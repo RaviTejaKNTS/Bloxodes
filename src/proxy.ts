@@ -3,7 +3,22 @@ import type { NextRequest } from "next/server";
 import legacySlugs from "@/data/slug_oldslugs.json";
 import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } from "@/lib/privacy/consent";
 import { buildSecurityHeaders } from "@/lib/security/csp";
-const CANONICAL_HOST = "bloxodes.com";
+
+const DEFAULT_CANONICAL_HOST = "bloxodes.com";
+
+function resolveCanonicalHost() {
+  const siteUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
+
+  if (!siteUrl) return DEFAULT_CANONICAL_HOST;
+
+  try {
+    return new URL(siteUrl).hostname.toLowerCase();
+  } catch {
+    return DEFAULT_CANONICAL_HOST;
+  }
+}
+
+const CANONICAL_HOST = resolveCanonicalHost();
 
 const ARTICLE_REDIRECT_SLUGS = new Set([
   "when-does-the-museum-open-in-jailbreak-roblox",
