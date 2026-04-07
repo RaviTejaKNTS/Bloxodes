@@ -1,0 +1,14 @@
+.git
+.github
+.next
+coverage
+logs
+node_modules
+tmp
+temp
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+!.env.production

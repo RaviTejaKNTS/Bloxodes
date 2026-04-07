@@ -25,16 +25,7 @@ type ConsentWindow = Window & {
 
 const DEFAULT_WAIT_FOR_UPDATE_MS = 500;
 
-function buildConsentSignal(requiresConsent: boolean, decided: boolean, analytics: boolean, marketing: boolean) {
-  if (!requiresConsent) {
-    return {
-      ad_storage: "granted",
-      analytics_storage: "granted",
-      ad_user_data: "granted",
-      ad_personalization: "granted"
-    } satisfies ConsentSignal;
-  }
-
+function buildConsentSignal(decided: boolean, analytics: boolean, marketing: boolean) {
   if (!decided) {
     return {
       ad_storage: "denied",
@@ -62,7 +53,7 @@ function signalsEqual(a: ConsentSignal, b: ConsentSignal) {
 }
 
 export function ConsentMode() {
-  const { requiresConsent, state } = useConsent();
+  const { ready, requiresConsent, state } = useConsent();
   const lastSignalRef = useRef<ConsentSignal | null>(null);
 
   useEffect(() => {
@@ -76,10 +67,10 @@ export function ConsentMode() {
       };
     }
 
-    const decided = requiresConsent ? state.decided : true;
-    const analyticsAllowed = requiresConsent ? state.analytics : true;
-    const marketingAllowed = requiresConsent ? state.marketing : true;
-    const nextSignal = buildConsentSignal(requiresConsent, decided, analyticsAllowed, marketingAllowed);
+    const decided = ready ? state.decided : false;
+    const analyticsAllowed = ready ? state.analytics : false;
+    const marketingAllowed = ready ? state.marketing : false;
+    const nextSignal = buildConsentSignal(decided, analyticsAllowed, marketingAllowed);
 
     win.__bloxodesConsent = {
       requiresConsent,
@@ -108,7 +99,7 @@ export function ConsentMode() {
       win.gtag?.("consent", "update", nextSignal);
       lastSignalRef.current = nextSignal;
     }
-  }, [requiresConsent, state.analytics, state.marketing, state.decided]);
+  }, [ready, requiresConsent, state.analytics, state.marketing, state.decided]);
 
   return null;
 }

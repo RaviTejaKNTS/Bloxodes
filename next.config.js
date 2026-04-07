@@ -24,6 +24,7 @@ if (cspMode !== "off" && (!publicCsp || !secureCsp)) {
 
 const nextConfig = {
   poweredByHeader: false,
+  output: "standalone",
   staticPageGenerationTimeout: 120,
   async headers() {
     return [
@@ -103,7 +104,7 @@ const nextConfig = {
     ];
   },
   images: {
-    // Disable Next image optimizer to avoid Vercel billing and serve images directly.
+    // Disable the built-in image optimizer so the app stays portable across hosts/CDNs.
     unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "**.roblox.com" },

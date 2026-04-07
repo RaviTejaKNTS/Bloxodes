@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 
 export function CookieSettingsContent() {
-  const { state, acceptAll, rejectAll, updateConsent, requiresConsent } = useConsent();
+  const { ready, state, acceptAll, rejectAll, updateConsent, requiresConsent } = useConsent();
   const [analytics, setAnalytics] = useState(state.analytics);
   const [marketing, setMarketing] = useState(state.marketing);
 
@@ -37,7 +37,7 @@ export function CookieSettingsContent() {
         <h1 className="text-3xl font-bold">Cookie settings</h1>
         <p className="text-muted-foreground">
           Control which non-essential cookies and scripts we run. Necessary cookies stay on to keep the site working.
-          {requiresConsent ? " We detected that consent is required for your region." : ""}
+          {ready && requiresConsent ? " We detected that consent is required for your region." : ""}
         </p>
       </div>
 

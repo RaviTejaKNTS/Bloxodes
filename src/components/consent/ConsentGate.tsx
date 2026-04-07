@@ -6,14 +6,13 @@ import { useConsent } from "./ConsentProvider";
 type ConsentCategory = "analytics" | "marketing";
 
 export function ConsentGate({ category, children }: { category: ConsentCategory; children: ReactNode }) {
-  const { state, requiresConsent, shouldShowBanner } = useConsent();
+  const { ready, state, requiresConsent, shouldShowBanner } = useConsent();
 
-  if (!requiresConsent) {
-    return <>{children}</>;
+  if (!ready) {
+    return null;
   }
 
-  // Block non-essential scripts until a decision is made.
-  if (shouldShowBanner) {
+  if (requiresConsent && shouldShowBanner) {
     return null;
   }
 

@@ -15,7 +15,7 @@ export function trackEvent(eventName: string, params?: AnalyticsParams) {
   };
   if (!win.__ga4Initialized) return;
   const consent = win.__bloxodesConsent;
-  if (consent?.requiresConsent) {
+  if (consent) {
     if (!consent.decided || !consent.analytics) return;
   }
   const gtag = win.gtag;

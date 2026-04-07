@@ -97,7 +97,8 @@ export default function PrivacyPolicyPage() {
               <p className="font-medium">We may collect automatically (technical data):</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Device and network data: IP address, browser type, OS, referral URL, timestamps, pages visited.</li>
-                <li>Usage data: page engagement (via Google Analytics). Vercel’s built-in analytics/performance telemetry runs on all visits but is aggregated and not used for marketing.</li>
+                <li>Usage data: page engagement (via Google Analytics).</li>
+                <li>Operational telemetry from our hosting, CDN, and security providers to monitor uptime, performance, and abuse.</li>
                 <li>Advertising identifiers: cookie IDs used by ad partners for frequency and fraud protection.</li>
               </ul>
             </div>
@@ -143,7 +144,8 @@ export default function PrivacyPolicyPage() {
             cookies to generate anonymous usage stats. We enable IP anonymization where possible and do not link this data to identities.
           </p>
           <p>
-            <strong>Vercel Analytics and Speed Insights:</strong> used for performance and error monitoring. These run by default for all visitors, are aggregated/anonymized, and are not used for ads or profiling.
+            <strong>Infrastructure telemetry:</strong> our hosting, CDN, and reverse-proxy providers may process aggregate request and
+            performance data to help us keep the site fast, secure, and reliable. This data is not used for advertising or profiling.
           </p>
         </section>
 
@@ -155,7 +157,7 @@ export default function PrivacyPolicyPage() {
               <li>Authentication/session cookies (so you stay signed in).</li>
               <li>Theme preference (cookie + account preference when signed in).</li>
               <li>Checklist progress for guides and tools (stored in local storage).</li>
-              <li>Consent state so we do not ask on every page.</li>
+              <li>Consent preferences stored in local storage so we remember your choices.</li>
             </ul>
           </div>
           <div className="space-y-2">
@@ -169,8 +171,8 @@ export default function PrivacyPolicyPage() {
             <a href="/cookie-settings" className="text-primary underline-offset-4 hover:underline">
               cookie settings
             </a>{" "}
-            page, or block/delete cookies in your browser. Clearing cookies will reset checklist progress and theme preferences and sign you
-            out of your account.
+            page, or block/delete cookies in your browser. Clearing cookies or site storage will reset checklist progress and theme
+            preferences and sign you out of your account.
           </p>
         </section>
 
@@ -180,7 +182,7 @@ export default function PrivacyPolicyPage() {
           <ul className="list-disc pl-6 space-y-2">
             <li>Google Analytics for usage measurement.</li>
             <li>Mediavine Journey and other ad partners for advertising delivery and measurement.</li>
-            <li>Vercel for secure hosting, edge delivery, and performance monitoring (Analytics/Speed Insights run by default).</li>
+            <li>Hosting, CDN, and reverse-proxy providers for secure delivery, caching, TLS, and performance monitoring.</li>
             <li>Supabase for authentication, database storage, and account management.</li>
           </ul>
           <p>We may disclose information if required by law or to protect our rights and users.</p>

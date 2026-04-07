@@ -1,56 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import legacySlugs from "@/data/slug_oldslugs.json";
+import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } from "@/lib/privacy/consent";
 import { buildSecurityHeaders } from "@/lib/security/csp";
-
-const GDPR_COUNTRIES = new Set([
-  "AT",
-  "BE",
-  "BG",
-  "HR",
-  "CY",
-  "CZ",
-  "DK",
-  "EE",
-  "FI",
-  "FR",
-  "DE",
-  "GR",
-  "HU",
-  "IE",
-  "IT",
-  "LV",
-  "LT",
-  "LU",
-  "GI",
-  "AX",
-  "IC",
-  "EA",
-  "GF",
-  "GP",
-  "MQ",
-  "RE",
-  "YT",
-  "MF",
-  "MT",
-  "NL",
-  "PL",
-  "PT",
-  "RO",
-  "SK",
-  "SI",
-  "ES",
-  "SE",
-  "IS",
-  "LI",
-  "NO",
-  "CH",
-  "GB"
-]);
-
-const CONSENT_HEADER = "x-require-consent";
-const CONSENT_COOKIE = "require-consent";
-const CONSENT_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 const CANONICAL_HOST = "bloxodes.com";
 
 const ARTICLE_REDIRECT_SLUGS = new Set([
@@ -83,38 +35,12 @@ const LEGACY_SLUG_MAP = new Map<string, string>(
   })
 );
 
-function applyConsentState(res: NextResponse, requiresConsent: boolean, attachState = true) {
-  if (!attachState) {
-    return res;
-  }
-
-  res.headers.set(CONSENT_HEADER, requiresConsent ? "1" : "0");
-  res.cookies.set({
-    name: CONSENT_COOKIE,
-    value: requiresConsent ? "1" : "0",
-    httpOnly: false,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: CONSENT_MAX_AGE
-  });
-  return res;
-}
-
 function applySecurityHeaders(res: NextResponse, pathname: string) {
   for (const { key, value } of buildSecurityHeaders(pathname)) {
     res.headers.set(key, value);
   }
 
   return res;
-}
-
-function shouldAttachConsentState(pathname: string) {
-  if (pathname === "/robots.txt") return false;
-  if (pathname === "/sitemap.xml") return false;
-  if (pathname === "/feed.xml") return false;
-  if (/^\/sitemaps\/.+\.xml$/i.test(pathname)) return false;
-  return true;
 }
 
 function normalizeSlugSegment(value: string) {
@@ -179,18 +105,9 @@ function shouldRedirectToCanonicalHost(hostname: string) {
 }
 
 export function proxy(req: NextRequest) {
-  // Prefer Vercel geo (works when DNS is on Vercel), fall back to Cloudflare if proxied.
-  const country =
-    req.headers.get("x-vercel-ip-country")?.toUpperCase() ||
-    req.headers.get("x-vercel-ip-country-region")?.toUpperCase() ||
-    (req as any).geo?.country?.toUpperCase() ||
-    req.headers.get("cf-ipcountry")?.toUpperCase() ||
-    "";
-
-  const requiresConsent = GDPR_COUNTRIES.has(country);
+  const requiresConsent = resolveRequiresConsent(req.headers, (req as any).geo?.country);
   const url = req.nextUrl;
   const hostname = getRequestHostname(req);
-  const attachConsentState = shouldAttachConsentState(url.pathname);
   const hostRedirectNeeded = shouldRedirectToCanonicalHost(hostname);
   const legacyPath = resolveLegacyRedirectPath(url.pathname);
   const pathRedirectNeeded = Boolean(legacyPath && legacyPath !== url.pathname);
@@ -204,20 +121,14 @@ export function proxy(req: NextRequest) {
     if (legacyPath) {
       redirectUrl.pathname = legacyPath;
     }
-    return applySecurityHeaders(
-      applyConsentState(redirectWithStatus(redirectUrl, 301), requiresConsent, attachConsentState),
-      redirectUrl.pathname
-    );
+    return applySecurityHeaders(redirectWithStatus(redirectUrl, 301), redirectUrl.pathname);
   }
 
-  // Pass a header downstream so layouts can decide whether to show consent UI.
+  // Pass a header downstream for routes that need request-time consent context.
   const requestHeaders = new Headers(req.headers);
-  requestHeaders.set(CONSENT_HEADER, requiresConsent ? "1" : "0");
+  requestHeaders.set(CONSENT_HEADER, serializeConsentRequirement(requiresConsent));
 
-  return applySecurityHeaders(
-    applyConsentState(NextResponse.next({ request: { headers: requestHeaders } }), requiresConsent, attachConsentState),
-    url.pathname
-  );
+  return applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname);
 }
 
 export const config = {

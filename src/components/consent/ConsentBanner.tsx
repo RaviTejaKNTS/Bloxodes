@@ -68,10 +68,10 @@ export function ConsentBanner() {
             {showOptions ? "Hide options" : "Manage choices"}
           </button>
           <Link
-            href="/privacy-policy"
+            href="/cookie-settings"
             className="text-sm font-medium text-primary underline-offset-4 hover:underline"
           >
-            Privacy policy
+            Cookie settings
           </Link>
         </div>
 
