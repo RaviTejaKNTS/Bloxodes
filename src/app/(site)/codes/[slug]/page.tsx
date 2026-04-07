@@ -32,7 +32,6 @@ import {
   getRobloxUniverseById,
   listGamesWithActiveCounts,
   listGamesWithActiveCountsByUniverseId,
-  listPublishedCodeSlugs,
   listPublishedArticlesByUniverseId,
   listPublishedChecklistsByUniverseId
 } from "@/lib/db";
@@ -58,15 +57,13 @@ import { getUniverseEventSummary } from "@/lib/events-summary";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 
 export const revalidate = 86400; // daily
-const MAX_STATIC_CODE_SLUGS = 150;
 
 const CODES_IN_ARTICLE_AD_SLOT = "6147197177";
 
 export type Params = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  const slugs = await listPublishedCodeSlugs();
-  return slugs.slice(0, MAX_STATIC_CODE_SLUGS).map((slug) => ({ slug }));
+  return [];
 }
 
 interface FaqEntry {
