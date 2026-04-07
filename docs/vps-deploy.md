@@ -2,6 +2,12 @@
 
 This repo is set up for a single self-hosted Next.js instance with a persistent ISR cache volume.
 
+### Branch strategy
+
+- Keep `main` for general development flow.
+- Use `production` as the dedicated Dokploy deploy branch.
+- Point Dokploy at the `production` branch in the `Bloxodes` repo.
+
 ### 1. Prepare the server
 
 - Install Docker Engine and the Compose plugin.
