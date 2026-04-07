@@ -2,6 +2,7 @@ import "./globals.css";
 import { ReactNode } from "react";
 import { LayoutGlobalSearch } from "@/components/LayoutClient";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { THEME_COOKIE } from "@/lib/theme";
 
 const themeScript = `(() => {
@@ -42,11 +43,11 @@ export const metadata = {
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   robots: {
-    index: true,
-    follow: true,
+    index: SEARCH_INDEXING_ENABLED,
+    follow: SEARCH_INDEXING_ENABLED,
     googleBot: {
-      index: true,
-      follow: true,
+      index: SEARCH_INDEXING_ENABLED,
+      follow: SEARCH_INDEXING_ENABLED,
       maxSnippet: -1,
       maxImagePreview: "large",
       maxVideoPreview: -1

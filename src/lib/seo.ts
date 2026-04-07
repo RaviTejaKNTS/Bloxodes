@@ -1,23 +1,8 @@
 import type { Metadata } from "next";
 import { collectAuthorSocials } from "./author-socials";
+import { SITE_URL } from "./site-config";
 
-const DEFAULT_SITE_URL = "https://bloxodes.com";
-
-function normalizeOrigin(value: string | undefined): string | null {
-  if (!value) return null;
-  const trimmed = value.trim();
-  if (!trimmed) return null;
-
-  try {
-    const parsed = new URL(trimmed);
-    if (parsed.protocol !== "https:" && parsed.protocol !== "http:") return null;
-    return `${parsed.protocol}//${parsed.host}`;
-  } catch {
-    return null;
-  }
-}
-
-export const SITE_URL = normalizeOrigin(process.env.NEXT_PUBLIC_SITE_URL) ?? DEFAULT_SITE_URL;
+export { SITE_URL } from "./site-config";
 
 export const SITE_NAME = "Bloxodes";
 export const SITE_DESCRIPTION =

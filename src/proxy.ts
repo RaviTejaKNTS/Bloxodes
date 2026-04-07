@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import legacySlugs from "@/data/slug_oldslugs.json";
 import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } from "@/lib/privacy/consent";
+import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
 
 const DEFAULT_CANONICAL_HOST = "bloxodes.com";
@@ -53,6 +54,10 @@ const LEGACY_SLUG_MAP = new Map<string, string>(
 function applySecurityHeaders(res: NextResponse, pathname: string) {
   for (const { key, value } of buildSecurityHeaders(pathname)) {
     res.headers.set(key, value);
+  }
+
+  if (!SEARCH_INDEXING_ENABLED) {
+    res.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
   }
 
   return res;
