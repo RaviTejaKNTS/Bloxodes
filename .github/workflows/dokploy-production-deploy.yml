@@ -1,0 +1,60 @@
+name: Dokploy Production Deploy
+
+on:
+  push:
+    branches:
+      - production
+  workflow_dispatch:
+
+concurrency:
+  group: dokploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Validate Dokploy configuration
+        env:
+          DOKPLOY_URL: ${{ vars.DOKPLOY_URL }}
+          DOKPLOY_APPLICATION_ID: ${{ vars.DOKPLOY_APPLICATION_ID }}
+          DOKPLOY_AUTH_TOKEN: ${{ secrets.DOKPLOY_AUTH_TOKEN }}
+        run: |
+          missing=0
+
+          for var_name in DOKPLOY_URL DOKPLOY_APPLICATION_ID DOKPLOY_AUTH_TOKEN; do
+            if [ -z "${!var_name}" ]; then
+              echo "Missing required Dokploy setting: $var_name"
+              missing=1
+            fi
+          done
+
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Trigger Dokploy deployment
+        env:
+          DOKPLOY_URL: ${{ vars.DOKPLOY_URL }}
+          DOKPLOY_APPLICATION_ID: ${{ vars.DOKPLOY_APPLICATION_ID }}
+          DOKPLOY_AUTH_TOKEN: ${{ secrets.DOKPLOY_AUTH_TOKEN }}
+        run: |
+          status_code=$(curl --silent --show-error \
+            --write-out '%{http_code}' \
+            --output /tmp/dokploy-response.json \
+            --request POST \
+            "$DOKPLOY_URL/api/application.deploy" \
+            --header 'accept: application/json' \
+            --header "x-api-key:$DOKPLOY_AUTH_TOKEN" \
+            --header 'Content-Type: application/json' \
+            --data "{\"applicationId\":\"$DOKPLOY_APPLICATION_ID\"}")
+
+          if [ "$status_code" -ne 200 ]; then
+            echo "Dokploy deployment trigger failed with status $status_code"
+            cat /tmp/dokploy-response.json
+            exit 1
+          fi
+
+          cat /tmp/dokploy-response.json
