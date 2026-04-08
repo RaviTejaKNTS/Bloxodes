@@ -171,7 +171,7 @@ export default function PrivacyPolicyPage() {
             <a href="/cookie-settings" className="text-primary underline-offset-4 hover:underline">
               cookie settings
             </a>{" "}
-            page, or block/delete cookies in your browser. Clearing cookies or site storage will reset checklist progress and theme
+            page for the current setup, or block/delete cookies in your browser. Clearing cookies or site storage will reset checklist progress and theme
             preferences and sign you out of your account.
           </p>
         </section>
@@ -202,13 +202,13 @@ export default function PrivacyPolicyPage() {
             <p className="font-medium">EU/UK/Switzerland (GDPR):</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>Non-essential analytics and ads are off by default until you accept.</li>
-              <li>Withdraw consent anytime at the cookie settings page.</li>
+              <li>Withdraw or update consent using the consent tools made available on the site.</li>
               <li>Access, correction, or deletion: manage profile details in your account, or contact us to request deletion.</li>
             </ul>
 
             <p className="font-medium">United States (California, Virginia, Colorado, etc.):</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>Opt out of targeted ads and analytics via the cookie settings page.</li>
+              <li>Opt out of targeted ads and analytics using the consent tools made available on the site.</li>
               <li>We do not share personal info for third-party direct marketing.</li>
               <li>You may request access or deletion of account data by contacting us.</li>
             </ul>
@@ -223,7 +223,7 @@ export default function PrivacyPolicyPage() {
             <a href="/cookie-settings" className="text-primary underline-offset-4 hover:underline">
               cookie settings
             </a>{" "}
-            page.
+            page or through the consent tools currently active on the site.
           </p>
         </section>
 

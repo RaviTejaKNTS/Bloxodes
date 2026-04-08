@@ -5,7 +5,44 @@ import { useConsent } from "@/components/consent/ConsentProvider";
 import { useEffect, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 
-export function CookieSettingsContent() {
+const ENABLE_LOCAL_CONSENT = process.env.NEXT_PUBLIC_ENABLE_LOCAL_CONSENT === "true";
+
+function DisabledCookieSettingsContent() {
+  return (
+    <main className="mx-auto flex max-w-3xl flex-col gap-6 px-4 py-10">
+      <div className="flex flex-col gap-2">
+        <p className="text-sm font-semibold uppercase tracking-wide text-primary">Privacy</p>
+        <h1 className="text-3xl font-bold">Cookie settings</h1>
+        <p className="text-muted-foreground">
+          We currently rely on our ad and consent partners to manage non-essential tracking preferences on the live site.
+        </p>
+      </div>
+
+      <div className="rounded-xl border border-border bg-muted/30 p-5 text-sm leading-6 text-muted-foreground">
+        <p>
+          If a consent prompt is shown, use that to manage ad and analytics preferences. You can also manage cookies directly in your
+          browser settings at any time.
+        </p>
+        <p className="mt-3">
+          Our original built-in cookie controls are still in the codebase, but they are currently disabled so they do not conflict with
+          the partner-managed consent flow.
+        </p>
+      </div>
+
+      <div className="text-sm text-muted-foreground">
+        <p>
+          Need more details? Read our{" "}
+          <Link href="/privacy-policy" className="text-primary underline-offset-4 hover:underline">
+            privacy policy
+          </Link>
+          .
+        </p>
+      </div>
+    </main>
+  );
+}
+
+function EnabledCookieSettingsContent() {
   const { ready, state, acceptAll, rejectAll, updateConsent, requiresConsent } = useConsent();
   const [analytics, setAnalytics] = useState(state.analytics);
   const [marketing, setMarketing] = useState(state.marketing);
@@ -87,9 +124,7 @@ export function CookieSettingsContent() {
           />
           <div>
             <p className="font-semibold">Analytics</p>
-            <p className="text-sm text-muted-foreground">
-              Helps us measure usage (Google Analytics).
-            </p>
+            <p className="text-sm text-muted-foreground">Helps us measure usage (Google Analytics).</p>
           </div>
         </label>
 
@@ -122,4 +157,8 @@ export function CookieSettingsContent() {
       </div>
     </main>
   );
+}
+
+export function CookieSettingsContent() {
+  return ENABLE_LOCAL_CONSENT ? <EnabledCookieSettingsContent /> : <DisabledCookieSettingsContent />;
 }

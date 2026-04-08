@@ -14,6 +14,7 @@ const JOURNEY_SCRIPT_SRC = "https://scripts.scriptwrapper.com/tags/75d9ab7d-268c
 type PublicSiteProvidersProps = {
   children: ReactNode;
   enableJourney?: boolean;
+  enableLocalConsent?: boolean;
   googleAnalyticsId?: string;
 };
 
@@ -32,24 +33,29 @@ function JourneyScript() {
 export function PublicSiteProviders({
   children,
   enableJourney = false,
+  enableLocalConsent = false,
   googleAnalyticsId
 }: PublicSiteProvidersProps) {
   return (
     <ConsentProvider>
-      <ConsentMode />
-      {enableJourney ? (
+      {enableLocalConsent ? <ConsentMode /> : null}
+      {enableLocalConsent && enableJourney ? (
         <ConsentGate category="marketing">
           <JourneyScript />
         </ConsentGate>
       ) : null}
       {googleAnalyticsId ? (
-        <ConsentGate category="analytics">
+        enableLocalConsent ? (
+          <ConsentGate category="analytics">
+            <GoogleAnalytics measurementId={googleAnalyticsId} />
+          </ConsentGate>
+        ) : (
           <GoogleAnalytics measurementId={googleAnalyticsId} />
-        </ConsentGate>
+        )
       ) : null}
       <AnalyticsTracker />
       {children}
-      <ConsentBanner />
+      {enableLocalConsent ? <ConsentBanner /> : null}
     </ConsentProvider>
   );
 }
