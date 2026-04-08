@@ -1,3 +1,5 @@
+import { resolvePublicOrigin } from "@/lib/request-origin";
+
 export function getRequestIp(request: Request): string {
   const forwardedFor = request.headers.get("x-forwarded-for");
   if (forwardedFor) {
@@ -29,12 +31,12 @@ function toOrigin(value: string): string | null {
 }
 
 export function isTrustedMutationOrigin(request: Request): boolean {
-  const requestOrigin = toOrigin(request.url);
+  const requestOrigin = toOrigin(resolvePublicOrigin(request.headers, request.url));
   if (!requestOrigin) return false;
 
   const originHeader = request.headers.get("origin");
   if (originHeader) {
-    return originHeader === requestOrigin;
+    return toOrigin(originHeader) === requestOrigin;
   }
 
   const refererHeader = request.headers.get("referer");
