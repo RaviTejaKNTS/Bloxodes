@@ -9,6 +9,7 @@ import {
   resolveRobloxLoginRedirectUri,
   setRobloxLoginOauthCookies
 } from "@/lib/auth/roblox-login";
+import { resolvePublicOrigin } from "@/lib/request-origin";
 import { checkRateLimit } from "@/lib/security/rate-limit";
 import { getRequestIp } from "@/lib/security/request";
 
@@ -33,7 +34,7 @@ function withNoIndexHeaders(response: NextResponse) {
 }
 
 export async function GET(request: NextRequest) {
-  const origin = request.nextUrl.origin;
+  const origin = resolvePublicOrigin(request.headers, request.nextUrl.origin);
   const requestedNext = request.nextUrl.searchParams.get("next");
   const nextPath = sanitizeNextPath(requestedNext);
   const clientId = process.env.ROBLOX_OAUTH_CLIENT_ID?.trim();

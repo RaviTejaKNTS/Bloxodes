@@ -10,6 +10,7 @@ import {
   readRobloxLoginOauthCookies,
   resolveRobloxLoginRedirectUri
 } from "@/lib/auth/roblox-login";
+import { resolvePublicOrigin } from "@/lib/request-origin";
 import { checkRateLimit } from "@/lib/security/rate-limit";
 import { getRequestIp } from "@/lib/security/request";
 
@@ -60,7 +61,7 @@ function toRobloxUserId(value: string | null | undefined): number | null {
 
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
-  const origin = requestUrl.origin;
+  const origin = resolvePublicOrigin(request.headers, requestUrl.origin);
   const code = requestUrl.searchParams.get("code");
   const state = requestUrl.searchParams.get("state");
   const oauthError = requestUrl.searchParams.get("error");
