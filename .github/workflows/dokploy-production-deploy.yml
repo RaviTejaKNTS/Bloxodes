@@ -58,3 +58,68 @@ jobs:
           fi
 
           cat /tmp/dokploy-response.json
+
+      - name: Validate optional Cloudflare configuration
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -z "$CLOUDFLARE_ZONE_ID" ]; then
+            echo "CLOUDFLARE_ZONE_ID is required when CLOUDFLARE_API_TOKEN is set"
+            exit 1
+          fi
+
+          if [ -n "$CLOUDFLARE_ZONE_ID" ] && [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "CLOUDFLARE_API_TOKEN is required when CLOUDFLARE_ZONE_ID is set"
+            exit 1
+          fi
+
+      - name: Wait for site health
+        if: ${{ vars.PRODUCTION_SITE_URL != '' }}
+        env:
+          PRODUCTION_SITE_URL: ${{ vars.PRODUCTION_SITE_URL }}
+        run: |
+          health_url="${PRODUCTION_SITE_URL%/}/api/health"
+
+          for attempt in $(seq 1 60); do
+            status_code=$(curl --silent --show-error \
+              --output /tmp/dokploy-health.json \
+              --write-out '%{http_code}' \
+              "$health_url" || true)
+
+            if [ "$status_code" -eq 200 ]; then
+              echo "Health check passed on attempt $attempt"
+              cat /tmp/dokploy-health.json
+              exit 0
+            fi
+
+            echo "Health check not ready yet (attempt $attempt, status $status_code)"
+            sleep 10
+          done
+
+          echo "Timed out waiting for deployed site health"
+          cat /tmp/dokploy-health.json || true
+          exit 1
+
+      - name: Purge Cloudflare cache
+        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && vars.CLOUDFLARE_ZONE_ID != '' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID }}
+        run: |
+          status_code=$(curl --silent --show-error \
+            --write-out '%{http_code}' \
+            --output /tmp/cloudflare-purge.json \
+            --request POST \
+            "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            --header 'Content-Type: application/json' \
+            --data '{"purge_everything":true}')
+
+          if [ "$status_code" -ne 200 ]; then
+            echo "Cloudflare purge failed with status $status_code"
+            cat /tmp/cloudflare-purge.json
+            exit 1
+          fi
+
+          cat /tmp/cloudflare-purge.json

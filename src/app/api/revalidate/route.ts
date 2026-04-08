@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
+import { purgeCloudflarePaths } from "@/lib/cloudflare-cache";
 
 type Payload =
   | { type: "code"; slug: string }
@@ -18,6 +19,16 @@ const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
 const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
 const FREE_ITEMS_CATALOG_PREFIXES = [FREE_ITEMS_CATALOG_CODE, LEGACY_FREE_ITEMS_CATALOG_CODE];
 const FREE_ITEMS_BASE_PATH = `/catalog/${FREE_ITEMS_CATALOG_CODE}`;
+const SITEMAP_INDEX_PATH = "/sitemap.xml";
+const ARTICLES_SITEMAP_PATH = "/sitemaps/articles.xml";
+const CODES_SITEMAP_PATH = "/sitemaps/codes.xml";
+const LISTS_SITEMAP_PATH = "/sitemaps/lists.xml";
+const AUTHORS_SITEMAP_PATH = "/sitemaps/authors.xml";
+const EVENTS_SITEMAP_PATH = "/sitemaps/events.xml";
+const CHECKLISTS_SITEMAP_PATH = "/sitemaps/checklists.xml";
+const QUIZZES_SITEMAP_PATH = "/sitemaps/quizzes.xml";
+const TOOLS_SITEMAP_PATH = "/sitemaps/tools.xml";
+const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
 
 function assertSecret(request: Request) {
   const secret = process.env.REVALIDATE_SECRET;
@@ -39,101 +50,92 @@ function normalizeSlug(value: string): string {
     .replace(/^\/+|\/+$/g, "");
 }
 
+function applyRevalidation(paths: string[], tags: string[] = []) {
+  const uniquePaths = Array.from(new Set(paths));
+  const uniqueTags = Array.from(new Set(tags.filter(Boolean)));
+
+  for (const path of uniquePaths) {
+    revalidatePath(path);
+  }
+
+  for (const tag of uniqueTags) {
+    revalidateTag(tag, { expire: 0 });
+  }
+
+  return uniquePaths;
+}
+
 function revalidateForCode(slug: string) {
-  revalidatePath(`/codes/${slug}`);
-  revalidatePath("/codes");
-  revalidatePath("/"); // home shows featured codes
-  revalidatePath("/sitemap.xml");
-  revalidateTag(`code:${slug}`, { expire: 0 });
-  revalidateTag("codes", { expire: 0 });
-  revalidateTag("codes-index", { expire: 0 });
-  revalidateTag("home", { expire: 0 });
+  return applyRevalidation(
+    [`/codes/${slug}`, "/codes", "/", SITEMAP_INDEX_PATH, CODES_SITEMAP_PATH],
+    [`code:${slug}`, "codes", "codes-index", "home"]
+  );
 }
 
 function revalidateForArticle(slug: string) {
-  revalidatePath(`/articles/${slug}`);
-  revalidatePath("/articles");
-  revalidatePath("/"); // home shows latest articles
-  revalidatePath("/sitemap.xml");
-  revalidateTag(`article:${slug}`, { expire: 0 });
-  revalidateTag("articles", { expire: 0 });
-  revalidateTag("articles-index", { expire: 0 });
+  return applyRevalidation(
+    [`/articles/${slug}`, "/articles", "/", SITEMAP_INDEX_PATH, ARTICLES_SITEMAP_PATH],
+    [`article:${slug}`, "articles", "articles-index"]
+  );
 }
 
 function revalidateForList(slug: string) {
-  revalidatePath(`/lists/${slug}`);
-  // Revalidate all paginated list pages (dynamic [page] segment)
-  revalidatePath(`/lists/${slug}/page/[page]`);
-  revalidatePath("/lists");
-  revalidatePath("/sitemap.xml");
-  revalidateTag(`list:${slug}`, { expire: 0 });
-  revalidateTag("lists", { expire: 0 });
-  revalidateTag("lists-index", { expire: 0 });
+  return applyRevalidation(
+    [`/lists/${slug}`, `/lists/${slug}/page/[page]`, "/lists", SITEMAP_INDEX_PATH, LISTS_SITEMAP_PATH],
+    [`list:${slug}`, "lists", "lists-index"]
+  );
 }
 
 function revalidateForAuthor(slug: string) {
-  revalidatePath(`/authors/${slug}`);
-  revalidatePath("/authors");
-  revalidateTag(`author:${slug}`, { expire: 0 });
-  revalidateTag("authors", { expire: 0 });
-  revalidateTag("authors-index", { expire: 0 });
+  return applyRevalidation(
+    [`/authors/${slug}`, "/authors", SITEMAP_INDEX_PATH, AUTHORS_SITEMAP_PATH],
+    [`author:${slug}`, "authors", "authors-index"]
+  );
 }
 
 function revalidateForEvents(slug: string) {
-  revalidatePath("/events");
-  revalidatePath(`/events/${slug}`);
-  revalidatePath("/sitemap.xml");
+  return applyRevalidation(["/events", `/events/${slug}`, SITEMAP_INDEX_PATH, EVENTS_SITEMAP_PATH]);
 }
 
 function revalidateForChecklists(slug: string) {
-  revalidatePath("/checklists");
-  revalidatePath("/checklists/page/[page]");
-  revalidatePath(`/checklists/${slug}`);
-  revalidatePath("/sitemap.xml");
-  revalidateTag("checklists-index", { expire: 0 });
+  return applyRevalidation(
+    ["/checklists", "/checklists/page/[page]", `/checklists/${slug}`, SITEMAP_INDEX_PATH, CHECKLISTS_SITEMAP_PATH],
+    ["checklists-index"]
+  );
 }
 
 function revalidateForQuizzes(slug: string) {
-  revalidatePath("/quizzes");
-  revalidatePath(`/quizzes/${slug}`);
-  revalidatePath("/sitemap.xml");
-  revalidatePath("/sitemaps/quizzes.xml");
-  revalidateTag("quizzes-index", { expire: 0 });
+  return applyRevalidation(
+    ["/quizzes", `/quizzes/${slug}`, SITEMAP_INDEX_PATH, QUIZZES_SITEMAP_PATH],
+    ["quizzes-index"]
+  );
 }
 
 function revalidateForTools(slug: string) {
-  revalidatePath("/tools");
-  revalidatePath("/tools/page/[page]");
-  revalidatePath(`/tools/${slug}`);
-  revalidatePath("/sitemap.xml");
-  revalidateTag("tools-index", { expire: 0 });
-}
-
-function revalidateForCatalog(slug: string) {
-  revalidatePath("/catalog");
-  if (slug) {
-    revalidatePath(`/catalog/${slug}`);
-    revalidateTag(`catalog:${slug}`, { expire: 0 });
-  }
-  revalidatePath("/sitemap.xml");
-  revalidateTag("catalog-index", { expire: 0 });
+  return applyRevalidation(
+    ["/tools", "/tools/page/[page]", `/tools/${slug}`, SITEMAP_INDEX_PATH, TOOLS_SITEMAP_PATH],
+    ["tools-index"]
+  );
 }
 
 function revalidateForMusic() {
-  revalidatePath("/catalog");
-  revalidatePath("/catalog/roblox-music-ids");
-  revalidatePath("/catalog/roblox-music-ids/page/[page]");
-  revalidatePath("/catalog/roblox-music-ids/trending");
-  revalidatePath("/catalog/roblox-music-ids/trending/page/[page]");
-  revalidatePath("/catalog/roblox-music-ids/genres");
-  revalidatePath("/catalog/roblox-music-ids/genres/page/[page]");
-  revalidatePath("/catalog/roblox-music-ids/genres/[genre]");
-  revalidatePath("/catalog/roblox-music-ids/genres/[genre]/page/[page]");
-  revalidatePath("/catalog/roblox-music-ids/artists");
-  revalidatePath("/catalog/roblox-music-ids/artists/page/[page]");
-  revalidatePath("/catalog/roblox-music-ids/artists/[artist]");
-  revalidatePath("/catalog/roblox-music-ids/artists/[artist]/page/[page]");
-  revalidatePath("/sitemap.xml");
+  return applyRevalidation([
+    "/catalog",
+    "/catalog/roblox-music-ids",
+    "/catalog/roblox-music-ids/page/[page]",
+    "/catalog/roblox-music-ids/trending",
+    "/catalog/roblox-music-ids/trending/page/[page]",
+    "/catalog/roblox-music-ids/genres",
+    "/catalog/roblox-music-ids/genres/page/[page]",
+    "/catalog/roblox-music-ids/genres/[genre]",
+    "/catalog/roblox-music-ids/genres/[genre]/page/[page]",
+    "/catalog/roblox-music-ids/artists",
+    "/catalog/roblox-music-ids/artists/page/[page]",
+    "/catalog/roblox-music-ids/artists/[artist]",
+    "/catalog/roblox-music-ids/artists/[artist]/page/[page]",
+    SITEMAP_INDEX_PATH,
+    CATALOG_SITEMAP_PATH
+  ]);
 }
 
 function isFreeItemsCatalogSlug(slug: string) {
@@ -141,15 +143,27 @@ function isFreeItemsCatalogSlug(slug: string) {
 }
 
 function revalidateForFreeItems() {
-  revalidatePath("/catalog");
-  revalidatePath(FREE_ITEMS_BASE_PATH);
-  revalidatePath(`${FREE_ITEMS_BASE_PATH}/page/[page]`);
-  revalidatePath(`${FREE_ITEMS_BASE_PATH}/[category]`);
-  revalidatePath(`${FREE_ITEMS_BASE_PATH}/[category]/page/[page]`);
-  revalidatePath(`${FREE_ITEMS_BASE_PATH}/[category]/[subcategory]`);
-  revalidatePath(`${FREE_ITEMS_BASE_PATH}/[category]/[subcategory]/page/[page]`);
-  revalidatePath("/sitemap.xml");
-  revalidateTag("free-items-catalog", { expire: 0 });
+  return applyRevalidation(
+    [
+      "/catalog",
+      FREE_ITEMS_BASE_PATH,
+      `${FREE_ITEMS_BASE_PATH}/page/[page]`,
+      `${FREE_ITEMS_BASE_PATH}/[category]`,
+      `${FREE_ITEMS_BASE_PATH}/[category]/page/[page]`,
+      `${FREE_ITEMS_BASE_PATH}/[category]/[subcategory]`,
+      `${FREE_ITEMS_BASE_PATH}/[category]/[subcategory]/page/[page]`,
+      SITEMAP_INDEX_PATH,
+      CATALOG_SITEMAP_PATH
+    ],
+    ["free-items-catalog"]
+  );
+}
+
+function revalidateForCatalog(slug: string) {
+  return applyRevalidation(
+    ["/catalog", slug ? `/catalog/${slug}` : "", SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH].filter(Boolean) as string[],
+    [`catalog:${slug}`, "catalog-index"]
+  );
 }
 
 export async function POST(request: Request) {
@@ -174,47 +188,50 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing slug" }, { status: 400 });
   }
 
+  let purgePaths: string[] = [];
+
   switch (payload.type) {
     case "code":
-      revalidateForCode(slug);
+      purgePaths = revalidateForCode(slug);
       break;
     case "article":
-      revalidateForArticle(slug);
+      purgePaths = revalidateForArticle(slug);
       break;
     case "list":
-      revalidateForList(slug);
+      purgePaths = revalidateForList(slug);
       break;
     case "author":
-      revalidateForAuthor(slug);
+      purgePaths = revalidateForAuthor(slug);
       break;
     case "event":
-      revalidateForEvents(slug);
+      purgePaths = revalidateForEvents(slug);
       break;
     case "checklist":
-      revalidateForChecklists(slug);
+      purgePaths = revalidateForChecklists(slug);
       break;
     case "quiz":
-      revalidateForQuizzes(slug);
+      purgePaths = revalidateForQuizzes(slug);
       break;
     case "tool":
-      revalidateForTools(slug);
+      purgePaths = revalidateForTools(slug);
       break;
     case "catalog":
       if (MUSIC_CATALOG_CODES.has(slug)) {
-        revalidateForMusic();
+        purgePaths = [...purgePaths, ...revalidateForMusic()];
       }
       if (isFreeItemsCatalogSlug(slug)) {
-        revalidateForFreeItems();
+        purgePaths = [...purgePaths, ...revalidateForFreeItems()];
       }
-      revalidateForCatalog(slug);
+      purgePaths = [...purgePaths, ...revalidateForCatalog(slug)];
       break;
     case "music":
-      revalidateForMusic();
+      purgePaths = revalidateForMusic();
       break;
     default:
       return NextResponse.json({ error: "Unknown type" }, { status: 400 });
   }
 
+  const cloudflare = await purgeCloudflarePaths(purgePaths);
   const indexNow = {
     enabled: false,
     attempted: 0,
@@ -224,5 +241,19 @@ export async function POST(request: Request) {
     reason: "site-disabled"
   };
 
-  return NextResponse.json({ revalidated: true, type: payload.type, slug, indexNow });
+  if (cloudflare.enabled && !cloudflare.ok) {
+    return NextResponse.json(
+      {
+        error: "Cloudflare purge failed",
+        revalidated: true,
+        type: payload.type,
+        slug,
+        indexNow,
+        cloudflare
+      },
+      { status: 502 }
+    );
+  }
+
+  return NextResponse.json({ revalidated: true, type: payload.type, slug, indexNow, cloudflare });
 }
