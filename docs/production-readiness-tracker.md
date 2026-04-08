@@ -9,17 +9,56 @@ This document tracks the remaining work to get the VPS deployment to a strong pr
 - The repo deploy source of truth is `RaviTejaKNTS/Bloxodes`.
 - Dokploy deploys from the `production` branch.
 - GitHub Actions can trigger Dokploy deploys automatically on `production`.
-- `bloxodes.com` is still serving the Vercel deployment.
+- `bloxodes.com` is live with Cloudflare nameservers active and is still serving the Vercel deployment.
+- The Cloudflare zone has been cleaned up to a normalized production shape:
+  - `A @ -> 76.76.21.21` proxied
+  - `CNAME www -> cname.vercel-dns.com` proxied
+  - duplicate imported Vercel `A` records and wildcard records have been removed
+- Cloudflare SSL/security baseline is now verified:
+  - `ssl = strict`
+  - `always_use_https = on`
+  - `min_tls_version = 1.2`
+  - `automatic_https_rewrites = on`
+  - `tls_1_3 = on`
+  - `http3 = on`
+  - `brotli = on`
+  - `rocket_loader = off`
+- `Smart Tiered Cache` is enabled.
+- One Cloudflare Cache Rule is active:
+  - `Cache public content by origin headers`
+  - action: `Eligible for cache`
+  - edge TTL mode: `bypass_by_default`
+- The rule is working on cache-friendly routes now:
+  - `https://bloxodes.com/robots.txt` returns `cf-cache-status: HIT`
+- Public HTML on the current Vercel deployment is still `cf-cache-status: BYPASS` because the live Vercel app still sends `Set-Cookie` on those pages.
+- The VPS test deployment does **not** send `Set-Cookie` on public HTML, so this cache rule should become effective for public pages after the final `bloxodes.com` cutover.
+- A scoped Cloudflare purge token has been created and verified against the `bloxodes.com` zone.
+- The Dokploy app now has `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ZONE_ID` configured and has been redeployed once to pick them up.
+- GitHub repository Actions secrets are now populated for the current automation workflows, including Dokploy deploy, Cloudflare purge, Supabase, OpenAI, Roblox Open Cloud, Telegram, Twitter, Google Custom Search, and revalidation.
+- GitHub repository Actions variables now include the Dokploy target, Cloudflare zone id, the current health-check host (`https://ravitejaknts.com`), and public runtime values such as `NEXT_PUBLIC_SITE_URL` and Supabase public keys.
 
 ## What Is Still Needed
 
 ### 1. Cloudflare for the production domain
 
-- Put `bloxodes.com` and `www.bloxodes.com` behind Cloudflare.
-- Use proxied DNS.
+- Keep `bloxodes.com` and `www.bloxodes.com` on Cloudflare and clean the imported DNS records down to the intended set.
+- Normalize apex and `www` records before the VPS origin cutover so routing stays predictable.
+- Use proxied DNS for the final production state.
 - Use `Full (strict)` SSL.
 - Enable Brotli, HTTP/3, Tiered Cache, and Automatic HTTPS Rewrites.
 - Keep Rocket Loader disabled because of Mediavine Journey.
+
+Status:
+
+- DNS normalization: done
+- `Full (strict)`: done
+- `Always Use HTTPS`: done
+- `Minimum TLS Version 1.2`: done
+- `Automatic HTTPS Rewrites`: done
+- `HTTP/3`: done
+- `Brotli`: done
+- `Rocket Loader off`: done
+- `Tiered Cache / Smart Topology`: done
 
 Reference: `docs/cloudflare-setup.md`
 
@@ -36,7 +75,17 @@ Repo status:
 
 - code-deploy purge is now wired in `.github/workflows/dokploy-production-deploy.yml`
 - runtime content purge is now wired in `src/app/api/revalidate/route.ts`
-- remaining step is to provide `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ZONE_ID`, and Cloudflare dashboard setup
+- Dokploy now has `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ZONE_ID`
+- GitHub Actions now has the Cloudflare token and zone id needed for post-deploy purge automation
+- `PRODUCTION_SITE_URL` intentionally remains `https://ravitejaknts.com` until the final `bloxodes.com` cutover, so deploy health checks still target the current VPS host
+
+Cloudflare status:
+
+- the first production Cache Rule is live and verified in the Cloudflare ruleset API
+- current Vercel public HTML still bypasses due to `Set-Cookie`
+- VPS public HTML is cache-friendly and ready for this rule after cutover
+- runtime Cloudflare purge is configured on the VPS app, but it will only target the final production URLs after `SITE_URL` is switched from `ravitejaknts.com` to `bloxodes.com`
+- no Cache Response Rules are configured
 
 ### 3. Lock the origin down
 
