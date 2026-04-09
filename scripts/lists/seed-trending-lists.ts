@@ -1,4 +1,4 @@
-// scripts/seed-trending-lists.ts
+// scripts/lists/seed-trending-lists.ts
 import "dotenv/config";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 

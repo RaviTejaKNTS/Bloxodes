@@ -3,8 +3,8 @@ import "dotenv/config";
 import OpenAI from "openai";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { revalidateEventsByUniverseIds } from "./lib/revalidate-events";
-import { tavilySearch } from "./lib/tavily";
+import { revalidateEventsByUniverseIds } from "../shared/revalidate-events";
+import { tavilySearch } from "../shared/tavily";
 
 const TAVILY_API_KEY = process.env.TAVILY_API_KEY;
 const OPENAI_KEY = process.env.OPENAI_API_KEY;

@@ -4,8 +4,8 @@ import OpenAI from "openai";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { slugify } from "@/lib/slug";
-import { revalidateEventSlugs } from "./lib/revalidate-events";
-import { tavilySearch } from "./lib/tavily";
+import { revalidateEventSlugs } from "../shared/revalidate-events";
+import { tavilySearch } from "../shared/tavily";
 
 const SOURCE_BATCH = Number(process.env.EVENTS_PAGES_SOURCE_BATCH ?? "1000");
 const DEFAULT_PUBLISHED = (process.env.EVENTS_PAGES_PUBLISHED ?? "true").toLowerCase() !== "false";

@@ -66,4 +66,4 @@ jobs:
           fi
           RUN_END_TIME="$END_TIME" \
           RUN_DURATION_SECONDS="$DURATION" \
-          node scripts/report-automation.mjs
+          node scripts/automation/report-automation.mjs

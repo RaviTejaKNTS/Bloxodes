@@ -74,4 +74,4 @@ These are the tables/views the site and APIs read from most often.
 
 ## External APIs (runtime + scripts)
 - Roblox public APIs (games/users/groups/catalog, thumbnails, asset delivery).
-- Telegram API for automation summaries (scripts/report-automation.mjs).
+- Telegram API for automation summaries (scripts/automation/report-automation.mjs).

@@ -2,7 +2,7 @@ import "dotenv/config";
 
 import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
-import { tavilySearch } from "./lib/tavily";
+import { tavilySearch } from "../shared/tavily";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 const supabase = createClient(

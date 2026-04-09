@@ -21,7 +21,7 @@ function parseArgs() {
       options.all = true;
     } else if (arg === "--help" || arg === "-h") {
       console.log(`
-Usage: npx tsx scripts/backfill-game-universes.ts [--all]
+Usage: npx tsx scripts/backfill/backfill-game-universes.ts [--all]
 
 Options:
   --all     Reprocess all games even if universe_id is already set.

@@ -8,7 +8,7 @@ import sharp from "sharp";
 import { createHash } from "node:crypto";
 
 import { slugify } from "@/lib/slug";
-import { tavilySearch } from "./lib/tavily";
+import { tavilySearch } from "../shared/tavily";
 
 type QueueRow = {
   id: string;

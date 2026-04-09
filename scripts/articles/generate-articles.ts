@@ -7,7 +7,7 @@ import { createClient } from "@supabase/supabase-js";
 import sharp from "sharp";
 
 import { slugify } from "@/lib/slug";
-import { tavilySearch } from "./lib/tavily";
+import { tavilySearch } from "../shared/tavily";
 
 type QueueRow = {
   id: string;

@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { JSDOM } from "jsdom";
 import sharp from "sharp";
 import { createHash } from "node:crypto";
-import { tavilySearch } from "./lib/tavily";
+import { tavilySearch } from "../shared/tavily";
 
 type CliOptions = {
   articleId: string | null;
@@ -914,8 +914,8 @@ Return JSON only:
 function usage(): string {
   return `
 Usage:
-  tsx scripts/update-articles.ts --article-id <uuid> [--dry-run]
-  tsx scripts/update-articles.ts --universe-id <id> [--limit <n>] [--dry-run]
+  tsx scripts/articles/update-articles.ts --article-id <uuid> [--dry-run]
+  tsx scripts/articles/update-articles.ts --universe-id <id> [--limit <n>] [--dry-run]
 `.trim();
 }
 

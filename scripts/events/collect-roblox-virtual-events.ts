@@ -1,7 +1,7 @@
 import "dotenv/config";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { revalidateEventsByUniverseIds } from "./lib/revalidate-events";
+import { revalidateEventsByUniverseIds } from "../shared/revalidate-events";
 
 const VIRTUAL_EVENTS_API_BASE = "https://apis.roblox.com/virtual-events/v1/universes";
 const CHUNK_SIZE = 200;

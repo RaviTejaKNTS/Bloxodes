@@ -140,4 +140,4 @@ jobs:
           CACHE_WARM_MAX_URLS: ${{ vars.CACHE_WARM_MAX_URLS }}
           CACHE_WARM_REQUEST_DELAY_MS: ${{ vars.CACHE_WARM_REQUEST_DELAY_MS }}
         run: |
-          node scripts/warm-cloudflare-cache.mjs
+          node scripts/automation/warm-cloudflare-cache.mjs

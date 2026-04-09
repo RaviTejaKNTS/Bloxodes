@@ -90,7 +90,7 @@ Example scoring (pseudo):
 - Create `public.roblox_music_ids_boombox_view`.
 
 ### Phase 2: Ingestion
-- Add a top-charts pass (no-query) to `scripts/collect-roblox-music-ids.ts`.
+- Add a top-charts pass (no-query) to `scripts/music/collect-roblox-music-ids.ts`.
 - Add a verification pipeline for `productinfo` + `assetdelivery`.
 - Store verification results + score in `public.roblox_music_ids`.
 
