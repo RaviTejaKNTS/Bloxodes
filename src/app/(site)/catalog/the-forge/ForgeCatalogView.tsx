@@ -16,13 +16,15 @@ type ForgeCatalogConfig = {
   badgeKey?: string;
   subtitleKeys?: string[];
   descriptionKey?: string;
+  cardDescriptionKey?: string;
+  hideImages?: boolean;
 };
 
 type ForgeCatalogItem = {
   id: string;
   name: string;
   image?: string | null;
-  [key: string]: string | number | null | undefined;
+  [key: string]: unknown;
 };
 
 type ForgeCatalogSection = {
@@ -38,6 +40,24 @@ type ForgeCatalogViewProps = {
   config: ForgeCatalogConfig;
 };
 
+const CARD_STAT_OVERRIDES: Record<string, string[]> = {
+  ores: ["dropChance", "multiplier", "sellPrice", "trait"],
+  weapons: ["baseDamage", "attackSpeed", "range", "sellPrice"],
+  armors: ["baseHealth", "sellPrice", "chance"],
+  pickaxes: ["power", "speed", "luck", "cost"],
+  runes: ["primaryDrop"],
+  races: ["rollChance", "damage", "health", "speed"],
+  essences: [],
+  totems: ["cost"],
+  potions: ["cost"],
+  enemies: ["health", "damage", "gold", "experience"],
+  npcs: [],
+  locations: [],
+  quests: [],
+  skills: [],
+  blueprints: []
+};
+
 function resolveImageSrc(image: string | null | undefined): string {
   if (!image) return FALLBACK_IMAGE;
   if (image.startsWith("http")) return image;
@@ -47,6 +67,10 @@ function resolveImageSrc(image: string | null | undefined): string {
 
 function normalizeValue(value: unknown): string | null {
   if (value === null || value === undefined) return null;
+  if (Array.isArray(value)) {
+    const parts = value.map((entry) => normalizeValue(entry)).filter(Boolean) as string[];
+    return parts.length ? parts.join("; ") : null;
+  }
   if (typeof value === "number") {
     if (!Number.isFinite(value)) return null;
     return value.toLocaleString("en-US");
@@ -57,6 +81,17 @@ function normalizeValue(value: unknown): string | null {
     const lowered = trimmed.toLowerCase();
     if (["none", "n/a", "na", "null"].includes(lowered)) return null;
     return trimmed;
+  }
+  if (typeof value === "object") {
+    const parts = Object.entries(value as Record<string, unknown>)
+      .map(([key, entry]) => {
+        const normalized = normalizeValue(entry);
+        if (!normalized) return null;
+        const label = /^\d+$/.test(key) ? `Lv. ${key}` : formatKeyLabel(key);
+        return `${label}: ${normalized}`;
+      })
+      .filter(Boolean) as string[];
+    return parts.length ? parts.join("; ") : null;
   }
   return String(value);
 }
@@ -75,18 +110,36 @@ function buildSubtitle(item: ForgeCatalogItem, config: ForgeCatalogConfig): stri
   if (!config.subtitleKeys?.length) return null;
   const parts = config.subtitleKeys
     .map((key) => normalizeValue(item[key]))
-    .filter(Boolean) as string[];
+    .filter(Boolean)
+    .slice(0, 2) as string[];
   if (!parts.length) return null;
-  return parts.join(" | ");
+  return parts.join(" • ");
 }
 
 function buildStatEntries(item: ForgeCatalogItem, config: ForgeCatalogConfig) {
-  const stats = (config.stats ?? [])
-    .map((stat) => ({
-      label: stat.label,
-      value: normalizeValue(item[stat.key])
-    }))
-    .filter((stat) => Boolean(stat.value));
+  const statMap = new Map(
+    (config.stats ?? []).map((stat) => [
+      stat.key,
+      {
+        label: stat.label,
+        value: normalizeValue(item[stat.key])
+      }
+    ])
+  );
+
+  const preferredKeys = CARD_STAT_OVERRIDES[config.slug] ?? (config.stats ?? []).map((stat) => stat.key);
+
+  const stats = preferredKeys
+    .map((key) => {
+      const stat = statMap.get(key);
+      const value = stat?.value ?? normalizeValue(item[key]);
+      if (!value) return null;
+      return {
+        label: stat?.label ?? formatKeyLabel(key),
+        value
+      };
+    })
+    .filter(Boolean) as Array<{ label: string; value: string }>;
 
   if (!stats.length) return [];
   const maxStats = config.maxStats ?? stats.length;
@@ -103,50 +156,52 @@ function renderValue(value: string | null) {
 function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: ForgeCatalogConfig }) {
   const badge = config.badgeKey ? normalizeValue(item[config.badgeKey]) : null;
   const subtitle = buildSubtitle(item, config);
-  const description = config.descriptionKey ? normalizeValue(item[config.descriptionKey]) : null;
+  const description = config.cardDescriptionKey ? normalizeValue(item[config.cardDescriptionKey]) : null;
   const stats = buildStatEntries(item, config);
   const image = resolveImageSrc(item.image ?? null);
+  const showImage = !config.hideImages;
 
   return (
     <article
       id={`item-${item.id}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-surface shadow-soft transition duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl"
+      className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border/60 bg-surface shadow-soft transition duration-200 hover:-translate-y-0.5 hover:border-border/90 hover:shadow-lg"
     >
-      <div className="relative aspect-square w-full overflow-hidden bg-background/60">
-        <Image
-          src={image}
-          alt={item.name}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-          className="object-cover transition duration-500 group-hover:scale-105"
-          unoptimized
-        />
-        {badge ? (
-          <span className="absolute right-2 top-2 rounded-full bg-accent px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white shadow-lg">
-            {badge}
-          </span>
-        ) : null}
-      </div>
-      <div className="flex flex-1 flex-col gap-3 p-4">
-        <div className="space-y-1">
-          <h3 className="text-lg font-semibold leading-snug text-foreground line-clamp-2">{item.name}</h3>
+      {showImage ? (
+        <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-border/60 bg-background/50">
+          <Image
+            src={image}
+            alt={item.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1440px) 25vw, 20vw"
+            className="object-contain p-5 transition duration-300 group-hover:scale-[1.02]"
+            unoptimized
+          />
+        </div>
+      ) : null}
+      <div className="flex flex-1 flex-col gap-3 p-5">
+        <div className="space-y-2">
+          {badge ? (
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">{badge}</p>
+          ) : null}
+          <h3 className="text-xl font-semibold leading-snug text-foreground">{item.name}</h3>
           {subtitle ? (
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">{subtitle}</p>
+            <p className="text-sm leading-relaxed text-muted line-clamp-2">{subtitle}</p>
+          ) : null}
+          {description ? (
+            <p className="text-sm leading-relaxed text-muted line-clamp-3">{description}</p>
           ) : null}
         </div>
 
         {stats.length ? (
-          <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+          <dl className="mt-auto space-y-2">
             {stats.map((stat) => (
-              <div key={stat.label} className="space-y-0.5">
-                <dt className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">{stat.label}</dt>
-                <dd className="text-sm font-semibold text-foreground">{stat.value}</dd>
+              <div key={stat.label} className="flex items-start justify-between gap-4">
+                <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{stat.label}</dt>
+                <dd className="text-right text-sm font-semibold leading-snug text-foreground">{stat.value}</dd>
               </div>
             ))}
           </dl>
         ) : null}
-
-        {description ? <p className="text-sm text-muted line-clamp-3">{description}</p> : null}
       </div>
     </article>
   );
@@ -155,6 +210,7 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
 function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; config: ForgeCatalogConfig }) {
   const stats = (config.stats ?? []).slice(0, config.maxStats ?? (config.stats?.length ?? 0));
   const badgeLabel = config.badgeKey ? formatKeyLabel(config.badgeKey) : null;
+  const showImages = !config.hideImages;
   const subtitleLabel = config.subtitleKeys?.length
     ? config.subtitleKeys.length === 1
       ? formatKeyLabel(config.subtitleKeys[0])
@@ -168,7 +224,7 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
         <table>
           <thead>
             <tr>
-              <th className="table-col-compact">Image</th>
+              {showImages ? <th className="table-col-compact">Image</th> : null}
               <th>Name</th>
               {badgeLabel ? <th className="table-col-compact">{badgeLabel}</th> : null}
               {subtitleLabel ? <th>{subtitleLabel}</th> : null}
@@ -188,20 +244,22 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
 
               return (
                 <tr key={item.id} id={`item-${item.id}`}>
-                  <td className="table-col-compact">
-                    <div className="flex items-center justify-center">
-                      <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-surface-muted/70 p-1.5">
-                        <Image
-                          src={resolveImageSrc(item.image ?? null)}
-                          alt={item.name}
-                          width={80}
-                          height={80}
-                          className="h-18 w-18 object-contain"
-                          unoptimized
-                        />
+                  {showImages ? (
+                    <td className="table-col-compact">
+                      <div className="flex items-center justify-center">
+                        <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-surface-muted/70 p-1.5">
+                          <Image
+                            src={resolveImageSrc(item.image ?? null)}
+                            alt={item.name}
+                            width={80}
+                            height={80}
+                            className="h-18 w-18 object-contain"
+                            unoptimized
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </td>
+                    </td>
+                  ) : null}
                   <td>
                     <span className="font-semibold text-foreground">{item.name}</span>
                   </td>
@@ -283,13 +341,13 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">{config.groupLabel}</p>
                 <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
               </div>
-              <span className="rounded-full border border-border/60 bg-surface/70 px-3 py-1 text-xs font-semibold text-muted">
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
                 {section.items.length.toLocaleString("en-US")} items
               </span>
             </div>
 
             {view === "cards" ? (
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                 {section.items.map((item) => (
                   <ForgeItemCard key={item.id} item={item} config={config} />
                 ))}

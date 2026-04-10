@@ -1,0 +1,49 @@
+# Public Site Routes Guide
+
+Scope: `src/app/(site)`.
+
+This folder contains the public Bloxodes experience: content hubs, detail pages, catalog sections, tools, policy pages, and route-family helpers.
+
+## Route Families
+
+- Core content: home, codes, articles, lists, checklists, events, quizzes, wiki pages, authors.
+- Catalog: music IDs, free Roblox items, admin commands, color codes, decal IDs, The Forge, and generic catalog fallback routes.
+- Tools: Roblox ID extractor, Robux/USD, DevEx, The Forge calculators, Grow a Garden calculator, and generic tool fallback routes.
+- Static pages: about, contact, policies, disclaimer, editorial, cookie settings.
+- Redirect/fallback: legacy slug resolver in `[slug]/page.tsx`.
+
+## Working Patterns
+
+- Prefer a sibling `page-data.tsx` when a route family has multiple pages, shared metadata helpers, or both index and detail views.
+- Keep heavy data work out of the page file. Route files should mostly compose helpers and present metadata.
+- Reuse shared components such as `GameCard`, `ArticleCard`, `PagePagination`, `CommentsSection`, and route-specific client widgets.
+- When interactive UI is required, keep a server wrapper page and isolate client logic in a colocated client component.
+
+## SEO and Structured Data
+
+- Public pages should define metadata or `generateMetadata`.
+- Use JSON-LD where the page type clearly maps to content entities like `CollectionPage`, `Article`, `FAQPage`, `ItemList`, or breadcrumbs.
+- Canonicals should come from shared helpers in `src/lib/seo.ts` and `src/lib/site-config.ts`.
+
+## Data Source Split
+
+- Codes, articles, lists, checklists, quizzes, wiki pages, authors, and much of catalog/tools content come from Supabase.
+- Some catalog/tools pages blend Supabase intro copy with local datasets in `data/`.
+- Free items, music IDs, and ID-extractor flows also depend on API routes under `src/app/api`.
+
+## Public Route Checklists
+
+### New page family
+
+1. Create route files under the right section.
+2. Add sidecar `page-data.tsx` if the family has more than one page.
+3. Add metadata, canonical handling, and structured data.
+4. Update sitemap and revalidation coverage if the page is publishable or regenerated.
+5. Refresh `agents/pages/agents.md`.
+
+### New catalog or tool
+
+1. Decide whether the long-form copy lives in Supabase, local data files, or both.
+2. Update `src/lib/catalog.ts`, `src/lib/tools.ts`, `src/lib/db.ts`, or the relevant dataset parser.
+3. Keep route slugs, API filtering, and revalidation behavior aligned.
+4. If the page is commentable, wire it through the existing comments flow instead of inventing a new one.

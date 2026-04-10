@@ -42,6 +42,8 @@ export type ForgeCatalogConfig = {
   badgeKey?: string;
   subtitleKeys?: string[];
   descriptionKey?: string;
+  cardDescriptionKey?: string;
+  hideImages?: boolean;
   linkKey?: string;
   maxStats?: number;
 };
@@ -216,6 +218,57 @@ export const FORGE_CATALOGS: ForgeCatalogConfig[] = [
     description: "The Forge NPC roster and their roles.",
     groupKey: "area",
     groupLabel: "Area",
+    badgeKey: "role",
+    subtitleKeys: ["location"],
+    hideImages: true,
+    stats: [],
+    maxStats: 0
+  },
+  {
+    slug: "quests",
+    label: "Quests",
+    file: "quests.json",
+    navDescription: "Quest objectives grouped by world and NPC.",
+    description: "Track The Forge quests by world, NPC, and listed objectives.",
+    groupKey: "world",
+    groupLabel: "World",
+    badgeKey: "status",
+    subtitleKeys: ["npc"],
+    descriptionKey: "objectives",
+    cardDescriptionKey: "objectives",
+    hideImages: true,
+    stats: [],
+    maxStats: 0
+  },
+  {
+    slug: "skills",
+    label: "Skills",
+    file: "skills.json",
+    navDescription: "Achievement skills, unlock requirements, and boosts.",
+    description: "Compare The Forge skill boosts and the achievements used to unlock them.",
+    groupKey: "boost",
+    groupLabel: "Boost",
+    badgeKey: "boost",
+    subtitleKeys: ["requirement"],
+    descriptionKey: "summary",
+    cardDescriptionKey: "summary",
+    hideImages: true,
+    stats: [],
+    maxStats: 0
+  },
+  {
+    slug: "blueprints",
+    label: "Blueprints",
+    file: "blueprints.json",
+    navDescription: "Weapon and armor blueprints with sources and availability.",
+    description: "See The Forge blueprints, where they come from, and whether they are available.",
+    groupKey: "source",
+    groupLabel: "Source",
+    badgeKey: "availability",
+    subtitleKeys: ["itemType"],
+    descriptionKey: "howToGet",
+    cardDescriptionKey: "howToGet",
+    hideImages: true,
     stats: [],
     maxStats: 0
   },
@@ -263,7 +316,7 @@ export type ForgeCatalogItem = {
   name: string;
   image?: string | null;
   link?: string | null;
-  [key: string]: string | number | null | undefined;
+  [key: string]: unknown;
 };
 
 export type ForgeCatalogDataset = {
@@ -611,8 +664,6 @@ export function renderForgeCatalogPage({
 
         <CatalogAdSlot />
 
-        <ForgeCatalogNav activeSlug={config.slug} />
-
         {sectionNav.length > 1 ? <ForgeSectionNav sections={sectionNav} /> : null}
 
         <ForgeCatalogView sections={groupedSections} config={config} />
@@ -659,6 +710,8 @@ export function renderForgeCatalogPage({
             ) : null}
           </>
         ) : null}
+
+        <ForgeCatalogNav activeSlug={config.slug} />
       </section>
 
       {contentHtml?.id ? (

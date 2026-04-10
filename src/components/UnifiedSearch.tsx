@@ -10,7 +10,7 @@ export type SearchItem = {
   title: string;
   subtitle?: string | null;
   url: string;
-  type: "codes" | "article" | "checklist" | "list" | "tool" | "catalog" | "event" | "author" | "music";
+  type: "codes" | "article" | "checklist" | "list" | "tool" | "catalog" | "event" | "author" | "music" | "wiki";
   updatedAt?: string | null;
   badge?: string | null;
 };
@@ -104,7 +104,7 @@ export function UnifiedSearch({ autoFocus = false }: Props) {
   const limitedResults = results.slice(0, visibleCount);
   const hasMore = results.length > visibleCount;
 
-  const placeholder = "Search articles, codes, checklists, tools, and lists";
+  const placeholder = "Search articles, codes, wiki pages, checklists, tools, and lists";
 
   return (
     <div className="space-y-6">
@@ -143,7 +143,7 @@ export function UnifiedSearch({ autoFocus = false }: Props) {
           </p>
         )
       ) : (
-        <p className="text-sm text-muted">Start typing to search articles, codes, checklists, quizzes, tools, and lists.</p>
+        <p className="text-sm text-muted">Start typing to search articles, codes, wiki pages, checklists, quizzes, tools, and lists.</p>
       )}
 
       {canSearch && loading && results.length === 0 ? (

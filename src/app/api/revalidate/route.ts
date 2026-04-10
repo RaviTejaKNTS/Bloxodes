@@ -12,7 +12,8 @@ type Payload =
   | { type: "tool"; slug: string }
   | { type: "catalog"; slug: string }
   | { type: "music"; slug: string }
-  | { type: "quiz"; slug: string };
+  | { type: "quiz"; slug: string }
+  | { type: "wiki"; slug: string };
 
 const MUSIC_CATALOG_CODES = new Set(["roblox-music-ids"]);
 const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
@@ -29,6 +30,7 @@ const CHECKLISTS_SITEMAP_PATH = "/sitemaps/checklists.xml";
 const QUIZZES_SITEMAP_PATH = "/sitemaps/quizzes.xml";
 const TOOLS_SITEMAP_PATH = "/sitemaps/tools.xml";
 const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
+const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
 
 function assertSecret(request: Request) {
   const secret = process.env.REVALIDATE_SECRET;
@@ -108,6 +110,13 @@ function revalidateForQuizzes(slug: string) {
   return applyRevalidation(
     ["/quizzes", `/quizzes/${slug}`, SITEMAP_INDEX_PATH, QUIZZES_SITEMAP_PATH],
     ["quizzes-index"]
+  );
+}
+
+function revalidateForWiki(slug: string) {
+  return applyRevalidation(
+    ["/wiki", `/wiki/${slug}`, SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
+    [`wiki:${slug}`, "wiki-index"]
   );
 }
 
@@ -211,6 +220,9 @@ export async function POST(request: Request) {
       break;
     case "quiz":
       purgePaths = revalidateForQuizzes(slug);
+      break;
+    case "wiki":
+      purgePaths = revalidateForWiki(slug);
       break;
     case "tool":
       purgePaths = revalidateForTools(slug);

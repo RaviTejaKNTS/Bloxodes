@@ -14,7 +14,8 @@ type EventRow = {
     | "tool"
     | "catalog"
     | "music"
-    | "quiz";
+    | "quiz"
+    | "wiki";
   slug: string;
 };
 

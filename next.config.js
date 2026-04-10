@@ -66,6 +66,12 @@ const nextConfig = {
         ]
       },
       {
+        source: "/wiki/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" }
+        ]
+      },
+      {
         source: "/checklists/:path*",
         headers: [
           { key: "Cache-Control", value: "public, s-maxage=21600, stale-while-revalidate=86400" }

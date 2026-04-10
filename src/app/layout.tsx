@@ -1,25 +1,9 @@
 import "./globals.css";
 import { ReactNode } from "react";
 import { LayoutGlobalSearch } from "@/components/LayoutClient";
+import { ThemeBootstrap } from "@/components/ThemeBootstrap";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
-import { THEME_COOKIE } from "@/lib/theme";
-
-const themeScript = `(() => {
-  const cookieKey = "${THEME_COOKIE}";
-  try {
-    const cookie = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(cookieKey + "="));
-    const value = cookie ? decodeURIComponent(cookie.split("=").slice(1).join("=")) : null;
-    const theme = value === "light" || value === "dark" ? value : "dark";
-    const root = document.documentElement;
-    root.classList.toggle("dark", theme === "dark");
-    root.dataset.theme = theme;
-  } catch (error) {
-    /* noop */
-  }
-})();`;
 
 const alternatesTypes = { "application/rss+xml": `${SITE_URL}/feed.xml` };
 export const metadata = {
@@ -106,7 +90,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning className="dark" data-theme="dark">
       <body className="min-h-screen bg-background text-foreground transition-colors duration-300">
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <ThemeBootstrap />
         <>
           <LayoutGlobalSearch />
           {children}

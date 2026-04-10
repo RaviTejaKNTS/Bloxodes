@@ -1,0 +1,157 @@
+{
+  "meta": {
+    "title": "The Forge Skills",
+    "updatedAt": "2026-04-10",
+    "sources": [
+      {
+        "label": "Game8 achievements and skills list",
+        "url": "https://game8.co/games/The-Forge/archives/574334",
+        "accessed": "2026-04-10"
+      }
+    ],
+    "columns": [
+      "name",
+      "requirement",
+      "boost",
+      "levels",
+      "summary"
+    ],
+    "notes": [
+      "Skills are passive stat boosts equipped from the Achievements menu.",
+      "Only one skill boost can be equipped at a time.",
+      "Equipping a skill uses the highest unlocked level for that achievement."
+    ]
+  },
+  "items": [
+    {
+      "name": "Weapon Smith",
+      "requirement": "Weapons forged",
+      "boost": "Attack Speed",
+      "levels": {
+        "1": "+4%",
+        "2": "+8%",
+        "3": "+12%",
+        "4": "+16%",
+        "5": "+20%"
+      },
+      "summary": "Raises attack speed as you forge more weapons."
+    },
+    {
+      "name": "Monster Slayer",
+      "requirement": "Mobs killed",
+      "boost": "Stamina",
+      "levels": {
+        "1": "+8%",
+        "2": "+16%",
+        "3": "+24%",
+        "4": "+32%",
+        "5": "+40%"
+      },
+      "summary": "Raises stamina as you defeat more regular enemies."
+    },
+    {
+      "name": "Master Miner",
+      "requirement": "Rocks mined",
+      "boost": "Mine Power",
+      "levels": {
+        "1": "+5%",
+        "2": "+10%",
+        "3": "+15%",
+        "4": "+20%",
+        "5": "+25%"
+      },
+      "summary": "Raises mining power as you mine more rocks."
+    },
+    {
+      "name": "Armor Smith",
+      "requirement": "Armor forged",
+      "boost": "Health",
+      "levels": {
+        "1": "+5%",
+        "2": "+10%",
+        "3": "+15%",
+        "4": "+20%",
+        "5": "+25%"
+      },
+      "summary": "Raises health as you forge more armor."
+    },
+    {
+      "name": "Experience Master",
+      "requirement": "Levels reached",
+      "boost": "XP Multiplier",
+      "levels": {
+        "1": "+6%",
+        "2": "+12%",
+        "3": "+18%",
+        "4": "+24%",
+        "5": "+30%"
+      },
+      "summary": "Raises XP gain as your account level grows."
+    },
+    {
+      "name": "Explorer",
+      "requirement": "Areas explored",
+      "boost": "Move Speed",
+      "levels": {
+        "1": "+5%",
+        "2": "+10%",
+        "3": "+15%",
+        "4": "+20%",
+        "5": "+25%"
+      },
+      "summary": "Raises movement speed as you explore more areas."
+    },
+    {
+      "name": "Rune Master",
+      "requirement": "Runes applied",
+      "boost": "Critical Chance",
+      "levels": {
+        "1": "+7%",
+        "2": "+14%",
+        "3": "+21%",
+        "4": "+28%",
+        "5": "+35%"
+      },
+      "summary": "Raises critical chance as you apply more runes."
+    },
+    {
+      "name": "Dedicated Player",
+      "requirement": "Hours played",
+      "boost": "Luck",
+      "levels": {
+        "1": "+8%",
+        "2": "+16%",
+        "3": "+24%",
+        "4": "+32%",
+        "5": "+40%"
+      },
+      "summary": "Raises luck as your playtime increases."
+    },
+    {
+      "name": "Boss Hunter",
+      "requirement": "Bosses killed",
+      "boost": "Damage",
+      "levels": {
+        "1": "+4%",
+        "2": "+8%",
+        "3": "+12%",
+        "4": "+16%",
+        "5": "+20%"
+      },
+      "summary": "Raises damage as you defeat more bosses."
+    },
+    {
+      "name": "Upgrade Master",
+      "requirement": "Items upgraded",
+      "boost": "Critical Chance",
+      "levels": {
+        "1": "+7%",
+        "2": "+14%",
+        "3": "+21%",
+        "4": "+28%",
+        "5": "+35%"
+      },
+      "summary": "Raises critical chance as you upgrade more items."
+    }
+  ]
+}

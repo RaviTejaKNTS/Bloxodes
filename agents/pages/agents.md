@@ -1,102 +1,95 @@
-# UI pages inventory (App Router)
+# Page Inventory
 
-Revalidate values are from each page's export const revalidate. Data caches also exist in src/lib/* via unstable_cache tags.
+Authoritative workflow guidance lives in:
 
-## Global shell
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| (root layout) | src/app/layout.tsx | Global metadata, consent gates, analytics, theme script, JSON-LD site/org. | force-static |
-| (site layout) | src/app/(site)/layout.tsx | Header/footer shell for marketing pages. | n/a |
-| (globals) | src/app/globals.css | Global styles + Tailwind base. | n/a |
-| 404 | src/app/(site)/not-found.tsx | Friendly 404 with links to core hubs. | n/a |
+- `src/app/AGENTS.md`
+- `src/app/(site)/AGENTS.md`
 
-## Home
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| / | src/app/(site)/page.tsx | Games, articles, checklists, lists, tools, events cards, music stats. JSON-LD CollectionPage. | 21600 |
+This file is the route-family inventory for quick scanning.
 
-## Codes
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| /codes | src/app/(site)/codes/page.tsx | Index via listGamesWithActiveCountsPage. JSON-LD CollectionPage. | 86400 |
-| /codes/page/[page] | src/app/(site)/codes/page/[page]/page.tsx | Paginated codes index. | 86400 |
-| /codes/[slug] | src/app/(site)/codes/[slug]/page.tsx | Code page from code_pages_view; active/expired codes, FAQ extraction, social share, JSON-LD. | 86400 |
-| /[slug] | src/app/(site)/[slug]/page.tsx | Legacy slug redirect using src/data/slug_oldslugs.json. | n/a |
+## Shell And Global UI
 
-## Articles
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| /articles | src/app/(site)/articles/page.tsx | Article index via article_pages_index_view. JSON-LD CollectionPage. | 604800 |
-| /articles/page/[page] | src/app/(site)/articles/page/[page]/page.tsx | Paginated article index. | 604800 |
-| /articles/[slug] | src/app/(site)/articles/[slug]/page.tsx | Article detail from article_pages_view; markdown, related items, how-to schema. | 604800 |
+| Area | Routes | Files / Notes |
+| --- | --- | --- |
+| Global shell | all routes | `src/app/layout.tsx`, `src/app/globals.css` |
+| Public shell | public pages | `src/app/(site)/layout.tsx` |
+| Secure shell | signed-in UI | `src/app/(secure)/layout.tsx` |
+| Not found | `404` | `src/app/(site)/not-found.tsx` |
+| Home | `/` | `src/app/(site)/page.tsx` |
+| Legacy slug redirect | `/{legacy-slug}` | `src/app/(site)/[slug]/page.tsx`, backed by `src/data/slug_oldslugs.json` |
 
-## Lists
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| /lists | src/app/(site)/lists/page.tsx | Lists index via game_lists_index_view. JSON-LD CollectionPage. | 86400 |
-| /lists/page/[page] | src/app/(site)/lists/page/[page]/page.tsx | Paginated lists index. | 86400 |
-| /lists/[slug] | src/app/(site)/lists/[slug]/page.tsx | List detail from game_lists + game_list_entries; ranking UI + JSON-LD. | 86400 |
-| /lists/[slug]/page/[page] | src/app/(site)/lists/[slug]/page/[page]/page.tsx | Paginated list detail; noindex for page > 1. | 86400 |
+## Secure Account UI
 
-## Checklists
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| /checklists | src/app/(site)/checklists/page.tsx | Checklists index via checklist_pages_view. JSON-LD CollectionPage. | 21600 |
-| /checklists/page/[page] | src/app/(site)/checklists/page/[page]/page.tsx | Paginated checklists index. | 21600 |
-| /checklists/[slug] | src/app/(site)/checklists/[slug]/page.tsx | Checklist detail + board UI; checklist_pages_view + checklist_items; JSON-LD ItemList. | 3600 |
+| Area | Routes | Files / Notes |
+| --- | --- | --- |
+| Login | `/login` | `src/app/(secure)/login/page.tsx`, server actions in `src/app/(secure)/login/actions.ts` |
+| Account | `/account` | `src/app/(secure)/account/page.tsx` |
 
-## Events
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| /events | src/app/(site)/events/page.tsx | Events index; cards from events_pages + roblox_virtual_events. | 3600 |
-| /events/[slug] | src/app/(site)/events/[slug]/page.tsx | Event detail + schedule/countdown; events_pages + roblox_virtual_events. | 3600 |
+## Core Content Families
 
-## Catalog
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| /catalog | src/app/(site)/catalog/page.tsx | Catalog hub; music stats + admin commands summary. | 3600 |
-| /catalog/roblox-music-ids | src/app/(site)/catalog/roblox-music-ids/page.tsx | Music IDs hub from roblox_music_ids_ranked_view; client browser uses /api/roblox-music-ids. | 2592000 |
-| /catalog/roblox-music-ids/page/[page] | src/app/(site)/catalog/roblox-music-ids/page/[page]/page.tsx | Paginated music IDs. | 2592000 |
-| /catalog/roblox-music-ids/trending | src/app/(site)/catalog/roblox-music-ids/trending/page.tsx | Trending music IDs by rank. | 2592000 |
-| /catalog/roblox-music-ids/trending/page/[page] | src/app/(site)/catalog/roblox-music-ids/trending/page/[page]/page.tsx | Paginated trending music IDs. | 2592000 |
-| /catalog/roblox-music-ids/genres | src/app/(site)/catalog/roblox-music-ids/genres/page.tsx | Genre list from roblox_music_genres_view. | 2592000 |
-| /catalog/roblox-music-ids/genres/page/[page] | src/app/(site)/catalog/roblox-music-ids/genres/page/[page]/page.tsx | Paginated genre list. | 2592000 |
-| /catalog/roblox-music-ids/genres/[genre] | src/app/(site)/catalog/roblox-music-ids/genres/[genre]/page.tsx | Genre detail from roblox_music_ids_ranked_view. | 2592000 |
-| /catalog/roblox-music-ids/genres/[genre]/page/[page] | src/app/(site)/catalog/roblox-music-ids/genres/[genre]/page/[page]/page.tsx | Paginated genre detail. | 2592000 |
-| /catalog/roblox-music-ids/artists | src/app/(site)/catalog/roblox-music-ids/artists/page.tsx | Artist list from roblox_music_artists_view. | 2592000 |
-| /catalog/roblox-music-ids/artists/page/[page] | src/app/(site)/catalog/roblox-music-ids/artists/page/[page]/page.tsx | Paginated artist list. | 2592000 |
-| /catalog/roblox-music-ids/artists/[artist] | src/app/(site)/catalog/roblox-music-ids/artists/[artist]/page.tsx | Artist detail from roblox_music_ids_ranked_view. | 2592000 |
-| /catalog/roblox-music-ids/artists/[artist]/page/[page] | src/app/(site)/catalog/roblox-music-ids/artists/[artist]/page/[page]/page.tsx | Paginated artist detail. | 2592000 |
-| /catalog/admin-commands | src/app/(site)/catalog/admin-commands/page.tsx | Admin commands hub; catalog_pages_view + data/Admin commands/*.md. | 86400 |
-| /catalog/admin-commands/[system] | src/app/(site)/catalog/admin-commands/[system]/page.tsx | Command list detail from markdown dataset. | 86400 |
-| /catalog/the-forge/[collection] | src/app/(site)/catalog/the-forge/[collection]/page.tsx | The Forge catalog datasets from data/The Forge/*.json with catalog_pages_view intro/FAQ. | 86400 |
-| /catalog/[...slug] | src/app/(site)/catalog/[...slug]/page.tsx | Generic catalog fallback from catalog_pages_view. | 86400 |
+| Area | Routes | Files / Notes |
+| --- | --- | --- |
+| Codes | `/codes`, `/codes/page/[page]`, `/codes/[slug]` | `src/app/(site)/codes/*`, shared helpers in `src/app/(site)/codes/page-data.tsx` |
+| Articles | `/articles`, `/articles/page/[page]`, `/articles/[slug]` | `src/app/(site)/articles/*`, shared helpers in `src/app/(site)/articles/page-data.tsx` |
+| Lists | `/lists`, `/lists/page/[page]`, `/lists/[slug]`, `/lists/[slug]/page/[page]` | `src/app/(site)/lists/*`, shared helpers in `src/app/(site)/lists/page-data.tsx` and `src/app/(site)/lists/[slug]/page-data.tsx` |
+| Checklists | `/checklists`, `/checklists/page/[page]`, `/checklists/[slug]` | `src/app/(site)/checklists/*`, shared helpers in `src/app/(site)/checklists/page-data.tsx` |
+| Events | `/events`, `/events/[slug]` | `src/app/(site)/events/*`, shared loaders in `src/app/(site)/events/page-data.tsx`, detail composition in `events/[slug]/events-page.tsx` |
+| Quizzes | `/quizzes`, `/quizzes/[slug]` | `src/app/(site)/quizzes/*`, shared helpers in `src/app/(site)/quizzes/page-data.tsx` |
+| Wiki | `/wiki`, `/wiki/[slug]` | `src/app/(site)/wiki/*`, shared helpers in `page-data.tsx`, Supabase read layer in `src/lib/wiki.ts` |
+| Authors | `/authors`, `/authors/[slug]` | `src/app/(site)/authors/*` |
 
-## Tools
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| /tools | src/app/(site)/tools/page.tsx | Tools index via tools_view. JSON-LD CollectionPage. | 21600 |
-| /tools/page/[page] | src/app/(site)/tools/page/[page]/page.tsx | Paginated tools index. | 21600 |
-| /tools/roblox-id-extractor | src/app/(site)/tools/roblox-id-extractor/page.tsx | Tool copy from tools_view; client calls /api/roblox-id-extractor. | 3600 |
-| /tools/robux-to-usd-calculator | src/app/(site)/tools/robux-to-usd-calculator/page.tsx | Uses robux-bundles.ts + robux-plans.ts. | 3600 |
-| /tools/roblox-devex-calculator | src/app/(site)/tools/roblox-devex-calculator/page.tsx | Uses tools_view + devex constants; calculator client. | 3600 |
-| /tools/the-forge-crafting-calculator | src/app/(site)/tools/the-forge-crafting-calculator/page.tsx | Uses data/The Forge/ores.json via src/lib/forge/ores.ts. | 3600 |
-| /tools/grow-a-garden-crop-value-calculator | src/app/(site)/tools/grow-a-garden-crop-value-calculator/page.tsx | Uses data/Grow a Garden/crops.json via src/lib/grow-a-garden/crops.ts. | 3600 |
-| /tools/[...slug] | src/app/(site)/tools/[...slug]/page.tsx | Generic tool fallback from tools_view. | 3600 |
+## Catalog Families
 
-## Authors
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| /authors | src/app/(site)/authors/page.tsx | Authors index from authors table. | 2592000 |
-| /authors/[slug] | src/app/(site)/authors/[slug]/page.tsx | Author detail with authored games + articles. | 2592000 |
+| Area | Routes | Files / Notes |
+| --- | --- | --- |
+| Catalog hub | `/catalog` | `src/app/(site)/catalog/page.tsx` |
+| Free Roblox items | `/catalog/free-roblox-items`, paginated routes, category routes, subcategory routes, and mirrored `categories/*` routes | `src/app/(site)/catalog/free-roblox-items/*`, helpers in `page-data.tsx`, client browser in `FreeItemsBrowser.tsx` |
+| Roblox music IDs | `/catalog/roblox-music-ids`, `/page/[page]`, `/trending`, `/genres`, `/artists`, and their paginated/detail routes | `src/app/(site)/catalog/roblox-music-ids/*`, client browser in `MusicIdsBrowser.tsx`, shared helpers in `page-data.tsx` |
+| Roblox color codes | `/catalog/roblox-color-codes` | `src/app/(site)/catalog/roblox-color-codes/*`, data helper in `page-data.tsx` |
+| Roblox decal IDs | `/catalog/roblox-decal-ids`, `/catalog/roblox-decal-ids/page/[page]` | `src/app/(site)/catalog/roblox-decal-ids/*`, helpers in `page-data.tsx` |
+| Admin commands | `/catalog/admin-commands`, `/catalog/admin-commands/[system]` | `src/app/(site)/catalog/admin-commands/*`, backed by `data/Admin commands/*.md` |
+| The Forge catalog | `/catalog/the-forge`, `/catalog/the-forge/[collection]` | `src/app/(site)/catalog/the-forge/*`, view helper in `ForgeCatalogView.tsx`, data helper in `page-data.tsx` |
+| Generic catalog fallback | `/catalog/[...slug]` | `src/app/(site)/catalog/[...slug]/page.tsx`, backed by Supabase catalog copy |
 
-## Static + policy pages
-| Route | File | Data/Notes | Revalidate |
-| --- | --- | --- | --- |
-| /about | src/app/(site)/about/page.tsx | Static content + metadata. | n/a |
-| /contact | src/app/(site)/contact/page.tsx | Static contact content. | n/a |
-| /privacy-policy | src/app/(site)/privacy-policy/page.tsx | Static policy copy. | n/a |
-| /editorial-guidelines | src/app/(site)/editorial-guidelines/page.tsx | Static editorial policy. | n/a |
-| /disclaimer | src/app/(site)/disclaimer/page.tsx | Static disclaimer copy + JSON-LD. | n/a |
-| /how-we-gather-and-verify-codes | src/app/(site)/how-we-gather-and-verify-codes/page.tsx | Static verification policy. | n/a |
-| /cookie-settings | src/app/(site)/cookie-settings/page.tsx | Consent controls (client component). | n/a |
+## Tool Families
+
+| Area | Routes | Files / Notes |
+| --- | --- | --- |
+| Tools hub | `/tools`, `/tools/page/[page]` | `src/app/(site)/tools/*`, shared helpers in `page-data.tsx` |
+| Roblox ID extractor | `/tools/roblox-id-extractor` | `src/app/(site)/tools/roblox-id-extractor/*`, client in `RobloxIdExtractorClient.tsx` |
+| Robux to USD | `/tools/robux-to-usd-calculator` | `src/app/(site)/tools/robux-to-usd-calculator/*`, static tables in `robux-bundles.ts` and `robux-plans.ts` |
+| DevEx | `/tools/roblox-devex-calculator` | `src/app/(site)/tools/roblox-devex-calculator/*` |
+| The Forge crafting | `/tools/the-forge-crafting-calculator` | `src/app/(site)/tools/the-forge-crafting-calculator/*` |
+| The Forge inventory optimizer | `/tools/the-forge-inventory-optimizer` | `src/app/(site)/tools/the-forge-inventory-optimizer/*` |
+| Grow a Garden | `/tools/grow-a-garden-crop-value-calculator` | `src/app/(site)/tools/grow-a-garden-crop-value-calculator/*` |
+| Generic tool fallback | `/tools/[...slug]` | `src/app/(site)/tools/[...slug]/page.tsx`, backed by Supabase tools copy |
+
+## Static And Policy Pages
+
+| Area | Routes | Files / Notes |
+| --- | --- | --- |
+| About | `/about` | `src/app/(site)/about/page.tsx` |
+| Contact | `/contact` | `src/app/(site)/contact/page.tsx` |
+| Privacy policy | `/privacy-policy` | `src/app/(site)/privacy-policy/page.tsx` |
+| Terms of service | `/terms-of-service` | `src/app/(site)/terms-of-service/page.tsx` |
+| Editorial guidelines | `/editorial-guidelines` | `src/app/(site)/editorial-guidelines/page.tsx` |
+| Disclaimer | `/disclaimer` | `src/app/(site)/disclaimer/page.tsx` |
+| Verification policy | `/how-we-gather-and-verify-codes` | `src/app/(site)/how-we-gather-and-verify-codes/page.tsx` |
+| Cookie settings | `/cookie-settings` | `src/app/(site)/cookie-settings/page.tsx`, client content in `Content.tsx` |
+
+## Route-Family Sidecars Worth Checking First
+
+- `src/app/(site)/articles/page-data.tsx`
+- `src/app/(site)/catalog/free-roblox-items/page-data.tsx`
+- `src/app/(site)/catalog/roblox-color-codes/page-data.tsx`
+- `src/app/(site)/catalog/roblox-decal-ids/page-data.tsx`
+- `src/app/(site)/catalog/roblox-music-ids/page-data.tsx`
+- `src/app/(site)/catalog/the-forge/page-data.tsx`
+- `src/app/(site)/checklists/page-data.tsx`
+- `src/app/(site)/codes/page-data.tsx`
+- `src/app/(site)/events/page-data.tsx`
+- `src/app/(site)/lists/page-data.tsx`
+- `src/app/(site)/lists/[slug]/page-data.tsx`
+- `src/app/(site)/quizzes/page-data.tsx`
+- `src/app/(site)/tools/page-data.tsx`
+- `src/app/(site)/wiki/page-data.tsx`

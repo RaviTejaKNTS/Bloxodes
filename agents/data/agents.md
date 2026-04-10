@@ -1,77 +1,112 @@
-# Data sources
+# Data Sources Inventory
 
-## Supabase (primary)
-These are the tables/views the site and APIs read from most often.
+Authoritative workflow guidance lives in:
 
-- Core content
-  - games, code_pages_view, game_pages_index_view (codes pages + list views)
-  - articles, article_pages_view, article_pages_index_view (articles + list views)
-  - authors (author profiles)
-  - game_lists, game_lists_index_view, game_list_entries (ranking lists)
-  - checklist_pages, checklist_pages_view, checklist_items (checklists)
-  - tools, tools_view (tool content + list views)
-  - catalog_pages, catalog_pages_view (catalog page copy)
-  - events_pages (event landing pages)
-- Roblox data enrichment
-  - roblox_universes (universe metadata, socials, counts)
-  - roblox_groups (group details for ID extractor)
-  - roblox_universe_gamepasses, roblox_universe_badges (ID extractor lookups)
-- Music IDs catalog
-  - roblox_music_ids (raw IDs and stats)
-  - roblox_music_ids_ranked_view (sorted/filterable catalog)
-  - roblox_music_genres_view, roblox_music_artists_view (filter options)
-- Admin / ops
-  - app_users (role-based access)
-  - RPC: search_site (site-wide search aggregator)
+- `src/lib/AGENTS.md`
+- `supabase/AGENTS.md`
+- `data/AGENTS.md`
 
-## Local datasets (tools and catalog)
-- data/Admin commands/*.md
-  - Parsed by src/lib/admin-commands.ts.
-  - Used by catalog/admin-commands hub and system pages.
-- data/Grow a Garden/crops.json
-  - Parsed by src/lib/grow-a-garden/crops.ts.
-  - Used by tools/grow-a-garden-crop-value-calculator.
-- data/Fisch/fish.json
-  - Fisch fish catalog from fischipedia.org.
-- data/The Forge/ores.json
-  - Parsed by src/lib/forge/ores.ts.
-  - Used by tools/the-forge-crafting-calculator.
-- data/The Forge/weapons.json
-  - Parsed by src/lib/forge/weapons.ts.
-  - Used by tools/the-forge-crafting-calculator.
-- data/The Forge/armors.json
-  - Parsed by src/lib/forge/armors.ts.
-  - Used by tools/the-forge-crafting-calculator.
-- data/The Forge/pickaxes.json
-  - The Forge pickaxe catalog from theforgewiki.org.
-- data/The Forge/runes.json
-  - The Forge rune catalog from theforgewiki.org.
-- data/The Forge/races.json
-  - The Forge race catalog from theforgewiki.org.
-- data/The Forge/essences.json
-  - The Forge essence catalog from theforgewiki.org.
-- data/The Forge/totems.json
-  - The Forge totem list from theforgewiki.org.
-- data/The Forge/potions.json
-  - The Forge potion list from theforgewiki.org.
-- data/The Forge/enemies.json
-  - The Forge enemy list from theforgewiki.org.
-- data/The Forge/npcs.json
-  - Placeholder dataset (no source page found yet).
-- data/The Forge/locations.json
-  - The Forge locations list from theforgewiki.org.
+This file is the quick reference for the repo's current data surface.
 
-## Static configs and JSON
-- src/data/slug_oldslugs.json
-  - Legacy slug redirect map for /[slug] -> /codes or /articles.
-- src/app/(site)/tools/robux-to-usd-calculator/robux-bundles.ts
-- src/app/(site)/tools/robux-to-usd-calculator/robux-plans.ts
-  - Pricing tables for the Robux to USD calculator.
-- src/lib/devex/constants
-  - DevEx baseline values for the DevEx calculator.
-- public/*
-  - OG images, logos, favicons, ads.txt, and other static assets.
+## Supabase: Core Public Content
 
-## External APIs (runtime + scripts)
-- Roblox public APIs (games/users/groups/catalog, thumbnails, asset delivery).
-- Telegram API for automation summaries (scripts/automation/report-automation.mjs).
+- `games`, `code_pages_view`, `game_pages_index_view`
+  - Code pages and code index views.
+- `articles`, `article_pages_view`, `article_pages_index_view`
+  - Article detail and article index content.
+- `authors`
+  - Author profiles.
+- `game_lists`, `game_lists_index_view`, `game_list_entries`
+  - Rankings and list pages.
+- `checklist_pages`, `checklist_pages_view`, `checklist_items`
+  - Checklist detail and checklist index content.
+- `quiz_pages`, `quiz_pages_view`
+  - Quiz detail and quiz index content.
+- `wiki_pages`, `wiki_pages_view`
+  - Game wiki hubs that link editorial controls/tips to `roblox_universes` automation.
+- `tools`, `tools_view`
+  - Tool copy and tool indexes.
+- `catalog_pages`, `catalog_pages_view`
+  - Catalog page copy and catalog indexes.
+- `events_pages`
+  - Event landing pages.
+
+## Supabase: Roblox And Catalog Enrichment
+
+- `roblox_universes`
+  - Universe metadata, stats, flags, icons, links.
+- `roblox_groups`
+  - Group details used by the ID extractor.
+- `roblox_universe_gamepasses`, `roblox_universe_badges`
+  - ID extractor fallback/cache data.
+- `roblox_virtual_events`
+  - Event scheduling and event media linkage.
+- `roblox_music_ids`, `roblox_music_ids_ranked_view`
+  - Music ID catalog and ranking/search views.
+- `roblox_music_genres_view`, `roblox_music_artists_view`
+  - Music filters and taxonomy views.
+- `roblox_catalog_items`
+  - Free-item and broader catalog ingestion data.
+
+## Supabase: User, Community, And Ops
+
+- `app_users`
+  - Account identity and Roblox-linked profile data.
+- `app_sessions`
+  - Session storage for signed-in flows.
+- `comments`
+  - Comment threads for supported content types.
+- `user_code_progress`
+  - Used-code progress per user/game.
+- `user_checklist_progress`
+  - Checklist completion state.
+- `user_quiz_progress`
+  - Quiz history and seen-question state.
+- `revalidation_events`
+  - Publish-trigger queue for the revalidation edge function.
+- RPC `search_site`
+  - Site-wide search aggregation.
+
+## Local Datasets
+
+- `data/Admin commands/*.md`
+  - Parsed by `src/lib/admin-commands.ts`.
+- `data/Grow a Garden/crops.json`
+  - Parsed by `src/lib/grow-a-garden/crops.ts`.
+- `data/Grow a Garden/crops.md`
+  - Supporting content for Grow a Garden data work.
+- `data/Grow a Garden/quiz.json`
+  - Quiz content for the Grow a Garden quiz flow.
+- `data/The Forge/*.json`
+  - Forge catalog and calculator datasets consumed by `src/lib/forge/*` and catalog routes.
+  - The Forge collection pages also use `quests.json`, `skills.json`, `blueprints.json`, and `npcs.json` through `src/app/(site)/catalog/the-forge/page-data.tsx`.
+- `data/Fisch/fish.json`
+  - Fisch catalog content.
+- `data/Color Codes/roblox-color-codes.json`
+  - Color-code dataset for the color-code catalog pages.
+- `data/decal-ids/*.json`, `data/decal-ids/*.csv`
+  - Decal ID scrape and enrichment outputs.
+- `data/roblox errros/roblox-errors.json`
+  - Static Roblox error reference dataset.
+- `src/data/slug_oldslugs.json`
+  - Legacy slug redirect map for the public fallback route.
+
+## Static Config And Generated Assets
+
+- `src/app/(site)/tools/robux-to-usd-calculator/robux-bundles.ts`
+- `src/app/(site)/tools/robux-to-usd-calculator/robux-plans.ts`
+  - Static pricing inputs for the Robux calculator.
+- `src/lib/devex/constants.ts`
+  - Static DevEx calculator baseline values.
+- `src/config/csp-directives.json`
+  - CSP config input.
+- `public/*`
+  - Images, logos, favicons, generated media, static verification files, and other public assets.
+
+## External APIs And Services
+
+- Roblox public APIs for universes, groups, thumbnails, catalog, and auth.
+- Supabase edge functions for publish revalidation and Roblox-code workflows.
+- Cloudflare purge API via the app revalidation route.
+- Telegram API for automation reports.
+- Other script-time providers such as Tavily or content-source sites when the relevant scripts call them.

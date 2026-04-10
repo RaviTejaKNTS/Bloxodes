@@ -9,6 +9,7 @@ const SITEMAP_PATHS = [
   "/sitemaps/tools.xml",
   "/sitemaps/checklists.xml",
   "/sitemaps/quizzes.xml",
+  "/sitemaps/wiki.xml",
   "/sitemaps/events.xml",
   "/sitemaps/authors.xml",
   "/sitemaps/catalog.xml"

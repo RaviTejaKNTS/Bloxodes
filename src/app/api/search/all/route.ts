@@ -13,7 +13,8 @@ type SearchItemType =
   | "catalog"
   | "event"
   | "author"
-  | "music";
+  | "music"
+  | "wiki";
 
 type SearchRow = {
   entity_type: string;
@@ -48,7 +49,8 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   author: "author",
   music_hub: "music",
   music_genre: "music",
-  music_artist: "music"
+  music_artist: "music",
+  wiki: "wiki"
 };
 
 const DEFAULT_LIMIT = 120;
