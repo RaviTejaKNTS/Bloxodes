@@ -64,6 +64,8 @@ This file is the quick reference for the repo's current data surface.
   - Quiz history and seen-question state.
 - `revalidation_events`
   - Publish-trigger queue for the revalidation edge function.
+- `article_generation_queue`, `article_generation_artifacts`
+  - Article draft generation queue state and per-run model/source/validation audit artifacts.
 - RPC `search_site`
   - Site-wide search aggregation.
 

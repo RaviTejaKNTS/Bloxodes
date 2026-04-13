@@ -5,19 +5,24 @@ import OpenAI from "openai";
 import { JSDOM } from "jsdom";
 import { createClient } from "@supabase/supabase-js";
 import sharp from "sharp";
+import { z } from "zod";
 
 import { slugify } from "@/lib/slug";
 import { tavilySearch } from "../shared/tavily";
+
+const GENERATOR_PROMPT_VERSION = "article-generator-v2-2026-09-03";
+const MODEL = process.env.ARTICLE_GENERATION_MODEL ?? "gpt-4.1-mini";
 
 type QueueRow = {
   id: string;
   article_title: string | null;
   sources: string | null;
   universe_id: number | null;
-  status: "pending" | "completed" | "failed";
+  status: "pending" | "processing" | "completed" | "failed";
   attempts: number;
   last_attempted_at: string | null;
   last_error: string | null;
+  idempotency_key?: string | null;
 };
 
 type SearchResult = {
@@ -33,6 +38,7 @@ type SourceDocument = {
   content: string;
   host: string;
   isForum: boolean;
+  accessedAt: string;
   verification?: "Yes" | "No";
   fromQueue?: boolean;
 };
@@ -54,6 +60,51 @@ type SourceGatheringResult = {
   sources: SourceDocument[];
 };
 
+type TokenUsageEntry = {
+  step: string;
+  model: string;
+  prompt_tokens: number | null;
+  completion_tokens: number | null;
+  total_tokens: number | null;
+};
+
+type ValidationResult = {
+  step: string;
+  ok: boolean;
+  attempt: number;
+  message?: string;
+};
+
+type SourceBackedClaim = {
+  claim: string;
+  verdict: "supported" | "unsupported" | "conflicting";
+  source_indexes: number[];
+  correction?: string | null;
+};
+
+type SourceBackedFactCheck = {
+  verdict: "pass" | "fail";
+  summary: string;
+  claims: SourceBackedClaim[];
+};
+
+type GenerationArtifactState = {
+  sources: Array<{
+    title: string;
+    url: string;
+    host: string;
+    accessed_at: string;
+    verification: string | null;
+    from_queue: boolean;
+  }>;
+  extractedFacts: SourceBackedClaim[];
+  coverageChecklist: ArticleContext | null;
+  factCheckFeedback: SourceBackedFactCheck | null;
+  linkCandidates: RelatedUniversePage[];
+  tokenUsage: TokenUsageEntry[];
+  validationResults: ValidationResult[];
+};
+
 type RelatedUniversePage = {
   type: "article" | "codes" | "checklist" | "tool" | "catalog" | "events" | "quiz";
   title: string;
@@ -72,6 +123,15 @@ const AUTHOR_ID = process.env.ARTICLE_AUTHOR_ID ?? "4fc99a58-83da-46f6-9621-7816
 const SUPABASE_MEDIA_BUCKET = process.env.SUPABASE_MEDIA_BUCKET;
 const SITE_URL = (process.env.SITE_URL ?? "https://bloxodes.com").replace(/\/$/, "");
 const LOG_DRAFT_PROMPT = process.env.LOG_DRAFT_PROMPT === "true";
+const WORKER_ID = process.env.ARTICLE_GENERATION_WORKER_ID ?? `article-generator-${process.pid}`;
+
+function parsePositiveInt(value: string | undefined, fallback: number): number {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : fallback;
+}
+
+const MAX_QUEUE_ATTEMPTS = parsePositiveInt(process.env.ARTICLE_GENERATION_MAX_ATTEMPTS, 3);
+const BACKOFF_BASE_MINUTES = parsePositiveInt(process.env.ARTICLE_GENERATION_BACKOFF_BASE_MINUTES, 10);
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE) {
   throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE.");
@@ -88,23 +148,116 @@ if (!OPENAI_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE);
 const openai = new OpenAI({ apiKey: OPENAI_KEY });
 
+const artifactState: GenerationArtifactState = {
+  sources: [],
+  extractedFacts: [],
+  coverageChecklist: null,
+  factCheckFeedback: null,
+  linkCandidates: [],
+  tokenUsage: [],
+  validationResults: []
+};
+
+function recordUsage(step: string, completion: { usage?: { prompt_tokens?: number | null; completion_tokens?: number | null; total_tokens?: number | null } | null }) {
+  artifactState.tokenUsage.push({
+    step,
+    model: MODEL,
+    prompt_tokens: completion.usage?.prompt_tokens ?? null,
+    completion_tokens: completion.usage?.completion_tokens ?? null,
+    total_tokens: completion.usage?.total_tokens ?? null
+  });
+}
+
+function recordValidation(result: ValidationResult) {
+  artifactState.validationResults.push(result);
+}
+
 async function requestModelText(params: {
+  step: string;
   system: string;
   prompt: string;
   maxTokens: number;
   temperature?: number;
 }): Promise<string> {
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4.1-mini",
-    temperature: params.temperature ?? 0.2,
-    max_tokens: params.maxTokens,
-    messages: [
-      { role: "system", content: params.system },
-      { role: "user", content: params.prompt }
-    ]
-  });
+  const schema = z.string().min(1);
+  const maxAttempts = 3;
+  let lastError: string | null = null;
 
-  return completion.choices[0]?.message?.content?.trim() ?? "";
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const completion = await openai.chat.completions.create({
+      model: MODEL,
+      temperature: params.temperature ?? 0.2,
+      max_tokens: params.maxTokens,
+      messages: [
+        { role: "system", content: params.system },
+        { role: "user", content: attempt === 1 ? params.prompt : `${params.prompt}\n\nPrevious response failed validation: ${lastError}. Return a non-empty response only.` }
+      ]
+    });
+
+    recordUsage(params.step, completion);
+    const raw = completion.choices[0]?.message?.content?.trim() ?? "";
+    const parsed = schema.safeParse(raw);
+    if (parsed.success) {
+      recordValidation({ step: params.step, ok: true, attempt });
+      return parsed.data;
+    }
+
+    lastError = z.prettifyError(parsed.error);
+    recordValidation({ step: params.step, ok: false, attempt, message: lastError });
+  }
+
+  throw new Error(`${params.step} returned an invalid text response: ${lastError ?? "unknown validation error"}`);
+}
+
+async function requestJsonWithSchema<T>(params: {
+  step: string;
+  system: string;
+  prompt: string;
+  schema: z.ZodType<T>;
+  maxTokens: number;
+  temperature?: number;
+}): Promise<T> {
+  const maxAttempts = 3;
+  let lastError: string | null = null;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const completion = await openai.chat.completions.create({
+      model: MODEL,
+      temperature: params.temperature ?? 0.2,
+      max_tokens: params.maxTokens,
+      response_format: { type: "json_object" },
+      messages: [
+        { role: "system", content: params.system },
+        {
+          role: "user",
+          content:
+            attempt === 1
+              ? params.prompt
+              : `${params.prompt}\n\nPrevious JSON response failed validation: ${lastError}. Return corrected JSON only.`
+        }
+      ]
+    });
+
+    recordUsage(params.step, completion);
+
+    const raw = completion.choices[0]?.message?.content ?? "";
+    try {
+      const json = JSON.parse(raw) as unknown;
+      const parsed = params.schema.safeParse(json);
+      if (parsed.success) {
+        recordValidation({ step: params.step, ok: true, attempt });
+        return parsed.data;
+      }
+
+      lastError = z.prettifyError(parsed.error);
+    } catch (error) {
+      lastError = error instanceof Error ? error.message : String(error);
+    }
+
+    recordValidation({ step: params.step, ok: false, attempt, message: lastError ?? "unknown validation error" });
+  }
+
+  throw new Error(`${params.step} returned invalid JSON after retries: ${lastError ?? "unknown validation error"}`);
 }
 
 const SOURCE_CHAR_LIMIT = 6500;
@@ -406,6 +559,47 @@ function collectSourceUrls(sources: SourceDocument[]): string[] {
   return urls;
 }
 
+function recordArtifactSources(sources: SourceDocument[]) {
+  artifactState.sources = sources.map((source) => ({
+    title: source.title,
+    url: source.url,
+    host: source.host,
+    accessed_at: source.accessedAt,
+    verification: source.verification ?? null,
+    from_queue: source.fromQueue ?? false
+  }));
+}
+
+async function saveGenerationArtifact(params: {
+  queue: QueueRow | null;
+  articleId?: string | null;
+  status: "completed" | "failed";
+  error?: string | null;
+}): Promise<void> {
+  const { queue } = params;
+  const { error } = await supabase.from("article_generation_artifacts").insert({
+    queue_id: queue?.id ?? null,
+    article_id: params.articleId ?? null,
+    prompt_version: GENERATOR_PROMPT_VERSION,
+    model: MODEL,
+    topic: queue?.article_title ?? null,
+    universe_id: queue?.universe_id ?? null,
+    status: params.status,
+    error: params.error ? params.error.slice(0, 1000) : null,
+    sources: artifactState.sources,
+    extracted_facts: artifactState.extractedFacts,
+    coverage_checklist: artifactState.coverageChecklist,
+    fact_check_feedback: artifactState.factCheckFeedback,
+    link_candidates: artifactState.linkCandidates,
+    token_usage: artifactState.tokenUsage,
+    validation_results: artifactState.validationResults
+  });
+
+  if (error) {
+    throw new Error(`Failed to save article generation artifact: ${error.message}`);
+  }
+}
+
 function normalizeStringArray(value: unknown, limit: number): string[] {
   if (!Array.isArray(value)) return [];
   const normalized: string[] = [];
@@ -592,37 +786,25 @@ async function uploadUniverseCoverImage(universeId: number, slug: string, overla
   });
 }
 
-async function getRandomQueueItem(): Promise<QueueRow | null> {
-  const { count, error: countError } = await supabase
-    .from("article_generation_queue")
-    .select("id", { count: "exact", head: true })
-    .eq("status", "pending")
-    .or("event_id.is.null,event_id.eq.");
-
-  if (countError) {
-    throw new Error(`Failed to count queue items: ${countError.message}`);
+function parseArgs(args: string[]): { queueId?: string } {
+  const options: { queueId?: string } = {};
+  const queueEq = args.find((arg) => arg.startsWith("--queue-id="));
+  if (queueEq) {
+    const value = queueEq.split("=")[1]?.trim();
+    if (value) options.queueId = value;
   }
 
-  const total = typeof count === "number" ? count : 0;
-  if (total === 0) return null;
-
-  const offset = Math.floor(Math.random() * total);
-  const { data, error } = await supabase
-    .from("article_generation_queue")
-    .select("id, article_title, sources, status, attempts, last_attempted_at, last_error, universe_id")
-    .eq("status", "pending")
-    .or("event_id.is.null,event_id.eq.")
-    .order("created_at", { ascending: true })
-    .range(offset, offset)
-    .maybeSingle();
-
-  if (error) {
-    throw new Error(`Failed to fetch queue: ${error.message}`);
+  const index = args.indexOf("--queue-id");
+  if (index !== -1 && args[index + 1]) {
+    const value = args[index + 1].trim();
+    if (value) options.queueId = value;
   }
 
-  if (!data) return null;
+  return options;
+}
 
-  const rawUniverseId = (data as { universe_id?: unknown }).universe_id;
+function normalizeQueueRow(data: any): QueueRow {
+  const rawUniverseId = data?.universe_id;
   const universeId =
     typeof rawUniverseId === "number"
       ? rawUniverseId
@@ -631,47 +813,75 @@ async function getRandomQueueItem(): Promise<QueueRow | null> {
         : null;
 
   return {
-    ...data,
+    id: data.id,
+    article_title: data.article_title ?? null,
     attempts: data.attempts ?? 0,
-    status: (data.status as QueueRow["status"]) ?? "pending",
+    status: (data.status as QueueRow["status"]) ?? "processing",
     last_attempted_at: data.last_attempted_at ?? null,
     last_error: data.last_error ?? null,
-    sources: (data as { sources?: string | null }).sources ?? null,
-    universe_id: Number.isFinite(universeId) ? universeId : null
+    sources: data.sources ?? null,
+    universe_id: Number.isFinite(universeId) ? universeId : null,
+    idempotency_key: data.idempotency_key ?? null
   };
 }
 
-async function markAttempt(queue: QueueRow): Promise<void> {
-  const { error } = await supabase
-    .from("article_generation_queue")
-    .update({
-      attempts: queue.attempts + 1,
-      last_attempted_at: new Date().toISOString()
-    })
-    .eq("id", queue.id)
-    .eq("status", "pending");
+async function claimQueueItem(options: { queueId?: string } = {}): Promise<QueueRow | null> {
+  const { data, error } = await supabase.rpc("claim_article_generation_queue_item", {
+    p_queue_id: options.queueId ?? null,
+    p_worker_id: WORKER_ID,
+    p_max_attempts: MAX_QUEUE_ATTEMPTS
+  });
 
   if (error) {
-    throw new Error(`Failed to record attempt: ${error.message}`);
+    throw new Error(`Failed to claim queue item: ${error.message}`);
   }
+
+  if (!data) return null;
+  return normalizeQueueRow(data);
 }
 
-async function updateQueueStatus(
-  queueId: string,
-  status: "completed" | "failed",
-  lastError?: string | null
-): Promise<void> {
+function nextBackoffAt(attempts: number): string {
+  const exponent = Math.max(0, attempts - 1);
+  const minutes = BACKOFF_BASE_MINUTES * Math.pow(2, exponent);
+  return new Date(Date.now() + minutes * 60_000).toISOString();
+}
+
+async function updateQueueCompleted(queueId: string, articleId: string): Promise<void> {
   const { error } = await supabase
     .from("article_generation_queue")
     .update({
-      status,
-      last_error: lastError ? lastError.slice(0, 500) : null,
-      last_attempted_at: new Date().toISOString()
+      status: "completed",
+      article_id: articleId,
+      completed_at: new Date().toISOString(),
+      last_error: null,
+      locked_at: null,
+      locked_by: null,
+      next_attempt_at: null
     })
     .eq("id", queueId);
 
   if (error) {
-    throw new Error(`Failed to update queue status: ${error.message}`);
+    throw new Error(`Failed to mark queue completed: ${error.message}`);
+  }
+}
+
+async function updateQueueFailure(queue: QueueRow, lastError: string): Promise<void> {
+  const exhausted = queue.attempts >= MAX_QUEUE_ATTEMPTS;
+  const status = exhausted ? "failed" : "pending";
+  const { error } = await supabase
+    .from("article_generation_queue")
+    .update({
+      status,
+      last_error: lastError.slice(0, 500),
+      last_attempted_at: new Date().toISOString(),
+      next_attempt_at: exhausted ? null : nextBackoffAt(queue.attempts),
+      locked_at: null,
+      locked_by: null
+    })
+    .eq("id", queue.id);
+
+  if (error) {
+    throw new Error(`Failed to update queue failure: ${error.message}`);
   }
 }
 
@@ -877,7 +1087,14 @@ async function gatherSources(topic: string, queueSources?: string | null): Promi
       if (c.fromQueue) continue; // queue URLs must fetch successfully
       const raw = c.rawContent?.trim() ?? "";
       if (raw.length < 200) continue;
-      collected.push({ title: c.resultTitle || c.url, url: c.url, content: raw.slice(0, SOURCE_CHAR_LIMIT), host: c.host, isForum: c.isForum });
+      collected.push({
+        title: c.resultTitle || c.url,
+        url: c.url,
+        content: raw.slice(0, SOURCE_CHAR_LIMIT),
+        host: c.host,
+        isForum: c.isForum,
+        accessedAt: new Date().toISOString()
+      });
     } else {
       collected.push({
         title: c.resultTitle || parsed.title || c.url,
@@ -885,6 +1102,7 @@ async function gatherSources(topic: string, queueSources?: string | null): Promi
         content: parsed.content,
         host: c.host,
         isForum: c.isForum,
+        accessedAt: new Date().toISOString(),
         ...(c.fromQueue ? { fromQueue: true } : {})
       });
     }
@@ -897,6 +1115,16 @@ async function gatherSources(topic: string, queueSources?: string | null): Promi
 
   return { sources: collected };
 }
+
+const sourceVerificationSchema = z.object({
+  results: z.array(
+    z.object({
+      index: z.number().int().positive(),
+      verdict: z.enum(["Yes", "No"]),
+      rank: z.number().int().positive().optional()
+    })
+  )
+});
 
 async function verifySources(topic: string, sources: SourceDocument[]): Promise<SourceDocument[]> {
   const queueSources = sources.filter((s) => s.fromQueue).map((s) => ({ ...s, verification: "Yes" as const }));
@@ -927,48 +1155,36 @@ Return JSON:
 }
 `.trim();
 
-  try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
-      temperature: 0,
-      max_tokens: 400,
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: "Evaluate and rank sources for Roblox articles. Return only valid JSON." },
-        { role: "user", content: prompt }
-      ]
-    });
+  const parsed = await requestJsonWithSchema({
+    step: "source_verification",
+    system: "Evaluate and rank sources for Roblox articles. Return only valid JSON.",
+    prompt,
+    schema: sourceVerificationSchema,
+    maxTokens: 400,
+    temperature: 0
+  });
 
-    const raw = completion.choices[0]?.message?.content ?? "";
-    const parsed = JSON.parse(raw) as { results?: Array<{ index?: number; verdict?: string; rank?: number }> };
-    const results = parsed.results ?? [];
-
-    const approved: Array<{ source: SourceDocument; rank: number }> = [];
-    for (const result of results) {
-      const idx = (result.index ?? 0) - 1;
-      if (idx < 0 || idx >= toVerify.length) continue;
-      const source = toVerify[idx];
-      source.verification = result.verdict?.trim().toLowerCase().startsWith("yes") ? "Yes" : "No";
-      console.log(`verify_source host=${source.host} verdict=${source.verification} rank=${result.rank ?? "-"}`);
-      if (source.verification === "Yes") {
-        approved.push({ source, rank: result.rank ?? 99 });
-      }
+  const approved: Array<{ source: SourceDocument; rank: number }> = [];
+  for (const result of parsed.results) {
+    const idx = result.index - 1;
+    if (idx < 0 || idx >= toVerify.length) continue;
+    const source = toVerify[idx];
+    source.verification = result.verdict;
+    console.log(`verify_source host=${source.host} verdict=${source.verification} rank=${result.rank ?? "-"}`);
+    if (source.verification === "Yes") {
+      approved.push({ source, rank: result.rank ?? 99 });
     }
-
-    approved.sort((a, b) => a.rank - b.rank);
-    // Queue sources lead (already trusted), followed by ranked web sources
-    const verified = [...queueSources, ...approved.map((a) => a.source)];
-
-    if (verified.length === 0) throw new Error("No usable sources after verification.");
-    if (verified.length < MIN_SOURCES) {
-      console.warn(`   • low_verified_sources verified=${verified.length} min=${MIN_SOURCES}`);
-    }
-    return verified;
-  } catch (error) {
-    if (error instanceof Error && error.message === "No usable sources after verification.") throw error;
-    console.warn("⚠️ Source verification failed, using all sources:", error instanceof Error ? error.message : String(error));
-    return sources.map((s) => ({ ...s, verification: "Yes" as const }));
   }
+
+  approved.sort((a, b) => a.rank - b.rank);
+  // Queue sources lead (already trusted), followed by ranked web sources
+  const verified = [...queueSources, ...approved.map((a) => a.source)];
+
+  if (verified.length === 0) throw new Error("No usable sources after verification.");
+  if (verified.length < MIN_SOURCES) {
+    console.warn(`   • low_verified_sources verified=${verified.length} min=${MIN_SOURCES}`);
+  }
+  return verified;
 }
 
 function formatSourcesForPrompt(sources: SourceDocument[]): string {
@@ -1077,6 +1293,13 @@ Return JSON:
   `.trim();
 }
 
+const articleContextSchema = z.object({
+  intent: z.string().optional(),
+  must_cover: z.array(z.string()).optional(),
+  reader_questions: z.array(z.string()).optional(),
+  coverage_checklist: z.string().nullable().optional()
+});
+
 async function buildArticleContext(
   topic: string,
   sources: SourceDocument[]
@@ -1107,24 +1330,14 @@ Return JSON:
   `.trim();
 
   try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
-      temperature: 0.2,
-      max_tokens: 700,
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: "Return only valid JSON." },
-        { role: "user", content: prompt }
-      ]
+    const parsed = await requestJsonWithSchema({
+      step: "article_context",
+      system: "Return only valid JSON.",
+      prompt,
+      schema: articleContextSchema,
+      maxTokens: 700,
+      temperature: 0.2
     });
-
-    const raw = completion.choices[0]?.message?.content ?? "";
-    const parsed = JSON.parse(raw) as {
-      intent?: unknown;
-      must_cover?: unknown;
-      reader_questions?: unknown;
-      coverage_checklist?: unknown;
-    };
 
     const intent = typeof parsed.intent === "string" ? parsed.intent.trim() : "";
     const mustCover = normalizeStringArray(parsed.must_cover, 8);
@@ -1134,41 +1347,32 @@ Return JSON:
         ? parsed.coverage_checklist.trim()
         : null;
 
-    return { intent, mustCover, readerQuestions, coverageChecklist };
+    const context = { intent, mustCover, readerQuestions, coverageChecklist };
+    artifactState.coverageChecklist = context;
+    return context;
   } catch (error) {
     console.warn("⚠️ Article context generation failed:", error instanceof Error ? error.message : String(error));
+    artifactState.coverageChecklist = fallback;
     return fallback;
   }
 }
 
+const draftArticleSchema = z.object({
+  title: z.string().min(1),
+  content_md: z.string().min(1),
+  meta_description: z.string().min(1)
+});
+
 async function draftArticle(prompt: string): Promise<DraftArticle> {
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4.1-mini",
-    temperature: 0.35,
-    max_tokens: 4000,
-    response_format: { type: "json_object" },
-    messages: [
-      {
-        role: "system",
-        content:
-          "You are an expert Roblox writer. Always return valid JSON with title, content_md, and meta_description. Title must be very short, on-point, and include relevant keywords. Keep the title strictly about the given topic; do not broaden scope or add extra targets. Meta description must be a simple, specific summary with primary keywords, under 160 characters, and not generic. Never mention sources or citations, never include bracketed references like [1], and do not quote the research; paraphrase it in your own words."
-      },
-      { role: "user", content: prompt }
-    ]
+  const { title, content_md, meta_description } = await requestJsonWithSchema({
+    step: "article_draft",
+    system:
+      "You are an expert Roblox writer. Always return valid JSON with title, content_md, and meta_description. Title must be very short, on-point, and include relevant keywords. Keep the title strictly about the given topic; do not broaden scope or add extra targets. Meta description must be a simple, specific summary with primary keywords, under 160 characters, and not generic. Never mention sources or citations, never include bracketed references like [1], and do not quote the research; paraphrase it in your own words.",
+    prompt,
+    schema: draftArticleSchema,
+    maxTokens: 4000,
+    temperature: 0.35
   });
-
-  const raw = completion.choices[0]?.message?.content ?? "";
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw);
-  } catch (error) {
-    throw new Error(`OpenAI did not return valid JSON: ${(error as Error).message}`);
-  }
-
-  const { title, content_md, meta_description } = parsed as Partial<DraftArticle>;
-  if (!title || !content_md || !meta_description) {
-    throw new Error("Draft missing required fields.");
-  }
 
   return sanitizeDraftArticle({
     title: title.trim(),
@@ -1188,14 +1392,6 @@ function isNoCoverageFeedback(feedback: string): boolean {
     normalized.startsWith("no critical") ||
     normalized.startsWith("no major")
   );
-}
-
-function isYesFeedback(feedback: string): boolean {
-  const normalized = feedback.trim().toLowerCase();
-  if (normalized === "yes" || normalized === "yes." || normalized === '"yes"' || normalized === "'yes'") {
-    return true;
-  }
-  return normalized.startsWith("yes") && normalized.length <= 8;
 }
 
 async function checkArticleCoverage(
@@ -1222,6 +1418,7 @@ ${formatSourcesForPrompt(sources)}
 `.trim();
 
   const feedback = await requestModelText({
+    step: "coverage_check",
     system:
       'You judge coverage completeness for Roblox articles. Only flag items that are very close to the topic and crucial to its intent. If nothing critical is missing, reply exactly "No". Otherwise, provide only the missing items with the information to add. Do not suggest tangential ideas.',
     prompt,
@@ -1235,17 +1432,48 @@ ${formatSourcesForPrompt(sources)}
   return feedback;
 }
 
-async function factCheckArticle(
+const sourceBackedFactCheckSchema = z.object({
+  verdict: z.enum(["pass", "fail"]),
+  summary: z.string().min(1),
+  claims: z.array(
+    z.object({
+      claim: z.string().min(1),
+      verdict: z.enum(["supported", "unsupported", "conflicting"]),
+      source_indexes: z.array(z.number().int().positive()),
+      correction: z.string().nullable().optional()
+    })
+  ).min(1)
+});
+
+function formatFactCheckFeedback(report: SourceBackedFactCheck): string {
+  const failedClaims = report.claims.filter((claim) => claim.verdict !== "supported");
+  if (!failedClaims.length) return report.summary;
+  return failedClaims
+    .map((claim, index) => {
+      const correction = claim.correction ? ` Correction: ${claim.correction}` : "";
+      return `${index + 1}. ${claim.verdict}: ${claim.claim}.${correction}`;
+    })
+    .join("\n");
+}
+
+async function sourceBackedFactCheckArticle(
   topic: string,
   article: DraftArticle,
   sources: SourceDocument[],
   context?: ArticleContext | null
-): Promise<string> {
+): Promise<SourceBackedFactCheck> {
   const reviewContext = formatReviewContext(context);
   const prompt = `
-Fact check this Roblox article. Search broadly. If everything is accurate, reply exactly: Yes
-If anything is incorrect, missing, or misleading, reply starting with: No
-Then give clear details of what is wrong and how to change it, including the correct information needed. Be explicit about what to fix and provide replacement wording where possible.
+Fact check this Roblox article using only the research docs below. Do not use memory and do not assume you can browse.
+Extract the concrete factual claims that matter for the topic, then verify each claim against the research docs.
+For each claim:
+- verdict "supported" if the research docs support it
+- verdict "unsupported" if the article says something the research docs do not establish
+- verdict "conflicting" if the research docs contradict it
+- source_indexes must list the research doc numbers that support or contradict the claim
+- correction should be a concise replacement or removal instruction when verdict is unsupported or conflicting
+
+Set verdict to "pass" only if all important claims are supported. Set verdict to "fail" if any important claim is unsupported or conflicting.
 Keep corrections strictly on the topic; do not broaden scope. If the article drifts to another item, instruct to remove or correct it back to the topic.
 
 Topic: "${topic}"
@@ -1258,20 +1486,34 @@ ${reviewContext}
 
  Relevant research:
 ${formatSourcesForPrompt(sources)}
+
+Return JSON:
+{
+  "verdict": "pass",
+  "summary": "Short source-backed fact-check summary",
+  "claims": [
+    {
+      "claim": "Concrete factual claim from the article",
+      "verdict": "supported",
+      "source_indexes": [1],
+      "correction": null
+    }
+  ]
+}
 `.trim();
 
-  const feedback = await requestModelText({
-    system:
-      "You are a strict fact checker. Always reply exactly 'Yes' if the article is accurate. Otherwise start with 'No' and provide detailed, actionable corrections with the right information.",
+  const report = await requestJsonWithSchema({
+    step: "source_backed_fact_check",
+    system: "You are a strict source-backed fact checker. Return only valid JSON matching the requested shape.",
     prompt,
-    maxTokens: 1200,
+    schema: sourceBackedFactCheckSchema,
+    maxTokens: 1800,
     temperature: 0
   });
-  if (!feedback) {
-    throw new Error("Fact check returned empty feedback.");
-  }
 
-  return feedback;
+  artifactState.extractedFacts = report.claims;
+  artifactState.factCheckFeedback = report;
+  return report;
 }
 
 async function reviseArticleWithFeedback(
@@ -1307,36 +1549,18 @@ Return JSON:
   "title": "Keep close to original unless feedback requires correction — short and scannable",
   "meta_description": "Specific summary with keywords, under 160 characters",
   "content_md": "Revised article with only the necessary changes applied"
-}
+  }
 `.trim();
 
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4.1-mini",
-    temperature: 0.35,
-    max_tokens: 4000,
-    response_format: { type: "json_object" },
-    messages: [
-      {
-        role: "system",
-        content:
-          "You are an expert Roblox writer. Return valid JSON with title, content_md, and meta_description. Apply only the feedback changes. Never mention sources or citations. Never add bracketed references. Keep existing links unchanged."
-      },
-      { role: "user", content: prompt }
-    ]
+  const { title, content_md, meta_description } = await requestJsonWithSchema({
+    step: `article_revision_${label.replace(/[^a-z0-9]+/gi, "_").toLowerCase()}`,
+    system:
+      "You are an expert Roblox writer. Return valid JSON with title, content_md, and meta_description. Apply only the feedback changes. Never mention sources or citations. Never add bracketed references. Keep existing links unchanged.",
+    prompt,
+    schema: draftArticleSchema,
+    maxTokens: 4000,
+    temperature: 0.35
   });
-
-  const raw = completion.choices[0]?.message?.content ?? "";
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw);
-  } catch (error) {
-    throw new Error(`Revision step did not return valid JSON: ${(error as Error).message}`);
-  }
-
-  const { title, content_md, meta_description } = parsed as Partial<DraftArticle>;
-  if (!title || !content_md || !meta_description) {
-    throw new Error("Revision missing required fields.");
-  }
 
   return sanitizeDraftArticle({
     title: title.trim(),
@@ -1360,11 +1584,17 @@ async function refineArticleWithFeedbackLoop(
     current = await reviseArticleWithFeedback(topic, current, sources, coverageFeedback, "coverage feedback");
   }
 
-  const factCheckFeedback = await factCheckArticle(topic, current, sources, context);
-  const factCheckLog = factCheckFeedback.replace(/\s+/g, " ").slice(0, 200);
-  console.log(`fact_check="${factCheckLog}${factCheckFeedback.length > 200 ? "..." : ""}"`);
-  if (!isYesFeedback(factCheckFeedback)) {
-    current = await reviseArticleWithFeedback(topic, current, sources, factCheckFeedback, "fact-check feedback");
+  const factCheckFeedback = await sourceBackedFactCheckArticle(topic, current, sources, context);
+  const factCheckLog = factCheckFeedback.summary.replace(/\s+/g, " ").slice(0, 200);
+  console.log(`fact_check="${factCheckLog}${factCheckFeedback.summary.length > 200 ? "..." : ""}" verdict=${factCheckFeedback.verdict}`);
+  if (factCheckFeedback.verdict !== "pass") {
+    current = await reviseArticleWithFeedback(topic, current, sources, formatFactCheckFeedback(factCheckFeedback), "fact-check feedback");
+    const recheckFeedback = await sourceBackedFactCheckArticle(topic, current, sources, context);
+    const recheckLog = recheckFeedback.summary.replace(/\s+/g, " ").slice(0, 200);
+    console.log(`fact_recheck="${recheckLog}${recheckFeedback.summary.length > 200 ? "..." : ""}" verdict=${recheckFeedback.verdict}`);
+    if (recheckFeedback.verdict !== "pass") {
+      throw new Error(`Source-backed fact check still failed after revision: ${formatFactCheckFeedback(recheckFeedback)}`);
+    }
   }
 
   return current;
@@ -1586,6 +1816,7 @@ async function insertRelatedLinksSection(params: {
   const { topic, article, pages } = params;
   if (!pages.length) return article;
 
+  artifactState.linkCandidates = pages;
   const allowedUrls = new Set(pages.map((p) => p.url));
 
   const pageBlock = pages
@@ -1646,33 +1877,15 @@ Return JSON:
 }
 `.trim();
 
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4.1-mini",
-    temperature: 0.2,
-    max_tokens: 4500,
-    response_format: { type: "json_object" },
-    messages: [
-      {
-        role: "system",
-        content:
-          "You add contextual internal links to Roblox articles. Every link must be a Markdown link [anchor text](url) using the exact URL from the page list — these are relative paths like /articles/slug or /codes/slug. NEVER prepend a domain — do not write https://bloxodes.com/... or https://roblox.com/... or any other domain. Use the path exactly as given. Never write plain text mentions without a link. Never wrap existing words as links. Never force a link where context does not exist. Return valid JSON with title, content_md, meta_description."
-      },
-      { role: "user", content: prompt }
-    ]
+  const { content_md } = await requestJsonWithSchema({
+    step: "related_links",
+    system:
+      "You add contextual internal links to Roblox articles. Every link must be a Markdown link [anchor text](url) using the exact URL from the page list — these are relative paths like /articles/slug or /codes/slug. NEVER prepend a domain — do not write https://bloxodes.com/... or https://roblox.com/... or any other domain. Use the path exactly as given. Never write plain text mentions without a link. Never wrap existing words as links. Never force a link where context does not exist. Return valid JSON with title, content_md, meta_description.",
+    prompt,
+    schema: draftArticleSchema,
+    maxTokens: 4500,
+    temperature: 0.2
   });
-
-  const raw = completion.choices[0]?.message?.content ?? "";
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw);
-  } catch (error) {
-    throw new Error(`Related links step did not return valid JSON: ${(error as Error).message}`);
-  }
-
-  const { content_md } = parsed as Partial<DraftArticle>;
-  if (!content_md) {
-    throw new Error("Related links step missing required fields.");
-  }
 
   return {
     title: article.title,
@@ -1713,33 +1926,15 @@ Return JSON:
 }
 `.trim();
 
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4.1-mini",
-    temperature: 0.2,
-    max_tokens: 4500,
-    response_format: { type: "json_object" },
-    messages: [
-      {
-        role: "system",
-        content:
-          "You are a copy editor for a Roblox gaming site. Your job is light final polish only — fix formatting issues, clean up links, remove em-dashes, tighten the intro and outro. Do not rewrite or restructure. Keep the original voice. Return valid JSON with title, content_md, meta_description."
-      },
-      { role: "user", content: prompt }
-    ]
+  const { title, content_md, meta_description } = await requestJsonWithSchema({
+    step: "final_polish",
+    system:
+      "You are a copy editor for a Roblox gaming site. Your job is light final polish only — fix formatting issues, clean up links, remove em-dashes, tighten the intro and outro. Do not rewrite or restructure. Keep the original voice. Return valid JSON with title, content_md, meta_description.",
+    prompt,
+    schema: draftArticleSchema,
+    maxTokens: 4500,
+    temperature: 0.2
   });
-
-  const raw = completion.choices[0]?.message?.content ?? "";
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw);
-  } catch (error) {
-    throw new Error(`Final polish step did not return valid JSON: ${(error as Error).message}`);
-  }
-
-  const { title, content_md, meta_description } = parsed as Partial<DraftArticle>;
-  if (!title || !content_md || !meta_description) {
-    throw new Error("Final polish step missing required fields.");
-  }
 
   return sanitizeDraftArticle({
     title: title.trim(),
@@ -1759,6 +1954,7 @@ Return only the shortened title text.
 
   try {
     const shortText = await requestModelText({
+      step: "cover_title",
       system: "Return only the shortened title text, no quotes or labels.",
       prompt,
       maxTokens: 50,
@@ -1831,9 +2027,11 @@ async function updateArticleContent(articleId: string, article: DraftArticle): P
 
 async function main() {
   let queueEntry: QueueRow | null = null;
+  let articleId: string | null = null;
+  const args = parseArgs(process.argv.slice(2));
 
   try {
-    queueEntry = await getRandomQueueItem();
+    queueEntry = await claimQueueItem(args);
     if (!queueEntry) {
       console.log("No pending article tasks found.");
       return;
@@ -1845,13 +2043,14 @@ async function main() {
     }
 
     console.log(`✏️  Generating article for "${topic}" (${queueEntry.id})`);
-    await markAttempt(queueEntry);
 
     const { sources: collectedSources } = await gatherSources(topic, queueEntry.sources);
     console.log(`sources_collected=${collectedSources.length}`);
+    recordArtifactSources(collectedSources);
     const sourceUrls = collectSourceUrls(collectedSources);
 
     const verifiedSources = await verifySources(topic, collectedSources);
+    recordArtifactSources(verifiedSources);
     console.log(`sources_verified=${verifiedSources.length}`);
 
     const articleContext = await buildArticleContext(topic, verifiedSources);
@@ -1896,6 +2095,7 @@ async function main() {
       coverImage,
       sources: sourceUrls
     });
+    articleId = article.id;
 
     console.log(`article_saved id=${article.id} slug=${article.slug} cover=${coverImage ?? "none"}`);
 
@@ -1936,14 +2136,23 @@ async function main() {
     // Single DB update for all post-insert changes
     const finalUpdated = await updateArticleContent(article.id, currentDraft);
     console.log(`article_finalized word_count=${estimateWordCount(currentDraft.content_md)} updated=${finalUpdated}`);
+    if (!finalUpdated) {
+      throw new Error("Failed to finalize article content after draft insert.");
+    }
 
-    await updateQueueStatus(queueEntry.id, "completed", null);
+    await saveGenerationArtifact({ queue: queueEntry, articleId: article.id, status: "completed" });
+    await updateQueueCompleted(queueEntry.id, article.id);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error("❌ Article generation failed:", message);
     if (queueEntry) {
       try {
-        await updateQueueStatus(queueEntry.id, "failed", message);
+        await saveGenerationArtifact({ queue: queueEntry, articleId, status: "failed", error: message });
+      } catch (artifactError) {
+        console.error("⚠️ Additionally failed to save generation artifact:", artifactError);
+      }
+      try {
+        await updateQueueFailure(queueEntry, message);
       } catch (innerError) {
         console.error("⚠️ Additionally failed to update queue status:", innerError);
       }

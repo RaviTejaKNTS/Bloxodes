@@ -9,6 +9,7 @@ type QueueRow = {
   article_title: string | null;
   status: string;
   attempts?: number;
+  next_attempt_at?: string | null;
   last_attempted_at: string | null;
   last_error: string | null;
 };
@@ -40,8 +41,9 @@ const supabase = createClient(
 async function pickQueueItems(limit: number): Promise<QueueRow[]> {
   const { data, error } = await supabase
     .from("article_generation_queue")
-    .select("id, article_title, status, attempts, last_attempted_at, last_error")
+    .select("id, article_title, status, attempts, next_attempt_at, last_attempted_at, last_error")
     .eq("status", "pending")
+    .or(`next_attempt_at.is.null,next_attempt_at.lte.${new Date().toISOString()}`)
     .order("created_at", { ascending: true })
     .limit(limit);
 
@@ -52,24 +54,9 @@ async function pickQueueItems(limit: number): Promise<QueueRow[]> {
   return data ?? [];
 }
 
-async function markAttempt(id: string, attempts: number) {
-  const { error } = await supabase
-    .from("article_generation_queue")
-    .update({
-      attempts: attempts + 1,
-      last_attempted_at: new Date().toISOString()
-    })
-    .eq("id", id)
-    .eq("status", "pending");
-
-  if (error) {
-    throw new Error(`Failed to record attempt: ${error.message}`);
-  }
-}
-
 function runGenerator(queueId: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    const child = spawn("npm", ["run", "generate:article", "--", "--queue-id", queueId], {
+    const child = spawn("npm", ["run", "generate:articles", "--", "--queue-id", queueId], {
       stdio: "inherit"
     });
 
@@ -81,26 +68,9 @@ function runGenerator(queueId: string): Promise<void> {
   });
 }
 
-async function markFailed(id: string, message: string) {
-  const truncated = message.slice(0, 500);
-  const { error } = await supabase
-    .from("article_generation_queue")
-    .update({
-      status: "failed",
-      last_error: truncated,
-      last_attempted_at: new Date().toISOString()
-    })
-    .eq("id", id);
-
-  if (error) {
-    throw new Error(`Failed to mark queue row failed: ${error.message}`);
-  }
-}
-
 async function processQueueItem(entry: QueueRow) {
   const label = entry.article_title?.trim() || "Untitled article";
   console.log(`📰 Processing article queue item ${label} (${entry.id})`);
-  await markAttempt(entry.id, entry.attempts ?? 0);
 
   try {
     await runGenerator(entry.id);
@@ -108,7 +78,6 @@ async function processQueueItem(entry: QueueRow) {
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error(`❌ Failed to generate article for queue item ${label}: ${message}`);
-    await markFailed(entry.id, message);
   }
 }
 
