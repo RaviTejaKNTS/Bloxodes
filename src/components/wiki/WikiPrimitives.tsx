@@ -26,13 +26,13 @@ export function WikiSection({
   className?: string;
 }) {
   return (
-    <section className={cn("border-t border-border/60 pt-8", className)}>
-      <div className="grid gap-5 lg:grid-cols-[13rem_minmax(0,1fr)]">
-        <div className="space-y-2">
+    <section className={cn("min-w-0 border-t border-border/60 pt-8", className)}>
+      <div className="grid min-w-0 gap-5 lg:grid-cols-[13rem_minmax(0,1fr)]">
+        <div className="min-w-0 space-y-2">
           <h2 className="mb-0 text-xl font-semibold leading-tight text-foreground md:text-2xl">{title}</h2>
           {description ? <p className="text-sm leading-6 text-muted">{description}</p> : null}
         </div>
-        <div>{children}</div>
+        <div className="min-w-0">{children}</div>
       </div>
     </section>
   );
@@ -112,7 +112,7 @@ export function WikiTable({
   if (!rows.length) return null;
 
   return (
-    <div className={cn("overflow-hidden rounded-xl border border-border/60 bg-surface/40", className)}>
+    <div className={cn("min-w-0 overflow-hidden rounded-xl border border-border/60 bg-surface/40", className)}>
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm">
           <thead className="border-b border-border/60 text-xs uppercase tracking-[0.14em] text-muted">

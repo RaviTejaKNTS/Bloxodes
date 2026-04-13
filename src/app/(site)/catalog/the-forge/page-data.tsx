@@ -294,8 +294,17 @@ export function getForgeCatalogConfig(slug: string): ForgeCatalogConfig | null {
 }
 
 export function buildForgeCatalogCodeCandidates(config: ForgeCatalogConfig): string[] {
-  const primary = `the-forge/${config.slug}`;
-  return [primary];
+  const primary = `the-forge-${config.slug}`;
+  const legacy = `the-forge/${config.slug}`;
+  return [primary, legacy];
+}
+
+export function buildForgeCatalogFlatCode(slug: string): string {
+  return `the-forge-${slug.trim().toLowerCase()}`;
+}
+
+export function buildForgeCatalogPath(slug: string): string {
+  return `/catalog/${buildForgeCatalogFlatCode(slug)}`;
 }
 
 type ForgeDatasetSource = {
@@ -470,7 +479,7 @@ export function ForgeCatalogNav({ activeSlug }: { activeSlug: string }) {
         }
 
         return (
-          <Link key={entry.slug} href={`${BASE_PATH}/${entry.slug}`} className="block h-full">
+          <Link key={entry.slug} href={buildForgeCatalogPath(entry.slug)} className="block h-full">
             {card}
           </Link>
         );
@@ -579,7 +588,7 @@ export function renderForgeCatalogPage({
     ? updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
     : null;
   const updatedRelativeLabel = updatedDate ? formatDistanceToNow(updatedDate, { addSuffix: true }) : null;
-  const canonicalPath = `${BASE_PATH}/${config.slug}`;
+  const canonicalPath = buildForgeCatalogPath(config.slug);
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const updatedIso = updatedDate ? updatedDate.toISOString() : new Date().toISOString();
   const groupedSections = buildGroupedSections(items, config.groupKey);

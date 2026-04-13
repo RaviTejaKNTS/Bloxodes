@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import type { IconType } from "react-icons";
+import { FiCalendar, FiEye, FiMonitor, FiRefreshCw, FiShield, FiSmartphone, FiStar, FiTablet, FiTag, FiTv, FiUsers } from "react-icons/fi";
+import { TbAugmentedReality } from "react-icons/tb";
 import { formatDistanceToNow } from "date-fns";
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
 import { processHtmlLinks } from "@/lib/link-utils";
 import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
+import { formatAgeRating } from "@/lib/age-rating";
 import {
   EMPTY_WIKI_RELATED_DATA,
   getWikiPageBySlug,
@@ -18,11 +22,18 @@ import {
   type WikiRelatedData,
   type WikiServerItem
 } from "@/lib/wiki";
-import { SITE_NAME, SITE_URL, WIKI_DESCRIPTION, breadcrumbJsonLd } from "@/lib/seo";
-import { WikiInlineList, WikiLinkList, WikiRows, WikiSection, WikiTable, type WikiLinkItem, type WikiRow } from "@/components/wiki/WikiPrimitives";
+import { CHECKLISTS_DESCRIPTION, EVENTS_DESCRIPTION, QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, WIKI_DESCRIPTION, breadcrumbJsonLd } from "@/lib/seo";
+import { WikiLinkList, WikiRows, WikiSection, WikiTable, type WikiLinkItem, type WikiRow } from "@/components/wiki/WikiPrimitives";
+import { ArticleCard } from "@/components/ArticleCard";
+import { ChecklistCard } from "@/components/ChecklistCard";
+import { EventsPageCard, type EventsPageCardProps } from "@/components/EventsPageCard";
+import { GameCard } from "@/components/GameCard";
+import { QuizCard } from "@/components/QuizCard";
+import { ToolCard } from "@/components/ToolCard";
 
 const ROBLOX_BASE_URL = "https://www.roblox.com";
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
+const compactNumberFormatter = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 });
 
 export type WikiIndexPageData = {
   pages: WikiListEntry[];
@@ -42,6 +53,38 @@ type ControlRow = {
 type SocialLink = {
   label: string;
   url: string;
+};
+
+type HeroStat = {
+  icon: IconType;
+  label: string;
+  value: string;
+};
+
+type DeviceBadgeItem = {
+  icon: IconType;
+  label: string;
+  enabled?: boolean | null;
+};
+
+type ChecklistCardData = {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  universeName: string | null;
+  coverImage: string | null;
+  updatedAt: string | null;
+  itemsCount: number | null;
+};
+
+type QuizCardData = {
+  code: string;
+  title: string;
+  summary: string;
+  universeName: string | null;
+  coverImage: string | null;
+  updatedAt: string | null;
 };
 
 function normalizeText(value?: string | null): string | null {
@@ -80,6 +123,12 @@ function pickThumbnail(value: unknown): string | null {
 function formatNumber(value?: number | null): string | null {
   if (typeof value !== "number" || !Number.isFinite(value)) return null;
   return new Intl.NumberFormat("en-US").format(value);
+}
+
+function formatCompactNumber(value?: number | null): string | null {
+  if (typeof value !== "number" || !Number.isFinite(value)) return null;
+  if (value < 1000) return value.toLocaleString("en-US");
+  return compactNumberFormatter.format(value);
 }
 
 function formatRobux(value?: number | null): string | null {
@@ -130,6 +179,15 @@ function summarizeWords(value: string | null, wordLimit = 100): string {
   return `${words.slice(0, wordLimit).join(" ")}…`;
 }
 
+function summarizeCardText(value: string | null | undefined, fallback: string): string {
+  const plain = value ? markdownToPlainText(value) : "";
+  const normalized = normalizeText(plain) ?? fallback;
+  if (normalized.length <= 160) return normalized;
+  const slice = normalized.slice(0, 157);
+  const lastSpace = slice.lastIndexOf(" ");
+  return `${lastSpace > 120 ? slice.slice(0, lastSpace) : slice}…`;
+}
+
 function getUniverseLabel(page: WikiPageContent): string {
   return normalizeText(page.universe_display_name) ?? normalizeText(page.universe_name) ?? page.title;
 }
@@ -148,63 +206,33 @@ function getHeroImage(page: WikiPageContent, related: WikiRelatedData): string |
   return normalizeImageSrc(mediaImage) ?? pickThumbnail(page.thumbnail_urls) ?? normalizeImageSrc(page.icon_url);
 }
 
-function getDeviceList(page: WikiPageContent): string[] {
-  return [
-    page.desktop_enabled ? "PC" : null,
-    page.mobile_enabled ? "Mobile" : null,
-    page.tablet_enabled ? "Tablet" : null,
-    page.console_enabled ? "Xbox / Console" : null,
-    page.vr_enabled ? "VR" : null
-  ].filter((item): item is string => Boolean(item));
-}
-
-function getLikeRatio(page: WikiPageContent): string | null {
-  const likes = page.likes ?? null;
-  const dislikes = page.dislikes ?? null;
-  if (typeof likes !== "number" || typeof dislikes !== "number") return null;
-  const total = likes + dislikes;
-  if (total <= 0) return null;
-  return `${Math.round((likes / total) * 100)}%`;
-}
-
 function compactMeta(items: Array<string | null | undefined>): string | null {
   const values = items.map(normalizeText).filter((item): item is string => Boolean(item));
   return values.length ? values.join(" · ") : null;
 }
 
-function buildMetricRows(page: WikiPageContent): WikiRow[] {
-  return [
-    ["Playing now", formatNumber(page.playing)],
-    ["Total visits", formatNumber(page.visits)],
-    ["Favorites", formatNumber(page.favorites)],
-    ["Likes", formatNumber(page.likes)],
-    ["Dislikes", formatNumber(page.dislikes)],
-    ["Like ratio", getLikeRatio(page)]
-  ]
-    .filter((row): row is [string, string] => Boolean(row[1]))
-    .map(([label, value]) => ({ label, value }));
+function buildDeviceBadges(page: WikiPageContent): DeviceBadgeItem[] {
+  const items: DeviceBadgeItem[] = [
+    { icon: FiMonitor, label: "Desktop", enabled: page.desktop_enabled },
+    { icon: FiSmartphone, label: "Mobile", enabled: page.mobile_enabled },
+    { icon: FiTablet, label: "Tablet", enabled: page.tablet_enabled },
+    { icon: FiTv, label: "Console", enabled: page.console_enabled },
+    { icon: TbAugmentedReality, label: "VR", enabled: page.vr_enabled }
+  ];
+  return items.some((item) => typeof item.enabled === "boolean") ? items : [];
 }
 
-function buildDetailRows(page: WikiPageContent): WikiRow[] {
-  const devices = getDeviceList(page);
-  const genre = [page.universe_genre_l1, page.universe_genre_l2, page.universe_genre].map(normalizeText).filter((item): item is string => Boolean(item));
-  const rows: Array<WikiRow | null> = [
-    page.universe_id ? { label: "Universe ID", value: formatNumber(page.universe_id) } : null,
-    page.universe_root_place_id ? { label: "Root place ID", value: formatNumber(page.universe_root_place_id) } : null,
-    genre.length ? { label: "Genre", value: <WikiInlineList items={Array.from(new Set(genre))} /> } : null,
-    devices.length ? { label: "Supported devices", value: <WikiInlineList items={devices} /> } : null,
-    yesNo(page.voice_chat_enabled) ? { label: "Voice enabled", value: yesNo(page.voice_chat_enabled) } : null,
-    normalizeText(page.universe_age_rating) ? { label: "Age rating", value: page.universe_age_rating } : null,
-    normalizeText(page.universe_avatar_type) ? { label: "Avatar type", value: page.universe_avatar_type } : null,
-    formatNumber(page.max_players) ? { label: "Max players", value: formatNumber(page.max_players) } : null,
-    formatNumber(page.server_size) ? { label: "Server size", value: formatNumber(page.server_size) } : null,
-    yesNo(page.create_vip_servers_allowed) ? { label: "Private servers", value: yesNo(page.create_vip_servers_allowed) } : null,
-    formatRobux(page.private_server_price_robux) ? { label: "Private server price", value: formatRobux(page.private_server_price_robux) } : null,
-    formatDate(page.created_at_api) ? { label: "Created on", value: formatDate(page.created_at_api) } : null,
-    formatDate(page.updated_at_api) ? { label: "Last Roblox update", value: formatDate(page.updated_at_api) } : null,
-    formatUpdated(page.universe_updated_at) ? { label: "Data refreshed", value: formatUpdated(page.universe_updated_at) } : null
-  ];
-  return rows.filter((row): row is WikiRow => Boolean(row));
+function WikiDeviceBadge({ label, icon: Icon, enabled }: DeviceBadgeItem) {
+  return (
+    <span
+      className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-semibold ${
+        enabled ? "border-accent/60 text-accent" : "border-border/60 text-muted"
+      }`}
+    >
+      <Icon className="h-4 w-4" />
+      {label}
+    </span>
+  );
 }
 
 function stringifyControlValue(value: unknown): string | null {
@@ -293,42 +321,37 @@ function buildCreatorUrl(page: WikiPageContent): string | null {
   return null;
 }
 
-function buildResourceLinks(related: WikiRelatedData): WikiLinkItem[] {
-  const codeLinks = related.codes.map((game) => ({
-    href: `/codes/${game.slug}`,
-    title: `${game.name} Codes`,
-    description: game.active_count === 1 ? "1 active code tracked." : `${game.active_count} active codes tracked.`,
-    meta: "Codes"
-  }));
-  const eventLinks = related.eventsPage
-    ? [
-        {
-          href: `/events/${related.eventsPage.slug}`,
-          title: related.eventsPage.title,
-          description: related.eventsPage.meta_description ?? "Current and past Roblox event coverage.",
-          meta: "Events"
-        }
-      ]
-    : [];
-  const toolLinks = related.tools.map((tool) => ({
-    href: `/tools/${tool.code}`,
-    title: tool.title,
-    description: tool.meta_description,
-    meta: "Tool"
-  }));
-  const checklistLinks = related.checklists.map((checklist) => ({
-    href: `/checklists/${checklist.slug}`,
-    title: checklist.title,
-    description: checklist.seo_description ?? checklist.description_md ?? null,
-    meta: checklist.leaf_item_count ? `${checklist.leaf_item_count} tasks` : "Checklist"
-  }));
-  const quizLinks = related.quizzes.map((quiz) => ({
-    href: `/quizzes/${quiz.code}`,
+function buildChecklistCards(page: WikiPageContent, related: WikiRelatedData): ChecklistCardData[] {
+  return related.checklists.map((row) => {
+    const itemsCount =
+      typeof row.leaf_item_count === "number"
+        ? row.leaf_item_count
+        : typeof row.item_count === "number"
+          ? row.item_count
+          : null;
+
+    return {
+      id: row.id,
+      slug: row.slug,
+      title: row.title,
+      summary: summarizeCardText(row.seo_description ?? row.description_md, CHECKLISTS_DESCRIPTION),
+      universeName: row.universe?.display_name ?? row.universe?.name ?? getUniverseLabel(page),
+      coverImage: row.universe?.icon_url ?? normalizeImageSrc(page.icon_url) ?? `${SITE_URL}/og-image.png`,
+      updatedAt: row.content_updated_at ?? row.updated_at ?? row.published_at ?? row.created_at ?? null,
+      itemsCount
+    };
+  });
+}
+
+function buildQuizCards(page: WikiPageContent, related: WikiRelatedData): QuizCardData[] {
+  return related.quizzes.map((quiz) => ({
+    code: quiz.code,
     title: quiz.title,
-    description: quiz.seo_description ?? quiz.description_md ?? null,
-    meta: "Quiz"
+    summary: summarizeCardText(quiz.seo_description ?? quiz.description_md, QUIZZES_DESCRIPTION),
+    universeName: quiz.universe?.display_name ?? quiz.universe?.name ?? getUniverseLabel(page),
+    coverImage: quiz.universe?.icon_url ?? pickThumbnail(quiz.universe?.thumbnail_urls) ?? normalizeImageSrc(page.icon_url) ?? `${SITE_URL}/og-image.png`,
+    updatedAt: quiz.content_updated_at ?? quiz.updated_at ?? quiz.published_at ?? quiz.created_at ?? null
   }));
-  return [...codeLinks, ...eventLinks, ...toolLinks, ...checklistLinks, ...quizLinks];
 }
 
 function buildCatalogLinks(related: WikiRelatedData): WikiLinkItem[] {
@@ -337,15 +360,6 @@ function buildCatalogLinks(related: WikiRelatedData): WikiLinkItem[] {
     title: page.title,
     description: page.meta_description,
     meta: "Catalog"
-  }));
-}
-
-function buildArticleLinks(related: WikiRelatedData): WikiLinkItem[] {
-  return related.articles.map((article) => ({
-    href: `/articles/${article.slug}`,
-    title: article.title,
-    description: article.meta_description,
-    meta: formatDate(article.published_at ?? article.updated_at)
   }));
 }
 
@@ -569,13 +583,9 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const universeLabel = getUniverseLabel(page);
   const summary = getSummary(page);
   const heroImage = getHeroImage(page, related);
-  const metricRows = buildMetricRows(page);
-  const detailRows = buildDetailRows(page);
   const controlRows = parseControls(page.controls_json).map((row) => ({ label: row.label, value: row.value }));
   const tipsNodes = await renderTipsNodes(page.tips_md);
-  const resourceLinks = buildResourceLinks(related);
   const catalogLinks = buildCatalogLinks(related);
-  const articleLinks = buildArticleLinks(related);
   const rankLinks = buildRankLinks(related);
   const developerRows = buildDeveloperRows(page);
   const developerLinks = developerGameLinks(related);
@@ -599,136 +609,346 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
     { name: "Wiki", url: `${SITE_URL}/wiki` },
     { name: page.title, url: `${SITE_URL}/wiki/${page.slug}` }
   ];
+  const robloxGameUrl = page.universe_root_place_id ? `${ROBLOX_BASE_URL}/games/${page.universe_root_place_id}` : null;
+  const heroAgeRating = formatAgeRating(page.universe_age_rating);
+  const deviceBadges = buildDeviceBadges(page);
+  const genre = normalizeText(page.universe_genre_l1) ?? normalizeText(page.universe_genre);
+  const subgenre = normalizeText(page.universe_genre_l2);
+  const genreLabel = compactMeta([genre, subgenre]);
+  const heroStats = [
+    { icon: FiUsers, label: "Playing Now", value: formatCompactNumber(page.playing) },
+    { icon: FiEye, label: "Total Visits", value: formatCompactNumber(page.visits) },
+    { icon: FiStar, label: "Favorites", value: formatCompactNumber(page.favorites) }
+  ].filter((stat): stat is HeroStat => Boolean(stat.value));
+  const dateStats = [
+    { icon: FiCalendar, label: "Created", value: formatDate(page.created_at_api) },
+    { icon: FiRefreshCw, label: "Updated", value: formatDate(page.updated_at_api) ?? formatUpdated(updated) }
+  ].filter((stat): stat is HeroStat => Boolean(stat.value));
+  const metaStats = [
+    { icon: FiTag, label: "Genre", value: genreLabel },
+    { icon: FiShield, label: "Age", value: heroAgeRating }
+  ].filter((stat): stat is HeroStat => Boolean(stat.value));
+  const checklistCards = buildChecklistCards(page, related);
+  const quizCards = buildQuizCards(page, related);
+  const eventsCard: EventsPageCardProps | null =
+    related.eventsPage && related.eventsPage.slug
+      ? {
+          slug: related.eventsPage.slug,
+          title: related.eventsPage.title,
+          summary: related.eventsPage.meta_description?.trim() || EVENTS_DESCRIPTION,
+          universeName: related.eventsPage.universe?.display_name ?? related.eventsPage.universe?.name ?? universeLabel,
+          coverImage: null,
+          fallbackIcon: related.eventsPage.universe?.icon_url ?? normalizeImageSrc(page.icon_url),
+          eventName: related.eventSummary?.featured?.name ?? null,
+          eventTimeLabel: related.eventSummary?.featured?.timeLabel ?? null,
+          status: (related.eventSummary?.featured?.status ?? "none") as EventsPageCardProps["status"],
+          counts: related.eventSummary?.counts ?? { upcoming: 0, current: 0, past: 0 },
+          updatedLabel: formatUpdated(related.eventsPage.updated_at || related.eventsPage.published_at || related.eventsPage.created_at)
+        }
+      : null;
 
   return (
-    <div className="mx-auto max-w-6xl space-y-9">
-      <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.22em] text-muted">
-        <ol className="flex flex-wrap items-center gap-2">
-          <li><Link href="/" className="font-semibold transition hover:text-accent">Home</Link></li>
-          <li className="text-muted/60">&gt;</li>
-          <li><Link href="/wiki" className="font-semibold transition hover:text-accent">Wiki</Link></li>
-          <li className="text-muted/60">&gt;</li>
-          <li className="font-semibold text-foreground/80">{page.title}</li>
-        </ol>
-      </nav>
+    <div className="space-y-9">
+      <header className="space-y-6">
+        <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.22em] text-muted">
+          <ol className="flex flex-wrap items-center gap-2">
+            <li><Link href="/" className="font-semibold transition hover:text-accent">Home</Link></li>
+            <li className="text-muted/60">&gt;</li>
+            <li><Link href="/wiki" className="font-semibold transition hover:text-accent">Wiki</Link></li>
+            <li className="text-muted/60">&gt;</li>
+            <li className="font-semibold text-foreground/80">{page.title}</li>
+          </ol>
+        </nav>
 
-      <header className="grid gap-6 border-b border-border/60 pb-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
-        <div className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted">Roblox Wiki</p>
-          <div className="space-y-3">
-            <h1 className="mb-0 text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
-            <p className="max-w-3xl text-base leading-7 text-muted md:text-lg">{summary}</p>
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start">
+            {heroImage ? (
+              <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-border/70 bg-surface-muted shadow-soft sm:h-28 sm:w-28">
+                <Image src={heroImage} alt={`${universeLabel} artwork`} fill sizes="112px" className="object-cover" priority />
+              </div>
+            ) : (
+              <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-2xl border border-border/70 bg-surface text-2xl font-semibold text-foreground shadow-soft sm:h-28 sm:w-28">
+                {page.title.charAt(0).toUpperCase() || "W"}
+              </div>
+            )}
+
+            <div className="min-w-0 max-w-3xl space-y-3">
+              <h1 className="mb-0 text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
+              {formatUpdated(updated) ? <p className="text-sm font-medium text-muted">Updated {formatUpdated(updated)}</p> : null}
+              <p className="max-w-3xl text-base leading-7 text-muted md:text-lg">{summary}</p>
+              <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+                {page.universe_creator_name ? <span>By {page.universe_creator_name}</span> : null}
+                {heroAgeRating ? <span>Age {heroAgeRating}</span> : null}
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
-            {page.universe_id ? <span>Universe {page.universe_id}</span> : null}
-            {formatDate(page.created_at_api) ? <span>Created {formatDate(page.created_at_api)}</span> : null}
-            {formatUpdated(updated) ? <span>Updated {formatUpdated(updated)}</span> : null}
-          </div>
+
+          {robloxGameUrl ? (
+            <div className="flex flex-wrap gap-3 lg:justify-end">
+              <a
+                href={robloxGameUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-accent px-5 py-2 text-sm font-semibold text-background transition hover:opacity-90"
+              >
+                Play on Roblox
+              </a>
+            </div>
+          ) : null}
         </div>
-        {heroImage ? (
-          <div className="overflow-hidden rounded-xl border border-border/60 bg-surface/40">
-            <div className="relative aspect-video bg-surface-muted">
-              <Image src={heroImage} alt={`${universeLabel} artwork`} fill sizes="(max-width: 1024px) 100vw, 22rem" className="object-cover" priority />
-            </div>
-            <div className="px-4 py-3 text-sm">
-              <p className="font-semibold text-foreground">{universeLabel}</p>
-              {page.universe_creator_name ? <p className="text-muted">By {page.universe_creator_name}</p> : null}
-            </div>
-          </div>
-        ) : null}
       </header>
 
-      {metricRows.length ? (
-        <WikiSection title="Live Metrics" description="Snapshot-style Roblox metrics from the connected universe record.">
-          <WikiRows rows={metricRows} />
-        </WikiSection>
-      ) : null}
+      <div aria-hidden className="border-t border-border/60" />
 
-      {detailRows.length ? (
-        <WikiSection title="Game Details" description="Core Roblox metadata that helps players understand the experience quickly.">
-          <WikiRows rows={detailRows} />
-        </WikiSection>
-      ) : null}
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
+        <article className="min-w-0 space-y-9">
+          {heroStats.length || dateStats.length || metaStats.length || deviceBadges.length ? (
+            <div className="space-y-3">
+              {heroStats.length ? (
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  {heroStats.map((stat) => (
+                    <div key={stat.label} className="flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-border/40 text-muted">
+                        <stat.icon className="h-5 w-5" aria-hidden />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted">{stat.label}</p>
+                        <p className="truncate text-lg font-semibold text-foreground">{stat.value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
 
-      {resourceLinks.length ? (
-        <WikiSection title="Useful Pages" description="Related Bloxodes pages connected to this game.">
-          <WikiLinkList items={resourceLinks} />
-        </WikiSection>
-      ) : null}
+              {dateStats.length ? (
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {dateStats.map((stat) => (
+                    <div key={stat.label} className="flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-border/40 text-muted">
+                        <stat.icon className="h-5 w-5" aria-hidden />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted">{stat.label}</p>
+                        <p className="truncate text-lg font-semibold text-foreground">{stat.value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
 
-      {catalogLinks.length ? (
-        <WikiSection title="Collections" description="Structured item, place, and game-specific collection pages.">
-          <WikiLinkList items={catalogLinks} />
-        </WikiSection>
-      ) : null}
+              {metaStats.length ? (
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {metaStats.map((stat) => (
+                    <div key={stat.label} className="flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-border/40 text-muted">
+                        <stat.icon className="h-5 w-5" aria-hidden />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted">{stat.label}</p>
+                        <p className="truncate text-lg font-semibold text-foreground">{stat.value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
 
-      {controlRows.length ? (
-        <WikiSection title="Controls" description="Device controls and input notes configured for this wiki page.">
-          <WikiRows rows={controlRows} />
-        </WikiSection>
-      ) : null}
+              {deviceBadges.length ? (
+                <div className="flex flex-wrap items-center justify-start gap-2">
+                  {deviceBadges.map((device) => (
+                    <WikiDeviceBadge key={device.label} {...device} />
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
 
-      {tipsNodes?.length ? (
-        <WikiSection title="Features And Tips" description="Short gameplay notes for new and returning players.">
-          <div className="article-content md-copy-scope rounded-xl border border-border/60 bg-surface/40 p-5 text-sm leading-7 text-foreground">
-            {tipsNodes}
-          </div>
-        </WikiSection>
-      ) : null}
+          {catalogLinks.length ? (
+            <WikiSection title="Collections" description="Structured item, place, and game-specific collection pages.">
+              <WikiLinkList items={catalogLinks} />
+            </WikiSection>
+          ) : null}
 
-      {eventRows.length ? (
-        <WikiSection title="Events" description="Current and historical event coverage from the Roblox event data we track.">
-          <WikiRows rows={eventRows} />
-        </WikiSection>
-      ) : null}
+          {controlRows.length ? (
+            <WikiSection title="Controls" description="Device controls and input notes configured for this wiki page.">
+              <WikiRows rows={controlRows} />
+            </WikiSection>
+          ) : null}
 
-      {related.badges.length ? (
-        <WikiSection title="Badges" description="Badges tracked for this Roblox universe.">
-          <WikiTable columns={["Badge", "Awarded", "Rarity"]} rows={badgeRows(related.badges)} />
-        </WikiSection>
-      ) : null}
+          {tipsNodes?.length ? (
+            <WikiSection title="Features And Tips" description="Short gameplay notes for new and returning players.">
+              <div className="article-content md-copy-scope rounded-xl border border-border/60 bg-surface/40 p-5 text-sm leading-7 text-foreground">
+                {tipsNodes}
+              </div>
+            </WikiSection>
+          ) : null}
 
-      {related.gamePasses.length ? (
-        <WikiSection title="Game Passes" description="Game passes and purchase details from the Roblox universe data.">
-          <WikiTable columns={["Game Pass", "Price", "For Sale", "Sales"]} rows={gamePassRows(related.gamePasses)} />
-        </WikiSection>
-      ) : null}
+          {eventRows.length ? (
+            <WikiSection title="Events" description="Current and historical event coverage from the Roblox event data we track.">
+              <WikiRows rows={eventRows} />
+            </WikiSection>
+          ) : null}
 
-      {related.servers.length ? (
-        <WikiSection title="Servers" description="Recently fetched public server details. This section appears only when server data exists.">
-          <WikiTable columns={["Server", "Region", "Players", "Ping", "FPS", "Fetched"]} rows={serverRows(related.servers)} />
-        </WikiSection>
-      ) : null}
+          {related.badges.length ? (
+            <WikiSection title="Badges" description="Badges tracked for this Roblox universe.">
+              <WikiTable columns={["Badge", "Awarded", "Rarity"]} rows={badgeRows(related.badges)} />
+            </WikiSection>
+          ) : null}
 
-      {mediaToDisplayItems(page, related).length ? (
-        <WikiSection title="Media" description="Thumbnails, screenshots, and videos available from the Roblox universe data.">
-          {renderMediaGrid(page, related)}
-        </WikiSection>
-      ) : null}
+          {related.gamePasses.length ? (
+            <WikiSection title="Game Passes" description="Game passes and purchase details from the Roblox universe data.">
+              <WikiTable columns={["Game Pass", "Price", "For Sale", "Sales"]} rows={gamePassRows(related.gamePasses)} />
+            </WikiSection>
+          ) : null}
 
-      {developerRows.length ? (
-        <WikiSection title="Developer" description="Creator and official link data connected to the Roblox universe.">
-          <WikiRows rows={developerRows} />
-        </WikiSection>
-      ) : null}
+          {related.servers.length ? (
+            <WikiSection title="Servers" description="Recently fetched public server details. This section appears only when server data exists.">
+              <WikiTable columns={["Server", "Region", "Players", "Ping", "FPS", "Fetched"]} rows={serverRows(related.servers)} />
+            </WikiSection>
+          ) : null}
 
-      {developerLinks.length ? (
-        <WikiSection title="More From This Developer" description="Other Roblox experiences found under the same creator.">
-          <WikiLinkList items={developerLinks} />
-        </WikiSection>
-      ) : null}
+          {mediaToDisplayItems(page, related).length ? (
+            <WikiSection title="Media" description="Thumbnails, screenshots, and videos available from the Roblox universe data.">
+              {renderMediaGrid(page, related)}
+            </WikiSection>
+          ) : null}
 
-      {rankLinks.length ? (
-        <WikiSection title="Rankings" description="Bloxodes lists where this game currently appears near the top.">
-          <WikiLinkList items={rankLinks} />
-        </WikiSection>
-      ) : null}
+          {developerRows.length ? (
+            <WikiSection title="Developer" description="Creator and official link data connected to the Roblox universe.">
+              <WikiRows rows={developerRows} />
+            </WikiSection>
+          ) : null}
 
-      {articleLinks.length ? (
-        <WikiSection title="Articles" description="Guides and articles connected to this game.">
-          <WikiLinkList items={articleLinks} />
-        </WikiSection>
-      ) : null}
+          {developerLinks.length ? (
+            <WikiSection title="More From This Developer" description="Other Roblox experiences found under the same creator.">
+              <WikiLinkList items={developerLinks} />
+            </WikiSection>
+          ) : null}
+
+          {rankLinks.length ? (
+            <WikiSection title="Rankings" description="Bloxodes lists where this game currently appears near the top.">
+              <WikiLinkList items={rankLinks} />
+            </WikiSection>
+          ) : null}
+
+        </article>
+
+        <aside className="space-y-4">
+          {related.codes.length ? (
+            <section className="space-y-3">
+              <h3 className="text-lg font-semibold text-foreground">Codes for {universeLabel}</h3>
+              <div className="grid gap-3">
+                {related.codes.map((game) => (
+                  <div
+                    key={game.id}
+                    className="block"
+                    data-analytics-event="related_content_click"
+                    data-analytics-source-type="wiki_sidebar"
+                    data-analytics-target-type="codes"
+                    data-analytics-target-slug={game.slug}
+                  >
+                    <GameCard game={game} titleAs="p" articleUpdatedAt={game.content_updated_at} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {related.tools.length ? (
+            <section className="space-y-3">
+              <h3 className="text-lg font-semibold text-foreground">Tools for {universeLabel}</h3>
+              <div className="space-y-4">
+                {related.tools.slice(0, 3).map((tool) => (
+                  <div
+                    key={tool.id ?? tool.code}
+                    className="block"
+                    data-analytics-event="related_content_click"
+                    data-analytics-source-type="wiki_sidebar"
+                    data-analytics-target-type="tool"
+                    data-analytics-target-slug={tool.code}
+                  >
+                    <ToolCard tool={tool} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {eventsCard ? (
+            <section className="space-y-3">
+              <h3 className="text-lg font-semibold text-foreground">Events for {universeLabel}</h3>
+              <div
+                className="block"
+                data-analytics-event="related_content_click"
+                data-analytics-source-type="wiki_sidebar"
+                data-analytics-target-type="event"
+                data-analytics-target-slug={eventsCard.slug}
+              >
+                <EventsPageCard {...eventsCard} />
+              </div>
+            </section>
+          ) : null}
+
+          {checklistCards.length ? (
+            <section className="space-y-3">
+              <h3 className="text-lg font-semibold text-foreground">Checklists for {universeLabel}</h3>
+              <div className="space-y-3">
+                {checklistCards.map((card) => (
+                  <div
+                    key={card.id}
+                    className="block"
+                    data-analytics-event="related_content_click"
+                    data-analytics-source-type="wiki_sidebar"
+                    data-analytics-target-type="checklist"
+                    data-analytics-target-slug={card.slug}
+                  >
+                    <ChecklistCard {...card} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {quizCards.length ? (
+            <section className="space-y-3">
+              <h3 className="text-lg font-semibold text-foreground">Quizzes for {universeLabel}</h3>
+              <div className="space-y-3">
+                {quizCards.map((card) => (
+                  <div
+                    key={card.code}
+                    className="block"
+                    data-analytics-event="related_content_click"
+                    data-analytics-source-type="wiki_sidebar"
+                    data-analytics-target-type="quiz"
+                    data-analytics-target-slug={card.code}
+                  >
+                    <QuizCard {...card} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {related.articles.length ? (
+            <section className="space-y-3">
+              <h3 className="text-lg font-semibold text-foreground">Articles on {universeLabel}</h3>
+              <div className="space-y-4">
+                {related.articles.slice(0, 5).map((article) => (
+                  <div
+                    key={article.id}
+                    className="block"
+                    data-analytics-event="related_content_click"
+                    data-analytics-source-type="wiki_sidebar"
+                    data-analytics-target-type="article"
+                    data-analytics-target-slug={article.slug}
+                  >
+                    <ArticleCard article={article} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
+        </aside>
+      </div>
 
       <script
         type="application/ld+json"

@@ -5,6 +5,7 @@ import { FiClock, FiMonitor, FiSmartphone, FiTablet, FiTv, FiShield, FiHash, FiU
 import { TbAugmentedReality } from "react-icons/tb";
 import type { GameListUniverseEntry, ListUniverseDetails, UniverseListBadge } from "@/lib/db";
 import { formatUpdatedLabel } from "@/lib/updated-label";
+import { formatAgeRating } from "@/lib/age-rating";
 import { FaCrown, FaMedal, FaTrophy } from "react-icons/fa";
 
 const numberFormatter = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 });
@@ -31,15 +32,6 @@ function formatRatio(likes: number | null | undefined, dislikes: number | null |
 
 function universeTitle(universe: ListUniverseDetails): string {
   return universe.display_name || universe.name;
-}
-
-function formatAgeRating(value: string | null | undefined): string {
-  if (!value) return "";
-  const normalized = value.toUpperCase();
-  if (normalized === "AGE_RATING_UNSPECIFIED") return "";
-  const match = normalized.match(/AGE_RATING_(\d+)_PLUS/);
-  if (match) return `${match[1]}+`;
-  return value.replace(/_/g, " ");
 }
 
 function robloxUniverseUrl(universe: ListUniverseDetails): string {
