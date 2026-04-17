@@ -752,8 +752,7 @@ export function renderRobloxMusicIdsPage({
         { name: "Roblox music IDs", url: canonicalUrl }
       ];
   const hasDetails =
-    Boolean(descriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length) ||
-    Boolean(contentHtml?.ctaLabel && contentHtml?.ctaUrl);
+    Boolean(descriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length);
   const listSchema = buildMusicItemListSchema({
     title: pageTitle,
     description,
@@ -845,21 +844,6 @@ export function renderRobloxMusicIdsPage({
             {descriptionNodes.length ? descriptionNodes : null}
 
             {howNodes ? howNodes : null}
-
-            {contentHtml?.ctaLabel && contentHtml?.ctaUrl ? (
-              <>
-                <h3 data-md-copy className="md-copy-node md-copy-heading md-copy-h3">Next step</h3>
-                <p data-md-copy className="md-copy-node md-copy-p">Keep exploring Roblox audio.</p>
-                <p data-md-copy className="md-copy-node md-copy-p">
-                  <a
-                    href={contentHtml.ctaUrl}
-                    className="inline-flex items-center justify-center rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
-                  >
-                    {contentHtml.ctaLabel}
-                  </a>
-                </p>
-              </>
-            ) : null}
 
             {faqNodes.length ? (
               <>

@@ -7,9 +7,21 @@ type SecurityHeader = {
   value: string;
 };
 
+type SecurityHeaderOptions = {
+  enableHsts?: boolean;
+};
+
 const isProduction = process.env.NODE_ENV === "production";
 const securePathPrefixes = ["/api", "/auth", "/login", "/account", "/admin"] as const;
 const noIndexPathPrefixes = ["/auth", "/login", "/account", "/admin"] as const;
+const hstsHeader = "max-age=31536000; includeSubDomains";
+const permissionsPolicyHeader = [
+  "camera=()",
+  "geolocation=()",
+  "microphone=()",
+  "payment=()",
+  "usb=()"
+].join(", ");
 
 export function resolveCspMode(value: string | undefined, productionMode = isProduction): CspMode {
   const normalized = value?.trim().toLowerCase();
@@ -48,13 +60,23 @@ export function getCspForPath(pathname: string) {
   return isSecurePath(pathname) ? secureCsp : publicCsp;
 }
 
-export function buildSecurityHeaders(pathname: string, mode: CspMode = cspMode): SecurityHeader[] {
+export function buildSecurityHeaders(
+  pathname: string,
+  mode: CspMode = cspMode,
+  options: SecurityHeaderOptions = {}
+): SecurityHeader[] {
   const securePath = isSecurePath(pathname);
+  const shouldSendHsts = options.enableHsts ?? isProduction;
   const headers: SecurityHeader[] = [
+    { key: "Permissions-Policy", value: permissionsPolicyHeader },
     { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
     { key: "X-Content-Type-Options", value: "nosniff" },
     { key: "X-Frame-Options", value: securePath ? "DENY" : "SAMEORIGIN" }
   ];
+
+  if (shouldSendHsts) {
+    headers.unshift({ key: "Strict-Transport-Security", value: hstsHeader });
+  }
 
   if (shouldNoIndexPath(pathname)) {
     headers.push({ key: "X-Robots-Tag", value: "noindex, nofollow" });

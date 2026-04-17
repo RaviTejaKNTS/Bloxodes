@@ -35,8 +35,8 @@ This document tracks the remaining work to get the VPS deployment to a strong pr
   - `https://bloxodes.com/codes/99-nights-in-the-forest` warms from `MISS` to `HIT`
 - A scoped Cloudflare purge token has been created and verified against the `bloxodes.com` zone.
 - The Dokploy app now has `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ZONE_ID` configured and has been redeployed once to pick them up.
-- GitHub repository Actions secrets are now populated for the current automation workflows, including Dokploy deploy, Cloudflare purge, Supabase, OpenAI, Roblox Open Cloud, Telegram, Twitter, Google Custom Search, and revalidation.
-- GitHub repository Actions variables now include the Dokploy target, Cloudflare zone id, the production health-check host (`https://bloxodes.com`), and public runtime values such as `NEXT_PUBLIC_SITE_URL` and Supabase public keys.
+- GitHub repository Actions secrets are now populated for the current automation workflows, including the Dokploy deploy webhook, Cloudflare purge, Supabase, OpenAI, Roblox Open Cloud, Telegram, Twitter, Google Custom Search, and revalidation.
+- GitHub repository Actions variables now include the Cloudflare zone id, the production health-check host (`https://bloxodes.com`), and public runtime values such as `NEXT_PUBLIC_SITE_URL` and Supabase public keys.
 - Dokploy runtime values now use the production domain:
   - `SITE_URL=https://bloxodes.com`
   - `NEXT_PUBLIC_SITE_URL=https://bloxodes.com`

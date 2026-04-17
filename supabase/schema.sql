@@ -1579,6 +1579,10 @@ create table if not exists public.catalog_pages (
   cta_url text,
   schema_ld_json jsonb,
   thumb_url text,
+  wiki_md text,
+  wiki_sort_order integer,
+  wiki_item_count integer,
+  wiki_image_urls text[] not null default '{}'::text[],
   is_published boolean not null default true,
   published_at timestamptz,
   created_at timestamptz not null default now(),
@@ -1587,6 +1591,9 @@ create table if not exists public.catalog_pages (
 
 create index if not exists idx_catalog_pages_is_published on public.catalog_pages (is_published);
 create index if not exists idx_catalog_pages_universe_id on public.catalog_pages (universe_id);
+create index if not exists idx_catalog_pages_universe_wiki_sort
+  on public.catalog_pages (universe_id, wiki_sort_order)
+  where is_published = true;
 
 create trigger trg_catalog_pages_updated_at
 before update on public.catalog_pages

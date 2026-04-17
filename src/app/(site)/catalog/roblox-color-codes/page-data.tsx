@@ -190,8 +190,7 @@ export function renderRobloxColorCodesPage({
     ])
   );
   const hasDetails =
-    Boolean(descriptionNodes.length) || Boolean(howNodes) || Boolean(faqNodes.length) ||
-    Boolean(contentHtml?.ctaLabel && contentHtml?.ctaUrl);
+    Boolean(descriptionNodes.length) || Boolean(howNodes) || Boolean(faqNodes.length);
   const commentsEntityId = contentHtml?.id ?? COLOR_CODES_COMMENTS_ENTITY_ID;
 
   return (
@@ -324,21 +323,6 @@ export function renderRobloxColorCodesPage({
             {descriptionNodes.length ? descriptionNodes : null}
 
             {howNodes ? howNodes : null}
-
-            {contentHtml?.ctaLabel && contentHtml?.ctaUrl ? (
-              <>
-                <h3 data-md-copy className="md-copy-node md-copy-heading md-copy-h3">Next step</h3>
-                <p data-md-copy className="md-copy-node md-copy-p">Keep exploring more Roblox catalog tools.</p>
-                <p data-md-copy className="md-copy-node md-copy-p">
-                  <a
-                    href={contentHtml.ctaUrl}
-                    className="inline-flex items-center justify-center rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
-                  >
-                    {contentHtml.ctaLabel}
-                  </a>
-                </p>
-              </>
-            ) : null}
 
             {faqNodes.length ? (
               <section className="rounded-2xl border border-border/60 bg-surface/40 p-6 shadow-sm">

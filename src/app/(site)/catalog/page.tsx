@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
+import Link from "next/link";
 import { CatalogCard } from "@/components/CatalogCard";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
@@ -73,13 +74,58 @@ async function buildCatalogCards() {
       coverImage: entry.thumb_url ?? null,
       tone: CATALOG_CARD_TONES[index % CATALOG_CARD_TONES.length],
       updatedLabel: formatUpdatedLabel(updatedAt),
-      updatedAt
+      updatedAt,
+      universeId: entry.universe_id ?? null,
+      universeName: entry.universe_name ?? null
     };
   });
 
   const latestUpdated = latestTimestamp(results.map((entry) => parseDate(entry.updatedAt)));
+  const genericCards = results.filter((entry) => !entry.universeId);
+  const groupedMap = new Map<
+    string,
+    {
+      universeId: number;
+      gameName: string;
+      items: typeof results;
+      latestUpdatedAt: number | null;
+    }
+  >();
+
+  for (const entry of results) {
+    if (!entry.universeId || !entry.universeName) continue;
+    const key = `${entry.universeId}:${entry.universeName}`;
+    const existing = groupedMap.get(key);
+    const updatedTimestamp = parseDate(entry.updatedAt);
+
+    if (existing) {
+      existing.items.push(entry);
+      existing.latestUpdatedAt = latestTimestamp([existing.latestUpdatedAt, updatedTimestamp]);
+      continue;
+    }
+
+    groupedMap.set(key, {
+      universeId: entry.universeId,
+      gameName: entry.universeName,
+      items: [entry],
+      latestUpdatedAt: updatedTimestamp
+    });
+  }
+
+  const groupedCatalogs = Array.from(groupedMap.values())
+    .map((group) => ({
+      ...group,
+      items: group.items.sort((a, b) => {
+        const left = parseDate(a.updatedAt) ?? 0;
+        const right = parseDate(b.updatedAt) ?? 0;
+        return right - left;
+      })
+    }))
+    .sort((a, b) => a.gameName.localeCompare(b.gameName));
+
   return {
-    cards: results,
+    genericCards,
+    groupedCatalogs,
     total: results.length,
     refreshedLabel:
       typeof latestUpdated === "number" ? formatDistanceToNow(new Date(latestUpdated), { addSuffix: true }) : null
@@ -87,7 +133,7 @@ async function buildCatalogCards() {
 }
 
 export default async function CatalogIndexPage() {
-  const { cards, total, refreshedLabel } = await buildCatalogCards();
+  const { genericCards, groupedCatalogs, total, refreshedLabel } = await buildCatalogCards();
 
   return (
     <div className="space-y-10">
@@ -111,22 +157,74 @@ export default async function CatalogIndexPage() {
         </div>
       </header>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {cards.map(({ id, updatedAt: _updatedAt, ...card }, index) => (
-          <div
-            key={id}
-            className="contents"
-            data-analytics-event="select_item"
-            data-analytics-item-list-name="catalog_index"
-            data-analytics-item-id={id}
-            data-analytics-item-name={card.title}
-            data-analytics-position={index + 1}
-            data-analytics-content-type="catalog"
-          >
-            <CatalogCard {...card} />
+      {genericCards.length ? (
+        <section className="space-y-6">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-semibold text-foreground">Catalogs</h2>
+            <p className="text-sm text-muted">General catalog hubs that are not tied to a specific game.</p>
           </div>
-        ))}
-      </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {genericCards.map(({ id, updatedAt: _updatedAt, universeId: _universeId, universeName: _universeName, ...card }, index) => (
+              <div
+                key={id}
+                className="contents"
+                data-analytics-event="select_item"
+                data-analytics-item-list-name="catalog_index"
+                data-analytics-item-id={id}
+                data-analytics-item-name={card.title}
+                data-analytics-position={index + 1}
+                data-analytics-content-type="catalog"
+              >
+                <CatalogCard {...card} />
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {groupedCatalogs.length ? (
+        <section className="space-y-10">
+          {groupedCatalogs.map((group) => (
+            <div key={`${group.universeId}-${group.gameName}`} className="space-y-5 border-t border-border/60 pt-8 first:border-t-0 first:pt-0">
+              <div className="space-y-1">
+                <h2 className="text-2xl font-semibold text-foreground">{group.gameName}</h2>
+                {typeof group.latestUpdatedAt === "number" ? (
+                  <p className="text-sm text-muted">
+                    Updated {formatDistanceToNow(new Date(group.latestUpdatedAt), { addSuffix: true })}
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="divide-y divide-border/60 rounded-lg border border-border/60 bg-surface/50">
+                {group.items.map((card, itemIndex) => (
+                  <Link
+                    key={card.id}
+                    href={card.href}
+                    className="block px-5 py-4 transition hover:bg-surface-muted/60"
+                    data-analytics-event="select_item"
+                    data-analytics-item-list-name={`catalog_index_${group.gameName}`}
+                    data-analytics-item-id={card.id}
+                    data-analytics-item-name={card.title}
+                    data-analytics-position={itemIndex + 1}
+                    data-analytics-content-type="catalog"
+                  >
+                    <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between md:gap-6">
+                      <div className="space-y-1">
+                        <h3 className="text-lg font-semibold text-foreground">{card.title}</h3>
+                        <p className="max-w-3xl text-sm text-muted">{card.description}</p>
+                      </div>
+                      {card.updatedLabel ? (
+                        <p className="shrink-0 text-sm text-muted md:text-right">Updated {card.updatedLabel}</p>
+                      ) : null}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+      ) : null}
 
       <script
         type="application/ld+json"

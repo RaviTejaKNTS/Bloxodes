@@ -18,6 +18,10 @@ export type CatalogPageContent = {
   cta_url?: string | null;
   schema_ld_json?: unknown;
   thumb_url?: string | null;
+  wiki_md?: string | null;
+  wiki_sort_order?: number | null;
+  wiki_item_count?: number | null;
+  wiki_image_urls?: string[] | null;
   is_published: boolean;
   published_at?: string | null;
   created_at?: string;
@@ -27,18 +31,43 @@ export type CatalogPageContent = {
 
 export type CatalogListEntry = Pick<
   CatalogPageContent,
-  "id" | "code" | "title" | "meta_description" | "thumb_url" | "universe_id" | "published_at" | "created_at" | "updated_at" | "content_updated_at"
+  | "id"
+  | "code"
+  | "title"
+  | "meta_description"
+  | "thumb_url"
+  | "wiki_md"
+  | "wiki_sort_order"
+  | "wiki_item_count"
+  | "wiki_image_urls"
+  | "universe_id"
+  | "published_at"
+  | "created_at"
+  | "updated_at"
+  | "content_updated_at"
 >;
 
 export type CatalogIndexEntry = Pick<
   CatalogPageContent,
-  "id" | "code" | "title" | "meta_description" | "intro_md" | "thumb_url" | "published_at" | "created_at" | "updated_at" | "content_updated_at"
->;
+  | "id"
+  | "code"
+  | "title"
+  | "meta_description"
+  | "intro_md"
+  | "thumb_url"
+  | "universe_id"
+  | "published_at"
+  | "created_at"
+  | "updated_at"
+  | "content_updated_at"
+> & {
+  universe_name?: string | null;
+};
 
 const CATALOG_SELECT_FIELDS_VIEW =
-  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, cta_label, cta_url, schema_ld_json, thumb_url, is_published, published_at, created_at, updated_at, content_updated_at";
+  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, cta_label, cta_url, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, wiki_item_count, wiki_image_urls, is_published, published_at, created_at, updated_at, content_updated_at";
 const CATALOG_SELECT_FIELDS_BASE =
-  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, cta_label, cta_url, schema_ld_json, thumb_url, is_published, published_at, created_at, updated_at";
+  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, cta_label, cta_url, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, wiki_item_count, wiki_image_urls, is_published, published_at, created_at, updated_at";
 const CATALOG_REVALIDATE_SECONDS = 86400;
 
 function normalizeCatalogCodes(codes: string[]): string[] {
@@ -123,7 +152,7 @@ export async function getCatalogPageContentByCodes(codes: string[]): Promise<Cat
 
   const cachedCatalogContent = unstable_cache(
     async (requestedCodes: string[]) => fetchCatalogContent(requestedCodes),
-    ["catalog-page-content-v4", ...normalizedCodes],
+    ["catalog-page-content-v5", ...normalizedCodes],
     {
       revalidate: CATALOG_REVALIDATE_SECONDS,
       tags: buildCatalogTags(normalizedCodes)
@@ -141,7 +170,7 @@ export async function getCatalogPageContentByCodesIncludingDrafts(
 
   const cachedCatalogContent = unstable_cache(
     async (requestedCodes: string[]) => fetchCatalogContent(requestedCodes, { includeUnpublished: true }),
-    ["catalog-page-content-drafts-v2", ...normalizedCodes],
+    ["catalog-page-content-drafts-v3", ...normalizedCodes],
     {
       revalidate: CATALOG_REVALIDATE_SECONDS,
       tags: buildCatalogTags(normalizedCodes)
@@ -180,25 +209,64 @@ export async function listPublishedTopLevelCatalogPages(): Promise<CatalogIndexE
   const cached = unstable_cache(
     async () => {
       const supabase = supabaseAdmin();
+      async function attachUniverseNames(rows: CatalogIndexEntry[]): Promise<CatalogIndexEntry[]> {
+        const universeIds = Array.from(
+          new Set(
+            rows
+              .map((row) => row.universe_id)
+              .filter((value): value is number => typeof value === "number" && Number.isFinite(value))
+          )
+        );
+
+        if (!universeIds.length) {
+          return rows;
+        }
+
+        const { data: universes, error: universeError } = await supabase
+          .from("roblox_universes")
+          .select("universe_id, display_name, name")
+          .in("universe_id", universeIds);
+
+        if (universeError) {
+          console.error("Error fetching catalog universe names", universeError);
+          return rows;
+        }
+
+        const universeNameById = new Map<number, string | null>();
+        for (const row of universes ?? []) {
+          const universeId = (row as { universe_id?: number | null }).universe_id;
+          if (typeof universeId !== "number") continue;
+          const displayName = (row as { display_name?: string | null }).display_name?.trim() ?? null;
+          const name = (row as { name?: string | null }).name?.trim() ?? null;
+          universeNameById.set(universeId, displayName || name || null);
+        }
+
+        return rows.map((row) => ({
+          ...row,
+          universe_name: typeof row.universe_id === "number" ? (universeNameById.get(row.universe_id) ?? null) : null
+        }));
+      }
+
       const { data, error } = await supabase
         .from("catalog_pages_view")
-        .select("id, code, title, meta_description, intro_md, thumb_url, published_at, created_at, updated_at, content_updated_at")
+        .select("id, code, title, meta_description, intro_md, thumb_url, universe_id, published_at, created_at, updated_at, content_updated_at")
         .eq("is_published", true)
         .order("content_updated_at", { ascending: false });
 
       if (!error && data) {
-        return sortCatalogIndexEntries(
+        const rows = sortCatalogIndexEntries(
           ((data ?? [])
-          .filter((row) => {
-            const code = (row as { code?: string | null }).code;
-            return typeof code === "string" && code.length > 0 && !code.includes("/");
-          }) as CatalogIndexEntry[])
+            .filter((row) => {
+              const code = (row as { code?: string | null }).code;
+              return typeof code === "string" && code.length > 0 && !code.includes("/");
+            }) as CatalogIndexEntry[])
         );
+        return attachUniverseNames(rows);
       }
 
       const { data: fallback, error: fallbackError } = await supabase
         .from("catalog_pages")
-        .select("id, code, title, meta_description, intro_md, thumb_url, published_at, created_at, updated_at")
+        .select("id, code, title, meta_description, intro_md, thumb_url, universe_id, published_at, created_at, updated_at")
         .eq("is_published", true)
         .order("updated_at", { ascending: false });
 
@@ -207,13 +275,14 @@ export async function listPublishedTopLevelCatalogPages(): Promise<CatalogIndexE
         return [];
       }
 
-      return sortCatalogIndexEntries(
+      const rows = sortCatalogIndexEntries(
         ((fallback ?? [])
-        .filter((row) => {
-          const code = (row as { code?: string | null }).code;
-          return typeof code === "string" && code.length > 0 && !code.includes("/");
-        }) as CatalogIndexEntry[])
+          .filter((row) => {
+            const code = (row as { code?: string | null }).code;
+            return typeof code === "string" && code.length > 0 && !code.includes("/");
+          }) as CatalogIndexEntry[])
       );
+      return attachUniverseNames(rows);
     },
     ["listPublishedTopLevelCatalogPages"],
     {
@@ -227,30 +296,42 @@ export async function listPublishedTopLevelCatalogPages(): Promise<CatalogIndexE
 
 export async function listPublishedCatalogPagesByUniverseId(
   universeId: number,
-  limit = 2
+  limit?: number | null
 ): Promise<CatalogListEntry[]> {
-  const safeLimit = Number.isFinite(limit) && limit > 0 ? Math.floor(limit) : 2;
+  const safeLimit = typeof limit === "number" && Number.isFinite(limit) && limit > 0 ? Math.floor(limit) : null;
   const supabase = supabaseAdmin();
 
-  const { data, error } = await supabase
+  let viewQuery = supabase
     .from("catalog_pages_view")
-    .select("id, code, title, meta_description, thumb_url, universe_id, published_at, created_at, updated_at, content_updated_at")
+    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, wiki_item_count, wiki_image_urls, universe_id, published_at, created_at, updated_at, content_updated_at")
     .eq("is_published", true)
     .eq("universe_id", universeId)
-    .order("content_updated_at", { ascending: false })
-    .limit(safeLimit);
+    .order("wiki_sort_order", { ascending: true, nullsFirst: false })
+    .order("title", { ascending: true });
+
+  if (safeLimit) {
+    viewQuery = viewQuery.limit(safeLimit);
+  }
+
+  const { data, error } = await viewQuery;
 
   if (!error && data) {
     return (data ?? []) as CatalogListEntry[];
   }
 
-  const { data: fallback, error: fallbackError } = await supabase
+  let fallbackQuery = supabase
     .from("catalog_pages")
-    .select("id, code, title, meta_description, thumb_url, universe_id, published_at, created_at, updated_at")
+    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, wiki_item_count, wiki_image_urls, universe_id, published_at, created_at, updated_at")
     .eq("is_published", true)
     .eq("universe_id", universeId)
-    .order("updated_at", { ascending: false })
-    .limit(safeLimit);
+    .order("wiki_sort_order", { ascending: true, nullsFirst: false })
+    .order("title", { ascending: true });
+
+  if (safeLimit) {
+    fallbackQuery = fallbackQuery.limit(safeLimit);
+  }
+
+  const { data: fallback, error: fallbackError } = await fallbackQuery;
 
   if (fallbackError) {
     console.error("Error fetching catalog pages by universe", fallbackError);

@@ -600,8 +600,7 @@ export function renderForgeCatalogPage({
   const hasDetails =
     Boolean(descriptionHtml.length) ||
     Boolean(howHtml) ||
-    Boolean(faqHtml.length) ||
-    Boolean(contentHtml?.ctaLabel && contentHtml?.ctaUrl);
+    Boolean(faqHtml.length);
 
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
@@ -651,21 +650,12 @@ export function renderForgeCatalogPage({
       <header className="space-y-4">
         <ForgeBreadcrumb items={breadcrumbNavItems} />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{pageTitle}</h1>
-        <p className="max-w-2xl text-base text-muted md:text-lg">{pageDescription}</p>
         {formattedUpdated ? (
           <p className="text-sm text-foreground/80">
             Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
             {updatedRelativeLabel ? <span>{" "}({updatedRelativeLabel})</span> : null}
           </p>
         ) : null}
-        <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-          <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-            {itemCount.toLocaleString("en-US")} items
-          </span>
-          <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-            {groupedSections.length} {config.groupLabel.toLowerCase()} groups
-          </span>
-        </div>
       </header>
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
@@ -684,20 +674,6 @@ export function renderForgeCatalogPage({
             {descriptionNodes.length ? descriptionNodes : null}
 
             {howNodes ? howNodes : null}
-
-            {contentHtml?.ctaLabel && contentHtml?.ctaUrl ? (
-              <p data-md-copy className="md-copy-node md-copy-p">
-                {contentHtml.ctaLabel}{" "}
-                <a
-                  href={contentHtml.ctaUrl}
-                  className="rounded-full bg-accent px-6 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn More
-                </a>
-              </p>
-            ) : null}
 
             {faqNodes.length ? (
               <>

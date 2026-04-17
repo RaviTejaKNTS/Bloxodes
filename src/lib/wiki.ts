@@ -506,7 +506,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     safeList("tools", () => listPublishedToolsByUniverseId(universeId, 6)),
     safeList("articles", () => listPublishedArticlesByUniverseId(universeId, 8, 0)),
     safeList("checklists", () => listPublishedChecklistsByUniverseId(universeId, 4)),
-    safeList("catalog pages", () => listPublishedCatalogPagesByUniverseId(universeId, 8)),
+    safeList("catalog pages", () => listPublishedCatalogPagesByUniverseId(universeId)),
     safeList("quizzes", () => listWikiQuizzesByUniverseId(universeId, 4)),
     safeValue("events page", () => getEventsPageByUniverseId(universeId)),
     safeValue("event summary", () => getUniverseEventSummary(universeId)),

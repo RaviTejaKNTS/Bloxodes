@@ -39,4 +39,14 @@ describe("security CSP routing", () => {
     expect(headerValue(homeHeaders, "X-Frame-Options")).toBe("SAMEORIGIN");
     expect(headerValue(homeHeaders, "X-Robots-Tag")).toBeUndefined();
   });
+
+  it("adds permissions policy and only sends HSTS when enabled", () => {
+    const localHeaders = buildSecurityHeaders("/", "off");
+    const productionHeaders = buildSecurityHeaders("/", "off", { enableHsts: true });
+
+    expect(headerValue(localHeaders, "Permissions-Policy")).toContain("camera=()");
+    expect(headerValue(localHeaders, "Permissions-Policy")).toContain("microphone=()");
+    expect(headerValue(localHeaders, "Strict-Transport-Security")).toBeUndefined();
+    expect(headerValue(productionHeaders, "Strict-Transport-Security")).toBe("max-age=31536000; includeSubDomains");
+  });
 });

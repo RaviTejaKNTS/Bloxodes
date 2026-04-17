@@ -129,7 +129,6 @@ export default async function AdminCommandsHubPage() {
     ...faq,
     nodes: renderCatalogNodes(faq.a, `admin-faq-${idx}`)
   }));
-  const showCta = Boolean(contentHtml?.ctaLabel && contentHtml?.ctaUrl);
   const updatedDateValue = contentHtml?.updatedAt ?? null;
   const updatedDate = updatedDateValue ? new Date(updatedDateValue) : null;
   const formattedUpdated = updatedDate
@@ -205,17 +204,6 @@ export default async function AdminCommandsHubPage() {
         {descriptionNodes.length ? descriptionNodes : null}
 
         {howNodes ? howNodes : null}
-
-        {showCta ? (
-          <p data-md-copy className="md-copy-node md-copy-p">
-            <a
-              href={contentHtml?.ctaUrl ?? "#"}
-              className="inline-flex items-center justify-center rounded-full bg-foreground px-5 py-2 text-sm font-semibold text-background transition hover:opacity-90"
-            >
-              {contentHtml?.ctaLabel}
-            </a>
-          </p>
-        ) : null}
 
         {faqNodes.length ? (
           <>

@@ -21,6 +21,7 @@ const RESERVED_CATALOG_PREFIXES = [
   "roblox-music-ids",
   "the-forge"
 ];
+const RESERVED_CATALOG_CODE_PREFIXES = ["the-forge-"];
 
 type PageProps = {
   params: Promise<{ slug: string[] }>;
@@ -31,7 +32,7 @@ export async function generateStaticParams() {
   return codes
     .map((code) => code.trim().toLowerCase())
     .filter((code) => code.length > 0)
-    .filter((code) => !RESERVED_CATALOG_PREFIXES.some((prefix) => code === prefix || code.startsWith(`${prefix}/`)))
+    .filter((code) => !isReservedCatalogCode(code))
     .map((code) => ({ slug: splitPathToSlug(code) }));
 }
 
@@ -60,7 +61,10 @@ function normalizeCatalogCode(slugParts: string[]): string {
 }
 
 function isReservedCatalogCode(code: string): boolean {
-  return RESERVED_CATALOG_PREFIXES.some((prefix) => code === prefix || code.startsWith(`${prefix}/`));
+  return (
+    RESERVED_CATALOG_PREFIXES.some((prefix) => code === prefix || code.startsWith(`${prefix}/`)) ||
+    RESERVED_CATALOG_CODE_PREFIXES.some((prefix) => code.startsWith(prefix))
+  );
 }
 
 function sortDescriptionEntries(description: Record<string, string> | null | undefined) {
@@ -183,7 +187,6 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
     ...faq,
     nodes: renderCatalogNodes(faq.a, `catalog-faq-${idx}`)
   }));
-  const showCta = Boolean(contentHtml.ctaLabel && contentHtml.ctaUrl);
   const updatedDateValue = contentHtml.updatedAt ?? null;
   const updatedDate = updatedDateValue ? new Date(updatedDateValue) : null;
   const formattedUpdated = updatedDate
@@ -228,17 +231,6 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
         {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
 
         {howNodes ? howNodes : null}
-
-        {showCta ? (
-          <p data-md-copy className="md-copy-node md-copy-p">
-            <a
-              href={contentHtml.ctaUrl ?? "#"}
-              className="inline-flex items-center justify-center rounded-full bg-foreground px-5 py-2 text-sm font-semibold text-background transition hover:opacity-90"
-            >
-              {contentHtml.ctaLabel}
-            </a>
-          </p>
-        ) : null}
 
         {faqNodes.length ? (
           <>

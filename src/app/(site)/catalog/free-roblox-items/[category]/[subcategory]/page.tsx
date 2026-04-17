@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { notFound } from "next/navigation";
-import { getCatalogPageContentByCodesIncludingDrafts } from "@/lib/catalog";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import {
   BASE_PATH,
   appendItemCountToSeoTitle,
-  buildFreeItemCatalogCodeCandidates,
-  buildFreeItemsCatalogContentHtml,
   buildFreeItemCategoryPath,
   loadFreeItemCategories,
   loadFreeItemCategoryBySlug,
@@ -22,8 +19,6 @@ export const revalidate = 2592000;
 type PageProps = {
   params: Promise<{ category: string; subcategory: string }>;
 };
-
-const FREE_ITEMS_CONTENT_CODES = buildFreeItemCatalogCodeCandidates();
 
 export async function generateStaticParams() {
   const categories = await loadFreeItemCategories();
@@ -64,6 +59,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${title} | ${SITE_NAME}`,
     description,
+    robots: {
+      index: false,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: false,
+        follow: true
+      }
+    },
     alternates: buildAlternates(canonical),
     openGraph: {
       type: "website",
@@ -92,13 +96,11 @@ export default async function RobloxFreeItemsSubcategoryPage({ params }: PagePro
     notFound();
   }
 
-  const [subcategories, pageData, catalog] = await Promise.all([
+  const [subcategories, pageData] = await Promise.all([
     loadFreeItemSubcategories(category.label),
-    loadFreeItemsPageData(1, { category: category.label, subcategory: subcategory.label }),
-    getCatalogPageContentByCodesIncludingDrafts(FREE_ITEMS_CONTENT_CODES)
+    loadFreeItemsPageData(1, { category: category.label, subcategory: subcategory.label })
   ]);
   const { items, total, totalPages } = pageData;
-  const contentHtml = await buildFreeItemsCatalogContentHtml(catalog);
 
   const pageTitle = `Free Roblox ${subcategory.label} items`;
   const description = `Browse free Roblox ${subcategory.label} items in the ${category.label} category.`;
@@ -124,7 +126,6 @@ export default async function RobloxFreeItemsSubcategoryPage({ params }: PagePro
     categorySlug: category.slug,
     categoryLabel: category.label,
     subcategories,
-    activeSubcategorySlug: subcategory.slug,
-    contentHtml
+    activeSubcategorySlug: subcategory.slug
   });
 }

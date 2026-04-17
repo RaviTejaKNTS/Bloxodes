@@ -424,8 +424,7 @@ export function renderRobloxDecalIdsPage({
             ];
 
     const hasDetails =
-        Boolean(descriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length) ||
-        Boolean(contentHtml?.ctaLabel && contentHtml?.ctaUrl);
+        Boolean(descriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length);
     const introNodes = introHtml ? renderCatalogNodes(introHtml, "decal-intro") : null;
     const descriptionNodes = descriptionHtml.flatMap((entry) =>
         renderCatalogNodes(entry.html, `decal-description-${entry.key}`)
@@ -502,20 +501,6 @@ export function renderRobloxDecalIdsPage({
                         {descriptionNodes.length ? descriptionNodes : null}
 
                         {howNodes ? howNodes : null}
-
-                        {contentHtml?.ctaLabel && contentHtml?.ctaUrl ? (
-                            <p data-md-copy className="md-copy-node md-copy-p">
-                                {contentHtml.ctaLabel}{" "}
-                                <a
-                                    href={contentHtml.ctaUrl}
-                                    className="rounded-full bg-accent px-6 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Learn More
-                                </a>
-                            </p>
-                        ) : null}
 
                         {faqNodes.length ? (
                             <>

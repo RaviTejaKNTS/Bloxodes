@@ -27,7 +27,7 @@ This file is the quick reference for the repo's current data surface.
 - `tools`, `tools_view`
   - Tool copy and tool indexes.
 - `catalog_pages`, `catalog_pages_view`
-  - Catalog page copy and catalog indexes.
+  - Catalog page copy and catalog indexes, including optional `wiki_md`, `wiki_sort_order`, `wiki_item_count`, and `wiki_image_urls` fields for game wiki catalog sections.
 - `events_pages`
   - Event landing pages.
 

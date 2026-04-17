@@ -354,13 +354,89 @@ function buildQuizCards(page: WikiPageContent, related: WikiRelatedData): QuizCa
   }));
 }
 
-function buildCatalogLinks(related: WikiRelatedData): WikiLinkItem[] {
-  return related.catalogPages.map((page) => ({
-    href: `/catalog/${page.code}`,
-    title: page.title,
-    description: page.meta_description,
-    meta: "Catalog"
-  }));
+async function buildWikiCatalogBlocks(related: WikiRelatedData) {
+  const pagesWithCopy = related.catalogPages
+    .map((page) => ({ page, copy: normalizeText(page.wiki_md) }))
+    .filter((entry) => Boolean(entry.copy)) as Array<{
+      page: WikiRelatedData["catalogPages"][number];
+      copy: string;
+    }>;
+
+  return Promise.all(
+    pagesWithCopy.map(async ({ page, copy }) => {
+      const html = await renderMarkdown(copy, { paragraphizeLineBreaks: true });
+      const nodes = renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix: `wiki-catalog-${page.code}` });
+
+      return {
+        page,
+        nodes
+      };
+    })
+  );
+}
+
+function getCatalogCollectionLabel(title: string): string {
+  const match = title.match(/^All\s+(.+?)\s+in\s+.+$/i);
+  return normalizeText(match?.[1]) ?? title;
+}
+
+function normalizeWikiImageUrls(value?: string[] | null): string[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((entry) => normalizeImageSrc(entry))
+    .filter((entry): entry is string => Boolean(entry))
+    .slice(0, 6);
+}
+
+function WikiCatalogCta({
+  href,
+  title,
+  count,
+  gameName,
+  imageUrls
+}: {
+  href: string;
+  title: string;
+  count?: number | null;
+  gameName: string;
+  imageUrls?: string[] | null;
+}) {
+  const collectionLabel = getCatalogCollectionLabel(title);
+  const formattedCount = typeof count === "number" && Number.isFinite(count) ? count.toLocaleString("en-US") : null;
+  const images = normalizeWikiImageUrls(imageUrls);
+  const label = formattedCount
+    ? `Check all ${formattedCount} ${collectionLabel} in ${gameName}`
+    : `Check all ${collectionLabel} in ${gameName}`;
+
+  return (
+    <Link
+      href={href}
+      className="group relative isolate flex min-h-[128px] w-full overflow-hidden rounded-lg border border-border/60 bg-surface/80 px-6 py-5 text-foreground shadow-sm transition hover:border-accent/60 dark:text-white md:min-h-[136px]"
+    >
+      {images.length ? (
+        <div aria-hidden className="absolute inset-0 flex opacity-60">
+          {images.map((image, index) => (
+            <div key={`${image}-${index}`} className="relative min-w-0 flex-1 border-r border-white/20 last:border-r-0">
+              <Image
+                src={image}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 20vw, 120px"
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
+      ) : null}
+      <span
+        className="absolute inset-0 bg-gradient-to-r from-white/98 via-white/96 to-white/93 transition group-hover:from-white/97 group-hover:via-white/95 group-hover:to-white/92 dark:from-black/96 dark:via-black/93 dark:to-black/89 dark:group-hover:from-black/95 dark:group-hover:via-black/92 dark:group-hover:to-black/88"
+        aria-hidden
+      />
+      <span className="relative z-10 flex w-full items-center">
+        <span className="max-w-3xl text-base font-semibold leading-6 md:text-lg">{label}</span>
+      </span>
+    </Link>
+  );
 }
 
 function buildRankLinks(related: WikiRelatedData): WikiLinkItem[] {
@@ -585,7 +661,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const heroImage = getHeroImage(page, related);
   const controlRows = parseControls(page.controls_json).map((row) => ({ label: row.label, value: row.value }));
   const tipsNodes = await renderTipsNodes(page.tips_md);
-  const catalogLinks = buildCatalogLinks(related);
+  const catalogBlocks = await buildWikiCatalogBlocks(related);
   const rankLinks = buildRankLinks(related);
   const developerRows = buildDeveloperRows(page);
   const developerLinks = developerGameLinks(related);
@@ -762,10 +838,35 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             </div>
           ) : null}
 
-          {catalogLinks.length ? (
-            <WikiSection title="Collections" description="Structured item, place, and game-specific collection pages.">
-              <WikiLinkList items={catalogLinks} />
-            </WikiSection>
+          {catalogBlocks.length ? (
+            <section className="min-w-0 border-t border-border/60 pt-8">
+              <div className="space-y-10">
+                {catalogBlocks.map(({ page: catalogPage, nodes }) => (
+                  <section
+                    key={catalogPage.code}
+                    className="space-y-4"
+                    data-analytics-event="select_item"
+                    data-analytics-item-list-name="wiki_catalog"
+                    data-analytics-item-id={catalogPage.code}
+                    data-analytics-item-name={catalogPage.title}
+                    data-analytics-content-type="catalog"
+                  >
+                    {nodes ? (
+                      <div className="article-content md-copy-scope text-sm leading-7 text-foreground">
+                        {nodes}
+                      </div>
+                    ) : null}
+                    <WikiCatalogCta
+                      href={`/catalog/${catalogPage.code}`}
+                      title={catalogPage.title}
+                      count={catalogPage.wiki_item_count}
+                      gameName={universeLabel}
+                      imageUrls={catalogPage.wiki_image_urls}
+                    />
+                  </section>
+                ))}
+              </div>
+            </section>
           ) : null}
 
           {controlRows.length ? (

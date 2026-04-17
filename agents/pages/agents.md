@@ -48,7 +48,7 @@ This file is the route-family inventory for quick scanning.
 | Roblox color codes | `/catalog/roblox-color-codes` | `src/app/(site)/catalog/roblox-color-codes/*`, data helper in `page-data.tsx` |
 | Roblox decal IDs | `/catalog/roblox-decal-ids`, `/catalog/roblox-decal-ids/page/[page]` | `src/app/(site)/catalog/roblox-decal-ids/*`, helpers in `page-data.tsx` |
 | Admin commands | `/catalog/admin-commands`, `/catalog/admin-commands/[system]` | `src/app/(site)/catalog/admin-commands/*`, backed by `data/Admin commands/*.md` |
-| The Forge catalog | `/catalog/the-forge`, `/catalog/the-forge/[collection]` | `src/app/(site)/catalog/the-forge/*`, view helper in `ForgeCatalogView.tsx`, data helper in `page-data.tsx` |
+| The Forge catalog | `/catalog/the-forge`, `/catalog/the-forge/[collection]`, `/catalog/the-forge-*` flat collection routes | `src/app/(site)/catalog/the-forge/*` plus flat wrappers, view helper in `ForgeCatalogView.tsx`, data helper in `page-data.tsx` |
 | Generic catalog fallback | `/catalog/[...slug]` | `src/app/(site)/catalog/[...slug]/page.tsx`, backed by Supabase catalog copy |
 
 ## Tool Families
