@@ -51,12 +51,22 @@ export function serializeConsentRequirement(requiresConsent: boolean) {
   return requiresConsent ? "1" : "0";
 }
 
+function readUpperHeader(headers: HeaderReader, ...names: string[]) {
+  for (const name of names) {
+    const value = headers.get(name)?.trim().toUpperCase();
+    if (value) {
+      return value;
+    }
+  }
+
+  return "";
+}
+
 export function resolveRequestCountry(headers: HeaderReader, geoCountry?: string | null) {
   return (
-    headers.get("x-vercel-ip-country")?.toUpperCase() ||
-    headers.get("x-vercel-ip-country-region")?.toUpperCase() ||
+    readUpperHeader(headers, "cf-ipcountry", "x-country-code", "x-forwarded-country", "x-geo-country") ||
+    headers.get("x-vercel-ip-country")?.trim().toUpperCase() ||
     geoCountry?.toUpperCase() ||
-    headers.get("cf-ipcountry")?.toUpperCase() ||
     ""
   );
 }

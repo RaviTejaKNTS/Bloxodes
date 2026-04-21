@@ -63,6 +63,29 @@ export async function getToolContent(code: string): Promise<ToolContent | null> 
   return (fallback as ToolContent) ?? null;
 }
 
+export async function getToolContentWithDevFallback(code: string): Promise<ToolContent | null> {
+  const publishedTool = await getToolContent(code);
+  if (publishedTool || process.env.NODE_ENV === "production") {
+    return publishedTool;
+  }
+
+  const supabase = supabaseAdmin();
+  const { data, error } = await supabase
+    .from("tools")
+    .select(
+      "id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, universe_id, cta_label, cta_url, schema_ld_json, thumb_url, is_published, published_at, created_at, updated_at"
+    )
+    .eq("code", code)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Error fetching tool content with dev fallback", error);
+    return null;
+  }
+
+  return (data as ToolContent | null) ?? null;
+}
+
 export type ToolListEntry = Pick<
   ToolContent,
   "id" | "code" | "title" | "seo_title" | "meta_description" | "intro_md" | "thumb_url" | "published_at" | "universe_id"
@@ -94,12 +117,12 @@ const cachedListPublishedTools = unstable_cache(
 
     return (fallback ?? []) as ToolListEntry[];
   },
-  ["listPublishedTools"],
-  {
-    revalidate: 21600, // 6 hours
-    tags: ["tools-index"]
-  }
-);
+    ["listPublishedTools"],
+    {
+      revalidate: 3600,
+      tags: ["tools-index"]
+    }
+  );
 
 export async function listPublishedTools(): Promise<ToolListEntry[]> {
   return cachedListPublishedTools();
@@ -143,7 +166,7 @@ export async function listPublishedToolsPage(
     },
     [`listPublishedToolsPage:${safePage}:${safePageSize}`],
     {
-      revalidate: 21600,
+      revalidate: 3600,
       tags: ["tools-index"]
     }
   );

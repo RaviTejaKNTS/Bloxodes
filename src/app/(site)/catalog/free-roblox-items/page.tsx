@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
-import { getCatalogPageContentByCodesIncludingDrafts } from "@/lib/catalog";
+import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import {
   BASE_PATH,
@@ -12,7 +12,7 @@ import {
   renderRobloxFreeItemsPage
 } from "./page-data";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 
 const CATALOG_CODE_CANDIDATES = buildFreeItemCatalogCodeCandidates();
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
@@ -21,7 +21,7 @@ const PAGE_DESCRIPTION = "Browse free Roblox items and bundles.";
 export async function generateMetadata(): Promise<Metadata> {
   const [{ total }, catalog] = await Promise.all([
     loadFreeItemsPageData(1),
-    getCatalogPageContentByCodesIncludingDrafts(CATALOG_CODE_CANDIDATES)
+    getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
   ]);
   if (!catalog) {
     const title = appendItemCountToSeoTitle("Roblox Free Items and Bundles", total);
@@ -61,7 +61,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function RobloxFreeItemsPage() {
   const [{ items, total, totalPages }, catalog] = await Promise.all([
     loadFreeItemsPageData(1),
-    getCatalogPageContentByCodesIncludingDrafts(CATALOG_CODE_CANDIDATES)
+    getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
   ]);
   const contentHtml = await buildFreeItemsCatalogContentHtml(catalog);
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
 import { renderMarkdown } from "@/lib/markdown";
-import { getCatalogPageContentByCodesIncludingDrafts, type CatalogFaqEntry } from "@/lib/catalog";
+import { getCatalogPageContentByCodes, type CatalogFaqEntry } from "@/lib/catalog";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import {
   buildForgeCatalogCodeCandidates,
@@ -27,7 +27,7 @@ function sortDescriptionEntries(description: Record<string, string> | null | und
 }
 
 async function buildCatalogContent(codes: string[]): Promise<{ contentHtml: CatalogContentHtml | null }> {
-  const catalog = await getCatalogPageContentByCodesIncludingDrafts(codes);
+  const catalog = await getCatalogPageContentByCodes(codes);
   if (!catalog) {
     return { contentHtml: null };
   }
@@ -82,7 +82,7 @@ export async function generateForgeCollectionMetadata(collection: string): Promi
   const dataset = await loadForgeCatalogDataset(config);
   const count = dataset.items.length;
   const fallbackTitle = `All ${count.toLocaleString("en-US")} ${config.label} in The Forge`;
-  const catalog = await getCatalogPageContentByCodesIncludingDrafts(buildForgeCatalogCodeCandidates(config));
+  const catalog = await getCatalogPageContentByCodes(buildForgeCatalogCodeCandidates(config));
   const title = resolveSeoTitle(catalog?.seo_title) ?? catalog?.title ?? fallbackTitle;
   const description = catalog?.meta_description ?? config.description ?? CATALOG_DESCRIPTION;
   const image = catalog?.thumb_url ?? `${SITE_URL}/og-image.png`;

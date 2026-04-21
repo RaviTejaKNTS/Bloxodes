@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
-import { getCatalogPageContentByCodesIncludingDrafts } from "@/lib/catalog";
+import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import {
   appendItemCountToSeoTitle,
   BASE_PATH,
   buildFreeItemCatalogCodeCandidates,
+  buildFreeItemsCatalogContentHtml,
   loadFreeItemsPageData,
   renderRobloxFreeItemsPage
 } from "../../page-data";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 
 const CATALOG_CODE_CANDIDATES = buildFreeItemCatalogCodeCandidates();
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const [{ total }, catalog] = await Promise.all([
     loadFreeItemsPageData(safePageNumber),
-    getCatalogPageContentByCodesIncludingDrafts(CATALOG_CODE_CANDIDATES)
+    getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
   ]);
   const baseTitle = catalog?.title ?? "Roblox free items";
   const title = `${appendItemCountToSeoTitle(resolveSeoTitle(catalog?.seo_title) ?? baseTitle, total)} - Page ${safePageNumber}`;
@@ -78,9 +79,10 @@ export default async function RobloxFreeItemsPaginatedPage({ params }: PageProps
 
   const [pageData, catalog] = await Promise.all([
     loadFreeItemsPageData(safePageNumber),
-    getCatalogPageContentByCodesIncludingDrafts(CATALOG_CODE_CANDIDATES)
+    getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
   ]);
   const { items, total, totalPages } = pageData;
+  const contentHtml = await buildFreeItemsCatalogContentHtml(catalog);
 
   return renderRobloxFreeItemsPage({
     items,
@@ -98,6 +100,6 @@ export default async function RobloxFreeItemsPaginatedPage({ params }: PageProps
     ],
     basePath: BASE_PATH,
     navActive: "all",
-    contentHtml: catalog ? { id: catalog.id ?? null } : null
+    contentHtml
   });
 }

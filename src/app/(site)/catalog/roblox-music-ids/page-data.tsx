@@ -1,17 +1,19 @@
-import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { MusicCoverImage } from "@/components/MusicCoverImage";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { Suspense } from "react";
 import { MusicIdsBrowser } from "./MusicIdsBrowser";
+import type { CatalogPageContent } from "@/lib/catalog";
 import { supabaseAdmin } from "@/lib/supabase";
 import { breadcrumbJsonLd, CATALOG_DESCRIPTION, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { DEFAULT_SORT, normalizeSearchQuery, type MusicSortKey } from "@/lib/music-ids-search";
-import { processHtmlLinks } from "@/lib/link-utils";
-import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
+import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
+import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
+import { ContentFaq } from "@/components/ContentFaq";
+import { formatRelativeDate } from "@/lib/content-dates";
+import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } from "@/lib/page-content";
 
 const PAGE_SIZE = 24;
 const OPTION_PAGE_SIZE = 24;
@@ -34,21 +36,7 @@ export type MusicRow = {
   last_seen_at: string | null;
 };
 
-export type CatalogContentHtml = {
-  id?: string | null;
-  title?: string | null;
-  introHtml?: string;
-  howHtml?: string;
-  descriptionHtml?: Array<{ key: string; html: string }>;
-  faqHtml?: Array<{ q: string; a: string }>;
-  updatedAt?: string | null;
-  ctaLabel?: string | null;
-  ctaUrl?: string | null;
-};
-
-function renderCatalogNodes(html: string, keyPrefix: string): ReactNode[] {
-  return renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix });
-}
+export type CatalogContentHtml = PageContentHtml;
 
 type PageData = {
   songs: MusicRow[];
@@ -71,10 +59,13 @@ type ValueOption = {
   count: number;
 };
 
-export type BreadcrumbItem = {
-  label: string;
-  href?: string | null;
-};
+export type BreadcrumbItem = PageBreadcrumbItem;
+
+export async function buildRobloxMusicCatalogContentHtml(
+  catalog: CatalogPageContent | null
+): Promise<CatalogContentHtml | null> {
+  return buildPageContentHtml(catalog);
+}
 
 const MUSIC_NAV_ITEMS: MusicNavItem[] = [
   {
@@ -410,24 +401,7 @@ export function MusicCatalogNav({ active }: { active: MusicNavKey }) {
 }
 
 export function MusicBreadcrumb({ items, className }: { items: BreadcrumbItem[]; className?: string }) {
-  return (
-    <nav aria-label="Breadcrumb" className={className ?? "text-xs uppercase tracking-[0.25em] text-muted"}>
-      <ol className="flex flex-wrap items-center gap-2">
-        {items.map((item, index) => (
-          <li key={`${item.label}-${index}`} className="flex items-center gap-2">
-            {item.href ? (
-              <Link href={item.href} className="font-semibold text-muted transition hover:text-accent">
-                {item.label}
-              </Link>
-            ) : (
-              <span className="font-semibold text-foreground/80">{item.label}</span>
-            )}
-            {index < items.length - 1 ? <span className="text-muted/60">&gt;</span> : null}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
+  return <PageBreadcrumb items={items} className={className} />;
 }
 
 export function buildMusicItemListSchema({
@@ -712,7 +686,7 @@ export function renderRobloxMusicIdsPage({
     if (!latestDate || candidate > latestDate) return candidate;
     return latestDate;
   }, null);
-  const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
+  const refreshedLabel = formatRelativeDate(latest);
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml?.introHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml?.howHtml : "";
@@ -722,13 +696,13 @@ export function renderRobloxMusicIdsPage({
   const formattedUpdated = updatedDate
     ? updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
     : null;
-  const updatedRelativeLabel = updatedDate ? formatDistanceToNow(updatedDate, { addSuffix: true }) : null;
+  const updatedRelativeLabel = formatRelativeDate(updatedDate);
   const canonicalPath = currentPage > 1 ? `${BASE_PATH}/page/${currentPage}` : BASE_PATH;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle;
   const description = CATALOG_DESCRIPTION;
   const image = `${SITE_URL}/og-image.png`;
-  const updatedIso = updatedDate ? updatedDate.toISOString() : new Date().toISOString();
+  const updatedIso = updatedDate?.toISOString() ?? null;
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const breadcrumbNavItems: BreadcrumbItem[] = [
     { label: "Home", href: "/" },
@@ -774,14 +748,14 @@ export function renderRobloxMusicIdsPage({
     })
   );
   const breadcrumbSchema = JSON.stringify(breadcrumbJsonLd(breadcrumbSchemaItems));
-  const introNodes = introHtml ? renderCatalogNodes(introHtml, "music-intro") : null;
+  const introNodes = introHtml ? renderPageContentNodes(introHtml, "music-intro") : null;
   const descriptionNodes = descriptionHtml.flatMap((entry) =>
-    renderCatalogNodes(entry.html, `music-description-${entry.key}`)
+    renderPageContentNodes(entry.html, `music-description-${entry.key}`)
   );
-  const howNodes = howHtml ? renderCatalogNodes(howHtml, "music-how") : null;
+  const howNodes = howHtml ? renderPageContentNodes(howHtml, "music-how") : null;
   const faqNodes = faqHtml.map((faq, idx) => ({
     ...faq,
-    nodes: renderCatalogNodes(faq.a, `music-faq-${idx}`)
+    nodes: renderPageContentNodes(faq.a, `music-faq-${idx}`)
   }));
 
   return (
@@ -790,28 +764,16 @@ export function renderRobloxMusicIdsPage({
         <header className="space-y-4">
           <MusicBreadcrumb items={breadcrumbNavItems} />
           <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{baseTitle}</h1>
-          {formattedUpdated ? (
-            <p className="text-sm text-foreground/80">
-              Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
-              {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
-            </p>
-          ) : null}
+          <UpdatedTimestamp value={updatedDate} />
         </header>
       ) : (
         <header className="space-y-2">
           <MusicBreadcrumb items={breadcrumbNavItems} />
           <h1 className="text-3xl font-semibold text-foreground">{baseTitle}</h1>
-          {formattedUpdated ? (
-            <p className="text-sm text-foreground/80">
-              Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
-              {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
-            </p>
-          ) : null}
-          {refreshedLabel ? (
-            <p className="text-sm text-muted">
-              Updated {refreshedLabel} · Page {currentPage} of {totalPages}
-            </p>
-          ) : null}
+          <UpdatedTimestamp value={updatedDate} />
+          <p className="text-sm text-muted">
+            {refreshedLabel ? `Fresh data ${refreshedLabel} · ` : ""}Page {currentPage} of {totalPages}
+          </p>
         </header>
       )}
 
@@ -845,24 +807,13 @@ export function renderRobloxMusicIdsPage({
 
             {howNodes ? howNodes : null}
 
-            {faqNodes.length ? (
-              <>
-                <section className="rounded-2xl border border-border/60 bg-surface/40 p-6 shadow-sm">
-                  <h2 className="text-lg font-semibold text-foreground">FAQ</h2>
-                  <div className="mt-3 space-y-4">
-                    {faqNodes.map((faq, idx) => (
-                      <div key={`${faq.q}-${idx}`} className="rounded-xl border border-border/40 bg-background/60 p-4">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm font-semibold uppercase tracking-[0.18em] text-muted">Q.</span>
-                          <p className="text-base font-semibold text-foreground">{faq.q}</p>
-                        </div>
-                        {faq.nodes}
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              </>
-            ) : null}
+            <ContentFaq
+              items={faqNodes.map((faq, idx) => ({
+                id: `${faq.q}-${idx}`,
+                question: faq.q,
+                answer: faq.nodes
+              }))}
+            />
           </>
         ) : null}
       </section>

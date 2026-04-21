@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
-import type { ReactNode } from "react";
 import "@/styles/article-content.css";
-import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
-import { processHtmlLinks } from "@/lib/link-utils";
-import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
+import { markdownToPlainText } from "@/lib/markdown";
 import { CHECKLISTS_DESCRIPTION, EVENTS_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import {
   getEventsPageByUniverseId,
@@ -14,11 +10,9 @@ import {
   listPublishedChecklistsByUniverseId
 } from "@/lib/db";
 import {
-  getToolContent,
+  getToolContentWithDevFallback,
   listPublishedTools,
   listPublishedToolsByUniverseId,
-  type ToolContent,
-  type ToolFaqEntry,
   type ToolListEntry
 } from "@/lib/tools";
 import { getUniverseEventSummary } from "@/lib/events-summary";
@@ -34,6 +28,10 @@ import { SocialShare } from "@/components/SocialShare";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 import { splitPathToSlug } from "@/lib/static-params";
+import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
+import { PageBreadcrumb } from "@/components/PageBreadcrumb";
+import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
+import { ContentFaq } from "@/components/ContentFaq";
 
 export const revalidate = 3600;
 
@@ -74,75 +72,6 @@ function summarize(text: string | null | undefined, fallback: string) {
   return normalized || fallback;
 }
 
-function sortDescriptionEntries(description: Record<string, string> | null | undefined) {
-  return Object.entries(description ?? {}).sort((a, b) => {
-    const left = Number.parseInt(a[0], 10);
-    const right = Number.parseInt(b[0], 10);
-    if (Number.isNaN(left) && Number.isNaN(right)) return a[0].localeCompare(b[0]);
-    if (Number.isNaN(left)) return 1;
-    if (Number.isNaN(right)) return -1;
-    return left - right;
-  });
-}
-
-function renderToolNodes(html: string, keyPrefix: string): ReactNode[] {
-  return renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix });
-}
-
-async function fetchTool(code: string): Promise<ToolContent | null> {
-  let tool = await getToolContent(code);
-
-  if (!tool && process.env.NODE_ENV !== "production") {
-    const supabase = supabaseAdmin();
-    const { data } = await supabase
-      .from("tools")
-      .select(
-        "id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, cta_label, cta_url, schema_ld_json, thumb_url, is_published, published_at, created_at, updated_at"
-      )
-      .eq("code", code)
-      .maybeSingle();
-    tool = (data as ToolContent | null) ?? null;
-  }
-
-  return tool ?? null;
-}
-
-async function buildToolContent(code: string): Promise<{
-  tool: ToolContent | null;
-  introHtml: string;
-  howHtml: string;
-  descriptionHtml: Array<{ key: string; html: string }>;
-  faqHtml: Array<{ q: string; a: string }>;
-}> {
-  const tool = await fetchTool(code);
-  const introHtml = tool?.intro_md ? await renderMarkdown(tool.intro_md, { paragraphizeLineBreaks: true }) : "";
-  const howHtml = tool?.how_it_works_md ? await renderMarkdown(tool.how_it_works_md, { paragraphizeLineBreaks: true }) : "";
-
-  const descriptionEntries = sortDescriptionEntries(tool?.description_json ?? {});
-  const descriptionHtml = await Promise.all(
-    descriptionEntries.map(async ([key, value]) => ({
-      key,
-      html: await renderMarkdown(value ?? "", { paragraphizeLineBreaks: true })
-    }))
-  );
-
-  const faqEntries: ToolFaqEntry[] = Array.isArray(tool?.faq_json) ? tool.faq_json : [];
-  const faqHtml = await Promise.all(
-    faqEntries.map(async (entry) => ({
-      q: entry.q,
-      a: await renderMarkdown(entry.a ?? "", { paragraphizeLineBreaks: true })
-    }))
-  );
-
-  return {
-    tool,
-    introHtml,
-    howHtml,
-    descriptionHtml,
-    faqHtml
-  };
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const code = normalizeToolCode(slug ?? []);
@@ -153,7 +82,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const tool = await fetchTool(code);
+  const tool = await getToolContentWithDevFallback(code);
   if (!tool) {
     return {
       alternates: buildAlternates(canonical)
@@ -196,20 +125,18 @@ export default async function ToolFallbackPage({ params }: PageProps) {
     notFound();
   }
 
-  const { tool, introHtml, howHtml, descriptionHtml, faqHtml } = await buildToolContent(code);
+  const tool = await getToolContentWithDevFallback(code);
   if (!tool) {
+    notFound();
+  }
+  const contentHtml = await buildPageContentHtml(tool);
+  if (!contentHtml) {
     notFound();
   }
 
   const canonical = `${SITE_URL.replace(/\/$/, "")}/tools/${code}`;
   const publishedTime = resolvePublishedAt(tool);
   const modifiedTime = resolveModifiedAt(tool);
-  const updatedDateValue = modifiedTime;
-  const updatedDate = updatedDateValue ? new Date(updatedDateValue) : null;
-  const formattedUpdated = updatedDate
-    ? updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
-    : null;
-  const updatedRelativeLabel = updatedDate ? formatDistanceToNow(updatedDate, { addSuffix: true }) : null;
   const universeId = tool.universe_id ?? null;
   const relatedCodes = universeId ? await listGamesWithActiveCountsByUniverseId(universeId, 1) : [];
   const relatedChecklists = universeId ? await listPublishedChecklistsByUniverseId(universeId, 1) : [];
@@ -272,15 +199,15 @@ export default async function ToolFallbackPage({ params }: PageProps) {
       relatedArticles.length > 0 ||
       relatedTools.length > 0 ||
       Boolean(eventsCard));
-  const introNodes = introHtml ? renderToolNodes(introHtml, "tool-intro") : null;
-  const descriptionNodes = descriptionHtml.map((entry) => ({
+  const introNodes = contentHtml.introHtml ? renderPageContentNodes(contentHtml.introHtml, "tool-intro") : null;
+  const descriptionNodes = contentHtml.descriptionHtml.map((entry) => ({
     key: entry.key,
-    nodes: renderToolNodes(entry.html, `tool-description-${entry.key}`)
+    nodes: renderPageContentNodes(entry.html, `tool-description-${entry.key}`)
   }));
-  const howNodes = howHtml ? renderToolNodes(howHtml, "tool-how") : null;
-  const faqNodes = faqHtml.map((faq, idx) => ({
+  const howNodes = contentHtml.howHtml ? renderPageContentNodes(contentHtml.howHtml, "tool-how") : null;
+  const faqNodes = contentHtml.faqHtml.map((faq, idx) => ({
     ...faq,
-    nodes: renderToolNodes(faq.a, `tool-faq-${idx}`)
+    nodes: renderPageContentNodes(faq.a, `tool-faq-${idx}`)
   }));
 
   const faqSchema =
@@ -336,33 +263,17 @@ export default async function ToolFallbackPage({ params }: PageProps) {
   const mainContent = (
     <article className="min-w-0">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <nav aria-label="Breadcrumb" className="mb-6 text-xs uppercase tracking-[0.25em] text-muted">
-        <ol className="flex flex-wrap items-center gap-2">
-          <li className="flex items-center gap-2">
-            <a href="/" className="font-semibold text-muted transition hover:text-accent">
-              Home
-            </a>
-            <span className="text-muted/60">&gt;</span>
-          </li>
-          <li className="flex items-center gap-2">
-            <a href="/tools" className="font-semibold text-muted transition hover:text-accent">
-              Tools
-            </a>
-            <span className="text-muted/60">&gt;</span>
-          </li>
-          <li className="flex items-center gap-2">
-            <span className="font-semibold text-foreground/80">{tool.title ?? "Tool"}</span>
-          </li>
-        </ol>
-      </nav>
+      <PageBreadcrumb
+        className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Tools", href: "/tools" },
+          { label: tool.title ?? "Tool", href: null }
+        ]}
+      />
       <header className="space-y-3">
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{tool.title ?? "Tool"}</h1>
-        {formattedUpdated ? (
-          <p className="text-sm text-foreground/80">
-            Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
-            {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
-          </p>
-        ) : null}
+        <UpdatedTimestamp value={modifiedTime} />
       </header>
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space mt-8 space-y-6">
@@ -379,29 +290,18 @@ export default async function ToolFallbackPage({ params }: PageProps) {
           {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
           {howNodes ? howNodes : null}
 
-          {faqNodes.length ? (
-            <>
-              <section className="rounded-2xl border border-border/60 bg-surface/40 p-6 shadow-sm">
-                <h2 className="text-lg font-semibold text-foreground">FAQ</h2>
-                <div className="mt-3 space-y-4">
-                  {faqNodes.map((faq, idx) => (
-                    <div key={`${faq.q}-${idx}`} className="rounded-xl border border-border/40 bg-background/60 p-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold uppercase tracking-[0.18em] text-muted">Q.</span>
-                        <p className="text-base font-semibold text-foreground">{faq.q}</p>
-                      </div>
-                      <div className="md-copy-scope mt-2">{faq.nodes}</div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            </>
-          ) : null}
+          <ContentFaq
+            items={faqNodes.map((faq, idx) => ({
+              id: `${faq.q}-${idx}`,
+              question: faq.q,
+              answer: faq.nodes
+            }))}
+          />
           </>
         ) : null}
       </section>
 
-      {tool?.id ? (
+      {tool.id ? (
         <div className="mt-10">
           <CommentsSection entityType="tool" entityId={tool.id} />
         </div>

@@ -12,7 +12,7 @@ import {
   loadTrendingMusicIdsPageData
 } from "../page-data";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: `Trending Music IDs | ${SITE_NAME}`,
@@ -34,7 +34,7 @@ export default async function TrendingMusicIdsPage() {
   const canonicalPath = `${BASE_PATH}/trending`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = "Trending Roblox music IDs";
-  const updatedIso = latest ? latest.toISOString() : new Date().toISOString();
+  const updatedIso = latest?.toISOString() ?? null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },

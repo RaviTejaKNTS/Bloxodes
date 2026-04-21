@@ -14,7 +14,7 @@ import {
 } from "../../../page-data";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 const MAX_STATIC_PAGES = 20;
 
 type PageProps = {
@@ -60,7 +60,7 @@ export default async function TrendingMusicIdsPaginatedPage({ params }: PageProp
   const canonicalPath = `${BASE_PATH}/trending/page/${pageNumber}`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = `Trending Roblox music IDs - Page ${pageNumber}`;
-  const updatedIso = latest ? latest.toISOString() : new Date().toISOString();
+  const updatedIso = latest?.toISOString() ?? null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },

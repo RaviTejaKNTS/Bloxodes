@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { notFound } from "next/navigation";
-import { getCatalogPageContentByCodesIncludingDrafts } from "@/lib/catalog";
+import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import {
   BASE_PATH,
@@ -17,7 +17,7 @@ import {
   renderRobloxFreeItemsPage
 } from "../page-data";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 
 type PageProps = {
   params: Promise<{ category: string }>;
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const catalog = await getCatalogPageContentByCodesIncludingDrafts(getCatalogCodeCandidates(category.slug));
+  const catalog = await getCatalogPageContentByCodes(getCatalogCodeCandidates(category.slug));
   const baseTitle = catalog?.seo_title?.trim() || catalog?.title?.trim() || `Free Roblox ${category.label} items`;
   const title = appendItemCountToSeoTitle(baseTitle, category.count);
   const description = resolveFreeItemsDescription(
@@ -80,7 +80,7 @@ export default async function RobloxFreeItemsCategoryPage({ params }: PageProps)
   const [subcategories, pageData, catalog] = await Promise.all([
     loadFreeItemSubcategories(category.label),
     loadFreeItemsPageData(1, { category: category.label }),
-    getCatalogPageContentByCodesIncludingDrafts(getCatalogCodeCandidates(category.slug))
+    getCatalogPageContentByCodes(getCatalogCodeCandidates(category.slug))
   ]);
   const { items, total, totalPages } = pageData;
   const contentHtml = await buildFreeItemsCatalogContentHtml(catalog);

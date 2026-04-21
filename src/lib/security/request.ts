@@ -10,7 +10,7 @@ export function getRequestIp(request: Request): string {
   const candidates = [
     request.headers.get("x-real-ip"),
     request.headers.get("cf-connecting-ip"),
-    request.headers.get("x-vercel-forwarded-for"),
+    request.headers.get("true-client-ip"),
     request.headers.get("x-client-ip")
   ];
 

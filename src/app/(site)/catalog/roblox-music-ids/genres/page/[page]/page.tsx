@@ -13,7 +13,7 @@ import {
 } from "../../../page-data";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 const MAX_STATIC_PAGES = 20;
 
 type PageProps = {
@@ -52,7 +52,7 @@ export default async function MusicIdGenresPaginatedPage({ params }: PageProps) 
   const canonicalPath = `${BASE_PATH}/genres/page/${pageNumber}`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = `Roblox music ID genres - Page ${pageNumber}`;
-  const updatedIso = new Date().toISOString();
+  const updatedIso = null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },

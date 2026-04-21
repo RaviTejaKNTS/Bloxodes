@@ -1,15 +1,15 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
-import { processHtmlLinks } from "@/lib/link-utils";
-import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
 import { ColorCodesGrid, type ColorCodeItem } from "./ColorCodesGrid";
 import { HexColorPicker } from "./HexColorPicker";
+import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
+import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
+import { ContentFaq } from "@/components/ContentFaq";
+import { renderPageContentNodes } from "@/lib/page-content";
 
 export const BASE_PATH = "/catalog/roblox-color-codes";
 export const CANONICAL = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
@@ -38,14 +38,7 @@ export type CatalogContentHtml = {
   ctaUrl?: string | null;
 };
 
-export type BreadcrumbItem = {
-  label: string;
-  href?: string | null;
-};
-
-function renderCatalogNodes(html: string, keyPrefix: string): ReactNode[] {
-  return renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix });
-}
+export type BreadcrumbItem = PageBreadcrumbItem;
 
 export async function loadRobloxColorCodesPageData(): Promise<ColorCodesDataset> {
   try {
@@ -65,24 +58,7 @@ export async function loadRobloxColorCodesPageData(): Promise<ColorCodesDataset>
 }
 
 export function ColorCodesBreadcrumb({ items, className }: { items: BreadcrumbItem[]; className?: string }) {
-  return (
-    <nav aria-label="Breadcrumb" className={className ?? "text-xs uppercase tracking-[0.25em] text-muted"}>
-      <ol className="flex flex-wrap items-center gap-2">
-        {items.map((item, index) => (
-          <li key={`${item.label}-${index}`} className="flex items-center gap-2">
-            {item.href ? (
-              <Link href={item.href} className="font-semibold text-muted transition hover:text-accent">
-                {item.label}
-              </Link>
-            ) : (
-              <span className="font-semibold text-foreground/80">{item.label}</span>
-            )}
-            {index < items.length - 1 ? <span className="text-muted/60">&gt;</span> : null}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
+  return <PageBreadcrumb items={items} className={className} />;
 }
 
 function buildColorCodeItemListSchema({
@@ -148,22 +124,18 @@ export function renderRobloxColorCodesPage({
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
   const faqHtml = contentHtml?.faqHtml ?? [];
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
-  const formattedUpdated = updatedDate
-    ? updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
-    : null;
-  const updatedRelativeLabel = updatedDate ? formatDistanceToNow(updatedDate, { addSuffix: true }) : null;
-  const introNodes = introHtml ? renderCatalogNodes(introHtml, "color-intro") : null;
+  const introNodes = introHtml ? renderPageContentNodes(introHtml, "color-intro") : null;
   const descriptionNodes = descriptionHtml.flatMap((entry) =>
-    renderCatalogNodes(entry.html, `color-description-${entry.key}`)
+    renderPageContentNodes(entry.html, `color-description-${entry.key}`)
   );
-  const howNodes = howHtml ? renderCatalogNodes(howHtml, "color-how") : null;
+  const howNodes = howHtml ? renderPageContentNodes(howHtml, "color-how") : null;
   const faqNodes = faqHtml.map((faq, idx) => ({
     ...faq,
-    nodes: renderCatalogNodes(faq.a, `color-faq-${idx}`)
+    nodes: renderPageContentNodes(faq.a, `color-faq-${idx}`)
   }));
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
   const description = "Browse every official Roblox BrickColor in one catalog with exact swatches, numbers, RGB values, and copy-ready color data.";
-  const updatedIso = updatedDate ? updatedDate.toISOString() : new Date().toISOString();
+  const updatedIso = updatedDate?.toISOString();
   const pageSchema = JSON.stringify(
     webPageJsonLd({
       siteUrl: SITE_URL,
@@ -204,12 +176,7 @@ export function renderRobloxColorCodesPage({
           ]}
         />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{baseTitle}</h1>
-        {formattedUpdated ? (
-          <p className="text-sm text-foreground/80">
-            Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
-            {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
-          </p>
-        ) : null}
+        <UpdatedTimestamp value={updatedDate} />
       </header>
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
@@ -324,22 +291,13 @@ export function renderRobloxColorCodesPage({
 
             {howNodes ? howNodes : null}
 
-            {faqNodes.length ? (
-              <section className="rounded-2xl border border-border/60 bg-surface/40 p-6 shadow-sm">
-                <h2 className="text-lg font-semibold text-foreground">FAQ</h2>
-                <div className="mt-3 space-y-4">
-                  {faqNodes.map((faq, idx) => (
-                    <div key={`${faq.q}-${idx}`} className="rounded-xl border border-border/40 bg-background/60 p-4">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold uppercase tracking-[0.18em] text-muted">Q.</span>
-                        <p className="text-base font-semibold text-foreground">{faq.q}</p>
-                      </div>
-                      {faq.nodes}
-                    </div>
-                  ))}
-                </div>
-              </section>
-            ) : null}
+            <ContentFaq
+              items={faqNodes.map((faq, idx) => ({
+                id: `${faq.q}-${idx}`,
+                question: faq.q,
+                answer: faq.nodes
+              }))}
+            />
           </>
         ) : null}
       </section>

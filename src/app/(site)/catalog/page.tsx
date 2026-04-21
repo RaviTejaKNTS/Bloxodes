@@ -4,8 +4,9 @@ import Link from "next/link";
 import { CatalogCard } from "@/components/CatalogCard";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
+import { formatUpdatedLabel } from "@/lib/updated-label";
 
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: `Roblox Catalogs | ${SITE_NAME}`,
@@ -42,15 +43,6 @@ function latestTimestamp(values: Array<number | null>): number | null {
     }
   }
   return latest;
-}
-
-function formatUpdatedLabel(value: string | null) {
-  if (!value) return null;
-  try {
-    return formatDistanceToNow(new Date(value), { addSuffix: true });
-  } catch {
-    return null;
-  }
 }
 
 function summarizeCatalogDescription(value: string | null | undefined): string {

@@ -4,6 +4,11 @@ Scope: `src/app/(site)`.
 
 This folder contains the public Bloxodes experience: content hubs, detail pages, catalog sections, tools, policy pages, and route-family helpers.
 
+Scoped route-family guides:
+
+- `src/app/(site)/catalog/AGENTS.md`
+- `src/app/(site)/tools/AGENTS.md`
+
 ## Route Families
 
 - Core content: home, codes, articles, lists, checklists, events, quizzes, wiki pages, authors.
@@ -18,6 +23,7 @@ This folder contains the public Bloxodes experience: content hubs, detail pages,
 - Keep heavy data work out of the page file. Route files should mostly compose helpers and present metadata.
 - Reuse shared components such as `GameCard`, `ArticleCard`, `PagePagination`, `CommentsSection`, and route-specific client widgets.
 - When interactive UI is required, keep a server wrapper page and isolate client logic in a colocated client component.
+- For catalog and tool routes, prefer the shared page primitives for breadcrumb, freshness, FAQ, and rich-content rendering.
 
 ## SEO and Structured Data
 
@@ -47,3 +53,4 @@ This folder contains the public Bloxodes experience: content hubs, detail pages,
 2. Update `src/lib/catalog.ts`, `src/lib/tools.ts`, `src/lib/db.ts`, or the relevant dataset parser.
 3. Keep route slugs, API filtering, and revalidation behavior aligned.
 4. If the page is commentable, wire it through the existing comments flow instead of inventing a new one.
+5. Follow the scoped workflow in `catalog/AGENTS.md` or `tools/AGENTS.md`.

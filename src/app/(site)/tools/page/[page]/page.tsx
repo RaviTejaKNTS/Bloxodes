@@ -4,7 +4,7 @@ import { loadToolsPageData, renderToolsPage } from "../../page-data";
 import { TOOLS_DESCRIPTION, buildAlternates } from "@/lib/seo";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 21600; // 6 hours
+export const revalidate = 3600;
 const MAX_STATIC_PAGES = 10;
 
 type PageProps = {
@@ -36,7 +36,7 @@ export default async function ToolsPaginatedPage({ params }: PageProps) {
     notFound();
   }
 
-  const { tools, total, totalPages } = await loadToolsPageData(pageNumber);
+  const { tools, total, totalPages, latestUpdatedAt } = await loadToolsPageData(pageNumber);
   if (pageNumber > totalPages) {
     notFound();
   }
@@ -46,6 +46,7 @@ export default async function ToolsPaginatedPage({ params }: PageProps) {
     total,
     totalPages,
     currentPage: pageNumber,
-    showHero: pageNumber === 1
+    showHero: pageNumber === 1,
+    latestUpdatedAt
   });
 }

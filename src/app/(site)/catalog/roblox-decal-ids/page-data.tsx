@@ -1,15 +1,16 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import Image from "next/image";
-import type { ReactNode } from "react";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { breadcrumbJsonLd, CATALOG_DESCRIPTION, SITE_URL, webPageJsonLd } from "@/lib/seo";
-import { processHtmlLinks } from "@/lib/link-utils";
-import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
+import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
+import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
+import { ContentFaq } from "@/components/ContentFaq";
+import { renderPageContentNodes } from "@/lib/page-content";
+import { PagePagination } from "@/components/PagePagination";
 
 const PAGE_SIZE = 24;
 
@@ -47,20 +48,13 @@ export type CatalogContentHtml = {
     ctaUrl?: string | null;
 };
 
-function renderCatalogNodes(html: string, keyPrefix: string): ReactNode[] {
-    return renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix });
-}
-
 type PageData = {
     decals: DecalRow[];
     total: number;
     totalPages: number;
 };
 
-export type BreadcrumbItem = {
-    label: string;
-    href?: string | null;
-};
+export type BreadcrumbItem = PageBreadcrumbItem;
 
 const DECAL_DATA_FILE = path.join(process.cwd(), "data", "decal-ids", "enriched-decal-ids.json");
 
@@ -107,24 +101,7 @@ function formatDate(dateString: string | undefined): string | null {
 }
 
 export function DecalBreadcrumb({ items, className }: { items: BreadcrumbItem[]; className?: string }) {
-    return (
-        <nav aria-label="Breadcrumb" className={className ?? "text-xs uppercase tracking-[0.25em] text-muted"}>
-            <ol className="flex flex-wrap items-center gap-2">
-                {items.map((item, index) => (
-                    <li key={`${item.label}-${index}`} className="flex items-center gap-2">
-                        {item.href ? (
-                            <Link href={item.href} className="font-semibold text-muted transition hover:text-accent">
-                                {item.label}
-                            </Link>
-                        ) : (
-                            <span className="font-semibold text-foreground/80">{item.label}</span>
-                        )}
-                        {index < items.length - 1 ? <span className="text-muted/60">&gt;</span> : null}
-                    </li>
-                ))}
-            </ol>
-        </nav>
-    );
+    return <PageBreadcrumb items={items} className={className} />;
 }
 
 export function DecalIdGrid({ decals }: { decals: DecalRow[] }) {
@@ -275,100 +252,6 @@ export function buildDecalItemListSchema({
     });
 }
 
-type PaginationProps = {
-    currentPage: number;
-    totalPages: number;
-    basePath: string;
-};
-
-export function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {
-    if (totalPages <= 1) return null;
-
-    const pageNumbers: (number | string)[] = [];
-    const maxVisible = 7;
-
-    if (totalPages <= maxVisible) {
-        for (let i = 1; i <= totalPages; i++) {
-            pageNumbers.push(i);
-        }
-    } else {
-        pageNumbers.push(1);
-        if (currentPage > 3) pageNumbers.push("...");
-
-        const start = Math.max(2, currentPage - 1);
-        const end = Math.min(totalPages - 1, currentPage + 1);
-        for (let i = start; i <= end; i++) {
-            pageNumbers.push(i);
-        }
-
-        if (currentPage < totalPages - 2) pageNumbers.push("...");
-        pageNumbers.push(totalPages);
-    }
-
-    return (
-        <nav aria-label="Pagination" className="flex items-center justify-center gap-2">
-            {/* Previous Button */}
-            {currentPage > 1 ? (
-                <Link
-                    href={currentPage === 2 ? basePath : `${basePath}/page/${currentPage - 1}`}
-                    className="rounded-xl border border-border/60 bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:bg-accent/10"
-                >
-                    Previous
-                </Link>
-            ) : (
-                <span className="rounded-xl border border-border/30 bg-surface/50 px-4 py-2 text-sm font-semibold text-muted/50">
-                    Previous
-                </span>
-            )}
-
-            {/* Page Numbers */}
-            <div className="flex items-center gap-1">
-                {pageNumbers.map((page, index) => {
-                    if (page === "...") {
-                        return (
-                            <span key={`ellipsis-${index}`} className="px-2 text-muted">
-                                ...
-                            </span>
-                        );
-                    }
-
-                    const pageNum = page as number;
-                    const isActive = pageNum === currentPage;
-                    const href = pageNum === 1 ? basePath : `${basePath}/page/${pageNum}`;
-
-                    return (
-                        <Link
-                            key={pageNum}
-                            href={href}
-                            aria-current={isActive ? "page" : undefined}
-                            className={`min-w-[40px] rounded-xl border px-3 py-2 text-center text-sm font-semibold transition ${isActive
-                                ? "border-accent bg-accent text-white"
-                                : "border-border/60 bg-surface text-foreground hover:border-accent hover:bg-accent/10"
-                                }`}
-                        >
-                            {pageNum}
-                        </Link>
-                    );
-                })}
-            </div>
-
-            {/* Next Button */}
-            {currentPage < totalPages ? (
-                <Link
-                    href={`${basePath}/page/${currentPage + 1}`}
-                    className="rounded-xl border border-border/60 bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:bg-accent/10"
-                >
-                    Next
-                </Link>
-            ) : (
-                <span className="rounded-xl border border-border/30 bg-surface/50 px-4 py-2 text-sm font-semibold text-muted/50">
-                    Next
-                </span>
-            )}
-        </nav>
-    );
-}
-
 export function renderRobloxDecalIdsPage({
     decals,
     total,
@@ -389,15 +272,13 @@ export function renderRobloxDecalIdsPage({
     const howHtml = contentHtml?.howHtml?.trim() ? contentHtml?.howHtml : "";
     const faqHtml = contentHtml?.faqHtml ?? [];
     const baseTitle = contentHtml?.title?.trim() ? contentHtml.title.trim() : "Roblox Decal IDs";
-    const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : new Date();
-    const formattedUpdated = updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-    const updatedRelativeLabel = formatDistanceToNow(updatedDate, { addSuffix: true });
+    const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : null;
     const canonicalPath = currentPage > 1 ? `${BASE_PATH}/page/${currentPage}` : BASE_PATH;
     const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
     const pageTitle = currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle;
     const description = CATALOG_DESCRIPTION;
     const image = `${SITE_URL}/og-image.png`;
-    const updatedIso = updatedDate.toISOString();
+    const updatedIso = updatedDate ? updatedDate.toISOString() : undefined;
     const startIndex = (currentPage - 1) * PAGE_SIZE;
 
     const breadcrumbNavItems: BreadcrumbItem[] = [
@@ -425,14 +306,14 @@ export function renderRobloxDecalIdsPage({
 
     const hasDetails =
         Boolean(descriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length);
-    const introNodes = introHtml ? renderCatalogNodes(introHtml, "decal-intro") : null;
+    const introNodes = introHtml ? renderPageContentNodes(introHtml, "decal-intro") : null;
     const descriptionNodes = descriptionHtml.flatMap((entry) =>
-        renderCatalogNodes(entry.html, `decal-description-${entry.key}`)
+        renderPageContentNodes(entry.html, `decal-description-${entry.key}`)
     );
-    const howNodes = howHtml ? renderCatalogNodes(howHtml, "decal-how") : null;
+    const howNodes = howHtml ? renderPageContentNodes(howHtml, "decal-how") : null;
     const faqNodes = faqHtml.map((faq, idx) => ({
         ...faq,
-        nodes: renderCatalogNodes(faq.a, `decal-faq-${idx}`)
+        nodes: renderPageContentNodes(faq.a, `decal-faq-${idx}`)
     }));
 
     const listSchema = buildDecalItemListSchema({
@@ -465,10 +346,7 @@ export function renderRobloxDecalIdsPage({
                 <header className="space-y-4">
                     <DecalBreadcrumb items={breadcrumbNavItems} />
                     <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{baseTitle}</h1>
-                    <p className="text-sm text-foreground/80">
-                        Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
-                        {updatedRelativeLabel ? <span> ({updatedRelativeLabel})</span> : null}
-                    </p>
+                    <UpdatedTimestamp value={updatedDate} />
                     <p className="text-lg text-muted">
                         Browse {total.toLocaleString()} verified Roblox decal IDs with visual previews. Copy any image ID instantly.
                     </p>
@@ -491,7 +369,12 @@ export function renderRobloxDecalIdsPage({
                 <DecalIdGrid decals={decals} />
 
                 {totalPages > 1 ? (
-                    <Pagination currentPage={currentPage} totalPages={totalPages} basePath={BASE_PATH} />
+                    <PagePagination
+                        className="flex items-center justify-center gap-2"
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        basePath={BASE_PATH}
+                    />
                 ) : null}
 
                 <CatalogAdSlot />
@@ -502,26 +385,13 @@ export function renderRobloxDecalIdsPage({
 
                         {howNodes ? howNodes : null}
 
-                        {faqNodes.length ? (
-                            <>
-                                <div className="space-y-4">
-                                    <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
-                                    <div className="space-y-4">
-                                        {faqNodes.map((faq, index) => (
-                                            <details
-                                                key={index}
-                                                className="group rounded-2xl border border-border/60 bg-surface p-5 transition hover:border-accent/60"
-                                            >
-                                                <summary className="cursor-pointer text-lg font-semibold text-foreground">
-                                                    {faq.q}
-                                                </summary>
-                                                {faq.nodes}
-                                            </details>
-                                        ))}
-                                    </div>
-                                </div>
-                            </>
-                        ) : null}
+                        <ContentFaq
+                            items={faqNodes.map((faq, idx) => ({
+                                id: `${faq.q}-${idx}`,
+                                question: faq.q,
+                                answer: faq.nodes
+                            }))}
+                        />
                     </>
                 ) : null}
             </section>

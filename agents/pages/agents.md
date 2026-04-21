@@ -43,6 +43,7 @@ This file is the route-family inventory for quick scanning.
 | Area | Routes | Files / Notes |
 | --- | --- | --- |
 | Catalog hub | `/catalog` | `src/app/(site)/catalog/page.tsx` |
+| Catalog workflow guide | all catalog routes | `src/app/(site)/catalog/AGENTS.md` |
 | Free Roblox items | `/catalog/free-roblox-items`, paginated routes, category routes, subcategory routes, and mirrored `categories/*` routes | `src/app/(site)/catalog/free-roblox-items/*`, helpers in `page-data.tsx`, client browser in `FreeItemsBrowser.tsx` |
 | Roblox music IDs | `/catalog/roblox-music-ids`, `/page/[page]`, `/trending`, `/genres`, `/artists`, and their paginated/detail routes | `src/app/(site)/catalog/roblox-music-ids/*`, client browser in `MusicIdsBrowser.tsx`, shared helpers in `page-data.tsx` |
 | Roblox color codes | `/catalog/roblox-color-codes` | `src/app/(site)/catalog/roblox-color-codes/*`, data helper in `page-data.tsx` |
@@ -56,6 +57,7 @@ This file is the route-family inventory for quick scanning.
 | Area | Routes | Files / Notes |
 | --- | --- | --- |
 | Tools hub | `/tools`, `/tools/page/[page]` | `src/app/(site)/tools/*`, shared helpers in `page-data.tsx` |
+| Tools workflow guide | all tool routes | `src/app/(site)/tools/AGENTS.md` |
 | Roblox ID extractor | `/tools/roblox-id-extractor` | `src/app/(site)/tools/roblox-id-extractor/*`, client in `RobloxIdExtractorClient.tsx` |
 | Robux to USD | `/tools/robux-to-usd-calculator` | `src/app/(site)/tools/robux-to-usd-calculator/*`, static tables in `robux-bundles.ts` and `robux-plans.ts` |
 | DevEx | `/tools/roblox-devex-calculator` | `src/app/(site)/tools/roblox-devex-calculator/*` |

@@ -1,9 +1,9 @@
-import { formatDistanceToNow } from "date-fns";
 import { ToolCard } from "@/components/ToolCard";
-import { listPublishedToolsPage, type ToolListEntry } from "@/lib/tools";
+import { listPublishedTools, listPublishedToolsPage, type ToolListEntry } from "@/lib/tools";
 import { TOOLS_DESCRIPTION, SITE_URL } from "@/lib/seo";
 import { PagePagination } from "@/components/PagePagination";
 import { resolveModifiedAt } from "@/lib/content-dates";
+import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 
 const PAGE_SIZE = 20;
 
@@ -11,12 +11,24 @@ type PageData = {
   tools: ToolListEntry[];
   total: number;
   totalPages: number;
+  latestUpdatedAt: string | null;
 };
 
 async function loadPage(pageNumber: number): Promise<PageData> {
-  const { tools, total } = await listPublishedToolsPage(pageNumber, PAGE_SIZE);
+  const [{ tools, total }, allTools] = await Promise.all([
+    listPublishedToolsPage(pageNumber, PAGE_SIZE),
+    listPublishedTools()
+  ]);
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-  return { tools, total, totalPages };
+  const latestUpdatedAt =
+    allTools.reduce<string | null>((latestValue, tool) => {
+      const candidate = resolveModifiedAt(tool);
+      if (!candidate) return latestValue;
+      if (!latestValue) return candidate;
+      return new Date(candidate) > new Date(latestValue) ? candidate : latestValue;
+    }, null) ?? null;
+
+  return { tools, total, totalPages, latestUpdatedAt };
 }
 
 function ToolsPageView({
@@ -24,26 +36,16 @@ function ToolsPageView({
   total,
   totalPages,
   currentPage,
-  showHero
+  showHero,
+  latestUpdatedAt
 }: {
   tools: ToolListEntry[];
   total: number;
   totalPages: number;
   currentPage: number;
   showHero: boolean;
+  latestUpdatedAt: string | null;
 }) {
-  const latest = tools.reduce<Date | null>((latestDate, tool) => {
-    const candidate = resolveModifiedAt(tool);
-    if (!candidate) return latestDate;
-    const candidateDate = new Date(candidate);
-    if (!latestDate || candidateDate > latestDate) return candidateDate;
-    return latestDate;
-  }, null);
-  const formattedUpdated = latest
-    ? latest.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
-    : null;
-  const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
-
   return (
     <div className="space-y-10">
       {showHero ? (
@@ -52,12 +54,7 @@ function ToolsPageView({
           <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
             Roblox tools and calculators to plan faster
           </h1>
-          {formattedUpdated ? (
-            <p className="text-sm text-foreground/80">
-              Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
-              {refreshedLabel ? <span>{' '}({refreshedLabel})</span> : null}
-            </p>
-          ) : null}
+          <UpdatedTimestamp value={latestUpdatedAt} />
           <p className="max-w-2xl text-base text-muted md:text-lg">
             Currency converters, planning helpers, and utilities built to stay current with our latest data and guides.
           </p>
@@ -65,9 +62,9 @@ function ToolsPageView({
             <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
               {total} tools published
             </span>
-            {refreshedLabel ? (
+            {latestUpdatedAt ? (
               <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-                Last updated {refreshedLabel}
+                Freshness based on the latest published tool
               </span>
             ) : null}
           </div>
@@ -76,15 +73,8 @@ function ToolsPageView({
         <header className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/80">Roblox Utilities</p>
           <h1 className="text-3xl font-semibold text-foreground">Roblox utilities</h1>
-          {formattedUpdated ? (
-            <p className="text-sm text-foreground/80">
-              Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
-              {refreshedLabel ? <span>{' '}({refreshedLabel})</span> : null}
-            </p>
-          ) : null}
-          {refreshedLabel ? (
-            <p className="text-sm text-muted">Updated {refreshedLabel} · Page {currentPage} of {totalPages}</p>
-          ) : null}
+          <UpdatedTimestamp value={latestUpdatedAt} />
+          <p className="text-sm text-muted">Page {currentPage} of {totalPages}</p>
         </header>
       )}
 

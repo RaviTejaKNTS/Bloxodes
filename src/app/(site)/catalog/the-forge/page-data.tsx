@@ -1,14 +1,14 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { ForgeCatalogView } from "./ForgeCatalogView";
-import { processHtmlLinks } from "@/lib/link-utils";
-import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
+import { PageBreadcrumb } from "@/components/PageBreadcrumb";
+import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
+import { ContentFaq } from "@/components/ContentFaq";
+import { renderPageContentNodes } from "@/lib/page-content";
 
 const FALLBACK_IMAGE = "/og-image.png";
 
@@ -25,10 +25,6 @@ export type CatalogContentHtml = {
   ctaLabel?: string | null;
   ctaUrl?: string | null;
 };
-
-function renderCatalogNodes(html: string, keyPrefix: string): ReactNode[] {
-  return renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix });
-}
 
 export type ForgeCatalogConfig = {
   slug: string;
@@ -489,24 +485,7 @@ export function ForgeCatalogNav({ activeSlug }: { activeSlug: string }) {
 }
 
 export function ForgeBreadcrumb({ items, className }: { items: Array<{ label: string; href?: string | null }>; className?: string }) {
-  return (
-    <nav aria-label="Breadcrumb" className={className ?? "text-xs uppercase tracking-[0.25em] text-muted"}>
-      <ol className="flex flex-wrap items-center gap-2">
-        {items.map((item, index) => (
-          <li key={`${item.label}-${index}`} className="flex items-center gap-2">
-            {item.href ? (
-              <Link href={item.href} className="font-semibold text-muted transition hover:text-accent">
-                {item.label}
-              </Link>
-            ) : (
-              <span className="font-semibold text-foreground/80">{item.label}</span>
-            )}
-            {index < items.length - 1 ? <span className="text-muted/60">&gt;</span> : null}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
+  return <PageBreadcrumb items={items} className={className} />;
 }
 
 function ForgeSectionNav({ sections }: { sections: Array<{ id: string; label: string; count: number }> }) {
@@ -584,13 +563,9 @@ export function renderForgeCatalogPage({
   const contentUpdatedAt = contentHtml?.updatedAt ?? null;
   const updatedAt = dataUpdatedAt ?? contentUpdatedAt;
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
-  const formattedUpdated = updatedDate
-    ? updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
-    : null;
-  const updatedRelativeLabel = updatedDate ? formatDistanceToNow(updatedDate, { addSuffix: true }) : null;
   const canonicalPath = buildForgeCatalogPath(config.slug);
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const updatedIso = updatedDate ? updatedDate.toISOString() : new Date().toISOString();
+  const updatedIso = updatedDate?.toISOString() ?? null;
   const groupedSections = buildGroupedSections(items, config.groupKey);
   const sectionNav = groupedSections.map((section) => ({
     id: section.id,
@@ -635,14 +610,14 @@ export function renderForgeCatalogPage({
       updatedAt: updatedIso
     })
   );
-  const introNodes = introHtml ? renderCatalogNodes(introHtml, "forge-intro") : null;
+  const introNodes = introHtml ? renderPageContentNodes(introHtml, "forge-intro") : null;
   const descriptionNodes = descriptionHtml.flatMap((entry) =>
-    renderCatalogNodes(entry.html, `forge-description-${entry.key}`)
+    renderPageContentNodes(entry.html, `forge-description-${entry.key}`)
   );
-  const howNodes = howHtml ? renderCatalogNodes(howHtml, "forge-how") : null;
+  const howNodes = howHtml ? renderPageContentNodes(howHtml, "forge-how") : null;
   const faqNodes = faqHtml.map((faq, idx) => ({
     ...faq,
-    nodes: renderCatalogNodes(faq.a, `forge-faq-${idx}`)
+    nodes: renderPageContentNodes(faq.a, `forge-faq-${idx}`)
   }));
 
   return (
@@ -650,12 +625,7 @@ export function renderForgeCatalogPage({
       <header className="space-y-4">
         <ForgeBreadcrumb items={breadcrumbNavItems} />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{pageTitle}</h1>
-        {formattedUpdated ? (
-          <p className="text-sm text-foreground/80">
-            Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
-            {updatedRelativeLabel ? <span>{" "}({updatedRelativeLabel})</span> : null}
-          </p>
-        ) : null}
+        <UpdatedTimestamp value={updatedDate} />
       </header>
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
@@ -675,24 +645,13 @@ export function renderForgeCatalogPage({
 
             {howNodes ? howNodes : null}
 
-            {faqNodes.length ? (
-              <>
-                <div className="space-y-4">
-                  <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
-                  <div className="space-y-4">
-                    {faqNodes.map((faq, index) => (
-                      <details
-                        key={index}
-                        className="group rounded-2xl border border-border/60 bg-surface p-5 transition hover:border-accent/60"
-                      >
-                        <summary className="cursor-pointer text-lg font-semibold text-foreground">{faq.q}</summary>
-                        {faq.nodes}
-                      </details>
-                    ))}
-                  </div>
-                </div>
-              </>
-            ) : null}
+            <ContentFaq
+              items={faqNodes.map((faq, idx) => ({
+                id: `${faq.q}-${idx}`,
+                question: faq.q,
+                answer: faq.nodes
+              }))}
+            />
           </>
         ) : null}
 

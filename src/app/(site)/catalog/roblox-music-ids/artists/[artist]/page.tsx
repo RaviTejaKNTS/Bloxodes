@@ -14,7 +14,7 @@ import {
   loadArtistOptionBySlug
 } from "../../page-data";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: `Artist Music IDs | ${SITE_NAME}`,
@@ -50,7 +50,7 @@ export default async function ArtistMusicIdsPage({ params }: PageProps) {
   const canonicalPath = `${BASE_PATH}/artists/${artist.slug}`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = `${artist.label} Roblox music IDs`;
-  const updatedIso = latest ? latest.toISOString() : new Date().toISOString();
+  const updatedIso = latest?.toISOString() ?? null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },

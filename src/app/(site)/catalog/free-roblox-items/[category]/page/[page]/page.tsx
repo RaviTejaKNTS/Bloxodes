@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { notFound } from "next/navigation";
-import { getCatalogPageContentByCodesIncludingDrafts } from "@/lib/catalog";
+import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import {
   BASE_PATH,
   appendItemCountToSeoTitle,
   buildFreeItemCatalogCodeCandidates,
   buildFreeItemCategoryPath,
+  buildFreeItemsCatalogContentHtml,
   loadFreeItemCategories,
   loadFreeItemCategoryBySlug,
   loadFreeItemSubcategories,
@@ -16,7 +17,7 @@ import {
   renderRobloxFreeItemsPage
 } from "../../../page-data";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 
 type PageProps = {
   params: Promise<{ category: string; page: string }>;
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const pageNumber = Number.parseInt(page, 10);
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
-  const catalog = await getCatalogPageContentByCodesIncludingDrafts(getCatalogCodeCandidates(category.slug));
+  const catalog = await getCatalogPageContentByCodes(getCatalogCodeCandidates(category.slug));
   const baseTitle = catalog?.seo_title?.trim() || catalog?.title?.trim() || `Free Roblox ${category.label} items`;
   const title = `${appendItemCountToSeoTitle(baseTitle, category.count)} - Page ${safePageNumber}`;
   const description = resolveFreeItemsDescription(
@@ -93,9 +94,10 @@ export default async function RobloxFreeItemsCategoryPaginatedPage({ params }: P
   const [subcategories, pageData, catalog] = await Promise.all([
     loadFreeItemSubcategories(category.label),
     loadFreeItemsPageData(safePageNumber, { category: category.label }),
-    getCatalogPageContentByCodesIncludingDrafts(getCatalogCodeCandidates(category.slug))
+    getCatalogPageContentByCodes(getCatalogCodeCandidates(category.slug))
   ]);
   const { items, total, totalPages } = pageData;
+  const contentHtml = await buildFreeItemsCatalogContentHtml(catalog);
 
   const pageTitle = catalog?.title?.trim() || `Free Roblox ${category.label} items`;
   const basePath = buildFreeItemCategoryPath(category.slug);
@@ -120,11 +122,6 @@ export default async function RobloxFreeItemsCategoryPaginatedPage({ params }: P
     categorySlug: category.slug,
     categoryLabel: category.label,
     subcategories,
-    contentHtml: catalog
-      ? {
-          id: catalog.id ?? null,
-          title: catalog.title ?? null
-        }
-      : null
+    contentHtml
   });
 }

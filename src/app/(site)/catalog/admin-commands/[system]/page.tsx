@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { ReactNode } from "react";
 import "@/styles/article-content.css";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { renderMarkdown } from "@/lib/markdown";
-import { processHtmlLinks } from "@/lib/link-utils";
-import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { ADMIN_COMMANDS_DESCRIPTION, resolveSeoTitle, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { getAdminCommandSystems, loadAdminCommandDataset, loadAdminCommandDatasets } from "@/lib/admin-commands";
+import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
+import { PageBreadcrumb } from "@/components/PageBreadcrumb";
+import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
+import { ContentFaq } from "@/components/ContentFaq";
 
 export const revalidate = 86400;
 
@@ -57,22 +56,6 @@ type CommandItem = {
   description: string | null;
 };
 
-type CatalogContentHtml = {
-  id?: string | null;
-  title: string | null;
-  introHtml: string;
-  howHtml: string;
-  descriptionHtml: Array<{ key: string; html: string }>;
-  faqHtml: Array<{ q: string; a: string }>;
-  ctaLabel: string | null;
-  ctaUrl: string | null;
-  updatedAt: string | null;
-};
-
-function renderCatalogNodes(html: string, keyPrefix: string): ReactNode[] {
-  return renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix });
-}
-
 export function generateStaticParams() {
   return getAdminCommandSystems().map((system) => ({ system: system.slug }));
 }
@@ -84,17 +67,6 @@ function slugify(value: string): string {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .trim();
-}
-
-function sortDescriptionEntries(description: Record<string, string> | null | undefined) {
-  return Object.entries(description ?? {}).sort((a, b) => {
-    const left = Number.parseInt(a[0], 10);
-    const right = Number.parseInt(b[0], 10);
-    if (Number.isNaN(left) && Number.isNaN(right)) return a[0].localeCompare(b[0]);
-    if (Number.isNaN(left)) return 1;
-    if (Number.isNaN(right)) return -1;
-    return left - right;
-  });
 }
 
 function normalizeTextValue(value: string | undefined): string {
@@ -336,43 +308,10 @@ function getCatalogCodeCandidates(systemSlug: string): string[] {
   return [`admin-commands/${systemSlug}`];
 }
 
-async function buildCatalogContent(systemSlug: string): Promise<{ contentHtml: CatalogContentHtml | null }> {
+async function buildCatalogContent(systemSlug: string) {
   const catalog = await getCatalogPageContentByCodes(getCatalogCodeCandidates(systemSlug));
-  if (!catalog) {
-    return { contentHtml: null };
-  }
-
-  const introHtml = catalog.intro_md ? await renderMarkdown(catalog.intro_md, { paragraphizeLineBreaks: true }) : "";
-  const howHtml = catalog.how_it_works_md ? await renderMarkdown(catalog.how_it_works_md, { paragraphizeLineBreaks: true }) : "";
-
-  const descriptionEntries = sortDescriptionEntries(catalog.description_json ?? {});
-  const descriptionHtml = await Promise.all(
-    descriptionEntries.map(async ([key, value]) => ({
-      key,
-      html: await renderMarkdown(value ?? "", { paragraphizeLineBreaks: true })
-    }))
-  );
-
-  const faqEntries = Array.isArray(catalog.faq_json) ? catalog.faq_json : [];
-  const faqHtml = await Promise.all(
-    faqEntries.map(async (entry) => ({
-      q: entry.q,
-      a: await renderMarkdown(entry.a ?? "", { paragraphizeLineBreaks: true })
-    }))
-  );
-
   return {
-    contentHtml: {
-      id: catalog.id ?? null,
-      title: catalog.title ?? null,
-      introHtml,
-      howHtml,
-      descriptionHtml,
-      faqHtml,
-      ctaLabel: catalog.cta_label ?? null,
-      ctaUrl: catalog.cta_url ?? null,
-      updatedAt: catalog.content_updated_at ?? catalog.updated_at ?? catalog.published_at ?? catalog.created_at ?? null
-    }
+    contentHtml: await buildPageContentHtml(catalog)
   };
 }
 
@@ -434,21 +373,16 @@ export default async function AdminCommandSystemPage({ params }: { params: Promi
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const faqHtml = contentHtml?.faqHtml ?? [];
-  const introNodes = introHtml ? renderCatalogNodes(introHtml, "admin-system-intro") : null;
+  const introNodes = introHtml ? renderPageContentNodes(introHtml, "admin-system-intro") : null;
   const descriptionNodes = descriptionHtml.flatMap((entry) =>
-    renderCatalogNodes(entry.html, `admin-system-description-${entry.key}`)
+    renderPageContentNodes(entry.html, `admin-system-description-${entry.key}`)
   );
-  const howNodes = howHtml ? renderCatalogNodes(howHtml, "admin-system-how") : null;
+  const howNodes = howHtml ? renderPageContentNodes(howHtml, "admin-system-how") : null;
   const faqNodes = faqHtml.map((faq, idx) => ({
     ...faq,
-    nodes: renderCatalogNodes(faq.a, `admin-system-faq-${idx}`)
+    nodes: renderPageContentNodes(faq.a, `admin-system-faq-${idx}`)
   }));
   const updatedDateValue = contentHtml?.updatedAt ?? dataset.generatedOn ?? null;
-  const updatedDate = updatedDateValue ? new Date(updatedDateValue) : null;
-  const formattedUpdated = updatedDate
-    ? updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
-    : null;
-  const updatedRelativeLabel = updatedDate ? formatDistanceToNow(updatedDate, { addSuffix: true }) : null;
   const categoryCount = sections.length;
   const systemNavItems = datasets.map((entry) => ({
     id: entry.system.slug,
@@ -460,42 +394,20 @@ export default async function AdminCommandSystemPage({ params }: { params: Promi
 
   return (
     <div className="space-y-10">
-      <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.25em] text-muted">
-        <ol className="flex flex-wrap items-center gap-2">
-          <li className="flex items-center gap-2">
-            <Link href="/" className="font-semibold text-muted transition hover:text-accent">
-              Home
-            </Link>
-            <span className="text-muted/60">&gt;</span>
-          </li>
-          <li className="flex items-center gap-2">
-            <Link href="/catalog" className="font-semibold text-muted transition hover:text-accent">
-              Catalog
-            </Link>
-            <span className="text-muted/60">&gt;</span>
-          </li>
-          <li className="flex items-center gap-2">
-            <Link href="/catalog/admin-commands" className="font-semibold text-muted transition hover:text-accent">
-              Admin Commands
-            </Link>
-            <span className="text-muted/60">&gt;</span>
-          </li>
-          <li className="flex items-center gap-2">
-            <span className="font-semibold text-foreground/80">{pageTitle}</span>
-          </li>
-        </ol>
-      </nav>
+      <PageBreadcrumb
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Catalog", href: "/catalog" },
+          { label: "Admin Commands", href: "/catalog/admin-commands" },
+          { label: pageTitle, href: null }
+        ]}
+      />
 
       <header className="space-y-3">
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
           {pageTitle}
         </h1>
-        {formattedUpdated ? (
-          <p className="text-sm text-foreground/80">
-            Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
-            {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
-          </p>
-        ) : null}
+        <UpdatedTimestamp value={updatedDateValue} />
       </header>
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
@@ -648,24 +560,13 @@ export default async function AdminCommandSystemPage({ params }: { params: Promi
 
       {howNodes ? howNodes : null}
 
-      {faqNodes.length ? (
-        <>
-          <section className="rounded-2xl border border-border/60 bg-surface/40 p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-foreground">FAQ</h2>
-            <div className="mt-3 space-y-4">
-              {faqNodes.map((faq, idx) => (
-                <div key={`${faq.q}-${idx}`} className="rounded-xl border border-border/40 bg-background/60 p-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold uppercase tracking-[0.18em] text-muted">Q.</span>
-                    <p className="text-base font-semibold text-foreground">{faq.q}</p>
-                  </div>
-                  {faq.nodes}
-                </div>
-              ))}
-            </div>
-          </section>
-        </>
-      ) : null}
+      <ContentFaq
+        items={faqNodes.map((faq, idx) => ({
+          id: `${faq.q}-${idx}`,
+          question: faq.q,
+          answer: faq.nodes
+        }))}
+      />
       </section>
 
       {contentHtml?.id ? (

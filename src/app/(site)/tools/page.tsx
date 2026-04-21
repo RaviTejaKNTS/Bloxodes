@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { TOOLS_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { loadToolsPageData, renderToolsPage } from "./page-data";
 
-export const revalidate = 21600; // refresh a few times per day
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: `Roblox Tools & Calculators | ${SITE_NAME}`,
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ToolsPage() {
-  const { tools, total, totalPages } = await loadToolsPageData(1);
+  const { tools, total, totalPages, latestUpdatedAt } = await loadToolsPageData(1);
   if (!tools) {
     notFound();
   }
@@ -34,6 +34,7 @@ export default async function ToolsPage() {
     total,
     totalPages,
     currentPage: 1,
-    showHero: true
+    showHero: true,
+    latestUpdatedAt
   });
 }

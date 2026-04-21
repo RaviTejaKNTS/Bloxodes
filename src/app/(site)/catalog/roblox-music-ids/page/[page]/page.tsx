@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
-import { loadRobloxMusicIdsPageData, renderRobloxMusicIdsPage } from "../../page-data";
+import {
+  buildRobloxMusicCatalogContentHtml,
+  loadRobloxMusicIdsPageData,
+  renderRobloxMusicIdsPage
+} from "../../page-data";
 import { CATALOG_DESCRIPTION, buildAlternates } from "@/lib/seo";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-music-ids"];
 const MAX_STATIC_PAGES = 20;
@@ -44,6 +48,7 @@ export default async function RobloxMusicIdsPaginatedPage({ params }: PageProps)
     getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
   ]);
   const { songs, total, totalPages } = pageData;
+  const contentHtml = await buildRobloxMusicCatalogContentHtml(catalog);
   if (pageNumber > totalPages) {
     notFound();
   }
@@ -54,6 +59,6 @@ export default async function RobloxMusicIdsPaginatedPage({ params }: PageProps)
     totalPages,
     currentPage: pageNumber,
     showHero: pageNumber === 1,
-    contentHtml: catalog ? { id: catalog.id ?? null } : null
+    contentHtml
   });
 }

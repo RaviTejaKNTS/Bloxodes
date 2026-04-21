@@ -14,7 +14,7 @@ import {
   loadGenreOptionBySlug
 } from "../../../../page-data";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 
 type PageProps = {
   params: Promise<{ genre: string; page: string }>;
@@ -64,7 +64,7 @@ export default async function GenreMusicIdsPaginatedPage({ params }: PageProps) 
   const canonicalPath = `${BASE_PATH}/genres/${genre.slug}/page/${pageNumber}`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = `${genre.label} Roblox music IDs - Page ${pageNumber}`;
-  const updatedIso = latest ? latest.toISOString() : new Date().toISOString();
+  const updatedIso = latest?.toISOString() ?? null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },

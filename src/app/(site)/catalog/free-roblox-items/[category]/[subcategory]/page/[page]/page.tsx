@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { notFound } from "next/navigation";
-import { getCatalogPageContentByCodesIncludingDrafts } from "@/lib/catalog";
+import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import {
   BASE_PATH,
   appendItemCountToSeoTitle,
   buildFreeItemCatalogCodeCandidates,
   buildFreeItemCategoryPath,
+  buildFreeItemsCatalogContentHtml,
   loadFreeItemCategories,
   loadFreeItemCategoryBySlug,
   loadFreeItemSubcategories,
@@ -16,7 +17,7 @@ import {
   renderRobloxFreeItemsPage
 } from "../../../../page-data";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 
 type PageProps = {
   params: Promise<{ category: string; subcategory: string; page: string }>;
@@ -110,9 +111,10 @@ export default async function RobloxFreeItemsSubcategoryPaginatedPage({ params }
   const [subcategories, pageData, catalog] = await Promise.all([
     loadFreeItemSubcategories(category.label),
     loadFreeItemsPageData(safePageNumber, { category: category.label, subcategory: subcategory.label }),
-    getCatalogPageContentByCodesIncludingDrafts(FREE_ITEMS_CONTENT_CODES)
+    getCatalogPageContentByCodes(FREE_ITEMS_CONTENT_CODES)
   ]);
   const { items, total, totalPages } = pageData;
+  const contentHtml = await buildFreeItemsCatalogContentHtml(catalog);
 
   const pageTitle = `Free Roblox ${subcategory.label} items`;
   const basePath = buildFreeItemCategoryPath(category.slug, subcategory.slug);
@@ -139,11 +141,6 @@ export default async function RobloxFreeItemsSubcategoryPaginatedPage({ params }
     categoryLabel: category.label,
     subcategories,
     activeSubcategorySlug: subcategory.slug,
-    contentHtml: catalog
-      ? {
-          id: catalog.id ?? null,
-          title: catalog.title ?? null
-        }
-      : null
+    contentHtml
   });
 }

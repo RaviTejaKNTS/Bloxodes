@@ -275,8 +275,8 @@ export function webPageJsonLd({
   description: string;
   image: string;
   author: { name: string; url?: string | null; description?: string | null; sameAs?: string[] | null } | null;
-  publishedAt: string;
-  updatedAt: string;
+  publishedAt?: string | null;
+  updatedAt?: string | null;
 }) {
   const canonical = `${siteUrl.replace(/\/$/, "")}/${slug.replace(/^\//, "")}`;
   const imageUrl = image.startsWith("http") ? image : `${siteUrl.replace(/\/$/, "")}/${image.replace(/^\//, "")}`;
@@ -289,8 +289,8 @@ export function webPageJsonLd({
     "headline": title,
     "description": description,
     "image": imageUrl,
-    "datePublished": publishedAt,
-    "dateModified": updatedAt,
+    ...(publishedAt ? { datePublished: publishedAt } : {}),
+    ...(updatedAt ? { dateModified: updatedAt } : {}),
     "publisher": {
       "@type": "Organization",
       "name": SITE_NAME,

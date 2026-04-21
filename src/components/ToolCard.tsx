@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
 import type { ToolListEntry } from "@/lib/tools";
+import { resolveModifiedAt } from "@/lib/content-dates";
+import { formatUpdatedLabel } from "@/lib/updated-label";
 
 type ToolCardProps = {
   tool: ToolListEntry;
 };
 
 export function ToolCard({ tool }: ToolCardProps) {
-  const updatedAt = tool.content_updated_at ?? tool.updated_at ?? null;
-  const updatedLabel = updatedAt ? formatDistanceToNow(new Date(updatedAt), { addSuffix: true }) : null;
+  const updatedAt = resolveModifiedAt(tool);
+  const updatedLabel = formatUpdatedLabel(updatedAt);
   const description =
     tool.meta_description?.trim() ||
     tool.intro_md?.replace(/\s+/g, " ").trim().slice(0, 160) ||

@@ -11,7 +11,7 @@ import {
   loadPagedArtistOptions
 } from "../page-data";
 
-export const revalidate = 2592000;
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: `Music ID Artists | ${SITE_NAME}`,
@@ -26,7 +26,7 @@ export default async function MusicIdArtistsPage() {
   const canonicalPath = `${BASE_PATH}/artists`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = "Roblox music ID artists";
-  const updatedIso = new Date().toISOString();
+  const updatedIso = null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },
