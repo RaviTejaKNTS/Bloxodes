@@ -11,3 +11,5 @@ temp
 .env
 .env.*
 !.env.example
+!.env
+!.env.production

@@ -21,8 +21,8 @@ ENV HOSTNAME=0.0.0.0
 ENV PORT=3000
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN groupadd --system --gid 1001 nodejs \
-  && useradd --system --uid 1001 --gid nodejs nextjs \
+RUN groupadd --gid 1001 nodejs \
+  && useradd --uid 1001 --gid nodejs --no-create-home --shell /usr/sbin/nologin nextjs \
   && mkdir -p /app/.next/cache \
   && chown -R nextjs:nodejs /app
 

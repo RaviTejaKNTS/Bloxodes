@@ -28,7 +28,9 @@ This repo is set up for a single self-hosted Next.js instance with a persistent 
    - `ROBLOX_OAUTH_CLIENT_SECRET`
    - `ROBLOX_OAUTH_LOGIN_REDIRECT_URI`
 3. Add any optional integration secrets you already use in GitHub Actions or production.
-4. Keep `.env.production` on the server before running `docker compose build`, because the Next.js build reads it while prerendering pages.
+4. Keep the build-time env file on the server before running `docker compose build`, because the Next.js build reads it while prerendering pages.
+5. For plain Docker Compose, this is usually `.env.production`.
+6. For Dokploy, keep using the env file shape Dokploy provides in the build workspace. In this repo, both `.env` and `.env.production` are intentionally allowed into the Docker build context because `next build` talks to Supabase during static generation.
 
 ### 3. Run the app
 
