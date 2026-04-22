@@ -1,0 +1,722 @@
+{
+  "meta": {
+    "title": "Grow a Garden gears data",
+    "updatedAt": "2026-04-22",
+    "sources": [
+      {
+        "label": "Grow a Garden Wiki - Gears",
+        "url": "https://growagarden.fandom.com/wiki/Gears",
+        "accessed": "2026-04-22"
+      },
+      {
+        "label": "Grow a Garden Wiki - Gear Shop",
+        "url": "https://growagarden.fandom.com/wiki/Gear_Shop",
+        "accessed": "2026-04-22"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "category",
+      "price",
+      "use",
+      "stock",
+      "obtainable"
+    ]
+  },
+  "items": [
+    {
+      "name": "Watering Can",
+      "image": "https://static.wikia.nocookie.net/growagarden/images/5/51/Watering_Can.png/revision/latest/scale-to-width-down/100?cb=20250429005625",
+      "category": "Common",
+      "price": "50,000 39",
+      "use": "Speeds up crop growth.",
+      "stock": "1–4",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Trowel",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Uncommon",
+      "price": "100,000 49",
+      "use": "Realign crops.",
+      "stock": "1–3",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Trading Ticket",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Uncommon",
+      "price": "100,000 19",
+      "use": "Allows trading with other players.",
+      "stock": "1–3",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Recall Wrench",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Uncommon",
+      "price": "150,000 59",
+      "use": "Teleports the user to the Gear Shop.",
+      "stock": "1–3",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Basic Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Rare",
+      "price": "25,000 79",
+      "use": "Increases growth speed and harvest size of crops within its radius.",
+      "stock": "1–5",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Firework",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Rare",
+      "price": "74,000 39",
+      "use": "Launches a firework into the sky.",
+      "stock": "1–30",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Charcoal Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Rare",
+      "price": "No Prices",
+      "use": "Can apply the Charcoal mutation.",
+      "stock": "No Stock",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Advanced Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Legendary",
+      "price": "50,000 99",
+      "use": "Increases growth speed and mutation chance of crops within its radius.",
+      "stock": "1–2",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Medium Treat",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Legendary",
+      "price": "4,000,000 199",
+      "use": "Used on pets for a medium XP boost over time (lasts 1 day).",
+      "stock": "–",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Medium Toy",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Legendary",
+      "price": "4,000,000 189",
+      "use": "Gives a pet a medium boost (8–9%) to their passive ability for 5 minutes.",
+      "stock": "–",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Night Staff",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Legendary",
+      "price": "12,000,000 (Sky Merchant) 40 ×1 110 ×1 250 ×1 360 ×3",
+      "use": "Guarantees the moonlit mutation of 6 random plants in the user's garden.",
+      "stock": "1–3",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Star Caller",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Legendary",
+      "price": "12,000,000 15,000,000 (Sky Merchant) 219",
+      "use": "Redirects shooting stars to land in its close vicinity.",
+      "stock": "1–3",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Garden Guide",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Legendary",
+      "price": "Free (used to be obtained upon joining the game)",
+      "use": "Used to look up information about Daily Quests, Achievements, Crops, Pets, Cosmetics, Food, and Mutations.",
+      "stock": "–",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Godly Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mythical",
+      "price": "120,000 149",
+      "use": "Increases growth speed, mutation chance, and harvest size of crops within its radius.",
+      "stock": "1–2",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Chocolate Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mythical",
+      "price": "500,000 199",
+      "use": "Multi-harvest fruit within its area are covered in chocolate.",
+      "stock": "1–2",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Magnifying Glass",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mythical",
+      "price": "10,000,000 99",
+      "use": "Inspects plants to reveal their value and growth progress (updates dynamically).",
+      "stock": "1",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Nectar Staff",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mythical",
+      "price": "25 219",
+      "use": "Attracts more bees to pollinate the player's fruit.",
+      "stock": "1",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Pollen Radar",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mythical",
+      "price": "20 249",
+      "use": "Scans and collects nearby pollinated fruit.",
+      "stock": "1–3",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Silver Fertilizer",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mythical",
+      "price": "10,000,000 129",
+      "use": "Makes a plant silver for 2 hours.",
+      "stock": "1",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Lush Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mythical",
+      "price": "30,000,000 299",
+      "use": "Turns nearby plants Lush. Lasts 1 minute.",
+      "stock": "1",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Geode Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mythical",
+      "price": "No Price",
+      "use": "Turns nearby plants Geode. Lasts 1 minute.",
+      "stock": "No Stock",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Master Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "10,000,000 199",
+      "use": "Greatly increases growth speed, mutation chance, and harvest size of crops within its radius.",
+      "stock": "1–2",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Cleaning Spray",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "15,000,000 139",
+      "use": "Removes all mutations from the selected crop.",
+      "stock": "1–10",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Favorite Tool",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "20,000,000 119",
+      "use": "Prevents selected crops from being picked up by the user.",
+      "stock": "1–3",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Harvest Tool",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "30,000,000 149",
+      "use": "Harvests all fruit from the selected plant.",
+      "stock": "1–3",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Friendship Pot",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "15,000,000 39",
+      "use": "A flower pot to share with a friend.",
+      "stock": "1",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Honey Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "30 199",
+      "use": "Applies the Honey Glazed mutation to crops within its radius.",
+      "stock": "1",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Pet Mutation Shard Tranquil",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "200 279",
+      "use": "Applies the Tranquil mutation to a pet.",
+      "stock": "1",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Pet Mutation Shard Corrupted",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "205 289",
+      "use": "Applies the Corrupted mutation to a pet.",
+      "stock": "1",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Maple Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "250,000,000 189",
+      "use": "Increases growth speed, mutation chances, and fruit size of fall plants (lasts 5 minutes).",
+      "stock": "-",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Large Toy",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "Trader Rewards Watering Can Advertisement Forever Pack Rare Present Gold Gift Rainbow Gift",
+      "use": "Gives a pet a large boost to their passive ability for 5 minutes.",
+      "stock": "1-3",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Smith Treat",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "Crafting",
+      "use": "Used on pets for a large XP boost over time (lasts 1 day).",
+      "stock": "-",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Gold Fertilizer",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "Safari Harvest Rewards",
+      "use": "Makes a plant gold for 2 hours.",
+      "stock": "–",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Rainbow Fertilizer",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "Forever Pack",
+      "use": "Makes a plant rainbow for 2 hours.",
+      "stock": "–",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Pet Pouch",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Divine",
+      "price": "Crafting",
+      "use": "Increases your pet inventory slots by +1. Max +50.",
+      "stock": "No Stock",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Levelup Lollipop",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Prismatic",
+      "price": "10,000,000,000 79",
+      "use": "Increases chosen pet age by 1.",
+      "stock": "1–2",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Grandmaster Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Prismatic",
+      "price": "1,000,000,000 279",
+      "use": "Massively increases growth speed, mutation chances, fruit size, and boosts pets.",
+      "stock": "1",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Rainbow Lollipop",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Prismatic",
+      "price": "37-119 in the Forever Pack.",
+      "use": "Increases chosen pet age by 50.",
+      "stock": "1",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Silver Lollipop",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Prismatic",
+      "price": "Achievement Rewards",
+      "use": "Increases chosen pet age by 5.",
+      "stock": "No Stock",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Gold Lollipop",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Prismatic",
+      "price": "Achievement Rewards",
+      "use": "Increases chosen pet age by 10.",
+      "stock": "No Stock",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Mega Lollipop",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Prismatic",
+      "price": "Achievement Rewards",
+      "use": "Increases chosen pet age by 100.",
+      "stock": "No Stock",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Lightning Rod",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "1× Basic Sprinkler + 1× Advanced Sprinkler + 1× Godly Sprinkler + 500,000 179",
+      "use": "Redirects lightning from its vicinity to a chosen point in the user's garden.",
+      "stock": "✓",
+      "obtainable": null
+    },
+    {
+      "name": "Tanning Mirror",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "1× Basic Sprinkler + 1× Advanced Sprinkler + 1× Godly Sprinkler + 500,000 219",
+      "use": "Attracts sun rays to nearby crops.",
+      "stock": "✓",
+      "obtainable": null
+    },
+    {
+      "name": "Reclaimer",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "1× Common Egg + 1× Harvest Tool + 500,000 199",
+      "use": "Reclaims plants, turning them into seeds (3 uses).",
+      "stock": "✓",
+      "obtainable": null
+    },
+    {
+      "name": "Small Toy",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "1× Common Egg + 1× Coconut Seed + 1× Coconut + 1,000,000 139",
+      "use": "Gives a pet a small passive ability boost (3 uses).",
+      "stock": "✓",
+      "obtainable": null
+    },
+    {
+      "name": "Small Treat",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "1× Common Egg + 1× Dragon Fruit Seed + 1× Blueberry + 1,000,000 89",
+      "use": "Gives a pet a small XP boost over time (3 uses).",
+      "stock": "✓",
+      "obtainable": null
+    },
+    {
+      "name": "Smith Hammer of Harvest",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "1× Harvest Tool + 3× Rare Coal + 6,000,000 149",
+      "use": "Harvests all fruit within a radius.",
+      "stock": "✓",
+      "obtainable": null
+    },
+    {
+      "name": "Smith Treat",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "1× Common Coal + 1× Rare Coal + 2× Small Treat + 4,000,000 229",
+      "use": "Used on pets for a large XP boost over time.",
+      "stock": "✓",
+      "obtainable": null
+    },
+    {
+      "name": "Pet Pouch",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "1× Common Egg + 1× Corndog + 1× Small Treat + 1× Small Toy + 50,000,000 89",
+      "use": "Increases your pet inventory slots by +1. Max +50.",
+      "stock": "✓",
+      "obtainable": null
+    },
+    {
+      "name": "Pet Mutation Shard Giantbean",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "3× Beanstalk + 1× Cleansing Pet Shard + 15,000,000 279",
+      "use": "Applies the GiantBean mutation on a pet: 15% faster hunger rate + ~0.12 xp/s per Beanstalk planted.",
+      "stock": "✗",
+      "obtainable": null
+    },
+    {
+      "name": "Chimera Stone",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "1× Mythical Egg + 1× Bug Egg + 1× Jungle Egg + 1× Gem Egg + 500,000,000 199",
+      "use": "Use the Stone to fuse the Chimera with the required pets and cosmetics.",
+      "stock": "✓",
+      "obtainable": null
+    },
+    {
+      "name": "Thundelbringer",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Craftables",
+      "price": "1× Smith Hammer of Harvest + 1× Lightning Rod + 1× Legendary Coal + 1× Divine Coal + 40,000,000 489",
+      "use": "Summons a lightning bolt upon your farm.",
+      "stock": "✓",
+      "obtainable": null
+    },
+    {
+      "name": "Spray Mutation Verdant",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "50,000,000 179",
+      "use": "Gives a fruit the Verdant mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Disco",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "50,000,000 249",
+      "use": "Gives a fruit the Disco mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Wet",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "50,000,000 179",
+      "use": "Gives a fruit the Wet mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Windstruck",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "50,000,000 189",
+      "use": "Gives a fruit the Windstruck mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Choc",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Cleaning Spray Cacao 200,000 179",
+      "use": "Gives a fruit the Choc mutation.",
+      "stock": "✓",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Pollinated",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Bee Balm Cleaning Spray 25 179",
+      "use": "Gives a fruit the Pollinated mutation.",
+      "stock": "✓",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Shocked",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Cleaning Spray Lightning Rod 1,000,000 199",
+      "use": "Gives a fruit the Shocked mutation.",
+      "stock": "✓",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Cloudtouched",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "50,000,000 189",
+      "use": "Gives a fruit the Cloudtouched mutation.",
+      "stock": "✗",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Spray Mutation Burnt",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "3 189",
+      "use": "Gives a fruit the Burnt mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Chilled",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Godly Sprinkler Cleaning Spray 500,000 189",
+      "use": "Gives a fruit the Chilled mutation.",
+      "stock": "✓",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Amber",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Cleaning Spray Dinosaur Egg 1,000,000 189",
+      "use": "Gives a fruit the Amber mutation.",
+      "stock": "✓",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Tranquil",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Obtained from Corrupted Rewards",
+      "use": "Gives a fruit the Tranquil mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Corrupt",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Obtained from Corrupted Rewards",
+      "use": "Gives a fruit the Corrupted mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation HoneyGlazed",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Obtained from Cooking Rewards",
+      "use": "Gives a fruit the HoneyGlazed mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Fried",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Obtained from Cooking Rewards",
+      "use": "Gives a fruit the Fried mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Cooked",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Unobtainable",
+      "use": "Gives a fruit the Cooked mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Bloom",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Obtained from Beanstalk Rewards",
+      "use": "Gives a fruit the Bloom mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Glimmering",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "Cleaning Spray Orange Tulip Seed Daffodil Seed Mango 1,000,000 159",
+      "use": "Gives a fruit the Glimmering mutation.",
+      "stock": "✓",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Spray Mutation Luminous",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Mutation Sprays",
+      "price": "6,000 209",
+      "use": "Gives a fruit the Luminous mutation.",
+      "stock": "✗",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Berry Blusher Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Merchant",
+      "price": "50,000,000 229",
+      "use": "Greatly increases size bonus for Grapes, Blueberries, Strawberries, Raspberries, and Celestiberries (1.5 min duration).",
+      "stock": "✓",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Flower Froster Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Merchant",
+      "price": "50,000,000 229",
+      "use": "Freezes flower-type plants (2.5 min duration).",
+      "stock": "✓",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Spice Spritzer Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Merchant",
+      "price": "50,000,000 229",
+      "use": "Greatly increases variant chance for Cacao, Pepper, Ember Lily, and Papaya (2.5 min duration).",
+      "stock": "✓",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Stalk Sprout Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Merchant",
+      "price": "50,000,000 229",
+      "use": "Greatly increases growth speed of Mushrooms, Bamboo, and Beanstalk; may apply Wet mutation (2 min duration).",
+      "stock": "✓",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Sweet Soaker Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Merchant",
+      "price": "50,000,000 229",
+      "use": "Increases size bonus for Watermelon, Pumpkin, and Moon Melon (5 min duration).",
+      "stock": "✓",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Tropical Mist Sprinkler",
+      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "category": "Merchant",
+      "price": "50,000,000 229",
+      "use": "Increases growth speed and size bonus for tropical fruits (4 min duration).",
+      "stock": "✓",
+      "obtainable": "✓"
+    }
+  ]
+}

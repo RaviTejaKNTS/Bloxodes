@@ -1,0 +1,1095 @@
+{
+  "meta": {
+    "title": "Grow a Garden seed packs data",
+    "updatedAt": "2026-04-22",
+    "sources": [
+      {
+        "label": "Grow a Garden Wiki - Seed Packs category",
+        "url": "https://growagarden.fandom.com/wiki/Seed_Packs",
+        "accessed": "2026-04-22"
+      }
+    ],
+    "columns": [
+      "name",
+      "packType",
+      "price",
+      "obtainable",
+      "dateAdded",
+      "obtainment",
+      "contents",
+      "sourceUrl"
+    ]
+  },
+  "items": [
+    {
+      "name": "Easter Seed Pack",
+      "packType": "Limited",
+      "price": "Event quests",
+      "obtainable": "Yes",
+      "dateAdded": "April 4, 2025",
+      "obtainment": "One Easter Seed Pack is obtained for every Jim the Venus Flytrap Quest a player completes during the Easter Event 2026.",
+      "contents": [
+        {
+          "name": "Candy Carrot",
+          "chance": "31%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/c/c6/CandyCarrotProduce.png/revision/latest/scale-to-width-down/120?cb=20260403014044"
+        },
+        {
+          "name": "Chocolate Berry",
+          "chance": "20%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/a/a6/ChocolateBerryProduce.png/revision/latest/scale-to-width-down/120?cb=20260403014101"
+        },
+        {
+          "name": "Gumball",
+          "chance": "15%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/b/b6/GumballProduce.png/revision/latest/scale-to-width-down/120?cb=20260403014115"
+        },
+        {
+          "name": "Sugar Melon",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Liquorice",
+          "chance": "8%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Chocolate Coconut",
+          "chance": "7%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Gummy Cactus",
+          "chance": "5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Sour Lemon",
+          "chance": "3.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Eggfruit",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Easter%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Ancient Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1699 for 10",
+      "obtainable": "No",
+      "dateAdded": "July 5th, 2025",
+      "obtainment": "Obtainable exclusively in the shop for Robux. It cannot be obtained through normal gameplay.",
+      "contents": [
+        {
+          "name": "Stonebite",
+          "chance": "39%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Paradise Petal",
+          "chance": "25%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Horned Dinoshroom",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Boneboo",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Firefly Fern",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Fossilight",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Sack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Ancient%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Crafters Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1699 for 10",
+      "obtainable": "No",
+      "dateAdded": "June 14, 2025",
+      "obtainment": "The pack was previously obtained from the Limited Time Shop for: 1 Pack: 1993 Packs: 57510 Packs: 1699",
+      "contents": [
+        {
+          "name": "Crocus",
+          "chance": "40%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Succulent",
+          "chance": "25%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Violet Corn",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Bendboo",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Cocovine",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Dragon Pepper",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Sack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Crafters%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Easter Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1,699 for 10 6,999 for 50",
+      "obtainable": "Yes",
+      "dateAdded": "April 4, 2025",
+      "obtainment": "Players can earn an Exotic Easter Seed Pack for every 50 Jim the Venus Fly Trap quests they complete during the Easter Event 2026. Alternatively, they can purchase one for 199, three for 575, 10 for 1,699, or 50 for 6,999.",
+      "contents": [
+        {
+          "name": "Candy Carrot",
+          "chance": "30%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Chocolate Berry",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Gumball",
+          "chance": "15%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Sugar Melon",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Liquorice",
+          "chance": "8%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Chocolate Coconut",
+          "chance": "7%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Gummy Cactus",
+          "chance": "5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Sour Lemon",
+          "chance": "3.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Eggfruit",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Exotic Easter Seed Pack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Easter%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Enchanted Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1699 for 10",
+      "obtainable": "No",
+      "dateAdded": "August 30th, 2025",
+      "obtainment": "The Exotic Enchanted Seed Pack can be purchased from the in-game shop during the Fairy Event for Robux only. It will be available in bundles: 1 Pack: 199 3 Packs: 575 10 Packs: 1,699 This pack is limited time only and will not be available after the event ends. Due to gambling laws, it is unavailable in Australia, Belgium, the UK, and Netherlands.",
+      "contents": [
+        {
+          "name": "Sunbulb",
+          "chance": "39%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Glowthorn",
+          "chance": "25%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Lightshoot",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Briar Rose",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Spirit Flower",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Wispwing",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Sack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Enchanted%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Fall Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1699 for 10",
+      "obtainable": "No",
+      "dateAdded": "September 20th, 2025",
+      "obtainment": "The Exotic Fall Seed Pack can be purchased from the in-game shop during the Fall Market Event for Robux only. It is available in bundles: 1 Pack: 199 3 Packs: 575 10 Packs: 1,699 This pack is limited time only and will not be available after the event ends. Due to gambling laws, it is unavailable in Australia, Belgium, the UK, and Netherlands.",
+      "contents": [
+        {
+          "name": "Autumn Shroom",
+          "chance": "40%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Fall Berry",
+          "chance": "25%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Speargrass",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Torchflare",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Auburn Pine",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Firewell",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Exotic Fall Seed Pack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Fall%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Flower Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1699 for 10",
+      "obtainable": "No",
+      "dateAdded": "May 31st, 2025",
+      "obtainment": "The Exotic Flower Seed Pack was available exclusively with Robux. It is not obtainable through regular gameplay or farming methods. This item's purchase availability may be restricted in certain countries or regions due to regulations on paid random chance items.",
+      "contents": [
+        {
+          "name": "Rose",
+          "chance": "40%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Foxglove",
+          "chance": "25%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Lilac",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Pink Lily",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Purple Dahlia",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Legacy Sunflower",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Sack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Flower%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Gardener Seed Pack",
+      "packType": null,
+      "price": null,
+      "obtainable": "No",
+      "dateAdded": "September 27th, 2025",
+      "obtainment": "The Exotic Gardener Seed Pack could be obtained via the rewards of the Seed Stages event.",
+      "contents": [],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Gardener%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Gourmet Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1699 for 10",
+      "obtainable": "No",
+      "dateAdded": "August 2nd, 2025",
+      "obtainment": "The Exotic Gourmet Seed Pack can be purchased from the in-game shop during the Cooking Event for Robux only. It is available in bundles: 1 Pack: 199 3 Packs: 575 10 Packs: 1,699 This pack is limited time only and will not be available after the event ends.",
+      "contents": [
+        {
+          "name": "Onion",
+          "chance": "40%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Jalapeno",
+          "chance": "25%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Crown Melon",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Sugarglaze",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Tall Asparagus",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Grand Tomato",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Exotic Gourmet Seed Pack",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Gourmet%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Holiday Seed Pack",
+      "packType": "Season Pass Reward",
+      "price": "Premium Season Pass",
+      "obtainable": "No",
+      "dateAdded": "December 6th 2025",
+      "obtainment": "The Exotic Holiday Seed Pack can be obtained from the Premium Season Pass rewards.",
+      "contents": [
+        {
+          "name": "Frosty Bite",
+          "chance": "40%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/d/dd/FrostyBiteProduce.png/revision/latest/scale-to-width-down/156?cb=20251206133311"
+        },
+        {
+          "name": "Cryo Rose",
+          "chance": "25%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/a/a2/CryoRoseProduce.png/revision/latest/scale-to-width-down/156?cb=20251206133736"
+        },
+        {
+          "name": "Bush Flake",
+          "chance": "20%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/c/c0/BushFlakeProduce.webp/revision/latest/scale-to-width-down/156?cb=20251206134341"
+        },
+        {
+          "name": "Rosemary",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Cryoshard",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Frostwing",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Sack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Holiday%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Prime Seed Pack",
+      "packType": "Season Pass Reward",
+      "price": "Premium Season Pass",
+      "obtainable": "No",
+      "dateAdded": "September 27, 2025",
+      "obtainment": "The Exotic Prime Seed Pack can be obtained from the Premium Season Pass rewards.",
+      "contents": [
+        {
+          "name": "Sundew",
+          "chance": "39%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/2/2b/SundewHd.png/revision/latest/scale-to-width-down/156?cb=20250927070717"
+        },
+        {
+          "name": "Black Bat Flower",
+          "chance": "25%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/a/a1/BlackBatFlowerHd.png/revision/latest/scale-to-width-down/156?cb=20250927070730"
+        },
+        {
+          "name": "Mandrone Berry",
+          "chance": "20%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/a/a9/MandroneBerryHd.png/revision/latest/scale-to-width-down/156?cb=20250927070737"
+        },
+        {
+          "name": "Corpse Flower",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Inferno Quince",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Multitrap",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Exotic Prime Seed Pack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Prime%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Safari Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1,699 for 10",
+      "obtainable": "No",
+      "dateAdded": "November 8th, 2025",
+      "obtainment": "The Exotic Safari Seed Pack can be purchased from the in-game shop during the Safari Harvest Event for Robux only. It is available in bundles: 1 Pack: 199 3 Packs: 575 10 Packs: 1,699 This pack is limited time only and will not be available after the event ends. Due to gambling laws, it is unavailable in Australia, Belgium, the UK and Netherlands.",
+      "contents": [
+        {
+          "name": "Daisy",
+          "chance": "39%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Bamboo Tree",
+          "chance": "25%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Amberfruit Shrub",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Castor Bean",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Java Banana",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Peacock Tail",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Sack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Safari%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1699 for 10 in the Limited Time Shop",
+      "obtainable": "No",
+      "dateAdded": "April 20th, 2025",
+      "obtainment": "Buying it from the Limited Shop from April 20 - April 27 in 2025.",
+      "contents": [
+        {
+          "name": "Papaya",
+          "chance": "40%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Banana",
+          "chance": "38%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Passionfruit",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Soul Fruit",
+          "chance": "1.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Cursed Fruit",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Sprout Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1699 for 10",
+      "obtainable": "No",
+      "dateAdded": "August 16th, 2025",
+      "obtainment": "The Exotic Sprout Seed Pack could be purchased from the in-game shop during the Beanstalk Event for Robux only. It would be available in bundles: 1 Pack: 199 3 Packs: 575 10 Packs: 1,699 This pack was limited time only and is not available after the event ended. Due to gambling laws, it was unavailable in Australia, Belgium, the UK and Netherlands.",
+      "contents": [
+        {
+          "name": "Flare Daisy",
+          "chance": "39%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Duskpuff",
+          "chance": "25%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Mangosteen",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Poseidon Plant",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Gleamroot",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Princess Thorn",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Sack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Sprout%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Summer Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1,699 for 10",
+      "obtainable": "No",
+      "dateAdded": "June 21, 2025",
+      "obtainment": "Obtainable exclusively in the shop for Robux. It cannot be obtained through normal gameplay.",
+      "contents": [
+        {
+          "name": "Wild Carrot",
+          "chance": "40%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Pear",
+          "chance": "25%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Cantaloupe",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Parasol Flower",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rosy Delight",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Elephant Ears",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Sack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Summer%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Zen Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1699 for 10",
+      "obtainable": "No",
+      "dateAdded": "July 19th, 2025",
+      "obtainment": "The Exotic Zen Seed Pack can be purchased from the in-game shop during the Zen Event for Robux only. It is available in bundles: 1 Pack: 199 3 Packs: 575 10 Packs: 1,699 This pack is limited time only and will not be available after the event ends. Due to gambling laws, it is unavailable in Australia, Belgium, the UK and Netherlands",
+      "contents": [
+        {
+          "name": "Monoblooma",
+          "chance": "40%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Serenity",
+          "chance": "25%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Taro Flower",
+          "chance": "20%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Zen Rocks",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Hinomai",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Maple Apple",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Sack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Zen%20Seed%20Pack"
+    },
+    {
+      "name": "Exotic Zenith Seed Pack",
+      "packType": "Season Pass Reward",
+      "price": "Premium Season Pass",
+      "obtainable": "No",
+      "dateAdded": "September 27, 2025",
+      "obtainment": "The Exotic Zenith Seed Pack can be obtained from the Premium Season Pass rewards.",
+      "contents": [
+        {
+          "name": "Horned Redrose",
+          "chance": "40%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/3/33/HornedRedroseProduce.png/revision/latest/scale-to-width-down/156?cb=20251101090320"
+        },
+        {
+          "name": "Banana Orchid",
+          "chance": "25%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/c/c3/BananaOrchidProduce.png/revision/latest/scale-to-width-down/156?cb=20250930125803"
+        },
+        {
+          "name": "Viburnum Berry",
+          "chance": "20%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/b/be/ViburnumBerryProduce.png/revision/latest/scale-to-width-down/156?cb=20251101090427"
+        },
+        {
+          "name": "Buddhas Hand",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Ghost Pepper",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Thornspire",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Rainbow Exotic Zenith Seed Pack",
+          "chance": "1%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Zenith%20Seed%20Pack"
+    },
+    {
+      "name": "Halloween Super Seed",
+      "packType": null,
+      "price": "37 99 175 375 495",
+      "obtainable": "No",
+      "dateAdded": "October 18, 2025",
+      "obtainment": "The Halloween Super Seed can be purchased with Robux in the Halloween Forever Pack with a 1% chance of appearing at the paid section.",
+      "contents": [],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Halloween%20Super%20Seed"
+    },
+    {
+      "name": "Premium Night Seed Pack",
+      "packType": "Limited",
+      "price": "199 for 1 575 for 3 1699 for 10",
+      "obtainable": "No",
+      "dateAdded": "May 10th, 2025",
+      "obtainment": "The Premium Night Seed Pack is available exclusively with Robux. It is not obtainable through regular gameplay or farming methods.",
+      "contents": [
+        {
+          "name": "Glowshroom",
+          "chance": "30%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Mint",
+          "chance": "22%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Moonflower",
+          "chance": "18%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Starfruit",
+          "chance": "15.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Moonglow",
+          "chance": "12%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Moon Blossom",
+          "chance": "2.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Premium%20Night%20Seed%20Pack"
+    },
+    {
+      "name": "Silver Common Seed Pack",
+      "packType": "Achievement",
+      "price": "Free",
+      "obtainable": "Yes",
+      "dateAdded": "August 16th, 2025",
+      "obtainment": "The Silver Common Seed Pack can be obtained by completing all the Common quests in Achievement Quests. (5 at a time)",
+      "contents": [
+        {
+          "name": "67%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "33%",
+          "chance": null,
+          "image": null
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Common%20Seed%20Pack"
+    },
+    {
+      "name": "Silver Divine Seed Pack",
+      "packType": "Achievement",
+      "price": null,
+      "obtainable": "Yes",
+      "dateAdded": "August 16th, 2025",
+      "obtainment": "The Silver Divine Seed Pack can be obtained by completing all the Divine quests in Core Plants Achievements.",
+      "contents": [
+        {
+          "name": "36%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "26%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "22%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "16%",
+          "chance": null,
+          "image": null
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Divine%20Seed%20Pack"
+    },
+    {
+      "name": "Silver Fall Seed Pack",
+      "packType": null,
+      "price": null,
+      "obtainable": "No",
+      "dateAdded": "September 20th, 2025",
+      "obtainment": "Fall Activities reward.",
+      "contents": [
+        {
+          "name": "Silver Autumn Shroom",
+          "chance": "40%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/6/62/AutumnShroomHd.png/revision/latest/scale-to-width-down/156?cb=20250920042313"
+        },
+        {
+          "name": "Silver Fall Berry",
+          "chance": "25%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/f/f0/FallBerryHd.png/revision/latest/scale-to-width-down/156?cb=20250920042255"
+        },
+        {
+          "name": "Silver Speargrass",
+          "chance": "20%",
+          "image": "https://static.wikia.nocookie.net/growagarden/images/d/d2/SpeargrassHd.png/revision/latest/scale-to-width-down/156?cb=20250920042230"
+        },
+        {
+          "name": "Silver Torchflare",
+          "chance": "10%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Silver Auburn Pine",
+          "chance": "4.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        },
+        {
+          "name": "Silver Firewell",
+          "chance": "0.5%",
+          "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Fall%20Seed%20Pack"
+    },
+    {
+      "name": "Silver Legendary Seed Pack",
+      "packType": "Achievement",
+      "price": "Free",
+      "obtainable": "Yes",
+      "dateAdded": "August 16th, 2025",
+      "obtainment": "The Silver Legendary Seed Pack can be obtained by completing all the Legendary quests in Achievement Quests.",
+      "contents": [
+        {
+          "name": "40%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "25%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "20%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "15%",
+          "chance": null,
+          "image": null
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Legendary%20Seed%20Pack"
+    },
+    {
+      "name": "Silver Mythical Seed Pack",
+      "packType": "Achievement",
+      "price": "Free",
+      "obtainable": "Yes",
+      "dateAdded": "August 16th, 2025",
+      "obtainment": "Achievements",
+      "contents": [
+        {
+          "name": "40%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "25%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "20%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "15%",
+          "chance": null,
+          "image": null
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Mythical%20Seed%20Pack"
+    },
+    {
+      "name": "Silver Prismatic Seed Pack",
+      "packType": "Achievement",
+      "price": null,
+      "obtainable": "Yes",
+      "dateAdded": "August 16th, 2025",
+      "obtainment": "The Silver Prismatic Seed Pack can only be obtained by completing all the Prismatic quests in Achievement Quests.",
+      "contents": [
+        {
+          "name": "27%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "19%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "17%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "13%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "9%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "8%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "7%",
+          "chance": null,
+          "image": null
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Prismatic%20Seed%20Pack"
+    },
+    {
+      "name": "Silver Rare Seed Pack",
+      "packType": "Achievement",
+      "price": "Free",
+      "obtainable": "Yes",
+      "dateAdded": "August 16th, 2025",
+      "obtainment": "The Silver Rare Seed Pack can be obtained by completing all the Rare quests in Achievement Quests.",
+      "contents": [
+        {
+          "name": "50%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "30%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "20%",
+          "chance": null,
+          "image": null
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Rare%20Seed%20Pack"
+    },
+    {
+      "name": "Silver Uncommon Seed Pack",
+      "packType": "Achievement",
+      "price": "Free",
+      "obtainable": "Yes",
+      "dateAdded": "August 16th, 2025",
+      "obtainment": "The Silver Uncommon Seed Pack can be obtained by completing all the Uncommon quests in Achievements.",
+      "contents": [
+        {
+          "name": "64%",
+          "chance": null,
+          "image": null
+        },
+        {
+          "name": "36%",
+          "chance": null,
+          "image": null
+        }
+      ],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Uncommon%20Seed%20Pack"
+    },
+    {
+      "name": "Super Seed",
+      "packType": null,
+      "price": "Super Seed Pack Prices 199 575 1,699 199 575 1,699Forever Pack Prices 37 99 175 375 495 37 99 175 375 495Super Seed Pack Limited Offer 1050",
+      "obtainable": "Yes",
+      "dateAdded": null,
+      "obtainment": null,
+      "contents": [],
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Super%20Seed"
+    }
+  ]
+}

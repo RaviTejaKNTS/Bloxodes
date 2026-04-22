@@ -10,7 +10,7 @@ These files back tools and catalog sections that are not fully modeled in Supaba
   - Parsed by `src/lib/admin-commands.ts`.
   - Used by catalog admin-command routes.
 - `data/Grow a Garden/*`
-  - Crop/tool data used by the Grow a Garden calculator and quiz content.
+  - Dataset-backed Grow a Garden catalog content, including crops, seeds, pets, eggs, gears, mutations, weather, merchants, NPCs, shops, seed packs, crafting recipes, food, currencies, and quiz content.
 - `data/The Forge/*.json`
   - Structured catalog and calculator data used by Forge catalog pages and Forge tools.
 - `data/Fisch/fish.json`

@@ -18,9 +18,10 @@ const RESERVED_CATALOG_PREFIXES = [
   "free-roblox-items",
   "roblox-free-items",
   "roblox-music-ids",
-  "the-forge"
+  "the-forge",
+  "grow-a-garden"
 ];
-const RESERVED_CATALOG_CODE_PREFIXES = ["the-forge-"];
+const RESERVED_CATALOG_CODE_PREFIXES = ["the-forge-", "grow-a-garden-"];
 
 type PageProps = {
   params: Promise<{ slug: string[] }>;

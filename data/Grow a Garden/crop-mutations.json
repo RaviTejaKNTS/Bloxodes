@@ -1,0 +1,2246 @@
+{
+  "meta": {
+    "title": "Grow a Garden crop mutations data",
+    "updatedAt": "2026-04-22",
+    "sources": [
+      {
+        "label": "Grow a Garden Wiki - Crop Mutations",
+        "url": "https://growagarden.fandom.com/wiki/Crop_Mutations",
+        "accessed": "2026-04-22"
+      }
+    ],
+    "columns": [
+      "name",
+      "category",
+      "appearance",
+      "multiplier",
+      "obtainment",
+      "visualDescription"
+    ]
+  },
+  "items": [
+    {
+      "name": "Gold",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "20x",
+      "obtainment": "1% chance to grow, replacing the normal variant. Chances can be increased by the Pig, Praying Mantis and Bacon Pig pet. Chances can be increased by using Sprinklers. Can be applied by the Super Seed. Only works in crops and not produces. It can increase their produce's chances of being Gold. Can be applied by the Dragonfly, Cockatrice or the Golden Bee pet. Can be applied by the Golden Bee pet when harvesting a crop. Can be applied by using the Gold Fertilizer. Only works in crops and not produces. It can increase their produce's chances of being Gold.",
+      "visualDescription": "Shining. Golden in color. Emits a shimmering sound."
+    },
+    {
+      "name": "Rainbow",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "50x",
+      "obtainment": "0.1% chance to grow, replacing the normal variant. Chances can be increased by using Pig, Praying Mantis and Bacon Pig pet. Chances can be increased by using Sprinklers. Can be applied by the Super Seed. Only works in crops and not produces. It can increase their produce's chances of being Rainbow. Can be applied by the Butterfly pet when a crop has 5+ environmental mutations. If the Butterfly applies Rainbow this way, all previous mutations will be removed. Can be applied by using the Rainbow Fertilizer. Only works on crops and not produces. It increases the produce's chances of being Rainbow. During Rainbow.",
+      "visualDescription": "Continuously cycles through the colors of the rainbow. Emits yellow particles and a rainbow on top."
+    },
+    {
+      "name": "Diamond",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "50x",
+      "obtainment": "Can be applied by the Diamond Dragonfly pet.",
+      "visualDescription": "Similar to Gold but cyan."
+    },
+    {
+      "name": "Wet",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x2",
+      "obtainment": "During Rain, Thunderstorm, Under The Sea, Water Your Garden or Rain Dance. Can be applied by Sprinklers. Can be applied by the Sea Turtle or the Kappa pet. Using the Mutation Spray Wet. Can replace Frozen mutation into Wet mutation by the Iguana pet. Can be applied by the Trinity Fruit crop.",
+      "visualDescription": "Dripping water particles."
+    },
+    {
+      "name": "Windstruck",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x2",
+      "obtainment": "During Windy, Gale or Soccer. Can be applied by the Pterodactyl pet. Using the Mutation Spray Windstruck. Can be applied by any pets with the Windy mutation.",
+      "visualDescription": "Wind particles swoop around the crop."
+    },
+    {
+      "name": "Moonlit",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x2",
+      "obtainment": "During Night or Shooting Stars. Can be applied by the Tanuki or the Wolf pet.",
+      "visualDescription": "Bluish-purple in color."
+    },
+    {
+      "name": "Chilled",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x2",
+      "obtainment": "During Frost. Can be applied by the Polar Bear, Tanuki, or the Sushi Bear pet. Using the Mutation Spray Chilled. Can replace Frozen mutation into Chilled mutation by the Iguana pet.",
+      "visualDescription": "Slightly bluish. Emits frost particles."
+    },
+    {
+      "name": "Pollinated",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "During Bee Swarm, Worker Bee Swarm, Beenado or Bee Storm. Can be applied by the Bee, Honey Bee, Petal Bee, Queen Bee, Wasp, Tarantula Hawk, Pack Bee or the Golden Bee pet. Using the Mutation Spray Pollinated.",
+      "visualDescription": "Shining. Yellow in color. Emits yellow gas-like particles."
+    },
+    {
+      "name": "Sandy",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "During Sandstorm. Can be applied by the Jackalope pet.",
+      "visualDescription": "Tan color Emits puffs of sand Emits grains of sand"
+    },
+    {
+      "name": "Moist",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "During Gentle Drizzle.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Lush",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "Using the Lush Sprinkler. Can be applied by the Lion pet.",
+      "visualDescription": "Different shades of green."
+    },
+    {
+      "name": "Cracked",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x4",
+      "obtainment": "During Earthquake or Super Storm. Can be applied by the Badger pet.",
+      "visualDescription": "Has a Cracked Texture and Small Earth Particles."
+    },
+    {
+      "name": "Verdant",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x4",
+      "obtainment": "Can be applied by the Scarlet Macaw pet. During Solar Flare or Sunset. Using the Mutation Spray Verdant.",
+      "visualDescription": "Green in color. Emits green rectangular particles."
+    },
+    {
+      "name": "Nocturnal",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x4",
+      "obtainment": "Can be applied by the Trinity Fruit. Can be applied by the Lion pet. During Safari Night.",
+      "visualDescription": "Similar to Moonlit."
+    },
+    {
+      "name": "Twilight",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x4",
+      "obtainment": "Can be applied by the Lion pet. During Safari Dusk.",
+      "visualDescription": "Similar to Nocturnal."
+    },
+    {
+      "name": "Fall",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x4",
+      "obtainment": "Can be applied by the Grizzly Bear pet. During Fall Bloom. Can be applied by the Fall Fountain cosmetic.",
+      "visualDescription": "Unharvested: Orange and yellow stud particles fall from the crop. Harvested: Orange and yellow stud particles fall from the crop. Slightly orange in color."
+    },
+    {
+      "name": "Bloodlit",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x4",
+      "obtainment": "During Blood Moon or Full Moon. Can replace Wet mutation into Bloodlit mutation by the Kappa pet. Can be applied by the Hex Serpent pet after devouring five single-harvest crops in the Hex Square cosmetic.",
+      "visualDescription": "Shining. Dark red in color."
+    },
+    {
+      "name": "Clay",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "Combining Wet or Drenched with Sandy mutation.",
+      "visualDescription": "Brownish color. One of the only mutations in the game with a unique texture."
+    },
+    {
+      "name": "Twisted",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "During Tornado.",
+      "visualDescription": "Tornado-like swirls similar to Windstruck."
+    },
+    {
+      "name": "Drenched",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "During Tropical Rain, Water Yo#r Garden, Super Storm, Rain Dance or Tsunami.",
+      "visualDescription": "Drenched in water. Crop looks saturated."
+    },
+    {
+      "name": "HoneyGlazed",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "Using the Honey Sprinkler. Can be applied by the Bear Bee pet. Using the Mutation Spray HoneyGlazed. During Bee Storm.",
+      "visualDescription": "Emits a yellow fog. Dripping in honey."
+    },
+    {
+      "name": "Cloudtouched",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "Can be applied by the Hyacinth Macaw pet. Using the Mutation Spray Cloudtouched.",
+      "visualDescription": "Flashing red glints. Cloud-like aura."
+    },
+    {
+      "name": "Arid",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x6",
+      "obtainment": "Can be applied by the Lion or Giraffe pet. During Safari Drought. Can be applied by the Trinity Fruit.",
+      "visualDescription": "Yellowish Orange."
+    },
+    {
+      "name": "Frozen",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x10",
+      "obtainment": "Combining Wet or Drenched with Chilled mutation. Using the Flower Froster Sprinkler. This only works on flower-type plants. Can be applied by the Polar Bear or the Sushi Bear pet. Can be applied by any pets with the Frozen mutation.",
+      "visualDescription": "Encased in an ice block"
+    },
+    {
+      "name": "Tempestuous",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x12",
+      "obtainment": "Combining Windstruck and Twisted mutation. Can be applied by the Pterodactyl pet. Tempestuous mutation cannot be applied by the Pterodactyl pet if it already has Windstruck or Twisted in it.",
+      "visualDescription": "Fast wind particles around the produce."
+    },
+    {
+      "name": "Acidic",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x15",
+      "obtainment": "During Acid Rain.",
+      "visualDescription": "Emits a greenish yellow cloud of dust."
+    },
+    {
+      "name": "Gnomed",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x15",
+      "obtainment": "Can be applied by the Gnome pet.",
+      "visualDescription": "Emits particles of the Sam Gnome's image."
+    },
+    {
+      "name": "Eclipsed",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x20",
+      "obtainment": "During Solar Eclipse.",
+      "visualDescription": "Blue glare-like particles forms around the crop."
+    },
+    {
+      "name": "Ceramic",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x32",
+      "obtainment": "Combining Clay with either: Sundried, Fried, Burnt, Molten or Cooked mutation. Cannot reapply Clay, Fried, Cooked or Burnt after.",
+      "visualDescription": "Looks darker in color similar to Sundried."
+    },
+    {
+      "name": "Monsoon",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "During Safari Typhoon. Can be applied by the Hippo or the Lion pet.",
+      "visualDescription": "TBA."
+    },
+    {
+      "name": "Friendbound",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x70",
+      "obtainment": "Can be applied by the Friendship Pot when fully grown. Having 4 friends/connections in a server. Can be applied randomly at any time.",
+      "visualDescription": "Pink in color. Emits pink hearts and stars."
+    },
+    {
+      "name": "Sundried",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x85",
+      "obtainment": "During Heatwave, Solar Flare or Pyramid Obby. Can be applied by the Mantis Shrimp pet.",
+      "visualDescription": "Dark brown tint applied"
+    },
+    {
+      "name": "Aurora",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x90",
+      "obtainment": "During Aurora Borealis or Crystal Beam. Can be applied by any pet with the Aurora Mutation.",
+      "visualDescription": "Shifts between blues and purples. Releases faint smoke. Purplish, Whitish glow"
+    },
+    {
+      "name": "Shocked",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x100",
+      "obtainment": "During Thunderstorm, Super Storm, Jandel Storm or Flamingo Storm. Using the Mutation Spray Shocked. Can be applied by the Raiju or the Firefly pet. Raiju pet can only apply during Thunderstorm. Can be applied with any pets with the Shocked mutation. Shocked Pets can only apply during Thunderstorm.",
+      "visualDescription": "Neon glow"
+    },
+    {
+      "name": "Paradisal",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x100",
+      "obtainment": "Combining Verdant and Sundried mutation. During Solar Flare.",
+      "visualDescription": "Lime Green in color Emits sun ray-like particles."
+    },
+    {
+      "name": "Celestial",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x120",
+      "obtainment": "During Meteor Shower or Crystal Beam. Can be applied by the Hex Serpent pet after devouring five single-harvest crops in the Hex Square cosmetic.",
+      "visualDescription": "Reflective Sparkling yellow and purple"
+    },
+    {
+      "name": "Disco",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x125",
+      "obtainment": "During Disco, Monster Mash, Super Storm, DJ Sam, Text Collect, Boombox Party or Strobe Party. Can be applied by the Disco Bee pet. Using the Mutation Spray Disco.",
+      "visualDescription": "Shining. Flashing red, pink, yellow, green, and blue (in that order) constantly. On Oct 11, 2025, the day of the Halloween Update P1, the appearance mysteriously changed to the same texture of Shocked."
+    },
+    {
+      "name": "Voidtouched",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x135",
+      "obtainment": "During Black Hole. Can be applied by the Space Squirrel pet.",
+      "visualDescription": "Emits black hole particles."
+    },
+    {
+      "name": "Dawnbound",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x150",
+      "obtainment": "During Sun God. Can be applied by any pets with the Ascended mutation.",
+      "visualDescription": "Glowing, electrified look. Wind puffs and blows around."
+    },
+    {
+      "name": "Cosmic",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x240",
+      "obtainment": "Combining Celestial and Aurora mutation.",
+      "visualDescription": "Emitting yellow, purple and pink colors with a glow."
+    },
+    {
+      "name": "Abyssal",
+      "category": "Natural",
+      "appearance": null,
+      "multiplier": "x240",
+      "obtainment": "Combining Voidtouched and Eclipsed mutation.",
+      "visualDescription": "Has several parts glowing purple or pink, and releases deep purple swirl particles."
+    },
+    {
+      "name": "Silver",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "5x",
+      "obtainment": "Can be applied by using the Silver Fertilizer gear. Only works in crops and not produces. Can be applied by the Cockatrice or the Silver Dragonfly pet.",
+      "visualDescription": "Shining. Silver in color. Emits a chiming sound when harvested."
+    },
+    {
+      "name": "Glimmering",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x2",
+      "obtainment": "During Fairies. Using the Mutation Spray Glimmering. Can be applied by the Glimmering Sprite pet. Can be applied by any pets with the Glimmering mutation. Interacting with a Fairy. More Fairies spawn during Fairies.",
+      "visualDescription": "Transparent look, pink and purple glow and has a small shockwave effect with a trail behind it."
+    },
+    {
+      "name": "Choc",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x2",
+      "obtainment": "Using the Chocolate Sprinkler. During Chocolate Rain. Using the Mutation Choc Spray. Can be applied by the Tanuki pet.",
+      "visualDescription": "Brown in color Dripping with chocolate syrup"
+    },
+    {
+      "name": "Snowy",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x2",
+      "obtainment": "During Snowfall, Yeti Night or Snowball Fight. Can be applied by the Nutcracker or theReindeer pet.",
+      "visualDescription": "Neon white in color."
+    },
+    {
+      "name": "Fiery",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x2",
+      "obtainment": "Can be applied by the Dragon's Firework.",
+      "visualDescription": "Fiery fruit."
+    },
+    {
+      "name": "Sauce",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "Can be applied by the Spaghetti Sloth pet.",
+      "visualDescription": "Red drops of sauce fall off the fruit."
+    },
+    {
+      "name": "Meatball",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "Can be applied by the Spaghetti Sloth pet.",
+      "visualDescription": "Meatball particles fly from the top of the fruit."
+    },
+    {
+      "name": "Pasta",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "Can be applied by the Spaghetti Sloth pet.",
+      "visualDescription": "Emits a tan squirmy effect around the bottom of the plant."
+    },
+    {
+      "name": "Aromatic",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "During Kitchen Storm. Can be applied by any pets with the Aromatic mutation.",
+      "visualDescription": "Emits an yellow steam effect"
+    },
+    {
+      "name": "Sleepy",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "Can be applied by the Calico pet.",
+      "visualDescription": "Lots of z's coming out"
+    },
+    {
+      "name": "Vamp",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "During Bat Attack. Can be applied by the Hex Serpent pet after devouring five single-harvest crops in the Hex Square cosmetic. Can be applied by the Specter pet.",
+      "visualDescription": "Blood red fog emits from the targeted plant."
+    },
+    {
+      "name": "Coin",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "Can be applied by the Sheckling pet.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Heartstruck",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "Can be applied by the Pink Panda pet. During Cupid's Arrow.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Luck",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x3",
+      "obtainment": "During Rainbow Event.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Burnt",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x4",
+      "obtainment": "Can be applied by the Cooked Owl or Red Dragon pet. Using the Mutation Spray Burnt. During Armageddon. Can be applied by any pets with the Soulflare mutation.",
+      "visualDescription": "Unharvested: Black in color Sparking Harvested: Black in color Emits ash particles"
+    },
+    {
+      "name": "Peppermint",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x4",
+      "obtainment": "Can be applied by the Mystical Snow Globe. During Giant Candy Cane Rain.",
+      "visualDescription": "Red and white in color."
+    },
+    {
+      "name": "Plasma",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "During Laser Storm or Flamingo Laser Storm. Can be applied by the Peach Wasp pet. Can be applied by the Radioactive Stegosaurus pet when harvesting a crop.",
+      "visualDescription": "Neon. Pinkish purple in color."
+    },
+    {
+      "name": "Wildfast",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "Can be applied by the Cheetah or the Lion pet.",
+      "visualDescription": "Yellow must covers the fruit. Yellow particles comes out of the fruit."
+    },
+    {
+      "name": "Geode",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "Can be applied by the Geode Sprinkler.",
+      "visualDescription": "TBD"
+    },
+    {
+      "name": "Snowtouched",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "TBD",
+      "visualDescription": "TBD"
+    },
+    {
+      "name": "Opulent",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "Can be applied by the Galah Cockatoo pet.",
+      "visualDescription": "Similar to Shocked but hot pink."
+    },
+    {
+      "name": "Tempered",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x6",
+      "obtainment": "During Smithing Fever.",
+      "visualDescription": "Crop has an orange neon glow."
+    },
+    {
+      "name": "Whimsical",
+      "category": "Limited",
+      "appearance": "center|100px",
+      "multiplier": "x6",
+      "obtainment": "Can be applied by the Bear on Bike pet.",
+      "visualDescription": "Lots of confetti coming out."
+    },
+    {
+      "name": "Static",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x8",
+      "obtainment": "Can be applied by the Raiju pet after devouring Shocked mutation.",
+      "visualDescription": "Emits yellow electricity particles."
+    },
+    {
+      "name": "Fried",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x8",
+      "obtainment": "During Fried Chicken. Can be applied by any pets with the Fried mutation. Using the Mutation Spray Fried.",
+      "visualDescription": "Small yellow particles fall from the crop."
+    },
+    {
+      "name": "Bloom",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x8",
+      "obtainment": "Using the Mutation Spray Bloom. Can be applied by the Spriggan pet.",
+      "visualDescription": "Flashing green explosions on crop. A flower-like aura around the crop."
+    },
+    {
+      "name": "Rot",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x8",
+      "obtainment": "Can be applied by the Mandrake pet when harvesting a Mandrake crop.",
+      "visualDescription": "Emits small purple particles."
+    },
+    {
+      "name": "Spooky",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x8",
+      "obtainment": "Can be applied by the Ghost Bear or the Specter pet.",
+      "visualDescription": "Emits white fading cloud, ring and ghost particles."
+    },
+    {
+      "name": "Pestilent",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x8",
+      "obtainment": "Can be applied by the Hex Serpent pet after devouring five single-harvest crops in the Hex Square cosmetic.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Blight",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x8",
+      "obtainment": "Can be applied by the Dark Spriggan pet.",
+      "visualDescription": "Emits violet sparkling and block particles."
+    },
+    {
+      "name": "Necrotic",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x8",
+      "obtainment": "Can be applied by the Ghostly Dark Spriggan pet.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Webbed",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x8",
+      "obtainment": "Can be applied by the Trapdoor Spider pet.",
+      "visualDescription": "Similar to Bloom but white in color"
+    },
+    {
+      "name": "Amber",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x10",
+      "obtainment": "Using the Mutation Spray Amber. Can be applied by the Raptor pet when harvesting crops.",
+      "visualDescription": "Coated in semi-transparent orange overlay, emits orange cloud particles."
+    },
+    {
+      "name": "Wilted",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x10",
+      "obtainment": "Can be applied by the Weeping Branch crop.",
+      "visualDescription": "Some of the fruit Wilts and turn into a shade of periwinkle. It starts dripping while the fruit has started wilting."
+    },
+    {
+      "name": "Ornamented",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x10",
+      "obtainment": "During Festive Night. Can be applied by the Red-Nosed Reindeer or the Nutcracker pet.",
+      "visualDescription": "Green in color. Having a red square hanging by a black string."
+    },
+    {
+      "name": "Cute",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x10",
+      "obtainment": "Can be applied by the Red Rose Fox pet.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Oil",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x15",
+      "obtainment": "During Oil Rain. Can be applied by the Junkbot pet.",
+      "visualDescription": "Emits a black steam effect and has a dripping effect like wet mutation."
+    },
+    {
+      "name": "Chakra",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x15",
+      "obtainment": "Can be applied by the Kitsune pet when stealing a crop.",
+      "visualDescription": "Red electric particles around the crop with the red star particle in the handle."
+    },
+    {
+      "name": "CorruptChakra",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x15",
+      "obtainment": "Can be applied by the Corrupted Kitsune pet.",
+      "visualDescription": "Blue lightning sparks around the plant with blue stars in the middle."
+    },
+    {
+      "name": "Jackpot",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x15",
+      "obtainment": "During Money Rain. Can be applied by the Fortune Squirrel pet.",
+      "visualDescription": "Emits falling robux particles and star particles."
+    },
+    {
+      "name": "Spaghetti",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x15",
+      "obtainment": "Combining Pasta, Sauce and Meatball mutation.",
+      "visualDescription": "Emits noodle particles, meatballs and has red sauce dripping from the bottom."
+    },
+    {
+      "name": "Toxic",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x15",
+      "obtainment": "Can be applied by the Cockatrice pet.",
+      "visualDescription": "Green particles dripping below."
+    },
+    {
+      "name": "Sizzled",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x18",
+      "obtainment": "Combining Cooked and Fried mutation.",
+      "visualDescription": "The fruit when it has the effects of white smoke surrounding it."
+    },
+    {
+      "name": "Tranquil",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x20",
+      "obtainment": "During Zen Aura. Can be applied by the Tanchozuru pet. Can be applied by any pets with the Tranquil mutation. Can be applied by the Kodama when harvesting zen type crops.",
+      "visualDescription": "Has a white, circular rippling effect. Words like \"信\", \"命\", \"夢\", and \"氣\" appear."
+    },
+    {
+      "name": "OldAmber",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x20",
+      "obtainment": "Aging Amber mutation by 24 hours.",
+      "visualDescription": "More orange than its yellow predecessor."
+    },
+    {
+      "name": "Corrupt",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x20",
+      "obtainment": "During Corrupt Zen Aura. Can be applied by any pets with the Corrupted mutation. Can be applied by the Corrupted Kodama when harvesting zen type crops.",
+      "visualDescription": "Emits falling red and black particles. Red lightning."
+    },
+    {
+      "name": "Withered",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x20",
+      "obtainment": "Can be applied by any crop with the Wilted mutation and being near the Weeping Branch crop.",
+      "visualDescription": "The fruit starts to decay into a almost black purple. The fruit starts producing ashes as the periwinkle starts decaying and wither."
+    },
+    {
+      "name": "Zombified",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "Can be applied by the Chicken Zombie pet Can be applied by the Hex Serpent pet after devouring five single-harvest crops in the Hex Square cosmetic.",
+      "visualDescription": "Emits a green fog. Dripping with green liquid."
+    },
+    {
+      "name": "Molten",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "During Volcano, Super Storm or Armageddon. Can be applied by the Lobster Thermidor pet.",
+      "visualDescription": "Neon. Orange, yellow and red in color."
+    },
+    {
+      "name": "Flaming",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "Can be applied by the Phoenix pet. Can be applied by any pets with the Soulflare mutation.",
+      "visualDescription": "Red and orange in color Emit small red and orange fire particle"
+    },
+    {
+      "name": "Ghostly",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "Can be applied by the Great Pumpkin crop. Can be appied by the Specter pet.",
+      "visualDescription": "Makes the crop almost transparent with a slight hint of blue."
+    },
+    {
+      "name": "Mirage",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "Can be applied by the Rhino or the Lion pet. During Safari Oasis. Can be applied by the Trinity Fruit crop.",
+      "visualDescription": "Light blue in color."
+    },
+    {
+      "name": "Crystalized",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "Can be applied by the Sapphire Macaw pet.",
+      "visualDescription": "Turn white"
+    },
+    {
+      "name": "Glacial",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "During Permafrost Explosion. Can be applied by the Frost Dragon pet.",
+      "visualDescription": "Unknown."
+    },
+    {
+      "name": "Gale",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "Can be applied by the Wind Wyvern pet.",
+      "visualDescription": "Fruit is full of winds."
+    },
+    {
+      "name": "Firework",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x26",
+      "obtainment": "Can be applied by the New Year's Dragon pet. Can be applied by the Dragon's Firework gear.",
+      "visualDescription": "Fireworks explode with shades of orange and yellow."
+    },
+    {
+      "name": "Gloom",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x30",
+      "obtainment": "Combining Bloom and Rot mutation.",
+      "visualDescription": "Emits both purple and yellow particles"
+    },
+    {
+      "name": "Umbral",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x30",
+      "obtainment": "Combining Blight and Pestilent mutation.",
+      "visualDescription": "Emits both yellowish green and purple particles Similar to Bloom"
+    },
+    {
+      "name": "Glossy",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x30",
+      "obtainment": "Can be applied by the Glass Dog or Glass Cat pet. During Raining Glass Animals.",
+      "visualDescription": "Unknown."
+    },
+    {
+      "name": "Typhoon",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x30",
+      "obtainment": "During Safari Storm. Can be applied by the Lion pet.",
+      "visualDescription": "Similar to Cyclonic but white in color."
+    },
+    {
+      "name": "Fierywork",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x30",
+      "obtainment": "Combining Firework and Fiery mutation.",
+      "visualDescription": "Fiery Fireworks exploding."
+    },
+    {
+      "name": "Blizzard",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x40",
+      "obtainment": "During Yeti Night.",
+      "visualDescription": "Smilar to Subzero but more blue."
+    },
+    {
+      "name": "SunScorched",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x32",
+      "obtainment": "Combining Mirage and Arid.",
+      "visualDescription": "Dark sunburn-like tint."
+    },
+    {
+      "name": "HarmonisedChakra",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x35",
+      "obtainment": "Combining Chakra and CorruptChakra mutation.",
+      "visualDescription": "Magenta rays and lightning streak out of the fruit with stars on the handle. A faint magenta halo around the crop."
+    },
+    {
+      "name": "Gourmet",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x37",
+      "obtainment": "Combining Aromatic, Spaghetti and Sizzled mutation.",
+      "visualDescription": "Stormy spaghetti particles along with tan mist"
+    },
+    {
+      "name": "Corrosive",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x40",
+      "obtainment": "Combining Acidic and Toxic mutations.",
+      "visualDescription": "Part of this crop turns green, green particles drop from the bottom and particles sweep from the crop."
+    },
+    {
+      "name": "AncientAmber",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "Aging OldAmber mutation by 48 hours.",
+      "visualDescription": "Orange Particles."
+    },
+    {
+      "name": "Fortune",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "Can be applied by the Golden Goose pet. The Golden Goose can only apply to a Golden Egg crop. Can be applied by the Golden Egg crop when selling itself.",
+      "visualDescription": "Sparkling with a golden and silver metallic shine. Gives off a yellow fog-like gas. Emits robux particles."
+    },
+    {
+      "name": "Cyclonic",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "Can be applied by the Griffin pet.",
+      "visualDescription": "Blue particles that are attracted to the fruit, blue stars, and grey circles appearing around the fruit."
+    },
+    {
+      "name": "Luminous",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "Using the Mutation Spray Luminous. Can be applied by the Luminous Sprite pet. Using the Luminous Wand when Fairies start. Can be applied by any pets with the Luminous mutation.",
+      "visualDescription": "Same as glimmering mutation. Emit small explosion with rainbow color and aurora color."
+    },
+    {
+      "name": "Desolate",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "Can be applied by any crop with the Withered mutation and being near the Weeping Branch crop.",
+      "visualDescription": "Crimson Red with red liquid dripping."
+    },
+    {
+      "name": "Stampede",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "During Safari Stampede. Can be applied by the Trinity Fruit crop. Can be applied by the Lion pet.",
+      "visualDescription": "Animal footprint covers the crop. Deformed Fruit."
+    },
+    {
+      "name": "Whalebound",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "During Whale Waters.",
+      "visualDescription": "Turn Navy Blue with bubbles coming out."
+    },
+    {
+      "name": "Heartbound",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "Can be applied by the Red Rose Fox pet.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Blazing",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x52",
+      "obtainment": "Combining Molten and Flaming mutation.",
+      "visualDescription": "Particle emissions and crop looks similar to Flaming mutation."
+    },
+    {
+      "name": "Shadowbound",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x70",
+      "obtainment": "Combining Gloom and Umbral mutation.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Leeched",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x70",
+      "obtainment": "Can be applied by the Woody pet During Vampire Bat Thirst.",
+      "visualDescription": "Unknown."
+    },
+    {
+      "name": "Warped",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x75",
+      "obtainment": "During Brainrot Stampede. Can be applied by the Apple Gazelle pet when harvesting Sugar Apples.",
+      "visualDescription": "Purple particles spin around the crop."
+    },
+    {
+      "name": "Azure",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x75",
+      "obtainment": "Can be applied by the Mizuchi pet. After selling any crops with the Azure mutation.",
+      "visualDescription": "Crop becomes transparent, with some blue shining particles."
+    },
+    {
+      "name": "Terran",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x75",
+      "obtainment": "Can be applied by the Hydra pet",
+      "visualDescription": "Unknown."
+    },
+    {
+      "name": "Graceful",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x77",
+      "obtainment": "Can be applied by the Swan pet.",
+      "visualDescription": "Emits bright star praticles"
+    },
+    {
+      "name": "FoxfireChakra",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x90",
+      "obtainment": "Can be applied by the Kitsune pet when stealing a crop.",
+      "visualDescription": "Intense red electric particles around the crop. Imbues the crop with red flames."
+    },
+    {
+      "name": "CorruptFoxfireChakra",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x90",
+      "obtainment": "Can be applied by the Corrupted Kitsune pet.",
+      "visualDescription": "Blue lightning sparks around the plant with blue stars in the middle. Imbues the crop with blue flames."
+    },
+    {
+      "name": "Brainrot",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x100",
+      "obtainment": "During Brainrot Portal. Can be applied by the Lemon Lion pet.",
+      "visualDescription": "Emits colorful confetti and Man Face PNGs, with rainbow aura circles with full of happiness."
+    },
+    {
+      "name": "Maelstrom",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x100",
+      "obtainment": "Combining Tempestuous and Cyclonic mutation.",
+      "visualDescription": "Same effects as Cyclonic. Neon blue color on different parts of the fruit (sometimes they can fill it completely and leave only the top)."
+    },
+    {
+      "name": "Meteoric",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x125",
+      "obtainment": "During Meteor Strike. Can be applied by the Lobster Thermidor pet.",
+      "visualDescription": "Having golden-yellow particles around the crop."
+    },
+    {
+      "name": "Infernal",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x180",
+      "obtainment": "Combining Meteoric and Blazing mutation.",
+      "visualDescription": "Similar to Flaming particles, but with light green flames emitted from the crop. Crop turns light green as well."
+    },
+    {
+      "name": "Stormcharged",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x180",
+      "obtainment": "Combining Static, Shocked and Tempestuous mutation.",
+      "visualDescription": "Crop colors turn blue and white, rapid wind particles, white raindrop particles, and with light blue sparkles emitted from the crop."
+    },
+    {
+      "name": "HarmonisedFoxfireChakra",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x190",
+      "obtainment": "Combining FoxfireChakra and CorruptFoxfireChakra mutation.",
+      "visualDescription": "A mix of red and blue lightning effects. Pulses between warm and cold glows. Emits intense star particles in both red and blue colors. Imbues the crop with blue flames."
+    },
+    {
+      "name": "AscendedChakra",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x230",
+      "obtainment": "Combining HarmonisedChakra and HarmonisedFoxfireChakra mutation.",
+      "visualDescription": "A holy radiant mix of angelic white and holy yellowish tone. Pulses with harmony and balance of radiant white and a yellowish tone. Emits white and yellow angelic star particles."
+    },
+    {
+      "name": "Mindbender",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x175",
+      "obtainment": "Combining Brainrot and Warped mutation.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Riptide",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x80",
+      "obtainment": "Combining Typhoon and Monsoon mutation.",
+      "visualDescription": "Waves and water particles swirl around."
+    },
+    {
+      "name": "Stormbound",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x270",
+      "obtainment": "Combining Riptide and Stormcharged mutation.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Supernatural",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x37",
+      "obtainment": "Combining Spooky, Vamp and Ghostly mutation.",
+      "visualDescription": "Glowing purple aura with small sparkles."
+    },
+    {
+      "name": "Affluent",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x70",
+      "obtainment": "Combining Coin, Jackpot and Fortune mutation.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Goldsparkle",
+      "category": "Limited",
+      "appearance": null,
+      "multiplier": "x500",
+      "obtainment": "Can be applied by the Gold Finch pet.",
+      "visualDescription": "Golden Sparkles flying out."
+    },
+    {
+      "name": "Wiltproof",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x4",
+      "obtainment": "During Drought.",
+      "visualDescription": "Highly saturated colors."
+    },
+    {
+      "name": "Heavenly",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x5",
+      "obtainment": "During Floating Jandel or Floating Flamingo.",
+      "visualDescription": "Emits Glow, shining fire from the base."
+    },
+    {
+      "name": "Brewed",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x7",
+      "obtainment": "During Giant Cauldron.",
+      "visualDescription": "Emits green smoke, with green squares floating off of the crop, along with a dripping effect like wet mutation."
+    },
+    {
+      "name": "Boil",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x15",
+      "obtainment": "During Boil Rain.",
+      "visualDescription": "Emits a white steam effect and has a dripping effect like wet mutation."
+    },
+    {
+      "name": "Gilded",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x15",
+      "obtainment": "During Midas Rain.",
+      "visualDescription": "Has a yellow outline. Emits yellow star particles."
+    },
+    {
+      "name": "Moonbled",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "During Marrow Moon.",
+      "visualDescription": "Affected crop is pale grey in colour, and grey mist emits from the crop."
+    },
+    {
+      "name": "Volcanic",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "During Eruption.",
+      "visualDescription": "Unknown."
+    },
+    {
+      "name": "Alienated",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x25",
+      "obtainment": "During Alien Aurora.",
+      "visualDescription": "Aurora but Green to blue and reduced mutipler from x90 to x25."
+    },
+    {
+      "name": "OilBoil",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x30",
+      "obtainment": "Combining Oil and Boil mutation.",
+      "visualDescription": "A bit of gray droplets. Small smoke around the crop."
+    },
+    {
+      "name": "Enlightened",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x35",
+      "obtainment": "During Enlightenment.",
+      "visualDescription": "Similar to Molten"
+    },
+    {
+      "name": "Subzero",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x40",
+      "obtainment": "During Route Runner or Frozen Ice King.",
+      "visualDescription": "Light blue in color. Emits snowflakes and blue haze."
+    },
+    {
+      "name": "Severed",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x40",
+      "obtainment": "During Offering.",
+      "visualDescription": "Parts separated apart similar to the Sliced mutation."
+    },
+    {
+      "name": "Junkshock",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x45",
+      "obtainment": "During Junkbot Raid.",
+      "visualDescription": "Has lime and yellow bolts circling around the fruit, emits some smoke effects and makes the fruit glow."
+    },
+    {
+      "name": "Batty",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x45",
+      "obtainment": "During Fruit Bat Attack.",
+      "visualDescription": "Unknown."
+    },
+    {
+      "name": "Blitzshock",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "During Lightning Storm.",
+      "visualDescription": "Blue tint with neon shine. Has yellow and blue \"electric\" particles swirling around. Occasionally emits a blue cloud puff."
+    },
+    {
+      "name": "Lightcycle",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "During Stoplight.",
+      "visualDescription": "Alternates between green, yellow, and red."
+    },
+    {
+      "name": "Sliced",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "During Jandel Katana.",
+      "visualDescription": "Parts divided. Rotated and shifted a bit."
+    },
+    {
+      "name": "Enchanted",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x50",
+      "obtainment": "During Enchantment.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Radioactive",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x55",
+      "obtainment": "During Radioactive Carrot.",
+      "visualDescription": "Neon green in color."
+    },
+    {
+      "name": "Infected",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x75",
+      "obtainment": "During Jandel Zombie.",
+      "visualDescription": "Emits small, hazy green particles. Completely green in color."
+    },
+    {
+      "name": "Glitched",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x85",
+      "obtainment": "During Dissonant.",
+      "visualDescription": "Fruit becomes semi-transparent with green, teal, blue or white parts. Emits glitch particles nearby."
+    },
+    {
+      "name": "Fractured",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x92",
+      "obtainment": "Combining Glitched and Plasma mutation.",
+      "visualDescription": "Broken crystal-like appearance."
+    },
+    {
+      "name": "Slashbound",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x95",
+      "obtainment": "Combining Sliced and Severed mutation.",
+      "visualDescription": "Similar to Severed mutation"
+    },
+    {
+      "name": "Blackout",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x95",
+      "obtainment": "During Reaper Scythe.",
+      "visualDescription": "Fully black in colour, has grey particles."
+    },
+    {
+      "name": "Alienlike",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x100",
+      "obtainment": "During Alien Invasion or Jandel UFO.",
+      "visualDescription": "Cyan in color Cyan particles emitted from the fruit Parts of fruit can be fully transparent/invisible, or be partially transparent."
+    },
+    {
+      "name": "Beanbound",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x100",
+      "obtainment": "During Beanaura.",
+      "visualDescription": "The crop is a bright shade of neon green."
+    },
+    {
+      "name": "Plagued",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x102",
+      "obtainment": "Combining Infected and Zombified mutation.",
+      "visualDescription": "Green mists covers the fruit and admits contagious green particles."
+    },
+    {
+      "name": "Touchdown",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x105",
+      "obtainment": "During Post Dunk.",
+      "visualDescription": "Red and orange sparkles spray out of the bottom of the fruit."
+    },
+    {
+      "name": "Galactic",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x120",
+      "obtainment": "During Space Travel or Supernova.",
+      "visualDescription": "Turns the crop a light purple, some parts of the fruit are glowing."
+    },
+    {
+      "name": "Extraterrestrial",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x137",
+      "obtainment": "Combining Alienlike and Alienated mutation.",
+      "visualDescription": "Blue with black and white and sometime gray."
+    },
+    {
+      "name": "Biohazard",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x157",
+      "obtainment": "Combining Radioactive and Plagued mutation.",
+      "visualDescription": "Unknown."
+    },
+    {
+      "name": "Contagion",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x205",
+      "obtainment": "Combining Corrosive and Biohazard mutation.",
+      "visualDescription": "TBA"
+    },
+    {
+      "name": "Astral",
+      "category": "Admin",
+      "appearance": null,
+      "multiplier": "x365",
+      "obtainment": "Combining Cosmic and Galactic mutation.",
+      "visualDescription": "Yellow and pink coloured stars are released and some parts of the fruits are gradient and glowing."
+    },
+    {
+      "name": "Charcoal",
+      "category": "Unreleased",
+      "appearance": null,
+      "multiplier": "x6",
+      "obtainment": "Using the Charcoal Sprinkler.",
+      "visualDescription": "Charcoal colour."
+    },
+    {
+      "name": "Mineral",
+      "category": "Unreleased",
+      "appearance": null,
+      "multiplier": "x18",
+      "obtainment": "Combining Charcoal, Tempered and Geode mutation.",
+      "visualDescription": "Charcoal but browner."
+    }
+  ],
+  "mutationAppliers": {
+    "pets": [
+      {
+        "mutation": "Chilled, Frozen",
+        "source": "Polar Bear",
+        "release": "Update 1.04.0"
+      },
+      {
+        "mutation": "Gold",
+        "source": "Dragonfly",
+        "release": null
+      },
+      {
+        "mutation": "Zombified",
+        "source": "Chicken Zombie",
+        "release": "Update 1.06.0"
+      },
+      {
+        "mutation": "HoneyGlazed",
+        "source": "Bear Bee",
+        "release": "Update 1.08.0"
+      },
+      {
+        "mutation": "Pollinated",
+        "source": "Bee, Honey Bee, Petal Bee, Queen Bee",
+        "release": null
+      },
+      {
+        "mutation": "Wasp, Tarantula Hawk",
+        "source": "Update 1.09.0",
+        "release": null
+      },
+      {
+        "mutation": "Rainbow",
+        "source": "Butterfly",
+        "release": null
+      },
+      {
+        "mutation": "Disco",
+        "source": "Disco Bee",
+        "release": null
+      },
+      {
+        "mutation": "Pollinated",
+        "source": "Pack Bee",
+        "release": "Update 1.10.0"
+      },
+      {
+        "mutation": "Burnt, Cooked",
+        "source": "Cooked Owl",
+        "release": null
+      },
+      {
+        "mutation": "Wet",
+        "source": "Sea Turtle",
+        "release": "Update 1.11.0"
+      },
+      {
+        "mutation": "Verdant",
+        "source": "Scarlet Macaw",
+        "release": null
+      },
+      {
+        "mutation": "Cloudtouched",
+        "source": "Hyacinth Macaw",
+        "release": "Update 1.12.0"
+      },
+      {
+        "mutation": "Amber",
+        "source": "Raptor",
+        "release": "Update 1.13.0"
+      },
+      {
+        "mutation": "Windstruck, Tempestuous",
+        "source": "Pterodactyl",
+        "release": null
+      },
+      {
+        "mutation": "Windstruck",
+        "source": "Windy Pets",
+        "release": "Update 1.14.0"
+      },
+      {
+        "mutation": "Frozen",
+        "source": "Frozen Pets",
+        "release": null
+      },
+      {
+        "mutation": "Shocked",
+        "source": "Shocked Pets",
+        "release": null
+      },
+      {
+        "mutation": "Dawnbound",
+        "source": "Ascended Pets",
+        "release": null
+      },
+      {
+        "mutation": "Moonlit, Choc, Chilled",
+        "source": "Tanuki",
+        "release": "Update 1.15.0"
+      },
+      {
+        "mutation": "Tranquil",
+        "source": "Tanchozuru, Tranquil Pets",
+        "release": null
+      },
+      {
+        "mutation": "Wet, Bloodlit",
+        "source": "Kappa",
+        "release": null
+      },
+      {
+        "mutation": "Chakra, FoxfireChakra",
+        "source": "Kitsune",
+        "release": null
+      },
+      {
+        "mutation": "Tranquil",
+        "source": "Kodama",
+        "release": "Update 1.16.0"
+      },
+      {
+        "mutation": "Corrupt",
+        "source": "Corrupted Pets, Corrupted Kodama",
+        "release": null
+      },
+      {
+        "mutation": "Static, Shocked",
+        "source": "Raiju",
+        "release": null
+      },
+      {
+        "mutation": "CorruptChakra, FoxfireCorruptChakra",
+        "source": "Corrupted Kitsune",
+        "release": null
+      },
+      {
+        "mutation": "Chilled, Frozen",
+        "source": "Sushi Bear",
+        "release": "Update 1.17.0"
+      },
+      {
+        "mutation": "Pasta, Sauce, Meatball",
+        "source": "Spaghetti Sloth",
+        "release": null
+      },
+      {
+        "mutation": "Fried",
+        "source": "Fried Pets",
+        "release": null
+      },
+      {
+        "mutation": "Molten, Meteoric",
+        "source": "Lobster Thermidor",
+        "release": "Update 1.18.0"
+      },
+      {
+        "mutation": "Aromatic",
+        "source": "Aromatic Pets",
+        "release": null
+      },
+      {
+        "mutation": "Oil",
+        "source": "Junkbot",
+        "release": null
+      },
+      {
+        "mutation": "Bloom",
+        "source": "Spriggan",
+        "release": "Update 1.19.0"
+      },
+      {
+        "mutation": "Sandy",
+        "source": "Jackalope",
+        "release": null
+      },
+      {
+        "mutation": "Fortune",
+        "source": "Golden Goose",
+        "release": null
+      },
+      {
+        "mutation": "Rot",
+        "source": "Mandrake",
+        "release": "Update 1.20.0"
+      },
+      {
+        "mutation": "Cyclonic",
+        "source": "Griffin",
+        "release": null
+      },
+      {
+        "mutation": "Gnomed",
+        "source": "Gnome",
+        "release": null
+      },
+      {
+        "mutation": "Brainrot",
+        "source": "Lemon Lion",
+        "release": null
+      },
+      {
+        "mutation": "Warped",
+        "source": "Apple Gazelle",
+        "release": null
+      },
+      {
+        "mutation": "Plasma",
+        "source": "Peach Wasp",
+        "release": null
+      },
+      {
+        "mutation": "Glimmering",
+        "source": "Glimmering Sprite, Glimmering Pets",
+        "release": "Update 1.21.0"
+      },
+      {
+        "mutation": "Silver, Gold, Toxic",
+        "source": "Cockatrice",
+        "release": null
+      },
+      {
+        "mutation": "Luminous",
+        "source": "Luminous Sprite, Luminous Pets",
+        "release": "Update 1.22.0"
+      },
+      {
+        "mutation": "Flaming",
+        "source": "Phoenix",
+        "release": null
+      },
+      {
+        "mutation": "Cracked",
+        "source": "Badger",
+        "release": "Update 1.23.0"
+      },
+      {
+        "mutation": "Fall",
+        "source": "Grizzly Bear",
+        "release": null
+      },
+      {
+        "mutation": "Graceful",
+        "source": "Swan",
+        "release": null
+      },
+      {
+        "mutation": "Voidtouched",
+        "source": "Space Squirrel",
+        "release": null
+      },
+      {
+        "mutation": "Shocked",
+        "source": "Firefly",
+        "release": "Update 1.25.0"
+      },
+      {
+        "mutation": "Silver",
+        "source": "Silver Dragonfly",
+        "release": null
+      },
+      {
+        "mutation": "Azure",
+        "source": "Mizuchi",
+        "release": null
+      },
+      {
+        "mutation": "Wet, Chilled",
+        "source": "Iguana",
+        "release": null
+      },
+      {
+        "mutation": "Jackpot",
+        "source": "Fortune Squirrel",
+        "release": "Update 1.26.0"
+      },
+      {
+        "mutation": "Moonlit",
+        "source": "Wolf",
+        "release": "Update 1.27.0"
+      },
+      {
+        "mutation": "Spooky",
+        "source": "Ghost Bear",
+        "release": null
+      },
+      {
+        "mutation": "Pestilent, Zombified, Bloodlit, Celestial, Vamp",
+        "source": "Hex Serpent",
+        "release": "Update 1.28.0"
+      },
+      {
+        "mutation": "Blight",
+        "source": "Dark Spriggan",
+        "release": null
+      },
+      {
+        "mutation": "Blight, Necrotic",
+        "source": "Ghostly Dark Spriggan",
+        "release": null
+      },
+      {
+        "mutation": "Leeched",
+        "source": "Woody",
+        "release": "Update 1.29.0"
+      },
+      {
+        "mutation": "Vamp, Spooky, Ghostly",
+        "source": "Specter",
+        "release": "Update 1.29.2"
+      },
+      {
+        "mutation": "Arid",
+        "source": "Giraffe",
+        "release": "Update 1.30.0"
+      },
+      {
+        "mutation": "Mirage",
+        "source": "Rhino",
+        "release": null
+      },
+      {
+        "mutation": "Sundried",
+        "source": "Mantis Shrimp",
+        "release": null
+      },
+      {
+        "mutation": "Terran",
+        "source": "Hydra",
+        "release": null
+      },
+      {
+        "mutation": "Monsoon",
+        "source": "Hippo",
+        "release": "Update 1.31.0"
+      },
+      {
+        "mutation": "Arid, Mirage, Stampede, Twiilght, Typhoon, Wildfast, Wet",
+        "source": "Lion",
+        "release": null
+      },
+      {
+        "mutation": "Crystalized",
+        "source": "Sapphire Macaw",
+        "release": "Update 1.32.0"
+      },
+      {
+        "mutation": "Geode",
+        "source": "Geode Turtle",
+        "release": null
+      },
+      {
+        "mutation": "Webbed",
+        "source": "Trapdoor Spider",
+        "release": null
+      },
+      {
+        "mutation": "Wildfast",
+        "source": "Cheetah",
+        "release": null
+      },
+      {
+        "mutation": "Sundried, Arid, Cracked",
+        "source": "Camel",
+        "release": "Update 1.34.0"
+      },
+      {
+        "mutation": "Glacial",
+        "source": "Frost Dragon",
+        "release": "Update 1.35.0"
+      },
+      {
+        "mutation": "Arctic",
+        "source": "Penguin",
+        "release": null
+      },
+      {
+        "mutation": "Chilled",
+        "source": "Mistletoad",
+        "release": null
+      },
+      {
+        "mutation": "Eggnog",
+        "source": "Eggnog Chick",
+        "release": "Update 1.36.0"
+      },
+      {
+        "mutation": "Snowy",
+        "source": "Reindeer",
+        "release": null
+      },
+      {
+        "mutation": "Chilled, Snowy, Ornamented",
+        "source": "Nutcracker",
+        "release": null
+      },
+      {
+        "mutation": "Blizzard, Snowy",
+        "source": "Yeti",
+        "release": null
+      },
+      {
+        "mutation": "Ornamented",
+        "source": "Red-Nosed Reindeer",
+        "release": null
+      },
+      {
+        "mutation": "Sandy, Snowy",
+        "source": "Summer Kiwi",
+        "release": "Update 1.37.0"
+      },
+      {
+        "mutation": "Frozen, Chilled, Ornamented",
+        "source": "Santa Bear",
+        "release": null
+      },
+      {
+        "mutation": "Subzero",
+        "source": "Frost Squirrel",
+        "release": null
+      },
+      {
+        "mutation": "Festive",
+        "source": "Christmas Spirit",
+        "release": null
+      },
+      {
+        "mutation": "Clockwork",
+        "source": "New Year's Chimp",
+        "release": "Update 1.38.0"
+      },
+      {
+        "mutation": "Celestial",
+        "source": "Star Wolf",
+        "release": null
+      },
+      {
+        "mutation": "Firework",
+        "source": "New Year's Dragon",
+        "release": null
+      },
+      {
+        "mutation": "Whimsical",
+        "source": "Bear on Bike",
+        "release": "Update 1.39.0"
+      },
+      {
+        "mutation": "Pollinated, Burnt, Flaming",
+        "source": "Flame Bee",
+        "release": "Update 1.40.0"
+      },
+      {
+        "mutation": "Diamond",
+        "source": "Diamond Dragonfly",
+        "release": null
+      },
+      {
+        "mutation": "Arid, Mirage, Stampede, Twiilght, Typhoon, Wildfast, Wet",
+        "source": "Lioness",
+        "release": null
+      },
+      {
+        "mutation": "Goldsparkle",
+        "source": "Gold Finch",
+        "release": "Update 1.41.0"
+      },
+      {
+        "mutation": "Sleepy",
+        "source": "Calico",
+        "release": null
+      },
+      {
+        "mutation": "Opulent",
+        "source": "Galah Cockatoo",
+        "release": null
+      },
+      {
+        "mutation": "Gale",
+        "source": "Wind Wyvern",
+        "release": null
+      },
+      {
+        "mutation": "Heartstruck",
+        "source": "Pink Panda",
+        "release": "Update 1.44.0"
+      },
+      {
+        "mutation": "Cute, Heartbound",
+        "source": "Red Rose Fox",
+        "release": null
+      }
+    ],
+    "gears": [
+      {
+        "mutation": "Shocked",
+        "source": "Lightning Rod",
+        "release": "Update 1.03.0"
+      },
+      {
+        "mutation": "Moonlit, Bloodlit",
+        "source": "Night Staff",
+        "release": "Update 1.05.0"
+      },
+      {
+        "mutation": "Celestial",
+        "source": "Star Caller",
+        "release": "Update 1.06.0"
+      },
+      {
+        "mutation": "Pollinated",
+        "source": "Nectar Staff",
+        "release": "Update 1.09.0"
+      },
+      {
+        "mutation": "Sundried",
+        "source": "Tanning Mirror",
+        "release": "Update 1.11.0"
+      },
+      {
+        "mutation": "Tranquil",
+        "source": "Tranquil Staff",
+        "release": "Update 1.16.0"
+      },
+      {
+        "mutation": "Corrupted",
+        "source": "Corrupt Staff",
+        "release": null
+      },
+      {
+        "mutation": "Glimmering",
+        "source": "Fairy Targeter",
+        "release": "Update 1.21.0"
+      },
+      {
+        "mutation": "Luminous",
+        "source": "Luminous Wand",
+        "release": "Update 1.22.0"
+      },
+      {
+        "mutation": "Wet",
+        "source": "Maple Leaf Charm",
+        "release": "Update 1.23.0"
+      },
+      {
+        "mutation": "Vamp",
+        "source": "Bat Caller Charm",
+        "release": "Update 1.28.0"
+      },
+      {
+        "mutation": "Snowy",
+        "source": "Ice Wand",
+        "release": "Update 1.35.0"
+      },
+      {
+        "mutation": "Ornamented",
+        "source": "Jingle Bells",
+        "release": null
+      }
+    ],
+    "cosmetics": [
+      {
+        "mutation": "Fall",
+        "source": "Fall Fountain",
+        "release": "Update 1.23.0"
+      }
+    ],
+    "crops": [
+      {
+        "mutation": "Fortune",
+        "source": "Golden Egg",
+        "release": "Update 1.19.0"
+      },
+      {
+        "mutation": "Ghostly",
+        "source": "Great Pumpkin",
+        "release": "Update 1.27.0"
+      },
+      {
+        "mutation": "Wilted",
+        "source": "Weeping Branch",
+        "release": "Update 1.28.0"
+      },
+      {
+        "mutation": "Wet, Arid, Stampede, Mirage",
+        "source": "Trinity Fruit",
+        "release": "Update 1.30.0"
+      },
+      {
+        "mutation": "Snowy, Ornamented, Blizzard, Eggnog, Arctic",
+        "source": "Reindeer Root",
+        "release": "Update Log 1.43.0"
+      }
+    ]
+  },
+  "fusionMutations": [
+    {
+      "mutation": "Clay",
+      "material1": "Wet/Drenched",
+      "material2": "Sandy",
+      "material3": "N/A"
+    },
+    {
+      "mutation": "Frozen",
+      "material1": "Chilled",
+      "material2": null,
+      "material3": null
+    },
+    {
+      "mutation": "Tempestuous",
+      "material1": "Windstruck",
+      "material2": "Twisted",
+      "material3": null
+    },
+    {
+      "mutation": "Ceramic",
+      "material1": "Clay",
+      "material2": "Sundried/Fried/Burnt/Molten/Cooked",
+      "material3": null
+    },
+    {
+      "mutation": "Paradisal",
+      "material1": "Verdant",
+      "material2": "Sundried",
+      "material3": null
+    },
+    {
+      "mutation": "Cosmic",
+      "material1": "Aurora",
+      "material2": "Celestial",
+      "material3": null
+    },
+    {
+      "mutation": "Gloom",
+      "material1": "Bloom",
+      "material2": "Rot",
+      "material3": null
+    },
+    {
+      "mutation": "HarmonisedChakra",
+      "material1": "Chakra",
+      "material2": "CorruptChakra",
+      "material3": null
+    },
+    {
+      "mutation": "Corrosive",
+      "material1": "Acidic",
+      "material2": "Toxic",
+      "material3": null
+    },
+    {
+      "mutation": "Blazing",
+      "material1": "Flaming",
+      "material2": "Molten",
+      "material3": null
+    },
+    {
+      "mutation": "Infernal",
+      "material1": "Blazing",
+      "material2": "Meteoric",
+      "material3": null
+    },
+    {
+      "mutation": "HarmonisedFoxfireChakra",
+      "material1": "FoxfireChakra",
+      "material2": "CorruptFoxfireChakra",
+      "material3": null
+    },
+    {
+      "mutation": "AscendedChakra",
+      "material1": "HarmonisedChakra",
+      "material2": "HarmonisedFoxfireChakra",
+      "material3": null
+    },
+    {
+      "mutation": "Abyssal",
+      "material1": "Eclipsed",
+      "material2": "Voidtouched",
+      "material3": null
+    },
+    {
+      "mutation": "Sizzled",
+      "material1": "Fried",
+      "material2": "Cooked",
+      "material3": null
+    },
+    {
+      "mutation": "Plagued",
+      "material1": "Zombified",
+      "material2": "Infected",
+      "material3": null
+    },
+    {
+      "mutation": "Astral",
+      "material1": "Galactic",
+      "material2": "Cosmic",
+      "material3": null
+    },
+    {
+      "mutation": "Biohazard",
+      "material1": "Radioactive",
+      "material2": "Plagued",
+      "material3": null
+    },
+    {
+      "mutation": "Slashbound",
+      "material1": "Severed",
+      "material2": "Sliced",
+      "material3": null
+    },
+    {
+      "mutation": "OilBoil",
+      "material1": "Oil",
+      "material2": "Boil",
+      "material3": null
+    },
+    {
+      "mutation": "Contagion",
+      "material1": "Corrosive",
+      "material2": "Biohazard",
+      "material3": null
+    },
+    {
+      "mutation": "Umbral",
+      "material1": "Blight",
+      "material2": "Pestilent",
+      "material3": null
+    },
+    {
+      "mutation": "Shadowbound",
+      "material1": "Umbral",
+      "material2": "Gloom",
+      "material3": null
+    },
+    {
+      "mutation": "Mindbender",
+      "material1": "Brainrot",
+      "material2": "Warped",
+      "material3": null
+    },
+    {
+      "mutation": "Stormbound",
+      "material1": "Stormcharged",
+      "material2": "Riptide",
+      "material3": null
+    },
+    {
+      "mutation": "Riptide",
+      "material1": "Monsoon",
+      "material2": "Typhoon",
+      "material3": null
+    },
+    {
+      "mutation": "Sun Scorched",
+      "material1": "Arid",
+      "material2": "Mirage",
+      "material3": null
+    },
+    {
+      "mutation": "Grim",
+      "material1": "Shadowbound",
+      "material2": "Blackout",
+      "material3": null
+    },
+    {
+      "mutation": "Fierywork",
+      "material1": "Firework",
+      "material2": "Fiery",
+      "material3": null
+    },
+    {
+      "mutation": "Extraterrestrial",
+      "material1": "Alienlike",
+      "material2": "Alienated",
+      "material3": null
+    },
+    {
+      "mutation": "Fractured",
+      "material1": "Glitched",
+      "material2": "Plasma",
+      "material3": null
+    },
+    {
+      "mutation": "Maelstorm",
+      "material1": "Tempestuous",
+      "material2": "Cyclonic",
+      "material3": null
+    },
+    {
+      "mutation": "Stormcharged",
+      "material1": "Static",
+      "material2": "Shocked",
+      "material3": null
+    },
+    {
+      "mutation": "Spaghetti",
+      "material1": "Sauce",
+      "material2": "Pasta",
+      "material3": "Meatball"
+    },
+    {
+      "mutation": "Gourmet",
+      "material1": "Aromatic",
+      "material2": "Spaghetti",
+      "material3": "Sizzled"
+    },
+    {
+      "mutation": "Affluent",
+      "material1": "Coin",
+      "material2": "Jackpot",
+      "material3": "Fortune"
+    },
+    {
+      "mutation": "Supernatural",
+      "material1": "Vamp",
+      "material2": "Spooky",
+      "material3": "Ghostly"
+    },
+    {
+      "mutation": "Mineral",
+      "material1": "Charcoal",
+      "material2": "Geode",
+      "material3": "Tempered"
+    }
+  ],
+  "agingMutations": [
+    {
+      "stage1": "Amber",
+      "stage2": "Old Amber",
+      "stage3": "Ancient Amber"
+    },
+    {
+      "stage1": "Wilted",
+      "stage2": "Withered",
+      "stage3": "Desolate"
+    }
+  ],
+  "evolutionMutations": [
+    {
+      "mutation1": "Burnt",
+      "mutation2": "Cooked"
+    },
+    {
+      "mutation1": "Wet",
+      "mutation2": "Drenched"
+    }
+  ]
+}

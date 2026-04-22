@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Grow a Garden merchants data",
+    "updatedAt": "2026-04-22",
+    "sources": [
+      {
+        "label": "Grow a Garden Wiki - Merchants",
+        "url": "https://growagarden.fandom.com/wiki/Merchants",
+        "accessed": "2026-04-22"
+      }
+    ],
+    "columns": [
+      "name",
+      "category",
+      "function"
+    ]
+  },
+  "items": [
+    {
+      "name": "4th of July Merchant",
+      "category": "Merchant",
+      "function": "Spawned only on 4th of July, staying for 24 hours. Sold 5 things in the shop: x5 Liberty Lily x15 Firework Flower x30 Firework x1 Bald Eagle x7 July 4th Crate"
+    },
+    {
+      "name": "Fall Merchant",
+      "category": "Merchant",
+      "function": "Sells seeds, gears, and pets from the Fall Market Event: Fall Seed Pack Kniphofia Maple Resin Fall Egg Chipmunk Space Squirrel Red Panda Bonfire Harvest Basket Super Leaf Blower Rake Fall Crate Maple Crate Fall Fountain The amount of Sheckles the player could buy are the same from the Fall Market Event"
+    },
+    {
+      "name": "Gnome Merchant",
+      "category": "Merchant",
+      "function": "Sells 5 things in the shop: Common, Classic, Farmers, Iconic Gnome Crates Gnome Pet"
+    },
+    {
+      "name": "Halloween Merchant",
+      "category": "Merchant",
+      "function": "Spawned only on the 31st of October, staying for 24 hours. Sold 8 items in the shop: x6 Spider Vine x3 Monster Flower x35 Frightwork x10 Vampire Fang x1 Specter x1 Lich Statue x1 Skull Fence x1 Cemetery Fence"
+    },
+    {
+      "name": "Honey Merchant",
+      "category": "Merchant",
+      "function": "Sells: Bee Egg Honey Sprinkler Flower Seed Pack Bee Crate Honey Crafters Crate for Honey."
+    },
+    {
+      "name": "Mutation Spray Merchant",
+      "category": "Merchant",
+      "function": "Sold follwing Mutation Sprays: Mutation Spray Wet Mutation Spray Windstruck Mutation Spray Verdant) Used to sell the Mutation Spray Disco which got removed a few hours later. They could all be purchased for 50,000,000 each. However, it was later removed on Update 1.24.0."
+    },
+    {
+      "name": "Rare Cosmetics Merchant",
+      "category": "Merchant",
+      "function": "Sells: Cooking Pot Hot Spring Spell Book Wisp Well Hex Circle Sarcophagus"
+    },
+    {
+      "name": "Safari Merchant",
+      "category": "Merchant",
+      "function": "Can only be spawned in after the Safari Harvest Event if globally 95,000,000,000 points were to be culminated during the event. This milestone was reached, so it now has a chance to spawn in every hour, same as the other merchants. Sells: Orange Delight Explorer's Compass Safari Crate Zebra Whistle Protea Lush Sprinkler Mini Shipping Container Baobab Pet Mutation Shard Jumbo Savannah Crate Gecko, Hyena Cape Buffalo Hippo Ancestral Horn Crocodile Lion"
+    },
+    {
+      "name": "Sky Merchant",
+      "category": "Merchant",
+      "function": "Sells 3 things in the shop: Night Staff Star Caller Cloudtouched Spray They respectively cost 12,000,000, 15,000,000, and 50,000,000 sheckles each."
+    },
+    {
+      "name": "Sprinkler Merchant",
+      "category": "Merchant",
+      "function": "Sells sprinklers: Tropical Mist Sprinkler Flower Froster Sprinkler Spice Spritzer Sprinkler Stalk Sprout Sprinkler Sweet Soaker Sprinkler They all cost 50,000,000 each."
+    },
+    {
+      "name": "Summer Seed Merchant",
+      "category": "Merchant",
+      "function": "Sells the Summer Seeds: Cauliflower Rafflesia Green Apple Avocado Banana Pineapple Kiwi (Crop) Bell Pepper Prickly Pear Loquat Feijoa Pitcher Plant Common Summer Egg Rare Summer Egg Paradise Egg"
+    }
+  ]
+}

@@ -50,6 +50,7 @@ This file is the route-family inventory for quick scanning.
 | Roblox decal IDs | `/catalog/roblox-decal-ids`, `/catalog/roblox-decal-ids/page/[page]` | `src/app/(site)/catalog/roblox-decal-ids/*`, helpers in `page-data.tsx` |
 | Admin commands | `/catalog/admin-commands`, `/catalog/admin-commands/[system]` | `src/app/(site)/catalog/admin-commands/*`, backed by `data/Admin commands/*.md` |
 | The Forge catalog | `/catalog/the-forge`, `/catalog/the-forge/[collection]`, `/catalog/the-forge-*` flat collection routes | `src/app/(site)/catalog/the-forge/*` plus flat wrappers, view helper in `ForgeCatalogView.tsx`, data helper in `page-data.tsx` |
+| Grow a Garden catalog | `/catalog/grow-a-garden/[collection]`, `/catalog/grow-a-garden-*` flat collection routes | `src/app/(site)/catalog/grow-a-garden/*` plus flat wrappers, shared view helper reused from `the-forge/ForgeCatalogView.tsx`, data helper in `page-data.tsx` |
 | Generic catalog fallback | `/catalog/[...slug]` | `src/app/(site)/catalog/[...slug]/page.tsx`, backed by Supabase catalog copy |
 
 ## Tool Families
@@ -86,6 +87,7 @@ This file is the route-family inventory for quick scanning.
 - `src/app/(site)/catalog/roblox-color-codes/page-data.tsx`
 - `src/app/(site)/catalog/roblox-decal-ids/page-data.tsx`
 - `src/app/(site)/catalog/roblox-music-ids/page-data.tsx`
+- `src/app/(site)/catalog/grow-a-garden/page-data.tsx`
 - `src/app/(site)/catalog/the-forge/page-data.tsx`
 - `src/app/(site)/checklists/page-data.tsx`
 - `src/app/(site)/codes/page-data.tsx`

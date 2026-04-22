@@ -1,0 +1,345 @@
+{
+  "meta": {
+    "title": "Grow a Garden NPCs data",
+    "updatedAt": "2026-04-22",
+    "sources": [
+      {
+        "label": "Grow a Garden Wiki - NPCs",
+        "url": "https://growagarden.fandom.com/wiki/NPCs",
+        "accessed": "2026-04-22"
+      }
+    ],
+    "columns": [
+      "name",
+      "category",
+      "function",
+      "birthday"
+    ]
+  },
+  "items": [
+    {
+      "name": "Ancient Jack O Lantern",
+      "category": "NPC",
+      "function": "Give it Halloween themed crops and it jump-scares the player and gives them candy corn.",
+      "birthday": null
+    },
+    {
+      "name": "Bald Eagle",
+      "category": "NPC",
+      "function": "The Bald Eagle is the mascot perching on top of the 4th of July Shop",
+      "birthday": null
+    },
+    {
+      "name": "Barry",
+      "category": "NPC",
+      "function": "Barry is the raptor beside Graham's DNA Machine. By giving prehistoric type crops to him, he can upgrade Graham's DNA Machine",
+      "birthday": null
+    },
+    {
+      "name": "Bee",
+      "category": "NPC",
+      "function": "The bees are the NPCs that visit gardens to pollinate certain plants during the Bizzy Bee event.",
+      "birthday": null
+    },
+    {
+      "name": "Bizzy Bear",
+      "category": "NPC",
+      "function": "The Bizzy Bear is an NPC at the Bizzy Bee Event, which is asking for a crop with a specific size with one of two mutations. He is also the NPC that owned the crafting stations before it got moved to the Cosmetics Shop.",
+      "birthday": null
+    },
+    {
+      "name": "Blaire",
+      "category": "NPC",
+      "function": "Blaire gives prehistoric quests and rewards to players.",
+      "birthday": null
+    },
+    {
+      "name": "Blood Owl",
+      "category": "NPC",
+      "function": "It is the Blood Owl perching on top of the Blood Moon Shop.",
+      "birthday": null
+    },
+    {
+      "name": "Brooklyn",
+      "category": "NPC",
+      "function": "Gives the player quests relating to Collecting Buttercups in exchange for Buttercup Coins which are used to buy Buttercup Chests",
+      "birthday": null
+    },
+    {
+      "name": "Chris P.",
+      "category": "NPC",
+      "function": "Chris P. takes Soups, Sushi, Icecream, Salad, Sandwich, Pie, Hotdog, Waffle, Pizza, Burger, and Cake in order to get rewards",
+      "birthday": null
+    },
+    {
+      "name": "Corrupted Zen Channeler",
+      "category": "NPC",
+      "function": "He takes various tranquil/corrupt fruits to grow the Corrupt Zen Tree to obtain rewards.",
+      "birthday": null
+    },
+    {
+      "name": "Elder Bean",
+      "category": "NPC",
+      "function": "The Elder Bean is a NPC that give the users info on the Sammy vs. Jandel admin war event along with the option to change the user's avatar to the bean.",
+      "birthday": null
+    },
+    {
+      "name": "Elder Wisp Architect",
+      "category": "NPC",
+      "function": "Opens the Fairy cosmetic shop.",
+      "birthday": null
+    },
+    {
+      "name": "Elder Wisp Care Taker",
+      "category": "NPC",
+      "function": "Opens the Fairy pet shop.",
+      "birthday": null
+    },
+    {
+      "name": "Elder Wisp Gardener",
+      "category": "NPC",
+      "function": "Opens the Fairy seed shop.",
+      "birthday": null
+    },
+    {
+      "name": "Eloise",
+      "category": "NPC",
+      "function": "Eloise is an NPC that sells gears. Her birthday is on March 4.",
+      "birthday": null
+    },
+    {
+      "name": "Fairies",
+      "category": "NPC",
+      "function": "The fairies are NPCs that can be occasionally found every 3 minutes in the map, if found they go to the player's garden and mutates a plant with the glimmering mutation and they can be trapped in jars with the Fairy Net.",
+      "birthday": null
+    },
+    {
+      "name": "Fairy Genius",
+      "category": "NPC",
+      "function": "The Fairy Genius is used to see how many Fairies has been captured.",
+      "birthday": null
+    },
+    {
+      "name": "Fairy Godmother",
+      "category": "NPC",
+      "function": "The Fairy Godmother is a NPC that can be used to give upgrades in the Wishing Well.",
+      "birthday": null
+    },
+    {
+      "name": "Freddie",
+      "category": "NPC",
+      "function": "Freddie is a merchant who sells Star Callers, Night Staffs and the Cloudtouched Mutation Spray.",
+      "birthday": null
+    },
+    {
+      "name": "Georgia",
+      "category": "NPC",
+      "function": "Georgia is a merchant who sells Summer Seeds, which is sold by Tom before the Prehistoric Event. Georgia is the same NPC from the Summer Harvest Event.",
+      "birthday": null
+    },
+    {
+      "name": "Georgia",
+      "category": "NPC",
+      "function": "Georgia is an NPC who takes Summer Fruits during the Summer Harvest Event. She also owns the Harvest Shop. As of now, she is the Summer Merchant, and sells Summer Crops.",
+      "birthday": null
+    },
+    {
+      "name": "Giant",
+      "category": "NPC",
+      "function": "The Giant is a NPC that opens the Shop for the Beanstalk Event",
+      "birthday": null
+    },
+    {
+      "name": "Gnomeo",
+      "category": "NPC",
+      "function": "Gnomeo is a merchant who sells various gnome crates.",
+      "birthday": null
+    },
+    {
+      "name": "Golden Goose",
+      "category": "NPC",
+      "function": "They are the geese on the cloud platform that walk in front of the Giant.",
+      "birthday": null
+    },
+    {
+      "name": "Graham",
+      "category": "NPC",
+      "function": "Graham takes non-dinosaur pets and converts them to dinosaur eggs or pets.",
+      "birthday": null
+    },
+    {
+      "name": "Halloween Shop NPCs",
+      "category": "NPC",
+      "function": "They appear as names: Eye-sack, Wraith-el. Sam-etery, Scream-ven and Halo-ise. They sell Halloween gears, seeds, cosmetics and pets and appear as translucent and ghost versions of Grow a Garden stands NPCs: Isaac, Raphael, Sam, Steven and Eloise",
+      "birthday": null
+    },
+    {
+      "name": "Harvest Spirit",
+      "category": "NPC",
+      "function": "TBA",
+      "birthday": null
+    },
+    {
+      "name": "Isaac (formerly known as Sam)",
+      "category": "NPC",
+      "function": "Isaac sells cosmetics to players. Players can use the crafting feature while at his shop.",
+      "birthday": null
+    },
+    {
+      "name": "Jack",
+      "category": "NPC",
+      "function": "Jack is the NPC on the Beanstalk Event island, he takes various types of crops to feed the beanstalk and eventually, grow it.",
+      "birthday": null
+    },
+    {
+      "name": "Jim the Venus Fly Trap",
+      "category": "NPC",
+      "function": "Jim was an NPC for the Angry Plant Event, asking for a crop with a specific size and/or mutation.",
+      "birthday": null
+    },
+    {
+      "name": "Kitsune",
+      "category": "NPC",
+      "function": "The Kitsune is the NPC between the Corrupted and Tranquil Island. By feeding him corrupt/tranquil fruits, the player can get the Kitsune Chest.",
+      "birthday": null
+    },
+    {
+      "name": "Lumina",
+      "category": "NPC",
+      "function": "Opens the Shop with the Enchanted Chest and gears and used to give the Fairy jars to it.",
+      "birthday": null
+    },
+    {
+      "name": "Mac (formerly known as Uncle Sam)",
+      "category": "NPC",
+      "function": "Mac is a merchant who sells three sprays: Mutation Spray Wet, Windstruck, and Verdant. The Mutation Spray Disco was formerly in his shop before it got removed due to the community thinking that the disco mutation should be limited to Admin Events. Mac is now removed due to pet shards doing the same thing.",
+      "birthday": null
+    },
+    {
+      "name": "Nuts",
+      "category": "NPC",
+      "function": "Give him crops (Up to 1500 Points) to get Nutty Fever weather which can speed up the skills of the Chubby Chipmunk pet.",
+      "birthday": null
+    },
+    {
+      "name": "Onett",
+      "category": "NPC",
+      "function": "Onett sells items from the Bizzy Bee Event and converts pollinated fruits to Honey",
+      "birthday": null
+    },
+    {
+      "name": "Onett",
+      "category": "NPC",
+      "function": "Takes Pollinated plants and turns them into honey. He also is the person who created Bee Swarm Simulator.",
+      "birthday": null
+    },
+    {
+      "name": "Orson the Coin Keeper",
+      "category": "NPC",
+      "function": "He lets the player Ascend",
+      "birthday": null
+    },
+    {
+      "name": "Poppy",
+      "category": "NPC",
+      "function": "Poppy was an NPC for the Easter Event 2025, asking for 30kg of Golden Fruits in order to unlock the Easter Shop",
+      "birthday": null
+    },
+    {
+      "name": "Queen Bee",
+      "category": "NPC",
+      "function": "The Queen Bee is an NPC at the Bizzy Bee Event, which can open the Event Shop when asked to.",
+      "birthday": null
+    },
+    {
+      "name": "Raphael",
+      "category": "NPC",
+      "function": "Raphael is an NPC that sells various types of eggs. Players can also sell pets to him.",
+      "birthday": null
+    },
+    {
+      "name": "Rat Connoisseur",
+      "category": "NPC",
+      "function": "He takes various mutated food items for rewards.",
+      "birthday": null
+    },
+    {
+      "name": "Safari Joe",
+      "category": "NPC",
+      "function": "TBA",
+      "birthday": null
+    },
+    {
+      "name": "Safari Joyce",
+      "category": "NPC",
+      "function": "TBA",
+      "birthday": null
+    },
+    {
+      "name": "Sam and Tom",
+      "category": "NPC",
+      "function": "Sam and Tom are NPCs that sell seeds to players. Tom was only available during the Summer Harvest Event.",
+      "birthday": null
+    },
+    {
+      "name": "Samuel",
+      "category": "NPC",
+      "function": "Talk to him to evolve Evo plants to get rewards",
+      "birthday": null
+    },
+    {
+      "name": "Sprinkler Salesman",
+      "category": "NPC",
+      "function": "He sells various sprinklers added from the Crafting Update.",
+      "birthday": null
+    },
+    {
+      "name": "Steven",
+      "category": "NPC",
+      "function": "Players can sell crops or pets to Steven for Sheckles.",
+      "birthday": null
+    },
+    {
+      "name": "Tanuki",
+      "category": "NPC",
+      "function": "The tanuki takes Tranquil mutated plants in order to receive Chi, which is used to buy items in his shop.",
+      "birthday": null
+    },
+    {
+      "name": "Twilight Shop Owl",
+      "category": "NPC",
+      "function": "It is the Owl perching on top of the Twilight Shop.",
+      "birthday": null
+    },
+    {
+      "name": "Uncle Sam",
+      "category": "NPC",
+      "function": "Uncle Sam owns the limited 4th of July Shop.",
+      "birthday": null
+    },
+    {
+      "name": "Wise Old Owl",
+      "category": "NPC",
+      "function": "The Wise Old Owl was an NPC for the Lunar Glow Event, tasking players for Moonlit mutated crops.",
+      "birthday": null
+    },
+    {
+      "name": "Witch",
+      "category": "NPC",
+      "function": "Give her crops (Up to 2000 points) to obtain rewards such as Candy Corn, Spooky Egg and Pumpkin Crate",
+      "birthday": null
+    },
+    {
+      "name": "Working Bees",
+      "category": "NPC",
+      "function": "The Working Bees are trios of differently colored bees that visit gardens to pollinate certain fruits.",
+      "birthday": null
+    },
+    {
+      "name": "Zen Channeller",
+      "category": "NPC",
+      "function": "The Zen Channeller takes Tranquil mutated plants in order to grow the tree.",
+      "birthday": null
+    }
+  ]
+}

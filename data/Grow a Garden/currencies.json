@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "title": "Grow a Garden currencies data",
+    "updatedAt": "2026-04-22",
+    "sources": [
+      {
+        "label": "Grow a Garden Wiki - Mechanics",
+        "url": "https://growagarden.fandom.com/wiki/Mechanics",
+        "accessed": "2026-04-22"
+      },
+      {
+        "label": "Grow a Garden Wiki - Sheckles",
+        "url": "https://growagarden.fandom.com/wiki/Sheckles",
+        "accessed": "2026-04-22"
+      },
+      {
+        "label": "Grow a Garden Wiki - Garden Coins",
+        "url": "https://growagarden.fandom.com/wiki/Garden_Coins",
+        "accessed": "2026-04-22"
+      }
+    ],
+    "columns": [
+      "name",
+      "obtainment",
+      "obtainable"
+    ]
+  },
+  "items": [
+    {
+      "name": "Sheckles",
+      "obtainment": "Sell crops and pets for Sheckles. Players can aquire Sheckles using multiple different pets such as the Tanuki, Pancake Mole,Crab, and Mole. NPCs also reward players Sheckles for completing a quest. Another way players can obtain sheckles is through the Forever Pack or (when there used to be) through directly buying them with Robux in the Limited Time Shop. Players can also be gifted sheckles by other players.",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Garden Coins",
+      "obtainment": "Exchange 1 trillion sheckles for 10 garden coins to Orson the Coin Keeper at the corner of the map. Sheckles will increase as players exchange more.",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Pass Points",
+      "obtainment": "Task completion in Season Pass. Another way is to directly buy them with Robux.",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Trade Token",
+      "obtainment": "Obtain by either buying with Robux in the game shop or by players purchasing their items in the Trade World.",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Flowers",
+      "obtainment": "Automatically exchange 1 quadrillion into flowers",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Honey",
+      "obtainment": "Give pollinated fruits to Onett, the honey merchant.",
+      "obtainable": "✓"
+    },
+    {
+      "name": "Lunar Points",
+      "obtainment": "Exchange moonlit crops for Lunar Points during the Lunar Glow Event, which allowed players to access certain items.",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Summer Coin",
+      "obtainment": "Every 1,000 points earned in the Summer Harvest Event will convert to 1 Summer Coin.",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Chi",
+      "obtainment": "Exchange tranquil crops for Chi at the Tanuki NPC and give tranquil crops to the Zen Channeller until the bar is full during the Zen Event.",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Fairy Point",
+      "obtainment": "Submit glimmering fruits to the wishing well or interact with fairies around the map during the Fairy Event.",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Candy Corn",
+      "obtainment": "Submit fruits to the Witch Cauldron, the Jack O Lantern NPC and the Harvest Reaper.",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Carrot Coins",
+      "obtainment": "Complete one of the Garden Games Quests from Greg during the Garden Games Event.",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Buttercup Coins",
+      "obtainment": "Complete one of the Buttercup Quests from Brooklyn during the Buttercup Quest Event.",
+      "obtainable": "✗"
+    },
+    {
+      "name": "Heart Coins",
+      "obtainment": "Exchange heartstruck, cute or heartbound fruits for Heart Coins to Heather during the Valentine's Event",
+      "obtainable": "✗"
+    }
+  ],
+  "details": {
+    "sheckles": "The Limited Time Shop is a shop in Grow a Garden where a player can buy or gift another player items, seeds, and Sheckles with Robux. This shop can be found by pressing the Shop button on the left of the screen. Also the only way to obtain Super Seeds. Due to gambling laws, certain offers may be hidden if the player is in Australia, Belgium, the U.K or the Netherlands. <img style=\"\" src=\"https://static.wikia.nocookie.net/growagarden/images/1/14/Limited_Time_Shop_Icon.png/revision/latest/scale-to-width-down/185?cb=20250526044558\" title=\"Limited Time Shop Icon.png (15 KB)\" class=\"thumbimage\" alt=\"The Button itself\" height=\"74\" width=\"185\" data-image-name=\"Limited Time Shop Icon.png\" data-image-key=\"Limited_Time_Shop_Icon.png\" data-relevant=\"1\" data-caption=\"The Button itself\">The Button itself",
+    "gardenCoins": "Sheckles are the main currency of Grow a Garden."
+  }
+}

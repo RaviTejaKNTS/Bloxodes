@@ -75,8 +75,21 @@ This file is the quick reference for the repo's current data surface.
   - Parsed by `src/lib/admin-commands.ts`.
 - `data/Grow a Garden/crops.json`
   - Parsed by `src/lib/grow-a-garden/crops.ts`.
-- `data/Grow a Garden/crops.md`
-  - Supporting content for Grow a Garden data work.
+- `data/Grow a Garden/seeds.json`
+- `data/Grow a Garden/pets.json`
+- `data/Grow a Garden/eggs.json`
+- `data/Grow a Garden/gears.json`
+- `data/Grow a Garden/crop-mutations.json`
+- `data/Grow a Garden/pet-mutations.json`
+- `data/Grow a Garden/weather.json`
+- `data/Grow a Garden/merchants.json`
+- `data/Grow a Garden/npcs.json`
+- `data/Grow a Garden/shops.json`
+- `data/Grow a Garden/seed-packs.json`
+- `data/Grow a Garden/crafting-recipes.json`
+- `data/Grow a Garden/food.json`
+- `data/Grow a Garden/currencies.json`
+  - Local Grow a Garden catalog datasets collected from multiple external sources and intended for wiki/catalog page work.
 - `data/Grow a Garden/quiz.json`
   - Quiz content for the Grow a Garden quiz flow.
 - `data/The Forge/*.json`
