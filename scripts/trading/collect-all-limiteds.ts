@@ -5,7 +5,7 @@
  * Part B: UGC Limiteds from Roblox Catalog (~100K items)
  */
 
-import "dotenv/config";
+import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 const REQUEST_DELAY_MS = 400;

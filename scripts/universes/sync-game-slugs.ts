@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { appendCodesSuffix, normalizeGameSlug, stripCodesSuffix } from "@/lib/slug";

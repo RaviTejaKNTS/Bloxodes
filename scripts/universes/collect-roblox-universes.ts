@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 import { randomUUID } from "node:crypto";
 

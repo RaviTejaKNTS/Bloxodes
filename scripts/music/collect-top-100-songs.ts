@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 const TOP_SONGS_API = "https://apis.roblox.com/music-discovery/v1/top-songs";

@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 import { readFile } from "node:fs/promises";
 import { supabaseAdmin } from "@/lib/supabase-admin";

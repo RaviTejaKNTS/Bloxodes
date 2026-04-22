@@ -10,6 +10,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - Keep shared helpers in `scripts/shared/`.
 - Group new scripts by task area instead of adding everything at the top level.
 - Document required env vars and downstream side effects when introducing a new script.
+- For script env loading, prefer `scripts/shared/load-env.ts` instead of importing `dotenv/config` directly.
 
 ## Folder Map
 

@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 import type { PostgrestError } from "@supabase/supabase-js";
 

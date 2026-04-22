@@ -19,3 +19,9 @@ The `scripts/` folder is organized by task area so it's easier to find the right
 - `universes/`: universe collection, enrichment, stats, slugs, and description jobs
 
 Prefer the `package.json` scripts when available so command names stay stable even if file locations change again.
+
+Local development note:
+
+- shared script env loading lives in `scripts/shared/load-env.ts`
+- scripts now prefer `.env.local` for local work, but they do not override real process env vars
+- production jobs can keep injecting `SUPABASE_*` and other env vars the same way they do today

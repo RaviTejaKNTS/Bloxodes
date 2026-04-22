@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 import { writeFile } from "node:fs/promises";
 import * as cheerio from "cheerio";

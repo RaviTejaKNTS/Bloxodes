@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 const DEFAULT_SITE_URL = "https://bloxodes.com";
 const DEFAULT_INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow";

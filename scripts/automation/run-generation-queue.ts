@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 import { spawn } from "node:child_process";
 

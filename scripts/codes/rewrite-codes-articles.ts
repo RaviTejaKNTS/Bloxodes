@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 import { Readability } from "@mozilla/readability";
 import OpenAI from "openai";

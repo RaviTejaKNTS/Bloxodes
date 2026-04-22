@@ -1,5 +1,5 @@
 // scripts/lists/seed-trending-lists.ts
-import "dotenv/config";
+import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 type ListConfig = {

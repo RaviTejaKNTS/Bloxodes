@@ -3,6 +3,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "supabase:status": "supabase status",
+    "supabase:status:env": "supabase status -o env",
+    "supabase:reset": "supabase db reset",
+    "supabase:push:local": "supabase db push --local",
+    "supabase:push:dry": "supabase db push --dry-run",
     "ads:update": "tsx scripts/ads/update-ads-txt.ts",
     "indexnow:bootstrap": "tsx scripts/automation/indexnow-bootstrap.ts",
     "prebuild": "npm run ads:update",

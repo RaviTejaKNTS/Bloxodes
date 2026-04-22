@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 const TOOLBOX_SEARCH_API = "https://apis.roblox.com/toolbox-service/v2/assets:search";

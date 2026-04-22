@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { revalidateEventsByUniverseIds } from "../shared/revalidate-events";

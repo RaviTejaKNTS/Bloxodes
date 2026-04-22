@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";

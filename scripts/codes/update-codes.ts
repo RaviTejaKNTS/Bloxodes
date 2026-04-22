@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 import { promises as fs } from "node:fs";
 import { detectProvider, getCodeDisplayPriority, scrapeSources } from "@/lib/scraper";
 import { supabaseAdmin } from "@/lib/supabase-admin";

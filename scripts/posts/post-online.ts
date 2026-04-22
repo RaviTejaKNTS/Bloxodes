@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import "../shared/load-env";
 import { promises as fs } from 'node:fs';
 import { format } from 'date-fns';
 import crypto from 'node:crypto';

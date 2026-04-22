@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 const METRICS = ["playing", "visits", "favorites", "likes"] as const;

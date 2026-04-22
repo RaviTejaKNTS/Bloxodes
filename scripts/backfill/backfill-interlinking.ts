@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 import { createClient } from "@supabase/supabase-js";
 import OpenAI from "openai";

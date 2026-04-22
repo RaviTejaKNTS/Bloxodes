@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "../shared/load-env";
 
 import { createHash } from "node:crypto";
 import { supabaseAdmin } from "@/lib/supabase-admin";
