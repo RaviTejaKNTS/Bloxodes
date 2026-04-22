@@ -7,6 +7,7 @@ This folder defines the app's database contract and edge-function behavior.
 ## Layout
 
 - `migrations/`: forward-only schema changes.
+- `migrations_archive/`: archived reference-only SQL files that are not part of the active migration chain.
 - `functions/revalidate/`: drains publish events and calls the app revalidation endpoint.
 - `functions/roblox-codes/`: Supabase edge function related to Roblox code workflows.
 - `schema.sql`: schema snapshot used as a reference point for the current database shape.
@@ -22,6 +23,9 @@ This folder defines the app's database contract and edge-function behavior.
 
 - Add new migrations; do not rewrite old ones once they are part of repo history.
 - Favor additive, reversible changes where possible.
+- For this repo, `schema.sql` is the clean reference for the current database shape. Read it first when you need to understand the live schema.
+- Treat `migrations/` as deployment history for the existing production project, not as the easiest way to infer current state.
+- Do not replace the active migration chain with a single baseline file for the current production project. If you generate a clean baseline snapshot, keep it in `schema.sql` or archive it outside `migrations/`.
 - Views are heavily used by `src/lib/db.ts`, `src/lib/catalog.ts`, and `src/lib/tools.ts`; update app queries alongside schema changes.
 - When changing policies, security definer functions, or search-path-sensitive code, review prior hardening migrations for consistency.
 
