@@ -15,7 +15,8 @@
       "appearance",
       "multiplier",
       "obtainment",
-      "visualDescription"
+      "visualDescription",
+      "image"
     ]
   },
   "items": [
@@ -25,7 +26,8 @@
       "appearance": null,
       "multiplier": "20x",
       "obtainment": "1% chance to grow, replacing the normal variant. Chances can be increased by the Pig, Praying Mantis and Bacon Pig pet. Chances can be increased by using Sprinklers. Can be applied by the Super Seed. Only works in crops and not produces. It can increase their produce's chances of being Gold. Can be applied by the Dragonfly, Cockatrice or the Golden Bee pet. Can be applied by the Golden Bee pet when harvesting a crop. Can be applied by using the Gold Fertilizer. Only works in crops and not produces. It can increase their produce's chances of being Gold.",
-      "visualDescription": "Shining. Golden in color. Emits a shimmering sound."
+      "visualDescription": "Shining. Golden in color. Emits a shimmering sound.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/gold.png"
     },
     {
       "name": "Rainbow",
@@ -33,7 +35,8 @@
       "appearance": null,
       "multiplier": "50x",
       "obtainment": "0.1% chance to grow, replacing the normal variant. Chances can be increased by using Pig, Praying Mantis and Bacon Pig pet. Chances can be increased by using Sprinklers. Can be applied by the Super Seed. Only works in crops and not produces. It can increase their produce's chances of being Rainbow. Can be applied by the Butterfly pet when a crop has 5+ environmental mutations. If the Butterfly applies Rainbow this way, all previous mutations will be removed. Can be applied by using the Rainbow Fertilizer. Only works on crops and not produces. It increases the produce's chances of being Rainbow. During Rainbow.",
-      "visualDescription": "Continuously cycles through the colors of the rainbow. Emits yellow particles and a rainbow on top."
+      "visualDescription": "Continuously cycles through the colors of the rainbow. Emits yellow particles and a rainbow on top.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/rainbow.png"
     },
     {
       "name": "Diamond",
@@ -41,7 +44,8 @@
       "appearance": null,
       "multiplier": "50x",
       "obtainment": "Can be applied by the Diamond Dragonfly pet.",
-      "visualDescription": "Similar to Gold but cyan."
+      "visualDescription": "Similar to Gold but cyan.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/diamond.png"
     },
     {
       "name": "Wet",
@@ -49,7 +53,8 @@
       "appearance": null,
       "multiplier": "x2",
       "obtainment": "During Rain, Thunderstorm, Under The Sea, Water Your Garden or Rain Dance. Can be applied by Sprinklers. Can be applied by the Sea Turtle or the Kappa pet. Using the Mutation Spray Wet. Can replace Frozen mutation into Wet mutation by the Iguana pet. Can be applied by the Trinity Fruit crop.",
-      "visualDescription": "Dripping water particles."
+      "visualDescription": "Dripping water particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/wet.png"
     },
     {
       "name": "Windstruck",
@@ -57,7 +62,8 @@
       "appearance": null,
       "multiplier": "x2",
       "obtainment": "During Windy, Gale or Soccer. Can be applied by the Pterodactyl pet. Using the Mutation Spray Windstruck. Can be applied by any pets with the Windy mutation.",
-      "visualDescription": "Wind particles swoop around the crop."
+      "visualDescription": "Wind particles swoop around the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/windstruck.png"
     },
     {
       "name": "Moonlit",
@@ -65,7 +71,8 @@
       "appearance": null,
       "multiplier": "x2",
       "obtainment": "During Night or Shooting Stars. Can be applied by the Tanuki or the Wolf pet.",
-      "visualDescription": "Bluish-purple in color."
+      "visualDescription": "Bluish-purple in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/moonlit.png"
     },
     {
       "name": "Chilled",
@@ -73,7 +80,8 @@
       "appearance": null,
       "multiplier": "x2",
       "obtainment": "During Frost. Can be applied by the Polar Bear, Tanuki, or the Sushi Bear pet. Using the Mutation Spray Chilled. Can replace Frozen mutation into Chilled mutation by the Iguana pet.",
-      "visualDescription": "Slightly bluish. Emits frost particles."
+      "visualDescription": "Slightly bluish. Emits frost particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/chilled.png"
     },
     {
       "name": "Pollinated",
@@ -81,7 +89,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "During Bee Swarm, Worker Bee Swarm, Beenado or Bee Storm. Can be applied by the Bee, Honey Bee, Petal Bee, Queen Bee, Wasp, Tarantula Hawk, Pack Bee or the Golden Bee pet. Using the Mutation Spray Pollinated.",
-      "visualDescription": "Shining. Yellow in color. Emits yellow gas-like particles."
+      "visualDescription": "Shining. Yellow in color. Emits yellow gas-like particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/pollinated.png"
     },
     {
       "name": "Sandy",
@@ -89,7 +98,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "During Sandstorm. Can be applied by the Jackalope pet.",
-      "visualDescription": "Tan color Emits puffs of sand Emits grains of sand"
+      "visualDescription": "Tan color Emits puffs of sand Emits grains of sand",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/sandy.png"
     },
     {
       "name": "Moist",
@@ -97,7 +107,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "During Gentle Drizzle.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/moist.png"
     },
     {
       "name": "Lush",
@@ -105,7 +116,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "Using the Lush Sprinkler. Can be applied by the Lion pet.",
-      "visualDescription": "Different shades of green."
+      "visualDescription": "Different shades of green.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/lush.png"
     },
     {
       "name": "Cracked",
@@ -113,7 +125,8 @@
       "appearance": null,
       "multiplier": "x4",
       "obtainment": "During Earthquake or Super Storm. Can be applied by the Badger pet.",
-      "visualDescription": "Has a Cracked Texture and Small Earth Particles."
+      "visualDescription": "Has a Cracked Texture and Small Earth Particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/cracked.png"
     },
     {
       "name": "Verdant",
@@ -121,7 +134,8 @@
       "appearance": null,
       "multiplier": "x4",
       "obtainment": "Can be applied by the Scarlet Macaw pet. During Solar Flare or Sunset. Using the Mutation Spray Verdant.",
-      "visualDescription": "Green in color. Emits green rectangular particles."
+      "visualDescription": "Green in color. Emits green rectangular particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/verdant.png"
     },
     {
       "name": "Nocturnal",
@@ -129,7 +143,8 @@
       "appearance": null,
       "multiplier": "x4",
       "obtainment": "Can be applied by the Trinity Fruit. Can be applied by the Lion pet. During Safari Night.",
-      "visualDescription": "Similar to Moonlit."
+      "visualDescription": "Similar to Moonlit.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/nocturnal.png"
     },
     {
       "name": "Twilight",
@@ -137,7 +152,8 @@
       "appearance": null,
       "multiplier": "x4",
       "obtainment": "Can be applied by the Lion pet. During Safari Dusk.",
-      "visualDescription": "Similar to Nocturnal."
+      "visualDescription": "Similar to Nocturnal.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/twilight.png"
     },
     {
       "name": "Fall",
@@ -145,7 +161,8 @@
       "appearance": null,
       "multiplier": "x4",
       "obtainment": "Can be applied by the Grizzly Bear pet. During Fall Bloom. Can be applied by the Fall Fountain cosmetic.",
-      "visualDescription": "Unharvested: Orange and yellow stud particles fall from the crop. Harvested: Orange and yellow stud particles fall from the crop. Slightly orange in color."
+      "visualDescription": "Unharvested: Orange and yellow stud particles fall from the crop. Harvested: Orange and yellow stud particles fall from the crop. Slightly orange in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/fall.png"
     },
     {
       "name": "Bloodlit",
@@ -153,7 +170,8 @@
       "appearance": null,
       "multiplier": "x4",
       "obtainment": "During Blood Moon or Full Moon. Can replace Wet mutation into Bloodlit mutation by the Kappa pet. Can be applied by the Hex Serpent pet after devouring five single-harvest crops in the Hex Square cosmetic.",
-      "visualDescription": "Shining. Dark red in color."
+      "visualDescription": "Shining. Dark red in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/bloodlit.png"
     },
     {
       "name": "Clay",
@@ -161,7 +179,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "Combining Wet or Drenched with Sandy mutation.",
-      "visualDescription": "Brownish color. One of the only mutations in the game with a unique texture."
+      "visualDescription": "Brownish color. One of the only mutations in the game with a unique texture.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/clay.png"
     },
     {
       "name": "Twisted",
@@ -169,7 +188,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "During Tornado.",
-      "visualDescription": "Tornado-like swirls similar to Windstruck."
+      "visualDescription": "Tornado-like swirls similar to Windstruck.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/twisted.png"
     },
     {
       "name": "Drenched",
@@ -177,7 +197,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "During Tropical Rain, Water Yo#r Garden, Super Storm, Rain Dance or Tsunami.",
-      "visualDescription": "Drenched in water. Crop looks saturated."
+      "visualDescription": "Drenched in water. Crop looks saturated.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/drenched.png"
     },
     {
       "name": "HoneyGlazed",
@@ -185,7 +206,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "Using the Honey Sprinkler. Can be applied by the Bear Bee pet. Using the Mutation Spray HoneyGlazed. During Bee Storm.",
-      "visualDescription": "Emits a yellow fog. Dripping in honey."
+      "visualDescription": "Emits a yellow fog. Dripping in honey.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/honeyglazed.png"
     },
     {
       "name": "Cloudtouched",
@@ -193,7 +215,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "Can be applied by the Hyacinth Macaw pet. Using the Mutation Spray Cloudtouched.",
-      "visualDescription": "Flashing red glints. Cloud-like aura."
+      "visualDescription": "Flashing red glints. Cloud-like aura.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/cloudtouched.png"
     },
     {
       "name": "Arid",
@@ -201,7 +224,8 @@
       "appearance": null,
       "multiplier": "x6",
       "obtainment": "Can be applied by the Lion or Giraffe pet. During Safari Drought. Can be applied by the Trinity Fruit.",
-      "visualDescription": "Yellowish Orange."
+      "visualDescription": "Yellowish Orange.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/arid.png"
     },
     {
       "name": "Frozen",
@@ -209,7 +233,8 @@
       "appearance": null,
       "multiplier": "x10",
       "obtainment": "Combining Wet or Drenched with Chilled mutation. Using the Flower Froster Sprinkler. This only works on flower-type plants. Can be applied by the Polar Bear or the Sushi Bear pet. Can be applied by any pets with the Frozen mutation.",
-      "visualDescription": "Encased in an ice block"
+      "visualDescription": "Encased in an ice block",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/frozen.png"
     },
     {
       "name": "Tempestuous",
@@ -217,7 +242,8 @@
       "appearance": null,
       "multiplier": "x12",
       "obtainment": "Combining Windstruck and Twisted mutation. Can be applied by the Pterodactyl pet. Tempestuous mutation cannot be applied by the Pterodactyl pet if it already has Windstruck or Twisted in it.",
-      "visualDescription": "Fast wind particles around the produce."
+      "visualDescription": "Fast wind particles around the produce.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/tempestuous.png"
     },
     {
       "name": "Acidic",
@@ -225,7 +251,8 @@
       "appearance": null,
       "multiplier": "x15",
       "obtainment": "During Acid Rain.",
-      "visualDescription": "Emits a greenish yellow cloud of dust."
+      "visualDescription": "Emits a greenish yellow cloud of dust.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/acidic.png"
     },
     {
       "name": "Gnomed",
@@ -233,7 +260,8 @@
       "appearance": null,
       "multiplier": "x15",
       "obtainment": "Can be applied by the Gnome pet.",
-      "visualDescription": "Emits particles of the Sam Gnome's image."
+      "visualDescription": "Emits particles of the Sam Gnome's image.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/gnomed.png"
     },
     {
       "name": "Eclipsed",
@@ -241,7 +269,8 @@
       "appearance": null,
       "multiplier": "x20",
       "obtainment": "During Solar Eclipse.",
-      "visualDescription": "Blue glare-like particles forms around the crop."
+      "visualDescription": "Blue glare-like particles forms around the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/eclipsed.png"
     },
     {
       "name": "Ceramic",
@@ -249,7 +278,8 @@
       "appearance": null,
       "multiplier": "x32",
       "obtainment": "Combining Clay with either: Sundried, Fried, Burnt, Molten or Cooked mutation. Cannot reapply Clay, Fried, Cooked or Burnt after.",
-      "visualDescription": "Looks darker in color similar to Sundried."
+      "visualDescription": "Looks darker in color similar to Sundried.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/ceramic.png"
     },
     {
       "name": "Monsoon",
@@ -257,7 +287,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "During Safari Typhoon. Can be applied by the Hippo or the Lion pet.",
-      "visualDescription": "TBA."
+      "visualDescription": "TBA.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/monsoon.png"
     },
     {
       "name": "Friendbound",
@@ -265,7 +296,8 @@
       "appearance": null,
       "multiplier": "x70",
       "obtainment": "Can be applied by the Friendship Pot when fully grown. Having 4 friends/connections in a server. Can be applied randomly at any time.",
-      "visualDescription": "Pink in color. Emits pink hearts and stars."
+      "visualDescription": "Pink in color. Emits pink hearts and stars.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/friendbound.png"
     },
     {
       "name": "Sundried",
@@ -273,7 +305,8 @@
       "appearance": null,
       "multiplier": "x85",
       "obtainment": "During Heatwave, Solar Flare or Pyramid Obby. Can be applied by the Mantis Shrimp pet.",
-      "visualDescription": "Dark brown tint applied"
+      "visualDescription": "Dark brown tint applied",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/sundried.png"
     },
     {
       "name": "Aurora",
@@ -281,7 +314,8 @@
       "appearance": null,
       "multiplier": "x90",
       "obtainment": "During Aurora Borealis or Crystal Beam. Can be applied by any pet with the Aurora Mutation.",
-      "visualDescription": "Shifts between blues and purples. Releases faint smoke. Purplish, Whitish glow"
+      "visualDescription": "Shifts between blues and purples. Releases faint smoke. Purplish, Whitish glow",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/aurora.png"
     },
     {
       "name": "Shocked",
@@ -289,7 +323,8 @@
       "appearance": null,
       "multiplier": "x100",
       "obtainment": "During Thunderstorm, Super Storm, Jandel Storm or Flamingo Storm. Using the Mutation Spray Shocked. Can be applied by the Raiju or the Firefly pet. Raiju pet can only apply during Thunderstorm. Can be applied with any pets with the Shocked mutation. Shocked Pets can only apply during Thunderstorm.",
-      "visualDescription": "Neon glow"
+      "visualDescription": "Neon glow",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/shocked.png"
     },
     {
       "name": "Paradisal",
@@ -297,7 +332,8 @@
       "appearance": null,
       "multiplier": "x100",
       "obtainment": "Combining Verdant and Sundried mutation. During Solar Flare.",
-      "visualDescription": "Lime Green in color Emits sun ray-like particles."
+      "visualDescription": "Lime Green in color Emits sun ray-like particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/paradisal.png"
     },
     {
       "name": "Celestial",
@@ -305,7 +341,8 @@
       "appearance": null,
       "multiplier": "x120",
       "obtainment": "During Meteor Shower or Crystal Beam. Can be applied by the Hex Serpent pet after devouring five single-harvest crops in the Hex Square cosmetic.",
-      "visualDescription": "Reflective Sparkling yellow and purple"
+      "visualDescription": "Reflective Sparkling yellow and purple",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/celestial.png"
     },
     {
       "name": "Disco",
@@ -313,7 +350,8 @@
       "appearance": null,
       "multiplier": "x125",
       "obtainment": "During Disco, Monster Mash, Super Storm, DJ Sam, Text Collect, Boombox Party or Strobe Party. Can be applied by the Disco Bee pet. Using the Mutation Spray Disco.",
-      "visualDescription": "Shining. Flashing red, pink, yellow, green, and blue (in that order) constantly. On Oct 11, 2025, the day of the Halloween Update P1, the appearance mysteriously changed to the same texture of Shocked."
+      "visualDescription": "Shining. Flashing red, pink, yellow, green, and blue (in that order) constantly. On Oct 11, 2025, the day of the Halloween Update P1, the appearance mysteriously changed to the same texture of Shocked.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/disco.png"
     },
     {
       "name": "Voidtouched",
@@ -321,7 +359,8 @@
       "appearance": null,
       "multiplier": "x135",
       "obtainment": "During Black Hole. Can be applied by the Space Squirrel pet.",
-      "visualDescription": "Emits black hole particles."
+      "visualDescription": "Emits black hole particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/voidtouched.png"
     },
     {
       "name": "Dawnbound",
@@ -329,7 +368,8 @@
       "appearance": null,
       "multiplier": "x150",
       "obtainment": "During Sun God. Can be applied by any pets with the Ascended mutation.",
-      "visualDescription": "Glowing, electrified look. Wind puffs and blows around."
+      "visualDescription": "Glowing, electrified look. Wind puffs and blows around.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/dawnbound.png"
     },
     {
       "name": "Cosmic",
@@ -337,7 +377,8 @@
       "appearance": null,
       "multiplier": "x240",
       "obtainment": "Combining Celestial and Aurora mutation.",
-      "visualDescription": "Emitting yellow, purple and pink colors with a glow."
+      "visualDescription": "Emitting yellow, purple and pink colors with a glow.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/cosmic.png"
     },
     {
       "name": "Abyssal",
@@ -345,7 +386,8 @@
       "appearance": null,
       "multiplier": "x240",
       "obtainment": "Combining Voidtouched and Eclipsed mutation.",
-      "visualDescription": "Has several parts glowing purple or pink, and releases deep purple swirl particles."
+      "visualDescription": "Has several parts glowing purple or pink, and releases deep purple swirl particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/abyssal.png"
     },
     {
       "name": "Silver",
@@ -353,7 +395,8 @@
       "appearance": null,
       "multiplier": "5x",
       "obtainment": "Can be applied by using the Silver Fertilizer gear. Only works in crops and not produces. Can be applied by the Cockatrice or the Silver Dragonfly pet.",
-      "visualDescription": "Shining. Silver in color. Emits a chiming sound when harvested."
+      "visualDescription": "Shining. Silver in color. Emits a chiming sound when harvested.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/silver.png"
     },
     {
       "name": "Glimmering",
@@ -361,7 +404,8 @@
       "appearance": null,
       "multiplier": "x2",
       "obtainment": "During Fairies. Using the Mutation Spray Glimmering. Can be applied by the Glimmering Sprite pet. Can be applied by any pets with the Glimmering mutation. Interacting with a Fairy. More Fairies spawn during Fairies.",
-      "visualDescription": "Transparent look, pink and purple glow and has a small shockwave effect with a trail behind it."
+      "visualDescription": "Transparent look, pink and purple glow and has a small shockwave effect with a trail behind it.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/glimmering.png"
     },
     {
       "name": "Choc",
@@ -369,7 +413,8 @@
       "appearance": null,
       "multiplier": "x2",
       "obtainment": "Using the Chocolate Sprinkler. During Chocolate Rain. Using the Mutation Choc Spray. Can be applied by the Tanuki pet.",
-      "visualDescription": "Brown in color Dripping with chocolate syrup"
+      "visualDescription": "Brown in color Dripping with chocolate syrup",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/choc.png"
     },
     {
       "name": "Snowy",
@@ -377,7 +422,8 @@
       "appearance": null,
       "multiplier": "x2",
       "obtainment": "During Snowfall, Yeti Night or Snowball Fight. Can be applied by the Nutcracker or theReindeer pet.",
-      "visualDescription": "Neon white in color."
+      "visualDescription": "Neon white in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/snowy.png"
     },
     {
       "name": "Fiery",
@@ -385,7 +431,8 @@
       "appearance": null,
       "multiplier": "x2",
       "obtainment": "Can be applied by the Dragon's Firework.",
-      "visualDescription": "Fiery fruit."
+      "visualDescription": "Fiery fruit.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/fiery.png"
     },
     {
       "name": "Sauce",
@@ -393,7 +440,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "Can be applied by the Spaghetti Sloth pet.",
-      "visualDescription": "Red drops of sauce fall off the fruit."
+      "visualDescription": "Red drops of sauce fall off the fruit.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/sauce.png"
     },
     {
       "name": "Meatball",
@@ -401,7 +449,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "Can be applied by the Spaghetti Sloth pet.",
-      "visualDescription": "Meatball particles fly from the top of the fruit."
+      "visualDescription": "Meatball particles fly from the top of the fruit.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/meatball.png"
     },
     {
       "name": "Pasta",
@@ -409,7 +458,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "Can be applied by the Spaghetti Sloth pet.",
-      "visualDescription": "Emits a tan squirmy effect around the bottom of the plant."
+      "visualDescription": "Emits a tan squirmy effect around the bottom of the plant.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/pasta.png"
     },
     {
       "name": "Aromatic",
@@ -417,7 +467,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "During Kitchen Storm. Can be applied by any pets with the Aromatic mutation.",
-      "visualDescription": "Emits an yellow steam effect"
+      "visualDescription": "Emits an yellow steam effect",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/aromatic.png"
     },
     {
       "name": "Sleepy",
@@ -425,7 +476,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "Can be applied by the Calico pet.",
-      "visualDescription": "Lots of z's coming out"
+      "visualDescription": "Lots of z's coming out",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/sleepy.png"
     },
     {
       "name": "Vamp",
@@ -433,7 +485,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "During Bat Attack. Can be applied by the Hex Serpent pet after devouring five single-harvest crops in the Hex Square cosmetic. Can be applied by the Specter pet.",
-      "visualDescription": "Blood red fog emits from the targeted plant."
+      "visualDescription": "Blood red fog emits from the targeted plant.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/vamp.png"
     },
     {
       "name": "Coin",
@@ -441,7 +494,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "Can be applied by the Sheckling pet.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/coin.png"
     },
     {
       "name": "Heartstruck",
@@ -449,7 +503,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "Can be applied by the Pink Panda pet. During Cupid's Arrow.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/heartstruck.png"
     },
     {
       "name": "Luck",
@@ -457,7 +512,8 @@
       "appearance": null,
       "multiplier": "x3",
       "obtainment": "During Rainbow Event.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/luck.png"
     },
     {
       "name": "Burnt",
@@ -465,7 +521,8 @@
       "appearance": null,
       "multiplier": "x4",
       "obtainment": "Can be applied by the Cooked Owl or Red Dragon pet. Using the Mutation Spray Burnt. During Armageddon. Can be applied by any pets with the Soulflare mutation.",
-      "visualDescription": "Unharvested: Black in color Sparking Harvested: Black in color Emits ash particles"
+      "visualDescription": "Unharvested: Black in color Sparking Harvested: Black in color Emits ash particles",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/burnt.png"
     },
     {
       "name": "Peppermint",
@@ -473,7 +530,8 @@
       "appearance": null,
       "multiplier": "x4",
       "obtainment": "Can be applied by the Mystical Snow Globe. During Giant Candy Cane Rain.",
-      "visualDescription": "Red and white in color."
+      "visualDescription": "Red and white in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/peppermint.png"
     },
     {
       "name": "Plasma",
@@ -481,7 +539,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "During Laser Storm or Flamingo Laser Storm. Can be applied by the Peach Wasp pet. Can be applied by the Radioactive Stegosaurus pet when harvesting a crop.",
-      "visualDescription": "Neon. Pinkish purple in color."
+      "visualDescription": "Neon. Pinkish purple in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/plasma.png"
     },
     {
       "name": "Wildfast",
@@ -489,7 +548,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "Can be applied by the Cheetah or the Lion pet.",
-      "visualDescription": "Yellow must covers the fruit. Yellow particles comes out of the fruit."
+      "visualDescription": "Yellow must covers the fruit. Yellow particles comes out of the fruit.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/wildfast.png"
     },
     {
       "name": "Geode",
@@ -497,7 +557,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "Can be applied by the Geode Sprinkler.",
-      "visualDescription": "TBD"
+      "visualDescription": "TBD",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/geode.png"
     },
     {
       "name": "Snowtouched",
@@ -505,7 +566,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "TBD",
-      "visualDescription": "TBD"
+      "visualDescription": "TBD",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/snowtouched.png"
     },
     {
       "name": "Opulent",
@@ -513,7 +575,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "Can be applied by the Galah Cockatoo pet.",
-      "visualDescription": "Similar to Shocked but hot pink."
+      "visualDescription": "Similar to Shocked but hot pink.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/opulent.png"
     },
     {
       "name": "Tempered",
@@ -521,7 +584,8 @@
       "appearance": null,
       "multiplier": "x6",
       "obtainment": "During Smithing Fever.",
-      "visualDescription": "Crop has an orange neon glow."
+      "visualDescription": "Crop has an orange neon glow.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/tempered.png"
     },
     {
       "name": "Whimsical",
@@ -529,7 +593,8 @@
       "appearance": "center|100px",
       "multiplier": "x6",
       "obtainment": "Can be applied by the Bear on Bike pet.",
-      "visualDescription": "Lots of confetti coming out."
+      "visualDescription": "Lots of confetti coming out.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/whimsical.png"
     },
     {
       "name": "Static",
@@ -537,7 +602,8 @@
       "appearance": null,
       "multiplier": "x8",
       "obtainment": "Can be applied by the Raiju pet after devouring Shocked mutation.",
-      "visualDescription": "Emits yellow electricity particles."
+      "visualDescription": "Emits yellow electricity particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/static.png"
     },
     {
       "name": "Fried",
@@ -545,7 +611,8 @@
       "appearance": null,
       "multiplier": "x8",
       "obtainment": "During Fried Chicken. Can be applied by any pets with the Fried mutation. Using the Mutation Spray Fried.",
-      "visualDescription": "Small yellow particles fall from the crop."
+      "visualDescription": "Small yellow particles fall from the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/fried.png"
     },
     {
       "name": "Bloom",
@@ -553,7 +620,8 @@
       "appearance": null,
       "multiplier": "x8",
       "obtainment": "Using the Mutation Spray Bloom. Can be applied by the Spriggan pet.",
-      "visualDescription": "Flashing green explosions on crop. A flower-like aura around the crop."
+      "visualDescription": "Flashing green explosions on crop. A flower-like aura around the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/bloom.png"
     },
     {
       "name": "Rot",
@@ -561,7 +629,8 @@
       "appearance": null,
       "multiplier": "x8",
       "obtainment": "Can be applied by the Mandrake pet when harvesting a Mandrake crop.",
-      "visualDescription": "Emits small purple particles."
+      "visualDescription": "Emits small purple particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/rot.png"
     },
     {
       "name": "Spooky",
@@ -569,7 +638,8 @@
       "appearance": null,
       "multiplier": "x8",
       "obtainment": "Can be applied by the Ghost Bear or the Specter pet.",
-      "visualDescription": "Emits white fading cloud, ring and ghost particles."
+      "visualDescription": "Emits white fading cloud, ring and ghost particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/spooky.png"
     },
     {
       "name": "Pestilent",
@@ -577,7 +647,8 @@
       "appearance": null,
       "multiplier": "x8",
       "obtainment": "Can be applied by the Hex Serpent pet after devouring five single-harvest crops in the Hex Square cosmetic.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/pestilent.png"
     },
     {
       "name": "Blight",
@@ -585,7 +656,8 @@
       "appearance": null,
       "multiplier": "x8",
       "obtainment": "Can be applied by the Dark Spriggan pet.",
-      "visualDescription": "Emits violet sparkling and block particles."
+      "visualDescription": "Emits violet sparkling and block particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/blight.png"
     },
     {
       "name": "Necrotic",
@@ -593,7 +665,8 @@
       "appearance": null,
       "multiplier": "x8",
       "obtainment": "Can be applied by the Ghostly Dark Spriggan pet.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/necrotic.png"
     },
     {
       "name": "Webbed",
@@ -601,7 +674,8 @@
       "appearance": null,
       "multiplier": "x8",
       "obtainment": "Can be applied by the Trapdoor Spider pet.",
-      "visualDescription": "Similar to Bloom but white in color"
+      "visualDescription": "Similar to Bloom but white in color",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/webbed.png"
     },
     {
       "name": "Amber",
@@ -609,7 +683,8 @@
       "appearance": null,
       "multiplier": "x10",
       "obtainment": "Using the Mutation Spray Amber. Can be applied by the Raptor pet when harvesting crops.",
-      "visualDescription": "Coated in semi-transparent orange overlay, emits orange cloud particles."
+      "visualDescription": "Coated in semi-transparent orange overlay, emits orange cloud particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/amber.png"
     },
     {
       "name": "Wilted",
@@ -617,7 +692,8 @@
       "appearance": null,
       "multiplier": "x10",
       "obtainment": "Can be applied by the Weeping Branch crop.",
-      "visualDescription": "Some of the fruit Wilts and turn into a shade of periwinkle. It starts dripping while the fruit has started wilting."
+      "visualDescription": "Some of the fruit Wilts and turn into a shade of periwinkle. It starts dripping while the fruit has started wilting.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/wilted.png"
     },
     {
       "name": "Ornamented",
@@ -625,7 +701,8 @@
       "appearance": null,
       "multiplier": "x10",
       "obtainment": "During Festive Night. Can be applied by the Red-Nosed Reindeer or the Nutcracker pet.",
-      "visualDescription": "Green in color. Having a red square hanging by a black string."
+      "visualDescription": "Green in color. Having a red square hanging by a black string.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/ornamented.png"
     },
     {
       "name": "Cute",
@@ -633,7 +710,8 @@
       "appearance": null,
       "multiplier": "x10",
       "obtainment": "Can be applied by the Red Rose Fox pet.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/cute.png"
     },
     {
       "name": "Oil",
@@ -641,7 +719,8 @@
       "appearance": null,
       "multiplier": "x15",
       "obtainment": "During Oil Rain. Can be applied by the Junkbot pet.",
-      "visualDescription": "Emits a black steam effect and has a dripping effect like wet mutation."
+      "visualDescription": "Emits a black steam effect and has a dripping effect like wet mutation.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/oil.png"
     },
     {
       "name": "Chakra",
@@ -649,7 +728,8 @@
       "appearance": null,
       "multiplier": "x15",
       "obtainment": "Can be applied by the Kitsune pet when stealing a crop.",
-      "visualDescription": "Red electric particles around the crop with the red star particle in the handle."
+      "visualDescription": "Red electric particles around the crop with the red star particle in the handle.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/chakra.png"
     },
     {
       "name": "CorruptChakra",
@@ -657,7 +737,8 @@
       "appearance": null,
       "multiplier": "x15",
       "obtainment": "Can be applied by the Corrupted Kitsune pet.",
-      "visualDescription": "Blue lightning sparks around the plant with blue stars in the middle."
+      "visualDescription": "Blue lightning sparks around the plant with blue stars in the middle.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/corruptchakra.png"
     },
     {
       "name": "Jackpot",
@@ -665,7 +746,8 @@
       "appearance": null,
       "multiplier": "x15",
       "obtainment": "During Money Rain. Can be applied by the Fortune Squirrel pet.",
-      "visualDescription": "Emits falling robux particles and star particles."
+      "visualDescription": "Emits falling robux particles and star particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/jackpot.png"
     },
     {
       "name": "Spaghetti",
@@ -673,7 +755,8 @@
       "appearance": null,
       "multiplier": "x15",
       "obtainment": "Combining Pasta, Sauce and Meatball mutation.",
-      "visualDescription": "Emits noodle particles, meatballs and has red sauce dripping from the bottom."
+      "visualDescription": "Emits noodle particles, meatballs and has red sauce dripping from the bottom.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/spaghetti.png"
     },
     {
       "name": "Toxic",
@@ -681,7 +764,8 @@
       "appearance": null,
       "multiplier": "x15",
       "obtainment": "Can be applied by the Cockatrice pet.",
-      "visualDescription": "Green particles dripping below."
+      "visualDescription": "Green particles dripping below.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/toxic.png"
     },
     {
       "name": "Sizzled",
@@ -689,7 +773,8 @@
       "appearance": null,
       "multiplier": "x18",
       "obtainment": "Combining Cooked and Fried mutation.",
-      "visualDescription": "The fruit when it has the effects of white smoke surrounding it."
+      "visualDescription": "The fruit when it has the effects of white smoke surrounding it.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/sizzled.png"
     },
     {
       "name": "Tranquil",
@@ -697,7 +782,8 @@
       "appearance": null,
       "multiplier": "x20",
       "obtainment": "During Zen Aura. Can be applied by the Tanchozuru pet. Can be applied by any pets with the Tranquil mutation. Can be applied by the Kodama when harvesting zen type crops.",
-      "visualDescription": "Has a white, circular rippling effect. Words like \"信\", \"命\", \"夢\", and \"氣\" appear."
+      "visualDescription": "Has a white, circular rippling effect. Words like \"信\", \"命\", \"夢\", and \"氣\" appear.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/tranquil.png"
     },
     {
       "name": "OldAmber",
@@ -705,7 +791,8 @@
       "appearance": null,
       "multiplier": "x20",
       "obtainment": "Aging Amber mutation by 24 hours.",
-      "visualDescription": "More orange than its yellow predecessor."
+      "visualDescription": "More orange than its yellow predecessor.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/oldamber.png"
     },
     {
       "name": "Corrupt",
@@ -713,7 +800,8 @@
       "appearance": null,
       "multiplier": "x20",
       "obtainment": "During Corrupt Zen Aura. Can be applied by any pets with the Corrupted mutation. Can be applied by the Corrupted Kodama when harvesting zen type crops.",
-      "visualDescription": "Emits falling red and black particles. Red lightning."
+      "visualDescription": "Emits falling red and black particles. Red lightning.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/corrupt.png"
     },
     {
       "name": "Withered",
@@ -721,7 +809,8 @@
       "appearance": null,
       "multiplier": "x20",
       "obtainment": "Can be applied by any crop with the Wilted mutation and being near the Weeping Branch crop.",
-      "visualDescription": "The fruit starts to decay into a almost black purple. The fruit starts producing ashes as the periwinkle starts decaying and wither."
+      "visualDescription": "The fruit starts to decay into a almost black purple. The fruit starts producing ashes as the periwinkle starts decaying and wither.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/withered.png"
     },
     {
       "name": "Zombified",
@@ -729,7 +818,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "Can be applied by the Chicken Zombie pet Can be applied by the Hex Serpent pet after devouring five single-harvest crops in the Hex Square cosmetic.",
-      "visualDescription": "Emits a green fog. Dripping with green liquid."
+      "visualDescription": "Emits a green fog. Dripping with green liquid.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/zombified.png"
     },
     {
       "name": "Molten",
@@ -737,7 +827,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "During Volcano, Super Storm or Armageddon. Can be applied by the Lobster Thermidor pet.",
-      "visualDescription": "Neon. Orange, yellow and red in color."
+      "visualDescription": "Neon. Orange, yellow and red in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/molten.png"
     },
     {
       "name": "Flaming",
@@ -745,7 +836,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "Can be applied by the Phoenix pet. Can be applied by any pets with the Soulflare mutation.",
-      "visualDescription": "Red and orange in color Emit small red and orange fire particle"
+      "visualDescription": "Red and orange in color Emit small red and orange fire particle",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/flaming.png"
     },
     {
       "name": "Ghostly",
@@ -753,7 +845,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "Can be applied by the Great Pumpkin crop. Can be appied by the Specter pet.",
-      "visualDescription": "Makes the crop almost transparent with a slight hint of blue."
+      "visualDescription": "Makes the crop almost transparent with a slight hint of blue.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/ghostly.png"
     },
     {
       "name": "Mirage",
@@ -761,7 +854,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "Can be applied by the Rhino or the Lion pet. During Safari Oasis. Can be applied by the Trinity Fruit crop.",
-      "visualDescription": "Light blue in color."
+      "visualDescription": "Light blue in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/mirage.png"
     },
     {
       "name": "Crystalized",
@@ -769,7 +863,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "Can be applied by the Sapphire Macaw pet.",
-      "visualDescription": "Turn white"
+      "visualDescription": "Turn white",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/crystalized.png"
     },
     {
       "name": "Glacial",
@@ -777,7 +872,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "During Permafrost Explosion. Can be applied by the Frost Dragon pet.",
-      "visualDescription": "Unknown."
+      "visualDescription": "Unknown.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/glacial.png"
     },
     {
       "name": "Gale",
@@ -785,7 +881,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "Can be applied by the Wind Wyvern pet.",
-      "visualDescription": "Fruit is full of winds."
+      "visualDescription": "Fruit is full of winds.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/gale.png"
     },
     {
       "name": "Firework",
@@ -793,7 +890,8 @@
       "appearance": null,
       "multiplier": "x26",
       "obtainment": "Can be applied by the New Year's Dragon pet. Can be applied by the Dragon's Firework gear.",
-      "visualDescription": "Fireworks explode with shades of orange and yellow."
+      "visualDescription": "Fireworks explode with shades of orange and yellow.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/firework.png"
     },
     {
       "name": "Gloom",
@@ -801,7 +899,8 @@
       "appearance": null,
       "multiplier": "x30",
       "obtainment": "Combining Bloom and Rot mutation.",
-      "visualDescription": "Emits both purple and yellow particles"
+      "visualDescription": "Emits both purple and yellow particles",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/gloom.png"
     },
     {
       "name": "Umbral",
@@ -809,7 +908,8 @@
       "appearance": null,
       "multiplier": "x30",
       "obtainment": "Combining Blight and Pestilent mutation.",
-      "visualDescription": "Emits both yellowish green and purple particles Similar to Bloom"
+      "visualDescription": "Emits both yellowish green and purple particles Similar to Bloom",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/umbral.png"
     },
     {
       "name": "Glossy",
@@ -817,7 +917,8 @@
       "appearance": null,
       "multiplier": "x30",
       "obtainment": "Can be applied by the Glass Dog or Glass Cat pet. During Raining Glass Animals.",
-      "visualDescription": "Unknown."
+      "visualDescription": "Unknown.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/glossy.png"
     },
     {
       "name": "Typhoon",
@@ -825,7 +926,8 @@
       "appearance": null,
       "multiplier": "x30",
       "obtainment": "During Safari Storm. Can be applied by the Lion pet.",
-      "visualDescription": "Similar to Cyclonic but white in color."
+      "visualDescription": "Similar to Cyclonic but white in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/typhoon.png"
     },
     {
       "name": "Fierywork",
@@ -833,7 +935,8 @@
       "appearance": null,
       "multiplier": "x30",
       "obtainment": "Combining Firework and Fiery mutation.",
-      "visualDescription": "Fiery Fireworks exploding."
+      "visualDescription": "Fiery Fireworks exploding.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/fierywork.png"
     },
     {
       "name": "Blizzard",
@@ -841,7 +944,8 @@
       "appearance": null,
       "multiplier": "x40",
       "obtainment": "During Yeti Night.",
-      "visualDescription": "Smilar to Subzero but more blue."
+      "visualDescription": "Smilar to Subzero but more blue.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/blizzard.png"
     },
     {
       "name": "SunScorched",
@@ -849,7 +953,8 @@
       "appearance": null,
       "multiplier": "x32",
       "obtainment": "Combining Mirage and Arid.",
-      "visualDescription": "Dark sunburn-like tint."
+      "visualDescription": "Dark sunburn-like tint.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/sunscorched.png"
     },
     {
       "name": "HarmonisedChakra",
@@ -857,7 +962,8 @@
       "appearance": null,
       "multiplier": "x35",
       "obtainment": "Combining Chakra and CorruptChakra mutation.",
-      "visualDescription": "Magenta rays and lightning streak out of the fruit with stars on the handle. A faint magenta halo around the crop."
+      "visualDescription": "Magenta rays and lightning streak out of the fruit with stars on the handle. A faint magenta halo around the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/harmonisedchakra.png"
     },
     {
       "name": "Gourmet",
@@ -865,7 +971,8 @@
       "appearance": null,
       "multiplier": "x37",
       "obtainment": "Combining Aromatic, Spaghetti and Sizzled mutation.",
-      "visualDescription": "Stormy spaghetti particles along with tan mist"
+      "visualDescription": "Stormy spaghetti particles along with tan mist",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/gourmet.png"
     },
     {
       "name": "Corrosive",
@@ -873,7 +980,8 @@
       "appearance": null,
       "multiplier": "x40",
       "obtainment": "Combining Acidic and Toxic mutations.",
-      "visualDescription": "Part of this crop turns green, green particles drop from the bottom and particles sweep from the crop."
+      "visualDescription": "Part of this crop turns green, green particles drop from the bottom and particles sweep from the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/corrosive.png"
     },
     {
       "name": "AncientAmber",
@@ -881,7 +989,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "Aging OldAmber mutation by 48 hours.",
-      "visualDescription": "Orange Particles."
+      "visualDescription": "Orange Particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/ancientamber.png"
     },
     {
       "name": "Fortune",
@@ -889,7 +998,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "Can be applied by the Golden Goose pet. The Golden Goose can only apply to a Golden Egg crop. Can be applied by the Golden Egg crop when selling itself.",
-      "visualDescription": "Sparkling with a golden and silver metallic shine. Gives off a yellow fog-like gas. Emits robux particles."
+      "visualDescription": "Sparkling with a golden and silver metallic shine. Gives off a yellow fog-like gas. Emits robux particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/fortune.png"
     },
     {
       "name": "Cyclonic",
@@ -897,7 +1007,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "Can be applied by the Griffin pet.",
-      "visualDescription": "Blue particles that are attracted to the fruit, blue stars, and grey circles appearing around the fruit."
+      "visualDescription": "Blue particles that are attracted to the fruit, blue stars, and grey circles appearing around the fruit.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/cyclonic.png"
     },
     {
       "name": "Luminous",
@@ -905,7 +1016,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "Using the Mutation Spray Luminous. Can be applied by the Luminous Sprite pet. Using the Luminous Wand when Fairies start. Can be applied by any pets with the Luminous mutation.",
-      "visualDescription": "Same as glimmering mutation. Emit small explosion with rainbow color and aurora color."
+      "visualDescription": "Same as glimmering mutation. Emit small explosion with rainbow color and aurora color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/luminous.png"
     },
     {
       "name": "Desolate",
@@ -913,7 +1025,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "Can be applied by any crop with the Withered mutation and being near the Weeping Branch crop.",
-      "visualDescription": "Crimson Red with red liquid dripping."
+      "visualDescription": "Crimson Red with red liquid dripping.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/desolate.png"
     },
     {
       "name": "Stampede",
@@ -921,7 +1034,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "During Safari Stampede. Can be applied by the Trinity Fruit crop. Can be applied by the Lion pet.",
-      "visualDescription": "Animal footprint covers the crop. Deformed Fruit."
+      "visualDescription": "Animal footprint covers the crop. Deformed Fruit.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/stampede.png"
     },
     {
       "name": "Whalebound",
@@ -929,7 +1043,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "During Whale Waters.",
-      "visualDescription": "Turn Navy Blue with bubbles coming out."
+      "visualDescription": "Turn Navy Blue with bubbles coming out.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/whalebound.png"
     },
     {
       "name": "Heartbound",
@@ -937,7 +1052,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "Can be applied by the Red Rose Fox pet.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/heartbound.png"
     },
     {
       "name": "Blazing",
@@ -945,7 +1061,8 @@
       "appearance": null,
       "multiplier": "x52",
       "obtainment": "Combining Molten and Flaming mutation.",
-      "visualDescription": "Particle emissions and crop looks similar to Flaming mutation."
+      "visualDescription": "Particle emissions and crop looks similar to Flaming mutation.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/blazing.png"
     },
     {
       "name": "Shadowbound",
@@ -953,7 +1070,8 @@
       "appearance": null,
       "multiplier": "x70",
       "obtainment": "Combining Gloom and Umbral mutation.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/shadowbound.png"
     },
     {
       "name": "Leeched",
@@ -961,7 +1079,8 @@
       "appearance": null,
       "multiplier": "x70",
       "obtainment": "Can be applied by the Woody pet During Vampire Bat Thirst.",
-      "visualDescription": "Unknown."
+      "visualDescription": "Unknown.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/leeched.png"
     },
     {
       "name": "Warped",
@@ -969,7 +1088,8 @@
       "appearance": null,
       "multiplier": "x75",
       "obtainment": "During Brainrot Stampede. Can be applied by the Apple Gazelle pet when harvesting Sugar Apples.",
-      "visualDescription": "Purple particles spin around the crop."
+      "visualDescription": "Purple particles spin around the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/warped.png"
     },
     {
       "name": "Azure",
@@ -977,7 +1097,8 @@
       "appearance": null,
       "multiplier": "x75",
       "obtainment": "Can be applied by the Mizuchi pet. After selling any crops with the Azure mutation.",
-      "visualDescription": "Crop becomes transparent, with some blue shining particles."
+      "visualDescription": "Crop becomes transparent, with some blue shining particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/azure.png"
     },
     {
       "name": "Terran",
@@ -985,7 +1106,8 @@
       "appearance": null,
       "multiplier": "x75",
       "obtainment": "Can be applied by the Hydra pet",
-      "visualDescription": "Unknown."
+      "visualDescription": "Unknown.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/terran.png"
     },
     {
       "name": "Graceful",
@@ -993,7 +1115,8 @@
       "appearance": null,
       "multiplier": "x77",
       "obtainment": "Can be applied by the Swan pet.",
-      "visualDescription": "Emits bright star praticles"
+      "visualDescription": "Emits bright star praticles",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/graceful.png"
     },
     {
       "name": "FoxfireChakra",
@@ -1001,7 +1124,8 @@
       "appearance": null,
       "multiplier": "x90",
       "obtainment": "Can be applied by the Kitsune pet when stealing a crop.",
-      "visualDescription": "Intense red electric particles around the crop. Imbues the crop with red flames."
+      "visualDescription": "Intense red electric particles around the crop. Imbues the crop with red flames.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/foxfirechakra.png"
     },
     {
       "name": "CorruptFoxfireChakra",
@@ -1009,7 +1133,8 @@
       "appearance": null,
       "multiplier": "x90",
       "obtainment": "Can be applied by the Corrupted Kitsune pet.",
-      "visualDescription": "Blue lightning sparks around the plant with blue stars in the middle. Imbues the crop with blue flames."
+      "visualDescription": "Blue lightning sparks around the plant with blue stars in the middle. Imbues the crop with blue flames.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/corruptfoxfirechakra.png"
     },
     {
       "name": "Brainrot",
@@ -1017,7 +1142,8 @@
       "appearance": null,
       "multiplier": "x100",
       "obtainment": "During Brainrot Portal. Can be applied by the Lemon Lion pet.",
-      "visualDescription": "Emits colorful confetti and Man Face PNGs, with rainbow aura circles with full of happiness."
+      "visualDescription": "Emits colorful confetti and Man Face PNGs, with rainbow aura circles with full of happiness.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/brainrot.png"
     },
     {
       "name": "Maelstrom",
@@ -1025,7 +1151,8 @@
       "appearance": null,
       "multiplier": "x100",
       "obtainment": "Combining Tempestuous and Cyclonic mutation.",
-      "visualDescription": "Same effects as Cyclonic. Neon blue color on different parts of the fruit (sometimes they can fill it completely and leave only the top)."
+      "visualDescription": "Same effects as Cyclonic. Neon blue color on different parts of the fruit (sometimes they can fill it completely and leave only the top).",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/maelstrom.png"
     },
     {
       "name": "Meteoric",
@@ -1033,7 +1160,8 @@
       "appearance": null,
       "multiplier": "x125",
       "obtainment": "During Meteor Strike. Can be applied by the Lobster Thermidor pet.",
-      "visualDescription": "Having golden-yellow particles around the crop."
+      "visualDescription": "Having golden-yellow particles around the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/meteoric.png"
     },
     {
       "name": "Infernal",
@@ -1041,7 +1169,8 @@
       "appearance": null,
       "multiplier": "x180",
       "obtainment": "Combining Meteoric and Blazing mutation.",
-      "visualDescription": "Similar to Flaming particles, but with light green flames emitted from the crop. Crop turns light green as well."
+      "visualDescription": "Similar to Flaming particles, but with light green flames emitted from the crop. Crop turns light green as well.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/infernal.png"
     },
     {
       "name": "Stormcharged",
@@ -1049,7 +1178,8 @@
       "appearance": null,
       "multiplier": "x180",
       "obtainment": "Combining Static, Shocked and Tempestuous mutation.",
-      "visualDescription": "Crop colors turn blue and white, rapid wind particles, white raindrop particles, and with light blue sparkles emitted from the crop."
+      "visualDescription": "Crop colors turn blue and white, rapid wind particles, white raindrop particles, and with light blue sparkles emitted from the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/stormcharged.png"
     },
     {
       "name": "HarmonisedFoxfireChakra",
@@ -1057,7 +1187,8 @@
       "appearance": null,
       "multiplier": "x190",
       "obtainment": "Combining FoxfireChakra and CorruptFoxfireChakra mutation.",
-      "visualDescription": "A mix of red and blue lightning effects. Pulses between warm and cold glows. Emits intense star particles in both red and blue colors. Imbues the crop with blue flames."
+      "visualDescription": "A mix of red and blue lightning effects. Pulses between warm and cold glows. Emits intense star particles in both red and blue colors. Imbues the crop with blue flames.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/harmonisedfoxfirechakra.png"
     },
     {
       "name": "AscendedChakra",
@@ -1065,7 +1196,8 @@
       "appearance": null,
       "multiplier": "x230",
       "obtainment": "Combining HarmonisedChakra and HarmonisedFoxfireChakra mutation.",
-      "visualDescription": "A holy radiant mix of angelic white and holy yellowish tone. Pulses with harmony and balance of radiant white and a yellowish tone. Emits white and yellow angelic star particles."
+      "visualDescription": "A holy radiant mix of angelic white and holy yellowish tone. Pulses with harmony and balance of radiant white and a yellowish tone. Emits white and yellow angelic star particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/ascendedchakra.png"
     },
     {
       "name": "Mindbender",
@@ -1073,7 +1205,8 @@
       "appearance": null,
       "multiplier": "x175",
       "obtainment": "Combining Brainrot and Warped mutation.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/mindbender.png"
     },
     {
       "name": "Riptide",
@@ -1081,7 +1214,8 @@
       "appearance": null,
       "multiplier": "x80",
       "obtainment": "Combining Typhoon and Monsoon mutation.",
-      "visualDescription": "Waves and water particles swirl around."
+      "visualDescription": "Waves and water particles swirl around.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/riptide.png"
     },
     {
       "name": "Stormbound",
@@ -1089,7 +1223,8 @@
       "appearance": null,
       "multiplier": "x270",
       "obtainment": "Combining Riptide and Stormcharged mutation.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/stormbound.png"
     },
     {
       "name": "Supernatural",
@@ -1097,7 +1232,8 @@
       "appearance": null,
       "multiplier": "x37",
       "obtainment": "Combining Spooky, Vamp and Ghostly mutation.",
-      "visualDescription": "Glowing purple aura with small sparkles."
+      "visualDescription": "Glowing purple aura with small sparkles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/supernatural.png"
     },
     {
       "name": "Affluent",
@@ -1105,7 +1241,8 @@
       "appearance": null,
       "multiplier": "x70",
       "obtainment": "Combining Coin, Jackpot and Fortune mutation.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/affluent.png"
     },
     {
       "name": "Goldsparkle",
@@ -1113,7 +1250,8 @@
       "appearance": null,
       "multiplier": "x500",
       "obtainment": "Can be applied by the Gold Finch pet.",
-      "visualDescription": "Golden Sparkles flying out."
+      "visualDescription": "Golden Sparkles flying out.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/goldsparkle.png"
     },
     {
       "name": "Wiltproof",
@@ -1121,7 +1259,8 @@
       "appearance": null,
       "multiplier": "x4",
       "obtainment": "During Drought.",
-      "visualDescription": "Highly saturated colors."
+      "visualDescription": "Highly saturated colors.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/wiltproof.png"
     },
     {
       "name": "Heavenly",
@@ -1129,7 +1268,8 @@
       "appearance": null,
       "multiplier": "x5",
       "obtainment": "During Floating Jandel or Floating Flamingo.",
-      "visualDescription": "Emits Glow, shining fire from the base."
+      "visualDescription": "Emits Glow, shining fire from the base.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/heavenly.png"
     },
     {
       "name": "Brewed",
@@ -1137,7 +1277,8 @@
       "appearance": null,
       "multiplier": "x7",
       "obtainment": "During Giant Cauldron.",
-      "visualDescription": "Emits green smoke, with green squares floating off of the crop, along with a dripping effect like wet mutation."
+      "visualDescription": "Emits green smoke, with green squares floating off of the crop, along with a dripping effect like wet mutation.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/brewed.png"
     },
     {
       "name": "Boil",
@@ -1145,7 +1286,8 @@
       "appearance": null,
       "multiplier": "x15",
       "obtainment": "During Boil Rain.",
-      "visualDescription": "Emits a white steam effect and has a dripping effect like wet mutation."
+      "visualDescription": "Emits a white steam effect and has a dripping effect like wet mutation.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/boil.png"
     },
     {
       "name": "Gilded",
@@ -1153,7 +1295,8 @@
       "appearance": null,
       "multiplier": "x15",
       "obtainment": "During Midas Rain.",
-      "visualDescription": "Has a yellow outline. Emits yellow star particles."
+      "visualDescription": "Has a yellow outline. Emits yellow star particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/gilded.png"
     },
     {
       "name": "Moonbled",
@@ -1161,7 +1304,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "During Marrow Moon.",
-      "visualDescription": "Affected crop is pale grey in colour, and grey mist emits from the crop."
+      "visualDescription": "Affected crop is pale grey in colour, and grey mist emits from the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/moonbled.png"
     },
     {
       "name": "Volcanic",
@@ -1169,7 +1313,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "During Eruption.",
-      "visualDescription": "Unknown."
+      "visualDescription": "Unknown.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/volcanic.png"
     },
     {
       "name": "Alienated",
@@ -1177,7 +1322,8 @@
       "appearance": null,
       "multiplier": "x25",
       "obtainment": "During Alien Aurora.",
-      "visualDescription": "Aurora but Green to blue and reduced mutipler from x90 to x25."
+      "visualDescription": "Aurora but Green to blue and reduced mutipler from x90 to x25.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/alienated.png"
     },
     {
       "name": "OilBoil",
@@ -1185,7 +1331,8 @@
       "appearance": null,
       "multiplier": "x30",
       "obtainment": "Combining Oil and Boil mutation.",
-      "visualDescription": "A bit of gray droplets. Small smoke around the crop."
+      "visualDescription": "A bit of gray droplets. Small smoke around the crop.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/oilboil.png"
     },
     {
       "name": "Enlightened",
@@ -1193,7 +1340,8 @@
       "appearance": null,
       "multiplier": "x35",
       "obtainment": "During Enlightenment.",
-      "visualDescription": "Similar to Molten"
+      "visualDescription": "Similar to Molten",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/enlightened.png"
     },
     {
       "name": "Subzero",
@@ -1201,7 +1349,8 @@
       "appearance": null,
       "multiplier": "x40",
       "obtainment": "During Route Runner or Frozen Ice King.",
-      "visualDescription": "Light blue in color. Emits snowflakes and blue haze."
+      "visualDescription": "Light blue in color. Emits snowflakes and blue haze.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/subzero.png"
     },
     {
       "name": "Severed",
@@ -1209,7 +1358,8 @@
       "appearance": null,
       "multiplier": "x40",
       "obtainment": "During Offering.",
-      "visualDescription": "Parts separated apart similar to the Sliced mutation."
+      "visualDescription": "Parts separated apart similar to the Sliced mutation.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/severed.png"
     },
     {
       "name": "Junkshock",
@@ -1217,7 +1367,8 @@
       "appearance": null,
       "multiplier": "x45",
       "obtainment": "During Junkbot Raid.",
-      "visualDescription": "Has lime and yellow bolts circling around the fruit, emits some smoke effects and makes the fruit glow."
+      "visualDescription": "Has lime and yellow bolts circling around the fruit, emits some smoke effects and makes the fruit glow.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/junkshock.png"
     },
     {
       "name": "Batty",
@@ -1225,7 +1376,8 @@
       "appearance": null,
       "multiplier": "x45",
       "obtainment": "During Fruit Bat Attack.",
-      "visualDescription": "Unknown."
+      "visualDescription": "Unknown.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/batty.png"
     },
     {
       "name": "Blitzshock",
@@ -1233,7 +1385,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "During Lightning Storm.",
-      "visualDescription": "Blue tint with neon shine. Has yellow and blue \"electric\" particles swirling around. Occasionally emits a blue cloud puff."
+      "visualDescription": "Blue tint with neon shine. Has yellow and blue \"electric\" particles swirling around. Occasionally emits a blue cloud puff.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/blitzshock.png"
     },
     {
       "name": "Lightcycle",
@@ -1241,7 +1394,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "During Stoplight.",
-      "visualDescription": "Alternates between green, yellow, and red."
+      "visualDescription": "Alternates between green, yellow, and red.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/lightcycle.png"
     },
     {
       "name": "Sliced",
@@ -1249,7 +1403,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "During Jandel Katana.",
-      "visualDescription": "Parts divided. Rotated and shifted a bit."
+      "visualDescription": "Parts divided. Rotated and shifted a bit.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/sliced.png"
     },
     {
       "name": "Enchanted",
@@ -1257,7 +1412,8 @@
       "appearance": null,
       "multiplier": "x50",
       "obtainment": "During Enchantment.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/enchanted.png"
     },
     {
       "name": "Radioactive",
@@ -1265,7 +1421,8 @@
       "appearance": null,
       "multiplier": "x55",
       "obtainment": "During Radioactive Carrot.",
-      "visualDescription": "Neon green in color."
+      "visualDescription": "Neon green in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/radioactive.png"
     },
     {
       "name": "Infected",
@@ -1273,7 +1430,8 @@
       "appearance": null,
       "multiplier": "x75",
       "obtainment": "During Jandel Zombie.",
-      "visualDescription": "Emits small, hazy green particles. Completely green in color."
+      "visualDescription": "Emits small, hazy green particles. Completely green in color.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/infected.png"
     },
     {
       "name": "Glitched",
@@ -1281,7 +1439,8 @@
       "appearance": null,
       "multiplier": "x85",
       "obtainment": "During Dissonant.",
-      "visualDescription": "Fruit becomes semi-transparent with green, teal, blue or white parts. Emits glitch particles nearby."
+      "visualDescription": "Fruit becomes semi-transparent with green, teal, blue or white parts. Emits glitch particles nearby.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/glitched.png"
     },
     {
       "name": "Fractured",
@@ -1289,7 +1448,8 @@
       "appearance": null,
       "multiplier": "x92",
       "obtainment": "Combining Glitched and Plasma mutation.",
-      "visualDescription": "Broken crystal-like appearance."
+      "visualDescription": "Broken crystal-like appearance.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/fractured.png"
     },
     {
       "name": "Slashbound",
@@ -1297,7 +1457,8 @@
       "appearance": null,
       "multiplier": "x95",
       "obtainment": "Combining Sliced and Severed mutation.",
-      "visualDescription": "Similar to Severed mutation"
+      "visualDescription": "Similar to Severed mutation",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/slashbound.png"
     },
     {
       "name": "Blackout",
@@ -1305,7 +1466,8 @@
       "appearance": null,
       "multiplier": "x95",
       "obtainment": "During Reaper Scythe.",
-      "visualDescription": "Fully black in colour, has grey particles."
+      "visualDescription": "Fully black in colour, has grey particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/blackout.png"
     },
     {
       "name": "Alienlike",
@@ -1313,7 +1475,8 @@
       "appearance": null,
       "multiplier": "x100",
       "obtainment": "During Alien Invasion or Jandel UFO.",
-      "visualDescription": "Cyan in color Cyan particles emitted from the fruit Parts of fruit can be fully transparent/invisible, or be partially transparent."
+      "visualDescription": "Cyan in color Cyan particles emitted from the fruit Parts of fruit can be fully transparent/invisible, or be partially transparent.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/alienlike.png"
     },
     {
       "name": "Beanbound",
@@ -1321,7 +1484,8 @@
       "appearance": null,
       "multiplier": "x100",
       "obtainment": "During Beanaura.",
-      "visualDescription": "The crop is a bright shade of neon green."
+      "visualDescription": "The crop is a bright shade of neon green.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/beanbound.png"
     },
     {
       "name": "Plagued",
@@ -1329,7 +1493,8 @@
       "appearance": null,
       "multiplier": "x102",
       "obtainment": "Combining Infected and Zombified mutation.",
-      "visualDescription": "Green mists covers the fruit and admits contagious green particles."
+      "visualDescription": "Green mists covers the fruit and admits contagious green particles.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/plagued.png"
     },
     {
       "name": "Touchdown",
@@ -1337,7 +1502,8 @@
       "appearance": null,
       "multiplier": "x105",
       "obtainment": "During Post Dunk.",
-      "visualDescription": "Red and orange sparkles spray out of the bottom of the fruit."
+      "visualDescription": "Red and orange sparkles spray out of the bottom of the fruit.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/touchdown.png"
     },
     {
       "name": "Galactic",
@@ -1345,7 +1511,8 @@
       "appearance": null,
       "multiplier": "x120",
       "obtainment": "During Space Travel or Supernova.",
-      "visualDescription": "Turns the crop a light purple, some parts of the fruit are glowing."
+      "visualDescription": "Turns the crop a light purple, some parts of the fruit are glowing.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/galactic.png"
     },
     {
       "name": "Extraterrestrial",
@@ -1353,7 +1520,8 @@
       "appearance": null,
       "multiplier": "x137",
       "obtainment": "Combining Alienlike and Alienated mutation.",
-      "visualDescription": "Blue with black and white and sometime gray."
+      "visualDescription": "Blue with black and white and sometime gray.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/extraterrestrial.png"
     },
     {
       "name": "Biohazard",
@@ -1361,7 +1529,8 @@
       "appearance": null,
       "multiplier": "x157",
       "obtainment": "Combining Radioactive and Plagued mutation.",
-      "visualDescription": "Unknown."
+      "visualDescription": "Unknown.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/biohazard.png"
     },
     {
       "name": "Contagion",
@@ -1369,7 +1538,8 @@
       "appearance": null,
       "multiplier": "x205",
       "obtainment": "Combining Corrosive and Biohazard mutation.",
-      "visualDescription": "TBA"
+      "visualDescription": "TBA",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/contagion.png"
     },
     {
       "name": "Astral",
@@ -1377,7 +1547,8 @@
       "appearance": null,
       "multiplier": "x365",
       "obtainment": "Combining Cosmic and Galactic mutation.",
-      "visualDescription": "Yellow and pink coloured stars are released and some parts of the fruits are gradient and glowing."
+      "visualDescription": "Yellow and pink coloured stars are released and some parts of the fruits are gradient and glowing.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/astral.png"
     },
     {
       "name": "Charcoal",
@@ -1385,7 +1556,8 @@
       "appearance": null,
       "multiplier": "x6",
       "obtainment": "Using the Charcoal Sprinkler.",
-      "visualDescription": "Charcoal colour."
+      "visualDescription": "Charcoal colour.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/charcoal.png"
     },
     {
       "name": "Mineral",
@@ -1393,7 +1565,8 @@
       "appearance": null,
       "multiplier": "x18",
       "obtainment": "Combining Charcoal, Tempered and Geode mutation.",
-      "visualDescription": "Charcoal but browner."
+      "visualDescription": "Charcoal but browner.",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/mineral.png"
     }
   ],
   "mutationAppliers": {

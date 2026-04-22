@@ -17,7 +17,8 @@
       "amount",
       "chance",
       "petSellMultiplier",
-      "obtainable"
+      "obtainable",
+      "image"
     ]
   },
   "items": [
@@ -29,7 +30,8 @@
       "amount": "30%",
       "chance": "32.15%",
       "petSellMultiplier": "x10",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/shiny.png"
     },
     {
       "name": "Inverted",
@@ -39,7 +41,8 @@
       "amount": "50%",
       "chance": "16.08%",
       "petSellMultiplier": "x10",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/inverted.png"
     },
     {
       "name": "Frozen",
@@ -49,7 +52,8 @@
       "amount": "None",
       "chance": "9.65%",
       "petSellMultiplier": "x10",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/frozen.png"
     },
     {
       "name": "Windy",
@@ -59,7 +63,8 @@
       "amount": "None",
       "chance": "9.65%",
       "petSellMultiplier": "x2",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/windy.png"
     },
     {
       "name": "Golden",
@@ -69,7 +74,8 @@
       "amount": "10%",
       "chance": "6.43%",
       "petSellMultiplier": "x100",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/golden.png"
     },
     {
       "name": "Mega",
@@ -79,7 +85,8 @@
       "amount": "200%",
       "chance": "6.43%",
       "petSellMultiplier": "x1",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/mega.png"
     },
     {
       "name": "Tiny",
@@ -89,7 +96,8 @@
       "amount": "-90%",
       "chance": "6.43%",
       "petSellMultiplier": "x1",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/tiny.png"
     },
     {
       "name": "IronSkin",
@@ -99,7 +107,8 @@
       "amount": "None",
       "chance": "3.22%",
       "petSellMultiplier": "x100",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/ironskin.png"
     },
     {
       "name": "Radiant",
@@ -109,7 +118,8 @@
       "amount": "None",
       "chance": "3.22%",
       "petSellMultiplier": "x100",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/radiant.png"
     },
     {
       "name": "Rainbow",
@@ -119,7 +129,8 @@
       "amount": "20%",
       "chance": "3.22%",
       "petSellMultiplier": "x100",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/rainbow.png"
     },
     {
       "name": "Shocked",
@@ -129,7 +140,8 @@
       "amount": "None",
       "chance": "3.22%",
       "petSellMultiplier": "x100",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/shocked.png"
     },
     {
       "name": "Ascended",
@@ -139,7 +151,8 @@
       "amount": "None",
       "chance": "0.32%",
       "petSellMultiplier": "x100",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/ascended.png"
     },
     {
       "name": "Tranquil",
@@ -149,7 +162,8 @@
       "amount": "None",
       "chance": "3.02%",
       "petSellMultiplier": "x100",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/tranquil.png"
     },
     {
       "name": "Corrupted",
@@ -159,7 +173,8 @@
       "amount": "None",
       "chance": "3.02%",
       "petSellMultiplier": "x100",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/corrupted.png"
     },
     {
       "name": "Fried",
@@ -169,7 +184,8 @@
       "amount": "None",
       "chance": "N/A",
       "petSellMultiplier": "x15",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/fried.png"
     },
     {
       "name": "Aromatic",
@@ -179,7 +195,8 @@
       "amount": "None",
       "chance": "N/A",
       "petSellMultiplier": "x100",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/aromatic.png"
     },
     {
       "name": "GiantBean",
@@ -189,7 +206,8 @@
       "amount": "150%",
       "chance": "Crafted during Beanstalk event using 3 beanstalks and 1 cleansing pet shard",
       "petSellMultiplier": "x1",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/giantbean.png"
     },
     {
       "name": "Silver",
@@ -199,7 +217,8 @@
       "amount": "5%",
       "chance": "Achievements",
       "petSellMultiplier": "x10",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/silver.png"
     },
     {
       "name": "Glimmering",
@@ -209,7 +228,8 @@
       "amount": "None",
       "chance": "1.72% on tier 3 of fountain rewards 3.03% on tier 4 of fountain rewards 5.88% on tier 5 of fountain rewards",
       "petSellMultiplier": "x1",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/glimmering.png"
     },
     {
       "name": "Luminous",
@@ -219,7 +239,8 @@
       "amount": "None",
       "chance": "Guaranteed reward in the form of a Mutation Shard from the Fairy Event's mini achievements section. Obtained upon completion.",
       "petSellMultiplier": "x1",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/luminous.png"
     },
     {
       "name": "Nutty",
@@ -229,7 +250,8 @@
       "amount": "None",
       "chance": "0.24% chance from collecting acorns from Chubby Chipmunk.",
       "petSellMultiplier": "x1",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/nutty.png"
     },
     {
       "name": "Dreadbound",
@@ -239,7 +261,8 @@
       "amount": "6.5-30 XP",
       "chance": "Chance to be applied by the Headless Horseman.",
       "petSellMultiplier": "x1",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/dreadbound.png"
     },
     {
       "name": "Soulflame",
@@ -249,7 +272,8 @@
       "amount": "60%",
       "chance": "Chance to be applied by the Headless Horseman.",
       "petSellMultiplier": "x1",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/soulflame.png"
     },
     {
       "name": "Spectral",
@@ -259,7 +283,8 @@
       "amount": "8%",
       "chance": "Chance to be applied by the Headless Horseman.",
       "petSellMultiplier": "x1",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/spectral.png"
     },
     {
       "name": "Nightmare",
@@ -269,7 +294,8 @@
       "amount": "22%, 125%",
       "chance": "Rare chance to be applied by the Headless Horseman.",
       "petSellMultiplier": "x1",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/nightmare.png"
     },
     {
       "name": "Tethered",
@@ -279,7 +305,8 @@
       "amount": "None",
       "chance": "Toffee Tether",
       "petSellMultiplier": "x1",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/tethered.png"
     },
     {
       "name": "Aurora",
@@ -289,7 +316,8 @@
       "amount": "None",
       "chance": "3.22%",
       "petSellMultiplier": "x10",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/aurora.png"
     },
     {
       "name": "Jumbo",
@@ -299,7 +327,8 @@
       "amount": "180%, 50%",
       "chance": "Safari Shop",
       "petSellMultiplier": "x10",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/jumbo.png"
     },
     {
       "name": "Oxpecker",
@@ -309,7 +338,8 @@
       "amount": "1%",
       "chance": "2.44% chance from giving a pet to Safari Joe",
       "petSellMultiplier": "x1",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/oxpecker.png"
     },
     {
       "name": "Giraffe",
@@ -319,7 +349,8 @@
       "amount": "3%",
       "chance": "2.04% chance from giving a pet to Safari Joe",
       "petSellMultiplier": "x5",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/giraffe.png"
     },
     {
       "name": "Rhino",
@@ -329,7 +360,8 @@
       "amount": "4.5%",
       "chance": "0.75-4.12% chance from giving a pet to Safari Joe",
       "petSellMultiplier": "x10",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/rhino.png"
     },
     {
       "name": "Crocodile",
@@ -339,7 +371,8 @@
       "amount": "6%",
       "chance": "0.76-2.06% chance from giving a pet to Safari Joe",
       "petSellMultiplier": "x15",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/crocodile.png"
     },
     {
       "name": "Lion",
@@ -349,7 +382,8 @@
       "amount": "7%",
       "chance": "0.55-1.03% chance from giving a pet to Safari Joe",
       "petSellMultiplier": "x20",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/lion.png"
     },
     {
       "name": "Forger",
@@ -359,7 +393,8 @@
       "amount": "7%",
       "chance": "Can be crafted as a Pet Mutation Shard in the smithing event, the materials required are: Gem Egg Legendary Coal Cleansing Pet Shard 4,500,000",
       "petSellMultiplier": "x10",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/forger.png"
     },
     {
       "name": "Nocturnal",
@@ -369,7 +404,8 @@
       "amount": "None",
       "chance": "0.5% Chance from the Christmas Present",
       "petSellMultiplier": "x15",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/nocturnal.png"
     },
     {
       "name": "Peppermint",
@@ -379,7 +415,8 @@
       "amount": "None",
       "chance": "10% chance from Peppermint Vine when hatching a pet in the plant's radius",
       "petSellMultiplier": "x25",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/peppermint.png"
     },
     {
       "name": "Spirit Sparkle",
@@ -389,7 +426,8 @@
       "amount": "None",
       "chance": "10% chance from Spirit Sparkle when hatching a pet in the plant's radius",
       "petSellMultiplier": "x25",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/spirit-sparkle.png"
     },
     {
       "name": "Christmas Rally",
@@ -399,7 +437,8 @@
       "amount": "4.01xp",
       "chance": "From the Ice Golem pet!",
       "petSellMultiplier": "x10",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/christmas-rally.png"
     },
     {
       "name": "Jolly Decorator",
@@ -409,7 +448,8 @@
       "amount": "None",
       "chance": "From the Ice Golem pet!",
       "petSellMultiplier": "x50",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/jolly-decorator.png"
     },
     {
       "name": "Merry Nursery",
@@ -419,7 +459,8 @@
       "amount": "None",
       "chance": "From the Ice Golem pet!",
       "petSellMultiplier": "x20",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/merry-nursery.png"
     },
     {
       "name": "GiantGolem",
@@ -429,7 +470,8 @@
       "amount": "20%, 150%",
       "chance": "Rare chance from the Ice Golem pet!",
       "petSellMultiplier": "x100",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/giantgolem.png"
     },
     {
       "name": "HyperHunger",
@@ -439,7 +481,8 @@
       "amount": "30%",
       "chance": "Santa's Stash",
       "petSellMultiplier": "x100",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/hyperhunger.png"
     },
     {
       "name": "Venom",
@@ -449,7 +492,8 @@
       "amount": "30%",
       "chance": "5 ~ 10% chance from the Giant Scorpion pet!",
       "petSellMultiplier": "x100",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/venom.png"
     },
     {
       "name": "Fiery",
@@ -459,7 +503,8 @@
       "amount": "None",
       "chance": "TBA",
       "petSellMultiplier": "x100",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/fiery.png"
     },
     {
       "name": "UFO",
@@ -469,7 +514,8 @@
       "amount": "30%",
       "chance": "N/A",
       "petSellMultiplier": "x100",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/ufo.png"
     },
     {
       "name": "Alienated",
@@ -479,7 +525,8 @@
       "amount": "30%",
       "chance": "A chance to obtain from the Alien Chaos Weather!",
       "petSellMultiplier": "x1",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/alienated.png"
     },
     {
       "name": "Blossoming",
@@ -489,7 +536,8 @@
       "amount": "TBA%",
       "chance": "TBA% chance from Elder Candy Blossom when hatching a pet in the plant's radius!",
       "petSellMultiplier": "xTBA",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Pet%20Mutations/blossoming.png"
     }
   ],
   "variants": [

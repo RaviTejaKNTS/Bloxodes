@@ -35,7 +35,8 @@
       "currency",
       "refreshCadence",
       "description",
-      "sourceUrl"
+      "sourceUrl",
+      "image"
     ]
   },
   "items": [
@@ -45,7 +46,8 @@
       "currency": "Sheckles, Robux, Trade Token",
       "refreshCadence": "Main stock every 5 minutes; Daily Deals every 24 hours",
       "description": "The Seed Shop, also known as Sam's Shop, is where players can purchase the majority of crop seeds available in the game. The seeds can either be bought with Sheckles , Robux or Trade Token .Seeds can also be gifted with Robux. It operates on a stock system, meaning that not all crop seeds are consistently available at all times. However, there are notable exceptions: Carrot, Strawberry,Blueberry and Tomato seeds are guaranteed to be available. If an item is sold out, like in other stores, the purchase button will be grey and say \"NO STOCK.\" The main stock refreshes every 5 minutes, and the Daily Deals shop refreshes every 24 hours, giving a chance for seeds that were previously unavailable to become available in the shop. The rarer the seed is, the less likely it will be available in the shop.",
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Seed_Shop"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Seed_Shop",
+      "image": "/Grow%20a%20Garden/Shops/seed-shop.png"
     },
     {
       "name": "Gear Shop",
@@ -53,7 +55,8 @@
       "currency": "Sheckles",
       "refreshCadence": "Stock changes every 5 minutes",
       "description": "The Gear Shop, also known as Eloise's Gear Shop, is one of the main shops in the game, where various gear can be purchased using sheckles. It is found at one of the sides of the game area, at the opposite side of the Seed Shop and the Sell Stuff stand and is between the Cosmetics Shop and the Pet Eggs Shop. The initial gear stock in the shop is the same throughout all servers, and changes every 5 minutes, giving a new selection of gear to purchase from. Watering Can, Trowel, Recall Wrench, Trading Ticket, Favorite Tool and Harvest Tool are guaranteed to be on stock every time the shop resets.",
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Gear_Shop"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Gear_Shop",
+      "image": "/Grow%20a%20Garden/Shops/gear-shop.png"
     },
     {
       "name": "Pet Eggs Shop",
@@ -61,7 +64,8 @@
       "currency": "Sheckles, Robux",
       "refreshCadence": "Egg stock refreshes every 30 minutes",
       "description": "The Pet Eggs shop is one of the main shops in Grow a Garden. The shop is mainly used to sell Pet Eggs and help increase pet slots. Raphael used to be the Quest Giver but that task was changed to the Pet Egg Shop after the Pet Update. The Pet Shop is one of the stands/shops in Grow a Garden. It holds the Pet Eggs. Every 30 minutes, the egg stock refreshes. The stand has a yellow and white striped spawning over it. It is made out of dark wood. On the top, there is a wood sign that says PET EGGS in yellow text. On the left of the stand, there is a stand, which provides the option to the player to refresh the egg stock on demand for a cost of Robux. The stand neighbors the Gear Shop and the Pet Mutations machine.",
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Pet_Eggs"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Pet_Eggs",
+      "image": "/Grow%20a%20Garden/Shops/pet-eggs-shop.png"
     },
     {
       "name": "Cosmetics Shop",
@@ -69,7 +73,8 @@
       "currency": "Sheckles, Robux",
       "refreshCadence": null,
       "description": "The Pet Eggs shop is one of the main shops in Grow a Garden. The shop is mainly used to sell Pet Eggs and help increase pet slots. Raphael used to be the Quest Giver but that task was changed to the Pet Egg Shop after the Pet Update. The Pet Shop is one of the stands/shops in Grow a Garden. It holds the Pet Eggs. Every 30 minutes, the egg stock refreshes. The stand has a yellow and white striped spawning over it. It is made out of dark wood. On the top, there is a wood sign that says PET EGGS in yellow text. On the left of the stand, there is a stand, which provides the option to the player to refresh the egg stock on demand for a cost of Robux. The stand neighbors the Gear Shop and the Pet Mutations machine. Common Egg",
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Cosmetics_Shop"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Cosmetics_Shop",
+      "image": "/Grow%20a%20Garden/Shops/cosmetics-shop.png"
     },
     {
       "name": "Limited Time Shop",
@@ -77,7 +82,8 @@
       "currency": "Robux",
       "refreshCadence": "Offer-based",
       "description": "The Cosmetic Shop was added in version 1.07.0. The player can use it to add decorations to spice up the look of their garden. This is considered a late game shop as everything in the shop is very costly. The crafting table moved here in version 1.11.0. Check Cosmetics for a full list of the cosmetics. The Cosmetic Shop is a small tent that is covered like any other with a white and purple striped cloth. Next to it is a brown sign that says, “Crafting Tables”",
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Limited_Time_Shop"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Limited_Time_Shop",
+      "image": "/Grow%20a%20Garden/Shops/limited-time-shop.png"
     }
   ]
 }

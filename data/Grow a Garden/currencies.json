@@ -22,79 +22,94 @@
     "columns": [
       "name",
       "obtainment",
-      "obtainable"
+      "obtainable",
+      "image"
     ]
   },
   "items": [
     {
       "name": "Sheckles",
       "obtainment": "Sell crops and pets for Sheckles. Players can aquire Sheckles using multiple different pets such as the Tanuki, Pancake Mole,Crab, and Mole. NPCs also reward players Sheckles for completing a quest. Another way players can obtain sheckles is through the Forever Pack or (when there used to be) through directly buying them with Robux in the Limited Time Shop. Players can also be gifted sheckles by other players.",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Currencies/sheckles.png"
     },
     {
       "name": "Garden Coins",
       "obtainment": "Exchange 1 trillion sheckles for 10 garden coins to Orson the Coin Keeper at the corner of the map. Sheckles will increase as players exchange more.",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Currencies/garden-coins.png"
     },
     {
       "name": "Pass Points",
       "obtainment": "Task completion in Season Pass. Another way is to directly buy them with Robux.",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Currencies/pass-points.png"
     },
     {
       "name": "Trade Token",
       "obtainment": "Obtain by either buying with Robux in the game shop or by players purchasing their items in the Trade World.",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Currencies/trade-token.png"
     },
     {
       "name": "Flowers",
       "obtainment": "Automatically exchange 1 quadrillion into flowers",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Currencies/flowers.png"
     },
     {
       "name": "Honey",
       "obtainment": "Give pollinated fruits to Onett, the honey merchant.",
-      "obtainable": "✓"
+      "obtainable": "✓",
+      "image": "/Grow%20a%20Garden/Currencies/honey.png"
     },
     {
       "name": "Lunar Points",
       "obtainment": "Exchange moonlit crops for Lunar Points during the Lunar Glow Event, which allowed players to access certain items.",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Currencies/lunar-points.png"
     },
     {
       "name": "Summer Coin",
       "obtainment": "Every 1,000 points earned in the Summer Harvest Event will convert to 1 Summer Coin.",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Currencies/summer-coin.png"
     },
     {
       "name": "Chi",
       "obtainment": "Exchange tranquil crops for Chi at the Tanuki NPC and give tranquil crops to the Zen Channeller until the bar is full during the Zen Event.",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Currencies/chi.png"
     },
     {
       "name": "Fairy Point",
       "obtainment": "Submit glimmering fruits to the wishing well or interact with fairies around the map during the Fairy Event.",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Currencies/fairy-point.png"
     },
     {
       "name": "Candy Corn",
       "obtainment": "Submit fruits to the Witch Cauldron, the Jack O Lantern NPC and the Harvest Reaper.",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Currencies/candy-corn.png"
     },
     {
       "name": "Carrot Coins",
       "obtainment": "Complete one of the Garden Games Quests from Greg during the Garden Games Event.",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Currencies/carrot-coins.png"
     },
     {
       "name": "Buttercup Coins",
       "obtainment": "Complete one of the Buttercup Quests from Brooklyn during the Buttercup Quest Event.",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Currencies/buttercup-coins.png"
     },
     {
       "name": "Heart Coins",
       "obtainment": "Exchange heartstruck, cute or heartbound fruits for Heart Coins to Heather during the Valentine's Event",
-      "obtainable": "✗"
+      "obtainable": "✗",
+      "image": "/Grow%20a%20Garden/Currencies/heart-coins.png"
     }
   ],
   "details": {

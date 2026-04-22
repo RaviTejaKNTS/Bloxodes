@@ -40,7 +40,8 @@
       "sourceGroups",
       "craftingRecipes",
       "seedPacks",
-      "secondarySummary"
+      "secondarySummary",
+      "image"
     ]
   },
   "items": [
@@ -60,7 +61,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/basket-bouquet.png"
     },
     {
       "name": "Jelly Bean Sprout",
@@ -78,7 +80,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/jelly-bean-sprout.png"
     },
     {
       "name": "Marshmallow Root",
@@ -96,7 +99,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Marshmallow Root seed produces divine quality fruit, obtainable, multi-harvest, 165K sheckles"
+      "secondarySummary": "Marshmallow Root seed produces divine quality fruit, obtainable, multi-harvest, 165K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/marshmallow-root.png"
     },
     {
       "name": "Egg Shroom",
@@ -114,7 +118,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Egg Shroom seed produces rare quality fruit, obtainable, multi-harvest, 99K sheckles"
+      "secondarySummary": "Egg Shroom seed produces rare quality fruit, obtainable, multi-harvest, 99K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/egg-shroom.png"
     },
     {
       "name": "Bonnet Bloom",
@@ -132,7 +137,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Bonnet Bloom seed produces legendary quality fruit, obtainable, multi-harvest, 90K sheckles"
+      "secondarySummary": "Bonnet Bloom seed produces legendary quality fruit, obtainable, multi-harvest, 90K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bonnet-bloom.png"
     },
     {
       "name": "Bunny Berry",
@@ -150,7 +156,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Bunny Berry seed produces quality fruit, obtainable, multi-harvest, 27K sheckles"
+      "secondarySummary": "Bunny Berry seed produces quality fruit, obtainable, multi-harvest, 27K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bunny-berry.png"
     },
     {
       "name": "Elder Candy Blossom",
@@ -168,7 +175,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Elder Candy Blossom seed produces prismatic quality fruit, obtainable, multi-harvest, 150K sheckles"
+      "secondarySummary": "Elder Candy Blossom seed produces prismatic quality fruit, obtainable, multi-harvest, 150K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/elder-candy-blossom.png"
     },
     {
       "name": "Candy Blossom 2026",
@@ -186,7 +194,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Candy Blossom 2026 seed produces divine quality fruit, obtainable, multi-harvest, 100K sheckles"
+      "secondarySummary": "Candy Blossom 2026 seed produces divine quality fruit, obtainable, multi-harvest, 100K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/candy-blossom-2026.png"
     },
     {
       "name": "Easter Sprout",
@@ -204,7 +213,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Easter Sprout seed produces limited quality fruit, obtainable, multi-harvest, 586K sheckles"
+      "secondarySummary": "Easter Sprout seed produces limited quality fruit, obtainable, multi-harvest, 586K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/easter-sprout.png"
     },
     {
       "name": "Blue Candypop",
@@ -222,7 +232,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Blue Candypop seed produces quality fruit, obtainable, single-harvest, 40K sheckles"
+      "secondarySummary": "Blue Candypop seed produces quality fruit, obtainable, single-harvest, 40K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/blue-candypop.png"
     },
     {
       "name": "Easter Egg Melon",
@@ -240,7 +251,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-egg-melon.png"
     },
     {
       "name": "Gift Berry",
@@ -258,7 +270,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Gift Berry seed produces divine quality fruit, obtainable, multi-harvest, 188K sheckles"
+      "secondarySummary": "Gift Berry seed produces divine quality fruit, obtainable, multi-harvest, 188K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/gift-berry.png"
     },
     {
       "name": "Severed Spine",
@@ -276,7 +289,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Severed Spine seed produces prismatic quality fruit, obtainable, multi-harvest, 98K sheckles"
+      "secondarySummary": "Severed Spine seed produces prismatic quality fruit, obtainable, multi-harvest, 98K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/severed-spine.png"
     },
     {
       "name": "Ghost Bush",
@@ -294,7 +308,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Ghost Bush seed produces uncommon quality fruit, obtainable, multi-harvest, 30K sheckles"
+      "secondarySummary": "Ghost Bush seed produces uncommon quality fruit, obtainable, multi-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/ghost-bush.png"
     },
     {
       "name": "Evo Mushroom IV",
@@ -312,7 +327,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Mushroom IV seed produces prismatic quality fruit, obtainable, multi-harvest, 40K sheckles"
+      "secondarySummary": "Evo Mushroom IV seed produces prismatic quality fruit, obtainable, multi-harvest, 40K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-mushroom-iv.png"
     },
     {
       "name": "Evo Mushroom III",
@@ -330,7 +346,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Mushroom III seed produces divine quality fruit, obtainable, single-harvest, 40K sheckles"
+      "secondarySummary": "Evo Mushroom III seed produces divine quality fruit, obtainable, single-harvest, 40K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-mushroom-iii.png"
     },
     {
       "name": "Evo Mushroom II",
@@ -348,7 +365,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Mushroom II seed produces mythical quality fruit, obtainable, single-harvest, 40K sheckles"
+      "secondarySummary": "Evo Mushroom II seed produces mythical quality fruit, obtainable, single-harvest, 40K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-mushroom-ii.png"
     },
     {
       "name": "Evo Pumpkin IV",
@@ -366,7 +384,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Pumpkin IV seed produces divine quality fruit, obtainable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Evo Pumpkin IV seed produces divine quality fruit, obtainable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-pumpkin-iv.png"
     },
     {
       "name": "Evo Pumpkin III",
@@ -384,7 +403,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Pumpkin III seed produces legendary quality fruit, obtainable, single-harvest, 35K sheckles"
+      "secondarySummary": "Evo Pumpkin III seed produces legendary quality fruit, obtainable, single-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-pumpkin-iii.png"
     },
     {
       "name": "Evo Pumpkin II",
@@ -402,7 +422,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Pumpkin II seed produces mythical quality fruit, obtainable, single-harvest, 35K sheckles"
+      "secondarySummary": "Evo Pumpkin II seed produces mythical quality fruit, obtainable, single-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-pumpkin-ii.png"
     },
     {
       "name": "Evo Blueberry IV",
@@ -420,7 +441,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Blueberry IV seed produces mythical quality fruit, obtainable, multi-harvest, 30K sheckles"
+      "secondarySummary": "Evo Blueberry IV seed produces mythical quality fruit, obtainable, multi-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-blueberry-iv.png"
     },
     {
       "name": "Evo Blueberry III",
@@ -438,7 +460,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Blueberry III seed produces legendary quality fruit, obtainable, single-harvest, 30K sheckles"
+      "secondarySummary": "Evo Blueberry III seed produces legendary quality fruit, obtainable, single-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-blueberry-iii.png"
     },
     {
       "name": "Evo Blueberry II",
@@ -456,7 +479,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Blueberry II seed produces rare quality fruit, obtainable, single-harvest, 30K sheckles"
+      "secondarySummary": "Evo Blueberry II seed produces rare quality fruit, obtainable, single-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-blueberry-ii.png"
     },
     {
       "name": "Evo Beetroot IV",
@@ -474,7 +498,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Beetroot IV seed produces legendary quality fruit, obtainable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Evo Beetroot IV seed produces legendary quality fruit, obtainable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-beetroot-iv.png"
     },
     {
       "name": "Evo Beetroot III",
@@ -492,7 +517,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Beetroot III seed produces rare quality fruit, obtainable, single-harvest, 25K sheckles"
+      "secondarySummary": "Evo Beetroot III seed produces rare quality fruit, obtainable, single-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-beetroot-iii.png"
     },
     {
       "name": "Evo Beetroot II",
@@ -510,7 +536,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Beetroot II seed produces uncommon quality fruit, obtainable, single-harvest, 25K sheckles"
+      "secondarySummary": "Evo Beetroot II seed produces uncommon quality fruit, obtainable, single-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-beetroot-ii.png"
     },
     {
       "name": "Evo Mushroom I",
@@ -528,7 +555,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Mushroom I seed produces legendary quality fruit, obtainable, single-harvest, 40K sheckles"
+      "secondarySummary": "Evo Mushroom I seed produces legendary quality fruit, obtainable, single-harvest, 40K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-mushroom-i.png"
     },
     {
       "name": "Evo Pumpkin I",
@@ -546,7 +574,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Pumpkin I seed produces rare quality fruit, obtainable, single-harvest, 35K sheckles"
+      "secondarySummary": "Evo Pumpkin I seed produces rare quality fruit, obtainable, single-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-pumpkin-i.png"
     },
     {
       "name": "Evo Blueberry I",
@@ -564,7 +593,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Blueberry I seed produces uncommon quality fruit, obtainable, single-harvest, 30K sheckles"
+      "secondarySummary": "Evo Blueberry I seed produces uncommon quality fruit, obtainable, single-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-blueberry-i.png"
     },
     {
       "name": "Carnival Pumpkin",
@@ -582,7 +612,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Carnival Pumpkin seed produces legendary quality fruit, obtainable, multi-harvest, 48K sheckles"
+      "secondarySummary": "Carnival Pumpkin seed produces legendary quality fruit, obtainable, multi-harvest, 48K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/carnival-pumpkin.webp"
     },
     {
       "name": "Crown Melon",
@@ -605,7 +636,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Crown Melon seed produces legendary quality fruit, unavailable, multi-harvest, 50K sheckles"
+      "secondarySummary": "Crown Melon seed produces legendary quality fruit, unavailable, multi-harvest, 50K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/crown-melon.png"
     },
     {
       "name": "Hinomai",
@@ -628,7 +660,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Hinomai seed produces mythical quality fruit, unavailable, multi-harvest, 80K sheckles"
+      "secondarySummary": "Hinomai seed produces mythical quality fruit, unavailable, multi-harvest, 80K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/hinomai.png"
     },
     {
       "name": "Fossilight",
@@ -651,7 +684,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Fossilight seed produces divine quality fruit, unavailable, multi-harvest, 88K sheckles"
+      "secondarySummary": "Fossilight seed produces divine quality fruit, unavailable, multi-harvest, 88K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/fossilight.png"
     },
     {
       "name": "Cocovine",
@@ -674,7 +708,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Cocovine seed produces mythical quality fruit, unavailable, multi-harvest, 66K sheckles"
+      "secondarySummary": "Cocovine seed produces mythical quality fruit, unavailable, multi-harvest, 66K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cocovine.png"
     },
     {
       "name": "Cranberry",
@@ -692,7 +727,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Cranberry seed produces legendary quality fruit, unavailable, multi-harvest, 3K sheckles"
+      "secondarySummary": "Cranberry seed produces legendary quality fruit, unavailable, multi-harvest, 3K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cranberry.png"
     },
     {
       "name": "Candy Blossom",
@@ -710,7 +746,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Candy Blossom seed produces divine quality fruit, unavailable, multi-harvest, 100K sheckles"
+      "secondarySummary": "Candy Blossom seed produces divine quality fruit, unavailable, multi-harvest, 100K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/candy-blossom.png"
     },
     {
       "name": "Red Lollipop",
@@ -728,7 +765,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Red Lollipop seed produces uncommon quality fruit, unavailable, single-harvest, 50K sheckles"
+      "secondarySummary": "Red Lollipop seed produces uncommon quality fruit, unavailable, single-harvest, 50K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/red-lollipop.png"
     },
     {
       "name": "Frost Pepper",
@@ -746,7 +784,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/frost-pepper.png"
     },
     {
       "name": "Frosty Bite",
@@ -769,7 +808,8 @@
           "chance": "40%"
         }
       ],
-      "secondarySummary": "Frosty Bite seed produces uncommon quality fruit, unavailable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Frosty Bite seed produces uncommon quality fruit, unavailable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/frosty-bite.png"
     },
     {
       "name": "Ghost Pepper",
@@ -792,7 +832,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Ghost Pepper seed produces mythical quality fruit, obtainable, multi-harvest, 77K sheckles"
+      "secondarySummary": "Ghost Pepper seed produces mythical quality fruit, obtainable, multi-harvest, 77K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/ghost-pepper.png"
     },
     {
       "name": "Corpse Flower",
@@ -815,7 +856,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Corpse Flower seed produces legendary quality fruit, obtainable, multi-harvest, 85K sheckles"
+      "secondarySummary": "Corpse Flower seed produces legendary quality fruit, obtainable, multi-harvest, 85K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/corpse-flower.png"
     },
     {
       "name": "Purple Dahlia",
@@ -838,7 +880,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Purple Dahlia seed produces mythical quality fruit, obtainable, multi-harvest"
+      "secondarySummary": "Purple Dahlia seed produces mythical quality fruit, obtainable, multi-harvest",
+      "image": "/Grow%20a%20Garden/Crops/purple-dahlia.png"
     },
     {
       "name": "Pitcher Plant",
@@ -867,7 +910,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pitcher Plant seed produces divine quality fruit, obtainable, multi-harvest, 52K sheckles"
+      "secondarySummary": "Pitcher Plant seed produces divine quality fruit, obtainable, multi-harvest, 52K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pitcher-plant.png"
     },
     {
       "name": "Prickly Pear",
@@ -896,7 +940,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Prickly Pear seed produces mythical quality fruit, obtainable, multi-harvest, 7K sheckles"
+      "secondarySummary": "Prickly Pear seed produces mythical quality fruit, obtainable, multi-harvest, 7K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/prickly-pear.png"
     },
     {
       "name": "Egg Melon",
@@ -925,7 +970,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Egg Melon seed produces quality fruit, obtainable, single-harvest, 90K sheckles"
+      "secondarySummary": "Egg Melon seed produces quality fruit, obtainable, single-harvest, 90K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/egg-melon.png"
     },
     {
       "name": "Great Pumpkin",
@@ -943,7 +989,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Great Pumpkin seed produces transcendent quality fruit, obtainable, multi-harvest, 180K sheckles"
+      "secondarySummary": "Great Pumpkin seed produces transcendent quality fruit, obtainable, multi-harvest, 180K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/great-pumpkin.png"
     },
     {
       "name": "Evo Beetroot I",
@@ -961,7 +1008,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Evo Beetroot I seed produces common quality fruit, obtainable, single-harvest, 25K sheckles"
+      "secondarySummary": "Evo Beetroot I seed produces common quality fruit, obtainable, single-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-beetroot-i.png"
     },
     {
       "name": "Cocomango",
@@ -990,7 +1038,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Cocomango seed produces prismatic quality fruit, obtainable, multi-harvest, 180K sheckles"
+      "secondarySummary": "Cocomango seed produces prismatic quality fruit, obtainable, multi-harvest, 180K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cocomango.png"
     },
     {
       "name": "Burning Bud",
@@ -1029,7 +1078,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Burning Bud seed produces prismatic quality fruit, obtainable, multi-harvest, 70K sheckles"
+      "secondarySummary": "Burning Bud seed produces prismatic quality fruit, obtainable, multi-harvest, 70K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/burning-bud.png"
     },
     {
       "name": "Turkish Hazel",
@@ -1047,7 +1097,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/turkish-hazel.svg"
     },
     {
       "name": "Tinsel",
@@ -1065,7 +1116,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/tinsel.png"
     },
     {
       "name": "Taffy Tree",
@@ -1083,7 +1135,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/taffy-tree.png"
     },
     {
       "name": "Sugarcane",
@@ -1101,7 +1154,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/sugarcane.png"
     },
     {
       "name": "Strange Man's Wheat",
@@ -1119,7 +1173,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/strange-man-s-wheat.png"
     },
     {
       "name": "Star Palm",
@@ -1137,7 +1192,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/star-palm.png"
     },
     {
       "name": "Spirit Lantern",
@@ -1155,7 +1211,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Spirit Lantern seed produces legendary quality fruit, unavailable, single-harvest, 7K sheckles"
+      "secondarySummary": "Spirit Lantern seed produces legendary quality fruit, unavailable, single-harvest, 7K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/spirit-lantern.png"
     },
     {
       "name": "Spectralis",
@@ -1173,7 +1230,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/spectralis.png"
     },
     {
       "name": "Skull Flower",
@@ -1191,7 +1249,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/skull-flower.svg"
     },
     {
       "name": "Sinisterdrip",
@@ -1209,7 +1268,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Sinisterdrip seed produces legendary quality fruit, unavailable, single-harvest, 69K sheckles"
+      "secondarySummary": "Sinisterdrip seed produces legendary quality fruit, unavailable, single-harvest, 69K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sinisterdrip.jpg"
     },
     {
       "name": "Shadow Buttercup",
@@ -1227,7 +1287,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Shadow Buttercup seed produces uncommon quality fruit, obtainable, single-harvest"
+      "secondarySummary": "Shadow Buttercup seed produces uncommon quality fruit, obtainable, single-harvest",
+      "image": "/Grow%20a%20Garden/Crops/shadow-buttercup.png"
     },
     {
       "name": "Rambutan",
@@ -1245,7 +1306,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/rambutan.svg"
     },
     {
       "name": "Queen Fruit",
@@ -1263,7 +1325,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/queen-fruit.svg"
     },
     {
       "name": "Purple Cabbage",
@@ -1281,7 +1344,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Purple Cabbage seed produces rare quality fruit, unavailable, multi-harvest, 500 sheckles"
+      "secondarySummary": "Purple Cabbage seed produces rare quality fruit, unavailable, multi-harvest, 500 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/purple-cabbage.png"
     },
     {
       "name": "Pink Tulip",
@@ -1299,7 +1363,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pink Tulip seed produces none quality fruit, unavailable, single-harvest, 850 sheckles"
+      "secondarySummary": "Pink Tulip seed produces none quality fruit, unavailable, single-harvest, 850 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pink-tulip.png"
     },
     {
       "name": "Peach Sun",
@@ -1317,7 +1382,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/peach-sun.png"
     },
     {
       "name": "Ornament Vine",
@@ -1335,7 +1401,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/ornament-vine.jpg"
     },
     {
       "name": "Observee",
@@ -1353,7 +1420,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/observee.svg"
     },
     {
       "name": "Noble Flower",
@@ -1371,7 +1439,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Noble Flower seed produces rare quality fruit, unavailable, multi-harvest, 20K sheckles"
+      "secondarySummary": "Noble Flower seed produces rare quality fruit, unavailable, multi-harvest, 20K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/noble-flower.png"
     },
     {
       "name": "New Years Tinsel",
@@ -1389,7 +1458,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/new-years-tinsel.png"
     },
     {
       "name": "Mutant Carrot",
@@ -1407,7 +1477,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Mutant Carrot seed produces rare quality fruit, unavailable, single-harvest, 18K sheckles"
+      "secondarySummary": "Mutant Carrot seed produces rare quality fruit, unavailable, single-harvest, 18K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/mutant-carrot.png"
     },
     {
       "name": "Monster Plum",
@@ -1425,7 +1496,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/monster-plum.svg"
     },
     {
       "name": "Mind Root",
@@ -1443,7 +1515,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/mind-root.svg"
     },
     {
       "name": "Milk Table",
@@ -1461,7 +1534,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/milk-table.svg"
     },
     {
       "name": "Merica Mushroom",
@@ -1479,7 +1553,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/merica-mushroom.png"
     },
     {
       "name": "Melon Flower",
@@ -1497,7 +1572,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/melon-flower.png"
     },
     {
       "name": "Mega Mushroom",
@@ -1515,7 +1591,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Mega Mushroom seed produces divine quality fruit, unavailable, single-harvest, 500 sheckles"
+      "secondarySummary": "Mega Mushroom seed produces divine quality fruit, unavailable, single-harvest, 500 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/mega-mushroom.png"
     },
     {
       "name": "Mauve Fruit",
@@ -1533,7 +1610,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/mauve-fruit.svg"
     },
     {
       "name": "Mammoth Mistletoe",
@@ -1551,7 +1629,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/mammoth-mistletoe.png"
     },
     {
       "name": "Mahogany",
@@ -1569,7 +1648,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/mahogany.png"
     },
     {
       "name": "Madras Thorn",
@@ -1587,7 +1667,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/madras-thorn.svg"
     },
     {
       "name": "Luminova",
@@ -1605,7 +1686,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/luminova.png"
     },
     {
       "name": "Log Pumpkin",
@@ -1623,7 +1705,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/log-pumpkin.png"
     },
     {
       "name": "Lime",
@@ -1641,7 +1724,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/lime.png"
     },
     {
       "name": "Leifo Fruit",
@@ -1659,7 +1743,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/leifo-fruit.svg"
     },
     {
       "name": "King Palm",
@@ -1677,7 +1762,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/king-palm.png"
     },
     {
       "name": "Jungle Queen Bulb",
@@ -1695,7 +1781,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/jungle-queen-bulb.png"
     },
     {
       "name": "Jungle Kiwano",
@@ -1713,7 +1800,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/jungle-kiwano.png"
     },
     {
       "name": "Jelpod",
@@ -1731,7 +1819,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/jelpod.svg"
     },
     {
       "name": "Iciclesco",
@@ -1749,7 +1838,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/iciclesco.svg"
     },
     {
       "name": "Icestalite",
@@ -1767,7 +1857,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/icestalite.svg"
     },
     {
       "name": "Ice Cream Bean",
@@ -1785,7 +1876,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/ice-cream-bean.png"
     },
     {
       "name": "Helenium",
@@ -1803,7 +1895,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/helenium.svg"
     },
     {
       "name": "Heart Gem",
@@ -1821,7 +1914,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/heart-gem.png"
     },
     {
       "name": "Grand Cucumber",
@@ -1839,7 +1933,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/grand-cucumber.svg"
     },
     {
       "name": "Gooseberry",
@@ -1857,7 +1952,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/gooseberry.svg"
     },
     {
       "name": "Gift Root",
@@ -1875,7 +1971,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/gift-root.png"
     },
     {
       "name": "Frostline Flake",
@@ -1893,7 +1990,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/frostline-flake.svg"
     },
     {
       "name": "Frost Fern",
@@ -1911,7 +2009,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/frost-fern.png"
     },
     {
       "name": "Frost Bush",
@@ -1929,7 +2028,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/frost-bush.png"
     },
     {
       "name": "Filbert Nut",
@@ -1947,7 +2047,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/filbert-nut.svg"
     },
     {
       "name": "Festive Bamboo",
@@ -1965,7 +2066,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/festive-bamboo.svg"
     },
     {
       "name": "Fennel",
@@ -1983,7 +2085,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/fennel.svg"
     },
     {
       "name": "Faestar",
@@ -2001,7 +2104,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/faestar.svg"
     },
     {
       "name": "Dryblood Rose",
@@ -2019,7 +2123,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/dryblood-rose.svg"
     },
     {
       "name": "Dragon Sapling",
@@ -2037,7 +2142,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/dragon-sapling.png"
     },
     {
       "name": "Cyberflare",
@@ -2055,7 +2161,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/cyberflare.png"
     },
     {
       "name": "Crown Pumpkin",
@@ -2073,7 +2180,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/crown-pumpkin.svg"
     },
     {
       "name": "Crimson Vine",
@@ -2091,7 +2199,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Crimson Vine seed produces divine quality fruit, unavailable, multi-harvest, 1K sheckles"
+      "secondarySummary": "Crimson Vine seed produces divine quality fruit, unavailable, multi-harvest, 1K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/crimson-vine.png"
     },
     {
       "name": "Crassula Umbrella",
@@ -2109,7 +2218,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/crassula-umbrella.svg"
     },
     {
       "name": "Coolcool Beanbeanstalk",
@@ -2127,7 +2237,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/coolcool-beanbeanstalk.png"
     },
     {
       "name": "Cold Snap Suckle",
@@ -2145,7 +2256,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/cold-snap-suckle.svg"
     },
     {
       "name": "Cherry (Legacy)",
@@ -2163,7 +2275,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/cherry-legacy.png"
     },
     {
       "name": "Cherry",
@@ -2181,7 +2294,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/cherry.svg"
     },
     {
       "name": "Blue Lollipop",
@@ -2199,7 +2313,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Blue Lollipop seed produces rare quality fruit, unavailable, single-harvest, 50K sheckles"
+      "secondarySummary": "Blue Lollipop seed produces rare quality fruit, unavailable, single-harvest, 50K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/blue-lollipop.png"
     },
     {
       "name": "Black Magic Ears",
@@ -2217,7 +2332,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/black-magic-ears.png"
     },
     {
       "name": "Birds Nest",
@@ -2235,7 +2351,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/birds-nest.png"
     },
     {
       "name": "Aura Flora",
@@ -2253,7 +2370,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/aura-flora.png"
     },
     {
       "name": "Archling",
@@ -2271,7 +2389,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/archling.svg"
     },
     {
       "name": "Aqua Lily",
@@ -2289,7 +2408,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/aqua-lily.svg"
     },
     {
       "name": "Akebi",
@@ -2307,7 +2427,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/akebi.svg"
     },
     {
       "name": "Twisted Tangle",
@@ -2332,7 +2453,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Twisted Tangle seed produces rare quality fruit, craftable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Twisted Tangle seed produces rare quality fruit, craftable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/twisted-tangle.webp"
     },
     {
       "name": "Turnip",
@@ -2350,7 +2472,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Turnip seed produces common quality fruit, obtainable, multi-harvest, 12K sheckles"
+      "secondarySummary": "Turnip seed produces common quality fruit, obtainable, multi-harvest, 12K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/turnip.webp"
     },
     {
       "name": "Trinity Fruit",
@@ -2368,7 +2491,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Trinity Fruit seed produces transcendent quality fruit, obtainable, multi-harvest, 155K sheckles"
+      "secondarySummary": "Trinity Fruit seed produces transcendent quality fruit, obtainable, multi-harvest, 155K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/trinity-fruit.webp"
     },
     {
       "name": "Traveler's Fruit",
@@ -2386,7 +2510,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Traveler's Fruit seed produces divine quality fruit, unavailable, multi-harvest, 59K sheckles"
+      "secondarySummary": "Traveler's Fruit seed produces divine quality fruit, unavailable, multi-harvest, 59K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/traveler-s-fruit.webp"
     },
     {
       "name": "Tranquil Bloom",
@@ -2404,7 +2529,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Tranquil Bloom seed produces prismatic quality fruit, unavailable, multi-harvest, 93K sheckles"
+      "secondarySummary": "Tranquil Bloom seed produces prismatic quality fruit, unavailable, multi-harvest, 93K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/tranquil-bloom.png"
     },
     {
       "name": "Thornspire",
@@ -2427,7 +2553,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Thornspire seed produces divine quality fruit, obtainable, multi-harvest, 100K sheckles"
+      "secondarySummary": "Thornspire seed produces divine quality fruit, obtainable, multi-harvest, 100K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/thornspire.webp"
     },
     {
       "name": "Taro Flower",
@@ -2450,7 +2577,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Taro Flower seed produces legendary quality fruit, unavailable, single-harvest, 120K sheckles"
+      "secondarySummary": "Taro Flower seed produces legendary quality fruit, unavailable, single-harvest, 120K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/taro-flower.webp"
     },
     {
       "name": "Tall Asparagus",
@@ -2473,7 +2601,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Tall Asparagus seed produces mythical quality fruit, unavailable, multi-harvest, 100K sheckles"
+      "secondarySummary": "Tall Asparagus seed produces mythical quality fruit, unavailable, multi-harvest, 100K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/tall-asparagus.webp"
     },
     {
       "name": "Taco Fern",
@@ -2491,7 +2620,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Taco Fern seed produces divine quality fruit, unavailable, multi-harvest, 75K sheckles"
+      "secondarySummary": "Taco Fern seed produces divine quality fruit, unavailable, multi-harvest, 75K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/taco-fern.webp"
     },
     {
       "name": "Sundew",
@@ -2514,7 +2644,8 @@
           "chance": "39%"
         }
       ],
-      "secondarySummary": "Sundew seed produces uncommon quality fruit, obtainable, multi-harvest, 40K sheckles"
+      "secondarySummary": "Sundew seed produces uncommon quality fruit, obtainable, multi-harvest, 40K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sundew.png"
     },
     {
       "name": "Suncoil",
@@ -2539,7 +2670,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Suncoil seed produces mythical quality fruit, unavailable, multi-harvest, 80K sheckles"
+      "secondarySummary": "Suncoil seed produces mythical quality fruit, unavailable, multi-harvest, 80K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/suncoil.png"
     },
     {
       "name": "Sunbulb",
@@ -2562,7 +2694,8 @@
           "chance": "39%"
         }
       ],
-      "secondarySummary": "Sunbulb seed produces uncommon quality fruit, obtainable, multi-harvest, 20K sheckles"
+      "secondarySummary": "Sunbulb seed produces uncommon quality fruit, obtainable, multi-harvest, 20K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sunbulb.png"
     },
     {
       "name": "Sugarglaze",
@@ -2585,7 +2718,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Sugarglaze seed produces mythical quality fruit, unavailable, multi-harvest, 70K sheckles"
+      "secondarySummary": "Sugarglaze seed produces mythical quality fruit, unavailable, multi-harvest, 70K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sugarglaze.png"
     },
     {
       "name": "Sugar Melon",
@@ -2612,7 +2746,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Sugar Melon seed produces legendary quality fruit, obtainable, multi-harvest, 36K sheckles"
+      "secondarySummary": "Sugar Melon seed produces legendary quality fruit, obtainable, multi-harvest, 36K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sugar-melon.png"
     },
     {
       "name": "Succulent",
@@ -2635,7 +2770,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Succulent seed produces rare quality fruit, unavailable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Succulent seed produces rare quality fruit, unavailable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/succulent.png"
     },
     {
       "name": "Stonebite",
@@ -2658,7 +2794,8 @@
           "chance": "39%"
         }
       ],
-      "secondarySummary": "Stonebite seed produces uncommon quality fruit, unavailable, single-harvest, 35K sheckles"
+      "secondarySummary": "Stonebite seed produces uncommon quality fruit, unavailable, single-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/stonebite.png"
     },
     {
       "name": "Starfruit",
@@ -2681,7 +2818,8 @@
           "chance": "15.5%"
         }
       ],
-      "secondarySummary": "Starfruit seed produces legendary quality fruit, unavailable, multi-harvest, 15K sheckles"
+      "secondarySummary": "Starfruit seed produces legendary quality fruit, unavailable, multi-harvest, 15K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/starfruit.png"
     },
     {
       "name": "Spring Onion",
@@ -2699,7 +2837,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Spring Onion seed produces common quality fruit, unavailable, single-harvest, 30K sheckles"
+      "secondarySummary": "Spring Onion seed produces common quality fruit, unavailable, single-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/spring-onion.png"
     },
     {
       "name": "Spirit Sparkle",
@@ -2717,7 +2856,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/spirit-sparkle.png"
     },
     {
       "name": "Spirit Flower",
@@ -2740,7 +2880,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Spirit Flower seed produces mythical quality fruit, obtainable, multi-harvest, 135K sheckles"
+      "secondarySummary": "Spirit Flower seed produces mythical quality fruit, obtainable, multi-harvest, 135K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/spirit-flower.png"
     },
     {
       "name": "Spiked Mango",
@@ -2758,7 +2899,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Spiked Mango seed produces mythical quality fruit, unavailable, multi-harvest, 67K sheckles"
+      "secondarySummary": "Spiked Mango seed produces mythical quality fruit, unavailable, multi-harvest, 67K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/spiked-mango.png"
     },
     {
       "name": "Spider Vine",
@@ -2776,7 +2918,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/spider-vine.png"
     },
     {
       "name": "Sparkle Slice",
@@ -2794,7 +2937,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Sparkle Slice seed produces divine quality fruit, obtainable, multi-harvest, 125K sheckles"
+      "secondarySummary": "Sparkle Slice seed produces divine quality fruit, obtainable, multi-harvest, 125K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sparkle-slice.png"
     },
     {
       "name": "Sour Lemon",
@@ -2821,7 +2965,8 @@
           "chance": "3.5%"
         }
       ],
-      "secondarySummary": "Sour Lemon seed produces divine quality fruit, obtainable, multi-harvest, 225K sheckles"
+      "secondarySummary": "Sour Lemon seed produces divine quality fruit, obtainable, multi-harvest, 225K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sour-lemon.png"
     },
     {
       "name": "Soul Fruit",
@@ -2844,7 +2989,8 @@
           "chance": "1.5%"
         }
       ],
-      "secondarySummary": "Soul Fruit seed produces divine quality fruit, unavailable, multi-harvest, 7K sheckles"
+      "secondarySummary": "Soul Fruit seed produces divine quality fruit, unavailable, multi-harvest, 7K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/soul-fruit.png"
     },
     {
       "name": "Soft Sunshine",
@@ -2862,7 +3008,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Soft Sunshine seed produces legendary quality fruit, unavailable, multi-harvest, 45K sheckles"
+      "secondarySummary": "Soft Sunshine seed produces legendary quality fruit, unavailable, multi-harvest, 45K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/soft-sunshine.png"
     },
     {
       "name": "Snowman Sprout",
@@ -2880,7 +3027,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/snowman-sprout.png"
     },
     {
       "name": "Snaparino Beanarini",
@@ -2898,7 +3046,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Snaparino Beanarini seed produces divine quality fruit, obtainable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Snaparino Beanarini seed produces divine quality fruit, obtainable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/snaparino-beanarini.png"
     },
     {
       "name": "Sherrybloom",
@@ -2916,7 +3065,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Sherrybloom seed produces legendary quality fruit, obtainable, multi-harvest, 80K sheckles"
+      "secondarySummary": "Sherrybloom seed produces legendary quality fruit, obtainable, multi-harvest, 80K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sherrybloom.png"
     },
     {
       "name": "Serenity",
@@ -2939,7 +3089,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Serenity seed produces rare quality fruit, unavailable, multi-harvest, 30K sheckles"
+      "secondarySummary": "Serenity seed produces rare quality fruit, unavailable, multi-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/serenity.png"
     },
     {
       "name": "Seer Vine",
@@ -2957,7 +3108,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Seer Vine seed produces divine quality fruit, obtainable, multi-harvest, 88K sheckles"
+      "secondarySummary": "Seer Vine seed produces divine quality fruit, obtainable, multi-harvest, 88K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/seer-vine.png"
     },
     {
       "name": "Saskia",
@@ -2975,7 +3127,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Saskia seed produces rare quality fruit, obtainable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Saskia seed produces rare quality fruit, obtainable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/saskia.png"
     },
     {
       "name": "Sakura Bush",
@@ -2993,7 +3146,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Sakura Bush seed produces legendary quality fruit, unavailable, multi-harvest, 28K sheckles"
+      "secondarySummary": "Sakura Bush seed produces legendary quality fruit, unavailable, multi-harvest, 28K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sakura-bush.png"
     },
     {
       "name": "Rosy Delight",
@@ -3016,7 +3170,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Rosy Delight seed produces divine quality fruit, unavailable, multi-harvest, 69K sheckles"
+      "secondarySummary": "Rosy Delight seed produces divine quality fruit, unavailable, multi-harvest, 69K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/rosy-delight.png"
     },
     {
       "name": "Rosemary",
@@ -3039,7 +3194,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Rosemary seed produces mythical quality fruit, obtainable, multi-harvest, 98K sheckles"
+      "secondarySummary": "Rosemary seed produces mythical quality fruit, obtainable, multi-harvest, 98K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/rosemary.png"
     },
     {
       "name": "Rhubarb",
@@ -3057,7 +3213,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Rhubarb seed produces uncommon quality fruit, unavailable, multi-harvest, 15K sheckles"
+      "secondarySummary": "Rhubarb seed produces uncommon quality fruit, unavailable, multi-harvest, 15K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/rhubarb.png"
     },
     {
       "name": "Reindeer Root",
@@ -3075,7 +3232,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/reindeer-root.png"
     },
     {
       "name": "Pyracantha",
@@ -3093,7 +3251,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pyracantha seed produces legendary quality fruit, obtainable, multi-harvest, 42K sheckles"
+      "secondarySummary": "Pyracantha seed produces legendary quality fruit, obtainable, multi-harvest, 42K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pyracantha.png"
     },
     {
       "name": "Purple Treeshroom",
@@ -3111,7 +3270,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Purple Treeshroom seed produces prismatic quality fruit, obtainable, multi-harvest, 144K sheckles"
+      "secondarySummary": "Purple Treeshroom seed produces prismatic quality fruit, obtainable, multi-harvest, 144K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/purple-treeshroom.png"
     },
     {
       "name": "Pricklefruit",
@@ -3129,7 +3289,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pricklefruit seed produces legendary quality fruit, unavailable, multi-harvest, 80K sheckles"
+      "secondarySummary": "Pricklefruit seed produces legendary quality fruit, unavailable, multi-harvest, 80K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pricklefruit.png"
     },
     {
       "name": "Princess Thorn",
@@ -3152,7 +3313,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Princess Thorn seed produces divine quality fruit, unavailable, multi-harvest, 111K sheckles"
+      "secondarySummary": "Princess Thorn seed produces divine quality fruit, unavailable, multi-harvest, 111K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/princess-thorn.png"
     },
     {
       "name": "Pomegranate",
@@ -3170,7 +3332,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pomegranate seed produces rare quality fruit, obtainable, multi-harvest, 33K sheckles"
+      "secondarySummary": "Pomegranate seed produces rare quality fruit, obtainable, multi-harvest, 33K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pomegranate.png"
     },
     {
       "name": "Poseidon Plant",
@@ -3193,7 +3356,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Poseidon Plant seed produces mythical quality fruit, unavailable, multi-harvest, 65K sheckles"
+      "secondarySummary": "Poseidon Plant seed produces mythical quality fruit, unavailable, multi-harvest, 65K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/poseidon-plant.png"
     },
     {
       "name": "Pollen Cone",
@@ -3211,7 +3375,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pollen Cone seed produces prismatic quality fruit, obtainable, multi-harvest, 120K sheckles"
+      "secondarySummary": "Pollen Cone seed produces prismatic quality fruit, obtainable, multi-harvest, 120K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pollen-cone.png"
     },
     {
       "name": "Poinsettia",
@@ -3229,7 +3394,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Poinsettia seed produces uncommon quality fruit, obtainable, multi-harvest, 30K sheckles"
+      "secondarySummary": "Poinsettia seed produces uncommon quality fruit, obtainable, multi-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/poinsettia.png"
     },
     {
       "name": "Poison Apple",
@@ -3247,7 +3413,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Poison Apple seed produces prismatic quality fruit, obtainable, multi-harvest, 111K sheckles"
+      "secondarySummary": "Poison Apple seed produces prismatic quality fruit, obtainable, multi-harvest, 111K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/poison-apple.png"
     },
     {
       "name": "Pixie Faern",
@@ -3265,7 +3432,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pixie Faern seed produces rare quality fruit, obtainable, multi-harvest, 30K sheckles"
+      "secondarySummary": "Pixie Faern seed produces rare quality fruit, obtainable, multi-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pixie-faern.png"
     },
     {
       "name": "Pinkside Dandelion",
@@ -3283,7 +3451,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pinkside Dandelion seed produces divine quality fruit, obtainable, multi-harvest, 177K sheckles"
+      "secondarySummary": "Pinkside Dandelion seed produces divine quality fruit, obtainable, multi-harvest, 177K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pinkside-dandelion.png"
     },
     {
       "name": "Pink Rose",
@@ -3301,7 +3470,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pink Rose seed produces mythical quality fruit, obtainable, multi-harvest"
+      "secondarySummary": "Pink Rose seed produces mythical quality fruit, obtainable, multi-harvest",
+      "image": "/Grow%20a%20Garden/Crops/pink-rose.png"
     },
     {
       "name": "Persimmon",
@@ -3319,7 +3489,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Persimmon seed produces legendary quality fruit, obtainable, multi-harvest, 60K sheckles"
+      "secondarySummary": "Persimmon seed produces legendary quality fruit, obtainable, multi-harvest, 60K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/persimmon.png"
     },
     {
       "name": "Peppermint Vine",
@@ -3337,7 +3508,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Peppermint Vine seed produces transcendent quality fruit, obtainable, multi-harvest, 177K sheckles"
+      "secondarySummary": "Peppermint Vine seed produces transcendent quality fruit, obtainable, multi-harvest, 177K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/peppermint-vine.png"
     },
     {
       "name": "Peppermint Pop",
@@ -3355,7 +3527,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Peppermint Pop seed produces common quality fruit, obtainable, single-harvest, 25K sheckles"
+      "secondarySummary": "Peppermint Pop seed produces common quality fruit, obtainable, single-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/peppermint-pop.png"
     },
     {
       "name": "Pecan",
@@ -3373,7 +3546,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pecan seed produces divine quality fruit, obtainable, multi-harvest, 100K sheckles"
+      "secondarySummary": "Pecan seed produces divine quality fruit, obtainable, multi-harvest, 100K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pecan.png"
     },
     {
       "name": "Pear",
@@ -3396,7 +3570,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Pear seed produces rare quality fruit, obtainable, multi-harvest, 20K sheckles"
+      "secondarySummary": "Pear seed produces rare quality fruit, obtainable, multi-harvest, 20K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pear.png"
     },
     {
       "name": "Peacock Tail",
@@ -3419,7 +3594,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Peacock Tail seed produces prismatic quality fruit, obtainable, multi-harvest, 150K sheckles"
+      "secondarySummary": "Peacock Tail seed produces prismatic quality fruit, obtainable, multi-harvest, 150K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/peacock-tail.png"
     },
     {
       "name": "Peace Lily",
@@ -3444,7 +3620,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Peace Lily seed produces rare quality fruit, unavailable, single-harvest, 24K sheckles"
+      "secondarySummary": "Peace Lily seed produces rare quality fruit, unavailable, single-harvest, 24K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/peace-lily.png"
     },
     {
       "name": "Passionfruit",
@@ -3467,7 +3644,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Passionfruit seed produces mythical quality fruit, unavailable, multi-harvest, 3K sheckles"
+      "secondarySummary": "Passionfruit seed produces mythical quality fruit, unavailable, multi-harvest, 3K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/passionfruit.png"
     },
     {
       "name": "Parsley",
@@ -3485,7 +3663,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Parsley seed produces uncommon quality fruit, obtainable, multi-harvest, 20K sheckles"
+      "secondarySummary": "Parsley seed produces uncommon quality fruit, obtainable, multi-harvest, 20K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/parsley.webp"
     },
     {
       "name": "Parasol Flower",
@@ -3508,7 +3687,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Parasol Flower seed produces mythical quality fruit, unavailable, single-harvest, 200K sheckles"
+      "secondarySummary": "Parasol Flower seed produces mythical quality fruit, unavailable, single-harvest, 200K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/parasol-flower.png"
     },
     {
       "name": "Paradise Petal",
@@ -3531,7 +3711,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Paradise Petal seed produces rare quality fruit, unavailable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Paradise Petal seed produces rare quality fruit, unavailable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/paradise-petal.png"
     },
     {
       "name": "Papaya",
@@ -3554,7 +3735,8 @@
           "chance": "40%"
         }
       ],
-      "secondarySummary": "Papaya seed produces legendary quality fruit, unavailable, multi-harvest, 1000 sheckles"
+      "secondarySummary": "Papaya seed produces legendary quality fruit, unavailable, multi-harvest, 1000 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/papaya.png"
     },
     {
       "name": "Onion",
@@ -3577,7 +3759,8 @@
           "chance": "40%"
         }
       ],
-      "secondarySummary": "Onion seed produces uncommon quality fruit, unavailable, single-harvest, 10K sheckles"
+      "secondarySummary": "Onion seed produces uncommon quality fruit, unavailable, single-harvest, 10K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/onion.png"
     },
     {
       "name": "Nightshade",
@@ -3595,7 +3778,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Nightshade seed produces uncommon quality fruit, unavailable, single-harvest, 3K sheckles"
+      "secondarySummary": "Nightshade seed produces uncommon quality fruit, unavailable, single-harvest, 3K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/nightshade.png"
     },
     {
       "name": "Nectarshade",
@@ -3613,7 +3797,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Nectarshade seed produces rare quality fruit, unavailable, single-harvest, 50K sheckles"
+      "secondarySummary": "Nectarshade seed produces rare quality fruit, unavailable, single-harvest, 50K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/nectarshade.png"
     },
     {
       "name": "Nectar Thorn",
@@ -3638,7 +3823,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Nectar Thorn seed produces legendary quality fruit, unavailable, multi-harvest, 44K sheckles"
+      "secondarySummary": "Nectar Thorn seed produces legendary quality fruit, unavailable, multi-harvest, 44K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/nectar-thorn.png"
     },
     {
       "name": "Nectarine",
@@ -3656,7 +3842,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Nectarine seed produces mythical quality fruit, unavailable, multi-harvest, 48K sheckles"
+      "secondarySummary": "Nectarine seed produces mythical quality fruit, unavailable, multi-harvest, 48K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/nectarine.png"
     },
     {
       "name": "Naval Wort",
@@ -3674,7 +3861,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Naval Wort seed produces prismatic quality fruit, obtainable, multi-harvest, 150K sheckles"
+      "secondarySummary": "Naval Wort seed produces prismatic quality fruit, obtainable, multi-harvest, 150K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/naval-wort.png"
     },
     {
       "name": "Mummy's Hand",
@@ -3692,7 +3880,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Mummy's Hand seed produces divine quality fruit, obtainable, multi-harvest, 111K sheckles"
+      "secondarySummary": "Mummy's Hand seed produces divine quality fruit, obtainable, multi-harvest, 111K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/mummy-s-hand.png"
     },
     {
       "name": "Multitrap",
@@ -3715,7 +3904,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Multitrap seed produces divine quality fruit, obtainable, multi-harvest, 180K sheckles"
+      "secondarySummary": "Multitrap seed produces divine quality fruit, obtainable, multi-harvest, 180K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/multitrap.png"
     },
     {
       "name": "Monster Flower",
@@ -3733,7 +3923,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/monster-flower.png"
     },
     {
       "name": "Moonglow",
@@ -3756,7 +3947,8 @@
           "chance": "12%"
         }
       ],
-      "secondarySummary": "Moonglow seed produces mythical quality fruit, unavailable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Moonglow seed produces mythical quality fruit, unavailable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/moonglow.png"
     },
     {
       "name": "Moonflower",
@@ -3779,7 +3971,8 @@
           "chance": "18%"
         }
       ],
-      "secondarySummary": "Moonflower seed produces legendary quality fruit, unavailable, multi-harvest, 9K sheckles"
+      "secondarySummary": "Moonflower seed produces legendary quality fruit, unavailable, multi-harvest, 9K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/moonflower.png"
     },
     {
       "name": "Moon Melon",
@@ -3797,7 +3990,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Moon Melon seed produces mythical quality fruit, unavailable, multi-harvest, 18K sheckles"
+      "secondarySummary": "Moon Melon seed produces mythical quality fruit, unavailable, multi-harvest, 18K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/moon-melon.png"
     },
     {
       "name": "Moon Mango",
@@ -3815,7 +4009,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Moon Mango seed produces mythical quality fruit, unavailable, multi-harvest, 50K sheckles"
+      "secondarySummary": "Moon Mango seed produces mythical quality fruit, unavailable, multi-harvest, 50K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/moon-mango.png"
     },
     {
       "name": "Moon Blossom",
@@ -3838,7 +4033,8 @@
           "chance": "2.5%"
         }
       ],
-      "secondarySummary": "Moon Blossom seed produces divine quality fruit, unavailable, multi-harvest, 66K sheckles"
+      "secondarySummary": "Moon Blossom seed produces divine quality fruit, unavailable, multi-harvest, 66K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/moon-blossom.png"
     },
     {
       "name": "Monoblooma",
@@ -3861,7 +4057,8 @@
           "chance": "40%"
         }
       ],
-      "secondarySummary": "Monoblooma seed produces uncommon quality fruit, unavailable, single-harvest, 22K sheckles"
+      "secondarySummary": "Monoblooma seed produces uncommon quality fruit, unavailable, single-harvest, 22K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/monoblooma.png"
     },
     {
       "name": "Mint",
@@ -3884,7 +4081,8 @@
           "chance": "22%"
         }
       ],
-      "secondarySummary": "Mint seed produces rare quality fruit, unavailable, multi-harvest, 5K sheckles"
+      "secondarySummary": "Mint seed produces rare quality fruit, unavailable, multi-harvest, 5K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/mint.png"
     },
     {
       "name": "Mini Pumpkin",
@@ -3902,7 +4100,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Mini Pumpkin seed produces legendary quality fruit, obtainable, multi-harvest, 58K sheckles"
+      "secondarySummary": "Mini Pumpkin seed produces legendary quality fruit, obtainable, multi-harvest, 58K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/mini-pumpkin.png"
     },
     {
       "name": "Meyer Lemon",
@@ -3920,7 +4119,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Meyer Lemon seed produces rare quality fruit, obtainable, multi-harvest, 32K sheckles"
+      "secondarySummary": "Meyer Lemon seed produces rare quality fruit, obtainable, multi-harvest, 32K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/meyer-lemon.webp"
     },
     {
       "name": "Maple Apple",
@@ -3943,7 +4143,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Maple Apple seed produces divine quality fruit, unavailable, multi-harvest, 77K sheckles"
+      "secondarySummary": "Maple Apple seed produces divine quality fruit, unavailable, multi-harvest, 77K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/maple-apple.png"
     },
     {
       "name": "Manuka Flower",
@@ -3968,7 +4169,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Manuka Flower seed produces uncommon quality fruit, unavailable, single-harvest, 25K sheckles"
+      "secondarySummary": "Manuka Flower seed produces uncommon quality fruit, unavailable, single-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/manuka-flower.png"
     },
     {
       "name": "Mangrove",
@@ -3986,7 +4188,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Mangrove seed produces prismatic quality fruit, unavailable, multi-harvest, 100K sheckles"
+      "secondarySummary": "Mangrove seed produces prismatic quality fruit, unavailable, multi-harvest, 100K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/mangrove.png"
     },
     {
       "name": "Mangosteen",
@@ -4009,7 +4212,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Mangosteen seed produces legendary quality fruit, unavailable, multi-harvest, 6K sheckles"
+      "secondarySummary": "Mangosteen seed produces legendary quality fruit, unavailable, multi-harvest, 6K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/mangosteen.png"
     },
     {
       "name": "Mandrone Berry",
@@ -4032,7 +4236,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Mandrone Berry seed produces legendary quality fruit, obtainable, multi-harvest, 65K sheckles"
+      "secondarySummary": "Mandrone Berry seed produces legendary quality fruit, obtainable, multi-harvest, 65K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/mandrone-berry.png"
     },
     {
       "name": "Luna Stem",
@@ -4050,7 +4255,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Luna Stem seed produces legendary quality fruit, obtainable, multi-harvest, 68K sheckles"
+      "secondarySummary": "Luna Stem seed produces legendary quality fruit, obtainable, multi-harvest, 68K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/luna-stem.png"
     },
     {
       "name": "Lumin Bloom",
@@ -4068,7 +4274,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Lumin Bloom seed produces rare quality fruit, obtainable, multi-harvest, 2K sheckles"
+      "secondarySummary": "Lumin Bloom seed produces rare quality fruit, obtainable, multi-harvest, 2K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/lumin-bloom.png"
     },
     {
       "name": "Lumira",
@@ -4093,7 +4300,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Lumira seed produces legendary quality fruit, unavailable, multi-harvest, 85K sheckles"
+      "secondarySummary": "Lumira seed produces legendary quality fruit, unavailable, multi-harvest, 85K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/lumira.png"
     },
     {
       "name": "Lucky Bamboo",
@@ -4111,7 +4319,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Lucky Bamboo seed produces legendary quality fruit, unavailable, multi-harvest, 65K sheckles"
+      "secondarySummary": "Lucky Bamboo seed produces legendary quality fruit, unavailable, multi-harvest, 65K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/lucky-bamboo.png"
     },
     {
       "name": "Lotus",
@@ -4129,7 +4338,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Lotus seed produces divine quality fruit, unavailable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Lotus seed produces divine quality fruit, unavailable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/lotus.png"
     },
     {
       "name": "Liquorice",
@@ -4156,7 +4366,8 @@
           "chance": "8%"
         }
       ],
-      "secondarySummary": "Liquorice seed produces rare quality fruit, obtainable, single-harvest, 20K sheckles"
+      "secondarySummary": "Liquorice seed produces rare quality fruit, obtainable, single-harvest, 20K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/liquorice.png"
     },
     {
       "name": "Lingonberry",
@@ -4181,7 +4392,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Lingonberry seed produces legendary quality fruit, craftable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Lingonberry seed produces legendary quality fruit, craftable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/lingonberry.png"
     },
     {
       "name": "Lily of the Valley",
@@ -4199,7 +4411,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/lily-of-the-valley.png"
     },
     {
       "name": "Lightshoot",
@@ -4222,7 +4435,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Lightshoot seed produces rare quality fruit, obtainable, multi-harvest, 40K sheckles"
+      "secondarySummary": "Lightshoot seed produces rare quality fruit, obtainable, multi-harvest, 40K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/lightshoot.png"
     },
     {
       "name": "Liberty Lily",
@@ -4240,7 +4454,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Liberty Lily seed produces rare quality fruit, unavailable, multi-harvest, 30K sheckles"
+      "secondarySummary": "Liberty Lily seed produces rare quality fruit, unavailable, multi-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/liberty-lily.png"
     },
     {
       "name": "Lemon",
@@ -4258,7 +4473,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Lemon seed produces mythical quality fruit, unavailable, multi-harvest, 350 sheckles"
+      "secondarySummary": "Lemon seed produces mythical quality fruit, unavailable, multi-harvest, 350 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/lemon.png"
     },
     {
       "name": "Lavender",
@@ -4276,7 +4492,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Lavender seed produces uncommon quality fruit, unavailable, single-harvest, 25K sheckles"
+      "secondarySummary": "Lavender seed produces uncommon quality fruit, unavailable, single-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/lavender.png"
     },
     {
       "name": "King Cabbage",
@@ -4294,7 +4511,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "King Cabbage seed produces divine quality fruit, unavailable, multi-harvest, 120K sheckles"
+      "secondarySummary": "King Cabbage seed produces divine quality fruit, unavailable, multi-harvest, 120K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/king-cabbage.png"
     },
     {
       "name": "Kernel Curl",
@@ -4312,7 +4530,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Kernel Curl seed produces prismatic quality fruit, obtainable, multi-harvest, 80K sheckles"
+      "secondarySummary": "Kernel Curl seed produces prismatic quality fruit, obtainable, multi-harvest, 80K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/kernel-curl.png"
     },
     {
       "name": "Jungle Cherry",
@@ -4330,7 +4549,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Jungle Cherry seed produces divine quality fruit, obtainable, single-harvest, 99K sheckles"
+      "secondarySummary": "Jungle Cherry seed produces divine quality fruit, obtainable, single-harvest, 99K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/jungle-cherry.png"
     },
     {
       "name": "Java Banana",
@@ -4353,7 +4573,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Java Banana seed produces divine quality fruit, obtainable, multi-harvest, 92K sheckles"
+      "secondarySummary": "Java Banana seed produces divine quality fruit, obtainable, multi-harvest, 92K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/java-banana.png"
     },
     {
       "name": "Jalapeno",
@@ -4376,7 +4597,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Jalapeno seed produces rare quality fruit, unavailable, multi-harvest, 30K sheckles"
+      "secondarySummary": "Jalapeno seed produces rare quality fruit, unavailable, multi-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/jalapeno.png"
     },
     {
       "name": "Jack O Lantern",
@@ -4394,7 +4616,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Jack O Lantern seed produces rare quality fruit, obtainable, multi-harvest, 33K sheckles"
+      "secondarySummary": "Jack O Lantern seed produces rare quality fruit, obtainable, multi-harvest, 33K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/jack-o-lantern.png"
     },
     {
       "name": "Inferno Quince",
@@ -4417,7 +4640,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Inferno Quince seed produces mythical quality fruit, obtainable, single-harvest, 130K sheckles"
+      "secondarySummary": "Inferno Quince seed produces mythical quality fruit, obtainable, single-harvest, 130K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/inferno-quince.png"
     },
     {
       "name": "Horsetail",
@@ -4442,7 +4666,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Horsetail seed produces rare quality fruit, craftable, single-harvest, 30K sheckles"
+      "secondarySummary": "Horsetail seed produces rare quality fruit, craftable, single-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/horsetail.png"
     },
     {
       "name": "Horned Redrose",
@@ -4465,7 +4690,8 @@
           "chance": "40%"
         }
       ],
-      "secondarySummary": "Horned Redrose seed produces common quality fruit, obtainable, multi-harvest, 18K sheckles"
+      "secondarySummary": "Horned Redrose seed produces common quality fruit, obtainable, multi-harvest, 18K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/horned-redrose.png"
     },
     {
       "name": "Horned Dinoshroom",
@@ -4488,7 +4714,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Horned Dinoshroom seed produces legendary quality fruit, unavailable, multi-harvest, 69K sheckles"
+      "secondarySummary": "Horned Dinoshroom seed produces legendary quality fruit, unavailable, multi-harvest, 69K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/horned-dinoshroom.png"
     },
     {
       "name": "Honeysuckle",
@@ -4513,7 +4740,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Honeysuckle seed produces mythical quality fruit, unavailable, multi-harvest, 100K sheckles"
+      "secondarySummary": "Honeysuckle seed produces mythical quality fruit, unavailable, multi-harvest, 100K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/honeysuckle.png"
     },
     {
       "name": "Holly Berry",
@@ -4531,7 +4759,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Holly Berry seed produces mythical quality fruit, obtainable, multi-harvest, 15K sheckles"
+      "secondarySummary": "Holly Berry seed produces mythical quality fruit, obtainable, multi-harvest, 15K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/holly-berry.png"
     },
     {
       "name": "Hive Fruit",
@@ -4549,7 +4778,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Hive Fruit seed produces divine quality fruit, unavailable, multi-harvest, 62K sheckles"
+      "secondarySummary": "Hive Fruit seed produces divine quality fruit, unavailable, multi-harvest, 62K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/hive-fruit.png"
     },
     {
       "name": "Heart Blossom",
@@ -4567,7 +4797,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Heart Blossom seed produces transcendent quality fruit, obtainable, multi-harvest"
+      "secondarySummary": "Heart Blossom seed produces transcendent quality fruit, obtainable, multi-harvest",
+      "image": "/Grow%20a%20Garden/Crops/heart-blossom.png"
     },
     {
       "name": "Hazelnut",
@@ -4585,7 +4816,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Hazelnut seed produces uncommon quality fruit, obtainable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Hazelnut seed produces uncommon quality fruit, obtainable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/hazelnut.png"
     },
     {
       "name": "Gummy Cactus",
@@ -4612,7 +4844,8 @@
           "chance": "5%"
         }
       ],
-      "secondarySummary": "Gummy Cactus seed produces mythical quality fruit, obtainable, multi-harvest, 100K sheckles"
+      "secondarySummary": "Gummy Cactus seed produces mythical quality fruit, obtainable, multi-harvest, 100K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/gummy-cactus.png"
     },
     {
       "name": "Gumdrop",
@@ -4630,7 +4863,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Gumdrop seed produces legendary quality fruit, obtainable, multi-harvest, 65K sheckles"
+      "secondarySummary": "Gumdrop seed produces legendary quality fruit, obtainable, multi-harvest, 65K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/gumdrop.png"
     },
     {
       "name": "Gumball",
@@ -4657,7 +4891,8 @@
           "chance": "15%"
         }
       ],
-      "secondarySummary": "Gumball seed produces rare quality fruit, obtainable, multi-harvest, 12K sheckles"
+      "secondarySummary": "Gumball seed produces rare quality fruit, obtainable, multi-harvest, 12K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/gumball.png"
     },
     {
       "name": "Guanabana",
@@ -4682,7 +4917,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Guanabana seed produces mythical quality fruit, unavailable, multi-harvest, 70K sheckles"
+      "secondarySummary": "Guanabana seed produces mythical quality fruit, unavailable, multi-harvest, 70K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/guanabana.png"
     },
     {
       "name": "Grand Volcania",
@@ -4707,7 +4943,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Grand Volcania seed produces divine quality fruit, unavailable, multi-harvest, 70K sheckles"
+      "secondarySummary": "Grand Volcania seed produces divine quality fruit, unavailable, multi-harvest, 70K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/grand-volcania.png"
     },
     {
       "name": "Grand Tomato",
@@ -4730,7 +4967,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Grand Tomato seed produces divine quality fruit, unavailable, multi-harvest, 88K sheckles"
+      "secondarySummary": "Grand Tomato seed produces divine quality fruit, unavailable, multi-harvest, 88K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/grand-tomato.png"
     },
     {
       "name": "Golden Peach",
@@ -4748,7 +4986,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Golden Peach seed produces divine quality fruit, obtainable, multi-harvest, 88K sheckles"
+      "secondarySummary": "Golden Peach seed produces divine quality fruit, obtainable, multi-harvest, 88K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/golden-peach.png"
     },
     {
       "name": "Golden Egg",
@@ -4766,7 +5005,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/golden-egg.png"
     },
     {
       "name": "Glowthorn",
@@ -4789,7 +5029,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Glowthorn seed produces legendary quality fruit, obtainable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Glowthorn seed produces legendary quality fruit, obtainable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/glowthorn.png"
     },
     {
       "name": "Glowshroom",
@@ -4812,7 +5053,8 @@
           "chance": "30%"
         }
       ],
-      "secondarySummary": "Glowshroom seed produces rare quality fruit, unavailable, multi-harvest, 300 sheckles"
+      "secondarySummary": "Glowshroom seed produces rare quality fruit, unavailable, multi-harvest, 300 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/glowshroom.png"
     },
     {
       "name": "Glowpod",
@@ -4830,7 +5072,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Glowpod seed produces uncommon quality fruit, unavailable, multi-harvest, 7K sheckles"
+      "secondarySummary": "Glowpod seed produces uncommon quality fruit, unavailable, multi-harvest, 7K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/glowpod.png"
     },
     {
       "name": "Gleamroot",
@@ -4853,7 +5096,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Gleamroot seed produces mythical quality fruit, unavailable, multi-harvest"
+      "secondarySummary": "Gleamroot seed produces mythical quality fruit, unavailable, multi-harvest",
+      "image": "/Grow%20a%20Garden/Crops/gleamroot.png"
     },
     {
       "name": "Glass Kiwi",
@@ -4871,7 +5115,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Glass Kiwi seed produces mythical quality fruit, unavailable, multi-harvest, 65K sheckles"
+      "secondarySummary": "Glass Kiwi seed produces mythical quality fruit, unavailable, multi-harvest, 65K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/glass-kiwi.png"
     },
     {
       "name": "Gingerbread Blossom",
@@ -4889,7 +5134,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Gingerbread Blossom seed produces transcendent quality fruit, unavailable, multi-harvest, 250K sheckles"
+      "secondarySummary": "Gingerbread Blossom seed produces transcendent quality fruit, unavailable, multi-harvest, 250K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/gingerbread-blossom.png"
     },
     {
       "name": "Ghoul Root",
@@ -4907,7 +5153,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Ghoul Root seed produces legendary quality fruit, obtainable, multi-harvest, 55K sheckles"
+      "secondarySummary": "Ghoul Root seed produces legendary quality fruit, obtainable, multi-harvest, 55K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/ghoul-root.png"
     },
     {
       "name": "Fruitball",
@@ -4925,7 +5172,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Fruitball seed produces legendary quality fruit, unavailable, multi-harvest, 7K sheckles"
+      "secondarySummary": "Fruitball seed produces legendary quality fruit, unavailable, multi-harvest, 7K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/fruitball.png"
     },
     {
       "name": "Frostwing",
@@ -4948,7 +5196,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Frostwing seed produces prismatic quality fruit, obtainable, multi-harvest, 200K sheckles"
+      "secondarySummary": "Frostwing seed produces prismatic quality fruit, obtainable, multi-harvest, 200K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/frostwing.png"
     },
     {
       "name": "Frostspike",
@@ -4966,7 +5215,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Frostspike seed produces legendary quality fruit, obtainable, multi-harvest, 45K sheckles"
+      "secondarySummary": "Frostspike seed produces legendary quality fruit, obtainable, multi-harvest, 45K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/frostspike.webp"
     },
     {
       "name": "Four Leaf Clover",
@@ -4984,7 +5234,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Four Leaf Clover seed produces transcendent quality fruit, obtainable, multi-harvest, 70K sheckles"
+      "secondarySummary": "Four Leaf Clover seed produces transcendent quality fruit, obtainable, multi-harvest, 70K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/four-leaf-clover.png"
     },
     {
       "name": "Firework Fern",
@@ -5002,7 +5253,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Firework Fern seed produces transcendent quality fruit, obtainable, single-harvest, 150K sheckles"
+      "secondarySummary": "Firework Fern seed produces transcendent quality fruit, obtainable, single-harvest, 150K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/firework-fern.png"
     },
     {
       "name": "Firework Flower",
@@ -5020,7 +5272,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Firework Flower seed produces legendary quality fruit, unavailable, single-harvest, 151K sheckles"
+      "secondarySummary": "Firework Flower seed produces legendary quality fruit, unavailable, single-harvest, 151K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/firework-flower.png"
     },
     {
       "name": "Firefly Fern",
@@ -5043,7 +5296,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Firefly Fern seed produces mythical quality fruit, unavailable, multi-harvest, 72K sheckles"
+      "secondarySummary": "Firefly Fern seed produces mythical quality fruit, unavailable, multi-harvest, 72K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/firefly-fern.png"
     },
     {
       "name": "Flare Melon",
@@ -5061,7 +5315,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Flare Melon seed produces rare quality fruit, unavailable, multi-harvest, 12K sheckles"
+      "secondarySummary": "Flare Melon seed produces rare quality fruit, unavailable, multi-harvest, 12K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/flare-melon.png"
     },
     {
       "name": "Flare Daisy",
@@ -5084,7 +5339,8 @@
           "chance": "39%"
         }
       ],
-      "secondarySummary": "Flare Daisy seed produces uncommon quality fruit, unavailable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Flare Daisy seed produces uncommon quality fruit, unavailable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/flare-daisy.png"
     },
     {
       "name": "Fissure Berry",
@@ -5102,7 +5358,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Fissure Berry seed produces rare quality fruit, obtainable, single-harvest, 13K sheckles"
+      "secondarySummary": "Fissure Berry seed produces rare quality fruit, obtainable, single-harvest, 13K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/fissure-berry.png"
     },
     {
       "name": "Ferntail",
@@ -5120,7 +5377,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Ferntail seed produces legendary quality fruit, unavailable, multi-harvest, 2K sheckles"
+      "secondarySummary": "Ferntail seed produces legendary quality fruit, unavailable, multi-harvest, 2K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/ferntail.png"
     },
     {
       "name": "Enkaku",
@@ -5138,7 +5396,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Enkaku seed produces legendary quality fruit, unavailable, multi-harvest, 62K sheckles"
+      "secondarySummary": "Enkaku seed produces legendary quality fruit, unavailable, multi-harvest, 62K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/enkaku.png"
     },
     {
       "name": "Emerald Bud",
@@ -5156,7 +5415,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Emerald Bud seed produces uncommon quality fruit, obtainable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Emerald Bud seed produces uncommon quality fruit, obtainable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/emerald-bud.png"
     },
     {
       "name": "Elephant Ears",
@@ -5179,7 +5439,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Elephant Ears seed produces prismatic quality fruit, unavailable, multi-harvest, 77K sheckles"
+      "secondarySummary": "Elephant Ears seed produces prismatic quality fruit, unavailable, multi-harvest, 77K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/elephant-ears.png"
     },
     {
       "name": "Eggsnapper",
@@ -5197,7 +5458,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Eggsnapper seed produces transcendent quality fruit, obtainable, multi-harvest, 157K sheckles"
+      "secondarySummary": "Eggsnapper seed produces transcendent quality fruit, obtainable, multi-harvest, 157K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/eggsnapper.png"
     },
     {
       "name": "Eggplant",
@@ -5215,7 +5477,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Eggplant seed produces mythical quality fruit, unavailable, multi-harvest, 12K sheckles"
+      "secondarySummary": "Eggplant seed produces mythical quality fruit, unavailable, multi-harvest, 12K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/eggplant.png"
     },
     {
       "name": "Eggfruit",
@@ -5242,7 +5505,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Eggfruit seed produces prismatic quality fruit, obtainable, multi-harvest, 444K sheckles"
+      "secondarySummary": "Eggfruit seed produces prismatic quality fruit, obtainable, multi-harvest, 444K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/eggfruit.png"
     },
     {
       "name": "Easter Sugar Melon",
@@ -5260,7 +5524,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-sugar-melon.png"
     },
     {
       "name": "Easter Sour Lemon",
@@ -5278,7 +5543,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-sour-lemon.png"
     },
     {
       "name": "Easter Liquorice",
@@ -5296,7 +5562,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-liquorice.png"
     },
     {
       "name": "Easter Gummy Cactus",
@@ -5314,7 +5581,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-gummy-cactus.png"
     },
     {
       "name": "Easter Gumball",
@@ -5332,7 +5600,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-gumball.png"
     },
     {
       "name": "Easter Eggfruit",
@@ -5350,7 +5619,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-eggfruit.png"
     },
     {
       "name": "Easter Egg",
@@ -5368,7 +5638,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Easter Egg seed produces mythical quality fruit, unavailable, multi-harvest, 2K sheckles"
+      "secondarySummary": "Easter Egg seed produces mythical quality fruit, unavailable, multi-harvest, 2K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/easter-egg.png"
     },
     {
       "name": "Easter Chocolate Coconut",
@@ -5386,7 +5657,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-chocolate-coconut.png"
     },
     {
       "name": "Easter Chocolate Berry",
@@ -5404,7 +5676,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-chocolate-berry.png"
     },
     {
       "name": "Easter Candy Carrot",
@@ -5422,7 +5695,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-candy-carrot.png"
     },
     {
       "name": "Duskpuff",
@@ -5445,7 +5719,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Duskpuff seed produces rare quality fruit, unavailable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Duskpuff seed produces rare quality fruit, unavailable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/duskpuff.png"
     },
     {
       "name": "Durian",
@@ -5463,7 +5738,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Durian seed produces legendary quality fruit, unavailable, multi-harvest, 7K sheckles"
+      "secondarySummary": "Durian seed produces legendary quality fruit, unavailable, multi-harvest, 7K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/durian.png"
     },
     {
       "name": "Drowned Flower",
@@ -5481,7 +5757,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Drowned Flower seed produces uncommon quality fruit, obtainable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Drowned Flower seed produces uncommon quality fruit, obtainable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/drowned-flower.png"
     },
     {
       "name": "Dragon Pepper",
@@ -5504,7 +5781,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Dragon Pepper seed produces divine quality fruit, unavailable, multi-harvest, 88K sheckles"
+      "secondarySummary": "Dragon Pepper seed produces divine quality fruit, unavailable, multi-harvest, 88K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/dragon-pepper.png"
     },
     {
       "name": "DJ Delight",
@@ -5522,7 +5800,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "DJ Delight seed produces divine quality fruit, unavailable, multi-harvest, 61K sheckles"
+      "secondarySummary": "DJ Delight seed produces divine quality fruit, unavailable, multi-harvest, 61K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/dj-delight.png"
     },
     {
       "name": "Devilroot",
@@ -5540,7 +5819,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Devilroot seed produces legendary quality fruit, obtainable, single-harvest, 66K sheckles"
+      "secondarySummary": "Devilroot seed produces legendary quality fruit, obtainable, single-harvest, 66K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/devilroot.png"
     },
     {
       "name": "Dezen",
@@ -5558,7 +5838,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Dezen seed produces uncommon quality fruit, unavailable, single-harvest, 29K sheckles"
+      "secondarySummary": "Dezen seed produces uncommon quality fruit, unavailable, single-harvest, 29K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/dezen.png"
     },
     {
       "name": "Delphinium",
@@ -5576,7 +5857,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Delphinium seed produces rare quality fruit, unavailable, single-harvest, 24K sheckles"
+      "secondarySummary": "Delphinium seed produces rare quality fruit, unavailable, single-harvest, 24K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/delphinium.png"
     },
     {
       "name": "Dandelion",
@@ -5601,7 +5883,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Dandelion seed produces rare quality fruit, unavailable, single-harvest, 50K sheckles"
+      "secondarySummary": "Dandelion seed produces rare quality fruit, unavailable, single-harvest, 50K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/dandelion.png"
     },
     {
       "name": "Daisy",
@@ -5624,7 +5907,8 @@
           "chance": "39%"
         }
       ],
-      "secondarySummary": "Daisy seed produces uncommon quality fruit, obtainable, multi-harvest, 20K sheckles"
+      "secondarySummary": "Daisy seed produces uncommon quality fruit, obtainable, multi-harvest, 20K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/daisy.png"
     },
     {
       "name": "Cyclamen",
@@ -5642,7 +5926,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Cyclamen seed produces divine quality fruit, obtainable, multi-harvest, 6K sheckles"
+      "secondarySummary": "Cyclamen seed produces divine quality fruit, obtainable, multi-harvest, 6K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cyclamen.png"
     },
     {
       "name": "Cursed Fruit",
@@ -5665,7 +5950,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Cursed Fruit seed produces divine quality fruit, unavailable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Cursed Fruit seed produces divine quality fruit, unavailable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cursed-fruit.png"
     },
     {
       "name": "Cryoshard",
@@ -5688,7 +5974,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Cryoshard seed produces divine quality fruit, obtainable, multi-harvest, 124K sheckles"
+      "secondarySummary": "Cryoshard seed produces divine quality fruit, obtainable, multi-harvest, 124K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cryoshard.png"
     },
     {
       "name": "Cryo Rose",
@@ -5711,7 +5998,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Cryo Rose seed produces rare quality fruit, unavailable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Cryo Rose seed produces rare quality fruit, unavailable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cryo-rose.png"
     },
     {
       "name": "Crown of Thorns",
@@ -5729,7 +6017,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/crown-of-thorns.png"
     },
     {
       "name": "Crocus",
@@ -5752,7 +6041,8 @@
           "chance": "40%"
         }
       ],
-      "secondarySummary": "Crocus seed produces uncommon quality fruit, unavailable, single-harvest, 30K sheckles"
+      "secondarySummary": "Crocus seed produces uncommon quality fruit, unavailable, single-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/crocus.png"
     },
     {
       "name": "Cookie Stack",
@@ -5770,7 +6060,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Cookie Stack seed produces common quality fruit, obtainable, multi-harvest, 20K sheckles"
+      "secondarySummary": "Cookie Stack seed produces common quality fruit, obtainable, multi-harvest, 20K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cookie-stack.png"
     },
     {
       "name": "Colorpop Crop",
@@ -5788,7 +6079,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Colorpop Crop seed produces prismatic quality fruit, unavailable, multi-harvest, 150K sheckles"
+      "secondarySummary": "Colorpop Crop seed produces prismatic quality fruit, unavailable, multi-harvest, 150K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/colorpop-crop.png"
     },
     {
       "name": "Coinfruit",
@@ -5806,7 +6098,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Coinfruit seed produces uncommon quality fruit, obtainable, multi-harvest, 22K sheckles"
+      "secondarySummary": "Coinfruit seed produces uncommon quality fruit, obtainable, multi-harvest, 22K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/coinfruit.png"
     },
     {
       "name": "Christmas Tree",
@@ -5824,7 +6117,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/christmas-tree.png"
     },
     {
       "name": "Christmas Cracker",
@@ -5842,7 +6136,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Christmas Cracker seed produces divine quality fruit, obtainable, multi-harvest, 120K sheckles"
+      "secondarySummary": "Christmas Cracker seed produces divine quality fruit, obtainable, multi-harvest, 120K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/christmas-cracker.png"
     },
     {
       "name": "Chocolate Coconut",
@@ -5869,7 +6164,8 @@
           "chance": "7%"
         }
       ],
-      "secondarySummary": "Chocolate Coconut seed produces legendary quality fruit, obtainable, multi-harvest, 55K sheckles"
+      "secondarySummary": "Chocolate Coconut seed produces legendary quality fruit, obtainable, multi-harvest, 55K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/chocolate-coconut.png"
     },
     {
       "name": "Chocolate Carrot",
@@ -5887,7 +6183,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Chocolate Carrot seed produces common quality fruit, unavailable, single-harvest, 11K sheckles"
+      "secondarySummary": "Chocolate Carrot seed produces common quality fruit, unavailable, single-harvest, 11K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/chocolate-carrot.png"
     },
     {
       "name": "Chocolate Berry",
@@ -5914,7 +6211,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Chocolate Berry seed produces uncommon quality fruit, obtainable, multi-harvest, 8K sheckles"
+      "secondarySummary": "Chocolate Berry seed produces uncommon quality fruit, obtainable, multi-harvest, 8K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/chocolate-berry.png"
     },
     {
       "name": "Chicken Feed",
@@ -5932,7 +6230,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Chicken Feed seed produces mythical quality fruit, obtainable, multi-harvest, 77K sheckles"
+      "secondarySummary": "Chicken Feed seed produces mythical quality fruit, obtainable, multi-harvest, 77K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/chicken-feed.png"
     },
     {
       "name": "Cherry Blossom",
@@ -5950,7 +6249,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Cherry Blossom seed produces divine quality fruit, unavailable, multi-harvest, 500 sheckles"
+      "secondarySummary": "Cherry Blossom seed produces divine quality fruit, unavailable, multi-harvest, 500 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cherry-blossom.png"
     },
     {
       "name": "Celestiberry",
@@ -5968,7 +6268,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Celestiberry seed produces mythical quality fruit, unavailable, multi-harvest, 10K sheckles"
+      "secondarySummary": "Celestiberry seed produces mythical quality fruit, unavailable, multi-harvest, 10K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/celestiberry.png"
     },
     {
       "name": "Castor Bean",
@@ -5991,7 +6292,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Castor Bean seed produces mythical quality fruit, obtainable, multi-harvest, 53K sheckles"
+      "secondarySummary": "Castor Bean seed produces mythical quality fruit, obtainable, multi-harvest, 53K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/castor-bean.png"
     },
     {
       "name": "Cantaloupe",
@@ -6014,7 +6316,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Cantaloupe seed produces legendary quality fruit, unavailable, multi-harvest, 34K sheckles"
+      "secondarySummary": "Cantaloupe seed produces legendary quality fruit, unavailable, multi-harvest, 34K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cantaloupe.png"
     },
     {
       "name": "Candy Sunflower",
@@ -6032,7 +6335,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Candy Sunflower seed produces legendary quality fruit, unavailable, single-harvest, 80K sheckles"
+      "secondarySummary": "Candy Sunflower seed produces legendary quality fruit, unavailable, single-harvest, 80K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/candy-sunflower.png"
     },
     {
       "name": "Candy Cornflower",
@@ -6050,7 +6354,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Candy Cornflower seed produces legendary quality fruit, obtainable, multi-harvest, 44K sheckles"
+      "secondarySummary": "Candy Cornflower seed produces legendary quality fruit, obtainable, multi-harvest, 44K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/candy-cornflower.png"
     },
     {
       "name": "Candy Carrot",
@@ -6077,7 +6382,8 @@
           "chance": "30%"
         }
       ],
-      "secondarySummary": "Candy Carrot seed produces common quality fruit, obtainable, single-harvest, 7K sheckles"
+      "secondarySummary": "Candy Carrot seed produces common quality fruit, obtainable, single-harvest, 7K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/candy-carrot.png"
     },
     {
       "name": "Candy Cane",
@@ -6095,7 +6401,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/candy-cane.png"
     },
     {
       "name": "Canary Melon",
@@ -6113,7 +6420,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Canary Melon seed produces rare quality fruit, unavailable, multi-harvest, 65K sheckles"
+      "secondarySummary": "Canary Melon seed produces rare quality fruit, unavailable, multi-harvest, 65K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/canary-melon.png"
     },
     {
       "name": "Calla Lily",
@@ -6131,7 +6439,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Calla Lily seed produces legendary quality fruit, obtainable, multi-harvest, 7K sheckles"
+      "secondarySummary": "Calla Lily seed produces legendary quality fruit, obtainable, multi-harvest, 7K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/calla-lily.png"
     },
     {
       "name": "Butternut Squash",
@@ -6149,7 +6458,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Butternut Squash seed produces rare quality fruit, unavailable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Butternut Squash seed produces rare quality fruit, unavailable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/butternut-squash.png"
     },
     {
       "name": "Bush Flake",
@@ -6172,7 +6482,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Bush Flake seed produces legendary quality fruit, unavailable, multi-harvest, 76K sheckles"
+      "secondarySummary": "Bush Flake seed produces legendary quality fruit, unavailable, multi-harvest, 76K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bush-flake.webp"
     },
     {
       "name": "Buddhas Hand",
@@ -6195,7 +6506,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Buddhas Hand seed produces legendary quality fruit, obtainable, multi-harvest, 48K sheckles"
+      "secondarySummary": "Buddhas Hand seed produces legendary quality fruit, obtainable, multi-harvest, 48K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/buddhas-hand.png"
     },
     {
       "name": "Briar Rose",
@@ -6218,7 +6530,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Briar Rose seed produces mythical quality fruit, obtainable, multi-harvest, 75K sheckles"
+      "secondarySummary": "Briar Rose seed produces mythical quality fruit, obtainable, multi-harvest, 75K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/briar-rose.png"
     },
     {
       "name": "Boreal Orange",
@@ -6236,7 +6549,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Boreal Orange seed produces prismatic quality fruit, obtainable, multi-harvest, 222K sheckles"
+      "secondarySummary": "Boreal Orange seed produces prismatic quality fruit, obtainable, multi-harvest, 222K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/boreal-orange.png"
     },
     {
       "name": "Bonanza Bloom",
@@ -6254,7 +6568,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Bonanza Bloom seed produces transcendent quality fruit, obtainable, multi-harvest, 288K sheckles"
+      "secondarySummary": "Bonanza Bloom seed produces transcendent quality fruit, obtainable, multi-harvest, 288K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bonanza-bloom.png"
     },
     {
       "name": "Boneboo",
@@ -6277,7 +6592,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Boneboo seed produces legendary quality fruit, unavailable, single-harvest, 141K sheckles"
+      "secondarySummary": "Boneboo seed produces legendary quality fruit, unavailable, single-harvest, 141K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/boneboo.png"
     },
     {
       "name": "Bone Blossom",
@@ -6295,7 +6611,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Bone Blossom seed produces transcendent quality fruit, unavailable, multi-harvest, 200K sheckles"
+      "secondarySummary": "Bone Blossom seed produces transcendent quality fruit, unavailable, multi-harvest, 200K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bone-blossom.png"
     },
     {
       "name": "Bloodred Mushroom",
@@ -6313,7 +6630,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Bloodred Mushroom seed produces uncommon quality fruit, obtainable, multi-harvest, 22K sheckles"
+      "secondarySummary": "Bloodred Mushroom seed produces uncommon quality fruit, obtainable, multi-harvest, 22K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bloodred-mushroom.png"
     },
     {
       "name": "Blood Orange",
@@ -6331,7 +6649,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Blood Orange seed produces prismatic quality fruit, obtainable, multi-harvest, 140K sheckles"
+      "secondarySummary": "Blood Orange seed produces prismatic quality fruit, obtainable, multi-harvest, 140K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/blood-orange.png"
     },
     {
       "name": "Blood Banana",
@@ -6349,7 +6668,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Blood Banana seed produces mythical quality fruit, unavailable, multi-harvest, 6K sheckles"
+      "secondarySummary": "Blood Banana seed produces mythical quality fruit, unavailable, multi-harvest, 6K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/blood-banana.png"
     },
     {
       "name": "Black Bat Flower",
@@ -6372,7 +6692,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Black Bat Flower seed produces rare quality fruit, obtainable, multi-harvest, 70K sheckles"
+      "secondarySummary": "Black Bat Flower seed produces rare quality fruit, obtainable, multi-harvest, 70K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/black-bat-flower.png"
     },
     {
       "name": "Bitter Melon",
@@ -6390,7 +6711,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Bitter Melon seed produces mythical quality fruit, unavailable, multi-harvest, 77K sheckles"
+      "secondarySummary": "Bitter Melon seed produces mythical quality fruit, unavailable, multi-harvest, 77K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bitter-melon.png"
     },
     {
       "name": "Biggest Shadow Buttercup",
@@ -6408,7 +6730,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Biggest Shadow Buttercup seed produces transcendent quality fruit, obtainable, single-harvest"
+      "secondarySummary": "Biggest Shadow Buttercup seed produces transcendent quality fruit, obtainable, single-harvest",
+      "image": "/Grow%20a%20Garden/Crops/biggest-shadow-buttercup.png"
     },
     {
       "name": "Biggest Buttercup",
@@ -6426,7 +6749,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Biggest Buttercup seed produces mythical quality fruit, obtainable, single-harvest"
+      "secondarySummary": "Biggest Buttercup seed produces mythical quality fruit, obtainable, single-harvest",
+      "image": "/Grow%20a%20Garden/Crops/biggest-buttercup.png"
     },
     {
       "name": "Bigger Shadow Buttercup",
@@ -6444,7 +6768,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Bigger Shadow Buttercup seed produces quality fruit, obtainable, single-harvest"
+      "secondarySummary": "Bigger Shadow Buttercup seed produces quality fruit, obtainable, single-harvest",
+      "image": "/Grow%20a%20Garden/Crops/bigger-shadow-buttercup.png"
     },
     {
       "name": "Bigger Buttercup",
@@ -6462,7 +6787,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Bigger Buttercup seed produces legendary quality fruit, obtainable, single-harvest"
+      "secondarySummary": "Bigger Buttercup seed produces legendary quality fruit, obtainable, single-harvest",
+      "image": "/Grow%20a%20Garden/Crops/bigger-buttercup.png"
     },
     {
       "name": "Big Shadow Buttercup",
@@ -6480,7 +6806,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Big Shadow Buttercup seed produces legendary quality fruit, obtainable, single-harvest"
+      "secondarySummary": "Big Shadow Buttercup seed produces legendary quality fruit, obtainable, single-harvest",
+      "image": "/Grow%20a%20Garden/Crops/big-shadow-buttercup.png"
     },
     {
       "name": "Big Buttercup",
@@ -6498,7 +6825,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Big Buttercup seed produces quality fruit, obtainable, single-harvest"
+      "secondarySummary": "Big Buttercup seed produces quality fruit, obtainable, single-harvest",
+      "image": "/Grow%20a%20Garden/Crops/big-buttercup.png"
     },
     {
       "name": "Bendboo",
@@ -6521,7 +6849,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Bendboo seed produces mythical quality fruit, unavailable, single-harvest, 155K sheckles"
+      "secondarySummary": "Bendboo seed produces mythical quality fruit, unavailable, single-harvest, 155K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bendboo.png"
     },
     {
       "name": "Bee Balm",
@@ -6546,7 +6875,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Bee Balm seed produces rare quality fruit, unavailable, multi-harvest, 18K sheckles"
+      "secondarySummary": "Bee Balm seed produces rare quality fruit, unavailable, multi-harvest, 18K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bee-balm.png"
     },
     {
       "name": "Beast Shadow Buttercup",
@@ -6564,7 +6894,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Beast Shadow Buttercup seed produces transcendent quality fruit, obtainable, single-harvest, 3000K sheckles"
+      "secondarySummary": "Beast Shadow Buttercup seed produces transcendent quality fruit, obtainable, single-harvest, 3000K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/beast-shadow-buttercup.png"
     },
     {
       "name": "Beast Buttercup",
@@ -6582,7 +6913,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Beast Buttercup seed produces transcendent quality fruit, obtainable, single-harvest"
+      "secondarySummary": "Beast Buttercup seed produces transcendent quality fruit, obtainable, single-harvest",
+      "image": "/Grow%20a%20Garden/Crops/beast-buttercup.png"
     },
     {
       "name": "Bamboo Tree",
@@ -6605,7 +6937,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Bamboo Tree seed produces rare quality fruit, obtainable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Bamboo Tree seed produces rare quality fruit, obtainable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bamboo-tree.png"
     },
     {
       "name": "Banesberry",
@@ -6623,7 +6956,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Banesberry seed produces rare quality fruit, obtainable, multi-harvest, 33K sheckles"
+      "secondarySummary": "Banesberry seed produces rare quality fruit, obtainable, multi-harvest, 33K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/banesberry.png"
     },
     {
       "name": "Banana Orchid",
@@ -6646,7 +6980,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Banana Orchid seed produces uncommon quality fruit, obtainable, multi-harvest, 24K sheckles"
+      "secondarySummary": "Banana Orchid seed produces uncommon quality fruit, obtainable, multi-harvest, 24K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/banana-orchid.png"
     },
     {
       "name": "Badlands Pepper",
@@ -6664,7 +6999,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Badlands Pepper seed produces legendary quality fruit, unavailable, multi-harvest, 45K sheckles"
+      "secondarySummary": "Badlands Pepper seed produces legendary quality fruit, unavailable, multi-harvest, 45K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/badlands-pepper.png"
     },
     {
       "name": "Aurora Vine",
@@ -6682,7 +7018,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Aurora Vine seed produces divine quality fruit, obtainable, multi-harvest, 120K sheckles"
+      "secondarySummary": "Aurora Vine seed produces divine quality fruit, obtainable, multi-harvest, 120K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/aurora-vine.png"
     },
     {
       "name": "Artichoke",
@@ -6700,7 +7037,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Artichoke seed produces uncommon quality fruit, unavailable, single-harvest, 30K sheckles"
+      "secondarySummary": "Artichoke seed produces uncommon quality fruit, unavailable, single-harvest, 30K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/artichoke.png"
     },
     {
       "name": "Antlerbloom",
@@ -6718,7 +7056,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Antlerbloom seed produces legendary quality fruit, obtainable, multi-harvest, 55K sheckles"
+      "secondarySummary": "Antlerbloom seed produces legendary quality fruit, obtainable, multi-harvest, 55K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/antlerbloom.png"
     },
     {
       "name": "Amberheart",
@@ -6736,7 +7075,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Amberheart seed produces mythical quality fruit, unavailable, multi-harvest, 175K sheckles"
+      "secondarySummary": "Amberheart seed produces mythical quality fruit, unavailable, multi-harvest, 175K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/amberheart.png"
     },
     {
       "name": "Amberfruit Shrub",
@@ -6759,7 +7099,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Amberfruit Shrub seed produces legendary quality fruit, obtainable, multi-harvest, 40K sheckles"
+      "secondarySummary": "Amberfruit Shrub seed produces legendary quality fruit, obtainable, multi-harvest, 40K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/amberfruit-shrub.png"
     },
     {
       "name": "Amber Spine",
@@ -6784,7 +7125,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Amber Spine seed produces mythical quality fruit, craftable, multi-harvest, 55K sheckles"
+      "secondarySummary": "Amber Spine seed produces mythical quality fruit, craftable, multi-harvest, 55K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/amber-spine.png"
     },
     {
       "name": "Amazon Feather Fern",
@@ -6802,7 +7144,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Amazon Feather Fern seed produces mythical quality fruit, obtainable, multi-harvest, 125K sheckles"
+      "secondarySummary": "Amazon Feather Fern seed produces mythical quality fruit, obtainable, multi-harvest, 125K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/amazon-feather-fern.png"
     },
     {
       "name": "Aloe Vera",
@@ -6827,7 +7170,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Aloe Vera seed produces legendary quality fruit, unavailable, single-harvest, 69K sheckles"
+      "secondarySummary": "Aloe Vera seed produces legendary quality fruit, unavailable, single-harvest, 69K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/aloe-vera.png"
     },
     {
       "name": "Alien Apple",
@@ -6856,7 +7200,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Alien Apple seed produces quality fruit, obtainable, multi-harvest, 902K sheckles"
+      "secondarySummary": "Alien Apple seed produces quality fruit, obtainable, multi-harvest, 902K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/alien-apple.png"
     },
     {
       "name": "Aetherfruit",
@@ -6874,7 +7219,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Aetherfruit seed produces divine quality fruit, obtainable, multi-harvest, 100K sheckles"
+      "secondarySummary": "Aetherfruit seed produces divine quality fruit, obtainable, multi-harvest, 100K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/aetherfruit.png"
     },
     {
       "name": "Acorn Squash",
@@ -6892,7 +7238,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Acorn Squash seed produces uncommon quality fruit, obtainable, multi-harvest, 15K sheckles"
+      "secondarySummary": "Acorn Squash seed produces uncommon quality fruit, obtainable, multi-harvest, 15K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/acorn-squash.png"
     },
     {
       "name": "Acorn",
@@ -6910,7 +7257,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Acorn seed produces divine quality fruit, obtainable, multi-harvest, 123K sheckles"
+      "secondarySummary": "Acorn seed produces divine quality fruit, obtainable, multi-harvest, 123K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/acorn.png"
     },
     {
       "name": "Torchflare",
@@ -6933,7 +7281,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Torchflare seed produces mythical quality fruit, obtainable, multi-harvest, 66K sheckles"
+      "secondarySummary": "Torchflare seed produces mythical quality fruit, obtainable, multi-harvest, 66K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/torchflare.webp"
     },
     {
       "name": "Tomato",
@@ -6962,7 +7311,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Tomato seed produces rare quality fruit, obtainable, multi-harvest, 30 sheckles"
+      "secondarySummary": "Tomato seed produces rare quality fruit, obtainable, multi-harvest, 30 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/tomato.png"
     },
     {
       "name": "Sugar Apple",
@@ -7001,7 +7351,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Sugar Apple seed produces prismatic quality fruit, obtainable, multi-harvest, 48K sheckles"
+      "secondarySummary": "Sugar Apple seed produces prismatic quality fruit, obtainable, multi-harvest, 48K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sugar-apple.png"
     },
     {
       "name": "Sunflower",
@@ -7030,7 +7381,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Sunflower seed produces divine quality fruit, obtainable, multi-harvest, 55K sheckles"
+      "secondarySummary": "Sunflower seed produces divine quality fruit, obtainable, multi-harvest, 55K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/sunflower.png"
     },
     {
       "name": "Strawberry",
@@ -7059,7 +7411,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Strawberry seed produces common quality fruit, obtainable, multi-harvest, 15 sheckles"
+      "secondarySummary": "Strawberry seed produces common quality fruit, obtainable, multi-harvest, 15 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/strawberry.png"
     },
     {
       "name": "Speargrass",
@@ -7082,7 +7435,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Speargrass seed produces legendary quality fruit, obtainable, multi-harvest, 51K sheckles"
+      "secondarySummary": "Speargrass seed produces legendary quality fruit, obtainable, multi-harvest, 51K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/speargrass.png"
     },
     {
       "name": "Shimmersprout",
@@ -7100,7 +7454,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/shimmersprout.png"
     },
     {
       "name": "Rose",
@@ -7123,7 +7478,8 @@
           "chance": "40%"
         }
       ],
-      "secondarySummary": "Rose seed produces uncommon quality fruit, obtainable, multi-harvest, 5K sheckles"
+      "secondarySummary": "Rose seed produces uncommon quality fruit, obtainable, multi-harvest, 5K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/rose.png"
     },
     {
       "name": "Romanesco",
@@ -7162,7 +7518,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Romanesco seed produces prismatic quality fruit, obtainable, multi-harvest, 166K sheckles"
+      "secondarySummary": "Romanesco seed produces prismatic quality fruit, obtainable, multi-harvest, 166K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/romanesco.png"
     },
     {
       "name": "Raspberry",
@@ -7180,7 +7537,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Raspberry seed produces rare quality fruit, obtainable, multi-harvest, 100 sheckles"
+      "secondarySummary": "Raspberry seed produces rare quality fruit, obtainable, multi-harvest, 100 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/raspberry.png"
     },
     {
       "name": "Rafflesia",
@@ -7209,7 +7567,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Rafflesia seed produces legendary quality fruit, obtainable, single-harvest, 3K sheckles"
+      "secondarySummary": "Rafflesia seed produces legendary quality fruit, obtainable, single-harvest, 3K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/rafflesia.png"
     },
     {
       "name": "Radish",
@@ -7227,7 +7586,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Radish seed produces uncommon quality fruit, obtainable, single-harvest, 40K sheckles"
+      "secondarySummary": "Radish seed produces uncommon quality fruit, obtainable, single-harvest, 40K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/radish.png"
     },
     {
       "name": "Pumpkin",
@@ -7256,7 +7616,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pumpkin seed produces legendary quality fruit, obtainable, single-harvest"
+      "secondarySummary": "Pumpkin seed produces legendary quality fruit, obtainable, single-harvest",
+      "image": "/Grow%20a%20Garden/Crops/pumpkin.png"
     },
     {
       "name": "Protea",
@@ -7274,7 +7635,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Protea seed produces legendary quality fruit, obtainable, multi-harvest, 50K sheckles"
+      "secondarySummary": "Protea seed produces legendary quality fruit, obtainable, multi-harvest, 50K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/protea.png"
     },
     {
       "name": "Potato",
@@ -7303,7 +7665,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Potato seed produces mythical quality fruit, obtainable, multi-harvest, 90K sheckles"
+      "secondarySummary": "Potato seed produces mythical quality fruit, obtainable, multi-harvest, 90K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/potato.png"
     },
     {
       "name": "Plumwillow",
@@ -7321,7 +7684,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/plumwillow.png"
     },
     {
       "name": "Pink Lily",
@@ -7344,7 +7708,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Pink Lily seed produces mythical quality fruit, obtainable, multi-harvest, 65K sheckles"
+      "secondarySummary": "Pink Lily seed produces mythical quality fruit, obtainable, multi-harvest, 65K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pink-lily.png"
     },
     {
       "name": "Pineapple",
@@ -7373,7 +7738,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pineapple seed produces mythical quality fruit, obtainable, multi-harvest, 2K sheckles"
+      "secondarySummary": "Pineapple seed produces mythical quality fruit, obtainable, multi-harvest, 2K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pineapple.png"
     },
     {
       "name": "Pepper",
@@ -7412,7 +7778,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Pepper seed produces divine quality fruit, obtainable, multi-harvest, 8K sheckles"
+      "secondarySummary": "Pepper seed produces divine quality fruit, obtainable, multi-harvest, 8K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/pepper.png"
     },
     {
       "name": "Peanut",
@@ -7430,7 +7797,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/peanut.png"
     },
     {
       "name": "Peach",
@@ -7448,7 +7816,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Peach seed produces mythical quality fruit, obtainable, multi-harvest, 300 sheckles"
+      "secondarySummary": "Peach seed produces mythical quality fruit, obtainable, multi-harvest, 300 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/peach.png"
     },
     {
       "name": "Orange Tulip",
@@ -7477,7 +7846,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Orange Tulip seed produces uncommon quality fruit, obtainable, single-harvest, 850 sheckles"
+      "secondarySummary": "Orange Tulip seed produces uncommon quality fruit, obtainable, single-harvest, 850 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/orange-tulip.png"
     },
     {
       "name": "Orange Delight",
@@ -7495,7 +7865,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Orange Delight seed produces uncommon quality fruit, obtainable, multi-harvest"
+      "secondarySummary": "Orange Delight seed produces uncommon quality fruit, obtainable, multi-harvest",
+      "image": "/Grow%20a%20Garden/Crops/orange-delight.png"
     },
     {
       "name": "Olive",
@@ -7520,7 +7891,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Olive seed produces uncommon quality fruit, craftable, multi-harvest, 20K sheckles"
+      "secondarySummary": "Olive seed produces uncommon quality fruit, craftable, multi-harvest, 20K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/olive.png"
     },
     {
       "name": "Octobloom",
@@ -7549,7 +7921,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Octobloom seed produces transcendent quality fruit, obtainable, multi-harvest, 290K sheckles"
+      "secondarySummary": "Octobloom seed produces transcendent quality fruit, obtainable, multi-harvest, 290K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/octobloom.png"
     },
     {
       "name": "Mushroom",
@@ -7588,7 +7961,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Mushroom seed produces divine quality fruit, obtainable, single-harvest, 151K sheckles"
+      "secondarySummary": "Mushroom seed produces divine quality fruit, obtainable, single-harvest, 151K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/mushroom.png"
     },
     {
       "name": "Maple Resin",
@@ -7606,7 +7980,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Maple Resin seed produces transcendent quality fruit, obtainable, multi-harvest, 190K sheckles"
+      "secondarySummary": "Maple Resin seed produces transcendent quality fruit, obtainable, multi-harvest, 190K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/maple-resin.png"
     },
     {
       "name": "Mandrake",
@@ -7631,7 +8006,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/mandrake.png"
     },
     {
       "name": "Mango",
@@ -7660,7 +8036,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Mango seed produces mythical quality fruit, obtainable, multi-harvest, 6K sheckles"
+      "secondarySummary": "Mango seed produces mythical quality fruit, obtainable, multi-harvest, 6K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/mango.png"
     },
     {
       "name": "Magma Pepper",
@@ -7678,7 +8055,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Magma Pepper seed produces prismatic quality fruit, obtainable, multi-harvest"
+      "secondarySummary": "Magma Pepper seed produces prismatic quality fruit, obtainable, multi-harvest",
+      "image": "/Grow%20a%20Garden/Crops/magma-pepper.png"
     },
     {
       "name": "Madcrown Vine",
@@ -7696,7 +8074,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/madcrown-vine.png"
     },
     {
       "name": "Loquat",
@@ -7725,7 +8104,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Loquat seed produces divine quality fruit, obtainable, multi-harvest, 8K sheckles"
+      "secondarySummary": "Loquat seed produces divine quality fruit, obtainable, multi-harvest, 8K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/loquat.png"
     },
     {
       "name": "Lilac",
@@ -7748,7 +8128,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Lilac seed produces legendary quality fruit, obtainable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Lilac seed produces legendary quality fruit, obtainable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/lilac.png"
     },
     {
       "name": "Legacy Sunflower",
@@ -7771,7 +8152,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/legacy-sunflower.png"
     },
     {
       "name": "Kniphofia",
@@ -7789,7 +8171,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Kniphofia seed produces mythical quality fruit, obtainable, multi-harvest, 110K sheckles"
+      "secondarySummary": "Kniphofia seed produces mythical quality fruit, obtainable, multi-harvest, 110K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/kniphofia.png"
     },
     {
       "name": "Kiwi",
@@ -7818,7 +8201,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/kiwi.webp"
     },
     {
       "name": "Horned Melon",
@@ -7836,7 +8220,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Horned Melon seed produces legendary quality fruit, obtainable, multi-harvest, 66K sheckles"
+      "secondarySummary": "Horned Melon seed produces legendary quality fruit, obtainable, multi-harvest, 66K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/horned-melon.png"
     },
     {
       "name": "Hollow Bamboo",
@@ -7861,7 +8246,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Hollow Bamboo seed produces mythical quality fruit, craftable, multi-harvest, 120K sheckles"
+      "secondarySummary": "Hollow Bamboo seed produces mythical quality fruit, craftable, multi-harvest, 120K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/hollow-bamboo.png"
     },
     {
       "name": "Hexberry",
@@ -7879,7 +8265,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Hexberry seed produces rare quality fruit, obtainable, multi-harvest, 50K sheckles"
+      "secondarySummary": "Hexberry seed produces rare quality fruit, obtainable, multi-harvest, 50K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/hexberry.png"
     },
     {
       "name": "Green Apple",
@@ -7908,7 +8295,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Green Apple seed produces legendary quality fruit, obtainable, multi-harvest, 300 sheckles"
+      "secondarySummary": "Green Apple seed produces legendary quality fruit, obtainable, multi-harvest, 300 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/green-apple.png"
     },
     {
       "name": "Grape",
@@ -7947,7 +8335,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Grape seed produces divine quality fruit, obtainable, multi-harvest, 7K sheckles"
+      "secondarySummary": "Grape seed produces divine quality fruit, obtainable, multi-harvest, 7K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/grape.png"
     },
     {
       "name": "Giant Pinecone",
@@ -7986,7 +8375,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Giant Pinecone seed produces prismatic quality fruit, obtainable, multi-harvest, 72K sheckles"
+      "secondarySummary": "Giant Pinecone seed produces prismatic quality fruit, obtainable, multi-harvest, 72K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/giant-pinecone.png"
     },
     {
       "name": "Gem Fruit",
@@ -8004,7 +8394,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Gem Fruit seed produces uncommon quality fruit, obtainable, multi-harvest, 45K sheckles"
+      "secondarySummary": "Gem Fruit seed produces uncommon quality fruit, obtainable, multi-harvest, 45K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/gem-fruit.png"
     },
     {
       "name": "Foxglove",
@@ -8027,7 +8418,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Foxglove seed produces rare quality fruit, obtainable, multi-harvest, 20K sheckles"
+      "secondarySummary": "Foxglove seed produces rare quality fruit, obtainable, multi-harvest, 20K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/foxglove.png"
     },
     {
       "name": "Firewell",
@@ -8050,7 +8442,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Firewell seed produces divine quality fruit, obtainable, multi-harvest, 112K sheckles"
+      "secondarySummary": "Firewell seed produces divine quality fruit, obtainable, multi-harvest, 112K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/firewell.png"
     },
     {
       "name": "Feijoa",
@@ -8079,7 +8472,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Feijoa seed produces divine quality fruit, obtainable, multi-harvest, 13K sheckles"
+      "secondarySummary": "Feijoa seed produces divine quality fruit, obtainable, multi-harvest, 13K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/feijoa.png"
     },
     {
       "name": "Fall Berry",
@@ -8102,7 +8496,8 @@
           "chance": "25%"
         }
       ],
-      "secondarySummary": "Fall Berry seed produces rare quality fruit, obtainable, multi-harvest, 45K sheckles"
+      "secondarySummary": "Fall Berry seed produces rare quality fruit, obtainable, multi-harvest, 45K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/fall-berry.png"
     },
     {
       "name": "Evo Apple IV",
@@ -8127,7 +8522,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Evo Apple IV seed produces prismatic quality fruit, obtainable, multi-harvest, 165K sheckles"
+      "secondarySummary": "Evo Apple IV seed produces prismatic quality fruit, obtainable, multi-harvest, 165K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-apple-iv.png"
     },
     {
       "name": "Evo Apple III",
@@ -8152,7 +8548,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Evo Apple III seed produces divine quality fruit, obtainable, multi-harvest, 90K sheckles"
+      "secondarySummary": "Evo Apple III seed produces divine quality fruit, obtainable, multi-harvest, 90K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-apple-iii.png"
     },
     {
       "name": "Evo Apple II",
@@ -8177,7 +8574,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Evo Apple II seed produces mythical quality fruit, craftable, multi-harvest, 75K sheckles"
+      "secondarySummary": "Evo Apple II seed produces mythical quality fruit, craftable, multi-harvest, 75K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-apple-ii.png"
     },
     {
       "name": "Evo Apple I",
@@ -8202,7 +8600,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Evo Apple I seed produces legendary quality fruit, craftable, multi-harvest, 60K sheckles"
+      "secondarySummary": "Evo Apple I seed produces legendary quality fruit, craftable, multi-harvest, 60K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/evo-apple-i.png"
     },
     {
       "name": "Ember Lily",
@@ -8241,7 +8640,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Ember Lily seed produces prismatic quality fruit, obtainable, multi-harvest, 66K sheckles"
+      "secondarySummary": "Ember Lily seed produces prismatic quality fruit, obtainable, multi-harvest, 66K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/ember-lily.png"
     },
     {
       "name": "Elder Strawberry",
@@ -8280,7 +8680,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Elder Strawberry seed produces prismatic quality fruit, obtainable, multi-harvest, 90K sheckles"
+      "secondarySummary": "Elder Strawberry seed produces prismatic quality fruit, obtainable, multi-harvest, 90K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/elder-strawberry.png"
     },
     {
       "name": "Dragon Fruit",
@@ -8309,7 +8710,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Dragon Fruit seed produces mythical quality fruit, obtainable, multi-harvest, 4K sheckles"
+      "secondarySummary": "Dragon Fruit seed produces mythical quality fruit, obtainable, multi-harvest, 4K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/dragon-fruit.png"
     },
     {
       "name": "Daffodil",
@@ -8338,7 +8740,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Daffodil seed produces rare quality fruit, obtainable, single-harvest, 1000 sheckles"
+      "secondarySummary": "Daffodil seed produces rare quality fruit, obtainable, single-harvest, 1000 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/daffodil.png"
     },
     {
       "name": "Crunchnut",
@@ -8356,7 +8759,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/crunchnut.png"
     },
     {
       "name": "Crimson Thorn",
@@ -8395,7 +8799,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Crimson Thorn seed produces transcendent quality fruit, obtainable, multi-harvest, 210K sheckles"
+      "secondarySummary": "Crimson Thorn seed produces transcendent quality fruit, obtainable, multi-harvest, 210K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/crimson-thorn.png"
     },
     {
       "name": "Crimson Cranberry",
@@ -8413,7 +8818,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Crimson Cranberry seed produces uncommon quality fruit, obtainable, multi-harvest"
+      "secondarySummary": "Crimson Cranberry seed produces uncommon quality fruit, obtainable, multi-harvest",
+      "image": "/Grow%20a%20Garden/Crops/crimson-cranberry.png"
     },
     {
       "name": "Corn",
@@ -8442,7 +8848,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Corn seed produces rare quality fruit, obtainable, multi-harvest, 40 sheckles"
+      "secondarySummary": "Corn seed produces rare quality fruit, obtainable, multi-harvest, 40 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/corn.png"
     },
     {
       "name": "Confetti Tula",
@@ -8460,7 +8867,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/confetti-tula.png"
     },
     {
       "name": "Coconut",
@@ -8489,7 +8897,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Coconut seed produces mythical quality fruit, obtainable, multi-harvest, 400 sheckles"
+      "secondarySummary": "Coconut seed produces mythical quality fruit, obtainable, multi-harvest, 400 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/coconut.png"
     },
     {
       "name": "Coilvine",
@@ -8507,7 +8916,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Coilvine seed produces legendary quality fruit, obtainable, multi-harvest, 65K sheckles"
+      "secondarySummary": "Coilvine seed produces legendary quality fruit, obtainable, multi-harvest, 65K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/coilvine.png"
     },
     {
       "name": "Cauliflower",
@@ -8536,7 +8946,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Cauliflower seed produces rare quality fruit, obtainable, multi-harvest, 50 sheckles"
+      "secondarySummary": "Cauliflower seed produces rare quality fruit, obtainable, multi-harvest, 50 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cauliflower.png"
     },
     {
       "name": "Carrot",
@@ -8565,7 +8976,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Carrot seed produces common quality fruit, obtainable, single-harvest, 20 sheckles"
+      "secondarySummary": "Carrot seed produces common quality fruit, obtainable, single-harvest, 20 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/carrot.png"
     },
     {
       "name": "Candlite",
@@ -8583,7 +8995,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/candlite.png"
     },
     {
       "name": "Cactus",
@@ -8612,7 +9025,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Cactus seed produces mythical quality fruit, obtainable, multi-harvest, 3K sheckles"
+      "secondarySummary": "Cactus seed produces mythical quality fruit, obtainable, multi-harvest, 3K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cactus.png"
     },
     {
       "name": "Cacao",
@@ -8651,7 +9065,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Cacao seed produces divine quality fruit, obtainable, multi-harvest, 12K sheckles"
+      "secondarySummary": "Cacao seed produces divine quality fruit, obtainable, multi-harvest, 12K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/cacao.png"
     },
     {
       "name": "Buttercup",
@@ -8680,7 +9095,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Buttercup seed produces uncommon quality fruit, obtainable, single-harvest, 600 sheckles"
+      "secondarySummary": "Buttercup seed produces uncommon quality fruit, obtainable, single-harvest, 600 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/buttercup.png"
     },
     {
       "name": "Brussels Sprout",
@@ -8709,7 +9125,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Brussels Sprout seed produces divine quality fruit, obtainable, multi-harvest, 120K sheckles"
+      "secondarySummary": "Brussels Sprout seed produces divine quality fruit, obtainable, multi-harvest, 120K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/brussels-sprout.png"
     },
     {
       "name": "Broccoli",
@@ -8738,7 +9155,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Broccoli seed produces legendary quality fruit, obtainable, multi-harvest, 55K sheckles"
+      "secondarySummary": "Broccoli seed produces legendary quality fruit, obtainable, multi-harvest, 55K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/broccoli.png"
     },
     {
       "name": "Blueberry",
@@ -8767,7 +9185,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Blueberry seed produces uncommon quality fruit, obtainable, multi-harvest, 20 sheckles"
+      "secondarySummary": "Blueberry seed produces uncommon quality fruit, obtainable, multi-harvest, 20 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/blueberry.png"
     },
     {
       "name": "Blue Raspberry",
@@ -8785,7 +9204,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Blue Raspberry seed produces rare quality fruit, obtainable, single-harvest, 45K sheckles"
+      "secondarySummary": "Blue Raspberry seed produces rare quality fruit, obtainable, single-harvest, 45K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/blue-raspberry.png"
     },
     {
       "name": "Blooming Cactus",
@@ -8803,7 +9223,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Blooming Cactus seed produces quality fruit, obtainable, multi-harvest, 32K sheckles"
+      "secondarySummary": "Blooming Cactus seed produces quality fruit, obtainable, multi-harvest, 32K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/blooming-cactus.png"
     },
     {
       "name": "Bell Pepper",
@@ -8832,7 +9253,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Bell Pepper seed produces mythical quality fruit, obtainable, multi-harvest, 5K sheckles"
+      "secondarySummary": "Bell Pepper seed produces mythical quality fruit, obtainable, multi-harvest, 5K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bell-pepper.png"
     },
     {
       "name": "Beanstalk",
@@ -8871,7 +9293,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Beanstalk seed produces prismatic quality fruit, obtainable, multi-harvest, 28K sheckles"
+      "secondarySummary": "Beanstalk seed produces prismatic quality fruit, obtainable, multi-harvest, 28K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/beanstalk.png"
     },
     {
       "name": "Banana",
@@ -8905,7 +9328,8 @@
           "chance": "38%"
         }
       ],
-      "secondarySummary": "Banana seed produces legendary quality fruit, obtainable, multi-harvest, 1K sheckles"
+      "secondarySummary": "Banana seed produces legendary quality fruit, obtainable, multi-harvest, 1K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/banana.png"
     },
     {
       "name": "Bamboo",
@@ -8934,7 +9358,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Bamboo seed produces legendary quality fruit, obtainable, single-harvest, 4K sheckles"
+      "secondarySummary": "Bamboo seed produces legendary quality fruit, obtainable, single-harvest, 4K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/bamboo.png"
     },
     {
       "name": "Baobab",
@@ -8952,7 +9377,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Baobab seed produces divine quality fruit, obtainable, multi-harvest, 120K sheckles"
+      "secondarySummary": "Baobab seed produces divine quality fruit, obtainable, multi-harvest, 120K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/baobab.png"
     },
     {
       "name": "Avocado",
@@ -8981,7 +9407,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Avocado seed produces legendary quality fruit, obtainable, multi-harvest, 350 sheckles"
+      "secondarySummary": "Avocado seed produces legendary quality fruit, obtainable, multi-harvest, 350 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/avocado.png"
     },
     {
       "name": "Autumn Shroom",
@@ -9004,7 +9431,8 @@
           "chance": "40%"
         }
       ],
-      "secondarySummary": "Autumn Shroom seed produces uncommon quality fruit, obtainable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Autumn Shroom seed produces uncommon quality fruit, obtainable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/autumn-shroom.png"
     },
     {
       "name": "Auburn Pine",
@@ -9027,7 +9455,8 @@
           "chance": "4.5%"
         }
       ],
-      "secondarySummary": "Auburn Pine seed produces mythical quality fruit, obtainable, multi-harvest, 73K sheckles"
+      "secondarySummary": "Auburn Pine seed produces mythical quality fruit, obtainable, multi-harvest, 73K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/auburn-pine.png"
     },
     {
       "name": "Asteris",
@@ -9045,7 +9474,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Asteris seed produces divine quality fruit, obtainable, multi-harvest, 125K sheckles"
+      "secondarySummary": "Asteris seed produces divine quality fruit, obtainable, multi-harvest, 125K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/asteris.png"
     },
     {
       "name": "Apple",
@@ -9074,7 +9504,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Apple seed produces legendary quality fruit, obtainable, multi-harvest, 275 sheckles"
+      "secondarySummary": "Apple seed produces legendary quality fruit, obtainable, multi-harvest, 275 sheckles",
+      "image": "/Grow%20a%20Garden/Crops/apple.png"
     },
     {
       "name": "Ackee",
@@ -9092,7 +9523,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Ackee seed produces mythical quality fruit, obtainable, multi-harvest, 88K sheckles"
+      "secondarySummary": "Ackee seed produces mythical quality fruit, obtainable, multi-harvest, 88K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/ackee.png"
     },
     {
       "name": "Urchin Plant",
@@ -9110,7 +9542,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Urchin Plant seed produces divine quality fruit, obtainable, multi-harvest, 111K sheckles"
+      "secondarySummary": "Urchin Plant seed produces divine quality fruit, obtainable, multi-harvest, 111K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/urchin-plant.webp"
     },
     {
       "name": "Watermelon",
@@ -9139,7 +9572,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Watermelon seed produces legendary quality fruit, obtainable, single-harvest, 3K sheckles"
+      "secondarySummary": "Watermelon seed produces legendary quality fruit, obtainable, single-harvest, 3K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/watermelon.png"
     },
     {
       "name": "Yarrow",
@@ -9164,7 +9598,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Yarrow seed produces divine quality fruit, craftable, multi-harvest, 170K sheckles"
+      "secondarySummary": "Yarrow seed produces divine quality fruit, craftable, multi-harvest, 170K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/yarrow.webp"
     },
     {
       "name": "Yellow Core",
@@ -9182,7 +9617,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Yellow Core seed produces rare quality fruit, obtainable, multi-harvest"
+      "secondarySummary": "Yellow Core seed produces rare quality fruit, obtainable, multi-harvest",
+      "image": "/Grow%20a%20Garden/Crops/yellow-core.png"
     },
     {
       "name": "Zebrazinkle",
@@ -9211,7 +9647,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Zebrazinkle seed produces transcendent quality fruit, obtainable, multi-harvest, 260K sheckles"
+      "secondarySummary": "Zebrazinkle seed produces transcendent quality fruit, obtainable, multi-harvest, 260K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/zebrazinkle.webp"
     },
     {
       "name": "Untold Bell",
@@ -9229,7 +9666,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Untold Bell seed produces mythical quality fruit, unavailable, multi-harvest, 15K sheckles"
+      "secondarySummary": "Untold Bell seed produces mythical quality fruit, unavailable, multi-harvest, 15K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/untold-bell.webp"
     },
     {
       "name": "Veinpetal",
@@ -9254,7 +9692,8 @@
         }
       ],
       "seedPacks": [],
-      "secondarySummary": "Veinpetal seed produces legendary quality fruit, craftable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Veinpetal seed produces legendary quality fruit, craftable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/veinpetal.webp"
     },
     {
       "name": "Venus Fly Trap",
@@ -9272,7 +9711,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Venus Fly Trap seed produces divine quality fruit, unavailable, multi-harvest, 85K sheckles"
+      "secondarySummary": "Venus Fly Trap seed produces divine quality fruit, unavailable, multi-harvest, 85K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/venus-fly-trap.webp"
     },
     {
       "name": "Viburnum Berry",
@@ -9295,7 +9735,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Viburnum Berry seed produces rare quality fruit, obtainable, multi-harvest, 35K sheckles"
+      "secondarySummary": "Viburnum Berry seed produces rare quality fruit, obtainable, multi-harvest, 35K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/viburnum-berry.webp"
     },
     {
       "name": "Violet Corn",
@@ -9318,7 +9759,8 @@
           "chance": "20%"
         }
       ],
-      "secondarySummary": "Violet Corn seed produces legendary quality fruit, unavailable, multi-harvest, 50K sheckles"
+      "secondarySummary": "Violet Corn seed produces legendary quality fruit, unavailable, multi-harvest, 50K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/violet-corn.webp"
     },
     {
       "name": "Weeping Branch",
@@ -9336,7 +9778,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Weeping Branch seed produces transcendent quality fruit, obtainable, multi-harvest, 155K sheckles"
+      "secondarySummary": "Weeping Branch seed produces transcendent quality fruit, obtainable, multi-harvest, 155K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/weeping-branch.webp"
     },
     {
       "name": "Wereplant",
@@ -9354,7 +9797,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Wereplant seed produces divine quality fruit, obtainable, multi-harvest, 170K sheckles"
+      "secondarySummary": "Wereplant seed produces divine quality fruit, obtainable, multi-harvest, 170K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/wereplant.webp"
     },
     {
       "name": "Wild Carrot",
@@ -9377,7 +9821,8 @@
           "chance": "40%"
         }
       ],
-      "secondarySummary": "Wild Carrot seed produces uncommon quality fruit, unavailable, single-harvest, 25K sheckles"
+      "secondarySummary": "Wild Carrot seed produces uncommon quality fruit, unavailable, single-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/wild-carrot.webp"
     },
     {
       "name": "Wild Pineapple",
@@ -9395,7 +9840,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Wild Pineapple seed produces mythical quality fruit, obtainable, multi-harvest, 88K sheckles"
+      "secondarySummary": "Wild Pineapple seed produces mythical quality fruit, obtainable, multi-harvest, 88K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/wild-pineapple.webp"
     },
     {
       "name": "Willowberry",
@@ -9413,7 +9859,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Willowberry seed produces legendary quality fruit, unavailable, multi-harvest, 7K sheckles"
+      "secondarySummary": "Willowberry seed produces legendary quality fruit, unavailable, multi-harvest, 7K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/willowberry.webp"
     },
     {
       "name": "Wisp Flower",
@@ -9431,7 +9878,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Wisp Flower seed produces mythical quality fruit, obtainable, multi-harvest, 70K sheckles"
+      "secondarySummary": "Wisp Flower seed produces mythical quality fruit, obtainable, multi-harvest, 70K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/wisp-flower.webp"
     },
     {
       "name": "Wispwing",
@@ -9454,7 +9902,8 @@
           "chance": "0.5%"
         }
       ],
-      "secondarySummary": "Wispwing seed produces divine quality fruit, obtainable, multi-harvest, 180K sheckles"
+      "secondarySummary": "Wispwing seed produces divine quality fruit, obtainable, multi-harvest, 180K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/wispwing.webp"
     },
     {
       "name": "Wyrmvine",
@@ -9472,7 +9921,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Wyrmvine seed produces prismatic quality fruit, obtainable, multi-harvest, 120K sheckles"
+      "secondarySummary": "Wyrmvine seed produces prismatic quality fruit, obtainable, multi-harvest, 120K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/wyrmvine.webp"
     },
     {
       "name": "Zenflare",
@@ -9490,7 +9940,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Zenflare seed produces rare quality fruit, unavailable, multi-harvest, 25K sheckles"
+      "secondarySummary": "Zenflare seed produces rare quality fruit, unavailable, multi-harvest, 25K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/zenflare.webp"
     },
     {
       "name": "Zen Rocks",
@@ -9513,7 +9964,8 @@
           "chance": "10%"
         }
       ],
-      "secondarySummary": "Zen Rocks seed produces mythical quality fruit, unavailable, single-harvest, 150K sheckles"
+      "secondarySummary": "Zen Rocks seed produces mythical quality fruit, unavailable, single-harvest, 150K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/zen-rocks.webp"
     },
     {
       "name": "Zombie Fruit",
@@ -9531,7 +9983,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Zombie Fruit seed produces rare quality fruit, obtainable, multi-harvest, 60K sheckles"
+      "secondarySummary": "Zombie Fruit seed produces rare quality fruit, obtainable, multi-harvest, 60K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/zombie-fruit.webp"
     },
     {
       "name": "Zucchini",
@@ -9549,7 +10002,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Zucchini seed produces divine quality fruit, obtainable, multi-harvest, 144K sheckles"
+      "secondarySummary": "Zucchini seed produces divine quality fruit, obtainable, multi-harvest, 144K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/zucchini.webp"
     },
     {
       "name": "Vampbloom",
@@ -9567,7 +10021,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/vampbloom.png"
     },
     {
       "name": "Walnut",
@@ -9585,7 +10040,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/walnut.svg"
     },
     {
       "name": "White Mulberry",
@@ -9603,7 +10059,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "White Mulberry seed produces legendary quality fruit, unavailable, single-harvest, 3K sheckles"
+      "secondarySummary": "White Mulberry seed produces legendary quality fruit, unavailable, single-harvest, 3K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/white-mulberry.webp"
     },
     {
       "name": "Wild Berry",
@@ -9621,7 +10078,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/wild-berry.svg"
     },
     {
       "name": "Wild Frond",
@@ -9639,7 +10097,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/wild-frond.svg"
     },
     {
       "name": "Wintercreep",
@@ -9657,7 +10116,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/wintercreep.svg"
     },
     {
       "name": "Witch Cap",
@@ -9675,7 +10135,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/witch-cap.svg"
     },
     {
       "name": "Witches Hair",
@@ -9693,7 +10154,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/witches-hair.png"
     },
     {
       "name": "Wreath Span",
@@ -9711,7 +10173,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Crops/wreath-span.png"
     },
     {
       "name": "Waddling Willow",
@@ -9729,7 +10192,8 @@
       ],
       "craftingRecipes": [],
       "seedPacks": [],
-      "secondarySummary": "Waddling Willow seed produces divine quality fruit, unavailable, single-harvest, 180K sheckles"
+      "secondarySummary": "Waddling Willow seed produces divine quality fruit, unavailable, single-harvest, 180K sheckles",
+      "image": "/Grow%20a%20Garden/Crops/waddling-willow.png"
     }
   ]
 }

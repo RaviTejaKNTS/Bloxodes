@@ -46,6 +46,7 @@
     "collect:body-items": "tsx scripts/catalog/collect-roblox-body-items.ts",
     "collect:clothing-items": "tsx scripts/catalog/collect-roblox-clothing-items.ts",
     "collect:avatar-animation-items": "tsx scripts/catalog/collect-roblox-avatar-animation-items.ts",
+    "collect:grow-a-garden-images": "tsx scripts/catalog/collect-grow-a-garden-images.ts",
     "queue:event-guides": "tsx scripts/events/queue-event-guides.ts",
     "enrich:universes": "tsx scripts/universes/enrich-roblox-universes.ts",
     "enrich:catalog-items": "tsx scripts/catalog/enrich-roblox-catalog-items.ts",

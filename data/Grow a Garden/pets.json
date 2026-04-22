@@ -32,7 +32,8 @@
       "eggSources",
       "merchantSources",
       "abilities",
-      "secondarySummary"
+      "secondarySummary",
+      "image"
     ]
   },
   "items": [
@@ -52,7 +53,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Amethyst Beetle is a legendary pet in Grow a Garden. It can be hatched from a Gem Egg."
+      "secondarySummary": "Amethyst Beetle is a legendary pet in Grow a Garden. It can be hatched from a Gem Egg.",
+      "image": "/Grow%20a%20Garden/Pets/amethyst-beetle.png"
     },
     {
       "name": "Angora Goat",
@@ -62,7 +64,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Angora Goat is a uncommon pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie from PhatMojo."
+      "secondarySummary": "Angora Goat is a uncommon pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie from PhatMojo.",
+      "image": "/Grow%20a%20Garden/Pets/angora-goat.png"
     },
     {
       "name": "Ankylosaurus",
@@ -89,7 +92,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Ankylosaurus is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Ankylosaurus is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/ankylosaurus.png"
     },
     {
       "name": "Apple Gazelle",
@@ -99,7 +103,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Apple Gazelle is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Apple Gazelle is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/apple-gazelle.png"
     },
     {
       "name": "Arctic Fox",
@@ -111,7 +116,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Arctic Fox is a mythical pet in Grow a Garden. It can be obtained from Christmas Harvest Event, obtained from Season Pass or obtained from reaching level 40 on the Season Pass."
+      "secondarySummary": "Arctic Fox is a mythical pet in Grow a Garden. It can be obtained from Christmas Harvest Event, obtained from Season Pass or obtained from reaching level 40 on the Season Pass.",
+      "image": "/Grow%20a%20Garden/Pets/arctic-fox.png"
     },
     {
       "name": "Armadillo",
@@ -121,7 +127,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Armadillo is a rare pet in Grow a Garden. It can be obtained from Season Pass Level 2 or obtained from Safari Harvest Event."
+      "secondarySummary": "Armadillo is a rare pet in Grow a Garden. It can be obtained from Season Pass Level 2 or obtained from Safari Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/armadillo.png"
     },
     {
       "name": "Ash Raven",
@@ -131,7 +138,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Ash Raven is a legendary pet in Grow a Garden. It can be obtained from Season Pass."
+      "secondarySummary": "Ash Raven is a legendary pet in Grow a Garden. It can be obtained from Season Pass.",
+      "image": "/Grow%20a%20Garden/Pets/ash-raven.png"
     },
     {
       "name": "Axolotl",
@@ -163,7 +171,8 @@
           "description": "Summer crops may replant when harvested"
         }
       ],
-      "secondarySummary": "Axolotl is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Axolotl is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/axolotl.png"
     },
     {
       "name": "Bacon Pig",
@@ -175,7 +184,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Bacon Pig is a uncommon pet in Grow a Garden. It can be obtained from a Culinarian Chest, obtained from a Exotic Culinarian Chest or obtained from Rainbow Sack."
+      "secondarySummary": "Bacon Pig is a uncommon pet in Grow a Garden. It can be obtained from a Culinarian Chest, obtained from a Exotic Culinarian Chest or obtained from Rainbow Sack.",
+      "image": "/Grow%20a%20Garden/Pets/bacon-pig.png"
     },
     {
       "name": "Badger",
@@ -202,7 +212,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Badger is a rare pet in Grow a Garden. It can be hatched from a Fall Egg or obtained from Fall Market Event."
+      "secondarySummary": "Badger is a rare pet in Grow a Garden. It can be hatched from a Fall Egg or obtained from Fall Market Event.",
+      "image": "/Grow%20a%20Garden/Pets/badger.png"
     },
     {
       "name": "Bagel Bunny",
@@ -222,7 +233,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Bagel Bunny is a common pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Bagel Bunny is a common pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/bagel-bunny.png"
     },
     {
       "name": "Bald Eagle",
@@ -242,7 +254,8 @@
           "description": "Chance to double hatch acceleration"
         }
       ],
-      "secondarySummary": "Bald Eagle is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Bald Eagle is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/bald-eagle.png"
     },
     {
       "name": "Barn Owl",
@@ -276,7 +289,8 @@
           "description": "Pets bought from shops directly have a chance to get an extra base weight"
         }
       ],
-      "secondarySummary": "Barn Owl is a mythical pet in Grow a Garden. It can be hatched from a Fall Egg."
+      "secondarySummary": "Barn Owl is a mythical pet in Grow a Garden. It can be hatched from a Fall Egg.",
+      "image": "/Grow%20a%20Garden/Pets/barn-owl.png"
     },
     {
       "name": "Bat",
@@ -303,7 +317,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Bat is a uncommon pet in Grow a Garden. It can be hatched from a Spooky Egg or obtained from Halloween Event."
+      "secondarySummary": "Bat is a uncommon pet in Grow a Garden. It can be hatched from a Spooky Egg or obtained from Halloween Event.",
+      "image": "/Grow%20a%20Garden/Pets/bat.png"
     },
     {
       "name": "Bear Bee",
@@ -328,7 +343,8 @@
           "description": "Grants HoneyGlazed mutation"
         }
       ],
-      "secondarySummary": "Bear Bee is a mythical pet in Grow a Garden. It can be hatched from a Bee Egg or obtained from Bizzy Bee Event."
+      "secondarySummary": "Bear Bee is a mythical pet in Grow a Garden. It can be hatched from a Bee Egg or obtained from Bizzy Bee Event.",
+      "image": "/Grow%20a%20Garden/Pets/bear-bee.png"
     },
     {
       "name": "Bear on Bike",
@@ -353,7 +369,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Bear on Bike is a legendary pet in Grow a Garden. It can be hatched from a Carnival Egg, hatched from a Premium Carnival Egg or hatched from a Rainbow Premium Carnival Egg."
+      "secondarySummary": "Bear on Bike is a legendary pet in Grow a Garden. It can be hatched from a Carnival Egg, hatched from a Premium Carnival Egg or hatched from a Rainbow Premium Carnival Egg.",
+      "image": "/Grow%20a%20Garden/Pets/bear-on-bike.png"
     },
     {
       "name": "Bearded Dragon",
@@ -363,7 +380,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Bearded Dragon is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Bearded Dragon is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/bearded-dragon.png"
     },
     {
       "name": "Beaver",
@@ -373,7 +391,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Beaver is a pet in Grow a Garden. It can be purchased from Easter Event Shop."
+      "secondarySummary": "Beaver is a pet in Grow a Garden. It can be purchased from Easter Event Shop.",
+      "image": "/Grow%20a%20Garden/Pets/beaver.png"
     },
     {
       "name": "Bee",
@@ -401,7 +420,8 @@
           "description": "Grants Pollinated mutation"
         }
       ],
-      "secondarySummary": "Bee is a uncommon pet in Grow a Garden. It can be hatched from a Bee Egg, obtained from Bee Egg (previous purchase), obtained from Bee Egg (previous purchase) or obtained from Honey Merchant."
+      "secondarySummary": "Bee is a uncommon pet in Grow a Garden. It can be hatched from a Bee Egg, obtained from Bee Egg (previous purchase), obtained from Bee Egg (previous purchase) or obtained from Honey Merchant.",
+      "image": "/Grow%20a%20Garden/Pets/bee.png"
     },
     {
       "name": "Birb",
@@ -426,7 +446,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Birb is a prismatic pet in Grow a Garden. It can be hatched from a Bird Egg, hatched from a Premium Bird Egg or hatched from a Rainbow Premium Bird Egg."
+      "secondarySummary": "Birb is a prismatic pet in Grow a Garden. It can be hatched from a Bird Egg, hatched from a Premium Bird Egg or hatched from a Rainbow Premium Bird Egg.",
+      "image": "/Grow%20a%20Garden/Pets/birb.png"
     },
     {
       "name": "Black Bird",
@@ -451,7 +472,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Black Bird is a common pet in Grow a Garden. It can be hatched from a Bird Egg, hatched from a Premium Bird Egg, hatched from a Rainbow Premium Bird Egg or obtained from Hungry Birds Event."
+      "secondarySummary": "Black Bird is a common pet in Grow a Garden. It can be hatched from a Bird Egg, hatched from a Premium Bird Egg, hatched from a Rainbow Premium Bird Egg or obtained from Hungry Birds Event.",
+      "image": "/Grow%20a%20Garden/Pets/black-bird.png"
     },
     {
       "name": "Black Bunny",
@@ -469,7 +491,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Black Bunny is a uncommon pet in Grow a Garden. It can be hatched from a uncommon egg."
+      "secondarySummary": "Black Bunny is a uncommon pet in Grow a Garden. It can be hatched from a uncommon egg.",
+      "image": "/Grow%20a%20Garden/Pets/black-bunny.png"
     },
     {
       "name": "Black Cat",
@@ -503,7 +526,8 @@
           "description": "Boosts nearby fruit size while napping near the Witch's Cauldron cosmetic on the player's farm"
         }
       ],
-      "secondarySummary": "Black Cat is a mythical pet in Grow a Garden. It can be hatched from a Spooky Egg or obtained from Halloween Event."
+      "secondarySummary": "Black Cat is a mythical pet in Grow a Garden. It can be hatched from a Spooky Egg or obtained from Halloween Event.",
+      "image": "/Grow%20a%20Garden/Pets/black-cat.png"
     },
     {
       "name": "Blood Hedgehog",
@@ -520,7 +544,8 @@
           "description": "Boosts size and variant chance for nearby prickly fruits"
         }
       ],
-      "secondarySummary": "Blood Hedgehog is a legendary pet in Grow a Garden. It can be purchased from Blood Moon Shop or obtained from Blood Moon Event."
+      "secondarySummary": "Blood Hedgehog is a legendary pet in Grow a Garden. It can be purchased from Blood Moon Shop or obtained from Blood Moon Event.",
+      "image": "/Grow%20a%20Garden/Pets/blood-hedgehog.png"
     },
     {
       "name": "Blood Kiwi",
@@ -537,7 +562,8 @@
           "description": "Reduces hatch time and boosts hatch speed"
         }
       ],
-      "secondarySummary": "Blood Kiwi is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Blood Kiwi is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/blood-kiwi.png"
     },
     {
       "name": "Blood Owl",
@@ -554,7 +580,8 @@
           "description": "Grants bonus experience per second to all active pets"
         }
       ],
-      "secondarySummary": "Blood Owl is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Blood Owl is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/blood-owl.png"
     },
     {
       "name": "Blue Jay",
@@ -564,7 +591,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Blue Jay is a uncommon pet in Grow a Garden. It can be obtained from Season Pass."
+      "secondarySummary": "Blue Jay is a uncommon pet in Grow a Garden. It can be obtained from Season Pass.",
+      "image": "/Grow%20a%20Garden/Pets/blue-jay.png"
     },
     {
       "name": "Bone Dog",
@@ -591,7 +619,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Bone Dog is a rare pet in Grow a Garden. It can be hatched from a Spooky Egg or obtained from Halloween Event."
+      "secondarySummary": "Bone Dog is a rare pet in Grow a Garden. It can be hatched from a Spooky Egg or obtained from Halloween Event.",
+      "image": "/Grow%20a%20Garden/Pets/bone-dog.png"
     },
     {
       "name": "Brontosaurus",
@@ -624,7 +653,8 @@
           "description": "Pets hatched from eggs have an increase in base size and weight"
         }
       ],
-      "secondarySummary": "Brontosaurus is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Brontosaurus is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/brontosaurus.png"
     },
     {
       "name": "Brown Mouse",
@@ -642,7 +672,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Brown Mouse is a mythical pet in Grow a Garden. It can be hatched from a mythical egg."
+      "secondarySummary": "Brown Mouse is a mythical pet in Grow a Garden. It can be hatched from a mythical egg.",
+      "image": "/Grow%20a%20Garden/Pets/brown-mouse.png"
     },
     {
       "name": "Brown Owl",
@@ -667,7 +698,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Brown Owl is a mythical pet in Grow a Garden. It can be hatched from a Bird Egg, hatched from a Premium Bird Egg, hatched from a Rainbow Premium Bird Egg or obtained from Hungry Birds Event."
+      "secondarySummary": "Brown Owl is a mythical pet in Grow a Garden. It can be hatched from a Bird Egg, hatched from a Premium Bird Egg, hatched from a Rainbow Premium Bird Egg or obtained from Hungry Birds Event.",
+      "image": "/Grow%20a%20Garden/Pets/brown-owl.png"
     },
     {
       "name": "Bunny",
@@ -692,7 +724,8 @@
           "description": "Eats carrots and grants bonus Sheckles"
         }
       ],
-      "secondarySummary": "Bunny is a common pet in Grow a Garden. It can be hatched from a common egg."
+      "secondarySummary": "Bunny is a common pet in Grow a Garden. It can be hatched from a common egg.",
+      "image": "/Grow%20a%20Garden/Pets/bunny.png"
     },
     {
       "name": "Butterfly",
@@ -724,7 +757,8 @@
           "description": "Grants Rainbow mutation"
         }
       ],
-      "secondarySummary": "Butterfly is a mythical pet in Grow a Garden. It can be hatched from a Anti Bee Egg or obtained from Premium Anti Bee Egg."
+      "secondarySummary": "Butterfly is a mythical pet in Grow a Garden. It can be hatched from a Anti Bee Egg or obtained from Premium Anti Bee Egg.",
+      "image": "/Grow%20a%20Garden/Pets/butterfly.png"
     },
     {
       "name": "Calico",
@@ -734,7 +768,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Calico is a legendary pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie at PhatMojo."
+      "secondarySummary": "Calico is a legendary pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie at PhatMojo.",
+      "image": "/Grow%20a%20Garden/Pets/calico.png"
     },
     {
       "name": "Camel",
@@ -744,7 +779,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Camel is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Camel is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/camel.png"
     },
     {
       "name": "Cape Buffalo",
@@ -757,7 +793,8 @@
         "Safari Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Cape Buffalo is a rare pet in Grow a Garden. It can be purchased from Safari Harvest Event Shop, obtained from Safari traveling Merchant or obtained from Safari Mega Harvest Event."
+      "secondarySummary": "Cape Buffalo is a rare pet in Grow a Garden. It can be purchased from Safari Harvest Event Shop, obtained from Safari traveling Merchant or obtained from Safari Mega Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/cape-buffalo.png"
     },
     {
       "name": "Capybara",
@@ -782,7 +819,8 @@
           "description": "Prevents hunger loss and grants experience every second nearby"
         }
       ],
-      "secondarySummary": "Capybara is a legendary pet in Grow a Garden. It can be hatched from a paradise egg."
+      "secondarySummary": "Capybara is a legendary pet in Grow a Garden. It can be hatched from a paradise egg.",
+      "image": "/Grow%20a%20Garden/Pets/capybara.png"
     },
     {
       "name": "Cardinal",
@@ -792,7 +830,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Cardinal is a common pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Cardinal is a common pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/cardinal.png"
     },
     {
       "name": "Carnival Elephant",
@@ -817,7 +856,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Carnival Elephant is a divine pet in Grow a Garden. It can be hatched from a Carnival Egg, hatched from a Premium Carnival Egg or hatched from a Rainbow Premium Carnival Egg."
+      "secondarySummary": "Carnival Elephant is a divine pet in Grow a Garden. It can be hatched from a Carnival Egg, hatched from a Premium Carnival Egg or hatched from a Rainbow Premium Carnival Egg.",
+      "image": "/Grow%20a%20Garden/Pets/carnival-elephant.png"
     },
     {
       "name": "Cat",
@@ -842,7 +882,8 @@
           "description": "Boosts nearby fruit size while napping randomly on the player's farm"
         }
       ],
-      "secondarySummary": "Cat is a uncommon pet in Grow a Garden. It can be hatched from a uncommon egg."
+      "secondarySummary": "Cat is a uncommon pet in Grow a Garden. It can be hatched from a uncommon egg.",
+      "image": "/Grow%20a%20Garden/Pets/cat.png"
     },
     {
       "name": "Caterpillar",
@@ -874,7 +915,8 @@
           "description": "Boosts growth rate of leafy plants nearby"
         }
       ],
-      "secondarySummary": "Caterpillar is a mythical pet in Grow a Garden. It can be hatched from a Bug Egg or hatched from a Exotic Bug Egg."
+      "secondarySummary": "Caterpillar is a mythical pet in Grow a Garden. It can be hatched from a Bug Egg or hatched from a Exotic Bug Egg.",
+      "image": "/Grow%20a%20Garden/Pets/caterpillar.png"
     },
     {
       "name": "Celebration Puppy",
@@ -899,7 +941,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Celebration Puppy is a legendary pet in Grow a Garden. It can be hatched from a New Year's Egg or hatched from a Premium New Year's Egg."
+      "secondarySummary": "Celebration Puppy is a legendary pet in Grow a Garden. It can be hatched from a New Year's Egg or hatched from a Premium New Year's Egg.",
+      "image": "/Grow%20a%20Garden/Pets/celebration-puppy.png"
     },
     {
       "name": "Cerberus",
@@ -909,7 +952,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Cerberus is a divine pet in Grow a Garden. It can be obtained from Season Pass."
+      "secondarySummary": "Cerberus is a divine pet in Grow a Garden. It can be obtained from Season Pass.",
+      "image": "/Grow%20a%20Garden/Pets/cerberus.png"
     },
     {
       "name": "Champion Beetle",
@@ -919,7 +963,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Champion Beetle is a legendary pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie at PhatMojo."
+      "secondarySummary": "Champion Beetle is a legendary pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie at PhatMojo.",
+      "image": "/Grow%20a%20Garden/Pets/champion-beetle.png"
     },
     {
       "name": "Cheetah",
@@ -929,7 +974,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Cheetah is a legendary pet in Grow a Garden. It can be obtained from Crafting in the Smithing Event."
+      "secondarySummary": "Cheetah is a legendary pet in Grow a Garden. It can be obtained from Crafting in the Smithing Event.",
+      "image": "/Grow%20a%20Garden/Pets/cheetah.png"
     },
     {
       "name": "Chicken",
@@ -954,7 +1000,8 @@
           "description": "Decreases hatch time for nearby eggs"
         }
       ],
-      "secondarySummary": "Chicken is a uncommon pet in Grow a Garden. It can be hatched from a uncommon egg."
+      "secondarySummary": "Chicken is a uncommon pet in Grow a Garden. It can be hatched from a uncommon egg.",
+      "image": "/Grow%20a%20Garden/Pets/chicken.png"
     },
     {
       "name": "Chicken Zombie",
@@ -977,7 +1024,8 @@
           "description": "Decreases hatch time for nearby eggs"
         }
       ],
-      "secondarySummary": "Chicken Zombie is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Chicken Zombie is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/chicken-zombie.png"
     },
     {
       "name": "Chimera",
@@ -987,7 +1035,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Chimera is a divine pet in Grow a Garden. It can be obtained from Fusing Chimera Stone, Emerald Snake, Lion or Lemon Lion, and Goat, obtained from Trader Event or obtained from Ritual."
+      "secondarySummary": "Chimera is a divine pet in Grow a Garden. It can be obtained from Fusing Chimera Stone, Emerald Snake, Lion or Lemon Lion, and Goat, obtained from Trader Event or obtained from Ritual.",
+      "image": "/Grow%20a%20Garden/Pets/chimera.png"
     },
     {
       "name": "Chimpanzee",
@@ -1005,7 +1054,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Chimpanzee is a mythical pet in Grow a Garden. It can be hatched from a Jungle Egg."
+      "secondarySummary": "Chimpanzee is a mythical pet in Grow a Garden. It can be hatched from a Jungle Egg.",
+      "image": "/Grow%20a%20Garden/Pets/chimpanzee.png"
     },
     {
       "name": "Chinchilla",
@@ -1015,7 +1065,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Chinchilla is a divine pet in Grow a Garden. It can be obtained from a Nutty Chest, obtained from a Exotic Nutty Chest or obtained from Rainbow Sack."
+      "secondarySummary": "Chinchilla is a divine pet in Grow a Garden. It can be obtained from a Nutty Chest, obtained from a Exotic Nutty Chest or obtained from Rainbow Sack.",
+      "image": "/Grow%20a%20Garden/Pets/chinchilla.png"
     },
     {
       "name": "Chipmunk",
@@ -1030,7 +1081,8 @@
         "Fall Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Chipmunk is a common pet in Grow a Garden. It can be purchased from Fall Pet Shop or obtained from Fall Market Event."
+      "secondarySummary": "Chipmunk is a common pet in Grow a Garden. It can be purchased from Fall Pet Shop or obtained from Fall Market Event.",
+      "image": "/Grow%20a%20Garden/Pets/chipmunk.png"
     },
     {
       "name": "Chocolate Bunny",
@@ -1055,7 +1107,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/chocolate-bunny.png"
     },
     {
       "name": "Christmas Gorilla",
@@ -1067,7 +1120,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Christmas Gorilla is a rare pet in Grow a Garden. It can be obtained from Santa's Surprise Present."
+      "secondarySummary": "Christmas Gorilla is a rare pet in Grow a Garden. It can be obtained from Santa's Surprise Present.",
+      "image": "/Grow%20a%20Garden/Pets/christmas-gorilla.png"
     },
     {
       "name": "Chubby Chipmunk",
@@ -1079,7 +1133,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Chubby Chipmunk is a rare pet in Grow a Garden. It can be obtained from Chubby Chipmunk Event."
+      "secondarySummary": "Chubby Chipmunk is a rare pet in Grow a Garden. It can be obtained from Chubby Chipmunk Event.",
+      "image": "/Grow%20a%20Garden/Pets/chubby-chipmunk.png"
     },
     {
       "name": "Clam",
@@ -1089,7 +1144,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Clam is a uncommon pet in Grow a Garden. It can be obtained from part two of the Trader Event or obtained from a Gem Chest."
+      "secondarySummary": "Clam is a uncommon pet in Grow a Garden. It can be obtained from part two of the Trader Event or obtained from a Gem Chest.",
+      "image": "/Grow%20a%20Garden/Pets/clam.png"
     },
     {
       "name": "Cockatrice",
@@ -1107,7 +1163,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Cockatrice is a divine pet in Grow a Garden. It can be hatched from a Enchanted Egg or obtained from Fairy Event."
+      "secondarySummary": "Cockatrice is a divine pet in Grow a Garden. It can be hatched from a Enchanted Egg or obtained from Fairy Event.",
+      "image": "/Grow%20a%20Garden/Pets/cockatrice.png"
     },
     {
       "name": "Cocoa Cat",
@@ -1126,7 +1183,8 @@
           "description": "Boosts nearby fruit size while napping near the Hot Chocolate Mug cosmetic on the player's farm"
         }
       ],
-      "secondarySummary": "Cocoa Cat is a mythical pet in Grow a Garden. It can be obtained from Christmas Harvest Event, obtained from Gold Gift or obtained from Rainbow Gift."
+      "secondarySummary": "Cocoa Cat is a mythical pet in Grow a Garden. It can be obtained from Christmas Harvest Event, obtained from Gold Gift or obtained from Rainbow Gift.",
+      "image": "/Grow%20a%20Garden/Pets/cocoa-cat.png"
     },
     {
       "name": "Cooked Owl",
@@ -1149,7 +1207,8 @@
           "description": "Grants bonus experience per second to all active pets"
         }
       ],
-      "secondarySummary": "Cooked Owl is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Cooked Owl is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/cooked-owl.png"
     },
     {
       "name": "Corrupted Kitsune",
@@ -1174,7 +1233,8 @@
           "description": "Grants Corrupted Chakra and Corrupted Foxfire Chakra mutation"
         }
       ],
-      "secondarySummary": "Corrupted Kitsune is a prismatic pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Corrupted Kitsune is a prismatic pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/corrupted-kitsune.png"
     },
     {
       "name": "Corrupted Kodama",
@@ -1191,7 +1251,8 @@
           "description": "Grants Corrupted mutation"
         }
       ],
-      "secondarySummary": "Corrupted Kodama is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Corrupted Kodama is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/corrupted-kodama.png"
     },
     {
       "name": "Cow",
@@ -1216,7 +1277,8 @@
           "description": "Fertilizing aura that boosts nearby plant growth"
         }
       ],
-      "secondarySummary": "Cow is a legendary pet in Grow a Garden. It can be hatched from a legendary egg."
+      "secondarySummary": "Cow is a legendary pet in Grow a Garden. It can be hatched from a legendary egg.",
+      "image": "/Grow%20a%20Garden/Pets/cow.png"
     },
     {
       "name": "Crab",
@@ -1241,7 +1303,8 @@
           "description": "Pinches another player and grants the player some sheckles"
         }
       ],
-      "secondarySummary": "Crab is a common pet in Grow a Garden. It can be hatched from a common egg."
+      "secondarySummary": "Crab is a common pet in Grow a Garden. It can be hatched from a common egg.",
+      "image": "/Grow%20a%20Garden/Pets/crab.png"
     },
     {
       "name": "Crocodile",
@@ -1254,7 +1317,8 @@
         "Safari Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Crocodile is a mythical pet in Grow a Garden. It can be purchased from Safari Shop or obtained from Mega Safari Harvest Event."
+      "secondarySummary": "Crocodile is a mythical pet in Grow a Garden. It can be purchased from Safari Shop or obtained from Mega Safari Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/crocodile.png"
     },
     {
       "name": "Crow",
@@ -1266,7 +1330,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Crow is a common pet in Grow a Garden. It can be obtained from Halloween Event Digging Rewards."
+      "secondarySummary": "Crow is a common pet in Grow a Garden. It can be obtained from Halloween Event Digging Rewards.",
+      "image": "/Grow%20a%20Garden/Pets/crow.png"
     },
     {
       "name": "Cuckoo",
@@ -1291,7 +1356,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Cuckoo is a legendary pet in Grow a Garden. It can be hatched from a Bird Egg, hatched from a Premium Bird Egg, hatched from a Rainbow Premium Bird Egg or obtained from Hungry Birds Event."
+      "secondarySummary": "Cuckoo is a legendary pet in Grow a Garden. It can be hatched from a Bird Egg, hatched from a Premium Bird Egg, hatched from a Rainbow Premium Bird Egg or obtained from Hungry Birds Event.",
+      "image": "/Grow%20a%20Garden/Pets/cuckoo.png"
     },
     {
       "name": "Dairy Cow",
@@ -1309,7 +1375,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Dairy Cow is a common pet in Grow a Garden. It can be hatched from a Sprout Egg or obtained from Beanstalk Event."
+      "secondarySummary": "Dairy Cow is a common pet in Grow a Garden. It can be hatched from a Sprout Egg or obtained from Beanstalk Event.",
+      "image": "/Grow%20a%20Garden/Pets/dairy-cow.png"
     },
     {
       "name": "Dark Spriggan",
@@ -1321,7 +1388,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Dark Spriggan is a mythical pet in Grow a Garden. It can be purchased from Creepy Critters Shop or obtained from Halloween Event."
+      "secondarySummary": "Dark Spriggan is a mythical pet in Grow a Garden. It can be purchased from Creepy Critters Shop or obtained from Halloween Event.",
+      "image": "/Grow%20a%20Garden/Pets/dark-spriggan.png"
     },
     {
       "name": "Deer",
@@ -1346,7 +1414,8 @@
           "description": "Chance for berry fruit to remain after harvesting"
         }
       ],
-      "secondarySummary": "Deer is a uncommon pet in Grow a Garden. It can be hatched from a uncommon egg."
+      "secondarySummary": "Deer is a uncommon pet in Grow a Garden. It can be hatched from a uncommon egg.",
+      "image": "/Grow%20a%20Garden/Pets/deer.png"
     },
     {
       "name": "Diamond Panther",
@@ -1364,7 +1433,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Diamond Panther is a divine pet in Grow a Garden. It can be hatched from a Gem Egg."
+      "secondarySummary": "Diamond Panther is a divine pet in Grow a Garden. It can be hatched from a Gem Egg.",
+      "image": "/Grow%20a%20Garden/Pets/diamond-panther.png"
     },
     {
       "name": "Dilophosaurus",
@@ -1391,7 +1461,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Dilophosaurus is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Dilophosaurus is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/dilophosaurus.png"
     },
     {
       "name": "Disco Bee",
@@ -1423,7 +1494,8 @@
           "description": "Grants Disco mutation"
         }
       ],
-      "secondarySummary": "Disco Bee is a divine pet in Grow a Garden. It can be hatched from a Anti Bee Egg, hatched from a Premium Anti Bee Egg, obtained from Anti Bee Egg or obtained from Anti Bee Egg (Robux)."
+      "secondarySummary": "Disco Bee is a divine pet in Grow a Garden. It can be hatched from a Anti Bee Egg, hatched from a Premium Anti Bee Egg, obtained from Anti Bee Egg or obtained from Anti Bee Egg (Robux).",
+      "image": "/Grow%20a%20Garden/Pets/disco-bee.png"
     },
     {
       "name": "Dog",
@@ -1448,7 +1520,8 @@
           "description": "Occasionally digs up a random seed at a 5% chance"
         }
       ],
-      "secondarySummary": "Dog is a common pet in Grow a Garden. It can be hatched from a common egg."
+      "secondarySummary": "Dog is a common pet in Grow a Garden. It can be hatched from a common egg.",
+      "image": "/Grow%20a%20Garden/Pets/dog.png"
     },
     {
       "name": "Dragonfly",
@@ -1480,7 +1553,8 @@
           "description": "Grants Gold mutation"
         }
       ],
-      "secondarySummary": "Dragonfly is a divine pet in Grow a Garden. It can be hatched from a Bug Egg or hatched from a Exotic Bug Egg."
+      "secondarySummary": "Dragonfly is a divine pet in Grow a Garden. It can be hatched from a Bug Egg or hatched from a Exotic Bug Egg.",
+      "image": "/Grow%20a%20Garden/Pets/dragonfly.png"
     },
     {
       "name": "Drake",
@@ -1490,7 +1564,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Drake is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Drake is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/drake.png"
     },
     {
       "name": "Easter Bunny",
@@ -1515,7 +1590,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Easter Bunny is a pet in Grow a Garden. It can be hatched from a Golden Egg."
+      "secondarySummary": "Easter Bunny is a pet in Grow a Garden. It can be hatched from a Golden Egg.",
+      "image": "/Grow%20a%20Garden/Pets/easter-bunny.png"
     },
     {
       "name": "Easter Egg Chick",
@@ -1540,7 +1616,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Easter Egg Chick is a rare pet in Grow a Garden. It can be hatched from a Golden Egg."
+      "secondarySummary": "Easter Egg Chick is a rare pet in Grow a Garden. It can be hatched from a Golden Egg.",
+      "image": "/Grow%20a%20Garden/Pets/easter-egg-chick.png"
     },
     {
       "name": "Echo Frog",
@@ -1572,7 +1649,8 @@
           "description": "Occasionally advances nearby plant’s growth by 24 hours"
         }
       ],
-      "secondarySummary": "Echo Frog is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Echo Frog is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/echo-frog.png"
     },
     {
       "name": "Eggnog Chick",
@@ -1584,7 +1662,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Eggnog Chick is a mythical pet in Grow a Garden. It can be obtained from Mythical Gift, obtained from Gold Gift, obtained from Christmas Harvest Event or obtained from Gifts."
+      "secondarySummary": "Eggnog Chick is a mythical pet in Grow a Garden. It can be obtained from Mythical Gift, obtained from Gold Gift, obtained from Christmas Harvest Event or obtained from Gifts.",
+      "image": "/Grow%20a%20Garden/Pets/eggnog-chick.png"
     },
     {
       "name": "Elephant",
@@ -1616,7 +1695,8 @@
           "description": "Occasionally resets a pet's age back to 1 but increases its base weight by 0.1KG with a certain age requirement and a base weight cap"
         }
       ],
-      "secondarySummary": "Elephant is a divine pet in Grow a Garden. It can be hatched from a Safari Egg or obtained from Safari Harvest Event."
+      "secondarySummary": "Elephant is a divine pet in Grow a Garden. It can be hatched from a Safari Egg or obtained from Safari Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/elephant.png"
     },
     {
       "name": "Elk",
@@ -1626,7 +1706,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Elk is a uncommon pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Elk is a uncommon pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/elk.png"
     },
     {
       "name": "Emerald Snake",
@@ -1644,7 +1725,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Emerald Snake is a legendary pet in Grow a Garden. It can be hatched from a Gem Egg."
+      "secondarySummary": "Emerald Snake is a legendary pet in Grow a Garden. It can be hatched from a Gem Egg.",
+      "image": "/Grow%20a%20Garden/Pets/emerald-snake.png"
     },
     {
       "name": "Farmer Chipmunk",
@@ -1654,7 +1736,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Farmer Chipmunk is a uncommon pet in Grow a Garden. It can be obtained from a Nutty Chest, obtained from a Exotic Nutty Chest or obtained from Rainbow Sack."
+      "secondarySummary": "Farmer Chipmunk is a uncommon pet in Grow a Garden. It can be obtained from a Nutty Chest, obtained from a Exotic Nutty Chest or obtained from Rainbow Sack.",
+      "image": "/Grow%20a%20Garden/Pets/farmer-chipmunk.png"
     },
     {
       "name": "Fennec Fox",
@@ -1692,7 +1775,8 @@
           "description": "Copies a mutation from another player's fruit and applies it to a random fruit in the owner's plot"
         }
       ],
-      "secondarySummary": "Fennec Fox is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Fennec Fox is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/fennec-fox.png"
     },
     {
       "name": "Festive Frost Squirrel",
@@ -1710,7 +1794,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-frost-squirrel.png"
     },
     {
       "name": "Festive Ice Golem",
@@ -1728,7 +1813,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-ice-golem.png"
     },
     {
       "name": "Festive Moose",
@@ -1746,7 +1832,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-moose.png"
     },
     {
       "name": "Festive Nutcracker",
@@ -1764,7 +1851,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-nutcracker.png"
     },
     {
       "name": "Festive Partridge",
@@ -1782,7 +1870,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-partridge.png"
     },
     {
       "name": "Festive Premium Christmas Egg",
@@ -1800,7 +1889,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-premium-christmas-egg.png"
     },
     {
       "name": "Festive Premium Winter Egg",
@@ -1818,7 +1908,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-premium-winter-egg.png"
     },
     {
       "name": "Festive Reindeer",
@@ -1836,7 +1927,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-reindeer.png"
     },
     {
       "name": "Festive Santa Bear",
@@ -1854,7 +1946,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-santa-bear.png"
     },
     {
       "name": "Festive Turtle Dove",
@@ -1872,7 +1965,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-turtle-dove.png"
     },
     {
       "name": "Festive Wendigo",
@@ -1890,7 +1984,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-wendigo.png"
     },
     {
       "name": "Festive Yeti",
@@ -1908,7 +2003,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/festive-yeti.png"
     },
     {
       "name": "Firefly",
@@ -1918,7 +2014,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Firefly is a mythical pet in Grow a Garden. It can be obtained from Manually given via commands in the test server. or obtained from Season Pass."
+      "secondarySummary": "Firefly is a mythical pet in Grow a Garden. It can be obtained from Manually given via commands in the test server. or obtained from Season Pass.",
+      "image": "/Grow%20a%20Garden/Pets/firefly.png"
     },
     {
       "name": "Firemite",
@@ -1928,7 +2025,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Firemite is a rare pet in Grow a Garden. It can be obtained from Season Pass."
+      "secondarySummary": "Firemite is a rare pet in Grow a Garden. It can be obtained from Season Pass.",
+      "image": "/Grow%20a%20Garden/Pets/firemite.png"
     },
     {
       "name": "Firework Sprite",
@@ -1953,7 +2051,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Firework Sprite is a rare pet in Grow a Garden. It can be hatched from a New Year's Egg or obtained from New Year's Event."
+      "secondarySummary": "Firework Sprite is a rare pet in Grow a Garden. It can be hatched from a New Year's Egg or obtained from New Year's Event.",
+      "image": "/Grow%20a%20Garden/Pets/firework-sprite.png"
     },
     {
       "name": "Flamingo",
@@ -1971,7 +2070,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Flamingo is a rare pet in Grow a Garden. It can be hatched from a rare egg or obtained from Rare Summer Egg."
+      "secondarySummary": "Flamingo is a rare pet in Grow a Garden. It can be hatched from a rare egg or obtained from Rare Summer Egg.",
+      "image": "/Grow%20a%20Garden/Pets/flamingo.png"
     },
     {
       "name": "Football",
@@ -1988,7 +2088,8 @@
           "description": "Awards the player with 870 sheckles or 20.4% for a Watering Can instead"
         }
       ],
-      "secondarySummary": "Football is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Football is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/football.png"
     },
     {
       "name": "Fortune Squirrel",
@@ -1998,7 +2099,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Fortune Squirrel is a legendary pet in Grow a Garden. It can be obtained from Chubby Chipmunk Event - Growing Rewards (Reaching 46.43 kg on the Chubby Chipmunk)."
+      "secondarySummary": "Fortune Squirrel is a legendary pet in Grow a Garden. It can be obtained from Chubby Chipmunk Event - Growing Rewards (Reaching 46.43 kg on the Chubby Chipmunk).",
+      "image": "/Grow%20a%20Garden/Pets/fortune-squirrel.png"
     },
     {
       "name": "French Fry Ferret",
@@ -2025,7 +2127,8 @@
           "description": "Increases a random pet's level by 1"
         }
       ],
-      "secondarySummary": "French Fry Ferret is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "French Fry Ferret is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/french-fry-ferret.png"
     },
     {
       "name": "French Hen",
@@ -2037,7 +2140,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "French Hen is a uncommon pet in Grow a Garden. It can be obtained from Santa's Surprise Present."
+      "secondarySummary": "French Hen is a uncommon pet in Grow a Garden. It can be obtained from Santa's Surprise Present.",
+      "image": "/Grow%20a%20Garden/Pets/french-hen.png"
     },
     {
       "name": "Frog",
@@ -2069,7 +2173,8 @@
           "description": "Occasionally advances nearby plant’s growth by 24 hours"
         }
       ],
-      "secondarySummary": "Frog is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Frog is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/frog.png"
     },
     {
       "name": "Frost Dragon",
@@ -2081,7 +2186,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Frost Dragon is a divine pet in Grow a Garden. It can be obtained from Season Pass/Season 3 by reaching Level 47."
+      "secondarySummary": "Frost Dragon is a divine pet in Grow a Garden. It can be obtained from Season Pass/Season 3 by reaching Level 47.",
+      "image": "/Grow%20a%20Garden/Pets/frost-dragon.png"
     },
     {
       "name": "Frost Squirrel",
@@ -2106,7 +2212,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/frost-squirrel.png"
     },
     {
       "name": "Galah Cockatoo",
@@ -2116,7 +2223,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Galah Cockatoo is a mythical pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie at PhatMojo."
+      "secondarySummary": "Galah Cockatoo is a mythical pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie at PhatMojo.",
+      "image": "/Grow%20a%20Garden/Pets/galah-cockatoo.png"
     },
     {
       "name": "Gecko",
@@ -2129,7 +2237,8 @@
         "Safari Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Gecko is a common pet in Grow a Garden. It can be purchased from Safari Shop after the 130B Safari Points milestone is reached."
+      "secondarySummary": "Gecko is a common pet in Grow a Garden. It can be purchased from Safari Shop after the 130B Safari Points milestone is reached.",
+      "image": "/Grow%20a%20Garden/Pets/gecko.png"
     },
     {
       "name": "Geode Turtle",
@@ -2139,7 +2248,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Geode Turtle is a rare pet in Grow a Garden. It can be obtained from Smithing Event."
+      "secondarySummary": "Geode Turtle is a rare pet in Grow a Garden. It can be obtained from Smithing Event.",
+      "image": "/Grow%20a%20Garden/Pets/geode-turtle.png"
     },
     {
       "name": "German Shepherd",
@@ -2149,7 +2259,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "German Shepherd is a legendary pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie at PhatMojo."
+      "secondarySummary": "German Shepherd is a legendary pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie at PhatMojo.",
+      "image": "/Grow%20a%20Garden/Pets/german-shepherd.png"
     },
     {
       "name": "Ghost Bear",
@@ -2161,7 +2272,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Ghost Bear is a rare pet in Grow a Garden. It can be purchased from Creepy Critters Shop."
+      "secondarySummary": "Ghost Bear is a rare pet in Grow a Garden. It can be purchased from Creepy Critters Shop.",
+      "image": "/Grow%20a%20Garden/Pets/ghost-bear.png"
     },
     {
       "name": "Ghostly Bat",
@@ -2179,7 +2291,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/ghostly-bat.png"
     },
     {
       "name": "Ghostly Black Cat",
@@ -2197,7 +2310,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/ghostly-black-cat.png"
     },
     {
       "name": "Ghostly Bone Dog",
@@ -2215,7 +2329,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/ghostly-bone-dog.png"
     },
     {
       "name": "Ghostly Headless Horseman",
@@ -2233,7 +2348,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/ghostly-headless-horseman.png"
     },
     {
       "name": "Ghostly Mummy",
@@ -2250,7 +2366,8 @@
           "description": "As long as players have a Sarcophagus in their Garden: Pets players get from Chests have a chance to get extra base weight"
         }
       ],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/ghostly-mummy.png"
     },
     {
       "name": "Ghostly Premium Spooky Egg",
@@ -2268,7 +2385,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/ghostly-premium-spooky-egg.png"
     },
     {
       "name": "Ghostly Spider",
@@ -2286,7 +2404,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/ghostly-spider.png"
     },
     {
       "name": "Giant Ant",
@@ -2324,7 +2443,8 @@
           "description": "Increased chance to duplicate candy-type plants"
         }
       ],
-      "secondarySummary": "Giant Ant is a mythical pet in Grow a Garden. It can be hatched from a Bug Egg or hatched from a Exotic Bug Egg."
+      "secondarySummary": "Giant Ant is a mythical pet in Grow a Garden. It can be hatched from a Bug Egg or hatched from a Exotic Bug Egg.",
+      "image": "/Grow%20a%20Garden/Pets/giant-ant.png"
     },
     {
       "name": "GIANT Badger",
@@ -2342,7 +2462,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/giant-badger.png"
     },
     {
       "name": "GIANT Barn Owl",
@@ -2367,7 +2488,8 @@
           "description": "Pets bought from shops directly have a chance to get an extra base weight"
         }
       ],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/giant-barn-owl.png"
     },
     {
       "name": "GIANT Grizzly Bear",
@@ -2385,7 +2507,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/giant-grizzly-bear.png"
     },
     {
       "name": "GIANT Premium Fall Egg",
@@ -2403,7 +2526,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/giant-premium-fall-egg.png"
     },
     {
       "name": "GIANT Robin",
@@ -2421,7 +2545,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/giant-robin.png"
     },
     {
       "name": "GIANT Swan",
@@ -2439,7 +2564,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/giant-swan.png"
     },
     {
       "name": "Gift Rat",
@@ -2451,7 +2577,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Gift Rat is a rare pet in Grow a Garden. It can be purchased from Santa's Stash Shop."
+      "secondarySummary": "Gift Rat is a rare pet in Grow a Garden. It can be purchased from Santa's Stash Shop.",
+      "image": "/Grow%20a%20Garden/Pets/gift-rat.png"
     },
     {
       "name": "Gilded Choc Chocolate Bunny",
@@ -2483,7 +2610,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/gilded-choc-chocolate-bunny.png"
     },
     {
       "name": "Gilded Choc Easter Bunny",
@@ -2515,7 +2643,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/gilded-choc-easter-bunny.png"
     },
     {
       "name": "Gilded Choc Easter Egg Chick",
@@ -2547,7 +2676,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/gilded-choc-easter-egg-chick.png"
     },
     {
       "name": "Gilded Choc Jerboa",
@@ -2565,7 +2695,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/gilded-choc-jerboa.png"
     },
     {
       "name": "Gilded Choc Marshmallow Lamb",
@@ -2597,7 +2728,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/gilded-choc-marshmallow-lamb.png"
     },
     {
       "name": "Gilded Choc Nyala",
@@ -2615,7 +2747,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/gilded-choc-nyala.png"
     },
     {
       "name": "Gilded Choc Peryton",
@@ -2633,7 +2766,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/gilded-choc-peryton.png"
     },
     {
       "name": "Gilded Choc Spring Bee",
@@ -2651,7 +2785,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/gilded-choc-spring-bee.png"
     },
     {
       "name": "Giraffe",
@@ -2676,7 +2811,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Giraffe is a legendary pet in Grow a Garden. It can be hatched from a Safari Egg or obtained from Safari Harvest Event."
+      "secondarySummary": "Giraffe is a legendary pet in Grow a Garden. It can be hatched from a Safari Egg or obtained from Safari Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/giraffe.png"
     },
     {
       "name": "Glimmering Sprite",
@@ -2694,7 +2830,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Glimmering Sprite is a mythical pet in Grow a Garden. It can be hatched from a Enchanted Egg or obtained from Fairy Event."
+      "secondarySummary": "Glimmering Sprite is a mythical pet in Grow a Garden. It can be hatched from a Enchanted Egg or obtained from Fairy Event.",
+      "image": "/Grow%20a%20Garden/Pets/glimmering-sprite.png"
     },
     {
       "name": "Gnome",
@@ -2707,7 +2844,8 @@
         "Gnome Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Gnome is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Gnome is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/gnome.png"
     },
     {
       "name": "Goat",
@@ -2719,7 +2857,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Goat is a uncommon pet in Grow a Garden. It can be purchased from Creepy Critters Shop."
+      "secondarySummary": "Goat is a uncommon pet in Grow a Garden. It can be purchased from Creepy Critters Shop.",
+      "image": "/Grow%20a%20Garden/Pets/goat.png"
     },
     {
       "name": "Goblin",
@@ -2729,7 +2868,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Goblin is a rare pet in Grow a Garden. It can be obtained from Halloween Event: Digging Rewards."
+      "secondarySummary": "Goblin is a rare pet in Grow a Garden. It can be obtained from Halloween Event: Digging Rewards.",
+      "image": "/Grow%20a%20Garden/Pets/goblin.png"
     },
     {
       "name": "Goblin Gardener",
@@ -2739,7 +2879,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Goblin Gardener is a mythical pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie from PhatMojo."
+      "secondarySummary": "Goblin Gardener is a mythical pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie from PhatMojo.",
+      "image": "/Grow%20a%20Garden/Pets/goblin-gardener.png"
     },
     {
       "name": "Goblin Miner",
@@ -2749,7 +2890,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Goblin Miner is a mythical pet in Grow a Garden. It can be obtained from Smithing Event (digging island)."
+      "secondarySummary": "Goblin Miner is a mythical pet in Grow a Garden. It can be obtained from Smithing Event (digging island).",
+      "image": "/Grow%20a%20Garden/Pets/goblin-miner.png"
     },
     {
       "name": "Goblin?",
@@ -2761,7 +2903,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/goblin.png"
     },
     {
       "name": "Gold Finch",
@@ -2786,7 +2929,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Gold Finch is a prismatic pet in Grow a Garden. It can be hatched from a Bird Egg, hatched from a Premium Bird Egg or hatched from a Rainbow Premium Bird Egg."
+      "secondarySummary": "Gold Finch is a prismatic pet in Grow a Garden. It can be hatched from a Bird Egg, hatched from a Premium Bird Egg or hatched from a Rainbow Premium Bird Egg.",
+      "image": "/Grow%20a%20Garden/Pets/gold-finch.png"
     },
     {
       "name": "Golden Bee",
@@ -2796,7 +2940,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Golden Bee is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Golden Bee is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/golden-bee.png"
     },
     {
       "name": "Golden Goose",
@@ -2814,7 +2959,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Golden Goose is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Golden Goose is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/golden-goose.png"
     },
     {
       "name": "Golden Lab",
@@ -2839,7 +2985,8 @@
           "description": "Occasionally digs up a random seed at a 10% chance"
         }
       ],
-      "secondarySummary": "Golden Lab is a common pet in Grow a Garden. It can be hatched from a common egg."
+      "secondarySummary": "Golden Lab is a common pet in Grow a Garden. It can be hatched from a common egg.",
+      "image": "/Grow%20a%20Garden/Pets/golden-lab.png"
     },
     {
       "name": "Golden Piggy",
@@ -2849,7 +2996,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Golden Piggy is a mythical pet in Grow a Garden. It can be obtained from Crafting."
+      "secondarySummary": "Golden Piggy is a mythical pet in Grow a Garden. It can be obtained from Crafting.",
+      "image": "/Grow%20a%20Garden/Pets/golden-piggy.png"
     },
     {
       "name": "Golem",
@@ -2867,7 +3015,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Golem is a mythical pet in Grow a Garden. It can be hatched from a Sprout Egg or obtained from Beanstalk Event Update."
+      "secondarySummary": "Golem is a mythical pet in Grow a Garden. It can be hatched from a Sprout Egg or obtained from Beanstalk Event Update.",
+      "image": "/Grow%20a%20Garden/Pets/golem.png"
     },
     {
       "name": "Gorilla Chef",
@@ -2879,7 +3028,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Gorilla Chef is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Gorilla Chef is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/gorilla-chef.png"
     },
     {
       "name": "Green Bean",
@@ -2889,7 +3039,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Green Bean is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Green Bean is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/green-bean.png"
     },
     {
       "name": "Grey Mouse",
@@ -2907,7 +3058,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Grey Mouse is a legendary pet in Grow a Garden. It can be hatched from a mythical egg."
+      "secondarySummary": "Grey Mouse is a legendary pet in Grow a Garden. It can be hatched from a mythical egg.",
+      "image": "/Grow%20a%20Garden/Pets/grey-mouse.png"
     },
     {
       "name": "Griffin",
@@ -2917,7 +3069,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Griffin is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Griffin is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/griffin.png"
     },
     {
       "name": "Grizzly Bear",
@@ -2944,7 +3097,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Grizzly Bear is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Grizzly Bear is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/grizzly-bear.png"
     },
     {
       "name": "Gummy Bear",
@@ -2954,7 +3108,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Gummy Bear is a legendary pet in Grow a Garden. It can be purchased from Easter Event Shop."
+      "secondarySummary": "Gummy Bear is a legendary pet in Grow a Garden. It can be purchased from Easter Event Shop.",
+      "image": "/Grow%20a%20Garden/Pets/gummy-bear.png"
     },
     {
       "name": "Hamster",
@@ -2971,7 +3126,8 @@
           "description": "Boosts crafting speed by a percentage for an amount of time"
         }
       ],
-      "secondarySummary": "Hamster is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Hamster is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/hamster.png"
     },
     {
       "name": "Hazehound",
@@ -2981,7 +3137,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Hazehound is a mythical pet in Grow a Garden. It can be obtained from Season Pass."
+      "secondarySummary": "Hazehound is a mythical pet in Grow a Garden. It can be obtained from Season Pass.",
+      "image": "/Grow%20a%20Garden/Pets/hazehound.png"
     },
     {
       "name": "Headless Horseman",
@@ -3015,7 +3172,8 @@
           "description": "Every ~40 minutes - has a chance to mutate a random ~40 age pet"
         }
       ],
-      "secondarySummary": "Headless Horseman is a prismatic pet in Grow a Garden. It can be hatched from a Spooky Egg or obtained from Halloween Event."
+      "secondarySummary": "Headless Horseman is a prismatic pet in Grow a Garden. It can be hatched from a Spooky Egg or obtained from Halloween Event.",
+      "image": "/Grow%20a%20Garden/Pets/headless-horseman.png"
     },
     {
       "name": "Hedgehog",
@@ -3047,7 +3205,8 @@
           "description": "Boosts size of nearby prickly fruits"
         }
       ],
-      "secondarySummary": "Hedgehog is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Hedgehog is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/hedgehog.png"
     },
     {
       "name": "Hex Serpent",
@@ -3059,7 +3218,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Hex Serpent is a divine pet in Grow a Garden. It can be obtained from Grave Digger's Treasures, obtained from Halloween Event or obtained from Digging Rewards."
+      "secondarySummary": "Hex Serpent is a divine pet in Grow a Garden. It can be obtained from Grave Digger's Treasures, obtained from Halloween Event or obtained from Digging Rewards.",
+      "image": "/Grow%20a%20Garden/Pets/hex-serpent.png"
     },
     {
       "name": "Hippo",
@@ -3072,7 +3232,8 @@
         "Safari Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Hippo is a legendary pet in Grow a Garden. It can be purchased from Safari Shop."
+      "secondarySummary": "Hippo is a legendary pet in Grow a Garden. It can be purchased from Safari Shop.",
+      "image": "/Grow%20a%20Garden/Pets/hippo.png"
     },
     {
       "name": "Honey Bee",
@@ -3097,7 +3258,8 @@
           "description": "Grants Pollinated mutation"
         }
       ],
-      "secondarySummary": "Honey Bee is a rare pet in Grow a Garden. It can be hatched from a Bee Egg or obtained from Honey Merchant."
+      "secondarySummary": "Honey Bee is a rare pet in Grow a Garden. It can be hatched from a Bee Egg or obtained from Honey Merchant.",
+      "image": "/Grow%20a%20Garden/Pets/honey-bee.png"
     },
     {
       "name": "Hootsie Roll",
@@ -3107,7 +3269,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Hootsie Roll is a mythical pet in Grow a Garden. It can be purchased from Easter Event Shop."
+      "secondarySummary": "Hootsie Roll is a mythical pet in Grow a Garden. It can be purchased from Easter Event Shop.",
+      "image": "/Grow%20a%20Garden/Pets/hootsie-roll.png"
     },
     {
       "name": "Hotdog Daschund",
@@ -3119,7 +3282,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Hotdog Daschund is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Hotdog Daschund is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/hotdog-daschund.png"
     },
     {
       "name": "Hummingbird",
@@ -3137,7 +3301,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Hummingbird is a rare pet in Grow a Garden. It can be hatched from a Jungle Egg."
+      "secondarySummary": "Hummingbird is a rare pet in Grow a Garden. It can be hatched from a Jungle Egg.",
+      "image": "/Grow%20a%20Garden/Pets/hummingbird.png"
     },
     {
       "name": "Hyacinth Macaw",
@@ -3169,7 +3334,8 @@
           "description": "Grants Cloudtouched mutation"
         }
       ],
-      "secondarySummary": "Hyacinth Macaw is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Hyacinth Macaw is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/hyacinth-macaw.png"
     },
     {
       "name": "Hydra",
@@ -3179,7 +3345,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Hydra is a divine pet in Grow a Garden. It can be obtained from Safari Harvest Event or obtained from Season 2 Pass (Tier 47)."
+      "secondarySummary": "Hydra is a divine pet in Grow a Garden. It can be obtained from Safari Harvest Event or obtained from Season 2 Pass (Tier 47).",
+      "image": "/Grow%20a%20Garden/Pets/hydra.png"
     },
     {
       "name": "Hyena",
@@ -3192,7 +3359,8 @@
         "Safari Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Hyena is a uncommon pet in Grow a Garden. It can be purchased from Safari Harvest Event Shop or obtained from Safari Harvest Event (165B Global Points milestone)."
+      "secondarySummary": "Hyena is a uncommon pet in Grow a Garden. It can be purchased from Safari Harvest Event Shop or obtained from Safari Harvest Event (165B Global Points milestone).",
+      "image": "/Grow%20a%20Garden/Pets/hyena.png"
     },
     {
       "name": "Hyrax",
@@ -3202,7 +3370,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Hyrax is a uncommon pet in Grow a Garden. It can be obtained from Chubby Chipmunk Rewards."
+      "secondarySummary": "Hyrax is a uncommon pet in Grow a Garden. It can be obtained from Chubby Chipmunk Rewards.",
+      "image": "/Grow%20a%20Garden/Pets/hyrax.png"
     },
     {
       "name": "Ice Golem",
@@ -3229,7 +3398,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Ice Golem is a prismatic pet in Grow a Garden. It can be hatched from a Christmas Egg, hatched from a Premium Christmas Egg or obtained from Christmas Harvest Event."
+      "secondarySummary": "Ice Golem is a prismatic pet in Grow a Garden. It can be hatched from a Christmas Egg, hatched from a Premium Christmas Egg or obtained from Christmas Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/ice-golem.png"
     },
     {
       "name": "Idol Chipmunk",
@@ -3239,7 +3409,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Idol Chipmunk is a legendary pet in Grow a Garden. It can be obtained from a Nutty Chest, obtained from a Exotic Nutty Chest, obtained from Rainbow Sack or obtained from Chubby Chipmunk Event."
+      "secondarySummary": "Idol Chipmunk is a legendary pet in Grow a Garden. It can be obtained from a Nutty Chest, obtained from a Exotic Nutty Chest, obtained from Rainbow Sack or obtained from Chubby Chipmunk Event.",
+      "image": "/Grow%20a%20Garden/Pets/idol-chipmunk.png"
     },
     {
       "name": "Iguana",
@@ -3257,7 +3428,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Iguana is a legendary pet in Grow a Garden. It can be hatched from a Jungle Egg."
+      "secondarySummary": "Iguana is a legendary pet in Grow a Garden. It can be hatched from a Jungle Egg.",
+      "image": "/Grow%20a%20Garden/Pets/iguana.png"
     },
     {
       "name": "Iguanodon",
@@ -3291,7 +3463,8 @@
           "description": "Grants bonus experience per second to all active Dinosaur-type pets"
         }
       ],
-      "secondarySummary": "Iguanodon is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Iguanodon is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/iguanodon.png"
     },
     {
       "name": "Imp",
@@ -3309,7 +3482,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Imp is a legendary pet in Grow a Garden. It can be hatched from a Enchanted Egg or obtained from Fairy Event."
+      "secondarySummary": "Imp is a legendary pet in Grow a Garden. It can be hatched from a Enchanted Egg or obtained from Fairy Event.",
+      "image": "/Grow%20a%20Garden/Pets/imp.png"
     },
     {
       "name": "Jackalope",
@@ -3327,7 +3501,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Jackalope is a uncommon pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Jackalope is a uncommon pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/jackalope.png"
     },
     {
       "name": "Jerboa",
@@ -3352,7 +3527,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/jerboa.png"
     },
     {
       "name": "Junkbot",
@@ -3369,7 +3545,8 @@
           "description": "Grants Oil mutation"
         }
       ],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/junkbot.png"
     },
     {
       "name": "Kappa",
@@ -3394,7 +3571,8 @@
           "description": "Grants Wet and Bloodlit mutations"
         }
       ],
-      "secondarySummary": "Kappa is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Kappa is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/kappa.png"
     },
     {
       "name": "Kitsune",
@@ -3419,7 +3597,8 @@
           "description": "Every ~22 Minutes, goes to another player's fruit, mutates it with Chakra and duplicates and gives it to the player. There’s a very rare chance to mutate with Foxfire Chakra instead."
         }
       ],
-      "secondarySummary": "Kitsune is a prismatic pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Kitsune is a prismatic pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/kitsune.png"
     },
     {
       "name": "Kitsune (Pet)",
@@ -3436,7 +3615,8 @@
           "description": "Grants Chakra and Foxfire Chakra mutation"
         }
       ],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/kitsune-pet.png"
     },
     {
       "name": "Kiwi",
@@ -3455,7 +3635,8 @@
           "description": "Occasionally reduces hatch time of the egg with the most time left"
         }
       ],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/kiwi.png"
     },
     {
       "name": "Kiwi (Pet)",
@@ -3465,7 +3646,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Kiwi (Pet) is a rare pet in Grow a Garden. It can be obtained from Lunar Glow Event."
+      "secondarySummary": "Kiwi (Pet) is a rare pet in Grow a Garden. It can be obtained from Lunar Glow Event.",
+      "image": "/Grow%20a%20Garden/Pets/kiwi-pet.png"
     },
     {
       "name": "Kodama",
@@ -3490,7 +3672,8 @@
           "description": "Grants Tranquil mutation"
         }
       ],
-      "secondarySummary": "Kodama is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Kodama is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/kodama.png"
     },
     {
       "name": "Koi",
@@ -3507,7 +3690,8 @@
           "description": "Grants a chance to recover an egg when hatching!"
         }
       ],
-      "secondarySummary": "Koi is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Koi is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/koi.png"
     },
     {
       "name": "Krampus",
@@ -3519,7 +3703,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Krampus is a divine pet in Grow a Garden. It can be obtained from Santa's Surprise Present."
+      "secondarySummary": "Krampus is a divine pet in Grow a Garden. It can be obtained from Santa's Surprise Present.",
+      "image": "/Grow%20a%20Garden/Pets/krampus.png"
     },
     {
       "name": "Ladybug",
@@ -3537,7 +3722,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Ladybug is a common pet in Grow a Garden. It can be hatched from a Enchanted Egg or obtained from Fairy Event."
+      "secondarySummary": "Ladybug is a common pet in Grow a Garden. It can be hatched from a Enchanted Egg or obtained from Fairy Event.",
+      "image": "/Grow%20a%20Garden/Pets/ladybug.png"
     },
     {
       "name": "Lemon Lion",
@@ -3547,7 +3733,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Lemon Lion is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Lemon Lion is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/lemon-lion.png"
     },
     {
       "name": "Lich",
@@ -3570,7 +3757,8 @@
         "Halloween Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Lich is a divine pet in Grow a Garden. It can be obtained from Lich Crystal."
+      "secondarySummary": "Lich is a divine pet in Grow a Garden. It can be obtained from Lich Crystal.",
+      "image": "/Grow%20a%20Garden/Pets/lich.png"
     },
     {
       "name": "Lion",
@@ -3583,7 +3771,8 @@
         "Safari Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Lion is a divine pet in Grow a Garden. It can be purchased from Safari Shop or obtained from Mega Safari Harvest Event."
+      "secondarySummary": "Lion is a divine pet in Grow a Garden. It can be purchased from Safari Shop or obtained from Mega Safari Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/lion.png"
     },
     {
       "name": "Lobster Thermidor",
@@ -3602,7 +3791,8 @@
           "description": "Grants Molten and Meteoric mutation"
         }
       ],
-      "secondarySummary": "Lobster Thermidor is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Lobster Thermidor is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/lobster-thermidor.png"
     },
     {
       "name": "Luminous Sprite",
@@ -3619,7 +3809,8 @@
           "description": "Grants Luminous mutation"
         }
       ],
-      "secondarySummary": "Luminous Sprite is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Luminous Sprite is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/luminous-sprite.png"
     },
     {
       "name": "Magpie",
@@ -3629,7 +3820,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Magpie is a legendary pet in Grow a Garden. It can be obtained from a Gem Chest, obtained from a Exotic Gem Chest or obtained from Trader Event."
+      "secondarySummary": "Magpie is a legendary pet in Grow a Garden. It can be obtained from a Gem Chest, obtained from a Exotic Gem Chest or obtained from Trader Event.",
+      "image": "/Grow%20a%20Garden/Pets/magpie.png"
     },
     {
       "name": "Mallard",
@@ -3639,7 +3831,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Mallard is a legendary pet in Grow a Garden. It can be purchased from Fall Pet Shop."
+      "secondarySummary": "Mallard is a legendary pet in Grow a Garden. It can be purchased from Fall Pet Shop.",
+      "image": "/Grow%20a%20Garden/Pets/mallard.png"
     },
     {
       "name": "Mandrake",
@@ -3649,7 +3842,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/mandrake.png"
     },
     {
       "name": "Mandrake (Pet)",
@@ -3659,7 +3853,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Mandrake (Pet) is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Mandrake (Pet) is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/mandrake-pet.png"
     },
     {
       "name": "Maneki-neko",
@@ -3677,7 +3872,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Maneki-neko is a uncommon pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Maneki-neko is a uncommon pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/maneki-neko.png"
     },
     {
       "name": "Mantis Shrimp",
@@ -3687,7 +3883,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Mantis Shrimp is a mythical pet in Grow a Garden. It can be obtained from Season Pass 2 Rewards."
+      "secondarySummary": "Mantis Shrimp is a mythical pet in Grow a Garden. It can be obtained from Season Pass 2 Rewards.",
+      "image": "/Grow%20a%20Garden/Pets/mantis-shrimp.png"
     },
     {
       "name": "Marmot",
@@ -3697,7 +3894,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Marmot is a legendary pet in Grow a Garden. It can be purchased from Fall Pet Shop or obtained from Fall Market Event."
+      "secondarySummary": "Marmot is a legendary pet in Grow a Garden. It can be purchased from Fall Pet Shop or obtained from Fall Market Event.",
+      "image": "/Grow%20a%20Garden/Pets/marmot.png"
     },
     {
       "name": "Marshmallow Lamb",
@@ -3722,7 +3920,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Marshmallow Lamb is a legendary pet in Grow a Garden. It can be hatched from a Golden Egg."
+      "secondarySummary": "Marshmallow Lamb is a legendary pet in Grow a Garden. It can be hatched from a Golden Egg.",
+      "image": "/Grow%20a%20Garden/Pets/marshmallow-lamb.png"
     },
     {
       "name": "Meerkat",
@@ -3747,7 +3946,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Meerkat is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Meerkat is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/meerkat.png"
     },
     {
       "name": "Messenger Pigeon",
@@ -3757,7 +3957,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Messenger Pigeon is a rare pet in Grow a Garden. It can be obtained from Trader Event or obtained from Trader Troy Rewards."
+      "secondarySummary": "Messenger Pigeon is a rare pet in Grow a Garden. It can be obtained from Trader Event or obtained from Trader Troy Rewards.",
+      "image": "/Grow%20a%20Garden/Pets/messenger-pigeon.png"
     },
     {
       "name": "Mimic Octopus",
@@ -3782,7 +3983,8 @@
           "description": "Copies the ability of another pet"
         }
       ],
-      "secondarySummary": "Mimic Octopus is a mythical pet in Grow a Garden. It can be hatched from a paradise egg or obtained from Summer Merchant."
+      "secondarySummary": "Mimic Octopus is a mythical pet in Grow a Garden. It can be hatched from a paradise egg or obtained from Summer Merchant.",
+      "image": "/Grow%20a%20Garden/Pets/mimic-octopus.png"
     },
     {
       "name": "Mistletoad",
@@ -3794,7 +3996,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Mistletoad is a mythical pet in Grow a Garden. It can be obtained from Santa's Surprise Present."
+      "secondarySummary": "Mistletoad is a mythical pet in Grow a Garden. It can be obtained from Santa's Surprise Present.",
+      "image": "/Grow%20a%20Garden/Pets/mistletoad.png"
     },
     {
       "name": "Mizuchi",
@@ -3812,7 +4015,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Mizuchi is a divine pet in Grow a Garden. It can be hatched from a Corrupted Zen Egg or obtained from Season Pass."
+      "secondarySummary": "Mizuchi is a divine pet in Grow a Garden. It can be hatched from a Corrupted Zen Egg or obtained from Season Pass.",
+      "image": "/Grow%20a%20Garden/Pets/mizuchi.png"
     },
     {
       "name": "Mochi Mouse",
@@ -3824,7 +4028,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Mochi Mouse is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Mochi Mouse is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/mochi-mouse.png"
     },
     {
       "name": "Mole",
@@ -3856,7 +4061,8 @@
           "description": "Digs to find gear or Sheckles"
         }
       ],
-      "secondarySummary": "Mole is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Mole is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/mole.png"
     },
     {
       "name": "Monkey",
@@ -3881,7 +4087,8 @@
           "description": "Chance to get fruit back when selling"
         }
       ],
-      "secondarySummary": "Monkey is a rare pet in Grow a Garden. It can be hatched from a rare egg."
+      "secondarySummary": "Monkey is a rare pet in Grow a Garden. It can be hatched from a rare egg.",
+      "image": "/Grow%20a%20Garden/Pets/monkey.png"
     },
     {
       "name": "Moon Cat",
@@ -3904,7 +4111,8 @@
           "description": "Night crops may replant when harvested"
         }
       ],
-      "secondarySummary": "Moon Cat is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Moon Cat is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/moon-cat.png"
     },
     {
       "name": "Moose",
@@ -3929,7 +4137,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/moose.png"
     },
     {
       "name": "Moth",
@@ -3961,7 +4170,8 @@
           "description": "Restores hunger of a random pet"
         }
       ],
-      "secondarySummary": "Moth is a legendary pet in Grow a Garden. It can be hatched from a Anti Bee Egg, obtained from Premium Anti Bee Egg, purchased from Limited Time Shop or obtained from Bizzy Bee Event."
+      "secondarySummary": "Moth is a legendary pet in Grow a Garden. It can be hatched from a Anti Bee Egg, obtained from Premium Anti Bee Egg, purchased from Limited Time Shop or obtained from Bizzy Bee Event.",
+      "image": "/Grow%20a%20Garden/Pets/moth.png"
     },
     {
       "name": "Mummy",
@@ -3980,7 +4190,8 @@
           "description": "As long as players have a Sarcophagus in their Garden: Pets players get from Chests have a chance to get extra base weight"
         }
       ],
-      "secondarySummary": "Mummy is a divine pet in Grow a Garden. It can be obtained from a Spooky Chest or obtained from a Exotic Spooky Chest."
+      "secondarySummary": "Mummy is a divine pet in Grow a Garden. It can be obtained from a Spooky Chest or obtained from a Exotic Spooky Chest.",
+      "image": "/Grow%20a%20Garden/Pets/mummy.png"
     },
     {
       "name": "New Year's Bird",
@@ -4005,7 +4216,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "New Year's Bird is a uncommon pet in Grow a Garden. It can be hatched from a New Year's Egg or obtained from New Year's Event."
+      "secondarySummary": "New Year's Bird is a uncommon pet in Grow a Garden. It can be hatched from a New Year's Egg or obtained from New Year's Event.",
+      "image": "/Grow%20a%20Garden/Pets/new-year-s-bird.png"
     },
     {
       "name": "New Year's Chimp",
@@ -4030,7 +4242,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "New Year's Chimp is a mythical pet in Grow a Garden. It can be hatched from a New Year's Egg or obtained from New Year's Event."
+      "secondarySummary": "New Year's Chimp is a mythical pet in Grow a Garden. It can be hatched from a New Year's Egg or obtained from New Year's Event.",
+      "image": "/Grow%20a%20Garden/Pets/new-year-s-chimp.png"
     },
     {
       "name": "New Year's Dragon",
@@ -4055,7 +4268,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "New Year's Dragon is a prismatic pet in Grow a Garden. It can be hatched from a New Year's Egg, hatched from a Premium New Year's Egg or purchased from Limited Time Shop."
+      "secondarySummary": "New Year's Dragon is a prismatic pet in Grow a Garden. It can be hatched from a New Year's Egg, hatched from a Premium New Year's Egg or purchased from Limited Time Shop.",
+      "image": "/Grow%20a%20Garden/Pets/new-year-s-dragon.png"
     },
     {
       "name": "Night Owl",
@@ -4087,7 +4301,8 @@
           "description": "Grants bonus experience per second to all active pets"
         }
       ],
-      "secondarySummary": "Night Owl is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Night Owl is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/night-owl.png"
     },
     {
       "name": "Nihonzaru",
@@ -4105,7 +4320,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Nihonzaru is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Nihonzaru is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/nihonzaru.png"
     },
     {
       "name": "Nutcracker",
@@ -4132,7 +4348,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Nutcracker is a mythical pet in Grow a Garden. It can be hatched from a Christmas Egg, hatched from a Premium Christmas Egg or obtained from Christmas Harvest Event."
+      "secondarySummary": "Nutcracker is a mythical pet in Grow a Garden. It can be hatched from a Christmas Egg, hatched from a Premium Christmas Egg or obtained from Christmas Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/nutcracker.png"
     },
     {
       "name": "Nyala",
@@ -4157,7 +4374,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/nyala.png"
     },
     {
       "name": "Orange Tabby",
@@ -4182,7 +4400,8 @@
           "description": "Boosts nearby fruit size while napping randomly on the player's farm"
         }
       ],
-      "secondarySummary": "Orange Tabby is a rare pet in Grow a Garden. It can be hatched from a rare egg."
+      "secondarySummary": "Orange Tabby is a rare pet in Grow a Garden. It can be hatched from a rare egg.",
+      "image": "/Grow%20a%20Garden/Pets/orange-tabby.png"
     },
     {
       "name": "Orangutan",
@@ -4207,7 +4426,8 @@
           "description": "Each material used in crafting has a chance not to be consumed"
         }
       ],
-      "secondarySummary": "Orangutan is a rare pet in Grow a Garden. It can be hatched from a rare egg."
+      "secondarySummary": "Orangutan is a rare pet in Grow a Garden. It can be hatched from a rare egg.",
+      "image": "/Grow%20a%20Garden/Pets/orangutan.png"
     },
     {
       "name": "Orchid Mantis",
@@ -4217,7 +4437,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Orchid Mantis is a divine pet in Grow a Garden. It can be obtained from Evil Bunny Rewards."
+      "secondarySummary": "Orchid Mantis is a divine pet in Grow a Garden. It can be obtained from Evil Bunny Rewards.",
+      "image": "/Grow%20a%20Garden/Pets/orchid-mantis.png"
     },
     {
       "name": "Ostrich",
@@ -4248,7 +4469,8 @@
           "description": "Pets hatched from eggs start with increased age"
         }
       ],
-      "secondarySummary": "Ostrich is a legendary pet in Grow a Garden. It can be hatched from a paradise egg."
+      "secondarySummary": "Ostrich is a legendary pet in Grow a Garden. It can be hatched from a paradise egg.",
+      "image": "/Grow%20a%20Garden/Pets/ostrich.png"
     },
     {
       "name": "Owl",
@@ -4265,7 +4487,8 @@
           "description": "Grants bonus experience per second to all active pets"
         }
       ],
-      "secondarySummary": "Owl is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Owl is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/owl.png"
     },
     {
       "name": "Oxpecker",
@@ -4290,7 +4513,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Oxpecker is a common pet in Grow a Garden. It can be hatched from a Safari Egg or obtained from Safari Harvest Event."
+      "secondarySummary": "Oxpecker is a common pet in Grow a Garden. It can be hatched from a Safari Egg or obtained from Safari Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/oxpecker.png"
     },
     {
       "name": "Pachycephalosaurus",
@@ -4317,7 +4541,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Pachycephalosaurus is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Pachycephalosaurus is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/pachycephalosaurus.png"
     },
     {
       "name": "Pack Bee",
@@ -4337,7 +4562,8 @@
           "description": "Grants Pollinated mutation"
         }
       ],
-      "secondarySummary": "Pack Bee is a mythical pet in Grow a Garden. It can be obtained from Anti Bee Egg, Sunflower, Purple Dahlia, Honey 250 or obtained from Robux."
+      "secondarySummary": "Pack Bee is a mythical pet in Grow a Garden. It can be obtained from Anti Bee Egg, Sunflower, Purple Dahlia, Honey 250 or obtained from Robux.",
+      "image": "/Grow%20a%20Garden/Pets/pack-bee.png"
     },
     {
       "name": "Pack Mule",
@@ -4354,7 +4580,8 @@
           "description": "Pets obtained from crafting have a chance to get extra base weight"
         }
       ],
-      "secondarySummary": "Pack Mule is a mythical pet in Grow a Garden. It can be obtained from Trader Rewards (Streak 8), obtained from Trader Rewards (Streak 9), obtained from Trader Rewards (Streak 10), obtained from Trader Rewards (Streak 11) or obtained from Trader Rewards (Streak 12+)."
+      "secondarySummary": "Pack Mule is a mythical pet in Grow a Garden. It can be obtained from Trader Rewards (Streak 8), obtained from Trader Rewards (Streak 9), obtained from Trader Rewards (Streak 10), obtained from Trader Rewards (Streak 11) or obtained from Trader Rewards (Streak 12+).",
+      "image": "/Grow%20a%20Garden/Pets/pack-mule.png"
     },
     {
       "name": "Pancake Mole",
@@ -4374,7 +4601,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Pancake Mole is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Pancake Mole is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/pancake-mole.png"
     },
     {
       "name": "Panda",
@@ -4394,7 +4622,8 @@
           "description": "Eats bamboo and grants bonus Sheckles"
         }
       ],
-      "secondarySummary": "Panda is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Panda is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/panda.png"
     },
     {
       "name": "Parasaurolophus",
@@ -4421,7 +4650,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Parasaurolophus is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Parasaurolophus is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/parasaurolophus.png"
     },
     {
       "name": "Partridge",
@@ -4446,7 +4676,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/partridge.png"
     },
     {
       "name": "Peach Wasp",
@@ -4456,7 +4687,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Peach Wasp is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Peach Wasp is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/peach-wasp.png"
     },
     {
       "name": "Peacock",
@@ -4474,7 +4706,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Peacock is a legendary pet in Grow a Garden. It can be hatched from a paradise egg."
+      "secondarySummary": "Peacock is a legendary pet in Grow a Garden. It can be hatched from a paradise egg.",
+      "image": "/Grow%20a%20Garden/Pets/peacock.png"
     },
     {
       "name": "Penguin",
@@ -4486,7 +4719,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Penguin is a mythical pet in Grow a Garden. It can be obtained from Santa's Stash."
+      "secondarySummary": "Penguin is a mythical pet in Grow a Garden. It can be obtained from Santa's Stash.",
+      "image": "/Grow%20a%20Garden/Pets/penguin.png"
     },
     {
       "name": "Performer Seal",
@@ -4511,7 +4745,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Performer Seal is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Performer Seal is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/performer-seal.png"
     },
     {
       "name": "Peryton",
@@ -4536,7 +4771,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/peryton.png"
     },
     {
       "name": "Petal Bee",
@@ -4561,7 +4797,8 @@
           "description": "Grants Pollinated mutation"
         }
       ],
-      "secondarySummary": "Petal Bee is a legendary pet in Grow a Garden. It can be hatched from a Bee Egg or obtained from Bizzy Bee Event."
+      "secondarySummary": "Petal Bee is a legendary pet in Grow a Garden. It can be hatched from a Bee Egg or obtained from Bizzy Bee Event.",
+      "image": "/Grow%20a%20Garden/Pets/petal-bee.png"
     },
     {
       "name": "Phoenix",
@@ -4571,7 +4808,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Phoenix is a divine pet in Grow a Garden. It can be obtained from a Enchanted Chest, obtained from a Exotic Enchanted Chest, obtained from Rainbow Sack or obtained from Fairy Event."
+      "secondarySummary": "Phoenix is a divine pet in Grow a Garden. It can be obtained from a Enchanted Chest, obtained from a Exotic Enchanted Chest, obtained from Rainbow Sack or obtained from Fairy Event.",
+      "image": "/Grow%20a%20Garden/Pets/phoenix.png"
     },
     {
       "name": "Pig",
@@ -4596,7 +4834,8 @@
           "description": "Temporarily boosts chance for new fruits to mutate"
         }
       ],
-      "secondarySummary": "Pig is a rare pet in Grow a Garden. It can be hatched from a rare egg."
+      "secondarySummary": "Pig is a rare pet in Grow a Garden. It can be hatched from a rare egg.",
+      "image": "/Grow%20a%20Garden/Pets/pig.png"
     },
     {
       "name": "Pine Beetle",
@@ -4608,7 +4847,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Pine Beetle is a legendary pet in Grow a Garden. It can be obtained from Rare Gift, obtained from Mythical Gift or obtained from Christmas Harvest Event."
+      "secondarySummary": "Pine Beetle is a legendary pet in Grow a Garden. It can be obtained from Rare Gift, obtained from Mythical Gift or obtained from Christmas Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/pine-beetle.png"
     },
     {
       "name": "Pink Bunny",
@@ -4618,7 +4858,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Pink Bunny is a uncommon pet in Grow a Garden. It can be obtained from a Buttercup Chest or obtained from a Exotic Buttercup Chest."
+      "secondarySummary": "Pink Bunny is a uncommon pet in Grow a Garden. It can be obtained from a Buttercup Chest or obtained from a Exotic Buttercup Chest.",
+      "image": "/Grow%20a%20Garden/Pets/pink-bunny.png"
     },
     {
       "name": "Pink Panda",
@@ -4628,7 +4869,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Pink Panda is a legendary pet in Grow a Garden. It can be obtained from Valentine's Event Prizes."
+      "secondarySummary": "Pink Panda is a legendary pet in Grow a Garden. It can be obtained from Valentine's Event Prizes.",
+      "image": "/Grow%20a%20Garden/Pets/pink-panda.png"
     },
     {
       "name": "Pixie",
@@ -4646,7 +4888,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Pixie is a rare pet in Grow a Garden. It can be hatched from a Enchanted Egg."
+      "secondarySummary": "Pixie is a rare pet in Grow a Garden. It can be hatched from a Enchanted Egg.",
+      "image": "/Grow%20a%20Garden/Pets/pixie.png"
     },
     {
       "name": "Polar Bear",
@@ -4671,7 +4914,8 @@
           "description": "Grants Chilled and Frozen mutations"
         }
       ],
-      "secondarySummary": "Polar Bear is a legendary pet in Grow a Garden. It can be hatched from a legendary egg."
+      "secondarySummary": "Polar Bear is a legendary pet in Grow a Garden. It can be hatched from a legendary egg.",
+      "image": "/Grow%20a%20Garden/Pets/polar-bear.png"
     },
     {
       "name": "Praying Mantis",
@@ -4703,7 +4947,8 @@
           "description": "Boosts variant chance nearby while praying"
         }
       ],
-      "secondarySummary": "Praying Mantis is a mythical pet in Grow a Garden. It can be hatched from a Bug Egg or hatched from a Exotic Bug Egg."
+      "secondarySummary": "Praying Mantis is a mythical pet in Grow a Garden. It can be hatched from a Bug Egg or hatched from a Exotic Bug Egg.",
+      "image": "/Grow%20a%20Garden/Pets/praying-mantis.png"
     },
     {
       "name": "Pterodactyl",
@@ -4730,7 +4975,8 @@
           "description": "Grants Windstruck and Twisted mutations"
         }
       ],
-      "secondarySummary": "Pterodactyl is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Pterodactyl is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/pterodactyl.png"
     },
     {
       "name": "Pumpkin Rat",
@@ -4742,7 +4988,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Pumpkin Rat is a common pet in Grow a Garden. It can be purchased from Creepy Critters Shop or obtained from Halloween Event."
+      "secondarySummary": "Pumpkin Rat is a common pet in Grow a Garden. It can be purchased from Creepy Critters Shop or obtained from Halloween Event.",
+      "image": "/Grow%20a%20Garden/Pets/pumpkin-rat.png"
     },
     {
       "name": "Queen Bee",
@@ -4771,7 +5018,8 @@
           "description": "Refreshes another pet's ability with the highest cooldown"
         }
       ],
-      "secondarySummary": "Queen Bee is a unknown pet in Grow a Garden. It can be hatched from a common egg."
+      "secondarySummary": "Queen Bee is a unknown pet in Grow a Garden. It can be hatched from a common egg.",
+      "image": "/Grow%20a%20Garden/Pets/queen-bee.png"
     },
     {
       "name": "Queen Bee (Pet)",
@@ -4789,7 +5037,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/queen-bee-pet.png"
     },
     {
       "name": "Raccoon",
@@ -4821,7 +5070,8 @@
           "description": "Duplicates fruit from another player's plant and gives it to the owner"
         }
       ],
-      "secondarySummary": "Raccoon is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Raccoon is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/raccoon.png"
     },
     {
       "name": "Raiju",
@@ -4852,7 +5102,8 @@
           "description": "Eats Shocked fruit, then mutates multiple fruits with Static or Shocked"
         }
       ],
-      "secondarySummary": "Raiju is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Raiju is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/raiju.png"
     },
     {
       "name": "Rainbow Ankylosaurus",
@@ -4870,7 +5121,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-ankylosaurus.png"
     },
     {
       "name": "Rainbow Bear on Bike",
@@ -4888,7 +5140,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-bear-on-bike.png"
     },
     {
       "name": "Rainbow Birb",
@@ -4906,7 +5159,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-birb.png"
     },
     {
       "name": "Rainbow Black Bird",
@@ -4924,7 +5178,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-black-bird.png"
     },
     {
       "name": "Rainbow Brown Owl",
@@ -4942,7 +5197,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-brown-owl.png"
     },
     {
       "name": "Rainbow Carnival Elephant",
@@ -4960,7 +5216,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-carnival-elephant.png"
     },
     {
       "name": "Rainbow Celebration Puppy",
@@ -4978,7 +5235,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-celebration-puppy.png"
     },
     {
       "name": "Rainbow Cuckoo",
@@ -4996,7 +5254,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-cuckoo.png"
     },
     {
       "name": "Rainbow Dilophosaurus",
@@ -5014,7 +5273,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-dilophosaurus.png"
     },
     {
       "name": "Rainbow Elephant",
@@ -5039,7 +5299,8 @@
           "description": "Occasionally resets a pet's age back to 1 but increases its base weight by 0.1KG with a certain age requirement and a base weight cap"
         }
       ],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-elephant.png"
     },
     {
       "name": "Rainbow Firework Sprite",
@@ -5057,7 +5318,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-firework-sprite.png"
     },
     {
       "name": "Rainbow Giraffe",
@@ -5075,7 +5337,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-giraffe.png"
     },
     {
       "name": "Rainbow Gold Finch",
@@ -5093,7 +5356,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-gold-finch.png"
     },
     {
       "name": "Rainbow Iguanodon",
@@ -5111,7 +5375,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-iguanodon.png"
     },
     {
       "name": "Rainbow New Year's Bird",
@@ -5129,7 +5394,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-new-year-s-bird.png"
     },
     {
       "name": "Rainbow New Year's Chimp",
@@ -5147,7 +5413,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-new-year-s-chimp.png"
     },
     {
       "name": "Rainbow New Year's Dragon",
@@ -5165,7 +5432,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-new-year-s-dragon.png"
     },
     {
       "name": "Rainbow Oxpecker",
@@ -5183,7 +5451,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-oxpecker.png"
     },
     {
       "name": "Rainbow Pachycephalosaurus",
@@ -5201,7 +5470,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-pachycephalosaurus.png"
     },
     {
       "name": "Rainbow Parasaurolophus",
@@ -5219,7 +5489,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-parasaurolophus.png"
     },
     {
       "name": "Rainbow Performer Seal",
@@ -5237,7 +5508,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-performer-seal.png"
     },
     {
       "name": "Rainbow Premium Bird Egg",
@@ -5255,7 +5527,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-premium-bird-egg.png"
     },
     {
       "name": "Rainbow Premium Carnival Egg",
@@ -5273,7 +5546,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-premium-carnival-egg.png"
     },
     {
       "name": "Rainbow Premium New Year's Egg",
@@ -5291,7 +5565,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-premium-new-year-s-egg.png"
     },
     {
       "name": "Rainbow Premium Primal Egg",
@@ -5309,7 +5584,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-premium-primal-egg.png"
     },
     {
       "name": "Rainbow Premium Safari Egg",
@@ -5327,7 +5603,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-premium-safari-egg.png"
     },
     {
       "name": "Rainbow Rhino",
@@ -5345,7 +5622,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-rhino.png"
     },
     {
       "name": "Rainbow Show Pony",
@@ -5363,7 +5641,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-show-pony.png"
     },
     {
       "name": "Rainbow Spinosaurus",
@@ -5381,7 +5660,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-spinosaurus.png"
     },
     {
       "name": "Rainbow Star Wolf",
@@ -5399,7 +5679,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-star-wolf.png"
     },
     {
       "name": "Rainbow Unicycle Monkey",
@@ -5417,7 +5698,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-unicycle-monkey.png"
     },
     {
       "name": "Rainbow Zebra",
@@ -5435,7 +5717,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/rainbow-zebra.png"
     },
     {
       "name": "Raptor",
@@ -5462,7 +5745,8 @@
           "description": "Grants Amber mutation"
         }
       ],
-      "secondarySummary": "Raptor is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Raptor is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/raptor.png"
     },
     {
       "name": "Reaper",
@@ -5474,7 +5758,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Reaper is a divine pet in Grow a Garden. It can be purchased from Creepy Critters Shop or obtained from Halloween Event."
+      "secondarySummary": "Reaper is a divine pet in Grow a Garden. It can be purchased from Creepy Critters Shop or obtained from Halloween Event.",
+      "image": "/Grow%20a%20Garden/Pets/reaper.png"
     },
     {
       "name": "Red Dragon",
@@ -5484,7 +5769,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Red Dragon is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Red Dragon is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/red-dragon.png"
     },
     {
       "name": "Red Fox",
@@ -5509,7 +5795,8 @@
           "description": "Attempts to steal a seed from another player's plant"
         }
       ],
-      "secondarySummary": "Red Fox is a divine pet in Grow a Garden. It can be hatched from a mythical egg."
+      "secondarySummary": "Red Fox is a divine pet in Grow a Garden. It can be hatched from a mythical egg.",
+      "image": "/Grow%20a%20Garden/Pets/red-fox.png"
     },
     {
       "name": "Red Giant Ant",
@@ -5527,7 +5814,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Red Giant Ant is a mythical pet in Grow a Garden. It can be hatched from a mythical egg."
+      "secondarySummary": "Red Giant Ant is a mythical pet in Grow a Garden. It can be hatched from a mythical egg.",
+      "image": "/Grow%20a%20Garden/Pets/red-giant-ant.png"
     },
     {
       "name": "Red Panda",
@@ -5540,7 +5828,8 @@
         "Fall Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Red Panda is a divine pet in Grow a Garden. It can be purchased from Fall Pet Shop or obtained from Fall Market Event."
+      "secondarySummary": "Red Panda is a divine pet in Grow a Garden. It can be purchased from Fall Pet Shop or obtained from Fall Market Event.",
+      "image": "/Grow%20a%20Garden/Pets/red-panda.png"
     },
     {
       "name": "Red Rose Fox",
@@ -5550,7 +5839,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Red Rose Fox is a divine pet in Grow a Garden. It can be obtained from Valentine's Event Prizes."
+      "secondarySummary": "Red Rose Fox is a divine pet in Grow a Garden. It can be obtained from Valentine's Event Prizes.",
+      "image": "/Grow%20a%20Garden/Pets/red-rose-fox.png"
     },
     {
       "name": "Red Squirrel",
@@ -5562,7 +5852,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Red Squirrel is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Red Squirrel is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/red-squirrel.png"
     },
     {
       "name": "Red-Nosed Reindeer",
@@ -5574,7 +5865,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Red-Nosed Reindeer is a divine pet in Grow a Garden. It can be obtained from Merging 8 level 100 Reindeer with the Sleigh or obtained from Christmas Harvest Event."
+      "secondarySummary": "Red-Nosed Reindeer is a divine pet in Grow a Garden. It can be obtained from Merging 8 level 100 Reindeer with the Sleigh or obtained from Christmas Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/red-nosed-reindeer.png"
     },
     {
       "name": "Reindeer",
@@ -5601,7 +5893,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Reindeer is a legendary pet in Grow a Garden. It can be hatched from a Christmas Egg, hatched from a Premium Christmas Egg or obtained from second part of the Christmas Harvest Event."
+      "secondarySummary": "Reindeer is a legendary pet in Grow a Garden. It can be hatched from a Christmas Egg, hatched from a Premium Christmas Egg or obtained from second part of the Christmas Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/reindeer.png"
     },
     {
       "name": "Rhino",
@@ -5626,7 +5919,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Rhino is a mythical pet in Grow a Garden. It can be hatched from a Safari Egg or obtained from Safari Harvest Event."
+      "secondarySummary": "Rhino is a mythical pet in Grow a Garden. It can be hatched from a Safari Egg or obtained from Safari Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/rhino.png"
     },
     {
       "name": "Robin",
@@ -5653,7 +5947,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Robin is a common pet in Grow a Garden. It can be hatched from a Fall Egg or obtained from Fall Market Event."
+      "secondarySummary": "Robin is a common pet in Grow a Garden. It can be hatched from a Fall Egg or obtained from Fall Market Event.",
+      "image": "/Grow%20a%20Garden/Pets/robin.png"
     },
     {
       "name": "Rooster",
@@ -5678,7 +5973,8 @@
           "description": "Decreases hatch time for nearby eggs"
         }
       ],
-      "secondarySummary": "Rooster is a rare pet in Grow a Garden. It can be hatched from a rare egg."
+      "secondarySummary": "Rooster is a rare pet in Grow a Garden. It can be hatched from a rare egg.",
+      "image": "/Grow%20a%20Garden/Pets/rooster.png"
     },
     {
       "name": "Ruby Squid",
@@ -5696,7 +5992,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Ruby Squid is a divine pet in Grow a Garden. It can be hatched from a Gem Egg."
+      "secondarySummary": "Ruby Squid is a divine pet in Grow a Garden. It can be hatched from a Gem Egg.",
+      "image": "/Grow%20a%20Garden/Pets/ruby-squid.png"
     },
     {
       "name": "Salmon",
@@ -5706,7 +6003,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Salmon is a uncommon pet in Grow a Garden. It can be obtained from Fall Market Event or purchased from Fall Pet Shop."
+      "secondarySummary": "Salmon is a uncommon pet in Grow a Garden. It can be obtained from Fall Market Event or purchased from Fall Pet Shop.",
+      "image": "/Grow%20a%20Garden/Pets/salmon.png"
     },
     {
       "name": "Sand Snake",
@@ -5731,7 +6029,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Sand Snake is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Sand Snake is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/sand-snake.png"
     },
     {
       "name": "Santa Bear",
@@ -5756,7 +6055,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/santa-bear.png"
     },
     {
       "name": "Sapphire Macaw",
@@ -5774,7 +6074,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Sapphire Macaw is a mythical pet in Grow a Garden. It can be hatched from a Gem Egg or hatched from a Gem Egg."
+      "secondarySummary": "Sapphire Macaw is a mythical pet in Grow a Garden. It can be hatched from a Gem Egg or hatched from a Gem Egg.",
+      "image": "/Grow%20a%20Garden/Pets/sapphire-macaw.png"
     },
     {
       "name": "Scarab",
@@ -5786,7 +6087,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Scarab is a uncommon pet in Grow a Garden. It can be obtained from a Spooky Chest, obtained from a Exotic Spooky Chest, obtained from a Special Exotic Spooky Chest or obtained from Halloween Event."
+      "secondarySummary": "Scarab is a uncommon pet in Grow a Garden. It can be obtained from a Spooky Chest, obtained from a Exotic Spooky Chest, obtained from a Special Exotic Spooky Chest or obtained from Halloween Event.",
+      "image": "/Grow%20a%20Garden/Pets/scarab.png"
     },
     {
       "name": "Scarlet Macaw",
@@ -5811,7 +6113,8 @@
           "description": "Grants Verdant mutation"
         }
       ],
-      "secondarySummary": "Scarlet Macaw is a legendary pet in Grow a Garden. It can be hatched from a paradise egg or obtained from Summer Update."
+      "secondarySummary": "Scarlet Macaw is a legendary pet in Grow a Garden. It can be hatched from a paradise egg or obtained from Summer Update.",
+      "image": "/Grow%20a%20Garden/Pets/scarlet-macaw.png"
     },
     {
       "name": "Sea Otter",
@@ -5836,7 +6139,8 @@
           "description": "Waters plants like a watering can"
         }
       ],
-      "secondarySummary": "Sea Otter is a legendary pet in Grow a Garden. It can be hatched from a legendary egg."
+      "secondarySummary": "Sea Otter is a legendary pet in Grow a Garden. It can be hatched from a legendary egg.",
+      "image": "/Grow%20a%20Garden/Pets/sea-otter.png"
     },
     {
       "name": "Sea Turtle",
@@ -5867,7 +6171,8 @@
           "description": "Occasionally grants bonus experience to a random active pet"
         }
       ],
-      "secondarySummary": "Sea Turtle is a rare pet in Grow a Garden. It can be hatched from a rare egg."
+      "secondarySummary": "Sea Turtle is a rare pet in Grow a Garden. It can be hatched from a rare egg.",
+      "image": "/Grow%20a%20Garden/Pets/sea-turtle.png"
     },
     {
       "name": "Seagull",
@@ -5885,7 +6190,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Seagull is a common pet in Grow a Garden. It can be hatched from a common egg."
+      "secondarySummary": "Seagull is a common pet in Grow a Garden. It can be hatched from a common egg.",
+      "image": "/Grow%20a%20Garden/Pets/seagull.png"
     },
     {
       "name": "Seal",
@@ -5910,7 +6216,8 @@
           "description": "Chance to receive the pet back as an egg when sold"
         }
       ],
-      "secondarySummary": "Seal is a rare pet in Grow a Garden. It can be hatched from a rare egg or obtained from Summer Merchant."
+      "secondarySummary": "Seal is a rare pet in Grow a Garden. It can be hatched from a rare egg or obtained from Summer Merchant.",
+      "image": "/Grow%20a%20Garden/Pets/seal.png"
     },
     {
       "name": "Seedling",
@@ -5928,7 +6235,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Seedling is a legendary pet in Grow a Garden. It can be hatched from a Sprout Egg or obtained from Beanstalk Event."
+      "secondarySummary": "Seedling is a legendary pet in Grow a Garden. It can be hatched from a Sprout Egg or obtained from Beanstalk Event.",
+      "image": "/Grow%20a%20Garden/Pets/seedling.png"
     },
     {
       "name": "Sheckling",
@@ -5938,7 +6246,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Sheckling is a common pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Sheckling is a common pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/sheckling.png"
     },
     {
       "name": "Shiba Inu",
@@ -5963,7 +6272,8 @@
           "description": "Occasionally digs up a random seed at a 15% chance"
         }
       ],
-      "secondarySummary": "Shiba Inu is a uncommon pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Shiba Inu is a uncommon pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/shiba-inu.png"
     },
     {
       "name": "Show Pony",
@@ -5988,7 +6298,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Show Pony is a mythical pet in Grow a Garden. It can be hatched from a Carnival Egg, hatched from a Premium Carnival Egg or hatched from a Rainbow Premium Carnival Egg."
+      "secondarySummary": "Show Pony is a mythical pet in Grow a Garden. It can be hatched from a Carnival Egg, hatched from a Premium Carnival Egg or hatched from a Rainbow Premium Carnival Egg.",
+      "image": "/Grow%20a%20Garden/Pets/show-pony.png"
     },
     {
       "name": "Shroomie",
@@ -5998,7 +6309,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Shroomie is a legendary pet in Grow a Garden. It can be obtained from a Enchanted Chest, obtained from a Exotic Enchanted Chest, obtained from Rainbow Sack or obtained from Fairy Event."
+      "secondarySummary": "Shroomie is a legendary pet in Grow a Garden. It can be obtained from a Enchanted Chest, obtained from a Exotic Enchanted Chest, obtained from Rainbow Sack or obtained from Fairy Event.",
+      "image": "/Grow%20a%20Garden/Pets/shroomie.png"
     },
     {
       "name": "Silver Dragonfly",
@@ -6008,7 +6320,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Silver Dragonfly is a legendary pet in Grow a Garden. It can be obtained from Season Pass or obtained from Premium Pass."
+      "secondarySummary": "Silver Dragonfly is a legendary pet in Grow a Garden. It can be obtained from Season Pass or obtained from Premium Pass.",
+      "image": "/Grow%20a%20Garden/Pets/silver-dragonfly.png"
     },
     {
       "name": "Silver Monkey",
@@ -6033,7 +6346,8 @@
           "description": "Chance to get fruit back when selling"
         }
       ],
-      "secondarySummary": "Silver Monkey is a legendary pet in Grow a Garden. It can be hatched from a legendary egg."
+      "secondarySummary": "Silver Monkey is a legendary pet in Grow a Garden. It can be hatched from a legendary egg.",
+      "image": "/Grow%20a%20Garden/Pets/silver-monkey.png"
     },
     {
       "name": "Silver Piggy",
@@ -6043,7 +6357,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Silver Piggy is a legendary pet in Grow a Garden. It can be obtained from Crafting."
+      "secondarySummary": "Silver Piggy is a legendary pet in Grow a Garden. It can be obtained from Crafting.",
+      "image": "/Grow%20a%20Garden/Pets/silver-piggy.png"
     },
     {
       "name": "Smithing Dog",
@@ -6053,7 +6368,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Smithing Dog is a rare pet in Grow a Garden. It can be obtained from Smithing Event."
+      "secondarySummary": "Smithing Dog is a rare pet in Grow a Garden. It can be obtained from Smithing Event.",
+      "image": "/Grow%20a%20Garden/Pets/smithing-dog.png"
     },
     {
       "name": "Snail",
@@ -6085,7 +6401,8 @@
           "description": "Increases lucky harvest chance"
         }
       ],
-      "secondarySummary": "Snail is a legendary pet in Grow a Garden. It can be hatched from a Bug Egg or hatched from a Exotic Bug Egg."
+      "secondarySummary": "Snail is a legendary pet in Grow a Garden. It can be hatched from a Bug Egg or hatched from a Exotic Bug Egg.",
+      "image": "/Grow%20a%20Garden/Pets/snail.png"
     },
     {
       "name": "Snow Bunny",
@@ -6097,7 +6414,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Snow Bunny is a common pet in Grow a Garden. It can be obtained from Santa's Surprise Present."
+      "secondarySummary": "Snow Bunny is a common pet in Grow a Garden. It can be obtained from Santa's Surprise Present.",
+      "image": "/Grow%20a%20Garden/Pets/snow-bunny.png"
     },
     {
       "name": "Snowman Builder",
@@ -6109,7 +6427,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Snowman Builder is a legendary pet in Grow a Garden. It can be obtained from Season Pass 3 Level 25 or obtained from Christmas Harvest Event."
+      "secondarySummary": "Snowman Builder is a legendary pet in Grow a Garden. It can be obtained from Season Pass 3 Level 25 or obtained from Christmas Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/snowman-builder.png"
     },
     {
       "name": "Snowman Soldier",
@@ -6121,7 +6440,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Snowman Soldier is a rare pet in Grow a Garden. It can be obtained from Season Pass 3 Level 2 or obtained from Season 3 of the Season Pass."
+      "secondarySummary": "Snowman Soldier is a rare pet in Grow a Garden. It can be obtained from Season Pass 3 Level 2 or obtained from Season 3 of the Season Pass.",
+      "image": "/Grow%20a%20Garden/Pets/snowman-soldier.png"
     },
     {
       "name": "Space Squirrel",
@@ -6136,7 +6456,8 @@
         "Fall Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Space Squirrel is a divine pet in Grow a Garden. It can be purchased from Fall Pet Shop or obtained from Fall Market Event."
+      "secondarySummary": "Space Squirrel is a divine pet in Grow a Garden. It can be purchased from Fall Pet Shop or obtained from Fall Market Event.",
+      "image": "/Grow%20a%20Garden/Pets/space-squirrel.png"
     },
     {
       "name": "Spaghetti Sloth",
@@ -6163,7 +6484,8 @@
           "description": "Grants Pasta, Meatballs, Sauce, and Spaghetti mutation"
         }
       ],
-      "secondarySummary": "Spaghetti Sloth is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Spaghetti Sloth is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/spaghetti-sloth.png"
     },
     {
       "name": "Specter",
@@ -6177,7 +6499,8 @@
         "Halloween Merchant"
       ],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/specter.png"
     },
     {
       "name": "Spider",
@@ -6207,7 +6530,8 @@
         "Halloween Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Spider is a legendary pet in Grow a Garden. It can be hatched from a Spooky Egg or obtained from Halloween Event."
+      "secondarySummary": "Spider is a legendary pet in Grow a Garden. It can be hatched from a Spooky Egg or obtained from Halloween Event.",
+      "image": "/Grow%20a%20Garden/Pets/spider.png"
     },
     {
       "name": "Spinosaurus",
@@ -6241,7 +6565,8 @@
           "description": "Removes a random mutation from three fruits and applies them to one other fruit (prioritizes favorited fruits)"
         }
       ],
-      "secondarySummary": "Spinosaurus is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Spinosaurus is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/spinosaurus.png"
     },
     {
       "name": "Spotted Deer",
@@ -6259,7 +6584,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Spotted Deer is a rare pet in Grow a Garden. It can be hatched from a rare egg."
+      "secondarySummary": "Spotted Deer is a rare pet in Grow a Garden. It can be hatched from a rare egg.",
+      "image": "/Grow%20a%20Garden/Pets/spotted-deer.png"
     },
     {
       "name": "Spriggan",
@@ -6269,7 +6595,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Spriggan is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Spriggan is a mythical pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/spriggan.png"
     },
     {
       "name": "Spring Bee",
@@ -6294,7 +6621,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/spring-bee.png"
     },
     {
       "name": "Squirrel",
@@ -6322,7 +6650,8 @@
           "description": "Chance to not consume a use when using the Reclaimer"
         }
       ],
-      "secondarySummary": "Squirrel is a mythical pet in Grow a Garden. It can be hatched from a mythical egg."
+      "secondarySummary": "Squirrel is a mythical pet in Grow a Garden. It can be hatched from a mythical egg.",
+      "image": "/Grow%20a%20Garden/Pets/squirrel.png"
     },
     {
       "name": "Stag Beetle",
@@ -6332,7 +6661,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Stag Beetle is a legendary pet in Grow a Garden. It can be obtained from Season 2 Season Pass."
+      "secondarySummary": "Stag Beetle is a legendary pet in Grow a Garden. It can be obtained from Season 2 Season Pass.",
+      "image": "/Grow%20a%20Garden/Pets/stag-beetle.png"
     },
     {
       "name": "Star Wolf",
@@ -6357,7 +6687,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Star Wolf is a divine pet in Grow a Garden. It can be hatched from a New Year's Egg or hatched from a Premium New Year's Egg."
+      "secondarySummary": "Star Wolf is a divine pet in Grow a Garden. It can be hatched from a New Year's Egg or hatched from a Premium New Year's Egg.",
+      "image": "/Grow%20a%20Garden/Pets/star-wolf.png"
     },
     {
       "name": "Starfish",
@@ -6382,7 +6713,8 @@
           "description": "Gains additional XP per second"
         }
       ],
-      "secondarySummary": "Starfish is a common pet in Grow a Garden. It can be hatched from a common egg."
+      "secondarySummary": "Starfish is a common pet in Grow a Garden. It can be hatched from a common egg.",
+      "image": "/Grow%20a%20Garden/Pets/starfish.png"
     },
     {
       "name": "Stegosaurus",
@@ -6415,7 +6747,8 @@
           "description": "Extra chance to duplicate harvested Prehistoric Type Crops."
         }
       ],
-      "secondarySummary": "Stegosaurus is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Stegosaurus is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/stegosaurus.png"
     },
     {
       "name": "Stork",
@@ -6425,7 +6758,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Stork is a legendary pet in Grow a Garden. It can be obtained from Evil Bunny Rewards."
+      "secondarySummary": "Stork is a legendary pet in Grow a Garden. It can be obtained from Evil Bunny Rewards.",
+      "image": "/Grow%20a%20Garden/Pets/stork.png"
     },
     {
       "name": "Sugar Glider",
@@ -6444,7 +6778,8 @@
           "description": "Occasionally glides from random different fruits. Takes 1 mutation from each fruit and applies it to the next."
         }
       ],
-      "secondarySummary": "Sugar Glider is a mythical pet in Grow a Garden. It can be purchased from Fall Pet Shop or obtained from Fall Market Event."
+      "secondarySummary": "Sugar Glider is a mythical pet in Grow a Garden. It can be purchased from Fall Pet Shop or obtained from Fall Market Event.",
+      "image": "/Grow%20a%20Garden/Pets/sugar-glider.png"
     },
     {
       "name": "Summer Kiwi",
@@ -6454,7 +6789,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Summer Kiwi is a mythical pet in Grow a Garden. It can be obtained from Santa's Stash."
+      "secondarySummary": "Summer Kiwi is a mythical pet in Grow a Garden. It can be obtained from Santa's Stash.",
+      "image": "/Grow%20a%20Garden/Pets/summer-kiwi.png"
     },
     {
       "name": "Sunny-Side Chicken",
@@ -6473,7 +6809,8 @@
           "description": "Increases egg hatch speed by >20%"
         }
       ],
-      "secondarySummary": "Sunny-Side Chicken is a uncommon pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Sunny-Side Chicken is a uncommon pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/sunny-side-chicken.png"
     },
     {
       "name": "Sushi Bear",
@@ -6500,7 +6837,8 @@
           "description": "Grants Chilled and Frozen mutations"
         }
       ],
-      "secondarySummary": "Sushi Bear is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Sushi Bear is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/sushi-bear.png"
     },
     {
       "name": "Swan",
@@ -6527,7 +6865,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Swan is a divine pet in Grow a Garden. It can be hatched from a Fall Egg or obtained from Fall Market Event."
+      "secondarySummary": "Swan is a divine pet in Grow a Garden. It can be hatched from a Fall Egg or obtained from Fall Market Event.",
+      "image": "/Grow%20a%20Garden/Pets/swan.png"
     },
     {
       "name": "T-Rex",
@@ -6554,7 +6893,8 @@
           "description": "Removes a random mutation from one fruit and applies it to three other fruits"
         }
       ],
-      "secondarySummary": "T-Rex is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "T-Rex is a divine pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/t-rex.png"
     },
     {
       "name": "Tanchozuru",
@@ -6579,7 +6919,8 @@
           "description": "Grants Tranquil mutation"
         }
       ],
-      "secondarySummary": "Tanchozuru is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Tanchozuru is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/tanchozuru.png"
     },
     {
       "name": "Tanuki",
@@ -6604,7 +6945,8 @@
           "description": "Mischief: Every ~10 minutes, causes mischief, doing random different actions in the player's garden: Gives itself a set amount of experience Gives a random fruit the Choc/Moonlit/Chilled mutation Gives a set amount of Sheckles Decreases a random pet's cooldown by 60 seconds"
         }
       ],
-      "secondarySummary": "Tanuki is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Tanuki is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/tanuki.png"
     },
     {
       "name": "Tarantula Hawk",
@@ -6648,7 +6990,8 @@
           "description": "Advances its ability cooldown by ~ 80s."
         }
       ],
-      "secondarySummary": "Tarantula Hawk is a legendary pet in Grow a Garden. It can be hatched from a Anti Bee Egg or hatched from a Premium Anti Bee Egg."
+      "secondarySummary": "Tarantula Hawk is a legendary pet in Grow a Garden. It can be hatched from a Anti Bee Egg or hatched from a Premium Anti Bee Egg.",
+      "image": "/Grow%20a%20Garden/Pets/tarantula-hawk.png"
     },
     {
       "name": "Termite",
@@ -6658,7 +7001,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Termite is a common pet in Grow a Garden. It can be obtained from Smithing Event."
+      "secondarySummary": "Termite is a common pet in Grow a Garden. It can be obtained from Smithing Event.",
+      "image": "/Grow%20a%20Garden/Pets/termite.png"
     },
     {
       "name": "Tiger",
@@ -6676,7 +7020,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Tiger is a divine pet in Grow a Garden. It can be hatched from a Jungle Egg."
+      "secondarySummary": "Tiger is a divine pet in Grow a Garden. It can be hatched from a Jungle Egg.",
+      "image": "/Grow%20a%20Garden/Pets/tiger.png"
     },
     {
       "name": "Tomb Marmot",
@@ -6688,7 +7033,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Tomb Marmot is a legendary pet in Grow a Garden. It can be obtained from a Spooky Chest."
+      "secondarySummary": "Tomb Marmot is a legendary pet in Grow a Garden. It can be obtained from a Spooky Chest.",
+      "image": "/Grow%20a%20Garden/Pets/tomb-marmot.png"
     },
     {
       "name": "Topaz Snail",
@@ -6706,7 +7052,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Topaz Snail is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Topaz Snail is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/topaz-snail.png"
     },
     {
       "name": "Toucan",
@@ -6737,7 +7084,8 @@
           "description": "Boosts size and variant chance of nearby tropical fruits"
         }
       ],
-      "secondarySummary": "Toucan is a rare pet in Grow a Garden. It can be hatched from a rare egg or obtained from Summer Update."
+      "secondarySummary": "Toucan is a rare pet in Grow a Garden. It can be hatched from a rare egg or obtained from Summer Update.",
+      "image": "/Grow%20a%20Garden/Pets/toucan.png"
     },
     {
       "name": "Trapdoor Spider",
@@ -6747,7 +7095,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Trapdoor Spider is a legendary pet in Grow a Garden. It can be obtained from Smithing Event."
+      "secondarySummary": "Trapdoor Spider is a legendary pet in Grow a Garden. It can be obtained from Smithing Event.",
+      "image": "/Grow%20a%20Garden/Pets/trapdoor-spider.png"
     },
     {
       "name": "Tree Frog",
@@ -6765,7 +7114,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Tree Frog is a rare pet in Grow a Garden. It can be hatched from a Jungle Egg."
+      "secondarySummary": "Tree Frog is a rare pet in Grow a Garden. It can be hatched from a Jungle Egg.",
+      "image": "/Grow%20a%20Garden/Pets/tree-frog.png"
     },
     {
       "name": "Triceratops",
@@ -6792,7 +7142,8 @@
           "description": "Charges into 3 plants, advancing their growth"
         }
       ],
-      "secondarySummary": "Triceratops is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Triceratops is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/triceratops.png"
     },
     {
       "name": "Tsuchinoko",
@@ -6810,7 +7161,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Tsuchinoko is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Tsuchinoko is a rare pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/tsuchinoko.png"
     },
     {
       "name": "Turtle",
@@ -6835,7 +7187,8 @@
           "description": "Slowing aura that extends sprinkler lifespan"
         }
       ],
-      "secondarySummary": "Turtle is a legendary pet in Grow a Garden. It can be hatched from a legendary egg or obtained from Beanstalk Part 2 (re-obtained after Summer update event)."
+      "secondarySummary": "Turtle is a legendary pet in Grow a Garden. It can be hatched from a legendary egg or obtained from Beanstalk Part 2 (re-obtained after Summer update event).",
+      "image": "/Grow%20a%20Garden/Pets/turtle.png"
     },
     {
       "name": "Turtle Dove",
@@ -6860,7 +7213,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Turtle Dove is a rare pet in Grow a Garden. It can be hatched from a Christmas Egg, hatched from a Premium Christmas Egg or obtained from Christmas Harvest Event."
+      "secondarySummary": "Turtle Dove is a rare pet in Grow a Garden. It can be hatched from a Christmas Egg, hatched from a Premium Christmas Egg or obtained from Christmas Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/turtle-dove.png"
     },
     {
       "name": "Unicycle Monkey",
@@ -6885,7 +7239,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Unicycle Monkey is a uncommon pet in Grow a Garden. It can be hatched from a Carnival Egg, hatched from a Premium Carnival Egg, hatched from a Rainbow Premium Carnival Egg or obtained from Garden Games Event."
+      "secondarySummary": "Unicycle Monkey is a uncommon pet in Grow a Garden. It can be hatched from a Carnival Egg, hatched from a Premium Carnival Egg, hatched from a Rainbow Premium Carnival Egg or obtained from Garden Games Event.",
+      "image": "/Grow%20a%20Garden/Pets/unicycle-monkey.png"
     },
     {
       "name": "Wasp",
@@ -6923,7 +7278,8 @@
           "description": "Advances cooldown of a random pet by 60s"
         }
       ],
-      "secondarySummary": "Wasp is a rare pet in Grow a Garden. It can be hatched from a Anti Bee Egg, hatched from a Premium Anti Bee Egg, purchased from Limited Time Shop or obtained from 1 Bee Egg and 25 Honey."
+      "secondarySummary": "Wasp is a rare pet in Grow a Garden. It can be hatched from a Anti Bee Egg, hatched from a Premium Anti Bee Egg, purchased from Limited Time Shop or obtained from 1 Bee Egg and 25 Honey.",
+      "image": "/Grow%20a%20Garden/Pets/wasp.png"
     },
     {
       "name": "Water Buffalo",
@@ -6933,7 +7289,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Water Buffalo is a divine pet in Grow a Garden. It can be purchased from Roblox VN Shop Robux Pack."
+      "secondarySummary": "Water Buffalo is a divine pet in Grow a Garden. It can be purchased from Roblox VN Shop Robux Pack.",
+      "image": "/Grow%20a%20Garden/Pets/water-buffalo.png"
     },
     {
       "name": "Wendigo",
@@ -6958,7 +7315,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": null
+      "secondarySummary": null,
+      "image": "/Grow%20a%20Garden/Pets/wendigo.png"
     },
     {
       "name": "Wind Wyvern",
@@ -6968,7 +7326,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Wind Wyvern is a divine pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie from PhatMojo."
+      "secondarySummary": "Wind Wyvern is a divine pet in Grow a Garden. It can be obtained from Redeeming a code from buying a Grow a Garden plushie from PhatMojo.",
+      "image": "/Grow%20a%20Garden/Pets/wind-wyvern.png"
     },
     {
       "name": "Wisp",
@@ -6981,7 +7340,8 @@
         "Rare Cosmetics Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Wisp is a legendary pet in Grow a Garden. It can be purchased from Fairy Fares Shop."
+      "secondarySummary": "Wisp is a legendary pet in Grow a Garden. It can be purchased from Fairy Fares Shop.",
+      "image": "/Grow%20a%20Garden/Pets/wisp.png"
     },
     {
       "name": "Wolf",
@@ -6993,7 +7353,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Wolf is a legendary pet in Grow a Garden. It can be purchased from Creepy Critters Shop or obtained from Halloween Event."
+      "secondarySummary": "Wolf is a legendary pet in Grow a Garden. It can be purchased from Creepy Critters Shop or obtained from Halloween Event.",
+      "image": "/Grow%20a%20Garden/Pets/wolf.png"
     },
     {
       "name": "Woodpecker",
@@ -7003,7 +7364,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Woodpecker is a rare pet in Grow a Garden. It can be obtained from Fall Market Event or purchased from Fall Pet Shop."
+      "secondarySummary": "Woodpecker is a rare pet in Grow a Garden. It can be obtained from Fall Market Event or purchased from Fall Pet Shop.",
+      "image": "/Grow%20a%20Garden/Pets/woodpecker.png"
     },
     {
       "name": "Woody",
@@ -7013,7 +7375,8 @@
       "eggSources": [],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Woody is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates."
+      "secondarySummary": "Woody is a legendary pet in Grow a Garden. It is currently unobtainable and was previously available through limited-time events or special promotions. This pet may return in future updates.",
+      "image": "/Grow%20a%20Garden/Pets/woody.png"
     },
     {
       "name": "Yeti",
@@ -7040,7 +7403,8 @@
       ],
       "merchantSources": [],
       "abilities": [],
-      "secondarySummary": "Yeti is a divine pet in Grow a Garden. It can be hatched from a Christmas Egg, hatched from a Premium Christmas Egg or obtained from Christmas Harvest Event."
+      "secondarySummary": "Yeti is a divine pet in Grow a Garden. It can be hatched from a Christmas Egg, hatched from a Premium Christmas Egg or obtained from Christmas Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/yeti.png"
     },
     {
       "name": "Zebra",
@@ -7068,7 +7432,8 @@
         "Safari Merchant"
       ],
       "abilities": [],
-      "secondarySummary": "Zebra is a rare pet in Grow a Garden. It can be hatched from a Safari Egg or obtained from Safari Harvest Event."
+      "secondarySummary": "Zebra is a rare pet in Grow a Garden. It can be hatched from a Safari Egg or obtained from Safari Harvest Event.",
+      "image": "/Grow%20a%20Garden/Pets/zebra.png"
     }
   ]
 }

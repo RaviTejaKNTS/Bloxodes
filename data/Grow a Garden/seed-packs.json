@@ -17,7 +17,8 @@
       "dateAdded",
       "obtainment",
       "contents",
-      "sourceUrl"
+      "sourceUrl",
+      "image"
     ]
   },
   "items": [
@@ -75,7 +76,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Easter%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Easter%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/easter-seed-pack.png"
     },
     {
       "name": "Exotic Ancient Seed Pack",
@@ -121,7 +123,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Ancient%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Ancient%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-ancient-seed-pack.png"
     },
     {
       "name": "Exotic Crafters Seed Pack",
@@ -167,7 +170,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Crafters%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Crafters%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-crafters-seed-pack.png"
     },
     {
       "name": "Exotic Easter Seed Pack",
@@ -228,7 +232,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Easter%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Easter%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-easter-seed-pack.png"
     },
     {
       "name": "Exotic Enchanted Seed Pack",
@@ -274,7 +279,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Enchanted%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Enchanted%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-enchanted-seed-pack.png"
     },
     {
       "name": "Exotic Fall Seed Pack",
@@ -320,7 +326,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Fall%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Fall%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-fall-seed-pack.png"
     },
     {
       "name": "Exotic Flower Seed Pack",
@@ -366,7 +373,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Flower%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Flower%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-flower-seed-pack.png"
     },
     {
       "name": "Exotic Gardener Seed Pack",
@@ -376,7 +384,8 @@
       "dateAdded": "September 27th, 2025",
       "obtainment": "The Exotic Gardener Seed Pack could be obtained via the rewards of the Seed Stages event.",
       "contents": [],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Gardener%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Gardener%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-gardener-seed-pack.png"
     },
     {
       "name": "Exotic Gourmet Seed Pack",
@@ -422,7 +431,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Gourmet%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Gourmet%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-gourmet-seed-pack.png"
     },
     {
       "name": "Exotic Holiday Seed Pack",
@@ -468,7 +478,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Holiday%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Holiday%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-holiday-seed-pack.png"
     },
     {
       "name": "Exotic Prime Seed Pack",
@@ -514,7 +525,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Prime%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Prime%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-prime-seed-pack.png"
     },
     {
       "name": "Exotic Safari Seed Pack",
@@ -560,7 +572,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Safari%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Safari%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-safari-seed-pack.png"
     },
     {
       "name": "Exotic Seed Pack",
@@ -596,7 +609,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-seed-pack.png"
     },
     {
       "name": "Exotic Sprout Seed Pack",
@@ -642,7 +656,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Sprout%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Sprout%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-sprout-seed-pack.png"
     },
     {
       "name": "Exotic Summer Seed Pack",
@@ -688,7 +703,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Summer%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Summer%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-summer-seed-pack.png"
     },
     {
       "name": "Exotic Zen Seed Pack",
@@ -734,7 +750,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Zen%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Zen%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-zen-seed-pack.png"
     },
     {
       "name": "Exotic Zenith Seed Pack",
@@ -780,7 +797,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Zenith%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Exotic%20Zenith%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/exotic-zenith-seed-pack.png"
     },
     {
       "name": "Halloween Super Seed",
@@ -790,7 +808,8 @@
       "dateAdded": "October 18, 2025",
       "obtainment": "The Halloween Super Seed can be purchased with Robux in the Halloween Forever Pack with a 1% chance of appearing at the paid section.",
       "contents": [],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Halloween%20Super%20Seed"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Halloween%20Super%20Seed",
+      "image": "/Grow%20a%20Garden/Crops/halloween-super-seed.png"
     },
     {
       "name": "Premium Night Seed Pack",
@@ -831,7 +850,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Premium%20Night%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Premium%20Night%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/premium-night-seed-pack.png"
     },
     {
       "name": "Silver Common Seed Pack",
@@ -852,7 +872,8 @@
           "image": null
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Common%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Common%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/silver-common-seed-pack.png"
     },
     {
       "name": "Silver Divine Seed Pack",
@@ -883,7 +904,8 @@
           "image": null
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Divine%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Divine%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/silver-divine-seed-pack.png"
     },
     {
       "name": "Silver Fall Seed Pack",
@@ -924,7 +946,8 @@
           "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D"
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Fall%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Fall%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/silver-fall-seed-pack.png"
     },
     {
       "name": "Silver Legendary Seed Pack",
@@ -955,7 +978,8 @@
           "image": null
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Legendary%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Legendary%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/silver-legendary-seed-pack.png"
     },
     {
       "name": "Silver Mythical Seed Pack",
@@ -986,7 +1010,8 @@
           "image": null
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Mythical%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Mythical%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/silver-mythical-seed-pack.png"
     },
     {
       "name": "Silver Prismatic Seed Pack",
@@ -1032,7 +1057,8 @@
           "image": null
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Prismatic%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Prismatic%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/silver-prismatic-seed-pack.png"
     },
     {
       "name": "Silver Rare Seed Pack",
@@ -1058,7 +1084,8 @@
           "image": null
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Rare%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Rare%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/silver-rare-seed-pack.png"
     },
     {
       "name": "Silver Uncommon Seed Pack",
@@ -1079,7 +1106,8 @@
           "image": null
         }
       ],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Uncommon%20Seed%20Pack"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Silver%20Uncommon%20Seed%20Pack",
+      "image": "/Grow%20a%20Garden/Seed%20Packs/silver-uncommon-seed-pack.png"
     },
     {
       "name": "Super Seed",
@@ -1089,7 +1117,8 @@
       "dateAdded": null,
       "obtainment": null,
       "contents": [],
-      "sourceUrl": "https://growagarden.fandom.com/wiki/Super%20Seed"
+      "sourceUrl": "https://growagarden.fandom.com/wiki/Super%20Seed",
+      "image": "/Grow%20a%20Garden/Crops/super-seed.png"
     }
   ]
 }

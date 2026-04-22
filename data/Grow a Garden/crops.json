@@ -50,7 +50,7 @@
   "items": [
     {
       "name": "Basket Bouquet",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/basket-bouquet.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -77,7 +77,7 @@
     },
     {
       "name": "Jelly Bean Sprout",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/jelly-bean-sprout.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -104,7 +104,7 @@
     },
     {
       "name": "Marshmallow Root",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/marshmallow-root.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -131,7 +131,7 @@
     },
     {
       "name": "Egg Shroom",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/egg-shroom.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -158,7 +158,7 @@
     },
     {
       "name": "Bonnet Bloom",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/bonnet-bloom.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -185,7 +185,7 @@
     },
     {
       "name": "Bunny Berry",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/bunny-berry.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -212,7 +212,7 @@
     },
     {
       "name": "Elder Candy Blossom",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/elder-candy-blossom.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -239,7 +239,7 @@
     },
     {
       "name": "Candy Blossom 2026",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/candy-blossom-2026.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -266,7 +266,7 @@
     },
     {
       "name": "Easter Sprout",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-sprout.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -293,7 +293,7 @@
     },
     {
       "name": "Blue Candypop",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/blue-candypop.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -320,7 +320,7 @@
     },
     {
       "name": "Easter Egg Melon",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-egg-melon.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -428,7 +428,7 @@
     },
     {
       "name": "Evo Mushroom IV",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-mushroom-iv.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -455,7 +455,7 @@
     },
     {
       "name": "Evo Mushroom III",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-mushroom-iii.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -482,7 +482,7 @@
     },
     {
       "name": "Evo Mushroom II",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-mushroom-ii.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -509,7 +509,7 @@
     },
     {
       "name": "Evo Pumpkin IV",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-pumpkin-iv.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -536,7 +536,7 @@
     },
     {
       "name": "Evo Pumpkin III",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-pumpkin-iii.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -563,7 +563,7 @@
     },
     {
       "name": "Evo Pumpkin II",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-pumpkin-ii.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -590,7 +590,7 @@
     },
     {
       "name": "Evo Blueberry IV",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-blueberry-iv.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -617,7 +617,7 @@
     },
     {
       "name": "Evo Blueberry III",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-blueberry-iii.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -644,7 +644,7 @@
     },
     {
       "name": "Evo Blueberry II",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-blueberry-ii.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -671,7 +671,7 @@
     },
     {
       "name": "Evo Beetroot IV",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-beetroot-iv.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -698,7 +698,7 @@
     },
     {
       "name": "Evo Beetroot III",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-beetroot-iii.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -725,7 +725,7 @@
     },
     {
       "name": "Evo Beetroot II",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/evo-beetroot-ii.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -1238,7 +1238,7 @@
     },
     {
       "name": "Egg Melon",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/egg-melon.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -1404,7 +1404,7 @@
     },
     {
       "name": "Tinsel",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/tinsel.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -1431,7 +1431,7 @@
     },
     {
       "name": "Taffy Tree",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/taffy-tree.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -1485,7 +1485,7 @@
     },
     {
       "name": "Strange Man's Wheat",
-      "image": "/Grow%20a%20Garden/Crops/strange-mans-wheat.svg",
+      "image": "/Grow%20a%20Garden/Crops/strange-man-s-wheat.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -1512,7 +1512,7 @@
     },
     {
       "name": "Star Palm",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/star-palm.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -1647,7 +1647,7 @@
     },
     {
       "name": "Shadow Buttercup",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/shadow-buttercup.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -1782,7 +1782,7 @@
     },
     {
       "name": "Peach Sun",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/peach-sun.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -1890,7 +1890,7 @@
     },
     {
       "name": "New Years Tinsel",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/new-years-tinsel.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -2133,7 +2133,7 @@
     },
     {
       "name": "Mammoth Mistletoe",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/mammoth-mistletoe.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -2214,7 +2214,7 @@
     },
     {
       "name": "Luminova",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/luminova.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -2349,7 +2349,7 @@
     },
     {
       "name": "Jungle Queen Bulb",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/jungle-queen-bulb.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -2376,7 +2376,7 @@
     },
     {
       "name": "Jungle Kiwano",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/jungle-kiwano.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -2538,7 +2538,7 @@
     },
     {
       "name": "Heart Gem",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/heart-gem.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -2673,7 +2673,7 @@
     },
     {
       "name": "Frost Fern",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/frost-fern.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -2700,7 +2700,7 @@
     },
     {
       "name": "Frost Bush",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/frost-bush.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -3159,7 +3159,7 @@
     },
     {
       "name": "Birds Nest",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/birds-nest.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -3645,7 +3645,7 @@
     },
     {
       "name": "Sugar Melon",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/sugar-melon.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -3780,7 +3780,7 @@
     },
     {
       "name": "Spirit Sparkle",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/spirit-sparkle.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -3902,7 +3902,7 @@
       "stock": "1",
       "multiHarvest": "✓",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/sparkle-slice.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -3915,7 +3915,7 @@
     },
     {
       "name": "Sour Lemon",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/sour-lemon.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -4131,7 +4131,7 @@
     },
     {
       "name": "Saskia",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/saskia.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -4266,7 +4266,7 @@
     },
     {
       "name": "Reindeer Root",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/reindeer-root.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -4320,7 +4320,7 @@
     },
     {
       "name": "Purple Treeshroom",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/purple-treeshroom.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -4604,7 +4604,7 @@
       "stock": "N/A",
       "multiHarvest": "✓",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/pink-rose.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -5103,7 +5103,7 @@
     },
     {
       "name": "Mummy's Hand",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/mummy-s-hand.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -5697,7 +5697,7 @@
     },
     {
       "name": "Liquorice",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/liquorice.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -5927,7 +5927,7 @@
       "stock": "N/A",
       "multiHarvest": "✓",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/kernel-curl.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -5940,7 +5940,7 @@
     },
     {
       "name": "Jungle Cherry",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/jungle-cherry.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -6251,7 +6251,7 @@
       "stock": "1",
       "multiHarvest": "✓",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/heart-blossom.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -6291,7 +6291,7 @@
     },
     {
       "name": "Gummy Cactus",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/gummy-cactus.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -6345,7 +6345,7 @@
     },
     {
       "name": "Gumball",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/gumball.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -6791,7 +6791,7 @@
       "stock": "N/A",
       "multiHarvest": "✓",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/four-leaf-clover.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -6804,7 +6804,7 @@
     },
     {
       "name": "Firework Fern",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/firework-fern.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7074,7 +7074,7 @@
     },
     {
       "name": "Eggsnapper",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/eggsnapper.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7128,7 +7128,7 @@
     },
     {
       "name": "Eggfruit",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/eggfruit.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7155,7 +7155,7 @@
     },
     {
       "name": "Easter Sugar Melon",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-sugar-melon.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7182,7 +7182,7 @@
     },
     {
       "name": "Easter Sour Lemon",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-sour-lemon.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7209,7 +7209,7 @@
     },
     {
       "name": "Easter Liquorice",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-liquorice.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7236,7 +7236,7 @@
     },
     {
       "name": "Easter Gummy Cactus",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-gummy-cactus.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7263,7 +7263,7 @@
     },
     {
       "name": "Easter Gumball",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-gumball.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7290,7 +7290,7 @@
     },
     {
       "name": "Easter Eggfruit",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-eggfruit.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7344,7 +7344,7 @@
     },
     {
       "name": "Easter Chocolate Coconut",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-chocolate-coconut.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7371,7 +7371,7 @@
     },
     {
       "name": "Easter Chocolate Berry",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-chocolate-berry.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7398,7 +7398,7 @@
     },
     {
       "name": "Easter Candy Carrot",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/easter-candy-carrot.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7479,7 +7479,7 @@
     },
     {
       "name": "Drowned Flower",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/drowned-flower.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7533,7 +7533,7 @@
     },
     {
       "name": "DJ Delight",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/dj-delight.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7898,7 +7898,7 @@
       "stock": "N/A",
       "multiHarvest": "✓",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/colorpop-crop.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -7938,7 +7938,7 @@
     },
     {
       "name": "Christmas Tree",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/christmas-tree.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -7992,7 +7992,7 @@
     },
     {
       "name": "Chocolate Coconut",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/chocolate-coconut.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -8046,7 +8046,7 @@
     },
     {
       "name": "Chocolate Berry",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/chocolate-berry.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -8262,7 +8262,7 @@
     },
     {
       "name": "Candy Carrot",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/candy-carrot.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -8303,7 +8303,7 @@
       "stock": "4-8",
       "multiHarvest": "✗",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/candy-cane.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -8478,7 +8478,7 @@
     },
     {
       "name": "Boreal Orange",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/boreal-orange.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -8505,7 +8505,7 @@
     },
     {
       "name": "Bonanza Bloom",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/bonanza-bloom.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -8735,7 +8735,7 @@
       "stock": "N/A",
       "multiHarvest": "✗",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/biggest-shadow-buttercup.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -8762,7 +8762,7 @@
       "stock": "N/A",
       "multiHarvest": "✗",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/biggest-buttercup.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -8789,7 +8789,7 @@
       "stock": "N/A",
       "multiHarvest": "✗",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/bigger-shadow-buttercup.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -8816,7 +8816,7 @@
       "stock": "N/A",
       "multiHarvest": "✗",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/bigger-buttercup.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -8843,7 +8843,7 @@
       "stock": "N/A",
       "multiHarvest": "✗",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/big-shadow-buttercup.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -8870,7 +8870,7 @@
       "stock": "N/A",
       "multiHarvest": "✗",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/big-buttercup.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -8951,7 +8951,7 @@
       "stock": "N/A",
       "multiHarvest": "✗",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/beast-shadow-buttercup.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -8978,7 +8978,7 @@
       "stock": "N/A",
       "multiHarvest": "✗",
       "obtainable": "✗",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/beast-buttercup.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "sourceGroups": [
         {
@@ -9261,7 +9261,7 @@
     },
     {
       "name": "Amazon Feather Fern",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/amazon-feather-fern.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -9315,7 +9315,7 @@
     },
     {
       "name": "Alien Apple",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/alien-apple.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -10206,7 +10206,7 @@
     },
     {
       "name": "Magma Pepper",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/magma-pepper.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -10233,7 +10233,7 @@
     },
     {
       "name": "Madcrown Vine",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/madcrown-vine.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -10962,7 +10962,7 @@
     },
     {
       "name": "Crimson Cranberry",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/crimson-cranberry.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -11016,7 +11016,7 @@
     },
     {
       "name": "Confetti Tula",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/confetti-tula.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -11772,7 +11772,7 @@
     },
     {
       "name": "Yellow Core",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/yellow-core.png",
       "wikiImageUrl": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -12474,7 +12474,7 @@
     },
     {
       "name": "Witches Hair",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/witches-hair.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -12501,7 +12501,7 @@
     },
     {
       "name": "Wreath Span",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/wreath-span.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",
@@ -12528,7 +12528,7 @@
     },
     {
       "name": "Waddling Willow",
-      "image": null,
+      "image": "/Grow%20a%20Garden/Crops/waddling-willow.png",
       "wikiImageUrl": null,
       "purchasePriceLabel": null,
       "purchasePriceValue": "N/A",

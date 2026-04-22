@@ -79,6 +79,7 @@ This file is the quick reference for what exists today and how to invoke it.
 | Collect body catalog items | `scripts/catalog/collect-roblox-body-items.ts` | `npm run collect:body-items` |
 | Collect clothing catalog items | `scripts/catalog/collect-roblox-clothing-items.ts` | `npm run collect:clothing-items` |
 | Collect avatar animation items | `scripts/catalog/collect-roblox-avatar-animation-items.ts` | `npm run collect:avatar-animation-items` |
+| Collect Grow a Garden local catalog images | `scripts/catalog/collect-grow-a-garden-images.ts` | `npm run collect:grow-a-garden-images` |
 | Collect all catalog item families | multiple catalog collectors | `npm run collect:catalog-items` |
 | Enrich catalog items | `scripts/catalog/enrich-roblox-catalog-items.ts` | `npm run enrich:catalog-items` |
 | Import RobloxDen free items | `scripts/catalog/import-robloxden-free-items.py` | direct `python scripts/catalog/import-robloxden-free-items.py` |

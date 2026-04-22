@@ -43,7 +43,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     subtitleKeys: ["harvestMode", "availability"],
     descriptionKey: "farmSummary",
     cardDescriptionKey: "farmSummary",
-    hideImages: true,
+    hideImages: false,
     stats: [
       { key: "purchasePrice", label: "Price" },
       { key: "averageValue", label: "Average value" },
@@ -64,7 +64,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     subtitleKeys: ["harvestType", "availability"],
     descriptionKey: "secondarySummary",
     cardDescriptionKey: "secondarySummary",
-    hideImages: true,
+    hideImages: false,
     stats: [
       { key: "shopCount", label: "Shop entries" },
       { key: "craftingCount", label: "Crafting" },
@@ -84,7 +84,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     subtitleKeys: ["availability"],
     descriptionKey: "secondarySummary",
     cardDescriptionKey: "secondarySummary",
-    hideImages: true,
+    hideImages: false,
     stats: [
       { key: "eggCount", label: "Eggs" },
       { key: "merchantCount", label: "Merchants" },
@@ -103,7 +103,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     subtitleKeys: ["hatchTime", "availability"],
     descriptionKey: "probabilityText",
     cardDescriptionKey: "probabilityText",
-    hideImages: true,
+    hideImages: false,
     stats: [{ key: "dropCount", label: "Pet drops" }],
     maxStats: 1
   },
@@ -135,7 +135,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     badgeKey: "multiplier",
     descriptionKey: "obtainment",
     cardDescriptionKey: "visualDescription",
-    hideImages: true,
+    hideImages: false,
     stats: [{ key: "multiplier", label: "Multiplier" }],
     maxStats: 1
   },
@@ -150,7 +150,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     badgeKey: "chance",
     descriptionKey: "passive",
     cardDescriptionKey: "passive",
-    hideImages: true,
+    hideImages: false,
     stats: [
       { key: "amount", label: "Amount" },
       { key: "chance", label: "Chance" },
@@ -182,7 +182,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     groupLabel: "Type",
     descriptionKey: "function",
     cardDescriptionKey: "function",
-    hideImages: true,
+    hideImages: false,
     stats: [],
     maxStats: 0
   },
@@ -197,7 +197,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     subtitleKeys: ["birthday"],
     descriptionKey: "function",
     cardDescriptionKey: "function",
-    hideImages: true,
+    hideImages: false,
     stats: [],
     maxStats: 0
   },
@@ -213,7 +213,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     subtitleKeys: ["refreshCadence"],
     descriptionKey: "description",
     cardDescriptionKey: "description",
-    hideImages: true,
+    hideImages: false,
     stats: [],
     maxStats: 0
   },
@@ -246,7 +246,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     subtitleKeys: ["craftTime"],
     descriptionKey: "recipe",
     cardDescriptionKey: "recipe",
-    hideImages: true,
+    hideImages: false,
     stats: [{ key: "alternativePrices", label: "Alternative price" }],
     maxStats: 1
   },
@@ -260,7 +260,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     groupLabel: "Category",
     descriptionKey: "recipes",
     cardDescriptionKey: "recipes",
-    hideImages: true,
+    hideImages: false,
     stats: [
       { key: "baseTime", label: "Base time" },
       { key: "baseWeight", label: "Base weight" }
@@ -278,7 +278,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     badgeKey: "availability",
     descriptionKey: "obtainment",
     cardDescriptionKey: "obtainment",
-    hideImages: true,
+    hideImages: false,
     stats: [],
     maxStats: 0
   }

@@ -19,7 +19,8 @@
       "recipes",
       "extraInfo",
       "baseTime",
-      "baseWeight"
+      "baseWeight",
+      "image"
     ]
   },
   "items": [
@@ -28,175 +29,200 @@
       "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower",
       "extraInfo": "Base Time:7 minutesBase Weight:2kg",
       "baseTime": "7 minutes",
-      "baseWeight": "2kg"
+      "baseWeight": "2kg",
+      "image": "/Grow%20a%20Garden/Food/burger.png"
     },
     {
       "name": "Cake",
       "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Icing: Sweet Crops Filling: Sweet Crops Fruit: Fruit Crops",
       "extraInfo": "Base Time:6 minutesBase Weight:2kg",
       "baseTime": "6 minutes",
-      "baseWeight": "2kg"
+      "baseWeight": "2kg",
+      "image": "/Grow%20a%20Garden/Food/cake.png"
     },
     {
       "name": "Candy Apple",
       "recipes": "Apple: Apple, Green Apple, Maple Apple, Sugar Apple Candy Coating: Sweet Crops",
       "extraInfo": "Base Time:3 minutesBase Weight:0.7kg",
       "baseTime": "3 minutes",
-      "baseWeight": "0.7kg"
+      "baseWeight": "0.7kg",
+      "image": "/Grow%20a%20Garden/Food/candy-apple.png"
     },
     {
       "name": "Candy Cane",
       "recipes": "Candy: Candy Crops Mint: Mint",
       "extraInfo": "Base Time:1 minutesBase Weight:1kg",
       "baseTime": "1 minutes",
-      "baseWeight": "1kg"
+      "baseWeight": "1kg",
+      "image": "/Grow%20a%20Garden/Crops/candy-cane.png"
     },
     {
       "name": "Corndog",
       "recipes": "Stick: Woody Crops Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Batter: Corn, Violet Corn",
       "extraInfo": "Base Time:7 minutesBase Weight:1.5kg",
       "baseTime": "7 minutes",
-      "baseWeight": "1.5kg"
+      "baseWeight": "1.5kg",
+      "image": "/Grow%20a%20Garden/Food/corndog.png"
     },
     {
       "name": "Donut",
       "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Icing: Sweet Crops Sprinkles: Sweet Crops",
       "extraInfo": "Base Time:3 minutesBase Weight:2kg",
       "baseTime": "3 minutes",
-      "baseWeight": "2kg"
+      "baseWeight": "2kg",
+      "image": "/Grow%20a%20Garden/Food/donut.png"
     },
     {
       "name": "Eggnog",
       "recipes": "Sweet: Sweet Crops Root: Root Crops",
       "extraInfo": "Base Time:2 minutesBase Weight:1.6kg",
       "baseTime": "2 minutes",
-      "baseWeight": "1.6kg"
+      "baseWeight": "1.6kg",
+      "image": "/Grow%20a%20Garden/Food/eggnog.png"
     },
     {
       "name": "Fruitcake",
       "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Fruit: Fruit Crops Berry: Berry Crops Sweet: Sweet Crops",
       "extraInfo": "Base Time:4 minutesBase Weight:2.2kg",
       "baseTime": "4 minutes",
-      "baseWeight": "2.2kg"
+      "baseWeight": "2.2kg",
+      "image": "/Grow%20a%20Garden/Food/fruitcake.png"
     },
     {
       "name": "Gingerbread Cookie",
       "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Candy: Candy Crops Root: Root Crops",
       "extraInfo": "Base Time:2 minutesBase Weight:1.5kg",
       "baseTime": "2 minutes",
-      "baseWeight": "1.5kg"
+      "baseWeight": "1.5kg",
+      "image": "/Grow%20a%20Garden/Food/gingerbread-cookie.png"
     },
     {
       "name": "Holiday Roast",
       "recipes": "Meat 1: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Meat 2: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Herbs: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower",
       "extraInfo": "Base Time:7 minutesBase Weight:2kg",
       "baseTime": "7 minutes",
-      "baseWeight": "2kg"
+      "baseWeight": "2kg",
+      "image": "/Grow%20a%20Garden/Food/holiday-roast.png"
     },
     {
       "name": "Holiday Stuffing",
       "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Herbs: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Vegetable: Vegetable Crops",
       "extraInfo": "Base Time:3 minutesBase Weight:1.8kg",
       "baseTime": "3 minutes",
-      "baseWeight": "1.8kg"
+      "baseWeight": "1.8kg",
+      "image": "/Grow%20a%20Garden/Food/holiday-stuffing.png"
     },
     {
       "name": "Hot Dog",
       "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom",
       "extraInfo": "Base Time:7 minutesBase Weight:1.5kg",
       "baseTime": "7 minutes",
-      "baseWeight": "1.5kg"
+      "baseWeight": "1.5kg",
+      "image": "/Grow%20a%20Garden/Food/hot-dog.png"
     },
     {
       "name": "Ice Cream",
       "recipes": "Cone: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Cream: Sweet Crops",
       "extraInfo": "Base Time:5 minutesBase Weight:2kg",
       "baseTime": "5 minutes",
-      "baseWeight": "2kg"
+      "baseWeight": "2kg",
+      "image": "/Grow%20a%20Garden/Food/ice-cream.png"
     },
     {
       "name": "Pie",
       "recipes": "Pastry: Crown Melon, Pumpkin, Coconut, Sugarglaze Filling: Vegetable Crops",
       "extraInfo": "Base Time:7 minutesBase Weight:3kg",
       "baseTime": "7 minutes",
-      "baseWeight": "3kg"
+      "baseWeight": "3kg",
+      "image": "/Grow%20a%20Garden/Food/pie.png"
     },
     {
       "name": "Pizza",
       "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Vegetable: Vegetable Crops Sause: Fruit Crops",
       "extraInfo": "Base Time:8 minutesBase Weight:2kg",
       "baseTime": "8 minutes",
-      "baseWeight": "2kg"
+      "baseWeight": "2kg",
+      "image": "/Grow%20a%20Garden/Food/pizza.png"
     },
     {
       "name": "Porridge",
       "recipes": "Base: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Cream: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Fruit: Fruit Crops",
       "extraInfo": "Base Time:4 minutesBase Weight:2kg",
       "baseTime": "4 minutes",
-      "baseWeight": "2kg"
+      "baseWeight": "2kg",
+      "image": "/Grow%20a%20Garden/Food/porridge.png"
     },
     {
       "name": "Salad",
       "recipes": "Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Vegetable: Vegetable Crops",
       "extraInfo": "Base Time:6 minutesBase Weight:0.2kg",
       "baseTime": "6 minutes",
-      "baseWeight": "0.2kg"
+      "baseWeight": "0.2kg",
+      "image": "/Grow%20a%20Garden/Food/salad.png"
     },
     {
       "name": "Sandwich",
       "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Tomato: Tomato, Grand Tomato",
       "extraInfo": "Base Time:6 minutesBase Weight:1kg",
       "baseTime": "6 minutes",
-      "baseWeight": "1kg"
+      "baseWeight": "1kg",
+      "image": "/Grow%20a%20Garden/Food/sandwich.png"
     },
     {
       "name": "Smoothie",
       "recipes": "Fruit: Fruit Crops",
       "extraInfo": "Base Time:7 minutesBase Weight:1.2kg",
       "baseTime": "7 minutes",
-      "baseWeight": "1.2kg"
+      "baseWeight": "1.2kg",
+      "image": "/Grow%20a%20Garden/Food/smoothie.png"
     },
     {
       "name": "Soup",
       "recipes": "Any recipe, as long as it isn't a recipe for another food.",
       "extraInfo": "Base Time:5 minutesBase Weight:0.5kg",
       "baseTime": "5 minutes",
-      "baseWeight": "0.5kg"
+      "baseWeight": "0.5kg",
+      "image": "/Grow%20a%20Garden/Food/soup.png"
     },
     {
       "name": "Spaghetti",
       "recipes": "Pasta: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Sause: Tomato, Grand Tomato Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Vegetable: Vegetable Crops",
       "extraInfo": "Base Time:6 minutesBase Weight:2.5kg",
       "baseTime": "6 minutes",
-      "baseWeight": "2.5kg"
+      "baseWeight": "2.5kg",
+      "image": "/Grow%20a%20Garden/Crop%20Mutations/spaghetti.png"
     },
     {
       "name": "Sushi",
       "recipes": "Bamboo: Bamboo Wrap: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Main: Vegetable Crops Rice: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze",
       "extraInfo": "Base Time:5 minutesBase Weight:2kg",
       "baseTime": "5 minutes",
-      "baseWeight": "2kg"
+      "baseWeight": "2kg",
+      "image": "/Grow%20a%20Garden/Food/sushi.png"
     },
     {
       "name": "Sweet Tea",
       "recipes": "Herbal Base: Flower Crops, Toxic Crops, Mint Sweetener: Sweet Crops",
       "extraInfo": "Base Time:5 minutesBase Weight:0.5kg",
       "baseTime": "5 minutes",
-      "baseWeight": "0.5kg"
+      "baseWeight": "0.5kg",
+      "image": "/Grow%20a%20Garden/Food/sweet-tea.png"
     },
     {
       "name": "Waffle",
       "recipes": "Pastry: Crown Melon, Pumpkin, Coconut, Sugarglaze Sweet: Sweet Crops",
       "extraInfo": "Base Time:6 minutesBase Weight:1.2kg",
       "baseTime": "6 minutes",
-      "baseWeight": "1.2kg"
+      "baseWeight": "1.2kg",
+      "image": "/Grow%20a%20Garden/Food/waffle.png"
     },
     {
       "name": "Wreath",
       "recipes": "Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Sweet: Sweet Crops Berries: Berry Crops",
       "extraInfo": "Base Time:3 minutesBase Weight:2kg",
       "baseTime": "3 minutes",
-      "baseWeight": "2kg"
+      "baseWeight": "2kg",
+      "image": "/Grow%20a%20Garden/Food/wreath.png"
     }
   ]
 }

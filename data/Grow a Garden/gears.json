@@ -27,7 +27,7 @@
   "items": [
     {
       "name": "Watering Can",
-      "image": "https://static.wikia.nocookie.net/growagarden/images/5/51/Watering_Can.png/revision/latest/scale-to-width-down/100?cb=20250429005625",
+      "image": "/Grow%20a%20Garden/Gears/watering-can.png",
       "category": "Common",
       "price": "50,000 39",
       "use": "Speeds up crop growth.",
@@ -36,7 +36,7 @@
     },
     {
       "name": "Trowel",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/trowel.png",
       "category": "Uncommon",
       "price": "100,000 49",
       "use": "Realign crops.",
@@ -45,7 +45,7 @@
     },
     {
       "name": "Trading Ticket",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/trading-ticket.png",
       "category": "Uncommon",
       "price": "100,000 19",
       "use": "Allows trading with other players.",
@@ -54,7 +54,7 @@
     },
     {
       "name": "Recall Wrench",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/recall-wrench.png",
       "category": "Uncommon",
       "price": "150,000 59",
       "use": "Teleports the user to the Gear Shop.",
@@ -63,7 +63,7 @@
     },
     {
       "name": "Basic Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/basic-sprinkler.png",
       "category": "Rare",
       "price": "25,000 79",
       "use": "Increases growth speed and harvest size of crops within its radius.",
@@ -72,7 +72,7 @@
     },
     {
       "name": "Firework",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/firework.png",
       "category": "Rare",
       "price": "74,000 39",
       "use": "Launches a firework into the sky.",
@@ -81,7 +81,7 @@
     },
     {
       "name": "Charcoal Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/charcoal-sprinkler.png",
       "category": "Rare",
       "price": "No Prices",
       "use": "Can apply the Charcoal mutation.",
@@ -90,7 +90,7 @@
     },
     {
       "name": "Advanced Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/advanced-sprinkler.png",
       "category": "Legendary",
       "price": "50,000 99",
       "use": "Increases growth speed and mutation chance of crops within its radius.",
@@ -99,7 +99,7 @@
     },
     {
       "name": "Medium Treat",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/medium-treat.png",
       "category": "Legendary",
       "price": "4,000,000 199",
       "use": "Used on pets for a medium XP boost over time (lasts 1 day).",
@@ -108,7 +108,7 @@
     },
     {
       "name": "Medium Toy",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/medium-toy.png",
       "category": "Legendary",
       "price": "4,000,000 189",
       "use": "Gives a pet a medium boost (8–9%) to their passive ability for 5 minutes.",
@@ -117,7 +117,7 @@
     },
     {
       "name": "Night Staff",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/night-staff.png",
       "category": "Legendary",
       "price": "12,000,000 (Sky Merchant) 40 ×1 110 ×1 250 ×1 360 ×3",
       "use": "Guarantees the moonlit mutation of 6 random plants in the user's garden.",
@@ -126,7 +126,7 @@
     },
     {
       "name": "Star Caller",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/star-caller.png",
       "category": "Legendary",
       "price": "12,000,000 15,000,000 (Sky Merchant) 219",
       "use": "Redirects shooting stars to land in its close vicinity.",
@@ -135,7 +135,7 @@
     },
     {
       "name": "Garden Guide",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/garden-guide.png",
       "category": "Legendary",
       "price": "Free (used to be obtained upon joining the game)",
       "use": "Used to look up information about Daily Quests, Achievements, Crops, Pets, Cosmetics, Food, and Mutations.",
@@ -144,7 +144,7 @@
     },
     {
       "name": "Godly Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/godly-sprinkler.png",
       "category": "Mythical",
       "price": "120,000 149",
       "use": "Increases growth speed, mutation chance, and harvest size of crops within its radius.",
@@ -153,7 +153,7 @@
     },
     {
       "name": "Chocolate Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/chocolate-sprinkler.png",
       "category": "Mythical",
       "price": "500,000 199",
       "use": "Multi-harvest fruit within its area are covered in chocolate.",
@@ -162,7 +162,7 @@
     },
     {
       "name": "Magnifying Glass",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/magnifying-glass.png",
       "category": "Mythical",
       "price": "10,000,000 99",
       "use": "Inspects plants to reveal their value and growth progress (updates dynamically).",
@@ -171,7 +171,7 @@
     },
     {
       "name": "Nectar Staff",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/nectar-staff.png",
       "category": "Mythical",
       "price": "25 219",
       "use": "Attracts more bees to pollinate the player's fruit.",
@@ -180,7 +180,7 @@
     },
     {
       "name": "Pollen Radar",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/pollen-radar.png",
       "category": "Mythical",
       "price": "20 249",
       "use": "Scans and collects nearby pollinated fruit.",
@@ -189,7 +189,7 @@
     },
     {
       "name": "Silver Fertilizer",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/silver-fertilizer.png",
       "category": "Mythical",
       "price": "10,000,000 129",
       "use": "Makes a plant silver for 2 hours.",
@@ -198,7 +198,7 @@
     },
     {
       "name": "Lush Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/lush-sprinkler.png",
       "category": "Mythical",
       "price": "30,000,000 299",
       "use": "Turns nearby plants Lush. Lasts 1 minute.",
@@ -207,7 +207,7 @@
     },
     {
       "name": "Geode Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/geode-sprinkler.png",
       "category": "Mythical",
       "price": "No Price",
       "use": "Turns nearby plants Geode. Lasts 1 minute.",
@@ -216,7 +216,7 @@
     },
     {
       "name": "Master Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/master-sprinkler.png",
       "category": "Divine",
       "price": "10,000,000 199",
       "use": "Greatly increases growth speed, mutation chance, and harvest size of crops within its radius.",
@@ -225,7 +225,7 @@
     },
     {
       "name": "Cleaning Spray",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/cleaning-spray.png",
       "category": "Divine",
       "price": "15,000,000 139",
       "use": "Removes all mutations from the selected crop.",
@@ -234,7 +234,7 @@
     },
     {
       "name": "Favorite Tool",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/favorite-tool.png",
       "category": "Divine",
       "price": "20,000,000 119",
       "use": "Prevents selected crops from being picked up by the user.",
@@ -243,7 +243,7 @@
     },
     {
       "name": "Harvest Tool",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/harvest-tool.png",
       "category": "Divine",
       "price": "30,000,000 149",
       "use": "Harvests all fruit from the selected plant.",
@@ -252,7 +252,7 @@
     },
     {
       "name": "Friendship Pot",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/friendship-pot.png",
       "category": "Divine",
       "price": "15,000,000 39",
       "use": "A flower pot to share with a friend.",
@@ -261,7 +261,7 @@
     },
     {
       "name": "Honey Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/honey-sprinkler.png",
       "category": "Divine",
       "price": "30 199",
       "use": "Applies the Honey Glazed mutation to crops within its radius.",
@@ -270,7 +270,7 @@
     },
     {
       "name": "Pet Mutation Shard Tranquil",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/pet-mutation-shard-tranquil.png",
       "category": "Divine",
       "price": "200 279",
       "use": "Applies the Tranquil mutation to a pet.",
@@ -279,7 +279,7 @@
     },
     {
       "name": "Pet Mutation Shard Corrupted",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/pet-mutation-shard-corrupted.png",
       "category": "Divine",
       "price": "205 289",
       "use": "Applies the Corrupted mutation to a pet.",
@@ -288,7 +288,7 @@
     },
     {
       "name": "Maple Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/maple-sprinkler.png",
       "category": "Divine",
       "price": "250,000,000 189",
       "use": "Increases growth speed, mutation chances, and fruit size of fall plants (lasts 5 minutes).",
@@ -297,7 +297,7 @@
     },
     {
       "name": "Large Toy",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/large-toy.png",
       "category": "Divine",
       "price": "Trader Rewards Watering Can Advertisement Forever Pack Rare Present Gold Gift Rainbow Gift",
       "use": "Gives a pet a large boost to their passive ability for 5 minutes.",
@@ -306,7 +306,7 @@
     },
     {
       "name": "Smith Treat",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/smith-treat.png",
       "category": "Divine",
       "price": "Crafting",
       "use": "Used on pets for a large XP boost over time (lasts 1 day).",
@@ -315,7 +315,7 @@
     },
     {
       "name": "Gold Fertilizer",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/gold-fertilizer.png",
       "category": "Divine",
       "price": "Safari Harvest Rewards",
       "use": "Makes a plant gold for 2 hours.",
@@ -324,7 +324,7 @@
     },
     {
       "name": "Rainbow Fertilizer",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/rainbow-fertilizer.png",
       "category": "Divine",
       "price": "Forever Pack",
       "use": "Makes a plant rainbow for 2 hours.",
@@ -333,7 +333,7 @@
     },
     {
       "name": "Pet Pouch",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/pet-pouch.png",
       "category": "Divine",
       "price": "Crafting",
       "use": "Increases your pet inventory slots by +1. Max +50.",
@@ -342,7 +342,7 @@
     },
     {
       "name": "Levelup Lollipop",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/levelup-lollipop.png",
       "category": "Prismatic",
       "price": "10,000,000,000 79",
       "use": "Increases chosen pet age by 1.",
@@ -351,7 +351,7 @@
     },
     {
       "name": "Grandmaster Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/grandmaster-sprinkler.png",
       "category": "Prismatic",
       "price": "1,000,000,000 279",
       "use": "Massively increases growth speed, mutation chances, fruit size, and boosts pets.",
@@ -360,7 +360,7 @@
     },
     {
       "name": "Rainbow Lollipop",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/rainbow-lollipop.png",
       "category": "Prismatic",
       "price": "37-119 in the Forever Pack.",
       "use": "Increases chosen pet age by 50.",
@@ -369,7 +369,7 @@
     },
     {
       "name": "Silver Lollipop",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/silver-lollipop.png",
       "category": "Prismatic",
       "price": "Achievement Rewards",
       "use": "Increases chosen pet age by 5.",
@@ -378,7 +378,7 @@
     },
     {
       "name": "Gold Lollipop",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/gold-lollipop.png",
       "category": "Prismatic",
       "price": "Achievement Rewards",
       "use": "Increases chosen pet age by 10.",
@@ -387,7 +387,7 @@
     },
     {
       "name": "Mega Lollipop",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/mega-lollipop.png",
       "category": "Prismatic",
       "price": "Achievement Rewards",
       "use": "Increases chosen pet age by 100.",
@@ -396,7 +396,7 @@
     },
     {
       "name": "Lightning Rod",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/lightning-rod.png",
       "category": "Craftables",
       "price": "1× Basic Sprinkler + 1× Advanced Sprinkler + 1× Godly Sprinkler + 500,000 179",
       "use": "Redirects lightning from its vicinity to a chosen point in the user's garden.",
@@ -405,7 +405,7 @@
     },
     {
       "name": "Tanning Mirror",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/tanning-mirror.png",
       "category": "Craftables",
       "price": "1× Basic Sprinkler + 1× Advanced Sprinkler + 1× Godly Sprinkler + 500,000 219",
       "use": "Attracts sun rays to nearby crops.",
@@ -414,7 +414,7 @@
     },
     {
       "name": "Reclaimer",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/reclaimer.png",
       "category": "Craftables",
       "price": "1× Common Egg + 1× Harvest Tool + 500,000 199",
       "use": "Reclaims plants, turning them into seeds (3 uses).",
@@ -423,7 +423,7 @@
     },
     {
       "name": "Small Toy",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/small-toy.png",
       "category": "Craftables",
       "price": "1× Common Egg + 1× Coconut Seed + 1× Coconut + 1,000,000 139",
       "use": "Gives a pet a small passive ability boost (3 uses).",
@@ -432,7 +432,7 @@
     },
     {
       "name": "Small Treat",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/small-treat.png",
       "category": "Craftables",
       "price": "1× Common Egg + 1× Dragon Fruit Seed + 1× Blueberry + 1,000,000 89",
       "use": "Gives a pet a small XP boost over time (3 uses).",
@@ -441,7 +441,7 @@
     },
     {
       "name": "Smith Hammer of Harvest",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/smith-hammer-of-harvest.png",
       "category": "Craftables",
       "price": "1× Harvest Tool + 3× Rare Coal + 6,000,000 149",
       "use": "Harvests all fruit within a radius.",
@@ -450,7 +450,7 @@
     },
     {
       "name": "Smith Treat",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/smith-treat.png",
       "category": "Craftables",
       "price": "1× Common Coal + 1× Rare Coal + 2× Small Treat + 4,000,000 229",
       "use": "Used on pets for a large XP boost over time.",
@@ -459,7 +459,7 @@
     },
     {
       "name": "Pet Pouch",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/pet-pouch.png",
       "category": "Craftables",
       "price": "1× Common Egg + 1× Corndog + 1× Small Treat + 1× Small Toy + 50,000,000 89",
       "use": "Increases your pet inventory slots by +1. Max +50.",
@@ -468,7 +468,7 @@
     },
     {
       "name": "Pet Mutation Shard Giantbean",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/pet-mutation-shard-giantbean.png",
       "category": "Craftables",
       "price": "3× Beanstalk + 1× Cleansing Pet Shard + 15,000,000 279",
       "use": "Applies the GiantBean mutation on a pet: 15% faster hunger rate + ~0.12 xp/s per Beanstalk planted.",
@@ -477,7 +477,7 @@
     },
     {
       "name": "Chimera Stone",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/chimera-stone.png",
       "category": "Craftables",
       "price": "1× Mythical Egg + 1× Bug Egg + 1× Jungle Egg + 1× Gem Egg + 500,000,000 199",
       "use": "Use the Stone to fuse the Chimera with the required pets and cosmetics.",
@@ -486,7 +486,7 @@
     },
     {
       "name": "Thundelbringer",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/thundelbringer.png",
       "category": "Craftables",
       "price": "1× Smith Hammer of Harvest + 1× Lightning Rod + 1× Legendary Coal + 1× Divine Coal + 40,000,000 489",
       "use": "Summons a lightning bolt upon your farm.",
@@ -495,7 +495,7 @@
     },
     {
       "name": "Spray Mutation Verdant",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-verdant.png",
       "category": "Mutation Sprays",
       "price": "50,000,000 179",
       "use": "Gives a fruit the Verdant mutation.",
@@ -504,7 +504,7 @@
     },
     {
       "name": "Spray Mutation Disco",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-disco.png",
       "category": "Mutation Sprays",
       "price": "50,000,000 249",
       "use": "Gives a fruit the Disco mutation.",
@@ -513,7 +513,7 @@
     },
     {
       "name": "Spray Mutation Wet",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-wet.png",
       "category": "Mutation Sprays",
       "price": "50,000,000 179",
       "use": "Gives a fruit the Wet mutation.",
@@ -522,7 +522,7 @@
     },
     {
       "name": "Spray Mutation Windstruck",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-windstruck.png",
       "category": "Mutation Sprays",
       "price": "50,000,000 189",
       "use": "Gives a fruit the Windstruck mutation.",
@@ -531,7 +531,7 @@
     },
     {
       "name": "Spray Mutation Choc",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-choc.png",
       "category": "Mutation Sprays",
       "price": "Cleaning Spray Cacao 200,000 179",
       "use": "Gives a fruit the Choc mutation.",
@@ -540,7 +540,7 @@
     },
     {
       "name": "Spray Mutation Pollinated",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-pollinated.png",
       "category": "Mutation Sprays",
       "price": "Bee Balm Cleaning Spray 25 179",
       "use": "Gives a fruit the Pollinated mutation.",
@@ -549,7 +549,7 @@
     },
     {
       "name": "Spray Mutation Shocked",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-shocked.png",
       "category": "Mutation Sprays",
       "price": "Cleaning Spray Lightning Rod 1,000,000 199",
       "use": "Gives a fruit the Shocked mutation.",
@@ -558,7 +558,7 @@
     },
     {
       "name": "Spray Mutation Cloudtouched",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-cloudtouched.png",
       "category": "Mutation Sprays",
       "price": "50,000,000 189",
       "use": "Gives a fruit the Cloudtouched mutation.",
@@ -567,7 +567,7 @@
     },
     {
       "name": "Spray Mutation Burnt",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-burnt.png",
       "category": "Mutation Sprays",
       "price": "3 189",
       "use": "Gives a fruit the Burnt mutation.",
@@ -576,7 +576,7 @@
     },
     {
       "name": "Spray Mutation Chilled",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-chilled.png",
       "category": "Mutation Sprays",
       "price": "Godly Sprinkler Cleaning Spray 500,000 189",
       "use": "Gives a fruit the Chilled mutation.",
@@ -585,7 +585,7 @@
     },
     {
       "name": "Spray Mutation Amber",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-amber.png",
       "category": "Mutation Sprays",
       "price": "Cleaning Spray Dinosaur Egg 1,000,000 189",
       "use": "Gives a fruit the Amber mutation.",
@@ -594,7 +594,7 @@
     },
     {
       "name": "Spray Mutation Tranquil",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-tranquil.png",
       "category": "Mutation Sprays",
       "price": "Obtained from Corrupted Rewards",
       "use": "Gives a fruit the Tranquil mutation.",
@@ -603,7 +603,7 @@
     },
     {
       "name": "Spray Mutation Corrupt",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-corrupt.png",
       "category": "Mutation Sprays",
       "price": "Obtained from Corrupted Rewards",
       "use": "Gives a fruit the Corrupted mutation.",
@@ -612,7 +612,7 @@
     },
     {
       "name": "Spray Mutation HoneyGlazed",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-honeyglazed.png",
       "category": "Mutation Sprays",
       "price": "Obtained from Cooking Rewards",
       "use": "Gives a fruit the HoneyGlazed mutation.",
@@ -621,7 +621,7 @@
     },
     {
       "name": "Spray Mutation Fried",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-fried.png",
       "category": "Mutation Sprays",
       "price": "Obtained from Cooking Rewards",
       "use": "Gives a fruit the Fried mutation.",
@@ -630,7 +630,7 @@
     },
     {
       "name": "Spray Mutation Cooked",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-cooked.png",
       "category": "Mutation Sprays",
       "price": "Unobtainable",
       "use": "Gives a fruit the Cooked mutation.",
@@ -639,7 +639,7 @@
     },
     {
       "name": "Spray Mutation Bloom",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-bloom.png",
       "category": "Mutation Sprays",
       "price": "Obtained from Beanstalk Rewards",
       "use": "Gives a fruit the Bloom mutation.",
@@ -648,7 +648,7 @@
     },
     {
       "name": "Spray Mutation Glimmering",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-glimmering.png",
       "category": "Mutation Sprays",
       "price": "Cleaning Spray Orange Tulip Seed Daffodil Seed Mango 1,000,000 159",
       "use": "Gives a fruit the Glimmering mutation.",
@@ -657,7 +657,7 @@
     },
     {
       "name": "Spray Mutation Luminous",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spray-mutation-luminous.png",
       "category": "Mutation Sprays",
       "price": "6,000 209",
       "use": "Gives a fruit the Luminous mutation.",
@@ -666,7 +666,7 @@
     },
     {
       "name": "Berry Blusher Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/berry-blusher-sprinkler.png",
       "category": "Merchant",
       "price": "50,000,000 229",
       "use": "Greatly increases size bonus for Grapes, Blueberries, Strawberries, Raspberries, and Celestiberries (1.5 min duration).",
@@ -675,7 +675,7 @@
     },
     {
       "name": "Flower Froster Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/flower-froster-sprinkler.png",
       "category": "Merchant",
       "price": "50,000,000 229",
       "use": "Freezes flower-type plants (2.5 min duration).",
@@ -684,7 +684,7 @@
     },
     {
       "name": "Spice Spritzer Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/spice-spritzer-sprinkler.png",
       "category": "Merchant",
       "price": "50,000,000 229",
       "use": "Greatly increases variant chance for Cacao, Pepper, Ember Lily, and Papaya (2.5 min duration).",
@@ -693,7 +693,7 @@
     },
     {
       "name": "Stalk Sprout Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/stalk-sprout-sprinkler.png",
       "category": "Merchant",
       "price": "50,000,000 229",
       "use": "Greatly increases growth speed of Mushrooms, Bamboo, and Beanstalk; may apply Wet mutation (2 min duration).",
@@ -702,7 +702,7 @@
     },
     {
       "name": "Sweet Soaker Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/sweet-soaker-sprinkler.png",
       "category": "Merchant",
       "price": "50,000,000 229",
       "use": "Increases size bonus for Watermelon, Pumpkin, and Moon Melon (5 min duration).",
@@ -711,7 +711,7 @@
     },
     {
       "name": "Tropical Mist Sprinkler",
-      "image": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+      "image": "/Grow%20a%20Garden/Gears/tropical-mist-sprinkler.png",
       "category": "Merchant",
       "price": "50,000,000 229",
       "use": "Increases growth speed and size bonus for tropical fruits (4 min duration).",
