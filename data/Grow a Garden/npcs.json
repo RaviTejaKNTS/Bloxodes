@@ -21,35 +21,35 @@
     {
       "name": "Ancient Jack O Lantern",
       "category": "NPC",
-      "function": "Give it Halloween themed crops and it jump-scares the player and gives them candy corn.",
+      "function": "Give it Halloween themed crops and it jump-scares the player before rewarding them with candy corn.",
       "birthday": null,
       "image": "/Grow%20a%20Garden/NPCs/ancient-jack-o-lantern.png"
     },
     {
       "name": "Bald Eagle",
       "category": "NPC",
-      "function": "The Bald Eagle is the mascot perching on top of the 4th of July Shop",
+      "function": "The Bald Eagle serves as the mascot perched on top of the 4th of July Shop",
       "birthday": null,
       "image": "/Grow%20a%20Garden/NPCs/bald-eagle.png"
     },
     {
       "name": "Barry",
       "category": "NPC",
-      "function": "Barry is the raptor beside Graham's DNA Machine. By giving prehistoric type crops to him, he can upgrade Graham's DNA Machine",
+      "function": "Barry is the raptor next to Graham's DNA Machine. If you bring him prehistoric-type crops, he can upgrade Graham's DNA Machine",
       "birthday": null,
       "image": "/Grow%20a%20Garden/NPCs/barry.png"
     },
     {
       "name": "Bee",
       "category": "NPC",
-      "function": "The bees are the NPCs that visit gardens to pollinate certain plants during the Bizzy Bee event.",
+      "function": "The bees are NPCs that visit gardens to pollinate certain plants during the Bizzy Bee event.",
       "birthday": null,
       "image": "/Grow%20a%20Garden/NPCs/bee.png"
     },
     {
       "name": "Bizzy Bear",
       "category": "NPC",
-      "function": "The Bizzy Bear is an NPC at the Bizzy Bee Event, which is asking for a crop with a specific size with one of two mutations. He is also the NPC that owned the crafting stations before it got moved to the Cosmetics Shop.",
+      "function": "The Bizzy Bear appears during the Bizzy Bee Event and asks for a crop with a specific size with one of two mutations. He is also the NPC that owned the crafting stations before it got moved to the Cosmetics Shop.",
       "birthday": null,
       "image": "/Grow%20a%20Garden/NPCs/bizzy-bear.png"
     },

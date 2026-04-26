@@ -30,7 +30,7 @@
       "image": "/Grow%20a%20Garden/Gears/watering-can.png",
       "category": "Common",
       "price": "50,000 39",
-      "use": "Speeds up crop growth.",
+      "use": "Helps crops grow faster.",
       "stock": "1–4",
       "obtainable": "✓"
     },
@@ -39,7 +39,7 @@
       "image": "/Grow%20a%20Garden/Gears/trowel.png",
       "category": "Uncommon",
       "price": "100,000 49",
-      "use": "Realign crops.",
+      "use": "Lets you realign crops.",
       "stock": "1–3",
       "obtainable": "✓"
     },
@@ -48,7 +48,7 @@
       "image": "/Grow%20a%20Garden/Gears/trading-ticket.png",
       "category": "Uncommon",
       "price": "100,000 19",
-      "use": "Allows trading with other players.",
+      "use": "Lets you trade with other players.",
       "stock": "1–3",
       "obtainable": "✓"
     },

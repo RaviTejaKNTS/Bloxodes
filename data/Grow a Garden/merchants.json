@@ -20,31 +20,31 @@
     {
       "name": "4th of July Merchant",
       "category": "Merchant",
-      "function": "Spawned only on 4th of July, staying for 24 hours. Sold 5 things in the shop: x5 Liberty Lily x15 Firework Flower x30 Firework x1 Bald Eagle x7 July 4th Crate",
+      "function": "Appears only on 4th of July, and stays for 24 hours. It sold 5 shop items: x5 Liberty Lily x15 Firework Flower x30 Firework x1 Bald Eagle x7 July 4th Crate",
       "image": "/Grow%20a%20Garden/Merchants/4th-of-july-merchant.png"
     },
     {
       "name": "Fall Merchant",
       "category": "Merchant",
-      "function": "Sells seeds, gears, and pets from the Fall Market Event: Fall Seed Pack Kniphofia Maple Resin Fall Egg Chipmunk Space Squirrel Red Panda Bonfire Harvest Basket Super Leaf Blower Rake Fall Crate Maple Crate Fall Fountain The amount of Sheckles the player could buy are the same from the Fall Market Event",
+      "function": "Offers seeds, gears, and pets from the Fall Market Event: Fall Seed Pack Kniphofia Maple Resin Fall Egg Chipmunk Space Squirrel Red Panda Bonfire Harvest Basket Super Leaf Blower Rake Fall Crate Maple Crate Fall Fountain The Sheckles purchase amounts matched the Fall Market Event.",
       "image": "/Grow%20a%20Garden/Merchants/fall-merchant.png"
     },
     {
       "name": "Gnome Merchant",
       "category": "Merchant",
-      "function": "Sells 5 things in the shop: Common, Classic, Farmers, Iconic Gnome Crates Gnome Pet",
+      "function": "It offers 5 shop items: Common, Classic, Farmers, Iconic Gnome Crates Gnome Pet",
       "image": "/Grow%20a%20Garden/Merchants/gnome-merchant.png"
     },
     {
       "name": "Halloween Merchant",
       "category": "Merchant",
-      "function": "Spawned only on the 31st of October, staying for 24 hours. Sold 8 items in the shop: x6 Spider Vine x3 Monster Flower x35 Frightwork x10 Vampire Fang x1 Specter x1 Lich Statue x1 Skull Fence x1 Cemetery Fence",
+      "function": "Appears only on the 31st of October, and stays for 24 hours. It sold 8 shop items: x6 Spider Vine x3 Monster Flower x35 Frightwork x10 Vampire Fang x1 Specter x1 Lich Statue x1 Skull Fence x1 Cemetery Fence",
       "image": "/Grow%20a%20Garden/Merchants/halloween-merchant.png"
     },
     {
       "name": "Honey Merchant",
       "category": "Merchant",
-      "function": "Sells: Bee Egg Honey Sprinkler Flower Seed Pack Bee Crate Honey Crafters Crate for Honey.",
+      "function": "Offers: Bee Egg Honey Sprinkler Flower Seed Pack Bee Crate Honey Crafters Crate for Honey.",
       "image": "/Grow%20a%20Garden/Merchants/honey-merchant.png"
     },
     {
@@ -56,7 +56,7 @@
     {
       "name": "Rare Cosmetics Merchant",
       "category": "Merchant",
-      "function": "Sells: Cooking Pot Hot Spring Spell Book Wisp Well Hex Circle Sarcophagus",
+      "function": "Offers: Cooking Pot Hot Spring Spell Book Wisp Well Hex Circle Sarcophagus",
       "image": "/Grow%20a%20Garden/Merchants/rare-cosmetics-merchant.png"
     },
     {
@@ -68,19 +68,19 @@
     {
       "name": "Sky Merchant",
       "category": "Merchant",
-      "function": "Sells 3 things in the shop: Night Staff Star Caller Cloudtouched Spray They respectively cost 12,000,000, 15,000,000, and 50,000,000 sheckles each.",
+      "function": "It offers 3 shop items: Night Staff Star Caller Cloudtouched Spray They respectively cost 12,000,000, 15,000,000, and 50,000,000 sheckles each.",
       "image": "/Grow%20a%20Garden/Merchants/sky-merchant.png"
     },
     {
       "name": "Sprinkler Merchant",
       "category": "Merchant",
-      "function": "Sells sprinklers: Tropical Mist Sprinkler Flower Froster Sprinkler Spice Spritzer Sprinkler Stalk Sprout Sprinkler Sweet Soaker Sprinkler They all cost 50,000,000 each.",
+      "function": "Offers sprinklers: Tropical Mist Sprinkler Flower Froster Sprinkler Spice Spritzer Sprinkler Stalk Sprout Sprinkler Sweet Soaker Sprinkler They all cost 50,000,000 each.",
       "image": "/Grow%20a%20Garden/Merchants/sprinkler-merchant.png"
     },
     {
       "name": "Summer Seed Merchant",
       "category": "Merchant",
-      "function": "Sells the Summer Seeds: Cauliflower Rafflesia Green Apple Avocado Banana Pineapple Kiwi (Crop) Bell Pepper Prickly Pear Loquat Feijoa Pitcher Plant Common Summer Egg Rare Summer Egg Paradise Egg",
+      "function": "Offers the Summer Seeds: Cauliflower Rafflesia Green Apple Avocado Banana Pineapple Kiwi (Crop) Bell Pepper Prickly Pear Loquat Feijoa Pitcher Plant Common Summer Egg Rare Summer Egg Paradise Egg",
       "image": "/Grow%20a%20Garden/Merchants/summer-seed-merchant.png"
     }
   ]

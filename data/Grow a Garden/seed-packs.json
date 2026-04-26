@@ -28,7 +28,7 @@
       "price": "Event quests",
       "obtainable": "Yes",
       "dateAdded": "April 4, 2025",
-      "obtainment": "One Easter Seed Pack is obtained for every Jim the Venus Flytrap Quest a player completes during the Easter Event 2026.",
+      "obtainment": "Players earn one Easter Seed Pack for every Jim the Venus Flytrap Quest a player completes during the Easter Event 2026.",
       "contents": [
         {
           "name": "Candy Carrot",
@@ -85,7 +85,7 @@
       "price": "199 for 1 575 for 3 1699 for 10",
       "obtainable": "No",
       "dateAdded": "July 5th, 2025",
-      "obtainment": "Obtainable exclusively in the shop for Robux. It cannot be obtained through normal gameplay.",
+      "obtainment": "Only available in the shop for Robux. It cannot be obtained through normal gameplay.",
       "contents": [
         {
           "name": "Stonebite",
@@ -132,7 +132,7 @@
       "price": "199 for 1 575 for 3 1699 for 10",
       "obtainable": "No",
       "dateAdded": "June 14, 2025",
-      "obtainment": "The pack was previously obtained from the Limited Time Shop for: 1 Pack: 1993 Packs: 57510 Packs: 1699",
+      "obtainment": "This pack was previously available from the Limited Time Shop for: 1 Pack: 1993 Packs: 57510 Packs: 1699",
       "contents": [
         {
           "name": "Crocus",
@@ -665,7 +665,7 @@
       "price": "199 for 1 575 for 3 1,699 for 10",
       "obtainable": "No",
       "dateAdded": "June 21, 2025",
-      "obtainment": "Obtainable exclusively in the shop for Robux. It cannot be obtained through normal gameplay.",
+      "obtainment": "Only available in the shop for Robux. It cannot be obtained through normal gameplay.",
       "contents": [
         {
           "name": "Wild Carrot",

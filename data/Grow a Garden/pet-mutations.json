@@ -25,7 +25,7 @@
     {
       "name": "Shiny",
       "appearance": null,
-      "passive": "Provides an additional 15% boost to the pet's XP per second!",
+      "passive": "Adds an extra 15% boost to the pet's XP per second!",
       "type": "Pet XP Boost",
       "amount": "30%",
       "chance": "32.15%",
@@ -36,7 +36,7 @@
     {
       "name": "Inverted",
       "appearance": null,
-      "passive": "Provides an additional 30% boost to the pet's XP per second!",
+      "passive": "Adds an extra 30% boost to the pet's XP per second!",
       "type": "Pet XP Boost",
       "amount": "50%",
       "chance": "16.08%",
@@ -47,7 +47,7 @@
     {
       "name": "Frozen",
       "appearance": null,
-      "passive": "Every 5:00-0:30m, 20-30% chance a nearby fruit becomes Frozen!",
+      "passive": "Once every 5:00-0:30m, 20-30% chance for a nearby fruit to become Frozen!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "9.65%",
@@ -58,7 +58,7 @@
     {
       "name": "Windy",
       "appearance": null,
-      "passive": "Every 5:00-0:30m, 20-30% chance a nearby fruit becomes Windstruck!",
+      "passive": "Once every 5:00-0:30m, 20-30% chance for a nearby fruit to become Windstruck!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "9.65%",
@@ -69,7 +69,7 @@
     {
       "name": "Golden",
       "appearance": null,
-      "passive": "Provides a big increase to the pet's passive!",
+      "passive": "Gives a major boost to the pet's passive!",
       "type": "Passive Boost",
       "amount": "10%",
       "chance": "6.43%",
@@ -113,7 +113,7 @@
     {
       "name": "Radiant",
       "appearance": null,
-      "passive": "Every 30:00-20:00m, emits sunshine at a random nearby plant and advances their growth by 24 hours!",
+      "passive": "Once every 30:00-20:00m, emits sunshine at a random nearby plant and advances their growth by 24 hours!",
       "type": "Plant Growth Boost",
       "amount": "None",
       "chance": "3.22%",
@@ -124,7 +124,7 @@
     {
       "name": "Rainbow",
       "appearance": null,
-      "passive": "Provides a massive increase to the pet's passive!",
+      "passive": "Gives a massive increase to the pet's passive!",
       "type": "Passive Boost",
       "amount": "20%",
       "chance": "3.22%",
@@ -135,7 +135,7 @@
     {
       "name": "Shocked",
       "appearance": null,
-      "passive": "During a Thunderstorm: Every 60-45s, has a 25-30% chance to attract lightning, shocking nearby fruits!",
+      "passive": "During a Thunderstorm: Once every 60-45s, has a 25-30% chance to attract lightning, shocking nearby fruits!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "3.22%",
@@ -146,7 +146,7 @@
     {
       "name": "Ascended",
       "appearance": null,
-      "passive": "Every 360:21-300:00m (6-5 hours), a nearby fruit ascends to a higher realm, with a 75-90% chance to apply the Dawnbound mutation!",
+      "passive": "Once every 360:21-300:00m (6-5 hours), a nearby fruit ascends to a higher realm, with a 75-90% chance to trigger the Dawnbound mutation!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "0.32%",
@@ -157,7 +157,7 @@
     {
       "name": "Tranquil",
       "appearance": null,
-      "passive": "Every 25:00-16:40m, a nearby fruit finds inner peace, with a 20-30% chance to apply the Tranquil mutation!",
+      "passive": "Once every 25:00-16:40m, a nearby fruit finds inner peace, with a 20-30% chance to trigger the Tranquil mutation!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "3.02%",
@@ -168,7 +168,7 @@
     {
       "name": "Corrupted",
       "appearance": null,
-      "passive": "Every 25:00-16:40m, a nearby fruit embraces the corruption, with a 20-30% chance to apply the Corrupted mutation!",
+      "passive": "Once every 25:00-16:40m, a nearby fruit embraces the corruption, with a 20-30% chance to trigger the Corrupted mutation!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "3.02%",
@@ -179,7 +179,7 @@
     {
       "name": "Fried",
       "appearance": null,
-      "passive": "Every 16:40-8:20m, a nearby fruit is sizzled up, with a 40-60% chance to apply the Fried mutation!",
+      "passive": "Once every 16:40-8:20m, a nearby fruit is sizzled up, with a 40-60% chance to trigger the Fried mutation!",
       "type": "Applies mutation",
       "amount": "None",
       "chance": "N/A",
@@ -190,7 +190,7 @@
     {
       "name": "Aromatic",
       "appearance": null,
-      "passive": "Every 25:00-16:40m, a nearby fruit is infused with a pungent aroma, with a 20-30% chance to apply the Aromatic mutation!",
+      "passive": "Once every 25:00-16:40m, a nearby fruit is infused with a pungent aroma, with a 20-30% chance to trigger the Aromatic mutation!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "N/A",
@@ -212,7 +212,7 @@
     {
       "name": "Silver",
       "appearance": null,
-      "passive": "Provides a small increase to the pet's passive!",
+      "passive": "Gives a small increase to the pet's passive!",
       "type": "Passive Boost",
       "amount": "5%",
       "chance": "Achievements",
@@ -223,7 +223,7 @@
     {
       "name": "Glimmering",
       "appearance": null,
-      "passive": "Every 25:00-13:20m, a nearby fruit is sprinkled with fairy dust, with a 20-30% chance to apply the Glimmering mutation!",
+      "passive": "Once every 25:00-13:20m, a nearby fruit is sprinkled with fairy dust, with a 20-30% chance to trigger the Glimmering mutation!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "1.72% on tier 3 of fountain rewards 3.03% on tier 4 of fountain rewards 5.88% on tier 5 of fountain rewards",
@@ -234,7 +234,7 @@
     {
       "name": "Luminous",
       "appearance": null,
-      "passive": "Every 33:20-16:40m, a nearby fruit is imbued with fairy power, with a 20-30% chance to apply the Luminous mutation!",
+      "passive": "Once every 33:20-16:40m, a nearby fruit is imbued with fairy power, with a 20-30% chance to trigger the Luminous mutation!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "Guaranteed reward in the form of a Mutation Shard from the Fairy Event's mini achievements section. Obtained upon completion.",
@@ -245,7 +245,7 @@
     {
       "name": "Nutty",
       "appearance": null,
-      "passive": "Every 20:00-2:00 minutes, the pet's next ability use has a 20-40% chance to activate twice. Otherwise, this pet loses a level.",
+      "passive": "Once every 20:00-2:00 minutes, the pet's next ability use has a 20-40% chance to activate twice. Otherwise, this pet loses a level.",
       "type": "Duplicates Ability",
       "amount": "None",
       "chance": "0.24% chance from collecting acorns from Chubby Chipmunk.",
@@ -267,7 +267,7 @@
     {
       "name": "Soulflame",
       "appearance": null,
-      "passive": "Provides an additional 60% boost to the pet's xp per second. Every 15:12-5:00m, a nearby fruit has a 20-30% chance to get mutated with Burnt - lower chance for Flaming!",
+      "passive": "Adds an extra 60% boost to the pet's xp per second. Once every 15:12-5:00m, a nearby fruit has a 20-30% chance to get mutated with Burnt - lower chance for Flaming!",
       "type": "Pet XP Boost, Applies Mutation",
       "amount": "60%",
       "chance": "Chance to be applied by the Headless Horseman.",
@@ -278,7 +278,7 @@
     {
       "name": "Spectral",
       "appearance": null,
-      "passive": "Provides a small increase to the pet's passive!",
+      "passive": "Gives a small increase to the pet's passive!",
       "type": "Passive Boost",
       "amount": "8%",
       "chance": "Chance to be applied by the Headless Horseman.",
@@ -289,7 +289,7 @@
     {
       "name": "Nightmare",
       "appearance": null,
-      "passive": "Provides a bigger increase to the pet's passive and is slightly bigger!",
+      "passive": "Gives a bigger increase to the pet's passive and is slightly bigger!",
       "type": "Passive Boost, Size Modification",
       "amount": "22%, 125%",
       "chance": "Rare chance to be applied by the Headless Horseman.",
@@ -311,7 +311,7 @@
     {
       "name": "Aurora",
       "appearance": null,
-      "passive": "Every 42:05-16:40m, 3-50% chance a nearby fruit becomes Aurora!",
+      "passive": "Once every 42:05-16:40m, 3-50% chance for a nearby fruit to become Aurora!",
       "type": "Applies mutation",
       "amount": "None",
       "chance": "3.22%",
@@ -344,7 +344,7 @@
     {
       "name": "Giraffe",
       "appearance": null,
-      "passive": "Every 25:54-9:43m, eats fruit that are atleast 10 studs high for 0.36-0.75x sell value. The plant the fruit came from advances growth by 30:00-16:37m! Also applies Arid mutation to all other fruits on that plant. Gains small increase to passives!",
+      "passive": "Once every 25:54-9:43m, eats fruit that are atleast 10 studs high for 0.36-0.75x sell value. The plant the fruit came from advances growth by 30:00-16:37m! Also applies Arid mutation to all other fruits on that plant. Gains small increase to passives!",
       "type": "Passive Boost",
       "amount": "3%",
       "chance": "2.04% chance from giving a pet to Safari Joe",
@@ -355,7 +355,7 @@
     {
       "name": "Rhino",
       "appearance": null,
-      "passive": "Every 25:54-12:57m, charges into a random egg or random fruit in your garden: Rammed eggs have hatch time halved, rammed fruits get Mirage mutation! Cannot be mimicked or refreshed. Gains medium increase to passives!",
+      "passive": "Once every 25:54-12:57m, charges into a random egg or random fruit in your garden: Rammed eggs have hatch time halved, rammed fruits get Mirage mutation! Cannot be mimicked or refreshed. Gains medium increase to passives!",
       "type": "Passive Boost",
       "amount": "4.5%",
       "chance": "0.75-4.12% chance from giving a pet to Safari Joe",
@@ -366,7 +366,7 @@
     {
       "name": "Crocodile",
       "appearance": null,
-      "passive": "Every 35:00-17:30m, bites on to a random Plant or Pet for 7.5-12.5s and performs a roll. Plants grow an additional 22.5-11.25s/s and Pets get additional 16.25-8.75 XP/s. Gains sizable increase to passives!",
+      "passive": "Once every 35:00-17:30m, bites on to a random Plant or Pet for 7.5-12.5s and performs a roll. Plants grow an additional 22.5-11.25s/s and Pets get additional 16.25-8.75 XP/s. Gains sizable increase to passives!",
       "type": "Passive Boost",
       "amount": "6%",
       "chance": "0.76-2.06% chance from giving a pet to Safari Joe",
@@ -377,7 +377,7 @@
     {
       "name": "Lion",
       "appearance": null,
-      "passive": "Every 23:20-5:50m, roars and calls all pets in your garden to move toward it. 100-200 total cooldown advancement is shared across each pet (max 30-15 seconds per pet). Gains big increase to passives!",
+      "passive": "Once every 23:20-5:50m, roars and calls all pets in your garden to move toward it. 100-200 total cooldown advancement is shared across each pet (max 30-15 seconds per pet). Gains big increase to passives!",
       "type": "Passive Boost",
       "amount": "7%",
       "chance": "0.55-1.03% chance from giving a pet to Safari Joe",
@@ -388,7 +388,7 @@
     {
       "name": "Forger",
       "appearance": null,
-      "passive": "Every 13:20-6:40m goes to an active crafting table and advances its crafting time by 40-80s!",
+      "passive": "Once every 13:20-6:40m goes to an active crafting table and advances its crafting time by 40-80s!",
       "type": "Passive Boost",
       "amount": "7%",
       "chance": "Can be crafted as a Pet Mutation Shard in the smithing event, the materials required are: Gem Egg Legendary Coal Cleansing Pet Shard 4,500,000",
@@ -399,7 +399,7 @@
     {
       "name": "Nocturnal",
       "appearance": null,
-      "passive": "Every 23:34-11:40m, a random fruit gets advanced by 12h! Cooldown ticks down twice as fast during the night!",
+      "passive": "Once every 23:34-11:40m, a random fruit gets advanced by 12h! Cooldown ticks down twice as fast during the night!",
       "type": "Plant Growth Boost",
       "amount": "None",
       "chance": "0.5% Chance from the Christmas Present",
@@ -410,7 +410,7 @@
     {
       "name": "Peppermint",
       "appearance": null,
-      "passive": "Every 16:06-8:20m, sacrifices 12 random Christmas-type fruit in your garden to instantly activate this pet's ability!",
+      "passive": "Once every 16:06-8:20m, sacrifices 12 random Christmas-type fruit in your garden to instantly activate this pet's ability!",
       "type": "Cooldown Reduction",
       "amount": "None",
       "chance": "10% chance from Peppermint Vine when hatching a pet in the plant's radius",
@@ -421,7 +421,7 @@
     {
       "name": "Spirit Sparkle",
       "appearance": null,
-      "passive": "Every 25:00-20:00m, your pet either ages up once, or ages down once.",
+      "passive": "Once every 25:00-20:00m, your pet either ages up once, or ages down once.",
       "type": "Pet Level",
       "amount": "None",
       "chance": "10% chance from Spirit Sparkle when hatching a pet in the plant's radius",
@@ -443,7 +443,7 @@
     {
       "name": "Jolly Decorator",
       "appearance": null,
-      "passive": "Every 8:25-4:10m, applies Ornamented mutation to a random fruit!",
+      "passive": "Once every 8:25-4:10m, applies Ornamented mutation to a random fruit!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "From the Ice Golem pet!",
@@ -454,7 +454,7 @@
     {
       "name": "Merry Nursery",
       "appearance": null,
-      "passive": "Every 30:00-5:00m, goes to the unhatched egg with the highest hatch time and reduces it by 25-60s with a bonus 1-2s for every Christmas-type plant in your garden!",
+      "passive": "Once every 30:00-5:00m, goes to the unhatched egg with the highest hatch time and reduces it by 25-60s with a bonus 1-2s for every Christmas-type plant in your garden!",
       "type": "Egg Hatch Time",
       "amount": "None",
       "chance": "From the Ice Golem pet!",
@@ -498,7 +498,7 @@
     {
       "name": "Fiery",
       "appearance": null,
-      "passive": "Every 10:00-5:00m, consumes a random fruit to mutate fruits around it with the Fiery mutation!",
+      "passive": "Once every 10:00-5:00m, consumes a random fruit to mutate fruits around it with the Fiery mutation!",
       "type": "Applies Mutation",
       "amount": "None",
       "chance": "TBA",
@@ -509,7 +509,7 @@
     {
       "name": "UFO",
       "appearance": null,
-      "passive": "Provides a big boost to the pet's passive!",
+      "passive": "Gives a big boost to the pet's passive!",
       "type": "Passive Boost",
       "amount": "30%",
       "chance": "N/A",
@@ -531,7 +531,7 @@
     {
       "name": "Blossoming",
       "appearance": null,
-      "passive": "Provides a bigger increase to the pet's passive, and gains an additional 7-25 XP/s!",
+      "passive": "Gives a bigger increase to the pet's passive, and gains an additional 7-25 XP/s!",
       "type": "Passive Boost, Pet XP",
       "amount": "TBA%",
       "chance": "TBA% chance from Elder Candy Blossom when hatching a pet in the plant's radius!",

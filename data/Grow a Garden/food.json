@@ -26,7 +26,7 @@
   "items": [
     {
       "name": "Burger",
-      "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower",
+      "recipes": "Recipe groups: Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower",
       "extraInfo": "Base Time:7 minutesBase Weight:2kg",
       "baseTime": "7 minutes",
       "baseWeight": "2kg",
@@ -34,7 +34,7 @@
     },
     {
       "name": "Cake",
-      "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Icing: Sweet Crops Filling: Sweet Crops Fruit: Fruit Crops",
+      "recipes": "Recipe groups: Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Icing: Sweet Crops Filling: Sweet Crops Fruit: Fruit Crops",
       "extraInfo": "Base Time:6 minutesBase Weight:2kg",
       "baseTime": "6 minutes",
       "baseWeight": "2kg",
@@ -42,7 +42,7 @@
     },
     {
       "name": "Candy Apple",
-      "recipes": "Apple: Apple, Green Apple, Maple Apple, Sugar Apple Candy Coating: Sweet Crops",
+      "recipes": "Recipe groups: Apple: Apple, Green Apple, Maple Apple, Sugar Apple Candy Coating: Sweet Crops",
       "extraInfo": "Base Time:3 minutesBase Weight:0.7kg",
       "baseTime": "3 minutes",
       "baseWeight": "0.7kg",
@@ -50,7 +50,7 @@
     },
     {
       "name": "Candy Cane",
-      "recipes": "Candy: Candy Crops Mint: Mint",
+      "recipes": "Recipe groups: Candy: Candy Crops Mint: Mint",
       "extraInfo": "Base Time:1 minutesBase Weight:1kg",
       "baseTime": "1 minutes",
       "baseWeight": "1kg",
@@ -58,7 +58,7 @@
     },
     {
       "name": "Corndog",
-      "recipes": "Stick: Woody Crops Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Batter: Corn, Violet Corn",
+      "recipes": "Recipe groups: Stick: Woody Crops Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Batter: Corn, Violet Corn",
       "extraInfo": "Base Time:7 minutesBase Weight:1.5kg",
       "baseTime": "7 minutes",
       "baseWeight": "1.5kg",
@@ -66,7 +66,7 @@
     },
     {
       "name": "Donut",
-      "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Icing: Sweet Crops Sprinkles: Sweet Crops",
+      "recipes": "Recipe groups: Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Icing: Sweet Crops Sprinkles: Sweet Crops",
       "extraInfo": "Base Time:3 minutesBase Weight:2kg",
       "baseTime": "3 minutes",
       "baseWeight": "2kg",
@@ -74,7 +74,7 @@
     },
     {
       "name": "Eggnog",
-      "recipes": "Sweet: Sweet Crops Root: Root Crops",
+      "recipes": "Recipe groups: Sweet: Sweet Crops Root: Root Crops",
       "extraInfo": "Base Time:2 minutesBase Weight:1.6kg",
       "baseTime": "2 minutes",
       "baseWeight": "1.6kg",
@@ -82,7 +82,7 @@
     },
     {
       "name": "Fruitcake",
-      "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Fruit: Fruit Crops Berry: Berry Crops Sweet: Sweet Crops",
+      "recipes": "Recipe groups: Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Fruit: Fruit Crops Berry: Berry Crops Sweet: Sweet Crops",
       "extraInfo": "Base Time:4 minutesBase Weight:2.2kg",
       "baseTime": "4 minutes",
       "baseWeight": "2.2kg",
@@ -90,7 +90,7 @@
     },
     {
       "name": "Gingerbread Cookie",
-      "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Candy: Candy Crops Root: Root Crops",
+      "recipes": "Recipe groups: Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Candy: Candy Crops Root: Root Crops",
       "extraInfo": "Base Time:2 minutesBase Weight:1.5kg",
       "baseTime": "2 minutes",
       "baseWeight": "1.5kg",
@@ -98,7 +98,7 @@
     },
     {
       "name": "Holiday Roast",
-      "recipes": "Meat 1: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Meat 2: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Herbs: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower",
+      "recipes": "Recipe groups: Meat 1: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Meat 2: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Herbs: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower",
       "extraInfo": "Base Time:7 minutesBase Weight:2kg",
       "baseTime": "7 minutes",
       "baseWeight": "2kg",
@@ -106,7 +106,7 @@
     },
     {
       "name": "Holiday Stuffing",
-      "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Herbs: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Vegetable: Vegetable Crops",
+      "recipes": "Recipe groups: Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Herbs: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Vegetable: Vegetable Crops",
       "extraInfo": "Base Time:3 minutesBase Weight:1.8kg",
       "baseTime": "3 minutes",
       "baseWeight": "1.8kg",
@@ -114,7 +114,7 @@
     },
     {
       "name": "Hot Dog",
-      "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom",
+      "recipes": "Recipe groups: Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom",
       "extraInfo": "Base Time:7 minutesBase Weight:1.5kg",
       "baseTime": "7 minutes",
       "baseWeight": "1.5kg",
@@ -122,7 +122,7 @@
     },
     {
       "name": "Ice Cream",
-      "recipes": "Cone: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Cream: Sweet Crops",
+      "recipes": "Recipe groups: Cone: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Cream: Sweet Crops",
       "extraInfo": "Base Time:5 minutesBase Weight:2kg",
       "baseTime": "5 minutes",
       "baseWeight": "2kg",
@@ -130,7 +130,7 @@
     },
     {
       "name": "Pie",
-      "recipes": "Pastry: Crown Melon, Pumpkin, Coconut, Sugarglaze Filling: Vegetable Crops",
+      "recipes": "Recipe groups: Pastry: Crown Melon, Pumpkin, Coconut, Sugarglaze Filling: Vegetable Crops",
       "extraInfo": "Base Time:7 minutesBase Weight:3kg",
       "baseTime": "7 minutes",
       "baseWeight": "3kg",
@@ -138,7 +138,7 @@
     },
     {
       "name": "Pizza",
-      "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Vegetable: Vegetable Crops Sause: Fruit Crops",
+      "recipes": "Recipe groups: Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Vegetable: Vegetable Crops Sause: Fruit Crops",
       "extraInfo": "Base Time:8 minutesBase Weight:2kg",
       "baseTime": "8 minutes",
       "baseWeight": "2kg",
@@ -146,7 +146,7 @@
     },
     {
       "name": "Porridge",
-      "recipes": "Base: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Cream: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Fruit: Fruit Crops",
+      "recipes": "Recipe groups: Base: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Cream: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Fruit: Fruit Crops",
       "extraInfo": "Base Time:4 minutesBase Weight:2kg",
       "baseTime": "4 minutes",
       "baseWeight": "2kg",
@@ -154,7 +154,7 @@
     },
     {
       "name": "Salad",
-      "recipes": "Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Vegetable: Vegetable Crops",
+      "recipes": "Recipe groups: Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Vegetable: Vegetable Crops",
       "extraInfo": "Base Time:6 minutesBase Weight:0.2kg",
       "baseTime": "6 minutes",
       "baseWeight": "0.2kg",
@@ -162,7 +162,7 @@
     },
     {
       "name": "Sandwich",
-      "recipes": "Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Tomato: Tomato, Grand Tomato",
+      "recipes": "Recipe groups: Bread: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Tomato: Tomato, Grand Tomato",
       "extraInfo": "Base Time:6 minutesBase Weight:1kg",
       "baseTime": "6 minutes",
       "baseWeight": "1kg",
@@ -170,7 +170,7 @@
     },
     {
       "name": "Smoothie",
-      "recipes": "Fruit: Fruit Crops",
+      "recipes": "Recipe groups: Fruit: Fruit Crops",
       "extraInfo": "Base Time:7 minutesBase Weight:1.2kg",
       "baseTime": "7 minutes",
       "baseWeight": "1.2kg",
@@ -178,7 +178,7 @@
     },
     {
       "name": "Soup",
-      "recipes": "Any recipe, as long as it isn't a recipe for another food.",
+      "recipes": "Recipe groups: Any recipe, as long as it isn't a recipe for another food.",
       "extraInfo": "Base Time:5 minutesBase Weight:0.5kg",
       "baseTime": "5 minutes",
       "baseWeight": "0.5kg",
@@ -186,7 +186,7 @@
     },
     {
       "name": "Spaghetti",
-      "recipes": "Pasta: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Sause: Tomato, Grand Tomato Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Vegetable: Vegetable Crops",
+      "recipes": "Recipe groups: Pasta: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze Sause: Tomato, Grand Tomato Meat: Glowshroom, Bell Pepper, Cactus, Eggplant, Tall Asparagus, Mushroom, Pepper, Taco Fern, Venus Fly Trap, Ember Lily, Bone Blossom Vegetable: Vegetable Crops",
       "extraInfo": "Base Time:6 minutesBase Weight:2.5kg",
       "baseTime": "6 minutes",
       "baseWeight": "2.5kg",
@@ -194,7 +194,7 @@
     },
     {
       "name": "Sushi",
-      "recipes": "Bamboo: Bamboo Wrap: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Main: Vegetable Crops Rice: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze",
+      "recipes": "Recipe groups: Bamboo: Bamboo Wrap: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Main: Vegetable Crops Rice: Cauliflower, Corn, Banana, Violet Corn, Sugarglaze",
       "extraInfo": "Base Time:5 minutesBase Weight:2kg",
       "baseTime": "5 minutes",
       "baseWeight": "2kg",
@@ -202,7 +202,7 @@
     },
     {
       "name": "Sweet Tea",
-      "recipes": "Herbal Base: Flower Crops, Toxic Crops, Mint Sweetener: Sweet Crops",
+      "recipes": "Recipe groups: Herbal Base: Flower Crops, Toxic Crops, Mint Sweetener: Sweet Crops",
       "extraInfo": "Base Time:5 minutesBase Weight:0.5kg",
       "baseTime": "5 minutes",
       "baseWeight": "0.5kg",
@@ -210,7 +210,7 @@
     },
     {
       "name": "Waffle",
-      "recipes": "Pastry: Crown Melon, Pumpkin, Coconut, Sugarglaze Sweet: Sweet Crops",
+      "recipes": "Recipe groups: Pastry: Crown Melon, Pumpkin, Coconut, Sugarglaze Sweet: Sweet Crops",
       "extraInfo": "Base Time:6 minutesBase Weight:1.2kg",
       "baseTime": "6 minutes",
       "baseWeight": "1.2kg",
@@ -218,7 +218,7 @@
     },
     {
       "name": "Wreath",
-      "recipes": "Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Sweet: Sweet Crops Berries: Berry Crops",
+      "recipes": "Recipe groups: Leafy: Artichoke, Onion, Jalapeno, Tomato, Avocado, Bamboo, Taro Flower, Bell Pepper, Pineapple, Grand Tomato, Sunflower Sweet: Sweet Crops Berries: Berry Crops",
       "extraInfo": "Base Time:3 minutesBase Weight:2kg",
       "baseTime": "3 minutes",
       "baseWeight": "2kg",

@@ -44,7 +44,7 @@
           "chance": "33.33%"
         }
       ],
-      "probabilityText": "Golden Lab: 33.33% Dog: 33.33% Bunny: 33.33%",
+      "probabilityText": "Possible drops: Golden Lab (33.33%), Dog (33.33%), Bunny (33.33%).",
       "image": "/Grow%20a%20Garden/Eggs/common-egg.png"
     },
     {
@@ -70,7 +70,7 @@
           "chance": "25%"
         }
       ],
-      "probabilityText": "Black Bunny: 25% Chicken: 25% Cat: 25% Deer: 25%",
+      "probabilityText": "Possible drops: Black Bunny (25%), Chicken (25%), Cat (25%), Deer (25%).",
       "image": "/Grow%20a%20Garden/Eggs/uncommon-egg.png"
     },
     {
@@ -100,7 +100,7 @@
           "chance": "8.33%"
         }
       ],
-      "probabilityText": "Orange Tabby: 33.33% Spotted Deer: 25% Pig: 16.67% Rooster: 16.67% Monkey: 8.33%",
+      "probabilityText": "Possible drops: Orange Tabby (33.33%), Spotted Deer (25%), Pig (16.67%), Rooster (16.67%), Monkey (8.33%).",
       "image": "/Grow%20a%20Garden/Eggs/rare-egg.png"
     },
     {
@@ -130,7 +130,7 @@
           "chance": "2.13%"
         }
       ],
-      "probabilityText": "Cow: 42.55% Silver Monkey: 42.55% Sea Otter: 10.64% Turtle: 2.13% Polar Bear: 2.13%",
+      "probabilityText": "Possible drops: Cow (42.55%), Silver Monkey (42.55%), Sea Otter (10.64%), Turtle (2.13%), Polar Bear (2.13%).",
       "image": "/Grow%20a%20Garden/Eggs/legendary-egg.png"
     },
     {
@@ -160,7 +160,7 @@
           "chance": "1.5%"
         }
       ],
-      "probabilityText": "Grey Mouse: 36% Brown Mouse: 27% Squirrel: 27% Red Giant Ant: 8.5% Red Fox: 1.5%",
+      "probabilityText": "Possible drops: Grey Mouse (36%), Brown Mouse (27%), Squirrel (27%), Red Giant Ant (8.5%), Red Fox (1.5%).",
       "image": "/Grow%20a%20Garden/Eggs/mythical-egg.png"
     },
     {
@@ -190,7 +190,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Caterpillar: 40% Snail: 30% Giant Ant: 25% Praying Mantis: 4% Dragonfly: 1%",
+      "probabilityText": "Possible drops: Caterpillar (40%), Snail (30%), Giant Ant (25%), Praying Mantis (4%), Dragonfly (1%).",
       "image": "/Grow%20a%20Garden/Eggs/bug-egg.png"
     },
     {
@@ -220,7 +220,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Tree Frog: 40% Hummingbird: 30% Iguana: 24% Chimpanzee: 5% Tiger: 1%",
+      "probabilityText": "Possible drops: Tree Frog (40%), Hummingbird (30%), Iguana (24%), Chimpanzee (5%), Tiger (1%).",
       "image": "/Grow%20a%20Garden/Eggs/jungle-egg.png"
     },
     {
@@ -250,7 +250,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Snail: 40% Giant Ant: 30% Caterpillar: 25% Praying Mantis: 4% Dragonfly: 1%",
+      "probabilityText": "Possible drops: Snail (40%), Giant Ant (30%), Caterpillar (25%), Praying Mantis (4%), Dragonfly (1%).",
       "image": "/Grow%20a%20Garden/Eggs/exotic-bug-egg.png"
     },
     {
@@ -284,7 +284,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Hedgehog: 49% Mole: 22% Frog: 14% Echo Frog: 10% Night Owl: 4% Raccoon: 1%",
+      "probabilityText": "Possible drops: Hedgehog (49%), Mole (22%), Frog (14%), Echo Frog (10%), Night Owl (4%), Raccoon (1%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-night-egg.png"
     },
     {
@@ -314,7 +314,7 @@
           "chance": "0.25%"
         }
       ],
-      "probabilityText": "Wasp: 55% Tarantula Hawk: 30% Moth: 13.75% Butterfly: 1% Disco Bee: 0.25%",
+      "probabilityText": "Possible drops: Wasp (55%), Tarantula Hawk (30%), Moth (13.75%), Butterfly (1%), Disco Bee (0.25%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-anti-bee-egg.png"
     },
     {
@@ -344,7 +344,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Meerkat: 45% Sand Snake: 34.5% Axolotl: 15% Hyacinth Macaw: 5% Fennec Fox: 0.5%",
+      "probabilityText": "Possible drops: Meerkat (45%), Sand Snake (34.5%), Axolotl (15%), Hyacinth Macaw (5%), Fennec Fox (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-oasis-egg.png"
     },
     {
@@ -382,7 +382,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Parasaurolophus: 34% Iguanodon: 32.5% Pachycephalosaurus: 28% Dilophosaurus: 3% Ankylosaurus: 1% Spinosaurus: 0.5% Rainbow Premium Primal Egg: 1%",
+      "probabilityText": "Possible drops: Parasaurolophus (34%), Iguanodon (32.5%), Pachycephalosaurus (28%), Dilophosaurus (3%), Ankylosaurus (1%), Spinosaurus (0.5%), Rainbow Premium Primal Egg (1%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-primal-egg.png"
     },
     {
@@ -416,7 +416,7 @@
           "chance": "7%"
         }
       ],
-      "probabilityText": "Rainbow Parasaurolophus: 30% Rainbow Iguanodon: 25% Rainbow Pachycephalosaurus: 20% Rainbow Dilophosaurus: 10% Rainbow Ankylosaurus: 8% Rainbow Spinosaurus: 7%",
+      "probabilityText": "Possible drops: Rainbow Parasaurolophus (30%), Rainbow Iguanodon (25%), Rainbow Pachycephalosaurus (20%), Rainbow Dilophosaurus (10%), Rainbow Ankylosaurus (8%), Rainbow Spinosaurus (7%).",
       "image": "/Grow%20a%20Garden/Eggs/rainbow-premium-primal-egg.png"
     },
     {
@@ -450,7 +450,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Robin: 54% Badger: 32.5% Grizzly Bear: 10% Barn Owl: 1.5% Swan: 1% GIANT Premium Fall Egg: 1%",
+      "probabilityText": "Possible drops: Robin (54%), Badger (32.5%), Grizzly Bear (10%), Barn Owl (1.5%), Swan (1%), GIANT Premium Fall Egg (1%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-fall-egg.png"
     },
     {
@@ -480,7 +480,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "GIANT Robin: 55% GIANT Badger: 32.5% GIANT Grizzly Bear: 10% GIANT Barn Owl: 1.5% GIANT Swan: 1%",
+      "probabilityText": "Possible drops: GIANT Robin (55%), GIANT Badger (32.5%), GIANT Grizzly Bear (10%), GIANT Barn Owl (1.5%), GIANT Swan (1%).",
       "image": "/Grow%20a%20Garden/Eggs/giant-premium-fall-egg.png"
     },
     {
@@ -514,7 +514,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Bat: 44% Bone Dog: 28% Spider: 18% Black Cat: 8.5% Headless Horseman: 0.5% Ghostly Premium Spooky Egg: 1%",
+      "probabilityText": "Possible drops: Bat (44%), Bone Dog (28%), Spider (18%), Black Cat (8.5%), Headless Horseman (0.5%), Ghostly Premium Spooky Egg (1%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-spooky-egg.png"
     },
     {
@@ -544,7 +544,7 @@
           "chance": "4.5%"
         }
       ],
-      "probabilityText": "Ghostly Bat: 41% Ghostly Bone Dog: 25% Ghostly Spider: 16% Ghostly Black Cat: 13.5% Ghostly Headless Horseman: 4.5%",
+      "probabilityText": "Possible drops: Ghostly Bat (41%), Ghostly Bone Dog (25%), Ghostly Spider (16%), Ghostly Black Cat (13.5%), Ghostly Headless Horseman (4.5%).",
       "image": "/Grow%20a%20Garden/Eggs/ghostly-premium-spooky-egg.png"
     },
     {
@@ -578,7 +578,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Oxpecker: 49% Zebra: 25% Giraffe: 16% Rhino: 8.5% Elephant: 0.5% Rainbow Premium Safari Egg: 1%",
+      "probabilityText": "Possible drops: Oxpecker (49%), Zebra (25%), Giraffe (16%), Rhino (8.5%), Elephant (0.5%), Rainbow Premium Safari Egg (1%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-safari-egg.png"
     },
     {
@@ -608,7 +608,7 @@
           "chance": "4.5%"
         }
       ],
-      "probabilityText": "Rainbow Oxpecker: 45% Rainbow Zebra: 23% Rainbow Giraffe: 17% Rainbow Rhino: 10.5% Rainbow Elephant: 4.5%",
+      "probabilityText": "Possible drops: Rainbow Oxpecker (45%), Rainbow Zebra (23%), Rainbow Giraffe (17%), Rainbow Rhino (10.5%), Rainbow Elephant (4.5%).",
       "image": "/Grow%20a%20Garden/Eggs/rainbow-premium-safari-egg.png"
     },
     {
@@ -642,7 +642,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Turtle Dove: 49% Reindeer: 30% Nutcracker: 18.5% Yeti: 1% Ice Golem: 0.5% Festive Premium Christmas Egg: 1%",
+      "probabilityText": "Possible drops: Turtle Dove (49%), Reindeer (30%), Nutcracker (18.5%), Yeti (1%), Ice Golem (0.5%), Festive Premium Christmas Egg (1%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-christmas-egg.png"
     },
     {
@@ -672,7 +672,7 @@
           "chance": "4.5%"
         }
       ],
-      "probabilityText": "Festive Turtle Dove: 45% Festive Reindeer: 23% Festive Nutcracker: 17% Festive Yeti: 10.5% Festive Ice Golem: 4.5%",
+      "probabilityText": "Possible drops: Festive Turtle Dove (45%), Festive Reindeer (23%), Festive Nutcracker (17%), Festive Yeti (10.5%), Festive Ice Golem (4.5%).",
       "image": "/Grow%20a%20Garden/Eggs/festive-premium-christmas-egg.png"
     },
     {
@@ -706,7 +706,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Partridge: 49% Santa Bear: 26% Moose: 15% Frost Squirrel: 8.5% Wendigo: 0.5% Festive Premium Winter Egg: 1%",
+      "probabilityText": "Possible drops: Partridge (49%), Santa Bear (26%), Moose (15%), Frost Squirrel (8.5%), Wendigo (0.5%), Festive Premium Winter Egg (1%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-winter-egg.png"
     },
     {
@@ -736,7 +736,7 @@
           "chance": "4.5%"
         }
       ],
-      "probabilityText": "Festive Partridge: 45% Festive Santa Bear: 23% Festive Moose: 17% Festive Frost Squirrel: 10.5% Festive Wendigo: 4.5%",
+      "probabilityText": "Possible drops: Festive Partridge (45%), Festive Santa Bear (23%), Festive Moose (17%), Festive Frost Squirrel (10.5%), Festive Wendigo (4.5%).",
       "image": "/Grow%20a%20Garden/Eggs/festive-premium-winter-egg.png"
     },
     {
@@ -774,7 +774,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "New Year's Bird: 30% Firework Sprite: 25% Celebration Puppy: 20% New Year's Chimp: 15% Star Wolf: 8.75% New Year's Dragon: 0.25% Rainbow Premium New Year's Egg: 1%",
+      "probabilityText": "Possible drops: New Year's Bird (30%), Firework Sprite (25%), Celebration Puppy (20%), New Year's Chimp (15%), Star Wolf (8.75%), New Year's Dragon (0.25%), Rainbow Premium New Year's Egg (1%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-new-year-s-egg.png"
     },
     {
@@ -808,7 +808,7 @@
           "chance": "4.5%"
         }
       ],
-      "probabilityText": "Rainbow New Year's Bird: 27% Rainbow Firework Sprite: 23% Rainbow Celebration Puppy: 18% Rainbow New Year's Chimp: 15% Rainbow Star Wolf: 12.5% Rainbow New Year's Dragon: 4.5%",
+      "probabilityText": "Possible drops: Rainbow New Year's Bird (27%), Rainbow Firework Sprite (23%), Rainbow Celebration Puppy (18%), Rainbow New Year's Chimp (15%), Rainbow Star Wolf (12.5%), Rainbow New Year's Dragon (4.5%).",
       "image": "/Grow%20a%20Garden/Eggs/rainbow-premium-new-year-s-egg.png"
     },
     {
@@ -842,7 +842,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Unicycle Monkey: 39% Performer Seal: 29.5% Bear on Bike: 20% Show Pony: 10% Carnival Elephant: 0.5% Rainbow Premium Carnival Egg: 1%",
+      "probabilityText": "Possible drops: Unicycle Monkey (39%), Performer Seal (29.5%), Bear on Bike (20%), Show Pony (10%), Carnival Elephant (0.5%), Rainbow Premium Carnival Egg (1%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-carnival-egg.png"
     },
     {
@@ -872,7 +872,7 @@
           "chance": "4.5%"
         }
       ],
-      "probabilityText": "Rainbow Unicycle Monkey: 45% Rainbow Performer Seal: 23% Rainbow Bear on Bike: 17% Rainbow Show Pony: 10.5% Rainbow Carnival Elephant: 4.5%",
+      "probabilityText": "Possible drops: Rainbow Unicycle Monkey (45%), Rainbow Performer Seal (23%), Rainbow Bear on Bike (17%), Rainbow Show Pony (10.5%), Rainbow Carnival Elephant (4.5%).",
       "image": "/Grow%20a%20Garden/Eggs/rainbow-premium-carnival-egg.png"
     },
     {
@@ -906,7 +906,7 @@
           "chance": "0.80%"
         }
       ],
-      "probabilityText": "Black Bird: 55.16% Cuckoo: 23.98% Brown Owl: 15.99% Gold Finch: 3.99% Birb: 0.08% Rainbow Premium Bird Egg: 0.80%",
+      "probabilityText": "Possible drops: Black Bird (55.16%), Cuckoo (23.98%), Brown Owl (15.99%), Gold Finch (3.99%), Birb (0.08%), Rainbow Premium Bird Egg (0.80%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-bird-egg.png"
     },
     {
@@ -936,7 +936,7 @@
           "chance": "4.5%"
         }
       ],
-      "probabilityText": "Rainbow Black Bird: 45% Rainbow Cuckoo: 23% Rainbow Brown Owl: 17% Rainbow Gold Finch: 10.5% Rainbow Birb: 4.5%",
+      "probabilityText": "Possible drops: Rainbow Black Bird (45%), Rainbow Cuckoo (23%), Rainbow Brown Owl (17%), Rainbow Gold Finch (10.5%), Rainbow Birb (4.5%).",
       "image": "/Grow%20a%20Garden/Eggs/rainbow-premium-bird-egg.png"
     },
     {
@@ -962,7 +962,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Chocolate Bunny: 54% Easter Egg Chick: 35% Marshmallow Lamb: 9% Easter Bunny: 1%",
+      "probabilityText": "Possible drops: Chocolate Bunny (54%), Easter Egg Chick (35%), Marshmallow Lamb (9%), Easter Bunny (1%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-golden-egg.png"
     },
     {
@@ -988,7 +988,7 @@
           "chance": "12%"
         }
       ],
-      "probabilityText": "Gilded Choc Chocolate Bunny: 45% Gilded Choc Easter Egg Chick: 25% Gilded Choc Marshmallow Lamb: 18% Gilded Choc Easter Bunny: 12%",
+      "probabilityText": "Possible drops: Gilded Choc Chocolate Bunny (45%), Gilded Choc Easter Egg Chick (25%), Gilded Choc Marshmallow Lamb (18%), Gilded Choc Easter Bunny (12%).",
       "image": "/Grow%20a%20Garden/Eggs/gilded-choc-premium-golden-egg.png"
     },
     {
@@ -1014,7 +1014,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Spring Bee: 54% Jerboa: 35% Nyala: 9% Peryton: 0.5%",
+      "probabilityText": "Possible drops: Spring Bee (54%), Jerboa (35%), Nyala (9%), Peryton (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/premium-springtide-egg.png"
     },
     {
@@ -1040,7 +1040,7 @@
           "chance": "12%"
         }
       ],
-      "probabilityText": "Gilded Choc Spring Bee: 45% Gilded Choc Jerboa: 25% Gilded Choc Nyala: 18% Gilded Choc Peryton: 12%",
+      "probabilityText": "Possible drops: Gilded Choc Spring Bee (45%), Gilded Choc Jerboa (25%), Gilded Choc Nyala (18%), Gilded Choc Peryton (12%).",
       "image": "/Grow%20a%20Garden/Eggs/gilded-choc-premium-springtide-egg.png"
     },
     {
@@ -1074,7 +1074,7 @@
           "chance": "0.1%"
         }
       ],
-      "probabilityText": "Hedgehog: 47% Mole: 23.5% Frog: 17.63% Echo Frog: 8.23% Night Owl: 3.53% Raccoon: 0.1%",
+      "probabilityText": "Possible drops: Hedgehog (47%), Mole (23.5%), Frog (17.63%), Echo Frog (8.23%), Night Owl (3.53%), Raccoon (0.1%).",
       "image": "/Grow%20a%20Garden/Eggs/night-egg.png"
     },
     {
@@ -1104,7 +1104,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Bee: 65% Honey Bee: 25% Bear Bee: 5% Petal Bee: 4% Queen Bee (Pet): 1%",
+      "probabilityText": "Possible drops: Bee (65%), Honey Bee (25%), Bear Bee (5%), Petal Bee (4%), Queen Bee (Pet) (1%).",
       "image": "/Grow%20a%20Garden/Eggs/bee-egg.png"
     },
     {
@@ -1134,7 +1134,7 @@
           "chance": "0.25%"
         }
       ],
-      "probabilityText": "Wasp: 55% Tarantula Hawk: 30% Moth: 13.75% Butterfly: 1% Disco Bee: 0.25%",
+      "probabilityText": "Possible drops: Wasp (55%), Tarantula Hawk (30%), Moth (13.75%), Butterfly (1%), Disco Bee (0.25%).",
       "image": "/Grow%20a%20Garden/Eggs/anti-bee-egg.png"
     },
     {
@@ -1156,7 +1156,7 @@
           "chance": "25%"
         }
       ],
-      "probabilityText": "Starfish: 50% Seagull: 25% Crab: 25%",
+      "probabilityText": "Possible drops: Starfish (50%), Seagull (25%), Crab (25%).",
       "image": "/Grow%20a%20Garden/Eggs/common-summer-egg.png"
     },
     {
@@ -1186,7 +1186,7 @@
           "chance": "10%"
         }
       ],
-      "probabilityText": "Flamingo: 30% Toucan: 25% Sea Turtle: 20% Orangutan: 15% Seal: 10%",
+      "probabilityText": "Possible drops: Flamingo (30%), Toucan (25%), Sea Turtle (20%), Orangutan (15%), Seal (10%).",
       "image": "/Grow%20a%20Garden/Eggs/rare-summer-egg.png"
     },
     {
@@ -1216,7 +1216,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Ostrich: 40% Peacock: 30% Capybara: 21% Scarlet Macaw: 8% Mimic Octopus: 1%",
+      "probabilityText": "Possible drops: Ostrich (40%), Peacock (30%), Capybara (21%), Scarlet Macaw (8%), Mimic Octopus (1%).",
       "image": "/Grow%20a%20Garden/Eggs/paradise-egg.png"
     },
     {
@@ -1246,7 +1246,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Meerkat: 45% Sand Snake: 34.5% Axolotl: 15% Hyacinth Macaw: 5% Fennec Fox: 0.5%",
+      "probabilityText": "Possible drops: Meerkat (45%), Sand Snake (34.5%), Axolotl (15%), Hyacinth Macaw (5%), Fennec Fox (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/oasis-egg.png"
     },
     {
@@ -1280,7 +1280,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Raptor: 35% Triceratops: 32.5% Stegosaurus: 28% Pterodactyl: 3% Brontosaurus: 1% T-Rex: 0.5%",
+      "probabilityText": "Possible drops: Raptor (35%), Triceratops (32.5%), Stegosaurus (28%), Pterodactyl (3%), Brontosaurus (1%), T-Rex (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/dinosaur-egg.png"
     },
     {
@@ -1314,7 +1314,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Parasaurolophus: 35% Iguanodon: 32.5% Pachycephalosaurus: 28% Dilophosaurus: 3% Ankylosaurus: 1% Spinosaurus: 0.5%",
+      "probabilityText": "Possible drops: Parasaurolophus (35%), Iguanodon (32.5%), Pachycephalosaurus (28%), Dilophosaurus (3%), Ankylosaurus (1%), Spinosaurus (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/primal-egg.png"
     },
     {
@@ -1348,7 +1348,7 @@
           "chance": "0.08%"
         }
       ],
-      "probabilityText": "Shiba Inu: 40% Nihonzaru: 31% Tanuki: 20.82% Tanchozuru: 4.6% Kappa: 3.5% Kitsune: 0.08%",
+      "probabilityText": "Possible drops: Shiba Inu (40%), Nihonzaru (31%), Tanuki (20.82%), Tanchozuru (4.6%), Kappa (3.5%), Kitsune (0.08%).",
       "image": "/Grow%20a%20Garden/Eggs/zen-egg.png"
     },
     {
@@ -1382,7 +1382,7 @@
           "chance": "0.3%"
         }
       ],
-      "probabilityText": "Maneki-neko: 40% Tsuchinoko: 32.2% Kodama: 20% Raiju: 4% Mizuchi: 3.5% Corrupted Kitsune: 0.3%",
+      "probabilityText": "Possible drops: Maneki-neko (40%), Tsuchinoko (32.2%), Kodama (20%), Raiju (4%), Mizuchi (3.5%), Corrupted Kitsune (0.3%).",
       "image": "/Grow%20a%20Garden/Eggs/corrupted-zen-egg.png"
     },
     {
@@ -1412,7 +1412,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Bagel Bunny: 50% Pancake Mole: 38% Sushi Bear: 7% Spaghetti Sloth: 4% French Fry Ferret: 1%",
+      "probabilityText": "Possible drops: Bagel Bunny (50%), Pancake Mole (38%), Sushi Bear (7%), Spaghetti Sloth (4%), French Fry Ferret (1%).",
       "image": "/Grow%20a%20Garden/Eggs/gourmet-egg.png"
     },
     {
@@ -1442,7 +1442,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Dairy Cow: 50% Jackalope: 31% Seedling: 12% Golem: 6% Golden Goose: 1%",
+      "probabilityText": "Possible drops: Dairy Cow (50%), Jackalope (31%), Seedling (12%), Golem (6%), Golden Goose (1%).",
       "image": "/Grow%20a%20Garden/Eggs/sprout-egg.png"
     },
     {
@@ -1472,7 +1472,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Ladybug: 50% Pixie: 29% Imp: 15% Glimmering Sprite: 5% Cockatrice: 1%",
+      "probabilityText": "Possible drops: Ladybug (50%), Pixie (29%), Imp (15%), Glimmering Sprite (5%), Cockatrice (1%).",
       "image": "/Grow%20a%20Garden/Eggs/enchanted-egg.png"
     },
     {
@@ -1502,7 +1502,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Robin: 55% Badger: 32.5% Grizzly Bear: 10% Barn Owl: 1.5% Swan: 1%",
+      "probabilityText": "Possible drops: Robin (55%), Badger (32.5%), Grizzly Bear (10%), Barn Owl (1.5%), Swan (1%).",
       "image": "/Grow%20a%20Garden/Eggs/fall-egg.png"
     },
     {
@@ -1532,7 +1532,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Bat: 45% Bone Dog: 28% Spider: 18% Black Cat: 8.5% Headless Horseman: 0.5%",
+      "probabilityText": "Possible drops: Bat (45%), Bone Dog (28%), Spider (18%), Black Cat (8.5%), Headless Horseman (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/spooky-egg.png"
     },
     {
@@ -1562,7 +1562,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Oxpecker: 50% Zebra: 25% Giraffe: 16% Rhino: 8.5% Elephant: 0.5%",
+      "probabilityText": "Possible drops: Oxpecker (50%), Zebra (25%), Giraffe (16%), Rhino (8.5%), Elephant (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/safari-egg.png"
     },
     {
@@ -1596,7 +1596,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Topaz Snail: 44.78% Amethyst Beetle: 31.84% Emerald Snake: 13.93% Sapphire Macaw: 8.46% Diamond Panther: 0.5% Ruby Squid: 0.5%",
+      "probabilityText": "Possible drops: Topaz Snail (44.78%), Amethyst Beetle (31.84%), Emerald Snake (13.93%), Sapphire Macaw (8.46%), Diamond Panther (0.5%), Ruby Squid (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/gem-egg.png"
     },
     {
@@ -1610,7 +1610,7 @@
           "chance": "100%"
         }
       ],
-      "probabilityText": "Lich: 100%",
+      "probabilityText": "Possible drops: Lich (100%).",
       "image": "/Grow%20a%20Garden/Eggs/lich-crystal-egg.png"
     },
     {
@@ -1640,7 +1640,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Turtle Dove: 50% Reindeer: 30% Nutcracker: 18.5% Yeti: 1% Ice Golem: 0.5%",
+      "probabilityText": "Possible drops: Turtle Dove (50%), Reindeer (30%), Nutcracker (18.5%), Yeti (1%), Ice Golem (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/christmas-egg.png"
     },
     {
@@ -1670,7 +1670,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Partridge: 50% Santa Bear: 26% Moose: 15% Frost Squirrel: 8.5% Wendigo: 0.5%",
+      "probabilityText": "Possible drops: Partridge (50%), Santa Bear (26%), Moose (15%), Frost Squirrel (8.5%), Wendigo (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/winter-egg.png"
     },
     {
@@ -1704,7 +1704,7 @@
           "chance": "0.25%"
         }
       ],
-      "probabilityText": "New Year's Bird: 31% Firework Sprite: 25% Celebration Puppy: 20% New Year's Chimp: 15% Star Wolf: 8.75% New Year's Dragon: 0.25%",
+      "probabilityText": "Possible drops: New Year's Bird (31%), Firework Sprite (25%), Celebration Puppy (20%), New Year's Chimp (15%), Star Wolf (8.75%), New Year's Dragon (0.25%).",
       "image": "/Grow%20a%20Garden/Eggs/new-year-s-egg.png"
     },
     {
@@ -1734,7 +1734,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Unicycle Monkey: 40% Performer Seal: 29.5% Bear on Bike: 20% Show Pony: 10% Carnival Elephant: 0.5%",
+      "probabilityText": "Possible drops: Unicycle Monkey (40%), Performer Seal (29.5%), Bear on Bike (20%), Show Pony (10%), Carnival Elephant (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/carnival-egg.png"
     },
     {
@@ -1764,7 +1764,7 @@
           "chance": "0.10%"
         }
       ],
-      "probabilityText": "Black Bird: 44.34% Cuckoo: 30.30% Brown Owl: 20.20% Gold Finch: 5.05% Birb: 0.10%",
+      "probabilityText": "Possible drops: Black Bird (44.34%), Cuckoo (30.30%), Brown Owl (20.20%), Gold Finch (5.05%), Birb (0.10%).",
       "image": "/Grow%20a%20Garden/Eggs/bird-egg.png"
     },
     {
@@ -1790,7 +1790,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Chocolate Bunny: 55% Easter Egg Chick: 35% Marshmallow Lamb: 9% Easter Bunny: 0.5%",
+      "probabilityText": "Possible drops: Chocolate Bunny (55%), Easter Egg Chick (35%), Marshmallow Lamb (9%), Easter Bunny (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/golden-egg.png"
     },
     {
@@ -1816,7 +1816,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Gilded Choc Chocolate Bunny: 55% Gilded Choc Easter Egg Chick: 35% Gilded Choc Marshmallow Lamb: 9% Gilded Choc Easter Bunny: 1%",
+      "probabilityText": "Possible drops: Gilded Choc Chocolate Bunny (55%), Gilded Choc Easter Egg Chick (35%), Gilded Choc Marshmallow Lamb (9%), Gilded Choc Easter Bunny (1%).",
       "image": "/Grow%20a%20Garden/Eggs/gilded-choc-golden-egg.png"
     },
     {
@@ -1842,7 +1842,7 @@
           "chance": "0.5%"
         }
       ],
-      "probabilityText": "Spring Bee: 55% Jerboa: 35% Nyala: 9% Peryton: 0.5%",
+      "probabilityText": "Possible drops: Spring Bee (55%), Jerboa (35%), Nyala (9%), Peryton (0.5%).",
       "image": "/Grow%20a%20Garden/Eggs/springtide-egg.png"
     },
     {
@@ -1868,7 +1868,7 @@
           "chance": "1%"
         }
       ],
-      "probabilityText": "Gilded Choc Chocolate Bunny: 55% Gilded Choc Easter Egg Chick: 35% Gilded Choc Marshmallow Lamb: 9% Gilded Choc Easter Bunny: 1%",
+      "probabilityText": "Possible drops: Gilded Choc Chocolate Bunny (55%), Gilded Choc Easter Egg Chick (35%), Gilded Choc Marshmallow Lamb (9%), Gilded Choc Easter Bunny (1%).",
       "image": "/Grow%20a%20Garden/Eggs/gilded-choc-springtide-egg.png"
     }
   ]

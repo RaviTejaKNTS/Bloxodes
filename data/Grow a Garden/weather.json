@@ -21,21 +21,21 @@
     {
       "name": "Rain",
       "category": "Standard",
-      "effects": "Increases growth speed by 50%. 50% chance to apply the Wet mutation.",
-      "details": "A continuous sound of rain hitting the ground is heard along with the background music. The skybox is washed over with grey clouds.",
+      "effects": "Increases growth speed by 50%. 50% chance to trigger the Wet mutation.",
+      "details": "You hear constant rainfall layered over the background music. Grey clouds spread across the skybox.",
       "image": "/Grow%20a%20Garden/Weather/rain.png"
     },
     {
       "name": "Frost",
       "category": "Standard",
       "effects": "Increases growth speed by 50%. Chance to apply Chilled or Frozen. Triggers shivering animation for players, along with a shivering sound effect.",
-      "details": "25% chance to replace Rain. Was made unavailable during the Summer Update, but made available again in a soft update before the Zen Update (9pm EST)",
+      "details": "25% chance to replace Rain. It was made unavailable during the Summer Update, but was made available again in a soft update before the Zen Update (9pm EST)",
       "image": "/Grow%20a%20Garden/Weather/frost.png"
     },
     {
       "name": "Thunderstorm",
       "category": "Standard",
-      "effects": "Increases growth speed by 50%. 50% chance to apply Wet. Crops struck by lightning obtain the Shocked mutation.",
+      "effects": "Increases growth speed by 50%. 50% chance to trigger Wet. Crops struck by lightning obtain the Shocked mutation.",
       "details": "Placing a Lightning Rod attracts lightning strikes within the rod's range three times before deletion. During the events of 8/2/2025-8/3/2025, Thunderstorm occurred multiple times throughout local day and night. It is unknown as to why specific weather events may be \"favorited\" by natural RNG causes or Admins, although it is believed that multiple weathers were just \"favorited\" (Frost, Thunderstorm, Acid Rain, Tropical Rain, etc.) because of the overriding tiny after-effects of the Admin Abuse of the Cooking Event. This is not entirely true though and shall be perceived as an identified rumor throughout the community. 10% chance to replace Rain.",
       "image": "/Grow%20a%20Garden/Weather/thunderstorm.png"
     },
@@ -77,7 +77,7 @@
     {
       "name": "Gale",
       "category": "Standard",
-      "effects": "Rare version of Windy. High chance to apply the Windstruck mutation. Players will be blown by strong wind currents, slowly moving them towards the gear shop area.",
+      "effects": "Rare version of Windy. High chance to trigger the Windstruck mutation. Players will be blown by strong wind currents, slowly moving them towards the gear shop area.",
       "details": "Applies a white tint to the player's camera. Makes large wind particle effects fly around the map. Makes the player's camera shake slowly.",
       "image": "/Grow%20a%20Garden/Weather/gale.png"
     },
@@ -168,14 +168,14 @@
     {
       "name": "Zen Aura",
       "category": "Event",
-      "effects": "Pixel particles and leaves revolve around the skybox. Every 30 seconds of the Zen event the Zen Channeller summons an orb that applies the Tranquil mutation to a random crop.",
+      "effects": "Pixel particles and leaves revolve around the skybox. Once every 30 seconds of the Zen event the Zen Channeller summons an orb that applies the Tranquil mutation to a random crop.",
       "details": "Activates every hour. Players can see when the next Zen Aura will occur, which is shown above the Zen Tree.",
       "image": "/Grow%20a%20Garden/Weather/zen-aura.png"
     },
     {
       "name": "Corrupted Aura",
       "category": "Event",
-      "effects": "Pixel particles and leaves revolve around the skybox like Zen Aura but red. Every 30 seconds of the Corrupted Zen event the Zen Channeller summons an orb that applies the Corrupt mutation to a random crop.",
+      "effects": "Pixel particles and leaves revolve around the skybox like Zen Aura but red. Once every 30 seconds of the Corrupted Zen event the Zen Channeller summons an orb that applies the Corrupt mutation to a random crop.",
       "details": "Have a chance to replace Zen Aura Players can see when the next Zen Aura will occur, which is shown above the Zen Tree.",
       "image": "/Grow%20a%20Garden/Weather/corrupted-aura.png"
     },
@@ -315,7 +315,7 @@
     {
       "name": "Safari Hunt",
       "category": "Event",
-      "effects": "Increased chance to apply Arid and Mirage mutations.",
+      "effects": "Increased chance to trigger Arid and Mirage mutations.",
       "details": "Gray clouds fill up the sky, and red eyes can be seen everywhere.",
       "image": "/Grow%20a%20Garden/Weather/safari-hunt.png"
     },
@@ -673,20 +673,20 @@
       "name": "Floating Flamingo",
       "category": "Admin",
       "effects": "Chance to apply Heavenly mutation.",
-      "details": "Causes Flamingo's Roblox avatar to start floating near the Gear shop and Pet Egg shop. This is has the same effect as Floating Jandel Weather. This was part of Flamingo's ( also known as MrFlimFlam ) celebrity host admin abuse. Will not happen anymore",
+      "details": "Causes Flamingo's Roblox avatar to start floating near the Gear shop and Pet Egg shop. This is has the same effect as Floating Jandel Weather. This was part of Flamingo's ( also called MrFlimFlam ) celebrity host admin abuse. Will not happen anymore",
       "image": "/Grow%20a%20Garden/Weather/floating-flamingo.png"
     },
     {
       "name": "Falling Flamingo",
       "category": "Admin",
       "effects": "Used to restock items.",
-      "details": "Causes Flamingo's Roblox avatar to start falling near the Gear shop and Pet Egg shop. Flings the players camera towards the falling flamingo. This was part of Flamingo's ( also known as MrFlimFlam ) celebrity host admin abuse. Will not happen anymore",
+      "details": "Causes Flamingo's Roblox avatar to start falling near the Gear shop and Pet Egg shop. Flings the players camera towards the falling flamingo. This was part of Flamingo's ( also called MrFlimFlam ) celebrity host admin abuse. Will not happen anymore",
       "image": "/Grow%20a%20Garden/Weather/falling-flamingo.png"
     },
     {
       "name": "Stoplight",
       "category": "Admin",
-      "effects": "Starts a game of red light, green light. Winner gets the stoplight cosmetic. Small chance to apply the Lightcycle mutation.",
+      "effects": "Starts a game of red light, green light. Winner gets the stoplight cosmetic. Small chance to trigger the Lightcycle mutation.",
       "details": "During the Stoplight weather, players must walk to the other side without being caught moving by the giant blood owl. The player will be sent back to the beginning if they are caught moving during a red light. Admins (usually jhailatte) restock Prismatics at the Gear Shop (Grandmaster Sprinkler and Levelup Lollipop), which can only be obtained by winning the game. This game disables all teleporting buttons and Recall Wrench.",
       "image": "/Grow%20a%20Garden/Weather/stoplight.png"
     },
@@ -798,7 +798,7 @@
     {
       "name": "Offering",
       "category": "Admin",
-      "effects": "A pillar will appear outside the player's garden. If the player offer it a blueberry, a beam will rise, giving a chance to apply the Severed mutation to the player's plants.",
+      "effects": "A pillar will appear outside the player's garden. If the player offer it a blueberry, a beam will rise, giving a chance to trigger the Severed mutation to the player's plants.",
       "details": "Only able to be spawned by admins.",
       "image": "/Grow%20a%20Garden/Weather/offering.png"
     },

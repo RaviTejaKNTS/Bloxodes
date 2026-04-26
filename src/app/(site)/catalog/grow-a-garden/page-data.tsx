@@ -147,7 +147,6 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     description: "Compare Grow a Garden pet mutations by type, chance, XP boost, and sell multiplier.",
     groupKey: "catalogGroup",
     groupLabel: "Type",
-    badgeKey: "chance",
     descriptionKey: "passive",
     cardDescriptionKey: "passive",
     hideImages: false,
@@ -168,7 +167,7 @@ export const GROW_GARDEN_CATALOGS: GrowGardenCatalogConfig[] = [
     groupLabel: "Category",
     descriptionKey: "details",
     cardDescriptionKey: "effects",
-    hideImages: true,
+    hideImages: false,
     stats: [],
     maxStats: 0
   },
