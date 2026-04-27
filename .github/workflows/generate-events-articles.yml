@@ -1,8 +1,8 @@
 name: Generate Event Guides
 
 on:
-  schedule:
-    - cron: "20 0,8,16 * * *"
+  # schedule:
+  #   - cron: "20 0,8,16 * * *"  # Disabled - manual runs only
   workflow_dispatch:
 
 jobs:
