@@ -1,18 +1,18 @@
-name: Universe Light Enrichment
+name: Refresh Game Lists
 
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "17 */3 * * *"
+    - cron: "15 1,7,13,19 * * *"
 
 concurrency:
-  group: universe-light-enrichment
+  group: refresh-game-lists
   cancel-in-progress: false
 
 jobs:
-  universe-light-enrichment:
+  refresh-game-lists:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,12 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Light enrich universes
+      - name: Refresh game lists
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-          ROBLOX_ENRICH_BATCH: 25
-          ROBLOX_ENRICH_REQUEST_INTERVAL_MS: 2500
-          ROBLOX_ENRICH_BATCH_DELAY_MS: 4000
-          ROBLOX_ENRICH_RETRY_LIMIT: 6
-        run: npm run enrich:universes:light -- --limit 1000 --batch 25
+        run: npm run lists:refresh

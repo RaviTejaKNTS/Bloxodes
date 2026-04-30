@@ -1,16 +1,16 @@
-name: Update Playing and Refresh Lists
+name: Universe Playing Refresh
 
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "0 3 * * *" # daily at 03:00 UTC
+    - cron: "12 * * * *"
 
 concurrency:
-  group: update-playing-and-lists
+  group: universe-playing-refresh
   cancel-in-progress: false
 
 jobs:
-  update-playing-and-lists:
+  universe-playing-refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -30,10 +30,6 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-        run: npm run update:playing
-
-      - name: Refresh lists
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-        run: npm run lists:refresh
+          UNIVERSE_PLAYING_BATCH_SIZE: 50
+          UNIVERSE_PLAYING_REQUEST_DELAY_MS: 1000
+        run: npm run update:playing -- --quality-only --limit 10000

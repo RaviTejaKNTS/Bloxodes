@@ -18,6 +18,13 @@ const GROUP_DETAILS_API = (groupId: number) => `https://groups.roblox.com/v1/gro
 const DEFAULT_TOTAL_LIMIT = Number(process.env.ROBLOX_ENRICH_LIMIT ?? "300");
 const BATCH_SIZE = Number(process.env.ROBLOX_ENRICH_BATCH ?? "50");
 const ATTACHMENT_CONCURRENCY = Number(process.env.ROBLOX_ENRICH_CONCURRENCY ?? "4");
+const REQUEST_INTERVAL_MS = Number(process.env.ROBLOX_ENRICH_REQUEST_INTERVAL_MS ?? "1000");
+const BATCH_DELAY_MS = Number(process.env.ROBLOX_ENRICH_BATCH_DELAY_MS ?? "1200");
+const RETRY_LIMIT = Number(process.env.ROBLOX_ENRICH_RETRY_LIMIT ?? "6");
+const RETRY_BASE_DELAY_MS = Number(process.env.ROBLOX_ENRICH_RETRY_BASE_DELAY_MS ?? "5000");
+const RETRY_MAX_DELAY_MS = Number(process.env.ROBLOX_ENRICH_RETRY_MAX_DELAY_MS ?? "120000");
+
+type EnrichmentMode = "light" | "deep";
 
 type UniverseRow = {
   universe_id: number;
@@ -215,6 +222,7 @@ type RobloxGroupResponse = {
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const nowIso = () => new Date().toISOString();
+let nextRequestAt = 0;
 
 function toSlug(value?: string | null): string | null {
   if (!value) return null;
@@ -233,13 +241,60 @@ function sanitizeDisplayName(value?: string | null): string | null {
   return result.length ? result : null;
 }
 
-async function fetchJson(url: string, label: string) {
-  const res = await fetch(url, { headers: { "user-agent": "BloxodesUniverseEnricher/1.0" } });
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(`Failed to fetch ${label} (${res.status}): ${body}`);
+function retryAfterMs(headers: Headers): number | null {
+  const value = headers.get("retry-after");
+  if (!value) return null;
+  const seconds = Number(value);
+  if (Number.isFinite(seconds)) return Math.max(seconds * 1000, 0);
+  const dateMs = Date.parse(value);
+  if (!Number.isNaN(dateMs)) return Math.max(dateMs - Date.now(), 0);
+  return null;
+}
+
+function jitter(ms: number) {
+  return Math.round(ms * (0.75 + Math.random() * 0.5));
+}
+
+async function waitForRequestSlot() {
+  const now = Date.now();
+  if (nextRequestAt > now) {
+    await sleep(nextRequestAt - now);
   }
-  return res.json();
+  nextRequestAt = Date.now() + REQUEST_INTERVAL_MS;
+}
+
+async function fetchJson(url: string, label: string) {
+  for (let attempt = 0; attempt <= RETRY_LIMIT; attempt += 1) {
+    await waitForRequestSlot();
+    let res: Response;
+    try {
+      res = await fetch(url, { headers: { "user-agent": "BloxodesUniverseEnricher/1.0" } });
+    } catch (error) {
+      if (attempt >= RETRY_LIMIT) {
+        throw error;
+      }
+      const delay = jitter(Math.min(RETRY_BASE_DELAY_MS * 2 ** attempt, RETRY_MAX_DELAY_MS));
+      console.warn(`⚠️ ${label} request failed; retrying in ${Math.round(delay / 1000)}s`);
+      await sleep(delay);
+      continue;
+    }
+    if (res.ok) {
+      return res.json();
+    }
+
+    const body = await res.text().catch(() => "");
+    const retryable = res.status === 429 || res.status >= 500;
+    if (!retryable || attempt >= RETRY_LIMIT) {
+      throw new Error(`Failed to fetch ${label} (${res.status}): ${body}`);
+    }
+
+    const delay =
+      retryAfterMs(res.headers) ?? jitter(Math.min(RETRY_BASE_DELAY_MS * 2 ** attempt, RETRY_MAX_DELAY_MS));
+    console.warn(`⚠️ ${label} returned ${res.status}; retrying in ${Math.round(delay / 1000)}s`);
+    await sleep(delay);
+  }
+
+  throw new Error(`Failed to fetch ${label}`);
 }
 
 function ensureOpenCloudApiKey(): string {
@@ -468,15 +523,37 @@ async function fetchUniverseMetadata(universeIds: number[]): Promise<Map<number,
 
 const SUPABASE_PAGE_LIMIT = 1000;
 
-async function fetchUniversePage(offset: number, count: number): Promise<UniverseRow[]> {
+async function fetchUniversePage(
+  offset: number,
+  count: number,
+  mode: EnrichmentMode,
+  qualityOnly: boolean
+): Promise<UniverseRow[]> {
   const supabase = supabaseAdmin();
-  const { data, error } = await supabase
+  let query = supabase
     .from("roblox_universes")
     .select("universe_id, root_place_id, last_seen_in_sort, updated_at, name")
-    .not("root_place_id", "is", null)
-    .order("last_seen_in_sort", { ascending: false })
-    .order("updated_at", { ascending: false })
-    .range(offset, offset + count - 1);
+    .not("root_place_id", "is", null);
+
+  if (qualityOnly) {
+    query = query.eq("is_quality_candidate", true);
+  }
+
+  if (mode === "light") {
+    query = query
+      .order("last_light_enriched_at", { ascending: true })
+      .order("last_seen_in_search", { ascending: false })
+      .order("last_seen_in_sort", { ascending: false })
+      .order("updated_at", { ascending: false });
+  } else {
+    query = query
+      .order("last_deep_enriched_at", { ascending: true })
+      .order("quality_score", { ascending: false })
+      .order("last_seen_in_sort", { ascending: false })
+      .order("updated_at", { ascending: false });
+  }
+
+  const { data, error } = await query.range(offset, offset + count - 1);
   if (error) throw error;
   return (data as UniverseRow[]) ?? [];
 }
@@ -1056,7 +1133,8 @@ async function processAttachments(supabase: ReturnType<typeof supabaseAdmin>, un
 
 async function processBatch(
   supabase: ReturnType<typeof supabaseAdmin>,
-  universes: UniverseRow[]
+  universes: UniverseRow[],
+  mode: EnrichmentMode
 ): Promise<{
   updatedGames: number;
   mediaRows: number;
@@ -1070,7 +1148,10 @@ async function processBatch(
   }
 
   const universeIds = universes.map((u) => u.universe_id);
-  const [metadataMap, details] = await Promise.all([fetchUniverseMetadata(universeIds), fetchGameDetails(universeIds)]);
+  const [metadataMap, details] = await Promise.all([
+    mode === "deep" ? fetchUniverseMetadata(universeIds) : Promise.resolve(new Map<number, UniverseMetadata>()),
+    fetchGameDetails(universeIds)
+  ]);
   const rootMap = new Map(universes.map((u) => [u.universe_id, u.root_place_id]));
   for (const [id, meta] of metadataMap.entries()) {
     if (meta.rootPlaceId) {
@@ -1098,6 +1179,7 @@ async function processBatch(
   }
 
   const missingRootIds: number[] = [];
+  const enrichedAt = nowIso();
   const upsertPayload = details
     .map((detail) => {
       const metadata = metadataMap.get(detail.id);
@@ -1107,6 +1189,12 @@ async function processBatch(
         return null;
       }
       const mapped = mapGameDetail(detail, fallbackRoot, metadata);
+      if (mapped) {
+        mapped.last_light_enriched_at = enrichedAt;
+        if (mode === "deep") {
+          mapped.last_deep_enriched_at = enrichedAt;
+        }
+      }
       return mapped;
     })
     .filter((value): value is NonNullable<typeof value> => value != null);
@@ -1194,7 +1282,10 @@ const [icons, thumbs] = await Promise.all([
 ]);
   const mediaStats = await upsertMedia(supabase, processedUniverseIds, icons, thumbs);
 
-  const attachments = await processAttachments(supabase, processedUniverseIds);
+  const attachments =
+    mode === "deep"
+      ? await processAttachments(supabase, processedUniverseIds)
+      : { passesCount: 0, badgesCount: 0 };
 
   const metadataUniverseIds = processedUniverseIds.filter((id) => metadataMap.has(id));
   const metadataSubset = new Map<number, UniverseMetadata>();
@@ -1205,8 +1296,8 @@ const [icons, thumbs] = await Promise.all([
     }
   }
 
-  const socialLinksCount = await syncSocialLinks(supabase, metadataUniverseIds, metadataMap);
-  const groupsSynced = await syncGroups(supabase, metadataSubset);
+  const socialLinksCount = mode === "deep" ? await syncSocialLinks(supabase, metadataUniverseIds, metadataMap) : 0;
+  const groupsSynced = mode === "deep" ? await syncGroups(supabase, metadataSubset) : 0;
 
   return {
     updatedGames: upsertPayload.length,
@@ -1229,11 +1320,23 @@ function parseArgs() {
     } else if (arg === "--batch" || arg === "-b") {
       options.batch = Number(args[i + 1]);
       i += 1;
+    } else if (arg === "--mode" || arg === "-m") {
+      options.mode = args[i + 1];
+      i += 1;
+    } else if (arg === "--quality-only") {
+      options.qualityOnly = true;
     } else if (arg === "--help" || arg === "-h") {
       options.help = true;
     }
   }
   return options;
+}
+
+function parseMode(value: unknown): EnrichmentMode {
+  if (value === "light" || value === "deep") return value;
+  const envMode = process.env.ROBLOX_ENRICH_MODE;
+  if (envMode === "light" || envMode === "deep") return envMode;
+  return "deep";
 }
 
 function printHelp() {
@@ -1243,6 +1346,8 @@ Usage: npm run enrich:universes -- [options]
 Options:
   -l, --limit <number>   Total universes to process (default: ${DEFAULT_TOTAL_LIMIT})
   -b, --batch <number>   Batch size per Roblox API request (default: ${BATCH_SIZE})
+  -m, --mode <mode>      light = details/media only; deep = Open Cloud, links, passes, badges (default: deep)
+  --quality-only         Only process rows marked is_quality_candidate
   -h, --help             Show this help text
 `);
 }
@@ -1257,14 +1362,16 @@ async function main() {
   const totalLimit =
     typeof options.limit === "number" && !Number.isNaN(options.limit) && options.limit > 0
       ? options.limit
-      : 0;
+      : DEFAULT_TOTAL_LIMIT;
   const batchSize =
     typeof options.batch === "number" && !Number.isNaN(options.batch) && options.batch > 0 ? options.batch : BATCH_SIZE;
+  const mode = parseMode(options.mode);
+  const qualityOnly = options.qualityOnly === true;
 
   const supabase = supabaseAdmin();
   const targetDescription = totalLimit > 0 ? `${totalLimit}` : "all available";
   console.log(
-    `🚀 Enriching ${targetDescription} universes (batch size ${batchSize}, concurrency ${ATTACHMENT_CONCURRENCY})`
+    `🚀 Enriching ${targetDescription} universes (${mode} mode, qualityOnly=${qualityOnly}, batch size ${batchSize}, concurrency ${ATTACHMENT_CONCURRENCY})`
   );
 
   let processed = 0;
@@ -1277,17 +1384,17 @@ async function main() {
     const pageSize =
       totalLimit > 0 ? Math.min(SUPABASE_PAGE_LIMIT, Math.max(remaining, 0)) : SUPABASE_PAGE_LIMIT;
 
-    const page = await fetchUniversePage(pageOffset, pageSize);
+    const page = await fetchUniversePage(pageOffset, pageSize, mode, qualityOnly);
     if (!page.length) break;
 
     for (let i = 0; i < page.length; i += batchSize) {
       const chunk = page.slice(i, i + batchSize);
-      const stats = await processBatch(supabase, chunk);
+      const stats = await processBatch(supabase, chunk, mode);
       processed += chunk.length;
       console.log(
         ` • Page ${pageIndex + 1}, batch ${Math.floor(i / batchSize) + 1} — universes: ${chunk.length}, updated: ${stats.updatedGames}, media rows: ${stats.mediaRows}, passes: ${stats.passesCount}, badges: ${stats.badgesCount}, social: ${stats.socialLinksCount}, groups: ${stats.groupsSynced}`
       );
-      await sleep(250);
+      await sleep(BATCH_DELAY_MS);
       if (totalLimit > 0 && processed >= totalLimit) {
         break;
       }

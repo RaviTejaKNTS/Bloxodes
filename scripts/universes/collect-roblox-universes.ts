@@ -6,12 +6,21 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { slugify } from "@/lib/slug";
 
 const EXPLORE_BASE = "https://apis.roblox.com/explore-api/v1";
-const DEVICES = ["computer", "phone", "tablet", "console", "vr"];
-const COUNTRIES = ["us"];
+const DEFAULT_DEVICES = ["computer", "phone", "tablet", "console", "vr"];
+const DEFAULT_COUNTRIES = ["us"];
 const CPU_CORES = process.env.ROBLOX_CPU_CORES ?? "8";
 const MAX_RESOLUTION = process.env.ROBLOX_MAX_RESOLUTION ?? "1440x900";
 const MAX_MEMORY = process.env.ROBLOX_MAX_MEMORY ?? "8192";
 const NETWORK_TYPE = process.env.ROBLOX_NETWORK_TYPE ?? "4g";
+const REQUEST_MIN_INTERVAL_MS = readPositiveNumber("ROBLOX_EXPLORE_REQUEST_INTERVAL_MS", 900);
+const PAGE_DELAY_MS = readPositiveNumber("ROBLOX_EXPLORE_PAGE_DELAY_MS", 900);
+const SORT_DELAY_MS = readPositiveNumber("ROBLOX_EXPLORE_SORT_DELAY_MS", 1200);
+const DEVICE_DELAY_MS = readPositiveNumber("ROBLOX_EXPLORE_DEVICE_DELAY_MS", 5000);
+const RETRY_LIMIT = readPositiveNumber("ROBLOX_EXPLORE_RETRY_LIMIT", 6);
+const RETRY_BASE_DELAY_MS = readPositiveNumber("ROBLOX_EXPLORE_RETRY_BASE_DELAY_MS", 4000);
+const RETRY_MAX_DELAY_MS = readPositiveNumber("ROBLOX_EXPLORE_RETRY_MAX_DELAY_MS", 90000);
+const DEVICES = readList("ROBLOX_DEVICES", DEFAULT_DEVICES);
+const COUNTRIES = readList("ROBLOX_COUNTRIES", DEFAULT_COUNTRIES);
 
 const BASE_QUERY_PARAMS: Record<string, string> = {};
 if (CPU_CORES) BASE_QUERY_PARAMS.cpuCores = CPU_CORES;
@@ -246,6 +255,67 @@ type FetchResult = {
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const todayIsoDate = () => new Date().toISOString().slice(0, 10);
+let lastRequestAt = 0;
+
+function readPositiveNumber(name: string, fallback: number): number {
+  const raw = process.env[name];
+  if (!raw) return fallback;
+  const parsed = Number(raw);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
+}
+
+function readList(name: string, fallback: string[]): string[] {
+  const raw = process.env[name];
+  if (!raw) return fallback;
+  const values = raw
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+  return values.length ? values : fallback;
+}
+
+function jitter(ms: number): number {
+  if (ms <= 0) return 0;
+  const variance = Math.min(1000, Math.max(100, ms * 0.2));
+  return Math.round(ms + Math.random() * variance);
+}
+
+function retryAfterMs(headers: Headers): number | null {
+  const raw = headers.get("retry-after");
+  if (!raw) return null;
+  const seconds = Number(raw);
+  if (Number.isFinite(seconds) && seconds >= 0) {
+    return seconds * 1000;
+  }
+  const dateValue = Date.parse(raw);
+  if (!Number.isNaN(dateValue)) {
+    return Math.max(0, dateValue - Date.now());
+  }
+  return null;
+}
+
+function isRetryableStatus(status: number): boolean {
+  return status === 429 || status === 500 || status === 502 || status === 503 || status === 504;
+}
+
+class FetchStatusError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+    readonly retryable: boolean
+  ) {
+    super(message);
+  }
+}
+
+async function waitForRequestSlot() {
+  if (REQUEST_MIN_INTERVAL_MS <= 0) return;
+  const elapsed = Date.now() - lastRequestAt;
+  if (elapsed < REQUEST_MIN_INTERVAL_MS) {
+    await sleep(jitter(REQUEST_MIN_INTERVAL_MS - elapsed));
+  }
+  lastRequestAt = Date.now();
+}
 
 function toSlug(value?: string | null): string | null {
   if (!value) return null;
@@ -254,12 +324,50 @@ function toSlug(value?: string | null): string | null {
 }
 
 async function fetchJson(url: string, label: string): Promise<any> {
-  const res = await fetch(url, { headers: { "user-agent": "BloxodesExploreBot/1.0" } });
-  if (!res.ok) {
-    const body = await res.text().catch(() => "");
-    throw new Error(`Failed to fetch ${label} (${res.status}): ${body}`);
+  let lastError: Error | null = null;
+
+  for (let attempt = 0; attempt <= RETRY_LIMIT; attempt += 1) {
+    await waitForRequestSlot();
+
+    try {
+      const res = await fetch(url, { headers: { "user-agent": "BloxodesExploreBot/1.0" } });
+      if (res.ok) {
+        return res.json();
+      }
+
+      const body = await res.text().catch(() => "");
+      const retryable = isRetryableStatus(res.status);
+      const message = `Failed to fetch ${label} (${res.status}): ${body}`;
+      lastError = new FetchStatusError(message, res.status, retryable);
+
+      if (!retryable || attempt >= RETRY_LIMIT) {
+        throw lastError;
+      }
+
+      const retryAfter = retryAfterMs(res.headers);
+      const exponentialDelay = RETRY_BASE_DELAY_MS * Math.pow(2, attempt);
+      const delay = Math.min(RETRY_MAX_DELAY_MS, retryAfter ?? exponentialDelay);
+      console.warn(
+        `⚠️ ${label} returned ${res.status}; retrying in ${Math.round(delay / 1000)}s (${attempt + 1}/${RETRY_LIMIT}).`
+      );
+      await sleep(jitter(delay));
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(String(error));
+      if (lastError instanceof FetchStatusError && !lastError.retryable) {
+        throw lastError;
+      }
+      if (attempt >= RETRY_LIMIT) {
+        throw lastError;
+      }
+      const delay = Math.min(RETRY_MAX_DELAY_MS, RETRY_BASE_DELAY_MS * Math.pow(2, attempt));
+      console.warn(
+        `⚠️ ${label} failed; retrying in ${Math.round(delay / 1000)}s (${attempt + 1}/${RETRY_LIMIT}): ${lastError.message}`
+      );
+      await sleep(jitter(delay));
+    }
   }
-  return res.json();
+
+  throw lastError ?? new Error(`Failed to fetch ${label}`);
 }
 
 async function fetchSorts(sessionId: string, device: string, country: string): Promise<ExploreSort[]> {
@@ -462,7 +570,7 @@ async function collectSortContent(
     nextToken = typeof payload?.nextPageToken === "string" && payload.nextPageToken.length ? payload.nextPageToken : null;
 
     if (nextToken) {
-      await sleep(200);
+      await sleep(jitter(PAGE_DELAY_MS));
     }
   } while (nextToken);
 
@@ -551,7 +659,11 @@ async function run(): Promise<FetchResult> {
         } catch (error) {
           console.error(`❌ Failed to process sort ${sort.sortId} (${device}/${country}):`, (error as Error).message);
         }
+
+        await sleep(jitter(SORT_DELAY_MS));
       }
+
+      await sleep(jitter(DEVICE_DELAY_MS));
     }
   }
 

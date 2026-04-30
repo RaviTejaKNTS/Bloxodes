@@ -1,18 +1,18 @@
-name: Update Stats and Refresh Lists
+name: Universe Stats Refresh
 
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "0 4 * * *" # daily at 04:00 UTC
+    - cron: "42 */6 * * *"
 
 concurrency:
-  group: update-stats-and-lists
+  group: universe-stats-refresh
   cancel-in-progress: false
 
 jobs:
-  update-stats-and-lists:
+  universe-stats-refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,10 +30,6 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-        run: npm run update:stats
-
-      - name: Refresh lists
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-        run: npm run lists:refresh
+          UNIVERSE_STATS_BATCH_SIZE: 50
+          UNIVERSE_STATS_REQUEST_DELAY_MS: 1200
+        run: npm run update:stats -- --limit 10000

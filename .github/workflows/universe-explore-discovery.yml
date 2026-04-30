@@ -1,16 +1,16 @@
-name: Universe Light Enrichment
+name: Universe Explore Discovery
 
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "17 */3 * * *"
+    - cron: "35 1 * * *"
 
 concurrency:
-  group: universe-light-enrichment
+  group: universe-explore-discovery
   cancel-in-progress: false
 
 jobs:
-  universe-light-enrichment:
+  universe-explore-discovery:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -26,12 +26,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Light enrich universes
+      - name: Collect Explore universes
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-          ROBLOX_ENRICH_BATCH: 25
-          ROBLOX_ENRICH_REQUEST_INTERVAL_MS: 2500
-          ROBLOX_ENRICH_BATCH_DELAY_MS: 4000
-          ROBLOX_ENRICH_RETRY_LIMIT: 6
-        run: npm run enrich:universes:light -- --limit 1000 --batch 25
+          ROBLOX_EXPLORE_REQUEST_INTERVAL_MS: 1200
+          ROBLOX_EXPLORE_PAGE_DELAY_MS: 1200
+          ROBLOX_EXPLORE_SORT_DELAY_MS: 1500
+          ROBLOX_EXPLORE_DEVICE_DELAY_MS: 6000
+          ROBLOX_EXPLORE_RETRY_LIMIT: 6
+        run: npm run collect:universes

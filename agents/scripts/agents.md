@@ -37,10 +37,14 @@ This file is the quick reference for what exists today and how to invoke it.
 | --- | --- | --- |
 | Import games into Supabase | `scripts/games/import-games.ts` | `npm run import:games` |
 | Collect Roblox universes | `scripts/universes/collect-roblox-universes.ts` | `npm run collect:universes` |
+| Discover universes from Roblox search | `scripts/universes/search-roblox-universes.ts` | `npm run search:universes` |
+| Expand universes from creators/groups | `scripts/universes/expand-roblox-creators.ts` | `npm run expand:creators` |
+| Score universe quality tiers | `scripts/universes/score-universe-quality.ts` | `npm run score:universes` |
+| Run local-safe universe pipeline | `scripts/universes/run-universe-pipeline.ts` | `npm run pipeline:universes` |
 | Backfill missing universe IDs | `scripts/backfill/backfill-game-universes.ts` | `npm run backfill:universes` |
 | Update universe slugs | `scripts/universes/update-universe-slugs.ts` | direct `tsx scripts/universes/update-universe-slugs.ts` |
 | Sync game slugs | `scripts/universes/sync-game-slugs.ts` | direct `tsx scripts/universes/sync-game-slugs.ts` |
-| Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes` |
+| Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes`, `npm run enrich:universes:light`, `npm run enrich:universes:deep` |
 | Update universe stats | `scripts/universes/update-universe-stats.ts` | `npm run update:stats` |
 | Update current playing counts | `scripts/universes/update-universe-playing.ts` | `npm run update:playing` |
 | Backfill social links | `scripts/backfill/backfill-social-links.ts` | `npm run links:backfill` |

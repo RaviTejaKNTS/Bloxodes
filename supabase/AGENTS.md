@@ -24,6 +24,9 @@ This folder defines the app's database contract and edge-function behavior.
 - Add new migrations; do not rewrite old ones once they are part of repo history.
 - Favor additive, reversible changes where possible.
 - For this repo, `schema.sql` is the clean reference for the current database shape. Read it first when you need to understand the live schema.
+- Do not manually edit `schema.sql` during feature work. Treat it as a live database dump/reference snapshot only.
+- Local Supabase can be bootstrapped from `schema.sql`, then active/pending migrations may be applied as local overlay migrations for development.
+- After migrations are applied to live, regenerate `schema.sql` from the live database dump instead of hand-editing it.
 - Treat `migrations/` as deployment history for the existing production project, not as the easiest way to infer current state.
 - Do not replace the active migration chain with a single baseline file for the current production project. If you generate a clean baseline snapshot, keep it in `schema.sql` or archive it outside `migrations/`.
 - Views are heavily used by `src/lib/db.ts`, `src/lib/catalog.ts`, and `src/lib/tools.ts`; update app queries alongside schema changes.
