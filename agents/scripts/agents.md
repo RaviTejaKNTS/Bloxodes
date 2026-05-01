@@ -13,7 +13,7 @@ This file is the quick reference for what exists today and how to invoke it.
 | Purpose | File | Preferred command |
 | --- | --- | --- |
 | Batch article generation | `scripts/articles/generate-articles.ts` | `npm run generate:articles` |
-| Single game article generation | `scripts/games/generate-game-article.ts` | `npm run generate:article` |
+| Draft code page generation | `scripts/games/generate-game-article.ts` | `npm run generate` |
 | Event guide generation | `scripts/events/generate-events-articles.ts` | `npm run generate:events-articles` |
 | Article generation queue worker | `scripts/automation/run-article-generation-queue.ts` | `npm run articles:queue` |
 | Generic generation queue worker | `scripts/automation/run-generation-queue.ts` | `npm run generate:queue` |

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
-import { FiCalendar, FiCheckSquare, FiFileText, FiGrid, FiHelpCircle, FiKey, FiList, FiTool, FiUser } from "react-icons/fi";
+import { FiBookOpen, FiCalendar, FiCheckSquare, FiFileText, FiGrid, FiHelpCircle, FiKey, FiList, FiTool, FiUser } from "react-icons/fi";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function HeaderControls() {
@@ -81,6 +81,7 @@ export function HeaderControls() {
     { href: "/checklists", label: "Checklists", icon: FiCheckSquare },
     { href: "/quizzes", label: "Quizzes", icon: FiHelpCircle },
     { href: "/lists", label: "Lists", icon: FiList },
+    { href: "/wiki", label: "Wiki", icon: FiBookOpen },
     { href: "/tools", label: "Tools", icon: FiTool }
   ];
 

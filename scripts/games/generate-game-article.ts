@@ -7,12 +7,9 @@ import { JSDOM } from "jsdom";
 import { Readability } from "@mozilla/readability";
 import sharp from "sharp";
 
-import { sanitizeCodeDisplay, normalizeCodeKey } from "@/lib/code-normalization";
-import { getCodeDisplayPriority, scrapeSources } from "@/lib/scraper";
-import { extractPlaceId, scrapeRobloxGameMetadata } from "@/lib/roblox/game-metadata";
+import { scrapeRobloxGameMetadata } from "@/lib/roblox/game-metadata";
 import { ensureUniverseForRobloxLink } from "@/lib/roblox/universe";
 import { scrapeSocialLinksFromSources, type SocialLinks as ScrapedSocialLinks } from "@/lib/social-links";
-import { slugify, stripCodesSuffix } from "@/lib/slug";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 const supabase = createClient(
@@ -47,12 +44,10 @@ async function pickAuthorId(): Promise<string | null> {
 
 const GOOGLE_SEARCH_KEY = process.env.GOOGLE_SEARCH_KEY!;
 const GOOGLE_SEARCH_CX = process.env.GOOGLE_SEARCH_CX!;
+let googleSearchCallCount = 0;
 
 const sleep = (ms: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms));
-
-const normalizeForMatch = (value: string): string =>
-  value.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
 
 function normalize(str?: string | null): string | null {
   if (!str) return null;
@@ -117,6 +112,7 @@ type PlaceholderLinks = {
 
 type ExistingGameRecord = {
   id: string;
+  name: string;
   slug: string;
   author_id: string | null;
   is_published: boolean;
@@ -129,6 +125,13 @@ type ExistingGameRecord = {
   source_url_2: string | null;
   source_url_3: string | null;
   universe_id: number | null;
+  intro_md: string | null;
+  redeem_md: string | null;
+  troubleshoot_md: string | null;
+  rewards_md: string | null;
+  find_codes_md: string | null;
+  about_game_md: string | null;
+  seo_description: string | null;
 };
 
 type UniverseMeta = {
@@ -174,6 +177,7 @@ function isArticleResponse(value: unknown): value is ArticleResponse {
 }
 
 async function googleSearch(query: string, limit = 5): Promise<SearchEntry[]> {
+  googleSearchCallCount += 1;
   const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(
     query
   )}&num=${limit}&key=${GOOGLE_SEARCH_KEY}&cx=${GOOGLE_SEARCH_CX}`;
@@ -196,79 +200,6 @@ async function googleSearch(query: string, limit = 5): Promise<SearchEntry[]> {
       }))
       .filter((item) => item.title && item.url) ?? []
   );
-}
-
-const ALLOWED_EXTRA_TITLE_TOKENS = new Set([
-  "roblox",
-  "code",
-  "codes",
-  "new",
-  "updated",
-  "update",
-  "working",
-  "active",
-  "latest",
-  "all",
-  "free",
-  "list",
-  "guide",
-  "wiki",
-  "rewards",
-  "bonus",
-  "bonuses",
-  "gift",
-  "gifts",
-  "promo",
-  "promos",
-  "redeem",
-  "how",
-  "to",
-  "get",
-  "the",
-  "for",
-  "of",
-  "and",
-  "with",
-  "best",
-  "tips",
-  "tricks",
-  "today"
-]);
-
-const tokenize = (value: string): string[] =>
-  normalizeForMatch(value)
-    .split(" ")
-    .map((token) => token.trim())
-    .filter(Boolean);
-
-const isAllowedExtraToken = (token: string): boolean =>
-  ALLOWED_EXTRA_TITLE_TOKENS.has(token) || /^20\d{2}$/.test(token);
-
-function titleMatchesGame(title: string, gameName: string): boolean {
-  const titleTokens = tokenize(title);
-  const gameTokens = tokenize(gameName);
-
-  if (gameTokens.length === 0 || titleTokens.length === 0) {
-    return false;
-  }
-
-  const counts = new Map<string, number>();
-  for (const token of gameTokens) {
-    counts.set(token, (counts.get(token) ?? 0) + 1);
-  }
-
-  for (const token of titleTokens) {
-    if (counts.has(token) && (counts.get(token) ?? 0) > 0) {
-      counts.set(token, (counts.get(token) ?? 0) - 1);
-      continue;
-    }
-
-    if (!isAllowedExtraToken(token)) {
-      return false;
-    }
-  }
-
-  return Array.from(counts.values()).every((value) => value === 0);
 }
 
 async function fetchWithRetry(url: string, attempts = 2): Promise<Response> {
@@ -466,88 +397,6 @@ async function generateInterlinkCopy(context: InterlinkPromptContext): Promise<s
   return text;
 }
 
-async function findGameCodeArticle(gameName: string, siteSpecifier: string) {
-  const { domain, pathFragment } = parseSiteSpecifier(siteSpecifier);
-
-  const queries = [
-    `"${gameName}" codes site:${domain}${pathFragment ? ` inurl:${pathFragment}` : ""}`,
-    `"${gameName}" Roblox codes site:${domain}${pathFragment ? ` inurl:${pathFragment}` : ""}`,
-    `"${gameName}" code list site:${domain}${pathFragment ? ` inurl:${pathFragment}` : ""}`,
-  ];
-
-  const visited = new Set<string>();
-  const normalizedGame = normalizeForMatch(gameName);
-
-  for (const query of queries) {
-    const results = await googleSearch(query, 7);
-
-    for (const entry of results) {
-      if (!entry.url) continue;
-      if (visited.has(entry.url)) continue;
-      visited.add(entry.url);
-
-      if (!/\bcodes?\b/i.test(entry.title)) continue;
-
-      const urlMatches = await validateGameMatch(entry.url, gameName);
-      if (urlMatches) {
-        return entry.url;
-      }
-
-      const normalizedTitle = normalizeForMatch(entry.title);
-      if (!normalizedTitle.includes(normalizedGame)) continue;
-      if (!titleMatchesGame(entry.title, gameName)) continue;
-      if (urlMatches) {
-        return entry.url;
-      }
-    }
-  }
-
-  if (domain.includes("robloxden.com")) {
-    const slugCandidate = stripCodesSuffix(slugify(gameName));
-    if (slugCandidate) {
-      const candidateUrl = `https://robloxden.com/game-codes/${slugCandidate}`;
-      if (await validateGameMatch(candidateUrl, gameName)) {
-        return candidateUrl;
-      }
-    }
-  }
-
-  return null;
-}
-
-function parseSiteSpecifier(value: string): { domain: string; pathFragment: string | null } {
-  const parts = value.split("/").filter(Boolean);
-  const domain = parts[0] ?? value;
-  const pathFragment = parts.slice(1).join("/") || null;
-  return { domain, pathFragment };
-}
-
-async function validateGameMatch(url: string, gameName: string): Promise<boolean> {
-  try {
-    const response = await fetchWithRetry(url);
-    const html = await response.text();
-    const dom = new JSDOM(html);
-    const { document } = dom.window;
-
-    const title = document.querySelector("meta[property='og:title']")?.getAttribute("content")
-      ?? document.querySelector("title")?.textContent
-      ?? "";
-
-    const heading = document.querySelector("h1")?.textContent ?? "";
-
-    const combined = `${title}\n${heading}`;
-    const titleMatches = titleMatchesGame(combined, gameName);
-    if (titleMatches) return true;
-
-    const normalizedGame = normalizeForMatch(gameName);
-    const normalizedCombined = normalizeForMatch(combined);
-    return normalizedCombined.includes(normalizedGame);
-  } catch (error) {
-    console.warn(`⚠️ Unable to validate game match for ${url}:`, error instanceof Error ? error.message : error);
-    return false;
-  }
-}
-
 async function fetchArticleText(url: string): Promise<string> {
   try {
     const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } });
@@ -574,6 +423,110 @@ async function fetchArticleText(url: string): Promise<string> {
     console.warn(`⚠️ Failed to fetch ${url}`);
     return "";
   }
+}
+
+function parseLimit(args: string[]): number {
+  const arg = args.find((value) => value.startsWith("--limit="));
+  const value = arg ? arg.slice("--limit=".length) : null;
+  const parsed = value ? Number(value) : Number(process.env.GENERATE_GAMES_LIMIT ?? 10);
+  if (!Number.isFinite(parsed) || parsed <= 0) return 10;
+  return Math.floor(parsed);
+}
+
+function parseSlugFilter(args: string[]): string | null {
+  const slugArg = args.find((value) => value.startsWith("--slug="));
+  if (slugArg) {
+    const slug = slugArg.slice("--slug=".length).trim();
+    return slug.length ? slug : null;
+  }
+
+  const slugIndex = args.indexOf("--slug");
+  if (slugIndex >= 0) {
+    const slug = args[slugIndex + 1]?.trim();
+    return slug?.length ? slug : null;
+  }
+
+  return null;
+}
+
+function splitSourceUrls(value: string | null | undefined): string[] {
+  if (!value) return [];
+  return value
+    .split(",")
+    .map((url) => normalizeExternalLink(url))
+    .filter((url): url is string => Boolean(url));
+}
+
+function uniqueUrls(urls: string[]): string[] {
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const url of urls) {
+    if (seen.has(url)) continue;
+    seen.add(url);
+    result.push(url);
+  }
+  return result;
+}
+
+async function loadDraftGames(limit: number, slug: string | null): Promise<ExistingGameRecord[]> {
+  let query = supabase
+    .from("games")
+    .select(
+      "id, name, slug, author_id, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, about_game_md, seo_description"
+    )
+    .eq("is_published", false);
+
+  if (slug) {
+    query = query.eq("slug", slug).limit(1);
+  } else {
+    query = query
+      .or(
+        "intro_md.is.null,redeem_md.is.null,troubleshoot_md.is.null,rewards_md.is.null,find_codes_md.is.null,about_game_md.is.null,seo_description.is.null"
+      )
+      .order("created_at", { ascending: true })
+      .limit(limit);
+  }
+
+  const { data, error } = await query;
+  if (error) throw new Error(`Failed to load draft games: ${error.message}`);
+  return ((data ?? []) as ExistingGameRecord[]).filter((game) => Boolean(game.id && game.name && game.slug));
+}
+
+async function collectArticleSources(game: ExistingGameRecord): Promise<string> {
+  console.log(`🔍 Collecting Google data for "${game.name}"...`);
+
+  const mainQuery = `"${game.name}" Roblox codes (site:beebom.com OR site:destructoid.com OR site:progameguides.com OR site:roblox.com OR site:pcgamesn.com OR site:pockettactics.com OR site:fandom.com OR site:tryhardguides.com OR site:techwiser.com)`;
+  const mainResults = await googleSearch(mainQuery, 5);
+  const topLinks = mainResults.slice(0, 3).map((entry) => entry.url);
+  const sourceUrl2Links = splitSourceUrls(game.source_url_2);
+  const articleUrls = uniqueUrls([...topLinks, ...sourceUrl2Links]);
+
+  let fullText = "";
+  for (const url of articleUrls) {
+    console.log(`📖 Reading full page: ${url}`);
+    fullText += await fetchArticleText(url);
+    await sleep(1500);
+  }
+
+  return fullText;
+}
+
+async function collectSocialLinksFromExistingSources(game: ExistingGameRecord): Promise<PlaceholderLinks> {
+  const sourceCandidates = uniqueUrls([
+    ...splitSourceUrls(game.source_url),
+    ...splitSourceUrls(game.source_url_2),
+    ...splitSourceUrls(game.source_url_3)
+  ]);
+
+  if (!sourceCandidates.length) return {};
+
+  const socialResult = await scrapeSocialLinksFromSources(sourceCandidates);
+  if (socialResult.errors.length) {
+    for (const errorMessage of socialResult.errors) {
+      console.warn(`⚠️ Social scrape error: ${errorMessage}`);
+    }
+  }
+  return convertScrapedSocialLinks(socialResult.links);
 }
 
 function resolveHref(href: string | null | undefined, base: string): string | null {
@@ -786,92 +739,16 @@ Return valid JSON with these keys:
 `;
 }
 
-async function main() {
-  const gameName = process.argv[2];
-
-  if (!gameName) {
-    console.error("❌ Please provide a game name.\nExample: npm run generate \"Anime Defenders\"");
-    process.exit(1);
+async function processDraftGame(game: ExistingGameRecord): Promise<void> {
+  if (game.is_published) {
+    console.log(`ℹ️ ${game.slug} is already published. Skipping.`);
+    return;
   }
 
-  console.log(`🔍 Collecting Google data for "${gameName}"...`);
-
-  const mainQuery = `"${gameName}" Roblox codes (site:beebom.com OR site:destructoid.com OR site:progameguides.com OR site:roblox.com OR site:pcgamesn.com OR site:pockettactics.com OR site:fandom.com OR site:tryhardguides.com OR site:techwiser.com)`;
-  const mainResults = await googleSearch(mainQuery, 5);
-
-  const topLinks = mainResults.slice(0, 3).map((entry) => entry.url);
-  let fullText = "";
-  for (const url of topLinks) {
-    console.log(`📖 Reading full page: ${url}`);
-    fullText += await fetchArticleText(url);
-    await sleep(1500);
-  }
-
-  const extraQueries = [
-    `how to redeem "${gameName}" Roblox codes (site:beebom.com OR site:destructoid.com OR site:progameguides.com OR site:roblox.com OR site:pcgamesn.com OR site:pockettactics.com OR site:gamerant.com OR site:fandom.com OR site:tryhardguides.com OR site:techwiser.com)`,
-    `"${gameName}" Roblox code rewards OR bonuses`,
-    `how to play "${gameName}" Roblox guide OR wiki site:fandom.com OR site:roblox.com`,
-  ];
-
-  let snippetText = "";
-  for (const q of extraQueries) {
-    console.log(`🌐 Searching: ${q}`);
-    const entries = await googleSearch(q);
-    if (!entries.length) continue;
-
-    const formatted = entries
-      .map((entry) => {
-        const snippetSuffix = entry.snippet ? `\nSnippet: ${entry.snippet}` : "";
-        return `Title: ${entry.title}\nURL: ${entry.url}${snippetSuffix}`;
-      })
-      .join("\n\n");
-
-    snippetText += `\n\n${formatted}`;
-    await sleep(1000);
-  }
-
-  const combinedSources = `${fullText}\n\n${snippetText}`;
-
-  const [robloxDenSource, beebomSource, destructoidSource] = await Promise.all([
-    findGameCodeArticle(gameName, "robloxden.com/game-codes"),
-    findGameCodeArticle(gameName, "beebom.com"),
-    findGameCodeArticle(gameName, "destructoid.com")
-  ]);
-
-  const sourceCandidates = [robloxDenSource, beebomSource, destructoidSource].filter(
-    (value): value is string => Boolean(value)
-  );
-
-  if (robloxDenSource) {
-    console.log(`🔗 Roblox Den source found: ${robloxDenSource}`);
-  } else {
-    console.log("⚠️ No matching Roblox Den codes article found.");
-  }
-
-  if (beebomSource) {
-    console.log(`🔗 Beebom source found: ${beebomSource}`);
-  } else {
-    console.log("⚠️ No matching Beebom codes article found.");
-  }
-
-  if (destructoidSource) {
-    console.log(`🔗 Destructoid source found: ${destructoidSource}`);
-  } else {
-    console.log("⚠️ No matching Destructoid codes article found.");
-  }
-
-  let socialLinks: PlaceholderLinks = {};
-  if (sourceCandidates.length) {
-    const socialResult = await scrapeSocialLinksFromSources(sourceCandidates);
-    if (socialResult.errors.length) {
-      for (const errorMessage of socialResult.errors) {
-        console.warn(`⚠️ Social scrape error: ${errorMessage}`);
-      }
-    }
-    socialLinks = convertScrapedSocialLinks(socialResult.links);
-  }
-
-  let metadata = await collectRobloxMetadata(socialLinks.roblox_link?.url);
+  const googleBefore = googleSearchCallCount;
+  const combinedSources = await collectArticleSources(game);
+  const socialLinks = await collectSocialLinksFromExistingSources(game);
+  const metadata = await collectRobloxMetadata(socialLinks.roblox_link?.url ?? game.roblox_link);
 
   console.log("🧠 Writing detailed article using GPT-4.1-mini...");
   const completion = await openai.chat.completions.create({
@@ -879,7 +756,7 @@ async function main() {
     temperature: 0.3,
     max_tokens: 5000,
     response_format: { type: "json_object" },
-    messages: [{ role: "user", content: buildArticlePrompt(gameName, combinedSources) }],
+    messages: [{ role: "user", content: buildArticlePrompt(game.name, combinedSources) }],
   });
 
   const raw = completion.choices[0].message?.content ?? "";
@@ -897,28 +774,8 @@ async function main() {
     throw new Error("Article generation incomplete.");
   }
 
-  const canonicalName = sanitizeGameDisplayName(parsed.game_display_name, gameName);
-  let slug = slugify(canonicalName || gameName);
-
-  let existingGame: ExistingGameRecord | null = null;
-  {
-  const { data, error } = await supabase
-    .from("games")
-    .select(
-      "id, slug, author_id, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, universe_id"
-    )
-      .eq("slug", slug)
-      .maybeSingle();
-    if (error) throw error;
-    existingGame = (data as ExistingGameRecord | null) ?? null;
-  }
-
-  if (existingGame?.is_published) {
-    console.log(`ℹ️ "${canonicalName}" already exists and is published. Skipping generation.`);
-    return;
-  }
-
-  const robloxExperienceLink = socialLinks.roblox_link?.url ?? existingGame?.roblox_link ?? undefined;
+  const displayName = sanitizeGameDisplayName(parsed.game_display_name, game.name);
+  const robloxExperienceLink = socialLinks.roblox_link?.url ?? game.roblox_link ?? undefined;
   if (!socialLinks.community_link && robloxExperienceLink) {
     const scrapedCommunityLink = await fetchCommunityLinkFromRobloxExperience(robloxExperienceLink);
     if (scrapedCommunityLink) {
@@ -932,11 +789,11 @@ async function main() {
   }
 
   const defaultLabels: Record<keyof PlaceholderLinks, string> = {
-    roblox_link: `${canonicalName} on Roblox`,
-    community_link: `${canonicalName} Community`,
-    discord_link: `${canonicalName} Discord`,
-    twitter_link: `${canonicalName} Twitter`,
-    youtube_link: `${canonicalName} YouTube Channel`,
+    roblox_link: `${displayName} on Roblox`,
+    community_link: `${displayName} Community`,
+    discord_link: `${displayName} Discord`,
+    twitter_link: `${displayName} Twitter`,
+    youtube_link: `${displayName} YouTube Channel`,
   };
 
   const buildLink = (
@@ -955,52 +812,44 @@ async function main() {
   };
 
   const resolvedLinks: PlaceholderLinks = {
-    roblox_link: buildLink(socialLinks.roblox_link, existingGame?.roblox_link, defaultLabels.roblox_link),
-    community_link: buildLink(socialLinks.community_link, existingGame?.community_link, defaultLabels.community_link),
-    discord_link: buildLink(socialLinks.discord_link, existingGame?.discord_link, defaultLabels.discord_link),
-    twitter_link: buildLink(socialLinks.twitter_link, existingGame?.twitter_link, defaultLabels.twitter_link),
-    youtube_link: buildLink(socialLinks.youtube_link, existingGame?.youtube_link, defaultLabels.youtube_link),
+    roblox_link: buildLink(socialLinks.roblox_link, game.roblox_link, defaultLabels.roblox_link),
+    community_link: buildLink(socialLinks.community_link, game.community_link, defaultLabels.community_link),
+    discord_link: buildLink(socialLinks.discord_link, game.discord_link, defaultLabels.discord_link),
+    twitter_link: buildLink(socialLinks.twitter_link, game.twitter_link, defaultLabels.twitter_link),
+    youtube_link: buildLink(socialLinks.youtube_link, game.youtube_link, defaultLabels.youtube_link),
   };
 
   if (!resolvedLinks.community_link && metadata.communityLink) {
     resolvedLinks.community_link = { url: metadata.communityLink, label: defaultLabels.community_link };
   }
 
-  const article = applyLinkPlaceholders(parsed, canonicalName, resolvedLinks);
+  const article = applyLinkPlaceholders(parsed, displayName, resolvedLinks);
 
-  const name = article.game_display_name;
-  slug = slugify(name || slug);
-
-  console.log(`📦 Saving article for "${name}"...`);
-  const insertPayload: Record<string, unknown> = {
-    name,
-    slug,
+  console.log(`📦 Updating draft content for "${game.name}" (${game.slug})...`);
+  const updatePayload: Record<string, unknown> = {
     intro_md: article.intro_md,
     redeem_md: article.redeem_md,
     troubleshoot_md: article.troubleshoot_md,
     rewards_md: article.rewards_md,
     find_codes_md: article.find_codes_md,
     about_game_md: article.about_game_md,
-    description_md: null,
     seo_description: article.meta_description,
-    is_published: false,
   };
 
-  const authorId = existingGame?.author_id ?? (await pickAuthorId());
-  if (authorId) {
-    insertPayload.author_id = authorId;
+  if (!game.author_id) {
+    const authorId = await pickAuthorId();
+    if (authorId) {
+      updatePayload.author_id = authorId;
+    }
   }
 
-  if (robloxDenSource) insertPayload.source_url = robloxDenSource;
-  if (beebomSource) insertPayload.source_url_2 = beebomSource;
-  if (destructoidSource) insertPayload.source_url_3 = destructoidSource;
-  if (resolvedLinks.roblox_link) insertPayload.roblox_link = resolvedLinks.roblox_link.url;
-  if (resolvedLinks.community_link) insertPayload.community_link = resolvedLinks.community_link.url;
-  if (resolvedLinks.discord_link) insertPayload.discord_link = resolvedLinks.discord_link.url;
-  if (resolvedLinks.twitter_link) insertPayload.twitter_link = resolvedLinks.twitter_link.url;
-  if (resolvedLinks.youtube_link) insertPayload.youtube_link = resolvedLinks.youtube_link.url;
+  if (resolvedLinks.roblox_link?.url) updatePayload.roblox_link = resolvedLinks.roblox_link.url;
+  if (resolvedLinks.community_link?.url) updatePayload.community_link = resolvedLinks.community_link.url;
+  if (resolvedLinks.discord_link?.url) updatePayload.discord_link = resolvedLinks.discord_link.url;
+  if (resolvedLinks.twitter_link?.url) updatePayload.twitter_link = resolvedLinks.twitter_link.url;
+  if (resolvedLinks.youtube_link?.url) updatePayload.youtube_link = resolvedLinks.youtube_link.url;
 
-  let resolvedUniverseId = (existingGame?.universe_id as number | null | undefined) ?? null;
+  let resolvedUniverseId = game.universe_id ?? null;
   if (resolvedLinks.roblox_link?.url) {
     try {
       const ensuredUniverse = await ensureUniverseForRobloxLink(supabase, resolvedLinks.roblox_link.url);
@@ -1015,206 +864,90 @@ async function main() {
     }
   }
   if (resolvedUniverseId != null) {
-    insertPayload.universe_id = resolvedUniverseId;
+    updatePayload.universe_id = resolvedUniverseId;
   }
 
-  insertPayload.slug = slug;
-
-  if (existingGame?.id) {
-    insertPayload.id = existingGame.id;
-  }
-
-  const upsert = await supabase
+  const { error: updateError } = await supabase
     .from("games")
-    .upsert(insertPayload, { onConflict: existingGame?.id ? "id" : "slug" })
-    .select("id")
-    .maybeSingle();
+    .update(updatePayload)
+    .eq("id", game.id);
 
-  if (upsert.error) throw upsert.error;
-  const gameId = upsert.data?.id ?? existingGame?.id;
-  console.log(`✅ "${name}" saved successfully (${slug})`);
+  if (updateError) throw new Error(`Failed to update ${game.slug}: ${updateError.message}`);
+  console.log(`✅ "${game.name}" updated successfully (${game.slug})`);
 
-  if (gameId) {
-    const interlinking = await generateInterlinkingForGame({
-      gameId,
-      gameName: name,
-      gameSlug: slug,
-      universeId: resolvedUniverseId ?? null
-    });
+  const interlinking = await generateInterlinkingForGame({
+    gameId: game.id,
+    gameName: game.name,
+    gameSlug: game.slug,
+    universeId: resolvedUniverseId ?? null
+  });
 
-    if (interlinking) {
-      const { error: interlinkError } = await supabase
+  if (interlinking) {
+    const { error: interlinkError } = await supabase
+      .from("games")
+      .update({
+        interlinking_ai: interlinking.meta,
+        interlinking_ai_copy_md: interlinking.copy
+      })
+      .eq("id", game.id);
+    if (interlinkError) {
+      console.warn("⚠️ Failed to store interlinking copy:", interlinkError.message);
+    }
+
+    for (const inc of interlinking.increments) {
+      const { error: incError } = await supabase
         .from("games")
-        .update({
-          interlinking_ai: interlinking.meta,
-          interlinking_ai_copy_md: interlinking.copy
-        })
-        .eq("id", gameId);
-      if (interlinkError) {
-        console.warn("⚠️ Failed to store interlinking copy:", interlinkError.message);
-      }
-
-      for (const inc of interlinking.increments) {
-        const { error: incError } = await supabase
-          .from("games")
-          .update({ internal_links: inc.internal_links })
-          .eq("id", inc.id);
-        if (incError) {
-          console.warn(`⚠️ Failed to bump internal_links for ${inc.id}:`, incError.message);
-        }
+        .update({ internal_links: inc.internal_links })
+        .eq("id", inc.id);
+      if (incError) {
+        console.warn(`⚠️ Failed to bump internal_links for ${inc.id}:`, incError.message);
       }
     }
   }
 
-  const coverSourceLink = resolvedLinks.roblox_link?.url ?? existingGame?.source_url ?? null;
-  await maybeAttachCoverImage({ slug, name, id: gameId ?? undefined, robloxLink: coverSourceLink });
-  await refreshCodesForGame(slug);
+  await maybeAttachCoverImage({
+    slug: game.slug,
+    name: game.name,
+    id: game.id,
+    robloxLink: resolvedLinks.roblox_link?.url ?? null
+  });
+
+  const googleAfter = googleSearchCallCount;
+  console.log(`🔎 Google searches used for ${game.slug}: ${googleAfter - googleBefore}`);
+}
+
+async function main() {
+  const args = process.argv.slice(2);
+  const limit = parseLimit(args);
+  const slug = parseSlugFilter(args);
+  const games = await loadDraftGames(limit, slug);
+
+  if (!games.length) {
+    console.log("No unpublished games with missing article content found.");
+    return;
+  }
+
+  console.log(`🧾 Processing ${games.length} draft game${games.length === 1 ? "" : "s"}...`);
+  let completed = 0;
+  let failed = 0;
+
+  for (const game of games) {
+    try {
+      await processDraftGame(game);
+      completed += 1;
+    } catch (error) {
+      failed += 1;
+      console.error(`❌ Failed to generate ${game.slug}:`, error instanceof Error ? error.message : error);
+    }
+  }
+
+  console.log(`✅ Draft generation complete: ${completed} completed, ${failed} failed.`);
 }
 
 main().catch((error) => {
   console.error("❌ Error:", error instanceof Error ? error.message : error);
   process.exit(1);
 });
-async function refreshCodesForGame(slug: string) {
-  if (!slug) {
-    console.log("⚠️ Missing slug, skipping post-insert refresh.");
-    return;
-  }
-
-  const { data: gameRecord, error: fetchError } = await supabase
-    .from("games")
-    .select("id, slug, source_url, source_url_2, source_url_3, expired_codes")
-    .eq("slug", slug)
-    .maybeSingle();
-
-  if (fetchError) {
-    console.error(`⚠️ Unable to load game for ${slug}:`, fetchError.message);
-    return;
-  }
-
-  if (!gameRecord) {
-    console.log(`⚠️ No game found for slug ${slug}. Skipping refresh.`);
-    return;
-  }
-
-  console.log(`🔁 Syncing codes for ${slug}...`);
-
-  const sourceUrls = [gameRecord.source_url, gameRecord.source_url_2, gameRecord.source_url_3]
-    .map((url) => (typeof url === "string" ? url.trim() : ""))
-    .filter((url) => url.length > 0);
-
-  if (!sourceUrls.length) {
-    console.log("⚠️ No source URLs available; skipping code sync.");
-    return;
-  }
-
-  const { codes, expiredCodes } = await scrapeSources(sourceUrls);
-  const scrapedExpired = expiredCodes ?? [];
-
-  const expiredByNormalized = new Map<string, { display: string; priority: number }>();
-  const setExpired = (normalized: string, display: string, priority: number) => {
-    const existing = expiredByNormalized.get(normalized);
-    if (!existing || priority > existing.priority) {
-      expiredByNormalized.set(normalized, { display, priority });
-    }
-  };
-
-  const existingExpiredArray = Array.isArray(gameRecord.expired_codes) ? gameRecord.expired_codes : [];
-  for (const code of existingExpiredArray) {
-    const displayCode = sanitizeCodeDisplay(code);
-    if (!displayCode) continue;
-    const normalized = normalizeCodeKey(displayCode);
-    if (normalized) {
-      setExpired(normalized, displayCode, -1);
-    }
-  }
-
-  for (const raw of scrapedExpired) {
-    const displayCode = sanitizeCodeDisplay(typeof raw === "string" ? raw : raw?.code);
-    if (!displayCode) continue;
-    const normalized = normalizeCodeKey(displayCode);
-    if (!normalized) continue;
-    const provider = typeof raw === "string" ? undefined : raw?.provider;
-    const priority = getCodeDisplayPriority(provider);
-    setExpired(normalized, displayCode, priority);
-  }
-
-  const { data: existingRows, error: existingError } = await supabase
-    .from("codes")
-    .select("code, status, provider_priority")
-    .eq("game_id", gameRecord.id);
-
-  if (existingError) {
-    console.error(`⚠️ Failed to load existing codes for ${slug}: ${existingError.message}`);
-    return;
-  }
-
-  const existingNormalizedMap = new Map<string, { code: string; providerPriority: number }>();
-  for (const row of existingRows ?? []) {
-    const existingCode = sanitizeCodeDisplay(row.code);
-    if (!existingCode) continue;
-    const normalized = normalizeCodeKey(existingCode);
-    if (!normalized) continue;
-    const providerPriority = Number(row.provider_priority ?? 0);
-    if (existingNormalizedMap.has(normalized)) {
-      const current = existingNormalizedMap.get(normalized)!;
-      if (current.providerPriority >= providerPriority) {
-        continue;
-      }
-    }
-    existingNormalizedMap.set(normalized, { code: existingCode, providerPriority });
-  }
-
-  let upserted = 0;
-  let newCodesCount = 0;
-
-  for (const c of codes) {
-    const displayCode = sanitizeCodeDisplay(c.code);
-    if (!displayCode) continue;
-    const normalized = normalizeCodeKey(displayCode);
-    if (!normalized) continue;
-    if (expiredByNormalized.has(normalized)) continue;
-    const providerPriority = Number(c.providerPriority ?? 0);
-
-    const existingEntry = existingNormalizedMap.get(normalized);
-    if (existingEntry) {
-      if (
-        existingEntry.providerPriority > providerPriority ||
-        (existingEntry.providerPriority === providerPriority && existingEntry.code === displayCode)
-      ) {
-        continue;
-      }
-    }
-
-    if (c.isNew) {
-      newCodesCount += 1;
-    }
-
-    const status = c.status === "check" ? "expired" : c.status;
-    const { error } = await supabase.rpc("upsert_code", {
-      p_game_id: gameRecord.id,
-      p_code: displayCode,
-      p_status: status,
-      p_rewards_text: c.rewardsText ?? null,
-      p_level_requirement: c.levelRequirement ?? null,
-      p_is_new: c.isNew ?? false,
-      p_provider_priority: providerPriority,
-    });
-
-    if (error) {
-      console.error(`⚠️ Upsert failed for ${displayCode}: ${error.message}`);
-      continue;
-    }
-
-    upserted += 1;
-    existingNormalizedMap.set(normalized, { code: displayCode, providerPriority });
-  }
-
-  const removedNote = scrapedExpired.length ? `, scraped expired ${scrapedExpired.length}` : "";
-  console.log(
-    `✔ ${slug} — ${upserted} codes upserted (new ${newCodesCount}${removedNote})`
-  );
-}
 
 function applyLinkPlaceholders(article: ArticleResponse, gameName: string, links: PlaceholderLinks): ProcessedArticle {
   const displayName = sanitizeGameDisplayName(article.game_display_name, gameName);
