@@ -53,6 +53,20 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   wiki: "wiki"
 };
 
+const SCOPE_ENTITY_TYPES: Record<string, string[]> = {
+  codes: ["code"],
+  articles: ["article"],
+  checklists: ["checklist"],
+  quizzes: ["quiz"],
+  lists: ["list"],
+  tools: ["tool"],
+  catalog: ["catalog"],
+  events: ["event"],
+  authors: ["author"],
+  music: ["music_hub", "music_genre", "music_artist"],
+  wiki: ["wiki"]
+};
+
 const DEFAULT_LIMIT = 120;
 const MAX_LIMIT = 200;
 const MIN_QUERY_LENGTH = 2;
@@ -69,16 +83,22 @@ function escapeLike(value: string): string {
   return value.replace(/[\\%_]/g, (char) => `\\${char}`);
 }
 
-async function searchSiteFallback(query: string, limit: number): Promise<SearchRow[]> {
+async function searchSiteFallback(query: string, limit: number, entityTypes: string[] | null): Promise<SearchRow[]> {
   const sb = supabaseAdmin();
   const pattern = `%${escapeLike(query)}%`;
-  const { data, error } = await sb
+  let request = sb
     .from("search_index")
     .select("entity_type,entity_id,slug,title,subtitle,url,updated_at")
     .eq("is_published", true)
     .ilike("search_text", pattern)
     .order("updated_at", { ascending: false, nullsFirst: false })
     .limit(limit);
+
+  if (entityTypes?.length) {
+    request = request.in("entity_type", entityTypes);
+  }
+
+  const { data, error } = await request;
 
   if (error) throw error;
 
@@ -92,6 +112,8 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const rawQuery = normalizeQuery(searchParams.get("q"));
+    const rawScope = normalizeQuery(searchParams.get("scope")).toLowerCase();
+    const entityTypes = rawScope && rawScope !== "global" ? SCOPE_ENTITY_TYPES[rawScope] ?? null : null;
     const requestedLimit = Number.parseInt(searchParams.get("limit") ?? "", 10);
     const safeLimit = clamp(Number.isFinite(requestedLimit) ? requestedLimit : DEFAULT_LIMIT, 1, MAX_LIMIT);
 
@@ -102,14 +124,17 @@ export async function GET(request: Request) {
     const sb = supabaseAdmin();
     const { data, error } = await sb.rpc("search_site", {
       p_query: rawQuery,
-      p_limit: safeLimit,
+      p_limit: entityTypes?.length ? MAX_LIMIT : safeLimit,
       p_offset: 0
     });
 
-    const rows = error ? await searchSiteFallback(rawQuery, safeLimit) : ((data ?? []) as SearchRow[]);
+    const allRows = error ? await searchSiteFallback(rawQuery, safeLimit, entityTypes) : ((data ?? []) as SearchRow[]);
     if (error) {
       console.warn("search_site RPC failed, using search_index fallback", error);
     }
+    const rows = entityTypes?.length
+      ? allRows.filter((row) => entityTypes.includes(row.entity_type)).slice(0, safeLimit)
+      : allRows.slice(0, safeLimit);
 
     const items: SearchItem[] = rows.map((row) => {
       const type = TYPE_MAP[row.entity_type] ?? "article";

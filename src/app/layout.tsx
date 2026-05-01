@@ -1,6 +1,5 @@
 import "./globals.css";
 import { ReactNode } from "react";
-import { LayoutGlobalSearch } from "@/components/LayoutClient";
 import { ThemeBootstrap } from "@/components/ThemeBootstrap";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
@@ -92,7 +91,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="min-h-screen bg-background text-foreground transition-colors duration-300">
         <ThemeBootstrap />
         <>
-          <LayoutGlobalSearch />
           {children}
         </>
       </body>

@@ -19,15 +19,15 @@
 
 .dark {
   color-scheme: dark;
-  --color-background: 9 11 20;
-  --color-surface: 22 28 46;
-  --color-surface-muted: 34 42 68;
-  --color-foreground: 236 240 255;
-  --color-muted: 186 195 224;
-  --color-border: 76 86 124;
-  --color-accent: 146 161 255;
+  --color-background: 5 6 8;
+  --color-surface: 12 14 18;
+  --color-surface-muted: 20 23 29;
+  --color-foreground: 238 241 247;
+  --color-muted: 164 173 190;
+  --color-border: 49 56 68;
+  --color-accent: 132 169 255;
   --color-accent-dark: 79 70 229;
-  --shadow-soft: 0 32px 70px -40px rgba(5, 7, 16, 0.85);
+  --shadow-soft: 0 28px 80px -48px rgba(0, 0, 0, 0.95);
 }
 
 html,
