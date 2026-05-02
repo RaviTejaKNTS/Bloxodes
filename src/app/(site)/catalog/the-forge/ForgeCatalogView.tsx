@@ -164,7 +164,7 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
   return (
     <article
       id={`item-${item.id}`}
-      className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border/60 bg-surface shadow-soft transition duration-200 hover:-translate-y-0.5 hover:border-border/90 hover:shadow-lg"
+      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
     >
       {showImage ? (
         <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-border/60 bg-background/50">
@@ -173,7 +173,7 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
             alt={item.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1440px) 25vw, 20vw"
-            className="object-contain p-5 transition duration-300 group-hover:scale-[1.02]"
+            className="object-contain p-5"
             unoptimized
           />
         </div>
@@ -298,17 +298,17 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
 
   if (!hasItems) {
     return (
-      <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
         No {config.label.toLowerCase()} data has been collected yet. Check back soon.
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
+    <div className="catalog-surface space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">View</p>
-        <div className="inline-flex rounded-full border border-border/60 bg-surface/70 p-1">
+        <div className="inline-flex rounded-md border border-border/60 bg-surface/70 p-1">
           {([
             { id: "cards", label: "Cards" },
             { id: "list", label: "List" }
@@ -320,7 +320,7 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
                 type="button"
                 onClick={() => setView(option.id)}
                 aria-pressed={isActive}
-                className={`rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
+                className={`rounded-md px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
                   isActive
                     ? "bg-accent text-white"
                     : "text-muted hover:text-foreground"

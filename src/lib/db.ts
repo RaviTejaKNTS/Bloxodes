@@ -1,6 +1,5 @@
 import { unstable_cache } from "next/cache";
 import { supabaseAdmin } from "@/lib/supabase";
-import { DEFAULT_AUTHOR_ID } from "./constants";
 
 export type Author = {
   id: string;
@@ -25,7 +24,6 @@ export type Game = {
   id: string;
   name: string;
   slug: string;
-  author_id: string | null;
   source_url: string | null;
   source_url_2: string | null;
   source_url_3: string | null;
@@ -52,10 +50,6 @@ export type Game = {
   re_rewritten_at?: string | null;
   created_at: string;
   updated_at: string;
-};
-
-export type GameWithAuthor = Game & {
-  author: Author | null;
 };
 
 export type RobloxUniverseInfo = {
@@ -454,6 +448,7 @@ export async function listGamesWithActiveCountsPage(page: number, pageSize: numb
           )
           .eq("is_published", true)
           .order("content_updated_at", { ascending: false })
+          .order("id", { ascending: true })
           .range(offset, offset + safePageSize - 1);
 
         if (error) {
@@ -522,6 +517,7 @@ export async function listGamesWithActiveCountsByUniverseId(universeId: number, 
     .eq("is_published", true)
     .eq("universe_id", universeId)
     .order("content_updated_at", { ascending: false })
+    .order("id", { ascending: true })
     .limit(limit);
   if (error) throw error;
   return (data ?? []).map((row) => mapCodePageRowToCounts(row as CodePageSummary));
@@ -602,6 +598,7 @@ export async function listPublishedGameListsPage(
           .select("id, slug, title, display_name, cover_image, top_entry_image, updated_at, created_at", { count: "exact" })
           .eq("is_published", true)
           .order("updated_at", { ascending: false })
+          .order("id", { ascending: true })
           .range(offset, offset + safePageSize - 1);
 
         if (error) {
@@ -634,6 +631,7 @@ export async function listPublishedGameListsPage(
           .select("id, slug, title, display_name, cover_image, updated_at, created_at", { count: "exact" })
           .eq("is_published", true)
           .order("updated_at", { ascending: false })
+          .order("id", { ascending: true })
           .range(offset, offset + safePageSize - 1);
 
         if (error) {
@@ -798,6 +796,7 @@ export async function getGameListEntriesPage(
       )
       .eq("list_id", listId)
       .order("rank", { ascending: true })
+      .order("universe_id", { ascending: true })
       .range(offset, offset + safePageSize - 1);
 
     if (error) {
@@ -858,6 +857,7 @@ export async function getGameListEntriesPage(
         )
         .eq("list_id", listId)
         .order("rank", { ascending: true })
+        .order("universe_id", { ascending: true })
         .range(offset, offset + safePageSize - 1);
       if (fallbackError) {
         if (!isOutOfRangePaginationFailure(fallbackStatus, fallbackError)) throw fallbackError;
@@ -1067,6 +1067,7 @@ export async function listPublishedArticlesPage(
           .select(ARTICLE_INDEX_FIELDS, { count: "exact" })
           .eq("is_published", true)
           .order("published_at", { ascending: false })
+          .order("id", { ascending: true })
           .range(offset, offset + safePageSize - 1);
 
         if (error) {
@@ -1213,34 +1214,6 @@ export async function listPublishedArticlesByAuthor(
     {
       revalidate: 21600, // 6 hours
       tags: ["articles-index", tagSlug ? `author:${tagSlug}` : null].filter(Boolean) as string[]
-    }
-  );
-
-  return cached();
-}
-
-export async function listPublishedGamesByAuthorWithActiveCounts(
-  authorId: string,
-  authorSlug?: string | null
-): Promise<GameWithCounts[]> {
-  const tagSlug = authorSlug?.trim().toLowerCase() ?? null;
-  const cached = unstable_cache(
-    async () => {
-      const sb = supabaseAdmin();
-      const { data, error } = await sb
-        .from("game_pages_index_view")
-        .select("id,name,slug,cover_image,created_at,updated_at,universe_id,genre_l1,genre_l2,active_code_count,latest_code_first_seen_at,content_updated_at")
-        .eq("is_published", true)
-        .eq("author_id", authorId)
-        .order("name", { ascending: true });
-      if (error) throw error;
-
-      return (data ?? []).map((row) => mapCodePageRowToCounts(row as CodePageSummary));
-    },
-    [`listPublishedGamesByAuthorWithActiveCounts:${authorId}`],
-    {
-      revalidate: 21600, // 6 hours
-      tags: ["authors-index", tagSlug ? `author:${tagSlug}` : null].filter(Boolean) as string[]
     }
   );
 
@@ -1433,6 +1406,7 @@ export async function listPublishedChecklistsPage(
           )
           .eq("is_public", true)
           .order("updated_at", { ascending: false })
+          .order("id", { ascending: true })
           .range(offset, offset + safePageSize - 1);
 
         if (error) {
@@ -1465,6 +1439,7 @@ export async function listPublishedChecklistsPage(
           )
           .eq("is_public", true)
           .order("updated_at", { ascending: false })
+          .order("id", { ascending: true })
           .range(offset, offset + safePageSize - 1);
 
         if (!viewError) {
@@ -1500,6 +1475,7 @@ export async function listPublishedChecklistsPage(
           )
           .eq("is_public", true)
           .order("updated_at", { ascending: false })
+          .order("id", { ascending: true })
           .range(offset, offset + safePageSize - 1);
 
         if (fallbackError) {
@@ -1595,7 +1571,7 @@ export async function listPublishedEventsPageSlugs(): Promise<string[]> {
   return cached();
 }
 
-export async function getGameBySlug(slug: string): Promise<GameWithAuthor | null> {
+export async function getGameBySlug(slug: string): Promise<Game | null> {
   const normalizedSlug = slug.trim().toLowerCase();
   const cached = unstable_cache(
     async () => {
@@ -1608,18 +1584,7 @@ export async function getGameBySlug(slug: string): Promise<GameWithAuthor | null
       if (error) throw error;
       if (!data) return null;
 
-      if (!(data as any).author && DEFAULT_AUTHOR_ID) {
-        const { data: fallback } = await sb
-          .from("authors")
-          .select("*")
-          .eq("id", DEFAULT_AUTHOR_ID)
-          .maybeSingle();
-        if (fallback) {
-          (data as any).author = fallback;
-        }
-      }
-
-      return data as GameWithAuthor;
+      return data as Game;
     },
     [`getGameBySlug:${normalizedSlug}`],
     {
@@ -1913,6 +1878,7 @@ async function fetchFeaturedFreeItemRows(filters: FreeItemsFilters = {}): Promis
     query = applyFreeItemsFilters(query, filters);
     query = query
       .order('favorite_count', { ascending: false, nullsFirst: false })
+      .order('asset_id', { ascending: true })
       .range(offset, offset + FEATURED_FREE_ITEMS_BATCH_SIZE - 1);
 
     const { data, error } = await query;
@@ -2005,14 +1971,14 @@ async function fetchFreeItems(
   // Apply sorting
   switch (effectiveSort) {
     case 'updated':
-      query = query.order('last_seen_at', { ascending: false });
+      query = query.order('last_seen_at', { ascending: false }).order('asset_id', { ascending: true });
       break;
     case 'newest':
-      query = query.order('created_at', { ascending: false });
+      query = query.order('created_at', { ascending: false }).order('asset_id', { ascending: true });
       break;
     case 'popular':
     default:
-      query = query.order('favorite_count', { ascending: false, nullsFirst: false });
+      query = query.order('favorite_count', { ascending: false, nullsFirst: false }).order('asset_id', { ascending: true });
       break;
   }
 

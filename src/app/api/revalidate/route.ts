@@ -31,6 +31,7 @@ const QUIZZES_SITEMAP_PATH = "/sitemaps/quizzes.xml";
 const TOOLS_SITEMAP_PATH = "/sitemaps/tools.xml";
 const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
 const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
+const PAGINATED_INDEX_PURGE_LIMIT = 50;
 
 function assertSecret(request: Request) {
   const secret = process.env.REVALIDATE_SECRET;
@@ -57,7 +58,11 @@ function applyRevalidation(paths: string[], tags: string[] = []) {
   const uniqueTags = Array.from(new Set(tags.filter(Boolean)));
 
   for (const path of uniquePaths) {
-    revalidatePath(path);
+    if (/\[[^/\]]+\]/.test(path)) {
+      revalidatePath(path, "page");
+    } else {
+      revalidatePath(path);
+    }
   }
 
   for (const tag of uniqueTags) {
@@ -67,23 +72,32 @@ function applyRevalidation(paths: string[], tags: string[] = []) {
   return uniquePaths;
 }
 
+function paginatedIndexPaths(basePath: string, pageLimit = PAGINATED_INDEX_PURGE_LIMIT) {
+  const normalizedBasePath = basePath === "/" ? "/" : basePath.replace(/\/+$/, "");
+  return [
+    normalizedBasePath,
+    `${normalizedBasePath}/page/[page]`,
+    ...Array.from({ length: Math.max(0, pageLimit - 1) }, (_, index) => `${normalizedBasePath}/page/${index + 2}`)
+  ];
+}
+
 function revalidateForCode(slug: string) {
   return applyRevalidation(
-    [`/codes/${slug}`, "/codes", "/", SITEMAP_INDEX_PATH, CODES_SITEMAP_PATH],
+    [`/codes/${slug}`, ...paginatedIndexPaths("/codes"), "/", SITEMAP_INDEX_PATH, CODES_SITEMAP_PATH],
     [`code:${slug}`, "codes", "codes-index", "home"]
   );
 }
 
 function revalidateForArticle(slug: string) {
   return applyRevalidation(
-    [`/articles/${slug}`, "/articles", "/", SITEMAP_INDEX_PATH, ARTICLES_SITEMAP_PATH],
+    [`/articles/${slug}`, ...paginatedIndexPaths("/articles"), "/", SITEMAP_INDEX_PATH, ARTICLES_SITEMAP_PATH],
     [`article:${slug}`, "articles", "articles-index"]
   );
 }
 
 function revalidateForList(slug: string) {
   return applyRevalidation(
-    [`/lists/${slug}`, `/lists/${slug}/page/[page]`, "/lists", SITEMAP_INDEX_PATH, LISTS_SITEMAP_PATH],
+    [`/lists/${slug}`, `/lists/${slug}/page/[page]`, ...paginatedIndexPaths("/lists"), SITEMAP_INDEX_PATH, LISTS_SITEMAP_PATH],
     [`list:${slug}`, "lists", "lists-index"]
   );
 }
@@ -101,7 +115,7 @@ function revalidateForEvents(slug: string) {
 
 function revalidateForChecklists(slug: string) {
   return applyRevalidation(
-    ["/checklists", "/checklists/page/[page]", `/checklists/${slug}`, SITEMAP_INDEX_PATH, CHECKLISTS_SITEMAP_PATH],
+    [...paginatedIndexPaths("/checklists"), `/checklists/${slug}`, SITEMAP_INDEX_PATH, CHECKLISTS_SITEMAP_PATH],
     ["checklists-index"]
   );
 }
@@ -122,7 +136,7 @@ function revalidateForWiki(slug: string) {
 
 function revalidateForTools(slug: string) {
   return applyRevalidation(
-    ["/tools", "/tools/page/[page]", `/tools/${slug}`, SITEMAP_INDEX_PATH, TOOLS_SITEMAP_PATH],
+    [...paginatedIndexPaths("/tools"), `/tools/${slug}`, SITEMAP_INDEX_PATH, TOOLS_SITEMAP_PATH],
     ["tools-index"]
   );
 }
@@ -130,16 +144,12 @@ function revalidateForTools(slug: string) {
 function revalidateForMusic() {
   return applyRevalidation([
     "/catalog",
-    "/catalog/roblox-music-ids",
-    "/catalog/roblox-music-ids/page/[page]",
-    "/catalog/roblox-music-ids/trending",
-    "/catalog/roblox-music-ids/trending/page/[page]",
-    "/catalog/roblox-music-ids/genres",
-    "/catalog/roblox-music-ids/genres/page/[page]",
+    ...paginatedIndexPaths("/catalog/roblox-music-ids"),
+    ...paginatedIndexPaths("/catalog/roblox-music-ids/trending"),
+    ...paginatedIndexPaths("/catalog/roblox-music-ids/genres"),
     "/catalog/roblox-music-ids/genres/[genre]",
     "/catalog/roblox-music-ids/genres/[genre]/page/[page]",
-    "/catalog/roblox-music-ids/artists",
-    "/catalog/roblox-music-ids/artists/page/[page]",
+    ...paginatedIndexPaths("/catalog/roblox-music-ids/artists"),
     "/catalog/roblox-music-ids/artists/[artist]",
     "/catalog/roblox-music-ids/artists/[artist]/page/[page]",
     SITEMAP_INDEX_PATH,
@@ -155,8 +165,7 @@ function revalidateForFreeItems() {
   return applyRevalidation(
     [
       "/catalog",
-      FREE_ITEMS_BASE_PATH,
-      `${FREE_ITEMS_BASE_PATH}/page/[page]`,
+      ...paginatedIndexPaths(FREE_ITEMS_BASE_PATH),
       `${FREE_ITEMS_BASE_PATH}/[category]`,
       `${FREE_ITEMS_BASE_PATH}/[category]/page/[page]`,
       `${FREE_ITEMS_BASE_PATH}/[category]/[subcategory]`,

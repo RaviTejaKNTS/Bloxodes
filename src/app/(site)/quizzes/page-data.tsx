@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { QuizCard } from "@/components/QuizCard";
 import { listPublishedQuizzes, type QuizListEntry } from "@/lib/quizzes";
 import { QUIZZES_DESCRIPTION, SITE_URL } from "@/lib/seo";
@@ -71,20 +72,16 @@ function QuizzesPageView({ cards, total }: { cards: ReturnType<typeof mapRowToCa
         <p className="max-w-2xl text-base text-muted md:text-lg">
           Quick, replayable quizzes built from in-game mechanics, NPCs, and regions. Pick a game and take a 15-question run.
         </p>
-        <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-          <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-            {total} quizzes published
-          </span>
-          {refreshedLabel ? (
-            <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-              Last updated {refreshedLabel}
-            </span>
-          ) : null}
-        </div>
+        <IndexPageStats
+          items={[
+            { label: `${total} quizzes published`, icon: "quizzes", tone: "accent" },
+            ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
+          ]}
+        />
       </header>
 
       {cards.length ? (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((card, index) => (
             <div
               key={card.code}

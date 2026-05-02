@@ -46,7 +46,7 @@ export function RobloxCatalogItemCard({ item }: Props) {
   const hasThumbnail = Boolean(item.thumbnail_url) && !imageFailed;
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border/60 bg-surface shadow-soft transition duration-300 hover:-translate-y-0.5 hover:border-accent/80 hover:shadow-xl">
+    <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55">
       <div className="flex flex-1 flex-col">
         <div className="relative aspect-square w-full overflow-hidden border-b border-border/60 bg-background/70">
           {hasThumbnail ? (
@@ -55,7 +55,7 @@ export function RobloxCatalogItemCard({ item }: Props) {
               alt={item.name}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              className="object-contain p-3 transition duration-500 group-hover:scale-[1.03]"
+              className="object-contain p-3"
               onError={() => setImageFailed(true)}
               unoptimized
             />
@@ -70,7 +70,7 @@ export function RobloxCatalogItemCard({ item }: Props) {
           )}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-background/85 via-background/25 to-transparent" />
           <div className="absolute left-2 top-2">
-            <div className="inline-flex rounded-full bg-black/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+            <div className="inline-flex rounded-md bg-black/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
               {formatPrice(item.price_robux)}
             </div>
           </div>
@@ -85,18 +85,18 @@ export function RobloxCatalogItemCard({ item }: Props) {
           </div>
 
           <div className="flex flex-wrap gap-1.5">
-            <span className="inline-flex items-center rounded-full border border-border/60 bg-background/50 px-2.5 py-1 text-[10px] font-medium text-foreground/85">
+            <span className="inline-flex items-center rounded-md border border-border/60 bg-background/50 px-2.5 py-1 text-[10px] font-medium text-foreground/85">
               {item.category}
             </span>
-            <span className="inline-flex items-center rounded-full border border-border/60 bg-background/50 px-2.5 py-1 text-[10px] font-medium text-foreground/85">
+            <span className="inline-flex items-center rounded-md border border-border/60 bg-background/50 px-2.5 py-1 text-[10px] font-medium text-foreground/85">
               {item.subcategory}
             </span>
           </div>
 
-          <div className="rounded-xl border border-border/60 bg-background/40 px-3 py-2.5">
+          <div className="rounded-md border border-border/60 bg-background/40 px-3 py-2.5">
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Favorites</p>
             <div className="mt-1.5 flex items-center gap-2">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-border/60 bg-background/70 text-foreground/80">
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-border/60 bg-background/70 text-foreground/80">
                 <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor" aria-hidden>
                   <path d="m12 17.27 5.18 3.05-1.38-5.89 4.58-3.97-6.03-.51L12 4.4 9.65 9.95l-6.03.51 4.58 3.97-1.38 5.89L12 17.27Z" />
                 </svg>
@@ -110,7 +110,7 @@ export function RobloxCatalogItemCard({ item }: Props) {
               href={buildFallbackRobloxUrl(item)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-4 py-2 text-xs font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-xs font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
             >
               Open on Roblox
             </a>

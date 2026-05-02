@@ -3,6 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 import { listPublishedArticlesPage, type ArticleWithRelations } from "@/lib/db";
 import { ARTICLES_DESCRIPTION, SITE_URL, buildAlternates } from "@/lib/seo";
 import { ArticleCard } from "@/components/ArticleCard";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 
 export const ARTICLES_PAGE_SIZE = 20;
@@ -52,16 +53,12 @@ function ArticlesPageView({
           <p className="max-w-2xl text-base text-muted md:text-lg">
             Long-form guides, recommendations, and redemption walkthroughs updated regularly to help you get more from every Roblox game.
           </p>
-          <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-            <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-              {totalArticles} published articles
-            </span>
-            {refreshedLabel ? (
-              <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-                Last updated {refreshedLabel}
-              </span>
-            ) : null}
-          </div>
+          <IndexPageStats
+            items={[
+              { label: `${totalArticles} articles published`, icon: "articles", tone: "accent" },
+              ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
+            ]}
+          />
         </header>
       ) : (
         <header className="space-y-2">

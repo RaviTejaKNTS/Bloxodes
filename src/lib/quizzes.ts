@@ -114,7 +114,8 @@ const cachedListPublishedQuizzes = unstable_cache(
       .from("quiz_pages_view")
       .select(QUIZ_SELECT_FIELDS_VIEW)
       .eq("is_published", true)
-      .order("content_updated_at", { ascending: false });
+      .order("content_updated_at", { ascending: false })
+      .order("id", { ascending: true });
 
     if (!error && data) {
       return (data ?? []) as QuizListEntry[];
@@ -124,7 +125,8 @@ const cachedListPublishedQuizzes = unstable_cache(
       .from("quiz_pages")
       .select(QUIZ_SELECT_FIELDS_BASE)
       .eq("is_published", true)
-      .order("updated_at", { ascending: false });
+      .order("updated_at", { ascending: false })
+      .order("id", { ascending: true });
 
     if (fallbackError) {
       console.error("Error fetching quiz pages", fallbackError);

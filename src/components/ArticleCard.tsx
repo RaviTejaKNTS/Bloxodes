@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FiClock } from "react-icons/fi";
 import type { ArticleWithRelations } from "@/lib/db";
 import { authorAvatarUrl } from "@/lib/avatar";
 
 const BASE_CLASS =
-  "group overflow-hidden rounded-[var(--radius-lg)] border border-border/60 bg-surface transition-colors flex flex-col";
+  "group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-card shadow-none transition-colors";
 
 const BLUR_DATA_URL =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTIwMCcgaGVpZ2h0PSc2NzUnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHJlY3Qgd2lkdGg9JzEyMDAnIGhlaWdodD0nNjc1JyBmaWxsPSdyZ2JhKDQ4LDUwLDU4LDAuMyknIC8+PC9zdmc+";
@@ -35,16 +36,16 @@ export function ArticleCard({ article }: ArticleCardProps) {
   const authorAvatar = author ? authorAvatarUrl(author, 48) : "https://www.gravatar.com/avatar/?d=mp";
 
   return (
-    <div className={`${BASE_CLASS} hover:border-accent hover:shadow-[0_24px_45px_-35px_rgba(59,70,128,0.65)]`}>
+    <div className={`${BASE_CLASS} hover:border-border`}>
       <Link href={`/articles/${article.slug}`} prefetch={false} className="flex flex-1 flex-col">
-        <div className="relative aspect-[16/9] bg-surface-muted">
+        <div className="relative aspect-[16/9] shrink-0 overflow-hidden bg-surface-muted">
           {normalizedCover ? (
             <Image
               src={normalizedCover}
               alt={article.title}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover"
               placeholder="blur"
               blurDataURL={BLUR_DATA_URL}
             />
@@ -55,20 +56,18 @@ export function ArticleCard({ article }: ArticleCardProps) {
               </span>
             </div>
           )}
+          <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-card via-card/70 to-transparent" aria-hidden />
         </div>
-        <div className="flex flex-1 flex-col gap-3 p-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-muted">
+        <div className="relative -mt-1 flex flex-1 flex-col gap-3 bg-card px-4 pb-4 pt-3">
+          <div className="space-y-2">
+            <p className="mb-0 text-xs font-semibold uppercase tracking-[0.18em] text-foreground/55">
               {article.universe?.display_name ?? article.universe?.name ?? "Roblox"}
             </p>
-            <h3 className="mt-1 text-lg font-semibold text-foreground group-hover:text-accent">{article.title}</h3>
+            <h3 className="mb-0 line-clamp-2 text-lg font-semibold leading-snug text-foreground">{article.title}</h3>
           </div>
-          {article.meta_description ? (
-            <p className="line-clamp-2 text-sm text-muted">{article.meta_description}</p>
-          ) : null}
         </div>
       </Link>
-      <div className="flex items-center justify-between gap-3 border-t border-border/60 px-4 py-3 text-xs text-muted">
+      <div className="flex items-center justify-between gap-3 border-t border-border/60 px-4 py-3 text-xs text-foreground/70">
         <span className="inline-flex items-center gap-2">
           <img
             src={authorAvatar}
@@ -84,7 +83,10 @@ export function ArticleCard({ article }: ArticleCardProps) {
             <span className="font-semibold text-foreground">{author?.name ?? "Bloxodes"}</span>
           )}
         </span>
-        <span>{updatedLabel}</span>
+        <span className="inline-flex items-center gap-1 whitespace-nowrap">
+          <FiClock aria-hidden className="h-3 w-3" />
+          <span>{updatedLabel}</span>
+        </span>
       </div>
     </div>
   );

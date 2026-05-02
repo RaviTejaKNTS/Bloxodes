@@ -13,6 +13,7 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `scripts/AGENTS.md`: automation/script authoring and execution rules.
 - `supabase/AGENTS.md`: schema and edge-function guidance.
 - `data/AGENTS.md`: local datasets and their consumers.
+- `DESIGN.md`: public live-database design direction, shadcn component usage, design tokens, and readable content rules.
 
 ## Reference Docs In This Folder
 

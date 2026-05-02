@@ -146,7 +146,7 @@ export function ForgeInventoryOptimizerClient({
     };
 
     return (
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="tool-surface grid lg:grid-cols-3 gap-6">
             {/* Left Panel - 2/3 width */}
             <div className="lg:col-span-2 space-y-6">
                 {/* Optimization Goal */}
@@ -155,7 +155,7 @@ export function ForgeInventoryOptimizerClient({
                         <div className="w-full">
                             <label className="block text-sm font-semibold text-foreground mb-2">Optimization Goal</label>
                             <div className="overflow-x-auto overflow-y-hidden">
-                                <div className="inline-flex overflow-hidden rounded-full border border-border/70 bg-surface text-sm font-semibold shadow-soft">
+                                <div className="inline-flex overflow-hidden rounded-md border border-border/70 bg-surface text-sm font-semibold shadow-soft">
                                     <button
                                         type="button"
                                         onClick={() => setOptimizationGoal("weapon_focus")}

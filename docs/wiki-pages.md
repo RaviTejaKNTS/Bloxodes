@@ -20,7 +20,7 @@
 
 11. Add wiki search index coverage if site search should include wiki pages.
 
-12. Add related cards on the wiki hub: codes, tools, events, articles, checklists, quizzes, and published catalog pages where available by `universe_id`. Catalog pages can provide wiki-specific copy through `catalog_pages.wiki_md`, stable placement through `catalog_pages.wiki_sort_order`, CTA counts through `catalog_pages.wiki_item_count`, and CTA background art through `catalog_pages.wiki_image_urls`.
+12. Add related cards on the wiki hub: codes, tools, events, articles, checklists, quizzes, and published catalog pages where available by `universe_id`. Catalog pages can provide wiki-specific copy through `catalog_pages.wiki_md`, stable placement through `catalog_pages.wiki_sort_order`, and CTA background art through `catalog_pages.wiki_image_urls`.
 
 13. Add Roblox universe metric blocks: playing now, visits, favorites, likes, dislikes, like ratio.
 

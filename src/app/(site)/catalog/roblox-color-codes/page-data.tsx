@@ -34,8 +34,6 @@ export type CatalogContentHtml = {
   descriptionHtml?: Array<{ key: string; html: string }>;
   faqHtml?: Array<{ q: string; a: string }>;
   updatedAt?: string | null;
-  ctaLabel?: string | null;
-  ctaUrl?: string | null;
 };
 
 export type BreadcrumbItem = PageBreadcrumbItem;
@@ -166,7 +164,7 @@ export function renderRobloxColorCodesPage({
   const commentsEntityId = contentHtml?.id ?? COLOR_CODES_COMMENTS_ENTITY_ID;
 
   return (
-    <div className="space-y-10">
+    <div className="catalog-surface space-y-10">
       <header className="space-y-4">
         <ColorCodesBreadcrumb
           items={[

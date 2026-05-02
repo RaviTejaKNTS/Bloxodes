@@ -189,13 +189,13 @@ export function FreeItemsNav({ active, categories }: { active: string; categorie
   ];
 
   return (
-    <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+    <section className="catalog-surface grid gap-4 md:grid-cols-2 lg:grid-cols-5">
       {navItems.map((item) => {
         const isActive = item.id === active;
-        const cardClasses = `group relative overflow-hidden rounded-2xl border px-5 py-4 transition ${
+        const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${
           isActive
-            ? "border-accent/70 bg-gradient-to-br from-accent/15 via-surface to-background shadow-soft"
-            : "border-border/60 bg-surface/80 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-soft"
+            ? "border-accent/60 bg-accent/10"
+            : "border-border/70 bg-surface/80 hover:border-accent/55"
         }`;
         const card = (
           <article className={cardClasses} aria-current={isActive ? "page" : undefined}>
@@ -209,7 +209,7 @@ export function FreeItemsNav({ active, categories }: { active: string; categorie
               <div className="flex flex-wrap items-center gap-2">
                 <p className="text-lg font-semibold text-foreground">{item.title}</p>
                 {isActive ? (
-                  <span className="rounded-full bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
+                  <span className="rounded-md bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
                     Active
                   </span>
                 ) : null}
@@ -327,7 +327,7 @@ export function buildSimpleItemListSchema({
 export function buildCategoryCards(categories: CategoryOption[]) {
   if (!categories.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
         No categories are available yet. Check back soon.
       </div>
     );
@@ -341,7 +341,7 @@ export function buildCategoryCards(categories: CategoryOption[]) {
           href={buildFreeItemCategoryPath(category.slug)}
           className="group block h-full"
         >
-          <article className="relative h-full overflow-hidden rounded-2xl border border-border/60 bg-surface p-5 shadow-soft transition hover:-translate-y-0.5 hover:border-accent/70">
+          <article className="relative h-full overflow-hidden rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/55">
             <span
               aria-hidden
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(255,255,255,0.3),transparent_55%)]"
@@ -445,7 +445,7 @@ export async function renderRobloxFreeItemsPage({
   }));
 
   return (
-    <div className="space-y-10">
+    <div className="catalog-surface space-y-10">
       {showHero ? (
         <header className="space-y-4">
           <FreeItemsBreadcrumb items={breadcrumbItems} />
@@ -473,7 +473,7 @@ export async function renderRobloxFreeItemsPage({
           <section className="flex flex-wrap gap-2">
             <Link
               href={buildFreeItemCategoryPath(categorySlug)}
-              className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
+              className={`rounded-md border px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
                 activeSubcategorySlug
                   ? "border-border/70 bg-background/70 text-muted hover:border-accent/70 hover:text-accent"
                   : "border-accent/70 bg-accent/10 text-accent"
@@ -487,7 +487,7 @@ export async function renderRobloxFreeItemsPage({
                 <Link
                   key={subcategory.slug}
                   href={buildFreeItemCategoryPath(categorySlug, subcategory.slug)}
-                  className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
+                  className={`rounded-md border px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
                     isActive
                       ? "border-accent/70 bg-accent/10 text-accent"
                       : "border-border/70 bg-background/70 text-muted hover:border-accent/70 hover:text-accent"
@@ -502,7 +502,7 @@ export async function renderRobloxFreeItemsPage({
 
         <Suspense
           fallback={
-            <div className="rounded-2xl border border-border/60 bg-surface/60 p-6 text-sm text-muted">
+            <div className="rounded-lg border border-border/60 bg-surface/60 p-6 text-sm text-muted">
               Loading free items...
             </div>
           }

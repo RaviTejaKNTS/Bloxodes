@@ -65,6 +65,8 @@ export type EventsPageCardData = {
   fallbackIcon: string | null;
   eventName: string | null;
   eventTimeLabel: string | null;
+  eventStartUtc: string | null;
+  eventEndUtc: string | null;
   status: "upcoming" | "current" | "past" | "none";
   counts: { upcoming: number; current: number; past: number };
   updatedLabel: string | null;
@@ -409,6 +411,8 @@ export async function buildEventsCards(
         fallbackIcon: page.universe?.icon_url ?? null,
         eventName: coverPick ? getEventDisplayName(coverPick.event) : null,
         eventTimeLabel: coverPick ? formatEventTimeLabel(coverPick.bucket, coverPick.event) : null,
+        eventStartUtc: coverPick?.event.start_utc ?? null,
+        eventEndUtc: coverPick?.event.end_utc ?? null,
         status,
         counts: {
           upcoming: grouped.upcoming.length,

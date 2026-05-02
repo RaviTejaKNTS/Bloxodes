@@ -301,6 +301,8 @@ async function loadMusicIdsPage(
       }
     }
 
+    query = query.order("asset_id", { ascending: true });
+
     const { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
 
     if (error) {
@@ -354,12 +356,12 @@ export async function loadArtistOptionBySlug(slug: string) {
 
 export function MusicCatalogNav({ active }: { active: MusicNavKey }) {
   return (
-    <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <section className="catalog-surface grid gap-4 md:grid-cols-2 xl:grid-cols-4">
       {MUSIC_NAV_ITEMS.map((item) => {
         const isActive = item.id === active;
-        const cardClasses = `group relative overflow-hidden rounded-2xl border px-5 py-4 transition ${isActive
-            ? "border-accent/70 bg-gradient-to-br from-accent/15 via-surface to-background shadow-soft"
-            : "border-border/60 bg-surface/80 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-soft"
+        const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${isActive
+            ? "border-accent/60 bg-accent/10"
+            : "border-border/70 bg-surface/80 hover:border-accent/55"
           }`;
         const card = (
           <article className={cardClasses} aria-current={isActive ? "page" : undefined}>
@@ -372,7 +374,7 @@ export function MusicCatalogNav({ active }: { active: MusicNavKey }) {
               <div className="flex flex-wrap items-center gap-2">
                 <p className="text-lg font-semibold text-foreground">{item.title}</p>
                 {isActive ? (
-                  <span className="rounded-full bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
+                  <span className="rounded-md bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
                     Active
                   </span>
                 ) : null}
@@ -486,7 +488,7 @@ export function buildSimpleItemListSchema({
 export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
   if (!songs.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
         No music IDs have been collected yet. Check back soon.
       </div>
     );
@@ -499,11 +501,11 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
         return (
           <article
             key={song.asset_id}
-            className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-surface shadow-soft transition duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl"
+            className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
           >
             <div className="flex flex-1 flex-col gap-4 p-4">
               <div className="flex items-start gap-4">
-                <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-background/60 shadow-inner">
+                <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border border-border/60 bg-background/60">
                   <MusicCoverImage
                     src={buildThumbnailUrl(song)}
                     alt={`${song.title} Roblox music`}
@@ -527,7 +529,7 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
-                <div className="flex items-center gap-1.5 rounded-full border border-border/50 bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-foreground">
+                <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-foreground">
                   <span>Music ID</span>
                   <span className="font-mono text-[0.82rem]">{song.asset_id}</span>
                   <CopyCodeButton
@@ -545,18 +547,18 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
                   />
                 </div>
                 {song.rank ? (
-                  <span className="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-accent">
+                  <span className="inline-flex items-center rounded-md bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-accent">
                     Top #{song.rank}
                   </span>
                 ) : null}
               </div>
 
               <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
-                <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1">
+                <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
                   <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
                   <span className="font-semibold text-foreground">{durationLabel ?? "—"}</span>
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1">
+                <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
                   <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
                   <span className="font-semibold text-foreground">{song.genre ?? "—"}</span>
                 </span>
@@ -567,7 +569,7 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
                   href={buildRobloxUrl(song.asset_id)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
                 >
                   Play on Roblox
                 </a>
@@ -583,7 +585,7 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
 export function TrendingMusicList({ songs }: { songs: MusicRow[] }) {
   if (!songs.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
         No trending music IDs are available yet. Check back soon.
       </div>
     );
@@ -597,13 +599,13 @@ export function TrendingMusicList({ songs }: { songs: MusicRow[] }) {
         return (
           <li
             key={song.asset_id}
-            className="group flex flex-col gap-4 rounded-2xl border border-border/60 bg-surface px-4 py-5 shadow-soft transition hover:-translate-y-0.5 hover:border-accent/70"
+            className="group flex flex-col gap-4 rounded-lg border border-border/70 bg-surface px-4 py-5 transition hover:border-accent/55"
           >
             <div className="flex flex-wrap items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/20 bg-accent/10 text-xl font-semibold text-accent">
+              <div className="flex h-12 w-12 items-center justify-center rounded-md border border-accent/20 bg-accent/10 text-xl font-semibold text-accent">
                 #{rank}
               </div>
-              <div className="relative h-14 w-14 overflow-hidden rounded-xl border border-border/60 bg-background/60 shadow-inner">
+              <div className="relative h-14 w-14 overflow-hidden rounded-md border border-border/60 bg-background/60">
                 <MusicCoverImage
                   src={buildThumbnailUrl(song)}
                   alt={`${song.title} Roblox music`}
@@ -619,12 +621,12 @@ export function TrendingMusicList({ songs }: { songs: MusicRow[] }) {
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
+                <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
                   <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
                   <span className="font-semibold text-foreground">{durationLabel ?? "—"}</span>
                 </span>
                 {song.genre ? (
-                  <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
+                  <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
                     <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
                     <span className="font-semibold text-foreground">{song.genre}</span>
                   </span>
@@ -632,7 +634,7 @@ export function TrendingMusicList({ songs }: { songs: MusicRow[] }) {
               </div>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-2 rounded-full border border-border/50 bg-surface px-3 py-1 text-xs font-semibold text-foreground">
+              <div className="flex items-center gap-2 rounded-md border border-border/50 bg-surface px-3 py-1 text-xs font-semibold text-foreground">
                 <span>Music ID</span>
                 <span className="font-mono text-[0.85rem]">{song.asset_id}</span>
                 <CopyCodeButton
@@ -653,7 +655,7 @@ export function TrendingMusicList({ songs }: { songs: MusicRow[] }) {
                 href={buildRobloxUrl(song.asset_id)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-accent px-4 py-2 text-xs font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+                className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-xs font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
               >
                 Play on Roblox
               </a>
@@ -759,7 +761,7 @@ export function renderRobloxMusicIdsPage({
   }));
 
   return (
-    <div className="space-y-10">
+    <div className="catalog-surface space-y-10">
       {showHero ? (
         <header className="space-y-4">
           <MusicBreadcrumb items={breadcrumbNavItems} />
@@ -786,7 +788,7 @@ export function renderRobloxMusicIdsPage({
 
         <Suspense
           fallback={
-            <div className="rounded-2xl border border-border/60 bg-surface/60 p-6 text-sm text-muted">
+            <div className="rounded-lg border border-border/60 bg-surface/60 p-6 text-sm text-muted">
               Loading music IDs...
             </div>
           }
@@ -834,7 +836,7 @@ export function renderRobloxMusicIdsPage({
 export function buildGenreCards(genres: ValueOption[]) {
   if (!genres.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
         No genre data is available yet. Check back soon.
       </div>
     );
@@ -848,7 +850,7 @@ export function buildGenreCards(genres: ValueOption[]) {
           href={`${BASE_PATH}/genres/${genre.slug}`}
           className="group block h-full"
         >
-          <article className="relative h-full overflow-hidden rounded-2xl border border-border/60 bg-surface p-5 shadow-soft transition hover:-translate-y-0.5 hover:border-accent/70">
+          <article className="relative h-full overflow-hidden rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/55">
             <span
               aria-hidden
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(255,255,255,0.3),transparent_55%)]"
@@ -871,7 +873,7 @@ export function buildGenreCards(genres: ValueOption[]) {
 export function buildArtistCards(artists: ValueOption[]) {
   if (!artists.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
         No artist data is available yet. Check back soon.
       </div>
     );
@@ -885,7 +887,7 @@ export function buildArtistCards(artists: ValueOption[]) {
           href={`${BASE_PATH}/artists/${artist.slug}`}
           className="group block h-full"
         >
-          <article className="relative h-full overflow-hidden rounded-2xl border border-border/60 bg-surface p-5 shadow-soft transition hover:-translate-y-0.5 hover:border-accent/70">
+          <article className="relative h-full overflow-hidden rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/55">
             <span
               aria-hidden
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(255,255,255,0.3),transparent_55%)]"

@@ -24,6 +24,9 @@ Scoped route-family guides:
 - Reuse shared components such as `GameCard`, `ArticleCard`, `PagePagination`, `CommentsSection`, and route-specific client widgets.
 - When interactive UI is required, keep a server wrapper page and isolate client logic in a colocated client component.
 - For catalog and tool routes, prefer the shared page primitives for breadcrumb, freshness, FAQ, and rich-content rendering.
+- Public pages should feel like readable content inside a clean live-database shell. Keep strong titles and comfortable prose.
+- Use shadcn-style primitives for reusable UI surfaces: cards, buttons, badges, search inputs, sheets, sidebars, tabs, tooltips, loading states, and empty states.
+- Avoid heavy custom decorative layouts inside shadcn components. Prefer neutral borders, compact spacing, and clear states.
 
 ## SEO and Structured Data
 

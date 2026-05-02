@@ -1,8 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { FiChevronDown } from "react-icons/fi";
+import { ChevronDown } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type Props = {
   codes: string[];
@@ -20,59 +23,75 @@ export function ExpiredCodes({ codes, gameName, gameSlug }: Props) {
   const hasCodes = sorted.length > 0;
 
   return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="prose prose-headings:mt-0 prose-headings:mb-1 prose-p:mt-1 dark:prose-invert max-w-none">
-          <h2 className="text-lg font-semibold">Expired {gameName} Codes</h2>
-          {hasCodes ? <p className="text-sm text-muted">These codes are expired and no longer work.</p> : null}
+    <Card className="overflow-hidden rounded-lg border-border/70 bg-card shadow-none">
+      <CardHeader className="border-b border-border/60 px-4 py-4 sm:px-5">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="min-w-0 space-y-1">
+            <CardTitle className="text-xl leading-tight text-foreground">
+              Expired {gameName} Codes
+            </CardTitle>
+            {hasCodes ? (
+              <p className="text-sm leading-5 text-muted-foreground">These codes are expired and no longer work.</p>
+            ) : null}
+          </div>
+          <Badge variant="outline" className="shrink-0 rounded-md px-2 py-1 text-xs">
+            {sorted.length} expired
+          </Badge>
         </div>
+      </CardHeader>
+
+      <CardContent className="p-3 sm:p-4">
         {showToggle ? (
-          <button
+          <Button
             type="button"
+            variant="ghost"
+            size="sm"
             onClick={() => {
               const next = !expanded;
               setExpanded(next);
               trackEvent("expired_codes_toggle", { game_slug: gameSlug, expanded: next });
             }}
-            className="inline-flex items-center gap-1.5 px-1 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-foreground transition hover:text-accent"
+            className="mb-3 h-8 px-2 text-xs text-muted-foreground"
             aria-expanded={expanded}
             aria-label={expanded ? "Show fewer expired codes" : "Show more expired codes"}
           >
             <span className="leading-none">{expanded ? "Show Less" : "Show More"}</span>
-            <FiChevronDown
+            <ChevronDown
               className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : "rotate-0"}`}
               aria-hidden
             />
-          </button>
+          </Button>
         ) : null}
-      </div>
 
-      {!hasCodes ? (
-        <p className="text-sm text-muted">We haven't tracked any expired codes yet.</p>
-      ) : (
-        <div className="relative">
-          <ul
-            className="mt-1 flex flex-wrap items-center gap-2 text-sm text-foreground transition-[max-height]"
-            style={{
-              maxHeight: shouldCollapse ? COLLAPSED_MAX_HEIGHT : undefined,
-              overflow: shouldCollapse ? "hidden" : "visible"
-            }}
-            aria-expanded={showToggle ? expanded : undefined}
-          >
-            {sorted.map((code) => (
-              <li
-                key={code}
-                className="flex items-center rounded-full border border-border/60 px-2 py-1 text-xs font-medium text-foreground"
-              >
-                <code className="leading-none">{code}</code>
-              </li>
-            ))}
-          </ul>
-          {shouldCollapse ? (
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-surface to-transparent" />
-          ) : null}
-        </div>
-      )}
-    </div>
+        {!hasCodes ? (
+          <div className="rounded-md border border-border/60 bg-muted/20 px-4 py-4 text-sm text-muted-foreground">
+            We haven't tracked any expired codes yet.
+          </div>
+        ) : (
+          <div className="relative">
+            <ul
+              className="flex flex-wrap items-center gap-2 text-sm text-foreground transition-[max-height]"
+              style={{
+                maxHeight: shouldCollapse ? COLLAPSED_MAX_HEIGHT : undefined,
+                overflow: shouldCollapse ? "hidden" : "visible"
+              }}
+              aria-expanded={showToggle ? expanded : undefined}
+            >
+              {sorted.map((code) => (
+                <li
+                  key={code}
+                  className="flex items-center rounded-md border border-border/60 bg-muted/20 px-2 py-1 text-xs font-medium text-muted-foreground"
+                >
+                  <code className="leading-none">{code}</code>
+                </li>
+              ))}
+            </ul>
+            {shouldCollapse ? (
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-card to-transparent" />
+            ) : null}
+          </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }

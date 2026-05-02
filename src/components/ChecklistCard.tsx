@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
+import { FiClock } from "react-icons/fi";
 import {
   readLocalChecklistProgress,
   useChecklistProgressIndex,
@@ -34,7 +35,6 @@ function formatUpdatedLabel(updatedAt: string | null): string | null {
 export function ChecklistCard({
   slug,
   title,
-  summary,
   universeName,
   coverImage,
   updatedAt,
@@ -91,48 +91,60 @@ export function ChecklistCard({
     };
   }, [session.userId, slug]);
 
+  const progressLabel =
+    progress.total > 0
+      ? `${progress.done}/${progress.total} tasks completed`
+      : "No tasks tracked yet";
+
   return (
     <Link
       href={`/checklists/${slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-gradient-to-br from-surface to-surface/60 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-accent/70 hover:shadow-lg"
+      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-card shadow-none transition-colors hover:border-border"
     >
-      <div className="absolute left-0 top-0 h-32 w-32 -translate-x-1/3 -translate-y-1/3 rounded-full bg-emerald-500/10 blur-3xl transition duration-500 group-hover:bg-emerald-500/20" />
-      <div className="flex items-center gap-2 border-b border-border/70 px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-emerald-500">
-        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-emerald-400/70 bg-emerald-500/10 text-xs">
-          ✓
-        </span>
-        <span>Checklist</span>
+      <div className="relative aspect-square shrink-0 overflow-hidden bg-surface-muted">
+        {coverImage ? (
+          <img
+            src={coverImage}
+            alt={universeName || title}
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            loading="lazy"
+            decoding="async"
+            onError={handleImgError}
+          />
+        ) : (
+          <img
+            src={fallbackImage}
+            alt=""
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            loading="lazy"
+            decoding="async"
+          />
+        )}
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-card via-card/70 to-transparent" aria-hidden />
       </div>
 
-      <div className="flex flex-1 flex-col gap-4 p-4">
-        <div className="flex items-start gap-3">
-          <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-border/60 bg-surface/80">
-            {coverImage ? (
-              <img
-                src={coverImage}
-                alt={universeName || title}
-                className="h-full w-full object-cover"
-                loading="lazy"
-                decoding="async"
-                onError={handleImgError}
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center text-muted/60">🎯</div>
-            )}
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-          </div>
-          <div className="min-w-0 space-y-1">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted"></p>
-            <h3 className="text-base font-semibold leading-tight text-foreground line-clamp-2 md:text-lg">{title}</h3>
-          </div>
+      <div className="relative -mt-1 flex flex-1 flex-col gap-3 bg-card px-4 pb-4 pt-3">
+        <div className="space-y-2">
+          <h3 className="mb-0 line-clamp-2 text-lg font-semibold leading-snug text-foreground">{title}</h3>
+          {updatedLabel ? (
+            <p className="inline-flex items-center gap-1.5 text-xs text-foreground/70">
+              <FiClock aria-hidden className="h-3 w-3" />
+              <span>{updatedLabel}</span>
+            </p>
+          ) : null}
         </div>
 
-        <div className="space-y-2">
-          <div className="text-sm text-muted leading-relaxed line-clamp-3">{summary}</div>
-          <div className="text-[11px] font-semibold text-muted">
-            {progress.total > 0
-              ? `${progress.done}/${progress.total} tasks done · ${progress.percent}% complete`
-              : `${totalItems} ${totalItems === 1 ? "task" : "tasks"}`}
+        <div className="mt-auto space-y-2">
+          <div className="flex items-center justify-between gap-3 text-xs text-foreground/70">
+            <span>{progressLabel}</span>
+            <span className="font-medium">{progress.percent}%</span>
+          </div>
+          <div className="h-1.5 overflow-hidden rounded-full bg-surface-muted">
+            <div
+              className="h-full rounded-full bg-accent transition-[width] duration-300"
+              style={{ width: `${progress.percent}%` }}
+              aria-hidden
+            />
           </div>
         </div>
       </div>

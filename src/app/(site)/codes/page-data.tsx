@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { listGamesWithActiveCountsPage, type GameWithCounts } from "@/lib/db";
 import { CODES_DESCRIPTION, SITE_URL, buildAlternates } from "@/lib/seo";
 import { GameCard } from "@/components/GameCard";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 
 export const CODES_PAGE_SIZE = 20;
@@ -51,16 +52,12 @@ function CodesPageView({
             Find the latest Roblox codes for all your favorite games in one place. Updated daily with active promo codes, rewards, and
             freebies to help you unlock items, boosts, and more.
           </p>
-          <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-            <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-              Tracking {totalGames} games
-            </span>
-            {refreshedLabel ? (
-              <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-                Last updated {refreshedLabel}
-              </span>
-            ) : null}
-          </div>
+          <IndexPageStats
+            items={[
+              { label: `${totalGames} games tracked`, icon: "codes", tone: "accent" },
+              ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
+            ]}
+          />
         </header>
       ) : (
         <header className="space-y-2">
@@ -73,17 +70,10 @@ function CodesPageView({
       )}
 
       <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Games we cover</h2>
-          <p className="text-sm text-muted">
-            {games.length ? `${totalGames} Roblox games tracked` : "Games will appear here once they are published."}
-          </p>
-        </div>
-
         {games.length === 0 ? (
           <p className="text-sm text-muted">We haven’t published any game code pages yet. Check back soon.</p>
         ) : (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4">
             {games.map((game, index) => (
               <div
                 key={game.id}

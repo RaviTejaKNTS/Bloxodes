@@ -129,7 +129,7 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
   }));
 
   return (
-    <div className="space-y-10">
+    <div className="catalog-surface space-y-10">
       <PageBreadcrumb
         items={[
           { label: "Home", href: "/" },

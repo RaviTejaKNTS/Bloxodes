@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
+import { FiCheck, FiClock } from "react-icons/fi";
 
 type QuizCardProps = {
   code: string;
@@ -12,6 +14,20 @@ type QuizCardProps = {
   updatedAt: string | null;
 };
 
+type QuizProgress = {
+  code: string;
+  lastScore: number | null;
+  lastTotal: number | null;
+};
+
+type QuizProgressState =
+  | { status: "loading" }
+  | { status: "signed-out" }
+  | { status: "ready"; progress: Map<string, QuizProgress> }
+  | { status: "error" };
+
+let quizProgressPromise: Promise<QuizProgressState> | null = null;
+
 function formatUpdatedLabel(updatedAt: string | null): string | null {
   if (!updatedAt) return null;
   try {
@@ -21,57 +37,107 @@ function formatUpdatedLabel(updatedAt: string | null): string | null {
   }
 }
 
-export function QuizCard({ code, title, summary, universeName, coverImage, updatedAt }: QuizCardProps) {
+async function loadQuizProgressIndex(): Promise<QuizProgressState> {
+  if (!quizProgressPromise) {
+    quizProgressPromise = fetch("/api/quizzes/progress", { credentials: "include" })
+      .then(async (res) => {
+        if (res.status === 401) return { status: "signed-out" } as QuizProgressState;
+        if (!res.ok) return { status: "error" } as QuizProgressState;
+        const payload = await res.json().catch(() => ({}));
+        const rows = Array.isArray(payload?.progress) ? payload.progress : [];
+        const progress = new Map<string, QuizProgress>();
+        for (const row of rows) {
+          const rowCode = typeof row?.code === "string" ? row.code.trim().toLowerCase() : "";
+          if (!rowCode) continue;
+          progress.set(rowCode, {
+            code: rowCode,
+            lastScore: typeof row?.lastScore === "number" ? row.lastScore : null,
+            lastTotal: typeof row?.lastTotal === "number" ? row.lastTotal : null
+          });
+        }
+        return { status: "ready", progress } as QuizProgressState;
+      })
+      .catch(() => ({ status: "error" }) as QuizProgressState);
+  }
+
+  return quizProgressPromise;
+}
+
+export function QuizCard({ code, title, universeName, coverImage, updatedAt }: QuizCardProps) {
   const updatedLabel = formatUpdatedLabel(updatedAt);
   const fallbackImage = "/og-image.png";
+  const [progressState, setProgressState] = useState<QuizProgressState>({ status: "loading" });
+  const normalizedCode = code.trim().toLowerCase();
+
+  useEffect(() => {
+    let cancelled = false;
+    void loadQuizProgressIndex().then((state) => {
+      if (!cancelled) setProgressState(state);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const progress = progressState.status === "ready" ? progressState.progress.get(normalizedCode) ?? null : null;
+  const hasCompleted = Boolean(progress && typeof progress.lastScore === "number" && typeof progress.lastTotal === "number" && progress.lastTotal > 0);
+  const statusLabel =
+    progressState.status === "ready"
+      ? hasCompleted
+        ? "Completed"
+        : "Not completed yet"
+      : progressState.status === "signed-out" || progressState.status === "error"
+        ? "15 questions"
+        : "Checking progress";
+  const scoreLabel = hasCompleted ? `${progress!.lastScore}/${progress!.lastTotal}` : null;
 
   return (
     <Link
       href={`/quizzes/${code}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-gradient-to-br from-surface to-surface/60 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-accent/70 hover:shadow-lg"
+      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-card shadow-none transition-colors hover:border-border"
     >
-      <div className="absolute right-0 top-0 h-32 w-32 translate-x-1/3 -translate-y-1/3 rounded-full bg-sky-500/10 blur-3xl transition duration-500 group-hover:bg-sky-500/20" />
-      <div className="flex items-center gap-2 border-b border-border/70 px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-sky-500">
-        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-sky-400/70 bg-sky-500/10 text-xs">
-          ?
-        </span>
-        <span>Quiz</span>
+      <div className="relative aspect-square shrink-0 overflow-hidden bg-surface-muted">
+        {coverImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={coverImage}
+            alt={universeName || title}
+            className="h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+            onError={(event) => {
+              if (event.currentTarget.src.endsWith(fallbackImage)) return;
+              event.currentTarget.src = fallbackImage;
+            }}
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={fallbackImage} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
+        )}
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-card via-card/70 to-transparent" aria-hidden />
       </div>
 
-      <div className="flex flex-1 flex-col gap-4 p-4">
-        <div className="flex items-start gap-3">
-          <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-border/60 bg-surface/80">
-            {coverImage ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={coverImage}
-                alt={universeName || title}
-                className="h-full w-full object-cover"
-                loading="lazy"
-                decoding="async"
-                onError={(event) => {
-                  if (event.currentTarget.src.endsWith(fallbackImage)) return;
-                  event.currentTarget.src = fallbackImage;
-                }}
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center text-muted/60">🎯</div>
-            )}
-            <div className="absolute inset-0 bg-gradient-to-br from-sky-500/10 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
-          </div>
-          <div className="min-w-0 space-y-1">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">{universeName ?? "Roblox"}</p>
-            <h3 className="text-base font-semibold leading-tight text-foreground line-clamp-2 md:text-lg">{title}</h3>
-          </div>
+      <div className="relative -mt-1 flex flex-1 flex-col gap-3 bg-card px-4 pb-4 pt-3">
+        <div className="space-y-2">
+          <p className="mb-0 text-xs font-semibold uppercase tracking-[0.18em] text-foreground/55">{universeName ?? "Roblox"}</p>
+          <h3 className="mb-0 line-clamp-2 text-lg font-semibold leading-snug text-foreground">{title}</h3>
         </div>
 
-        <div className="space-y-2">
-          <div className="text-sm text-muted leading-relaxed line-clamp-3">{summary}</div>
-          <div className="flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
-            <span>15 questions</span>
-            <span>5 easy · 5 medium · 5 hard</span>
+        <div className="mt-auto space-y-2">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-foreground/70">
+            <span className="inline-flex items-center gap-1.5">
+              {hasCompleted ? <FiCheck aria-hidden className="h-3.5 w-3.5 text-green-400" /> : null}
+              <span>{statusLabel}</span>
+            </span>
+            {scoreLabel ? <span>Last score: {scoreLabel}</span> : null}
           </div>
-          {updatedLabel ? <div className="text-xs text-muted">Updated {updatedLabel}</div> : null}
+          {updatedLabel ? (
+            <p className="mb-0 inline-flex items-center gap-1 text-xs text-foreground/70">
+              <FiClock aria-hidden className="h-3 w-3" />
+              <span>{updatedLabel}</span>
+            </p>
+          ) : null}
         </div>
       </div>
     </Link>

@@ -70,7 +70,7 @@ export default async function AdminCommandsHubPage() {
   }));
 
   return (
-    <div className="space-y-10">
+    <div className="catalog-surface space-y-10">
       <PageBreadcrumb
         items={[
           { label: "Home", href: "/" },
@@ -96,7 +96,7 @@ export default async function AdminCommandsHubPage() {
                   aria-label={`${dataset.system.name} commands`}
                   className="block h-full"
                 >
-                  <article className="group relative overflow-hidden rounded-2xl border border-border/60 bg-surface/80 px-5 py-4 transition hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-soft">
+                  <article className="group relative overflow-hidden rounded-lg border border-border/70 bg-surface/80 px-5 py-4 transition hover:border-accent/55">
                     <span
                       aria-hidden
                       className="absolute inset-x-0 top-0 h-1 bg-accent/30 transition group-hover:bg-accent/60"

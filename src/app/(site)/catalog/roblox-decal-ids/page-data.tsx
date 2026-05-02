@@ -44,8 +44,6 @@ export type CatalogContentHtml = {
     descriptionHtml?: Array<{ key: string; html: string }>;
     faqHtml?: Array<{ q: string; a: string }>;
     updatedAt?: string | null;
-    ctaLabel?: string | null;
-    ctaUrl?: string | null;
 };
 
 type PageData = {
@@ -107,7 +105,7 @@ export function DecalBreadcrumb({ items, className }: { items: BreadcrumbItem[];
 export function DecalIdGrid({ decals }: { decals: DecalRow[] }) {
     if (!decals.length) {
         return (
-            <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+            <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
                 No decal IDs have been collected yet. Check back soon.
             </div>
         );
@@ -120,7 +118,7 @@ export function DecalIdGrid({ decals }: { decals: DecalRow[] }) {
                 return (
                     <article
                         key={decal.id}
-                        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-surface shadow-soft transition duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl"
+                        className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
                     >
                         {/* Image Preview */}
                         <div className="relative aspect-square w-full overflow-hidden bg-background/60">
@@ -129,11 +127,11 @@ export function DecalIdGrid({ decals }: { decals: DecalRow[] }) {
                                 alt={decal.name || `Decal ${decal.id}`}
                                 fill
                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                                className="object-cover transition duration-500 group-hover:scale-105"
+                                className="object-cover"
                                 unoptimized
                             />
                             {decal.isForSale && decal.priceInRobux ? (
-                                <span className="absolute right-2 top-2 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-white shadow-lg">
+                                <span className="absolute right-2 top-2 rounded-md bg-accent px-3 py-1 text-xs font-semibold text-white">
                                     {decal.priceInRobux} R$
                                 </span>
                             ) : null}
@@ -154,7 +152,7 @@ export function DecalIdGrid({ decals }: { decals: DecalRow[] }) {
                             ) : null}
 
                             {/* Decal ID */}
-                            <div className="flex items-center gap-1.5 rounded-full border border-border/50 bg-background px-3 py-1.5 text-xs font-semibold text-foreground">
+                            <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-background px-3 py-1.5 text-xs font-semibold text-foreground">
                                 <span>Decal ID</span>
                                 <span className="font-mono text-[0.82rem]">{decal.id}</span>
                                 <CopyCodeButton
@@ -174,13 +172,13 @@ export function DecalIdGrid({ decals }: { decals: DecalRow[] }) {
                             {/* Upload Date & Sales */}
                             <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
                                 {uploadDate ? (
-                                    <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/60 px-2.5 py-0.5">
+                                    <span className="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-background/60 px-2.5 py-0.5">
                                         <span className="text-[9px] font-semibold uppercase tracking-wide">Uploaded</span>
                                         <span className="font-semibold text-foreground">{uploadDate}</span>
                                     </span>
                                 ) : null}
                                 {decal.sales && decal.sales > 0 ? (
-                                    <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/60 px-2.5 py-0.5">
+                                    <span className="inline-flex items-center gap-1.5 rounded-md border border-border/60 bg-background/60 px-2.5 py-0.5">
                                         <span className="text-[9px] font-semibold uppercase tracking-wide">Sales</span>
                                         <span className="font-semibold text-foreground">{decal.sales.toLocaleString()}</span>
                                     </span>
@@ -193,7 +191,7 @@ export function DecalIdGrid({ decals }: { decals: DecalRow[] }) {
                                     href={buildRobloxUrl(decal.id)}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+                                    className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
                                 >
                                     View on Roblox
                                 </a>
@@ -341,7 +339,7 @@ export function renderRobloxDecalIdsPage({
     const breadcrumbSchema = JSON.stringify(breadcrumbJsonLd(breadcrumbSchemaItems));
 
     return (
-        <div className="space-y-10">
+        <div className="catalog-surface space-y-10">
             {showHero ? (
                 <header className="space-y-4">
                     <DecalBreadcrumb items={breadcrumbNavItems} />

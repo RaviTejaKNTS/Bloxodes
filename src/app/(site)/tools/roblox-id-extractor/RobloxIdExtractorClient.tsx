@@ -320,7 +320,7 @@ export function RobloxIdExtractorClient() {
   }, [result]);
 
   return (
-    <div className="space-y-8">
+    <div className="tool-surface space-y-8">
       <form onSubmit={handleSubmit} className="panel space-y-4 p-6">
         <div className="space-y-2">
           <h2 className="text-xl font-semibold text-foreground">Paste a Roblox link or ID</h2>

@@ -24,7 +24,7 @@ export const EVENTS_DESCRIPTION =
 export const CATALOG_DESCRIPTION =
   "Catalog pages for Roblox assets and command lists like music IDs and admin commands, with quick lookup details, filters, and links.";
 export const WIKI_DESCRIPTION =
-  "Roblox game wiki hubs with live universe data, related codes, tools, articles, badges, passes, servers, controls, and gameplay notes.";
+  "Roblox wiki hubs with live universe stats, codes, tools, catalog links, controls, tips, and gameplay notes.";
 export const ADMIN_COMMANDS_DESCRIPTION =
   "Roblox admin commands catalog covering HD Admin, Kohl's Admin, Basic Admin Essentials, and Adonis Admin.";
 

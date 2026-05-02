@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates } from "@/lib/seo";
 import {
@@ -78,17 +79,13 @@ export default async function TrendingMusicIdsPage() {
         <p className="max-w-2xl text-base text-muted md:text-lg">
           Ranked songs pulled from Roblox music charts so you can grab the hottest IDs first.
         </p>
-        <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-          <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-            {total.toLocaleString("en-US")} ranked songs
-          </span>
-          {refreshedLabel ? (
-            <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-              Updated {refreshedLabel}
-            </span>
-          ) : null}
-          <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">24 per page</span>
-        </div>
+        <IndexPageStats
+          items={[
+            { label: `${total.toLocaleString("en-US")} ranked songs`, icon: "music", tone: "accent" },
+            ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : []),
+            { label: "24 per page" }
+          ]}
+        />
       </header>
 
       <CatalogAdSlot />

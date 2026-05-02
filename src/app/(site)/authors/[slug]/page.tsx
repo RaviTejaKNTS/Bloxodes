@@ -3,13 +3,11 @@ import { notFound } from "next/navigation";
 import { marked } from "marked";
 import { AuthorSocialLinks } from "@/components/AuthorSocialLinks";
 import { ArticleCard } from "@/components/ArticleCard";
-import { GameCard } from "@/components/GameCard";
 import { authorAvatarUrl } from "@/lib/avatar";
 import {
   getAuthorBySlug,
   listAuthorSlugs,
-  listPublishedArticlesByAuthor,
-  listPublishedGamesByAuthorWithActiveCounts
+  listPublishedArticlesByAuthor
 } from "@/lib/db";
 import {
   SITE_DESCRIPTION,
@@ -80,10 +78,7 @@ export default async function AuthorPage({ params }: Params) {
     return notFound();
   }
 
-  const [games, articles] = await Promise.all([
-    listPublishedGamesByAuthorWithActiveCounts(author.id, author.slug),
-    listPublishedArticlesByAuthor(author.id, 12, 0, author.slug)
-  ]);
+  const articles = await listPublishedArticlesByAuthor(author.id, 12, 0, author.slug);
   const avatar = authorAvatarUrl(author, 120);
   const bioHtml = author.bio_md ? await marked.parse(author.bio_md) : "";
   const bioText = markdownToPlain(author.bio_md) || `${author.name} shares the latest Roblox guides and articles on ${SITE_NAME}.`;
@@ -104,60 +99,35 @@ export default async function AuthorPage({ params }: Params) {
     })
   );
 
-  const authoredGames = games.map((game) => ({
-    game,
-    articleUpdatedAt: game.content_updated_at ?? game.updated_at ?? null
-  }));
-
   return (
     <div className="space-y-12">
-      <header className="rounded-[var(--radius-lg)] border border-border/60 bg-surface px-6 py-8 shadow-soft">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:gap-8">
+      <header className="border-b border-border/60 pb-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
           <img
             src={avatar || "https://www.gravatar.com/avatar/?d=mp"}
             alt={author.name}
-            className="h-24 w-24 flex-shrink-0 rounded-full border border-border/50 object-cover shadow-soft"
+            className="h-20 w-20 shrink-0 rounded-md border border-border/60 object-cover"
             loading="lazy"
           />
-          <div className="space-y-4">
+          <div className="min-w-0 flex-1 space-y-3">
             <div>
-              <h1 className="text-4xl font-bold text-foreground">{author.name}</h1>
+              <h1 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl">{author.name}</h1>
               {author.slug ? (
-                <p className="text-sm text-muted">@{author.slug}</p>
+                <p className="mt-2 text-sm text-muted">@{author.slug}</p>
               ) : null}
             </div>
             {bioHtml ? (
               <div
-                className="prose dark:prose-invert max-w-none"
+                className="max-w-3xl text-sm leading-7 text-muted md:text-base md:leading-8 [&_a]:font-semibold [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:text-accent [&_p]:m-0 [&_p+p]:mt-3"
                 dangerouslySetInnerHTML={{ __html: bioHtml }}
               />
             ) : (
-              <p className="text-sm text-muted">{bioText}</p>
+              <p className="max-w-3xl text-sm leading-7 text-muted md:text-base md:leading-8">{bioText}</p>
             )}
-            <AuthorSocialLinks author={author} />
+            <AuthorSocialLinks author={author} size="sm" />
           </div>
         </div>
       </header>
-
-      <section className="space-y-6">
-        <div>
-          <h2 className="text-2xl font-semibold text-foreground">Guides & Updates</h2>
-          <p className="text-sm text-muted">
-            Active Roblox code collections published by {author.name}.
-          </p>
-        </div>
-        {authoredGames.length ? (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {authoredGames.map(({ game, articleUpdatedAt }) => (
-              <GameCard key={game.id} game={game} articleUpdatedAt={articleUpdatedAt} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-muted">
-            {author.name} hasn't published any guides yet. Check back soon!
-          </p>
-        )}
-      </section>
 
       <section className="space-y-6">
         <div>

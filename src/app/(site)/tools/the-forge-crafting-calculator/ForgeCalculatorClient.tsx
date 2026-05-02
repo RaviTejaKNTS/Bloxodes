@@ -284,10 +284,10 @@ export function ForgeCalculatorClient({
   const selectedMap = new Map(selectedOres.map((item) => [item.oreId, item.count]));
 
   return (
-    <div className="space-y-10">
+    <div className="tool-surface space-y-10">
       <section className="space-y-3">
         <div className="flex flex-wrap items-center gap-3">
-          <div className="inline-flex overflow-hidden rounded-full border border-border/70 bg-surface text-sm font-semibold shadow-soft">
+          <div className="inline-flex overflow-hidden rounded-md border border-border/70 bg-surface text-sm font-semibold shadow-soft">
             <button
               type="button"
               onClick={() => {
@@ -316,7 +316,7 @@ export function ForgeCalculatorClient({
             </button>
           </div>
           {mode === "armor" ? (
-            <div className="inline-flex overflow-hidden rounded-full border border-border/70 bg-surface text-sm font-semibold shadow-soft">
+            <div className="inline-flex overflow-hidden rounded-md border border-border/70 bg-surface text-sm font-semibold shadow-soft">
               {["All", ...ARMOR_SLOTS].map((slot) => (
                 <button
                   key={slot}
@@ -336,7 +336,7 @@ export function ForgeCalculatorClient({
             </div>
           ) : null}
           {mode === "armor" ? (
-            <div className="inline-flex overflow-hidden rounded-full border border-border/70 bg-surface text-sm font-semibold shadow-soft">
+            <div className="inline-flex overflow-hidden rounded-md border border-border/70 bg-surface text-sm font-semibold shadow-soft">
               {(["Stonewake", "Forgotten Kingdom"] as const).map((value) => (
                 <button
                   key={value}

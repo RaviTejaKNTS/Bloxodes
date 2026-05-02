@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import {
@@ -98,17 +99,13 @@ export default async function ArtistMusicIdsPage({ params }: PageProps) {
         <p className="max-w-2xl text-base text-muted md:text-lg">
           Every music ID credited to {artist.label}, ready to copy and play.
         </p>
-        <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-          <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-            {total.toLocaleString("en-US")} songs
-          </span>
-          {refreshedLabel ? (
-            <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-              Updated {refreshedLabel}
-            </span>
-          ) : null}
-          <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">24 per page</span>
-        </div>
+        <IndexPageStats
+          items={[
+            { label: `${total.toLocaleString("en-US")} songs`, icon: "music", tone: "accent" },
+            ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : []),
+            { label: "24 per page" }
+          ]}
+        />
       </header>
 
       <CatalogAdSlot />

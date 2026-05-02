@@ -203,24 +203,24 @@ export function GameListItem({ entry, rank, metricLabel, listSlug }: GameListIte
       </div>
 
       <div className="mt-4 space-y-5">
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
           <Stat icon={FiUsers} label="Playing Now" value={universe.playing} />
           <Stat icon={FiEye} label="Visits" value={universe.visits} />
           <Stat icon={FiStar} label="Favorites" value={universe.favorites} />
           <Stat icon={FiThumbsUp} label="Like Ratio" valueLabel={formatRatio(universe.likes, universe.dislikes)} />
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-[220px,1fr]">
+        <div className="grid gap-5 md:grid-cols-[220px,1fr]">
           <ExternalLinkWrapper
             href={primaryHref}
-            className="group relative block w-full max-w-[420px] lg:max-w-none"
+            className="group relative block w-full max-w-[420px] md:max-w-none"
           >
             <div className="relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border border-border/60 bg-black/20">
               <Image
                 src={coverImage}
                 alt={universeTitle(universe)}
                 fill
-                sizes="(min-width: 1024px) 220px, 90vw"
+                sizes="(min-width: 768px) 220px, 90vw"
                 className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
               />
             </div>

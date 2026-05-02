@@ -196,7 +196,7 @@ export function HexColorPicker({ items }: Props) {
   }
 
   return (
-    <section className="rounded-[1.75rem] border border-border/60 bg-gradient-to-br from-surface via-surface/95 to-background p-4 shadow-soft">
+    <section className="catalog-surface rounded-lg border border-border/70 bg-surface p-4">
       <div className="space-y-4">
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(17rem,0.9fr)] lg:items-stretch">
           <div className="rounded-2xl border border-border/60 bg-background/70 p-4 lg:h-full">

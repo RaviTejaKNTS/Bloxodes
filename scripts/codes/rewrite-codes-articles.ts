@@ -10,7 +10,6 @@ type GameRow = {
   name: string;
   slug: string;
   old_slugs: string[];
-  author_id: string | null;
   created_at: string | null;
   intro_md: string | null;
   redeem_md: string | null;
@@ -253,20 +252,6 @@ function isRewritePayload(value: unknown): value is RewritePayload {
   return requiredKeys.every((key) => typeof candidate[key] === "string" && (candidate[key] as string).trim().length > 0);
 }
 
-async function pickAuthorId(): Promise<string | null> {
-  const { data, error } = await supabase.from("authors").select("id").order("name", { ascending: true });
-  if (error) {
-    console.warn("⚠️ Unable to load authors:", error.message);
-    return null;
-  }
-  const ids = (data ?? [])
-    .map((row) => row.id)
-    .filter((id): id is string => typeof id === "string" && id.length > 0);
-  if (!ids.length) return null;
-  const index = Math.floor(Math.random() * ids.length);
-  return ids[index] ?? null;
-}
-
 function buildPrompt(game: GameRow, existingArticle: string, sources: string): string {
   const gameName = game.name;
   const createdAt = game.created_at ? new Date(game.created_at).toISOString() : "unknown date";
@@ -357,13 +342,6 @@ async function rewriteGame(game: GameRow, dryRun: boolean): Promise<void> {
     re_rewritten_at: new Date().toISOString()
   };
 
-  if (!game.author_id) {
-    const authorId = await pickAuthorId();
-    if (authorId) {
-      updatePayload.author_id = authorId;
-    }
-  }
-
   if (dryRun) {
     console.log(`📝 Dry run only for ${game.slug}. Payload:`, JSON.stringify(updatePayload, null, 2));
     return;
@@ -388,7 +366,7 @@ async function fetchNextGame(options: CliOptions): Promise<GameRow | null> {
     let query = supabase
       .from("games")
       .select(
-        "id, name, slug, old_slugs, author_id, created_at, intro_md, redeem_md, troubleshoot_md, rewards_md, seo_description, description_md, roblox_link, source_url, source_url_2, source_url_3, re_rewritten_at, is_published"
+        "id, name, slug, old_slugs, created_at, intro_md, redeem_md, troubleshoot_md, rewards_md, seo_description, description_md, roblox_link, source_url, source_url_2, source_url_3, re_rewritten_at, is_published"
       )
       .order("created_at", { ascending: true })
       .range(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE - 1);

@@ -25,6 +25,7 @@ type SearchRow = {
   url: string;
   updated_at: string | null;
   active_code_count: number | null;
+  search_text?: string | null;
 };
 
 type SearchItem = {
@@ -88,7 +89,7 @@ async function searchSiteFallback(query: string, limit: number, entityTypes: str
   const pattern = `%${escapeLike(query)}%`;
   let request = sb
     .from("search_index")
-    .select("entity_type,entity_id,slug,title,subtitle,url,updated_at")
+    .select("entity_type,entity_id,slug,title,subtitle,url,updated_at,search_text")
     .eq("is_published", true)
     .ilike("search_text", pattern)
     .order("updated_at", { ascending: false, nullsFirst: false })
@@ -106,6 +107,44 @@ async function searchSiteFallback(query: string, limit: number, entityTypes: str
     ...row,
     active_code_count: null
   }));
+}
+
+function rowKey(row: SearchRow): string {
+  return `${row.entity_type}:${row.entity_id}`;
+}
+
+function rankSearchRow(row: SearchRow, query: string): number {
+  const normalizedQuery = query.toLowerCase();
+  const title = row.title.toLowerCase();
+  const searchable = (row.search_text ?? "").toLowerCase();
+  const words = title.split(/[\s()[\]{}:;,.!?'"`~|/\\_+\-=]+/).filter(Boolean);
+
+  if (title === normalizedQuery) return 0;
+  if (title.startsWith(normalizedQuery)) return 1;
+  if (words.some((word) => word.startsWith(normalizedQuery))) return 2;
+  if (title.includes(normalizedQuery)) return 3;
+  if (searchable.includes(normalizedQuery)) return 4;
+
+  return 20;
+}
+
+function mergeAndRankRows(query: string, rows: SearchRow[], entityTypes: string[] | null): SearchRow[] {
+  const merged = new Map<string, SearchRow>();
+
+  for (const row of rows) {
+    if (entityTypes?.length && !entityTypes.includes(row.entity_type)) continue;
+    const key = rowKey(row);
+    const current = merged.get(key);
+    if (!current || rankSearchRow(row, query) < rankSearchRow(current, query)) {
+      merged.set(key, row);
+    }
+  }
+
+  return [...merged.values()].sort((a, b) => {
+    const rankDelta = rankSearchRow(a, query) - rankSearchRow(b, query);
+    if (rankDelta !== 0) return rankDelta;
+    return Date.parse(b.updated_at ?? "0") - Date.parse(a.updated_at ?? "0");
+  });
 }
 
 export async function GET(request: Request) {
@@ -128,13 +167,13 @@ export async function GET(request: Request) {
       p_offset: 0
     });
 
-    const allRows = error ? await searchSiteFallback(rawQuery, safeLimit, entityTypes) : ((data ?? []) as SearchRow[]);
     if (error) {
       console.warn("search_site RPC failed, using search_index fallback", error);
     }
-    const rows = entityTypes?.length
-      ? allRows.filter((row) => entityTypes.includes(row.entity_type)).slice(0, safeLimit)
-      : allRows.slice(0, safeLimit);
+
+    const substringRows = await searchSiteFallback(rawQuery, entityTypes?.length ? MAX_LIMIT : safeLimit, entityTypes);
+    const rpcRows = error ? [] : ((data ?? []) as SearchRow[]);
+    const rows = mergeAndRankRows(rawQuery, [...substringRows, ...rpcRows], entityTypes).slice(0, safeLimit);
 
     const items: SearchItem[] = rows.map((row) => {
       const type = TYPE_MAP[row.entity_type] ?? "article";

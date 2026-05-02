@@ -43,7 +43,7 @@ export function AuthorSocialLinks({ author, size = "md", className }: AuthorSoci
   if (!socials.length) return null;
 
   const buttonClasses = cn(
-    "inline-flex items-center justify-center rounded-full border border-border/50 bg-surface text-foreground transition hover:border-accent/60 hover:text-accent",
+    "inline-flex items-center justify-center rounded-md border border-border/60 bg-surface text-muted transition hover:border-accent/60 hover:text-foreground",
     SIZE_CLASSES[size]
   );
 

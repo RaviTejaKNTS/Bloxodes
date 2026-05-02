@@ -129,9 +129,9 @@ export function RobuxPurchaseClient({
   const formattedTargetRobux = Number.isFinite(parsedRobux) ? formatNumber(parsedRobux) : "—";
 
   return (
-    <div className="space-y-10">
+    <div className="tool-surface space-y-10">
       <section className="space-y-3">
-        <div className="inline-flex overflow-hidden rounded-full border border-border/70 bg-surface text-sm font-semibold shadow-soft">
+        <div className="inline-flex overflow-hidden rounded-md border border-border/70 bg-surface text-sm font-semibold shadow-soft">
           <button
             type="button"
             onClick={() => setMode("robux_to_usd")}

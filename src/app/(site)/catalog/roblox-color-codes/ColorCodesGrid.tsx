@@ -148,7 +148,7 @@ export function ColorCodeCard({
 
   return (
     <article
-      className={`group relative overflow-hidden rounded-2xl border border-border/60 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl ${
+      className={`group relative overflow-hidden rounded-lg border border-border/70 transition duration-200 hover:border-accent/40 ${
         compact ? "h-[21rem]" : "h-[18rem]"
       } ${className}`}
     >
@@ -187,9 +187,9 @@ export function ColorCodeCard({
         </div>
       </div>
 
-      <div className="pointer-events-none absolute inset-0 z-20 rounded-2xl opacity-0 transition duration-200 group-hover:opacity-100">
-        <div className="absolute inset-0 rounded-2xl bg-[rgba(34,78,154,0.62)]" />
-        <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10" />
+      <div className="pointer-events-none absolute inset-0 z-20 rounded-lg opacity-0 transition duration-200 group-hover:opacity-100">
+        <div className="absolute inset-0 rounded-lg bg-[rgba(34,78,154,0.62)]" />
+        <div className="absolute inset-0 rounded-lg ring-1 ring-white/10" />
 
         <div className={`pointer-events-auto relative flex h-full flex-col ${compact ? "p-3" : "p-3"}`}>
           <div className="mb-2 flex items-center justify-between gap-2">
@@ -224,7 +224,7 @@ export function ColorCodeCard({
                 key={field.key}
                 type="button"
                 onClick={() => handleCopy(field)}
-                className={`flex min-w-0 flex-col items-start justify-center rounded-xl border px-3 py-2 text-left transition focus:outline-none focus-visible:border-white/60 focus-visible:ring-2 focus-visible:ring-white/15 ${
+              className={`flex min-w-0 flex-col items-start justify-center rounded-md border px-3 py-2 text-left transition focus:outline-none focus-visible:border-white/60 focus-visible:ring-2 focus-visible:ring-white/15 ${
                   copiedKey === field.key
                     ? "border-white/30 bg-white/16"
                     : "border-white/12 bg-white/[0.08] hover:bg-white/[0.12]"
@@ -285,20 +285,20 @@ export function ColorCodesGrid({ items }: Props) {
 
   if (!items.length) {
     return (
-      <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
         No Roblox color codes are available yet. Check back soon.
       </div>
     );
   }
 
   return (
-    <section className="space-y-5">
+    <section className="catalog-surface space-y-5">
       <input
         type="text"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Search by name, number, hex, or RGB"
-        className="w-full rounded-2xl border border-border/60 bg-background px-4 py-3 text-base text-foreground outline-none transition placeholder:text-muted focus:border-accent/50 focus:ring-2 focus:ring-accent/15"
+        className="w-full rounded-md border border-border/60 bg-background px-4 py-3 text-base text-foreground outline-none transition placeholder:text-muted focus:border-accent/50 focus:ring-2 focus:ring-accent/15"
         aria-label="Search Roblox color codes"
       />
 
@@ -309,7 +309,7 @@ export function ColorCodesGrid({ items }: Props) {
       </div>
 
       {trimmedQuery && !filteredItems.length ? (
-        <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
           No Roblox colors matched that search.
         </div>
       ) : null}

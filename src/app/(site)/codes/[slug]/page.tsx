@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import type { IconType } from "react-icons";
+import { FiClock } from "react-icons/fi";
 import { FaFacebook, FaTelegramPlane, FaTwitch, FaUsers, FaYoutube, FaDiscord } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { SiGooglechrome, SiGuilded, SiRoblox } from "react-icons/si";
@@ -22,16 +22,11 @@ import { SocialShare } from "@/components/SocialShare";
 import { ContentSlot } from "@/components/ContentSlot";
 import { CodeBlockEnhancer } from "@/components/CodeBlockEnhancer";
 import { monthYear } from "@/lib/date";
-import { authorAvatarUrl } from "@/lib/avatar";
-import { AuthorCard } from "@/components/AuthorCard";
-import { collectAuthorSocials } from "@/lib/author-socials";
 import { sortCodesByFirstSeenDesc } from "@/lib/code-utils";
 import {
   getGameBySlug,
   getEventsPageByUniverseId,
-  getRobloxUniverseById,
   listGamesWithActiveCounts,
-  listGamesWithActiveCountsByUniverseId,
   listPublishedArticlesByUniverseId,
   listPublishedChecklistsByUniverseId
 } from "@/lib/db";
@@ -375,9 +370,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     : game.cover_image
       ? `${SITE_URL.replace(/\/$/, "")}/${game.cover_image.replace(/^\//, "")}`
       : `${SITE_URL}/og-image.png`;
-  const publishedTimeRaw = resolvePublishedAt(game);
-  const publishedTime = publishedTimeRaw ? new Date(publishedTimeRaw).toISOString() : undefined;
-  const modifiedTime = new Date(lastContentUpdate).toISOString();
   const otherMeta: Record<string, string> = {};
   return {
     title,
@@ -391,19 +383,16 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     ],
     category: "Gaming",
     alternates: buildAlternates(canonicalUrl),
-    authors: [{ name: SITE_NAME, url: SITE_URL }],
+    authors: null,
     publisher: SITE_NAME,
     openGraph: {
-      type: "article",
+      type: "website",
       title,
       description,
       url: canonicalUrl,
       siteName: SITE_NAME,
       images: [coverImage],
-      publishedTime,
-      modifiedTime,
-      locale: "en_US",
-      authors: [SITE_NAME]
+      locale: "en_US"
     },
     twitter: {
       card: "summary_large_image",
@@ -606,24 +595,21 @@ export default async function GamePage({ params }: Params) {
   const troubleshootMarkdown = game.troubleshoot_md ? replaceLinkPlaceholders(game.troubleshoot_md, linkMap) : "";
   const rewardsMarkdown = game.rewards_md ? replaceLinkPlaceholders(game.rewards_md, linkMap) : "";
   const descriptionMarkdown = game.description_md ? replaceLinkPlaceholders(game.description_md, linkMap) : "";
-  const aboutMarkdown = game.about_game_md ? replaceLinkPlaceholders(game.about_game_md, linkMap) : "";
   const findCodesMarkdown = game.find_codes_md ? replaceLinkPlaceholders(game.find_codes_md, linkMap) : "";
   const interlinkMarkdown = game.interlinking_ai_copy_md ?? "";
 
   const redeemSteps = extractHowToSteps(redeemMarkdown || game.redeem_md);
 
-  const [introHtml, redeemHtml, interlinkHtml, troubleshootHtml, rewardsHtml, descriptionHtml, aboutHtml, findCodesHtml] = await Promise.all([
+  const [introHtml, redeemHtml, interlinkHtml, troubleshootHtml, rewardsHtml, descriptionHtml, findCodesHtml] = await Promise.all([
     introMarkdown ? renderMarkdown(introMarkdown) : "",
     redeemMarkdown ? renderMarkdown(redeemMarkdown) : "",
     interlinkMarkdown ? renderMarkdown(interlinkMarkdown) : "",
     troubleshootMarkdown ? renderMarkdown(troubleshootMarkdown) : "",
     rewardsMarkdown ? renderMarkdown(rewardsMarkdown) : "",
     descriptionMarkdown ? renderMarkdown(descriptionMarkdown) : "",
-    aboutMarkdown ? renderMarkdown(aboutMarkdown) : "",
     findCodesMarkdown ? renderMarkdown(findCodesMarkdown) : ""
   ]);
-  const hasGameAboutDescription = Boolean(universe?.game_description_md);
-  const hasSupplemental = Boolean(troubleshootHtml || rewardsHtml || aboutHtml);
+  const hasSupplemental = Boolean(troubleshootHtml || rewardsHtml);
   const introNodes = introHtml ? renderProcessedHtmlNodes(introHtml, "codes-intro") : null;
   const redeemNodes = redeemHtml ? renderProcessedHtmlNodes(redeemHtml, "codes-redeem") : null;
   const interlinkNodes = interlinkHtml ? renderProcessedHtmlNodes(interlinkHtml, "codes-interlink") : null;
@@ -631,9 +617,6 @@ export default async function GamePage({ params }: Params) {
   const rewardsNodes = rewardsHtml ? renderProcessedHtmlNodes(rewardsHtml, "codes-rewards") : null;
   const findCodesNodes = findCodesHtml ? renderProcessedHtmlNodes(findCodesHtml, "codes-find-codes") : null;
   const descriptionNodes = descriptionHtml ? renderProcessedHtmlNodes(descriptionHtml, "codes-description") : null;
-  const universeDescriptionNodes = hasGameAboutDescription
-    ? renderProcessedHtmlNodes(universe?.game_description_md || "", "codes-game-description")
-    : null;
 
   const canonicalUrl = `${SITE_URL}/codes/${game.slug}`;
   const coverImage = game.cover_image?.startsWith("http")
@@ -646,17 +629,9 @@ export default async function GamePage({ params }: Params) {
     `Get the latest ${game.name} codes for ${monthYear()} and redeem them for free in-game rewards. Updated daily with only active and working codes.`
   );
   const metaDescription = metaDescriptionRaw?.trim() || CODES_DESCRIPTION;
-  const authorMeta =
-    game.author && game.author.name
-      ? {
-        name: game.author.name,
-        url: game.author.slug ? `${SITE_URL}/authors/${game.author.slug}` : undefined
-      }
-      : null;
   const publishedAt = resolvePublishedAt(game) ?? game.created_at;
   const publishedIso = new Date(publishedAt).toISOString();
   const updatedIso = new Date(lastContentUpdate).toISOString();
-  const lastCheckedIso = new Date(lastChecked).toISOString();
   const siteBaseUrl = SITE_URL.replace(/\/$/, "");
   const breadcrumbs = [
     { name: "Home", url: SITE_URL },
@@ -669,11 +644,6 @@ export default async function GamePage({ params }: Params) {
     { label: "Codes", href: "/codes" },
     { label: game.name ?? "Roblox", href: null }
   ];
-  const authorBioHtml = game.author?.bio_md ? await renderMarkdown(game.author.bio_md) : "";
-  const authorAvatar = game.author ? authorAvatarUrl(game.author, 72) : null;
-  const authorProfileUrl = game.author?.slug ? `/authors/${game.author.slug}` : null;
-  const authorSameAs = game.author ? Array.from(new Set(collectAuthorSocials(game.author).map((link) => link.url))) : [];
-  const authorBioPlain = game.author?.bio_md ? markdownToPlainText(game.author.bio_md) : null;
   const activeCodesItemList = sortedActive.map((code, index) => ({
     "@type": "ListItem",
     position: index + 1,
@@ -695,10 +665,6 @@ export default async function GamePage({ params }: Params) {
       const answer = markdownToPlainText(rewardsMarkdown).trim();
       if (answer) faqEntries.push({ question: "Rewards from these codes", answer });
     }
-    if (aboutMarkdown) {
-      const answer = markdownToPlainText(aboutMarkdown).trim();
-      if (answer) faqEntries.push({ question: `About ${game.name}`, answer });
-    }
     if (findCodesMarkdown) {
       const answer = markdownToPlainText(findCodesMarkdown).trim();
       if (answer) {
@@ -712,45 +678,11 @@ export default async function GamePage({ params }: Params) {
 
   const universeLabel = universe?.display_name ?? universe?.name ?? game.name;
   const universeId = game.universe_id ?? null;
-  const universeMeta = universeId ? await getRobloxUniverseById(universeId) : null;
   const relatedChecklists = universeId ? await listPublishedChecklistsByUniverseId(universeId, 1) : [];
   const relatedArticles = universeId ? await listPublishedArticlesByUniverseId(universeId, 3) : [];
   const relatedTools: ToolListEntry[] = universeId ? await listPublishedToolsByUniverseId(universeId, 3) : [];
   const relatedEventsPage = universeId ? await getEventsPageByUniverseId(universeId) : null;
   const eventSummary = universeId ? await getUniverseEventSummary(universeId) : null;
-  const relatedGame = universeId ? await listGamesWithActiveCountsByUniverseId(universeId, 1) : [];
-  const gameCreatedOnLabel = universeMeta?.created_at_api
-    ? new Date(universeMeta.created_at_api).toLocaleDateString("en-US", {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-        timeZone: "UTC"
-      })
-    : null;
-  const gameDetailRows = [
-    universe?.creator_name
-      ? { label: "Developer", value: universe.creator_name }
-      : null,
-    gameCreatedOnLabel
-      ? { label: "Game created on", value: gameCreatedOnLabel }
-      : null,
-    universe?.genre_l1 || universe?.genre_l2
-      ? { label: "Genre", value: [universe.genre_l1, universe.genre_l2].filter(Boolean).join(", ") }
-      : null,
-    (universe?.desktop_enabled || universe?.mobile_enabled || universe?.tablet_enabled ||
-      universe?.console_enabled || universe?.vr_enabled)
-      ? {
-          label: "Platforms",
-          value: [
-            universe.desktop_enabled && "Desktop",
-            universe.mobile_enabled && "Mobile",
-            universe.tablet_enabled && "Tablet",
-            universe.console_enabled && "Console",
-            universe.vr_enabled && "VR"
-          ].filter(Boolean).join(", ")
-        }
-      : null
-  ].filter((row): row is { label: string; value: string } => Boolean(row));
   const relatedChecklistCards = relatedChecklists.map((row) => {
     const summary = summarize(row.seo_description ?? row.description_md ?? null, CHECKLISTS_DESCRIPTION);
     const itemsCount =
@@ -788,6 +720,8 @@ export default async function GamePage({ params }: Params) {
           fallbackIcon: relatedEventsPage.universe?.icon_url ?? null,
           eventName: eventSummary?.featured?.name ?? null,
           eventTimeLabel: eventSummary?.featured?.timeLabel ?? null,
+          eventStartUtc: eventSummary?.featured?.startUtc ?? null,
+          eventEndUtc: eventSummary?.featured?.endUtc ?? null,
           status: (eventSummary?.featured?.status ?? "none") as EventsPageCardProps["status"],
           counts: eventSummary?.counts ?? { upcoming: 0, current: 0, past: 0 },
           updatedLabel: eventsUpdatedLabel
@@ -814,62 +748,20 @@ export default async function GamePage({ params }: Params) {
           </ol>
         </nav>
         <header className="mb-6">
-          <h1 className="text-4xl font-bold text-foreground md:text-5xl" itemProp="headline">
+          <h1 className="text-4xl font-bold text-foreground md:text-5xl">
             {game.name} Codes ({monthYear()})
           </h1>
           <div className="mt-4 flex flex-col gap-3 text-sm text-muted">
             <div className="flex flex-wrap items-center gap-2">
-              {game.author ? (
-                <div className="flex items-center gap-2" itemProp="author" itemScope itemType="https://schema.org/Person">
-                  {authorProfileUrl ? <link itemProp="url" href={authorProfileUrl} /> : null}
-                  {authorBioPlain ? <meta itemProp="description" content={authorBioPlain} /> : null}
-                  {authorSameAs.map((url) => (
-                    <link key={url} itemProp="sameAs" href={url} />
-                  ))}
-                  <img
-                    src={authorAvatar || "https://www.gravatar.com/avatar/?d=mp"}
-                    alt={game.author.name}
-                    className="h-9 w-9 rounded-full border border-border/40 object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <span>
-                    Authored by {game.author.slug ? (
-                      <Link
-                        href={`/authors/${game.author.slug}`}
-                        className="font-semibold text-foreground transition hover:text-accent"
-                        itemProp="name"
-                        data-analytics-event="author_click"
-                        data-analytics-codes-url={canonicalUrl}
-                        data-analytics-author-url={`/authors/${game.author.slug}`}
-                      >
-                        {game.author.name}
-                      </Link>
-                    ) : (
-                      <span className="font-semibold text-foreground" itemProp="name">
-                        {game.author.name}
-                      </span>
-                    )}
-                  </span>
-                </div>
-              ) : (
-                <span className="font-semibold text-foreground" itemProp="author">
-                  Published by {SITE_NAME}
-                </span>
-              )}
-              <span aria-hidden="true">•</span>
-              <span className="text-foreground/80">
+              <span className="inline-flex items-center gap-1.5 text-foreground/80">
+                <FiClock className="h-4 w-4 shrink-0" aria-hidden />
                 Updated on <span className="font-semibold text-foreground">{lastUpdatedFormatted}</span>
               </span>
             </div>
           </div>
         </header>
 
-        <section
-          id="article-body"
-          itemProp="articleBody"
-          className="article-content md-copy-scope"
-        >
+        <section id="article-body" className="article-content md-copy-scope">
         {introNodes ? (
           introNodes
         ) : null}
@@ -882,7 +774,6 @@ export default async function GamePage({ params }: Params) {
             lastUpdatedLabel={lastUpdatedFormatted}
             lastCheckedLabel={lastCheckedFormatted}
             lastCheckedRelativeLabel={lastCheckedRelativeLabel}
-            coverImage={game.cover_image}
             nowMs={nowMs}
           />
         </div>
@@ -898,7 +789,7 @@ export default async function GamePage({ params }: Params) {
         {interlinkNodes ? (
           interlinkNodes
         ) : null}
-        <div className="panel mb-8 mt-8 space-y-3 px-5 pb-5 pt-0" id="expired-codes">
+        <div className="mb-8 mt-8" id="expired-codes">
           <ExpiredCodes codes={expiredWithoutSpaces} gameName={game.name} gameSlug={game.slug} />
         </div>
 
@@ -916,12 +807,12 @@ export default async function GamePage({ params }: Params) {
             ) : null}
 
             {shouldShowSocialSection ? (
-              <div className="mb-8 space-y-4" id={`more-${game.slug}-codes`}>
+              <>
                 {findCodesNodes ? (
                   findCodesNodes
                 ) : null}
                 {socialLinksToDisplay.length ? (
-                  <div className="mt-4 flex flex-wrap gap-3">
+                  <div data-md-copy="true" className="md-copy-node flex flex-wrap gap-3">
                     {socialLinksToDisplay.map(({ key, url, label, Icon }) => (
                       <a
                         key={key}
@@ -939,12 +830,14 @@ export default async function GamePage({ params }: Params) {
                     ))}
                   </div>
                 ) : (
-                  <p className="mt-3 text-sm text-muted">We haven't found any official social media links yet.</p>
+                  <p data-md-copy="true" className="md-copy-node md-copy-p">
+                    We haven't found any official social media links yet.
+                  </p>
                 )}
                 <p data-md-copy="true" className="md-copy-node md-copy-p">
                   We keep track of these sources and update this page as soon as new codes drop. Bookmark this page or follow our channels to get the codes right away.
                 </p>
-                <div className="flex flex-wrap gap-3">
+                <div data-md-copy="true" className="md-copy-node flex flex-wrap gap-3">
                   <a
                     href="https://t.me/bloxodes"
                     target="_blank"
@@ -982,54 +875,14 @@ export default async function GamePage({ params }: Params) {
                     <span>Install Chrome Extension</span>
                   </a>
                 </div>
-              </div>
+              </>
             ) : null}
 
           </>
         ) : descriptionNodes ? (
           descriptionNodes
         ) : null}
-
-        {universe ? (
-          <div className="mb-8" id="game-details">
-            <div className="overflow-hidden rounded-[var(--radius-lg)] border border-border/65 shadow-soft">
-              <div className="border-b border-border/60 px-5 py-4 sm:px-6">
-                <h2 className="text-2xl font-bold leading-tight text-foreground">
-                  About {universe.display_name || universe.name || game.name}
-                </h2>
-              </div>
-
-              {gameDetailRows.length ? (
-                <div className="grid gap-3 border-b border-border/60 px-5 py-5 sm:grid-cols-2 sm:px-6 xl:grid-cols-4">
-                  {gameDetailRows.map((row) => (
-                    <div
-                      key={row.label}
-                      className="rounded-[var(--radius-sm)] border border-border/60 px-4 py-3"
-                    >
-                      <dt className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-muted">
-                        {row.label}
-                      </dt>
-                      <dd className="mt-1 text-sm font-semibold leading-6 text-foreground">{row.value}</dd>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-
-              {universeDescriptionNodes ? (
-                <div className="article-content md-copy-scope px-5 py-5 sm:px-6">
-                  {universeDescriptionNodes}
-                </div>
-              ) : null}
-            </div>
-          </div>
-        ) : null}
         </section>
-
-        {game.author ? (
-          <div className="mt-10">
-            <AuthorCard author={game.author} bioHtml={authorBioHtml} />
-          </div>
-        ) : null}
 
         <script
           type="application/ld+json"
@@ -1039,7 +892,7 @@ export default async function GamePage({ params }: Params) {
               "@graph": [
                 breadcrumbJsonLd(breadcrumbs),
                 {
-                  "@type": "BlogPosting",
+                  "@type": "CollectionPage",
                   url: canonicalUrl,
                   mainEntityOfPage: {
                     "@type": "WebPage",
@@ -1053,19 +906,6 @@ export default async function GamePage({ params }: Params) {
                     url: coverImage,
                     thumbnailUrl: coverImage
                   },
-                  author: game.author
-                    ? {
-                      "@type": "Person",
-                      name: game.author.name,
-                      ...(authorProfileUrl ? { url: `${SITE_URL.replace(/\/$/, "")}${authorProfileUrl}` } : {}),
-                      ...(authorBioPlain ? { description: authorBioPlain } : {}),
-                      ...(authorSameAs.length ? { sameAs: authorSameAs } : {})
-                    }
-                    : {
-                      "@type": "Organization",
-                      name: SITE_NAME,
-                      url: SITE_URL
-                    },
                   publisher: { "@id": `${SITE_URL.replace(/\/$/, "")}/#organization` },
                   about: {
                     "@type": "VideoGame",
@@ -1215,52 +1055,53 @@ export default async function GamePage({ params }: Params) {
 
           {suggestedCodes.length > 0 ? (
             <>
-              <section className="panel space-y-3 px-4 py-5">
-                <h3 className="text-lg font-semibold text-foreground">Get Roblox codes directly on</h3>
-                <div className="space-y-2 text-sm">
+              <section className="space-y-3 px-1 py-1">
+                <h3 className="text-base font-semibold leading-6 text-foreground">
+                  Get Roblox codes directly on
+                </h3>
+                <div className="space-y-2">
                   <Link
                     href="https://t.me/bloxodes"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-4 rounded-md border border-border px-4 py-3 font-medium text-foreground transition hover:bg-accent hover:text-accent-foreground"
+                    className="flex items-center justify-between gap-4 rounded-md px-2 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted/20"
                   >
                     <span className="flex items-center gap-2">
                       <FaTelegramPlane className="h-4 w-4" aria-hidden />
                       Telegram
                     </span>
-                    <span className="text-xs text-muted">@bloxodes</span>
+                    <span className="text-xs text-muted-foreground">@bloxodes</span>
                   </Link>
                   <Link
                     href="https://x.com/bloxodes"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-4 rounded-md border border-border px-4 py-3 font-medium text-foreground transition hover:bg-accent hover:text-accent-foreground"
+                    className="flex items-center justify-between gap-4 rounded-md px-2 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted/20"
                   >
                     <span className="flex items-center gap-2">
                       <RiTwitterXLine className="h-4 w-4" aria-hidden />
                       X (Twitter)
                     </span>
-                    <span className="text-xs text-muted">@bloxodes</span>
+                    <span className="text-xs text-muted-foreground">@bloxodes</span>
                   </Link>
                   <Link
                     href="https://chromewebstore.google.com/detail/bloxodes-%E2%80%93-roblox-game-co/mammkedlehmpechknaicfakljaogcmhc?authuser=0&hl=en"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-4 rounded-md border border-border px-4 py-3 font-medium text-foreground transition hover:bg-accent hover:text-accent-foreground"
+                    className="flex items-center justify-between gap-4 rounded-md px-2 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted/20"
                   >
                     <span className="flex items-center gap-2">
                       <SiGooglechrome className="h-4 w-4" aria-hidden />
                       Chrome Extension
                     </span>
-                    <span className="text-xs text-muted">Add to Chrome</span>
+                    <span className="text-xs text-muted-foreground">Add to Chrome</span>
                   </Link>
                 </div>
               </section>
 
-              <div className="space-y-2 p-2">
-                <h3 className="text-lg font-semibold text-foreground">More games with codes</h3>
-                <p className="text-sm text-muted">Discover other Roblox games that currently have active rewards.</p>
-              </div>
+              <section className="space-y-1 px-1 py-1">
+                <h3 className="text-base font-semibold leading-6 text-foreground">More games with codes</h3>
+              </section>
               <div className="grid gap-4">
                 {suggestedCodes.map((g) => (
                   <div

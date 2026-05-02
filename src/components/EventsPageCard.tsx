@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { CalendarClock, Clock3, Radio } from "lucide-react";
 
 type EventCounts = {
   upcoming: number;
@@ -16,34 +20,41 @@ export type EventsPageCardProps = {
   fallbackIcon: string | null;
   eventName: string | null;
   eventTimeLabel: string | null;
+  eventStartUtc: string | null;
+  eventEndUtc: string | null;
   status: "upcoming" | "current" | "past" | "none";
   counts: EventCounts;
   updatedLabel: string | null;
 };
 
-const BLUR_DATA_URL =
-  "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTIwMCcgaGVpZ2h0PSc2NzUnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHJlY3Qgd2lkdGg9JzEyMDAnIGhlaWdodD0nNjc1JyBmaWxsPSdyZ2JhKDQ4LDUwLDU4LDAuMyknIC8+PC9zdmc+";
-
-const STATUS_STYLES = {
+const STATUS_COPY = {
   upcoming: {
     label: "Next event",
-    badge: "bg-accent/90 text-white",
-    dot: "bg-accent"
+    timerLabel: "Starts in",
+    icon: CalendarClock,
+    dot: "bg-accent",
+    iconClass: "text-accent"
   },
   current: {
     label: "Live now",
-    badge: "bg-emerald-500/90 text-white",
-    dot: "bg-emerald-400"
+    timerLabel: "Ends in",
+    icon: Radio,
+    dot: "bg-emerald-400",
+    iconClass: "text-emerald-400"
   },
   past: {
-    label: "Recent event",
-    badge: "bg-amber-400/90 text-slate-900",
-    dot: "bg-amber-400"
+    label: "Last event",
+    timerLabel: "Ended",
+    icon: Clock3,
+    dot: "bg-amber-400",
+    iconClass: "text-amber-400"
   },
   none: {
     label: "Events hub",
-    badge: "bg-surface-muted text-foreground",
-    dot: "bg-muted"
+    timerLabel: "Status",
+    icon: CalendarClock,
+    dot: "bg-muted",
+    iconClass: "text-muted"
   }
 } as const;
 
@@ -53,27 +64,98 @@ function normalizeImageUrl(value: string | null): string | null {
   return value.startsWith("/") ? value : `/${value}`;
 }
 
+function parseTarget(value: string | null): number | null {
+  if (!value) return null;
+  const time = Date.parse(value);
+  return Number.isNaN(time) ? null : time;
+}
+
+function buildCountdown(target: number, now: number): string {
+  const diff = target - now;
+  if (diff <= 0) return "0d 0h 0m 0s";
+
+  const totalSeconds = Math.ceil(diff / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
 function buildCountsLabel(counts: EventCounts) {
   const upcoming = counts.upcoming ?? 0;
   const current = counts.current ?? 0;
   const past = counts.past ?? 0;
-  const total = upcoming + current + past;
-  if (!total) return "Events tracked";
   if (upcoming || current) {
-    return `${upcoming} upcoming · ${current} live`;
+    const parts: string[] = [];
+    if (upcoming) parts.push(`${upcoming} upcoming`);
+    if (current) parts.push(`${current} live`);
+    return parts.join(" · ");
   }
-  return `${past} past ${past === 1 ? "event" : "events"}`;
+  if (past) return `${past} past ${past === 1 ? "event" : "events"}`;
+  return "No events tracked";
+}
+
+function normalizeTimerFallback(status: EventsPageCardProps["status"], fallback: string | null) {
+  if (!fallback) return null;
+  if (status === "past") {
+    return fallback.replace(/^ended\s+/i, "");
+  }
+  if (status === "upcoming") {
+    return fallback.replace(/^starts\s+/i, "");
+  }
+  if (status === "current") {
+    return fallback.replace(/^ends\s+/i, "");
+  }
+  return fallback;
+}
+
+function useEventTimer({
+  status,
+  startUtc,
+  endUtc,
+  fallback
+}: {
+  status: EventsPageCardProps["status"];
+  startUtc: string | null;
+  endUtc: string | null;
+  fallback: string | null;
+}) {
+  const target = useMemo(() => {
+    if (status === "upcoming") return parseTarget(startUtc);
+    if (status === "current") return parseTarget(endUtc);
+    return null;
+  }, [endUtc, startUtc, status]);
+
+  const normalizedFallback = useMemo(() => normalizeTimerFallback(status, fallback), [fallback, status]);
+  const [label, setLabel] = useState(() => normalizedFallback ?? "No event time");
+
+  useEffect(() => {
+    if (!target) {
+      setLabel(normalizedFallback ?? "No event time");
+      return;
+    }
+
+    const tick = () => setLabel(buildCountdown(target, Date.now()));
+    tick();
+    const id = window.setInterval(tick, 1000);
+    return () => window.clearInterval(id);
+  }, [normalizedFallback, target]);
+
+  return label;
 }
 
 export function EventsPageCard({
   slug,
   title,
-  summary,
   universeName,
   coverImage,
   fallbackIcon,
   eventName,
   eventTimeLabel,
+  eventStartUtc,
+  eventEndUtc,
   status,
   counts,
   updatedLabel
@@ -81,79 +163,61 @@ export function EventsPageCard({
   const displayUniverse = universeName ?? "Roblox";
   const normalizedCover = normalizeImageUrl(coverImage);
   const normalizedIcon = normalizeImageUrl(fallbackIcon);
-  const statusStyle = STATUS_STYLES[status] ?? STATUS_STYLES.none;
-  const countsLabel = buildCountsLabel(counts);
-  const totalEvents = (counts.upcoming ?? 0) + (counts.current ?? 0) + (counts.past ?? 0);
-  const fallbackTitle = eventName || title || "Events overview";
-  const timeLabel =
-    eventTimeLabel ??
-    (totalEvents > 0 ? "Schedules and countdowns" : "No scheduled events yet");
+  const statusCopy = STATUS_COPY[status] ?? STATUS_COPY.none;
+  const StatusIcon = statusCopy.icon;
+  const timerLabel = useEventTimer({
+    status,
+    startUtc: eventStartUtc,
+    endUtc: eventEndUtc,
+    fallback: eventTimeLabel
+  });
+  const imageUrl = normalizedCover ?? normalizedIcon;
+  const gameTitle = displayUniverse || title || "Roblox events";
+  const eventTitle = eventName || title || "Events overview";
 
   return (
     <Link href={`/events/${slug}`} prefetch={false} className="group block h-full">
-      <article className="relative flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border/70 bg-surface shadow-soft transition duration-300 hover:-translate-y-1 hover:border-accent/70 hover:shadow-xl">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-70 transition duration-700 group-hover:opacity-100"
-          aria-hidden
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(15,23,42,0.12),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(15,23,42,0.1),transparent_35%)] dark:bg-[radial-gradient(circle_at_12%_18%,rgba(79,70,229,0.18),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(16,185,129,0.14),transparent_35%)]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/10 via-transparent to-slate-950/20 dark:from-background/40 dark:to-background/80" />
-        </div>
-
-        <div className="relative">
-          <div className="relative aspect-[16/9] overflow-hidden bg-surface-muted">
-            {normalizedCover ? (
+      <article className="flex h-full flex-col rounded-md border border-border/70 bg-card transition-colors hover:border-border">
+        <div className="flex items-start gap-4 p-4">
+          <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md border border-border/60 bg-surface-muted">
+            {imageUrl ? (
               <Image
-                src={normalizedCover}
-                alt={title}
+                src={imageUrl}
+                alt={gameTitle}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover transition duration-700 group-hover:scale-105"
-                placeholder="blur"
-                blurDataURL={BLUR_DATA_URL}
+                sizes="64px"
+                className="object-cover"
               />
             ) : (
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gradient-to-br from-surface-muted via-surface to-background/80 px-6 text-center">
-                {normalizedIcon ? (
-                  <div className="relative h-14 w-14 overflow-hidden rounded-2xl border border-border/60 bg-background/70 shadow-inner">
-                    <Image src={normalizedIcon} alt={displayUniverse} fill sizes="56px" className="object-cover" />
-                  </div>
-                ) : (
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-border/60 bg-background/70 text-sm font-semibold text-muted">
-                    EV
-                  </div>
-                )}
-                <span className="text-sm font-semibold text-foreground">{displayUniverse}</span>
+              <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-muted">
+                EV
               </div>
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent dark:from-background/95 dark:via-background/40" />
-            <div className="absolute left-4 top-4 flex items-center gap-2">
-              <span className={`rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] ${statusStyle.badge}`}>
-                {statusStyle.label}
-              </span>
+          </div>
+
+          <div className="min-w-0 flex-1 space-y-3">
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+                <span className={`h-2 w-2 rounded-full ${statusCopy.dot}`} aria-hidden />
+                {statusCopy.label}
+              </div>
+              <h3 className="line-clamp-2 text-xl font-semibold leading-tight text-foreground transition-colors group-hover:text-accent">
+                {gameTitle}
+              </h3>
+              <p className="line-clamp-1 text-sm text-muted">{eventTitle}</p>
             </div>
-            <div className="absolute bottom-4 left-4 right-4 space-y-1">
-              <p className="text-base font-semibold text-white drop-shadow-sm line-clamp-1">{fallbackTitle}</p>
-              <p className="text-xs text-white/80">{timeLabel}</p>
+
+            <div className="inline-flex max-w-full items-center gap-2 rounded-md border border-border/60 bg-surface px-3 py-2 text-sm font-semibold text-foreground">
+              <StatusIcon className={`h-4 w-4 shrink-0 ${statusCopy.iconClass}`} aria-hidden />
+              <span className="shrink-0 text-muted">{statusCopy.timerLabel}</span>
+              <span className="truncate">{timerLabel}</span>
             </div>
           </div>
         </div>
 
-        <div className="relative flex flex-1 flex-col gap-4 p-5">
-          <div className="space-y-1">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{displayUniverse}</p>
-            <h3 className="text-lg font-semibold leading-snug text-foreground transition group-hover:text-accent line-clamp-2">
-              {title}
-            </h3>
-          </div>
-          <p className="text-sm text-muted leading-relaxed line-clamp-3">{summary}</p>
-          <div className="mt-auto flex flex-wrap items-center justify-between gap-3 text-xs text-muted">
-            <span className="inline-flex items-center gap-2">
-              <span className={`h-2 w-2 rounded-full ${statusStyle.dot}`} aria-hidden />
-              {countsLabel}
-            </span>
-            {updatedLabel ? <span>Updated {updatedLabel}</span> : null}
-          </div>
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-border/60 px-4 py-3 text-xs text-muted">
+          <span>{buildCountsLabel(counts)}</span>
+          {updatedLabel ? <span>Updated {updatedLabel}</span> : null}
         </div>
       </article>
     </Link>

@@ -59,9 +59,7 @@ async function buildCatalogContent(codes: string[]): Promise<{ contentHtml: Cata
       howHtml,
       descriptionHtml,
       faqHtml,
-      updatedAt: catalog.content_updated_at ?? catalog.updated_at ?? catalog.published_at ?? catalog.created_at ?? null,
-      ctaLabel: catalog.cta_label ?? null,
-      ctaUrl: catalog.cta_url ?? null
+      updatedAt: catalog.content_updated_at ?? catalog.updated_at ?? catalog.published_at ?? catalog.created_at ?? null
     }
   };
 }

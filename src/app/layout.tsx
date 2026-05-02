@@ -23,7 +23,6 @@ export const metadata = {
   ],
   category: "Gaming",
   publisher: SITE_NAME,
-  authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   robots: {
     index: SEARCH_INDEXING_ENABLED,

@@ -1,6 +1,7 @@
 import { ToolCard } from "@/components/ToolCard";
 import { listPublishedTools, listPublishedToolsPage, type ToolListEntry } from "@/lib/tools";
 import { TOOLS_DESCRIPTION, SITE_URL } from "@/lib/seo";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { resolveModifiedAt } from "@/lib/content-dates";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
@@ -58,16 +59,12 @@ function ToolsPageView({
           <p className="max-w-2xl text-base text-muted md:text-lg">
             Currency converters, planning helpers, and utilities built to stay current with our latest data and guides.
           </p>
-          <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-            <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-              {total} tools published
-            </span>
-            {latestUpdatedAt ? (
-              <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-                Freshness based on the latest published tool
-              </span>
-            ) : null}
-          </div>
+          <IndexPageStats
+            items={[
+              { label: `${total} tools published`, icon: "tools", tone: "accent" },
+              ...(latestUpdatedAt ? [{ label: "Freshness from latest tool", icon: "clock" as const }] : [])
+            ]}
+          />
         </header>
       ) : (
         <header className="space-y-2">
@@ -79,7 +76,7 @@ function ToolsPageView({
       )}
 
       {tools.length ? (
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
           {tools.map((tool, index) => (
             <div
               key={tool.id ?? tool.code}

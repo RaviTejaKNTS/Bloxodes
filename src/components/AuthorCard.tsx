@@ -16,19 +16,17 @@ export function AuthorCard({ author, bioHtml }: AuthorCardProps) {
   const avatar = authorAvatarUrl(author);
 
   return (
-    <section className="panel mt-8 flex flex-col gap-5 p-5 md:flex-row md:items-start">
-      <div className="flex-shrink-0">
+    <section className="mt-10 border-t border-border/60 pt-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
         <img
           src={avatar}
           alt={author.name}
-          className="h-24 w-24 rounded-full border border-border/50 object-cover shadow-soft"
+          className="h-16 w-16 shrink-0 rounded-md border border-border/60 object-cover"
           loading="lazy"
           decoding="async"
         />
-      </div>
-      <div className="flex-1 space-y-3">
-        <div className="prose prose-headings:mt-0 prose-p:mt-2 dark:prose-invert max-w-none">
-          <h3>
+        <div className="min-w-0 flex-1 space-y-3">
+          <h2 className="mb-0 text-2xl font-semibold tracking-tight text-foreground">
             {author.slug ? (
               <Link href={`/authors/${author.slug}`} className="transition hover:text-accent">
                 About {author.name}
@@ -36,14 +34,19 @@ export function AuthorCard({ author, bioHtml }: AuthorCardProps) {
             ) : (
               <>About {author.name}</>
             )}
-          </h3>
+          </h2>
           {bioHtml ? (
-            <div dangerouslySetInnerHTML={typeof bioHtml === 'string' ? { __html: bioHtml } : bioHtml} />
+            <div
+              className="max-w-3xl text-sm leading-7 text-muted [&_a]:font-semibold [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:text-accent [&_p]:m-0 [&_p+p]:mt-3"
+              dangerouslySetInnerHTML={typeof bioHtml === "string" ? { __html: bioHtml } : bioHtml}
+            />
           ) : (
-            <p className="text-muted">{author.name} curates the latest Roblox codes and keeps this guide up to date.</p>
+            <p className="max-w-3xl text-sm leading-7 text-muted">
+              {author.name} curates the latest Roblox codes and keeps this guide up to date.
+            </p>
           )}
+          <AuthorSocialLinks author={author} size="sm" />
         </div>
-        <AuthorSocialLinks author={author} />
       </div>
     </section>
   );

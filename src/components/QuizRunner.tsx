@@ -458,7 +458,7 @@ export function QuizRunner(props: QuizRunnerProps) {
 
   if (!readyToStart) {
     return (
-      <div className="rounded-2xl border border-dashed border-border/70 bg-surface/60 p-8 text-center text-muted">
+      <div className="rounded-lg border border-dashed border-border/70 bg-card p-8 text-center text-muted">
         Preparing your quiz...
       </div>
     );
@@ -467,14 +467,14 @@ export function QuizRunner(props: QuizRunnerProps) {
   if (!attempt.length) {
     if (totalAvailableQuestions === 0) {
       return (
-        <div className="rounded-2xl border border-dashed border-border/70 bg-surface/60 p-8 text-center text-muted">
+        <div className="rounded-lg border border-dashed border-border/70 bg-card p-8 text-center text-muted">
           No quiz questions available yet.
         </div>
       );
     }
 
     return (
-      <div className="rounded-2xl border border-dashed border-border/70 bg-surface/60 p-8 text-center text-muted">
+      <div className="rounded-lg border border-dashed border-border/70 bg-card p-8 text-center text-muted">
         Preparing your quiz...
       </div>
     );
@@ -485,8 +485,8 @@ export function QuizRunner(props: QuizRunnerProps) {
       {!showSummary ? (
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
           {heroImage ? (
-            <div className="rounded-2xl border border-border/60 bg-surface/70 p-3 shadow-soft">
-              <div className="aspect-video overflow-hidden rounded-xl bg-black/20">
+            <div className="rounded-lg border border-border/70 bg-card p-3">
+              <div className="aspect-video overflow-hidden rounded-md bg-surface-muted">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={heroImage}
@@ -499,9 +499,9 @@ export function QuizRunner(props: QuizRunnerProps) {
             </div>
           ) : null}
 
-          <div className="rounded-2xl border border-border/70 bg-surface/70 p-6 shadow-sm">
+          <div className="rounded-lg border border-border/70 bg-card p-5">
             <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-              <span className="rounded-full bg-accent/10 px-3 py-1 text-accent">
+              <span className="rounded-md border border-border/70 bg-surface-muted px-2.5 py-1 text-accent">
                 {formatDifficulty(currentQuestion?.difficulty ?? "easy")}
               </span>
               <span>
@@ -509,21 +509,21 @@ export function QuizRunner(props: QuizRunnerProps) {
               </span>
             </div>
 
-            <div className="mt-4 h-2 w-full rounded-full bg-surface-muted">
+            <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-surface-muted">
               <div
-                className="h-2 rounded-full bg-accent transition-all"
+                className="h-full rounded-full bg-accent transition-all"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
 
             {currentQuestion?.image ? (
-              <div className="mt-6 overflow-hidden rounded-xl border border-border/60 bg-background/80">
+              <div className="mt-6 overflow-hidden rounded-lg border border-border/70 bg-background">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={currentQuestion.image} alt="Quiz prompt" className="h-auto w-full object-cover" />
               </div>
             ) : null}
 
-            <h2 className="mt-6 text-lg font-semibold text-foreground md:text-xl">{currentQuestion?.question}</h2>
+            <h2 className="mt-6 text-xl font-semibold leading-snug text-foreground md:text-2xl">{currentQuestion?.question}</h2>
 
             <div className="mt-4 grid gap-3">
               {(currentQuestion?.options ?? []).map((option, index) => {
@@ -532,16 +532,16 @@ export function QuizRunner(props: QuizRunnerProps) {
                 const isCorrect = currentQuestion?.correctOptionId === option.id;
                 const showResult = Boolean(currentAnswer);
                 const baseClass =
-                  "flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm font-medium transition";
+                  "flex w-full items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm font-medium transition-colors";
                 const stateClass = showResult
                   ? selected
                     ? isCorrect
-                      ? "border-emerald-500 bg-emerald-500/10 text-emerald-700"
-                      : "border-rose-500 bg-rose-500/10 text-rose-700"
+                      ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
+                      : "border-rose-500/70 bg-rose-500/10 text-rose-600 dark:text-rose-300"
                     : isCorrect
-                      ? "border-emerald-500/40 bg-emerald-500/5 text-emerald-600"
-                      : "border-border/70 bg-surface/60 text-foreground"
-                  : "border-border/70 bg-surface/60 text-foreground hover:border-accent/70 hover:bg-accent/10";
+                      ? "border-emerald-500/40 bg-emerald-500/5 text-emerald-600 dark:text-emerald-300"
+                      : "border-border/70 bg-background text-foreground"
+                  : "border-border/70 bg-background text-foreground hover:border-border hover:bg-surface-muted";
 
                 return (
                   <button
@@ -551,7 +551,7 @@ export function QuizRunner(props: QuizRunnerProps) {
                     onClick={() => handleSelectOption(option.id)}
                     disabled={Boolean(currentAnswer)}
                   >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-background/80 text-xs font-semibold uppercase">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border/70 bg-surface-muted text-xs font-semibold uppercase">
                       {label}
                     </span>
                     <span className="flex-1">{option.text}</span>
@@ -562,10 +562,10 @@ export function QuizRunner(props: QuizRunnerProps) {
 
             {currentAnswer ? (
               <div
-                className={`mt-4 rounded-xl border px-4 py-3 text-sm font-semibold ${
+                className={`mt-4 rounded-lg border px-4 py-3 text-sm font-semibold ${
                   currentAnswer === currentQuestion?.correctOptionId
-                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700"
-                    : "border-rose-500/40 bg-rose-500/10 text-rose-700"
+                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
+                    : "border-rose-500/40 bg-rose-500/10 text-rose-600 dark:text-rose-300"
                 }`}
               >
                 {currentAnswer === currentQuestion?.correctOptionId
@@ -579,14 +579,14 @@ export function QuizRunner(props: QuizRunnerProps) {
             <div className="mt-6 flex flex-wrap items-center justify-end gap-3">
               <button
                 type="button"
-                className="rounded-full border border-border/70 bg-background/70 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition hover:border-accent/60 hover:text-accent"
+                className="rounded-md border border-border/70 bg-background px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-foreground transition-colors hover:bg-surface-muted"
                 onClick={handleReloadQuiz}
               >
                 Reload Quiz
               </button>
               <button
                 type="button"
-                className="rounded-full bg-accent px-6 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-soft transition hover:shadow-lg disabled:cursor-not-allowed disabled:bg-accent/40"
+                className="rounded-md bg-accent px-5 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:bg-accent/40"
                 onClick={handleNext}
                 disabled={!currentAnswer}
               >
@@ -596,7 +596,7 @@ export function QuizRunner(props: QuizRunnerProps) {
           </div>
         </div>
       ) : (
-        <div className="rounded-2xl border border-border/70 bg-surface/70 p-6 shadow-sm">
+        <div className="rounded-lg border border-border/70 bg-card p-5">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted">Final Score</p>
@@ -609,14 +609,14 @@ export function QuizRunner(props: QuizRunnerProps) {
             </div>
             <button
               type="button"
-              className="rounded-full bg-accent px-6 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-soft transition hover:shadow-lg"
+              className="rounded-md bg-accent px-5 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-accent/90"
               onClick={handleRestart}
             >
               Play Again
             </button>
             <button
               type="button"
-              className="rounded-full border border-border/70 bg-background/70 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground transition hover:border-accent/60 hover:text-accent"
+              className="rounded-md border border-border/70 bg-background px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-foreground transition-colors hover:bg-surface-muted"
               onClick={handleReloadQuiz}
             >
               Reload Quiz
@@ -625,7 +625,7 @@ export function QuizRunner(props: QuizRunnerProps) {
 
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
             {(Object.keys(LEVEL_CONFIG) as Difficulty[]).map((level) => (
-              <div key={level} className="rounded-xl border border-border/60 bg-background/80 p-4">
+              <div key={level} className="rounded-lg border border-border/70 bg-background p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{formatDifficulty(level)}</p>
                 <p className="mt-2 text-lg font-semibold text-foreground">
                   {breakdown[level].correct}/{breakdown[level].total}
@@ -634,7 +634,7 @@ export function QuizRunner(props: QuizRunnerProps) {
             ))}
           </div>
 
-          <div className="mt-6 rounded-xl border border-border/60 bg-background/70 px-4 py-3 text-xs text-muted">
+          <div className="mt-6 rounded-lg border border-border/70 bg-background px-4 py-3 text-xs text-muted">
             If you are logged in, we will save your quiz history to keep your progress across attempts.
           </div>
 
@@ -648,14 +648,16 @@ export function QuizRunner(props: QuizRunnerProps) {
                 const isCorrect = selectedId === question.correctOptionId;
 
                 return (
-                  <div key={question.id} className="rounded-xl border border-border/60 bg-background/80 p-4">
+                  <div key={question.id} className="rounded-lg border border-border/70 bg-background p-4">
                     <div className="flex flex-wrap items-start justify-between gap-2">
                       <p className="text-sm font-semibold text-foreground">
                         {index + 1}. {question.question}
                       </p>
                       <span
-                        className={`rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] ${
-                          isCorrect ? "bg-emerald-500/10 text-emerald-600" : "bg-rose-500/10 text-rose-600"
+                        className={`rounded-md px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] ${
+                          isCorrect
+                            ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
+                            : "bg-rose-500/10 text-rose-600 dark:text-rose-300"
                         }`}
                       >
                         {isCorrect ? "Correct" : "Wrong"}

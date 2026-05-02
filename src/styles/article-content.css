@@ -1383,6 +1383,157 @@
   border-bottom: 1px solid rgba(18, 22, 40, 0.12) !important;
 }
 
+/* Shared markdown/data table treatment: compact, clipped, and aligned with shadcn-style surfaces. */
+.table-scroll-wrapper,
+.md-copy-scope .table-scroll-wrapper[data-md-copy] {
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(var(--color-border) / 0.7);
+  background: rgb(var(--color-surface) / 0.78);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.dark .table-scroll-wrapper,
+.dark .md-copy-scope .table-scroll-wrapper[data-md-copy] {
+  border-color: rgb(var(--color-border) / 0.72);
+  background: rgb(var(--color-surface) / 0.72);
+  box-shadow: none;
+}
+
+.table-scroll-inner,
+.md-copy-scope .table-scroll-inner[data-md-copy] {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--color-border) / 0.9) transparent;
+}
+
+.table-scroll-inner::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-scroll-inner::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-border) / 0.9);
+  border-radius: 999px;
+}
+
+.prose table,
+.game-copy table,
+.md-copy-scope table[data-md-copy],
+.md-copy-scope .md-copy-table {
+  display: table;
+  width: 100% !important;
+  max-width: 100%;
+  min-width: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-spacing: 0;
+  margin: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: 0.92rem !important;
+  table-layout: auto;
+}
+
+.prose table::after,
+.game-copy table::after,
+.md-copy-scope table[data-md-copy]::after {
+  content: none;
+}
+
+.prose thead,
+.game-copy thead,
+.md-copy-scope thead[data-md-copy] {
+  background: rgb(var(--color-surface-muted) / 0.36);
+}
+
+.dark .prose thead,
+.dark .game-copy thead,
+.dark .md-copy-scope thead[data-md-copy] {
+  background: rgb(var(--color-surface-muted) / 0.42);
+}
+
+.prose thead th,
+.game-copy thead th,
+.md-copy-scope thead th[data-md-copy],
+.md-copy-scope .md-copy-th {
+  padding: 0.7rem 0.85rem !important;
+  font-size: 0.76rem !important;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgb(var(--color-foreground) / 0.88) !important;
+  border-right: 1px solid rgb(var(--color-border) / 0.55) !important;
+  border-bottom: 1px solid rgb(var(--color-border) / 0.68) !important;
+  white-space: nowrap;
+}
+
+.prose tbody tr,
+.game-copy tbody tr,
+.md-copy-scope tbody tr[data-md-copy] {
+  background: transparent !important;
+}
+
+.prose tbody tr:nth-child(even),
+.game-copy tbody tr:nth-child(even),
+.md-copy-scope tbody tr[data-md-copy]:nth-child(even) {
+  background: rgb(var(--color-surface-muted) / 0.18) !important;
+}
+
+.prose :is(th, td),
+.game-copy :is(th, td),
+.md-copy-scope :is(th, td)[data-md-copy],
+.md-copy-scope .md-copy-td {
+  padding: 0.72rem 0.85rem !important;
+  color: rgb(var(--color-foreground) / 0.9) !important;
+  border-right: 1px solid rgb(var(--color-border) / 0.5) !important;
+  border-bottom: 1px solid rgb(var(--color-border) / 0.45) !important;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.prose :is(th, td):last-child,
+.game-copy :is(th, td):last-child,
+.md-copy-scope :is(th, td)[data-md-copy]:last-child {
+  border-right: 0 !important;
+}
+
+.prose tbody tr:last-child td,
+.game-copy tbody tr:last-child td,
+.md-copy-scope tbody tr[data-md-copy]:last-child td[data-md-copy] {
+  border-bottom: 0 !important;
+}
+
+.content-faq-answer > .md-copy-node + .md-copy-node {
+  margin-top: 0.7rem !important;
+}
+
+.content-faq-answer .md-copy-p {
+  color: rgb(var(--color-muted)) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0 !important;
+}
+
+.content-faq-answer .md-copy-list {
+  margin: 0.75rem 0 !important;
+  padding-left: 1.2rem !important;
+}
+
+.content-faq-answer .md-copy-li {
+  color: rgb(var(--color-muted)) !important;
+  font-size: 0.98rem !important;
+  line-height: 1.7 !important;
+}
+
+.content-faq-answer .md-copy-li + .md-copy-li {
+  margin-top: 0.35rem !important;
+}
+
 /* Keep tool/catalog UIs full-width while markdown copy reserves sidebar-like space on desktop */
 @media (min-width: 1024px) {
   .copy-with-sidebar-space {

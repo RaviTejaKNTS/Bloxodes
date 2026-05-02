@@ -18,6 +18,12 @@ export type ToolContent = {
   cta_url?: string | null;
   schema_ld_json?: unknown;
   thumb_url?: string | null;
+  universe?: {
+    icon_url?: string | null;
+    thumbnail_urls?: unknown;
+    display_name?: string | null;
+    name?: string | null;
+  } | null;
   is_published: boolean;
   published_at?: string | null;
   created_at?: string;
@@ -28,9 +34,9 @@ export type ToolContent = {
 const TOOL_SELECT_FIELDS =
   "id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, universe_id, cta_label, cta_url, schema_ld_json, thumb_url, is_published, published_at, created_at, updated_at, content_updated_at";
 const TOOL_INDEX_FIELDS_VIEW =
-  "id, code, title, seo_title, meta_description, intro_md, thumb_url, universe_id, published_at, created_at, updated_at, content_updated_at";
+  "id, code, title, seo_title, meta_description, intro_md, thumb_url, universe_id, published_at, created_at, updated_at, content_updated_at, universe:roblox_universes(icon_url, thumbnail_urls, display_name, name)";
 const TOOL_INDEX_FIELDS_BASE =
-  "id, code, title, seo_title, meta_description, intro_md, thumb_url, universe_id, published_at, created_at, updated_at";
+  "id, code, title, seo_title, meta_description, intro_md, thumb_url, universe_id, published_at, created_at, updated_at, universe:roblox_universes(icon_url, thumbnail_urls, display_name, name)";
 
 export async function getToolContent(code: string): Promise<ToolContent | null> {
   const supabase = supabaseAdmin();
@@ -88,7 +94,7 @@ export async function getToolContentWithDevFallback(code: string): Promise<ToolC
 
 export type ToolListEntry = Pick<
   ToolContent,
-  "id" | "code" | "title" | "seo_title" | "meta_description" | "intro_md" | "thumb_url" | "published_at" | "universe_id"
+  "id" | "code" | "title" | "seo_title" | "meta_description" | "intro_md" | "thumb_url" | "published_at" | "universe_id" | "universe"
 > & { created_at?: string; updated_at?: string; content_updated_at?: string | null };
 
 const cachedListPublishedTools = unstable_cache(
@@ -98,7 +104,8 @@ const cachedListPublishedTools = unstable_cache(
       .from("tools_view")
       .select(TOOL_INDEX_FIELDS_VIEW)
       .eq("is_published", true)
-      .order("content_updated_at", { ascending: false });
+      .order("content_updated_at", { ascending: false })
+      .order("id", { ascending: true });
 
     if (!error && data) {
       return (data ?? []) as ToolListEntry[];
@@ -108,7 +115,8 @@ const cachedListPublishedTools = unstable_cache(
       .from("tools")
       .select(TOOL_INDEX_FIELDS_BASE)
       .eq("is_published", true)
-      .order("updated_at", { ascending: false });
+      .order("updated_at", { ascending: false })
+      .order("id", { ascending: true });
 
     if (fallbackError) {
       console.error("Error fetching tools index", fallbackError);
@@ -144,6 +152,7 @@ export async function listPublishedToolsPage(
         .select(TOOL_INDEX_FIELDS_VIEW, { count: "exact" })
         .eq("is_published", true)
         .order("content_updated_at", { ascending: false })
+        .order("id", { ascending: true })
         .range(offset, offset + safePageSize - 1);
 
       if (!error && data) {
@@ -155,6 +164,7 @@ export async function listPublishedToolsPage(
         .select(TOOL_INDEX_FIELDS_BASE, { count: "exact" })
         .eq("is_published", true)
         .order("updated_at", { ascending: false })
+        .order("id", { ascending: true })
         .range(offset, offset + safePageSize - 1);
 
       if (fallbackError) {

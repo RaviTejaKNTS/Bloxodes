@@ -24,6 +24,7 @@ if (cspMode !== "off" && (!publicCsp || !secureCsp)) {
 
 const nextConfig = {
   poweredByHeader: false,
+  devIndicators: false,
   output: "standalone",
   staticPageGenerationTimeout: 120,
   async headers() {

@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { formatDistanceToNow } from "date-fns";
 import "@/styles/article-content.css";
-import { AuthorCard } from "@/components/AuthorCard";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ChecklistCard } from "@/components/ChecklistCard";
 import { ContentSlot } from "@/components/ContentSlot";
@@ -16,14 +15,11 @@ import { CommentsSection } from "@/components/comments/CommentsSection";
 import {
   listPublishedArticlesByUniverseId,
   listPublishedChecklistsByUniverseId,
-  listGamesWithActiveCountsByUniverseId,
-  type Author
+  listGamesWithActiveCountsByUniverseId
 } from "@/lib/db";
-import { collectAuthorSocials } from "@/lib/author-socials";
 import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
 import { processHtmlLinks } from "@/lib/link-utils";
 import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
-import { authorAvatarUrl } from "@/lib/avatar";
 import { supabaseAdmin } from "@/lib/supabase";
 import { CHECKLISTS_DESCRIPTION, SITE_NAME, SITE_URL, breadcrumbJsonLd, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
@@ -54,18 +50,15 @@ type EventsPageRow = {
   content_md: string | null;
   seo_title: string | null;
   meta_description: string | null;
-  author_id: string | null;
   is_published: boolean;
   published_at: string | null;
   created_at: string;
   updated_at: string;
-  author?: Author | null;
   universe?: UniverseSummary | null;
 };
 
-type EventsPageRowRaw = Omit<EventsPageRow, "universe" | "author"> & {
+type EventsPageRowRaw = Omit<EventsPageRow, "universe"> & {
   universe?: UniverseSummary | UniverseSummary[] | null;
-  author?: Author | Author[] | null;
 };
 
 type EventCategory = {
@@ -139,12 +132,6 @@ function normalizeText(value: string | null | undefined): string | null {
 }
 
 function normalizeUniverse(value: UniverseSummary | UniverseSummary[] | null | undefined): UniverseSummary | null {
-  if (!value) return null;
-  if (Array.isArray(value)) return value[0] ?? null;
-  return value;
-}
-
-function normalizeAuthor(value: Author | Author[] | null | undefined): Author | null {
   if (!value) return null;
   if (Array.isArray(value)) return value[0] ?? null;
   return value;
@@ -342,7 +329,7 @@ export async function loadEventsPage(slug: string): Promise<EventsPageRow | null
   const { data, error } = await sb
     .from("events_pages")
     .select(
-      "id, universe_id, slug, title, content_md, seo_title, meta_description, author_id, is_published, published_at, created_at, updated_at, author:authors(id,name,slug,avatar_url,gravatar_email,bio_md,twitter,youtube,website,facebook,linkedin,instagram,roblox,discord,created_at,updated_at), universe:roblox_universes(universe_id, display_name, name, icon_url, creator_name, creator_type)"
+      "id, universe_id, slug, title, content_md, seo_title, meta_description, is_published, published_at, created_at, updated_at, universe:roblox_universes(universe_id, display_name, name, icon_url, creator_name, creator_type)"
     )
     .eq("slug", normalized)
     .eq("is_published", true)
@@ -354,8 +341,7 @@ export async function loadEventsPage(slug: string): Promise<EventsPageRow | null
   const raw = data as EventsPageRowRaw;
   return {
     ...raw,
-    universe: normalizeUniverse(raw.universe),
-    author: normalizeAuthor(raw.author)
+    universe: normalizeUniverse(raw.universe)
   };
 }
 
@@ -816,13 +802,9 @@ export async function renderEventsPage({ slug }: { slug: string }) {
   const firstUpcomingName = upcomingEvents[0] ? getEventNameForTitle(upcomingEvents[0]) : null;
   const dynamicTitle = buildDynamicTitle(universeName, firstUpcomingName);
   const headingTitle = normalizeText(page.title) ?? dynamicTitle;
-  const [introHtmlRaw, authorBioHtml] = await Promise.all([
-    page.content_md ? renderMarkdown(page.content_md) : Promise.resolve(""),
-    page.author?.bio_md ? renderMarkdown(page.author.bio_md) : Promise.resolve("")
-  ]);
+  const introHtmlRaw = page.content_md ? await renderMarkdown(page.content_md) : "";
   const introHtml = introHtmlRaw?.trim() ? introHtmlRaw : null;
   const introNodes = introHtml ? renderEventHtmlNodes(introHtml, "events-intro") : null;
-  const processedAuthorBioHtml = authorBioHtml ? processHtmlLinks(authorBioHtml) : null;
   const universeId = page.universe_id;
   const universeLabel = page.universe?.display_name ?? page.universe?.name ?? universeName;
   const canonicalSlug = page.slug ?? slug;
@@ -840,10 +822,6 @@ export async function renderEventsPage({ slug }: { slug: string }) {
     })
     : null;
   const updatedRelativeLabel = updatedDate ? formatDistanceToNow(updatedDate, { addSuffix: true }) : null;
-  const authorAvatar = page.author ? authorAvatarUrl(page.author, 72) : null;
-  const authorProfileUrl = page.author?.slug ? `${SITE_URL.replace(/\/$/, "")}/authors/${page.author.slug}` : null;
-  const authorSameAs = page.author ? Array.from(new Set(collectAuthorSocials(page.author).map((link) => link.url))) : [];
-  const authorBioPlain = page.author?.bio_md ? markdownToPlainText(page.author.bio_md) : null;
   const descriptionPlain =
     normalizeText(page.meta_description) ??
     (page.content_md
@@ -924,9 +902,9 @@ export async function renderEventsPage({ slug }: { slug: string }) {
     })
     .filter((entry) => Boolean(entry));
 
-  const blogPostingSchema = JSON.stringify({
+  const collectionPageSchema = JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    "@type": "CollectionPage",
     url: canonicalUrl,
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -940,19 +918,6 @@ export async function renderEventsPage({ slug }: { slug: string }) {
       "@type": "ImageObject",
       url: coverImage
     },
-    author: page.author
-      ? {
-        "@type": "Person",
-        name: page.author.name,
-        ...(authorProfileUrl ? { url: authorProfileUrl } : {}),
-        ...(authorBioPlain ? { description: authorBioPlain } : {}),
-        ...(authorSameAs.length ? { sameAs: authorSameAs } : {})
-      }
-      : {
-        "@type": "Organization",
-        name: SITE_NAME,
-        url: SITE_URL
-      },
     publisher: {
       "@id": `${SITE_URL.replace(/\/$/, "")}/#organization`
     },
@@ -992,7 +957,7 @@ export async function renderEventsPage({ slug }: { slug: string }) {
             <ol className="flex flex-wrap items-center gap-2">
               {[
                 { label: "Home", href: "/" },
-                { label: "Events", href: null },
+                { label: "Events", href: "/events" },
                 { label: universeName, href: null }
               ].map((item, index, items) => (
                 <li key={`${item.label}-${index}`} className="flex items-center gap-2">
@@ -1009,46 +974,13 @@ export async function renderEventsPage({ slug }: { slug: string }) {
             </ol>
           </nav>
           <h1 className="text-4xl font-bold text-foreground md:text-5xl">{headingTitle}</h1>
-          {page.author || formattedUpdated ? (
+          {formattedUpdated ? (
             <div className="flex flex-col gap-3 text-sm text-muted">
               <div className="flex flex-wrap items-center gap-2">
-                {page.author ? (
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={authorAvatar || "https://www.gravatar.com/avatar/?d=mp"}
-                      alt={page.author.name}
-                      className="h-9 w-9 rounded-full border border-border/40 object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span>
-                      Authored by {authorProfileUrl ? (
-                        <Link
-                          href={`/authors/${page.author.slug}`}
-                          className="font-semibold text-foreground transition hover:text-accent"
-                          data-analytics-event="author_click"
-                          data-analytics-codes-url={canonicalUrl}
-                          data-analytics-author-url={`/authors/${page.author.slug}`}
-                        >
-                          {page.author.name}
-                        </Link>
-                      ) : (
-                        <span className="font-semibold text-foreground">{page.author.name}</span>
-                      )}
-                    </span>
-                  </div>
-                ) : (
-                  <span className="font-semibold text-foreground">Published by {SITE_NAME}</span>
-                )}
-                {formattedUpdated ? (
-                  <>
-                    <span aria-hidden="true">•</span>
-                    <span className="text-foreground/80">
-                      Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
-                      {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
-                    </span>
-                  </>
-                ) : null}
+                <span className="text-foreground/80">
+                  Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
+                  {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
+                </span>
               </div>
             </div>
           ) : null}
@@ -1164,13 +1096,11 @@ export async function renderEventsPage({ slug }: { slug: string }) {
           </div>
         </section>
 
-        {page.author ? <AuthorCard author={page.author} bioHtml={processedAuthorBioHtml ?? ""} /> : null}
-
         <div className="mt-10">
           <CommentsSection entityType="event" entityId={page.id} />
         </div>
 
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: blogPostingSchema }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: collectionPageSchema }} />
         {eventListSchema ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: eventListSchema }} />
         ) : null}

@@ -187,6 +187,8 @@ export default async function ToolFallbackPage({ params }: PageProps) {
           fallbackIcon: relatedEventsPage.universe?.icon_url ?? null,
           eventName: eventSummary?.featured?.name ?? null,
           eventTimeLabel: eventSummary?.featured?.timeLabel ?? null,
+          eventStartUtc: eventSummary?.featured?.startUtc ?? null,
+          eventEndUtc: eventSummary?.featured?.endUtc ?? null,
           status: (eventSummary?.featured?.status ?? "none") as EventsPageCardProps["status"],
           counts: eventSummary?.counts ?? { upcoming: 0, current: 0, past: 0 },
           updatedLabel: eventsUpdatedLabel

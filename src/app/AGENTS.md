@@ -19,6 +19,8 @@ Use this file for route-level work. For public content route specifics, also rea
 - If a route family has index/detail/pagination variants, keep shared loaders and view helpers in a sibling `page-data.tsx`.
 - Keep route files thin. Prefer `src/lib/*` for database access and cross-route logic.
 - Public content pages should set metadata and structured data close to the route family, not ad hoc inside unrelated components.
+- Preserve readable public content hierarchy: large useful titles and comfortable body copy are allowed and expected.
+- For shared UI surfaces, prefer shadcn primitives from `src/components/ui` and keep their composition simple.
 
 ## Route Handler Conventions
 

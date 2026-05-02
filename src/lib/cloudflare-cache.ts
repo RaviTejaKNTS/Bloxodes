@@ -18,6 +18,7 @@ export type CloudflarePurgeResult = {
 };
 
 const CLOUDFLARE_API_BASE = "https://api.cloudflare.com/client/v4";
+const CLOUDFLARE_PURGE_BATCH_SIZE = 30;
 
 function readEnv(name: string) {
   const value = process.env[name]?.trim();
@@ -87,35 +88,47 @@ export async function purgeCloudflarePaths(paths: string[]): Promise<CloudflareP
     };
   }
 
-  let payload: unknown = null;
   let responseStatus = 0;
+  const purged: string[] = [];
+  const errors: string[] = [];
 
   try {
-    const response = await fetch(`${CLOUDFLARE_API_BASE}/zones/${zoneId}/purge_cache`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiToken}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ files })
-    });
+    for (let index = 0; index < files.length; index += CLOUDFLARE_PURGE_BATCH_SIZE) {
+      const batch = files.slice(index, index + CLOUDFLARE_PURGE_BATCH_SIZE);
+      const response = await fetch(`${CLOUDFLARE_API_BASE}/zones/${zoneId}/purge_cache`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ files: batch })
+      });
 
-    responseStatus = response.status;
-    payload = await response.json().catch(() => null);
+      responseStatus = response.status;
+      const payload = await response.json().catch(() => null);
+      const successFlag =
+        payload && typeof payload === "object" && typeof (payload as { success?: unknown }).success === "boolean"
+          ? Boolean((payload as { success: boolean }).success)
+          : response.ok;
 
-    const successFlag =
-      payload && typeof payload === "object" && typeof (payload as { success?: unknown }).success === "boolean"
-        ? Boolean((payload as { success: boolean }).success)
-        : response.ok;
+      if (response.ok && successFlag) {
+        purged.push(...batch);
+      } else {
+        errors.push(...extractErrors(payload));
+        if (!errors.length) {
+          errors.push(`Cloudflare purge batch failed with status ${response.status}`);
+        }
+      }
+    }
 
     return {
       enabled: true,
-      ok: response.ok && successFlag,
+      ok: purged.length === files.length,
       attempted: files.length,
-      purged: files,
+      purged,
       status: responseStatus,
-      reason: response.ok && successFlag ? undefined : "cloudflare-api-error",
-      errors: extractErrors(payload)
+      reason: purged.length === files.length ? undefined : "cloudflare-api-error",
+      errors
     };
   } catch (error) {
     return {

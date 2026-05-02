@@ -17,31 +17,6 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE!
 );
 
-let cachedAuthorIds: string[] | null = null;
-
-async function pickAuthorId(): Promise<string | null> {
-  if (!cachedAuthorIds) {
-    const { data, error } = await supabase.from("authors").select("id");
-    if (error) {
-      console.warn("⚠️ Unable to load authors:", error.message);
-      cachedAuthorIds = [];
-    } else {
-      cachedAuthorIds = (data ?? [])
-        .map((author) => author.id)
-        .filter((id): id is string => typeof id === "string" && id.length > 0);
-    }
-  }
-
-  if (!cachedAuthorIds || cachedAuthorIds.length === 0) {
-    console.warn("⚠️ No authors available; skipping author assignment.");
-    return null;
-  }
-
-  const authorIds = cachedAuthorIds;
-  const index = Math.floor(Math.random() * authorIds.length);
-  return authorIds[index] ?? null;
-}
-
 const GOOGLE_SEARCH_KEY = process.env.GOOGLE_SEARCH_KEY!;
 const GOOGLE_SEARCH_CX = process.env.GOOGLE_SEARCH_CX!;
 let googleSearchCallCount = 0;
@@ -114,7 +89,6 @@ type ExistingGameRecord = {
   id: string;
   name: string;
   slug: string;
-  author_id: string | null;
   is_published: boolean;
   roblox_link: string | null;
   community_link: string | null;
@@ -472,7 +446,7 @@ async function loadDraftGames(limit: number, slug: string | null): Promise<Exist
   let query = supabase
     .from("games")
     .select(
-      "id, name, slug, author_id, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, about_game_md, seo_description"
+      "id, name, slug, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, about_game_md, seo_description"
     )
     .eq("is_published", false);
 
@@ -835,13 +809,6 @@ async function processDraftGame(game: ExistingGameRecord): Promise<void> {
     about_game_md: article.about_game_md,
     seo_description: article.meta_description,
   };
-
-  if (!game.author_id) {
-    const authorId = await pickAuthorId();
-    if (authorId) {
-      updatePayload.author_id = authorId;
-    }
-  }
 
   if (resolvedLinks.roblox_link?.url) updatePayload.roblox_link = resolvedLinks.roblox_link.url;
   if (resolvedLinks.community_link?.url) updatePayload.community_link = resolvedLinks.community_link.url;

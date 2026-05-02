@@ -18,7 +18,7 @@ type VirtualEventRow = {
 
 export type UniverseEventSummary = {
   counts: { upcoming: number; current: number; past: number };
-  featured: { name: string; timeLabel: string | null; status: EventBucket } | null;
+  featured: { name: string; timeLabel: string | null; startUtc: string | null; endUtc: string | null; status: EventBucket } | null;
 };
 
 function parseDate(value: string | null): number | null {
@@ -150,6 +150,8 @@ export async function getUniverseEventSummary(universeId: number): Promise<Unive
         ? {
             name: getEventDisplayName(featuredPick.event),
             timeLabel: formatEventTimeLabel(featuredPick.bucket, featuredPick.event),
+            startUtc: featuredPick.event.start_utc,
+            endUtc: featuredPick.event.end_utc,
             status: featuredPick.bucket
           }
         : null;

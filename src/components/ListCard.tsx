@@ -54,7 +54,7 @@ export function ListCard({
   return (
     <Link
       href={`/lists/${slug}`}
-      className="group block overflow-hidden rounded-lg border border-border/40 bg-surface/80 shadow-soft transition hover:shadow-xl hover:border-accent/60"
+      className="group block overflow-hidden rounded-lg border border-border/70 bg-card transition-colors hover:border-border"
     >
       <div className="relative aspect-[1200/675] w-full overflow-hidden bg-surface-muted/60">
         {heroImage ? (
@@ -62,18 +62,21 @@ export function ListCard({
           <img
             src={heroImage}
             alt={displayName || title}
-            className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+            className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-surface to-surface-muted" />
         )}
-        <div className="absolute inset-0 bg-black/70 mix-blend-multiply transition duration-500 group-hover:bg-black/80" />
-        <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-6">
-          <div className="flex flex-wrap items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/80">
-            {updatedLabel ? <span className="text-white/70">Updated {updatedLabel}</span> : null}
-          </div>
-          <h3 className="text-2xl font-semibold text-white drop-shadow-md" title={displayName}>
+        <div className="absolute inset-0 bg-black/20" aria-hidden />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/55 to-transparent" aria-hidden />
+        <div className="absolute inset-x-0 bottom-0 space-y-1.5 p-4">
+          {updatedLabel ? (
+            <p className="mb-0 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70">
+              Updated {updatedLabel}
+            </p>
+          ) : null}
+          <h3 className="mb-0 line-clamp-2 text-lg font-semibold leading-tight text-white drop-shadow-sm" title={displayName}>
             {displayName}
           </h3>
         </div>

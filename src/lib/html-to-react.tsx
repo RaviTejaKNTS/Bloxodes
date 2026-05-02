@@ -30,7 +30,6 @@ const BOOLEAN_ATTRS = new Set([
   "selected"
 ]);
 const TABLE_CONTEXT_TAGS = new Set(["table", "thead", "tbody", "tfoot", "tr", "colgroup"]);
-const UNWRAP_CONTAINER_CLASSES = new Set(["table-scroll-wrapper", "table-scroll-inner"]);
 const PRESERVE_CONTAINER_CLASSES = new Set(["video-embed", "article-gallery", "article-gallery__item"]);
 
 function toReactAttrName(name: string): string {
@@ -115,10 +114,6 @@ function shouldUnwrapElement(element: Element): boolean {
   const attribs = element.attribs ?? {};
   const classAttr = attribs.class ?? "";
   const classes = classAttr.split(/\s+/).filter(Boolean);
-
-  if (element.name === "div" && classes.some((className) => UNWRAP_CONTAINER_CLASSES.has(className))) {
-    return true;
-  }
 
   if (element.name !== "div" && element.name !== "section") {
     return false;

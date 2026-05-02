@@ -18,16 +18,16 @@ export function ContentFaq({
   if (!items.length) return null;
 
   return (
-    <section className={className ?? "rounded-2xl border border-border/60 bg-surface/40 p-6 shadow-sm"}>
-      <h2 className="text-lg font-semibold text-foreground">{title}</h2>
-      <div className="mt-3 space-y-4">
+    <section className={className ?? "border-t border-border/60 pt-6"}>
+      <h2 className="text-2xl font-semibold tracking-tight text-foreground">{title}</h2>
+      <div className="mt-4 divide-y divide-border/60">
         {items.map((item) => (
-          <div key={item.id} className="rounded-xl border border-border/40 bg-background/60 p-4">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-muted">Q.</span>
-              <p className="text-base font-semibold text-foreground">{item.question}</p>
+          <div key={item.id} className="py-4 first:pt-0 last:pb-0">
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 shrink-0 text-xs font-semibold uppercase tracking-[0.18em] text-muted">Q.</span>
+              <p className="text-base font-semibold leading-6 text-foreground">{item.question}</p>
             </div>
-            <div className="md-copy-scope mt-2">{item.answer}</div>
+            <div className="content-faq-answer md-copy-scope mt-2 sm:pl-8">{item.answer}</div>
           </div>
         ))}
       </div>

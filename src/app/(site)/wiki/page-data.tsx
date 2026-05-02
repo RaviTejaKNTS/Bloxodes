@@ -2,7 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { IconType } from "react-icons";
-import { FiCalendar, FiEye, FiMonitor, FiRefreshCw, FiShield, FiSmartphone, FiStar, FiTablet, FiTag, FiTv, FiUsers } from "react-icons/fi";
+import { FiCalendar, FiClock, FiEye, FiMonitor, FiRefreshCw, FiShield, FiSmartphone, FiStar, FiTablet, FiTag, FiTv, FiUsers } from "react-icons/fi";
+import { FaCrown, FaDiscord, FaFacebook, FaMedal, FaTrophy, FaTwitch, FaYoutube } from "react-icons/fa";
+import { RiTwitterXLine } from "react-icons/ri";
+import { SiGuilded, SiGooglechrome, SiRoblox } from "react-icons/si";
 import { TbAugmentedReality } from "react-icons/tb";
 import { formatDistanceToNow } from "date-fns";
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
@@ -23,13 +26,15 @@ import {
   type WikiServerItem
 } from "@/lib/wiki";
 import { CHECKLISTS_DESCRIPTION, EVENTS_DESCRIPTION, QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, WIKI_DESCRIPTION, breadcrumbJsonLd } from "@/lib/seo";
-import { WikiLinkList, WikiRows, WikiSection, WikiTable, type WikiLinkItem, type WikiRow } from "@/components/wiki/WikiPrimitives";
+import { WikiLinkList, WikiSection, type WikiLinkItem } from "@/components/wiki/WikiPrimitives";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ChecklistCard } from "@/components/ChecklistCard";
 import { EventsPageCard, type EventsPageCardProps } from "@/components/EventsPageCard";
 import { GameCard } from "@/components/GameCard";
 import { QuizCard } from "@/components/QuizCard";
 import { ToolCard } from "@/components/ToolCard";
+import { WikiCard } from "@/components/WikiCard";
+import { IndexPageStats } from "@/components/IndexPageStats";
 
 const ROBLOX_BASE_URL = "https://www.roblox.com";
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
@@ -51,8 +56,10 @@ type ControlRow = {
 };
 
 type SocialLink = {
+  platform: string;
   label: string;
   url: string;
+  title?: string | null;
 };
 
 type HeroStat = {
@@ -90,6 +97,12 @@ type QuizCardData = {
 function normalizeText(value?: string | null): string | null {
   if (typeof value !== "string") return null;
   const normalized = value.replace(/\s+/g, " ").trim();
+  return normalized || null;
+}
+
+function normalizeMarkdownText(value?: string | null): string | null {
+  if (typeof value !== "string") return null;
+  const normalized = value.replace(/\r\n?/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
   return normalized || null;
 }
 
@@ -148,6 +161,13 @@ function formatDate(value?: string | null): string | null {
   return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
 }
 
+function formatIsoDate(value?: string | null): string | null {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toISOString();
+}
+
 function formatUpdated(value?: string | null): string | null {
   if (!value) return null;
   const date = new Date(value);
@@ -172,8 +192,9 @@ function formatKeyLabel(value: string): string {
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
-function summarizeWords(value: string | null, wordLimit = 100): string {
-  const normalized = normalizeText(value) ?? WIKI_DESCRIPTION;
+function summarizeWords(value: string | null, wordLimit = 100): string | null {
+  const normalized = normalizeText(value);
+  if (!normalized) return null;
   const words = normalized.split(/\s+/).filter(Boolean);
   if (words.length <= wordLimit) return normalized;
   return `${words.slice(0, wordLimit).join(" ")}…`;
@@ -192,13 +213,8 @@ function getUniverseLabel(page: WikiPageContent): string {
   return normalizeText(page.universe_display_name) ?? normalizeText(page.universe_name) ?? page.title;
 }
 
-function getSummary(page: WikiPageContent): string {
-  const candidates = [
-    page.meta_description,
-    page.universe_game_description_md ? markdownToPlainText(page.universe_game_description_md) : null,
-    page.universe_description
-  ];
-  return summarizeWords(candidates.map(normalizeText).find(Boolean) ?? null, 100);
+function getSummary(page: WikiPageContent): string | null {
+  return summarizeWords(page.universe_game_description_md ? markdownToPlainText(page.universe_game_description_md) : null, 100);
 }
 
 function getHeroImage(page: WikiPageContent, related: WikiRelatedData): string | null {
@@ -295,11 +311,12 @@ function extractSocialLinks(raw: unknown): SocialLink[] {
   if (!raw || typeof raw !== "object") return [];
   const links: SocialLink[] = [];
   for (const [platform, value] of Object.entries(raw as Record<string, unknown>)) {
+    const normalizedPlatform = platform.trim().toLowerCase();
     const entries = Array.isArray(value) ? value : [value];
     for (const entry of entries) {
       if (typeof entry === "string") {
         const url = normalizeText(entry);
-        if (url) links.push({ label: formatKeyLabel(platform), url });
+        if (url) links.push({ platform: normalizedPlatform, label: formatKeyLabel(platform), url });
         continue;
       }
       if (!entry || typeof entry !== "object") continue;
@@ -307,10 +324,108 @@ function extractSocialLinks(raw: unknown): SocialLink[] {
       const url = typeof record.url === "string" ? normalizeText(record.url) : null;
       if (!url) continue;
       const title = typeof record.title === "string" ? normalizeText(record.title) : null;
-      links.push({ label: title ?? formatKeyLabel(platform), url });
+      links.push({ platform: normalizedPlatform, label: title ?? formatKeyLabel(platform), title, url });
     }
   }
   return links;
+}
+
+const UNIVERSE_SOCIAL_META: Record<string, { label: string; icon: IconType }> = {
+  twitter: { label: "Twitter / X", icon: RiTwitterXLine },
+  x: { label: "Twitter / X", icon: RiTwitterXLine },
+  youtube: { label: "YouTube", icon: FaYoutube },
+  discord: { label: "Discord", icon: FaDiscord },
+  twitch: { label: "Twitch", icon: FaTwitch },
+  facebook: { label: "Facebook", icon: FaFacebook },
+  roblox_group: { label: "Roblox Group", icon: SiRoblox },
+  roblox: { label: "Roblox Group", icon: SiRoblox },
+  guilded: { label: "Guilded", icon: SiGuilded }
+};
+
+const DEFAULT_SOCIAL_META: { label: string; icon: IconType } = {
+  label: "Website",
+  icon: SiGooglechrome
+};
+
+type SocialLinkButton = { key: string; url: string; label: string; Icon: IconType; platform: string };
+
+function normalizeUrl(value?: string | null): string | null {
+  const trimmed = normalizeText(value);
+  if (!trimmed) return null;
+  try {
+    return new URL(trimmed).toString();
+  } catch {
+    return null;
+  }
+}
+
+function normalizeLinkForDedup(value: string): string | null {
+  try {
+    const parsed = new URL(value);
+    parsed.hash = "";
+    parsed.search = "";
+    return `${parsed.hostname.toLowerCase()}${parsed.pathname.replace(/\/+$/, "").toLowerCase()}`;
+  } catch {
+    return null;
+  }
+}
+
+function extractHandleFromUrl(platform: string, url: string): string | null {
+  try {
+    const parsed = new URL(url);
+    const segments = parsed.pathname.split("/").map((part) => part.trim()).filter(Boolean);
+    let handle = segments.length ? segments[segments.length - 1] : parsed.hostname;
+    if (!handle) return null;
+    if (handle.includes("?")) {
+      handle = handle.split("?")[0];
+    }
+    handle = handle.replace(/\/+$/, "");
+    if (!handle) return null;
+    if (platform === "twitter" || platform === "x") {
+      handle = handle.replace(/^@/, "");
+      return handle ? `@${handle}` : null;
+    }
+    if (platform.includes("youtube")) {
+      return handle.startsWith("@") ? handle : null;
+    }
+    return handle;
+  } catch {
+    return null;
+  }
+}
+
+function formatSocialLabel(platform: string, link: SocialLink, creatorName?: string | null): string {
+  if (platform === "roblox_group" || platform === "roblox") {
+    return creatorName ? `${creatorName} Roblox Community` : "Roblox Community";
+  }
+  if (platform === "discord") {
+    return "Discord";
+  }
+  const handle = extractHandleFromUrl(platform, link.url);
+  if (handle) return handle;
+  if (platform.includes("youtube")) {
+    return "YouTube";
+  }
+  return link.title?.trim() || UNIVERSE_SOCIAL_META[platform]?.label || DEFAULT_SOCIAL_META.label;
+}
+
+function buildSocialLinkButtons(links: SocialLink[], creatorName?: string | null): SocialLinkButton[] {
+  const deduped = new Map<string, SocialLinkButton>();
+  for (const link of links) {
+    const url = normalizeUrl(link.url);
+    if (!url) continue;
+    const meta = UNIVERSE_SOCIAL_META[link.platform] ?? DEFAULT_SOCIAL_META;
+    const dedupeKey = normalizeLinkForDedup(url);
+    if (!dedupeKey || deduped.has(dedupeKey)) continue;
+    deduped.set(dedupeKey, {
+      key: `${link.platform}-${url}`,
+      url,
+      label: formatSocialLabel(link.platform, link, creatorName),
+      Icon: meta.icon,
+      platform: link.platform
+    });
+  }
+  return Array.from(deduped.values());
 }
 
 function buildCreatorUrl(page: WikiPageContent): string | null {
@@ -375,11 +490,6 @@ async function buildWikiCatalogBlocks(related: WikiRelatedData) {
   );
 }
 
-function getCatalogCollectionLabel(title: string): string {
-  const match = title.match(/^All\s+(.+?)\s+in\s+.+$/i);
-  return normalizeText(match?.[1]) ?? title;
-}
-
 function normalizeWikiImageUrls(value?: string[] | null): string[] {
   if (!Array.isArray(value)) return [];
   return value
@@ -391,22 +501,14 @@ function normalizeWikiImageUrls(value?: string[] | null): string[] {
 function WikiCatalogCta({
   href,
   title,
-  count,
-  gameName,
   imageUrls
 }: {
   href: string;
   title: string;
-  count?: number | null;
-  gameName: string;
   imageUrls?: string[] | null;
 }) {
-  const collectionLabel = getCatalogCollectionLabel(title);
-  const formattedCount = typeof count === "number" && Number.isFinite(count) ? count.toLocaleString("en-US") : null;
   const images = normalizeWikiImageUrls(imageUrls);
-  const label = formattedCount
-    ? `Check all ${formattedCount} ${collectionLabel} in ${gameName}`
-    : `Check all ${collectionLabel} in ${gameName}`;
+  const label = normalizeText(title) ?? "Open catalog";
 
   return (
     <Link
@@ -448,41 +550,10 @@ function buildRankLinks(related: WikiRelatedData): WikiLinkItem[] {
   }));
 }
 
-function buildDeveloperRows(page: WikiPageContent): WikiRow[] {
-  const creatorUrl = buildCreatorUrl(page);
-  const socialLinks = extractSocialLinks(page.social_links);
-  const rows: Array<WikiRow | null> = [
-    normalizeText(page.universe_creator_name)
-      ? {
-          label: "Creator",
-          value: creatorUrl ? (
-            <a href={creatorUrl} target="_blank" rel="noopener noreferrer" className="text-accent underline-offset-4 hover:underline">
-              {page.universe_creator_name}
-            </a>
-          ) : (
-            page.universe_creator_name
-          )
-        }
-      : null,
-    normalizeText(page.universe_creator_type) ? { label: "Creator type", value: formatKeyLabel(page.universe_creator_type ?? "") } : null,
-    yesNo(page.universe_creator_has_verified_badge) ? { label: "Verified creator", value: yesNo(page.universe_creator_has_verified_badge) } : null,
-    normalizeText(page.universe_group_name) ? { label: "Group", value: page.universe_group_name } : null,
-    socialLinks.length
-      ? {
-          label: "Official links",
-          value: (
-            <span className="inline-flex flex-wrap gap-x-3 gap-y-1">
-              {socialLinks.map((link) => (
-                <a key={`${link.label}-${link.url}`} href={link.url} target="_blank" rel="noopener noreferrer" className="text-accent underline-offset-4 hover:underline">
-                  {link.label}
-                </a>
-              ))}
-            </span>
-          )
-        }
-      : null
-  ];
-  return rows.filter((row): row is WikiRow => Boolean(row));
+function rankBadgeIconForRank(rank: number): IconType {
+  if (rank === 1) return FaCrown;
+  if (rank === 2) return FaTrophy;
+  return FaMedal;
 }
 
 function mediaToDisplayItems(page: WikiPageContent, related: WikiRelatedData): WikiMediaItem[] {
@@ -598,7 +669,7 @@ function developerGameLinks(related: WikiRelatedData): WikiLinkItem[] {
 }
 
 async function renderTipsNodes(tipsMd?: string | null): Promise<ReactNode[] | null> {
-  const tips = normalizeText(tipsMd);
+  const tips = normalizeMarkdownText(tipsMd);
   if (!tips) return null;
   const html = await renderMarkdown(tips, { paragraphizeLineBreaks: true });
   return renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix: "wiki-tips" });
@@ -617,23 +688,37 @@ export async function loadWikiDetailPageData(slug: string): Promise<WikiDetailPa
 }
 
 export function renderWikiIndexPage({ pages, total }: WikiIndexPageData) {
-  const links: WikiLinkItem[] = pages.map((page) => ({
-    href: `/wiki/${page.slug}`,
-    title: page.title,
-    description: page.meta_description ?? null,
-    meta: formatUpdated(page.content_updated_at ?? page.updated_at ?? page.published_at ?? page.created_at) ?? null
-  }));
+  const latest = pages.reduce<Date | null>((latestDate, page) => {
+    const candidate = page.content_updated_at ?? page.updated_at ?? page.published_at ?? page.created_at;
+    if (!candidate) return latestDate;
+    const candidateDate = new Date(candidate);
+    if (Number.isNaN(candidateDate.getTime())) return latestDate;
+    if (!latestDate || candidateDate > latestDate) return candidateDate;
+    return latestDate;
+  }, null);
+  const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
 
   return (
-    <div className="mx-auto max-w-5xl space-y-10">
-      <header className="space-y-4 border-b border-border/60 pb-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted">Roblox Wiki</p>
-        <h1 className="mb-0 text-4xl font-semibold leading-tight text-foreground md:text-5xl">Roblox game wiki pages</h1>
-        <p className="max-w-2xl text-base leading-7 text-muted">{WIKI_DESCRIPTION}</p>
-        {total ? <p className="text-sm font-medium text-foreground">{total} wiki page{total === 1 ? "" : "s"} published</p> : null}
+    <div className="space-y-10">
+      <header className="space-y-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Roblox Wiki Hub</p>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
+          Roblox wiki hubs built from live universe data
+        </h1>
+        <p className="max-w-2xl text-base text-muted md:text-lg">{WIKI_DESCRIPTION}</p>
+        <IndexPageStats
+          items={[
+            { label: `${total} wiki page${total === 1 ? "" : "s"} tracked`, icon: "wiki", tone: "accent" },
+            ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
+          ]}
+        />
       </header>
-      {links.length ? (
-        <WikiLinkList items={links} />
+      {pages.length ? (
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {pages.map((page) => (
+            <WikiCard key={page.id} page={page} />
+          ))}
+        </div>
       ) : (
         <div className="rounded-xl border border-dashed border-border/60 bg-surface/40 p-8 text-center text-sm text-muted">
           No wiki pages have been published yet.
@@ -662,28 +747,23 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const controlRows = parseControls(page.controls_json).map((row) => ({ label: row.label, value: row.value }));
   const tipsNodes = await renderTipsNodes(page.tips_md);
   const catalogBlocks = await buildWikiCatalogBlocks(related);
-  const rankLinks = buildRankLinks(related);
-  const developerRows = buildDeveloperRows(page);
   const developerLinks = developerGameLinks(related);
-  const updated = page.content_updated_at ?? page.updated_at ?? page.published_at ?? page.created_at ?? null;
-  const eventCounts = related.eventSummary?.counts;
-  const eventRows: WikiRow[] = eventCounts
-    ? ([
-        { label: "Current events", value: formatNumber(eventCounts.current) ?? "0" },
-        { label: "Upcoming events", value: formatNumber(eventCounts.upcoming) ?? "0" },
-        { label: "Past events", value: formatNumber(eventCounts.past) ?? "0" },
-        related.eventSummary?.featured
-          ? {
-              label: "Featured event",
-              value: compactMeta([related.eventSummary.featured.name, related.eventSummary.featured.timeLabel]) ?? related.eventSummary.featured.name
-            }
-          : null
-      ] as Array<WikiRow | null>).filter((row): row is WikiRow => Boolean(row))
-    : [];
+  const creatorUrl = buildCreatorUrl(page);
+  const creatorLabel = normalizeText(page.universe_creator_name) ?? "Developer";
+  const socialLinks = buildSocialLinkButtons(extractSocialLinks(page.social_links), creatorLabel);
+  const heroRankingBadges = related.rankingBadges
+    .filter((badge) => badge.rank >= 1 && badge.rank <= 3)
+    .sort((a, b) => a.rank - b.rank)
+    .slice(0, 3);
+  const published = page.published_at ?? page.created_at ?? null;
+  const updated = page.content_updated_at ?? page.updated_at ?? published;
+  const publishedIso = formatIsoDate(published);
+  const updatedIso = formatIsoDate(updated);
+  const canonicalUrl = `${SITE_URL}/wiki/${page.slug}`;
   const breadcrumbs = [
     { name: "Home", url: SITE_URL },
     { name: "Wiki", url: `${SITE_URL}/wiki` },
-    { name: page.title, url: `${SITE_URL}/wiki/${page.slug}` }
+    { name: page.title, url: canonicalUrl }
   ];
   const robloxGameUrl = page.universe_root_place_id ? `${ROBLOX_BASE_URL}/games/${page.universe_root_place_id}` : null;
   const heroAgeRating = formatAgeRating(page.universe_age_rating);
@@ -717,6 +797,8 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
           fallbackIcon: related.eventsPage.universe?.icon_url ?? normalizeImageSrc(page.icon_url),
           eventName: related.eventSummary?.featured?.name ?? null,
           eventTimeLabel: related.eventSummary?.featured?.timeLabel ?? null,
+          eventStartUtc: related.eventSummary?.featured?.startUtc ?? null,
+          eventEndUtc: related.eventSummary?.featured?.endUtc ?? null,
           status: (related.eventSummary?.featured?.status ?? "none") as EventsPageCardProps["status"],
           counts: related.eventSummary?.counts ?? { upcoming: 0, current: 0, past: 0 },
           updatedLabel: formatUpdated(related.eventsPage.updated_at || related.eventsPage.published_at || related.eventsPage.created_at)
@@ -750,22 +832,65 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
 
             <div className="min-w-0 max-w-3xl space-y-3">
               <h1 className="mb-0 text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
-              {formatUpdated(updated) ? <p className="text-sm font-medium text-muted">Updated {formatUpdated(updated)}</p> : null}
-              <p className="max-w-3xl text-base leading-7 text-muted md:text-lg">{summary}</p>
-              <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
-                {page.universe_creator_name ? <span>By {page.universe_creator_name}</span> : null}
-                {heroAgeRating ? <span>Age {heroAgeRating}</span> : null}
+              {formatUpdated(updated) ? (
+                <p className="inline-flex items-center gap-2 text-sm font-medium text-muted">
+                  <FiClock className="h-4 w-4 shrink-0" aria-hidden />
+                  <span>Updated {formatUpdated(updated)}</span>
+                </p>
+              ) : null}
+              {summary ? <p className="max-w-3xl text-base leading-7 text-muted md:text-lg">{summary}</p> : null}
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted">
+                {page.universe_creator_name ? (
+                  <span>
+                    By{" "}
+                    {creatorUrl ? (
+                      <a href={creatorUrl} target="_blank" rel="noopener noreferrer" className="text-foreground underline-offset-4 transition hover:text-accent hover:underline">
+                        {page.universe_creator_name}
+                      </a>
+                    ) : (
+                      page.universe_creator_name
+                    )}
+                  </span>
+                ) : null}
+                {page.universe_creator_name && heroRankingBadges.length ? <span aria-hidden className="text-muted/60">.</span> : null}
+                {heroRankingBadges.map((badge) => {
+                  const Icon = rankBadgeIconForRank(badge.rank);
+                  const label = `#${badge.rank} on ${badge.list_title}`;
+                  return (
+                    <Link
+                      key={`${badge.list_id}-${badge.rank}`}
+                      href={`/lists/${badge.list_slug}`}
+                      prefetch={false}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-border/60 px-2.5 py-1 text-xs font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                    >
+                      <Icon className="h-3.5 w-3.5 text-accent" aria-hidden />
+                      <span>{label}</span>
+                    </Link>
+                  );
+                })}
               </div>
+              {robloxGameUrl ? (
+                <div className="pt-2 lg:hidden">
+                  <a
+                    href={robloxGameUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-xl bg-accent px-5 py-2 text-sm font-semibold text-background transition hover:opacity-90"
+                  >
+                    Play on Roblox
+                  </a>
+                </div>
+              ) : null}
             </div>
           </div>
 
           {robloxGameUrl ? (
-            <div className="flex flex-wrap gap-3 lg:justify-end">
+            <div className="hidden flex-wrap gap-3 lg:flex lg:shrink-0 lg:justify-end">
               <a
                 href={robloxGameUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-accent px-5 py-2 text-sm font-semibold text-background transition hover:opacity-90"
+                className="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-xl bg-accent px-5 py-2 text-sm font-semibold text-background transition hover:opacity-90"
               >
                 Play on Roblox
               </a>
@@ -859,8 +984,6 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                     <WikiCatalogCta
                       href={`/catalog/${catalogPage.code}`}
                       title={catalogPage.title}
-                      count={catalogPage.wiki_item_count}
-                      gameName={universeLabel}
                       imageUrls={catalogPage.wiki_image_urls}
                     />
                   </section>
@@ -870,64 +993,52 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
           ) : null}
 
           {controlRows.length ? (
-            <WikiSection title="Controls" description="Device controls and input notes configured for this wiki page.">
-              <WikiRows rows={controlRows} />
-            </WikiSection>
+            <section className="article-content md-copy-scope game-copy min-w-0 border-t border-border/60 pt-8">
+              <h2>Controls</h2>
+              {controlRows.map((row) => (
+                <p key={row.label}>
+                  <strong>{row.label}:</strong> {row.value}
+                </p>
+              ))}
+            </section>
           ) : null}
 
           {tipsNodes?.length ? (
-            <WikiSection title="Features And Tips" description="Short gameplay notes for new and returning players.">
-              <div className="article-content md-copy-scope rounded-xl border border-border/60 bg-surface/40 p-5 text-sm leading-7 text-foreground">
-                {tipsNodes}
+            <section className="article-content md-copy-scope game-copy min-w-0 border-t border-border/60 pt-8">
+              {tipsNodes}
+            </section>
+          ) : null}
+
+          {socialLinks.length ? (
+            <section className="min-w-0 space-y-4 border-t border-border/60 pt-8">
+              <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">{creatorLabel} Social Accounts</h2>
+              <p className="text-base leading-7 text-muted md:text-lg">Here are the official social media platforms of {universeLabel} developers.</p>
+              <div className="flex flex-wrap gap-3">
+                {socialLinks.map(({ key, url, label, Icon, platform }) => {
+                  return (
+                    <a
+                      key={key}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-analytics-event="social_follow_click"
+                      data-analytics-platform={platform}
+                      data-analytics-content-type="wiki"
+                      data-analytics-item-id={page.slug}
+                      className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                    >
+                      <Icon className="h-4 w-4" aria-hidden />
+                      <span>{label}</span>
+                    </a>
+                  );
+                })}
               </div>
-            </WikiSection>
-          ) : null}
-
-          {eventRows.length ? (
-            <WikiSection title="Events" description="Current and historical event coverage from the Roblox event data we track.">
-              <WikiRows rows={eventRows} />
-            </WikiSection>
-          ) : null}
-
-          {related.badges.length ? (
-            <WikiSection title="Badges" description="Badges tracked for this Roblox universe.">
-              <WikiTable columns={["Badge", "Awarded", "Rarity"]} rows={badgeRows(related.badges)} />
-            </WikiSection>
-          ) : null}
-
-          {related.gamePasses.length ? (
-            <WikiSection title="Game Passes" description="Game passes and purchase details from the Roblox universe data.">
-              <WikiTable columns={["Game Pass", "Price", "For Sale", "Sales"]} rows={gamePassRows(related.gamePasses)} />
-            </WikiSection>
-          ) : null}
-
-          {related.servers.length ? (
-            <WikiSection title="Servers" description="Recently fetched public server details. This section appears only when server data exists.">
-              <WikiTable columns={["Server", "Region", "Players", "Ping", "FPS", "Fetched"]} rows={serverRows(related.servers)} />
-            </WikiSection>
-          ) : null}
-
-          {mediaToDisplayItems(page, related).length ? (
-            <WikiSection title="Media" description="Thumbnails, screenshots, and videos available from the Roblox universe data.">
-              {renderMediaGrid(page, related)}
-            </WikiSection>
-          ) : null}
-
-          {developerRows.length ? (
-            <WikiSection title="Developer" description="Creator and official link data connected to the Roblox universe.">
-              <WikiRows rows={developerRows} />
-            </WikiSection>
+            </section>
           ) : null}
 
           {developerLinks.length ? (
             <WikiSection title="More From This Developer" description="Other Roblox experiences found under the same creator.">
               <WikiLinkList items={developerLinks} />
-            </WikiSection>
-          ) : null}
-
-          {rankLinks.length ? (
-            <WikiSection title="Rankings" description="Bloxodes lists where this game currently appears near the top.">
-              <WikiLinkList items={rankLinks} />
             </WikiSection>
           ) : null}
 
@@ -1060,9 +1171,24 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
               "@context": "https://schema.org",
               "@type": "WebPage",
               name: page.title,
+              headline: page.title,
               description: summary,
-              url: `${SITE_URL}/wiki/${page.slug}`,
+              url: canonicalUrl,
+              ...(publishedIso ? { datePublished: publishedIso } : {}),
+              ...(updatedIso ? { dateModified: updatedIso } : {}),
+              ...(heroImage ? { image: heroImage } : {}),
+              inLanguage: "en-US",
+              isAccessibleForFree: true,
               isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+              publisher: {
+                "@type": "Organization",
+                name: SITE_NAME,
+                url: SITE_URL,
+                logo: {
+                  "@type": "ImageObject",
+                  url: `${SITE_URL}/Bloxodes-dark.png`
+                }
+              },
               about: {
                 "@type": "VideoGame",
                 name: universeLabel,

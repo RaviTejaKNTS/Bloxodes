@@ -155,7 +155,7 @@ export function FreeItemsBrowser({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="catalog-surface space-y-6">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:flex-row md:items-end">
         <div className="flex-1 space-y-2">
           <label htmlFor="free-items-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
@@ -168,7 +168,7 @@ export function FreeItemsBrowser({
             value={queryInput}
             onChange={(event) => setQueryInput(event.target.value)}
             placeholder="Search item name, creator, or ID"
-            className="w-full rounded-lg border-0 bg-surface/60 px-4 py-2 text-sm text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-accent/40"
+            className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-accent/40"
           />
         </div>
         <div className="w-full space-y-2 md:w-56">
@@ -180,7 +180,7 @@ export function FreeItemsBrowser({
             name="sort"
             value={sortInput}
             onChange={(event) => setSortInput(event.target.value as FreeItemsSortKey)}
-            className="w-full rounded-lg border-0 bg-surface/60 px-4 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
+            className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
           >
             {SORT_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
@@ -192,7 +192,7 @@ export function FreeItemsBrowser({
         <div className="flex items-center gap-3">
           <button
             type="submit"
-            className="inline-flex items-center justify-center rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-md bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
           >
             Apply
           </button>
@@ -212,7 +212,7 @@ export function FreeItemsBrowser({
       {error ? <p className="text-sm font-semibold text-rose-400">{error}</p> : null}
 
       {!items.length ? (
-        <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
           No free items match those filters right now.
         </div>
       ) : (

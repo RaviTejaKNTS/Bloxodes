@@ -221,13 +221,13 @@ export function GrowGardenCropValueCalculatorClient({
   }
 
   return (
-    <div className="space-y-8">
+    <div className="tool-surface space-y-8">
       <div className="grid gap-6 lg:grid-cols-[2fr_1.2fr]">
         <section className="space-y-6">
           <div className="rounded-2xl border border-border/70 bg-surface/50 p-5 shadow-soft">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="text-lg font-semibold text-foreground">Step 1 · Choose a crop</h2>
-              <div className="inline-flex overflow-hidden rounded-full border border-border/70 bg-surface text-xs font-semibold shadow-soft">
+              <div className="inline-flex overflow-hidden rounded-md border border-border/70 bg-surface text-xs font-semibold shadow-soft">
                 <button
                   type="button"
                   onClick={() => handleBaseModeChange("average")}

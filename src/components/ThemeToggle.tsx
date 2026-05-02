@@ -4,6 +4,7 @@ import { useEffect, useState, useTransition } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { updateThemePreference } from "@/app/actions/preferences";
 import { THEME_COOKIE, type Theme, normalizeTheme } from "@/lib/theme";
+import { cn } from "@/lib/utils";
 
 function readThemeCookie(): Theme | null {
   if (typeof document === "undefined") return null;
@@ -33,7 +34,7 @@ function applyTheme(theme: Theme) {
   root.dataset.theme = theme;
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({ className }: { className?: string }) {
   const [theme, setTheme] = useState<Theme>("dark");
   const [hydrated, setHydrated] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -65,7 +66,10 @@ export function ThemeToggle() {
       aria-label={label}
       title={label}
       disabled={isPending}
-      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-surface-muted text-foreground shadow-soft transition hover:-translate-y-[1px] hover:border-border/40 hover:bg-surface"
+      className={cn(
+        "inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-surface-muted text-foreground shadow-soft transition hover:-translate-y-[1px] hover:border-border/40 hover:bg-surface",
+        className
+      )}
     >
       <span className="sr-only">{label}</span>
       {hydrated ? (

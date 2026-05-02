@@ -20,9 +20,9 @@ import type { QuizListEntry } from "@/lib/quizzes";
 
 const WIKI_REVALIDATE_SECONDS = 3600;
 const WIKI_SELECT_FIELDS =
-  "id, slug, title, seo_title, meta_description, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at, content_updated_at, universe_root_place_id, universe_name, universe_display_name, universe_slug, universe_description, universe_game_description_md, universe_creator_id, universe_creator_name, universe_creator_type, universe_creator_has_verified_badge, universe_group_id, universe_group_name, universe_group_has_verified_badge, universe_genre, universe_genre_l1, universe_genre_l2, universe_age_rating, universe_avatar_type, desktop_enabled, mobile_enabled, tablet_enabled, console_enabled, vr_enabled, voice_chat_enabled, price, private_server_price_robux, create_vip_servers_allowed, max_players, server_size, playing, visits, favorites, likes, dislikes, icon_url, thumbnail_urls, social_links, created_at_api, updated_at_api, universe_updated_at";
+  "id, slug, title, seo_title, meta_description, cover_image, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at, content_updated_at, universe_root_place_id, universe_name, universe_display_name, universe_slug, universe_description, universe_game_description_md, universe_creator_id, universe_creator_name, universe_creator_type, universe_creator_has_verified_badge, universe_group_id, universe_group_name, universe_group_has_verified_badge, universe_genre, universe_genre_l1, universe_genre_l2, universe_age_rating, universe_avatar_type, desktop_enabled, mobile_enabled, tablet_enabled, console_enabled, vr_enabled, voice_chat_enabled, price, private_server_price_robux, create_vip_servers_allowed, max_players, server_size, playing, visits, favorites, likes, dislikes, icon_url, thumbnail_urls, social_links, created_at_api, updated_at_api, universe_updated_at";
 const WIKI_FALLBACK_FIELDS =
-  "id, slug, title, seo_title, meta_description, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at";
+  "id, slug, title, seo_title, meta_description, cover_image, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at";
 
 export type WikiPageContent = {
   id: string;
@@ -30,6 +30,7 @@ export type WikiPageContent = {
   title: string;
   seo_title?: string | null;
   meta_description?: string | null;
+  cover_image?: string | null;
   universe_id?: number | null;
   controls_json?: unknown;
   tips_md?: string | null;
@@ -86,6 +87,7 @@ export type WikiListEntry = Pick<
   | "slug"
   | "title"
   | "meta_description"
+  | "cover_image"
   | "universe_id"
   | "icon_url"
   | "thumbnail_urls"
@@ -241,9 +243,10 @@ export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
       const supabase = supabaseAdmin();
       const { data, error } = await supabase
         .from("wiki_pages_view")
-        .select("id, slug, title, meta_description, universe_id, icon_url, thumbnail_urls, published_at, created_at, updated_at, content_updated_at")
+        .select("id, slug, title, meta_description, cover_image, universe_id, icon_url, thumbnail_urls, published_at, created_at, updated_at, content_updated_at")
         .eq("is_published", true)
-        .order("content_updated_at", { ascending: false });
+        .order("content_updated_at", { ascending: false })
+        .order("id", { ascending: true });
 
       if (!error && data) {
         return (data ?? []) as WikiListEntry[];
@@ -251,9 +254,10 @@ export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
 
       const { data: fallback, error: fallbackError } = await supabase
         .from("wiki_pages")
-        .select("id, slug, title, meta_description, universe_id, published_at, created_at, updated_at")
+        .select("id, slug, title, meta_description, cover_image, universe_id, published_at, created_at, updated_at")
         .eq("is_published", true)
-        .order("updated_at", { ascending: false });
+        .order("updated_at", { ascending: false })
+        .order("id", { ascending: true });
 
       if (fallbackError) {
         console.error("Error fetching wiki index", fallbackError);

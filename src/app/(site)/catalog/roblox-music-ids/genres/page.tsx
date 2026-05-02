@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates } from "@/lib/seo";
 import {
@@ -72,11 +73,9 @@ export default async function MusicIdGenresPage() {
         <p className="max-w-2xl text-base text-muted md:text-lg">
           Jump into a genre to explore every Roblox music ID we have tagged for that sound.
         </p>
-        <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-          <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-            {total.toLocaleString("en-US")} genres tracked
-          </span>
-        </div>
+        <IndexPageStats
+          items={[{ label: `${total.toLocaleString("en-US")} genres tracked`, icon: "music", tone: "accent" }]}
+        />
       </header>
 
       <CatalogAdSlot />

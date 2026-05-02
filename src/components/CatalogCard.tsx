@@ -6,22 +6,19 @@ const TONE_STYLES = {
     chip: "border-accent/30 bg-accent/10 text-accent",
     ring: "border-accent/20",
     text: "text-accent",
-    dot: "bg-accent",
-    glow: "bg-gradient-to-br from-accent/25 via-transparent to-transparent"
+    dot: "bg-accent"
   },
   emerald: {
     chip: "border-emerald-400/30 bg-emerald-500/10 text-emerald-600",
     ring: "border-emerald-400/30",
     text: "text-emerald-600",
-    dot: "bg-emerald-400",
-    glow: "bg-gradient-to-br from-emerald-400/25 via-transparent to-transparent"
+    dot: "bg-emerald-400"
   },
   amber: {
     chip: "border-amber-400/30 bg-amber-400/15 text-amber-600",
     ring: "border-amber-400/30",
     text: "text-amber-600",
-    dot: "bg-amber-400",
-    glow: "bg-gradient-to-br from-amber-400/30 via-transparent to-transparent"
+    dot: "bg-amber-400"
   }
 } as const;
 
@@ -71,34 +68,27 @@ export function CatalogCard({
 
   return (
     <Link href={href} className="group block h-full">
-      <article className="relative flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-border/70 bg-gradient-to-br from-surface to-background shadow-soft transition duration-300 hover:-translate-y-1 hover:border-accent/70 hover:shadow-xl">
-        <div
-          className={`pointer-events-none absolute -right-10 top-[-20px] h-44 w-44 rounded-full ${toneStyles.glow} blur-3xl`}
-          aria-hidden
-        />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_12%,rgba(255,255,255,0.35),transparent_45%)]" aria-hidden />
-
-        <div className="relative flex flex-1 flex-col gap-4 p-5">
+      <article className="flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55">
+        <div className="flex flex-1 flex-col gap-4 p-4">
           <div className="flex items-start gap-4">
-            <div className={`relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-2xl border ${toneStyles.ring} bg-background/70 shadow-inner`}>
+            <div className={`relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border ${toneStyles.ring} bg-background/70`}>
               {normalizedCover ? (
                 <Image
                   src={normalizedCover}
                   alt={title}
                   fill
                   sizes="80px"
-                  className="object-cover transition duration-500 group-hover:scale-105"
+                  className="object-cover"
                 />
               ) : (
                 <div className={`flex h-full w-full items-center justify-center px-2 text-center text-[11px] font-semibold uppercase tracking-[0.2em] ${toneStyles.text}`}>
                   {tileText}
                 </div>
               )}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent" />
             </div>
 
             <div className="min-w-0 space-y-2">
-              <h3 className="text-xl font-semibold leading-snug text-foreground transition group-hover:text-accent line-clamp-2">
+              <h3 className="text-lg font-semibold leading-snug text-foreground transition group-hover:text-accent line-clamp-2">
                 {title}
               </h3>
               <p className="text-sm text-muted line-clamp-2">{description}</p>
@@ -106,17 +96,17 @@ export function CatalogCard({
           </div>
 
           {showMetric ? (
-            <div className={`flex flex-wrap items-end justify-between gap-4 rounded-2xl border ${toneStyles.ring} bg-background/60 px-4 py-3`}>
+            <div className={`flex flex-wrap items-end justify-between gap-4 rounded-md border ${toneStyles.ring} bg-background/60 px-3 py-2.5`}>
               <div className="space-y-1">
                 <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted">Catalog size</p>
-                <p className="text-3xl font-semibold text-foreground">{formattedValue}</p>
+                <p className="text-2xl font-semibold text-foreground">{formattedValue}</p>
               </div>
               <div className="text-right">
                 <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${toneStyles.text}`}>{metricLabel}</p>
               </div>
             </div>
           ) : updatedLabel ? (
-            <div className={`flex items-center gap-2 rounded-2xl border ${toneStyles.ring} bg-background/60 px-4 py-3 text-sm text-muted`}>
+            <div className={`flex items-center gap-2 rounded-md border ${toneStyles.ring} bg-background/60 px-3 py-2 text-sm text-muted`}>
               <span className={`h-2 w-2 rounded-full ${toneStyles.dot}`} aria-hidden />
               <span>Updated {updatedLabel}</span>
             </div>

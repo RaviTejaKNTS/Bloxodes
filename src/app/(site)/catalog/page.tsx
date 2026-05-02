@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { CatalogCard } from "@/components/CatalogCard";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
 import { formatUpdatedLabel } from "@/lib/updated-label";
@@ -128,7 +129,7 @@ export default async function CatalogIndexPage() {
   const { genericCards, groupedCatalogs, total, refreshedLabel } = await buildCatalogCards();
 
   return (
-    <div className="space-y-10">
+    <div className="catalog-surface space-y-10">
       <header className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Catalog</p>
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
@@ -137,16 +138,12 @@ export default async function CatalogIndexPage() {
         <p className="max-w-2xl text-base text-muted md:text-lg">
           Browse Roblox catalog pages for free items, music IDs, admin commands, promo codes, decal IDs, and more.
         </p>
-        <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-          <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-            {total} catalog hub{total === 1 ? "" : "s"}
-          </span>
-          {refreshedLabel ? (
-            <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-              Updated {refreshedLabel}
-            </span>
-          ) : null}
-        </div>
+        <IndexPageStats
+          items={[
+            { label: `${total} catalog hub${total === 1 ? "" : "s"}`, icon: "catalog", tone: "accent" },
+            ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
+          ]}
+        />
       </header>
 
       {genericCards.length ? (
@@ -188,12 +185,12 @@ export default async function CatalogIndexPage() {
                 ) : null}
               </div>
 
-              <div className="divide-y divide-border/60 rounded-lg border border-border/60 bg-surface/50">
+              <div className="divide-y divide-border/60 rounded-lg border border-border/70 bg-surface/50">
                 {group.items.map((card, itemIndex) => (
                   <Link
                     key={card.id}
                     href={card.href}
-                    className="block px-5 py-4 transition hover:bg-surface-muted/60"
+                    className="block px-5 py-4 transition hover:bg-surface-muted/45"
                     data-analytics-event="select_item"
                     data-analytics-item-list-name={`catalog_index_${group.gameName}`}
                     data-analytics-item-id={card.id}

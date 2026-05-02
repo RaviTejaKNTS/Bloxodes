@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates } from "@/lib/seo";
 import {
@@ -97,14 +98,12 @@ export default async function MusicIdArtistsPaginatedPage({ params }: PageProps)
       <header className="space-y-2">
         <MusicBreadcrumb items={breadcrumbNavItems} />
         <h1 className="text-3xl font-semibold text-foreground">Roblox music ID artists</h1>
-        <div className="flex flex-wrap items-center gap-3 text-xs text-muted">
-          <span className="rounded-full bg-accent/10 px-3 py-1 font-semibold uppercase tracking-wide text-accent">
-            {total.toLocaleString("en-US")} artists tracked
-          </span>
-          <span className="rounded-full bg-surface-muted px-3 py-1 font-semibold text-muted">
-            Page {pageNumber} of {totalPages}
-          </span>
-        </div>
+        <IndexPageStats
+          items={[
+            { label: `${total.toLocaleString("en-US")} artists tracked`, icon: "music", tone: "accent" },
+            { label: `Page ${pageNumber} of ${totalPages}` }
+          ]}
+        />
       </header>
 
       <CatalogAdSlot />

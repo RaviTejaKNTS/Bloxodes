@@ -1,8 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import Link from "next/link";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { CatalogSelectNav } from "@/components/CatalogSelectNav";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { ForgeCatalogView } from "../the-forge/ForgeCatalogView";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -559,18 +559,43 @@ async function readGrowGardenDataset(
   if (Array.isArray(parsed)) {
     return {
       meta: null,
-      items: parsed
-        .map((row) => normalizeGrowGardenItem(config.slug, row))
-        .filter(Boolean) as GrowGardenCatalogItem[]
+      items: uniquifyGrowGardenItemIds(
+        parsed
+          .map((row) => normalizeGrowGardenItem(config.slug, row))
+          .filter(Boolean) as GrowGardenCatalogItem[]
+      )
     };
   }
 
   return {
     meta: parsed.meta ?? null,
-    items: (parsed.items ?? [])
-      .map((row) => normalizeGrowGardenItem(config.slug, row))
-      .filter(Boolean) as GrowGardenCatalogItem[]
+    items: uniquifyGrowGardenItemIds(
+      (parsed.items ?? [])
+        .map((row) => normalizeGrowGardenItem(config.slug, row))
+        .filter(Boolean) as GrowGardenCatalogItem[]
+    )
   };
+}
+
+function uniquifyGrowGardenItemIds(items: GrowGardenCatalogItem[]): GrowGardenCatalogItem[] {
+  const seen = new Map<string, number>();
+  const used = new Set<string>();
+
+  return items.map((item) => {
+    const baseId = item.id || "item";
+    const occurrence = (seen.get(baseId) ?? 0) + 1;
+    seen.set(baseId, occurrence);
+
+    let nextId = occurrence === 1 ? baseId : `${baseId}-${occurrence}`;
+    let suffix = occurrence;
+    while (used.has(nextId)) {
+      suffix += 1;
+      nextId = `${baseId}-${suffix}`;
+    }
+    used.add(nextId);
+
+    return nextId === item.id ? item : { ...item, id: nextId };
+  });
 }
 
 function resolveDataUpdatedAt(meta: GrowGardenDatasetMeta | null): string | null {
@@ -637,54 +662,24 @@ export async function loadGrowGardenCatalogDataset(config: GrowGardenCatalogConf
   }
 }
 
-export function GrowGardenCatalogNav({ activeSlug }: { activeSlug: string }) {
+export function GrowGardenCatalogNav({
+  activeSlug,
+  className
+}: {
+  activeSlug: string;
+  className?: string;
+}) {
   return (
-    <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-      {GROW_GARDEN_CATALOGS.map((entry) => {
-        const isActive = entry.slug === activeSlug;
-        const cardClasses = `group relative overflow-hidden rounded-2xl border px-5 py-4 transition ${
-          isActive
-            ? "border-accent/70 bg-gradient-to-br from-accent/15 via-surface to-background shadow-soft"
-            : "border-border/60 bg-surface/80 hover:-translate-y-0.5 hover:border-accent/60 hover:shadow-soft"
-        }`;
-
-        const card = (
-          <article className={cardClasses} aria-current={isActive ? "page" : undefined}>
-            <span
-              aria-hidden
-              className={`absolute inset-x-0 top-0 h-1 ${
-                isActive ? "bg-accent" : "bg-accent/30 group-hover:bg-accent/60"
-              }`}
-            />
-            <div className="flex h-full flex-col gap-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="text-lg font-semibold text-foreground">{entry.label}</p>
-                {isActive ? (
-                  <span className="rounded-full bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
-                    Active
-                  </span>
-                ) : null}
-              </div>
-              <p className="text-sm text-muted">{entry.navDescription}</p>
-            </div>
-          </article>
-        );
-
-        if (isActive) {
-          return (
-            <div key={entry.slug} className="h-full" aria-current="page">
-              {card}
-            </div>
-          );
-        }
-
-        return (
-          <Link key={entry.slug} href={buildGrowGardenCatalogPath(entry.slug)} className="block h-full">
-            {card}
-          </Link>
-        );
-      })}
-    </section>
+    <CatalogSelectNav
+      label="Catalog page"
+      value={activeSlug}
+      className={className}
+      options={GROW_GARDEN_CATALOGS.map((entry) => ({
+        value: entry.slug,
+        label: entry.label,
+        href: buildGrowGardenCatalogPath(entry.slug)
+      }))}
+    />
   );
 }
 
@@ -698,20 +693,26 @@ export function GrowGardenBreadcrumb({
   return <PageBreadcrumb items={items} className={className} />;
 }
 
-function GrowGardenSectionNav({ sections }: { sections: Array<{ id: string; label: string; count: number }> }) {
+function GrowGardenSectionNav({
+  sections,
+  className
+}: {
+  sections: Array<{ id: string; label: string; count: number }>;
+  className?: string;
+}) {
   if (!sections.length) return null;
   return (
-    <nav aria-label="Jump to section" className="flex flex-wrap gap-2">
-      {sections.map((section) => (
-        <a
-          key={section.id}
-          href={`#${section.id}`}
-          className="rounded-full border border-border/60 bg-surface/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-muted transition hover:border-accent/70 hover:text-accent"
-        >
-          {section.label} ({section.count})
-        </a>
-      ))}
-    </nav>
+    <CatalogSelectNav
+      label="Jump to section"
+      placeholder="Choose a section"
+      className={className}
+      options={sections.map((section) => ({
+        value: section.id,
+        label: section.label,
+        count: section.count,
+        targetId: section.id
+      }))}
+    />
   );
 }
 
@@ -829,7 +830,7 @@ export function renderGrowGardenCatalogPage({
   }));
 
   return (
-    <div className="space-y-10">
+    <div className="catalog-surface space-y-10">
       <header className="space-y-4">
         <GrowGardenBreadcrumb items={breadcrumbNavItems} />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{pageTitle}</h1>
@@ -841,7 +842,10 @@ export function renderGrowGardenCatalogPage({
 
         <CatalogAdSlot />
 
-        {sectionNav.length > 1 ? <GrowGardenSectionNav sections={sectionNav} /> : null}
+        <div className="grid gap-4 md:grid-cols-2 md:items-end">
+          <GrowGardenCatalogNav activeSlug={config.slug} className="max-w-none" />
+          {sectionNav.length > 1 ? <GrowGardenSectionNav sections={sectionNav} className="max-w-none" /> : null}
+        </div>
 
         <ForgeCatalogView sections={groupedSections} config={config} />
 
@@ -862,8 +866,6 @@ export function renderGrowGardenCatalogPage({
             />
           </>
         ) : null}
-
-        <GrowGardenCatalogNav activeSlug={config.slug} />
       </section>
 
       {contentHtml?.id ? (

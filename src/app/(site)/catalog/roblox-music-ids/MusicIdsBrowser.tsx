@@ -142,7 +142,7 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
   }
 
   return (
-    <div className="space-y-6">
+    <div className="catalog-surface space-y-6">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:flex-row md:items-end">
         <div className="flex-1 space-y-2">
           <label htmlFor="music-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
@@ -155,7 +155,7 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
             value={queryInput}
             onChange={(event) => setQueryInput(event.target.value)}
             placeholder="Search title, artist, album, genre, or ID"
-            className="w-full rounded-lg border-0 bg-surface/60 px-4 py-2 text-sm text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-accent/40"
+            className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-accent/40"
           />
         </div>
         <div className="w-full space-y-2 md:w-56">
@@ -167,7 +167,7 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
             name="sort"
             value={sortInput}
             onChange={(event) => setSortInput(event.target.value as MusicSortKey)}
-            className="w-full rounded-lg border-0 bg-surface/60 px-4 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
+            className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
           >
             {SORT_OPTIONS.map((option) => (
               <option key={option.value} value={option.value}>
@@ -179,7 +179,7 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
         <div className="flex items-center gap-3">
           <button
             type="submit"
-            className="inline-flex items-center justify-center rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-md bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
           >
             Apply
           </button>
@@ -199,7 +199,7 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
       {error ? <p className="text-sm font-semibold text-rose-400">{error}</p> : null}
 
       {!songs.length ? (
-        <div className="rounded-2xl border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
           No music IDs have been collected yet. Check back soon.
         </div>
       ) : (
@@ -209,16 +209,16 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
             return (
               <article
                 key={song.asset_id}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-surface shadow-soft transition duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl"
+                className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
               >
                 <div className="flex flex-1 flex-col gap-4 p-4">
                   <div className="flex items-start gap-4">
-                    <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-background/60 shadow-inner">
+                    <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border border-border/60 bg-background/60">
                       <MusicCoverImage
                         src={buildThumbnailUrl(song)}
                         alt={`${song.title} Roblox music`}
                         sizes="80px"
-                        className="object-cover transition duration-500 group-hover:scale-105"
+                        className="object-cover"
                       />
                     </div>
                     <div className="min-w-0 flex-1 space-y-1">
@@ -237,7 +237,7 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2">
-                    <div className="flex items-center gap-1.5 rounded-full border border-border/50 bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-foreground">
+                    <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-foreground">
                       <span>Music ID</span>
                       <span className="font-mono text-[0.82rem]">{song.asset_id}</span>
                       <CopyCodeButton
@@ -255,18 +255,18 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
                       />
                     </div>
                     {song.rank ? (
-                      <span className="inline-flex items-center rounded-full bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-accent">
+                      <span className="inline-flex items-center rounded-md bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-accent">
                         Top #{song.rank}
                       </span>
                     ) : null}
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
-                    <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1">
+                    <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
                       <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
                       <span className="font-semibold text-foreground">{durationLabel ?? "-"}</span>
                     </span>
-                    <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1">
+                    <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
                       <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
                       <span className="font-semibold text-foreground">{song.genre ?? "-"}</span>
                     </span>
@@ -277,7 +277,7 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
                       href={buildRobloxUrl(song.asset_id)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
                     >
                       Play on Roblox
                     </a>

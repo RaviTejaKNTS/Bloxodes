@@ -1,6 +1,7 @@
 import { formatDistanceToNow } from "date-fns";
 import { listPublishedGameListsPage, type GameList } from "@/lib/db";
 import { LISTS_DESCRIPTION, SITE_URL } from "@/lib/seo";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { ListCard } from "@/components/ListCard";
 import { PagePagination } from "@/components/PagePagination";
 
@@ -79,16 +80,12 @@ function ListsPageView({
           <p className="max-w-2xl text-base text-muted md:text-lg">
             Rankings and collections driven by live Roblox data and refreshed regularly to help you discover what to play next.
           </p>
-          <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-            <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-              {total} published lists
-            </span>
-            {refreshedLabel ? (
-              <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-                Last updated {refreshedLabel}
-              </span>
-            ) : null}
-          </div>
+          <IndexPageStats
+            items={[
+              { label: `${total} lists published`, icon: "lists", tone: "accent" },
+              ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
+            ]}
+          />
         </header>
       ) : (
         <header className="space-y-2">

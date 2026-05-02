@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EventsPageCard } from "@/components/EventsPageCard";
+import { IndexPageStats } from "@/components/IndexPageStats";
 import { EVENTS_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { buildEventsCards } from "./page-data";
 
@@ -40,16 +41,12 @@ export default async function EventsIndexPage() {
         <p className="max-w-2xl text-base text-muted md:text-lg">
           Follow upcoming updates, live events, and recent recaps with start times, countdowns, and related guides.
         </p>
-        <div className="flex flex-wrap items-center gap-4 text-xs text-muted md:text-sm">
-          <span className="rounded-full bg-accent/10 px-4 py-1 font-semibold uppercase tracking-wide text-accent">
-            {total} event hubs
-          </span>
-          {refreshedLabel ? (
-            <span className="rounded-full bg-surface-muted px-4 py-1 font-semibold text-muted">
-              Last updated {refreshedLabel}
-            </span>
-          ) : null}
-        </div>
+        <IndexPageStats
+          items={[
+            { label: `${total} event hubs`, icon: "events", tone: "accent" },
+            ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
+          ]}
+        />
       </header>
 
       {cards.length ? (

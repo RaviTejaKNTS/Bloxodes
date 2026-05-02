@@ -468,7 +468,7 @@ export function ListPageView({
         </ol>
       </nav>
 
-      <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-12 lg:min-h-0">
+      <div className="flex flex-col gap-10 xl:flex-row xl:items-start xl:gap-12 xl:min-h-0">
         <div className="space-y-10 min-w-0 flex-1">
           <div className="space-y-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -482,7 +482,7 @@ export function ListPageView({
                 </p>
               ) : null}
             </div>
-            <div className="lg:hidden">
+            <div className="xl:hidden">
               <details className="rounded-xl border border-border/60 bg-surface/70 px-4 py-3">
                 <summary className="flex items-center justify-between text-sm font-semibold text-foreground cursor-pointer">
                   <span>Jump to game</span>
@@ -581,8 +581,8 @@ export function ListPageView({
           </div>
         </div>
 
-        <div className="mt-0 space-y-6 lg:w-[320px]">
-          <div className="hidden lg:block">
+        <div className="mt-0 space-y-6 xl:w-[320px]">
+          <div className="hidden xl:block">
             <SidebarNav
               slug={slug}
               entries={navEntries}

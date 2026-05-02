@@ -45,8 +45,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     normalizeDescription(page.universe_description) ??
     WIKI_DESCRIPTION;
   const image = page.icon_url || `${SITE_URL}/og-image.png`;
-  const publishedTime = page.published_at ? new Date(page.published_at).toISOString() : undefined;
-  const modifiedTime = (page.content_updated_at ?? page.updated_at) ? new Date(page.content_updated_at ?? page.updated_at!).toISOString() : undefined;
+  const publishedAt = page.published_at ?? page.created_at ?? null;
+  const modifiedAt = page.content_updated_at ?? page.updated_at ?? publishedAt;
+  const publishedTime = publishedAt ? new Date(publishedAt).toISOString() : undefined;
+  const modifiedTime = modifiedAt ? new Date(modifiedAt).toISOString() : undefined;
 
   return {
     title,

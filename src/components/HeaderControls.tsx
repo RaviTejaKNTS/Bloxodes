@@ -1,41 +1,58 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { type CSSProperties, type Dispatch, type SetStateAction, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  FiBookOpen,
-  FiCalendar,
-  FiCheckSquare,
-  FiAward,
-  FiFileText,
-  FiGrid,
-  FiHome,
-  FiKey,
-  FiList,
-  FiMenu,
-  FiSearch,
-  FiTool,
-  FiUser,
-  FiX
-} from "react-icons/fi";
+  Award,
+  BookOpen,
+  Calendar,
+  FileText,
+  Home,
+  KeyRound,
+  LayoutGrid,
+  List,
+  Menu,
+  Search,
+  SquareCheckBig,
+  User,
+  Wrench,
+  X
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInput,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarSeparator,
+  useSidebar
+} from "@/components/ui/sidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { trackEvent } from "@/lib/analytics";
+import { cn } from "@/lib/utils";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 
 const navLinks = [
-  { href: "/", label: "Home", icon: FiHome },
-  { href: "/codes", label: "Codes", icon: FiKey },
-  { href: "/lists", label: "Lists", icon: FiList },
-  { href: "/wiki", label: "Wiki", icon: FiBookOpen },
-  { href: "/tools", label: "Tools", icon: FiTool },
-  { href: "/catalog", label: "Catalog", icon: FiGrid },
-  { href: "/checklists", label: "Checklists", icon: FiCheckSquare },
-  { href: "/events", label: "Events", icon: FiCalendar },
-  { href: "/articles", label: "Articles", icon: FiFileText },
-  { href: "/quizzes", label: "Quizzes", icon: FiAward }
+  { href: "/", label: "Home", icon: Home },
+  { href: "/codes", label: "Codes", icon: KeyRound },
+  { href: "/lists", label: "Lists", icon: List },
+  { href: "/wiki", label: "Wiki", icon: BookOpen },
+  { href: "/tools", label: "Tools", icon: Wrench },
+  { href: "/catalog", label: "Catalog", icon: LayoutGrid },
+  { href: "/checklists", label: "Checklists", icon: SquareCheckBig },
+  { href: "/events", label: "Events", icon: Calendar },
+  { href: "/articles", label: "Articles", icon: FileText },
+  { href: "/quizzes", label: "Quizzes", icon: Award }
 ];
 
 type SearchItem = {
@@ -54,7 +71,16 @@ const DEBOUNCE_MS = 250;
 
 function resolveSearchScope(pathname: string | null): { scope: string; label: string } {
   const path = pathname ?? "/";
-  if (path === "/" || path.startsWith("/about") || path.startsWith("/contact") || path.startsWith("/privacy-policy") || path.startsWith("/terms-of-service") || path.startsWith("/disclaimer") || path.startsWith("/editorial-guidelines") || path.startsWith("/how-we-gather-and-verify-codes")) {
+  if (
+    path === "/" ||
+    path.startsWith("/about") ||
+    path.startsWith("/contact") ||
+    path.startsWith("/privacy-policy") ||
+    path.startsWith("/terms-of-service") ||
+    path.startsWith("/disclaimer") ||
+    path.startsWith("/editorial-guidelines") ||
+    path.startsWith("/how-we-gather-and-verify-codes")
+  ) {
     return { scope: "global", label: "Bloxodes" };
   }
   if (path.startsWith("/codes")) return { scope: "codes", label: "codes" };
@@ -79,7 +105,7 @@ function LogoMark({ className = "h-9" }: { className?: string }) {
         width={948}
         height={319}
         priority
-        className={`hidden w-auto shrink-0 dark:block ${className}`}
+        className={cn("hidden w-auto shrink-0 dark:block", className)}
       />
       <Image
         src="/Bloxodes-light.png"
@@ -88,16 +114,268 @@ function LogoMark({ className = "h-9" }: { className?: string }) {
         height={319}
         loading="lazy"
         fetchPriority="low"
-        className={`block w-auto shrink-0 dark:hidden ${className}`}
+        className={cn("block w-auto shrink-0 dark:hidden", className)}
       />
     </Link>
   );
 }
 
+function MobileMenuButton() {
+  const { setOpenMobile } = useSidebar();
+
+  return (
+    <Button
+      type="button"
+      variant="ghost"
+      size="icon"
+      onClick={() => setOpenMobile(true)}
+      aria-label="Open menu"
+      className="h-10 w-10 rounded-md text-foreground hover:bg-transparent hover:text-accent"
+    >
+      <Menu aria-hidden className="h-5 w-5" />
+    </Button>
+  );
+}
+
+type SidebarBodyProps = {
+  accountAvatar: string | null;
+  accountHref: string;
+  accountLabel: string;
+  canSearch: boolean;
+  clearSearch: () => void;
+  error: string | null;
+  isSignedIn: boolean;
+  loading: boolean;
+  pathname: string | null;
+  query: string;
+  results: SearchItem[];
+  searchActive: boolean;
+  searchScope: { scope: string; label: string };
+  setQuery: Dispatch<SetStateAction<string>>;
+  trimmedQuery: string;
+};
+
+function SidebarBody({
+  accountAvatar,
+  accountHref,
+  accountLabel,
+  canSearch,
+  clearSearch,
+  error,
+  isSignedIn,
+  loading,
+  pathname,
+  query,
+  results,
+  searchActive,
+  searchScope,
+  setQuery,
+  trimmedQuery
+}: SidebarBodyProps) {
+  const { isMobile, setOpenMobile } = useSidebar();
+  const closeIfMobile = () => {
+    if (isMobile) setOpenMobile(false);
+  };
+
+  const isActive = (href: string) =>
+    pathname === href || (href !== "/" && pathname?.startsWith(`${href}/`));
+
+  const accountContent = (
+    <>
+      {accountAvatar ? (
+        <img
+          src={accountAvatar}
+          alt=""
+          aria-hidden="true"
+          className="h-6 w-6 rounded-full border border-sidebar-border object-cover"
+          loading="lazy"
+        />
+      ) : (
+        <span className="inline-flex h-6 w-6 items-center justify-center rounded-md text-sidebar-foreground/70">
+          <User aria-hidden className="h-3.5 w-3.5" />
+        </span>
+      )}
+      <span className="min-w-0 truncate">{isSignedIn ? accountLabel : "Sign in"}</span>
+    </>
+  );
+
+  return (
+    <>
+      <SidebarHeader className="gap-0 px-3 pb-2 pt-5">
+        <div className="relative flex min-h-12 items-center justify-center">
+          <LogoMark className="h-12" />
+          {isMobile ? (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={() => setOpenMobile(false)}
+              aria-label="Close menu"
+              className="absolute right-0 h-8 w-8 rounded-md text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+            >
+              <X aria-hidden className="h-4 w-4" />
+            </Button>
+          ) : null}
+        </div>
+
+        <div className="relative mt-4">
+          <Search aria-hidden className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-sidebar-foreground/45" />
+          <SidebarInput
+            type="text"
+            inputMode="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder={`Search ${searchScope.label}`}
+            aria-label={`Search ${searchScope.label}`}
+            className="h-8 rounded-md border-transparent bg-sidebar-accent/50 pl-8 pr-8 text-[13px] font-medium text-sidebar-foreground shadow-none placeholder:text-sidebar-foreground/45 hover:bg-sidebar-accent/70 focus-visible:bg-sidebar focus-visible:ring-1"
+          />
+          {query ? (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={clearSearch}
+              aria-label="Clear search"
+              className="absolute right-1 top-1/2 h-7 w-7 -translate-y-1/2 rounded-md text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground"
+            >
+              <X aria-hidden className="h-3.5 w-3.5" />
+            </Button>
+          ) : null}
+        </div>
+      </SidebarHeader>
+
+      <SidebarContent className="px-2 pb-3">
+        {searchActive ? (
+          <SidebarGroup className="min-h-0 flex-1 px-1">
+            <div className="mb-2 px-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-sidebar-foreground/45">
+              {!canSearch
+                ? "Keep typing"
+                : loading && results.length === 0
+                  ? "Searching"
+                  : error
+                    ? "Search unavailable"
+                    : results.length
+                      ? `${results.length} result${results.length === 1 ? "" : "s"}`
+                      : "No results"}
+            </div>
+            <SidebarGroupContent>
+              {!canSearch ? (
+                <Card className="rounded-md border-0 bg-sidebar-accent/50 px-3 py-2 text-[13px] leading-5 text-muted-foreground shadow-none">
+                  Type at least 2 characters to search.
+                </Card>
+              ) : error ? (
+                <Card className="rounded-md border-0 bg-sidebar-accent/50 px-3 py-2 text-[13px] leading-5 text-muted-foreground shadow-none">
+                  {error}
+                </Card>
+              ) : loading && results.length === 0 ? (
+                <div className="space-y-2">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <div key={index} className="h-10 animate-pulse rounded-md bg-sidebar-accent/70" />
+                  ))}
+                </div>
+              ) : results.length ? (
+                <SidebarMenu>
+                  {results.map((item, index) => {
+                    const updatedLabel = item.updatedAt ? formatUpdatedLabel(item.updatedAt) : null;
+                    return (
+                      <SidebarMenuItem key={item.id}>
+                        <SidebarMenuButton
+                          asChild
+                          size="lg"
+                          className="h-auto items-start rounded-md px-2 py-2 hover:bg-sidebar-accent"
+                        >
+                          <Link
+                            href={item.url}
+                            onClick={() => {
+                              trackEvent("search_result_click", {
+                                search_term: trimmedQuery,
+                                results_count: results.length,
+                                content_type: item.type,
+                                position: index + 1,
+                                scope: searchScope.scope
+                              });
+                              closeIfMobile();
+                            }}
+                          >
+                            <span className="block min-w-0">
+                              <span className="block truncate text-[13px] font-medium leading-5 text-sidebar-foreground">{item.title}</span>
+                              <span className="block truncate text-[11px] font-normal leading-4 text-sidebar-foreground/50">
+                                {item.subtitle ?? item.type}
+                                {item.badge ? ` • ${item.badge}` : ""}
+                                {updatedLabel ? ` • ${updatedLabel}` : ""}
+                              </span>
+                            </span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    );
+                  })}
+                </SidebarMenu>
+              ) : (
+                <Card className="rounded-md border-0 bg-sidebar-accent/50 px-3 py-2 text-[13px] leading-5 text-muted-foreground shadow-none">
+                  Try another keyword.
+                </Card>
+              )}
+            </SidebarGroupContent>
+          </SidebarGroup>
+        ) : (
+          <SidebarGroup className="px-1">
+            <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium uppercase tracking-[0.12em] text-sidebar-foreground/40">
+              Browse
+            </SidebarGroupLabel>
+            <SidebarMenu className="gap-0.5">
+              {navLinks.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <SidebarMenuItem key={link.href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={active}
+                      size="lg"
+                      className={cn(
+                        "h-8 rounded-md px-2 text-[13px] font-medium text-sidebar-foreground/62",
+                        active
+                          ? "bg-sidebar-accent/80 text-sidebar-foreground"
+                          : "hover:bg-sidebar-accent/70 hover:text-sidebar-foreground"
+                      )}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={closeIfMobile}
+                        aria-current={active ? "page" : undefined}
+                      >
+                        <link.icon aria-hidden className="h-3.5 w-3.5" />
+                        <span>{link.label}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+
+            <SidebarSeparator className="mx-2 my-2" />
+            <Button
+              asChild
+              variant="ghost"
+              className="h-8 w-full justify-start gap-2 rounded-md px-2 text-[13px] font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+            >
+              <Link href={accountHref} aria-label={accountLabel} title={accountLabel} onClick={closeIfMobile}>
+                {accountContent}
+              </Link>
+            </Button>
+            <div className="flex h-8 items-center justify-between gap-2 rounded-md px-2 hover:bg-sidebar-accent">
+              <span className="text-[13px] font-medium text-sidebar-foreground/70">Theme</span>
+              <ThemeToggle className="h-6 w-6 border-sidebar-border bg-transparent shadow-none hover:translate-y-0 hover:bg-sidebar-accent [&_svg]:h-3.5 [&_svg]:w-3.5" />
+            </div>
+          </SidebarGroup>
+        )}
+      </SidebarContent>
+    </>
+  );
+}
+
 export function HeaderControls() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [accountAvatar, setAccountAvatar] = useState<string | null>(null);
   const [accountLabel, setAccountLabel] = useState("Sign in");
   const [accountHref, setAccountHref] = useState("/login?next=%2Faccount");
@@ -113,22 +391,7 @@ export function HeaderControls() {
   const searchActive = trimmedQuery.length > 0;
   const canSearch = trimmedQuery.length >= MIN_QUERY_LENGTH;
 
-  const close = () => setOpen(false);
   const clearSearch = () => setQuery("");
-
-  useEffect(() => {
-    if (open) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [open]);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     let active = true;
@@ -158,7 +421,7 @@ export function HeaderControls() {
           setAccountLabel("Sign in");
         }
       } catch {
-        // ignore avatar fetch failures
+        // Ignore avatar fetch failures; the sign-in affordance still works.
       }
     }
 
@@ -242,213 +505,34 @@ export function HeaderControls() {
     });
   }, [canSearch, loading, results.length, searchScope.scope, trimmedQuery]);
 
-  const isActive = (href: string) =>
-    pathname === href || (href !== "/" && pathname?.startsWith(`${href}/`));
-
-  const accountContent = (
-    <>
-      {accountAvatar ? (
-        <img
-          src={accountAvatar}
-          alt=""
-          aria-hidden="true"
-          className="h-8 w-8 rounded-full border border-border/50 object-cover"
-          loading="lazy"
-        />
-      ) : (
-        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-surface-muted text-foreground">
-          <FiUser aria-hidden className="h-4 w-4" />
-        </span>
-      )}
-      <span className="min-w-0 truncate">{isSignedIn ? accountLabel : "Sign in"}</span>
-    </>
-  );
-
-  const sidebarContent = (mobile = false) => (
-    <>
-      <div className="flex items-center justify-between gap-3">
-        <LogoMark className="h-9" />
-        {mobile ? (
-          <button
-            type="button"
-            onClick={close}
-            aria-label="Close menu"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 bg-surface-muted text-foreground transition hover:border-accent hover:text-accent"
-          >
-            <FiX aria-hidden className="h-5 w-5" />
-          </button>
-        ) : null}
-      </div>
-
-      <div className="relative mt-8">
-        <FiSearch aria-hidden className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
-        <input
-          type="text"
-          inputMode="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder={`Search ${searchScope.label}`}
-          aria-label={`Search ${searchScope.label}`}
-          className="h-12 w-full rounded-lg border border-border/60 bg-background/70 px-10 text-sm font-semibold text-foreground outline-none transition placeholder:text-muted/75 focus:border-accent focus:ring-2 focus:ring-accent/30"
-        />
-        {query ? (
-          <button
-            type="button"
-            onClick={clearSearch}
-            aria-label="Clear search"
-            className="absolute right-2 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-muted transition hover:bg-surface-muted hover:text-foreground"
-          >
-            <FiX aria-hidden className="h-4 w-4" />
-          </button>
-        ) : null}
-      </div>
-
-      {searchActive ? (
-        <div className="mt-5 flex min-h-0 flex-1 flex-col overflow-y-auto pr-1">
-          <div className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-            {!canSearch
-              ? "Keep typing"
-              : loading && results.length === 0
-              ? "Searching"
-              : error
-                ? "Search unavailable"
-                : results.length
-                  ? `${results.length} result${results.length === 1 ? "" : "s"}`
-                  : "No results"}
-          </div>
-          {!canSearch ? (
-            <p className="rounded-lg border border-border/60 bg-background/50 px-3 py-3 text-sm text-muted">
-              Type at least 2 characters to search.
-            </p>
-          ) : error ? (
-            <p className="rounded-lg border border-border/60 bg-background/50 px-3 py-3 text-sm text-muted">{error}</p>
-          ) : loading && results.length === 0 ? (
-            <div className="space-y-2">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <div key={index} className="h-14 animate-pulse rounded-lg border border-border/50 bg-surface-muted/70" />
-              ))}
-            </div>
-          ) : results.length ? (
-            <ul className="space-y-2">
-              {results.map((item, index) => {
-                const updatedLabel = item.updatedAt ? formatUpdatedLabel(item.updatedAt) : null;
-                return (
-                  <li key={item.id}>
-                    <Link
-                      href={item.url}
-                      onClick={() => {
-                        trackEvent("search_result_click", {
-                          search_term: trimmedQuery,
-                          results_count: results.length,
-                          content_type: item.type,
-                          position: index + 1,
-                          scope: searchScope.scope
-                        });
-                        if (mobile) close();
-                      }}
-                      className="block rounded-lg border border-border/60 bg-background/50 px-3 py-3 text-sm text-foreground transition hover:border-accent hover:text-accent"
-                    >
-                      <span className="block truncate font-semibold">{item.title}</span>
-                      <span className="mt-1 block truncate text-xs text-muted">
-                        {item.subtitle ?? item.type}
-                        {item.badge ? ` • ${item.badge}` : ""}
-                        {updatedLabel ? ` • ${updatedLabel}` : ""}
-                      </span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          ) : (
-            <p className="rounded-lg border border-border/60 bg-background/50 px-3 py-3 text-sm text-muted">
-              Try another keyword.
-            </p>
-          )}
-        </div>
-      ) : (
-        <nav className="mt-6 flex flex-1 flex-col gap-1.5" aria-label="Primary">
-          {navLinks.map((link) => {
-            const active = isActive(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={mobile ? close : undefined}
-                aria-current={active ? "page" : undefined}
-                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold transition ${
-                  active
-                    ? "border border-accent/40 bg-accent/15 text-foreground"
-                    : "border border-transparent text-muted hover:border-border/60 hover:bg-surface-muted/70 hover:text-foreground"
-                }`}
-              >
-                <link.icon aria-hidden className="h-4 w-4 shrink-0" />
-                <span>{link.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-      )}
-
-      {!searchActive ? (
-        <div className="mt-6 space-y-3 border-t border-border/60 pt-5">
-          <Link
-            href={accountHref}
-            aria-label={accountLabel}
-            title={accountLabel}
-            onClick={mobile ? close : undefined}
-            className="flex w-full items-center gap-3 rounded-lg border border-border/60 bg-background/55 px-3 py-3 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
-          >
-            {accountContent}
-          </Link>
-          <div className="flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-background/35 px-3 py-2.5">
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Theme</span>
-            <ThemeToggle />
-          </div>
-        </div>
-      ) : null}
-    </>
-  );
-
-  const mobileMenu = (
-    <div
-      className="fixed inset-0 z-[100000] bg-black/60 backdrop-blur-sm xl:hidden"
-      role="dialog"
-      aria-modal="true"
-      onClick={close}
-    >
-      <aside
-        id="site-menu-panel"
-        className="flex h-full w-[86vw] max-w-[320px] flex-col overflow-y-auto border-r border-border/70 bg-surface/95 px-4 pb-32 pt-5 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {sidebarContent(true)}
-      </aside>
-    </div>
-  );
-
   return (
-    <>
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 flex-col overflow-y-auto border-r border-border/60 bg-surface/95 px-5 pb-10 pt-6 shadow-soft xl:flex">
-        {sidebarContent(false)}
-      </aside>
+    <SidebarProvider className="contents" style={{ "--sidebar-width": "15rem" } as CSSProperties}>
+      <Sidebar className="z-40 border-r border-sidebar-border/80 bg-sidebar shadow-none">
+        <SidebarBody
+          accountAvatar={accountAvatar}
+          accountHref={accountHref}
+          accountLabel={accountLabel}
+          canSearch={canSearch}
+          clearSearch={clearSearch}
+          error={error}
+          isSignedIn={isSignedIn}
+          loading={loading}
+          pathname={pathname}
+          query={query}
+          results={results}
+          searchActive={searchActive}
+          searchScope={searchScope}
+          setQuery={setQuery}
+          trimmedQuery={trimmedQuery}
+        />
+      </Sidebar>
 
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur xl:hidden">
         <div className="flex items-center gap-3 px-4 py-3">
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center text-foreground transition hover:text-accent"
-            onClick={() => setOpen((prev) => !prev)}
-            aria-expanded={open}
-            aria-controls="site-menu-panel"
-            aria-label="Open menu"
-          >
-            <FiMenu aria-hidden className="h-5 w-5" />
-          </button>
+          <MobileMenuButton />
           <LogoMark className="h-8" />
         </div>
       </header>
-
-      {open && mounted ? createPortal(mobileMenu, document.body) : null}
-    </>
+    </SidebarProvider>
   );
 }

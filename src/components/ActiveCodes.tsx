@@ -1,11 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import { FiClock, FiKey, FiRotateCcw } from "react-icons/fi";
+import { Check, RotateCcw } from "lucide-react";
 import type { Code } from "@/lib/db";
 import { cleanRewardsText, isCodeWithinNewThreshold } from "@/lib/code-utils";
 import { trackEvent } from "@/lib/analytics";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   loadAccountCodeProgress,
   readLocalCodeProgress,
@@ -22,7 +24,6 @@ type Props = {
   lastUpdatedLabel: string;
   lastCheckedLabel: string;
   lastCheckedRelativeLabel?: string | null;
-  coverImage?: string | null;
   nowMs: number;
 };
 
@@ -32,11 +33,6 @@ type EnrichedCode = Code & {
   addedAtLabel: string | null;
 };
 
-function normalizeCoverImage(coverImage?: string | null): string | null {
-  if (!coverImage) return null;
-  return coverImage.startsWith("http") ? coverImage : `/${coverImage.replace(/^\//, "")}`;
-}
-
 export function ActiveCodes({
   codes,
   gameName,
@@ -44,7 +40,6 @@ export function ActiveCodes({
   lastUpdatedLabel,
   lastCheckedLabel,
   lastCheckedRelativeLabel,
-  coverImage,
   nowMs
 }: Props) {
   const [usedCodes, setUsedCodes] = useState<Set<string>>(() => new Set());
@@ -110,8 +105,6 @@ export function ActiveCodes({
     });
   }, [codes, nowMs]);
 
-  const normalizedCover = normalizeCoverImage(coverImage);
-
   function markUsed(code: string) {
     if (usedCodes.has(code)) {
       return;
@@ -139,63 +132,42 @@ export function ActiveCodes({
   }
 
   return (
-    <section className="panel overflow-hidden" id="active-codes">
-      <div className="relative overflow-hidden border-b border-border/60">
-        {normalizedCover ? (
-          <Image
-            src={normalizedCover}
-            alt={`${gameName} key art`}
-            fill
-            sizes="100vw"
-            className="absolute inset-0 h-full w-full object-cover opacity-80 blur-[1px]"
-            priority={false}
-          />
-        ) : null}
-        <div className="absolute inset-0 bg-gradient-to-r from-[rgb(var(--color-surface))] via-[rgb(var(--color-background))] to-[rgb(var(--color-surface-muted))] opacity-85" />
-        <div className="relative px-5 py-6 sm:px-8 sm:py-7">
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-3">
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-border/70 bg-surface text-foreground shadow-soft backdrop-blur">
-                <FiKey className="h-5 w-5" aria-hidden />
+    <Card className="overflow-hidden rounded-lg border-border/70 bg-card shadow-none" id="active-codes">
+      <CardHeader className="border-b border-border/60 px-4 py-4 sm:px-5">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="min-w-0 space-y-1">
+            <CardTitle className="text-xl leading-tight text-foreground sm:text-2xl">
+              Active {gameName} Codes
+            </CardTitle>
+            <p className="flex items-center gap-1.5 text-sm leading-5 text-muted-foreground">
+              <Check className="h-3.5 w-3.5 shrink-0" aria-hidden />
+              <span>
+                Checked and verified on {lastCheckedLabel}
+                {lastCheckedRelativeLabel ? <span> ({lastCheckedRelativeLabel})</span> : null}
               </span>
-              <h2 className="mb-0 text-2xl font-bold leading-tight text-foreground drop-shadow-sm sm:text-3xl">
-                Active {gameName} Codes
-              </h2>
-            </div>
-            <div className="flex flex-wrap items-center gap-2 text-base text-foreground/85">
-              <span className="inline-flex items-center gap-2">
-                <FiClock aria-hidden className="h-4 w-4 shrink-0" />
-                <span>
-                  Last checked for new codes on{" "}
-                  <span className="font-semibold text-foreground">{lastCheckedLabel}</span>
-                  {lastCheckedRelativeLabel ? (
-                    <span className="text-foreground/70"> ({lastCheckedRelativeLabel})</span>
-                  ) : null}
-                </span>
-              </span>
-              <span className="rounded-full border border-border/60 bg-surface px-2.5 py-1 text-[0.85rem] font-semibold text-foreground">
-                {codes.length} active
-              </span>
-            </div>
+            </p>
           </div>
+          <Badge variant="secondary" className="shrink-0 rounded-md px-2 py-1 text-xs">
+            {codes.length} active
+          </Badge>
         </div>
-      </div>
+      </CardHeader>
 
-      <div className="space-y-4 bg-surface px-4 py-5 sm:px-6 sm:py-7">
+      <CardContent className="space-y-2 p-3 sm:p-4">
         {enriched.length === 0 ? (
-          <div className="flex flex-col gap-3 rounded-[var(--radius-sm)] border border-border/50 bg-surface-muted/70 px-4 py-5 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-3 rounded-md border border-border/60 bg-muted/20 px-4 py-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-1">
-              <p className="text-base font-semibold text-foreground">No active codes right now</p>
-              <p className="text-muted">
+              <p className="font-semibold text-foreground">No active codes right now</p>
+              <p>
                 We have not confirmed any working codes at the moment. Check back soon for the next drop.
               </p>
             </div>
-            <span className="rounded-full border border-border/50 bg-surface px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+            <Badge variant="outline" className="shrink-0 rounded-md text-[11px] uppercase tracking-[0.12em]">
               Waiting for updates
-            </span>
+            </Badge>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="divide-y divide-border/60 overflow-hidden rounded-md border border-border/60">
             {enriched.map((code, index) => {
               const isUsed = usedCodes.has(code.code);
               const displayReward = code.rewardText
@@ -204,53 +176,52 @@ export function ActiveCodes({
               return (
                 <article
                   key={code.id}
-                  className={`relative overflow-hidden rounded-[var(--radius-sm)] border border-border/60 bg-surface shadow-soft transition hover:border-accent/35 ${
-                    isUsed ? "opacity-80 grayscale-[0.05]" : ""
-                  }`}
+                  className={`bg-card ${isUsed ? "opacity-70" : ""}`}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent/5 via-transparent to-transparent opacity-0 transition-opacity duration-200 hover:opacity-100" />
-                  <div className="relative grid gap-4 px-4 py-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-6 sm:px-5">
-                    <div className="flex items-start gap-3 sm:gap-4 min-w-0">
-                      <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-border/60 bg-surface-muted/80">
-                        <span className="text-sm font-semibold text-muted">{index + 1}</span>
-                      </div>
-                      <div className="space-y-2 min-w-0">
-                        <div className="flex flex-wrap items-center gap-2">
+                  <div className="grid gap-3 px-3 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:px-4">
+                    <div className="flex min-w-0 items-start gap-3">
+                      <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-md bg-muted/30 text-xs font-medium text-muted-foreground">
+                        {index + 1}
+                      </span>
+                      <div className="min-w-0 space-y-1.5">
+                        <div className="flex min-w-0 flex-wrap items-center gap-1.5">
                           <code
-                            className={`font-mono text-lg font-bold tracking-[0.14em] sm:text-xl ${
+                            className={`font-mono text-base font-semibold tracking-[0.08em] sm:text-lg ${
                               isUsed ? "line-through text-muted" : "text-foreground"
                             }`}
                           >
                             {code.code}
                           </code>
                           {code.isNew ? (
-                            <span className="rounded-full border border-accent/40 bg-accent/15 px-2 py-0.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-accent">
+                            <Badge className="rounded-md px-1.5 py-0 text-[10px] uppercase tracking-[0.12em]">
                               New
-                            </span>
+                            </Badge>
                           ) : null}
                           {code.level_requirement != null ? (
-                            <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface-muted px-2.5 py-1 text-[0.72rem] font-semibold tracking-wide text-foreground/90">
+                            <Badge variant="outline" className="rounded-md px-1.5 py-0 text-[10px]">
                               Level {code.level_requirement}+
-                            </span>
+                            </Badge>
                           ) : null}
                         </div>
-                        <p className={`text-sm ${isUsed ? "line-through text-muted" : "text-foreground/85"}`}>
-                          {displayReward ?? <span className="text-muted">No reward listed yet.</span>}
+                        <p className={`text-sm leading-5 ${isUsed ? "line-through text-muted" : "text-muted-foreground"}`}>
+                          {displayReward ?? "No reward listed yet."}
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-end gap-2 pl-14 sm:pl-0 sm:justify-end sm:gap-3 sm:[&>*]:whitespace-nowrap">
+                    <div className="flex flex-col items-start gap-2 pl-10 sm:items-end sm:pl-0 sm:[&>*]:whitespace-nowrap">
                       <div className="flex flex-row items-center justify-end gap-2">
                         {isUsed ? (
-                          <button
+                          <Button
                             type="button"
+                            variant="outline"
+                            size="icon"
                             onClick={() => markUnused(code.code)}
-                            className="order-1 inline-flex h-8 w-8 items-center justify-center rounded-full border border-accent/40 bg-accent/15 text-accent shadow-soft transition hover:border-accent/60 hover:bg-accent/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                            className="order-1 h-8 w-8 text-muted-foreground"
                             aria-label={`Uncheck code ${code.code}`}
                             title="Uncheck code"
                           >
-                            <FiRotateCcw className="h-3.5 w-3.5" aria-hidden />
-                          </button>
+                            <RotateCcw className="h-3.5 w-3.5" aria-hidden />
+                          </Button>
                         ) : null}
                         <div className="order-2">
                           <CopyCodeButton
@@ -270,7 +241,7 @@ export function ActiveCodes({
                         </div>
                       </div>
                       {code.addedAtLabel ? (
-                        <span className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-muted">
+                        <span className="text-[11px] font-medium text-muted-foreground">
                           Added {code.addedAtLabel}
                         </span>
                       ) : null}
@@ -281,7 +252,7 @@ export function ActiveCodes({
             })}
           </div>
         )}
-      </div>
-    </section>
+      </CardContent>
+    </Card>
   );
 }
