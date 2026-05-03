@@ -46,11 +46,17 @@ type BloxodesContentResponse =
 
 const BLOXODES_PANEL_ID = "bloxodes-codes-extension";
 const BLOXODES_CODES_HUB_URL = "https://bloxodes.com/codes";
+const BLOXODES_LOGO_DARK_URL = chrome.runtime.getURL("brand/Bloxodes-dark.png");
+const BLOXODES_LOGO_LIGHT_URL = chrome.runtime.getURL("brand/Bloxodes-light.png");
 const BLOXODES_STATE = {
+  lastHiddenRequestKey: "",
+  lastMatchedPayload: null as BloxodesContentPayload | null,
   lastRequestKey: "",
   observer: null as MutationObserver | null,
   urlPoll: 0
 };
+
+type BloxodesTheme = "light" | "dark";
 
 function parsePlaceId(url: string): number | null {
   try {
@@ -106,14 +112,57 @@ function findInsertionTarget(): Element | null {
   return document.body;
 }
 
+function removePanel(): void {
+  document.getElementById(BLOXODES_PANEL_ID)?.remove();
+}
+
+function getRgbFromColor(value: string): [number, number, number] | null {
+  const match = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
+  if (!match) return null;
+  return [Number(match[1]), Number(match[2]), Number(match[3])];
+}
+
+function getColorLuminance([red, green, blue]: [number, number, number]): number {
+  return (0.2126 * red + 0.7152 * green + 0.0722 * blue) / 255;
+}
+
+function detectRobloxTheme(): BloxodesTheme {
+  const themeText = [
+    document.documentElement.className,
+    document.body.className,
+    document.documentElement.getAttribute("data-theme"),
+    document.body.getAttribute("data-theme")
+  ]
+    .join(" ")
+    .toLowerCase();
+
+  if (/\b(dark|dark-theme|theme-dark)\b/.test(themeText)) return "dark";
+  if (/\b(light|light-theme|theme-light)\b/.test(themeText)) return "light";
+
+  const bodyColor = getRgbFromColor(getComputedStyle(document.body).backgroundColor);
+  if (bodyColor) {
+    return getColorLuminance(bodyColor) < 0.45 ? "dark" : "light";
+  }
+
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function syncPanelTheme(panel = document.getElementById(BLOXODES_PANEL_ID)): void {
+  panel?.setAttribute("data-bloxodes-theme", detectRobloxTheme());
+}
+
 function ensurePanel(): HTMLElement {
   const existing = document.getElementById(BLOXODES_PANEL_ID);
-  if (existing) return existing;
+  if (existing) {
+    syncPanelTheme(existing);
+    return existing;
+  }
 
   const panel = document.createElement("section");
   panel.id = BLOXODES_PANEL_ID;
-  panel.className = "bloxodes-panel";
+  panel.className = "Bloxodes-codes-panel";
   panel.setAttribute("aria-label", "Bloxodes Roblox game codes");
+  syncPanelTheme(panel);
 
   const target = findInsertionTarget();
   if (target?.parentElement && target.tagName.toLowerCase() !== "body") {
@@ -178,50 +227,16 @@ function renderShell(title: string, status: string, badge: string, body: string,
   `;
 }
 
-function renderLoading(gameName: string | null): void {
-  renderShell(
-    gameName ? `Active ${gameName} Codes` : "Active Roblox Game Codes",
-    "Checking Bloxodes for working codes",
-    "Loading",
-    `
-      <div class="bloxodes-loading-row"><span></span><span></span></div>
-      <div class="bloxodes-loading-row"><span></span><span></span></div>
-      <div class="bloxodes-loading-row"><span></span><span></span></div>
-    `
-  );
-}
-
-function renderNoMatch(gameName: string | null): void {
-  const title = gameName ? `Active ${gameName} Codes` : "Active Roblox Game Codes";
-  renderShell(
-    title,
-    "No matching Bloxodes page found yet",
-    "No match",
-    `
-      <div class="bloxodes-empty">
-        <p class="bloxodes-empty-title">No codes panel for this game yet</p>
-        <p>Bloxodes may still be tracking this game. You can open the full codes hub to search manually.</p>
-      </div>
-    `,
-    `<a class="bloxodes-link" href="${BLOXODES_CODES_HUB_URL}" target="_blank" rel="noopener noreferrer">Open Bloxodes codes</a>`
-  );
-}
-
-function renderError(gameName: string | null, message: string): void {
-  const title = gameName ? `Active ${gameName} Codes` : "Active Roblox Game Codes";
-  renderShell(
-    title,
-    "Could not load codes right now",
-    "Unavailable",
-    `
-      <div class="bloxodes-empty">
-        <p class="bloxodes-empty-title">Bloxodes did not respond</p>
-        <p>${escapeHtml(message)}</p>
-      </div>
-    `,
-    `<button class="bloxodes-retry-button" type="button">Try again</button>`
-  );
-  document.querySelector<HTMLButtonElement>(".bloxodes-retry-button")?.addEventListener("click", () => run());
+function renderFullListLink(fullListUrl: string): string {
+  return `
+    <a class="bloxodes-link" href="${escapeHtml(fullListUrl)}" target="_blank" rel="noopener noreferrer">
+      <span>Open full list on</span>
+      <span class="bloxodes-logo-wrap" aria-label="Bloxodes">
+        <img class="bloxodes-logo bloxodes-logo-light" src="${escapeHtml(BLOXODES_LOGO_LIGHT_URL)}" alt="Bloxodes" />
+        <img class="bloxodes-logo bloxodes-logo-dark" src="${escapeHtml(BLOXODES_LOGO_DARK_URL)}" alt="" aria-hidden="true" />
+      </span>
+    </a>
+  `;
 }
 
 function renderCodes(payload: BloxodesContentPayload): void {
@@ -252,8 +267,14 @@ function renderCodes(payload: BloxodesContentPayload): void {
                 </div>
                 <div class="bloxodes-code-actions">
                   <button class="bloxodes-copy-button" type="button" data-code="${escapeHtml(code.code)}" aria-label="Copy code ${escapeHtml(code.code)}">
-                    <span class="bloxodes-copy-icon" aria-hidden="true"></span>
-                    <span>Copy</span>
+                    <svg aria-hidden="true" class="bloxodes-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <g class="bloxodes-copy-icon-copy">
+                        <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                        <path d="M5 15a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8"></path>
+                      </g>
+                      <path class="bloxodes-copy-icon-check" d="m5 13 4 4L19 7"></path>
+                    </svg>
+                    <span class="bloxodes-copy-label">Copy</span>
                   </button>
                   ${addedAt ? `<span class="bloxodes-added">Added ${escapeHtml(addedAt)}</span>` : ""}
                 </div>
@@ -275,7 +296,7 @@ function renderCodes(payload: BloxodesContentPayload): void {
     `Checked and verified on ${formatLastChecked(payload.lastCheckedAt)}`,
     `${totalActive} active`,
     body,
-    `<span>${escapeHtml(shownCopy)}</span><a class="bloxodes-link" href="${escapeHtml(fullListUrl)}" target="_blank" rel="noopener noreferrer">Open full list</a>`
+    `<span>${escapeHtml(shownCopy)}</span>${renderFullListLink(fullListUrl)}`
   );
 
   attachCopyHandlers();
@@ -340,12 +361,23 @@ async function run(): Promise<void> {
 
   const gameName = readGameName();
   const requestKey = `${placeId}:${gameName ?? ""}:${location.pathname}`;
-  if (BLOXODES_STATE.lastRequestKey === requestKey && document.getElementById(BLOXODES_PANEL_ID)) {
+  if (BLOXODES_STATE.lastRequestKey === requestKey) {
+    const panel = document.getElementById(BLOXODES_PANEL_ID);
+    if (panel) {
+      syncPanelTheme(panel);
+      return;
+    }
+    if (BLOXODES_STATE.lastMatchedPayload) {
+      renderCodes(BLOXODES_STATE.lastMatchedPayload);
+      return;
+    }
+    if (BLOXODES_STATE.lastHiddenRequestKey === requestKey) {
+      removePanel();
+      return;
+    }
     return;
   }
   BLOXODES_STATE.lastRequestKey = requestKey;
-
-  renderLoading(gameName);
 
   const response = await requestCodes({
     type: "BLOXODES_GET_CODES",
@@ -355,15 +387,21 @@ async function run(): Promise<void> {
   });
 
   if (!response.ok) {
-    renderError(gameName, response.error);
+    BLOXODES_STATE.lastHiddenRequestKey = requestKey;
+    BLOXODES_STATE.lastMatchedPayload = null;
+    removePanel();
     return;
   }
 
   if (!response.payload.ok || response.payload.matched !== true) {
-    renderNoMatch(gameName);
+    BLOXODES_STATE.lastHiddenRequestKey = requestKey;
+    BLOXODES_STATE.lastMatchedPayload = null;
+    removePanel();
     return;
   }
 
+  BLOXODES_STATE.lastHiddenRequestKey = "";
+  BLOXODES_STATE.lastMatchedPayload = response.payload;
   renderCodes(response.payload);
 }
 
@@ -378,8 +416,11 @@ function start(): void {
 
   BLOXODES_STATE.observer?.disconnect();
   BLOXODES_STATE.observer = new MutationObserver(() => {
-    if (!document.getElementById(BLOXODES_PANEL_ID)) {
+    const panel = document.getElementById(BLOXODES_PANEL_ID);
+    if (!panel) {
       scheduleRun();
+    } else {
+      syncPanelTheme(panel);
     }
   });
   BLOXODES_STATE.observer.observe(document.documentElement, { childList: true, subtree: true });
@@ -389,6 +430,8 @@ function start(): void {
   BLOXODES_STATE.urlPoll = window.setInterval(() => {
     if (location.href !== lastUrl) {
       lastUrl = location.href;
+      BLOXODES_STATE.lastHiddenRequestKey = "";
+      BLOXODES_STATE.lastMatchedPayload = null;
       BLOXODES_STATE.lastRequestKey = "";
       scheduleRun();
     }

@@ -54,4 +54,4 @@
 
 28. Run TypeScript check.
 
-29. Update docs: `src/app/(site)/AGENTS.md`, `src/lib/AGENTS.md`, and relevant `agents/*` inventory docs.
+29. Update docs: `apps/web/src/app/(site)/AGENTS.md`, `apps/web/src/lib/AGENTS.md`, and relevant `agents/*` inventory docs.

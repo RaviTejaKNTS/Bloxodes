@@ -2,11 +2,12 @@
 
 Authoritative workflow guidance lives in:
 
-- `src/lib/AGENTS.md`
+- `apps/web/src/lib/AGENTS.md`
 - `supabase/AGENTS.md`
 - `data/AGENTS.md`
 
 This file is the quick reference for the repo's current data surface.
+After the monorepo move, older shorthand paths in this inventory that begin with `src/` refer to `apps/web/src/`.
 
 ## Supabase: Core Public Content
 

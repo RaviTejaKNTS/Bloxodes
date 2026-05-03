@@ -8,11 +8,15 @@ const repoRoot = path.resolve(appDir, "../..");
 const distDir = path.join(appDir, "dist");
 const iconSource = path.join(repoRoot, "apps/web/public/android-chrome-192x192.png");
 const iconDir = path.join(distDir, "icons");
+const brandDir = path.join(distDir, "brand");
 
 await mkdir(iconDir, { recursive: true });
+await mkdir(brandDir, { recursive: true });
 
 await copyFile(path.join(appDir, "manifest.json"), path.join(distDir, "manifest.json"));
 await copyFile(path.join(appDir, "styles.css"), path.join(distDir, "styles.css"));
+await copyFile(path.join(repoRoot, "apps/web/public/Bloxodes-dark.png"), path.join(brandDir, "Bloxodes-dark.png"));
+await copyFile(path.join(repoRoot, "apps/web/public/Bloxodes-light.png"), path.join(brandDir, "Bloxodes-light.png"));
 
 for (const size of [16, 32, 48, 128]) {
   await sharp(iconSource)

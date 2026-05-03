@@ -3,9 +3,12 @@
 .next
 apps/extension/dist
 apps/extension/*.zip
+apps/mobile/.expo
+apps/mobile/dist
 coverage
 logs
 node_modules
+.expo-home
 tmp
 temp
 *.log

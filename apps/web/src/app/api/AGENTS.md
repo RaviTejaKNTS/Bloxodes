@@ -12,6 +12,10 @@ These routes back interactive site features, search, tool data, session/progress
   - `roblox-music-ids`
   - `roblox-free-items`
   - `roblox-id-extractor`
+- Platform clients:
+  - `extension/roblox-game-codes`
+  - `mobile/codes`
+  - `mobile/codes/[slug]`
 - User/session state:
   - `codes/session`, `codes/progress`
   - `checklists/session`, `checklists/progress`
@@ -29,6 +33,9 @@ These routes back interactive site features, search, tool data, session/progress
 ## Implementation Rules
 
 - Validate all user input at the route boundary.
+- Keep extension and mobile routes public-read unless a feature truly needs account state; never expose Supabase service role behavior through client routes.
+- Return small, stable typed JSON payloads for extension/mobile consumers because shipped clients can lag behind the website.
+- For public client APIs, set explicit cache headers and `OPTIONS` support when the client can be cross-origin.
 - For write endpoints, use shared helpers from:
   - `apps/web/src/lib/auth/session-user.ts`
   - `apps/web/src/lib/security/request.ts`
@@ -47,6 +54,14 @@ These routes back interactive site features, search, tool data, session/progress
 - Keep trusted-origin checks for browser-originated writes.
 - Preserve rate limits on comment or auth-related endpoints unless there is a clear reason to adjust them.
 - Prefer shared normalization helpers over bespoke parsing inside each route.
+
+## Extension And Mobile APIs
+
+- `/api/extension/roblox-game-codes` resolves Roblox place/game context to a published Bloxodes codes page and returns a three-code preview plus the full page URL.
+- `/api/mobile/codes` returns the paginated mobile codes index.
+- `/api/mobile/codes/[slug]` returns active and expired codes for a mobile detail screen.
+- Shared payload logic lives in `apps/web/src/lib/extension-codes.ts` and `apps/web/src/lib/mobile-codes.ts`.
+- Keep freshness badges aligned with the website by using `apps/web/src/lib/code-utils.ts` helpers instead of adding client-specific `is_new` rules.
 
 ## When Adding an Endpoint
 

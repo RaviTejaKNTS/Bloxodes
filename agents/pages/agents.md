@@ -2,10 +2,11 @@
 
 Authoritative workflow guidance lives in:
 
-- `src/app/AGENTS.md`
-- `src/app/(site)/AGENTS.md`
+- `apps/web/src/app/AGENTS.md`
+- `apps/web/src/app/(site)/AGENTS.md`
 
 This file is the route-family inventory for quick scanning.
+After the monorepo move, older shorthand paths in this inventory that begin with `src/` refer to `apps/web/src/`.
 
 ## Shell And Global UI
 

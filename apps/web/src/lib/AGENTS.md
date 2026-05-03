@@ -12,6 +12,9 @@ Most application behavior should flow through this folder before it reaches page
 - `auth/*`: session cookies, Roblox OAuth helpers, navigation safety, and current-user lookup.
 - `security/*`: request origin checks, IP extraction, CSP, and rate limiting.
 - `comments.ts` and `comment-moderation.ts`: comment formatting, tags, and moderation decisions.
+- `code-utils.ts`: shared code reward cleanup, sorting, and "new code" freshness rules used by website, extension API, and mobile API.
+- `extension-codes.ts` and `extension-codes-utils.ts`: public Chrome extension payload building and Roblox page-context normalization.
+- `mobile-codes.ts`: public mobile app payload building for codes index/detail screens.
 - Domain helpers:
   - `forge/*`
   - `grow-a-garden/*`
@@ -29,6 +32,7 @@ Most application behavior should flow through this folder before it reaches page
 ## Shared Utility Rules
 
 - Keep normalization, slug handling, and search parsing centralized.
+- Keep cross-client rules centralized. If the website, extension, and mobile app all show the same concept, add one helper here and make all clients use it.
 - Avoid duplicating canonical URL logic or SEO text assembly in page files.
 - Security and auth helpers should stay composable so API routes and auth routes can share them.
 

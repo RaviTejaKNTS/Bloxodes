@@ -5,6 +5,8 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ## Start Here
 
+- `apps/extension/AGENTS.md`: Chrome MV3 extension packaging, Roblox injection, API use, and Chrome Web Store update rules.
+- `apps/mobile/AGENTS.md`: Expo React Native app scope, mobile API contract, and local testing commands.
 - `apps/web/src/app/AGENTS.md`: App Router, layouts, feeds, auth routes, and API conventions.
 - `apps/web/src/app/(site)/AGENTS.md`: public page families, page-data patterns, SEO, and content route expectations.
 - `apps/web/src/app/api/AGENTS.md`: JSON endpoints, mutation safety, session/progress flows, and revalidation behavior.
@@ -16,10 +18,14 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ## Architecture Snapshot
 
+- npm workspaces are enabled at the repo root. `npm run build` remains the production web build and delegates to `npm run build:web`.
 - Next.js App Router application in `apps/web`, with public content in `apps/web/src/app/(site)` and account/auth flows in `apps/web/src/app/(secure)` plus `apps/web/src/app/auth`.
+- Chrome extension source lives in `apps/extension`. It builds a Chrome MV3 upload package and calls Bloxodes web APIs; it is not part of Dokploy deployment.
+- Expo React Native mobile source lives in `apps/mobile`. The current mobile V1 is a codes index/detail client backed by `/api/mobile/*` web routes.
 - Supabase is the primary content and product data store. Pages usually read from views via `apps/web/src/lib/db.ts`, `apps/web/src/lib/catalog.ts`, and `apps/web/src/lib/tools.ts`.
 - Local datasets in `data/` and `apps/web/src/data/` back a few tools/catalog sections where structured content does not live in Supabase.
 - Operational work happens through root `scripts/` and Supabase edge functions in `supabase/functions/`.
+- Dokploy deploys the public web app from the root Dockerfile, which builds `@bloxodes/web` and runs `apps/web/server.js`.
 
 ## Working Defaults
 
@@ -53,6 +59,20 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 2. Use shared auth/security helpers from `apps/web/src/lib/auth/*` and `apps/web/src/lib/security/*`.
 3. Revalidate tags or paths after successful writes.
 4. Document new endpoints in `agents/routes/agents.md`.
+
+### Chrome extension
+
+1. Work under `apps/extension` and follow `apps/extension/AGENTS.md`.
+2. Keep permissions minimal and use Bloxodes API routes instead of Supabase or edge functions directly.
+3. Keep injected UI scoped under `#bloxodes-codes-extension`; avoid generic global class names that can collide with older live extensions.
+4. Run `npm run typecheck:extension` and `npm run package:extension`.
+
+### Mobile app
+
+1. Work under `apps/mobile` and follow `apps/mobile/AGENTS.md`.
+2. Keep mobile data access behind `apps/web/src/app/api/mobile/*`.
+3. Keep V1 focused on codes index/detail until the shared client and auth model mature.
+4. Run `npm run typecheck:mobile`.
 
 ### Database or content model
 

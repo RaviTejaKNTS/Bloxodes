@@ -22,6 +22,8 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/consent` | `GET` | `src/app/api/consent/route.ts` | Consent state resolution. |
 | `/api/extension/roblox-game-codes` | `GET`, `OPTIONS` | `apps/web/src/app/api/extension/roblox-game-codes/route.ts` | Public Chrome extension lookup for a Roblox game page, returning a three-code preview and full Bloxodes URL. |
 | `/api/health` | `GET` | `src/app/api/health/route.ts` | Runtime health endpoint. |
+| `/api/mobile/codes` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/codes/route.ts` | Public mobile app payload for the paginated codes index. |
+| `/api/mobile/codes/[slug]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/codes/[slug]/route.ts` | Public mobile app payload for a code detail page with active and expired codes. |
 | `/api/quizzes/progress` | `GET`, `PUT` | `src/app/api/quizzes/progress/route.ts` | Per-user quiz progress and last score state. |
 | `/api/quizzes/session` | `GET` | `src/app/api/quizzes/session/route.ts` | Session snapshot for quiz UI. |
 | `/api/revalidate` | `POST` | `src/app/api/revalidate/route.ts` | Publish-triggered ISR and Cloudflare purge entrypoint. |

@@ -1,6 +1,82 @@
 # Bloxodes Platform Expansion Plan
 
-Last updated: 2026-05-03
+Last updated: 2026-05-04
+
+## Current Implementation Snapshot
+
+This repo has already moved into the first monorepo shape:
+
+```txt
+Bloxodes/
+  apps/
+    web/        # production Next.js public site
+    extension/  # Chrome MV3 extension source and package scripts
+    mobile/     # Expo React Native Android/iOS app
+  packages/     # reserved for future shared packages
+  data/
+  docs/
+  scripts/
+  supabase/
+```
+
+Root npm workspaces are enabled with:
+
+```json
+{
+  "workspaces": ["apps/*", "packages/*"]
+}
+```
+
+Current root commands:
+
+```bash
+npm run dev:web
+npm run build:web
+npm run start:web
+npm run typecheck:web
+npm run test:web
+npm run typecheck:extension
+npm run package:extension
+npm run dev:mobile
+npm run typecheck:mobile
+```
+
+Production web deployment remains web-only:
+
+- Dokploy should build from the repo root Dockerfile.
+- Root `npm run build` delegates to `npm run build:web`.
+- The root Dockerfile builds `apps/web` with Next standalone output and starts `apps/web/server.js`.
+- `apps/extension` and `apps/mobile` are ignored by deployment except for dependency installation during the Docker build.
+
+Current Chrome extension implementation:
+
+- Source: `apps/extension`.
+- Manifest version: Chrome MV3.
+- Store package: `apps/extension/bloxodes-extension-v4.0.0.zip`.
+- Runtime API: `GET https://bloxodes.com/api/extension/roblox-game-codes`.
+- Roblox matches: `www.roblox.com/games/*` and `web.roblox.com/games/*`.
+- Shows only up to three active codes, hides itself when there is no published matching Bloxodes codes page, and links to the full Bloxodes page.
+- CSS is scoped under `#bloxodes-codes-extension`; avoid generic wrapper classes because the live store extension can be enabled at the same time during testing.
+
+Current mobile implementation:
+
+- Source: `apps/mobile`.
+- Stack: Expo, React Native, TypeScript.
+- V1 scope: codes index and code detail page only.
+- Runtime APIs:
+  - `GET /api/mobile/codes`
+  - `GET /api/mobile/codes/[slug]`
+- Default API base URL: `https://bloxodes.com`.
+- Local/staging override: `EXPO_PUBLIC_BLOXODES_API_URL`.
+
+Still future work:
+
+- `apps/admin`.
+- Shared `packages/*` extraction.
+- Mobile auth, follows, notifications, and store release setup.
+- Extension auth bridge and follow/new-code notification features.
+
+The older phase plan below is kept as long-form context, but the snapshot above is the source of truth for the current repo state.
 
 This document is the start-to-finish plan for expanding Bloxodes from the current Next.js web app into a monorepo with:
 
@@ -19,11 +95,11 @@ The main recommendation is:
 4. Add admin as a separate deployable web app.
 5. Add React Native mobile after the shared API and auth model are stable.
 
-## Current Situation
+## Original Situation Before Migration
 
-The current repository is a single Next.js App Router application for Bloxodes.
+The repository started as a single Next.js App Router application for Bloxodes. It now has the monorepo foundation described in the current snapshot above.
 
-Important existing facts:
+Important historical facts:
 
 - The public site is already live and deployed.
 - Dokploy is used for deployment.
@@ -39,13 +115,13 @@ Use a monorepo.
 
 Do not create separate repositories for admin, extension, or mobile unless a future team, security, or open-source boundary makes that necessary.
 
-Recommended target layout:
+Current and recommended target layout:
 
 ```txt
 Bloxodes/
   apps/
     web/
-    admin/
+    admin/       # future
     extension/
     mobile/
   packages/
@@ -121,6 +197,8 @@ Goals:
 - Keep production deployment working during and after the move.
 - Add shared packages only where they solve real duplication.
 
+Status: foundation is implemented for `apps/web`, `apps/extension`, and `apps/mobile`. `apps/admin` and meaningful shared package extraction are still future work.
+
 ### Phase 3: Admin App
 
 Goals:
@@ -137,6 +215,8 @@ Goals:
 - Target iOS and Android from one codebase.
 - Use safe Bloxodes APIs, not direct broad Supabase access.
 - Ship only after the API contract is stable.
+
+Status: Expo app scaffold and codes V1 screens are implemented. Store release, auth, and broad content surfaces are still future work.
 
 ## Target Monorepo Layout
 
@@ -200,7 +280,7 @@ Bloxodes/
 
 The current repo uses npm and has `package-lock.json`. To reduce migration risk, start with npm workspaces.
 
-Root `package.json` after migration:
+Root `package.json` now uses workspace scripts like:
 
 ```json
 {
@@ -210,16 +290,16 @@ Root `package.json` after migration:
     "packages/*"
   ],
   "scripts": {
-    "dev:web": "npm run dev -w apps/web",
-    "build:web": "npm run build -w apps/web",
-    "start:web": "npm run start -w apps/web",
+    "dev:web": "npm run dev -w @bloxodes/web",
+    "build:web": "npm run build -w @bloxodes/web",
+    "start:web": "npm run start -w @bloxodes/web",
     "dev:admin": "npm run dev -w apps/admin",
     "build:admin": "npm run build -w apps/admin",
-    "dev:extension": "npm run dev -w apps/extension",
-    "build:extension": "npm run build -w apps/extension",
-    "dev:mobile": "npm run start -w apps/mobile",
-    "typecheck": "npm run typecheck --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present"
+    "build:extension": "npm run build -w @bloxodes/extension",
+    "package:extension": "npm run package -w @bloxodes/extension",
+    "dev:mobile": "npm run dev -w @bloxodes/mobile",
+    "typecheck": "npm run typecheck:web && npm run typecheck:extension && npm run typecheck:mobile",
+    "test": "npm run test:web"
   }
 }
 ```
@@ -699,44 +779,42 @@ apps/extension/
 
 ### Extension API Design
 
-Create a public API route in Bloxodes specifically for the extension.
+The public extension API route now exists in Bloxodes.
 
-Suggested endpoint:
+Current endpoint:
 
 ```txt
-POST /api/extension/roblox-game-codes
+GET /api/extension/roblox-game-codes?placeId=123456&robloxUrl=...&gameName=...&limit=3
 ```
 
-Request:
+Response shape:
 
 ```json
 {
-  "robloxUrl": "https://www.roblox.com/games/123456/Game-Name",
-  "placeId": "123456",
-  "gameName": "Game Name",
-  "extensionVersion": "4.0.0"
-}
-```
-
-Response:
-
-```json
-{
+  "ok": true,
   "matched": true,
   "game": {
     "name": "Game Name",
     "slug": "game-name",
-    "url": "https://bloxodes.com/codes/game-name"
+    "url": "https://bloxodes.com/codes/game-name",
+    "robloxUrl": "https://www.roblox.com/games/123456/Game-Name",
+    "coverImage": "https://..."
   },
   "codes": [
     {
       "code": "REWARD123",
-      "reward": "Coins",
-      "isNew": true
+      "rewardText": "Coins",
+      "isNew": true,
+      "levelRequirement": null,
+      "addedAt": "2026-05-03T00:00:00.000Z"
     }
   ],
-  "activeCount": 1,
-  "updatedAt": "2026-05-03T00:00:00.000Z"
+  "totalActive": 1,
+  "shown": 1,
+  "hasMore": false,
+  "lastCheckedAt": "2026-05-03T00:00:00.000Z",
+  "fullListUrl": "https://bloxodes.com/codes/game-name",
+  "codesHubUrl": "https://bloxodes.com/codes"
 }
 ```
 
@@ -748,27 +826,31 @@ Security rules:
 - Return only data needed by the extension.
 - Do not require user login for basic code lookup.
 - Do not collect Roblox usernames unless a future feature explicitly needs it and privacy policy is updated.
+- Keep this endpoint backward-compatible because Chrome extensions update gradually.
 
 ### Manifest Permissions
 
 Keep permissions minimal.
 
-Likely manifest v3 permissions:
+Current manifest v3 shape:
 
 ```json
 {
   "manifest_version": 3,
   "name": "Bloxodes - Roblox Game Codes",
   "version": "4.0.0",
-  "permissions": ["storage"],
   "host_permissions": [
-    "https://www.roblox.com/*",
-    "https://web.roblox.com/*",
-    "https://bloxodes.com/*"
+    "https://bloxodes.com/api/extension/*"
   ],
   "background": {
     "service_worker": "background.js"
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["brand/Bloxodes-dark.png", "brand/Bloxodes-light.png"],
+      "matches": ["https://www.roblox.com/*", "https://web.roblox.com/*"]
+    }
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -776,7 +858,7 @@ Likely manifest v3 permissions:
         "https://web.roblox.com/games/*"
       ],
       "js": ["content.js"],
-      "css": ["content.css"]
+      "css": ["styles.css"]
     }
   ]
 }
@@ -807,13 +889,15 @@ Before upload:
 
 ```bash
 npm install
-npm run build -w apps/extension
+npm run typecheck:extension
+npm run package:extension
 ```
 
 Expected output:
 
 ```txt
 apps/extension/dist/
+apps/extension/bloxodes-extension-v4.0.0.zip
 ```
 
 Manual test:
@@ -832,8 +916,7 @@ Manual test:
 Package:
 
 ```bash
-cd apps/extension/dist
-zip -r ../bloxodes-extension-4.0.0.zip .
+npm run package:extension
 ```
 
 Chrome Web Store:
@@ -912,22 +995,33 @@ Recommended stack:
 - EAS Build
 - EAS Submit
 
-Do not start mobile before extension recovery and basic shared API work are done.
+Mobile has started as a small V1 focused on codes. Keep that scope tight until the API contract and auth/follow model are stable.
 
 ### Mobile App MVP
 
-Start simple:
+Current V1 starts simple:
+
+- Codes index
+- Code detail page
+
+Later MVP expansion candidates:
 
 - Home feed
 - Search
-- Codes index
-- Code detail page
 - Catalog index
 - Tools index
 - Wiki index
 - Quizzes index
 - Saved/favorite games locally
 - Push notification foundation, optional
+
+Local test:
+
+```bash
+npm run dev:mobile
+```
+
+Use Expo Go on a phone, iOS Simulator, or Android Emulator. Set `EXPO_PUBLIC_BLOXODES_API_URL` to a local/staging web server when needed.
 
 ### Mobile API Rule
 
@@ -1036,9 +1130,9 @@ Extension and mobile should call public or authenticated Bloxodes APIs.
 Shared API layers:
 
 ```txt
-src/app/api/extension/*
-src/app/api/mobile/*
-src/app/api/admin/*
+apps/web/src/app/api/extension/*
+apps/web/src/app/api/mobile/*
+apps/web/src/app/api/admin/*
 packages/api-client
 packages/shared
 ```

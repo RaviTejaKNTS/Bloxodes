@@ -6,14 +6,17 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 ## Primary Guides
 
 - `AGENTS.md`: root repo workflow and change checklists.
-- `src/app/AGENTS.md`: App Router structure, feeds, sitemaps, auth routes, and route conventions.
-- `src/app/(site)/AGENTS.md`: public route families, page-data patterns, SEO, and publishable content rules.
-- `src/app/api/AGENTS.md`: JSON endpoint conventions, mutation safety, and cache invalidation.
-- `src/lib/AGENTS.md`: shared data access, caching, auth, SEO, and domain helpers.
+- `apps/extension/AGENTS.md`: Chrome MV3 extension source, Roblox injected UI, and Chrome Web Store packaging rules.
+- `apps/mobile/AGENTS.md`: Expo React Native app scope, API contract, and local testing workflow.
+- `apps/web/src/app/AGENTS.md`: App Router structure, feeds, sitemaps, auth routes, and route conventions.
+- `apps/web/src/app/(site)/AGENTS.md`: public route families, page-data patterns, SEO, and publishable content rules.
+- `apps/web/src/app/api/AGENTS.md`: JSON endpoint conventions, mutation safety, extension/mobile APIs, and cache invalidation.
+- `apps/web/src/lib/AGENTS.md`: shared data access, caching, auth, SEO, client payload helpers, and domain modules.
 - `scripts/AGENTS.md`: automation/script authoring and execution rules.
 - `supabase/AGENTS.md`: schema and edge-function guidance.
 - `data/AGENTS.md`: local datasets and their consumers.
 - `DESIGN.md`: public live-database design direction, shadcn component usage, design tokens, and readable content rules.
+- `docs/platform-monorepo-extension-mobile-plan.md`: current platform snapshot plus longer-term admin, extension, and mobile roadmap.
 
 ## Reference Docs In This Folder
 
@@ -27,3 +30,4 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - Update the closest scoped `AGENTS.md` when behavior or workflow changes.
 - Update these `agents/*.md` files when the repo surface area changes: new routes, scripts, datasets, or major architecture moves.
 - Treat this folder as the discovery layer and the scoped `AGENTS.md` files as the operating layer.
+- For workspace-level changes, keep root `package.json`, root `Dockerfile`, `.dockerignore`, and Dokploy notes aligned so production stays web-only unless intentionally expanded.

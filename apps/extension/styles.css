@@ -1,11 +1,44 @@
 #bloxodes-codes-extension {
+  --bloxodes-accent: rgb(79, 70, 229);
+  --bloxodes-accent-dark: rgb(67, 56, 202);
+  --bloxodes-accent-soft: rgba(79, 70, 229, 0.15);
+  --bloxodes-accent-softer: rgba(79, 70, 229, 0.12);
+  --bloxodes-accent-border: rgba(79, 70, 229, 0.4);
+  --bloxodes-accent-border-strong: rgba(79, 70, 229, 0.6);
+  --bloxodes-background: rgb(226, 229, 243);
+  --bloxodes-border: rgba(198, 202, 224, 0.7);
+  --bloxodes-border-muted: rgba(198, 202, 224, 0.6);
+  --bloxodes-foreground: rgb(32, 38, 60);
+  --bloxodes-muted: rgb(110, 118, 146);
+  --bloxodes-surface-muted: rgb(212, 215, 231);
+  --bloxodes-surface-muted-soft: rgba(212, 215, 231, 0.35);
+  --bloxodes-surface-muted-softer: rgba(212, 215, 231, 0.2);
+  --bloxodes-white: #ffffff;
   box-sizing: border-box;
   clear: both;
-  color: rgb(32, 38, 60);
+  color: var(--bloxodes-foreground);
   font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   margin: 16px 0;
   max-width: 970px;
   width: 100%;
+}
+
+#bloxodes-codes-extension[data-bloxodes-theme="dark"] {
+  --bloxodes-accent: rgb(132, 169, 255);
+  --bloxodes-accent-dark: rgb(79, 70, 229);
+  --bloxodes-accent-soft: rgba(132, 169, 255, 0.14);
+  --bloxodes-accent-softer: rgba(132, 169, 255, 0.12);
+  --bloxodes-accent-border: rgba(132, 169, 255, 0.38);
+  --bloxodes-accent-border-strong: rgba(132, 169, 255, 0.6);
+  --bloxodes-background: rgb(31, 33, 39);
+  --bloxodes-border: rgba(255, 255, 255, 0.14);
+  --bloxodes-border-muted: rgba(255, 255, 255, 0.11);
+  --bloxodes-foreground: rgb(241, 243, 247);
+  --bloxodes-muted: rgb(184, 190, 205);
+  --bloxodes-surface-muted: rgb(47, 50, 59);
+  --bloxodes-surface-muted-soft: rgba(255, 255, 255, 0.07);
+  --bloxodes-surface-muted-softer: rgba(255, 255, 255, 0.045);
+  --bloxodes-white: #ffffff;
 }
 
 #bloxodes-codes-extension *,
@@ -15,8 +48,8 @@
 }
 
 #bloxodes-codes-extension .bloxodes-card {
-  background: rgb(226, 229, 243);
-  border: 1px solid rgba(198, 202, 224, 0.7);
+  background: var(--bloxodes-background);
+  border: 1px solid var(--bloxodes-border);
   border-radius: 8px;
   box-shadow: none;
   overflow: hidden;
@@ -24,7 +57,7 @@
 
 #bloxodes-codes-extension .bloxodes-card-header {
   align-items: flex-start;
-  border-bottom: 1px solid rgba(198, 202, 224, 0.6);
+  border-bottom: 1px solid var(--bloxodes-border-muted);
   display: flex;
   gap: 12px;
   justify-content: space-between;
@@ -36,7 +69,7 @@
 }
 
 #bloxodes-codes-extension .bloxodes-title {
-  color: rgb(32, 38, 60);
+  color: var(--bloxodes-foreground);
   font-size: 22px;
   font-weight: 600;
   letter-spacing: 0;
@@ -46,7 +79,7 @@
 
 #bloxodes-codes-extension .bloxodes-status {
   align-items: center;
-  color: rgb(110, 118, 146);
+  color: var(--bloxodes-muted);
   display: flex;
   font-size: 13px;
   gap: 6px;
@@ -66,10 +99,10 @@
 }
 
 #bloxodes-codes-extension .bloxodes-badge {
-  background: rgb(212, 215, 231);
-  border: 1px solid rgba(198, 202, 224, 0.7);
+  background: var(--bloxodes-surface-muted);
+  border: 1px solid var(--bloxodes-border);
   border-radius: 6px;
-  color: rgb(32, 38, 60);
+  color: var(--bloxodes-foreground);
   flex: 0 0 auto;
   font-size: 12px;
   font-weight: 600;
@@ -82,14 +115,14 @@
 }
 
 #bloxodes-codes-extension .bloxodes-code-list {
-  border: 1px solid rgba(198, 202, 224, 0.6);
+  border: 1px solid var(--bloxodes-border-muted);
   border-radius: 6px;
   overflow: hidden;
 }
 
 #bloxodes-codes-extension .bloxodes-code-row {
   align-items: center;
-  background: rgb(226, 229, 243);
+  background: var(--bloxodes-background);
   display: grid;
   gap: 12px;
   grid-template-columns: 30px minmax(0, 1fr) auto;
@@ -98,14 +131,14 @@
 }
 
 #bloxodes-codes-extension .bloxodes-code-row + .bloxodes-code-row {
-  border-top: 1px solid rgba(198, 202, 224, 0.6);
+  border-top: 1px solid var(--bloxodes-border-muted);
 }
 
 #bloxodes-codes-extension .bloxodes-code-index {
   align-items: center;
-  background: rgba(212, 215, 231, 0.35);
+  background: var(--bloxodes-surface-muted-soft);
   border-radius: 6px;
-  color: rgb(110, 118, 146);
+  color: var(--bloxodes-muted);
   display: inline-flex;
   font-size: 12px;
   font-weight: 500;
@@ -128,7 +161,7 @@
 #bloxodes-codes-extension code {
   background: transparent;
   border: 0;
-  color: rgb(32, 38, 60);
+  color: var(--bloxodes-foreground);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace;
   font-size: 17px;
   font-weight: 700;
@@ -139,17 +172,17 @@
 }
 
 #bloxodes-codes-extension .bloxodes-code-main p {
-  color: rgb(110, 118, 146);
+  color: var(--bloxodes-muted);
   font-size: 13px;
   line-height: 1.45;
   margin: 4px 0 0;
 }
 
 #bloxodes-codes-extension .bloxodes-mini-badge {
-  background: rgba(79, 70, 229, 0.12);
-  border: 1px solid rgba(79, 70, 229, 0.35);
+  background: var(--bloxodes-accent-softer);
+  border: 1px solid var(--bloxodes-accent-border);
   border-radius: 5px;
-  color: rgb(79, 70, 229);
+  color: var(--bloxodes-accent);
   font-size: 10px;
   font-weight: 700;
   line-height: 1;
@@ -167,58 +200,57 @@
 #bloxodes-codes-extension .bloxodes-copy-button,
 #bloxodes-codes-extension .bloxodes-retry-button {
   align-items: center;
-  background: rgba(79, 70, 229, 0.15);
-  border: 1px solid rgba(79, 70, 229, 0.4);
+  background: var(--bloxodes-accent-soft);
+  border: 1px solid var(--bloxodes-accent-border);
   border-radius: 999px;
-  color: rgb(79, 70, 229);
+  color: var(--bloxodes-accent);
   cursor: pointer;
   display: inline-flex;
   font: inherit;
   font-size: 12px;
   font-weight: 600;
-  gap: 7px;
+  gap: 8px;
   justify-content: center;
   line-height: 1;
-  min-height: 32px;
-  padding: 8px 13px;
+  min-height: 30px;
+  padding: 6px 16px;
   transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
   white-space: nowrap;
 }
 
 #bloxodes-codes-extension .bloxodes-copy-button:hover,
 #bloxodes-codes-extension .bloxodes-retry-button:hover {
-  background: rgba(79, 70, 229, 0.2);
-  border-color: rgba(79, 70, 229, 0.6);
+  background: var(--bloxodes-accent-soft);
+  border-color: var(--bloxodes-accent-border-strong);
 }
 
 #bloxodes-codes-extension .bloxodes-copy-button.is-copied {
-  background: rgb(67, 56, 202);
-  border-color: rgba(79, 70, 229, 0.6);
-  color: #ffffff;
+  background: var(--bloxodes-accent-dark);
+  border-color: var(--bloxodes-accent-border-strong);
+  color: var(--bloxodes-white);
 }
 
 #bloxodes-codes-extension .bloxodes-copy-icon {
-  border: 1.8px solid currentColor;
-  border-radius: 3px;
-  display: inline-block;
-  height: 13px;
-  position: relative;
-  width: 13px;
+  display: block;
+  flex: 0 0 auto;
+  height: 14px;
+  width: 14px;
 }
 
-#bloxodes-codes-extension .bloxodes-copy-icon::before {
-  border: 1.8px solid currentColor;
-  border-radius: 3px;
-  content: "";
-  height: 13px;
-  left: -5px;
-  position: absolute;
-  top: -5px;
-  width: 13px;
+#bloxodes-codes-extension .bloxodes-copy-icon-check {
+  display: none;
+}
+
+#bloxodes-codes-extension .bloxodes-copy-button.is-copied .bloxodes-copy-icon-copy {
+  display: none;
+}
+
+#bloxodes-codes-extension .bloxodes-copy-button.is-copied .bloxodes-copy-icon-check {
+  display: block;
 }
 
 #bloxodes-codes-extension .bloxodes-added {
-  color: rgb(110, 118, 146);
+  color: var(--bloxodes-muted);
   font-size: 11px;
   font-weight: 500;
   line-height: 1.2;
@@ -226,10 +258,10 @@
 }
 
 #bloxodes-codes-extension .bloxodes-empty {
-  background: rgba(212, 215, 231, 0.2);
-  border: 1px solid rgba(198, 202, 224, 0.6);
+  background: var(--bloxodes-surface-muted-softer);
+  border: 1px solid var(--bloxodes-border-muted);
   border-radius: 6px;
-  color: rgb(110, 118, 146);
+  color: var(--bloxodes-muted);
   font-size: 13px;
   line-height: 1.45;
   padding: 14px;
@@ -244,15 +276,15 @@
 }
 
 #bloxodes-codes-extension .bloxodes-empty-title {
-  color: rgb(32, 38, 60);
+  color: var(--bloxodes-foreground);
   font-weight: 600;
 }
 
 #bloxodes-codes-extension .bloxodes-card-footer {
   align-items: center;
-  background: rgba(212, 215, 231, 0.25);
-  border-top: 1px solid rgba(198, 202, 224, 0.6);
-  color: rgb(110, 118, 146);
+  background: var(--bloxodes-surface-muted-softer);
+  border-top: 1px solid var(--bloxodes-border-muted);
+  color: var(--bloxodes-muted);
   display: flex;
   flex-wrap: wrap;
   font-size: 12px;
@@ -263,8 +295,12 @@
 }
 
 #bloxodes-codes-extension .bloxodes-link {
-  color: rgb(79, 70, 229);
+  align-items: center;
+  color: var(--bloxodes-accent);
+  display: inline-flex;
+  gap: 4px;
   font-weight: 700;
+  line-height: 1;
   text-decoration: none;
 }
 
@@ -272,9 +308,37 @@
   text-decoration: underline;
 }
 
+#bloxodes-codes-extension .bloxodes-logo-wrap {
+  align-items: center;
+  display: inline-flex;
+  height: 1em;
+  line-height: 1;
+}
+
+#bloxodes-codes-extension .bloxodes-logo {
+  display: block;
+  flex: 0 0 auto;
+  height: 1em;
+  max-width: none;
+  object-fit: contain;
+  width: auto;
+}
+
+#bloxodes-codes-extension .bloxodes-logo-dark {
+  display: none;
+}
+
+#bloxodes-codes-extension[data-bloxodes-theme="dark"] .bloxodes-logo-light {
+  display: none;
+}
+
+#bloxodes-codes-extension[data-bloxodes-theme="dark"] .bloxodes-logo-dark {
+  display: block;
+}
+
 #bloxodes-codes-extension .bloxodes-loading-row {
   align-items: center;
-  border: 1px solid rgba(198, 202, 224, 0.6);
+  border: 1px solid var(--bloxodes-border-muted);
   display: grid;
   gap: 12px;
   grid-template-columns: minmax(0, 1fr) 90px;
@@ -287,7 +351,7 @@
 
 #bloxodes-codes-extension .bloxodes-loading-row span {
   animation: bloxodes-pulse 1.2s ease-in-out infinite;
-  background: rgb(212, 215, 231);
+  background: var(--bloxodes-surface-muted);
   border-radius: 999px;
   display: block;
   height: 14px;

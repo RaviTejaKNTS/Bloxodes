@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Check, RotateCcw } from "lucide-react";
 import type { Code } from "@/lib/db";
-import { cleanRewardsText, isCodeWithinNewThreshold } from "@/lib/code-utils";
+import { cleanRewardsText, isCodeNew } from "@/lib/code-utils";
 import { trackEvent } from "@/lib/analytics";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -95,7 +95,7 @@ export function ActiveCodes({
   const enriched = useMemo<EnrichedCode[]>(() => {
     return codes.map((code) => {
       const rewardText = cleanRewardsText(code.rewards_text);
-      const isNew = isCodeWithinNewThreshold(code, nowMs);
+      const isNew = isCodeNew(code, nowMs);
       const addedAtLabel = code.first_seen_at
         ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(
             new Date(code.first_seen_at)

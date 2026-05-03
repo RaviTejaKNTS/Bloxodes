@@ -1,5 +1,5 @@
 import { unstable_cache } from "next/cache";
-import { cleanRewardsText, isCodeWithinNewThreshold, sortCodesByFirstSeenDesc } from "@/lib/code-utils";
+import { cleanRewardsText, isCodeNew, sortCodesByFirstSeenDesc } from "@/lib/code-utils";
 import type { Code, Game } from "@/lib/db";
 import {
   extractPlaceIdFromRobloxUrl,
@@ -78,7 +78,7 @@ function formatExtensionCode(code: Code, referenceMs: number): ExtensionCode {
   return {
     code: code.code,
     rewardText: cleanRewardsText(code.rewards_text),
-    isNew: Boolean(code.is_new) || isCodeWithinNewThreshold(code, referenceMs),
+    isNew: isCodeNew(code, referenceMs),
     levelRequirement: code.level_requirement,
     addedAt: code.first_seen_at ?? null
   };

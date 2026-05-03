@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Bloxodes",
+    "slug": "bloxodes",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "bloxodes",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bloxodes.app"
+    },
+    "android": {
+      "package": "com.bloxodes.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#edf0f8"
+      }
+    },
+    "extra": {
+      "apiBaseUrl": "https://bloxodes.com"
+    }
+  }
+}

@@ -18,6 +18,18 @@
   "host_permissions": [
     "https://bloxodes.com/api/extension/*"
   ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "brand/Bloxodes-dark.png",
+        "brand/Bloxodes-light.png"
+      ],
+      "matches": [
+        "https://www.roblox.com/*",
+        "https://web.roblox.com/*"
+      ]
+    }
+  ],
   "content_scripts": [
     {
       "matches": [

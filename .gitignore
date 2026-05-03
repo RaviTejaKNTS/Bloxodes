@@ -13,6 +13,8 @@ out/
 /build
 apps/extension/dist/
 apps/extension/*.zip
+apps/mobile/.expo/
+apps/mobile/dist/
 
 # Runtime data
 pids
@@ -34,6 +36,7 @@ jspm_packages/
 
 # Optional npm cache directory
 .npm
+.expo-home/
 
 # Optional eslint cache
 .eslintcache

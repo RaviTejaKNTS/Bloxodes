@@ -34,3 +34,7 @@ export function isCodeWithinNewThreshold(code: Pick<Code, "first_seen_at">, refe
   if (firstSeenMs == null) return false;
   return referenceMs - firstSeenMs <= NEW_CODE_THRESHOLD_MS;
 }
+
+export function isCodeNew(code: Pick<Code, "first_seen_at">, referenceMs: number): boolean {
+  return isCodeWithinNewThreshold(code, referenceMs);
+}
