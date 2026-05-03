@@ -53,6 +53,8 @@ const supabase = createClient(
 );
 
 const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+const ENABLE_GOOGLE_IMAGE_FALLBACK = process.argv.includes("--google-image-fallback");
+const RETRY_MISSING_UNIVERSE_ONLY = process.argv.includes("--retry-missing-universe-only");
 
 function assertLocalSupabase() {
   const url = process.env.SUPABASE_URL ?? "";
@@ -469,7 +471,7 @@ async function resolveCoverImage(game: GameRow, robloxLink: string | null, stats
     imageUrl = await fetchRobloxExperienceThumbnail(robloxLink);
   }
 
-  if (!imageUrl) {
+  if (!imageUrl && ENABLE_GOOGLE_IMAGE_FALLBACK) {
     imageUrl = await findRobloxImageUrl(game.name, stats);
   }
 
@@ -483,24 +485,39 @@ async function resolveCoverImage(game: GameRow, robloxLink: string | null, stats
 }
 
 async function loadUnpublishedGames(limit: number | null, startAfterSlug: string | null): Promise<GameRow[]> {
-  let query = supabase
-    .from("games")
-    .select(
-      "id, name, slug, source_url, source_url_2, source_url_3, roblox_link, community_link, discord_link, twitter_link, youtube_link, cover_image, universe_id"
-    )
-    .eq("is_published", false)
-    .order("slug", { ascending: true });
+  const pageSize = 1000;
+  const rows: GameRow[] = [];
+  let offset = 0;
 
-  if (startAfterSlug) {
-    query = query.gt("slug", startAfterSlug);
-  }
-  if (limit) {
-    query = query.limit(limit);
+  while (limit === null || rows.length < limit) {
+    const remaining = limit === null ? pageSize : Math.min(pageSize, limit - rows.length);
+    if (remaining <= 0) break;
+
+    let query = supabase
+      .from("games")
+      .select(
+        "id, name, slug, source_url, source_url_2, source_url_3, roblox_link, community_link, discord_link, twitter_link, youtube_link, cover_image, universe_id"
+      )
+      .eq("is_published", false)
+      .order("slug", { ascending: true })
+      .range(offset, offset + remaining - 1);
+
+    if (RETRY_MISSING_UNIVERSE_ONLY) {
+      query = query.not("roblox_link", "is", null).is("universe_id", null);
+    }
+
+    if (startAfterSlug) {
+      query = query.gt("slug", startAfterSlug);
+    }
+
+    const { data, error } = await query;
+    if (error) throw new Error(`Failed to load local games: ${error.message}`);
+    rows.push(...((data ?? []) as GameRow[]));
+    if (!data || data.length < remaining) break;
+    offset += remaining;
   }
 
-  const { data, error } = await query;
-  if (error) throw new Error(`Failed to load local games: ${error.message}`);
-  return (data ?? []) as GameRow[];
+  return rows;
 }
 
 async function promisePool<T>(items: T[], concurrency: number, handler: (item: T) => Promise<void>) {
@@ -517,15 +534,9 @@ async function promisePool<T>(items: T[], concurrency: number, handler: (item: T
 
 async function enrichGame(game: GameRow, stats: EnrichmentStats): Promise<void> {
   console.log(`\n🔎 ${stats.processed + 1}. Enriching ${game.slug}`);
-  const socialLinks = await collectSocialLinksFromExistingSources(game);
+  const socialLinks = RETRY_MISSING_UNIVERSE_ONLY ? {} : await collectSocialLinksFromExistingSources(game);
 
   const robloxLink = socialLinks.roblox_link?.url ?? game.roblox_link ?? null;
-  if (robloxLink && !socialLinks.community_link) {
-    const metadata = await collectRobloxMetadata(robloxLink);
-    if (metadata.communityLink) {
-      socialLinks.community_link = { url: metadata.communityLink };
-    }
-  }
 
   let resolvedUniverseId: number | null = null;
   if (robloxLink) {
@@ -538,10 +549,12 @@ async function enrichGame(game: GameRow, stats: EnrichmentStats): Promise<void> 
   }
 
   let coverImage: string | null = null;
-  try {
-    coverImage = await resolveCoverImage(game, robloxLink, stats);
-  } catch (error) {
-    console.warn("⚠️ Failed to attach cover image:", error instanceof Error ? error.message : error);
+  if (!RETRY_MISSING_UNIVERSE_ONLY) {
+    try {
+      coverImage = await resolveCoverImage(game, robloxLink, stats);
+    } catch (error) {
+      console.warn("⚠️ Failed to attach cover image:", error instanceof Error ? error.message : error);
+    }
   }
 
   const updatePayload = {
@@ -646,7 +659,9 @@ async function main() {
   }
 
   console.log(
-    `🧾 Local enrichment target: ${games.length} unpublished game${games.length === 1 ? "" : "s"} with concurrency ${concurrency}`
+    `🧾 Local enrichment target: ${games.length} unpublished game${games.length === 1 ? "" : "s"} with concurrency ${concurrency}${
+      RETRY_MISSING_UNIVERSE_ONLY ? " (missing universe retry only)" : ""
+    }`
   );
   const stats: EnrichmentStats = {
     processed: 0,

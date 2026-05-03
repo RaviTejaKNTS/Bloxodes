@@ -65,7 +65,6 @@ type ArticleResponse = {
   troubleshoot_md: string;
   rewards_md: string;
   find_codes_md: string;
-  about_game_md: string;
   meta_description: string;
   game_display_name: string;
 };
@@ -104,7 +103,6 @@ type ExistingGameRecord = {
   troubleshoot_md: string | null;
   rewards_md: string | null;
   find_codes_md: string | null;
-  about_game_md: string | null;
   seo_description: string | null;
 };
 
@@ -145,7 +143,7 @@ const normalizeInterlinkGame = (row: InterlinkGameQuery): InterlinkGame => ({
 function isArticleResponse(value: unknown): value is ArticleResponse {
   if (!value || typeof value !== "object") return false;
   const candidate = value as Record<string, unknown>;
-  return ["intro_md", "redeem_md", "troubleshoot_md", "rewards_md", "find_codes_md", "about_game_md", "meta_description", "game_display_name"].every(
+  return ["intro_md", "redeem_md", "troubleshoot_md", "rewards_md", "find_codes_md", "meta_description", "game_display_name"].every(
     (key) => typeof candidate[key] === "string" && Boolean(candidate[key])
   );
 }
@@ -446,7 +444,7 @@ async function loadDraftGames(limit: number, slug: string | null): Promise<Exist
   let query = supabase
     .from("games")
     .select(
-      "id, name, slug, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, about_game_md, seo_description"
+      "id, name, slug, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, seo_description"
     )
     .eq("is_published", false);
 
@@ -455,7 +453,7 @@ async function loadDraftGames(limit: number, slug: string | null): Promise<Exist
   } else {
     query = query
       .or(
-        "intro_md.is.null,redeem_md.is.null,troubleshoot_md.is.null,rewards_md.is.null,find_codes_md.is.null,about_game_md.is.null,seo_description.is.null"
+        "intro_md.is.null,redeem_md.is.null,troubleshoot_md.is.null,rewards_md.is.null,find_codes_md.is.null,seo_description.is.null"
       )
       .order("created_at", { ascending: true })
       .limit(limit);
@@ -650,7 +648,7 @@ function buildArticlePrompt(gameName: string, sources: string) {
 You are a Roblox player and a good friendly writer who is writing an article on ${gameName} Codes. Write the article in simple english, easy to understand style and most importantly information rich. Use only the details from the provided script and write only the section asked.
 
 Rules:
-- Keep the structure to intro_md, redeem_md, rewards_md, troubleshoot_md, find_codes_md, about_game_md, and meta_description.
+- Keep the structure to intro_md, redeem_md, rewards_md, troubleshoot_md, find_codes_md, and meta_description.
 - no generic words like This is a existing game or you will love this game is needed. Focus on the game and make sure every sentence adds more value to use who already plays the game.
 - If something is missing from sources, leave it out instead of guessing.
 - Meta description must be 150-160 characters, no generic claims, write unconvetional and very human and unique meta descriptions for each game.
@@ -685,17 +683,6 @@ find_codes_md rules:
 - Make it info rich and no fluff. 
 - Don't have to ask users to bookmark our page. 
 
-about_game_md rules:
-- Start with an H2 heading (## ...) about what's the game is about and how to play or how codes fit in.
-- Briefly explain what the game is and the main gameplay loop. Do not include the work gameplay loop. Just mention everything with a flow.
-- Include concrete details from the sources (genre, modes, goals, progression) when available.
-- You can add one short player tip only if it is supported by sources.
-- Keep it to 1-2 short paragraphs.
-- Include details like how codes fit in to the game, what rewards from the codes are most valuble or rare that users should not miss. 
-- Include details of other ways to get rewards easily other than codes if mentioned in the sources. 
-- Keep it info rich and make the section fluff-free. 
-- Leave out any generic info that belogs to all games or just more general in nature. Only focus on unique aspects of game and rewards. 
-
 Source excerpts:
 ${sources}
 
@@ -706,7 +693,6 @@ Return valid JSON with these keys:
   "rewards_md": "Start with ${JSON.stringify(rewardsHeading)} then Create a table of typical rewards (from the sources). Include all the reward types we get for this game with clear details,and a small description of each reward. Keep it very informational, full sentences, clean to understand, but write in as less words as possible. Before the table, write a line or two to give cue to the users. Do not include any generic or templated writing. Always write things that are unique to the game and leave out everything that is generic in nature like rewards help you progress faster. Leave out the ovbious and focus on the depth and information.",
   "troubleshoot_md": "Start with ${JSON.stringify(troubleshootHeading)} and write why codes might fail and how to fix it. Anything that is generic in nature should be just covered in para style and in one word. But if there are any game specific issues like reaching a specific level or something like that, only then it needs to include them in the bullet list. Even if the list only has 1, include only the unique ones and do not repeat anything. Always keep things direct and try to tell in as less words as possible. (No generic reasons should get into bullet points",
   "find_codes_md": "Write the find codes section using the rules provided above.",
-  "about_game_md": "Write the about game section using the rules provided above.",
   "meta_description": "150-160 character, plain sentence mentioning ${gameName} codes and the value players get. No generic claims, write unconvetional and very human and unique meta descriptions for each game.",
   "game_display_name": "Return the official game name exactly as written in the sources (respect capitalization, punctuation, and spacing). Never invent a new name."
 }
@@ -806,7 +792,6 @@ async function processDraftGame(game: ExistingGameRecord): Promise<void> {
     troubleshoot_md: article.troubleshoot_md,
     rewards_md: article.rewards_md,
     find_codes_md: article.find_codes_md,
-    about_game_md: article.about_game_md,
     seo_description: article.meta_description,
   };
 
@@ -923,7 +908,6 @@ function applyLinkPlaceholders(article: ArticleResponse, gameName: string, links
   let troubleshoot = article.troubleshoot_md;
   let rewards = article.rewards_md;
   let findCodes = article.find_codes_md;
-  let aboutGame = article.about_game_md;
   const metaDescription = formatMetaDescription(article.meta_description, displayName);
 
   const hasPlaceholder = (key: keyof PlaceholderLinks) => {
@@ -1045,7 +1029,6 @@ function applyLinkPlaceholders(article: ArticleResponse, gameName: string, links
   troubleshoot = stripNonRobloxPlaceholders(troubleshoot);
   rewards = stripNonRobloxPlaceholders(rewards);
   findCodes = stripNonRobloxPlaceholders(findCodes);
-  aboutGame = stripNonRobloxPlaceholders(aboutGame);
 
   return {
     intro_md: intro,
@@ -1053,7 +1036,6 @@ function applyLinkPlaceholders(article: ArticleResponse, gameName: string, links
     troubleshoot_md: troubleshoot,
     rewards_md: rewards,
     find_codes_md: findCodes,
-    about_game_md: aboutGame,
     meta_description: metaDescription,
     game_display_name: displayName,
   };

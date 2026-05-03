@@ -41,8 +41,6 @@ export type Game = {
   find_codes_md: string | null;
   troubleshoot_md: string | null;
   rewards_md: string | null;
-  about_game_md: string | null;
-  description_md: string | null;
   universe_id: number | null;
   interlinking_ai_copy_md: string | null;
   is_published: boolean;

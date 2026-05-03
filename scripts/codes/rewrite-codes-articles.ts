@@ -16,7 +16,6 @@ type GameRow = {
   troubleshoot_md: string | null;
   rewards_md: string | null;
   seo_description: string | null;
-  description_md: string | null;
   roblox_link: string | null;
   source_url: string | null;
   source_url_2: string | null;
@@ -366,7 +365,7 @@ async function fetchNextGame(options: CliOptions): Promise<GameRow | null> {
     let query = supabase
       .from("games")
       .select(
-        "id, name, slug, old_slugs, created_at, intro_md, redeem_md, troubleshoot_md, rewards_md, seo_description, description_md, roblox_link, source_url, source_url_2, source_url_3, re_rewritten_at, is_published"
+        "id, name, slug, old_slugs, created_at, intro_md, redeem_md, troubleshoot_md, rewards_md, seo_description, roblox_link, source_url, source_url_2, source_url_3, re_rewritten_at, is_published"
       )
       .order("created_at", { ascending: true })
       .range(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE - 1);

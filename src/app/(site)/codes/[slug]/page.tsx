@@ -594,19 +594,17 @@ export default async function GamePage({ params }: Params) {
   const redeemMarkdown = game.redeem_md ? replaceLinkPlaceholders(game.redeem_md, linkMap) : "";
   const troubleshootMarkdown = game.troubleshoot_md ? replaceLinkPlaceholders(game.troubleshoot_md, linkMap) : "";
   const rewardsMarkdown = game.rewards_md ? replaceLinkPlaceholders(game.rewards_md, linkMap) : "";
-  const descriptionMarkdown = game.description_md ? replaceLinkPlaceholders(game.description_md, linkMap) : "";
   const findCodesMarkdown = game.find_codes_md ? replaceLinkPlaceholders(game.find_codes_md, linkMap) : "";
   const interlinkMarkdown = game.interlinking_ai_copy_md ?? "";
 
   const redeemSteps = extractHowToSteps(redeemMarkdown || game.redeem_md);
 
-  const [introHtml, redeemHtml, interlinkHtml, troubleshootHtml, rewardsHtml, descriptionHtml, findCodesHtml] = await Promise.all([
+  const [introHtml, redeemHtml, interlinkHtml, troubleshootHtml, rewardsHtml, findCodesHtml] = await Promise.all([
     introMarkdown ? renderMarkdown(introMarkdown) : "",
     redeemMarkdown ? renderMarkdown(redeemMarkdown) : "",
     interlinkMarkdown ? renderMarkdown(interlinkMarkdown) : "",
     troubleshootMarkdown ? renderMarkdown(troubleshootMarkdown) : "",
     rewardsMarkdown ? renderMarkdown(rewardsMarkdown) : "",
-    descriptionMarkdown ? renderMarkdown(descriptionMarkdown) : "",
     findCodesMarkdown ? renderMarkdown(findCodesMarkdown) : ""
   ]);
   const hasSupplemental = Boolean(troubleshootHtml || rewardsHtml);
@@ -616,7 +614,6 @@ export default async function GamePage({ params }: Params) {
   const troubleshootNodes = troubleshootHtml ? renderProcessedHtmlNodes(troubleshootHtml, "codes-troubleshoot") : null;
   const rewardsNodes = rewardsHtml ? renderProcessedHtmlNodes(rewardsHtml, "codes-rewards") : null;
   const findCodesNodes = findCodesHtml ? renderProcessedHtmlNodes(findCodesHtml, "codes-find-codes") : null;
-  const descriptionNodes = descriptionHtml ? renderProcessedHtmlNodes(descriptionHtml, "codes-description") : null;
 
   const canonicalUrl = `${SITE_URL}/codes/${game.slug}`;
   const coverImage = game.cover_image?.startsWith("http")
@@ -671,9 +668,6 @@ export default async function GamePage({ params }: Params) {
         faqEntries.push({ question: "How to get new codes fast?", answer });
       }
     }
-  } else if (descriptionMarkdown) {
-    const answer = markdownToPlainText(descriptionMarkdown).trim();
-    if (answer) faqEntries.push({ question: `About ${game.name}`, answer });
   }
 
   const universeLabel = universe?.display_name ?? universe?.name ?? game.name;
@@ -879,8 +873,6 @@ export default async function GamePage({ params }: Params) {
             ) : null}
 
           </>
-        ) : descriptionNodes ? (
-          descriptionNodes
         ) : null}
         </section>
 
