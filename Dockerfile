@@ -24,7 +24,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN groupadd --gid 1001 nodejs \
   && useradd --uid 1001 --gid nodejs --no-create-home --shell /usr/sbin/nologin nextjs \
-  && mkdir -p /app/.next/cache \
+  && mkdir -p /app/apps/web/.next/cache \
   && chown -R nextjs:nodejs /app
 
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
