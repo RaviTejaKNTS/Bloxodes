@@ -2,8 +2,8 @@
 
 Authoritative workflow guidance lives in:
 
-- `src/app/AGENTS.md`
-- `src/app/api/AGENTS.md`
+- `apps/web/src/app/AGENTS.md`
+- `apps/web/src/app/api/AGENTS.md`
 
 This file is the inventory for API, auth, feed, and sitemap routes.
 
@@ -20,6 +20,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/comments/[id]` | `PATCH`, `DELETE` | `src/app/api/comments/[id]/route.ts` | Edit or delete the current user's comments. |
 | `/api/comments/session` | `GET` | `src/app/api/comments/session/route.ts` | Signed-in user payload for comment forms. |
 | `/api/consent` | `GET` | `src/app/api/consent/route.ts` | Consent state resolution. |
+| `/api/extension/roblox-game-codes` | `GET`, `OPTIONS` | `apps/web/src/app/api/extension/roblox-game-codes/route.ts` | Public Chrome extension lookup for a Roblox game page, returning a three-code preview and full Bloxodes URL. |
 | `/api/health` | `GET` | `src/app/api/health/route.ts` | Runtime health endpoint. |
 | `/api/quizzes/progress` | `GET`, `PUT` | `src/app/api/quizzes/progress/route.ts` | Per-user quiz progress and last score state. |
 | `/api/quizzes/session` | `GET` | `src/app/api/quizzes/session/route.ts` | Session snapshot for quiz UI. |

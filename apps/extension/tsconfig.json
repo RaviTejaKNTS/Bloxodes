@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "declaration": false,
+    "emitDeclarationOnly": false,
+    "incremental": false,
+    "lib": ["DOM", "ES2020"],
+    "module": "ES2020",
+    "noEmit": false,
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "types": []
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts"]
+}

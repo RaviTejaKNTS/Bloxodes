@@ -74,9 +74,12 @@
     "scrape:decal-ids": "tsx scripts/decal-ids/scrape-decal-ids.ts",
     "enrich:decal-ids": "tsx scripts/decal-ids/enrich-decal-ids.ts",
     "build:web": "npm run build -w @bloxodes/web",
+    "build:extension": "npm run build -w @bloxodes/extension",
+    "package:extension": "npm run package -w @bloxodes/extension",
     "start:web": "npm run start -w @bloxodes/web",
     "typecheck": "npm run typecheck:web",
     "typecheck:web": "npm run typecheck -w @bloxodes/web",
+    "typecheck:extension": "npm run typecheck -w @bloxodes/extension",
     "test:web": "npm run test -w @bloxodes/web"
   },
   "dependencies": {

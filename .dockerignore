@@ -1,6 +1,8 @@
 .git
 .github
 .next
+apps/extension/dist
+apps/extension/*.zip
 coverage
 logs
 node_modules

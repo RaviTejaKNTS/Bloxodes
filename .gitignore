@@ -11,6 +11,8 @@ out/
 
 # Production
 /build
+apps/extension/dist/
+apps/extension/*.zip
 
 # Runtime data
 pids

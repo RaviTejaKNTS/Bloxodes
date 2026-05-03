@@ -5,6 +5,7 @@ WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY package.json package-lock.json ./
 COPY apps/web/package.json ./apps/web/package.json
+COPY apps/extension/package.json ./apps/extension/package.json
 RUN npm ci
 
 FROM node:20-bookworm-slim AS builder
