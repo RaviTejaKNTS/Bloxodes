@@ -1,8 +1,13 @@
 {
-  "name": "roblox-codes-site",
+  "name": "bloxodes",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run dev:web",
+    "dev:web": "npm run dev -w @bloxodes/web",
     "supabase:start": "supabase start",
     "supabase:stop": "supabase stop",
     "supabase:status": "supabase status",
@@ -13,10 +18,10 @@
     "ads:update": "tsx scripts/ads/update-ads-txt.ts",
     "indexnow:bootstrap": "tsx scripts/automation/indexnow-bootstrap.ts",
     "prebuild": "npm run ads:update",
-    "build": "next build --webpack",
-    "start": "next start",
+    "build": "npm run build:web",
+    "start": "npm run start:web",
     "lint": "echo \"(lint intentionally omitted)\"",
-    "test": "vitest run",
+    "test": "npm run test:web",
     "generate:articles": "tsx scripts/articles/generate-articles.ts",
     "generate:events-articles": "tsx scripts/events/generate-events-articles.ts",
     "articles:queue": "tsx scripts/automation/run-article-generation-queue.ts",
@@ -67,7 +72,12 @@
     "seed:event-details": "tsx scripts/events/seed-event-details.ts",
     "trading:collect": "tsx scripts/trading/collect-all-limiteds.ts",
     "scrape:decal-ids": "tsx scripts/decal-ids/scrape-decal-ids.ts",
-    "enrich:decal-ids": "tsx scripts/decal-ids/enrich-decal-ids.ts"
+    "enrich:decal-ids": "tsx scripts/decal-ids/enrich-decal-ids.ts",
+    "build:web": "npm run build -w @bloxodes/web",
+    "start:web": "npm run start -w @bloxodes/web",
+    "typecheck": "npm run typecheck:web",
+    "typecheck:web": "npm run typecheck -w @bloxodes/web",
+    "test:web": "npm run test -w @bloxodes/web"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",

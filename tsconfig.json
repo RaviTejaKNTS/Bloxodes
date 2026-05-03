@@ -22,7 +22,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./src/*"
+        "./apps/web/src/*"
       ]
     },
     "incremental": true,
@@ -34,15 +34,18 @@
     ]
   },
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    "apps/web/next-env.d.ts",
+    "apps/web/**/*.ts",
+    "apps/web/**/*.tsx",
+    "apps/web/.next/types/**/*.ts",
+    "apps/web/.next/dev/types/**/*.ts",
+    "scripts/**/*.ts",
+    "types/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",
     "admin-archive",
+    "apps/web/.next",
     "supabase/functions"
   ]
 }

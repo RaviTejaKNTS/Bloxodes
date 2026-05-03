@@ -39,6 +39,6 @@ These files are operational jobs, imports, backfills, collectors, and automation
 ## Script Authoring Checklist
 
 1. Put the file in the correct folder.
-2. Reuse a helper from `scripts/shared/` or `src/lib/*` if one already exists.
+2. Reuse a helper from `scripts/shared/` or `apps/web/src/lib/*` if one already exists.
 3. Add a `package.json` command if people will run it regularly.
 4. Document the script in `agents/scripts/agents.md`.

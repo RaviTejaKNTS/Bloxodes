@@ -15,7 +15,7 @@ services:
     ports:
       - "${APP_PORT:-3000}:3000"
     volumes:
-      - next-cache:/app/.next/cache
+      - next-cache:/app/apps/web/.next/cache
     healthcheck:
       test:
         - CMD

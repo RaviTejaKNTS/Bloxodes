@@ -5,10 +5,10 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ## Start Here
 
-- `src/app/AGENTS.md`: App Router, layouts, feeds, auth routes, and API conventions.
-- `src/app/(site)/AGENTS.md`: public page families, page-data patterns, SEO, and content route expectations.
-- `src/app/api/AGENTS.md`: JSON endpoints, mutation safety, session/progress flows, and revalidation behavior.
-- `src/lib/AGENTS.md`: shared data access, caching, SEO helpers, auth/security utilities, and domain modules.
+- `apps/web/src/app/AGENTS.md`: App Router, layouts, feeds, auth routes, and API conventions.
+- `apps/web/src/app/(site)/AGENTS.md`: public page families, page-data patterns, SEO, and content route expectations.
+- `apps/web/src/app/api/AGENTS.md`: JSON endpoints, mutation safety, session/progress flows, and revalidation behavior.
+- `apps/web/src/lib/AGENTS.md`: shared data access, caching, SEO helpers, auth/security utilities, and domain modules.
 - `scripts/AGENTS.md`: automation jobs, preferred npm commands, and script authoring rules.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
@@ -16,15 +16,15 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ## Architecture Snapshot
 
-- Next.js App Router application with public content in `src/app/(site)` and account/auth flows in `src/app/(secure)` plus `src/app/auth`.
-- Supabase is the primary content and product data store. Pages usually read from views via `src/lib/db.ts`, `src/lib/catalog.ts`, and `src/lib/tools.ts`.
-- Local datasets in `data/` and `src/data/` back a few tools/catalog sections where structured content does not live in Supabase.
-- Operational work happens through `scripts/` and Supabase edge functions in `supabase/functions/`.
+- Next.js App Router application in `apps/web`, with public content in `apps/web/src/app/(site)` and account/auth flows in `apps/web/src/app/(secure)` plus `apps/web/src/app/auth`.
+- Supabase is the primary content and product data store. Pages usually read from views via `apps/web/src/lib/db.ts`, `apps/web/src/lib/catalog.ts`, and `apps/web/src/lib/tools.ts`.
+- Local datasets in `data/` and `apps/web/src/data/` back a few tools/catalog sections where structured content does not live in Supabase.
+- Operational work happens through root `scripts/` and Supabase edge functions in `supabase/functions/`.
 
 ## Working Defaults
 
-- Keep pages server-first. Move repeated loaders and rendering helpers into route-family `page-data.tsx` files or `src/lib/*`.
-- Prefer adding or extending typed helpers in `src/lib/db.ts` instead of scattering raw Supabase queries across page files.
+- Keep pages server-first. Move repeated loaders and rendering helpers into route-family `page-data.tsx` files or `apps/web/src/lib/*`.
+- Prefer adding or extending typed helpers in `apps/web/src/lib/db.ts` instead of scattering raw Supabase queries across page files.
 - For public content changes, check all of: metadata, JSON-LD, pagination, sitemap coverage, feed coverage, and `/api/revalidate`.
 - For mutations, keep origin validation, rate limiting, and tag revalidation explicit.
 - Prefer `npm run ...` aliases over direct `tsx path/to/script.ts` when an alias already exists.
@@ -41,23 +41,23 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ### Public page or route family
 
-1. Add or update the route in `src/app/(site)`.
-2. Keep data loading in `page-data.tsx` or `src/lib/*` if the route family has multiple pages.
+1. Add or update the route in `apps/web/src/app/(site)`.
+2. Keep data loading in `page-data.tsx` or `apps/web/src/lib/*` if the route family has multiple pages.
 3. Update metadata, canonical handling, and structured data.
-4. Update `src/app/sitemap.xml/route.ts`, `src/app/sitemaps/*`, `src/app/feed.xml/route.ts`, or `src/app/api/revalidate/route.ts` if the content is publishable.
+4. Update `apps/web/src/app/sitemap.xml/route.ts`, `apps/web/src/app/sitemaps/*`, `apps/web/src/app/feed.xml/route.ts`, or `apps/web/src/app/api/revalidate/route.ts` if the content is publishable.
 5. Refresh the relevant inventory doc in `agents/`.
 
 ### API or auth flow
 
 1. Validate inputs and request origin.
-2. Use shared auth/security helpers from `src/lib/auth/*` and `src/lib/security/*`.
+2. Use shared auth/security helpers from `apps/web/src/lib/auth/*` and `apps/web/src/lib/security/*`.
 3. Revalidate tags or paths after successful writes.
 4. Document new endpoints in `agents/routes/agents.md`.
 
 ### Database or content model
 
 1. Add a forward-only migration in `supabase/migrations/`.
-2. Update the read layer in `src/lib/*`.
+2. Update the read layer in `apps/web/src/lib/*`.
 3. Wire publish/revalidation flows if the new data powers public content.
 4. Update the relevant `AGENTS.md` and `agents/data/agents.md`.
 

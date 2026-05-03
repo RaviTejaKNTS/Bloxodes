@@ -1,6 +1,6 @@
 ## Deploying to a VPS with Docker and Cloudflare
 
-This repo is set up for a single self-hosted Next.js instance with a persistent ISR cache volume.
+This repo is set up as an npm-workspaces monorepo. The production web app lives in `apps/web`, while the root `Dockerfile` remains Dokploy-compatible and builds the web workspace from the repository root.
 
 ### Branch strategy
 
@@ -51,12 +51,12 @@ The app listens on port `3000` inside the container and exposes `/api/health` fo
 
 ### 5. Cache rules
 
-Use Cloudflare cache rules that respect the origin `Cache-Control` headers from `next.config.js`.
+Use Cloudflare cache rules that respect the origin `Cache-Control` headers from `apps/web/next.config.js`.
 
 - Cache public HTML using the origin headers.
 - Cache static assets aggressively: `/_next/static/*`, images, icons, fonts, `robots.txt`, and sitemap files.
 - Bypass cache for `/api/*`, `/auth/*`, `/account*`, `/login*`, and any other user-specific or mutation routes.
-- Keep a persistent Docker volume mounted at `/app/.next/cache` so ISR output survives restarts.
+- Keep a persistent Docker volume mounted at `/app/apps/web/.next/cache` so ISR output survives restarts.
 
 ### 6. Ads and consent
 
