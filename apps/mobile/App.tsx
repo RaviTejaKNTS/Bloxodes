@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import * as Clipboard from "expo-clipboard";
-import { useEffect, useMemo, useState } from "react";
+import { Feather } from "@expo/vector-icons";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -10,13 +11,15 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
+  useColorScheme,
   useWindowDimensions,
   View
 } from "react-native";
-import { fetchCodeDetail, fetchCodesIndex } from "./src/api";
-import { colors, radii, spacing } from "./src/theme";
-import type { CodeDetailResponse, CodeItem, CodesIndexItem } from "./src/types";
+import { fetchCodeDetail, fetchCodesIndex, fetchContentIndex } from "./src/api";
+import { darkColors, lightColors, radii, spacing, type ThemeColors } from "./src/theme";
+import type { CodeDetailResponse, CodeItem, CodesIndexItem, MobileContentIndexResponse, MobileContentItem, MobileContentKind } from "./src/types";
 
 const NAV_ITEMS = [
   "Catalog",
@@ -30,16 +33,133 @@ const NAV_ITEMS = [
   "Articles"
 ] as const;
 
+type FeatherIconName = keyof typeof Feather.glyphMap;
+
+const NAV_ITEM_ICONS: Record<(typeof NAV_ITEMS)[number], FeatherIconName> = {
+  Catalog: "grid",
+  Tools: "tool",
+  Wiki: "book-open",
+  Codes: "key",
+  Quizzes: "award",
+  Lists: "list",
+  Checklists: "check-square",
+  Events: "calendar",
+  Articles: "file-text"
+};
+
+const LOGO_LIGHT = require("./assets/Bloxodes-light.png");
+const LOGO_DARK = require("./assets/Bloxodes-dark.png");
+
+const WEB_BREAKPOINT_MD = 768;
+const WEB_BREAKPOINT_LG = 1024;
+const WEB_BREAKPOINT_XL = 1280;
+const SIDEBAR_WIDTH = 240;
+const CONTENT_MAX_WIDTH = 940;
+const CONTENT_PADDING = spacing.lg;
+const CARD_GAP = 20;
+
 type Screen = {
-  name: "codes" | "codeDetail";
+  name: "codes" | "codeDetail" | MobileContentKind;
   slug?: string;
 };
+
+type ContentSectionConfig = {
+  description: string;
+  eyebrow: string;
+  icon: FeatherIconName;
+  statNoun: string;
+  title: string;
+};
+
+const CONTENT_SECTIONS: Record<MobileContentKind, ContentSectionConfig> = {
+  tools: {
+    description: "Currency converters, planning helpers, and utilities built to stay current with our latest data and guides.",
+    eyebrow: "Roblox Utilities",
+    icon: "tool",
+    statNoun: "tools published",
+    title: "Roblox tools and calculators to plan faster"
+  },
+  quizzes: {
+    description: "Quick, replayable quizzes built from in-game mechanics, NPCs, and regions. Pick a game and take a 15-question run.",
+    eyebrow: "Roblox Quizzes",
+    icon: "award",
+    statNoun: "quizzes published",
+    title: "Roblox quizzes to test in-game knowledge"
+  },
+  checklists: {
+    description: "Actionable runbooks for your favorite experiences so you can mark off tasks, rewards, and codes as you play.",
+    eyebrow: "Roblox Checklists",
+    icon: "check-square",
+    statNoun: "checklists published",
+    title: "Guided Roblox checklists to track your progress"
+  },
+  events: {
+    description: "Track Roblox event pages with live, upcoming, and past event coverage from Bloxodes.",
+    eyebrow: "Roblox Events",
+    icon: "calendar",
+    statNoun: "event pages",
+    title: "Roblox events to follow now and next"
+  }
+};
+
+function isMobileContentScreen(name: Screen["name"]): name is MobileContentKind {
+  return name === "checklists" || name === "events" || name === "quizzes" || name === "tools";
+}
+
+type AppStyles = ReturnType<typeof createAppStyles>;
+
+type ContentState = {
+  data: MobileContentIndexResponse | null;
+  error: string | null;
+  loading: boolean;
+  refreshing: boolean;
+};
+
+type ThemeContextValue = {
+  colors: ThemeColors;
+  isDark: boolean;
+  styles: AppStyles;
+  statusBarStyle: "dark" | "light";
+  toggleTheme: () => void;
+};
+
+const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+function useAppTheme() {
+  const theme = useContext(ThemeContext);
+  if (!theme) {
+    throw new Error("useAppTheme must be used inside ThemeContext.Provider");
+  }
+  return theme;
+}
 
 function formatDate(value: string | null): string {
   if (!value) return "Recently";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "Recently";
   return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(date);
+}
+
+function formatUpdatedLabel(value: string | null): string {
+  if (!value) return "recently";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "recently";
+
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffDays = Math.abs(Math.round(diffMs / 86_400_000));
+
+  if (diffDays <= 4) {
+    if (diffDays === 0) return "today";
+    if (diffDays === 1) return diffMs >= 0 ? "yesterday" : "tomorrow";
+    return diffMs >= 0 ? `${diffDays} days ago` : `in ${diffDays} days`;
+  }
+
+  return formatDate(value);
+}
+
+function monthYear() {
+  return new Intl.DateTimeFormat("en-US", { month: "long", year: "numeric" }).format(new Date());
 }
 
 function stripMarkdown(value: string | null): string | null {
@@ -53,25 +173,83 @@ function stripMarkdown(value: string | null): string | null {
   return cleaned || null;
 }
 
+function formatRewardText(value: string | null): string {
+  if (!value) return "No reward listed yet.";
+  return /this code gives you/i.test(value) ? value : `You get ${value}`;
+}
+
+function BrandLogo({ large }: { large?: boolean }) {
+  const { isDark, styles } = useAppTheme();
+  return (
+    <Image
+      source={isDark ? LOGO_DARK : LOGO_LIGHT}
+      style={large ? styles.logoLarge : styles.logoSmall}
+      resizeMode="contain"
+      accessibilityLabel="Bloxodes"
+    />
+  );
+}
+
+function AppIcon({
+  color,
+  name,
+  size = 16
+}: {
+  color?: string;
+  name: FeatherIconName;
+  size?: number;
+}) {
+  const { colors } = useAppTheme();
+  return <Feather name={name} size={size} color={color ?? colors.mutedStrong} />;
+}
+
+function HamburgerIcon() {
+  const { colors } = useAppTheme();
+  return <AppIcon name="menu" size={20} color={colors.foreground} />;
+}
+
+function CloseIcon() {
+  const { colors } = useAppTheme();
+  return <AppIcon name="x" size={16} color={colors.mutedStrong} />;
+}
+
+function SearchIcon() {
+  const { colors } = useAppTheme();
+  return <AppIcon name="search" size={15} color={colors.muted} />;
+}
+
+function CopyIcon({ copied }: { copied: boolean }) {
+  const { colors } = useAppTheme();
+  return <AppIcon name={copied ? "check" : "copy"} size={14} color={copied ? colors.white : colors.accent} />;
+}
+
+function ThemeIcon() {
+  const { colors, isDark } = useAppTheme();
+  return <AppIcon name={isDark ? "moon" : "sun"} size={14} color={colors.foreground} />;
+}
+
 function AppShell({
   children,
   currentScreen,
   drawerOpen,
+  onNavigate,
   setDrawerOpen
 }: {
   children: JSX.Element;
   currentScreen: Screen;
   drawerOpen: boolean;
+  onNavigate: (screen: Screen) => void;
   setDrawerOpen: (open: boolean) => void;
 }) {
+  const { styles, statusBarStyle } = useAppTheme();
   const { height, width } = useWindowDimensions();
-  const sidebarVisible = width >= 780;
+  const sidebarVisible = width >= WEB_BREAKPOINT_XL;
 
   return (
     <SafeAreaView style={[styles.safeArea, { minHeight: height }]}>
-      <StatusBar style="dark" />
+      <StatusBar style={statusBarStyle} />
       <View style={styles.appFrame}>
-        {sidebarVisible ? <Sidebar currentScreen={currentScreen} /> : null}
+        {sidebarVisible ? <Sidebar currentScreen={currentScreen} onNavigate={onNavigate} /> : null}
         <View style={styles.mainColumn}>
           {!sidebarVisible ? (
             <View style={styles.topBar}>
@@ -81,9 +259,9 @@ function AppShell({
                 onPress={() => setDrawerOpen(true)}
                 style={styles.iconButton}
               >
-                <Text style={styles.iconButtonText}>Menu</Text>
+                <HamburgerIcon />
               </TouchableOpacity>
-              <Text style={styles.topBarTitle}>Bloxodes</Text>
+              <BrandLogo />
             </View>
           ) : null}
           {children}
@@ -93,7 +271,7 @@ function AppShell({
         <View style={styles.drawerOverlay}>
           <TouchableOpacity style={styles.drawerScrim} onPress={() => setDrawerOpen(false)} />
           <View style={styles.drawerPanel}>
-            <Sidebar currentScreen={currentScreen} compact onClose={() => setDrawerOpen(false)} />
+            <Sidebar currentScreen={currentScreen} compact onClose={() => setDrawerOpen(false)} onNavigate={onNavigate} />
           </View>
         </View>
       ) : null}
@@ -101,35 +279,89 @@ function AppShell({
   );
 }
 
-function Sidebar({ currentScreen, compact, onClose }: { currentScreen: Screen; compact?: boolean; onClose?: () => void }) {
+function Sidebar({
+  currentScreen,
+  compact,
+  onClose,
+  onNavigate
+}: {
+  currentScreen: Screen;
+  compact?: boolean;
+  onClose?: () => void;
+  onNavigate: (screen: Screen) => void;
+}) {
+  const { colors, isDark, styles, toggleTheme } = useAppTheme();
+  const [query, setQuery] = useState("");
+
   return (
     <View style={[styles.sidebar, compact ? styles.sidebarCompact : null]}>
-      <View style={styles.brandBlock}>
-        <View style={styles.brandMark}>
-          <Text style={styles.brandMarkText}>B</Text>
+      <View style={styles.sidebarHeader}>
+        <View style={styles.logoCenter}>
+          <BrandLogo large />
         </View>
-        <View>
-          <Text style={styles.brandTitle}>Bloxodes</Text>
-          <Text style={styles.brandSubTitle}>Roblox hub</Text>
+        {compact ? (
+          <TouchableOpacity accessibilityRole="button" accessibilityLabel="Close menu" onPress={onClose} style={styles.closeButton}>
+            <CloseIcon />
+          </TouchableOpacity>
+        ) : null}
+        <View style={styles.searchBox}>
+          <SearchIcon />
+          <TextInput
+            value={query}
+            onChangeText={setQuery}
+            placeholder="Search codes"
+            placeholderTextColor={styles.searchPlaceholder.color}
+            style={styles.searchInput}
+            inputMode="search"
+          />
         </View>
       </View>
       <View style={styles.navList}>
+        <Text style={styles.navGroupLabel}>Browse</Text>
         {NAV_ITEMS.map((item) => {
-          const active = item === "Codes" && currentScreen.name.startsWith("code");
-          const enabled = item === "Codes";
+          const screenName = item.toLowerCase() as Screen["name"];
+          const active =
+            (item === "Codes" && currentScreen.name.startsWith("code")) ||
+            (isMobileContentScreen(currentScreen.name) && screenName === currentScreen.name);
+          const enabled = item === "Codes" || item === "Tools" || item === "Quizzes" || item === "Checklists" || item === "Events";
+          const iconColor = active ? colors.foreground : colors.muted;
           return (
             <TouchableOpacity
               key={item}
               accessibilityRole="button"
               disabled={!enabled}
-              onPress={onClose}
+              onPress={() => {
+                if (!enabled) return;
+                onNavigate(item === "Codes" ? { name: "codes" } : { name: screenName });
+                onClose?.();
+              }}
               style={[styles.navItem, active ? styles.navItemActive : null, !enabled ? styles.navItemDisabled : null]}
             >
+              <View style={styles.navIcon}>
+                <AppIcon name={NAV_ITEM_ICONS[item]} size={14} color={iconColor} />
+              </View>
               <Text style={[styles.navItemText, active ? styles.navItemTextActive : null]}>{item}</Text>
-              {!enabled ? <Text style={styles.navItemMeta}>Later</Text> : null}
             </TouchableOpacity>
           );
         })}
+        <View style={styles.sidebarSeparator} />
+        <TouchableOpacity style={styles.navItem} accessibilityRole="button">
+          <View style={styles.navIcon}>
+            <AppIcon name="user" size={14} color={colors.muted} />
+          </View>
+          <Text style={styles.navItemText}>Sign in</Text>
+        </TouchableOpacity>
+        <View style={styles.themeRow}>
+          <Text style={styles.themeLabel}>Theme</Text>
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityLabel={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            onPress={toggleTheme}
+            style={styles.themeButton}
+          >
+            <ThemeIcon />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -158,6 +390,14 @@ function CodesIndexScreen({
   onLoadMore: () => void;
   onSelectGame: (slug: string) => void;
 }) {
+  const { colors, styles } = useAppTheme();
+  const { width } = useWindowDimensions();
+  const refreshedLabel = games[0] ? formatUpdatedLabel(games[0].contentUpdatedAt) : null;
+  const cardColumns = width >= WEB_BREAKPOINT_LG ? 4 : width >= WEB_BREAKPOINT_MD ? 3 : 1;
+  const mainWidth = width >= WEB_BREAKPOINT_XL ? width - SIDEBAR_WIDTH : width;
+  const contentWidth = Math.min(Math.max(mainWidth - CONTENT_PADDING * 2, 0), CONTENT_MAX_WIDTH);
+  const cardWidth = (contentWidth - CARD_GAP * (cardColumns - 1)) / cardColumns;
+
   return (
     <ScrollView
       contentContainerStyle={styles.content}
@@ -165,34 +405,43 @@ function CodesIndexScreen({
     >
       <View style={styles.headerBlock}>
         <Text style={styles.eyebrow}>Roblox Codes Hub</Text>
-        <Text style={styles.pageTitle}>Fresh Roblox game codes</Text>
+        <Text style={styles.pageTitle}>Fresh Roblox game codes, updated as soon as they drop</Text>
         <Text style={styles.pageDescription}>
-          Find active codes for Roblox games, then open a code page for rewards, copy actions, and update details.
+          Find the latest Roblox codes for all your favorite games in one place. Updated daily with active promo codes, rewards, and
+          freebies to help you unlock items, boosts, and more.
         </Text>
         <View style={styles.statsRow}>
-          <Pill label={`${total || games.length} games tracked`} />
-          <Pill label="Updated daily" />
+          <Pill icon="key" label={`${total || games.length} games tracked`} tone="accent" />
+          {refreshedLabel ? <Pill icon="clock" label={`Updated ${refreshedLabel}`} /> : null}
         </View>
       </View>
 
       {error ? <ErrorPanel message={error} onRetry={onRefresh} /> : null}
-      {loading && games.length === 0 ? <LoadingPanel /> : null}
+      {loading && games.length === 0 ? <LoadingPanel label="Loading Bloxodes codes" /> : null}
 
       <View style={styles.grid}>
         {games.map((game) => (
-          <TouchableOpacity key={game.id} style={styles.gameCard} onPress={() => onSelectGame(game.slug)}>
-            <ImageSlot source={game.coverImage} label={game.name} />
+          <TouchableOpacity key={game.id} style={[styles.gameCard, { width: cardWidth }]} onPress={() => onSelectGame(game.slug)}>
+            <View style={styles.gameCardImageWrap}>
+              <ImageSlot source={game.coverImage} label={game.name} />
+              <View style={styles.imageBottomFade} />
+            </View>
             <View style={styles.gameCardBody}>
-              <View style={styles.cardHeaderLine}>
-                <Text style={styles.gameTitle} numberOfLines={2}>
-                  {game.name}
-                </Text>
-                <Text style={styles.countBadge}>{game.activeCount} active</Text>
-              </View>
-              <Text style={styles.mutedText} numberOfLines={1}>
-                Updated {formatDate(game.contentUpdatedAt)}
+              <Text style={styles.gameTitle} numberOfLines={2}>
+                {game.name} Codes
               </Text>
-              {game.genre ? <Text style={styles.genreText}>{game.genre}</Text> : null}
+              <View style={styles.gameMetaRow}>
+                <View style={styles.gameMetaItem}>
+                  <View style={styles.activeDot} />
+                  <Text style={styles.gameMetaText}>
+                    {game.activeCount} {game.activeCount === 1 ? "active code" : "active codes"}
+                  </Text>
+                </View>
+                <View style={styles.gameMetaItem}>
+                  <AppIcon name="clock" size={12} color={colors.mutedStrong} />
+                  <Text style={styles.gameMetaText}>{formatUpdatedLabel(game.contentUpdatedAt)}</Text>
+                </View>
+              </View>
             </View>
           </TouchableOpacity>
         ))}
@@ -204,6 +453,107 @@ function CodesIndexScreen({
         </TouchableOpacity>
       ) : null}
     </ScrollView>
+  );
+}
+
+function ContentIndexScreen({
+  data,
+  error,
+  kind,
+  loading,
+  onLoadMore,
+  onRefresh,
+  refreshing
+}: {
+  data: MobileContentIndexResponse | null;
+  error: string | null;
+  kind: MobileContentKind;
+  loading: boolean;
+  onLoadMore: () => void;
+  onRefresh: () => void;
+  refreshing: boolean;
+}) {
+  const { colors, styles } = useAppTheme();
+  const { width } = useWindowDimensions();
+  const config = CONTENT_SECTIONS[kind];
+  const items = data?.items ?? [];
+  const cardColumns = width >= WEB_BREAKPOINT_LG ? 4 : width >= WEB_BREAKPOINT_MD ? 3 : 1;
+  const mainWidth = width >= WEB_BREAKPOINT_XL ? width - SIDEBAR_WIDTH : width;
+  const contentWidth = Math.min(Math.max(mainWidth - CONTENT_PADDING * 2, 0), CONTENT_MAX_WIDTH);
+  const cardWidth = (contentWidth - CARD_GAP * (cardColumns - 1)) / cardColumns;
+
+  return (
+    <ScrollView
+      contentContainerStyle={styles.content}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.accent} />}
+    >
+      <View style={styles.headerBlock}>
+        <Text style={styles.eyebrow}>{config.eyebrow}</Text>
+        <Text style={styles.pageTitle}>{config.title}</Text>
+        <Text style={styles.pageDescription}>{config.description}</Text>
+        <View style={styles.statsRow}>
+          <Pill icon={config.icon} label={`${data?.total ?? 0} ${config.statNoun}`} tone="accent" />
+          {data?.latestUpdatedAt ? <Pill icon="clock" label={`Updated ${formatUpdatedLabel(data.latestUpdatedAt)}`} /> : null}
+        </View>
+      </View>
+
+      {error ? <ErrorPanel message={error} onRetry={onRefresh} /> : null}
+      {loading && items.length === 0 ? <LoadingPanel label={`Loading Bloxodes ${kind}`} /> : null}
+
+      {!loading && !error && items.length === 0 ? (
+        <View style={styles.statePanel}>
+          <Text style={styles.errorTitle}>Nothing published yet</Text>
+          <Text style={styles.mutedText}>Check back soon for new Bloxodes {kind}.</Text>
+        </View>
+      ) : null}
+
+      <View style={styles.grid}>
+        {items.map((item) => (
+          <ContentCard key={item.id} item={item} width={cardWidth} />
+        ))}
+      </View>
+
+      {data && items.length > 0 && data.page < data.totalPages ? (
+        <TouchableOpacity style={styles.loadMoreButton} onPress={onLoadMore} disabled={loading}>
+          <Text style={styles.loadMoreText}>{loading ? "Loading" : "Load more"}</Text>
+        </TouchableOpacity>
+      ) : null}
+    </ScrollView>
+  );
+}
+
+function ContentCard({ item, width }: { item: MobileContentItem; width: number }) {
+  const { colors, styles } = useAppTheme();
+
+  return (
+    <TouchableOpacity style={[styles.gameCard, { width }]} onPress={() => Linking.openURL(item.url)}>
+      <View style={styles.gameCardImageWrap}>
+        <ImageSlot source={item.coverImage} label={item.title} />
+        <View style={styles.imageBottomFade} />
+      </View>
+      <View style={styles.gameCardBody}>
+        <Text style={styles.gameTitle} numberOfLines={2}>
+          {item.title}
+        </Text>
+        {item.summary ? (
+          <Text style={styles.contentCardSummary} numberOfLines={3}>
+            {item.summary}
+          </Text>
+        ) : null}
+        <View style={styles.gameMetaRow}>
+          {item.badge ? (
+            <View style={styles.gameMetaItem}>
+              <View style={styles.activeDot} />
+              <Text style={styles.gameMetaText}>{item.badge}</Text>
+            </View>
+          ) : null}
+          <View style={styles.gameMetaItem}>
+            <AppIcon name="clock" size={12} color={colors.mutedStrong} />
+            <Text style={styles.gameMetaText}>{formatUpdatedLabel(item.updatedAt)}</Text>
+          </View>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 }
 
@@ -220,6 +570,7 @@ function CodeDetailScreen({
   onBack: () => void;
   onRetry: () => void;
 }) {
+  const { styles } = useAppTheme();
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
   async function copyCode(code: string) {
@@ -230,28 +581,29 @@ function CodeDetailScreen({
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      <TouchableOpacity style={styles.backButton} onPress={onBack}>
-        <Text style={styles.backButtonText}>Back to codes</Text>
-      </TouchableOpacity>
-
-      {loading ? <LoadingPanel /> : null}
+      {loading ? <LoadingPanel label="Loading Bloxodes codes" /> : null}
       {error ? <ErrorPanel message={error} onRetry={onRetry} /> : null}
 
       {detail ? (
         <>
-          <View style={styles.detailHero}>
-            <ImageSlot source={detail.game.coverImage} label={detail.game.name} tall />
-            <View style={styles.detailHeroText}>
-              <Text style={styles.eyebrow}>Roblox Codes</Text>
-              <Text style={styles.pageTitle}>{detail.game.name} Codes</Text>
-              <Text style={styles.pageDescription} numberOfLines={4}>
-                {stripMarkdown(detail.game.description) ?? "Active and expired codes tracked by Bloxodes."}
-              </Text>
-              <View style={styles.statsRow}>
-                <Pill label={`${detail.activeCodes.length} active`} />
-                <Pill label={`Updated ${formatDate(detail.game.contentUpdatedAt)}`} />
-              </View>
+          <View style={styles.detailHeader}>
+            <View style={styles.breadcrumbRow}>
+              <TouchableOpacity onPress={onBack}>
+                <Text style={styles.breadcrumbLink}>Codes</Text>
+              </TouchableOpacity>
+              <Text style={styles.breadcrumbDivider}>&gt;</Text>
+              <Text style={styles.breadcrumbCurrent} numberOfLines={1}>{detail.game.name}</Text>
             </View>
+            <Text style={styles.detailTitle}>{detail.game.name} Codes ({monthYear()})</Text>
+            <View style={styles.updatedLine}>
+              <AppIcon name="clock" size={14} color={styles.clockIcon.color} />
+              <Text style={styles.updatedText}>
+                Updated on <Text style={styles.updatedStrong}>{formatDate(detail.game.contentUpdatedAt)}</Text>
+              </Text>
+            </View>
+            <Text style={styles.detailIntro}>
+              {stripMarkdown(detail.game.description) ?? `Get the latest ${detail.game.name} codes and redeem them for free in-game rewards.`}
+            </Text>
           </View>
 
           <CodesPanel
@@ -265,17 +617,7 @@ function CodeDetailScreen({
             emptyBody="Bloxodes has a page for this game, but no working codes are confirmed at the moment."
           />
 
-          <CodesPanel
-            title="Expired codes"
-            subtitle="These codes are no longer confirmed as working."
-            badge={`${detail.expiredCodes.length} expired`}
-            codes={detail.expiredCodes}
-            copiedCode={copiedCode}
-            onCopy={copyCode}
-            emptyTitle="No expired codes listed"
-            emptyBody="We have not archived expired codes for this game yet."
-            muted
-          />
+          <ExpiredCodesPanel codes={detail.expiredCodes} gameName={detail.game.name} />
 
           <View style={styles.externalLinks}>
             <TouchableOpacity style={styles.outlineButton} onPress={() => Linking.openURL(detail.game.url)}>
@@ -314,6 +656,8 @@ function CodesPanel({
   emptyBody: string;
   muted?: boolean;
 }) {
+  const { styles } = useAppTheme();
+
   return (
     <View style={[styles.codesPanel, muted ? styles.codesPanelMuted : null]}>
       <View style={styles.codesPanelHeader}>
@@ -330,29 +674,66 @@ function CodesPanel({
             <Text style={styles.mutedText}>{emptyBody}</Text>
           </View>
         ) : (
-          codes.map((code, index) => (
-            <View key={code.id} style={[styles.codeRow, index > 0 ? styles.codeRowBorder : null]}>
-              <View style={styles.codeIndex}>
-                <Text style={styles.codeIndexText}>{index + 1}</Text>
-              </View>
-              <View style={styles.codeMain}>
-                <View style={styles.codeLine}>
-                  <Text style={styles.codeText}>{code.code}</Text>
-                  {code.isNew ? <Text style={styles.miniBadge}>New</Text> : null}
-                  {code.levelRequirement != null ? <Text style={styles.miniBadge}>Level {code.levelRequirement}+</Text> : null}
+          codes.map((code, index) => {
+            const copied = copiedCode === code.code;
+            return (
+              <View key={code.id} style={[styles.codeRow, index > 0 ? styles.codeRowBorder : null]}>
+                <View style={styles.codeRowMain}>
+                  <View style={styles.codeIndex}>
+                    <Text style={styles.codeIndexText}>{index + 1}</Text>
+                  </View>
+                  <View style={styles.codeMain}>
+                    <View style={styles.codeLine}>
+                      <Text style={styles.codeText}>{code.code}</Text>
+                      {code.isNew ? <Text style={styles.miniBadge}>New</Text> : null}
+                      {code.levelRequirement != null ? <Text style={styles.miniBadge}>Level {code.levelRequirement}+</Text> : null}
+                    </View>
+                    <Text style={styles.mutedText} numberOfLines={2}>{formatRewardText(code.rewardText)}</Text>
+                  </View>
                 </View>
-                <Text style={styles.mutedText} numberOfLines={2}>
-                  {code.rewardText ? `You get ${code.rewardText}` : "No reward listed yet."}
-                </Text>
-                <Text style={styles.addedText}>Added {formatDate(code.firstSeenAt)}</Text>
+                <View style={styles.codeActionRow}>
+                  <TouchableOpacity style={[styles.copyButton, copied ? styles.copyButtonDone : null]} onPress={() => onCopy(code.code)}>
+                    <CopyIcon copied={copied} />
+                    <Text style={[styles.copyButtonText, copied ? styles.copyButtonDoneText : null]}>
+                      {copied ? "Copied" : "Copy"}
+                    </Text>
+                  </TouchableOpacity>
+                  <Text style={styles.addedText}>Added {formatDate(code.firstSeenAt)}</Text>
+                </View>
               </View>
-              <TouchableOpacity style={[styles.copyButton, copiedCode === code.code ? styles.copyButtonDone : null]} onPress={() => onCopy(code.code)}>
-                <Text style={[styles.copyButtonText, copiedCode === code.code ? styles.copyButtonDoneText : null]}>
-                  {copiedCode === code.code ? "Copied" : "Copy"}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          ))
+            );
+          })
+        )}
+      </View>
+    </View>
+  );
+}
+
+function ExpiredCodesPanel({ codes, gameName }: { codes: CodeItem[]; gameName: string }) {
+  const { styles } = useAppTheme();
+
+  return (
+    <View style={styles.codesPanel}>
+      <View style={styles.codesPanelHeader}>
+        <View style={styles.panelHeading}>
+          <Text style={styles.panelTitle}>Expired {gameName} Codes</Text>
+          {codes.length > 0 ? <Text style={styles.panelSubtitle}>These codes are expired and no longer work.</Text> : null}
+        </View>
+        <Text style={styles.outlineBadge}>{codes.length} expired</Text>
+      </View>
+      <View style={styles.expiredContent}>
+        {codes.length === 0 ? (
+          <View style={styles.emptyState}>
+            <Text style={styles.mutedText}>We haven't tracked any expired codes yet.</Text>
+          </View>
+        ) : (
+          <View style={styles.expiredChipList}>
+            {codes.map((code) => (
+              <View key={code.id} style={styles.expiredChip}>
+                <Text style={styles.expiredChipText}>{code.code}</Text>
+              </View>
+            ))}
+          </View>
         )}
       </View>
     </View>
@@ -360,6 +741,8 @@ function CodesPanel({
 }
 
 function ImageSlot({ source, label, tall }: { source: string | null; label: string; tall?: boolean }) {
+  const { styles } = useAppTheme();
+
   if (!source) {
     return (
       <View style={[styles.imageFallback, tall ? styles.imageTall : null]}>
@@ -371,24 +754,32 @@ function ImageSlot({ source, label, tall }: { source: string | null; label: stri
   return <Image source={{ uri: source }} style={[styles.image, tall ? styles.imageTall : null]} resizeMode="cover" />;
 }
 
-function Pill({ label }: { label: string }) {
+function Pill({ icon, label, tone }: { icon?: FeatherIconName; label: string; tone?: "accent" | "muted" }) {
+  const { colors, styles } = useAppTheme();
+  const iconColor = tone === "accent" ? colors.accent : colors.muted;
+
   return (
-    <View style={styles.pill}>
-      <Text style={styles.pillText}>{label}</Text>
+    <View style={[styles.pill, tone === "accent" ? styles.pillAccent : null]}>
+      {icon ? <AppIcon name={icon} size={14} color={iconColor} /> : null}
+      <Text style={[styles.pillText, tone === "accent" ? styles.pillTextAccent : null]}>{label}</Text>
     </View>
   );
 }
 
-function LoadingPanel() {
+function LoadingPanel({ label }: { label: string }) {
+  const { colors, styles } = useAppTheme();
+
   return (
     <View style={styles.statePanel}>
       <ActivityIndicator color={colors.accent} />
-      <Text style={styles.stateText}>Loading Bloxodes codes</Text>
+      <Text style={styles.stateText}>{label}</Text>
     </View>
   );
 }
 
 function ErrorPanel({ message, onRetry }: { message: string; onRetry: () => void }) {
+  const { styles } = useAppTheme();
+
   return (
     <View style={styles.statePanel}>
       <Text style={styles.errorTitle}>Bloxodes did not respond</Text>
@@ -401,6 +792,19 @@ function ErrorPanel({ message, onRetry }: { message: string; onRetry: () => void
 }
 
 export default function App() {
+  const colorScheme = useColorScheme();
+  const [themeMode, setThemeMode] = useState<"light" | "dark" | null>(null);
+  const isDark = themeMode ? themeMode === "dark" : colorScheme === "dark";
+  const theme = useMemo<ThemeContextValue>(() => {
+    const themeColors = isDark ? darkColors : lightColors;
+    return {
+      colors: themeColors,
+      isDark,
+      styles: createAppStyles(themeColors),
+      statusBarStyle: isDark ? "light" : "dark",
+      toggleTheme: () => setThemeMode(isDark ? "light" : "dark")
+    };
+  }, [isDark]);
   const [screen, setScreen] = useState<Screen>({ name: "codes" });
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [games, setGames] = useState<CodesIndexItem[]>([]);
@@ -413,8 +817,15 @@ export default function App() {
   const [detail, setDetail] = useState<CodeDetailResponse | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
+  const [contentSections, setContentSections] = useState<Record<MobileContentKind, ContentState>>({
+    checklists: { data: null, error: null, loading: false, refreshing: false },
+    events: { data: null, error: null, loading: false, refreshing: false },
+    quizzes: { data: null, error: null, loading: false, refreshing: false },
+    tools: { data: null, error: null, loading: false, refreshing: false }
+  });
 
   const currentSlug = screen.name === "codeDetail" ? screen.slug : undefined;
+  const currentContentKind = isMobileContentScreen(screen.name) ? screen.name : null;
 
   async function loadIndex(nextPage = 1, replace = true) {
     setIndexLoading(true);
@@ -452,6 +863,56 @@ export default function App() {
     }
   }
 
+  async function loadContent(kind: MobileContentKind, nextPage = 1, replace = true) {
+    setContentSections((prev) => ({
+      ...prev,
+      [kind]: {
+        ...prev[kind],
+        error: null,
+        loading: true
+      }
+    }));
+
+    try {
+      const response = await fetchContentIndex(kind, nextPage);
+      setContentSections((prev) => ({
+        ...prev,
+        [kind]: {
+          data: replace || !prev[kind].data
+            ? response
+            : {
+                ...response,
+                items: [...prev[kind].data.items, ...response.items]
+              },
+          error: null,
+          loading: false,
+          refreshing: false
+        }
+      }));
+    } catch (error) {
+      setContentSections((prev) => ({
+        ...prev,
+        [kind]: {
+          ...prev[kind],
+          error: error instanceof Error ? error.message : `Failed to load ${kind}`,
+          loading: false,
+          refreshing: false
+        }
+      }));
+    }
+  }
+
+  async function refreshContent(kind: MobileContentKind) {
+    setContentSections((prev) => ({
+      ...prev,
+      [kind]: {
+        ...prev[kind],
+        refreshing: true
+      }
+    }));
+    await loadContent(kind, 1, true);
+  }
+
   useEffect(() => {
     void loadIndex(1, true);
   }, []);
@@ -462,6 +923,12 @@ export default function App() {
     }
   }, [currentSlug]);
 
+  useEffect(() => {
+    if (currentContentKind && !contentSections[currentContentKind].data && !contentSections[currentContentKind].loading) {
+      void loadContent(currentContentKind, 1, true);
+    }
+  }, [currentContentKind, contentSections]);
+
   const content = useMemo(() => {
     if (screen.name === "codeDetail") {
       return (
@@ -471,6 +938,22 @@ export default function App() {
           error={detailError}
           onBack={() => setScreen({ name: "codes" })}
           onRetry={() => currentSlug && void loadDetail(currentSlug)}
+        />
+      );
+    }
+
+    if (isMobileContentScreen(screen.name)) {
+      const section = contentSections[screen.name];
+      const nextPage = (section.data?.page ?? 0) + 1;
+      return (
+        <ContentIndexScreen
+          data={section.data}
+          error={section.error}
+          kind={screen.name}
+          loading={section.loading}
+          refreshing={section.refreshing}
+          onRefresh={() => void refreshContent(screen.name as MobileContentKind)}
+          onLoadMore={() => void loadContent(screen.name as MobileContentKind, nextPage, false)}
         />
       );
     }
@@ -489,123 +972,231 @@ export default function App() {
         onSelectGame={(slug) => setScreen({ name: "codeDetail", slug })}
       />
     );
-  }, [currentSlug, detail, detailError, detailLoading, games, indexError, indexLoading, page, refreshing, screen.name, total, totalPages]);
+  }, [contentSections, currentSlug, detail, detailError, detailLoading, games, indexError, indexLoading, page, refreshing, screen.name, total, totalPages]);
 
   return (
-    <AppShell currentScreen={screen} drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen}>
-      {content}
-    </AppShell>
+    <ThemeContext.Provider value={theme}>
+      <AppShell currentScreen={screen} drawerOpen={drawerOpen} onNavigate={setScreen} setDrawerOpen={setDrawerOpen}>
+        {content}
+      </AppShell>
+    </ThemeContext.Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.background
-  },
-  appFrame: {
-    flex: 1,
-    backgroundColor: colors.background,
-    flexDirection: "row"
-  },
+function createAppStyles(colors: ThemeColors) {
+  return StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: colors.background
+    },
+    appFrame: {
+      flex: 1,
+      backgroundColor: colors.background,
+      flexDirection: "row"
+    },
   sidebar: {
-    width: 244,
-    backgroundColor: "#f1f3f8",
+    width: SIDEBAR_WIDTH,
+    backgroundColor: colors.sidebar,
     borderRightWidth: 1,
     borderRightColor: colors.border,
-    padding: spacing.lg,
-    gap: spacing.xl
+    paddingHorizontal: 12,
+    paddingBottom: spacing.md
   },
   sidebarCompact: {
-    width: 284,
+    width: 300,
     height: "100%"
   },
-  brandBlock: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.md
+  sidebarHeader: {
+    paddingBottom: spacing.sm,
+    paddingTop: 20
   },
-  brandMark: {
-    width: 36,
-    height: 36,
-    borderRadius: radii.md,
-    backgroundColor: colors.foreground,
+  logoCenter: {
+    minHeight: 48,
     alignItems: "center",
     justifyContent: "center"
   },
-  brandMarkText: {
-    color: colors.white,
-    fontSize: 18,
-    fontWeight: "800"
+  logoSmall: {
+    width: 104,
+    height: 35
   },
-  brandTitle: {
-    color: colors.foreground,
-    fontSize: 17,
-    fontWeight: "700"
+  logoLarge: {
+    width: 144,
+    height: 48
   },
-  brandSubTitle: {
-    color: colors.muted,
-    fontSize: 12,
-    marginTop: 2
-  },
-  navList: {
-    gap: spacing.xs
-  },
-  navItem: {
-    minHeight: 42,
+  closeButton: {
+    position: "absolute",
+    right: 0,
+    top: 24,
+    width: 32,
+    height: 32,
     borderRadius: radii.md,
-    paddingHorizontal: spacing.md,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  searchBox: {
+    height: 32,
+    marginTop: spacing.lg,
+    borderRadius: radii.md,
+    backgroundColor: colors.surfaceMuted,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between"
+    paddingHorizontal: spacing.sm
+  },
+  searchInput: {
+    flex: 1,
+    color: colors.foreground,
+    fontSize: 13,
+    fontWeight: "500",
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 0
+  },
+  searchPlaceholder: {
+    color: colors.muted
+  },
+  navList: {
+    gap: 2,
+    paddingHorizontal: spacing.xs,
+    paddingTop: spacing.sm
+  },
+  navGroupLabel: {
+    color: colors.muted,
+    fontSize: 11,
+    fontWeight: "600",
+    marginBottom: spacing.xs,
+    paddingHorizontal: spacing.sm,
+    textTransform: "uppercase"
+  },
+  navItem: {
+    minHeight: 32,
+    borderRadius: radii.md,
+    paddingHorizontal: spacing.sm,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm
   },
   navItemActive: {
     backgroundColor: colors.surfaceMuted
   },
   navItemDisabled: {
-    opacity: 0.58
+    opacity: 0.62
+  },
+  navIcon: {
+    width: 16,
+    alignItems: "center",
+    justifyContent: "center"
   },
   navItemText: {
-    color: colors.foreground,
-    fontSize: 15,
+    color: colors.mutedStrong,
+    flex: 1,
+    fontSize: 13,
     fontWeight: "600"
   },
   navItemTextActive: {
-    color: colors.accent
+    color: colors.foreground
   },
-  navItemMeta: {
-    color: colors.muted,
-    fontSize: 11,
+  sidebarSeparator: {
+    height: 1,
+    backgroundColor: colors.border,
+    marginHorizontal: spacing.sm,
+    marginVertical: spacing.sm
+  },
+  themeRow: {
+    minHeight: 32,
+    borderRadius: radii.md,
+    paddingHorizontal: spacing.sm,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  themeLabel: {
+    color: colors.mutedStrong,
+    fontSize: 13,
     fontWeight: "600"
+  },
+  themeButton: {
+    width: 24,
+    height: 24,
+    borderRadius: 999,
+    borderWidth: 1,
+    borderColor: colors.border,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  themeIcon: {
+    color: colors.foreground,
+    fontSize: 14,
+    lineHeight: 18
   },
   mainColumn: {
     flex: 1
   },
   topBar: {
-    height: 58,
+    height: 65,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
+    backgroundColor: colors.background,
     paddingHorizontal: spacing.lg,
     flexDirection: "row",
     alignItems: "center",
     gap: spacing.md
   },
   iconButton: {
-    borderWidth: 1,
-    borderColor: colors.border,
+    width: 40,
+    height: 40,
     borderRadius: radii.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    backgroundColor: colors.surface
+    alignItems: "center",
+    justifyContent: "center"
   },
-  iconButtonText: {
-    color: colors.foreground,
-    fontWeight: "700"
+  hamburgerIcon: {
+    width: 20,
+    gap: 4
   },
-  topBarTitle: {
-    color: colors.foreground,
-    fontSize: 18,
-    fontWeight: "700"
+  hamburgerLine: {
+    height: 2,
+    borderRadius: 999,
+    backgroundColor: colors.foreground
+  },
+  closeIcon: {
+    width: 18,
+    height: 18,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  closeLine: {
+    position: "absolute",
+    width: 16,
+    height: 2,
+    borderRadius: 999,
+    backgroundColor: colors.mutedStrong
+  },
+  closeLineLeft: {
+    transform: [{ rotate: "45deg" }]
+  },
+  closeLineRight: {
+    transform: [{ rotate: "-45deg" }]
+  },
+  searchIcon: {
+    width: 16,
+    height: 16
+  },
+  searchCircle: {
+    width: 11,
+    height: 11,
+    borderRadius: 999,
+    borderWidth: 1.5,
+    borderColor: colors.muted,
+    left: 1,
+    top: 1
+  },
+  searchHandle: {
+    position: "absolute",
+    width: 7,
+    height: 1.5,
+    borderRadius: 999,
+    backgroundColor: colors.muted,
+    bottom: 2,
+    right: 0,
+    transform: [{ rotate: "45deg" }]
   },
   drawerOverlay: {
     bottom: 0,
@@ -622,18 +1213,21 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 0,
     top: 0,
-    backgroundColor: "rgba(32, 38, 60, 0.28)"
+    backgroundColor: colors.scrim
   },
   drawerPanel: {
     height: "100%"
   },
   content: {
-    padding: spacing.lg,
-    gap: spacing.xl,
-    paddingBottom: 48
+    padding: CONTENT_PADDING,
+    gap: 40,
+    paddingBottom: 48,
+    width: "100%",
+    maxWidth: CONTENT_MAX_WIDTH,
+    alignSelf: "center"
   },
   headerBlock: {
-    gap: spacing.sm,
+    gap: spacing.md,
     maxWidth: 760
   },
   eyebrow: {
@@ -644,8 +1238,8 @@ const styles = StyleSheet.create({
   },
   pageTitle: {
     color: colors.foreground,
-    fontSize: 32,
-    lineHeight: 38,
+    fontSize: 36,
+    lineHeight: 43,
     fontWeight: "700"
   },
   pageDescription: {
@@ -662,29 +1256,56 @@ const styles = StyleSheet.create({
   pill: {
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 999,
+    borderRadius: radii.md,
     backgroundColor: colors.surface,
+    minHeight: 32,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm
+    paddingVertical: spacing.sm,
+    justifyContent: "center"
+  },
+  pillAccent: {
+    borderColor: colors.accentBorder,
+    backgroundColor: colors.accentSoft
   },
   pillText: {
     color: colors.muted,
-    fontSize: 12,
-    fontWeight: "700"
+    fontSize: 14,
+    fontWeight: "600"
+  },
+  pillTextAccent: {
+    color: colors.accent
   },
   grid: {
-    gap: spacing.md
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 20
   },
   gameCard: {
     overflow: "hidden",
-    borderRadius: radii.md,
+    borderRadius: radii.lg,
     borderWidth: 1,
     borderColor: colors.border,
     backgroundColor: colors.surface
   },
+  gameCardImageWrap: {
+    position: "relative",
+    overflow: "hidden",
+    backgroundColor: colors.surfaceMuted
+  },
+  imageBottomFade: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 32,
+    backgroundColor: colors.surface
+  },
   image: {
     width: "100%",
-    height: 142,
+    aspectRatio: 16 / 9,
     backgroundColor: colors.surfaceMuted
   },
   imageTall: {
@@ -692,7 +1313,7 @@ const styles = StyleSheet.create({
   },
   imageFallback: {
     width: "100%",
-    height: 142,
+    aspectRatio: 16 / 9,
     backgroundColor: colors.surfaceMuted,
     alignItems: "center",
     justifyContent: "center"
@@ -703,31 +1324,49 @@ const styles = StyleSheet.create({
     fontWeight: "800"
   },
   gameCardBody: {
-    padding: spacing.md,
-    gap: spacing.sm
-  },
-  cardHeaderLine: {
-    flexDirection: "row",
+    marginTop: -4,
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.lg,
+    paddingTop: spacing.md,
     gap: spacing.sm,
-    alignItems: "flex-start",
-    justifyContent: "space-between"
+    backgroundColor: colors.surface
   },
   gameTitle: {
-    flex: 1,
     color: colors.foreground,
-    fontSize: 17,
-    lineHeight: 22,
+    fontSize: 18,
+    lineHeight: 24,
     fontWeight: "700"
   },
-  countBadge: {
-    overflow: "hidden",
-    borderRadius: radii.sm,
-    backgroundColor: colors.surfaceMuted,
-    color: colors.foreground,
+  gameMetaRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: spacing.md
+  },
+  gameMetaItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6
+  },
+  activeDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 999,
+    backgroundColor: "#4ade80"
+  },
+  gameMetaText: {
+    color: colors.mutedStrong,
     fontSize: 12,
-    fontWeight: "700",
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 6
+    fontWeight: "500"
+  },
+  contentCardSummary: {
+    color: colors.muted,
+    fontSize: 13,
+    lineHeight: 19
+  },
+  clockIcon: {
+    color: colors.mutedStrong,
+    fontSize: 13,
+    fontWeight: "700"
   },
   mutedText: {
     color: colors.muted,
@@ -742,9 +1381,9 @@ const styles = StyleSheet.create({
   loadMoreButton: {
     alignSelf: "center",
     borderWidth: 1,
-    borderColor: "rgba(79, 70, 229, 0.4)",
+    borderColor: colors.accentBorder,
     borderRadius: 999,
-    backgroundColor: "rgba(79, 70, 229, 0.15)",
+    backgroundColor: colors.accentSoft,
     paddingHorizontal: spacing.xl,
     paddingVertical: spacing.md
   },
@@ -767,16 +1406,55 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "700"
   },
-  detailHero: {
-    overflow: "hidden",
-    borderRadius: radii.md,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface
+  detailHeader: {
+    gap: spacing.md
   },
-  detailHeroText: {
-    padding: spacing.lg,
+  breadcrumbRow: {
+    flexDirection: "row",
+    alignItems: "center",
     gap: spacing.sm
+  },
+  breadcrumbLink: {
+    color: colors.muted,
+    fontSize: 12,
+    fontWeight: "700",
+    textTransform: "uppercase"
+  },
+  breadcrumbDivider: {
+    color: colors.muted,
+    fontSize: 12
+  },
+  breadcrumbCurrent: {
+    color: colors.foreground,
+    flex: 1,
+    fontSize: 12,
+    fontWeight: "700",
+    textTransform: "uppercase"
+  },
+  detailTitle: {
+    color: colors.foreground,
+    fontSize: 38,
+    lineHeight: 46,
+    fontWeight: "800"
+  },
+  updatedLine: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm
+  },
+  updatedText: {
+    color: colors.muted,
+    fontSize: 14,
+    lineHeight: 20
+  },
+  updatedStrong: {
+    color: colors.foreground,
+    fontWeight: "700"
+  },
+  detailIntro: {
+    color: colors.muted,
+    fontSize: 16,
+    lineHeight: 25
   },
   codesPanel: {
     overflow: "hidden",
@@ -791,7 +1469,8 @@ const styles = StyleSheet.create({
   codesPanelHeader: {
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
-    padding: spacing.lg,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.lg,
     flexDirection: "row",
     gap: spacing.md,
     alignItems: "flex-start",
@@ -812,14 +1491,38 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 19
   },
+  countBadge: {
+    overflow: "hidden",
+    borderRadius: radii.sm,
+    backgroundColor: colors.surfaceMuted,
+    color: colors.foreground,
+    fontSize: 12,
+    fontWeight: "700",
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 6
+  },
+  outlineBadge: {
+    overflow: "hidden",
+    borderRadius: radii.sm,
+    borderWidth: 1,
+    borderColor: colors.border,
+    color: colors.foreground,
+    fontSize: 12,
+    fontWeight: "700",
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 6
+  },
   codesList: {
-    padding: spacing.md
+    overflow: "hidden",
+    margin: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radii.sm
   },
   codeRow: {
-    flexDirection: "row",
     gap: spacing.md,
-    paddingVertical: spacing.md,
-    alignItems: "center"
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.md
   },
   codeRowBorder: {
     borderTopWidth: 1,
@@ -829,7 +1532,7 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: radii.sm,
-    backgroundColor: "rgba(212, 215, 231, 0.45)",
+    backgroundColor: colors.surfaceMuted,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -840,7 +1543,13 @@ const styles = StyleSheet.create({
   },
   codeMain: {
     flex: 1,
-    gap: 5
+    minWidth: 0,
+    gap: 6
+  },
+  codeRowMain: {
+    flexDirection: "row",
+    gap: spacing.md,
+    alignItems: "flex-start"
   },
   codeLine: {
     flexDirection: "row",
@@ -857,7 +1566,7 @@ const styles = StyleSheet.create({
   miniBadge: {
     overflow: "hidden",
     borderRadius: radii.sm,
-    backgroundColor: "rgba(79, 70, 229, 0.12)",
+    backgroundColor: colors.accentSoft,
     color: colors.accent,
     fontSize: 10,
     fontWeight: "800",
@@ -870,12 +1579,22 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: "600"
   },
+  codeActionRow: {
+    paddingLeft: 40,
+    gap: spacing.sm,
+    alignItems: "flex-start"
+  },
   copyButton: {
     borderWidth: 1,
-    borderColor: "rgba(79, 70, 229, 0.4)",
+    borderColor: colors.accentBorder,
     borderRadius: 999,
-    backgroundColor: "rgba(79, 70, 229, 0.15)",
-    paddingHorizontal: spacing.md,
+    backgroundColor: colors.accentSoft,
+    minHeight: 34,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+    justifyContent: "center",
+    paddingHorizontal: spacing.lg,
     paddingVertical: spacing.sm
   },
   copyButtonDone: {
@@ -890,11 +1609,57 @@ const styles = StyleSheet.create({
   copyButtonDoneText: {
     color: colors.white
   },
+  copyIcon: {
+    width: 14,
+    height: 14
+  },
+  copyBack: {
+    position: "absolute",
+    left: 1,
+    top: 1,
+    width: 9,
+    height: 9,
+    borderRadius: 2,
+    borderWidth: 1.5,
+    borderColor: colors.accent
+  },
+  copyFront: {
+    position: "absolute",
+    bottom: 1,
+    right: 1,
+    width: 9,
+    height: 9,
+    borderRadius: 2,
+    borderWidth: 1.5,
+    borderColor: colors.accent,
+    backgroundColor: colors.accentSoft
+  },
+  checkIcon: {
+    width: 14,
+    height: 14
+  },
+  checkShort: {
+    position: "absolute",
+    left: 2,
+    top: 7,
+    width: 5,
+    height: 2,
+    borderRadius: 999,
+    backgroundColor: colors.white,
+    transform: [{ rotate: "45deg" }]
+  },
+  checkLong: {
+    position: "absolute",
+    left: 5,
+    top: 6,
+    width: 9,
+    height: 2,
+    borderRadius: 999,
+    backgroundColor: colors.white,
+    transform: [{ rotate: "-45deg" }]
+  },
   emptyState: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.sm,
-    backgroundColor: "rgba(212, 215, 231, 0.2)",
+    backgroundColor: colors.surface,
     padding: spacing.md,
     gap: spacing.xs
   },
@@ -902,6 +1667,27 @@ const styles = StyleSheet.create({
     color: colors.foreground,
     fontSize: 15,
     fontWeight: "700"
+  },
+  expiredContent: {
+    padding: spacing.md
+  },
+  expiredChipList: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: spacing.sm
+  },
+  expiredChip: {
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radii.sm,
+    backgroundColor: colors.surfaceMuted,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs
+  },
+  expiredChipText: {
+    color: colors.muted,
+    fontSize: 12,
+    fontWeight: "600"
   },
   externalLinks: {
     flexDirection: "row",
@@ -942,9 +1728,9 @@ const styles = StyleSheet.create({
   },
   retryButton: {
     borderWidth: 1,
-    borderColor: "rgba(79, 70, 229, 0.4)",
+    borderColor: colors.accentBorder,
     borderRadius: 999,
-    backgroundColor: "rgba(79, 70, 229, 0.15)",
+    backgroundColor: colors.accentSoft,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm
   },
@@ -953,4 +1739,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "800"
   }
-});
+  });
+}

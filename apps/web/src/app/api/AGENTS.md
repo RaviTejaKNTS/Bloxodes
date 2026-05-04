@@ -16,6 +16,7 @@ These routes back interactive site features, search, tool data, session/progress
   - `extension/roblox-game-codes`
   - `mobile/codes`
   - `mobile/codes/[slug]`
+  - `mobile/content/[kind]`
 - User/session state:
   - `codes/session`, `codes/progress`
   - `checklists/session`, `checklists/progress`
@@ -60,7 +61,8 @@ These routes back interactive site features, search, tool data, session/progress
 - `/api/extension/roblox-game-codes` resolves Roblox place/game context to a published Bloxodes codes page and returns a three-code preview plus the full page URL.
 - `/api/mobile/codes` returns the paginated mobile codes index.
 - `/api/mobile/codes/[slug]` returns active and expired codes for a mobile detail screen.
-- Shared payload logic lives in `apps/web/src/lib/extension-codes.ts` and `apps/web/src/lib/mobile-codes.ts`.
+- `/api/mobile/content/[kind]` returns paginated mobile index cards for `tools`, `quizzes`, `checklists`, and `events`.
+- Shared payload logic lives in `apps/web/src/lib/extension-codes.ts`, `apps/web/src/lib/mobile-codes.ts`, and `apps/web/src/lib/mobile-content.ts`.
 - Keep freshness badges aligned with the website by using `apps/web/src/lib/code-utils.ts` helpers instead of adding client-specific `is_new` rules.
 
 ## When Adding an Endpoint

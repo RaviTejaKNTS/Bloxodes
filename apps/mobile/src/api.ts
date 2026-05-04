@@ -1,10 +1,17 @@
-import type { ApiErrorResponse, CodeDetailResponse, CodesIndexResponse } from "./types";
+import type { ApiErrorResponse, CodeDetailResponse, CodesIndexResponse, MobileContentIndexResponse, MobileContentKind } from "./types";
 
 const DEFAULT_API_BASE_URL = "https://bloxodes.com";
 
 function getApiBaseUrl(): string {
   const value = process.env.EXPO_PUBLIC_BLOXODES_API_URL?.trim();
-  return (value || DEFAULT_API_BASE_URL).replace(/\/$/, "");
+  if (value) return value.replace(/\/$/, "");
+
+  const location = (globalThis as { location?: { hostname?: string } }).location;
+  if (location?.hostname === "localhost") {
+    return "http://localhost:3001";
+  }
+
+  return DEFAULT_API_BASE_URL;
 }
 
 async function requestJson<T>(path: string): Promise<T> {
@@ -33,4 +40,8 @@ export function fetchCodesIndex(page = 1): Promise<CodesIndexResponse> {
 
 export function fetchCodeDetail(slug: string): Promise<CodeDetailResponse> {
   return requestJson<CodeDetailResponse>(`/api/mobile/codes/${encodeURIComponent(slug)}`);
+}
+
+export function fetchContentIndex(kind: MobileContentKind, page = 1): Promise<MobileContentIndexResponse> {
+  return requestJson<MobileContentIndexResponse>(`/api/mobile/content/${kind}?page=${page}`);
 }

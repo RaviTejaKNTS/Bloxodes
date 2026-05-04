@@ -1,8 +1,7 @@
 name: Draft Code Page Generation
 
 on:
-  schedule:
-    - cron: "20 2,14 * * *"
+  # Disabled: codes article/page generation is paused.
   workflow_dispatch:
     inputs:
       limit:
@@ -16,6 +15,7 @@ concurrency:
 
 jobs:
   generate-drafts:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 180
     env:

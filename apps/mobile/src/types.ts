@@ -50,3 +50,27 @@ export type ApiErrorResponse = {
   ok: false;
   error: string;
 };
+
+export type MobileContentKind = "checklists" | "events" | "quizzes" | "tools";
+
+export type MobileContentItem = {
+  id: string;
+  title: string;
+  subtitle: string | null;
+  summary: string | null;
+  coverImage: string | null;
+  updatedAt: string | null;
+  url: string;
+  badge: string | null;
+};
+
+export type MobileContentIndexResponse = {
+  ok: true;
+  kind: MobileContentKind;
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+  latestUpdatedAt: string | null;
+  items: MobileContentItem[];
+};
