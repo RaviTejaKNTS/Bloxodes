@@ -19,6 +19,8 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - `automation/`: queue runners, IndexNow/bootstrap helpers, cache warming, reporting.
 - `backfill/`: repair jobs for existing content/data.
 - `catalog/`: Roblox catalog and avatar item collection plus enrichment.
+  - `seed-game-catalog-pages.ts` upserts local game dataset catalog copy into `catalog_pages`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
+  - `seed-game-wiki-pages.ts` upserts game hub rows into `wiki_pages` and links them to matching `roblox_universes`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
 - `codes/`: code refresh and code-article rewrite jobs.
 - `decal-ids/`: decal scraping and enrichment.
 - `events/`: event ingestion, page seeding, event detail hydration, event guide generation.

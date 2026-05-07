@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "title": "Adopt Me pet ages and tricks data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Adopt Me Wiki - Pets",
+        "url": "https://adoptme.fandom.com/wiki/Pets",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "number",
+      "name",
+      "trickUnlocked",
+      "specialTricks"
+    ]
+  },
+  "items": [
+    {
+      "number": "1",
+      "name": "Newborn",
+      "slug": "newborn",
+      "trickUnlocked": "Sit",
+      "specialTricks": "Do Nothing",
+      "fields": {
+        "item": "1",
+        "age": "Newborn",
+        "trickUnlocked": "Sit",
+        "specialTricks": "Do Nothing"
+      }
+    },
+    {
+      "number": "2",
+      "name": "Junior",
+      "slug": "junior",
+      "trickUnlocked": "Lay down",
+      "specialTricks": "Play dead, Joyful",
+      "fields": {
+        "item": "2",
+        "age": "Junior",
+        "trickUnlocked": "Lay down",
+        "specialTricks": "Play dead, Joyful"
+      }
+    },
+    {
+      "number": "3",
+      "name": "Pre-Teen",
+      "slug": "pre-teen",
+      "trickUnlocked": "Bounce",
+      "specialTricks": "Beg, Joy, Scared, Stay",
+      "fields": {
+        "item": "3",
+        "age": "Pre-Teen",
+        "trickUnlocked": "Bounce",
+        "specialTricks": "Beg, Joy, Scared, Stay"
+      }
+    },
+    {
+      "number": "4",
+      "name": "Teen",
+      "slug": "teen",
+      "trickUnlocked": "Roll Over",
+      "specialTricks": "Handstand, Dance 1, Erode, Joyful, Jump",
+      "fields": {
+        "item": "4",
+        "age": "Teen",
+        "trickUnlocked": "Roll Over",
+        "specialTricks": "Handstand, Dance 1, Erode, Joyful, Jump"
+      }
+    },
+    {
+      "number": "5",
+      "name": "Post-Teen",
+      "slug": "post-teen",
+      "trickUnlocked": "Backflip",
+      "specialTricks": "Sideflip, Dance 1, Twirl Around, Trick 1, Dive, Dance 2, Sit Still",
+      "fields": {
+        "item": "5",
+        "age": "Post-Teen",
+        "trickUnlocked": "Backflip",
+        "specialTricks": "Sideflip, Dance 1, Twirl Around, Trick 1, Dive, Dance 2, Sit Still"
+      }
+    },
+    {
+      "number": "6",
+      "name": "Full Grown",
+      "slug": "full-grown",
+      "trickUnlocked": "Dance",
+      "specialTricks": "Shadow Breath, Frost Breath, Triple Flip, Dance 2, Trick 2, Dance 3, Think",
+      "fields": {
+        "item": "6",
+        "age": "Full Grown",
+        "trickUnlocked": "Dance",
+        "specialTricks": "Shadow Breath, Frost Breath, Triple Flip, Dance 2, Trick 2, Dance 3, Think"
+      }
+    }
+  ]
+}

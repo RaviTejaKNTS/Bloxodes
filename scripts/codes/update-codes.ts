@@ -44,7 +44,6 @@ function sleep(ms: number) {
 type GameRow = Game & {
   source_url: string | null;
   source_url_2: string | null;
-  source_url_3: string | null;
 };
 
 type ProcessResult = {
@@ -83,7 +82,7 @@ async function fetchPublishedGames() {
 }
 
 async function processGame(sb: ReturnType<typeof supabaseAdmin>, game: GameRow): Promise<ProcessResult> {
-  const sourceUrls = [game.source_url, game.source_url_2, game.source_url_3]
+  const sourceUrls = [game.source_url, game.source_url_2]
     .map((url) => (typeof url === "string" ? url.trim() : ""))
     .filter((url) => url.length > 0);
 

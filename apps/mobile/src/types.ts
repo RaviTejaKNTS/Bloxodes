@@ -51,7 +51,7 @@ export type ApiErrorResponse = {
   error: string;
 };
 
-export type MobileContentKind = "checklists" | "events" | "quizzes" | "tools";
+export type MobileContentKind = "articles" | "catalog" | "checklists" | "events" | "lists" | "quizzes" | "tools" | "wiki";
 
 export type MobileContentItem = {
   id: string;
@@ -73,4 +73,31 @@ export type MobileContentIndexResponse = {
   totalPages: number;
   latestUpdatedAt: string | null;
   items: MobileContentItem[];
+};
+
+export type SearchItemType =
+  | "article"
+  | "author"
+  | "catalog"
+  | "checklist"
+  | "codes"
+  | "event"
+  | "list"
+  | "music"
+  | "quiz"
+  | "tool"
+  | "wiki";
+
+export type SearchItem = {
+  id: string;
+  title: string;
+  subtitle: string | null;
+  url: string;
+  type: SearchItemType;
+  updatedAt: string | null;
+  badge: string | null;
+};
+
+export type SearchResponse = {
+  items: SearchItem[];
 };

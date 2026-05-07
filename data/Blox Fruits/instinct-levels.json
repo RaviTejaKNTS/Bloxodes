@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "title": "Blox Fruits instinct levels data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Blox Fruits Wiki - Instinct",
+        "url": "https://blox-fruits.fandom.com/wiki/Instinct",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "level",
+      "exp",
+      "dodges",
+      "buffs"
+    ]
+  },
+  "items": [
+    {
+      "name": "1",
+      "slug": "1",
+      "fields": {
+        "level": "1",
+        "exp": "[0]-[59]",
+        "dodges": "2",
+        "buffs": "Gives player dodges and visual range"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "level": "1",
+      "exp": "[0]-[59]",
+      "dodges": "2",
+      "buffs": "Gives player dodges and visual range"
+    },
+    {
+      "name": "2",
+      "slug": "2",
+      "fields": {
+        "level": "2",
+        "exp": "[60-329]",
+        "dodges": "3",
+        "buffs": "Increased dodges and visual range"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "level": "2",
+      "exp": "[60-329]",
+      "dodges": "3",
+      "buffs": "Increased dodges and visual range"
+    },
+    {
+      "name": "3",
+      "slug": "3",
+      "fields": {
+        "level": "3",
+        "exp": "[330]-[815]",
+        "dodges": "4",
+        "buffs": "Increased dodges and visual range"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "level": "3",
+      "exp": "[330]-[815]",
+      "dodges": "4",
+      "buffs": "Increased dodges and visual range"
+    },
+    {
+      "name": "4",
+      "slug": "4",
+      "fields": {
+        "level": "4",
+        "exp": "[816]-[1416]",
+        "dodges": "5",
+        "buffs": "Increased dodges and visual range"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "level": "4",
+      "exp": "[816]-[1416]",
+      "dodges": "5",
+      "buffs": "Increased dodges and visual range"
+    },
+    {
+      "name": "5",
+      "slug": "5",
+      "fields": {
+        "level": "5",
+        "exp": "[1417]-[2099]",
+        "dodges": "6",
+        "buffs": "Increased dodges and visual range"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "level": "5",
+      "exp": "[1417]-[2099]",
+      "dodges": "6",
+      "buffs": "Increased dodges and visual range"
+    },
+    {
+      "name": "6",
+      "slug": "6",
+      "fields": {
+        "level": "6",
+        "exp": "[2100]-[2823]",
+        "dodges": "7",
+        "buffs": "Increased dodges and visual range"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "level": "6",
+      "exp": "[2100]-[2823]",
+      "dodges": "7",
+      "buffs": "Increased dodges and visual range"
+    },
+    {
+      "name": "7 (MAX)",
+      "slug": "7-max",
+      "fields": {
+        "level": "7 (MAX)",
+        "exp": "[2824]-[5000 (MAX)]",
+        "dodges": "8",
+        "buffs": "When max, you can upgrade to Instinct/V2."
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Instinct/V2",
+      "imageCandidate": null,
+      "level": "7 (MAX)",
+      "exp": "[2824]-[5000 (MAX)]",
+      "dodges": "8",
+      "buffs": "When max, you can upgrade to Instinct/V2."
+    }
+  ]
+}

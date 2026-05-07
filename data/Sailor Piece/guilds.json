@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "title": "Sailor Piece guilds data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Sailor Piece Wiki - guilds",
+        "url": "https://sailorpiece.org/wiki/guilds/",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "type",
+      "description",
+      "requirements",
+      "bonus"
+    ]
+  },
+  "items": [
+    {
+      "name": "Delinquent (Starter Island)",
+      "slug": "delinquent-starter-island",
+      "tier": null,
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": null,
+      "bonus": null,
+      "recipe": null,
+      "description": "Drop rate: 0.00019342%",
+      "stats": {},
+      "requirements": null,
+      "obtainment": "Drop rate: 0.00019342%",
+      "tags": [
+        "0.00019342%"
+      ]
+    },
+    {
+      "name": "Cosmic Being (World Boss, 30 min spawn)",
+      "slug": "cosmic-being-world-boss-30-min-spawn",
+      "tier": null,
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": null,
+      "bonus": null,
+      "recipe": null,
+      "description": "Drop rate: 0.01%",
+      "stats": {},
+      "requirements": null,
+      "obtainment": "Drop rate: 0.01%",
+      "tags": [
+        "0.01%"
+      ]
+    },
+    {
+      "name": "Sea Beast (Kraken / Sea Serpent, 500k+ bounty required to spawn)",
+      "slug": "sea-beast-kraken-sea-serpent-500k-bounty-required-to-spawn",
+      "tier": null,
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": null,
+      "bonus": null,
+      "recipe": null,
+      "description": "Drop rate: 0.011%",
+      "stats": {},
+      "requirements": null,
+      "obtainment": "Drop rate: 0.011%",
+      "tags": [
+        "0.011%"
+      ]
+    },
+    {
+      "name": "Member Cap",
+      "slug": "member-cap",
+      "tier": null,
+      "rarity": null,
+      "category": "+150 max members",
+      "type": null,
+      "effect": null,
+      "bonus": null,
+      "recipe": null,
+      "description": "Raises guild member cap from 15 up to 150 at max upgrade.",
+      "stats": {},
+      "requirements": null,
+      "obtainment": null,
+      "tags": [
+        "+150 max members"
+      ]
+    },
+    {
+      "name": "Damage",
+      "slug": "damage",
+      "tier": null,
+      "rarity": null,
+      "category": "+15% Damage",
+      "type": null,
+      "effect": null,
+      "bonus": null,
+      "recipe": null,
+      "description": "Applies +15% Damage to all guild members at max upgrade.",
+      "stats": {},
+      "requirements": null,
+      "obtainment": null,
+      "tags": [
+        "+15% Damage"
+      ]
+    },
+    {
+      "name": "Crit Damage",
+      "slug": "crit-damage",
+      "tier": null,
+      "rarity": null,
+      "category": "+5% Crit Damage",
+      "type": null,
+      "effect": null,
+      "bonus": null,
+      "recipe": null,
+      "description": "Applies +5% Crit Damage to all guild members at max upgrade.",
+      "stats": {},
+      "requirements": null,
+      "obtainment": null,
+      "tags": [
+        "+5% Crit Damage"
+      ]
+    },
+    {
+      "name": "Crit Chance",
+      "slug": "crit-chance",
+      "tier": null,
+      "rarity": null,
+      "category": "+2% Crit Chance",
+      "type": null,
+      "effect": null,
+      "bonus": null,
+      "recipe": null,
+      "description": "Applies +2% Crit Chance to all guild members at max upgrade.",
+      "stats": {},
+      "requirements": null,
+      "obtainment": null,
+      "tags": [
+        "+2% Crit Chance"
+      ]
+    },
+    {
+      "name": "HP",
+      "slug": "hp",
+      "tier": null,
+      "rarity": null,
+      "category": "+15% HP",
+      "type": null,
+      "effect": null,
+      "bonus": null,
+      "recipe": null,
+      "description": "Applies +15% HP to all guild members at max upgrade.",
+      "stats": {},
+      "requirements": null,
+      "obtainment": null,
+      "tags": [
+        "+15% HP"
+      ]
+    },
+    {
+      "name": "Luck",
+      "slug": "luck",
+      "tier": null,
+      "rarity": null,
+      "category": "+10% Luck",
+      "type": null,
+      "effect": null,
+      "bonus": null,
+      "recipe": null,
+      "description": "Applies +10% Luck to all guild members at max upgrade.",
+      "stats": {},
+      "requirements": null,
+      "obtainment": null,
+      "tags": [
+        "+10% Luck"
+      ]
+    }
+  ]
+}

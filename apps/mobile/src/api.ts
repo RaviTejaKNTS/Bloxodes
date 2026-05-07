@@ -1,8 +1,15 @@
-import type { ApiErrorResponse, CodeDetailResponse, CodesIndexResponse, MobileContentIndexResponse, MobileContentKind } from "./types";
+import type {
+  ApiErrorResponse,
+  CodeDetailResponse,
+  CodesIndexResponse,
+  MobileContentIndexResponse,
+  MobileContentKind,
+  SearchResponse
+} from "./types";
 
 const DEFAULT_API_BASE_URL = "https://bloxodes.com";
 
-function getApiBaseUrl(): string {
+export function getApiBaseUrl(): string {
   const value = process.env.EXPO_PUBLIC_BLOXODES_API_URL?.trim();
   if (value) return value.replace(/\/$/, "");
 
@@ -12,6 +19,12 @@ function getApiBaseUrl(): string {
   }
 
   return DEFAULT_API_BASE_URL;
+}
+
+export function buildWebUrl(path: string): string {
+  if (/^https?:\/\//i.test(path)) return path;
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${getApiBaseUrl()}${normalizedPath}`;
 }
 
 async function requestJson<T>(path: string): Promise<T> {
@@ -44,4 +57,19 @@ export function fetchCodeDetail(slug: string): Promise<CodeDetailResponse> {
 
 export function fetchContentIndex(kind: MobileContentKind, page = 1): Promise<MobileContentIndexResponse> {
   return requestJson<MobileContentIndexResponse>(`/api/mobile/content/${kind}?page=${page}`);
+}
+
+export function fetchSearchResults(query: string, scope = "global"): Promise<SearchResponse> {
+  const params = new URLSearchParams({
+    q: query,
+    scope,
+    limit: "20"
+  });
+  return fetch(`${getApiBaseUrl()}/api/search/all?${params.toString()}`).then(async (response) => {
+    const payload = (await response.json()) as unknown;
+    if (!response.ok) {
+      throw new Error("Failed to load search results");
+    }
+    return payload as SearchResponse;
+  });
 }

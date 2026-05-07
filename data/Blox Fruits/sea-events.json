@@ -1,0 +1,278 @@
+{
+  "meta": {
+    "title": "Blox Fruits sea events data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Blox Fruits Wiki - Category:Sea Events",
+        "url": "https://blox-fruits.fandom.com/wiki/Category%3ASea_Events",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "fields",
+      "overview",
+      "wikiUrl"
+    ]
+  },
+  "items": [
+    {
+      "name": "Frozen Dimension",
+      "slug": "frozen-dimension",
+      "image": "/Blox%20Fruits/Sea%20Events/frozen-dimension.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b5/Frozen_Dimension.png/revision/latest/scale-to-width-down/268?cb=20231022223922",
+      "fields": {
+        "type": "Sea Event",
+        "sea": "Third Sea",
+        "location": "Sea Danger Level 6 (????)",
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Courage_Of_A_Warrior_(accurate_loop).mp3The Courage Of A Warrior (in-game loop)"
+      },
+      "overview": "The Frozen Dimension exclusively spawns in Sea Danger Level 6 (????).",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Frozen_Dimension"
+    },
+    {
+      "name": "Ghost Shark",
+      "slug": "ghost-shark",
+      "image": "/Blox%20Fruits/Sea%20Events/ghost-shark.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/32/Ghost_Shark.png/revision/latest/scale-to-width-down/268?cb=20231218065150",
+      "fields": {
+        "location": "Haunted Shipwreck",
+        "level": "2000",
+        "atkPerHit": "1803.6 (Long ranged)1821.6 (Short ranged)",
+        "drops": "1-3 Shark Tooth 4-5 Ectoplasm 4-6 Bones"
+      },
+      "overview": null,
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghost_Shark"
+    },
+    {
+      "name": "Ghost Ship Raid",
+      "slug": "ghost-ship-raid",
+      "image": "/Blox%20Fruits/Sea%20Events/ghost-ship-raid.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3e/Ghost_Ship_Raid.PNG/revision/latest/scale-to-width-down/268?cb=20240819134834",
+      "fields": {
+        "location": "Haunted Shipwreck",
+        "hp": "90,000",
+        "atkPerHit": "~100 to boat",
+        "drops": "100 3 600A random Blox Fruit"
+      },
+      "overview": "In the Ghost Ship Raid, only one ship will spawn with an aquamarine color and attacks the player's ship with cannons, as well as two Ghost Sharks and some Haunted Crew Members.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghost_Ship_Raid"
+    },
+    {
+      "name": "Haunted Crew Member",
+      "slug": "haunted-crew-member",
+      "image": "/Blox%20Fruits/Sea%20Events/haunted-crew-member.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f9/Haunted_Crew_Member.png/revision/latest/scale-to-width-down/268?cb=20231220041029",
+      "fields": {
+        "location": "Haunted Shipwreck",
+        "level": "2000",
+        "weapon": "Sanguine Art",
+        "drops": "4-5 Ectoplasm 4-6 Bones"
+      },
+      "overview": "The Haunted Crew Members also leave a bluish-green glow similar to Ghost's Resurrection Passive.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Haunted_Crew_Member"
+    },
+    {
+      "name": "Haunted Ship Raid",
+      "slug": "haunted-ship-raid",
+      "image": "/Blox%20Fruits/Sea%20Events/haunted-ship-raid.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c0/Sr.PNG/revision/latest/scale-to-width-down/268?cb=20231027120657",
+      "fields": {
+        "location": "Sea Danger Level 1-6",
+        "hp": "45.000",
+        "atkPerHit": "~100 to boat",
+        "drops": "75 Fragments 3 Fool's GoldBlox Fruit (not guaranteed)Total: 150 Fragments 6 Fool's Gold"
+      },
+      "overview": "Haunted Ship Raids can spawn at Sea Danger Level 1-6.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Haunted_Ship_Raid"
+    },
+    {
+      "name": "Haunted Shipwreck",
+      "slug": "haunted-shipwreck",
+      "image": "/Blox%20Fruits/Sea%20Events/haunted-shipwreck.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6a/HSW_ClearVision.png/revision/latest/scale-to-width-down/268?cb=20240409182523",
+      "fields": {
+        "type": "Sea Event",
+        "sea": "Third Sea",
+        "location": "Sea Danger Level 6 (????)",
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Deep_Mist.mp3Deep Mist"
+      },
+      "overview": "The Haunted Shipwreck may only spawn if the player is sailing a Boat in Sea Danger Level 6 (????). This island will despawn:",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Haunted_Shipwreck"
+    },
+    {
+      "name": "Kitsune Island",
+      "slug": "kitsune-island",
+      "image": "/Blox%20Fruits/Sea%20Events/kitsune-island.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/74/KitsuneIsland.png/revision/latest/scale-to-width-down/268?cb=20240615124013",
+      "fields": {
+        "type": "Sea Event",
+        "sea": "Third Sea",
+        "location": "Sea Danger Level 6",
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Clever_Fox.mp3Clever Fox"
+      },
+      "overview": "\"A mysterious shrine has appeared in the sea...\"",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kitsune_Island"
+    },
+    {
+      "name": "Kitsune Shrine",
+      "slug": "kitsune-shrine",
+      "image": "/Blox%20Fruits/Sea%20Events/kitsune-shrine.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/89/Kitsune_Shrine_Full.png/revision/latest/scale-to-width-down/268?cb=20240812005020",
+      "fields": {
+        "purpose": "Exchange Azure Embers"
+      },
+      "overview": "The Kitsune Shrine is a shrine where players can interact with a boulder engraved with the transformed Kitsune's silhouette to obtain various in-game items.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kitsune_Shrine"
+    },
+    {
+      "name": "Leviathan",
+      "slug": "leviathan",
+      "image": "/Blox%20Fruits/Sea%20Events/leviathan.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0a/Leviathan.png/revision/latest/scale-to-width-down/268?cb=20250127234818",
+      "fields": {
+        "type": "Raid Boss",
+        "sea": "Third Sea",
+        "location": "Frozen Dimension",
+        "hp": "Total: 1,000,000 Segments: 350,000 Tail and Front: 200,000"
+      },
+      "overview": "The Leviathan can be summoned by the Frozen Watcher.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Leviathan"
+    },
+    {
+      "name": "Mirage Island",
+      "slug": "mirage-island",
+      "image": "/Blox%20Fruits/Sea%20Events/mirage-island.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f9/Mirage_Clear_View.png/revision/latest/scale-to-width-down/267?cb=20230316042605",
+      "fields": {
+        "type": "Sea Event",
+        "sea": "Third Sea",
+        "location": "Sea Danger Level 2-6",
+        "backgroundMusic": "http://blox-fruits.fandom.com/wiki/File:Mirage_Island.mp3Echoing Realm"
+      },
+      "overview": "The Mirage Island is a special island that functions differently from all the other islands. It is the place where the Advanced Fruit Dealer, and the Blue Gear for Race Awakening are located.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mirage_Island"
+    },
+    {
+      "name": "Piranha",
+      "slug": "piranha",
+      "image": "/Blox%20Fruits/Sea%20Events/piranha.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/41/Piranha_%28Blue%29.png/revision/latest/scale-to-width-down/268?cb=20240907024055",
+      "fields": {
+        "location": "Sea Danger Level 1-6, Second Sea.",
+        "level": "2000",
+        "hp": "16k",
+        "atkPerHit": "750",
+        "drops": "1-3 Electric Wings (not guaranteed)"
+      },
+      "overview": "Piranhas are capable of leaping out of the water to attack both the player's boat and the player directly. They utilize biting and electric shocks as their primary forms of attack. When a player is hit by a Piranha, their ability to dash, jump, and use abilities is temporarily disabled. Piranhas will automatically despawn if they move too far from their original spawn point. Notably, they prioritize targeting the player over the boat and cannot be damaged using M1 attacks from fighting styles or swords.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Piranha"
+    },
+    {
+      "name": "Prehistoric Island",
+      "slug": "prehistoric-island",
+      "image": "/Blox%20Fruits/Sea%20Events/prehistoric-island.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b1/Prehistoric_Island.png/revision/latest/scale-to-width-down/268?cb=20241229013115",
+      "fields": {
+        "type": "Sea Event",
+        "sea": "Third Sea",
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Haunted_Halls.mp3Haunted Halls (Neutral)https://blox-fruits.fandom.com/wiki/File:PrehistoricIsland.mp3Magmatic Antiquity (Active)"
+      },
+      "overview": "To spawn the Prehistoric Island, players need to sail into Sea Danger Level 6 (????) and continue exploring until the island appears. The island can spawn even if the player in the boat does not have the Volcanic Magnet, but having it increases the chances of the island spawning drastically. Thus, it is recommended for at least one player to have a Volcanic Magnet in the sea exploration group if they're hunting for the Prehistoric Island.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Prehistoric_Island"
+    },
+    {
+      "name": "Rough Sea",
+      "slug": "rough-sea",
+      "image": "/Blox%20Fruits/Sea%20Events/rough-sea.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/03/Roughseas.png/revision/latest/scale-to-width-down/268?cb=20231022095149",
+      "fields": {},
+      "overview": "The Rough Sea is a randomly spawned sea event that clears surrounding rocks, dims the area inside the sea, and spawns lightning that can damage players and their boats. The Sharks and Piranhas can spawn in and will target players. The Rough Sea can spawn at any Sea Danger Level arranging from Sea Danger Level 1 (Low) to Sea Danger Level 6 (????), and is able to be spawned without a boat. Additionally, in the Second Sea, the Rough Sea can also spawn.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rough_Sea"
+    },
+    {
+      "name": "Rumbling Waters",
+      "slug": "rumbling-waters",
+      "image": "/Blox%20Fruits/Sea%20Events/rumbling-waters.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/62/Rumbling_Waters.webp/revision/latest/scale-to-width-down/268?cb=20240621131600",
+      "fields": {
+        "amount": "3",
+        "location": "Sea Danger Level 1-6"
+      },
+      "overview": "The Rumbling Waters is a sea event composed of three Sea Beasts.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rumbling_Waters"
+    },
+    {
+      "name": "Sea Beast",
+      "slug": "sea-beast",
+      "image": "/Blox%20Fruits/Sea%20Events/sea-beast.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/91/SeaBeast.webp/revision/latest/scale-to-width-down/267?cb=20240212015257",
+      "fields": {
+        "location": "Sea Danger Level 1-6, Second Sea and Third Sea waters",
+        "hp": "Dependent on amount of players: 1: 100,000 2: 125,000 3: 150,000 4+: 175,000",
+        "atkPerHit": "Deadly Shower: up to 2100 Water Beam: 1500 Roaring Beast: 500",
+        "drops": "General Drops +1 Level 60,000-250,000 Choppa Top Hat 250-150 Second Sea 250 Fist of Darkness Third Sea 150 350"
+      },
+      "overview": "Sea Beasts, unlike most aggressive NPCs, are only vulnerable to special moves and are immune to most M1 attacks. There are some exceptions to these such as:",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sea_Beast"
+    },
+    {
+      "name": "Shark (Enemy)",
+      "slug": "shark-enemy",
+      "image": "/Blox%20Fruits/Sea%20Events/shark-enemy.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/02/SharkNPC.png/revision/latest/scale-to-width-down/267?cb=20231227145220",
+      "fields": {
+        "location": "Danger Levels 0-6",
+        "level": "2000",
+        "hp": "8000",
+        "atkPerHit": "10 (Boat)TBA (Player)",
+        "drops": "1-3 Shark Tooth"
+      },
+      "overview": "The Sharks randomly spawn in groups of 1-5 in Second Sea and in Sea Danger Level 0-6 in Third Sea (can also spawn in First sea for easter event)",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shark_(Enemy)"
+    },
+    {
+      "name": "Ship Raid",
+      "slug": "ship-raid",
+      "image": "/Blox%20Fruits/Sea%20Events/ship-raid.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b8/ShipRaidBetter.png/revision/latest/scale-to-width-down/268?cb=20240929213531",
+      "fields": {
+        "type": "Enemy",
+        "sea": "Second SeaThird Sea",
+        "location": "Sea"
+      },
+      "overview": "The Ship Raid has a chance to happen when the player sails across the sea in a boat. It has two Brigade ships, and a chance to have a Grand Brigade, which will constantly shoot cannonballs at their ship. They will despawn after they successfully destroy the player's boat/ship or if they go far enough away. The player can sink these ships by firing their cannons at them or using AoE moves against them.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ship_Raid"
+    },
+    {
+      "name": "Terrorshark",
+      "slug": "terrorshark",
+      "image": "/Blox%20Fruits/Sea%20Events/terrorshark.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/15/Terrorshark_IG_%28Green%29.png/revision/latest/scale-to-width-down/268?cb=20240907213938",
+      "fields": {
+        "type": "Raid Boss",
+        "sea": "Third Sea",
+        "location": "Sea",
+        "level": "2000"
+      },
+      "overview": "The Terrorshark has a chance to spawn between Sea Danger Levels 2-6. When spawned, it will swim around the player(s) boat and constantly attack the player(s) until the boat/target dies. As the Sea Danger Level increases, the Terrorshark will progressively get stronger and harder to defeat. It is recommended to not go past Danger Level 5 as the Terrorsharks that spawn there are very powerful. Although higher levels do not increase health, they will carry more sharks and do greater damage. It is also almost impossible to escape from the Terrorshark, however fast fruits, such as Light, and boats, such as The Sentinel can sometimes outrun them.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Terrorshark"
+    },
+    {
+      "name": "Treasure Island",
+      "slug": "treasure-island",
+      "image": "/Blox%20Fruits/Sea%20Events/treasure-island.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8c/Treasure_Island_Small.png/revision/latest/scale-to-width-down/268?cb=20240506132840",
+      "fields": {
+        "type": "Island",
+        "sea": "Second SeaThird Sea",
+        "location": "Sea Danger Levels",
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Haunted_Halls.mp3Haunted Halls"
+      },
+      "overview": "The Treasure Island is relatively small and consists of three distinct sections, each at a different elevation. A few trees and rocks are scattered across the terrain, with a chance for Chests to spawn. Aside from these features, the island is largely barren.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Treasure_Island"
+    }
+  ]
+}

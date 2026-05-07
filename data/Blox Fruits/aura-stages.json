@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "title": "Blox Fruits aura stages data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Blox Fruits Wiki - Aura",
+        "url": "https://blox-fruits.fandom.com/wiki/Aura",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "stage",
+      "visualAura",
+      "buffs",
+      "expNeeded"
+    ]
+  },
+  "items": [
+    {
+      "name": "0",
+      "slug": "0",
+      "fields": {
+        "stage": "0",
+        "visualAuraArmFsLegFs": "Lower arms/legs.",
+        "buffs": "Increases player's damage on non-fruit attacks by 10%",
+        "expNeeded": "0 EXP0 EXP"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "stage": "0",
+      "visualAura": "Lower arms/legs.",
+      "buffs": "Increases player's damage on non-fruit attacks by 10%",
+      "expNeeded": "0 EXP0 EXP"
+    },
+    {
+      "name": "1",
+      "slug": "1",
+      "fields": {
+        "stage": "1",
+        "visualAuraArmFsLegFs": "Full arms/legs.",
+        "buffs": "Increases player's damage on non-fruit attacks by 21% (stage 0 buff * 1.1)",
+        "expNeeded": "4,000 EXP4,000 EXP"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "stage": "1",
+      "visualAura": "Full arms/legs.",
+      "buffs": "Increases player's damage on non-fruit attacks by 21% (stage 0 buff * 1.1)",
+      "expNeeded": "4,000 EXP4,000 EXP"
+    },
+    {
+      "name": "2",
+      "slug": "2",
+      "fields": {
+        "stage": "2",
+        "visualAuraArmFsLegFs": "Full arms/legs and half torso.",
+        "buffs": "Decreases all damage meant to be taken by 10% before subtracting it from the player's health.",
+        "expNeeded": "12,000 EXP12,000 EXP"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "stage": "2",
+      "visualAura": "Full arms/legs and half torso.",
+      "buffs": "Decreases all damage meant to be taken by 10% before subtracting it from the player's health.",
+      "expNeeded": "12,000 EXP12,000 EXP"
+    },
+    {
+      "name": "3",
+      "slug": "3",
+      "fields": {
+        "stage": "3",
+        "visualAuraArmFsLegFs": "Full arms/legs, torso and head.",
+        "buffs": "Decreases all damage meant to be taken by roughly 18% (stage 2 buff * 9%) before subtracting it from the player's health.",
+        "expNeeded": "24,000 EXP24,000 EXP"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "stage": "3",
+      "visualAura": "Full arms/legs, torso and head.",
+      "buffs": "Decreases all damage meant to be taken by roughly 18% (stage 2 buff * 9%) before subtracting it from the player's health.",
+      "expNeeded": "24,000 EXP24,000 EXP"
+    },
+    {
+      "name": "4",
+      "slug": "4",
+      "fields": {
+        "stage": "4",
+        "visualAuraArmFsLegFs": "Full arms/legs, full torso, head, and upper arms/legs.",
+        "buffs": "Decreases all damage meant to be taken by roughly 25% (stage 3 buff * 8%) before subtracting it from the player's health.",
+        "expNeeded": "48,000 EXP48,000 EXP"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "stage": "4",
+      "visualAura": "Full arms/legs, full torso, head, and upper arms/legs.",
+      "buffs": "Decreases all damage meant to be taken by roughly 25% (stage 3 buff * 8%) before subtracting it from the player's health.",
+      "expNeeded": "48,000 EXP48,000 EXP"
+    },
+    {
+      "name": "5",
+      "slug": "5",
+      "fields": {
+        "stage": "5",
+        "visualAuraArmFsLegFs": "Full body.",
+        "buffs": "Decreases all damage meant to be taken by roughly 30% (stage 4 buff * 7%) before subtracting it from the player's health.",
+        "expNeeded": "60,000 EXP60,000 EXP"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "stage": "5",
+      "visualAura": "Full body.",
+      "buffs": "Decreases all damage meant to be taken by roughly 30% (stage 4 buff * 7%) before subtracting it from the player's health.",
+      "expNeeded": "60,000 EXP60,000 EXP"
+    }
+  ]
+}

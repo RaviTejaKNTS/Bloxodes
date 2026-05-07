@@ -1,0 +1,463 @@
+{
+  "meta": {
+    "title": "Blox Fruits special titles data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Blox Fruits Wiki - Titles",
+        "url": "https://blox-fruits.fandom.com/wiki/Titles",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "title",
+      "obtainment"
+    ]
+  },
+  "items": [
+    {
+      "name": "BOSS BLOX FRUITS OFFICIAL",
+      "slug": "boss-blox-fruits-official",
+      "fields": {
+        "title": "BOSS BLOX FRUITS OFFICIAL",
+        "obtainment": "Given to co-owners of Blox Fruits."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "BOSS BLOX FRUITS OFFICIAL",
+      "obtainment": "Given to co-owners of Blox Fruits."
+    },
+    {
+      "name": "OWNER",
+      "slug": "owner",
+      "fields": {
+        "title": "OWNER",
+        "obtainment": "Given to co-owners of Blox Fruits."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "OWNER",
+      "obtainment": "Given to co-owners of Blox Fruits."
+    },
+    {
+      "name": "El Rodolfo OFFICIAL",
+      "slug": "el-rodolfo-official",
+      "fields": {
+        "title": "El Rodolfo OFFICIAL",
+        "obtainment": "Given to admins."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "El Rodolfo OFFICIAL",
+      "obtainment": "Given to admins."
+    },
+    {
+      "name": "Festive Jester",
+      "slug": "festive-jester",
+      "fields": {
+        "title": "Festive Jester",
+        "obtainment": "Given to Experimic's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "Festive Jester",
+      "obtainment": "Given to Experimic's Roblox account."
+    },
+    {
+      "name": "Sables PESADO",
+      "slug": "sables-pesado",
+      "fields": {
+        "title": "Sables PESADO",
+        "obtainment": "Given to arowe's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "Sables PESADO",
+      "obtainment": "Given to arowe's Roblox account."
+    },
+    {
+      "name": "Los Original Bestia Supremia LOCO VERDE",
+      "slug": "los-original-bestia-supremia-loco-verde",
+      "fields": {
+        "title": "Los Original Bestia Supremia LOCO VERDE",
+        "obtainment": "Given to drip_mama's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "Los Original Bestia Supremia LOCO VERDE",
+      "obtainment": "Given to drip_mama's Roblox account."
+    },
+    {
+      "name": "BRAZIL GOD ブラジルの神",
+      "slug": "brazil-god",
+      "fields": {
+        "title": "BRAZIL GOD ブラジルの神",
+        "obtainment": "Given to brqod's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "BRAZIL GOD ブラジルの神",
+      "obtainment": "Given to brqod's Roblox account."
+    },
+    {
+      "name": "El Papi",
+      "slug": "el-papi",
+      "fields": {
+        "title": "El Papi",
+        "obtainment": "Given to Uzi_London's Roblox account (also known as E.)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "El Papi",
+      "obtainment": "Given to Uzi_London's Roblox account (also known as E.)."
+    },
+    {
+      "name": "Lady Sarah Idiotstwo",
+      "slug": "lady-sarah-idiotstwo",
+      "fields": {
+        "title": "Lady Sarah Idiotstwo",
+        "obtainment": "Given to Guashiem's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "Lady Sarah Idiotstwo",
+      "obtainment": "Given to Guashiem's Roblox account."
+    },
+    {
+      "name": "Dragon of Dojima",
+      "slug": "dragon-of-dojima",
+      "fields": {
+        "title": "Dragon of Dojima",
+        "obtainment": "Given to torrtoise's Roblox account (also known as Limeturtkle)."
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/User:Limeturtkle",
+      "imageCandidate": null,
+      "title": "Dragon of Dojima",
+      "obtainment": "Given to torrtoise's Roblox account (also known as Limeturtkle)."
+    },
+    {
+      "name": "<RIP_FAMILY LEADER>",
+      "slug": "rip-family-leader",
+      "fields": {
+        "title": "<RIP_FAMILY LEADER>",
+        "obtainment": "Given to rip_indra's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "<RIP_FAMILY LEADER>",
+      "obtainment": "Given to rip_indra's Roblox account."
+    },
+    {
+      "name": "History’s Strongest Loser",
+      "slug": "history-s-strongest-loser",
+      "fields": {
+        "title": "History’s Strongest Loser",
+        "obtainment": "Given to ShafiDev's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "History’s Strongest Loser",
+      "obtainment": "Given to ShafiDev's Roblox account."
+    },
+    {
+      "name": "神聖な Cult Of Asura",
+      "slug": "cult-of-asura",
+      "fields": {
+        "title": "神聖な Cult Of Asura",
+        "obtainment": "Given to SylentAsura's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "神聖な Cult Of Asura",
+      "obtainment": "Given to SylentAsura's Roblox account."
+    },
+    {
+      "name": "D1 TRADER",
+      "slug": "d1-trader",
+      "fields": {
+        "title": "D1 TRADER",
+        "obtainment": "Given to ElG8T's Roblox account (also known as Misted)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "D1 TRADER",
+      "obtainment": "Given to ElG8T's Roblox account (also known as Misted)."
+    },
+    {
+      "name": "{LA FLEUR DU MAL 悪の華}",
+      "slug": "la-fleur-du-mal",
+      "fields": {
+        "title": "{LA FLEUR DU MAL 悪の華}",
+        "obtainment": "Given to my6thlife's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "{LA FLEUR DU MAL 悪の華}",
+      "obtainment": "Given to my6thlife's Roblox account."
+    },
+    {
+      "name": "El Perro Official TV",
+      "slug": "el-perro-official-tv",
+      "fields": {
+        "title": "El Perro Official TV",
+        "obtainment": "Given to AznWay's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "El Perro Official TV",
+      "obtainment": "Given to AznWay's Roblox account."
+    },
+    {
+      "name": "Just a Guest",
+      "slug": "just-a-guest",
+      "fields": {
+        "title": "Just a Guest",
+        "obtainment": "Given to kyt0kyt0's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "Just a Guest",
+      "obtainment": "Given to kyt0kyt0's Roblox account."
+    },
+    {
+      "name": "Devil in a New Dress",
+      "slug": "devil-in-a-new-dress",
+      "fields": {
+        "title": "Devil in a New Dress",
+        "obtainment": "Given to uranium_devil's Roblox account (also known as simply uranium/Marisa)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "Devil in a New Dress",
+      "obtainment": "Given to uranium_devil's Roblox account (also known as simply uranium/Marisa)."
+    },
+    {
+      "name": "Ez = Rage",
+      "slug": "ez-rage",
+      "fields": {
+        "title": "Ez = Rage",
+        "obtainment": "Given to Nat_7517's Roblox account (also known as Nat)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "Ez = Rage",
+      "obtainment": "Given to Nat_7517's Roblox account (also known as Nat)."
+    },
+    {
+      "name": "Equal to the Hells",
+      "slug": "equal-to-the-hells",
+      "fields": {
+        "title": "Equal to the Hells",
+        "obtainment": "Given to Krossful's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "Equal to the Hells",
+      "obtainment": "Given to Krossful's Roblox account."
+    },
+    {
+      "name": "OwNeR SoN",
+      "slug": "owner-son",
+      "fields": {
+        "title": "OwNeR SoN",
+        "obtainment": "Given to Majestic_Queena's Roblox account (also known as GOL D SAMA)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "OwNeR SoN",
+      "obtainment": "Given to Majestic_Queena's Roblox account (also known as GOL D SAMA)."
+    },
+    {
+      "name": "The Devil Of Paradis",
+      "slug": "the-devil-of-paradis",
+      "fields": {
+        "title": "The Devil Of Paradis",
+        "obtainment": "Given to MouseTheBoi's Roblox account (also known as Mao)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "The Devil Of Paradis",
+      "obtainment": "Given to MouseTheBoi's Roblox account (also known as Mao)."
+    },
+    {
+      "name": "Sending you to Brazil",
+      "slug": "sending-you-to-brazil",
+      "fields": {
+        "title": "Sending you to Brazil",
+        "obtainment": "Given to Mertlcle's Roblox account (also known as Xasdo)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "Sending you to Brazil",
+      "obtainment": "Given to Mertlcle's Roblox account (also known as Xasdo)."
+    },
+    {
+      "name": "anubis#7777",
+      "slug": "anubis-7777",
+      "fields": {
+        "title": "anubis#7777",
+        "obtainment": "Given to arlthmetic's Roblox account (also known as Anubis)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "anubis#7777",
+      "obtainment": "Given to arlthmetic's Roblox account (also known as Anubis)."
+    },
+    {
+      "name": "<RIP_FAMILY COMMANDER \"PRIMADON\">",
+      "slug": "rip-family-commander-primadon",
+      "fields": {
+        "title": "<RIP_FAMILY COMMANDER \"PRIMADON\">",
+        "obtainment": "Given to rip_fud's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "<RIP_FAMILY COMMANDER \"PRIMADON\">",
+      "obtainment": "Given to rip_fud's Roblox account."
+    },
+    {
+      "name": "KING PIGGY OFFICIAL",
+      "slug": "king-piggy-official",
+      "fields": {
+        "title": "KING PIGGY OFFICIAL",
+        "obtainment": "Given to undercovertommy's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "KING PIGGY OFFICIAL",
+      "obtainment": "Given to undercovertommy's Roblox account."
+    },
+    {
+      "name": "KING TOAD OFFICIAL",
+      "slug": "king-toad-official",
+      "fields": {
+        "title": "KING TOAD OFFICIAL",
+        "obtainment": "Given to wenlocktoad's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "KING TOAD OFFICIAL",
+      "obtainment": "Given to wenlocktoad's Roblox account."
+    },
+    {
+      "name": "hey im baconbugz",
+      "slug": "hey-im-baconbugz",
+      "fields": {
+        "title": "hey im baconbugz",
+        "obtainment": "Given to Uzoth's ALT Roblox account baconbungz."
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Uzoth_(Player)",
+      "imageCandidate": null,
+      "title": "hey im baconbugz",
+      "obtainment": "Given to Uzoth's ALT Roblox account baconbungz."
+    },
+    {
+      "name": "Mughal Steel",
+      "slug": "mughal-steel",
+      "fields": {
+        "title": "Mughal Steel",
+        "obtainment": "Given to RealmKisame's Roblox account (also known as Kisame)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "Mughal Steel",
+      "obtainment": "Given to RealmKisame's Roblox account (also known as Kisame)."
+    },
+    {
+      "name": "The Headless Reaper",
+      "slug": "the-headless-reaper",
+      "fields": {
+        "title": "The Headless Reaper",
+        "obtainment": "Given to DuckehLover's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "The Headless Reaper",
+      "obtainment": "Given to DuckehLover's Roblox account."
+    },
+    {
+      "name": "The Nocturnal Sovereign",
+      "slug": "the-nocturnal-sovereign",
+      "fields": {
+        "title": "The Nocturnal Sovereign",
+        "obtainment": "Given to NoctisAUS's Roblox account (also known as Noctis)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "The Nocturnal Sovereign",
+      "obtainment": "Given to NoctisAUS's Roblox account (also known as Noctis)."
+    },
+    {
+      "name": "の王 King of Hell 地獄",
+      "slug": "king-of-hell",
+      "fields": {
+        "title": "の王 King of Hell 地獄",
+        "obtainment": "Given to dutbooot's Roblox account (also known as crash)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "の王 King of Hell 地獄",
+      "obtainment": "Given to dutbooot's Roblox account (also known as crash)."
+    },
+    {
+      "name": "S Rank Hunter",
+      "slug": "s-rank-hunter",
+      "fields": {
+        "title": "S Rank Hunter",
+        "obtainment": "Given to Unstoppable_YHbro's Roblox account (also known as Yh)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "S Rank Hunter",
+      "obtainment": "Given to Unstoppable_YHbro's Roblox account (also known as Yh)."
+    },
+    {
+      "name": "The Requiem of Vengeance",
+      "slug": "the-requiem-of-vengeance",
+      "fields": {
+        "title": "The Requiem of Vengeance",
+        "obtainment": "Given to MollaAmar's Roblox account (also known as Amar)."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "The Requiem of Vengeance",
+      "obtainment": "Given to MollaAmar's Roblox account (also known as Amar)."
+    },
+    {
+      "name": "el brainrot 67",
+      "slug": "el-brainrot-67",
+      "fields": {
+        "title": "el brainrot 67",
+        "obtainment": "Given to Abso_Delete's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "el brainrot 67",
+      "obtainment": "Given to Abso_Delete's Roblox account."
+    },
+    {
+      "name": "OwNeR GrAnDsOn",
+      "slug": "owner-grandson",
+      "fields": {
+        "title": "OwNeR GrAnDsOn",
+        "obtainment": "Given to FindMotion and baconha_263's Roblox accounts."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "OwNeR GrAnDsOn",
+      "obtainment": "Given to FindMotion and baconha_263's Roblox accounts."
+    },
+    {
+      "name": "gorilla king",
+      "slug": "gorilla-king",
+      "fields": {
+        "title": "gorilla king",
+        "obtainment": "Given to orkoal's Roblox account."
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "title": "gorilla king",
+      "obtainment": "Given to orkoal's Roblox account."
+    }
+  ]
+}

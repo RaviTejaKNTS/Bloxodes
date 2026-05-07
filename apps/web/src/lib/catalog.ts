@@ -342,3 +342,54 @@ export async function listPublishedCatalogPagesByUniverseId(
 
   return (fallback ?? []) as CatalogListEntry[];
 }
+
+export async function listPublishedCatalogPagesByCodePrefix(
+  codePrefix: string,
+  limit?: number | null
+): Promise<CatalogListEntry[]> {
+  const normalizedPrefix = codePrefix.trim().toLowerCase().replace(/-+$/g, "");
+  if (!normalizedPrefix) return [];
+
+  const safeLimit = typeof limit === "number" && Number.isFinite(limit) && limit > 0 ? Math.floor(limit) : null;
+  const supabase = supabaseAdmin();
+  const likePattern = `${normalizedPrefix}-%`;
+
+  let viewQuery = supabase
+    .from("catalog_pages_view")
+    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, wiki_image_urls, universe_id, published_at, created_at, updated_at, content_updated_at")
+    .eq("is_published", true)
+    .like("code", likePattern)
+    .order("wiki_sort_order", { ascending: true, nullsFirst: false })
+    .order("title", { ascending: true });
+
+  if (safeLimit) {
+    viewQuery = viewQuery.limit(safeLimit);
+  }
+
+  const { data, error } = await viewQuery;
+
+  if (!error && data) {
+    return (data ?? []) as CatalogListEntry[];
+  }
+
+  let fallbackQuery = supabase
+    .from("catalog_pages")
+    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, wiki_image_urls, universe_id, published_at, created_at, updated_at")
+    .eq("is_published", true)
+    .like("code", likePattern)
+    .order("wiki_sort_order", { ascending: true, nullsFirst: false })
+    .order("title", { ascending: true });
+
+  if (safeLimit) {
+    fallbackQuery = fallbackQuery.limit(safeLimit);
+  }
+
+  const { data: fallback, error: fallbackError } = await fallbackQuery;
+
+  if (fallbackError) {
+    console.error("Error fetching catalog pages by code prefix", fallbackError);
+    return [];
+  }
+
+  return (fallback ?? []) as CatalogListEntry[];
+}

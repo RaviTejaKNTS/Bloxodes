@@ -9,6 +9,11 @@ import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
+import { buildGameDatasetCatalogCopy, getGameDatasetCatalogConfigByCode } from "@/lib/game-dataset-catalogs";
+import {
+  loadGameDatasetCatalogDataset,
+  renderGameDatasetCatalogPage
+} from "../game-datasets/page-data";
 
 export const revalidate = 86400;
 const RESERVED_CATALOG_PREFIXES = [
@@ -68,6 +73,43 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const gameDatasetConfig = getGameDatasetCatalogConfigByCode(code);
+  if (gameDatasetConfig) {
+    const [dataset, catalog] = await Promise.all([
+      loadGameDatasetCatalogDataset(gameDatasetConfig),
+      getCatalogPageContentByCodes([code])
+    ]);
+    const generated = buildGameDatasetCatalogCopy({
+      config: gameDatasetConfig,
+      itemCount: dataset.items.length,
+      columns: dataset.columns,
+      imageUrls: getDatasetImageUrls(dataset.items)
+    });
+    const title = resolveSeoTitle(catalog?.seo_title) ?? catalog?.title ?? generated.seo_title;
+    const description = catalog?.meta_description ?? generated.meta_description;
+    const image = catalog?.thumb_url || generated.thumb_url || `${SITE_URL}/og-image.png`;
+
+    return {
+      title,
+      description,
+      alternates: buildAlternates(canonical),
+      openGraph: {
+        type: "website",
+        url: canonical,
+        title,
+        description,
+        siteName: SITE_NAME,
+        images: [image]
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: [image]
+      }
+    };
+  }
+
   const catalog = await getCatalogPageContentByCodes([code]);
   if (!catalog) {
     return {
@@ -105,6 +147,26 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
   const code = normalizeCatalogCode(slug ?? []);
   if (!code || isReservedCatalogCode(code)) {
     notFound();
+  }
+
+  const gameDatasetConfig = getGameDatasetCatalogConfigByCode(code);
+  if (gameDatasetConfig) {
+    const [dataset, catalog] = await Promise.all([
+      loadGameDatasetCatalogDataset(gameDatasetConfig),
+      getCatalogPageContentByCodes([code])
+    ]);
+    const generated = buildGameDatasetCatalogCopy({
+      config: gameDatasetConfig,
+      itemCount: dataset.items.length,
+      columns: dataset.columns,
+      imageUrls: getDatasetImageUrls(dataset.items)
+    });
+    const contentHtml = await buildPageContentHtml(catalog ?? generated);
+    return renderGameDatasetCatalogPage({
+      config: gameDatasetConfig,
+      dataset,
+      contentHtml
+    });
   }
 
   const { contentHtml } = await buildCatalogContent(code);
@@ -165,4 +227,14 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
       ) : null}
     </div>
   );
+}
+
+function getDatasetImageUrls(items: Array<{ image?: string | null }>): string[] {
+  return Array.from(
+    new Set(
+      items
+        .map((item) => item.image)
+        .filter((image): image is string => typeof image === "string" && image.length > 0)
+    )
+  ).slice(0, 6);
 }

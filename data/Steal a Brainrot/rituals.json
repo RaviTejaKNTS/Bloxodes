@@ -1,0 +1,269 @@
+{
+  "meta": {
+    "title": "Steal a Brainrot rituals data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Steal a Brainrot Wiki - Rituals",
+        "url": "https://stealabrainrot.fandom.com/wiki/Rituals",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "spawns",
+      "requires",
+      "formation",
+      "weather",
+      "incomeAfter"
+    ]
+  },
+  "items": [
+    {
+      "name": "Las Vaquitas Saturnitas ritual",
+      "slug": "las-vaquitas-saturnitas-ritual",
+      "image": "/Steal%20a%20Brainrot/Rituals/las-vaquitas-saturnitas-ritual.webp",
+      "spawns": [
+        {
+          "name": "Las Vaquitas Saturnitas",
+          "page": "Las Vaquitas Saturnitas",
+          "url": "https://stealabrainrot.fandom.com/wiki/Las_Vaquitas_Saturnitas"
+        }
+      ],
+      "requires": [
+        {
+          "name": "La Vacca Saturno Saturnita",
+          "page": "La Vacca Saturno Saturnita",
+          "url": "https://stealabrainrot.fandom.com/wiki/La_Vacca_Saturno_Saturnita"
+        }
+      ],
+      "formation": "To begin the ritual, 3 players need to hold a La Vacca Saturno Saturnita and stand in a triangle formation, with all La Vaccas facing the middle. After doing so, the La Vaccas will begin to spin faster and faster, until flying into the sky, activating the Meteor Shower weather, and spawning the Secret Las Vaquitas Saturnitas, generating 750K/s.",
+      "weather": "Meteor Shower weather",
+      "incomeAfter": "$-225K/s",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/1e/Las_Vaquitas_Saturnitas.png/revision/latest?cb=20250902172807"
+    },
+    {
+      "name": "Bombardiro Crocodilo ritual",
+      "slug": "bombardiro-crocodilo-ritual",
+      "image": "/Steal%20a%20Brainrot/Rituals/bombardiro-crocodilo-ritual.webp",
+      "spawns": [
+        {
+          "name": "Los Crocodillitos",
+          "page": "Los Crocodillitos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Crocodillitos"
+        }
+      ],
+      "requires": [
+        {
+          "name": "Bombardiro Crocodilo",
+          "page": "Bombardiro Crocodilo",
+          "url": "https://stealabrainrot.fandom.com/wiki/Bombardiro_Crocodilo"
+        }
+      ],
+      "formation": "To begin the ritual, 3 players need to hold a Bombardiro Crocodilo and stand in a line formation at the red carpet, not that far apart from each other. After doing so, the Bombardiro's will force the player to move with them, going straight and then flying away. When they fly away it will start the special Bombardiro Bombing weather, and spawn the Brainrot God Los Crocodillitos, generating 55K/s.",
+      "weather": "Explosive",
+      "incomeAfter": "$+47.5K/s",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/95/LosCrocodillitos.png/revision/latest?cb=20251006203748"
+    },
+    {
+      "name": "Los Orcalitos",
+      "slug": "los-orcalitos",
+      "image": "/Steal%20a%20Brainrot/Rituals/los-orcalitos.webp",
+      "spawns": [
+        {
+          "name": "Los Orcalitos",
+          "page": "Los Orcalitos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Orcalitos"
+        }
+      ],
+      "requires": [
+        {
+          "name": "Orcalero Orcala",
+          "page": "Orcalero Orcala",
+          "url": "https://stealabrainrot.fandom.com/wiki/Orcalero_Orcala"
+        }
+      ],
+      "formation": "To begin the ritual, 4 players need to steal or grab an Orcalero Orcala and stand next to each other, with the orcas facing front in a line, one must be a little back to work. After doing so, the Orcaleros will start swimming, and the Ocean weather will begin and spawn the Brainrot God Los Orcalitos, generating 235K/s.",
+      "weather": "Ocean",
+      "incomeAfter": "$-165k/s",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/27/Los_orcalitos.png/revision/latest?cb=20251006201225"
+    },
+    {
+      "name": "Matteo",
+      "slug": "matteo",
+      "image": "/Steal%20a%20Brainrot/Rituals/matteo.webp",
+      "spawns": [
+        {
+          "name": "Los Matteos",
+          "page": "Los Matteos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Matteos"
+        }
+      ],
+      "requires": [
+        {
+          "name": "Matteo",
+          "page": "Matteo",
+          "url": "https://stealabrainrot.fandom.com/wiki/Matteo"
+        }
+      ],
+      "formation": "3 players must stand on top of each other while holding a Matteo. After this is done, a tree will sprout from the location of the players holding the Matteo's, activating the Matteo's Hat weather and spawn the Secret Los Matteos, generating 300K/s.",
+      "weather": "Matteo Trees",
+      "incomeAfter": "+$175K/s",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/8a/LosMatteos.png/revision/latest?cb=20250817040306"
+    },
+    {
+      "name": "Sammyni Spyderini ritual",
+      "slug": "sammyni-spyderini-ritual",
+      "image": "/Steal%20a%20Brainrot/Rituals/sammyni-spyderini-ritual.webp",
+      "spawns": [
+        {
+          "name": "Los Spyderinis",
+          "page": "Los Spyderinis",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Spyderinis"
+        }
+      ],
+      "requires": [
+        {
+          "name": "Sammyni Spyderini",
+          "page": "Sammyni Spyderini",
+          "url": "https://stealabrainrot.fandom.com/wiki/Sammyni_Spyderini"
+        }
+      ],
+      "formation": "4 players must go on the center of the map in a square formation without getting on the carpet while holding a Sammyni Spyderini. After this is done, those Spyderinis will jump down from the ground and a giant cobweb will appear on the map, activating the Sammyni Spyderini Invasion weather and spawn the Secret Los Spyderinis, generating 425K/s.",
+      "weather": "Spyder Invasion",
+      "incomeAfter": "$-875k/s",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/dd/Los_spyderinis.png/revision/latest?cb=20260410012918"
+    },
+    {
+      "name": "Chicleteira Bicicleteira",
+      "slug": "chicleteira-bicicleteira",
+      "image": "/Steal%20a%20Brainrot/Rituals/chicleteira-bicicleteira.webp",
+      "spawns": [
+        {
+          "name": "Los Chicleteiras",
+          "page": "Los Chicleteiras",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Chicleteiras"
+        }
+      ],
+      "requires": [
+        {
+          "name": "Chicleteira Bicicleteira",
+          "page": "Chicleteira Bicicleteira",
+          "url": "https://stealabrainrot.fandom.com/wiki/Chicleteira_Bicicleteira"
+        }
+      ],
+      "formation": "Two players have to get close to the start of the Red Carpet holding a Chicleteira Bicicleteira, then go on each sides of the cave facing front. This will also trigger the Chicleteira Bicicleteira event, and spawn the Secret Los Chicleteiras, generating 7M/s. A road comes out of the ground, there will be graffiti on the walls of the map, and Chicleteira Bicicleteira will spawn on the road. Some will be on the left sidewalk, others on the right sidewalk. This event also has a special way of being triggered. If triggered by an admin, it will NOT spawn the Los Chicleteiras . However, if triggered by the ritual it will.",
+      "weather": "Paint",
+      "incomeAfter": "$0/s",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/9b/Los_Chicleteiras.png/revision/latest?cb=20260428165725"
+    },
+    {
+      "name": "Dul Dul Dul ritual",
+      "slug": "dul-dul-dul-ritual",
+      "image": "/Steal%20a%20Brainrot/Rituals/dul-dul-dul-ritual.webp",
+      "spawns": [
+        {
+          "name": "Yess my examine",
+          "page": "Yess my examine",
+          "url": "https://stealabrainrot.fandom.com/wiki/Yess_my_examine"
+        },
+        {
+          "name": "Noo my examine",
+          "page": "Noo my examine",
+          "url": "https://stealabrainrot.fandom.com/wiki/Noo_my_examine"
+        }
+      ],
+      "requires": [
+        {
+          "name": "Dul Dul Dul",
+          "page": "Dul Dul Dul",
+          "url": "https://stealabrainrot.fandom.com/wiki/Dul_Dul_Dul"
+        }
+      ],
+      "formation": "4 players need to hold Dul Dul Duls and form a square formation without touching the Red Carpet, then 3 Dul Dul Duls will despawn while 1 will make a speech talk. Once the Dul Dul Dul is done speaking, either Yess my examine or Noo my examine will spawn along with the school graduation event. Yess my examine generating 575K/s and Noo my examine 1,7M/s",
+      "weather": "Graduation",
+      "incomeAfter": "$-$925k/s (Yess my examine) or $+250K/s (Noo my examine)",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/8f/Yessmyexamine.png/revision/latest?cb=20260422160018"
+    },
+    {
+      "name": "Karkerkar Kurkur ritual",
+      "slug": "karkerkar-kurkur-ritual",
+      "image": "/Steal%20a%20Brainrot/Rituals/karkerkar-kurkur-ritual.webp",
+      "spawns": [
+        {
+          "name": "Los Karkeritos",
+          "page": "Los Karkeritos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Karkeritos"
+        }
+      ],
+      "requires": [
+        {
+          "name": "Karkerkar Kurkur",
+          "page": "Karkerkar Kurkur",
+          "url": "https://stealabrainrot.fandom.com/wiki/Karkerkar_Kurkur"
+        }
+      ],
+      "formation": "4 players must form a cube with 4 Karkerkar Kurkur's, then a musical chairs game will initiate, after the game, the Secret Los Karkeritos will spawn (and head to the winner's base), generating 750K/s.",
+      "weather": "None",
+      "incomeAfter": "$-550K/s",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a8/Loskarkeritos.png/revision/latest?cb=20251006210532"
+    },
+    {
+      "name": "Guerriro Digitale Ritual",
+      "slug": "guerriro-digitale-ritual",
+      "image": "/Steal%20a%20Brainrot/Rituals/guerriro-digitale-ritual.webp",
+      "spawns": [
+        {
+          "name": "1x1x1x1",
+          "page": "1x1x1x1",
+          "url": "https://stealabrainrot.fandom.com/wiki/1x1x1x1"
+        },
+        {
+          "name": "Guest 666",
+          "page": "Guest 666",
+          "url": "https://stealabrainrot.fandom.com/wiki/Guest_666"
+        },
+        {
+          "name": "John Doe",
+          "page": "John Doe",
+          "url": "https://stealabrainrot.fandom.com/wiki/John_Doe"
+        }
+      ],
+      "requires": [
+        {
+          "name": "Guerriro Digitale",
+          "page": "Guerriro Digitale",
+          "url": "https://stealabrainrot.fandom.com/wiki/Guerriro_Digitale"
+        }
+      ],
+      "formation": "This only works at 3 AM EST, as otherwise the area to do the ritual is not available. Or during Admin Abuse, as Sammy usually spawns it then. 4 players must grab a Guerriro Digitale and go in the tunnel dispensing brainrots.You must make a square around the container where brainrots are being made. It will either spawn 1x1x1x1 or John Doe or even SUPER rarely, Guest 666.",
+      "weather": "Glitch (starts when the area for the ritual opens)",
+      "incomeAfter": "$-1.1m/s(1x1x1x1) $+64.46M/s (Guest 666) $+5.3M/s (John Doe)",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/39/1x1x1x1t.png/revision/latest?cb=20251102022532"
+    },
+    {
+      "name": "Mi Gatito Ritual",
+      "slug": "mi-gatito-ritual",
+      "image": "/Steal%20a%20Brainrot/Rituals/mi-gatito-ritual.webp",
+      "spawns": [
+        {
+          "name": "Los Mi Gatitos",
+          "page": "Los Mi Gatitos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Mi_Gatitos"
+        }
+      ],
+      "requires": [
+        {
+          "name": "Mi Gatito",
+          "page": "Mi Gatito",
+          "url": "https://stealabrainrot.fandom.com/wiki/Mi_Gatito"
+        }
+      ],
+      "formation": "Two players need to face each other with the Mi Gatito brainrot to make them “hug”, which would play the “:3” event and spawn the Los Mi Gatitos, generating $6.5M.",
+      "weather": ":3",
+      "incomeAfter": "$0/s",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/c0/Los_Ay_Mi_Gatitos.png/revision/latest?cb=20260219033604"
+    }
+  ]
+}

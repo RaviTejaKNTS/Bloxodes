@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "title": "Brookhaven RP emotes data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Official Brookhaven Wiki - Emotes",
+        "url": "https://official-brookhaven.fandom.com/wiki/Emotes",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "category"
+    ]
+  },
+  "items": [
+    {
+      "name": "EmotesCatalog (1).png",
+      "slug": "emotescatalog-1-png",
+      "category": "Emotes",
+      "image": "/Brookhaven%20RP/Emotes/emotescatalog-1-png.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/8c/EmotesCatalog_%281%29.png/revision/latest/scale-to-width-down/179?cb=20260124081348"
+    },
+    {
+      "name": "EmotesCatalog (7).png",
+      "slug": "emotescatalog-7-png",
+      "category": "Emotes",
+      "image": "/Brookhaven%20RP/Emotes/emotescatalog-7-png.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/7/71/EmotesCatalog_%287%29.png/revision/latest/scale-to-width-down/178?cb=20260124081350"
+    },
+    {
+      "name": "EmotesCatalog (6).png",
+      "slug": "emotescatalog-6-png",
+      "category": "Emotes",
+      "image": "/Brookhaven%20RP/Emotes/emotescatalog-6-png.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/aa/EmotesCatalog_%286%29.png/revision/latest/scale-to-width-down/181?cb=20260124081350"
+    },
+    {
+      "name": "EmotesCatalog (5).png",
+      "slug": "emotescatalog-5-png",
+      "category": "Emotes",
+      "image": "/Brookhaven%20RP/Emotes/emotescatalog-5-png.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/d/d2/EmotesCatalog_%285%29.png/revision/latest/scale-to-width-down/177?cb=20260124081350"
+    },
+    {
+      "name": "EmotesCatalog (3).png",
+      "slug": "emotescatalog-3-png",
+      "category": "Emotes",
+      "image": "/Brookhaven%20RP/Emotes/emotescatalog-3-png.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/9/94/EmotesCatalog_%283%29.png/revision/latest/scale-to-width-down/178?cb=20260124081349"
+    },
+    {
+      "name": "EmotesCatalog (2).png",
+      "slug": "emotescatalog-2-png",
+      "category": "Emotes",
+      "image": "/Brookhaven%20RP/Emotes/emotescatalog-2-png.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/39/EmotesCatalog_%282%29.png/revision/latest/scale-to-width-down/179?cb=20260124081350"
+    },
+    {
+      "name": "Ed Sheeran collaboration",
+      "slug": "ed-sheeran-collaboration",
+      "category": "Limited-time Emotes",
+      "image": "/Brookhaven%20RP/Emotes/ed-sheeran-collaboration.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/83/Limited_emotes1.png/revision/latest/scale-to-width-down/185?cb=20251219141555"
+    },
+    {
+      "name": "Wicked:For Good collaboration",
+      "slug": "wicked-for-good-collaboration",
+      "category": "Limited-time Emotes",
+      "image": "/Brookhaven%20RP/Emotes/wicked-for-good-collaboration.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/40/Limited_emotes2.png/revision/latest/scale-to-width-down/185?cb=20251219141610"
+    },
+    {
+      "name": "Ed Sheeran collaboration",
+      "slug": "ed-sheeran-collaboration",
+      "category": "Gallery",
+      "image": "/Brookhaven%20RP/Emotes/ed-sheeran-collaboration-2.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/83/Limited_emotes1.png/revision/latest/scale-to-width-down/185?cb=20251219141555"
+    },
+    {
+      "name": "Wicked:For Good collaboration",
+      "slug": "wicked-for-good-collaboration",
+      "category": "Gallery",
+      "image": "/Brookhaven%20RP/Emotes/wicked-for-good-collaboration-2.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/40/Limited_emotes2.png/revision/latest/scale-to-width-down/185?cb=20251219141610"
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "title": "Blox Fruits title colors data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Blox Fruits Wiki - Titles",
+        "url": "https://blox-fruits.fandom.com/wiki/Titles",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "color",
+      "obtainment"
+    ]
+  },
+  "items": [
+    {
+      "name": "Default",
+      "slug": "default",
+      "fields": {
+        "column1": "",
+        "color": "Default",
+        "obtainment": "Unlocked automatically"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Default",
+      "obtainment": "Unlocked automatically"
+    },
+    {
+      "name": "White",
+      "slug": "white",
+      "fields": {
+        "column1": "",
+        "color": "White",
+        "obtainment": "Unlocked automatically"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "White",
+      "obtainment": "Unlocked automatically"
+    },
+    {
+      "name": "Spanish Pink",
+      "slug": "spanish-pink",
+      "fields": {
+        "column1": "",
+        "color": "Spanish Pink",
+        "obtainment": "Obtain 10 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Spanish Pink",
+      "obtainment": "Obtain 10 Titles"
+    },
+    {
+      "name": "Deep Peach",
+      "slug": "deep-peach",
+      "fields": {
+        "column1": "",
+        "color": "Deep Peach",
+        "obtainment": "Obtain 20 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Deep Peach",
+      "obtainment": "Obtain 20 Titles"
+    },
+    {
+      "name": "Blond",
+      "slug": "blond",
+      "fields": {
+        "column1": "",
+        "color": "Blond",
+        "obtainment": "Obtain 30 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Blond",
+      "obtainment": "Obtain 30 Titles"
+    },
+    {
+      "name": "Calamansi",
+      "slug": "calamansi",
+      "fields": {
+        "column1": "",
+        "color": "Calamansi",
+        "obtainment": "Obtain 40 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Calamansi",
+      "obtainment": "Obtain 40 Titles"
+    },
+    {
+      "name": "Nyanza",
+      "slug": "nyanza",
+      "fields": {
+        "column1": "",
+        "color": "Nyanza",
+        "obtainment": "Obtain 50 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Nyanza",
+      "obtainment": "Obtain 50 Titles"
+    },
+    {
+      "name": "Pistachio",
+      "slug": "pistachio",
+      "fields": {
+        "column1": "",
+        "color": "Pistachio",
+        "obtainment": "Obtain 60 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Pistachio",
+      "obtainment": "Obtain 60 Titles"
+    },
+    {
+      "name": "Tea Green",
+      "slug": "tea-green",
+      "fields": {
+        "column1": "",
+        "color": "Tea Green",
+        "obtainment": "Obtain 70 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Tea Green",
+      "obtainment": "Obtain 70 Titles"
+    },
+    {
+      "name": "Diamond",
+      "slug": "diamond",
+      "fields": {
+        "column1": "",
+        "color": "Diamond",
+        "obtainment": "Obtain 80 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Diamond",
+      "obtainment": "Obtain 80 Titles"
+    },
+    {
+      "name": "Powder Blue",
+      "slug": "powder-blue",
+      "fields": {
+        "column1": "",
+        "color": "Powder Blue",
+        "obtainment": "Obtain 90 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Powder Blue",
+      "obtainment": "Obtain 90 Titles"
+    },
+    {
+      "name": "Pale Lavender",
+      "slug": "pale-lavender",
+      "fields": {
+        "column1": "",
+        "color": "Pale Lavender",
+        "obtainment": "Obtain 100 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Pale Lavender",
+      "obtainment": "Obtain 100 Titles"
+    },
+    {
+      "name": "Shampoo",
+      "slug": "shampoo",
+      "fields": {
+        "column1": "",
+        "color": "Shampoo",
+        "obtainment": "Obtain 120 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Shampoo",
+      "obtainment": "Obtain 120 Titles"
+    },
+    {
+      "name": "Classic Rose",
+      "slug": "classic-rose",
+      "fields": {
+        "column1": "",
+        "color": "Classic Rose",
+        "obtainment": "Obtain 140 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Classic Rose",
+      "obtainment": "Obtain 140 Titles"
+    },
+    {
+      "name": "Aquamarine",
+      "slug": "aquamarine",
+      "fields": {
+        "column1": "",
+        "color": "Aquamarine",
+        "obtainment": "Obtain 160 Titles"
+      },
+      "wikiUrl": null,
+      "imageCandidate": null,
+      "color": "Aquamarine",
+      "obtainment": "Obtain 160 Titles"
+    }
+  ]
+}

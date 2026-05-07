@@ -1,0 +1,965 @@
+{
+  "meta": {
+    "title": "Steal a Brainrot fuse machine data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Steal a Brainrot Wiki - Fuse Machine",
+        "url": "https://stealabrainrot.fandom.com/wiki/Fuse_Machine",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "machine",
+      "rarity",
+      "maxChance",
+      "income"
+    ]
+  },
+  "items": [
+    {
+      "name": "Pipi Corni",
+      "slug": "pipi-corni",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pipi-corni.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Common",
+      "maxChance": "67% (4 Noobini Pizzanini)",
+      "income": "$14/s",
+      "brainrotLinks": [
+        {
+          "name": "Pipi Corni",
+          "page": "Pipi Corni",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Corni"
+        },
+        {
+          "name": "Pipi Corni",
+          "page": "Pipi Corni",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Corni"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/53/PipiCorni.png/revision/latest?cb=20251128210620"
+    },
+    {
+      "name": "Pipi Avocado",
+      "slug": "pipi-avocado",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pipi-avocado.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Rare",
+      "maxChance": "54% (2 Pipi Kiwi and 2 Bandito Bobritto)",
+      "income": "$70/s",
+      "brainrotLinks": [
+        {
+          "name": "Pipi Avocado",
+          "page": "Pipi Avocado",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Avocado"
+        },
+        {
+          "name": "Pipi Avocado",
+          "page": "Pipi Avocado",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Avocado"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f5/-08D2AFE2-1A88-4E47-91AD-B28otoroom.png/revision/latest?cb=20251212001247"
+    },
+    {
+      "name": "Ti Ti Ti Sahur",
+      "slug": "ti-ti-ti-sahur",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/ti-ti-ti-sahur.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Epic",
+      "maxChance": "71% (3 Perochello Lemonchello and 1 Trulimero Trulicina)",
+      "income": "$225/s",
+      "brainrotLinks": [
+        {
+          "name": "Ti Ti Ti Sahur",
+          "page": "Ti Ti Ti Sahur",
+          "url": "https://stealabrainrot.fandom.com/wiki/Ti_Ti_Ti_Sahur"
+        },
+        {
+          "name": "Ti Ti Ti Sahur",
+          "page": "Ti Ti Ti Sahur",
+          "url": "https://stealabrainrot.fandom.com/wiki/Ti_Ti_Ti_Sahur"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/ad/Titititiit.png/revision/latest?cb=20251017141030"
+    },
+    {
+      "name": "Penguino Cocosino",
+      "slug": "penguino-cocosino",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/penguino-cocosino.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Epic",
+      "maxChance": "43% (4 Brr Brr Patapim or 4 Brri Brri Bicus Dicus Bombicus",
+      "income": "$300/s",
+      "brainrotLinks": [
+        {
+          "name": "Penguino Cocosino",
+          "page": "Penguino Cocosino",
+          "url": "https://stealabrainrot.fandom.com/wiki/Penguino_Cocosino"
+        },
+        {
+          "name": "Penguino Cocosino",
+          "page": "Penguino Cocosino",
+          "url": "https://stealabrainrot.fandom.com/wiki/Penguino_Cocosino"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/6a/Penguino_Cocosino.png/revision/latest?cb=20260119201430"
+    },
+    {
+      "name": "Cocosini Mama",
+      "slug": "cocosini-mama",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/cocosini-mama.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Legendary",
+      "maxChance": "62% (4 Burbaloni Lolilolis)",
+      "income": "$1.2K/s",
+      "brainrotLinks": [
+        {
+          "name": "Cocosini Mama",
+          "page": "Cocosini Mama",
+          "url": "https://stealabrainrot.fandom.com/wiki/Cocosini_Mama"
+        },
+        {
+          "name": "Cocosini Mama",
+          "page": "Cocosini Mama",
+          "url": "https://stealabrainrot.fandom.com/wiki/Cocosini_Mama"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/ca/Cocosini_Mama.png/revision/latest?cb=20260103034424"
+    },
+    {
+      "name": "Pi Pi Watermelon",
+      "slug": "pi-pi-watermelon",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pi-pi-watermelon.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Legendary",
+      "maxChance": "41% (4 Ballerina Cappuccina)",
+      "income": "$1.3K/s",
+      "brainrotLinks": [
+        {
+          "name": "Pi Pi Watermelon",
+          "page": "Pi Pi Watermelon",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pi_Pi_Watermelon"
+        },
+        {
+          "name": "Pi Pi Watermelon",
+          "page": "Pi Pi Watermelon",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pi_Pi_Watermelon"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/84/Pi_Pi_Watermelon.png/revision/latest?cb=20251103172551"
+    },
+    {
+      "name": "Avocadorilla",
+      "slug": "avocadorilla",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/avocadorilla.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Mythic",
+      "maxChance": "69% (3 Chef Cabracadabra and 1 Frigo Camelo)",
+      "income": "$7K/s",
+      "brainrotLinks": [
+        {
+          "name": "Avocadorilla",
+          "page": "Avocadorilla",
+          "url": "https://stealabrainrot.fandom.com/wiki/Avocadorilla"
+        },
+        {
+          "name": "Avocadorilla",
+          "page": "Avocadorilla",
+          "url": "https://stealabrainrot.fandom.com/wiki/Avocadorilla"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/85/Avocadorilla.png/revision/latest?cb=20251128210930"
+    },
+    {
+      "name": "Tob Tobi Tobi",
+      "slug": "tob-tobi-tobi",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/tob-tobi-tobi.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Mythic",
+      "maxChance": "43% (3 Frigo Camelo and 1 Sigma Boy)",
+      "income": "$8.5K/s",
+      "brainrotLinks": [
+        {
+          "name": "Tob Tobi Tobi",
+          "page": "Tob Tobi Tobi",
+          "url": "https://stealabrainrot.fandom.com/wiki/Tob_Tobi_Tobi"
+        },
+        {
+          "name": "Tob Tobi Tobi",
+          "page": "Tob Tobi Tobi",
+          "url": "https://stealabrainrot.fandom.com/wiki/Tob_Tobi_Tobi"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b0/Tob_Tobi_Tobi.png/revision/latest?cb=20251015000944"
+    },
+    {
+      "name": "Ganganzelli Trulala",
+      "slug": "ganganzelli-trulala",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/ganganzelli-trulala.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Mythic",
+      "maxChance": "26% (3 Bombardiro Crocodilo and 1 Blueberrinni Octopusini)",
+      "income": "$9K/s",
+      "brainrotLinks": [
+        {
+          "name": "Ganganzelli Trulala",
+          "page": "Ganganzelli Trulala",
+          "url": "https://stealabrainrot.fandom.com/wiki/Ganganzelli_Trulala"
+        },
+        {
+          "name": "Ganganzelli Trulala",
+          "page": "Ganganzelli Trulala",
+          "url": "https://stealabrainrot.fandom.com/wiki/Ganganzelli_Trulala"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b4/Ganganzelli_Trulala.png/revision/latest?cb=20251125173952"
+    },
+    {
+      "name": "Tukanno Bananno",
+      "slug": "tukanno-bananno",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/tukanno-bananno.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Brainrot God",
+      "maxChance": "60% (4 Girafa Celestre)",
+      "income": "$100K/s",
+      "brainrotLinks": [
+        {
+          "name": "Tukanno Bananno",
+          "page": "Tukanno Bananno",
+          "url": "https://stealabrainrot.fandom.com/wiki/Tukanno_Bananno"
+        },
+        {
+          "name": "Tukanno Bananno",
+          "page": "Tukanno Bananno",
+          "url": "https://stealabrainrot.fandom.com/wiki/Tukanno_Bananno"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/87/Tukanno_Bananno.png/revision/latest?cb=20251209235928"
+    },
+    {
+      "name": "Brr es Teh Patipum",
+      "slug": "brr-es-teh-patipum",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/brr-es-teh-patipum.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Brainrot God",
+      "maxChance": "44% (3 Tralalero Tralala and 1 Cocofanto Elefanto)",
+      "income": "$225K/s",
+      "brainrotLinks": [
+        {
+          "name": "Brr es Teh Patipum",
+          "page": "Brr es Teh Patipum",
+          "url": "https://stealabrainrot.fandom.com/wiki/Brr_es_Teh_Patipum"
+        },
+        {
+          "name": "Brr es Teh Patipum",
+          "page": "Brr es Teh Patipum",
+          "url": "https://stealabrainrot.fandom.com/wiki/Brr_es_Teh_Patipum"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/30/Brr_es_Teh_Patipum.png/revision/latest?cb=20251025220427"
+    },
+    {
+      "name": "Los Orcalitos",
+      "slug": "los-orcalitos",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-orcalitos.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Brainrot God",
+      "maxChance": "?%",
+      "income": "$235K/s",
+      "brainrotLinks": [
+        {
+          "name": "Los Orcalitos",
+          "page": "Los Orcalitos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Orcalitos"
+        },
+        {
+          "name": "Los Orcalitos",
+          "page": "Los Orcalitos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Orcalitos"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/27/Los_orcalitos.png/revision/latest?cb=20251006201225"
+    },
+    {
+      "name": "Los Tungtungtungcitos",
+      "slug": "los-tungtungtungcitos",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-tungtungtungcitos.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Brainrot God",
+      "maxChance": "76% (3 Odin Din Din Dun and 1 Piccione Macchina)",
+      "income": "$210K/s",
+      "brainrotLinks": [
+        {
+          "name": "Los Tungtungtungcitos",
+          "page": "Los Tungtungtungcitos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Tungtungtungcitos"
+        },
+        {
+          "name": "Los Tungtungtungcitos",
+          "page": "Los Tungtungtungcitos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Tungtungtungcitos"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a0/Los_Tungtungtungcitos.png/revision/latest?cb=20250902182803"
+    },
+    {
+      "name": "Agarrini la Palini",
+      "slug": "agarrini-la-palini",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/agarrini-la-palini.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "96% (4 Graipuss Medussi)",
+      "income": "$425K/s",
+      "brainrotLinks": [
+        {
+          "name": "Agarrini la Palini",
+          "page": "Agarrini la Palini",
+          "url": "https://stealabrainrot.fandom.com/wiki/Agarrini_la_Palini"
+        },
+        {
+          "name": "Agarrini la Palini",
+          "page": "Agarrini la Palini",
+          "url": "https://stealabrainrot.fandom.com/wiki/Agarrini_la_Palini"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/de/Agarrini_la_Palini.png/revision/latest?cb=20260428162721"
+    },
+    {
+      "name": "Los Combinasionas",
+      "slug": "los-combinasionas",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-combinasionas.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "6% (4 Graipuss Medussi or 4 Chicleteira Bicicleteira)",
+      "income": "$15M/s",
+      "brainrotLinks": [
+        {
+          "name": "Los Combinasionas",
+          "page": "Los Combinasionas",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Combinasionas"
+        },
+        {
+          "name": "Los Combinasionas",
+          "page": "Los Combinasionas",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Combinasionas"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/36/Stop_taking_my_chips_im_just_a_baybeh.png/revision/latest?cb=20250909223756"
+    },
+    {
+      "name": "Los Hotspotsitos",
+      "slug": "los-hotspotsitos",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-hotspotsitos.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "3% (4 La Grande Combinasion or 4 Los Combinasionas)",
+      "income": "$20M/s",
+      "brainrotLinks": [
+        {
+          "name": "Los Hotspotsitos",
+          "page": "Los Hotspotsitos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Hotspotsitos"
+        },
+        {
+          "name": "Los Hotspotsitos",
+          "page": "Los Hotspotsitos",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Hotspotsitos"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/69/Loshotspotsitos.png/revision/latest?cb=20251226204212"
+    },
+    {
+      "name": "La Supreme Combinasion",
+      "slug": "la-supreme-combinasion",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/la-supreme-combinasion.webp",
+      "machine": "2025 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "7%",
+      "income": "$200M/s",
+      "brainrotLinks": [
+        {
+          "name": "La Supreme Combinasion",
+          "page": "La Supreme Combinasion",
+          "url": "https://stealabrainrot.fandom.com/wiki/La_Supreme_Combinasion"
+        },
+        {
+          "name": "La Supreme Combinasion",
+          "page": "La Supreme Combinasion",
+          "url": "https://stealabrainrot.fandom.com/wiki/La_Supreme_Combinasion"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/52/SupremeCombinasion.png/revision/latest?cb=20250825130920"
+    },
+    {
+      "name": "Pipi Corni",
+      "slug": "pipi-corni",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pipi-corni-2.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Common",
+      "maxChance": "67% (4 Noobinis)",
+      "income": "$14/s",
+      "brainrotLinks": [
+        {
+          "name": "Pipi Corni",
+          "page": "Pipi Corni",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Corni"
+        },
+        {
+          "name": "Pipi Corni",
+          "page": "Pipi Corni",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Corni"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/53/PipiCorni.png/revision/latest?cb=20251128210620"
+    },
+    {
+      "name": "Pipi Avocado",
+      "slug": "pipi-avocado",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pipi-avocado-2.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Rare",
+      "maxChance": "95%",
+      "income": "$70/s",
+      "brainrotLinks": [
+        {
+          "name": "Pipi Avocado",
+          "page": "Pipi Avocado",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Avocado"
+        },
+        {
+          "name": "Pipi Avocado",
+          "page": "Pipi Avocado",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Avocado"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f5/-08D2AFE2-1A88-4E47-91AD-B28otoroom.png/revision/latest?cb=20251212001247"
+    },
+    {
+      "name": "Ti Ti Ti Sahur",
+      "slug": "ti-ti-ti-sahur",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/ti-ti-ti-sahur-2.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Epic",
+      "maxChance": "62%",
+      "income": "$225/s",
+      "brainrotLinks": [
+        {
+          "name": "Ti Ti Ti Sahur",
+          "page": "Ti Ti Ti Sahur",
+          "url": "https://stealabrainrot.fandom.com/wiki/Ti_Ti_Ti_Sahur"
+        },
+        {
+          "name": "Ti Ti Ti Sahur",
+          "page": "Ti Ti Ti Sahur",
+          "url": "https://stealabrainrot.fandom.com/wiki/Ti_Ti_Ti_Sahur"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/ad/Titititiit.png/revision/latest?cb=20251017141030"
+    },
+    {
+      "name": "Penguino Cocosino",
+      "slug": "penguino-cocosino",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/penguino-cocosino-2.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Epic",
+      "maxChance": "31%",
+      "income": "$300/s",
+      "brainrotLinks": [
+        {
+          "name": "Penguino Cocosino",
+          "page": "Penguino Cocosino",
+          "url": "https://stealabrainrot.fandom.com/wiki/Penguino_Cocosino"
+        },
+        {
+          "name": "Penguino Cocosino",
+          "page": "Penguino Cocosino",
+          "url": "https://stealabrainrot.fandom.com/wiki/Penguino_Cocosino"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/6a/Penguino_Cocosino.png/revision/latest?cb=20260119201430"
+    },
+    {
+      "name": "Cocosini Mama",
+      "slug": "cocosini-mama",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/cocosini-mama-2.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Legendary",
+      "maxChance": "61%",
+      "income": "$1.2K/s",
+      "brainrotLinks": [
+        {
+          "name": "Cocosini Mama",
+          "page": "Cocosini Mama",
+          "url": "https://stealabrainrot.fandom.com/wiki/Cocosini_Mama"
+        },
+        {
+          "name": "Cocosini Mama",
+          "page": "Cocosini Mama",
+          "url": "https://stealabrainrot.fandom.com/wiki/Cocosini_Mama"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/ca/Cocosini_Mama.png/revision/latest?cb=20260103034424"
+    },
+    {
+      "name": "Pi Pi Watermelon",
+      "slug": "pi-pi-watermelon",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pi-pi-watermelon-2.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Legendary",
+      "maxChance": "47%",
+      "income": "$1.3K/s",
+      "brainrotLinks": [
+        {
+          "name": "Pi Pi Watermelon",
+          "page": "Pi Pi Watermelon",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pi_Pi_Watermelon"
+        },
+        {
+          "name": "Pi Pi Watermelon",
+          "page": "Pi Pi Watermelon",
+          "url": "https://stealabrainrot.fandom.com/wiki/Pi_Pi_Watermelon"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/84/Pi_Pi_Watermelon.png/revision/latest?cb=20251103172551"
+    },
+    {
+      "name": "Spongini Quackini",
+      "slug": "spongini-quackini",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/spongini-quackini.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Mythic",
+      "maxChance": "73%",
+      "income": "$13K/s",
+      "brainrotLinks": [
+        {
+          "name": "Spongini Quackini",
+          "page": "Spongini Quackini",
+          "url": "https://stealabrainrot.fandom.com/wiki/Spongini_Quackini"
+        },
+        {
+          "name": "Spongini Quackini",
+          "page": "Spongini Quackini",
+          "url": "https://stealabrainrot.fandom.com/wiki/Spongini_Quackini"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/ec/Spongini_Quackini.png/revision/latest?cb=20260125102619"
+    },
+    {
+      "name": "Fizzy Soda",
+      "slug": "fizzy-soda",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/fizzy-soda.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Mythic",
+      "maxChance": "41% (3 Cocofanto Elefantos and 1 high tier Mythic or Mythic Lucky Block)",
+      "income": "$17.2K/s",
+      "brainrotLinks": [
+        {
+          "name": "Fizzy Soda",
+          "page": "Fizzy Soda",
+          "url": "https://stealabrainrot.fandom.com/wiki/Fizzy_Soda"
+        },
+        {
+          "name": "Fizzy Soda",
+          "page": "Fizzy Soda",
+          "url": "https://stealabrainrot.fandom.com/wiki/Fizzy_Soda"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f3/Fizzy_Soda.png/revision/latest?cb=20260125102651"
+    },
+    {
+      "name": "Boba Panda",
+      "slug": "boba-panda",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/boba-panda.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Brainrot God",
+      "maxChance": "60%",
+      "income": "$270K/s",
+      "brainrotLinks": [
+        {
+          "name": "Boba Panda",
+          "page": "Boba Panda",
+          "url": "https://stealabrainrot.fandom.com/wiki/Boba_Panda"
+        },
+        {
+          "name": "Boba Panda",
+          "page": "Boba Panda",
+          "url": "https://stealabrainrot.fandom.com/wiki/Boba_Panda"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/00/Panda.png/revision/latest?cb=20260413205305"
+    },
+    {
+      "name": "Dolphini Jetskini",
+      "slug": "dolphini-jetskini",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/dolphini-jetskini.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Brainrot God",
+      "maxChance": "46%",
+      "income": "$294.5K/s",
+      "brainrotLinks": [
+        {
+          "name": "Dolphini Jetskini",
+          "page": "Dolphini Jetskini",
+          "url": "https://stealabrainrot.fandom.com/wiki/Dolphini_Jetskini"
+        },
+        {
+          "name": "Dolphini Jetskini",
+          "page": "Dolphini Jetskini",
+          "url": "https://stealabrainrot.fandom.com/wiki/Dolphini_Jetskini"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/69/Dolphini_Jetskini.png/revision/latest?cb=20260125102730"
+    },
+    {
+      "name": "Los Trios",
+      "slug": "los-trios",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-trios.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "92%",
+      "income": "$700K/s",
+      "brainrotLinks": [
+        {
+          "name": "Los Trios",
+          "page": "Los Trios",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Trios"
+        },
+        {
+          "name": "Los Trios",
+          "page": "Los Trios",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Trios"
+        },
+        {
+          "name": "Fishboard",
+          "page": "Fishboard",
+          "url": "https://stealabrainrot.fandom.com/wiki/Fishboard"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/f1/Los_Trios.png/revision/latest?cb=20260322235046"
+    },
+    {
+      "name": "Fishboard",
+      "slug": "fishboard",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/fishboard.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "92%",
+      "income": "$825K/s",
+      "brainrotLinks": [
+        {
+          "name": "Fishboard",
+          "page": "Fishboard",
+          "url": "https://stealabrainrot.fandom.com/wiki/Fishboard"
+        },
+        {
+          "name": "Fishboard",
+          "page": "Fishboard",
+          "url": "https://stealabrainrot.fandom.com/wiki/Fishboard"
+        },
+        {
+          "name": "Los Trios",
+          "page": "Los Trios",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Trios"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/7c/Fishboard.webp/revision/latest?cb=20260306193324"
+    },
+    {
+      "name": "Chill Puppy",
+      "slug": "chill-puppy",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/chill-puppy.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "37%",
+      "income": "$4M/s",
+      "brainrotLinks": [
+        {
+          "name": "Chill Puppy",
+          "page": "Chill Puppy",
+          "url": "https://stealabrainrot.fandom.com/wiki/Chill_Puppy"
+        },
+        {
+          "name": "Chill Puppy",
+          "page": "Chill Puppy",
+          "url": "https://stealabrainrot.fandom.com/wiki/Chill_Puppy"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/e0/Chill_Puppy.png/revision/latest?cb=20260417154751"
+    },
+    {
+      "name": "Los Sweethearts",
+      "slug": "los-sweethearts",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-sweethearts.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "50% (Los Tralaleritos Las Tralaleritas, Cupid Hotspot, and Noo my Heart)",
+      "income": "$16.5M/s",
+      "brainrotLinks": [
+        {
+          "name": "Los Sweethearts",
+          "page": "Los Sweethearts",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Sweethearts"
+        },
+        {
+          "name": "Los Sweethearts",
+          "page": "Los Sweethearts",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_Sweethearts"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a3/Los_Sweethearts.png/revision/latest?cb=20260327201824"
+    },
+    {
+      "name": "Spinny Hammy",
+      "slug": "spinny-hammy",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/spinny-hammy.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "49%",
+      "income": "$17M/s",
+      "brainrotLinks": [
+        {
+          "name": "Spinny Hammy",
+          "page": "Spinny Hammy",
+          "url": "https://stealabrainrot.fandom.com/wiki/Spinny_Hammy"
+        },
+        {
+          "name": "Spinny Hammy",
+          "page": "Spinny Hammy",
+          "url": "https://stealabrainrot.fandom.com/wiki/Spinny_Hammy"
+        },
+        {
+          "name": "DJ Panda",
+          "page": "DJ Panda",
+          "url": "https://stealabrainrot.fandom.com/wiki/DJ_Panda"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/cb/Spinny_Hammy.png/revision/latest?cb=20260428165949"
+    },
+    {
+      "name": "DJ Panda",
+      "slug": "dj-panda",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/dj-panda.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "49%",
+      "income": "$17.5M/s",
+      "brainrotLinks": [
+        {
+          "name": "DJ Panda",
+          "page": "DJ Panda",
+          "url": "https://stealabrainrot.fandom.com/wiki/DJ_Panda"
+        },
+        {
+          "name": "DJ Panda",
+          "page": "DJ Panda",
+          "url": "https://stealabrainrot.fandom.com/wiki/DJ_Panda"
+        },
+        {
+          "name": "Spinny Hammy",
+          "page": "Spinny Hammy",
+          "url": "https://stealabrainrot.fandom.com/wiki/Spinny_Hammy"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/2c/DJ_Panda.webp/revision/latest?cb=20260306192457"
+    },
+    {
+      "name": "Bacuru and Egguru",
+      "slug": "bacuru-and-egguru",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/bacuru-and-egguru.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "48%",
+      "income": "$24M/s",
+      "brainrotLinks": [
+        {
+          "name": "Bacuru and Egguru",
+          "page": "Bacuru and Egguru",
+          "url": "https://stealabrainrot.fandom.com/wiki/Bacuru_and_Egguru"
+        },
+        {
+          "name": "Bacuru and Egguru",
+          "page": "Bacuru and Egguru",
+          "url": "https://stealabrainrot.fandom.com/wiki/Bacuru_and_Egguru"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b5/Bacuru_and_Egguru.png/revision/latest?cb=20260417154056"
+    },
+    {
+      "name": "Los 67",
+      "slug": "los-67",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-67.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "48%",
+      "income": "$22.5M/s",
+      "brainrotLinks": [
+        {
+          "name": "Los 67",
+          "page": "Los 67",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_67"
+        },
+        {
+          "name": "Los 67",
+          "page": "Los 67",
+          "url": "https://stealabrainrot.fandom.com/wiki/Los_67"
+        },
+        {
+          "name": "Bacuru and Egguru",
+          "page": "Bacuru and Egguru",
+          "url": "https://stealabrainrot.fandom.com/wiki/Bacuru_and_Egguru"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/db/Los-67.png/revision/latest?cb=20251103171526"
+    },
+    {
+      "name": "Garama and Madundung",
+      "slug": "garama-and-madundung",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/garama-and-madundung.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "16% (required OGs)",
+      "income": "$50M/s",
+      "brainrotLinks": [
+        {
+          "name": "Garama and Madundung",
+          "page": "Garama and Madundung",
+          "url": "https://stealabrainrot.fandom.com/wiki/Garama_and_Madundung"
+        },
+        {
+          "name": "Garama and Madundung",
+          "page": "Garama and Madundung",
+          "url": "https://stealabrainrot.fandom.com/wiki/Garama_and_Madundung"
+        },
+        {
+          "name": "Popcuru and Fizzuru",
+          "page": "Popcuru and Fizzuru",
+          "url": "https://stealabrainrot.fandom.com/wiki/Popcuru_and_Fizzuru"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/6b/Garama_and_Madundung.png/revision/latest?cb=20250726052620"
+    },
+    {
+      "name": "Capitano Moby",
+      "slug": "capitano-moby",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/capitano-moby.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "16% (required OGs)",
+      "income": "$160M/s",
+      "brainrotLinks": [
+        {
+          "name": "Capitano Moby",
+          "page": "Capitano Moby",
+          "url": "https://stealabrainrot.fandom.com/wiki/Capitano_Moby"
+        },
+        {
+          "name": "Capitano Moby",
+          "page": "Capitano Moby",
+          "url": "https://stealabrainrot.fandom.com/wiki/Capitano_Moby"
+        },
+        {
+          "name": "Popcuru and Fizzuru",
+          "page": "Popcuru and Fizzuru",
+          "url": "https://stealabrainrot.fandom.com/wiki/Popcuru_and_Fizzuru"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/ef/Moby.png/revision/latest?cb=20251101185416"
+    },
+    {
+      "name": "Popcuru And Fizzuru",
+      "slug": "popcuru-and-fizzuru",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/popcuru-and-fizzuru.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "16% (required OGs)",
+      "income": "$170M/s",
+      "brainrotLinks": [
+        {
+          "name": "Popcuru And Fizzuru",
+          "page": "Popcuru And Fizzuru",
+          "url": "https://stealabrainrot.fandom.com/wiki/Popcuru_And_Fizzuru"
+        },
+        {
+          "name": "Popcuru and Fizzuru",
+          "page": "Popcuru and Fizzuru",
+          "url": "https://stealabrainrot.fandom.com/wiki/Popcuru_and_Fizzuru"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a9/Popuru_and_Fizzuru.png/revision/latest?cb=20260213204324"
+    },
+    {
+      "name": "Ketupat Bros",
+      "slug": "ketupat-bros",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/ketupat-bros.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "100% (1 Ketupat Kepat and 1 Ginger Gerat)",
+      "income": "$145M/s",
+      "brainrotLinks": [
+        {
+          "name": "Ketupat Bros",
+          "page": "Ketupat Bros",
+          "url": "https://stealabrainrot.fandom.com/wiki/Ketupat_Bros"
+        },
+        {
+          "name": "Ketupat Bros",
+          "page": "Ketupat Bros",
+          "url": "https://stealabrainrot.fandom.com/wiki/Ketupat_Bros"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4d/Ketupat_Bros.png/revision/latest?cb=20260207220106"
+    },
+    {
+      "name": "Hydra Dragon Cannelloni",
+      "slug": "hydra-dragon-cannelloni",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/hydra-dragon-cannelloni.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "10% (4 Strawberry Elephants)",
+      "income": "$300M/s",
+      "brainrotLinks": [
+        {
+          "name": "Hydra Dragon Cannelloni",
+          "page": "Hydra Dragon Cannelloni",
+          "url": "https://stealabrainrot.fandom.com/wiki/Hydra_Dragon_Cannelloni"
+        },
+        {
+          "name": "Hydra Dragon Cannelloni",
+          "page": "Hydra Dragon Cannelloni",
+          "url": "https://stealabrainrot.fandom.com/wiki/Hydra_Dragon_Cannelloni"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/ee/Hydra_Dragon_Cannelloni.png/revision/latest?cb=20260207220000"
+    },
+    {
+      "name": "Celestial Pegasus",
+      "slug": "celestial-pegasus",
+      "image": "/Steal%20a%20Brainrot/Fuse%20Machine/celestial-pegasus.webp",
+      "machine": "2026 Fuse Machine",
+      "rarity": "Secret",
+      "maxChance": "10% (4 Strawberry Elephants)",
+      "income": "$175M/s",
+      "brainrotLinks": [
+        {
+          "name": "Celestial Pegasus",
+          "page": "Celestial Pegasus",
+          "url": "https://stealabrainrot.fandom.com/wiki/Celestial_Pegasus"
+        },
+        {
+          "name": "Celestial Pegasus",
+          "page": "Celestial Pegasus",
+          "url": "https://stealabrainrot.fandom.com/wiki/Celestial_Pegasus"
+        },
+        {
+          "name": "Hydra Dragon Cannelloni",
+          "page": "Hydra Dragon Cannelloni",
+          "url": "https://stealabrainrot.fandom.com/wiki/Hydra_Dragon_Cannelloni"
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/6c/Celestial_Pegasus.webp/revision/latest?cb=20260306194040"
+    }
+  ]
+}

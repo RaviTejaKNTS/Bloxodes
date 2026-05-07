@@ -1,0 +1,679 @@
+{
+  "meta": {
+    "title": "Steal a Brainrot lucky blocks data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Steal a Brainrot Wiki - Lucky Blocks",
+        "url": "https://stealabrainrot.fandom.com/wiki/Lucky_Blocks",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "cost",
+      "gender",
+      "rarity",
+      "status",
+      "sound",
+      "description",
+      "appearance",
+      "contents"
+    ]
+  },
+  "items": [
+    {
+      "name": "Mythic Lucky Block",
+      "slug": "mythic-lucky-block",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/mythic-lucky-block.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "The Mythic Lucky Block is one of the 3 lucky blocks that are purchasable via the shop, or by simply waiting for it to spawn on the red path. It costs 199 in the shop or $5M. The Mythic Lucky Block has 5 brainrots inside of it, those being: Spioniro Golubiro, Tigrilini Watermelini, Zibra Zubra Zibralini, Carrotini Brainini and Bananito Bandito.",
+      "appearance": "Mythic Lucky Block's appearance is mainly red and white, the red being the block itself while the white parts are the question marks, corners, and mouth (smile). It has 2 white wings on each side like the other lucky blocks.",
+      "contents": [
+        {
+          "name": "Spioniro Golubiro",
+          "chance": "37%",
+          "income": "3.5k/s",
+          "links": []
+        },
+        {
+          "name": "Zibra Zubra Zibralini",
+          "chance": "30%",
+          "income": "6k/s",
+          "links": []
+        },
+        {
+          "name": "Tigrilini Watermelini",
+          "chance": "20%",
+          "income": "6.5k/s",
+          "links": []
+        },
+        {
+          "name": "Carrotini Brainini",
+          "chance": "10%",
+          "income": "15k/s",
+          "links": []
+        },
+        {
+          "name": "Bananito Bandito",
+          "chance": "3%",
+          "income": "16.5k/s",
+          "links": []
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/e7/Mythic_lucky_block.png/revision/latest?cb=20260206164029"
+    },
+    {
+      "name": "Brainrot God Lucky Block",
+      "slug": "brainrot-god-lucky-block",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/brainrot-god-lucky-block.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "The Brainrot God Lucky Block is one of the 3 lucky blocks that are purchasable via the shop, or by simply waiting for it to spawn on the red path. It costs 599 in the shop or $15M. The Brainrot God Lucky Block has 5 Brainrots inside of it, those being: Tigroligre Frutonni, Orcalero Orcala, Bulbito Bandito Traktorito, Mastodontico Telepiedone and Pop Pop Sahur.",
+      "appearance": "Brainrot God Lucky Block's appearance is mainly blue and rainbow, the blue being the block itself. The rainbow parts are question marks, corner and smile. It has 2 white wings on each side like the other Lucky Blocks.",
+      "contents": [
+        {
+          "name": "Tigroligre Frutonni",
+          "chance": "54%",
+          "income": "60k/s",
+          "links": []
+        },
+        {
+          "name": "Orcalero Orcala",
+          "chance": "30%",
+          "income": "100k/s",
+          "links": []
+        },
+        {
+          "name": "Bulbito Bandito Traktorito",
+          "chance": "10%",
+          "income": "205k/s",
+          "links": []
+        },
+        {
+          "name": "Mastodontico Telepiedone",
+          "chance": "5%",
+          "income": "275k/s",
+          "links": []
+        },
+        {
+          "name": "Pop Pop Sahur",
+          "chance": "1%",
+          "income": "295k/s",
+          "links": []
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/56/BrainrotGodLuckyBlock.png/revision/latest?cb=20250902180130"
+    },
+    {
+      "name": "Secret Lucky Block",
+      "slug": "secret-lucky-block",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/secret-lucky-block.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "The Secret Lucky Block is one of the 3 types of lucky blocks to be able to be bought in the shop for 2399 or on the red carpet for $750M. The Secret Lucky Block has 6 Brainrots inside of it, those being: Torrtuginni Dragonfrutini, Pot Hotspot, Esok Sekolah, Spaghetti Tualetti, La Secret Combinasion, and Celestial Pegasus.",
+      "appearance": "It's appearance is black and white, the black part being the main part of the lucky block while the question marks, the smile and the corners are white. It carries 2 wings on each side like the other Lucky Blocks.",
+      "contents": [
+        {
+          "name": "Torrtuginni Dragonfrutini",
+          "chance": "74.45%",
+          "income": "350k/s",
+          "links": []
+        },
+        {
+          "name": "Pot Hotspot",
+          "chance": "21%",
+          "income": "2.5m/s",
+          "links": []
+        },
+        {
+          "name": "Esok Sekolah",
+          "chance": "3%",
+          "income": "30m/s",
+          "links": []
+        },
+        {
+          "name": "Spaghetti Tualetti",
+          "chance": "1%",
+          "income": "60m/s",
+          "links": []
+        },
+        {
+          "name": "La Secret Combinasion",
+          "chance": "0.5%",
+          "income": "125m/s",
+          "links": []
+        },
+        {
+          "name": "Celestial Pegasus",
+          "chance": "0.05%",
+          "income": "175m/s",
+          "links": []
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/3a/SecretLuckyBlock.png/revision/latest?cb=20251125192757"
+    },
+    {
+      "name": "Admin Lucky Block",
+      "slug": "admin-lucky-block",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/admin-lucky-block.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "The Admin Lucky Block was added on August 23rd, 2025 for the Admin Abuse War event and costs $100M. This Brainrot, similarly to Sammyini Spyderini, is based off of the game's developer SammySpyder. It contains the La Grande Combinasion, which is highly valuable. This Lucky Block does not need any waiting time in order to open as well, which saves a lot of time in Public Servers where people will most likely try to steal the Lucky Block the moment you get it. This can be obtained from the Advent Calendar. The Admin Lucky Block has 9 brainrots inside of them, them being Carloo, Alessio ,Los Bombinitos, Crabbo Limonetta, Blackhole Goat, Guerriro Digitale, 67, La Grande Combinasion and Sammyni Fattini.",
+      "appearance": "The Admin Lucky Block is a yellow lucky block, with 2 red question marks for the pupils inside the eyes, wings, and a red and white top hat, resembling Sammy's avatar. Unlike Sammyini Spyderini, it does not have Sammy's face, but has the :3 face which Sammy almost always uses in global chat messages.",
+      "contents": [
+        {
+          "name": "Carloo",
+          "chance": "35%",
+          "income": "13.5k/s",
+          "links": []
+        },
+        {
+          "name": "Alessio",
+          "chance": "25%",
+          "income": "85k/s",
+          "links": []
+        },
+        {
+          "name": "Los Bombinitos",
+          "chance": "15%",
+          "income": "220k/s",
+          "links": []
+        },
+        {
+          "name": "Crabbo Limonetta",
+          "chance": "10%",
+          "income": "235k/s",
+          "links": []
+        },
+        {
+          "name": "Blackhole Goat",
+          "chance": "5%",
+          "income": "400k/s",
+          "links": []
+        },
+        {
+          "name": "Guerriro Digitale",
+          "chance": "3%",
+          "income": "550k/s",
+          "links": []
+        },
+        {
+          "name": "67",
+          "chance": "1.5%",
+          "income": "7.5m/s",
+          "links": []
+        },
+        {
+          "name": "La Grande Combinasion",
+          "chance": "0.5%",
+          "income": "10m/s",
+          "links": []
+        },
+        {
+          "name": "Sammyni Fattini",
+          "chance": "0.1%",
+          "income": "70m/s",
+          "links": []
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/7c/AdminLuckyBlock.png/revision/latest?cb=20251007132226"
+    },
+    {
+      "name": "Taco Lucky Block",
+      "slug": "taco-lucky-block",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/taco-lucky-block.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "The Taco Lucky Block is one of the 5 event-only Lucky Blocks. This Lucky Block has 7 brainrots inside the Lucky Block. Like the Admin Lucky Block, This Lucky Block does not need any waiting time in order to open as well, which saves a lot of time in Public Servers where people will most likely try to steal the Lucky Block the moment you get it. The Taco Lucky Block has 7 brainrots inside of it, they are Chihuanini Taconini, Gattito Tacoto, Los Tipi Tacos, Quesadilla Crocodila, Burrito Bandito, Los Nooo My Hotspotsitos, and La Food Combinasion.",
+      "appearance": "Taco Lucky Block's appearance is a taco with white wings and question marks on the sides. Its appearance is not like the others.",
+      "contents": [
+        {
+          "name": "Chihuanini Taconini",
+          "chance": "50.4%",
+          "income": "45k/s",
+          "links": []
+        },
+        {
+          "name": "Gattito Tacoto",
+          "chance": "35%",
+          "income": "165k/s",
+          "links": []
+        },
+        {
+          "name": "Los Tipi Tacos",
+          "chance": "10%",
+          "income": "260k/s",
+          "links": []
+        },
+        {
+          "name": "Quesadilla Crocodila",
+          "chance": "3%",
+          "income": "3m/s",
+          "links": []
+        },
+        {
+          "name": "Burrito Bandito",
+          "chance": "1%",
+          "income": "4m/s",
+          "links": []
+        },
+        {
+          "name": "Los Nooo My Hotspotsitos",
+          "chance": "0.5%",
+          "income": "5.5m/s",
+          "links": []
+        },
+        {
+          "name": "La Food Combinasion",
+          "chance": "0.1%",
+          "income": "90m/s",
+          "links": []
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/8/81/TacoLuckyBlock2.png/revision/latest?cb=20251007133142"
+    },
+    {
+      "name": "Los Lucky Blocks",
+      "slug": "los-lucky-blocks",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/los-lucky-blocks.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "Los Lucky Blocks are Admin Exclusive Lucky Blocks summoned by the last Admin abuse on October 4th, 2025. Like Admin Lucky Blocks and Taco Lucky Blocks, this Lucky Block also has no waiting time before opening. Los Brainrot drops from this Lucky Block. This can also be obtained from the Advent Calendar. There are 9 Brainrots in the Los Lucky Blocks, they are Los Bombinitos, Los Tungtungtungcitos, Los Orcalitos, Los Tipi Tacos, Los Tortus, Los Jobcitos, Los Combinasionas, Los 67, and Los Sekolahs.",
+      "appearance": "Like many Los Brainrot, Los Lucky Block has an appearance where Admin Lucky Blocks with normal faces, crying faces, and smiling faces are arranged horizontally. The normal lucky block is in the middle, the crying lucky block is in the left and the smiling face is in the right.",
+      "contents": [
+        {
+          "name": "Los Bombinitos",
+          "chance": "39.75%",
+          "income": "220k/s",
+          "links": []
+        },
+        {
+          "name": "Los Tungtungtungcitos",
+          "chance": "25%",
+          "income": "210k/s",
+          "links": []
+        },
+        {
+          "name": "Los Orcalitos",
+          "chance": "15%",
+          "income": "235k/s",
+          "links": []
+        },
+        {
+          "name": "Los Tipi Tacos",
+          "chance": "10%",
+          "income": "260k/s",
+          "links": []
+        },
+        {
+          "name": "Los Tortus",
+          "chance": "5%",
+          "income": "500k/s",
+          "links": []
+        },
+        {
+          "name": "Los Jobcitos",
+          "chance": "3.5%",
+          "income": "1.5m/s",
+          "links": []
+        },
+        {
+          "name": "Los Combinasionas",
+          "chance": "1%",
+          "income": "15m/s",
+          "links": []
+        },
+        {
+          "name": "Los 67",
+          "chance": "0.5%",
+          "income": "22.5m/s",
+          "links": []
+        },
+        {
+          "name": "Los Sekolahs",
+          "chance": "0.25%",
+          "income": "110m/s",
+          "links": []
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/16/Los_lucky_blockss.png/revision/latest?cb=20251007132603"
+    },
+    {
+      "name": "Los Taco Blocks",
+      "slug": "los-taco-blocks",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/los-taco-blocks.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "Main article: Los Taco Blocks",
+      "appearance": "This Lucky Block takes the appearence of 3 littles Taco Lucky Blocks aligned in a horizontal line.",
+      "contents": [
+        {
+          "name": "Los Chihuaninis",
+          "chance": "50.9%",
+          "income": "160k/s",
+          "links": []
+        },
+        {
+          "name": "Los Gattitos",
+          "chance": "40%",
+          "income": "275k/s",
+          "links": []
+        },
+        {
+          "name": "Los Cucurachas",
+          "chance": "5%",
+          "income": "1.2m/s",
+          "links": []
+        },
+        {
+          "name": "Los Quesadillas",
+          "chance": "3.5%",
+          "income": "4.5m/s",
+          "links": []
+        },
+        {
+          "name": "Los Burritos",
+          "chance": "0.5%",
+          "income": "8.5m/s",
+          "links": []
+        },
+        {
+          "name": "Los Amigos",
+          "chance": "0.1%",
+          "income": "130m/s",
+          "links": []
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a9/Los_Taco_Lucky_Blocks.png/revision/latest?cb=20251016005952"
+    },
+    {
+      "name": "Spooky Lucky Block",
+      "slug": "spooky-lucky-block",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/spooky-lucky-block.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "The Spooky Lucky Block is a Lucky Block that was released on October 25, 2025. It could have been obtained by participating in Admin Abuses or using 500 Candy Corns to spawn it in when certain Halloween events were active. These Lucky Blocks will never be spawned in again until halloween 2026 (Not confirmed). Spooky Lucky Block has 8 Brainrots, they are Mummy Ambalabu, Cappucino Clownino, Jackorilla, Trickolino, Telemorte, Los Spooky Combinasionas, and La Casa Boo.",
+      "appearance": "It is an orange pumpkin/jack o' lantern with white wings and question marks in the eyes.",
+      "contents": [
+        {
+          "name": "Mummy Ambalabu",
+          "chance": "32.7%",
+          "income": "250k/s",
+          "links": []
+        },
+        {
+          "name": "Cappucino Clownino",
+          "chance": "32.5%",
+          "income": "285k/s",
+          "links": []
+        },
+        {
+          "name": "Jackorilla",
+          "chance": "19.5%",
+          "income": "315k/s",
+          "links": []
+        },
+        {
+          "name": "Pumpkini Spyderini",
+          "chance": "9%",
+          "income": "650k/s",
+          "links": []
+        },
+        {
+          "name": "Trickolino",
+          "chance": "3%",
+          "income": "900k/s",
+          "links": []
+        },
+        {
+          "name": "Telemorte",
+          "chance": "2%",
+          "income": "2m/s",
+          "links": []
+        },
+        {
+          "name": "Los Spooky Combinasionas",
+          "chance": "1%",
+          "income": "20m/s",
+          "links": []
+        },
+        {
+          "name": "La Casa Boo",
+          "chance": "0.3%",
+          "income": "100m/s",
+          "links": []
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/2d/Spooky_block.png/revision/latest?cb=20251026090952"
+    },
+    {
+      "name": "Festive Lucky Block",
+      "slug": "festive-lucky-block",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/festive-lucky-block.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "The Festive Lucky Block was released on the 13th of December, 2025. It can be obtained from the Advent Calendar, or place them on Santa's sleigh during North Pole Event, or purchase for 300 candy canes and buying in the Robux Shop. These Lucky Blocks will never spawned in again until Christmas 2026 (Not confirmed). The Festive Lucky Block has 8 brainrots, they are Chrismatmamat, Pandanini Frostini, Triplito Tralaleritos, Santa Hotspot, Los 25, Chimnino, La Ginger Sekolah, and Reinito Sleighnito.",
+      "appearance": "It appears as a green with a red ribbon giftbox, having two white wings, a smile and eyes with question marks.",
+      "contents": [
+        {
+          "name": "Chrismatmamat",
+          "chance": "30.9%",
+          "income": "277.5k/s",
+          "links": []
+        },
+        {
+          "name": "Pandanini Frostini",
+          "chance": "30%",
+          "income": "294k/s",
+          "links": []
+        },
+        {
+          "name": "Triplito Tralaleritos",
+          "chance": "25%",
+          "income": "875k/s",
+          "links": []
+        },
+        {
+          "name": "Santa Hotspot",
+          "chance": "10%",
+          "income": "2.6m/s",
+          "links": []
+        },
+        {
+          "name": "Los 25",
+          "chance": "2.5%",
+          "income": "10m/s",
+          "links": []
+        },
+        {
+          "name": "Chimnino",
+          "chance": "1%",
+          "income": "14m/s",
+          "links": []
+        },
+        {
+          "name": "La Ginger Sekolah",
+          "chance": "0.5%",
+          "income": "75m/s",
+          "links": []
+        },
+        {
+          "name": "Reinito Sleighito",
+          "chance": "0.1%",
+          "income": "140m/s",
+          "links": []
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/24/FestiveLuckyBlockRealF4Leak.png/revision/latest?cb=20251130105118"
+    },
+    {
+      "name": "Heart Lucky Block",
+      "slug": "heart-lucky-block",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/heart-lucky-block.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "The Heart Lucky Block is a Lucky Block that will release sometime in the future. It will be obtained either by participating in an Admin Abuse or using an unknown amount of the new currency to spawn it. There will be 8 brainrots that can be obtained, which are yet to be leaked.",
+      "appearance": "The appearance is a pink heart, with wings and question marks on the sides of it. The front side has a face, consisting of black eyes, where the pupils are question marks, with the overall shape of the eye being a heart, along with a :3 mouth.",
+      "contents": [
+        {
+          "name": "Luv Luv Luv",
+          "chance": "30.95%",
+          "income": "$282.5K",
+          "links": [
+            {
+              "name": "Luv Luv Luv",
+              "page": "Luv Luv Luv",
+              "url": "https://stealabrainrot.fandom.com/wiki/Luv_Luv_Luv"
+            }
+          ]
+        },
+        {
+          "name": "Karkerheart Luvkur",
+          "chance": "30%",
+          "income": "297.5K",
+          "links": [
+            {
+              "name": "Karkerheart Luvkur",
+              "page": "Karkerheart Luvkur",
+              "url": "https://stealabrainrot.fandom.com/wiki/Karkerheart_Luvkur"
+            }
+          ]
+        },
+        {
+          "name": "Love Love Love Sahur",
+          "chance": "25%",
+          "income": "1M",
+          "links": [
+            {
+              "name": "Love Love Love Sahur",
+              "page": "Love Love Love Sahur",
+              "url": "https://stealabrainrot.fandom.com/wiki/Love_Love_Love_Sahur"
+            }
+          ]
+        },
+        {
+          "name": "Cupid Hotspot",
+          "chance": "10%",
+          "income": "3.5M",
+          "links": [
+            {
+              "name": "Cupid Hotspot",
+              "page": "Cupid Hotspot",
+              "url": "https://stealabrainrot.fandom.com/wiki/Cupid_Hotspot"
+            }
+          ]
+        },
+        {
+          "name": "Noo My Heart",
+          "chance": "2.5%",
+          "income": "13M",
+          "links": [
+            {
+              "name": "Noo My Heart",
+              "page": "Noo my Heart",
+              "url": "https://stealabrainrot.fandom.com/wiki/Noo_my_Heart"
+            }
+          ]
+        },
+        {
+          "name": "Chicleteria Cupideria",
+          "chance": "1%",
+          "income": "17.5M",
+          "links": [
+            {
+              "name": "Chicleteria Cupideria",
+              "page": "Chicleteira Cupideira",
+              "url": "https://stealabrainrot.fandom.com/wiki/Chicleteira_Cupideira"
+            }
+          ]
+        },
+        {
+          "name": "Rosetti Tualetti",
+          "chance": "0.5%",
+          "income": "50M",
+          "links": [
+            {
+              "name": "Rosetti Tualetti",
+              "page": "Rosetti Tualetti",
+              "url": "https://stealabrainrot.fandom.com/wiki/Rosetti_Tualetti"
+            }
+          ]
+        },
+        {
+          "name": "Rosey and Teddy",
+          "chance": "0.05%",
+          "income": "165M",
+          "links": [
+            {
+              "name": "Rosey and Teddy",
+              "page": "Rosey and Teddy",
+              "url": "https://stealabrainrot.fandom.com/wiki/Rosey_and_Teddy"
+            }
+          ]
+        }
+      ],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/43/Valentine%27s_luck_block.png/revision/latest/scale-to-width-down/268?cb=20260202090627"
+    },
+    {
+      "name": "Leprechaun Lucky Block",
+      "slug": "leprechaun-lucky-block",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/leprechaun-lucky-block.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "The Leprechaun Lucky Block is a Lucky Block that was released on March 14, 2026. It can be obtained by participating in Admin Abuse, using 50 Gold Coins to buy it or buying it in the Robux Shop. The Leprechaun Lucky Block has 7 Brainrots.",
+      "appearance": null,
+      "contents": [],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/19/Leprechaun_Lucky_Block.png/revision/latest?cb=20260316134453"
+    },
+    {
+      "name": "Egg Lucky Block",
+      "slug": "egg-lucky-block",
+      "image": "/Steal%20a%20Brainrot/Lucky%20Blocks/egg-lucky-block.webp",
+      "cost": null,
+      "gender": null,
+      "rarity": null,
+      "status": null,
+      "sound": null,
+      "description": "The Egg Lucky Block is a Lucky Block that was released on April 4th 2026. It can be obtainable by participating in Admin Abuse, using 250 coins or buying in the Robux shop. The Egg Lucky Block has 8 Brainrots.",
+      "appearance": null,
+      "contents": [],
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a4/EggBlock.png/revision/latest?cb=20260405230823"
+    }
+  ]
+}

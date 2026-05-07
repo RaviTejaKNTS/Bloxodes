@@ -14,6 +14,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `scripts/AGENTS.md`: automation jobs, preferred npm commands, and script authoring rules.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
+- `agents/wiki-catalog-workflow.md`: repeatable local-first process for turning game datasets into wiki and catalog pages.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
 
 ## Architecture Snapshot
@@ -52,6 +53,14 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 3. Update metadata, canonical handling, and structured data.
 4. Update `apps/web/src/app/sitemap.xml/route.ts`, `apps/web/src/app/sitemaps/*`, `apps/web/src/app/feed.xml/route.ts`, or `apps/web/src/app/api/revalidate/route.ts` if the content is publishable.
 5. Refresh the relevant inventory doc in `agents/`.
+
+### Game wiki and catalog pages
+
+1. Follow `agents/wiki-catalog-workflow.md`.
+2. Seed and preview `wiki_pages` and `catalog_pages` locally before production.
+3. Keep catalog codes in `<game-slug>-<collection-slug>` format.
+4. Verify local dataset images, item counts, metadata, sitemaps, search, and revalidation before publishing.
+5. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
 
 ### API or auth flow
 

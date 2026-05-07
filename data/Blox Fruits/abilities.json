@@ -1,0 +1,267 @@
+{
+  "meta": {
+    "title": "Blox Fruits abilities data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Blox Fruits Wiki - Category:Abilities",
+        "url": "https://blox-fruits.fandom.com/wiki/Category%3AAbilities",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "fields",
+      "overview",
+      "wikiUrl"
+    ]
+  },
+  "items": [
+    {
+      "name": "Agility",
+      "slug": "agility",
+      "image": "/Blox%20Fruits/Abilities/agility.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b7/Agility2.gif/revision/latest?cb=20250106135643",
+      "fields": {
+        "type": "Ability",
+        "releaseDate": "November 23, 2019",
+        "source": "Arowe",
+        "costToBuy": "2,000,000"
+      },
+      "overview": "Upon activating Agility, the user sends out a burst of green lighting. When this ability is active, the user gains a green and black aura that resembles lightning. The user also gains a lighting cross around their torso and a green heart on the left side of their chest.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Agility"
+    },
+    {
+      "name": "Air Jump",
+      "slug": "air-jump",
+      "image": "/Blox%20Fruits/Abilities/air-jump.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5e/New_sky_jump.gif/revision/latest/scale-to-width-down/268?cb=20230804142318",
+      "fields": {
+        "dateOfAddition": "January 16, 2019",
+        "locations": "Frozen Village (First Sea)Magma Village (First Sea)",
+        "source": "Ability Teacher"
+      },
+      "overview": "Air Jump, formerly known as \"Skyjump\", is an ability that allows the user to jump in the air multiple times.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Air_Jump"
+    },
+    {
+      "name": "Aura",
+      "slug": "aura",
+      "image": "/Blox%20Fruits/Abilities/aura.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4f/Aura.png/revision/latest/scale-to-width-down/268?cb=20250827195422",
+      "fields": {
+        "dateOfAddition": "January 16, 2019",
+        "locations": "Frozen VillageMagma Village",
+        "source": "Ability Teacher",
+        "objectsAffected": "PlayersEnemiesWeapons",
+        "level": "No official Level requiment"
+      },
+      "overview": "Aura (formerly known as Enhancement) is an ability that allows the user to coat a certain body part in black armor, improving the user's damage & defense along with letting the user bypass an Elemental Fruit's Elemental Reflex. Aura is cheap, easily obtainable, and especially useful, and as such it is recommended that new players get it as soon as possible.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Aura"
+    },
+    {
+      "name": "Brazil World",
+      "slug": "brazil-world",
+      "image": "/Blox%20Fruits/Abilities/brazil-world.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0e/Brazil_WORLD.png/revision/latest/scale-to-width-down/268?cb=20240506150955",
+      "fields": {
+        "purpose": "Possibly fun purposes"
+      },
+      "overview": "The Brazil World is an admin-exclusive ability.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Brazil_World"
+    },
+    {
+      "name": "Dashing",
+      "slug": "dashing",
+      "image": "/Blox%20Fruits/Abilities/dashing.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/ac/Dashground.gif/revision/latest/scale-to-width-down/268?cb=20240215084519",
+      "fields": {
+        "dateOfAddition": "January 16, 2019"
+      },
+      "overview": "When a player dashes, they will move forward faster than normal for a short distance while consuming some energy. The lengths of dashing can be increased through certain accessories, Rabbit or Ghoul.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dashing"
+    },
+    {
+      "name": "Dragon Tether",
+      "slug": "dragon-tether",
+      "image": null,
+      "sourceImageUrl": null,
+      "fields": {},
+      "overview": "Dragon Tether is an ability which allows the player to obtain the Dragon Egg from Prehistoric Island. It is needed for obtaining the Draco race, Dragonheart and Dragonstorm. It is learned from the Dragon Wizard.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_Tether"
+    },
+    {
+      "name": "Energy Core",
+      "slug": "energy-core",
+      "image": "/Blox%20Fruits/Abilities/energy-core.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ef/EnergyCoreNew.gif/revision/latest/scale-to-width-down/268?cb=20250108020501",
+      "fields": {
+        "type": "Ability",
+        "releaseDate": "March 20, 2021",
+        "source": "Arowe",
+        "costToBuy": "2,000,000"
+      },
+      "overview": "Upon activating Energy Core, purple lightning bursts from the player. When this ability is activated, purple static appears around the user, purple energy covers the user's arms and torso, lightning bolts continuously appear around the user, a pink rotating energy crosshair appears in front of the user's face, and a purple heart appears on the left of their chest.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Energy_Core"
+    },
+    {
+      "name": "Flash Step",
+      "slug": "flash-step",
+      "image": "/Blox%20Fruits/Abilities/flash-step.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6f/Flash_Step.gif/revision/latest/scale-to-width-down/267?cb=20250309050132",
+      "fields": {
+        "dateOfAddition": "January 16, 2019",
+        "locations": "Frozen VillageMagma Village",
+        "source": "Ability Teacher",
+        "objectsAffected": "Players"
+      },
+      "overview": "Flash Step lets the user teleport at the cost of 10 energy, a limited medium range, as well as a cooldown of 15 seconds. It can be used by either pressing the [R] key while on PC, pressing the \"Flash Step\" button and then tapping on a location while on mobile, or pressing the right joystick with a controller. It is most often used to avoid attacks/combos from other players.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Flash_Step"
+    },
+    {
+      "name": "Heavenly Blood",
+      "slug": "heavenly-blood",
+      "image": "/Blox%20Fruits/Abilities/heavenly-blood.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c1/Heavenlybloodgif.gif/revision/latest/scale-to-width-down/268?cb=20250106020156",
+      "fields": {
+        "type": "Ability",
+        "releaseDate": "November 23, 2019",
+        "source": "Arowe",
+        "costToBuy": "2,000,000"
+      },
+      "overview": "Upon activation, golden feathers burst from the player. When this ability is active, golden static appears around the user, chains cover the user's arms and torso, and a golden heart appears on the left side of their chest.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Heavenly_Blood"
+    },
+    {
+      "name": "Heightened Senses",
+      "slug": "heightened-senses",
+      "image": "/Blox%20Fruits/Abilities/heightened-senses.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6b/Heightened_Senses_base.gif/revision/latest/scale-to-width-down/268?cb=20260120193648",
+      "fields": {
+        "type": "Ability",
+        "releaseDate": "October 21, 2020",
+        "source": "Arowe",
+        "costToBuy": "2,000,000"
+      },
+      "overview": "Upon activating Heightened Senses, red crows burst from the player. While the ability is active, red static appears around the user, blood cover the user's arms and torso, and a red heart appears on the left side of their chest.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Heightened_Senses"
+    },
+    {
+      "name": "Instinct",
+      "slug": "instinct",
+      "image": "/Blox%20Fruits/Abilities/instinct.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9f/Instinct.png/revision/latest/scale-to-width-down/268?cb=20250827195555",
+      "fields": {
+        "dateOfAddition": "June 30, 2019",
+        "purpose": "Dodging attacks and seeing entities through objects",
+        "locations": "Upper Skylands",
+        "source": "Instinct Teacher",
+        "levelRequirement": "300"
+      },
+      "overview": "Instinct can be upgraded to Instinct V2 after completing the Citizen's quest and getting 5000 EXP5000 EXP on normal Instinct.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Instinct"
+    },
+    {
+      "name": "Instinct/Break",
+      "slug": "instinct-break",
+      "image": null,
+      "sourceImageUrl": null,
+      "fields": {},
+      "overview": "Instinct breaking is the act of forcing someone out of their Instinct state. This can be achieved by attacking with specific moves.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Instinct%2FBreak"
+    },
+    {
+      "name": "Instinct/V2",
+      "slug": "instinct-v2",
+      "image": "/Blox%20Fruits/Abilities/instinct-v2.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0c/Instinct-V1-vs-V2.png/revision/latest/scale-to-width-down/703?cb=20240215102708",
+      "fields": {},
+      "overview": "Instinct V2 is an upgraded version of Instinct and can only be unlocked in the Third Sea with certain requirements.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Instinct%2FV2"
+    },
+    {
+      "name": "Last Resort",
+      "slug": "last-resort",
+      "image": "/Blox%20Fruits/Abilities/last-resort.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/ca/Ezgif-6-4f660bf95c.gif/revision/latest/scale-to-width-down/268?cb=20250108132427",
+      "fields": {
+        "type": "Ability",
+        "releaseDate": "November 23, 2019",
+        "source": "Arowe",
+        "costToBuy": "2,000,000"
+      },
+      "overview": "Last Resort is the V3 ability of Human, unlockable through Arowe. It can only be used while the player is of the Human race. Like all V3 abilities, it can be quickly activated using the [T] key, or up D-Pad on console.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Last_Resort"
+    },
+    {
+      "name": "Pakistan Dimension",
+      "slug": "pakistan-dimension",
+      "image": "/Blox%20Fruits/Abilities/pakistan-dimension.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/99/Paskistan_kamui.png/revision/latest/scale-to-width-down/268?cb=20220113025835",
+      "fields": {
+        "type": "Enclosed Space"
+      },
+      "overview": "A huge black box is outside the Pakistan Dimension. Inside, there's a Mazar-e-Quaid with a Pakistani flag on top.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pakistan_Dimension"
+    },
+    {
+      "name": "Primordial Reign",
+      "slug": "primordial-reign",
+      "image": "/Blox%20Fruits/Abilities/primordial-reign.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/71/Primordial_Reign_Base.gif/revision/latest/scale-to-width-down/268?cb=20260120193651",
+      "fields": {
+        "type": "Ability",
+        "releaseDate": "December 14, 2024",
+        "source": "Dragon Wizard",
+        "costToBuy": "3,000,000"
+      },
+      "overview": "Upon activating Primordial Reign, the user roars, causing a large orange VFX, and a green dragon to start circling them. If it the roar reaches nearby enemies, an orange dragon will start circling them. While the ability is active, the user gains an orange and purple aura and flames coming out of the users back. The user also gains an orange and purple heart.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Primordial_Reign"
+    },
+    {
+      "name": "Race Awakening",
+      "slug": "race-awakening",
+      "image": "/Blox%20Fruits/Abilities/race-awakening.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/32/Race_v4_%28Full_Version%29.gif/revision/latest/scale-to-width-down/268?cb=20240911035957",
+      "fields": {
+        "dateOfAddition": "January 06, 2023",
+        "locations": "Third Sea"
+      },
+      "overview": "These upgrades are unlocked by completing a series of quests, puzzles, and trials, with requirements and content varying based on the chosen race.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Race_Awakening"
+    },
+    {
+      "name": "Skins",
+      "slug": "skins",
+      "image": "/Blox%20Fruits/Abilities/skins.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c2/FragmentIcon.png/revision/latest/scale-to-width-down/12?cb=20240828233755",
+      "fields": {},
+      "overview": "Skins are wearable cosmetics that change the visuals of certain abilities and transformations.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skins"
+    },
+    {
+      "name": "Summon Sea Beast",
+      "slug": "summon-sea-beast",
+      "image": null,
+      "sourceImageUrl": null,
+      "fields": {},
+      "overview": "The Summon Sea Beast tool can be obtained permanently by reaching 10,000,000 (10M) Bounty or Honor, meaning the player still keeps Summon Sea Beast even if they drop below 10,000,000 Bounty or Honor. Moreover, If the player received 10,000,000 Bounty or Honor, and they switch to a team where they do not have 10,000,000+ Bounty or Honor, they will still have the Summon Sea Beast tool.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Summon_Sea_Beast"
+    },
+    {
+      "name": "Water Body",
+      "slug": "water-body",
+      "image": "/Blox%20Fruits/Abilities/water-body.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f5/WaterBody2.gif/revision/latest/scale-to-width-down/268?cb=20250106020555",
+      "fields": {
+        "type": "Ability",
+        "releaseDate": "November 23, 2019",
+        "source": "Arowe",
+        "costToBuy": "2,000,000"
+      },
+      "overview": "Upon activating Water Body, the user sends out small sharks. When this ability is active, the user gains a blue and black aura that resembles lightning, and the user also gains a water-like cross on their torso and a blue heart on the left side of their chest.",
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Water_Body"
+    }
+  ]
+}

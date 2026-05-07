@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "title": "Sailor Piece relics data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Sailor Piece Wiki - relics",
+        "url": "https://sailorpiece.org/wiki/relics/",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "tier",
+      "effect",
+      "recipe",
+      "tags",
+      "description"
+    ]
+  },
+  "items": [
+    {
+      "name": "Damage Relic",
+      "slug": "damage-relic",
+      "tier": "S+",
+      "rarity": null,
+      "category": "sea-2",
+      "type": null,
+      "effect": "+30% Damage",
+      "bonus": "+30% Damage",
+      "recipe": "40x Part #7 + 30x Part #8 + 50x Part #1 + 50x Part #3",
+      "description": "40x Part #7 + 30x Part #8 + 50x Part #1 + 50x Part #3",
+      "stats": {
+        "recipe": "40x Part #7 + 30x Part #8 + 50x Part #1 + 50x Part #3"
+      },
+      "requirements": null,
+      "obtainment": null,
+      "tags": [
+        "sea-2"
+      ]
+    },
+    {
+      "name": "Crit Damage Relic",
+      "slug": "crit-damage-relic",
+      "tier": "A",
+      "rarity": null,
+      "category": "sea-2",
+      "type": null,
+      "effect": "+20% Crit Damage",
+      "bonus": "+20% Crit Damage",
+      "recipe": "25x Part #3 + 20x Part #4",
+      "description": "Recipe",
+      "stats": {
+        "recipe": "25x Part #3 + 20x Part #4"
+      },
+      "requirements": null,
+      "obtainment": null,
+      "tags": [
+        "sea-2"
+      ]
+    },
+    {
+      "name": "Luck Relic",
+      "slug": "luck-relic",
+      "tier": "A",
+      "rarity": null,
+      "category": "sea-2",
+      "type": null,
+      "effect": "+20% Luck",
+      "bonus": "+20% Luck",
+      "recipe": "30x Part #5 + 25x Part #6",
+      "description": "Recipe",
+      "stats": {
+        "recipe": "30x Part #5 + 25x Part #6"
+      },
+      "requirements": null,
+      "obtainment": null,
+      "tags": [
+        "sea-2"
+      ]
+    },
+    {
+      "name": "Crit Chance Relic",
+      "slug": "crit-chance-relic",
+      "tier": "B",
+      "rarity": null,
+      "category": "sea-2",
+      "type": null,
+      "effect": "+5% Crit Chance",
+      "bonus": "+5% Crit Chance",
+      "recipe": "20x Part #1 + 15x Part #2",
+      "description": "Recipe",
+      "stats": {
+        "recipe": "20x Part #1 + 15x Part #2"
+      },
+      "requirements": null,
+      "obtainment": null,
+      "tags": [
+        "sea-2"
+      ]
+    }
+  ]
+}

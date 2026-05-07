@@ -17,10 +17,6 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE!
 );
 
-const GOOGLE_SEARCH_KEY = process.env.GOOGLE_SEARCH_KEY!;
-const GOOGLE_SEARCH_CX = process.env.GOOGLE_SEARCH_CX!;
-let googleSearchCallCount = 0;
-
 const sleep = (ms: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -52,12 +48,6 @@ const sortCandidates = (list: InterlinkGame[]): InterlinkGame[] =>
     if (aLinks !== bLinks) return aLinks - bLinks;
     return a.name.localeCompare(b.name);
   });
-
-type SearchEntry = {
-  title: string;
-  url: string;
-  snippet?: string;
-};
 
 type ArticleResponse = {
   intro_md: string;
@@ -97,6 +87,13 @@ type ExistingGameRecord = {
   source_url: string | null;
   source_url_2: string | null;
   source_url_3: string | null;
+  source_url_4: string | null;
+  source_url_5: string | null;
+  source_url_6: string | null;
+  source_url_7: string | null;
+  source_url_8: string | null;
+  source_url_9: string | null;
+  source_url_10: string | null;
   universe_id: number | null;
   intro_md: string | null;
   redeem_md: string | null;
@@ -104,6 +101,7 @@ type ExistingGameRecord = {
   rewards_md: string | null;
   find_codes_md: string | null;
   seo_description: string | null;
+  created_at: string | null;
 };
 
 type UniverseMeta = {
@@ -136,9 +134,26 @@ type InterlinkPromptContext = {
 };
 
 const GAME_ARTICLE_SELECT =
-  "id, name, slug, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, seo_description";
+  "id, name, slug, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, source_url_4, source_url_5, source_url_6, source_url_7, source_url_8, source_url_9, source_url_10, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, seo_description, created_at";
 const MISSING_ARTICLE_CONTENT_FILTER =
   "intro_md.is.null,redeem_md.is.null,troubleshoot_md.is.null,rewards_md.is.null,find_codes_md.is.null,seo_description.is.null";
+const DRAFT_GAME_PAGE_SIZE = 1000;
+const PRIMARY_SOURCE_FIELDS = ["source_url"] as const;
+const ARTICLE_SOURCE_FIELDS = [
+  "source_url_2",
+  "source_url_3",
+  "source_url_4",
+  "source_url_5",
+  "source_url_6",
+  "source_url_7",
+  "source_url_8",
+  "source_url_9",
+  "source_url_10"
+] as const;
+const ALL_ARTICLE_RESEARCH_SOURCE_FIELDS = [...PRIMARY_SOURCE_FIELDS, ...ARTICLE_SOURCE_FIELDS] as const;
+
+type ArticleSourceField = (typeof ARTICLE_SOURCE_FIELDS)[number];
+type ResearchSourceField = (typeof ALL_ARTICLE_RESEARCH_SOURCE_FIELDS)[number];
 
 const normalizeInterlinkGame = (row: InterlinkGameQuery): InterlinkGame => ({
   ...row,
@@ -150,32 +165,6 @@ function isArticleResponse(value: unknown): value is ArticleResponse {
   const candidate = value as Record<string, unknown>;
   return ["intro_md", "redeem_md", "troubleshoot_md", "rewards_md", "find_codes_md", "meta_description", "game_display_name"].every(
     (key) => typeof candidate[key] === "string" && Boolean(candidate[key])
-  );
-}
-
-async function googleSearch(query: string, limit = 5): Promise<SearchEntry[]> {
-  googleSearchCallCount += 1;
-  const url = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(
-    query
-  )}&num=${limit}&key=${GOOGLE_SEARCH_KEY}&cx=${GOOGLE_SEARCH_CX}`;
-
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Google Search failed: ${res.statusText}`);
-  }
-
-  const data = (await res.json()) as {
-    items?: { title?: string; link?: string; snippet?: string }[];
-  };
-
-  return (
-    data.items
-      ?.map((item) => ({
-        title: item.title ?? "",
-        url: item.link ?? "",
-        snippet: item.snippet,
-      }))
-      .filter((item) => item.title && item.url) ?? []
   );
 }
 
@@ -445,6 +434,48 @@ function uniqueUrls(urls: string[]): string[] {
   return result;
 }
 
+function sourceUrlsFromFields(game: ExistingGameRecord, fields: readonly ResearchSourceField[]): string[] {
+  return uniqueUrls(fields.flatMap((field) => splitSourceUrls(game[field])));
+}
+
+function articleSourceUrls(game: ExistingGameRecord): string[] {
+  return sourceUrlsFromFields(game, ARTICLE_SOURCE_FIELDS);
+}
+
+function hasArticleSourcesBeyondPrimary(game: ExistingGameRecord): boolean {
+  return articleSourceUrls(game).length > 0;
+}
+
+function sourceFieldCount(game: ExistingGameRecord, field: ArticleSourceField): number {
+  return splitSourceUrls(game[field]).length;
+}
+
+function compareDraftGamePriority(a: ExistingGameRecord, b: ExistingGameRecord): number {
+  const aSourceCount = articleSourceUrls(a).length;
+  const bSourceCount = articleSourceUrls(b).length;
+  if (aSourceCount !== bSourceCount) return bSourceCount - aSourceCount;
+
+  const aHasSourceUrl2 = sourceFieldCount(a, "source_url_2") > 0 ? 1 : 0;
+  const bHasSourceUrl2 = sourceFieldCount(b, "source_url_2") > 0 ? 1 : 0;
+  if (aHasSourceUrl2 !== bHasSourceUrl2) return bHasSourceUrl2 - aHasSourceUrl2;
+
+  const aHasSourceUrl3 = sourceFieldCount(a, "source_url_3") > 0 ? 1 : 0;
+  const bHasSourceUrl3 = sourceFieldCount(b, "source_url_3") > 0 ? 1 : 0;
+  if (aHasSourceUrl3 !== bHasSourceUrl3) return bHasSourceUrl3 - aHasSourceUrl3;
+
+  const aHasSourceUrl4 = sourceFieldCount(a, "source_url_4") > 0 ? 1 : 0;
+  const bHasSourceUrl4 = sourceFieldCount(b, "source_url_4") > 0 ? 1 : 0;
+  if (aHasSourceUrl4 !== bHasSourceUrl4) return bHasSourceUrl4 - aHasSourceUrl4;
+
+  const aCreated = Date.parse(a.created_at ?? "");
+  const bCreated = Date.parse(b.created_at ?? "");
+  if (Number.isFinite(aCreated) && Number.isFinite(bCreated) && aCreated !== bCreated) {
+    return aCreated - bCreated;
+  }
+
+  return a.name.localeCompare(b.name);
+}
+
 async function loadDraftGames(limit: number, slug: string | null): Promise<ExistingGameRecord[]> {
   if (slug) {
     const { data, error } = await supabase
@@ -455,75 +486,54 @@ async function loadDraftGames(limit: number, slug: string | null): Promise<Exist
       .limit(1);
 
     if (error) throw new Error(`Failed to load draft games: ${error.message}`);
-    return ((data ?? []) as ExistingGameRecord[]).filter((game) => Boolean(game.id && game.name && game.slug));
+    const selected = ((data ?? []) as ExistingGameRecord[])
+      .filter((game) => Boolean(game.id && game.name && game.slug))
+      .filter(hasArticleSourcesBeyondPrimary);
+    if (!selected.length) {
+      console.log(`⏭️ ${slug} has no article-writing sources beyond source_url. Skipping.`);
+    }
+    return selected;
   }
 
-  const withSourceUrl2 = await loadDraftGamesWithSourceUrl2(limit);
-  if (withSourceUrl2.length > 0) {
-    console.log(`🎯 Prioritizing ${withSourceUrl2.length} draft game${withSourceUrl2.length === 1 ? "" : "s"} with source_url_2.`);
-    return withSourceUrl2;
+  const candidates = await loadDraftGamesWithArticleSources();
+  const selected = candidates.sort(compareDraftGamePriority).slice(0, limit);
+  if (selected.length > 0) {
+    const withSourceUrl2 = selected.filter((game) => sourceFieldCount(game, "source_url_2") > 0).length;
+    const withSourceUrl3 = selected.filter((game) => sourceFieldCount(game, "source_url_3") > 0).length;
+    const withSourceUrl4 = selected.filter((game) => sourceFieldCount(game, "source_url_4") > 0).length;
+    console.log(
+      `🎯 Picked ${selected.length} sourced draft game${selected.length === 1 ? "" : "s"} ` +
+        `(source_url_2: ${withSourceUrl2}, source_url_3: ${withSourceUrl3}, source_url_4: ${withSourceUrl4}).`
+    );
   }
-
-  const fallback = await loadRandomDraftGamesWithoutSourceUrl2(limit);
-  if (fallback.length > 0) {
-    console.log(`🎲 No source_url_2 drafts found. Picked ${fallback.length} remaining draft game${fallback.length === 1 ? "" : "s"}.`);
-  }
-  return fallback;
+  return selected;
 }
 
-async function loadDraftGamesWithSourceUrl2(limit: number): Promise<ExistingGameRecord[]> {
-  const { data, error } = await supabase
-    .from("games")
-    .select(GAME_ARTICLE_SELECT)
-    .eq("is_published", false)
-    .or(MISSING_ARTICLE_CONTENT_FILTER)
-    .not("source_url_2", "is", null)
-    .neq("source_url_2", "")
-    .order("created_at", { ascending: true })
-    .limit(limit);
+async function loadDraftGamesWithArticleSources(): Promise<ExistingGameRecord[]> {
+  const games: ExistingGameRecord[] = [];
+  for (let from = 0; ; from += DRAFT_GAME_PAGE_SIZE) {
+    const to = from + DRAFT_GAME_PAGE_SIZE - 1;
+    const { data, error } = await supabase
+      .from("games")
+      .select(GAME_ARTICLE_SELECT)
+      .eq("is_published", false)
+      .or(MISSING_ARTICLE_CONTENT_FILTER)
+      .order("created_at", { ascending: true })
+      .range(from, to);
 
-  if (error) throw new Error(`Failed to load draft games with source_url_2: ${error.message}`);
-  return ((data ?? []) as ExistingGameRecord[]).filter((game) => Boolean(game.id && game.name && game.slug));
-}
-
-async function loadRandomDraftGamesWithoutSourceUrl2(limit: number): Promise<ExistingGameRecord[]> {
-  const countQuery = await supabase
-    .from("games")
-    .select("id", { count: "exact", head: true })
-    .eq("is_published", false)
-    .or(MISSING_ARTICLE_CONTENT_FILTER)
-    .or("source_url_2.is.null,source_url_2.eq.");
-
-  if (countQuery.error) throw new Error(`Failed to count draft games without source_url_2: ${countQuery.error.message}`);
-
-  const total = countQuery.count ?? 0;
-  if (total <= 0) return [];
-
-  const safeLimit = Math.min(limit, total);
-  const maxOffset = Math.max(0, total - safeLimit);
-  const offset = maxOffset > 0 ? Math.floor(Math.random() * (maxOffset + 1)) : 0;
-
-  const { data, error } = await supabase
-    .from("games")
-    .select(GAME_ARTICLE_SELECT)
-    .eq("is_published", false)
-    .or(MISSING_ARTICLE_CONTENT_FILTER)
-    .or("source_url_2.is.null,source_url_2.eq.")
-    .order("created_at", { ascending: true })
-    .range(offset, offset + safeLimit - 1);
-
-  if (error) throw new Error(`Failed to load random draft games without source_url_2: ${error.message}`);
-  return ((data ?? []) as ExistingGameRecord[]).filter((game) => Boolean(game.id && game.name && game.slug));
+    if (error) throw new Error(`Failed to load sourced draft games: ${error.message}`);
+    const batch = ((data ?? []) as ExistingGameRecord[])
+      .filter((game) => Boolean(game.id && game.name && game.slug))
+      .filter(hasArticleSourcesBeyondPrimary);
+    games.push(...batch);
+    if ((data ?? []).length < DRAFT_GAME_PAGE_SIZE) break;
+  }
+  return games;
 }
 
 async function collectArticleSources(game: ExistingGameRecord): Promise<string> {
-  console.log(`🔍 Collecting Google data for "${game.name}"...`);
-
-  const mainQuery = `"${game.name}" Roblox codes (site:beebom.com OR site:destructoid.com OR site:progameguides.com OR site:roblox.com OR site:pcgamesn.com OR site:pockettactics.com OR site:fandom.com OR site:tryhardguides.com OR site:techwiser.com)`;
-  const mainResults = await googleSearch(mainQuery, 5);
-  const topLinks = mainResults.slice(0, 3).map((entry) => entry.url);
-  const sourceUrl2Links = splitSourceUrls(game.source_url_2);
-  const articleUrls = uniqueUrls([...topLinks, ...sourceUrl2Links]);
+  const articleUrls = sourceUrlsFromFields(game, ALL_ARTICLE_RESEARCH_SOURCE_FIELDS);
+  console.log(`🔍 Reading ${articleUrls.length} existing source${articleUrls.length === 1 ? "" : "s"} for "${game.name}"...`);
 
   let fullText = "";
   for (const url of articleUrls) {
@@ -532,15 +542,15 @@ async function collectArticleSources(game: ExistingGameRecord): Promise<string> 
     await sleep(1500);
   }
 
+  if (!fullText.trim()) {
+    throw new Error(`No readable source text found for ${game.slug}.`);
+  }
+
   return fullText;
 }
 
 async function collectSocialLinksFromExistingSources(game: ExistingGameRecord): Promise<PlaceholderLinks> {
-  const sourceCandidates = uniqueUrls([
-    ...splitSourceUrls(game.source_url),
-    ...splitSourceUrls(game.source_url_2),
-    ...splitSourceUrls(game.source_url_3)
-  ]);
+  const sourceCandidates = sourceUrlsFromFields(game, ALL_ARTICLE_RESEARCH_SOURCE_FIELDS);
 
   if (!sourceCandidates.length) return {};
 
@@ -757,7 +767,6 @@ async function processDraftGame(game: ExistingGameRecord): Promise<void> {
     return;
   }
 
-  const googleBefore = googleSearchCallCount;
   const combinedSources = await collectArticleSources(game);
   const socialLinks = await collectSocialLinksFromExistingSources(game);
   const metadata = await collectRobloxMetadata(socialLinks.roblox_link?.url ?? game.roblox_link);
@@ -915,9 +924,6 @@ async function processDraftGame(game: ExistingGameRecord): Promise<void> {
     id: game.id,
     robloxLink: resolvedLinks.roblox_link?.url ?? null
   });
-
-  const googleAfter = googleSearchCallCount;
-  console.log(`🔎 Google searches used for ${game.slug}: ${googleAfter - googleBefore}`);
 }
 
 async function main() {
@@ -1170,14 +1176,10 @@ async function maybeAttachCoverImage(game: { slug: string; name: string; id?: st
     return;
   }
 
-  console.log("🖼️ Searching for cover image...");
+  console.log("🖼️ Checking Roblox cover image...");
   let imageUrl: string | null = null;
   if (game.robloxLink) {
     imageUrl = await fetchRobloxExperienceThumbnail(game.robloxLink);
-  }
-
-  if (!imageUrl) {
-    imageUrl = await findRobloxImageUrl(game.name);
   }
 
   if (!imageUrl) {
@@ -1298,46 +1300,6 @@ async function fetchRobloxThumbnailViaApi(gameUrl: string): Promise<string | nul
     console.warn("⚠️ Roblox thumbnail API failed:", error instanceof Error ? error.message : error);
     return null;
   }
-}
-
-async function findRobloxImageUrl(gameName: string): Promise<string | null> {
-  const query = `site:roblox.com ${gameName} game`;
-  const results = await googleSearch(query, 4);
-
-  for (const entry of results) {
-    if (!entry.url) continue;
-    if (!/roblox\.com\//i.test(entry.url)) continue;
-
-    const image = await fetchPrimaryImageFromPage(entry.url);
-    if (image) return image;
-    await sleep(1000);
-  }
-
-  return null;
-}
-
-async function fetchPrimaryImageFromPage(url: string): Promise<string | null> {
-  try {
-    const res = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } });
-    if (!res.ok) return null;
-
-    const html = await res.text();
-    const dom = new JSDOM(html);
-    const document = dom.window.document;
-
-    const metaOg = document.querySelector('meta[property="og:image"]') as HTMLMetaElement | null;
-    if (metaOg?.content) return metaOg.content;
-
-    const metaTwitter = document.querySelector('meta[name="twitter:image"]') as HTMLMetaElement | null;
-    if (metaTwitter?.content) return metaTwitter.content;
-
-    const img = document.querySelector("img") as HTMLImageElement | null;
-    if (img?.src) return img.src;
-  } catch (error) {
-    console.warn("⚠️ Failed to extract image from page", url, error);
-  }
-
-  return null;
 }
 
 async function downloadResizeAndUploadImage(params: {

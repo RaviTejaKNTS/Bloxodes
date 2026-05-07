@@ -1,0 +1,2226 @@
+{
+  "meta": {
+    "title": "Sailor Piece traits data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Sailor Piece Wiki - traits",
+        "url": "https://sailorpiece.org/wiki/traits/",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "tier",
+      "rarity",
+      "description",
+      "stats",
+      "pros",
+      "cons",
+      "wikiUrl"
+    ]
+  },
+  "items": [
+    {
+      "name": "Emperor",
+      "slug": "emperor",
+      "image": null,
+      "tier": "S+",
+      "rarity": "Secret",
+      "type": null,
+      "category": null,
+      "description": "The highest-damage trait in the game, added in the Massive Update 7.0. Emperor provides an unmatched 2.30x damage multiplier, 1.60x defense, and 30% cooldown reduction. Best-in-slot for pure damage builds — pairs exceptionally well with Warlord race for melee specs.",
+      "stats": {
+        "secret": "S+",
+        "damage_multiplier": "2.30x",
+        "defense_multiplier": "1.60x",
+        "cooldown_reduction": "30%",
+        "emperor_current": "S+",
+        "celestial": "S",
+        "singularity": "S",
+        "cataclysm": "S",
+        "overlord": "S"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+2.30x DMG — highest damage multiplier of any trait",
+        "+30% CDR enables ability chaining",
+        "+Best combo: Emperor + Warlord race for melee specs"
+      ],
+      "cons": [
+        "−Secret rarity — extremely rare",
+        "−Lower defense than Singularity/Overlord (1.60x)"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC (Japanese building, Sailor Island). Secret rarity — extremely rare.",
+      "unlock": "Trait Reroll at Trait NPC (Japanese building, Sailor Island). Secret rarity — extremely rare.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC (Japanese building, Sailor Island). Secret rarity — extremely rare.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Emperor (current)",
+              "Tier": "S+",
+              "DMG": "2.30x",
+              "DEF": "1.60x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Celestial",
+              "Tier": "S",
+              "DMG": "2.20x",
+              "DEF": "1.65x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Singularity",
+              "Tier": "S",
+              "DMG": "2.10x",
+              "DEF": "1.75x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Cataclysm",
+              "Tier": "S",
+              "DMG": "2.00x",
+              "DEF": "1.70x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Overlord",
+              "Tier": "S",
+              "DMG": "1.90x",
+              "DEF": "2.00x",
+              "CDR": "25%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-26",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/emperor/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Celestial",
+      "slug": "celestial",
+      "image": null,
+      "tier": "S",
+      "rarity": "Secret",
+      "type": null,
+      "category": null,
+      "description": "A top Secret trait surpassed only by Emperor. Celestial provides a 2.20x damage multiplier, 1.65x defense, and 30% cooldown reduction — excellent for any damage-focused build that hasn't obtained Emperor yet.",
+      "stats": {
+        "secret": "S",
+        "damage_multiplier": "2.20x",
+        "defense_multiplier": "1.65x",
+        "cooldown_reduction": "30%",
+        "celestial_current": "S",
+        "emperor": "S+",
+        "singularity": "S",
+        "cataclysm": "S",
+        "overlord": "S"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+2.20x damage multiplier (second only to Emperor)",
+        "+30% CDR enables ability chaining",
+        "+Works with every build type"
+      ],
+      "cons": [
+        "−Secret rarity — extremely rare to roll",
+        "−Surpassed by Emperor (2.30x) added in Massive Update"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC (Japanese building, Sailor Island). Secret rarity — extremely rare.",
+      "unlock": "Trait Reroll at Trait NPC (Japanese building, Sailor Island). Secret rarity — extremely rare.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC (Japanese building, Sailor Island). Secret rarity — extremely rare.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Celestial (current)",
+              "Tier": "S",
+              "DMG": "2.20x",
+              "DEF": "1.65x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Emperor",
+              "Tier": "S+",
+              "DMG": "2.30x",
+              "DEF": "1.60x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Singularity",
+              "Tier": "S",
+              "DMG": "2.10x",
+              "DEF": "1.75x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Cataclysm",
+              "Tier": "S",
+              "DMG": "2.00x",
+              "DEF": "1.70x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Overlord",
+              "Tier": "S",
+              "DMG": "1.90x",
+              "DEF": "2.00x",
+              "CDR": "25%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-26",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/celestial/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Singularity",
+      "slug": "singularity",
+      "image": null,
+      "tier": "S",
+      "rarity": "Secret",
+      "type": null,
+      "category": null,
+      "description": "The best defensive Secret trait. Singularity provides 2.10x damage, 1.75x defense multiplier, and 30% CDR, making it the top pick for melee builds that need sustained ability cycling and survivability.",
+      "stats": {
+        "secret": "S",
+        "damage_multiplier": "2.10x",
+        "defense_multiplier": "1.75x",
+        "cooldown_reduction": "30%",
+        "singularity_current": "S",
+        "emperor": "S+",
+        "celestial": "S",
+        "cataclysm": "S",
+        "overlord": "S"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.75x defense — best tanking trait",
+        "+30% CDR for sustained ability spam",
+        "+Perfect for Anos/Gilgamesh melee builds"
+      ],
+      "cons": [
+        "−Lower damage than Celestial",
+        "−Secret rarity — extremely rare"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Secret rarity — extremely rare.",
+      "unlock": "Trait Reroll at Trait NPC. Secret rarity — extremely rare.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Secret rarity — extremely rare.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Singularity (current)",
+              "Tier": "S",
+              "DMG": "2.10x",
+              "DEF": "1.75x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Emperor",
+              "Tier": "S+",
+              "DMG": "2.30x",
+              "DEF": "1.60x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Celestial",
+              "Tier": "S",
+              "DMG": "2.20x",
+              "DEF": "1.65x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Cataclysm",
+              "Tier": "S",
+              "DMG": "2.00x",
+              "DEF": "1.70x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Overlord",
+              "Tier": "S",
+              "DMG": "1.90x",
+              "DEF": "2.00x",
+              "CDR": "25%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/singularity/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Cataclysm",
+      "slug": "cataclysm",
+      "image": null,
+      "tier": "S",
+      "rarity": "Secret",
+      "type": null,
+      "category": null,
+      "description": "A high-damage Secret trait with balanced stats. Cataclysm's 2.00x damage, 1.70x defense, and 30% CDR make it an excellent alternative to Celestial for builds that prioritize ability uptime.",
+      "stats": {
+        "secret": "S",
+        "damage_multiplier": "2.00x",
+        "defense_multiplier": "1.70x",
+        "cooldown_reduction": "30%",
+        "cataclysm_current": "S",
+        "emperor": "S+",
+        "celestial": "S",
+        "singularity": "S",
+        "overlord": "S"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+30% CDR core",
+        "+Strong damage multipliers",
+        "+Good alternative to Celestial"
+      ],
+      "cons": [
+        "−Lower raw damage than Celestial",
+        "−Secret rarity"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Secret rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Secret rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Secret rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Cataclysm (current)",
+              "Tier": "S",
+              "DMG": "2.00x",
+              "DEF": "1.70x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Emperor",
+              "Tier": "S+",
+              "DMG": "2.30x",
+              "DEF": "1.60x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Celestial",
+              "Tier": "S",
+              "DMG": "2.20x",
+              "DEF": "1.65x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Singularity",
+              "Tier": "S",
+              "DMG": "2.10x",
+              "DEF": "1.75x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Overlord",
+              "Tier": "S",
+              "DMG": "1.90x",
+              "DEF": "2.00x",
+              "CDR": "25%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/cataclysm/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Overlord",
+      "slug": "overlord",
+      "image": null,
+      "tier": "S",
+      "rarity": "Secret",
+      "type": null,
+      "category": null,
+      "description": "The best defensive Secret trait with the highest defense multiplier (2.00x). Overlord's 1.90x damage and 25% CDR make it the most versatile Secret trait, fitting any build archetype.",
+      "stats": {
+        "secret": "S",
+        "damage_multiplier": "1.90x",
+        "defense_multiplier": "2.00x",
+        "cooldown_reduction": "25%",
+        "overlord_current": "S",
+        "emperor": "S+",
+        "celestial": "S",
+        "singularity": "S",
+        "cataclysm": "S"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+Balanced offense and defense",
+        "+2.00x defense — highest in game",
+        "+Works in hybrid builds"
+      ],
+      "cons": [
+        "−Lower CDR than other Secrets",
+        "−Secret rarity"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Secret rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Secret rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Secret rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Overlord (current)",
+              "Tier": "S",
+              "DMG": "1.90x",
+              "DEF": "2.00x",
+              "CDR": "25%"
+            },
+            {
+              "Trait": "Emperor",
+              "Tier": "S+",
+              "DMG": "2.30x",
+              "DEF": "1.60x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Celestial",
+              "Tier": "S",
+              "DMG": "2.20x",
+              "DEF": "1.65x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Singularity",
+              "Tier": "S",
+              "DMG": "2.10x",
+              "DEF": "1.75x",
+              "CDR": "30%"
+            },
+            {
+              "Trait": "Cataclysm",
+              "Tier": "S",
+              "DMG": "2.00x",
+              "DEF": "1.70x",
+              "CDR": "30%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/overlord/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Malevolent",
+      "slug": "malevolent",
+      "image": null,
+      "tier": "A",
+      "rarity": "Mythic",
+      "type": null,
+      "category": null,
+      "description": "A strong trait for pure damage output. Malevolent is a good realistic target for most players since Secret traits are extremely rare.",
+      "stats": {
+        "mythic": "A",
+        "damage_multiplier": "1.80x",
+        "defense_multiplier": "1.50x",
+        "cooldown_reduction": "20%",
+        "malevolent_current": "A",
+        "transcendent": "A",
+        "infinity": "A",
+        "godspeed": "A",
+        "sovereign": "A"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+Strong damage trait (1.80x)",
+        "+20% CDR for ability cycling",
+        "+Realistic target for most players"
+      ],
+      "cons": [
+        "−Outperformed by all Secret traits",
+        "−Lower defense than Singularity/Overlord"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Mythic rarity — rare but achievable.",
+      "unlock": "Trait Reroll at Trait NPC. Mythic rarity — rare but achievable.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Mythic rarity — rare but achievable.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Malevolent (current)",
+              "Tier": "A",
+              "DMG": "1.80x",
+              "DEF": "1.50x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Transcendent",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.75x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Infinity",
+              "Tier": "A",
+              "DMG": "1.60x",
+              "DEF": "1.70x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Godspeed",
+              "Tier": "A",
+              "DMG": "1.55x",
+              "DEF": "1.50x",
+              "CDR": "25%"
+            },
+            {
+              "Trait": "Sovereign",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.85x",
+              "CDR": "15%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/malevolent/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Transcendent",
+      "slug": "transcendent",
+      "image": null,
+      "tier": "A",
+      "rarity": "Mythic",
+      "type": null,
+      "category": null,
+      "description": "An A-tier Mythic trait with 1.65x damage and 1.75x defense multipliers plus 20% cooldown reduction. Transcendent is a solid endgame option for players working toward Secret rarity traits.",
+      "stats": {
+        "mythic": "A",
+        "damage_multiplier": "1.65x",
+        "defense_multiplier": "1.75x",
+        "cooldown_reduction": "20%",
+        "transcendent_current": "A",
+        "malevolent": "A",
+        "infinity": "A",
+        "godspeed": "A",
+        "sovereign": "A"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.65x DMG + 1.75x DEF + 20% CDR",
+        "+Solid all-round Mythic trait"
+      ],
+      "cons": [
+        "−Outclassed by Secret rarity traits"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC.",
+      "unlock": "Trait Reroll at Trait NPC.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Transcendent (current)",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.75x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Malevolent",
+              "Tier": "A",
+              "DMG": "1.80x",
+              "DEF": "1.50x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Infinity",
+              "Tier": "A",
+              "DMG": "1.60x",
+              "DEF": "1.70x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Godspeed",
+              "Tier": "A",
+              "DMG": "1.55x",
+              "DEF": "1.50x",
+              "CDR": "25%"
+            },
+            {
+              "Trait": "Sovereign",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.85x",
+              "CDR": "15%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/transcendent/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Infinity",
+      "slug": "infinity",
+      "image": null,
+      "tier": "A",
+      "rarity": "Mythic",
+      "type": null,
+      "category": null,
+      "description": "An A-tier Mythic trait providing 1.60x damage, 1.70x defense, and 20% cooldown reduction. Slightly weaker than Transcendent but a reliable stepping stone to Secret rarity traits.",
+      "stats": {
+        "mythic": "A",
+        "damage_multiplier": "1.60x",
+        "defense_multiplier": "1.70x",
+        "cooldown_reduction": "20%",
+        "infinity_current": "A",
+        "malevolent": "A",
+        "transcendent": "A",
+        "godspeed": "A",
+        "sovereign": "A"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.60x DMG + 1.70x DEF + 20% CDR",
+        "+Good Mythic trait for progression"
+      ],
+      "cons": [
+        "−Outclassed by Secret rarity traits"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC.",
+      "unlock": "Trait Reroll at Trait NPC.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Infinity (current)",
+              "Tier": "A",
+              "DMG": "1.60x",
+              "DEF": "1.70x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Malevolent",
+              "Tier": "A",
+              "DMG": "1.80x",
+              "DEF": "1.50x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Transcendent",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.75x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Godspeed",
+              "Tier": "A",
+              "DMG": "1.55x",
+              "DEF": "1.50x",
+              "CDR": "25%"
+            },
+            {
+              "Trait": "Sovereign",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.85x",
+              "CDR": "15%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/infinity/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Sovereign",
+      "slug": "sovereign",
+      "image": null,
+      "tier": "A",
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "The best defensive Legendary trait with 1.85x defense multiplier. Excellent for tank-focused builds.",
+      "stats": {
+        "legendary": "A",
+        "damage_multiplier": "1.65x",
+        "defense_multiplier": "1.85x",
+        "cooldown_reduction": "15%",
+        "sovereign_current": "A",
+        "malevolent": "A",
+        "transcendent": "A",
+        "infinity": "A",
+        "godspeed": "A"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.85x defense — high tanking stat",
+        "+1.65x damage + 15% CDR",
+        "+Achievable rarity"
+      ],
+      "cons": [
+        "−Lower CDR than Secret traits",
+        "−Outclassed by Singularity in endgame"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Sovereign (current)",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.85x",
+              "CDR": "15%"
+            },
+            {
+              "Trait": "Malevolent",
+              "Tier": "A",
+              "DMG": "1.80x",
+              "DEF": "1.50x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Transcendent",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.75x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Infinity",
+              "Tier": "A",
+              "DMG": "1.60x",
+              "DEF": "1.70x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Godspeed",
+              "Tier": "A",
+              "DMG": "1.55x",
+              "DEF": "1.50x",
+              "CDR": "25%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/sovereign/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Genesis",
+      "slug": "genesis",
+      "image": null,
+      "tier": "B",
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "A B-tier Legendary trait providing balanced 1.40x damage and 1.40x defense with 15% cooldown reduction. Genesis is the strongest B-tier option thanks to its CDR bonus.",
+      "stats": {
+        "legendary": "B",
+        "damage_multiplier": "1.40x",
+        "defense_multiplier": "1.40x",
+        "cooldown_reduction": "15%",
+        "genesis_current": "B",
+        "sovereign": "A",
+        "dominator": "B",
+        "unstoppable": "B",
+        "overdrive": "B"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+15% CDR — best CDR of B-tier traits",
+        "+Balanced 1.40x DMG + DEF"
+      ],
+      "cons": [
+        "−Outclassed by A-tier traits",
+        "−Replace when Mythic+ available"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Genesis (current)",
+              "Tier": "B",
+              "DMG": "1.40x",
+              "DEF": "1.40x",
+              "CDR": "15%"
+            },
+            {
+              "Trait": "Sovereign",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.85x",
+              "CDR": "15%"
+            },
+            {
+              "Trait": "Dominator",
+              "Tier": "B",
+              "DMG": "1.50x",
+              "DEF": "1.45x",
+              "CDR": "10%"
+            },
+            {
+              "Trait": "Unstoppable",
+              "Tier": "B",
+              "DMG": "1.45x",
+              "DEF": "1.70x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Overdrive",
+              "Tier": "B",
+              "DMG": "1.30x",
+              "DEF": "1.35x",
+              "CDR": "10%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/genesis/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Dominator",
+      "slug": "dominator",
+      "image": null,
+      "tier": "B",
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "A B-tier Legendary trait with 1.50x damage and 1.45x defense plus 10% cooldown reduction. Dominator offers stronger raw damage than Genesis at the cost of some CDR.",
+      "stats": {
+        "legendary": "B",
+        "damage_multiplier": "1.50x",
+        "defense_multiplier": "1.45x",
+        "cooldown_reduction": "10%",
+        "dominator_current": "B",
+        "sovereign": "A",
+        "genesis": "B",
+        "unstoppable": "B",
+        "overdrive": "B"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.50x DMG — highest raw damage of B-tier traits",
+        "+10% CDR adds up"
+      ],
+      "cons": [
+        "−Outclassed by A-tier traits"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Dominator (current)",
+              "Tier": "B",
+              "DMG": "1.50x",
+              "DEF": "1.45x",
+              "CDR": "10%"
+            },
+            {
+              "Trait": "Sovereign",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.85x",
+              "CDR": "15%"
+            },
+            {
+              "Trait": "Genesis",
+              "Tier": "B",
+              "DMG": "1.40x",
+              "DEF": "1.40x",
+              "CDR": "15%"
+            },
+            {
+              "Trait": "Unstoppable",
+              "Tier": "B",
+              "DMG": "1.45x",
+              "DEF": "1.70x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Overdrive",
+              "Tier": "B",
+              "DMG": "1.30x",
+              "DEF": "1.35x",
+              "CDR": "10%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/dominator/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Unstoppable",
+      "slug": "unstoppable",
+      "image": null,
+      "tier": "B",
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "A B-tier Legendary tank trait with the highest defense multiplier of all B-tier options: 1.70x defense and 1.45x damage. No CDR, but best-in-tier for survivability.",
+      "stats": {
+        "legendary": "B",
+        "damage_multiplier": "1.45x",
+        "defense_multiplier": "1.70x",
+        "cooldown_reduction": "0%",
+        "unstoppable_current": "B",
+        "sovereign": "A",
+        "genesis": "B",
+        "dominator": "B",
+        "overdrive": "B"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.70x DEF — best defense of B-tier traits",
+        "+Solid 1.45x damage"
+      ],
+      "cons": [
+        "−No CDR bonus",
+        "−Outclassed by Sovereign/Godspeed (A tier)"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Legendary rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Unstoppable (current)",
+              "Tier": "B",
+              "DMG": "1.45x",
+              "DEF": "1.70x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Sovereign",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.85x",
+              "CDR": "15%"
+            },
+            {
+              "Trait": "Genesis",
+              "Tier": "B",
+              "DMG": "1.40x",
+              "DEF": "1.40x",
+              "CDR": "15%"
+            },
+            {
+              "Trait": "Dominator",
+              "Tier": "B",
+              "DMG": "1.50x",
+              "DEF": "1.45x",
+              "CDR": "10%"
+            },
+            {
+              "Trait": "Overdrive",
+              "Tier": "B",
+              "DMG": "1.30x",
+              "DEF": "1.35x",
+              "CDR": "10%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/unstoppable/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Godspeed",
+      "slug": "godspeed",
+      "image": null,
+      "tier": "A",
+      "rarity": "Epic",
+      "type": null,
+      "category": null,
+      "description": "A solid CDR trait. Godspeed's 25% cooldown reduction rivals higher-rarity CDR traits, making it a strong option for ability-focused builds.",
+      "stats": {
+        "epic": "A",
+        "damage_multiplier": "1.55x",
+        "defense_multiplier": "1.50x",
+        "cooldown_reduction": "25%",
+        "godspeed_current": "A",
+        "malevolent": "A",
+        "transcendent": "A",
+        "infinity": "A",
+        "sovereign": "A"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+25% CDR — close to Secret tier CDR",
+        "+1.55x DMG + 1.50x DEF",
+        "+Achievable rarity"
+      ],
+      "cons": [
+        "−Lower damage than Mythic traits",
+        "−Outclassed by Secret traits"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Epic rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Epic rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Epic rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Godspeed (current)",
+              "Tier": "A",
+              "DMG": "1.55x",
+              "DEF": "1.50x",
+              "CDR": "25%"
+            },
+            {
+              "Trait": "Malevolent",
+              "Tier": "A",
+              "DMG": "1.80x",
+              "DEF": "1.50x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Transcendent",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.75x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Infinity",
+              "Tier": "A",
+              "DMG": "1.60x",
+              "DEF": "1.70x",
+              "CDR": "20%"
+            },
+            {
+              "Trait": "Sovereign",
+              "Tier": "A",
+              "DMG": "1.65x",
+              "DEF": "1.85x",
+              "CDR": "15%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/godspeed/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Overdrive",
+      "slug": "overdrive",
+      "image": null,
+      "tier": "B",
+      "rarity": "Epic",
+      "type": null,
+      "category": null,
+      "description": "An Epic-rarity trait with 10% CDR and decent multipliers. Overdrive is a reliable filler trait until players unlock higher rarity options.",
+      "stats": {
+        "epic": "B",
+        "damage_multiplier": "1.30x",
+        "defense_multiplier": "1.35x",
+        "cooldown_reduction": "10%",
+        "overdrive_current": "B",
+        "godspeed": "A",
+        "genesis": "B",
+        "dominator": "B",
+        "unstoppable": "B"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+Decent multipliers across stats",
+        "+10% CDR adds up with other sources"
+      ],
+      "cons": [
+        "−Weak compared to Legendary+ traits",
+        "−Replace when possible"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Epic rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Epic rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Epic rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Overdrive (current)",
+              "Tier": "B",
+              "DMG": "1.30x",
+              "DEF": "1.35x",
+              "CDR": "10%"
+            },
+            {
+              "Trait": "Godspeed",
+              "Tier": "A",
+              "DMG": "1.55x",
+              "DEF": "1.50x",
+              "CDR": "25%"
+            },
+            {
+              "Trait": "Genesis",
+              "Tier": "B",
+              "DMG": "1.40x",
+              "DEF": "1.40x",
+              "CDR": "15%"
+            },
+            {
+              "Trait": "Dominator",
+              "Tier": "B",
+              "DMG": "1.50x",
+              "DEF": "1.45x",
+              "CDR": "10%"
+            },
+            {
+              "Trait": "Unstoppable",
+              "Tier": "B",
+              "DMG": "1.45x",
+              "DEF": "1.70x",
+              "CDR": "0%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/overdrive/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Ascended",
+      "slug": "ascended",
+      "image": null,
+      "tier": "B",
+      "rarity": "Epic",
+      "type": null,
+      "category": null,
+      "description": "A B-tier Epic trait with 1.35x damage and 1.40x defense. No cooldown reduction. Ascended is a mid-tier option obtainable at Epic rarity while working toward Legendary or Mythic traits.",
+      "stats": {
+        "epic": "B",
+        "damage_multiplier": "1.35x",
+        "defense_multiplier": "1.40x",
+        "cooldown_reduction": "0%",
+        "ascended_current": "B",
+        "godspeed": "A",
+        "genesis": "B",
+        "dominator": "B",
+        "unstoppable": "B"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.35x DMG + 1.40x DEF",
+        "+Epic rarity — more accessible than Legendary"
+      ],
+      "cons": [
+        "−No CDR",
+        "−Outclassed by A-tier traits"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Epic rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Epic rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Epic rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Ascended (current)",
+              "Tier": "B",
+              "DMG": "1.35x",
+              "DEF": "1.40x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Godspeed",
+              "Tier": "A",
+              "DMG": "1.55x",
+              "DEF": "1.50x",
+              "CDR": "25%"
+            },
+            {
+              "Trait": "Genesis",
+              "Tier": "B",
+              "DMG": "1.40x",
+              "DEF": "1.40x",
+              "CDR": "15%"
+            },
+            {
+              "Trait": "Dominator",
+              "Tier": "B",
+              "DMG": "1.50x",
+              "DEF": "1.45x",
+              "CDR": "10%"
+            },
+            {
+              "Trait": "Unstoppable",
+              "Tier": "B",
+              "DMG": "1.45x",
+              "DEF": "1.70x",
+              "CDR": "0%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/ascended/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Breaker",
+      "slug": "breaker",
+      "image": null,
+      "tier": "C",
+      "rarity": "Epic",
+      "type": null,
+      "category": null,
+      "description": "A C-tier Epic trait with 1.30x damage and 1.55x defense. Despite the high defense multiplier, Breaker's lack of CDR and low damage cap it at C tier. Reroll when Legendary+ becomes available.",
+      "stats": {
+        "epic": "C",
+        "damage_multiplier": "1.30x",
+        "defense_multiplier": "1.55x",
+        "cooldown_reduction": "0%",
+        "breaker_current": "C",
+        "godspeed": "A",
+        "overdrive": "B",
+        "ascended": "B",
+        "sharpened": "C"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.55x DEF is surprisingly high for C tier"
+      ],
+      "cons": [
+        "−No CDR",
+        "−Low damage multiplier",
+        "−Reroll when possible"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Epic rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Epic rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Epic rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Breaker (current)",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.55x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Godspeed",
+              "Tier": "A",
+              "DMG": "1.55x",
+              "DEF": "1.50x",
+              "CDR": "25%"
+            },
+            {
+              "Trait": "Overdrive",
+              "Tier": "B",
+              "DMG": "1.30x",
+              "DEF": "1.35x",
+              "CDR": "10%"
+            },
+            {
+              "Trait": "Ascended",
+              "Tier": "B",
+              "DMG": "1.35x",
+              "DEF": "1.40x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Sharpened",
+              "Tier": "C",
+              "DMG": "1.35x",
+              "DEF": "1.10x",
+              "CDR": "0%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/breaker/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Sharpened",
+      "slug": "sharpened",
+      "image": null,
+      "tier": "C",
+      "rarity": "Rare",
+      "type": null,
+      "category": null,
+      "description": "A C-tier Rare trait with 1.35x damage and 1.10x defense. Provides minor offensive boost but very low defense. Replace as soon as Epic+ traits become available.",
+      "stats": {
+        "rare": "C",
+        "damage_multiplier": "1.35x",
+        "defense_multiplier": "1.10x",
+        "cooldown_reduction": "0%",
+        "sharpened_current": "C",
+        "breaker": "C",
+        "vicious": "C",
+        "predator": "C",
+        "driven": "C"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.35x DMG — decent for C tier"
+      ],
+      "cons": [
+        "−Very low 1.10x DEF",
+        "−No CDR",
+        "−Reroll when possible"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Rare rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Rare rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Rare rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Sharpened (current)",
+              "Tier": "C",
+              "DMG": "1.35x",
+              "DEF": "1.10x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Breaker",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.55x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Vicious",
+              "Tier": "C",
+              "DMG": "1.25x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            },
+            {
+              "Trait": "Predator",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.15x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Driven",
+              "Tier": "C",
+              "DMG": "1.10x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/sharpened/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Vicious",
+      "slug": "vicious",
+      "image": null,
+      "tier": "C",
+      "rarity": "Rare",
+      "type": null,
+      "category": null,
+      "description": "A C-tier Rare trait with 1.25x damage, 1.15x defense, and 5% cooldown reduction. The small CDR boost is the only notable feature — replace when Epic+ traits become available.",
+      "stats": {
+        "rare": "C",
+        "damage_multiplier": "1.25x",
+        "defense_multiplier": "1.15x",
+        "cooldown_reduction": "5%",
+        "vicious_current": "C",
+        "breaker": "C",
+        "sharpened": "C",
+        "predator": "C",
+        "driven": "C"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+5% CDR — small but notable for C tier"
+      ],
+      "cons": [
+        "−Low DMG/DEF multipliers",
+        "−Reroll when possible"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Rare rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Rare rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Rare rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Vicious (current)",
+              "Tier": "C",
+              "DMG": "1.25x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            },
+            {
+              "Trait": "Breaker",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.55x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Sharpened",
+              "Tier": "C",
+              "DMG": "1.35x",
+              "DEF": "1.10x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Predator",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.15x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Driven",
+              "Tier": "C",
+              "DMG": "1.10x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/vicious/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Predator",
+      "slug": "predator",
+      "image": null,
+      "tier": "C",
+      "rarity": "Rare",
+      "type": null,
+      "category": null,
+      "description": "A C-tier Rare trait with 1.30x damage and 1.15x defense, no CDR. Balanced but weak — a typical early game trait to replace as you progress.",
+      "stats": {
+        "rare": "C",
+        "damage_multiplier": "1.30x",
+        "defense_multiplier": "1.15x",
+        "cooldown_reduction": "0%",
+        "predator_current": "C",
+        "breaker": "C",
+        "sharpened": "C",
+        "vicious": "C",
+        "driven": "C"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.30x DMG — highest of low-stat C traits"
+      ],
+      "cons": [
+        "−No CDR",
+        "−Low DEF",
+        "−Reroll when possible"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Rare rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Rare rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Rare rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Predator (current)",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.15x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Breaker",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.55x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Sharpened",
+              "Tier": "C",
+              "DMG": "1.35x",
+              "DEF": "1.10x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Vicious",
+              "Tier": "C",
+              "DMG": "1.25x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            },
+            {
+              "Trait": "Driven",
+              "Tier": "C",
+              "DMG": "1.10x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/predator/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Driven",
+      "slug": "driven",
+      "image": null,
+      "tier": "C",
+      "rarity": "Common",
+      "type": null,
+      "category": null,
+      "description": "A C-tier Common trait with 1.10x damage, 1.15x defense, and 5% CDR. The tiny CDR bonus helps slightly but this trait is placeholder until better options are available.",
+      "stats": {
+        "common": "C",
+        "damage_multiplier": "1.10x",
+        "defense_multiplier": "1.15x",
+        "cooldown_reduction": "5%",
+        "driven_current": "C",
+        "breaker": "C",
+        "sharpened": "C",
+        "vicious": "C",
+        "predator": "C"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+5% CDR — small bonus"
+      ],
+      "cons": [
+        "−Very weak multipliers",
+        "−Replace ASAP"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Common rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Common rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Common rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Driven (current)",
+              "Tier": "C",
+              "DMG": "1.10x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            },
+            {
+              "Trait": "Breaker",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.55x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Sharpened",
+              "Tier": "C",
+              "DMG": "1.35x",
+              "DEF": "1.10x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Vicious",
+              "Tier": "C",
+              "DMG": "1.25x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            },
+            {
+              "Trait": "Predator",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.15x",
+              "CDR": "0%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/driven/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Balanced",
+      "slug": "balanced",
+      "image": null,
+      "tier": "C",
+      "rarity": "Common",
+      "type": null,
+      "category": null,
+      "description": "A C-tier Common trait with equal 1.20x damage and 1.20x defense, no CDR. True to its name — perfectly balanced between offense and defense, but both stats are weak.",
+      "stats": {
+        "common": "C",
+        "damage_multiplier": "1.20x",
+        "defense_multiplier": "1.20x",
+        "cooldown_reduction": "0%",
+        "balanced_current": "C",
+        "breaker": "C",
+        "sharpened": "C",
+        "vicious": "C",
+        "predator": "C"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+Equal damage and defense — no weakness"
+      ],
+      "cons": [
+        "−No CDR",
+        "−Weak multipliers",
+        "−Replace when possible"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Common rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Common rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Common rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Balanced (current)",
+              "Tier": "C",
+              "DMG": "1.20x",
+              "DEF": "1.20x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Breaker",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.55x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Sharpened",
+              "Tier": "C",
+              "DMG": "1.35x",
+              "DEF": "1.10x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Vicious",
+              "Tier": "C",
+              "DMG": "1.25x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            },
+            {
+              "Trait": "Predator",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.15x",
+              "CDR": "0%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/balanced/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Steady",
+      "slug": "steady",
+      "image": null,
+      "tier": "C",
+      "rarity": "Common",
+      "type": null,
+      "category": null,
+      "description": "A C-tier Common trait with 1.15x damage and 1.25x defense. Slightly defense-oriented — marginally better than D tier but still a placeholder to reroll past.",
+      "stats": {
+        "common": "C",
+        "damage_multiplier": "1.15x",
+        "defense_multiplier": "1.25x",
+        "cooldown_reduction": "0%",
+        "steady_current": "C",
+        "breaker": "C",
+        "sharpened": "C",
+        "vicious": "C",
+        "predator": "C"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+1.25x DEF slightly above average for C tier"
+      ],
+      "cons": [
+        "−No CDR",
+        "−Replace when possible"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Common rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Common rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Common rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Steady (current)",
+              "Tier": "C",
+              "DMG": "1.15x",
+              "DEF": "1.25x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Breaker",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.55x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Sharpened",
+              "Tier": "C",
+              "DMG": "1.35x",
+              "DEF": "1.10x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Vicious",
+              "Tier": "C",
+              "DMG": "1.25x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            },
+            {
+              "Trait": "Predator",
+              "Tier": "C",
+              "DMG": "1.30x",
+              "DEF": "1.15x",
+              "CDR": "0%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/steady/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Agile",
+      "slug": "agile",
+      "image": null,
+      "tier": "D",
+      "rarity": "Common",
+      "type": null,
+      "category": null,
+      "description": "A D-tier Common trait with no damage or defense multipliers — only 10% cooldown reduction. Agile is the only D-tier trait with any CDR, but its complete lack of offensive/defensive scaling makes it a placeholder to reroll past immediately.",
+      "stats": {
+        "common": "D",
+        "damage_multiplier": "1.00x",
+        "defense_multiplier": "1.00x",
+        "cooldown_reduction": "10%",
+        "agile_current": "D",
+        "driven": "C",
+        "balanced": "C",
+        "steady": "C",
+        "strong": "D"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+10% CDR — only CDR bonus at D tier"
+      ],
+      "cons": [
+        "−No damage or defense multiplier",
+        "−Replace immediately"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Common rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Common rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Common rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Agile (current)",
+              "Tier": "D",
+              "DMG": "1.00x",
+              "DEF": "1.00x",
+              "CDR": "10%"
+            },
+            {
+              "Trait": "Driven",
+              "Tier": "C",
+              "DMG": "1.10x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            },
+            {
+              "Trait": "Balanced",
+              "Tier": "C",
+              "DMG": "1.20x",
+              "DEF": "1.20x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Steady",
+              "Tier": "C",
+              "DMG": "1.15x",
+              "DEF": "1.25x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Strong",
+              "Tier": "D",
+              "DMG": "1.15x",
+              "DEF": "1.05x",
+              "CDR": "0%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/agile/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Strong",
+      "slug": "strong",
+      "image": null,
+      "tier": "D",
+      "rarity": "Common",
+      "type": null,
+      "category": null,
+      "description": "A D-tier Common trait with minimal 1.15x damage and 1.05x defense, no CDR. One of the weakest traits available — reroll as soon as possible.",
+      "stats": {
+        "common": "D",
+        "damage_multiplier": "1.15x",
+        "defense_multiplier": "1.05x",
+        "cooldown_reduction": "0%",
+        "strong_current": "D",
+        "driven": "C",
+        "balanced": "C",
+        "steady": "C",
+        "agile": "D"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+Easy to obtain"
+      ],
+      "cons": [
+        "−Negligible 1.15x DMG / 1.05x DEF",
+        "−No CDR",
+        "−Replace immediately"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Common rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Common rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Common rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Strong (current)",
+              "Tier": "D",
+              "DMG": "1.15x",
+              "DEF": "1.05x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Driven",
+              "Tier": "C",
+              "DMG": "1.10x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            },
+            {
+              "Trait": "Balanced",
+              "Tier": "C",
+              "DMG": "1.20x",
+              "DEF": "1.20x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Steady",
+              "Tier": "C",
+              "DMG": "1.15x",
+              "DEF": "1.25x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Agile",
+              "Tier": "D",
+              "DMG": "1.00x",
+              "DEF": "1.00x",
+              "CDR": "10%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/strong/",
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Tough",
+      "slug": "tough",
+      "image": null,
+      "tier": "D",
+      "rarity": "Common",
+      "type": null,
+      "category": null,
+      "description": "A D-tier Common trait with 1.10x damage and 1.15x defense, no CDR. Slightly defense-oriented among D-tier traits but still near-useless — reroll as soon as possible.",
+      "stats": {
+        "common": "D",
+        "damage_multiplier": "1.10x",
+        "defense_multiplier": "1.15x",
+        "cooldown_reduction": "0%",
+        "tough_current": "D",
+        "driven": "C",
+        "balanced": "C",
+        "steady": "C",
+        "agile": "D"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [
+        "+Easy to obtain"
+      ],
+      "cons": [
+        "−Negligible multipliers",
+        "−No CDR",
+        "−Replace immediately"
+      ],
+      "acquisition": "Trait Reroll at Trait NPC. Common rarity.",
+      "unlock": "Trait Reroll at Trait NPC. Common rarity.",
+      "strategy": null,
+      "obtainment": "Trait Reroll at Trait NPC. Common rarity.",
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Trait",
+            "Tier",
+            "DMG",
+            "DEF",
+            "CDR"
+          ],
+          "rows": [
+            {
+              "Trait": "Tough (current)",
+              "Tier": "D",
+              "DMG": "1.10x",
+              "DEF": "1.15x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Driven",
+              "Tier": "C",
+              "DMG": "1.10x",
+              "DEF": "1.15x",
+              "CDR": "5%"
+            },
+            {
+              "Trait": "Balanced",
+              "Tier": "C",
+              "DMG": "1.20x",
+              "DEF": "1.20x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Steady",
+              "Tier": "C",
+              "DMG": "1.15x",
+              "DEF": "1.25x",
+              "CDR": "0%"
+            },
+            {
+              "Trait": "Agile",
+              "Tier": "D",
+              "DMG": "1.00x",
+              "DEF": "1.00x",
+              "CDR": "10%"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-27",
+      "wikiUrl": "https://sailorpiece.org/wiki/traits/tough/",
+      "sourceImageUrl": null
+    }
+  ]
+}

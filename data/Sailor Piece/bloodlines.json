@@ -1,0 +1,232 @@
+{
+  "meta": {
+    "title": "Sailor Piece bloodlines data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Sailor Piece Wiki - bloodlines",
+        "url": "https://sailorpiece.org/wiki/bloodlines/",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "tier",
+      "category",
+      "description",
+      "stats",
+      "obtainment"
+    ]
+  },
+  "items": [
+    {
+      "name": "Primordial",
+      "slug": "primordial",
+      "tier": "S+",
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": "+27%",
+      "bonus": "+27%",
+      "recipe": null,
+      "description": "S+ tier (Mythical pity) bloodline. Listed as a required ingredient in The World spec crafting recipe per sailorpiecewiki /entries/the-world-style.",
+      "stats": {
+        "damage": "+27%",
+        "damage_reduction": "+5%",
+        "luck": "+15%",
+        "melee_damage": "+10%",
+        "hp": "+40%"
+      },
+      "requirements": null,
+      "obtainment": "S+ tier (Mythical pity) bloodline. Listed as a required ingredient in The World spec crafting recipe per sailorpiecewiki /entries/the-world-style.",
+      "tags": []
+    },
+    {
+      "name": "Astral",
+      "slug": "astral",
+      "tier": "S+",
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": "+30%",
+      "bonus": "+30%",
+      "recipe": null,
+      "description": "S+ tier (Mythical pity) bloodline. Listed as a required step in the Cosmic Master F Move questline per sailorpiecewiki /entries/cosmic-being-style (Astral Bloodline + 15 Cosmic Being kills + Infinite Tower 90+ ×5).",
+      "stats": {
+        "damage": "+30%",
+        "luck": "+10%",
+        "lifesteal": "+2%",
+        "sword_damage": "+10%",
+        "hp": "+35%"
+      },
+      "requirements": null,
+      "obtainment": "Roll with Bloodline Stone. Mythical tier — pity 750 rolls. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "tags": []
+    },
+    {
+      "name": "Demonic",
+      "slug": "demonic",
+      "tier": "S+",
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": "+32%",
+      "bonus": "+32%",
+      "recipe": null,
+      "description": "New S+ tier bloodline from the Anti-Magic Update (April 26, 2026). Best passive for clearing boss NPCs. Stats: +32% DMG, +12% Sword DMG Multi, +12% Luck Multi, +40% Max HP, +2% Lifesteal. Proc: 20% chance for +30% DMG & 10% slow on NPC hits (5s CD). Source: Beebom + sailorpiecewiki + Sportskeeda (3-source verified R109 2026-05-01).",
+      "stats": {
+        "damage": "+32%",
+        "sword_damage": "+12%",
+        "luck": "+12%",
+        "hp": "+40%",
+        "lifesteal": "+2%"
+      },
+      "requirements": null,
+      "obtainment": "Roll with Bloodline Stone. S+ tier (Mythical rarity). Source: Beebom + sailorpiecewiki + Sportskeeda (3-source, R109 2026-05-01).",
+      "tags": []
+    },
+    {
+      "name": "Dawnbringer",
+      "slug": "dawnbringer",
+      "tier": "A",
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": "+20%",
+      "bonus": "+20%",
+      "recipe": null,
+      "description": "Roll with Bloodline Stone. Legendary tier — pity 250 rolls. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "stats": {
+        "damage": "+20%",
+        "damage_reduction": "+2%",
+        "luck": "+7%",
+        "sword_damage": "+7%"
+      },
+      "requirements": null,
+      "obtainment": "Roll with Bloodline Stone. Legendary tier — pity 250 rolls. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "tags": []
+    },
+    {
+      "name": "Nightfall",
+      "slug": "nightfall",
+      "tier": "A",
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": "+17%",
+      "bonus": "+17%",
+      "recipe": null,
+      "description": "Roll with Bloodline Stone. Legendary tier — pity 250 rolls. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "stats": {
+        "damage": "+17%",
+        "lifesteal": "+1%",
+        "hp": "+17%",
+        "luck": "+5%"
+      },
+      "requirements": null,
+      "obtainment": "Roll with Bloodline Stone. Legendary tier — pity 250 rolls. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "tags": []
+    },
+    {
+      "name": "Demonblood",
+      "slug": "demonblood",
+      "tier": "B",
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": "+22%",
+      "bonus": "+22%",
+      "recipe": null,
+      "description": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "stats": {
+        "damage": "+22%",
+        "lifesteal": "+1%",
+        "melee_damage": "+7%"
+      },
+      "requirements": null,
+      "obtainment": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "tags": []
+    },
+    {
+      "name": "Vizard",
+      "slug": "vizard",
+      "tier": "B",
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": "+15%",
+      "bonus": "+15%",
+      "recipe": null,
+      "description": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "stats": {
+        "damage": "+15%",
+        "gems": "+15%",
+        "hp": "+20%"
+      },
+      "requirements": null,
+      "obtainment": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "tags": []
+    },
+    {
+      "name": "Hunter",
+      "slug": "hunter",
+      "tier": "B",
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": "+10%",
+      "bonus": "+10%",
+      "recipe": null,
+      "description": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "stats": {
+        "damage": "+10%",
+        "money": "+10%",
+        "gems": "+10%",
+        "hp": "+15%"
+      },
+      "requirements": null,
+      "obtainment": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "tags": []
+    },
+    {
+      "name": "Stormborn",
+      "slug": "stormborn",
+      "tier": "C",
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": "+12%",
+      "bonus": "+12%",
+      "recipe": null,
+      "description": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "stats": {
+        "damage": "+12%",
+        "xp": "+10%",
+        "hp": "+12%"
+      },
+      "requirements": null,
+      "obtainment": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "tags": []
+    },
+    {
+      "name": "Commoner",
+      "slug": "commoner",
+      "tier": "D",
+      "rarity": null,
+      "category": null,
+      "type": null,
+      "effect": "+7%",
+      "bonus": "+7%",
+      "recipe": null,
+      "description": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "stats": {
+        "damage": "+7%",
+        "hp": "+10%",
+        "xp": "+10%"
+      },
+      "requirements": null,
+      "obtainment": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
+      "tags": []
+    }
+  ]
+}

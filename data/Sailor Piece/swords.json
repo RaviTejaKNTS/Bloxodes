@@ -1,0 +1,1330 @@
+{
+  "meta": {
+    "title": "Sailor Piece swords data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Sailor Piece Wiki - swords",
+        "url": "https://sailorpiece.org/wiki/swords/",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "tier",
+      "rarity",
+      "description",
+      "stats",
+      "specialMove",
+      "acquisition",
+      "pros",
+      "cons",
+      "wikiUrl"
+    ]
+  },
+  "items": [
+    {
+      "name": "Dragon Goddess",
+      "slug": "dragon-goddess",
+      "image": "/Sailor%20Piece/Swords/dragon-goddess.webp",
+      "tier": null,
+      "rarity": "Mythical",
+      "type": "Beast",
+      "category": null,
+      "description": "A new Mythical sword introduced in the Sea 2 Update (April 18, 2026). Dragon Goddess is crafted from materials dropped by the Sea Serpent and Kraken Sea Beasts — the same creatures that award the Dragon Queen title (+97.5% damage). Bounty affects Sea Beast spawn rate, so players are advised to keep their bounty high when farming this sword. Buffed on April 22, 2026 (Alx, Discord gold standard). Community poll (April 23, 2026) confirmed Dragon Goddess is currently the top Sea 2 sword — stronger than Ice Queen (~21k vs ~3.5k votes).",
+      "stats": {
+        "dmg_999": "Speed: Medium",
+        "sea_2": "sea-beast",
+        "base_damage": "999",
+        "attack_speed": "Medium",
+        "mastery_required": "999",
+        "grade": "Mythical"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "999",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "999",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Mythical",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-25",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/dragon-goddess/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/dragon-goddess.webp"
+    },
+    {
+      "name": "True Aizen",
+      "slug": "true-aizen",
+      "image": "/Sailor%20Piece/Swords/true-aizen.webp",
+      "tier": "S+",
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "True Aizen is an S-tier Legendary sword — the upgraded form of the Aizen Sword with 900 damage, fast attack speed, and extremely low cooldowns (800 mastery required). After the March 2026 meta updates, S+ swords (Anti-Magic, Shadow Monarch) rank above it in raw power, but True Aizen remains a top PvP pick for consistent damage pressure via Kyoka Suigetsu. Acquisition requires the Aizen Sword as prerequisite, then farming Chrysalis Sigils and Transmutation Shards on Soul Society to summon and upgrade the True Aizen boss.",
+      "stats": {
+        "dmg_900": "Speed: Fast",
+        "pvp": "high-damage",
+        "base_damage": "900",
+        "attack_speed": "Fast",
+        "mastery_required": "800",
+        "grade": "Legendary"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "900",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Fast",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "800",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Legendary",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-28",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/true-aizen/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/true-aizen.webp"
+    },
+    {
+      "name": "Shadow Monarch",
+      "slug": "shadow-monarch",
+      "image": "/Sailor%20Piece/Swords/shadow-monarch.webp",
+      "tier": null,
+      "rarity": "Mythical",
+      "type": null,
+      "category": null,
+      "description": "Shadow Monarch is the S+ Mythical sword in Sailor Piece with 999 damage — the strongest weapon in the game for PvP and boss farming. To get it: farm Jinwoo boss for Monarch Core, then defeat the Shadow Monarch boss in Double Dungeon. Massive AoE, top-tier iFrames, and crowd control.",
+      "stats": {
+        "dmg_999": "Speed: Medium",
+        "pvp": "bosses",
+        "base_damage": "999",
+        "attack_speed": "Medium",
+        "mastery_required": "999",
+        "grade": "Mythical"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "999",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "999",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Mythical",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-26",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/shadow-monarch/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/shadow-monarch.webp"
+    },
+    {
+      "name": "Yamato",
+      "slug": "yamato",
+      "image": "/Sailor%20Piece/Swords/yamato.webp",
+      "tier": "S+",
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "Yamato is a top-tier Legendary sword with high DPS, large AoE coverage, and multi-stage crowd control. The acquisition process is one of the most demanding in the game, requiring specific race requirements, extensive boss farming, and a large Gem investment.",
+      "stats": {
+        "dmg_880": "Speed: Fast",
+        "pvp": "aoe",
+        "base_damage": "880",
+        "attack_speed": "Fast",
+        "mastery_required": "750",
+        "grade": "Legendary"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "880",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Fast",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "750",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Legendary",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/yamato/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/yamato.webp"
+    },
+    {
+      "name": "Escanor",
+      "slug": "escanor",
+      "image": "/Sailor%20Piece/Swords/escanor.webp",
+      "tier": null,
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "Escanor is one of the rarest and highest-damage swords in Sailor Piece. It can only be obtained through Boss Rush Portals with a 3% success rate, or purchased directly for 1,149 Robux. Its acquisition difficulty makes it one of the most exclusive weapons.",
+      "stats": {
+        "dmg_870": "Speed: Medium",
+        "pvp": "high-damage",
+        "base_damage": "870",
+        "attack_speed": "Medium",
+        "mastery_required": "700",
+        "grade": "Legendary"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "870",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "700",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Legendary",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/escanor/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/escanor.webp"
+    },
+    {
+      "name": "Atomic",
+      "slug": "atomic",
+      "image": "/Sailor%20Piece/Swords/atomic.webp",
+      "tier": null,
+      "rarity": "Mythical",
+      "type": null,
+      "category": null,
+      "description": "An S+ sword added in the Massive Update (March 25, 2026). Purchased from the Atomic Seller NPC on Lawless Island — requires 80x Abyss Sigil and additional materials. The F Move is unlocked via a separate questline with the Atomic Master NPC. Companion weapon to the Atomic melee spec (formerly Cid V2). Being buffed post-launch per developer Alx.",
+      "stats": {
+        "dmg_pending": "Speed: Medium",
+        "massive_update": "lawless-island",
+        "base_damage": "Pending verification",
+        "attack_speed": "Medium",
+        "mastery_required": "Pending verification",
+        "grade": "Mythical"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "Pending verification",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "Pending verification",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Mythical",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-07",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/atomic/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/atomic.webp"
+    },
+    {
+      "name": "Abyssal Empress",
+      "slug": "abyssal-empress",
+      "image": "/Sailor%20Piece/Swords/abyssal-empress.webp",
+      "tier": null,
+      "rarity": "Mythical",
+      "type": null,
+      "category": null,
+      "description": "An S+ sword added in the Massive Update (March 25, 2026). Obtainable from the Tower Shop on Tower Island — costs 4,000 Tower Tokens (earned from Infinite Tower) or 1,399 Robux. Inspired by the Acheron character from Honkai: Star Rail. Developer Alx confirmed it will receive a buff post-launch. Companion to the Acheron melee spec.",
+      "stats": {
+        "dmg_pending": "Speed: Medium",
+        "massive_update": "tower-island",
+        "base_damage": "Pending verification",
+        "attack_speed": "Medium",
+        "mastery_required": "Pending verification",
+        "grade": "Mythical"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "Pending verification",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "Pending verification",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Mythical",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-26",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/abyssal-empress/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/abyssal-empress.webp"
+    },
+    {
+      "name": "Ice Queen",
+      "slug": "ice-queen",
+      "image": "/Sailor%20Piece/Swords/ice-queen.webp",
+      "tier": null,
+      "rarity": "Mythical",
+      "type": null,
+      "category": null,
+      "description": "An S+ sword added in the Ice Update (April 8, 2026). Obtained from Boss Island by defeating the new summonable Frost Boss. Requires the Frost Empress title as a prerequisite to craft. The V Move deals massive AOE damage with iFrames and ~2s cooldown — currently the fastest V Move cooldown among S+ swords. Requires Frostbane Clan to unlock V Move. Farming tip: Frost Relic (the easiest material) drops from ALL NPCs in the game — Lawless Island Arena Fighters are the most efficient source. 2x Luck event (active April 9+) doubles all Frost Boss drop rates.",
+      "stats": {
+        "dmg_pending": "Speed: Fast",
+        "ice_update": "boss-island",
+        "base_damage": "Pending verification",
+        "attack_speed": "Fast",
+        "mastery_required": "Pending verification",
+        "grade": "Mythical"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "Pending verification",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Fast",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "Pending verification",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Mythical",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-23",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/ice-queen/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/ice-queen.webp"
+    },
+    {
+      "name": "Anti-Magic",
+      "slug": "anti-magic",
+      "image": null,
+      "tier": null,
+      "rarity": "Mythical",
+      "type": null,
+      "category": null,
+      "description": "Anti-Magic is an S+ Mythical sword in Sailor Piece, inspired by Asta's Demon-Slayer sword from Black Clover. Introduced in the Anti-Magic Update (April 26, 2026). Get it via Crystal Defense mode: collect 5,000 Crystal Coins from the Defense Merchant on Punch Island, or buy 1,299 Robux bundle (with Demon Wing) / 1,499 Robux solo. One of the strongest F moves in the game. Move damage (Beebom + allthings.how, 2-source verified R109): Z=24B / X=41B / C=71B / V=102B / F=235B. Mastery: None — entire moveset unlocks instantly (allthings.how + Destructoid 2-source verified R109).",
+      "stats": {
+        "dmg_999": "Speed: Medium",
+        "anti_magic_update": "top-tier",
+        "base_damage": "999",
+        "attack_speed": "Medium",
+        "mastery_required": "Pending verification",
+        "grade": "Mythical"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "999",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "Pending verification",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Mythical",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-05-01",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/anti-magic/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/anti-magic.webp"
+    },
+    {
+      "name": "Great Mage",
+      "slug": "great-mage",
+      "image": "/Sailor%20Piece/Swords/great-mage.webp",
+      "tier": null,
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "A new Legendary sword introduced in the Sea 2 Update (April 18, 2026). Great Mage is crafted from materials dropped by the Great Mage boss, which also awards the Ancient Mage title (+90% damage). This is one of 2 new swords added alongside Dragon Goddess. Buffed on April 22, 2026 (Alx, Discord gold standard) — improved damage output. Easter event ended 2026-04-22 11:16 AM PT. F2P Easter Shop route closed. Current boss farm obtainability uncertain — verify in-game.",
+      "stats": {
+        "dmg_999": "Speed: Medium",
+        "sea_2": "boss-drop",
+        "base_damage": "999",
+        "attack_speed": "Medium",
+        "mastery_required": "999",
+        "grade": "Legendary"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "999",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "999",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Legendary",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-24",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/great-mage/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/great-mage.webp"
+    },
+    {
+      "name": "Ichigo Sword",
+      "slug": "ichigo-sword",
+      "image": "/Sailor%20Piece/Swords/ichigo-sword.webp",
+      "tier": null,
+      "rarity": "Mythical",
+      "type": null,
+      "category": null,
+      "description": "The Ichigo Sword is a Mythical-grade weapon and the recommended choice for beginner-to-intermediate players. Despite being relatively accessible compared to other Mythical weapons, it remains consistently effective throughout the entire game progression.",
+      "stats": {
+        "dmg_750": "Speed: Fast",
+        "pvp": "beginner-friendly",
+        "base_damage": "750",
+        "attack_speed": "Fast",
+        "mastery_required": "500",
+        "grade": "Mythical"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "750",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Fast",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "500",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Mythical",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/ichigo/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/ichigo.webp"
+    },
+    {
+      "name": "Aizen Sword",
+      "slug": "aizen-sword",
+      "image": "/Sailor%20Piece/Swords/aizen-sword.webp",
+      "tier": null,
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "The Aizen Sword is the mid-game powerhouse and a critical stepping stone toward True Aizen. It offers solid damage output suited for advanced players transitioning from early to late game, and can be upgraded to the True Aizen for endgame use.",
+      "stats": {
+        "dmg_680": "Speed: Fast",
+        "pvp": "mid-game",
+        "base_damage": "680",
+        "attack_speed": "Fast",
+        "mastery_required": "450",
+        "grade": "Legendary"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "680",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Fast",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "450",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Legendary",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/aizen/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/aizen.webp"
+    },
+    {
+      "name": "Rimuru Sword",
+      "slug": "rimuru-sword",
+      "image": "/Sailor%20Piece/Swords/rimuru-sword.webp",
+      "tier": null,
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "The Rimuru Sword is built on a shadow-based ability foundation and delivers incredible damage in both PvP and PvE. It is one of the strongest choices for advanced players who have progressed past the early-game swords.",
+      "stats": {
+        "dmg_660": "Speed: Medium",
+        "pvp": "pve",
+        "base_damage": "660",
+        "attack_speed": "Medium",
+        "mastery_required": "420",
+        "grade": "Legendary"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "660",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "420",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Legendary",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/rimuru/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/rimuru.webp"
+    },
+    {
+      "name": "Shadow Sword",
+      "slug": "shadow-sword",
+      "image": "/Sailor%20Piece/Swords/shadow-sword.webp",
+      "tier": null,
+      "rarity": "Mythical",
+      "type": null,
+      "category": null,
+      "description": "The Shadow Sword provides excellent damage at high levels and is considered one of the best weapons for farming mobs and bosses. It is particularly effective as a farming tool in the late game.",
+      "stats": {
+        "dmg_640": "Speed: Fast",
+        "farming": "boss",
+        "base_damage": "640",
+        "attack_speed": "Fast",
+        "mastery_required": "380",
+        "grade": "Mythical"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "640",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Fast",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "380",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Mythical",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/shadow-sword/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/shadow-sword.webp"
+    },
+    {
+      "name": "Ragna Sword",
+      "slug": "ragna-sword",
+      "image": "/Sailor%20Piece/Swords/ragna-sword.webp",
+      "tier": null,
+      "rarity": "Mythical",
+      "type": null,
+      "category": null,
+      "description": "The Ragna Sword is a solid Legendary weapon for players in the mid-to-late game who have not yet obtained top-tier swords. It provides reliable damage and is a strong option before upgrading to Shadow Monarch or True Aizen.",
+      "stats": {
+        "dmg_650": "Speed: Medium",
+        "mid_game": "reliable",
+        "base_damage": "650",
+        "attack_speed": "Medium",
+        "mastery_required": "400",
+        "grade": "Mythical"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "650",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "400",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Mythical",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/ragna/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/ragna.webp"
+    },
+    {
+      "name": "Saber Sword",
+      "slug": "saber-sword",
+      "image": "/Sailor%20Piece/Swords/saber-sword.webp",
+      "tier": null,
+      "rarity": "Legendary",
+      "type": null,
+      "category": null,
+      "description": "The Saber Sword performs solidly in the early-to-mid game but gradually falls behind as players unlock higher-tier weapons. It is a reliable option for players who have not yet reached the end game.",
+      "stats": {
+        "dmg_400": "Speed: Medium",
+        "mid_game": "reliable",
+        "base_damage": "400",
+        "attack_speed": "Medium",
+        "mastery_required": "200",
+        "grade": "Legendary"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "400",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "200",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Legendary",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/saber/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/saber.webp"
+    },
+    {
+      "name": "Jinwoo Sword",
+      "slug": "jinwoo-sword",
+      "image": "/Sailor%20Piece/Swords/jinwoo-sword.webp",
+      "tier": null,
+      "rarity": "Epic",
+      "type": null,
+      "category": null,
+      "description": "The Jinwoo Sword is the required intermediate weapon on the path to obtaining the Shadow Monarch. At 2,500,000 Money from the Sailor Island Jinwoo Trainer, it is a significant investment — but necessary for players aiming for the game's best weapon.",
+      "stats": {
+        "dmg_450": "Speed: Medium",
+        "progression": "shadow-monarch-path",
+        "base_damage": "450",
+        "attack_speed": "Medium",
+        "mastery_required": "250",
+        "grade": "Epic"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "450",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "250",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Epic",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/jinwoo/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/jinwoo.webp"
+    },
+    {
+      "name": "Dark Blade",
+      "slug": "dark-blade",
+      "image": "/Sailor%20Piece/Swords/dark-blade.webp",
+      "tier": null,
+      "rarity": "Epic",
+      "type": null,
+      "category": null,
+      "description": "The Dark Blade is an early-game Epic weapon that provides an easy introduction to sword combat. While it has good initial usability, it does not scale well into mid-to-late game and is best used as a temporary weapon before unlocking better options.",
+      "stats": {
+        "dmg_200": "Speed: Fast",
+        "early_game": "beginner-friendly",
+        "base_damage": "200",
+        "attack_speed": "Fast",
+        "mastery_required": "50",
+        "grade": "Epic"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "200",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Fast",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "50",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Epic",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/dark-blade/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/dark-blade.webp"
+    },
+    {
+      "name": "Katana",
+      "slug": "katana",
+      "image": "/Sailor%20Piece/Swords/katana.webp",
+      "tier": null,
+      "rarity": "Common",
+      "type": null,
+      "category": null,
+      "description": "The Katana is the true starting weapon of Sailor Piece. Available from Starter Island for just 2,500 Money, it has a wide-range Z skill that can clear small groups of enemies. It is the weakest sword but marks the beginning of the weapon progression chain.",
+      "stats": {
+        "dmg_80": "Speed: Fast",
+        "starter": "beginner",
+        "base_damage": "80",
+        "attack_speed": "Fast",
+        "mastery_required": "1",
+        "grade": "Common"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "80",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Fast",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "1",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Common",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/katana/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/katana.webp"
+    },
+    {
+      "name": "Wooden Sword",
+      "slug": "wooden-sword",
+      "image": "/Sailor%20Piece/Swords/wooden-sword.webp",
+      "tier": null,
+      "rarity": "Common",
+      "type": null,
+      "category": null,
+      "description": "The Wooden Sword is the absolute weakest weapon in the game, typically used as an initial placeholder before obtaining the Katana. It is not recommended for any extended use beyond the very first minutes of gameplay.",
+      "stats": {
+        "dmg_20": "Speed: Slow",
+        "starter": "weakest",
+        "base_damage": "20",
+        "attack_speed": "Slow",
+        "mastery_required": "1",
+        "grade": "Common"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "20",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Slow",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "1",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Common",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-14",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/wooden-sword/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/wooden-sword.webp"
+    },
+    {
+      "name": "Gryphon",
+      "slug": "gryphon",
+      "image": "/Sailor%20Piece/Swords/gryphon.webp",
+      "tier": null,
+      "rarity": "Common",
+      "type": null,
+      "category": null,
+      "description": "A starter sword added in the Alter Update (March 16, 2026). Purchased from Shanks NPC (Gryphon Seller) on Shibuya Island for 650,000 Gold + 650 Gems. Works well with the Alter fighting style for melee-focused builds.",
+      "stats": {
+        "dmg_100": "Speed: Medium",
+        "starter": "early-game",
+        "base_damage": "100",
+        "attack_speed": "Medium",
+        "mastery_required": "Pending verification",
+        "grade": "Common"
+      },
+      "abilities": [],
+      "drops": [],
+      "pros": [],
+      "cons": [],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "Stat",
+            "Value",
+            "Notes"
+          ],
+          "rows": [
+            {
+              "Stat": "Base Damage",
+              "Value": "100",
+              "Notes": "Before stat bonuses"
+            },
+            {
+              "Stat": "Attack Speed",
+              "Value": "Medium",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Mastery Required",
+              "Value": "Pending verification",
+              "Notes": "-"
+            },
+            {
+              "Stat": "Grade",
+              "Value": "Common",
+              "Notes": "-"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-16",
+      "wikiUrl": "https://sailorpiece.org/wiki/swords/gryphon/",
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/gryphon.webp"
+    }
+  ]
+}

@@ -15,6 +15,7 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `scripts/AGENTS.md`: automation/script authoring and execution rules.
 - `supabase/AGENTS.md`: schema and edge-function guidance.
 - `data/AGENTS.md`: local datasets and their consumers.
+- `agents/wiki-catalog-workflow.md`: local-first workflow for publishing game datasets as wiki and catalog pages.
 - `DESIGN.md`: public live-database design direction, shadcn component usage, design tokens, and readable content rules.
 - `docs/platform-monorepo-extension-mobile-plan.md`: current platform snapshot plus longer-term admin, extension, and mobile roadmap.
 
@@ -24,6 +25,7 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `agents/routes/agents.md`: API, auth, feed, and sitemap route inventory.
 - `agents/scripts/agents.md`: script inventory grouped by job type plus preferred npm commands.
 - `agents/data/agents.md`: data-source inventory across Supabase, local datasets, and external APIs.
+- `agents/wiki-catalog-workflow.md`: repeatable checklist for local `wiki_pages` and `catalog_pages` seeding, rendering, verification, and prod promotion.
 
 ## Maintenance Rules
 

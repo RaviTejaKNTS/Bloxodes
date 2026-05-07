@@ -1,0 +1,517 @@
+{
+  "meta": {
+    "title": "Sailor Piece islands data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Sailor Piece Wiki - islands",
+        "url": "https://sailorpiece.org/wiki/islands/",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "level",
+      "sea",
+      "bosses",
+      "activities",
+      "description"
+    ]
+  },
+  "items": [
+    {
+      "name": "World Island",
+      "slug": "world-island",
+      "level": "10000+",
+      "sea": "Early Islands",
+      "bosses": [
+        "None"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "World Island",
+        "Level": "10000+",
+        "Sea": "Early Islands",
+        "Bosses": "None"
+      }
+    },
+    {
+      "name": "JoJo Island",
+      "slug": "jojo-island",
+      "level": "10000+",
+      "sea": "Endgame Islands",
+      "bosses": [
+        "The World"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "JoJo Island",
+        "Level": "10000+",
+        "Sea": "Endgame Islands",
+        "Bosses": "The World"
+      }
+    },
+    {
+      "name": "Sailor Island",
+      "slug": "sailor-island",
+      "level": "0+",
+      "sea": "Early Islands",
+      "bosses": [
+        "Jinwoo",
+        "Alucard",
+        "Escanor (Boss Rush)"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Sailor Island",
+        "Level": "0+",
+        "Sea": "Early Islands",
+        "Bosses": "Jinwoo, Alucard, Escanor (Boss Rush)"
+      }
+    },
+    {
+      "name": "Starter Island",
+      "slug": "starter-island",
+      "level": "0",
+      "sea": "Early Islands",
+      "bosses": [
+        "None"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Starter Island",
+        "Level": "0",
+        "Sea": "Early Islands",
+        "Bosses": "None"
+      }
+    },
+    {
+      "name": "Jungle Island",
+      "slug": "jungle-island",
+      "level": "250+",
+      "sea": "Early Islands",
+      "bosses": [
+        "None"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Jungle Island",
+        "Level": "250+",
+        "Sea": "Early Islands",
+        "Bosses": "None"
+      }
+    },
+    {
+      "name": "Desert Island",
+      "slug": "desert-island",
+      "level": "750+",
+      "sea": "Early Islands",
+      "bosses": [
+        "None"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Desert Island",
+        "Level": "750+",
+        "Sea": "Early Islands",
+        "Bosses": "None"
+      }
+    },
+    {
+      "name": "Dungeon Island",
+      "slug": "dungeon-island",
+      "level": "1000+ (dungeon requires 5000+)",
+      "sea": "Early Islands",
+      "bosses": [
+        "Shadow",
+        "Shadow Monarch"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Dungeon Island",
+        "Level": "1000+ (dungeon requires 5000+)",
+        "Sea": "Early Islands",
+        "Bosses": "Shadow, Shadow Monarch"
+      }
+    },
+    {
+      "name": "Snow Island",
+      "slug": "snow-island",
+      "level": "1500+",
+      "sea": "Early Islands",
+      "bosses": [
+        "None"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Snow Island",
+        "Level": "1500+",
+        "Sea": "Early Islands",
+        "Bosses": "None"
+      }
+    },
+    {
+      "name": "Boss Island",
+      "slug": "boss-island",
+      "level": "1500+",
+      "sea": "Mid Islands",
+      "bosses": [
+        "Saber",
+        "Ichigo",
+        "Gilgamesh",
+        "Qin Shi",
+        "Blessed Maiden"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Boss Island",
+        "Level": "1500+",
+        "Sea": "Mid Islands",
+        "Bosses": "Saber, Ichigo, Gilgamesh, Qin Shi, Blessed Maiden"
+      }
+    },
+    {
+      "name": "Shibuya Station",
+      "slug": "shibuya-station",
+      "level": "3000+",
+      "sea": "Mid Islands",
+      "bosses": [
+        "Yuji",
+        "Gojo",
+        "Sukuna"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Shibuya Station",
+        "Level": "3000+",
+        "Sea": "Mid Islands",
+        "Bosses": "Yuji, Gojo, Sukuna"
+      }
+    },
+    {
+      "name": "Hueco Mundo",
+      "slug": "hueco-mundo",
+      "level": "5000+",
+      "sea": "Mid Islands",
+      "bosses": [
+        "Aizen"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Hueco Mundo",
+        "Level": "5000+",
+        "Sea": "Mid Islands",
+        "Bosses": "Aizen"
+      }
+    },
+    {
+      "name": "Shinjuku Island",
+      "slug": "shinjuku-island",
+      "level": "6250+",
+      "sea": "Endgame Islands",
+      "bosses": [
+        "Strongest of Today",
+        "Strongest in History"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Shinjuku Island",
+        "Level": "6250+",
+        "Sea": "Endgame Islands",
+        "Bosses": "Strongest of Today, Strongest in History"
+      }
+    },
+    {
+      "name": "Slime Island",
+      "slug": "slime-island",
+      "level": "8000+",
+      "sea": "Endgame Islands",
+      "bosses": [
+        "Rimuru"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Slime Island",
+        "Level": "8000+",
+        "Sea": "Endgame Islands",
+        "Bosses": "Rimuru"
+      }
+    },
+    {
+      "name": "Academy Island",
+      "slug": "academy-island",
+      "level": "9000+",
+      "sea": "Endgame Islands",
+      "bosses": [
+        "Anos"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Academy Island",
+        "Level": "9000+",
+        "Sea": "Endgame Islands",
+        "Bosses": "Anos"
+      }
+    },
+    {
+      "name": "Christmas Island",
+      "slug": "christmas-island",
+      "level": "Any",
+      "sea": "Early Islands",
+      "bosses": [
+        "Ragna"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Christmas Island",
+        "Level": "Any",
+        "Sea": "Early Islands",
+        "Bosses": "Ragna"
+      }
+    },
+    {
+      "name": "Valentine Island",
+      "slug": "valentine-island",
+      "level": "Endgame",
+      "sea": "Endgame Islands",
+      "bosses": [
+        "Madoka"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Valentine Island",
+        "Level": "Endgame",
+        "Sea": "Endgame Islands",
+        "Bosses": "Madoka"
+      }
+    },
+    {
+      "name": "Judgement Island",
+      "slug": "judgement-island",
+      "level": "10000+",
+      "sea": "Endgame Islands",
+      "bosses": [
+        "Yamato"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Judgement Island",
+        "Level": "10000+",
+        "Sea": "Endgame Islands",
+        "Bosses": "Yamato"
+      }
+    },
+    {
+      "name": "Soul Society",
+      "slug": "soul-society",
+      "level": "8500+ (requires Hogyoku Quest)",
+      "sea": "Endgame Islands",
+      "bosses": [
+        "True Aizen"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Soul Society",
+        "Level": "8500+ (requires Hogyoku Quest)",
+        "Sea": "Endgame Islands",
+        "Bosses": "True Aizen"
+      }
+    },
+    {
+      "name": "Lawless Island",
+      "slug": "lawless-island",
+      "level": "12000+",
+      "sea": "Endgame Islands",
+      "bosses": [
+        "Atomic Boss"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Lawless Island",
+        "Level": "12000+",
+        "Sea": "Endgame Islands",
+        "Bosses": "Atomic Boss"
+      }
+    },
+    {
+      "name": "Ninja Island",
+      "slug": "ninja-island",
+      "level": "12000+",
+      "sea": "Endgame Islands",
+      "bosses": [
+        "Strongest Shinobi (2B HP",
+        "respawn 5m45s)"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Ninja Island",
+        "Level": "12000+",
+        "Sea": "Endgame Islands",
+        "Bosses": "Strongest Shinobi (2B HP, respawn 5m45s)"
+      }
+    },
+    {
+      "name": "Tower Island",
+      "slug": "tower-island",
+      "level": "8500+",
+      "sea": "Endgame Islands",
+      "bosses": [
+        "None"
+      ],
+      "location": null,
+      "cost": null,
+      "maxLevel": null,
+      "maxBonus": null,
+      "tier": null,
+      "difficulty": null,
+      "boss": null,
+      "time": null,
+      "raw": {
+        "Island": "Tower Island",
+        "Level": "8500+",
+        "Sea": "Endgame Islands",
+        "Bosses": "None"
+      }
+    }
+  ]
+}

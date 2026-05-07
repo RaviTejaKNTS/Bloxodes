@@ -5,16 +5,29 @@
     "version": "0.1.0",
     "orientation": "portrait",
     "scheme": "bloxodes",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f8fafc"
+    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.bloxodes.app"
+      "bundleIdentifier": "com.bloxodes.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.bloxodes.app",
+      "versionCode": 1,
       "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#f8fafc"
-      }
+      },
+      "permissions": []
     },
     "extra": {
       "apiBaseUrl": "https://bloxodes.com"

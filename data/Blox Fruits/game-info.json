@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Blox Fruits game information data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Roblox Universe API - Blox Fruits",
+        "url": "https://apis.roblox.com/universes/v1/places/2753915549/universe",
+        "accessed": "2026-05-07"
+      },
+      {
+        "label": "Roblox Games API - Blox Fruits",
+        "url": "https://games.roblox.com/v1/games?universeIds=994732206",
+        "accessed": "2026-05-07"
+      },
+      {
+        "label": "Roblox Thumbnails API - Blox Fruits icon",
+        "url": "https://thumbnails.roblox.com/v1/games/icons?universeIds=994732206&size=512x512&format=Png&isCircular=false",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "fields",
+      "overview",
+      "robloxUrl"
+    ]
+  },
+  "items": [
+    {
+      "name": "Blox Fruits",
+      "slug": "blox-fruits",
+      "image": "/Blox%20Fruits/Game%20Info/blox-fruits.png",
+      "fields": {
+        "universeId": "994732206",
+        "rootPlaceId": "2753915549",
+        "creatorName": "Gamer Robot Inc",
+        "creatorType": "Group",
+        "playing": "257218",
+        "visits": "61254271310",
+        "maxPlayers": "12",
+        "created": "2019-01-16T03:29:19.433Z",
+        "updated": "2026-05-07T05:55:57.8402668Z"
+      },
+      "overview": "Welcome to Blox Fruits! Become a master swordsman or a powerful blox fruit user as you train to become the strongest player to ever live. You can choose to fight against tough enemies or have powerful boss battles while sailing across the ocean to find hidden secrets. \n\nCurrent level cap: 2800\nCurrent fruits in the game:\nRocket, Spin, Blade, Spring, Bomb, Smoke, Spike, Flame, Ice, Sand, Dark, Eagle, Diamond, Light, Rubber, Ghost, Magma, Quake, Buddha, Love, Creation, Spider, Sound, Phoenix, Portal, Lightning, Pain, Blizzard, Gravity, Mammoth, T-Rex, Dough, Shadow, Venom, Gas, Spirit, Tiger, Yeti, Kitsune, Control, and Dragon\n\nFAQ:\n-Fruits spawn in the map every hour / despawn after 20 mins\n-You can buy fruits from the Blox Fruits Dealer. He restocks random fruits every 4 hours\n-More info in the group description\n\nDo not exploit, our auto-detection will catch you and we do not appeal our bans.",
+      "robloxUrl": "https://www.roblox.com/games/2753915549/Blox-Fruits",
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-a64f70da20fc1e80ee76fe5d49c1be0a/512/512/Image/Png/noFilter"
+    }
+  ]
+}

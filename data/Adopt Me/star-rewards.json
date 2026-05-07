@@ -1,0 +1,488 @@
+{
+  "meta": {
+    "title": "Adopt Me star rewards data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Adopt Me Wiki - Star Rewards",
+        "url": "https://adoptme.fandom.com/wiki/Star_Rewards",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "category",
+      "rewardCategory",
+      "rarity",
+      "costStars",
+      "wikiUrl"
+    ]
+  },
+  "items": [
+    {
+      "name": "Steel Drum",
+      "slug": "steel-drum",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Uncommon",
+      "costStars": "9 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Steel_Drum",
+      "fields": {
+        "costStars": "9 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Uncommon"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/steel-drum.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/7/77/Steel_Drum.JPG/revision/latest?cb=20200321044541"
+    },
+    {
+      "name": "Drone Propeller",
+      "slug": "drone-propeller",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Uncommon",
+      "costStars": "30 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Drone_Propeller",
+      "fields": {
+        "costStars": "30 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Uncommon"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/drone-propeller.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/5/55/Drone_Propeller.jpg/revision/latest?cb=20200321044000"
+    },
+    {
+      "name": "Medieval Grapple",
+      "slug": "medieval-grapple",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Uncommon",
+      "costStars": "90 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Medieval_Grapple",
+      "fields": {
+        "costStars": "90 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Uncommon"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/medieval-grapple.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/3/36/Medieval_Grapple.JPG/revision/latest?cb=20200321044725"
+    },
+    {
+      "name": "Human Bubble",
+      "slug": "human-bubble",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Vehicles",
+      "rarity": "Rare",
+      "costStars": "140 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Human_Bubble",
+      "fields": {
+        "costStars": "140 Stars",
+        "rewardCategory": "Vehicles",
+        "rarity": "Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/human-bubble.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/8/8c/Human_Bubble.JPG/revision/latest?cb=20200321044901"
+    },
+    {
+      "name": "Da Vinci Propeller",
+      "slug": "da-vinci-propeller",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Rare",
+      "costStars": "180 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Da_Vinci_Propeller",
+      "fields": {
+        "costStars": "180 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/da-vinci-propeller.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/c/cf/Da_Vinci_Propeller.jpg/revision/latest?cb=20200321045018"
+    },
+    {
+      "name": "Ginger Cat",
+      "slug": "ginger-cat",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Pets",
+      "rarity": "Ultra-Rare",
+      "costStars": "210 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Ginger_Cat",
+      "fields": {
+        "costStars": "210 Stars",
+        "rewardCategory": "Pets",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/ginger-cat.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/d/d6/Ginger_Cat_AM.png/revision/latest?cb=20200416010459"
+    },
+    {
+      "name": "Frostbite Grapple",
+      "slug": "frostbite-grapple",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Rare",
+      "costStars": "230 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Frostbite_Grapple",
+      "fields": {
+        "costStars": "230 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/frostbite-grapple.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/a9/Frostbite_Grapple.jpg/revision/latest?cb=20200321045228"
+    },
+    {
+      "name": "Trumpet",
+      "slug": "trumpet",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Uncommon",
+      "costStars": "280 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Trumpet",
+      "fields": {
+        "costStars": "280 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Uncommon"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/trumpet.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/2/2b/Trumpet.jpg/revision/latest?cb=20200321045414"
+    },
+    {
+      "name": "Angelic Propeller",
+      "slug": "angelic-propeller",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Ultra-Rare",
+      "costStars": "300 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Angelic_Propeller",
+      "fields": {
+        "costStars": "300 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/angelic-propeller.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/6/67/Angelic_Propeller.jpg/revision/latest?cb=20200321045527"
+    },
+    {
+      "name": "Blue Rider",
+      "slug": "blue-rider",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Vehicles",
+      "rarity": "Rare",
+      "costStars": "320 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Blue_Rider",
+      "fields": {
+        "costStars": "320 Stars",
+        "rewardCategory": "Vehicles",
+        "rarity": "Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/blue-rider.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/c/c5/Blue_Rider.jpg/revision/latest?cb=20200321045641"
+    },
+    {
+      "name": "Didgeridoo",
+      "slug": "didgeridoo",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Rare",
+      "costStars": "360 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Didgeridoo",
+      "fields": {
+        "costStars": "360 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/didgeridoo.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/13/Didgeridoo.jpg/revision/latest?cb=20200321050035"
+    },
+    {
+      "name": "Toucan",
+      "slug": "toucan",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Pets",
+      "rarity": "Ultra-Rare",
+      "costStars": "400 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Toucan",
+      "fields": {
+        "costStars": "400 Stars",
+        "rewardCategory": "Pets",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/toucan.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/e/eb/Toucan_AM.jpg/revision/latest?cb=20200321050823"
+    },
+    {
+      "name": "Futuristic Grapple",
+      "slug": "futuristic-grapple",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Ultra-Rare",
+      "costStars": "460 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Futuristic_Grapple",
+      "fields": {
+        "costStars": "460 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/futuristic-grapple.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/b/b5/Futuristic_Grapple.jpg/revision/latest/scale-to-width-down/92?cb=20200416010047"
+    },
+    {
+      "name": "Rocket Racer",
+      "slug": "rocket-racer",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Vehicles",
+      "rarity": "Ultra-Rare",
+      "costStars": "500 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Rocket_Racer",
+      "fields": {
+        "costStars": "500 Stars",
+        "rewardCategory": "Vehicles",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/rocket-racer.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/f/f3/Rocket_Racer_AM.png/revision/latest/scale-to-width-down/92?cb=20200406022019"
+    },
+    {
+      "name": "Starfish",
+      "slug": "starfish",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Pets",
+      "rarity": "Ultra-Rare",
+      "costStars": "550 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Starfish",
+      "fields": {
+        "costStars": "550 Stars",
+        "rewardCategory": "Pets",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/starfish.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/e/eb/Starfish_AM.jpg/revision/latest?cb=20200321051042"
+    },
+    {
+      "name": "Witch's Caravan",
+      "slug": "witch-s-caravan",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Vehicles",
+      "rarity": "Legendary",
+      "costStars": "600 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Witch%27s_Caravan",
+      "fields": {
+        "costStars": "600 Stars",
+        "rewardCategory": "Vehicles",
+        "rarity": "Legendary"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/witch-s-caravan.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/e/ea/Witch_Caravan.png/revision/latest/scale-to-width-down/102?cb=20200405204436"
+    },
+    {
+      "name": "Golden Egg",
+      "slug": "golden-egg",
+      "category": "First page of the Star Rewards",
+      "rewardCategory": "Pets",
+      "rarity": "Legendary",
+      "costStars": "660 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Golden_Egg",
+      "fields": {
+        "costStars": "660 Stars",
+        "rewardCategory": "Pets",
+        "rarity": "Legendary"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/golden-egg.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/5/5c/Golden_Egg_AM.jpg/revision/latest?cb=20200321051250"
+    },
+    {
+      "name": "Magician's Wand Grappling Hook",
+      "slug": "magician-s-wand-grappling-hook",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Rare",
+      "costStars": "9 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Magician%27s_Wand_Grappling_Hook",
+      "fields": {
+        "costStars": "9 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/magician-s-wand-grappling-hook.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/07/Magician%27s_Wand_Grappling_Hook_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191220"
+    },
+    {
+      "name": "Hovercraft",
+      "slug": "hovercraft",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Vehicles",
+      "rarity": "Ultra-Rare",
+      "costStars": "65 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Hovercraft",
+      "fields": {
+        "costStars": "65 Stars",
+        "rewardCategory": "Vehicles",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/hovercraft.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/47/Hovercraft_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191220"
+    },
+    {
+      "name": "Big Log Throw Toy",
+      "slug": "big-log-throw-toy",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Uncommon",
+      "costStars": "120 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Big_Log_Throw_Toy",
+      "fields": {
+        "costStars": "120 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Uncommon"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/big-log-throw-toy.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/0a/Big_Log_Throw_Toy_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191219"
+    },
+    {
+      "name": "Froggy Stroller",
+      "slug": "froggy-stroller",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Strollers",
+      "rarity": "Rare",
+      "costStars": "180 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Froggy_Stroller",
+      "fields": {
+        "costStars": "180 Stars",
+        "rewardCategory": "Strollers",
+        "rarity": "Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/froggy-stroller.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/15/Froggy_Stroller_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191220"
+    },
+    {
+      "name": "Red Panda Cupcake Chew Toy",
+      "slug": "red-panda-cupcake-chew-toy",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Uncommon",
+      "costStars": "225 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Red_Panda_Cupcake_Chew_Toy",
+      "fields": {
+        "costStars": "225 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Uncommon"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/red-panda-cupcake-chew-toy.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/6/6c/Red_Panda_Cupcake_Chew_Toy_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191220"
+    },
+    {
+      "name": "Mermaid Propeller",
+      "slug": "mermaid-propeller",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Toys",
+      "rarity": "Rare",
+      "costStars": "280 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Mermaid_Propeller",
+      "fields": {
+        "costStars": "280 Stars",
+        "rewardCategory": "Toys",
+        "rarity": "Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/mermaid-propeller.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/a4/Mermaid_Propeller_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191220"
+    },
+    {
+      "name": "Planetary Core Car",
+      "slug": "planetary-core-car",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Vehicles",
+      "rarity": "Ultra-Rare",
+      "costStars": "340 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Planetary_Core_Car",
+      "fields": {
+        "costStars": "340 Stars",
+        "rewardCategory": "Vehicles",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/planetary-core-car.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/5/55/Planetary_Core_Car_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191220"
+    },
+    {
+      "name": "Pomeranian",
+      "slug": "pomeranian",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Pets",
+      "rarity": "Ultra-Rare",
+      "costStars": "400 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Pomeranian",
+      "fields": {
+        "costStars": "400 Stars",
+        "rewardCategory": "Pets",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/pomeranian.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/5/5f/Pomeranian_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191332"
+    },
+    {
+      "name": "Wind Turbine Earrings",
+      "slug": "wind-turbine-earrings",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Pet Accessories",
+      "rarity": "Uncommon",
+      "costStars": "450 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Wind_Turbine_Earrings",
+      "fields": {
+        "costStars": "450 Stars",
+        "rewardCategory": "Pet Accessories",
+        "rarity": "Uncommon"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/wind-turbine-earrings.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1c/Wind_Turbine_Earrings_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191220"
+    },
+    {
+      "name": "Orchid Racer",
+      "slug": "orchid-racer",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Vehicles",
+      "rarity": "Ultra-Rare",
+      "costStars": "520 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Orchid_Racer",
+      "fields": {
+        "costStars": "520 Stars",
+        "rewardCategory": "Vehicles",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/orchid-racer.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/7/7d/Orchid_Racer_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191220"
+    },
+    {
+      "name": "Orca",
+      "slug": "orca",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Pets",
+      "rarity": "Ultra-Rare",
+      "costStars": "600 Stars",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Orca",
+      "fields": {
+        "costStars": "600 Stars",
+        "rewardCategory": "Pets",
+        "rarity": "Ultra-Rare"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/orca.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/f/f9/Orca_in_the_Star_Rewards.png/revision/latest/scale-to-width-down/103?cb=20220901191220"
+    },
+    {
+      "name": "Diamond Egg",
+      "slug": "diamond-egg",
+      "category": "Second page of the Star Rewards",
+      "rewardCategory": "Pets",
+      "rarity": "Legendary",
+      "costStars": "660 Stars and must have gotten the Golden Egg at least once.",
+      "wikiUrl": "https://adoptme.fandom.com/wiki/Diamond_Egg",
+      "fields": {
+        "costStars": "660 Stars and must have gotten the Golden Egg at least once.",
+        "rewardCategory": "Pets",
+        "rarity": "Legendary"
+      },
+      "image": "/Adopt%20Me/Star%20Rewards/diamond-egg.webp",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/2/25/Diamond_Egg_AM.jpg/revision/latest/scale-to-width-down/104?cb=20210124074406"
+    }
+  ]
+}

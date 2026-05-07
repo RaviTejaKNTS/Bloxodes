@@ -11,7 +11,7 @@ export type SocialLinkDetail = {
   value: string;
 };
 
-export type Provider = "beebom" | "robloxden" | "destructoid";
+export type Provider = "beebom" | "robloxden" | "destructoid" | "progameguides";
 
 type ProviderResult = {
   provider: Provider;
@@ -19,17 +19,38 @@ type ProviderResult = {
   links: SocialLinks;
 };
 
-const PROVIDER_PRIORITY: Provider[] = ["beebom", "robloxden", "destructoid"];
+const PROVIDER_PRIORITY: Provider[] = ["beebom", "robloxden", "destructoid", "progameguides"];
 const PROVIDER_RANK: Record<Provider, number> = {
   beebom: 0,
   robloxden: 1,
-  destructoid: 2
+  destructoid: 2,
+  progameguides: 3
 };
 
 const USER_AGENT = "Mozilla/5.0 (compatible; RobloxCodesSocialBot/1.0)";
-const TWITTER_HANDLE_BLOCKLIST = new Set(["ishanxxi", "sanmaysays"]);
+const TWITTER_HANDLE_BLOCKLIST = new Set([
+  "ishanxxi",
+  "sanmaysays",
+  "beebom",
+  "beebomco",
+  "destructoid",
+  "dtoid",
+  "pggroblox",
+  "progamerguides",
+  "progameguides"
+]);
+const YOUTUBE_PATH_BLOCKLIST = new Set([
+  "@dtoid",
+  "@beebomco",
+  "@progameguides",
+  "beebomco",
+  "channel/uc9lhxd5ubbsa0hfifyumaa",
+  "channel/uc9lhxd5ubbsao0hfifyumaa"
+]);
+const SITE_SOCIAL_CONTEXT_PATTERN =
+  /\b(beebom|destructoid|dtoid|pgg\s*roblox|pro\s*game\s*guides|progamerguides)\b/i;
 const EXCLUDED_CONTAINER_SELECTOR =
-  "aside, header, footer, .author, .author-box, .author-card, .post-author, .byline, .post-share, .social-share, .article-share, .sidebar, .related-articles";
+  "aside, header, footer, nav, .author, .author-box, .author-card, .post-author, .byline, .post-share, .social-share, .article-share, .beebom-social-share, .social-wrap, .sidebar, .related-articles, .toast, .network, .site-footer";
 
 const TRACKING_PARAMS = [
   "utm_source",
@@ -43,7 +64,11 @@ const TRACKING_PARAMS = [
   "utm_reader",
   "utm_place",
   "utm_social",
-  "utm_social-type"
+  "utm_social-type",
+  "ref_src",
+  "fbclid",
+  "gclid",
+  "twclid"
 ];
 
 function stripTrackingParams(url: URL) {
@@ -77,6 +102,7 @@ function detectSocialProvider(rawUrl: string): Provider | null {
     if (host.endsWith("beebom.com")) return "beebom";
     if (host.endsWith("robloxden.com")) return "robloxden";
     if (host.endsWith("destructoid.com")) return "destructoid";
+    if (host.endsWith("progameguides.com")) return "progameguides";
   } catch {
     return null;
   }
@@ -90,7 +116,7 @@ function isRobloxExperiencePath(pathname: string, searchParams: URLSearchParams)
 }
 
 function isRobloxCommunityPath(pathname: string): boolean {
-  return pathname.includes("/communities/") || pathname.includes("/users/");
+  return pathname.includes("/communities/") || pathname.includes("/groups/");
 }
 
 function classifyLink(url: URL): SocialLinkType | null {
@@ -131,14 +157,36 @@ async function fetchHtml(url: string): Promise<cheerio.CheerioAPI> {
   return cheerio.load(html);
 }
 
-function isBlockedTwitter(url: URL): boolean {
+function normalizedTwitterHandle(url: URL): string | null {
   const host = url.hostname.replace(/^www\./i, "").toLowerCase();
   if (host !== "twitter.com" && host !== "x.com") {
-    return false;
+    return null;
+  }
+  if (url.pathname.startsWith("/intent/") || url.pathname.startsWith("/share")) {
+    return "__blocked_intent__";
   }
   const [handle] = url.pathname.split("/").filter(Boolean);
-  if (!handle) return false;
-  return TWITTER_HANDLE_BLOCKLIST.has(handle.toLowerCase());
+  return handle ? handle.toLowerCase() : null;
+}
+
+function normalizedYoutubePath(url: URL): string | null {
+  const host = url.hostname.replace(/^www\./i, "").toLowerCase();
+  if (!host.endsWith("youtube.com") && host !== "youtu.be" && host !== "m.youtube.com") {
+    return null;
+  }
+  return url.pathname.replace(/^\/+|\/+$/g, "").toLowerCase();
+}
+
+function isSiteOwnedSocialLink(url: URL, label: string, context: string): boolean {
+  const twitterHandle = normalizedTwitterHandle(url);
+  if (twitterHandle === "__blocked_intent__") return true;
+  if (twitterHandle && TWITTER_HANDLE_BLOCKLIST.has(twitterHandle)) return true;
+
+  const youtubePath = normalizedYoutubePath(url);
+  if (youtubePath && YOUTUBE_PATH_BLOCKLIST.has(youtubePath)) return true;
+
+  const text = `${label} ${context}`;
+  return SITE_SOCIAL_CONTEXT_PATTERN.test(text) && !/\b(roblox group|discord server|developer|creator)\b/i.test(text);
 }
 
 function extractLinksFromAnchors(
@@ -155,7 +203,9 @@ function extractLinksFromAnchors(
     const href = anchor.attr("href");
     const normalized = normalizeAbsoluteUrl(href, baseUrl);
     if (!normalized) return;
-    if (isBlockedTwitter(normalized)) return;
+    const label = anchor.text().replace(/\s+/g, " ").trim();
+    const context = anchor.parent().text().replace(/\s+/g, " ").trim();
+    if (isSiteOwnedSocialLink(normalized, label, context)) return;
     const type = classifyLink(normalized);
     if (!type) return;
     if (!result[type]) {
@@ -186,7 +236,9 @@ function extractRobloxdenPageLinks($: cheerio.CheerioAPI, baseUrl: string): Soci
     const href = anchor.attr("href");
     const normalized = normalizeAbsoluteUrl(href, baseUrl);
     if (!normalized) return;
-    if (isBlockedTwitter(normalized)) return;
+    const label = anchor.text().replace(/\s+/g, " ").trim();
+    const context = anchor.parent().text().replace(/\s+/g, " ").trim();
+    if (isSiteOwnedSocialLink(normalized, label, context)) return;
 
     const type = classifyLink(normalized);
     if (!type || result[type]) return;
@@ -247,8 +299,23 @@ async function scrapeDestructoidLinks(url: string): Promise<SocialLinks> {
   const container =
     selectArticleContainer($, [
       ".wp-block-gamurs-article-content",
+      ".post-content",
       "article .wp-block-post-content",
       ".article__body"
+    ]) ?? null;
+  if (!container) {
+    return {};
+  }
+  return extractLinksFromAnchors($, container, url);
+}
+
+async function scrapeProGameGuidesLinks(url: string): Promise<SocialLinks> {
+  const $ = await fetchHtml(url);
+  const container =
+    selectArticleContainer($, [
+      ".entry-content.wp-block-gamurs-article-content",
+      ".wp-block-gamurs-article-content",
+      "article .entry-content"
     ]) ?? null;
   if (!container) {
     return {};
@@ -272,6 +339,9 @@ export async function scrapeSocialLinksFromUrl(url: string): Promise<ProviderRes
       break;
     case "destructoid":
       links = await scrapeDestructoidLinks(url);
+      break;
+    case "progameguides":
+      links = await scrapeProGameGuidesLinks(url);
       break;
     default:
       break;

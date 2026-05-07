@@ -93,6 +93,21 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Local Grow a Garden catalog datasets collected from multiple external sources and intended for wiki/catalog page work.
 - `data/Grow a Garden/quiz.json`
   - Quiz content for the Grow a Garden quiz flow.
+- `data/Steal a Brainrot/*.json`
+  - Local Steal a Brainrot in-game datasets collected from the Steal a Brainrot Wiki for wiki/catalog page work.
+  - Matching images live under `apps/web/public/Steal a Brainrot/`.
+- `data/Sailor Piece/*.json`
+  - Local Sailor Piece in-game datasets collected from SailorPiece.org for wiki/catalog page work.
+  - Matching source-provided images live under `apps/web/public/Sailor Piece/`.
+- `data/Brookhaven RP/*.json`
+  - Local Brookhaven RP in-game datasets collected from the Official Brookhaven Wiki for wiki/catalog page work.
+  - Matching source-provided images live under `apps/web/public/Brookhaven RP/`.
+- `data/Adopt Me/*.json`
+  - Local Adopt Me in-game datasets collected from the Adopt Me Wiki and Roblox public APIs for wiki/catalog page work.
+  - Matching source-provided images live under `apps/web/public/Adopt Me/`.
+- `data/Blox Fruits/*.json`
+  - Local Blox Fruits in-game datasets collected from the Blox Fruits Wiki and Roblox public APIs for wiki/catalog page work.
+  - Matching source-provided images live under `apps/web/public/Blox Fruits/`.
 - `data/The Forge/*.json`
   - Forge catalog and calculator datasets consumed by `src/lib/forge/*` and catalog routes.
   - The Forge collection pages also use `quests.json`, `skills.json`, `blueprints.json`, and `npcs.json` through `src/app/(site)/catalog/the-forge/page-data.tsx`.

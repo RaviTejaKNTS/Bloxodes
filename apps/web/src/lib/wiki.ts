@@ -13,16 +13,20 @@ import {
   type UniverseListBadge
 } from "@/lib/db";
 import { getUniverseEventSummary, type UniverseEventSummary } from "@/lib/events-summary";
-import { listPublishedCatalogPagesByUniverseId, type CatalogListEntry } from "@/lib/catalog";
+import {
+  listPublishedCatalogPagesByCodePrefix,
+  listPublishedCatalogPagesByUniverseId,
+  type CatalogListEntry
+} from "@/lib/catalog";
 import { supabaseAdmin } from "@/lib/supabase";
 import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
 import type { QuizListEntry } from "@/lib/quizzes";
 
 const WIKI_REVALIDATE_SECONDS = 3600;
 const WIKI_SELECT_FIELDS =
-  "id, slug, title, seo_title, meta_description, cover_image, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at, content_updated_at, universe_root_place_id, universe_name, universe_display_name, universe_slug, universe_description, universe_game_description_md, universe_creator_id, universe_creator_name, universe_creator_type, universe_creator_has_verified_badge, universe_group_id, universe_group_name, universe_group_has_verified_badge, universe_genre, universe_genre_l1, universe_genre_l2, universe_age_rating, universe_avatar_type, desktop_enabled, mobile_enabled, tablet_enabled, console_enabled, vr_enabled, voice_chat_enabled, price, private_server_price_robux, create_vip_servers_allowed, max_players, server_size, playing, visits, favorites, likes, dislikes, icon_url, thumbnail_urls, social_links, created_at_api, updated_at_api, universe_updated_at";
+  "id, slug, title, seo_title, meta_description, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at, content_updated_at, universe_root_place_id, universe_name, universe_display_name, universe_slug, universe_description, universe_game_description_md, universe_creator_id, universe_creator_name, universe_creator_type, universe_creator_has_verified_badge, universe_group_id, universe_group_name, universe_group_has_verified_badge, universe_genre, universe_genre_l1, universe_genre_l2, universe_age_rating, universe_avatar_type, desktop_enabled, mobile_enabled, tablet_enabled, console_enabled, vr_enabled, voice_chat_enabled, price, private_server_price_robux, create_vip_servers_allowed, max_players, server_size, playing, visits, favorites, likes, dislikes, icon_url, thumbnail_urls, social_links, created_at_api, updated_at_api, universe_updated_at";
 const WIKI_FALLBACK_FIELDS =
-  "id, slug, title, seo_title, meta_description, cover_image, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at";
+  "id, slug, title, seo_title, meta_description, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at";
 
 export type WikiPageContent = {
   id: string;
@@ -229,7 +233,7 @@ export async function getWikiPageBySlug(slug: string): Promise<WikiPageContent |
   const normalized = normalizeSlug(slug);
   if (!normalized) return null;
 
-  const cached = unstable_cache(async () => fetchWikiPage(normalized), [`wiki-page:${normalized}`], {
+  const cached = unstable_cache(async () => fetchWikiPage(normalized), [`wiki-page-v2:${normalized}`], {
     revalidate: WIKI_REVALIDATE_SECONDS,
     tags: buildWikiTags(normalized)
   });
@@ -243,7 +247,7 @@ export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
       const supabase = supabaseAdmin();
       const { data, error } = await supabase
         .from("wiki_pages_view")
-        .select("id, slug, title, meta_description, cover_image, universe_id, icon_url, thumbnail_urls, published_at, created_at, updated_at, content_updated_at")
+        .select("id, slug, title, meta_description, universe_id, icon_url, thumbnail_urls, published_at, created_at, updated_at, content_updated_at")
         .eq("is_published", true)
         .order("content_updated_at", { ascending: false })
         .order("id", { ascending: true });
@@ -254,7 +258,7 @@ export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
 
       const { data: fallback, error: fallbackError } = await supabase
         .from("wiki_pages")
-        .select("id, slug, title, meta_description, cover_image, universe_id, published_at, created_at, updated_at")
+        .select("id, slug, title, meta_description, universe_id, published_at, created_at, updated_at")
         .eq("is_published", true)
         .order("updated_at", { ascending: false })
         .order("id", { ascending: true });
@@ -266,7 +270,7 @@ export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
 
       return (fallback ?? []) as WikiListEntry[];
     },
-    ["wiki-index-pages"],
+    ["wiki-index-pages-v2"],
     {
       revalidate: WIKI_REVALIDATE_SECONDS,
       tags: ["wiki-index"]
@@ -291,7 +295,7 @@ export async function listPublishedWikiSlugs(): Promise<string[]> {
         .map((row) => (row as { slug?: string | null }).slug)
         .filter((slug): slug is string => typeof slug === "string" && slug.trim().length > 0);
     },
-    ["wiki-index-slugs"],
+    ["wiki-index-slugs-v2"],
     {
       revalidate: WIKI_REVALIDATE_SECONDS,
       tags: ["wiki-index"]
@@ -488,7 +492,17 @@ async function listOtherWikiDeveloperGames(
 
 export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRelatedData> {
   const universeId = page.universe_id ?? null;
-  if (!universeId) return EMPTY_WIKI_RELATED_DATA;
+  const slug = page.slug?.trim().toLowerCase() ?? "";
+  const catalogPagesByPrefixPromise = slug
+    ? safeList("catalog pages by slug", () => listPublishedCatalogPagesByCodePrefix(slug))
+    : Promise.resolve([]);
+
+  if (!universeId) {
+    return {
+      ...EMPTY_WIKI_RELATED_DATA,
+      catalogPages: await catalogPagesByPrefixPromise
+    };
+  }
 
   const [
     codes,
@@ -496,6 +510,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     articles,
     checklists,
     catalogPages,
+    catalogPagesByPrefix,
     quizzes,
     eventsPage,
     eventSummary,
@@ -511,6 +526,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     safeList("articles", () => listPublishedArticlesByUniverseId(universeId, 8, 0)),
     safeList("checklists", () => listPublishedChecklistsByUniverseId(universeId, 4)),
     safeList("catalog pages", () => listPublishedCatalogPagesByUniverseId(universeId)),
+    catalogPagesByPrefixPromise,
     safeList("quizzes", () => listWikiQuizzesByUniverseId(universeId, 4)),
     safeValue("events page", () => getEventsPageByUniverseId(universeId)),
     safeValue("event summary", () => getUniverseEventSummary(universeId)),
@@ -527,7 +543,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     tools,
     articles,
     checklists,
-    catalogPages,
+    catalogPages: mergeCatalogPages(catalogPages, catalogPagesByPrefix),
     quizzes,
     eventsPage,
     eventSummary,
@@ -538,4 +554,20 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     servers,
     developerGames
   };
+}
+
+function mergeCatalogPages(left: CatalogListEntry[], right: CatalogListEntry[]): CatalogListEntry[] {
+  const seen = new Set<string>();
+  const merged: CatalogListEntry[] = [];
+  for (const entry of [...left, ...right]) {
+    if (seen.has(entry.code)) continue;
+    seen.add(entry.code);
+    merged.push(entry);
+  }
+  return merged.sort((a, b) => {
+    const leftOrder = typeof a.wiki_sort_order === "number" ? a.wiki_sort_order : Number.MAX_SAFE_INTEGER;
+    const rightOrder = typeof b.wiki_sort_order === "number" ? b.wiki_sort_order : Number.MAX_SAFE_INTEGER;
+    if (leftOrder !== rightOrder) return leftOrder - rightOrder;
+    return a.title.localeCompare(b.title);
+  });
 }

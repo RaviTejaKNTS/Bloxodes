@@ -60,6 +60,8 @@
     "collect:clothing-items": "tsx scripts/catalog/collect-roblox-clothing-items.ts",
     "collect:avatar-animation-items": "tsx scripts/catalog/collect-roblox-avatar-animation-items.ts",
     "collect:grow-a-garden-images": "tsx scripts/catalog/collect-grow-a-garden-images.ts",
+    "seed:game-catalog-pages": "tsx scripts/catalog/seed-game-catalog-pages.ts",
+    "seed:game-wiki-pages": "tsx scripts/catalog/seed-game-wiki-pages.ts",
     "queue:event-guides": "tsx scripts/events/queue-event-guides.ts",
     "enrich:universes": "tsx scripts/universes/enrich-roblox-universes.ts",
     "enrich:universes:light": "tsx scripts/universes/enrich-roblox-universes.ts --mode light",

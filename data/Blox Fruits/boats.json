@@ -1,0 +1,235 @@
+{
+  "meta": {
+    "title": "Blox Fruits boats data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Blox Fruits Wiki - Boats",
+        "url": "https://blox-fruits.fandom.com/wiki/Boats",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "category",
+      "price",
+      "health",
+      "seats",
+      "cannons",
+      "speed"
+    ]
+  },
+  "items": [
+    {
+      "name": "Dinghy",
+      "slug": "dinghy",
+      "fields": {
+        "boat": "Dinghy",
+        "price": "Free",
+        "health": "100",
+        "seats": "2",
+        "cannons": "0",
+        "estimatedSpeedInThirdSeaMetersPerMinute": "500"
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dinghy",
+      "category": "Normal Boats",
+      "price": "Free",
+      "health": "100",
+      "seats": "2",
+      "cannons": "0",
+      "speed": "500",
+      "image": null,
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Sloop",
+      "slug": "sloop",
+      "fields": {
+        "boat": "Sloop",
+        "price": "300 (Pirate) 150 (Marine)",
+        "health": "1000 (Pirate)2500 (Marine)",
+        "seats": "3",
+        "cannons": "2",
+        "estimatedSpeedInThirdSeaMetersPerMinute": "625"
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sloop",
+      "category": "Normal Boats",
+      "price": "300 (Pirate) 150 (Marine)",
+      "health": "1000 (Pirate)2500 (Marine)",
+      "seats": "3",
+      "cannons": "2",
+      "speed": "625",
+      "image": null,
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Brigade",
+      "slug": "brigade",
+      "fields": {
+        "boat": "Brigade",
+        "price": "1,000 (Pirate) 600 (Marine)",
+        "health": "2000",
+        "seats": "5",
+        "cannons": "4",
+        "estimatedSpeedInThirdSeaMetersPerMinute": "675 (Faster with Marine)"
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Brigade",
+      "category": "Normal Boats",
+      "price": "1,000 (Pirate) 600 (Marine)",
+      "health": "2000",
+      "seats": "5",
+      "cannons": "4",
+      "speed": "675 (Faster with Marine)",
+      "image": null,
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Grand Brigade",
+      "slug": "grand-brigade",
+      "fields": {
+        "boat": "Grand Brigade",
+        "price": "4,000 (Pirate) 2,000 (Marine)",
+        "health": "2500",
+        "seats": "7",
+        "cannons": "6",
+        "estimatedSpeedInThirdSeaMetersPerMinute": "725"
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Grand_Brigade",
+      "category": "Normal Boats",
+      "price": "4,000 (Pirate) 2,000 (Marine)",
+      "health": "2500",
+      "seats": "7",
+      "cannons": "6",
+      "speed": "725",
+      "image": null,
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Miracle",
+      "slug": "miracle",
+      "fields": {
+        "boat": "Miracle",
+        "price": "Free",
+        "health": "1200",
+        "seats": "2",
+        "cannons": "0",
+        "estimatedSpeedInThirdSeaMetersPerMinute": "1050"
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Miracle",
+      "category": "Luxury Boats",
+      "price": "Free",
+      "health": "1200",
+      "seats": "2",
+      "cannons": "0",
+      "speed": "1050",
+      "image": null,
+      "sourceImageUrl": null
+    },
+    {
+      "name": "The Sentinel",
+      "slug": "the-sentinel",
+      "fields": {
+        "boat": "The Sentinel",
+        "price": "1,000",
+        "health": "1000",
+        "seats": "1",
+        "cannons": "0",
+        "estimatedSpeedInThirdSeaMetersPerMinute": "1100"
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/The_Sentinel",
+      "category": "Luxury Boats",
+      "price": "1,000",
+      "health": "1000",
+      "seats": "1",
+      "cannons": "0",
+      "speed": "1100",
+      "image": null,
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Guardian",
+      "slug": "guardian",
+      "fields": {
+        "boat": "Guardian",
+        "price": "5,000",
+        "health": "2500",
+        "seats": "7",
+        "cannons": "6",
+        "estimatedSpeedInThirdSeaMetersPerMinute": "750"
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Guardian",
+      "category": "Luxury Boats",
+      "price": "5,000",
+      "health": "2500",
+      "seats": "7",
+      "cannons": "6",
+      "speed": "750",
+      "image": null,
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Lantern",
+      "slug": "lantern",
+      "fields": {
+        "boat": "Lantern",
+        "price": "5,000",
+        "health": "2500",
+        "seats": "5",
+        "cannons": "4",
+        "estimatedSpeedInThirdSeaMetersPerMinute": "750"
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Lantern",
+      "category": "Luxury Boats",
+      "price": "5,000",
+      "health": "2500",
+      "seats": "5",
+      "cannons": "4",
+      "speed": "750",
+      "image": null,
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Sleigh",
+      "slug": "sleigh",
+      "fields": {
+        "boat": "Sleigh",
+        "price": "5,000",
+        "health": "1000",
+        "seats": "3",
+        "cannons": "0",
+        "estimatedSpeedInThirdSeaMetersPerMinute": "1000"
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sleigh",
+      "category": "Luxury Boats",
+      "price": "5,000",
+      "health": "1000",
+      "seats": "3",
+      "cannons": "0",
+      "speed": "1000",
+      "image": null,
+      "sourceImageUrl": null
+    },
+    {
+      "name": "Beast Hunter",
+      "slug": "beast-hunter",
+      "fields": {
+        "boat": "Beast Hunter",
+        "price": "5,000",
+        "health": "2500",
+        "seats": "6",
+        "cannons": "4",
+        "estimatedSpeedInThirdSeaMetersPerMinute": "850"
+      },
+      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Beast_Hunter",
+      "category": "Luxury Boats",
+      "price": "5,000",
+      "health": "2500",
+      "seats": "6",
+      "cannons": "4",
+      "speed": "850",
+      "image": null,
+      "sourceImageUrl": null
+    }
+  ]
+}

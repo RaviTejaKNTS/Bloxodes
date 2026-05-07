@@ -85,6 +85,8 @@ This file is the quick reference for what exists today and how to invoke it.
 | Collect clothing catalog items | `scripts/catalog/collect-roblox-clothing-items.ts` | `npm run collect:clothing-items` |
 | Collect avatar animation items | `scripts/catalog/collect-roblox-avatar-animation-items.ts` | `npm run collect:avatar-animation-items` |
 | Collect Grow a Garden local catalog images | `scripts/catalog/collect-grow-a-garden-images.ts` | `npm run collect:grow-a-garden-images` |
+| Seed gathered game catalog pages into Supabase | `scripts/catalog/seed-game-catalog-pages.ts` | `npm run seed:game-catalog-pages`, add `-- --dry-run` to preview |
+| Seed gathered game wiki pages into Supabase | `scripts/catalog/seed-game-wiki-pages.ts` | `npm run seed:game-wiki-pages`, add `-- --dry-run` to preview |
 | Collect all catalog item families | multiple catalog collectors | `npm run collect:catalog-items` |
 | Enrich catalog items | `scripts/catalog/enrich-roblox-catalog-items.ts` | `npm run enrich:catalog-items` |
 | Import RobloxDen free items | `scripts/catalog/import-robloxden-free-items.py` | direct `python scripts/catalog/import-robloxden-free-items.py` |

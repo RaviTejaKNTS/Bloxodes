@@ -17,9 +17,17 @@ import {
   useWindowDimensions,
   View
 } from "react-native";
-import { fetchCodeDetail, fetchCodesIndex, fetchContentIndex } from "./src/api";
+import { buildWebUrl, fetchCodeDetail, fetchCodesIndex, fetchContentIndex, fetchSearchResults } from "./src/api";
 import { darkColors, lightColors, radii, spacing, type ThemeColors } from "./src/theme";
-import type { CodeDetailResponse, CodeItem, CodesIndexItem, MobileContentIndexResponse, MobileContentItem, MobileContentKind } from "./src/types";
+import type {
+  CodeDetailResponse,
+  CodeItem,
+  CodesIndexItem,
+  MobileContentIndexResponse,
+  MobileContentItem,
+  MobileContentKind,
+  SearchItem
+} from "./src/types";
 
 const NAV_ITEMS = [
   "Catalog",
@@ -72,6 +80,20 @@ type ContentSectionConfig = {
 };
 
 const CONTENT_SECTIONS: Record<MobileContentKind, ContentSectionConfig> = {
+  articles: {
+    description: "Fast links into Bloxodes guides and updates, with the useful context you need before opening the full page.",
+    eyebrow: "Roblox Articles",
+    icon: "file-text",
+    statNoun: "articles published",
+    title: "Roblox articles and guides"
+  },
+  catalog: {
+    description: "Browse Roblox reference pages, item databases, IDs, game catalogs, and useful collections from Bloxodes.",
+    eyebrow: "Roblox Catalog",
+    icon: "grid",
+    statNoun: "catalog pages",
+    title: "Roblox catalog pages and databases"
+  },
   tools: {
     description: "Currency converters, planning helpers, and utilities built to stay current with our latest data and guides.",
     eyebrow: "Roblox Utilities",
@@ -99,11 +121,25 @@ const CONTENT_SECTIONS: Record<MobileContentKind, ContentSectionConfig> = {
     icon: "calendar",
     statNoun: "event pages",
     title: "Roblox events to follow now and next"
+  },
+  lists: {
+    description: "Scan curated Roblox game rankings and collections, then open the full list when you want the details.",
+    eyebrow: "Roblox Lists",
+    icon: "list",
+    statNoun: "lists published",
+    title: "Curated Roblox game lists"
+  },
+  wiki: {
+    description: "Quick database cards for Bloxodes wiki pages, built around games, mechanics, stats, and related resources.",
+    eyebrow: "Roblox Wiki",
+    icon: "book-open",
+    statNoun: "wiki pages",
+    title: "Roblox wiki pages and game references"
   }
 };
 
 function isMobileContentScreen(name: Screen["name"]): name is MobileContentKind {
-  return name === "checklists" || name === "events" || name === "quizzes" || name === "tools";
+  return name in CONTENT_SECTIONS;
 }
 
 type AppStyles = ReturnType<typeof createAppStyles>;
@@ -218,6 +254,64 @@ function SearchIcon() {
   return <AppIcon name="search" size={15} color={colors.muted} />;
 }
 
+function getSearchIcon(type: SearchItem["type"]): FeatherIconName {
+  switch (type) {
+    case "article":
+      return "file-text";
+    case "catalog":
+      return "grid";
+    case "checklist":
+      return "check-square";
+    case "codes":
+      return "key";
+    case "event":
+      return "calendar";
+    case "list":
+      return "list";
+    case "quiz":
+      return "award";
+    case "tool":
+      return "tool";
+    case "wiki":
+      return "book-open";
+    case "author":
+      return "user";
+    case "music":
+      return "music";
+    default:
+      return "search";
+  }
+}
+
+function getSearchLabel(type: SearchItem["type"]): string {
+  switch (type) {
+    case "codes":
+      return "Codes";
+    case "article":
+      return "Article";
+    case "checklist":
+      return "Checklist";
+    case "quiz":
+      return "Quiz";
+    case "list":
+      return "List";
+    case "tool":
+      return "Tool";
+    case "catalog":
+      return "Catalog";
+    case "event":
+      return "Event";
+    case "author":
+      return "Author";
+    case "music":
+      return "Music";
+    case "wiki":
+      return "Wiki";
+    default:
+      return "Result";
+  }
+}
+
 function CopyIcon({ copied }: { copied: boolean }) {
   const { colors } = useAppTheme();
   return <AppIcon name={copied ? "check" : "copy"} size={14} color={copied ? colors.white : colors.accent} />;
@@ -233,12 +327,16 @@ function AppShell({
   currentScreen,
   drawerOpen,
   onNavigate,
+  onSearchResult,
+  onSignIn,
   setDrawerOpen
 }: {
   children: JSX.Element;
   currentScreen: Screen;
   drawerOpen: boolean;
   onNavigate: (screen: Screen) => void;
+  onSearchResult: (item: SearchItem) => void;
+  onSignIn: () => void;
   setDrawerOpen: (open: boolean) => void;
 }) {
   const { styles, statusBarStyle } = useAppTheme();
@@ -249,7 +347,9 @@ function AppShell({
     <SafeAreaView style={[styles.safeArea, { minHeight: height }]}>
       <StatusBar style={statusBarStyle} />
       <View style={styles.appFrame}>
-        {sidebarVisible ? <Sidebar currentScreen={currentScreen} onNavigate={onNavigate} /> : null}
+        {sidebarVisible ? (
+          <Sidebar currentScreen={currentScreen} onNavigate={onNavigate} onSearchResult={onSearchResult} onSignIn={onSignIn} />
+        ) : null}
         <View style={styles.mainColumn}>
           {!sidebarVisible ? (
             <View style={styles.topBar}>
@@ -271,7 +371,14 @@ function AppShell({
         <View style={styles.drawerOverlay}>
           <TouchableOpacity style={styles.drawerScrim} onPress={() => setDrawerOpen(false)} />
           <View style={styles.drawerPanel}>
-            <Sidebar currentScreen={currentScreen} compact onClose={() => setDrawerOpen(false)} onNavigate={onNavigate} />
+            <Sidebar
+              currentScreen={currentScreen}
+              compact
+              onClose={() => setDrawerOpen(false)}
+              onNavigate={onNavigate}
+              onSearchResult={onSearchResult}
+              onSignIn={onSignIn}
+            />
           </View>
         </View>
       ) : null}
@@ -283,15 +390,57 @@ function Sidebar({
   currentScreen,
   compact,
   onClose,
-  onNavigate
+  onNavigate,
+  onSearchResult,
+  onSignIn
 }: {
   currentScreen: Screen;
   compact?: boolean;
   onClose?: () => void;
   onNavigate: (screen: Screen) => void;
+  onSearchResult: (item: SearchItem) => void;
+  onSignIn: () => void;
 }) {
   const { colors, isDark, styles, toggleTheme } = useAppTheme();
   const [query, setQuery] = useState("");
+  const [searchError, setSearchError] = useState<string | null>(null);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [searchResults, setSearchResults] = useState<SearchItem[]>([]);
+
+  useEffect(() => {
+    const normalized = query.replace(/\s+/g, " ").trim();
+    if (normalized.length < 2) {
+      setSearchError(null);
+      setSearchLoading(false);
+      setSearchResults([]);
+      return;
+    }
+
+    let canceled = false;
+    setSearchLoading(true);
+    setSearchError(null);
+
+    const timeout = setTimeout(() => {
+      fetchSearchResults(normalized)
+        .then((response) => {
+          if (canceled) return;
+          setSearchResults(response.items);
+        })
+        .catch((error) => {
+          if (canceled) return;
+          setSearchResults([]);
+          setSearchError(error instanceof Error ? error.message : "Search failed");
+        })
+        .finally(() => {
+          if (!canceled) setSearchLoading(false);
+        });
+    }, 250);
+
+    return () => {
+      canceled = true;
+      clearTimeout(timeout);
+    };
+  }, [query]);
 
   return (
     <View style={[styles.sidebar, compact ? styles.sidebarCompact : null]}>
@@ -309,12 +458,43 @@ function Sidebar({
           <TextInput
             value={query}
             onChangeText={setQuery}
-            placeholder="Search codes"
+            placeholder="Search Bloxodes"
             placeholderTextColor={styles.searchPlaceholder.color}
             style={styles.searchInput}
             inputMode="search"
           />
         </View>
+        {query.trim().length >= 2 ? (
+          <View style={styles.searchResultsPanel}>
+            {searchLoading ? <Text style={styles.searchStateText}>Searching</Text> : null}
+            {searchError ? <Text style={styles.searchStateText}>{searchError}</Text> : null}
+            {!searchLoading && !searchError && searchResults.length === 0 ? <Text style={styles.searchStateText}>No results found</Text> : null}
+            {searchResults.slice(0, 8).map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                accessibilityRole="button"
+                onPress={() => {
+                  onSearchResult(item);
+                  setQuery("");
+                  onClose?.();
+                }}
+                style={styles.searchResultItem}
+              >
+                <View style={styles.searchResultIcon}>
+                  <AppIcon name={getSearchIcon(item.type)} size={13} color={colors.muted} />
+                </View>
+                <View style={styles.searchResultBody}>
+                  <Text style={styles.searchResultTitle} numberOfLines={1}>
+                    {item.title}
+                  </Text>
+                  <Text style={styles.searchResultMeta} numberOfLines={1}>
+                    {item.badge ?? item.subtitle ?? getSearchLabel(item.type)}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ) : null}
       </View>
       <View style={styles.navList}>
         <Text style={styles.navGroupLabel}>Browse</Text>
@@ -323,19 +503,16 @@ function Sidebar({
           const active =
             (item === "Codes" && currentScreen.name.startsWith("code")) ||
             (isMobileContentScreen(currentScreen.name) && screenName === currentScreen.name);
-          const enabled = item === "Codes" || item === "Tools" || item === "Quizzes" || item === "Checklists" || item === "Events";
           const iconColor = active ? colors.foreground : colors.muted;
           return (
             <TouchableOpacity
               key={item}
               accessibilityRole="button"
-              disabled={!enabled}
               onPress={() => {
-                if (!enabled) return;
                 onNavigate(item === "Codes" ? { name: "codes" } : { name: screenName });
                 onClose?.();
               }}
-              style={[styles.navItem, active ? styles.navItemActive : null, !enabled ? styles.navItemDisabled : null]}
+              style={[styles.navItem, active ? styles.navItemActive : null]}
             >
               <View style={styles.navIcon}>
                 <AppIcon name={NAV_ITEM_ICONS[item]} size={14} color={iconColor} />
@@ -345,7 +522,7 @@ function Sidebar({
           );
         })}
         <View style={styles.sidebarSeparator} />
-        <TouchableOpacity style={styles.navItem} accessibilityRole="button">
+        <TouchableOpacity style={styles.navItem} accessibilityRole="button" onPress={onSignIn}>
           <View style={styles.navIcon}>
             <AppIcon name="user" size={14} color={colors.muted} />
           </View>
@@ -526,7 +703,7 @@ function ContentCard({ item, width }: { item: MobileContentItem; width: number }
   const { colors, styles } = useAppTheme();
 
   return (
-    <TouchableOpacity style={[styles.gameCard, { width }]} onPress={() => Linking.openURL(item.url)}>
+    <TouchableOpacity style={[styles.gameCard, { width }]} onPress={() => Linking.openURL(buildWebUrl(item.url))}>
       <View style={styles.gameCardImageWrap}>
         <ImageSlot source={item.coverImage} label={item.title} />
         <View style={styles.imageBottomFade} />
@@ -620,7 +797,7 @@ function CodeDetailScreen({
           <ExpiredCodesPanel codes={detail.expiredCodes} gameName={detail.game.name} />
 
           <View style={styles.externalLinks}>
-            <TouchableOpacity style={styles.outlineButton} onPress={() => Linking.openURL(detail.game.url)}>
+            <TouchableOpacity style={styles.outlineButton} onPress={() => Linking.openURL(buildWebUrl(detail.game.url))}>
               <Text style={styles.outlineButtonText}>Open on Bloxodes</Text>
             </TouchableOpacity>
             {detail.game.robloxUrl ? (
@@ -818,10 +995,14 @@ export default function App() {
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
   const [contentSections, setContentSections] = useState<Record<MobileContentKind, ContentState>>({
+    articles: { data: null, error: null, loading: false, refreshing: false },
+    catalog: { data: null, error: null, loading: false, refreshing: false },
     checklists: { data: null, error: null, loading: false, refreshing: false },
     events: { data: null, error: null, loading: false, refreshing: false },
+    lists: { data: null, error: null, loading: false, refreshing: false },
     quizzes: { data: null, error: null, loading: false, refreshing: false },
-    tools: { data: null, error: null, loading: false, refreshing: false }
+    tools: { data: null, error: null, loading: false, refreshing: false },
+    wiki: { data: null, error: null, loading: false, refreshing: false }
   });
 
   const currentSlug = screen.name === "codeDetail" ? screen.slug : undefined;
@@ -913,6 +1094,31 @@ export default function App() {
     await loadContent(kind, 1, true);
   }
 
+  function openWebUrl(url: string) {
+    void Linking.openURL(buildWebUrl(url));
+  }
+
+  function handleSearchResult(item: SearchItem) {
+    let pathname = item.url;
+    try {
+      pathname = new URL(buildWebUrl(item.url)).pathname;
+    } catch {
+      pathname = item.url;
+    }
+
+    const codeMatch = pathname.match(/^\/codes\/([^/]+)\/?$/);
+    if (item.type === "codes" && codeMatch?.[1]) {
+      setScreen({ name: "codeDetail", slug: decodeURIComponent(codeMatch[1]) });
+      return;
+    }
+
+    openWebUrl(item.url);
+  }
+
+  function handleSignIn() {
+    openWebUrl(`/auth/roblox/login?next=${encodeURIComponent("/account")}`);
+  }
+
   useEffect(() => {
     void loadIndex(1, true);
   }, []);
@@ -976,7 +1182,14 @@ export default function App() {
 
   return (
     <ThemeContext.Provider value={theme}>
-      <AppShell currentScreen={screen} drawerOpen={drawerOpen} onNavigate={setScreen} setDrawerOpen={setDrawerOpen}>
+      <AppShell
+        currentScreen={screen}
+        drawerOpen={drawerOpen}
+        onNavigate={setScreen}
+        onSearchResult={handleSearchResult}
+        onSignIn={handleSignIn}
+        setDrawerOpen={setDrawerOpen}
+      >
         {content}
       </AppShell>
     </ThemeContext.Provider>
@@ -1052,6 +1265,51 @@ function createAppStyles(colors: ThemeColors) {
   },
   searchPlaceholder: {
     color: colors.muted
+  },
+  searchResultsPanel: {
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radii.md,
+    backgroundColor: colors.surface,
+    gap: 2,
+    marginTop: spacing.sm,
+    overflow: "hidden",
+    padding: spacing.xs
+  },
+  searchStateText: {
+    color: colors.muted,
+    fontSize: 12,
+    fontWeight: "600",
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.sm
+  },
+  searchResultItem: {
+    borderRadius: radii.sm,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm,
+    minHeight: 44,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs
+  },
+  searchResultIcon: {
+    width: 22,
+    alignItems: "center"
+  },
+  searchResultBody: {
+    flex: 1,
+    minWidth: 0
+  },
+  searchResultTitle: {
+    color: colors.foreground,
+    fontSize: 13,
+    fontWeight: "700"
+  },
+  searchResultMeta: {
+    color: colors.muted,
+    fontSize: 11,
+    fontWeight: "600",
+    marginTop: 2
   },
   navList: {
     gap: 2,

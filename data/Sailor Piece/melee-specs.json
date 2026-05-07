@@ -1,0 +1,2063 @@
+{
+  "meta": {
+    "title": "Sailor Piece melee specs data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Sailor Piece Wiki - melee-specs",
+        "url": "https://sailorpiece.org/wiki/melee-specs/",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "tier",
+      "buildType",
+      "description",
+      "abilities",
+      "unlock",
+      "stats",
+      "pros",
+      "cons",
+      "wikiUrl"
+    ]
+  },
+  "items": [
+    {
+      "name": "Blessed Maiden",
+      "slug": "blessed-maiden",
+      "image": "/Sailor%20Piece/Melee%20Specs/blessed-maiden.webp",
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "An S-tier fighting style obtained as a rare boss drop. Blessed Maiden features divine-blessed strikes with excellent DPS, large AOE, invincibility frames, and CC — placing it firmly in the top tier alongside Anos and Gilgamesh.",
+      "stats": {
+        "1": "Blessed Strike — divine-enhanced melee attack",
+        "2": "Holy Barrage — rapid multi-hit sacred attacks",
+        "3": "Maiden's Grace — AoE healing + damage combination",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Blessed Strike — divine-enhanced melee attack"
+        },
+        {
+          "#": "2",
+          "Ability": "Holy Barrage — rapid multi-hit sacred attacks"
+        },
+        {
+          "#": "3",
+          "Ability": "Maiden's Grace — AoE healing + damage combination"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+S-tier DPS with excellent AoE",
+        "+i-frames on key abilities",
+        "+Unique healing mechanic in Maiden's Grace",
+        "+Astral Empress title (+70% DMG) drops from same boss"
+      ],
+      "cons": [
+        "-Requires farming Tempest Relics and Blessed Maiden boss materials",
+        "-F Move unlock requires Galevorn Race"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Blessed Strike — divine-enhanced melee attack"
+            },
+            {
+              "#": "2",
+              "Ability": "Holy Barrage — rapid multi-hit sacred attacks"
+            },
+            {
+              "#": "3",
+              "Ability": "Maiden's Grace — AoE healing + damage combination"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/blessed-maiden/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/blessed-maiden.webp"
+    },
+    {
+      "name": "Gilgamesh",
+      "slug": "gilgamesh",
+      "image": "/Sailor%20Piece/Melee%20Specs/gilgamesh.webp",
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "One of the S-tier fighting styles, learned from the Gilgamesh NPC located above Boss Island (on top of the boss's hand). Features legendary-themed strikes with high DPS, large AoE, invincibility frames, and CC effects.",
+      "stats": {
+        "1": "Gate of Babylon — fires projectile weapons from a dimensional gate",
+        "2": "Enkidu — restraining chain ability that immobilizes enemies",
+        "3": "Enuma Elish — massive AoE finishing technique",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Gate of Babylon — fires projectile weapons from a dimensional gate"
+        },
+        {
+          "#": "2",
+          "Ability": "Enkidu — restraining chain ability that immobilizes enemies"
+        },
+        {
+          "#": "3",
+          "Ability": "Enuma Elish — massive AoE finishing technique"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+S-tier damage output",
+        "+Gate of Babylon is excellent AoE",
+        "+Enkidu CC is very powerful in PvP",
+        "+Invincibility frames on key abilities"
+      ],
+      "cons": [
+        "-Requires reaching Boss Island and summoning Gilgamesh first",
+        "-High-level prerequisite"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Gate of Babylon — fires projectile weapons from a dimensional gate"
+            },
+            {
+              "#": "2",
+              "Ability": "Enkidu — restraining chain ability that immobilizes enemies"
+            },
+            {
+              "#": "3",
+              "Ability": "Enuma Elish — massive AoE finishing technique"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/gilgamesh-style/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/gilgamesh-style.webp"
+    },
+    {
+      "name": "Anos",
+      "slug": "anos",
+      "image": "/Sailor%20Piece/Melee%20Specs/anos.webp",
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "A top S-tier fighting style learned from the Anos NPC at the top of the castle on Academy Island. Anos features demon-lord themed abilities with massive AoE, high DPS, invincibility frames, and CC — competing with Gilgamesh for the strongest style.",
+      "stats": {
+        "1": "Ginnungagap — massive AoE void explosion",
+        "2": "Venuzdonoa — sword-of-destruction strike that ignores all defenses",
+        "3": "Iniocull — reality-rewriting ability that resets enemy position",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Ginnungagap — massive AoE void explosion"
+        },
+        {
+          "#": "2",
+          "Ability": "Venuzdonoa — sword-of-destruction strike that ignores all defenses"
+        },
+        {
+          "#": "3",
+          "Ability": "Iniocull — reality-rewriting ability that resets enemy position"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Venuzdonoa ignores enemy defenses — best single-target DPS",
+        "+Ginnungagap has massive AoE",
+        "+Multiple i-frames protect during combos",
+        "+Best fighting style for pure melee endgame"
+      ],
+      "cons": [
+        "-Hardest location to access (level 9000+)",
+        "-Requires summoning and defeating Anos first"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Ginnungagap — massive AoE void explosion"
+            },
+            {
+              "#": "2",
+              "Ability": "Venuzdonoa — sword-of-destruction strike that ignores all defenses"
+            },
+            {
+              "#": "3",
+              "Ability": "Iniocull — reality-rewriting ability that resets enemy position"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/anos-style/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/anos-style.webp"
+    },
+    {
+      "name": "Strongest in History",
+      "slug": "strongest-in-history",
+      "image": "/Sailor%20Piece/Melee%20Specs/strongest-in-history.webp",
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "The hardest-to-obtain fighting style and arguably the best overall. Learned from the Strongest of Today Trainer on Shinjuku Island after defeating the Strongest in History boss. Features the highest DPS combos in the game with excellent AoE and CC.",
+      "stats": {
+        "1": "History's Edge — ultra-high damage multi-hit combo",
+        "2": "Absolute Zero — freezing AoE attack that immobilizes enemies",
+        "3": "Pinnacle Strike — the strongest single-hit move in the game",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "History's Edge — ultra-high damage multi-hit combo"
+        },
+        {
+          "#": "2",
+          "Ability": "Absolute Zero — freezing AoE attack that immobilizes enemies"
+        },
+        {
+          "#": "3",
+          "Ability": "Pinnacle Strike — the strongest single-hit move in the game"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Considered the best or top-2 fighting style",
+        "+Highest DPS potential",
+        "+Excellent AoE and CC",
+        "+Unlocks exclusive content"
+      ],
+      "cons": [
+        "-Hardest unlock chain — requires 2 summonable boss kills",
+        "-Requires both Limitless Key (Gojo drop) and Malevolent Key (Sukuna drop)",
+        "-Level 6250+ required for Shinjuku Island access"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "History's Edge — ultra-high damage multi-hit combo"
+            },
+            {
+              "#": "2",
+              "Ability": "Absolute Zero — freezing AoE attack that immobilizes enemies"
+            },
+            {
+              "#": "3",
+              "Ability": "Pinnacle Strike — the strongest single-hit move in the game"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/strongest-in-history/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/strongest-in-history.webp"
+    },
+    {
+      "name": "Saber Alter",
+      "slug": "saber-alter",
+      "image": "/Sailor%20Piece/Melee%20Specs/saber-alter.webp",
+      "tier": "S",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "A top-tier melee spec added in the Alter Update (March 16, 2026). High DPS output with large AoE moves, i-frames, and crowd control. Ranked among the top 5 melee specs alongside Blessed Maiden, Anos, Gilgamesh, and Strongest in History. Essential grind for late-game melee builds.",
+      "stats": {
+        "1": "High DPS melee attacks with large AoE coverage.",
+        "2": "i-Frame moves for damage avoidance.",
+        "3": "Crowd control abilities for group fights.",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "High DPS melee attacks with large AoE coverage."
+        },
+        {
+          "#": "2",
+          "Ability": "i-Frame moves for damage avoidance."
+        },
+        {
+          "#": "3",
+          "Ability": "Crowd control abilities for group fights."
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+S-tier DPS output",
+        "+Large AoE moves with i-frames",
+        "+Strong crowd control",
+        "+Top 5 melee spec"
+      ],
+      "cons": [
+        "-Requires Boss Island access (endgame)",
+        "-New — meta still stabilizing"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "High DPS melee attacks with large AoE coverage."
+            },
+            {
+              "#": "2",
+              "Ability": "i-Frame moves for damage avoidance."
+            },
+            {
+              "#": "3",
+              "Ability": "Crowd control abilities for group fights."
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-16"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-16",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/saber-alter-style/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/saber-alter-style.webp"
+    },
+    {
+      "name": "Cosmic Being",
+      "slug": "cosmic-being",
+      "image": "/Sailor%20Piece/Melee%20Specs/cosmic-being.webp",
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "A Sea 2 Melee Spec inspired by Cosmic Garou (One Punch Man). Drops directly from the Cosmic Being World Boss (~500B HP, spawns every 30 minutes at the middle of Punch Island). The boss has an adaptive system that triggers a random buff every 25% HP lost (max 3 per fight). No pity — recommended team comp: 12 players (8x 9-10M bounty, 3x 10-11M, 1x 20M anchor).",
+      "stats": {
+        "1": "Detailed move list TBA — pending in-game verification (Sea 2 launched 2026-04-18).",
+        "2": "F move sneak peak: Alx #sneak-peaks (2026-04-13, gold standard) — previewed pre-launch.",
+        "3": "Cosmic Master F Move questline (wiki /entries/cosmic-being-style): (1) Defeat Cosmic Being World Boss 15 times, (2) Reach Infinite Tower 90+ floor 5 times, (3) Obtain Astral Bloodline.",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Detailed move list TBA — pending in-game verification (Sea 2 launched 2026-04-18)."
+        },
+        {
+          "#": "2",
+          "Ability": "F move sneak peak: Alx #sneak-peaks (2026-04-13, gold standard) — previewed pre-launch."
+        },
+        {
+          "#": "3",
+          "Ability": "Cosmic Master F Move questline (wiki /entries/cosmic-being-style): (1) Defeat Cosmic Being World Boss 15 times, (2) Reach Infinite Tower 90+ floor 5 times, (3) Obtain Astral Bloodline."
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Two unlock paths — direct drop OR guaranteed NPC trade after farming materials",
+        "+One of 4 new Sea 2 specs — buffed April 20 hotfix (better than Ice Queen per Discord Alx)",
+        "+Same boss drops Cosmic Being title +95% damage (1.75% rate, pity 75)"
+      ],
+      "cons": [
+        "-Direct drop has no pity — purely RNG dependent",
+        "-Requires Sea 2 access (2 Ancient Fragments needed)",
+        "-Boss has adaptive buff system (Harden/Rage/Accelerate/Regenerate, max 3 per fight)",
+        "-Punch Island Lv 14,500+ recommended"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Detailed move list TBA — pending in-game verification (Sea 2 launched 2026-04-18)."
+            },
+            {
+              "#": "2",
+              "Ability": "F move sneak peak: Alx #sneak-peaks (2026-04-13, gold standard) — previewed pre-launch."
+            },
+            {
+              "#": "3",
+              "Ability": "Cosmic Master F Move questline (wiki /entries/cosmic-being-style): (1) Defeat Cosmic Being World Boss 15 times, (2) Reach Infinite Tower 90+ floor 5 times, (3) Obtain Astral Bloodline."
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-04-20"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-20",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/cosmic-being/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/cosmic-being.webp"
+    },
+    {
+      "name": "The World",
+      "slug": "the-world",
+      "image": "/Sailor%20Piece/Melee%20Specs/the-world.webp",
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "A Sea 2 Melee Spec inspired by DIO (JoJo's Bizarre Adventure, Part 3 — The World Stand). Unlocked via a summon-based boss on Bizarre Island with 4 difficulties (Normal 5B / Medium 15B / Hard 40B / Extreme 100B HP). Each summon costs 1 Dominion Brand. Requires Primordial Bloodline + Time Tyrant title to craft the spec.",
+      "stats": {
+        "1": "Detailed move list TBA — pending in-game verification (Sea 2 launched 2026-04-18).",
+        "2": "F move sneak peak: Alx #sneak-peaks (2026-04-14, gold standard) — previewed pre-launch.",
+        "3": "The World F Move questline (wiki /entries/the-world-style): defeat The World on Hard+ 20 times + use V move 250 times + defeat 10 World Bosses + defeat 10 Sea Beasts.",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Detailed move list TBA — pending in-game verification (Sea 2 launched 2026-04-18)."
+        },
+        {
+          "#": "2",
+          "Ability": "F move sneak peak: Alx #sneak-peaks (2026-04-14, gold standard) — previewed pre-launch."
+        },
+        {
+          "#": "3",
+          "Ability": "The World F Move questline (wiki /entries/the-world-style): defeat The World on Hard+ 20 times + use V move 250 times + defeat 10 World Bosses + defeat 10 Sea Beasts."
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Crafted via materials — guaranteed unlock once recipe complete (no RNG drop)",
+        "+Buffed April 20 hotfix — better than Ice Queen per Discord Alx",
+        "+Same boss drops Time Tyrant title +92.5% damage",
+        "+Difficulty scaling lets players choose risk/reward tradeoff"
+      ],
+      "cons": [
+        "-Hard prerequisites: Primordial Bloodline (S+ rarity) + Time Tyrant title (low %)",
+        "-80x Dominion Brand requirement is expensive",
+        "-Sea 2 launch-day quest bugs (compensation code SORRYFORBADSEA2QUEST released 2026-04-19)",
+        "-Bizarre Island Lv 13,500+ recommended"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Detailed move list TBA — pending in-game verification (Sea 2 launched 2026-04-18)."
+            },
+            {
+              "#": "2",
+              "Ability": "F move sneak peak: Alx #sneak-peaks (2026-04-14, gold standard) — previewed pre-launch."
+            },
+            {
+              "#": "3",
+              "Ability": "The World F Move questline (wiki /entries/the-world-style): defeat The World on Hard+ 20 times + use V move 250 times + defeat 10 World Bosses + defeat 10 Sea Beasts."
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-04-23"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-23",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/the-world/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/the-world.webp"
+    },
+    {
+      "name": "Frieren",
+      "slug": "frieren",
+      "image": null,
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "A Sea 2 Melee Spec inspired by Frieren (Frieren: Beyond Journey's End). Reward from the Easter Event (Bunny NPC questline). The Easter Event ended 2026-04-22 11:16 AM PT (Source: patches.ts ice-update + Beebom Easter guide 2026-04-19). F move sneak peak shown by Alx in Discord #sneak-peaks on April 9.",
+      "stats": {
+        "1": "Detailed ability list TBA — pending in-game verification (Sea 2 launched 2026-04-18).",
+        "2": "F move sneak peak: Alx #sneak-peaks (2026-04-09, gold standard) — previewed pre-launch.",
+        "2_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Detailed ability list TBA — pending in-game verification (Sea 2 launched 2026-04-18)."
+        },
+        {
+          "#": "2",
+          "Ability": "F move sneak peak: Alx #sneak-peaks (2026-04-09, gold standard) — previewed pre-launch."
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Guaranteed via questline completion (no RNG drop dependence)",
+        "+One of 4 new Sea 2 specs — buffed April 20 hotfix (better than Ice Queen)",
+        "+Easter Event also rewards Egg Seeker title + auras"
+      ],
+      "cons": [
+        "-Limited-time — only obtainable until 2026-04-22 11:16 AM PT",
+        "-Requires Sea 2 access + finding all 7 eggs (2 timed eggs spawn every 10 min)",
+        "-Easter quest has bugs — players sometimes stuck at 6/7 (use private server workaround per criss 2026-04-20)"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Detailed ability list TBA — pending in-game verification (Sea 2 launched 2026-04-18)."
+            },
+            {
+              "#": "2",
+              "Ability": "F move sneak peak: Alx #sneak-peaks (2026-04-09, gold standard) — previewed pre-launch."
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-04-23"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-23",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/frieren/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/frieren.webp"
+    },
+    {
+      "name": "Castorice",
+      "slug": "castorice",
+      "image": null,
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "A Sea 2 Melee Spec inspired by Castorice (Honkai: Star Rail). Drops directly from a Sea 2 World Boss (no pity — purely RNG). F move sneak peak shown by Alx in Discord #sneak-peaks on April 10 (gold standard pre-launch teaser).",
+      "stats": {
+        "1": "Detailed ability list TBA — pending in-game verification (Sea 2 launched 2026-04-18).",
+        "2": "F move sneak peak: Alx #sneak-peaks (2026-04-10, gold standard) — previewed pre-launch.",
+        "2_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Detailed ability list TBA — pending in-game verification (Sea 2 launched 2026-04-18)."
+        },
+        {
+          "#": "2",
+          "Ability": "F move sneak peak: Alx #sneak-peaks (2026-04-10, gold standard) — previewed pre-launch."
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Drops directly from World Boss — no multi-step crafting",
+        "+One of 4 new Sea 2 specs — buffed April 20 hotfix (better than Ice Queen)",
+        "+Permanent (unlike Frieren's limited Easter window)"
+      ],
+      "cons": [
+        "-No pity system — purely RNG dependent",
+        "-Requires Sea 2 access (2 Ancient Fragments needed)",
+        "-World Boss fights require group coordination + 40% NPC damage reduction"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Detailed ability list TBA — pending in-game verification (Sea 2 launched 2026-04-18)."
+            },
+            {
+              "#": "2",
+              "Ability": "F move sneak peak: Alx #sneak-peaks (2026-04-10, gold standard) — previewed pre-launch."
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-04-23"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-23",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/castorice/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/castorice.webp"
+    },
+    {
+      "name": "Strongest of Today",
+      "slug": "strongest-of-today",
+      "image": "/Sailor%20Piece/Melee%20Specs/strongest-of-today.webp",
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "An S-tier fighting style obtained from the Strongest of Today boss on Shinjuku Island. Listed separately from Strongest in History in allthings.how tier list. Exact ability details and how it differs from Strongest in History need in-game verification.",
+      "stats": {
+        "1": "Unconfirmed — needs in-game verification",
+        "1_ability": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Unconfirmed — needs in-game verification"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+S-tier ranking (allthings.how)",
+        "+Endgame style"
+      ],
+      "cons": [
+        "-Exact abilities unconfirmed",
+        "-Requires endgame access"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Unconfirmed — needs in-game verification"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/strongest-of-today/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/strongest-of-today.webp"
+    },
+    {
+      "name": "Strongest Shinobi",
+      "slug": "strongest-shinobi",
+      "image": "/Sailor%20Piece/Melee%20Specs/strongest-shinobi.webp",
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "Strongest Shinobi is an S+ melee spec from the Massive Update (March 25, 2026), formerly known as Madara in pre-release. Purchased from the Strongest Shinobi Seller NPC on Ninja Island. Signature moves include fast multi-hit combos, Shadow Clones for AoE extension, and Susanoo (V move) for massive burst damage. F Move requires Battlefield Warlord Title (1.5% drop from Ninja Island Boss, 100 pity) + Eternal Cores + Battle Sigils. Among the highest community engagement pre-release (10K+ upvotes on V and F moves).",
+      "stats": {
+        "1": "Fast multi-hit melee combo — rapid strikes with high hit count",
+        "2": "Shadow Clones — creates clones to extend AoE and confuse enemies",
+        "3": "Susanoo — large AoE ability dealing massive burst damage (V move)",
+        "4": "F Move — powerful finisher; requires Battlefield Warlord Title item + Eternal Cores + Battle Sigils. Source: community guides (2026-03-26).",
+        "4_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Fast multi-hit melee combo — rapid strikes with high hit count"
+        },
+        {
+          "#": "2",
+          "Ability": "Shadow Clones — creates clones to extend AoE and confuse enemies"
+        },
+        {
+          "#": "3",
+          "Ability": "Susanoo — large AoE ability dealing massive burst damage (V move)"
+        },
+        {
+          "#": "4",
+          "Ability": "F Move — powerful finisher; requires Battlefield Warlord Title item + Eternal Cores + Battle Sigils. Source: community guides (2026-03-26)."
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+S+ tier — top-tier melee spec",
+        "+High-hit-count combos with shadow clone AoE",
+        "+Susanoo V move is large-area burst damage"
+      ],
+      "cons": [
+        "-F Move requires expensive materials (Battlefield Warlord Title item + Eternal Cores + Battle Sigils)",
+        "-Specific ability names still being confirmed by guides"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Fast multi-hit melee combo — rapid strikes with high hit count"
+            },
+            {
+              "#": "2",
+              "Ability": "Shadow Clones — creates clones to extend AoE and confuse enemies"
+            },
+            {
+              "#": "3",
+              "Ability": "Susanoo — large AoE ability dealing massive burst damage (V move)"
+            },
+            {
+              "#": "4",
+              "Ability": "F Move — powerful finisher; requires Battlefield Warlord Title item + Eternal Cores + Battle Sigils. Source: community guides (2026-03-26)."
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-26"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-26",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/strongest-shinobi/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/strongest-shinobi.webp"
+    },
+    {
+      "name": "Atomic",
+      "slug": "atomic",
+      "image": "/Sailor%20Piece/Melee%20Specs/atomic.webp",
+      "tier": "S+",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "A top S+ melee spec released in the Massive Update (March 25, 2026). Formerly known as \"Cid V2\" in pre-release. Located on Lawless Island with the highest community engagement of any sneak peek (F move: 16,045 upvotes). Purchased from the Atomic Seller NPC; F Move unlocked via a separate questline with the Atomic Master NPC.",
+      "stats": {
+        "1": "F Move — community-confirmed strongest finisher (16,045 Discord upvotes, highest pre-release engagement of any sneak peek). Exact in-game ability names and stat values not yet publicly documented as of 2026-04-25.",
+        "1_ability": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "F Move — community-confirmed strongest finisher (16,045 Discord upvotes, highest pre-release engagement of any sneak peek). Exact in-game ability names and stat values not yet publicly documented as of 2026-04-25."
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+S+ tier — top-tier melee spec",
+        "+Highest pre-release engagement (16K upvotes)",
+        "+F Move unlockable via NPC questline"
+      ],
+      "cons": [
+        "-Only F Move fully documented in third-party guides as of 2026-04-25; other ability stats not yet published",
+        "-Requires Lawless Island materials"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "F Move — community-confirmed strongest finisher (16,045 Discord upvotes, highest pre-release engagement of any sneak peek). Exact in-game ability names and stat values not yet publicly documented as of 2026-04-25."
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S+"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-26"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-26",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/atomic/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/atomic.webp"
+    },
+    {
+      "name": "Jin Woo (Shadow Monarch)",
+      "slug": "jin-woo-shadow-monarch",
+      "image": "/Sailor%20Piece/Melee%20Specs/jin-woo-shadow-monarch.webp",
+      "tier": "S",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "The Shadow Monarch fighting style based on Jin Woo. A powerful endgame style with shadow-based abilities and excellent utility in both PvP and boss farming.",
+      "stats": {
+        "1": "Shadow Strike — shadow-infused melee attack",
+        "2": "Monarch's Command — summons shadow soldiers to assist",
+        "3": "Arise — reanimates fallen enemies as temporary shadow allies",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Shadow Strike — shadow-infused melee attack"
+        },
+        {
+          "#": "2",
+          "Ability": "Monarch's Command — summons shadow soldiers to assist"
+        },
+        {
+          "#": "3",
+          "Ability": "Arise — reanimates fallen enemies as temporary shadow allies"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Unique shadow soldier summon mechanic (Tusk)",
+        "+Strong endgame DPS with rapid dual-dagger strikes",
+        "+Shadow projectile and dash combos"
+      ],
+      "cons": [
+        "-Requires extensive farming of Jinwoo boss in double dungeon",
+        "-Weaker than top S+ styles without full synergy"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Shadow Strike — shadow-infused melee attack"
+            },
+            {
+              "#": "2",
+              "Ability": "Monarch's Command — summons shadow soldiers to assist"
+            },
+            {
+              "#": "3",
+              "Ability": "Arise — reanimates fallen enemies as temporary shadow allies"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/jin-woo/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/jin-woo.webp"
+    },
+    {
+      "name": "Acheron",
+      "slug": "acheron",
+      "image": "/Sailor%20Piece/Melee%20Specs/acheron.webp",
+      "tier": "S",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "A new female melee spec released in the Massive Update (March 25, 2026). Acheron was confirmed NOT renamed by DMCA — multiple sources (Pro Game Guides, Beebom, search results) consistently list it as 'Acheron' as of 2026-03-26. Features a unique idle animation and comes with a dedicated Acheron accessory. F move previewed on Discord with 8K+ community upvotes.",
+      "stats": {
+        "1": "F move — powerful finisher previewed with 8,125 upvotes on Discord; exact damage/cooldown values not yet documented in third-party guides as of 2026-04-25.",
+        "2": "Unique idle animation distinguishes it from other melee specs.",
+        "3": "Dedicated Acheron Accessory provides bonus stats.",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "F move — powerful finisher previewed with 8,125 upvotes on Discord; exact damage/cooldown values not yet documented in third-party guides as of 2026-04-25."
+        },
+        {
+          "#": "2",
+          "Ability": "Unique idle animation distinguishes it from other melee specs."
+        },
+        {
+          "#": "3",
+          "Ability": "Dedicated Acheron Accessory provides bonus stats."
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Unique character design with dedicated accessory",
+        "+Strong F move preview",
+        "+Name confirmed stable (not renamed)"
+      ],
+      "cons": [
+        "-Unlock method and ability details not yet documented in public guides"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "F move — powerful finisher previewed with 8,125 upvotes on Discord; exact damage/cooldown values not yet documented in third-party guides as of 2026-04-25."
+            },
+            {
+              "#": "2",
+              "Ability": "Unique idle animation distinguishes it from other melee specs."
+            },
+            {
+              "#": "3",
+              "Ability": "Dedicated Acheron Accessory provides bonus stats."
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-26"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-26",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/acheron/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/acheron.webp"
+    },
+    {
+      "name": "Moon Slayer",
+      "slug": "moon-slayer",
+      "image": "/Sailor%20Piece/Melee%20Specs/moon-slayer.webp",
+      "tier": "S",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "Moon Slayer is the Moon Update's (March 31, 2026) signature melee spec — developer noted 'not black clover btw' at launch, confirming original IP design. Purchased on Boss Island using 37,500 Gems + Kokushibo boss materials (Six-Eyed Demon title required). F Move unlocked at the Moon Slayer F Move Mastery NPC near King of Heroes seller. Best paired with Upper Clan for maximum melee damage. Source: Beebom patch notes + Discord #update-logs (2026-04-01).",
+      "stats": {
+        "1": "F Move — Moon Slayer finisher unlocked at the Moon Slayer F Move Mastery NPC (near King of Heroes seller). Exact in-game ability names and stat values not yet publicly documented in third-party guides as of 2026-04-25.",
+        "1_ability": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "F Move — Moon Slayer finisher unlocked at the Moon Slayer F Move Mastery NPC (near King of Heroes seller). Exact in-game ability names and stat values not yet publicly documented in third-party guides as of 2026-04-25."
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+New Moon Update signature melee spec",
+        "+Synergizes with Upper Clan melee bonuses"
+      ],
+      "cons": [
+        "-Exact ability stats not in third-party guides as of 2026-05-07",
+        "-Requires farming Kokushibo boss for Six-Eyed Demon title + 4 rare materials"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "F Move — Moon Slayer finisher unlocked at the Moon Slayer F Move Mastery NPC (near King of Heroes seller). Exact in-game ability names and stat values not yet publicly documented in third-party guides as of 2026-04-25."
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "S"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-04-01"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-04-01",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/moon-slayer/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/moon-slayer.webp"
+    },
+    {
+      "name": "Alucard",
+      "slug": "alucard",
+      "image": "/Sailor%20Piece/Melee%20Specs/alucard.webp",
+      "tier": "A",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "The Alucard fighting style, learned from the Alucard NPC on Sailor Island. Exclusive to the Vampire race, it features vampiric combat with lifesteal, regeneration, and ranged zoning abilities. One of the hardest melee specs to unlock due to boss rotation RNG and race requirement.",
+      "stats": {
+        "1": "Blood Drain — melee strike with lifesteal effect",
+        "2": "Night Strike — fast dash attack",
+        "3": "Crimson Barrage — multi-hit combo with bleed",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Blood Drain — melee strike with lifesteal effect"
+        },
+        {
+          "#": "2",
+          "Ability": "Night Strike — fast dash attack"
+        },
+        {
+          "#": "3",
+          "Ability": "Crimson Barrage — multi-hit combo with bleed"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Built-in lifesteal synergy",
+        "+Regeneration and ranged zoning utility",
+        "+Good for sustain fighting"
+      ],
+      "cons": [
+        "-Requires Vampire race — locked out for other races",
+        "-Vampire King title is a rare 2.5% boss drop",
+        "-One of the hardest melee specs to unlock"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Blood Drain — melee strike with lifesteal effect"
+            },
+            {
+              "#": "2",
+              "Ability": "Night Strike — fast dash attack"
+            },
+            {
+              "#": "3",
+              "Ability": "Crimson Barrage — multi-hit combo with bleed"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee = Defense"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "A"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/alucard-style/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/alucard-style.webp"
+    },
+    {
+      "name": "The Love Maiden",
+      "slug": "the-love-maiden",
+      "image": "/Sailor%20Piece/Melee%20Specs/the-love-maiden.webp",
+      "tier": "A",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "The Love Maiden fighting style (formerly known as Madoka), learned from the NPC on Valentine Island (available during the Valentine's event). A high-tier style with divine-themed abilities and strong burst damage.",
+      "stats": {
+        "1": "Divine Strike — massive single-target damage",
+        "2": "Sacred Barrage — rapid multi-hit divine attacks",
+        "3": "Miracle Burst — large AoE divine explosion",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Divine Strike — massive single-target damage"
+        },
+        {
+          "#": "2",
+          "Ability": "Sacred Barrage — rapid multi-hit divine attacks"
+        },
+        {
+          "#": "3",
+          "Ability": "Miracle Burst — large AoE divine explosion"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+High burst damage",
+        "+Unique divine aesthetic",
+        "+Strong AoE with Miracle Burst"
+      ],
+      "cons": [
+        "-Limited availability — requires Valentine's event",
+        "-Seasonal NPC may not always be present"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Divine Strike — massive single-target damage"
+            },
+            {
+              "#": "2",
+              "Ability": "Sacred Barrage — rapid multi-hit divine attacks"
+            },
+            {
+              "#": "3",
+              "Ability": "Miracle Burst — large AoE divine explosion"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "A"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-26"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-26",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/love-maiden/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/love-maiden.webp"
+    },
+    {
+      "name": "Sukuna",
+      "slug": "sukuna",
+      "image": "/Sailor%20Piece/Melee%20Specs/sukuna.webp",
+      "tier": "B",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "The Sukuna fighting style, learned from the Sukuna NPC on the rooftop of Shibuya Station. Features cursed energy-infused strikes and multi-hit combos.",
+      "stats": {
+        "1": "Dismantle — slashing cursed energy attack",
+        "2": "Cleave — wide-range cursed energy sweep",
+        "3": "Malevolent Shrine — powerful AoE domain attack",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Dismantle — slashing cursed energy attack"
+        },
+        {
+          "#": "2",
+          "Ability": "Cleave — wide-range cursed energy sweep"
+        },
+        {
+          "#": "3",
+          "Ability": "Malevolent Shrine — powerful AoE domain attack"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Powerful multi-hit abilities",
+        "+Good synergy with sword builds",
+        "+Malevolent Shrine is large AoE"
+      ],
+      "cons": [
+        "-Rooftop NPC can be tricky to find",
+        "-Weaker than endgame styles"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Dismantle — slashing cursed energy attack"
+            },
+            {
+              "#": "2",
+              "Ability": "Cleave — wide-range cursed energy sweep"
+            },
+            {
+              "#": "3",
+              "Ability": "Malevolent Shrine — powerful AoE domain attack"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "B"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/sukuna-style/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/sukuna-style.webp"
+    },
+    {
+      "name": "Qin Shi",
+      "slug": "qin-shi",
+      "image": "/Sailor%20Piece/Melee%20Specs/qin-shi.webp",
+      "tier": "B",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "The Qin Shi fighting style, associated with the Qin Shi summonable boss on Boss Island. An endgame melee style with emperor-themed strikes.",
+      "stats": {
+        "1": "Emperor Strike — powerful heavy single-target attack",
+        "2": "Imperial Sweep — wide-range AoE melee attack",
+        "3": "Imperial Command — additional ability (verify in-game)",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Emperor Strike — powerful heavy single-target attack"
+        },
+        {
+          "#": "2",
+          "Ability": "Imperial Sweep — wide-range AoE melee attack"
+        },
+        {
+          "#": "3",
+          "Ability": "Imperial Command — additional ability (verify in-game)"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Solid endgame damage",
+        "+AoE sweep ability is useful for boss farming"
+      ],
+      "cons": [
+        "-Requires expensive Qin Shi summon",
+        "-Below S-tier styles in raw power"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Emperor Strike — powerful heavy single-target attack"
+            },
+            {
+              "#": "2",
+              "Ability": "Imperial Sweep — wide-range AoE melee attack"
+            },
+            {
+              "#": "3",
+              "Ability": "Imperial Command — additional ability (verify in-game)"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "B"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/qin-shi-style/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/qin-shi-style.webp"
+    },
+    {
+      "name": "Gojo",
+      "slug": "gojo",
+      "image": "/Sailor%20Piece/Melee%20Specs/gojo.webp",
+      "tier": "C",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "The Gojo fighting style learned from the Gojo NPC at Shibuya Station. Themed around the Limitless technique with high-speed attacks and AoE capabilities. Outclassed by endgame styles.",
+      "stats": {
+        "1": "Limitless Strike — high-speed close-range punch",
+        "2": "Infinity Field — AoE defense/offense ability",
+        "3": "Blue — pull ability that drags enemies in",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Limitless Strike — high-speed close-range punch"
+        },
+        {
+          "#": "2",
+          "Ability": "Infinity Field — AoE defense/offense ability"
+        },
+        {
+          "#": "3",
+          "Ability": "Blue — pull ability that drags enemies in"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Good AoE",
+        "+Strong control abilities",
+        "+Accessible at Shibuya Station"
+      ],
+      "cons": [
+        "-Weaker than endgame styles",
+        "-Limited vertical mobility"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Limitless Strike — high-speed close-range punch"
+            },
+            {
+              "#": "2",
+              "Ability": "Infinity Field — AoE defense/offense ability"
+            },
+            {
+              "#": "3",
+              "Ability": "Blue — pull ability that drags enemies in"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "C"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/gojo-style/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/gojo-style.webp"
+    },
+    {
+      "name": "Cursed Vessel",
+      "slug": "cursed-vessel",
+      "image": "/Sailor%20Piece/Melee%20Specs/cursed-vessel.webp",
+      "tier": "C",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "The Cursed Vessel fighting style (formerly known as Yuji), learned from the NPC at Shibuya Station. Known for its fast punching combos and cursed energy reinforcement that boosts melee speed.",
+      "stats": {
+        "1": "Divergent Fist — impact-delayed punch dealing bonus damage",
+        "2": "Manji Kick — powerful spinning kick",
+        "3": "Black Flash — random proc that multiplies next hit's damage",
+        "3_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Divergent Fist — impact-delayed punch dealing bonus damage"
+        },
+        {
+          "#": "2",
+          "Ability": "Manji Kick — powerful spinning kick"
+        },
+        {
+          "#": "3",
+          "Ability": "Black Flash — random proc that multiplies next hit's damage"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Easy to learn",
+        "+Fast combo speed",
+        "+Black Flash provides big burst potential"
+      ],
+      "cons": [
+        "-Black Flash is unreliable (random proc)",
+        "-Less powerful than higher-tier styles"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Divergent Fist — impact-delayed punch dealing bonus damage"
+            },
+            {
+              "#": "2",
+              "Ability": "Manji Kick — powerful spinning kick"
+            },
+            {
+              "#": "3",
+              "Ability": "Black Flash — random proc that multiplies next hit's damage"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "C"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-26"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-26",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/cursed-vessel/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/cursed-vessel.webp"
+    },
+    {
+      "name": "Tanjiro",
+      "slug": "tanjiro",
+      "image": null,
+      "tier": "C",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "A melee fighting style listed on the Sailor Piece Wiki. Exact abilities and tier ranking need in-game verification.",
+      "stats": {
+        "1": "Unconfirmed — needs in-game verification",
+        "1_ability": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Unconfirmed — needs in-game verification"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Listed on official Wiki"
+      ],
+      "cons": [
+        "-Exact abilities and stats unconfirmed",
+        "-C-tier ranking — outclassed by higher styles"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Unconfirmed — needs in-game verification"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Melee"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "C"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/tanjiro-style/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/tanjiro-style.webp"
+    },
+    {
+      "name": "Combat",
+      "slug": "combat",
+      "image": "/Sailor%20Piece/Melee%20Specs/combat.webp",
+      "tier": "D",
+      "rarity": null,
+      "type": null,
+      "category": null,
+      "description": "The default fighting style all players start with. Basic punches and kicks with no special mechanics. Replace as soon as possible.",
+      "stats": {
+        "1": "Basic Punch — standard melee attack",
+        "2": "Basic Kick — standard melee kick",
+        "2_abilities": "View guide →"
+      },
+      "abilities": [
+        {
+          "#": "1",
+          "Ability": "Basic Punch — standard melee attack"
+        },
+        {
+          "#": "2",
+          "Ability": "Basic Kick — standard melee kick"
+        }
+      ],
+      "drops": [],
+      "pros": [
+        "+Free",
+        "+Always available",
+        "+No prerequisites"
+      ],
+      "cons": [
+        "-Very low damage",
+        "-No special mechanics",
+        "-Replace as soon as possible"
+      ],
+      "acquisition": null,
+      "unlock": null,
+      "strategy": null,
+      "obtainment": null,
+      "usageTips": null,
+      "sections": [
+        {
+          "title": null,
+          "headers": [
+            "#",
+            "Ability"
+          ],
+          "rows": [
+            {
+              "#": "1",
+              "Ability": "Basic Punch — standard melee attack"
+            },
+            {
+              "#": "2",
+              "Ability": "Basic Kick — standard melee kick"
+            }
+          ]
+        },
+        {
+          "title": null,
+          "headers": [
+            "Property",
+            "Value"
+          ],
+          "rows": [
+            {
+              "Property": "Stat Priority",
+              "Value": "Any"
+            },
+            {
+              "Property": "Tier Rating",
+              "Value": "D"
+            },
+            {
+              "Property": "Last Updated",
+              "Value": "2026-03-15"
+            }
+          ]
+        }
+      ],
+      "updatedAt": "2026-03-15",
+      "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/combat/",
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/combat.webp"
+    }
+  ]
+}

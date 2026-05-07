@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "title": "Steal a Brainrot rarities data",
+    "updatedAt": "2026-05-07",
+    "sources": [
+      {
+        "label": "Steal a Brainrot Wiki - Rarities",
+        "url": "https://stealabrainrot.fandom.com/wiki/Rarities",
+        "accessed": "2026-05-07"
+      }
+    ],
+    "columns": [
+      "name",
+      "brainrotCount",
+      "incomeRange",
+      "costRange",
+      "spawnChance",
+      "description"
+    ]
+  },
+  "items": [
+    {
+      "name": "Common",
+      "slug": "common",
+      "brainrotCount": 11,
+      "incomeRange": "$1/s to $14/s",
+      "costRange": null,
+      "spawnChance": "55%",
+      "description": "Common is the least expensive rarity. Including 11 brainrots, they range from Noobini Pizzanini to Pipi Corni. It's the most common rarity to spawn on the red carpet. It can produce from $1/s to $14/s. Price range can go from $25 to $1.7K. 55% of the time it will spawn."
+    },
+    {
+      "name": "Rare",
+      "slug": "rare",
+      "brainrotCount": 11,
+      "incomeRange": "$15/s to $75/s",
+      "costRange": "$2K to $9",
+      "spawnChance": null,
+      "description": "Rare is still a common rarity. Including 11 brainrots, this rarity ranges from Trippi Troppi to Pinealotto Fruttarino. It is still very common to spawn, less often than Common. It can produce from $15/s to $75/s, and cost $2K to $9.7K."
+    },
+    {
+      "name": "Epic",
+      "slug": "epic",
+      "brainrotCount": 20,
+      "incomeRange": "$75/s to $325/s",
+      "costRange": "$10K to $47",
+      "spawnChance": null,
+      "description": "Epic is an early game rarity. Including 20 Brainrots, it is one of the smaller rarites. These Brainrots range from Cappuccino Assassino to Mummio Rappitto. These Brainrots are more rare than Rare, as they often appear, but slightly less. It can produce from $75/s to $325/s, and cost $10K to $47.5K."
+    },
+    {
+      "name": "Legendary",
+      "slug": "legendary",
+      "brainrotCount": 24,
+      "incomeRange": "$200/s to $1",
+      "costRange": null,
+      "spawnChance": null,
+      "description": "Legendary is an intermediate rarity including 24 brainrots, ranging from Burbaloni Loliloli to Seraphino Gruyero. Brainrots in this tier are harder to spawn. It can produce from $200/s to $1.9K/s, and $35K to $347.5K."
+    },
+    {
+      "name": "Mythic",
+      "slug": "mythic",
+      "brainrotCount": 33,
+      "incomeRange": "$2K/s to $18K/s",
+      "costRange": "up to $5",
+      "spawnChance": "10%",
+      "description": "Mythic is an intermediate rarity including 33 brainrots (including the Mythic Lucky Block). Brainrots from this rarity spawn way less often than Legendary Brainrots. It goes to Frigo Camelo to Berenjello Angello but Los Noobinis and Tob Tobi Tobi are 2 examples of unobtainable Mythics. They can cost up to $5.5M. They can produce up to $18K/s, which is almost good (not now) as the Brainrot God: Cocofanto Elefanto which does $19K/s (formerly $17.5K/s). A mythic (depends on which Mythic spawns) can have approximately a 10% chance to spawn. It can produce from $2K/s to $18K/s, and cost $350K to $5.5M."
+    },
+    {
+      "name": "Brainrot God",
+      "slug": "brainrot-god",
+      "brainrotCount": 74,
+      "incomeRange": null,
+      "costRange": "$5M to $75M",
+      "spawnChance": null,
+      "description": "Brainrot God is a semi rare rarity including 74 brainrots. It ranges from Cocofanto Elefanto to Dumborino Miracello. Whenever a Brainrot from this tier spawns, its name is said out loud. It can produce $19K/s (formerly $17.5K/s) to $315K/s, and cost $5M to $75M."
+    },
+    {
+      "name": "Secret",
+      "slug": "secret",
+      "brainrotCount": null,
+      "incomeRange": null,
+      "costRange": "$50M to $400B",
+      "spawnChance": null,
+      "description": "Secret is a hard to obtain rarity. It ranges from Jackorilla (formerly La Vacca Saturno Saturnita) to Griffin, These Brainrots have a VERY LOW chance to spawn. The most common secret, La Vacca Saturno Saturnita, is still extremely rare without Server Luck or Admin Abuse, which is a Core Feature. People who have these Brainrots are highly invested in this game. These Brainrots can produce $315K/s to $400M/s, and can cost $50M to $400B. This rarity has the most brainrots in it, being 100+ brainrots (including the Secret Lucky Block. Coffin Tung Tung Tung Sahur and the Gold Elf)"
+    },
+    {
+      "name": "OG",
+      "slug": "og",
+      "brainrotCount": null,
+      "incomeRange": null,
+      "costRange": null,
+      "spawnChance": null,
+      "description": "OG OG is by far the rarest rarity. There are 5 OG Brainrots, the Strawberry Elephant, which costs $750B and produces $750M/s, the Meowl, which produces $600M/s and costs $600B, Headless Horseman, which costs $550B and produces $550M/s, John Pork, which costs $500B and produces $500M/s and Skibidi Toilet which costs $450B. and produces $450M/s These Brainrots can be spawned by admins although Sammy stated he never will. They can spawn on the red carpet with an EXTREMELY LOW CHANCE, even with Server Luck. This also makes the OG rarity to have the least amount of Brainrots. Sammy wants to keep the OG rarity extremely unique. Headless Horseman was buffed to OG on February 28th, or the Divine Admin Machine update."
+    },
+    {
+      "name": "Admin",
+      "slug": "admin",
+      "brainrotCount": null,
+      "incomeRange": null,
+      "costRange": null,
+      "spawnChance": null,
+      "description": "Admin Is a limited Admin Abuse rarity, and has only two obtainable Lucky Blocks, which are the Admin Lucky Block and the Los Lucky Blocks and NO obtainable brainrots, however, previously there was Developini Braziliaspidini and Kings Coleslaw with admin rarity, but they are NOT obtainable now"
+    },
+    {
+      "name": "Taco",
+      "slug": "taco",
+      "brainrotCount": null,
+      "incomeRange": null,
+      "costRange": null,
+      "spawnChance": null,
+      "description": "Taco is a limited Admin Abuse rarity and has only two Brainrots, which are the Taco Lucky Block and the Los Taco Blocks."
+    },
+    {
+      "name": "Spooky",
+      "slug": "spooky",
+      "brainrotCount": null,
+      "incomeRange": null,
+      "costRange": null,
+      "spawnChance": null,
+      "description": "Spooky is a limited Halloween rarity and has only one Brainrot, which is the Spooky Lucky Block"
+    },
+    {
+      "name": "Festive",
+      "slug": "festive",
+      "brainrotCount": null,
+      "incomeRange": null,
+      "costRange": null,
+      "spawnChance": null,
+      "description": "Festive is a limited Christmas rarity and has only one Brainrot, which is the Festive Lucky Block Valentines Valentines is a limited Valentines Day rarity and has only one Brainrot, which is the Heart Lucky Block St Patrick St Patrick is a limited St Patricks Day rarity and has only one Brainrot, which is the Leprechaun Lucky Block Easter Easter is a limited Easter rarity and has only one Brainrot, which is the Egg Lucky Block"
+    }
+  ]
+}
