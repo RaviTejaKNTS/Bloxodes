@@ -39,6 +39,7 @@
     "backfill:universes": "tsx scripts/backfill/backfill-game-universes.ts",
     "generate:queue": "tsx scripts/automation/run-generation-queue.ts",
     "links:backfill": "tsx scripts/backfill/backfill-social-links.ts",
+    "fix:game-links": "tsx scripts/games/fix-missing-roblox-links-and-universes.ts",
     "cover:backfill": "tsx scripts/backfill/backfill-missing-cover-images.ts",
     "collect:universes": "tsx scripts/universes/collect-roblox-universes.ts",
     "search:universes": "tsx scripts/universes/search-roblox-universes.ts",

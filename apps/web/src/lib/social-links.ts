@@ -165,6 +165,42 @@ function extractLinksFromAnchors(
   return result;
 }
 
+function mergeMissingLinks(primary: SocialLinks, fallback: SocialLinks): SocialLinks {
+  const merged: SocialLinks = { ...primary };
+  for (const [type, value] of Object.entries(fallback) as [SocialLinkType, string][]) {
+    if (value && !merged[type]) {
+      merged[type] = value;
+    }
+  }
+  return merged;
+}
+
+function isRobloxdenGameFooterText(value: string): boolean {
+  return /\bon\s+roblox\b/i.test(value);
+}
+
+function extractRobloxdenPageLinks($: cheerio.CheerioAPI, baseUrl: string): SocialLinks {
+  const result: SocialLinks = {};
+  $("a[href]").each((_, element) => {
+    const anchor = $(element);
+    const href = anchor.attr("href");
+    const normalized = normalizeAbsoluteUrl(href, baseUrl);
+    if (!normalized) return;
+    if (isBlockedTwitter(normalized)) return;
+
+    const type = classifyLink(normalized);
+    if (!type || result[type]) return;
+
+    if (type === "roblox") {
+      const label = anchor.text().replace(/\s+/g, " ").trim();
+      if (!isRobloxdenGameFooterText(label)) return;
+    }
+
+    result[type] = normalized.toString();
+  });
+  return result;
+}
+
 function selectArticleContainer(
   $: cheerio.CheerioAPI,
   selectors: string[]
@@ -187,10 +223,9 @@ async function scrapeRobloxdenLinks(url: string): Promise<SocialLinks> {
       ".article__content",
       ".section__body"
     ]) ?? null;
-  if (!container) {
-    return {};
-  }
-  return extractLinksFromAnchors($, container, url);
+  const contentLinks = container ? extractLinksFromAnchors($, container, url) : {};
+  const pageLinks = extractRobloxdenPageLinks($, url);
+  return mergeMissingLinks(contentLinks, pageLinks);
 }
 
 async function scrapeBeebomLinks(url: string): Promise<SocialLinks> {

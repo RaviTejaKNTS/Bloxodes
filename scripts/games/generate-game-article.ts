@@ -135,6 +135,11 @@ type InterlinkPromptContext = {
   picks: { id: string; slug: string; name: string; basis: "developer" | "genre" }[];
 };
 
+const GAME_ARTICLE_SELECT =
+  "id, name, slug, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, seo_description";
+const MISSING_ARTICLE_CONTENT_FILTER =
+  "intro_md.is.null,redeem_md.is.null,troubleshoot_md.is.null,rewards_md.is.null,find_codes_md.is.null,seo_description.is.null";
+
 const normalizeInterlinkGame = (row: InterlinkGameQuery): InterlinkGame => ({
   ...row,
   universe: Array.isArray(row.universe) ? row.universe[0] ?? null : row.universe ?? null
@@ -441,26 +446,73 @@ function uniqueUrls(urls: string[]): string[] {
 }
 
 async function loadDraftGames(limit: number, slug: string | null): Promise<ExistingGameRecord[]> {
-  let query = supabase
-    .from("games")
-    .select(
-      "id, name, slug, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, seo_description"
-    )
-    .eq("is_published", false);
-
   if (slug) {
-    query = query.eq("slug", slug).limit(1);
-  } else {
-    query = query
-      .or(
-        "intro_md.is.null,redeem_md.is.null,troubleshoot_md.is.null,rewards_md.is.null,find_codes_md.is.null,seo_description.is.null"
-      )
-      .order("created_at", { ascending: true })
-      .limit(limit);
+    const { data, error } = await supabase
+      .from("games")
+      .select(GAME_ARTICLE_SELECT)
+      .eq("is_published", false)
+      .eq("slug", slug)
+      .limit(1);
+
+    if (error) throw new Error(`Failed to load draft games: ${error.message}`);
+    return ((data ?? []) as ExistingGameRecord[]).filter((game) => Boolean(game.id && game.name && game.slug));
   }
 
-  const { data, error } = await query;
-  if (error) throw new Error(`Failed to load draft games: ${error.message}`);
+  const withSourceUrl2 = await loadDraftGamesWithSourceUrl2(limit);
+  if (withSourceUrl2.length > 0) {
+    console.log(`🎯 Prioritizing ${withSourceUrl2.length} draft game${withSourceUrl2.length === 1 ? "" : "s"} with source_url_2.`);
+    return withSourceUrl2;
+  }
+
+  const fallback = await loadRandomDraftGamesWithoutSourceUrl2(limit);
+  if (fallback.length > 0) {
+    console.log(`🎲 No source_url_2 drafts found. Picked ${fallback.length} remaining draft game${fallback.length === 1 ? "" : "s"}.`);
+  }
+  return fallback;
+}
+
+async function loadDraftGamesWithSourceUrl2(limit: number): Promise<ExistingGameRecord[]> {
+  const { data, error } = await supabase
+    .from("games")
+    .select(GAME_ARTICLE_SELECT)
+    .eq("is_published", false)
+    .or(MISSING_ARTICLE_CONTENT_FILTER)
+    .not("source_url_2", "is", null)
+    .neq("source_url_2", "")
+    .order("created_at", { ascending: true })
+    .limit(limit);
+
+  if (error) throw new Error(`Failed to load draft games with source_url_2: ${error.message}`);
+  return ((data ?? []) as ExistingGameRecord[]).filter((game) => Boolean(game.id && game.name && game.slug));
+}
+
+async function loadRandomDraftGamesWithoutSourceUrl2(limit: number): Promise<ExistingGameRecord[]> {
+  const countQuery = await supabase
+    .from("games")
+    .select("id", { count: "exact", head: true })
+    .eq("is_published", false)
+    .or(MISSING_ARTICLE_CONTENT_FILTER)
+    .or("source_url_2.is.null,source_url_2.eq.");
+
+  if (countQuery.error) throw new Error(`Failed to count draft games without source_url_2: ${countQuery.error.message}`);
+
+  const total = countQuery.count ?? 0;
+  if (total <= 0) return [];
+
+  const safeLimit = Math.min(limit, total);
+  const maxOffset = Math.max(0, total - safeLimit);
+  const offset = maxOffset > 0 ? Math.floor(Math.random() * (maxOffset + 1)) : 0;
+
+  const { data, error } = await supabase
+    .from("games")
+    .select(GAME_ARTICLE_SELECT)
+    .eq("is_published", false)
+    .or(MISSING_ARTICLE_CONTENT_FILTER)
+    .or("source_url_2.is.null,source_url_2.eq.")
+    .order("created_at", { ascending: true })
+    .range(offset, offset + safeLimit - 1);
+
+  if (error) throw new Error(`Failed to load random draft games without source_url_2: ${error.message}`);
   return ((data ?? []) as ExistingGameRecord[]).filter((game) => Boolean(game.id && game.name && game.slug));
 }
 

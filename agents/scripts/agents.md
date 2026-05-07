@@ -47,6 +47,7 @@ This file is the quick reference for what exists today and how to invoke it.
 | Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes`, `npm run enrich:universes:light`, `npm run enrich:universes:deep` |
 | Update universe stats | `scripts/universes/update-universe-stats.ts` | `npm run update:stats` |
 | Update current playing counts | `scripts/universes/update-universe-playing.ts` | `npm run update:playing` |
+| Fix games with article content but missing Roblox link/universe ID | `scripts/games/fix-missing-roblox-links-and-universes.ts` | `npm run fix:game-links` local dry run, `npm run fix:game-links -- --prod --apply` to write prod |
 | Backfill social links | `scripts/backfill/backfill-social-links.ts` | `npm run links:backfill` |
 | Backfill missing cover images | `scripts/backfill/backfill-missing-cover-images.ts` | `npm run cover:backfill` |
 | Backfill interlinking copy | `scripts/backfill/backfill-interlinking.ts` | `npm run backfill:interlinking` |
