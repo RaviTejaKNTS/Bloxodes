@@ -17,12 +17,13 @@ import {
   useWindowDimensions,
   View
 } from "react-native";
-import { buildWebUrl, fetchCodeDetail, fetchCodesIndex, fetchContentIndex, fetchSearchResults } from "./src/api";
+import { buildWebUrl, fetchCodeDetail, fetchCodesIndex, fetchContentDetail, fetchContentIndex, fetchSearchResults } from "./src/api";
 import { darkColors, lightColors, radii, spacing, type ThemeColors } from "./src/theme";
 import type {
   CodeDetailResponse,
   CodeItem,
   CodesIndexItem,
+  MobileContentDetailResponse,
   MobileContentIndexResponse,
   MobileContentItem,
   MobileContentKind,
@@ -67,7 +68,8 @@ const CONTENT_PADDING = spacing.lg;
 const CARD_GAP = 20;
 
 type Screen = {
-  name: "codes" | "codeDetail" | MobileContentKind;
+  name: "codes" | "codeDetail" | "contentDetail" | MobileContentKind;
+  kind?: MobileContentKind;
   slug?: string;
 };
 
@@ -140,6 +142,40 @@ const CONTENT_SECTIONS: Record<MobileContentKind, ContentSectionConfig> = {
 
 function isMobileContentScreen(name: Screen["name"]): name is MobileContentKind {
   return name in CONTENT_SECTIONS;
+}
+
+function getSlugFromUrl(url: string): string | null {
+  try {
+    const pathname = new URL(buildWebUrl(url)).pathname;
+    const parts = pathname.split("/").filter(Boolean);
+    return parts[1] ? decodeURIComponent(parts[1]) : null;
+  } catch {
+    const parts = url.split("?")[0].split("/").filter(Boolean);
+    return parts[1] ? decodeURIComponent(parts[1]) : null;
+  }
+}
+
+function getKindFromSearchType(type: SearchItem["type"]): MobileContentKind | null {
+  switch (type) {
+    case "article":
+      return "articles";
+    case "catalog":
+      return "catalog";
+    case "checklist":
+      return "checklists";
+    case "event":
+      return "events";
+    case "list":
+      return "lists";
+    case "quiz":
+      return "quizzes";
+    case "tool":
+      return "tools";
+    case "wiki":
+      return "wiki";
+    default:
+      return null;
+  }
 }
 
 type AppStyles = ReturnType<typeof createAppStyles>;
@@ -502,7 +538,8 @@ function Sidebar({
           const screenName = item.toLowerCase() as Screen["name"];
           const active =
             (item === "Codes" && currentScreen.name.startsWith("code")) ||
-            (isMobileContentScreen(currentScreen.name) && screenName === currentScreen.name);
+            (isMobileContentScreen(currentScreen.name) && screenName === currentScreen.name) ||
+            (currentScreen.name === "contentDetail" && screenName === currentScreen.kind);
           const iconColor = active ? colors.foreground : colors.muted;
           return (
             <TouchableOpacity
@@ -640,6 +677,7 @@ function ContentIndexScreen({
   loading,
   onLoadMore,
   onRefresh,
+  onSelectItem,
   refreshing
 }: {
   data: MobileContentIndexResponse | null;
@@ -648,6 +686,7 @@ function ContentIndexScreen({
   loading: boolean;
   onLoadMore: () => void;
   onRefresh: () => void;
+  onSelectItem: (item: MobileContentItem) => void;
   refreshing: boolean;
 }) {
   const { colors, styles } = useAppTheme();
@@ -686,7 +725,7 @@ function ContentIndexScreen({
 
       <View style={styles.grid}>
         {items.map((item) => (
-          <ContentCard key={item.id} item={item} width={cardWidth} />
+          <ContentCard key={item.id} item={item} onPress={() => onSelectItem(item)} width={cardWidth} />
         ))}
       </View>
 
@@ -699,11 +738,11 @@ function ContentIndexScreen({
   );
 }
 
-function ContentCard({ item, width }: { item: MobileContentItem; width: number }) {
+function ContentCard({ item, onPress, width }: { item: MobileContentItem; onPress: () => void; width: number }) {
   const { colors, styles } = useAppTheme();
 
   return (
-    <TouchableOpacity style={[styles.gameCard, { width }]} onPress={() => Linking.openURL(buildWebUrl(item.url))}>
+    <TouchableOpacity style={[styles.gameCard, { width }]} onPress={onPress}>
       <View style={styles.gameCardImageWrap}>
         <ImageSlot source={item.coverImage} label={item.title} />
         <View style={styles.imageBottomFade} />
@@ -731,6 +770,108 @@ function ContentCard({ item, width }: { item: MobileContentItem; width: number }
         </View>
       </View>
     </TouchableOpacity>
+  );
+}
+
+function ContentDetailScreen({
+  detail,
+  error,
+  kind,
+  loading,
+  onBack,
+  onRetry
+}: {
+  detail: MobileContentDetailResponse | null;
+  error: string | null;
+  kind: MobileContentKind;
+  loading: boolean;
+  onBack: () => void;
+  onRetry: () => void;
+}) {
+  const { colors, styles } = useAppTheme();
+  const config = CONTENT_SECTIONS[kind];
+
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      {loading ? <LoadingPanel label={`Loading Bloxodes ${kind}`} /> : null}
+      {error ? <ErrorPanel message={error} onRetry={onRetry} /> : null}
+
+      {detail ? (
+        <>
+          <View style={styles.detailHeader}>
+            <View style={styles.breadcrumbRow}>
+              <TouchableOpacity onPress={onBack}>
+                <Text style={styles.breadcrumbLink}>{config.eyebrow}</Text>
+              </TouchableOpacity>
+              <Text style={styles.breadcrumbDivider}>&gt;</Text>
+              <Text style={styles.breadcrumbCurrent} numberOfLines={1}>
+                {detail.title}
+              </Text>
+            </View>
+            <ImageSlot source={detail.coverImage} label={detail.title} />
+            <Text style={styles.detailTitle}>{detail.title}</Text>
+            <View style={styles.statsRow}>
+              {detail.badge ? <Pill icon={config.icon} label={detail.badge} tone="accent" /> : null}
+              {detail.updatedAt ? <Pill icon="clock" label={`Updated ${formatUpdatedLabel(detail.updatedAt)}`} /> : null}
+              {detail.subtitle ? <Pill icon="info" label={detail.subtitle} /> : null}
+            </View>
+            {detail.summary ? <Text style={styles.detailIntro}>{detail.summary}</Text> : null}
+          </View>
+
+          {detail.sections.length === 0 ? (
+            <View style={styles.statePanel}>
+              <Text style={styles.errorTitle}>No detail sections yet</Text>
+              <Text style={styles.mutedText}>Bloxodes has this page, but there is no mobile detail data to show right now.</Text>
+            </View>
+          ) : null}
+
+          {detail.sections.map((section) => (
+            <View key={section.id} style={styles.codesPanel}>
+              <View style={styles.codesPanelHeader}>
+                <View style={styles.panelHeading}>
+                  <Text style={styles.panelTitle}>{section.title}</Text>
+                  {section.subtitle ? <Text style={styles.panelSubtitle}>{section.subtitle}</Text> : null}
+                </View>
+              </View>
+              {section.body ? (
+                <View style={styles.detailSectionBody}>
+                  <Text style={styles.detailSectionText}>{section.body}</Text>
+                </View>
+              ) : null}
+              {section.items.length ? (
+                <View style={styles.codesList}>
+                  {section.items.map((item, index) => (
+                    <View key={item.id} style={[styles.detailItemRow, index > 0 ? styles.codeRowBorder : null]}>
+                      {item.image ? (
+                        <Image source={{ uri: item.image }} style={styles.detailItemImage} resizeMode="cover" />
+                      ) : (
+                        <View style={styles.codeIndex}>
+                          <Text style={styles.codeIndexText}>{index + 1}</Text>
+                        </View>
+                      )}
+                      <View style={styles.codeMain}>
+                        <View style={styles.codeLine}>
+                          <Text style={styles.detailItemTitle}>{item.title}</Text>
+                          {item.badge ? <Text style={styles.miniBadge}>{item.badge}</Text> : null}
+                        </View>
+                        {item.subtitle ? <Text style={styles.gameMetaText}>{item.subtitle}</Text> : null}
+                        {item.body ? <Text style={styles.mutedText}>{item.body}</Text> : null}
+                      </View>
+                    </View>
+                  ))}
+                </View>
+              ) : null}
+            </View>
+          ))}
+
+          <View style={styles.externalLinks}>
+            <TouchableOpacity style={styles.outlineButton} onPress={() => Linking.openURL(buildWebUrl(detail.url))}>
+              <Text style={styles.outlineButtonText}>Open full page on Bloxodes</Text>
+            </TouchableOpacity>
+          </View>
+        </>
+      ) : null}
+    </ScrollView>
   );
 }
 
@@ -994,6 +1135,9 @@ export default function App() {
   const [detail, setDetail] = useState<CodeDetailResponse | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
+  const [contentDetail, setContentDetail] = useState<MobileContentDetailResponse | null>(null);
+  const [contentDetailError, setContentDetailError] = useState<string | null>(null);
+  const [contentDetailLoading, setContentDetailLoading] = useState(false);
   const [contentSections, setContentSections] = useState<Record<MobileContentKind, ContentState>>({
     articles: { data: null, error: null, loading: false, refreshing: false },
     catalog: { data: null, error: null, loading: false, refreshing: false },
@@ -1006,6 +1150,8 @@ export default function App() {
   });
 
   const currentSlug = screen.name === "codeDetail" ? screen.slug : undefined;
+  const currentDetailKind = screen.name === "contentDetail" ? screen.kind : null;
+  const currentDetailSlug = screen.name === "contentDetail" ? screen.slug : undefined;
   const currentContentKind = isMobileContentScreen(screen.name) ? screen.name : null;
 
   async function loadIndex(nextPage = 1, replace = true) {
@@ -1041,6 +1187,20 @@ export default function App() {
       setDetailError(error instanceof Error ? error.message : "Failed to load code page");
     } finally {
       setDetailLoading(false);
+    }
+  }
+
+  async function loadContentDetail(kind: MobileContentKind, slug: string) {
+    setContentDetail(null);
+    setContentDetailLoading(true);
+    setContentDetailError(null);
+    try {
+      const response = await fetchContentDetail(kind, slug);
+      setContentDetail(response);
+    } catch (error) {
+      setContentDetailError(error instanceof Error ? error.message : "Failed to load content page");
+    } finally {
+      setContentDetailLoading(false);
     }
   }
 
@@ -1112,6 +1272,13 @@ export default function App() {
       return;
     }
 
+    const kind = getKindFromSearchType(item.type);
+    const slug = getSlugFromUrl(item.url);
+    if (kind && slug) {
+      setScreen({ name: "contentDetail", kind, slug });
+      return;
+    }
+
     openWebUrl(item.url);
   }
 
@@ -1128,6 +1295,12 @@ export default function App() {
       void loadDetail(currentSlug);
     }
   }, [currentSlug]);
+
+  useEffect(() => {
+    if (currentDetailKind && currentDetailSlug) {
+      void loadContentDetail(currentDetailKind, currentDetailSlug);
+    }
+  }, [currentDetailKind, currentDetailSlug]);
 
   useEffect(() => {
     if (currentContentKind && !contentSections[currentContentKind].data && !contentSections[currentContentKind].loading) {
@@ -1148,6 +1321,19 @@ export default function App() {
       );
     }
 
+    if (screen.name === "contentDetail" && screen.kind && screen.slug) {
+      return (
+        <ContentDetailScreen
+          detail={contentDetail}
+          error={contentDetailError}
+          kind={screen.kind}
+          loading={contentDetailLoading}
+          onBack={() => setScreen({ name: screen.kind! })}
+          onRetry={() => screen.kind && screen.slug && void loadContentDetail(screen.kind, screen.slug)}
+        />
+      );
+    }
+
     if (isMobileContentScreen(screen.name)) {
       const section = contentSections[screen.name];
       const nextPage = (section.data?.page ?? 0) + 1;
@@ -1160,6 +1346,14 @@ export default function App() {
           refreshing={section.refreshing}
           onRefresh={() => void refreshContent(screen.name as MobileContentKind)}
           onLoadMore={() => void loadContent(screen.name as MobileContentKind, nextPage, false)}
+          onSelectItem={(item) => {
+            const slug = getSlugFromUrl(item.url);
+            if (slug) {
+              setScreen({ name: "contentDetail", kind: screen.name as MobileContentKind, slug });
+            } else {
+              openWebUrl(item.url);
+            }
+          }}
         />
       );
     }
@@ -1178,7 +1372,26 @@ export default function App() {
         onSelectGame={(slug) => setScreen({ name: "codeDetail", slug })}
       />
     );
-  }, [contentSections, currentSlug, detail, detailError, detailLoading, games, indexError, indexLoading, page, refreshing, screen.name, total, totalPages]);
+  }, [
+    contentDetail,
+    contentDetailError,
+    contentDetailLoading,
+    contentSections,
+    currentSlug,
+    detail,
+    detailError,
+    detailLoading,
+    games,
+    indexError,
+    indexLoading,
+    page,
+    refreshing,
+    screen.kind,
+    screen.name,
+    screen.slug,
+    total,
+    totalPages
+  ]);
 
   return (
     <ThemeContext.Provider value={theme}>
@@ -1630,6 +1843,33 @@ function createAppStyles(colors: ThemeColors) {
     color: colors.muted,
     fontSize: 14,
     lineHeight: 20
+  },
+  detailSectionBody: {
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.lg
+  },
+  detailSectionText: {
+    color: colors.mutedStrong,
+    fontSize: 15,
+    lineHeight: 23
+  },
+  detailItemRow: {
+    flexDirection: "row",
+    gap: spacing.md,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.md
+  },
+  detailItemImage: {
+    width: 44,
+    height: 44,
+    borderRadius: radii.sm,
+    backgroundColor: colors.surfaceMuted
+  },
+  detailItemTitle: {
+    color: colors.foreground,
+    fontSize: 15,
+    lineHeight: 21,
+    fontWeight: "800"
   },
   genreText: {
     color: colors.accent,

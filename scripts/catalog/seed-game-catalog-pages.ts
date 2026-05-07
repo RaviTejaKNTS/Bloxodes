@@ -29,11 +29,8 @@ type CatalogPageUpsert = {
   how_it_works_md: string;
   description_json: Record<string, string>;
   faq_json: Array<{ q: string; a: string }>;
-  cta_label: string;
-  cta_url: string;
   wiki_md: string;
   wiki_sort_order: number;
-  wiki_item_count: number;
   wiki_image_urls: string[];
   thumb_url: string | null;
   is_published: boolean;
@@ -44,6 +41,7 @@ const args = new Set(process.argv.slice(2));
 const dryRun = args.has("--dry-run");
 const draft = args.has("--draft");
 const allowProd = args.has("--allow-prod");
+const UNIVERSE_LOOKUP_PAGE_SIZE = 1000;
 
 async function readDataset(config: GameDatasetCatalogConfig) {
   const datasetPath = repoPath("data", config.dataDir, config.file);
@@ -108,11 +106,8 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
       how_it_works_md: copy.how_it_works_md,
       description_json: copy.description_json,
       faq_json: copy.faq_json,
-      cta_label: copy.cta_label,
-      cta_url: copy.cta_url,
       wiki_md: copy.wiki_md,
       wiki_sort_order: copy.wiki_sort_order,
-      wiki_item_count: copy.wiki_item_count,
       wiki_image_urls: copy.wiki_image_urls,
       thumb_url: copy.thumb_url,
       is_published: !draft,
@@ -139,16 +134,7 @@ async function loadExistingPublishedAt() {
 
 async function loadUniverseIdsByGameSlug() {
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, number | null>();
-  const sb = supabaseAdmin();
-  const { data, error } = await sb.from("roblox_universes").select("universe_id, slug, name, display_name");
-  if (error) throw error;
-
-  const rows = (data ?? []) as Array<{
-    universe_id: number;
-    slug?: string | null;
-    name?: string | null;
-    display_name?: string | null;
-  }>;
+  const rows = await loadRobloxUniverseLookupRows();
 
   return new Map(
     GAME_DATASET_CATALOG_GROUPS.map((group) => {
@@ -159,6 +145,31 @@ async function loadUniverseIdsByGameSlug() {
       return [group.gameSlug, match?.universe_id ?? null];
     })
   );
+}
+
+async function loadRobloxUniverseLookupRows() {
+  const sb = supabaseAdmin();
+  const rows: Array<{
+    universe_id: number;
+    slug?: string | null;
+    name?: string | null;
+    display_name?: string | null;
+  }> = [];
+
+  for (let from = 0; ; from += UNIVERSE_LOOKUP_PAGE_SIZE) {
+    const to = from + UNIVERSE_LOOKUP_PAGE_SIZE - 1;
+    const { data, error } = await sb
+      .from("roblox_universes")
+      .select("universe_id, slug, name, display_name")
+      .order("universe_id", { ascending: true })
+      .range(from, to);
+
+    if (error) throw error;
+    rows.push(...((data ?? []) as typeof rows));
+    if (!data || data.length < UNIVERSE_LOOKUP_PAGE_SIZE) break;
+  }
+
+  return rows;
 }
 
 function normalizeLookup(value: string | null | undefined): string {
@@ -184,8 +195,10 @@ async function main() {
 
   if (dryRun) {
     console.log(`Prepared ${rows.length} catalog page rows.`);
-    for (const row of rows) {
-      console.log(`${row.code} | ${row.title} | items=${row.wiki_item_count}`);
+    for (const [index, row] of rows.entries()) {
+      const config = GAME_DATASET_CATALOGS[index];
+      const dataset = config ? await readDataset(config) : null;
+      console.log(`${row.code} | ${row.title} | items=${dataset?.rows.length ?? "unknown"}`);
     }
     return;
   }

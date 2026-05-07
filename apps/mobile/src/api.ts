@@ -2,6 +2,7 @@ import type {
   ApiErrorResponse,
   CodeDetailResponse,
   CodesIndexResponse,
+  MobileContentDetailResponse,
   MobileContentIndexResponse,
   MobileContentKind,
   SearchResponse
@@ -57,6 +58,10 @@ export function fetchCodeDetail(slug: string): Promise<CodeDetailResponse> {
 
 export function fetchContentIndex(kind: MobileContentKind, page = 1): Promise<MobileContentIndexResponse> {
   return requestJson<MobileContentIndexResponse>(`/api/mobile/content/${kind}?page=${page}`);
+}
+
+export function fetchContentDetail(kind: MobileContentKind, slug: string): Promise<MobileContentDetailResponse> {
+  return requestJson<MobileContentDetailResponse>(`/api/mobile/content/${kind}/${encodeURIComponent(slug)}`);
 }
 
 export function fetchSearchResults(query: string, scope = "global"): Promise<SearchResponse> {

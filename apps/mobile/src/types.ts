@@ -75,6 +75,36 @@ export type MobileContentIndexResponse = {
   items: MobileContentItem[];
 };
 
+export type MobileContentDetailItem = {
+  id: string;
+  title: string;
+  subtitle: string | null;
+  body: string | null;
+  badge: string | null;
+  image: string | null;
+};
+
+export type MobileContentDetailSection = {
+  id: string;
+  title: string;
+  subtitle: string | null;
+  body: string | null;
+  items: MobileContentDetailItem[];
+};
+
+export type MobileContentDetailResponse = {
+  ok: true;
+  kind: MobileContentKind;
+  title: string;
+  subtitle: string | null;
+  summary: string | null;
+  coverImage: string | null;
+  updatedAt: string | null;
+  url: string;
+  badge: string | null;
+  sections: MobileContentDetailSection[];
+};
+
 export type SearchItemType =
   | "article"
   | "author"

@@ -8,7 +8,7 @@ This workspace contains the Expo React Native app for Bloxodes Android and iOS b
 
 - Keep mobile data access behind public Bloxodes web APIs. Do not connect the app directly to Supabase.
 - Match the web app's quiet Bloxodes style: readable surfaces, restrained borders, small-radius cards, and the same navigation order.
-- Keep V1 focused on codes index and code detail screens. Other sidebar items can be present as disabled navigation until their screens are implemented.
+- Keep V1 focused on lightweight database-style browsing. Mobile should show native index cards for major Bloxodes sections, then hand off to the website for full rich detail pages.
 - Prefer shared types and small API clients before duplicating response shapes across screens.
 - Keep platform-specific code out of screen components unless it is truly needed.
 - Use `EXPO_PUBLIC_BLOXODES_API_URL` for local/staging API testing. The default is production `https://bloxodes.com`.
@@ -28,12 +28,16 @@ The app currently reads:
 
 - `GET /api/mobile/codes`
 - `GET /api/mobile/codes/[slug]`
+- `GET /api/mobile/content/[kind]`
+- `GET /api/search/all`
 
 Use `EXPO_PUBLIC_BLOXODES_API_URL` to point at a local or staging web server during development. The default is `https://bloxodes.com`.
 
 ## Current UI Scope
 
 - Left navigation uses the same Bloxodes order: Catalog, Tools, Wiki, Codes, Quizzes, Lists, Checklists, Events, Articles.
-- Only Codes is enabled for V1.
+- Catalog, Tools, Wiki, Quizzes, Lists, Checklists, Events, and Articles use native index cards that open full web pages.
 - Codes index supports pagination and refresh.
 - Code detail shows active and expired codes, copy actions, and a link back to the website when available.
+- Search uses the same website search endpoint and opens code results natively where possible.
+- Sign-in opens the existing Bloxodes Roblox OAuth flow on the website.

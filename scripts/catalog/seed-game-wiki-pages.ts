@@ -23,6 +23,7 @@ const args = new Set(process.argv.slice(2));
 const dryRun = args.has("--dry-run");
 const draft = args.has("--draft");
 const allowProd = args.has("--allow-prod");
+const UNIVERSE_LOOKUP_PAGE_SIZE = 1000;
 
 const WIKI_COPY: Record<string, WikiCopy> = {
   "steal-a-brainrot": {
@@ -78,16 +79,7 @@ async function loadExistingPublishedAt() {
 
 async function loadUniverseIdsByGameSlug() {
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, number | null>();
-  const sb = supabaseAdmin();
-  const { data, error } = await sb.from("roblox_universes").select("universe_id, slug, name, display_name");
-  if (error) throw error;
-
-  const rows = (data ?? []) as Array<{
-    universe_id: number;
-    slug?: string | null;
-    name?: string | null;
-    display_name?: string | null;
-  }>;
+  const rows = await loadRobloxUniverseLookupRows();
 
   return new Map(
     GAME_DATASET_CATALOG_GROUPS.map((group) => {
@@ -98,6 +90,31 @@ async function loadUniverseIdsByGameSlug() {
       return [group.gameSlug, match?.universe_id ?? null];
     })
   );
+}
+
+async function loadRobloxUniverseLookupRows() {
+  const sb = supabaseAdmin();
+  const rows: Array<{
+    universe_id: number;
+    slug?: string | null;
+    name?: string | null;
+    display_name?: string | null;
+  }> = [];
+
+  for (let from = 0; ; from += UNIVERSE_LOOKUP_PAGE_SIZE) {
+    const to = from + UNIVERSE_LOOKUP_PAGE_SIZE - 1;
+    const { data, error } = await sb
+      .from("roblox_universes")
+      .select("universe_id, slug, name, display_name")
+      .order("universe_id", { ascending: true })
+      .range(from, to);
+
+    if (error) throw error;
+    rows.push(...((data ?? []) as typeof rows));
+    if (!data || data.length < UNIVERSE_LOOKUP_PAGE_SIZE) break;
+  }
+
+  return rows;
 }
 
 async function buildRows(existingPublishedAt: Map<string, string | null>, universeIdsByGameSlug: Map<string, number | null>) {

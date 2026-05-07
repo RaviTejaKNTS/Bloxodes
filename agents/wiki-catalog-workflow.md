@@ -207,9 +207,30 @@ Only after local is clean:
 1. Use a forward-only migration or a controlled seed/upsert script.
 2. Keep production SQL idempotent with `on conflict` upserts.
 3. Preserve existing published timestamps unless intentionally republishing.
-4. Apply to production after a dry run.
-5. Verify production URLs and sitemap entries.
-6. Trigger or confirm revalidation for `wiki` and `catalog` entities.
+4. Run production dry-runs before writing:
+   - Use `NODE_ENV=production` so `scripts/shared/load-env.ts` reads `.env` instead of `.env.development.local`.
+   - Confirm the target host is production, not `127.0.0.1:54321`.
+   - Run `NODE_ENV=production npm run seed:game-catalog-pages -- --dry-run`.
+   - Run `NODE_ENV=production npm run seed:game-wiki-pages -- --dry-run`.
+   - Confirm expected row counts.
+   - Confirm wiki rows show real `universe_id` values, not `not linked`.
+5. Apply to production only after dry-runs are clean:
+   - Run `NODE_ENV=production npm run seed:game-catalog-pages -- --allow-prod`.
+   - Run `NODE_ENV=production npm run seed:game-wiki-pages -- --allow-prod`.
+   - Do not use `--draft` for production publish unless the pages must stay hidden.
+6. Verify production DB state after writing:
+   - All expected `catalog_pages` rows exist.
+   - All expected `wiki_pages` rows exist.
+   - `is_published = true` for rows meant to go live.
+   - No expected catalog or wiki rows have missing `universe_id`.
+7. Verify production URLs and sitemap entries.
+8. Trigger or confirm revalidation for `wiki` and `catalog` entities.
+
+Production notes:
+
+- Production Supabase can contain more than the default returned row count. Any script that looks up `roblox_universes` for matching must paginate with `.range(...)` or another explicit paging strategy.
+- Keep seed payloads aligned with the current table schema. Do not carry old migration fields into upserts. In the current catalog schema, `cta_label`, `cta_url`, and `wiki_item_count` are not written to `catalog_pages`.
+- If production writes fail with a schema-cache column error, stop and align the script or migration before retrying. Do not keep retrying the same payload.
 
 ## Quality Bar
 
@@ -220,6 +241,8 @@ Only after local is clean:
 - Keep page copy practical: explain how players use the dataset, not marketing filler.
 - Keep images local for dataset-backed collections unless the existing route intentionally uses remote images.
 - When adding many similar games, improve the shared renderer/scripts instead of creating copy-pasted route families.
+- Delete true one-off collector/import scripts once the data is stable, committed, and no longer needed.
+- Keep reusable workflow scripts such as game catalog/wiki seeders because they are part of the repeated publishing process.
 
 ## Existing Reference Points
 
