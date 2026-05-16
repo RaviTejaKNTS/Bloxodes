@@ -31,7 +31,7 @@ Important fields:
 - `catalog_pages.universe_id`: links catalog pages into the wiki hub.
 - `catalog_pages.wiki_md`: short copy rendered on the game wiki hub.
 - `catalog_pages.wiki_sort_order`: ordering on the game wiki hub.
-- `catalog_pages.wiki_image_urls`: image strip shown in wiki catalog CTAs.
+- Wiki catalog CTA image strips are derived from representative item images in `data/<Game>/<collection>.json` by matching `catalog_pages.code`.
 
 ## Naming Pattern
 
@@ -128,7 +128,7 @@ Each `catalog_pages` row should have useful copy, not just SEO filler.
 - `description_json`: use only for extra detail that genuinely helps players understand the collection.
 - `faq_json`: answer real questions a player would have. Avoid generic FAQ entries.
 - `wiki_md`: short wiki-hub copy that explains the catalog's role in one compact paragraph.
-- `wiki_image_urls`: use representative item images from the local dataset when possible.
+- CTA images on wiki hubs come from representative item images in the matching local dataset; do not store per-page image arrays in Supabase.
 
 Good catalog copy usually follows this shape:
 

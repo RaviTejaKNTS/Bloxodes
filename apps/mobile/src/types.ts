@@ -72,6 +72,7 @@ export type MobileContentIndexResponse = {
   total: number;
   totalPages: number;
   latestUpdatedAt: string | null;
+  query?: string | null;
   items: MobileContentItem[];
 };
 
@@ -90,6 +91,11 @@ export type MobileContentDetailSection = {
   subtitle: string | null;
   body: string | null;
   items: MobileContentDetailItem[];
+  page?: number;
+  pageSize?: number;
+  total?: number;
+  totalPages?: number;
+  query?: string | null;
 };
 
 export type MobileContentDetailResponse = {
@@ -130,4 +136,18 @@ export type SearchItem = {
 
 export type SearchResponse = {
   items: SearchItem[];
+};
+
+export type MobileHomeResponse = {
+  ok: true;
+  codes: CodesIndexResponse;
+  sections: MobileContentIndexResponse[];
+};
+
+export type CodeSessionResponse = {
+  userId: string | null;
+};
+
+export type CodeProgressResponse = {
+  usedCodes: string[];
 };

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { purgeCloudflarePaths } from "@/lib/cloudflare-cache";
+import { supabaseAdmin } from "@/lib/supabase";
 
 type Payload =
   | { type: "code"; slug: string }
@@ -110,7 +111,7 @@ function revalidateForAuthor(slug: string) {
 }
 
 function revalidateForEvents(slug: string) {
-  return applyRevalidation(["/events", `/events/${slug}`, SITEMAP_INDEX_PATH, EVENTS_SITEMAP_PATH]);
+  return applyRevalidation(["/events", `/events/${slug}`, SITEMAP_INDEX_PATH, EVENTS_SITEMAP_PATH], ["events-pages"]);
 }
 
 function revalidateForChecklists(slug: string) {
@@ -184,6 +185,130 @@ function revalidateForCatalog(slug: string) {
   );
 }
 
+function parseUniverseId(value: unknown): number | null {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string" && value.trim()) {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  return null;
+}
+
+function uniqueUniverseIds(rows: Array<{ universe_id?: unknown }>): number[] {
+  return Array.from(
+    new Set(
+      rows
+        .map((row) => parseUniverseId(row.universe_id))
+        .filter((value): value is number => value !== null)
+    )
+  );
+}
+
+async function lookupUniverseIdsBySlug(table: string, slugColumn: string, values: string[]): Promise<number[]> {
+  const candidates = Array.from(new Set(values.map(normalizeSlug).filter(Boolean)));
+  if (!candidates.length) return [];
+
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from(table)
+    .select("universe_id")
+    .in(slugColumn, candidates)
+    .not("universe_id", "is", null);
+
+  if (error) {
+    console.warn(`Wiki revalidation lookup failed for ${table}.${slugColumn}`, error.message);
+    return [];
+  }
+
+  return uniqueUniverseIds((data ?? []) as Array<{ universe_id?: unknown }>);
+}
+
+async function lookupListUniverseIds(slug: string): Promise<number[]> {
+  const sb = supabaseAdmin();
+  const { data: lists, error: listError } = await sb
+    .from("game_lists")
+    .select("id")
+    .eq("slug", slug)
+    .eq("is_published", true);
+
+  if (listError) {
+    console.warn("Wiki revalidation lookup failed for game_lists", listError.message);
+    return [];
+  }
+
+  const listIds = (lists ?? [])
+    .map((row) => (row as { id?: unknown }).id)
+    .filter((id): id is string => typeof id === "string" && id.length > 0);
+
+  if (!listIds.length) return [];
+
+  const { data: entries, error: entriesError } = await sb
+    .from("game_list_entries")
+    .select("universe_id")
+    .in("list_id", listIds)
+    .lte("rank", 3)
+    .not("universe_id", "is", null);
+
+  if (entriesError) {
+    console.warn("Wiki revalidation lookup failed for game_list_entries", entriesError.message);
+    return [];
+  }
+
+  return uniqueUniverseIds((entries ?? []) as Array<{ universe_id?: unknown }>);
+}
+
+async function lookupWikiSlugsByUniverseIds(universeIds: number[]): Promise<string[]> {
+  const ids = Array.from(new Set(universeIds.filter((id) => Number.isFinite(id))));
+  if (!ids.length) return [];
+
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from("wiki_pages")
+    .select("slug")
+    .in("universe_id", ids)
+    .eq("is_published", true)
+    .not("slug", "is", null);
+
+  if (error) {
+    console.warn("Wiki revalidation lookup failed for wiki_pages", error.message);
+    return [];
+  }
+
+  return Array.from(
+    new Set(
+      (data ?? [])
+        .map((row) => normalizeSlug((row as { slug?: string | null }).slug ?? ""))
+        .filter(Boolean)
+    )
+  );
+}
+
+async function lookupRelatedWikiSlugs(type: Payload["type"], slug: string): Promise<string[]> {
+  if (type === "wiki" || type === "author" || type === "music") return [];
+
+  let universeIds: number[] = [];
+
+  if (type === "code") {
+    universeIds = await lookupUniverseIdsBySlug("games", "slug", [slug]);
+  } else if (type === "article") {
+    universeIds = await lookupUniverseIdsBySlug("articles", "slug", [slug]);
+  } else if (type === "event") {
+    universeIds = await lookupUniverseIdsBySlug("events_pages", "slug", [slug]);
+  } else if (type === "checklist") {
+    universeIds = await lookupUniverseIdsBySlug("checklist_pages", "slug", [slug]);
+  } else if (type === "tool") {
+    universeIds = await lookupUniverseIdsBySlug("tools", "code", [slug]);
+  } else if (type === "quiz") {
+    universeIds = await lookupUniverseIdsBySlug("quiz_pages", "code", [slug]);
+  } else if (type === "catalog") {
+    universeIds = await lookupUniverseIdsBySlug("catalog_pages", "code", [slug, slug.replace(/\//g, "-")]);
+  } else if (type === "list") {
+    universeIds = await lookupListUniverseIds(slug);
+  }
+
+  return lookupWikiSlugsByUniverseIds(universeIds);
+}
+
 export async function POST(request: Request) {
   const authError = assertSecret(request);
   if (authError) {
@@ -207,6 +332,7 @@ export async function POST(request: Request) {
   }
 
   let purgePaths: string[] = [];
+  let impactedWikiSlugs: string[] = [];
 
   switch (payload.type) {
     case "code":
@@ -252,6 +378,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unknown type" }, { status: 400 });
   }
 
+  impactedWikiSlugs = await lookupRelatedWikiSlugs(payload.type, slug);
+  for (const wikiSlug of impactedWikiSlugs) {
+    purgePaths = [...purgePaths, ...revalidateForWiki(wikiSlug)];
+  }
+
   const cloudflare = await purgeCloudflarePaths(purgePaths);
   const indexNow = {
     enabled: false,
@@ -269,6 +400,7 @@ export async function POST(request: Request) {
         revalidated: true,
         type: payload.type,
         slug,
+        impactedWikiSlugs,
         indexNow,
         cloudflare
       },
@@ -276,5 +408,5 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.json({ revalidated: true, type: payload.type, slug, indexNow, cloudflare });
+  return NextResponse.json({ revalidated: true, type: payload.type, slug, impactedWikiSlugs, indexNow, cloudflare });
 }

@@ -2,11 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { IconType } from "react-icons";
-import { FiCalendar, FiClock, FiEye, FiMonitor, FiRefreshCw, FiShield, FiSmartphone, FiStar, FiTablet, FiTag, FiTv, FiUsers } from "react-icons/fi";
+import { FiClock, FiEye, FiMonitor, FiSmartphone, FiStar, FiTablet, FiTv, FiUsers } from "react-icons/fi";
 import { FaCrown, FaDiscord, FaFacebook, FaMedal, FaTrophy, FaTwitch, FaYoutube } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { SiGuilded, SiGooglechrome, SiRoblox } from "react-icons/si";
 import { TbAugmentedReality } from "react-icons/tb";
+import { Check } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
 import { processHtmlLinks } from "@/lib/link-utils";
@@ -25,20 +26,32 @@ import {
   type WikiRelatedData,
   type WikiServerItem
 } from "@/lib/wiki";
-import { CHECKLISTS_DESCRIPTION, EVENTS_DESCRIPTION, QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, WIKI_DESCRIPTION, breadcrumbJsonLd } from "@/lib/seo";
+import { CHECKLISTS_DESCRIPTION, QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, WIKI_DESCRIPTION, breadcrumbJsonLd } from "@/lib/seo";
 import { WikiLinkList, WikiSection, type WikiLinkItem } from "@/components/wiki/WikiPrimitives";
 import { ArticleCard } from "@/components/ArticleCard";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChecklistCard } from "@/components/ChecklistCard";
-import { EventsPageCard, type EventsPageCardProps } from "@/components/EventsPageCard";
-import { GameCard } from "@/components/GameCard";
 import { QuizCard } from "@/components/QuizCard";
 import { ToolCard } from "@/components/ToolCard";
 import { WikiCard } from "@/components/WikiCard";
 import { IndexPageStats } from "@/components/IndexPageStats";
+import { CopyCodeButton } from "@/components/CopyCodeButton";
+import { cleanRewardsText, isCodeNew } from "@/lib/code-utils";
+import { listGameDatasetCatalogImageUrls } from "@/lib/game-dataset-catalog-images";
 
 const ROBLOX_BASE_URL = "https://www.roblox.com";
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
 const compactNumberFormatter = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 });
+const PT_TIME_ZONE = "America/Los_Angeles";
+const ptDateTimeFormatter = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+  hour: "numeric",
+  minute: "2-digit",
+  timeZone: PT_TIME_ZONE
+});
 
 export type WikiIndexPageData = {
   pages: WikiListEntry[];
@@ -179,6 +192,47 @@ function formatUpdated(value?: string | null): string | null {
   }
 }
 
+function toValidTime(value?: string | null): number | null {
+  if (!value) return null;
+  const time = Date.parse(value);
+  return Number.isNaN(time) ? null : time;
+}
+
+function latestTimestamp(values: Array<string | null | undefined>): string | null {
+  const now = Date.now();
+  const latest = values.reduce<number | null>((current, value) => {
+    const time = toValidTime(value);
+    if (time === null) return current;
+    if (time > now + 86_400_000) return current;
+    return current === null || time > current ? time : current;
+  }, null);
+  return latest === null ? null : new Date(latest).toISOString();
+}
+
+function formatRelativeUpdated(value?: string | null): string | null {
+  const time = toValidTime(value);
+  if (time === null) return null;
+  try {
+    return formatDistanceToNow(new Date(time), { addSuffix: true });
+  } catch {
+    return null;
+  }
+}
+
+function formatShortDate(value?: string | null): string | null {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+}
+
+function formatPtDateTime(value?: string | null): string | null {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return ptDateTimeFormatter.format(date);
+}
+
 function yesNo(value?: boolean | null): string | null {
   if (typeof value !== "boolean") return null;
   return value ? "Yes" : "No";
@@ -238,6 +292,65 @@ function buildDeviceBadges(page: WikiPageContent): DeviceBadgeItem[] {
   return items.some((item) => typeof item.enabled === "boolean") ? items : [];
 }
 
+function resolveWikiHubUpdatedAt(page: WikiPageContent, related: WikiRelatedData): string | null {
+  return latestTimestamp([
+    page.content_updated_at,
+    page.updated_at,
+    page.published_at,
+    page.created_at,
+    page.universe_updated_at,
+    page.updated_at_api,
+    ...related.codes.flatMap((game) => [
+      game.content_updated_at,
+      game.latest_code_first_seen_at,
+      game.updated_at,
+      game.created_at
+    ]),
+    ...related.activeCodes.flatMap((code) => [
+      code.last_seen_at,
+      code.first_seen_at
+    ]),
+    ...related.tools.flatMap((tool) => [
+      tool.content_updated_at,
+      tool.updated_at,
+      tool.published_at,
+      tool.created_at
+    ]),
+    ...related.articles.flatMap((article) => [
+      article.updated_at,
+      article.published_at,
+      article.created_at
+    ]),
+    ...related.checklists.flatMap((checklist) => [
+      checklist.content_updated_at,
+      checklist.updated_at,
+      checklist.published_at,
+      checklist.created_at
+    ]),
+    ...related.catalogPages.flatMap((catalogPage) => [
+      catalogPage.content_updated_at,
+      catalogPage.updated_at,
+      catalogPage.published_at,
+      catalogPage.created_at
+    ]),
+    ...related.quizzes.flatMap((quiz) => [
+      quiz.content_updated_at,
+      quiz.updated_at,
+      quiz.published_at,
+      quiz.created_at
+    ]),
+    related.eventsPage?.updated_at,
+    related.eventsPage?.published_at,
+    related.eventsPage?.created_at,
+    ...related.eventTimeline.flatMap((event) => [
+      event.updatedUtc,
+      event.createdUtc
+    ]),
+    ...related.media.map((item) => item.fetched_at),
+    ...related.servers.map((server) => server.fetched_at)
+  ]);
+}
+
 function WikiDeviceBadge({ label, icon: Icon, enabled }: DeviceBadgeItem) {
   return (
     <span
@@ -248,6 +361,220 @@ function WikiDeviceBadge({ label, icon: Icon, enabled }: DeviceBadgeItem) {
       <Icon className="h-4 w-4" />
       {label}
     </span>
+  );
+}
+
+function WikiActiveCodesPreview({
+  codes,
+  game,
+  universeLabel,
+  nowMs
+}: {
+  codes: WikiRelatedData["activeCodes"];
+  game: WikiRelatedData["codes"][number] | null;
+  universeLabel: string;
+  nowMs: number;
+}) {
+  if (!codes.length || !game) return null;
+
+  const gameName = universeLabel;
+  const codesHref = game.slug ? `/codes/${game.slug}` : null;
+  const activeCount = game.active_count ?? codes.length;
+  const lastChecked = codes.reduce<string | null>((latest, code) => {
+    if (!code.last_seen_at) return latest;
+    if (!latest || code.last_seen_at > latest) return code.last_seen_at;
+    return latest;
+  }, null);
+  const lastCheckedLabel = formatDate(lastChecked);
+
+  return (
+    <section className="min-w-0" id="active-codes">
+      <Card className="overflow-hidden rounded-lg border-border/70 bg-card shadow-none">
+        <CardHeader className="border-b border-border/60 px-4 py-4 sm:px-5">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="min-w-0 space-y-1">
+              <CardTitle className="text-xl leading-tight text-foreground sm:text-2xl">
+                Active {gameName} Codes
+              </CardTitle>
+              {lastCheckedLabel ? (
+                <p className="flex items-center gap-1.5 text-sm leading-5 text-muted-foreground">
+                  <Check className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                  <span>Checked and verified on {lastCheckedLabel}</span>
+                </p>
+              ) : null}
+            </div>
+            <Badge variant="secondary" className="shrink-0 rounded-md px-2 py-1 text-xs">
+              {activeCount} active
+            </Badge>
+          </div>
+        </CardHeader>
+
+        <CardContent className="space-y-3 p-3 sm:p-4">
+          <div className="divide-y divide-border/60 overflow-hidden rounded-md border border-border/60">
+            {codes.map((code, index) => {
+              const rewardText = cleanRewardsText(code.rewards_text);
+              const displayReward = rewardText
+                ? (/this code gives you/i.test(rewardText) ? rewardText : `You get ${rewardText}`)
+                : "No reward listed yet.";
+              const addedAtLabel = formatShortDate(code.first_seen_at);
+              return (
+                <article key={code.id} className="bg-card">
+                  <div className="grid gap-3 px-3 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:px-4">
+                    <div className="flex min-w-0 items-start gap-3">
+                      <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-md bg-muted/30 text-xs font-medium text-muted-foreground">
+                        {index + 1}
+                      </span>
+                      <div className="min-w-0 space-y-1.5">
+                        <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+                          <code className="font-mono text-base font-semibold tracking-[0.08em] text-foreground sm:text-lg">
+                            {code.code}
+                          </code>
+                          {isCodeNew(code, nowMs) ? (
+                            <Badge className="rounded-md px-1.5 py-0 text-[10px] uppercase tracking-[0.12em]">New</Badge>
+                          ) : null}
+                          {code.level_requirement != null ? (
+                            <Badge variant="outline" className="rounded-md px-1.5 py-0 text-[10px]">
+                              Level {code.level_requirement}+
+                            </Badge>
+                          ) : null}
+                        </div>
+                        <p className="text-sm leading-5 text-muted-foreground">{displayReward}</p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-start gap-2 pl-10 sm:items-end sm:pl-0 sm:[&>*]:whitespace-nowrap">
+                      <CopyCodeButton
+                        code={code.code}
+                        tone="accent"
+                        analytics={{
+                          event: "copy_code",
+                          params: {
+                            game_slug: game.slug,
+                            code: code.code,
+                            is_new: isCodeNew(code, nowMs),
+                            status: "active",
+                            source: "wiki"
+                          }
+                        }}
+                      />
+                      {addedAtLabel ? (
+                        <span className="text-[11px] font-medium text-muted-foreground">Added {addedAtLabel}</span>
+                      ) : null}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          {codesHref ? (
+            <p className="text-sm text-muted-foreground">
+              {activeCount > codes.length ? (
+                <>
+                  Showing the latest {codes.length} of {activeCount} active codes.{" "}
+                </>
+              ) : null}
+              <Link href={codesHref} className="font-semibold text-accent underline-offset-4 transition hover:underline">
+                View all {gameName} codes
+              </Link>
+            </p>
+          ) : null}
+        </CardContent>
+      </Card>
+    </section>
+  );
+}
+
+function getTimelineStatusMeta(event: WikiRelatedData["eventTimeline"][number]) {
+  if (event.status === "upcoming") {
+    const startTime = event.startUtc ? new Date(event.startUtc) : null;
+    const label = startTime && !Number.isNaN(startTime.getTime())
+      ? `Starts ${formatDistanceToNow(startTime, { addSuffix: true })}`
+      : "Upcoming";
+    return {
+      label,
+      dotClass: "bg-emerald-500",
+      pillClass: "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+    };
+  }
+
+  if (event.status === "current") {
+    return {
+      label: "Live now",
+      dotClass: "bg-sky-500",
+      pillClass: "border-sky-500/30 bg-sky-500/10 text-sky-700 dark:text-sky-300"
+    };
+  }
+
+  return {
+    label: "Completed",
+    dotClass: "bg-rose-500",
+    pillClass: "border-rose-500/30 bg-rose-500/10 text-rose-700 dark:text-rose-300"
+  };
+}
+
+function WikiEventsTimeline({
+  events,
+  eventsPageSlug,
+  universeLabel
+}: {
+  events: WikiRelatedData["eventTimeline"];
+  eventsPageSlug?: string | null;
+  universeLabel: string;
+}) {
+  if (!events.length) return null;
+
+  return (
+    <section className="min-w-0 space-y-5 border-t border-border/60 pt-8" id="events">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div className="min-w-0 space-y-1">
+          <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">{universeLabel} Events</h2>
+          <p className="text-sm text-muted">Recent updates, live events, and completed event history for {universeLabel}.</p>
+        </div>
+        {eventsPageSlug ? (
+          <Link href={`/events/${eventsPageSlug}`} className="text-sm font-semibold text-accent underline-offset-4 transition hover:underline">
+            Open events page
+          </Link>
+        ) : null}
+      </div>
+
+      <ol className="relative ml-2 space-y-6 border-l border-border/70 pl-6">
+        {events.map((event) => {
+          const status = getTimelineStatusMeta(event);
+          const startLabel = formatPtDateTime(event.startUtc) ?? "TBA";
+          const endLabel = formatPtDateTime(event.endUtc) ?? "TBA";
+          return (
+            <li key={event.eventId} className="relative pl-1">
+              <span className={`absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-background ${status.dotClass}`} />
+              <div className="min-w-0 space-y-2">
+                <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
+                  <h3 className="m-0 flex min-h-7 min-w-0 items-center text-lg font-semibold leading-none text-foreground">{event.name}</h3>
+                  <span className={`inline-flex h-7 shrink-0 items-center rounded-full border px-2.5 text-xs font-semibold leading-none ${status.pillClass}`}>
+                    {status.label}
+                  </span>
+                </div>
+                <p className="text-sm leading-6 text-muted">
+                  <span className="font-semibold text-foreground/80">Starts (PT):</span> {startLabel}
+                  <span className="mx-2 text-muted/60">.</span>
+                  <span className="font-semibold text-foreground/80">Ends (PT):</span> {endLabel}
+                </p>
+                {event.description ? <p className="max-w-3xl text-sm leading-6 text-muted">{event.description}</p> : null}
+                {event.guideSlug ? (
+                  <Link
+                    href={`/articles/${event.guideSlug}`}
+                    className="inline-flex text-sm font-semibold text-accent underline-offset-4 hover:underline"
+                    data-analytics-event="event_guide_click"
+                    data-analytics-event-id={event.eventId}
+                    data-analytics-guide-slug={event.guideSlug}
+                  >
+                    Event guide
+                  </Link>
+                ) : null}
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
   );
 }
 
@@ -479,12 +806,16 @@ async function buildWikiCatalogBlocks(related: WikiRelatedData) {
 
   return Promise.all(
     pagesWithCopy.map(async ({ page, copy }) => {
-      const html = await renderMarkdown(copy, { paragraphizeLineBreaks: true });
+      const [html, imageUrls] = await Promise.all([
+        renderMarkdown(copy, { paragraphizeLineBreaks: true }),
+        listGameDatasetCatalogImageUrls(page.code, 6)
+      ]);
       const nodes = renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix: `wiki-catalog-${page.code}` });
 
       return {
         page,
-        nodes
+        nodes,
+        imageUrls
       };
     })
   );
@@ -756,9 +1087,10 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
     .sort((a, b) => a.rank - b.rank)
     .slice(0, 3);
   const published = page.published_at ?? page.created_at ?? null;
-  const updated = page.content_updated_at ?? page.updated_at ?? published;
+  const hubUpdatedAt = resolveWikiHubUpdatedAt(page, related) ?? page.content_updated_at ?? page.updated_at ?? published;
+  const hubUpdatedRelativeLabel = formatRelativeUpdated(hubUpdatedAt);
   const publishedIso = formatIsoDate(published);
-  const updatedIso = formatIsoDate(updated);
+  const updatedIso = formatIsoDate(hubUpdatedAt);
   const canonicalUrl = `${SITE_URL}/wiki/${page.slug}`;
   const breadcrumbs = [
     { name: "Home", url: SITE_URL },
@@ -767,43 +1099,26 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   ];
   const robloxGameUrl = page.universe_root_place_id ? `${ROBLOX_BASE_URL}/games/${page.universe_root_place_id}` : null;
   const heroAgeRating = formatAgeRating(page.universe_age_rating);
+  const agePillLabel = heroAgeRating ? (/^\d+\+$/.test(heroAgeRating) ? `Ages ${heroAgeRating}` : heroAgeRating) : null;
   const deviceBadges = buildDeviceBadges(page);
   const genre = normalizeText(page.universe_genre_l1) ?? normalizeText(page.universe_genre);
   const subgenre = normalizeText(page.universe_genre_l2);
-  const genreLabel = compactMeta([genre, subgenre]);
+  const genreItems = [genre, subgenre].filter((item): item is string => Boolean(item));
+  const createdLabel = formatDate(page.created_at_api);
+  const updatedLabel = formatDate(page.updated_at_api);
+  const dateMetaItems = [
+    createdLabel ? `Game created on ${createdLabel}` : null,
+    updatedLabel ? `Game last updated on ${updatedLabel}` : null
+  ].filter((item): item is string => Boolean(item));
   const heroStats = [
     { icon: FiUsers, label: "Playing Now", value: formatCompactNumber(page.playing) },
     { icon: FiEye, label: "Total Visits", value: formatCompactNumber(page.visits) },
     { icon: FiStar, label: "Favorites", value: formatCompactNumber(page.favorites) }
   ].filter((stat): stat is HeroStat => Boolean(stat.value));
-  const dateStats = [
-    { icon: FiCalendar, label: "Created", value: formatDate(page.created_at_api) },
-    { icon: FiRefreshCw, label: "Updated", value: formatDate(page.updated_at_api) ?? formatUpdated(updated) }
-  ].filter((stat): stat is HeroStat => Boolean(stat.value));
-  const metaStats = [
-    { icon: FiTag, label: "Genre", value: genreLabel },
-    { icon: FiShield, label: "Age", value: heroAgeRating }
-  ].filter((stat): stat is HeroStat => Boolean(stat.value));
   const checklistCards = buildChecklistCards(page, related);
   const quizCards = buildQuizCards(page, related);
-  const eventsCard: EventsPageCardProps | null =
-    related.eventsPage && related.eventsPage.slug
-      ? {
-          slug: related.eventsPage.slug,
-          title: related.eventsPage.title,
-          summary: related.eventsPage.meta_description?.trim() || EVENTS_DESCRIPTION,
-          universeName: related.eventsPage.universe?.display_name ?? related.eventsPage.universe?.name ?? universeLabel,
-          coverImage: null,
-          fallbackIcon: related.eventsPage.universe?.icon_url ?? normalizeImageSrc(page.icon_url),
-          eventName: related.eventSummary?.featured?.name ?? null,
-          eventTimeLabel: related.eventSummary?.featured?.timeLabel ?? null,
-          eventStartUtc: related.eventSummary?.featured?.startUtc ?? null,
-          eventEndUtc: related.eventSummary?.featured?.endUtc ?? null,
-          status: (related.eventSummary?.featured?.status ?? "none") as EventsPageCardProps["status"],
-          counts: related.eventSummary?.counts ?? { upcoming: 0, current: 0, past: 0 },
-          updatedLabel: formatUpdated(related.eventsPage.updated_at || related.eventsPage.published_at || related.eventsPage.created_at)
-        }
-      : null;
+  const primaryCodePage = related.codes[0] ?? null;
+  const nowMs = Date.now();
 
   return (
     <div className="space-y-9">
@@ -832,13 +1147,12 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
 
             <div className="min-w-0 max-w-3xl space-y-3">
               <h1 className="mb-0 text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
-              {formatUpdated(updated) ? (
-                <p className="inline-flex items-center gap-2 text-sm font-medium text-muted">
+              {hubUpdatedRelativeLabel ? (
+                <p className="inline-flex items-center gap-1.5 text-sm leading-5 text-muted">
                   <FiClock className="h-4 w-4 shrink-0" aria-hidden />
-                  <span>Updated {formatUpdated(updated)}</span>
+                  <span>Updated {hubUpdatedRelativeLabel}</span>
                 </p>
               ) : null}
-              {summary ? <p className="max-w-3xl text-base leading-7 text-muted md:text-lg">{summary}</p> : null}
               <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted">
                 {page.universe_creator_name ? (
                   <span>
@@ -869,6 +1183,34 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                   );
                 })}
               </div>
+              {dateMetaItems.length ? (
+                <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm leading-6 text-muted">
+                  {dateMetaItems.map((item, index) => (
+                    <span key={item} className="inline-flex items-center gap-x-2">
+                      {index > 0 ? <span aria-hidden className="text-muted/60">.</span> : null}
+                      <span>{item}</span>
+                    </span>
+                  ))}
+                </p>
+              ) : null}
+              {genreItems.length || agePillLabel ? (
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm text-muted">
+                  {genreItems.map((item, index) => (
+                    <span key={item} className="inline-flex items-center gap-x-2">
+                      {index > 0 ? <span aria-hidden className="text-muted/60">.</span> : null}
+                      <span>{item}</span>
+                    </span>
+                  ))}
+                  {agePillLabel ? (
+                    <>
+                      {genreItems.length ? <span className="text-muted/60">.</span> : null}
+                      <span className="inline-flex items-center rounded-full border border-border/60 bg-background/40 px-2.5 py-1 text-xs font-semibold text-foreground">
+                        {agePillLabel}
+                      </span>
+                    </>
+                  ) : null}
+                </div>
+              ) : null}
               {robloxGameUrl ? (
                 <div className="pt-2 lg:hidden">
                   <a
@@ -903,43 +1245,11 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
         <article className="min-w-0 space-y-9">
-          {heroStats.length || dateStats.length || metaStats.length || deviceBadges.length ? (
-            <div className="space-y-3">
+          {heroStats.length || deviceBadges.length || summary ? (
+            <section className="space-y-4">
               {heroStats.length ? (
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                   {heroStats.map((stat) => (
-                    <div key={stat.label} className="flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-border/40 text-muted">
-                        <stat.icon className="h-5 w-5" aria-hidden />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted">{stat.label}</p>
-                        <p className="truncate text-lg font-semibold text-foreground">{stat.value}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-
-              {dateStats.length ? (
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  {dateStats.map((stat) => (
-                    <div key={stat.label} className="flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-border/40 text-muted">
-                        <stat.icon className="h-5 w-5" aria-hidden />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted">{stat.label}</p>
-                        <p className="truncate text-lg font-semibold text-foreground">{stat.value}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-
-              {metaStats.length ? (
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  {metaStats.map((stat) => (
                     <div key={stat.label} className="flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3">
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-border/40 text-muted">
                         <stat.icon className="h-5 w-5" aria-hidden />
@@ -960,13 +1270,26 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                   ))}
                 </div>
               ) : null}
-            </div>
+
+              {summary ? (
+                <p className="max-w-3xl text-base leading-7 text-muted md:text-lg">
+                  {summary}
+                </p>
+              ) : null}
+            </section>
           ) : null}
 
+          <WikiActiveCodesPreview
+            codes={related.activeCodes}
+            game={primaryCodePage}
+            universeLabel={universeLabel}
+            nowMs={nowMs}
+          />
+
           {catalogBlocks.length ? (
-            <section className="min-w-0 border-t border-border/60 pt-8">
+            <section className="min-w-0">
               <div className="space-y-10">
-                {catalogBlocks.map(({ page: catalogPage, nodes }) => (
+                {catalogBlocks.map(({ page: catalogPage, nodes, imageUrls }) => (
                   <section
                     key={catalogPage.code}
                     className="space-y-4"
@@ -984,7 +1307,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                     <WikiCatalogCta
                       href={`/catalog/${catalogPage.code}`}
                       title={catalogPage.title}
-                      imageUrls={catalogPage.wiki_image_urls}
+                      imageUrls={imageUrls}
                     />
                   </section>
                 ))}
@@ -1005,6 +1328,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
 
           {tipsNodes?.length ? (
             <section className="article-content md-copy-scope game-copy min-w-0 border-t border-border/60 pt-8">
+              <h2>{universeLabel} Gameplay Tips</h2>
               {tipsNodes}
             </section>
           ) : null}
@@ -1042,29 +1366,15 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             </WikiSection>
           ) : null}
 
+          <WikiEventsTimeline
+            events={related.eventTimeline}
+            eventsPageSlug={related.eventsPage?.slug ?? null}
+            universeLabel={universeLabel}
+          />
+
         </article>
 
         <aside className="space-y-4">
-          {related.codes.length ? (
-            <section className="space-y-3">
-              <h3 className="text-lg font-semibold text-foreground">Codes for {universeLabel}</h3>
-              <div className="grid gap-3">
-                {related.codes.map((game) => (
-                  <div
-                    key={game.id}
-                    className="block"
-                    data-analytics-event="related_content_click"
-                    data-analytics-source-type="wiki_sidebar"
-                    data-analytics-target-type="codes"
-                    data-analytics-target-slug={game.slug}
-                  >
-                    <GameCard game={game} titleAs="p" articleUpdatedAt={game.content_updated_at} />
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
           {related.tools.length ? (
             <section className="space-y-3">
               <h3 className="text-lg font-semibold text-foreground">Tools for {universeLabel}</h3>
@@ -1081,21 +1391,6 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                     <ToolCard tool={tool} />
                   </div>
                 ))}
-              </div>
-            </section>
-          ) : null}
-
-          {eventsCard ? (
-            <section className="space-y-3">
-              <h3 className="text-lg font-semibold text-foreground">Events for {universeLabel}</h3>
-              <div
-                className="block"
-                data-analytics-event="related_content_click"
-                data-analytics-source-type="wiki_sidebar"
-                data-analytics-target-type="event"
-                data-analytics-target-slug={eventsCard.slug}
-              >
-                <EventsPageCard {...eventsCard} />
               </div>
             </section>
           ) : null}

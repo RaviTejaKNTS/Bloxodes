@@ -39,7 +39,6 @@ export type GameDatasetCatalogCopy = {
   wiki_md: string;
   wiki_sort_order: number;
   wiki_item_count: number;
-  wiki_image_urls: string[];
   thumb_url: string | null;
 };
 
@@ -413,7 +412,6 @@ Use it to check names, images, requirements, prices, rewards, availability, and 
     wiki_md: `${config.label} are part of ${config.gameName}'s in-game reference data. Use this catalog to compare ${focus} before you choose what to collect, unlock, buy, fight, or track next.`,
     wiki_sort_order: config.sortOrder,
     wiki_item_count: itemCount,
-    wiki_image_urls: imageUrls.slice(0, 6),
     thumb_url: imageUrls[0] ?? null
   };
 }

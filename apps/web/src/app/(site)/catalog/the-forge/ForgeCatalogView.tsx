@@ -40,6 +40,19 @@ type ForgeCatalogViewProps = {
   config: ForgeCatalogConfig;
 };
 
+type ForgeCatalogDisplayStat = {
+  label: string;
+  value: string;
+  parts?: string[];
+  tone?: "positive" | "negative" | "neutral";
+};
+
+type BooleanishValue = {
+  value: boolean;
+  detail?: string;
+  exact: boolean;
+};
+
 const CARD_STAT_OVERRIDES: Record<string, string[]> = {
   ores: ["dropChance", "multiplier", "sellPrice", "trait"],
   weapons: ["baseDamage", "attackSpeed", "range", "sellPrice"],
@@ -75,6 +88,9 @@ function normalizeValue(value: unknown): string | null {
     if (!Number.isFinite(value)) return null;
     return value.toLocaleString("en-US");
   }
+  if (typeof value === "boolean") {
+    return value ? "Yes" : "No";
+  }
   if (typeof value === "string") {
     const trimmed = value.trim();
     if (!trimmed) return null;
@@ -96,6 +112,10 @@ function normalizeValue(value: unknown): string | null {
   return String(value);
 }
 
+function normalizeDisplayText(value: string): string {
+  return value.replace(/\s+/g, " ").trim();
+}
+
 function formatKeyLabel(value: string): string {
   return value
     .replace(/[_-]/g, " ")
@@ -106,14 +126,219 @@ function formatKeyLabel(value: string): string {
     .join(" ");
 }
 
+function formatSentenceFragment(value: string): string {
+  const label = formatKeyLabel(value);
+  return label ? label.charAt(0).toLowerCase() + label.slice(1) : "";
+}
+
+function normalizeBooleanDetail(value: string | undefined): string | undefined {
+  if (!value) return undefined;
+  const cleaned = normalizeDisplayText(value)
+    .replace(/^[\s:([{-]+/, "")
+    .replace(/[\s.)\]}-]+$/, "");
+  return cleaned || undefined;
+}
+
+function parseBooleanishValue(value: string): BooleanishValue | null {
+  const normalized = normalizeDisplayText(value);
+  const exact = normalized.replace(/[.!]+$/, "").toLowerCase();
+  if (["yes", "true", "available", "enabled", "active", "obtainable", "✓", "✔", "✅"].includes(exact)) {
+    return { value: true, exact: true };
+  }
+  if (["no", "false", "unavailable", "disabled", "inactive", "not available", "not obtainable", "✗", "✘", "❌"].includes(exact)) {
+    return { value: false, exact: true };
+  }
+
+  const yesMatch = normalized.match(/^(yes|true)\b(.+)$/i);
+  if (yesMatch) {
+    return { value: true, detail: normalizeBooleanDetail(yesMatch[2]), exact: false };
+  }
+
+  const noMatch = normalized.match(/^(no|false)\b(.+)$/i);
+  if (noMatch) {
+    return { value: false, detail: normalizeBooleanDetail(noMatch[2]), exact: false };
+  }
+
+  return null;
+}
+
+function withBooleanDetail(value: string, detail: string | undefined): string {
+  return detail ? `${value} (${detail})` : value;
+}
+
+function formatBooleanStat(label: string, value: string): ForgeCatalogDisplayStat | null {
+  const parsed = parseBooleanishValue(value);
+  if (!parsed) return null;
+
+  const normalizedLabel = label.trim();
+  const loweredLabel = normalizedLabel.toLowerCase();
+  const booleanValue = parsed.value;
+  if (["available", "availability"].includes(loweredLabel)) {
+    return {
+      label: "Status",
+      value: withBooleanDetail(booleanValue ? "Available" : "Not available", parsed.detail),
+      tone: booleanValue ? "positive" : "negative"
+    };
+  }
+
+  if (loweredLabel === "obtainable") {
+    return {
+      label: "Status",
+      value: withBooleanDetail(booleanValue ? "Obtainable" : "Not obtainable", parsed.detail),
+      tone: booleanValue ? "positive" : "negative"
+    };
+  }
+
+  if (loweredLabel.startsWith("has ")) {
+    const subject = formatSentenceFragment(normalizedLabel.slice(4));
+    return {
+      label: "Status",
+      value: withBooleanDetail(booleanValue ? `Has ${subject}` : `No ${subject}`, parsed.detail),
+      tone: booleanValue ? "positive" : "negative"
+    };
+  }
+
+  if (loweredLabel.startsWith("is ")) {
+    const subject = normalizedLabel.slice(3);
+    return {
+      label: "Status",
+      value: withBooleanDetail(booleanValue ? formatKeyLabel(subject) : `Not ${formatSentenceFragment(subject)}`, parsed.detail),
+      tone: booleanValue ? "positive" : "negative"
+    };
+  }
+
+  if (loweredLabel.startsWith("part of ")) {
+    const subject = formatSentenceFragment(normalizedLabel.slice(8));
+    return {
+      label: "Status",
+      value: withBooleanDetail(booleanValue ? `Part of ${subject}` : `Not part of ${subject}`, parsed.detail),
+      tone: booleanValue ? "positive" : "negative"
+    };
+  }
+
+  if (["tradable", "tradeable", "limited", "craftable", "obtainable"].includes(loweredLabel)) {
+    return {
+      label: "Status",
+      value: withBooleanDetail(
+        booleanValue ? formatKeyLabel(normalizedLabel) : `Not ${formatSentenceFragment(normalizedLabel)}`,
+        parsed.detail
+      ),
+      tone: booleanValue ? "positive" : "negative"
+    };
+  }
+
+  if (loweredLabel.startsWith("can ")) {
+    const subject = formatSentenceFragment(normalizedLabel.slice(4));
+    return {
+      label: "Status",
+      value: withBooleanDetail(booleanValue ? `Can ${subject}` : `Cannot ${subject}`, parsed.detail),
+      tone: booleanValue ? "positive" : "negative"
+    };
+  }
+
+  if (!parsed.exact) {
+    return null;
+  }
+
+  return {
+    label: normalizedLabel,
+    value: booleanValue ? "Yes" : "No",
+    tone: booleanValue ? "positive" : "negative"
+  };
+}
+
+function formatBadgeValue(key: string, value: unknown): string | null {
+  const normalized = normalizeValue(value);
+  if (!normalized) return null;
+
+  const displayStat = buildDisplayStat(formatKeyLabel(key), value);
+  if (displayStat?.label === "Status") return displayStat.value;
+
+  return normalized;
+}
+
+function formatSubtitleValue(key: string, value: unknown): string | null {
+  const normalized = normalizeValue(value);
+  if (!normalized) return null;
+
+  const booleanValue = parseBooleanishValue(normalized);
+  const loweredKey = key.toLowerCase();
+  if (["available", "availability"].includes(loweredKey) && booleanValue) {
+    return withBooleanDetail(booleanValue.value ? "Available" : "Not available", booleanValue.detail);
+  }
+
+  if (loweredKey === "obtainable" && booleanValue) {
+    return withBooleanDetail(booleanValue.value ? "Obtainable" : "Not obtainable", booleanValue.detail);
+  }
+
+  if (loweredKey === "sea" && /^\d/.test(normalized)) {
+    return `Sea ${normalized}`;
+  }
+
+  if (loweredKey === "level" && !/^level\b/i.test(normalized)) {
+    return `Level ${normalized}`;
+  }
+
+  if (["sourceType", "source_type"].includes(key) || ["category", "type", "status", "source", "location", "building"].includes(loweredKey)) {
+    return normalized;
+  }
+
+  return `${formatKeyLabel(key)} ${normalized}`;
+}
+
 function buildSubtitle(item: ForgeCatalogItem, config: ForgeCatalogConfig): string | null {
   if (!config.subtitleKeys?.length) return null;
   const parts = config.subtitleKeys
-    .map((key) => normalizeValue(item[key]))
+    .map((key) => formatSubtitleValue(key, item[key]))
     .filter(Boolean)
     .slice(0, 2) as string[];
   if (!parts.length) return null;
   return parts.join(" • ");
+}
+
+function splitStatParts(label: string, value: string): string[] | null {
+  const cleanedValue = normalizeDisplayText(value);
+  const loweredLabel = label.toLowerCase();
+  const semicolonParts = cleanedValue
+    .split(/\s*;\s*/)
+    .map((part) => normalizeDisplayText(part))
+    .filter(Boolean);
+
+  if (semicolonParts.length > 1) {
+    return semicolonParts;
+  }
+
+  const signedMatches = cleanedValue
+    .replace(/\s+-\s+/g, " ")
+    .match(/[+-]\s*\d[\s\S]*?(?=\s+[+-]\s*\d|$)/g)
+    ?.map((part) => normalizeDisplayText(part.replace(/\s+-\s+/g, " ")))
+    .filter(Boolean);
+
+  if (
+    signedMatches &&
+    signedMatches.length > 1 &&
+    (loweredLabel.includes("bonus") || loweredLabel.includes("stat") || cleanedValue.length > 56)
+  ) {
+    return signedMatches;
+  }
+
+  return null;
+}
+
+function buildDisplayStat(label: string, value: unknown): ForgeCatalogDisplayStat | null {
+  const normalized = normalizeValue(value);
+  if (!normalized) return null;
+
+  const booleanStat = formatBooleanStat(label, normalized);
+  if (booleanStat) return booleanStat;
+
+  const displayValue = normalizeDisplayText(normalized);
+  const parts = splitStatParts(label, displayValue);
+  return {
+    label,
+    value: displayValue,
+    parts: parts ?? undefined
+  };
 }
 
 function buildStatEntries(item: ForgeCatalogItem, config: ForgeCatalogConfig) {
@@ -122,7 +347,7 @@ function buildStatEntries(item: ForgeCatalogItem, config: ForgeCatalogConfig) {
       stat.key,
       {
         label: stat.label,
-        value: normalizeValue(item[stat.key])
+        value: item[stat.key]
       }
     ])
   );
@@ -132,18 +357,19 @@ function buildStatEntries(item: ForgeCatalogItem, config: ForgeCatalogConfig) {
   const stats = preferredKeys
     .map((key) => {
       const stat = statMap.get(key);
-      const value = stat?.value ?? normalizeValue(item[key]);
-      if (!value) return null;
-      return {
-        label: stat?.label ?? formatKeyLabel(key),
-        value
-      };
+      return buildDisplayStat(stat?.label ?? formatKeyLabel(key), stat?.value ?? item[key]);
     })
-    .filter(Boolean) as Array<{ label: string; value: string }>;
+    .filter(Boolean) as ForgeCatalogDisplayStat[];
 
   if (!stats.length) return [];
   const maxStats = config.maxStats ?? stats.length;
   return stats.slice(0, maxStats);
+}
+
+function getStatToneClass(stat: ForgeCatalogDisplayStat): string {
+  if (stat.tone === "positive") return "border-emerald-400/30 bg-emerald-400/10 text-emerald-100";
+  if (stat.tone === "negative") return "border-rose-400/30 bg-rose-400/10 text-rose-100";
+  return "border-border/70 bg-background/45 text-foreground";
 }
 
 function renderValue(value: string | null) {
@@ -154,7 +380,7 @@ function renderValue(value: string | null) {
 }
 
 function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: ForgeCatalogConfig }) {
-  const badge = config.badgeKey ? normalizeValue(item[config.badgeKey]) : null;
+  const badge = config.badgeKey ? formatBadgeValue(config.badgeKey, item[config.badgeKey]) : null;
   const subtitle = buildSubtitle(item, config);
   const description = config.cardDescriptionKey ? normalizeValue(item[config.cardDescriptionKey]) : null;
   const stats = buildStatEntries(item, config);
@@ -178,14 +404,16 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
           />
         </div>
       ) : null}
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div className="flex flex-1 flex-col gap-4 p-4">
         <div className="space-y-2">
           {badge ? (
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">{badge}</p>
+            <p className="w-fit rounded-full border border-border/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+              {badge}
+            </p>
           ) : null}
-          <h3 className="text-xl font-semibold leading-snug text-foreground">{item.name}</h3>
+          <h3 className="text-lg font-semibold leading-snug text-foreground">{item.name}</h3>
           {subtitle ? (
-            <p className="text-sm leading-relaxed text-muted line-clamp-2">{subtitle}</p>
+            <p className="text-sm leading-relaxed text-muted">{subtitle}</p>
           ) : null}
           {description ? (
             <p className="text-sm leading-relaxed text-muted line-clamp-3">{description}</p>
@@ -193,13 +421,43 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
         </div>
 
         {stats.length ? (
-          <dl className="mt-auto space-y-2">
-            {stats.map((stat) => (
-              <div key={stat.label} className="flex items-start justify-between gap-4">
-                <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{stat.label}</dt>
-                <dd className="text-right text-sm font-semibold leading-snug text-foreground">{stat.value}</dd>
-              </div>
-            ))}
+          <dl className="mt-auto space-y-3 border-t border-border/60 pt-4">
+            {stats.map((stat, index) =>
+              stat.parts?.length ? (
+                <div key={`${stat.label}-${index}`} className="space-y-2">
+                  <div className="flex items-center justify-between gap-3">
+                    <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{stat.label}</dt>
+                    <dd className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
+                      {stat.parts.length.toLocaleString("en-US")}
+                    </dd>
+                  </div>
+                  <dd className="flex flex-wrap gap-1.5">
+                    {stat.parts.slice(0, 6).map((part, partIndex) => (
+                      <span
+                        key={`${part}-${partIndex}`}
+                        className="rounded-full border border-border/70 bg-background/45 px-2 py-1 text-xs font-medium leading-snug text-foreground"
+                      >
+                        {part}
+                      </span>
+                    ))}
+                    {stat.parts.length > 6 ? (
+                      <span className="rounded-full border border-border/70 bg-background/45 px-2 py-1 text-xs font-medium leading-snug text-muted">
+                        +{stat.parts.length - 6} more
+                      </span>
+                    ) : null}
+                  </dd>
+                </div>
+              ) : (
+                <div key={`${stat.label}-${index}`} className="grid grid-cols-[minmax(5rem,0.42fr)_minmax(0,1fr)] gap-3">
+                  <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{stat.label}</dt>
+                  <dd
+                    className={`w-fit max-w-full rounded-full border px-2 py-0.5 text-sm font-semibold leading-snug ${getStatToneClass(stat)}`}
+                  >
+                    {stat.value}
+                  </dd>
+                </div>
+              )
+            )}
           </dl>
         ) : null}
       </div>
@@ -240,7 +498,7 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
             {section.items.map((item) => {
               const subtitle = buildSubtitle(item, config);
               const description = config.descriptionKey ? normalizeValue(item[config.descriptionKey]) : null;
-              const badgeValue = config.badgeKey ? normalizeValue(item[config.badgeKey]) : null;
+              const badgeValue = config.badgeKey ? formatBadgeValue(config.badgeKey, item[config.badgeKey]) : null;
 
               return (
                 <tr key={item.id} id={`item-${item.id}`}>
@@ -267,7 +525,7 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
                   {subtitleLabel ? <td>{renderValue(subtitle)}</td> : null}
                   {stats.map((stat) => (
                     <td key={stat.key} className="table-col-compact">
-                      {renderValue(normalizeValue(item[stat.key]))}
+                      {renderValue(buildDisplayStat(stat.label, item[stat.key])?.value ?? null)}
                     </td>
                   ))}
                   {descriptionLabel ? (

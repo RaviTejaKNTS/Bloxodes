@@ -31,7 +31,6 @@ type CatalogPageUpsert = {
   faq_json: Array<{ q: string; a: string }>;
   wiki_md: string;
   wiki_sort_order: number;
-  wiki_image_urls: string[];
   thumb_url: string | null;
   is_published: boolean;
   published_at: string | null;
@@ -108,7 +107,6 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
       faq_json: copy.faq_json,
       wiki_md: copy.wiki_md,
       wiki_sort_order: copy.wiki_sort_order,
-      wiki_image_urls: copy.wiki_image_urls,
       thumb_url: copy.thumb_url,
       is_published: !draft,
       published_at: draft ? existingPublishedAt.get(copy.code) ?? null : existingPublishedAt.get(copy.code) ?? now

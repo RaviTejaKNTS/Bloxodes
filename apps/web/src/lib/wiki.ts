@@ -2,6 +2,7 @@ import "server-only";
 import { unstable_cache } from "next/cache";
 import {
   getEventsPageByUniverseId,
+  listCodesForGame,
   listGamesWithActiveCountsByUniverseId,
   listPublishedArticlesByUniverseId,
   listPublishedChecklistsByUniverseId,
@@ -10,9 +11,10 @@ import {
   type ChecklistSummaryRow,
   type EventsPageSummary,
   type GameWithCounts,
+  type Code,
   type UniverseListBadge
 } from "@/lib/db";
-import { getUniverseEventSummary, type UniverseEventSummary } from "@/lib/events-summary";
+import { getUniverseEventSummary, listUniverseEventTimeline, type UniverseEventSummary, type UniverseTimelineEvent } from "@/lib/events-summary";
 import {
   listPublishedCatalogPagesByCodePrefix,
   listPublishedCatalogPagesByUniverseId,
@@ -21,6 +23,7 @@ import {
 import { supabaseAdmin } from "@/lib/supabase";
 import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
 import type { QuizListEntry } from "@/lib/quizzes";
+import { sortCodesByFirstSeenDesc } from "@/lib/code-utils";
 
 const WIKI_REVALIDATE_SECONDS = 3600;
 const WIKI_SELECT_FIELDS =
@@ -157,6 +160,7 @@ export type WikiDeveloperGame = {
 
 export type WikiRelatedData = {
   codes: GameWithCounts[];
+  activeCodes: Code[];
   tools: ToolListEntry[];
   articles: ArticleWithRelations[];
   checklists: ChecklistSummaryRow[];
@@ -164,6 +168,7 @@ export type WikiRelatedData = {
   quizzes: QuizListEntry[];
   eventsPage: EventsPageSummary | null;
   eventSummary: UniverseEventSummary | null;
+  eventTimeline: UniverseTimelineEvent[];
   rankingBadges: UniverseListBadge[];
   media: WikiMediaItem[];
   badges: WikiBadgeItem[];
@@ -174,6 +179,7 @@ export type WikiRelatedData = {
 
 export const EMPTY_WIKI_RELATED_DATA: WikiRelatedData = {
   codes: [],
+  activeCodes: [],
   tools: [],
   articles: [],
   checklists: [],
@@ -181,6 +187,7 @@ export const EMPTY_WIKI_RELATED_DATA: WikiRelatedData = {
   quizzes: [],
   eventsPage: null,
   eventSummary: null,
+  eventTimeline: [],
   rankingBadges: [],
   media: [],
   badges: [],
@@ -514,6 +521,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     quizzes,
     eventsPage,
     eventSummary,
+    eventTimeline,
     rankMap,
     media,
     badges,
@@ -530,6 +538,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     safeList("quizzes", () => listWikiQuizzesByUniverseId(universeId, 4)),
     safeValue("events page", () => getEventsPageByUniverseId(universeId)),
     safeValue("event summary", () => getUniverseEventSummary(universeId)),
+    safeList("event timeline", () => listUniverseEventTimeline(universeId, 7)),
     safeValue("rankings", () => listRanksForUniverses([universeId])),
     safeList("media", () => listWikiMediaByUniverseId(universeId, 8)),
     safeList("badges", () => listWikiBadgesByUniverseId(universeId, 8)),
@@ -537,9 +546,17 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     safeList("servers", () => listWikiServersByUniverseId(universeId, 12)),
     safeList("developer games", () => listOtherWikiDeveloperGames(universeId, page.universe_creator_id, 6))
   ]);
+  const codePages = codes.filter((game) => (game.active_count ?? 0) > 0);
+  const primaryCodePage = codePages[0] ?? null;
+  const activeCodes = primaryCodePage
+    ? sortCodesByFirstSeenDesc(
+        (await safeList("active codes", () => listCodesForGame(primaryCodePage.id))).filter((code) => code.status === "active")
+      ).slice(0, 3)
+    : [];
 
   return {
-    codes: codes.filter((game) => (game.active_count ?? 0) > 0),
+    codes: codePages,
+    activeCodes,
     tools,
     articles,
     checklists,
@@ -547,6 +564,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     quizzes,
     eventsPage,
     eventSummary,
+    eventTimeline,
     rankingBadges: rankMap?.get(universeId) ?? [],
     media,
     badges,

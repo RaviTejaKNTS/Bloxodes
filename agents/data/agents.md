@@ -28,7 +28,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `tools`, `tools_view`
   - Tool copy and tool indexes.
 - `catalog_pages`, `catalog_pages_view`
-  - Catalog page copy and catalog indexes, including optional `wiki_md`, `wiki_sort_order`, and `wiki_image_urls` fields for game wiki catalog sections.
+  - Catalog page copy and catalog indexes, including optional `wiki_md` and `wiki_sort_order` fields for game wiki catalog sections. Wiki CTA image strips are derived from matching local dataset images by catalog code.
 - `events_pages`
   - Event landing pages.
 

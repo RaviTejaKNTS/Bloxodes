@@ -151,6 +151,7 @@ const STAT_KEY_PRIORITY = [
   "requirements",
   "obtainment",
   "source",
+  "bonuses",
   "drops",
   "abilities",
   "stats",
@@ -169,6 +170,7 @@ const HIDDEN_FIELD_KEYS = new Set([
   "wikiUrl",
   "imageCandidate",
   "sourceTables",
+  "fields",
   "raw",
   "rawText",
   "sections"

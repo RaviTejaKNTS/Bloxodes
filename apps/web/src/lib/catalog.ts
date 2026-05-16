@@ -18,7 +18,6 @@ export type CatalogPageContent = {
   thumb_url?: string | null;
   wiki_md?: string | null;
   wiki_sort_order?: number | null;
-  wiki_image_urls?: string[] | null;
   is_published: boolean;
   published_at?: string | null;
   created_at?: string;
@@ -35,7 +34,6 @@ export type CatalogListEntry = Pick<
   | "thumb_url"
   | "wiki_md"
   | "wiki_sort_order"
-  | "wiki_image_urls"
   | "universe_id"
   | "published_at"
   | "created_at"
@@ -61,9 +59,9 @@ export type CatalogIndexEntry = Pick<
 };
 
 const CATALOG_SELECT_FIELDS_VIEW =
-  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, wiki_image_urls, is_published, published_at, created_at, updated_at, content_updated_at";
+  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at, content_updated_at";
 const CATALOG_SELECT_FIELDS_BASE =
-  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, wiki_image_urls, is_published, published_at, created_at, updated_at";
+  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at";
 const CATALOG_REVALIDATE_SECONDS = 86400;
 
 function normalizeCatalogCodes(codes: string[]): string[] {
@@ -305,7 +303,7 @@ export async function listPublishedCatalogPagesByUniverseId(
 
   let viewQuery = supabase
     .from("catalog_pages_view")
-    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, wiki_image_urls, universe_id, published_at, created_at, updated_at, content_updated_at")
+    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, universe_id, published_at, created_at, updated_at, content_updated_at")
     .eq("is_published", true)
     .eq("universe_id", universeId)
     .order("wiki_sort_order", { ascending: true, nullsFirst: false })
@@ -323,7 +321,7 @@ export async function listPublishedCatalogPagesByUniverseId(
 
   let fallbackQuery = supabase
     .from("catalog_pages")
-    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, wiki_image_urls, universe_id, published_at, created_at, updated_at")
+    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, universe_id, published_at, created_at, updated_at")
     .eq("is_published", true)
     .eq("universe_id", universeId)
     .order("wiki_sort_order", { ascending: true, nullsFirst: false })
@@ -356,7 +354,7 @@ export async function listPublishedCatalogPagesByCodePrefix(
 
   let viewQuery = supabase
     .from("catalog_pages_view")
-    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, wiki_image_urls, universe_id, published_at, created_at, updated_at, content_updated_at")
+    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, universe_id, published_at, created_at, updated_at, content_updated_at")
     .eq("is_published", true)
     .like("code", likePattern)
     .order("wiki_sort_order", { ascending: true, nullsFirst: false })
@@ -374,7 +372,7 @@ export async function listPublishedCatalogPagesByCodePrefix(
 
   let fallbackQuery = supabase
     .from("catalog_pages")
-    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, wiki_image_urls, universe_id, published_at, created_at, updated_at")
+    .select("id, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, universe_id, published_at, created_at, updated_at")
     .eq("is_published", true)
     .like("code", likePattern)
     .order("wiki_sort_order", { ascending: true, nullsFirst: false })

@@ -17,175 +17,33 @@ import {
   useWindowDimensions,
   View
 } from "react-native";
-import { buildWebUrl, fetchCodeDetail, fetchCodesIndex, fetchContentDetail, fetchContentIndex, fetchSearchResults } from "./src/api";
+import {
+  buildWebUrl,
+  fetchCodeDetail,
+  fetchCodeProgress,
+  fetchCodesIndex,
+  fetchCodeSession,
+  saveCodeProgress
+} from "./src/api";
 import { darkColors, lightColors, radii, spacing, type ThemeColors } from "./src/theme";
-import type {
-  CodeDetailResponse,
-  CodeItem,
-  CodesIndexItem,
-  MobileContentDetailResponse,
-  MobileContentIndexResponse,
-  MobileContentItem,
-  MobileContentKind,
-  SearchItem
-} from "./src/types";
-
-const NAV_ITEMS = [
-  "Catalog",
-  "Tools",
-  "Wiki",
-  "Codes",
-  "Quizzes",
-  "Lists",
-  "Checklists",
-  "Events",
-  "Articles"
-] as const;
-
-type FeatherIconName = keyof typeof Feather.glyphMap;
-
-const NAV_ITEM_ICONS: Record<(typeof NAV_ITEMS)[number], FeatherIconName> = {
-  Catalog: "grid",
-  Tools: "tool",
-  Wiki: "book-open",
-  Codes: "key",
-  Quizzes: "award",
-  Lists: "list",
-  Checklists: "check-square",
-  Events: "calendar",
-  Articles: "file-text"
-};
+import type { CodeDetailResponse, CodeItem, CodesIndexItem } from "./src/types";
 
 const LOGO_LIGHT = require("./assets/Bloxodes-light.png");
 const LOGO_DARK = require("./assets/Bloxodes-dark.png");
 
 const WEB_BREAKPOINT_MD = 768;
 const WEB_BREAKPOINT_LG = 1024;
-const WEB_BREAKPOINT_XL = 1280;
-const SIDEBAR_WIDTH = 240;
-const CONTENT_MAX_WIDTH = 940;
-const CONTENT_PADDING = spacing.lg;
-const CARD_GAP = 20;
+const CONTENT_MAX_WIDTH = 920;
+const PAGE_SIZE = 24;
 
-type Screen = {
-  name: "codes" | "codeDetail" | "contentDetail" | MobileContentKind;
-  kind?: MobileContentKind;
-  slug?: string;
-};
+type FeatherIconName = keyof typeof Feather.glyphMap;
 
-type ContentSectionConfig = {
-  description: string;
-  eyebrow: string;
-  icon: FeatherIconName;
-  statNoun: string;
-  title: string;
-};
-
-const CONTENT_SECTIONS: Record<MobileContentKind, ContentSectionConfig> = {
-  articles: {
-    description: "Fast links into Bloxodes guides and updates, with the useful context you need before opening the full page.",
-    eyebrow: "Roblox Articles",
-    icon: "file-text",
-    statNoun: "articles published",
-    title: "Roblox articles and guides"
-  },
-  catalog: {
-    description: "Browse Roblox reference pages, item databases, IDs, game catalogs, and useful collections from Bloxodes.",
-    eyebrow: "Roblox Catalog",
-    icon: "grid",
-    statNoun: "catalog pages",
-    title: "Roblox catalog pages and databases"
-  },
-  tools: {
-    description: "Currency converters, planning helpers, and utilities built to stay current with our latest data and guides.",
-    eyebrow: "Roblox Utilities",
-    icon: "tool",
-    statNoun: "tools published",
-    title: "Roblox tools and calculators to plan faster"
-  },
-  quizzes: {
-    description: "Quick, replayable quizzes built from in-game mechanics, NPCs, and regions. Pick a game and take a 15-question run.",
-    eyebrow: "Roblox Quizzes",
-    icon: "award",
-    statNoun: "quizzes published",
-    title: "Roblox quizzes to test in-game knowledge"
-  },
-  checklists: {
-    description: "Actionable runbooks for your favorite experiences so you can mark off tasks, rewards, and codes as you play.",
-    eyebrow: "Roblox Checklists",
-    icon: "check-square",
-    statNoun: "checklists published",
-    title: "Guided Roblox checklists to track your progress"
-  },
-  events: {
-    description: "Track Roblox event pages with live, upcoming, and past event coverage from Bloxodes.",
-    eyebrow: "Roblox Events",
-    icon: "calendar",
-    statNoun: "event pages",
-    title: "Roblox events to follow now and next"
-  },
-  lists: {
-    description: "Scan curated Roblox game rankings and collections, then open the full list when you want the details.",
-    eyebrow: "Roblox Lists",
-    icon: "list",
-    statNoun: "lists published",
-    title: "Curated Roblox game lists"
-  },
-  wiki: {
-    description: "Quick database cards for Bloxodes wiki pages, built around games, mechanics, stats, and related resources.",
-    eyebrow: "Roblox Wiki",
-    icon: "book-open",
-    statNoun: "wiki pages",
-    title: "Roblox wiki pages and game references"
-  }
-};
-
-function isMobileContentScreen(name: Screen["name"]): name is MobileContentKind {
-  return name in CONTENT_SECTIONS;
-}
-
-function getSlugFromUrl(url: string): string | null {
-  try {
-    const pathname = new URL(buildWebUrl(url)).pathname;
-    const parts = pathname.split("/").filter(Boolean);
-    return parts[1] ? decodeURIComponent(parts[1]) : null;
-  } catch {
-    const parts = url.split("?")[0].split("/").filter(Boolean);
-    return parts[1] ? decodeURIComponent(parts[1]) : null;
-  }
-}
-
-function getKindFromSearchType(type: SearchItem["type"]): MobileContentKind | null {
-  switch (type) {
-    case "article":
-      return "articles";
-    case "catalog":
-      return "catalog";
-    case "checklist":
-      return "checklists";
-    case "event":
-      return "events";
-    case "list":
-      return "lists";
-    case "quiz":
-      return "quizzes";
-    case "tool":
-      return "tools";
-    case "wiki":
-      return "wiki";
-    default:
-      return null;
-  }
-}
+type Screen =
+  | { name: "codes" }
+  | { name: "detail"; slug: string }
+  | { name: "account" };
 
 type AppStyles = ReturnType<typeof createAppStyles>;
-
-type ContentState = {
-  data: MobileContentIndexResponse | null;
-  error: string | null;
-  loading: boolean;
-  refreshing: boolean;
-};
 
 type ThemeContextValue = {
   colors: ThemeColors;
@@ -199,9 +57,7 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 function useAppTheme() {
   const theme = useContext(ThemeContext);
-  if (!theme) {
-    throw new Error("useAppTheme must be used inside ThemeContext.Provider");
-  }
+  if (!theme) throw new Error("useAppTheme must be used inside ThemeContext.Provider");
   return theme;
 }
 
@@ -216,17 +72,29 @@ function formatUpdatedLabel(value: string | null): string {
   if (!value) return "recently";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return "recently";
-
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
+  const diffMs = Date.now() - date.getTime();
   const diffDays = Math.abs(Math.round(diffMs / 86_400_000));
+  if (diffDays === 0) return "today";
+  if (diffDays === 1) return diffMs >= 0 ? "yesterday" : "tomorrow";
+  if (diffDays <= 7) return diffMs >= 0 ? `${diffDays} days ago` : `in ${diffDays} days`;
+  return formatDate(value);
+}
 
-  if (diffDays <= 4) {
-    if (diffDays === 0) return "today";
-    if (diffDays === 1) return diffMs >= 0 ? "yesterday" : "tomorrow";
-    return diffMs >= 0 ? `${diffDays} days ago` : `in ${diffDays} days`;
-  }
+function formatRefreshedLabel(value: string | null): string | null {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  const diffMs = date.getTime() - Date.now();
+  const absMs = Math.abs(diffMs);
+  const minute = 60_000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+  const month = 30 * day;
+  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
 
+  if (absMs < hour) return rtf.format(Math.round(diffMs / minute), "minute");
+  if (absMs < day) return rtf.format(Math.round(diffMs / hour), "hour");
+  if (absMs < month) return rtf.format(Math.round(diffMs / day), "day");
   return formatDate(value);
 }
 
@@ -245,848 +113,111 @@ function stripMarkdown(value: string | null): string | null {
   return cleaned || null;
 }
 
-function formatRewardText(value: string | null): string {
+function rewardText(value: string | null): string {
   if (!value) return "No reward listed yet.";
   return /this code gives you/i.test(value) ? value : `You get ${value}`;
 }
 
-function BrandLogo({ large }: { large?: boolean }) {
+function normalizeUsedCodes(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const entry of value) {
+    if (typeof entry !== "string") continue;
+    const trimmed = entry.trim();
+    if (!trimmed || seen.has(trimmed)) continue;
+    seen.add(trimmed);
+    result.push(trimmed);
+  }
+  return result;
+}
+
+function storageGet(key: string): string | null {
+  try {
+    const storage = (globalThis as { localStorage?: { getItem: (key: string) => string | null } }).localStorage;
+    return storage?.getItem(key) ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function storageSet(key: string, value: string) {
+  try {
+    const storage = (globalThis as { localStorage?: { setItem: (key: string, value: string) => void } }).localStorage;
+    storage?.setItem(key, value);
+  } catch {
+    // ignore storage failures
+  }
+}
+
+function progressKey(slug: string) {
+  return `code-progress:${slug.trim().toLowerCase()}`;
+}
+
+function legacyProgressKey(gameName: string) {
+  const slug = gameName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "default";
+  return `roblox-codes-checked-${slug}`;
+}
+
+function readLocalProgress(slug: string, gameName: string): string[] {
+  for (const key of [progressKey(slug), legacyProgressKey(gameName)]) {
+    const raw = storageGet(key);
+    if (!raw) continue;
+    try {
+      return normalizeUsedCodes(JSON.parse(raw));
+    } catch {
+      // ignore invalid storage payloads
+    }
+  }
+  return [];
+}
+
+function writeLocalProgress(slug: string, gameName: string, usedCodes: string[]) {
+  const serialized = JSON.stringify(normalizeUsedCodes(usedCodes));
+  storageSet(progressKey(slug), serialized);
+  storageSet(legacyProgressKey(gameName), serialized);
+}
+
+function AppIcon({ color, name, size = 18 }: { color: string; name: FeatherIconName; size?: number }) {
+  return <Feather name={name} size={size} color={color} />;
+}
+
+function AppLogo({ large = false }: { large?: boolean }) {
   const { isDark, styles } = useAppTheme();
   return (
     <Image
       source={isDark ? LOGO_DARK : LOGO_LIGHT}
-      style={large ? styles.logoLarge : styles.logoSmall}
       resizeMode="contain"
+      style={large ? styles.logoLarge : styles.logoSmall}
       accessibilityLabel="Bloxodes"
     />
   );
 }
 
-function AppIcon({
-  color,
-  name,
-  size = 16
-}: {
-  color?: string;
-  name: FeatherIconName;
-  size?: number;
-}) {
-  const { colors } = useAppTheme();
-  return <Feather name={name} size={size} color={color ?? colors.mutedStrong} />;
-}
-
-function HamburgerIcon() {
-  const { colors } = useAppTheme();
-  return <AppIcon name="menu" size={20} color={colors.foreground} />;
-}
-
-function CloseIcon() {
-  const { colors } = useAppTheme();
-  return <AppIcon name="x" size={16} color={colors.mutedStrong} />;
-}
-
-function SearchIcon() {
-  const { colors } = useAppTheme();
-  return <AppIcon name="search" size={15} color={colors.muted} />;
-}
-
-function getSearchIcon(type: SearchItem["type"]): FeatherIconName {
-  switch (type) {
-    case "article":
-      return "file-text";
-    case "catalog":
-      return "grid";
-    case "checklist":
-      return "check-square";
-    case "codes":
-      return "key";
-    case "event":
-      return "calendar";
-    case "list":
-      return "list";
-    case "quiz":
-      return "award";
-    case "tool":
-      return "tool";
-    case "wiki":
-      return "book-open";
-    case "author":
-      return "user";
-    case "music":
-      return "music";
-    default:
-      return "search";
-  }
-}
-
-function getSearchLabel(type: SearchItem["type"]): string {
-  switch (type) {
-    case "codes":
-      return "Codes";
-    case "article":
-      return "Article";
-    case "checklist":
-      return "Checklist";
-    case "quiz":
-      return "Quiz";
-    case "list":
-      return "List";
-    case "tool":
-      return "Tool";
-    case "catalog":
-      return "Catalog";
-    case "event":
-      return "Event";
-    case "author":
-      return "Author";
-    case "music":
-      return "Music";
-    case "wiki":
-      return "Wiki";
-    default:
-      return "Result";
-  }
-}
-
-function CopyIcon({ copied }: { copied: boolean }) {
-  const { colors } = useAppTheme();
-  return <AppIcon name={copied ? "check" : "copy"} size={14} color={copied ? colors.white : colors.accent} />;
-}
-
-function ThemeIcon() {
-  const { colors, isDark } = useAppTheme();
-  return <AppIcon name={isDark ? "moon" : "sun"} size={14} color={colors.foreground} />;
-}
-
-function AppShell({
-  children,
-  currentScreen,
-  drawerOpen,
-  onNavigate,
-  onSearchResult,
-  onSignIn,
-  setDrawerOpen
-}: {
-  children: JSX.Element;
-  currentScreen: Screen;
-  drawerOpen: boolean;
-  onNavigate: (screen: Screen) => void;
-  onSearchResult: (item: SearchItem) => void;
-  onSignIn: () => void;
-  setDrawerOpen: (open: boolean) => void;
-}) {
-  const { styles, statusBarStyle } = useAppTheme();
-  const { height, width } = useWindowDimensions();
-  const sidebarVisible = width >= WEB_BREAKPOINT_XL;
-
-  return (
-    <SafeAreaView style={[styles.safeArea, { minHeight: height }]}>
-      <StatusBar style={statusBarStyle} />
-      <View style={styles.appFrame}>
-        {sidebarVisible ? (
-          <Sidebar currentScreen={currentScreen} onNavigate={onNavigate} onSearchResult={onSearchResult} onSignIn={onSignIn} />
-        ) : null}
-        <View style={styles.mainColumn}>
-          {!sidebarVisible ? (
-            <View style={styles.topBar}>
-              <TouchableOpacity
-                accessibilityRole="button"
-                accessibilityLabel="Open navigation"
-                onPress={() => setDrawerOpen(true)}
-                style={styles.iconButton}
-              >
-                <HamburgerIcon />
-              </TouchableOpacity>
-              <BrandLogo />
-            </View>
-          ) : null}
-          {children}
-        </View>
-      </View>
-      {!sidebarVisible && drawerOpen ? (
-        <View style={styles.drawerOverlay}>
-          <TouchableOpacity style={styles.drawerScrim} onPress={() => setDrawerOpen(false)} />
-          <View style={styles.drawerPanel}>
-            <Sidebar
-              currentScreen={currentScreen}
-              compact
-              onClose={() => setDrawerOpen(false)}
-              onNavigate={onNavigate}
-              onSearchResult={onSearchResult}
-              onSignIn={onSignIn}
-            />
-          </View>
-        </View>
-      ) : null}
-    </SafeAreaView>
-  );
-}
-
-function Sidebar({
-  currentScreen,
-  compact,
-  onClose,
-  onNavigate,
-  onSearchResult,
-  onSignIn
-}: {
-  currentScreen: Screen;
-  compact?: boolean;
-  onClose?: () => void;
-  onNavigate: (screen: Screen) => void;
-  onSearchResult: (item: SearchItem) => void;
-  onSignIn: () => void;
-}) {
-  const { colors, isDark, styles, toggleTheme } = useAppTheme();
-  const [query, setQuery] = useState("");
-  const [searchError, setSearchError] = useState<string | null>(null);
-  const [searchLoading, setSearchLoading] = useState(false);
-  const [searchResults, setSearchResults] = useState<SearchItem[]>([]);
-
-  useEffect(() => {
-    const normalized = query.replace(/\s+/g, " ").trim();
-    if (normalized.length < 2) {
-      setSearchError(null);
-      setSearchLoading(false);
-      setSearchResults([]);
-      return;
-    }
-
-    let canceled = false;
-    setSearchLoading(true);
-    setSearchError(null);
-
-    const timeout = setTimeout(() => {
-      fetchSearchResults(normalized)
-        .then((response) => {
-          if (canceled) return;
-          setSearchResults(response.items);
-        })
-        .catch((error) => {
-          if (canceled) return;
-          setSearchResults([]);
-          setSearchError(error instanceof Error ? error.message : "Search failed");
-        })
-        .finally(() => {
-          if (!canceled) setSearchLoading(false);
-        });
-    }, 250);
-
-    return () => {
-      canceled = true;
-      clearTimeout(timeout);
-    };
-  }, [query]);
-
-  return (
-    <View style={[styles.sidebar, compact ? styles.sidebarCompact : null]}>
-      <View style={styles.sidebarHeader}>
-        <View style={styles.logoCenter}>
-          <BrandLogo large />
-        </View>
-        {compact ? (
-          <TouchableOpacity accessibilityRole="button" accessibilityLabel="Close menu" onPress={onClose} style={styles.closeButton}>
-            <CloseIcon />
-          </TouchableOpacity>
-        ) : null}
-        <View style={styles.searchBox}>
-          <SearchIcon />
-          <TextInput
-            value={query}
-            onChangeText={setQuery}
-            placeholder="Search Bloxodes"
-            placeholderTextColor={styles.searchPlaceholder.color}
-            style={styles.searchInput}
-            inputMode="search"
-          />
-        </View>
-        {query.trim().length >= 2 ? (
-          <View style={styles.searchResultsPanel}>
-            {searchLoading ? <Text style={styles.searchStateText}>Searching</Text> : null}
-            {searchError ? <Text style={styles.searchStateText}>{searchError}</Text> : null}
-            {!searchLoading && !searchError && searchResults.length === 0 ? <Text style={styles.searchStateText}>No results found</Text> : null}
-            {searchResults.slice(0, 8).map((item) => (
-              <TouchableOpacity
-                key={item.id}
-                accessibilityRole="button"
-                onPress={() => {
-                  onSearchResult(item);
-                  setQuery("");
-                  onClose?.();
-                }}
-                style={styles.searchResultItem}
-              >
-                <View style={styles.searchResultIcon}>
-                  <AppIcon name={getSearchIcon(item.type)} size={13} color={colors.muted} />
-                </View>
-                <View style={styles.searchResultBody}>
-                  <Text style={styles.searchResultTitle} numberOfLines={1}>
-                    {item.title}
-                  </Text>
-                  <Text style={styles.searchResultMeta} numberOfLines={1}>
-                    {item.badge ?? item.subtitle ?? getSearchLabel(item.type)}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
-        ) : null}
-      </View>
-      <View style={styles.navList}>
-        <Text style={styles.navGroupLabel}>Browse</Text>
-        {NAV_ITEMS.map((item) => {
-          const screenName = item.toLowerCase() as Screen["name"];
-          const active =
-            (item === "Codes" && currentScreen.name.startsWith("code")) ||
-            (isMobileContentScreen(currentScreen.name) && screenName === currentScreen.name) ||
-            (currentScreen.name === "contentDetail" && screenName === currentScreen.kind);
-          const iconColor = active ? colors.foreground : colors.muted;
-          return (
-            <TouchableOpacity
-              key={item}
-              accessibilityRole="button"
-              onPress={() => {
-                onNavigate(item === "Codes" ? { name: "codes" } : { name: screenName });
-                onClose?.();
-              }}
-              style={[styles.navItem, active ? styles.navItemActive : null]}
-            >
-              <View style={styles.navIcon}>
-                <AppIcon name={NAV_ITEM_ICONS[item]} size={14} color={iconColor} />
-              </View>
-              <Text style={[styles.navItemText, active ? styles.navItemTextActive : null]}>{item}</Text>
-            </TouchableOpacity>
-          );
-        })}
-        <View style={styles.sidebarSeparator} />
-        <TouchableOpacity style={styles.navItem} accessibilityRole="button" onPress={onSignIn}>
-          <View style={styles.navIcon}>
-            <AppIcon name="user" size={14} color={colors.muted} />
-          </View>
-          <Text style={styles.navItemText}>Sign in</Text>
-        </TouchableOpacity>
-        <View style={styles.themeRow}>
-          <Text style={styles.themeLabel}>Theme</Text>
-          <TouchableOpacity
-            accessibilityRole="button"
-            accessibilityLabel={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            onPress={toggleTheme}
-            style={styles.themeButton}
-          >
-            <ThemeIcon />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
-  );
-}
-
-function CodesIndexScreen({
-  games,
-  loading,
-  refreshing,
-  error,
-  total,
-  page,
-  totalPages,
-  onRefresh,
-  onLoadMore,
-  onSelectGame
-}: {
-  games: CodesIndexItem[];
-  loading: boolean;
-  refreshing: boolean;
-  error: string | null;
-  total: number;
-  page: number;
-  totalPages: number;
-  onRefresh: () => void;
-  onLoadMore: () => void;
-  onSelectGame: (slug: string) => void;
-}) {
-  const { colors, styles } = useAppTheme();
-  const { width } = useWindowDimensions();
-  const refreshedLabel = games[0] ? formatUpdatedLabel(games[0].contentUpdatedAt) : null;
-  const cardColumns = width >= WEB_BREAKPOINT_LG ? 4 : width >= WEB_BREAKPOINT_MD ? 3 : 1;
-  const mainWidth = width >= WEB_BREAKPOINT_XL ? width - SIDEBAR_WIDTH : width;
-  const contentWidth = Math.min(Math.max(mainWidth - CONTENT_PADDING * 2, 0), CONTENT_MAX_WIDTH);
-  const cardWidth = (contentWidth - CARD_GAP * (cardColumns - 1)) / cardColumns;
-
-  return (
-    <ScrollView
-      contentContainerStyle={styles.content}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.accent} />}
-    >
-      <View style={styles.headerBlock}>
-        <Text style={styles.eyebrow}>Roblox Codes Hub</Text>
-        <Text style={styles.pageTitle}>Fresh Roblox game codes, updated as soon as they drop</Text>
-        <Text style={styles.pageDescription}>
-          Find the latest Roblox codes for all your favorite games in one place. Updated daily with active promo codes, rewards, and
-          freebies to help you unlock items, boosts, and more.
-        </Text>
-        <View style={styles.statsRow}>
-          <Pill icon="key" label={`${total || games.length} games tracked`} tone="accent" />
-          {refreshedLabel ? <Pill icon="clock" label={`Updated ${refreshedLabel}`} /> : null}
-        </View>
-      </View>
-
-      {error ? <ErrorPanel message={error} onRetry={onRefresh} /> : null}
-      {loading && games.length === 0 ? <LoadingPanel label="Loading Bloxodes codes" /> : null}
-
-      <View style={styles.grid}>
-        {games.map((game) => (
-          <TouchableOpacity key={game.id} style={[styles.gameCard, { width: cardWidth }]} onPress={() => onSelectGame(game.slug)}>
-            <View style={styles.gameCardImageWrap}>
-              <ImageSlot source={game.coverImage} label={game.name} />
-              <View style={styles.imageBottomFade} />
-            </View>
-            <View style={styles.gameCardBody}>
-              <Text style={styles.gameTitle} numberOfLines={2}>
-                {game.name} Codes
-              </Text>
-              <View style={styles.gameMetaRow}>
-                <View style={styles.gameMetaItem}>
-                  <View style={styles.activeDot} />
-                  <Text style={styles.gameMetaText}>
-                    {game.activeCount} {game.activeCount === 1 ? "active code" : "active codes"}
-                  </Text>
-                </View>
-                <View style={styles.gameMetaItem}>
-                  <AppIcon name="clock" size={12} color={colors.mutedStrong} />
-                  <Text style={styles.gameMetaText}>{formatUpdatedLabel(game.contentUpdatedAt)}</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {games.length > 0 && page < totalPages ? (
-        <TouchableOpacity style={styles.loadMoreButton} onPress={onLoadMore} disabled={loading}>
-          <Text style={styles.loadMoreText}>{loading ? "Loading" : "Load more"}</Text>
-        </TouchableOpacity>
-      ) : null}
-    </ScrollView>
-  );
-}
-
-function ContentIndexScreen({
-  data,
-  error,
-  kind,
-  loading,
-  onLoadMore,
-  onRefresh,
-  onSelectItem,
-  refreshing
-}: {
-  data: MobileContentIndexResponse | null;
-  error: string | null;
-  kind: MobileContentKind;
-  loading: boolean;
-  onLoadMore: () => void;
-  onRefresh: () => void;
-  onSelectItem: (item: MobileContentItem) => void;
-  refreshing: boolean;
-}) {
-  const { colors, styles } = useAppTheme();
-  const { width } = useWindowDimensions();
-  const config = CONTENT_SECTIONS[kind];
-  const items = data?.items ?? [];
-  const cardColumns = width >= WEB_BREAKPOINT_LG ? 4 : width >= WEB_BREAKPOINT_MD ? 3 : 1;
-  const mainWidth = width >= WEB_BREAKPOINT_XL ? width - SIDEBAR_WIDTH : width;
-  const contentWidth = Math.min(Math.max(mainWidth - CONTENT_PADDING * 2, 0), CONTENT_MAX_WIDTH);
-  const cardWidth = (contentWidth - CARD_GAP * (cardColumns - 1)) / cardColumns;
-
-  return (
-    <ScrollView
-      contentContainerStyle={styles.content}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.accent} />}
-    >
-      <View style={styles.headerBlock}>
-        <Text style={styles.eyebrow}>{config.eyebrow}</Text>
-        <Text style={styles.pageTitle}>{config.title}</Text>
-        <Text style={styles.pageDescription}>{config.description}</Text>
-        <View style={styles.statsRow}>
-          <Pill icon={config.icon} label={`${data?.total ?? 0} ${config.statNoun}`} tone="accent" />
-          {data?.latestUpdatedAt ? <Pill icon="clock" label={`Updated ${formatUpdatedLabel(data.latestUpdatedAt)}`} /> : null}
-        </View>
-      </View>
-
-      {error ? <ErrorPanel message={error} onRetry={onRefresh} /> : null}
-      {loading && items.length === 0 ? <LoadingPanel label={`Loading Bloxodes ${kind}`} /> : null}
-
-      {!loading && !error && items.length === 0 ? (
-        <View style={styles.statePanel}>
-          <Text style={styles.errorTitle}>Nothing published yet</Text>
-          <Text style={styles.mutedText}>Check back soon for new Bloxodes {kind}.</Text>
-        </View>
-      ) : null}
-
-      <View style={styles.grid}>
-        {items.map((item) => (
-          <ContentCard key={item.id} item={item} onPress={() => onSelectItem(item)} width={cardWidth} />
-        ))}
-      </View>
-
-      {data && items.length > 0 && data.page < data.totalPages ? (
-        <TouchableOpacity style={styles.loadMoreButton} onPress={onLoadMore} disabled={loading}>
-          <Text style={styles.loadMoreText}>{loading ? "Loading" : "Load more"}</Text>
-        </TouchableOpacity>
-      ) : null}
-    </ScrollView>
-  );
-}
-
-function ContentCard({ item, onPress, width }: { item: MobileContentItem; onPress: () => void; width: number }) {
-  const { colors, styles } = useAppTheme();
-
-  return (
-    <TouchableOpacity style={[styles.gameCard, { width }]} onPress={onPress}>
-      <View style={styles.gameCardImageWrap}>
-        <ImageSlot source={item.coverImage} label={item.title} />
-        <View style={styles.imageBottomFade} />
-      </View>
-      <View style={styles.gameCardBody}>
-        <Text style={styles.gameTitle} numberOfLines={2}>
-          {item.title}
-        </Text>
-        {item.summary ? (
-          <Text style={styles.contentCardSummary} numberOfLines={3}>
-            {item.summary}
-          </Text>
-        ) : null}
-        <View style={styles.gameMetaRow}>
-          {item.badge ? (
-            <View style={styles.gameMetaItem}>
-              <View style={styles.activeDot} />
-              <Text style={styles.gameMetaText}>{item.badge}</Text>
-            </View>
-          ) : null}
-          <View style={styles.gameMetaItem}>
-            <AppIcon name="clock" size={12} color={colors.mutedStrong} />
-            <Text style={styles.gameMetaText}>{formatUpdatedLabel(item.updatedAt)}</Text>
-          </View>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-}
-
-function ContentDetailScreen({
-  detail,
-  error,
-  kind,
-  loading,
-  onBack,
-  onRetry
-}: {
-  detail: MobileContentDetailResponse | null;
-  error: string | null;
-  kind: MobileContentKind;
-  loading: boolean;
-  onBack: () => void;
-  onRetry: () => void;
-}) {
-  const { colors, styles } = useAppTheme();
-  const config = CONTENT_SECTIONS[kind];
-
-  return (
-    <ScrollView contentContainerStyle={styles.content}>
-      {loading ? <LoadingPanel label={`Loading Bloxodes ${kind}`} /> : null}
-      {error ? <ErrorPanel message={error} onRetry={onRetry} /> : null}
-
-      {detail ? (
-        <>
-          <View style={styles.detailHeader}>
-            <View style={styles.breadcrumbRow}>
-              <TouchableOpacity onPress={onBack}>
-                <Text style={styles.breadcrumbLink}>{config.eyebrow}</Text>
-              </TouchableOpacity>
-              <Text style={styles.breadcrumbDivider}>&gt;</Text>
-              <Text style={styles.breadcrumbCurrent} numberOfLines={1}>
-                {detail.title}
-              </Text>
-            </View>
-            <ImageSlot source={detail.coverImage} label={detail.title} />
-            <Text style={styles.detailTitle}>{detail.title}</Text>
-            <View style={styles.statsRow}>
-              {detail.badge ? <Pill icon={config.icon} label={detail.badge} tone="accent" /> : null}
-              {detail.updatedAt ? <Pill icon="clock" label={`Updated ${formatUpdatedLabel(detail.updatedAt)}`} /> : null}
-              {detail.subtitle ? <Pill icon="info" label={detail.subtitle} /> : null}
-            </View>
-            {detail.summary ? <Text style={styles.detailIntro}>{detail.summary}</Text> : null}
-          </View>
-
-          {detail.sections.length === 0 ? (
-            <View style={styles.statePanel}>
-              <Text style={styles.errorTitle}>No detail sections yet</Text>
-              <Text style={styles.mutedText}>Bloxodes has this page, but there is no mobile detail data to show right now.</Text>
-            </View>
-          ) : null}
-
-          {detail.sections.map((section) => (
-            <View key={section.id} style={styles.codesPanel}>
-              <View style={styles.codesPanelHeader}>
-                <View style={styles.panelHeading}>
-                  <Text style={styles.panelTitle}>{section.title}</Text>
-                  {section.subtitle ? <Text style={styles.panelSubtitle}>{section.subtitle}</Text> : null}
-                </View>
-              </View>
-              {section.body ? (
-                <View style={styles.detailSectionBody}>
-                  <Text style={styles.detailSectionText}>{section.body}</Text>
-                </View>
-              ) : null}
-              {section.items.length ? (
-                <View style={styles.codesList}>
-                  {section.items.map((item, index) => (
-                    <View key={item.id} style={[styles.detailItemRow, index > 0 ? styles.codeRowBorder : null]}>
-                      {item.image ? (
-                        <Image source={{ uri: item.image }} style={styles.detailItemImage} resizeMode="cover" />
-                      ) : (
-                        <View style={styles.codeIndex}>
-                          <Text style={styles.codeIndexText}>{index + 1}</Text>
-                        </View>
-                      )}
-                      <View style={styles.codeMain}>
-                        <View style={styles.codeLine}>
-                          <Text style={styles.detailItemTitle}>{item.title}</Text>
-                          {item.badge ? <Text style={styles.miniBadge}>{item.badge}</Text> : null}
-                        </View>
-                        {item.subtitle ? <Text style={styles.gameMetaText}>{item.subtitle}</Text> : null}
-                        {item.body ? <Text style={styles.mutedText}>{item.body}</Text> : null}
-                      </View>
-                    </View>
-                  ))}
-                </View>
-              ) : null}
-            </View>
-          ))}
-
-          <View style={styles.externalLinks}>
-            <TouchableOpacity style={styles.outlineButton} onPress={() => Linking.openURL(buildWebUrl(detail.url))}>
-              <Text style={styles.outlineButtonText}>Open full page on Bloxodes</Text>
-            </TouchableOpacity>
-          </View>
-        </>
-      ) : null}
-    </ScrollView>
-  );
-}
-
-function CodeDetailScreen({
-  detail,
-  loading,
-  error,
-  onBack,
-  onRetry
-}: {
-  detail: CodeDetailResponse | null;
-  loading: boolean;
-  error: string | null;
-  onBack: () => void;
-  onRetry: () => void;
-}) {
+function ImageSlot({ source, label }: { source: string | null; label: string }) {
   const { styles } = useAppTheme();
-  const [copiedCode, setCopiedCode] = useState<string | null>(null);
-
-  async function copyCode(code: string) {
-    await Clipboard.setStringAsync(code);
-    setCopiedCode(code);
-    setTimeout(() => setCopiedCode(null), 1800);
-  }
-
-  return (
-    <ScrollView contentContainerStyle={styles.content}>
-      {loading ? <LoadingPanel label="Loading Bloxodes codes" /> : null}
-      {error ? <ErrorPanel message={error} onRetry={onRetry} /> : null}
-
-      {detail ? (
-        <>
-          <View style={styles.detailHeader}>
-            <View style={styles.breadcrumbRow}>
-              <TouchableOpacity onPress={onBack}>
-                <Text style={styles.breadcrumbLink}>Codes</Text>
-              </TouchableOpacity>
-              <Text style={styles.breadcrumbDivider}>&gt;</Text>
-              <Text style={styles.breadcrumbCurrent} numberOfLines={1}>{detail.game.name}</Text>
-            </View>
-            <Text style={styles.detailTitle}>{detail.game.name} Codes ({monthYear()})</Text>
-            <View style={styles.updatedLine}>
-              <AppIcon name="clock" size={14} color={styles.clockIcon.color} />
-              <Text style={styles.updatedText}>
-                Updated on <Text style={styles.updatedStrong}>{formatDate(detail.game.contentUpdatedAt)}</Text>
-              </Text>
-            </View>
-            <Text style={styles.detailIntro}>
-              {stripMarkdown(detail.game.description) ?? `Get the latest ${detail.game.name} codes and redeem them for free in-game rewards.`}
-            </Text>
-          </View>
-
-          <CodesPanel
-            title={`Active ${detail.game.name} Codes`}
-            subtitle={`Checked and verified on ${formatDate(detail.game.contentUpdatedAt)}`}
-            badge={`${detail.activeCodes.length} active`}
-            codes={detail.activeCodes}
-            copiedCode={copiedCode}
-            onCopy={copyCode}
-            emptyTitle="No active codes right now"
-            emptyBody="Bloxodes has a page for this game, but no working codes are confirmed at the moment."
-          />
-
-          <ExpiredCodesPanel codes={detail.expiredCodes} gameName={detail.game.name} />
-
-          <View style={styles.externalLinks}>
-            <TouchableOpacity style={styles.outlineButton} onPress={() => Linking.openURL(buildWebUrl(detail.game.url))}>
-              <Text style={styles.outlineButtonText}>Open on Bloxodes</Text>
-            </TouchableOpacity>
-            {detail.game.robloxUrl ? (
-              <TouchableOpacity style={styles.outlineButton} onPress={() => Linking.openURL(detail.game.robloxUrl!)}>
-                <Text style={styles.outlineButtonText}>Open Roblox game</Text>
-              </TouchableOpacity>
-            ) : null}
-          </View>
-        </>
-      ) : null}
-    </ScrollView>
-  );
-}
-
-function CodesPanel({
-  title,
-  subtitle,
-  badge,
-  codes,
-  copiedCode,
-  onCopy,
-  emptyTitle,
-  emptyBody,
-  muted
-}: {
-  title: string;
-  subtitle: string;
-  badge: string;
-  codes: CodeItem[];
-  copiedCode: string | null;
-  onCopy: (code: string) => void;
-  emptyTitle: string;
-  emptyBody: string;
-  muted?: boolean;
-}) {
-  const { styles } = useAppTheme();
-
-  return (
-    <View style={[styles.codesPanel, muted ? styles.codesPanelMuted : null]}>
-      <View style={styles.codesPanelHeader}>
-        <View style={styles.panelHeading}>
-          <Text style={styles.panelTitle}>{title}</Text>
-          <Text style={styles.panelSubtitle}>✓ {subtitle}</Text>
-        </View>
-        <Text style={styles.countBadge}>{badge}</Text>
-      </View>
-      <View style={styles.codesList}>
-        {codes.length === 0 ? (
-          <View style={styles.emptyState}>
-            <Text style={styles.emptyTitle}>{emptyTitle}</Text>
-            <Text style={styles.mutedText}>{emptyBody}</Text>
-          </View>
-        ) : (
-          codes.map((code, index) => {
-            const copied = copiedCode === code.code;
-            return (
-              <View key={code.id} style={[styles.codeRow, index > 0 ? styles.codeRowBorder : null]}>
-                <View style={styles.codeRowMain}>
-                  <View style={styles.codeIndex}>
-                    <Text style={styles.codeIndexText}>{index + 1}</Text>
-                  </View>
-                  <View style={styles.codeMain}>
-                    <View style={styles.codeLine}>
-                      <Text style={styles.codeText}>{code.code}</Text>
-                      {code.isNew ? <Text style={styles.miniBadge}>New</Text> : null}
-                      {code.levelRequirement != null ? <Text style={styles.miniBadge}>Level {code.levelRequirement}+</Text> : null}
-                    </View>
-                    <Text style={styles.mutedText} numberOfLines={2}>{formatRewardText(code.rewardText)}</Text>
-                  </View>
-                </View>
-                <View style={styles.codeActionRow}>
-                  <TouchableOpacity style={[styles.copyButton, copied ? styles.copyButtonDone : null]} onPress={() => onCopy(code.code)}>
-                    <CopyIcon copied={copied} />
-                    <Text style={[styles.copyButtonText, copied ? styles.copyButtonDoneText : null]}>
-                      {copied ? "Copied" : "Copy"}
-                    </Text>
-                  </TouchableOpacity>
-                  <Text style={styles.addedText}>Added {formatDate(code.firstSeenAt)}</Text>
-                </View>
-              </View>
-            );
-          })
-        )}
-      </View>
-    </View>
-  );
-}
-
-function ExpiredCodesPanel({ codes, gameName }: { codes: CodeItem[]; gameName: string }) {
-  const { styles } = useAppTheme();
-
-  return (
-    <View style={styles.codesPanel}>
-      <View style={styles.codesPanelHeader}>
-        <View style={styles.panelHeading}>
-          <Text style={styles.panelTitle}>Expired {gameName} Codes</Text>
-          {codes.length > 0 ? <Text style={styles.panelSubtitle}>These codes are expired and no longer work.</Text> : null}
-        </View>
-        <Text style={styles.outlineBadge}>{codes.length} expired</Text>
-      </View>
-      <View style={styles.expiredContent}>
-        {codes.length === 0 ? (
-          <View style={styles.emptyState}>
-            <Text style={styles.mutedText}>We haven't tracked any expired codes yet.</Text>
-          </View>
-        ) : (
-          <View style={styles.expiredChipList}>
-            {codes.map((code) => (
-              <View key={code.id} style={styles.expiredChip}>
-                <Text style={styles.expiredChipText}>{code.code}</Text>
-              </View>
-            ))}
-          </View>
-        )}
-      </View>
-    </View>
-  );
-}
-
-function ImageSlot({ source, label, tall }: { source: string | null; label: string; tall?: boolean }) {
-  const { styles } = useAppTheme();
-
   if (!source) {
     return (
-      <View style={[styles.imageFallback, tall ? styles.imageTall : null]}>
+      <View style={styles.imageFallback}>
         <Text style={styles.imageFallbackText}>{label.slice(0, 1).toUpperCase()}</Text>
       </View>
     );
   }
-
-  return <Image source={{ uri: source }} style={[styles.image, tall ? styles.imageTall : null]} resizeMode="cover" />;
+  return <Image source={{ uri: source }} style={styles.image} resizeMode="cover" />;
 }
 
-function Pill({ icon, label, tone }: { icon?: FeatherIconName; label: string; tone?: "accent" | "muted" }) {
+function Pill({ icon, label, tone = "default" }: { icon: FeatherIconName; label: string; tone?: "default" | "accent" | "success" }) {
   const { colors, styles } = useAppTheme();
-  const iconColor = tone === "accent" ? colors.accent : colors.muted;
-
   return (
-    <View style={[styles.pill, tone === "accent" ? styles.pillAccent : null]}>
-      {icon ? <AppIcon name={icon} size={14} color={iconColor} /> : null}
-      <Text style={[styles.pillText, tone === "accent" ? styles.pillTextAccent : null]}>{label}</Text>
+    <View style={[styles.pill, tone === "accent" ? styles.pillAccent : null, tone === "success" ? styles.pillSuccess : null]}>
+      <AppIcon name={icon} size={13} color={tone === "default" ? colors.mutedStrong : colors.accent} />
+      <Text style={[styles.pillText, tone !== "default" ? styles.pillTextAccent : null]}>{label}</Text>
     </View>
   );
 }
 
 function LoadingPanel({ label }: { label: string }) {
   const { colors, styles } = useAppTheme();
-
   return (
     <View style={styles.statePanel}>
       <ActivityIndicator color={colors.accent} />
@@ -1097,15 +228,505 @@ function LoadingPanel({ label }: { label: string }) {
 
 function ErrorPanel({ message, onRetry }: { message: string; onRetry: () => void }) {
   const { styles } = useAppTheme();
-
   return (
     <View style={styles.statePanel}>
       <Text style={styles.errorTitle}>Bloxodes did not respond</Text>
       <Text style={styles.mutedText}>{message}</Text>
-      <TouchableOpacity style={styles.retryButton} onPress={onRetry}>
+      <TouchableOpacity style={styles.retryButton} onPress={onRetry} activeOpacity={0.82}>
         <Text style={styles.retryButtonText}>Try again</Text>
       </TouchableOpacity>
     </View>
+  );
+}
+
+function Shell({
+  children,
+  currentScreen,
+  onNavigate,
+  onSignIn,
+  userId
+}: {
+  children: React.ReactNode;
+  currentScreen: Screen;
+  onNavigate: (screen: Screen) => void;
+  onSignIn: () => void;
+  userId: string | null;
+}) {
+  const { colors, styles, statusBarStyle, toggleTheme, isDark } = useAppTheme();
+  const { height } = useWindowDimensions();
+  return (
+    <SafeAreaView style={[styles.safeArea, { minHeight: height }]}>
+      <StatusBar style={statusBarStyle} />
+      <View style={styles.appFrame}>
+        <View style={styles.topBar}>
+          <AppLogo />
+          <View style={styles.topBarActions}>
+            <TouchableOpacity style={styles.iconButton} onPress={toggleTheme} activeOpacity={0.82}>
+              <AppIcon name={isDark ? "sun" : "moon"} color={colors.foreground} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.accountButton} onPress={() => (userId ? onNavigate({ name: "account" }) : onSignIn())} activeOpacity={0.82}>
+              <AppIcon name={userId ? "user-check" : "user"} color={userId ? colors.accent : colors.foreground} size={16} />
+              <Text style={styles.accountButtonText}>{userId ? "Account" : "Sign in"}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.contentFrame}>{children}</View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+function CodesIndexScreen({
+  error,
+  games,
+  loading,
+  onOpenGame,
+  onPageChange,
+  onRefresh,
+  onSearch,
+  page,
+  query,
+  refreshing,
+  total,
+  totalPages
+}: {
+  error: string | null;
+  games: CodesIndexItem[];
+  loading: boolean;
+  onOpenGame: (slug: string) => void;
+  onPageChange: (page: number) => void;
+  onRefresh: () => void;
+  onSearch: (query: string) => void;
+  page: number;
+  query: string;
+  refreshing: boolean;
+  total: number;
+  totalPages: number;
+}) {
+  const { colors, styles } = useAppTheme();
+  const { width } = useWindowDimensions();
+  const [searchText, setSearchText] = useState(query);
+  const columns = width >= WEB_BREAKPOINT_LG ? 4 : width >= WEB_BREAKPOINT_MD ? 3 : 1;
+  const cardGap = 16;
+  const contentWidth = Math.min(width - spacing.lg * 2, CONTENT_MAX_WIDTH);
+  const cardWidth = (contentWidth - cardGap * (columns - 1)) / columns;
+  const refreshedLabel = formatRefreshedLabel(games[0]?.contentUpdatedAt ?? games[0]?.latestCodeFirstSeenAt ?? null);
+
+  useEffect(() => {
+    setSearchText(query);
+  }, [query]);
+
+  return (
+    <ScrollView
+      contentContainerStyle={styles.content}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.accent} />}
+    >
+      <View style={styles.hero}>
+        <Text style={styles.heroEyebrow}>Roblox Codes Hub</Text>
+        <Text style={styles.pageTitle}>Find active Roblox codes and copy them fast.</Text>
+        <Text style={styles.pageDescription}>
+          A focused Bloxodes app for browsing current game code pages with the same database-first feel as the website.
+        </Text>
+        <View style={styles.statsRow}>
+          <Pill icon="key" label={`${total || games.length} games tracked`} tone="accent" />
+          {refreshedLabel ? <Pill icon="clock" label={`Updated ${refreshedLabel}`} /> : null}
+          {query ? <Pill icon="search" label={`Search: ${query}`} /> : null}
+        </View>
+      </View>
+
+      <View style={styles.searchPanel}>
+        <View style={styles.searchInputWrap}>
+          <AppIcon name="search" color={colors.muted} size={16} />
+          <TextInput
+            value={searchText}
+            onChangeText={setSearchText}
+            onSubmitEditing={() => onSearch(searchText)}
+            placeholder="Search games"
+            placeholderTextColor={colors.muted}
+            style={styles.searchInput}
+            inputMode="search"
+          />
+        </View>
+        <TouchableOpacity style={styles.primaryButton} onPress={() => onSearch(searchText)} activeOpacity={0.82}>
+          <Text style={styles.primaryButtonText}>Search</Text>
+        </TouchableOpacity>
+        {query ? (
+          <TouchableOpacity style={styles.secondaryButton} onPress={() => onSearch("")} activeOpacity={0.82}>
+            <Text style={styles.secondaryButtonText}>Clear</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+
+      {error ? <ErrorPanel message={error} onRetry={onRefresh} /> : null}
+      {loading && !games.length ? <LoadingPanel label="Loading code pages" /> : null}
+
+      {games.length ? (
+        <View style={styles.indexMetaRow}>
+          <Text style={styles.indexMetaText}>Showing {games.length} of {total} games</Text>
+          <Text style={styles.indexMetaText}>Page {page} of {totalPages}</Text>
+        </View>
+      ) : null}
+
+      <View style={styles.grid}>
+        {games.map((game) => (
+          <TouchableOpacity key={game.id} style={[styles.gameCard, { width: cardWidth }]} onPress={() => onOpenGame(game.slug)} activeOpacity={0.86}>
+            <View style={styles.gameImageWrap}>
+              <ImageSlot source={game.coverImage} label={game.name} />
+              <View style={styles.imageFade} />
+            </View>
+            <View style={styles.gameCardBody}>
+              {game.genre ? <Text style={styles.cardEyebrow} numberOfLines={1}>{game.genre}</Text> : null}
+              <Text style={styles.gameTitle} numberOfLines={2}>{game.name} Codes</Text>
+              <View style={styles.gameMetaRow}>
+                <View style={styles.gameMetaItem}>
+                  <View style={styles.activeDot} />
+                  <Text style={styles.gameMetaText}>{game.activeCount} active</Text>
+                </View>
+                <View style={styles.gameMetaItem}>
+                  <AppIcon name="clock" color={colors.mutedStrong} size={12} />
+                  <Text style={styles.gameMetaText}>{formatUpdatedLabel(game.contentUpdatedAt)}</Text>
+                </View>
+              </View>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {games.length && totalPages > 1 ? (
+        <Pager page={page} totalPages={totalPages} loading={loading} onPageChange={onPageChange} />
+      ) : null}
+    </ScrollView>
+  );
+}
+
+function Pager({
+  loading,
+  onPageChange,
+  page,
+  totalPages
+}: {
+  loading: boolean;
+  onPageChange: (page: number) => void;
+  page: number;
+  totalPages: number;
+}) {
+  const { styles } = useAppTheme();
+  return (
+    <View style={styles.pager}>
+      <TouchableOpacity
+        style={[styles.pagerButton, page <= 1 ? styles.pagerButtonDisabled : null]}
+        disabled={page <= 1 || loading}
+        onPress={() => onPageChange(Math.max(1, page - 1))}
+        activeOpacity={0.82}
+      >
+        <Text style={styles.pagerButtonText}>Previous</Text>
+      </TouchableOpacity>
+      <Text style={styles.pagerMeta}>Page {page} of {totalPages}</Text>
+      <TouchableOpacity
+        style={[styles.pagerButton, page >= totalPages ? styles.pagerButtonDisabled : null]}
+        disabled={page >= totalPages || loading}
+        onPress={() => onPageChange(Math.min(totalPages, page + 1))}
+        activeOpacity={0.82}
+      >
+        <Text style={styles.pagerButtonText}>Next</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function CodeDetailScreen({
+  detail,
+  error,
+  loading,
+  onBack,
+  onRetry,
+  sessionUserId
+}: {
+  detail: CodeDetailResponse | null;
+  error: string | null;
+  loading: boolean;
+  onBack: () => void;
+  onRetry: () => void;
+  sessionUserId: string | null;
+}) {
+  const { colors, styles } = useAppTheme();
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
+  const [progressReady, setProgressReady] = useState(false);
+  const [, setSyncState] = useState<"local" | "syncing" | "synced" | "failed">("local");
+  const [usedCodes, setUsedCodes] = useState<Set<string>>(() => new Set());
+
+  const game = detail?.game ?? null;
+
+  useEffect(() => {
+    if (!game) return;
+    const currentGame = game;
+    let cancelled = false;
+    async function loadProgress() {
+      setProgressReady(false);
+      setSyncState(sessionUserId ? "syncing" : "local");
+      const local = readLocalProgress(currentGame.slug, currentGame.name);
+      if (!sessionUserId) {
+        if (!cancelled) {
+          setUsedCodes(new Set(local));
+          setProgressReady(true);
+          setSyncState("local");
+        }
+        return;
+      }
+      const account = await fetchCodeProgress(currentGame.slug);
+      if (cancelled) return;
+      const merged = Array.from(new Set([...account.usedCodes, ...local]));
+      setUsedCodes(new Set(merged));
+      writeLocalProgress(currentGame.slug, currentGame.name, merged);
+      setProgressReady(true);
+      setSyncState("synced");
+    }
+    void loadProgress();
+    return () => {
+      cancelled = true;
+    };
+  }, [game?.slug, game?.name, sessionUserId]);
+
+  useEffect(() => {
+    if (!game || !progressReady) return;
+    const serialized = Array.from(usedCodes);
+    writeLocalProgress(game.slug, game.name, serialized);
+    if (!sessionUserId) {
+      setSyncState("local");
+      return;
+    }
+    setSyncState("syncing");
+    const handle = setTimeout(() => {
+      void saveCodeProgress(game.slug, serialized).then((ok) => setSyncState(ok ? "synced" : "failed"));
+    }, 300);
+    return () => clearTimeout(handle);
+  }, [game?.slug, game?.name, progressReady, sessionUserId, usedCodes]);
+
+  async function copyCode(code: string) {
+    await Clipboard.setStringAsync(code);
+    setCopiedCode(code);
+    markUsed(code);
+    setTimeout(() => setCopiedCode(null), 1600);
+  }
+
+  function markUsed(code: string) {
+    setUsedCodes((prev) => {
+      if (prev.has(code)) return prev;
+      const next = new Set(prev);
+      next.add(code);
+      return next;
+    });
+  }
+
+  function markUnused(code: string) {
+    setUsedCodes((prev) => {
+      if (!prev.has(code)) return prev;
+      const next = new Set(prev);
+      next.delete(code);
+      return next;
+    });
+  }
+
+  const activeCodes = detail?.activeCodes ?? [];
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <TouchableOpacity style={styles.backButton} onPress={onBack} activeOpacity={0.82}>
+        <AppIcon name="chevron-left" color={colors.foreground} size={16} />
+        <Text style={styles.backButtonText}>All codes</Text>
+      </TouchableOpacity>
+
+      {loading ? <LoadingPanel label="Loading codes" /> : null}
+      {error ? <ErrorPanel message={error} onRetry={onRetry} /> : null}
+
+      {detail ? (
+        <>
+          <View style={styles.detailHero}>
+            <ImageSlot source={detail.game.coverImage} label={detail.game.name} />
+            <View style={styles.heroScrim} />
+            <View style={styles.detailHeroText}>
+              <Text style={styles.heroEyebrow}>Bloxodes Codes</Text>
+              <Text style={styles.detailTitle}>{detail.game.name} Codes ({monthYear()})</Text>
+              <View style={styles.detailHeroMeta}>
+                <Text style={styles.heroBadge}>{detail.activeCodes.length} active</Text>
+                <Text style={styles.heroMeta}>Updated {formatDate(detail.game.contentUpdatedAt)}</Text>
+              </View>
+            </View>
+          </View>
+
+          <Text style={styles.detailIntro}>
+            {stripMarkdown(detail.game.description) ?? `Track active ${detail.game.name} codes and mark the ones you have already used.`}
+          </Text>
+
+          <CodesPanel
+            codes={activeCodes}
+            copiedCode={copiedCode}
+            emptyBody="We have not confirmed any working codes at the moment. Check back soon for the next drop."
+            emptyTitle="No active codes right now"
+            onCopy={copyCode}
+            onMarkUnused={markUnused}
+            title={`Active ${detail.game.name} Codes`}
+            usedCodes={usedCodes}
+          />
+
+          <ExpiredCodesPanel codes={detail.expiredCodes} gameName={detail.game.name} />
+
+          {detail.game.robloxUrl ? (
+            <TouchableOpacity style={styles.robloxButton} onPress={() => Linking.openURL(detail.game.robloxUrl!)} activeOpacity={0.82}>
+              <AppIcon name="external-link" color={colors.accent} size={15} />
+              <Text style={styles.robloxButtonText}>Open Roblox game</Text>
+            </TouchableOpacity>
+          ) : null}
+        </>
+      ) : null}
+    </ScrollView>
+  );
+}
+
+function CodesPanel({
+  codes,
+  copiedCode,
+  emptyBody,
+  emptyTitle,
+  onCopy,
+  onMarkUnused,
+  title,
+  usedCodes
+}: {
+  codes: CodeItem[];
+  copiedCode: string | null;
+  emptyBody: string;
+  emptyTitle: string;
+  onCopy: (code: string) => void;
+  onMarkUnused: (code: string) => void;
+  title: string;
+  usedCodes: Set<string>;
+}) {
+  const { colors, styles } = useAppTheme();
+  return (
+    <View style={styles.codesPanel}>
+      <View style={styles.panelHeader}>
+        <View>
+          <Text style={styles.panelTitle}>{title}</Text>
+          <Text style={styles.panelSubtitle}>Checked and verified for the current update.</Text>
+        </View>
+        <Text style={styles.countBadge}>{codes.length} active</Text>
+      </View>
+
+      {codes.length === 0 ? (
+        <View style={styles.emptyState}>
+          <Text style={styles.emptyTitle}>{emptyTitle}</Text>
+          <Text style={styles.mutedText}>{emptyBody}</Text>
+        </View>
+      ) : (
+        <View style={styles.codeList}>
+          {codes.map((code, index) => {
+            const used = usedCodes.has(code.code);
+            const copied = copiedCode === code.code;
+            return (
+              <View key={code.id} style={[styles.codeRow, index > 0 ? styles.rowBorder : null, used ? styles.codeRowUsed : null]}>
+                <View style={styles.codeNumber}>
+                  <Text style={styles.codeNumberText}>{index + 1}</Text>
+                </View>
+                <View style={styles.codeBody}>
+                  <View style={styles.codeLine}>
+                    <Text style={[styles.codeText, used ? styles.codeTextUsed : null]}>{code.code}</Text>
+                    {code.isNew ? <Text style={styles.miniBadge}>New</Text> : null}
+                    {code.levelRequirement != null ? <Text style={styles.miniBadge}>Level {code.levelRequirement}+</Text> : null}
+                  </View>
+                  <Text style={[styles.mutedText, used ? styles.usedMutedText : null]} numberOfLines={2}>{rewardText(code.rewardText)}</Text>
+                  <Text style={styles.addedText}>Added {formatDate(code.firstSeenAt)}</Text>
+                </View>
+                <View style={styles.codeActions}>
+                  {used ? (
+                    <TouchableOpacity
+                      accessibilityLabel={`Uncheck code ${code.code}`}
+                      style={styles.uncheckButton}
+                      onPress={() => onMarkUnused(code.code)}
+                      activeOpacity={0.82}
+                    >
+                      <AppIcon name="rotate-ccw" color={colors.mutedStrong} size={14} />
+                    </TouchableOpacity>
+                  ) : null}
+                  <TouchableOpacity style={[styles.copyButton, copied ? styles.copyButtonDone : null]} onPress={() => onCopy(code.code)} activeOpacity={0.82}>
+                    <AppIcon name={copied ? "check" : "copy"} color={copied ? colors.white : colors.accent} size={14} />
+                    <Text style={[styles.copyButtonText, copied ? styles.copyButtonDoneText : null]}>{copied ? "Copied" : "Copy"}</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            );
+          })}
+        </View>
+      )}
+    </View>
+  );
+}
+
+function ExpiredCodesPanel({ codes, gameName }: { codes: CodeItem[]; gameName: string }) {
+  const { styles } = useAppTheme();
+  return (
+    <View style={styles.codesPanel}>
+      <View style={styles.panelHeader}>
+        <View>
+          <Text style={styles.panelTitle}>Expired {gameName} Codes</Text>
+          <Text style={styles.panelSubtitle}>These no longer work, but they help avoid retrying old codes.</Text>
+        </View>
+        <Text style={styles.outlineBadge}>{codes.length} expired</Text>
+      </View>
+      {codes.length ? (
+        <View style={styles.expiredChipList}>
+          {codes.slice(0, 80).map((code) => (
+            <View key={code.id} style={styles.expiredChip}>
+              <Text style={styles.expiredChipText}>{code.code}</Text>
+            </View>
+          ))}
+        </View>
+      ) : (
+        <View style={styles.emptyState}>
+          <Text style={styles.mutedText}>No expired codes tracked yet.</Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+function AccountScreen({
+  onRefreshSession,
+  onSignIn,
+  sessionLoading,
+  userId
+}: {
+  onRefreshSession: () => void;
+  onSignIn: () => void;
+  sessionLoading: boolean;
+  userId: string | null;
+}) {
+  const { colors, styles } = useAppTheme();
+  return (
+    <ScrollView contentContainerStyle={styles.content}>
+      <View style={styles.hero}>
+        <Text style={styles.heroEyebrow}>Account Sync</Text>
+        <Text style={styles.pageTitle}>Keep copied codes synced with Bloxodes.</Text>
+        <Text style={styles.pageDescription}>
+          Used-code progress works locally first. Sign in to sync checked codes with your Bloxodes web account where cookies/session are available.
+        </Text>
+      </View>
+      <View style={styles.accountCard}>
+        <View style={styles.accountIcon}>
+          <AppIcon name={userId ? "user-check" : "user"} color={colors.accent} size={24} />
+        </View>
+        <Text style={styles.accountTitle}>{userId ? "Signed in" : "Not signed in"}</Text>
+        <Text style={styles.mutedText}>
+          {userId
+            ? "Your checked codes will be merged with local progress and saved to your account."
+            : "You can still mark used codes on this device. Sign in when you want sync across web and app."}
+        </Text>
+        <View style={styles.accountActions}>
+          <TouchableOpacity style={styles.primaryButton} onPress={userId ? onRefreshSession : onSignIn} activeOpacity={0.82}>
+            <Text style={styles.primaryButtonText}>{sessionLoading ? "Checking" : userId ? "Refresh session" : "Sign in"}</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -1123,57 +744,43 @@ export default function App() {
       toggleTheme: () => setThemeMode(isDark ? "light" : "dark")
     };
   }, [isDark]);
+
   const [screen, setScreen] = useState<Screen>({ name: "codes" });
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const [games, setGames] = useState<CodesIndexItem[]>([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
+  const [query, setQuery] = useState("");
   const [indexLoading, setIndexLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
+  const [indexRefreshing, setIndexRefreshing] = useState(false);
   const [indexError, setIndexError] = useState<string | null>(null);
   const [detail, setDetail] = useState<CodeDetailResponse | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
   const [detailError, setDetailError] = useState<string | null>(null);
-  const [contentDetail, setContentDetail] = useState<MobileContentDetailResponse | null>(null);
-  const [contentDetailError, setContentDetailError] = useState<string | null>(null);
-  const [contentDetailLoading, setContentDetailLoading] = useState(false);
-  const [contentSections, setContentSections] = useState<Record<MobileContentKind, ContentState>>({
-    articles: { data: null, error: null, loading: false, refreshing: false },
-    catalog: { data: null, error: null, loading: false, refreshing: false },
-    checklists: { data: null, error: null, loading: false, refreshing: false },
-    events: { data: null, error: null, loading: false, refreshing: false },
-    lists: { data: null, error: null, loading: false, refreshing: false },
-    quizzes: { data: null, error: null, loading: false, refreshing: false },
-    tools: { data: null, error: null, loading: false, refreshing: false },
-    wiki: { data: null, error: null, loading: false, refreshing: false }
-  });
+  const [sessionUserId, setSessionUserId] = useState<string | null>(null);
+  const [sessionLoading, setSessionLoading] = useState(false);
 
-  const currentSlug = screen.name === "codeDetail" ? screen.slug : undefined;
-  const currentDetailKind = screen.name === "contentDetail" ? screen.kind : null;
-  const currentDetailSlug = screen.name === "contentDetail" ? screen.slug : undefined;
-  const currentContentKind = isMobileContentScreen(screen.name) ? screen.name : null;
-
-  async function loadIndex(nextPage = 1, replace = true) {
+  async function loadIndex(nextPage = 1, nextQuery = query) {
     setIndexLoading(true);
     setIndexError(null);
     try {
-      const response = await fetchCodesIndex(nextPage);
-      setGames((prev) => (replace ? response.games : [...prev, ...response.games]));
+      const response = await fetchCodesIndex(nextPage, PAGE_SIZE, nextQuery);
+      setGames(response.games);
       setPage(response.page);
       setTotal(response.total);
       setTotalPages(response.totalPages);
+      setQuery(nextQuery);
     } catch (error) {
       setIndexError(error instanceof Error ? error.message : "Failed to load codes");
     } finally {
       setIndexLoading(false);
-      setRefreshing(false);
+      setIndexRefreshing(false);
     }
   }
 
   async function refreshIndex() {
-    setRefreshing(true);
-    await loadIndex(1, true);
+    setIndexRefreshing(true);
+    await loadIndex(1, query);
   }
 
   async function loadDetail(slug: string) {
@@ -1190,221 +797,69 @@ export default function App() {
     }
   }
 
-  async function loadContentDetail(kind: MobileContentKind, slug: string) {
-    setContentDetail(null);
-    setContentDetailLoading(true);
-    setContentDetailError(null);
+  async function refreshSession() {
+    setSessionLoading(true);
     try {
-      const response = await fetchContentDetail(kind, slug);
-      setContentDetail(response);
-    } catch (error) {
-      setContentDetailError(error instanceof Error ? error.message : "Failed to load content page");
+      const session = await fetchCodeSession();
+      setSessionUserId(session.userId);
     } finally {
-      setContentDetailLoading(false);
+      setSessionLoading(false);
     }
   }
 
-  async function loadContent(kind: MobileContentKind, nextPage = 1, replace = true) {
-    setContentSections((prev) => ({
-      ...prev,
-      [kind]: {
-        ...prev[kind],
-        error: null,
-        loading: true
-      }
-    }));
-
-    try {
-      const response = await fetchContentIndex(kind, nextPage);
-      setContentSections((prev) => ({
-        ...prev,
-        [kind]: {
-          data: replace || !prev[kind].data
-            ? response
-            : {
-                ...response,
-                items: [...prev[kind].data.items, ...response.items]
-              },
-          error: null,
-          loading: false,
-          refreshing: false
-        }
-      }));
-    } catch (error) {
-      setContentSections((prev) => ({
-        ...prev,
-        [kind]: {
-          ...prev[kind],
-          error: error instanceof Error ? error.message : `Failed to load ${kind}`,
-          loading: false,
-          refreshing: false
-        }
-      }));
-    }
-  }
-
-  async function refreshContent(kind: MobileContentKind) {
-    setContentSections((prev) => ({
-      ...prev,
-      [kind]: {
-        ...prev[kind],
-        refreshing: true
-      }
-    }));
-    await loadContent(kind, 1, true);
-  }
-
-  function openWebUrl(url: string) {
-    void Linking.openURL(buildWebUrl(url));
-  }
-
-  function handleSearchResult(item: SearchItem) {
-    let pathname = item.url;
-    try {
-      pathname = new URL(buildWebUrl(item.url)).pathname;
-    } catch {
-      pathname = item.url;
-    }
-
-    const codeMatch = pathname.match(/^\/codes\/([^/]+)\/?$/);
-    if (item.type === "codes" && codeMatch?.[1]) {
-      setScreen({ name: "codeDetail", slug: decodeURIComponent(codeMatch[1]) });
-      return;
-    }
-
-    const kind = getKindFromSearchType(item.type);
-    const slug = getSlugFromUrl(item.url);
-    if (kind && slug) {
-      setScreen({ name: "contentDetail", kind, slug });
-      return;
-    }
-
-    openWebUrl(item.url);
-  }
-
-  function handleSignIn() {
-    openWebUrl(`/auth/roblox/login?next=${encodeURIComponent("/account")}`);
+  function signIn() {
+    void Linking.openURL(buildWebUrl(`/auth/roblox/login?next=${encodeURIComponent("/codes")}`));
   }
 
   useEffect(() => {
-    void loadIndex(1, true);
+    void loadIndex(1, "");
+    void refreshSession();
   }, []);
 
   useEffect(() => {
-    if (currentSlug) {
-      void loadDetail(currentSlug);
+    if (screen.name === "detail") {
+      void loadDetail(screen.slug);
     }
-  }, [currentSlug]);
+  }, [screen]);
 
-  useEffect(() => {
-    if (currentDetailKind && currentDetailSlug) {
-      void loadContentDetail(currentDetailKind, currentDetailSlug);
-    }
-  }, [currentDetailKind, currentDetailSlug]);
-
-  useEffect(() => {
-    if (currentContentKind && !contentSections[currentContentKind].data && !contentSections[currentContentKind].loading) {
-      void loadContent(currentContentKind, 1, true);
-    }
-  }, [currentContentKind, contentSections]);
-
-  const content = useMemo(() => {
-    if (screen.name === "codeDetail") {
-      return (
-        <CodeDetailScreen
-          detail={detail}
-          loading={detailLoading}
-          error={detailError}
-          onBack={() => setScreen({ name: "codes" })}
-          onRetry={() => currentSlug && void loadDetail(currentSlug)}
-        />
-      );
-    }
-
-    if (screen.name === "contentDetail" && screen.kind && screen.slug) {
-      return (
-        <ContentDetailScreen
-          detail={contentDetail}
-          error={contentDetailError}
-          kind={screen.kind}
-          loading={contentDetailLoading}
-          onBack={() => setScreen({ name: screen.kind! })}
-          onRetry={() => screen.kind && screen.slug && void loadContentDetail(screen.kind, screen.slug)}
-        />
-      );
-    }
-
-    if (isMobileContentScreen(screen.name)) {
-      const section = contentSections[screen.name];
-      const nextPage = (section.data?.page ?? 0) + 1;
-      return (
-        <ContentIndexScreen
-          data={section.data}
-          error={section.error}
-          kind={screen.name}
-          loading={section.loading}
-          refreshing={section.refreshing}
-          onRefresh={() => void refreshContent(screen.name as MobileContentKind)}
-          onLoadMore={() => void loadContent(screen.name as MobileContentKind, nextPage, false)}
-          onSelectItem={(item) => {
-            const slug = getSlugFromUrl(item.url);
-            if (slug) {
-              setScreen({ name: "contentDetail", kind: screen.name as MobileContentKind, slug });
-            } else {
-              openWebUrl(item.url);
-            }
-          }}
-        />
-      );
-    }
-
-    return (
-      <CodesIndexScreen
-        games={games}
-        loading={indexLoading}
-        refreshing={refreshing}
-        error={indexError}
-        total={total}
-        page={page}
-        totalPages={totalPages}
-        onRefresh={() => void refreshIndex()}
-        onLoadMore={() => void loadIndex(page + 1, false)}
-        onSelectGame={(slug) => setScreen({ name: "codeDetail", slug })}
-      />
-    );
-  }, [
-    contentDetail,
-    contentDetailError,
-    contentDetailLoading,
-    contentSections,
-    currentSlug,
-    detail,
-    detailError,
-    detailLoading,
-    games,
-    indexError,
-    indexLoading,
-    page,
-    refreshing,
-    screen.kind,
-    screen.name,
-    screen.slug,
-    total,
-    totalPages
-  ]);
+  const content = screen.name === "detail" ? (
+    <CodeDetailScreen
+      detail={detail}
+      error={detailError}
+      loading={detailLoading}
+      onBack={() => setScreen({ name: "codes" })}
+      onRetry={() => screen.name === "detail" && void loadDetail(screen.slug)}
+      sessionUserId={sessionUserId}
+    />
+  ) : screen.name === "account" ? (
+    <AccountScreen
+      onRefreshSession={() => void refreshSession()}
+      onSignIn={signIn}
+      sessionLoading={sessionLoading}
+      userId={sessionUserId}
+    />
+  ) : (
+    <CodesIndexScreen
+      error={indexError}
+      games={games}
+      loading={indexLoading}
+      onOpenGame={(slug) => setScreen({ name: "detail", slug })}
+      onPageChange={(pageNumber) => void loadIndex(pageNumber, query)}
+      onRefresh={() => void refreshIndex()}
+      onSearch={(nextQuery) => void loadIndex(1, nextQuery.trim())}
+      page={page}
+      query={query}
+      refreshing={indexRefreshing}
+      total={total}
+      totalPages={totalPages}
+    />
+  );
 
   return (
     <ThemeContext.Provider value={theme}>
-      <AppShell
-        currentScreen={screen}
-        drawerOpen={drawerOpen}
-        onNavigate={setScreen}
-        onSearchResult={handleSearchResult}
-        onSignIn={handleSignIn}
-        setDrawerOpen={setDrawerOpen}
-      >
+      <Shell currentScreen={screen} onNavigate={setScreen} onSignIn={signIn} userId={sessionUserId}>
         {content}
-      </AppShell>
+      </Shell>
     </ThemeContext.Provider>
   );
 }
@@ -1417,825 +872,645 @@ function createAppStyles(colors: ThemeColors) {
     },
     appFrame: {
       flex: 1,
-      backgroundColor: colors.background,
-      flexDirection: "row"
+      backgroundColor: colors.background
     },
-  sidebar: {
-    width: SIDEBAR_WIDTH,
-    backgroundColor: colors.sidebar,
-    borderRightWidth: 1,
-    borderRightColor: colors.border,
-    paddingHorizontal: 12,
-    paddingBottom: spacing.md
-  },
-  sidebarCompact: {
-    width: 300,
-    height: "100%"
-  },
-  sidebarHeader: {
-    paddingBottom: spacing.sm,
-    paddingTop: 20
-  },
-  logoCenter: {
-    minHeight: 48,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  logoSmall: {
-    width: 104,
-    height: 35
-  },
-  logoLarge: {
-    width: 144,
-    height: 48
-  },
-  closeButton: {
-    position: "absolute",
-    right: 0,
-    top: 24,
-    width: 32,
-    height: 32,
-    borderRadius: radii.md,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  searchBox: {
-    height: 32,
-    marginTop: spacing.lg,
-    borderRadius: radii.md,
-    backgroundColor: colors.surfaceMuted,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: spacing.sm
-  },
-  searchInput: {
-    flex: 1,
-    color: colors.foreground,
-    fontSize: 13,
-    fontWeight: "500",
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 0
-  },
-  searchPlaceholder: {
-    color: colors.muted
-  },
-  searchResultsPanel: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.md,
-    backgroundColor: colors.surface,
-    gap: 2,
-    marginTop: spacing.sm,
-    overflow: "hidden",
-    padding: spacing.xs
-  },
-  searchStateText: {
-    color: colors.muted,
-    fontSize: 12,
-    fontWeight: "600",
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.sm
-  },
-  searchResultItem: {
-    borderRadius: radii.sm,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.sm,
-    minHeight: 44,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs
-  },
-  searchResultIcon: {
-    width: 22,
-    alignItems: "center"
-  },
-  searchResultBody: {
-    flex: 1,
-    minWidth: 0
-  },
-  searchResultTitle: {
-    color: colors.foreground,
-    fontSize: 13,
-    fontWeight: "700"
-  },
-  searchResultMeta: {
-    color: colors.muted,
-    fontSize: 11,
-    fontWeight: "600",
-    marginTop: 2
-  },
-  navList: {
-    gap: 2,
-    paddingHorizontal: spacing.xs,
-    paddingTop: spacing.sm
-  },
-  navGroupLabel: {
-    color: colors.muted,
-    fontSize: 11,
-    fontWeight: "600",
-    marginBottom: spacing.xs,
-    paddingHorizontal: spacing.sm,
-    textTransform: "uppercase"
-  },
-  navItem: {
-    minHeight: 32,
-    borderRadius: radii.md,
-    paddingHorizontal: spacing.sm,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.sm
-  },
-  navItemActive: {
-    backgroundColor: colors.surfaceMuted
-  },
-  navItemDisabled: {
-    opacity: 0.62
-  },
-  navIcon: {
-    width: 16,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  navItemText: {
-    color: colors.mutedStrong,
-    flex: 1,
-    fontSize: 13,
-    fontWeight: "600"
-  },
-  navItemTextActive: {
-    color: colors.foreground
-  },
-  sidebarSeparator: {
-    height: 1,
-    backgroundColor: colors.border,
-    marginHorizontal: spacing.sm,
-    marginVertical: spacing.sm
-  },
-  themeRow: {
-    minHeight: 32,
-    borderRadius: radii.md,
-    paddingHorizontal: spacing.sm,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  themeLabel: {
-    color: colors.mutedStrong,
-    fontSize: 13,
-    fontWeight: "600"
-  },
-  themeButton: {
-    width: 24,
-    height: 24,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  themeIcon: {
-    color: colors.foreground,
-    fontSize: 14,
-    lineHeight: 18
-  },
-  mainColumn: {
-    flex: 1
-  },
-  topBar: {
-    height: 65,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-    backgroundColor: colors.background,
-    paddingHorizontal: spacing.lg,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.md
-  },
-  iconButton: {
-    width: 40,
-    height: 40,
-    borderRadius: radii.md,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  hamburgerIcon: {
-    width: 20,
-    gap: 4
-  },
-  hamburgerLine: {
-    height: 2,
-    borderRadius: 999,
-    backgroundColor: colors.foreground
-  },
-  closeIcon: {
-    width: 18,
-    height: 18,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  closeLine: {
-    position: "absolute",
-    width: 16,
-    height: 2,
-    borderRadius: 999,
-    backgroundColor: colors.mutedStrong
-  },
-  closeLineLeft: {
-    transform: [{ rotate: "45deg" }]
-  },
-  closeLineRight: {
-    transform: [{ rotate: "-45deg" }]
-  },
-  searchIcon: {
-    width: 16,
-    height: 16
-  },
-  searchCircle: {
-    width: 11,
-    height: 11,
-    borderRadius: 999,
-    borderWidth: 1.5,
-    borderColor: colors.muted,
-    left: 1,
-    top: 1
-  },
-  searchHandle: {
-    position: "absolute",
-    width: 7,
-    height: 1.5,
-    borderRadius: 999,
-    backgroundColor: colors.muted,
-    bottom: 2,
-    right: 0,
-    transform: [{ rotate: "45deg" }]
-  },
-  drawerOverlay: {
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-    right: 0,
-    top: 0,
-    flexDirection: "row",
-    zIndex: 20
-  },
-  drawerScrim: {
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-    right: 0,
-    top: 0,
-    backgroundColor: colors.scrim
-  },
-  drawerPanel: {
-    height: "100%"
-  },
-  content: {
-    padding: CONTENT_PADDING,
-    gap: 40,
-    paddingBottom: 48,
-    width: "100%",
-    maxWidth: CONTENT_MAX_WIDTH,
-    alignSelf: "center"
-  },
-  headerBlock: {
-    gap: spacing.md,
-    maxWidth: 760
-  },
-  eyebrow: {
-    color: colors.accent,
-    fontSize: 12,
-    fontWeight: "800",
-    textTransform: "uppercase"
-  },
-  pageTitle: {
-    color: colors.foreground,
-    fontSize: 36,
-    lineHeight: 43,
-    fontWeight: "700"
-  },
-  pageDescription: {
-    color: colors.muted,
-    fontSize: 16,
-    lineHeight: 24
-  },
-  statsRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: spacing.sm,
-    marginTop: spacing.xs
-  },
-  pill: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.md,
-    backgroundColor: colors.surface,
-    minHeight: 32,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.sm,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    justifyContent: "center"
-  },
-  pillAccent: {
-    borderColor: colors.accentBorder,
-    backgroundColor: colors.accentSoft
-  },
-  pillText: {
-    color: colors.muted,
-    fontSize: 14,
-    fontWeight: "600"
-  },
-  pillTextAccent: {
-    color: colors.accent
-  },
-  grid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 20
-  },
-  gameCard: {
-    overflow: "hidden",
-    borderRadius: radii.lg,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface
-  },
-  gameCardImageWrap: {
-    position: "relative",
-    overflow: "hidden",
-    backgroundColor: colors.surfaceMuted
-  },
-  imageBottomFade: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 32,
-    backgroundColor: colors.surface
-  },
-  image: {
-    width: "100%",
-    aspectRatio: 16 / 9,
-    backgroundColor: colors.surfaceMuted
-  },
-  imageTall: {
-    height: 210
-  },
-  imageFallback: {
-    width: "100%",
-    aspectRatio: 16 / 9,
-    backgroundColor: colors.surfaceMuted,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  imageFallbackText: {
-    color: colors.muted,
-    fontSize: 40,
-    fontWeight: "800"
-  },
-  gameCardBody: {
-    marginTop: -4,
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.lg,
-    paddingTop: spacing.md,
-    gap: spacing.sm,
-    backgroundColor: colors.surface
-  },
-  gameTitle: {
-    color: colors.foreground,
-    fontSize: 18,
-    lineHeight: 24,
-    fontWeight: "700"
-  },
-  gameMetaRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: spacing.md
-  },
-  gameMetaItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6
-  },
-  activeDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 999,
-    backgroundColor: "#4ade80"
-  },
-  gameMetaText: {
-    color: colors.mutedStrong,
-    fontSize: 12,
-    fontWeight: "500"
-  },
-  contentCardSummary: {
-    color: colors.muted,
-    fontSize: 13,
-    lineHeight: 19
-  },
-  clockIcon: {
-    color: colors.mutedStrong,
-    fontSize: 13,
-    fontWeight: "700"
-  },
-  mutedText: {
-    color: colors.muted,
-    fontSize: 14,
-    lineHeight: 20
-  },
-  detailSectionBody: {
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.lg
-  },
-  detailSectionText: {
-    color: colors.mutedStrong,
-    fontSize: 15,
-    lineHeight: 23
-  },
-  detailItemRow: {
-    flexDirection: "row",
-    gap: spacing.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.md
-  },
-  detailItemImage: {
-    width: 44,
-    height: 44,
-    borderRadius: radii.sm,
-    backgroundColor: colors.surfaceMuted
-  },
-  detailItemTitle: {
-    color: colors.foreground,
-    fontSize: 15,
-    lineHeight: 21,
-    fontWeight: "800"
-  },
-  genreText: {
-    color: colors.accent,
-    fontSize: 12,
-    fontWeight: "700"
-  },
-  loadMoreButton: {
-    alignSelf: "center",
-    borderWidth: 1,
-    borderColor: colors.accentBorder,
-    borderRadius: 999,
-    backgroundColor: colors.accentSoft,
-    paddingHorizontal: spacing.xl,
-    paddingVertical: spacing.md
-  },
-  loadMoreText: {
-    color: colors.accent,
-    fontSize: 14,
-    fontWeight: "800"
-  },
-  backButton: {
-    alignSelf: "flex-start",
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: colors.border,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-    backgroundColor: colors.surface
-  },
-  backButtonText: {
-    color: colors.foreground,
-    fontSize: 13,
-    fontWeight: "700"
-  },
-  detailHeader: {
-    gap: spacing.md
-  },
-  breadcrumbRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.sm
-  },
-  breadcrumbLink: {
-    color: colors.muted,
-    fontSize: 12,
-    fontWeight: "700",
-    textTransform: "uppercase"
-  },
-  breadcrumbDivider: {
-    color: colors.muted,
-    fontSize: 12
-  },
-  breadcrumbCurrent: {
-    color: colors.foreground,
-    flex: 1,
-    fontSize: 12,
-    fontWeight: "700",
-    textTransform: "uppercase"
-  },
-  detailTitle: {
-    color: colors.foreground,
-    fontSize: 38,
-    lineHeight: 46,
-    fontWeight: "800"
-  },
-  updatedLine: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.sm
-  },
-  updatedText: {
-    color: colors.muted,
-    fontSize: 14,
-    lineHeight: 20
-  },
-  updatedStrong: {
-    color: colors.foreground,
-    fontWeight: "700"
-  },
-  detailIntro: {
-    color: colors.muted,
-    fontSize: 16,
-    lineHeight: 25
-  },
-  codesPanel: {
-    overflow: "hidden",
-    borderRadius: radii.md,
-    borderWidth: 1,
-    borderColor: colors.border,
-    backgroundColor: colors.surface
-  },
-  codesPanelMuted: {
-    opacity: 0.92
-  },
-  codesPanelHeader: {
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.lg,
-    flexDirection: "row",
-    gap: spacing.md,
-    alignItems: "flex-start",
-    justifyContent: "space-between"
-  },
-  panelHeading: {
-    flex: 1,
-    gap: spacing.xs
-  },
-  panelTitle: {
-    color: colors.foreground,
-    fontSize: 20,
-    lineHeight: 26,
-    fontWeight: "700"
-  },
-  panelSubtitle: {
-    color: colors.muted,
-    fontSize: 13,
-    lineHeight: 19
-  },
-  countBadge: {
-    overflow: "hidden",
-    borderRadius: radii.sm,
-    backgroundColor: colors.surfaceMuted,
-    color: colors.foreground,
-    fontSize: 12,
-    fontWeight: "700",
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 6
-  },
-  outlineBadge: {
-    overflow: "hidden",
-    borderRadius: radii.sm,
-    borderWidth: 1,
-    borderColor: colors.border,
-    color: colors.foreground,
-    fontSize: 12,
-    fontWeight: "700",
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 6
-  },
-  codesList: {
-    overflow: "hidden",
-    margin: spacing.md,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.sm
-  },
-  codeRow: {
-    gap: spacing.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.md
-  },
-  codeRowBorder: {
-    borderTopWidth: 1,
-    borderTopColor: colors.border
-  },
-  codeIndex: {
-    width: 28,
-    height: 28,
-    borderRadius: radii.sm,
-    backgroundColor: colors.surfaceMuted,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  codeIndexText: {
-    color: colors.muted,
-    fontSize: 12,
-    fontWeight: "700"
-  },
-  codeMain: {
-    flex: 1,
-    minWidth: 0,
-    gap: 6
-  },
-  codeRowMain: {
-    flexDirection: "row",
-    gap: spacing.md,
-    alignItems: "flex-start"
-  },
-  codeLine: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: spacing.xs,
-    alignItems: "center"
-  },
-  codeText: {
-    color: colors.foreground,
-    fontSize: 17,
-    fontWeight: "800",
-    letterSpacing: 1
-  },
-  miniBadge: {
-    overflow: "hidden",
-    borderRadius: radii.sm,
-    backgroundColor: colors.accentSoft,
-    color: colors.accent,
-    fontSize: 10,
-    fontWeight: "800",
-    paddingHorizontal: 6,
-    paddingVertical: 3,
-    textTransform: "uppercase"
-  },
-  addedText: {
-    color: colors.muted,
-    fontSize: 11,
-    fontWeight: "600"
-  },
-  codeActionRow: {
-    paddingLeft: 40,
-    gap: spacing.sm,
-    alignItems: "flex-start"
-  },
-  copyButton: {
-    borderWidth: 1,
-    borderColor: colors.accentBorder,
-    borderRadius: 999,
-    backgroundColor: colors.accentSoft,
-    minHeight: 34,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.sm,
-    justifyContent: "center",
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.sm
-  },
-  copyButtonDone: {
-    backgroundColor: colors.accentDark,
-    borderColor: colors.accentDark
-  },
-  copyButtonText: {
-    color: colors.accent,
-    fontSize: 12,
-    fontWeight: "800"
-  },
-  copyButtonDoneText: {
-    color: colors.white
-  },
-  copyIcon: {
-    width: 14,
-    height: 14
-  },
-  copyBack: {
-    position: "absolute",
-    left: 1,
-    top: 1,
-    width: 9,
-    height: 9,
-    borderRadius: 2,
-    borderWidth: 1.5,
-    borderColor: colors.accent
-  },
-  copyFront: {
-    position: "absolute",
-    bottom: 1,
-    right: 1,
-    width: 9,
-    height: 9,
-    borderRadius: 2,
-    borderWidth: 1.5,
-    borderColor: colors.accent,
-    backgroundColor: colors.accentSoft
-  },
-  checkIcon: {
-    width: 14,
-    height: 14
-  },
-  checkShort: {
-    position: "absolute",
-    left: 2,
-    top: 7,
-    width: 5,
-    height: 2,
-    borderRadius: 999,
-    backgroundColor: colors.white,
-    transform: [{ rotate: "45deg" }]
-  },
-  checkLong: {
-    position: "absolute",
-    left: 5,
-    top: 6,
-    width: 9,
-    height: 2,
-    borderRadius: 999,
-    backgroundColor: colors.white,
-    transform: [{ rotate: "-45deg" }]
-  },
-  emptyState: {
-    backgroundColor: colors.surface,
-    padding: spacing.md,
-    gap: spacing.xs
-  },
-  emptyTitle: {
-    color: colors.foreground,
-    fontSize: 15,
-    fontWeight: "700"
-  },
-  expiredContent: {
-    padding: spacing.md
-  },
-  expiredChipList: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: spacing.sm
-  },
-  expiredChip: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.sm,
-    backgroundColor: colors.surfaceMuted,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs
-  },
-  expiredChipText: {
-    color: colors.muted,
-    fontSize: 12,
-    fontWeight: "600"
-  },
-  externalLinks: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: spacing.md
-  },
-  outlineButton: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 999,
-    backgroundColor: colors.surface,
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md
-  },
-  outlineButtonText: {
-    color: colors.foreground,
-    fontSize: 13,
-    fontWeight: "800"
-  },
-  statePanel: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.md,
-    backgroundColor: colors.surface,
-    padding: spacing.lg,
-    gap: spacing.sm,
-    alignItems: "flex-start"
-  },
-  stateText: {
-    color: colors.muted,
-    fontSize: 14,
-    fontWeight: "600"
-  },
-  errorTitle: {
-    color: colors.foreground,
-    fontSize: 16,
-    fontWeight: "800"
-  },
-  retryButton: {
-    borderWidth: 1,
-    borderColor: colors.accentBorder,
-    borderRadius: 999,
-    backgroundColor: colors.accentSoft,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm
-  },
-  retryButtonText: {
-    color: colors.accent,
-    fontSize: 12,
-    fontWeight: "800"
-  }
+    topBar: {
+      height: 64,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.border,
+      backgroundColor: colors.background,
+      paddingHorizontal: spacing.lg,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: spacing.md
+    },
+    topBarActions: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm
+    },
+    logoSmall: {
+      width: 112,
+      height: 38
+    },
+    logoLarge: {
+      width: 142,
+      height: 48
+    },
+    iconButton: {
+      width: 40,
+      height: 40,
+      borderRadius: radii.md,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: colors.surface
+    },
+    accountButton: {
+      minHeight: 40,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surface,
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+      paddingHorizontal: spacing.md
+    },
+    accountButtonText: {
+      color: colors.foreground,
+      fontSize: 13,
+      fontWeight: "800"
+    },
+    contentFrame: {
+      flex: 1
+    },
+    content: {
+      width: "100%",
+      maxWidth: CONTENT_MAX_WIDTH,
+      alignSelf: "center",
+      gap: spacing.xl,
+      padding: spacing.lg,
+      paddingBottom: spacing.xl
+    },
+    hero: {
+      gap: spacing.md,
+      paddingTop: spacing.sm
+    },
+    heroEyebrow: {
+      color: colors.accent,
+      fontSize: 12,
+      fontWeight: "900",
+      textTransform: "uppercase"
+    },
+    pageTitle: {
+      color: colors.foreground,
+      fontSize: 34,
+      lineHeight: 40,
+      fontWeight: "800"
+    },
+    pageDescription: {
+      color: colors.muted,
+      fontSize: 16,
+      lineHeight: 24
+    },
+    statsRow: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: spacing.sm
+    },
+    pill: {
+      minHeight: 32,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surface,
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm
+    },
+    pillAccent: {
+      borderColor: colors.accentBorder,
+      backgroundColor: colors.accentSoft
+    },
+    pillSuccess: {
+      borderColor: colors.accentBorder,
+      backgroundColor: colors.accentSoft
+    },
+    pillText: {
+      color: colors.mutedStrong,
+      fontSize: 13,
+      fontWeight: "800"
+    },
+    pillTextAccent: {
+      color: colors.accent
+    },
+    searchPanel: {
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surface,
+      padding: spacing.md,
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: spacing.sm,
+      alignItems: "center"
+    },
+    searchInputWrap: {
+      flex: 1,
+      minWidth: 220,
+      minHeight: 42,
+      borderRadius: radii.md,
+      backgroundColor: colors.surfaceMuted,
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+      paddingHorizontal: spacing.md
+    },
+    searchInput: {
+      flex: 1,
+      minWidth: 0,
+      color: colors.foreground,
+      fontSize: 15,
+      fontWeight: "700",
+      paddingVertical: spacing.sm
+    },
+    primaryButton: {
+      minHeight: 42,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.accentBorder,
+      backgroundColor: colors.accentSoft,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: spacing.lg
+    },
+    primaryButtonText: {
+      color: colors.accent,
+      fontSize: 13,
+      fontWeight: "900"
+    },
+    secondaryButton: {
+      minHeight: 42,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surface,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: spacing.lg
+    },
+    secondaryButtonText: {
+      color: colors.foreground,
+      fontSize: 13,
+      fontWeight: "900"
+    },
+    grid: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 16
+    },
+    indexMetaRow: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+      gap: spacing.md
+    },
+    indexMetaText: {
+      color: colors.muted,
+      fontSize: 13,
+      fontWeight: "800"
+    },
+    gameCard: {
+      overflow: "hidden",
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surface
+    },
+    gameImageWrap: {
+      position: "relative",
+      overflow: "hidden",
+      backgroundColor: colors.surfaceMuted
+    },
+    image: {
+      width: "100%",
+      aspectRatio: 16 / 9,
+      backgroundColor: colors.surfaceMuted
+    },
+    imageFallback: {
+      width: "100%",
+      aspectRatio: 16 / 9,
+      backgroundColor: colors.surfaceMuted,
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    imageFallbackText: {
+      color: colors.muted,
+      fontSize: 38,
+      fontWeight: "900"
+    },
+    imageFade: {
+      position: "absolute",
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: 36,
+      backgroundColor: colors.surface
+    },
+    gameCardBody: {
+      marginTop: -4,
+      backgroundColor: colors.surface,
+      gap: spacing.sm,
+      paddingHorizontal: spacing.lg,
+      paddingBottom: spacing.lg,
+      paddingTop: spacing.md
+    },
+    cardEyebrow: {
+      color: colors.muted,
+      fontSize: 11,
+      fontWeight: "900",
+      textTransform: "uppercase"
+    },
+    gameTitle: {
+      color: colors.foreground,
+      fontSize: 18,
+      lineHeight: 24,
+      fontWeight: "800"
+    },
+    gameMetaRow: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: spacing.md
+    },
+    gameMetaItem: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 6
+    },
+    activeDot: {
+      width: 8,
+      height: 8,
+      borderRadius: 999,
+      backgroundColor: "#4ade80"
+    },
+    gameMetaText: {
+      color: colors.mutedStrong,
+      fontSize: 12,
+      fontWeight: "700"
+    },
+    pager: {
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surface,
+      padding: spacing.md,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: spacing.sm
+    },
+    pagerButton: {
+      minHeight: 36,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.background,
+      justifyContent: "center",
+      paddingHorizontal: spacing.md
+    },
+    pagerButtonDisabled: {
+      opacity: 0.45
+    },
+    pagerButtonText: {
+      color: colors.foreground,
+      fontSize: 12,
+      fontWeight: "900"
+    },
+    pagerMeta: {
+      color: colors.mutedStrong,
+      fontSize: 12,
+      fontWeight: "900"
+    },
+    backButton: {
+      alignSelf: "flex-start",
+      minHeight: 36,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surface,
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+      paddingHorizontal: spacing.md
+    },
+    backButtonText: {
+      color: colors.foreground,
+      fontSize: 13,
+      fontWeight: "900"
+    },
+    detailHero: {
+      position: "relative",
+      overflow: "hidden",
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surfaceMuted
+    },
+    heroScrim: {
+      position: "absolute",
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: "78%",
+      backgroundColor: "rgba(0,0,0,0.58)"
+    },
+    detailHeroText: {
+      position: "absolute",
+      left: spacing.lg,
+      right: spacing.lg,
+      bottom: spacing.lg,
+      gap: spacing.sm
+    },
+    detailTitle: {
+      color: colors.white,
+      fontSize: 30,
+      lineHeight: 36,
+      fontWeight: "900"
+    },
+    detailHeroMeta: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: spacing.sm,
+      alignItems: "center"
+    },
+    heroBadge: {
+      overflow: "hidden",
+      borderRadius: radii.sm,
+      backgroundColor: colors.accentSoft,
+      color: colors.white,
+      fontSize: 11,
+      fontWeight: "900",
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 5,
+      textTransform: "uppercase"
+    },
+    heroMeta: {
+      color: "rgba(255,255,255,0.82)",
+      fontSize: 12,
+      fontWeight: "800"
+    },
+    detailIntro: {
+      color: colors.mutedStrong,
+      fontSize: 16,
+      lineHeight: 24
+    },
+    codesPanel: {
+      overflow: "hidden",
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surface
+    },
+    panelHeader: {
+      borderBottomWidth: 1,
+      borderBottomColor: colors.border,
+      flexDirection: "row",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      gap: spacing.md,
+      padding: spacing.lg
+    },
+    panelTitle: {
+      color: colors.foreground,
+      fontSize: 20,
+      lineHeight: 26,
+      fontWeight: "900"
+    },
+    panelSubtitle: {
+      color: colors.muted,
+      fontSize: 13,
+      lineHeight: 19,
+      marginTop: 4
+    },
+    countBadge: {
+      overflow: "hidden",
+      borderRadius: radii.sm,
+      backgroundColor: colors.surfaceMuted,
+      color: colors.foreground,
+      fontSize: 12,
+      fontWeight: "900",
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 6
+    },
+    outlineBadge: {
+      overflow: "hidden",
+      borderRadius: radii.sm,
+      borderWidth: 1,
+      borderColor: colors.border,
+      color: colors.foreground,
+      fontSize: 12,
+      fontWeight: "900",
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 6
+    },
+    codeList: {
+      overflow: "hidden"
+    },
+    codeRow: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      gap: spacing.md,
+      padding: spacing.md
+    },
+    codeRowUsed: {
+      opacity: 0.72
+    },
+    rowBorder: {
+      borderTopWidth: 1,
+      borderTopColor: colors.border
+    },
+    codeNumber: {
+      width: 34,
+      height: 34,
+      borderRadius: radii.md,
+      backgroundColor: colors.surfaceMuted,
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    codeNumberText: {
+      color: colors.mutedStrong,
+      fontSize: 12,
+      fontWeight: "900"
+    },
+    codeBody: {
+      flex: 1,
+      minWidth: 0,
+      gap: 5
+    },
+    codeLine: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: spacing.xs,
+      alignItems: "center"
+    },
+    codeText: {
+      color: colors.foreground,
+      fontSize: 17,
+      fontWeight: "900",
+      letterSpacing: 1
+    },
+    codeTextUsed: {
+      color: colors.muted,
+      textDecorationLine: "line-through"
+    },
+    miniBadge: {
+      overflow: "hidden",
+      borderRadius: radii.sm,
+      backgroundColor: colors.accentSoft,
+      color: colors.accent,
+      fontSize: 10,
+      fontWeight: "900",
+      paddingHorizontal: 6,
+      paddingVertical: 3,
+      textTransform: "uppercase"
+    },
+    mutedText: {
+      color: colors.muted,
+      fontSize: 14,
+      lineHeight: 20
+    },
+    usedMutedText: {
+      textDecorationLine: "line-through"
+    },
+    addedText: {
+      color: colors.muted,
+      fontSize: 11,
+      fontWeight: "700"
+    },
+    codeActions: {
+      alignItems: "flex-end",
+      gap: spacing.sm
+    },
+    uncheckButton: {
+      width: 34,
+      height: 34,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.background,
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    copyButton: {
+      minHeight: 34,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.accentBorder,
+      backgroundColor: colors.accentSoft,
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+      paddingHorizontal: spacing.md
+    },
+    copyButtonDone: {
+      backgroundColor: colors.accent,
+      borderColor: colors.accent
+    },
+    copyButtonText: {
+      color: colors.accent,
+      fontSize: 12,
+      fontWeight: "900"
+    },
+    copyButtonDoneText: {
+      color: colors.white
+    },
+    emptyState: {
+      padding: spacing.lg,
+      gap: spacing.xs
+    },
+    emptyTitle: {
+      color: colors.foreground,
+      fontSize: 16,
+      fontWeight: "900"
+    },
+    expiredChipList: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: spacing.sm,
+      padding: spacing.md
+    },
+    expiredChip: {
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: radii.sm,
+      backgroundColor: colors.surfaceMuted,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: spacing.xs
+    },
+    expiredChipText: {
+      color: colors.muted,
+      fontSize: 12,
+      fontWeight: "700"
+    },
+    robloxButton: {
+      alignSelf: "flex-start",
+      minHeight: 42,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.accentBorder,
+      backgroundColor: colors.accentSoft,
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+      paddingHorizontal: spacing.lg
+    },
+    robloxButtonText: {
+      color: colors.accent,
+      fontSize: 13,
+      fontWeight: "900"
+    },
+    accountCard: {
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surface,
+      gap: spacing.md,
+      padding: spacing.xl
+    },
+    accountIcon: {
+      width: 54,
+      height: 54,
+      borderRadius: radii.md,
+      backgroundColor: colors.accentSoft,
+      alignItems: "center",
+      justifyContent: "center"
+    },
+    accountTitle: {
+      color: colors.foreground,
+      fontSize: 22,
+      fontWeight: "900"
+    },
+    accountActions: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: spacing.md
+    },
+    statePanel: {
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.border,
+      backgroundColor: colors.surface,
+      padding: spacing.lg,
+      gap: spacing.sm,
+      alignItems: "flex-start"
+    },
+    stateText: {
+      color: colors.muted,
+      fontSize: 14,
+      fontWeight: "800"
+    },
+    errorTitle: {
+      color: colors.foreground,
+      fontSize: 16,
+      fontWeight: "900"
+    },
+    retryButton: {
+      minHeight: 36,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.accentBorder,
+      backgroundColor: colors.accentSoft,
+      justifyContent: "center",
+      paddingHorizontal: spacing.md
+    },
+    retryButtonText: {
+      color: colors.accent,
+      fontSize: 12,
+      fontWeight: "900"
+    }
   });
 }

@@ -1,5 +1,5 @@
 import { cleanRewardsText, isCodeNew, sortCodesByFirstSeenDesc } from "@/lib/code-utils";
-import { getGameBySlug, listCodesForGame, listGamesWithActiveCountsPage, type Code, type GameWithCounts } from "@/lib/db";
+import { getGameBySlug, listCodesForGame, listGamesWithActiveCounts, listGamesWithActiveCountsPage, type Code, type GameWithCounts } from "@/lib/db";
 import { SITE_URL } from "@/lib/seo";
 
 const DEFAULT_PAGE_SIZE = 20;
@@ -36,6 +36,18 @@ export type MobileCodesIndexPayload = {
   totalPages: number;
   games: MobileCodesIndexItem[];
 };
+
+function normalizeSearchQuery(value: string | null): string | null {
+  const normalized = value?.trim().toLowerCase();
+  return normalized ? normalized : null;
+}
+
+function gameMatchesQuery(game: GameWithCounts, query: string | null): boolean {
+  if (!query) return true;
+  return [game.name, game.slug, game.genre_l1, game.genre_l2]
+    .filter((value): value is string => typeof value === "string" && value.length > 0)
+    .some((value) => value.toLowerCase().includes(query));
+}
 
 export type MobileCodeDetailPayload = {
   ok: true;
@@ -100,6 +112,24 @@ function mapCode(code: Code, nowMs: number): MobileCodeItem {
 export async function getMobileCodesIndex(searchParams: URLSearchParams): Promise<MobileCodesIndexPayload> {
   const page = normalizePositiveInt(searchParams.get("page"), 1);
   const pageSize = normalizePageSize(searchParams.get("pageSize"));
+  const query = normalizeSearchQuery(searchParams.get("q"));
+
+  if (query) {
+    const allGames = await listGamesWithActiveCounts();
+    const filtered = allGames.filter((game) => gameMatchesQuery(game, query));
+    const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+    const safePage = Math.min(page, totalPages);
+    const offset = (safePage - 1) * pageSize;
+    return {
+      ok: true,
+      page: safePage,
+      pageSize,
+      total: filtered.length,
+      totalPages,
+      games: filtered.slice(offset, offset + pageSize).map(mapIndexGame)
+    };
+  }
+
   const { games, total } = await listGamesWithActiveCountsPage(page, pageSize);
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
