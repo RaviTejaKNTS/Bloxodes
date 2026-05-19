@@ -6,6 +6,7 @@ import {
   buildRobloxMusicCatalogContentHtml,
   CANONICAL,
   loadRobloxMusicIdsPageData,
+  resolveMusicSearch,
   renderRobloxMusicIdsPage
 } from "./page-data";
 
@@ -13,6 +14,10 @@ export const revalidate = 86400;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-music-ids"];
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
+
+type PageProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
@@ -49,9 +54,10 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RobloxMusicIdsPage() {
+export default async function RobloxMusicIdsPage({ searchParams }: PageProps) {
+  const search = await resolveMusicSearch(searchParams);
   const [{ songs, total, totalPages }, catalog] = await Promise.all([
-    loadRobloxMusicIdsPageData(1),
+    loadRobloxMusicIdsPageData(1, search),
     getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
   ]);
   const contentHtml = await buildRobloxMusicCatalogContentHtml(catalog);
@@ -62,6 +68,8 @@ export default async function RobloxMusicIdsPage() {
     totalPages,
     currentPage: 1,
     showHero: true,
-    contentHtml
+    contentHtml,
+    search: search.search,
+    sort: search.sort
   });
 }

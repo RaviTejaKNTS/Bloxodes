@@ -1,7 +1,5 @@
-"use client";
-
-import { useMemo, useState } from "react";
 import Image from "next/image";
+import { ForgeCatalogViewShell } from "./ForgeCatalogViewShell";
 
 const FALLBACK_IMAGE = "/og-image.png";
 
@@ -31,9 +29,8 @@ type ForgeCatalogSection = {
   id: string;
   label: string;
   items: ForgeCatalogItem[];
+  noteHtml?: string | null;
 };
-
-type ViewMode = "cards" | "list";
 
 type ForgeCatalogViewProps = {
   sections: ForgeCatalogSection[];
@@ -367,9 +364,9 @@ function buildStatEntries(item: ForgeCatalogItem, config: ForgeCatalogConfig) {
 }
 
 function getStatToneClass(stat: ForgeCatalogDisplayStat): string {
-  if (stat.tone === "positive") return "border-emerald-400/30 bg-emerald-400/10 text-emerald-100";
-  if (stat.tone === "negative") return "border-rose-400/30 bg-rose-400/10 text-rose-100";
-  return "border-border/70 bg-background/45 text-foreground";
+  if (stat.tone === "positive") return "text-emerald-300";
+  if (stat.tone === "negative") return "text-rose-300";
+  return "text-foreground";
 }
 
 function renderValue(value: string | null) {
@@ -407,7 +404,7 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
       <div className="flex flex-1 flex-col gap-4 p-4">
         <div className="space-y-2">
           {badge ? (
-            <p className="w-fit rounded-full border border-border/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
               {badge}
             </p>
           ) : null}
@@ -431,27 +428,29 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
                       {stat.parts.length.toLocaleString("en-US")}
                     </dd>
                   </div>
-                  <dd className="flex flex-wrap gap-1.5">
-                    {stat.parts.slice(0, 6).map((part, partIndex) => (
-                      <span
-                        key={`${part}-${partIndex}`}
-                        className="rounded-full border border-border/70 bg-background/45 px-2 py-1 text-xs font-medium leading-snug text-foreground"
-                      >
-                        {part}
-                      </span>
-                    ))}
-                    {stat.parts.length > 6 ? (
-                      <span className="rounded-full border border-border/70 bg-background/45 px-2 py-1 text-xs font-medium leading-snug text-muted">
-                        +{stat.parts.length - 6} more
-                      </span>
-                    ) : null}
+                  <dd>
+                    <ul className="space-y-1">
+                      {stat.parts.slice(0, 6).map((part, partIndex) => (
+                        <li
+                          key={`${part}-${partIndex}`}
+                          className="text-sm font-medium leading-snug text-foreground [overflow-wrap:anywhere]"
+                        >
+                          {part}
+                        </li>
+                      ))}
+                      {stat.parts.length > 6 ? (
+                        <li className="text-xs font-medium leading-snug text-muted">
+                          +{stat.parts.length - 6} more
+                        </li>
+                      ) : null}
+                    </ul>
                   </dd>
                 </div>
               ) : (
                 <div key={`${stat.label}-${index}`} className="grid grid-cols-[minmax(5rem,0.42fr)_minmax(0,1fr)] gap-3">
                   <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{stat.label}</dt>
                   <dd
-                    className={`w-fit max-w-full rounded-full border px-2 py-0.5 text-sm font-semibold leading-snug ${getStatToneClass(stat)}`}
+                    className={`min-w-0 text-sm font-semibold leading-snug [overflow-wrap:anywhere] ${getStatToneClass(stat)}`}
                   >
                     {stat.value}
                   </dd>
@@ -501,7 +500,7 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
               const badgeValue = config.badgeKey ? formatBadgeValue(config.badgeKey, item[config.badgeKey]) : null;
 
               return (
-                <tr key={item.id} id={`item-${item.id}`}>
+                <tr key={item.id} id={`item-${item.id}-row`}>
                   {showImages ? (
                     <td className="table-col-compact">
                       <div className="flex items-center justify-center">
@@ -548,11 +547,7 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
 }
 
 export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
-  const [view, setView] = useState<ViewMode>("cards");
-  const hasItems = useMemo(
-    () => sections.some((section) => section.items.length > 0),
-    [sections]
-  );
+  const hasItems = sections.some((section) => section.items.length > 0);
 
   if (!hasItems) {
     return (
@@ -563,34 +558,7 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
   }
 
   return (
-    <div className="catalog-surface space-y-8">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">View</p>
-        <div className="inline-flex rounded-md border border-border/60 bg-surface/70 p-1">
-          {([
-            { id: "cards", label: "Cards" },
-            { id: "list", label: "List" }
-          ] as const).map((option) => {
-            const isActive = view === option.id;
-            return (
-              <button
-                key={option.id}
-                type="button"
-                onClick={() => setView(option.id)}
-                aria-pressed={isActive}
-                className={`rounded-md px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
-                  isActive
-                    ? "bg-accent text-white"
-                    : "text-muted hover:text-foreground"
-                }`}
-              >
-                {option.label}
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
+    <ForgeCatalogViewShell>
       <div className="space-y-12">
         {sections.map((section) => (
           <section key={section.id} id={section.id} className="space-y-5 scroll-mt-28">
@@ -604,18 +572,26 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
               </span>
             </div>
 
-            {view === "cards" ? (
+            {section.noteHtml ? (
+              <div
+                className="max-w-3xl text-sm leading-relaxed text-muted [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:underline [&_p]:m-0 [&_strong]:text-foreground"
+                dangerouslySetInnerHTML={{ __html: section.noteHtml }}
+              />
+            ) : null}
+
+            <div className="forge-catalog-cards-view">
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                 {section.items.map((item) => (
                   <ForgeItemCard key={item.id} item={item} config={config} />
                 ))}
               </div>
-            ) : (
+            </div>
+            <div className="forge-catalog-list-view">
               <ForgeItemTable section={section} config={config} />
-            )}
+            </div>
           </section>
         ))}
       </div>
-    </div>
+    </ForgeCatalogViewShell>
   );
 }

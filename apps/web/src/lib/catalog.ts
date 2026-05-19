@@ -12,6 +12,7 @@ export type CatalogPageContent = {
   meta_description: string;
   intro_md: string | null;
   how_it_works_md: string | null;
+  description_md?: string | null;
   description_json: Record<string, string>;
   faq_json: CatalogFaqEntry[];
   schema_ld_json?: unknown;
@@ -59,9 +60,9 @@ export type CatalogIndexEntry = Pick<
 };
 
 const CATALOG_SELECT_FIELDS_VIEW =
-  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at, content_updated_at";
+  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at, content_updated_at";
 const CATALOG_SELECT_FIELDS_BASE =
-  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at";
+  "id, universe_id, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at";
 const CATALOG_REVALIDATE_SECONDS = 86400;
 
 function normalizeCatalogCodes(codes: string[]): string[] {
@@ -150,7 +151,7 @@ export async function getCatalogPageContentByCodes(codes: string[]): Promise<Cat
 
   const cachedCatalogContent = unstable_cache(
     async (requestedCodes: string[]) => fetchCatalogContent(requestedCodes),
-    ["catalog-page-content-v5", ...normalizedCodes],
+    ["catalog-page-content-v6", ...normalizedCodes],
     {
       revalidate: CATALOG_REVALIDATE_SECONDS,
       tags: buildCatalogTags(normalizedCodes)
@@ -168,7 +169,7 @@ export async function getCatalogPageContentByCodesIncludingDrafts(
 
   const cachedCatalogContent = unstable_cache(
     async (requestedCodes: string[]) => fetchCatalogContent(requestedCodes, { includeUnpublished: true }),
-    ["catalog-page-content-drafts-v3", ...normalizedCodes],
+    ["catalog-page-content-drafts-v4", ...normalizedCodes],
     {
       revalidate: CATALOG_REVALIDATE_SECONDS,
       tags: buildCatalogTags(normalizedCodes)

@@ -2,22 +2,22 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { QuizData, QuizOption, QuizQuestion } from "@/lib/quiz-types";
-
-const LEVEL_CONFIG = {
-  easy: 5,
-  medium: 5,
-  hard: 5
-} as const;
+import {
+  buildQuizAttempt,
+  QUIZ_LEVEL_CONFIG,
+  type QuizAttemptQuestion,
+  type QuizDifficulty
+} from "@/lib/quiz-attempts";
 
 const STORAGE_VERSION = 1;
 
-type Difficulty = keyof typeof LEVEL_CONFIG;
-
-type AttemptQuestion = QuizQuestion & { difficulty: Difficulty; options: QuizOption[] };
+type Difficulty = QuizDifficulty;
+type AttemptQuestion = QuizAttemptQuestion;
 
 type QuizRunnerProps = {
   quizCode: string;
   questions: QuizData;
+  initialAttempt?: AttemptQuestion[];
   heroImage?: string | null;
   heroAlt?: string | null;
 };
@@ -40,51 +40,6 @@ type PersistedState = {
   showSummary: boolean;
   savedAttemptKey?: string | null;
 };
-
-function shuffle<T>(items: T[]): T[] {
-  const next = [...items];
-  for (let i = next.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [next[i], next[j]] = [next[j], next[i]];
-  }
-  return next;
-}
-
-function pickQuestions(pool: QuizQuestion[], seenIds: Set<string>, count: number): QuizQuestion[] {
-  const unseen = pool.filter((question) => !seenIds.has(question.id));
-  const picks: QuizQuestion[] = [];
-
-  const unseenPicks = shuffle(unseen).slice(0, Math.min(count, unseen.length));
-  picks.push(...unseenPicks);
-
-  if (picks.length < count) {
-    const remainingPool = pool.filter((question) => !picks.some((picked) => picked.id === question.id));
-    picks.push(...shuffle(remainingPool).slice(0, count - picks.length));
-  }
-
-  return picks;
-}
-
-function buildAttempt(quizData: QuizData, seenQuestionIds: string[]): AttemptQuestion[] {
-  const seen = new Set(seenQuestionIds);
-  const easy = pickQuestions(quizData.easy ?? [], seen, LEVEL_CONFIG.easy).map((question) => ({
-    ...question,
-    difficulty: "easy" as const,
-    options: shuffle(question.options ?? [])
-  }));
-  const medium = pickQuestions(quizData.medium ?? [], seen, LEVEL_CONFIG.medium).map((question) => ({
-    ...question,
-    difficulty: "medium" as const,
-    options: shuffle(question.options ?? [])
-  }));
-  const hard = pickQuestions(quizData.hard ?? [], seen, LEVEL_CONFIG.hard).map((question) => ({
-    ...question,
-    difficulty: "hard" as const,
-    options: shuffle(question.options ?? [])
-  }));
-
-  return [...easy, ...medium, ...hard];
-}
 
 function mergeSeenIds(existing: string[], additions: string[]): string[] {
   const merged = new Set(existing);
@@ -163,9 +118,9 @@ function restoreAttempt(persisted: PersistedQuestion[], quizData: QuizData): Att
   }
 
   const expectedOrder: Difficulty[] = [
-    ...Array.from({ length: LEVEL_CONFIG.easy }, () => "easy" as const),
-    ...Array.from({ length: LEVEL_CONFIG.medium }, () => "medium" as const),
-    ...Array.from({ length: LEVEL_CONFIG.hard }, () => "hard" as const)
+    ...Array.from({ length: QUIZ_LEVEL_CONFIG.easy }, () => "easy" as const),
+    ...Array.from({ length: QUIZ_LEVEL_CONFIG.medium }, () => "medium" as const),
+    ...Array.from({ length: QUIZ_LEVEL_CONFIG.hard }, () => "hard" as const)
   ];
 
   if (attempt.length !== expectedOrder.length) return null;
@@ -194,12 +149,13 @@ function sanitizeAnswers(
 
 export function QuizRunner(props: QuizRunnerProps) {
   const { quizCode, questions } = props;
+  const initialAttempt = props.initialAttempt ?? [];
   const heroImage = props.heroImage ?? null;
   const heroAlt = props.heroAlt ?? null;
   const [session, setSession] = useState<SessionState>({ status: "loading", userId: null });
   const [progressStatus, setProgressStatus] = useState<"idle" | "loading" | "ready">("idle");
   const [seenQuestionIds, setSeenQuestionIds] = useState<string[]>([]);
-  const [attempt, setAttempt] = useState<AttemptQuestion[]>([]);
+  const [attempt, setAttempt] = useState<AttemptQuestion[]>(() => initialAttempt);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showSummary, setShowSummary] = useState(false);
@@ -278,9 +234,10 @@ export function QuizRunner(props: QuizRunnerProps) {
   }, [session.status, session.userId, quizCode]);
 
   const readyToStart = session.status === "ready" && progressStatus === "ready";
+  const canInteract = readyToStart;
 
   const startNewAttempt = useCallback(() => {
-    const nextAttempt = buildAttempt(questions, seenQuestionIds);
+    const nextAttempt = buildQuizAttempt(questions, seenQuestionIds);
     setAttempt(nextAttempt);
     setCurrentIndex(0);
     setAnswers({});
@@ -336,8 +293,18 @@ export function QuizRunner(props: QuizRunnerProps) {
       }
     }
 
+    if (initialAttempt.length && seenQuestionIds.length === 0) {
+      setAttempt(initialAttempt);
+      setCurrentIndex(0);
+      setAnswers({});
+      setShowSummary(false);
+      setSavedAttemptKey(null);
+      lastSavedAttempt.current = null;
+      return;
+    }
+
     startNewAttempt();
-  }, [readyToStart, startNewAttempt, questions, storageKey]);
+  }, [readyToStart, startNewAttempt, questions, storageKey, initialAttempt, seenQuestionIds.length]);
 
   const currentQuestion = attempt[currentIndex] ?? null;
   const currentAnswer = currentQuestion ? answers[currentQuestion.id] : null;
@@ -421,11 +388,13 @@ export function QuizRunner(props: QuizRunnerProps) {
   }, [attempt, currentIndex, answers, showSummary, savedAttemptKey, storageKey, answeredCount]);
 
   const handleSelectOption = (optionId: string) => {
+    if (!canInteract) return;
     if (!currentQuestion || currentAnswer) return;
     setAnswers((prev) => ({ ...prev, [currentQuestion.id]: optionId }));
   };
 
   const handleNext = () => {
+    if (!canInteract) return;
     if (!currentQuestion || !currentAnswer) return;
     const isLast = currentIndex >= attempt.length - 1;
     if (isLast) {
@@ -456,7 +425,7 @@ export function QuizRunner(props: QuizRunnerProps) {
     window.location.reload();
   };
 
-  if (!readyToStart) {
+  if (!attempt.length && !readyToStart) {
     return (
       <div className="rounded-lg border border-dashed border-border/70 bg-card p-8 text-center text-muted">
         Preparing your quiz...
@@ -549,7 +518,7 @@ export function QuizRunner(props: QuizRunnerProps) {
                     type="button"
                     className={`${baseClass} ${stateClass}`}
                     onClick={() => handleSelectOption(option.id)}
-                    disabled={Boolean(currentAnswer)}
+                    disabled={!canInteract || Boolean(currentAnswer)}
                   >
                     <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border/70 bg-surface-muted text-xs font-semibold uppercase">
                       {label}
@@ -588,7 +557,7 @@ export function QuizRunner(props: QuizRunnerProps) {
                 type="button"
                 className="rounded-md bg-accent px-5 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:bg-accent/40"
                 onClick={handleNext}
-                disabled={!currentAnswer}
+                disabled={!canInteract || !currentAnswer}
               >
                 {currentIndex >= attempt.length - 1 ? "Finish" : "Next"}
               </button>
@@ -624,7 +593,7 @@ export function QuizRunner(props: QuizRunnerProps) {
           </div>
 
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            {(Object.keys(LEVEL_CONFIG) as Difficulty[]).map((level) => (
+            {(Object.keys(QUIZ_LEVEL_CONFIG) as Difficulty[]).map((level) => (
               <div key={level} className="rounded-lg border border-border/70 bg-background p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">{formatDifficulty(level)}</p>
                 <p className="mt-2 text-lg font-semibold text-foreground">

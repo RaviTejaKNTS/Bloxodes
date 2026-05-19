@@ -13,6 +13,7 @@ import {
   loadFreeItemCategoryBySlug,
   loadFreeItemSubcategories,
   loadFreeItemsPageData,
+  resolveFreeItemsSearch,
   resolveFreeItemsDescription,
   renderRobloxFreeItemsPage
 } from "../page-data";
@@ -21,6 +22,7 @@ export const revalidate = 86400;
 
 type PageProps = {
   params: Promise<{ category: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 function getCatalogCodeCandidates(categorySlug: string) {
@@ -70,16 +72,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function RobloxFreeItemsCategoryPage({ params }: PageProps) {
+export default async function RobloxFreeItemsCategoryPage({ params, searchParams }: PageProps) {
   const { category: categorySlug } = await params;
   const category = await loadFreeItemCategoryBySlug(categorySlug);
   if (!category) {
     notFound();
   }
+  const search = await resolveFreeItemsSearch(searchParams);
 
   const [subcategories, pageData, catalog] = await Promise.all([
     loadFreeItemSubcategories(category.label),
-    loadFreeItemsPageData(1, { category: category.label }),
+    loadFreeItemsPageData(1, { category: category.label, search: search.search, sort: search.sort }),
     getCatalogPageContentByCodes(getCatalogCodeCandidates(category.slug))
   ]);
   const { items, total, totalPages } = pageData;
@@ -111,6 +114,8 @@ export default async function RobloxFreeItemsCategoryPage({ params }: PageProps)
     categorySlug: category.slug,
     categoryLabel: category.label,
     subcategories,
-    contentHtml
+    contentHtml,
+    search: search.search,
+    sort: search.sort
   });
 }

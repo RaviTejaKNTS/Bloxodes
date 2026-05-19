@@ -31,6 +31,7 @@ export type GameDatasetCatalogCopy = {
   seo_title: string;
   meta_description: string;
   intro_md: string;
+  description_md: string;
   how_it_works_md: string;
   description_json: Record<string, string>;
   faq_json: Array<{ q: string; a: string }>;
@@ -115,7 +116,6 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
       "eggs",
       "food",
       "furniture",
-      "gamepasses",
       "gift-prizes",
       "gifts",
       "house-surfaces",
@@ -339,12 +339,27 @@ export function buildGameDatasetCatalogCode(gameSlug: string, collectionSlug: st
 }
 
 export function buildGameDatasetCatalogPath(code: string): string {
-  return `/catalog/${code}`;
+  const config = getGameDatasetCatalogConfigByCode(code);
+  if (!config) return `/catalog/${code}`;
+  return `/wiki/${config.gameSlug}/${config.slug}`;
 }
 
 export function getGameDatasetCatalogConfigByCode(code: string): GameDatasetCatalogConfig | null {
   const normalized = code.trim().toLowerCase();
   return GAME_DATASET_CATALOGS.find((entry) => entry.code === normalized) ?? null;
+}
+
+export function getGameDatasetCatalogConfigByWikiPath(
+  gameSlug: string,
+  collectionSlug: string
+): GameDatasetCatalogConfig | null {
+  const normalizedGameSlug = gameSlug.trim().toLowerCase();
+  const normalizedCollectionSlug = collectionSlug.trim().toLowerCase();
+  return (
+    GAME_DATASET_CATALOGS.find(
+      (entry) => entry.gameSlug === normalizedGameSlug && entry.slug === normalizedCollectionSlug
+    ) ?? null
+  );
 }
 
 export function getCollectionFocus(slug: string): string {
@@ -376,14 +391,18 @@ export function buildGameDatasetCatalogCopy({
   const fieldSummary = toReadableList(columnLabels.length ? columnLabels : ["names", "images", "details"]);
   const title = `All ${countLabel} ${config.label} in ${config.gameName}`;
   const metaDescription = truncateMeta(
-    `Browse ${countLabel} ${config.gameName} ${lowerLabel} with ${fieldSummary}.`
+    `Compare ${countLabel} ${config.gameName} ${lowerLabel} by ${fieldSummary}.`
   );
 
-  const intro = `${config.label} matter in ${config.gameName} because players use them to compare ${focus}. This catalog lists ${countLabel} ${lowerLabel} and keeps the important fields in one place: ${fieldSummary}.
+  const intro = `${config.gameName} ${lowerLabel} cover ${focus}. The ${countLabel} tracked entries show ${fieldSummary}, so it is easier to spot which items are useful right now and which ones mostly matter for collection, trading, or completion.
 
-Use it to check names, images, requirements, prices, rewards, availability, and other listed details without opening each item one by one. When a value is blank, that detail was not listed clearly in the current data.`;
+Rarity is only one clue. Source, availability, price, effect, requirement, or reward details usually explain whether an item is easy to replace, worth saving, or locked behind an older update.`;
 
-  const how = `Start with the grouped sections, then compare the fields that matter for this collection: ${fieldSummary}. Images help identify entries when the game uses icons or thumbnails, while the list view is better for scanning many rows quickly. Missing values are left empty instead of guessed.`;
+  const description = `The grouped sections give quick context for the kind of entry you are looking at, but the best field changes by collection. A combat item usually comes down to stats and requirements. A shop item comes down to price and availability. A reward item comes down to source, drop chance, event timing, or whether that reward can still be earned.
+
+Blank fields are left empty instead of padded with guesses. That matters because Roblox game collections rarely share one perfect shape; a pet, boss, vehicle, consumable, quest, and material all need different details to make sense.`;
+
+  const how = `The group heading gives the first read on each item type, then the useful fields carry the decision: ${fieldSummary}. Images help with quick recognition, while list view is better when you need to scan many entries at once. If an entry is missing a value, treat that detail as not clearly listed instead of assuming it works like nearby items.`;
 
   return {
     code: config.code,
@@ -391,25 +410,26 @@ Use it to check names, images, requirements, prices, rewards, availability, and 
     seo_title: title,
     meta_description: metaDescription,
     intro_md: intro,
+    description_md: description,
     how_it_works_md: how,
     description_json: {},
     faq_json: [
       {
-        q: `What is included in this ${config.gameName} ${lowerLabel} catalog?`,
-        a: `It includes every ${lowerLabel} entry currently collected for ${config.gameName}, with the item fields that are available in the dataset.`
+        q: `Which ${config.gameName} ${lowerLabel} fields matter most?`,
+        a: `Start with the fields that change the player's decision: ${fieldSummary}. Rarity helps with sorting, but source, effect, requirement, price, or availability usually explains the real value.`
       },
       {
         q: "Why are some values blank?",
-        a: "Blank values mean that detail was not listed clearly for that entry. We keep the item visible and avoid filling missing stats with guesses."
+        a: "Blank values mean that detail was not listed clearly for that entry. The item stays visible, but missing stats are not filled with guesses."
       },
       {
-        q: "How should I use this page?",
-        a: `Use the card view for quick visual browsing and the list view when you want to compare ${fieldSummary} across many entries.`
+        q: "Can a low-rarity item still be hard to replace?",
+        a: "Yes. A low-rarity item from an old event, removed shop, limited reward, or rare drop can be harder to get than a higher-rarity item that is still sold or farmed normally."
       }
     ],
     cta_label: `Open ${lowerLabel} catalog`,
     cta_url: buildGameDatasetCatalogPath(config.code),
-    wiki_md: `${config.label} are part of ${config.gameName}'s in-game reference data. Use this catalog to compare ${focus} before you choose what to collect, unlock, buy, fight, or track next.`,
+    wiki_md: `${config.gameName} ${lowerLabel} connect to ${focus}. Source and availability usually matter as much as rarity because older rewards, event items, shop rotations, and progression unlocks do not all stay equally easy to replace.`,
     wiki_sort_order: config.sortOrder,
     wiki_item_count: itemCount,
     thumb_url: imageUrls[0] ?? null

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
 import { ChecklistBoard } from "@/components/ChecklistBoard";
+import { ChecklistServerSnapshot } from "@/components/ChecklistServerSnapshot";
 import { ChecklistProgressHeader } from "@/components/ChecklistProgressHeader";
 import { ChecklistFooterLinks } from "@/components/ChecklistFooterLinks";
 import { getChecklistPageBySlug, listPublishedChecklistsPage } from "@/lib/db";
@@ -133,6 +134,7 @@ export default async function ChecklistPage({ params }: PageProps) {
           <ChecklistProgressHeader title={page.title} slug={page.slug} totalItems={leafItems.length} />
         </div>
       </header>
+      <ChecklistServerSnapshot items={items} />
       <div className={boardContainerClass} data-checklist-scroll>
         <div className="w-full pr-6 md:min-w-max">
           <ChecklistBoard

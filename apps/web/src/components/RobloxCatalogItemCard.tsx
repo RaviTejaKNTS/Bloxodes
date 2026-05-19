@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 
 export type RobloxCatalogItemCardItem = {
@@ -42,8 +39,7 @@ function buildFallbackRobloxUrl(item: Pick<RobloxCatalogItemCardItem, "asset_id"
 }
 
 export function RobloxCatalogItemCard({ item }: Props) {
-  const [imageFailed, setImageFailed] = useState(false);
-  const hasThumbnail = Boolean(item.thumbnail_url) && !imageFailed;
+  const hasThumbnail = Boolean(item.thumbnail_url);
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55">
@@ -56,7 +52,6 @@ export function RobloxCatalogItemCard({ item }: Props) {
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
               className="object-contain p-3"
-              onError={() => setImageFailed(true)}
               unoptimized
             />
           ) : (

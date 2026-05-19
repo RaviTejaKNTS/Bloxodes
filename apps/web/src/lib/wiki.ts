@@ -16,10 +16,10 @@ import {
 } from "@/lib/db";
 import { getUniverseEventSummary, listUniverseEventTimeline, type UniverseEventSummary, type UniverseTimelineEvent } from "@/lib/events-summary";
 import {
-  listPublishedCatalogPagesByCodePrefix,
-  listPublishedCatalogPagesByUniverseId,
-  type CatalogListEntry
-} from "@/lib/catalog";
+  listPublishedWikiCatalogPagesByUniverseId,
+  listPublishedWikiCatalogPagesByWikiSlug,
+  type WikiCatalogListEntry
+} from "@/lib/wiki-catalog";
 import { supabaseAdmin } from "@/lib/supabase";
 import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
 import type { QuizListEntry } from "@/lib/quizzes";
@@ -164,7 +164,7 @@ export type WikiRelatedData = {
   tools: ToolListEntry[];
   articles: ArticleWithRelations[];
   checklists: ChecklistSummaryRow[];
-  catalogPages: CatalogListEntry[];
+  catalogPages: WikiCatalogListEntry[];
   quizzes: QuizListEntry[];
   eventsPage: EventsPageSummary | null;
   eventSummary: UniverseEventSummary | null;
@@ -500,14 +500,14 @@ async function listOtherWikiDeveloperGames(
 export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRelatedData> {
   const universeId = page.universe_id ?? null;
   const slug = page.slug?.trim().toLowerCase() ?? "";
-  const catalogPagesByPrefixPromise = slug
-    ? safeList("catalog pages by slug", () => listPublishedCatalogPagesByCodePrefix(slug))
+  const catalogPagesBySlugPromise = slug
+    ? safeList("wiki catalog pages by slug", () => listPublishedWikiCatalogPagesByWikiSlug(slug))
     : Promise.resolve([]);
 
   if (!universeId) {
     return {
       ...EMPTY_WIKI_RELATED_DATA,
-      catalogPages: await catalogPagesByPrefixPromise
+      catalogPages: await catalogPagesBySlugPromise
     };
   }
 
@@ -517,7 +517,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     articles,
     checklists,
     catalogPages,
-    catalogPagesByPrefix,
+    catalogPagesBySlug,
     quizzes,
     eventsPage,
     eventSummary,
@@ -533,8 +533,8 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     safeList("tools", () => listPublishedToolsByUniverseId(universeId, 6)),
     safeList("articles", () => listPublishedArticlesByUniverseId(universeId, 8, 0)),
     safeList("checklists", () => listPublishedChecklistsByUniverseId(universeId, 4)),
-    safeList("catalog pages", () => listPublishedCatalogPagesByUniverseId(universeId)),
-    catalogPagesByPrefixPromise,
+    safeList("wiki catalog pages", () => listPublishedWikiCatalogPagesByUniverseId(universeId)),
+    catalogPagesBySlugPromise,
     safeList("quizzes", () => listWikiQuizzesByUniverseId(universeId, 4)),
     safeValue("events page", () => getEventsPageByUniverseId(universeId)),
     safeValue("event summary", () => getUniverseEventSummary(universeId)),
@@ -560,7 +560,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     tools,
     articles,
     checklists,
-    catalogPages: mergeCatalogPages(catalogPages, catalogPagesByPrefix),
+    catalogPages: mergeCatalogPages(catalogPages, catalogPagesBySlug),
     quizzes,
     eventsPage,
     eventSummary,
@@ -574,9 +574,9 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
   };
 }
 
-function mergeCatalogPages(left: CatalogListEntry[], right: CatalogListEntry[]): CatalogListEntry[] {
+function mergeCatalogPages(left: WikiCatalogListEntry[], right: WikiCatalogListEntry[]): WikiCatalogListEntry[] {
   const seen = new Set<string>();
-  const merged: CatalogListEntry[] = [];
+  const merged: WikiCatalogListEntry[] = [];
   for (const entry of [...left, ...right]) {
     if (seen.has(entry.code)) continue;
     seen.add(entry.code);

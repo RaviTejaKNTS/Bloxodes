@@ -8,6 +8,7 @@ import {
   buildFreeItemCatalogCodeCandidates,
   buildFreeItemsCatalogContentHtml,
   loadFreeItemsPageData,
+  resolveFreeItemsSearch,
   renderRobloxFreeItemsPage
 } from "../../page-data";
 import { buildPageParams } from "@/lib/static-params";
@@ -20,6 +21,7 @@ const MAX_STATIC_PAGES = 20;
 
 type PageProps = {
   params: Promise<{ page: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateStaticParams() {
@@ -72,13 +74,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function RobloxFreeItemsPaginatedPage({ params }: PageProps) {
+export default async function RobloxFreeItemsPaginatedPage({ params, searchParams }: PageProps) {
   const { page } = await params;
   const pageNumber = Number.parseInt(page, 10);
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
+  const search = await resolveFreeItemsSearch(searchParams);
 
   const [pageData, catalog] = await Promise.all([
-    loadFreeItemsPageData(safePageNumber),
+    loadFreeItemsPageData(safePageNumber, search),
     getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
   ]);
   const { items, total, totalPages } = pageData;
@@ -100,6 +103,8 @@ export default async function RobloxFreeItemsPaginatedPage({ params }: PageProps
     ],
     basePath: BASE_PATH,
     navActive: "all",
-    contentHtml
+    contentHtml,
+    search: search.search,
+    sort: search.sort
   });
 }

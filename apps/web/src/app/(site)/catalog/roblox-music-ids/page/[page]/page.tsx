@@ -4,6 +4,7 @@ import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import {
   buildRobloxMusicCatalogContentHtml,
   loadRobloxMusicIdsPageData,
+  resolveMusicSearch,
   renderRobloxMusicIdsPage
 } from "../../page-data";
 import { CATALOG_DESCRIPTION, buildAlternates } from "@/lib/seo";
@@ -16,6 +17,7 @@ const MAX_STATIC_PAGES = 20;
 
 type PageProps = {
   params: Promise<{ page: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateStaticParams() {
@@ -36,15 +38,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function RobloxMusicIdsPaginatedPage({ params }: PageProps) {
+export default async function RobloxMusicIdsPaginatedPage({ params, searchParams }: PageProps) {
   const { page } = await params;
   const pageNumber = Number(page);
   if (!Number.isFinite(pageNumber) || pageNumber < 1) {
     notFound();
   }
+  const search = await resolveMusicSearch(searchParams);
 
   const [pageData, catalog] = await Promise.all([
-    loadRobloxMusicIdsPageData(pageNumber),
+    loadRobloxMusicIdsPageData(pageNumber, search),
     getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
   ]);
   const { songs, total, totalPages } = pageData;
@@ -59,6 +62,8 @@ export default async function RobloxMusicIdsPaginatedPage({ params }: PageProps)
     totalPages,
     currentPage: pageNumber,
     showHero: pageNumber === 1,
-    contentHtml
+    contentHtml,
+    search: search.search,
+    sort: search.sort
   });
 }

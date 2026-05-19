@@ -13,6 +13,7 @@ import {
   loadFreeItemCategoryBySlug,
   loadFreeItemSubcategories,
   loadFreeItemsPageData,
+  resolveFreeItemsSearch,
   resolveFreeItemsDescription,
   renderRobloxFreeItemsPage
 } from "../../../page-data";
@@ -21,6 +22,7 @@ export const revalidate = 86400;
 
 type PageProps = {
   params: Promise<{ category: string; page: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 function getCatalogCodeCandidates(categorySlug: string) {
@@ -81,7 +83,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function RobloxFreeItemsCategoryPaginatedPage({ params }: PageProps) {
+export default async function RobloxFreeItemsCategoryPaginatedPage({ params, searchParams }: PageProps) {
   const { category: categorySlug, page } = await params;
   const category = await loadFreeItemCategoryBySlug(categorySlug);
   if (!category) {
@@ -90,10 +92,11 @@ export default async function RobloxFreeItemsCategoryPaginatedPage({ params }: P
 
   const pageNumber = Number.parseInt(page, 10);
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
+  const search = await resolveFreeItemsSearch(searchParams);
 
   const [subcategories, pageData, catalog] = await Promise.all([
     loadFreeItemSubcategories(category.label),
-    loadFreeItemsPageData(safePageNumber, { category: category.label }),
+    loadFreeItemsPageData(safePageNumber, { category: category.label, search: search.search, sort: search.sort }),
     getCatalogPageContentByCodes(getCatalogCodeCandidates(category.slug))
   ]);
   const { items, total, totalPages } = pageData;
@@ -122,6 +125,8 @@ export default async function RobloxFreeItemsCategoryPaginatedPage({ params }: P
     categorySlug: category.slug,
     categoryLabel: category.label,
     subcategories,
-    contentHtml
+    contentHtml,
+    search: search.search,
+    sort: search.sort
   });
 }

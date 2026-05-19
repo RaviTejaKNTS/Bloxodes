@@ -1,11 +1,19 @@
 import Link from "next/link";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { PagePagination } from "@/components/PagePagination";
+import { RobloxCatalogItemCard } from "@/components/RobloxCatalogItemCard";
 import type { CatalogPageContent } from "@/lib/catalog";
 import { getFreeItemCategories, getFreeItemSubcategories, listFreeItems, type FreeItem } from "@/lib/db";
+import {
+  DEFAULT_SORT,
+  SORT_OPTIONS,
+  buildSearchQueryString,
+  normalizeSearchQuery,
+  normalizeSortKey,
+  type FreeItemsSortKey
+} from "@/lib/free-items-search";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
-import { Suspense } from "react";
-import { FreeItemsBrowser } from "./FreeItemsBrowser";
 import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } from "@/lib/page-content";
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
@@ -58,6 +66,29 @@ type FreeItemsPageFilters = {
   search?: string;
   sort?: "featured" | "newest" | "popular" | "updated";
 };
+
+export type SearchParamsInput =
+  | Promise<Record<string, string | string[] | undefined>>
+  | Record<string, string | string[] | undefined>
+  | undefined;
+
+export type FreeItemsResolvedSearch = {
+  search: string;
+  sort: FreeItemsSortKey;
+};
+
+function firstSearchParam(value: string | string[] | undefined): string | null {
+  if (Array.isArray(value)) return value[0] ?? null;
+  return value ?? null;
+}
+
+export async function resolveFreeItemsSearch(searchParams: SearchParamsInput): Promise<FreeItemsResolvedSearch> {
+  const params = searchParams ? await searchParams : {};
+  return {
+    search: normalizeSearchQuery(firstSearchParam(params.q)),
+    sort: normalizeSortKey(firstSearchParam(params.sort))
+  };
+}
 
 function normalizeKey(value: string): string {
   return value
@@ -361,6 +392,84 @@ export function buildCategoryCards(categories: CategoryOption[]) {
   );
 }
 
+function FreeItemsFilterForm({
+  basePath,
+  search,
+  sort
+}: {
+  basePath: string;
+  search: string;
+  sort: FreeItemsSortKey;
+}) {
+  const hasFilters = search.length > 0 || sort !== DEFAULT_SORT;
+
+  return (
+    <form action={basePath} method="get" className="flex flex-col gap-4 md:flex-row md:items-end">
+      <div className="flex-1 space-y-2">
+        <label htmlFor="free-items-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+          Search
+        </label>
+        <input
+          id="free-items-search"
+          name="q"
+          type="search"
+          defaultValue={search}
+          placeholder="Search item name, creator, or ID"
+          className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-accent/40"
+        />
+      </div>
+      <div className="w-full space-y-2 md:w-56">
+        <label htmlFor="free-items-sort" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+          Sort
+        </label>
+        <select
+          id="free-items-sort"
+          name="sort"
+          defaultValue={sort}
+          className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
+        >
+          {SORT_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex items-center gap-3">
+        <button
+          type="submit"
+          className="inline-flex items-center justify-center rounded-md bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+        >
+          Apply
+        </button>
+        {hasFilters ? (
+          <Link href={basePath} className="text-sm font-semibold text-muted transition hover:text-accent">
+            Clear
+          </Link>
+        ) : null}
+      </div>
+    </form>
+  );
+}
+
+function FreeItemsGrid({ items }: { items: FreeItem[] }) {
+  if (!items.length) {
+    return (
+      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+        No free items match those filters right now.
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {items.map((item) => (
+        <RobloxCatalogItemCard key={item.asset_id} item={item} />
+      ))}
+    </div>
+  );
+}
+
 export async function renderRobloxFreeItemsPage({
   items,
   total,
@@ -376,7 +485,9 @@ export async function renderRobloxFreeItemsPage({
   categorySlug,
   categoryLabel,
   subcategories,
-  activeSubcategorySlug
+  activeSubcategorySlug,
+  search = "",
+  sort = DEFAULT_SORT
 }: {
   items: FreeItem[];
   total: number;
@@ -393,6 +504,8 @@ export async function renderRobloxFreeItemsPage({
   categoryLabel?: string;
   subcategories?: SubcategoryOption[];
   activeSubcategorySlug?: string;
+  search?: string;
+  sort?: FreeItemsSortKey;
 }) {
   const navCategories = await loadFreeItemCategories();
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml.introHtml : "";
@@ -404,6 +517,7 @@ export async function renderRobloxFreeItemsPage({
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const updatedIso = updatedDate?.toISOString() ?? null;
   const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const searchQueryString = buildSearchQueryString({ query: search, sort });
   const hasDetails =
     Boolean(descriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length);
   const listSchema = buildFreeItemsItemListSchema({
@@ -500,24 +614,16 @@ export async function renderRobloxFreeItemsPage({
           </section>
         ) : null}
 
-        <Suspense
-          fallback={
-            <div className="rounded-lg border border-border/60 bg-surface/60 p-6 text-sm text-muted">
-              Loading free items...
-            </div>
-          }
-        >
-          <FreeItemsBrowser
-            initialItems={items}
-            initialTotalPages={totalPages}
-            currentPage={currentPage}
+        <div className="catalog-surface space-y-6">
+          <FreeItemsFilterForm basePath={basePath} search={search} sort={sort} />
+          <FreeItemsGrid items={items} />
+          <PagePagination
             basePath={basePath}
-            category={categoryLabel}
-            subcategory={
-              subcategories?.find((subcategory) => subcategory.slug === activeSubcategorySlug)?.label ?? undefined
-            }
+            currentPage={currentPage}
+            totalPages={totalPages}
+            query={searchQueryString || undefined}
           />
-        </Suspense>
+        </div>
 
         <CatalogAdSlot />
 

@@ -298,7 +298,7 @@ export function buildForgeCatalogFlatCode(slug: string): string {
 }
 
 export function buildForgeCatalogPath(slug: string): string {
-  return `/catalog/${buildForgeCatalogFlatCode(slug)}`;
+  return `/wiki/the-forge/${slug.trim().toLowerCase()}`;
 }
 
 type ForgeDatasetSource = {
@@ -574,14 +574,16 @@ export function renderForgeCatalogPage({
 
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
-    { label: "Catalog", href: "/catalog" },
+    { label: "Wiki", href: "/wiki" },
+    { label: "The Forge", href: "/wiki/the-forge" },
     { label: config.label, href: null }
   ];
 
   const breadcrumbSchema = JSON.stringify(
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
-      { name: "Catalog", url: `${SITE_URL.replace(/\/$/, "")}/catalog` },
+      { name: "Wiki", url: `${SITE_URL.replace(/\/$/, "")}/wiki` },
+      { name: "The Forge", url: `${SITE_URL.replace(/\/$/, "")}/wiki/the-forge` },
       { name: config.label, url: canonicalUrl }
     ])
   );

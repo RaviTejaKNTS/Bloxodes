@@ -19,13 +19,17 @@ type DatasetFile = {
   data?: Record<string, unknown>[] | null;
 };
 
-type CatalogPageUpsert = {
+type WikiCatalogPageUpsert = {
+  wiki_page_id: string | null;
   universe_id: number | null;
+  wiki_slug: string;
+  collection_slug: string;
   code: string;
   title: string;
   seo_title: string;
   meta_description: string;
   intro_md: string;
+  description_md: string;
   how_it_works_md: string;
   description_json: Record<string, string>;
   faq_json: Array<{ q: string; a: string }>;
@@ -82,9 +86,13 @@ function normalizeImage(value: unknown): string | null {
   return trimmed;
 }
 
-async function buildRows(existingPublishedAt: Map<string, string | null>, universeIdsByGameSlug: Map<string, number | null>) {
+async function buildRows(
+  existingPublishedAt: Map<string, string | null>,
+  universeIdsByGameSlug: Map<string, number | null>,
+  wikiPageIdsBySlug: Map<string, string | null>
+) {
   const now = new Date().toISOString();
-  const rows: CatalogPageUpsert[] = [];
+  const rows: WikiCatalogPageUpsert[] = [];
 
   for (const config of GAME_DATASET_CATALOGS) {
     const dataset = await readDataset(config);
@@ -96,12 +104,16 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
     });
 
     rows.push({
+      wiki_page_id: wikiPageIdsBySlug.get(config.gameSlug) ?? null,
       universe_id: universeIdsByGameSlug.get(config.gameSlug) ?? null,
+      wiki_slug: config.gameSlug,
+      collection_slug: config.slug,
       code: copy.code,
       title: copy.title,
       seo_title: copy.seo_title,
       meta_description: copy.meta_description,
       intro_md: copy.intro_md,
+      description_md: copy.description_md,
       how_it_works_md: copy.how_it_works_md,
       description_json: copy.description_json,
       faq_json: copy.faq_json,
@@ -120,12 +132,26 @@ async function loadExistingPublishedAt() {
   if (dryRun) return new Map<string, string | null>();
   const sb = supabaseAdmin();
   const codes = GAME_DATASET_CATALOGS.map((config) => config.code);
-  const { data, error } = await sb.from("catalog_pages").select("code, published_at").in("code", codes);
+  const { data, error } = await sb.from("wiki_catalog_pages").select("code, published_at").in("code", codes);
   if (error) throw error;
   return new Map(
     (data ?? []).map((row) => [
       (row as { code: string }).code,
       (row as { published_at?: string | null }).published_at ?? null
+    ])
+  );
+}
+
+async function loadWikiPageIdsBySlug() {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, string | null>();
+  const sb = supabaseAdmin();
+  const slugs = GAME_DATASET_CATALOG_GROUPS.map((group) => group.gameSlug);
+  const { data, error } = await sb.from("wiki_pages").select("id, slug").in("slug", slugs);
+  if (error) throw error;
+  return new Map(
+    (data ?? []).map((row) => [
+      (row as { slug: string }).slug,
+      (row as { id?: string | null }).id ?? null
     ])
   );
 }
@@ -185,27 +211,28 @@ async function main() {
     throw new Error("Refusing to write to a non-local Supabase URL. Use --allow-prod only after local review is clean.");
   }
 
-  const [existingPublishedAt, universeIdsByGameSlug] = await Promise.all([
+  const [existingPublishedAt, universeIdsByGameSlug, wikiPageIdsBySlug] = await Promise.all([
     loadExistingPublishedAt(),
-    loadUniverseIdsByGameSlug()
+    loadUniverseIdsByGameSlug(),
+    loadWikiPageIdsBySlug()
   ]);
-  const rows = await buildRows(existingPublishedAt, universeIdsByGameSlug);
+  const rows = await buildRows(existingPublishedAt, universeIdsByGameSlug, wikiPageIdsBySlug);
 
   if (dryRun) {
-    console.log(`Prepared ${rows.length} catalog page rows.`);
+    console.log(`Prepared ${rows.length} wiki catalog page rows.`);
     for (const [index, row] of rows.entries()) {
       const config = GAME_DATASET_CATALOGS[index];
       const dataset = config ? await readDataset(config) : null;
-      console.log(`${row.code} | ${row.title} | items=${dataset?.rows.length ?? "unknown"}`);
+      console.log(`${row.wiki_slug}/${row.collection_slug} | ${row.code} | ${row.title} | items=${dataset?.rows.length ?? "unknown"}`);
     }
     return;
   }
 
   const sb = supabaseAdmin();
-  const { error } = await sb.from("catalog_pages").upsert(rows, { onConflict: "code" });
+  const { error } = await sb.from("wiki_catalog_pages").upsert(rows, { onConflict: "wiki_slug,collection_slug" });
   if (error) throw error;
 
-  console.log(`Upserted ${rows.length} ${draft ? "draft" : "published"} catalog pages.`);
+  console.log(`Upserted ${rows.length} ${draft ? "draft" : "published"} wiki catalog pages.`);
 }
 
 main().catch((error) => {

@@ -1,68 +1,16 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import "@/styles/article-content.css";
-import { renderMarkdown } from "@/lib/markdown";
-import { getCatalogPageContentByCodes, type CatalogFaqEntry } from "@/lib/catalog";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
+import { getWikiCatalogPageByCode } from "@/lib/wiki-catalog";
 import {
   buildForgeCatalogCodeCandidates,
   buildForgeCatalogPath,
   getForgeCatalogConfig,
-  loadForgeCatalogDataset,
-  renderForgeCatalogPage,
-  type CatalogContentHtml
+  loadForgeCatalogDataset
 } from "./page-data";
 
 export const revalidate = 86400;
-
-function sortDescriptionEntries(description: Record<string, string> | null | undefined) {
-  return Object.entries(description ?? {}).sort((a, b) => {
-    const left = Number.parseInt(a[0], 10);
-    const right = Number.parseInt(b[0], 10);
-    if (Number.isNaN(left) && Number.isNaN(right)) return a[0].localeCompare(b[0]);
-    if (Number.isNaN(left)) return 1;
-    if (Number.isNaN(right)) return -1;
-    return left - right;
-  });
-}
-
-async function buildCatalogContent(codes: string[]): Promise<{ contentHtml: CatalogContentHtml | null }> {
-  const catalog = await getCatalogPageContentByCodes(codes);
-  if (!catalog) {
-    return { contentHtml: null };
-  }
-
-  const introHtml = catalog.intro_md ? await renderMarkdown(catalog.intro_md, { paragraphizeLineBreaks: true }) : "";
-  const howHtml = catalog.how_it_works_md ? await renderMarkdown(catalog.how_it_works_md, { paragraphizeLineBreaks: true }) : "";
-
-  const descriptionEntries = sortDescriptionEntries(catalog.description_json ?? {});
-  const descriptionHtml = await Promise.all(
-    descriptionEntries.map(async ([key, value]) => ({
-      key,
-      html: await renderMarkdown(value ?? "", { paragraphizeLineBreaks: true })
-    }))
-  );
-
-  const faqEntries: CatalogFaqEntry[] = Array.isArray(catalog.faq_json) ? catalog.faq_json : [];
-  const faqHtml = await Promise.all(
-    faqEntries.map(async (entry) => ({
-      q: entry.q,
-      a: await renderMarkdown(entry.a ?? "", { paragraphizeLineBreaks: true })
-    }))
-  );
-
-  return {
-    contentHtml: {
-      id: catalog.id ?? null,
-      title: catalog.title ?? null,
-      introHtml,
-      howHtml,
-      descriptionHtml,
-      faqHtml,
-      updatedAt: catalog.content_updated_at ?? catalog.updated_at ?? catalog.published_at ?? catalog.created_at ?? null
-    }
-  };
-}
 
 export async function generateForgeCollectionMetadata(collection: string): Promise<Metadata> {
   const config = getForgeCatalogConfig(collection);
@@ -80,7 +28,7 @@ export async function generateForgeCollectionMetadata(collection: string): Promi
   const dataset = await loadForgeCatalogDataset(config);
   const count = dataset.items.length;
   const fallbackTitle = `All ${count.toLocaleString("en-US")} ${config.label} in The Forge`;
-  const catalog = await getCatalogPageContentByCodes(buildForgeCatalogCodeCandidates(config));
+  const catalog = await getWikiCatalogPageByCode(buildForgeCatalogCodeCandidates(config)[0]);
   const title = resolveSeoTitle(catalog?.seo_title) ?? catalog?.title ?? fallbackTitle;
   const description = catalog?.meta_description ?? config.description ?? CATALOG_DESCRIPTION;
   const image = catalog?.thumb_url ?? `${SITE_URL}/og-image.png`;
@@ -112,10 +60,5 @@ export async function renderForgeCollectionRoute(collection: string) {
     notFound();
   }
 
-  const [dataset, { contentHtml }] = await Promise.all([
-    loadForgeCatalogDataset(config),
-    buildCatalogContent(buildForgeCatalogCodeCandidates(config))
-  ]);
-
-  return renderForgeCatalogPage({ config, dataset, contentHtml });
+  permanentRedirect(buildForgeCatalogPath(config.slug));
 }

@@ -10,8 +10,9 @@ import { ToolCard } from "@/components/ToolCard";
 import { getQuizPageByCode, listPublishedQuizCodes, loadQuizData } from "@/lib/quizzes";
 import { listGamesWithActiveCountsByUniverseId, listPublishedArticlesByUniverseId } from "@/lib/db";
 import { listPublishedToolsByUniverseId } from "@/lib/tools";
-import { listPublishedCatalogPagesByUniverseId } from "@/lib/catalog";
+import { buildWikiCatalogPath, listPublishedWikiCatalogPagesByUniverseId } from "@/lib/wiki-catalog";
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
+import { buildServerQuizAttempt } from "@/lib/quiz-attempts";
 import type { QuizData } from "@/lib/quiz-types";
 import { QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 
@@ -49,16 +50,6 @@ function summarize(value: string | null | undefined, fallback: string): string {
   const slice = normalized.slice(0, 137);
   const lastSpace = slice.lastIndexOf(" ");
   return `${lastSpace > 80 ? slice.slice(0, lastSpace) : slice}…`;
-}
-
-function buildCatalogHref(code: string): string {
-  const normalized = code
-    .split("/")
-    .map((part) => part.trim())
-    .filter(Boolean)
-    .map((part) => encodeURIComponent(part))
-    .join("/");
-  return `/catalog/${normalized}`;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -106,6 +97,7 @@ export default async function QuizPage({ params }: PageProps) {
   if (!quizData) {
     notFound();
   }
+  const initialAttempt = buildServerQuizAttempt(quizData, page.code);
 
   const description = page.description_md
     ? markdownToPlainText(page.description_md).replace(/\s+/g, " ").trim()
@@ -136,13 +128,11 @@ export default async function QuizPage({ params }: PageProps) {
         listGamesWithActiveCountsByUniverseId(universeId, 2),
         listPublishedArticlesByUniverseId(universeId, 3, 0),
         listPublishedToolsByUniverseId(universeId, 2),
-        listPublishedCatalogPagesByUniverseId(universeId, 2)
+        listPublishedWikiCatalogPagesByUniverseId(universeId, 2)
       ])
     : [[], [], [], []];
 
-  const relatedCatalogPages = relatedCatalogPagesRaw
-    .filter((entry) => typeof entry.code === "string" && entry.code.trim().length > 0)
-    .slice(0, 2);
+  const relatedCatalogPages = relatedCatalogPagesRaw.slice(0, 2);
   const showRecommendations =
     relatedCodes.length > 0 ||
     relatedArticles.length > 0 ||
@@ -229,6 +219,7 @@ export default async function QuizPage({ params }: PageProps) {
       <QuizRunner
         quizCode={page.code}
         questions={quizData}
+        initialAttempt={initialAttempt}
         heroImage={heroImage}
         heroAlt={heroAlt}
       />
@@ -321,7 +312,7 @@ export default async function QuizPage({ params }: PageProps) {
                       data-analytics-target-slug={catalog.code}
                     >
                       <Link
-                        href={buildCatalogHref(catalog.code)}
+                        href={buildWikiCatalogPath(catalog.wiki_slug, catalog.collection_slug)}
                         className="block rounded-xl border border-border/60 bg-surface/70 p-4 transition hover:border-accent/60 hover:bg-surface"
                       >
                         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/80">Catalog</p>

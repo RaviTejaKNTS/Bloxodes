@@ -3,6 +3,7 @@ import { repoPath } from "@/lib/paths";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
+import { processHtmlLinks } from "@/lib/link-utils";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { ForgeCatalogView } from "../the-forge/ForgeCatalogView";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -69,6 +70,449 @@ type GenericViewConfig = {
   hideImages?: boolean;
 };
 
+type CatalogSectionOverride = {
+  groupKey: string;
+  groupLabel: string;
+  sectionOrder: string[];
+  getSectionLabel: (item: GameDatasetCatalogItem) => string | null;
+  hiddenKeys?: string[];
+  additionalColumns?: string[];
+  transformItem?: (item: GameDatasetCatalogItem) => GameDatasetCatalogItem;
+};
+
+const DESCRIPTION_MD_KEY = "description-md";
+
+const ADOPT_ME_GIFTS_SECTION_ORDER = [
+  "Gift Display rolls",
+  "Accessory and wing chests",
+  "Special reward boxes",
+  "Event pet boxes",
+  "Standard and premium event boxes",
+  "Mixed seasonal gift boxes"
+];
+
+const ADOPT_ME_GIFTS_SECTION_BY_NAME: Record<string, string> = {
+  "Small Gift": "Gift Display rolls",
+  "Big Gift": "Gift Display rolls",
+  "Massive Gift": "Gift Display rolls",
+  "Standard Chest": "Accessory and wing chests",
+  "Regal Chest": "Accessory and wing chests",
+  "Standard Wing Chest": "Accessory and wing chests",
+  "Regal Wing Chest": "Accessory and wing chests",
+  "RGB Reward Box": "Special reward boxes",
+  "2D Box": "Special reward boxes",
+  "Admin Abuse Box": "Special reward boxes",
+  "1000 Bucks Silk Bag": "Special reward boxes",
+  "Rat Box": "Event pet boxes",
+  "Bat Box": "Event pet boxes",
+  "Ox Box": "Event pet boxes",
+  "Halloween Mummy Cat Box": "Event pet boxes",
+  "Walrus Box": "Event pet boxes",
+  "Lunar Tiger Box": "Event pet boxes",
+  "Wolf Box": "Event pet boxes",
+  "Pony Box": "Event pet boxes",
+  "Moon Bear Box": "Event pet boxes",
+  "Duckling Box": "Event pet boxes",
+  "Hermit Crab Box": "Event pet boxes",
+  "Scarecrow Box": "Event pet boxes",
+  "Hare Box": "Event pet boxes",
+  "Easter Eggy Box": "Event pet boxes",
+  "Halloween Chick Box": "Event pet boxes",
+  "Ice Tray": "Event pet boxes",
+  "Kaijunior Box": "Event pet boxes",
+  "Kelp Raider Box": "Event pet boxes",
+  "Spider Box": "Event pet boxes",
+  "Aberdeen Angus Box": "Event pet boxes",
+  "Choccybunny Box": "Event pet boxes",
+  "Monkey Box": "Standard and premium event boxes",
+  "Premium Monkey Box": "Standard and premium event boxes",
+  "Standard Gorilla Box": "Standard and premium event boxes",
+  "Premium Gorilla Box": "Standard and premium event boxes",
+  "Standard Capuchin Box": "Standard and premium event boxes",
+  "Premium Capuchin Box": "Standard and premium event boxes",
+  "Standard Gibbon Box": "Standard and premium event boxes",
+  "Premium Gibbon Box": "Standard and premium event boxes",
+  "Christmas Gift": "Mixed seasonal gift boxes",
+  "Golden Gift": "Mixed seasonal gift boxes",
+  "Lunar New Year Gift Box": "Mixed seasonal gift boxes",
+  "Special Lunar New Year Gift Box": "Mixed seasonal gift boxes",
+  "Box of Jokes": "Mixed seasonal gift boxes",
+  "Golden Mistletoe": "Mixed seasonal gift boxes"
+};
+
+const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
+  "adopt-me-accessory-shop": {
+    groupKey: "category",
+    groupLabel: "Shop section",
+    sectionOrder: ["Accessory Chests", "Obtainable Pets"],
+    getSectionLabel: getCategorySection
+  },
+  "adopt-me-eggs": {
+    groupKey: "catalogSection",
+    groupLabel: "Egg route",
+    sectionOrder: [
+      "Nursery and VIP eggs",
+      "Rotating gumball eggs",
+      "Star Rewards eggs",
+      "Pet Releaser eggs",
+      "Event and special eggs",
+      "Admin Abuse egg"
+    ],
+    getSectionLabel: getAdoptMeEggSection
+  },
+  "adopt-me-food": {
+    groupKey: "category",
+    groupLabel: "Food type",
+    sectionOrder: ["Edible Food", "Drinkable Drinks", "Candy", "Potions", "Special Potions"],
+    getSectionLabel: getCategorySection
+  },
+  "adopt-me-gift-prizes": {
+    groupKey: "catalogSection",
+    groupLabel: "Prize rarity",
+    sectionOrder: ["Common", "Uncommon", "Rare", "Ultra-Rare", "Legendary", "Legacy or uncategorized prizes"],
+    getSectionLabel: getAdoptMeGiftPrizeSection,
+    hiddenKeys: ["rarity"],
+    additionalColumns: ["displayRarity"],
+    transformItem: withDisplayRarity
+  },
+  "adopt-me-gifts": {
+    groupKey: "catalogSection",
+    groupLabel: "Gift type",
+    sectionOrder: ADOPT_ME_GIFTS_SECTION_ORDER,
+    getSectionLabel: (item) => ADOPT_ME_GIFTS_SECTION_BY_NAME[item.name] ?? null
+  },
+  "adopt-me-pet-ages": {
+    groupKey: "catalogSection",
+    groupLabel: "Age path",
+    sectionOrder: ["Pet age stages"],
+    getSectionLabel: () => "Pet age stages",
+    hiddenKeys: ["age", "number"]
+  },
+  "adopt-me-pets": {
+    groupKey: "catalogSection",
+    groupLabel: "Source family",
+    sectionOrder: [
+      "Egg and hatch-pool pets",
+      "Robux shop and premium treat pets",
+      "Event and seasonal pets",
+      "Reward, box, lure, and activity pets",
+      "Temporary and special-case pets"
+    ],
+    getSectionLabel: getAdoptMePetSection,
+    hiddenKeys: ["rarity"],
+    additionalColumns: ["displayRarity"],
+    transformItem: withDisplayRarity
+  },
+  "adopt-me-potions": {
+    groupKey: "catalogSection",
+    groupLabel: "Potion type",
+    sectionOrder: [
+      "Sky Castle Potions",
+      "Age Potions",
+      "Gamepass Potion",
+      "Event/Gift Potions",
+      "Cauldron Potions",
+      "Tim's Cauldron Potions",
+      "Legacy and special potions"
+    ],
+    getSectionLabel: getAdoptMePotionSection
+  },
+  "adopt-me-star-rewards": {
+    groupKey: "category",
+    groupLabel: "Star Rewards page",
+    sectionOrder: ["First page of the Star Rewards", "Second page of the Star Rewards"],
+    getSectionLabel: getCategorySection
+  },
+  "adopt-me-strollers": {
+    groupKey: "category",
+    groupLabel: "Source",
+    sectionOrder: ["Baby Shop Strollers", "Other Obtainable Strollers", "Gifts Display Strollers", "Event Strollers"],
+    getSectionLabel: getCategorySection
+  },
+  "adopt-me-toys": {
+    groupKey: "catalogSection",
+    groupLabel: "Toy role",
+    sectionOrder: [
+      "Pet play and leashes",
+      "Movement toys",
+      "Grapples, gliders, and teleport toys",
+      "Roleplay and collectibles",
+      "Music and performance toys",
+      "Stands, seats, and placeable utility",
+      "Event tools and special-use items"
+    ],
+    getSectionLabel: getAdoptMeToySection,
+    hiddenKeys: ["rarity"],
+    additionalColumns: ["displayRarity"],
+    transformItem: withDisplayRarity
+  },
+  "adopt-me-vehicles": {
+    groupKey: "category",
+    groupLabel: "Source",
+    sectionOrder: [
+      "Vehicle Dealership Vehicles",
+      "Other Obtainable Vehicles",
+      "Gifts Display Vehicles",
+      "Event Vehicles",
+      "Premium Vehicles",
+      "Star Rewards Vehicles",
+      "RGB Reward Box Vehicles",
+      "Redemption Kiosk Vehicles",
+      "Temporary Vehicle"
+    ],
+    getSectionLabel: getCategorySection
+  }
+};
+
+const STANDARD_RARITIES = new Set(["Common", "Uncommon", "Rare", "Ultra-Rare", "Legendary", "Event"]);
+
+function getCategorySection(item: GameDatasetCatalogItem): string | null {
+  return normalizeValue(item.category);
+}
+
+function withDisplayRarity(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const rarity = normalizeValue(item.rarity);
+  return {
+    ...item,
+    displayRarity: rarity && STANDARD_RARITIES.has(rarity) ? rarity : null
+  };
+}
+
+function getAdoptMeEggSection(item: GameDatasetCatalogItem): string {
+  const name = normalizeValue(item.name) ?? "";
+  const key = name.toLowerCase();
+
+  if (["starter egg", "cracked egg", "pet egg", "royal egg", "retired egg"].includes(key)) {
+    return "Nursery and VIP eggs";
+  }
+
+  if (["golden egg", "diamond egg"].includes(key)) {
+    return "Star Rewards eggs";
+  }
+
+  if (["basic egg", "crystal egg"].includes(key)) {
+    return "Pet Releaser eggs";
+  }
+
+  if (key === "admin abuse egg") {
+    return "Admin Abuse egg";
+  }
+
+  if (
+    [
+      "safari egg",
+      "jungle egg",
+      "farm egg",
+      "aussie egg",
+      "fossil egg",
+      "ocean egg",
+      "mythic egg",
+      "woodland egg",
+      "japan egg",
+      "southeast asia egg",
+      "danger egg",
+      "urban egg",
+      "desert egg",
+      "garden egg",
+      "moon egg",
+      "royal moon egg",
+      "aztec egg",
+      "royal aztec egg",
+      "endangered egg"
+    ].includes(key)
+  ) {
+    return "Rotating gumball eggs";
+  }
+
+  return "Event and special eggs";
+}
+
+function getAdoptMeGiftPrizeSection(item: GameDatasetCatalogItem): string {
+  const rarity = normalizeValue(item.rarity);
+  return rarity && STANDARD_RARITIES.has(rarity) ? rarity : "Legacy or uncategorized prizes";
+}
+
+function getAdoptMePotionSection(item: GameDatasetCatalogItem): string {
+  const category = normalizeValue(item.category);
+  return category && category !== "Unknown" ? category : "Legacy and special potions";
+}
+
+function getAdoptMePetSection(item: GameDatasetCatalogItem): string {
+  const name = normalizeValue(item.name) ?? "";
+  const cost = normalizeValue(item.cost) ?? "";
+  const availability = normalizeValue(item.availability) ?? "";
+  const sourceTables = Array.isArray(item.sourceTables)
+    ? item.sourceTables.map((value) => normalizeValue(value) ?? "").join(" ")
+    : normalizeValue(item.sourceTables) ?? "";
+  const haystack = `${name} ${cost} ${availability} ${sourceTables}`.toLowerCase();
+
+  if (
+    haystack.includes("temporary") ||
+    haystack.includes("scoob") ||
+    haystack.includes("2d kitty") ||
+    haystack.includes("pumpkin friend")
+  ) {
+    return "Temporary and special-case pets";
+  }
+
+  if (
+    haystack.includes("robux pets") ||
+    haystack.includes("robux") ||
+    haystack.includes("bundle") ||
+    haystack.includes("golden clam") ||
+    haystack.includes("honey") ||
+    haystack.includes("golden wheat") ||
+    haystack.includes("golden bone") ||
+    haystack.includes("golden goldfish") ||
+    haystack.includes("golden lettuce") ||
+    haystack.includes("golden corn") ||
+    haystack.includes("golden dandelion") ||
+    haystack.includes("golden seed ball") ||
+    haystack.includes("maple leaf treat") ||
+    haystack.includes("mud ball") ||
+    haystack.includes("diamond lavender") ||
+    haystack.includes("golden petunia")
+  ) {
+    return "Robux shop and premium treat pets";
+  }
+
+  if (
+    haystack.includes("box") ||
+    haystack.includes("reward") ||
+    haystack.includes("lure") ||
+    haystack.includes("star reward") ||
+    haystack.includes("mission") ||
+    haystack.includes("ticket") ||
+    haystack.includes("pet releaser") ||
+    haystack.includes("rgb") ||
+    haystack.includes("subscription") ||
+    haystack.includes("pass") ||
+    haystack.includes("task")
+  ) {
+    return "Reward, box, lure, and activity pets";
+  }
+
+  if (
+    haystack.includes("event") ||
+    haystack.includes("festival") ||
+    haystack.includes("winter") ||
+    haystack.includes("christmas") ||
+    haystack.includes("halloween") ||
+    haystack.includes("easter") ||
+    haystack.includes("lunar") ||
+    haystack.includes("summer") ||
+    haystack.includes("spring") ||
+    haystack.includes("sugar") ||
+    haystack.includes("cherry blossom") ||
+    haystack.includes("pride") ||
+    haystack.includes("april fool") ||
+    haystack.includes("birthday") ||
+    haystack.includes("fairground") ||
+    haystack.includes("state fair") ||
+    haystack.includes("fossil isle") ||
+    haystack.includes("games") ||
+    haystack.includes("sunshine games") ||
+    haystack.includes("monkey fairground") ||
+    haystack.includes("gorilla fairground") ||
+    haystack.includes("capuchin fairground") ||
+    haystack.includes("gibbon fairground")
+  ) {
+    return "Event and seasonal pets";
+  }
+
+  return "Egg and hatch-pool pets";
+}
+
+function getAdoptMeToySection(item: GameDatasetCatalogItem): string {
+  const name = normalizeValue(item.name) ?? "";
+  const category = normalizeValue(item.category) ?? "";
+  const interaction = normalizeValue(item.interaction) ?? "";
+  const obtainedBy = normalizeValue(item.obtainedBy) ?? "";
+  const haystack = `${name} ${category} ${interaction} ${obtainedBy}`.toLowerCase();
+
+  if (
+    haystack.includes("treasure key") ||
+    haystack.includes("priceless jewel") ||
+    haystack.includes("paint") ||
+    haystack.includes("ingredient") ||
+    haystack.includes("event tool") ||
+    haystack.includes("mega neon") ||
+    haystack.includes("event-specific")
+  ) {
+    return "Event tools and special-use items";
+  }
+
+  if (
+    haystack.includes("leash") ||
+    haystack.includes("throw toy") ||
+    haystack.includes("chew toy") ||
+    haystack.includes("flying disc") ||
+    haystack.includes("ball") ||
+    haystack.includes("fetch") ||
+    haystack.includes("pet chase") ||
+    haystack.includes("bring it back") ||
+    haystack.includes("connects the player and pet")
+  ) {
+    return "Pet play and leashes";
+  }
+
+  if (
+    haystack.includes("grappl") ||
+    haystack.includes("glider") ||
+    haystack.includes("teleport") ||
+    haystack.includes("magic house door") ||
+    haystack.includes("homeing rocket") ||
+    haystack.includes("slimingo feather")
+  ) {
+    return "Grapples, gliders, and teleport toys";
+  }
+
+  if (
+    haystack.includes("pogo") ||
+    haystack.includes("balloon") ||
+    haystack.includes("propeller") ||
+    haystack.includes("float") ||
+    haystack.includes("kite") ||
+    haystack.includes("jump") ||
+    haystack.includes("bounce") ||
+    haystack.includes("fly up") ||
+    haystack.includes("float into") ||
+    haystack.includes("levitate")
+  ) {
+    return "Movement toys";
+  }
+
+  if (
+    haystack.includes("stand") ||
+    haystack.includes("bench") ||
+    haystack.includes("tent") ||
+    haystack.includes("sleeping bag") ||
+    haystack.includes("throne") ||
+    haystack.includes("seat") ||
+    haystack.includes("sell") ||
+    haystack.includes("sit")
+  ) {
+    return "Stands, seats, and placeable utility";
+  }
+
+  if (
+    haystack.includes("drum") ||
+    haystack.includes("guitar") ||
+    haystack.includes("trumpet") ||
+    haystack.includes("instrument") ||
+    haystack.includes("bongos") ||
+    haystack.includes("piano") ||
+    haystack.includes("conch") ||
+    haystack.includes("dance") ||
+    haystack.includes("music") ||
+    haystack.includes("play sound")
+  ) {
+    return "Music and performance toys";
+  }
+
+  return "Roleplay and collectibles";
+}
+
 const GROUP_KEY_PRIORITY = [
   "rarity",
   "tier",
@@ -84,7 +528,7 @@ const GROUP_KEY_PRIORITY = [
   "level"
 ];
 
-const BADGE_KEY_PRIORITY = ["rarity", "tier", "status", "type", "category", "sea"];
+const BADGE_KEY_PRIORITY = ["displayRarity", "rarity", "tier", "status", "type", "category", "sea"];
 
 const SUBTITLE_KEY_PRIORITY = [
   "category",
@@ -173,7 +617,8 @@ const HIDDEN_FIELD_KEYS = new Set([
   "fields",
   "raw",
   "rawText",
-  "sections"
+  "sections",
+  "displayRarity"
 ]);
 
 export function getGameDatasetCatalogConfig(collectionCode: string): GameDatasetCatalogConfig | null {
@@ -217,22 +662,115 @@ export async function loadGameDatasetCatalogDataset(
 }
 
 function normalizeItem(row: Record<string, unknown>): GameDatasetCatalogItem | null {
-  const name = normalizeText(row.name) ?? normalizeText(row.title) ?? normalizeText(row.item);
+  const cleanedRow = cleanDatasetRecord(row) as Record<string, unknown>;
+  const name = normalizeText(cleanedRow.name) ?? normalizeText(cleanedRow.title) ?? normalizeText(cleanedRow.item);
   if (!name) return null;
 
-  const fields = isRecord(row.fields) ? row.fields : {};
+  const fields = isRecord(cleanedRow.fields) ? cleanedRow.fields : {};
   const flattenedFields = Object.fromEntries(
-    Object.entries(fields).filter(([key]) => !(key in row) && key !== "image" && key !== "item")
+    Object.entries(fields).filter(([key]) => !(key in cleanedRow) && key !== "image" && key !== "item")
   );
-  const slug = normalizeText(row.slug) ?? toSlug(name);
+  const rawSlug = normalizeText(cleanedRow.slug);
+  const slug = rawSlug && !isHtmlDerivedSlug(rawSlug) ? rawSlug : toSlug(name);
 
   return {
     ...flattenedFields,
-    ...row,
+    ...cleanedRow,
     id: toSlug(slug || name),
     name,
     image: normalizeImage(row.image) ?? normalizeImage(row.imageCandidate) ?? null
   };
+}
+
+function cleanDatasetRecord(value: unknown, key = ""): unknown {
+  if (typeof value === "string") {
+    return shouldPreserveRawString(key) ? value : htmlToPlainText(value);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((entry) => cleanDatasetRecord(entry));
+  }
+
+  if (isRecord(value)) {
+    return Object.fromEntries(
+      Object.entries(value).map(([entryKey, entryValue]) => [entryKey, cleanDatasetRecord(entryValue, entryKey)])
+    );
+  }
+
+  return value;
+}
+
+function shouldPreserveRawString(key: string): boolean {
+  const normalizedKey = key.toLowerCase();
+  return normalizedKey.includes("url") || normalizedKey.includes("image") || normalizedKey === "src";
+}
+
+function isHtmlDerivedSlug(value: string): boolean {
+  return /^(a-href|img-|span-|div-)-/i.test(value) || /static-wikia-nocookie|mw-file-description/i.test(value);
+}
+
+function htmlToPlainText(value: string): string {
+  const trimmed = value.trim();
+  if (!/[<&]/.test(trimmed)) return trimmed.replace(/\s+/g, " ");
+
+  const fallbackFromImage = extractImageLabel(trimmed);
+  const withoutHidden = trimmed
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ");
+  const stripped = decodeHtmlEntities(
+    withoutHidden
+      .replace(/<br\s*\/?>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+  );
+
+  return stripped || fallbackFromImage || trimmed.replace(/\s+/g, " ");
+}
+
+function extractImageLabel(value: string): string | null {
+  const attrMatch =
+    value.match(/\bdata-image-name=(["'])(.*?)\1/i) ??
+    value.match(/\balt=(["'])(.*?)\1/i) ??
+    value.match(/\bdata-image-key=(["'])(.*?)\1/i);
+  if (!attrMatch?.[2]) return null;
+
+  const decoded = decodeHtmlEntities(attrMatch[2])
+    .replace(/\.(png|jpe?g|webp|gif|svg)$/i, "")
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return decoded || null;
+}
+
+function decodeHtmlEntities(value: string): string {
+  return value.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (entity, token: string) => {
+    const lowered = token.toLowerCase();
+    if (lowered.startsWith("#x")) {
+      const codePoint = Number.parseInt(lowered.slice(2), 16);
+      return isValidCodePoint(codePoint) ? String.fromCodePoint(codePoint) : entity;
+    }
+    if (lowered.startsWith("#")) {
+      const codePoint = Number.parseInt(lowered.slice(1), 10);
+      return isValidCodePoint(codePoint) ? String.fromCodePoint(codePoint) : entity;
+    }
+
+    const named: Record<string, string> = {
+      amp: "&",
+      apos: "'",
+      gt: ">",
+      lt: "<",
+      nbsp: " ",
+      quot: "\""
+    };
+
+    return named[lowered] ?? entity;
+  });
+}
+
+function isValidCodePoint(value: number): boolean {
+  return Number.isInteger(value) && value >= 0 && value <= 0x10ffff;
 }
 
 function uniquifyIds(items: GameDatasetCatalogItem[]): GameDatasetCatalogItem[] {
@@ -275,17 +813,24 @@ function resolveColumns(
 
 function buildViewConfig(
   config: GameDatasetCatalogConfig,
-  dataset: GameDatasetCatalogDataset
+  dataset: GameDatasetCatalogDataset,
+  sectionOverride?: CatalogSectionOverride | null
 ): GenericViewConfig {
   const columns = dataset.columns;
-  const groupKey = pickFirstExistingKey(columns, GROUP_KEY_PRIORITY) ?? "catalogGroup";
-  const badgeKey = pickFirstExistingKey(columns, BADGE_KEY_PRIORITY);
-  const descriptionKey = pickFirstExistingKey(columns, DESCRIPTION_KEY_PRIORITY);
-  const subtitleKeys = SUBTITLE_KEY_PRIORITY.filter((key) => columns.includes(key) && key !== badgeKey).slice(0, 2);
+  const hiddenFieldKeys = new Set([...HIDDEN_FIELD_KEYS, ...(sectionOverride?.hiddenKeys ?? [])]);
+  const groupKey =
+    sectionOverride?.groupKey ??
+    pickFirstUsefulKey(dataset, GROUP_KEY_PRIORITY, { requireMultipleValues: true }) ??
+    "catalogGroup";
+  const badgeKey = pickFirstUsefulKey(dataset, BADGE_KEY_PRIORITY.filter((key) => key !== groupKey));
+  const descriptionKey = pickFirstUsefulKey(dataset, DESCRIPTION_KEY_PRIORITY);
+  const subtitleKeys = SUBTITLE_KEY_PRIORITY.filter(
+    (key) => columns.includes(key) && key !== groupKey && key !== badgeKey && hasUsefulValues(dataset.items, key)
+  ).slice(0, 2);
   const statKeys = [
-    ...STAT_KEY_PRIORITY.filter((key) => columns.includes(key)),
-    ...columns.filter((key) => !HIDDEN_FIELD_KEYS.has(key))
-  ].filter((key) => key !== badgeKey && key !== descriptionKey && !subtitleKeys.includes(key));
+    ...STAT_KEY_PRIORITY.filter((key) => columns.includes(key) && hasUsefulValues(dataset.items, key)),
+    ...columns.filter((key) => !hiddenFieldKeys.has(key) && hasUsefulValues(dataset.items, key))
+  ].filter((key) => key !== groupKey && key !== badgeKey && key !== descriptionKey && !subtitleKeys.includes(key));
   const stats = Array.from(new Set(statKeys))
     .slice(0, 6)
     .map((key) => ({ key, label: getFieldLabel(key) }));
@@ -301,7 +846,7 @@ function buildViewConfig(
     slug: config.code,
     label: config.label,
     groupKey,
-    groupLabel: groupKey === "catalogGroup" ? "Group" : getFieldLabel(groupKey),
+    groupLabel: sectionOverride?.groupLabel ?? (groupKey === "catalogGroup" ? "Group" : getFieldLabel(groupKey)),
     badgeKey: badgeKey ?? undefined,
     subtitleKeys,
     descriptionKey: descriptionKey ?? undefined,
@@ -312,7 +857,63 @@ function buildViewConfig(
   };
 }
 
-function buildGroupedSections(items: GameDatasetCatalogItem[], groupKey: string) {
+function getUsefulValueSet(items: GameDatasetCatalogItem[], key: string): Set<string> {
+  const values = new Set<string>();
+  for (const item of items) {
+    const normalized = normalizeValue(item[key]);
+    if (normalized) values.add(normalized);
+  }
+  return values;
+}
+
+function hasUsefulValues(items: GameDatasetCatalogItem[], key: string, options?: { requireMultipleValues?: boolean }) {
+  const values = getUsefulValueSet(items, key);
+  return options?.requireMultipleValues ? values.size > 1 : values.size > 0;
+}
+
+function pickFirstUsefulKey(
+  dataset: GameDatasetCatalogDataset,
+  keys: string[],
+  options?: { requireMultipleValues?: boolean }
+): string | null {
+  return (
+    keys.find((key) => dataset.columns.includes(key) && hasUsefulValues(dataset.items, key, options)) ?? null
+  );
+}
+
+function withCatalogSectionOverride(
+  config: GameDatasetCatalogConfig,
+  dataset: GameDatasetCatalogDataset
+): { dataset: GameDatasetCatalogDataset; sectionOverride: CatalogSectionOverride | null } {
+  const sectionOverride = CATALOG_SECTION_OVERRIDES[config.code] ?? null;
+  if (!sectionOverride) {
+    return { dataset, sectionOverride: null };
+  }
+
+  const items = dataset.items.map((item) => {
+    const transformedItem = sectionOverride.transformItem ? sectionOverride.transformItem(item) : item;
+    return {
+      ...transformedItem,
+      [sectionOverride.groupKey]: sectionOverride.getSectionLabel(transformedItem) ?? "Other"
+    };
+  });
+  const nextColumns = new Set([...dataset.columns, sectionOverride.groupKey, ...(sectionOverride.additionalColumns ?? [])]);
+
+  return {
+    dataset: {
+      ...dataset,
+      columns: Array.from(nextColumns),
+      items
+    },
+    sectionOverride
+  };
+}
+
+function buildGroupedSections(
+  items: GameDatasetCatalogItem[],
+  groupKey: string,
+  sectionOrder?: string[] | null
+) {
   const groups = new Map<string, GameDatasetCatalogItem[]>();
   items.forEach((item) => {
     const label = normalizeValue(item[groupKey]) ?? "Other";
@@ -322,8 +923,17 @@ function buildGroupedSections(items: GameDatasetCatalogItem[], groupKey: string)
     groups.get(label)?.push(item);
   });
 
+  const orderIndex = new Map((sectionOrder ?? []).map((label, index) => [label, index]));
+
   return Array.from(groups.entries())
-    .sort((a, b) => a[0].localeCompare(b[0]))
+    .sort((a, b) => {
+      const left = orderIndex.get(a[0]);
+      const right = orderIndex.get(b[0]);
+      if (left !== undefined && right !== undefined) return left - right;
+      if (left !== undefined) return -1;
+      if (right !== undefined) return 1;
+      return a[0].localeCompare(b[0]);
+    })
     .map(([label, entries]) => ({
       id: `section-${toSlug(label || "items")}`,
       label,
@@ -340,6 +950,23 @@ function resolveDataUpdatedAt(meta: GameDatasetMeta | null): string | null {
   if (meta.updatedAt) return meta.updatedAt;
   const sources = meta.sources ?? [];
   return sources.find((source) => source?.accessed)?.accessed ?? null;
+}
+
+function resolveLatestUpdatedAt(values: Array<string | null | undefined>): string | null {
+  let latestValue: string | null = null;
+  let latestTime = Number.NEGATIVE_INFINITY;
+
+  for (const value of values) {
+    if (!value) continue;
+    const time = Date.parse(value);
+    if (Number.isNaN(time)) continue;
+    if (time > latestTime) {
+      latestTime = time;
+      latestValue = value;
+    }
+  }
+
+  return latestValue ?? values.find((value): value is string => Boolean(value)) ?? null;
 }
 
 function resolveAbsoluteUrl(value: string | null | undefined): string {
@@ -429,7 +1056,8 @@ export function renderGameDatasetCatalogPage({
   dataset: GameDatasetCatalogDataset;
   contentHtml?: GameDatasetCatalogContentHtml | null;
 }) {
-  const items = dataset.items;
+  const { dataset: displayDataset, sectionOverride } = withCatalogSectionOverride(config, dataset);
+  const items = displayDataset.items;
   const itemCount = items.length;
   const pageTitle =
     contentHtml?.title?.trim() ||
@@ -441,29 +1069,49 @@ export function renderGameDatasetCatalogPage({
   const faqHtml = contentHtml?.faqHtml ?? [];
   const dataUpdatedAt = resolveDataUpdatedAt(dataset.meta);
   const contentUpdatedAt = contentHtml?.updatedAt ?? null;
-  const updatedAt = dataUpdatedAt ?? contentUpdatedAt;
+  const updatedAt = resolveLatestUpdatedAt([dataUpdatedAt, contentUpdatedAt]);
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
   const canonicalPath = buildGameDatasetCatalogPath(config.code);
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const updatedIso = updatedDate?.toISOString() ?? null;
-  const viewConfig = buildViewConfig(config, dataset);
-  const groupedSections = buildGroupedSections(items, viewConfig.groupKey);
+  const viewConfig = buildViewConfig(config, displayDataset, sectionOverride);
+  const groupedSections = buildGroupedSections(items, viewConfig.groupKey, sectionOverride?.sectionOrder);
+  const sectionNoteEntries = new Map<string, { key: string; html: string }>();
+  descriptionHtml
+    .filter((entry) => entry.key !== DESCRIPTION_MD_KEY)
+    .forEach((entry) => {
+      sectionNoteEntries.set(toSlug(entry.key), entry);
+    });
+  const usedSectionNoteKeys = new Set<string>();
+  const groupedSectionsWithNotes = groupedSections.map((section) => {
+    const noteEntry = sectionNoteEntries.get(toSlug(section.label));
+    if (noteEntry) {
+      usedSectionNoteKeys.add(toSlug(noteEntry.key));
+    }
+    return {
+      ...section,
+      noteHtml: noteEntry ? processHtmlLinks(noteEntry.html).__html : null
+    };
+  });
+  const detailDescriptionHtml = descriptionHtml.filter(
+    (entry) => entry.key === DESCRIPTION_MD_KEY || !usedSectionNoteKeys.has(toSlug(entry.key))
+  );
   const sectionNav = groupedSections.map((section) => ({
     id: section.id,
     label: section.label,
     count: section.items.length
   }));
-  const hasDetails = Boolean(descriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length);
+  const hasDetails = Boolean(detailDescriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length);
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
-    { label: "Catalog", href: "/catalog" },
+    { label: "Wiki", href: "/wiki" },
     { label: config.gameName, href: `/wiki/${config.gameSlug}` },
     { label: config.label, href: null }
   ];
 
   const introNodes = introHtml ? renderPageContentNodes(introHtml, `${config.code}-intro`) : null;
-  const descriptionNodes = descriptionHtml.flatMap((entry) =>
+  const descriptionNodes = detailDescriptionHtml.flatMap((entry) =>
     renderPageContentNodes(entry.html, `${config.code}-description-${entry.key}`)
   );
   const howNodes = howHtml ? renderPageContentNodes(howHtml, `${config.code}-how`) : null;
@@ -475,7 +1123,7 @@ export function renderGameDatasetCatalogPage({
   const breadcrumbSchema = JSON.stringify(
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
-      { name: "Catalog", url: `${SITE_URL.replace(/\/$/, "")}/catalog` },
+      { name: "Wiki", url: `${SITE_URL.replace(/\/$/, "")}/wiki` },
       { name: config.gameName, url: `${SITE_URL.replace(/\/$/, "")}/wiki/${config.gameSlug}` },
       { name: config.label, url: canonicalUrl }
     ])
@@ -519,7 +1167,7 @@ export function renderGameDatasetCatalogPage({
           {sectionNav.length > 1 ? <SectionNav sections={sectionNav} className="max-w-none" /> : null}
         </div>
 
-        <ForgeCatalogView sections={groupedSections} config={viewConfig} />
+        <ForgeCatalogView sections={groupedSectionsWithNotes} config={viewConfig} />
 
         <CatalogAdSlot />
 

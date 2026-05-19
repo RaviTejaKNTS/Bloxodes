@@ -48,7 +48,7 @@ const WIKI_COPY: Record<string, WikiCopy> = {
 - Some prop and emote entries are image-led, so the catalog is useful for identification even when written stats are limited.`
   },
   "adopt-me": {
-    metaDescription: "Adopt Me wiki hub with pets, eggs, vehicles, toys, gifts, strollers, potions, furniture, gamepasses, and rewards.",
+    metaDescription: "Adopt Me wiki hub with pets, eggs, vehicles, toys, gifts, strollers, potions, furniture, and rewards.",
     tipsMd: `- Start with pets and eggs when you need rarity, availability, source tables, prices, and collection planning.
 - Vehicles, toys, strollers, food, potions, gifts, and gift prizes are useful when comparing older items, event items, and current shop options.
 - Pet ages are a small reference, but they matter because tricks unlock as pets grow.

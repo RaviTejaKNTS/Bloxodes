@@ -11,6 +11,7 @@ export type PageContentSource = ContentDateSource & {
   title?: string | null;
   intro_md?: string | null;
   how_it_works_md?: string | null;
+  description_md?: string | null;
   description_json?: Record<string, string> | null;
   faq_json?: PageFaqEntry[] | null;
   cta_label?: string | null;
@@ -50,13 +51,20 @@ export async function buildPageContentHtml(source: PageContentSource | null): Pr
     ? await renderMarkdown(source.how_it_works_md, { paragraphizeLineBreaks: true })
     : "";
 
+  const descriptionMdHtml = source.description_md
+    ? await renderMarkdown(source.description_md, { paragraphizeLineBreaks: true })
+    : "";
   const descriptionEntries = sortOrderedContentEntries(source.description_json ?? {});
-  const descriptionHtml = await Promise.all(
+  const descriptionJsonHtml = await Promise.all(
     descriptionEntries.map(async ([key, value]) => ({
       key,
       html: await renderMarkdown(value ?? "", { paragraphizeLineBreaks: true })
     }))
   );
+  const descriptionHtml = [
+    ...(descriptionMdHtml ? [{ key: "description-md", html: descriptionMdHtml }] : []),
+    ...descriptionJsonHtml
+  ];
 
   const faqEntries = Array.isArray(source.faq_json) ? source.faq_json : [];
   const faqHtml = await Promise.all(

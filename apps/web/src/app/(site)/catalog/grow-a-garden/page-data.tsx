@@ -324,7 +324,7 @@ export function buildGrowGardenCatalogFlatCode(slug: string): string {
 }
 
 export function buildGrowGardenCatalogPath(slug: string): string {
-  return `/catalog/${buildGrowGardenCatalogFlatCode(slug)}`;
+  return `/wiki/grow-a-garden/${slug.trim().toLowerCase()}`;
 }
 
 function normalizeText(value: unknown): string | null {
@@ -787,14 +787,16 @@ export function renderGrowGardenCatalogPage({
 
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
-    { label: "Catalog", href: "/catalog" },
+    { label: "Wiki", href: "/wiki" },
+    { label: "Grow a Garden", href: "/wiki/grow-a-garden" },
     { label: config.label, href: null }
   ];
 
   const breadcrumbSchema = JSON.stringify(
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
-      { name: "Catalog", url: `${SITE_URL.replace(/\/$/, "")}/catalog` },
+      { name: "Wiki", url: `${SITE_URL.replace(/\/$/, "")}/wiki` },
+      { name: "Grow a Garden", url: `${SITE_URL.replace(/\/$/, "")}/wiki/grow-a-garden` },
       { name: config.label, url: canonicalUrl }
     ])
   );

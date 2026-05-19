@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import "@/styles/article-content.css";
 import { getCatalogPageContentByCodes, listPublishedCatalogCodes, type CatalogFaqEntry } from "@/lib/catalog";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
@@ -10,10 +10,8 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 import { buildGameDatasetCatalogCopy, getGameDatasetCatalogConfigByCode } from "@/lib/game-dataset-catalogs";
-import {
-  loadGameDatasetCatalogDataset,
-  renderGameDatasetCatalogPage
-} from "../game-datasets/page-data";
+import { getWikiCatalogPageByCode } from "@/lib/wiki-catalog";
+import { loadGameDatasetCatalogDataset } from "../game-datasets/page-data";
 
 export const revalidate = 86400;
 const RESERVED_CATALOG_PREFIXES = [
@@ -75,9 +73,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const gameDatasetConfig = getGameDatasetCatalogConfigByCode(code);
   if (gameDatasetConfig) {
+    const nextCanonical = `${SITE_URL.replace(/\/$/, "")}/wiki/${gameDatasetConfig.gameSlug}/${gameDatasetConfig.slug}`;
     const [dataset, catalog] = await Promise.all([
       loadGameDatasetCatalogDataset(gameDatasetConfig),
-      getCatalogPageContentByCodes([code])
+      getWikiCatalogPageByCode(code)
     ]);
     const generated = buildGameDatasetCatalogCopy({
       config: gameDatasetConfig,
@@ -92,10 +91,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
       title,
       description,
-      alternates: buildAlternates(canonical),
+      alternates: buildAlternates(nextCanonical),
       openGraph: {
         type: "website",
-        url: canonical,
+        url: nextCanonical,
         title,
         description,
         siteName: SITE_NAME,
@@ -151,22 +150,7 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
 
   const gameDatasetConfig = getGameDatasetCatalogConfigByCode(code);
   if (gameDatasetConfig) {
-    const [dataset, catalog] = await Promise.all([
-      loadGameDatasetCatalogDataset(gameDatasetConfig),
-      getCatalogPageContentByCodes([code])
-    ]);
-    const generated = buildGameDatasetCatalogCopy({
-      config: gameDatasetConfig,
-      itemCount: dataset.items.length,
-      columns: dataset.columns,
-      imageUrls: getDatasetImageUrls(dataset.items)
-    });
-    const contentHtml = await buildPageContentHtml(catalog ?? generated);
-    return renderGameDatasetCatalogPage({
-      config: gameDatasetConfig,
-      dataset,
-      contentHtml
-    });
+    permanentRedirect(`/wiki/${gameDatasetConfig.gameSlug}/${gameDatasetConfig.slug}`);
   }
 
   const { contentHtml } = await buildCatalogContent(code);

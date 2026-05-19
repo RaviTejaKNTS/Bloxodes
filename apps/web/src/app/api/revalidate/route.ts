@@ -14,7 +14,8 @@ type Payload =
   | { type: "catalog"; slug: string }
   | { type: "music"; slug: string }
   | { type: "quiz"; slug: string }
-  | { type: "wiki"; slug: string };
+  | { type: "wiki"; slug: string }
+  | { type: "wiki_catalog"; slug: string };
 
 const MUSIC_CATALOG_CODES = new Set(["roblox-music-ids"]);
 const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
@@ -185,6 +186,28 @@ function revalidateForCatalog(slug: string) {
   );
 }
 
+function revalidateForWikiCatalog(slug: string) {
+  const [wikiSlug, collectionSlug] = slug.split("/");
+  const oldFlatCatalogSlug = wikiSlug && collectionSlug ? `${wikiSlug}-${collectionSlug}` : "";
+  return applyRevalidation(
+    [
+      "/wiki",
+      wikiSlug ? `/wiki/${wikiSlug}` : "",
+      wikiSlug && collectionSlug ? `/wiki/${wikiSlug}/${collectionSlug}` : "",
+      oldFlatCatalogSlug ? `/catalog/${oldFlatCatalogSlug}` : "",
+      SITEMAP_INDEX_PATH,
+      WIKI_SITEMAP_PATH
+    ].filter(Boolean) as string[],
+    [
+      "wiki-index",
+      "wiki-catalog-index",
+      wikiSlug ? `wiki:${wikiSlug}` : "",
+      wikiSlug && collectionSlug ? `wiki-catalog:${wikiSlug}/${collectionSlug}` : "",
+      oldFlatCatalogSlug ? `wiki-catalog-code:${oldFlatCatalogSlug}` : ""
+    ]
+  );
+}
+
 function parseUniverseId(value: unknown): number | null {
   if (typeof value === "number" && Number.isFinite(value)) return value;
   if (typeof value === "string" && value.trim()) {
@@ -302,6 +325,9 @@ async function lookupRelatedWikiSlugs(type: Payload["type"], slug: string): Prom
     universeIds = await lookupUniverseIdsBySlug("quiz_pages", "code", [slug]);
   } else if (type === "catalog") {
     universeIds = await lookupUniverseIdsBySlug("catalog_pages", "code", [slug, slug.replace(/\//g, "-")]);
+  } else if (type === "wiki_catalog") {
+    const [wikiSlug] = slug.split("/");
+    return wikiSlug ? [wikiSlug] : [];
   } else if (type === "list") {
     universeIds = await lookupListUniverseIds(slug);
   }
@@ -358,6 +384,9 @@ export async function POST(request: Request) {
       break;
     case "wiki":
       purgePaths = revalidateForWiki(slug);
+      break;
+    case "wiki_catalog":
+      purgePaths = revalidateForWikiCatalog(slug);
       break;
     case "tool":
       purgePaths = revalidateForTools(slug);

@@ -9,6 +9,7 @@ import {
   appendItemCountToSeoTitle,
   buildFreeItemsCatalogContentHtml,
   loadFreeItemsPageData,
+  resolveFreeItemsSearch,
   renderRobloxFreeItemsPage
 } from "./page-data";
 
@@ -17,6 +18,10 @@ export const revalidate = 86400;
 const CATALOG_CODE_CANDIDATES = buildFreeItemCatalogCodeCandidates();
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
 const PAGE_DESCRIPTION = "Browse free Roblox items and bundles.";
+
+type PageProps = {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const [{ total }, catalog] = await Promise.all([
@@ -58,9 +63,10 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RobloxFreeItemsPage() {
+export default async function RobloxFreeItemsPage({ searchParams }: PageProps) {
+  const search = await resolveFreeItemsSearch(searchParams);
   const [{ items, total, totalPages }, catalog] = await Promise.all([
-    loadFreeItemsPageData(1),
+    loadFreeItemsPageData(1, search),
     getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
   ]);
   const contentHtml = await buildFreeItemsCatalogContentHtml(catalog);
@@ -82,6 +88,8 @@ export default async function RobloxFreeItemsPage() {
       { label: "Roblox free items", href: null }
     ],
     basePath: BASE_PATH,
-    navActive: "all"
+    navActive: "all",
+    search: search.search,
+    sort: search.sort
   });
 }

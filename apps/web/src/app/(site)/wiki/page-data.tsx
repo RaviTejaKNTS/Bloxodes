@@ -39,6 +39,7 @@ import { IndexPageStats } from "@/components/IndexPageStats";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { cleanRewardsText, isCodeNew } from "@/lib/code-utils";
 import { listGameDatasetCatalogImageUrls } from "@/lib/game-dataset-catalog-images";
+import { buildWikiCatalogPath } from "@/lib/wiki-catalog";
 
 const ROBLOX_BASE_URL = "https://www.roblox.com";
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
@@ -1305,7 +1306,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                       </div>
                     ) : null}
                     <WikiCatalogCta
-                      href={`/catalog/${catalogPage.code}`}
+                      href={buildWikiCatalogPath(catalogPage.wiki_slug, catalogPage.collection_slug)}
                       title={catalogPage.title}
                       imageUrls={imageUrls}
                     />
