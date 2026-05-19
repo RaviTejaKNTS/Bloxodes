@@ -723,16 +723,18 @@ function parseControls(raw: unknown, columns: ControlDeviceColumn[]): ControlTab
 
 function WikiControlsTable({
   columns,
+  heading,
   rows
 }: {
   columns: ControlDeviceColumn[];
+  heading: string;
   rows: ControlTableRow[];
 }) {
   if (!columns.length || !rows.length) return null;
 
   return (
     <section className="min-w-0 space-y-4 border-t border-border/60 pt-8">
-      <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">Controls</h2>
+      <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">{heading}</h2>
       <div className="overflow-x-auto rounded-lg border border-border/70">
         <table className="min-w-full border-collapse text-left text-sm">
           <thead className="bg-muted/20 text-xs uppercase tracking-[0.14em] text-muted-foreground">
@@ -1452,7 +1454,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             </section>
           ) : null}
 
-          <WikiControlsTable columns={controlColumns} rows={controlRows} />
+          <WikiControlsTable columns={controlColumns} heading={`${universeLabel} Controls`} rows={controlRows} />
 
           {tipsNodes?.length ? (
             <section className="article-content md-copy-scope game-copy min-w-0 border-t border-border/60 pt-8">
