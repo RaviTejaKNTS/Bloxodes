@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Wiki Writing"
+  short_description: "Write Roblox game wiki hub fields"
+  default_prompt: "Use $bloxodes-wiki-writing to write research-notes.md and final.json for one wiki hub after researching the game loop in plain language. Do not rewrite catalog_pages.wiki_md during the wiki pass."

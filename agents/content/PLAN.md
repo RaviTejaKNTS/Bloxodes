@@ -1,6 +1,19 @@
 # Bloxodes Content Writing System Plan
 
-This plan defines the lightweight writing system we want to build for Bloxodes. The goal is to improve page copy without overwhelming the project with generated drafts, temporary research, or one-off prompt files.
+This plan defines the lightweight writing system we want to build for Bloxodes. The goal is to improve page copy without overwhelming the project with generated content, temporary research, or one-off prompt files.
+
+## V2 Reset
+
+The first version failed because it let `research-notes.md` become a database and schema checklist. That created field-first copy instead of useful game explanation.
+
+The current standard is one-page-first:
+
+- Build one gold-standard page before rewriting a batch.
+- Research must explain the game system in plain English before implementation notes.
+- Final copy must teach the topic, not describe Bloxodes, a dataset, or the catalog surface.
+- A sentence fails if a normal player can ask "what does that mean?" and the surrounding copy does not answer it.
+- Batch generation is paused until one page has been researched, written, previewed, and approved.
+- Catalog pages now use a section-confirmation step: research first, propose the item-card section style, get user confirmation, then write final copy.
 
 ## Goal
 
@@ -13,8 +26,25 @@ The writing system should help us:
 - make research more current, specific, and source-aware
 - keep page copy practical instead of generic
 - keep reusable style rules in git
-- keep generated drafts and research notes out of git
+- keep generated content and research notes out of git
 - produce final content in the same shapes used by Supabase tables
+- make the skills and memory docs themselves read in clear, conversational guidance so models are nudged toward the same fluid style we want in the output
+
+## Research Basis
+
+This system follows a few working patterns:
+
+- Keep `SKILL.md` files thin, with strong trigger descriptions and clear references.
+- Put reusable style, research, final edit, and page-type rules in tracked reference files.
+- Keep generated content and research notes in ignored local workspaces.
+- Require a final compression/edit pass before database import, but keep it internal.
+- Shape final output like the destination Supabase fields, not loose prose.
+- Keep the generated workflow to two files per page: `research-notes.md` and `final.json`.
+- Make `research-notes.md` read like plain-language topic research, not a field checklist.
+- Use `description_json` as short section-level context when catalog cards are divided into meaningful in-game groups.
+- Write the guidance itself in simple editorial language. Be clear and specific, but avoid making the docs sound like robotic command stacks. Use examples only when they teach a reusable pattern.
+
+The structure is adapted from the iGeeks editorial workflow, but changed for Bloxodes' public database model instead of WordPress posts.
 
 ## Tracked Files
 
@@ -34,9 +64,22 @@ agents/content/
     game-catalog-pages.md
     wiki-pages.md
     articles.md
+    tools.md
 ```
 
-Keep these files short and operational. They should explain how to write, research, edit, and shape Bloxodes content. They should not contain generated page drafts.
+Keep these files short and operational. They should explain how to write, research, edit, and shape Bloxodes content. They should not contain generated page content.
+
+Implemented files:
+
+- `agents/content/PROCESS.md`
+- `agents/content/writing-core.md`
+- `agents/content/research-policy.md`
+- `agents/content/final-edit.md`
+- `agents/content/page-types/catalog-pages.md`
+- `agents/content/page-types/game-catalog-pages.md`
+- `agents/content/page-types/wiki-pages.md`
+- `agents/content/page-types/articles.md`
+- `agents/content/page-types/tools.md`
 
 ## Skills
 
@@ -53,6 +96,7 @@ Initial skills to create:
   bloxodes-game-catalog-writing/SKILL.md
   bloxodes-wiki-writing/SKILL.md
   bloxodes-article-writing/SKILL.md
+  bloxodes-tool-writing/SKILL.md
 ```
 
 The first page-specific skills should be:
@@ -61,12 +105,24 @@ The first page-specific skills should be:
 - `bloxodes-game-catalog-writing`
 - `bloxodes-wiki-writing`
 - `bloxodes-article-writing`
+- `bloxodes-tool-writing`
 
-Later page-specific skills can cover tools, codes, lists, quizzes, and other content types.
+Later page-specific skills can cover codes, lists, quizzes, and other content types.
 
-## Local Draft Workspace
+Implemented initial skills under `.agents/skills/`:
 
-Generated content, research notes, and intermediate drafts should stay out of git.
+- `bloxodes-writing-core`
+- `bloxodes-research`
+- `bloxodes-final-edit`
+- `bloxodes-catalog-writing`
+- `bloxodes-game-catalog-writing`
+- `bloxodes-wiki-writing`
+- `bloxodes-article-writing`
+- `bloxodes-tool-writing`
+
+## Local Content Workspace
+
+Generated content, research notes, and intermediate working files should stay out of git.
 
 Use the existing ignored `tmp/` folder:
 
@@ -75,40 +131,33 @@ tmp/content-workspace/
   YYYY-MM-DD/
     catalog/
       page-code/
-        brief.md
         research-notes.md
-        draft.json
         final.json
-        review.md
     game-catalog/
       game-slug-collection/
-        brief.md
         research-notes.md
-        draft.json
         final.json
-        review.md
     wiki/
       game-slug/
-        brief.md
         research-notes.md
-        draft.json
         final.json
-        review.md
     articles/
       article-slug/
-        brief.md
         research-notes.md
-        article.md
-        final.md
-        seo.json
-        review.md
+        final.json
+    tools/
+      tool-code/
+        research-notes.md
+        final.json
 ```
 
 The `tmp/` directory is already ignored by `.gitignore`, so these files can be freely generated, revised, and deleted locally.
 
+Do not add `brief.md`, `review.md`, fan-out plan files, draft JSON, separate article body files, or SEO files. Put the useful setup, research, source notes, writing requirements, unknowns, and final risk notes inside `research-notes.md`.
+
 ## Supabase Output Shape
 
-For Supabase-backed catalog, game catalog, wiki, and tool-like content, final drafts should be shaped like the target table fields instead of loose prose.
+For Supabase-backed catalog, game catalog, wiki, and tool-like content, final output should be shaped like the target table fields instead of loose prose.
 
 Example `final.json` shape for catalog-style pages:
 
@@ -124,34 +173,41 @@ Example `final.json` shape for catalog-style pages:
 }
 ```
 
-Article-style pages may use Markdown for the body, but should still include structured SEO output.
+Article-style pages should still use `final.json`. Put Markdown in `content_md` and include structured output through fields the `articles` table actually has, mainly `title`, `meta_description`, `tags`, and `sources`.
 
 ## Workflow
 
 Use this flow for every serious rewrite:
 
 1. Create a local folder under `tmp/content-workspace/YYYY-MM-DD/...`.
-2. Write a short `brief.md` with page type, URL/code/slug, target reader, and content goal.
-3. Research current facts and save them in `research-notes.md`.
-4. Draft content using the relevant page-specific skill.
-5. Run the Bloxodes final edit pass.
-6. Save approved output to `final.json` or `final.md`.
-7. Push only the approved final content into local Supabase.
-8. Preview locally.
-9. Promote to production only through the normal controlled Supabase process.
+2. Research the topic deeply in plain language and save it in `research-notes.md`.
+3. Confirm the notes explain what the thing is, how it works, important terms, item groups, real examples, and common mistakes.
+4. For catalog and game-catalog pages, propose the item-card section style and wait for user confirmation.
+5. Write researched, final-shaped content using the relevant page-specific skill.
+6. Run the Bloxodes final edit gate inside the same workflow.
+7. Save approved output to `final.json`.
+8. Push only the approved final content into local Supabase.
+9. Preview locally.
+10. Promote to production only through the normal controlled Supabase process.
+
+For catalog and game catalog work, apply this flow to one page first. Do not rewrite a whole game at once until the first page becomes the approved standard.
+
+When catalog cards are divided into sections, choose the grouping that has the strongest in-game meaning. Rarity, item type, source, event, location, shop, tier, world, and unlock route are all possible. Do not default to the easiest dataset field if another grouping helps players understand the collection better. Put the short section setup in `description_json`, then keep `description_md` focused on whole-page mechanics instead of repeating those notes.
 
 ## Core Writing Principles
 
 - Start with what the player needs from the page.
 - Avoid generic setup lines and padded conclusions.
 - Keep paragraphs short, but not robotic.
+- Keep paragraphs focused on one concept with enough context to follow.
 - Use specific game context when it changes how players use the page.
 - Do not over-explain obvious Roblox basics.
 - Do not make every page follow the exact same rhythm.
 - Add practical judgment: what matters, what can be skipped, what changes often, what players usually misunderstand.
-- Use headings that tell readers what the section does.
+- Use sentence-style headings that tell readers what the section explains.
 - Do not repeat the heading in the first sentence below it.
 - Every sentence should explain, compare, guide, warn, redeem, decide, or help the player continue.
+- Define unclear terms before using them as advice. `Source`, `seats`, `uses`, `availability`, `rarity`, `chance`, `refresh`, and similar field labels are not enough by themselves.
 
 ## Page Type Priorities
 

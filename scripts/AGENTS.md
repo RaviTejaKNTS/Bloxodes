@@ -19,11 +19,13 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - `automation/`: queue runners, IndexNow/bootstrap helpers, cache warming, reporting.
 - `backfill/`: repair jobs for existing content/data.
 - `catalog/`: Roblox catalog and avatar item collection plus enrichment.
-  - `seed-game-catalog-pages.ts` upserts local game dataset catalog copy into `catalog_pages`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
+  - `seed-game-catalog-pages.ts` upserts local game dataset collection copy into `wiki_catalog_pages`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
   - `seed-game-wiki-pages.ts` upserts game hub rows into `wiki_pages` and links them to matching `roblox_universes`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
   - For production runs, use `NODE_ENV=production` plus `--allow-prod` only after a clean production dry-run. Confirm the scripts are targeting the production Supabase host, not local Supabase.
   - Scripts that match against `roblox_universes` must page through production rows explicitly; do not assume the default Supabase result limit is enough.
   - Keep reusable seed/upsert scripts for repeated wiki/catalog work. Delete temporary collector/import scripts after their data is stable and committed.
+- `content/`: local content QA helpers.
+  - `check-public-copy.ts` blocks self-referential public copy such as `Use the X catalog`, `this catalog`, `dataset`, and `Bloxodes`, weak field-command copy such as `Read category first`, and AI-ish contrast filler such as `not just`; run it against generated `final.json` files before local Supabase import.
 - `codes/`: code refresh and code-article rewrite jobs.
 - `decal-ids/`: decal scraping and enrichment.
 - `events/`: event ingestion, page seeding, event detail hydration, event guide generation.

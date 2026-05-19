@@ -21,6 +21,7 @@ This file is the quick reference for what exists today and how to invoke it.
 | Code-article rewrite | `scripts/codes/rewrite-codes-articles.ts` | `npm run rewrite:codes` |
 | Universe description generation | `scripts/universes/generate-universe-description.ts` | `npm run generate:universe-description` |
 | Queue event guides | `scripts/events/queue-event-guides.ts` | `npm run queue:event-guides` |
+| Public copy quality check | `scripts/content/check-public-copy.ts` | `npm run content:check-copy -- <final.json>` |
 
 ## Codes Refresh And Posting
 

@@ -25,10 +25,12 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Quiz detail and quiz index content.
 - `wiki_pages`, `wiki_pages_view`
   - Game wiki hubs that link editorial controls/tips to `roblox_universes` automation.
+- `wiki_catalog_pages`, `wiki_catalog_pages_view`
+  - Game-specific collection pages rendered under `/wiki/<game-slug>/<collection-slug>`, with stable `code` values kept for scripts, search, and old catalog URL redirects.
 - `tools`, `tools_view`
   - Tool copy and tool indexes.
 - `catalog_pages`, `catalog_pages_view`
-  - Catalog page copy and catalog indexes, including optional `wiki_md` and `wiki_sort_order` fields for game wiki catalog sections. Wiki CTA image strips are derived from matching local dataset images by catalog code.
+  - General Roblox catalog hub copy and catalog indexes for pages that are not tied to one game, such as music IDs, decal IDs, free Roblox items, and admin commands.
 - `events_pages`
   - Event landing pages.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Game Catalog Writing"
+  short_description: "Write game dataset catalog copy"
+  default_prompt: "Use $bloxodes-game-catalog-writing for one game-specific catalog page. Read the required docs, create plain-language research-notes.md first, then write final.json with catalog page fields, including wiki_md for the wiki hub."

@@ -1,14 +1,9 @@
---
--- PostgreSQL database dump
---
 
--- Dumped from database version 17.6
--- Dumped by pg_dump version 18.3
+
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -17,31 +12,301 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- Name: extensions; Type: SCHEMA; Schema: -; Owner: -
---
 
 CREATE SCHEMA IF NOT EXISTS "extensions";
 
---
--- Name: pg_trgm; Type: EXTENSION; Schema: -; Owner: -
---
 
-CREATE EXTENSION IF NOT EXISTS "pg_trgm" WITH SCHEMA "extensions";
-
---
--- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA "extensions";
+ALTER SCHEMA "extensions" OWNER TO "postgres";
 
 
+CREATE SCHEMA IF NOT EXISTS "public";
 
---
--- Name: article_generation_queue_idempotency_key("text", bigint); Type: FUNCTION; Schema: public; Owner: -
---
 
-CREATE FUNCTION "public"."article_generation_queue_idempotency_key"("title" "text", "universe_id" bigint) RETURNS "text"
+ALTER SCHEMA "public" OWNER TO "pg_database_owner";
+
+
+COMMENT ON SCHEMA "public" IS 'standard public schema';
+
+
+
+CREATE OR REPLACE FUNCTION "extensions"."grant_pg_cron_access"() RETURNS "event_trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+BEGIN
+  IF EXISTS (
+    SELECT
+    FROM pg_event_trigger_ddl_commands() AS ev
+    JOIN pg_extension AS ext
+    ON ev.objid = ext.oid
+    WHERE ext.extname = 'pg_cron'
+  )
+  THEN
+    grant usage on schema cron to postgres with grant option;
+
+    alter default privileges in schema cron grant all on tables to postgres with grant option;
+    alter default privileges in schema cron grant all on functions to postgres with grant option;
+    alter default privileges in schema cron grant all on sequences to postgres with grant option;
+
+    alter default privileges for user supabase_admin in schema cron grant all
+        on sequences to postgres with grant option;
+    alter default privileges for user supabase_admin in schema cron grant all
+        on tables to postgres with grant option;
+    alter default privileges for user supabase_admin in schema cron grant all
+        on functions to postgres with grant option;
+
+    grant all privileges on all tables in schema cron to postgres with grant option;
+    revoke all on table cron.job from postgres;
+    grant select on table cron.job to postgres with grant option;
+  END IF;
+END;
+$$;
+
+
+ALTER FUNCTION "extensions"."grant_pg_cron_access"() OWNER TO "supabase_admin";
+
+
+COMMENT ON FUNCTION "extensions"."grant_pg_cron_access"() IS 'Grants access to pg_cron';
+
+
+
+CREATE OR REPLACE FUNCTION "extensions"."grant_pg_graphql_access"() RETURNS "event_trigger"
+    LANGUAGE "plpgsql"
+    AS $_$
+DECLARE
+    func_is_graphql_resolve bool;
+BEGIN
+    func_is_graphql_resolve = (
+        SELECT n.proname = 'resolve'
+        FROM pg_event_trigger_ddl_commands() AS ev
+        LEFT JOIN pg_catalog.pg_proc AS n
+        ON ev.objid = n.oid
+    );
+
+    IF func_is_graphql_resolve
+    THEN
+        -- Update public wrapper to pass all arguments through to the pg_graphql resolve func
+        DROP FUNCTION IF EXISTS graphql_public.graphql;
+        create or replace function graphql_public.graphql(
+            "operationName" text default null,
+            query text default null,
+            variables jsonb default null,
+            extensions jsonb default null
+        )
+            returns jsonb
+            language sql
+        as $$
+            select graphql.resolve(
+                query := query,
+                variables := coalesce(variables, '{}'),
+                "operationName" := "operationName",
+                extensions := extensions
+            );
+        $$;
+
+        -- This hook executes when `graphql.resolve` is created. That is not necessarily the last
+        -- function in the extension so we need to grant permissions on existing entities AND
+        -- update default permissions to any others that are created after `graphql.resolve`
+        grant usage on schema graphql to postgres, anon, authenticated, service_role;
+        grant select on all tables in schema graphql to postgres, anon, authenticated, service_role;
+        grant execute on all functions in schema graphql to postgres, anon, authenticated, service_role;
+        grant all on all sequences in schema graphql to postgres, anon, authenticated, service_role;
+        alter default privileges in schema graphql grant all on tables to postgres, anon, authenticated, service_role;
+        alter default privileges in schema graphql grant all on functions to postgres, anon, authenticated, service_role;
+        alter default privileges in schema graphql grant all on sequences to postgres, anon, authenticated, service_role;
+
+        -- Allow postgres role to allow granting usage on graphql and graphql_public schemas to custom roles
+        grant usage on schema graphql_public to postgres with grant option;
+        grant usage on schema graphql to postgres with grant option;
+    END IF;
+
+END;
+$_$;
+
+
+ALTER FUNCTION "extensions"."grant_pg_graphql_access"() OWNER TO "supabase_admin";
+
+
+COMMENT ON FUNCTION "extensions"."grant_pg_graphql_access"() IS 'Grants access to pg_graphql';
+
+
+
+CREATE OR REPLACE FUNCTION "extensions"."grant_pg_net_access"() RETURNS "event_trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+BEGIN
+  IF EXISTS (
+    SELECT 1
+    FROM pg_event_trigger_ddl_commands() AS ev
+    JOIN pg_extension AS ext
+    ON ev.objid = ext.oid
+    WHERE ext.extname = 'pg_net'
+  )
+  THEN
+    IF NOT EXISTS (
+      SELECT 1
+      FROM pg_roles
+      WHERE rolname = 'supabase_functions_admin'
+    )
+    THEN
+      CREATE USER supabase_functions_admin NOINHERIT CREATEROLE LOGIN NOREPLICATION;
+    END IF;
+
+    GRANT USAGE ON SCHEMA net TO supabase_functions_admin, postgres, anon, authenticated, service_role;
+
+    IF EXISTS (
+      SELECT FROM pg_extension
+      WHERE extname = 'pg_net'
+      -- all versions in use on existing projects as of 2025-02-20
+      -- version 0.12.0 onwards don't need these applied
+      AND extversion IN ('0.2', '0.6', '0.7', '0.7.1', '0.8', '0.10.0', '0.11.0')
+    ) THEN
+      ALTER function net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) SECURITY DEFINER;
+      ALTER function net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) SECURITY DEFINER;
+
+      ALTER function net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) SET search_path = net;
+      ALTER function net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) SET search_path = net;
+
+      REVOKE ALL ON FUNCTION net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) FROM PUBLIC;
+      REVOKE ALL ON FUNCTION net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) FROM PUBLIC;
+
+      GRANT EXECUTE ON FUNCTION net.http_get(url text, params jsonb, headers jsonb, timeout_milliseconds integer) TO supabase_functions_admin, postgres, anon, authenticated, service_role;
+      GRANT EXECUTE ON FUNCTION net.http_post(url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer) TO supabase_functions_admin, postgres, anon, authenticated, service_role;
+    END IF;
+  END IF;
+END;
+$$;
+
+
+ALTER FUNCTION "extensions"."grant_pg_net_access"() OWNER TO "supabase_admin";
+
+
+COMMENT ON FUNCTION "extensions"."grant_pg_net_access"() IS 'Grants access to pg_net';
+
+
+
+CREATE OR REPLACE FUNCTION "extensions"."pgrst_ddl_watch"() RETURNS "event_trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+DECLARE
+  cmd record;
+BEGIN
+  FOR cmd IN SELECT * FROM pg_event_trigger_ddl_commands()
+  LOOP
+    IF cmd.command_tag IN (
+      'CREATE SCHEMA', 'ALTER SCHEMA'
+    , 'CREATE TABLE', 'CREATE TABLE AS', 'SELECT INTO', 'ALTER TABLE'
+    , 'CREATE FOREIGN TABLE', 'ALTER FOREIGN TABLE'
+    , 'CREATE VIEW', 'ALTER VIEW'
+    , 'CREATE MATERIALIZED VIEW', 'ALTER MATERIALIZED VIEW'
+    , 'CREATE FUNCTION', 'ALTER FUNCTION'
+    , 'CREATE TRIGGER'
+    , 'CREATE TYPE', 'ALTER TYPE'
+    , 'CREATE RULE'
+    , 'COMMENT'
+    )
+    -- don't notify in case of CREATE TEMP table or other objects created on pg_temp
+    AND cmd.schema_name is distinct from 'pg_temp'
+    THEN
+      NOTIFY pgrst, 'reload schema';
+    END IF;
+  END LOOP;
+END; $$;
+
+
+ALTER FUNCTION "extensions"."pgrst_ddl_watch"() OWNER TO "supabase_admin";
+
+
+CREATE OR REPLACE FUNCTION "extensions"."pgrst_drop_watch"() RETURNS "event_trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+DECLARE
+  obj record;
+BEGIN
+  FOR obj IN SELECT * FROM pg_event_trigger_dropped_objects()
+  LOOP
+    IF obj.object_type IN (
+      'schema'
+    , 'table'
+    , 'foreign table'
+    , 'view'
+    , 'materialized view'
+    , 'function'
+    , 'trigger'
+    , 'type'
+    , 'rule'
+    )
+    AND obj.is_temporary IS false -- no pg_temp objects
+    THEN
+      NOTIFY pgrst, 'reload schema';
+    END IF;
+  END LOOP;
+END; $$;
+
+
+ALTER FUNCTION "extensions"."pgrst_drop_watch"() OWNER TO "supabase_admin";
+
+
+CREATE OR REPLACE FUNCTION "extensions"."set_graphql_placeholder"() RETURNS "event_trigger"
+    LANGUAGE "plpgsql"
+    AS $_$
+    DECLARE
+    graphql_is_dropped bool;
+    BEGIN
+    graphql_is_dropped = (
+        SELECT ev.schema_name = 'graphql_public'
+        FROM pg_event_trigger_dropped_objects() AS ev
+        WHERE ev.schema_name = 'graphql_public'
+    );
+
+    IF graphql_is_dropped
+    THEN
+        create or replace function graphql_public.graphql(
+            "operationName" text default null,
+            query text default null,
+            variables jsonb default null,
+            extensions jsonb default null
+        )
+            returns jsonb
+            language plpgsql
+        as $$
+            DECLARE
+                server_version float;
+            BEGIN
+                server_version = (SELECT (SPLIT_PART((select version()), ' ', 2))::float);
+
+                IF server_version >= 14 THEN
+                    RETURN jsonb_build_object(
+                        'errors', jsonb_build_array(
+                            jsonb_build_object(
+                                'message', 'pg_graphql extension is not enabled.'
+                            )
+                        )
+                    );
+                ELSE
+                    RETURN jsonb_build_object(
+                        'errors', jsonb_build_array(
+                            jsonb_build_object(
+                                'message', 'pg_graphql is only available on projects running Postgres 14 onwards.'
+                            )
+                        )
+                    );
+                END IF;
+            END;
+        $$;
+    END IF;
+
+    END;
+$_$;
+
+
+ALTER FUNCTION "extensions"."set_graphql_placeholder"() OWNER TO "supabase_admin";
+
+
+COMMENT ON FUNCTION "extensions"."set_graphql_placeholder"() IS 'Reintroduces placeholder function for graphql_public.graphql';
+
+
+
+CREATE OR REPLACE FUNCTION "public"."article_generation_queue_idempotency_key"("title" "text", "universe_id" bigint) RETURNS "text"
     LANGUAGE "sql" IMMUTABLE
     AS $$
   select case
@@ -53,11 +318,14 @@ CREATE FUNCTION "public"."article_generation_queue_idempotency_key"("title" "tex
 $$;
 
 
---
--- Name: article_generation_queue; Type: TABLE; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."article_generation_queue_idempotency_key"("title" "text", "universe_id" bigint) OWNER TO "postgres";
 
-CREATE TABLE "public"."article_generation_queue" (
+SET default_tablespace = '';
+
+SET default_table_access_method = "heap";
+
+
+CREATE TABLE IF NOT EXISTS "public"."article_generation_queue" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "article_title" "text",
     "article_type" "text",
@@ -81,11 +349,10 @@ CREATE TABLE "public"."article_generation_queue" (
 );
 
 
---
--- Name: claim_article_generation_queue_item("uuid", "text", integer); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER TABLE "public"."article_generation_queue" OWNER TO "postgres";
 
-CREATE FUNCTION "public"."claim_article_generation_queue_item"("p_queue_id" "uuid" DEFAULT NULL::"uuid", "p_worker_id" "text" DEFAULT NULL::"text", "p_max_attempts" integer DEFAULT 3) RETURNS "public"."article_generation_queue"
+
+CREATE OR REPLACE FUNCTION "public"."claim_article_generation_queue_item"("p_queue_id" "uuid" DEFAULT NULL::"uuid", "p_worker_id" "text" DEFAULT NULL::"text", "p_max_attempts" integer DEFAULT 3) RETURNS "public"."article_generation_queue"
     LANGUAGE "plpgsql" SECURITY DEFINER
     SET "search_path" TO 'public'
     AS $$
@@ -170,11 +437,10 @@ end;
 $$;
 
 
---
--- Name: enqueue_revalidation("text", "text", "text"); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."claim_article_generation_queue_item"("p_queue_id" "uuid", "p_worker_id" "text", "p_max_attempts" integer) OWNER TO "postgres";
 
-CREATE FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text" DEFAULT NULL::"text") RETURNS "void"
+
+CREATE OR REPLACE FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text" DEFAULT NULL::"text") RETURNS "void"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -193,11 +459,36 @@ end;
 $$;
 
 
---
--- Name: get_items_needing_metrics_calculation(integer, integer); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") OWNER TO "postgres";
 
-CREATE FUNCTION "public"."get_items_needing_metrics_calculation"("p_limit" integer DEFAULT 100, "p_max_age_hours" integer DEFAULT 1) RETURNS TABLE("asset_id" bigint, "name" "text", "rap" bigint, "last_calculated" timestamp with time zone, "hours_since_calculation" numeric)
+
+CREATE OR REPLACE FUNCTION "public"."enqueue_wiki_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") RETURNS "void"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  if p_universe_id is null then
+    return;
+  end if;
+
+  insert into public.revalidation_events (entity_type, slug, source)
+  select distinct 'wiki', lower(w.slug), p_source
+  from public.wiki_pages w
+  where w.universe_id = p_universe_id
+    and w.is_published = true
+    and w.slug is not null
+    and trim(w.slug) <> ''
+  on conflict (entity_type, slug)
+  do update set
+    created_at = now(),
+    source = excluded.source;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."enqueue_wiki_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."get_items_needing_metrics_calculation"("p_limit" integer DEFAULT 100, "p_max_age_hours" integer DEFAULT 1) RETURNS TABLE("asset_id" bigint, "name" "text", "rap" bigint, "last_calculated" timestamp with time zone, "hours_since_calculation" numeric)
     LANGUAGE "plpgsql" STABLE
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -227,11 +518,14 @@ end;
 $$;
 
 
---
--- Name: get_items_needing_rap_update(integer, integer); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."get_items_needing_metrics_calculation"("p_limit" integer, "p_max_age_hours" integer) OWNER TO "postgres";
 
-CREATE FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer DEFAULT 100, "p_max_age_hours" integer DEFAULT 12) RETURNS TABLE("asset_id" bigint, "name" "text", "last_fetched" timestamp with time zone, "hours_since_update" numeric)
+
+COMMENT ON FUNCTION "public"."get_items_needing_metrics_calculation"("p_limit" integer, "p_max_age_hours" integer) IS 'Returns Limited items that need trading metrics calculated';
+
+
+
+CREATE OR REPLACE FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer DEFAULT 100, "p_max_age_hours" integer DEFAULT 12) RETURNS TABLE("asset_id" bigint, "name" "text", "last_fetched" timestamp with time zone, "hours_since_update" numeric)
     LANGUAGE "plpgsql" STABLE
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -259,11 +553,14 @@ end;
 $$;
 
 
---
--- Name: is_admin("uuid"); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) OWNER TO "postgres";
 
-CREATE FUNCTION "public"."is_admin"("user_uuid" "uuid") RETURNS boolean
+
+COMMENT ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) IS 'Returns Limited items that need RAP data updated';
+
+
+
+CREATE OR REPLACE FUNCTION "public"."is_admin"("user_uuid" "uuid") RETURNS boolean
     LANGUAGE "sql" STABLE SECURITY DEFINER
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -276,11 +573,10 @@ CREATE FUNCTION "public"."is_admin"("user_uuid" "uuid") RETURNS boolean
 $$;
 
 
---
--- Name: normalize_section_code("text"); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."is_admin"("user_uuid" "uuid") OWNER TO "postgres";
 
-CREATE FUNCTION "public"."normalize_section_code"("raw" "text") RETURNS "text"
+
+CREATE OR REPLACE FUNCTION "public"."normalize_section_code"("raw" "text") RETURNS "text"
     LANGUAGE "plpgsql" IMMUTABLE
     SET "search_path" TO 'pg_catalog', 'public'
     AS $_$
@@ -296,11 +592,10 @@ end;
 $_$;
 
 
---
--- Name: qualifies_for_free_items_catalog(bigint, boolean, "jsonb", boolean, bigint, "text", "text", "text", bigint); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."normalize_section_code"("raw" "text") OWNER TO "postgres";
 
-CREATE FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) RETURNS boolean
+
+CREATE OR REPLACE FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) RETURNS boolean
     LANGUAGE "sql" IMMUTABLE
     AS $$
   select coalesce(
@@ -318,11 +613,10 @@ CREATE FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigi
 $$;
 
 
---
--- Name: refresh_search_index_music(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) OWNER TO "postgres";
 
-CREATE FUNCTION "public"."refresh_search_index_music"() RETURNS "void"
+
+CREATE OR REPLACE FUNCTION "public"."refresh_search_index_music"() RETURNS "void"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -350,11 +644,10 @@ end;
 $$;
 
 
---
--- Name: run_game_list_sql("text", integer); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."refresh_search_index_music"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer DEFAULT NULL::integer) RETURNS TABLE("universe_id" bigint, "rank" integer, "metric_value" numeric, "reason" "text", "extra" "jsonb", "game_id" "uuid", "playing" bigint, "visits" bigint, "favorites" bigint, "likes" bigint, "dislikes" bigint)
+
+CREATE OR REPLACE FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer DEFAULT NULL::integer) RETURNS TABLE("universe_id" bigint, "rank" integer, "metric_value" numeric, "reason" "text", "extra" "jsonb", "game_id" "uuid", "playing" bigint, "visits" bigint, "favorites" bigint, "likes" bigint, "dislikes" bigint)
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -385,11 +678,10 @@ end;
 $$;
 
 
---
--- Name: search_site("text", integer, integer); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer) OWNER TO "postgres";
 
-CREATE FUNCTION "public"."search_site"("p_query" "text", "p_limit" integer DEFAULT 120, "p_offset" integer DEFAULT 0) RETURNS TABLE("entity_type" "text", "entity_id" "text", "slug" "text", "title" "text", "subtitle" "text", "url" "text", "updated_at" timestamp with time zone, "active_code_count" bigint)
+
+CREATE OR REPLACE FUNCTION "public"."search_site"("p_query" "text", "p_limit" integer DEFAULT 120, "p_offset" integer DEFAULT 0) RETURNS TABLE("entity_type" "text", "entity_id" "text", "slug" "text", "title" "text", "subtitle" "text", "url" "text", "updated_at" timestamp with time zone, "active_code_count" bigint)
     LANGUAGE "plpgsql" STABLE
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -437,11 +729,10 @@ end;
 $$;
 
 
---
--- Name: set_article_generation_queue_idempotency_key(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."search_site"("p_query" "text", "p_limit" integer, "p_offset" integer) OWNER TO "postgres";
 
-CREATE FUNCTION "public"."set_article_generation_queue_idempotency_key"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."set_article_generation_queue_idempotency_key"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'public'
     AS $$
@@ -452,11 +743,10 @@ end;
 $$;
 
 
---
--- Name: set_article_published_at(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."set_article_generation_queue_idempotency_key"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."set_article_published_at"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."set_article_published_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -471,11 +761,10 @@ end;
 $$;
 
 
---
--- Name: set_catalog_page_published_at(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."set_article_published_at"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."set_catalog_page_published_at"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."set_catalog_page_published_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -490,11 +779,10 @@ end;
 $$;
 
 
---
--- Name: set_checklist_published_at(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."set_catalog_page_published_at"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."set_checklist_published_at"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."set_checklist_published_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -509,11 +797,10 @@ end;
 $$;
 
 
---
--- Name: set_game_published_at(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."set_checklist_published_at"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."set_game_published_at"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."set_game_published_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -528,11 +815,10 @@ end;
 $$;
 
 
---
--- Name: set_quiz_page_published_at(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."set_game_published_at"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."set_quiz_page_published_at"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."set_quiz_page_published_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -547,11 +833,10 @@ end;
 $$;
 
 
---
--- Name: set_tool_published_at(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."set_quiz_page_published_at"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."set_tool_published_at"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."set_tool_published_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -566,11 +851,10 @@ end;
 $$;
 
 
---
--- Name: set_updated_at(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."set_tool_published_at"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."set_updated_at"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."set_updated_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -581,11 +865,10 @@ end;
 $$;
 
 
---
--- Name: set_wiki_page_published_at(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."set_updated_at"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."set_wiki_page_published_at"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."set_wiki_page_published_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     AS $$
 begin
@@ -601,11 +884,10 @@ end;
 $$;
 
 
---
--- Name: trg_comments_revalidate_code(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."set_wiki_page_published_at"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_comments_revalidate_code"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_comments_revalidate_code"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -625,11 +907,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_articles(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_comments_revalidate_code"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_articles"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_articles"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -646,13 +927,11 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_authors(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_articles"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_authors"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_authors"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 declare
   author_id uuid;
@@ -665,27 +944,14 @@ begin
     perform public.enqueue_revalidation('author', author_slug, 'authors_' || lower(tg_op));
   end if;
 
-  -- Revalidate articles authored by this author
+  -- Revalidate articles authored by this author.
   insert into public.revalidation_events (entity_type, slug, source)
   select distinct 'article', lower(a.slug), 'authors_articles_' || lower(tg_op)
   from public.articles a
   where a.author_id = author_id
     and a.slug is not null
     and trim(a.slug) <> ''
-  on conflict on constraint revalidation_events_entity_slug_key
-  do update set
-    created_at = now(),
-    source = excluded.source;
-
-  -- Revalidate code pages for games attributed to this author
-  insert into public.revalidation_events (entity_type, slug, source)
-  select distinct 'code', lower(g.slug), 'authors_games_' || lower(tg_op)
-  from public.games g
-  where g.author_id = author_id
-    and g.is_published = true
-    and g.slug is not null
-    and trim(g.slug) <> ''
-  on conflict on constraint revalidation_events_entity_slug_key
+  on conflict (entity_type, slug)
   do update set
     created_at = now(),
     source = excluded.source;
@@ -695,11 +961,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_catalog_pages(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_authors"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_catalog_pages"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_catalog_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -716,11 +981,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_checklist_items(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_catalog_pages"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_checklist_items"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_checklist_items"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -741,11 +1005,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_checklist_pages(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_checklist_items"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -762,11 +1025,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_codes(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_codes"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_codes"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -787,11 +1049,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_events_pages(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_codes"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_events_pages"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_events_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -808,11 +1069,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_free_item_images(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_events_pages"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_free_item_images"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_free_item_images"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     AS $$
 declare
@@ -850,11 +1110,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_free_items_catalog(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_free_item_images"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     AS $$
 declare
@@ -898,11 +1157,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_game_list_entries(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -923,11 +1181,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_game_lists(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_game_lists"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_game_lists"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -944,11 +1201,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_games(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_game_lists"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_games"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_games"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -965,11 +1221,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_music_ids(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_games"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_music_ids"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_music_ids"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -980,11 +1235,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_quiz_pages(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_music_ids"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1001,11 +1255,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_tools(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_tools"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_tools"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1022,11 +1275,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_virtual_event_assets(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_tools"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_virtual_event_assets"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_virtual_event_assets"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1061,11 +1313,10 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_virtual_events(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_virtual_event_assets"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_virtual_events"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_virtual_events"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1091,11 +1342,35 @@ end;
 $$;
 
 
---
--- Name: trg_enqueue_revalidation_wiki_pages(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_virtual_events"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_enqueue_revalidation_wiki_pages"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO 'pg_catalog', 'public'
+    AS $$
+declare
+  v_slug text;
+begin
+  if tg_op = 'DELETE' then
+    v_slug := old.wiki_slug || '/' || old.collection_slug;
+    perform public.enqueue_revalidation('wiki_catalog', v_slug, 'wiki_catalog_pages_delete');
+  elsif new.is_published = true then
+    v_slug := new.wiki_slug || '/' || new.collection_slug;
+    perform public.enqueue_revalidation('wiki_catalog', v_slug, 'wiki_catalog_pages_' || lower(tg_op));
+  elsif tg_op = 'UPDATE' and old.is_published = true then
+    v_slug := old.wiki_slug || '/' || old.collection_slug;
+    perform public.enqueue_revalidation('wiki_catalog', v_slug, 'wiki_catalog_pages_unpublish');
+  end if;
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_wiki_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     AS $$
 begin
@@ -1111,11 +1386,39 @@ end;
 $$;
 
 
---
--- Name: trg_normalize_section_code(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_enqueue_revalidation_wiki_pages"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_normalize_section_code"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  target_universe_id bigint;
+begin
+  if tg_op = 'DELETE' then
+    target_universe_id := old.universe_id;
+    perform public.enqueue_wiki_revalidation_for_universe(target_universe_id, tg_table_name || '_' || lower(tg_op));
+  elsif tg_op = 'UPDATE' then
+    target_universe_id := new.universe_id;
+    perform public.enqueue_wiki_revalidation_for_universe(target_universe_id, tg_table_name || '_' || lower(tg_op));
+
+    if old.universe_id is distinct from new.universe_id then
+      perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, tg_table_name || '_old_universe_update');
+    end if;
+  else
+    target_universe_id := new.universe_id;
+    perform public.enqueue_wiki_revalidation_for_universe(target_universe_id, tg_table_name || '_' || lower(tg_op));
+  end if;
+
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_normalize_section_code"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1126,11 +1429,10 @@ end;
 $$;
 
 
---
--- Name: trg_refresh_search_index_music(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_normalize_section_code"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_refresh_search_index_music"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_refresh_search_index_music"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1141,11 +1443,10 @@ end;
 $$;
 
 
---
--- Name: trg_search_index_articles(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_refresh_search_index_music"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_search_index_articles"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_articles"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1187,11 +1488,10 @@ end;
 $$;
 
 
---
--- Name: trg_search_index_authors(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_search_index_articles"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_search_index_authors"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_authors"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1232,11 +1532,10 @@ end;
 $$;
 
 
---
--- Name: trg_search_index_catalog_pages(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_search_index_authors"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_search_index_catalog_pages"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_catalog_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1258,6 +1557,7 @@ begin
       new.seo_title,
       new.meta_description,
       new.intro_md,
+      new.description_md,
       new.how_it_works_md
     ),
     3000
@@ -1280,11 +1580,10 @@ end;
 $$;
 
 
---
--- Name: trg_search_index_checklists(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_search_index_catalog_pages"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_search_index_checklists"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_checklists"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1326,11 +1625,10 @@ end;
 $$;
 
 
---
--- Name: trg_search_index_events_pages(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_search_index_checklists"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_search_index_events_pages"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_events_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1376,11 +1674,10 @@ end;
 $$;
 
 
---
--- Name: trg_search_index_game_lists(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_search_index_events_pages"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_search_index_game_lists"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_game_lists"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1428,11 +1725,10 @@ end;
 $$;
 
 
---
--- Name: trg_search_index_games(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_search_index_game_lists"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_search_index_games"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_games"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1455,9 +1751,10 @@ begin
       new.seo_title,
       new.seo_description,
       new.intro_md,
-      new.description_md,
-      new.find_codes_md,
-      new.about_game_md
+      new.redeem_md,
+      new.rewards_md,
+      new.troubleshoot_md,
+      new.find_codes_md
     ),
     4000
   );
@@ -1479,11 +1776,10 @@ end;
 $$;
 
 
---
--- Name: trg_search_index_quiz_pages(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_search_index_games"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_search_index_quiz_pages"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_quiz_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1527,11 +1823,10 @@ end;
 $$;
 
 
---
--- Name: trg_search_index_tools(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_search_index_quiz_pages"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_search_index_tools"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_tools"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1575,11 +1870,63 @@ end;
 $$;
 
 
---
--- Name: trg_search_index_wiki_pages(); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_search_index_tools"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."trg_search_index_wiki_pages"() RETURNS "trigger"
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_wiki_catalog_pages"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO 'pg_catalog', 'public'
+    AS $$
+declare
+  v_search text;
+  v_slug text;
+begin
+  if (tg_op = 'DELETE') then
+    delete from public.search_index
+    where entity_type = 'wiki_catalog'
+      and entity_id = old.id::text;
+    return null;
+  end if;
+
+  v_slug := new.wiki_slug || '/' || new.collection_slug;
+  v_search := left(
+    concat_ws(
+      ' ',
+      new.title,
+      new.code,
+      new.wiki_slug,
+      new.collection_slug,
+      new.seo_title,
+      new.meta_description,
+      new.intro_md,
+      new.description_md,
+      new.how_it_works_md,
+      new.wiki_md
+    ),
+    3000
+  );
+
+  perform public.upsert_search_index(
+    'wiki_catalog',
+    new.id::text,
+    v_slug,
+    new.title,
+    'Wiki catalog',
+    '/wiki/' || v_slug,
+    new.updated_at,
+    new.is_published,
+    v_search
+  );
+
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_search_index_wiki_catalog_pages"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_wiki_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     AS $$
 declare
@@ -1621,11 +1968,10 @@ end;
 $$;
 
 
---
--- Name: upsert_code("uuid", "text", "text", "text", integer, boolean); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."trg_search_index_wiki_pages"() OWNER TO "postgres";
 
-CREATE FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) RETURNS "void"
+
+CREATE OR REPLACE FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) RETURNS "void"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1642,11 +1988,10 @@ end;
 $$;
 
 
---
--- Name: upsert_code("uuid", "text", "text", "text", integer, boolean, integer); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) OWNER TO "postgres";
 
-CREATE FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer DEFAULT 0) RETURNS "void"
+
+CREATE OR REPLACE FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer DEFAULT 0) RETURNS "void"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1706,11 +2051,10 @@ end;
 $$;
 
 
---
--- Name: upsert_search_index("text", "text", "text", "text", "text", "text", timestamp with time zone, boolean, "text"); Type: FUNCTION; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) OWNER TO "postgres";
 
-CREATE FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") RETURNS "void"
+
+CREATE OR REPLACE FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") RETURNS "void"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -1763,11 +2107,10 @@ end;
 $$;
 
 
---
--- Name: app_sessions; Type: TABLE; Schema: public; Owner: -
---
+ALTER FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") OWNER TO "postgres";
 
-CREATE TABLE "public"."app_sessions" (
+
+CREATE TABLE IF NOT EXISTS "public"."app_sessions" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "user_id" "uuid" NOT NULL,
     "user_agent" "text",
@@ -1778,11 +2121,10 @@ CREATE TABLE "public"."app_sessions" (
 );
 
 
---
--- Name: app_users; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."app_sessions" OWNER TO "postgres";
 
-CREATE TABLE "public"."app_users" (
+
+CREATE TABLE IF NOT EXISTS "public"."app_users" (
     "user_id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "role" "text" DEFAULT 'user'::"text" NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
@@ -1799,11 +2141,10 @@ CREATE TABLE "public"."app_users" (
 );
 
 
---
--- Name: article_generation_artifacts; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."app_users" OWNER TO "postgres";
 
-CREATE TABLE "public"."article_generation_artifacts" (
+
+CREATE TABLE IF NOT EXISTS "public"."article_generation_artifacts" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "queue_id" "uuid",
     "article_id" "uuid",
@@ -1826,11 +2167,10 @@ CREATE TABLE "public"."article_generation_artifacts" (
 );
 
 
---
--- Name: articles; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."article_generation_artifacts" OWNER TO "postgres";
 
-CREATE TABLE "public"."articles" (
+
+CREATE TABLE IF NOT EXISTS "public"."articles" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "title" "text" NOT NULL,
     "slug" "text" NOT NULL,
@@ -1849,11 +2189,10 @@ CREATE TABLE "public"."articles" (
 );
 
 
---
--- Name: authors; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."articles" OWNER TO "postgres";
 
-CREATE TABLE "public"."authors" (
+
+CREATE TABLE IF NOT EXISTS "public"."authors" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "name" "text" NOT NULL,
     "slug" "text" NOT NULL,
@@ -1873,11 +2212,10 @@ CREATE TABLE "public"."authors" (
 );
 
 
---
--- Name: roblox_universes; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."authors" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universes" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universes" (
     "universe_id" bigint NOT NULL,
     "root_place_id" bigint NOT NULL,
     "name" "text" NOT NULL,
@@ -1932,15 +2270,26 @@ CREATE TABLE "public"."roblox_universes" (
     "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "game_description_md" "text",
     "created_at_api" timestamp with time zone,
-    "updated_at_api" timestamp with time zone
+    "updated_at_api" timestamp with time zone,
+    "discovery_score" numeric,
+    "quality_score" numeric,
+    "quality_tier" "text",
+    "quality_reasons" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "last_quality_scored_at" timestamp with time zone,
+    "last_light_enriched_at" timestamp with time zone,
+    "last_deep_enriched_at" timestamp with time zone,
+    "last_stats_refreshed_at" timestamp with time zone,
+    "last_playing_refreshed_at" timestamp with time zone,
+    "discovery_sources" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "is_quality_candidate" boolean,
+    CONSTRAINT "roblox_universes_quality_tier_check" CHECK ((("quality_tier" IS NULL) OR ("quality_tier" = ANY (ARRAY['A'::"text", 'B'::"text", 'C'::"text", 'D'::"text", 'archive'::"text"]))))
 );
 
 
---
--- Name: article_pages_index_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universes" OWNER TO "postgres";
 
-CREATE VIEW "public"."article_pages_index_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."article_pages_index_view" WITH ("security_invoker"='true') AS
  SELECT "art"."id",
     "art"."title",
     "art"."slug",
@@ -1965,11 +2314,10 @@ CREATE VIEW "public"."article_pages_index_view" WITH ("security_invoker"='true')
   WHERE ("art"."is_published" IS NOT NULL);
 
 
---
--- Name: article_pages_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER VIEW "public"."article_pages_index_view" OWNER TO "postgres";
 
-CREATE VIEW "public"."article_pages_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."article_pages_view" WITH ("security_invoker"='true') AS
  SELECT "art"."id",
     "art"."title",
     "art"."slug",
@@ -2013,11 +2361,10 @@ CREATE VIEW "public"."article_pages_view" WITH ("security_invoker"='true') AS
      LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "art"."universe_id")));
 
 
---
--- Name: article_source_images; Type: TABLE; Schema: public; Owner: -
---
+ALTER VIEW "public"."article_pages_view" OWNER TO "postgres";
 
-CREATE TABLE "public"."article_source_images" (
+
+CREATE TABLE IF NOT EXISTS "public"."article_source_images" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "article_id" "uuid" NOT NULL,
     "source_url" "text" NOT NULL,
@@ -2038,11 +2385,10 @@ CREATE TABLE "public"."article_source_images" (
 );
 
 
---
--- Name: catalog_pages; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."article_source_images" OWNER TO "postgres";
 
-CREATE TABLE "public"."catalog_pages" (
+
+CREATE TABLE IF NOT EXISTS "public"."catalog_pages" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "code" "text" NOT NULL,
     "title" "text" NOT NULL,
@@ -2052,8 +2398,6 @@ CREATE TABLE "public"."catalog_pages" (
     "how_it_works_md" "text",
     "description_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
     "faq_json" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
-    "cta_label" "text",
-    "cta_url" "text",
     "schema_ld_json" "jsonb",
     "thumb_url" "text",
     "is_published" boolean DEFAULT true NOT NULL,
@@ -2063,16 +2407,14 @@ CREATE TABLE "public"."catalog_pages" (
     "universe_id" bigint,
     "wiki_md" "text",
     "wiki_sort_order" integer,
-    "wiki_item_count" integer,
-    "wiki_image_urls" "text"[] DEFAULT '{}'::"text"[] NOT NULL
+    "description_md" "text"
 );
 
 
---
--- Name: catalog_pages_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."catalog_pages" OWNER TO "postgres";
 
-CREATE VIEW "public"."catalog_pages_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."catalog_pages_view" WITH ("security_invoker"='true') AS
  SELECT "id",
     "code",
     "title",
@@ -2080,10 +2422,9 @@ CREATE VIEW "public"."catalog_pages_view" WITH ("security_invoker"='true') AS
     "meta_description",
     "intro_md",
     "how_it_works_md",
+    "description_md",
     "description_json",
     "faq_json",
-    "cta_label",
-    "cta_url",
     "schema_ld_json",
     "thumb_url",
     "is_published",
@@ -2093,17 +2434,14 @@ CREATE VIEW "public"."catalog_pages_view" WITH ("security_invoker"='true') AS
     "universe_id",
     "wiki_md",
     "wiki_sort_order",
-    "wiki_item_count",
-    "wiki_image_urls",
     GREATEST("updated_at", COALESCE("published_at", "updated_at")) AS "content_updated_at"
    FROM "public"."catalog_pages" "cp";
 
 
---
--- Name: checklist_items; Type: TABLE; Schema: public; Owner: -
---
+ALTER VIEW "public"."catalog_pages_view" OWNER TO "postgres";
 
-CREATE TABLE "public"."checklist_items" (
+
+CREATE TABLE IF NOT EXISTS "public"."checklist_items" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "page_id" "uuid" NOT NULL,
     "section_code" "text" NOT NULL,
@@ -2115,11 +2453,10 @@ CREATE TABLE "public"."checklist_items" (
 );
 
 
---
--- Name: checklist_pages; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."checklist_items" OWNER TO "postgres";
 
-CREATE TABLE "public"."checklist_pages" (
+
+CREATE TABLE IF NOT EXISTS "public"."checklist_pages" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "universe_id" bigint NOT NULL,
     "slug" "text" NOT NULL,
@@ -2134,11 +2471,10 @@ CREATE TABLE "public"."checklist_pages" (
 );
 
 
---
--- Name: checklist_pages_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."checklist_pages" OWNER TO "postgres";
 
-CREATE VIEW "public"."checklist_pages_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."checklist_pages_view" WITH ("security_invoker"='true') AS
  WITH "item_stats" AS (
          SELECT "checklist_items"."page_id",
             "count"(*) AS "item_count",
@@ -2170,11 +2506,10 @@ CREATE VIEW "public"."checklist_pages_view" WITH ("security_invoker"='true') AS
      LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "cp"."universe_id")));
 
 
---
--- Name: codes; Type: TABLE; Schema: public; Owner: -
---
+ALTER VIEW "public"."checklist_pages_view" OWNER TO "postgres";
 
-CREATE TABLE "public"."codes" (
+
+CREATE TABLE IF NOT EXISTS "public"."codes" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "game_id" "uuid" NOT NULL,
     "code" "text" NOT NULL,
@@ -2190,11 +2525,10 @@ CREATE TABLE "public"."codes" (
 );
 
 
---
--- Name: games; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."codes" OWNER TO "postgres";
 
-CREATE TABLE "public"."games" (
+
+CREATE TABLE IF NOT EXISTS "public"."games" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "name" "text" NOT NULL,
     "slug" "text" NOT NULL,
@@ -2202,13 +2536,11 @@ CREATE TABLE "public"."games" (
     "cover_image" "text",
     "seo_title" "text",
     "seo_description" "text",
-    "description_md" "text",
     "is_published" boolean DEFAULT false NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "intro_md" "text",
     "redeem_md" "text",
-    "author_id" "uuid",
     "expired_codes" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
     "source_url_2" "text",
     "source_url_3" "text",
@@ -2221,21 +2553,26 @@ CREATE TABLE "public"."games" (
     "universe_id" bigint,
     "rewards_md" "text",
     "troubleshoot_md" "text",
-    "about_game_md" "text",
     "old_slugs" "text"[] DEFAULT '{}'::"text"[] NOT NULL,
     "re_rewritten_at" timestamp with time zone,
     "interlinking_ai" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
     "interlinking_ai_copy_md" "text",
     "published_at" timestamp with time zone,
-    "find_codes_md" "text"
+    "find_codes_md" "text",
+    "source_url_4" "text",
+    "source_url_5" "text",
+    "source_url_6" "text",
+    "source_url_7" "text",
+    "source_url_8" "text",
+    "source_url_9" "text",
+    "source_url_10" "text"
 );
 
 
---
--- Name: code_pages_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."games" OWNER TO "postgres";
 
-CREATE VIEW "public"."code_pages_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."code_pages_view" WITH ("security_invoker"='true') AS
  WITH "code_stats" AS (
          SELECT "c"."game_id",
             "jsonb_agg"("c".* ORDER BY "c"."status", "c"."last_seen_at" DESC) FILTER (WHERE ("c"."id" IS NOT NULL)) AS "codes",
@@ -2248,7 +2585,6 @@ CREATE VIEW "public"."code_pages_view" WITH ("security_invoker"='true') AS
     "g"."name",
     "g"."slug",
     "g"."old_slugs",
-    "g"."author_id",
     "g"."roblox_link",
     "g"."universe_id",
     "g"."community_link",
@@ -2264,8 +2600,6 @@ CREATE VIEW "public"."code_pages_view" WITH ("security_invoker"='true') AS
     "g"."find_codes_md",
     "g"."troubleshoot_md",
     "g"."rewards_md",
-    "g"."about_game_md",
-    "g"."description_md",
     "g"."internal_links",
     "g"."is_published",
     "g"."re_rewritten_at",
@@ -2277,10 +2611,6 @@ CREATE VIEW "public"."code_pages_view" WITH ("security_invoker"='true') AS
     COALESCE("cs"."active_code_count", (0)::bigint) AS "active_code_count",
     "cs"."latest_code_first_seen_at",
     GREATEST(COALESCE("cs"."latest_code_first_seen_at", "g"."updated_at"), "g"."updated_at") AS "content_updated_at",
-        CASE
-            WHEN ("a"."id" IS NULL) THEN NULL::"jsonb"
-            ELSE "jsonb_build_object"('id', "a"."id", 'name', "a"."name", 'slug', "a"."slug", 'gravatar_email', "a"."gravatar_email", 'avatar_url', "a"."avatar_url", 'bio_md', "a"."bio_md", 'twitter', "a"."twitter", 'youtube', "a"."youtube", 'website', "a"."website", 'facebook', "a"."facebook", 'linkedin', "a"."linkedin", 'instagram', "a"."instagram", 'roblox', "a"."roblox", 'discord', "a"."discord", 'created_at', "a"."created_at", 'updated_at', "a"."updated_at")
-        END AS "author",
         CASE
             WHEN ("u"."universe_id" IS NULL) THEN NULL::"jsonb"
             ELSE "jsonb_build_object"('universe_id', "u"."universe_id", 'slug', "u"."slug", 'display_name', "u"."display_name", 'name', "u"."name", 'creator_name', "u"."creator_name", 'creator_id', "u"."creator_id", 'creator_type', "u"."creator_type", 'social_links', "u"."social_links", 'icon_url', "u"."icon_url", 'genre_l1', "u"."genre_l1", 'genre_l2', "u"."genre_l2", 'playing', "u"."playing", 'visits', "u"."visits", 'favorites', "u"."favorites", 'likes', "u"."likes", 'dislikes', "u"."dislikes", 'age_rating', "u"."age_rating", 'desktop_enabled', "u"."desktop_enabled", 'mobile_enabled', "u"."mobile_enabled", 'tablet_enabled', "u"."tablet_enabled", 'console_enabled', "u"."console_enabled", 'vr_enabled', "u"."vr_enabled", 'updated_at', "u"."updated_at", 'description', "u"."description", 'game_description_md', "u"."game_description_md")
@@ -2302,17 +2632,15 @@ CREATE VIEW "public"."code_pages_view" WITH ("security_invoker"='true') AS
                   ORDER BY COALESCE("cs2"."active_code_count", (0)::bigint) DESC, "g2"."updated_at" DESC
                  LIMIT 6) "rec") AS "recommended_games",
     "g"."interlinking_ai_copy_md"
-   FROM ((("public"."games" "g"
+   FROM (("public"."games" "g"
      LEFT JOIN "code_stats" "cs" ON (("cs"."game_id" = "g"."id")))
-     LEFT JOIN "public"."authors" "a" ON (("a"."id" = "g"."author_id")))
      LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "g"."universe_id")));
 
 
---
--- Name: comments; Type: TABLE; Schema: public; Owner: -
---
+ALTER VIEW "public"."code_pages_view" OWNER TO "postgres";
 
-CREATE TABLE "public"."comments" (
+
+CREATE TABLE IF NOT EXISTS "public"."comments" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "entity_type" "text" NOT NULL,
     "entity_id" "uuid" NOT NULL,
@@ -2330,11 +2658,10 @@ CREATE TABLE "public"."comments" (
 );
 
 
---
--- Name: event_guide_generation_queue; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."comments" OWNER TO "postgres";
 
-CREATE TABLE "public"."event_guide_generation_queue" (
+
+CREATE TABLE IF NOT EXISTS "public"."event_guide_generation_queue" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "event_id" "text" NOT NULL,
     "universe_id" bigint,
@@ -2351,11 +2678,10 @@ CREATE TABLE "public"."event_guide_generation_queue" (
 );
 
 
---
--- Name: events_pages; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."event_guide_generation_queue" OWNER TO "postgres";
 
-CREATE TABLE "public"."events_pages" (
+
+CREATE TABLE IF NOT EXISTS "public"."events_pages" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "universe_id" bigint NOT NULL,
     "title" "text" NOT NULL,
@@ -2366,16 +2692,14 @@ CREATE TABLE "public"."events_pages" (
     "published_at" timestamp with time zone,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "slug" "text",
-    "author_id" "uuid"
+    "slug" "text"
 );
 
 
---
--- Name: game_code_stats; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."events_pages" OWNER TO "postgres";
 
-CREATE VIEW "public"."game_code_stats" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."game_code_stats" WITH ("security_invoker"='true') AS
  SELECT "g"."id",
     "g"."name",
     "g"."slug",
@@ -2396,11 +2720,10 @@ CREATE VIEW "public"."game_code_stats" WITH ("security_invoker"='true') AS
   WHERE ("g"."is_published" = true);
 
 
---
--- Name: game_generation_queue; Type: TABLE; Schema: public; Owner: -
---
+ALTER VIEW "public"."game_code_stats" OWNER TO "postgres";
 
-CREATE TABLE "public"."game_generation_queue" (
+
+CREATE TABLE IF NOT EXISTS "public"."game_generation_queue" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "game_name" "text" NOT NULL,
     "status" "text" DEFAULT 'pending'::"text" NOT NULL,
@@ -2413,11 +2736,10 @@ CREATE TABLE "public"."game_generation_queue" (
 );
 
 
---
--- Name: game_list_entries; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."game_generation_queue" OWNER TO "postgres";
 
-CREATE TABLE "public"."game_list_entries" (
+
+CREATE TABLE IF NOT EXISTS "public"."game_list_entries" (
     "list_id" "uuid" NOT NULL,
     "game_id" "uuid",
     "rank" integer NOT NULL,
@@ -2430,11 +2752,10 @@ CREATE TABLE "public"."game_list_entries" (
 );
 
 
---
--- Name: game_lists; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."game_list_entries" OWNER TO "postgres";
 
-CREATE TABLE "public"."game_lists" (
+
+CREATE TABLE IF NOT EXISTS "public"."game_lists" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "slug" "text" NOT NULL,
     "title" "text" NOT NULL,
@@ -2459,11 +2780,10 @@ CREATE TABLE "public"."game_lists" (
 );
 
 
---
--- Name: game_lists_index_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."game_lists" OWNER TO "postgres";
 
-CREATE VIEW "public"."game_lists_index_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."game_lists_index_view" WITH ("security_invoker"='true') AS
  SELECT "id",
     "slug",
     "title",
@@ -2485,11 +2805,10 @@ CREATE VIEW "public"."game_lists_index_view" WITH ("security_invoker"='true') AS
   WHERE ("is_published" = true);
 
 
---
--- Name: game_lists_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER VIEW "public"."game_lists_index_view" OWNER TO "postgres";
 
-CREATE VIEW "public"."game_lists_view" AS
+
+CREATE OR REPLACE VIEW "public"."game_lists_view" AS
 SELECT
     NULL::"uuid" AS "id",
     NULL::"text" AS "slug",
@@ -2514,11 +2833,10 @@ SELECT
     NULL::"jsonb" AS "other_lists";
 
 
---
--- Name: game_pages_index_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER VIEW "public"."game_lists_view" OWNER TO "postgres";
 
-CREATE VIEW "public"."game_pages_index_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."game_pages_index_view" WITH ("security_invoker"='true') AS
  SELECT "g"."id",
     "g"."slug",
     "g"."name",
@@ -2526,34 +2844,27 @@ CREATE VIEW "public"."game_pages_index_view" WITH ("security_invoker"='true') AS
     "g"."cover_image",
     "g"."updated_at",
     "g"."created_at",
-    "g"."author_id",
     "g"."universe_id",
     "g"."internal_links",
     COALESCE("cs"."active_code_count", (0)::bigint) AS "active_code_count",
     "cs"."latest_code_first_seen_at",
     GREATEST(COALESCE("cs"."latest_code_first_seen_at", "g"."updated_at"), "g"."updated_at") AS "content_updated_at",
     "u"."genre_l1",
-    "u"."genre_l2",
-        CASE
-            WHEN ("a"."id" IS NULL) THEN NULL::"jsonb"
-            ELSE "jsonb_build_object"('id', "a"."id", 'name', "a"."name", 'slug', "a"."slug")
-        END AS "author"
-   FROM ((("public"."games" "g"
+    "u"."genre_l2"
+   FROM (("public"."games" "g"
      LEFT JOIN ( SELECT "codes"."game_id",
             "count"(*) FILTER (WHERE ("codes"."status" = 'active'::"text")) AS "active_code_count",
             "max"("codes"."first_seen_at") FILTER (WHERE ("codes"."status" = 'active'::"text")) AS "latest_code_first_seen_at"
            FROM "public"."codes"
           GROUP BY "codes"."game_id") "cs" ON (("cs"."game_id" = "g"."id")))
-     LEFT JOIN "public"."authors" "a" ON (("a"."id" = "g"."author_id")))
      LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "g"."universe_id")))
   WHERE ("g"."is_published" IS NOT NULL);
 
 
---
--- Name: roblox_catalog_items; Type: TABLE; Schema: public; Owner: -
---
+ALTER VIEW "public"."game_pages_index_view" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_catalog_items" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_items" (
     "asset_id" bigint NOT NULL,
     "item_type" "text" DEFAULT 'Asset'::"text" NOT NULL,
     "asset_type_id" integer,
@@ -2626,11 +2937,98 @@ CREATE TABLE "public"."roblox_catalog_items" (
 );
 
 
---
--- Name: limited_items_trading_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_catalog_items" OWNER TO "postgres";
 
-CREATE VIEW "public"."limited_items_trading_view" WITH ("security_invoker"='true') AS
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."collectible_item_id" IS 'Collectible item UUID for UGC Limiteds (needed for marketplace-sales API)';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."rap" IS 'Recent Average Price from Roblox Economy API';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."rap_sales" IS 'Total sales count from Roblox Economy API';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."rap_stock" IS 'Current stock from Roblox Economy API';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."rap_price_points" IS 'Historical price data points from Roblox Economy API';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."rap_volume_points" IS 'Historical volume data points from Roblox Economy API';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."rap_last_fetched" IS 'When RAP data was last fetched from Roblox';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."trading_value" IS 'Calculated trading value using VWAP algorithm (more stable than RAP)';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."trading_value_confidence" IS 'Confidence in trading_value calculation (0-100), based on data quality';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."trend_direction" IS 'Price trend direction: rising, stable, or falling';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."trend_strength" IS 'Strength of trend (0-100) based on R² from linear regression';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."trend_change_7d" IS 'Percentage price change over last 7 days';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."trend_change_30d" IS 'Percentage price change over last 30 days';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."demand_level" IS 'Trading demand level: amazing, popular, normal, or terrible';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."demand_score" IS 'Demand score (0-100) based on sales velocity and consistency';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."demand_sales_per_day" IS 'Average sales per day based on volume history';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."demand_consistency" IS 'Sales consistency score (0-100), lower variance = higher score';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."is_projected" IS 'True if item appears to have artificially inflated RAP (projected)';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."projected_confidence" IS 'Confidence in projected detection (0-100)';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."projected_reason" IS 'Reason why item is flagged as potentially projected';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."trading_metrics_calculated_at" IS 'When trading metrics were last calculated';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."limited_type" IS 'Type of Limited: classic (old system) or ugc (new collectibles)';
+
+
+
+CREATE OR REPLACE VIEW "public"."limited_items_trading_view" WITH ("security_invoker"='true') AS
  SELECT "asset_id",
     "name",
     "description",
@@ -2693,11 +3091,14 @@ CREATE VIEW "public"."limited_items_trading_view" WITH ("security_invoker"='true
   WHERE (("is_limited" = true) OR ("is_limited_unique" = true));
 
 
---
--- Name: quiz_pages; Type: TABLE; Schema: public; Owner: -
---
+ALTER VIEW "public"."limited_items_trading_view" OWNER TO "postgres";
 
-CREATE TABLE "public"."quiz_pages" (
+
+COMMENT ON VIEW "public"."limited_items_trading_view" IS 'Simplified view of Limited items with trading data and freshness indicators for frontend';
+
+
+
+CREATE TABLE IF NOT EXISTS "public"."quiz_pages" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "universe_id" bigint,
     "code" "text" NOT NULL,
@@ -2713,11 +3114,10 @@ CREATE TABLE "public"."quiz_pages" (
 );
 
 
---
--- Name: quiz_pages_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."quiz_pages" OWNER TO "postgres";
 
-CREATE VIEW "public"."quiz_pages_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."quiz_pages_view" WITH ("security_invoker"='true') AS
  SELECT "qp"."id",
     "qp"."universe_id",
     "qp"."code",
@@ -2739,25 +3139,23 @@ CREATE VIEW "public"."quiz_pages_view" WITH ("security_invoker"='true') AS
      LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "qp"."universe_id")));
 
 
---
--- Name: revalidation_events; Type: TABLE; Schema: public; Owner: -
---
+ALTER VIEW "public"."quiz_pages_view" OWNER TO "postgres";
 
-CREATE TABLE "public"."revalidation_events" (
+
+CREATE TABLE IF NOT EXISTS "public"."revalidation_events" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "entity_type" "text" NOT NULL,
     "slug" "text" NOT NULL,
     "source" "text",
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    CONSTRAINT "revalidation_events_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'list'::"text", 'author'::"text", 'event'::"text", 'checklist'::"text", 'tool'::"text", 'catalog'::"text", 'music'::"text", 'quiz'::"text", 'wiki'::"text"])))
+    CONSTRAINT "revalidation_events_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'list'::"text", 'author'::"text", 'event'::"text", 'checklist'::"text", 'tool'::"text", 'catalog'::"text", 'music'::"text", 'quiz'::"text", 'wiki'::"text", 'wiki_catalog'::"text"])))
 );
 
 
---
--- Name: roblox_catalog_categories; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."revalidation_events" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_catalog_categories" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_categories" (
     "category" "text" NOT NULL,
     "name" "text",
     "category_id" integer,
@@ -2770,11 +3168,10 @@ CREATE TABLE "public"."roblox_catalog_categories" (
 );
 
 
---
--- Name: roblox_catalog_discovery_hits; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_catalog_categories" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_catalog_discovery_hits" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_discovery_hits" (
     "run_id" "uuid" NOT NULL,
     "asset_id" bigint NOT NULL,
     "query_hash" "text",
@@ -2787,11 +3184,10 @@ CREATE TABLE "public"."roblox_catalog_discovery_hits" (
 );
 
 
---
--- Name: roblox_catalog_discovery_runs; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_catalog_discovery_hits" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_catalog_discovery_runs" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_discovery_runs" (
     "run_id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "strategy" "text" NOT NULL,
     "category" "text",
@@ -2808,11 +3204,10 @@ CREATE TABLE "public"."roblox_catalog_discovery_runs" (
 );
 
 
---
--- Name: roblox_catalog_item_images; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_catalog_discovery_runs" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_catalog_item_images" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_item_images" (
     "asset_id" bigint NOT NULL,
     "size" "text" NOT NULL,
     "format" "text" NOT NULL,
@@ -2825,11 +3220,10 @@ CREATE TABLE "public"."roblox_catalog_item_images" (
 );
 
 
---
--- Name: roblox_catalog_items_history; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_catalog_item_images" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_catalog_items_history" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_items_history" (
     "asset_id" bigint NOT NULL,
     "recorded_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "rap" bigint,
@@ -2840,11 +3234,26 @@ CREATE TABLE "public"."roblox_catalog_items_history" (
 );
 
 
---
--- Name: roblox_catalog_refresh_queue; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_catalog_items_history" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_catalog_refresh_queue" (
+
+COMMENT ON TABLE "public"."roblox_catalog_items_history" IS 'Historical snapshots of catalog items for tracking changes over time';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items_history"."rap" IS 'RAP value at this snapshot';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items_history"."sales" IS 'Total sales at this snapshot';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items_history"."price_robux" IS 'Price at this snapshot';
+
+
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_refresh_queue" (
     "asset_id" bigint NOT NULL,
     "priority" "text" DEFAULT 'new'::"text" NOT NULL,
     "next_run_at" timestamp with time zone DEFAULT "now"() NOT NULL,
@@ -2856,11 +3265,10 @@ CREATE TABLE "public"."roblox_catalog_refresh_queue" (
 );
 
 
---
--- Name: roblox_catalog_subcategories; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_catalog_refresh_queue" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_catalog_subcategories" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_subcategories" (
     "subcategory" "text" NOT NULL,
     "category" "text" NOT NULL,
     "name" "text",
@@ -2873,11 +3281,10 @@ CREATE TABLE "public"."roblox_catalog_subcategories" (
 );
 
 
---
--- Name: roblox_groups; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_catalog_subcategories" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_groups" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_groups" (
     "group_id" bigint NOT NULL,
     "name" "text" NOT NULL,
     "description" "text",
@@ -2890,11 +3297,10 @@ CREATE TABLE "public"."roblox_groups" (
 );
 
 
---
--- Name: roblox_music_ids; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_groups" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_music_ids" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_music_ids" (
     "asset_id" bigint NOT NULL,
     "title" "text" NOT NULL,
     "artist" "text" NOT NULL,
@@ -2922,11 +3328,10 @@ CREATE TABLE "public"."roblox_music_ids" (
 );
 
 
---
--- Name: roblox_music_artists_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_music_ids" OWNER TO "postgres";
 
-CREATE VIEW "public"."roblox_music_artists_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."roblox_music_artists_view" WITH ("security_invoker"='true') AS
  WITH "normalized" AS (
          SELECT TRIM(BOTH FROM "roblox_music_ids"."artist") AS "label",
             "regexp_replace"(TRIM(BOTH FROM "regexp_replace"("replace"("lower"(TRIM(BOTH FROM "roblox_music_ids"."artist")), '&'::"text", 'and'::"text"), '[^a-z0-9]+'::"text", ' '::"text", 'g'::"text")), '\s+'::"text", '-'::"text", 'g'::"text") AS "slug"
@@ -2941,11 +3346,10 @@ CREATE VIEW "public"."roblox_music_artists_view" WITH ("security_invoker"='true'
   GROUP BY "slug";
 
 
---
--- Name: roblox_music_genres_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER VIEW "public"."roblox_music_artists_view" OWNER TO "postgres";
 
-CREATE VIEW "public"."roblox_music_genres_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."roblox_music_genres_view" WITH ("security_invoker"='true') AS
  WITH "normalized" AS (
          SELECT TRIM(BOTH FROM "roblox_music_ids"."genre") AS "label",
             "regexp_replace"(TRIM(BOTH FROM "regexp_replace"("replace"("lower"(TRIM(BOTH FROM "roblox_music_ids"."genre")), '&'::"text", 'and'::"text"), '[^a-z0-9]+'::"text", ' '::"text", 'g'::"text")), '\s+'::"text", '-'::"text", 'g'::"text") AS "slug"
@@ -2960,11 +3364,10 @@ CREATE VIEW "public"."roblox_music_genres_view" WITH ("security_invoker"='true')
   GROUP BY "slug";
 
 
---
--- Name: roblox_music_ids_boombox_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER VIEW "public"."roblox_music_genres_view" OWNER TO "postgres";
 
-CREATE VIEW "public"."roblox_music_ids_boombox_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."roblox_music_ids_boombox_view" WITH ("security_invoker"='true') AS
  SELECT "asset_id",
     "title",
     "artist",
@@ -2993,11 +3396,10 @@ CREATE VIEW "public"."roblox_music_ids_boombox_view" WITH ("security_invoker"='t
   WHERE ("boombox_ready" IS TRUE);
 
 
---
--- Name: roblox_music_ids_ranked_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER VIEW "public"."roblox_music_ids_boombox_view" OWNER TO "postgres";
 
-CREATE VIEW "public"."roblox_music_ids_ranked_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."roblox_music_ids_ranked_view" WITH ("security_invoker"='true') AS
  SELECT "asset_id",
     "title",
     "artist",
@@ -3031,11 +3433,10 @@ CREATE VIEW "public"."roblox_music_ids_ranked_view" WITH ("security_invoker"='tr
    FROM "public"."roblox_music_ids" "rm";
 
 
---
--- Name: roblox_universe_badges; Type: TABLE; Schema: public; Owner: -
---
+ALTER VIEW "public"."roblox_music_ids_ranked_view" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universe_badges" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_badges" (
     "badge_id" bigint NOT NULL,
     "universe_id" bigint NOT NULL,
     "name" "text" NOT NULL,
@@ -3055,11 +3456,40 @@ CREATE TABLE "public"."roblox_universe_badges" (
 );
 
 
---
--- Name: roblox_universe_gamepasses; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universe_badges" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universe_gamepasses" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_discovery_jobs" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "job_key" "text" NOT NULL,
+    "source" "text" NOT NULL,
+    "strategy" "text" NOT NULL,
+    "query" "text",
+    "params" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "status" "text" DEFAULT 'pending'::"text" NOT NULL,
+    "priority" integer DEFAULT 0 NOT NULL,
+    "attempts" integer DEFAULT 0 NOT NULL,
+    "max_attempts" integer DEFAULT 5 NOT NULL,
+    "result_count" integer DEFAULT 0 NOT NULL,
+    "new_universe_count" integer DEFAULT 0 NOT NULL,
+    "cursor" "text",
+    "cooldown_until" timestamp with time zone,
+    "next_run_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "locked_at" timestamp with time zone,
+    "locked_by" "text",
+    "last_error" "text",
+    "last_run_at" timestamp with time zone,
+    "completed_at" timestamp with time zone,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "roblox_universe_discovery_jobs_status_check" CHECK (("status" = ANY (ARRAY['pending'::"text", 'in_progress'::"text", 'completed'::"text", 'failed'::"text", 'paused'::"text"])))
+);
+
+
+ALTER TABLE "public"."roblox_universe_discovery_jobs" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_gamepasses" (
     "pass_id" bigint NOT NULL,
     "universe_id" bigint NOT NULL,
     "product_id" bigint,
@@ -3076,11 +3506,10 @@ CREATE TABLE "public"."roblox_universe_gamepasses" (
 );
 
 
---
--- Name: roblox_universe_media; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universe_gamepasses" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universe_media" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_media" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "universe_id" bigint NOT NULL,
     "media_type" "text" NOT NULL,
@@ -3095,11 +3524,10 @@ CREATE TABLE "public"."roblox_universe_media" (
 );
 
 
---
--- Name: roblox_universe_place_servers; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universe_media" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universe_place_servers" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_place_servers" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "place_id" bigint NOT NULL,
     "universe_id" bigint,
@@ -3114,11 +3542,10 @@ CREATE TABLE "public"."roblox_universe_place_servers" (
 );
 
 
---
--- Name: roblox_universe_search_snapshots; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universe_place_servers" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universe_search_snapshots" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_search_snapshots" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "query" "text" NOT NULL,
     "universe_id" bigint NOT NULL,
@@ -3134,11 +3561,10 @@ CREATE TABLE "public"."roblox_universe_search_snapshots" (
 );
 
 
---
--- Name: roblox_universe_social_links; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universe_search_snapshots" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universe_social_links" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_social_links" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "universe_id" bigint NOT NULL,
     "platform" "text" NOT NULL,
@@ -3149,11 +3575,10 @@ CREATE TABLE "public"."roblox_universe_social_links" (
 );
 
 
---
--- Name: roblox_universe_sort_definitions; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universe_social_links" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universe_sort_definitions" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_sort_definitions" (
     "sort_id" "text" NOT NULL,
     "title" "text",
     "description" "text",
@@ -3163,11 +3588,10 @@ CREATE TABLE "public"."roblox_universe_sort_definitions" (
 );
 
 
---
--- Name: roblox_universe_sort_entries; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universe_sort_definitions" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universe_sort_entries" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_sort_entries" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "sort_id" "text" NOT NULL,
     "universe_id" bigint NOT NULL,
@@ -3183,11 +3607,10 @@ CREATE TABLE "public"."roblox_universe_sort_entries" (
 );
 
 
---
--- Name: roblox_universe_sort_runs; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universe_sort_entries" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universe_sort_runs" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_sort_runs" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "session_id" "uuid" NOT NULL,
     "device" "text" NOT NULL,
@@ -3196,11 +3619,10 @@ CREATE TABLE "public"."roblox_universe_sort_runs" (
 );
 
 
---
--- Name: roblox_universe_stats_daily; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universe_sort_runs" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_universe_stats_daily" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_stats_daily" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "universe_id" bigint NOT NULL,
     "stat_date" "date" NOT NULL,
@@ -3218,33 +3640,30 @@ CREATE TABLE "public"."roblox_universe_stats_daily" (
 );
 
 
---
--- Name: roblox_virtual_event_categories; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_universe_stats_daily" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_virtual_event_categories" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_virtual_event_categories" (
     "event_id" "text" NOT NULL,
     "category" "text" NOT NULL,
     "rank" integer NOT NULL
 );
 
 
---
--- Name: roblox_virtual_event_thumbnails; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_virtual_event_categories" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_virtual_event_thumbnails" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_virtual_event_thumbnails" (
     "event_id" "text" NOT NULL,
     "media_id" bigint NOT NULL,
     "rank" integer NOT NULL
 );
 
 
---
--- Name: roblox_virtual_events; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_virtual_event_thumbnails" OWNER TO "postgres";
 
-CREATE TABLE "public"."roblox_virtual_events" (
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_virtual_events" (
     "event_id" "text" NOT NULL,
     "universe_id" bigint NOT NULL,
     "place_id" bigint,
@@ -3275,11 +3694,10 @@ CREATE TABLE "public"."roblox_virtual_events" (
 );
 
 
---
--- Name: search_index; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."roblox_virtual_events" OWNER TO "postgres";
 
-CREATE TABLE "public"."search_index" (
+
+CREATE TABLE IF NOT EXISTS "public"."search_index" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "entity_type" "text" NOT NULL,
     "entity_id" "text" NOT NULL,
@@ -3294,11 +3712,10 @@ CREATE TABLE "public"."search_index" (
 );
 
 
---
--- Name: tools; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."search_index" OWNER TO "postgres";
 
-CREATE TABLE "public"."tools" (
+
+CREATE TABLE IF NOT EXISTS "public"."tools" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "code" "text" NOT NULL,
     "title" "text" NOT NULL,
@@ -3320,11 +3737,10 @@ CREATE TABLE "public"."tools" (
 );
 
 
---
--- Name: tools_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."tools" OWNER TO "postgres";
 
-CREATE VIEW "public"."tools_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."tools_view" WITH ("security_invoker"='true') AS
  SELECT "id",
     "code",
     "title",
@@ -3347,11 +3763,10 @@ CREATE VIEW "public"."tools_view" WITH ("security_invoker"='true') AS
    FROM "public"."tools" "t";
 
 
---
--- Name: user_checklist_progress; Type: TABLE; Schema: public; Owner: -
---
+ALTER VIEW "public"."tools_view" OWNER TO "postgres";
 
-CREATE TABLE "public"."user_checklist_progress" (
+
+CREATE TABLE IF NOT EXISTS "public"."user_checklist_progress" (
     "user_id" "uuid" NOT NULL,
     "checklist_slug" "text" NOT NULL,
     "checked_item_ids" "text"[] DEFAULT '{}'::"text"[] NOT NULL,
@@ -3360,11 +3775,10 @@ CREATE TABLE "public"."user_checklist_progress" (
 );
 
 
---
--- Name: user_code_progress; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."user_checklist_progress" OWNER TO "postgres";
 
-CREATE TABLE "public"."user_code_progress" (
+
+CREATE TABLE IF NOT EXISTS "public"."user_code_progress" (
     "user_id" "uuid" NOT NULL,
     "game_slug" "text" NOT NULL,
     "used_code_ids" "text"[] DEFAULT '{}'::"text"[] NOT NULL,
@@ -3373,11 +3787,10 @@ CREATE TABLE "public"."user_code_progress" (
 );
 
 
---
--- Name: user_quiz_progress; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."user_code_progress" OWNER TO "postgres";
 
-CREATE TABLE "public"."user_quiz_progress" (
+
+CREATE TABLE IF NOT EXISTS "public"."user_quiz_progress" (
     "user_id" "uuid" NOT NULL,
     "quiz_code" "text" NOT NULL,
     "seen_question_ids" "text"[] DEFAULT '{}'::"text"[] NOT NULL,
@@ -3390,11 +3803,72 @@ CREATE TABLE "public"."user_quiz_progress" (
 );
 
 
---
--- Name: wiki_pages; Type: TABLE; Schema: public; Owner: -
---
+ALTER TABLE "public"."user_quiz_progress" OWNER TO "postgres";
 
-CREATE TABLE "public"."wiki_pages" (
+
+CREATE TABLE IF NOT EXISTS "public"."wiki_catalog_pages" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "wiki_page_id" "uuid",
+    "universe_id" bigint,
+    "wiki_slug" "text" NOT NULL,
+    "collection_slug" "text" NOT NULL,
+    "code" "text" NOT NULL,
+    "title" "text" NOT NULL,
+    "seo_title" "text" NOT NULL,
+    "meta_description" "text" NOT NULL,
+    "intro_md" "text",
+    "how_it_works_md" "text",
+    "description_md" "text",
+    "description_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "faq_json" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "schema_ld_json" "jsonb",
+    "thumb_url" "text",
+    "wiki_md" "text",
+    "wiki_sort_order" integer,
+    "is_published" boolean DEFAULT true NOT NULL,
+    "published_at" timestamp with time zone,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "wiki_catalog_pages_code_not_blank" CHECK (("length"("btrim"("code")) > 0)),
+    CONSTRAINT "wiki_catalog_pages_collection_slug_not_blank" CHECK (("length"("btrim"("collection_slug")) > 0)),
+    CONSTRAINT "wiki_catalog_pages_wiki_slug_not_blank" CHECK (("length"("btrim"("wiki_slug")) > 0))
+);
+
+
+ALTER TABLE "public"."wiki_catalog_pages" OWNER TO "postgres";
+
+
+CREATE OR REPLACE VIEW "public"."wiki_catalog_pages_view" WITH ("security_invoker"='true') AS
+ SELECT "id",
+    "wiki_page_id",
+    "universe_id",
+    "wiki_slug",
+    "collection_slug",
+    "code",
+    "title",
+    "seo_title",
+    "meta_description",
+    "intro_md",
+    "how_it_works_md",
+    "description_md",
+    "description_json",
+    "faq_json",
+    "schema_ld_json",
+    "thumb_url",
+    "wiki_md",
+    "wiki_sort_order",
+    "is_published",
+    "published_at",
+    "created_at",
+    "updated_at",
+    GREATEST("updated_at", COALESCE("published_at", "updated_at")) AS "content_updated_at"
+   FROM "public"."wiki_catalog_pages" "wcp";
+
+
+ALTER VIEW "public"."wiki_catalog_pages_view" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."wiki_pages" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "slug" "text" NOT NULL,
     "title" "text" NOT NULL,
@@ -3407,15 +3881,15 @@ CREATE TABLE "public"."wiki_pages" (
     "published_at" timestamp with time zone,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "cover_image" "text",
     CONSTRAINT "wiki_pages_slug_not_empty" CHECK (("length"(TRIM(BOTH FROM "slug")) > 0))
 );
 
 
---
--- Name: wiki_pages_view; Type: VIEW; Schema: public; Owner: -
---
+ALTER TABLE "public"."wiki_pages" OWNER TO "postgres";
 
-CREATE VIEW "public"."wiki_pages_view" WITH ("security_invoker"='true') AS
+
+CREATE OR REPLACE VIEW "public"."wiki_pages_view" WITH ("security_invoker"='true') AS
  SELECT "wp"."id",
     "wp"."slug",
     "wp"."title",
@@ -3428,6 +3902,7 @@ CREATE VIEW "public"."wiki_pages_view" WITH ("security_invoker"='true') AS
     "wp"."published_at",
     "wp"."created_at",
     "wp"."updated_at",
+    "wp"."cover_image",
     GREATEST("wp"."updated_at", COALESCE("wp"."published_at", "wp"."updated_at")) AS "content_updated_at",
     "u"."root_place_id" AS "universe_root_place_id",
     "u"."name" AS "universe_name",
@@ -3473,1321 +3948,835 @@ CREATE VIEW "public"."wiki_pages_view" WITH ("security_invoker"='true') AS
      LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "wp"."universe_id")));
 
 
---
--- Name: app_sessions app_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
+ALTER VIEW "public"."wiki_pages_view" OWNER TO "postgres";
+
 
 ALTER TABLE ONLY "public"."app_sessions"
     ADD CONSTRAINT "app_sessions_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: app_users app_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."app_users"
     ADD CONSTRAINT "app_users_pkey" PRIMARY KEY ("user_id");
 
 
---
--- Name: article_generation_artifacts article_generation_artifacts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."article_generation_artifacts"
     ADD CONSTRAINT "article_generation_artifacts_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: article_generation_queue article_generation_queue_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."article_generation_queue"
     ADD CONSTRAINT "article_generation_queue_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: article_source_images article_source_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."article_source_images"
     ADD CONSTRAINT "article_source_images_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: articles articles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."articles"
     ADD CONSTRAINT "articles_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: articles articles_slug_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."articles"
     ADD CONSTRAINT "articles_slug_key" UNIQUE ("slug");
 
 
---
--- Name: authors authors_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."authors"
     ADD CONSTRAINT "authors_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: authors authors_slug_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."authors"
     ADD CONSTRAINT "authors_slug_key" UNIQUE ("slug");
 
 
---
--- Name: catalog_pages catalog_pages_code_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."catalog_pages"
     ADD CONSTRAINT "catalog_pages_code_key" UNIQUE ("code");
 
 
---
--- Name: catalog_pages catalog_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."catalog_pages"
     ADD CONSTRAINT "catalog_pages_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: checklist_items checklist_items_page_id_section_code_title_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."checklist_items"
     ADD CONSTRAINT "checklist_items_page_id_section_code_title_key" UNIQUE ("page_id", "section_code", "title");
 
 
---
--- Name: checklist_items checklist_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."checklist_items"
     ADD CONSTRAINT "checklist_items_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: checklist_pages checklist_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."checklist_pages"
     ADD CONSTRAINT "checklist_pages_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: checklist_pages checklist_pages_universe_id_slug_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."checklist_pages"
     ADD CONSTRAINT "checklist_pages_universe_id_slug_key" UNIQUE ("universe_id", "slug");
 
 
---
--- Name: codes codes_game_id_code_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."codes"
     ADD CONSTRAINT "codes_game_id_code_key" UNIQUE ("game_id", "code");
 
 
---
--- Name: codes codes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."codes"
     ADD CONSTRAINT "codes_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."comments"
     ADD CONSTRAINT "comments_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: event_guide_generation_queue event_guide_generation_queue_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."event_guide_generation_queue"
     ADD CONSTRAINT "event_guide_generation_queue_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: events_pages events_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."events_pages"
     ADD CONSTRAINT "events_pages_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: events_pages events_pages_universe_id_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."events_pages"
     ADD CONSTRAINT "events_pages_universe_id_key" UNIQUE ("universe_id");
 
 
---
--- Name: game_generation_queue game_generation_queue_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."game_generation_queue"
     ADD CONSTRAINT "game_generation_queue_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: game_list_entries game_list_entries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."game_list_entries"
     ADD CONSTRAINT "game_list_entries_pkey" PRIMARY KEY ("list_id", "universe_id");
 
 
---
--- Name: game_lists game_lists_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."game_lists"
     ADD CONSTRAINT "game_lists_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: game_lists game_lists_slug_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."game_lists"
     ADD CONSTRAINT "game_lists_slug_key" UNIQUE ("slug");
 
 
---
--- Name: games games_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."games"
     ADD CONSTRAINT "games_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: games games_slug_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."games"
     ADD CONSTRAINT "games_slug_key" UNIQUE ("slug");
 
 
---
--- Name: quiz_pages quiz_pages_code_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."quiz_pages"
     ADD CONSTRAINT "quiz_pages_code_key" UNIQUE ("code");
 
 
---
--- Name: quiz_pages quiz_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."quiz_pages"
     ADD CONSTRAINT "quiz_pages_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: revalidation_events revalidation_events_entity_slug_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."revalidation_events"
     ADD CONSTRAINT "revalidation_events_entity_slug_key" UNIQUE ("entity_type", "slug");
 
 
---
--- Name: revalidation_events revalidation_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."revalidation_events"
     ADD CONSTRAINT "revalidation_events_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: roblox_catalog_categories roblox_catalog_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_categories"
     ADD CONSTRAINT "roblox_catalog_categories_pkey" PRIMARY KEY ("category");
 
 
---
--- Name: roblox_catalog_discovery_hits roblox_catalog_discovery_hits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_discovery_hits"
     ADD CONSTRAINT "roblox_catalog_discovery_hits_pkey" PRIMARY KEY ("run_id", "asset_id");
 
 
---
--- Name: roblox_catalog_discovery_runs roblox_catalog_discovery_runs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_discovery_runs"
     ADD CONSTRAINT "roblox_catalog_discovery_runs_pkey" PRIMARY KEY ("run_id");
 
 
---
--- Name: roblox_catalog_item_images roblox_catalog_item_images_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_item_images"
     ADD CONSTRAINT "roblox_catalog_item_images_pkey" PRIMARY KEY ("asset_id", "size", "format");
 
 
---
--- Name: roblox_catalog_items_history roblox_catalog_items_history_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_items_history"
     ADD CONSTRAINT "roblox_catalog_items_history_pkey" PRIMARY KEY ("asset_id", "recorded_at");
 
 
---
--- Name: roblox_catalog_items roblox_catalog_items_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_items"
     ADD CONSTRAINT "roblox_catalog_items_pkey" PRIMARY KEY ("asset_id");
 
 
---
--- Name: roblox_catalog_refresh_queue roblox_catalog_refresh_queue_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_refresh_queue"
     ADD CONSTRAINT "roblox_catalog_refresh_queue_pkey" PRIMARY KEY ("asset_id");
 
 
---
--- Name: roblox_catalog_subcategories roblox_catalog_subcategories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_subcategories"
     ADD CONSTRAINT "roblox_catalog_subcategories_pkey" PRIMARY KEY ("subcategory");
 
 
---
--- Name: roblox_groups roblox_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_groups"
     ADD CONSTRAINT "roblox_groups_pkey" PRIMARY KEY ("group_id");
 
 
---
--- Name: roblox_music_ids roblox_music_ids_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_music_ids"
     ADD CONSTRAINT "roblox_music_ids_pkey" PRIMARY KEY ("asset_id");
 
 
---
--- Name: roblox_universe_badges roblox_universe_badges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_badges"
     ADD CONSTRAINT "roblox_universe_badges_pkey" PRIMARY KEY ("badge_id");
 
 
---
--- Name: roblox_universe_gamepasses roblox_universe_gamepasses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
+
+ALTER TABLE ONLY "public"."roblox_universe_discovery_jobs"
+    ADD CONSTRAINT "roblox_universe_discovery_jobs_job_key_key" UNIQUE ("job_key");
+
+
+
+ALTER TABLE ONLY "public"."roblox_universe_discovery_jobs"
+    ADD CONSTRAINT "roblox_universe_discovery_jobs_pkey" PRIMARY KEY ("id");
+
+
 
 ALTER TABLE ONLY "public"."roblox_universe_gamepasses"
     ADD CONSTRAINT "roblox_universe_gamepasses_pkey" PRIMARY KEY ("pass_id");
 
 
---
--- Name: roblox_universe_media roblox_universe_media_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_media"
     ADD CONSTRAINT "roblox_universe_media_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: roblox_universe_place_servers roblox_universe_place_servers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_place_servers"
     ADD CONSTRAINT "roblox_universe_place_servers_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: roblox_universe_place_servers roblox_universe_place_servers_place_id_server_id_fetched_at_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_place_servers"
     ADD CONSTRAINT "roblox_universe_place_servers_place_id_server_id_fetched_at_key" UNIQUE ("place_id", "server_id", "fetched_at");
 
 
---
--- Name: roblox_universe_search_snapshots roblox_universe_search_snapshots_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_search_snapshots"
     ADD CONSTRAINT "roblox_universe_search_snapshots_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: roblox_universe_social_links roblox_universe_social_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_social_links"
     ADD CONSTRAINT "roblox_universe_social_links_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: roblox_universe_social_links roblox_universe_social_links_universe_id_platform_url_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_social_links"
     ADD CONSTRAINT "roblox_universe_social_links_universe_id_platform_url_key" UNIQUE ("universe_id", "platform", "url");
 
 
---
--- Name: roblox_universe_sort_definitions roblox_universe_sort_definitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_sort_definitions"
     ADD CONSTRAINT "roblox_universe_sort_definitions_pkey" PRIMARY KEY ("sort_id");
 
 
---
--- Name: roblox_universe_sort_entries roblox_universe_sort_entries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
     ADD CONSTRAINT "roblox_universe_sort_entries_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: roblox_universe_sort_entries roblox_universe_sort_entries_sort_id_universe_id_session_id_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
     ADD CONSTRAINT "roblox_universe_sort_entries_sort_id_universe_id_session_id_key" UNIQUE ("sort_id", "universe_id", "session_id", "fetched_at");
 
 
---
--- Name: roblox_universe_sort_runs roblox_universe_sort_runs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_sort_runs"
     ADD CONSTRAINT "roblox_universe_sort_runs_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: roblox_universe_stats_daily roblox_universe_stats_daily_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_stats_daily"
     ADD CONSTRAINT "roblox_universe_stats_daily_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: roblox_universe_stats_daily roblox_universe_stats_daily_universe_id_stat_date_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_stats_daily"
     ADD CONSTRAINT "roblox_universe_stats_daily_universe_id_stat_date_key" UNIQUE ("universe_id", "stat_date");
 
 
---
--- Name: roblox_universes roblox_universes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universes"
     ADD CONSTRAINT "roblox_universes_pkey" PRIMARY KEY ("universe_id");
 
 
---
--- Name: roblox_virtual_event_categories roblox_virtual_event_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_virtual_event_categories"
     ADD CONSTRAINT "roblox_virtual_event_categories_pkey" PRIMARY KEY ("event_id", "rank");
 
 
---
--- Name: roblox_virtual_event_thumbnails roblox_virtual_event_thumbnails_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_virtual_event_thumbnails"
     ADD CONSTRAINT "roblox_virtual_event_thumbnails_pkey" PRIMARY KEY ("event_id", "rank");
 
 
---
--- Name: roblox_virtual_events roblox_virtual_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_virtual_events"
     ADD CONSTRAINT "roblox_virtual_events_pkey" PRIMARY KEY ("event_id");
 
 
---
--- Name: search_index search_index_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."search_index"
     ADD CONSTRAINT "search_index_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: tools tools_code_key; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."tools"
     ADD CONSTRAINT "tools_code_key" UNIQUE ("code");
 
 
---
--- Name: tools tools_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."tools"
     ADD CONSTRAINT "tools_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: user_checklist_progress user_checklist_progress_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."user_checklist_progress"
     ADD CONSTRAINT "user_checklist_progress_pkey" PRIMARY KEY ("user_id", "checklist_slug");
 
 
---
--- Name: user_code_progress user_code_progress_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."user_code_progress"
     ADD CONSTRAINT "user_code_progress_pkey" PRIMARY KEY ("user_id", "game_slug");
 
 
---
--- Name: user_quiz_progress user_quiz_progress_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."user_quiz_progress"
     ADD CONSTRAINT "user_quiz_progress_pkey" PRIMARY KEY ("user_id", "quiz_code");
 
 
---
--- Name: wiki_pages wiki_pages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
+
+ALTER TABLE ONLY "public"."wiki_catalog_pages"
+    ADD CONSTRAINT "wiki_catalog_pages_code_key" UNIQUE ("code");
+
+
+
+ALTER TABLE ONLY "public"."wiki_catalog_pages"
+    ADD CONSTRAINT "wiki_catalog_pages_path_key" UNIQUE ("wiki_slug", "collection_slug");
+
+
+
+ALTER TABLE ONLY "public"."wiki_catalog_pages"
+    ADD CONSTRAINT "wiki_catalog_pages_pkey" PRIMARY KEY ("id");
+
+
 
 ALTER TABLE ONLY "public"."wiki_pages"
     ADD CONSTRAINT "wiki_pages_pkey" PRIMARY KEY ("id");
 
 
---
--- Name: idx_app_sessions_expires_at; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_app_sessions_expires_at" ON "public"."app_sessions" USING "btree" ("expires_at");
 
 
---
--- Name: idx_app_sessions_revoked_at; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_app_sessions_revoked_at" ON "public"."app_sessions" USING "btree" ("revoked_at");
 
 
---
--- Name: idx_app_sessions_user_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_app_sessions_user_id" ON "public"."app_sessions" USING "btree" ("user_id");
 
 
---
--- Name: idx_app_users_roblox_user_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE UNIQUE INDEX "idx_app_users_roblox_user_id" ON "public"."app_users" USING "btree" ("roblox_user_id") WHERE ("roblox_user_id" IS NOT NULL);
 
 
---
--- Name: idx_app_users_role; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_app_users_role" ON "public"."app_users" USING "btree" ("role");
 
 
---
--- Name: idx_article_generation_artifacts_article; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_article_generation_artifacts_article" ON "public"."article_generation_artifacts" USING "btree" ("article_id", "created_at" DESC);
 
 
---
--- Name: idx_article_generation_artifacts_queue; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_article_generation_artifacts_queue" ON "public"."article_generation_artifacts" USING "btree" ("queue_id", "created_at" DESC);
 
 
---
--- Name: idx_article_generation_queue_active_idempotency; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE UNIQUE INDEX "idx_article_generation_queue_active_idempotency" ON "public"."article_generation_queue" USING "btree" ("idempotency_key") WHERE (("status" = ANY (ARRAY['pending'::"text", 'processing'::"text"])) AND ("event_id" IS NULL) AND ("idempotency_key" IS NOT NULL));
 
 
---
--- Name: idx_article_generation_queue_event_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE UNIQUE INDEX "idx_article_generation_queue_event_id" ON "public"."article_generation_queue" USING "btree" ("event_id") WHERE ("event_id" IS NOT NULL);
 
 
---
--- Name: idx_article_generation_queue_pending_backoff; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_article_generation_queue_pending_backoff" ON "public"."article_generation_queue" USING "btree" ("status", "next_attempt_at", "created_at");
 
 
---
--- Name: idx_article_generation_queue_status_created; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_article_generation_queue_status_created" ON "public"."article_generation_queue" USING "btree" ("status", "created_at");
 
 
---
--- Name: idx_article_source_images_article; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_article_source_images_article" ON "public"."article_source_images" USING "btree" ("article_id");
 
 
---
--- Name: idx_article_source_images_source; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_article_source_images_source" ON "public"."article_source_images" USING "btree" ("source_host", "source_url");
 
 
---
--- Name: idx_articles_author; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_articles_author" ON "public"."articles" USING "btree" ("author_id", "is_published");
 
 
---
--- Name: idx_articles_published; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_articles_published" ON "public"."articles" USING "btree" ("is_published");
 
 
---
--- Name: idx_articles_published_published_at; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_articles_published_published_at" ON "public"."articles" USING "btree" ("is_published", "published_at" DESC);
 
 
---
--- Name: idx_articles_slug; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_articles_slug" ON "public"."articles" USING "btree" ("lower"("slug"));
 
 
---
--- Name: idx_articles_universe; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_articles_universe" ON "public"."articles" USING "btree" ("universe_id");
 
 
---
--- Name: idx_catalog_pages_is_published; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_catalog_pages_is_published" ON "public"."catalog_pages" USING "btree" ("is_published");
 
 
---
--- Name: idx_catalog_pages_universe_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_catalog_pages_universe_id" ON "public"."catalog_pages" USING "btree" ("universe_id");
 
 
---
--- Name: idx_catalog_pages_universe_wiki_sort; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_catalog_pages_universe_wiki_sort" ON "public"."catalog_pages" USING "btree" ("universe_id", "wiki_sort_order") WHERE ("is_published" = true);
 
 
---
--- Name: idx_checklist_items_page; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_checklist_items_page" ON "public"."checklist_items" USING "btree" ("page_id");
 
 
---
--- Name: idx_checklist_items_page_section; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_checklist_items_page_section" ON "public"."checklist_items" USING "btree" ("page_id", "section_code");
 
 
---
--- Name: idx_checklist_pages_published; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_checklist_pages_published" ON "public"."checklist_pages" USING "btree" ("is_public", "published_at" DESC NULLS LAST, "updated_at" DESC);
 
 
---
--- Name: idx_checklist_pages_universe_slug; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_checklist_pages_universe_slug" ON "public"."checklist_pages" USING "btree" ("universe_id", "lower"("slug"));
 
 
---
--- Name: idx_codes_game_code_upper; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE UNIQUE INDEX "idx_codes_game_code_upper" ON "public"."codes" USING "btree" ("game_id", "upper"("code"));
 
 
---
--- Name: idx_codes_game_first_seen; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_codes_game_first_seen" ON "public"."codes" USING "btree" ("game_id", "first_seen_at" DESC);
 
 
---
--- Name: idx_codes_game_status_seen; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_codes_game_status_seen" ON "public"."codes" USING "btree" ("game_id", "status", "last_seen_at" DESC);
 
 
---
--- Name: idx_codes_status_game; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_codes_status_game" ON "public"."codes" USING "btree" ("status", "game_id");
 
 
---
--- Name: idx_comments_author; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_comments_author" ON "public"."comments" USING "btree" ("author_id");
 
 
---
--- Name: idx_comments_entity_created; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_comments_entity_created" ON "public"."comments" USING "btree" ("entity_type", "entity_id", "created_at" DESC);
 
 
---
--- Name: idx_comments_parent; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_comments_parent" ON "public"."comments" USING "btree" ("parent_id");
 
 
---
--- Name: idx_event_guide_generation_queue_event_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE UNIQUE INDEX "idx_event_guide_generation_queue_event_id" ON "public"."event_guide_generation_queue" USING "btree" ("event_id");
 
 
---
--- Name: idx_event_guide_generation_queue_status_created; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_event_guide_generation_queue_status_created" ON "public"."event_guide_generation_queue" USING "btree" ("status", "created_at");
 
 
---
--- Name: idx_events_pages_author; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX "idx_events_pages_author" ON "public"."events_pages" USING "btree" ("author_id", "is_published");
-
-
---
--- Name: idx_events_pages_is_published; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_events_pages_is_published" ON "public"."events_pages" USING "btree" ("is_published");
 
 
---
--- Name: idx_events_pages_slug; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE UNIQUE INDEX "idx_events_pages_slug" ON "public"."events_pages" USING "btree" ("slug");
 
 
---
--- Name: idx_game_generation_queue_status_created; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_game_generation_queue_status_created" ON "public"."game_generation_queue" USING "btree" ("status", "created_at");
 
 
---
--- Name: idx_game_list_entries_game; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_game_list_entries_game" ON "public"."game_list_entries" USING "btree" ("game_id");
 
 
---
--- Name: idx_game_list_entries_rank; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_game_list_entries_rank" ON "public"."game_list_entries" USING "btree" ("list_id", "rank");
 
 
---
--- Name: idx_game_list_entries_universe; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_game_list_entries_universe" ON "public"."game_list_entries" USING "btree" ("universe_id");
 
 
---
--- Name: idx_game_lists_published; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_game_lists_published" ON "public"."game_lists" USING "btree" ("is_published", "updated_at" DESC);
 
 
---
--- Name: idx_game_lists_slug; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_game_lists_slug" ON "public"."game_lists" USING "btree" ("lower"("slug"));
 
 
---
--- Name: idx_games_author_published; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX "idx_games_author_published" ON "public"."games" USING "btree" ("author_id", "is_published");
-
-
---
--- Name: idx_games_old_slugs; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_games_old_slugs" ON "public"."games" USING "gin" ("old_slugs");
 
 
---
--- Name: idx_games_published; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_games_published" ON "public"."games" USING "btree" ("is_published");
 
 
---
--- Name: idx_games_published_name; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_games_published_name" ON "public"."games" USING "btree" ("is_published", "name");
 
 
---
--- Name: idx_games_published_updated; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_games_published_updated" ON "public"."games" USING "btree" ("is_published", "updated_at" DESC);
 
 
---
--- Name: idx_games_slug; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_games_slug" ON "public"."games" USING "btree" ("lower"("slug"));
 
 
---
--- Name: idx_games_universe_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_games_universe_id" ON "public"."games" USING "btree" ("universe_id");
 
 
---
--- Name: idx_quiz_pages_is_published; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_quiz_pages_is_published" ON "public"."quiz_pages" USING "btree" ("is_published", "published_at" DESC NULLS LAST, "updated_at" DESC);
 
 
---
--- Name: idx_quiz_pages_universe_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_quiz_pages_universe_id" ON "public"."quiz_pages" USING "btree" ("universe_id");
 
 
---
--- Name: idx_revalidation_events_created; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_revalidation_events_created" ON "public"."revalidation_events" USING "btree" ("created_at" DESC);
 
 
---
--- Name: idx_revalidation_events_type_slug; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_revalidation_events_type_slug" ON "public"."revalidation_events" USING "btree" ("entity_type", "slug");
 
 
---
--- Name: idx_roblox_catalog_discovery_hits_asset_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_discovery_hits_asset_id" ON "public"."roblox_catalog_discovery_hits" USING "btree" ("asset_id");
 
 
---
--- Name: idx_roblox_catalog_discovery_hits_query_hash; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_discovery_hits_query_hash" ON "public"."roblox_catalog_discovery_hits" USING "btree" ("query_hash");
 
 
---
--- Name: idx_roblox_catalog_discovery_runs_status; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_discovery_runs_status" ON "public"."roblox_catalog_discovery_runs" USING "btree" ("status");
 
 
---
--- Name: idx_roblox_catalog_item_images_state; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_item_images_state" ON "public"."roblox_catalog_item_images" USING "btree" ("state");
 
 
---
--- Name: idx_roblox_catalog_items_asset_type_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_asset_type_id" ON "public"."roblox_catalog_items" USING "btree" ("asset_type_id");
 
 
---
--- Name: idx_roblox_catalog_items_category; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_category" ON "public"."roblox_catalog_items" USING "btree" ("category");
 
 
---
--- Name: idx_roblox_catalog_items_creator_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_creator_id" ON "public"."roblox_catalog_items" USING "btree" ("creator_id");
 
 
---
--- Name: idx_roblox_catalog_items_demand_level; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_demand_level" ON "public"."roblox_catalog_items" USING "btree" ("demand_level", "trading_value" DESC NULLS LAST) WHERE (("is_limited" = true) OR ("is_limited_unique" = true));
 
 
---
--- Name: idx_roblox_catalog_items_history_asset; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_history_asset" ON "public"."roblox_catalog_items_history" USING "btree" ("asset_id", "recorded_at" DESC);
 
 
---
--- Name: idx_roblox_catalog_items_history_recorded_at; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_history_recorded_at" ON "public"."roblox_catalog_items_history" USING "btree" ("recorded_at" DESC);
 
 
---
--- Name: idx_roblox_catalog_items_is_for_sale; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_is_for_sale" ON "public"."roblox_catalog_items" USING "btree" ("is_for_sale");
 
 
---
--- Name: idx_roblox_catalog_items_is_limited; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_is_limited" ON "public"."roblox_catalog_items" USING "btree" ("is_limited");
 
 
---
--- Name: idx_roblox_catalog_items_last_seen_at; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_last_seen_at" ON "public"."roblox_catalog_items" USING "btree" ("last_seen_at" DESC);
 
 
---
--- Name: idx_roblox_catalog_items_limited_tradeable; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_limited_tradeable" ON "public"."roblox_catalog_items" USING "btree" ("is_limited", "is_limited_unique", "trading_value" DESC NULLS LAST) WHERE ((("is_limited" = true) OR ("is_limited_unique" = true)) AND ("trading_value" IS NOT NULL));
 
 
---
--- Name: idx_roblox_catalog_items_price_robux; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_price_robux" ON "public"."roblox_catalog_items" USING "btree" ("price_robux");
 
 
---
--- Name: idx_roblox_catalog_items_projected; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_projected" ON "public"."roblox_catalog_items" USING "btree" ("is_projected", "trading_value" DESC NULLS LAST) WHERE (("is_limited" = true) OR ("is_limited_unique" = true));
 
 
---
--- Name: idx_roblox_catalog_items_rap; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_rap" ON "public"."roblox_catalog_items" USING "btree" ("rap" DESC NULLS LAST) WHERE (("is_limited" = true) OR ("is_limited_unique" = true));
 
 
---
--- Name: idx_roblox_catalog_items_rap_last_fetched; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_rap_last_fetched" ON "public"."roblox_catalog_items" USING "btree" ("rap_last_fetched" DESC NULLS LAST) WHERE (("is_limited" = true) OR ("is_limited_unique" = true));
 
 
---
--- Name: idx_roblox_catalog_items_subcategory; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_subcategory" ON "public"."roblox_catalog_items" USING "btree" ("subcategory");
 
 
---
--- Name: idx_roblox_catalog_items_trading_value; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_trading_value" ON "public"."roblox_catalog_items" USING "btree" ("trading_value" DESC NULLS LAST) WHERE (("is_limited" = true) OR ("is_limited_unique" = true));
 
 
---
--- Name: idx_roblox_catalog_items_trend_direction; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_items_trend_direction" ON "public"."roblox_catalog_items" USING "btree" ("trend_direction", "trading_value" DESC NULLS LAST) WHERE (("is_limited" = true) OR ("is_limited_unique" = true));
 
 
---
--- Name: idx_roblox_catalog_refresh_queue_next_run_at; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_refresh_queue_next_run_at" ON "public"."roblox_catalog_refresh_queue" USING "btree" ("next_run_at");
 
 
---
--- Name: idx_roblox_catalog_refresh_queue_priority; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_refresh_queue_priority" ON "public"."roblox_catalog_refresh_queue" USING "btree" ("priority");
 
 
---
--- Name: idx_roblox_catalog_subcategories_category; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_catalog_subcategories_category" ON "public"."roblox_catalog_subcategories" USING "btree" ("category");
 
 
---
--- Name: idx_roblox_music_ids_boombox_ready; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_music_ids_boombox_ready" ON "public"."roblox_music_ids" USING "btree" ("boombox_ready");
 
 
---
--- Name: idx_roblox_music_ids_last_seen; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_music_ids_last_seen" ON "public"."roblox_music_ids" USING "btree" ("last_seen_at" DESC);
 
 
---
--- Name: idx_roblox_music_ids_popularity_score; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_music_ids_popularity_score" ON "public"."roblox_music_ids" USING "btree" ("popularity_score" DESC);
 
 
---
--- Name: idx_roblox_music_ids_rank; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_music_ids_rank" ON "public"."roblox_music_ids" USING "btree" ("rank");
 
 
---
--- Name: idx_roblox_music_ids_verified_at; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_music_ids_verified_at" ON "public"."roblox_music_ids" USING "btree" ("verified_at");
 
 
---
--- Name: idx_roblox_universe_badges; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universe_badges" ON "public"."roblox_universe_badges" USING "btree" ("universe_id");
 
 
---
--- Name: idx_roblox_universe_gamepasses; Type: INDEX; Schema: public; Owner: -
---
+
+CREATE INDEX "idx_roblox_universe_discovery_jobs_query" ON "public"."roblox_universe_discovery_jobs" USING "btree" ("source", "strategy", "query");
+
+
+
+CREATE INDEX "idx_roblox_universe_discovery_jobs_ready" ON "public"."roblox_universe_discovery_jobs" USING "btree" ("status", "next_run_at", "priority" DESC) WHERE ("status" = ANY (ARRAY['pending'::"text", 'failed'::"text"]));
+
+
 
 CREATE INDEX "idx_roblox_universe_gamepasses" ON "public"."roblox_universe_gamepasses" USING "btree" ("universe_id");
 
 
---
--- Name: idx_roblox_universe_media_universe; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universe_media_universe" ON "public"."roblox_universe_media" USING "btree" ("universe_id", "media_type");
 
 
---
--- Name: idx_roblox_universe_place_servers_place; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universe_place_servers_place" ON "public"."roblox_universe_place_servers" USING "btree" ("place_id", "fetched_at" DESC);
 
 
---
--- Name: idx_roblox_universe_place_servers_universe; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universe_place_servers_universe" ON "public"."roblox_universe_place_servers" USING "btree" ("universe_id", "fetched_at" DESC);
 
 
---
--- Name: idx_roblox_universe_search_snapshots_query; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universe_search_snapshots_query" ON "public"."roblox_universe_search_snapshots" USING "btree" ("query", "fetched_at" DESC);
 
 
---
--- Name: idx_roblox_universe_search_snapshots_universe; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universe_search_snapshots_universe" ON "public"."roblox_universe_search_snapshots" USING "btree" ("universe_id", "fetched_at" DESC);
 
 
---
--- Name: idx_roblox_universe_sort_entries_sort; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universe_sort_entries_sort" ON "public"."roblox_universe_sort_entries" USING "btree" ("sort_id", "fetched_at" DESC);
 
 
---
--- Name: idx_roblox_universe_sort_entries_universe; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universe_sort_entries_universe" ON "public"."roblox_universe_sort_entries" USING "btree" ("universe_id", "fetched_at" DESC);
 
 
---
--- Name: idx_roblox_universe_stats_daily; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universe_stats_daily" ON "public"."roblox_universe_stats_daily" USING "btree" ("universe_id", "stat_date" DESC);
 
 
---
--- Name: idx_roblox_universes_creator; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universes_creator" ON "public"."roblox_universes" USING "btree" ("creator_id");
 
 
---
--- Name: idx_roblox_universes_seen; Type: INDEX; Schema: public; Owner: -
---
+
+CREATE INDEX "idx_roblox_universes_deep_enriched" ON "public"."roblox_universes" USING "btree" ("last_deep_enriched_at" NULLS FIRST, "quality_score" DESC NULLS LAST);
+
+
+
+CREATE INDEX "idx_roblox_universes_light_enriched" ON "public"."roblox_universes" USING "btree" ("last_light_enriched_at" NULLS FIRST, "last_seen_in_search" DESC NULLS LAST);
+
+
+
+CREATE INDEX "idx_roblox_universes_quality" ON "public"."roblox_universes" USING "btree" ("quality_tier", "quality_score" DESC NULLS LAST);
+
+
 
 CREATE INDEX "idx_roblox_universes_seen" ON "public"."roblox_universes" USING "btree" (COALESCE("last_seen_in_sort", "last_seen_in_search") DESC);
 
 
---
--- Name: idx_roblox_universes_slug; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_universes_slug" ON "public"."roblox_universes" USING "btree" ("lower"("slug"));
 
 
---
--- Name: idx_roblox_virtual_events_event_status; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_virtual_events_event_status" ON "public"."roblox_virtual_events" USING "btree" ("event_status");
 
 
---
--- Name: idx_roblox_virtual_events_first_live_at; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_virtual_events_first_live_at" ON "public"."roblox_virtual_events" USING "btree" ("first_live_at");
 
 
---
--- Name: idx_roblox_virtual_events_start_utc; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_virtual_events_start_utc" ON "public"."roblox_virtual_events" USING "btree" ("start_utc");
 
 
---
--- Name: idx_roblox_virtual_events_universe_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_roblox_virtual_events_universe_id" ON "public"."roblox_virtual_events" USING "btree" ("universe_id");
 
 
---
--- Name: idx_search_index_entity; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE UNIQUE INDEX "idx_search_index_entity" ON "public"."search_index" USING "btree" ("entity_type", "entity_id");
 
 
---
--- Name: idx_search_index_published_updated; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_search_index_published_updated" ON "public"."search_index" USING "btree" ("is_published", "updated_at" DESC);
 
 
---
--- Name: idx_search_index_search_text_trgm; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_search_index_search_text_trgm" ON "public"."search_index" USING "gin" ("search_text" "extensions"."gin_trgm_ops");
 
 
---
--- Name: idx_search_index_type_slug; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_search_index_type_slug" ON "public"."search_index" USING "btree" ("entity_type", "slug");
 
 
---
--- Name: idx_search_index_vector; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_search_index_vector" ON "public"."search_index" USING "gin" ("search_vector");
 
 
---
--- Name: idx_tools_is_published; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_tools_is_published" ON "public"."tools" USING "btree" ("is_published");
 
 
---
--- Name: idx_user_checklist_progress_slug; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_user_checklist_progress_slug" ON "public"."user_checklist_progress" USING "btree" ("checklist_slug");
 
 
---
--- Name: idx_user_code_progress_slug; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_user_code_progress_slug" ON "public"."user_code_progress" USING "btree" ("game_slug");
 
 
---
--- Name: idx_user_quiz_progress_code; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_user_quiz_progress_code" ON "public"."user_quiz_progress" USING "btree" ("quiz_code");
 
 
---
--- Name: idx_wiki_pages_published; Type: INDEX; Schema: public; Owner: -
---
+
+CREATE INDEX "idx_wiki_catalog_pages_is_published" ON "public"."wiki_catalog_pages" USING "btree" ("is_published");
+
+
+
+CREATE INDEX "idx_wiki_catalog_pages_universe_id" ON "public"."wiki_catalog_pages" USING "btree" ("universe_id");
+
+
+
+CREATE INDEX "idx_wiki_catalog_pages_wiki_sort" ON "public"."wiki_catalog_pages" USING "btree" ("wiki_slug", "wiki_sort_order") WHERE ("is_published" = true);
+
+
 
 CREATE INDEX "idx_wiki_pages_published" ON "public"."wiki_pages" USING "btree" ("is_published", "published_at" DESC NULLS LAST, "updated_at" DESC);
 
 
---
--- Name: idx_wiki_pages_slug_lower; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE UNIQUE INDEX "idx_wiki_pages_slug_lower" ON "public"."wiki_pages" USING "btree" ("lower"("slug"));
 
 
---
--- Name: idx_wiki_pages_universe_id; Type: INDEX; Schema: public; Owner: -
---
 
 CREATE INDEX "idx_wiki_pages_universe_id" ON "public"."wiki_pages" USING "btree" ("universe_id");
 
 
---
--- Name: game_lists_view _RETURN; Type: RULE; Schema: public; Owner: -
---
 
 CREATE OR REPLACE VIEW "public"."game_lists_view" WITH ("security_invoker"='true') AS
  WITH "code_stats" AS (
@@ -4853,1331 +4842,1662 @@ CREATE OR REPLACE VIEW "public"."game_lists_view" WITH ("security_invoker"='true
   GROUP BY "l"."id";
 
 
---
--- Name: app_sessions trg_app_sessions_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_app_sessions_updated_at" BEFORE UPDATE ON "public"."app_sessions" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_app_sessions_updated_at" BEFORE UPDATE ON "public"."app_sessions" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: app_users trg_app_users_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_app_users_updated_at" BEFORE UPDATE ON "public"."app_users" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_app_users_updated_at" BEFORE UPDATE ON "public"."app_users" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: article_generation_artifacts trg_article_generation_artifacts_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_article_generation_artifacts_updated_at" BEFORE UPDATE ON "public"."article_generation_artifacts" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_article_generation_artifacts_updated_at" BEFORE UPDATE ON "public"."article_generation_artifacts" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: article_generation_queue trg_article_generation_queue_idempotency_key; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_article_generation_queue_idempotency_key" BEFORE INSERT OR UPDATE OF "article_title", "universe_id" ON "public"."article_generation_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_article_generation_queue_idempotency_key"();
+CREATE OR REPLACE TRIGGER "trg_article_generation_queue_idempotency_key" BEFORE INSERT OR UPDATE OF "article_title", "universe_id" ON "public"."article_generation_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_article_generation_queue_idempotency_key"();
 
 
---
--- Name: article_generation_queue trg_article_generation_queue_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_article_generation_queue_updated_at" BEFORE UPDATE ON "public"."article_generation_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_article_generation_queue_updated_at" BEFORE UPDATE ON "public"."article_generation_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: articles trg_articles_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_articles_updated_at" BEFORE UPDATE ON "public"."articles" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_articles_updated_at" BEFORE UPDATE ON "public"."articles" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: authors trg_authors_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_authors_updated_at" BEFORE UPDATE ON "public"."authors" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_authors_updated_at" BEFORE UPDATE ON "public"."authors" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: catalog_pages trg_catalog_pages_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_catalog_pages_updated_at" BEFORE UPDATE ON "public"."catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_catalog_pages_updated_at" BEFORE UPDATE ON "public"."catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: checklist_items trg_checklist_items_normalize; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_checklist_items_normalize" BEFORE INSERT OR UPDATE ON "public"."checklist_items" FOR EACH ROW EXECUTE FUNCTION "public"."trg_normalize_section_code"();
+CREATE OR REPLACE TRIGGER "trg_checklist_items_normalize" BEFORE INSERT OR UPDATE ON "public"."checklist_items" FOR EACH ROW EXECUTE FUNCTION "public"."trg_normalize_section_code"();
 
 
---
--- Name: checklist_items trg_checklist_items_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_checklist_items_updated_at" BEFORE UPDATE ON "public"."checklist_items" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_checklist_items_updated_at" BEFORE UPDATE ON "public"."checklist_items" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: checklist_pages trg_checklist_pages_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_checklist_pages_updated_at" BEFORE UPDATE ON "public"."checklist_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_checklist_pages_updated_at" BEFORE UPDATE ON "public"."checklist_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: comments trg_comments_revalidate_code; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_comments_revalidate_code" AFTER INSERT OR UPDATE ON "public"."comments" FOR EACH ROW EXECUTE FUNCTION "public"."trg_comments_revalidate_code"();
+CREATE OR REPLACE TRIGGER "trg_comments_revalidate_code" AFTER INSERT OR UPDATE ON "public"."comments" FOR EACH ROW EXECUTE FUNCTION "public"."trg_comments_revalidate_code"();
 
 
---
--- Name: comments trg_comments_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_comments_updated_at" BEFORE UPDATE ON "public"."comments" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_comments_updated_at" BEFORE UPDATE ON "public"."comments" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: articles trg_enqueue_revalidation_articles; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_articles" AFTER INSERT OR DELETE OR UPDATE ON "public"."articles" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_articles"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_articles" AFTER INSERT OR DELETE OR UPDATE ON "public"."articles" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_articles"();
 
 
---
--- Name: catalog_pages trg_enqueue_revalidation_catalog_pages; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_catalog_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_catalog_pages"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_catalog_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_catalog_pages"();
 
 
---
--- Name: checklist_items trg_enqueue_revalidation_checklist_items; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_checklist_items" AFTER INSERT OR DELETE OR UPDATE ON "public"."checklist_items" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_checklist_items"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_checklist_items" AFTER INSERT OR DELETE OR UPDATE ON "public"."checklist_items" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_checklist_items"();
 
 
---
--- Name: checklist_pages trg_enqueue_revalidation_checklist_pages; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_checklist_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."checklist_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_checklist_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."checklist_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"();
 
 
---
--- Name: codes trg_enqueue_revalidation_codes; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_codes" AFTER INSERT OR DELETE OR UPDATE ON "public"."codes" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_codes"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_codes" AFTER INSERT OR DELETE OR UPDATE ON "public"."codes" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_codes"();
 
 
---
--- Name: events_pages trg_enqueue_revalidation_events_pages; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_events_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."events_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_events_pages"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_events_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."events_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_events_pages"();
 
 
---
--- Name: roblox_catalog_item_images trg_enqueue_revalidation_free_item_images; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_free_item_images" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_catalog_item_images" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_free_item_images"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_free_item_images" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_catalog_item_images" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_free_item_images"();
 
 
---
--- Name: roblox_catalog_items trg_enqueue_revalidation_free_items_catalog; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_free_items_catalog" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_catalog_items" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_free_items_catalog" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_catalog_items" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"();
 
 
---
--- Name: game_list_entries trg_enqueue_revalidation_game_list_entries; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_game_list_entries" AFTER INSERT OR DELETE OR UPDATE ON "public"."game_list_entries" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_game_list_entries" AFTER INSERT OR DELETE OR UPDATE ON "public"."game_list_entries" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"();
 
 
---
--- Name: game_lists trg_enqueue_revalidation_game_lists; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_game_lists" AFTER INSERT OR DELETE OR UPDATE ON "public"."game_lists" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_game_lists"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_game_lists" AFTER INSERT OR DELETE OR UPDATE ON "public"."game_lists" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_game_lists"();
 
 
---
--- Name: games trg_enqueue_revalidation_games; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_games" AFTER INSERT OR DELETE OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_games"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_games" AFTER INSERT OR DELETE OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_games"();
 
 
---
--- Name: roblox_music_ids trg_enqueue_revalidation_music_ids; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_music_ids" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_music_ids" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_music_ids"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_music_ids" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_music_ids" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_music_ids"();
 
 
---
--- Name: quiz_pages trg_enqueue_revalidation_quiz_pages; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_quiz_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."quiz_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_quiz_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."quiz_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"();
 
 
---
--- Name: tools trg_enqueue_revalidation_tools; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_tools" AFTER INSERT OR DELETE OR UPDATE ON "public"."tools" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_tools"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_tools" AFTER INSERT OR DELETE OR UPDATE ON "public"."tools" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_tools"();
 
 
---
--- Name: roblox_virtual_event_categories trg_enqueue_revalidation_virtual_event_categories; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_virtual_event_categories" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_virtual_event_categories" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_virtual_event_assets"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_virtual_event_categories" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_virtual_event_categories" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_virtual_event_assets"();
 
 
---
--- Name: roblox_virtual_event_thumbnails trg_enqueue_revalidation_virtual_event_thumbnails; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_virtual_event_thumbnails" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_virtual_event_thumbnails" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_virtual_event_assets"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_virtual_event_thumbnails" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_virtual_event_thumbnails" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_virtual_event_assets"();
 
 
---
--- Name: roblox_virtual_events trg_enqueue_revalidation_virtual_events; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_virtual_events" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_virtual_events" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_virtual_events"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_virtual_events" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_virtual_events" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_virtual_events"();
 
 
---
--- Name: wiki_pages trg_enqueue_revalidation_wiki_pages; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_enqueue_revalidation_wiki_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_pages"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_wiki_catalog_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."wiki_catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"();
 
 
---
--- Name: event_guide_generation_queue trg_event_guide_generation_queue_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_event_guide_generation_queue_updated_at" BEFORE UPDATE ON "public"."event_guide_generation_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_wiki_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_pages"();
 
 
---
--- Name: events_pages trg_events_pages_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_events_pages_updated_at" BEFORE UPDATE ON "public"."events_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_wiki_roblox_universes" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_universes" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"();
 
 
---
--- Name: game_generation_queue trg_game_generation_queue_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_game_generation_queue_updated_at" BEFORE UPDATE ON "public"."game_generation_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_wiki_universe_badges" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_universe_badges" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"();
 
 
---
--- Name: game_list_entries trg_game_list_entries_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_game_list_entries_updated_at" BEFORE UPDATE ON "public"."game_list_entries" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_wiki_universe_gamepasses" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_universe_gamepasses" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"();
 
 
---
--- Name: game_lists trg_game_lists_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_game_lists_updated_at" BEFORE UPDATE ON "public"."game_lists" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_wiki_universe_media" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_universe_media" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"();
 
 
---
--- Name: games trg_games_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_games_updated_at" BEFORE UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_wiki_universe_place_servers" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_universe_place_servers" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"();
 
 
---
--- Name: quiz_pages trg_quiz_pages_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_quiz_pages_updated_at" BEFORE UPDATE ON "public"."quiz_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_wiki_universe_social_links" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_universe_social_links" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"();
 
 
---
--- Name: roblox_music_ids trg_refresh_search_index_music; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_refresh_search_index_music" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_music_ids" FOR EACH STATEMENT EXECUTE FUNCTION "public"."trg_refresh_search_index_music"();
+CREATE OR REPLACE TRIGGER "trg_event_guide_generation_queue_updated_at" BEFORE UPDATE ON "public"."event_guide_generation_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: roblox_catalog_categories trg_roblox_catalog_categories_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_roblox_catalog_categories_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_categories" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_events_pages_updated_at" BEFORE UPDATE ON "public"."events_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: roblox_catalog_discovery_runs trg_roblox_catalog_discovery_runs_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_roblox_catalog_discovery_runs_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_discovery_runs" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_game_generation_queue_updated_at" BEFORE UPDATE ON "public"."game_generation_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: roblox_catalog_item_images trg_roblox_catalog_item_images_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_roblox_catalog_item_images_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_item_images" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_game_list_entries_updated_at" BEFORE UPDATE ON "public"."game_list_entries" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: roblox_catalog_items trg_roblox_catalog_items_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_roblox_catalog_items_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_items" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_game_lists_updated_at" BEFORE UPDATE ON "public"."game_lists" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: roblox_catalog_refresh_queue trg_roblox_catalog_refresh_queue_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_roblox_catalog_refresh_queue_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_refresh_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_games_updated_at" BEFORE UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: roblox_catalog_subcategories trg_roblox_catalog_subcategories_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_roblox_catalog_subcategories_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_subcategories" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_quiz_pages_updated_at" BEFORE UPDATE ON "public"."quiz_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: roblox_music_ids trg_roblox_music_ids_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_roblox_music_ids_updated_at" BEFORE UPDATE ON "public"."roblox_music_ids" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_refresh_search_index_music" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_music_ids" FOR EACH STATEMENT EXECUTE FUNCTION "public"."trg_refresh_search_index_music"();
 
 
---
--- Name: roblox_universes trg_roblox_universes_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_roblox_universes_updated_at" BEFORE UPDATE ON "public"."roblox_universes" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_roblox_catalog_categories_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_categories" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: articles trg_search_index_articles; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_search_index_articles" AFTER INSERT OR DELETE OR UPDATE ON "public"."articles" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_articles"();
+CREATE OR REPLACE TRIGGER "trg_roblox_catalog_discovery_runs_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_discovery_runs" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: authors trg_search_index_authors; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_search_index_authors" AFTER INSERT OR DELETE OR UPDATE ON "public"."authors" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_authors"();
+CREATE OR REPLACE TRIGGER "trg_roblox_catalog_item_images_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_item_images" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: catalog_pages trg_search_index_catalog_pages; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_search_index_catalog_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_catalog_pages"();
+CREATE OR REPLACE TRIGGER "trg_roblox_catalog_items_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_items" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: checklist_pages trg_search_index_checklists; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_search_index_checklists" AFTER INSERT OR DELETE OR UPDATE ON "public"."checklist_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_checklists"();
+CREATE OR REPLACE TRIGGER "trg_roblox_catalog_refresh_queue_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_refresh_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: events_pages trg_search_index_events_pages; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_search_index_events_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."events_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_events_pages"();
+CREATE OR REPLACE TRIGGER "trg_roblox_catalog_subcategories_updated_at" BEFORE UPDATE ON "public"."roblox_catalog_subcategories" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: game_lists trg_search_index_game_lists; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_search_index_game_lists" AFTER INSERT OR DELETE OR UPDATE ON "public"."game_lists" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_game_lists"();
+CREATE OR REPLACE TRIGGER "trg_roblox_music_ids_updated_at" BEFORE UPDATE ON "public"."roblox_music_ids" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: games trg_search_index_games; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_search_index_games" AFTER INSERT OR DELETE OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_games"();
+CREATE OR REPLACE TRIGGER "trg_roblox_universe_discovery_jobs_updated_at" BEFORE UPDATE ON "public"."roblox_universe_discovery_jobs" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: quiz_pages trg_search_index_quiz_pages; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_search_index_quiz_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."quiz_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_quiz_pages"();
+CREATE OR REPLACE TRIGGER "trg_roblox_universes_updated_at" BEFORE UPDATE ON "public"."roblox_universes" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
---
--- Name: tools trg_search_index_tools; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_search_index_tools" AFTER INSERT OR DELETE OR UPDATE ON "public"."tools" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_tools"();
+CREATE OR REPLACE TRIGGER "trg_search_index_articles" AFTER INSERT OR DELETE OR UPDATE ON "public"."articles" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_articles"();
 
 
---
--- Name: wiki_pages trg_search_index_wiki_pages; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_search_index_wiki_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_wiki_pages"();
+CREATE OR REPLACE TRIGGER "trg_search_index_authors" AFTER INSERT OR DELETE OR UPDATE ON "public"."authors" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_authors"();
 
 
---
--- Name: articles trg_set_article_published_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_set_article_published_at" BEFORE INSERT OR UPDATE ON "public"."articles" FOR EACH ROW EXECUTE FUNCTION "public"."set_article_published_at"();
+CREATE OR REPLACE TRIGGER "trg_search_index_catalog_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_catalog_pages"();
 
 
---
--- Name: catalog_pages trg_set_catalog_page_published_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_set_catalog_page_published_at" BEFORE INSERT OR UPDATE ON "public"."catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_catalog_page_published_at"();
+CREATE OR REPLACE TRIGGER "trg_search_index_checklists" AFTER INSERT OR DELETE OR UPDATE ON "public"."checklist_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_checklists"();
 
 
---
--- Name: checklist_pages trg_set_checklist_published_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_set_checklist_published_at" BEFORE INSERT OR UPDATE ON "public"."checklist_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_checklist_published_at"();
+CREATE OR REPLACE TRIGGER "trg_search_index_events_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."events_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_events_pages"();
 
 
---
--- Name: events_pages trg_set_events_pages_published_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_set_events_pages_published_at" BEFORE INSERT OR UPDATE ON "public"."events_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_catalog_page_published_at"();
+CREATE OR REPLACE TRIGGER "trg_search_index_game_lists" AFTER INSERT OR DELETE OR UPDATE ON "public"."game_lists" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_game_lists"();
 
 
---
--- Name: games trg_set_game_published_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_set_game_published_at" BEFORE INSERT OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."set_game_published_at"();
+CREATE OR REPLACE TRIGGER "trg_search_index_games" AFTER INSERT OR DELETE OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_games"();
 
 
---
--- Name: quiz_pages trg_set_quiz_page_published_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_set_quiz_page_published_at" BEFORE INSERT OR UPDATE ON "public"."quiz_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_quiz_page_published_at"();
+CREATE OR REPLACE TRIGGER "trg_search_index_quiz_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."quiz_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_quiz_pages"();
 
 
---
--- Name: tools trg_set_tool_published_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_set_tool_published_at" BEFORE INSERT OR UPDATE ON "public"."tools" FOR EACH ROW EXECUTE FUNCTION "public"."set_tool_published_at"();
+CREATE OR REPLACE TRIGGER "trg_search_index_tools" AFTER INSERT OR DELETE OR UPDATE ON "public"."tools" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_tools"();
 
 
---
--- Name: wiki_pages trg_set_wiki_page_published_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_set_wiki_page_published_at" BEFORE INSERT OR UPDATE ON "public"."wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_wiki_page_published_at"();
+CREATE OR REPLACE TRIGGER "trg_search_index_wiki_catalog_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."wiki_catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_wiki_catalog_pages"();
 
 
---
--- Name: tools trg_tools_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_tools_updated_at" BEFORE UPDATE ON "public"."tools" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_search_index_wiki_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_wiki_pages"();
 
 
---
--- Name: user_checklist_progress trg_user_checklist_progress_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_user_checklist_progress_updated_at" BEFORE UPDATE ON "public"."user_checklist_progress" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_set_article_published_at" BEFORE INSERT OR UPDATE ON "public"."articles" FOR EACH ROW EXECUTE FUNCTION "public"."set_article_published_at"();
 
 
---
--- Name: user_code_progress trg_user_code_progress_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_user_code_progress_updated_at" BEFORE UPDATE ON "public"."user_code_progress" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_set_catalog_page_published_at" BEFORE INSERT OR UPDATE ON "public"."catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_catalog_page_published_at"();
 
 
---
--- Name: user_quiz_progress trg_user_quiz_progress_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_user_quiz_progress_updated_at" BEFORE UPDATE ON "public"."user_quiz_progress" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_set_checklist_published_at" BEFORE INSERT OR UPDATE ON "public"."checklist_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_checklist_published_at"();
 
 
---
--- Name: wiki_pages trg_wiki_pages_updated_at; Type: TRIGGER; Schema: public; Owner: -
---
 
-CREATE TRIGGER "trg_wiki_pages_updated_at" BEFORE UPDATE ON "public"."wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_set_events_pages_published_at" BEFORE INSERT OR UPDATE ON "public"."events_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_catalog_page_published_at"();
 
 
---
--- Name: app_sessions app_sessions_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
+
+CREATE OR REPLACE TRIGGER "trg_set_game_published_at" BEFORE INSERT OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."set_game_published_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_set_quiz_page_published_at" BEFORE INSERT OR UPDATE ON "public"."quiz_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_quiz_page_published_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_set_tool_published_at" BEFORE INSERT OR UPDATE ON "public"."tools" FOR EACH ROW EXECUTE FUNCTION "public"."set_tool_published_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_set_wiki_catalog_page_published_at" BEFORE INSERT OR UPDATE ON "public"."wiki_catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_catalog_page_published_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_set_wiki_page_published_at" BEFORE INSERT OR UPDATE ON "public"."wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_wiki_page_published_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_tools_updated_at" BEFORE UPDATE ON "public"."tools" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_user_checklist_progress_updated_at" BEFORE UPDATE ON "public"."user_checklist_progress" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_user_code_progress_updated_at" BEFORE UPDATE ON "public"."user_code_progress" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_user_quiz_progress_updated_at" BEFORE UPDATE ON "public"."user_quiz_progress" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_wiki_catalog_pages_updated_at" BEFORE UPDATE ON "public"."wiki_catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_wiki_pages_updated_at" BEFORE UPDATE ON "public"."wiki_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
 
 ALTER TABLE ONLY "public"."app_sessions"
     ADD CONSTRAINT "app_sessions_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."app_users"("user_id") ON DELETE CASCADE;
 
 
---
--- Name: article_generation_artifacts article_generation_artifacts_article_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."article_generation_artifacts"
     ADD CONSTRAINT "article_generation_artifacts_article_id_fkey" FOREIGN KEY ("article_id") REFERENCES "public"."articles"("id") ON DELETE SET NULL;
 
 
---
--- Name: article_generation_artifacts article_generation_artifacts_queue_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."article_generation_artifacts"
     ADD CONSTRAINT "article_generation_artifacts_queue_id_fkey" FOREIGN KEY ("queue_id") REFERENCES "public"."article_generation_queue"("id") ON DELETE SET NULL;
 
 
---
--- Name: article_generation_artifacts article_generation_artifacts_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."article_generation_artifacts"
     ADD CONSTRAINT "article_generation_artifacts_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
 
 
---
--- Name: article_generation_queue article_generation_queue_article_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."article_generation_queue"
     ADD CONSTRAINT "article_generation_queue_article_id_fkey" FOREIGN KEY ("article_id") REFERENCES "public"."articles"("id") ON DELETE SET NULL;
 
 
---
--- Name: article_generation_queue article_generation_queue_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."article_generation_queue"
     ADD CONSTRAINT "article_generation_queue_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id");
 
 
---
--- Name: article_source_images article_source_images_article_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."article_source_images"
     ADD CONSTRAINT "article_source_images_article_id_fkey" FOREIGN KEY ("article_id") REFERENCES "public"."articles"("id") ON DELETE CASCADE;
 
 
---
--- Name: articles articles_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."articles"
     ADD CONSTRAINT "articles_author_id_fkey" FOREIGN KEY ("author_id") REFERENCES "public"."authors"("id") ON DELETE SET NULL;
 
 
---
--- Name: articles articles_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."articles"
     ADD CONSTRAINT "articles_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id");
 
 
---
--- Name: catalog_pages catalog_pages_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."catalog_pages"
     ADD CONSTRAINT "catalog_pages_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
 
 
---
--- Name: checklist_items checklist_items_page_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."checklist_items"
     ADD CONSTRAINT "checklist_items_page_id_fkey" FOREIGN KEY ("page_id") REFERENCES "public"."checklist_pages"("id") ON DELETE CASCADE;
 
 
---
--- Name: checklist_pages checklist_pages_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."checklist_pages"
     ADD CONSTRAINT "checklist_pages_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: codes codes_game_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."codes"
     ADD CONSTRAINT "codes_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."games"("id") ON DELETE CASCADE;
 
 
---
--- Name: comments comments_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."comments"
     ADD CONSTRAINT "comments_author_id_fkey" FOREIGN KEY ("author_id") REFERENCES "public"."app_users"("user_id") ON DELETE CASCADE;
 
 
---
--- Name: comments comments_parent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."comments"
     ADD CONSTRAINT "comments_parent_id_fkey" FOREIGN KEY ("parent_id") REFERENCES "public"."comments"("id") ON DELETE CASCADE;
 
 
---
--- Name: event_guide_generation_queue event_guide_generation_queue_article_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."event_guide_generation_queue"
     ADD CONSTRAINT "event_guide_generation_queue_article_id_fkey" FOREIGN KEY ("article_id") REFERENCES "public"."articles"("id") ON DELETE SET NULL;
 
 
---
--- Name: event_guide_generation_queue event_guide_generation_queue_event_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."event_guide_generation_queue"
     ADD CONSTRAINT "event_guide_generation_queue_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."roblox_virtual_events"("event_id") ON DELETE CASCADE;
 
 
---
--- Name: event_guide_generation_queue event_guide_generation_queue_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."event_guide_generation_queue"
     ADD CONSTRAINT "event_guide_generation_queue_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id");
 
 
---
--- Name: events_pages events_pages_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY "public"."events_pages"
-    ADD CONSTRAINT "events_pages_author_id_fkey" FOREIGN KEY ("author_id") REFERENCES "public"."authors"("id") ON DELETE SET NULL;
-
-
---
--- Name: events_pages events_pages_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."events_pages"
     ADD CONSTRAINT "events_pages_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: game_list_entries game_list_entries_game_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."game_list_entries"
     ADD CONSTRAINT "game_list_entries_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."games"("id") ON DELETE SET NULL;
 
 
---
--- Name: game_list_entries game_list_entries_list_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."game_list_entries"
     ADD CONSTRAINT "game_list_entries_list_id_fkey" FOREIGN KEY ("list_id") REFERENCES "public"."game_lists"("id") ON DELETE CASCADE;
 
 
---
--- Name: game_list_entries game_list_entries_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."game_list_entries"
     ADD CONSTRAINT "game_list_entries_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: games games_author_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY "public"."games"
-    ADD CONSTRAINT "games_author_id_fkey" FOREIGN KEY ("author_id") REFERENCES "public"."authors"("id");
-
-
---
--- Name: games games_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."games"
     ADD CONSTRAINT "games_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id");
 
 
---
--- Name: quiz_pages quiz_pages_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."quiz_pages"
     ADD CONSTRAINT "quiz_pages_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
 
 
---
--- Name: roblox_catalog_discovery_hits roblox_catalog_discovery_hits_asset_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_discovery_hits"
     ADD CONSTRAINT "roblox_catalog_discovery_hits_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_catalog_discovery_hits roblox_catalog_discovery_hits_run_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_discovery_hits"
     ADD CONSTRAINT "roblox_catalog_discovery_hits_run_id_fkey" FOREIGN KEY ("run_id") REFERENCES "public"."roblox_catalog_discovery_runs"("run_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_catalog_item_images roblox_catalog_item_images_asset_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_item_images"
     ADD CONSTRAINT "roblox_catalog_item_images_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_catalog_items_history roblox_catalog_items_history_asset_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_items_history"
     ADD CONSTRAINT "roblox_catalog_items_history_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_catalog_refresh_queue roblox_catalog_refresh_queue_asset_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_refresh_queue"
     ADD CONSTRAINT "roblox_catalog_refresh_queue_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_catalog_subcategories roblox_catalog_subcategories_category_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_catalog_subcategories"
     ADD CONSTRAINT "roblox_catalog_subcategories_category_fkey" FOREIGN KEY ("category") REFERENCES "public"."roblox_catalog_categories"("category") ON DELETE CASCADE;
 
 
---
--- Name: roblox_universe_badges roblox_universe_badges_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_badges"
     ADD CONSTRAINT "roblox_universe_badges_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_universe_gamepasses roblox_universe_gamepasses_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_gamepasses"
     ADD CONSTRAINT "roblox_universe_gamepasses_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_universe_media roblox_universe_media_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_media"
     ADD CONSTRAINT "roblox_universe_media_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_universe_place_servers roblox_universe_place_servers_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_place_servers"
     ADD CONSTRAINT "roblox_universe_place_servers_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_universe_search_snapshots roblox_universe_search_snapshots_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_search_snapshots"
     ADD CONSTRAINT "roblox_universe_search_snapshots_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_universe_social_links roblox_universe_social_links_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_social_links"
     ADD CONSTRAINT "roblox_universe_social_links_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_universe_sort_entries roblox_universe_sort_entries_run_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
     ADD CONSTRAINT "roblox_universe_sort_entries_run_id_fkey" FOREIGN KEY ("run_id") REFERENCES "public"."roblox_universe_sort_runs"("id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_universe_sort_entries roblox_universe_sort_entries_sort_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
     ADD CONSTRAINT "roblox_universe_sort_entries_sort_id_fkey" FOREIGN KEY ("sort_id") REFERENCES "public"."roblox_universe_sort_definitions"("sort_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_universe_sort_entries roblox_universe_sort_entries_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
     ADD CONSTRAINT "roblox_universe_sort_entries_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_universe_stats_daily roblox_universe_stats_daily_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_universe_stats_daily"
     ADD CONSTRAINT "roblox_universe_stats_daily_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_virtual_event_categories roblox_virtual_event_categories_event_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_virtual_event_categories"
     ADD CONSTRAINT "roblox_virtual_event_categories_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."roblox_virtual_events"("event_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_virtual_event_thumbnails roblox_virtual_event_thumbnails_event_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_virtual_event_thumbnails"
     ADD CONSTRAINT "roblox_virtual_event_thumbnails_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."roblox_virtual_events"("event_id") ON DELETE CASCADE;
 
 
---
--- Name: roblox_virtual_events roblox_virtual_events_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."roblox_virtual_events"
     ADD CONSTRAINT "roblox_virtual_events_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE RESTRICT;
 
 
---
--- Name: tools tools_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."tools"
     ADD CONSTRAINT "tools_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
 
 
---
--- Name: user_checklist_progress user_checklist_progress_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."user_checklist_progress"
     ADD CONSTRAINT "user_checklist_progress_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."app_users"("user_id") ON DELETE CASCADE;
 
 
---
--- Name: user_code_progress user_code_progress_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."user_code_progress"
     ADD CONSTRAINT "user_code_progress_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."app_users"("user_id") ON DELETE CASCADE;
 
 
---
--- Name: user_quiz_progress user_quiz_progress_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
 
 ALTER TABLE ONLY "public"."user_quiz_progress"
     ADD CONSTRAINT "user_quiz_progress_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."app_users"("user_id") ON DELETE CASCADE;
 
 
---
--- Name: wiki_pages wiki_pages_universe_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
+
+ALTER TABLE ONLY "public"."wiki_catalog_pages"
+    ADD CONSTRAINT "wiki_catalog_pages_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
+
+
+
+ALTER TABLE ONLY "public"."wiki_catalog_pages"
+    ADD CONSTRAINT "wiki_catalog_pages_wiki_page_id_fkey" FOREIGN KEY ("wiki_page_id") REFERENCES "public"."wiki_pages"("id") ON DELETE SET NULL;
+
+
 
 ALTER TABLE ONLY "public"."wiki_pages"
     ADD CONSTRAINT "wiki_pages_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
 
 
---
--- Name: app_sessions; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."app_sessions" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: app_users; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."app_users" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: app_users app_users_insert_self; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "app_users_insert_self" ON "public"."app_users" FOR INSERT WITH CHECK ((("auth"."uid"() = "user_id") AND ("role" = 'user'::"text")));
 
 
---
--- Name: app_users app_users_read_self; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "app_users_read_self" ON "public"."app_users" FOR SELECT USING (("auth"."uid"() = "user_id"));
 
 
---
--- Name: app_users app_users_update_self; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "app_users_update_self" ON "public"."app_users" FOR UPDATE USING (("auth"."uid"() = "user_id")) WITH CHECK ((("auth"."uid"() = "user_id") AND ("role" = 'user'::"text")));
 
 
---
--- Name: article_generation_artifacts; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."article_generation_artifacts" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: article_generation_queue; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."article_generation_queue" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: article_source_images; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."article_source_images" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: articles; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."articles" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: authors; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."authors" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: catalog_pages; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."catalog_pages" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: checklist_items; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."checklist_items" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: checklist_pages; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."checklist_pages" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: codes; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."codes" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: comments; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."comments" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: comments comments_insert_authenticated; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "comments_insert_authenticated" ON "public"."comments" FOR INSERT WITH CHECK ((("auth"."uid"() = "author_id") AND ("status" = 'pending'::"text") AND ("moderation" IS NULL)));
 
 
---
--- Name: comments comments_insert_guest; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "comments_insert_guest" ON "public"."comments" FOR INSERT WITH CHECK ((("auth"."uid"() IS NULL) AND ("author_id" IS NULL) AND ("guest_name" IS NOT NULL) AND ("length"(TRIM(BOTH FROM "guest_name")) >= 2) AND ("guest_email" IS NOT NULL) AND (POSITION(('@'::"text") IN ("guest_email")) > 1) AND ("status" = 'pending'::"text") AND ("moderation" IS NULL)));
 
 
---
--- Name: comments comments_select_public; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "comments_select_public" ON "public"."comments" FOR SELECT USING ((("status" = 'approved'::"text") OR ("author_id" = "auth"."uid"())));
 
 
---
--- Name: event_guide_generation_queue; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."event_guide_generation_queue" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: events_pages; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."events_pages" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: game_generation_queue; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."game_generation_queue" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: game_list_entries; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."game_list_entries" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: game_lists; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."game_lists" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: games; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."games" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: quiz_pages; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."quiz_pages" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: quiz_pages quiz_pages_admin_full_access; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "quiz_pages_admin_full_access" ON "public"."quiz_pages" TO "authenticated" USING ("public"."is_admin"("auth"."uid"())) WITH CHECK ("public"."is_admin"("auth"."uid"()));
 
 
---
--- Name: quiz_pages quiz_pages_public_read; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "quiz_pages_public_read" ON "public"."quiz_pages" FOR SELECT TO "authenticated", "anon" USING (("is_published" = true));
 
 
---
--- Name: revalidation_events; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."revalidation_events" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_catalog_categories; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_catalog_categories" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_catalog_discovery_hits; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_catalog_discovery_hits" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_catalog_discovery_runs; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_catalog_discovery_runs" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_catalog_item_images; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_catalog_item_images" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_catalog_items; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_catalog_items" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_catalog_items_history; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_catalog_items_history" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_catalog_refresh_queue; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_catalog_refresh_queue" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_catalog_subcategories; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_catalog_subcategories" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_groups; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_groups" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_music_ids; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_music_ids" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universe_badges; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_universe_badges" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universe_gamepasses; Type: ROW SECURITY; Schema: public; Owner: -
---
+
+ALTER TABLE "public"."roblox_universe_discovery_jobs" ENABLE ROW LEVEL SECURITY;
+
 
 ALTER TABLE "public"."roblox_universe_gamepasses" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universe_media; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_universe_media" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universe_place_servers; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_universe_place_servers" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universe_search_snapshots; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_universe_search_snapshots" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universe_social_links; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_universe_social_links" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universe_sort_definitions; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_universe_sort_definitions" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universe_sort_entries; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_universe_sort_entries" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universe_sort_runs; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_universe_sort_runs" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universe_stats_daily; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_universe_stats_daily" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_universes; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_universes" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_virtual_event_categories; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_virtual_event_categories" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_virtual_event_thumbnails; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_virtual_event_thumbnails" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: roblox_virtual_events; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."roblox_virtual_events" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: search_index; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."search_index" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: tools; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."tools" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: user_checklist_progress; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."user_checklist_progress" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: user_checklist_progress user_checklist_progress_delete_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_checklist_progress_delete_own" ON "public"."user_checklist_progress" FOR DELETE USING (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_checklist_progress user_checklist_progress_insert_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_checklist_progress_insert_own" ON "public"."user_checklist_progress" FOR INSERT WITH CHECK (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_checklist_progress user_checklist_progress_select_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_checklist_progress_select_own" ON "public"."user_checklist_progress" FOR SELECT USING (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_checklist_progress user_checklist_progress_update_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_checklist_progress_update_own" ON "public"."user_checklist_progress" FOR UPDATE USING (("auth"."uid"() = "user_id")) WITH CHECK (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_code_progress; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."user_code_progress" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: user_code_progress user_code_progress_delete_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_code_progress_delete_own" ON "public"."user_code_progress" FOR DELETE USING (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_code_progress user_code_progress_insert_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_code_progress_insert_own" ON "public"."user_code_progress" FOR INSERT WITH CHECK (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_code_progress user_code_progress_select_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_code_progress_select_own" ON "public"."user_code_progress" FOR SELECT USING (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_code_progress user_code_progress_update_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_code_progress_update_own" ON "public"."user_code_progress" FOR UPDATE USING (("auth"."uid"() = "user_id")) WITH CHECK (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_quiz_progress; Type: ROW SECURITY; Schema: public; Owner: -
---
 
 ALTER TABLE "public"."user_quiz_progress" ENABLE ROW LEVEL SECURITY;
 
---
--- Name: user_quiz_progress user_quiz_progress_delete_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_quiz_progress_delete_own" ON "public"."user_quiz_progress" FOR DELETE USING (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_quiz_progress user_quiz_progress_insert_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_quiz_progress_insert_own" ON "public"."user_quiz_progress" FOR INSERT WITH CHECK (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_quiz_progress user_quiz_progress_select_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_quiz_progress_select_own" ON "public"."user_quiz_progress" FOR SELECT USING (("auth"."uid"() = "user_id"));
 
 
---
--- Name: user_quiz_progress user_quiz_progress_update_own; Type: POLICY; Schema: public; Owner: -
---
 
 CREATE POLICY "user_quiz_progress_update_own" ON "public"."user_quiz_progress" FOR UPDATE USING (("auth"."uid"() = "user_id")) WITH CHECK (("auth"."uid"() = "user_id"));
 
 
---
--- PostgreSQL database dump complete
---
+
+ALTER TABLE "public"."wiki_catalog_pages" ENABLE ROW LEVEL SECURITY;
+
+
+GRANT USAGE ON SCHEMA "extensions" TO "anon";
+GRANT USAGE ON SCHEMA "extensions" TO "authenticated";
+GRANT USAGE ON SCHEMA "extensions" TO "service_role";
+GRANT ALL ON SCHEMA "extensions" TO "dashboard_user";
+
+
+
+GRANT USAGE ON SCHEMA "public" TO "postgres";
+GRANT USAGE ON SCHEMA "public" TO "anon";
+GRANT USAGE ON SCHEMA "public" TO "authenticated";
+GRANT USAGE ON SCHEMA "public" TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "extensions"."grant_pg_cron_access"() FROM "supabase_admin";
+GRANT ALL ON FUNCTION "extensions"."grant_pg_cron_access"() TO "supabase_admin" WITH GRANT OPTION;
+GRANT ALL ON FUNCTION "extensions"."grant_pg_cron_access"() TO "dashboard_user";
+
+
+
+GRANT ALL ON FUNCTION "extensions"."grant_pg_graphql_access"() TO "postgres" WITH GRANT OPTION;
+
+
+
+REVOKE ALL ON FUNCTION "extensions"."grant_pg_net_access"() FROM "supabase_admin";
+GRANT ALL ON FUNCTION "extensions"."grant_pg_net_access"() TO "supabase_admin" WITH GRANT OPTION;
+GRANT ALL ON FUNCTION "extensions"."grant_pg_net_access"() TO "dashboard_user";
+
+
+
+GRANT ALL ON FUNCTION "extensions"."pgrst_ddl_watch"() TO "postgres" WITH GRANT OPTION;
+
+
+
+GRANT ALL ON FUNCTION "extensions"."pgrst_drop_watch"() TO "postgres" WITH GRANT OPTION;
+
+
+
+GRANT ALL ON FUNCTION "extensions"."set_graphql_placeholder"() TO "postgres" WITH GRANT OPTION;
+
+
+
+GRANT ALL ON FUNCTION "public"."article_generation_queue_idempotency_key"("title" "text", "universe_id" bigint) TO "anon";
+GRANT ALL ON FUNCTION "public"."article_generation_queue_idempotency_key"("title" "text", "universe_id" bigint) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."article_generation_queue_idempotency_key"("title" "text", "universe_id" bigint) TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."article_generation_queue" TO "anon";
+GRANT ALL ON TABLE "public"."article_generation_queue" TO "authenticated";
+GRANT ALL ON TABLE "public"."article_generation_queue" TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."claim_article_generation_queue_item"("p_queue_id" "uuid", "p_worker_id" "text", "p_max_attempts" integer) FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."claim_article_generation_queue_item"("p_queue_id" "uuid", "p_worker_id" "text", "p_max_attempts" integer) TO "anon";
+GRANT ALL ON FUNCTION "public"."claim_article_generation_queue_item"("p_queue_id" "uuid", "p_worker_id" "text", "p_max_attempts" integer) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."claim_article_generation_queue_item"("p_queue_id" "uuid", "p_worker_id" "text", "p_max_attempts" integer) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."enqueue_wiki_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."enqueue_wiki_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."enqueue_wiki_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."get_items_needing_metrics_calculation"("p_limit" integer, "p_max_age_hours" integer) TO "anon";
+GRANT ALL ON FUNCTION "public"."get_items_needing_metrics_calculation"("p_limit" integer, "p_max_age_hours" integer) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."get_items_needing_metrics_calculation"("p_limit" integer, "p_max_age_hours" integer) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) TO "anon";
+GRANT ALL ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."is_admin"("user_uuid" "uuid") TO "anon";
+GRANT ALL ON FUNCTION "public"."is_admin"("user_uuid" "uuid") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."is_admin"("user_uuid" "uuid") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."normalize_section_code"("raw" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."normalize_section_code"("raw" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."normalize_section_code"("raw" "text") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) TO "anon";
+GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."refresh_search_index_music"() TO "anon";
+GRANT ALL ON FUNCTION "public"."refresh_search_index_music"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."refresh_search_index_music"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer) TO "anon";
+GRANT ALL ON FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."search_site"("p_query" "text", "p_limit" integer, "p_offset" integer) TO "anon";
+GRANT ALL ON FUNCTION "public"."search_site"("p_query" "text", "p_limit" integer, "p_offset" integer) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."search_site"("p_query" "text", "p_limit" integer, "p_offset" integer) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_article_generation_queue_idempotency_key"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_article_generation_queue_idempotency_key"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_article_generation_queue_idempotency_key"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_article_published_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_article_published_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_article_published_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_catalog_page_published_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_catalog_page_published_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_catalog_page_published_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_checklist_published_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_checklist_published_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_checklist_published_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_game_published_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_game_published_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_game_published_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_quiz_page_published_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_quiz_page_published_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_quiz_page_published_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_tool_published_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_tool_published_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_tool_published_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_wiki_page_published_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_wiki_page_published_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_wiki_page_published_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_code"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_code"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_code"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_articles"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_articles"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_articles"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_authors"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_authors"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_authors"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_catalog_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_catalog_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_catalog_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_checklist_items"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_checklist_items"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_checklist_items"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_codes"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_codes"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_codes"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_events_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_events_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_events_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_free_item_images"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_free_item_images"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_free_item_images"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_lists"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_lists"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_lists"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_games"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_games"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_games"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_music_ids"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_music_ids"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_music_ids"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_tools"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_tools"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_tools"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_virtual_event_assets"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_virtual_event_assets"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_virtual_event_assets"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_virtual_events"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_virtual_events"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_virtual_events"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_universe"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_normalize_section_code"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_normalize_section_code"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_normalize_section_code"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_refresh_search_index_music"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_refresh_search_index_music"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_refresh_search_index_music"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_articles"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_articles"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_articles"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_authors"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_authors"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_authors"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_catalog_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_catalog_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_catalog_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_checklists"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_checklists"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_checklists"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_events_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_events_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_events_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_game_lists"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_game_lists"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_game_lists"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_games"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_games"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_games"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_quiz_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_quiz_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_quiz_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_tools"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_tools"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_tools"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_catalog_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_catalog_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_catalog_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_pages"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) TO "anon";
+GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "anon";
+GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."app_sessions" TO "anon";
+GRANT ALL ON TABLE "public"."app_sessions" TO "authenticated";
+GRANT ALL ON TABLE "public"."app_sessions" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."app_users" TO "anon";
+GRANT ALL ON TABLE "public"."app_users" TO "authenticated";
+GRANT ALL ON TABLE "public"."app_users" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."article_generation_artifacts" TO "anon";
+GRANT ALL ON TABLE "public"."article_generation_artifacts" TO "authenticated";
+GRANT ALL ON TABLE "public"."article_generation_artifacts" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."articles" TO "anon";
+GRANT ALL ON TABLE "public"."articles" TO "authenticated";
+GRANT ALL ON TABLE "public"."articles" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."authors" TO "anon";
+GRANT ALL ON TABLE "public"."authors" TO "authenticated";
+GRANT ALL ON TABLE "public"."authors" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universes" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universes" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universes" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."article_pages_index_view" TO "anon";
+GRANT ALL ON TABLE "public"."article_pages_index_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."article_pages_index_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."article_pages_view" TO "anon";
+GRANT ALL ON TABLE "public"."article_pages_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."article_pages_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."article_source_images" TO "anon";
+GRANT ALL ON TABLE "public"."article_source_images" TO "authenticated";
+GRANT ALL ON TABLE "public"."article_source_images" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."catalog_pages" TO "anon";
+GRANT ALL ON TABLE "public"."catalog_pages" TO "authenticated";
+GRANT ALL ON TABLE "public"."catalog_pages" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."catalog_pages_view" TO "anon";
+GRANT ALL ON TABLE "public"."catalog_pages_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."catalog_pages_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."checklist_items" TO "anon";
+GRANT ALL ON TABLE "public"."checklist_items" TO "authenticated";
+GRANT ALL ON TABLE "public"."checklist_items" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."checklist_pages" TO "anon";
+GRANT ALL ON TABLE "public"."checklist_pages" TO "authenticated";
+GRANT ALL ON TABLE "public"."checklist_pages" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."checklist_pages_view" TO "anon";
+GRANT ALL ON TABLE "public"."checklist_pages_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."checklist_pages_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."codes" TO "anon";
+GRANT ALL ON TABLE "public"."codes" TO "authenticated";
+GRANT ALL ON TABLE "public"."codes" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."games" TO "anon";
+GRANT ALL ON TABLE "public"."games" TO "authenticated";
+GRANT ALL ON TABLE "public"."games" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."code_pages_view" TO "anon";
+GRANT ALL ON TABLE "public"."code_pages_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."code_pages_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."comments" TO "anon";
+GRANT ALL ON TABLE "public"."comments" TO "authenticated";
+GRANT ALL ON TABLE "public"."comments" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."event_guide_generation_queue" TO "anon";
+GRANT ALL ON TABLE "public"."event_guide_generation_queue" TO "authenticated";
+GRANT ALL ON TABLE "public"."event_guide_generation_queue" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."events_pages" TO "anon";
+GRANT ALL ON TABLE "public"."events_pages" TO "authenticated";
+GRANT ALL ON TABLE "public"."events_pages" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."game_code_stats" TO "anon";
+GRANT ALL ON TABLE "public"."game_code_stats" TO "authenticated";
+GRANT ALL ON TABLE "public"."game_code_stats" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."game_generation_queue" TO "anon";
+GRANT ALL ON TABLE "public"."game_generation_queue" TO "authenticated";
+GRANT ALL ON TABLE "public"."game_generation_queue" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."game_list_entries" TO "anon";
+GRANT ALL ON TABLE "public"."game_list_entries" TO "authenticated";
+GRANT ALL ON TABLE "public"."game_list_entries" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."game_lists" TO "anon";
+GRANT ALL ON TABLE "public"."game_lists" TO "authenticated";
+GRANT ALL ON TABLE "public"."game_lists" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."game_lists_index_view" TO "anon";
+GRANT ALL ON TABLE "public"."game_lists_index_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."game_lists_index_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."game_lists_view" TO "anon";
+GRANT ALL ON TABLE "public"."game_lists_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."game_lists_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."game_pages_index_view" TO "anon";
+GRANT ALL ON TABLE "public"."game_pages_index_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."game_pages_index_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_catalog_items" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_items" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_items" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."limited_items_trading_view" TO "anon";
+GRANT ALL ON TABLE "public"."limited_items_trading_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."limited_items_trading_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."quiz_pages" TO "anon";
+GRANT ALL ON TABLE "public"."quiz_pages" TO "authenticated";
+GRANT ALL ON TABLE "public"."quiz_pages" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."quiz_pages_view" TO "anon";
+GRANT ALL ON TABLE "public"."quiz_pages_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."quiz_pages_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."revalidation_events" TO "anon";
+GRANT ALL ON TABLE "public"."revalidation_events" TO "authenticated";
+GRANT ALL ON TABLE "public"."revalidation_events" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_catalog_categories" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_categories" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_categories" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_catalog_discovery_hits" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_discovery_hits" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_discovery_hits" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_catalog_discovery_runs" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_discovery_runs" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_discovery_runs" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_catalog_item_images" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_images" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_images" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_catalog_items_history" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_items_history" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_items_history" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_catalog_refresh_queue" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_refresh_queue" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_refresh_queue" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_catalog_subcategories" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_subcategories" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_subcategories" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_groups" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_groups" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_groups" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_music_ids" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_music_ids" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_music_ids" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_music_artists_view" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_music_artists_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_music_artists_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_music_genres_view" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_music_genres_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_music_genres_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_music_ids_boombox_view" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_music_ids_boombox_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_music_ids_boombox_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_music_ids_ranked_view" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_music_ids_ranked_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_music_ids_ranked_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_badges" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_badges" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_badges" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_discovery_jobs" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_discovery_jobs" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_discovery_jobs" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_gamepasses" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_gamepasses" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_gamepasses" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_media" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_media" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_media" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_place_servers" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_place_servers" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_place_servers" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_search_snapshots" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_search_snapshots" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_search_snapshots" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_social_links" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_social_links" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_social_links" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_sort_definitions" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_sort_definitions" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_sort_definitions" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_sort_entries" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_sort_entries" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_sort_entries" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_sort_runs" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_sort_runs" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_sort_runs" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_stats_daily" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_stats_daily" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_stats_daily" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_virtual_event_categories" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_virtual_event_categories" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_virtual_event_categories" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_virtual_event_thumbnails" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_virtual_event_thumbnails" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_virtual_event_thumbnails" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_virtual_events" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_virtual_events" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_virtual_events" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."search_index" TO "anon";
+GRANT ALL ON TABLE "public"."search_index" TO "authenticated";
+GRANT ALL ON TABLE "public"."search_index" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."tools" TO "anon";
+GRANT ALL ON TABLE "public"."tools" TO "authenticated";
+GRANT ALL ON TABLE "public"."tools" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."tools_view" TO "anon";
+GRANT ALL ON TABLE "public"."tools_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."tools_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."user_checklist_progress" TO "anon";
+GRANT ALL ON TABLE "public"."user_checklist_progress" TO "authenticated";
+GRANT ALL ON TABLE "public"."user_checklist_progress" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."user_code_progress" TO "anon";
+GRANT ALL ON TABLE "public"."user_code_progress" TO "authenticated";
+GRANT ALL ON TABLE "public"."user_code_progress" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."user_quiz_progress" TO "anon";
+GRANT ALL ON TABLE "public"."user_quiz_progress" TO "authenticated";
+GRANT ALL ON TABLE "public"."user_quiz_progress" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."wiki_catalog_pages" TO "anon";
+GRANT ALL ON TABLE "public"."wiki_catalog_pages" TO "authenticated";
+GRANT ALL ON TABLE "public"."wiki_catalog_pages" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."wiki_catalog_pages_view" TO "anon";
+GRANT ALL ON TABLE "public"."wiki_catalog_pages_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."wiki_catalog_pages_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."wiki_pages" TO "anon";
+GRANT ALL ON TABLE "public"."wiki_pages" TO "authenticated";
+GRANT ALL ON TABLE "public"."wiki_pages" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."wiki_pages_view" TO "anon";
+GRANT ALL ON TABLE "public"."wiki_pages_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."wiki_pages_view" TO "service_role";
+
+
+
+
+
+
+
+
+
+
+
+
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON SEQUENCES TO "postgres";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON SEQUENCES TO "anon";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON SEQUENCES TO "authenticated";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON SEQUENCES TO "service_role";
+
+
+
+
+
+
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON FUNCTIONS TO "postgres";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON FUNCTIONS TO "anon";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON FUNCTIONS TO "authenticated";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON FUNCTIONS TO "service_role";
+
+
+
+
+
+
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "postgres";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "anon";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "authenticated";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "service_role";
+
+
+
+
+
+
 

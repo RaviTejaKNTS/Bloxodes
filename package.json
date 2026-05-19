@@ -31,6 +31,7 @@
     "articles:update": "tsx scripts/articles/update-articles.ts",
     "refresh:codes": "tsx scripts/codes/update-codes.ts",
     "rewrite:codes": "tsx scripts/codes/rewrite-codes-articles.ts",
+    "content:check-copy": "tsx scripts/content/check-public-copy.ts",
     "import:games": "tsx scripts/games/import-games.ts",
     "post:codes": "tsx scripts/posts/post-codes.ts",
     "post:online": "tsx scripts/posts/post-online.ts",

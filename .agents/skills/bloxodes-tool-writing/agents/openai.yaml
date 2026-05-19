@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Tool Writing"
+  short_description: "Write Supabase tool page fields"
+  default_prompt: "Use $bloxodes-tool-writing to write research-notes.md and final.json for one tool page after explaining the tool result and formula in plain language."

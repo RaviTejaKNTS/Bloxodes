@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Catalog Writing"
+  short_description: "Write Supabase catalog page fields"
+  default_prompt: "Use $bloxodes-catalog-writing for one catalog page. Read the required docs, create plain-language research-notes.md first, then write final.json with catalog page fields, including wiki_md when the page appears on a wiki hub."

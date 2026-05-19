@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Research"
+  short_description: "Research Roblox facts for Bloxodes content"
+  default_prompt: "Use $bloxodes-research to prepare plain-language research-notes.md for one Bloxodes page. Explain the topic before database or route notes."

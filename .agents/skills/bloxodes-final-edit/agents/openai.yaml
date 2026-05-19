@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Final Edit"
+  short_description: "Gate Bloxodes content quality"
+  default_prompt: "Use $bloxodes-final-edit to verify this Bloxodes content output before database import. Fail unclear field-first writing and any sentence a normal player cannot understand."

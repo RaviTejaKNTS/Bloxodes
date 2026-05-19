@@ -2,6 +2,26 @@
 
 Use this whenever a local game dataset should become public wiki and catalog pages. The expected path is local first, production only after preview and data quality checks are clean.
 
+Read this as a practical workflow, not a page template. The process keeps the data path safe, but the writing still needs to come from the game system, the dataset, and the player's reason for opening the page.
+
+## V2 Writing Override
+
+For public copy, the current writing source of truth is:
+
+1. `agents/content/PROCESS.md`
+2. `agents/content/research-policy.md`
+3. `agents/content/writing-core.md`
+4. `agents/content/page-types/game-catalog-pages.md`
+5. `agents/content/final-edit.md`
+
+If this workflow conflicts with those files, follow the v2 content docs.
+
+Important: do not batch-write every catalog page for a game until one page has been researched, written, previewed, and approved as the gold standard. The dataset and route setup can still be prepared in bulk, but public copy must be proven on one page first.
+
+For catalog copy changes, research first and propose the item-card section style before writing final content. The user should confirm whether sections are divided by rarity, item type, source, event, location, shop, tier, world, unlock route, or another in-game grouping. The confirmation must be explicit; a normal request to write or continue is not enough. After confirmation, use `description_json` for short notes between those sections and keep `description_md` focused on whole-page mechanics.
+
+Before importing catalog copy, verify that the route actually renders the confirmed card sections. Do not assume the renderer will pick the right field because the dataset contains it. If the cards should be grouped by `Walls` and `Floors` but the route is grouping by blank `rarity` values, fix the renderer or add the confirmed grouping behavior first.
+
 ## Trigger
 
 Follow this workflow when adding pages for a game dataset under `data/<Game>/`, especially for repeated Roblox game wiki/catalog work such as Adopt Me, Blox Fruits, Brookhaven RP, Sailor Piece, Steal a Brainrot, The Forge, Grow a Garden, or future games.
@@ -13,32 +33,35 @@ Follow this workflow when adding pages for a game dataset under `data/<Game>/`, 
 - Dataset collectors should live under `scripts/catalog/collect-<game>-data.ts`.
 - Long-lived datasets must be documented in `data/AGENTS.md` and `agents/data/agents.md`.
 - Collector scripts must be documented in `agents/scripts/agents.md`.
-- Catalog page rows for gathered game datasets can be generated with `npm run seed:game-catalog-pages -- --dry-run`, then written locally with `npm run seed:game-catalog-pages`.
+- Wiki catalog page rows for gathered game datasets can be generated with `npm run seed:game-catalog-pages -- --dry-run`, then written locally with `npm run seed:game-catalog-pages`.
 - Wiki page rows for gathered game datasets can be generated with `npm run seed:game-wiki-pages -- --dry-run`, then written locally with `npm run seed:game-wiki-pages`.
 
 ## DB Targets
 
 - `wiki_pages`: one game-level hub at `/wiki/[slug]`.
-- `catalog_pages`: one page per collection at `/catalog/[code]`.
+- `wiki_catalog_pages`: one game-specific collection page at `/wiki/[game-slug]/[collection-slug]`.
+- `catalog_pages`: general Roblox catalog hubs that are not tied to a specific game, such as music IDs, decal IDs, free Roblox items, and admin commands.
 - `roblox_universes`: provides universe metadata, icon, thumbnails, stats, and the shared `universe_id`.
 
 Important fields:
 
 - `wiki_pages.slug`: game slug, for example `adopt-me`.
 - `wiki_pages.title`, `seo_title`, `meta_description`, `tips_md`, `cover_image`, `controls_json`.
-- `catalog_pages.code`: collection code, for example `adopt-me-pets` or `blox-fruits-fruits`.
-- `catalog_pages.title`, `seo_title`, `meta_description`, `intro_md`, `how_it_works_md`, `faq_json`, `thumb_url`.
-- `catalog_pages.universe_id`: links catalog pages into the wiki hub.
-- `catalog_pages.wiki_md`: short copy rendered on the game wiki hub.
-- `catalog_pages.wiki_sort_order`: ordering on the game wiki hub.
-- Wiki catalog CTA image strips are derived from representative item images in `data/<Game>/<collection>.json` by matching `catalog_pages.code`.
+- `wiki_catalog_pages.wiki_slug`: game slug, for example `adopt-me`.
+- `wiki_catalog_pages.collection_slug`: collection slug, for example `pets`.
+- `wiki_catalog_pages.code`: stable collection code, for example `adopt-me-pets` or `blox-fruits-fruits`, kept for scripts and old URL redirects.
+- `wiki_catalog_pages.title`, `seo_title`, `meta_description`, `intro_md`, `description_md`, `how_it_works_md`, `description_json`, `faq_json`, `thumb_url`.
+- `wiki_catalog_pages.universe_id`: links collection pages into the wiki hub.
+- `wiki_catalog_pages.wiki_md`: short copy rendered on the game wiki hub.
+- `wiki_catalog_pages.wiki_sort_order`: ordering on the game wiki hub.
+- Wiki catalog CTA image strips are derived from representative item images in `data/<Game>/<collection>.json` by matching `wiki_catalog_pages.code`.
 
 ## Naming Pattern
 
 - Game wiki slug: lowercase kebab-case, e.g. `blox-fruits`.
-- Catalog code: `<game-slug>-<collection-slug>`, e.g. `blox-fruits-swords`.
+- Wiki catalog code: `<game-slug>-<collection-slug>`, e.g. `blox-fruits-swords`.
 - Catalog title: `All <Collection> in <Game>`.
-- Route should be predictable and SEO-readable: `/catalog/blox-fruits-swords`.
+- Route should be predictable and SEO-readable: `/wiki/blox-fruits/swords`.
 
 ## Local-First Process
 
@@ -50,8 +73,8 @@ Important fields:
    - Missing images are understood and intentional.
 2. Confirm or seed the local `roblox_universes` row for the game.
 3. Upsert the game hub into local `wiki_pages`.
-4. Upsert collection shells into local `catalog_pages`.
-   - Rerun both seed scripts after adding or fixing a game in `roblox_universes` so `wiki_pages.universe_id` and `catalog_pages.universe_id` are linked. The wiki page automatically lists catalog blocks through this shared `universe_id`.
+4. Upsert collection shells into local `wiki_catalog_pages`.
+   - Rerun both seed scripts after adding or fixing a game in `roblox_universes` so `wiki_pages.universe_id` and `wiki_catalog_pages.universe_id` are linked. The wiki page automatically lists collection blocks through this shared `universe_id`.
 5. Start as drafts when content/layout is new:
    - Use `is_published = false` until local preview is clean.
    - Publish locally only after routes render correctly.
@@ -60,15 +83,16 @@ Important fields:
    - Add per-game route code only when the dataset needs custom behavior.
 7. Preview locally:
    - `/wiki/<game-slug>`
-   - `/catalog/<game-slug>-<collection-slug>`
+   - `/wiki/<game-slug>/<collection-slug>`
    - `/catalog`
    - `/sitemaps/wiki.xml`
    - `/sitemaps/catalog.xml`
 8. Verify:
    - Metadata and canonical URLs.
    - JSON-LD if applicable.
-   - Wiki hub lists the catalog blocks in the intended order.
+   - Wiki hub lists the wiki catalog blocks in the intended order.
    - Catalog pages render real dataset rows/cards, not just shell copy.
+   - Section labels match the confirmed section plan and `description_json` notes visibly appear next to those sections.
    - Images work on desktop and mobile.
    - Search/revalidation hooks are covered by existing triggers.
 
@@ -76,7 +100,9 @@ Important fields:
 
 Use this style for every wiki page, catalog page, and catalog table explanation.
 
-The goal is simple: write complete, useful information in simple English with a clean story-like flow. Every sentence must help the player understand the game, the dataset, or the decision they came to make. If a sentence does not add value, remove it.
+The goal is simple: write complete, useful information in simple English with a clean story-like flow. Every sentence must help the player understand the game, item, mechanic, tool, or decision they came to make. If a sentence does not add value, remove it.
+
+Do not write public copy from a database-field mindset. Explain the game system first, then explain fields in player language. A sentence fails if a normal player can ask "what does that mean?" and the surrounding copy does not answer it.
 
 ### Voice
 
@@ -99,6 +125,7 @@ The goal is simple: write complete, useful information in simple English with a 
 - Keep game-specific details. Remove anything that would apply equally to every Roblox game.
 - Prefer exact terms from the game when naming items, shops, currencies, rarities, worlds, bosses, requirements, and rewards.
 - Explain what fields mean when they are not obvious, such as availability, source, hatch time, roll chance, mastery, or mutation multiplier.
+- Define unclear fields before relying on them as advice. For example, `seats` means passenger capacity on vehicles, `source` means the route that created the item, and `availability` means whether that route still exists.
 - When a page includes limits, requirements, timers, rotations, drop chances, prices, or availability, make those details easy to find.
 - If the dataset has known gaps, mention them cleanly instead of hiding them.
 
@@ -118,14 +145,14 @@ The goal is simple: write complete, useful information in simple English with a 
 
 ### Catalog Page Content
 
-Each `catalog_pages` row should have useful copy, not just SEO filler.
+Each `wiki_catalog_pages` row should have useful copy, not just SEO filler.
 
 - `title`: short and scannable, usually `All <Collection> in <Game>`.
-- `seo_title`: close to the title unless a clearer search phrase is needed.
+- `seo_title`: for catalog pages, default to the visible title with the item count, for example `All 1,898 Furniture Items in Adopt Me`. Do not simplify count-based catalog titles unless the title is genuinely too long or the route has a special SEO format.
 - `meta_description`: specific, under 160 characters, and mentions the game plus the collection.
 - `intro_md`: explain what the collection controls in the game and what the page helps players compare.
 - `how_it_works_md`: explain how to use the table/cards and what fields matter most.
-- `description_json`: use only for extra detail that genuinely helps players understand the collection.
+- `description_json`: short section-level notes when item cards are divided into meaningful groups. These notes should set up the section near the cards and should not repeat `description_md`.
 - `faq_json`: answer real questions a player would have. Avoid generic FAQ entries.
 - `wiki_md`: short wiki-hub copy that explains the catalog's role in one compact paragraph.
 - CTA images on wiki hubs come from representative item images in the matching local dataset; do not store per-page image arrays in Supabase.
@@ -133,9 +160,13 @@ Each `catalog_pages` row should have useful copy, not just SEO filler.
 Good catalog copy usually follows this shape:
 
 1. What this collection is in the game.
-2. Why players care about it.
-3. What the table lets them compare.
-4. Any important limitations, availability notes, or source gaps.
+2. What players actually do with it.
+3. How players get, unlock, buy, hatch, craft, farm, earn, or trade it.
+4. Main groups and why they differ.
+5. Important terms explained in gameplay language.
+6. Any current, retired, event, premium, reward, trade-only, or uncertain caveats.
+
+When item cards are sectioned, put the section-specific setup in `description_json` and keep `description_md` shorter. `description_md` should explain the whole system, such as where the mechanic lives in-game, how players acquire items, how odds or prices work, and what mistakes apply across the collection.
 
 ### Wiki Page Content
 
@@ -149,6 +180,8 @@ Each `wiki_pages` row is a game hub, not a full article dump.
 - The wiki hub should connect the player to catalog pages, tools, codes, articles, checklists, events, and game metadata through existing related-data blocks.
 
 Wiki copy should summarize how the game works at a high level and point players toward the catalog sections that solve specific needs.
+
+Catalog blurbs on wiki hubs must explain the collection as a game system. They are not link-card captions.
 
 ### Tables And Cards
 
@@ -177,15 +210,16 @@ Before writing:
 1. Read the local dataset fields and item examples.
 2. Check the source URLs stored in dataset `meta.sources`.
 3. Identify what the player is trying to decide or understand.
-4. List the 5-8 specific facts the page must cover.
-5. Identify 3-5 reader questions the page should answer.
+4. Write plain-language notes for what the topic is, how it works in the game, important terms, main groups, real examples, and common mistakes.
+5. List the specific facts the page must cover.
+6. Identify reader questions the page should answer.
 
 After writing:
 
 1. Check every factual claim against the dataset or verified source notes.
 2. Remove claims that are not supported.
 3. Check that the intro, table context, how-to copy, wiki copy, and FAQ do not repeat each other.
-4. Check that important item fields are explained somewhere on the page.
+4. Check that important item fields are explained in gameplay language somewhere on the page.
 5. Check that no generic line survived.
 6. Check that the page still reads naturally from top to bottom.
 
@@ -219,7 +253,7 @@ Only after local is clean:
    - Run `NODE_ENV=production npm run seed:game-wiki-pages -- --allow-prod`.
    - Do not use `--draft` for production publish unless the pages must stay hidden.
 6. Verify production DB state after writing:
-   - All expected `catalog_pages` rows exist.
+   - All expected `wiki_catalog_pages` rows exist.
    - All expected `wiki_pages` rows exist.
    - `is_published = true` for rows meant to go live.
    - No expected catalog or wiki rows have missing `universe_id`.
@@ -229,7 +263,7 @@ Only after local is clean:
 Production notes:
 
 - Production Supabase can contain more than the default returned row count. Any script that looks up `roblox_universes` for matching must paginate with `.range(...)` or another explicit paging strategy.
-- Keep seed payloads aligned with the current table schema. Do not carry old migration fields into upserts. In the current catalog schema, `cta_label`, `cta_url`, and `wiki_item_count` are not written to `catalog_pages`.
+- Keep seed payloads aligned with the current table schema. Do not carry old migration fields into upserts. In the current wiki catalog schema, `cta_label`, `cta_url`, and `wiki_item_count` are not written to `wiki_catalog_pages`.
 - If production writes fail with a schema-cache column error, stop and align the script or migration before retrying. Do not keep retrying the same payload.
 
 ## Quality Bar
