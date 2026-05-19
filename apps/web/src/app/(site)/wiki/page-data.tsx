@@ -64,9 +64,17 @@ export type WikiDetailPageData = {
   related: WikiRelatedData;
 };
 
-type ControlRow = {
+type ControlDeviceKey = "desktop" | "mobile" | "tablet" | "console" | "vr";
+
+type ControlDeviceColumn = {
+  key: ControlDeviceKey;
   label: string;
-  value: string;
+  enabled?: boolean | null;
+};
+
+type ControlTableRow = {
+  action: string;
+  values: Partial<Record<ControlDeviceKey, string>>;
 };
 
 type SocialLink = {
@@ -603,36 +611,163 @@ function stringifyControlValue(value: unknown): string | null {
   return null;
 }
 
-function parseControls(raw: unknown): ControlRow[] {
+const CONTROL_DEVICE_COLUMNS: ControlDeviceColumn[] = [
+  { key: "desktop", label: "Desktop" },
+  { key: "mobile", label: "Mobile" },
+  { key: "tablet", label: "Tablet" },
+  { key: "console", label: "Console" },
+  { key: "vr", label: "VR" }
+];
+
+const CONTROL_DEVICE_ALIASES: Record<ControlDeviceKey, string[]> = {
+  desktop: ["desktop", "pc", "computer", "keyboard", "keyboard_mouse", "keyboardMouse"],
+  mobile: ["mobile", "phone"],
+  tablet: ["tablet"],
+  console: ["console", "controller", "xbox", "playstation"],
+  vr: ["vr", "virtual_reality", "virtualReality"]
+};
+
+function getControlDeviceColumns(page: WikiPageContent): ControlDeviceColumn[] {
+  const enabledByDevice: Record<ControlDeviceKey, boolean | null | undefined> = {
+    desktop: page.desktop_enabled,
+    mobile: page.mobile_enabled,
+    tablet: page.tablet_enabled,
+    console: page.console_enabled,
+    vr: page.vr_enabled
+  };
+  const columns = CONTROL_DEVICE_COLUMNS.map((column) => ({
+    ...column,
+    enabled: enabledByDevice[column.key]
+  }));
+  const enabledColumns = columns.filter((column) => column.enabled === true);
+  return enabledColumns.length ? enabledColumns : columns.slice(0, 1);
+}
+
+function getControlActionLabel(record: Record<string, unknown>, fallback: string): string {
+  return (
+    stringifyControlValue(record.action) ??
+    stringifyControlValue(record.move) ??
+    stringifyControlValue(record.label) ??
+    stringifyControlValue(record.title) ??
+    stringifyControlValue(record.name) ??
+    fallback
+  );
+}
+
+function getDeviceControlValue(record: Record<string, unknown>, key: ControlDeviceKey): string | null {
+  for (const alias of CONTROL_DEVICE_ALIASES[key]) {
+    const value = stringifyControlValue(record[alias]);
+    if (value) return value;
+  }
+  return null;
+}
+
+function getGenericControlValue(record: Record<string, unknown>): string | null {
+  return (
+    stringifyControlValue(record.value) ??
+    stringifyControlValue(record.controls) ??
+    stringifyControlValue(record.keys) ??
+    stringifyControlValue(record.description)
+  );
+}
+
+function parseControlEntry(
+  entry: unknown,
+  index: number,
+  columns: ControlDeviceColumn[],
+  labelOverride?: string
+): ControlTableRow | null {
+  const fallbackLabel = labelOverride ?? `Controls ${index + 1}`;
+  const fallbackColumn = columns.find((column) => column.key === "desktop") ?? columns[0];
+  if (!fallbackColumn) return null;
+
+  if (typeof entry === "string") {
+    const value = stringifyControlValue(entry);
+    return value ? { action: fallbackLabel, values: { [fallbackColumn.key]: value } } : null;
+  }
+
+  if (!entry || typeof entry !== "object") return null;
+  const record = entry as Record<string, unknown>;
+  const action = getControlActionLabel(record, fallbackLabel);
+  const values: Partial<Record<ControlDeviceKey, string>> = {};
+
+  for (const column of columns) {
+    const value = getDeviceControlValue(record, column.key);
+    if (value) values[column.key] = value;
+  }
+
+  if (!Object.keys(values).length) {
+    const generic = getGenericControlValue(record);
+    if (generic) values[fallbackColumn.key] = generic;
+  }
+
+  return Object.keys(values).length ? { action, values } : null;
+}
+
+function parseControls(raw: unknown, columns: ControlDeviceColumn[]): ControlTableRow[] {
   if (!raw) return [];
   if (Array.isArray(raw)) {
     return raw
-      .map((entry, index) => {
-        if (typeof entry === "string") return { label: `Controls ${index + 1}`, value: entry };
-        if (!entry || typeof entry !== "object") return null;
-        const record = entry as Record<string, unknown>;
-        const label =
-          stringifyControlValue(record.device) ??
-          stringifyControlValue(record.platform) ??
-          stringifyControlValue(record.label) ??
-          stringifyControlValue(record.title) ??
-          stringifyControlValue(record.name) ??
-          `Controls ${index + 1}`;
-        const value = stringifyControlValue(record);
-        return value ? { label, value } : null;
-      })
-      .filter((entry): entry is ControlRow => Boolean(entry));
+      .map((entry, index) => parseControlEntry(entry, index, columns))
+      .filter((entry): entry is ControlTableRow => Boolean(entry));
   }
   if (typeof raw === "object") {
     return Object.entries(raw as Record<string, unknown>)
-      .map(([key, value]) => {
-        const text = stringifyControlValue(value);
-        return text ? { label: formatKeyLabel(key), value: text } : null;
-      })
-      .filter((entry): entry is ControlRow => Boolean(entry));
+      .map(([key, value], index) => parseControlEntry(value, index, columns, formatKeyLabel(key)))
+      .filter((entry): entry is ControlTableRow => Boolean(entry));
   }
   const value = stringifyControlValue(raw);
-  return value ? [{ label: "Controls", value }] : [];
+  const fallbackColumn = columns.find((column) => column.key === "desktop") ?? columns[0];
+  return value && fallbackColumn ? [{ action: "Controls", values: { [fallbackColumn.key]: value } }] : [];
+}
+
+function WikiControlsTable({
+  columns,
+  rows
+}: {
+  columns: ControlDeviceColumn[];
+  rows: ControlTableRow[];
+}) {
+  if (!columns.length || !rows.length) return null;
+
+  return (
+    <section className="min-w-0 space-y-4 border-t border-border/60 pt-8">
+      <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">Controls</h2>
+      <div className="overflow-x-auto rounded-lg border border-border/70">
+        <table className="min-w-full border-collapse text-left text-sm">
+          <thead className="bg-muted/20 text-xs uppercase tracking-[0.14em] text-muted-foreground">
+            <tr>
+              <th scope="col" className="min-w-36 border-b border-border/70 px-4 py-3 font-semibold">
+                Move
+              </th>
+              {columns.map((column) => (
+                <th key={column.key} scope="col" className="min-w-40 border-b border-border/70 px-4 py-3 font-semibold">
+                  {column.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border/60">
+            {rows.map((row) => (
+              <tr key={row.action} className="align-top">
+                <th scope="row" className="px-4 py-3 font-semibold text-foreground">
+                  {row.action}
+                </th>
+                {columns.map((column) => {
+                  const value = row.values[column.key];
+                  return (
+                    <td key={column.key} className="px-4 py-3 leading-6 text-muted">
+                      {value ? value : <span className="text-muted/60">Not listed</span>}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
 }
 
 function extractSocialLinks(raw: unknown): SocialLink[] {
@@ -1076,7 +1211,8 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const universeLabel = getUniverseLabel(page);
   const summary = getSummary(page);
   const heroImage = getHeroImage(page, related);
-  const controlRows = parseControls(page.controls_json).map((row) => ({ label: row.label, value: row.value }));
+  const controlColumns = getControlDeviceColumns(page);
+  const controlRows = parseControls(page.controls_json, controlColumns);
   const tipsNodes = await renderTipsNodes(page.tips_md);
   const catalogBlocks = await buildWikiCatalogBlocks(related);
   const developerLinks = developerGameLinks(related);
@@ -1316,16 +1452,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             </section>
           ) : null}
 
-          {controlRows.length ? (
-            <section className="article-content md-copy-scope game-copy min-w-0 border-t border-border/60 pt-8">
-              <h2>Controls</h2>
-              {controlRows.map((row) => (
-                <p key={row.label}>
-                  <strong>{row.label}:</strong> {row.value}
-                </p>
-              ))}
-            </section>
-          ) : null}
+          <WikiControlsTable columns={controlColumns} rows={controlRows} />
 
           {tipsNodes?.length ? (
             <section className="article-content md-copy-scope game-copy min-w-0 border-t border-border/60 pt-8">
