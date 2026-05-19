@@ -733,7 +733,7 @@ function WikiControlsTable({
   if (!columns.length || !rows.length) return null;
 
   return (
-    <section className="min-w-0 space-y-4 border-t border-border/60 pt-8">
+    <section className="min-w-0 space-y-4">
       <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">{heading}</h2>
       <div className="overflow-x-auto rounded-lg border border-border/70">
         <table className="min-w-full border-collapse text-left text-sm">
@@ -1215,7 +1215,14 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const heroImage = getHeroImage(page, related);
   const controlColumns = getControlDeviceColumns(page);
   const controlRows = parseControls(page.controls_json, controlColumns);
+  const hasControlsSection = controlColumns.length > 0 && controlRows.length > 0;
   const tipsNodes = await renderTipsNodes(page.tips_md);
+  const tipsSectionClassName = hasControlsSection
+    ? "article-content md-copy-scope game-copy min-w-0"
+    : "article-content md-copy-scope game-copy min-w-0 border-t border-border/60 pt-8";
+  const socialSectionClassName = hasControlsSection && !tipsNodes?.length
+    ? "min-w-0 space-y-4"
+    : "min-w-0 space-y-4 border-t border-border/60 pt-8";
   const catalogBlocks = await buildWikiCatalogBlocks(related);
   const developerLinks = developerGameLinks(related);
   const creatorUrl = buildCreatorUrl(page);
@@ -1457,14 +1464,14 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
           <WikiControlsTable columns={controlColumns} heading={`${universeLabel} Controls`} rows={controlRows} />
 
           {tipsNodes?.length ? (
-            <section className="article-content md-copy-scope game-copy min-w-0 border-t border-border/60 pt-8">
+            <section className={tipsSectionClassName}>
               <h2>{universeLabel} Gameplay Tips</h2>
               {tipsNodes}
             </section>
           ) : null}
 
           {socialLinks.length ? (
-            <section className="min-w-0 space-y-4 border-t border-border/60 pt-8">
+            <section className={socialSectionClassName}>
               <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">{creatorLabel} Social Accounts</h2>
               <p className="text-base leading-7 text-muted md:text-lg">Here are the official social media platforms of {universeLabel} developers.</p>
               <div className="flex flex-wrap gap-3">
