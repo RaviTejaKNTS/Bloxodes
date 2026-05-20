@@ -51,6 +51,57 @@ type BooleanishValue = {
 };
 
 const CARD_STAT_OVERRIDES: Record<string, string[]> = {
+  "sailor-piece-fruits": ["bestFor", "combatRole", "mainStrength", "mainLimit", "spinChance"],
+  "sailor-piece-islands": ["bosses", "mainRole", "keyContent", "progressionUse"],
+  "sailor-piece-accessories": ["defense", "damage", "damageReduction", "sourceRoute", "dropOrCost", "bestFor"],
+  "sailor-piece-dungeons": [
+    "runType",
+    "entryItem",
+    "location",
+    "maxPlayers",
+    "formatTime",
+    "bossCheckpoint",
+    "mainRewards",
+    "importantRule"
+  ],
+  "sailor-piece-races": ["rollRarity", "bestFor", "coreBonus", "hasV4", "requiredFor"],
+  "sailor-piece-traits": ["damageMultiplier", "defenseMultiplier", "cooldownReduction", "bestFor"],
+  "sailor-piece-bloodlines": [
+    "damage",
+    "hp",
+    "luck",
+    "weaponBonus",
+    "sustainDefense",
+    "utilityBonus",
+    "sourcePity",
+    "specialUse"
+  ],
+  "sailor-piece-bosses": ["difficulty", "level", "hp", "encounterType", "respawnAccess", "dropCount", "notableDrops"],
+  "sailor-piece-swords": ["baseDamage", "attackSpeed", "masteryRequired", "sourceRoute", "bestFor", "unlockNote"],
+  "sailor-piece-guilds": [
+    "location",
+    "encounter",
+    "dropChance",
+    "spawnRequirement",
+    "maxBonus",
+    "appliesTo",
+    "upgradeRole"
+  ],
+  "sailor-piece-titles": ["tier", "bonus", "unlockRoute", "requirement", "dropOrPity", "availability", "bestFor"],
+  "sailor-piece-melee-specs": [
+    "statPriority",
+    "unlockRoute",
+    "sourceLocation",
+    "abilityCount",
+    "signatureMove",
+    "mainStrength",
+    "mainLimit",
+    "verificationNote"
+  ],
+  "sailor-piece-runes": ["displayRarity", "source", "bonusType", "baseEffect", "maxEffect", "bestFor", "dropNote"],
+  "sailor-piece-clans": ["rarity", "bestFor", "bonusSummary", "passive", "requirement"],
+  "sailor-piece-relics": ["effect", "recipe", "partRoute", "bestFor"],
+  "sailor-piece-haki": ["role", "unlockRoute", "requirements", "maxLevel", "maxEffect", "levelingRoute"],
   ores: ["dropChance", "multiplier", "sellPrice", "trait"],
   weapons: ["baseDamage", "attackSpeed", "range", "sellPrice"],
   armors: ["baseHealth", "sellPrice", "chance"],

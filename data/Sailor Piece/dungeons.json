@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Sailor Piece dungeons data",
-    "updatedAt": "2026-05-07",
+    "updatedAt": "2026-05-20",
     "sources": [
       {
         "label": "Sailor Piece Wiki - dungeons",
@@ -11,13 +11,16 @@
     ],
     "columns": [
       "name",
+      "catalogSection",
+      "runType",
       "level",
-      "difficulty",
-      "boss",
-      "time",
-      "description",
-      "rewards",
-      "wikiUrl"
+      "entryItem",
+      "location",
+      "maxPlayers",
+      "formatTime",
+      "bossCheckpoint",
+      "mainRewards",
+      "importantRule"
     ]
   },
   "items": [
@@ -43,7 +46,17 @@
       "sections": [],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/dungeons/rune-dungeon/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "catalogSection": "15-wave farming runs",
+      "runType": "Rune farming wave run",
+      "level": "5000+ dungeon route",
+      "entryItem": "Dungeon access route",
+      "location": "Dungeon Island",
+      "maxPlayers": "Up to 4",
+      "formatTime": "15 waves, 5 minutes per wave",
+      "bossCheckpoint": "Wave bosses",
+      "mainRewards": "Runes and rune XP",
+      "importantRule": "Higher difficulty improves rune rewards."
     },
     {
       "name": "Boss Rush",
@@ -67,7 +80,17 @@
       "sections": [],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/dungeons/boss-rush/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "catalogSection": "15-wave farming runs",
+      "runType": "Boss wave rush",
+      "level": "Boss-ready builds",
+      "entryItem": "Rush Key",
+      "location": "Sailor Island",
+      "maxPlayers": "Up to 4",
+      "formatTime": "15 waves, 300-second run",
+      "bossCheckpoint": "Escanor and boss waves",
+      "mainRewards": "Rush Coins, upgrades, Boss Rush rewards",
+      "importantRule": "Deal at least 10% damage to receive rewards."
     },
     {
       "name": "Double Dungeon",
@@ -91,7 +114,17 @@
       "sections": [],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/dungeons/double-dungeon/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "catalogSection": "Shadow Monarch boss dungeon",
+      "runType": "Focused boss dungeon",
+      "level": "Endgame",
+      "entryItem": "Dungeon route access",
+      "location": "Dungeon Island",
+      "maxPlayers": "Team-ready",
+      "formatTime": "Boss encounter route",
+      "bossCheckpoint": "Shadow Monarch",
+      "mainRewards": "Shadow Monarch rewards and rare drops",
+      "importantRule": "Bring a strong build; this is not a normal starter dungeon."
     },
     {
       "name": "Infinite Tower",
@@ -115,7 +148,17 @@
       "sections": [],
       "updatedAt": "2026-03-30",
       "wikiUrl": "https://sailorpiece.org/wiki/dungeons/tower-mode/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "catalogSection": "Endless tower climb",
+      "runType": "Endless floor climb",
+      "level": "8500+ route",
+      "entryItem": "Tower Key",
+      "location": "Tower Island",
+      "maxPlayers": "Solo or team climb",
+      "formatTime": "Endless floors with scaling pressure",
+      "bossCheckpoint": "Boss every 5 floors",
+      "mainRewards": "Tower Tokens, secret rune chase, tower rewards",
+      "importantRule": "Floor scaling and token rewards matter more than normal wave clear speed."
     }
   ]
 }

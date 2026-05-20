@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Sailor Piece bloodlines data",
-    "updatedAt": "2026-05-07",
+    "updatedAt": "2026-05-20",
     "sources": [
       {
         "label": "Sailor Piece Wiki - bloodlines",
@@ -12,10 +12,14 @@
     "columns": [
       "name",
       "tier",
-      "category",
-      "description",
-      "stats",
-      "obtainment"
+      "damage",
+      "hp",
+      "luck",
+      "weaponBonus",
+      "sustainDefense",
+      "utilityBonus",
+      "sourcePity",
+      "specialUse"
     ]
   },
   "items": [
@@ -39,7 +43,15 @@
       },
       "requirements": null,
       "obtainment": "S+ tier (Mythical pity) bloodline. Listed as a required ingredient in The World spec crafting recipe per sailorpiecewiki /entries/the-world-style.",
-      "tags": []
+      "tags": [],
+      "damage": "+27%",
+      "hp": "+40%",
+      "luck": "+15%",
+      "weaponBonus": "Melee +10%",
+      "sustainDefense": "DR +5%",
+      "utilityBonus": null,
+      "sourcePity": "Bloodline Stone, Mythical pity",
+      "specialUse": "The World recipe ingredient"
     },
     {
       "name": "Astral",
@@ -61,7 +73,15 @@
       },
       "requirements": null,
       "obtainment": "Roll with Bloodline Stone. Mythical tier — pity 750 rolls. Source: sailorpiecewiki /entries/bloodlines-system.",
-      "tags": []
+      "tags": [],
+      "damage": "+30%",
+      "hp": "+35%",
+      "luck": "+10%",
+      "weaponBonus": "Sword +10%",
+      "sustainDefense": "Lifesteal +2%",
+      "utilityBonus": null,
+      "sourcePity": "Bloodline Stone, Mythical pity",
+      "specialUse": "Cosmic Master quest step"
     },
     {
       "name": "Demonic",
@@ -83,7 +103,15 @@
       },
       "requirements": null,
       "obtainment": "Roll with Bloodline Stone. S+ tier (Mythical rarity). Source: Beebom + sailorpiecewiki + Sportskeeda (3-source, R109 2026-05-01).",
-      "tags": []
+      "tags": [],
+      "damage": "+32%",
+      "hp": "+40%",
+      "luck": "+12%",
+      "weaponBonus": "Sword +12%",
+      "sustainDefense": "Lifesteal +2%",
+      "utilityBonus": null,
+      "sourcePity": "Bloodline Stone, Mythical pity",
+      "specialUse": "Boss-clearing passive value"
     },
     {
       "name": "Dawnbringer",
@@ -104,7 +132,15 @@
       },
       "requirements": null,
       "obtainment": "Roll with Bloodline Stone. Legendary tier — pity 250 rolls. Source: sailorpiecewiki /entries/bloodlines-system.",
-      "tags": []
+      "tags": [],
+      "damage": "+20%",
+      "hp": null,
+      "luck": "+7%",
+      "weaponBonus": "Sword +7%",
+      "sustainDefense": "DR +2%",
+      "utilityBonus": null,
+      "sourcePity": "Bloodline Stone, Legendary pity",
+      "specialUse": null
     },
     {
       "name": "Nightfall",
@@ -125,7 +161,15 @@
       },
       "requirements": null,
       "obtainment": "Roll with Bloodline Stone. Legendary tier — pity 250 rolls. Source: sailorpiecewiki /entries/bloodlines-system.",
-      "tags": []
+      "tags": [],
+      "damage": "+17%",
+      "hp": "+17%",
+      "luck": "+5%",
+      "weaponBonus": null,
+      "sustainDefense": "Lifesteal +1%",
+      "utilityBonus": null,
+      "sourcePity": "Bloodline Stone, Legendary pity",
+      "specialUse": null
     },
     {
       "name": "Demonblood",
@@ -145,7 +189,15 @@
       },
       "requirements": null,
       "obtainment": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
-      "tags": []
+      "tags": [],
+      "damage": "+22%",
+      "hp": null,
+      "luck": null,
+      "weaponBonus": "Melee +7%",
+      "sustainDefense": "Lifesteal +1%",
+      "utilityBonus": null,
+      "sourcePity": "Bloodline Stone roll",
+      "specialUse": null
     },
     {
       "name": "Vizard",
@@ -165,7 +217,15 @@
       },
       "requirements": null,
       "obtainment": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
-      "tags": []
+      "tags": [],
+      "damage": "+15%",
+      "hp": "+20%",
+      "luck": null,
+      "weaponBonus": null,
+      "sustainDefense": null,
+      "utilityBonus": "Gems +15%",
+      "sourcePity": "Bloodline Stone roll",
+      "specialUse": null
     },
     {
       "name": "Hunter",
@@ -186,7 +246,15 @@
       },
       "requirements": null,
       "obtainment": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
-      "tags": []
+      "tags": [],
+      "damage": "+10%",
+      "hp": "+15%",
+      "luck": null,
+      "weaponBonus": null,
+      "sustainDefense": null,
+      "utilityBonus": "Money +10%, Gems +10%",
+      "sourcePity": "Bloodline Stone roll",
+      "specialUse": null
     },
     {
       "name": "Stormborn",
@@ -206,7 +274,15 @@
       },
       "requirements": null,
       "obtainment": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
-      "tags": []
+      "tags": [],
+      "damage": "+12%",
+      "hp": "+12%",
+      "luck": null,
+      "weaponBonus": null,
+      "sustainDefense": null,
+      "utilityBonus": "XP +10%",
+      "sourcePity": "Bloodline Stone roll",
+      "specialUse": null
     },
     {
       "name": "Commoner",
@@ -226,7 +302,15 @@
       },
       "requirements": null,
       "obtainment": "Roll with Bloodline Stone. Source: sailorpiecewiki /entries/bloodlines-system.",
-      "tags": []
+      "tags": [],
+      "damage": "+7%",
+      "hp": "+10%",
+      "luck": null,
+      "weaponBonus": null,
+      "sustainDefense": null,
+      "utilityBonus": "XP +10%",
+      "sourcePity": "Bloodline Stone roll",
+      "specialUse": null
     }
   ]
 }

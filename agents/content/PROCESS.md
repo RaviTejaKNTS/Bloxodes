@@ -6,7 +6,7 @@ Use this process for serious rewrites, new page copy, or any content that will b
 
 The current standard is outline-first. Research does not stop at facts. It must decide what the reader cares about, which sections should exist, which sections should be cut, and which details are better shown as bullets, tables, numbered steps, or section-level `description_json` notes before `final.json` is written.
 
-For catalog and game-catalog pages, the workflow is also section-confirmation-first. After research, propose how the item cards should be divided into sections, explain why that section style is the strongest in-game grouping, and wait for explicit user confirmation before writing final copy or updating Supabase. Do not treat a general request like "write this page", "continue", or "go ahead" as section approval unless the user has already seen the exact section proposal.
+For catalog and game-catalog pages, the workflow is also section-confirmation-first. After research, propose how the item cards should be divided into sections, explain why that section style is the strongest in-game grouping, propose the clean card fields, and wait for explicit user confirmation before writing final copy or updating Supabase. Do not treat a general request like "write this page", "continue", or "go ahead" as section approval unless the user has already seen the exact section and card-data proposal.
 
 Write workflow notes in a human editorial voice. The process should be strict, but the language should still explain the reason behind the step. A clear reason helps the model apply the workflow to a catalog page, article, tool, or wiki hub without turning every output into the same template.
 
@@ -148,7 +148,7 @@ Explain what the final page should teach, what it should skip, the tone to use, 
 
 If the `What this is`, `How it works in the game`, `Real examples from the data`, and `Reader questions and page outline` sections are weak, the research is not ready.
 
-For catalog and game-catalog work, do not move from research to final copy until the proposed section style is confirmed. The proposal should name the grouping axis, such as rarity, item type, source, location, event, tier, shop, world, or unlock path. Choose the grouping that has the clearest in-game meaning, not merely the field that is easiest to sort.
+For catalog and game-catalog work, do not move from research to final copy until the proposed section style and card data shape are confirmed. The proposal should name the grouping axis, such as rarity, item type, source, location, event, tier, shop, world, or unlock path. It should also name the fields that belong on the cards and the raw fields that should not render. Choose the grouping and card fields that have the clearest in-game meaning, not merely the fields that are easiest to sort.
 
 The research notes must keep `Status: needs section confirmation` until that approval exists. When approval happens, record it plainly, for example: `Section style confirmed by user on YYYY-MM-DD: group by category into Walls and Floors.` Do not write vague lines such as `user requested final copy` as a substitute for confirmation.
 
@@ -161,6 +161,8 @@ Before importing the final JSON, prove the render contract:
 - list the actual section labels the route will render
 - list the planned `description_json` keys
 - confirm every planned section note matches a rendered section label
+- list the actual card fields the route will render
+- confirm cards do not show raw long descriptions, raw pros/cons, nested objects, HTML, or unexplained yes/no values
 - if the route picks a bad grouping field, such as blank `rarity` values instead of real `category` values, fix the route or add the correct grouping behavior before importing
 
 The final JSON must fit the destination table shape. Write the public fields as final copy from the start. Do not write placeholder copy and expect another pass to make it human.

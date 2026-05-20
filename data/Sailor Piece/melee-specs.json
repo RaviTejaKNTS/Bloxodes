@@ -13,14 +13,14 @@
       "name",
       "image",
       "tier",
-      "buildType",
-      "description",
-      "abilities",
-      "unlock",
-      "stats",
-      "pros",
-      "cons",
-      "wikiUrl"
+      "statPriority",
+      "unlockRoute",
+      "sourceLocation",
+      "abilityCount",
+      "signatureMove",
+      "mainStrength",
+      "mainLimit",
+      "verificationNote"
     ]
   },
   "items": [
@@ -115,7 +115,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/blessed-maiden/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/blessed-maiden.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/blessed-maiden.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Blessed Maiden boss route",
+      "sourceLocation": "Boss Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Blessed Strike",
+      "mainStrength": "AoE, healing, and i-frames",
+      "mainLimit": "Boss materials and Galevorn F-move gate",
+      "verificationNote": null
     },
     {
       "name": "Gilgamesh",
@@ -208,7 +216,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/gilgamesh-style/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/gilgamesh-style.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/gilgamesh-style.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Gilgamesh NPC / boss route",
+      "sourceLocation": "Boss Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Gate of Babylon",
+      "mainStrength": "AoE and crowd control",
+      "mainLimit": "Requires Boss Island progression",
+      "verificationNote": null
     },
     {
       "name": "Anos",
@@ -301,7 +317,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/anos-style/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/anos-style.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/anos-style.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Anos NPC route",
+      "sourceLocation": "Academy Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Ginnungagap",
+      "mainStrength": "Large AoE and i-frames",
+      "mainLimit": "Endgame island access",
+      "verificationNote": null
     },
     {
       "name": "Strongest in History",
@@ -395,7 +419,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/strongest-in-history/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/strongest-in-history.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/strongest-in-history.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Strongest in History boss route",
+      "sourceLocation": "Shinjuku Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "History's Edge",
+      "mainStrength": "High DPS combos",
+      "mainLimit": "Hard boss requirement",
+      "verificationNote": null
     },
     {
       "name": "Saber Alter",
@@ -488,7 +520,15 @@
       ],
       "updatedAt": "2026-03-16",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/saber-alter-style/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/saber-alter-style.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/saber-alter-style.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Saber Alter boss route",
+      "sourceLocation": "Boss Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "High DPS melee attacks with large AoE coverage.",
+      "mainStrength": "High DPS, AoE, and i-frames",
+      "mainLimit": "Alter-route materials",
+      "verificationNote": null
     },
     {
       "name": "Cosmic Being",
@@ -582,7 +622,15 @@
       ],
       "updatedAt": "2026-04-20",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/cosmic-being/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/cosmic-being.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/cosmic-being.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Cosmic Being world boss drop",
+      "sourceLocation": "Punch Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Detailed move list TBA",
+      "mainStrength": "Sea 2 boss-drop style",
+      "mainLimit": "World boss RNG",
+      "verificationNote": null
     },
     {
       "name": "The World",
@@ -677,7 +725,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/the-world/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/the-world.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/the-world.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "The World boss summon route",
+      "sourceLocation": "Bizarre Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Detailed move list TBA",
+      "mainStrength": "Time-stop style burst",
+      "mainLimit": "Bloodline and summon requirements",
+      "verificationNote": null
     },
     {
       "name": "Frieren",
@@ -761,7 +817,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/frieren/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/frieren.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/frieren.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Easter event Bunny NPC route",
+      "sourceLocation": "Event route",
+      "abilityCount": "2 abilities",
+      "signatureMove": "Detailed ability list TBA",
+      "mainStrength": "Sea 2 mage-style attacks",
+      "mainLimit": "Event availability needs verification",
+      "verificationNote": "Some route details need live-game confirmation."
     },
     {
       "name": "Castorice",
@@ -845,7 +909,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/castorice/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/castorice.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/castorice.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Sea 2 world boss drop",
+      "sourceLocation": "Sea 2",
+      "abilityCount": "2 abilities",
+      "signatureMove": "Detailed ability list TBA",
+      "mainStrength": "World-boss melee chase",
+      "mainLimit": "No pity listed",
+      "verificationNote": "Some route details need live-game confirmation."
     },
     {
       "name": "Strongest of Today",
@@ -918,7 +990,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/strongest-of-today/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/strongest-of-today.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/strongest-of-today.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Strongest of Today boss route",
+      "sourceLocation": "Shinjuku Island",
+      "abilityCount": "1 abilities",
+      "signatureMove": "Unconfirmed",
+      "mainStrength": "Gojo-style pressure",
+      "mainLimit": "Ability details need verification",
+      "verificationNote": "Some route details need live-game confirmation."
     },
     {
       "name": "Strongest Shinobi",
@@ -1019,7 +1099,15 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/strongest-shinobi/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/strongest-shinobi.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/strongest-shinobi.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Strongest Shinobi Seller NPC",
+      "sourceLocation": "Ninja Island",
+      "abilityCount": "4 abilities",
+      "signatureMove": "Fast multi-hit melee combo",
+      "mainStrength": "Fast multi-hit damage",
+      "mainLimit": "High island progression",
+      "verificationNote": null
     },
     {
       "name": "Atomic",
@@ -1093,7 +1181,15 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/atomic/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/atomic.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/atomic.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Atomic Master / Lawless Island route",
+      "sourceLocation": "Lawless Island",
+      "abilityCount": "1 abilities",
+      "signatureMove": "F Move",
+      "mainStrength": "High burst and community-favorite F move",
+      "mainLimit": "Multi-step questline",
+      "verificationNote": null
     },
     {
       "name": "Jin Woo (Shadow Monarch)",
@@ -1185,7 +1281,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/jin-woo/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/jin-woo.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/jin-woo.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Shadow Monarch route",
+      "sourceLocation": "Double Dungeon",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Shadow Strike",
+      "mainStrength": "Shadow utility and boss farming",
+      "mainLimit": "Dungeon and boss materials",
+      "verificationNote": null
     },
     {
       "name": "Acheron",
@@ -1276,7 +1380,15 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/acheron/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/acheron.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/acheron.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Massive Update route",
+      "sourceLocation": "Lawless Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "F move",
+      "mainStrength": "Burst melee damage",
+      "mainLimit": "Exact route needs verification",
+      "verificationNote": null
     },
     {
       "name": "Moon Slayer",
@@ -1349,7 +1461,15 @@
       ],
       "updatedAt": "2026-04-01",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/moon-slayer/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/moon-slayer.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/moon-slayer.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Moon Slayer purchase route",
+      "sourceLocation": "Boss Island",
+      "abilityCount": "1 abilities",
+      "signatureMove": "F Move",
+      "mainStrength": "Moon Update melee spec",
+      "mainLimit": "Requires Gems and Kokushibo materials",
+      "verificationNote": null
     },
     {
       "name": "Alucard",
@@ -1442,7 +1562,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/alucard-style/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/alucard-style.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/alucard-style.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Alucard NPC route",
+      "sourceLocation": "Sailor Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Blood Drain",
+      "mainStrength": "Lifesteal and ranged zoning",
+      "mainLimit": "Requires Vampire race",
+      "verificationNote": null
     },
     {
       "name": "The Love Maiden",
@@ -1534,7 +1662,15 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/love-maiden/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/love-maiden.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/love-maiden.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Valentine Island NPC route",
+      "sourceLocation": "Valentine Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Divine Strike",
+      "mainStrength": "Burst damage and event style",
+      "mainLimit": "Event availability needs verification",
+      "verificationNote": null
     },
     {
       "name": "Sukuna",
@@ -1626,7 +1762,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/sukuna-style/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/sukuna-style.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/sukuna-style.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Sukuna NPC route",
+      "sourceLocation": "Shibuya Station",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Dismantle",
+      "mainStrength": "Cursed-energy melee combos",
+      "mainLimit": "Outscaled by later specs",
+      "verificationNote": null
     },
     {
       "name": "Qin Shi",
@@ -1717,7 +1861,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/qin-shi-style/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/qin-shi-style.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/qin-shi-style.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Qin Shi boss route",
+      "sourceLocation": "Boss Island",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Emperor Strike",
+      "mainStrength": "Emperor-themed strikes",
+      "mainLimit": "Outscaled by later specs",
+      "verificationNote": null
     },
     {
       "name": "Gojo",
@@ -1809,7 +1961,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/gojo-style/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/gojo-style.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/gojo-style.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Gojo NPC route",
+      "sourceLocation": "Shibuya Station",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Limitless Strike",
+      "mainStrength": "Limitless-themed AoE",
+      "mainLimit": "Outclassed by endgame styles",
+      "verificationNote": null
     },
     {
       "name": "Cursed Vessel",
@@ -1901,7 +2061,15 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/cursed-vessel/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/cursed-vessel.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/cursed-vessel.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Cursed Vessel NPC route",
+      "sourceLocation": "Shibuya Station",
+      "abilityCount": "3 abilities",
+      "signatureMove": "Divergent Fist",
+      "mainStrength": "Fast punching combos",
+      "mainLimit": "Early-to-mid style",
+      "verificationNote": null
     },
     {
       "name": "Tanjiro",
@@ -1973,7 +2141,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/tanjiro-style/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/tanjiro-style.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/tanjiro-style.webp",
+      "statPriority": "Melee damage",
+      "unlockRoute": "Listed Sailor Piece Wiki route",
+      "sourceLocation": null,
+      "abilityCount": "1 abilities",
+      "signatureMove": "Unconfirmed",
+      "mainStrength": "Starter-to-mid sword-anime style",
+      "mainLimit": "Ability details need verification",
+      "verificationNote": "Some route details need live-game confirmation."
     },
     {
       "name": "Combat",
@@ -2057,7 +2233,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/melee-specs/combat/",
-      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/combat.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/melee-specs/combat.webp",
+      "statPriority": "Starter melee",
+      "unlockRoute": "Default starting style",
+      "sourceLocation": "Starter route",
+      "abilityCount": "2 abilities",
+      "signatureMove": "Basic Punch",
+      "mainStrength": "Basic punches and kicks",
+      "mainLimit": "Replace quickly",
+      "verificationNote": null
     }
   ]
 }

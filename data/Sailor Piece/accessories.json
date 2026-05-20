@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Sailor Piece accessories data",
-    "updatedAt": "2026-05-07",
+    "updatedAt": "2026-05-20",
     "sources": [
       {
         "label": "Sailor Piece Wiki - accessories",
@@ -13,12 +13,13 @@
       "name",
       "image",
       "tier",
-      "description",
-      "stats",
-      "obtainment",
-      "enchanting",
-      "tags",
-      "wikiUrl"
+      "rarity",
+      "defense",
+      "damage",
+      "damageReduction",
+      "sourceRoute",
+      "dropOrCost",
+      "bestFor"
     ]
   },
   "items": [
@@ -107,7 +108,13 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/atomic-outfit/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+105%",
+      "damage": "+82%",
+      "damageReduction": "15%",
+      "sourceRoute": "Atomic Boss on Lawless Island",
+      "dropOrCost": "1.23% drop",
+      "bestFor": "Endgame damage and defense"
     },
     {
       "name": "Abyssal Outfit",
@@ -193,14 +200,20 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/abyssal-outfit/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+105%",
+      "damage": "+80%",
+      "damageReduction": "--",
+      "sourceRoute": "Tower Island shop",
+      "dropOrCost": "4,000 Tower Tokens",
+      "bestFor": "Infinite Tower damage builds"
     },
     {
       "name": "Manipulator Outfit",
       "slug": "manipulator-outfit",
       "image": null,
       "tier": "S+",
-      "rarity": "mythical",
+      "rarity": "Mythical",
       "type": null,
       "category": null,
       "description": "The best overall accessory in the game. Manipulator Outfit provides 100% Defense, 72% DMG boost, and 15% Damage Reduction — making it the clear best-in-slot for both PvP and PvE endgame builds.",
@@ -280,14 +293,20 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/manipulator-outfit/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+100%",
+      "damage": "+72%",
+      "damageReduction": "15%",
+      "sourceRoute": "Late-game boss route",
+      "dropOrCost": null,
+      "bestFor": "Best-in-slot all-round accessory"
     },
     {
       "name": "Maiden Outfit",
       "slug": "maiden-outfit",
       "image": null,
       "tier": "S+",
-      "rarity": "mythical",
+      "rarity": "Mythical",
       "type": null,
       "category": null,
       "description": "Second-best accessory overall. Maiden Outfit grants 95% Defense, 70% DMG, and 15% Damage Reduction. Nearly as powerful as Manipulator Outfit and highly sought-after.",
@@ -367,7 +386,13 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/maiden-outfit/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+95%",
+      "damage": "+70%",
+      "damageReduction": "15%",
+      "sourceRoute": "Blessed Maiden boss route",
+      "dropOrCost": null,
+      "bestFor": "High-end boss farming and PvP"
     },
     {
       "name": "Demon Wing",
@@ -454,7 +479,13 @@
       ],
       "updatedAt": "2026-04-27",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/demon-wing/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+125%",
+      "damage": "+102%",
+      "damageReduction": "15%",
+      "sourceRoute": "Crystal Defense on Punch Island or Robux",
+      "dropOrCost": "Crystal Defense route / Robux option",
+      "bestFor": "Anti-Magic endgame builds"
     },
     {
       "name": "Clover Outfit",
@@ -541,7 +572,13 @@
       ],
       "updatedAt": "2026-04-28",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/clover-outfit/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+120%",
+      "damage": "+100%",
+      "damageReduction": "15%",
+      "sourceRoute": "Crystal Defense on Punch Island or Robux",
+      "dropOrCost": "Crystal Defense route / Robux option",
+      "bestFor": "Anti-Magic endgame builds"
     },
     {
       "name": "Icen Queen Outfit",
@@ -628,14 +665,20 @@
       ],
       "updatedAt": "2026-04-09",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/icen-queen-outfit/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+30%",
+      "damage": "+35%",
+      "damageReduction": "17%",
+      "sourceRoute": "Frost Boss on Boss Island",
+      "dropOrCost": null,
+      "bestFor": "Ice Update sword and boss builds"
     },
     {
       "name": "Imperial Outfit",
       "slug": "imperial-outfit",
       "image": null,
       "tier": "S",
-      "rarity": "mythical",
+      "rarity": "Mythical",
       "type": null,
       "category": null,
       "description": "A Mythical accessory with 90% Defense, 65% DMG, and 15% Damage Reduction. The third-best outfit and a strong endgame option for players who can't yet obtain the top two.",
@@ -715,14 +758,20 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/imperial-outfit/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+90%",
+      "damage": "+65%",
+      "damageReduction": "15%",
+      "sourceRoute": "Endgame accessory route",
+      "dropOrCost": null,
+      "bestFor": "Strong fallback below the top outfits"
     },
     {
       "name": "Monarch Armor",
       "slug": "monarch-armor",
       "image": null,
       "tier": "S",
-      "rarity": "mythical",
+      "rarity": "Mythical",
       "type": null,
       "category": null,
       "description": "A powerful Mythical armor piece themed around the Monarch boss. Provides strong defensive and offensive stats, perfect for endgame tank-damage hybrid builds.",
@@ -802,14 +851,20 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/monarch-armor/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+80%",
+      "damage": "+50%",
+      "damageReduction": "10%",
+      "sourceRoute": "Shadow Monarch route",
+      "dropOrCost": null,
+      "bestFor": "Tank-damage hybrid builds"
     },
     {
       "name": "Anos Outfit",
       "slug": "anos-outfit",
       "image": null,
       "tier": "S",
-      "rarity": "mythical",
+      "rarity": "Mythical",
       "type": null,
       "category": null,
       "description": "The outfit of the Anos boss, obtainable from the Anos fight on Academy Island. A high-tier accessory for endgame players with strong all-round stats.",
@@ -889,14 +944,20 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/anos-outfit/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+85%",
+      "damage": "+55%",
+      "damageReduction": "10%",
+      "sourceRoute": "Anos boss on Academy Island",
+      "dropOrCost": null,
+      "bestFor": "Endgame all-round stats"
     },
     {
       "name": "Gilgamesh Armor",
       "slug": "gilgamesh-armor",
       "image": null,
       "tier": "S",
-      "rarity": "mythical",
+      "rarity": "Mythical",
       "type": null,
       "category": null,
       "description": "A legendary armor set modeled after Gilgamesh. Obtained from the high-difficulty Gilgamesh summonable boss on Boss Island. Strong stats for endgame progression.",
@@ -976,7 +1037,13 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/gilgamesh-armor/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+75%",
+      "damage": "+60%",
+      "damageReduction": "10%",
+      "sourceRoute": "Gilgamesh boss on Boss Island",
+      "dropOrCost": null,
+      "bestFor": "Endgame progression"
     },
     {
       "name": "Alter Armor",
@@ -1063,7 +1130,13 @@
       ],
       "updatedAt": "2026-03-24",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/alter-armor/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+100%",
+      "damage": "+75%",
+      "damageReduction": "15%",
+      "sourceRoute": "Saber Alter route",
+      "dropOrCost": null,
+      "bestFor": "Top-tier damage and defense"
     },
     {
       "name": "Sun Armor",
@@ -1150,7 +1223,13 @@
       ],
       "updatedAt": "2026-03-24",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/sun-armor/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+75%",
+      "damage": "+55%",
+      "damageReduction": "20%",
+      "sourceRoute": "Escanor Boss or Boss Rush Shop",
+      "dropOrCost": "Boss Rush reward route",
+      "bestFor": "Boss Rush armor option"
     },
     {
       "name": "Mirage Pendant",
@@ -1237,14 +1316,20 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/mirage-pendant/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+30%",
+      "damage": "+30%",
+      "damageReduction": "5%",
+      "sourceRoute": "Aizen in Hueco Mundo",
+      "dropOrCost": "20% drop",
+      "bestFor": "Mid-game combat accessory"
     },
     {
       "name": "Yuji Hair",
       "slug": "yuji-hair",
       "image": null,
       "tier": "B",
-      "rarity": "legendary",
+      "rarity": "Legendary",
       "type": null,
       "category": null,
       "description": "A Legendary-rarity cosmetic accessory with a 5% drop rate. Provides decent stat bonuses for mid-game players.",
@@ -1324,7 +1409,13 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/yuji-hair/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+35%",
+      "damage": "+30%",
+      "damageReduction": "5%",
+      "sourceRoute": "Yuji boss route",
+      "dropOrCost": "5% drop",
+      "bestFor": "Mid-game stat filler"
     },
     {
       "name": "Soul Amulet",
@@ -1410,7 +1501,13 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/soul-amulet/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+20%",
+      "damage": "+20%",
+      "damageReduction": "--",
+      "sourceRoute": "Alucard on Sailor Island",
+      "dropOrCost": null,
+      "bestFor": "Early accessory upgrade"
     },
     {
       "name": "Gojo Blindfold",
@@ -1496,7 +1593,13 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/gojo-blindfold/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+10%",
+      "damage": "+10%",
+      "damageReduction": "--",
+      "sourceRoute": "Gojo route",
+      "dropOrCost": null,
+      "bestFor": "Beginner stat filler"
     },
     {
       "name": "Santa Hat",
@@ -1582,14 +1685,20 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/santa-hat/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+10%",
+      "damage": "+5%",
+      "damageReduction": "--",
+      "sourceRoute": "Seasonal event route",
+      "dropOrCost": "Event-limited",
+      "bestFor": "Collection or early filler"
     },
     {
       "name": "Saber Armor",
       "slug": "saber-armor",
       "image": null,
       "tier": "D",
-      "rarity": "legendary",
+      "rarity": "Legendary",
       "type": null,
       "category": null,
       "description": "A Legendary-rarity mid-game accessory with a 5% drop rate. Placed in D tier by community Accessory Tierlist.",
@@ -1669,7 +1778,13 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/accessories/saber-armor/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "defense": "+40%",
+      "damage": "+35%",
+      "damageReduction": "5%",
+      "sourceRoute": "Saber boss route",
+      "dropOrCost": "5% drop",
+      "bestFor": "Mid-game armor fallback"
     }
   ]
 }

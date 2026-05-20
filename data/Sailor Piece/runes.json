@@ -12,12 +12,13 @@
     "columns": [
       "name",
       "tier",
+      "displayRarity",
+      "source",
       "bonusType",
-      "description",
-      "stats",
-      "obtainment",
-      "usageTips",
-      "wikiUrl"
+      "baseEffect",
+      "maxEffect",
+      "bestFor",
+      "dropNote"
     ]
   },
   "items": [
@@ -76,7 +77,14 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/havoc-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": null,
+      "source": "Rune Dungeon: rare drop",
+      "bonusType": "Global Damage Multiplier",
+      "baseEffect": null,
+      "maxEffect": "Scales with rune level up to Lv. 50",
+      "bestFor": "Reliable damage rune",
+      "dropNote": null
     },
     {
       "name": "Primordial Rune",
@@ -133,7 +141,14 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/primordial-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": "Secret",
+      "source": "Infinite Tower (Tower Island): less than 1% drop rate from Tower floors. Level 8,500+ required.",
+      "bonusType": "Global Damage Boost",
+      "baseEffect": "+84% DMG at Lv. 1",
+      "maxEffect": "+112% DMG at Lv. 60",
+      "bestFor": "Top Infinite Tower damage chase",
+      "dropNote": "Less than 1% Infinite Tower drop listed locally"
     },
     {
       "name": "Wrath Rune",
@@ -190,7 +205,14 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/wrath-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": null,
+      "source": "Rune Dungeon: rare drop",
+      "bonusType": "Flat Damage Bonus",
+      "baseEffect": "+40% DMG",
+      "maxEffect": "Max (Lv50): +59% DMG",
+      "bestFor": "Strong practical damage",
+      "dropNote": null
     },
     {
       "name": "Fortune Rune",
@@ -247,7 +269,14 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/fortune-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": null,
+      "source": "Rune Dungeon: rare drop",
+      "bonusType": "Luck Multiplier",
+      "baseEffect": "+10% Luck",
+      "maxEffect": "Max (Lv50): +15% Luck",
+      "bestFor": "Luck farming",
+      "dropNote": null
     },
     {
       "name": "Radiant Rune",
@@ -304,7 +333,14 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/radiant-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": "Secret",
+      "source": "Infinite Tower (Tower Island): rare drop from Tower floors. Level 8,500+ required.",
+      "bonusType": "Luck / Drop Rate Boost",
+      "baseEffect": null,
+      "maxEffect": "+26% Luck at max Lv. 60",
+      "bestFor": "Infinite Tower luck chase",
+      "dropNote": "Infinite Tower rare drop listed locally"
     },
     {
       "name": "Destruction Rune",
@@ -361,7 +397,14 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/destruction-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": null,
+      "source": "Rune Dungeon: rare drop",
+      "bonusType": "Flat Damage Bonus",
+      "baseEffect": "+25% DMG",
+      "maxEffect": "Max (Lv50): +37% DMG",
+      "bestFor": "Mid-tier damage fallback",
+      "dropNote": null
     },
     {
       "name": "Inferno Rune",
@@ -418,7 +461,14 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/inferno-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": null,
+      "source": "Rune Dungeon: rare drop",
+      "bonusType": "Burn DoT Damage",
+      "baseEffect": "70% total DMG over 4s",
+      "maxEffect": "Max (Lv50): 104% total DMG over 4s",
+      "bestFor": "Burn damage over time",
+      "dropNote": null
     },
     {
       "name": "Blood Rune",
@@ -475,7 +525,14 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/blood-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": null,
+      "source": "Rune Dungeon: rare drop",
+      "bonusType": "Bleed DoT Damage",
+      "baseEffect": "65% total DMG over 5s",
+      "maxEffect": "Max (Lv50): 97% total DMG over 5s",
+      "bestFor": "Bleed damage over time",
+      "dropNote": null
     },
     {
       "name": "Frost Rune",
@@ -532,7 +589,14 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/frost-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": null,
+      "source": "Rune Dungeon: rare drop",
+      "bonusType": "Freeze + Impact Damage",
+      "baseEffect": "30% DMG + Freeze 2s",
+      "maxEffect": "Max (Lv50): 44% DMG + Freeze 3s",
+      "bestFor": "PvP control and freeze",
+      "dropNote": null
     },
     {
       "name": "Guardian Rune",
@@ -589,7 +653,14 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/guardian-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": null,
+      "source": "Rune Dungeon: rare drop",
+      "bonusType": "Max HP Bonus",
+      "baseEffect": "+39% Max HP",
+      "maxEffect": "Max (Lv50): +59% Max HP",
+      "bestFor": "Tank HP builds",
+      "dropNote": null
     },
     {
       "name": "Suppression Rune",
@@ -646,7 +717,14 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/runes/suppression-rune/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "displayRarity": null,
+      "source": "Rune Dungeon: rare drop",
+      "bonusType": "Damage Reduction",
+      "baseEffect": "10% DMG Reduction",
+      "maxEffect": "Max (Lv50): 15% DMG Reduction",
+      "bestFor": "Starter damage reduction fallback",
+      "dropNote": null
     }
   ]
 }

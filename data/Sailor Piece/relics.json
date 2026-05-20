@@ -12,10 +12,11 @@
     "columns": [
       "name",
       "tier",
+      "catalogSection",
       "effect",
       "recipe",
-      "tags",
-      "description"
+      "partRoute",
+      "bestFor"
     ]
   },
   "items": [
@@ -28,7 +29,7 @@
       "type": null,
       "effect": "+30% Damage",
       "bonus": "+30% Damage",
-      "recipe": "40x Part #7 + 30x Part #8 + 50x Part #1 + 50x Part #3",
+      "recipe": "40x Relic Part #7 + 30x Relic Part #8 + 50x Relic Part #1 + 50x Relic Part #3",
       "description": "40x Part #7 + 30x Part #8 + 50x Part #1 + 50x Part #3",
       "stats": {
         "recipe": "40x Part #7 + 30x Part #8 + 50x Part #1 + 50x Part #3"
@@ -37,7 +38,10 @@
       "obtainment": null,
       "tags": [
         "sea-2"
-      ]
+      ],
+      "catalogSection": "Raw damage",
+      "partRoute": "Starter Island + Punch Island parts",
+      "bestFor": "Boss damage and general DPS"
     },
     {
       "name": "Crit Damage Relic",
@@ -48,7 +52,7 @@
       "type": null,
       "effect": "+20% Crit Damage",
       "bonus": "+20% Crit Damage",
-      "recipe": "25x Part #3 + 20x Part #4",
+      "recipe": "25x Relic Part #3 + 20x Relic Part #4",
       "description": "Recipe",
       "stats": {
         "recipe": "25x Part #3 + 20x Part #4"
@@ -57,7 +61,10 @@
       "obtainment": null,
       "tags": [
         "sea-2"
-      ]
+      ],
+      "catalogSection": "Critical stats",
+      "partRoute": "Starter Island part pair",
+      "bestFor": "Crit damage builds"
     },
     {
       "name": "Luck Relic",
@@ -68,7 +75,7 @@
       "type": null,
       "effect": "+20% Luck",
       "bonus": "+20% Luck",
-      "recipe": "30x Part #5 + 25x Part #6",
+      "recipe": "30x Relic Part #5 + 25x Relic Part #6",
       "description": "Recipe",
       "stats": {
         "recipe": "30x Part #5 + 25x Part #6"
@@ -77,7 +84,10 @@
       "obtainment": null,
       "tags": [
         "sea-2"
-      ]
+      ],
+      "catalogSection": "Drop farming",
+      "partRoute": "Bizarre Island parts",
+      "bestFor": "Rare drop farming"
     },
     {
       "name": "Crit Chance Relic",
@@ -88,7 +98,7 @@
       "type": null,
       "effect": "+5% Crit Chance",
       "bonus": "+5% Crit Chance",
-      "recipe": "20x Part #1 + 15x Part #2",
+      "recipe": "20x Relic Part #1 + 15x Relic Part #2",
       "description": "Recipe",
       "stats": {
         "recipe": "20x Part #1 + 15x Part #2"
@@ -97,7 +107,10 @@
       "obtainment": null,
       "tags": [
         "sea-2"
-      ]
+      ],
+      "catalogSection": "Critical stats",
+      "partRoute": "Starter Island part pair",
+      "bestFor": "Crit chance builds"
     }
   ]
 }

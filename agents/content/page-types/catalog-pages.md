@@ -78,7 +78,7 @@ For a complex game system, `description_md` can still have real sections. When `
 
 ## Section Style Confirmation
 
-For catalog and game-catalog changes, research the collection first, then propose the section style before writing final copy or updating Supabase.
+For catalog and game-catalog changes, research the collection first, then propose the section style and the card data shape before writing final copy or updating Supabase.
 
 The proposal should include:
 
@@ -87,10 +87,15 @@ The proposal should include:
 - alternatives considered and why they are weaker
 - the planned `description_json` keys and short notes for each section
 - how `description_md` will stay focused on whole-page context instead of repeating section notes
+- the planned card or table fields, with the player meaning of each field
+- raw fields that should stay hidden, such as long descriptions, raw HTML, raw `pros`/`cons`, nested objects, source dumps, or vague yes/no values
+- any route or renderer override needed to make the approved sections and approved card fields actually render
 
-Wait for explicit user confirmation before making the content change. If the user approves a different section style, use that confirmed structure. Do not treat "write this page", "continue", or "go ahead" as section approval unless the user has already seen the exact proposed section labels and accepted them.
+Wait for explicit user confirmation before making the content change. If the user approves a different section style or card field plan, use that confirmed structure. Do not treat "write this page", "continue", or "go ahead" as section approval unless the user has already seen the exact proposed section labels and card fields and accepted them.
 
 Before saving or importing, verify the route will actually render those sections. The planned `description_json` keys must match the computed section labels from the page renderer. If the renderer is grouping by a stale or blank field, such as empty `rarity` values, fix the renderer or add the confirmed grouping behavior before writing the local DB row.
+
+Verify the rendered card fields too. Cards and tables should show pure comparison data that helps the player act: source, price, rarity, chance, requirement, best use, role, strength, limit, availability, damage, seats, reward type, or another concrete field. Do not render raw long prose, raw `pros`/`cons`, nested object dumps, source HTML, vague meta descriptions, or unexplained `Yes`/`No` values. If a page needs pros and cons, translate them into short labeled fields such as `Strength`, `Limit`, `Best for`, `Trade note`, or the equivalent for that collection.
 
 ## Writing Rules
 
@@ -179,8 +184,10 @@ Avoid FAQ entries like:
 
 - Does the intro explain the collection's role in the game?
 - Does `description_md` give real context about mechanics, obtainment, value, availability, or player mistakes?
-- If the page uses sections, did research propose and get approval for the section style before final writing?
+- If the page uses sections, did research propose and get approval for the section style and card data shape before final writing?
 - Did the route actually render those section labels, and do the `description_json` keys match them?
+- Did the route actually render the approved card/table fields?
+- Are raw descriptions, raw `pros`/`cons`, nested stats, HTML, vague meta fields, and unexplained yes/no values absent from the cards?
 - After import, did local Supabase read back the updated `description_json`, and did the local page visibly render at least one section note?
 - Does `description_json` explain each section in one to three useful sentences without repeating `description_md`?
 - Does the page define unclear terms before relying on them?

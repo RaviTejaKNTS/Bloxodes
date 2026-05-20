@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Sailor Piece swords data",
-    "updatedAt": "2026-05-07",
+    "updatedAt": "2026-05-20",
     "sources": [
       {
         "label": "Sailor Piece Wiki - swords",
@@ -14,13 +14,12 @@
       "image",
       "tier",
       "rarity",
-      "description",
-      "stats",
-      "specialMove",
-      "acquisition",
-      "pros",
-      "cons",
-      "wikiUrl"
+      "baseDamage",
+      "attackSpeed",
+      "masteryRequired",
+      "sourceRoute",
+      "bestFor",
+      "unlockNote"
     ]
   },
   "items": [
@@ -28,7 +27,7 @@
       "name": "Dragon Goddess",
       "slug": "dragon-goddess",
       "image": "/Sailor%20Piece/Swords/dragon-goddess.webp",
-      "tier": null,
+      "tier": "S+",
       "rarity": "Mythical",
       "type": "Beast",
       "category": null,
@@ -84,7 +83,13 @@
       ],
       "updatedAt": "2026-04-25",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/dragon-goddess/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/dragon-goddess.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/dragon-goddess.webp",
+      "baseDamage": "999",
+      "attackSpeed": "Medium",
+      "masteryRequired": "999",
+      "sourceRoute": "Sea Serpent and Kraken materials",
+      "bestFor": "Sea Beast sword chase",
+      "unlockNote": "High bounty helps Sea Beast spawns."
     },
     {
       "name": "True Aizen",
@@ -146,13 +151,19 @@
       ],
       "updatedAt": "2026-03-28",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/true-aizen/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/true-aizen.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/true-aizen.webp",
+      "baseDamage": "900",
+      "attackSpeed": "Fast",
+      "masteryRequired": "800",
+      "sourceRoute": "Aizen Sword upgrade route on Soul Society",
+      "bestFor": "Fast late-game DPS and PvP pressure",
+      "unlockNote": "Requires Aizen Sword and True Aizen boss materials."
     },
     {
       "name": "Shadow Monarch",
       "slug": "shadow-monarch",
       "image": "/Sailor%20Piece/Swords/shadow-monarch.webp",
-      "tier": null,
+      "tier": "S+",
       "rarity": "Mythical",
       "type": null,
       "category": null,
@@ -208,7 +219,13 @@
       ],
       "updatedAt": "2026-04-26",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/shadow-monarch/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/shadow-monarch.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/shadow-monarch.webp",
+      "baseDamage": "999",
+      "attackSpeed": "Medium",
+      "masteryRequired": "999",
+      "sourceRoute": "Double Dungeon and Shadow Monarch route",
+      "bestFor": "Top PvP and boss-farming sword",
+      "unlockNote": "Requires the Jinwoo route and Monarch materials."
     },
     {
       "name": "Yamato",
@@ -270,13 +287,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/yamato/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/yamato.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/yamato.webp",
+      "baseDamage": "880",
+      "attackSpeed": "Fast",
+      "masteryRequired": "750",
+      "sourceRoute": "Judgement Island boss route",
+      "bestFor": "AoE and crowd-control sword builds",
+      "unlockNote": "One of the heavier boss/material grinds."
     },
     {
       "name": "Escanor",
       "slug": "escanor",
       "image": "/Sailor%20Piece/Swords/escanor.webp",
-      "tier": null,
+      "tier": "S+",
       "rarity": "Legendary",
       "type": null,
       "category": null,
@@ -332,13 +355,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/escanor/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/escanor.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/escanor.webp",
+      "baseDamage": "870",
+      "attackSpeed": "Medium",
+      "masteryRequired": "700",
+      "sourceRoute": "Boss Rush Portal or Robux",
+      "bestFor": "Rare high-damage sword",
+      "unlockNote": "Boss Rush route has a low success chance."
     },
     {
       "name": "Atomic",
       "slug": "atomic",
       "image": "/Sailor%20Piece/Swords/atomic.webp",
-      "tier": null,
+      "tier": "S+",
       "rarity": "Mythical",
       "type": null,
       "category": null,
@@ -394,13 +423,19 @@
       ],
       "updatedAt": "2026-04-07",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/atomic/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/atomic.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/atomic.webp",
+      "baseDamage": "Pending verification",
+      "attackSpeed": "Medium",
+      "masteryRequired": "Pending verification",
+      "sourceRoute": "Atomic Seller on Lawless Island",
+      "bestFor": "Anti-Magic endgame sword",
+      "unlockNote": "Requires Abyss Sigils and a separate F move questline."
     },
     {
       "name": "Abyssal Empress",
       "slug": "abyssal-empress",
       "image": "/Sailor%20Piece/Swords/abyssal-empress.webp",
-      "tier": null,
+      "tier": "S+",
       "rarity": "Mythical",
       "type": null,
       "category": null,
@@ -456,13 +491,19 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/abyssal-empress/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/abyssal-empress.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/abyssal-empress.webp",
+      "baseDamage": "Pending verification",
+      "attackSpeed": "Medium",
+      "masteryRequired": "Pending verification",
+      "sourceRoute": "Tower Shop on Tower Island",
+      "bestFor": "Infinite Tower sword chase",
+      "unlockNote": "Costs 4,000 Tower Tokens or Robux."
     },
     {
       "name": "Ice Queen",
       "slug": "ice-queen",
       "image": "/Sailor%20Piece/Swords/ice-queen.webp",
-      "tier": null,
+      "tier": "S+",
       "rarity": "Mythical",
       "type": null,
       "category": null,
@@ -518,13 +559,19 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/ice-queen/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/ice-queen.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/ice-queen.webp",
+      "baseDamage": "Pending verification",
+      "attackSpeed": "Fast",
+      "masteryRequired": "Pending verification",
+      "sourceRoute": "Frost Boss on Boss Island",
+      "bestFor": "Ice Update AoE sword",
+      "unlockNote": "Requires Frost Empress title for crafting."
     },
     {
       "name": "Anti-Magic",
       "slug": "anti-magic",
       "image": null,
-      "tier": null,
+      "tier": "S+",
       "rarity": "Mythical",
       "type": null,
       "category": null,
@@ -580,13 +627,19 @@
       ],
       "updatedAt": "2026-05-01",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/anti-magic/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/anti-magic.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/anti-magic.webp",
+      "baseDamage": "999",
+      "attackSpeed": "Medium",
+      "masteryRequired": "Pending verification",
+      "sourceRoute": "Crystal Defense on Punch Island",
+      "bestFor": "Anti-Magic DPS builds",
+      "unlockNote": "Requires Crystal Defense currency and boss-wave farming."
     },
     {
       "name": "Great Mage",
       "slug": "great-mage",
       "image": "/Sailor%20Piece/Swords/great-mage.webp",
-      "tier": null,
+      "tier": "S",
       "rarity": "Legendary",
       "type": null,
       "category": null,
@@ -642,13 +695,19 @@
       ],
       "updatedAt": "2026-04-24",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/great-mage/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/great-mage.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/great-mage.webp",
+      "baseDamage": "999",
+      "attackSpeed": "Medium",
+      "masteryRequired": "999",
+      "sourceRoute": "Great Mage boss materials",
+      "bestFor": "Sea 2 crafting progression",
+      "unlockNote": "Connected to the Ancient Mage title route."
     },
     {
       "name": "Ichigo Sword",
       "slug": "ichigo-sword",
       "image": "/Sailor%20Piece/Swords/ichigo-sword.webp",
-      "tier": null,
+      "tier": "S",
       "rarity": "Mythical",
       "type": null,
       "category": null,
@@ -704,13 +763,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/ichigo/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/ichigo.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/ichigo.webp",
+      "baseDamage": "750",
+      "attackSpeed": "Fast",
+      "masteryRequired": "500",
+      "sourceRoute": "Ichigo and Soul Society route",
+      "bestFor": "Beginner-to-mid Mythical sword",
+      "unlockNote": "Accessible compared with later Mythical weapons."
     },
     {
       "name": "Aizen Sword",
       "slug": "aizen-sword",
       "image": "/Sailor%20Piece/Swords/aizen-sword.webp",
-      "tier": null,
+      "tier": "S",
       "rarity": "Legendary",
       "type": null,
       "category": null,
@@ -766,13 +831,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/aizen/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/aizen.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/aizen.webp",
+      "baseDamage": "680",
+      "attackSpeed": "Fast",
+      "masteryRequired": "450",
+      "sourceRoute": "Aizen boss route",
+      "bestFor": "Mid-game upgrade path",
+      "unlockNote": "Prerequisite for True Aizen."
     },
     {
       "name": "Rimuru Sword",
       "slug": "rimuru-sword",
       "image": "/Sailor%20Piece/Swords/rimuru-sword.webp",
-      "tier": null,
+      "tier": "S",
       "rarity": "Legendary",
       "type": null,
       "category": null,
@@ -828,13 +899,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/rimuru/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/rimuru.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/rimuru.webp",
+      "baseDamage": "660",
+      "attackSpeed": "Medium",
+      "masteryRequired": "420",
+      "sourceRoute": "Rimuru and Slime Island route",
+      "bestFor": "PvE and PvP damage",
+      "unlockNote": "Stronger after early-game swords."
     },
     {
       "name": "Shadow Sword",
       "slug": "shadow-sword",
       "image": "/Sailor%20Piece/Swords/shadow-sword.webp",
-      "tier": null,
+      "tier": "S",
       "rarity": "Mythical",
       "type": null,
       "category": null,
@@ -890,13 +967,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/shadow-sword/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/shadow-sword.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/shadow-sword.webp",
+      "baseDamage": "640",
+      "attackSpeed": "Fast",
+      "masteryRequired": "380",
+      "sourceRoute": "Shadow/Cid route",
+      "bestFor": "Late-game farming",
+      "unlockNote": "Useful before top S+ swords."
     },
     {
       "name": "Ragna Sword",
       "slug": "ragna-sword",
       "image": "/Sailor%20Piece/Swords/ragna-sword.webp",
-      "tier": null,
+      "tier": "A",
       "rarity": "Mythical",
       "type": null,
       "category": null,
@@ -952,13 +1035,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/ragna/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/ragna.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/ragna.webp",
+      "baseDamage": "650",
+      "attackSpeed": "Medium",
+      "masteryRequired": "400",
+      "sourceRoute": "Ragna event boss route",
+      "bestFor": "Mid-to-late fallback sword",
+      "unlockNote": "Older event route may affect availability."
     },
     {
       "name": "Saber Sword",
       "slug": "saber-sword",
       "image": "/Sailor%20Piece/Swords/saber-sword.webp",
-      "tier": null,
+      "tier": "B",
       "rarity": "Legendary",
       "type": null,
       "category": null,
@@ -1014,13 +1103,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/saber/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/saber.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/saber.webp",
+      "baseDamage": "400",
+      "attackSpeed": "Medium",
+      "masteryRequired": "200",
+      "sourceRoute": "Saber boss route",
+      "bestFor": "Early-to-mid progression",
+      "unlockNote": "Falls behind later boss swords."
     },
     {
       "name": "Jinwoo Sword",
       "slug": "jinwoo-sword",
       "image": "/Sailor%20Piece/Swords/jinwoo-sword.webp",
-      "tier": null,
+      "tier": "B",
       "rarity": "Epic",
       "type": null,
       "category": null,
@@ -1076,13 +1171,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/jinwoo/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/jinwoo.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/jinwoo.webp",
+      "baseDamage": "450",
+      "attackSpeed": "Medium",
+      "masteryRequired": "250",
+      "sourceRoute": "Jinwoo Trainer on Sailor Island",
+      "bestFor": "Shadow Monarch prerequisite path",
+      "unlockNote": "Costs 2,500,000 Money."
     },
     {
       "name": "Dark Blade",
       "slug": "dark-blade",
       "image": "/Sailor%20Piece/Swords/dark-blade.webp",
-      "tier": null,
+      "tier": "B",
       "rarity": "Epic",
       "type": null,
       "category": null,
@@ -1138,13 +1239,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/dark-blade/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/dark-blade.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/dark-blade.webp",
+      "baseDamage": "200",
+      "attackSpeed": "Fast",
+      "masteryRequired": "50",
+      "sourceRoute": "Early Epic route",
+      "bestFor": "Temporary sword combat",
+      "unlockNote": "Replace once mid-game swords open."
     },
     {
       "name": "Katana",
       "slug": "katana",
       "image": "/Sailor%20Piece/Swords/katana.webp",
-      "tier": null,
+      "tier": "B",
       "rarity": "Common",
       "type": null,
       "category": null,
@@ -1200,13 +1307,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/katana/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/katana.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/katana.webp",
+      "baseDamage": "80",
+      "attackSpeed": "Fast",
+      "masteryRequired": "1",
+      "sourceRoute": "Starter Island shop",
+      "bestFor": "First paid sword",
+      "unlockNote": "Costs 2,500 Money."
     },
     {
       "name": "Wooden Sword",
       "slug": "wooden-sword",
       "image": "/Sailor%20Piece/Swords/wooden-sword.webp",
-      "tier": null,
+      "tier": "C",
       "rarity": "Common",
       "type": null,
       "category": null,
@@ -1262,13 +1375,19 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/wooden-sword/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/wooden-sword.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/wooden-sword.webp",
+      "baseDamage": "20",
+      "attackSpeed": "Slow",
+      "masteryRequired": "1",
+      "sourceRoute": "Starter placeholder",
+      "bestFor": "First minutes only",
+      "unlockNote": "Replace quickly."
     },
     {
       "name": "Gryphon",
       "slug": "gryphon",
       "image": "/Sailor%20Piece/Swords/gryphon.webp",
-      "tier": null,
+      "tier": "C",
       "rarity": "Common",
       "type": null,
       "category": null,
@@ -1324,7 +1443,13 @@
       ],
       "updatedAt": "2026-03-16",
       "wikiUrl": "https://sailorpiece.org/wiki/swords/gryphon/",
-      "sourceImageUrl": "https://sailorpiece.org/images/swords/gryphon.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/swords/gryphon.webp",
+      "baseDamage": "100",
+      "attackSpeed": "Medium",
+      "masteryRequired": "Pending verification",
+      "sourceRoute": "Shanks NPC on Shibuya Island",
+      "bestFor": "Alter-style starter synergy",
+      "unlockNote": "Costs 650,000 Gold and 650 Gems."
     }
   ]
 }

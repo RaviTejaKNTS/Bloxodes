@@ -42,11 +42,11 @@ Translate raw fields only after the gameplay term is clear. A field like `source
 
 Create a reader-first outline inside `research-notes.md`. It should name the reader questions, section order, details to cut, and places where a table, bullet list, numbered list, or short paragraph will help.
 
-Before final writing, propose the item-card section style. Explain the grouping axis, why it has in-game meaning, weaker alternatives, planned `description_json` keys and notes, and what stays in `description_md`. Wait for explicit user confirmation before writing `final.json` or updating Supabase. A request like "write this page" or "continue" is not section approval unless the user has already seen and accepted the section proposal.
+Before final writing, propose the item-card section style and the card data shape. Explain the grouping axis, why it has in-game meaning, weaker alternatives, planned `description_json` keys and notes, what stays in `description_md`, which fields should appear on cards, which raw fields should be hidden, and whether the route needs a renderer override. Wait for explicit user confirmation before writing `final.json` or updating Supabase. A request like "write this page" or "continue" is not section approval unless the user has already seen and accepted the section proposal.
 
 Once the structure is confirmed, write `catalog_pages` fields directly in final JSON. Include `wiki_md` and `wiki_sort_order` when the catalog belongs on a wiki hub. Run the final edit gate before saving.
 
-Before importing or calling the page done, prove the content can render. Compare the planned `description_json` keys with the actual section labels produced by the route. Do not assume a field such as `rarity`, `category`, or `type` will be used because it exists in the dataset; inspect the rendered grouping or the same grouping logic used by the route. If the page needs `Walls` and `Floors` but the route is grouping by `rarity` or `Other`, fix the renderer or add the proper grouping behavior before importing.
+Before importing or calling the page done, prove the content can render. Compare the planned `description_json` keys with the actual section labels produced by the route. Compare the planned card fields with the actual card fields too. Do not assume a field such as `rarity`, `category`, or `type` will be used because it exists in the dataset; inspect the rendered grouping or the same grouping logic used by the route. If the page needs `Walls` and `Floors` but the route is grouping by `rarity` or `Other`, fix the renderer or add the proper grouping behavior before importing. If the cards are showing raw descriptions, generic pros/cons blobs, nested stats, unexplained yes/no values, or fields that do not help a player decide, clean the dataset fields or add a route override before importing.
 
 After importing to local Supabase, read the row back and verify the updated fields exist in the database. Then fetch or open the local page and confirm visible strings from `intro_md`, `description_json`, and `description_md` actually render. `final.json` by itself is not a completed page update.
 
@@ -57,6 +57,8 @@ For multiple catalog pages, finish one user-approved gold-standard page first. A
 Keep the copy specific to the game system. Say what the collection does in play, how players get or use it, and which values change a decision.
 
 Use `description_json` as the section-level context layer when item cards are divided into meaningful groups. Keep each note short and useful, usually one to three sentences, and place it near the cards it explains.
+
+Keep cards as clean, scannable data. They should show pure player-useful facts such as role, source, price, rarity, chance, requirement, strength, limit, availability, damage, seats, or reward type. Do not show long marketing descriptions, raw HTML, raw `pros` and `cons` arrays, nested stats objects, or unlabeled values. If pros and cons matter, translate them into short data fields such as `Strength`, `Limit`, `Best for`, or `Trade note`.
 
 Keep `description_md` focused on whole-page mechanics: how the system works, where it is in-game, how players obtain items, how prices, odds, or availability work, and mistakes that apply across the full collection. Do not repeat the `description_json` notes there.
 

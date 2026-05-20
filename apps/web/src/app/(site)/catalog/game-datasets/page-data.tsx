@@ -77,6 +77,7 @@ type CatalogSectionOverride = {
   getSectionLabel: (item: GameDatasetCatalogItem) => string | null;
   hiddenKeys?: string[];
   additionalColumns?: string[];
+  maxStats?: number;
   transformItem?: (item: GameDatasetCatalogItem) => GameDatasetCatalogItem;
 };
 
@@ -140,7 +141,232 @@ const ADOPT_ME_GIFTS_SECTION_BY_NAME: Record<string, string> = {
   "Golden Mistletoe": "Mixed seasonal gift boxes"
 };
 
+const SAILOR_PIECE_FRUITS_SECTION_ORDER = ["S+", "S", "A", "B", "C", "D"];
+const SAILOR_PIECE_TIER_SECTION_ORDER = ["S+", "S", "A", "B", "C", "D"];
+const SAILOR_PIECE_TOP_TIER_SECTION_ORDER = ["S+", "S", "A", "B", "C"];
+const SAILOR_PIECE_ISLANDS_SECTION_ORDER = ["Early Islands", "Mid Islands", "Endgame Islands"];
+const SAILOR_PIECE_DUNGEONS_SECTION_ORDER = [
+  "15-wave farming runs",
+  "Shadow Monarch boss dungeon",
+  "Endless tower climb"
+];
+const SAILOR_PIECE_TITLE_SECTION_ORDER = ["Damage", "Farming", "Luck"];
+const SAILOR_PIECE_GUILD_SECTION_ORDER = ["Guild Key Sources", "Guild Upgrades"];
+const SAILOR_PIECE_RELIC_SECTION_ORDER = ["Raw damage", "Drop farming", "Critical stats"];
+const SAILOR_PIECE_HAKI_SECTION_ORDER = [
+  "First defensive unlock",
+  "Main damage unlock",
+  "Endgame Haki unlock"
+];
+
+const SAILOR_PIECE_RAW_CARD_KEYS = [
+  "description",
+  "stats",
+  "abilities",
+  "pros",
+  "cons",
+  "drops",
+  "acquisition",
+  "unlock",
+  "strategy",
+  "obtainment",
+  "usageTips",
+  "sections",
+  "type",
+  "category"
+];
+
 const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
+  "sailor-piece-fruits": {
+    groupKey: "tier",
+    groupLabel: "Fruit tier",
+    sectionOrder: SAILOR_PIECE_FRUITS_SECTION_ORDER,
+    additionalColumns: ["bestFor", "combatRole", "mainStrength", "mainLimit", "spinChance"],
+    hiddenKeys: [
+      "description",
+      "stats",
+      "abilities",
+      "pros",
+      "cons",
+      "drops",
+      "acquisition",
+      "unlock",
+      "strategy",
+      "obtainment",
+      "usageTips",
+      "category"
+    ],
+    getSectionLabel: getTierSection
+  },
+  "sailor-piece-islands": {
+    groupKey: "sea",
+    groupLabel: "Island stage",
+    sectionOrder: SAILOR_PIECE_ISLANDS_SECTION_ORDER,
+    additionalColumns: ["mainRole", "keyContent", "progressionUse"],
+    hiddenKeys: [
+      "description",
+      "activities",
+      "raw",
+      "sections",
+      "location",
+      "cost",
+      "maxLevel",
+      "maxBonus",
+      "tier",
+      "difficulty",
+      "boss",
+      "time"
+    ],
+    getSectionLabel: getSeaSection
+  },
+  "sailor-piece-accessories": {
+    groupKey: "tier",
+    groupLabel: "Accessory tier",
+    sectionOrder: SAILOR_PIECE_TIER_SECTION_ORDER,
+    additionalColumns: ["defense", "damage", "damageReduction", "sourceRoute", "dropOrCost", "bestFor"],
+    hiddenKeys: SAILOR_PIECE_RAW_CARD_KEYS,
+    getSectionLabel: getTierSection
+  },
+  "sailor-piece-dungeons": {
+    groupKey: "catalogSection",
+    groupLabel: "Dungeon type",
+    sectionOrder: SAILOR_PIECE_DUNGEONS_SECTION_ORDER,
+    additionalColumns: [
+      "runType",
+      "level",
+      "entryItem",
+      "location",
+      "maxPlayers",
+      "formatTime",
+      "bossCheckpoint",
+      "mainRewards",
+      "importantRule"
+    ],
+    hiddenKeys: SAILOR_PIECE_RAW_CARD_KEYS,
+    maxStats: 8,
+    getSectionLabel: getCatalogSection
+  },
+  "sailor-piece-races": {
+    groupKey: "tier",
+    groupLabel: "Race tier",
+    sectionOrder: SAILOR_PIECE_TOP_TIER_SECTION_ORDER,
+    additionalColumns: ["rollRarity", "bestFor", "coreBonus", "hasV4", "requiredFor"],
+    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "rarity"],
+    getSectionLabel: getTierSection
+  },
+  "sailor-piece-traits": {
+    groupKey: "tier",
+    groupLabel: "Trait tier",
+    sectionOrder: SAILOR_PIECE_TIER_SECTION_ORDER,
+    additionalColumns: ["damageMultiplier", "defenseMultiplier", "cooldownReduction", "bestFor"],
+    hiddenKeys: SAILOR_PIECE_RAW_CARD_KEYS,
+    getSectionLabel: getTierSection
+  },
+  "sailor-piece-bloodlines": {
+    groupKey: "tier",
+    groupLabel: "Bloodline tier",
+    sectionOrder: ["S+", "A", "B", "C", "D"],
+    additionalColumns: ["damage", "hp", "luck", "weaponBonus", "sustainDefense", "utilityBonus", "sourcePity", "specialUse"],
+    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "effect", "bonus", "recipe", "requirements", "tags", "rarity"],
+    maxStats: 8,
+    getSectionLabel: getTierSection
+  },
+  "sailor-piece-bosses": {
+    groupKey: "bossStage",
+    groupLabel: "Boss stage",
+    sectionOrder: SAILOR_PIECE_ISLANDS_SECTION_ORDER,
+    additionalColumns: ["difficulty", "level", "hp", "encounterType", "respawnAccess", "dropCount", "notableDrops"],
+    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "tier", "rarity", "region"],
+    maxStats: 7,
+    getSectionLabel: getBossStage
+  },
+  "sailor-piece-swords": {
+    groupKey: "tier",
+    groupLabel: "Sword tier",
+    sectionOrder: SAILOR_PIECE_TOP_TIER_SECTION_ORDER,
+    additionalColumns: ["baseDamage", "attackSpeed", "masteryRequired", "sourceRoute", "bestFor", "unlockNote"],
+    hiddenKeys: SAILOR_PIECE_RAW_CARD_KEYS,
+    getSectionLabel: getTierSection
+  },
+  "sailor-piece-guilds": {
+    groupKey: "catalogSection",
+    groupLabel: "Guild system",
+    sectionOrder: SAILOR_PIECE_GUILD_SECTION_ORDER,
+    additionalColumns: [
+      "location",
+      "encounter",
+      "dropChance",
+      "spawnRequirement",
+      "maxBonus",
+      "appliesTo",
+      "upgradeRole"
+    ],
+    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "tier", "rarity", "effect", "bonus", "recipe", "requirements", "tags"],
+    maxStats: 7,
+    getSectionLabel: getCatalogSection
+  },
+  "sailor-piece-titles": {
+    groupKey: "titleRole",
+    groupLabel: "Title role",
+    sectionOrder: SAILOR_PIECE_TITLE_SECTION_ORDER,
+    additionalColumns: ["tier", "bonus", "unlockRoute", "requirement", "dropOrPity", "availability", "bestFor"],
+    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "effect", "recipe", "requirements", "tags", "rarity"],
+    maxStats: 7,
+    getSectionLabel: getTitleRoleSection
+  },
+  "sailor-piece-melee-specs": {
+    groupKey: "tier",
+    groupLabel: "Melee tier",
+    sectionOrder: SAILOR_PIECE_TIER_SECTION_ORDER,
+    additionalColumns: [
+      "statPriority",
+      "unlockRoute",
+      "sourceLocation",
+      "abilityCount",
+      "signatureMove",
+      "mainStrength",
+      "mainLimit",
+      "verificationNote"
+    ],
+    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "rarity"],
+    maxStats: 8,
+    getSectionLabel: getTierSection
+  },
+  "sailor-piece-runes": {
+    groupKey: "tier",
+    groupLabel: "Rune tier",
+    sectionOrder: SAILOR_PIECE_TIER_SECTION_ORDER,
+    additionalColumns: ["displayRarity", "source", "bonusType", "baseEffect", "maxEffect", "bestFor", "dropNote"],
+    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "rarity"],
+    maxStats: 7,
+    getSectionLabel: getTierSection
+  },
+  "sailor-piece-clans": {
+    groupKey: "tier",
+    groupLabel: "Clan tier",
+    sectionOrder: SAILOR_PIECE_TOP_TIER_SECTION_ORDER,
+    additionalColumns: ["rarity", "bestFor", "bonusSummary", "passive", "requirement"],
+    hiddenKeys: SAILOR_PIECE_RAW_CARD_KEYS,
+    maxStats: 5,
+    getSectionLabel: getTierSection
+  },
+  "sailor-piece-relics": {
+    groupKey: "catalogSection",
+    groupLabel: "Relic role",
+    sectionOrder: SAILOR_PIECE_RELIC_SECTION_ORDER,
+    additionalColumns: ["effect", "recipe", "partRoute", "bestFor"],
+    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "bonus", "tags", "rarity"],
+    getSectionLabel: getCatalogSection
+  },
+  "sailor-piece-haki": {
+    groupKey: "catalogSection",
+    groupLabel: "Progression role",
+    sectionOrder: SAILOR_PIECE_HAKI_SECTION_ORDER,
+    additionalColumns: ["role", "unlockRoute", "requirements", "maxLevel", "maxEffect", "levelingRoute"],
+    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "rarity"],
+    maxStats: 6,
+    getSectionLabel: getCatalogSection
+  },
   "adopt-me-accessory-shop": {
     groupKey: "category",
     groupLabel: "Shop section",
@@ -268,6 +494,26 @@ const STANDARD_RARITIES = new Set(["Common", "Uncommon", "Rare", "Ultra-Rare", "
 
 function getCategorySection(item: GameDatasetCatalogItem): string | null {
   return normalizeValue(item.category);
+}
+
+function getTierSection(item: GameDatasetCatalogItem): string | null {
+  return normalizeValue(item.tier);
+}
+
+function getSeaSection(item: GameDatasetCatalogItem): string | null {
+  return normalizeValue(item.sea);
+}
+
+function getCatalogSection(item: GameDatasetCatalogItem): string | null {
+  return normalizeValue(item.catalogSection);
+}
+
+function getBossStage(item: GameDatasetCatalogItem): string | null {
+  return normalizeValue(item.bossStage);
+}
+
+function getTitleRoleSection(item: GameDatasetCatalogItem): string | null {
+  return normalizeValue(item.titleRole ?? item.category);
 }
 
 function withDisplayRarity(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
@@ -618,7 +864,8 @@ const HIDDEN_FIELD_KEYS = new Set([
   "raw",
   "rawText",
   "sections",
-  "displayRarity"
+  "displayRarity",
+  "updatedAt"
 ]);
 
 export function getGameDatasetCatalogConfig(collectionCode: string): GameDatasetCatalogConfig | null {
@@ -822,17 +1069,36 @@ function buildViewConfig(
     sectionOverride?.groupKey ??
     pickFirstUsefulKey(dataset, GROUP_KEY_PRIORITY, { requireMultipleValues: true }) ??
     "catalogGroup";
-  const badgeKey = pickFirstUsefulKey(dataset, BADGE_KEY_PRIORITY.filter((key) => key !== groupKey));
-  const descriptionKey = pickFirstUsefulKey(dataset, DESCRIPTION_KEY_PRIORITY);
+  const badgeKey = pickFirstUsefulKey(
+    dataset,
+    BADGE_KEY_PRIORITY.filter((key) => key !== groupKey && !hiddenFieldKeys.has(key))
+  );
+  const descriptionKey = pickFirstUsefulKey(
+    dataset,
+    DESCRIPTION_KEY_PRIORITY.filter((key) => !hiddenFieldKeys.has(key))
+  );
   const subtitleKeys = SUBTITLE_KEY_PRIORITY.filter(
-    (key) => columns.includes(key) && key !== groupKey && key !== badgeKey && hasUsefulValues(dataset.items, key)
+    (key) =>
+      columns.includes(key) &&
+      !hiddenFieldKeys.has(key) &&
+      key !== groupKey &&
+      key !== badgeKey &&
+      hasUsefulValues(dataset.items, key)
   ).slice(0, 2);
   const statKeys = [
     ...STAT_KEY_PRIORITY.filter((key) => columns.includes(key) && hasUsefulValues(dataset.items, key)),
     ...columns.filter((key) => !hiddenFieldKeys.has(key) && hasUsefulValues(dataset.items, key))
-  ].filter((key) => key !== groupKey && key !== badgeKey && key !== descriptionKey && !subtitleKeys.includes(key));
+  ].filter(
+    (key) =>
+      !hiddenFieldKeys.has(key) &&
+      key !== groupKey &&
+      key !== badgeKey &&
+      key !== descriptionKey &&
+      !subtitleKeys.includes(key)
+  );
+  const maxStats = sectionOverride?.maxStats ?? Math.min(6, statKeys.length);
   const stats = Array.from(new Set(statKeys))
-    .slice(0, 6)
+    .slice(0, maxStats)
     .map((key) => ({ key, label: getFieldLabel(key) }));
   const hasImages = dataset.items.some((item) => Boolean(normalizeText(item.image)));
 
@@ -852,7 +1118,7 @@ function buildViewConfig(
     descriptionKey: descriptionKey ?? undefined,
     cardDescriptionKey: descriptionKey ?? undefined,
     stats,
-    maxStats: Math.min(6, stats.length),
+    maxStats,
     hideImages: !hasImages
   };
 }
@@ -935,7 +1201,7 @@ function buildGroupedSections(
       return a[0].localeCompare(b[0]);
     })
     .map(([label, entries]) => ({
-      id: `section-${toSlug(label || "items")}`,
+      id: `section-${toSectionKey(label || "items")}`,
       label,
       items: entries
     }));
@@ -1080,13 +1346,13 @@ export function renderGameDatasetCatalogPage({
   descriptionHtml
     .filter((entry) => entry.key !== DESCRIPTION_MD_KEY)
     .forEach((entry) => {
-      sectionNoteEntries.set(toSlug(entry.key), entry);
+      sectionNoteEntries.set(toSectionKey(entry.key), entry);
     });
   const usedSectionNoteKeys = new Set<string>();
   const groupedSectionsWithNotes = groupedSections.map((section) => {
-    const noteEntry = sectionNoteEntries.get(toSlug(section.label));
+    const noteEntry = sectionNoteEntries.get(toSectionKey(section.label));
     if (noteEntry) {
-      usedSectionNoteKeys.add(toSlug(noteEntry.key));
+      usedSectionNoteKeys.add(toSectionKey(noteEntry.key));
     }
     return {
       ...section,
@@ -1094,7 +1360,7 @@ export function renderGameDatasetCatalogPage({
     };
   });
   const detailDescriptionHtml = descriptionHtml.filter(
-    (entry) => entry.key === DESCRIPTION_MD_KEY || !usedSectionNoteKeys.has(toSlug(entry.key))
+    (entry) => entry.key === DESCRIPTION_MD_KEY || !usedSectionNoteKeys.has(toSectionKey(entry.key))
   );
   const sectionNav = groupedSections.map((section) => ({
     id: section.id,
@@ -1252,4 +1518,8 @@ function toSlug(value: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+function toSectionKey(value: string): string {
+  return toSlug(value.replace(/\+/g, " plus "));
 }

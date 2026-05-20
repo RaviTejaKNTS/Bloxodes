@@ -11,15 +11,19 @@
     ],
     "columns": [
       "name",
-      "type",
-      "description",
-      "requirements",
-      "bonus"
+      "catalogSection",
+      "location",
+      "encounter",
+      "dropChance",
+      "spawnRequirement",
+      "maxBonus",
+      "appliesTo",
+      "upgradeRole"
     ]
   },
   "items": [
     {
-      "name": "Delinquent (Starter Island)",
+      "name": "Delinquent",
       "slug": "delinquent-starter-island",
       "tier": null,
       "rarity": null,
@@ -34,10 +38,18 @@
       "obtainment": "Drop rate: 0.00019342%",
       "tags": [
         "0.00019342%"
-      ]
+      ],
+      "catalogSection": "Guild Key Sources",
+      "location": "Starter Island",
+      "encounter": "NPC enemy route",
+      "dropChance": "0.00019342%",
+      "spawnRequirement": null,
+      "maxBonus": null,
+      "appliesTo": null,
+      "upgradeRole": "Guild Key drop source"
     },
     {
-      "name": "Cosmic Being (World Boss, 30 min spawn)",
+      "name": "Cosmic Being",
       "slug": "cosmic-being-world-boss-30-min-spawn",
       "tier": null,
       "rarity": null,
@@ -52,10 +64,18 @@
       "obtainment": "Drop rate: 0.01%",
       "tags": [
         "0.01%"
-      ]
+      ],
+      "catalogSection": "Guild Key Sources",
+      "location": "Punch Island world boss route",
+      "encounter": "World Boss",
+      "dropChance": "0.01%",
+      "spawnRequirement": "Spawns about every 30 minutes",
+      "maxBonus": null,
+      "appliesTo": null,
+      "upgradeRole": "Guild Key drop source"
     },
     {
-      "name": "Sea Beast (Kraken / Sea Serpent, 500k+ bounty required to spawn)",
+      "name": "Sea Beast",
       "slug": "sea-beast-kraken-sea-serpent-500k-bounty-required-to-spawn",
       "tier": null,
       "rarity": null,
@@ -70,7 +90,15 @@
       "obtainment": "Drop rate: 0.011%",
       "tags": [
         "0.011%"
-      ]
+      ],
+      "catalogSection": "Guild Key Sources",
+      "location": "Open sea route",
+      "encounter": "Kraken or Sea Serpent",
+      "dropChance": "0.011%",
+      "spawnRequirement": "500k+ bounty required to spawn sea beasts",
+      "maxBonus": null,
+      "appliesTo": null,
+      "upgradeRole": "Guild Key drop source"
     },
     {
       "name": "Member Cap",
@@ -88,7 +116,11 @@
       "obtainment": null,
       "tags": [
         "+150 max members"
-      ]
+      ],
+      "catalogSection": "Guild Upgrades",
+      "maxBonus": "+150 max members",
+      "appliesTo": "Guild roster",
+      "upgradeRole": "Capacity upgrade"
     },
     {
       "name": "Damage",
@@ -106,7 +138,11 @@
       "obtainment": null,
       "tags": [
         "+15% Damage"
-      ]
+      ],
+      "catalogSection": "Guild Upgrades",
+      "maxBonus": "+15% Damage",
+      "appliesTo": "All guild members",
+      "upgradeRole": "Damage upgrade"
     },
     {
       "name": "Crit Damage",
@@ -124,7 +160,11 @@
       "obtainment": null,
       "tags": [
         "+5% Crit Damage"
-      ]
+      ],
+      "catalogSection": "Guild Upgrades",
+      "maxBonus": "+5% Crit Damage",
+      "appliesTo": "All guild members",
+      "upgradeRole": "Critical damage upgrade"
     },
     {
       "name": "Crit Chance",
@@ -142,7 +182,11 @@
       "obtainment": null,
       "tags": [
         "+2% Crit Chance"
-      ]
+      ],
+      "catalogSection": "Guild Upgrades",
+      "maxBonus": "+2% Crit Chance",
+      "appliesTo": "All guild members",
+      "upgradeRole": "Critical chance upgrade"
     },
     {
       "name": "HP",
@@ -160,7 +204,11 @@
       "obtainment": null,
       "tags": [
         "+15% HP"
-      ]
+      ],
+      "catalogSection": "Guild Upgrades",
+      "maxBonus": "+15% HP",
+      "appliesTo": "All guild members",
+      "upgradeRole": "Survivability upgrade"
     },
     {
       "name": "Luck",
@@ -178,7 +226,11 @@
       "obtainment": null,
       "tags": [
         "+10% Luck"
-      ]
+      ],
+      "catalogSection": "Guild Upgrades",
+      "maxBonus": "+10% Luck",
+      "appliesTo": "All guild members",
+      "upgradeRole": "Drop-farming upgrade"
     }
   ]
 }

@@ -12,14 +12,14 @@
     "columns": [
       "name",
       "image",
+      "bossStage",
       "difficulty",
-      "region",
-      "location",
-      "description",
-      "stats",
-      "drops",
-      "strategy",
-      "wikiUrl"
+      "level",
+      "hp",
+      "encounterType",
+      "respawnAccess",
+      "dropCount",
+      "notableDrops"
     ]
   },
   "items": [
@@ -156,7 +156,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/jinwoo/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/jinwoo.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/jinwoo.webp",
+      "bossStage": "Early Islands",
+      "level": "0",
+      "hp": "6,000,000",
+      "difficulty": "Easy",
+      "respawnAccess": "~6.5 minutes",
+      "dropCount": "4 items",
+      "notableDrops": "Abyss Edge (17.5%); Dark Ring (7%); Shadow Heart (2%); Shadow Monarch Title (3%)",
+      "encounterType": "Boss fight"
     },
     {
       "name": "Alucard",
@@ -291,7 +299,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/alucard/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/alucard.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/alucard.webp",
+      "bossStage": "Early Islands",
+      "level": "0",
+      "hp": "20,000,000",
+      "difficulty": "Medium",
+      "respawnAccess": "~5 minutes",
+      "dropCount": "4 items",
+      "notableDrops": "Soul Amulet (8%); Casull (2%); Blood Ring (2%); Vampire King Title (2.5%)",
+      "encounterType": "World boss"
     },
     {
       "name": "Yuji",
@@ -414,7 +430,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/yuji/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/yuji.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/yuji.webp",
+      "bossStage": "Early Islands",
+      "level": "3,000",
+      "hp": "3,750,000",
+      "difficulty": "Easy",
+      "respawnAccess": "~5 minutes",
+      "dropCount": "3 items",
+      "notableDrops": "Energy Core (25%); Flash Impact (9%); Divergent Pulse (4%)",
+      "encounterType": "World boss"
     },
     {
       "name": "Gojo",
@@ -549,7 +573,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/gojo/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/gojo.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/gojo.webp",
+      "bossStage": "Early Islands",
+      "level": "3,000",
+      "hp": "4,000,000",
+      "difficulty": "Easy",
+      "respawnAccess": "~5 minutes",
+      "dropCount": "4 items",
+      "notableDrops": "Limitless Key (30%); Void Fragment (20%); Limitless Ring (8%); Honored One Title (5%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Sukuna",
@@ -684,7 +716,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/sukuna/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/sukuna.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/sukuna.webp",
+      "bossStage": "Early Islands",
+      "level": "3,000",
+      "hp": "5,000,000",
+      "difficulty": "Medium",
+      "respawnAccess": "~5 minutes",
+      "dropCount": "4 items",
+      "notableDrops": "Malevolent Key (30%); Cursed Finger (20%); Dismantle Fang (8%); Curse King Title (4%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Escanor",
@@ -807,7 +847,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/escanor/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/escanor.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/escanor.webp",
+      "bossStage": "Early Islands",
+      "level": "0",
+      "hp": "100,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "Boss Rush only (requires Rush Key)",
+      "dropCount": "3 items",
+      "notableDrops": "Escanor Weapon (5.74%); The One Title (0.85%); Sun Armor (0.5%)",
+      "encounterType": "Boss Rush"
     },
     {
       "name": "Aizen",
@@ -954,7 +1002,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/aizen/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/aizen.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/aizen.webp",
+      "bossStage": "Mid Islands",
+      "level": "5,000",
+      "hp": "25,000,000",
+      "difficulty": "Hard",
+      "respawnAccess": "~5 minutes",
+      "dropCount": "5 items",
+      "notableDrops": "Mirage Pendant (20%); Illusion Prism (8%); Reiatsu Core (3%); Hogyoku Fragment (1.2%)",
+      "encounterType": "Boss fight"
     },
     {
       "name": "Saber",
@@ -1053,7 +1109,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/saber/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/saber.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/saber.webp",
+      "bossStage": "Mid Islands",
+      "level": "1,500",
+      "hp": "2,500,000",
+      "difficulty": "Medium",
+      "respawnAccess": "Summon only",
+      "dropCount": "1 items",
+      "notableDrops": "Saber Sword (2%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Qin Shi",
@@ -1164,7 +1228,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/qin-shi/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/qin-shi.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/qin-shi.webp",
+      "bossStage": "Mid Islands",
+      "level": "0",
+      "hp": "10,000,000",
+      "difficulty": "Hard",
+      "respawnAccess": "Summon only",
+      "dropCount": "2 items",
+      "notableDrops": "Jade Tablet (6%); Imperial Seal (2%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Ichigo",
@@ -1287,7 +1359,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/ichigo/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/ichigo.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/ichigo.webp",
+      "bossStage": "Mid Islands",
+      "level": "1,500",
+      "hp": "65,000,000",
+      "difficulty": "Hard",
+      "respawnAccess": "Summon only",
+      "dropCount": "3 items",
+      "notableDrops": "Soul Fragment (6%); Spiritual Core (1.75%); Soul Flame (0.7%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Shadow",
@@ -1422,7 +1502,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/shadow/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/shadow.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/shadow.webp",
+      "bossStage": "Mid Islands",
+      "level": "5,000",
+      "hp": "20,000,000",
+      "difficulty": "Hard",
+      "respawnAccess": "Dungeon only",
+      "dropCount": "4 items",
+      "notableDrops": "Umbral Capsule (12.5%); Void Seed (4.5%); Shadow Essence (2%); Atomic Core (0.75%)",
+      "encounterType": "Dungeon boss"
     },
     {
       "name": "Ragna",
@@ -1545,7 +1633,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/ragna/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/ragna.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/ragna.webp",
+      "bossStage": "Mid Islands",
+      "level": "0",
+      "hp": "12,500,000",
+      "difficulty": "Medium",
+      "respawnAccess": "~5 minutes (event cooldown)",
+      "dropCount": "3 items",
+      "notableDrops": "Wyrm Band (25%); Black Frost (9%); Silver Requiem (3.5%)",
+      "encounterType": "Boss fight"
     },
     {
       "name": "Cosmic Being",
@@ -1740,7 +1836,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/cosmic-being-boss/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/cosmic-being-boss.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/cosmic-being-boss.webp",
+      "bossStage": "Endgame Islands",
+      "level": "14,500",
+      "hp": "500,000,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "30 minutes after defeat (server time)",
+      "dropCount": "9 items",
+      "notableDrops": "Cosmic Being (Melee Spec) (0.525%); Cosmic Being Title (+95% Damage) (1.75%); Cosmic Essence (6.53%); Star Mark (3.26%)",
+      "encounterType": "World boss"
     },
     {
       "name": "The World",
@@ -1899,7 +2003,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/the-world-boss/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/the-world-boss.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/the-world-boss.webp",
+      "bossStage": "Endgame Islands",
+      "level": "13,500",
+      "hp": "5,000,000,000",
+      "difficulty": "Very Hard",
+      "respawnAccess": "Summon-based (1 Dominion Brand per Normal summon)",
+      "dropCount": "6 items",
+      "notableDrops": "Time Tyrant Title (+92.5% Damage) (0.6%); Power Fragment (8%); Time Remnant (2.75%); World Outfit (0.65%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Great Mage",
@@ -2057,7 +2169,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/great-mage/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/great-mage.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/great-mage.webp",
+      "bossStage": "Endgame Islands",
+      "level": "13,000",
+      "hp": "3,500,000,000",
+      "difficulty": "Very Hard",
+      "respawnAccess": "Summon-based — Normal 1 Easter Key / Medium 2 / Hard 3 / Extreme 4 (sailorpiecewiki 2026-04-23). Easter Event until 2026-04-22 11:16 AM PT",
+      "dropCount": "6 items",
+      "notableDrops": "Ancient Mage Title (+90% Damage) (0.65%); Spell Echo (9.87%); Ancient Fragment (3.41%); Mage Outfit (0.9%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Kraken",
@@ -2192,7 +2312,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/kraken/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/kraken.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/kraken.webp",
+      "bossStage": "Endgame Islands",
+      "level": "13,000",
+      "hp": "1,250,000,000,000",
+      "difficulty": "Very Hard",
+      "respawnAccess": "Bounty-dependent (500k+ bounty required, server cap 1 Kraken)",
+      "dropCount": "4 items",
+      "notableDrops": "Dragon Queen Title (+97.5% Damage) (0.85%); Dragon Goddess Sword Crafting Materials (0.465%); Bloodline Stone (avg 15/kill); Clan Reroll (avg 25/kill)",
+      "encounterType": "Sea creature"
     },
     {
       "name": "Sea Serpent",
@@ -2303,7 +2431,15 @@
       ],
       "updatedAt": "2026-04-20",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/sea-serpent/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/sea-serpent.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/sea-serpent.webp",
+      "bossStage": "Endgame Islands",
+      "level": "13,000",
+      "hp": "625,000,000,000",
+      "difficulty": "Very Hard",
+      "respawnAccess": "Bounty-dependent (500k+ bounty required, server cap 1 Sea Serpent)",
+      "dropCount": "2 items",
+      "notableDrops": "Dragon Queen Title (+97.5% Damage) (0.85%); Dragon Goddess Sword Crafting Materials (0.4%)",
+      "encounterType": "Sea creature"
     },
     {
       "name": "Madoka",
@@ -2438,7 +2574,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/madoka/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/madoka.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/madoka.webp",
+      "bossStage": "Endgame Islands",
+      "level": "0",
+      "hp": "250,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "~6.5 minutes",
+      "dropCount": "4 items",
+      "notableDrops": "Heart (100%); Divine Fragment (6%); Sacred Bow (4%); Star Maiden Title (1.2%)",
+      "encounterType": "World boss"
     },
     {
       "name": "Gilgamesh",
@@ -2573,7 +2717,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/gilgamesh/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/gilgamesh.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/gilgamesh.webp",
+      "bossStage": "Endgame Islands",
+      "level": "0",
+      "hp": "300,000,000",
+      "difficulty": "Very Hard",
+      "respawnAccess": "Summon only",
+      "dropCount": "4 items",
+      "notableDrops": "Throne Remnant (11.5%); Ancient Shard (4.5%); Golden Essence (1.5%); Phantasm Core (0.5%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Strongest of Today",
@@ -2708,7 +2860,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/strongest-of-today/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/strongest-of-today.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/strongest-of-today.webp",
+      "bossStage": "Endgame Islands",
+      "level": "6,250",
+      "hp": "125,000,000",
+      "difficulty": "Very Hard",
+      "respawnAccess": "Summon only",
+      "dropCount": "4 items",
+      "notableDrops": "Reversal Pulse (15%); Six Eye (6%); Blue Singularity (2%); Infinity Essence (0.65%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Strongest in History",
@@ -2843,7 +3003,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/strongest-in-history/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/strongest-in-history.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/strongest-in-history.webp",
+      "bossStage": "Endgame Islands",
+      "level": "6,250",
+      "hp": "150,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "Summon only",
+      "dropCount": "4 items",
+      "notableDrops": "Awakened Cursed Finger (15%); Vessel Ring (6%); Malevolent Soul (2%); Cursed Flesh (0.65%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Rimuru",
@@ -2954,7 +3122,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/rimuru/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/rimuru.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/rimuru.webp",
+      "bossStage": "Endgame Islands",
+      "level": "8,000",
+      "hp": "200,000,000",
+      "difficulty": "Very Hard",
+      "respawnAccess": "Summon only",
+      "dropCount": "2 items",
+      "notableDrops": "Sage Pulse (13.5%); Tempest Seal (5.5%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Anos",
@@ -3065,7 +3241,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/anos/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/anos.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/anos.webp",
+      "bossStage": "Endgame Islands",
+      "level": "9,000",
+      "hp": "350,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "Summon only",
+      "dropCount": "2 items",
+      "notableDrops": "Demonic Fragment (11.5%); Demonic Shard (4.5%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Shadow Monarch",
@@ -3200,7 +3384,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/shadow-monarch/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/shadow-monarch.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/shadow-monarch.webp",
+      "bossStage": "Endgame Islands",
+      "level": "5,000",
+      "hp": "750,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "Dungeon only",
+      "dropCount": "4 items",
+      "notableDrops": "Monarch Core (6.75%); Monarch Essence (2.75%); Shadow Crystal (0.5%); Kamish Dagger (0.75%)",
+      "encounterType": "Dungeon boss"
     },
     {
       "name": "True Aizen",
@@ -3359,7 +3551,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/true-aizen/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/true-aizen.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/true-aizen.webp",
+      "bossStage": "Endgame Islands",
+      "level": "5,000",
+      "hp": "850,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "Summon only",
+      "dropCount": "6 items",
+      "notableDrops": "Transcendent Being Title (0.75%); Evolution Fragment (15%); Transcendent Core (6%); Divinity Essence (2%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Yamato",
@@ -3518,7 +3718,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/yamato/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/yamato.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/yamato.webp",
+      "bossStage": "Endgame Islands",
+      "level": "5,000",
+      "hp": "850,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "Summon only",
+      "dropCount": "6 items",
+      "notableDrops": "Blade Sovereign Title (1%); Azure Heart (0.5%); Yamato Essence (2.5%); Frozen Will (4.25%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Blessed Maiden",
@@ -3665,7 +3873,15 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/blessed-maiden/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/blessed-maiden.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/blessed-maiden.webp",
+      "bossStage": "Endgame Islands",
+      "level": "0",
+      "hp": "650,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "Summon only",
+      "dropCount": "5 items",
+      "notableDrops": "Astral Empress Title (0.8%); Aero Core (1.6%); Gale Essence (3%); Tide Remnants (5%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Saber Alter",
@@ -3824,7 +4040,15 @@
       ],
       "updatedAt": "2026-03-16",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/saber-alter/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/saber-alter.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/saber-alter.webp",
+      "bossStage": "Endgame Islands",
+      "level": "0",
+      "hp": "750,000,000",
+      "difficulty": "Hard",
+      "respawnAccess": "Summoned (not timed spawn) — requires Dark Grails + currency",
+      "dropCount": "6 items",
+      "notableDrops": "Morgan Remnant (33.93%); Alter Essence (12.25%); Alter Armor (3.2%); Corruption Core (3.02%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Kokushibo (Moon Slayer Boss)",
@@ -3959,7 +4183,15 @@
       ],
       "updatedAt": "2026-05-06",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/kokushibo/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/kokushibo.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/kokushibo.webp",
+      "bossStage": "Endgame Islands",
+      "level": "12,000",
+      "hp": "1,250,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "Summon only (1x Upper Seal + 700,000 Money + 700 Gems)",
+      "dropCount": "4 items",
+      "notableDrops": "Demon Remnant (8.91%); Lunar Essence (3.08%); Crescent Shard (0.7%); Moon Crest (0.3%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Strongest Shinobi",
@@ -4106,7 +4338,15 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/strongest-shinobi-boss/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/strongest-shinobi-boss.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/strongest-shinobi-boss.webp",
+      "bossStage": "Endgame Islands",
+      "level": "12,000",
+      "hp": "2,000,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "~6 minutes (open world auto-spawn)",
+      "dropCount": "5 items",
+      "notableDrops": "Power Remnant (3.69%); Battle Sigil (2.12%); Eternal Core (1.01%); Battlefield Warlord Title (1.5%)",
+      "encounterType": "World boss"
     },
     {
       "name": "Atomic Boss (Cid)",
@@ -4265,7 +4505,15 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/atomic-boss/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/atomic-boss.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/atomic-boss.webp",
+      "bossStage": "Endgame Islands",
+      "level": "12,000",
+      "hp": "2,000,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "Summon only (Abyss Sigils required)",
+      "dropCount": "6 items",
+      "notableDrops": "Magic Shard (11.5%); Shadow Remnant (4.01%); Atomic Outfit (1.23%); Eminence Essence (1.02%)",
+      "encounterType": "Summon boss"
     },
     {
       "name": "Frost Boss",
@@ -4423,7 +4671,15 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/bosses/frost-boss/",
-      "sourceImageUrl": "https://sailorpiece.org/images/bosses/frost-boss.webp"
+      "sourceImageUrl": "https://sailorpiece.org/images/bosses/frost-boss.webp",
+      "bossStage": "Endgame Islands",
+      "level": "0",
+      "hp": "1,650,000,000",
+      "difficulty": "Extreme",
+      "respawnAccess": "Summon only — Normal: 1 Frost Relic + $750k + 750 Gems / Medium: 2 + $1M + 1000 / Hard: 3 + $1.25M + 1250 / Extreme: 4 + $1M + 1000",
+      "dropCount": "6 items",
+      "notableDrops": "Battle Shard (16.2%); Glacier Remnant (5.37%); Icen Queen Outfit (1.42%); Frozen Brand (1.21%)",
+      "encounterType": "Summon boss"
     }
   ]
 }

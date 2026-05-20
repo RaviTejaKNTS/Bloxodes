@@ -27,6 +27,8 @@ Keep the copy game-first. Explain the item, mechanic, event, code, tool result, 
 
 Give context before asking the reader to understand a field. `Rarity`, `source`, `availability`, `chance`, `seats`, `uses`, `refresh`, `Full Grown`, `Neon`, and similar terms only work after the page explains what they mean in play.
 
+For catalog cards and tables, make the data surface as thoughtful as the prose. Show clean labeled facts that help a player compare items, and hide raw descriptions, raw HTML, nested objects, raw pros/cons arrays, vague meta text, and unexplained yes/no values.
+
 Write in simple English with natural rhythm. Some sentences can be short. Some can carry a little more explanation. The goal is not to sound casual for its own sake; the goal is to sound clear, human, and useful.
 
 Use examples when they teach a reusable pattern. Avoid examples that make the workflow feel locked to one game or one page type.

@@ -1,12 +1,22 @@
 {
   "meta": {
     "title": "Sailor Piece islands data",
-    "updatedAt": "2026-05-07",
+    "updatedAt": "2026-05-20",
     "sources": [
       {
         "label": "Sailor Piece Wiki - islands",
         "url": "https://sailorpiece.org/wiki/islands/",
-        "accessed": "2026-05-07"
+        "accessed": "2026-05-20"
+      },
+      {
+        "label": "Sailor Piece Wiki - islands route notes",
+        "url": "https://sailorpiecewiki.com/islands/",
+        "accessed": "2026-05-20"
+      },
+      {
+        "label": "SailorPiece.pro islands guide",
+        "url": "https://sailorpiece.pro/islands",
+        "accessed": "2026-05-20"
       }
     ],
     "columns": [
@@ -14,504 +24,221 @@
       "level",
       "sea",
       "bosses",
-      "activities",
-      "description"
+      "mainRole",
+      "keyContent",
+      "progressionUse"
     ]
   },
   "items": [
     {
-      "name": "World Island",
-      "slug": "world-island",
-      "level": "10000+",
+      "name": "Starter Island",
+      "slug": "starter-island",
+      "level": "0",
       "sea": "Early Islands",
-      "bosses": [
-        "None"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "World Island",
-        "Level": "10000+",
-        "Sea": "Early Islands",
-        "Bosses": "None"
-      }
-    },
-    {
-      "name": "JoJo Island",
-      "slug": "jojo-island",
-      "level": "10000+",
-      "sea": "Endgame Islands",
-      "bosses": [
-        "The World"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "JoJo Island",
-        "Level": "10000+",
-        "Sea": "Endgame Islands",
-        "Bosses": "The World"
-      }
+      "bosses": "No major tracked boss",
+      "mainRole": "Opening island",
+      "keyContent": "Starter quests, first weapon pickup, tutorial route, hidden puzzle progress",
+      "progressionUse": "Begin here, learn the basics, then move toward Jungle and Desert."
     },
     {
       "name": "Sailor Island",
       "slug": "sailor-island",
       "level": "0+",
       "sea": "Early Islands",
-      "bosses": [
-        "Jinwoo",
-        "Alucard",
-        "Escanor (Boss Rush)"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Sailor Island",
-        "Level": "0+",
-        "Sea": "Early Islands",
-        "Bosses": "Jinwoo, Alucard, Escanor (Boss Rush)"
-      }
-    },
-    {
-      "name": "Starter Island",
-      "slug": "starter-island",
-      "level": "0",
-      "sea": "Early Islands",
-      "bosses": [
-        "None"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Starter Island",
-        "Level": "0",
-        "Sea": "Early Islands",
-        "Bosses": "None"
-      }
+      "bosses": "Jinwoo, Alucard, Escanor (Boss Rush)",
+      "mainRole": "Main utility hub",
+      "keyContent": "Fruit Dealers, merchants, rerolls, ascension, Boss Rush, Jinwoo and Alucard routes",
+      "progressionUse": "Return here often because services and repeat routes stay useful past early game."
     },
     {
       "name": "Jungle Island",
       "slug": "jungle-island",
       "level": "250+",
       "sea": "Early Islands",
-      "bosses": [
-        "None"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Jungle Island",
-        "Level": "250+",
-        "Sea": "Early Islands",
-        "Bosses": "None"
-      }
+      "bosses": "No major tracked boss",
+      "mainRole": "Early leveling bridge",
+      "keyContent": "Jungle quests, early enemy farming, hidden collection spots",
+      "progressionUse": "Use it after starter routes before Desert and Snow open up."
     },
     {
       "name": "Desert Island",
       "slug": "desert-island",
       "level": "750+",
       "sea": "Early Islands",
-      "bosses": [
-        "None"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Desert Island",
-        "Level": "750+",
-        "Sea": "Early Islands",
-        "Bosses": "None"
-      }
+      "bosses": "No major tracked boss",
+      "mainRole": "Observation Haki stop",
+      "keyContent": "Observation Haki Master, desert quests, hidden puzzle piece",
+      "progressionUse": "Visit when you are ready to start Haki progress and push toward dungeon setup."
     },
     {
       "name": "Dungeon Island",
       "slug": "dungeon-island",
       "level": "1000+ (dungeon requires 5000+)",
       "sea": "Early Islands",
-      "bosses": [
-        "Shadow",
-        "Shadow Monarch"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Dungeon Island",
-        "Level": "1000+ (dungeon requires 5000+)",
-        "Sea": "Early Islands",
-        "Bosses": "Shadow, Shadow Monarch"
-      }
+      "bosses": "Shadow, Shadow Monarch",
+      "mainRole": "Dungeon gateway",
+      "keyContent": "Dungeon Master, Shadow route, Shadow Monarch route, dungeon unlock chain",
+      "progressionUse": "Unlock the island early, then return at 5000+ when dungeon access matters."
     },
     {
       "name": "Snow Island",
       "slug": "snow-island",
       "level": "1500+",
       "sea": "Early Islands",
-      "bosses": [
-        "None"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Snow Island",
-        "Level": "1500+",
-        "Sea": "Early Islands",
-        "Bosses": "None"
-      }
-    },
-    {
-      "name": "Boss Island",
-      "slug": "boss-island",
-      "level": "1500+",
-      "sea": "Mid Islands",
-      "bosses": [
-        "Saber",
-        "Ichigo",
-        "Gilgamesh",
-        "Qin Shi",
-        "Blessed Maiden"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Boss Island",
-        "Level": "1500+",
-        "Sea": "Mid Islands",
-        "Bosses": "Saber, Ichigo, Gilgamesh, Qin Shi, Blessed Maiden"
-      }
-    },
-    {
-      "name": "Shibuya Station",
-      "slug": "shibuya-station",
-      "level": "3000+",
-      "sea": "Mid Islands",
-      "bosses": [
-        "Yuji",
-        "Gojo",
-        "Sukuna"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Shibuya Station",
-        "Level": "3000+",
-        "Sea": "Mid Islands",
-        "Bosses": "Yuji, Gojo, Sukuna"
-      }
-    },
-    {
-      "name": "Hueco Mundo",
-      "slug": "hueco-mundo",
-      "level": "5000+",
-      "sea": "Mid Islands",
-      "bosses": [
-        "Aizen"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Hueco Mundo",
-        "Level": "5000+",
-        "Sea": "Mid Islands",
-        "Bosses": "Aizen"
-      }
-    },
-    {
-      "name": "Shinjuku Island",
-      "slug": "shinjuku-island",
-      "level": "6250+",
-      "sea": "Endgame Islands",
-      "bosses": [
-        "Strongest of Today",
-        "Strongest in History"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Shinjuku Island",
-        "Level": "6250+",
-        "Sea": "Endgame Islands",
-        "Bosses": "Strongest of Today, Strongest in History"
-      }
-    },
-    {
-      "name": "Slime Island",
-      "slug": "slime-island",
-      "level": "8000+",
-      "sea": "Endgame Islands",
-      "bosses": [
-        "Rimuru"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Slime Island",
-        "Level": "8000+",
-        "Sea": "Endgame Islands",
-        "Bosses": "Rimuru"
-      }
-    },
-    {
-      "name": "Academy Island",
-      "slug": "academy-island",
-      "level": "9000+",
-      "sea": "Endgame Islands",
-      "bosses": [
-        "Anos"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Academy Island",
-        "Level": "9000+",
-        "Sea": "Endgame Islands",
-        "Bosses": "Anos"
-      }
+      "bosses": "No major tracked boss",
+      "mainRole": "Haki and upgrade island",
+      "keyContent": "Armament Haki, artifacts, upgrade station, Skill Tree, Hogyoku Fragment progress",
+      "progressionUse": "Treat it as a major account-power stop, not just another leveling island."
     },
     {
       "name": "Christmas Island",
       "slug": "christmas-island",
       "level": "Any",
       "sea": "Early Islands",
-      "bosses": [
-        "Ragna"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Christmas Island",
-        "Level": "Any",
-        "Sea": "Early Islands",
-        "Bosses": "Ragna"
-      }
+      "bosses": "Ragna",
+      "mainRole": "Seasonal event island",
+      "keyContent": "Ragna boss, Christmas event rewards, limited seasonal drops",
+      "progressionUse": "Check it during event windows, even if your normal route is somewhere else."
     },
     {
-      "name": "Valentine Island",
-      "slug": "valentine-island",
-      "level": "Endgame",
-      "sea": "Endgame Islands",
-      "bosses": [
-        "Madoka"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Valentine Island",
-        "Level": "Endgame",
-        "Sea": "Endgame Islands",
-        "Bosses": "Madoka"
-      }
-    },
-    {
-      "name": "Judgement Island",
-      "slug": "judgement-island",
+      "name": "World Island",
+      "slug": "world-island",
       "level": "10000+",
-      "sea": "Endgame Islands",
-      "bosses": [
-        "Yamato"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Judgement Island",
-        "Level": "10000+",
-        "Sea": "Endgame Islands",
-        "Bosses": "Yamato"
-      }
+      "sea": "Early Islands",
+      "bosses": "No major tracked boss",
+      "mainRole": "Sea 2 handoff",
+      "keyContent": "Sea Traveler, Ancient Fragments, Map Pieces, Cartographer handoff",
+      "progressionUse": "Use it late in the first sea when you are working toward the Sea 2 route."
     },
     {
-      "name": "Soul Society",
-      "slug": "soul-society",
-      "level": "8500+ (requires Hogyoku Quest)",
-      "sea": "Endgame Islands",
-      "bosses": [
-        "True Aizen"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Soul Society",
-        "Level": "8500+ (requires Hogyoku Quest)",
-        "Sea": "Endgame Islands",
-        "Bosses": "True Aizen"
-      }
+      "name": "Boss Island",
+      "slug": "boss-island",
+      "level": "1500+",
+      "sea": "Mid Islands",
+      "bosses": "Saber, Ichigo, Gilgamesh, Qin Shi, Blessed Maiden",
+      "mainRole": "Boss summon hub",
+      "keyContent": "Boss Summoner, Boss Exchange, boss keys, fighting-style and weapon routes",
+      "progressionUse": "Go here for summon routes and unlock materials instead of normal mob farming."
     },
     {
-      "name": "Lawless Island",
-      "slug": "lawless-island",
-      "level": "12000+",
-      "sea": "Endgame Islands",
-      "bosses": [
-        "Atomic Boss"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Lawless Island",
-        "Level": "12000+",
-        "Sea": "Endgame Islands",
-        "Bosses": "Atomic Boss"
-      }
+      "name": "Shibuya Station",
+      "slug": "shibuya-station",
+      "level": "3000+",
+      "sea": "Mid Islands",
+      "bosses": "Yuji, Gojo, Sukuna",
+      "mainRole": "Trainer and enchant hub",
+      "keyContent": "Yuji, Gojo, Sukuna, Conqueror Haki, accessory enchanting, puzzle and fragment progress",
+      "progressionUse": "Use it when boss drops, Haki progress, trainers, and enchants start overlapping."
     },
     {
-      "name": "Ninja Island",
-      "slug": "ninja-island",
-      "level": "12000+",
+      "name": "Hueco Mundo",
+      "slug": "hueco-mundo",
+      "level": "5000+",
+      "sea": "Mid Islands",
+      "bosses": "Aizen",
+      "mainRole": "Aizen and fragment route",
+      "keyContent": "Aizen boss, specialized trainers, Hogyoku Fragment progress, late material farming",
+      "progressionUse": "Move here when the mid-game route turns into Aizen, fragments, and stronger unlocks."
+    },
+    {
+      "name": "Shinjuku Island",
+      "slug": "shinjuku-island",
+      "level": "6250+",
       "sea": "Endgame Islands",
-      "bosses": [
-        "Strongest Shinobi (2B HP",
-        "respawn 5m45s)"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Ninja Island",
-        "Level": "12000+",
-        "Sea": "Endgame Islands",
-        "Bosses": "Strongest Shinobi (2B HP, respawn 5m45s)"
-      }
+      "bosses": "Strongest of Today, Strongest in History",
+      "mainRole": "Late cursed combat route",
+      "keyContent": "Strongest bosses, mastery progress, Hogyoku Fragment progress, dense enemy farming",
+      "progressionUse": "Use it as an early endgame combat and boss route before higher islands open."
+    },
+    {
+      "name": "Slime Island",
+      "slug": "slime-island",
+      "level": "8000+",
+      "sea": "Endgame Islands",
+      "bosses": "Rimuru",
+      "mainRole": "Skill Tree and Rimuru route",
+      "keyContent": "Rimuru boss, Skill Tree NPC, Slime puzzle, Hogyoku Fragment progress",
+      "progressionUse": "Visit when stat scaling, puzzle progress, and the Rimuru route become useful."
     },
     {
       "name": "Tower Island",
       "slug": "tower-island",
       "level": "8500+",
       "sea": "Endgame Islands",
-      "bosses": [
-        "None"
-      ],
-      "location": null,
-      "cost": null,
-      "maxLevel": null,
-      "maxBonus": null,
-      "tier": null,
-      "difficulty": null,
-      "boss": null,
-      "time": null,
-      "raw": {
-        "Island": "Tower Island",
-        "Level": "8500+",
-        "Sea": "Endgame Islands",
-        "Bosses": "None"
-      }
+      "bosses": "No major tracked boss",
+      "mainRole": "Infinite Tower route",
+      "keyContent": "Infinite Tower access and endgame progression activity",
+      "progressionUse": "Use it when you are ready for tower-style progression instead of island farming."
+    },
+    {
+      "name": "Soul Society",
+      "slug": "soul-society",
+      "level": "8500+ (requires Hogyoku Quest)",
+      "sea": "Endgame Islands",
+      "bosses": "True Aizen",
+      "mainRole": "Hogyoku quest gate",
+      "keyContent": "True Aizen, Hogyoku Quest requirement, Transcendent Being title route",
+      "progressionUse": "Go here after the Hogyoku route is ready, not just because your level is high enough."
+    },
+    {
+      "name": "Academy Island",
+      "slug": "academy-island",
+      "level": "9000+",
+      "sea": "Endgame Islands",
+      "bosses": "Anos",
+      "mainRole": "High-level Anos route",
+      "keyContent": "Anos boss, Anos fighting style NPC, high-level training facility",
+      "progressionUse": "Use it as a high-level boss and fighting-style stop after earlier endgame routes."
+    },
+    {
+      "name": "JoJo Island",
+      "slug": "jojo-island",
+      "level": "10000+",
+      "sea": "Endgame Islands",
+      "bosses": "The World",
+      "mainRole": "The World route",
+      "keyContent": "The World boss, The World melee spec, Time Tyrant title route",
+      "progressionUse": "Visit for the DIO-inspired route and Sea 2-style endgame progression."
+    },
+    {
+      "name": "Judgement Island",
+      "slug": "judgement-island",
+      "level": "10000+",
+      "sea": "Endgame Islands",
+      "bosses": "Yamato",
+      "mainRole": "Yamato route",
+      "keyContent": "Yamato boss, Yamato sword, Yamato fighting style materials, Hogyoku Fragment progress",
+      "progressionUse": "Use it when your endgame route needs Yamato drops or fighting-style materials."
+    },
+    {
+      "name": "Valentine Island",
+      "slug": "valentine-island",
+      "level": "Endgame",
+      "sea": "Endgame Islands",
+      "bosses": "Madoka",
+      "mainRole": "Endgame seasonal boss",
+      "keyContent": "Madoka boss, Valentine event route, high-HP seasonal encounter",
+      "progressionUse": "Check it for event-linked endgame farming and Madoka boss progress."
+    },
+    {
+      "name": "Lawless Island",
+      "slug": "lawless-island",
+      "level": "12000+",
+      "sea": "Endgame Islands",
+      "bosses": "Atomic Boss",
+      "mainRole": "Atomic route",
+      "keyContent": "Atomic Boss, Atomic melee spec Seller, Arena Fighters, Abyss Sigils",
+      "progressionUse": "Use it when your build route points toward Atomic unlocks and Abyss Sigils."
+    },
+    {
+      "name": "Ninja Island",
+      "slug": "ninja-island",
+      "level": "12000+",
+      "sea": "Endgame Islands",
+      "bosses": "Strongest Shinobi (2B HP, respawns every 5m45s)",
+      "mainRole": "Strongest Shinobi route",
+      "keyContent": "Strongest Shinobi boss, Strongest Shinobi seller, Battlefield Warlord title",
+      "progressionUse": "Farm it for the late Shinobi route and title-gated unlock progress."
     }
   ]
 }

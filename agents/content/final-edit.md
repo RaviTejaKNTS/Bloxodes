@@ -70,6 +70,7 @@ Fail the final edit and rewrite before import if public copy contains:
 - AI-ish contrast filler: `not just`, `not only`
 - vague field-first claims without definition: `source explains`, `availability explains`, `rarity explains`, `seats explain`, `price explains`, `uses explain`, `field matters`, `value context`
 - unexplained values such as `Yes`, `No`, `3`, `common`, `available`, or `limited` in public prose without a visible label or gameplay explanation
+- catalog cards or tables that render raw long descriptions, raw HTML, raw `pros`/`cons`, nested object dumps, vague meta descriptions, or unlabeled values that do not help the player compare items
 - fake authority such as `players say`, `experts believe`, or `reports suggest` without a named source
 - inflated wording such as `serves as`, `stands as`, `pivotal`, `underscores`, `showcases`, `evolving landscape`
 - vague tails such as `highlighting its importance`, `making it valuable`, `ensuring a smoother experience`
@@ -96,6 +97,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - For catalog and game-catalog pages, `description_json` values are short section-level notes tied to the confirmed item-card grouping.
 - `description_md` does not repeat the same section notes already carried by `description_json`.
 - The confirmed `description_json` keys match the route's actual section labels. If the route renders `Other`, `Rarity`, or another unexpected group while the notes are written for different sections, the page fails final edit.
+- The confirmed card/table fields match the route's actual rendered fields. If the cards are still showing raw descriptions, raw `pros`/`cons`, nested stats, source HTML, vague meta text, or unexplained yes/no values, the page fails final edit even if the prose is good.
 - `controls_json` is filled only when controls are known and useful.
 - Only include fields the destination table owns.
 
@@ -105,8 +107,11 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 
 - `intro_md` explains what the collection is in the game.
 - If the page is sectioned, research notes record the confirmed section style before final writing.
+- Research notes record the confirmed card data shape before final writing: fields to show, fields to hide, and route changes needed.
 - The confirmation is explicit. A note saying the user asked to write the page is not section-style confirmation.
 - The route's actual section labels have been checked against `description_json`.
+- The route's actual card/table fields have been checked against the approved card data plan.
+- Cards and tables contain clean comparison data, not raw prose, raw arrays, nested objects, HTML, or unlabeled yes/no values.
 - `description_json` explains the confirmed sections in concise player language when section notes are used.
 - `description_md` gives whole-page context about mechanics, obtainment, value, availability, or player mistakes without repeating section-level notes.
 - `how_it_works_md` explains how to understand the item data in gameplay terms, not as field commands.
@@ -118,6 +123,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - The copy reflects local dataset fields and real item examples.
 - Confusing fields are defined in gameplay terms.
 - The item-card section style is based on real in-game meaning, not only the easiest dataset sort.
+- The item-card data shape is based on player usefulness, not on whatever fields happen to exist in the dataset.
 - `description_md` has enough depth when the system needs it. Do not compress complex systems into two vague paragraphs.
 - The page teaches the collection before asking the reader to compare values.
 - A multi-page job only starts after one approved gold-standard page.
@@ -154,4 +160,4 @@ Do not call content ready unless:
 - Public copy passes the hard blockers.
 - Important terms are defined or naturally clear.
 - Any remaining uncertainty is recorded in `research-notes.md`.
-- Catalog and game-catalog pages have explicit section confirmation, rendered-section proof, local DB readback after import, and local page proof before the work is called complete.
+- Catalog and game-catalog pages have explicit section confirmation, explicit card-data confirmation, rendered-section proof, rendered-card proof, local DB readback after import, and local page proof before the work is called complete.

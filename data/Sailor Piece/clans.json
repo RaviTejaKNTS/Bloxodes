@@ -12,11 +12,11 @@
     "columns": [
       "name",
       "tier",
-      "description",
-      "ability",
-      "bonuses",
-      "tags",
-      "wikiUrl"
+      "rarity",
+      "bestFor",
+      "bonusSummary",
+      "passive",
+      "requirement"
     ]
   },
   "items": [
@@ -44,7 +44,11 @@
       "sections": [],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/pride/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "PvP and boss damage",
+      "bonusSummary": "+20% stacked global damage at max heat",
+      "passive": "Hits build heat stacks; stacks reset after 6 seconds without damage.",
+      "requirement": null
     },
     {
       "name": "Monarch Clan",
@@ -70,7 +74,11 @@
       "sections": [],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/monarch/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Drop farming",
+      "bonusSummary": "+27% global damage and +40% HP",
+      "passive": "20% chance to gain +1 extra drop.",
+      "requirement": null
     },
     {
       "name": "Voldigoat Clan",
@@ -96,7 +104,11 @@
       "sections": [],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/voldigoat/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Tanky boss fighting",
+      "bonusSummary": "+32% damage and +50% HP",
+      "passive": "Enemies under 50% HP take 25% more damage.",
+      "requirement": null
     },
     {
       "name": "Frostbane Clan",
@@ -122,7 +134,11 @@
       "sections": [],
       "updatedAt": "2026-04-08",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/frostbane/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Ice Queen sword synergy",
+      "bonusSummary": "High damage, HP, and sword support",
+      "passive": "Built around Ice Update sword synergy.",
+      "requirement": "Ice Queen V move synergy"
     },
     {
       "name": "Devil Clan",
@@ -148,7 +164,11 @@
       "sections": [],
       "updatedAt": "2026-05-01",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/devil/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Current farming meta",
+      "bonusSummary": "+42% damage, +60% HP, +12% sword damage, +15% luck",
+      "passive": "30% chance to gain +1 extra drop.",
+      "requirement": null
     },
     {
       "name": "Eminence Clan",
@@ -174,7 +194,11 @@
       "sections": [],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/eminence/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Atomic Fighting Style route",
+      "bonusSummary": "+35% damage, +55% HP, +12% sword damage, +12% luck",
+      "passive": "25% chance to gain an extra drop.",
+      "requirement": "Atomic F move quest"
     },
     {
       "name": "Upper Clan",
@@ -200,14 +224,18 @@
       "sections": [],
       "updatedAt": "2026-04-01",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/upper/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Melee damage builds",
+      "bonusSummary": "+40% damage and +12% melee damage",
+      "passive": "Skill use can trigger a 25% extra-damage burst.",
+      "requirement": "Moon Slayer-style melee builds"
     },
     {
       "name": "Alter Clan",
       "slug": "alter-clan",
       "image": null,
       "tier": "S",
-      "rarity": "legendary",
+      "rarity": "Legendary",
       "type": null,
       "category": null,
       "description": "One of the strongest clans in the game, added in the Alter Update (March 16, 2026). After using 5 abilities (sword, combat style, or fruit), your next ability deals 1.5x damage. Combined with +35% base damage, +50% Max HP, and +10% Melee DMG, Alter rivals Pride and Monarch for top-tier status.",
@@ -226,7 +254,11 @@
       "sections": [],
       "updatedAt": "2026-03-16",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/alter/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Ability burst builds",
+      "bonusSummary": "+35% damage, +50% HP, +10% melee damage",
+      "passive": "After 5 abilities, the next ability deals 1.5x damage.",
+      "requirement": null
     },
     {
       "name": "Mugetsu Clan",
@@ -252,7 +284,11 @@
       "sections": [],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/mugetsu/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Survival builds",
+      "bonusSummary": "Damage, HP, lifesteal, and damage reduction",
+      "passive": "Balanced sustain passive value.",
+      "requirement": null
     },
     {
       "name": "Espada Clan",
@@ -278,7 +314,11 @@
       "sections": [],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/espada/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Burst timing builds",
+      "bonusSummary": "Combat bonus with ability-count trigger",
+      "passive": "Every 10th ability grants a short damage boost.",
+      "requirement": null
     },
     {
       "name": "Yamato Clan",
@@ -304,7 +344,11 @@
       "sections": [],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/yamato/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Mid-game gem farming",
+      "bonusSummary": "+17% damage, +27% HP, +5% melee damage, +20% gems",
+      "passive": "No special passive listed.",
+      "requirement": null
     },
     {
       "name": "Zoldyck Clan",
@@ -330,7 +374,11 @@
       "sections": [],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/zoldyck/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Mobility and gems",
+      "bonusSummary": "+15% damage, +20% HP, +20% sprint speed, +15% gems",
+      "passive": "No special passive listed.",
+      "requirement": null
     },
     {
       "name": "Raikage Clan",
@@ -356,7 +404,11 @@
       "sections": [],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/raikage/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Starter combat",
+      "bonusSummary": "Basic balanced combat bonuses",
+      "passive": "Simple stat value while saving rerolls.",
+      "requirement": null
     },
     {
       "name": "Sasaki Clan",
@@ -382,7 +434,11 @@
       "sections": [],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/clans/sasaki/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "bestFor": "Leveling",
+      "bonusSummary": "+7% damage, +10% HP, +10% XP",
+      "passive": "XP gain helps early leveling.",
+      "requirement": null
     }
   ]
 }

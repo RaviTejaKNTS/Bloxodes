@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Sailor Piece traits data",
-    "updatedAt": "2026-05-07",
+    "updatedAt": "2026-05-20",
     "sources": [
       {
         "label": "Sailor Piece Wiki - traits",
@@ -13,11 +13,10 @@
       "name",
       "tier",
       "rarity",
-      "description",
-      "stats",
-      "pros",
-      "cons",
-      "wikiUrl"
+      "damageMultiplier",
+      "defenseMultiplier",
+      "cooldownReduction",
+      "bestFor"
     ]
   },
   "items": [
@@ -108,7 +107,11 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/emperor/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "2.30x",
+      "defenseMultiplier": "1.60x",
+      "cooldownReduction": "30%",
+      "bestFor": "Best damage chase trait"
     },
     {
       "name": "Celestial",
@@ -197,7 +200,11 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/celestial/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "2.20x",
+      "defenseMultiplier": "1.65x",
+      "cooldownReduction": "30%",
+      "bestFor": "Endgame Secret trait builds"
     },
     {
       "name": "Singularity",
@@ -286,7 +293,11 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/singularity/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "2.10x",
+      "defenseMultiplier": "1.75x",
+      "cooldownReduction": "30%",
+      "bestFor": "Endgame Secret trait builds"
     },
     {
       "name": "Cataclysm",
@@ -375,7 +386,11 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/cataclysm/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "2.00x",
+      "defenseMultiplier": "1.70x",
+      "cooldownReduction": "30%",
+      "bestFor": "Endgame Secret trait builds"
     },
     {
       "name": "Overlord",
@@ -464,7 +479,11 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/overlord/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.90x",
+      "defenseMultiplier": "2.00x",
+      "cooldownReduction": "25%",
+      "bestFor": "Endgame Secret trait builds"
     },
     {
       "name": "Malevolent",
@@ -553,7 +572,11 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/malevolent/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.80x",
+      "defenseMultiplier": "1.50x",
+      "cooldownReduction": "20%",
+      "bestFor": "Keepable Mythic/Legendary rolls"
     },
     {
       "name": "Transcendent",
@@ -640,7 +663,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/transcendent/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.65x",
+      "defenseMultiplier": "1.75x",
+      "cooldownReduction": "20%",
+      "bestFor": "Keepable Mythic/Legendary rolls"
     },
     {
       "name": "Infinity",
@@ -727,7 +754,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/infinity/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.60x",
+      "defenseMultiplier": "1.70x",
+      "cooldownReduction": "20%",
+      "bestFor": "Keepable Mythic/Legendary rolls"
     },
     {
       "name": "Sovereign",
@@ -816,7 +847,11 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/sovereign/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.65x",
+      "defenseMultiplier": "1.85x",
+      "cooldownReduction": "15%",
+      "bestFor": "Keepable Mythic/Legendary rolls"
     },
     {
       "name": "Genesis",
@@ -904,7 +939,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/genesis/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.40x",
+      "defenseMultiplier": "1.40x",
+      "cooldownReduction": "15%",
+      "bestFor": "Usable filler while rerolling"
     },
     {
       "name": "Dominator",
@@ -991,7 +1030,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/dominator/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.50x",
+      "defenseMultiplier": "1.45x",
+      "cooldownReduction": "10%",
+      "bestFor": "Usable filler while rerolling"
     },
     {
       "name": "Unstoppable",
@@ -1079,7 +1122,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/unstoppable/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.45x",
+      "defenseMultiplier": "1.70x",
+      "cooldownReduction": "0%",
+      "bestFor": "Usable filler while rerolling"
     },
     {
       "name": "Godspeed",
@@ -1168,7 +1215,11 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/godspeed/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.55x",
+      "defenseMultiplier": "1.50x",
+      "cooldownReduction": "25%",
+      "bestFor": "Keepable Mythic/Legendary rolls"
     },
     {
       "name": "Overdrive",
@@ -1256,7 +1307,11 @@
       ],
       "updatedAt": "2026-03-15",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/overdrive/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.30x",
+      "defenseMultiplier": "1.35x",
+      "cooldownReduction": "10%",
+      "bestFor": "Usable filler while rerolling"
     },
     {
       "name": "Ascended",
@@ -1344,7 +1399,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/ascended/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.35x",
+      "defenseMultiplier": "1.40x",
+      "cooldownReduction": "0%",
+      "bestFor": "Usable filler while rerolling"
     },
     {
       "name": "Breaker",
@@ -1432,7 +1491,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/breaker/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.30x",
+      "defenseMultiplier": "1.55x",
+      "cooldownReduction": "0%",
+      "bestFor": "Temporary early trait"
     },
     {
       "name": "Sharpened",
@@ -1520,7 +1583,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/sharpened/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.35x",
+      "defenseMultiplier": "1.10x",
+      "cooldownReduction": "0%",
+      "bestFor": "Temporary early trait"
     },
     {
       "name": "Vicious",
@@ -1607,7 +1674,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/vicious/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.25x",
+      "defenseMultiplier": "1.15x",
+      "cooldownReduction": "5%",
+      "bestFor": "Temporary early trait"
     },
     {
       "name": "Predator",
@@ -1695,7 +1766,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/predator/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.30x",
+      "defenseMultiplier": "1.15x",
+      "cooldownReduction": "0%",
+      "bestFor": "Temporary early trait"
     },
     {
       "name": "Driven",
@@ -1782,7 +1857,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/driven/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.10x",
+      "defenseMultiplier": "1.15x",
+      "cooldownReduction": "5%",
+      "bestFor": "Temporary early trait"
     },
     {
       "name": "Balanced",
@@ -1870,7 +1949,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/balanced/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.20x",
+      "defenseMultiplier": "1.20x",
+      "cooldownReduction": "0%",
+      "bestFor": "Temporary early trait"
     },
     {
       "name": "Steady",
@@ -1957,7 +2040,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/steady/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.15x",
+      "defenseMultiplier": "1.25x",
+      "cooldownReduction": "0%",
+      "bestFor": "Temporary early trait"
     },
     {
       "name": "Agile",
@@ -2044,7 +2131,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/agile/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.00x",
+      "defenseMultiplier": "1.00x",
+      "cooldownReduction": "10%",
+      "bestFor": "Reroll quickly"
     },
     {
       "name": "Strong",
@@ -2132,7 +2223,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/strong/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.15x",
+      "defenseMultiplier": "1.05x",
+      "cooldownReduction": "0%",
+      "bestFor": "Reroll quickly"
     },
     {
       "name": "Tough",
@@ -2220,7 +2315,11 @@
       ],
       "updatedAt": "2026-03-27",
       "wikiUrl": "https://sailorpiece.org/wiki/traits/tough/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "damageMultiplier": "1.10x",
+      "defenseMultiplier": "1.15x",
+      "cooldownReduction": "0%",
+      "bestFor": "Reroll quickly"
     }
   ]
 }

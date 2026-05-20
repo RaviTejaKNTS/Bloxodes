@@ -69,7 +69,7 @@ This field is owned here. When writing a game wiki page later, do not recreate e
 
 ## Section Style Confirmation
 
-Before writing or updating a game-catalog page, research the collection and propose the item-card section style to the user.
+Before writing or updating a game-catalog page, research the collection and propose the item-card section style and card data shape to the user. This applies whether the page already exists or the page is being created fresh.
 
 Choose the grouping with the strongest in-game meaning. Rarity is often better than refresh date when rarity is how the game divides rewards. Source can be better than rarity when obtainment is the real player decision. Item type can be better when the collection mixes tools, vehicles, strollers, weapons, or materials. Other useful grouping axes can be event, location, shop, world, tier, level range, unlock route, crop type, resource type, or boss.
 
@@ -80,10 +80,15 @@ The proposal must include:
 - weaker alternatives and why they are not the first choice
 - planned `description_json` keys and one-to-three-sentence notes for each section
 - which parts stay in `description_md` as whole-page explanation
+- planned card fields and the player meaning of each one
+- raw fields that should be hidden from cards, such as long `description`, raw `pros`, raw `cons`, nested `stats`, source HTML, or unclear yes/no values
+- whether the dataset or route renderer needs an override so the approved fields actually appear
 
 Wait for explicit user confirmation before writing `final.json` or updating local Supabase. If the user changes the section style, use the confirmed style. A broad page request is not section approval. The notes should say what the user approved, such as `confirmed category sections: Walls and Floors`, instead of saying the user merely requested the page.
 
 After confirmation, check the route's real section output before writing to the database. The rendered card sections must match the `description_json` keys. If the dataset has a blank `rarity` field and the generic renderer would choose it over the intended category, fix the renderer or add the confirmed grouping override first. Public copy written for `Walls` and `Floors` is not ready while the page renders `Other` or `Rarity`.
+
+Check the route's real card output too. Cards should be clean reference surfaces, not mini articles. Keep pure data that helps a player compare items: source, price, rarity, chance, requirement, best use, role, strength, limit, availability, damage, seats, reward type, or a similar concrete field. Do not render raw long descriptions, raw pros/cons arrays, nested object dumps, unexplained yes/no values, or vague meta text. If a page needs pros and cons, translate them into short fields like `Strength`, `Limit`, `Best for`, or `Trade note`.
 
 ## Writing Pattern
 

@@ -12,12 +12,13 @@
     "columns": [
       "name",
       "tier",
-      "location",
-      "cost",
+      "catalogSection",
+      "role",
+      "unlockRoute",
+      "requirements",
       "maxLevel",
-      "maxBonus",
-      "description",
-      "wikiUrl"
+      "maxEffect",
+      "levelingRoute"
     ]
   },
   "items": [
@@ -104,7 +105,14 @@
       ],
       "updatedAt": "2026-04-23",
       "wikiUrl": "https://sailorpiece.org/wiki/haki/observation-haki/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "catalogSection": "First defensive unlock",
+      "role": "Dodge layer",
+      "unlockRoute": "Observation Master on Desert Island",
+      "requirements": "250,000 Cash and 300 Gems",
+      "maxLevel": "50",
+      "maxEffect": "10 dodges",
+      "levelingRoute": "Levels through combat use while active"
     },
     {
       "name": "Armament Haki",
@@ -189,7 +197,14 @@
       ],
       "updatedAt": "2026-03-14",
       "wikiUrl": "https://sailorpiece.org/wiki/haki/armament-haki/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "catalogSection": "Main damage unlock",
+      "role": "Damage layer",
+      "unlockRoute": "Haki Master on Snow Island",
+      "requirements": "Defeat 150 NPCs, hit 65 Z-key attacks, and land 750 punches",
+      "maxLevel": "100",
+      "maxEffect": "+75% damage",
+      "levelingRoute": "Levels through combat use while active"
     },
     {
       "name": "Conqueror's Haki",
@@ -280,7 +295,14 @@
       ],
       "updatedAt": "2026-03-26",
       "wikiUrl": "https://sailorpiece.org/wiki/haki/conquerors-haki/",
-      "sourceImageUrl": null
+      "sourceImageUrl": null,
+      "catalogSection": "Endgame Haki unlock",
+      "role": "Permanent damage layer",
+      "unlockRoute": "Conqueror Haki Trainer on Shibuya Station",
+      "requirements": "Armament Lv. 40, Observation Lv. 25, Ascension Lv. 5, and 1 Conqueror Fragment",
+      "maxLevel": "35",
+      "maxEffect": "+35% permanent damage",
+      "levelingRoute": "Levels through combat use after unlock"
     }
   ]
 }

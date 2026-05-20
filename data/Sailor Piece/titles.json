@@ -12,10 +12,13 @@
     "columns": [
       "name",
       "tier",
+      "titleRole",
       "bonus",
-      "category",
-      "description",
-      "tags"
+      "unlockRoute",
+      "requirement",
+      "dropOrPity",
+      "availability",
+      "bestFor"
     ]
   },
   "items": [
@@ -39,7 +42,13 @@
         "Damage",
         "anti-magic-update",
         "crystal-defense"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "Crystal Defense boss waves on Punch Island",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Dragon Queen",
@@ -61,7 +70,13 @@
         "Damage",
         "sea-2",
         "damage"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "Sea Serpent / Kraken Sea Beast route",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Cosmic Being",
@@ -83,7 +98,13 @@
         "Damage",
         "sea-2",
         "damage"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "Cosmic Being World Boss",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Golden Tyrant",
@@ -105,7 +126,13 @@
         "Farming",
         "farming",
         "cash"
-      ]
+      ],
+      "titleRole": "Farming",
+      "unlockRoute": "Farming title route",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "XP, Money, and Gems farming"
     },
     {
       "name": "Destiny Marked",
@@ -127,7 +154,13 @@
         "Luck",
         "luck",
         "boss-farming"
-      ]
+      ],
+      "titleRole": "Luck",
+      "unlockRoute": "Boss-kill requirement route",
+      "requirement": "5,000 boss kills",
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Rare drop farming"
     },
     {
       "name": "Celestial Favor",
@@ -149,7 +182,13 @@
         "Luck",
         "luck",
         "boss-farming"
-      ]
+      ],
+      "titleRole": "Luck",
+      "unlockRoute": "Boss-kill requirement route",
+      "requirement": "5,000 boss kills",
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Rare drop farming"
     },
     {
       "name": "The One",
@@ -159,7 +198,7 @@
       "category": "Damage",
       "type": null,
       "effect": null,
-      "bonus": null,
+      "bonus": "Massive Damage bonus",
       "recipe": null,
       "description": "A supreme damage title — one of the strongest damage titles in the game.",
       "stats": {
@@ -171,7 +210,13 @@
         "Damage",
         "damage",
         "endgame"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "Escanor / Boss Rush route",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Transcendent Being",
@@ -193,7 +238,13 @@
         "Damage",
         "damage",
         "pvp"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "True Aizen boss route",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Frost Empress",
@@ -203,7 +254,7 @@
       "category": "Damage",
       "type": null,
       "effect": "+87.5% Damage. Note: this title is also the required crafting material for the Ice Queen sword — making it mandatory for the Ice Update meta. Source: Pro Game Guides + GAMES.GG + u7buy (3-source, 2026-04-09).",
-      "bonus": "+87.5% Damage. Note: this title is also the required crafting material for the Ice Queen sword — making it mandatory for the Ice Update meta. Source: Pro Game Guides + GAMES.GG + u7buy (3-source, 2026-04-09).",
+      "bonus": "+87.5% Damage",
       "recipe": null,
       "description": "+87.5% Damage. Note: this title is also the required crafting material for the Ice Queen sword — making it mandatory for the Ice Update meta. Source: Pro Game Guides + GAMES.GG + u7buy (3-source, 2026-04-09).",
       "stats": {
@@ -215,7 +266,13 @@
         "Damage",
         "ice-update",
         "boss-title"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "Frost Boss route",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Battlefield Warlord",
@@ -237,7 +294,13 @@
         "Damage",
         "damage",
         "boss-farming"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "Strongest Shinobi boss route",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Eminence Incarnate",
@@ -259,7 +322,13 @@
         "Damage",
         "damage",
         "boss-farming"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "Atomic Boss route",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Time Tyrant",
@@ -281,7 +350,13 @@
         "Damage",
         "sea-2",
         "damage"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "The World boss route",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Ancient Mage",
@@ -303,7 +378,13 @@
         "Damage",
         "sea-2",
         "damage"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "Great Mage boss route",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Treasure Hunter",
@@ -325,7 +406,13 @@
         "Farming",
         "farming",
         "loot"
-      ]
+      ],
+      "titleRole": "Farming",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Grinding and collection progress"
     },
     {
       "name": "Blessed Sovereign",
@@ -347,7 +434,13 @@
         "Luck",
         "luck",
         "endgame"
-      ]
+      ],
+      "titleRole": "Luck",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Rare drop farming"
     },
     {
       "name": "Living Weapon",
@@ -369,7 +462,13 @@
         "Damage",
         "damage",
         "endgame"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "King of Beginning",
@@ -391,7 +490,13 @@
         "Damage",
         "damage",
         "anos"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Eminence In Shadow",
@@ -413,7 +518,13 @@
         "Damage",
         "damage",
         "cid"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Strongest Sorcerer",
@@ -435,7 +546,13 @@
         "Damage",
         "damage",
         "gojo"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Soul Reaper",
@@ -457,7 +574,13 @@
         "Damage",
         "damage",
         "ichigo"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Star Maiden",
@@ -479,7 +602,13 @@
         "Damage",
         "damage",
         "madoka"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Demon Lord",
@@ -501,7 +630,13 @@
         "Damage",
         "damage",
         "rimuru"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Golden King",
@@ -523,7 +658,13 @@
         "Damage",
         "damage",
         "gilgamesh"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Demon King",
@@ -545,7 +686,13 @@
         "Damage",
         "damage",
         "endgame"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "King of Shadows",
@@ -567,7 +714,13 @@
         "Damage",
         "damage",
         "jin-woo"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Corrupt Tyrant",
@@ -589,7 +742,13 @@
         "Damage",
         "damage",
         "alter-update"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": "Alter Update boss route",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage title slot"
     },
     {
       "name": "Egg Seeker",
@@ -611,7 +770,13 @@
         "Farming",
         "sea-2",
         "easter-event"
-      ]
+      ],
+      "titleRole": "Farming",
+      "unlockRoute": "Easter event egg hunt",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": "Easter event ended",
+      "bestFor": "Grinding and collection progress"
     },
     {
       "name": "Collector",
@@ -633,7 +798,13 @@
         "Farming",
         "farming",
         "collection"
-      ]
+      ],
+      "titleRole": "Farming",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Grinding and collection progress"
     },
     {
       "name": "Hoarder",
@@ -655,7 +826,13 @@
         "Farming",
         "farming",
         "collection"
-      ]
+      ],
+      "titleRole": "Farming",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Grinding and collection progress"
     },
     {
       "name": "Cupid's Chosen",
@@ -677,7 +854,13 @@
         "Farming",
         "farming",
         "event"
-      ]
+      ],
+      "titleRole": "Farming",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": "Seasonal event title",
+      "bestFor": "Grinding and collection progress"
     },
     {
       "name": "Blessed One",
@@ -699,7 +882,13 @@
         "Luck",
         "luck",
         "drops"
-      ]
+      ],
+      "titleRole": "Luck",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Rare drop farming"
     },
     {
       "name": "Chosen One",
@@ -721,7 +910,13 @@
         "Luck",
         "luck",
         "boss-farming"
-      ]
+      ],
+      "titleRole": "Luck",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Rare drop farming"
     },
     {
       "name": "Shadow Monarch",
@@ -743,7 +938,13 @@
         "Damage",
         "damage",
         "pvp"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Dragon Slayer",
@@ -765,7 +966,13 @@
         "Damage",
         "damage",
         "boss-kills"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Manipulator",
@@ -787,7 +994,13 @@
         "Damage",
         "damage",
         "boss-kills"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Vampire King",
@@ -809,7 +1022,13 @@
         "Damage",
         "damage",
         "alucard"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Disgraced One",
@@ -828,7 +1047,13 @@
       "tags": [
         "Damage",
         "damage"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Warrior",
@@ -850,7 +1075,13 @@
         "Farming",
         "farming",
         "mid-game"
-      ]
+      ],
+      "titleRole": "Farming",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Grinding and collection progress"
     },
     {
       "name": "Champion",
@@ -872,7 +1103,13 @@
         "Farming",
         "farming",
         "mid-game"
-      ]
+      ],
+      "titleRole": "Farming",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Grinding and collection progress"
     },
     {
       "name": "Fortune Seeker",
@@ -894,7 +1131,13 @@
         "Luck",
         "luck",
         "farming"
-      ]
+      ],
+      "titleRole": "Luck",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Rare drop farming"
     },
     {
       "name": "Lucky Star",
@@ -916,7 +1159,13 @@
         "Luck",
         "luck",
         "boss-farming"
-      ]
+      ],
+      "titleRole": "Luck",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Rare drop farming"
     },
     {
       "name": "Honored One",
@@ -938,7 +1187,13 @@
         "Damage",
         "damage",
         "pvp"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Cursed King",
@@ -960,7 +1215,13 @@
         "Damage",
         "damage",
         "pvp"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     },
     {
       "name": "Santa Helper",
@@ -982,7 +1243,13 @@
         "Farming",
         "farming",
         "event"
-      ]
+      ],
+      "titleRole": "Farming",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": "Seasonal event title",
+      "bestFor": "Grinding and collection progress"
     },
     {
       "name": "Apprentice",
@@ -1004,7 +1271,13 @@
         "Farming",
         "farming",
         "beginner"
-      ]
+      ],
+      "titleRole": "Farming",
+      "unlockRoute": "Early farming progression",
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Grinding and collection progress"
     },
     {
       "name": "Lucky Novice",
@@ -1026,7 +1299,13 @@
         "Luck",
         "luck",
         "beginner"
-      ]
+      ],
+      "titleRole": "Luck",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Rare drop farming"
     },
     {
       "name": "Blade Master",
@@ -1048,7 +1327,13 @@
         "Damage",
         "damage",
         "beginner"
-      ]
+      ],
+      "titleRole": "Damage",
+      "unlockRoute": null,
+      "requirement": null,
+      "dropOrPity": null,
+      "availability": null,
+      "bestFor": "Damage build slot"
     }
   ]
 }
