@@ -42,6 +42,8 @@ This system follows a few working patterns:
 - Keep the generated workflow to two files per page: `research-notes.md` and `final.json`.
 - Make `research-notes.md` read like plain-language topic research, not a field checklist.
 - Use `description_json` as short section-level context when catalog cards are divided into meaningful in-game groups.
+- Add a mandatory FLOW pass after the first-pass `final.json` for catalog, game-catalog, article, and tool pages with body copy.
+- Keep `description_md` focused on the whole mechanic or collection, and keep section-specific card notes in `description_json`.
 - Write the guidance itself in simple editorial language. Be clear and specific, but avoid making the docs sound like robotic command stacks. Use examples only when they teach a reusable pattern.
 
 The structure is adapted from the iGeeks editorial workflow, but changed for Bloxodes' public database model instead of WordPress posts.
@@ -53,12 +55,13 @@ Reusable guidance should live in git under `agents/content/`.
 Suggested structure:
 
 ```text
-agents/content/
-  PLAN.md
-  PROCESS.md
-  writing-core.md
-  research-policy.md
-  final-edit.md
+  agents/content/
+    PLAN.md
+    PROCESS.md
+    writing-core.md
+    research-policy.md
+    flow-pass.md
+    final-edit.md
   page-types/
     catalog-pages.md
     game-catalog-pages.md
@@ -74,6 +77,7 @@ Implemented files:
 - `agents/content/PROCESS.md`
 - `agents/content/writing-core.md`
 - `agents/content/research-policy.md`
+- `agents/content/flow-pass.md`
 - `agents/content/final-edit.md`
 - `agents/content/page-types/catalog-pages.md`
 - `agents/content/page-types/game-catalog-pages.md`
@@ -183,16 +187,19 @@ Use this flow for every serious rewrite:
 2. Research the topic deeply in plain language and save it in `research-notes.md`.
 3. Confirm the notes explain what the thing is, how it works, important terms, item groups, real examples, and common mistakes.
 4. For catalog and game-catalog pages, propose the item-card section style and wait for user confirmation.
-5. Write researched, final-shaped content using the relevant page-specific skill.
-6. Run the Bloxodes final edit gate inside the same workflow.
-7. Save approved output to `final.json`.
-8. Push only the approved final content into local Supabase.
-9. Preview locally.
-10. Promote to production only through the normal controlled Supabase process.
+5. Write researched first-pass content using the relevant page-specific skill.
+6. Run the FLOW pass and rewrite the public fields so the page reads in a clear player-facing order.
+7. Run the Bloxodes final edit gate inside the same workflow.
+8. Save approved output to `final.json`.
+9. Push only the approved final content into local Supabase.
+10. Preview locally.
+11. Promote to production only through the normal controlled Supabase process.
 
 For catalog and game catalog work, apply this flow to one page first. Do not rewrite a whole game at once until the first page becomes the approved standard.
 
 When catalog cards are divided into sections, choose the grouping that has the strongest in-game meaning. Rarity, item type, source, event, location, shop, tier, world, and unlock route are all possible. Do not default to the easiest dataset field if another grouping helps players understand the collection better. Put the short section setup in `description_json`, then keep `description_md` focused on whole-page mechanics instead of repeating those notes.
+
+For catalog and game-catalog pages, the FLOW pass is not optional. It should check whether `description_md` explains the whole page, whether the page has a useful action/how-to/use section when the topic has player action behind it, whether tables or numbered steps would explain faster than paragraphs, and whether the headings guide the reader instead of reflecting database fields.
 
 ## Core Writing Principles
 

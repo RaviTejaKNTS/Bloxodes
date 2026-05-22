@@ -10,6 +10,8 @@ Game catalog pages should turn local structured datasets into readable player re
 
 The writing standard is closer to a useful wiki explanation than a database caption. The page does not need to become a full article, but it must teach the system before it asks the reader to compare items.
 
+The data standard is just as important as the writing standard. A game catalog page should not polish stale data. If research finds missing items, wrong counts, missing images, or fields that do not support useful cards, fix or explicitly approve the data state before final writing.
+
 ## Required Context
 
 Before writing, inspect:
@@ -25,6 +27,8 @@ Check item examples, not just field names. If research notes do not include real
 ## One-Page Standard
 
 For game catalog work, build one approved page before scaling to a batch. Do not rewrite all collections in one script until the first page proves the depth, tone, and structure.
+
+The gold-standard page must prove the whole workflow: research quality, data completeness, image coverage, card structure, writing, local import, and rendered verification.
 
 ## Catalog Code Rules
 
@@ -67,14 +71,40 @@ Use the same content fields as normal catalog pages, but write them into `wiki_c
 
 This field is owned here. When writing a game wiki page later, do not recreate every collection blurb there; the wiki hub should read the already-researched `wiki_md` from each catalog page. If the blurb is weak, come back through this game-catalog workflow for that one collection.
 
+## Data And Image Audit
+
+Before section approval or final writing, audit the actual collection data.
+
+For existing pages, compare:
+
+- local dataset item count
+- rendered card count
+- current page title count
+- source counts found during research
+- local image count and missing image count
+
+For new game pages, create or update the local dataset as part of the workflow. The model should gather the item list, useful card fields, and image paths before writing final copy. If repeatable collection will matter later, prefer a collector script under `scripts/catalog/collect-<game>-data.ts` instead of one-off manual data.
+
+Write the audit in `research-notes.md`. It should say which data files were checked, which sources disagree, what items are missing or extra, which images are missing, and whether the page is `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`.
+
+If sources disagree, do not pretend the local count is correct. Use judgment, but make the disagreement visible:
+
+- If multiple reliable sources list more Sailor Piece islands than the local 21-row dataset, list the extra island names and mark the page `needs dataset update`.
+- If Blox Fruits accessories have local image files but cards are not showing images, mark it `needs image wiring`, not a writing issue.
+- If a source count includes removed, admin-only, duplicate, or unreleased entries, explain why the local dataset may intentionally differ.
+
+After the user approves the data action, update the local dataset and image wiring before writing `final.json`. Public copy should match the final local dataset, not the stale dataset from the start of research.
+
 ## Section Style Confirmation
 
-Before writing or updating a game-catalog page, research the collection and propose the item-card section style and card data shape to the user. This applies whether the page already exists or the page is being created fresh.
+Before writing or updating a game-catalog page, research the collection and propose the data action, item-card section style, and card data shape to the user. This applies whether the page already exists or the page is being created fresh.
 
 Choose the grouping with the strongest in-game meaning. Rarity is often better than refresh date when rarity is how the game divides rewards. Source can be better than rarity when obtainment is the real player decision. Item type can be better when the collection mixes tools, vehicles, strollers, weapons, or materials. Other useful grouping axes can be event, location, shop, world, tier, level range, unlock route, crop type, resource type, or boss.
 
 The proposal must include:
 
+- dataset status: local count, source count, rendered count, title count, image count, and missing image count
+- data update plan if needed: missing items to add, stale fields to clean, image work to do, and whether a collector script is needed
 - recommended grouping axis
 - why that axis helps players understand the collection long-term
 - weaker alternatives and why they are not the first choice
@@ -84,7 +114,7 @@ The proposal must include:
 - raw fields that should be hidden from cards, such as long `description`, raw `pros`, raw `cons`, nested `stats`, source HTML, or unclear yes/no values
 - whether the dataset or route renderer needs an override so the approved fields actually appear
 
-Wait for explicit user confirmation before writing `final.json` or updating local Supabase. If the user changes the section style, use the confirmed style. A broad page request is not section approval. The notes should say what the user approved, such as `confirmed category sections: Walls and Floors`, instead of saying the user merely requested the page.
+Wait for explicit user confirmation before writing `final.json` or updating local Supabase. If the dataset needs changes, update the local dataset after approval and before writing final copy. If the user changes the section style, use the confirmed style. A broad page request is not data or section approval. The notes should say what the user approved, such as `confirmed data update: add missing islands, then group by sea`, instead of saying the user merely requested the page.
 
 After confirmation, check the route's real section output before writing to the database. The rendered card sections must match the `description_json` keys. If the dataset has a blank `rarity` field and the generic renderer would choose it over the intended category, fix the renderer or add the confirmed grouping override first. Public copy written for `Walls` and `Floors` is not ready while the page renders `Other` or `Rarity`.
 
@@ -107,6 +137,21 @@ Keep it concrete. A pets catalog, crops catalog, boss catalog, and vehicle catal
 Before writing public copy, make an outline in `research-notes.md`. The outline must name the reader questions, the section order, the details to cut, and the formatting plan. If the page has a major acquisition question, such as `How to get eggs`, `How to unlock weapons`, or `How to farm materials`, that section should usually appear before deeper caveats.
 
 For sectioned catalog pages, the outline must separate `description_json` and `description_md` jobs. `description_json` sets up each item section near the cards. `description_md` explains the full game system, such as where the system lives in-game, how players obtain items, how prices or odds work, and what mistakes apply across the whole collection. Do not repeat the same section notes in both fields.
+
+After the first-pass `final.json`, run the FLOW pass before final edit. This pass should reshape `description_md`, `how_it_works_md`, FAQs, and headings until the page reads like a useful player explanation instead of a stack of facts. The pass must rewrite weak structure, not only check for banned phrases.
+
+For game catalog pages, `description_md` should almost always contain one practical action section. The action depends on the collection: how to train Instinct, how to reach islands, how to farm materials, how to unlock swords, how to roll gifts, how to hatch eggs, how to grow crops, how to equip accessories, or how to compare old rewards before trading.
+
+If the collection has no direct action, explain the nearest player behavior. A title color page can explain how title-count milestones unlock colors. A special-title page can explain why most entries are not normal player goals. A cosmetic page can explain where the cosmetic applies and how players usually encounter it.
+
+The page should use formatting when it helps:
+
+- numbered lists for steps, unlock paths, or training routes
+- tables for repeated comparisons such as gift odds, source types, sea access, or rarity meaning
+- bullets for short rules, mistakes, and examples
+- paragraphs for the story that connects those pieces
+
+Do not let a game catalog page land on random sections because the data had convenient fields. A Blox Fruits Instinct Levels page should explain how to train Instinct, what the 2824 and 5000 EXP milestones mean, and how normal Instinct connects to Instinct V2. It should not feel like three card notes were enlarged into article headings.
 
 Do not make the reader sprint through the system. Explain the collection first, then separate obtainment, comparison, availability, trading, crafting, or value notes into their own paragraphs when those ideas are not directly connected.
 
@@ -162,12 +207,24 @@ Examples:
 
 Avoid unexplained values like `Yes`, `No`, `3`, or `common` without a visible label.
 
+## Mandatory FLOW Pass
+
+Before import, confirm the FLOW pass has happened and record it in `research-notes.md`. A simple line is enough when the rewrite is clean:
+
+```markdown
+FLOW pass: rewrote description_md around whole-page mechanics, added a how-to section, kept section-specific notes in description_json, and checked headings for reader flow.
+```
+
+If the pass changes the outline, update `final.json` directly. Do not create another draft file.
+
 ## Image Rules
 
 - Use local dataset images when the route supports them.
 - Do not add `wiki_image_urls` or per-page image arrays to Supabase.
 - If images are missing, record the gap in research notes.
 - Do not invent image paths.
+- If images exist locally but the page does not render them, treat that as a renderer or dataset-wiring issue and fix it before final verification.
+- If images are expected but not available, count the missing images and get approval to continue without them or to gather them first.
 
 ## Copy By Collection Type
 
@@ -211,12 +268,18 @@ Focus on start/end times, event status, rewards, and what changes while the even
 ## Final Checks
 
 - Did you inspect actual item examples?
+- Did `research-notes.md` include a data and image audit?
+- Do local dataset count, rendered card count, page title count, and source count match or have an intentional explanation?
+- If research found missing items, did you update the local dataset or get explicit approval to proceed without them?
+- If images matter, did you count missing images and verify existing local images are wired?
 - Did you propose the item-card section style after research and get user confirmation before final writing?
 - Is the section grouping based on real in-game meaning instead of only the easiest dataset field?
 - Did you verify the route actually renders the confirmed section labels?
 - Does `description_json` give short useful setup notes for each confirmed section?
 - After local import, did the database row read back with the updated `description_json`, and did the local page render those notes?
 - Does `description_md` stay focused on whole-page mechanics instead of repeating section notes?
+- Did the FLOW pass rewrite `description_md`, headings, and transitions before final edit?
+- Does `description_md` include a useful action/how-to/use section, or do notes explain why the collection is passive?
 - Did you explain unclear fields?
 - Did you define the game meaning of any field used as advice?
 - Does the page teach the system before it talks about comparison?

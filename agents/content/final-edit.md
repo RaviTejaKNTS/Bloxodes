@@ -4,6 +4,8 @@ Use this as a mandatory quality gate during the same writing workflow and again 
 
 The final edit is internal. It does not create `review.md`; it either improves `final.json`, marks the work blocked, or records unresolved risk inside `research-notes.md`.
 
+For catalog, game-catalog, article, and tool pages with meaningful body copy, the final edit assumes the FLOW pass has already rewritten the draft. If the FLOW pass has not happened, stop and run `agents/content/flow-pass.md` first. Final edit is the gate after flow, not a replacement for flow.
+
 ## Goal
 
 Prevent weak content from leaving the workflow. The page-specific skill should already write in Bloxodes voice; this file confirms the result is practical, specific, human, and shaped for the target database fields.
@@ -32,16 +34,18 @@ A vehicle from the current car showroom can be bought again with Bucks or Robux.
 
 1. Re-read the player-facing research sections in `research-notes.md`.
 2. Confirm the page type and target fields.
-3. Remove generic opening lines.
-4. Remove unsupported claims.
-5. Cut repeated ideas across fields.
-6. Replace broad field claims with exact game or dataset details.
-7. Keep the useful answer close to the top.
-8. Add missing context where the copy jumps too quickly between mechanics, fields, or item groups.
-9. Split paragraphs that mix unrelated concepts.
-10. Check headings are clear sentence-style fragments, not rigid one-word labels.
-11. Check Markdown and JSON are valid.
-12. Check the final output can be pasted or upserted without reshaping.
+3. For catalog and game-catalog pages, confirm the data and image audit exists and is resolved.
+4. Confirm the FLOW pass happened when the page has `description_md`, `how_it_works_md`, article body, or tool explanation.
+5. Remove generic opening lines.
+6. Remove unsupported claims.
+7. Cut repeated ideas across fields.
+8. Replace broad field claims with exact game or dataset details.
+9. Keep the useful answer close to the top.
+10. Add missing context where the copy jumps too quickly between mechanics, fields, or item groups.
+11. Split paragraphs that mix unrelated concepts.
+12. Check headings are clear sentence-style fragments, not rigid one-word labels.
+13. Check Markdown and JSON are valid.
+14. Check the final output can be pasted or upserted without reshaping.
 
 ## Understanding Questions
 
@@ -60,6 +64,7 @@ For every paragraph, ask:
 - Does this paragraph stay on one concept?
 - Does the paragraph move too fast for a new player to follow?
 - Is the heading repeated in the first line below it?
+- Does the section exist for a reader reason, or only because a field or row made the writer think of it?
 
 ## Hard Fail Patterns
 
@@ -71,6 +76,12 @@ Fail the final edit and rewrite before import if public copy contains:
 - vague field-first claims without definition: `source explains`, `availability explains`, `rarity explains`, `seats explain`, `price explains`, `uses explain`, `field matters`, `value context`
 - unexplained values such as `Yes`, `No`, `3`, `common`, `available`, or `limited` in public prose without a visible label or gameplay explanation
 - catalog cards or tables that render raw long descriptions, raw HTML, raw `pros`/`cons`, nested object dumps, vague meta descriptions, or unlabeled values that do not help the player compare items
+- catalog research that found missing items, mismatched counts, or missing expected images but continued to final copy without a resolved data action
+- catalog or game-catalog final copy that skipped the FLOW pass
+- catalog `description_md` that repeats card-section notes instead of explaining the whole collection or mechanic
+- catalog `description_md` with no useful action/use/how-to section when the collection has a clear player action behind it
+- random headings that do not create a clear reader path
+- count-based titles that disagree with local dataset or rendered card counts without an intentional explanation
 - fake authority such as `players say`, `experts believe`, or `reports suggest` without a named source
 - inflated wording such as `serves as`, `stands as`, `pivotal`, `underscores`, `showcases`, `evolving landscape`
 - vague tails such as `highlighting its importance`, `making it valuable`, `ensuring a smoother experience`
@@ -96,6 +107,9 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - `description_json` values are useful ordered blocks, not raw paragraphs dumped because Markdown felt hard.
 - For catalog and game-catalog pages, `description_json` values are short section-level notes tied to the confirmed item-card grouping.
 - `description_md` does not repeat the same section notes already carried by `description_json`.
+- `description_md` has gone through the FLOW pass and reads as whole-page explanation, not a pile of unrelated mini sections.
+- `description_md` includes a useful action/use/how-to section when the catalog item type has a player action behind it.
+- For catalog and game-catalog pages, the data and image audit in `research-notes.md` is resolved before import. Missing items, stale fields, and image gaps must be fixed or explicitly accepted.
 - The confirmed `description_json` keys match the route's actual section labels. If the route renders `Other`, `Rarity`, or another unexpected group while the notes are written for different sections, the page fails final edit.
 - The confirmed card/table fields match the route's actual rendered fields. If the cards are still showing raw descriptions, raw `pros`/`cons`, nested stats, source HTML, vague meta text, or unexplained yes/no values, the page fails final edit even if the prose is good.
 - `controls_json` is filled only when controls are known and useful.
@@ -106,6 +120,8 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 ### Catalog
 
 - `intro_md` explains what the collection is in the game.
+- `research-notes.md` includes local item count, source count, rendered count, title count, image coverage, and any missing/extra/stale items.
+- If the data audit found missing items or missing images, the local dataset/image wiring was updated or the remaining gap was explicitly accepted.
 - If the page is sectioned, research notes record the confirmed section style before final writing.
 - Research notes record the confirmed card data shape before final writing: fields to show, fields to hide, and route changes needed.
 - The confirmation is explicit. A note saying the user asked to write the page is not section-style confirmation.
@@ -114,6 +130,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - Cards and tables contain clean comparison data, not raw prose, raw arrays, nested objects, HTML, or unlabeled yes/no values.
 - `description_json` explains the confirmed sections in concise player language when section notes are used.
 - `description_md` gives whole-page context about mechanics, obtainment, value, availability, or player mistakes without repeating section-level notes.
+- `description_md` includes at least one clear action section, such as how to get, find, unlock, farm, grow, hatch, roll, craft, equip, travel, compare, or use the items, unless research notes explain why the collection is passive.
 - `how_it_works_md` explains how to understand the item data in gameplay terms, not as field commands.
 - `wiki_md` is short but still concrete.
 - FAQs are real player questions.
@@ -121,10 +138,14 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 ### Game Catalog
 
 - The copy reflects local dataset fields and real item examples.
+- The copy reflects the final local dataset after any approved data update, not the stale dataset from the start of research.
+- The title count, dataset count, and rendered card count align or have a written reason for the difference.
+- Images are present when expected, or the missing image count is recorded and accepted.
 - Confusing fields are defined in gameplay terms.
 - The item-card section style is based on real in-game meaning, not only the easiest dataset sort.
 - The item-card data shape is based on player usefulness, not on whatever fields happen to exist in the dataset.
 - `description_md` has enough depth when the system needs it. Do not compress complex systems into two vague paragraphs.
+- The FLOW pass has rewritten awkward section order, random headings, and choppy transitions before final edit.
 - The page teaches the collection before asking the reader to compare values.
 - A multi-page job only starts after one approved gold-standard page.
 
@@ -156,8 +177,10 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 Do not call content ready unless:
 
 - `research-notes.md` has real human topic research before implementation notes.
+- Catalog and game-catalog research includes a resolved data and image audit.
+- Catalog, game-catalog, article, and tool pages with body copy have gone through the FLOW pass.
 - `final.json` is valid JSON in the target table shape.
 - Public copy passes the hard blockers.
 - Important terms are defined or naturally clear.
 - Any remaining uncertainty is recorded in `research-notes.md`.
-- Catalog and game-catalog pages have explicit section confirmation, explicit card-data confirmation, rendered-section proof, rendered-card proof, local DB readback after import, and local page proof before the work is called complete.
+- Catalog and game-catalog pages have explicit data-state confirmation, explicit section confirmation, explicit card-data confirmation, rendered-count proof, rendered-section proof, rendered-card proof, image proof when images matter, local DB readback after import, and local page proof before the work is called complete.

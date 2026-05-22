@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { ForgeCatalogViewShell } from "./ForgeCatalogViewShell";
 
 const FALLBACK_IMAGE = "/og-image.png";
@@ -30,6 +31,7 @@ type ForgeCatalogSection = {
   label: string;
   items: ForgeCatalogItem[];
   noteHtml?: string | null;
+  noteNodes?: ReactNode[] | null;
 };
 
 type ForgeCatalogViewProps = {
@@ -51,6 +53,97 @@ type BooleanishValue = {
 };
 
 const CARD_STAT_OVERRIDES: Record<string, string[]> = {
+  "blox-fruits-accessories": ["displaySea", "bestFor", "damage", "defense", "mobility", "utility"],
+  "blox-fruits-fruits": ["displayType", "moneyPrice", "permanentPrice", "awakeningCost", "status", "baseFruit"],
+  "blox-fruits-swords": ["displaySea", "sourceRoute", "displayCost", "progressionUse"],
+  "blox-fruits-fighting-styles": [
+    "sourceTeacher",
+    "costSummary",
+    "masteryGate",
+    "extraUnlock",
+    "progressionRole",
+    "bestFor"
+  ],
+  "blox-fruits-materials": ["displaySea", "sourceRoute", "use", "farmRoute", "craftCost"],
+  "blox-fruits-races": ["unlockRoute", "rerollStatus", "bestFor", "mainStrength", "mainLimit", "v4Trial", "v4Title"],
+  "blox-fruits-bosses": ["displaySea", "location", "level", "respawnAccess", "dropsRewards", "routeUse"],
+  "blox-fruits-enemies": [
+    "seaStage",
+    "level",
+    "islandRegion",
+    "questSource",
+    "elementalBladeLevel",
+    "dropsRewards",
+    "accessRespawn",
+    "grindNote"
+  ],
+  "blox-fruits-locations": ["displaySea", "levelRange", "locationType", "routeRole", "mainNpcs", "accessTravel", "purpose"],
+  "blox-fruits-quests": [
+    "displaySea",
+    "levelRequirement",
+    "islandArea",
+    "questGiverName",
+    "objective",
+    "targetType",
+    "expReward",
+    "moneyReward",
+    "routeNote"
+  ],
+  "blox-fruits-sea-events": [
+    "dangerLevel",
+    "displayArea",
+    "spawnAccess",
+    "mainReward",
+    "requiredSetup",
+    "crewNote",
+    "farmRoute"
+  ],
+  "blox-fruits-abilities": [
+    "unlockRoute",
+    "displayCost",
+    "teacherSource",
+    "levelMasteryRequirement",
+    "combatTravelRole",
+    "upgradePath",
+    "keyUse",
+    "limitation"
+  ],
+  "blox-fruits-aura-stages": ["displayStage", "coverage", "auraExpNeeded", "bonusEffect", "progressionNote"],
+  "blox-fruits-aura-visuals": ["visualStage", "bodyCoverage", "armsVisual", "legsVisual", "statEffect", "equipUseNote"],
+  "blox-fruits-boats": [
+    "sourceAccess",
+    "displayPrice",
+    "displayHealth",
+    "displaySeats",
+    "displayCannons",
+    "displaySpeed",
+    "seaEventRole",
+    "specialUse"
+  ],
+  "blox-fruits-guns": [
+    "displaySea",
+    "sourceRoute",
+    "costOrDrop",
+    "requirementMastery",
+    "combatRole",
+    "upgradeUse",
+    "availability"
+  ],
+  "blox-fruits-instinct-levels": ["displayLevel", "expRange", "baseDodges", "progressNote"],
+  "blox-fruits-npcs": [
+    "npcRole",
+    "displaySea",
+    "displayLocation",
+    "purpose",
+    "combatLevel",
+    "accessSpawn",
+    "combat",
+    "availability",
+    "relatedRoute"
+  ],
+  "blox-fruits-titles": ["displayTitleNumber", "unlockRequirement", "unlockRoute", "relatedTarget", "availabilityNote"],
+  "blox-fruits-special-titles": ["grantRoute", "holderTarget", "obtainmentNote", "normalPlayerRoute"],
+  "blox-fruits-title-colors": ["unlockRequirement", "titleCountNeeded", "unlockStage", "visualRole"],
   "sailor-piece-fruits": ["bestFor", "combatRole", "mainStrength", "mainLimit", "spinChance"],
   "sailor-piece-islands": ["bosses", "mainRole", "keyContent", "progressionUse"],
   "sailor-piece-accessories": ["defense", "damage", "damageReduction", "sourceRoute", "dropOrCost", "bestFor"],
@@ -623,9 +716,11 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
               </span>
             </div>
 
-            {section.noteHtml ? (
+            {section.noteNodes?.length ? <div className="max-w-3xl">{section.noteNodes}</div> : null}
+
+            {!section.noteNodes?.length && section.noteHtml ? (
               <div
-                className="max-w-3xl text-sm leading-relaxed text-muted [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:underline [&_p]:m-0 [&_strong]:text-foreground"
+                className="md-copy-node md-copy-p max-w-3xl [&_a]:text-accent [&_a]:underline-offset-4 [&_a:hover]:underline [&_p]:m-0 [&_strong]:text-foreground"
                 dangerouslySetInnerHTML={{ __html: section.noteHtml }}
               />
             ) : null}

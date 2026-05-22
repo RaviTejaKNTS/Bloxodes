@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Writing Core"
   short_description: "Shared Bloxodes voice and quality rules"
-  default_prompt: "Use $bloxodes-writing-core to write final-shaped Bloxodes copy after reading the required docs. Explain the game system before fields."
+  default_prompt: "Use $bloxodes-writing-core to write final-shaped Bloxodes copy after reading the required docs. Explain the game system before fields, write for a real Roblox player, then run the FLOW pass before final edit when the page has body copy."

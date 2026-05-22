@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes FLOW Edit"
+  short_description: "Rewrite content for reader flow"
+  default_prompt: "Use $bloxodes-flow-edit after first-pass final.json and before final edit. Rewrite description_md, how_it_works_md, FAQs, headings, and section order so the page reads like a useful Roblox player explanation with clear action/how-to context."

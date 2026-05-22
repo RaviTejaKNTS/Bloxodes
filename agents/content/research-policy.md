@@ -64,7 +64,7 @@ Use this structure:
 Date: YYYY-MM-DD
 Page Type: catalog | game-catalog | wiki | article | tool
 Target: /path-or-code
-Status: researching | needs section confirmation | ready to write | needs review
+Status: researching | needs data update | needs section confirmation | ready to write | needs review
 
 ## What this is
 
@@ -90,6 +90,22 @@ Explain usefulness, collection value, trade value, progression value, reward val
 
 Use actual item names, values, sections, or source rows. Explain why each example matters.
 
+## Data and image audit
+
+For catalog and game-catalog pages, this section is required. It decides whether the model can write now or must update data first.
+
+Include:
+
+- local dataset file and local item count
+- current source counts found during research
+- existing page title count, if a page already exists
+- rendered card count, if the route already exists
+- missing items, extra local items, renamed items, duplicate rows, stale fields, or unclear rows
+- image coverage: cards with images, cards without images, local image files that are not wired, and images that need to be gathered
+- data action: `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`
+
+If current sources show more items than the local dataset, or if important images are missing, do not hide that under a writing task. Record the issue here and keep the status at `needs data update` until the user approves how to fix it or explicitly accepts the current dataset.
+
 ## Common mistakes or confusion
 
 List what readers may misunderstand and how the final copy should prevent it.
@@ -105,11 +121,13 @@ Include:
 - sections to skip or cut because they would pad the page
 - where a table, bullet list, or numbered list would explain faster than paragraphs
 - the story flow from opening context to final takeaway
-- for catalog and game-catalog pages, the proposed item-card section style, the in-game reason for that grouping, alternatives rejected, and the `description_json` notes that should appear between those sections
+- the action, how-to, obtainment, use, or comparison section the page needs when the topic has player action behind it
+- for catalog and game-catalog pages, the proposed data update plan if needed, item-card section style, the in-game reason for that grouping, alternatives rejected, card fields to show or hide, and the `description_json` notes that should appear between those sections
+- for catalog and game-catalog pages, what `description_md` should explain as a whole-page story so it does not repeat the same notes as `description_json`
 
 Do not mark research ready if this section is only a list of database fields. The outline should feel like an article editor decided the shape of the page before the writer started drafting.
 
-For catalog and game-catalog pages, research pauses at `needs section confirmation` until the user approves the section style. Do not write final copy or update Supabase before that confirmation. The approval must refer to the proposed grouping, not merely to the page request. If the user says "write this catalog page" before seeing the section plan, that is permission to research and propose, not permission to write final copy.
+For catalog and game-catalog pages, research pauses at `needs data update` when the dataset or images are stale. It pauses at `needs section confirmation` until the user approves the section style and card data shape. Do not write final copy or update Supabase before those confirmations. The approval must refer to the proposed data action or grouping, not merely to the page request. If the user says "write this catalog page" before seeing the data and section plan, that is permission to research and propose, not permission to write final copy.
 
 ## Missing or uncertain facts
 
@@ -140,15 +158,21 @@ Research the collection and its item groups. For small catalogs, inspect every i
 
 The notes should explain the collection itself before they explain fields.
 
+Run the data and image audit before proposing final copy. Compare local item count with current source counts, page title count, and rendered card count. If a source shows more items than local data, list the missing names and mark the work `needs data update` instead of writing around the gap. If images matter for the collection, count missing images and say whether they can be found locally, need to be gathered, or should be intentionally left blank.
+
 After research, propose the section style before writing. Choose the strongest in-game grouping, such as rarity, item type, source, event, location, tier, shop, unlock route, or world. The best grouping is the one that helps players understand the collection long-term, not necessarily the dataset's first category field.
 
 When the route can render copy between item sections, plan `description_json` as short section context. These notes should set up the cards in that section with useful game meaning and should not be repeated in `description_md`.
+
+Plan the `description_md` separately. It should explain the full collection or mechanic, including how players get, use, compare, unlock, travel to, farm, hatch, roll, craft, equip, or avoid mistakes around the items when that action exists. A catalog page can have cards first and still need a clear how-to section later, because the cards show data while `description_md` teaches how the system actually works.
 
 The route must be checked as part of research. Record the actual section labels the renderer will produce from the current dataset. A column existing in the JSON is not enough. If a blank `rarity` field exists and the route would group every item under `Other`, the research must call that out and block final writing until the grouping behavior is fixed or a confirmed override is planned.
 
 ### Game-Specific Catalog Pages
 
 Research the game system behind the collection.
+
+For existing games, audit the current local dataset first. For new games, research must also gather or build the first local dataset. The final page is not ready until the item list, useful card fields, and image coverage are good enough for the page being created.
 
 A good game catalog research file should answer:
 
@@ -163,6 +187,9 @@ A good game catalog research file should answer:
 - Which parts deserve tables, bullets, or numbered steps?
 - Which item-card section style should be proposed to the user before final writing?
 - Which `description_json` notes belong between those sections?
+- What whole-page `description_md` story belongs after the cards?
+- What action/how-to/use section should make the page practically useful?
+- Are local data, source counts, rendered card counts, title counts, and images aligned enough to publish?
 
 Examples:
 
@@ -221,7 +248,9 @@ For catalog and game catalog work:
 3. Identify the item groups a player would recognize.
 4. Identify fields that need definition because the label is unclear.
 5. Check whether images exist when images matter.
-6. Record missing or uncertain facts instead of hiding them.
+6. Compare local item count, rendered card count, title count, and current source counts.
+7. Record missing items, stale rows, duplicate rows, renamed items, missing images, and uncertain facts instead of hiding them.
+8. If the data needs work, stop writing and propose the dataset/image update plan.
 
 ## Supabase And Route Review
 
@@ -305,5 +334,6 @@ Before writing, answer these in your own words:
 3. Can I name real examples from the item data or source material?
 4. Can I explain what a player should do differently after reading?
 5. Can I explain what should not be claimed because facts are missing?
+6. For catalog work, can I prove the local item count, rendered card count, title count, source count, and image coverage are either aligned or intentionally accepted?
 
 If the answer is no, research is not ready.

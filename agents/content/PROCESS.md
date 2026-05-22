@@ -4,9 +4,9 @@ This is the v2 process. The old checklist-heavy workflow failed because it let r
 
 Use this process for serious rewrites, new page copy, or any content that will be saved to Supabase.
 
-The current standard is outline-first. Research does not stop at facts. It must decide what the reader cares about, which sections should exist, which sections should be cut, and which details are better shown as bullets, tables, numbered steps, or section-level `description_json` notes before `final.json` is written.
+The current standard is outline-first, and for catalog work it is data-first and flow-first too. Research does not stop at facts. It must decide what the reader cares about, whether the item data is complete enough, which sections should exist, which sections should be cut, and which details are better shown as bullets, tables, numbered steps, or section-level `description_json` notes before `final.json` is written. After the first-pass JSON exists, the FLOW pass must rewrite the public fields so the page reads in an order that makes sense to a normal player.
 
-For catalog and game-catalog pages, the workflow is also section-confirmation-first. After research, propose how the item cards should be divided into sections, explain why that section style is the strongest in-game grouping, propose the clean card fields, and wait for explicit user confirmation before writing final copy or updating Supabase. Do not treat a general request like "write this page", "continue", or "go ahead" as section approval unless the user has already seen the exact section and card-data proposal.
+For catalog and game-catalog pages, the workflow is also data-confirmation-first and section-confirmation-first. After research, audit the local dataset against current sources, check image coverage, propose any dataset updates that are needed, propose how the item cards should be divided into sections, explain why that section style is the strongest in-game grouping, propose the clean card fields, and wait for explicit user confirmation before writing final copy or updating Supabase. Do not treat a general request like "write this page", "continue", or "go ahead" as approval unless the user has already seen the exact data, section, and card-data proposal.
 
 Write workflow notes in a human editorial voice. The process should be strict, but the language should still explain the reason behind the step. A clear reason helps the model apply the workflow to a catalog page, article, tool, or wiki hub without turning every output into the same template.
 
@@ -33,7 +33,8 @@ Before writing or editing public copy, read these files in this order:
 1. `agents/content/writing-core.md`
 2. `agents/content/research-policy.md`
 3. matching page-type guide in `agents/content/page-types/`
-4. `agents/content/final-edit.md`
+4. `agents/content/flow-pass.md` for catalog, game-catalog, article, and tool pages with meaningful body copy
+5. `agents/content/final-edit.md`
 
 If this reading has not happened in the current task, do not write content.
 
@@ -85,7 +86,7 @@ Use this structure unless a page type clearly needs a small adjustment:
 Date: YYYY-MM-DD
 Page Type: catalog | game-catalog | wiki | article | tool
 Target: /path-or-code
-Status: researching | needs section confirmation | ready to write | needs review
+Status: researching | needs data update | needs section confirmation | ready to write | needs review
 
 ## What this is
 
@@ -111,6 +112,22 @@ Explain what is useful, collectible, easy to replace, hard to get, event-gated, 
 
 Use actual item names, groups, values, or rows from the local dataset or source material. Explain why each example matters.
 
+## Data and image audit
+
+For catalog and game-catalog pages, write this before the section proposal. This is a hard gate, not housekeeping.
+
+Include:
+
+- local dataset file and item count
+- source counts found during research, with dates or source names
+- rendered card count if the route exists
+- page title count if the page already exists
+- missing items, extra items, renamed items, duplicate items, or stale fields
+- image coverage: cards with images, cards without images, images that exist locally but are not wired, and images that still need sourcing
+- data action: `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`
+
+If research finds more items than the local dataset, or finds that images are missing even though images are expected for the collection, stop here and make the data issue visible. Do not write public copy on top of stale data.
+
 ## Common mistakes or confusion
 
 Write what a player might misunderstand and how the page should prevent that confusion.
@@ -127,7 +144,7 @@ Include:
 - parts to cut
 - where bullets, tables, or numbered steps should be used
 - how the page flows from context to action to caveats
-- for catalog and game-catalog pages, the proposed item-card section style, the reason that grouping matches the game, alternatives considered, and the `description_json` keys/notes that should appear between sections
+- for catalog and game-catalog pages, the proposed data update plan if needed, item-card section style, the reason that grouping matches the game, alternatives considered, card fields to show or hide, and the `description_json` keys/notes that should appear between sections
 
 ## Missing or uncertain facts
 
@@ -148,16 +165,26 @@ Explain what the final page should teach, what it should skip, the tone to use, 
 
 If the `What this is`, `How it works in the game`, `Real examples from the data`, and `Reader questions and page outline` sections are weak, the research is not ready.
 
-For catalog and game-catalog work, do not move from research to final copy until the proposed section style and card data shape are confirmed. The proposal should name the grouping axis, such as rarity, item type, source, location, event, tier, shop, world, or unlock path. It should also name the fields that belong on the cards and the raw fields that should not render. Choose the grouping and card fields that have the clearest in-game meaning, not merely the fields that are easiest to sort.
+For catalog and game-catalog work, do not move from research to final copy until the data state, proposed section style, and card data shape are confirmed. The proposal should name the dataset status, source-count agreement or disagreement, missing image count, grouping axis, fields that belong on the cards, and raw fields that should not render. Choose the grouping and card fields that have the clearest in-game meaning, not merely the fields that are easiest to sort.
 
-The research notes must keep `Status: needs section confirmation` until that approval exists. When approval happens, record it plainly, for example: `Section style confirmed by user on YYYY-MM-DD: group by category into Walls and Floors.` Do not write vague lines such as `user requested final copy` as a substitute for confirmation.
+The research notes must keep `Status: needs data update` when the item list or image coverage is not ready. They must keep `Status: needs section confirmation` until the section and card plan is approved. When approval happens, record it plainly, for example: `Data and section plan confirmed by user on YYYY-MM-DD: update missing islands, group by sea, and show level range, location, travel role, and key content.` Do not write vague lines such as `user requested final copy` as a substitute for confirmation.
 
-## 4. Write `final.json`
+## 3.5. Build Or Update The Data Before Writing
 
-Only write `final.json` after `research-notes.md` is marked `ready to write`. For catalog and game-catalog pages, that means the user has already confirmed the proposed section style.
+For existing games, the data step is an audit first. For new games, the data step is a real build step.
+
+After research and approval, update the local dataset before writing public copy when the audit says it is needed. That can mean adding missing items, cleaning names and slugs, adding useful card fields, removing raw HTML, normalizing yes/no values into labeled fields, wiring local images, or creating a collector script when this game will need repeatable refreshes.
+
+Only continue to `final.json` after the local dataset is in the shape the page will use. The page title count, local dataset count, rendered card count, and expected source count should either match or have a written reason for the difference.
+
+## 4. Write First-Pass `final.json`
+
+Only write `final.json` after `research-notes.md` is marked `ready to write`. For catalog and game-catalog pages, that means the user has already confirmed the data state, the proposed section style, and the card data shape, and any required dataset or image updates have been completed locally.
 
 Before importing the final JSON, prove the render contract:
 
+- list the local dataset count, rendered card count, and title count
+- list the image count and missing image count when images matter
 - list the actual section labels the route will render
 - list the planned `description_json` keys
 - confirm every planned section note matches a rendered section label
@@ -167,7 +194,7 @@ Before importing the final JSON, prove the render contract:
 
 The final JSON must fit the destination table shape. Write the public fields as final copy from the start. Do not write placeholder copy and expect another pass to make it human.
 
-Follow the outline from research notes. Do not dump every researched fact into the public fields. The final page should keep the useful structure and cut the rest.
+Follow the outline from research notes. Do not dump every researched fact into the public fields. The first pass should already be useful, but it is not ready for import until the FLOW pass has checked and rewritten the reader path.
 
 Catalog-style output:
 
@@ -237,7 +264,27 @@ Wiki page work should not rewrite catalog-page blurbs. A wiki workflow owns game
 
 For catalog-style pages, `description_json` is the section-level context layer when item cards are divided into meaningful sections. Keep each entry short, usually one to three useful sentences, and place the explanation near the card section it supports. Do not repeat those same notes later in `description_md`.
 
-## 5. Depth Rules
+## 5. Run The FLOW Pass
+
+Run `agents/content/flow-pass.md` after the first-pass `final.json` and before the final edit gate. This is mandatory for catalog and game-catalog pages, and strongly expected for articles and tools.
+
+The FLOW pass is a rewrite pass. It should update `final.json` directly when the page has awkward headings, random sections, rushed explanation, field-first copy, or disconnected paragraphs.
+
+For catalog and game-catalog pages, the FLOW pass must confirm:
+
+- `description_md` explains the whole collection or mechanic, not individual card sections.
+- `description_json` owns the section-level notes near the cards.
+- `description_md` includes at least one useful action section when the collection has a player action behind it, such as how to get, find, unlock, farm, grow, hatch, roll, craft, equip, travel, compare, or use the items.
+- headings read like useful sentence fragments, not one-word labels or random fact snippets.
+- at least one table, bullet list, or numbered process is used when it would explain faster than prose.
+- the copy moves from context to action to interpretation to caveats in a clean pace.
+- the page sounds like a practical Roblox player explaining the system, not a database row translated into paragraphs.
+
+If the page is about Instinct levels, the FLOW pass should not settle for disconnected sections such as `Instinct EXP comes from dodging`, `Level 7 is the normal Instinct cap`, and `Instinct V2 comes after this ladder` unless the surrounding copy clearly tells the reader how to train Instinct, how to read the milestones, and how that normal ladder leads into V2. The pass should reshape the article, not merely polish the sentences.
+
+Record major FLOW changes in `research-notes.md` under `Implementation notes` or `Writing angle`.
+
+## 6. Depth Rules
 
 Short is good only when the explanation is complete.
 
@@ -260,15 +307,15 @@ Use formatting when it helps:
 
 Do not pad. But do not compress away the context.
 
-## 6. Final Edit Gate
+## 7. Final Edit Gate
 
-Run `agents/content/final-edit.md` before writing to local Supabase or calling the work ready.
+Run `agents/content/final-edit.md` before writing to local Supabase or calling the work ready. The final edit gate assumes the FLOW pass has already happened. If a catalog or game-catalog page has not gone through FLOW, the final edit fails.
 
 The most important v2 blocker:
 
 If a normal player can ask "what does that mean?" after a sentence, the sentence fails.
 
-For catalog and game-catalog pages, the final edit also fails if section confirmation, render-contract proof, local DB readback, or rendered-page proof is missing. A page is not done because `final.json` exists. It is done only after local Supabase contains the updated fields and the local page visibly renders the intended intro, section notes, and page-level Markdown.
+For catalog and game-catalog pages, the final edit also fails if section confirmation, render-contract proof, FLOW-pass rewrite, local DB readback, or rendered-page proof is missing. A page is not done because `final.json` exists. It is done only after local Supabase contains the updated fields and the local page visibly renders the intended intro, section notes, and page-level Markdown.
 
 Bad:
 
@@ -284,7 +331,7 @@ A one-seat vehicle is mostly personal travel. Multi-seat vehicles matter more wh
 
 Do not let unclear field-first writing pass because it avoids banned phrases.
 
-## 7. Local Import And Preview
+## 8. Local Import And Preview
 
 Write approved content to local Supabase first.
 
@@ -305,7 +352,7 @@ Check the rendered page, not just the JSON:
 - mobile readability
 - whether the copy feels like it teaches the topic
 
-## 8. Scale Only After Approval
+## 9. Scale Only After Approval
 
 After the first page is approved as the gold standard, repeat the same process per page.
 
@@ -313,6 +360,7 @@ For multiple catalog pages, every page still needs its own:
 
 - `research-notes.md`
 - `final.json`
+- a recorded FLOW pass inside those files, not a separate artifact
 - route preview
 
 Shared game research can support those files, but it cannot replace page-specific research.

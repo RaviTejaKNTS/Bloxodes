@@ -13,6 +13,7 @@ For serious rewrites, also read:
 
 - `agents/content/PROCESS.md`
 - `agents/content/research-policy.md`
+- `agents/content/flow-pass.md`
 - `agents/content/final-edit.md`
 
 If those files have not been read in the current task, read them before producing public copy. Do not guess the Bloxodes style from memory.
@@ -22,6 +23,8 @@ If those files have not been read in the current task, read them before producin
 Bloxodes writing should sound like a useful Roblox player explaining the part that matters. It can be friendly and natural, but it should never drift into filler, hype, or website-focused copy.
 
 Start with the reader's reason for being there. They may want to compare items, understand a mechanic, redeem a reward, use a tool, or decide whether something is worth chasing. The first draft should already serve that goal.
+
+When the page has meaningful body copy, especially catalog `description_md`, run the FLOW pass after first-pass `final.json`. The FLOW pass rewrites section order, headings, transitions, and action context so the page reads like a normal explanation instead of a stitched-together set of fields.
 
 Keep the copy game-first. Explain the item, mechanic, event, code, tool result, or collection directly. Do not explain the website, the database, the route, or the existence of the catalog unless the UI itself requires that wording.
 

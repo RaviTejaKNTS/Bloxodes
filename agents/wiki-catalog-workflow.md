@@ -16,11 +16,13 @@ For public copy, the current writing source of truth is:
 
 If this workflow conflicts with those files, follow the v2 content docs.
 
-Important: do not batch-write every catalog page for a game until one page has been researched, written, previewed, and approved as the gold standard. The dataset and route setup can still be prepared in bulk, but public copy must be proven on one page first.
+Important: do not batch-write every catalog page for a game until one page has been researched, data-audited, written, previewed, and approved as the gold standard. The dataset and route setup can still be prepared in bulk, but public copy must be proven on one page first.
 
-For catalog copy changes, research first and propose the item-card section style and card data shape before writing final content. The user should confirm whether sections are divided by rarity, item type, source, event, location, shop, tier, world, unlock route, or another in-game grouping. Also confirm which fields should appear on the cards and which raw fields should stay hidden. The confirmation must be explicit; a normal request to write or continue is not enough. After confirmation, use `description_json` for short notes between those sections and keep `description_md` focused on whole-page mechanics.
+For catalog copy changes, research first and propose the data state, item-card section style, and card data shape before writing final content. The user should see local item count, source count, rendered card count, title count, image coverage, missing or extra items, and any required dataset/image update. The user should also confirm whether sections are divided by rarity, item type, source, event, location, shop, tier, world, unlock route, or another in-game grouping. Also confirm which fields should appear on the cards and which raw fields should stay hidden. The confirmation must be explicit; a normal request to write or continue is not enough. After confirmation, use `description_json` for short notes between those sections and keep `description_md` focused on whole-page mechanics.
 
-Before importing catalog copy, verify that the route actually renders the confirmed card sections and card fields. Do not assume the renderer will pick the right field because the dataset contains it. If the cards should be grouped by `Walls` and `Floors` but the route is grouping by blank `rarity` values, fix the renderer or add the confirmed grouping behavior first. If the cards show raw prose, raw pros/cons arrays, nested stats, unclear yes/no values, or fields that do not help the player compare items, clean the data shape or add a renderer override before calling the page done.
+After the first-pass `final.json`, run the FLOW pass from `agents/content/flow-pass.md`. This is mandatory for catalog and game-catalog pages. The pass rewrites `description_md`, `how_it_works_md`, FAQs, headings, and transitions so the page reads like a useful player explanation with a clear action/how-to/use section where the collection has player action behind it.
+
+Before importing catalog copy, verify that the route actually renders the confirmed item count, card sections, card fields, and images. Do not assume the renderer will pick the right field because the dataset contains it. If the cards should be grouped by `Walls` and `Floors` but the route is grouping by blank `rarity` values, fix the renderer or add the confirmed grouping behavior first. If the cards show raw prose, raw pros/cons arrays, nested stats, unclear yes/no values, or fields that do not help the player compare items, clean the data shape or add a renderer override before calling the page done.
 
 ## Trigger
 
@@ -35,6 +37,8 @@ Follow this workflow when adding pages for a game dataset under `data/<Game>/`, 
 - Collector scripts must be documented in `agents/scripts/agents.md`.
 - Wiki catalog page rows for gathered game datasets can be generated with `npm run seed:game-catalog-pages -- --dry-run`, then written locally with `npm run seed:game-catalog-pages`.
 - Wiki page rows for gathered game datasets can be generated with `npm run seed:game-wiki-pages -- --dry-run`, then written locally with `npm run seed:game-wiki-pages`.
+
+For new games, data gathering is part of this workflow. Research should produce the first item list, useful card fields, local image plan, and collection structure before copy is written. If a source says a collection has more items than the current local file, update or intentionally accept the data gap before writing public fields.
 
 ## DB Targets
 
@@ -67,8 +71,11 @@ Important fields:
 
 1. Confirm the dataset is complete enough:
    - JSON parses.
-   - Item counts look plausible.
+   - Item counts match current source counts, or the difference is explained.
+   - Rendered card counts match dataset counts.
+   - Count-based page titles match the dataset count.
    - Referenced local images exist.
+   - Image coverage is counted.
    - No unreferenced generated images remain.
    - Missing images are understood and intentional.
 2. Confirm or seed the local `roblox_universes` row for the game.
@@ -92,7 +99,9 @@ Important fields:
    - JSON-LD if applicable.
    - Wiki hub lists the wiki catalog blocks in the intended order.
    - Catalog pages render real dataset rows/cards, not just shell copy.
+   - Dataset count, rendered card count, and title count align.
    - Section labels match the confirmed section plan and `description_json` notes visibly appear next to those sections.
+   - Card fields match the confirmed card-data plan.
    - Images work on desktop and mobile.
    - Search/revalidation hooks are covered by existing triggers.
 
@@ -166,7 +175,7 @@ Good catalog copy usually follows this shape:
 5. Important terms explained in gameplay language.
 6. Any current, retired, event, premium, reward, trade-only, or uncertain caveats.
 
-When item cards are sectioned, put the section-specific setup in `description_json` and keep `description_md` shorter. `description_md` should explain the whole system, such as where the mechanic lives in-game, how players acquire items, how odds or prices work, and what mistakes apply across the collection.
+When item cards are sectioned, put the section-specific setup in `description_json` and keep `description_md` shorter. `description_md` should explain the whole system, such as where the mechanic lives in-game, how players acquire items, how odds or prices work, and what mistakes apply across the collection. The FLOW pass should reject `description_md` that only turns card sections into larger article headings.
 
 ### Wiki Page Content
 

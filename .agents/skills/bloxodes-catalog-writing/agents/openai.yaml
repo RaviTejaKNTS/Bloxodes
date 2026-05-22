@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Catalog Writing"
   short_description: "Write Supabase catalog page fields"
-  default_prompt: "Use $bloxodes-catalog-writing for one catalog page. Read the required docs, create plain-language research-notes.md first, then write final.json with catalog page fields, including wiki_md when the page appears on a wiki hub."
+  default_prompt: "Use $bloxodes-catalog-writing for one catalog page. Read the required docs, create plain-language research-notes.md first, include a data/image audit when the page has item data, propose any data update plus section/card structure, and wait for approval. Then write a first-pass final.json, run $bloxodes-flow-edit so description_md explains the whole collection instead of repeating card-section notes, includes a how-to/action section when useful, and uses tables/lists/steps where they make the page easier to understand. Run $bloxodes-final-edit before saving final.json with catalog fields and wiki_md when the page appears on a wiki hub."

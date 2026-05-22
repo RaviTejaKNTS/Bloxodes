@@ -10,6 +10,8 @@ A catalog page should help readers understand a collection and compare its items
 
 Do not start from fields. Start from the collection.
 
+Do not start from stale data either. If the collection has item cards, tables, images, counts, prices, sources, or availability states, research must check whether those facts are current enough before public copy is written.
+
 Bad:
 
 ```markdown
@@ -76,12 +78,16 @@ Keep the page data-first. Do not bury the table/cards under long prose.
 
 For a complex game system, `description_md` can still have real sections. When `description_json` already explains each item group, make `description_md` shorter and focused on full-page mechanics such as how to get the items, where to find the system in-game, how rolls or prices work, and what mistakes to avoid.
 
+After the first-pass `final.json`, run the FLOW pass before final edit. This is where `description_md` gets reshaped into an explanation that reads cleanly instead of a pile of field-driven sections.
+
 ## Section Style Confirmation
 
-For catalog and game-catalog changes, research the collection first, then propose the section style and the card data shape before writing final copy or updating Supabase.
+For catalog and game-catalog changes, research the collection first, then propose the data state, section style, and card data shape before writing final copy or updating Supabase.
 
 The proposal should include:
 
+- local item count, rendered card/table count, page title count, source count, image count, and missing image count when the page has item data
+- data update plan if the current local data is stale, incomplete, poorly shaped, or missing expected images
 - the recommended grouping axis, such as rarity, item type, source, event, location, tier, shop, world, or unlock route
 - why that grouping has real in-game meaning
 - alternatives considered and why they are weaker
@@ -91,11 +97,28 @@ The proposal should include:
 - raw fields that should stay hidden, such as long descriptions, raw HTML, raw `pros`/`cons`, nested objects, source dumps, or vague yes/no values
 - any route or renderer override needed to make the approved sections and approved card fields actually render
 
-Wait for explicit user confirmation before making the content change. If the user approves a different section style or card field plan, use that confirmed structure. Do not treat "write this page", "continue", or "go ahead" as section approval unless the user has already seen the exact proposed section labels and card fields and accepted them.
+Wait for explicit user confirmation before making the content change. If the user approves a data update, finish that local data work before writing final copy. If the user approves a different section style or card field plan, use that confirmed structure. Do not treat "write this page", "continue", or "go ahead" as approval unless the user has already seen the exact proposed data state, section labels, and card fields and accepted them.
 
 Before saving or importing, verify the route will actually render those sections. The planned `description_json` keys must match the computed section labels from the page renderer. If the renderer is grouping by a stale or blank field, such as empty `rarity` values, fix the renderer or add the confirmed grouping behavior before writing the local DB row.
 
 Verify the rendered card fields too. Cards and tables should show pure comparison data that helps the player act: source, price, rarity, chance, requirement, best use, role, strength, limit, availability, damage, seats, reward type, or another concrete field. Do not render raw long prose, raw `pros`/`cons`, nested object dumps, source HTML, vague meta descriptions, or unexplained `Yes`/`No` values. If a page needs pros and cons, translate them into short labeled fields such as `Strength`, `Limit`, `Best for`, `Trade note`, or the equivalent for that collection.
+
+## Data And Image Audit
+
+When a catalog page has item data, add a `Data and image audit` section to `research-notes.md` before final writing.
+
+Include:
+
+- local dataset or table checked
+- local item count
+- rendered card/table count
+- page title count, if the title includes a count
+- current source counts found during research
+- missing, extra, duplicate, renamed, stale, or unclear items
+- image coverage and missing images when images matter
+- data action: `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`
+
+If the audit finds more real items than local data, or finds that important images are missing, the page is not ready for final copy. Propose the data update and get approval first.
 
 ## Writing Rules
 
@@ -121,6 +144,38 @@ Verify the rendered card fields too. Cards and tables should show pure compariso
 - Use `Not listed` only when the missing value matters.
 - Do not expose raw keys such as `is_for_sale` or `asset_type_id` in prose. Translate them into player labels.
 
+## Description Markdown FLOW
+
+`description_md` is the most common place where catalog pages go wrong. It should not become a second version of the card sections. It should not jump from one random fact to another because the research notes had those facts nearby.
+
+Write `description_md` as whole-page explanation:
+
+- what the collection is in the game
+- how players get, find, unlock, farm, roll, craft, equip, trade, or use it
+- what the visible card fields mean in actual play
+- what mistakes or misunderstandings apply across the collection
+- what matters after the cards have already shown the item data
+
+Every actionable catalog should include at least one action section. Pick the action that matches the collection:
+
+- `How to get gift prizes in Adopt Me`
+- `How to train Instinct levels in Blox Fruits`
+- `How to reach these islands`
+- `How to farm these materials`
+- `How to use this calculator result`
+- `How to read old rewards before trading`
+
+If a catalog is passive or purely cosmetic, still explain how players encounter or apply the item. Do not skip the action section just because the item does not have combat stats.
+
+Use structure that helps the reader:
+
+- numbered lists for steps
+- tables for repeated comparisons
+- bullets for quick rules, mistakes, or examples
+- paragraphs for context and judgment
+
+The Adopt Me gift prizes page is the right shape: it explains how gifts work, separates gifts from prizes, uses tables for odds and item types, and then gives practical open/save/trade advice. A weak page might have correct headings like `EXP`, `Cap`, and `V2`, but if those sections do not explain the player action and the reason for each milestone, the reader still gets a weird article.
+
 ## Description Markdown vs JSON
 
 Prefer `description_md` for normal whole-page explanation.
@@ -133,6 +188,8 @@ Use `description_json` when:
 - the note helps the reader understand that group before scanning the cards
 
 Do not duplicate the same paragraphs in both fields. If both are used, `description_json` should hold placement-specific section notes, while `description_md` should hold general context such as how the system works, where to find it, how to obtain items, or what mistakes to avoid.
+
+During the FLOW pass, check this separation again. If `description_md` is talking about `Common`, `Rare`, `Third Sea`, `Starter`, or another specific card section in the same way as `description_json`, move that idea into `description_json` or rewrite it as whole-page context.
 
 Good `description_json` entries are short and useful:
 
@@ -183,7 +240,12 @@ Avoid FAQ entries like:
 ## Final Checks
 
 - Does the intro explain the collection's role in the game?
+- Did `research-notes.md` include a data and image audit when the page has item data?
+- Do local item count, rendered card/table count, title count, and source count match or have a written reason for the difference?
+- If the audit found missing items or missing images, was that fixed or explicitly accepted before writing?
 - Does `description_md` give real context about mechanics, obtainment, value, availability, or player mistakes?
+- Did the FLOW pass rewrite `description_md` for whole-page readability before final edit?
+- Does `description_md` include a useful action/how-to/use section when the collection has player action behind it?
 - If the page uses sections, did research propose and get approval for the section style and card data shape before final writing?
 - Did the route actually render those section labels, and do the `description_json` keys match them?
 - Did the route actually render the approved card/table fields?

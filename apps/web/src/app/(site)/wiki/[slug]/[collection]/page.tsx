@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
 import { buildGameDatasetCatalogCopy, getGameDatasetCatalogConfigByWikiPath } from "@/lib/game-dataset-catalogs";
@@ -110,6 +111,12 @@ function getImageUrls(items: Array<{ image?: string | null }>): string[] {
   ).slice(0, 6);
 }
 
+function disableCacheInDevelopment() {
+  if (process.env.NODE_ENV === "development") {
+    noStore();
+  }
+}
+
 export async function generateStaticParams() {
   const paths = await listPublishedWikiCatalogPaths();
   return paths.map((path) => ({
@@ -119,6 +126,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  disableCacheInDevelopment();
   const { slug, collection } = await params;
   const context = resolveContext(slug, collection);
   const canonicalPath = buildWikiCatalogPath(slug, collection);
@@ -183,6 +191,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function WikiCatalogPage({ params }: PageProps) {
+  disableCacheInDevelopment();
   const { slug, collection } = await params;
   const context = resolveContext(slug, collection);
   if (!context) {

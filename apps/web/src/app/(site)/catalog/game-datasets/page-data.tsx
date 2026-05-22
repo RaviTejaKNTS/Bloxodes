@@ -79,6 +79,7 @@ type CatalogSectionOverride = {
   additionalColumns?: string[];
   maxStats?: number;
   transformItem?: (item: GameDatasetCatalogItem) => GameDatasetCatalogItem;
+  transformItems?: (items: GameDatasetCatalogItem[]) => GameDatasetCatalogItem[];
 };
 
 const DESCRIPTION_MD_KEY = "description-md";
@@ -141,6 +142,446 @@ const ADOPT_ME_GIFTS_SECTION_BY_NAME: Record<string, string> = {
   "Golden Mistletoe": "Mixed seasonal gift boxes"
 };
 
+const BLOX_FRUITS_ACCESSORY_SECTION_ORDER = [
+  "First Sea accessories",
+  "Second Sea accessories",
+  "Third Sea accessories",
+  "Multi-sea accessories",
+  "Event accessories",
+  "Admin-only accessories"
+];
+
+const BLOX_FRUITS_ACCESSORY_HIDDEN_KEYS = [
+  "type",
+  "sea",
+  "bonuses",
+  "rawText",
+  "fields",
+  "money",
+  "robux",
+  "source",
+  "price",
+  "requirements",
+  "obtainment",
+  "upgrading",
+  "purpose"
+];
+
+const BLOX_FRUITS_FRUIT_SECTION_ORDER = [
+  "Natural fruits",
+  "Elemental fruits",
+  "Beast fruits",
+  "Fruit mutations",
+  "Legacy and unavailable fruits",
+  "Admin-only fruits"
+];
+
+const BLOX_FRUITS_FRUIT_HIDDEN_KEYS = [
+  "type",
+  "sea",
+  "price",
+  "money",
+  "robux",
+  "awakening",
+  "upgrading",
+  "unavailableReason",
+  "source",
+  "requirements",
+  "obtainment",
+  "purpose",
+  "bonuses",
+  "rawText",
+  "fields"
+];
+
+const BLOX_FRUITS_SWORD_SECTION_ORDER = [
+  "First Sea swords",
+  "Second Sea swords",
+  "Third Sea swords",
+  "Multi-sea and special swords",
+  "Admin-only swords"
+];
+
+const BLOX_FRUITS_SWORD_HIDDEN_KEYS = [
+  "type",
+  "sea",
+  "price",
+  "money",
+  "robux",
+  "obtainment",
+  "requirements",
+  "upgrading",
+  "source",
+  "purpose",
+  "bonuses",
+  "rawText",
+  "fields"
+];
+
+const BLOX_FRUITS_FIGHTING_STYLE_SECTION_ORDER = [
+  "Starter and First Sea fighting styles",
+  "Second Sea fighting styles",
+  "Third Sea fighting styles"
+];
+
+const BLOX_FRUITS_FIGHTING_STYLE_HIDDEN_KEYS = [
+  "type",
+  "price",
+  "money",
+  "robux",
+  "requirements",
+  "source",
+  "sea",
+  "obtainment",
+  "upgrading",
+  "purpose",
+  "bonuses",
+  "rawText",
+  "fields"
+];
+
+const BLOX_FRUITS_MATERIAL_SECTION_ORDER = [
+  "Upgrade materials",
+  "Unlock and progression materials",
+  "Crafting and recipe materials",
+  "Event currency and gacha materials",
+  "Utility and no-use materials"
+];
+
+const BLOX_FRUITS_MATERIAL_HIDDEN_KEYS = [
+  "type",
+  "sea",
+  "source",
+  "purpose",
+  "price",
+  "money",
+  "robux",
+  "requirements",
+  "obtainment",
+  "upgrading",
+  "bonuses",
+  "rawText",
+  "fields"
+];
+
+const BLOX_FRUITS_RACE_SECTION_ORDER = ["Starter and reroll races", "Quest-only races"];
+
+const BLOX_FRUITS_RACE_HIDDEN_KEYS = [
+  "source",
+  "titles",
+  "overview",
+  "rawText",
+  "fields",
+  "type",
+  "sea",
+  "price",
+  "money",
+  "robux",
+  "requirements",
+  "obtainment",
+  "upgrading",
+  "purpose",
+  "bonuses"
+];
+
+const BLOX_FRUITS_BOSS_SECTION_ORDER = [
+  "First Sea bosses",
+  "Second Sea bosses",
+  "Third Sea bosses",
+  "Dungeon bosses",
+  "Event and multi-sea bosses"
+];
+
+const BLOX_FRUITS_BOSS_HIDDEN_KEYS = [
+  "type",
+  "sea",
+  "spawnTime",
+  "despawnTime",
+  "hp",
+  "usesAura",
+  "weaponType",
+  "previous",
+  "overview",
+  "fields",
+  "wikiUrl",
+  "sourceImageUrl"
+];
+
+const BLOX_FRUITS_ENEMY_SECTION_ORDER = [
+  "First Sea enemies",
+  "Second Sea enemies",
+  "Third Sea enemies",
+  "Raid, sea event, and special enemies"
+];
+
+const BLOX_FRUITS_ENEMY_HIDDEN_KEYS = [
+  "enemy",
+  "sea",
+  "elementalBladeLevel",
+  "notes",
+  "fields",
+  "wikiUrl",
+  "imageCandidate"
+];
+
+const BLOX_FRUITS_LOCATION_SECTION_ORDER = [
+  "First Sea locations",
+  "Second Sea locations",
+  "Third Sea locations",
+  "Sea-event locations",
+  "Hidden and special locations"
+];
+
+const BLOX_FRUITS_LOCATION_HIDDEN_KEYS = [
+  "type",
+  "sea",
+  "level",
+  "levelRequirement",
+  "location",
+  "inhabitants",
+  "overview",
+  "backgroundMusic",
+  "previous",
+  "next",
+  "fields",
+  "wikiUrl",
+  "sourceImageUrl"
+];
+
+const BLOX_FRUITS_QUEST_SECTION_ORDER = ["First Sea", "Second Sea", "Third Sea"];
+
+const BLOX_FRUITS_QUEST_HIDDEN_KEYS = [
+  "sea",
+  "island",
+  "questGiver",
+  "quest",
+  "level",
+  "exp",
+  "expexp",
+  "money",
+  "special",
+  "fields",
+  "wikiUrl",
+  "sourceImageUrl"
+];
+
+const BLOX_FRUITS_SEA_EVENT_SECTION_ORDER = [
+  "Basic travel events",
+  "Third Sea combat hunts",
+  "Rare island spawns",
+  "Island follow-up encounters"
+];
+
+const BLOX_FRUITS_SEA_EVENT_HIDDEN_KEYS = [
+  "type",
+  "sea",
+  "location",
+  "drops",
+  "overview",
+  "backgroundMusic",
+  "atkPerHit",
+  "hp",
+  "level",
+  "weapon",
+  "amount",
+  "purpose",
+  "fields",
+  "wikiUrl",
+  "sourceImageUrl"
+];
+
+const BLOX_FRUITS_ABILITY_SECTION_ORDER = [
+  "Core movement unlocks",
+  "Combat awareness and Aura systems",
+  "Race abilities and awakenings",
+  "Special tools and progression utility",
+  "Admin or special-space abilities"
+];
+
+const BLOX_FRUITS_ABILITY_HIDDEN_KEYS = [
+  "type",
+  "source",
+  "costToBuy",
+  "level",
+  "levelRequirement",
+  "locations",
+  "objectsAffected",
+  "purpose",
+  "overview",
+  "releaseDate",
+  "dateOfAddition",
+  "fields",
+  "wikiUrl",
+  "sourceImageUrl"
+];
+
+const BLOX_FRUITS_AURA_STAGE_SECTION_ORDER = ["Aura stage progression"];
+
+const BLOX_FRUITS_AURA_STAGE_HIDDEN_KEYS = [
+  "stage",
+  "visualAura",
+  "visualAuraArmFsLegFs",
+  "buffs",
+  "expNeeded",
+  "fields",
+  "wikiUrl",
+  "imageCandidate"
+];
+
+const BLOX_FRUITS_AURA_VISUAL_SECTION_ORDER = ["Aura appearance stages"];
+
+const BLOX_FRUITS_AURA_VISUAL_HIDDEN_KEYS = [
+  "stage",
+  "legs",
+  "arms",
+  "fields",
+  "wikiUrl",
+  "sourceImageUrl"
+];
+
+const BLOX_FRUITS_BOAT_SECTION_ORDER = [
+  "Starter and normal dealer boats",
+  "Fast Boats gamepass boats",
+  "Unlock and event luxury boats",
+  "Leviathan hunt boat"
+];
+
+const BLOX_FRUITS_BOAT_HIDDEN_KEYS = [
+  "boat",
+  "category",
+  "price",
+  "health",
+  "seats",
+  "cannons",
+  "speed",
+  "estimatedSpeedInThirdSeaMetersPerMinute",
+  "fields",
+  "wikiUrl",
+  "sourceImageUrl"
+];
+
+const BLOX_FRUITS_GUN_SECTION_ORDER = [
+  "First Sea shop guns",
+  "First Sea boss drops",
+  "Second Sea raid and currency guns",
+  "Third Sea boss and special guns"
+];
+
+const BLOX_FRUITS_GUN_HIDDEN_KEYS = [
+  "rarity",
+  "type",
+  "sea",
+  "money",
+  "robux",
+  "source",
+  "price",
+  "requirements",
+  "obtainment",
+  "upgrading",
+  "purpose",
+  "bonuses",
+  "rawText",
+  "fields",
+  "wikiUrl",
+  "sourcePage",
+  "sourceImageUrl"
+];
+
+const BLOX_FRUITS_INSTINCT_LEVEL_SECTION_ORDER = ["Starter Instinct", "Main training climb", "V2 preparation"];
+
+const BLOX_FRUITS_INSTINCT_LEVEL_HIDDEN_KEYS = [
+  "level",
+  "exp",
+  "dodges",
+  "buffs",
+  "fields",
+  "wikiUrl",
+  "imageCandidate"
+];
+
+const BLOX_FRUITS_NPC_SECTION_ORDER = [
+  "Quest givers and progression NPCs",
+  "Shops, dealers, and exchange NPCs",
+  "Trainers, teachers, and system unlocks",
+  "Travel, crew, and service NPCs",
+  "Enemies and grind targets",
+  "Bosses and raid bosses",
+  "Event, limited, and special-space NPCs",
+  "Admin, removed, and unclear references"
+];
+
+const BLOX_FRUITS_NPC_HIDDEN_KEYS = [
+  "type",
+  "sea",
+  "location",
+  "overview",
+  "previous",
+  "next",
+  "spawnTime",
+  "despawnTime",
+  "level",
+  "usesAura",
+  "weaponType",
+  "hp",
+  "amount",
+  "immunityLevel",
+  "atkPerHit",
+  "weapon",
+  "dateOfAddition",
+  "purpose",
+  "locations",
+  "source",
+  "drops",
+  "objectsAffected",
+  "fields",
+  "wikiUrl",
+  "sourceImageUrl"
+];
+
+const BLOX_FRUITS_TITLE_SECTION_ORDER = [
+  "Race evolution titles",
+  "Bounty and Honor titles",
+  "Fruit awakening titles",
+  "Progression and mastery titles",
+  "Boss, raid, and enemy titles",
+  "Sea event and special activity titles",
+  "Event, code, and limited titles",
+  "Creator, admin, and community titles",
+  "Utility, puzzle, and misc titles",
+  "Placeholders and unknown titles"
+];
+
+const BLOX_FRUITS_TITLE_HIDDEN_KEYS = [
+  "title",
+  "titleNumber",
+  "obtainment",
+  "column1",
+  "icon",
+  "fields",
+  "wikiUrl",
+  "sourceImageUrl"
+];
+
+const BLOX_FRUITS_SPECIAL_TITLE_SECTION_ORDER = ["Owner and admin titles", "Named account custom titles"];
+
+const BLOX_FRUITS_SPECIAL_TITLE_HIDDEN_KEYS = ["title", "obtainment", "fields", "wikiUrl", "imageCandidate"];
+
+const BLOX_FRUITS_TITLE_COLOR_SECTION_ORDER = [
+  "Automatic colors",
+  "Early title milestones",
+  "Mid title milestones",
+  "Late title milestones"
+];
+
+const BLOX_FRUITS_TITLE_COLOR_HIDDEN_KEYS = [
+  "color",
+  "obtainment",
+  "column1",
+  "fields",
+  "wikiUrl",
+  "imageCandidate"
+];
+
 const SAILOR_PIECE_FRUITS_SECTION_ORDER = ["S+", "S", "A", "B", "C", "D"];
 const SAILOR_PIECE_TIER_SECTION_ORDER = ["S+", "S", "A", "B", "C", "D"];
 const SAILOR_PIECE_TOP_TIER_SECTION_ORDER = ["S+", "S", "A", "B", "C"];
@@ -177,6 +618,254 @@ const SAILOR_PIECE_RAW_CARD_KEYS = [
 ];
 
 const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
+  "blox-fruits-accessories": {
+    groupKey: "catalogSection",
+    groupLabel: "Availability",
+    sectionOrder: BLOX_FRUITS_ACCESSORY_SECTION_ORDER,
+    additionalColumns: ["displaySea", "bestFor", "damage", "defense", "mobility", "utility"],
+    hiddenKeys: BLOX_FRUITS_ACCESSORY_HIDDEN_KEYS,
+    maxStats: 6,
+    transformItem: withBloxFruitsAccessoryFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-fruits": {
+    groupKey: "catalogSection",
+    groupLabel: "Fruit group",
+    sectionOrder: BLOX_FRUITS_FRUIT_SECTION_ORDER,
+    additionalColumns: ["displayType", "moneyPrice", "permanentPrice", "awakeningCost", "status", "baseFruit"],
+    hiddenKeys: BLOX_FRUITS_FRUIT_HIDDEN_KEYS,
+    maxStats: 6,
+    transformItem: withBloxFruitsFruitFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-swords": {
+    groupKey: "catalogSection",
+    groupLabel: "Sword route",
+    sectionOrder: BLOX_FRUITS_SWORD_SECTION_ORDER,
+    additionalColumns: ["displaySea", "sourceRoute", "displayCost", "progressionUse"],
+    hiddenKeys: BLOX_FRUITS_SWORD_HIDDEN_KEYS,
+    maxStats: 4,
+    transformItem: withBloxFruitsSwordFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-fighting-styles": {
+    groupKey: "catalogSection",
+    groupLabel: "Unlock stage",
+    sectionOrder: BLOX_FRUITS_FIGHTING_STYLE_SECTION_ORDER,
+    additionalColumns: ["sourceTeacher", "costSummary", "masteryGate", "extraUnlock", "progressionRole", "bestFor"],
+    hiddenKeys: BLOX_FRUITS_FIGHTING_STYLE_HIDDEN_KEYS,
+    maxStats: 6,
+    transformItem: withBloxFruitsFightingStyleFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-materials": {
+    groupKey: "catalogSection",
+    groupLabel: "Material use",
+    sectionOrder: BLOX_FRUITS_MATERIAL_SECTION_ORDER,
+    additionalColumns: ["displaySea", "sourceRoute", "use", "farmRoute", "craftCost"],
+    hiddenKeys: BLOX_FRUITS_MATERIAL_HIDDEN_KEYS,
+    maxStats: 5,
+    transformItem: withBloxFruitsMaterialFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-races": {
+    groupKey: "catalogSection",
+    groupLabel: "Unlock route",
+    sectionOrder: BLOX_FRUITS_RACE_SECTION_ORDER,
+    additionalColumns: ["unlockRoute", "rerollStatus", "bestFor", "mainStrength", "mainLimit", "v4Trial", "v4Title"],
+    hiddenKeys: BLOX_FRUITS_RACE_HIDDEN_KEYS,
+    maxStats: 7,
+    transformItem: withBloxFruitsRaceFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-bosses": {
+    groupKey: "catalogSection",
+    groupLabel: "Boss route",
+    sectionOrder: BLOX_FRUITS_BOSS_SECTION_ORDER,
+    additionalColumns: ["displaySea", "location", "level", "respawnAccess", "dropsRewards", "routeUse"],
+    hiddenKeys: BLOX_FRUITS_BOSS_HIDDEN_KEYS,
+    maxStats: 6,
+    transformItem: withBloxFruitsBossFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-enemies": {
+    groupKey: "catalogSection",
+    groupLabel: "Enemy stage",
+    sectionOrder: BLOX_FRUITS_ENEMY_SECTION_ORDER,
+    additionalColumns: [
+      "seaStage",
+      "level",
+      "islandRegion",
+      "questSource",
+      "elementalBladeLevel",
+      "dropsRewards",
+      "accessRespawn",
+      "grindNote"
+    ],
+    hiddenKeys: BLOX_FRUITS_ENEMY_HIDDEN_KEYS,
+    maxStats: 8,
+    transformItem: withBloxFruitsEnemyFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-locations": {
+    groupKey: "catalogSection",
+    groupLabel: "Location route",
+    sectionOrder: BLOX_FRUITS_LOCATION_SECTION_ORDER,
+    additionalColumns: ["displaySea", "levelRange", "locationType", "routeRole", "mainNpcs", "accessTravel", "purpose"],
+    hiddenKeys: BLOX_FRUITS_LOCATION_HIDDEN_KEYS,
+    maxStats: 7,
+    transformItem: withBloxFruitsLocationFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-quests": {
+    groupKey: "catalogSection",
+    groupLabel: "Sea",
+    sectionOrder: BLOX_FRUITS_QUEST_SECTION_ORDER,
+    additionalColumns: [
+      "displaySea",
+      "levelRequirement",
+      "islandArea",
+      "questGiverName",
+      "objective",
+      "targetType",
+      "expReward",
+      "moneyReward",
+      "routeNote"
+    ],
+    hiddenKeys: BLOX_FRUITS_QUEST_HIDDEN_KEYS,
+    maxStats: 9,
+    transformItems: withBloxFruitsQuestFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-sea-events": {
+    groupKey: "catalogSection",
+    groupLabel: "Hunt route",
+    sectionOrder: BLOX_FRUITS_SEA_EVENT_SECTION_ORDER,
+    additionalColumns: ["dangerLevel", "displayArea", "spawnAccess", "mainReward", "requiredSetup", "crewNote", "farmRoute"],
+    hiddenKeys: BLOX_FRUITS_SEA_EVENT_HIDDEN_KEYS,
+    maxStats: 7,
+    transformItem: withBloxFruitsSeaEventFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-abilities": {
+    groupKey: "catalogSection",
+    groupLabel: "Ability role",
+    sectionOrder: BLOX_FRUITS_ABILITY_SECTION_ORDER,
+    additionalColumns: [
+      "unlockRoute",
+      "displayCost",
+      "teacherSource",
+      "levelMasteryRequirement",
+      "combatTravelRole",
+      "upgradePath",
+      "keyUse",
+      "limitation"
+    ],
+    hiddenKeys: BLOX_FRUITS_ABILITY_HIDDEN_KEYS,
+    maxStats: 8,
+    transformItem: withBloxFruitsAbilityFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-aura-stages": {
+    groupKey: "catalogSection",
+    groupLabel: "Aura path",
+    sectionOrder: BLOX_FRUITS_AURA_STAGE_SECTION_ORDER,
+    additionalColumns: ["displayStage", "coverage", "auraExpNeeded", "bonusEffect", "progressionNote"],
+    hiddenKeys: BLOX_FRUITS_AURA_STAGE_HIDDEN_KEYS,
+    maxStats: 5,
+    transformItem: withBloxFruitsAuraStageFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-aura-visuals": {
+    groupKey: "catalogSection",
+    groupLabel: "Aura visual",
+    sectionOrder: BLOX_FRUITS_AURA_VISUAL_SECTION_ORDER,
+    additionalColumns: ["visualStage", "bodyCoverage", "armsVisual", "legsVisual", "statEffect", "equipUseNote"],
+    hiddenKeys: BLOX_FRUITS_AURA_VISUAL_HIDDEN_KEYS,
+    maxStats: 6,
+    transformItem: withBloxFruitsAuraVisualFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-boats": {
+    groupKey: "catalogSection",
+    groupLabel: "Boat route",
+    sectionOrder: BLOX_FRUITS_BOAT_SECTION_ORDER,
+    additionalColumns: ["sourceAccess", "displayPrice", "displayHealth", "displaySeats", "displayCannons", "displaySpeed", "seaEventRole", "specialUse"],
+    hiddenKeys: BLOX_FRUITS_BOAT_HIDDEN_KEYS,
+    maxStats: 8,
+    transformItem: withBloxFruitsBoatFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-guns": {
+    groupKey: "catalogSection",
+    groupLabel: "Gun route",
+    sectionOrder: BLOX_FRUITS_GUN_SECTION_ORDER,
+    additionalColumns: ["displaySea", "sourceRoute", "costOrDrop", "requirementMastery", "combatRole", "upgradeUse", "availability"],
+    hiddenKeys: BLOX_FRUITS_GUN_HIDDEN_KEYS,
+    maxStats: 7,
+    transformItem: withBloxFruitsGunFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-instinct-levels": {
+    groupKey: "catalogSection",
+    groupLabel: "Instinct path",
+    sectionOrder: BLOX_FRUITS_INSTINCT_LEVEL_SECTION_ORDER,
+    additionalColumns: ["displayLevel", "expRange", "baseDodges", "progressNote"],
+    hiddenKeys: BLOX_FRUITS_INSTINCT_LEVEL_HIDDEN_KEYS,
+    maxStats: 4,
+    transformItem: withBloxFruitsInstinctLevelFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-npcs": {
+    groupKey: "catalogSection",
+    groupLabel: "NPC role",
+    sectionOrder: BLOX_FRUITS_NPC_SECTION_ORDER,
+    additionalColumns: [
+      "npcRole",
+      "displaySea",
+      "displayLocation",
+      "purpose",
+      "combatLevel",
+      "accessSpawn",
+      "combat",
+      "availability",
+      "relatedRoute"
+    ],
+    hiddenKeys: BLOX_FRUITS_NPC_HIDDEN_KEYS,
+    maxStats: 9,
+    transformItem: withBloxFruitsNpcFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-titles": {
+    groupKey: "catalogSection",
+    groupLabel: "Unlock route",
+    sectionOrder: BLOX_FRUITS_TITLE_SECTION_ORDER,
+    additionalColumns: ["displayTitleNumber", "unlockRequirement", "unlockRoute", "relatedTarget", "availabilityNote"],
+    hiddenKeys: BLOX_FRUITS_TITLE_HIDDEN_KEYS,
+    maxStats: 5,
+    transformItem: withBloxFruitsTitleFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-special-titles": {
+    groupKey: "catalogSection",
+    groupLabel: "Special title type",
+    sectionOrder: BLOX_FRUITS_SPECIAL_TITLE_SECTION_ORDER,
+    additionalColumns: ["grantRoute", "holderTarget", "obtainmentNote", "normalPlayerRoute"],
+    hiddenKeys: BLOX_FRUITS_SPECIAL_TITLE_HIDDEN_KEYS,
+    maxStats: 4,
+    transformItem: withBloxFruitsSpecialTitleFields,
+    getSectionLabel: getCatalogSection
+  },
+  "blox-fruits-title-colors": {
+    groupKey: "catalogSection",
+    groupLabel: "Color unlock",
+    sectionOrder: BLOX_FRUITS_TITLE_COLOR_SECTION_ORDER,
+    additionalColumns: ["unlockRequirement", "titleCountNeeded", "unlockStage", "visualRole"],
+    hiddenKeys: BLOX_FRUITS_TITLE_COLOR_HIDDEN_KEYS,
+    maxStats: 4,
+    transformItem: withBloxFruitsTitleColorFields,
+    getSectionLabel: getCatalogSection
+  },
   "sailor-piece-fruits": {
     groupKey: "tier",
     groupLabel: "Fruit tier",
@@ -522,6 +1211,1947 @@ function withDisplayRarity(item: GameDatasetCatalogItem): GameDatasetCatalogItem
     ...item,
     displayRarity: rarity && STANDARD_RARITIES.has(rarity) ? rarity : null
   };
+}
+
+function withBloxFruitsAccessoryFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const bonusParts = getBloxFruitsBonusParts(item);
+
+  return {
+    ...item,
+    catalogSection: getBloxFruitsAccessorySection(item),
+    displaySea: getBloxFruitsAccessorySeaLabel(item),
+    bestFor: getBloxFruitsAccessoryBestFor(bonusParts),
+    damage: filterBloxFruitsBonusParts(bonusParts, isBloxFruitsDamageBonus),
+    defense: filterBloxFruitsBonusParts(bonusParts, isBloxFruitsDefenseBonus),
+    mobility: filterBloxFruitsBonusParts(bonusParts, isBloxFruitsMobilityBonus),
+    utility: filterBloxFruitsBonusParts(bonusParts, isBloxFruitsUtilityBonus)
+  };
+}
+
+function getBloxFruitsAccessorySection(item: GameDatasetCatalogItem): string | null {
+  const sea = normalizeValue(item.sea)?.toLowerCase() ?? "";
+  if (!sea) return null;
+  if (sea.includes("admin")) return "Admin-only accessories";
+  if (sea.includes("event")) return "Event accessories";
+
+  const seaNumbers = Array.from(new Set(sea.match(/[123]/g) ?? []));
+  if (seaNumbers.length > 1) return "Multi-sea accessories";
+  if (seaNumbers[0] === "1") return "First Sea accessories";
+  if (seaNumbers[0] === "2") return "Second Sea accessories";
+  if (seaNumbers[0] === "3") return "Third Sea accessories";
+  return null;
+}
+
+function getBloxFruitsAccessorySeaLabel(item: GameDatasetCatalogItem): string | null {
+  const sea = normalizeValue(item.sea)?.toLowerCase() ?? "";
+  if (!sea) return null;
+  if (sea.includes("admin")) return "Admin-only";
+  if (sea.includes("event")) return "Event";
+
+  const seaNumbers = Array.from(new Set(sea.match(/[123]/g) ?? []));
+  if (!seaNumbers.length) return null;
+  const seaLabels: Record<string, string> = {
+    "1": "First Sea",
+    "2": "Second Sea",
+    "3": "Third Sea"
+  };
+  return seaNumbers.map((value) => seaLabels[value]).filter(Boolean).join(" / ") || null;
+}
+
+function getBloxFruitsBonusParts(item: GameDatasetCatalogItem): string[] {
+  const raw = normalizeValue(item.bonuses);
+  if (!raw) return [];
+  return (
+    raw
+      .match(/[+-]\s*\d[\s\S]*?(?=\s+[+-]\s*\d|$)/g)
+      ?.map((part) => normalizeBloxFruitsBonusPart(part))
+      .filter(Boolean) ?? []
+  );
+}
+
+function normalizeBloxFruitsBonusPart(value: string): string {
+  return value
+    .replace(/\s+/g, " ")
+    .replace(/\bFruit -/g, "Blox Fruit -")
+    .replace(/\bFlashStep\b/g, "Flash Step")
+    .trim();
+}
+
+function filterBloxFruitsBonusParts(
+  bonusParts: string[],
+  predicate: (value: string) => boolean
+): string[] | null {
+  const matches = bonusParts.filter(predicate);
+  return matches.length ? matches : null;
+}
+
+function isBloxFruitsDamageBonus(value: string): boolean {
+  const lowered = value.toLowerCase();
+  return (
+    lowered.includes("damage") &&
+    !lowered.includes("damage resistance") &&
+    !lowered.includes("damage reduction") &&
+    !lowered.includes("defense") &&
+    !lowered.includes("material drop rate")
+  );
+}
+
+function isBloxFruitsDefenseBonus(value: string): boolean {
+  const lowered = value.toLowerCase();
+  return (
+    lowered.includes("damage resistance") ||
+    lowered.includes("damage reduction") ||
+    lowered.includes("defense") ||
+    lowered.includes("health") ||
+    lowered.includes("life leech")
+  );
+}
+
+function isBloxFruitsMobilityBonus(value: string): boolean {
+  const lowered = value.toLowerCase();
+  return (
+    lowered.includes("movement speed") ||
+    lowered.includes("dash") ||
+    lowered.includes("dashing") ||
+    lowered.includes("flash step") ||
+    lowered.includes("air jump")
+  );
+}
+
+function isBloxFruitsUtilityBonus(value: string): boolean {
+  const lowered = value.toLowerCase();
+  return (
+    lowered.includes("energy") ||
+    lowered.includes("cooldown") ||
+    lowered.includes("instinct") ||
+    lowered.includes("vision") ||
+    lowered.includes("drop rate") ||
+    lowered.includes("boost") ||
+    lowered.includes("multiplier") ||
+    lowered.includes("terror level") ||
+    lowered.includes("meter")
+  );
+}
+
+function getBloxFruitsAccessoryBestFor(bonusParts: string[]): string[] | null {
+  const text = bonusParts.join(" ").toLowerCase();
+  if (!text) return null;
+
+  const labels: string[] = [];
+  addBloxFruitsBestForLabel(labels, /sea event|sea damage reduction/.test(text), "Sea events");
+  addBloxFruitsBestForLabel(labels, /blox fruit - (damage|cooldown|damage resistance)|fruit meter/.test(text), "Blox Fruit builds");
+  addBloxFruitsBestForLabel(labels, /sword - (damage|cooldown|damage resistance)/.test(text), "Sword builds");
+  addBloxFruitsBestForLabel(labels, /melee - (damage|cooldown|damage resistance)|life leech/.test(text), "Melee builds");
+  addBloxFruitsBestForLabel(labels, /gun - (damage|cooldown|damage resistance)/.test(text), "Gun builds");
+  addBloxFruitsBestForLabel(labels, /all - (damage|cooldown|damage resistance)/.test(text), "Hybrid builds");
+  addBloxFruitsBestForLabel(labels, bonusParts.some(isBloxFruitsMobilityBonus), "Mobility");
+  addBloxFruitsBestForLabel(labels, /instinct|vision/.test(text), "PvP tracking");
+  addBloxFruitsBestForLabel(labels, bonusParts.some(isBloxFruitsDefenseBonus), "Defense");
+  addBloxFruitsBestForLabel(labels, /experience|token|candy|hearts|friendship/.test(text), "Event or EXP farming");
+
+  return labels.length ? labels.slice(0, 4) : null;
+}
+
+function addBloxFruitsBestForLabel(labels: string[], shouldAdd: boolean, label: string) {
+  if (shouldAdd && !labels.includes(label)) {
+    labels.push(label);
+  }
+}
+
+function withBloxFruitsFruitFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const status = getBloxFruitsFruitStatus(item);
+  const baseFruit = getBloxFruitsMutationBaseFruit(item);
+
+  return {
+    ...item,
+    catalogSection: getBloxFruitsFruitSection(item),
+    displayType: baseFruit ? "Mutation" : normalizeValue(item.type),
+    moneyPrice: formatBloxFruitsMoney(item.money),
+    permanentPrice: formatBloxFruitsRobux(item.robux),
+    awakeningCost: formatBloxFruitsFragments(getBloxFruitsFieldValue(item, "awakening")),
+    status,
+    baseFruit
+  };
+}
+
+function getBloxFruitsFruitSection(item: GameDatasetCatalogItem): string | null {
+  const unavailableReason = normalizeValue(getBloxFruitsFieldValue(item, "unavailableReason"));
+  const type = normalizeValue(item.type);
+  if (unavailableReason?.toLowerCase() === "admin-exclusive") return "Admin-only fruits";
+  if (unavailableReason) return "Legacy and unavailable fruits";
+  if (getBloxFruitsMutationBaseFruit(item)) return "Fruit mutations";
+  if (type === "Natural") return "Natural fruits";
+  if (type === "Elemental") return "Elemental fruits";
+  if (type === "Beast") return "Beast fruits";
+  return null;
+}
+
+function getBloxFruitsFruitStatus(item: GameDatasetCatalogItem): string {
+  const unavailableReason = normalizeValue(getBloxFruitsFieldValue(item, "unavailableReason"));
+  if (unavailableReason) return unavailableReason === "Admin-Exclusive" ? "Admin-only" : unavailableReason;
+  if (getBloxFruitsMutationBaseFruit(item)) return "Mutation";
+  return "Current";
+}
+
+function getBloxFruitsMutationBaseFruit(item: GameDatasetCatalogItem): string | null {
+  const name = normalizeValue(item.name) ?? "";
+  const match = name.match(/\(([^)]+)\)/);
+  if (!match?.[1]) return null;
+  if (/^(empyrean|fiend|werewolf)\b/i.test(name)) return match[1];
+  return null;
+}
+
+function withBloxFruitsSwordFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  return {
+    ...item,
+    catalogSection: getBloxFruitsSwordSection(item),
+    displaySea: getBloxFruitsSeaLabel(item.sea),
+    sourceRoute: getBloxFruitsSwordSourceRoute(item),
+    displayCost: getBloxFruitsSwordCost(item),
+    progressionUse: getBloxFruitsSwordProgressionUse(item)
+  };
+}
+
+function getBloxFruitsSwordSection(item: GameDatasetCatalogItem): string | null {
+  const sea = normalizeValue(item.sea)?.toLowerCase() ?? "";
+  if (sea.includes("admin")) return "Admin-only swords";
+
+  const seaNumbers = getBloxFruitsSeaNumbers(item.sea);
+  if (seaNumbers.length > 1) return "Multi-sea and special swords";
+  if (seaNumbers[0] === "1") return "First Sea swords";
+  if (seaNumbers[0] === "2") return "Second Sea swords";
+  if (seaNumbers[0] === "3") return "Third Sea swords";
+  return null;
+}
+
+function getBloxFruitsSwordSourceRoute(item: GameDatasetCatalogItem): string | null {
+  const name = normalizeValue(item.name) ?? "";
+  if (name === "Triple Dark Blade") return "Admin-only";
+  if (name === "Fishing Trophy") return "2025 Fishing Tournament";
+
+  const obtainment = normalizeValue(item.obtainment);
+  if (!obtainment) return null;
+
+  const fromMatch = obtainment.match(/^(?:[\d,]+|\d(?:\s+\d)+)\s+from\s+(.+)$/i);
+  if (fromMatch?.[1]) return normalizeBloxFruitsRouteText(fromMatch[1]);
+
+  if (/^from\s+/i.test(obtainment)) {
+    return normalizeBloxFruitsRouteText(obtainment.replace(/^from\s+/i, ""));
+  }
+
+  return normalizeBloxFruitsRouteText(obtainment);
+}
+
+function getBloxFruitsSwordCost(item: GameDatasetCatalogItem): string | null {
+  return formatBloxFruitsMoney(item.money) ?? formatBloxFruitsRobux(item.robux);
+}
+
+function getBloxFruitsSwordProgressionUse(item: GameDatasetCatalogItem): string | null {
+  const route = getBloxFruitsSwordSourceRoute(item)?.toLowerCase() ?? "";
+  const name = normalizeValue(item.name) ?? "";
+  if (!route) return name === "Triple Dark Blade" ? "Admin-only reference" : null;
+  if (route.includes("shop") || route.includes("dealer")) return "Shop weapon";
+  if (route.includes("tournament")) return "Tournament reward";
+  if (route.includes("admin")) return "Admin-only reference";
+  if (route.includes("scroll") || route.includes("quest") || route.includes("trial")) return "Quest weapon";
+  if (route.includes("shrine") || route.includes("rough sea") || route.includes("lightning")) return "Special event route";
+  if (/defeat|boss|reaper|queen|prince|king|indra|longma|terrorshark|order|saw/.test(route)) {
+    return "Boss drop";
+  }
+  return null;
+}
+
+function withBloxFruitsFightingStyleFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const name = normalizeValue(item.name) ?? "";
+  const details = getBloxFruitsFightingStyleDetails(name);
+
+  return {
+    ...item,
+    catalogSection: details.section,
+    sourceTeacher: details.teacher ?? getBloxFruitsTeacherFromType(item),
+    costSummary: details.cost,
+    masteryGate: details.masteryGate,
+    extraUnlock: details.extraUnlock,
+    progressionRole: details.progressionRole,
+    bestFor: details.bestFor
+  };
+}
+
+function getBloxFruitsFightingStyleDetails(name: string) {
+  const details: Record<
+    string,
+    {
+      section: string;
+      teacher?: string | null;
+      cost?: string | null;
+      masteryGate?: string | null;
+      extraUnlock?: string | null;
+      progressionRole?: string | null;
+      bestFor?: string | null;
+    }
+  > = {
+    Combat: {
+      section: "Starter and First Sea fighting styles",
+      teacher: "Starter style",
+      progressionRole: "Starter melee",
+      bestFor: "New characters"
+    },
+    "Dark Step": {
+      section: "Starter and First Sea fighting styles",
+      cost: "$150,000",
+      progressionRole: "Death Step base",
+      bestFor: "Early mastery path"
+    },
+    Electric: {
+      section: "Starter and First Sea fighting styles",
+      cost: "$500,000",
+      progressionRole: "Electric Claw base",
+      bestFor: "Early mastery path"
+    },
+    "Water Kung Fu": {
+      section: "Starter and First Sea fighting styles",
+      cost: "$750,000",
+      progressionRole: "Sharkman Karate base",
+      bestFor: "Early mastery path"
+    },
+    "Dragon Breath": {
+      section: "Second Sea fighting styles",
+      cost: "1,500 fragments",
+      progressionRole: "Dragon Talon base",
+      bestFor: "Fragment unlock path"
+    },
+    Superhuman: {
+      section: "Second Sea fighting styles",
+      cost: "$3,000,000",
+      masteryGate: "300 mastery on Dark Step, Electric, Water Kung Fu, and Dragon Breath",
+      progressionRole: "Godhuman requirement",
+      bestFor: "Midgame melee chain"
+    },
+    "Death Step": {
+      section: "Second Sea fighting styles",
+      cost: "$2,500,000 + 5,000 fragments",
+      masteryGate: "400 mastery on Dark Step",
+      extraUnlock: "Library Key",
+      progressionRole: "Dark Step upgrade",
+      bestFor: "Godhuman chain"
+    },
+    "Sharkman Karate": {
+      section: "Second Sea fighting styles",
+      cost: "$2,500,000 + 5,000 fragments",
+      masteryGate: "400 mastery on Water Kung Fu",
+      extraUnlock: "Water Key",
+      progressionRole: "Water Kung Fu upgrade",
+      bestFor: "Godhuman chain"
+    },
+    "Electric Claw": {
+      section: "Third Sea fighting styles",
+      cost: "$3,000,000 + 5,000 fragments",
+      masteryGate: "400 mastery on Electric",
+      extraUnlock: "Previous Hero timed quest",
+      progressionRole: "Electric upgrade",
+      bestFor: "Godhuman chain"
+    },
+    "Dragon Talon": {
+      section: "Third Sea fighting styles",
+      cost: "$3,000,000 + 5,000 fragments",
+      masteryGate: "400 mastery on Dragon Breath",
+      extraUnlock: "Fire Essence",
+      progressionRole: "Dragon Breath upgrade",
+      bestFor: "Godhuman chain"
+    },
+    Godhuman: {
+      section: "Third Sea fighting styles",
+      cost: "$5,000,000 + 5,000 fragments + materials",
+      masteryGate: "400 mastery on Superhuman, Death Step, Electric Claw, Sharkman Karate, and Dragon Talon",
+      extraUnlock: "Godhuman material set",
+      progressionRole: "Endgame melee chain",
+      bestFor: "Endgame melee builds"
+    },
+    "Sanguine Art": {
+      section: "Third Sea fighting styles",
+      cost: "Leviathan Heart + $5,000,000 + 5,000 fragments + materials",
+      extraUnlock: "Leviathan Heart",
+      progressionRole: "Leviathan route",
+      bestFor: "Late-game sustain"
+    }
+  };
+
+  return (
+    details[name] ?? {
+      section: "Starter and First Sea fighting styles",
+      cost: formatBloxFruitsMoney(null),
+      progressionRole: null,
+      bestFor: null
+    }
+  );
+}
+
+function getBloxFruitsTeacherFromType(item: GameDatasetCatalogItem): string | null {
+  const type = normalizeValue(item.type);
+  if (!type || type === "Source N/A") return null;
+  return type.replace(/^Source\s+/i, "").trim() || null;
+}
+
+function withBloxFruitsMaterialFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  return {
+    ...item,
+    catalogSection: getBloxFruitsMaterialSection(item),
+    displaySea: getBloxFruitsSeaLabel(item.sea),
+    sourceRoute: normalizeBloxFruitsRouteText(normalizeValue(item.source)),
+    use: getBloxFruitsMaterialUse(item),
+    farmRoute: getBloxFruitsMaterialFarmRoute(item),
+    craftCost: getBloxFruitsMaterialCraftCost(item)
+  };
+}
+
+function getBloxFruitsMaterialSection(item: GameDatasetCatalogItem): string {
+  const purpose = normalizeValue(item.purpose)?.toLowerCase() ?? "";
+  const sea = normalizeValue(item.sea)?.toLowerCase() ?? "";
+  if (purpose.includes("currency") || purpose.includes("gacha") || purpose.includes("random surprise") || sea.includes("event")) {
+    return "Event currency and gacha materials";
+  }
+  if (
+    purpose.includes("obtaining") ||
+    purpose.includes("unlocking") ||
+    purpose.includes("spawning") ||
+    purpose.includes("race awakening")
+  ) {
+    return "Unlock and progression materials";
+  }
+  if (purpose.includes("crafting")) return "Crafting and recipe materials";
+  if (purpose.includes("upgrading")) return "Upgrade materials";
+  if (purpose.includes("repairing") || purpose === "none") return "Utility and no-use materials";
+  return "Utility and no-use materials";
+}
+
+function getBloxFruitsMaterialUse(item: GameDatasetCatalogItem): string | null {
+  const purpose = normalizeValue(item.purpose);
+  if (!purpose) return null;
+  return purpose.toLowerCase() === "none" ? "No listed use" : normalizeBloxFruitsRouteText(purpose);
+}
+
+function getBloxFruitsMaterialFarmRoute(item: GameDatasetCatalogItem): string | null {
+  const source = normalizeValue(item.source)?.toLowerCase() ?? "";
+  const purpose = normalizeValue(item.purpose)?.toLowerCase() ?? "";
+  const sea = normalizeValue(item.sea)?.toLowerCase() ?? "";
+  if (sea.includes("event") || purpose.includes("currency") || purpose.includes("gacha")) return "Event or gacha route";
+  if (source.includes("various enemies") || source.includes("bushes") || source.includes("trees")) return "World drop";
+  if (source.includes("shop") || source.includes("npc") || source.includes("simulation hub")) return "NPC or shop route";
+  if (
+    /raid|leviathan|terrorshark|shrine|volcano|dough king|darkbeard|fajita|hunter|dragon wizard|soul reaper|captain|admiral|lord|boss|order/.test(
+      source
+    )
+  ) {
+    return "Boss, raid, or sea event";
+  }
+  if (source) return "Named enemy drop";
+  return null;
+}
+
+function getBloxFruitsMaterialCraftCost(item: GameDatasetCatalogItem): string | null {
+  const name = normalizeValue(item.name);
+  if (name === "Volcanic Magnet") return "15 Blaze Ember + 10 Scrap Metal";
+  return null;
+}
+
+function withBloxFruitsRaceFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const name = normalizeValue(item.name) ?? "";
+  const details = getBloxFruitsRaceDetails(name);
+
+  return {
+    ...item,
+    catalogSection: details.section,
+    unlockRoute: details.unlockRoute,
+    rerollStatus: details.rerollStatus,
+    bestFor: details.bestFor,
+    mainStrength: details.mainStrength,
+    mainLimit: details.mainLimit,
+    v4Trial: details.v4Trial,
+    v4Title: details.v4Title
+  };
+}
+
+function getBloxFruitsRaceDetails(name: string) {
+  const details: Record<
+    string,
+    {
+      section: string;
+      unlockRoute: string;
+      rerollStatus: string;
+      bestFor: string;
+      mainStrength: string;
+      mainLimit: string;
+      v4Trial: string;
+      v4Title: string;
+    }
+  > = {
+    Human: {
+      section: "Starter and reroll races",
+      unlockRoute: "Starter/reroll pool",
+      rerollStatus: "Rerollable",
+      bestFor: "Aggressive PvP combos",
+      mainStrength: "Damage and mobility",
+      mainLimit: "No built-in defense",
+      v4Trial: "Trial of Strength",
+      v4Title: "Berserker"
+    },
+    Rabbit: {
+      section: "Starter and reroll races",
+      unlockRoute: "Starter/reroll pool",
+      rerollStatus: "Rerollable",
+      bestFor: "Travel, chasing, and dodging",
+      mainStrength: "Speed and movement",
+      mainLimit: "Low damage, defense, and healing",
+      v4Trial: "Trial of Speed",
+      v4Title: "Thunderbolt"
+    },
+    Shark: {
+      section: "Starter and reroll races",
+      unlockRoute: "Starter/reroll pool",
+      rerollStatus: "Rerollable",
+      bestFor: "Defense and early sea events",
+      mainStrength: "Damage reduction and water safety",
+      mainLimit: "Lower mobility and damage",
+      v4Trial: "Trial of Water",
+      v4Title: "Leviathan"
+    },
+    Angel: {
+      section: "Starter and reroll races",
+      unlockRoute: "Starter/reroll pool",
+      rerollStatus: "Rerollable",
+      bestFor: "Healing and combo disruption",
+      mainStrength: "Healing, jumps, and V4 control",
+      mainLimit: "Counterable before stronger awakenings",
+      v4Trial: "Trial of the King",
+      v4Title: "His Majesty"
+    },
+    Ghoul: {
+      section: "Quest-only races",
+      unlockRoute: "Experimic",
+      rerollStatus: "Quest unlock",
+      bestFor: "Sustain PvP and cooldown pressure",
+      mainStrength: "Night speed, life leech, and cooldown pressure",
+      mainLimit: "Less armor support than tank races",
+      v4Trial: "Trial of Carnage",
+      v4Title: "Nightwalker"
+    },
+    Cyborg: {
+      section: "Quest-only races",
+      unlockRoute: "Cyborg Puzzle",
+      rerollStatus: "Quest unlock",
+      bestFor: "Grinding groups, team fights, and Instinct breaks",
+      mainStrength: "AoE damage, defense, and combo disruption",
+      mainLimit: "Average V3 range and weaker 1v1 V4 damage",
+      v4Trial: "Trial of the Machine",
+      v4Title: "Genesis"
+    },
+    Draco: {
+      section: "Quest-only races",
+      unlockRoute: "Dragon Wizard quest",
+      rerollStatus: "Third Sea quest unlock",
+      bestFor: "Late-game V4 area pressure",
+      mainStrength: "Third Sea exclusive race with damage or reflect-style V4 paths",
+      mainLimit: "Not a normal reroll and needs late progression",
+      v4Trial: "Trial of Flames",
+      v4Title: "Primordial Guardian"
+    }
+  };
+
+  return (
+    details[name] ?? {
+      section: "Quest-only races",
+      unlockRoute: "Special route",
+      rerollStatus: "Quest unlock",
+      bestFor: "Build choice",
+      mainStrength: "Race-specific bonuses",
+      mainLimit: "Check unlock route first",
+      v4Trial: "",
+      v4Title: ""
+    }
+  );
+}
+
+function withBloxFruitsBossFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  return {
+    ...item,
+    catalogSection: getBloxFruitsBossSection(item),
+    displaySea: getBloxFruitsSeaLabel(getBloxFruitsFieldValue(item, "sea")) ?? getBloxFruitsBossSection(item).replace(" bosses", ""),
+    respawnAccess: getBloxFruitsBossRespawnAccess(item),
+    dropsRewards: getBloxFruitsBossDropsRewards(item),
+    routeUse: getBloxFruitsBossRouteUse(item)
+  };
+}
+
+function getBloxFruitsBossSection(item: GameDatasetCatalogItem): string {
+  const location = normalizeValue(getBloxFruitsFieldValue(item, "location"))?.toLowerCase() ?? "";
+  const sea = normalizeValue(getBloxFruitsFieldValue(item, "sea"))?.toLowerCase() ?? "";
+  if (location.includes("dungeon")) return "Dungeon bosses";
+
+  const seaNumbers = getBloxFruitsSeaNumbers(getBloxFruitsFieldValue(item, "sea"));
+  if (sea.includes("event") || seaNumbers.length > 1 || !seaNumbers.length) return "Event and multi-sea bosses";
+  if (seaNumbers[0] === "1") return "First Sea bosses";
+  if (seaNumbers[0] === "2") return "Second Sea bosses";
+  if (seaNumbers[0] === "3") return "Third Sea bosses";
+  return "Event and multi-sea bosses";
+}
+
+function getBloxFruitsBossRespawnAccess(item: GameDatasetCatalogItem): string | null {
+  const spawnTime = normalizeValue(getBloxFruitsFieldValue(item, "spawnTime"));
+  const despawnTime = normalizeValue(getBloxFruitsFieldValue(item, "despawnTime"));
+  const overview = normalizeValue(item.overview)?.toLowerCase() ?? "";
+  const parts: string[] = [];
+  if (spawnTime) parts.push(`Respawns in ${spawnTime.toLowerCase()}`);
+  if (despawnTime) parts.push(`despawns after ${despawnTime.toLowerCase()}`);
+  if (overview.includes("only accessible") || overview.includes("requires") || overview.includes("summon")) {
+    parts.push("special access");
+  }
+  return parts.length ? sentenceCase(parts.join("; ")) : null;
+}
+
+function getBloxFruitsBossDropsRewards(item: GameDatasetCatalogItem): string | null {
+  const name = normalizeValue(item.name) ?? "";
+  const rewardByName: Record<string, string> = {
+    Core: "Factory Raid reward route",
+    Darkbeard: "Dark Fragment route",
+    Longma: "Tushita route",
+    "Saber Expert": "Saber route",
+    "The Saw": "Shark Saw route",
+    "Rip indra": "Dark Dagger and portal route"
+  };
+  return rewardByName[name] ?? null;
+}
+
+function getBloxFruitsBossRouteUse(item: GameDatasetCatalogItem): string | null {
+  const section = getBloxFruitsBossSection(item);
+  const location = normalizeValue(getBloxFruitsFieldValue(item, "location"));
+  const weaponType = normalizeValue(getBloxFruitsFieldValue(item, "weaponType"));
+  if (section === "Dungeon bosses") return "Dungeon checkpoint";
+  if (section === "Event and multi-sea bosses") return "Special boss route";
+  if (location) return `${location} boss`;
+  return weaponType ? `${weaponType} boss` : null;
+}
+
+function withBloxFruitsEnemyFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  return {
+    ...item,
+    catalogSection: getBloxFruitsEnemySection(item),
+    seaStage: getBloxFruitsEnemySeaStage(item),
+    islandRegion: getBloxFruitsEnemyRegion(item),
+    questSource: getBloxFruitsEnemyQuestSource(item),
+    dropsRewards: getBloxFruitsEnemyDropsRewards(item),
+    accessRespawn: getBloxFruitsEnemyAccess(item),
+    grindNote: cleanBloxFruitsNote(item.notes ?? getBloxFruitsFieldValue(item, "notes"))
+  };
+}
+
+function getBloxFruitsEnemySection(item: GameDatasetCatalogItem): string {
+  const sea = normalizeValue(item.sea)?.toLowerCase() ?? "";
+  if (sea === "first sea") return "First Sea enemies";
+  if (sea === "second sea") return "Second Sea enemies";
+  if (sea === "third sea") return "Third Sea enemies";
+  return "Raid, sea event, and special enemies";
+}
+
+function getBloxFruitsEnemySeaStage(item: GameDatasetCatalogItem): string | null {
+  const section = getBloxFruitsEnemySection(item);
+  if (section === "Raid, sea event, and special enemies") return "Special route";
+  return section.replace(" enemies", "");
+}
+
+function getBloxFruitsEnemyRegion(item: GameDatasetCatalogItem): string | null {
+  const name = normalizeValue(item.name) ?? "";
+  const regionByName: Record<string, string> = {
+    Bandits: "Pirate Starter",
+    "Bandits/Trainees": "Starter islands",
+    Monkeys: "Jungle",
+    Gorillas: "Jungle",
+    Pirates: "Pirate Village",
+    Brutes: "Pirate Village",
+    "Desert Bandits": "Desert",
+    "Desert Officers": "Desert",
+    "Snow Bandits": "Frozen Village",
+    Snowmen: "Frozen Village",
+    "Chief Petty Officers": "Marine Fortress",
+    "Sky Bandits": "Skylands",
+    "Dark Masters": "Skylands",
+    Prisoner: "Prison",
+    "Dangerous Prisoner": "Prison",
+    "Toga Warrior": "Colosseum",
+    Gladiator: "Colosseum",
+    "Fishman Warrior": "Underwater City",
+    "Fishman Commando": "Underwater City",
+    Raider: "Kingdom of Rose",
+    Mercenary: "Kingdom of Rose",
+    Zombie: "Graveyard Island",
+    Vampire: "Graveyard Island",
+    "Sea Soldier": "Forgotten Island",
+    "Water Fighter": "Forgotten Island",
+    "Pirate Millionaire": "Port Town",
+    "Pistol Billionaire": "Port Town",
+    "Dragon Crew Warrior": "Hydra Island",
+    "Dragon Crew Archer": "Hydra Island",
+    "Forest Pirate": "Floating Turtle",
+    "Musketeer Pirate": "Floating Turtle",
+    "Peanut Scout": "Sea of Treats",
+    "Candy Rebel": "Sea of Treats",
+    "Reef Bandit": "Submerged Island",
+    "Grand Devotee": "Submerged Island",
+    Shark: "Sea event",
+    Piranha: "Sea event",
+    "Ghost Shark": "Haunted Shipwreck",
+    "Haunted Crew Member": "Haunted Shipwreck"
+  };
+  return regionByName[name] ?? null;
+}
+
+function getBloxFruitsEnemyQuestSource(item: GameDatasetCatalogItem): string | null {
+  const section = getBloxFruitsEnemySection(item);
+  if (section === "Raid, sea event, and special enemies") return "Special encounter";
+  return "Leveling route";
+}
+
+function getBloxFruitsEnemyDropsRewards(item: GameDatasetCatalogItem): string | null {
+  const name = normalizeValue(item.name) ?? "";
+  const rewards: Record<string, string> = {
+    Shark: "Shark Tooth",
+    Piranha: "Electric Wing",
+    "Ghost Shark": "Shark Tooth, Ectoplasm, Bones",
+    "Haunted Crew Member": "Fool's Gold",
+    "Ghost Ship Raid": "Fool's Gold, Valor, fragments, fruit chance",
+    "Ship Raid": "Fragments, Fool's Gold, fruit chance"
+  };
+  return rewards[name] ?? null;
+}
+
+function getBloxFruitsEnemyAccess(item: GameDatasetCatalogItem): string | null {
+  const section = getBloxFruitsEnemySection(item);
+  if (section !== "Raid, sea event, and special enemies") return null;
+  const name = normalizeValue(item.name) ?? "";
+  if (/ghost|haunted/i.test(name)) return "Haunted Shipwreck route";
+  if (/shark|piranha|ship raid/i.test(name)) return "Sea-event route";
+  if (/raid|dummy|elite/i.test(name)) return "Special activity";
+  return "Special route";
+}
+
+function withBloxFruitsLocationFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const details = getBloxFruitsLocationDetails(item);
+
+  return {
+    ...item,
+    catalogSection: details.section,
+    displaySea: details.displaySea,
+    levelRange: details.levelRange,
+    locationType: details.locationType,
+    routeRole: details.routeRole,
+    mainNpcs: details.mainNpcs,
+    accessTravel: details.accessTravel,
+    purpose: details.purpose
+  };
+}
+
+function getBloxFruitsLocationDetails(item: GameDatasetCatalogItem) {
+  const name = normalizeValue(item.name) ?? "";
+  const type = normalizeValue(getBloxFruitsFieldValue(item, "type"));
+  const location = normalizeValue(getBloxFruitsFieldValue(item, "location"));
+  const overview = normalizeValue(item.overview);
+  const seaLabel = getBloxFruitsSeaLabel(getBloxFruitsFieldValue(item, "sea"));
+  const lowerName = name.toLowerCase();
+  const lowerType = type?.toLowerCase() ?? "";
+  const lowerLocation = location?.toLowerCase() ?? "";
+  const lowerOverview = overview?.toLowerCase() ?? "";
+  const seaNumbers = getBloxFruitsSeaNumbers(getBloxFruitsFieldValue(item, "sea"));
+
+  const special = getBloxFruitsLocationSpecialDetails(name);
+  if (special) {
+    return {
+      ...special,
+      displaySea: special.displaySea ?? seaLabel ?? "Special",
+      levelRange: special.levelRange ?? getBloxFruitsLocationLevelRange(item),
+      locationType: special.locationType ?? cleanBloxFruitsLocationType(type, name),
+      accessTravel: special.accessTravel ?? location ?? null
+    };
+  }
+
+  if (lowerType.includes("sea event") || lowerLocation.includes("sea danger")) {
+    return {
+      section: "Sea-event locations",
+      displaySea: seaLabel ?? "Third Sea",
+      levelRange: getBloxFruitsLocationLevelRange(item),
+      locationType: "Sea event",
+      routeRole: "Sea-event spawn",
+      mainNpcs: getBloxFruitsLocationNpcHint(name, overview),
+      accessTravel: location ?? "Sea Danger route",
+      purpose: getBloxFruitsLocationPurpose(name, overview)
+    };
+  }
+
+  const section =
+    seaNumbers.length === 1 && seaNumbers[0] === "1"
+      ? "First Sea locations"
+      : seaNumbers.length === 1 && seaNumbers[0] === "2"
+        ? "Second Sea locations"
+        : seaNumbers.length === 1 && seaNumbers[0] === "3"
+          ? "Third Sea locations"
+          : "Hidden and special locations";
+
+  return {
+    section,
+    displaySea: seaLabel ?? (section === "Hidden and special locations" ? "Special" : section.replace(" locations", "")),
+    levelRange: getBloxFruitsLocationLevelRange(item),
+    locationType: cleanBloxFruitsLocationType(type, name),
+    routeRole: getBloxFruitsLocationRole(name, lowerName, lowerType, lowerOverview),
+    mainNpcs: getBloxFruitsLocationNpcHint(name, overview),
+    accessTravel: location,
+    purpose: getBloxFruitsLocationPurpose(name, overview)
+  };
+}
+
+function getBloxFruitsLocationSpecialDetails(name: string) {
+  const details: Record<
+    string,
+    {
+      section: string;
+      displaySea?: string | null;
+      levelRange?: string | null;
+      locationType?: string | null;
+      routeRole?: string | null;
+      mainNpcs?: string | null;
+      accessTravel?: string | null;
+      purpose?: string | null;
+    }
+  > = {
+    "North Pole": {
+      section: "Hidden and special locations",
+      displaySea: "All Seas",
+      locationType: "Event island",
+      routeRole: "Christmas event",
+      accessTravel: "Near Frozen Village during the event",
+      purpose: "Seasonal event area"
+    },
+    "Celestial Domain": {
+      section: "Hidden and special locations",
+      locationType: "Event area",
+      routeRole: "Limited event route"
+    },
+    "Oni Realm": {
+      section: "Hidden and special locations",
+      locationType: "Event area",
+      routeRole: "Limited event route"
+    },
+    "Party Realm": {
+      section: "Hidden and special locations",
+      locationType: "Event area",
+      routeRole: "Limited event route"
+    },
+    "Grand Colosseum": {
+      section: "Hidden and special locations",
+      locationType: "Event arena",
+      routeRole: "Special event fight"
+    },
+    "Dimensional Rift": {
+      section: "Hidden and special locations",
+      locationType: "Dimension",
+      routeRole: "Special access"
+    },
+    "Pocket Dimension": {
+      section: "Hidden and special locations",
+      locationType: "Dimension",
+      routeRole: "Special access"
+    },
+    "Pakistan Dimension": {
+      section: "Hidden and special locations",
+      locationType: "Dimension",
+      routeRole: "Special access"
+    },
+    "Rip Family x Red Legion Arena": {
+      section: "Hidden and special locations",
+      locationType: "Arena",
+      routeRole: "Admin or special event reference"
+    }
+  };
+  return details[name] ?? null;
+}
+
+function getBloxFruitsLocationLevelRange(item: GameDatasetCatalogItem): string | null {
+  return normalizeBloxFruitsRouteText(
+    normalizeValue(getBloxFruitsFieldValue(item, "level")) ?? normalizeValue(getBloxFruitsFieldValue(item, "levelRequirement"))
+  );
+}
+
+function cleanBloxFruitsLocationType(type: string | null, name: string): string | null {
+  if (type) return normalizeBloxFruitsRouteText(type);
+  if (/dimension/i.test(name)) return "Dimension";
+  if (/room|cave|laboratory|vault|temple|mansion|domain/i.test(name)) return "Subarea";
+  return null;
+}
+
+function getBloxFruitsLocationRole(name: string, lowerName: string, lowerType: string, lowerOverview: string): string | null {
+  if (lowerType.includes("safe")) return "Safe zone";
+  if (/starter|jungle|desert|village|fortress|prison|city|skylands|kingdom|zone|castle|outpost|island|town/.test(lowerName)) {
+    return "Leveling or hub route";
+  }
+  if (/raid|factory|laboratory/.test(lowerName) || lowerOverview.includes("raid")) return "Raid or activity access";
+  if (/race awakening|temple of time|ancient clock/.test(lowerOverview) || lowerName.includes("temple of time")) {
+    return "Race Awakening route";
+  }
+  if (/boss|domain|crypt/.test(lowerName) || lowerOverview.includes("boss")) return "Boss or unlock route";
+  if (/hidden|secret|cave|room|vault/.test(lowerName)) return "Hidden area";
+  return null;
+}
+
+function getBloxFruitsLocationNpcHint(name: string, overview: string | null): string | null {
+  const text = `${name} ${overview ?? ""}`.toLowerCase();
+  const labels: string[] = [];
+  addBloxFruitsBestForLabel(labels, text.includes("ability teacher"), "Ability Teacher");
+  addBloxFruitsBestForLabel(labels, text.includes("advanced fruit dealer"), "Advanced Fruit Dealer");
+  addBloxFruitsBestForLabel(labels, text.includes("beautiful pirate"), "Beautiful Pirate");
+  addBloxFruitsBestForLabel(labels, text.includes("crypt master"), "Crypt Master");
+  addBloxFruitsBestForLabel(labels, text.includes("sharkman master"), "Sharkman Master");
+  addBloxFruitsBestForLabel(labels, text.includes("blox fruit dealer"), "Blox Fruit Dealer");
+  addBloxFruitsBestForLabel(labels, text.includes("experienced captain"), "Experienced Captain");
+  addBloxFruitsBestForLabel(labels, text.includes("ice admiral"), "Ice Admiral");
+  return labels.length ? labels.join(", ") : null;
+}
+
+function getBloxFruitsLocationPurpose(name: string, overview: string | null): string | null {
+  const text = `${name} ${overview ?? ""}`.toLowerCase();
+  if (text.includes("second sea")) return "Second Sea access";
+  if (text.includes("race awakening") || text.includes("blue gear")) return "Race Awakening";
+  if (text.includes("advanced fruit dealer")) return "Advanced Fruit Dealer route";
+  if (text.includes("volcanic magnet")) return "Prehistoric Island hunt";
+  if (text.includes("sharkman master")) return "Sharkman Karate route";
+  if (text.includes("beautiful pirate")) return "Beautiful Pirate access";
+  if (text.includes("raid")) return "Raid or activity route";
+  if (text.includes("chest")) return "Chest or reward stop";
+  return null;
+}
+
+function withBloxFruitsQuestFields(items: GameDatasetCatalogItem[]): GameDatasetCatalogItem[] {
+  let currentIsland: string | null = null;
+  let currentQuestGiver: string | null = null;
+
+  return items.map((item) => {
+    const parts = (normalizeValue(item.name) ?? "").split(" - ");
+    const sea = normalizeValue(item.sea) ?? parts[0] ?? null;
+    const rawIsland = normalizeValue(item.island);
+    const rawQuestGiver = normalizeValue(item.questGiver);
+    const rawQuest = normalizeValue(item.quest);
+    const rawLevel = normalizeValue(item.level);
+    const rawExp = normalizeValue(item.exp ?? getBloxFruitsFieldValue(item, "expexp"));
+    const rawMoney = normalizeValue(item.money);
+    const rawSpecial = normalizeValue(item.special);
+    const shiftedByQuestGiver = Boolean(rawQuestGiver && /^\d[\d,]*$/.test(rawQuestGiver) && rawQuest?.includes("EXP"));
+    const shiftedByQuest = Boolean(rawQuest && /^\d[\d,]*$/.test(rawQuest) && rawLevel?.includes("EXP"));
+
+    const islandArea = shiftedByQuestGiver || shiftedByQuest ? currentIsland : rawIsland;
+    const questGiverName = shiftedByQuestGiver || shiftedByQuest ? currentQuestGiver : rawQuestGiver;
+    const objective = shiftedByQuestGiver || shiftedByQuest ? parts[1] ?? rawIsland : rawQuest;
+    const levelRequirement = shiftedByQuestGiver ? rawQuestGiver : shiftedByQuest ? rawQuest : rawLevel;
+    const expReward = normalizeBloxFruitsExp(shiftedByQuestGiver ? rawQuest : shiftedByQuest ? rawLevel : rawExp);
+    const moneyReward = formatBloxFruitsRewardMoney(
+      shiftedByQuestGiver ? rawLevel : shiftedByQuest ? null : rawMoney
+    );
+    const routeNote = cleanBloxFruitsNote(rawSpecial) ?? (shiftedByQuest ? cleanBloxFruitsNote(rawMoney) : null);
+
+    if (!shiftedByQuestGiver && !shiftedByQuest) {
+      currentIsland = rawIsland ?? currentIsland;
+      currentQuestGiver = rawQuestGiver ?? currentQuestGiver;
+    }
+
+    return {
+      ...item,
+      name: shiftedByQuestGiver || shiftedByQuest ? [sea, islandArea, objective].filter(Boolean).join(" - ") : item.name,
+      catalogSection: sea,
+      displaySea: sea,
+      levelRequirement,
+      islandArea,
+      questGiverName,
+      objective,
+      targetType: routeNote?.toLowerCase().includes("boss") ? "Boss quest" : "Enemy quest",
+      expReward,
+      moneyReward,
+      routeNote
+    };
+  });
+}
+
+function withBloxFruitsSeaEventFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const name = normalizeValue(item.name) ?? "";
+  const details = getBloxFruitsSeaEventDetails(name);
+
+  return {
+    ...item,
+    catalogSection: details.section,
+    dangerLevel: details.dangerLevel ?? normalizeValue(getBloxFruitsFieldValue(item, "location")),
+    displayArea: details.displayArea ?? getBloxFruitsSeaLabel(getBloxFruitsFieldValue(item, "sea")),
+    spawnAccess: details.spawnAccess,
+    mainReward: details.mainReward,
+    requiredSetup: details.requiredSetup,
+    crewNote: details.crewNote,
+    farmRoute: details.farmRoute
+  };
+}
+
+function getBloxFruitsSeaEventDetails(name: string) {
+  const basic = {
+    section: "Basic travel events",
+    farmRoute: "Basic sail encounter"
+  };
+  const details: Record<
+    string,
+    {
+      section: string;
+      dangerLevel?: string | null;
+      displayArea?: string | null;
+      spawnAccess?: string | null;
+      mainReward?: string | null;
+      requiredSetup?: string | null;
+      crewNote?: string | null;
+      farmRoute?: string | null;
+    }
+  > = {
+    "Ship Raid": {
+      ...basic,
+      dangerLevel: "Open sea",
+      displayArea: "Second Sea / Third Sea",
+      spawnAccess: "Sail by boat",
+      mainReward: "Fragments, Fool's Gold, fruit chance"
+    },
+    "Sea Beast": {
+      ...basic,
+      dangerLevel: "Sea Danger Level 1-6",
+      displayArea: "Second Sea / Third Sea",
+      spawnAccess: "Sail by boat",
+      mainReward: "Money, fragments, sea-event drops",
+      crewNote: "Team helps on higher danger levels"
+    },
+    "Shark (Enemy)": {
+      ...basic,
+      mainReward: "Shark Tooth",
+      spawnAccess: "Sea-event enemy"
+    },
+    Piranha: {
+      ...basic,
+      mainReward: "Electric Wing",
+      spawnAccess: "Sea-event enemy"
+    },
+    "Rough Sea": {
+      ...basic,
+      dangerLevel: "Sea Danger Level 1-6",
+      spawnAccess: "Random rough-water event",
+      mainReward: "Sea-event enemy farming"
+    },
+    "Treasure Island": {
+      ...basic,
+      displayArea: "Second Sea / Third Sea",
+      spawnAccess: "Sea danger island",
+      mainReward: "Chests and rewards"
+    },
+    Terrorshark: {
+      section: "Third Sea combat hunts",
+      dangerLevel: "Sea Danger Level 2-6",
+      displayArea: "Third Sea",
+      spawnAccess: "Danger-level fight",
+      mainReward: "Terrorshark materials",
+      requiredSetup: "Strong boat recommended",
+      crewNote: "Team recommended",
+      farmRoute: "Danger-level fight"
+    },
+    "Rumbling Waters": {
+      section: "Third Sea combat hunts",
+      dangerLevel: "Sea Danger Level 1-6",
+      displayArea: "Third Sea",
+      spawnAccess: "Three Sea Beasts",
+      mainReward: "Sea Beast rewards",
+      requiredSetup: "Boat and damage",
+      crewNote: "Team recommended",
+      farmRoute: "Multi-boss fight"
+    },
+    "Haunted Ship Raid": {
+      section: "Third Sea combat hunts",
+      displayArea: "Haunted Shipwreck",
+      spawnAccess: "Haunted Shipwreck route",
+      mainReward: "Fool's Gold, Valor, fragments, fruit chance",
+      crewNote: "Team helps",
+      farmRoute: "Shipwreck fight"
+    },
+    "Mirage Island": {
+      section: "Rare island spawns",
+      dangerLevel: "Sea Danger Level 2-6",
+      displayArea: "Third Sea",
+      spawnAccess: "Rare sea island",
+      mainReward: "Advanced Fruit Dealer and Blue Gear",
+      farmRoute: "Rare island search"
+    },
+    "Kitsune Island": {
+      section: "Rare island spawns",
+      dangerLevel: "Sea Danger Level 6",
+      displayArea: "Third Sea",
+      spawnAccess: "Full Moon route",
+      mainReward: "Kitsune Shrine access",
+      requiredSetup: "Full Moon timing",
+      crewNote: "Boat owner must stay in boat",
+      farmRoute: "Rare island search"
+    },
+    "Haunted Shipwreck": {
+      section: "Rare island spawns",
+      dangerLevel: "Sea Danger Level 6",
+      displayArea: "Third Sea",
+      spawnAccess: "Rare shipwreck spawn",
+      mainReward: "Chests and ghost encounters",
+      farmRoute: "Rare island search"
+    },
+    "Frozen Dimension": {
+      section: "Rare island spawns",
+      dangerLevel: "Sea Danger Level 6",
+      displayArea: "Third Sea",
+      spawnAccess: "Frozen Watcher route",
+      mainReward: "Leviathan access",
+      requiredSetup: "Spy bribe helps",
+      crewNote: "5+ group needed for Leviathan",
+      farmRoute: "Leviathan route"
+    },
+    "Prehistoric Island": {
+      section: "Rare island spawns",
+      dangerLevel: "Sea Danger Level 6",
+      displayArea: "Third Sea",
+      spawnAccess: "Rare island spawn",
+      mainReward: "Prehistoric rewards",
+      requiredSetup: "Volcanic Magnet recommended",
+      crewNote: "Group search helps",
+      farmRoute: "Prehistoric hunt"
+    },
+    "Ghost Ship Raid": {
+      section: "Island follow-up encounters",
+      displayArea: "Haunted Shipwreck",
+      spawnAccess: "Inside Haunted Shipwreck",
+      mainReward: "Fool's Gold, Valor, fragments, fruit chance",
+      farmRoute: "Nested shipwreck fight"
+    },
+    "Ghost Shark": {
+      section: "Island follow-up encounters",
+      displayArea: "Haunted Shipwreck",
+      spawnAccess: "Inside Haunted Shipwreck",
+      mainReward: "Shark Tooth, Ectoplasm, Bones",
+      farmRoute: "Nested shipwreck enemy"
+    },
+    "Haunted Crew Member": {
+      section: "Island follow-up encounters",
+      displayArea: "Haunted Shipwreck",
+      spawnAccess: "Inside Haunted Shipwreck",
+      mainReward: "Fool's Gold",
+      farmRoute: "Nested shipwreck enemy"
+    },
+    "Kitsune Shrine": {
+      section: "Island follow-up encounters",
+      displayArea: "Kitsune Island",
+      spawnAccess: "Kitsune Island shrine",
+      mainReward: "Azure Ember rewards",
+      requiredSetup: "Kitsune Island active",
+      farmRoute: "Shrine exchange"
+    },
+    Leviathan: {
+      section: "Island follow-up encounters",
+      displayArea: "Frozen Dimension",
+      spawnAccess: "Frozen Watcher summon",
+      mainReward: "Leviathan Heart and scales",
+      requiredSetup: "Beast Hunter for Heart",
+      crewNote: "5+ group for spawn route",
+      farmRoute: "Leviathan route"
+    }
+  };
+
+  return details[name] ?? basic;
+}
+
+function withBloxFruitsAbilityFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const name = normalizeValue(item.name) ?? "";
+  const details = getBloxFruitsAbilityDetails(name);
+
+  return {
+    ...item,
+    catalogSection: details.section,
+    unlockRoute: details.unlockRoute,
+    displayCost: details.cost ?? formatBloxFruitsMoney(getBloxFruitsFieldValue(item, "costToBuy")),
+    teacherSource: details.teacherSource ?? normalizeValue(getBloxFruitsFieldValue(item, "source")),
+    levelMasteryRequirement: details.levelMasteryRequirement,
+    combatTravelRole: details.combatTravelRole,
+    upgradePath: details.upgradePath,
+    keyUse: details.keyUse,
+    limitation: details.limitation
+  };
+}
+
+function getBloxFruitsAbilityDetails(name: string) {
+  const raceCost = "$2,000,000";
+  const aroweRaceSkill = (race: string, use: string) => ({
+    section: "Race abilities and awakenings",
+    unlockRoute: "Race V3 route",
+    cost: raceCost,
+    teacherSource: "Arowe",
+    levelMasteryRequirement: `${race} race`,
+    combatTravelRole: "Race V3 skill",
+    upgradePath: "Race V3",
+    keyUse: use,
+    limitation: "Race-locked"
+  });
+  const details: Record<
+    string,
+    {
+      section: string;
+      unlockRoute?: string | null;
+      cost?: string | null;
+      teacherSource?: string | null;
+      levelMasteryRequirement?: string | null;
+      combatTravelRole?: string | null;
+      upgradePath?: string | null;
+      keyUse?: string | null;
+      limitation?: string | null;
+    }
+  > = {
+    "Air Jump": {
+      section: "Core movement unlocks",
+      unlockRoute: "Ability Teacher",
+      cost: "$10,000",
+      teacherSource: "Ability Teacher",
+      combatTravelRole: "Movement",
+      keyUse: "Multiple air jumps",
+      limitation: "Uses energy"
+    },
+    Dashing: {
+      section: "Core movement unlocks",
+      unlockRoute: "Starter movement",
+      combatTravelRole: "Movement",
+      keyUse: "Short ground or air dash",
+      limitation: "Movement tool, not a damage skill"
+    },
+    "Flash Step": {
+      section: "Core movement unlocks",
+      unlockRoute: "Ability Teacher",
+      cost: "$100,000",
+      teacherSource: "Ability Teacher",
+      combatTravelRole: "Escape/chase",
+      keyUse: "Short teleport",
+      limitation: "Energy, range, and cooldown limits"
+    },
+    Aura: {
+      section: "Combat awareness and Aura systems",
+      unlockRoute: "Ability Teacher",
+      teacherSource: "Ability Teacher",
+      combatTravelRole: "Aura combat",
+      upgradePath: "Aura stages",
+      keyUse: "Bypass Elemental Reflex and improve non-fruit combat",
+      limitation: "Progresses through use"
+    },
+    Instinct: {
+      section: "Combat awareness and Aura systems",
+      unlockRoute: "Instinct Teacher",
+      cost: "$750,000",
+      teacherSource: "Instinct Teacher",
+      levelMasteryRequirement: "Level 300 and Saber Puzzle",
+      combatTravelRole: "Instinct awareness",
+      upgradePath: "Instinct levels",
+      keyUse: "Dodge and see entities",
+      limitation: "Dodges recharge over time"
+    },
+    "Instinct/V2": {
+      section: "Combat awareness and Aura systems",
+      unlockRoute: "Third Sea upgrade",
+      cost: "$5,000,000",
+      teacherSource: "Hungry Man route",
+      levelMasteryRequirement: "Level 1800+ and 5000 Instinct EXP",
+      combatTravelRole: "Advanced Instinct",
+      upgradePath: "Instinct upgrade",
+      keyUse: "Improved awareness and dodge recovery",
+      limitation: "Heavy quest requirements"
+    },
+    "Instinct/Break": {
+      section: "Combat awareness and Aura systems",
+      unlockRoute: "Combat mechanic",
+      combatTravelRole: "Instinct counter",
+      keyUse: "Forces an opponent out of Instinct",
+      limitation: "Not a purchased ability"
+    },
+    "Last Resort": aroweRaceSkill("Human", "Damage burst at low health"),
+    Agility: aroweRaceSkill("Rabbit", "Speed burst"),
+    "Water Body": aroweRaceSkill("Shark", "Damage reduction"),
+    "Heavenly Blood": aroweRaceSkill("Angel", "Healing and regeneration"),
+    "Heightened Senses": aroweRaceSkill("Ghoul", "Cooldown and awareness pressure"),
+    "Energy Core": aroweRaceSkill("Cyborg", "Area burst and damage reduction"),
+    "Primordial Reign": {
+      section: "Race abilities and awakenings",
+      unlockRoute: "Dragon Wizard",
+      cost: "$3,000,000",
+      teacherSource: "Dragon Wizard",
+      levelMasteryRequirement: "Draco route",
+      combatTravelRole: "Race skill",
+      upgradePath: "Draco progression",
+      keyUse: "Draco race power",
+      limitation: "Late progression route"
+    },
+    "Race Awakening": {
+      section: "Race abilities and awakenings",
+      unlockRoute: "Race V4 system",
+      teacherSource: "Temple of Time route",
+      combatTravelRole: "Race V4 system",
+      upgradePath: "Race Awakening",
+      keyUse: "Unlock race trials and gears",
+      limitation: "Third Sea progression"
+    },
+    "Dragon Tether": {
+      section: "Special tools and progression utility",
+      unlockRoute: "Dragon Wizard",
+      teacherSource: "Dragon Wizard",
+      levelMasteryRequirement: "Dojo Belt (Black)",
+      combatTravelRole: "Dragon progression",
+      upgradePath: "Dragon Egg and Draco routes",
+      keyUse: "Collect Dragon Eggs",
+      limitation: "Specific progression tool"
+    },
+    Skins: {
+      section: "Special tools and progression utility",
+      unlockRoute: "Cosmetic system",
+      combatTravelRole: "Cosmetic",
+      keyUse: "Change ability visuals",
+      limitation: "Visual only"
+    },
+    "Summon Sea Beast": {
+      section: "Special tools and progression utility",
+      unlockRoute: "Bounty/Honor milestone",
+      levelMasteryRequirement: "10,000,000 Bounty or Honor",
+      combatTravelRole: "Sea utility",
+      keyUse: "Summon Sea Beasts near the sea",
+      limitation: "Second/Third Sea use and combat caveats"
+    },
+    "Brazil World": {
+      section: "Admin or special-space abilities",
+      unlockRoute: "Admin-only",
+      combatTravelRole: "Admin-only",
+      keyUse: "Special ability reference",
+      limitation: "Not normal player progression"
+    },
+    "Pakistan Dimension": {
+      section: "Admin or special-space abilities",
+      unlockRoute: "Special-space reference",
+      combatTravelRole: "Special space",
+      keyUse: "Enclosed-space reference",
+      limitation: "Not a normal ability purchase"
+    }
+  };
+
+  return (
+    details[name] ?? {
+      section: "Special tools and progression utility",
+      unlockRoute: null,
+      combatTravelRole: "Utility",
+      keyUse: null,
+      limitation: null
+    }
+  );
+}
+
+function withBloxFruitsAuraStageFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const stage = normalizeValue(item.stage ?? getBloxFruitsFieldValue(item, "stage")) ?? normalizeValue(item.name);
+  return {
+    ...item,
+    name: `Stage ${stage}`,
+    catalogSection: "Aura stage progression",
+    displayStage: stage,
+    coverage: normalizeValue(item.visualAura ?? getBloxFruitsFieldValue(item, "visualAuraArmFsLegFs")),
+    auraExpNeeded: normalizeBloxFruitsExp(item.expNeeded ?? getBloxFruitsFieldValue(item, "expNeeded")),
+    bonusEffect: cleanBloxFruitsNote(item.buffs ?? getBloxFruitsFieldValue(item, "buffs")),
+    progressionNote: getBloxFruitsAuraStageNote(stage)
+  };
+}
+
+function getBloxFruitsAuraStageNote(stage: string | null): string | null {
+  if (stage === "0") return "First Aura coverage";
+  if (stage === "5") return "Full-body Aura";
+  return stage ? "More coverage and stronger Aura progression" : null;
+}
+
+function withBloxFruitsAuraVisualFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const stage = normalizeValue(item.stage ?? getBloxFruitsFieldValue(item, "stage")) ?? normalizeValue(item.name);
+  return {
+    ...item,
+    name: `Stage ${stage}`,
+    catalogSection: "Aura appearance stages",
+    visualStage: stage,
+    bodyCoverage: getBloxFruitsAuraVisualCoverage(stage),
+    armsVisual: normalizeValue(item.arms ?? getBloxFruitsFieldValue(item, "arms")) ?? getBloxFruitsAuraVisualCoverage(stage),
+    legsVisual: normalizeValue(item.legs ?? getBloxFruitsFieldValue(item, "legs")) ?? getBloxFruitsAuraVisualCoverage(stage),
+    statEffect: "Visual only",
+    equipUseNote: "Reflects Aura stage coverage"
+  };
+}
+
+function getBloxFruitsAuraVisualCoverage(stage: string | null): string | null {
+  const coverage: Record<string, string> = {
+    "0": "Lower arms and legs",
+    "1": "Full arms and legs",
+    "2": "Arms, legs, and half torso",
+    "3": "Arms, legs, torso, and head",
+    "4": "Full body coverage",
+    "5": "Full body coverage"
+  };
+  return stage ? coverage[stage] ?? null : null;
+}
+
+function withBloxFruitsBoatFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  return {
+    ...item,
+    catalogSection: getBloxFruitsBoatSection(item),
+    sourceAccess: getBloxFruitsBoatSourceAccess(item),
+    displayPrice: normalizeValue(item.price ?? getBloxFruitsFieldValue(item, "price")),
+    displayHealth: normalizeValue(item.health ?? getBloxFruitsFieldValue(item, "health")),
+    displaySeats: normalizeValue(item.seats ?? getBloxFruitsFieldValue(item, "seats")),
+    displayCannons: normalizeValue(item.cannons ?? getBloxFruitsFieldValue(item, "cannons")),
+    displaySpeed: normalizeValue(item.speed ?? getBloxFruitsFieldValue(item, "estimatedSpeedInThirdSeaMetersPerMinute")),
+    seaEventRole: getBloxFruitsBoatSeaEventRole(item),
+    specialUse: getBloxFruitsBoatSpecialUse(item)
+  };
+}
+
+function getBloxFruitsBoatSection(item: GameDatasetCatalogItem): string {
+  const name = normalizeValue(item.name) ?? "";
+  const category = normalizeValue(item.category)?.toLowerCase() ?? "";
+  if (name === "Beast Hunter") return "Leviathan hunt boat";
+  if (["Miracle", "The Sentinel"].includes(name)) return "Fast Boats gamepass boats";
+  if (category.includes("luxury")) return "Unlock and event luxury boats";
+  return "Starter and normal dealer boats";
+}
+
+function getBloxFruitsBoatSourceAccess(item: GameDatasetCatalogItem): string | null {
+  const section = getBloxFruitsBoatSection(item);
+  if (section === "Fast Boats gamepass boats") return "Fast Boats gamepass";
+  if (section === "Leviathan hunt boat") return "Beast Hunter craft route";
+  if (section === "Unlock and event luxury boats") return "Luxury Boat Dealer or event route";
+  return "Boat Dealer";
+}
+
+function getBloxFruitsBoatSeaEventRole(item: GameDatasetCatalogItem): string | null {
+  const name = normalizeValue(item.name) ?? "";
+  if (name === "Beast Hunter") return "Leviathan Heart route";
+  const cannons = Number(normalizeValue(item.cannons)?.match(/\d+/)?.[0] ?? 0);
+  const health = Number(normalizeValue(item.health)?.match(/\d+/)?.[0] ?? 0);
+  if (cannons >= 4 && health >= 2000) return "Sea-event capable";
+  if (cannons > 0) return "Basic sea combat";
+  return "Travel";
+}
+
+function getBloxFruitsBoatSpecialUse(item: GameDatasetCatalogItem): string | null {
+  const name = normalizeValue(item.name) ?? "";
+  if (name === "Beast Hunter") return "Carries Leviathan Heart";
+  if (["Lantern", "Sleigh"].includes(name)) return "Event-style luxury boat";
+  return null;
+}
+
+function withBloxFruitsGunFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  return {
+    ...item,
+    catalogSection: getBloxFruitsGunSection(item),
+    displaySea: getBloxFruitsSeaLabel(item.sea),
+    sourceRoute: getBloxFruitsGunSourceRoute(item),
+    costOrDrop: getBloxFruitsGunCostOrDrop(item),
+    requirementMastery: getBloxFruitsGunRequirementMastery(item),
+    combatRole: getBloxFruitsGunCombatRole(item),
+    upgradeUse: getBloxFruitsGunUpgradeUse(item),
+    availability: "Obtainable"
+  };
+}
+
+function getBloxFruitsGunSection(item: GameDatasetCatalogItem): string {
+  const seaNumbers = getBloxFruitsSeaNumbers(item.sea);
+  const route = normalizeValue(item.obtainment)?.toLowerCase() ?? "";
+  if (seaNumbers[0] === "1" && /dealer/.test(route)) return "First Sea shop guns";
+  if (seaNumbers[0] === "1") return "First Sea boss drops";
+  if (seaNumbers[0] === "2") return "Second Sea raid and currency guns";
+  return "Third Sea boss and special guns";
+}
+
+function getBloxFruitsGunSourceRoute(item: GameDatasetCatalogItem): string | null {
+  const route = normalizeValue(item.obtainment);
+  if (!route) return null;
+  if (/weapon dealer/i.test(route)) return route.includes("Advanced") ? "Advanced Weapon Dealer" : "Weapon Dealer";
+  if (/factory/i.test(route)) return "Factory Raid";
+  if (/el rodolfo/i.test(route)) return "Ectoplasm purchase";
+  if (/strongest god/i.test(route)) return "Fragment purchase";
+  if (/dragon hunter/i.test(route)) return "Dragon Hunter craft";
+  if (/weird machine/i.test(route)) return "Weird Machine";
+  return normalizeBloxFruitsRouteText(route.replace(/^defeat\s+/i, "")) ?? route;
+}
+
+function getBloxFruitsGunCostOrDrop(item: GameDatasetCatalogItem): string | null {
+  const route = normalizeValue(item.obtainment) ?? "";
+  const money = formatBloxFruitsMoney(item.money);
+  if (money) return money;
+  if (/25\s+from\s+el rodolfo/i.test(route)) return "25 Ectoplasm";
+  if (/1,?500\s+from\s+the strongest god/i.test(route)) return "1,500 Fragments";
+  if (/dragon hunter/i.test(route)) return "Crafting materials";
+  if (/weird machine/i.test(route)) return "Dark Fragment, Ectoplasm, Bones, and Fragments";
+  if (/defeat/i.test(route)) return "Boss or raid drop";
+  return null;
+}
+
+function getBloxFruitsGunRequirementMastery(item: GameDatasetCatalogItem): string | null {
+  const name = normalizeValue(item.name) ?? "";
+  const gates: Record<string, string> = {
+    Bazooka: "100 / 250 mastery moves",
+    "Bizarre Revolver": "150 / 300 mastery moves",
+    "Venom Bow": "125 / 250 mastery moves",
+    Dragonstorm: "125 / 250 mastery moves",
+    "Skull Guitar": "150 / 300 mastery moves"
+  };
+  return gates[name] ?? null;
+}
+
+function getBloxFruitsGunCombatRole(item: GameDatasetCatalogItem): string | null {
+  const name = normalizeValue(item.name) ?? "";
+  if (["Slingshot", "Flintlock", "Musket", "Refined Slingshot", "Dual Flintlock"].includes(name)) {
+    return "Early ranged weapon";
+  }
+  if (["Cannon", "Bazooka"].includes(name)) return "Explosive gun";
+  if (["Kabucha", "Skull Guitar"].includes(name)) return "PvP support";
+  if (name === "Dragonstorm") return "Crafted endgame gun";
+  if (name === "Venom Bow") return "Poison bow";
+  return "Ranged support";
+}
+
+function getBloxFruitsGunUpgradeUse(item: GameDatasetCatalogItem): string | null {
+  return normalizeValue(item.upgrading) ? "Blacksmith upgrade available" : null;
+}
+
+function withBloxFruitsInstinctLevelFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const level = normalizeValue(item.level ?? getBloxFruitsFieldValue(item, "level")) ?? normalizeValue(item.name);
+  return {
+    ...item,
+    name: `Level ${level}`,
+    catalogSection: getBloxFruitsInstinctLevelSection(level),
+    displayLevel: level,
+    expRange: normalizeBloxFruitsInstinctExp(item.exp ?? getBloxFruitsFieldValue(item, "exp")),
+    baseDodges: normalizeValue(item.dodges ?? getBloxFruitsFieldValue(item, "dodges")),
+    progressNote: getBloxFruitsInstinctProgressNote(level, item.buffs ?? getBloxFruitsFieldValue(item, "buffs"))
+  };
+}
+
+function getBloxFruitsInstinctLevelSection(level: string | null): string {
+  const numeric = Number.parseInt(level ?? "", 10);
+  if (numeric <= 1) return "Starter Instinct";
+  if (numeric >= 7) return "V2 preparation";
+  return "Main training climb";
+}
+
+function normalizeBloxFruitsInstinctExp(value: unknown): string | null {
+  const normalized = normalizeValue(value);
+  if (!normalized) return null;
+  return `${normalized.replace(/\[|\]/g, "").replace(/\s+/g, " ")} EXP`;
+}
+
+function getBloxFruitsInstinctProgressNote(level: string | null, buffs: unknown): string | null {
+  if (level === "1") return "First dodge and vision tier";
+  if (level === "7") return "Max base Instinct level before V2";
+  return cleanBloxFruitsNote(buffs);
+}
+
+function withBloxFruitsNpcFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const details = getBloxFruitsNpcDetails(item);
+
+  return {
+    ...item,
+    catalogSection: details.section,
+    npcRole: details.role,
+    displaySea: details.sea,
+    displayLocation: details.location,
+    purpose: details.purpose,
+    combatLevel: details.level,
+    accessSpawn: details.accessSpawn,
+    combat: details.combat,
+    availability: details.availability,
+    relatedRoute: details.relatedRoute
+  };
+}
+
+function getBloxFruitsNpcDetails(item: GameDatasetCatalogItem) {
+  const name = normalizeValue(item.name) ?? "";
+  const rawType = normalizeValue(getBloxFruitsFieldValue(item, "type")) ?? "";
+  const overview = normalizeValue(item.overview) ?? "";
+  const haystack = `${name} ${rawType} ${overview}`.toLowerCase();
+  const type = rawType.toLowerCase();
+  const isBoss = type.includes("boss");
+  const isEnemy = type.includes("enemy") || isBloxFruitsSeaEnemyName(name);
+  const isQuest = type.includes("quest");
+  const isTrainer = isBloxFruitsTrainerNpc(name);
+  const isShop = isBloxFruitsShopNpc(name, type);
+  const isService = isBloxFruitsServiceNpc(name, haystack);
+  const isEvent = isBloxFruitsEventNpc(name, haystack);
+  const isUnclear = isBloxFruitsUnclearNpc(name, haystack);
+
+  const section = isUnclear
+    ? "Admin, removed, and unclear references"
+    : isEvent
+      ? "Event, limited, and special-space NPCs"
+      : isBoss
+        ? "Bosses and raid bosses"
+        : isEnemy
+          ? "Enemies and grind targets"
+          : isTrainer
+            ? "Trainers, teachers, and system unlocks"
+            : isShop
+              ? "Shops, dealers, and exchange NPCs"
+              : isQuest
+                ? "Quest givers and progression NPCs"
+                : isService
+                  ? "Travel, crew, and service NPCs"
+                  : "Admin, removed, and unclear references";
+
+  return {
+    section,
+    role: getBloxFruitsNpcRole(name, rawType, section),
+    sea: getBloxFruitsSeaLabel(getBloxFruitsFieldValue(item, "sea")),
+    location: cleanBloxFruitsLocationList(getBloxFruitsFieldValue(item, "location") ?? getBloxFruitsFieldValue(item, "locations")),
+    purpose: getBloxFruitsNpcPurpose(name, section, overview),
+    level: isBoss || isEnemy ? normalizeValue(getBloxFruitsFieldValue(item, "level")) : null,
+    accessSpawn: getBloxFruitsNpcAccessSpawn(item, section),
+    combat: isBoss || isEnemy ? getBloxFruitsNpcCombat(item) : null,
+    availability: getBloxFruitsNpcAvailability(name, section, haystack),
+    relatedRoute: getBloxFruitsNpcRelatedRoute(name, overview)
+  };
+}
+
+function isBloxFruitsTrainerNpc(name: string): boolean {
+  return /teacher|trainer|master|monk|scientist|wizard|hunter|sage|arowe|uzoth|dojo|instinct|ability|water kung|dark step|mad scientist/i.test(
+    name
+  );
+}
+
+function isBloxFruitsShopNpc(name: string, type: string): boolean {
+  return (
+    type.includes("shop") ||
+    /dealer|gacha|shop|merchant|exchange|seller|blacksmith|blox fruit|weapon|boat|sword|stock|barista|cousin/i.test(name)
+  );
+}
+
+function isBloxFruitsServiceNpc(name: string, haystack: string): boolean {
+  return /captain|set home|titles|crew|manager|expert|remove|plokster|nerd|tort|editor|home point|travel|teleport|bounty|honor/i.test(
+    `${name} ${haystack}`
+  );
+}
+
+function isBloxFruitsEventNpc(name: string, haystack: string): boolean {
+  return /event|halloween|summer|christmas|santa|elf|celestial|oni|tournament|lucky|maxer|agony|ashen|rip family|red legion|grand colosseum|limited/i.test(
+    `${name} ${haystack}`
+  );
+}
+
+function isBloxFruitsUnclearNpc(name: string, haystack: string): boolean {
+  return /admin|removed|category|raid bosses|elite pirates|official|not available|unknown|unclear/i.test(`${name} ${haystack}`);
+}
+
+function isBloxFruitsSeaEnemyName(name: string): boolean {
+  return /sea beast|piranha|shark|ghost shark|haunted crew/i.test(name);
+}
+
+function getBloxFruitsNpcRole(name: string, rawType: string, section: string): string {
+  if (section === "Bosses and raid bosses") return rawType.includes("Raid") ? "Raid boss" : "Boss";
+  if (section === "Enemies and grind targets") return "Enemy";
+  if (section === "Quest givers and progression NPCs") return "Quest giver";
+  if (section === "Shops, dealers, and exchange NPCs") return /gacha/i.test(name) ? "Gacha / exchange NPC" : "Shop or dealer";
+  if (section === "Trainers, teachers, and system unlocks") return "Trainer or unlock NPC";
+  if (section === "Travel, crew, and service NPCs") return "Service NPC";
+  if (section === "Event, limited, and special-space NPCs") return "Event or special NPC";
+  return "Reference row";
+}
+
+function getBloxFruitsNpcPurpose(name: string, section: string, overview: string): string | null {
+  if (name === "Ability Teacher") return "Teaches core abilities";
+  if (name === "Instinct Teacher") return "Unlocks Instinct";
+  if (/Blox Fruit Dealer/i.test(name)) return "Fruit shop access";
+  if (/Blox Fruit Gacha/i.test(name)) return "Random physical fruit roll";
+  if (/Boat Dealer/i.test(name)) return "Boat purchase and travel";
+  if (/Titles Specialist/i.test(name)) return "Equip titles and title colors";
+  if (/Set Home/i.test(name)) return "Sets respawn point";
+  if (/Experienced Captain/i.test(name)) return "Sea travel service";
+  if (/Arowe/i.test(name)) return "Race V3 upgrade route";
+  if (/Dragon Wizard|Dragon Hunter|Dojo|Dragon Talon/i.test(name)) return "Dragon Dojo progression";
+  if (/Mysterious Scientist/i.test(name)) return "Raid access";
+  if (/Trevor/i.test(name)) return "Don Swan room access";
+  if (section === "Quest givers and progression NPCs") return "Starts quest route";
+  if (section === "Enemies and grind targets") return "Combat grind target";
+  if (section === "Bosses and raid bosses") return "Boss fight route";
+  if (section === "Event, limited, and special-space NPCs") return "Event or special route";
+  return summarizeBloxFruitsOverview(overview);
+}
+
+function getBloxFruitsNpcAccessSpawn(item: GameDatasetCatalogItem, section: string): string | null {
+  const spawnTime = normalizeValue(getBloxFruitsFieldValue(item, "spawnTime"));
+  const despawnTime = normalizeValue(getBloxFruitsFieldValue(item, "despawnTime"));
+  const parts: string[] = [];
+  if (spawnTime) parts.push(`spawns in ${spawnTime.toLowerCase()}`);
+  if (despawnTime) parts.push(`despawns after ${despawnTime.toLowerCase()}`);
+  if (parts.length) return sentenceCase(parts.join("; "));
+  if (section === "Event, limited, and special-space NPCs") return "Event or special access";
+  return null;
+}
+
+function getBloxFruitsNpcCombat(item: GameDatasetCatalogItem): string | null {
+  const aura = normalizeValue(getBloxFruitsFieldValue(item, "usesAura"));
+  const weapon = normalizeValue(getBloxFruitsFieldValue(item, "weaponType") ?? getBloxFruitsFieldValue(item, "weapon"));
+  const parts: string[] = [];
+  if (aura) parts.push(`Aura: ${aura === "✔" ? "Yes" : aura === "✘" ? "No" : aura}`);
+  if (weapon) parts.push(`Weapon: ${weapon}`);
+  return parts.length ? parts.join("; ") : null;
+}
+
+function getBloxFruitsNpcAvailability(name: string, section: string, haystack: string): string | null {
+  if (section === "Admin, removed, and unclear references") return "Reference or unclear";
+  if (/removed|no longer|unavailable/i.test(haystack)) return "Removed or unavailable";
+  if (section === "Event, limited, and special-space NPCs") return "Event or special route";
+  if (/admin/i.test(name)) return "Admin-only";
+  return null;
+}
+
+function getBloxFruitsNpcRelatedRoute(name: string, overview: string): string | null {
+  const text = `${name} ${overview}`.toLowerCase();
+  if (text.includes("title")) return "Titles";
+  if (text.includes("fruit")) return "Fruit shop";
+  if (text.includes("boat")) return "Boats";
+  if (text.includes("raid")) return "Raids";
+  if (text.includes("instinct")) return "Instinct";
+  if (text.includes("aura")) return "Aura";
+  if (text.includes("race")) return "Race progression";
+  if (text.includes("dragon")) return "Dragon Dojo";
+  if (text.includes("sea beast") || text.includes("leviathan")) return "Sea events";
+  if (text.includes("quest")) return "Quest chain";
+  return null;
+}
+
+function cleanBloxFruitsLocationList(value: unknown): string | null {
+  const normalized = normalizeValue(value);
+  if (!normalized || normalized === "???") return normalized === "???" ? "Hidden/quest route" : null;
+  const knownLocations = [
+    "Pirate Starter",
+    "Marine Starter",
+    "Middle Town",
+    "Kingdom of Rose",
+    "Frozen Village",
+    "Magma Village",
+    "Upper Skylands",
+    "Mirage Island",
+    "Castle on the Sea",
+    "Port Town",
+    "Mansion",
+    "Cafe",
+    "Café",
+    "Jungle",
+    "Marine Fortress",
+    "Grand Colosseum",
+    "Hot and Cold",
+    "Floating Turtle",
+    "Hydra Island",
+    "Tiki Outpost",
+    "Frozen Dimension",
+    "Haunted Shipwreck"
+  ];
+  const matches = knownLocations.filter((location) => normalized.includes(location));
+  if (matches.length > 1) return matches.join(" / ");
+  return normalizeBloxFruitsRouteText(normalized);
+}
+
+function summarizeBloxFruitsOverview(overview: string): string | null {
+  const cleaned = overview.replace(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z/g, "").replace(/Loading Timer|Purge\/Reload the page to continue the countdown/g, "");
+  const sentence = cleaned.split(/[.!?]/).map((part) => part.trim()).find(Boolean);
+  if (!sentence || sentence.length > 120) return null;
+  return sentence;
+}
+
+function withBloxFruitsTitleFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const obtainment = normalizeValue(item.obtainment ?? getBloxFruitsFieldValue(item, "obtainment")) ?? "";
+  const details = getBloxFruitsTitleDetails(obtainment);
+  return {
+    ...item,
+    catalogSection: details.section,
+    displayTitleNumber: normalizeValue(item.titleNumber ?? getBloxFruitsFieldValue(item, "titleNumber")),
+    unlockRequirement: obtainment,
+    unlockRoute: details.route,
+    relatedTarget: details.relatedTarget,
+    availabilityNote: details.availabilityNote
+  };
+}
+
+function getBloxFruitsTitleDetails(obtainment: string) {
+  const text = obtainment.toLowerCase();
+  if (/to be added|unknown|secret|wishes to keep it secret/.test(text)) {
+    return {
+      section: "Placeholders and unknown titles",
+      route: "Unknown or placeholder",
+      relatedTarget: null,
+      availabilityNote: obtainment
+    };
+  }
+  if (/v2|v3|v4|human|rabbit|shark|angel|ghoul|cyborg|draco/.test(text) && /unlock|obtain/.test(text)) {
+    return { section: "Race evolution titles", route: "Race evolution", relatedTarget: deriveBloxFruitsTitleTarget(obtainment), availabilityNote: null };
+  }
+  if (/bounty|honor|marine|pirate/.test(text) && /\d|bounty|honor/.test(text)) {
+    return { section: "Bounty and Honor titles", route: "Bounty / Honor", relatedTarget: null, availabilityNote: null };
+  }
+  if (/awak/.test(text) || /raid/i.test(obtainment) && /fruit/i.test(obtainment)) {
+    return { section: "Fruit awakening titles", route: "Fruit awakening", relatedTarget: deriveBloxFruitsTitleTarget(obtainment), availabilityNote: null };
+  }
+  if (/mastery|level|aura|instinct|title|fishing|fish|max/.test(text)) {
+    return { section: "Progression and mastery titles", route: "Progression / mastery", relatedTarget: deriveBloxFruitsTitleTarget(obtainment), availabilityNote: null };
+  }
+  if (/defeat|kill|boss|prince|king|queen|indra|longma|leviathan|terrorshark|sea beast|enemy|raid boss/.test(text)) {
+    return { section: "Boss, raid, and enemy titles", route: "Boss or enemy", relatedTarget: deriveBloxFruitsTitleTarget(obtainment), availabilityNote: null };
+  }
+  if (/sea event|ship|treasure|prehistoric|mirage|kitsune|shrine|rumbling|ghost|haunted|shark|piranh|volcano/.test(text)) {
+    return { section: "Sea event and special activity titles", route: "Sea event / activity", relatedTarget: deriveBloxFruitsTitleTarget(obtainment), availabilityNote: null };
+  }
+  if (/code|event|christmas|halloween|easter|valentine|limited|redeem|202/.test(text)) {
+    return { section: "Event, code, and limited titles", route: "Event / code", relatedTarget: deriveBloxFruitsTitleTarget(obtainment), availabilityNote: null };
+  }
+  if (/admin|owner|creator|youtube|youtuber|official|crew|community|discord|roblox account|developer/.test(text)) {
+    return { section: "Creator, admin, and community titles", route: "Creator / community", relatedTarget: deriveBloxFruitsTitleTarget(obtainment), availabilityNote: null };
+  }
+  return { section: "Utility, puzzle, and misc titles", route: "Utility / misc", relatedTarget: deriveBloxFruitsTitleTarget(obtainment), availabilityNote: null };
+}
+
+function deriveBloxFruitsTitleTarget(obtainment: string): string | null {
+  const quoted = obtainment.match(/"([^"]+)"/)?.[1];
+  if (quoted) return quoted;
+  const patterns = [
+    /unlock\s+(.+?)(?:\.|$)/i,
+    /defeat\s+(.+?)(?:\.|$)/i,
+    /kill\s+(.+?)(?:\.|$)/i,
+    /obtain\s+(.+?)(?:\.|$)/i,
+    /redeem\s+(.+?)(?:\.|$)/i
+  ];
+  for (const pattern of patterns) {
+    const match = obtainment.match(pattern);
+    if (match?.[1]) return match[1].trim();
+  }
+  return null;
+}
+
+function withBloxFruitsSpecialTitleFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const obtainment = normalizeValue(item.obtainment ?? getBloxFruitsFieldValue(item, "obtainment")) ?? "";
+  const lower = obtainment.toLowerCase();
+  const ownerAdmin = /co-owner|admin|owner|official/.test(lower) || /owner|official/i.test(normalizeValue(item.name) ?? "");
+  return {
+    ...item,
+    catalogSection: ownerAdmin ? "Owner and admin titles" : "Named account custom titles",
+    grantRoute: ownerAdmin ? "Developer/admin grant" : "Named account grant",
+    holderTarget: getBloxFruitsSpecialTitleHolder(obtainment),
+    obtainmentNote: obtainment,
+    normalPlayerRoute: "Not a normal player unlock"
+  };
+}
+
+function getBloxFruitsSpecialTitleHolder(obtainment: string): string | null {
+  const match = obtainment.match(/Given to (.+?)(?:\.|$)/i);
+  return match?.[1]?.trim() ?? null;
+}
+
+function withBloxFruitsTitleColorFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const obtainment = normalizeValue(item.obtainment ?? getBloxFruitsFieldValue(item, "obtainment")) ?? "";
+  const count = getBloxFruitsTitleColorCount(obtainment);
+  const section =
+    count === null ? "Automatic colors" : count <= 50 ? "Early title milestones" : count <= 100 ? "Mid title milestones" : "Late title milestones";
+  const stage =
+    count === null ? "Automatic" : count <= 50 ? "Early milestone" : count <= 100 ? "Mid milestone" : "Late milestone";
+  return {
+    ...item,
+    catalogSection: section,
+    unlockRequirement: obtainment,
+    titleCountNeeded: count === null ? "Automatic" : `${count} titles`,
+    unlockStage: stage,
+    visualRole: "Equipped title color"
+  };
+}
+
+function getBloxFruitsTitleColorCount(obtainment: string): number | null {
+  const match = obtainment.match(/(\d+)\s+Titles?/i);
+  return match?.[1] ? Number(match[1]) : null;
+}
+
+function getBloxFruitsSeaNumbers(value: unknown): string[] {
+  const sea = normalizeValue(value)?.toLowerCase() ?? "";
+  const numbers = new Set<string>(sea.match(/[123]/g) ?? []);
+  if (sea.includes("first")) numbers.add("1");
+  if (sea.includes("second")) numbers.add("2");
+  if (sea.includes("third")) numbers.add("3");
+  return Array.from(numbers);
+}
+
+function getBloxFruitsSeaLabel(value: unknown): string | null {
+  const sea = normalizeValue(value)?.toLowerCase() ?? "";
+  if (!sea) return null;
+  if (sea.includes("admin")) return "Admin-only";
+  if (sea.includes("event")) return "Event";
+
+  const seaNumbers = getBloxFruitsSeaNumbers(value);
+  if (!seaNumbers.length) return null;
+  if (seaNumbers.length === 3) return "All Seas";
+
+  const seaLabels: Record<string, string> = {
+    "1": "First Sea",
+    "2": "Second Sea",
+    "3": "Third Sea"
+  };
+  return seaNumbers.map((entry) => seaLabels[entry]).filter(Boolean).join(" / ") || null;
+}
+
+function getBloxFruitsFieldValue(item: GameDatasetCatalogItem, key: string): unknown {
+  if (item[key] !== undefined && item[key] !== null) return item[key];
+  return isRecord(item.fields) ? item.fields[key] : null;
+}
+
+function formatBloxFruitsMoney(value: unknown): string | null {
+  const normalized = normalizeValue(value);
+  if (!normalized || normalized.toLowerCase() === "inf") return null;
+  return `$${normalized.replace(/^\$/, "")}`;
+}
+
+function formatBloxFruitsRewardMoney(value: unknown): string | null {
+  const normalized = normalizeValue(value);
+  if (!normalized || normalized === "N/A" || /exp/i.test(normalized) || /boss|katana|fruit|aura/i.test(normalized)) {
+    return null;
+  }
+  return /^\$/.test(normalized) ? normalized : `$${normalized}`;
+}
+
+function formatBloxFruitsRobux(value: unknown): string | null {
+  const normalized = normalizeValue(value);
+  if (!normalized) return null;
+  return `${normalized.replace(/\s*robux$/i, "")} Robux`;
+}
+
+function formatBloxFruitsFragments(value: unknown): string | null {
+  const normalized = normalizeValue(value);
+  if (!normalized) return null;
+  return `${normalized.replace(/\s*fragments?$/i, "")} Fragments`;
+}
+
+function normalizeBloxFruitsRouteText(value: string | null): string | null {
+  if (!value) return null;
+  return value.replace(/\s*\u2022\s*/g, "; ").replace(/\s+/g, " ").trim() || null;
+}
+
+function normalizeBloxFruitsExp(value: unknown): string | null {
+  const normalized = normalizeValue(value);
+  if (!normalized || normalized === "N/A") return null;
+  return normalized.replace(/^(.+?EXP)\1$/i, "$1").replace(/\s+/g, " ").trim();
+}
+
+function cleanBloxFruitsNote(value: unknown): string | null {
+  const normalized = normalizeValue(value);
+  if (!normalized || normalized === "N/A") return null;
+  return normalizeBloxFruitsRouteText(normalized);
+}
+
+function sentenceCase(value: string): string {
+  const normalized = value.trim();
+  if (!normalized) return normalized;
+  return `${normalized[0]?.toUpperCase() ?? ""}${normalized.slice(1)}`;
 }
 
 function getAdoptMeEggSection(item: GameDatasetCatalogItem): string {
@@ -1156,7 +3786,8 @@ function withCatalogSectionOverride(
     return { dataset, sectionOverride: null };
   }
 
-  const items = dataset.items.map((item) => {
+  const sourceItems = sectionOverride.transformItems ? sectionOverride.transformItems(dataset.items) : dataset.items;
+  const items = sourceItems.map((item) => {
     const transformedItem = sectionOverride.transformItem ? sectionOverride.transformItem(item) : item;
     return {
       ...transformedItem,
@@ -1356,7 +3987,8 @@ export function renderGameDatasetCatalogPage({
     }
     return {
       ...section,
-      noteHtml: noteEntry ? processHtmlLinks(noteEntry.html).__html : null
+      noteHtml: noteEntry ? processHtmlLinks(noteEntry.html).__html : null,
+      noteNodes: noteEntry ? renderPageContentNodes(noteEntry.html, `${config.code}-section-note-${section.id}`) : null
     };
   });
   const detailDescriptionHtml = descriptionHtml.filter(
@@ -1381,6 +4013,7 @@ export function renderGameDatasetCatalogPage({
     renderPageContentNodes(entry.html, `${config.code}-description-${entry.key}`)
   );
   const howNodes = howHtml ? renderPageContentNodes(howHtml, `${config.code}-how`) : null;
+  const howHeading = `How to Use This ${config.gameName} ${config.label} List`;
   const faqNodes = faqHtml.map((faq, idx) => ({
     ...faq,
     nodes: renderPageContentNodes(faq.a, `${config.code}-faq-${idx}`)
@@ -1441,7 +4074,14 @@ export function renderGameDatasetCatalogPage({
           <>
             {descriptionNodes.length ? descriptionNodes : null}
 
-            {howNodes ? howNodes : null}
+            {howNodes ? (
+              <>
+                <h2 data-md-copy className="md-copy-node md-copy-heading md-copy-h2">
+                  {howHeading}
+                </h2>
+                {howNodes}
+              </>
+            ) : null}
 
             <ContentFaq
               items={faqNodes.map((faq, idx) => ({

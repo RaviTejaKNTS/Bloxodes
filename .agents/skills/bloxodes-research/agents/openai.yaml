@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Research"
   short_description: "Research Roblox facts for Bloxodes content"
-  default_prompt: "Use $bloxodes-research to prepare plain-language research-notes.md for one Bloxodes page. Explain the topic before database or route notes."
+  default_prompt: "Use $bloxodes-research to prepare plain-language research-notes.md for one Bloxodes page. Explain the topic before database or route notes. For catalog pages, include local/source/rendered counts, image coverage, missing data, and the data action before proposing sections. The outline must also name the reader story flow, the how-to/action section the final page needs when the topic has action, what belongs in description_json, and what must stay in description_md."

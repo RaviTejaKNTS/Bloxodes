@@ -52,6 +52,7 @@ export type WikiCatalogListEntry = Pick<
 const WIKI_CATALOG_REVALIDATE_SECONDS = 86400;
 const WIKI_CATALOG_SELECT_FIELDS =
   "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at, content_updated_at";
+const BYPASS_WIKI_CATALOG_CACHE = process.env.NODE_ENV === "development";
 
 function normalizeSlug(value: string): string {
   return value.trim().toLowerCase().replace(/^\/+|\/+$/g, "");
@@ -79,24 +80,28 @@ export async function getWikiCatalogPageByPath(
   const normalizedCollectionSlug = normalizeSlug(collectionSlug);
   if (!normalizedWikiSlug || !normalizedCollectionSlug) return null;
 
+  const fetchPage = async () => {
+    const supabase = supabaseAdmin();
+    const { data, error } = await supabase
+      .from("wiki_catalog_pages_view")
+      .select(WIKI_CATALOG_SELECT_FIELDS)
+      .eq("wiki_slug", normalizedWikiSlug)
+      .eq("collection_slug", normalizedCollectionSlug)
+      .eq("is_published", true)
+      .maybeSingle();
+
+    if (error) {
+      console.error("Error fetching wiki catalog page", error);
+      return null;
+    }
+
+    return (data as WikiCatalogPageContent | null) ?? null;
+  };
+
+  if (BYPASS_WIKI_CATALOG_CACHE) return fetchPage();
+
   const cached = unstable_cache(
-    async () => {
-      const supabase = supabaseAdmin();
-      const { data, error } = await supabase
-        .from("wiki_catalog_pages_view")
-        .select(WIKI_CATALOG_SELECT_FIELDS)
-        .eq("wiki_slug", normalizedWikiSlug)
-        .eq("collection_slug", normalizedCollectionSlug)
-        .eq("is_published", true)
-        .maybeSingle();
-
-      if (error) {
-        console.error("Error fetching wiki catalog page", error);
-        return null;
-      }
-
-      return (data as WikiCatalogPageContent | null) ?? null;
-    },
+    fetchPage,
     ["wiki-catalog-page-by-path-v1", normalizedWikiSlug, normalizedCollectionSlug],
     {
       revalidate: WIKI_CATALOG_REVALIDATE_SECONDS,
@@ -111,23 +116,27 @@ export async function getWikiCatalogPageByCode(code: string): Promise<WikiCatalo
   const normalizedCode = normalizeCode(code);
   if (!normalizedCode) return null;
 
+  const fetchPage = async () => {
+    const supabase = supabaseAdmin();
+    const { data, error } = await supabase
+      .from("wiki_catalog_pages_view")
+      .select(WIKI_CATALOG_SELECT_FIELDS)
+      .eq("code", normalizedCode)
+      .eq("is_published", true)
+      .maybeSingle();
+
+    if (error) {
+      console.error("Error fetching wiki catalog page by code", error);
+      return null;
+    }
+
+    return (data as WikiCatalogPageContent | null) ?? null;
+  };
+
+  if (BYPASS_WIKI_CATALOG_CACHE) return fetchPage();
+
   const cached = unstable_cache(
-    async () => {
-      const supabase = supabaseAdmin();
-      const { data, error } = await supabase
-        .from("wiki_catalog_pages_view")
-        .select(WIKI_CATALOG_SELECT_FIELDS)
-        .eq("code", normalizedCode)
-        .eq("is_published", true)
-        .maybeSingle();
-
-      if (error) {
-        console.error("Error fetching wiki catalog page by code", error);
-        return null;
-      }
-
-      return (data as WikiCatalogPageContent | null) ?? null;
-    },
+    fetchPage,
     ["wiki-catalog-page-by-code-v1", normalizedCode],
     {
       revalidate: WIKI_CATALOG_REVALIDATE_SECONDS,
@@ -139,19 +148,23 @@ export async function getWikiCatalogPageByCode(code: string): Promise<WikiCatalo
 }
 
 export async function listPublishedWikiCatalogPaths(): Promise<Array<{ wiki_slug: string; collection_slug: string }>> {
-  const cached = unstable_cache(
-    async () => {
-      const supabase = supabaseAdmin();
-      const { data, error } = await supabase
-        .from("wiki_catalog_pages")
-        .select("wiki_slug, collection_slug")
-        .eq("is_published", true)
-        .not("wiki_slug", "is", null)
-        .not("collection_slug", "is", null);
+  const fetchPaths = async () => {
+    const supabase = supabaseAdmin();
+    const { data, error } = await supabase
+      .from("wiki_catalog_pages")
+      .select("wiki_slug, collection_slug")
+      .eq("is_published", true)
+      .not("wiki_slug", "is", null)
+      .not("collection_slug", "is", null);
 
-      if (error) throw error;
-      return (data ?? []) as Array<{ wiki_slug: string; collection_slug: string }>;
-    },
+    if (error) throw error;
+    return (data ?? []) as Array<{ wiki_slug: string; collection_slug: string }>;
+  };
+
+  if (BYPASS_WIKI_CATALOG_CACHE) return fetchPaths();
+
+  const cached = unstable_cache(
+    fetchPaths,
     ["wiki-catalog-paths-v1"],
     {
       revalidate: WIKI_CATALOG_REVALIDATE_SECONDS,

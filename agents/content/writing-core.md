@@ -130,20 +130,23 @@ Basic food is usually safe to spend because you can buy it again or pick it up d
 12. If a normal player can ask "what does that mean?" after a sentence, rewrite it with context.
 13. Do not compress away explanation just to keep the field short. Short copy is good only when it is complete.
 
-## One-Pass Writing Standard
+## One-Workflow Writing Standard
 
 Every serious content task should produce researched, final-shaped copy in one workflow:
 
 1. Confirm the page type and exact database fields.
 2. Create or update `research-notes.md` with plain-language topic research before implementation notes.
 3. Inspect the current row, local dataset, route behavior, or source material.
-4. Verify unstable facts before writing.
-5. Write directly in `final.json` using the mature human standard.
-6. Run the final edit checklist before returning or importing the result.
+4. For catalog work, audit data and images before writing: local count, source count, rendered count, title count, image coverage, and missing or stale rows.
+5. Verify unstable facts before writing.
+6. Update or intentionally accept stale data before writing public copy.
+7. Write the first pass directly in `final.json` using the mature human standard.
+8. Run the FLOW pass when the page has meaningful body copy, especially catalog, game-catalog, article, and tool pages.
+9. Run the final edit checklist before returning or importing the result.
 
 Do not return weak preliminary copy that needs another prompt to become usable. If research is blocked, return `needs review` with the missing facts inside `research-notes.md` instead of filling gaps.
 
-For catalog and game catalog work, finish one gold-standard page before scaling to more pages.
+For catalog and game catalog work, finish one gold-standard page before scaling to more pages. The gold standard includes data completeness and image coverage, not only good prose.
 
 ## Reader-First Standard
 
@@ -206,6 +209,22 @@ A Bloxodes page should move like a practical story:
 
 Keep the reader oriented. Each section should make the next section feel expected.
 
+## FLOW Pass Standard
+
+The FLOW pass exists because a page can be factual and still read badly. It may have clean sentences, but the headings feel random, the paragraphs jump too fast, or `description_md` repeats card-section notes instead of explaining the whole mechanic.
+
+Run the FLOW pass after the first-pass `final.json` and before final edit. It should rewrite the public fields, not merely judge them.
+
+For catalog and game-catalog pages:
+
+- `description_json` explains specific card sections near the cards.
+- `description_md` explains the collection as a whole: how it works, how players get or use it, what terms mean, and what mistakes matter across the page.
+- `description_md` should include at least one useful action section when the collection has an action behind it. The action can be getting, finding, unlocking, farming, growing, hatching, rolling, crafting, equipping, traveling, comparing, or using the items.
+- Tables, bullets, and numbered steps should appear when they make the page easier to understand.
+- Headings should explain a reader question or action, not restate a field label.
+
+Think of the pass like this: research gives the facts, the first pass writes the page, FLOW makes the page readable enough that a normal Roblox player can follow it without stopping to decode why the sections exist.
+
 ## Outline-First Page Structure
 
 Do not start public copy by turning research notes into polished paragraphs. Build the reader path first.
@@ -219,6 +238,8 @@ Before writing, decide:
 - where a list, table, or numbered process will be clearer than prose
 
 Good catalog and game-catalog pages should feel like catalog plus useful guide context. They should not become giant articles, but they should answer the practical questions a player would ask: how to get the item, what the main types are, what current versus old availability means, which values change a decision, and what mistakes to avoid.
+
+They also need trustworthy data. If research finds more items than the local dataset, missing expected images, or cards that cannot show useful fields yet, stop and fix or approve the data state before writing polished copy.
 
 ## Lists, Tables, And Steps
 

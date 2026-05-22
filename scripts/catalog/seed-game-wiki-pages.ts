@@ -17,6 +17,7 @@ type WikiPageUpsert = {
 type WikiCopy = {
   metaDescription: string;
   tipsMd: string;
+  controlsJson?: Array<Record<string, string>>;
 };
 
 const args = new Set(process.argv.slice(2));
@@ -55,11 +56,76 @@ const WIKI_COPY: Record<string, WikiCopy> = {
 - Furniture and house surfaces are large catalogs, so use categories and prices to narrow home customization choices.`
   },
   "blox-fruits": {
-    metaDescription: "Blox Fruits wiki hub with fruits, swords, fighting styles, materials, bosses, quests, races, titles, NPCs, and locations.",
-    tipsMd: `- Use fruits, swords, guns, fighting styles, races, and accessories when comparing combat builds.
-- Materials, quests, bosses, enemies, NPCs, and locations help with progression because they connect sources, levels, rewards, and islands.
-- Instinct, aura stages, aura visuals, titles, special titles, and title colors are progression references, so keep them close to the main wiki hub.
-- The current game-info data lists level cap 2800, fruit map spawns every hour, fruit despawn after 20 minutes, and dealer restocks every 4 hours.`
+    metaDescription: "Blox Fruits wiki hub with active codes, fruit and weapon catalogs, quest routes, bosses, sea events, controls, and Roblox game details.",
+    tipsMd: `- Follow the quest route before chasing random bosses. First Sea teaches the basic loop, Second Sea starts at Level 700, and Third Sea opens around Level 1500 with late-game islands leading toward the 2800 cap.
+- Fruit timing matters because the Blox Fruit Dealer restocks random fruits every 4 hours, while physical fruits can spawn on the map every hour and disappear after 20 minutes.
+- Keep core abilities close to your build plan. Aura, Instinct, Dash, Flash Step, and Air Jump affect combat, travel, Elemental enemies, and PvP more than their short names make it sound.
+- Save materials instead of treating low-rarity drops as junk. Upgrades, fighting styles, race progress, event shops, and special unlocks can all ask for drops you ignored earlier.
+- Use locations, quests, enemies, bosses, NPCs, and materials together when planning a grind route. Blox Fruits progress is usually tied to where you are, what level you are, and which unlock route you are working on.`,
+    controlsJson: [
+      {
+        action: "Move",
+        desktop: "W/A/S/D",
+        mobile: "Virtual joystick",
+        tablet: "Virtual joystick",
+        console: "Left stick"
+      },
+      {
+        action: "Jump",
+        desktop: "Space",
+        mobile: "Jump button",
+        tablet: "Jump button",
+        console: "A"
+      },
+      {
+        action: "Attack / interact",
+        desktop: "Left click",
+        mobile: "Tap or attack button",
+        tablet: "Tap or attack button",
+        console: "RT"
+      },
+      {
+        action: "Dash",
+        desktop: "Q",
+        mobile: "Dash button",
+        tablet: "Dash button",
+        console: "Double-tap or wiggle left stick"
+      },
+      {
+        action: "Use fruit or weapon skills",
+        desktop: "Z, X, C, V, F",
+        mobile: "On-screen skill buttons",
+        tablet: "On-screen skill buttons",
+        console: "X, Y, B, LT, and mapped skill prompts"
+      },
+      {
+        action: "Race ability",
+        desktop: "T",
+        mobile: "Race ability button",
+        tablet: "Race ability button"
+      },
+      {
+        action: "Toggle Aura",
+        desktop: "J",
+        mobile: "Aura button",
+        tablet: "Aura button",
+        console: "D-pad down"
+      },
+      {
+        action: "Toggle Instinct",
+        desktop: "E or K",
+        mobile: "Instinct button",
+        tablet: "Instinct button",
+        console: "D-pad left"
+      },
+      {
+        action: "Flash Step",
+        desktop: "R",
+        mobile: "Flash Step button, then tap a target spot",
+        tablet: "Flash Step button, then tap a target spot",
+        console: "Right stick press"
+      }
+    ]
   }
 };
 
@@ -131,7 +197,7 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
       seo_title: `${group.gameName} Wiki`,
       meta_description: copy.metaDescription,
       universe_id: universeIdsByGameSlug.get(group.gameSlug) ?? null,
-      controls_json: [],
+      controls_json: copy.controlsJson ?? [],
       tips_md: copy.tipsMd,
       is_published: !draft,
       published_at: draft ? existingPublishedAt.get(group.gameSlug) ?? null : existingPublishedAt.get(group.gameSlug) ?? now
