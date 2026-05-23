@@ -187,12 +187,12 @@ function SidebarBody({
           src={accountAvatar}
           alt=""
           aria-hidden="true"
-          className="h-6 w-6 rounded-full border border-sidebar-border object-cover"
+          className="h-[26px] w-[26px] rounded-full border border-sidebar-border object-cover"
           loading="lazy"
         />
       ) : (
-        <span className="inline-flex h-6 w-6 items-center justify-center rounded-md text-sidebar-foreground/70">
-          <User aria-hidden className="h-3.5 w-3.5" />
+        <span className="inline-flex h-[26px] w-[26px] items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-foreground/70">
+          <User aria-hidden className="h-4 w-4" />
         </span>
       )}
       <span className="min-w-0 truncate">{isSignedIn ? accountLabel : "Sign in"}</span>
@@ -202,8 +202,8 @@ function SidebarBody({
   return (
     <>
       <SidebarHeader className="gap-0 px-3 pb-2 pt-5">
-        <div className="relative flex min-h-12 items-center justify-center">
-          <LogoMark className="h-12" />
+        <div className="relative flex min-h-11 items-center justify-center">
+          <LogoMark className="h-10" />
           {isMobile ? (
             <Button
               type="button"
@@ -211,7 +211,7 @@ function SidebarBody({
               size="icon"
               onClick={() => setOpenMobile(false)}
               aria-label="Close menu"
-              className="absolute right-0 h-8 w-8 rounded-md text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+              className="absolute right-0 h-9 w-9 rounded-lg text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
             >
               <X aria-hidden className="h-4 w-4" />
             </Button>
@@ -219,7 +219,7 @@ function SidebarBody({
         </div>
 
         <div className="relative mt-4">
-          <Search aria-hidden className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-sidebar-foreground/45" />
+          <Search aria-hidden className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-sidebar-foreground/45" />
           <SidebarInput
             type="text"
             inputMode="search"
@@ -227,7 +227,7 @@ function SidebarBody({
             onChange={(event) => setQuery(event.target.value)}
             placeholder={`Search ${searchScope.label}`}
             aria-label={`Search ${searchScope.label}`}
-            className="h-8 rounded-md border-transparent bg-sidebar-accent/50 pl-8 pr-8 text-[13px] font-medium text-sidebar-foreground shadow-none placeholder:text-sidebar-foreground/45 hover:bg-sidebar-accent/70 focus-visible:bg-sidebar focus-visible:ring-1"
+            className="h-[34px] rounded-lg border-transparent bg-sidebar-accent/50 pl-8 pr-8 text-[13px] font-medium text-sidebar-foreground shadow-none placeholder:text-sidebar-foreground/45 hover:bg-sidebar-accent/70 focus-visible:bg-sidebar focus-visible:ring-1"
           />
           {query ? (
             <Button
@@ -247,7 +247,7 @@ function SidebarBody({
       <SidebarContent className="px-2 pb-3">
         {searchActive ? (
           <SidebarGroup className="min-h-0 flex-1 px-1">
-            <div className="mb-2 px-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-sidebar-foreground/45">
+            <div className="mb-2 px-1.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-sidebar-foreground/45">
               {!canSearch
                 ? "Keep typing"
                 : loading && results.length === 0
@@ -260,21 +260,21 @@ function SidebarBody({
             </div>
             <SidebarGroupContent>
               {!canSearch ? (
-                <Card className="rounded-md border-0 bg-sidebar-accent/50 px-3 py-2 text-[13px] leading-5 text-muted-foreground shadow-none">
+                <Card className="rounded-lg border-0 bg-sidebar-accent/50 px-3 py-2 text-[13px] leading-5 text-muted-foreground shadow-none">
                   Type at least 2 characters to search.
                 </Card>
               ) : error ? (
-                <Card className="rounded-md border-0 bg-sidebar-accent/50 px-3 py-2 text-[13px] leading-5 text-muted-foreground shadow-none">
+                <Card className="rounded-lg border-0 bg-sidebar-accent/50 px-3 py-2 text-[13px] leading-5 text-muted-foreground shadow-none">
                   {error}
                 </Card>
               ) : loading && results.length === 0 ? (
                 <div className="space-y-2">
                   {Array.from({ length: 5 }).map((_, index) => (
-                    <div key={index} className="h-10 animate-pulse rounded-md bg-sidebar-accent/70" />
+                    <div key={index} className="h-10 animate-pulse rounded-lg bg-sidebar-accent/70" />
                   ))}
                 </div>
               ) : results.length ? (
-                <SidebarMenu>
+                <SidebarMenu className="gap-1">
                   {results.map((item, index) => {
                     const updatedLabel = item.updatedAt ? formatUpdatedLabel(item.updatedAt) : null;
                     return (
@@ -282,7 +282,7 @@ function SidebarBody({
                         <SidebarMenuButton
                           asChild
                           size="lg"
-                          className="h-auto items-start rounded-md px-2 py-2 hover:bg-sidebar-accent"
+                          className="h-auto items-start rounded-lg px-2.5 py-2.5 hover:bg-sidebar-accent"
                         >
                           <Link
                             href={item.url}
@@ -312,7 +312,7 @@ function SidebarBody({
                   })}
                 </SidebarMenu>
               ) : (
-                <Card className="rounded-md border-0 bg-sidebar-accent/50 px-3 py-2 text-[13px] leading-5 text-muted-foreground shadow-none">
+                <Card className="rounded-lg border-0 bg-sidebar-accent/50 px-3 py-2 text-[13px] leading-5 text-muted-foreground shadow-none">
                   Try another keyword.
                 </Card>
               )}
@@ -323,7 +323,7 @@ function SidebarBody({
             <SidebarGroupLabel className="h-6 px-2 text-[11px] font-medium uppercase tracking-[0.12em] text-sidebar-foreground/40">
               Browse
             </SidebarGroupLabel>
-            <SidebarMenu className="gap-0.5">
+            <SidebarMenu className="gap-1">
               {navLinks.map((link) => {
                 const active = isActive(link.href);
                 return (
@@ -333,9 +333,9 @@ function SidebarBody({
                       isActive={active}
                       size="lg"
                       className={cn(
-                        "h-8 rounded-md px-2 text-[13px] font-medium text-sidebar-foreground/62",
+                        "h-9 gap-2.5 rounded-lg px-2.5 text-[13px] font-semibold text-sidebar-foreground/68 [&>svg]:h-[18px] [&>svg]:w-[18px]",
                         active
-                          ? "bg-sidebar-accent/80 text-sidebar-foreground"
+                          ? "bg-sidebar-accent/85 text-sidebar-foreground"
                           : "hover:bg-sidebar-accent/70 hover:text-sidebar-foreground"
                       )}
                     >
@@ -357,15 +357,15 @@ function SidebarBody({
             <Button
               asChild
               variant="ghost"
-              className="h-8 w-full justify-start gap-2 rounded-md px-2 text-[13px] font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+              className="h-9 w-full justify-start gap-2.5 rounded-lg px-2.5 text-[13px] font-semibold text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
             >
               <Link href={accountHref} aria-label={accountLabel} title={accountLabel} onClick={closeIfMobile}>
                 {accountContent}
               </Link>
             </Button>
-            <div className="flex h-8 items-center justify-between gap-2 rounded-md px-2 hover:bg-sidebar-accent">
-              <span className="text-[13px] font-medium text-sidebar-foreground/70">Theme</span>
-              <ThemeToggle className="h-6 w-6 border-sidebar-border bg-transparent shadow-none hover:translate-y-0 hover:bg-sidebar-accent [&_svg]:h-3.5 [&_svg]:w-3.5" />
+            <div className="flex h-9 items-center justify-between gap-2 rounded-lg px-2.5 hover:bg-sidebar-accent">
+              <span className="text-[13px] font-semibold text-sidebar-foreground/70">Theme</span>
+              <ThemeToggle className="h-[26px] w-[26px] border-sidebar-border bg-transparent shadow-none hover:translate-y-0 hover:bg-sidebar-accent [&_svg]:h-3.5 [&_svg]:w-3.5" />
             </div>
           </SidebarGroup>
         )}
@@ -506,7 +506,7 @@ export function HeaderControls() {
   }, [canSearch, loading, results.length, searchScope.scope, trimmedQuery]);
 
   return (
-    <SidebarProvider className="contents" style={{ "--sidebar-width": "15rem" } as CSSProperties}>
+    <SidebarProvider className="contents" style={{ "--sidebar-width": "15.5rem" } as CSSProperties}>
       <Sidebar className="z-40 border-r border-sidebar-border/80 bg-sidebar shadow-none">
         <SidebarBody
           accountAvatar={accountAvatar}
