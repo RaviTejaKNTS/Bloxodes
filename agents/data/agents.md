@@ -22,7 +22,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `checklist_pages`, `checklist_pages_view`, `checklist_items`
   - Checklist detail and checklist index content.
 - `quiz_pages`, `quiz_pages_view`
-  - Quiz detail and quiz index content.
+  - Quiz detail and quiz index metadata. Quiz detail rendering does not use `about_md`; keep quiz value in the intro copy and question pool. Use `agents/content/page-types/quizzes.md` for page shape and validation.
 - `wiki_pages`, `wiki_pages_view`
   - Game wiki hubs that link editorial controls/tips to `roblox_universes` automation.
 - `wiki_catalog_pages`, `wiki_catalog_pages_view`
@@ -94,7 +94,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Grow a Garden/currencies.json`
   - Local Grow a Garden catalog datasets collected from multiple external sources and intended for wiki/catalog page work.
 - `data/Grow a Garden/quiz.json`
-  - Quiz content for the Grow a Garden quiz flow.
+  - Local Grow a Garden quiz question pool for `/quizzes/grow-a-garden`.
 - `data/Steal a Brainrot/*.json`
   - Local Steal a Brainrot in-game datasets collected from the Steal a Brainrot Wiki for wiki/catalog page work.
   - Matching images live under `apps/web/public/Steal a Brainrot/`.
@@ -115,7 +115,11 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - The Forge collection pages also use `quests.json`, `skills.json`, `blueprints.json`, and `npcs.json` through `src/app/(site)/catalog/the-forge/page-data.tsx`.
 - `data/Wizard Alchemy/*.json`
   - Local Wizard Alchemy game datasets for wiki/catalog page work, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
+  - `potions.json`, `materials.json`, and `races.json` also power the Wizard Alchemy potion planner and race reroll calculator through `src/lib/wizard-alchemy/data.ts`.
   - Do not store manual code-page payloads with active codes or dates here. Code pages should update the `games` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then rely on `scripts/codes/update-codes.ts` to populate `codes`.
+- `data/Wizard Alchemy/quiz.json`
+  - Local Wizard Alchemy quiz question pool for `/quizzes/wizard-alchemy`.
+  - Quiz pools use `QuizData` shape with `easy`, `medium`, and `hard` arrays. Keep easy questions beginner-friendly, make hard questions pro-level, and vary question rhythm naturally.
 - `data/Fisch/fish.json`
   - Fisch catalog content.
 - `data/Color Codes/roblox-color-codes.json`

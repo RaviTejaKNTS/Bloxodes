@@ -14,6 +14,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `scripts/AGENTS.md`: automation jobs, preferred npm commands, and script authoring rules.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
+- `agents/content/page-types/quizzes.md`: quiz page workflow, metadata shape, question pool design, and validation rules.
 - `agents/wiki-catalog-workflow.md`: repeatable local-first process for turning game datasets into wiki and catalog pages.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
 

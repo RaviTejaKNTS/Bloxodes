@@ -105,9 +105,6 @@ export default async function QuizPage({ params }: PageProps) {
   const descriptionHtml = page.description_md
     ? await renderMarkdown(page.description_md, { paragraphizeLineBreaks: true })
     : "";
-  const aboutHtml = page.about_md
-    ? await renderMarkdown(page.about_md, { paragraphizeLineBreaks: true })
-    : "";
   const heroImage = pickThumbnail(page.universe?.thumbnail_urls) || page.universe?.icon_url || null;
   const gameName = page.universe?.display_name ?? page.universe?.name ?? page.title;
   const heroAlt = `${gameName} Quiz Thumbnail`;
@@ -223,15 +220,6 @@ export default async function QuizPage({ params }: PageProps) {
         heroImage={heroImage}
         heroAlt={heroAlt}
       />
-      {aboutHtml ? (
-        <section className="mt-10 border-t border-border/60 pt-6" id="about">
-          <div
-            className="article-content prose dark:prose-invert max-w-none game-copy"
-            dangerouslySetInnerHTML={{ __html: aboutHtml }}
-          />
-        </section>
-      ) : null}
-
       {showRecommendations ? (
         <section className="mt-16 border-t border-border/60 pt-10">
           <div className="space-y-8">

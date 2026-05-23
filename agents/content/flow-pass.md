@@ -17,6 +17,8 @@ FLOW means the public copy moves like a player explanation:
 
 The pass should change `final.json` when the structure is weak. Do not only say the draft is bad. Rewrite it.
 
+For catalog and game-catalog pages, also read the approved title as a promise. If the title says `how to get them`, `locations`, `drops`, `chances`, `what they do`, `bonuses`, `value`, or another specific answer, the FLOW pass must make sure the body actually answers it. Do not leave the promise trapped in a card column when the title needs a real explanation.
+
 ## Catalog FLOW Rules
 
 For catalog and game-catalog pages, `description_md` must not be a second set of card-section notes. If the cards are grouped by rarity, sea, source, item type, or unlock route, those group notes belong in `description_json`.
@@ -102,6 +104,7 @@ Before the pass is complete, confirm:
 
 - `description_md` explains the whole page, not individual card sections.
 - The page has a useful action/how-to/use section when the collection has player action behind it.
+- The visible title and `seo_title` promise is answered by the cards, `description_md`, `how_it_works_md`, and FAQs.
 - Headings explain what the section helps the reader understand.
 - The first paragraph under a heading deepens the idea instead of repeating the heading.
 - Paragraphs do not mix unrelated concepts.

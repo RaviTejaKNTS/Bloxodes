@@ -78,6 +78,8 @@ This powerful and useful calculator helps Roblox players make smarter decisions.
 
 ## How-It-Works Rules
 
+`how_it_works_md` renders directly below the interactive tool on tool pages. Write it as the practical "how to use this tool" section, not as a distant technical appendix. It should tell the reader what to click or enter, what to check in the result panel, what each important number means, and which output should drive the next decision.
+
 `how_it_works_md` should explain the actual mechanics:
 
 - what each input changes
@@ -86,7 +88,9 @@ This powerful and useful calculator helps Roblox players make smarter decisions.
 - whether the result is an estimate or exact output
 - what the user should do if a value looks wrong
 
-Do not write vague lines like "enter your information and get a result" unless the next sentence explains the result.
+For interactive tools, use short headings, numbered steps, or compact bullets when they make the workflow easier to follow. A good section can say things like "Pick the target item first", "Enter the quantity you actually plan to spend", "Read the shortfall before using rare materials", or "Compare miss chance with hit chance before rerolling." Do not write vague lines like "enter your information and get a result" unless the next sentence explains the result.
+
+Keep broader system explanation, examples, and edge cases in `description_json` below this section. The first written section after the tool should help the player operate the tool immediately.
 
 ## FAQ Rules
 

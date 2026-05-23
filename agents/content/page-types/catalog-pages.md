@@ -50,7 +50,7 @@ Only include fields you are updating. Do not invent image URLs or schema payload
 
 ## Field Roles
 
-- `title`: visible page title. Usually `All <Collection> in <Game>` or a direct catalog name.
+- `title`: visible page title. Make it unique, well-defined, and matched to the collection's real reader intent. Use `All <Collection> in <Game>` only when the page is truly a simple list; prefer a more specific promise when the page explains obtainment, locations, drops, chances, effects, value, or comparison.
 - `seo_title`: search title. For catalog and game-catalog pages, default this to the visible `title`, including the item count, because count-based titles are clearer in search results. Only diverge when the visible title is genuinely too long or a route has a special SEO format.
 - `meta_description`: under 160 characters, specific to the collection.
 - `intro_md`: short context before the primary data section.
@@ -82,12 +82,14 @@ After the first-pass `final.json`, run the FLOW pass before final edit. This is 
 
 ## Section Style Confirmation
 
-For catalog and game-catalog changes, research the collection first, then propose the data state, section style, and card data shape before writing final copy or updating Supabase.
+For catalog and game-catalog changes, research the collection first, then propose the data state, title promise, section style, and card data shape before writing final copy or updating Supabase.
 
 The proposal should include:
 
 - local item count, rendered card/table count, page title count, source count, image count, and missing image count when the page has item data
 - data update plan if the current local data is stale, incomplete, poorly shaped, or missing expected images
+- recommended visible title and `seo_title`
+- exact title promise and the content coverage needed to satisfy it
 - the recommended grouping axis, such as rarity, item type, source, event, location, tier, shop, world, or unlock route
 - why that grouping has real in-game meaning
 - alternatives considered and why they are weaker
@@ -97,7 +99,7 @@ The proposal should include:
 - raw fields that should stay hidden, such as long descriptions, raw HTML, raw `pros`/`cons`, nested objects, source dumps, or vague yes/no values
 - any route or renderer override needed to make the approved sections and approved card fields actually render
 
-Wait for explicit user confirmation before making the content change. If the user approves a data update, finish that local data work before writing final copy. If the user approves a different section style or card field plan, use that confirmed structure. Do not treat "write this page", "continue", or "go ahead" as approval unless the user has already seen the exact proposed data state, section labels, and card fields and accepted them.
+Wait for explicit user confirmation before making the content change. If the user approves a data update, finish that local data work before writing final copy. If the user approves a different title, section style, or card field plan, use that confirmed structure. Do not treat "write this page", "continue", or "go ahead" as approval unless the user has already seen the exact proposed data state, title promise, section labels, and card fields and accepted them.
 
 Before saving or importing, verify the route will actually render those sections. The planned `description_json` keys must match the computed section labels from the page renderer. If the renderer is grouping by a stale or blank field, such as empty `rarity` values, fix the renderer or add the confirmed grouping behavior before writing the local DB row.
 
@@ -123,6 +125,7 @@ If the audit finds more real items than local data, or finds that important imag
 ## Writing Rules
 
 - Explain the fields players actually scan.
+- Make the page satisfy its title. If the title says `how to get them`, `locations`, `drops`, `chances`, `what they do`, or another specific promise, the cards and copy must answer it completely enough that the reader does not need a separate article.
 - Define the field in gameplay terms before using it as advice.
 - Name the game mechanic, not just the collection.
 - Add enough context for the collection to make sense before and after the item cards. A catalog page still stays data-first, but the copy should explain what the items do in the game, how players get them, why the fields matter, and what mistakes to avoid.
@@ -246,6 +249,8 @@ Avoid FAQ entries like:
 - Does `description_md` give real context about mechanics, obtainment, value, availability, or player mistakes?
 - Did the FLOW pass rewrite `description_md` for whole-page readability before final edit?
 - Does `description_md` include a useful action/how-to/use section when the collection has player action behind it?
+- Did research propose and get approval for the title promise before final writing?
+- Does the page fully answer the title promise through the cards, `description_md`, `how_it_works_md`, and FAQs?
 - If the page uses sections, did research propose and get approval for the section style and card data shape before final writing?
 - Did the route actually render those section labels, and do the `description_json` keys match them?
 - Did the route actually render the approved card/table fields?

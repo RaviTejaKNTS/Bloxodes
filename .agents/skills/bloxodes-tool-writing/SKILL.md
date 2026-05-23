@@ -69,7 +69,9 @@ Run the final edit gate before returning output.
 
 The intro should quickly say what the tool helps the user calculate, compare, optimize, extract, or plan.
 
-`how_it_works_md` should explain inputs, outputs, assumptions, and limits in plain English. Give enough context before formulas or caveats so the user understands what the result means.
+`how_it_works_md` renders directly below the interactive tool, so write it as the practical "how to use this tool" section. Explain what to click or enter, what to check in the result panel, what each important number means, and which output should drive the next player decision. Use numbered steps or compact bullets when they make the workflow clearer.
+
+After the workflow is clear, explain assumptions and limits in plain English. Give enough context before formulas or caveats so the user understands what the result means.
 
 Do not claim exact accuracy when the result depends on changing data, player-entered estimates, hidden formulas, or incomplete datasets. Say what the tool can safely estimate and where the user should treat the result as guidance.
 

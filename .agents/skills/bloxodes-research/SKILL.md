@@ -20,6 +20,7 @@ Then read the matching page-type guide:
 - `agents/content/page-types/code-pages.md`
 - `agents/content/page-types/articles.md`
 - `agents/content/page-types/tools.md`
+- `agents/content/page-types/checklists.md`
 
 If these files have not been read in the current task, read them before researching or writing. Research is where the page earns its usefulness, so do not rush this step.
 
@@ -37,13 +38,13 @@ Build the page structure inside the notes. This is not a formality. The outline 
 
 For catalog and game-catalog pages, also plan the later FLOW pass while the research is still fresh. Name what the page-level `description_md` should teach as a whole, what action/how-to/use section the reader needs, and which details belong in `description_json` because they only explain one card section. This prevents the final page from turning into a pile of accurate but disconnected headings.
 
-For catalog and game-catalog pages, stop after research and propose the data action, item-card section style, and card data shape. Name the local/source/rendered counts, image coverage, any missing or stale items, the grouping axis, why it has real in-game meaning, weaker alternatives, the `description_json` notes, and what should stay in `description_md`. Mark the notes `needs data update` when the dataset or images need work. Mark the notes `needs section confirmation` until the user approves the data, section, and card plan.
+For catalog and game-catalog pages, stop after research and propose the data action, title promise, item-card section style, and card data shape. Name the local/source/rendered counts, image coverage, any missing or stale items, the recommended visible title and `seo_title`, the exact promise the title makes to the reader, the grouping axis, why it has real in-game meaning, weaker alternatives, the `description_json` notes, and what should stay in `description_md`. Mark the notes `needs data update` when the dataset or images need work. Mark the notes `needs section confirmation` until the user approves the data, title promise, section, and card plan.
 
 Verify facts that can change: codes, events, prices, availability, dates, stats, formulas, and active reward pools. Record source links and checked dates in the notes. If a fact is missing or uncertain, say so there instead of hiding the gap with generic copy.
 
 For code pages, verify source wiring instead of manually collecting code rows. The `games.slug` must be the game slug only, `roblox_link` must be the Roblox experience URL, `source_url` must be the RobloxDen codes page, and `source_url_2` must be the Beebom codes page. Do not write active codes, expired codes, code names, code dates, or `first_seen_at` values into local JSON, SQL, Supabase, or `final.json`; the codes refresh script owns that data.
 
-Only mark research `ready to write` when the content can be written without guessing, any required data/image update is complete or accepted, and any required section style has been confirmed.
+Only mark research `ready to write` when the content can be written without guessing, any required data/image update is complete or accepted, and any required title promise, section style, and card data shape have been confirmed.
 
 ## What Good Research Feels Like
 
@@ -66,5 +67,6 @@ Return a concise summary of:
 - facts confirmed
 - unknowns
 - data/image action for catalog pages
+- recommended catalog title, title promise, and how the page will satisfy it
 - source URL and refresh action for code pages
 - recommended page type and output shape

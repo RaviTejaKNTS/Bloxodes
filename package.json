@@ -33,6 +33,7 @@
     "rewrite:codes": "tsx scripts/codes/rewrite-codes-articles.ts",
     "content:check-copy": "tsx scripts/content/check-public-copy.ts",
     "import:games": "tsx scripts/games/import-games.ts",
+    "upsert:game-code-page": "tsx scripts/games/upsert-game-code-page.ts",
     "post:codes": "tsx scripts/posts/post-codes.ts",
     "post:online": "tsx scripts/posts/post-online.ts",
     "generate": "tsx scripts/games/generate-game-article.ts",

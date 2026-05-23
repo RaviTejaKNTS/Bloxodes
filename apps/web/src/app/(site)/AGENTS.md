@@ -7,6 +7,7 @@ This folder contains the public Bloxodes experience: content hubs, detail pages,
 Scoped route-family guides:
 
 - `apps/web/src/app/(site)/catalog/AGENTS.md`
+- `apps/web/src/app/(site)/quizzes/AGENTS.md`
 - `apps/web/src/app/(site)/tools/AGENTS.md`
 
 ## Route Families

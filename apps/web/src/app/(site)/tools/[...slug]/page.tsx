@@ -43,7 +43,9 @@ const RESERVED_TOOL_CODES = new Set([
   "roblox-id-extractor",
   "robux-to-usd-calculator",
   "the-forge-crafting-calculator",
-  "the-forge-inventory-optimizer"
+  "the-forge-inventory-optimizer",
+  "wizard-alchemy-potion-planner",
+  "wizard-alchemy-race-reroll-calculator"
 ]);
 
 type PageProps = {
@@ -287,18 +289,20 @@ export default async function ToolFallbackPage({ params }: PageProps) {
           adFormat="auto"
           fullWidthResponsive
         />
-        {(descriptionNodes.length || howNodes || faqNodes.length) ? (
+        {howNodes ? howNodes : null}
+        {(descriptionNodes.length || faqNodes.length) ? (
           <>
           {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
-          {howNodes ? howNodes : null}
 
-          <ContentFaq
-            items={faqNodes.map((faq, idx) => ({
-              id: `${faq.q}-${idx}`,
-              question: faq.q,
-              answer: faq.nodes
-            }))}
-          />
+          {faqNodes.length ? (
+            <ContentFaq
+              items={faqNodes.map((faq, idx) => ({
+                id: `${faq.q}-${idx}`,
+                question: faq.q,
+                answer: faq.nodes
+              }))}
+            />
+          ) : null}
           </>
         ) : null}
       </section>

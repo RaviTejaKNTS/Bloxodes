@@ -10,12 +10,15 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `apps/mobile/AGENTS.md`: Expo React Native app scope, API contract, and local testing workflow.
 - `apps/web/src/app/AGENTS.md`: App Router structure, feeds, sitemaps, auth routes, and route conventions.
 - `apps/web/src/app/(site)/AGENTS.md`: public route families, page-data patterns, SEO, and publishable content rules.
+- `apps/web/src/app/(site)/quizzes/AGENTS.md`: quiz route behavior, local question pool rules, and preview checks.
 - `apps/web/src/app/api/AGENTS.md`: JSON endpoint conventions, mutation safety, extension/mobile APIs, and cache invalidation.
 - `apps/web/src/lib/AGENTS.md`: shared data access, caching, auth, SEO, client payload helpers, and domain modules.
 - `scripts/AGENTS.md`: automation/script authoring and execution rules.
 - `supabase/AGENTS.md`: schema and edge-function guidance.
 - `data/AGENTS.md`: local datasets and their consumers.
 - `agents/wiki-catalog-workflow.md`: local-first workflow for publishing game datasets as wiki and catalog pages.
+- `agents/content/page-types/checklists.md`: workflow and schema guidance for interactive checklist pages.
+- `agents/content/page-types/quizzes.md`: workflow and schema guidance for quiz pages and easy/medium/hard question pools.
 - `DESIGN.md`: public live-database design direction, shadcn component usage, design tokens, and readable content rules.
 - `docs/platform-monorepo-extension-mobile-plan.md`: current platform snapshot plus longer-term admin, extension, and mobile roadmap.
 
@@ -26,6 +29,7 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `agents/scripts/agents.md`: script inventory grouped by job type plus preferred npm commands.
 - `agents/data/agents.md`: data-source inventory across Supabase, local datasets, and external APIs.
 - `agents/wiki-catalog-workflow.md`: repeatable checklist for local `wiki_pages` and `catalog_pages` seeding, rendering, verification, and prod promotion.
+- `agents/content/page-types/quizzes.md`: quiz-page workflow, local `QuizData` shape, difficulty design, and validation checks.
 
 ## Maintenance Rules
 

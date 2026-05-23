@@ -68,6 +68,7 @@ Suggested structure:
     wiki-pages.md
     articles.md
     tools.md
+    quizzes.md
 ```
 
 Keep these files short and operational. They should explain how to write, research, edit, and shape Bloxodes content. They should not contain generated page content.
@@ -84,6 +85,7 @@ Implemented files:
 - `agents/content/page-types/wiki-pages.md`
 - `agents/content/page-types/articles.md`
 - `agents/content/page-types/tools.md`
+- `agents/content/page-types/quizzes.md`
 
 ## Skills
 
@@ -101,6 +103,7 @@ Initial skills to create:
   bloxodes-wiki-writing/SKILL.md
   bloxodes-article-writing/SKILL.md
   bloxodes-tool-writing/SKILL.md
+  bloxodes-quiz-writing/SKILL.md
 ```
 
 The first page-specific skills should be:
@@ -110,8 +113,9 @@ The first page-specific skills should be:
 - `bloxodes-wiki-writing`
 - `bloxodes-article-writing`
 - `bloxodes-tool-writing`
+- `bloxodes-quiz-writing`
 
-Later page-specific skills can cover codes, lists, quizzes, and other content types.
+Later page-specific skills can cover codes, lists, and other content types.
 
 Implemented initial skills under `.agents/skills/`:
 
@@ -123,6 +127,7 @@ Implemented initial skills under `.agents/skills/`:
 - `bloxodes-wiki-writing`
 - `bloxodes-article-writing`
 - `bloxodes-tool-writing`
+- `bloxodes-quiz-writing`
 
 ## Local Content Workspace
 

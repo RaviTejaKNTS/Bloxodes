@@ -2,8 +2,6 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { ForgeCatalogViewShell } from "./ForgeCatalogViewShell";
 
-const FALLBACK_IMAGE = "/og-image.png";
-
 type ForgeCatalogStat = { key: string; label: string };
 
 type ForgeCatalogConfig = {
@@ -212,8 +210,8 @@ const CARD_STAT_OVERRIDES: Record<string, string[]> = {
   blueprints: []
 };
 
-function resolveImageSrc(image: string | null | undefined): string {
-  if (!image) return FALLBACK_IMAGE;
+function resolveImageSrc(image: string | null | undefined): string | null {
+  if (!image) return null;
   if (image.startsWith("http")) return image;
   if (image.startsWith("/")) return image;
   return `/${image}`;
@@ -535,14 +533,20 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
     >
       {showImage ? (
         <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-border/60 bg-background/50">
-          <Image
-            src={image}
-            alt={item.name}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1440px) 25vw, 20vw"
-            className="object-contain p-5"
-            unoptimized
-          />
+          {image ? (
+            <Image
+              src={image}
+              alt={item.name}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1440px) 25vw, 20vw"
+              className="object-contain p-5"
+              unoptimized
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-surface-muted/60">
+              <span className="sr-only">Image unavailable for {item.name}</span>
+            </div>
+          )}
         </div>
       ) : null}
       <div className="flex flex-1 flex-col gap-4 p-4">
@@ -642,6 +646,7 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
               const subtitle = buildSubtitle(item, config);
               const description = config.descriptionKey ? normalizeValue(item[config.descriptionKey]) : null;
               const badgeValue = config.badgeKey ? formatBadgeValue(config.badgeKey, item[config.badgeKey]) : null;
+              const image = resolveImageSrc(item.image ?? null);
 
               return (
                 <tr key={item.id} id={`item-${item.id}-row`}>
@@ -649,14 +654,18 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
                     <td className="table-col-compact">
                       <div className="flex items-center justify-center">
                         <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-surface-muted/70 p-1.5">
-                          <Image
-                            src={resolveImageSrc(item.image ?? null)}
-                            alt={item.name}
-                            width={80}
-                            height={80}
-                            className="h-18 w-18 object-contain"
-                            unoptimized
-                          />
+                          {image ? (
+                            <Image
+                              src={image}
+                              alt={item.name}
+                              width={80}
+                              height={80}
+                              className="h-18 w-18 object-contain"
+                              unoptimized
+                            />
+                          ) : (
+                            <span className="sr-only">Image unavailable for {item.name}</span>
+                          )}
                         </div>
                       </div>
                     </td>

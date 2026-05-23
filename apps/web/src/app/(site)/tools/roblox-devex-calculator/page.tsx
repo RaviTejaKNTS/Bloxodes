@@ -160,6 +160,7 @@ export default async function RobloxDevexPage() {
           initialOldRobux={Math.floor(DEVEX_DEFAULT_TARGET_ROBUX / 2)}
           initialNewRobux={Math.ceil(DEVEX_DEFAULT_TARGET_ROBUX / 2)}
         />
+        {howNodes ? howNodes : null}
         <ContentSlot
           slot={TOOL_AD_SLOT}
           className="my-8 w-full"
@@ -167,10 +168,9 @@ export default async function RobloxDevexPage() {
           adFormat="auto"
           fullWidthResponsive
         />
-        {(descriptionNodes.length || howNodes || faqNodes.length) ? (
+        {(descriptionNodes.length || faqNodes.length) ? (
           <>
           {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
-          {howNodes ? howNodes : null}
 
           {faqNodes.length ? (
             <>

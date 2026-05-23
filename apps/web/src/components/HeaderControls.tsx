@@ -527,7 +527,7 @@ export function HeaderControls() {
         />
       </Sidebar>
 
-      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur xl:hidden">
+      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur lg:hidden">
         <div className="flex items-center gap-3 px-4 py-3">
           <MobileMenuButton />
           <LogoMark className="h-8" />

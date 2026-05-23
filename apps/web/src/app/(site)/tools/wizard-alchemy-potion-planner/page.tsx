@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
-import { SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
-import { getToolContentWithDevFallback } from "@/lib/tools";
+import { ContentFaq } from "@/components/ContentFaq";
 import { ContentSlot } from "@/components/ContentSlot";
-import { RobloxIdExtractorClient } from "./RobloxIdExtractorClient";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
-import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
-import { ContentFaq } from "@/components/ContentFaq";
+import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
+import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
+import { SITE_NAME, SITE_URL, buildAlternates, resolveSeoTitle } from "@/lib/seo";
+import { getToolContentWithDevFallback } from "@/lib/tools";
+import { loadWizardAlchemyPotionPlannerData } from "@/lib/wizard-alchemy/data";
+import { WizardAlchemyPotionPlannerClient } from "./WizardAlchemyPotionPlannerClient";
 
 export const revalidate = 3600;
 
-const TOOL_CODE = "roblox-id-extractor";
+const TOOL_CODE = "wizard-alchemy-potion-planner";
+const TOOL_TITLE = "Wizard Alchemy Potion Planner";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/${TOOL_CODE}`;
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
 const TOOL_AD_SLOT = "3529946151";
@@ -22,6 +24,8 @@ export async function generateMetadata(): Promise<Metadata> {
   const tool = await getToolContentWithDevFallback(TOOL_CODE);
   if (!tool) {
     return {
+      title: TOOL_TITLE,
+      description: "Plan Wizard Alchemy potion Magic totals, material shortfalls, shards, and unlockable potion thresholds.",
       alternates: buildAlternates(CANONICAL)
     };
   }
@@ -55,8 +59,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RobloxIdExtractorPage() {
-  const tool = await getToolContentWithDevFallback(TOOL_CODE);
+export default async function WizardAlchemyPotionPlannerPage() {
+  const [tool, plannerData] = await Promise.all([
+    getToolContentWithDevFallback(TOOL_CODE),
+    loadWizardAlchemyPotionPlannerData()
+  ]);
   const contentHtml = await buildPageContentHtml(tool);
   const introNodes = contentHtml?.introHtml ? renderPageContentNodes(contentHtml.introHtml, "tool-intro") : null;
   const descriptionNodes = (contentHtml?.descriptionHtml ?? []).map((entry) => ({
@@ -70,6 +77,8 @@ export default async function RobloxIdExtractorPage() {
   }));
   const publishedTime = tool ? resolvePublishedAt(tool) : null;
   const modifiedTime = tool ? resolveModifiedAt(tool) : null;
+  const fallbackIntro =
+    "Plan a Wizard Alchemy brew before spending materials. Pick a potion, add ingredient quantities, and check whether your Magic total reaches the target threshold.";
 
   const faqSchema =
     (tool?.faq_json?.length ?? 0) > 0
@@ -88,8 +97,8 @@ export default async function RobloxIdExtractorPage() {
     "@graph": [
       {
         "@type": "WebPage",
-        name: tool?.title ?? undefined,
-        description: tool?.meta_description ?? undefined,
+        name: tool?.title ?? TOOL_TITLE,
+        description: tool?.meta_description ?? "Wizard Alchemy potion planner with material Magic totals and shard guidance.",
         url: CANONICAL,
         datePublished: publishedTime ? new Date(publishedTime).toISOString() : undefined,
         dateModified: modifiedTime ? new Date(modifiedTime).toISOString() : undefined,
@@ -98,13 +107,13 @@ export default async function RobloxIdExtractorPage() {
           itemListElement: [
             { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
             { "@type": "ListItem", position: 2, name: "Tools", item: `${SITE_URL.replace(/\/$/, "")}/tools` },
-            { "@type": "ListItem", position: 3, name: tool?.title ?? "Tool" }
+            { "@type": "ListItem", position: 3, name: tool?.title ?? TOOL_TITLE }
           ]
         },
         mainEntity: {
           "@type": "WebApplication",
-          name: tool?.title ?? undefined,
-          description: tool?.meta_description ?? undefined,
+          name: tool?.title ?? TOOL_TITLE,
+          description: tool?.meta_description ?? "Plan Wizard Alchemy potion Magic totals before brewing.",
           applicationCategory: "Utility",
           operatingSystem: "Web",
           url: CANONICAL
@@ -129,19 +138,19 @@ export default async function RobloxIdExtractorPage() {
         items={[
           { label: "Home", href: "/" },
           { label: "Tools", href: "/tools" },
-          { label: tool?.title ?? "Tool", href: null }
+          { label: tool?.title ?? TOOL_TITLE, href: null }
         ]}
       />
 
       <header className="space-y-3">
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-          {tool?.title ?? "Roblox ID Extractor"}
+          {tool?.title ?? TOOL_TITLE}
         </h1>
         <UpdatedTimestamp value={modifiedTime} />
       </header>
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space mt-8 space-y-6">
-        {introNodes ? introNodes : null}
+        {introNodes ? introNodes : <p data-md-copy className="md-copy-node md-copy-p">{fallbackIntro}</p>}
         <ContentSlot
           slot={TOOL_AD_SLOT}
           className="mt-8 w-full"
@@ -150,7 +159,7 @@ export default async function RobloxIdExtractorPage() {
           fullWidthResponsive
         />
         <div className="mt-8">
-          <RobloxIdExtractorClient />
+          <WizardAlchemyPotionPlannerClient potions={plannerData.potions} materials={plannerData.materials} />
         </div>
         {howNodes ? howNodes : null}
         <ContentSlot
@@ -160,28 +169,28 @@ export default async function RobloxIdExtractorPage() {
           adFormat="auto"
           fullWidthResponsive
         />
-        {(descriptionNodes.length || faqNodes.length) ? (
+        {descriptionNodes.length || faqNodes.length ? (
           <>
-          {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
+            {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
 
-          {faqNodes.length ? (
-            <>
-              <ContentSlot
-                slot={TOOL_AD_SLOT}
-                className="w-full"
-                adLayout={null}
-                adFormat="auto"
-                fullWidthResponsive
-              />
-              <ContentFaq
-                items={faqNodes.map((faq, idx) => ({
-                  id: `${faq.q}-${idx}`,
-                  question: faq.q,
-                  answer: faq.nodes
-                }))}
-              />
-            </>
-          ) : null}
+            {faqNodes.length ? (
+              <>
+                <ContentSlot
+                  slot={TOOL_AD_SLOT}
+                  className="w-full"
+                  adLayout={null}
+                  adFormat="auto"
+                  fullWidthResponsive
+                />
+                <ContentFaq
+                  items={faqNodes.map((faq, idx) => ({
+                    id: `${faq.q}-${idx}`,
+                    question: faq.q,
+                    answer: faq.nodes
+                  }))}
+                />
+              </>
+            ) : null}
           </>
         ) : null}
       </section>

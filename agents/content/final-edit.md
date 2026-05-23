@@ -45,7 +45,8 @@ A vehicle from the current car showroom can be bought again with Bucks or Robux.
 11. Split paragraphs that mix unrelated concepts.
 12. Check headings are clear sentence-style fragments, not rigid one-word labels.
 13. Check Markdown and JSON are valid.
-14. Check the final output can be pasted or upserted without reshaping.
+14. Check the visible title and `seo_title` are unique, well-defined, count-accurate, and fully supported by the page body.
+15. Check the final output can be pasted or upserted without reshaping.
 
 ## Understanding Questions
 
@@ -80,6 +81,7 @@ Fail the final edit and rewrite before import if public copy contains:
 - catalog or game-catalog final copy that skipped the FLOW pass
 - catalog `description_md` that repeats card-section notes instead of explaining the whole collection or mechanic
 - catalog `description_md` with no useful action/use/how-to section when the collection has a clear player action behind it
+- catalog or game-catalog titles that promise how to get items, locations, drops, chances, brewing, crafting, effects, value, or comparison when the body, cards, and FAQ do not answer that promise in enough detail
 - random headings that do not create a clear reader path
 - count-based titles that disagree with local dataset or rendered card counts without an intentional explanation
 - fake authority such as `players say`, `experts believe`, or `reports suggest` without a named source
@@ -109,6 +111,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - `description_md` does not repeat the same section notes already carried by `description_json`.
 - `description_md` has gone through the FLOW pass and reads as whole-page explanation, not a pile of unrelated mini sections.
 - `description_md` includes a useful action/use/how-to section when the catalog item type has a player action behind it.
+- `title` and `seo_title` match the approved title promise. If they promise obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison, the page body must fully answer that promise.
 - For catalog and game-catalog pages, the data and image audit in `research-notes.md` is resolved before import. Missing items, stale fields, and image gaps must be fixed or explicitly accepted.
 - The confirmed `description_json` keys match the route's actual section labels. If the route renders `Other`, `Rarity`, or another unexpected group while the notes are written for different sections, the page fails final edit.
 - The confirmed card/table fields match the route's actual rendered fields. If the cards are still showing raw descriptions, raw `pros`/`cons`, nested stats, source HTML, vague meta text, or unexplained yes/no values, the page fails final edit even if the prose is good.
@@ -135,6 +138,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - If the data audit found missing items or missing images, the local dataset/image wiring was updated or the remaining gap was explicitly accepted.
 - If the page is sectioned, research notes record the confirmed section style before final writing.
 - Research notes record the confirmed card data shape before final writing: fields to show, fields to hide, and route changes needed.
+- Research notes record the confirmed title promise before final writing, including what content coverage is required to satisfy it.
 - The confirmation is explicit. A note saying the user asked to write the page is not section-style confirmation.
 - The route's actual section labels have been checked against `description_json`.
 - The route's actual card/table fields have been checked against the approved card data plan.
@@ -151,6 +155,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - The copy reflects local dataset fields and real item examples.
 - The copy reflects the final local dataset after any approved data update, not the stale dataset from the start of research.
 - The title count, dataset count, and rendered card count align or have a written reason for the difference.
+- The title is not only a generic wiki label unless the collection is truly a simple list. It should reflect the strongest player intent, and the page should deliver that promise in detail.
 - Images are present when expected, or the missing image count is recorded and accepted.
 - Confusing fields are defined in gameplay terms.
 - The item-card section style is based on real in-game meaning, not only the easiest dataset sort.
@@ -182,6 +187,35 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - The intro says what input/result the tool gives and why it matters.
 - `how_it_works_md` explains the formula, assumptions, or user flow in plain language.
 - FAQs answer real calculation, input, assumption, or result questions.
+
+### Checklist
+
+- The output includes a `checklist_pages` shaped page row and `checklist_items` shaped task rows.
+- The slug is the game slug only, such as `wizard-alchemy`.
+- The visible title is spelled correctly and usually follows `<Game> Checklist`.
+- `seo_description` and `description_md` are not empty for a new checklist.
+- Parent section rows use `section_code` depth 1, subsection rows use depth 2, and checkable tasks use depth 3 or deeper.
+- Parent rows have useful descriptions that explain the player-facing purpose of the section.
+- Leaf task titles are concrete actions a player can complete.
+- Leaf task descriptions are compact and useful when present.
+- No `title` value starts with a Markdown bullet or decorative prefix.
+- The leaf task count matches the planned size or has an intentional reason for being larger or smaller.
+- Local Supabase readback confirms `item_count` and `leaf_item_count`.
+- The local `/checklists/<slug>` route and `/checklists` index have been rendered before the checklist is called complete.
+
+### Quiz
+
+- The output includes a `quiz_pages` shaped metadata row when page metadata changes and a valid `QuizData` pool when questions change.
+- The code is the game slug only, such as `wizard-alchemy`, with no `-quiz` suffix.
+- `description_md` is compact and useful; it should not become a separate guide or answer key.
+- The detail route does not reintroduce a “what this quiz covers” / about section.
+- Each difficulty has enough questions for the intended public attempt. Current Bloxodes quiz attempts use 5 easy, 5 medium, and 5 hard questions, so keep at least 10 per difficulty when possible.
+- Easy questions are beginner-friendly and not trick questions.
+- Medium questions require real game familiarity.
+- Hard questions are genuinely pro-level and supported by checked facts, such as exact values, drops, formulas, thresholds, route comparisons, or multi-step reasoning.
+- Question rhythm is varied in a natural way. Normal `What`, `Which`, `Who`, and `Where` questions are allowed, but the pool should not collapse into one repeated sentence shape.
+- Every question has four clean options, every `correctOptionId` exists in its question, and distractors are plausible without being ambiguous.
+- The local `/quizzes/<slug>` route and `/quizzes` index have been rendered when metadata or question pools change.
 
 ## Completion Rule
 

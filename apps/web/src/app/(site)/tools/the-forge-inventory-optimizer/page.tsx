@@ -146,6 +146,7 @@ export default async function ForgeInventoryOptimizerPage() {
                         armorPieces={armorDataset.armorPieces}
                     />
                 </div>
+                {howNodes ? howNodes : null}
                 <ContentSlot
                     slot={TOOL_AD_SLOT}
                     className="my-8 w-full"
@@ -153,10 +154,9 @@ export default async function ForgeInventoryOptimizerPage() {
                     adFormat="auto"
                     fullWidthResponsive
                 />
-                {(descriptionNodes.length || howNodes || faqNodes.length) ? (
+                {(descriptionNodes.length || faqNodes.length) ? (
                     <>
                     {descriptionNodes.length ? descriptionNodes.flatMap((entry) => entry.nodes) : null}
-                    {howNodes ? howNodes : null}
 
                     {faqNodes.length ? (
                         <>

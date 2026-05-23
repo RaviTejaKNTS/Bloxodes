@@ -122,12 +122,12 @@ Include:
 - where a table, bullet list, or numbered list would explain faster than paragraphs
 - the story flow from opening context to final takeaway
 - the action, how-to, obtainment, use, or comparison section the page needs when the topic has player action behind it
-- for catalog and game-catalog pages, the proposed data update plan if needed, item-card section style, the in-game reason for that grouping, alternatives rejected, card fields to show or hide, and the `description_json` notes that should appear between those sections
+- for catalog and game-catalog pages, the proposed data update plan if needed, recommended visible title and `seo_title`, exact title promise, required content coverage for that promise, item-card section style, the in-game reason for that grouping, alternatives rejected, card fields to show or hide, and the `description_json` notes that should appear between those sections
 - for catalog and game-catalog pages, what `description_md` should explain as a whole-page story so it does not repeat the same notes as `description_json`
 
 Do not mark research ready if this section is only a list of database fields. The outline should feel like an article editor decided the shape of the page before the writer started drafting.
 
-For catalog and game-catalog pages, research pauses at `needs data update` when the dataset or images are stale. It pauses at `needs section confirmation` until the user approves the section style and card data shape. Do not write final copy or update Supabase before those confirmations. The approval must refer to the proposed data action or grouping, not merely to the page request. If the user says "write this catalog page" before seeing the data and section plan, that is permission to research and propose, not permission to write final copy.
+For catalog and game-catalog pages, research pauses at `needs data update` when the dataset or images are stale. It pauses at `needs section confirmation` until the user approves the title promise, section style, and card data shape. Do not write final copy or update Supabase before those confirmations. The approval must refer to the proposed data action, title, or grouping, not merely to the page request. If the user says "write this catalog page" before seeing the data, title, and section plan, that is permission to research and propose, not permission to write final copy.
 
 ## Missing or uncertain facts
 
@@ -160,11 +160,11 @@ The notes should explain the collection itself before they explain fields.
 
 Run the data and image audit before proposing final copy. Compare local item count with current source counts, page title count, and rendered card count. If a source shows more items than local data, list the missing names and mark the work `needs data update` instead of writing around the gap. If images matter for the collection, count missing images and say whether they can be found locally, need to be gathered, or should be intentionally left blank.
 
-After research, propose the section style before writing. Choose the strongest in-game grouping, such as rarity, item type, source, event, location, tier, shop, unlock route, or world. The best grouping is the one that helps players understand the collection long-term, not necessarily the dataset's first category field.
+After research, propose the title promise and section style before writing. The title should be unique, well-defined, and tied to the collection's real intent, such as obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison. Choose the strongest in-game grouping, such as rarity, item type, source, event, location, tier, shop, unlock route, or world. The best grouping is the one that helps players understand the collection long-term, not necessarily the dataset's first category field.
 
 When the route can render copy between item sections, plan `description_json` as short section context. These notes should set up the cards in that section with useful game meaning and should not be repeated in `description_md`.
 
-Plan the `description_md` separately. It should explain the full collection or mechanic, including how players get, use, compare, unlock, travel to, farm, hatch, roll, craft, equip, or avoid mistakes around the items when that action exists. A catalog page can have cards first and still need a clear how-to section later, because the cards show data while `description_md` teaches how the system actually works.
+Plan the `description_md` separately. It should explain the full collection or mechanic, including how players get, use, compare, unlock, travel to, farm, hatch, roll, craft, equip, or avoid mistakes around the items when that action exists. A catalog page can have cards first and still need a clear how-to section later, because the cards show data while `description_md` teaches how the system actually works. If the approved title promises an answer, `description_md`, `how_it_works_md`, FAQs, and card fields must together satisfy that promise.
 
 The route must be checked as part of research. Record the actual section labels the renderer will produce from the current dataset. A column existing in the JSON is not enough. If a blank `rarity` field exists and the route would group every item under `Other`, the research must call that out and block final writing until the grouping behavior is fixed or a confirmed override is planned.
 
@@ -240,6 +240,23 @@ Research the formula, input, output, unit, edge case, and user misunderstanding.
 
 The copy should explain what the result means, not simply say the tool calculates something.
 
+### Checklist Pages
+
+Research checklists as playable progress boards. Inspect existing `/checklists` pages and the `checklist_pages_view` / `checklist_items` rows before writing a new one. The goal is to decide what a player should actually tick off while playing, not to translate every guide fact into a checkbox.
+
+Use one combined checklist per game unless the user explicitly asks for more. The slug should be the game slug only, such as `wizard-alchemy`. Record the planned parent sections, subsection rows, expected leaf task count, and which local datasets or source rows support item-level tasks.
+
+The research should identify:
+
+- first-session setup tasks
+- progression systems
+- item collections that deserve item-level tracking
+- routes, locations, NPCs, shops, enemies, bosses, and maintenance tasks
+- final audit tasks
+- which facts should be grouped instead of repeated for every item
+
+Keep the style close to The Forge, Jailbreak, or 99 Nights in the Forest: compact, direct, and playable. Avoid oversized Blox Fruits-style dumps unless the user wants a very large completion board.
+
 ## Current Facts That Need Fresh Checks
 
 Always verify when possible:
@@ -278,6 +295,8 @@ Core content tables:
 - `wiki_pages`
 - `articles`
 - `tools`
+- `checklist_pages`
+- `checklist_items`
 - `games`
 - `codes`
 - `roblox_universes`

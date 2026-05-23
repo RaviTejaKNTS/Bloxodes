@@ -44,13 +44,19 @@ Examples:
 - `adopt-me-pets`
 - `blox-fruits-accessories`
 
-The title usually follows:
+The title should be unique, well-defined, and matched to the collection's real search intent. A plain wiki-style title such as `All <Collection> in <Game>` is acceptable only when the page is truly a simple list. Most game catalogs should promise the main answer players came for.
 
-```text
-All <Collection> in <Game>
-```
+Good title patterns include:
+
+- `All 26 Wizard Alchemy Materials and How to Get Them`
+- `All 10 Wizard Alchemy Chest Locations`
+- `All 10 Wizard Alchemy Enchantments and What They Do`
+- `All 7 Wizard Alchemy Wands and How to Get Them`
+- `All 10 Wizard Alchemy Races, Chances, and Bonuses`
 
 For game-catalog pages, `seo_title` should usually match the visible `title` exactly, including the item count when the title has one. Do not simplify `All 1,898 Furniture Items in Adopt Me` into `All Adopt Me Furniture`; the count is useful search context and can improve click appeal.
+
+The title is a promise. If it says `how to get them`, the page must explain sources, routes, requirements, drops, shops, or repeatability in enough detail. If it says `locations`, the cards and body must give usable location guidance. If it says `what they do`, the page must explain effects, bonuses, stats, or roles in gameplay language.
 
 The public route should be `/wiki/<game-slug>/<collection-slug>`, for example `/wiki/adopt-me/pets`. Do not create new game-specific pages under `/catalog`; old `/catalog/<game-slug>-<collection-slug>` URLs should redirect to the wiki route.
 
@@ -97,7 +103,7 @@ After the user approves the data action, update the local dataset and image wiri
 
 ## Section Style Confirmation
 
-Before writing or updating a game-catalog page, research the collection and propose the data action, item-card section style, and card data shape to the user. This applies whether the page already exists or the page is being created fresh.
+Before writing or updating a game-catalog page, research the collection and propose the data action, title promise, item-card section style, and card data shape to the user. This applies whether the page already exists or the page is being created fresh.
 
 Choose the grouping with the strongest in-game meaning. Rarity is often better than refresh date when rarity is how the game divides rewards. Source can be better than rarity when obtainment is the real player decision. Item type can be better when the collection mixes tools, vehicles, strollers, weapons, or materials. Other useful grouping axes can be event, location, shop, world, tier, level range, unlock route, crop type, resource type, or boss.
 
@@ -105,6 +111,9 @@ The proposal must include:
 
 - dataset status: local count, source count, rendered count, title count, image count, and missing image count
 - data update plan if needed: missing items to add, stale fields to clean, image work to do, and whether a collector script is needed
+- recommended visible title and `seo_title`
+- exact title promise: what answer the page is promising, such as obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison
+- content coverage required to satisfy that title promise
 - recommended grouping axis
 - why that axis helps players understand the collection long-term
 - weaker alternatives and why they are not the first choice
@@ -114,7 +123,7 @@ The proposal must include:
 - raw fields that should be hidden from cards, such as long `description`, raw `pros`, raw `cons`, nested `stats`, source HTML, or unclear yes/no values
 - whether the dataset or route renderer needs an override so the approved fields actually appear
 
-Wait for explicit user confirmation before writing `final.json` or updating local Supabase. If the dataset needs changes, update the local dataset after approval and before writing final copy. If the user changes the section style, use the confirmed style. A broad page request is not data or section approval. The notes should say what the user approved, such as `confirmed data update: add missing islands, then group by sea`, instead of saying the user merely requested the page.
+Wait for explicit user confirmation before writing `final.json` or updating local Supabase. If the dataset needs changes, update the local dataset after approval and before writing final copy. If the user changes the title, section style, or card fields, use the confirmed version. A broad page request is not data, title, or section approval. The notes should say what the user approved, such as `confirmed title/data/section plan: title promises chest locations, group by route stage, and show landmark, route order, reward notes, and travel tip`, instead of saying the user merely requested the page.
 
 After confirmation, check the route's real section output before writing to the database. The rendered card sections must match the `description_json` keys. If the dataset has a blank `rarity` field and the generic renderer would choose it over the intended category, fix the renderer or add the confirmed grouping override first. Public copy written for `Walls` and `Floors` is not ready while the page renders `Other` or `Rarity`.
 
@@ -135,6 +144,8 @@ Good game catalog copy usually covers:
 Keep it concrete. A pets catalog, crops catalog, boss catalog, and vehicle catalog should not sound interchangeable.
 
 Before writing public copy, make an outline in `research-notes.md`. The outline must name the reader questions, the section order, the details to cut, and the formatting plan. If the page has a major acquisition question, such as `How to get eggs`, `How to unlock weapons`, or `How to farm materials`, that section should usually appear before deeper caveats.
+
+The outline must also explain how the page will satisfy the approved title promise. A page titled `All Materials and How to Get Them` needs more than a source column; it needs clear obtainment context, route advice, source groups, and FAQ coverage where useful. A page titled `Chest Locations` needs practical landmarks and route order, not only chest names.
 
 For sectioned catalog pages, the outline must separate `description_json` and `description_md` jobs. `description_json` sets up each item section near the cards. `description_md` explains the full game system, such as where the system lives in-game, how players obtain items, how prices or odds work, and what mistakes apply across the whole collection. Do not repeat the same section notes in both fields.
 

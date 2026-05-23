@@ -53,7 +53,7 @@ For new games or new collections, gather or build the local dataset as part of t
 
 The image plan must reject weak substitutions. Use direct in-game item art, enemy/object cutouts, NPC screenshots, station screenshots, or location screenshots where the catalog subject is clearly visible. Do not use edited guide thumbnails, site-branded cover art, arrows/callouts, generic hero art, or broad nearby screenshots that do not actually show the row subject. If no clean image exists, leave the row image empty and record the capture/source gap.
 
-Before final writing, propose the data action, item-card section style, and card data shape. Explain the count/image audit, any dataset updates needed, the grouping axis, why it has in-game meaning, weaker alternatives, planned `description_json` keys and notes, what stays in `description_md`, which fields should appear on cards, which raw fields should be hidden, and whether the route needs a renderer override. Wait for explicit user confirmation before writing `final.json` or updating Supabase. A request like "write this page" or "continue" is not approval unless the user has already seen and accepted the data, section, and card proposal.
+Before final writing, propose the data action, title promise, item-card section style, and card data shape. Explain the count/image audit, any dataset updates needed, the recommended visible title and `seo_title`, the exact reader promise in that title, the grouping axis, why it has in-game meaning, weaker alternatives, planned `description_json` keys and notes, what stays in `description_md`, which fields should appear on cards, which raw fields should be hidden, and whether the route needs a renderer override. Wait for explicit user confirmation before writing `final.json` or updating Supabase. A request like "write this page" or "continue" is not approval unless the user has already seen and accepted the data, title promise, section, and card proposal.
 
 Once the data and structure are confirmed, update the local dataset/images first when needed, then write the page fields directly in first-pass final JSON. Include `wiki_md` and `wiki_sort_order` when the catalog belongs on a wiki hub.
 
@@ -85,7 +85,7 @@ Use practical player judgment when the facts support it: easy to replace, mostly
 
 Public copy should explain the collection itself. Avoid `Use the X catalog`, `check the catalog`, `this page`, `dataset`, or `Bloxodes` in public fields.
 
-Set `seo_title` to the visible `title` by default, including item counts.
+Set `seo_title` to the visible `title` by default, including item counts. Do not default every page to `All <count> <collection> in <game>` when research shows stronger intent. Titles should be unique and well-defined, such as `All 26 Wizard Alchemy Materials and How to Get Them`, `All 10 Wizard Alchemy Chest Locations`, or `All 10 Wizard Alchemy Enchantments and What They Do`. If the title promises obtainment, locations, drops, chances, brewing, crafting, value, or effects, the page body must answer that promise in complete detail.
 
 ## Output
 

@@ -61,11 +61,11 @@ Inspect the row, route, and item examples first. Then research the collection in
 
 For any item-backed catalog, add a data and image audit before final copy. Compare local item count, rendered card/table count, title count, source count, and image coverage. If the audit finds missing items, stale fields, duplicate rows, raw HTML, bad card values, or missing expected images, propose the data action and wait for approval before writing.
 
-If the page can be divided into item-card sections, propose the data state and section style before writing final copy. The proposal should explain whether the dataset is ready, the grouping axis, why it has in-game meaning, which alternatives are weaker, what short `description_json` notes would appear between sections, and what should stay in `description_md`.
+If the page can be divided into item-card sections, propose the data state, title promise, and section style before writing final copy. The proposal should explain whether the dataset is ready, the recommended visible title and `seo_title`, the exact answer that title promises, the grouping axis, why it has in-game meaning, which alternatives are weaker, what short `description_json` notes would appear between sections, and what should stay in `description_md`.
 
 Propose the card data shape in the same pass. Name the fields that should appear on cards or tables, the player meaning of each field, which raw fields should stay hidden, and whether the route needs a renderer override. Cards should be clean data surfaces, not mini articles. Do not let raw long descriptions, raw HTML, raw `pros`/`cons`, nested stats objects, vague meta text, or unexplained `Yes`/`No` values appear just because they exist in the dataset.
 
-Wait for user confirmation before writing final copy or updating Supabase. If the user approves a data update, complete that local data/image work before final writing. If the user changes the section style or card field plan, use the confirmed structure.
+Wait for user confirmation before writing final copy or updating Supabase. If the user approves a data update, complete that local data/image work before final writing. If the user changes the title, section style, or card field plan, use the confirmed structure.
 
 After the structure is confirmed, write directly in the target JSON shape. Do not create generic draft copy for later cleanup. Apply the core writing standard while drafting.
 
@@ -77,7 +77,7 @@ After FLOW, run the final edit gate before saving `final.json`.
 
 Keep the item data near the top of the route. The copy should support the cards or table, not bury them.
 
-Set `seo_title` to the visible `title` by default, including item counts. Count-based titles are useful search context unless the route has a special reason to diverge.
+Set `seo_title` to the visible `title` by default, including item counts. Count-based titles are useful search context unless the route has a special reason to diverge. Do not use a generic `All <Collection> in <Game>` title when research shows a stronger player intent. If the title promises obtainment, locations, drops, chances, effects, value, or comparison, the page body must deliver that promise in detail.
 
 Use `description_json` for short section-level notes when a useful section split exists. Use `description_md` for page-level mechanics: how the system works, where to find it, how players obtain items, and mistakes that apply across the whole collection. Do not repeat the same idea in both fields. During FLOW, reject `description_md` that feels like a pile of random mini sections or card notes.
 

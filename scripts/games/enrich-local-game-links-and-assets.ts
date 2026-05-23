@@ -310,7 +310,7 @@ async function fetchRobloxThumbnailViaApi(gameUrl: string): Promise<string | nul
     if (!universeId) return null;
 
     const thumbRes = await fetch(
-      `https://thumbnails.roblox.com/v1/games/multiget-thumbnails?universeIds=${universeId}&size=768x432&format=Png&isCircular=false`,
+      `https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=${universeId}&countPerUniverse=1&defaults=true&size=768x432&format=Png&isCircular=false`,
       {
         headers: {
           "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -321,7 +321,7 @@ async function fetchRobloxThumbnailViaApi(gameUrl: string): Promise<string | nul
 
     if (!thumbRes.ok) return null;
     const thumbs = await thumbRes.json();
-    const imageUrl = thumbs?.data?.[0]?.imageUrl;
+    const imageUrl = thumbs?.data?.[0]?.thumbnails?.[0]?.imageUrl ?? thumbs?.data?.[0]?.imageUrl;
     return typeof imageUrl === "string" ? imageUrl : null;
   } catch (error) {
     console.warn("⚠️ Roblox thumbnail API failed:", error instanceof Error ? error.message : error);

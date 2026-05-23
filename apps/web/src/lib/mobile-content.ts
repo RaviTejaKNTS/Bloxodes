@@ -1327,12 +1327,11 @@ export async function getMobileContentDetail(
     const updatedAt = page.content_updated_at || page.updated_at || page.published_at || page.created_at || null;
     const questions = [...(quizData?.easy ?? []), ...(quizData?.medium ?? []), ...(quizData?.hard ?? [])].slice(0, 15);
     const sections = [
-      section("overview", "Overview", { body: toPlainText(page.seo_description) ?? toPlainText(page.description_md) ?? toPlainText(page.about_md) }),
+      section("overview", "Overview", { body: toPlainText(page.seo_description) ?? toPlainText(page.description_md) }),
       section("questions", "Questions", {
         subtitle: questions.length ? `${questions.length} questions` : null,
         items: questions.map((question, index) => detailItem(question.id || `q-${index}`, question.question, { badge: `Q${index + 1}` }))
-      }),
-      section("about", "About this quiz", { body: toPlainText(page.about_md) })
+      })
     ].filter(Boolean) as MobileContentDetailSection[];
 
     return {

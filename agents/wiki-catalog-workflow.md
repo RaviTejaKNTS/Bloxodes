@@ -18,7 +18,7 @@ If this workflow conflicts with those files, follow the v2 content docs.
 
 Important: do not batch-write every catalog page for a game until one page has been researched, data-audited, written, previewed, and approved as the gold standard. The dataset and route setup can still be prepared in bulk, but public copy must be proven on one page first.
 
-For catalog copy changes, research first and propose the data state, item-card section style, and card data shape before writing final content. The user should see local item count, source count, rendered card count, title count, image coverage, missing or extra items, and any required dataset/image update. The user should also confirm whether sections are divided by rarity, item type, source, event, location, shop, tier, world, unlock route, or another in-game grouping. Also confirm which fields should appear on the cards and which raw fields should stay hidden. The confirmation must be explicit; a normal request to write or continue is not enough. After confirmation, use `description_json` for short notes between those sections and keep `description_md` focused on whole-page mechanics.
+For catalog copy changes, research first and propose the data state, title promise, item-card section style, and card data shape before writing final content. The user should see local item count, source count, rendered card count, title count, image coverage, missing or extra items, any required dataset/image update, the recommended visible title and `seo_title`, and the exact answer the title promises. The user should also confirm whether sections are divided by rarity, item type, source, event, location, shop, tier, world, unlock route, or another in-game grouping. Also confirm which fields should appear on the cards and which raw fields should stay hidden. The confirmation must be explicit; a normal request to write or continue is not enough. After confirmation, use `description_json` for short notes between those sections and keep `description_md` focused on whole-page mechanics that fully delivers the title promise.
 
 After the first-pass `final.json`, run the FLOW pass from `agents/content/flow-pass.md`. This is mandatory for catalog and game-catalog pages. The pass rewrites `description_md`, `how_it_works_md`, FAQs, headings, and transitions so the page reads like a useful player explanation with a clear action/how-to/use section where the collection has player action behind it.
 
@@ -66,7 +66,7 @@ Important fields:
 
 - Game wiki slug: lowercase kebab-case, e.g. `blox-fruits`.
 - Wiki catalog code: `<game-slug>-<collection-slug>`, e.g. `blox-fruits-swords`.
-- Catalog title: `All <Collection> in <Game>`.
+- Catalog title: unique, well-defined, and intent-matched. Use `All <Collection> in <Game>` only for simple list pages; prefer titles such as `All 26 Wizard Alchemy Materials and How to Get Them`, `All 10 Wizard Alchemy Chest Locations`, or `All 10 Wizard Alchemy Enchantments and What They Do` when the content answers that promise.
 - Route should be predictable and SEO-readable: `/wiki/blox-fruits/swords`.
 
 ## Local-First Process
@@ -158,7 +158,7 @@ Do not write public copy from a database-field mindset. Explain the game system 
 
 Each `wiki_catalog_pages` row should have useful copy, not just SEO filler.
 
-- `title`: short and scannable, usually `All <Collection> in <Game>`.
+- `title`: short, scannable, unique, and matched to the collection's real player intent. If the title promises how to get, locations, drops, chances, brewing, crafting, effects, value, or comparison, the public fields and card data must answer that in detail.
 - `seo_title`: for catalog pages, default to the visible title with the item count, for example `All 1,898 Furniture Items in Adopt Me`. Do not simplify count-based catalog titles unless the title is genuinely too long or the route has a special SEO format.
 - `meta_description`: specific, under 160 characters, and mentions the game plus the collection.
 - `intro_md`: explain what the collection controls in the game and what the page helps players compare.

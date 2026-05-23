@@ -31,13 +31,13 @@ Public copy should not mention internal research, scraping, AI, prompts, Bloxode
 
 Check the shape as carefully as the prose: Markdown should render cleanly, JSON should parse, FAQs should use the expected object shape, article `sources` and `tags` should be honest, and titles or meta descriptions should be readable.
 
-For catalog and game-catalog pages, confirm that `research-notes.md` records the user-confirmed item-card section style and card data shape before final copy. The confirmation must be explicit. Do not accept "user asked me to write the page" as approval of the card sections or card fields. If `description_json` is used, it should contain short section-level notes, and `description_md` should not repeat those same notes.
+For catalog and game-catalog pages, confirm that `research-notes.md` records the user-confirmed title promise, item-card section style, and card data shape before final copy. The confirmation must be explicit. Do not accept "user asked me to write the page" as approval of the title, card sections, or card fields. If `description_json` is used, it should contain short section-level notes, and `description_md` should not repeat those same notes.
 
 Also confirm the data and image audit. `research-notes.md` should show local item count, source count, rendered card/table count, title count, image coverage, missing or extra items, and the data action. If research found missing items or expected images and the gap was not fixed or explicitly accepted, the content is not ready.
 
 Also confirm the rendered section and card contracts. The `description_json` keys must match the sections the route actually renders, not the sections the writer hopes it renders. If the route groups by `rarity`, `Other`, or another field while the copy is written for `Walls`, `Floors`, `Common`, `Legendary`, or another section set, the content is not ready. If the cards show raw long descriptions, raw `pros`/`cons`, nested objects, source HTML, vague meta text, or unexplained yes/no values, the content is not ready either.
 
-Count contracts matter too. Count-based titles should match local data and rendered cards unless the notes explain why they intentionally differ.
+Count contracts matter too. Count-based titles should match local data and rendered cards unless the notes explain why they intentionally differ. Intent contracts matter as much as counts: if the title promises `how to get`, `locations`, `drops`, `chances`, `brewing`, `crafting`, `value`, `effects`, or another specific answer, the page must deliver that answer in the intro, cards, `description_md`, `how_it_works_md`, and FAQ where appropriate.
 
 If a normal player can ask "what does that mean?" after a sentence and the surrounding copy does not answer it, the sentence still fails.
 
@@ -50,13 +50,15 @@ Do not mark the content ready unless:
 - `research-notes.md` has the reader goal, sources/data checked, confirmed facts, and unknowns
 - `research-notes.md` explains the topic in plain language before implementation notes
 - catalog or game-catalog notes contain a resolved data and image audit
-- catalog or game-catalog notes contain an explicit user confirmation line for the card section style and card data shape
+- catalog or game-catalog notes contain an explicit user confirmation line for the title promise, card section style, and card data shape
 - any approved dataset or image update has been completed before final copy is imported
+- the visible title and `seo_title` are unique, well-defined, count-accurate when they include a count, and fully supported by the page body
 - `description_json` keys match the route's actual rendered section labels
 - rendered card/table fields match the approved card data plan
 - title counts, dataset counts, and rendered counts match or have a recorded intentional reason
 - `final.json` is valid and shaped for the target table
 - code-page `final.json` contains only `games` row fields, uses the game slug without `-codes`, leaves `seo_title` empty or null, puts RobloxDen in `source_url`, Beebom in `source_url_2`, and contains no manual `codes` array or code dates
+- quiz output uses the game slug without `-quiz`, keeps page copy compact, validates the local `QuizData` shape, keeps easy questions easy, makes hard questions pro-level, and varies question rhythm without banning normal quiz phrasing
 - public copy passes the blockers in `final-edit.md`
 - catalog, game-catalog, article, and tool body copy has gone through the FLOW pass when applicable
 - remaining risks are recorded in `research-notes.md`

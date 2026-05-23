@@ -6,7 +6,7 @@ Use this process for serious rewrites, new page copy, or any content that will b
 
 The current standard is outline-first, and for catalog work it is data-first and flow-first too. Research does not stop at facts. It must decide what the reader cares about, whether the item data is complete enough, which sections should exist, which sections should be cut, and which details are better shown as bullets, tables, numbered steps, or section-level `description_json` notes before `final.json` is written. After the first-pass JSON exists, the FLOW pass must rewrite the public fields so the page reads in an order that makes sense to a normal player.
 
-For catalog and game-catalog pages, the workflow is also data-confirmation-first and section-confirmation-first. After research, audit the local dataset against current sources, check image coverage, propose any dataset updates that are needed, propose how the item cards should be divided into sections, explain why that section style is the strongest in-game grouping, propose the clean card fields, and wait for explicit user confirmation before writing final copy or updating Supabase. Do not treat a general request like "write this page", "continue", or "go ahead" as approval unless the user has already seen the exact data, section, and card-data proposal.
+For catalog and game-catalog pages, the workflow is also data-confirmation-first, title-confirmation-first, and section-confirmation-first. After research, audit the local dataset against current sources, check image coverage, propose any dataset updates that are needed, propose the visible title and `seo_title`, state the exact promise that title makes, propose how the item cards should be divided into sections, explain why that section style is the strongest in-game grouping, propose the clean card fields, and wait for explicit user confirmation before writing final copy or updating Supabase. Do not treat a general request like "write this page", "continue", or "go ahead" as approval unless the user has already seen the exact data, title, section, and card-data proposal.
 
 Write workflow notes in a human editorial voice. The process should be strict, but the language should still explain the reason behind the step. A clear reason helps the model apply the workflow to a catalog page, article, tool, or wiki hub without turning every output into the same template.
 
@@ -48,6 +48,7 @@ Choose one target page and identify the page type:
 - code page
 - article
 - tool page
+- checklist page
 
 For catalog and game catalog work, do not rewrite every page in a game at once. Build one gold-standard page first. Good choices are pages with enough variety to expose the real writing standard, such as `adopt-me-food`, `adopt-me-vehicles`, `blox-fruits-accessories`, or `grow-a-garden-crops`.
 
@@ -145,7 +146,7 @@ Include:
 - parts to cut
 - where bullets, tables, or numbered steps should be used
 - how the page flows from context to action to caveats
-- for catalog and game-catalog pages, the proposed data update plan if needed, item-card section style, the reason that grouping matches the game, alternatives considered, card fields to show or hide, and the `description_json` keys/notes that should appear between sections
+- for catalog and game-catalog pages, the proposed data update plan if needed, recommended visible title and `seo_title`, exact title promise, content coverage needed to satisfy that title, item-card section style, the reason that grouping matches the game, alternatives considered, card fields to show or hide, and the `description_json` keys/notes that should appear between sections
 
 ## Missing or uncertain facts
 
@@ -166,9 +167,9 @@ Explain what the final page should teach, what it should skip, the tone to use, 
 
 If the `What this is`, `How it works in the game`, `Real examples from the data`, and `Reader questions and page outline` sections are weak, the research is not ready.
 
-For catalog and game-catalog work, do not move from research to final copy until the data state, proposed section style, and card data shape are confirmed. The proposal should name the dataset status, source-count agreement or disagreement, missing image count, grouping axis, fields that belong on the cards, and raw fields that should not render. Choose the grouping and card fields that have the clearest in-game meaning, not merely the fields that are easiest to sort.
+For catalog and game-catalog work, do not move from research to final copy until the data state, title promise, proposed section style, and card data shape are confirmed. The proposal should name the dataset status, source-count agreement or disagreement, missing image count, recommended title, title promise, grouping axis, fields that belong on the cards, and raw fields that should not render. Choose the title, grouping, and card fields that have the clearest in-game meaning, not merely the fields that are easiest to sort.
 
-The research notes must keep `Status: needs data update` when the item list or image coverage is not ready. They must keep `Status: needs section confirmation` until the section and card plan is approved. When approval happens, record it plainly, for example: `Data and section plan confirmed by user on YYYY-MM-DD: update missing islands, group by sea, and show level range, location, travel role, and key content.` Do not write vague lines such as `user requested final copy` as a substitute for confirmation.
+The research notes must keep `Status: needs data update` when the item list or image coverage is not ready. They must keep `Status: needs section confirmation` until the title, section, and card plan is approved. When approval happens, record it plainly, for example: `Title, data, and section plan confirmed by user on YYYY-MM-DD: title promises how to get materials, update missing materials, group by source route, and show source, drop chance, Magic Power, and farming stage.` Do not write vague lines such as `user requested final copy` as a substitute for confirmation.
 
 ## 3.5. Build Or Update The Data Before Writing
 
@@ -176,15 +177,16 @@ For existing games, the data step is an audit first. For new games, the data ste
 
 After research and approval, update the local dataset before writing public copy when the audit says it is needed. That can mean adding missing items, cleaning names and slugs, adding useful card fields, removing raw HTML, normalizing yes/no values into labeled fields, wiring local images, or creating a collector script when this game will need repeatable refreshes.
 
-Only continue to `final.json` after the local dataset is in the shape the page will use. The page title count, local dataset count, rendered card count, and expected source count should either match or have a written reason for the difference.
+Only continue to `final.json` after the local dataset is in the shape the page will use. The page title count, local dataset count, rendered card count, and expected source count should either match or have a written reason for the difference. If the title promises obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison, the outline must show which fields and sections will answer that promise.
 
 ## 4. Write First-Pass `final.json`
 
-Only write `final.json` after `research-notes.md` is marked `ready to write`. For catalog and game-catalog pages, that means the user has already confirmed the data state, the proposed section style, and the card data shape, and any required dataset or image updates have been completed locally.
+Only write `final.json` after `research-notes.md` is marked `ready to write`. For catalog and game-catalog pages, that means the user has already confirmed the data state, title promise, proposed section style, and the card data shape, and any required dataset or image updates have been completed locally.
 
 Before importing the final JSON, prove the render contract:
 
 - list the local dataset count, rendered card count, and title count
+- state the approved title promise and how the body satisfies it
 - list the image count and missing image count when images matter
 - list the actual section labels the route will render
 - list the planned `description_json` keys
@@ -258,6 +260,44 @@ Tool output:
   "universe_id": null
 }
 ```
+
+Checklist output:
+
+```json
+{
+  "page": {
+    "universe_id": null,
+    "slug": "",
+    "title": "",
+    "seo_title": null,
+    "seo_description": "",
+    "description_md": "",
+    "is_public": true
+  },
+  "items": [
+    {
+      "section_code": "1",
+      "title": "",
+      "description": "",
+      "is_required": false
+    },
+    {
+      "section_code": "1.1",
+      "title": "",
+      "description": null,
+      "is_required": false
+    },
+    {
+      "section_code": "1.1.1",
+      "title": "",
+      "description": "",
+      "is_required": true
+    }
+  ]
+}
+```
+
+Checklist pages use `section_code` depth as the render contract. Parent rows such as `1` create major board sections, child rows such as `1.1` create labels inside a section, and leaf rows such as `1.1.1` become checkable tasks. Use the game slug only for the public route, such as `/checklists/wizard-alchemy`. New checklist rows should include `seo_description` and `description_md`, and task titles must not include Markdown bullets.
 
 Code page output:
 
@@ -368,6 +408,7 @@ Then preview the actual route:
 - wiki pages: `/wiki/<slug>`
 - articles: `/articles/<slug>`
 - tool pages: `/tools/<code>`
+- checklist pages: `/checklists/<slug>`
 
 Check the rendered page, not just the JSON:
 

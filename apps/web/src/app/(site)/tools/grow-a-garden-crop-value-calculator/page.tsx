@@ -142,6 +142,7 @@ export default async function GrowGardenCropValueCalculatorPage() {
             variants={GAG_VARIANTS}
             mutations={GAG_MUTATIONS}
           />
+          {howNodes ? howNodes : null}
           <ContentSlot
             slot={TOOL_AD_SLOT}
             className="my-8 w-full"
@@ -149,10 +150,9 @@ export default async function GrowGardenCropValueCalculatorPage() {
             adFormat="auto"
             fullWidthResponsive
           />
-          {(descriptionNodes.length || howNodes || faqNodes.length) ? (
+          {(descriptionNodes.length || faqNodes.length) ? (
             <>
             {descriptionNodes.length ? descriptionNodes.flatMap((item) => item.nodes) : null}
-            {howNodes ? howNodes : null}
 
             {faqNodes.length ? (
               <>

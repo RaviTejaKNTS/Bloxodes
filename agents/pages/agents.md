@@ -35,7 +35,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Lists | `/lists`, `/lists/page/[page]`, `/lists/[slug]`, `/lists/[slug]/page/[page]` | `src/app/(site)/lists/*`, shared helpers in `src/app/(site)/lists/page-data.tsx` and `src/app/(site)/lists/[slug]/page-data.tsx` |
 | Checklists | `/checklists`, `/checklists/page/[page]`, `/checklists/[slug]` | `src/app/(site)/checklists/*`, shared helpers in `src/app/(site)/checklists/page-data.tsx` |
 | Events | `/events`, `/events/[slug]` | `src/app/(site)/events/*`, shared loaders in `src/app/(site)/events/page-data.tsx`, detail composition in `events/[slug]/events-page.tsx` |
-| Quizzes | `/quizzes`, `/quizzes/[slug]` | `src/app/(site)/quizzes/*`, shared helpers in `src/app/(site)/quizzes/page-data.tsx` |
+| Quizzes | `/quizzes`, `/quizzes/[slug]` | `src/app/(site)/quizzes/*`, scoped guide in `src/app/(site)/quizzes/AGENTS.md`, shared helpers in `src/app/(site)/quizzes/page-data.tsx`. Use `agents/content/page-types/quizzes.md` and `$bloxodes-quiz-writing` for metadata, local question pools, and validation. Detail pages should keep the user in the quiz experience: use the page intro plus the interactive quiz, not a separate "what this quiz covers" about block. |
 | Wiki | `/wiki`, `/wiki/[slug]` | `src/app/(site)/wiki/*`, shared helpers in `page-data.tsx`, Supabase read layer in `src/lib/wiki.ts` |
 | Authors | `/authors`, `/authors/[slug]` | `src/app/(site)/authors/*` |
 
@@ -66,6 +66,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | The Forge crafting | `/tools/the-forge-crafting-calculator` | `src/app/(site)/tools/the-forge-crafting-calculator/*` |
 | The Forge inventory optimizer | `/tools/the-forge-inventory-optimizer` | `src/app/(site)/tools/the-forge-inventory-optimizer/*` |
 | Grow a Garden | `/tools/grow-a-garden-crop-value-calculator` | `src/app/(site)/tools/grow-a-garden-crop-value-calculator/*` |
+| Wizard Alchemy potion planner | `/tools/wizard-alchemy-potion-planner` | `src/app/(site)/tools/wizard-alchemy-potion-planner/*`, local data loader in `src/lib/wizard-alchemy/data.ts` |
+| Wizard Alchemy race reroll calculator | `/tools/wizard-alchemy-race-reroll-calculator` | `src/app/(site)/tools/wizard-alchemy-race-reroll-calculator/*`, local data loader in `src/lib/wizard-alchemy/data.ts` |
 | Generic tool fallback | `/tools/[...slug]` | `src/app/(site)/tools/[...slug]/page.tsx`, backed by Supabase tools copy |
 
 ## Static And Policy Pages

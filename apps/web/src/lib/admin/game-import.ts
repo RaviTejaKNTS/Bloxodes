@@ -1,5 +1,6 @@
-import { scrapeSources } from "@/lib/scraper";
+import { detectProvider, scrapeSources } from "@/lib/scraper";
 import { normalizeGameSlug } from "@/lib/slug";
+import { upsertScrapedCodesForGame } from "@/lib/admin/code-upsert";
 
 type ComputeArgs = {
   slug?: string | null;
@@ -45,14 +46,9 @@ type SyncResult = {
   errors: string[];
 };
 
-/**
- * Lightweight placeholder for syncing codes.
- * Scrapes provided URLs and reports counts, but does not write to the database.
- * Extend with real upsert logic if/when needed.
- */
 export async function syncGameCodesFromSources(
-  _sb: any,
-  _gameId: string,
+  sb: any,
+  gameId: string,
   urls: Array<string | null | undefined>
 ): Promise<SyncResult> {
   const uniqueUrls = Array.from(new Set(urls.filter((u): u is string => Boolean(u))));
@@ -60,13 +56,46 @@ export async function syncGameCodesFromSources(
     return { codesFound: 0, codesUpserted: 0, errors: ["No source URLs provided"] };
   }
 
+  const enabledUrls = uniqueUrls.filter((url) => {
+    try {
+      return Boolean(detectProvider(url));
+    } catch {
+      return false;
+    }
+  });
+
+  if (!enabledUrls.length) {
+    return { codesFound: 0, codesUpserted: 0, errors: ["No supported source URLs provided"] };
+  }
+
   try {
-    const scraped = await scrapeSources(uniqueUrls);
-    const total = (scraped.codes?.length ?? 0) + (scraped.expiredCodes?.length ?? 0);
+    const scraped = await scrapeSources(enabledUrls);
+    const { data: game, error: gameError } = await sb
+      .from("games")
+      .select("expired_codes")
+      .eq("id", gameId)
+      .maybeSingle();
+
+    if (gameError) {
+      return {
+        codesFound: 0,
+        codesUpserted: 0,
+        errors: [gameError.message]
+      };
+    }
+
+    const upsert = await upsertScrapedCodesForGame(sb, {
+      gameId,
+      existingExpiredCodes: game?.expired_codes,
+      codes: scraped.codes ?? [],
+      expiredCodes: scraped.expiredCodes ?? [],
+      expireMissingActive: true,
+    });
+
     return {
-      codesFound: total,
-      codesUpserted: 0,
-      errors: []
+      codesFound: upsert.codesFound,
+      codesUpserted: upsert.codesUpserted,
+      errors: upsert.errors
     };
   } catch (error) {
     return {

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Quiz Writing"
+  short_description: "Write Bloxodes quiz pages"
+  default_prompt: "Use $bloxodes-quiz-writing to research one Roblox game quiz, write the quiz_pages fields, and produce a validated easy/medium/hard QuizData pool."
