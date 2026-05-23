@@ -26,6 +26,7 @@ import type { QuizListEntry } from "@/lib/quizzes";
 import { sortCodesByFirstSeenDesc } from "@/lib/code-utils";
 
 const WIKI_REVALIDATE_SECONDS = 3600;
+const BYPASS_WIKI_CACHE = process.env.NODE_ENV === "development";
 const WIKI_SELECT_FIELDS =
   "id, slug, title, seo_title, meta_description, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at, content_updated_at, universe_root_place_id, universe_name, universe_display_name, universe_slug, universe_description, universe_game_description_md, universe_creator_id, universe_creator_name, universe_creator_type, universe_creator_has_verified_badge, universe_group_id, universe_group_name, universe_group_has_verified_badge, universe_genre, universe_genre_l1, universe_genre_l2, universe_age_rating, universe_avatar_type, desktop_enabled, mobile_enabled, tablet_enabled, console_enabled, vr_enabled, voice_chat_enabled, price, private_server_price_robux, create_vip_servers_allowed, max_players, server_size, playing, visits, favorites, likes, dislikes, icon_url, thumbnail_urls, social_links, created_at_api, updated_at_api, universe_updated_at";
 const WIKI_FALLBACK_FIELDS =
@@ -239,6 +240,7 @@ async function fetchWikiPage(slug: string): Promise<WikiPageContent | null> {
 export async function getWikiPageBySlug(slug: string): Promise<WikiPageContent | null> {
   const normalized = normalizeSlug(slug);
   if (!normalized) return null;
+  if (BYPASS_WIKI_CACHE) return fetchWikiPage(normalized);
 
   const cached = unstable_cache(async () => fetchWikiPage(normalized), [`wiki-page-v2:${normalized}`], {
     revalidate: WIKI_REVALIDATE_SECONDS,
@@ -249,34 +251,38 @@ export async function getWikiPageBySlug(slug: string): Promise<WikiPageContent |
 }
 
 export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
+  const fetchPages = async () => {
+    const supabase = supabaseAdmin();
+    const { data, error } = await supabase
+      .from("wiki_pages_view")
+      .select("id, slug, title, meta_description, universe_id, icon_url, thumbnail_urls, published_at, created_at, updated_at, content_updated_at")
+      .eq("is_published", true)
+      .order("content_updated_at", { ascending: false })
+      .order("id", { ascending: true });
+
+    if (!error && data) {
+      return (data ?? []) as WikiListEntry[];
+    }
+
+    const { data: fallback, error: fallbackError } = await supabase
+      .from("wiki_pages")
+      .select("id, slug, title, meta_description, universe_id, published_at, created_at, updated_at")
+      .eq("is_published", true)
+      .order("updated_at", { ascending: false })
+      .order("id", { ascending: true });
+
+    if (fallbackError) {
+      console.error("Error fetching wiki index", fallbackError);
+      return [];
+    }
+
+    return (fallback ?? []) as WikiListEntry[];
+  };
+
+  if (BYPASS_WIKI_CACHE) return fetchPages();
+
   const cached = unstable_cache(
-    async () => {
-      const supabase = supabaseAdmin();
-      const { data, error } = await supabase
-        .from("wiki_pages_view")
-        .select("id, slug, title, meta_description, universe_id, icon_url, thumbnail_urls, published_at, created_at, updated_at, content_updated_at")
-        .eq("is_published", true)
-        .order("content_updated_at", { ascending: false })
-        .order("id", { ascending: true });
-
-      if (!error && data) {
-        return (data ?? []) as WikiListEntry[];
-      }
-
-      const { data: fallback, error: fallbackError } = await supabase
-        .from("wiki_pages")
-        .select("id, slug, title, meta_description, universe_id, published_at, created_at, updated_at")
-        .eq("is_published", true)
-        .order("updated_at", { ascending: false })
-        .order("id", { ascending: true });
-
-      if (fallbackError) {
-        console.error("Error fetching wiki index", fallbackError);
-        return [];
-      }
-
-      return (fallback ?? []) as WikiListEntry[];
-    },
+    fetchPages,
     ["wiki-index-pages-v2"],
     {
       revalidate: WIKI_REVALIDATE_SECONDS,
@@ -288,20 +294,24 @@ export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
 }
 
 export async function listPublishedWikiSlugs(): Promise<string[]> {
-  const cached = unstable_cache(
-    async () => {
-      const supabase = supabaseAdmin();
-      const { data, error } = await supabase
-        .from("wiki_pages")
-        .select("slug")
-        .eq("is_published", true)
-        .not("slug", "is", null);
+  const fetchSlugs = async () => {
+    const supabase = supabaseAdmin();
+    const { data, error } = await supabase
+      .from("wiki_pages")
+      .select("slug")
+      .eq("is_published", true)
+      .not("slug", "is", null);
 
-      if (error) throw error;
-      return (data ?? [])
-        .map((row) => (row as { slug?: string | null }).slug)
-        .filter((slug): slug is string => typeof slug === "string" && slug.trim().length > 0);
-    },
+    if (error) throw error;
+    return (data ?? [])
+      .map((row) => (row as { slug?: string | null }).slug)
+      .filter((slug): slug is string => typeof slug === "string" && slug.trim().length > 0);
+  };
+
+  if (BYPASS_WIKI_CACHE) return fetchSlugs();
+
+  const cached = unstable_cache(
+    fetchSlugs,
     ["wiki-index-slugs-v2"],
     {
       revalidate: WIKI_REVALIDATE_SECONDS,

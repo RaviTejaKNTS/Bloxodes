@@ -44,7 +44,9 @@ Pick the primary type before writing:
 - list
 - Roblox codes support article
 
-If the article is about codes, verify active rewards and expired status with current sources. Do not invent codes.
+If the work is a `/codes/<slug>` page backed by the `games` table, use `agents/content/page-types/code-pages.md` instead of this article guide. Code pages are source-driven: never invent or manually enter codes.
+
+If a normal article is about codes, verify active rewards and expired status with current sources. Do not invent codes.
 
 ## Structure
 

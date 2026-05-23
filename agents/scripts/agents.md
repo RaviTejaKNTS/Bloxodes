@@ -22,6 +22,21 @@ This file is the quick reference for what exists today and how to invoke it.
 | Universe description generation | `scripts/universes/generate-universe-description.ts` | `npm run generate:universe-description` |
 | Queue event guides | `scripts/events/queue-event-guides.ts` | `npm run queue:event-guides` |
 | Public copy quality check | `scripts/content/check-public-copy.ts` | `npm run content:check-copy -- <final.json>` |
+### Code Page Workflow Hard Rules
+
+`scripts/codes/update-codes.ts` is the source of truth for active and expired code rows. It reads `games.source_url` and `games.source_url_2`, detects supported providers, scrapes the source pages, upserts active codes, and expires codes that disappear from the supported sources.
+
+For new or corrected code pages:
+
+- Use the game slug only, such as `wizard-alchemy`, because the route is already `/codes/<slug>`.
+- Store the Roblox experience URL in `roblox_link`, not in `source_url`.
+- Store the RobloxDen codes page in `source_url`.
+- Store the Beebom codes page in `source_url_2`.
+- Keep `seo_title` empty or null unless the user explicitly asks for a custom title.
+- Do not manually insert `codes` rows, `expired_codes`, code names, rewards tied to current code names, or `first_seen_at` dates.
+- After the game row is ready, run `npm run refresh:codes -- --slug <game-slug>`.
+
+Code-page article copy must be long-term. Metadata and prose should explain reward types, redemption steps, troubleshooting, and official source locations without naming active codes, exact dates, month/year labels, active-code counts, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily`.
 
 ## Codes Refresh And Posting
 

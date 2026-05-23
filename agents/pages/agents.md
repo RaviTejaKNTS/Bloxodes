@@ -30,7 +30,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 | Area | Routes | Files / Notes |
 | --- | --- | --- |
-| Codes | `/codes`, `/codes/page/[page]`, `/codes/[slug]` | `src/app/(site)/codes/*`, shared helpers in `src/app/(site)/codes/page-data.tsx` |
+| Codes | `/codes`, `/codes/page/[page]`, `/codes/[slug]` | `src/app/(site)/codes/*`, shared helpers in `src/app/(site)/codes/page-data.tsx`. Slugs are game slugs only, not `<game>-codes`; code rows come from `scripts/codes/update-codes.ts` using RobloxDen in `source_url` and Beebom in `source_url_2`. |
 | Articles | `/articles`, `/articles/page/[page]`, `/articles/[slug]` | `src/app/(site)/articles/*`, shared helpers in `src/app/(site)/articles/page-data.tsx` |
 | Lists | `/lists`, `/lists/page/[page]`, `/lists/[slug]`, `/lists/[slug]/page/[page]` | `src/app/(site)/lists/*`, shared helpers in `src/app/(site)/lists/page-data.tsx` and `src/app/(site)/lists/[slug]/page-data.tsx` |
 | Checklists | `/checklists`, `/checklists/page/[page]`, `/checklists/[slug]` | `src/app/(site)/checklists/*`, shared helpers in `src/app/(site)/checklists/page-data.tsx` |

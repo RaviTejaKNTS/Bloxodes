@@ -21,12 +21,17 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - `catalog/`: Roblox catalog and avatar item collection plus enrichment.
   - `seed-game-catalog-pages.ts` upserts local game dataset collection copy into `wiki_catalog_pages`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
   - `seed-game-wiki-pages.ts` upserts game hub rows into `wiki_pages` and links them to matching `roblox_universes`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
+  - Both seed scripts accept `--game <slug>` for narrow production publishes. Catalog seeding also accepts `--collection <slug>` for single-page retries.
   - For production runs, use `NODE_ENV=production` plus `--allow-prod` only after a clean production dry-run. Confirm the scripts are targeting the production Supabase host, not local Supabase.
   - Scripts that match against `roblox_universes` must page through production rows explicitly; do not assume the default Supabase result limit is enough.
   - Keep reusable seed/upsert scripts for repeated wiki/catalog work. Delete temporary collector/import scripts after their data is stable and committed.
 - `content/`: local content QA helpers.
   - `check-public-copy.ts` blocks self-referential public copy such as `Use the X catalog`, `this catalog`, `dataset`, and `Bloxodes`, weak field-command copy such as `Read category first`, and AI-ish contrast filler such as `not just`; run it against generated `final.json` files before local Supabase import.
 - `codes/`: code refresh and code-article rewrite jobs.
+  - Code rows must come from `scripts/codes/update-codes.ts`, not from manual JSON, SQL, Supabase edits, or hand-written script payloads.
+  - For a code page, insert or update the `games` row first: `slug` is the game slug only, `roblox_link` is the Roblox experience URL, `source_url` is the RobloxDen codes page, `source_url_2` is the Beebom codes page, and `seo_title` stays empty or null unless the user explicitly asks otherwise.
+  - After source URLs are set, run `npm run refresh:codes -- --slug <game-slug>` so the scraper reads RobloxDen and Beebom, upserts active codes, and expires missing codes.
+  - Code-page article fields and metadata must be evergreen. Do not write active code names, current-code reward mappings, active counts, exact dates, month/year labels, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily` into prose or metadata.
 - `decal-ids/`: decal scraping and enrichment.
 - `events/`: event ingestion, page seeding, event detail hydration, event guide generation.
 - `games/`: import jobs and single-game article generation.

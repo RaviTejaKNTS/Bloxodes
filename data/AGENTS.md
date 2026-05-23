@@ -25,6 +25,9 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
   - Dataset-backed Blox Fruits wiki/catalog content, including fruits, swords, guns, accessories, materials, fighting styles, quests, enemies, titles, boats, Aura, Instinct, bosses, NPCs, locations, races, sea events, abilities, item index entries, and game info.
 - `data/The Forge/*.json`
   - Structured catalog and calculator data used by Forge catalog pages and Forge tools.
+- `data/Wizard Alchemy/*`
+  - Dataset-backed Wizard Alchemy wiki/catalog content, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
+  - Code pages must not keep manual code seed payloads. For Wizard Alchemy or any other game, update the `games` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then let `scripts/codes/update-codes.ts` populate `codes`.
 - `data/Fisch/fish.json`
   - Fisch catalog content.
 - `data/Color Codes/roblox-color-codes.json`
@@ -42,3 +45,4 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
 - When changing a dataset, update the parser/helper in `src/lib/*` or the route-family helper in `src/app/(site)`.
 - If a dataset powers a public route, verify SEO text, pagination, and revalidation behavior still make sense after the change.
 - If a new dataset becomes long-lived, document it in `agents/data/agents.md`.
+- Do not store manual active-code lists, expired-code lists, code dates, or code rewards in `data/`. Code data belongs to the source-driven codes refresh workflow.

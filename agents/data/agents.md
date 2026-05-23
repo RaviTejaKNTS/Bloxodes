@@ -113,6 +113,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/The Forge/*.json`
   - Forge catalog and calculator datasets consumed by `src/lib/forge/*` and catalog routes.
   - The Forge collection pages also use `quests.json`, `skills.json`, `blueprints.json`, and `npcs.json` through `src/app/(site)/catalog/the-forge/page-data.tsx`.
+- `data/Wizard Alchemy/*.json`
+  - Local Wizard Alchemy game datasets for wiki/catalog page work, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
+  - Do not store manual code-page payloads with active codes or dates here. Code pages should update the `games` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then rely on `scripts/codes/update-codes.ts` to populate `codes`.
 - `data/Fisch/fish.json`
   - Fisch catalog content.
 - `data/Color Codes/roblox-color-codes.json`

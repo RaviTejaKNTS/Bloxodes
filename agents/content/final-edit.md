@@ -117,6 +117,17 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 
 ## Page-Specific Final Checks
 
+### Code Page
+
+- The output writes only `games` row fields. It does not include a manual `codes` array, `expired_codes`, code names, `first_seen_at`, or code dates.
+- `slug` is the game slug only, such as `wizard-alchemy`, with no `-codes` suffix.
+- `roblox_link` is the Roblox experience URL.
+- `source_url` is the RobloxDen codes page URL and `source_url_2` is the Beebom codes page URL.
+- `seo_title` is empty or null unless the user explicitly asked for a custom value.
+- `seo_description`, `intro_md`, `rewards_md`, `troubleshoot_md`, and `find_codes_md` are evergreen. They do not include active code names, exact dates, month/year labels, active-code counts, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily`.
+- `rewards_md` may use a table, but the table explains durable reward types and player use. It must not map current code names to rewards.
+- The completion note confirms that live code rows must come from `npm run refresh:codes -- --slug <game-slug>`, not from manual entry.
+
 ### Catalog
 
 - `intro_md` explains what the collection is in the game.

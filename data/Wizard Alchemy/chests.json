@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "title": "Wizard Alchemy chests data",
+    "updatedAt": "2026-05-23",
+    "sources": [
+      {
+        "label": "Pro Game Guides - Wizard Alchemy Chest Location Guide",
+        "url": "https://progameguides.com/roblox/wizard-alchemy-chest-location-guide/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Beebom - All Wizard Alchemy Chest Locations",
+        "url": "https://beebom.com/all-wizard-alchemy-chest-locations/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "GAMES.GG - Wizard Alchemy Guide: All Chest Locations",
+        "url": "https://games.gg/roblox/guides/wizard-alchemy-all-chest-locations/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Wiki",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Roblox - Wizard Alchemy",
+        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
+        "accessed": "2026-05-23"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "catalogSection",
+      "area",
+      "routeOrder",
+      "landmark",
+      "locationHint",
+      "howToReach",
+      "difficultyStage",
+      "rewardNotes",
+      "travelTip",
+      "verificationNote"
+    ]
+  },
+  "items": [
+    {
+      "name": "Top Potions List Island Chest",
+      "slug": "top-potions-list-island",
+      "image": null,
+      "catalogSection": "Starter-area chests",
+      "area": "Spawn shoreline",
+      "routeOrder": 1,
+      "landmark": "Top Potions List, Lombart NPC, and Lemin NPC",
+      "locationHint": "On the sandy island or drop-off beside the spawn leaderboard platform.",
+      "howToReach": "From spawn, move to the platform between Lombart and Lemin where the leaderboards sit, turn right, and hop down to the sand.",
+      "difficultyStage": "Starter",
+      "rewardNotes": "Shared chest rewards. Exact chest-specific reward pools are not clearly listed.",
+      "travelTip": "Grab this before leaving the spawn shoreline for the river path.",
+      "verificationNote": "Spawn-shoreline wording differs across guides, so use both the leaderboard and shoreline landmarks. Image intentionally withheld until a clean in-game screenshot without guide arrows is available."
+    },
+    {
+      "name": "Spawn River Rocks Chest",
+      "slug": "spawn-river-rocks",
+      "image": "/Wizard%20Alchemy/Chests/spawn-river-rocks.jpg",
+      "catalogSection": "Starter-area chests",
+      "area": "First farming path",
+      "routeOrder": 2,
+      "landmark": "River, rocks, tree, and first farming area",
+      "locationHint": "Between rocks near the early river route and first enemy farming area.",
+      "howToReach": "Run straight from spawn along the river path, avoid the Pickaxe Dwarfs if needed, then check the rock gap near the tree.",
+      "difficultyStage": "Early route",
+      "rewardNotes": "Shared chest rewards. Exact chest-specific reward pools are not clearly listed.",
+      "travelTip": "Stay moving if you only want the chest, since early dwarfs can slow the route down.",
+      "verificationNote": "Guide descriptions agree on a rock or river chest near the first farming stretch."
+    },
+    {
+      "name": "Traveler's Tent Chest",
+      "slug": "traveler-tent",
+      "image": null,
+      "catalogSection": "Forest and mine chests",
+      "area": "Bridge and Traveler camp",
+      "routeOrder": 3,
+      "landmark": "Traveler NPC, Cauldron, tent, and bridge",
+      "locationHint": "Behind the tent beside the Traveler NPC and Cauldron.",
+      "howToReach": "Head through the Knife Goblin and Warhammer Dwarf route, turn left, cross the bridge, and check behind the Traveler's tent.",
+      "difficultyStage": "Early route",
+      "rewardNotes": "Shared chest rewards. Exact chest-specific reward pools are not clearly listed.",
+      "travelTip": "Use the tent as the landmark instead of fighting the nearby enemies.",
+      "verificationNote": "Both main guides list a Traveler or Traveller tent chest. Image intentionally withheld until a clean in-game screenshot without guide arrows is available."
+    },
+    {
+      "name": "Miner Cave Chest",
+      "slug": "miner-cave",
+      "image": "/Wizard%20Alchemy/Chests/miner-cave.jpg",
+      "catalogSection": "Forest and mine chests",
+      "area": "Mine entrance",
+      "routeOrder": 4,
+      "landmark": "Optimistic Miner NPC and boarded mine entrance",
+      "locationHint": "Inside the mine near the Optimistic Miner route.",
+      "howToReach": "Climb the platform past the first Pickaxe Dwarfs, turn left toward the plant-covered boards, enter the mine, and collect the chest inside.",
+      "difficultyStage": "Mine route",
+      "rewardNotes": "Shared chest rewards. Exact chest-specific reward pools are not clearly listed.",
+      "travelTip": "Enter from the main boarded entrance instead of trying to force the thorny top path.",
+      "verificationNote": "Guide descriptions agree on a chest inside the miner cave."
+    },
+    {
+      "name": "Secret Mine Cave Chest",
+      "slug": "secret-mine-cave",
+      "image": "/Wizard%20Alchemy/Chests/secret-mine-cave.jpg",
+      "catalogSection": "Forest and mine chests",
+      "area": "Mine illusion wall",
+      "routeOrder": 5,
+      "landmark": "Hidden wall inside the mine",
+      "locationHint": "Past the right side of the back wall inside the mine.",
+      "howToReach": "After opening the miner cave chest, stay inside the mine and walk through the right side of the back wall to reach the hidden cave.",
+      "difficultyStage": "Hidden route",
+      "rewardNotes": "Shared chest rewards. Exact chest-specific reward pools are not clearly listed.",
+      "travelTip": "Do this immediately after the miner cave chest so you do not backtrack into the mine later.",
+      "verificationNote": "Guide descriptions agree that this is an illusion-wall chest inside the mine extension."
+    },
+    {
+      "name": "Mine Mountain Top Chest",
+      "slug": "mine-mountain-top",
+      "image": "/Wizard%20Alchemy/Chests/mine-mountain-top.jpg",
+      "catalogSection": "Forest and mine chests",
+      "area": "Top of the mine",
+      "routeOrder": 6,
+      "landmark": "Mine mountain, rocks, and thorny vines",
+      "locationHint": "On the upper platform above the mine.",
+      "howToReach": "Exit the mine, climb from the rocks on the left side of the entrance, follow the thorny vines toward the upper platform, and check the top.",
+      "difficultyStage": "Climb",
+      "rewardNotes": "Shared chest rewards. Exact chest-specific reward pools are not clearly listed.",
+      "travelTip": "Movement speed or better jump height helps here, but the climb is reachable without a special item.",
+      "verificationNote": "Guide descriptions agree on a top-of-mine chest."
+    },
+    {
+      "name": "Lighthouse Island Chest",
+      "slug": "lighthouse-island",
+      "image": "/Wizard%20Alchemy/Chests/lighthouse-island.jpg",
+      "catalogSection": "Island and boss-route chests",
+      "area": "Lighthouse island",
+      "routeOrder": 7,
+      "landmark": "Lighthouse, sea, and small island mountain",
+      "locationHint": "Behind the mountain on the small island next to the lighthouse.",
+      "howToReach": "From the Traveler and Cauldron side, run left past Archer Goblins and Warhammer Dwarfs until you reach the sea, then hop to the small island near the lighthouse and check behind the mountain.",
+      "difficultyStage": "Island route",
+      "rewardNotes": "Shared chest rewards. Exact chest-specific reward pools are not clearly listed.",
+      "travelTip": "Group this with the Dwarf King and treehouse checks so the beach route is only done once.",
+      "verificationNote": "Guide wording varies between lighthouse island and behind lighthouse, but the shared landmark is the small island near the lighthouse."
+    },
+    {
+      "name": "Dwarf King Throne Chest",
+      "slug": "dwarf-king-throne",
+      "image": null,
+      "catalogSection": "Island and boss-route chests",
+      "area": "Dwarf King route",
+      "routeOrder": 8,
+      "landmark": "Dwarf King spawn, hammer wall, chains, and rock",
+      "locationHint": "Behind the rock near the chained stone at the Dwarf King throne area.",
+      "howToReach": "Use the lighthouse route, turn toward the mountain where Dwarf King spawns, walk to the hammer wall, then look far right behind the chained stone.",
+      "difficultyStage": "Boss-route landmark",
+      "rewardNotes": "Shared chest rewards. Exact chest-specific reward pools are not clearly listed.",
+      "travelTip": "Check the chest without starting a long boss fight if your goal is only a material run.",
+      "verificationNote": "This chest is included in PGG and Beebom; one third-party guide mentions it as an extra note outside its numbered list. Image intentionally withheld until a clean in-game screenshot without guide arrows is available."
+    },
+    {
+      "name": "Treehouse Platform Chest",
+      "slug": "treehouse-platform",
+      "image": "/Wizard%20Alchemy/Chests/treehouse-platform.jpg",
+      "catalogSection": "Island and boss-route chests",
+      "area": "Treehouse",
+      "routeOrder": 9,
+      "landmark": "Large tree, rope, railing, and treehouse door",
+      "locationHint": "On the right side of the treehouse railing near the door.",
+      "howToReach": "From the lighthouse side, look up for the huge tree, reach the rope, climb to the treehouse platform, and check the right side of the railing.",
+      "difficultyStage": "High path",
+      "rewardNotes": "Shared chest rewards. Exact chest-specific reward pools are not clearly listed.",
+      "travelTip": "Tilt the camera upward near the lighthouse route to spot the tree faster.",
+      "verificationNote": "Guide descriptions agree on a treehouse chest at the large tree."
+    },
+    {
+      "name": "Goblin Camp Hidden Platform Chest",
+      "slug": "goblin-camp-hidden-platform",
+      "image": "/Wizard%20Alchemy/Chests/goblin-camp-hidden-platform.jpg",
+      "catalogSection": "Forest and mine chests",
+      "area": "Goblin camp and hidden platform",
+      "routeOrder": 10,
+      "landmark": "Bridge, Knife Goblins, campfire, brown pine trees, and mountain platform",
+      "locationHint": "On a hidden platform behind the goblin campfire route near the bridge path.",
+      "howToReach": "Before crossing the bridge toward the Traveler camp, climb the rocks on the right, follow the brown pine trees, find the Knife Goblins and small campfire, then jump to the platform behind them.",
+      "difficultyStage": "Hidden route",
+      "rewardNotes": "Shared chest rewards. Exact chest-specific reward pools are not clearly listed.",
+      "travelTip": "This is easy to miss if you only follow the bridge, so check the rocks beside the bridge before leaving the starter side.",
+      "verificationNote": "PGG describes this as a hidden platform near the bridge; Beebom and Games.GG describe the same general goblin campfire route with different ordering."
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "meta": {
+    "title": "Wizard Alchemy wands data",
+    "updatedAt": "2026-05-23",
+    "sources": [
+      {
+        "label": "BloxInformer - Wizard Alchemy Wands",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/wands/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Pro Game Guides - All Wands, Hats & Potions in Wizard Alchemy",
+        "url": "https://progameguides.com/roblox/all-wands-hats-potions-in-wizard-alchemy/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Gamezebo - Wizard Alchemy Tier List",
+        "url": "https://www.gamezebo.com/walkthroughs/wizard-alchemy-tier-list/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Beebom - Wizard Alchemy Tier List",
+        "url": "https://beebom.com/wizard-alchemy-tier-list/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "AllThings.How - Wizard Alchemy Wands, Hats, Robes and Potions Reference",
+        "url": "https://allthings.how/wizard-alchemy-wands-hats-robes-and-potions-reference/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Roblox - Wizard Alchemy",
+        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
+        "accessed": "2026-05-23"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "catalogSection",
+      "rarity",
+      "tier",
+      "displayCost",
+      "priceGold",
+      "attack",
+      "attackBonus",
+      "specialBonus",
+      "sourceLocation",
+      "progressionUse",
+      "verificationNote"
+    ]
+  },
+  "items": [
+    {
+      "name": "Twisted Wand",
+      "slug": "twisted-wand",
+      "image": null,
+      "catalogSection": "Starter wand",
+      "rarity": "Uncommon",
+      "tier": "D",
+      "displayCost": "Free starter wand",
+      "priceGold": 0,
+      "attack": 10,
+      "attackBonus": null,
+      "specialBonus": null,
+      "sourceLocation": "Given to all players at the start",
+      "progressionUse": "Starter damage only; replace it once a shop wand is affordable.",
+      "verificationNote": "Confirmed by Pro Game Guides, Gamezebo, and Beebom tier sources. No reliable individual image found."
+    },
+    {
+      "name": "Wingbird Wand",
+      "slug": "wingbird-wand",
+      "image": "/Wizard%20Alchemy/Wands/wingbird-wand.webp",
+      "catalogSection": "Roger's shop wands",
+      "rarity": "Uncommon",
+      "tier": "C",
+      "displayCost": "200 Gold",
+      "priceGold": 200,
+      "attack": 20,
+      "attackBonus": "+5%",
+      "specialBonus": null,
+      "sourceLocation": "Roger's wand shop at spawn",
+      "progressionUse": "First cheap upgrade when starter damage feels too low.",
+      "verificationNote": "BloxInformer, Gamezebo, and AllThings.How list 200 Gold; Pro Game Guides lists 300 Gold."
+    },
+    {
+      "name": "Azure Wand",
+      "slug": "azure-wand",
+      "image": "/Wizard%20Alchemy/Wands/azure-wand.webp",
+      "catalogSection": "Roger's shop wands",
+      "rarity": "Rare",
+      "tier": "B",
+      "displayCost": "500 Gold",
+      "priceGold": 500,
+      "attack": 25,
+      "attackBonus": "+10%",
+      "specialBonus": null,
+      "sourceLocation": "Roger's wand shop at spawn",
+      "progressionUse": "Early farming upgrade before the 8,000 Gold Demon Trident jump.",
+      "verificationNote": "BloxInformer and AllThings.How list 500 Gold; Pro Game Guides and Gamezebo list 1,000 Gold."
+    },
+    {
+      "name": "Demon Trident Wand",
+      "slug": "demon-trident-wand",
+      "image": "/Wizard%20Alchemy/Wands/demon-trident-wand.webp",
+      "catalogSection": "Roger's shop wands",
+      "rarity": "Epic",
+      "tier": "A",
+      "displayCost": "8,000 Gold",
+      "priceGold": 8000,
+      "attack": 30,
+      "attackBonus": "+15%",
+      "specialBonus": null,
+      "sourceLocation": "Roger's wand shop at spawn",
+      "progressionUse": "Best mid-game value before hidden and late-game wand prices.",
+      "verificationNote": "All checked stat sources agree on 8,000 Gold, 30 Attack, and +15% Attack Bonus."
+    },
+    {
+      "name": "Ice Star Wand",
+      "slug": "ice-star-wand",
+      "image": "/Wizard%20Alchemy/Wands/ice-star-wand.webp",
+      "catalogSection": "Hidden Departure Isle wands",
+      "rarity": "Legendary",
+      "tier": "S",
+      "displayCost": "20,000 Gold",
+      "priceGold": 20000,
+      "attack": 40,
+      "attackBonus": "+20%",
+      "specialBonus": "+50 Cooldown Reduction",
+      "sourceLocation": "Hidden purchase inside the waterfall cave near the starting village",
+      "progressionUse": "Strong cooldown-focused option once spell recasts matter more than raw basic damage.",
+      "verificationNote": "Sources agree on core stats. Location descriptions disagree on left or right wording, so the dataset uses the stable waterfall cave description."
+    },
+    {
+      "name": "Ember Staff Wand",
+      "slug": "ember-staff-wand",
+      "image": "/Wizard%20Alchemy/Wands/ember-staff-wand.webp",
+      "catalogSection": "Hidden Departure Isle wands",
+      "rarity": "Legendary",
+      "tier": "S",
+      "displayCost": "30,000 Gold",
+      "priceGold": 30000,
+      "attack": 44,
+      "attackBonus": "+20%",
+      "specialBonus": "+30% Crit Rate",
+      "sourceLocation": "Hidden purchase on the treehouse branch near the waterfall",
+      "progressionUse": "Highest raw Attack among the verified wands and a strong boss-farming target.",
+      "verificationNote": "Sources agree on cost and stats. Directional wording around the treehouse differs, so the dataset avoids left/right wording."
+    },
+    {
+      "name": "Ember Wand",
+      "slug": "ember-wand",
+      "image": "/Wizard%20Alchemy/Wands/ember-wand.webp",
+      "catalogSection": "Sea of Oblivion wand",
+      "rarity": null,
+      "tier": "New Mainland",
+      "displayCost": "50,000 Gold",
+      "priceGold": 50000,
+      "attack": 30,
+      "attackBonus": "+30%",
+      "specialBonus": "+30% Crit Rate; +30 Cooldown Reduction",
+      "sourceLocation": "Top of the Volcano in the Sea of Oblivion region",
+      "progressionUse": "Late Sea of Oblivion option for players who want bonus stacking over the Ember Staff's higher raw Attack.",
+      "verificationNote": "Found on BloxInformer's New Mainland update page. Older PGG, Gamezebo, Beebom, and AllThings.How sources do not include this wand."
+    }
+  ]
+}

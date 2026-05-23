@@ -56,6 +56,7 @@ Do not mark the content ready unless:
 - rendered card/table fields match the approved card data plan
 - title counts, dataset counts, and rendered counts match or have a recorded intentional reason
 - `final.json` is valid and shaped for the target table
+- code-page `final.json` contains only `games` row fields, uses the game slug without `-codes`, leaves `seo_title` empty or null, puts RobloxDen in `source_url`, Beebom in `source_url_2`, and contains no manual `codes` array or code dates
 - public copy passes the blockers in `final-edit.md`
 - catalog, game-catalog, article, and tool body copy has gone through the FLOW pass when applicable
 - remaining risks are recorded in `research-notes.md`

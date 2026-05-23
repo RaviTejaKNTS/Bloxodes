@@ -1,0 +1,353 @@
+{
+  "meta": {
+    "title": "Wizard Alchemy enemies data",
+    "updatedAt": "2026-05-23",
+    "sources": [
+      {
+        "label": "BloxInformer - Wizard Alchemy Monsters",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/monsters/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Materials",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/materials/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Local Wizard Alchemy materials dataset",
+        "url": "data/Wizard Alchemy/materials.json",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "WizardAlchemy.org - Farming Guide",
+        "url": "https://wizardalchemy.org/farming",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Pro Game Guides - Wizard Alchemy Beginner's Guide",
+        "url": "https://progameguides.com/roblox/wizard-alchemy-beginners-guide/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Roblox - Wizard Alchemy",
+        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
+        "accessed": "2026-05-23"
+      }
+    ],
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "family",
+      "area",
+      "enemyType",
+      "drops",
+      "notableDrops",
+      "dropSummary",
+      "farmRole",
+      "difficultyStage",
+      "sourceLocation",
+      "verificationNote"
+    ]
+  },
+  "items": [
+    {
+      "name": "Pickaxe Dwarf",
+      "slug": "pickaxe-dwarf",
+      "image": "/Wizard%20Alchemy/Enemies/pickaxe-dwarf.png",
+      "catalogSection": "Departure Isle dwarfs",
+      "family": "Dwarf",
+      "area": "Departure Isle",
+      "enemyType": "Normal enemy",
+      "drops": [
+        "Gold (100%)",
+        "Dwarf Emblem (75%)",
+        "Golden Tooth (25%)"
+      ],
+      "notableDrops": "Dwarf Emblem, Golden Tooth",
+      "dropSummary": "Early dwarf route for Dwarf Emblem and Golden Tooth.",
+      "farmRole": "Starter dwarf material and Gold farming",
+      "difficultyStage": "Beginner",
+      "sourceLocation": "Departure Isle (Forest Area)",
+      "verificationNote": "Full monster row and image from BloxInformer Monsters; material drops align with the local materials dataset."
+    },
+    {
+      "name": "Warhammer Dwarf",
+      "slug": "warhammer-dwarf",
+      "image": "/Wizard%20Alchemy/Enemies/warhammer-dwarf.png",
+      "catalogSection": "Departure Isle dwarfs",
+      "family": "Dwarf",
+      "area": "Departure Isle",
+      "enemyType": "Normal enemy",
+      "drops": [
+        "Gold (100%)",
+        "Dwarf Emblem (50%)",
+        "Golden Tooth (38%)",
+        "Flame Crest (13%)"
+      ],
+      "notableDrops": "Dwarf Emblem, Golden Tooth, Flame Crest",
+      "dropSummary": "Mid dwarf route that adds Flame Crest to the normal dwarf drop pool.",
+      "farmRole": "Stronger dwarf material farming",
+      "difficultyStage": "Early to mid enemy farming",
+      "sourceLocation": "Departure Isle (Beach); Departure Isle (Forest Area); Departure Isle (Dwarf King Cave)",
+      "verificationNote": "Full monster row and image from BloxInformer Monsters; material drops align with the local materials dataset."
+    },
+    {
+      "name": "Knife Goblin",
+      "slug": "knife-goblin",
+      "image": "/Wizard%20Alchemy/Enemies/knife-goblin.png",
+      "catalogSection": "Departure Isle goblins",
+      "family": "Goblin",
+      "area": "Departure Isle",
+      "enemyType": "Normal enemy",
+      "drops": [
+        "Gold (100%)",
+        "Goblin Finger (75%)",
+        "Goblin Bone (25%)"
+      ],
+      "notableDrops": "Goblin Finger, Goblin Bone",
+      "dropSummary": "Starter goblin route for Goblin Finger and Goblin Bone.",
+      "farmRole": "Starter goblin material and Gold farming",
+      "difficultyStage": "Beginner",
+      "sourceLocation": "Departure Isle (Forest Area); Departure Isle (Forest Area near Beach)",
+      "verificationNote": "Full monster row and image from BloxInformer Monsters; material drops align with the local materials dataset."
+    },
+    {
+      "name": "Archer Goblin",
+      "slug": "archer-goblin",
+      "image": "/Wizard%20Alchemy/Enemies/archer-goblin.png",
+      "catalogSection": "Departure Isle goblins",
+      "family": "Goblin",
+      "area": "Departure Isle",
+      "enemyType": "Normal enemy",
+      "drops": [
+        "Gold (100%)",
+        "Goblin Finger (50%)",
+        "Goblin Bone (38%)",
+        "Copper Earring (13%)"
+      ],
+      "notableDrops": "Goblin Finger, Goblin Bone, Copper Earring",
+      "dropSummary": "Mid goblin route that adds Copper Earring to normal goblin drops.",
+      "farmRole": "Goblin material farming with early Copper Earring chance",
+      "difficultyStage": "Early to mid enemy farming",
+      "sourceLocation": "Departure Isle (Beach); Departure Isle (Forest Area near Beach); Departure Isle (Dwarf King Cave)",
+      "verificationNote": "Full monster row and image from BloxInformer Monsters; material drops align with the local materials dataset."
+    },
+    {
+      "name": "Mutant Warhammer Dwarf",
+      "slug": "mutant-warhammer-dwarf",
+      "image": "/Wizard%20Alchemy/Enemies/mutant-warhammer-dwarf.png",
+      "catalogSection": "Elite and boss enemies",
+      "family": "Dwarf",
+      "area": "Departure Isle",
+      "enemyType": "Elite enemy",
+      "drops": [
+        "Gold (100%)",
+        "Flame Crest (43%)",
+        "Copper Earring (43%)",
+        "Furnace Core (14%)",
+        "Dark Shard (50%)",
+        "Light Shard (50%)"
+      ],
+      "notableDrops": "Flame Crest, Copper Earring, Furnace Core, Dark Shard, Light Shard",
+      "dropSummary": "Elite dwarf route for Furnace Core chances, Light Shard, Dark Shard, and high-value normal materials.",
+      "farmRole": "Elite Departure Isle material and shard farming",
+      "difficultyStage": "Elite enemy farming",
+      "sourceLocation": "Departure Isle (On the mountain on the right of Fugitive Orc)",
+      "verificationNote": "Full monster row and image from BloxInformer Monsters; material drops align with the local materials dataset."
+    },
+    {
+      "name": "Mutant Goblin Archer",
+      "slug": "mutant-goblin-archer",
+      "image": "/Wizard%20Alchemy/Enemies/mutant-goblin-archer.png",
+      "catalogSection": "Elite and boss enemies",
+      "family": "Goblin",
+      "area": "Departure Isle",
+      "enemyType": "Elite enemy",
+      "drops": [
+        "Gold (100%)",
+        "Flame Crest (43%)",
+        "Copper Earring (43%)",
+        "Furnace Core (14%)",
+        "Dark Shard (50%)",
+        "Light Shard (50%)"
+      ],
+      "notableDrops": "Flame Crest, Copper Earring, Furnace Core, Dark Shard, Light Shard",
+      "dropSummary": "Elite goblin route for Furnace Core chances, Light Shard, Dark Shard, and Copper Earring.",
+      "farmRole": "Elite Departure Isle material and shard farming",
+      "difficultyStage": "Elite enemy farming",
+      "sourceLocation": "Departure Isle (On top of the Dwarf King Cave on the giant helmet)",
+      "verificationNote": "BloxInformer Monsters names this row Mutant Goblin Archer; BloxInformer Materials and the local materials dataset use Mutant Archer Goblin for the same drop source."
+    },
+    {
+      "name": "Dwarf King",
+      "slug": "dwarf-king",
+      "image": "/Wizard%20Alchemy/Enemies/dwarf-king.png",
+      "catalogSection": "Elite and boss enemies",
+      "family": "Dwarf",
+      "area": "Departure Isle",
+      "enemyType": "Boss",
+      "drops": [
+        "Gold (100%)",
+        "Flame Crest (43%)",
+        "Copper Earring (43%)",
+        "Furnace Core (14%)"
+      ],
+      "notableDrops": "Flame Crest, Copper Earring, Furnace Core",
+      "dropSummary": "Departure Isle boss route for high-value materials and Gold.",
+      "farmRole": "Boss material and Gold farming",
+      "difficultyStage": "Boss farming",
+      "sourceLocation": "Departure Isle (Dwarf King Cave)",
+      "verificationNote": "Full monster row and image from BloxInformer Monsters; kept in enemies because the checked sources only show one fully listed boss row."
+    },
+    {
+      "name": "Sword Orc",
+      "slug": "sword-orc",
+      "image": "/Wizard%20Alchemy/Enemies/sword-orc.png",
+      "catalogSection": "Sea of Oblivion enemies",
+      "family": "Orc",
+      "area": "Sea of Oblivion",
+      "enemyType": "Normal enemy",
+      "drops": [
+        "Gold (100%)",
+        "Orc Ears (50%)",
+        "Orc Teeth (50%)"
+      ],
+      "notableDrops": "Orc Ears, Orc Teeth",
+      "dropSummary": "Basic Sea of Oblivion orc route for Orc Ears and Orc Teeth.",
+      "farmRole": "New Mainland orc material farming",
+      "difficultyStage": "New Mainland enemy farming",
+      "sourceLocation": "Sea of Oblivion (around the burning tree near spawn)",
+      "verificationNote": "Current BloxInformer Monsters table verifies the image, drops, and burning-tree spawn landmark."
+    },
+    {
+      "name": "Bow Orc",
+      "slug": "bow-orc",
+      "image": "/Wizard%20Alchemy/Enemies/bow-orc.png",
+      "catalogSection": "Sea of Oblivion enemies",
+      "family": "Orc",
+      "area": "Sea of Oblivion",
+      "enemyType": "Normal enemy",
+      "drops": [
+        "Gold (100%)",
+        "Orc Ears (30%)",
+        "Orc Teeth (30%)",
+        "Broken Arrow (40%)"
+      ],
+      "notableDrops": "Orc Ears, Orc Teeth, Broken Arrow",
+      "dropSummary": "Sea of Oblivion orc route for Broken Arrow plus common orc drops.",
+      "farmRole": "New Mainland orc and Broken Arrow farming",
+      "difficultyStage": "New Mainland enemy farming",
+      "sourceLocation": "Sea of Oblivion (near a Volcano entrance, above Sword Orcs)",
+      "verificationNote": "Current BloxInformer Monsters table verifies the image, drops, and Volcano-entrance landmark."
+    },
+    {
+      "name": "Axe Orc",
+      "slug": "axe-orc",
+      "image": "/Wizard%20Alchemy/Enemies/axe-orc.png",
+      "catalogSection": "Sea of Oblivion enemies",
+      "family": "Orc",
+      "area": "Sea of Oblivion",
+      "enemyType": "Normal enemy",
+      "drops": [
+        "Gold (100%)",
+        "Orc Ears (30%)",
+        "Orc Teeth (30%)",
+        "Iron Armour (40%)"
+      ],
+      "notableDrops": "Orc Ears, Orc Teeth, Iron Armour",
+      "dropSummary": "Sea of Oblivion orc route that adds Iron Armour to the normal orc drop pool.",
+      "farmRole": "New Mainland orc and Iron Armour farming",
+      "difficultyStage": "New Mainland enemy farming",
+      "sourceLocation": "Sea of Oblivion (inside Volcano near Lava Behemoth); Sea of Oblivion (outside Volcano)",
+      "verificationNote": "Current BloxInformer Monsters table verifies the image, drops, and inside/outside Volcano landmarks."
+    },
+    {
+      "name": "Orc Priest",
+      "slug": "orc-priest",
+      "image": "/Wizard%20Alchemy/Enemies/orc-priest.png",
+      "catalogSection": "Sea of Oblivion enemies",
+      "family": "Orc Priest",
+      "area": "Sea of Oblivion",
+      "enemyType": "Normal enemy",
+      "drops": [
+        "Gold (100%)",
+        "Orc Ears (30%)",
+        "Orc Teeth (30%)",
+        "Scepter Gem (40%)"
+      ],
+      "notableDrops": "Orc Ears, Orc Teeth, Scepter Gem",
+      "dropSummary": "Sea of Oblivion priest route for common orc drops plus Scepter Gem.",
+      "farmRole": "New Mainland priest material farming",
+      "difficultyStage": "New Mainland enemy farming",
+      "sourceLocation": "Sea of Oblivion (inside Volcano near Lava Behemoth); Sea of Oblivion (outside Volcano)",
+      "verificationNote": "Current BloxInformer Monsters table verifies the image, drops, and inside/outside Volcano landmarks; Scepter Gem spelling is normalized to match the local materials dataset."
+    },
+    {
+      "name": "Mutant Axe Orc",
+      "slug": "mutant-axe-orc",
+      "image": "/Wizard%20Alchemy/Enemies/mutant-axe-orc.png",
+      "catalogSection": "Sea of Oblivion enemies",
+      "family": "Orc",
+      "area": "Sea of Oblivion",
+      "enemyType": "Elite enemy",
+      "drops": [
+        "Gold (100%)",
+        "Enchanted Stone (100%)",
+        "Iron Armour (60%)",
+        "Golem Core (30%)",
+        "Lava Behemoth Remains (10%)"
+      ],
+      "notableDrops": "Enchanted Stone, Iron Armour, Golem Core, Lava Behemoth Remains",
+      "dropSummary": "Elite Sea of Oblivion orc route for Enchanted Stone, Iron Armour, Golem Core, and Lava Behemoth Remains.",
+      "farmRole": "New Mainland elite material farming",
+      "difficultyStage": "New Mainland elite farming",
+      "sourceLocation": "Sea of Oblivion (on one of the side islands)",
+      "verificationNote": "Current BloxInformer Monsters table verifies the image, drops, and side-island landmark; Lava Beholder wording is normalized to Lava Behemoth Remains to match the local materials dataset."
+    },
+    {
+      "name": "Mutant Orc Priest",
+      "slug": "mutant-orc-priest",
+      "image": null,
+      "catalogSection": "Sea of Oblivion enemies",
+      "family": "Orc Priest",
+      "area": "Sea of Oblivion",
+      "enemyType": "Elite enemy",
+      "drops": [
+        "Gold (100%)",
+        "Enchanted Stone (100%)",
+        "Iron Armour (60%)",
+        "Golem Core (30%)",
+        "Lava Behemoth Remains (10%)"
+      ],
+      "notableDrops": "Enchanted Stone, Iron Armour, Golem Core, Lava Behemoth Remains",
+      "dropSummary": "Elite Sea of Oblivion priest route for Enchanted Stone, Iron Armour, Golem Core, and Lava Behemoth Remains.",
+      "farmRole": "New Mainland elite priest material farming",
+      "difficultyStage": "New Mainland elite farming",
+      "sourceLocation": "Sea of Oblivion (on the enchantment island)",
+      "verificationNote": "Current BloxInformer Monsters table verifies the drops and enchantment-island landmark, but no reliable direct image was found. Lava Beholder wording is normalized to Lava Behemoth Remains to match the local materials dataset."
+    },
+    {
+      "name": "Lava Behemoth",
+      "slug": "lava-behemoth",
+      "image": "/Wizard%20Alchemy/Enemies/lava-behemoth.png",
+      "catalogSection": "Sea of Oblivion enemies",
+      "family": "Behemoth",
+      "area": "Sea of Oblivion",
+      "enemyType": "Boss",
+      "drops": [
+        "Gold (100%)",
+        "Golem Core (60%)",
+        "Lava Behemoth Remains (20%)",
+        "Enchanted Stone (100%)"
+      ],
+      "notableDrops": "Golem Core, Lava Behemoth Remains, Enchanted Stone",
+      "dropSummary": "Sea of Oblivion boss route for Golem Core, Lava Behemoth Remains, and guaranteed Enchanted Stone.",
+      "farmRole": "New Mainland boss material farming",
+      "difficultyStage": "New Mainland boss farming",
+      "sourceLocation": "Sea of Oblivion (inside Volcano)",
+      "verificationNote": "Current BloxInformer Monsters table verifies the image, boss location, and listed core drops. It also mentions Fire Crystal and Solar Flare Fragment IV, which need a separate material/system check before being normalized into the materials dataset."
+    }
+  ]
+}

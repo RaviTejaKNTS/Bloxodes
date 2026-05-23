@@ -40,11 +40,47 @@ type WikiCatalogPageUpsert = {
   published_at: string | null;
 };
 
-const args = new Set(process.argv.slice(2));
+const rawArgs = process.argv.slice(2);
+const args = new Set(rawArgs);
 const dryRun = args.has("--dry-run");
 const draft = args.has("--draft");
 const allowProd = args.has("--allow-prod");
+const targetGameSlugs = collectArgValues(rawArgs, ["--game", "--game-slug", "--wiki-slug"]);
+const targetCollections = collectArgValues(rawArgs, ["--collection", "--collection-slug"]);
 const UNIVERSE_LOOKUP_PAGE_SIZE = 1000;
+
+function collectArgValues(argv: string[], names: string[]): string[] {
+  const values: string[] = [];
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    const inlineName = names.find((name) => arg.startsWith(`${name}=`));
+    if (inlineName) {
+      const value = arg.slice(inlineName.length + 1).trim().toLowerCase();
+      if (value) values.push(value);
+      continue;
+    }
+    if (names.includes(arg)) {
+      const value = argv[i + 1]?.trim().toLowerCase();
+      if (!value) throw new Error(`Missing value for ${arg}`);
+      values.push(value);
+      i += 1;
+    }
+  }
+  return Array.from(new Set(values));
+}
+
+function getTargetCatalogs() {
+  return GAME_DATASET_CATALOGS.filter((config) => {
+    const matchesGame = !targetGameSlugs.length || targetGameSlugs.includes(config.gameSlug);
+    const matchesCollection = !targetCollections.length || targetCollections.includes(config.slug);
+    return matchesGame && matchesCollection;
+  });
+}
+
+function getTargetGroups(targetCatalogs: GameDatasetCatalogConfig[]) {
+  const gameSlugs = new Set(targetCatalogs.map((config) => config.gameSlug));
+  return GAME_DATASET_CATALOG_GROUPS.filter((group) => gameSlugs.has(group.gameSlug));
+}
 
 async function readDataset(config: GameDatasetCatalogConfig) {
   const datasetPath = repoPath("data", config.dataDir, config.file);
@@ -89,12 +125,13 @@ function normalizeImage(value: unknown): string | null {
 async function buildRows(
   existingPublishedAt: Map<string, string | null>,
   universeIdsByGameSlug: Map<string, number | null>,
-  wikiPageIdsBySlug: Map<string, string | null>
+  wikiPageIdsBySlug: Map<string, string | null>,
+  targetCatalogs: GameDatasetCatalogConfig[]
 ) {
   const now = new Date().toISOString();
   const rows: WikiCatalogPageUpsert[] = [];
 
-  for (const config of GAME_DATASET_CATALOGS) {
+  for (const config of targetCatalogs) {
     const dataset = await readDataset(config);
     const copy = buildGameDatasetCatalogCopy({
       config,
@@ -131,7 +168,7 @@ async function buildRows(
 async function loadExistingPublishedAt() {
   if (dryRun) return new Map<string, string | null>();
   const sb = supabaseAdmin();
-  const codes = GAME_DATASET_CATALOGS.map((config) => config.code);
+  const codes = getTargetCatalogs().map((config) => config.code);
   const { data, error } = await sb.from("wiki_catalog_pages").select("code, published_at").in("code", codes);
   if (error) throw error;
   return new Map(
@@ -145,7 +182,8 @@ async function loadExistingPublishedAt() {
 async function loadWikiPageIdsBySlug() {
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, string | null>();
   const sb = supabaseAdmin();
-  const slugs = GAME_DATASET_CATALOG_GROUPS.map((group) => group.gameSlug);
+  const targetGroups = getTargetGroups(getTargetCatalogs());
+  const slugs = targetGroups.map((group) => group.gameSlug);
   const { data, error } = await sb.from("wiki_pages").select("id, slug").in("slug", slugs);
   if (error) throw error;
   return new Map(
@@ -161,7 +199,7 @@ async function loadUniverseIdsByGameSlug() {
   const rows = await loadRobloxUniverseLookupRows();
 
   return new Map(
-    GAME_DATASET_CATALOG_GROUPS.map((group) => {
+    getTargetGroups(getTargetCatalogs()).map((group) => {
       const candidates = new Set([group.gameSlug, group.gameName, ...group.universeNames].map(normalizeLookup));
       const match = rows.find((row) =>
         [row.slug, row.name, row.display_name].some((value) => candidates.has(normalizeLookup(value)))
@@ -200,6 +238,8 @@ function normalizeLookup(value: string | null | undefined): string {
   return (value ?? "")
     .trim()
     .toLowerCase()
+    .replace(/\s*\[[^\]]+\]\s*$/g, "")
+    .trim()
     .replace(/!+$/g, "");
 }
 
@@ -216,12 +256,17 @@ async function main() {
     loadUniverseIdsByGameSlug(),
     loadWikiPageIdsBySlug()
   ]);
-  const rows = await buildRows(existingPublishedAt, universeIdsByGameSlug, wikiPageIdsBySlug);
+  const targetCatalogs = getTargetCatalogs();
+  const rows = await buildRows(existingPublishedAt, universeIdsByGameSlug, wikiPageIdsBySlug, targetCatalogs);
+
+  if (targetCatalogs.length === 0) {
+    throw new Error("No game catalog pages matched the provided filters.");
+  }
 
   if (dryRun) {
     console.log(`Prepared ${rows.length} wiki catalog page rows.`);
     for (const [index, row] of rows.entries()) {
-      const config = GAME_DATASET_CATALOGS[index];
+      const config = targetCatalogs[index];
       const dataset = config ? await readDataset(config) : null;
       console.log(`${row.wiki_slug}/${row.collection_slug} | ${row.code} | ${row.title} | items=${dataset?.rows.length ?? "unknown"}`);
     }

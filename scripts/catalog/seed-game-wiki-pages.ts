@@ -20,11 +20,39 @@ type WikiCopy = {
   controlsJson?: Array<Record<string, string>>;
 };
 
-const args = new Set(process.argv.slice(2));
+const rawArgs = process.argv.slice(2);
+const args = new Set(rawArgs);
 const dryRun = args.has("--dry-run");
 const draft = args.has("--draft");
 const allowProd = args.has("--allow-prod");
+const targetGameSlugs = collectArgValues(rawArgs, ["--game", "--game-slug", "--wiki-slug"]);
 const UNIVERSE_LOOKUP_PAGE_SIZE = 1000;
+
+function collectArgValues(argv: string[], names: string[]): string[] {
+  const values: string[] = [];
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    const inlineName = names.find((name) => arg.startsWith(`${name}=`));
+    if (inlineName) {
+      const value = arg.slice(inlineName.length + 1).trim().toLowerCase();
+      if (value) values.push(value);
+      continue;
+    }
+    if (names.includes(arg)) {
+      const value = argv[i + 1]?.trim().toLowerCase();
+      if (!value) throw new Error(`Missing value for ${arg}`);
+      values.push(value);
+      i += 1;
+    }
+  }
+  return Array.from(new Set(values));
+}
+
+function getTargetGroups() {
+  return GAME_DATASET_CATALOG_GROUPS.filter(
+    (group) => !targetGameSlugs.length || targetGameSlugs.includes(group.gameSlug)
+  );
+}
 
 const WIKI_COPY: Record<string, WikiCopy> = {
   "steal-a-brainrot": {
@@ -126,13 +154,47 @@ const WIKI_COPY: Record<string, WikiCopy> = {
         console: "Right stick press"
       }
     ]
+  },
+  "wizard-alchemy": {
+    metaDescription: "Wizard Alchemy wiki hub with materials, potions, races, equipment, enchantments, chests, NPCs, locations, controls, and Roblox game details.",
+    tipsMd: `- Materials and potions drive the main route. Farm ingredients around the Magic threshold you need instead of throwing rare drops into random brews.
+- Brew at the spawn Alchemy table, then use the Refine machine only when you can afford the risk. Three matching potions give the cleanest upgrade attempt.
+- Quests and monster farming are the early Gold engine. Harryint's starter quests, goblins, dwarfs, and Fugitive Orc routes help you buy wand, robe, hat, and stat upgrades before bosses feel comfortable.
+- Keep Race Rerolls and Enchanted Stones for a build plan. A useful race or wand enchantment that fits your element, cooldowns, or survival is better than gambling every reward immediately.
+- Learn the fixed route landmarks before New Mainland runs. Spawn services, river, mine, lighthouse side, Dwarf King, chests, and hidden shops decide how fast you gather materials and recover between fights.`,
+    controlsJson: [
+      {
+        action: "Move",
+        desktop: "W/A/S/D"
+      },
+      {
+        action: "Jump",
+        desktop: "Space"
+      },
+      {
+        action: "Dash",
+        desktop: "Q"
+      },
+      {
+        action: "Attack",
+        desktop: "Left mouse button"
+      },
+      {
+        action: "Cast spells",
+        desktop: "E / R"
+      },
+      {
+        action: "Walk / run toggle",
+        desktop: "Ctrl"
+      }
+    ]
   }
 };
 
 async function loadExistingPublishedAt() {
   if (dryRun) return new Map<string, string | null>();
   const sb = supabaseAdmin();
-  const slugs = GAME_DATASET_CATALOG_GROUPS.map((group) => group.gameSlug);
+  const slugs = getTargetGroups().map((group) => group.gameSlug);
   const { data, error } = await sb.from("wiki_pages").select("slug, published_at").in("slug", slugs);
   if (error) throw error;
   return new Map(
@@ -148,7 +210,7 @@ async function loadUniverseIdsByGameSlug() {
   const rows = await loadRobloxUniverseLookupRows();
 
   return new Map(
-    GAME_DATASET_CATALOG_GROUPS.map((group) => {
+    getTargetGroups().map((group) => {
       const candidates = new Set([group.gameSlug, group.gameName, ...group.universeNames].map(normalizeLookup));
       const match = rows.find((row) =>
         [row.slug, row.name, row.display_name].some((value) => candidates.has(normalizeLookup(value)))
@@ -187,7 +249,7 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
   const now = new Date().toISOString();
   const rows: WikiPageUpsert[] = [];
 
-  for (const group of GAME_DATASET_CATALOG_GROUPS) {
+  for (const group of getTargetGroups()) {
     const copy = WIKI_COPY[group.gameSlug];
     if (!copy) continue;
 
@@ -211,6 +273,8 @@ function normalizeLookup(value: string | null | undefined): string {
   return (value ?? "")
     .trim()
     .toLowerCase()
+    .replace(/\s*\[[^\]]+\]\s*$/g, "")
+    .trim()
     .replace(/!+$/g, "");
 }
 
@@ -237,6 +301,10 @@ async function main() {
     loadUniverseIdsByGameSlug()
   ]);
   const rows = await buildRows(existingPublishedAt, universeIdsByGameSlug);
+
+  if (rows.length === 0) {
+    throw new Error("No wiki pages matched the provided filters.");
+  }
 
   if (dryRun) {
     console.log(`Prepared ${rows.length} wiki page rows.`);

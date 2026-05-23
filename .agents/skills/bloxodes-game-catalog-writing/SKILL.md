@@ -51,6 +51,8 @@ Before the section proposal, add a required data and image audit to `research-no
 
 For new games or new collections, gather or build the local dataset as part of this workflow. Research should produce the complete item list, clean names/slugs, useful card fields, and image plan before final writing. If repeatable updates will matter, prefer a collector script over a one-off manual dump.
 
+The image plan must reject weak substitutions. Use direct in-game item art, enemy/object cutouts, NPC screenshots, station screenshots, or location screenshots where the catalog subject is clearly visible. Do not use edited guide thumbnails, site-branded cover art, arrows/callouts, generic hero art, or broad nearby screenshots that do not actually show the row subject. If no clean image exists, leave the row image empty and record the capture/source gap.
+
 Before final writing, propose the data action, item-card section style, and card data shape. Explain the count/image audit, any dataset updates needed, the grouping axis, why it has in-game meaning, weaker alternatives, planned `description_json` keys and notes, what stays in `description_md`, which fields should appear on cards, which raw fields should be hidden, and whether the route needs a renderer override. Wait for explicit user confirmation before writing `final.json` or updating Supabase. A request like "write this page" or "continue" is not approval unless the user has already seen and accepted the data, section, and card proposal.
 
 Once the data and structure are confirmed, update the local dataset/images first when needed, then write the page fields directly in first-pass final JSON. Include `wiki_md` and `wiki_sort_order` when the catalog belongs on a wiki hub.

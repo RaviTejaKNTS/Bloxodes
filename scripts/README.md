@@ -7,7 +7,7 @@ The `scripts/` folder is organized by task area so it's easier to find the right
 - `automation/`: queue runners, deploy warmup, and reporting utilities
 - `backfill/`: one-off cleanup and repair scripts for existing data
 - `catalog/`: Roblox catalog and avatar item ingestion/enrichment
-- `codes/`: code refresh and code-article rewrite jobs
+- `codes/`: code refresh and code-article rewrite jobs. Code rows come from `scripts/codes/update-codes.ts` using `games.source_url` for RobloxDen and `games.source_url_2` for Beebom; do not seed codes manually.
 - `decal-ids/`: decal scraping and enrichment tooling
 - `events/`: event ingestion, event page seeding, and event article generation
 - `games/`: game import and single-game article generation

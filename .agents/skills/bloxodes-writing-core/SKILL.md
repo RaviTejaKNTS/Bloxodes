@@ -43,6 +43,7 @@ When a sentence can fit almost any Roblox page, rewrite it. When a normal player
 When producing content, return the target database shape when possible:
 
 - Supabase fields as JSON for catalog, wiki, and tool-like pages.
+- For code pages, return only the `games` row fields and source URLs. Do not return a manual `codes` array.
 - Article fields as JSON, with Markdown inside `content_md`.
 - `research-notes.md` and `final.json` as the only local generated artifacts for serious content work.
 

@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "title": "Wizard Alchemy wizard hats data",
+    "updatedAt": "2026-05-23",
+    "sources": [
+      {
+        "label": "BloxInformer - Wizard Alchemy Wizard Hat",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/wizard-hat/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Pro Game Guides - All Wands, Hats & Potions in Wizard Alchemy",
+        "url": "https://progameguides.com/roblox/all-wands-hats-potions-in-wizard-alchemy/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Gamezebo - Wizard Alchemy Tier List",
+        "url": "https://www.gamezebo.com/walkthroughs/wizard-alchemy-tier-list/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Beebom - Wizard Alchemy Tier List",
+        "url": "https://beebom.com/wizard-alchemy-tier-list/amp/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "AllThings.How - Wizard Alchemy Wands, Hats, Robes and Potions Reference",
+        "url": "https://allthings.how/wizard-alchemy-wands-hats-robes-and-potions-reference/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Roblox - Wizard Alchemy",
+        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
+        "accessed": "2026-05-23"
+      }
+    ],
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "rarity",
+      "displayCost",
+      "priceGold",
+      "hp",
+      "lavaResistance",
+      "sourceLocation",
+      "progressionUse",
+      "availability",
+      "verificationNote"
+    ],
+    "sourceCountSummary": {
+      "bloxInformerLiveHtml": 4,
+      "bloxInformerTextCache": 3,
+      "proGameGuides": 3,
+      "gamezebo": 3,
+      "beebom": 3,
+      "allThingsHow": 3,
+      "robloxGamePage": "No item-level hat table in public page description"
+    },
+    "uncertainFacts": [
+      "BloxInformer live HTML fetched on 2026-05-23 includes Lava Wizard Hat, but BloxInformer's text-only cache and older PGG/Gamezebo/Beebom/AllThings.How pages list only the three Roger shop hats.",
+      "Starlight Hat has a source conflict: BloxInformer lists HP +20 and 8K Gold, while PGG and Gamezebo list HP +40 and 8K Gold. Beebom says Starlight gives the same HP boost as Golden Reverie, so this dataset uses +40 HP with an in-game verification caveat."
+    ]
+  },
+  "items": [
+    {
+      "name": "Starmoon Hat",
+      "slug": "starmoon-hat",
+      "image": "/Wizard%20Alchemy/Wizard%20Hats/starmoon-hat.png",
+      "catalogSection": "Roger's shop hats",
+      "rarity": "Rare",
+      "displayCost": "1,200 Gold",
+      "priceGold": 1200,
+      "hp": "+20 HP",
+      "lavaResistance": null,
+      "sourceLocation": "Roger's Equipment Shop Wizard Hat tab at spawn",
+      "progressionUse": "Early HP upgrade while saving for stronger wands, potions, robes, and later hats.",
+      "availability": "Current Roger shop",
+      "verificationNote": "BloxInformer, PGG, and Gamezebo agree on +20 HP and 1.2K Gold. Gamezebo lists the rarity as Rare."
+    },
+    {
+      "name": "Golden Reverie Hat",
+      "slug": "golden-reverie-hat",
+      "image": "/Wizard%20Alchemy/Wizard%20Hats/golden-reverie-hat.png",
+      "catalogSection": "Roger's shop hats",
+      "rarity": "Epic",
+      "displayCost": "8,000 Gold",
+      "priceGold": 8000,
+      "hp": "+40 HP",
+      "lavaResistance": null,
+      "sourceLocation": "Roger's Equipment Shop Wizard Hat tab at spawn",
+      "progressionUse": "Main 8K defensive buy for players who need more HP before tougher fights.",
+      "availability": "Current Roger shop",
+      "verificationNote": "BloxInformer, PGG, and Gamezebo agree on +40 HP and 8K Gold. Gamezebo lists the rarity as Epic."
+    },
+    {
+      "name": "Starlight Hat",
+      "slug": "starlight-hat",
+      "image": "/Wizard%20Alchemy/Wizard%20Hats/starlight-hat.png",
+      "catalogSection": "Roger's shop hats",
+      "rarity": "Epic",
+      "displayCost": "8,000 Gold",
+      "priceGold": 8000,
+      "hp": "+40 HP",
+      "lavaResistance": null,
+      "sourceLocation": "Roger's Equipment Shop Wizard Hat tab at spawn",
+      "progressionUse": "Alternative 8K defensive buy; check the in-game stat line before choosing it over Golden Reverie.",
+      "availability": "Current Roger shop",
+      "verificationNote": "Dataset uses +40 HP because PGG and Gamezebo both list Starlight Hat at +40 HP and 8K Gold, and Beebom says Starlight gives the same HP boost as Golden Reverie. BloxInformer lists Starlight Hat at +20 HP and 8K Gold, so this row needs in-game confirmation before production publishing."
+    },
+    {
+      "name": "Lava Wizard Hat",
+      "slug": "lava-wizard-hat",
+      "image": "/Wizard%20Alchemy/Wizard%20Hats/lava-wizard-hat.webp",
+      "catalogSection": "Sea of Oblivion hat",
+      "rarity": null,
+      "displayCost": "10,000 Gold",
+      "priceGold": 10000,
+      "hp": "+40 HP",
+      "lavaResistance": "+100%",
+      "sourceLocation": "Behind the fiery Lava waterfall next to the base in the Sea of Oblivion region",
+      "progressionUse": "Sea of Oblivion utility hat for players who need HP plus lava resistance on New Mainland routes.",
+      "availability": "Current Sea of Oblivion route",
+      "verificationNote": "BloxInformer live HTML fetched on 2026-05-23 lists Lava Wizard Hat with +40 HP, +100% Lava Resistance, 10K Gold, and a Sea of Oblivion lava waterfall location. Older PGG, Gamezebo, Beebom, and AllThings.How pages do not include this New Mainland hat."
+    }
+  ]
+}

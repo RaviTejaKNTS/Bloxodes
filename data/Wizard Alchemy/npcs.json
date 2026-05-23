@@ -1,0 +1,174 @@
+{
+  "meta": {
+    "title": "Wizard Alchemy NPCs data",
+    "updatedAt": "2026-05-23",
+    "sources": [
+      {
+        "label": "Pro Game Guides - Wizard Alchemy Beginner's Guide",
+        "url": "https://progameguides.com/roblox/wizard-alchemy-beginners-guide/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Pro Game Guides - All 10 Chest Locations in Wizard Alchemy",
+        "url": "https://progameguides.com/roblox/wizard-alchemy-chest-location-guide/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "GAMES.GG - Wizard Alchemy All Chest Locations",
+        "url": "https://games.gg/roblox/guides/wizard-alchemy-all-chest-locations/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "GAMES.GG - Wizard Alchemy All Enchantments",
+        "url": "https://games.gg/roblox/guides/wizard-alchemy-all-enchantments-and-how-to-get-them/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Beebom - All Wizard Alchemy Chest Locations",
+        "url": "https://beebom.com/all-wizard-alchemy-chest-locations/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Wiki",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Materials",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/materials/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Wands",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/wands/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Robes",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/robes/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Wizard Hat",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/wizard-hat/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "AllThings.How - Wizard Alchemy Wands, Hats, Robes and Potions Reference",
+        "url": "https://allthings.how/wizard-alchemy-wands-hats-robes-and-potions-reference/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Roblox - Wizard Alchemy",
+        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
+        "accessed": "2026-05-23"
+      }
+    ],
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "npcRole",
+      "area",
+      "location",
+      "relatedSystem",
+      "whatTheyDo",
+      "playerUse",
+      "verificationNote"
+    ]
+  },
+  "items": [
+    {
+      "name": "Roger",
+      "slug": "roger",
+      "image": "/Wizard%20Alchemy/NPCs/roger.webp",
+      "catalogSection": "Spawn services",
+      "npcRole": "Equipment shop NPC",
+      "area": "Departure Isle",
+      "location": "Roger's equipment shop in the starter village",
+      "relatedSystem": "Wands, wizard hats, and wizard robes",
+      "whatTheyDo": "Opens equipment shop menus for wand damage upgrades and HP gear.",
+      "playerUse": "Visit Roger when saving Gold for a stronger wand, wizard hat, or robe.",
+      "verificationNote": "BloxInformer wands, robes, and wizard hat pages all name Roger as the shop NPC; Pro Game Guides also confirms the Equipment Shop upgrade route. Image uses a direct in-game Roger shop screenshot with the Roger label visible."
+    },
+    {
+      "name": "Lombart",
+      "slug": "lombart",
+      "image": null,
+      "catalogSection": "Spawn services",
+      "npcRole": "Material selling NPC",
+      "area": "Departure Isle",
+      "location": "Starter village near the spawn leaderboard platform",
+      "relatedSystem": "Materials and inventory cleanup",
+      "whatTheyDo": "Lets players sell unwanted materials from the material bag.",
+      "playerUse": "Use Lombart when extra low-priority materials are taking up inventory slots.",
+      "verificationNote": "BloxInformer Materials says unwanted materials can be sold at Lombart in the starter village; PGG and GAMES.GG chest routes also use Lombart as a spawn platform landmark."
+    },
+    {
+      "name": "Harryint",
+      "slug": "harryint",
+      "image": "/Wizard%20Alchemy/NPCs/harryint.jpg",
+      "catalogSection": "Route and quest NPCs",
+      "npcRole": "Quest NPC",
+      "area": "Departure Isle spawn",
+      "location": "Right side of spawn beside the Wanted board",
+      "relatedSystem": "Quests, Gold, materials, and Enchanted Stones",
+      "whatTheyDo": "Offers quests, including early gold/material quests and a lava golem boss quest source for Enchanted Stones.",
+      "playerUse": "Start here when you want repeatable quest rewards before relying only on enemy farming.",
+      "verificationNote": "Pro Game Guides confirms Harryint's spawn-side Wanted board location and multiple quests; GAMES.GG confirms the Harryint boss quest as a guaranteed Enchanted Stone source. Image uses a direct in-game Wanted board screenshot with Harryint visible."
+    },
+    {
+      "name": "Fugitive Orc",
+      "slug": "fugitive-orc",
+      "image": null,
+      "catalogSection": "Route and quest NPCs",
+      "npcRole": "Side quest NPC",
+      "area": "Departure Isle",
+      "location": "Below a tree next to the Warhammer Dwarf on the forest route from spawn",
+      "relatedSystem": "NPC quests, berry gathering, and forest routing",
+      "whatTheyDo": "Gives an early side quest to feed him 10 berries.",
+      "playerUse": "Bring berries while moving through the forest route if you want a simple beginner quest.",
+      "verificationNote": "Pro Game Guides describes Fugitive Orc as an easy NPC quest target near Warhammer Dwarf; BloxInformer and enemy-guide snippets use Fugitive Orc as a landmark for the Mutant Warhammer Dwarf route."
+    },
+    {
+      "name": "Lemin",
+      "slug": "lemin",
+      "image": null,
+      "catalogSection": "Landmark NPCs",
+      "npcRole": "Leaderboard platform NPC",
+      "area": "Departure Isle spawn",
+      "location": "Spawn platform near Lombart, Lemin, and the three leaderboards",
+      "relatedSystem": "Leaderboards, Top Potions List, and spawn chest route",
+      "whatTheyDo": "Acts as a named spawn landmark beside the leaderboard platform.",
+      "playerUse": "Use Lemin and Lombart together to find the Top Potions List platform and sandy-island chest drop-off.",
+      "verificationNote": "PGG and GAMES.GG chest routes both name Lemin NPC at the leaderboard platform; no shop or quest role was confirmed."
+    },
+    {
+      "name": "Optimistic Miner",
+      "slug": "optimistic-miner",
+      "image": "/Wizard%20Alchemy/Chests/miner-cave.jpg",
+      "catalogSection": "Landmark NPCs",
+      "npcRole": "Chest hint NPC",
+      "area": "Departure Isle",
+      "location": "Mine entrance near the boarded cave after the first Pickaxe Dwarfs",
+      "relatedSystem": "Chests, mine route, and material farming",
+      "whatTheyDo": "Explains that chests can give useful materials and marks the main mine entrance.",
+      "playerUse": "Use the Optimistic Miner as the anchor for the miner cave, secret cave, and mine-top chest route.",
+      "verificationNote": "PGG says the Optimistic Miner explains chest rewards such as Gold, Emblems, Crests, and Shards; PGG, Beebom, and GAMES.GG use the NPC as the mine entrance landmark. Image uses a direct in-game mine entrance screenshot with the Optimistic Miner label visible."
+    },
+    {
+      "name": "Traveler",
+      "slug": "traveler",
+      "image": null,
+      "catalogSection": "Landmark NPCs",
+      "npcRole": "Travel-route landmark",
+      "area": "Departure Isle",
+      "location": "Camp with a tent, Cauldron, and bridge past Knife Goblins and Warhammer Dwarf",
+      "relatedSystem": "Chest route, bridge route, Cauldron landmark, and lighthouse route",
+      "whatTheyDo": "Marks the tent and Cauldron area used for chest, bridge, and lighthouse navigation.",
+      "playerUse": "Use Traveler's camp to orient toward the tent chest, lighthouse path, and hidden platform routes.",
+      "verificationNote": "PGG and GAMES.GG both name Traveler NPC in chest route directions; no shop or quest service was confirmed."
+    }
+  ]
+}

@@ -8,7 +8,7 @@ const nodeEnv = process.env.NODE_ENV ?? "development";
 
 const candidates = [
   `.env.${nodeEnv}.local`,
-  nodeEnv === "test" ? null : ".env.local",
+  nodeEnv === "test" || nodeEnv === "production" ? null : ".env.local",
   `.env.${nodeEnv}`,
   ".env"
 ].filter((value): value is string => Boolean(value));

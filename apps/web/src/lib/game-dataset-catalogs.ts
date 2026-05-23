@@ -156,6 +156,27 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
       "title-colors",
       "titles"
     ]
+  },
+  {
+    gameSlug: "wizard-alchemy",
+    gameName: "Wizard Alchemy",
+    dataDir: "Wizard Alchemy",
+    universeNames: ["Wizard Alchemy"],
+    collections: [
+      "materials",
+      "potions",
+      "races",
+      "wands",
+      "brooms",
+      "robes",
+      "wizard-hats",
+      "enemies",
+      "chests",
+      "enchantments",
+      "locations",
+      "npcs",
+      "resource-nodes"
+    ]
   }
 ];
 
@@ -193,10 +214,13 @@ const COLLECTION_FOCUS: Record<string, string> = {
   boats: "price, speed, health, seats, cannons, and travel use",
   bosses: "boss names, locations, levels, drops, rewards, and fight details",
   brainrots: "rarity, income, cost, status, rituals, mutations, traits, and release details",
+  brooms: "prices, locations, travel stats, availability, and movement value",
+  chests: "route order, landmarks, location hints, reward notes, and travel tips",
   clans: "clan effects, bonuses, rarity, requirements, and obtainment",
   dungeons: "entry rules, wave structure, rewards, difficulty, and dungeon purpose",
   eggs: "price, rarity chances, availability, events, and obtainment",
   emotes: "available emote entries and their catalog images",
+  enchantments: "roll stats, tier values, Enchanted Stone costs, build roles, and wand upgrade value",
   enemies: "enemy levels, seas, locations, notes, and progression value",
   "fighting-styles": "price, requirements, obtainment, upgrading, and combat role",
   "fuse-machine": "possible fuse results, rarities, income values, and max chances",
@@ -218,7 +242,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   locations: "areas, types, descriptions, map placement, and related details",
   "lucky-blocks": "cost, rarity, status, contents, appearance, and reward context",
   machines: "machine names, how to use them, what they do, and whether they are in game",
-  materials: "rarity, source, requirements, obtainment, and upgrade use",
+  materials: "rarity, source, requirements, obtainment, Magic values, and upgrade or crafting use",
   "map-themes": "theme names, categories, requirements, costs, and map effects",
   "melee-specs": "melee specs, rarity, stats, abilities, drops, and acquisition",
   mutations: "mutation categories, multipliers, visual changes, and availability",
@@ -233,7 +257,9 @@ const COLLECTION_FOCUS: Record<string, string> = {
   rebirths: "rebirth levels, cash requirements, required brainrots, multipliers, and unlocks",
   relics: "relic effects, bonuses, rarity, requirements, and obtainment",
   rituals: "ritual names, required formations, spawned brainrots, weather, and income results",
+  robes: "HP bonuses, Gold costs, shop source, rarity, and defensive upgrade value",
   "roleplay-outfits": "outfit names, buildings, categories, and roleplay images",
+  "resource-nodes": "gathering sources, route safety, material rewards, repeat notes, and farming use",
   runes: "rune rarity, effects, stats, requirements, drops, and use",
   secrets: "secret names, summaries, steps, and images where listed",
   "sea-events": "event names, images, descriptions, and sea-event context",
@@ -245,7 +271,9 @@ const COLLECTION_FOCUS: Record<string, string> = {
   titles: "title numbers, title text, obtainment, and unlock requirements",
   toys: "toy names, rarity, prices, effects, availability, and event notes",
   traits: "trait categories, multipliers, visuals, obtainment, and notes",
-  vehicles: "vehicle names, categories, costs, seats, requirements, and availability"
+  vehicles: "vehicle names, categories, costs, seats, requirements, and availability",
+  wands: "cost, Attack, Attack Bonus, special bonuses, source locations, and upgrade value",
+  "wizard-hats": "HP bonuses, Gold costs, lava resistance, source locations, and defensive gear value"
 };
 
 const FIELD_LABELS: Record<string, string> = {
@@ -254,9 +282,12 @@ const FIELD_LABELS: Record<string, string> = {
   accessSpawn: "access / spawn",
   accessTravel: "access / travel",
   acquisition: "acquisition",
+  area: "area",
   armsVisual: "arms visual",
   abilityCount: "ability count",
   appliesTo: "applies to",
+  attack: "Attack",
+  attackBonus: "Attack Bonus",
   available: "availability",
   availability: "availability",
   availabilityNote: "availability note",
@@ -274,6 +305,7 @@ const FIELD_LABELS: Record<string, string> = {
   bossCheckpoint: "boss checkpoint",
   bossStage: "boss stage",
   bosses: "bosses",
+  buildRole: "build role",
   building: "building",
   cashBonus: "cash bonus",
   catalogSection: "section",
@@ -282,6 +314,7 @@ const FIELD_LABELS: Record<string, string> = {
   combat: "combat",
   combatLevel: "level",
   combatRole: "role",
+  compatibleRace: "compatible race",
   cooldown: "cooldown",
   cooldownReduction: "cooldown reduction",
   cost: "cost",
@@ -313,15 +346,18 @@ const FIELD_LABELS: Record<string, string> = {
   displayType: "type",
   dodges: "dodges",
   dropChance: "drop chance",
+  dropChances: "drop chances",
   dropCount: "drop count",
   dropNote: "drop note",
   dropOrCost: "drop / cost",
   dropOrPity: "drop / pity",
   drops: "drops",
   dropsRewards: "drops / rewards",
+  dropSummary: "drop summary",
   effect: "effect",
   encounter: "encounter",
   encounterType: "encounter type",
+  enemyType: "enemy type",
   entryItem: "entry item",
   extraUnlock: "extra unlock",
   exp: "EXP",
@@ -329,26 +365,35 @@ const FIELD_LABELS: Record<string, string> = {
   expRange: "EXP range",
   expReward: "EXP reward",
   equipUseNote: "equip / use note",
+  family: "family",
+  farmRole: "farm role",
   farmRoute: "farm route",
   fields: "listed fields",
   formatTime: "format",
   grantRoute: "grant route",
   hasV4: "V4 status",
+  howToReach: "how to reach",
   howToUse: "how to use",
   hp: "HP",
+  hpBonus: "HP Bonus",
   holderTarget: "holder / target",
   image: "image",
   income: "income",
   importantRule: "important rule",
   islandArea: "island / area",
   islandRegion: "island / region",
+  keyNpcs: "key NPCs",
   keyContent: "key content",
+  keepPriority: "keep or reroll",
   keyUse: "key use",
+  landmark: "landmark",
   level: "level",
+  lavaResistance: "lava resistance",
   levelRange: "level range",
   levelRequirement: "level requirement",
   levelingRoute: "leveling route",
   location: "location",
+  locationHint: "location hint",
   locationType: "location type",
   legsVisual: "legs visual",
   mainLimit: "limit",
@@ -357,10 +402,14 @@ const FIELD_LABELS: Record<string, string> = {
   mainRole: "main role",
   mainStrength: "strength",
   mainRewards: "main rewards",
+  materialRole: "material role",
+  magicPower: "Magic Power",
+  maxAcceleration: "max acceleration",
   maxBonus: "max bonus",
   maxChance: "max chance",
   maxEffect: "max effect",
   maxLevel: "max level",
+  maxValue: "max value",
   maxPlayers: "max players",
   masteryGate: "mastery gate",
   masteryRequired: "mastery required",
@@ -368,8 +417,11 @@ const FIELD_LABELS: Record<string, string> = {
   money: "money cost",
   moneyPrice: "money price",
   moneyReward: "money reward",
+  minMagic: "Min Magic",
   multiplier: "multiplier",
   normalPlayerRoute: "normal-player route",
+  notableDrops: "notable drops",
+  nodeType: "node type",
   notes: "notes",
   npcRole: "role",
   objective: "objective",
@@ -378,7 +430,10 @@ const FIELD_LABELS: Record<string, string> = {
   overview: "overview",
   partRoute: "part route",
   passive: "passive",
+  power: "Power",
   price: "price",
+  priceCoins: "coin price",
+  priceGold: "gold price",
   permanentPrice: "permanent price",
   progressionRole: "progression role",
   progressionNote: "progression note",
@@ -387,6 +442,7 @@ const FIELD_LABELS: Record<string, string> = {
   questSource: "quest / source",
   rarity: "rarity",
   requirement: "requirement",
+  difficultyStage: "difficulty stage",
   requiredBrainrots: "required brainrots",
   requiredCash: "required cash",
   requiredSetup: "required setup",
@@ -394,14 +450,21 @@ const FIELD_LABELS: Record<string, string> = {
   requirements: "requirements",
   requirementMastery: "requirement / mastery",
   relatedRoute: "related route",
+  relatedSystem: "related system",
   relatedTarget: "related target",
+  recommendedShard: "recommended shard",
   respawnAccess: "access / respawn",
+  respawnOrRepeatNote: "respawn / repeat note",
   rewardCategory: "reward type",
+  rewardNotes: "reward notes",
   robux: "Robux cost",
   role: "role",
   routeNote: "route note",
+  routeOrder: "route order",
   routeRole: "route role",
   routeUse: "route / use",
+  rollChance: "roll chance",
+  rollRoute: "reroll route",
   rollRarity: "roll rarity",
   rerollStatus: "reroll status",
   runType: "run type",
@@ -410,7 +473,11 @@ const FIELD_LABELS: Record<string, string> = {
   seaEventRole: "sea-event role",
   seats: "seats",
   signatureMove: "signature move",
+  sellPrice: "sell price",
   source: "source",
+  elementEffect: "element effect",
+  elementSynergy: "element synergy",
+  farmingStage: "farming stage",
   sourceLocation: "source location",
   sourcePity: "source / pity",
   sourceRoute: "source",
@@ -419,7 +486,9 @@ const FIELD_LABELS: Record<string, string> = {
   sourceAccess: "source / access",
   spawnAccess: "spawn / access",
   special: "special reward",
+  specialBonus: "special bonus",
   specialUse: "special use",
+  spellRole: "spell role",
   spawnRequirement: "spawn requirement",
   spinChance: "spin chance",
   status: "status",
@@ -429,6 +498,7 @@ const FIELD_LABELS: Record<string, string> = {
   tier: "tier",
   titleCountNeeded: "title count needed",
   titleRole: "title role",
+  travelTip: "travel tip",
   type: "type",
   unlock: "unlock",
   unlockNote: "unlock note",
@@ -447,9 +517,14 @@ const FIELD_LABELS: Record<string, string> = {
   visualRole: "visual role",
   visualStage: "visual stage",
   whatItDoes: "what it does",
+  whatTheyDo: "what they do",
   weaponBonus: "weapon bonus",
   statEffect: "stat effect",
+  stoneRoute: "stone route",
   teacherSource: "teacher / source",
+  tierFive: "Tier V",
+  tierOne: "Tier I",
+  tierThree: "Tier III",
   upgradePath: "upgrade path",
   upgradeUse: "upgrade / use note",
   wikiUrl: "wiki page"
@@ -537,6 +612,14 @@ export function buildGameDatasetCatalogCopy({
   imageUrls
 }: GameDatasetCatalogCopyInput): GameDatasetCatalogCopy {
   const countLabel = itemCount.toLocaleString("en-US");
+  const override = buildGameDatasetCatalogCopyOverride({
+    config,
+    itemCount,
+    countLabel,
+    imageUrls
+  });
+  if (override) return override;
+
   const lowerLabel = config.label.toLowerCase();
   const focus = getCollectionFocus(config.slug);
   const columnLabels = getUsefulColumnLabels(columns, 7);
@@ -582,6 +665,756 @@ Blank fields are left empty instead of padded with guesses. That matters because
     cta_label: `Open ${lowerLabel} catalog`,
     cta_url: buildGameDatasetCatalogPath(config.code),
     wiki_md: `${config.gameName} ${lowerLabel} connect to ${focus}. Source and availability usually matter as much as rarity because older rewards, event items, shop rotations, and progression unlocks do not all stay equally easy to replace.`,
+    wiki_sort_order: config.sortOrder,
+    wiki_item_count: itemCount,
+    thumb_url: imageUrls[0] ?? null
+  };
+}
+
+function buildGameDatasetCatalogCopyOverride({
+  config,
+  itemCount,
+  countLabel,
+  imageUrls
+}: Omit<GameDatasetCatalogCopyInput, "columns"> & { countLabel: string }): GameDatasetCatalogCopy | null {
+  if (config.code === "wizard-alchemy-potions") {
+    const title = `All ${countLabel} Potions in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Wizard Alchemy potions list with Departure Isle and Sea of Oblivion spell thresholds, Power values, effects, sell prices, and refining tips.",
+      intro_md:
+        "Wizard Alchemy potions unlock the spells you use for fighting, farming, travel, defense, and damage buffs. Each brew starts with materials, and the total Magic value decides which potion results can appear in the alchemy table. The current list has 26 potions split between the Departure Isle spell ladder and the newer Sea of Oblivion potion set.",
+      description_md:
+        "## How brewing targets work\n\nPotions do not work like a normal shop purchase. Materials add Magic to the brew, and the total decides which potion results are allowed to appear. If Wind Blade needs 6 Magic, a 6-Magic brew can roll it. If the same brew climbs high enough to unlock another potion, the result pool changes because the alchemy table now has more possible outcomes.\n\nThat is why the best target is usually close to the potion you want. A small starter brew is fine for Wind Blade, Rock Blast, or Ice Spike. A stronger Departure Isle brew can chase Fire Arrow, Earth Shield, Frost Thorns, Radiant Sword, or Night Wraith. Sea of Oblivion raises the ceiling again with potions such as Thunder Revenge, Incendies, Molten Core, and Solar Flare.\n\n## How to brew toward a specific potion\n\n1. Pick the potion you actually want before adding rare materials.\n2. Add normal Magic Power materials until the total reaches that potion's minimum Magic value.\n3. Avoid pushing far into the next target unless you are fine with the higher potion joining the result pool.\n4. Add a matching shard only when the Magic total already qualifies for the spell route you are chasing.\n5. Finish the brewing minigame carefully because purity affects the final spell stats.\n\n## When to refine or sell duplicates\n\nRefinement gives duplicate potions a second purpose. Matching potions can be combined to raise a spell's grade, which improves power and range over time. Selling is still useful for gold, but rare or high-Magic duplicates are usually worth checking before you cash them out.\n\n| Situation | Better move | Why it helps |\n| --- | --- | --- |\n| Early duplicate starter spells | Sell or refine only if you still use the spell | Low-Magic potions are easier to replace. |\n| A spell you use for farming | Save copies for refinement | Better grade means stronger casts and range. |\n| Rare high-Magic potion | Check refinement before selling | Rebrewing it can cost better materials and shards. |\n| Utility or buff potion | Keep one usable copy | Movement, counter damage, or damage buffs can help outside raw Power checks. |\n\n## What changes in Sea of Oblivion\n\nThe Sea of Oblivion rows make old potion plans feel smaller. Solar Flare has the highest listed Magic and Power value, while Molten Core sits just below it with a heavy 230-Magic requirement. These targets are not early goals. Treat them as late New Mainland brews after your material farming can support much larger Magic totals.",
+      how_it_works_md:
+        "Each potion card shows the minimum Magic needed before that potion can roll, the listed Power when the spell has one, and the sell price in Gold. `Effect` explains rows that do not behave like plain Power attacks, such as Lithe, Ice Turtle, and Twin Currents. `Spell role` separates attacks from utility, defense, counter damage, and buffs, while shard and race fields only appear where a useful pairing is listed.",
+      description_json: {
+        "Departure Isle potions":
+          "Departure Isle potions start with low-Magic attack spells like Wind Blade, Rock Blast, and Ice Spike, then climb into utility, defense, late attacks, and Night Wraith. This section is still useful after New Mainland because it covers the first spell route most players learn.",
+        "Sea of Oblivion potions":
+          "Sea of Oblivion potions are the New Mainland spell ladder. Wood Splinter starts at 30 Magic, while Molten Core and Solar Flare sit much higher and need stronger material totals before they can roll."
+      },
+      faq_json: [
+        {
+          q: "How do you get potions in Wizard Alchemy?",
+          a: "Brew them at the alchemy table with materials. Add up to five materials, reach the Magic total for the potion you want, then finish the brewing minigame to create the potion."
+        },
+        {
+          q: "What is the strongest potion in Wizard Alchemy?",
+          a: "Solar Flare Potion has the highest listed values in the current list at 245 Magic and 160 Power. Night Wraith is still the strongest Departure Isle potion listed, with 148 Power."
+        },
+        {
+          q: "Do shards guarantee the potion I want?",
+          a: "No. Shards help push a brew toward a matching element, but the Magic total still has to qualify for the potion route first. Save shards for serious attempts instead of spending them on weak totals."
+        },
+        {
+          q: "Should I sell duplicate potions?",
+          a: "Only sell duplicates after checking whether you need them for refinement. Extra low-Magic spells are easier to replace, but high-Magic potions can be annoying to brew again."
+        },
+        {
+          q: "Why do some potions show an effect instead of Power?",
+          a: "Some potions are utility, counter, or buff spells. Lithe gives movement speed, Ice Turtle deals damage when enemies hit you, and Twin Currents increases damage by 30%."
+        }
+      ],
+      cta_label: "Open potions catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Potions are Wizard Alchemy's spell ladder. Materials decide which Magic thresholds you can reach, while refinement, shards, and New Mainland potion targets shape which spells are worth saving, upgrading, or selling.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: "/Wizard%20Alchemy/Potions/wind-blade-potion.png"
+    };
+  }
+
+  if (config.code === "wizard-alchemy-races") {
+    const title = `All ${countLabel} Races in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Wizard Alchemy races list with roll chances, rarity tiers, stat bonuses, passives, drawbacks, and reroll guidance.",
+      intro_md:
+        "Wizard Alchemy races are reroll traits that change your character's combat stats, movement, sustain, and elemental damage. Every player starts as Human, but Race Rerolls can replace it with a stronger option such as Death Eater, Stellar Ambassador, Ice Crystal, Fiendish Demon, or the 1% Legendary dark race.",
+      description_md:
+        "## How race rerolls fit progression\n\nRaces matter because they change what your character can survive, how fast you move, and how much damage a spell build can push. Human does nothing, so the first goal is simple: replace it with any useful combat or utility roll. After that, the better question is whether your current race helps the way you actually fight.\n\nA safe early roll is usually Werewolf because it gives HP, Attack Power, movement, and jump height without a major drawback. Death Eater is stronger when you are farming enemies quickly because its 5% Max HP heal triggers after kills. Undead can save you from a fatal hit, but the Max HP penalty means normal mistakes hurt more.\n\nEpic and Legendary races are where builds start to matter. Ice Crystal wants Ice spells, Fiendish Demon wants Fire spells, and Stellar Ambassador works across elements because Attack Power and Skill Speed are useful in almost every setup. The 1% dark race is the chase result because its dark damage bonus, Disaster status, Attack Power, and Skill Speed all point toward high damage.\n\n## How to decide when to stop rerolling\n\n1. Reroll Human first. No passive bonuses means it is only a starting point.\n2. Keep Werewolf if you are new and need a stable early upgrade.\n3. Keep Death Eater if you are farming normal enemies and can keep kill chains going.\n4. Keep Ice Crystal or Fiendish Demon when your spells match that element.\n5. Keep Stellar Ambassador for a general damage and speed setup that does not depend on one element.\n6. Stop immediately on the 1% Legendary dark race unless you are deliberately testing something unusual.\n\n## What to watch before spending more rerolls\n\nRace Rerolls are limited unless you are buying them, so chasing the perfect roll too early can waste a lot of value. A good race does not replace basic progression: stronger potions, better wands, clean parry timing, and enough HP still matter. If your current race helps you clear enemies consistently, it can be smarter to farm materials and upgrades before gambling for a tiny 1% chance.",
+      how_it_works_md:
+        "Races are grouped by rarity because rarity also shows the roll chance. `Roll chance` is the probability of landing that race from a reroll. `Core bonus` gives the main stat package, `Passive` explains special effects such as kill healing or Disaster, and `Main limit` shows the tradeoff that can make a race harder to use. `Element synergy` matters most for Ice Crystal, Fiendish Demon, and the Legendary dark race because their damage bonuses only shine when your spell setup matches the element.",
+      description_json: {
+        "Common races":
+          "Human is the default starter result. It has no passive bonuses, so it should be replaced once you have Race Rerolls to spend.",
+        "Uncommon races":
+          "Tree Spirit and Elf are early utility rolls. Tree Spirit gives passive sustain with a movement penalty, while Elf helps movement and jumping without improving combat.",
+        "Rare races":
+          "Rare races are the first rolls worth thinking through. Werewolf is a safe early upgrade, Death Eater is better for kill-based farming, and Undead is a risky survival pick because its revive passive comes with a Max HP penalty.",
+        "Epic races":
+          "Epic races start shaping real builds. Ice Crystal and Fiendish Demon reward Ice or Fire spell setups, while Stellar Ambassador gives general Attack Power, Skill Speed, and movement burst value for any element.",
+        "Legendary races":
+          "Night Knight is the 1% Legendary dark-race entry, and some players may still recognize the same dark stat line as Thestrals. Its dark damage, Disaster status, Attack Power, mobility, and Skill Speed make it the clearest top roll."
+      },
+      faq_json: [
+        {
+          q: "How many races are in Wizard Alchemy?",
+          a: "There are 10 race entries in the current list: Human, Tree Spirit, Elf, Werewolf, Death Eater, Undead, Ice Crystal, Fiendish Demon, Stellar Ambassador, and the 1% Legendary dark race listed here as Night Knight."
+        },
+        {
+          q: "What is the best race in Wizard Alchemy?",
+          a: "The 1% Legendary dark race is the strongest target because it stacks Dark Elemental Damage, Attack Power, Skill Speed, mobility, and the Disaster on-hit effect. Stellar Ambassador is the best all-around Epic roll, while Death Eater is a strong Rare choice for solo farming."
+        },
+        {
+          q: "Should you reroll Human?",
+          a: "Yes. Human has no passive bonuses, so any useful combat or movement race is an upgrade. Werewolf is a good early stopping point if you do not want to spend every reroll chasing Epic or Legendary odds."
+        },
+        {
+          q: "Which race should you keep for Fire or Ice builds?",
+          a: "Fiendish Demon is the Fire build race because it gives +20% Fire Elemental Damage. Ice Crystal is the Ice build race because it gives +20% Ice Elemental Damage and extra Max HP, though it also lowers movement speed."
+        },
+        {
+          q: "How do you reroll races in Wizard Alchemy?",
+          a: "Open the Race menu through the Stat page or through the Shop race reroll option, then spend Race Rerolls to roll a new race. Race Rerolls are mainly earned from active codes or bought from the in-game shop."
+        },
+        {
+          q: "Why do some players say Thestrals instead of Night Knight?",
+          a: "Some players may still use Thestrals for the 1% dark Legendary race. The important part is the dark stat package: Dark Elemental Damage, Attack Power, Skill Speed, mobility, and the Disaster on-hit effect."
+        }
+      ],
+      cta_label: "Open races catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Races are Wizard Alchemy's reroll traits. Human has no bonuses, early races help movement or sustain, Rare rolls start supporting combat, and Epic or Legendary rolls can shape Fire, Ice, Dark, farming, or all-around spell builds.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: "/Wizard%20Alchemy/Races/night-knight.jpg"
+    };
+  }
+
+  if (config.code === "wizard-alchemy-wands") {
+    const title = `All ${countLabel} Wands in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Wizard Alchemy wands list with starter, shop, hidden, and Sea of Oblivion weapons, costs, attack stats, bonuses, and locations.",
+      intro_md:
+        "Wands are the main weapon upgrade path in Wizard Alchemy. The starter wand gets you moving, shop wands raise early farming damage, hidden wands add stronger special stats, and the Sea of Oblivion wand gives late-game players another expensive bonus-stacking option. The useful comparison is cost, Attack, Attack Bonus, special bonus, and where the wand is actually found.",
+      description_md:
+        "## How wands change combat\n\nA wand is not the whole build, but it sets the damage floor for every fight. Potions give spells, races add bonuses, and ascension raises long-term power, but a weak wand still makes enemy farming and boss attempts drag. That is why the early goal is simple: replace the starter wand, then save for the next jump only when your gold route can support it.\n\nAttack is the base number on the wand. Attack Bonus adds a percent boost on top of that. Special bonuses change the feel of combat: Cooldown Reduction helps spell-heavy routes recast faster, while Crit Rate gives more burst when hits land well.\n\n## How to upgrade without wasting gold\n\n1. Replace Twisted Wand first. Wingbird is the cheap first step when 10 Attack starts feeling slow.\n2. Use Azure if you want a smoother early climb before the larger Demon Trident cost.\n3. Save for Demon Trident once normal enemy farming is steady. It is the clean mid-game value point because it jumps to 30 Attack and +15% Attack Bonus.\n4. Choose Ice Star or Ember Staff by playstyle. Ice Star is better when cooldown matters to your spell loop. Ember Staff is better when you want higher raw Attack and crit support.\n5. Treat Ember Wand as a Sea of Oblivion purchase. It costs more than the Departure Isle hidden wands, so judge it by its combined bonuses instead of its 30 Attack alone.\n\n## What the New Mainland wand changes\n\nEmber Wand makes the wand path less linear. Before it, the upgrade route mostly moves from cheap shop damage into expensive hidden damage. Ember Wand costs 50,000 Gold and trades lower raw Attack for stronger bonus stacking: +30% Attack Bonus, +30% Crit Rate, and +30 Cooldown Reduction.\n\nThat makes it a specialist late buy instead of a simple replacement for Ember Staff. If your current problem is basic damage, Ember Staff's 44 Attack is still the cleaner number. If your build cares about faster spell rhythm and crit-heavy farming, Ember Wand is worth reviewing once Sea of Oblivion routes are comfortable.",
+      how_it_works_md:
+        "`Cost` is the gold gate or starter status. `Attack` is the wand's base damage. `Attack Bonus` is the listed percent boost. `Special bonus` shows extra stats such as Cooldown Reduction or Crit Rate, which can change whether a wand fits spell spam, boss farming, or raw damage. `Source location` matters because some wands are normal shop buys, while others need a hidden waterfall, treehouse, or Sea of Oblivion route.",
+      description_json: {
+        "Starter wand":
+          "Twisted Wand is the free baseline. It has enough damage to start the game, but it should be replaced once a cheap shop wand is affordable.",
+        "Roger's shop wands":
+          "Roger's shop covers the normal early upgrade route: Wingbird, Azure, then Demon Trident. Demon Trident is the biggest shop jump before hidden wand prices take over.",
+        "Hidden Departure Isle wands":
+          "Ice Star and Ember Staff are expensive hidden Departure Isle upgrades. Ice Star leans into cooldown reduction, while Ember Staff has the highest raw Attack among the listed wands.",
+        "Sea of Oblivion wand":
+          "Ember Wand belongs to the New Mainland route. Its raw Attack is lower than Ember Staff, but the stacked Attack Bonus, Crit Rate, and Cooldown Reduction make it a late Sea of Oblivion option."
+      },
+      faq_json: [
+        {
+          q: "How many wands are in Wizard Alchemy?",
+          a: "There are 7 tracked wands when the starter Twisted Wand and the New Mainland Ember Wand are counted together."
+        },
+        {
+          q: "What is the best wand in Wizard Alchemy?",
+          a: "Ember Staff Wand has the highest listed raw Attack at 44 and adds +30% Crit Rate, so it is the cleanest raw damage pick. Ice Star Wand is better for cooldown-focused spell use, while Ember Wand is a late Sea of Oblivion option with stacked bonus stats."
+        },
+        {
+          q: "Where do you get Ice Star Wand?",
+          a: "Ice Star Wand is a hidden 20,000 Gold purchase inside the waterfall cave near the starting village."
+        },
+        {
+          q: "Where do you get Ember Wand?",
+          a: "Ember Wand is the 50,000 Gold Sea of Oblivion wand found on top of the Volcano."
+        },
+        {
+          q: "Should you buy every wand upgrade?",
+          a: "Not always. Replace Twisted early, then use Wingbird, Azure, or Demon Trident based on your gold. For expensive upgrades, choose the stat package that fits your build instead of buying only because the price is higher."
+        }
+      ],
+      cta_label: "Open wands catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Wands set the combat baseline in Wizard Alchemy. The route starts with Twisted Wand, moves through Roger's shop upgrades, branches into hidden Departure Isle picks like Ice Star and Ember Staff, then reaches the Sea of Oblivion Ember Wand for late bonus stacking.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: "/Wizard%20Alchemy/Wands/ember-staff-wand.webp"
+    };
+  }
+
+  if (config.code === "wizard-alchemy-brooms") {
+    const title = `All ${countLabel} Brooms in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Wizard Alchemy brooms list with prices, rarity, acceleration stats, max acceleration, and map locations for each travel broom.",
+      intro_md:
+        "Brooms are Wizard Alchemy's travel upgrade for moving across the map without chaining dash over and over. The current broom list is short, but the two choices have a real gap in price, rarity, acceleration, and where you buy them.",
+      description_md:
+        "## How to get and use a broom\n\nBrooms are bought from specific map spots with Coins. The Apprentice Broom is the early option under the portal at Departure Isle beach, while the Lava Broom is the expensive upgrade near Alchemy in the Sea of Oblivion.\n\n1. Go to the broom's listed location.\n2. Bring enough Coins for the listed price.\n3. Buy the broom and equip it from your hotbar.\n4. Hold forward to build speed, steer with your camera or movement controls, and point toward the ground when you want to land.\n5. Tap the hotbar slot again when you want to hop off.\n\n## How to choose between the two brooms\n\n| Broom | Best use | Why it matters |\n| --- | --- | --- |\n| Apprentice Broom | Early travel | It is much cheaper and appears on Departure Isle, so it is the practical first broom. |\n| Lava Broom | Faster long-distance travel | It costs far more, but its higher acceleration and max acceleration make it the better movement item once you can afford it. |\n\nThe Apprentice Broom is enough if you are still farming early Coins, materials, and starter enemies. The Lava Broom is the clear upgrade once Sea of Oblivion routes become part of your loop, especially when you are crossing more space between alchemy, enemies, materials, and chests.",
+      how_it_works_md:
+        "Broom stats are travel stats. `Price` tells you how much to save before checking the purchase spot. `Location` tells you where the broom is bought. `Acceleration` is how quickly the broom builds movement, while `Max Acceleration` is the higher movement ceiling listed for that broom. A bigger number means faster travel, but the cheaper broom can still be the right buy when you are early in the game.",
+      description_json: {
+        Brooms:
+          "Wizard Alchemy currently has two listed brooms. Apprentice Broom is the cheap starter travel item, while Lava Broom is the stronger Sea of Oblivion upgrade with higher movement stats."
+      },
+      faq_json: [
+        {
+          q: "How many brooms are in Wizard Alchemy?",
+          a: "There are 2 brooms currently listed: Apprentice Broom and Lava Broom."
+        },
+        {
+          q: "What is the best broom in Wizard Alchemy?",
+          a: "Lava Broom is the best broom by listed stats. It has 25 acceleration and 50 max acceleration, compared with Apprentice Broom's 10 acceleration and 35 max acceleration."
+        },
+        {
+          q: "How do you get the Apprentice Broom?",
+          a: "Buy the Apprentice Broom for 3K Coins under the portal at Departure Isle beach."
+        },
+        {
+          q: "How do you get the Lava Broom?",
+          a: "Buy the Lava Broom for 50K Coins to the right of Alchemy in the Sea of Oblivion."
+        },
+        {
+          q: "Do brooms help with combat?",
+          a: "Brooms are travel items. Their useful stats are movement stats, so they help you cross the map faster rather than improving wand damage, potion power, or enemy drops."
+        }
+      ],
+      cta_label: "Open brooms catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Brooms are Wizard Alchemy's travel items. Apprentice Broom gives players an early movement option on Departure Isle, while Lava Broom is the faster Sea of Oblivion upgrade once saving 50K Coins is realistic.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: "/Wizard%20Alchemy/Brooms/lava-broom.png"
+    };
+  }
+
+  if (config.code === "wizard-alchemy-robes") {
+    const title = `All ${countLabel} Robes in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Wizard Alchemy robes list with HP bonuses, Gold costs, rarity, Roger shop location, and upgrade-stage notes.",
+      intro_md:
+        "Robes are Wizard Alchemy's HP gear slot. They do not raise wand damage or potion strength; they give you a larger health pool while you farm stronger enemies, learn spell routes, and push boss attempts. The current robe list has Starmoon, Golden Reverie, and Starlight, with the two upper robes both listed at +60 HP.",
+      description_md:
+        "## How to buy and equip robes\n\nRobes come from Roger's equipment shop. Open the Wizard Robe section, compare the robe's Gold price with its HP bonus, then buy and equip the robe when survivability is blocking your next farming route.\n\n1. Go to Roger's shop near the equipment area.\n2. Open the Wizard Robe section.\n3. Check the in-game Gold price before spending, because current public price lists disagree.\n4. Buy the robe that fits your Gold route.\n5. Equip it before fighting enemies that can burst through your current health pool.\n\n## How to plan robe upgrades around HP\n\n| Robe | HP bonus | Best use |\n| --- | --- | --- |\n| Starmoon Robe | +30 HP | First defensive upgrade when starter health feels too thin. |\n| Golden Reverie Robe | +60 HP | Earlier +60 HP target if the shop price is affordable in your run. |\n| Starlight Robe | +60 HP | Late defensive target and the current S-tier robe listing. |\n\nA robe is worth buying when enemies are killing you before your spell loop finishes. If fights are safe but slow, spend on wand damage or potion progress first. HP without enough damage can make farming feel longer because you survive more hits but still take too long to clear the enemy.\n\n## Why the price caveat matters\n\nThe three robe names and HP bonuses are consistent across the current robe and equipment references, but the Gold costs are not. The listed card prices use the most detailed current robe table. If Roger's shop shows a different number in-game, treat the shop as the final price before saving around exact totals.",
+      how_it_works_md:
+        "`HP Bonus` is the flat health gain while the robe is worn. `Cost` is the listed Gold price, but exact costs should be checked in Roger's shop because current public price lists disagree. `Rarity` and `Tier` help scan the upgrade order; they do not add damage by themselves. The practical choice is whether you need +30 HP now or can save for a +60 HP robe.",
+      description_json: {
+        "Starter robe":
+          "Starmoon Robe is the first defensive buy. Its +30 HP is the small survival bump to consider once starter damage is no longer your only problem.",
+        "Early robe upgrade":
+          "Golden Reverie Robe is the first +60 HP robe in the list. It is useful when enemy hits start ending runs before your potion or wand loop finishes.",
+        "Late robe upgrade":
+          "Starlight Robe is the top tier-list robe, but it shares the same listed +60 HP bonus as Golden Reverie. Treat it as a late defensive target rather than an automatic damage upgrade."
+      },
+      faq_json: [
+        {
+          q: "How many robes are in Wizard Alchemy?",
+          a: "There are 3 tracked robes: Starmoon Robe, Golden Reverie Robe, and Starlight Robe."
+        },
+        {
+          q: "Where do you buy robes in Wizard Alchemy?",
+          a: "Robes are bought from Roger's shop in the Wizard Robe section."
+        },
+        {
+          q: "What is the best robe in Wizard Alchemy?",
+          a: "Starlight Robe is the current S-tier robe listing, but Golden Reverie Robe has the same listed +60 HP bonus. If you only care about HP, check the exact shop prices before choosing between the two."
+        },
+        {
+          q: "Why do robe prices differ between Wizard Alchemy references?",
+          a: "Current public robe lists agree on the three names and HP bonuses, but they disagree on Gold costs. The listed prices here follow the detailed robe table, so check Roger's shop in-game before saving around exact totals."
+        },
+        {
+          q: "Should you buy a robe before upgrading your wand?",
+          a: "Buy a robe when you are dying before a fight finishes. If enemies are safe but slow to clear, a wand or potion upgrade usually helps more than extra HP."
+        }
+      ],
+      cta_label: "Open robes catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Robes are Wizard Alchemy's HP gear slot. Starmoon gives the first +30 HP bump, while Golden Reverie and Starlight are +60 HP upgrades from Roger's Wizard Robe shop; exact Gold costs should be checked in-game because current price lists disagree.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: "/Wizard%20Alchemy/Robes/starlight-robe.png"
+    };
+  }
+
+  if (config.code === "wizard-alchemy-wizard-hats") {
+    const title = `All ${countLabel} Wizard Hats in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Wizard Alchemy wizard hats list with Roger shop hats, Lava Wizard Hat, Gold costs, HP bonuses, lava resistance, and locations.",
+      intro_md:
+        "Wizard hats are Wizard Alchemy's head-slot defensive gear. They add HP so you can survive harder enemy loops, and the Lava Wizard Hat adds lava resistance for Sea of Oblivion routes. The useful comparison is cost, HP, source location, and whether the hat is a normal Roger shop buy or a New Mainland pickup.",
+      description_md:
+        "## How hats fit into survival\n\nWizard hats are defensive upgrades, not damage upgrades. Extra HP gives you more room when enemies hit hard, but it does not make a weak wand, low-grade potion, or poor spell route clear fights faster. A good hat buy should solve a survival problem without delaying every damage upgrade you still need.\n\nStarmoon Hat is the early safety buy. Golden Reverie Hat is the clean 8K shop upgrade because its +40 HP value is consistent. Starlight Hat may match it, but read the in-game shop stat before spending 8K Gold if you are choosing between the two. Lava Wizard Hat is a different kind of goal because it adds lava resistance for Sea of Oblivion routes.\n\n## How to buy or find the next hat\n\n1. Visit Roger's Equipment Shop at spawn and open the Wizard Hat tab for Starmoon, Golden Reverie, and Starlight.\n2. Buy Starmoon when early enemies are forcing too many heals or respawns.\n3. Move to Golden Reverie or Starlight once 8K Gold is affordable without stalling your wand and potion route.\n4. Check Starlight's shop stat before buying if you need the exact HP number.\n5. Look for Lava Wizard Hat in Sea of Oblivion when lava resistance matters more than a normal shop upgrade.\n\n## How to compare defensive value\n\n| Situation | Better read | Why it matters |\n| --- | --- | --- |\n| Early farming feels risky | Starmoon Hat | It is much cheaper and still adds +20 HP. |\n| You need the safest 8K shop pick | Golden Reverie Hat | Its +40 HP listing is the most stable high-HP shop value. |\n| You want Starlight's look or stat line | Verify in Roger's shop | Its listed HP has appeared inconsistently, so confirm before spending. |\n| Sea of Oblivion lava routes matter | Lava Wizard Hat | It adds +40 HP and +100% lava resistance instead of only HP. |\n\nHP is most useful when it prevents a death that would interrupt farming or boss attempts. If fights are slow because your damage is low, upgrade your wand, brew stronger potions, or refine spells before putting every spare Gold into defensive gear.",
+      how_it_works_md:
+        "Hats are grouped by obtainment route because the player action changes. `Cost` shows the Gold price, `HP` shows the listed health bonus, and `Lava Resistance` only appears when the hat has that special Sea of Oblivion utility. `Source location` tells you where to buy or find the hat, while `Progression use` explains whether it is an early safety buy, an 8K shop upgrade, or a New Mainland utility pickup.",
+      description_json: {
+        "Roger's shop hats":
+          "Roger's shop hats are the normal defensive route: Starmoon is the cheap early HP buy, while Golden Reverie and Starlight are the 8K Gold options. Check Starlight's in-game stat line before choosing it over Golden Reverie because its HP value has appeared inconsistently.",
+        "Sea of Oblivion hat":
+          "Lava Wizard Hat belongs to the Sea of Oblivion route instead of Roger's normal shop path. Its +40 HP is useful, but the extra +100% lava resistance is the reason it stands apart from the other hats."
+      },
+      faq_json: [
+        {
+          q: "How many wizard hats are in Wizard Alchemy?",
+          a: "There are 4 tracked wizard hats: Starmoon Hat, Golden Reverie Hat, Starlight Hat, and Lava Wizard Hat. The first three are Roger shop hats, while Lava Wizard Hat belongs to the Sea of Oblivion route."
+        },
+        {
+          q: "What is the best wizard hat in Wizard Alchemy?",
+          a: "Golden Reverie Hat is the safest normal shop answer because it costs 8K Gold and is consistently listed at +40 HP. Lava Wizard Hat is better when you specifically need Sea of Oblivion lava resistance."
+        },
+        {
+          q: "Is Starlight Hat better than Golden Reverie Hat?",
+          a: "Treat Starlight Hat as an 8K Gold alternative, but check its in-game stat line before buying. If it shows +40 HP, it matches Golden Reverie by stat and cost. If it shows +20 HP, Golden Reverie is the stronger defensive buy."
+        },
+        {
+          q: "Where do you get wizard hats?",
+          a: "Starmoon, Golden Reverie, and Starlight are bought from Roger's Equipment Shop through the Wizard Hat tab. Lava Wizard Hat is listed as a Sea of Oblivion pickup behind the fiery Lava waterfall next to the base."
+        },
+        {
+          q: "Should you buy a hat before upgrading your wand?",
+          a: "Buy a hat when low HP is causing deaths, but do not let defense replace damage progression. If enemies take too long to kill, a stronger wand, better potion, or refined spell usually helps more than another HP item."
+        }
+      ],
+      cta_label: "Open wizard hats catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Wizard hats are Wizard Alchemy's head-slot survival gear. Starmoon, Golden Reverie, and Starlight cover the Roger shop HP route, while Lava Wizard Hat adds Sea of Oblivion lava resistance for players moving into New Mainland content.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: "/Wizard%20Alchemy/Wizard%20Hats/lava-wizard-hat.webp"
+    };
+  }
+
+  if (config.code === "wizard-alchemy-enemies") {
+    const title = `All ${countLabel} Enemies in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Wizard Alchemy enemies list with Departure Isle and Sea of Oblivion drops, farm roles, locations, and boss targets.",
+      intro_md:
+        "Enemies are the combat farming targets behind Wizard Alchemy's material loop. Dwarfs and goblins cover the first Departure Isle drops, mutants and Dwarf King carry the late first-island route, and Sea of Oblivion enemies add the New Mainland orc, priest, and Lava Behemoth material pools.",
+      description_md:
+        "## How enemies fit into farming\n\nEnemy farming fills the gap between safe gathering nodes and stronger potion attempts. Blueberries, mushrooms, nests, and chests can carry the first few brews, but higher Magic Power materials usually push you into combat. That is where enemy drops start to decide the route.\n\nDeparture Isle starts with simple family routes. Pickaxe Dwarf and Warhammer Dwarf cover dwarf materials such as Dwarf Emblem, Golden Tooth, and Flame Crest. Knife Goblin and Archer Goblin cover Goblin Finger, Goblin Bone, and the first Copper Earring chance. Mutant Warhammer Dwarf, Mutant Goblin Archer, and Dwarf King are the harder first-island targets when Furnace Core or Light/Dark Shards become the goal.\n\nSea of Oblivion continues the same idea with New Mainland drops. Sword Orc, Bow Orc, Axe Orc, Orc Priest, Mutant Axe Orc, Mutant Orc Priest, and Lava Behemoth are best read as material drop targets until a full spawn-route map exists.\n\n## How to choose the right enemy to farm\n\n1. Start from the missing material. Goblin Finger points to Knife Goblin or Archer Goblin, while Dwarf Emblem points to Pickaxe Dwarf or Warhammer Dwarf.\n2. Prefer fast kills before harder drops. A weaker enemy you can clear quickly often beats a stronger target that makes every run slow.\n3. Move to Archer Goblin, Warhammer Dwarf, or mutant enemies when Copper Earring, Flame Crest, Furnace Core, Light Shard, or Dark Shard becomes part of your potion plan.\n4. Add Dwarf King only when your wand damage, HP, movement, and potion setup make the fight consistent.\n5. Treat Sea of Oblivion enemies as New Mainland drop-pool targets until exact spawn landmarks are captured in game.\n\n## What to avoid when reading enemy drops\n\nDrop odds are only useful when the fight is repeatable for your build. A 43% material chance still feels bad if you die often or spend too long reaching the enemy. For most players, the cleaner route is to farm the easiest enemy that drops the missing material, brew stronger spells, upgrade gear, then move into mutants and bosses once the clear time feels steady.",
+      how_it_works_md:
+        "`Area` tells you the broad map stage. `Enemy type` separates normal enemies, elite enemies, and bosses. `Drops` lists the known drop pool and odds when a percentage is known. `Farm role` explains why a player would repeat that target, while `Difficulty stage` gives the practical progression point without inventing HP or damage values. Sea of Oblivion entries have less location detail, so read `Source location` as the current route hint rather than a full spawn map.",
+      description_json: {
+        "Departure Isle dwarfs":
+          "Pickaxe Dwarf is the safer starter dwarf route for Dwarf Emblem and Golden Tooth. Warhammer Dwarf adds Flame Crest once normal fights feel stable.",
+        "Departure Isle goblins":
+          "Knife Goblin is the starter goblin farm for Goblin Finger and Goblin Bone. Archer Goblin matters later because it adds Copper Earring to the goblin route.",
+        "Elite and boss enemies":
+          "Mutant enemies and Dwarf King are the late Departure Isle targets for Furnace Core, Light Shard, Dark Shard, and high-value materials. Treat these as upgrade-check fights, not beginner loops.",
+        "Sea of Oblivion enemies":
+          "Sea of Oblivion enemies are New Mainland drop targets. Their drop pools are clear, but exact spawn landmarks and images still need a clean in-game capture pass."
+      },
+      faq_json: [
+        {
+          q: "How many enemies are in Wizard Alchemy?",
+          a: "The current list tracks 14 enemies: 7 Departure Isle enemies with full monster details and 7 Sea of Oblivion enemies tied to New Mainland material drops."
+        },
+        {
+          q: "Which enemy should beginners farm first?",
+          a: "Knife Goblin and Pickaxe Dwarf are the cleanest first farming loop. They drop early materials, give Gold, and are easier to repeat before stronger wands and potions are ready."
+        },
+        {
+          q: "Which enemies drop Furnace Core?",
+          a: "Mutant Warhammer Dwarf, Mutant Goblin Archer, and Dwarf King drop Furnace Core on Departure Isle. Mutant enemies are usually the better volume route, while Dwarf King is the boss route."
+        },
+        {
+          q: "Which enemies drop Light Shard and Dark Shard?",
+          a: "Mutant Warhammer Dwarf and Mutant Goblin Archer drop Light Shard and Dark Shard. Save those shards for element planning instead of treating them like normal Magic Power materials."
+        },
+        {
+          q: "Why do some Sea of Oblivion enemies have no image?",
+          a: "The Sea of Oblivion enemies are confirmed through material drops, but clean monster portraits and exact spawn landmarks still need an in-game capture pass."
+        }
+      ],
+      cta_label: "Open enemies catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Enemies are the combat side of Wizard Alchemy's material grind. Dwarfs and goblins cover early Departure Isle farming, mutants and Dwarf King handle Furnace Core and shard routes, and Sea of Oblivion adds orc, priest, and Lava Behemoth material targets for New Mainland progression.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: "/Wizard%20Alchemy/Enemies/dwarf-king.png"
+    };
+  }
+
+  if (config.code === "wizard-alchemy-chests") {
+    const title = `All ${countLabel} Chest Locations in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Find all 10 Wizard Alchemy chest locations with route hints, landmarks, reward caveats, and New Mainland notes.",
+      intro_md:
+        "Chests are fixed Wizard Alchemy pickups that help with material farming before every enemy route feels fast. The current verified route has 10 first-island locations across spawn, the river path, the mine, the lighthouse route, Dwarf King's area, the treehouse, and a hidden goblin camp platform.",
+      description_md:
+        "## How chests fit into material farming\n\nChests are worth routing because they give a chance at useful resources without forcing a fight every few steps. They are especially helpful early, when Pickaxe Dwarfs, Warhammer Dwarfs, goblins, and Dwarf King routes can take longer than a quick pickup loop.\n\nThe listed rewards are broad rather than chest-specific. Chests can give materials, gold or money, emblems, crests, shards, rare materials, and higher-rarity resources, but exact reward tables by location are not clearly listed. Treat the locations as the reliable part and the reward pool as a general farming bonus.\n\n## How to run the full chest loop\n\n1. Start at spawn and grab the shoreline or Top Potions List island chest before leaving the platform area.\n2. Follow the river path to the first farming area and check the rocks near the tree.\n3. Sweep the Traveler camp and bridge route, then move into the mine cluster.\n4. Inside the mine, open the normal cave chest, walk through the illusion wall for the secret cave chest, then climb above the mine for the top chest.\n5. Move toward the beach route and group the lighthouse island, Dwarf King throne, and treehouse checks together.\n6. Check the hidden goblin camp platform if you skipped it while moving between spawn, bridge, and mine routes.\n\n| Route group | Why it helps |\n| --- | --- |\n| Starter-area chests | Fast pickups before combat or long travel starts. |\n| Forest and mine chests | The densest cluster, with one cave, one illusion wall, one climb, and one hidden platform route. |\n| Island and boss-route chests | Longer travel, but easy to combine once you are already near the lighthouse and Dwarf King side. |\n\n## What to check before opening\n\nWalk close to the chest and hold the interact key when the prompt appears. Keep inventory space open before opening, because the game may not hold extra materials for you. Chests are listed as fixed spawns with a one-hour respawn timer, so a missing chest may already have been opened on that server.\n\n## Why Sea of Oblivion is not listed yet\n\nWizard Alchemy now has New Mainland and Sea of Oblivion content, but the verified chest route still points to the 10 first-island locations. Keep the list to the first-island route until exact lava island or Sea of Oblivion spots are confirmed.",
+      how_it_works_md:
+        "`Route order` is a suggested sweep, not an official in-game number. `Landmark` and `location hint` are the fastest way to find each chest when location names vary. `How to reach` gives the practical movement route, while `difficulty stage` explains whether the stop is a starter pickup, hidden path, climb, island route, or boss-route landmark. Reward notes stay cautious because exact per-chest reward pools are not clearly listed.",
+      description_json: {
+        "Starter-area chests":
+          "The first two stops sit around spawn and the early river route. They are the easiest pickups to grab before enemy farming starts.",
+        "Forest and mine chests":
+          "This section covers the Traveler camp, mine entrance, illusion wall, mine top, and goblin camp platform. Several are hidden, so landmarks matter more than just running forward.",
+        "Island and boss-route chests":
+          "These stops sit near the lighthouse, Dwarf King route, and treehouse. Group them together so the beach and high-tree routes are not repeated."
+      },
+      faq_json: [
+        {
+          q: "How many chests are in Wizard Alchemy?",
+          a: "There are 10 currently verified chest locations in the first-island route. The list covers spawn, river, mine, lighthouse, Dwarf King, treehouse, and hidden platform spots."
+        },
+        {
+          q: "How do you open chests in Wizard Alchemy?",
+          a: "Walk up to a chest until the interact prompt appears, then hold the interact key. Make sure your inventory has space before opening so the materials are not wasted."
+        },
+        {
+          q: "How often do Wizard Alchemy chests respawn?",
+          a: "The current listed timer is one hour at fixed locations. If a chest is missing, it may have been opened recently on that server."
+        },
+        {
+          q: "What rewards do chests give?",
+          a: "Chests are material and resource pickups that can give gold or money, emblems, crests, shards, rare materials, and higher-rarity resources. Exact rewards by chest are not clearly listed."
+        },
+        {
+          q: "Are there Sea of Oblivion chest locations?",
+          a: "No separate Sea of Oblivion chest route is verified in this 10-location set yet. The New Mainland update exists, but the chest page should wait for exact Sea of Oblivion locations before adding that section."
+        },
+        {
+          q: "Do you need a broom or movement race for the chest route?",
+          a: "No. The verified route can be run on foot, but movement speed, jump height, or a broom makes the mine climb, treehouse path, and long beach route faster."
+        }
+      ],
+      cta_label: "Open chests catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Chests are fixed material pickups across Wizard Alchemy's first-island route. The tracked set covers 10 spawn, mine, lighthouse, boss-route, treehouse, and hidden-platform locations, with reward details kept cautious because exact chest-specific pools are not listed.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: "/Wizard%20Alchemy/Chests/spawn-river-rocks.jpg"
+    };
+  }
+
+  if (config.code === "wizard-alchemy-enchantments") {
+    const title = `All ${countLabel} Enchantments in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Compare all 10 Wizard Alchemy enchantments by stat, max tier value, build role, and Enchanted Stone roll route.",
+      intro_md:
+        "Enchantments are random wand upgrades in Wizard Alchemy. Each roll spends one Enchanted Stone and can give one of 10 enchantment types, with every type scaling from Tier I to Tier V. The useful comparison is the stat, the Tier V max value, and whether the roll fits damage, element damage, farming, movement, or cooldown-heavy play.",
+      description_md:
+        "## How enchanting works on a wand\n\nEnchanting starts after you have a wand worth improving. Go to the enchanting table on the small island near the main Sea of Oblivion area, equip your wand, hold `E`, and confirm the roll. One roll spends one Enchanted Stone.\n\nThe result is random. You do not choose the enchantment name or the tier, so it is better to farm several stones before chasing a perfect Tier V result. Keep a useful lower-tier roll if it supports your current build, then roll again when you can afford to gamble.\n\n## How to farm Enchanted Stones\n\nEnchanted Stones are the resource that slows the whole system down. Treat guaranteed and repeatable routes as the backbone, then use chance rewards and codes as bonus supply.\n\n- Harryint's lava golem quest is the predictable route because it rewards a stone after the boss quest is completed.\n- Enchanted Sword Ferns on the lava island are repeatable, but they have more HP than normal enemies, so weak builds farm them slowly.\n- Rare chests, mutant enemies such as Mutant Iron Axe Orc, and other quests can add stones while you are already moving through the map.\n- Code rewards can include stones, but codes change quickly. Redeem current codes when they are active instead of planning your whole enchantment route around them.\n\n## Which rolls are worth keeping\n\n| Goal | Rolls to value |\n| --- | --- |\n| Boss burst | Fatal for bigger crits, Critical Hit when more crit triggers matter. |\n| Element builds | Blazing Fire for Fire, Thunder for Thunder, Shadow for Dark, and Ice for Ice. |\n| Potion crafting and rare farming | Luck, especially at higher tiers. |\n| Travel and dodging | Swift when movement speed helps chest loops, stone farming, or boss positioning. |\n| Spell uptime | Staying Calm when cooldown pressure matters more than one-hit damage. |\n| General fallback damage | Magic, mainly when the build does not already have a better crit or element roll. |\n\nDo not judge a roll only by the number. A 20% Ice Damage Boost is better than a 10% Attack Boost if your main spells are Ice-based, while Luck can be the right keep even though it is not a direct boss-damage stat.",
+      how_it_works_md:
+        "`Stat` names the buff added to the wand. `Tier I`, `Tier III`, and `Tier V` show the main scaling checkpoints, and `Max value` is the Tier V cap. `Build role` and `Best for` translate the stat into a player decision, such as crit burst, element damage, movement, crafting, or cooldown uptime. `Stone route` stays the same for every enchantment because each one comes from a random Enchanted Stone roll at the Sea of Oblivion enchanting table.",
+      description_json: {
+        "Damage enchantments":
+          "Fatal, Critical Hit, and Magic are the general combat rolls. Fatal and Critical Hit form the main crit pair, while Magic is the smaller all-purpose attack boost.",
+        "Element damage enchantments":
+          "Blazing Fire, Thunder, Shadow, and Ice are strongest when the rest of the build already leans into that element. Blazing Fire has the highest listed element cap at Tier V.",
+        "Utility and farming enchantments":
+          "Luck, Swift, and Staying Calm are keep-worthy for farming, travel, or spell uptime instead of direct burst. Luck and Staying Calm both reach 50% at Tier V."
+      },
+      faq_json: [
+        {
+          q: "How many enchantments are in Wizard Alchemy?",
+          a: "There are 10 verified enchantment types: Luck, Swift, Fatal, Critical Hit, Blazing Fire, Thunder, Shadow, Ice, Magic, and Staying Calm."
+        },
+        {
+          q: "Can you choose the enchantment you want?",
+          a: "No. Each roll spends one Enchanted Stone and gives a random enchantment at a random tier. Farm extra stones before chasing a specific Tier V roll."
+        },
+        {
+          q: "Where do you enchant a wand?",
+          a: "Use the enchanting table on the small island near the main Sea of Oblivion area. Equip your wand, hold `E`, and confirm the roll."
+        },
+        {
+          q: "Which enchantments are best for damage?",
+          a: "Fatal and Critical Hit are the main crit pair. Blazing Fire, Thunder, Shadow, and Ice are better when your spell setup already focuses on that element."
+        },
+        {
+          q: "How do you get Enchanted Stones?",
+          a: "Farm Enchanted Sword Ferns, complete Harryint's lava golem quest, check rare chests, clear stone-dropping mutant enemies, finish quests, and redeem active codes when they include stones."
+        },
+        {
+          q: "Does every enchantment have five tiers?",
+          a: "Yes. Each enchantment scales from Tier I through Tier V. The card values focus on Tier I, Tier III, and Tier V so the starting, middle, and max checkpoints are easy to compare."
+        }
+      ],
+      cta_label: "Open enchantments catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Enchantments add random extra stats to Wizard Alchemy wands through Enchanted Stone rolls. The current set has 10 rolls covering crit damage, crit rate, element damage, attack boost, alchemy luck, movement speed, and cooldown-focused utility.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: null
+    };
+  }
+
+  if (config.code === "wizard-alchemy-locations") {
+    const title = `All ${countLabel} Locations in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Wizard Alchemy locations list with spawn services, chest routes, hidden shops, boss landmarks, and Sea of Oblivion stops.",
+      intro_md:
+        "Wizard Alchemy locations are the route anchors behind the whole upgrade loop. Spawn services handle brewing, selling, quests, and gear, while the forest, mine, beach, boss, and Sea of Oblivion routes decide where you farm materials, open chests, buy hidden items, enchant wands, and push into New Mainland upgrades.",
+      description_md:
+        "## How to move through the map without wasting runs\n\nLocations work best when you treat them as loops. Start at spawn, choose a goal, then move through the route that gives the material, quest, chest, shop, boss, or upgrade you actually need. Wandering without a target fills your bag with random materials and usually sends you back to Lombart or the Alchemy Table before you have brewed anything useful.\n\nA clean route usually looks like this:\n\n1. Start at Spawn Village to brew, refine, sell extras, take a quest, or buy gear from Roger.\n2. Move down the river path for early Pickaxe Dwarf, chest, and starter material routes.\n3. Treat Traveler camp as the split point for the mine cluster, bridge-side goblin platform, or beach route.\n4. Clear the mine cluster together: normal mine, secret wall cave, and mine mountain top.\n5. Push toward the beach side when you need lighthouse, Dwarf King, treehouse, or waterfall cave routes.\n6. Move into Sea of Oblivion only when New Mainland materials, enchanting, lava-island farming, broom upgrades, or late gear are the goal.\n\n## Which place to learn first by goal\n\n| Goal | Best location to learn | Why it helps |\n| --- | --- | --- |\n| Brew or refine spells | Alchemy Table and Refine Machine | Every material loop becomes useful only after you turn drops into potions or upgrades. |\n| Sell extras safely | Spawn Village and Leaderboard Shoreline | Lombart is the cleanup point when inventory pressure starts slowing your route. |\n| Start gold and material farming | First River Farming Path | It is close to spawn and teaches the early enemy spacing without a long run back. |\n| Run hidden chest routes | Mine Entrance, Secret Mine Cave, Mine Mountain Top | These three stops are close together and teach the cave, illusion wall, and climb pattern. |\n| Prepare for boss farming | Dwarf King Cave and Throne | The boss route is worth learning after your wand, HP gear, movement, and spells are stable. |\n| Chase hidden wand upgrades | Treehouse Branch, Waterfall Cave, Volcano Summit | These locations hold the stronger wand route once normal shop upgrades stop being enough. |\n| Roll wand enchantments | Enchanting Table Island | The table spends Enchanted Stones, so it matters after you can farm stones consistently. |\n\n## What not to over-assume from the map\n\nThe stable landmarks are the useful part: spawn services, chest clusters, hidden caves, boss routes, shops, and New Mainland upgrade stops. Some exact Sea of Oblivion enemy spawns and material node paths are better treated as broad routes, so read New Mainland rows as anchors rather than exact coordinates.\n\nThat caution matters most when farming. If you need a material, start from the location or enemy route tied to that drop, then adjust after you see how fast your build clears the area. A weaker route you can repeat cleanly often beats a late route that causes deaths, long resets, or wasted potion attempts.",
+      how_it_works_md:
+        "`Area` tells you the broad map region. `Location type` explains whether the place is a spawn service, shop, farm route, hidden route, boss route, island, or New Mainland stop. `Landmark` is the fastest navigation clue when exact directions vary. `Key NPCs` lists the NPC or boss tied to the place when one is known. `Key content` and `related farms` show why the location matters, while `travel tip` gives the practical route habit to use in-game.",
+      description_json: {
+        "Departure Isle spawn and services":
+          "Spawn is the reset point for crafting, selling, quests, leaderboards, and early gear. Learn these stops first because most farming loops eventually send you back here.",
+        "Forest, river, and mine routes":
+          "These locations cover the first real material and chest loops. They also teach the hidden-route habits Wizard Alchemy uses later: check rocks, tents, caves, climbs, and off-path platforms.",
+        "Beach, boss, and high routes":
+          "This side of Departure Isle connects mid enemy farming, the lighthouse, Dwarf King, treehouse, and waterfall cave. It is where route planning starts to matter more than running straight from spawn.",
+        "Sea of Oblivion routes":
+          "Sea of Oblivion is the New Mainland layer for enchanting, lava-island farming, broom upgrades, the volcano wand route, and lava-resistance gear. These rows focus on stable landmarks instead of every enemy or material path."
+      },
+      faq_json: [
+        {
+          q: "How many locations are tracked in Wizard Alchemy?",
+          a: "There are 20 tracked route and service landmarks in the current list. They cover spawn services, forest and mine routes, beach and boss landmarks, hidden upgrade spots, and Sea of Oblivion stops."
+        },
+        {
+          q: "Which Wizard Alchemy locations should beginners learn first?",
+          a: "Learn Spawn Village, the Alchemy Table, Roger's Equipment Shop, Harryint's Wanted Board, the First River Farming Path, Traveler Camp, and the Mine Entrance first. Those locations cover early quests, brewing, selling, gear, enemies, and chests."
+        },
+        {
+          q: "Where is the Alchemy Table in Wizard Alchemy?",
+          a: "The Alchemy Table is at the spawn area. Turn around from the spawn point to find it, then use gathered materials to brew potions. The Refine machine sits next to the Alchemy Table for upgrading duplicate potions."
+        },
+        {
+          q: "Where is Dwarf King in Wizard Alchemy?",
+          a: "Dwarf King is tied to the Dwarf King Cave route on Departure Isle. Start from the lighthouse side as a route anchor, then look for the mountain area with the hammer wall and chained stone landmark."
+        },
+        {
+          q: "Where do you enchant wands in Wizard Alchemy?",
+          a: "Wand enchanting happens at the Enchanting Table Island, a small island near the main Sea of Oblivion area. Bring Enchanted Stones before you roll because each enchantment attempt consumes one stone."
+        },
+        {
+          q: "Are the Sea of Oblivion locations fully mapped?",
+          a: "The Sea of Oblivion rows cover stable landmarks such as the main base, enchanting island, lava island, volcano, and lava waterfall. Treat them as route anchors rather than a full coordinate map for every enemy and material path."
+        }
+      ],
+      cta_label: "Open locations catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Locations are the route anchors for Wizard Alchemy progression. Spawn services handle brewing, selling, quests, and gear, while forest, mine, beach, boss, hidden-shop, and Sea of Oblivion landmarks shape the material, chest, enchantment, and New Mainland upgrade loops.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: "/Wizard%20Alchemy/Locations/alchemy-table-refine-machine.jpg"
+    };
+  }
+
+  if (config.code === "wizard-alchemy-npcs") {
+    const title = `All ${countLabel} NPCs in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Find Wizard Alchemy NPCs by role, area, location, related system, quests, shops, and useful map landmarks.",
+      intro_md:
+        "NPCs in Wizard Alchemy point you toward the game's important early systems: Roger handles equipment, Lombart clears materials, Harryint and Fugitive Orc give quest routes, and landmark NPCs such as Traveler, Optimistic Miner, and Lemin help you navigate chest and farming paths.",
+      description_md:
+        "## How NPCs fit into early routing\n\nWizard Alchemy puts several important NPCs around the starter island, and most of them are useful because they sit beside a system you already need. Roger is the equipment stop for wands, hats, and robes. Lombart is the material-selling NPC in the starter village. Harryint is the spawn-side quest NPC near the Wanted board, while Fugitive Orc is an easy forest quest target if you have berries.\n\nThe remaining named NPCs are still worth tracking because they act as map anchors. Optimistic Miner marks the mine entrance and explains chest rewards. Traveler marks the tent, Cauldron, bridge, and lighthouse route. Lemin marks the spawn leaderboard platform with Lombart and the sandy-island chest route.\n\n## How to route the useful NPCs\n\n1. Start around spawn and identify Roger, Lombart, Harryint, and the leaderboard platform.\n2. Use Harryint when you want repeatable quest Gold and materials before stronger farming routes feel comfortable.\n3. Sell unwanted materials to Lombart only after checking whether they are needed for a potion, quest, or later brew.\n4. Move from spawn toward the forest for Fugitive Orc if you are doing the berry quest or heading toward mutant-route landmarks.\n5. Use Optimistic Miner and Traveler as route anchors when running mine, tent, bridge, lighthouse, or chest paths.\n\n## What counts as an NPC here\n\nThe Alchemy table, Refine machine, Wanted board, Cauldron, chests, and enchanting table are interactables, not NPCs. They matter to progression, but they belong with interactable objects rather than character NPCs.",
+      how_it_works_md:
+        "`NPC role` tells you whether the character is a shop, quest giver, material seller, hint NPC, or landmark. `Location` is the shortest route clue, while `Related system` tells which part of progression the NPC connects to. `What they do` gives the direct function, and `Player use` explains the practical reason to find them during a normal route.",
+      description_json: {
+        "Spawn services":
+          "Roger and Lombart are the two service NPCs around the starter village. Visit Roger for combat and HP gear, then use Lombart when extra materials are taking up inventory slots.",
+        "Route and quest NPCs":
+          "Harryint and Fugitive Orc are quest-oriented NPCs. Harryint sits near the Wanted board at spawn, while Fugitive Orc is an early forest side quest tied to berries.",
+        "Landmark NPCs":
+          "Traveler, Optimistic Miner, and Lemin are most useful as navigation anchors. Their names help locate the tent, mine entrance, leaderboard platform, and nearby chests."
+      },
+      faq_json: [
+        {
+          q: "How many NPCs are in Wizard Alchemy?",
+          a: "This list tracks 7 named NPCs: Roger, Lombart, Harryint, Fugitive Orc, Lemin, Optimistic Miner, and Traveler."
+        },
+        {
+          q: "Which NPC sells equipment in Wizard Alchemy?",
+          a: "Roger is the equipment shop NPC. Visit Roger when you want to buy wands, wizard hats, or wizard robes with Gold."
+        },
+        {
+          q: "What does Lombart do in Wizard Alchemy?",
+          a: "Lombart is the material-selling NPC in the starter village. Use him when you want to sell unwanted materials instead of keeping every ingredient in your material bag."
+        },
+        {
+          q: "Where is Harryint in Wizard Alchemy?",
+          a: "Harryint is on the right side of the spawn location beside the Wanted board. He is the quest NPC tied to early quest rewards and the later lava golem boss quest route."
+        },
+        {
+          q: "Is Traveler a shop NPC?",
+          a: "Treat Traveler as a route landmark. Use Traveler's camp to find the tent, Cauldron, bridge, lighthouse path, and nearby chest route."
+        },
+        {
+          q: "Are the Alchemy table and enchanting table NPCs?",
+          a: "No. The Alchemy table, Refine machine, Wanted board, Cauldron, chests, and enchanting table are interactable objects, so they are kept out of the NPC list."
+        }
+      ],
+      cta_label: "Open NPCs catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "NPCs connect Wizard Alchemy's early systems: Roger sells equipment, Lombart handles unwanted materials, Harryint and Fugitive Orc offer quest routes, and named landmarks such as Traveler, Optimistic Miner, and Lemin help players find chests and farming paths.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: null
+    };
+  }
+
+  if (config.code === "wizard-alchemy-resource-nodes") {
+    const title = `All ${countLabel} Resource Nodes in Wizard Alchemy`;
+
+    return {
+      code: config.code,
+      title,
+      seo_title: title,
+      meta_description:
+        "Find Wizard Alchemy resource nodes by area, material source, route safety, chest use, and Enchanted Stone caveats.",
+      intro_md:
+        "Wizard Alchemy resource nodes are the safer side of the material loop: bushes, nests, mushrooms, New Mainland pickups, chests, and one Enchanted Stone source that needs a combat-ready build. The useful split is whether a source is a safe gathering stop, a broad chest pickup, or an enemy-like object.",
+      description_md:
+        "## How safe gathering fits into potion farming\n\nSafe nodes are useful because they let you collect potion ingredients before every route becomes a fight. Blueberry Bushes, Mushroom Clusters, and Bird Nests cover the first Departure Isle brews. Their materials are low Magic Power, but they are easy to replace and help you learn brewing before goblins, dwarfs, mutants, or Dwarf King routes matter.\n\nSea of Oblivion has its own starter pickups. Fern, Sulphur Lumps, and Volcanic Rock come from New Mainland gathering sources, so they give you a safer way to start the lava-island material loop before orc, priest, mutant, and Lava Behemoth drops become realistic.\n\n## How to run a safer gathering route\n\n1. Start on Departure Isle by sweeping Blueberry Bushes, Mushroom Clusters, and Bird Nests while you learn movement and potion brewing.\n2. Add nearby chests when they are already on your path, but do not treat one chest as a guaranteed source for one specific material.\n3. Move into normal enemies once starter ingredients stop reaching the Magic totals you need.\n4. In Sea of Oblivion, gather Fern, Sulphur Lumps, and Volcanic Rock before pushing too hard into enemy farms.\n5. Save Enchanted Sword Ferns for when your build can handle Sea of Oblivion combat, because they behave like tougher combat farming rather than peaceful gathering.\n\n| Source type | Best read | What to avoid |\n| --- | --- | --- |\n| Safe gathering nodes | Low-risk materials for early or area-starting brews | Expecting them to replace rare enemy drops |\n| Chests | Broad bonus pickups while routing around the map | Assuming a specific chest has a fixed listed material pool |\n| Enemy-like destructible sources | Special resources such as Enchanted Stones | Treating them like peaceful gathering nodes |\n\n## Why some special sources are handled carefully\n\nBig Bird's Nest is not treated like a normal safe node here. Reports tie it to rare materials and shards, which makes it closer to a special farm target than a simple starter pickup. Until its source behavior is clearer, plan around the standard nodes, chests, enemies, and boss routes first.",
+      how_it_works_md:
+        "`Area` tells you which map stage the source belongs to. `Node type` separates safe gathering, fixed chest pickups, and enemy-like destructible sources. `Materials` names the resource or reward group tied to the source, while `route use` explains why a player would include it in a farming loop. `Difficulty stage` is practical progression language, and `respawn or repeat note` stays cautious when sources do not list exact timers.",
+      description_json: {
+        "Departure Isle gathering nodes":
+          "Blueberry Bushes, Mushroom Clusters, and Bird Nests are the clean starter pickups. They give low-Magic ingredients, but they let new players brew without taking every early fight.",
+        "Sea of Oblivion gathering nodes":
+          "Fern Bushes, Sulphur Lumps, and Volcanic Rocks are the New Mainland gathering nodes tied to Fern, Sulphur Lumps, and Volcanic Rock. Use them as safer route pieces before enemy drops become comfortable.",
+        "Shared pickup sources":
+          "Chests are fixed pickups with broad material and shard rewards. They sit between gathering and combat farming because they can pay out useful resources without forcing a fight.",
+        "Enchanted Stone sources":
+          "Enchanted Sword Ferns are for Enchanted Stones, not normal potion materials. Treat them as a combat-ready Sea of Oblivion farm, not as a peaceful starter node."
+      },
+      faq_json: [
+        {
+          q: "How many Wizard Alchemy resource nodes are listed?",
+          a: "The list tracks 8 resource sources: 3 Departure Isle gathering nodes, 3 Sea of Oblivion gathering nodes, 1 shared chest pickup source, and 1 Enchanted Stone source."
+        },
+        {
+          q: "What are the safest starter resource nodes?",
+          a: "Blueberry Bushes, Mushroom Clusters, and Bird Nests are the safest starter nodes. They give Blueberry, Withered Mushroom, and Seagull Egg for early potion attempts before enemy farming feels steady."
+        },
+        {
+          q: "Are chests already covered somewhere else?",
+          a: "Yes. Chests have their own location route. They appear here only as a broad pickup source because they can give materials, shards, and other resources while you move through the map."
+        },
+        {
+          q: "Are Enchanted Sword Ferns safe gathering nodes?",
+          a: "No. Enchanted Sword Ferns are tied to Enchanted Stone farming and should be treated as Sea of Oblivion combat farming, not as peaceful gathering."
+        },
+        {
+          q: "Why is Big Bird's Nest not listed?",
+          a: "Big Bird's Nest is better treated as a special farm target until its behavior is clearer. It is not listed beside normal safe nodes because the reported drops overlap with rare materials and shards."
+        },
+        {
+          q: "Do resource nodes replace enemy farming?",
+          a: "No. Resource nodes are best for starter materials, safer New Mainland pickups, and route bonuses. Once you need Dwarf Emblem, Goblin Finger, Flame Crest, Copper Earring, Furnace Core, or boss materials, enemy farming still matters."
+        }
+      ],
+      cta_label: "Open resource nodes catalog",
+      cta_url: buildGameDatasetCatalogPath(config.code),
+      wiki_md:
+        "Resource nodes cover Wizard Alchemy's safer material sources: starter bushes, mushrooms, nests, New Mainland pickups, broad chest rewards, and the Enchanted Stone source that still needs combat-ready handling.",
+      wiki_sort_order: config.sortOrder,
+      wiki_item_count: itemCount,
+      thumb_url: null
+    };
+  }
+
+  if (config.code !== "wizard-alchemy-materials") return null;
+
+  const title = `All ${countLabel} Materials in Wizard Alchemy`;
+
+  return {
+    code: config.code,
+    title,
+    seo_title: title,
+    meta_description:
+      "Wizard Alchemy materials list with Departure Isle and Sea of Oblivion drops, Magic Power values, shard effects, and sources.",
+    intro_md:
+      "Wizard Alchemy materials feed potion brewing. Normal ingredients from Departure Isle and Sea of Oblivion add Magic Power to a brew, while elemental shards push the result toward Fire, Ice, Light, Dark, Earth, or Wind. The useful choice is where the item drops, how hard the source is to farm, and whether the material should be saved for a later potion attempt.",
+    description_md:
+      "## How materials fit into potion brewing\n\nPotion attempts use the total Magic Power from normal materials. Blueberry, Withered Mushroom, and Seagull Egg are low-value ingredients, but they are easy to gather and help with early brews. Enemy drops such as Dwarf Emblem, Golden Tooth, Goblin Finger, Flame Crest, Goblin Bone, Copper Earring, and Furnace Core push Departure Isle brewing higher.\n\nSea of Oblivion materials take that same loop into New Mainland. Fern, Sulphur Lumps, and Volcanic Rock come from gathering routes, while Orc Ears, Orc Teeth, Broken Arrow, Iron Armour, Scepter Gem, Golem Core, and Lava Behemoth Remains move the best Magic Power values into orc, priest, mutant, and Lava Behemoth farming.\n\nElemental shards work differently. They are still materials, but they are planning items rather than Magic Power fuel. Add a shard when you care about the element of the result, such as using a Dark Shard for a dark spell route or a Fire Shard for a fire spell route.\n\n## How to farm the missing ingredient\n\n1. Start with safe nodes: Blueberry Bushes, Mushroom Clusters, Bird Nests, Fern Bushes, sulfur nodes, volcanic rocks, and nearby chests give enough early ingredients for starter potion attempts in each area.\n2. Move into normal enemies when low-Magic ingredients stop helping. Dwarfs and goblins cover Departure Isle combat drops, while Sword Orcs, Bow Orcs, Axe Orcs, and Orc Priests cover the early Sea of Oblivion climb.\n3. Farm stronger enemies once your damage is stable. Mutant dwarfs, mutant goblins, Dwarf King, Mutant Axe Orc, Mutant Orc Priest, and Lava Behemoth are where high-value drops start to matter.\n4. Save shards for element targeting. Spending a shard on a weak brew can feel wasteful if the Magic total is not high enough to reach the potion you want.\n5. Sell extras carefully. Common materials are easier to replace, but rare drops and shards can be annoying to recover when a quest or potion target suddenly needs them.\n\n## What to watch before chasing rare drops\n\nLava Behemoth Remains has the highest Magic Power value currently listed, but farming it early can be slow if enemies take too long. A better wand, more HP, cleaner movement, and a stronger race can make material routes faster than forcing the hardest target too soon. For most players, the clean route is to farm what you can defeat quickly, brew better spells, then move into elite and boss drops when the fights are consistent.",
+    how_it_works_md:
+      "Materials are split by area and role first. `Magic Power` is the number that contributes to potion thresholds, so blank Magic Power on a shard means it is not a normal ingredient. `Element effect` explains which element a shard helps target. `Source` and `Drop chances` show where the item comes from, while `Farming stage` gives the practical route: starter gathering, early enemies, mid enemies, elite targets, bosses, or element planning.",
+    description_json: {
+      "Departure Isle materials":
+        "These materials cover the first island routes: starter nodes, dwarfs, goblins, mutants, and Dwarf King. Furnace Core is the strongest Departure Isle ingredient, but it is still below the top Sea of Oblivion drops.",
+      "Sea of Oblivion materials":
+        "New Mainland materials raise the Magic Power ceiling with orc, priest, golem, and Lava Behemoth drops. Lava Behemoth Remains is the highest Magic Power material currently listed.",
+      "Elemental shards":
+        "Shards do not work like normal Magic ingredients. Add them when the Magic total is already high enough and you want a better chance at a matching element."
+    },
+    faq_json: [
+      {
+        q: "What is the best material in Wizard Alchemy?",
+        a: "Lava Behemoth Remains has the highest Magic Power value currently listed at 65. Furnace Core is still the strongest Departure Isle material at 43, but the New Mainland route pushes the top end higher."
+      },
+      {
+        q: "What do elemental shards do?",
+        a: "Elemental shards increase the chance of a matching element on a potion. They do not add normal Magic Power, so they are best used after your other materials already reach the potion threshold you want."
+      },
+      {
+        q: "How do you get materials fast?",
+        a: "Farm by the ingredient you are missing. Gather node materials and chests early, then move to dwarfs, goblins, orcs, and priests for mid materials. Save mutant enemies, Dwarf King, Lava Behemoth, and other boss routes for when your clear time is steady."
+      },
+      {
+        q: "Should you sell materials in Wizard Alchemy?",
+        a: "Selling extras can help with gold, but rare drops and shards are worth checking before you cash them in. A material that feels extra now can become the exact ingredient needed for a stronger potion, quest, or element plan."
+      },
+      {
+        q: "Why is Magic Power blank for shards?",
+        a: "Shards are element-chance materials. They help steer the potion toward Fire, Ice, Light, Dark, Earth, or Wind instead of raising the normal Magic Power total."
+      }
+    ],
+    cta_label: "Open materials catalog",
+    cta_url: buildGameDatasetCatalogPath(config.code),
+    wiki_md:
+      "Materials are the ingredients behind Wizard Alchemy's potion loop. Departure Isle and Sea of Oblivion drops raise Magic Power for stronger brews, while elemental shards help steer a potion toward a chosen element once the Magic total is ready.",
     wiki_sort_order: config.sortOrder,
     wiki_item_count: itemCount,
     thumb_url: imageUrls[0] ?? null

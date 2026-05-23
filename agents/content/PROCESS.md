@@ -45,6 +45,7 @@ Choose one target page and identify the page type:
 - catalog page
 - game-specific catalog page
 - wiki page
+- code page
 - article
 - tool page
 
@@ -84,7 +85,7 @@ Use this structure unless a page type clearly needs a small adjustment:
 # Research Notes: Page Title
 
 Date: YYYY-MM-DD
-Page Type: catalog | game-catalog | wiki | article | tool
+Page Type: catalog | game-catalog | wiki | code-page | article | tool
 Target: /path-or-code
 Status: researching | needs data update | needs section confirmation | ready to write | needs review
 
@@ -257,6 +258,32 @@ Tool output:
   "universe_id": null
 }
 ```
+
+Code page output:
+
+```json
+{
+  "name": "",
+  "slug": "",
+  "is_published": true,
+  "roblox_link": "",
+  "source_url": "",
+  "source_url_2": "",
+  "seo_title": null,
+  "seo_description": "",
+  "intro_md": "",
+  "redeem_md": "",
+  "rewards_md": "",
+  "troubleshoot_md": "",
+  "find_codes_md": ""
+}
+```
+
+Code pages are backed by `games` plus the `codes` table, but the content workflow only writes the `games` row. The slug is the game slug only, such as `wizard-alchemy`, because the public route is already `/codes/<slug>`. `roblox_link` must hold the Roblox experience URL. `source_url` must hold the RobloxDen codes page URL, and `source_url_2` must hold the Beebom codes page URL so `scripts/codes/update-codes.ts` can collect live codes. Keep `seo_title` empty or null unless the user explicitly asks otherwise.
+
+Never write active codes, expired codes, code names, `first_seen_at`, or other code rows manually in `final.json`, local JSON, SQL, or Supabase. After the game row is inserted or updated with the correct source URLs, run the codes refresh workflow, usually `npm run refresh:codes -- --slug <game-slug>`, and let that script upsert active and expired codes from the configured sources.
+
+Code page prose and metadata must be evergreen. Do not include active code names, current reward tables tied to specific codes, month/year labels, exact dates, active-code counts, "latest", "current", "updated daily", or any other wording that will age between code refresh runs. The live codes UI owns active codes, dates, counts, and status. The article fields should explain reward types, redemption steps, troubleshooting, and official places to watch in a long-term way.
 
 Only include fields the page type owns. Leave unknown optional fields out instead of inventing values.
 

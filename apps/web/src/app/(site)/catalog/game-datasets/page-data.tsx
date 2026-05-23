@@ -18,7 +18,7 @@ import {
   type GameDatasetCatalogConfig
 } from "@/lib/game-dataset-catalogs";
 
-const FALLBACK_IMAGE = "/og-image.png";
+const FALLBACK_IMAGE = "/Bloxodes.png";
 
 export type GameDatasetCatalogContentHtml = {
   id?: string | null;
@@ -600,6 +600,70 @@ const SAILOR_PIECE_HAKI_SECTION_ORDER = [
   "Endgame Haki unlock"
 ];
 
+const WIZARD_ALCHEMY_MATERIAL_SECTION_ORDER = [
+  "Departure Isle materials",
+  "Sea of Oblivion materials",
+  "Elemental shards"
+];
+
+const WIZARD_ALCHEMY_POTION_SECTION_ORDER = ["Departure Isle potions", "Sea of Oblivion potions"];
+
+const WIZARD_ALCHEMY_RACE_SECTION_ORDER = [
+  "Common races",
+  "Uncommon races",
+  "Rare races",
+  "Epic races",
+  "Legendary races"
+];
+
+const WIZARD_ALCHEMY_WAND_SECTION_ORDER = [
+  "Starter wand",
+  "Roger's shop wands",
+  "Hidden Departure Isle wands",
+  "Sea of Oblivion wand"
+];
+
+const WIZARD_ALCHEMY_BROOM_SECTION_ORDER = ["Brooms"];
+
+const WIZARD_ALCHEMY_ROBE_SECTION_ORDER = ["Starter robe", "Early robe upgrade", "Late robe upgrade"];
+
+const WIZARD_ALCHEMY_WIZARD_HAT_SECTION_ORDER = ["Roger's shop hats", "Sea of Oblivion hat"];
+
+const WIZARD_ALCHEMY_CHEST_SECTION_ORDER = [
+  "Starter-area chests",
+  "Forest and mine chests",
+  "Island and boss-route chests"
+];
+
+const WIZARD_ALCHEMY_ENEMY_SECTION_ORDER = [
+  "Departure Isle dwarfs",
+  "Departure Isle goblins",
+  "Elite and boss enemies",
+  "Sea of Oblivion enemies"
+];
+
+const WIZARD_ALCHEMY_ENCHANTMENT_SECTION_ORDER = [
+  "Damage enchantments",
+  "Element damage enchantments",
+  "Utility and farming enchantments"
+];
+
+const WIZARD_ALCHEMY_LOCATION_SECTION_ORDER = [
+  "Departure Isle spawn and services",
+  "Forest, river, and mine routes",
+  "Beach, boss, and high routes",
+  "Sea of Oblivion routes"
+];
+
+const WIZARD_ALCHEMY_NPC_SECTION_ORDER = ["Spawn services", "Route and quest NPCs", "Landmark NPCs"];
+
+const WIZARD_ALCHEMY_RESOURCE_NODE_SECTION_ORDER = [
+  "Departure Isle gathering nodes",
+  "Sea of Oblivion gathering nodes",
+  "Shared pickup sources",
+  "Enchanted Stone sources"
+];
+
 const SAILOR_PIECE_RAW_CARD_KEYS = [
   "description",
   "stats",
@@ -1176,6 +1240,123 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "Temporary Vehicle"
     ],
     getSectionLabel: getCategorySection
+  },
+  "wizard-alchemy-materials": {
+    groupKey: "catalogSection",
+    groupLabel: "Material role",
+    sectionOrder: WIZARD_ALCHEMY_MATERIAL_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? null,
+    hiddenKeys: ["catalogSection"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "wizard-alchemy-potions": {
+    groupKey: "category",
+    groupLabel: "Potion route",
+    sectionOrder: WIZARD_ALCHEMY_POTION_SECTION_ORDER,
+    getSectionLabel: getCategorySection,
+    hiddenKeys: ["category", "sourcePage", "sourceImageUrl", "rawText"],
+    additionalColumns: ["category"],
+    maxStats: 7
+  },
+  "wizard-alchemy-races": {
+    groupKey: "catalogSection",
+    groupLabel: "Race rarity",
+    sectionOrder: WIZARD_ALCHEMY_RACE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "alternateName", "confidence", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 8
+  },
+  "wizard-alchemy-wands": {
+    groupKey: "catalogSection",
+    groupLabel: "Wand route",
+    sectionOrder: WIZARD_ALCHEMY_WAND_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "priceGold", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "wizard-alchemy-brooms": {
+    groupKey: "catalogSection",
+    groupLabel: "Travel route",
+    sectionOrder: WIZARD_ALCHEMY_BROOM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "priceCoins", "sourceImageUrl"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "wizard-alchemy-robes": {
+    groupKey: "catalogSection",
+    groupLabel: "Robe stage",
+    sectionOrder: WIZARD_ALCHEMY_ROBE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "priceGold", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "wizard-alchemy-wizard-hats": {
+    groupKey: "catalogSection",
+    groupLabel: "Hat route",
+    sectionOrder: WIZARD_ALCHEMY_WIZARD_HAT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "priceGold", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "wizard-alchemy-chests": {
+    groupKey: "catalogSection",
+    groupLabel: "Chest route",
+    sectionOrder: WIZARD_ALCHEMY_CHEST_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 8
+  },
+  "wizard-alchemy-enemies": {
+    groupKey: "catalogSection",
+    groupLabel: "Enemy route",
+    sectionOrder: WIZARD_ALCHEMY_ENEMY_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "family", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 8
+  },
+  "wizard-alchemy-enchantments": {
+    groupKey: "catalogSection",
+    groupLabel: "Build role",
+    sectionOrder: WIZARD_ALCHEMY_ENCHANTMENT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 7
+  },
+  "wizard-alchemy-locations": {
+    groupKey: "catalogSection",
+    groupLabel: "Route stage",
+    sectionOrder: WIZARD_ALCHEMY_LOCATION_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 8
+  },
+  "wizard-alchemy-npcs": {
+    groupKey: "catalogSection",
+    groupLabel: "NPC role",
+    sectionOrder: WIZARD_ALCHEMY_NPC_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 7
+  },
+  "wizard-alchemy-resource-nodes": {
+    groupKey: "catalogSection",
+    groupLabel: "Source route",
+    sectionOrder: WIZARD_ALCHEMY_RESOURCE_NODE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
   }
 };
 
@@ -4041,7 +4222,7 @@ export function renderGameDatasetCatalogPage({
       slug: canonicalPath.replace(/^\//, ""),
       title: pageTitle,
       description: pageDescription,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}${FALLBACK_IMAGE}`,
       author: null,
       publishedAt: updatedIso,
       updatedAt: updatedIso

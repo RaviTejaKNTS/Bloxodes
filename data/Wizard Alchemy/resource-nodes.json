@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "title": "Wizard Alchemy resource nodes data",
+    "updatedAt": "2026-05-23",
+    "sources": [
+      {
+        "label": "BloxInformer - Wizard Alchemy Materials",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/materials/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Pro Game Guides - All Materials in Wizard Alchemy",
+        "url": "https://progameguides.com/roblox/all-materials-in-wizard-alchemy-how-to-get/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Beebom - All Wizard Alchemy Materials and How to Get Them",
+        "url": "https://beebom.com/wizard-alchemy-materials-guide/amp/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "GAMES.GG - Wizard Alchemy Guide: All Chest Locations",
+        "url": "https://games.gg/roblox/guides/wizard-alchemy-all-chest-locations/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "GAMES.GG - Wizard Alchemy Guide: All Enchantments and How to Get Them",
+        "url": "https://games.gg/roblox/guides/wizard-alchemy-all-enchantments-and-how-to-get-them/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "WizardAlchemy.org - Farming Guide",
+        "url": "https://wizardalchemy.org/farming",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Pro Game Guides - Wizard Alchemy Beginner's Guide",
+        "url": "https://progameguides.com/roblox/wizard-alchemy-beginners-guide/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Roblox - Wizard Alchemy",
+        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Beebom - All Wizard Alchemy Enchantments and How to Get Them",
+        "url": "https://beebom.com/wizard-alchemy-enchantments-guide/",
+        "accessed": "2026-05-23"
+      }
+    ],
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "area",
+      "nodeType",
+      "materials",
+      "routeUse",
+      "difficultyStage",
+      "respawnOrRepeatNote",
+      "verificationNote"
+    ],
+    "excludedCandidates": [
+      {
+        "name": "Big Bird's Nest",
+        "reason": "Pro Game Guides and Beebom mention Big Bird's Nest as a special source for Copper Earring, Furnace Core, Light Shard, and Dark Shard, but BloxInformer Materials does not list it. Excluded until an in-game pass or a stronger primary source verifies the source and drop pool."
+      }
+    ]
+  },
+  "items": [
+    {
+      "name": "Blueberry Bush",
+      "slug": "blueberry-bush",
+      "image": null,
+      "catalogSection": "Departure Isle gathering nodes",
+      "area": "Departure Isle",
+      "nodeType": "Safe gathering node",
+      "materials": [
+        "Blueberry"
+      ],
+      "routeUse": "Fast starter Magic ingredient for low-Magic potion attempts and early material quests.",
+      "difficultyStage": "Starter gathering",
+      "respawnOrRepeatNote": "Repeatable world pickup; exact respawn timer not listed in checked sources.",
+      "verificationNote": "BloxInformer, Pro Game Guides, and Beebom all list Blueberry Bushes as the Blueberry source, with chests as a secondary source."
+    },
+    {
+      "name": "Mushroom Cluster",
+      "slug": "mushroom-cluster",
+      "image": null,
+      "catalogSection": "Departure Isle gathering nodes",
+      "area": "Departure Isle",
+      "nodeType": "Safe gathering node",
+      "materials": [
+        "Withered Mushroom"
+      ],
+      "routeUse": "Common starter ingredient with slightly more Magic Power than Blueberry.",
+      "difficultyStage": "Starter gathering",
+      "respawnOrRepeatNote": "Repeatable world pickup; Pro Game Guides notes clusters are found around the world, mostly near water.",
+      "verificationNote": "BloxInformer, Pro Game Guides, and Beebom all list Mushroom Clusters as the Withered Mushroom source, with chests as a secondary source."
+    },
+    {
+      "name": "Bird Nest",
+      "slug": "bird-nest",
+      "image": null,
+      "catalogSection": "Departure Isle gathering nodes",
+      "area": "Departure Isle",
+      "nodeType": "Safe gathering node",
+      "materials": [
+        "Seagull Egg"
+      ],
+      "routeUse": "Highest Magic Power starter-node ingredient before enemy farming starts.",
+      "difficultyStage": "Starter gathering",
+      "respawnOrRepeatNote": "Repeatable world pickup; Pro Game Guides notes nests appear in higher places such as trees and cliffs.",
+      "verificationNote": "BloxInformer, Pro Game Guides, and Beebom all list Bird Nests as the Seagull Egg source, with chests as a secondary source."
+    },
+    {
+      "name": "Fern Bush",
+      "slug": "fern-bush",
+      "image": null,
+      "catalogSection": "Sea of Oblivion gathering nodes",
+      "area": "Sea of Oblivion",
+      "nodeType": "Safe gathering node",
+      "materials": [
+        "Fern"
+      ],
+      "routeUse": "Starter New Mainland gathering material for Sea of Oblivion potion attempts.",
+      "difficultyStage": "New Mainland gathering",
+      "respawnOrRepeatNote": "Repeatable world pickup; exact respawn timer not listed in checked sources.",
+      "verificationNote": "BloxInformer lists Fern as obtained from Fern Bush and chests. Local materials data aligns with that source."
+    },
+    {
+      "name": "Sulphur Lumps",
+      "slug": "sulphur-lumps-node",
+      "image": null,
+      "catalogSection": "Sea of Oblivion gathering nodes",
+      "area": "Sea of Oblivion",
+      "nodeType": "Safe gathering node",
+      "materials": [
+        "Sulphur Lumps"
+      ],
+      "routeUse": "New Mainland node material with more Magic Power than the first-island starter pickups.",
+      "difficultyStage": "New Mainland gathering",
+      "respawnOrRepeatNote": "Repeatable world pickup; exact respawn timer not listed in checked sources.",
+      "verificationNote": "BloxInformer lists Sulphur Lumps as obtained from Sulphur Lumps and chests. Local materials data treats this as a sulfur-node pickup."
+    },
+    {
+      "name": "Volcanic Rock",
+      "slug": "volcanic-rock-node",
+      "image": null,
+      "catalogSection": "Sea of Oblivion gathering nodes",
+      "area": "Sea of Oblivion",
+      "nodeType": "Safe gathering node",
+      "materials": [
+        "Volcanic Rock"
+      ],
+      "routeUse": "New Mainland node material that reaches early enemy-drop Magic Power values without a fight.",
+      "difficultyStage": "New Mainland gathering",
+      "respawnOrRepeatNote": "Repeatable world pickup; exact respawn timer not listed in checked sources.",
+      "verificationNote": "BloxInformer lists Volcanic Rock as obtained from Volcanic Rock and chests. Local materials data aligns with that source."
+    },
+    {
+      "name": "Chests",
+      "slug": "chests",
+      "image": "/Wizard%20Alchemy/Chests/spawn-river-rocks.jpg",
+      "catalogSection": "Shared pickup sources",
+      "area": "Departure Isle and material routes",
+      "nodeType": "Fixed pickup source",
+      "materials": [
+        "Common materials",
+        "selected New Mainland materials",
+        "elemental shards",
+        "Gold or resource rewards"
+      ],
+      "routeUse": "Broad pickup loop for materials and shards when you want resources without fighting every enemy on the path.",
+      "difficultyStage": "Any stage, route dependent",
+      "respawnOrRepeatNote": "GAMES.GG lists fixed chest spots with a one-hour respawn timer; exact per-chest reward tables are not clearly listed.",
+      "verificationNote": "Included as a summary row only. The dedicated chests dataset owns exact locations, route order, and chest-specific caveats. Image uses an existing clean in-game chest screenshot without guide arrows or editorial overlays."
+    },
+    {
+      "name": "Enchanted Sword Ferns",
+      "slug": "enchanted-sword-ferns",
+      "image": "/Wizard%20Alchemy/Resource%20Nodes/enchanted-sword-ferns.jpg",
+      "catalogSection": "Enchanted Stone sources",
+      "area": "Sea of Oblivion lava island",
+      "nodeType": "Enemy-like destructible source",
+      "materials": [
+        "Enchanted Stone"
+      ],
+      "routeUse": "Repeatable Enchanted Stone farming for wand enchantment rolls.",
+      "difficultyStage": "Sea of Oblivion combat farming",
+      "respawnOrRepeatNote": "GAMES.GG describes them as respawning sources but does not list an exact timer.",
+      "verificationNote": "Supported by the current GAMES.GG enchantments guide. The same source calls them enemies with extra HP, so this row should not be presented as a safe gathering node. Image uses a direct in-game Enchanted Sword Fern screenshot with the source label visible."
+    }
+  ]
+}

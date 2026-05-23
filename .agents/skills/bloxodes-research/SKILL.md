@@ -17,6 +17,7 @@ Then read the matching page-type guide:
 - `agents/content/page-types/catalog-pages.md`
 - `agents/content/page-types/game-catalog-pages.md`
 - `agents/content/page-types/wiki-pages.md`
+- `agents/content/page-types/code-pages.md`
 - `agents/content/page-types/articles.md`
 - `agents/content/page-types/tools.md`
 
@@ -39,6 +40,8 @@ For catalog and game-catalog pages, also plan the later FLOW pass while the rese
 For catalog and game-catalog pages, stop after research and propose the data action, item-card section style, and card data shape. Name the local/source/rendered counts, image coverage, any missing or stale items, the grouping axis, why it has real in-game meaning, weaker alternatives, the `description_json` notes, and what should stay in `description_md`. Mark the notes `needs data update` when the dataset or images need work. Mark the notes `needs section confirmation` until the user approves the data, section, and card plan.
 
 Verify facts that can change: codes, events, prices, availability, dates, stats, formulas, and active reward pools. Record source links and checked dates in the notes. If a fact is missing or uncertain, say so there instead of hiding the gap with generic copy.
+
+For code pages, verify source wiring instead of manually collecting code rows. The `games.slug` must be the game slug only, `roblox_link` must be the Roblox experience URL, `source_url` must be the RobloxDen codes page, and `source_url_2` must be the Beebom codes page. Do not write active codes, expired codes, code names, code dates, or `first_seen_at` values into local JSON, SQL, Supabase, or `final.json`; the codes refresh script owns that data.
 
 Only mark research `ready to write` when the content can be written without guessing, any required data/image update is complete or accepted, and any required section style has been confirmed.
 
@@ -63,4 +66,5 @@ Return a concise summary of:
 - facts confirmed
 - unknowns
 - data/image action for catalog pages
+- source URL and refresh action for code pages
 - recommended page type and output shape

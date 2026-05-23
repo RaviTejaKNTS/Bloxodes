@@ -62,6 +62,15 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 4. Verify local dataset images, item counts, metadata, sitemaps, search, and revalidation before publishing.
 5. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
 
+### Codes pages
+
+1. Use the game slug only for `games.slug`, for example `wizard-alchemy`; do not append `-codes` because the route is already `/codes/<slug>`.
+2. Put the Roblox experience URL in `roblox_link`, not in any `source_url` field.
+3. Put the RobloxDen codes page in `source_url` and the Beebom codes page in `source_url_2`; `scripts/codes/update-codes.ts` reads those two fields for the refresh workflow.
+4. Keep `seo_title` empty or null unless the user explicitly asks for a custom title.
+5. Never manually enter active codes, expired codes, code names, rewards tied to current code names, or code dates. Insert or update the `games` row, then run the codes refresh script to populate `codes`.
+6. Write code-page prose and metadata for long-term use. Do not include active code names, exact dates, month/year labels, active-code counts, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily`.
+
 ### API or auth flow
 
 1. Validate inputs and request origin.

@@ -16,6 +16,8 @@ Read:
 
 If these files have not been read in the current task, read them before writing.
 
+If the target is a `/codes/<slug>` page backed by the `games` table, stop and use `agents/content/page-types/code-pages.md` instead. Code pages are source-driven and must not manually include active code rows, expired code rows, code dates, or current-code reward mappings in article fields or metadata.
+
 ## What This Skill Is For
 
 Use this for researched articles: guides, update explainers, event guides, system explainers, how-tos, troubleshooting, comparisons, lists, and Roblox support-style pieces.

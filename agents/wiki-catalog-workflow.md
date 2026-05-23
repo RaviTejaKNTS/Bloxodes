@@ -40,6 +40,8 @@ Follow this workflow when adding pages for a game dataset under `data/<Game>/`, 
 
 For new games, data gathering is part of this workflow. Research should produce the first item list, useful card fields, local image plan, and collection structure before copy is written. If a source says a collection has more items than the current local file, update or intentionally accept the data gap before writing public fields.
 
+Image plan means clean catalog images, not just any image from a guide page. Use direct in-game item art, enemy/object cutouts, NPC screenshots, station screenshots, or location screenshots where the catalog subject is clearly visible. Do not use edited guide thumbnails, site-branded cover art, arrows/callouts, generic hero art, or broad nearby screenshots that do not actually show the row subject. If no clean image exists, leave the row image empty and record the capture/source gap instead of filling it with a weak substitute.
+
 ## DB Targets
 
 - `wiki_pages`: one game-level hub at `/wiki/[slug]`.
@@ -253,13 +255,13 @@ Only after local is clean:
 4. Run production dry-runs before writing:
    - Use `NODE_ENV=production` so `scripts/shared/load-env.ts` reads `.env` instead of `.env.development.local`.
    - Confirm the target host is production, not `127.0.0.1:54321`.
-   - Run `NODE_ENV=production npm run seed:game-catalog-pages -- --dry-run`.
-   - Run `NODE_ENV=production npm run seed:game-wiki-pages -- --dry-run`.
+   - Run `NODE_ENV=production npm run seed:game-catalog-pages -- --game <game-slug> --dry-run`.
+   - Run `NODE_ENV=production npm run seed:game-wiki-pages -- --game <game-slug> --dry-run`.
    - Confirm expected row counts.
    - Confirm wiki rows show real `universe_id` values, not `not linked`.
 5. Apply to production only after dry-runs are clean:
-   - Run `NODE_ENV=production npm run seed:game-catalog-pages -- --allow-prod`.
-   - Run `NODE_ENV=production npm run seed:game-wiki-pages -- --allow-prod`.
+   - Run `NODE_ENV=production npm run seed:game-catalog-pages -- --game <game-slug> --allow-prod`.
+   - Run `NODE_ENV=production npm run seed:game-wiki-pages -- --game <game-slug> --allow-prod`.
    - Do not use `--draft` for production publish unless the pages must stay hidden.
 6. Verify production DB state after writing:
    - All expected `wiki_catalog_pages` rows exist.

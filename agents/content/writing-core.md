@@ -114,6 +114,12 @@ Better:
 Basic food is usually safe to spend because you can buy it again or pick it up during normal tasks. Event candy, weather food, and potion-like consumables are different because their source may only appear during a limited event or rotation.
 ```
 
+## Code Page Standard
+
+Code pages must separate evergreen article copy from live code data. The public prose should explain the game, reward types, redemption steps, troubleshooting, and official places where new codes usually appear. It should not name active codes, list current code rewards by code name, mention exact dates, include month/year labels, quote active-code counts, or promise freshness with lines such as `latest codes`, `current codes`, `fresh codes`, or `updated daily`.
+
+The live codes table and `scripts/codes/update-codes.ts` own active codes, expired codes, dates, counts, and reward rows. When writing code-page fields, return only the `games` row fields and source URLs. Do not include a manual `codes` array.
+
 ## Non-Negotiable Writing Rules
 
 1. No vague writing. Every sentence needs clear context and useful information.

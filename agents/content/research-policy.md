@@ -62,7 +62,7 @@ Use this structure:
 # Research Notes: Page Title
 
 Date: YYYY-MM-DD
-Page Type: catalog | game-catalog | wiki | article | tool
+Page Type: catalog | game-catalog | wiki | code-page | article | tool
 Target: /path-or-code
 Status: researching | needs data update | needs section confirmation | ready to write | needs review
 
@@ -218,6 +218,22 @@ Do not use wiki research as a shortcut to rewrite every related catalog blurb. C
 
 Research the exact niche question, update, event, mechanic, comparison, or guide angle. The article should move like a clear explanation, similar to a good editorial guide: what changed, why it matters, how it works, limitations, and what the reader should do next.
 
+### Code Pages
+
+Research code pages as source-driven `games` rows, not as hand-maintained code lists. The public path is `/codes/<game-slug>`, so the stored `games.slug` must be the game slug only, such as `wizard-alchemy`, never `wizard-alchemy-codes`.
+
+Before writing or updating a code page, confirm the source wiring:
+
+- `roblox_link` is the official Roblox experience URL.
+- `source_url` is the RobloxDen codes page URL.
+- `source_url_2` is the Beebom codes page URL.
+- `seo_title` is empty or null unless the user explicitly asks for a custom value.
+- `scripts/codes/update-codes.ts` can read the row because the game is published and the supported source URLs are in the first two source fields.
+
+Never manually write code rows, active codes, expired codes, code names, `first_seen_at` dates, or reward rows into local JSON, SQL, Supabase, or `final.json`. The code data must come from the codes refresh workflow. After the `games` row has the right source URLs, run `npm run refresh:codes -- --slug <game-slug>` and let the script scrape RobloxDen and Beebom, upsert active codes, expire missing codes, and update `expired_codes`.
+
+The article fields on a code page must work long-term. `seo_description`, `intro_md`, `rewards_md`, `troubleshoot_md`, and `find_codes_md` should not name active codes, include exact dates, mention a month/year, promise daily updates, quote active-code counts, or use stale wording such as `latest` or `current`. A rewards table is fine when it explains reward types and how they affect the game, but it must not map current code names to rewards.
+
 ### Tool Pages
 
 Research the formula, input, output, unit, edge case, and user misunderstanding. Inspect the tool client logic when available.
@@ -316,6 +332,24 @@ Tool content fields:
 - `cta_url`
 - `thumb_url`
 - `universe_id`
+
+Code page `games` fields:
+
+- `name`
+- `slug`
+- `is_published`
+- `roblox_link`
+- `source_url`
+- `source_url_2`
+- `seo_title`
+- `seo_description`
+- `intro_md`
+- `redeem_md`
+- `rewards_md`
+- `troubleshoot_md`
+- `find_codes_md`
+
+Do not include a `codes` array in code-page content output. The `codes` table is populated only by the codes refresh script from supported source URLs.
 
 ## Public Copy Rules
 

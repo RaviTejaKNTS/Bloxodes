@@ -1,0 +1,379 @@
+{
+  "meta": {
+    "title": "Wizard Alchemy locations data",
+    "updatedAt": "2026-05-23",
+    "sources": [
+      {
+        "label": "WizardAlchemy.org - Home and map references",
+        "url": "https://wizardalchemy.org/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "WizardAlchemy.org - Farming Guide",
+        "url": "https://wizardalchemy.org/farming",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "GAMES.GG - Wizard Alchemy Guide: All Chest Locations",
+        "url": "https://games.gg/roblox/guides/wizard-alchemy-all-chest-locations/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "GAMES.GG - Wizard Alchemy Guide: All Enchantments and How to Get Them",
+        "url": "https://games.gg/roblox/guides/wizard-alchemy-all-enchantments-and-how-to-get-them/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Pro Game Guides - Wizard Alchemy Beginner's Guide",
+        "url": "https://progameguides.com/roblox/wizard-alchemy-beginners-guide/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Pro Game Guides - Wizard Alchemy Chest Location Guide",
+        "url": "https://progameguides.com/roblox/wizard-alchemy-chest-location-guide/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Wiki",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Materials",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/materials/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Monsters",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/monsters/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "BloxInformer - Wizard Alchemy Wands",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/wands/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Beebom - All Wizard Alchemy Brooms and How to Get Them",
+        "url": "https://beebom.com/wizard-alchemy-brooms-guide/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Local Wizard Alchemy wands dataset",
+        "url": "data/Wizard Alchemy/wands.json",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Local Wizard Alchemy wizard hats dataset",
+        "url": "data/Wizard Alchemy/wizard-hats.json",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Roblox - Wizard Alchemy",
+        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Beebom - All Wizard Alchemy Enchantments and How to Get Them",
+        "url": "https://beebom.com/wizard-alchemy-enchantments-guide/",
+        "accessed": "2026-05-23"
+      }
+    ],
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "area",
+      "locationType",
+      "landmark",
+      "keyNpcs",
+      "keyContent",
+      "relatedFarms",
+      "travelTip",
+      "verificationNote"
+    ]
+  },
+  "items": [
+    {
+      "name": "Spawn Village and Leaderboard Shoreline",
+      "slug": "spawn-village-leaderboard-shoreline",
+      "image": null,
+      "catalogSection": "Departure Isle spawn and services",
+      "area": "Departure Isle",
+      "locationType": "Spawn hub",
+      "landmark": "Spawn point, Top Potions List, three leaderboards, Lombart, and Lemin",
+      "keyNpcs": "Lombart, Lemin",
+      "keyContent": "Starting village services, material selling, leaderboards, and a nearby shoreline chest",
+      "relatedFarms": "Starter chest route, inventory cleanup, early upgrade planning",
+      "travelTip": "Use the leaderboard platform as the anchor before leaving spawn for the river, bridge, or shop routes.",
+      "verificationNote": "PGG chest guide verifies Lombart, Lemin, the leaderboard platform, and the sandy island chest; BloxInformer materials verifies Lombart in the starting village."
+    },
+    {
+      "name": "Alchemy Table and Refine Machine",
+      "slug": "alchemy-table-refine-machine",
+      "image": "/Wizard%20Alchemy/Locations/alchemy-table-refine-machine.jpg",
+      "catalogSection": "Departure Isle spawn and services",
+      "area": "Departure Isle",
+      "locationType": "Crafting station",
+      "landmark": "Alchemy table behind or near the spawn point",
+      "keyNpcs": "Not listed",
+      "keyContent": "Potion brewing, material selection, spell unlocks, and potion refinement",
+      "relatedFarms": "All material routes feed back into this station",
+      "travelTip": "Return here after a material loop so you can brew before selling rare ingredients by mistake.",
+      "verificationNote": "PGG beginner guide verifies the Alchemy table at spawn and the Refine machine next to it."
+    },
+    {
+      "name": "Roger's Equipment Shop",
+      "slug": "rogers-equipment-shop",
+      "image": "/Wizard%20Alchemy/Locations/rogers-equipment-shop.webp",
+      "catalogSection": "Departure Isle spawn and services",
+      "area": "Departure Isle",
+      "locationType": "Shop",
+      "landmark": "Roger shop menu with wand, wizard hat, and robe tabs",
+      "keyNpcs": "Roger",
+      "keyContent": "Wands, wizard hats, robes, early Attack upgrades, and HP gear",
+      "relatedFarms": "Gold farming, boss prep, gear upgrades",
+      "travelTip": "Check wand upgrades before forcing harder enemy routes, because better damage often saves more time than a risky farm.",
+      "verificationNote": "BloxInformer wands and wizard hat pages verify Roger's shop menus; local robe, wand, and hat datasets tie multiple equipment rows to Roger's shop."
+    },
+    {
+      "name": "Harryint Wanted Board",
+      "slug": "harryint-wanted-board",
+      "image": "/Wizard%20Alchemy/Locations/harryint-wanted-board.jpg",
+      "catalogSection": "Departure Isle spawn and services",
+      "area": "Departure Isle",
+      "locationType": "Quest board",
+      "landmark": "Wanted board on the right side of spawn",
+      "keyNpcs": "Harryint",
+      "keyContent": "Repeatable quests for gold and material rewards",
+      "relatedFarms": "Beginner gold farming, monster quests, material gathering",
+      "travelTip": "Pick a quest before starting a combat route so enemy kills also move your gold and material goals.",
+      "verificationNote": "PGG beginner guide verifies Harryint beside the Wanted board on the right side of spawn and names The Bully of the Forest I as an early quest."
+    },
+    {
+      "name": "First River Farming Path",
+      "slug": "first-river-farming-path",
+      "image": "/Wizard%20Alchemy/Chests/spawn-river-rocks.jpg",
+      "catalogSection": "Forest, river, and mine routes",
+      "area": "Departure Isle forest",
+      "locationType": "Starter farm route",
+      "landmark": "River, big rock, tree, and first farming stretch",
+      "keyNpcs": "Not listed",
+      "keyContent": "Pickaxe Dwarfs, early gathering route, and river rocks chest",
+      "relatedFarms": "Dwarf Emblem, Golden Tooth, early Gold, chest materials",
+      "travelTip": "Run straight from spawn and avoid nearby Pickaxe Dwarfs if you only want the chest or gathering nodes.",
+      "verificationNote": "PGG and GAMES.GG chest guides verify the river rocks chest near the first farming area; BloxInformer monsters verifies Pickaxe Dwarf in Departure Isle forest."
+    },
+    {
+      "name": "Traveler Camp and Cauldron",
+      "slug": "traveler-camp-cauldron",
+      "image": null,
+      "catalogSection": "Forest, river, and mine routes",
+      "area": "Bridge and forest camp",
+      "locationType": "Route landmark",
+      "landmark": "Traveler NPC, Cauldron, tent, bridge, and nearby enemies",
+      "keyNpcs": "Traveler",
+      "keyContent": "Bridge route, tent chest, route split toward beach and mine-side paths",
+      "relatedFarms": "Knife Goblins, Warhammer Dwarfs, chest materials",
+      "travelTip": "Use the Traveler and Cauldron as the reference point before turning toward the lighthouse, treehouse, or mine cluster.",
+      "verificationNote": "PGG and GAMES.GG both verify the Traveler, Cauldron, bridge, tent, and surrounding Knife Goblin or Warhammer Dwarf route."
+    },
+    {
+      "name": "Mine Entrance and Optimistic Miner",
+      "slug": "mine-entrance-optimistic-miner",
+      "image": "/Wizard%20Alchemy/Chests/miner-cave.jpg",
+      "catalogSection": "Forest, river, and mine routes",
+      "area": "Mine entrance",
+      "locationType": "Cave route",
+      "landmark": "Optimistic Miner, wooden boards, plants, and mine entrance",
+      "keyNpcs": "Optimistic Miner",
+      "keyContent": "Mine chest, miner hint, cave route, and nearby Pickaxe Dwarfs",
+      "relatedFarms": "Chest materials, early dwarf route, mine cluster sweep",
+      "travelTip": "Enter from the boarded mine entrance after the first Pickaxe Dwarf platform instead of trying to force the thorny upper path.",
+      "verificationNote": "PGG chest guide verifies the Optimistic Miner and mine entrance route; the chest dataset reuses the matching local screenshot."
+    },
+    {
+      "name": "Secret Mine Cave",
+      "slug": "secret-mine-cave",
+      "image": "/Wizard%20Alchemy/Chests/secret-mine-cave.jpg",
+      "catalogSection": "Forest, river, and mine routes",
+      "area": "Mine illusion wall",
+      "locationType": "Hidden cave",
+      "landmark": "Right side of the back wall inside the mine",
+      "keyNpcs": "Not listed",
+      "keyContent": "Hidden cave extension and secret chest",
+      "relatedFarms": "Chest materials, hidden-route checking",
+      "travelTip": "Open this immediately after the normal mine chest so you do not backtrack into the mine later.",
+      "verificationNote": "PGG and GAMES.GG verify the illusion wall behind the mine cave."
+    },
+    {
+      "name": "Mine Mountain Top",
+      "slug": "mine-mountain-top",
+      "image": "/Wizard%20Alchemy/Chests/mine-mountain-top.jpg",
+      "catalogSection": "Forest, river, and mine routes",
+      "area": "Mine mountain",
+      "locationType": "Climb route",
+      "landmark": "Rocks, thorny vines, and upper mine platform",
+      "keyNpcs": "Not listed",
+      "keyContent": "Top-of-mine chest and high route practice",
+      "relatedFarms": "Chest materials, movement practice",
+      "travelTip": "Use the rocks on the left side of the mine entrance, then follow the thorny vines to the upper platform.",
+      "verificationNote": "PGG and GAMES.GG verify the top-of-mine chest route."
+    },
+    {
+      "name": "Goblin Camp Hidden Platform",
+      "slug": "goblin-camp-hidden-platform",
+      "image": "/Wizard%20Alchemy/Chests/goblin-camp-hidden-platform.jpg",
+      "catalogSection": "Forest, river, and mine routes",
+      "area": "Bridge-side goblin camp",
+      "locationType": "Hidden platform",
+      "landmark": "Bridge rocks, brown pine trees, Knife Goblins, campfire, and rear platform",
+      "keyNpcs": "Not listed",
+      "keyContent": "Hidden platform chest and bridge-side goblin route",
+      "relatedFarms": "Knife Goblins, chest materials, early hidden-route sweep",
+      "travelTip": "Check the rocks on the right side of the bridge before crossing all the way to the Traveler camp.",
+      "verificationNote": "PGG verifies the hidden platform near spawn, Knife Goblins, and campfire; GAMES.GG lists the same goblin campfire route with different ordering."
+    },
+    {
+      "name": "Departure Isle Beach and Portal",
+      "slug": "departure-isle-beach-portal",
+      "image": null,
+      "catalogSection": "Beach, boss, and high routes",
+      "area": "Departure Isle beach",
+      "locationType": "Beach route",
+      "landmark": "Beach route, sea edge, portal area, and Apprentice Broom spot",
+      "keyNpcs": "Not listed",
+      "keyContent": "Apprentice Broom purchase spot, Warhammer Dwarf and Archer Goblin routes, path toward lighthouse",
+      "relatedFarms": "Flame Crest, Copper Earring, Goblin Finger, Goblin Bone, Dwarf Emblem",
+      "travelTip": "Treat the beach as a connector between mid enemy farming, the lighthouse route, and later travel upgrades.",
+      "verificationNote": "Beebom brooms guide verifies Apprentice Broom under the portal at Departure Island beach; BloxInformer monsters places Warhammer Dwarf and Archer Goblin in Departure Isle beach routes."
+    },
+    {
+      "name": "Lighthouse Island",
+      "slug": "lighthouse-island",
+      "image": "/Wizard%20Alchemy/Chests/lighthouse-island.jpg",
+      "catalogSection": "Beach, boss, and high routes",
+      "area": "Lighthouse island",
+      "locationType": "Island landmark",
+      "landmark": "Lighthouse, sea, small island, and mountain behind the island",
+      "keyNpcs": "Not listed",
+      "keyContent": "Lighthouse chest, beach navigation, route anchor for Dwarf King and treehouse checks",
+      "relatedFarms": "Chest materials, Archer Goblins, Warhammer Dwarfs, boss-route travel",
+      "travelTip": "Use the Traveler and Cauldron as a starting reference, then run left past Archer Goblins and Warhammer Dwarfs until the sea opens up.",
+      "verificationNote": "PGG and GAMES.GG verify the lighthouse island chest and route from the Traveler/Cauldron side."
+    },
+    {
+      "name": "Dwarf King Cave and Throne",
+      "slug": "dwarf-king-cave-throne",
+      "image": null,
+      "catalogSection": "Beach, boss, and high routes",
+      "area": "Dwarf King Cave",
+      "locationType": "Boss route",
+      "landmark": "Dwarf King spawn, hammer wall, chained stone, and cave area",
+      "keyNpcs": "Dwarf King",
+      "keyContent": "Boss farming, throne-area chest, Furnace Core route, Flame Crest and Copper Earring drops",
+      "relatedFarms": "Gold, Flame Crest, Copper Earring, Furnace Core",
+      "travelTip": "Farm Dwarf King only after your wand, HP gear, potions, and movement are steady enough for repeat clears.",
+      "verificationNote": "PGG verifies the Dwarf King chest landmark near the hammer wall; BloxInformer monsters verifies Dwarf King in Departure Isle Dwarf King Cave."
+    },
+    {
+      "name": "Treehouse Branch and Platform",
+      "slug": "treehouse-branch-platform",
+      "image": "/Wizard%20Alchemy/Chests/treehouse-platform.jpg",
+      "catalogSection": "Beach, boss, and high routes",
+      "area": "Treehouse route",
+      "locationType": "High path",
+      "landmark": "Huge tree, rope climb, treehouse door, railing, and charred branch",
+      "keyNpcs": "Not listed",
+      "keyContent": "Treehouse chest and Ember Staff Wand purchase route",
+      "relatedFarms": "Chest materials, late Departure Isle wand upgrade",
+      "travelTip": "Tilt the camera upward near the lighthouse route to spot the huge tree before climbing.",
+      "verificationNote": "PGG verifies the treehouse platform chest; PGG and BloxInformer wands sources connect Ember Staff to the treehouse branch route, with some left/right direction conflict."
+    },
+    {
+      "name": "Starting Village Waterfall Cave",
+      "slug": "starting-village-waterfall-cave",
+      "image": "/Wizard%20Alchemy/Locations/starting-village-waterfall-cave.webp",
+      "catalogSection": "Beach, boss, and high routes",
+      "area": "Waterfall near starting village",
+      "locationType": "Hidden shop route",
+      "landmark": "Waterfall cave near the starting village",
+      "keyNpcs": "Hidden wand seller",
+      "keyContent": "Ice Star Wand purchase spot",
+      "relatedFarms": "Gold saving, cooldown-focused wand upgrade",
+      "travelTip": "Save the waterfall route for when 20,000 Gold is realistic, because the Ice Star Wand is a late Departure Isle purchase.",
+      "verificationNote": "BloxInformer wands verifies Ice Star Wand inside the waterfall next to the starting village; other source wording disagrees on exact direction, so the row avoids left/right claims."
+    },
+    {
+      "name": "Main Sea of Oblivion Base",
+      "slug": "main-sea-of-oblivion-base",
+      "image": "/Wizard%20Alchemy/Locations/main-sea-of-oblivion-base.jpg",
+      "catalogSection": "Sea of Oblivion routes",
+      "area": "Sea of Oblivion",
+      "locationType": "New Mainland hub",
+      "landmark": "Main Sea of Oblivion area, Alchemy station, and Lava Broom spot",
+      "keyNpcs": "Not listed",
+      "keyContent": "New Mainland hub, Lava Broom purchase spot, Sea of Oblivion material route start",
+      "relatedFarms": "Fern, Sulphur Lumps, Volcanic Rock, orc materials, New Mainland potion targets",
+      "travelTip": "Use the Sea of Oblivion base as the reset point before branching to the enchanting table, lava island, volcano, or lava waterfall.",
+      "verificationNote": "Roblox page title verifies New Mainland context; Beebom brooms guide verifies Lava Broom right of Alchemy in Sea of Oblivion."
+    },
+    {
+      "name": "Enchanting Table Island",
+      "slug": "enchanting-table-island",
+      "image": null,
+      "catalogSection": "Sea of Oblivion routes",
+      "area": "Sea of Oblivion island",
+      "locationType": "Enchanting station",
+      "landmark": "Small island near the main Sea of Oblivion",
+      "keyNpcs": "Not listed",
+      "keyContent": "Wand enchantment table and Enchanted Stone spending",
+      "relatedFarms": "Enchanted Stones, wand enchantment rolls, Sea of Oblivion power upgrades",
+      "travelTip": "Farm a stack of Enchanted Stones before interacting, because each enchantment roll consumes one stone and the result is random.",
+      "verificationNote": "GAMES.GG enchantments guide verifies the enchanting table on a small island near the main Sea of Oblivion. Image intentionally withheld until a clean enchanting-table screenshot without guide callout arrows is available."
+    },
+    {
+      "name": "Lava Island and Enchanted Sword Ferns",
+      "slug": "lava-island-enchanted-sword-ferns",
+      "image": "/Wizard%20Alchemy/Locations/lava-island-enchanted-sword-ferns.jpg",
+      "catalogSection": "Sea of Oblivion routes",
+      "area": "Sea of Oblivion lava island",
+      "locationType": "Material and enchantment farm",
+      "landmark": "Lava island with Enchanted Sword Ferns",
+      "keyNpcs": "Not listed",
+      "keyContent": "Enchanted Stone farming and lava-island material route",
+      "relatedFarms": "Enchanted Stones, Fern, Volcanic Rock, Sulphur Lumps",
+      "travelTip": "Check whether your build can handle the tougher fern enemies before turning this into a long loop.",
+      "verificationNote": "GAMES.GG enchantments guide verifies Enchanted Sword Ferns scattered across the lava island; local materials data supports Sea of Oblivion gathering routes but does not place every node."
+    },
+    {
+      "name": "Volcano Summit",
+      "slug": "volcano-summit",
+      "image": null,
+      "catalogSection": "Sea of Oblivion routes",
+      "area": "Sea of Oblivion volcano",
+      "locationType": "Late shop route",
+      "landmark": "Top of the Volcano",
+      "keyNpcs": "Not listed",
+      "keyContent": "Ember Wand purchase spot",
+      "relatedFarms": "50,000 Gold saving, Sea of Oblivion wand progression",
+      "travelTip": "Treat the volcano route as a late upgrade stop, not an early detour, because Ember Wand costs far more than Departure Isle shop wands.",
+      "verificationNote": "Local wands dataset records Ember Wand at the top of the Volcano from BloxInformer New Mainland data; exact movement path still needs in-game capture. Image intentionally withheld until a clean volcano summit screenshot without guide callout boxes is available."
+    },
+    {
+      "name": "Lava Waterfall Base",
+      "slug": "lava-waterfall-base",
+      "image": "/Wizard%20Alchemy/Locations/lava-waterfall-base.jpg",
+      "catalogSection": "Sea of Oblivion routes",
+      "area": "Sea of Oblivion lava waterfall",
+      "locationType": "Gear pickup route",
+      "landmark": "Fiery lava waterfall next to the Sea of Oblivion base",
+      "keyNpcs": "Not listed",
+      "keyContent": "Lava Wizard Hat purchase or pickup route",
+      "relatedFarms": "10,000 Gold saving, lava resistance, New Mainland survival",
+      "travelTip": "Check this route when lava resistance matters, because the Lava Wizard Hat is the only currently tracked hat with that utility.",
+      "verificationNote": "Local wizard hats dataset records Lava Wizard Hat behind the fiery lava waterfall next to the base from BloxInformer live New Mainland data; older sources do not include the New Mainland hat."
+    }
+  ]
+}

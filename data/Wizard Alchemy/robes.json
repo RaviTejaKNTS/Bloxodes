@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "title": "Wizard Alchemy robes data",
+    "updatedAt": "2026-05-23",
+    "sources": [
+      {
+        "label": "BloxInformer - Wizard Alchemy Robes",
+        "url": "https://bloxinformer.com/wikis/wizard-alchemy/robes/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Gamezebo - Wizard Alchemy Tier List",
+        "url": "https://www.gamezebo.com/walkthroughs/wizard-alchemy-tier-list/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "AllThings.How - Wizard Alchemy Wands, Hats, Robes and Potions Reference",
+        "url": "https://allthings.how/wizard-alchemy-wands-hats-robes-and-potions-reference/",
+        "accessed": "2026-05-23"
+      },
+      {
+        "label": "Roblox - Wizard Alchemy",
+        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
+        "accessed": "2026-05-23"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "catalogSection",
+      "rarity",
+      "tier",
+      "displayCost",
+      "priceGold",
+      "hpBonus",
+      "sourceLocation",
+      "progressionUse",
+      "availability",
+      "verificationNote"
+    ]
+  },
+  "items": [
+    {
+      "name": "Starmoon Robe",
+      "slug": "starmoon-robe",
+      "image": "/Wizard%20Alchemy/Robes/starmoon-robe.png",
+      "catalogSection": "Starter robe",
+      "rarity": "Rare",
+      "tier": "B",
+      "displayCost": "100 Gold",
+      "priceGold": 100,
+      "hpBonus": "+30 HP",
+      "sourceLocation": "Roger's shop, Wizard Robe section",
+      "progressionUse": "First HP robe for early survivability before saving for 60 HP gear.",
+      "availability": "Current Roger shop listing",
+      "verificationNote": "BloxInformer lists 100 Gold and +30 HP. Gamezebo lists Rare/B tier, +30 HP, and 1.8K Gold. Exact cost needs in-game shop verification. Image downloaded from the matched BloxInformer item asset."
+    },
+    {
+      "name": "Golden Reverie Robe",
+      "slug": "golden-reverie-robe",
+      "image": "/Wizard%20Alchemy/Robes/golden-reverie-robe.png",
+      "catalogSection": "Early robe upgrade",
+      "rarity": "Epic",
+      "tier": "A",
+      "displayCost": "500 Gold",
+      "priceGold": 500,
+      "hpBonus": "+60 HP",
+      "sourceLocation": "Roger's shop, Wizard Robe section",
+      "progressionUse": "Lower listed-cost +60 HP robe once stronger enemies punish a small health pool.",
+      "availability": "Current Roger shop listing",
+      "verificationNote": "BloxInformer lists 500 Gold and +60 HP. Gamezebo lists Epic/A tier, +60 HP, and 12K Gold. Exact cost needs in-game shop verification. Image downloaded from the matched BloxInformer item asset."
+    },
+    {
+      "name": "Starlight Robe",
+      "slug": "starlight-robe",
+      "image": "/Wizard%20Alchemy/Robes/starlight-robe.png",
+      "catalogSection": "Late robe upgrade",
+      "rarity": "Epic",
+      "tier": "S",
+      "displayCost": "5,000 Gold",
+      "priceGold": 5000,
+      "hpBonus": "+60 HP",
+      "sourceLocation": "Roger's shop, Wizard Robe section",
+      "progressionUse": "High-cost late robe target for boss and tougher farming loops; same listed HP as Golden Reverie.",
+      "availability": "Current Roger shop listing",
+      "verificationNote": "BloxInformer lists 5,000 Gold and +60 HP. Gamezebo lists Epic/S tier, +60 HP, and 12K Gold. Exact cost needs in-game shop verification. Image downloaded from the matched BloxInformer item asset."
+    }
+  ]
+}
