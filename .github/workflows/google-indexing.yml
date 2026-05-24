@@ -1,0 +1,42 @@
+name: Google Indexing API
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "17 */6 * * *"
+
+concurrency:
+  group: google-indexing-api
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SITE_URL: ${{ vars.PRODUCTION_SITE_URL }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      GOOGLE_INDEXING_API_ENABLED: ${{ vars.GOOGLE_INDEXING_API_ENABLED }}
+      GOOGLE_INDEXING_SERVICE_ACCOUNT_JSON_BASE64: ${{ secrets.GOOGLE_INDEXING_SERVICE_ACCOUNT_JSON_BASE64 }}
+      GOOGLE_INDEXING_SCOPE: https://www.googleapis.com/auth/indexing
+      GOOGLE_INDEXING_STATE_BACKEND: supabase
+      GOOGLE_INDEXING_DAILY_LIMIT: ${{ vars.GOOGLE_INDEXING_DAILY_LIMIT }}
+      GOOGLE_INDEXING_BATCH_LIMIT: ${{ vars.GOOGLE_INDEXING_BATCH_LIMIT }}
+      GOOGLE_INDEXING_REQUEST_DELAY_MS: ${{ vars.GOOGLE_INDEXING_REQUEST_DELAY_MS }}
+      GOOGLE_INDEXING_RESUBMIT_AFTER_HOURS: ${{ vars.GOOGLE_INDEXING_RESUBMIT_AFTER_HOURS }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Submit sitemap URLs to Google Indexing API
+        run: npm run indexing:google -- --apply

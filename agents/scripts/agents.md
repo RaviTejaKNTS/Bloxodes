@@ -101,7 +101,8 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Collect clothing catalog items | `scripts/catalog/collect-roblox-clothing-items.ts` | `npm run collect:clothing-items` |
 | Collect avatar animation items | `scripts/catalog/collect-roblox-avatar-animation-items.ts` | `npm run collect:avatar-animation-items` |
 | Collect Grow a Garden local catalog images | `scripts/catalog/collect-grow-a-garden-images.ts` | `npm run collect:grow-a-garden-images` |
-| Seed gathered game catalog pages into Supabase | `scripts/catalog/seed-game-catalog-pages.ts` | `npm run seed:game-catalog-pages`, add `-- --dry-run` to preview |
+| Collect Slime RNG local catalog data and images | `scripts/catalog/collect-slime-rng-data.ts` | `npm run collect:slime-rng-data` |
+| Seed gathered game catalog pages into Supabase | `scripts/catalog/seed-game-catalog-pages.ts` | `npm run seed:game-catalog-pages`, add `-- --dry-run` to preview; add `-- --final-json-root tmp/content-workspace/<date>/game-catalog` when approved page `final.json` files should override generated copy |
 | Seed gathered game wiki pages into Supabase | `scripts/catalog/seed-game-wiki-pages.ts` | `npm run seed:game-wiki-pages`, add `-- --dry-run` to preview |
 | Collect all catalog item families | multiple catalog collectors | `npm run collect:catalog-items` |
 | Enrich catalog items | `scripts/catalog/enrich-roblox-catalog-items.ts` | `npm run enrich:catalog-items` |
@@ -116,7 +117,24 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | --- | --- | --- |
 | Update `ads.txt` | `scripts/ads/update-ads-txt.ts` | `npm run ads:update` |
 | IndexNow bootstrap | `scripts/automation/indexnow-bootstrap.ts` | `npm run indexnow:bootstrap` |
+| Google Indexing API submitter | `scripts/automation/google-indexing-submit.ts` | `npm run indexing:google -- --dry-run`, live only with `--apply` and `GOOGLE_INDEXING_API_ENABLED=true` |
 | Warm Cloudflare cache | `scripts/automation/warm-cloudflare-cache.mjs` | direct `node scripts/automation/warm-cloudflare-cache.mjs` |
 | Automation reporting | `scripts/automation/report-automation.mjs` | direct `node scripts/automation/report-automation.mjs` |
 | Report redeem markdown image gaps | `scripts/backfill/report-redeem-md-missing-images.ts` | direct `tsx scripts/backfill/report-redeem-md-missing-images.ts` |
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |
+
+### Google Indexing API Workflow
+
+The Google Indexing API job is separate from `.env.analytics`. Local settings belong in ignored `.env.indexing` files; production/GitHub settings should be injected as secrets or variables. The script is guarded twice: it needs `--apply`, and it still exits without submitting unless `GOOGLE_INDEXING_API_ENABLED=true`.
+
+For recurring runs, use Supabase state by setting `GOOGLE_INDEXING_STATE_BACKEND=supabase` with `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE`. That lets the job persist the daily submission count and rotate through older URLs instead of hitting the same sitemap URLs every run.
+
+Minimum production settings:
+
+- `GOOGLE_INDEXING_API_ENABLED=true`
+- `GOOGLE_INDEXING_SERVICE_ACCOUNT_JSON_BASE64=<service account JSON as base64 secret>`
+- `GOOGLE_INDEXING_DAILY_LIMIT=50`
+- `GOOGLE_INDEXING_BATCH_LIMIT=10`
+- `GOOGLE_INDEXING_REQUEST_DELAY_MS=1000`
+- `GOOGLE_INDEXING_RESUBMIT_AFTER_HOURS=168`
+- `GOOGLE_INDEXING_STATE_BACKEND=supabase`

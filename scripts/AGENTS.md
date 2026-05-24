@@ -16,10 +16,12 @@ These files are operational jobs, imports, backfills, collectors, and automation
 
 - `ads/`: build-time ad and policy helpers.
 - `articles/`: article generation and article refresh.
-- `automation/`: queue runners, IndexNow/bootstrap helpers, cache warming, reporting.
+- `automation/`: queue runners, IndexNow/bootstrap helpers, Google Indexing API submitter, cache warming, reporting.
+  - `google-indexing-submit.ts` is a guarded Google Indexing API job. It loads `.env.indexing*`, requires `--apply` plus `GOOGLE_INDEXING_API_ENABLED=true` before calling Google, and should use Supabase state in recurring production/GitHub runs so the daily cap and URL rotation persist.
 - `backfill/`: repair jobs for existing content/data.
 - `catalog/`: Roblox catalog and avatar item collection plus enrichment.
-  - `seed-game-catalog-pages.ts` upserts local game dataset collection copy into `wiki_catalog_pages`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
+  - `collect-slime-rng-data.ts` collects Slime RNG wiki source data into `data/Slime RNG/` and downloads available source images into `apps/web/public/Slime RNG/`. It is a local dataset collector and does not mutate Supabase.
+  - `seed-game-catalog-pages.ts` upserts local game dataset collection copy into `wiki_catalog_pages`; use `--dry-run` before writing and `--draft` when pages should stay unpublished. Pass `--final-json-root tmp/content-workspace/<date>/game-catalog` when approved per-page `final.json` files should override generated copy during local review/import.
   - `seed-game-wiki-pages.ts` upserts game hub rows into `wiki_pages` and links them to matching `roblox_universes`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
   - Both seed scripts accept `--game <slug>` for narrow production publishes. Catalog seeding also accepts `--collection <slug>` for single-page retries.
   - For production runs, use `NODE_ENV=production` plus `--allow-prod` only after a clean production dry-run. Confirm the scripts are targeting the production Supabase host, not local Supabase.

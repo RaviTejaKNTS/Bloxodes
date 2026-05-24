@@ -4,7 +4,7 @@ The `scripts/` folder is organized by task area so it's easier to find the right
 
 - `ads/`: build-time ad and site policy helpers
 - `articles/`: article generation and article refresh jobs
-- `automation/`: queue runners, deploy warmup, and reporting utilities
+- `automation/`: queue runners, deploy warmup, Google/IndexNow indexing helpers, and reporting utilities
 - `backfill/`: one-off cleanup and repair scripts for existing data
 - `catalog/`: Roblox catalog and avatar item ingestion/enrichment
 - `codes/`: code refresh and code-article rewrite jobs. Code rows come from `scripts/codes/update-codes.ts` using `games.source_url` for RobloxDen and `games.source_url_2` for Beebom; do not seed codes manually.
@@ -24,4 +24,5 @@ Local development note:
 
 - shared script env loading lives in `scripts/shared/load-env.ts`
 - scripts now prefer `.env.local` for local work, but they do not override real process env vars
+- Google Indexing API jobs load `.env.indexing.local` / `.env.indexing` after the normal env files; keep indexing secrets separate from `.env.analytics`
 - production jobs can keep injecting `SUPABASE_*` and other env vars the same way they do today
