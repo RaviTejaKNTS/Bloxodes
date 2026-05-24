@@ -664,6 +664,63 @@ const WIZARD_ALCHEMY_RESOURCE_NODE_SECTION_ORDER = [
   "Enchanted Stone sources"
 ];
 
+const SLIME_RNG_SLIME_SECTION_ORDER = ["Base", "Big", "Huge", "Shiny", "Inverted"];
+
+const SLIME_RNG_ZONE_SECTION_ORDER = ["Earlygame", "Midgame", "Lategame", "Endgame"];
+
+const SLIME_RNG_CRAFTING_SECTION_ORDER = [
+  "Early crafting recipes",
+  "Midgame crafting recipes",
+  "Late crafting recipes",
+  "Endgame crafting recipes"
+];
+
+const SLIME_RNG_ITEM_SECTION_ORDER = ["Food", "Potions", "Dice"];
+
+const SLIME_RNG_POWER_FRUIT_SECTION_ORDER = ["Power Fruits"];
+
+const SLIME_RNG_REBIRTH_SECTION_ORDER = ["Rebirths 1-10", "Rebirths 11-20", "Rebirths 21-30"];
+
+const SLIME_RNG_INDEX_REWARD_SECTION_ORDER = ["Basic", "Big", "Huge", "Shiny", "Inverted"];
+
+const KICK_A_LUCKY_BLOCK_BRAINROT_SECTION_ORDER = [
+  "Common",
+  "Rare",
+  "Epic",
+  "Legendary",
+  "Mythic",
+  "Godly",
+  "Secret",
+  "Divine",
+  "Hacked",
+  "OG",
+  "Celestial",
+  "Eternal",
+  "Exclusive"
+];
+
+const KICK_A_LUCKY_BLOCK_MUTATION_SECTION_ORDER = [
+  "Baseline",
+  "Cross-checked mutations",
+  "Update 5 additions",
+  "Limited-data mutations"
+];
+
+const KICK_A_LUCKY_BLOCK_WEIGHT_SECTION_ORDER = [
+  "Starter weights",
+  "Early shop upgrades",
+  "High-cost weights",
+  "Endgame weights"
+];
+
+const KICK_A_LUCKY_BLOCK_ZONE_SECTION_ORDER = ["Starter zones", "Progression zones", "Endgame zones"];
+
+const KICK_A_LUCKY_BLOCK_GAMEPASS_SECTION_ORDER = [
+  "Luck Gamepasses",
+  "Progression Gamepasses",
+  "VIP Gamepass"
+];
+
 const SAILOR_PIECE_RAW_CARD_KEYS = [
   "description",
   "stats",
@@ -1357,6 +1414,139 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     hiddenKeys: ["catalogSection", "verificationNote"],
     additionalColumns: ["catalogSection"],
     maxStats: 6
+  },
+  "slime-rng-slimes": {
+    groupKey: "catalogSection",
+    groupLabel: "Variant",
+    sectionOrder: SLIME_RNG_SLIME_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "sortOrder", "sourcePage", "sourceImageUrl"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "slime-rng-zones": {
+    groupKey: "stage",
+    groupLabel: "Stage",
+    sectionOrder: SLIME_RNG_ZONE_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.stage),
+    hiddenKeys: ["stage", "sortOrder", "sourcePage", "sourceImageUrl", "zoneName"],
+    additionalColumns: ["stage"],
+    maxStats: 6
+  },
+  "slime-rng-crafting-recipes": {
+    groupKey: "craftingStage",
+    groupLabel: "Crafting stage",
+    sectionOrder: SLIME_RNG_CRAFTING_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.craftingStage),
+    hiddenKeys: [
+      "craftingStage",
+      "sortOrder",
+      "sourcePage",
+      "sourceImageUrl",
+      "requiredSlimeOne",
+      "requiredSlimeTwo",
+      "requiredSlimeThree"
+    ],
+    additionalColumns: ["craftingStage"],
+    maxStats: 7
+  },
+  "slime-rng-items": {
+    groupKey: "itemType",
+    groupLabel: "Item type",
+    sectionOrder: SLIME_RNG_ITEM_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.itemType),
+    hiddenKeys: ["itemType", "effect", "sortOrder", "sourcePage", "sourceImageUrl"],
+    additionalColumns: ["itemType"],
+    maxStats: 7
+  },
+  "slime-rng-power-fruits": {
+    groupKey: "catalogSection",
+    groupLabel: "Fruit list",
+    sectionOrder: SLIME_RNG_POWER_FRUIT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "spawnChanceDenominator", "sortOrder", "sourcePage", "sourceImageUrl"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "slime-rng-rebirths": {
+    groupKey: "catalogSection",
+    groupLabel: "Rebirth range",
+    sectionOrder: SLIME_RNG_REBIRTH_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "rebirthRange", "resetNote", "sortOrder", "sourcePage", "sourceImageUrl"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 3
+  },
+  "slime-rng-index-rewards": {
+    groupKey: "catalogSection",
+    groupLabel: "Mutation type",
+    sectionOrder: SLIME_RNG_INDEX_REWARD_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "sortOrder", "sourcePage", "rewardSummary"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 5
+  },
+  "kick-a-lucky-block-brainrots": {
+    groupKey: "catalogSection",
+    groupLabel: "Brainrot tier",
+    sectionOrder: KICK_A_LUCKY_BLOCK_BRAINROT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "sortOrder",
+      "sourcePage",
+      "sourceStatus",
+      "sourceConfidence",
+      "incomeType",
+      "availability"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 3
+  },
+  "kick-a-lucky-block-mutations": {
+    groupKey: "catalogSection",
+    groupLabel: "Mutation confidence",
+    sectionOrder: KICK_A_LUCKY_BLOCK_MUTATION_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "sortOrder", "sourcePage", "sourceStatus"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 4
+  },
+  "kick-a-lucky-block-weights": {
+    groupKey: "catalogSection",
+    groupLabel: "Upgrade stage",
+    sectionOrder: KICK_A_LUCKY_BLOCK_WEIGHT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "sortOrder", "sourcePage", "sourceImageUrl", "sourceStatus"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 4
+  },
+  "kick-a-lucky-block-zones": {
+    groupKey: "catalogSection",
+    groupLabel: "Zone stage",
+    sectionOrder: KICK_A_LUCKY_BLOCK_ZONE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "sortOrder", "sourcePage", "sourceStatus"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "kick-a-lucky-block-gamepasses": {
+    groupKey: "catalogSection",
+    groupLabel: "Pass type",
+    sectionOrder: KICK_A_LUCKY_BLOCK_GAMEPASS_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "sortOrder",
+      "sourcePage",
+      "gamepassId",
+      "productId",
+      "iconAssetId",
+      "thumbnailUrl",
+      "sourceCheckedAt"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 4
   }
 };
 
@@ -3629,7 +3819,19 @@ const DESCRIPTION_KEY_PRIORITY = [
 ];
 
 const STAT_KEY_PRIORITY = [
+  "zoneNumber",
+  "rebirthNumber",
+  "slimesNeeded",
+  "odds",
+  "rarity",
+  "variant",
+  "power",
+  "health",
+  "baseIncome",
+  "incomeMultiplier",
   "income",
+  "chance",
+  "confidence",
   "cost",
   "price",
   "costBucks",
@@ -3638,11 +3840,21 @@ const STAT_KEY_PRIORITY = [
   "robux",
   "requiredCash",
   "requiredBrainrots",
+  "goopRequired",
   "multiplier",
+  "luckMultiplier",
   "maxChance",
   "spawnChance",
+  "kickPowerBand",
+  "earningsBand",
+  "mutationChance",
+  "totalZoneLuck",
+  "enemyHealth",
+  "goopPerKill",
+  "machineUnlocks",
   "level",
   "exp",
+  "xp",
   "expNeeded",
   "dodges",
   "health",
@@ -3650,6 +3862,28 @@ const STAT_KEY_PRIORITY = [
   "cannons",
   "speed",
   "requirements",
+  "area",
+  "zone",
+  "resultChance",
+  "resultRarity",
+  "requiredSummary",
+  "ingredientOddsText",
+  "itemType",
+  "effect",
+  "buff",
+  "nextRoll",
+  "duration",
+  "rule",
+  "abilityOne",
+  "abilityTwo",
+  "upgradeNote",
+  "restrictions",
+  "appliesTo",
+  "survivalNote",
+  "rewardOne",
+  "rewardTwo",
+  "rewardThree",
+  "rewardSummary",
   "obtainment",
   "source",
   "bonuses",

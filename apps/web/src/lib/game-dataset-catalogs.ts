@@ -63,6 +63,28 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
     ]
   },
   {
+    gameSlug: "slime-rng",
+    gameName: "Slime RNG",
+    dataDir: "Slime RNG",
+    universeNames: ["Slime RNG"],
+    collections: [
+      "slimes",
+      "zones",
+      "crafting-recipes",
+      "items",
+      "power-fruits",
+      "rebirths",
+      "index-rewards"
+    ]
+  },
+  {
+    gameSlug: "kick-a-lucky-block",
+    gameName: "Kick a Lucky Block",
+    dataDir: "Kick a Lucky Block",
+    universeNames: ["Kick a Lucky Block", "[🌋] Kick a Lucky Block"],
+    collections: ["brainrots", "mutations", "weights", "zones"]
+  },
+  {
     gameSlug: "sailor-piece",
     gameName: "Sailor Piece",
     dataDir: "Sailor Piece",
@@ -184,18 +206,21 @@ const COLLECTION_LABEL_OVERRIDES: Record<string, string> = {
   "accessory-shop": "Accessory Shop Items",
   "aura-stages": "Aura Stages",
   "aura-visuals": "Aura Visuals",
+  "crafting-recipes": "Crafting Recipes",
   "fighting-styles": "Fighting Styles",
   "fuse-machine": "Fuse Machine Results",
   gamepasses: "Gamepasses",
   haki: "Haki",
   "house-surfaces": "House Surfaces",
   "instinct-levels": "Instinct Levels",
+  "index-rewards": "Index Rewards",
   "inventory-items": "Inventory Items",
   "lucky-blocks": "Lucky Blocks",
   "map-themes": "Map Themes",
   "melee-specs": "Melee Specs",
   npcs: "NPCs",
   "pet-ages": "Pet Ages",
+  "power-fruits": "Power Fruits",
   "roleplay-outfits": "Roleplay Outfits",
   "sea-events": "Sea Events",
   "special-titles": "Special Titles",
@@ -217,6 +242,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   brooms: "prices, locations, travel stats, availability, and movement value",
   chests: "route order, landmarks, location hints, reward notes, and travel tips",
   clans: "clan effects, bonuses, rarity, requirements, and obtainment",
+  "crafting-recipes": "crafted results, recipe areas, result odds, required slimes, and crafting progression",
   dungeons: "entry rules, wave structure, rewards, difficulty, and dungeon purpose",
   eggs: "price, rarity chances, availability, events, and obtainment",
   emotes: "available emote entries and their catalog images",
@@ -236,6 +262,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   "house-surfaces": "wall and floor surfaces, prices, categories, and home design options",
   houses: "house names, categories, costs, requirements, images, and unlock notes",
   "instinct-levels": "Instinct level progression, experience, dodges, and buffs",
+  "index-rewards": "index milestones, required slime counts, reward bundles, and permanent boosts",
   "inventory-items": "tools, roleplay items, categories, descriptions, and images",
   islands: "level ranges, seas, bosses, costs, and travel progression",
   jobs: "job names, categories, buildings, images, and roleplay use",
@@ -250,6 +277,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   "pet-ages": "pet age stages, tricks unlocked, and special tricks",
   pets: "rarity, cost, availability, source tables, images, and pet collection progress",
   potions: "price, effect, use, availability, and obtainment",
+  "power-fruits": "fruit spawn chances, powers, abilities, upgrade notes, and use restrictions",
   props: "prop categories, names, and catalog images for roleplay setup",
   quests: "quest givers, islands, levels, XP, money, objectives, and special rewards",
   races: "race names, rarity, effects, bonuses, requirements, and progression use",
@@ -273,7 +301,9 @@ const COLLECTION_FOCUS: Record<string, string> = {
   traits: "trait categories, multipliers, visuals, obtainment, and notes",
   vehicles: "vehicle names, categories, costs, seats, requirements, and availability",
   wands: "cost, Attack, Attack Bonus, special bonuses, source locations, and upgrade value",
-  "wizard-hats": "HP bonuses, Gold costs, lava resistance, source locations, and defensive gear value"
+  weights: "rarity, kick power, cost, progression stage, and weight upgrade value",
+  "wizard-hats": "HP bonuses, Gold costs, lava resistance, source locations, and defensive gear value",
+  zones: "zone order, rarity, kick power bands, reward bands, mutation notes, and return-risk context"
 };
 
 const FIELD_LABELS: Record<string, string> = {
@@ -285,6 +315,8 @@ const FIELD_LABELS: Record<string, string> = {
   area: "area",
   armsVisual: "arms visual",
   abilityCount: "ability count",
+  abilityOne: "Ability 1",
+  abilityTwo: "Ability 2",
   appliesTo: "applies to",
   attack: "Attack",
   attackBonus: "Attack Bonus",
@@ -302,6 +334,7 @@ const FIELD_LABELS: Record<string, string> = {
   bonusEffect: "bonus / effect",
   bonusSummary: "bonuses",
   bonusType: "bonus type",
+  buff: "buff",
   bossCheckpoint: "boss checkpoint",
   bossStage: "boss stage",
   bosses: "bosses",
@@ -310,11 +343,13 @@ const FIELD_LABELS: Record<string, string> = {
   cashBonus: "cash bonus",
   catalogSection: "section",
   category: "category",
+  chance: "chance",
   chances: "chances",
   combat: "combat",
   combatLevel: "level",
   combatRole: "role",
   compatibleRace: "compatible race",
+  confidence: "confidence",
   cooldown: "cooldown",
   cooldownReduction: "cooldown reduction",
   cost: "cost",
@@ -324,6 +359,7 @@ const FIELD_LABELS: Record<string, string> = {
   costSummary: "cost",
   coreBonus: "core bonus",
   craftCost: "craft cost",
+  craftingStage: "crafting stage",
   damage: "damage",
   damageMultiplier: "damage multiplier",
   damageReduction: "damage reduction",
@@ -354,7 +390,9 @@ const FIELD_LABELS: Record<string, string> = {
   drops: "drops",
   dropsRewards: "drops / rewards",
   dropSummary: "drop summary",
+  duration: "duration",
   effect: "effect",
+  enemyHealth: "enemy health",
   encounter: "encounter",
   encounterType: "encounter type",
   enemyType: "enemy type",
@@ -374,18 +412,25 @@ const FIELD_LABELS: Record<string, string> = {
   hasV4: "V4 status",
   howToReach: "how to reach",
   howToUse: "how to use",
+  health: "Health",
   hp: "HP",
   hpBonus: "HP Bonus",
   holderTarget: "holder / target",
   image: "image",
   income: "income",
+  baseIncome: "base income",
+  incomeMultiplier: "income multiplier",
+  incomeType: "income type",
+  ingredientOddsText: "ingredient odds",
   importantRule: "important rule",
   islandArea: "island / area",
   islandRegion: "island / region",
+  itemType: "type",
   keyNpcs: "key NPCs",
   keyContent: "key content",
   keepPriority: "keep or reroll",
   keyUse: "key use",
+  kickPowerBand: "kick power band",
   landmark: "landmark",
   level: "level",
   lavaResistance: "lava resistance",
@@ -396,6 +441,8 @@ const FIELD_LABELS: Record<string, string> = {
   locationHint: "location hint",
   locationType: "location type",
   legsVisual: "legs visual",
+  luckMultiplier: "luck multiplier",
+  machineUnlocks: "machine unlocks",
   mainLimit: "limit",
   mainNpcs: "main NPCs / bosses",
   mainReward: "main reward",
@@ -419,6 +466,8 @@ const FIELD_LABELS: Record<string, string> = {
   moneyReward: "money reward",
   minMagic: "Min Magic",
   multiplier: "multiplier",
+  mutationType: "mutation type",
+  nextRoll: "next roll",
   normalPlayerRoute: "normal-player route",
   notableDrops: "notable drops",
   nodeType: "node type",
@@ -438,10 +487,16 @@ const FIELD_LABELS: Record<string, string> = {
   progressionRole: "progression role",
   progressionNote: "progression note",
   progressionUse: "route use",
+  rebirthNumber: "rebirth",
+  rebirthRange: "rebirth range",
   questGiverName: "quest giver",
   questSource: "quest / source",
   rarity: "rarity",
   requirement: "requirement",
+  requiredSlimeOne: "required slime 1",
+  requiredSlimeTwo: "required slime 2",
+  requiredSlimeThree: "required slime 3",
+  requiredSummary: "required slimes",
   difficultyStage: "difficulty stage",
   requiredBrainrots: "required brainrots",
   requiredCash: "required cash",
@@ -456,7 +511,12 @@ const FIELD_LABELS: Record<string, string> = {
   respawnAccess: "access / respawn",
   respawnOrRepeatNote: "respawn / repeat note",
   rewardCategory: "reward type",
+  rewardFocus: "Reward Focus",
   rewardNotes: "reward notes",
+  rewardOne: "Reward 1",
+  rewardTwo: "Reward 2",
+  rewardThree: "Reward 3",
+  rewardSummary: "rewards",
   robux: "Robux cost",
   role: "role",
   routeNote: "route note",
@@ -466,6 +526,10 @@ const FIELD_LABELS: Record<string, string> = {
   rollChance: "roll chance",
   rollRoute: "reroll route",
   rollRarity: "roll rarity",
+  resultChance: "result odds",
+  resultRarity: "result rarity",
+  restrictions: "restrictions",
+  rule: "rule",
   rerollStatus: "reroll status",
   runType: "run type",
   sea: "sea",
@@ -475,12 +539,14 @@ const FIELD_LABELS: Record<string, string> = {
   signatureMove: "signature move",
   sellPrice: "sell price",
   source: "source",
+  sourceConfidence: "source confidence",
   elementEffect: "element effect",
   elementSynergy: "element synergy",
   farmingStage: "farming stage",
   sourceLocation: "source location",
   sourcePity: "source / pity",
   sourceRoute: "source",
+  sourceStatus: "source status",
   sourceTeacher: "teacher",
   sourceType: "source type",
   sourceAccess: "source / access",
@@ -490,15 +556,23 @@ const FIELD_LABELS: Record<string, string> = {
   specialUse: "special use",
   spellRole: "spell role",
   spawnRequirement: "spawn requirement",
+  spawnChance: "spawn chance",
+  slimesNeeded: "slimes needed",
   spinChance: "spin chance",
   status: "status",
   stats: "stats",
   statPriority: "stat priority",
+  survivalNote: "survival note",
   sustainDefense: "sustain / defense",
   tier: "tier",
   titleCountNeeded: "title count needed",
   titleRole: "title role",
   travelTip: "travel tip",
+  earningsBand: "earnings band",
+  mutationChance: "mutation chance",
+  totalZoneLuck: "total zone luck",
+  goopPerKill: "Goop per kill",
+  goopRequired: "Goop required",
   type: "type",
   unlock: "unlock",
   unlockNote: "unlock note",
@@ -526,7 +600,12 @@ const FIELD_LABELS: Record<string, string> = {
   tierOne: "Tier I",
   tierThree: "Tier III",
   upgradePath: "upgrade path",
+  upgradeNote: "upgrade note",
   upgradeUse: "upgrade / use note",
+  variant: "Variant",
+  xp: "XP",
+  zoneName: "zone",
+  zoneNumber: "zone",
   wikiUrl: "wiki page"
 };
 
@@ -677,6 +756,10 @@ function buildGameDatasetCatalogCopyOverride({
   countLabel,
   imageUrls
 }: Omit<GameDatasetCatalogCopyInput, "columns"> & { countLabel: string }): GameDatasetCatalogCopy | null {
+  if (config.gameSlug === "slime-rng") {
+    return buildSlimeRngCatalogCopyOverride({ config, itemCount, countLabel, imageUrls });
+  }
+
   if (config.code === "wizard-alchemy-potions") {
     const title = `All ${countLabel} Potions in Wizard Alchemy`;
 
@@ -1419,6 +1502,325 @@ function buildGameDatasetCatalogCopyOverride({
     wiki_item_count: itemCount,
     thumb_url: imageUrls[0] ?? null
   };
+}
+
+function buildSlimeRngCatalogCopyOverride({
+  config,
+  itemCount,
+  countLabel,
+  imageUrls
+}: Omit<GameDatasetCatalogCopyInput, "columns"> & { countLabel: string }): GameDatasetCatalogCopy | null {
+  const common = {
+    code: config.code,
+    cta_url: buildGameDatasetCatalogPath(config.code),
+    wiki_sort_order: config.sortOrder,
+    wiki_item_count: itemCount
+  };
+
+  switch (config.code) {
+    case "slime-rng-slimes": {
+      const title = `All ${countLabel} Slime RNG Slimes, Odds, and Stats`;
+      return {
+        ...common,
+        title,
+        seo_title: title,
+        meta_description: "Slime RNG slimes list with roll odds, rarity, variants, Power, Health, and family names for every tracked slime.",
+        intro_md:
+          "Slimes are the main rolls and combat units in Slime RNG. Each entry has a roll chance, rarity, variant, Power stat, and Health stat, so a good pull matters both for collection progress and for clearing enemy slimes in later zones.",
+        description_json: {
+          Base:
+            "Base slimes are the normal version of each slime family. They set the starting odds and stats that the Big, Huge, Shiny, and Inverted versions build from.",
+          Big:
+            "Big slimes are rarer variant pulls with stronger stats than the base form. They are usually the first mutation-style upgrade players notice while rolling.",
+          Huge:
+            "Huge slimes push the same family into much harder odds and higher combat stats. These pulls matter more once enemy Health starts rising across zones.",
+          Shiny:
+            "Shiny slimes are rare alternate versions with their own odds and stat values. Treat the listed odds and stats as the useful comparison point until more in-game behavior is verified.",
+          Inverted:
+            "Inverted slimes are the hardest listed variant in each family. Their odds climb sharply, and their Power and Health usually make them major keepers."
+        },
+        description_md:
+          "## How rolling and variants fit together\n\nEvery slime belongs to a family, such as Goopy, Lucky, Cyber, or Mossy. The variant tells you which version of that family you rolled. Base is the normal form, while Big, Huge, Shiny, and Inverted versions are progressively rarer pulls with different odds and stronger combat stats.\n\n## How to compare a slime pull\n\n1. Check the variant first so you know whether the pull is Base, Big, Huge, Shiny, or Inverted.\n2. Compare the odds to understand how hard that exact entry is to roll again.\n3. Use Power when deciding which slime helps kill enemies faster.\n4. Use Health when deciding which slime can stay alive longer during zone fights.\n5. Keep stronger variants from the same family before spending food on weaker duplicates.\n\n## Why stats matter after the roll\n\nRarity is useful for bragging rights and collection progress, but Power and Health decide how the slime performs in fights. A high-odds pull with better stats can help you push enemies and Goop farming farther than a low-stat slime that only fills the index.",
+        how_it_works_md:
+          "`Odds` is the listed roll rate for that exact slime entry. `Variant` separates Base, Big, Huge, Shiny, and Inverted versions. `Power` is the combat damage stat, while `Health` is how much damage the slime can take. `Family` links variants back to the same base slime line.",
+        faq_json: [
+          {
+            q: "How many slimes are listed for Slime RNG?",
+            a: `There are ${countLabel} tracked slime entries in the current local list, split across Base, Big, Huge, Shiny, and Inverted variants.`
+          },
+          {
+            q: "What is the difference between a slime family and a variant?",
+            a: "The family is the base slime line, such as Goopy or Lucky. The variant is the version you rolled, such as Base, Big, Huge, Shiny, or Inverted."
+          },
+          {
+            q: "Which slime stat should you compare first?",
+            a: "Start with odds and variant if you care about rarity. Use Power and Health when choosing which slime to level for combat."
+          }
+        ],
+        cta_label: "Open slimes list",
+        wiki_md:
+          "Slimes are the core Slime RNG collection and combat units. Variants change the odds and stats for each family, while Power and Health decide which pulls are worth feeding before tougher zone enemies.",
+        thumb_url: imageUrls[0] ?? null
+      };
+    }
+    case "slime-rng-zones": {
+      const title = `All ${countLabel} Slime RNG Zones, Costs, Luck, and Goop`;
+      return {
+        ...common,
+        title,
+        seo_title: title,
+        meta_description: "Slime RNG zones list with unlock costs, permanent zone luck, enemy Health, Goop per kill, and machine unlocks.",
+        intro_md:
+          "Zones are Slime RNG's main map progression path. Unlocking a new zone costs Coins, raises your highest-zone luck bonus, changes enemy Health, and increases the Goop you can earn from kills.",
+        description_json: {
+          Earlygame:
+            "Earlygame zones teach the basic loop: unlock the next area, fight tougher enemies, and build enough Coins and slimes to keep moving.",
+          Midgame:
+            "Midgame zones start raising costs and enemy Health quickly. These areas are where permanent zone luck and stronger slime stats begin to feel important.",
+          Lategame:
+            "Lategame zones ask for larger Coin jumps and better combat strength. Goop per kill rises, but enemies become much harder to clear with weak slimes.",
+          Endgame:
+            "Endgame zones are the current high-end route in the completed source list. Plan around both the unlock cost and the enemy Health before pushing ahead."
+        },
+        description_md:
+          "## How zone progress works\n\nZone unlocks are bought with Coins, but the most important long-term reward is zone luck. The highest zone you have reached gives permanent zone luck, and the source notes that re-unlocking zones after a rebirth does not add the same bonus again.\n\n## How to push into the next zone\n\n1. Check the next zone cost before leaving your current farming route.\n2. Compare enemy Health with your best slime Power so fights do not slow down too much.\n3. Use Goop per kill to decide whether the new zone is worth farming after you unlock it.\n4. Watch for machine unlocks, since Crafting Machine and XP Transfer Machine access changes what you can do between rolls.\n5. After rebirthing, rebuild zone progress for access, but remember that highest-zone luck is based on your personal best.\n\n## Why the count stops at completed zones\n\nThe current source headline mentions more zones than the completed card data supports. The local list uses the completed zone cards through Honeycomb and leaves unfinished duplicate rows out until they have reliable names, costs, stats, and images.",
+        how_it_works_md:
+          "`Cost` is the Coin price to unlock the zone. `Total Zone Luck` is the cumulative permanent luck value shown for reaching that zone. `Enemy Health` shows how much tougher zone fights become, and `Goop Per Kill` shows the reward pace after kills. `Machine Unlocks` appears only where the source lists a machine in that zone.",
+        faq_json: [
+          {
+            q: "Why does the list show completed zones only?",
+            a: "The current source includes unfinished zone text beyond the completed card list. Rows without reliable zone data are left out until their cost, luck, enemy Health, Goop, and image are confirmed."
+          },
+          {
+            q: "Does rebirth remove zone luck in Slime RNG?",
+            a: "The Zones source says rebirth resets current zone progress, but the permanent luck from your highest reached zone is kept."
+          },
+          {
+            q: "Which zone values matter most?",
+            a: "Cost decides whether you can unlock the area, enemy Health decides whether your slimes can fight there, and Goop per kill decides how useful the zone is for rebirth progress."
+          }
+        ],
+        cta_label: "Open zones list",
+        wiki_md:
+          "Zones control Slime RNG map progress. Coin costs gate each area, permanent zone luck rewards your highest reach, and enemy Health plus Goop per kill decide when a new area becomes a better farm.",
+        thumb_url: imageUrls[0] ?? null
+      };
+    }
+    case "slime-rng-crafting-recipes": {
+      const title = `All ${countLabel} Slime RNG Crafting Recipes, Locations, and Required Slimes`;
+      return {
+        ...common,
+        title,
+        seo_title: title,
+        meta_description:
+          "Slime RNG crafting recipes list with recipe areas, crafted slime odds, result rarity, and required slimes.",
+        intro_md:
+          "Crafting lets you trade three specific slimes for a crafted slime result. The useful details are where the recipe belongs, how rare the crafted result is, and which ingredient slimes you need before you spend anything.",
+        description_json: {
+          "Early crafting recipes":
+            "Early recipes sit near the first crafting route and use slimes from the earlier progression climb. They are the safest place to learn the three-slime recipe pattern.",
+          "Midgame crafting recipes":
+            "Midgame recipes move into rarer ingredients and higher result odds. This is where farming the required slimes matters more than simply reaching the machine.",
+          "Late crafting recipes":
+            "Late recipes use billion-range result odds and ingredients from deeper zone progress. Check the ingredient list before chasing the result.",
+          "Endgame crafting recipes":
+            "Endgame recipes are the highest recipes in the current source list. They depend on rare ingredients, so failed preparation can waste valuable slime pulls."
+        },
+        description_md:
+          "## How crafting recipes work\n\nA crafting recipe consumes three listed slimes to create a specific crafted result. The result still has its own rarity and odds, so the recipe is best treated as a planned upgrade route rather than a casual sink for spare slimes.\n\n## How to prepare for a craft\n\n1. Pick the crafted slime you want before spending rare ingredients.\n2. Check the recipe area so you know how far the zone route needs to be unlocked.\n3. Farm or roll the three required slimes and compare their own odds.\n4. Save duplicate ingredient slimes until you are sure they are not needed for another recipe.\n5. Craft only when losing those three slimes is worth the result you are chasing.\n\n## What the recipe odds mean\n\nThe result odds show the rarity of the crafted slime itself, while the required slime fields show the cost of making the attempt. A recipe can look simple because it only needs three ingredients, but those ingredients can be rare enough that the real cost is the rolling time behind them.",
+        how_it_works_md:
+          "`Area` and `Zone` show where the recipe belongs in progression. `Result odds` and `Result rarity` describe the crafted slime. `Required slimes` lists the three consumed ingredients, and `Ingredient odds` gives a compact look at how hard those ingredient slimes are to replace.",
+        faq_json: [
+          {
+            q: "How many crafting recipes are listed for Slime RNG?",
+            a: `There are ${countLabel} crafting recipes in the current local list.`
+          },
+          {
+            q: "Does crafting use up the required slimes?",
+            a: "The Crafting source describes recipes as using three other slimes. Treat the required slimes as spent ingredients unless in-game text says otherwise."
+          },
+          {
+            q: "Can crafting create mutated slimes?",
+            a: "The source says crafting has a rare chance to give a mutated slime, but it does not list exact mutation odds."
+          }
+        ],
+        cta_label: "Open crafting recipes",
+        wiki_md:
+          "Crafting recipes turn three required slimes into a crafted result. Recipe area, result odds, rarity, and ingredient odds all matter because a craft can cost rare pulls before it creates the slime you want.",
+        thumb_url: imageUrls[0] ?? null
+      };
+    }
+    case "slime-rng-items": {
+      const title = `All ${countLabel} Slime RNG Items, Food, Potions, and Dice`;
+      return {
+        ...common,
+        title,
+        seo_title: title,
+        meta_description:
+          "Slime RNG items list with Food XP values, Potion buffs, Dice effects, duration notes, and roll rules.",
+        intro_md:
+          "Items support the roll and combat loop in Slime RNG. Food levels slimes for better stats, potions give short buffs, and dice change the next roll or reward result.",
+        description_json: {
+          Food:
+            "Food gives XP to slimes. Higher food values are better for important slimes, especially rare variants that you plan to use in fights.",
+          Potions:
+            "Potions provide short buffs for rolling or farming. The current source describes these buffs as lasting 3 minutes.",
+          Dice:
+            "Dice affect the next roll or Jackpot result. Mutation dice guarantee a listed mutation type, but the source notes that mutation dice do not stack."
+        },
+        description_md:
+          "## How to use items without wasting them\n\nItems are best saved for the part of the loop they actually improve. Food belongs on slimes you plan to keep. Potions are strongest when you are ready to roll or farm for the full buff window. Dice should be used when you care about the next roll outcome instead of spending them randomly.\n\n## Quick item plan\n\n| Item type | Best use | What to avoid |\n| --- | --- | --- |\n| Food | Leveling strong slimes for combat | Feeding every low-value duplicate |\n| Potions | Short focused rolling or coin sessions | Activating them when you are about to leave |\n| Dice | Forcing a specific next-roll mutation or Jackpot result | Stacking mutation dice when the source says they do not stack |\n\n## Why Power Fruits are separate\n\nPower Fruits behave more like a slime power system than normal consumables. They have spawn chances, ability pages, upgrade notes, and one-fruit restrictions, so they are tracked separately from food, potions, and dice.",
+        how_it_works_md:
+          "Food rows show `XP`, potion rows show the `Buff` and `Duration`, and dice rows show the `Next roll` effect plus any rule that changes how the dice should be used.",
+        faq_json: [
+          {
+            q: "How many normal items are listed for Slime RNG?",
+            a: `There are ${countLabel} Food, Potion, and Dice items in the current local list. Power Fruits are tracked separately.`
+          },
+          {
+            q: "How long do potions last in Slime RNG?",
+            a: "The current Items source says potion buffs last 3 minutes."
+          },
+          {
+            q: "Do mutation dice stack?",
+            a: "The Items source says mutation dice do not stack, so use one when you want that next-roll mutation effect."
+          }
+        ],
+        cta_label: "Open items list",
+        wiki_md:
+          "Items support Slime RNG progression outside the slime list itself. Food gives XP, potions create short buff windows, and dice change next-roll outcomes or Jackpot rewards.",
+        thumb_url: imageUrls[0] ?? null
+      };
+    }
+    case "slime-rng-power-fruits": {
+      const title = `All ${countLabel} Slime RNG Power Fruits and Spawn Chances`;
+      return {
+        ...common,
+        title,
+        seo_title: title,
+        meta_description:
+          "Slime RNG Power Fruits list with spawn chances, powers, known abilities, upgrade notes, and use restrictions.",
+        intro_md:
+          "Power Fruits are rare fruit drops that give a slime an elemental-style power. They are separate from normal food because they change what a slime can do, have their own spawn chances, and come with important restrictions.",
+        description_json: {
+          "Power Fruits":
+            "Power Fruits are sorted from the most common listed spawn chance to the rarest. Universe Fruit is included, but its ability names are still unknown in the current source."
+        },
+        description_md:
+          "## How Power Fruits work\n\nPower Fruits fall from meteors after the system is unlocked through the Upgrade Tree. Each fruit adds a power to a slime, such as Lightning, Fire, Ice, Sword, Magician, or Universe. Known fruit pages list two abilities for most fruits, while Universe Fruit still has unknown ability text in the current source.\n\n## How to choose a fruit target\n\n1. Check the spawn chance so you know how rare the fruit is compared with the others.\n2. Read the known abilities before giving the fruit to an important slime.\n3. Put a fruit on a slime you plan to keep, because the source warns against normal free switching.\n4. Avoid using fruited slimes as crafting ingredients, since the source says they cannot be used in the crafting machine.\n5. Claim meteor fruits quickly because the source gives a short 2-3 minute claim window.\n\n## What to do with unknown ability data\n\nWhen a fruit has unknown ability text, the safest comparison is spawn chance and power name. Do not assume the missing ability works like another fruit until the in-game description or source page is updated.",
+        how_it_works_md:
+          "`Spawn Chance` is the listed per-second meteor chance, not a slime roll chance. `Power` names the fruit's power type. `Ability 1` and `Ability 2` show known source descriptions where available. `Restrictions` covers the one-fruit and crafting limits that matter before assigning a fruit.",
+        faq_json: [
+          {
+            q: "How many Power Fruits are in Slime RNG?",
+            a: `There are ${countLabel} Power Fruits in the current local list: Lightning, Fire, Ice, Sword, Magician, and Universe.`
+          },
+          {
+            q: "Can a slime have more than one Power Fruit?",
+            a: "The Power Fruits source says a slime cannot have more than one fruit."
+          },
+          {
+            q: "Can fruited slimes be used for crafting?",
+            a: "The source says slimes with fruits cannot be used in the crafting machine."
+          }
+        ],
+        cta_label: "Open Power Fruits list",
+        wiki_md:
+          "Power Fruits give slimes special powers and need more planning than normal food. Spawn chance, known abilities, upgrade limits, and one-fruit restrictions decide which slime should receive one.",
+        thumb_url: imageUrls[0] ?? null
+      };
+    }
+    case "slime-rng-rebirths": {
+      const title = `All ${countLabel} Slime RNG Rebirths, Goop Costs, and Luck Multipliers`;
+      return {
+        ...common,
+        title,
+        seo_title: title,
+        meta_description:
+          "Slime RNG rebirths list with Goop requirements, luck multipliers, reset rules, and displayed rebirth ranges.",
+        intro_md:
+          "Rebirths are Slime RNG's long-term reset path. Each displayed rebirth asks for more Goop and gives a higher luck multiplier, while resetting coins and current zone progress.",
+        description_json: {
+          "Rebirths 1-10":
+            "The first rebirths introduce the Goop cost climb and give the first major luck multiplier jumps.",
+          "Rebirths 11-20":
+            "Middle rebirths move the Goop requirement into millions and push multipliers much higher.",
+          "Rebirths 21-30":
+            "The highest displayed rebirths in the current source require large Goop totals and are not the stated cap."
+        },
+        description_md:
+          "## How rebirth changes a run\n\nA rebirth spends the required Goop and resets your coins and current zone unlocks. The FAQ says slimes, upgrades, and luck are kept, while the Zones source says your highest-zone luck bonus stays tied to the best zone you have reached.\n\n## When to rebirth\n\n1. Check the Goop requirement for your next rebirth.\n2. Make sure you are ready to rebuild coins and zone access after the reset.\n3. Keep your strongest slimes leveled so early zones are faster after rebirth.\n4. Use the luck multiplier jump to decide whether the reset is worth doing now or after one more farming push.\n\n## Why the list says displayed rebirths\n\nThe source lists 30 rebirth rows but also says that is not the maximum. The local list tracks the displayed source rows and avoids guessing future or unlisted rebirth costs.",
+        how_it_works_md:
+          "`Rebirth` is the numbered rebirth milestone. `Goop required` is the amount needed to activate that rebirth, and `Luck multiplier` is the source-listed multiplier for that stage. Reset details stay in the page copy because repeating the same warning on every card would make the list harder to scan.",
+        faq_json: [
+          {
+            q: "How many rebirths are listed for Slime RNG?",
+            a: `There are ${countLabel} displayed rebirth rows in the current local list, and the source says this is not the maximum.`
+          },
+          {
+            q: "What resets when you rebirth?",
+            a: "The FAQ says rebirth resets zones and coins only, while keeping slimes, upgrades, and luck."
+          },
+          {
+            q: "Does rebirth remove highest-zone luck?",
+            a: "The Zones source says highest-zone permanent luck is kept even though current zone progress resets."
+          }
+        ],
+        cta_label: "Open rebirths list",
+        wiki_md:
+          "Rebirths turn Goop into long-term luck multipliers. The reset removes coins and current zones, but source notes say slimes, upgrades, luck, and highest-zone progress are kept.",
+        thumb_url: null
+      };
+    }
+    case "slime-rng-index-rewards": {
+      const title = `All ${countLabel} Slime RNG Index Rewards and Milestones`;
+      return {
+        ...common,
+        title,
+        seo_title: title,
+        meta_description:
+          "Slime RNG index rewards list with Basic, Big, Huge, Shiny, and Inverted milestones plus reward bundles.",
+        intro_md:
+          "Index rewards are collection milestones for filling out slime variants. Each milestone asks for a number of discovered slimes in a variant track and pays out boosts, currency, Goop, dice, food, or multipliers.",
+        description_json: {
+          Basic:
+            "Basic milestones reward normal slime collection progress. They include early boosts, currency, food, Goop, and multiplier rewards.",
+          Big:
+            "Big milestones focus on collecting Big variants and include mutation dice, boosts, food, and multiplier rewards.",
+          Huge:
+            "Huge milestones reward Huge variant collection. These rows start lower than Basic because Huge pulls are harder to fill.",
+          Shiny:
+            "Shiny milestones reward Shiny variant collection and include Shiny Dice, boosts, food, and multipliers.",
+          Inverted:
+            "Inverted milestones reward the rarest variant track. These rows are valuable because Inverted pulls are much harder to complete."
+        },
+        description_md:
+          "## How index rewards fit collection progress\n\nThe index rewards system pays you for discovering enough slimes in each variant track. Basic has the largest early collection path, while Big, Huge, Shiny, and Inverted tracks reward rarer variant progress with their own milestones.\n\n## How to plan around index milestones\n\n1. Check the variant track you are closest to finishing.\n2. Compare the next `Slimes Needed` value with your current index progress.\n3. Use guaranteed mutation dice from rewards when they help the next track you are pushing.\n4. Save stronger boosts for focused rolling sessions instead of spending them between short checks.\n5. Treat multiplier rewards as long-term account value because they help more than one roll.\n\n## Why reward focus matters\n\nSome milestones give short-term items such as food, boosts, dice, coins, or Goop. Others give multiplier increases that improve future rolling or coin progress. The best milestone to chase is usually the one close enough to finish soon while still giving a reward you can use immediately.",
+        how_it_works_md:
+          "`Mutation Type` is the index track. `Slimes Needed` is the count required for that milestone. `Reward 1`, `Reward 2`, and `Reward 3` show the listed payout bundle; blank reward slots mean the source only listed one or two rewards for that milestone.",
+        faq_json: [
+          {
+            q: "How many index rewards are listed for Slime RNG?",
+            a: `There are ${countLabel} index reward milestones in the current local list across Basic, Big, Huge, Shiny, and Inverted tracks.`
+          },
+          {
+            q: "Which index track should you work on first?",
+            a: "Start with the track closest to its next milestone. Basic milestones are usually easier early, while Big, Huge, Shiny, and Inverted tracks depend on rarer variant pulls."
+          },
+          {
+            q: "Why are row images hidden for index rewards?",
+            a: "The rewards are mixed bundles of icons and text, so clean reward fields are easier to scan than repeated per-card images."
+          }
+        ],
+        cta_label: "Open index rewards",
+        wiki_md:
+          "Index rewards turn slime collection into milestone payouts. Basic, Big, Huge, Shiny, and Inverted tracks each pay boosts, dice, food, currency, Goop, or multipliers as the index fills.",
+        thumb_url: null
+      };
+    }
+    default:
+      return null;
+  }
 }
 
 function getCollectionLabel(slug: string): string {

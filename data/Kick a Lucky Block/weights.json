@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "title": "Kick a Lucky Block weights data",
+    "updatedAt": "2026-05-24",
+    "sources": [
+      {
+        "label": "Kick a Lucky Block - Weights",
+        "url": "https://kickaluckyblock.com/weights",
+        "accessed": "2026-05-24"
+      },
+      {
+        "label": "Kick a Lucky Block - Weights alternate source",
+        "url": "https://kickaluckyblock.io/weights",
+        "accessed": "2026-05-24"
+      }
+    ],
+    "columns": [
+      "rarity",
+      "power",
+      "cost",
+      "catalogSection",
+      "sourceStatus",
+      "image"
+    ],
+    "notes": "Primary source lists 13 weights through Emerald Barbell. Alternate source lists 12 and omits Emerald Barbell."
+  },
+  "items": [
+    {
+      "name": "Wooden Stick",
+      "slug": "wooden-stick",
+      "rarity": "Common",
+      "power": "2",
+      "cost": "Free",
+      "catalogSection": "Starter weights",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/wooden-stick.webp",
+      "sortOrder": 1,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Wooden-Stick.webp"
+    },
+    {
+      "name": "Bone Barbell",
+      "slug": "bone-barbell",
+      "rarity": "Rare",
+      "power": "5",
+      "cost": "$7.5K",
+      "catalogSection": "Starter weights",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/bone-barbell.webp",
+      "sortOrder": 2,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Bone-Barbell.webp"
+    },
+    {
+      "name": "Stone Block",
+      "slug": "stone-block",
+      "rarity": "Epic",
+      "power": "10",
+      "cost": "$75K",
+      "catalogSection": "Starter weights",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/stone-block.webp",
+      "sortOrder": 3,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Stone-Block.webp"
+    },
+    {
+      "name": "Copper Plate",
+      "slug": "copper-plate",
+      "rarity": "Legendary",
+      "power": "50",
+      "cost": "$500K",
+      "catalogSection": "Early shop upgrades",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/copper-plate.webp",
+      "sortOrder": 4,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Copper-Plate.webp"
+    },
+    {
+      "name": "Iron Plate",
+      "slug": "iron-plate",
+      "rarity": "Mythic",
+      "power": "150",
+      "cost": "$7.2M",
+      "catalogSection": "Early shop upgrades",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/iron-plate.webp",
+      "sortOrder": 5,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Iron-Plate.webp"
+    },
+    {
+      "name": "Ice Barbell",
+      "slug": "ice-barbell",
+      "rarity": "Godly",
+      "power": "400",
+      "cost": "$350M",
+      "catalogSection": "Early shop upgrades",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/ice-barbell.webp",
+      "sortOrder": 6,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Ice-Barbell.webp"
+    },
+    {
+      "name": "Donut Barbell",
+      "slug": "donut-barbell",
+      "rarity": "Secret",
+      "power": "1000",
+      "cost": "$6.2B",
+      "catalogSection": "High-cost weights",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/donut-barbell.webp",
+      "sortOrder": 7,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Donut-Barbell.webp"
+    },
+    {
+      "name": "Golden Barbell",
+      "slug": "golden-barbell",
+      "rarity": "Divine",
+      "power": "2500",
+      "cost": "$85B",
+      "catalogSection": "High-cost weights",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/golden-barbell.webp",
+      "sortOrder": 8,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Golden-Barbell.webp"
+    },
+    {
+      "name": "Heaven Plate",
+      "slug": "heaven-plate",
+      "rarity": "Rainbow",
+      "power": "6250",
+      "cost": "$1.2T",
+      "catalogSection": "High-cost weights",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/heaven-plate.webp",
+      "sortOrder": 9,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Heaven-Plate.webp"
+    },
+    {
+      "name": "Mega Golden Barbell",
+      "slug": "mega-golden-barbell",
+      "rarity": "Hacked",
+      "power": "15000",
+      "cost": "$18T",
+      "catalogSection": "Endgame weights",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/mega-golden-barbell.webp",
+      "sortOrder": 10,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Mega-Golden-Barbell.webp"
+    },
+    {
+      "name": "Neon Pulse",
+      "slug": "neon-pulse",
+      "rarity": "Demon",
+      "power": "40000",
+      "cost": "$500T",
+      "catalogSection": "Endgame weights",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/neon-pulse.webp",
+      "sortOrder": 11,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Neon-Pulse.webp"
+    },
+    {
+      "name": "Giant Gold Star Barbell",
+      "slug": "giant-gold-star-barbell",
+      "rarity": "OG",
+      "power": "100000",
+      "cost": "$20Q",
+      "catalogSection": "Endgame weights",
+      "sourceStatus": "cross-checked",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/giant-gold-star-barbell.webp",
+      "sortOrder": 12,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Giant-Gold-Star-Barbell.webp"
+    },
+    {
+      "name": "Emerald Barbell",
+      "slug": "emerald-barbell",
+      "rarity": "Celestial",
+      "power": "300000",
+      "cost": "$5S",
+      "catalogSection": "Endgame weights",
+      "sourceStatus": "newer-source-only",
+      "image": "/Kick%20a%20Lucky%20Block/Weights/emerald-barbell.webp",
+      "sortOrder": 13,
+      "sourcePage": "https://kickaluckyblock.com/weights",
+      "sourceImageUrl": "https://kickaluckyblock.com/images/weight/Emerald-Barbell.webp"
+    }
+  ]
+}

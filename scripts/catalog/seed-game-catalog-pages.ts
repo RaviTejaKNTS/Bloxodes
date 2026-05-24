@@ -1,5 +1,6 @@
 import "../shared/load-env";
 import fs from "node:fs/promises";
+import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { repoPath } from "@/lib/paths";
 import {
@@ -47,6 +48,7 @@ const draft = args.has("--draft");
 const allowProd = args.has("--allow-prod");
 const targetGameSlugs = collectArgValues(rawArgs, ["--game", "--game-slug", "--wiki-slug"]);
 const targetCollections = collectArgValues(rawArgs, ["--collection", "--collection-slug"]);
+const finalJsonRoot = collectSingleArgValue(rawArgs, ["--final-json-root", "--final-json-dir"]);
 const UNIVERSE_LOOKUP_PAGE_SIZE = 1000;
 
 function collectArgValues(argv: string[], names: string[]): string[] {
@@ -69,12 +71,64 @@ function collectArgValues(argv: string[], names: string[]): string[] {
   return Array.from(new Set(values));
 }
 
+function collectSingleArgValue(argv: string[], names: string[]): string | null {
+  const values: string[] = [];
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    const inlineName = names.find((name) => arg.startsWith(`${name}=`));
+    if (inlineName) {
+      const value = arg.slice(inlineName.length + 1).trim();
+      if (value) values.push(value);
+      continue;
+    }
+    if (names.includes(arg)) {
+      const value = argv[i + 1]?.trim();
+      if (!value) throw new Error(`Missing value for ${arg}`);
+      values.push(value);
+      i += 1;
+    }
+  }
+  if (values.length > 1) throw new Error(`Expected one value for ${names.join(" / ")}, received ${values.length}.`);
+  return values[0] ?? null;
+}
+
 function getTargetCatalogs() {
   return GAME_DATASET_CATALOGS.filter((config) => {
     const matchesGame = !targetGameSlugs.length || targetGameSlugs.includes(config.gameSlug);
     const matchesCollection = !targetCollections.length || targetCollections.includes(config.slug);
     return matchesGame && matchesCollection;
   });
+}
+
+async function readFinalJsonOverride(config: GameDatasetCatalogConfig) {
+  if (!finalJsonRoot) return null;
+
+  const root = path.isAbsolute(finalJsonRoot) ? finalJsonRoot : repoPath(finalJsonRoot);
+  const finalJsonPath = path.join(root, config.code, "final.json");
+  try {
+    const parsed = JSON.parse(await fs.readFile(finalJsonPath, "utf8")) as Partial<
+      Pick<
+        WikiCatalogPageUpsert,
+        | "code"
+        | "title"
+        | "seo_title"
+        | "meta_description"
+        | "intro_md"
+        | "description_md"
+        | "how_it_works_md"
+        | "description_json"
+        | "faq_json"
+        | "wiki_md"
+        | "wiki_sort_order"
+      >
+    >;
+    if (parsed.code !== config.code) {
+      throw new Error(`Expected code ${config.code}, found ${parsed.code ?? "(missing)"}`);
+    }
+    return parsed;
+  } catch (error) {
+    throw new Error(`Failed to read final JSON override for ${config.code} at ${finalJsonPath}: ${String(error)}`);
+  }
 }
 
 function getTargetGroups(targetCatalogs: GameDatasetCatalogConfig[]) {
@@ -139,26 +193,28 @@ async function buildRows(
       columns: dataset.columns,
       imageUrls: dataset.imageUrls
     });
+    const finalJson = await readFinalJsonOverride(config);
+    const pageCopy = finalJson ? { ...copy, ...finalJson } : copy;
 
     rows.push({
       wiki_page_id: wikiPageIdsBySlug.get(config.gameSlug) ?? null,
       universe_id: universeIdsByGameSlug.get(config.gameSlug) ?? null,
       wiki_slug: config.gameSlug,
       collection_slug: config.slug,
-      code: copy.code,
-      title: copy.title,
-      seo_title: copy.seo_title,
-      meta_description: copy.meta_description,
-      intro_md: copy.intro_md,
-      description_md: copy.description_md,
-      how_it_works_md: copy.how_it_works_md,
-      description_json: copy.description_json,
-      faq_json: copy.faq_json,
-      wiki_md: copy.wiki_md,
-      wiki_sort_order: copy.wiki_sort_order,
+      code: pageCopy.code,
+      title: pageCopy.title,
+      seo_title: pageCopy.seo_title,
+      meta_description: pageCopy.meta_description,
+      intro_md: pageCopy.intro_md,
+      description_md: pageCopy.description_md,
+      how_it_works_md: pageCopy.how_it_works_md,
+      description_json: pageCopy.description_json,
+      faq_json: pageCopy.faq_json,
+      wiki_md: pageCopy.wiki_md,
+      wiki_sort_order: pageCopy.wiki_sort_order,
       thumb_url: copy.thumb_url,
       is_published: !draft,
-      published_at: draft ? existingPublishedAt.get(copy.code) ?? null : existingPublishedAt.get(copy.code) ?? now
+      published_at: draft ? existingPublishedAt.get(pageCopy.code) ?? null : existingPublishedAt.get(pageCopy.code) ?? now
     });
   }
 

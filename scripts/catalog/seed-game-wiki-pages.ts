@@ -188,6 +188,26 @@ const WIKI_COPY: Record<string, WikiCopy> = {
         desktop: "Ctrl"
       }
     ]
+  },
+  "slime-rng": {
+    metaDescription: "Slime RNG wiki hub with slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.",
+    tipsMd: `- Start with slimes when you need roll odds, rarity, variants, Power, Health, and family names.
+- Use zones to compare Coin costs, permanent zone luck, enemy Health, Goop per kill, and machine unlocks before pushing farther.
+- Check crafting recipes before spending rare slimes, because each craft asks for three specific ingredients.
+- Save food for slimes you plan to keep, use potions during focused sessions, and spend dice only when the next roll outcome matters.
+- Treat Power Fruits as long-term slime choices. The source lists one-fruit and crafting restrictions, so assign them carefully.
+- Rebirths and index rewards are progression references: Goop costs, luck multipliers, and collection milestones decide the next efficient goal.`,
+    controlsJson: []
+  },
+  "kick-a-lucky-block": {
+    metaDescription:
+      "Kick a Lucky Block wiki hub with brainrots, mutations, weights, zones, Roblox details, and progression tips.",
+    tipsMd: `- Kick power decides how far the lucky block travels, so weights and training upgrades matter before chasing higher zones.
+- Brainrots earn cash on your plot after you bring them back safely. A far-zone roll is only useful if you survive the return.
+- Mutations change brainrot earning value, but public odds are incomplete for some newer entries. Treat unknown odds as unknown instead of assuming they match nearby multipliers.
+- Zones raise the reward ceiling as the block travels farther, while tsunami pressure makes return speed and positioning part of the route.
+- Luck-source details beyond normal item and progression systems are still source-disputed, so keep boost planning flexible until in-game values are verified.`,
+    controlsJson: []
   }
 };
 
