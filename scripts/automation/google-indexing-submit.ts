@@ -597,7 +597,7 @@ function createSupabaseStateStore(): StateStore {
     },
     async getUrlStates(urls, notificationType) {
       const result = new Map<string, UrlState>();
-      for (const chunk of chunkArray(urls, 200)) {
+      for (const chunk of chunkArray(urls, 25)) {
         const { data, error } = await sb
           .from("google_indexing_url_state")
           .select("url,notification_type,last_submitted_at,last_status_code,last_error,attempt_count,success_count")
