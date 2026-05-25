@@ -2,7 +2,7 @@ import "../shared/load-env";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-import { normalizeGameSlug } from "@/lib/slug";
+import { slugify, stripCodesSuffix } from "@/lib/slug";
 import { ensureUniverseForRobloxLink } from "@/lib/roblox/universe";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
@@ -189,7 +189,7 @@ async function fetchRobloxThumbnail(
 
 async function upsertGamePage(payload: CodePagePayload, options: CliOptions) {
   const sb = supabaseAdmin();
-  const slug = normalizeGameSlug(payload.name, payload.slug ?? payload.name);
+  const slug = slugify(stripCodesSuffix(payload.slug ?? payload.name));
   const publish = options.publish ?? payload.publish ?? true;
 
   const { data: existing, error: existingError } = await sb

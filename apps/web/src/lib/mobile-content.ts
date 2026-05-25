@@ -327,7 +327,10 @@ function firstMeaningfulValue(row: Record<string, unknown>, keys: string[]): str
 
 function datasetItemBody(row: Record<string, unknown>, keys: string[], max = 5): string | null {
   const parts = keys
-    .filter((key) => !["id", "slug", "name", "title", "image", "thumbnail", "thumbnail_url", "imageUrl"].includes(key))
+    .filter(
+      (key) =>
+        !["id", "slug", "name", "title", "image", "imageStatus", "thumbnail", "thumbnail_url", "imageUrl"].includes(key)
+    )
     .map((key) => {
       const value = formatUnknownValue(row[key]);
       return value ? `${getFieldLabel(key)}: ${value}` : null;

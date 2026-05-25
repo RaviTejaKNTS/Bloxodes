@@ -19,13 +19,12 @@ import {
 } from "@/lib/seo";
 
 // Cache author pages for a month; on-demand revalidation keeps them fresh
-export const revalidate = 2592000; // monthly
+export const revalidate = 0;
 
 type Params = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  const slugs = await listAuthorSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return [];
 }
 
 function markdownToPlain(text?: string | null): string {

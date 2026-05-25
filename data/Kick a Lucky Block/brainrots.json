@@ -12,6 +12,26 @@
         "label": "Kick a Lucky Block - Brainrots",
         "url": "https://kickaluckyblock.com/brainrots",
         "accessed": "2026-05-24"
+      },
+      {
+        "label": "xSteal a Brainrot - Complete index of all Brainrots from Kick a Lucky Block",
+        "url": "https://xstealabrainrot.com/kick-a-lucky-block/",
+        "accessed": "2026-05-24"
+      },
+      {
+        "label": "TechWiser - Kick a Lucky Block All Brainrots",
+        "url": "https://techwiser.com/kick-a-lucky-block-all-brainrots/",
+        "accessed": "2026-05-24"
+      },
+      {
+        "label": "Steal a Brainrot Fandom item images",
+        "url": "https://stealabrainrot.fandom.com/wiki/Swag_Soda",
+        "accessed": "2026-05-24"
+      },
+      {
+        "label": "Plants vs Brainrots Fandom item images",
+        "url": "https://plants-vs-brainrots.fandom.com/wiki/Castlino_Fortini",
+        "accessed": "2026-05-24"
       }
     ],
     "columns": [
@@ -21,9 +41,10 @@
       "incomeMultiplier",
       "availability",
       "sourceStatus",
-      "image"
+      "image",
+      "sourceImageUrl"
     ],
-    "notes": "Current index source lists 114 entries through Eternal and Exclusive. Legacy fan source lists 81 entries through OG. Row image coverage is 0/114."
+    "notes": "Image audit: 110 of 114 brainrot rows use accepted item-level images. Four weak TechWiser crops were replaced with direct Fandom item renders. Astro Tim, Baba Yaga, Kicky, and Elefantucci Bananucci are intentionally left without images because checked public sources did not provide clean publish-quality item art."
   },
   "items": [
     {
@@ -37,10 +58,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/noobini-pizzanini.webp",
       "sortOrder": 1,
       "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "imageCandidate": "/Kick%20a%20Lucky%20Block/Roblox/icon.png"
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/noob.webp"
     },
     {
       "name": "Lirili Larila",
@@ -53,9 +74,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/lirili-larila.webp",
       "sortOrder": 2,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/eleee.webp"
     },
     {
       "name": "Tim Cheese",
@@ -68,9 +90,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tim-cheese.webp",
       "sortOrder": 3,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/cheese.webp"
     },
     {
       "name": "Talpa Di Fero",
@@ -83,9 +106,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/talpa-di-fero.webp",
       "sortOrder": 4,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/fero.webp"
     },
     {
       "name": "Svinina Bombardino",
@@ -98,9 +122,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/svinina-bombardino.webp",
       "sortOrder": 5,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/pigg.webp"
     },
     {
       "name": "Pipi Kiwi",
@@ -113,9 +138,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/pipi-kiwi.webp",
       "sortOrder": 6,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/kiwi.webp"
     },
     {
       "name": "Trippi Troppi",
@@ -128,9 +154,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/trippi-troppi.webp",
       "sortOrder": 7,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/f/f9/Trip_Trop_Shrimp.png/revision/latest?cb=20251113115055"
     },
     {
       "name": "Fluriflura",
@@ -143,9 +170,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/fluriflura.webp",
       "sortOrder": 8,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/crow.webp"
     },
     {
       "name": "Gangster Footera",
@@ -158,9 +186,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/gangster-footera.webp",
       "sortOrder": 9,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/73/Gangster_Footera.png/revision/latest?cb=20260306211838"
     },
     {
       "name": "Bandito Bobritto",
@@ -173,9 +202,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bandito-bobritto.webp",
       "sortOrder": 10,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bob.webp"
     },
     {
       "name": "Boneca Ambalabu",
@@ -188,9 +218,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/boneca-ambalabu.webp",
       "sortOrder": 11,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bonn.webp"
     },
     {
       "name": "Ta Ta Ta Ta Sahur",
@@ -203,9 +234,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/ta-ta-ta-ta-sahur.webp",
       "sortOrder": 12,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/ta.webp"
     },
     {
       "name": "Ballerina Cappuccina",
@@ -218,9 +250,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/ballerina-cappuccina.webp",
       "sortOrder": 13,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bal.webp"
     },
     {
       "name": "Cappuccino Assassino",
@@ -233,9 +266,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cappuccino-assassino.webp",
       "sortOrder": 14,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/cccc.webp"
     },
     {
       "name": "Brr Brr Patapim",
@@ -248,9 +282,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/brr-brr-patapim.webp",
       "sortOrder": 15,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/wewew.webp"
     },
     {
       "name": "Cacto Hipopotamo",
@@ -263,9 +298,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cacto-hipopotamo.webp",
       "sortOrder": 16,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/hopop.webp"
     },
     {
       "name": "Garamaramam",
@@ -278,9 +314,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/garamaramam.webp",
       "sortOrder": 17,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/gmr.webp"
     },
     {
       "name": "Madung",
@@ -293,9 +330,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/madung.webp",
       "sortOrder": 18,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/mudang.webp"
     },
     {
       "name": "Waterdino",
@@ -308,9 +346,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/waterdino.webp",
       "sortOrder": 19,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/water.webp"
     },
     {
       "name": "Pesto Mortioni",
@@ -323,9 +362,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/pesto-mortioni.webp",
       "sortOrder": 20,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/pesto.webp"
     },
     {
       "name": "Pannaburro",
@@ -338,9 +378,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/pannaburro.webp",
       "sortOrder": 21,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/panna.webp"
     },
     {
       "name": "Orcalero",
@@ -353,9 +394,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/orcalero.webp",
       "sortOrder": 22,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/orca.webp"
     },
     {
       "name": "Mangolini Parrocini",
@@ -368,9 +410,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/mangolini-parrocini.webp",
       "sortOrder": 23,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/totas.webp"
     },
     {
       "name": "John Pork",
@@ -383,9 +426,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/john-pork.webp",
       "sortOrder": 24,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/john.webp"
     },
     {
       "name": "Gattatino Nyanino",
@@ -398,9 +442,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/gattatino-nyanino.webp",
       "sortOrder": 25,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bhila.webp"
     },
     {
       "name": "Chimpanzini Bananini",
@@ -413,9 +458,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/chimpanzini-bananini.webp",
       "sortOrder": 26,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bandar.webp"
     },
     {
       "name": "Plan Red",
@@ -428,9 +474,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/plan-red.webp",
       "sortOrder": 27,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/red.webp"
     },
     {
       "name": "Plan Blue",
@@ -443,9 +490,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/plan-blue.webp",
       "sortOrder": 28,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bluew.webp"
     },
     {
       "name": "Capi Taco",
@@ -458,9 +506,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/capi-taco.webp",
       "sortOrder": 29,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/taco.webp"
     },
     {
       "name": "Bambini Crostini",
@@ -473,9 +522,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bambini-crostini.webp",
       "sortOrder": 30,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/deer.webp"
     },
     {
       "name": "Trulimero Trulicina",
@@ -488,9 +538,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/trulimero-trulicina.webp",
       "sortOrder": 31,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/d3/Trulimero_Trulicina.png/revision/latest?cb=20260419094842"
     },
     {
       "name": "Elefantucci Bananucci",
@@ -505,7 +556,9 @@
       "sourceConfidence": "current index with older partial source coverage",
       "image": null,
       "sortOrder": 32,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": null,
+      "imageStatus": "needs clean in-game capture; TechWiser radial graphic rejected for publish quality"
     },
     {
       "name": "Bananita Dolphinita",
@@ -518,9 +571,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bananita-dolphinita.webp",
       "sortOrder": 33,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/kea.webp"
     },
     {
       "name": "Salamino Penguino",
@@ -533,9 +587,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/salamino-penguino.webp",
       "sortOrder": 34,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/penguin.webp"
     },
     {
       "name": "Penguino Cocosino",
@@ -548,9 +603,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/penguino-cocosino.webp",
       "sortOrder": 35,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/mslkdmskd.webp"
     },
     {
       "name": "67",
@@ -563,9 +619,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/67.webp",
       "sortOrder": 36,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/67.webp"
     },
     {
       "name": "Burbaloni Lulliloli",
@@ -578,9 +635,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/burbaloni-lulliloli.webp",
       "sortOrder": 37,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bang.webp"
     },
     {
       "name": "Chef Crabracadabra",
@@ -593,9 +651,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/chef-crabracadabra.webp",
       "sortOrder": 38,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/crab.webp"
     },
     {
       "name": "Capybara Eggplant",
@@ -608,9 +667,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/capybara-eggplant.webp",
       "sortOrder": 39,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/egg.webp"
     },
     {
       "name": "Bangello",
@@ -623,9 +683,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bangello.webp",
       "sortOrder": 40,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/3/3a/Bangello1.png/revision/latest?cb=20251020052150"
     },
     {
       "name": "Elefanto Frigo",
@@ -638,9 +699,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/elefanto-frigo.webp",
       "sortOrder": 41,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/ele.webp"
     },
     {
       "name": "Rinoccio Verdini",
@@ -653,9 +715,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/rinoccio-verdini.webp",
       "sortOrder": 42,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/rino.webp"
     },
     {
       "name": "Glorbo Fruttodrilo",
@@ -668,9 +731,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/glorbo-fruttodrilo.webp",
       "sortOrder": 43,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/glorbo.webp"
     },
     {
       "name": "Udin Din Din Dun",
@@ -683,9 +747,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/udin-din-din-dun.webp",
       "sortOrder": 44,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/udn.webp"
     },
     {
       "name": "Pandaccini Bananini",
@@ -698,9 +763,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/pandaccini-bananini.webp",
       "sortOrder": 45,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/panda.webp"
     },
     {
       "name": "Waterino",
@@ -713,9 +779,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/waterino.webp",
       "sortOrder": 46,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/octopus.webp"
     },
     {
       "name": "Strawberreli Flamingelli",
@@ -728,9 +795,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/strawberreli-flamingelli.webp",
       "sortOrder": 47,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/flamingo.webp"
     },
     {
       "name": "Sigma Boy",
@@ -743,9 +811,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/sigma-boy.webp",
       "sortOrder": 48,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/boy.webp"
     },
     {
       "name": "Frigo Camelo",
@@ -758,9 +827,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/frigo-camelo.webp",
       "sortOrder": 49,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/camel.webp"
     },
     {
       "name": "Orangutini Ananasini",
@@ -773,9 +843,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/orangutini-ananasini.webp",
       "sortOrder": 50,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/orange.webp"
     },
     {
       "name": "Rhino Toasterino",
@@ -788,9 +859,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/rhino-toasterino.webp",
       "sortOrder": 51,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/rhino.webp"
     },
     {
       "name": "Bombardiro Crocodilo",
@@ -803,9 +875,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bombardiro-crocodilo.webp",
       "sortOrder": 52,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bomb.webp"
     },
     {
       "name": "Bombini Gusini",
@@ -818,9 +891,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bombini-gusini.webp",
       "sortOrder": 53,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/e0/Bombombini_Gusini.png/revision/latest?cb=20250909223121"
     },
     {
       "name": "Castlino Fortini",
@@ -833,9 +907,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/castlino-fortini.webp",
       "sortOrder": 54,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/4/4f/Castlino_Fortini.png/revision/latest?cb=20251129214004"
     },
     {
       "name": "Tuff Toucan",
@@ -848,9 +923,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tuff-toucan.webp",
       "sortOrder": 55,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/tuffff.webp"
     },
     {
       "name": "Fryuro",
@@ -863,9 +939,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/fryuro.webp",
       "sortOrder": 56,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/fries.webp"
     },
     {
       "name": "Burguro",
@@ -878,9 +955,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/burguro.webp",
       "sortOrder": 57,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/burger.webp"
     },
     {
       "name": "Guest666",
@@ -893,9 +971,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/guest666.webp",
       "sortOrder": 58,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/666.webp"
     },
     {
       "name": "Zibra Zubra Zibralini",
@@ -908,9 +987,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/zibra-zubra-zibralini.webp",
       "sortOrder": 59,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/zebra.webp"
     },
     {
       "name": "Cavallo Virtuoso",
@@ -923,9 +1003,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cavallo-virtuoso.webp",
       "sortOrder": 60,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/sassas.webp"
     },
     {
       "name": "Gorillo Watermelondrillo",
@@ -938,9 +1019,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/gorillo-watermelondrillo.webp",
       "sortOrder": 61,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/tarbooz.webp"
     },
     {
       "name": "Cocofanto Elefanto",
@@ -953,9 +1035,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cocofanto-elefanto.webp",
       "sortOrder": 62,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/coco.webp"
     },
     {
       "name": "Bambu Sahur",
@@ -968,9 +1051,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bambu-sahur.webp",
       "sortOrder": 63,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/da/Bambu_sahur_full_rost.png/revision/latest?cb=20251203093726"
     },
     {
       "name": "WL",
@@ -983,9 +1067,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/wl.webp",
       "sortOrder": 64,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/4/43/WL.png/revision/latest?cb=20251122214045"
     },
     {
       "name": "Girafa Celeste",
@@ -998,9 +1083,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/girafa-celeste.webp",
       "sortOrder": 65,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/celete.webp"
     },
     {
       "name": "Tralalero Tralala",
@@ -1013,9 +1099,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tralalero-tralala.webp",
       "sortOrder": 66,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/shrsk.webp"
     },
     {
       "name": "Tralalerita Tralala",
@@ -1028,9 +1115,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tralalerita-tralala.webp",
       "sortOrder": 67,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/tuna.webp"
     },
     {
       "name": "Peant Jarro",
@@ -1043,9 +1131,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/peant-jarro.webp",
       "sortOrder": 68,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/ddsdsd.webp"
     },
     {
       "name": "Dipperl Chiperini",
@@ -1058,9 +1147,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/dipperl-chiperini.webp",
       "sortOrder": 69,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/chip.webp"
     },
     {
       "name": "Rexosaurus",
@@ -1073,9 +1163,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/rexosaurus.webp",
       "sortOrder": 70,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/dino.webp"
     },
     {
       "name": "1x1x1x1",
@@ -1088,9 +1179,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/1x1x1x1.webp",
       "sortOrder": 71,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/1X1X1.webp"
     },
     {
       "name": "Matteo",
@@ -1103,9 +1195,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/matteo.webp",
       "sortOrder": 72,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/mtt.webp"
     },
     {
       "name": "Espresso Signora",
@@ -1118,9 +1211,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/espresso-signora.webp",
       "sortOrder": 73,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/a/ad/Espresso.png/revision/latest?cb=20251202130252"
     },
     {
       "name": "Alessio",
@@ -1133,9 +1227,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/alessio.webp",
       "sortOrder": 74,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/aless.webp"
     },
     {
       "name": "Tripi Tropi Tropa Tripa",
@@ -1148,9 +1243,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tripi-tropi-tropa-tripa.webp",
       "sortOrder": 75,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/tropa.webp"
     },
     {
       "name": "Swag Soda",
@@ -1163,9 +1259,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/swag-soda.webp",
       "sortOrder": 76,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/9f/Swag_Soda.png/revision/latest?cb=20260323193131"
     },
     {
       "name": "Stoppo Luminino",
@@ -1178,9 +1275,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/stoppo-luminino.webp",
       "sortOrder": 77,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b6/Stoppo_Luminino.png/revision/latest?cb=20251108231758"
     },
     {
       "name": "Torrtuginni Dragonfrutini",
@@ -1193,9 +1291,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/torrtuginni-dragonfrutini.webp",
       "sortOrder": 78,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/dragon.webp"
     },
     {
       "name": "Tictac Sahur",
@@ -1208,9 +1307,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tictac-sahur.webp",
       "sortOrder": 79,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/tictac.webp"
     },
     {
       "name": "Cactus Pingo",
@@ -1223,9 +1323,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cactus-pingo.webp",
       "sortOrder": 80,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/cactus.webp"
     },
     {
       "name": "Los Primos Blue",
@@ -1238,9 +1339,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/los-primos-blue.webp",
       "sortOrder": 81,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/blue.webp"
     },
     {
       "name": "La Vacca Saturno Saturnita",
@@ -1253,9 +1355,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/la-vacca-saturno-saturnita.webp",
       "sortOrder": 82,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/saturn.webp"
     },
     {
       "name": "Agarrini La Palini",
@@ -1268,9 +1371,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/agarrini-la-palini.webp",
       "sortOrder": 83,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/kulhadi.webp"
     },
     {
       "name": "Bottellini",
@@ -1283,9 +1387,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bottellini.webp",
       "sortOrder": 84,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/1/18/Bottellini.png/revision/latest?cb=20251012193543"
     },
     {
       "name": "Karkerkar Kurkur",
@@ -1298,9 +1403,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/karkerkar-kurkur.webp",
       "sortOrder": 85,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/kursi.webp"
     },
     {
       "name": "Blackhole Goat",
@@ -1313,9 +1419,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/blackhole-goat.webp",
       "sortOrder": 86,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/goat.webp"
     },
     {
       "name": "Compactoroni Daskaloni",
@@ -1328,9 +1435,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/compactoroni-daskaloni.webp",
       "sortOrder": 87,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/dsik.webp"
     },
     {
       "name": "Cappuccino Clownino",
@@ -1343,9 +1451,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cappuccino-clownino.webp",
       "sortOrder": 88,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/capp.webp"
     },
     {
       "name": "Nuclearo Dinossauro",
@@ -1358,9 +1467,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/nuclearo-dinossauro.webp",
       "sortOrder": 89,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b5/Nuclearo_Dinossauro.png/revision/latest?cb=20260328003025"
     },
     {
       "name": "Los Noo My Hotspotsitos",
@@ -1373,9 +1483,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/los-noo-my-hotspotsitos.webp",
       "sortOrder": 90,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/cb/LosNooMyHotspotsitos.png/revision/latest?cb=20250903124000"
     },
     {
       "name": "Chillin Chilli",
@@ -1388,9 +1499,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/chillin-chilli.webp",
       "sortOrder": 91,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/chilli.webp"
     },
     {
       "name": "Crazylone Pizaione",
@@ -1403,9 +1515,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/crazylone-pizaione.webp",
       "sortOrder": 92,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/8/88/CrazylonePizaione.png/revision/latest?cb=20251012185234"
     },
     {
       "name": "Corn Sahur",
@@ -1418,9 +1531,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/corn-sahur.webp",
       "sortOrder": 93,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/06/CornSahur.png/revision/latest?cb=20251006205228"
     },
     {
       "name": "Meowl",
@@ -1433,9 +1547,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/meowl.webp",
       "sortOrder": 94,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b8/Clear_background_clear_meowl_image.png/revision/latest?cb=20251022133154"
     },
     {
       "name": "Strawberry Elephant",
@@ -1448,9 +1563,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index",
       "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/strawberry-elephant.webp",
       "sortOrder": 95,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/58/Strawberryelephant.png/revision/latest?cb=20260317001745"
     },
     {
       "name": "Dragonfrutina Dolphinita",
@@ -1463,9 +1579,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/dragonfrutina-dolphinita.webp",
       "sortOrder": 96,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/d/de/Dragonfrutina_Dolphinita1.png/revision/latest?cb=20251007090246"
     },
     {
       "name": "Guerriro Digitale",
@@ -1478,9 +1595,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/guerriro-digitale.webp",
       "sortOrder": 97,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/7c/Guerriro_Digitale.png/revision/latest?cb=20260422155418"
     },
     {
       "name": "Chicleteira Bicicleteira",
@@ -1493,9 +1611,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/chicleteira-bicicleteira.webp",
       "sortOrder": 98,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/5a/Chicleteira.png/revision/latest?cb=20250921012655"
     },
     {
       "name": "Pot Hotspot",
@@ -1508,9 +1627,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/pot-hotspot.webp",
       "sortOrder": 99,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4b/Pot_Hotspot.png/revision/latest?cb=20260428164612"
     },
     {
       "name": "Krupuk Pagi Pagi",
@@ -1523,9 +1643,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/krupuk-pagi-pagi.webp",
       "sortOrder": 100,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/c8/Krupuk_Pagi_Pagi.png/revision/latest?cb=20260420132451"
     },
     {
       "name": "Beluga Beluga",
@@ -1538,9 +1659,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/beluga-beluga.webp",
       "sortOrder": 101,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/56/Belulaa.png/revision/latest?cb=20251115205345"
     },
     {
       "name": "Tralaledon",
@@ -1553,9 +1675,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tralaledon.webp",
       "sortOrder": 102,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/79/Brr_Brr_Patapem.png/revision/latest?cb=20250909171639"
     },
     {
       "name": "Anpali Babel",
@@ -1568,9 +1691,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/anpali-babel.webp",
       "sortOrder": 103,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/6a/Anpali_Babel.png/revision/latest?cb=20250909165504"
     },
     {
       "name": "Ketchuru and Musturu",
@@ -1583,9 +1707,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/ketchuru-and-musturu.webp",
       "sortOrder": 104,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/14/Ketchuru.png/revision/latest?cb=20251021163857"
     },
     {
       "name": "Los Primos",
@@ -1598,9 +1723,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/los-primos.webp",
       "sortOrder": 105,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/96/LosPrimos.png/revision/latest?cb=20251006044831"
     },
     {
       "name": "Mastodontico Telepiedone",
@@ -1613,9 +1739,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/mastodontico-telepiedone.webp",
       "sortOrder": 106,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b0/Mastodontico_Telepiedone.png/revision/latest?cb=20250902184428"
     },
     {
       "name": "Ketupat Kepat",
@@ -1628,9 +1755,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/ketupat-kepat.webp",
       "sortOrder": 107,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/ac/KetupatKepat.png/revision/latest?cb=20260324191002"
     },
     {
       "name": "Professora 67",
@@ -1643,9 +1771,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/professora-67.webp",
       "sortOrder": 108,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/40/Fourtyone.png/revision/latest?cb=20251014024859"
     },
     {
       "name": "Astro Tim",
@@ -1660,7 +1789,9 @@
       "sourceConfidence": "single current index source",
       "image": null,
       "sortOrder": 109,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": null,
+      "imageStatus": "needs clean in-game capture; xSteal card crop rejected for publish quality"
     },
     {
       "name": "Baba Yaga",
@@ -1675,7 +1806,9 @@
       "sourceConfidence": "single current index source",
       "image": null,
       "sortOrder": 110,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": null,
+      "imageStatus": "needs clean in-game capture; xSteal card crop rejected for publish quality"
     },
     {
       "name": "Kicky",
@@ -1690,7 +1823,9 @@
       "sourceConfidence": "single current index source",
       "image": null,
       "sortOrder": 111,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": null,
+      "imageStatus": "needs clean in-game capture; xSteal card crop rejected for publish quality"
     },
     {
       "name": "Spaghetti Tualetti",
@@ -1703,9 +1838,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/spaghetti-tualetti.webp",
       "sortOrder": 112,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b8/Spaghettitualetti.png/revision/latest?cb=20251122142032"
     },
     {
       "name": "Dragon Cannelloni",
@@ -1718,9 +1854,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/dragon-cannelloni.webp",
       "sortOrder": 113,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a5/Dragon_Cannelloni.png/revision/latest?cb=20260428162417"
     },
     {
       "name": "Esok Sekolah",
@@ -1733,9 +1870,10 @@
       "availability": "Documented brainrot entry",
       "sourceStatus": "current-index-only",
       "sourceConfidence": "single current index source",
-      "image": null,
+      "image": "/Kick%20a%20Lucky%20Block/Brainrots/esok-sekolah.webp",
       "sortOrder": 114,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/2a/EsokSekolah2.png/revision/latest?cb=20250819001020"
     }
   ]
 }

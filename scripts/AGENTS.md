@@ -18,6 +18,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - `articles/`: article generation and article refresh.
 - `automation/`: queue runners, IndexNow/bootstrap helpers, Google Indexing API submitter, cache warming, reporting.
   - `google-indexing-submit.ts` is a guarded Google Indexing API job. It loads `.env.indexing*`, requires `--apply` plus `GOOGLE_INDEXING_API_ENABLED=true` before calling Google, and should use Supabase state in recurring production/GitHub runs so the daily cap and URL rotation persist.
+  - `warm-cloudflare-cache.mjs` warms public pages from the sitemap after deploy. Use `CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm`; do not send cache-bypass request headers during warmup because the goal is to fill Cloudflare.
 - `backfill/`: repair jobs for existing content/data.
 - `catalog/`: Roblox catalog and avatar item collection plus enrichment.
   - `collect-slime-rng-data.ts` collects Slime RNG wiki source data into `data/Slime RNG/` and downloads available source images into `apps/web/public/Slime RNG/`. It is a local dataset collector and does not mutate Supabase.
@@ -29,6 +30,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - Keep reusable seed/upsert scripts for repeated wiki/catalog work. Delete temporary collector/import scripts after their data is stable and committed.
 - `content/`: local content QA helpers.
   - `check-public-copy.ts` blocks self-referential public copy such as `Use the X catalog`, `this catalog`, `dataset`, and `Bloxodes`, weak field-command copy such as `Read category first`, and AI-ish contrast filler such as `not just`; run it against generated `final.json` files before local Supabase import.
+  - `import-content-final.ts` upserts reviewed article, checklist, and quiz `final.json` files into Supabase. Article imports write only to the `articles` table, pick a random author when missing, create an edited 16:9 cover from the linked Roblox universe thumbnail when no cover image is provided, and inject the feature image before the first H2 like generated articles. After article imports, verify both `/articles` and `/articles/<slug>` show the same title, author, and cover from the saved article row. It is local-first by default and refuses production writes unless `NODE_ENV=production` is paired with `--allow-prod`.
 - `codes/`: code refresh and code-article rewrite jobs.
   - Code rows must come from `scripts/codes/update-codes.ts`, not from manual JSON, SQL, Supabase edits, or hand-written script payloads.
   - For a code page, insert or update the `games` row first: `slug` is the game slug only, `roblox_link` is the Roblox experience URL, `source_url` is the RobloxDen codes page, `source_url_2` is the Beebom codes page, and `seo_title` stays empty or null unless the user explicitly asks otherwise.

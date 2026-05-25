@@ -1,4 +1,4 @@
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type ToolFaqEntry = { q: string; a: string };
@@ -97,7 +97,7 @@ export type ToolListEntry = Pick<
   "id" | "code" | "title" | "seo_title" | "meta_description" | "intro_md" | "thumb_url" | "published_at" | "universe_id" | "universe"
 > & { created_at?: string; updated_at?: string; content_updated_at?: string | null };
 
-const cachedListPublishedTools = unstable_cache(
+const cachedListPublishedTools = publicContentCache(
   async () => {
     const supabase = supabaseAdmin();
     const { data, error } = await supabase
@@ -144,7 +144,7 @@ export async function listPublishedToolsPage(
   const safePageSize = Math.max(1, pageSize);
   const offset = (safePage - 1) * safePageSize;
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const supabase = supabaseAdmin();
       const { data, error, count } = await supabase

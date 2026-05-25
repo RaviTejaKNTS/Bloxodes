@@ -1,4 +1,4 @@
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type CatalogFaqEntry = { q: string; a: string };
@@ -149,7 +149,7 @@ export async function getCatalogPageContentByCodes(codes: string[]): Promise<Cat
   const normalizedCodes = normalizeCatalogCodes(codes);
   if (!normalizedCodes.length) return null;
 
-  const cachedCatalogContent = unstable_cache(
+  const cachedCatalogContent = publicContentCache(
     async (requestedCodes: string[]) => fetchCatalogContent(requestedCodes),
     ["catalog-page-content-v6", ...normalizedCodes],
     {
@@ -167,7 +167,7 @@ export async function getCatalogPageContentByCodesIncludingDrafts(
   const normalizedCodes = normalizeCatalogCodes(codes);
   if (!normalizedCodes.length) return null;
 
-  const cachedCatalogContent = unstable_cache(
+  const cachedCatalogContent = publicContentCache(
     async (requestedCodes: string[]) => fetchCatalogContent(requestedCodes, { includeUnpublished: true }),
     ["catalog-page-content-drafts-v4", ...normalizedCodes],
     {
@@ -180,7 +180,7 @@ export async function getCatalogPageContentByCodesIncludingDrafts(
 }
 
 export async function listPublishedCatalogCodes(): Promise<string[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const supabase = supabaseAdmin();
       const { data, error } = await supabase
@@ -205,7 +205,7 @@ export async function listPublishedCatalogCodes(): Promise<string[]> {
 }
 
 export async function listPublishedTopLevelCatalogPages(): Promise<CatalogIndexEntry[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const supabase = supabaseAdmin();
       async function attachUniverseNames(rows: CatalogIndexEntry[]): Promise<CatalogIndexEntry[]> {

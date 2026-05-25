@@ -715,12 +715,6 @@ const KICK_A_LUCKY_BLOCK_WEIGHT_SECTION_ORDER = [
 
 const KICK_A_LUCKY_BLOCK_ZONE_SECTION_ORDER = ["Starter zones", "Progression zones", "Endgame zones"];
 
-const KICK_A_LUCKY_BLOCK_GAMEPASS_SECTION_ORDER = [
-  "Luck Gamepasses",
-  "Progression Gamepasses",
-  "VIP Gamepass"
-];
-
 const SAILOR_PIECE_RAW_CARD_KEYS = [
   "description",
   "stats",
@@ -1529,24 +1523,6 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     hiddenKeys: ["catalogSection", "sortOrder", "sourcePage", "sourceStatus"],
     additionalColumns: ["catalogSection"],
     maxStats: 6
-  },
-  "kick-a-lucky-block-gamepasses": {
-    groupKey: "catalogSection",
-    groupLabel: "Pass type",
-    sectionOrder: KICK_A_LUCKY_BLOCK_GAMEPASS_SECTION_ORDER,
-    getSectionLabel: getCatalogSection,
-    hiddenKeys: [
-      "catalogSection",
-      "sortOrder",
-      "sourcePage",
-      "gamepassId",
-      "productId",
-      "iconAssetId",
-      "thumbnailUrl",
-      "sourceCheckedAt"
-    ],
-    additionalColumns: ["catalogSection"],
-    maxStats: 4
   }
 };
 
@@ -3900,6 +3876,7 @@ const HIDDEN_FIELD_KEYS = new Set([
   "slug",
   "name",
   "image",
+  "imageStatus",
   "sourceImageUrl",
   "sourcePage",
   "wikiUrl",

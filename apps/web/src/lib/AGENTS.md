@@ -7,6 +7,7 @@ Most application behavior should flow through this folder before it reaches page
 ## Key Modules
 
 - `db.ts`: typed Supabase reads for page families, list pages, detail pages, search-backed views, free items, quizzes, and progress data.
+- `public-content-cache.ts`: compatibility wrapper for former `unstable_cache` call sites. Public Supabase content should render fresh at the VPS and rely on Cloudflare for long-lived edge caching.
 - `catalog.ts`, `tools.ts`, and `wiki.ts`: Supabase-backed content helpers, related-content aggregators, and index readers.
 - `seo.ts`, `site-config.ts`, `sitemap.ts`, `content-dates.ts`, `updated-label.ts`: metadata, canonical URLs, sitemap shaping, and freshness labels.
 - `auth/*`: session cookies, Roblox OAuth helpers, navigation safety, and current-user lookup.
@@ -26,7 +27,7 @@ Most application behavior should flow through this folder before it reaches page
 
 - Prefer adding new read helpers here instead of querying Supabase directly inside page files.
 - Use view tables for index pages and lighter queries when possible.
-- Use `unstable_cache` with meaningful tags for read-heavy, shared loaders.
+- Do not add new `unstable_cache` around public Supabase content reads. Cloudflare is the long-lived cache layer; the origin should render fresh HTML whenever Cloudflare misses or is purged.
 - When a view may lag or differ from the base table, keep a safe fallback query with a compatible field set.
 
 ## Shared Utility Rules

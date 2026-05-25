@@ -614,6 +614,7 @@ const OMITTED_FIELD_KEYS = new Set([
   "slug",
   "name",
   "image",
+  "imageStatus",
   "sourceImageUrl",
   "wikiUrl",
   "sourcePage",

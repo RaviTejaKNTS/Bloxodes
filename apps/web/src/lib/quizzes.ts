@@ -1,6 +1,6 @@
 import "server-only";
 import fs from "node:fs/promises";
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 import { repoPath } from "@/lib/paths";
 import type { QuizData, QuizQuestion } from "@/lib/quiz-types";
@@ -47,7 +47,8 @@ const QUIZ_SELECT_FIELDS_BASE =
 const QUIZ_DATA_MAP: Record<string, string> = {
   "wizard-alchemy": repoPath("data", "Wizard Alchemy", "quiz.json"),
   "the-forge": repoPath("data", "The Forge", "quiz.json"),
-  "grow-a-garden": repoPath("data", "Grow a Garden", "quiz.json")
+  "grow-a-garden": repoPath("data", "Grow a Garden", "quiz.json"),
+  "slime-rng": repoPath("data", "Slime RNG", "quiz.json")
 };
 
 function normalizeCode(value: string): string {
@@ -71,7 +72,7 @@ export async function loadQuizData(code: string): Promise<QuizData | null> {
     return readQuizData(normalized);
   }
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async (slug: string) => readQuizData(slug),
     ["quiz-data", normalized],
     { revalidate: 21600 }
@@ -111,7 +112,7 @@ export async function getQuizPageByCode(code: string): Promise<QuizPage | null> 
   return (fallback as QuizPage) ?? null;
 }
 
-const cachedListPublishedQuizzes = unstable_cache(
+const cachedListPublishedQuizzes = publicContentCache(
   async () => {
     const supabase = supabaseAdmin();
     const { data, error } = await supabase
@@ -151,7 +152,7 @@ export async function listPublishedQuizzes(): Promise<QuizListEntry[]> {
 }
 
 export async function listPublishedQuizCodes(): Promise<string[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const supabase = supabaseAdmin();
       const { data, error } = await supabase

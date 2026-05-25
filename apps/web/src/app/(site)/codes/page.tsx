@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { loadCodesPageData, renderCodesPage, codesMetadata } from "./page-data";
 
-export const revalidate = 86400; // daily
+export const revalidate = 0;
 
 export const metadata: Metadata = codesMetadata;
 

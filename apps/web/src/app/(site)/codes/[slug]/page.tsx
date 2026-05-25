@@ -51,7 +51,7 @@ import { formatUpdatedLabel } from "@/lib/updated-label";
 import { getUniverseEventSummary } from "@/lib/events-summary";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 
-export const revalidate = 86400; // daily
+export const revalidate = 0;
 
 const CODES_IN_ARTICLE_AD_SLOT = "6147197177";
 

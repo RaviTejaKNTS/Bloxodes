@@ -7,7 +7,7 @@ import {
 } from "../page-data";
 import { generateForgeCollectionMetadata } from "../collection-route";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 type PageProps = {
   params: Promise<{ collection: string }>;
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function generateStaticParams() {
-  return FORGE_CATALOGS.map((entry) => ({ collection: entry.slug }));
+  return [];
 }
 
 export default async function ForgeCatalogCollectionPage({ params }: PageProps) {

@@ -22,9 +22,10 @@
       "mutationChance",
       "survivalNote",
       "sourceStatus",
-      "image"
+      "image",
+      "sourceImageUrl"
     ],
-    "notes": "TechWiser lists 12 zones including Eternal. kickaluckyblock.org lists 11 zones through Celestial and warns exact thresholds/earnings are not published."
+    "notes": "Zone rows use TechWiser table tile images for the zone/rarity tile itself. They are not guide thumbnails or page hero art. Exact sourceImageUrl values were recorded during the 2026-05-24 strict image audit."
   },
   "items": [
     {
@@ -40,7 +41,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/common.png",
       "sortOrder": 1,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Common.png"
     },
     {
       "name": "Rare",
@@ -55,7 +57,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/rare.png",
       "sortOrder": 2,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Rare.png"
     },
     {
       "name": "Epic",
@@ -70,7 +73,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/epic.png",
       "sortOrder": 3,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Epic.png"
     },
     {
       "name": "Legend",
@@ -85,7 +89,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/legend.png",
       "sortOrder": 4,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Legend.png"
     },
     {
       "name": "Mythic",
@@ -100,7 +105,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/mythic.png",
       "sortOrder": 5,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Mythic.png"
     },
     {
       "name": "Godly",
@@ -115,7 +121,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/godly.png",
       "sortOrder": 6,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Godly.png"
     },
     {
       "name": "Secret",
@@ -130,7 +137,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/secret.png",
       "sortOrder": 7,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Secret.png"
     },
     {
       "name": "Divine",
@@ -145,7 +153,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/divine.png",
       "sortOrder": 8,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Divine.png"
     },
     {
       "name": "Hacked",
@@ -160,7 +169,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/hacked.png",
       "sortOrder": 9,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Hacked.png"
     },
     {
       "name": "OG",
@@ -175,7 +185,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/og.png",
       "sortOrder": 10,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/OG.png"
     },
     {
       "name": "Celestial",
@@ -190,7 +201,8 @@
       "sourceStatus": "cross-checked",
       "image": "/Kick%20a%20Lucky%20Block/Zones/celestial.png",
       "sortOrder": 11,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Celestial.png"
     },
     {
       "name": "Eternal",
@@ -205,7 +217,8 @@
       "sourceStatus": "techwiser-current",
       "image": "/Kick%20a%20Lucky%20Block/Zones/eternal.webp",
       "sortOrder": 12,
-      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/"
+      "sourcePage": "https://techwiser.com/kick-a-lucky-block-zones/",
+      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/04/Eternal-Zone-in-Kick-a-Lucky-Block.webp"
     }
   ]
 }

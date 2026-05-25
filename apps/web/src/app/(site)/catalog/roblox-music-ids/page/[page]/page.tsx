@@ -10,7 +10,7 @@ import {
 import { CATALOG_DESCRIPTION, buildAlternates } from "@/lib/seo";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-music-ids"];
 const MAX_STATIC_PAGES = 20;
@@ -21,8 +21,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const { totalPages } = await loadRobloxMusicIdsPageData(1);
-  return buildPageParams(totalPages, 1, MAX_STATIC_PAGES);
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

@@ -15,14 +15,13 @@ import {
   loadGenreOptionBySlug
 } from "../../../../page-data";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 type PageProps = {
   params: Promise<{ genre: string; page: string }>;
 };
 
 export async function generateStaticParams() {
-  // Keep high-cardinality genre pagination on on-demand ISR to prevent build-time timeouts.
   return [];
 }
 

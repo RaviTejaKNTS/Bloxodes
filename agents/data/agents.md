@@ -14,7 +14,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `games`, `code_pages_view`, `game_pages_index_view`
   - Code pages and code index views.
 - `articles`, `article_pages_view`, `article_pages_index_view`
-  - Article detail and article index content.
+  - `articles` is the article write source. Article views are read projections only; article imports should not write separate index/detail data.
 - `authors`
   - Author profiles.
 - `game_lists`, `game_lists_index_view`, `game_list_entries`
@@ -119,10 +119,11 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Do not store manual code-page payloads with active codes or dates here. Code pages should update the `games` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then rely on `scripts/codes/update-codes.ts` to populate `codes`.
 - `data/Slime RNG/*.json`
   - Local Slime RNG game datasets for wiki/catalog page work, including slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.
+  - `quiz.json` is the local question pool for `/quizzes/slime-rng`; follow `agents/content/page-types/quizzes.md` when editing it.
   - Matching source-provided images live under `apps/web/public/Slime RNG/`. Rebirth and index reward rows are text-only because the source data is milestone-based rather than item-image based.
 - `data/Kick a Lucky Block/*.json`
   - Local Kick a Lucky Block game datasets for wiki/catalog page work, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki catalogs.
-  - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot and mutation rows are text-only because current sources do not provide clean per-entry images.
+  - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
 - `data/Wizard Alchemy/quiz.json`
   - Local Wizard Alchemy quiz question pool for `/quizzes/wizard-alchemy`.
   - Quiz pools use `QuizData` shape with `easy`, `medium`, and `hard` arrays. Keep easy questions beginner-friendly, make hard questions pro-level, and vary question rhythm naturally.

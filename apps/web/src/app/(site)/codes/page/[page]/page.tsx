@@ -4,7 +4,7 @@ import { loadCodesPageData, renderCodesPage } from "../../page-data";
 import { CODES_DESCRIPTION, buildAlternates } from "@/lib/seo";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 86400; // daily
+export const revalidate = 0;
 const MAX_STATIC_PAGES = 15;
 
 type PageProps = {
@@ -12,8 +12,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const { totalPages } = await loadCodesPageData(1);
-  return buildPageParams(totalPages, 1, MAX_STATIC_PAGES);
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

@@ -15,7 +15,7 @@ import {
   loadGenreOptionBySlug
 } from "../../page-data";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: `Genre Music IDs | ${SITE_NAME}`,
@@ -28,7 +28,6 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  // Keep high-cardinality genre pages on on-demand ISR to prevent build-time timeouts.
   return [];
 }
 

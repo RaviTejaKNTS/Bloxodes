@@ -1,6 +1,6 @@
 import "server-only";
 import fs from "node:fs/promises";
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import { repoPath } from "@/lib/paths";
 
 export type WizardAlchemyPotion = {
@@ -59,13 +59,13 @@ async function readRaceRerollData() {
   return { races };
 }
 
-export const loadWizardAlchemyPotionPlannerData = unstable_cache(
+export const loadWizardAlchemyPotionPlannerData = publicContentCache(
   readPotionPlannerData,
   ["wizard-alchemy-potion-planner-data"],
   { revalidate: 21600 }
 );
 
-export const loadWizardAlchemyRaceRerollData = unstable_cache(
+export const loadWizardAlchemyRaceRerollData = publicContentCache(
   readRaceRerollData,
   ["wizard-alchemy-race-reroll-data"],
   { revalidate: 21600 }

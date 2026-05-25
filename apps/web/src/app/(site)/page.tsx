@@ -34,7 +34,7 @@ const INITIAL_CATALOGS = 3;
 const INITIAL_QUIZZES = 8;
 const CATALOG_CARD_TONES = ["indigo", "amber", "emerald"] as const;
 
-export const revalidate = 21600; // 6 hours
+export const revalidate = 0;
 
 const PAGE_TITLE = `${SITE_NAME} | Roblox codes, guides, checklists, and tools`;
 const PAGE_DESCRIPTION = SITE_DESCRIPTION;

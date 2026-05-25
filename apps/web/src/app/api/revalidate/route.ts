@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { purgeCloudflarePaths } from "@/lib/cloudflare-cache";
+import { purgeCloudflarePaths, warmCloudflarePaths } from "@/lib/cloudflare-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
 type Payload =
@@ -22,6 +22,7 @@ const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
 const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
 const FREE_ITEMS_CATALOG_PREFIXES = [FREE_ITEMS_CATALOG_CODE, LEGACY_FREE_ITEMS_CATALOG_CODE];
 const FREE_ITEMS_BASE_PATH = `/catalog/${FREE_ITEMS_CATALOG_CODE}`;
+const MUSIC_BASE_PATH = "/catalog/roblox-music-ids";
 const SITEMAP_INDEX_PATH = "/sitemap.xml";
 const ARTICLES_SITEMAP_PATH = "/sitemaps/articles.xml";
 const CODES_SITEMAP_PATH = "/sitemaps/codes.xml";
@@ -33,6 +34,7 @@ const QUIZZES_SITEMAP_PATH = "/sitemaps/quizzes.xml";
 const TOOLS_SITEMAP_PATH = "/sitemaps/tools.xml";
 const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
 const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
+const FEED_PATH = "/feed.xml";
 const PAGINATED_INDEX_PURGE_LIMIT = 50;
 
 function assertSecret(request: Request) {
@@ -83,24 +85,41 @@ function paginatedIndexPaths(basePath: string, pageLimit = PAGINATED_INDEX_PURGE
   ];
 }
 
+function slugSegmentsAfterPrefix(slug: string, prefixes: string[]) {
+  for (const prefix of prefixes) {
+    if (slug === prefix) return [];
+    if (slug.startsWith(`${prefix}/`)) {
+      return slug.slice(prefix.length + 1).split("/").filter(Boolean);
+    }
+  }
+  return [];
+}
+
 function revalidateForCode(slug: string) {
   return applyRevalidation(
-    [`/codes/${slug}`, ...paginatedIndexPaths("/codes"), "/", SITEMAP_INDEX_PATH, CODES_SITEMAP_PATH],
+    [`/codes/${slug}`, ...paginatedIndexPaths("/codes"), "/", FEED_PATH, SITEMAP_INDEX_PATH, CODES_SITEMAP_PATH],
     [`code:${slug}`, "codes", "codes-index", "home"]
   );
 }
 
 function revalidateForArticle(slug: string) {
   return applyRevalidation(
-    [`/articles/${slug}`, ...paginatedIndexPaths("/articles"), "/", SITEMAP_INDEX_PATH, ARTICLES_SITEMAP_PATH],
-    [`article:${slug}`, "articles", "articles-index"]
+    [`/articles/${slug}`, ...paginatedIndexPaths("/articles"), "/", FEED_PATH, SITEMAP_INDEX_PATH, ARTICLES_SITEMAP_PATH],
+    [`article:${slug}`, "articles", "articles-index", "home"]
   );
 }
 
 function revalidateForList(slug: string) {
   return applyRevalidation(
-    [`/lists/${slug}`, `/lists/${slug}/page/[page]`, ...paginatedIndexPaths("/lists"), SITEMAP_INDEX_PATH, LISTS_SITEMAP_PATH],
-    [`list:${slug}`, "lists", "lists-index"]
+    [
+      ...paginatedIndexPaths(`/lists/${slug}`),
+      ...paginatedIndexPaths("/lists"),
+      "/",
+      FEED_PATH,
+      SITEMAP_INDEX_PATH,
+      LISTS_SITEMAP_PATH
+    ],
+    [`list:${slug}`, "lists", "lists-index", "home"]
   );
 }
 
@@ -112,48 +131,68 @@ function revalidateForAuthor(slug: string) {
 }
 
 function revalidateForEvents(slug: string) {
-  return applyRevalidation(["/events", `/events/${slug}`, SITEMAP_INDEX_PATH, EVENTS_SITEMAP_PATH], ["events-pages"]);
+  return applyRevalidation(
+    ["/events", `/events/${slug}`, "/", FEED_PATH, SITEMAP_INDEX_PATH, EVENTS_SITEMAP_PATH],
+    ["events-pages", "home"]
+  );
 }
 
 function revalidateForChecklists(slug: string) {
   return applyRevalidation(
-    [...paginatedIndexPaths("/checklists"), `/checklists/${slug}`, SITEMAP_INDEX_PATH, CHECKLISTS_SITEMAP_PATH],
-    ["checklists-index"]
+    [
+      ...paginatedIndexPaths("/checklists"),
+      `/checklists/${slug}`,
+      "/",
+      FEED_PATH,
+      SITEMAP_INDEX_PATH,
+      CHECKLISTS_SITEMAP_PATH
+    ],
+    ["checklists-index", "home"]
   );
 }
 
 function revalidateForQuizzes(slug: string) {
   return applyRevalidation(
-    ["/quizzes", `/quizzes/${slug}`, SITEMAP_INDEX_PATH, QUIZZES_SITEMAP_PATH],
-    ["quizzes-index"]
+    ["/quizzes", `/quizzes/${slug}`, "/", SITEMAP_INDEX_PATH, QUIZZES_SITEMAP_PATH],
+    ["quizzes-index", "home"]
   );
 }
 
 function revalidateForWiki(slug: string) {
   return applyRevalidation(
-    ["/wiki", `/wiki/${slug}`, SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
-    [`wiki:${slug}`, "wiki-index"]
+    ["/wiki", `/wiki/${slug}`, "/", SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
+    [`wiki:${slug}`, "wiki-index", "home"]
   );
 }
 
 function revalidateForTools(slug: string) {
   return applyRevalidation(
-    [...paginatedIndexPaths("/tools"), `/tools/${slug}`, SITEMAP_INDEX_PATH, TOOLS_SITEMAP_PATH],
-    ["tools-index"]
+    [...paginatedIndexPaths("/tools"), `/tools/${slug}`, "/", SITEMAP_INDEX_PATH, TOOLS_SITEMAP_PATH],
+    ["tools-index", "home"]
   );
 }
 
-function revalidateForMusic() {
+function revalidateForMusic(slug = "roblox-music-ids") {
+  const [section, valueSlug] = slugSegmentsAfterPrefix(slug, ["roblox-music-ids"]);
+  const scopedPaths =
+    section === "genres" && valueSlug
+      ? paginatedIndexPaths(`${MUSIC_BASE_PATH}/genres/${valueSlug}`)
+      : section === "artists" && valueSlug
+      ? paginatedIndexPaths(`${MUSIC_BASE_PATH}/artists/${valueSlug}`)
+      : [];
+
   return applyRevalidation([
     "/catalog",
-    ...paginatedIndexPaths("/catalog/roblox-music-ids"),
-    ...paginatedIndexPaths("/catalog/roblox-music-ids/trending"),
-    ...paginatedIndexPaths("/catalog/roblox-music-ids/genres"),
-    "/catalog/roblox-music-ids/genres/[genre]",
-    "/catalog/roblox-music-ids/genres/[genre]/page/[page]",
-    ...paginatedIndexPaths("/catalog/roblox-music-ids/artists"),
-    "/catalog/roblox-music-ids/artists/[artist]",
-    "/catalog/roblox-music-ids/artists/[artist]/page/[page]",
+    ...paginatedIndexPaths(MUSIC_BASE_PATH),
+    ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/trending`),
+    ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/genres`),
+    `${MUSIC_BASE_PATH}/genres/[genre]`,
+    `${MUSIC_BASE_PATH}/genres/[genre]/page/[page]`,
+    ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/artists`),
+    `${MUSIC_BASE_PATH}/artists/[artist]`,
+    `${MUSIC_BASE_PATH}/artists/[artist]/page/[page]`,
+    ...scopedPaths,
+    "/",
     SITEMAP_INDEX_PATH,
     CATALOG_SITEMAP_PATH
   ]);
@@ -163,7 +202,15 @@ function isFreeItemsCatalogSlug(slug: string) {
   return FREE_ITEMS_CATALOG_PREFIXES.some((prefix) => slug === prefix || slug.startsWith(`${prefix}/`));
 }
 
-function revalidateForFreeItems() {
+function revalidateForFreeItems(slug = FREE_ITEMS_CATALOG_CODE) {
+  const [categorySlug, subcategorySlug] = slugSegmentsAfterPrefix(slug, FREE_ITEMS_CATALOG_PREFIXES);
+  const scopedPaths = [
+    ...(categorySlug ? paginatedIndexPaths(`${FREE_ITEMS_BASE_PATH}/${categorySlug}`) : []),
+    ...(categorySlug && subcategorySlug
+      ? paginatedIndexPaths(`${FREE_ITEMS_BASE_PATH}/${categorySlug}/${subcategorySlug}`)
+      : [])
+  ];
+
   return applyRevalidation(
     [
       "/catalog",
@@ -172,17 +219,19 @@ function revalidateForFreeItems() {
       `${FREE_ITEMS_BASE_PATH}/[category]/page/[page]`,
       `${FREE_ITEMS_BASE_PATH}/[category]/[subcategory]`,
       `${FREE_ITEMS_BASE_PATH}/[category]/[subcategory]/page/[page]`,
+      ...scopedPaths,
+      "/",
       SITEMAP_INDEX_PATH,
       CATALOG_SITEMAP_PATH
     ],
-    ["free-items-catalog"]
+    ["free-items-catalog", "home"]
   );
 }
 
 function revalidateForCatalog(slug: string) {
   return applyRevalidation(
-    ["/catalog", slug ? `/catalog/${slug}` : "", SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH].filter(Boolean) as string[],
-    [`catalog:${slug}`, "catalog-index"]
+    ["/catalog", slug ? `/catalog/${slug}` : "", "/", SITEMAP_INDEX_PATH, CATALOG_SITEMAP_PATH].filter(Boolean) as string[],
+    [`catalog:${slug}`, "catalog-index", "home"]
   );
 }
 
@@ -195,12 +244,14 @@ function revalidateForWikiCatalog(slug: string) {
       wikiSlug ? `/wiki/${wikiSlug}` : "",
       wikiSlug && collectionSlug ? `/wiki/${wikiSlug}/${collectionSlug}` : "",
       oldFlatCatalogSlug ? `/catalog/${oldFlatCatalogSlug}` : "",
+      "/",
       SITEMAP_INDEX_PATH,
       WIKI_SITEMAP_PATH
     ].filter(Boolean) as string[],
     [
       "wiki-index",
       "wiki-catalog-index",
+      "home",
       wikiSlug ? `wiki:${wikiSlug}` : "",
       wikiSlug && collectionSlug ? `wiki-catalog:${wikiSlug}/${collectionSlug}` : "",
       oldFlatCatalogSlug ? `wiki-catalog-code:${oldFlatCatalogSlug}` : ""
@@ -280,6 +331,36 @@ async function lookupListUniverseIds(slug: string): Promise<number[]> {
   return uniqueUniverseIds((entries ?? []) as Array<{ universe_id?: unknown }>);
 }
 
+async function lookupListSlugsByUniverseIds(universeIds: number[]): Promise<string[]> {
+  const ids = Array.from(new Set(universeIds.filter((id) => Number.isFinite(id))));
+  if (!ids.length) return [];
+
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from("game_list_entries")
+    .select("list:game_lists(slug, is_published)")
+    .in("universe_id", ids);
+
+  if (error) {
+    console.warn("List revalidation lookup failed for game_list_entries", error.message);
+    return [];
+  }
+
+  return Array.from(
+    new Set(
+      (data ?? [])
+        .flatMap((row) => {
+          const list = (row as { list?: unknown }).list;
+          return Array.isArray(list) ? list : list ? [list] : [];
+        })
+        .filter((list): list is { slug?: string | null; is_published?: boolean | null } => Boolean(list))
+        .filter((list) => list.is_published === true)
+        .map((list) => normalizeSlug(list.slug ?? ""))
+        .filter(Boolean)
+    )
+  );
+}
+
 async function lookupWikiSlugsByUniverseIds(universeIds: number[]): Promise<string[]> {
   const ids = Array.from(new Set(universeIds.filter((id) => Number.isFinite(id))));
   if (!ids.length) return [];
@@ -335,6 +416,12 @@ async function lookupRelatedWikiSlugs(type: Payload["type"], slug: string): Prom
   return lookupWikiSlugsByUniverseIds(universeIds);
 }
 
+async function lookupRelatedListSlugs(type: Payload["type"], slug: string): Promise<string[]> {
+  if (type !== "code") return [];
+  const universeIds = await lookupUniverseIdsBySlug("games", "slug", [slug]);
+  return lookupListSlugsByUniverseIds(universeIds);
+}
+
 export async function POST(request: Request) {
   const authError = assertSecret(request);
   if (authError) {
@@ -359,6 +446,7 @@ export async function POST(request: Request) {
 
   let purgePaths: string[] = [];
   let impactedWikiSlugs: string[] = [];
+  let impactedListSlugs: string[] = [];
 
   switch (payload.type) {
     case "code":
@@ -393,15 +481,15 @@ export async function POST(request: Request) {
       break;
     case "catalog":
       if (MUSIC_CATALOG_CODES.has(slug)) {
-        purgePaths = [...purgePaths, ...revalidateForMusic()];
+        purgePaths = [...purgePaths, ...revalidateForMusic(slug)];
       }
       if (isFreeItemsCatalogSlug(slug)) {
-        purgePaths = [...purgePaths, ...revalidateForFreeItems()];
+        purgePaths = [...purgePaths, ...revalidateForFreeItems(slug)];
       }
       purgePaths = [...purgePaths, ...revalidateForCatalog(slug)];
       break;
     case "music":
-      purgePaths = revalidateForMusic();
+      purgePaths = revalidateForMusic(slug);
       break;
     default:
       return NextResponse.json({ error: "Unknown type" }, { status: 400 });
@@ -412,7 +500,22 @@ export async function POST(request: Request) {
     purgePaths = [...purgePaths, ...revalidateForWiki(wikiSlug)];
   }
 
+  impactedListSlugs = await lookupRelatedListSlugs(payload.type, slug);
+  for (const listSlug of impactedListSlugs) {
+    purgePaths = [...purgePaths, ...revalidateForList(listSlug)];
+  }
+
   const cloudflare = await purgeCloudflarePaths(purgePaths);
+  const cloudflareWarm = cloudflare.enabled && cloudflare.ok
+    ? await warmCloudflarePaths(purgePaths)
+    : {
+        enabled: false,
+        ok: true,
+        attempted: 0,
+        warmed: [],
+        skipped: 0,
+        reason: cloudflare.enabled ? "purge-failed" : cloudflare.reason ?? "cloudflare-disabled"
+      };
   const indexNow = {
     enabled: false,
     attempted: 0,
@@ -430,12 +533,23 @@ export async function POST(request: Request) {
         type: payload.type,
         slug,
         impactedWikiSlugs,
+        impactedListSlugs,
         indexNow,
-        cloudflare
+        cloudflare,
+        cloudflareWarm
       },
       { status: 502 }
     );
   }
 
-  return NextResponse.json({ revalidated: true, type: payload.type, slug, impactedWikiSlugs, indexNow, cloudflare });
+  return NextResponse.json({
+    revalidated: true,
+    type: payload.type,
+    slug,
+    impactedWikiSlugs,
+    impactedListSlugs,
+    indexNow,
+    cloudflare,
+    cloudflareWarm
+  });
 }

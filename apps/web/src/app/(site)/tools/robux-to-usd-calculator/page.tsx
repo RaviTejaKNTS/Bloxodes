@@ -21,7 +21,7 @@ import {
   selectBestRobuxPlan
 } from "./robux-plans";
 
-export const revalidate = 3600; // revalidate every hour to keep SSR/CSR snapshots aligned
+export const revalidate = 0;
 
 const TOOL_CODE = "robux-to-usd-calculator";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/robux-to-usd-calculator`;

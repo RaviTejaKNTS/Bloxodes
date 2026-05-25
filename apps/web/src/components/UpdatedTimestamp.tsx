@@ -1,3 +1,5 @@
+import { FiClock } from "react-icons/fi";
+
 import { buildUpdatedDisplay } from "@/lib/content-dates";
 
 export function UpdatedTimestamp({
@@ -11,7 +13,8 @@ export function UpdatedTimestamp({
   if (!exact) return null;
 
   return (
-    <p className={className ?? "text-sm text-foreground/80"}>
+    <p className={className ?? "inline-flex items-center gap-1.5 text-sm text-foreground/80"}>
+      <FiClock className="h-4 w-4 shrink-0" aria-hidden />
       Updated on <span className="font-semibold text-foreground">{exact}</span>
       {relative ? <span>{` (${relative})`}</span> : null}
     </p>

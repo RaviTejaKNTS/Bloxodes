@@ -15,14 +15,13 @@ import {
   loadArtistOptionBySlug
 } from "../../../../page-data";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 type PageProps = {
   params: Promise<{ artist: string; page: string }>;
 };
 
 export async function generateStaticParams() {
-  // Keep high-cardinality artist pagination on on-demand ISR to prevent build-time timeouts.
   return [];
 }
 

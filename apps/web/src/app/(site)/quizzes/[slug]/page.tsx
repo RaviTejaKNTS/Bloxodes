@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
+import { FiClock } from "react-icons/fi";
 import "@/styles/article-content.css";
 import { QuizRunner } from "@/components/QuizRunner";
 import { GameCard } from "@/components/GameCard";
@@ -16,15 +17,14 @@ import { buildServerQuizAttempt } from "@/lib/quiz-attempts";
 import type { QuizData } from "@/lib/quiz-types";
 import { QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 
-export const revalidate = 3600; // 1 hour
+export const revalidate = 0;
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  const slugs = await listPublishedQuizCodes();
-  return slugs.map((slug) => ({ slug }));
+  return [];
 }
 
 function pickThumbnail(value: unknown): string | null {
@@ -199,7 +199,8 @@ export default async function QuizPage({ params }: PageProps) {
       <header className="mb-6 space-y-3">
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
         {formattedUpdated ? (
-          <p className="text-sm text-foreground/80">
+          <p className="inline-flex items-center gap-1.5 text-sm text-foreground/80">
+            <FiClock className="h-4 w-4 shrink-0" aria-hidden />
             Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
             {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
           </p>

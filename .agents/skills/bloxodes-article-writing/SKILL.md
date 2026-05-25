@@ -43,6 +43,9 @@ Return:
   "slug": "",
   "meta_description": "",
   "content_md": "",
+  "cover_image": null,
+  "author_id": null,
+  "universe_id": null,
   "tags": [],
   "sources": []
 }
@@ -50,6 +53,18 @@ Return:
 
 Use Markdown in `content_md`.
 Do not include `seo_title` for articles unless the `articles` schema changes.
+
+## Article Metadata And Feature Images
+
+Use the same publishing shape as `scripts/articles/generate-articles.ts` and `scripts/content/import-content-final.ts`.
+
+Article titles should be SEO-friendly without feeling like database labels. Keep the primary keyword near the front, then add a short human outcome when it helps the card feel worth opening, such as `Slime RNG Rebirth Guide: When Resetting Is Worth It` or `Slime RNG Items Guide: What to Use, Save, and Spend First`. Avoid clickbait, fake urgency, or subtitles so long that the card becomes hard to scan.
+
+Every article needs an author. If the workflow is importing reviewed `final.json` and no explicit author is provided, the importer must pick one author randomly from `authors`, matching the generator behavior. Do not leave `author_id` null for a published article.
+
+Every game article needs a feature image. Use the linked Roblox universe thumbnail as the source image, then create an edited 1200x675 WebP cover like the generator: crop to 16:9, apply a dark overlay, and place a short centered title such as `Rebirth Guide` or `Power Fruits Guide`. Do not use a raw Roblox thumbnail as the article cover unless cover generation is blocked and the gap is recorded.
+
+The feature image should also appear inside `content_md` before the first H2, matching `generate-articles.ts`. After import, verify both `/articles` and `/articles/<slug>` show the same author and edited cover.
 
 ## How To Write The Article
 

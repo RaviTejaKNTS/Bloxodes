@@ -1,4 +1,4 @@
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import { cleanRewardsText, isCodeNew, sortCodesByFirstSeenDesc } from "@/lib/code-utils";
 import type { Code, Game } from "@/lib/db";
 import {
@@ -248,7 +248,7 @@ export async function getExtensionCodes(params: {
   const gameName = normalizeRobloxGameName(params.gameName);
   const limit = normalizeExtensionLimit(params.limit);
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     () => uncachedGetExtensionCodes({ placeId, robloxUrl, gameName, limit }),
     [`extension-codes:${placeId ?? "none"}:${normalizeGameNameSlug(gameName)}:${limit}`],
     {

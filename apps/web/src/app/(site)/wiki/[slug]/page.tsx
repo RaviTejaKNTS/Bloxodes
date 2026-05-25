@@ -6,7 +6,7 @@ import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL, WIKI_DESCRIPTION
 import { getWikiPageBySlug, listPublishedWikiSlugs } from "@/lib/wiki";
 import { loadWikiDetailPageData, renderWikiDetailPage } from "../page-data";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -23,8 +23,7 @@ function normalizeDescription(value?: string | null): string | null {
 }
 
 export async function generateStaticParams() {
-  const slugs = await listPublishedWikiSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

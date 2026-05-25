@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { articlesMetadata, loadArticlesPageData, renderArticlesPage } from "./page-data";
 
-export const revalidate = 604800; // weekly
+export const revalidate = 0;
 
 export const metadata: Metadata = articlesMetadata;
 

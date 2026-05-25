@@ -125,8 +125,6 @@ async function warmUrl(url) {
       redirect: "follow",
       headers: {
         accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "cache-control": "no-cache",
-        pragma: "no-cache",
         "user-agent": "BloxodesCacheWarmup/1.0"
       },
       signal: controller.signal

@@ -37,6 +37,8 @@ if (cspMode !== "off" && (!publicCsp || !secureCsp)) {
   throw new Error("CSP directives must not be empty.");
 }
 
+const publicHtmlCacheControl = "public, max-age=0, s-maxage=31536000, stale-while-revalidate=31536000";
+
 const nextConfig = {
   poweredByHeader: false,
   devIndicators: false,
@@ -48,73 +50,91 @@ const nextConfig = {
       {
         source: "/",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=1800, stale-while-revalidate=86400" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/codes/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/articles/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=604800" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/lists/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=300, stale-while-revalidate=86400" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/tools/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=21600, stale-while-revalidate=86400" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/wiki/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/checklists/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=21600, stale-while-revalidate=86400" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
+        ]
+      },
+      {
+        source: "/quizzes/:path*",
+        headers: [
+          { key: "Cache-Control", value: publicHtmlCacheControl }
+        ]
+      },
+      {
+        source: "/events/:path*",
+        headers: [
+          { key: "Cache-Control", value: publicHtmlCacheControl }
+        ]
+      },
+      {
+        source: "/catalog/:path*",
+        headers: [
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/authors/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=604800, stale-while-revalidate=2592000" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/sitemap.xml",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=21600, stale-while-revalidate=86400" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/sitemaps/:path*",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=21600, stale-while-revalidate=86400" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/robots.txt",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=604800" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       },
       {
         source: "/feed.xml",
         headers: [
-          { key: "Cache-Control", value: "public, s-maxage=21600, stale-while-revalidate=604800" }
+          { key: "Cache-Control", value: publicHtmlCacheControl }
         ]
       }
     ];

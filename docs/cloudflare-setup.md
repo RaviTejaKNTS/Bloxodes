@@ -129,7 +129,7 @@ URI path equals /ads.txt
 
 Action:
 - Cache status: **Cache Everything**
-- Edge Cache TTL: **6 hours** (matches `s-maxage=21600`)
+- Edge Cache TTL: **Respect Cache-Control header from origin**
 - Browser Cache TTL: Respect Existing Headers
 
 ---
@@ -147,30 +147,28 @@ AND Hostname equals bloxodes.com
 
 Action:
 - Cache status: **Cache Everything**
-- Edge Cache TTL: **Respect Cache-Control header from origin** (or set to 30 minutes as a floor)
+- Edge Cache TTL: **Respect Cache-Control header from origin**
 - Browser Cache TTL: Respect Existing Headers
 
-> This rule makes Cloudflare cache server-rendered HTML at its edge nodes. Without this, Cloudflare never caches HTML regardless of your `Cache-Control` headers.
+> This rule makes Cloudflare the primary public-page cache. The VPS renders fresh HTML on a Cloudflare miss; Supabase revalidation events purge and warm affected URLs when content changes.
 
 ---
 
-### 3.4 Per-Route Cache TTLs (Reference)
+### 3.4 Cache-Until-Purged Headers
 
-The app sends these headers — Cloudflare will respect them once Rule 4 is active:
+The app now sends the same public HTML cache policy for public pages, sitemaps, robots, and the feed:
 
-| Route | s-maxage | stale-while-revalidate |
-|---|---|---|
-| `/` | 30 min | 24 hours |
-| `/codes/*` | 1 hour | 24 hours |
-| `/articles/*` | 24 hours | 7 days |
-| `/lists/*` | 5 min | 24 hours |
-| `/tools/*` | 6 hours | 24 hours |
-| `/checklists/*` | 6 hours | 24 hours |
-| `/authors/*` | 7 days | 30 days |
-| `/quizzes/*` | inherits default | — |
-| `/catalog/*` | inherits default | — |
-| `/sitemap.xml` | 6 hours | 24 hours |
-| `/robots.txt` | 24 hours | 7 days |
+```http
+Cache-Control: public, max-age=0, s-maxage=31536000, stale-while-revalidate=31536000
+```
+
+What that means:
+
+- Browsers revalidate HTML instead of holding long stale copies.
+- Cloudflare can keep HTML for a long time.
+- Content freshness comes from exact Cloudflare purges, not short TTL expiry.
+- After deploy, warm Cloudflare from the sitemap.
+- After content updates, `/api/revalidate` purges and warms the affected URLs.
 
 ---
 
@@ -302,9 +300,20 @@ After every deployment, Cloudflare's edge cache holds the old HTML. You need to 
 
 In the Cloudflare dashboard, go to the bloxodes.com overview page. The **Zone ID** is shown in the right sidebar. Copy it.
 
-### 7.3 Add Purge Step to Deploy Script / GitHub Actions
+### 7.3 Add Purge And Warm Steps To Deploy
 
-Add this to your Dokploy post-deploy hook or GitHub Actions workflow:
+The repo workflow `.github/workflows/dokploy-production-deploy.yml` is the preferred place for deploy-wide purge and warm. On pushes to `production`, it triggers Dokploy, waits for the site, purges Cloudflare, and warms the sitemap.
+
+If you deploy manually from Dokploy, open the workflow in GitHub Actions and run it manually with:
+
+- `trigger_dokploy=false`
+- `site_url=https://bloxodes.com`
+- `purge_cloudflare=true`
+- `warm_cloudflare=true`
+
+That makes the workflow act as a post-deploy purge/warm job without trying to start another Dokploy deploy.
+
+The purge step does the same API call:
 
 ```bash
 # Purge all Cloudflare cache after deploy
@@ -314,42 +323,38 @@ curl -X POST "https://api.cloudflare.com/client/v4/zones/YOUR_ZONE_ID/purge_cach
   --data '{"purge_everything": true}'
 ```
 
-Or to purge only specific high-traffic URLs instead of everything:
+Then warm Cloudflare from the sitemap so normal visitors hit the edge cache instead of the VPS:
 
 ```bash
-curl -X POST "https://api.cloudflare.com/client/v4/zones/YOUR_ZONE_ID/purge_cache" \
-  -H "Authorization: Bearer YOUR_API_TOKEN" \
-  -H "Content-Type: application/json" \
-  --data '{
-    "files": [
-      "https://bloxodes.com/",
-      "https://bloxodes.com/codes",
-      "https://bloxodes.com/articles",
-      "https://bloxodes.com/quizzes",
-      "https://bloxodes.com/catalog"
-    ]
-  }'
+CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm
 ```
+
+For normal content updates, do not purge everything. Supabase triggers write to `revalidation_events`, the Supabase revalidation function calls `/api/revalidate`, and the app purges plus warms only the affected URLs.
 
 ### 7.4 Store API Token as a Secret
 
 In GitHub Actions:
 
 - add `CLOUDFLARE_API_TOKEN` as a repository secret under **Settings → Secrets → Actions**
-- add `CLOUDFLARE_ZONE_ID` as a repository variable under **Settings → Secrets and variables → Actions → Variables**
-- add `PRODUCTION_SITE_URL` as a repository variable so the deploy workflow can wait for `/api/health` before purging
+- add `CLOUDFLARE_ZONE_ID` as a repository variable under **Settings → Secrets and variables → Actions → Variables**; the workflow also accepts it as a secret if you prefer
+- preferred for the current setup: add `DOKPLOY_DEPLOY_WEBHOOK_URL` as a repository secret or variable. The workflow also accepts `DOKPLOY_WEBHOOK_URL` and sends a GitHub-style push payload with `ref=refs/heads/production`.
+- fallback API deploy path: add `DOKPLOY_AUTH_TOKEN` or `DOKPLOY_API_TOKEN` as a repository secret, plus `DOKPLOY_URL` or `DOKPLOY_API_URL`, and `DOKPLOY_APPLICATION_ID`.
+- optionally add `PRODUCTION_SITE_URL=https://bloxodes.com`; the workflow falls back to `https://bloxodes.com` when this is missing
+- optionally add `DOKPLOY_DEPLOY_SETTLE_SECONDS` if Dokploy needs more or less time before health checks begin
 
 In Dokploy app environment variables:
 
 - add `CLOUDFLARE_API_TOKEN`
 - add `CLOUDFLARE_ZONE_ID`
+- add `CLOUDFLARE_WARM_AFTER_PURGE=true`
+- optionally tune `CLOUDFLARE_WARM_MAX_PATHS` and `CLOUDFLARE_WARM_CONCURRENCY`
 
 Why both places:
 
 - GitHub Actions uses these values to purge Cloudflare after code deployments
-- the app runtime uses these values inside `/api/revalidate` so Supabase-triggered content updates also purge the relevant Cloudflare HTML entries
+- the app runtime uses these values inside `/api/revalidate` so Supabase-triggered content updates purge and warm the relevant Cloudflare HTML entries
 
-Without the Dokploy runtime env vars, content revalidation will update the origin cache but Cloudflare can still keep serving stale HTML until TTL expiry.
+Without the Dokploy runtime env vars, content revalidation cannot purge Cloudflare, so long-lived edge HTML can stay stale until manually purged.
 
 ---
 

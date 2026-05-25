@@ -10,7 +10,7 @@ This document tracks the remaining work to get the VPS deployment to a strong pr
 - `bloxodes.ravitejaknts.com` is live as the Dokploy admin panel over HTTPS.
 - The repo deploy source of truth is `RaviTejaKNTS/Bloxodes`.
 - Dokploy deploys from the `production` branch.
-- GitHub Actions can trigger Dokploy deploys automatically on `production`.
+- GitHub Actions can trigger Dokploy deploys automatically on `production` when `DOKPLOY_DEPLOY_WEBHOOK_URL` or `DOKPLOY_WEBHOOK_URL` is configured. The webhook call must include a GitHub-style push event header and `ref=refs/heads/production`; a bare `{}` payload returns `Branch Not Match`. A Dokploy API deploy remains available as a fallback when the token, URL, and application id are all configured. The same workflow can also be run manually with `trigger_dokploy=false` after a Dokploy-only manual deploy.
 - `bloxodes.com` and `www.bloxodes.com` have been cut over from Vercel to the VPS.
 - The Cloudflare zone has been cleaned up to a normalized production shape:
   - `A @ -> 187.124.68.197` proxied
@@ -35,7 +35,7 @@ This document tracks the remaining work to get the VPS deployment to a strong pr
   - `https://bloxodes.com/codes/99-nights-in-the-forest` warms from `MISS` to `HIT`
 - A scoped Cloudflare purge token has been created and verified against the `bloxodes.com` zone.
 - The Dokploy app now has `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ZONE_ID` configured and has been redeployed once to pick them up.
-- GitHub repository Actions secrets are now populated for the current automation workflows, including the Dokploy deploy webhook, Cloudflare purge, Supabase, OpenAI, Roblox Open Cloud, Telegram, Twitter, Google Custom Search, and revalidation.
+- GitHub repository Actions must have the current automation secrets populated for fully automatic runs, including the Dokploy deploy trigger, Cloudflare purge, Supabase, OpenAI, Roblox Open Cloud, Telegram, Twitter, Google Custom Search, and revalidation.
 - GitHub repository Actions variables now include the Cloudflare zone id, the production health-check host (`https://bloxodes.com`), and public runtime values such as `NEXT_PUBLIC_SITE_URL` and Supabase public keys.
 - Dokploy runtime values now use the production domain:
   - `SITE_URL=https://bloxodes.com`
@@ -86,7 +86,7 @@ Repo status:
 - code-deploy purge is now wired in `.github/workflows/dokploy-production-deploy.yml`
 - runtime content purge is now wired in `src/app/api/revalidate/route.ts`
 - Dokploy now has `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ZONE_ID`
-- GitHub Actions now has the Cloudflare token and zone id needed for post-deploy purge automation
+- GitHub Actions needs the Cloudflare token and zone id for post-deploy purge automation; Dokploy runtime values only cover `/api/revalidate`
 - `PRODUCTION_SITE_URL` now points to `https://bloxodes.com`
 
 Cloudflare status:

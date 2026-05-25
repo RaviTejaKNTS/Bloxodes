@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { buildAlternates, SITE_NAME, SITE_URL, WIKI_DESCRIPTION } from "@/lib/seo";
 import { loadWikiIndexPageData, renderWikiIndexPage } from "./page-data";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: `Roblox Wiki | ${SITE_NAME}`,

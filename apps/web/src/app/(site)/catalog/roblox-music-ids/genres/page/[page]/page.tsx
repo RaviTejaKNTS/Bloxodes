@@ -14,7 +14,7 @@ import {
 } from "../../../page-data";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 const MAX_STATIC_PAGES = 20;
 
 type PageProps = {
@@ -22,8 +22,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const { totalPages } = await loadPagedGenreOptions(1);
-  return buildPageParams(totalPages, 1, MAX_STATIC_PAGES);
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

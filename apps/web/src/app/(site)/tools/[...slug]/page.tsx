@@ -33,7 +33,7 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
 const TOOL_AD_SLOT = "3529946151";
@@ -53,11 +53,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const tools = await listPublishedTools();
-  return tools
-    .map((tool) => tool.code?.trim().toLowerCase())
-    .filter((code): code is string => Boolean(code) && !RESERVED_TOOL_CODES.has(code))
-    .map((code) => ({ slug: splitPathToSlug(code) }));
+  return [];
 }
 
 function normalizeToolCode(slugParts: string[]): string {

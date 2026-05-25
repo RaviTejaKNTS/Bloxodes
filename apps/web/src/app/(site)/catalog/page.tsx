@@ -7,7 +7,7 @@ import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: `Roblox Catalogs | ${SITE_NAME}`,

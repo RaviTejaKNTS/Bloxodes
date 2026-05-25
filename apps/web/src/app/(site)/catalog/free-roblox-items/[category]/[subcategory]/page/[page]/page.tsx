@@ -18,7 +18,7 @@ import {
   renderRobloxFreeItemsPage
 } from "../../../../page-data";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 type PageProps = {
   params: Promise<{ category: string; subcategory: string; page: string }>;
@@ -28,17 +28,7 @@ type PageProps = {
 const FREE_ITEMS_CONTENT_CODES = buildFreeItemCatalogCodeCandidates();
 
 export async function generateStaticParams() {
-  const categories = await loadFreeItemCategories();
-  const paramsList: Array<{ category: string; subcategory: string; page: string }> = [];
-
-  for (const category of categories) {
-    const subcategories = await loadFreeItemSubcategories(category.label);
-    for (const subcategory of subcategories) {
-      paramsList.push({ category: category.slug, subcategory: subcategory.slug, page: "1" });
-    }
-  }
-
-  return paramsList;
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

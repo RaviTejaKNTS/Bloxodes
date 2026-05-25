@@ -25,7 +25,7 @@ import {
   renderForgeCatalogPage
 } from "@/app/(site)/catalog/the-forge/page-data";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 type PageProps = {
   params: Promise<{ slug: string; collection: string }>;
@@ -118,11 +118,7 @@ function disableCacheInDevelopment() {
 }
 
 export async function generateStaticParams() {
-  const paths = await listPublishedWikiCatalogPaths();
-  return paths.map((path) => ({
-    slug: path.wiki_slug,
-    collection: path.collection_slug
-  }));
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

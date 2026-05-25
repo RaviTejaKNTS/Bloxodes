@@ -9,32 +9,13 @@ type PageProps = {
   params: Promise<{ slug: string; page: string }>;
 };
 
-export const revalidate = 86400; // daily
+export const revalidate = 0;
 const MAX_STATIC_LIST_SLUGS = 80;
 const MAX_STATIC_PAGES_PER_LIST = 2;
 const STATIC_PAGE_START = 2;
 
 export async function generateStaticParams() {
-  const { lists } = await listPublishedGameListsPage(1, MAX_STATIC_LIST_SLUGS);
-  const slugs = lists
-    .map((list) => list.slug?.trim())
-    .filter((slug): slug is string => Boolean(slug));
-  const paramsList: Array<{ slug: string; page: string }> = [];
-
-  for (const slug of slugs) {
-    try {
-      const data = await buildListData(slug, 1);
-      const totalPages = Math.max(1, Math.ceil(data.totalEntries / PAGE_SIZE));
-      const pageParams = buildPageParams(totalPages, STATIC_PAGE_START, MAX_STATIC_PAGES_PER_LIST);
-      for (const entry of pageParams) {
-        paramsList.push({ slug, page: entry.page });
-      }
-    } catch {
-      // Skip lists that cannot be resolved during prerender enumeration.
-    }
-  }
-
-  return paramsList;
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

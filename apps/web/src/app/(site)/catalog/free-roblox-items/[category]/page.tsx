@@ -18,7 +18,7 @@ import {
   renderRobloxFreeItemsPage
 } from "../page-data";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 type PageProps = {
   params: Promise<{ category: string }>;
@@ -30,8 +30,7 @@ function getCatalogCodeCandidates(categorySlug: string) {
 }
 
 export async function generateStaticParams() {
-  const categories = await loadFreeItemCategories();
-  return categories.map((category) => ({ category: category.slug }));
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

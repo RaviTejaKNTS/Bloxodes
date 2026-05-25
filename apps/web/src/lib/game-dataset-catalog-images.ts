@@ -2,7 +2,7 @@ import "server-only";
 
 import type { Dirent } from "node:fs";
 import fs from "node:fs/promises";
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import { getGameDatasetCatalogConfigByCode } from "@/lib/game-dataset-catalogs";
 import { repoPath } from "@/lib/paths";
 
@@ -141,7 +141,7 @@ export async function listGameDatasetCatalogImageUrls(code: string, limit = 6): 
 
   const requestedLimit = Number.isFinite(limit) ? Math.floor(limit) : 6;
   const safeLimit = Math.max(1, Math.min(12, requestedLimit));
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     () => readCatalogImageUrls(normalizedCode, safeLimit),
     ["game-dataset-catalog-images-v2", normalizedCode, String(safeLimit)],
     {

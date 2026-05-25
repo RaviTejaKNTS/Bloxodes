@@ -104,6 +104,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Collect Slime RNG local catalog data and images | `scripts/catalog/collect-slime-rng-data.ts` | `npm run collect:slime-rng-data` |
 | Seed gathered game catalog pages into Supabase | `scripts/catalog/seed-game-catalog-pages.ts` | `npm run seed:game-catalog-pages`, add `-- --dry-run` to preview; add `-- --final-json-root tmp/content-workspace/<date>/game-catalog` when approved page `final.json` files should override generated copy |
 | Seed gathered game wiki pages into Supabase | `scripts/catalog/seed-game-wiki-pages.ts` | `npm run seed:game-wiki-pages`, add `-- --dry-run` to preview |
+| Import reviewed content final JSON into Supabase | `scripts/content/import-content-final.ts` | `npm run import:content-final -- --file tmp/content-workspace/<date>/<type>/<slug>/final.json --dry-run`; article imports write only to `articles`, fill missing authors randomly, create edited game-thumbnail covers when needed, inject the feature image before the first H2, and require `/articles` plus `/articles/<slug>` verification against the same saved row |
 | Collect all catalog item families | multiple catalog collectors | `npm run collect:catalog-items` |
 | Enrich catalog items | `scripts/catalog/enrich-roblox-catalog-items.ts` | `npm run enrich:catalog-items` |
 | Import RobloxDen free items | `scripts/catalog/import-robloxden-free-items.py` | direct `python scripts/catalog/import-robloxden-free-items.py` |
@@ -118,7 +119,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Update `ads.txt` | `scripts/ads/update-ads-txt.ts` | `npm run ads:update` |
 | IndexNow bootstrap | `scripts/automation/indexnow-bootstrap.ts` | `npm run indexnow:bootstrap` |
 | Google Indexing API submitter | `scripts/automation/google-indexing-submit.ts` | `npm run indexing:google -- --dry-run`, live only with `--apply` and `GOOGLE_INDEXING_API_ENABLED=true` |
-| Warm Cloudflare cache | `scripts/automation/warm-cloudflare-cache.mjs` | direct `node scripts/automation/warm-cloudflare-cache.mjs` |
+| Warm Cloudflare cache | `scripts/automation/warm-cloudflare-cache.mjs` | `CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm`; run after deploy/purge to fill Cloudflare from the sitemap |
 | Automation reporting | `scripts/automation/report-automation.mjs` | direct `node scripts/automation/report-automation.mjs` |
 | Report redeem markdown image gaps | `scripts/backfill/report-redeem-md-missing-images.ts` | direct `tsx scripts/backfill/report-redeem-md-missing-images.ts` |
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |

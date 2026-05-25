@@ -19,7 +19,7 @@ export function SiteShell({ children, integrations = null }: SiteShellProps) {
       {integrations}
       <div className={`${inter.className} min-h-screen`}>
         <HeaderControls />
-        <div className="flex min-h-screen flex-col lg:pl-[15.5rem]">
+        <div className="flex min-h-screen flex-col xl:pl-[15.5rem]">
           <main className="container flex-1 py-6 md:py-8 xl:py-10">{children}</main>
           <SiteFooter />
         </div>

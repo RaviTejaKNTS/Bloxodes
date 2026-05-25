@@ -17,8 +17,20 @@ export type CloudflarePurgeResult = {
   errors?: string[];
 };
 
+export type CloudflareWarmResult = {
+  enabled: boolean;
+  ok: boolean;
+  attempted: number;
+  warmed: string[];
+  skipped: number;
+  reason?: string;
+  errors?: string[];
+};
+
 const CLOUDFLARE_API_BASE = "https://api.cloudflare.com/client/v4";
 const CLOUDFLARE_PURGE_BATCH_SIZE = 30;
+const DEFAULT_WARM_CONCURRENCY = 4;
+const DEFAULT_WARM_MAX_PATHS = 80;
 
 function readEnv(name: string) {
   const value = process.env[name]?.trim();
@@ -45,6 +57,28 @@ function buildPurgeUrls(paths: string[]) {
   );
 
   return uniquePaths.map((path) => `${origin}${path === "/" ? "/" : path}`);
+}
+
+function readPositiveInt(name: string, fallback: number, max: number) {
+  const raw = readEnv(name);
+  if (!raw) return fallback;
+  const value = Number(raw);
+  if (!Number.isFinite(value) || value < 1) return fallback;
+  return Math.min(Math.floor(value), max);
+}
+
+async function runLimited<T, R>(items: T[], concurrency: number, worker: (item: T) => Promise<R>): Promise<R[]> {
+  const results: R[] = [];
+  let cursor = 0;
+  async function runWorker() {
+    while (cursor < items.length) {
+      const index = cursor;
+      cursor += 1;
+      results[index] = await worker(items[index]);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, runWorker));
+  return results;
 }
 
 function extractErrors(payload: unknown) {
@@ -140,4 +174,77 @@ export async function purgeCloudflarePaths(paths: string[]): Promise<CloudflareP
       reason: error instanceof Error ? error.message : "cloudflare-request-failed"
     };
   }
+}
+
+export async function warmCloudflarePaths(paths: string[]): Promise<CloudflareWarmResult> {
+  if (readEnv("CLOUDFLARE_WARM_AFTER_PURGE") === "false") {
+    return {
+      enabled: false,
+      ok: true,
+      attempted: 0,
+      warmed: [],
+      skipped: 0,
+      reason: "disabled"
+    };
+  }
+
+  const apiToken = readEnv("CLOUDFLARE_API_TOKEN");
+  const zoneId = readEnv("CLOUDFLARE_ZONE_ID");
+  if (!apiToken || !zoneId) {
+    return {
+      enabled: false,
+      ok: false,
+      attempted: 0,
+      warmed: [],
+      skipped: 0,
+      reason: "missing-config"
+    };
+  }
+
+  const allUrls = buildPurgeUrls(paths);
+  const maxPaths = readPositiveInt("CLOUDFLARE_WARM_MAX_PATHS", DEFAULT_WARM_MAX_PATHS, 500);
+  const urls = allUrls.slice(0, maxPaths);
+  if (!urls.length) {
+    return {
+      enabled: true,
+      ok: true,
+      attempted: 0,
+      warmed: [],
+      skipped: 0,
+      reason: "no-cacheable-paths"
+    };
+  }
+
+  const concurrency = readPositiveInt("CLOUDFLARE_WARM_CONCURRENCY", DEFAULT_WARM_CONCURRENCY, 16);
+  const errors: string[] = [];
+  const warmed: string[] = [];
+  await runLimited(urls, concurrency, async (url) => {
+    try {
+      const response = await fetch(url, {
+        redirect: "follow",
+        headers: {
+          Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "User-Agent": "BloxodesRevalidationWarmup/1.0"
+        }
+      });
+      await response.arrayBuffer();
+      if (response.ok) {
+        warmed.push(url);
+      } else {
+        errors.push(`${url} returned ${response.status}`);
+      }
+    } catch (error) {
+      errors.push(`${url} failed: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  });
+
+  return {
+    enabled: true,
+    ok: errors.length === 0,
+    attempted: urls.length,
+    warmed,
+    skipped: Math.max(0, allUrls.length - urls.length),
+    reason: errors.length ? "warmup-failed" : undefined,
+    errors: errors.length ? errors : undefined
+  };
 }

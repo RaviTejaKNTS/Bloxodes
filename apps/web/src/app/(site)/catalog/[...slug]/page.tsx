@@ -13,7 +13,7 @@ import { buildGameDatasetCatalogCopy, getGameDatasetCatalogConfigByCode } from "
 import { getWikiCatalogPageByCode } from "@/lib/wiki-catalog";
 import { loadGameDatasetCatalogDataset } from "../game-datasets/page-data";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 const RESERVED_CATALOG_PREFIXES = [
   "admin-commands",
   "roblox-color-codes",
@@ -31,12 +31,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const codes = await listPublishedCatalogCodes();
-  return codes
-    .map((code) => code.trim().toLowerCase())
-    .filter((code) => code.length > 0)
-    .filter((code) => !isReservedCatalogCode(code))
-    .map((code) => ({ slug: splitPathToSlug(code) }));
+  return [];
 }
 
 function normalizeCatalogCode(slugParts: string[]): string {

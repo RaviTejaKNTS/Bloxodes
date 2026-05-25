@@ -2,7 +2,7 @@ import { generateGrowGardenCollectionMetadata, renderGrowGardenCollectionRoute }
 
 const COLLECTION = "currencies";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 export async function generateMetadata() {
   return generateGrowGardenCollectionMetadata(COLLECTION);

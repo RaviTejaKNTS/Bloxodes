@@ -30,6 +30,8 @@ Write in this shape:
 
 The current `articles` table does not have `seo_title`. Use the visible `title` as the article title and make `meta_description` carry the search preview.
 
+Article ingestion writes only to the `articles` table. Do not write reviewed article content into article views or index projections; those are read paths and should derive from the same saved article row.
+
 ## Article Types
 
 Pick the primary type before writing:
@@ -113,9 +115,24 @@ Do not add self-referential wording like "in our article" just to place a link.
 ## SEO Rules
 
 - `title`: useful and natural.
+- Keep the visible `title` search-friendly but not lifeless. Put the main keyword first, then add a short reader outcome when it improves the headline, such as `Slime RNG Rebirth Guide: When Resetting Is Worth It` or `Slime RNG Items Guide: What to Use, Save, and Spend First`.
 - `slug`: lowercase, stable, and not date-stuffed unless the topic is inherently dated.
 - `meta_description`: usually 145-160 characters, specific to the reader outcome.
 - `tags`: specific and reusable.
+
+## Author And Feature Image Rules
+
+Published articles must have an author. When importing reviewed article JSON without an explicit `author_id`, use the same behavior as `scripts/articles/generate-articles.ts`: pick one author randomly from the `authors` table and save that ID on the article row. Do not publish article rows with `author_id = null`.
+
+Game articles must have an edited feature image. Start from the linked Roblox universe thumbnail, crop it to 1200x675, apply the same dark overlay style used by `scripts/articles/generate-articles.ts`, and place a short centered overlay title. The overlay should be 3-6 words when possible, such as `Beginner Guide`, `Rebirth Guide`, `Items Guide`, or `Power Fruits Guide`.
+
+Do not store the raw Roblox thumbnail as the article cover when an edited cover can be generated. Use `cover_image` for the edited image path or URL, then inject the feature image into `content_md` before the first H2 so the detail page has the same visual treatment as generated articles.
+
+After import, verify the card and detail page together:
+
+- `/articles` shows the simplified title, edited cover, and assigned author.
+- `/articles/<slug>` shows the same title, edited cover, and same author.
+- Open Graph image uses the edited cover.
 
 ## Markdown Rules
 

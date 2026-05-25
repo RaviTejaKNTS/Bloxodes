@@ -1,4 +1,4 @@
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type Author = {
@@ -143,7 +143,12 @@ function isOutOfRangePaginationFailure(status: unknown, error: unknown): boolean
 
 const ARTICLE_INDEX_FIELDS =
   `id,title,slug,cover_image,meta_description,published_at,created_at,updated_at,is_published,` +
-  `author,universe`;
+  `universe_id,author_id,` +
+  `author:authors(id,name,slug,avatar_url,gravatar_email),` +
+  `universe:roblox_universes(universe_id,slug,display_name,name,icon_url)`;
+const ARTICLE_DETAIL_FIELDS =
+  `*, author:authors(id,name,slug,avatar_url,gravatar_email,bio_md,twitter,youtube,website,facebook,linkedin,instagram,roblox,discord,created_at,updated_at), universe:roblox_universes(universe_id,slug,display_name,name,icon_url,genre_l1,genre_l2)`;
+const BYPASS_ARTICLE_CACHE = process.env.NODE_ENV === "development";
 
 export type ListUniverseDetails = {
   universe_id: number;
@@ -262,6 +267,34 @@ export type ChecklistItem = {
   updated_at: string;
 };
 
+function compareChecklistSectionCodes(a: string, b: string): number {
+  const aParts = a
+    .split(".")
+    .map((part) => Number.parseInt(part, 10))
+    .filter((part) => Number.isFinite(part));
+  const bParts = b
+    .split(".")
+    .map((part) => Number.parseInt(part, 10))
+    .filter((part) => Number.isFinite(part));
+  const maxLength = Math.max(aParts.length, bParts.length);
+
+  for (let index = 0; index < maxLength; index += 1) {
+    const aPart = aParts[index] ?? -1;
+    const bPart = bParts[index] ?? -1;
+    if (aPart !== bPart) return aPart - bPart;
+  }
+
+  return a.localeCompare(b);
+}
+
+function sortChecklistItems(items: ChecklistItem[]): ChecklistItem[] {
+  return [...items].sort((a, b) => {
+    const sectionComparison = compareChecklistSectionCodes(a.section_code, b.section_code);
+    if (sectionComparison !== 0) return sectionComparison;
+    return a.title.localeCompare(b.title);
+  });
+}
+
 export type Code = {
   id: string;
   game_id: string;
@@ -287,7 +320,7 @@ export async function listPublishedGames(): Promise<Game[]> {
 }
 
 export async function listAuthors(): Promise<Author[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
@@ -308,7 +341,7 @@ export async function listAuthors(): Promise<Author[]> {
 }
 
 export async function listAuthorSlugs(): Promise<string[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
@@ -398,7 +431,7 @@ async function fetchGamesWithActiveCounts(): Promise<GameWithCounts[]> {
   return (data ?? []).map((row) => mapCodePageRowToCounts(row as CodePageSummary));
 }
 
-const cachedListGamesWithActiveCounts = unstable_cache(
+const cachedListGamesWithActiveCounts = publicContentCache(
   fetchGamesWithActiveCounts,
   ["listGamesWithActiveCounts"],
   {
@@ -412,7 +445,7 @@ export async function listGamesWithActiveCounts(): Promise<GameWithCounts[]> {
 }
 
 export async function listPublishedCodeSlugs(): Promise<string[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
@@ -441,7 +474,7 @@ export async function listGamesWithActiveCountsPage(page: number, pageSize: numb
   const safePageSize = Math.max(1, pageSize);
   const offset = (safePage - 1) * safePageSize;
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       try {
@@ -529,7 +562,7 @@ export async function listGamesWithActiveCountsByUniverseId(universeId: number, 
 }
 
 export async function listPublishedGameLists(): Promise<GameList[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       try {
@@ -563,7 +596,7 @@ export async function listPublishedGameLists(): Promise<GameList[]> {
 }
 
 export async function listPublishedGameListSlugs(): Promise<string[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
@@ -594,7 +627,7 @@ export async function listPublishedGameListsPage(
   const safePageSize = Math.max(1, pageSize);
   const offset = (safePage - 1) * safePageSize;
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       try {
@@ -664,7 +697,7 @@ export async function listPublishedGameListsPage(
 
 export async function getGameListMetadata(slug: string): Promise<GameList | null> {
   const normalizedSlug = slug.trim().toLowerCase();
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
@@ -997,27 +1030,135 @@ export async function listRanksForUniverses(
   return map;
 }
 
-const cachedListPublishedArticles = unstable_cache(
-  async (limit: number, offset: number) => {
-    const sb = supabaseAdmin();
-    const { data, error } = await sb
-      .from('article_pages_index_view')
-      .select(ARTICLE_INDEX_FIELDS)
-      .eq('is_published', true)
-      .order('published_at', { ascending: false })
-      .range(offset, offset + limit - 1);
+function mapArticleIndexRows(rows: unknown[] | null | undefined): ArticleWithRelations[] {
+  return ((rows ?? []) as Array<Record<string, unknown>>).map((row) => ({
+    ...row,
+    content_md: "",
+    tags: [],
+    sources: [],
+    word_count: null,
+    author: (row as any).author ?? null,
+    universe: (row as any).universe ?? null
+  })) as unknown as ArticleWithRelations[];
+}
 
-    if (error) throw error;
-    const rows = (data ?? []) as unknown as Array<Record<string, unknown>>;
-    const mapped = rows.map((row) => ({
-      ...row,
-      content_md: "",
-      tags: [],
-      word_count: null,
-      author: (row as any).author ?? null,
-      universe: (row as any).universe ?? null
-    })) as unknown as ArticleWithRelations[];
-    return mapped;
+async function fetchPublishedArticles(limit: number, offset: number): Promise<ArticleWithRelations[]> {
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from("articles")
+    .select(ARTICLE_INDEX_FIELDS)
+    .eq("is_published", true)
+    .order("published_at", { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) throw error;
+  return mapArticleIndexRows(data);
+}
+
+async function fetchPublishedArticleSlugs(): Promise<string[]> {
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from("articles")
+    .select("slug")
+    .eq("is_published", true)
+    .not("slug", "is", null)
+    .order("published_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? [])
+    .map((row) => (row as { slug: string | null }).slug)
+    .filter((slug): slug is string => typeof slug === "string" && slug.length > 0);
+}
+
+async function fetchPublishedArticlesPage(
+  safePage: number,
+  safePageSize: number
+): Promise<{ articles: ArticleWithRelations[]; total: number }> {
+  const offset = (safePage - 1) * safePageSize;
+  const sb = supabaseAdmin();
+  try {
+    const { data, count, error, status } = await sb
+      .from("articles")
+      .select(ARTICLE_INDEX_FIELDS, { count: "exact" })
+      .eq("is_published", true)
+      .order("published_at", { ascending: false })
+      .order("id", { ascending: true })
+      .range(offset, offset + safePageSize - 1);
+
+    if (error) {
+      if (!isOutOfRangePaginationFailure(status, error)) throw error;
+      const { count, error: countError } = await sb
+        .from("articles")
+        .select("id", { count: "exact", head: true })
+        .eq("is_published", true);
+      if (countError) throw countError;
+      return { articles: [], total: count ?? 0 };
+    }
+    const articles = mapArticleIndexRows(data);
+    return { articles, total: count ?? articles.length };
+  } catch (error) {
+    if (!isOutOfRangePaginationError(error)) throw error;
+    const { count, error: countError } = await sb
+      .from("articles")
+      .select("id", { count: "exact", head: true })
+      .eq("is_published", true);
+    if (countError) throw countError;
+    return { articles: [], total: count ?? 0 };
+  }
+}
+
+async function fetchPublishedArticlesByUniverseId(
+  universeId: number,
+  limit: number,
+  offset: number
+): Promise<ArticleWithRelations[]> {
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from("articles")
+    .select(ARTICLE_INDEX_FIELDS)
+    .eq("is_published", true)
+    .eq("universe_id", universeId)
+    .order("published_at", { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) throw error;
+  return mapArticleIndexRows(data);
+}
+
+async function fetchArticleBySlug(normalizedSlug: string): Promise<ArticleWithRelations | null> {
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from("articles")
+    .select(ARTICLE_DETAIL_FIELDS)
+    .eq("slug", normalizedSlug)
+    .eq("is_published", true)
+    .maybeSingle();
+
+  if (error) throw error;
+  if (!data) return null;
+  return data as unknown as ArticleWithRelations;
+}
+
+async function fetchPublishedArticlesByAuthor(
+  authorId: string,
+  limit: number,
+  offset: number
+): Promise<ArticleWithRelations[]> {
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from("articles")
+    .select(ARTICLE_INDEX_FIELDS)
+    .eq("is_published", true)
+    .eq("author_id", authorId)
+    .order("published_at", { ascending: false })
+    .range(offset, offset + limit - 1);
+
+  if (error) throw error;
+  return mapArticleIndexRows(data);
+}
+
+const cachedListPublishedArticles = publicContentCache(
+  async (limit: number, offset: number) => {
+    return fetchPublishedArticles(limit, offset);
   },
   ["listPublishedArticles"],
   {
@@ -1027,24 +1168,18 @@ const cachedListPublishedArticles = unstable_cache(
 );
 
 export async function listPublishedArticles(limit = 20, offset = 0): Promise<ArticleWithRelations[]> {
+  if (BYPASS_ARTICLE_CACHE) {
+    return fetchPublishedArticles(limit, offset);
+  }
   return cachedListPublishedArticles(limit, offset);
 }
 
 export async function listPublishedArticleSlugs(): Promise<string[]> {
-  const cached = unstable_cache(
-    async () => {
-      const sb = supabaseAdmin();
-      const { data, error } = await sb
-        .from("article_pages_index_view")
-        .select("slug")
-        .eq("is_published", true)
-        .not("slug", "is", null)
-        .order("published_at", { ascending: false });
-      if (error) throw error;
-      return (data ?? [])
-        .map((row) => (row as { slug: string | null }).slug)
-        .filter((slug): slug is string => typeof slug === "string" && slug.length > 0);
-    },
+  if (BYPASS_ARTICLE_CACHE) {
+    return fetchPublishedArticleSlugs();
+  }
+  const cached = publicContentCache(
+    fetchPublishedArticleSlugs,
     ["listPublishedArticleSlugs"],
     {
       revalidate: 21600, // 6 hours
@@ -1061,49 +1196,12 @@ export async function listPublishedArticlesPage(
 ): Promise<{ articles: ArticleWithRelations[]; total: number }> {
   const safePage = normalizePositivePage(page);
   const safePageSize = Math.max(1, pageSize);
-  const offset = (safePage - 1) * safePageSize;
+  if (BYPASS_ARTICLE_CACHE) {
+    return fetchPublishedArticlesPage(safePage, safePageSize);
+  }
 
-  const cached = unstable_cache(
-    async () => {
-      const sb = supabaseAdmin();
-      try {
-        const { data, count, error, status } = await sb
-          .from("article_pages_index_view")
-          .select(ARTICLE_INDEX_FIELDS, { count: "exact" })
-          .eq("is_published", true)
-          .order("published_at", { ascending: false })
-          .order("id", { ascending: true })
-          .range(offset, offset + safePageSize - 1);
-
-        if (error) {
-          if (!isOutOfRangePaginationFailure(status, error)) throw error;
-          const { count, error: countError } = await sb
-            .from("article_pages_index_view")
-            .select("id", { count: "exact", head: true })
-            .eq("is_published", true);
-          if (countError) throw countError;
-          return { articles: [], total: count ?? 0 };
-        }
-        const rows = (data ?? []) as unknown as Array<Record<string, unknown>>;
-        const mapped = rows.map((row) => ({
-          ...row,
-          content_md: "",
-          tags: [],
-          word_count: null,
-          author: (row as any).author ?? null,
-          universe: (row as any).universe ?? null
-        })) as unknown as ArticleWithRelations[];
-        return { articles: mapped, total: count ?? mapped.length };
-      } catch (error) {
-        if (!isOutOfRangePaginationError(error)) throw error;
-        const { count, error: countError } = await sb
-          .from("article_pages_index_view")
-          .select("id", { count: "exact", head: true })
-          .eq("is_published", true);
-        if (countError) throw countError;
-        return { articles: [], total: count ?? 0 };
-      }
-    },
+  const cached = publicContentCache(
+    () => fetchPublishedArticlesPage(safePage, safePageSize),
     [`listPublishedArticlesPage:${safePage}:${safePageSize}`],
     {
       revalidate: 21600, // 6 hours
@@ -1120,29 +1218,11 @@ export async function listPublishedArticlesByUniverseId(
   offset = 0
 ): Promise<ArticleWithRelations[]> {
   const cacheKey = `listPublishedArticlesByUniverseId:${universeId}:${limit}:${offset}`;
-  const cached = unstable_cache(
-    async () => {
-      const sb = supabaseAdmin();
-      const { data, error } = await sb
-        .from("article_pages_index_view")
-        .select(ARTICLE_INDEX_FIELDS)
-        .eq("is_published", true)
-        .eq("universe_id", universeId)
-        .order("published_at", { ascending: false })
-        .range(offset, offset + limit - 1);
-
-      if (error) throw error;
-      const rows = (data ?? []) as unknown as Array<Record<string, unknown>>;
-      const mapped = rows.map((row) => ({
-        ...row,
-        content_md: "",
-        tags: [],
-        word_count: null,
-        author: (row as any).author ?? null,
-        universe: (row as any).universe ?? null
-      })) as unknown as ArticleWithRelations[];
-      return mapped;
-    },
+  if (BYPASS_ARTICLE_CACHE) {
+    return fetchPublishedArticlesByUniverseId(universeId, limit, offset);
+  }
+  const cached = publicContentCache(
+    () => fetchPublishedArticlesByUniverseId(universeId, limit, offset),
     [cacheKey],
     {
       revalidate: 21600, // 6 hours
@@ -1155,22 +1235,11 @@ export async function listPublishedArticlesByUniverseId(
 
 export async function getArticleBySlug(slug: string): Promise<ArticleWithRelations | null> {
   const normalizedSlug = slug.trim().toLowerCase();
-  const cached = unstable_cache(
-    async () => {
-      const sb = supabaseAdmin();
-      const { data, error } = await sb
-        .from('article_pages_view')
-        .select(
-          `*, author:authors(id,name,slug,avatar_url,gravatar_email,bio_md,twitter,youtube,website,facebook,linkedin,instagram,roblox,discord,created_at,updated_at), universe:roblox_universes(universe_id,slug,display_name,name,icon_url,genre_l1,genre_l2)`
-        )
-        .eq('slug', normalizedSlug)
-        .eq('is_published', true)
-        .maybeSingle();
-
-      if (error) throw error;
-      if (!data) return null;
-      return data as unknown as ArticleWithRelations;
-    },
+  if (BYPASS_ARTICLE_CACHE) {
+    return fetchArticleBySlug(normalizedSlug);
+  }
+  const cached = publicContentCache(
+    () => fetchArticleBySlug(normalizedSlug),
     [`getArticleBySlug:${normalizedSlug}`],
     {
       revalidate: 604800, // 7 days to align with article ISR
@@ -1193,28 +1262,11 @@ export async function listPublishedArticlesByAuthor(
 ): Promise<ArticleWithRelations[]> {
   const tagSlug = authorSlug?.trim().toLowerCase() ?? null;
   const cacheKey = `listPublishedArticlesByAuthor:${authorId}:${limit}:${offset}`;
-  const cached = unstable_cache(
-    async () => {
-      const sb = supabaseAdmin();
-      const { data, error } = await sb
-        .from("article_pages_view")
-        .select("id,title,slug,cover_image,meta_description,published_at,created_at,updated_at,is_published,author,universe,author_id")
-        .eq("is_published", true)
-        .eq("author_id", authorId)
-        .order("published_at", { ascending: false })
-        .range(offset, offset + limit - 1);
-
-      if (error) throw error;
-      const rows = (data ?? []) as unknown as Array<Record<string, unknown>>;
-      return rows.map((row) => ({
-        ...row,
-        content_md: "",
-        tags: [],
-        word_count: null,
-        author: (row as any).author ?? null,
-        universe: (row as any).universe ?? null
-      })) as unknown as ArticleWithRelations[];
-    },
+  if (BYPASS_ARTICLE_CACHE) {
+    return fetchPublishedArticlesByAuthor(authorId, limit, offset);
+  }
+  const cached = publicContentCache(
+    () => fetchPublishedArticlesByAuthor(authorId, limit, offset),
     [cacheKey],
     {
       revalidate: 21600, // 6 hours
@@ -1225,7 +1277,7 @@ export async function listPublishedArticlesByAuthor(
   return cached();
 }
 
-const cachedGetChecklistPageBySlug = unstable_cache(
+const cachedGetChecklistPageBySlug = publicContentCache(
   async (slug: string) => {
     const normalizedSlug = slug.trim().toLowerCase();
     const sb = supabaseAdmin();
@@ -1265,7 +1317,7 @@ const cachedGetChecklistPageBySlug = unstable_cache(
 
     return {
       page,
-      items: (items ?? []) as ChecklistItem[]
+      items: sortChecklistItems((items ?? []) as ChecklistItem[])
     };
   },
   ["getChecklistPageBySlug"],
@@ -1282,7 +1334,7 @@ export async function getChecklistPageBySlug(
 }
 
 export async function listPublishedChecklistSlugs(): Promise<string[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
@@ -1340,7 +1392,7 @@ export type EventsPageSummary = {
   } | null;
 };
 
-const cachedListPublishedChecklists = unstable_cache(
+const cachedListPublishedChecklists = publicContentCache(
   async (limit: number, offset: number) => {
     const sb = supabaseAdmin();
     const { data, error } = await sb
@@ -1399,7 +1451,7 @@ export async function listPublishedChecklistsPage(
   const safePageSize = Math.max(1, pageSize);
   const offset = (safePage - 1) * safePageSize;
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       try {
@@ -1521,7 +1573,7 @@ export async function listPublishedChecklistsByUniverseId(universeId: number, li
 }
 
 export async function getEventsPageByUniverseId(universeId: number): Promise<EventsPageSummary | null> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
@@ -1553,7 +1605,7 @@ export async function getEventsPageByUniverseId(universeId: number): Promise<Eve
 }
 
 export async function listPublishedEventsPageSlugs(): Promise<string[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
@@ -1578,7 +1630,7 @@ export async function listPublishedEventsPageSlugs(): Promise<string[]> {
 
 export async function getGameBySlug(slug: string): Promise<Game | null> {
   const normalizedSlug = slug.trim().toLowerCase();
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
@@ -1601,7 +1653,7 @@ export async function getGameBySlug(slug: string): Promise<Game | null> {
   return cached();
 }
 
-const cachedGetRobloxUniverseById = unstable_cache(
+const cachedGetRobloxUniverseById = publicContentCache(
   async (universeId: number) => {
     const sb = supabaseAdmin();
   const { data, error } = await sb
@@ -1624,7 +1676,7 @@ export async function getRobloxUniverseById(universeId: number): Promise<RobloxU
   return cachedGetRobloxUniverseById(universeId);
 }
 
-const cachedListCodesForGame = unstable_cache(
+const cachedListCodesForGame = publicContentCache(
   async (gameId: string) => {
     const sb = supabaseAdmin();
     const { data, error } = await sb
@@ -2014,7 +2066,7 @@ export async function listFreeItems(
   const safePage = Math.max(1, page);
   const safeLimit = Math.max(1, Math.min(100, limit));
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     () => fetchFreeItems(safePage, safeLimit, filters),
     [`listFreeItems:v6:${safePage}:${safeLimit}:${JSON.stringify(filters)}`],
     {
@@ -2027,7 +2079,7 @@ export async function listFreeItems(
 }
 
 export async function getFreeItemsCount(filters: FreeItemsFilters = {}): Promise<number> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       let query = applyFreeItemLibraryFilters(
@@ -2107,7 +2159,7 @@ async function fetchAllFreeItemFacetRows(
 }
 
 export async function getFreeItemCategories(): Promise<Array<{ category: string; count: number }>> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const data = await fetchAllFreeItemFacetRows('category');
 
@@ -2134,7 +2186,7 @@ export async function getFreeItemCategories(): Promise<Array<{ category: string;
 }
 
 export async function getFreeItemSubcategories(category?: string): Promise<Array<{ subcategory: string; count: number }>> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const data = await fetchAllFreeItemFacetRows('subcategory', category);
 

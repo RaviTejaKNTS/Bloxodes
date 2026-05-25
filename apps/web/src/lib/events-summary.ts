@@ -1,5 +1,5 @@
 import { formatDistanceToNow } from "date-fns";
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import { markdownToPlainText } from "@/lib/markdown";
 import { supabaseAdmin } from "@/lib/supabase";
 
@@ -145,7 +145,7 @@ function pickFeaturedEvent(grouped: ReturnType<typeof classifyEvents>) {
 
 export async function getUniverseEventSummary(universeId: number): Promise<UniverseEventSummary | null> {
   const cacheKey = `universeEventSummary:${universeId}`;
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
@@ -213,7 +213,7 @@ function getEventTimelineDescription(event: VirtualEventRow): string | null {
 export async function listUniverseEventTimeline(universeId: number, limit = 7): Promise<UniverseTimelineEvent[]> {
   const normalizedLimit = Math.max(1, Math.min(limit, 20));
   const cacheKey = `universeEventTimeline:${universeId}:${normalizedLimit}`;
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb

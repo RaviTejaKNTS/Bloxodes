@@ -10,7 +10,7 @@ import {
   loadGrowGardenCatalogDataset
 } from "./page-data";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 export async function generateGrowGardenCollectionMetadata(collection: string): Promise<Metadata> {
   const config = getGrowGardenCatalogConfig(collection);

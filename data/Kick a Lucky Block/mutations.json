@@ -17,6 +17,11 @@
         "label": "Eldorado - Kick a Lucky Block All Brainrots Index",
         "url": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
         "accessed": "2026-05-24"
+      },
+      {
+        "label": "Game8 - Mutations | Kick a Lucky Block",
+        "url": "https://game8.co/games/Kick-a-Lucky-Block/archives/598371",
+        "accessed": "2026-05-24"
       }
     ],
     "columns": [
@@ -25,10 +30,9 @@
       "confidence",
       "status",
       "effect",
-      "catalogSection",
-      "image"
+      "catalogSection"
     ],
-    "notes": "Source row counts differ: 10 from kickaluckyblock.com, 12 from Pro Game Guides, and 17 from Eldorado when Normal baseline is included. Row image coverage is 0/17."
+    "notes": "Source row counts differ: 10 from kickaluckyblock.com, 12 from Pro Game Guides, 17 from Eldorado when Normal baseline is included, and Game8 currently documents the mutation guide page without row art. Clean row image coverage is 0 of 17 because checked sources publish mutation tables plus broad gameplay screenshots, not one reusable icon or in-game capture per mutation. Bloxodes visual badge templates were intentionally removed from the publishable row images."
   },
   "items": [
     {
@@ -44,7 +48,7 @@
       "image": null,
       "sortOrder": 1,
       "sourcePage": "https://kickaluckyblock.com/mutations",
-      "imageCandidate": "/Kick%20a%20Lucky%20Block/Roblox/thumbnail-1.png"
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Gold",
@@ -58,7 +62,8 @@
       "sourceStatus": "Cross-checked",
       "image": null,
       "sortOrder": 2,
-      "sourcePage": "https://kickaluckyblock.com/mutations"
+      "sourcePage": "https://kickaluckyblock.com/mutations",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Diamond",
@@ -72,7 +77,8 @@
       "sourceStatus": "Cross-checked",
       "image": null,
       "sortOrder": 3,
-      "sourcePage": "https://kickaluckyblock.com/mutations"
+      "sourcePage": "https://kickaluckyblock.com/mutations",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Plasma",
@@ -86,7 +92,8 @@
       "sourceStatus": "Cross-checked",
       "image": null,
       "sortOrder": 4,
-      "sourcePage": "https://kickaluckyblock.com/mutations"
+      "sourcePage": "https://kickaluckyblock.com/mutations",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Molten",
@@ -100,7 +107,8 @@
       "sourceStatus": "Cross-checked",
       "image": null,
       "sortOrder": 5,
-      "sourcePage": "https://kickaluckyblock.com/mutations"
+      "sourcePage": "https://kickaluckyblock.com/mutations",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Radioactive",
@@ -114,7 +122,8 @@
       "sourceStatus": "Cross-checked",
       "image": null,
       "sortOrder": 6,
-      "sourcePage": "https://kickaluckyblock.com/mutations"
+      "sourcePage": "https://kickaluckyblock.com/mutations",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Shadow",
@@ -128,7 +137,8 @@
       "sourceStatus": "Cross-checked",
       "image": null,
       "sortOrder": 7,
-      "sourcePage": "https://kickaluckyblock.com/mutations"
+      "sourcePage": "https://kickaluckyblock.com/mutations",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Electrified",
@@ -142,7 +152,8 @@
       "sourceStatus": "Cross-checked",
       "image": null,
       "sortOrder": 8,
-      "sourcePage": "https://kickaluckyblock.com/mutations"
+      "sourcePage": "https://kickaluckyblock.com/mutations",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Rainbow",
@@ -156,7 +167,8 @@
       "sourceStatus": "Cross-checked",
       "image": null,
       "sortOrder": 9,
-      "sourcePage": "https://kickaluckyblock.com/mutations"
+      "sourcePage": "https://kickaluckyblock.com/mutations",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Virus",
@@ -170,7 +182,8 @@
       "sourceStatus": "Cross-checked",
       "image": null,
       "sortOrder": 10,
-      "sourcePage": "https://kickaluckyblock.com/mutations"
+      "sourcePage": "https://kickaluckyblock.com/mutations",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Void",
@@ -184,7 +197,8 @@
       "sourceStatus": "Cross-checked",
       "image": null,
       "sortOrder": 11,
-      "sourcePage": "https://kickaluckyblock.com/mutations"
+      "sourcePage": "https://kickaluckyblock.com/mutations",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Alien",
@@ -198,7 +212,8 @@
       "sourceStatus": "PGG and Eldorado",
       "image": null,
       "sortOrder": 12,
-      "sourcePage": "https://progameguides.com/roblox/kick-a-lucky-block-mutations-guide/"
+      "sourcePage": "https://progameguides.com/roblox/kick-a-lucky-block-mutations-guide/",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Bacon",
@@ -212,7 +227,8 @@
       "sourceStatus": "PGG and Eldorado",
       "image": null,
       "sortOrder": 13,
-      "sourcePage": "https://progameguides.com/roblox/kick-a-lucky-block-mutations-guide/"
+      "sourcePage": "https://progameguides.com/roblox/kick-a-lucky-block-mutations-guide/",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Astral",
@@ -226,7 +242,8 @@
       "sourceStatus": "Eldorado-only",
       "image": null,
       "sortOrder": 14,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Enchanted",
@@ -240,7 +257,8 @@
       "sourceStatus": "Eldorado-only",
       "image": null,
       "sortOrder": 15,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Wet",
@@ -254,7 +272,8 @@
       "sourceStatus": "Eldorado-only",
       "image": null,
       "sortOrder": 16,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     },
     {
       "name": "Phantom",
@@ -268,7 +287,8 @@
       "sourceStatus": "Eldorado-only",
       "image": null,
       "sortOrder": 17,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/"
+      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
+      "imageStatus": "needs clean in-game mutation capture; Bloxodes badge template rejected for publish quality"
     }
   ]
 }

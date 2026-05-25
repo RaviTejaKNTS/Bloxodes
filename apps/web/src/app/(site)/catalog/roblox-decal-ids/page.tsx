@@ -10,7 +10,7 @@ import {
     type CatalogContentHtml
 } from "./page-data";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-decal-ids"];
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;

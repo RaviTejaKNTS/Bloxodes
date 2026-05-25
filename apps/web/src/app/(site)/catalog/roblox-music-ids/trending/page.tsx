@@ -13,7 +13,7 @@ import {
   loadTrendingMusicIdsPageData
 } from "../page-data";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: `Trending Music IDs | ${SITE_NAME}`,

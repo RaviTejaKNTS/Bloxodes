@@ -33,6 +33,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
     year: "numeric"
   });
   const author = article.author;
+  const authorName = author?.name?.trim() || author?.name || "Bloxodes";
   const authorAvatar = author ? authorAvatarUrl(author, 48) : "https://www.gravatar.com/avatar/?d=mp";
 
   return (
@@ -71,16 +72,16 @@ export function ArticleCard({ article }: ArticleCardProps) {
         <span className="inline-flex items-center gap-2">
           <img
             src={authorAvatar}
-            alt={author?.name ?? "Bloxodes"}
+            alt={authorName}
             className="h-7 w-7 rounded-full border border-border/60 object-cover"
             loading="lazy"
           />
           {author?.slug ? (
             <Link href={`/authors/${author.slug}`} className="font-semibold text-foreground transition hover:text-accent">
-              {author.name}
+              {authorName}
             </Link>
           ) : (
-            <span className="font-semibold text-foreground">{author?.name ?? "Bloxodes"}</span>
+            <span className="font-semibold text-foreground">{authorName}</span>
           )}
         </span>
         <span className="inline-flex items-center gap-1 whitespace-nowrap">

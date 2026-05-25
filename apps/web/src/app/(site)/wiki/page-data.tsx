@@ -2,7 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { IconType } from "react-icons";
-import { FiClock, FiEye, FiMonitor, FiSmartphone, FiStar, FiTablet, FiTv, FiUsers } from "react-icons/fi";
+import {
+  FiCalendar,
+  FiClock,
+  FiEye,
+  FiMonitor,
+  FiRefreshCw,
+  FiShield,
+  FiSmartphone,
+  FiStar,
+  FiTablet,
+  FiTag,
+  FiTv,
+  FiUser,
+  FiUsers
+} from "react-icons/fi";
 import { FaCrown, FaDiscord, FaFacebook, FaMedal, FaTrophy, FaTwitch, FaYoutube } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { SiGuilded, SiGooglechrome, SiRoblox } from "react-icons/si";
@@ -94,6 +108,13 @@ type DeviceBadgeItem = {
   icon: IconType;
   label: string;
   enabled?: boolean | null;
+};
+
+type WikiGameDetailItem = {
+  icon: IconType;
+  label: string;
+  value: ReactNode;
+  fullWidth?: boolean;
 };
 
 type ChecklistCardData = {
@@ -370,6 +391,39 @@ function WikiDeviceBadge({ label, icon: Icon, enabled }: DeviceBadgeItem) {
       <Icon className="h-4 w-4" />
       {label}
     </span>
+  );
+}
+
+function WikiGameDetailsBlock({ details }: { details: WikiGameDetailItem[] }) {
+  if (!details.length) return null;
+
+  return (
+    <dl className="grid max-w-3xl gap-1">
+      {details.map((detail) => {
+        const label = (
+          <dt className="flex min-w-0 items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.08em] text-muted">
+            <detail.icon className="h-4 w-4 shrink-0 text-accent" aria-hidden />
+            <span className="min-w-0">{detail.label}</span>
+          </dt>
+        );
+
+        if (detail.fullWidth) {
+          return (
+            <div key={detail.label} className="rounded-lg py-2.5">
+              {label}
+              <dd className="mt-2 min-w-0 break-words text-sm font-medium leading-6 text-foreground">{detail.value}</dd>
+            </div>
+          );
+        }
+
+        return (
+          <div key={detail.label} className="grid grid-cols-[9.25rem_minmax(0,1fr)] items-start gap-3 rounded-lg py-2.5">
+            {label}
+            <dd className="min-w-0 break-words pt-0.5 text-sm font-medium leading-6 text-foreground">{detail.value}</dd>
+          </div>
+        );
+      })}
+    </dl>
   );
 }
 
@@ -1247,15 +1301,15 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const heroAgeRating = formatAgeRating(page.universe_age_rating);
   const agePillLabel = heroAgeRating ? (/^\d+\+$/.test(heroAgeRating) ? `Ages ${heroAgeRating}` : heroAgeRating) : null;
   const deviceBadges = buildDeviceBadges(page);
-  const genre = normalizeText(page.universe_genre_l1) ?? normalizeText(page.universe_genre);
-  const subgenre = normalizeText(page.universe_genre_l2);
-  const genreItems = [genre, subgenre].filter((item): item is string => Boolean(item));
+  const rawGenre = normalizeText(page.universe_genre_l1) ?? normalizeText(page.universe_genre);
+  const rawSubgenre = normalizeText(page.universe_genre_l2);
+  const splitGenre = !rawSubgenre && rawGenre?.includes("·")
+    ? rawGenre.split("·").map((item) => normalizeText(item)).filter((item): item is string => Boolean(item))
+    : [];
+  const genre = splitGenre[0] ?? rawGenre;
+  const subgenre = rawSubgenre ?? splitGenre[1] ?? null;
   const createdLabel = formatDate(page.created_at_api);
   const updatedLabel = formatDate(page.updated_at_api);
-  const dateMetaItems = [
-    createdLabel ? `Game created on ${createdLabel}` : null,
-    updatedLabel ? `Game last updated on ${updatedLabel}` : null
-  ].filter((item): item is string => Boolean(item));
   const heroStats = [
     { icon: FiUsers, label: "Playing Now", value: formatCompactNumber(page.playing) },
     { icon: FiEye, label: "Total Visits", value: formatCompactNumber(page.visits) },
@@ -1265,6 +1319,39 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const quizCards = buildQuizCards(page, related);
   const primaryCodePage = related.codes[0] ?? null;
   const nowMs = Date.now();
+  const gameDetailItems: WikiGameDetailItem[] = [];
+  if (page.universe_creator_name) {
+    gameDetailItems.push({
+      icon: FiUser,
+      label: "Creator",
+      value: creatorUrl ? (
+        <a href={creatorUrl} target="_blank" rel="noopener noreferrer" className="underline-offset-4 transition hover:text-accent hover:underline">
+          {page.universe_creator_name}
+        </a>
+      ) : (
+        page.universe_creator_name
+      )
+    });
+  }
+  if (createdLabel) gameDetailItems.push({ icon: FiCalendar, label: "Game Created", value: createdLabel });
+  if (updatedLabel) gameDetailItems.push({ icon: FiRefreshCw, label: "Last Updated On", value: updatedLabel });
+  if (agePillLabel) gameDetailItems.push({ icon: FiShield, label: "Age Requirement", value: agePillLabel });
+  if (genre) gameDetailItems.push({ icon: FiTag, label: "Genre", value: genre });
+  if (subgenre) gameDetailItems.push({ icon: FiTag, label: "Subgenre", value: subgenre });
+  if (deviceBadges.length) {
+    gameDetailItems.push({
+      icon: FiMonitor,
+      label: "Supported Devices",
+      fullWidth: true,
+      value: (
+        <div className="flex flex-wrap gap-2">
+          {deviceBadges.map((device) => (
+            <WikiDeviceBadge key={device.label} {...device} />
+          ))}
+        </div>
+      )
+    });
+  }
 
   return (
     <div className="space-y-9">
@@ -1299,64 +1386,6 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                   <span>Updated {hubUpdatedRelativeLabel}</span>
                 </p>
               ) : null}
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted">
-                {page.universe_creator_name ? (
-                  <span>
-                    By{" "}
-                    {creatorUrl ? (
-                      <a href={creatorUrl} target="_blank" rel="noopener noreferrer" className="text-foreground underline-offset-4 transition hover:text-accent hover:underline">
-                        {page.universe_creator_name}
-                      </a>
-                    ) : (
-                      page.universe_creator_name
-                    )}
-                  </span>
-                ) : null}
-                {page.universe_creator_name && heroRankingBadges.length ? <span aria-hidden className="text-muted/60">.</span> : null}
-                {heroRankingBadges.map((badge) => {
-                  const Icon = rankBadgeIconForRank(badge.rank);
-                  const label = `#${badge.rank} on ${badge.list_title}`;
-                  return (
-                    <Link
-                      key={`${badge.list_id}-${badge.rank}`}
-                      href={`/lists/${badge.list_slug}`}
-                      prefetch={false}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-border/60 px-2.5 py-1 text-xs font-semibold text-foreground transition hover:border-accent hover:text-accent"
-                    >
-                      <Icon className="h-3.5 w-3.5 text-accent" aria-hidden />
-                      <span>{label}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-              {dateMetaItems.length ? (
-                <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm leading-6 text-muted">
-                  {dateMetaItems.map((item, index) => (
-                    <span key={item} className="inline-flex items-center gap-x-2">
-                      {index > 0 ? <span aria-hidden className="text-muted/60">.</span> : null}
-                      <span>{item}</span>
-                    </span>
-                  ))}
-                </p>
-              ) : null}
-              {genreItems.length || agePillLabel ? (
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm text-muted">
-                  {genreItems.map((item, index) => (
-                    <span key={item} className="inline-flex items-center gap-x-2">
-                      {index > 0 ? <span aria-hidden className="text-muted/60">.</span> : null}
-                      <span>{item}</span>
-                    </span>
-                  ))}
-                  {agePillLabel ? (
-                    <>
-                      {genreItems.length ? <span className="text-muted/60">.</span> : null}
-                      <span className="inline-flex items-center rounded-full border border-border/60 bg-background/40 px-2.5 py-1 text-xs font-semibold text-foreground">
-                        {agePillLabel}
-                      </span>
-                    </>
-                  ) : null}
-                </div>
-              ) : null}
               {robloxGameUrl ? (
                 <div className="pt-2 lg:hidden">
                   <a
@@ -1389,10 +1418,42 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
 
       <div aria-hidden className="border-t border-border/60" />
 
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(20rem,1fr)]">
         <article className="min-w-0 space-y-9">
-          {heroStats.length || deviceBadges.length || summary ? (
+          {heroRankingBadges.length || summary || gameDetailItems.length || heroStats.length ? (
             <section className="space-y-4">
+              {heroRankingBadges.length ? (
+                <div className="flex flex-wrap gap-2">
+                  {heroRankingBadges.map((badge) => {
+                    const Icon = rankBadgeIconForRank(badge.rank);
+                    const label = `#${badge.rank} on ${badge.list_title}`;
+                    return (
+                      <Link
+                        key={`${badge.list_id}-${badge.rank}`}
+                        href={`/lists/${badge.list_slug}`}
+                        prefetch={false}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border/60 px-2.5 py-1 text-xs font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                      >
+                        <Icon className="h-3.5 w-3.5 text-accent" aria-hidden />
+                        <span>{label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : null}
+
+              {summary ? (
+                <p className="max-w-3xl text-base leading-7 text-foreground md:text-lg">
+                  {summary}
+                </p>
+              ) : null}
+
+              {gameDetailItems.length ? (
+                <section aria-label="Game details" className="lg:hidden">
+                  <WikiGameDetailsBlock details={gameDetailItems} />
+                </section>
+              ) : null}
+
               {heroStats.length ? (
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                   {heroStats.map((stat) => (
@@ -1407,20 +1468,6 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                     </div>
                   ))}
                 </div>
-              ) : null}
-
-              {deviceBadges.length ? (
-                <div className="flex flex-wrap items-center justify-start gap-2">
-                  {deviceBadges.map((device) => (
-                    <WikiDeviceBadge key={device.label} {...device} />
-                  ))}
-                </div>
-              ) : null}
-
-              {summary ? (
-                <p className="max-w-3xl text-base leading-7 text-muted md:text-lg">
-                  {summary}
-                </p>
               ) : null}
             </section>
           ) : null}
@@ -1512,6 +1559,12 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
         </article>
 
         <aside className="space-y-4">
+          {gameDetailItems.length ? (
+            <section aria-label="Game details" className="hidden lg:block">
+              <WikiGameDetailsBlock details={gameDetailItems} />
+            </section>
+          ) : null}
+
           {related.tools.length ? (
             <section className="space-y-3">
               <h3 className="text-lg font-semibold text-foreground">Tools for {universeLabel}</h3>

@@ -13,7 +13,7 @@ import {
 } from "../../page-data";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 const CATALOG_CODE_CANDIDATES = buildFreeItemCatalogCodeCandidates();
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
@@ -25,8 +25,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const { totalPages } = await loadFreeItemsPageData(1);
-  return buildPageParams(totalPages, 1, MAX_STATIC_PAGES);
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

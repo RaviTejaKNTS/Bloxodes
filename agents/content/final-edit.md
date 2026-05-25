@@ -177,6 +177,11 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 
 - The first paragraph gives useful context immediately.
 - The article has source-backed claims where needed.
+- The visible title is natural, SEO-friendly, and not a flat database label. Keep the main keyword near the front, and use a short outcome phrase when it helps the reader understand why to open it.
+- `author_id` is set before import. If no author was specified, the importer should randomly choose one from `authors`.
+- `cover_image` is an edited article feature image, not a raw game thumbnail, unless the reason is recorded.
+- The feature image is injected into `content_md` before the first H2 when the article uses the generated article visual style.
+- The `/articles` card and `/articles/<slug>` detail page show the same author name and same edited cover after import or revalidation.
 - Headings fit the story and reader flow.
 - Paragraphs do not jump between unrelated points too quickly.
 - `sources` includes the important URLs.

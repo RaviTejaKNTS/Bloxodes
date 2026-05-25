@@ -5,7 +5,7 @@ import { IndexPageStats } from "@/components/IndexPageStats";
 import { EVENTS_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { buildEventsCards } from "./page-data";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: `Roblox Events | ${SITE_NAME}`,

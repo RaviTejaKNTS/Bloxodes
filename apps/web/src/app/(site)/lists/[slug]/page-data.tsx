@@ -16,6 +16,7 @@ import {
 import { LISTS_DESCRIPTION, SITE_NAME, SITE_URL, breadcrumbJsonLd, webPageJsonLd, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { markdownToPlainText } from "@/lib/markdown";
 import { formatDistanceToNow } from "date-fns";
+import { FiClock } from "react-icons/fi";
 import { ListCard } from "@/components/ListCard";
 
 type GameListEntryWithBadges = GameListUniverseEntry & { badges?: UniverseListBadge[] };
@@ -476,7 +477,8 @@ export function ListPageView({
                 <h1 className="mt-2 text-3xl font-bold text-foreground sm:text-4xl">{pageTitle}</h1>
               </div>
               {formattedUpdated ? (
-                <p className="text-sm text-foreground/80">
+                <p className="inline-flex items-center gap-1.5 text-sm text-foreground/80">
+                  <FiClock className="h-4 w-4 shrink-0" aria-hidden />
                   Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
                   {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
                 </p>

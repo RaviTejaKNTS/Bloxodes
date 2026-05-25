@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
+import { FiClock } from "react-icons/fi";
 import "@/styles/article-content.css";
 import { AuthorCard } from "@/components/AuthorCard";
 import { SocialShare } from "@/components/SocialShare";
@@ -47,14 +48,13 @@ import { formatUpdatedLabel } from "@/lib/updated-label";
 import { getUniverseEventSummary } from "@/lib/events-summary";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 
-export const revalidate = 604800; // weekly
+export const revalidate = 0;
 const MAX_STATIC_ARTICLE_SLUGS = 150;
 
 type Params = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  const slugs = await listPublishedArticleSlugs();
-  return slugs.slice(0, MAX_STATIC_ARTICLE_SLUGS).map((slug) => ({ slug }));
+  return [];
 }
 
 function collectAuthorSameAs(author?: Author | null): string[] {
@@ -78,6 +78,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     (article.meta_description || markdownToPlainText(article.content_md)).trim() || ARTICLES_DESCRIPTION;
   const title = resolveSeoTitle(article.seo_title) ?? article.title;
   const universeName = article.universe?.display_name ?? article.universe?.name ?? null;
+  const authorName = article.author?.name?.trim() || article.author?.name || null;
   const publishedAt = resolvePublishedAt(article);
   const modifiedAt = resolveModifiedAt(article);
 
@@ -95,7 +96,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       images: [coverImage],
       publishedTime: publishedAt ? new Date(publishedAt).toISOString() : undefined,
       modifiedTime: modifiedAt ? new Date(modifiedAt).toISOString() : undefined,
-      authors: article.author ? [article.author.name] : undefined
+      authors: authorName ? [authorName] : undefined
     },
     twitter: {
       card: "summary_large_image",
@@ -152,6 +153,7 @@ async function renderArticlePage(article: ArticleWithRelations) {
       : "Latest articles"
     : null;
   const authorAvatar = article.author ? authorAvatarUrl(article.author, 72) : null;
+  const authorName = article.author?.name?.trim() || article.author?.name || null;
   const publishedAt = resolvePublishedAt(article) ?? article.created_at;
   const modifiedAt = resolveModifiedAt(article) ?? article.updated_at ?? publishedAt;
   const publishedDate = new Date(publishedAt);
@@ -207,7 +209,7 @@ async function renderArticlePage(article: ArticleWithRelations) {
     author: article.author
       ? {
           '@type': 'Person',
-          name: article.author.name,
+          name: authorName ?? article.author.name,
           url: authorProfileUrl ?? undefined,
           sameAs: authorSameAs.length ? authorSameAs : undefined
         }
@@ -312,7 +314,7 @@ async function renderArticlePage(article: ArticleWithRelations) {
                   ))}
                   <img
                     src={authorAvatar || "https://www.gravatar.com/avatar/?d=mp"}
-                    alt={article.author.name}
+                    alt={authorName ?? article.author.name}
                     className="h-9 w-9 rounded-full border border-border/40 object-cover"
                     loading="lazy"
                     decoding="async"
@@ -327,11 +329,11 @@ async function renderArticlePage(article: ArticleWithRelations) {
                         data-analytics-codes-url={canonicalUrl}
                         data-analytics-author-url={`/authors/${article.author.slug}`}
                       >
-                        {article.author.name}
+                        {authorName ?? article.author.name}
                       </Link>
                     ) : (
                       <span className="font-semibold text-foreground" itemProp="name">
-                        {article.author.name}
+                        {authorName ?? article.author.name}
                       </span>
                     )}
                   </span>
@@ -342,7 +344,8 @@ async function renderArticlePage(article: ArticleWithRelations) {
                 </span>
               )}
               <span aria-hidden="true">•</span>
-              <span className="text-foreground/80">
+              <span className="inline-flex items-center gap-1.5 text-foreground/80">
+                <FiClock className="h-4 w-4 shrink-0" aria-hidden />
                 Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
                 {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
               </span>

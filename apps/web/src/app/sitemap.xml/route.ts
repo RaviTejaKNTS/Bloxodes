@@ -1,6 +1,10 @@
 import { buildSitemapIndexXml, withSiteUrl } from "@/lib/sitemap";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
+
 const SITEMAP_PATHS = [
   "/sitemaps/main.xml",
   "/sitemaps/codes.xml",

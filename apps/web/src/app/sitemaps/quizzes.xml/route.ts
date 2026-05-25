@@ -2,7 +2,9 @@ import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl 
 import { supabaseAdmin } from "@/lib/supabase";
 import { NextResponse } from "next/server";
 
-export const revalidate = 21600; // 6 hours
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+export const fetchCache = "force-no-store";
 
 type QuizSitemapRow = {
   code: string | null;

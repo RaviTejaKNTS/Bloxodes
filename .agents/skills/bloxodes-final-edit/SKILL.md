@@ -31,6 +31,8 @@ Public copy should not mention internal research, scraping, AI, prompts, Bloxode
 
 Check the shape as carefully as the prose: Markdown should render cleanly, JSON should parse, FAQs should use the expected object shape, article `sources` and `tags` should be honest, and titles or meta descriptions should be readable.
 
+For articles, also check publishing metadata. The visible title should be SEO-friendly and human, with the main keyword near the front and an outcome phrase only when it makes the headline clearer or more inviting. Published articles need an `author_id`; if none is provided, the import workflow should pick one random author from `authors`. Game articles need an edited 1200x675 feature image made from the game thumbnail with a dark overlay and short centered title text, plus that image injected before the first H2 in `content_md`. Do not approve a raw game thumbnail as the final article cover unless generation is blocked and recorded.
+
 For catalog and game-catalog pages, confirm that `research-notes.md` records the user-confirmed title promise, item-card section style, and card data shape before final copy. The confirmation must be explicit. Do not accept "user asked me to write the page" as approval of the title, card sections, or card fields. If `description_json` is used, it should contain short section-level notes, and `description_md` should not repeat those same notes.
 
 Also confirm the data and image audit. `research-notes.md` should show local item count, source count, rendered card/table count, title count, image coverage, missing or extra items, and the data action. If research found missing items or expected images and the gap was not fixed or explicitly accepted, the content is not ready.
@@ -57,6 +59,7 @@ Do not mark the content ready unless:
 - rendered card/table fields match the approved card data plan
 - title counts, dataset counts, and rendered counts match or have a recorded intentional reason
 - `final.json` is valid and shaped for the target table
+- article output uses a simple SEO-friendly title, a non-null author, an edited feature image, and the card/detail pages are verified to show the same author and cover after import
 - code-page `final.json` contains only `games` row fields, uses the game slug without `-codes`, leaves `seo_title` empty or null, puts RobloxDen in `source_url`, Beebom in `source_url_2`, and contains no manual `codes` array or code dates
 - quiz output uses the game slug without `-quiz`, keeps page copy compact, validates the local `QuizData` shape, keeps easy questions easy, makes hard questions pro-level, and varies question rhythm without banning normal quiz phrasing
 - public copy passes the blockers in `final-edit.md`

@@ -4,7 +4,7 @@ import { loadChecklistsPageData, renderChecklistsPage } from "../../page-data";
 import { CHECKLISTS_DESCRIPTION, buildAlternates } from "@/lib/seo";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 21600; // 6 hours
+export const revalidate = 0;
 const MAX_STATIC_PAGES = 10;
 
 type PageProps = {
@@ -12,8 +12,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const { totalPages } = await loadChecklistsPageData(1);
-  return buildPageParams(totalPages, 1, MAX_STATIC_PAGES);
+  return [];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

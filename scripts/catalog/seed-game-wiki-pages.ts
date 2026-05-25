@@ -190,13 +190,15 @@ const WIKI_COPY: Record<string, WikiCopy> = {
     ]
   },
   "slime-rng": {
-    metaDescription: "Slime RNG wiki hub with slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.",
-    tipsMd: `- Start with slimes when you need roll odds, rarity, variants, Power, Health, and family names.
-- Use zones to compare Coin costs, permanent zone luck, enemy Health, Goop per kill, and machine unlocks before pushing farther.
-- Check crafting recipes before spending rare slimes, because each craft asks for three specific ingredients.
-- Save food for slimes you plan to keep, use potions during focused sessions, and spend dice only when the next roll outcome matters.
-- Treat Power Fruits as long-term slime choices. The source lists one-fruit and crafting restrictions, so assign them carefully.
-- Rebirths and index rewards are progression references: Goop costs, luck multipliers, and collection milestones decide the next efficient goal.`,
+    metaDescription:
+      "Slime RNG wiki hub with active codes, slime catalogs, zones, crafting recipes, items, Power Fruits, rebirths, index rewards, guides, and Roblox stats.",
+    tipsMd: `- Roll with a goal in mind. Odds and variants show how hard a slime is to replace, while Power and Health decide whether it helps your team clear enemies.
+- Push zones when your best slimes can kill enemies comfortably. New zones cost Coins, raise your highest-zone luck, and increase the Goop you can earn from kills.
+- Check crafting recipes before feeding or discarding rare pulls. Each recipe consumes three named slimes, and later recipes can ask for crafted results or hard-to-roll ingredients.
+- Time items around one job. Food belongs on slimes you plan to keep, 3-minute potions need a focused rolling or farming window, and mutation dice affect the next roll.
+- Place Power Fruits carefully. A slime can only hold one fruit power, the fruit cannot be removed, and powered slimes cannot be used in the crafting machine.
+- Rebirth when the Goop cost and luck multiplier are worth rebuilding. Rebirth resets Coins and unlocked zones, but your slimes, upgrades, luck, and highest-zone progress stay.
+- Claim index rewards as collection milestones across Basic, Big, Huge, Shiny, and Inverted tracks. Those rewards can feed the next roll, fight, item window, or rebirth push.`,
     controlsJson: []
   },
   "kick-a-lucky-block": {

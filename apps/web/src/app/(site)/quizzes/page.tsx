@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { loadQuizzesPageData, renderQuizzesPage } from "./page-data";
 
-export const revalidate = 21600; // 6 hours
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: `Roblox Quizzes | ${SITE_NAME}`,

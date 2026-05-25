@@ -1,4 +1,4 @@
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import { renderMarkdown } from "@/lib/markdown";
 import { supabaseAdmin } from "@/lib/supabase";
 
@@ -120,7 +120,7 @@ async function fetchApprovedComments(entityType: string, entityId: string): Prom
 }
 
 export async function getApprovedComments(entityType: string, entityId: string): Promise<CommentEntry[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => fetchApprovedComments(entityType, entityId),
     [`comments:${entityType}:${entityId}`],
     {

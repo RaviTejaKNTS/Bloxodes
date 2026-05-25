@@ -1,5 +1,5 @@
 import "server-only";
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type WikiCatalogFaqEntry = { q: string; a: string };
@@ -100,7 +100,7 @@ export async function getWikiCatalogPageByPath(
 
   if (BYPASS_WIKI_CATALOG_CACHE) return fetchPage();
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     fetchPage,
     ["wiki-catalog-page-by-path-v1", normalizedWikiSlug, normalizedCollectionSlug],
     {
@@ -135,7 +135,7 @@ export async function getWikiCatalogPageByCode(code: string): Promise<WikiCatalo
 
   if (BYPASS_WIKI_CATALOG_CACHE) return fetchPage();
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     fetchPage,
     ["wiki-catalog-page-by-code-v1", normalizedCode],
     {
@@ -163,7 +163,7 @@ export async function listPublishedWikiCatalogPaths(): Promise<Array<{ wiki_slug
 
   if (BYPASS_WIKI_CATALOG_CACHE) return fetchPaths();
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     fetchPaths,
     ["wiki-catalog-paths-v1"],
     {

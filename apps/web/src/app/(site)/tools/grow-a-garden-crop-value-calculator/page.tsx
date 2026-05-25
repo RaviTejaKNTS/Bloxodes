@@ -13,7 +13,7 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 
-export const revalidate = 3600; // 1 hour to pick up Supabase edits sooner
+export const revalidate = 0;
 
 const TOOL_CODE = "grow-a-garden-crop-value-calculator";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/${TOOL_CODE}`;

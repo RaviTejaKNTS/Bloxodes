@@ -63,6 +63,7 @@ Bloxodes copy must sound human from the first written version. Do not write gene
 - For catalog, wiki, tool, and database copy, prefer player-perspective language over literal first person. Use `you`, `your`, and practical gamer judgment. Avoid stuffing fields with `I`, `we`, or `our`.
 - For normal guides, voice should come from structure, specificity, confident judgment, and the feeling that the writer understands the game.
 - For articles, first person is allowed when the format benefits from a direct player opinion or editorial angle.
+- Article publishing details matter as much as article prose. Use simple SEO-friendly visible titles, assign a real author, and use an edited feature image instead of a raw game thumbnail. The standard article cover starts from the linked Roblox universe thumbnail, becomes a 1200x675 WebP with a dark overlay and short centered title text, and is injected before the first H2 in `content_md`.
 
 ## System-First Standard
 

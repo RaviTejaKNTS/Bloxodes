@@ -12,7 +12,7 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 const CANONICAL_BASE = `${SITE_URL.replace(/\/$/, "")}/catalog/admin-commands`;
 const INLINE_PREFIX_PATTERN = /^[;:!\/]/;
@@ -57,7 +57,7 @@ type CommandItem = {
 };
 
 export function generateStaticParams() {
-  return getAdminCommandSystems().map((system) => ({ system: system.slug }));
+  return [];
 }
 
 function slugify(value: string): string {

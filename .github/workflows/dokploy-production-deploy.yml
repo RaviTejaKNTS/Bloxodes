@@ -5,6 +5,36 @@ on:
     branches:
       - production
   workflow_dispatch:
+    inputs:
+      trigger_dokploy:
+        description: "Trigger the Dokploy deploy webhook before purge/warm"
+        required: true
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+      site_url:
+        description: "Production site URL to health-check and warm"
+        required: true
+        default: "https://bloxodes.com"
+        type: string
+      purge_cloudflare:
+        description: "Purge Cloudflare after deploy"
+        required: true
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+      warm_cloudflare:
+        description: "Warm Cloudflare from the sitemap after purge"
+        required: true
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
 
 concurrency:
   group: dokploy-production
@@ -13,33 +43,69 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 45
+    env:
+      PRODUCTION_SITE_URL: ${{ inputs.site_url || vars.PRODUCTION_SITE_URL || 'https://bloxodes.com' }}
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Validate Dokploy configuration
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.trigger_dokploy == 'true' }}
         env:
-          DOKPLOY_DEPLOY_WEBHOOK_URL: ${{ secrets.DOKPLOY_DEPLOY_WEBHOOK_URL }}
+          DOKPLOY_API_TOKEN: ${{ secrets.DOKPLOY_API_TOKEN || secrets.DOKPLOY_AUTH_TOKEN }}
+          DOKPLOY_API_URL: ${{ vars.DOKPLOY_API_URL || secrets.DOKPLOY_API_URL || vars.DOKPLOY_URL || secrets.DOKPLOY_URL }}
+          DOKPLOY_APPLICATION_ID: ${{ vars.DOKPLOY_APPLICATION_ID || secrets.DOKPLOY_APPLICATION_ID }}
+          DOKPLOY_DEPLOY_WEBHOOK_URL: ${{ secrets.DOKPLOY_DEPLOY_WEBHOOK_URL || vars.DOKPLOY_DEPLOY_WEBHOOK_URL || secrets.DOKPLOY_WEBHOOK_URL || vars.DOKPLOY_WEBHOOK_URL }}
         run: |
-          if [ -z "$DOKPLOY_DEPLOY_WEBHOOK_URL" ]; then
-            echo "Missing required Dokploy setting: DOKPLOY_DEPLOY_WEBHOOK_URL"
+          if [ -n "$DOKPLOY_DEPLOY_WEBHOOK_URL" ]; then
+            exit 0
+          fi
+
+          if [ -z "$DOKPLOY_API_TOKEN" ] || [ -z "$DOKPLOY_API_URL" ] || [ -z "$DOKPLOY_APPLICATION_ID" ]; then
+            echo "Missing Dokploy deploy settings. Set DOKPLOY_DEPLOY_WEBHOOK_URL, or set DOKPLOY_API_TOKEN/DOKPLOY_AUTH_TOKEN + DOKPLOY_API_URL/DOKPLOY_URL + DOKPLOY_APPLICATION_ID."
             exit 1
           fi
 
       - name: Trigger Dokploy deployment
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.trigger_dokploy == 'true' }}
         env:
-          DOKPLOY_DEPLOY_WEBHOOK_URL: ${{ secrets.DOKPLOY_DEPLOY_WEBHOOK_URL }}
+          DOKPLOY_API_TOKEN: ${{ secrets.DOKPLOY_API_TOKEN || secrets.DOKPLOY_AUTH_TOKEN }}
+          DOKPLOY_API_URL: ${{ vars.DOKPLOY_API_URL || secrets.DOKPLOY_API_URL || vars.DOKPLOY_URL || secrets.DOKPLOY_URL }}
+          DOKPLOY_APPLICATION_ID: ${{ vars.DOKPLOY_APPLICATION_ID || secrets.DOKPLOY_APPLICATION_ID }}
+          DOKPLOY_DEPLOY_WEBHOOK_URL: ${{ secrets.DOKPLOY_DEPLOY_WEBHOOK_URL || vars.DOKPLOY_DEPLOY_WEBHOOK_URL || secrets.DOKPLOY_WEBHOOK_URL || vars.DOKPLOY_WEBHOOK_URL }}
         run: |
-          status_code=$(curl --silent --show-error \
-            --write-out '%{http_code}' \
-            --output /tmp/dokploy-response.json \
-            --request POST \
-            "$DOKPLOY_DEPLOY_WEBHOOK_URL" \
-            --header 'accept: application/json' \
-            --header 'Content-Type: application/json' \
-            --data '{}')
+          if [ -n "$DOKPLOY_DEPLOY_WEBHOOK_URL" ]; then
+            deploy_ref="${GITHUB_REF:-refs/heads/production}"
+            echo "Triggering Dokploy deployment through webhook URL for ${deploy_ref}."
+            status_code=$(curl --silent --show-error \
+              --write-out '%{http_code}' \
+              --output /tmp/dokploy-response.json \
+              --request POST \
+              "$DOKPLOY_DEPLOY_WEBHOOK_URL" \
+              --header 'accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --header 'X-GitHub-Event: push' \
+              --data "{\"ref\":\"$deploy_ref\"}")
+          else
+            deploy_url="${DOKPLOY_API_URL%/}/api/application.deploy"
+            echo "Triggering Dokploy deployment through API."
+            status_code=$(curl --silent --show-error \
+              --write-out '%{http_code}' \
+              --output /tmp/dokploy-response.json \
+              --request POST \
+              "$deploy_url" \
+              --header 'accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --header "x-api-key: $DOKPLOY_API_TOKEN" \
+              --data "{\"applicationId\":\"$DOKPLOY_APPLICATION_ID\"}")
+          fi
 
           if [ "$status_code" -lt 200 ] || [ "$status_code" -ge 300 ]; then
             echo "Dokploy deployment trigger failed with status $status_code"
@@ -49,10 +115,27 @@ jobs:
 
           cat /tmp/dokploy-response.json
 
+      - name: Allow Dokploy deploy to start
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.trigger_dokploy == 'true' }}
+        env:
+          DOKPLOY_DEPLOY_SETTLE_SECONDS: ${{ vars.DOKPLOY_DEPLOY_SETTLE_SECONDS || '120' }}
+        run: |
+          case "$DOKPLOY_DEPLOY_SETTLE_SECONDS" in
+            ''|*[!0-9]*)
+              DOKPLOY_DEPLOY_SETTLE_SECONDS=120
+              ;;
+          esac
+
+          if [ "$DOKPLOY_DEPLOY_SETTLE_SECONDS" -gt 0 ]; then
+            echo "Waiting ${DOKPLOY_DEPLOY_SETTLE_SECONDS}s before health checks."
+            sleep "$DOKPLOY_DEPLOY_SETTLE_SECONDS"
+          fi
+
       - name: Validate optional Cloudflare configuration
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.purge_cloudflare == 'true' || inputs.warm_cloudflare == 'true' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
         run: |
           if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -z "$CLOUDFLARE_ZONE_ID" ]; then
             echo "CLOUDFLARE_ZONE_ID is required when CLOUDFLARE_API_TOKEN is set"
@@ -65,13 +148,10 @@ jobs:
           fi
 
       - name: Wait for site health
-        if: ${{ vars.PRODUCTION_SITE_URL != '' }}
-        env:
-          PRODUCTION_SITE_URL: ${{ vars.PRODUCTION_SITE_URL }}
         run: |
           health_url="${PRODUCTION_SITE_URL%/}/api/health"
 
-          for attempt in $(seq 1 60); do
+          for attempt in $(seq 1 90); do
             status_code=$(curl --silent --show-error \
               --output /tmp/dokploy-health.json \
               --write-out '%{http_code}' \
@@ -92,9 +172,10 @@ jobs:
           exit 1
 
       - name: Purge Cloudflare cache
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.purge_cloudflare == 'true' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ZONE_ID" ]; then
             echo "Skipping Cloudflare purge because token or zone id is not configured"
@@ -119,12 +200,10 @@ jobs:
           cat /tmp/cloudflare-purge.json
 
       - name: Warm Cloudflare cache from sitemap
-        if: ${{ vars.PRODUCTION_SITE_URL != '' }}
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.warm_cloudflare == 'true' }}
         env:
-          PRODUCTION_SITE_URL: ${{ vars.PRODUCTION_SITE_URL }}
-          CACHE_WARM_SITE_URL: ${{ vars.PRODUCTION_SITE_URL }}
           CACHE_WARM_CONCURRENCY: ${{ vars.CACHE_WARM_CONCURRENCY }}
           CACHE_WARM_MAX_URLS: ${{ vars.CACHE_WARM_MAX_URLS }}
           CACHE_WARM_REQUEST_DELAY_MS: ${{ vars.CACHE_WARM_REQUEST_DELAY_MS }}
         run: |
-          node scripts/automation/warm-cloudflare-cache.mjs
+          CACHE_WARM_SITE_URL="$PRODUCTION_SITE_URL" npm run cache:warm

@@ -10,7 +10,7 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/catalog/admin-commands`;
 const CATALOG_CODE_CANDIDATES = ["admin-commands"];

@@ -2,7 +2,7 @@ import { renderEventsPage } from "./events-page";
 import { listPublishedEventsPageSlugs } from "@/lib/db";
 
 // Must be a literal for Next segment config extraction.
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export { generateMetadata } from "./events-page";
 
@@ -11,8 +11,7 @@ type PageProps = {
 };
 
 export async function generateStaticParams() {
-  const slugs = await listPublishedEventsPageSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return [];
 }
 
 export default async function EventsPage({ params }: PageProps) {

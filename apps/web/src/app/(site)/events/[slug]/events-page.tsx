@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { formatDistanceToNow } from "date-fns";
+import { FiClock } from "react-icons/fi";
 import "@/styles/article-content.css";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ChecklistCard } from "@/components/ChecklistCard";
@@ -977,7 +978,8 @@ export async function renderEventsPage({ slug }: { slug: string }) {
           {formattedUpdated ? (
             <div className="flex flex-col gap-3 text-sm text-muted">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-foreground/80">
+                <span className="inline-flex items-center gap-1.5 text-foreground/80">
+                  <FiClock className="h-4 w-4 shrink-0" aria-hidden />
                   Updated on <span className="font-semibold text-foreground">{formattedUpdated}</span>
                   {updatedRelativeLabel ? <span>{' '}({updatedRelativeLabel})</span> : null}
                 </span>

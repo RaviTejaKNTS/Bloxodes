@@ -1,5 +1,5 @@
 import "server-only";
-import { unstable_cache } from "next/cache";
+import { publicContentCache } from "@/lib/public-content-cache";
 import {
   getEventsPageByUniverseId,
   listCodesForGame,
@@ -242,7 +242,7 @@ export async function getWikiPageBySlug(slug: string): Promise<WikiPageContent |
   if (!normalized) return null;
   if (BYPASS_WIKI_CACHE) return fetchWikiPage(normalized);
 
-  const cached = unstable_cache(async () => fetchWikiPage(normalized), [`wiki-page-v2:${normalized}`], {
+  const cached = publicContentCache(async () => fetchWikiPage(normalized), [`wiki-page-v2:${normalized}`], {
     revalidate: WIKI_REVALIDATE_SECONDS,
     tags: buildWikiTags(normalized)
   });
@@ -281,7 +281,7 @@ export async function listPublishedWikiPages(): Promise<WikiListEntry[]> {
 
   if (BYPASS_WIKI_CACHE) return fetchPages();
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     fetchPages,
     ["wiki-index-pages-v2"],
     {
@@ -310,7 +310,7 @@ export async function listPublishedWikiSlugs(): Promise<string[]> {
 
   if (BYPASS_WIKI_CACHE) return fetchSlugs();
 
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     fetchSlugs,
     ["wiki-index-slugs-v2"],
     {
@@ -342,7 +342,7 @@ async function safeValue<T>(label: string, loader: () => Promise<T | null>): Pro
 
 async function listWikiQuizzesByUniverseId(universeId: number, limit = 4): Promise<QuizListEntry[]> {
   const safeLimit = Number.isFinite(limit) && limit > 0 ? Math.floor(limit) : 4;
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const supabase = supabaseAdmin();
       const { data, error } = await supabase
@@ -379,7 +379,7 @@ async function listWikiQuizzesByUniverseId(universeId: number, limit = 4): Promi
 }
 
 async function listWikiMediaByUniverseId(universeId: number, limit = 8): Promise<WikiMediaItem[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const supabase = supabaseAdmin();
       const { data, error } = await supabase
@@ -405,7 +405,7 @@ async function listWikiMediaByUniverseId(universeId: number, limit = 8): Promise
 }
 
 async function listWikiBadgesByUniverseId(universeId: number, limit = 8): Promise<WikiBadgeItem[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const supabase = supabaseAdmin();
       const { data, error } = await supabase
@@ -429,7 +429,7 @@ async function listWikiBadgesByUniverseId(universeId: number, limit = 8): Promis
 }
 
 async function listWikiGamePassesByUniverseId(universeId: number, limit = 8): Promise<WikiGamePassItem[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const supabase = supabaseAdmin();
       const { data, error } = await supabase
@@ -454,7 +454,7 @@ async function listWikiGamePassesByUniverseId(universeId: number, limit = 8): Pr
 }
 
 async function listWikiServersByUniverseId(universeId: number, limit = 12): Promise<WikiServerItem[]> {
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const supabase = supabaseAdmin();
       const { data, error } = await supabase
@@ -483,7 +483,7 @@ async function listOtherWikiDeveloperGames(
   limit = 6
 ): Promise<WikiDeveloperGame[]> {
   if (!creatorId) return [];
-  const cached = unstable_cache(
+  const cached = publicContentCache(
     async () => {
       const supabase = supabaseAdmin();
       const { data, error } = await supabase
