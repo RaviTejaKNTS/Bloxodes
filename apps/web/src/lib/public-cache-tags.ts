@@ -12,7 +12,8 @@ export type PublicCacheEventType =
   | "music"
   | "quiz"
   | "wiki"
-  | "wiki_catalog";
+  | "wiki_catalog"
+  | "stats";
 
 export type PublicCacheEvent = {
   type: PublicCacheEventType;
@@ -187,6 +188,13 @@ export function cacheTagsForPath(pathname: string) {
     return unique([...tags, "lists", slugTag("list", second)]);
   }
 
+  if (first === "stats") {
+    if (!second) return unique([...tags, "stats", "stats-home"]);
+    if (second === "games" && !third) return unique([...tags, "stats", "stats-games"]);
+    if (second === "games" && third) return unique([...tags, "stats", "stats-games", slugTag("stats-game", third)]);
+    return unique([...tags, "stats"]);
+  }
+
   if (first === "wiki") {
     if (!second || second === "page") return unique([...tags, "wiki-index"]);
     if (third && third !== "page") {
@@ -270,6 +278,18 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
       return unique([...base, slugTag("quiz", normalized), "quizzes-index", "home", "sitemap", "sitemap:quizzes"]);
     case "wiki":
       return unique([...base, slugTag("wiki", normalized), "wiki-index", "home", "sitemap", "sitemap:wiki"]);
+    case "stats":
+      return unique([
+        ...base,
+        "stats",
+        normalized === "home" || normalized === "stats" ? "stats-home" : "",
+        normalized === "games" ? "stats-games" : "",
+        normalized.startsWith("games/") ? "stats-games" : "",
+        normalized.startsWith("games/") ? slugTag("stats-game", normalized.replace(/^games\//, "")) : "",
+        "home",
+        "sitemap",
+        "sitemap:stats"
+      ]);
     case "wiki_catalog": {
       const [wikiSlug, collectionSlug] = normalized.split("/");
       const flatCatalogSlug = wikiSlug && collectionSlug ? `${wikiSlug}-${collectionSlug}` : "";

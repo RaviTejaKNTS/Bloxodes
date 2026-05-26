@@ -19,7 +19,7 @@ const DEFAULT_SORT_TYPES = [
 ];
 const DEFAULT_KEYWORDS = [..."abcdefghijklmnopqrstuvwxyz", ..."0123456789"];
 const DEFAULT_KEYWORD_SORT_TYPES: string[] = [];
-const ALLOWED_LIMITS = [10, 28, 30, 50, 60, 100, 120];
+const ALLOWED_LIMITS = [10, 28, 30];
 
 const CATEGORY = "Accessories";
 const SUBCATEGORIES_RAW = process.env.ROBLOX_CATALOG_SUBCATEGORIES;
@@ -85,7 +85,7 @@ type CatalogItem = {
   creatorHasVerifiedBadge?: boolean;
   creatorId?: number;
   productId?: number;
-  collectibleItemId?: number;
+  collectibleItemId?: string | number;
   favoriteCount?: number;
   hasResellers?: boolean;
   totalQuantity?: number;
@@ -131,7 +131,7 @@ type CatalogItemRow = {
   creator_type: string | null;
   creator_has_verified_badge: boolean | null;
   product_id: number | null;
-  collectible_item_id: number | null;
+  collectible_item_id: string | null;
   favorite_count: number | null;
   has_resellers: boolean | null;
   total_quantity: number | null;
@@ -221,6 +221,17 @@ function normalizeNumber(value: unknown): number | null {
   if (typeof value === "string" && value.trim().length) {
     const parsed = Number(value);
     return Number.isFinite(parsed) ? parsed : null;
+  }
+  return null;
+}
+
+function normalizeIdText(value: unknown): string | null {
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    return trimmed.length ? trimmed : null;
+  }
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return String(Math.trunc(value));
   }
   return null;
 }
@@ -452,7 +463,8 @@ function buildCatalogRows(
   items.forEach((item) => {
     const assetId = normalizeNumber(item.id);
     if (!assetId) return;
-    if (item.itemType && item.itemType !== "Asset") return;
+    const itemType = normalizeText(item.itemType) ?? "Asset";
+    if (itemType !== "Asset" && itemType !== "Bundle") return;
 
     const creatorId = normalizeNumber(item.creatorId);
     const creatorTargetId = normalizeNumber(item.creatorTargetId) ?? creatorId;
@@ -461,7 +473,7 @@ function buildCatalogRows(
 
     rows.push({
       asset_id: assetId,
-      item_type: item.itemType ?? "Asset",
+      item_type: itemType,
       asset_type_id: normalizeNumber(item.assetType),
       category,
       subcategory,
@@ -481,7 +493,7 @@ function buildCatalogRows(
       creator_type: normalizeText(item.creatorType),
       creator_has_verified_badge: normalizeBoolean(item.creatorHasVerifiedBadge),
       product_id: normalizeNumber(item.productId),
-      collectible_item_id: normalizeNumber(item.collectibleItemId),
+      collectible_item_id: normalizeIdText(item.collectibleItemId),
       favorite_count: normalizeNumber(item.favoriteCount),
       has_resellers: normalizeBoolean(item.hasResellers),
       total_quantity: normalizeNumber(item.totalQuantity),

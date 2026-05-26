@@ -20,7 +20,8 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
   "music",
   "quiz",
   "wiki",
-  "wiki_catalog"
+  "wiki_catalog",
+  "stats"
 ]);
 
 const MUSIC_CATALOG_CODES = new Set(["roblox-music-ids"]);
@@ -50,6 +51,7 @@ const QUIZZES_SITEMAP_PATH = "/sitemaps/quizzes.xml";
 const TOOLS_SITEMAP_PATH = "/sitemaps/tools.xml";
 const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
 const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
+const STATS_SITEMAP_PATH = "/sitemaps/stats.xml";
 const FEED_PATH = "/feed.xml";
 const PAGINATED_INDEX_PURGE_LIMIT = 50;
 
@@ -178,6 +180,22 @@ function revalidateForWiki(slug: string) {
   return applyRevalidation(
     ["/wiki", `/wiki/${slug}`, "/", SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
     [`wiki:${slug}`, "wiki-index", "home"]
+  );
+}
+
+function revalidateForStats(slug: string) {
+  const normalized = normalizeSlug(slug);
+  const scopedPaths =
+    normalized === "home" || normalized === "stats"
+      ? ["/stats"]
+      : normalized === "games"
+        ? ["/stats", "/stats/games"]
+        : normalized.startsWith("games/")
+          ? ["/stats", "/stats/games", `/stats/games/${normalized.replace(/^games\//, "")}`]
+          : ["/stats", "/stats/games"];
+  return applyRevalidation(
+    [...scopedPaths, "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
+    ["stats", "stats-home", "stats-games", "home"]
   );
 }
 
@@ -548,6 +566,9 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       break;
     case "wiki":
       purgePaths = revalidateForWiki(slug);
+      break;
+    case "stats":
+      purgePaths = revalidateForStats(slug);
       break;
     case "wiki_catalog":
       purgePaths = revalidateForWikiCatalog(slug);

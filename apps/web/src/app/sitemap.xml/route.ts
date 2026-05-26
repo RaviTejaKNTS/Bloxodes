@@ -16,7 +16,8 @@ const SITEMAP_PATHS = [
   "/sitemaps/wiki.xml",
   "/sitemaps/events.xml",
   "/sitemaps/authors.xml",
-  "/sitemaps/catalog.xml"
+  "/sitemaps/catalog.xml",
+  "/sitemaps/stats.xml"
 ];
 
 export async function GET() {

@@ -193,6 +193,9 @@ const CARD_STAT_OVERRIDES: Record<string, string[]> = {
   "sailor-piece-clans": ["rarity", "bestFor", "bonusSummary", "passive", "requirement"],
   "sailor-piece-relics": ["effect", "recipe", "partRoute", "bestFor"],
   "sailor-piece-haki": ["role", "unlockRoute", "requirements", "maxLevel", "maxEffect", "levelingRoute"],
+  "rivals-wraps": ["source", "sourceType", "appliesTo", "sourceWeapon", "availability", "motion", "specialNote"],
+  "rivals-finishers": ["source", "availability", "sourceNote", "rarity"],
+  "rivals-ugc": ["itemType", "price", "availability", "rewardSummary", "creatorName", "robloxId", "sourceNote"],
   ores: ["dropChance", "multiplier", "sellPrice", "trait"],
   weapons: ["baseDamage", "attackSpeed", "range", "sellPrice"],
   armors: ["baseHealth", "sellPrice", "chance"],
@@ -518,7 +521,141 @@ function renderValue(value: string | null) {
   return <span className="text-sm text-foreground">{value}</span>;
 }
 
+function formatCompactNumber(value: number): string {
+  return value.toLocaleString("en-US");
+}
+
+function parseRobuxValue(value: unknown): number | null {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  const normalized = normalizeValue(value);
+  if (!normalized) return null;
+  const parsed = Number.parseInt(normalized.replace(/[^\d]/g, ""), 10);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function formatRobuxPrice(item: ForgeCatalogItem): string | null {
+  const priceRobux = parseRobuxValue(item.priceRobux);
+  if (priceRobux !== null) {
+    return priceRobux === 0 ? "Free" : `${formatCompactNumber(priceRobux)} Robux`;
+  }
+
+  return normalizeValue(item.price);
+}
+
+function buildRobloxCatalogUrl(item: ForgeCatalogItem): string | null {
+  const directUrl = normalizeValue(item.robloxUrl);
+  if (directUrl?.startsWith("https://www.roblox.com/")) return directUrl;
+
+  const robloxId = normalizeValue(item.robloxId);
+  if (robloxId) return `https://www.roblox.com/catalog/${robloxId}`;
+
+  return null;
+}
+
+function RivalsUgcItemCard({ item }: { item: ForgeCatalogItem }) {
+  const image = resolveImageSrc(item.image ?? null);
+  const price = formatRobuxPrice(item);
+  const creator = normalizeValue(item.creatorName);
+  const itemType = normalizeValue(item.itemType);
+  const availability = normalizeValue(item.availability);
+  const rewardSummary = normalizeValue(item.rewardSummary);
+  const robloxId = normalizeValue(item.robloxId);
+  const sourceNote = normalizeValue(item.sourceNote);
+  const robloxUrl = buildRobloxCatalogUrl(item);
+
+  return (
+    <article
+      id={`item-${item.id}`}
+      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
+    >
+      <div className="relative aspect-square w-full overflow-hidden border-b border-border/60 bg-background/70">
+        {image ? (
+          <Image
+            src={image}
+            alt={item.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-contain p-3"
+            unoptimized
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-surface-muted/60">
+            <span className="sr-only">Image unavailable for {item.name}</span>
+          </div>
+        )}
+        {price ? (
+          <div className="absolute left-2 top-2 inline-flex rounded-md bg-black/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+            {price}
+          </div>
+        ) : null}
+      </div>
+
+      <div className="flex flex-1 flex-col gap-4 p-3">
+        <div>
+          <h3 className="text-sm font-semibold leading-4 text-foreground line-clamp-2">{item.name}</h3>
+          {creator ? (
+            <p className="-mt-0.5 block truncate text-xs leading-none text-muted">
+              by <span className="font-semibold text-foreground">{creator}</span>
+            </p>
+          ) : null}
+        </div>
+
+        <div className="flex flex-wrap gap-1.5">
+          {itemType ? (
+            <span className="inline-flex items-center rounded-md border border-border/60 bg-background/50 px-2.5 py-1 text-[10px] font-medium text-foreground/85">
+              {itemType}
+            </span>
+          ) : null}
+          {availability ? (
+            <span className="inline-flex items-center rounded-md border border-border/60 bg-background/50 px-2.5 py-1 text-[10px] font-medium text-foreground/85">
+              {availability}
+            </span>
+          ) : null}
+        </div>
+
+        <dl className="space-y-2 rounded-md border border-border/60 bg-background/40 px-3 py-2.5">
+          {rewardSummary ? (
+            <div>
+              <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Reward progress</dt>
+              <dd className="mt-1 text-sm font-semibold leading-snug text-foreground">{rewardSummary}</dd>
+            </div>
+          ) : null}
+          {robloxId ? (
+            <div>
+              <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Roblox ID</dt>
+              <dd className="mt-1 text-sm font-semibold leading-snug text-foreground [overflow-wrap:anywhere]">
+                {robloxId}
+              </dd>
+            </div>
+          ) : null}
+          {sourceNote ? (
+            <div>
+              <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Source note</dt>
+              <dd className="mt-1 text-sm font-semibold leading-snug text-foreground">{sourceNote}</dd>
+            </div>
+          ) : null}
+        </dl>
+
+        {robloxUrl ? (
+          <a
+            href={robloxUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-xs font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+          >
+            Open on Roblox
+          </a>
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
 function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: ForgeCatalogConfig }) {
+  if (config.slug === "rivals-ugc") {
+    return <RivalsUgcItemCard item={item} />;
+  }
+
   const badge = config.badgeKey ? formatBadgeValue(config.badgeKey, item[config.badgeKey]) : null;
   const subtitle = buildSubtitle(item, config);
   const description = config.cardDescriptionKey ? normalizeValue(item[config.cardDescriptionKey]) : null;

@@ -1,0 +1,460 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import {
+  Activity,
+  ArrowDownRight,
+  ArrowUpRight,
+  CalendarDays,
+  ExternalLink,
+  Gamepad2,
+  Search,
+  Star,
+  Trophy,
+  Users
+} from "lucide-react";
+import { PageBreadcrumb } from "@/components/PageBreadcrumb";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { StatsChartPanel } from "@/app/(site)/stats/components/StatsChartPanel";
+import {
+  STATS_SORT_OPTIONS,
+  type StatsGame,
+  type StatsGameDetailData,
+  type StatsGamesPageData,
+  type StatsHomeData,
+  type StatsRelatedLink,
+  robloxGameUrl
+} from "@/lib/stats";
+import { formatCompactNumber, formatDelta, formatDeltaPercent, formatFullNumber, formatPercent } from "@/lib/stats-format";
+import { cn } from "@/lib/utils";
+
+export function StatsPageShell({ children }: { children: ReactNode }) {
+  return (
+    <div className="relative left-1/2 w-[calc(100vw-2rem)] max-w-[1800px] -translate-x-1/2 xl:w-[calc(100vw-18rem)]">
+      {children}
+    </div>
+  );
+}
+
+function statUpdatedLabel(value?: string | null) {
+  if (!value) return "Waiting for refresh";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Recently";
+  return date.toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "UTC",
+    timeZoneName: "short"
+  });
+}
+
+function gameImage(game: Pick<StatsGame, "iconUrl" | "name">, size = 44) {
+  if (!game.iconUrl) {
+    return (
+      <span className="flex shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-sm font-semibold text-muted" style={{ width: size, height: size }}>
+        {game.name.charAt(0)}
+      </span>
+    );
+  }
+  return (
+    <Image
+      src={game.iconUrl}
+      alt={`${game.name} icon`}
+      width={size}
+      height={size}
+      className="shrink-0 rounded-md border border-border/70 object-cover"
+      style={{ width: size, height: size }}
+    />
+  );
+}
+
+function DeltaPill({ value, percent }: { value?: number | null; percent?: number | null }) {
+  const positive = typeof value === "number" && value > 0;
+  const negative = typeof value === "number" && value < 0;
+  const Icon = positive ? ArrowUpRight : negative ? ArrowDownRight : Activity;
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-semibold",
+        positive && "bg-emerald-500/10 text-emerald-500",
+        negative && "bg-rose-500/10 text-rose-500",
+        !positive && !negative && "bg-secondary text-muted"
+      )}
+    >
+      <Icon className="h-3.5 w-3.5" aria-hidden />
+      {percent != null ? formatDeltaPercent(percent) : formatDelta(value)}
+    </span>
+  );
+}
+
+function MetricCard({
+  label,
+  value,
+  detail,
+  icon: Icon
+}: {
+  label: string;
+  value: string;
+  detail?: string | null;
+  icon: typeof Users;
+}) {
+  return (
+    <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+      <CardContent className="p-4">
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{label}</p>
+          <Icon className="h-4 w-4 text-accent" aria-hidden />
+        </div>
+        <p className="mt-3 text-2xl font-semibold leading-none text-foreground">{value}</p>
+        {detail ? <p className="mt-2 text-xs font-medium text-muted">{detail}</p> : null}
+      </CardContent>
+    </Card>
+  );
+}
+
+function CompactGameRow({ game, rank, metric }: { game: StatsGame; rank?: number | null; metric?: "playing" | "trend" | "visits" }) {
+  const primary = metric === "visits" ? formatCompactNumber(game.visits) : formatCompactNumber(game.playing);
+  return (
+    <Link
+      href={`/stats/games/${game.slug}`}
+      className="group flex items-center gap-3 rounded-lg border border-border/60 bg-background/35 px-3 py-3 transition hover:border-accent/70 hover:bg-background/65"
+    >
+      <span className="w-7 shrink-0 text-center text-xs font-bold text-muted">#{rank ?? game.rank ?? "-"}</span>
+      {gameImage(game, 40)}
+      <span className="min-w-0 flex-1">
+        <span className="block truncate text-sm font-semibold text-foreground group-hover:text-accent">{game.name}</span>
+        <span className="mt-0.5 flex flex-wrap items-center gap-2 text-xs text-muted">
+          {game.genre ? <span>{game.genre}</span> : null}
+          {game.ratingPercent != null ? <span>{formatPercent(game.ratingPercent)} rating</span> : null}
+        </span>
+      </span>
+      <span className="text-right">
+        <span className="block text-sm font-semibold text-foreground">{metric === "trend" ? game.trendScore : primary}</span>
+        <span className="mt-1 block"><DeltaPill value={game.growth24h} percent={game.growth24hPercent} /></span>
+      </span>
+    </Link>
+  );
+}
+
+function GameListPanel({ title, games, metric }: { title: string; games: StatsGame[]; metric?: "playing" | "trend" | "visits" }) {
+  return (
+    <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+      <CardHeader className="border-b border-border/60 p-4">
+        <CardTitle className="m-0 text-base font-semibold text-foreground">{title}</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-2 p-3">
+        {games.length ? games.map((game, index) => <CompactGameRow key={game.universeId} game={game} rank={index + 1} metric={metric} />) : (
+          <div className="rounded-lg border border-dashed border-border/70 p-6 text-center text-sm text-muted">Not enough hourly movement yet.</div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+export function StatsHomeView({ data }: { data: StatsHomeData }) {
+  return (
+    <div className="stats-surface space-y-6">
+      <header className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        <div className="max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Roblox Stats</p>
+          <h1 className="mb-0 mt-2 text-3xl font-semibold leading-tight text-foreground md:text-4xl">Live Roblox game stats</h1>
+          <p className="mt-3 text-sm font-medium leading-6 text-muted">
+            Public Roblox game data tracked by Bloxodes, refreshed regularly for players, creators, and researchers.
+          </p>
+        </div>
+        <form action="/stats/games" className="flex w-full max-w-xl gap-2">
+          <div className="relative flex-1">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" aria-hidden />
+            <Input name="q" type="search" placeholder="Search games" className="h-10 rounded-md bg-surface pl-9" />
+          </div>
+          <Button asChild className="rounded-md">
+            <Link href="/stats/games">View all</Link>
+          </Button>
+        </form>
+      </header>
+
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <MetricCard label="Live players" value={formatCompactNumber(data.totals.livePlayers)} detail="Top tracked games right now" icon={Users} />
+        <MetricCard label="Games shown" value={formatFullNumber(data.totals.trackedGames)} detail="Public stats index sample" icon={Gamepad2} />
+        <MetricCard label="Top visits" value={formatCompactNumber(data.totals.totalVisits)} detail="From most visited games" icon={Trophy} />
+        <MetricCard label="Last refresh" value={statUpdatedLabel(data.totals.lastUpdatedAt)} detail="UTC public data sample" icon={CalendarDays} />
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-2">
+        <GameListPanel title="Top games right now" games={data.topGames} metric="playing" />
+        <GameListPanel title="Fastest risers" games={data.risers} metric="trend" />
+      </div>
+
+      <StatsChartPanel title="Platform CCU trend" subtitle="Top tracked games, last 24 hours" chart={data.platformTrend} defaultMetric="players" compact={false} area />
+
+      <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+        <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+          <CardHeader className="border-b border-border/60 p-4">
+            <CardTitle className="m-0 text-base font-semibold text-foreground">Trending genres</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 p-4">
+            {data.genres.map((genre) => (
+              <Link key={genre.slug} href={`/stats/games?genre=${encodeURIComponent(genre.genre)}`} className="block rounded-lg border border-border/60 bg-background/35 p-3 transition hover:border-accent/70">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{genre.genre}</p>
+                    <p className="text-xs text-muted">{genre.games} tracked games</p>
+                  </div>
+                  <p className="text-sm font-semibold text-foreground">{formatCompactNumber(genre.playing)}</p>
+                </div>
+                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-border/50">
+                  <div className="h-full rounded-full bg-accent" style={{ width: `${Math.min(100, Math.max(5, genre.playing / Math.max(1, data.genres[0]?.playing ?? 1) * 100))}%` }} />
+                </div>
+              </Link>
+            ))}
+          </CardContent>
+        </Card>
+        <GameListPanel title="Most visited games" games={data.mostVisited.slice(0, 8)} metric="visits" />
+      </div>
+    </div>
+  );
+}
+
+export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
+  const activeGenre = data.filters.genre && data.filters.genre !== "all" ? data.filters.genre : null;
+  const title = activeGenre ? `${activeGenre} Roblox game stats` : "Roblox game stats table";
+  const description = activeGenre
+    ? `Sort ${activeGenre} Roblox games by current players, growth, visits, rating, and tracked peaks.`
+    : "Sort public Roblox games by current players, growth, visits, rating, and tracked peaks.";
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Stats", href: "/stats" },
+    { label: "Games", href: activeGenre ? "/stats/games" : null },
+    ...(activeGenre ? [{ label: activeGenre, href: null }] : [])
+  ];
+  return (
+    <div className="stats-surface space-y-5">
+      <header className="space-y-3">
+        <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
+        <h1 className="mb-0 text-3xl font-semibold leading-tight text-foreground md:text-4xl">{title}</h1>
+        <p className="text-sm font-medium text-muted">{description}</p>
+      </header>
+
+      <form action="/stats/games" className="grid gap-3 md:grid-cols-[minmax(0,1.4fr)_220px_180px_160px_auto]">
+        <div className="relative">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" aria-hidden />
+          <Input name="q" type="search" defaultValue={data.filters.q} placeholder="Search name or creator" className="h-11 rounded-md border-border/80 bg-surface/60 pl-9 shadow-none" />
+        </div>
+        <Select name="genre" defaultValue={data.filters.genre || "all"}>
+          <SelectTrigger className="h-11 rounded-md border-border/80 bg-surface/60 shadow-none">
+            <SelectValue placeholder="Genre" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All genres</SelectItem>
+            {data.genres.map((genre) => <SelectItem key={genre} value={genre}>{genre}</SelectItem>)}
+          </SelectContent>
+        </Select>
+        <Select name="sort" defaultValue={data.filters.sort}>
+          <SelectTrigger className="h-11 rounded-md border-border/80 bg-surface/60 shadow-none">
+            <SelectValue placeholder="Sort" />
+          </SelectTrigger>
+          <SelectContent>
+            {STATS_SORT_OPTIONS.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}
+          </SelectContent>
+        </Select>
+        <Input name="minPlayers" type="number" min="0" defaultValue={data.filters.minPlayers ?? ""} placeholder="Min players" className="h-11 rounded-md border-border/80 bg-surface/60 shadow-none" />
+        <Button type="submit" className="h-11 rounded-md px-5">Apply</Button>
+      </form>
+
+      <Card className="overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
+        <div className="hidden md:block">
+          <Table>
+            <TableHeader>
+              <TableRow className="hover:bg-transparent">
+                <TableHead className="w-14">Rank</TableHead>
+                <TableHead>Game</TableHead>
+                <TableHead className="text-right">CCU</TableHead>
+                <TableHead className="text-right">24h</TableHead>
+                <TableHead className="text-right">7d</TableHead>
+                <TableHead className="text-right">Visits</TableHead>
+                <TableHead className="text-right">Rating</TableHead>
+                <TableHead className="text-right">Trend</TableHead>
+                <TableHead className="text-right">Updated</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {data.games.map((game, index) => (
+                <TableRow key={game.universeId} className="border-border/60 hover:bg-background/40">
+                  <TableCell className="font-mono text-xs text-muted">#{game.rank ?? (data.page - 1) * 50 + index + 1}</TableCell>
+                  <TableCell>
+                    <Link href={`/stats/games/${game.slug}`} className="flex items-center gap-3">
+                      {gameImage(game, 38)}
+                      <span className="min-w-0">
+                        <span className="block truncate text-sm font-semibold text-foreground hover:text-accent">{game.name}</span>
+                        <span className="mt-0.5 flex items-center gap-2 text-xs text-muted">
+                          {game.genre ? <span>{game.genre}</span> : null}
+                          {game.creatorName ? <span>{game.creatorName}</span> : null}
+                        </span>
+                      </span>
+                    </Link>
+                  </TableCell>
+                  <TableCell className="text-right font-semibold">{formatCompactNumber(game.playing)}</TableCell>
+                  <TableCell className="text-right"><DeltaPill value={game.growth24h} percent={game.growth24hPercent} /></TableCell>
+                  <TableCell className="text-right"><DeltaPill value={game.growth7d} percent={game.growth7dPercent} /></TableCell>
+                  <TableCell className="text-right">{formatCompactNumber(game.visits)}</TableCell>
+                  <TableCell className="text-right">{formatPercent(game.ratingPercent)}</TableCell>
+                  <TableCell className="text-right"><Badge variant="outline" className="rounded-md">{game.trendScore}</Badge></TableCell>
+                  <TableCell className="text-right text-xs text-muted">{statUpdatedLabel(game.lastStatsRefreshedAt)}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+
+        <div className="space-y-2 p-3 md:hidden">
+          {data.games.map((game, index) => <CompactGameRow key={game.universeId} game={game} rank={game.rank ?? index + 1} />)}
+        </div>
+      </Card>
+
+      {data.totalPages > 1 ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
+          <span>Page {data.page} of {data.totalPages}</span>
+          <div className="flex gap-2">
+            <Button asChild variant="outline" className="rounded-md" aria-disabled={data.page <= 1}>
+              <Link href={statsPageHref(data, Math.max(1, data.page - 1))}>Previous</Link>
+            </Button>
+            <Button asChild variant="outline" className="rounded-md" aria-disabled={data.page >= data.totalPages}>
+              <Link href={statsPageHref(data, Math.min(data.totalPages, data.page + 1))}>Next</Link>
+            </Button>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function statsPageHref(data: StatsGamesPageData, page: number) {
+  const params = new URLSearchParams();
+  if (page > 1) params.set("page", String(page));
+  if (data.filters.q) params.set("q", data.filters.q);
+  if (data.filters.genre && data.filters.genre !== "all") params.set("genre", data.filters.genre);
+  if (data.filters.sort !== "playing") params.set("sort", data.filters.sort);
+  if (data.filters.minPlayers) params.set("minPlayers", String(data.filters.minPlayers));
+  const query = params.toString();
+  return query ? `/stats/games?${query}` : "/stats/games";
+}
+
+function RelatedLinks({ links }: { links: StatsRelatedLink[] }) {
+  if (!links.length) {
+    return <p className="rounded-lg border border-dashed border-border/70 p-4 text-sm text-muted">No linked Bloxodes pages yet.</p>;
+  }
+  return (
+    <div className="flex flex-wrap gap-2">
+      {links.map((link) => (
+        <Button key={`${link.type}-${link.href}`} asChild variant="outline" size="sm" className="h-8 rounded-md">
+          <Link href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+            {link.label}
+            {link.href.startsWith("http") ? <ExternalLink className="ml-1.5 h-3.5 w-3.5" aria-hidden /> : null}
+          </Link>
+        </Button>
+      ))}
+    </div>
+  );
+}
+
+export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
+  const { game } = data;
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Stats", href: "/stats" },
+    { label: "Games", href: "/stats/games" },
+    ...(game.genre ? [{ label: game.genre, href: `/stats/games?genre=${encodeURIComponent(game.genre)}` }] : []),
+    ...(game.subgenre ? [{ label: game.subgenre, href: null }] : [])
+  ];
+  return (
+    <div className="stats-surface space-y-5">
+      <header className="relative overflow-hidden rounded-lg border border-border/70 bg-surface/80 p-4 shadow-none">
+        {game.thumbnailUrls[0] || game.iconUrl ? (
+          <div className="absolute inset-0 opacity-20 blur-sm">
+            <Image src={game.thumbnailUrls[0] ?? game.iconUrl ?? ""} alt="" fill sizes="100vw" className="object-cover" />
+          </div>
+        ) : null}
+        <div className="relative flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex min-w-0 gap-4">
+            {gameImage(game, 76)}
+            <div className="min-w-0">
+              <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
+              <h1 className="mb-0 mt-2 text-3xl font-semibold leading-tight text-foreground md:text-5xl">{game.name}</h1>
+              <p className="mt-2 text-sm font-medium text-muted">
+                {game.creatorName ? `by ${game.creatorName}` : "Creator not tracked"} · Updated {statUpdatedLabel(game.lastStatsRefreshedAt)}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {game.genre ? <Badge variant="outline" className="rounded-md">{game.genre}</Badge> : null}
+                {game.ageRating ? <Badge variant="outline" className="rounded-md">{game.ageRating}</Badge> : null}
+                <Badge variant="outline" className="rounded-md">{formatPercent(game.ratingPercent)} rating</Badge>
+              </div>
+            </div>
+          </div>
+          <div className="ml-[92px] flex gap-2 lg:ml-0">
+            <Button asChild className="rounded-md">
+              <Link href={robloxGameUrl(game)} target="_blank" rel="noopener noreferrer">
+                Play
+                <ExternalLink className="ml-1.5 h-4 w-4" aria-hidden />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <MetricCard label="Current CCU" value={formatCompactNumber(game.playing)} detail={`${formatCompactNumber(game.peak24h)} 24h peak`} icon={Users} />
+        <MetricCard label="24h movement" value={formatDelta(game.growth24h)} detail={formatDeltaPercent(game.growth24hPercent)} icon={ArrowUpRight} />
+        <MetricCard label="Visits" value={formatCompactNumber(game.visits)} detail={formatFullNumber(game.visits)} icon={Trophy} />
+        <MetricCard label="Rating" value={formatPercent(game.ratingPercent)} detail={`${formatCompactNumber(game.likes)} likes`} icon={Star} />
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
+        <StatsChartPanel title={`${game.name} chart`} subtitle="Public Roblox data tracked by Bloxodes" charts={data.charts} defaultMetric="players" />
+        <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+          <CardHeader className="border-b border-border/60 p-4">
+            <CardTitle className="m-0 text-base font-semibold text-foreground">Game summary</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3 p-4 text-sm">
+            {[
+              ["Universe ID", String(game.universeId)],
+              ["Creator", game.creatorName ?? "Not tracked"],
+              ["Genre", game.genre ?? "Not tracked"],
+              ["Subgenre", game.subgenre ?? "Not tracked"],
+              ["Created", game.createdAtApi ? new Date(game.createdAtApi).toLocaleDateString("en-US") : "Not tracked"],
+              ["Updated", game.updatedAtApi ? new Date(game.updatedAtApi).toLocaleDateString("en-US") : "Not tracked"],
+              ["Favorites", formatCompactNumber(game.favorites)]
+            ].map(([label, value]) => (
+              <div key={label} className="flex items-center justify-between gap-3 border-b border-border/50 pb-2 last:border-0 last:pb-0">
+                <span className="text-muted">{label}</span>
+                <span className="text-right font-semibold text-foreground">{value}</span>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+        <CardHeader className="border-b border-border/60 p-4">
+          <CardTitle className="m-0 text-base font-semibold text-foreground">Bloxodes pages for this game</CardTitle>
+        </CardHeader>
+        <CardContent className="p-4">
+          <RelatedLinks links={[...data.relatedLinks, ...data.includedInLists]} />
+        </CardContent>
+      </Card>
+
+      {data.similarGames.length || data.sameCreator.length ? (
+        <div className="grid gap-4 xl:grid-cols-2">
+          {data.similarGames.length ? <GameListPanel title="Similar games" games={data.similarGames} /> : null}
+          {data.sameCreator.length ? <GameListPanel title="Same creator" games={data.sameCreator} /> : null}
+        </div>
+      ) : null}
+    </div>
+  );
+}

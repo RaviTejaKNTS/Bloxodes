@@ -173,4 +173,29 @@ body {
   .catalog-surface :is(button, a, label):hover {
     transform: none;
   }
+
+  .stats-surface {
+    font-size: 0.95rem;
+    letter-spacing: 0;
+  }
+
+  .stats-surface .shadow-soft {
+    box-shadow: none;
+  }
+
+  .stats-surface :is(.rounded-2xl, .rounded-xl) {
+    border-radius: 0.5rem;
+  }
+
+  .stats-surface :is(.rounded-lg, .rounded-md) {
+    border-radius: 0.5rem;
+  }
+
+  .stats-surface :is(input, select, textarea, button, a) {
+    letter-spacing: 0;
+  }
+
+  .stats-surface button {
+    box-shadow: none;
+  }
 }

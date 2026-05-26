@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Award,
+  BarChart3,
   BookOpen,
   Calendar,
   FileText,
@@ -46,6 +47,7 @@ const navLinks = [
   { href: "/", label: "Home", icon: Home },
   { href: "/codes", label: "Codes", icon: KeyRound },
   { href: "/lists", label: "Lists", icon: List },
+  { href: "/stats", label: "Stats", icon: BarChart3 },
   { href: "/wiki", label: "Wiki", icon: BookOpen },
   { href: "/tools", label: "Tools", icon: Wrench },
   { href: "/catalog", label: "Catalog", icon: LayoutGrid },
@@ -60,7 +62,7 @@ type SearchItem = {
   title: string;
   subtitle?: string | null;
   url: string;
-  type: "codes" | "article" | "checklist" | "quiz" | "list" | "tool" | "catalog" | "event" | "author" | "music" | "wiki";
+  type: "codes" | "article" | "checklist" | "quiz" | "list" | "stats" | "tool" | "catalog" | "event" | "author" | "music" | "wiki";
   updatedAt?: string | null;
   badge?: string | null;
 };
@@ -85,6 +87,7 @@ function resolveSearchScope(pathname: string | null): { scope: string; label: st
   }
   if (path.startsWith("/codes")) return { scope: "codes", label: "codes" };
   if (path.startsWith("/lists")) return { scope: "lists", label: "lists" };
+  if (path.startsWith("/stats")) return { scope: "stats", label: "stats" };
   if (path.startsWith("/wiki")) return { scope: "wiki", label: "wiki" };
   if (path.startsWith("/tools")) return { scope: "tools", label: "tools" };
   if (path.startsWith("/catalog")) return { scope: "catalog", label: "catalog" };

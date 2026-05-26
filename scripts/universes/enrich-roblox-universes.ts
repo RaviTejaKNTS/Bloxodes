@@ -23,6 +23,7 @@ const BATCH_DELAY_MS = Number(process.env.ROBLOX_ENRICH_BATCH_DELAY_MS ?? "1200"
 const RETRY_LIMIT = Number(process.env.ROBLOX_ENRICH_RETRY_LIMIT ?? "6");
 const RETRY_BASE_DELAY_MS = Number(process.env.ROBLOX_ENRICH_RETRY_BASE_DELAY_MS ?? "5000");
 const RETRY_MAX_DELAY_MS = Number(process.env.ROBLOX_ENRICH_RETRY_MAX_DELAY_MS ?? "120000");
+const WRITE_LEGACY_DAILY_STATS = process.env.ROBLOX_ENRICH_WRITE_DAILY_STATS === "true";
 
 type EnrichmentMode = "light" | "deep";
 
@@ -1228,8 +1229,8 @@ if (mergedPayload.length) {
 
 const processedUniverseIds = mergedPayload.map((payload) => payload.universe_id);
 
-  // Insert daily stats with non-null fields only (do not overwrite existing rows for the day)
-  if (mergedPayload.length) {
+  // Legacy escape hatch only. Daily public stats now come from hourly rollups.
+  if (WRITE_LEGACY_DAILY_STATS && mergedPayload.length) {
     const today = new Date().toISOString().slice(0, 10);
     const idsForStats = processedUniverseIds;
     const { data: existingStats, error: statsError } = await supabase

@@ -9,6 +9,7 @@ type SearchItemType =
   | "checklist"
   | "quiz"
   | "list"
+  | "stats"
   | "tool"
   | "catalog"
   | "event"
@@ -52,7 +53,8 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   music_genre: "music",
   music_artist: "music",
   wiki: "wiki",
-  wiki_catalog: "wiki"
+  wiki_catalog: "wiki",
+  stats_game: "stats"
 };
 
 const SCOPE_ENTITY_TYPES: Record<string, string[]> = {
@@ -61,6 +63,7 @@ const SCOPE_ENTITY_TYPES: Record<string, string[]> = {
   checklists: ["checklist"],
   quizzes: ["quiz"],
   lists: ["list"],
+  stats: ["stats_game"],
   tools: ["tool"],
   catalog: ["catalog"],
   events: ["event"],
@@ -108,6 +111,50 @@ async function searchSiteFallback(query: string, limit: number, entityTypes: str
     ...row,
     active_code_count: null
   }));
+}
+
+async function searchStatsGames(query: string, limit: number, entityTypes: string[] | null): Promise<SearchRow[]> {
+  if (entityTypes?.length && !entityTypes.includes("stats_game")) return [];
+  const sb = supabaseAdmin();
+  const pattern = `%${escapeLike(query)}%`;
+  const { data, error } = await sb
+    .from("roblox_universes")
+    .select("universe_id, slug, name, display_name, creator_name, genre_l1, genre, updated_at, last_stats_refreshed_at, playing")
+    .not("slug", "is", null)
+    .not("icon_url", "is", null)
+    .or(`name.ilike.${pattern},display_name.ilike.${pattern},creator_name.ilike.${pattern}`)
+    .order("playing", { ascending: false, nullsFirst: false })
+    .limit(Math.min(limit, 30));
+
+  if (error) {
+    console.warn("stats game search failed", error.message);
+    return [];
+  }
+
+  return ((data ?? []) as Array<{
+    universe_id: number;
+    slug: string | null;
+    name: string | null;
+    display_name: string | null;
+    creator_name: string | null;
+    genre_l1: string | null;
+    genre: string | null;
+    updated_at: string | null;
+    last_stats_refreshed_at: string | null;
+    playing: number | null;
+  }>)
+    .filter((row) => row.slug && (row.display_name || row.name))
+    .map((row) => ({
+      entity_type: "stats_game",
+      entity_id: String(row.universe_id),
+      slug: row.slug ?? "",
+      title: `${row.display_name ?? row.name} Stats`,
+      subtitle: [row.creator_name, row.genre_l1 ?? row.genre].filter(Boolean).join(" · ") || "Roblox game stats",
+      url: `/stats/games/${row.slug}`,
+      updated_at: row.last_stats_refreshed_at ?? row.updated_at,
+      active_code_count: null,
+      search_text: [row.display_name, row.name, row.creator_name, row.genre_l1, row.genre].filter(Boolean).join(" ")
+    }));
 }
 
 function rowKey(row: SearchRow): string {
@@ -172,9 +219,12 @@ export async function GET(request: Request) {
       console.warn("search_site RPC failed, using search_index fallback", error);
     }
 
-    const substringRows = await searchSiteFallback(rawQuery, entityTypes?.length ? MAX_LIMIT : safeLimit, entityTypes);
+    const [substringRows, statsRows] = await Promise.all([
+      searchSiteFallback(rawQuery, entityTypes?.length ? MAX_LIMIT : safeLimit, entityTypes),
+      searchStatsGames(rawQuery, safeLimit, entityTypes)
+    ]);
     const rpcRows = error ? [] : ((data ?? []) as SearchRow[]);
-    const rows = mergeAndRankRows(rawQuery, [...substringRows, ...rpcRows], entityTypes).slice(0, safeLimit);
+    const rows = mergeAndRankRows(rawQuery, [...substringRows, ...rpcRows, ...statsRows], entityTypes).slice(0, safeLimit);
 
     const items: SearchItem[] = rows.map((row) => {
       const type = TYPE_MAP[row.entity_type] ?? "article";

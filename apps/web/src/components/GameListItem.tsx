@@ -160,6 +160,7 @@ export function GameListItem({ entry, rank, metricLabel, listSlug }: GameListIte
   const activeCodesValue =
     typeof game?.active_count === "number" ? game.active_count.toLocaleString() : "—";
   const activeCodesHref = game?.slug ? `/codes/${game.slug}` : null;
+  const statsHref = universe.slug ? `/stats/games/${universe.slug}` : null;
   const badges = (entry as any).badges as UniverseListBadge[] | undefined;
   const visibleBadges = badges?.filter((badge) => badge.rank >= 1 && badge.rank <= 3);
   const customDescription = universe.game_description_md;
@@ -254,6 +255,20 @@ export function GameListItem({ entry, rank, metricLabel, listSlug }: GameListIte
                 >
                   <FiHash className="h-3 w-3" />
                   {activeCodesValue} active codes
+                </Link>
+              ) : null}
+              {statsHref ? (
+                <Link
+                  href={statsHref}
+                  prefetch={false}
+                  data-analytics-event="list_game_stats_click"
+                  data-analytics-list-slug={listSlug}
+                  data-analytics-universe-id={universe.universe_id}
+                  data-analytics-rank={rank}
+                  className="inline-flex items-center gap-1 rounded-full border border-border/60 px-3 py-1 transition hover:border-accent hover:text-accent"
+                >
+                  <FiTrendingUp className="h-3 w-3" />
+                  Stats
                 </Link>
               ) : null}
             </div>
