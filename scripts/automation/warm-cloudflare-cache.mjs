@@ -3,6 +3,7 @@ const DEFAULT_MAX_SITEMAPS = 200;
 const DEFAULT_MAX_URLS = 5000;
 const DEFAULT_REQUEST_TIMEOUT_MS = 20000;
 const DEFAULT_REQUEST_DELAY_MS = 0;
+const DEFAULT_RETRIES = 2;
 
 function clampNumber(value, fallback, min, max) {
   if (value == null || String(value).trim() === "") return fallback;
@@ -155,7 +156,32 @@ async function warmUrl(url) {
   }
 }
 
-async function warmUrls(urls, { concurrency, requestDelayMs }) {
+async function warmUrlWithRetries(url, retries) {
+  let lastResult;
+
+  for (let attempt = 0; attempt <= retries; attempt += 1) {
+    const result = await warmUrl(url);
+    lastResult = result;
+    if (result.ok) {
+      return {
+        ...result,
+        attempts: attempt + 1
+      };
+    }
+
+    if (attempt < retries) {
+      const backoffMs = 250 * (attempt + 1);
+      await new Promise((resolve) => setTimeout(resolve, backoffMs));
+    }
+  }
+
+  return {
+    ...lastResult,
+    attempts: retries + 1
+  };
+}
+
+async function warmUrls(urls, { concurrency, requestDelayMs, retries }) {
   const results = [];
   let cursor = 0;
 
@@ -166,12 +192,13 @@ async function warmUrls(urls, { concurrency, requestDelayMs }) {
       if (index >= urls.length) return;
 
       const url = urls[index];
-      const result = await warmUrl(url);
+      const result = await warmUrlWithRetries(url, retries);
       results[index] = result;
 
       const outcome = result.ok ? "OK" : "ERR";
+      const attempts = result.attempts > 1 ? ` attempts=${result.attempts}` : "";
       console.log(
-        `[${index + 1}/${urls.length}] ${outcome} ${result.status} ${result.durationMs}ms ${result.cfCacheStatus ?? "-"} ${url}`
+        `[${index + 1}/${urls.length}] ${outcome} ${result.status} ${result.durationMs}ms${attempts} ${result.cfCacheStatus ?? "-"} ${url}`
       );
 
       if (requestDelayMs > 0) {
@@ -198,12 +225,14 @@ async function main() {
   const maxSitemaps = clampNumber(process.env.CACHE_WARM_MAX_SITEMAPS, DEFAULT_MAX_SITEMAPS, 1, 10000);
   const maxUrls = clampNumber(process.env.CACHE_WARM_MAX_URLS, DEFAULT_MAX_URLS, 1, 50000);
   const requestDelayMs = clampNumber(process.env.CACHE_WARM_REQUEST_DELAY_MS, DEFAULT_REQUEST_DELAY_MS, 0, 5000);
+  const retries = clampNumber(process.env.CACHE_WARM_RETRIES, DEFAULT_RETRIES, 0, 5);
 
   console.log(`Warmup site origin: ${normalizedSiteOrigin}`);
   console.log(`Warmup sitemap: ${sitemapUrl}`);
   console.log(`Concurrency: ${concurrency}`);
   console.log(`Max sitemaps: ${maxSitemaps}`);
   console.log(`Max urls: ${maxUrls}`);
+  console.log(`Retries: ${retries}`);
 
   const discovered = await collectUrlsFromSitemaps({
     sitemapUrl,
@@ -220,7 +249,7 @@ async function main() {
   console.log(`Discovered ${discovered.urls.length} page URLs from ${discovered.sitemapCount} sitemap files.`);
   console.log(`Warming ${urls.length} URLs including sitemap index.`);
 
-  const results = await warmUrls(urls, { concurrency, requestDelayMs });
+  const results = await warmUrls(urls, { concurrency, requestDelayMs, retries });
 
   const okCount = results.filter((result) => result?.ok).length;
   const failed = results.filter((result) => result && !result.ok);
