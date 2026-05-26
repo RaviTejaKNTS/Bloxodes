@@ -83,62 +83,62 @@ begin
   end if;
 
   if v_category = 'Accessories' then
-    v_slugs := array_append(v_slugs, 'roblox-accessories');
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories');
     case v_subcategory
-      when 'HeadAccessories' then v_slugs := array_append(v_slugs, 'roblox-accessories/head-accessories');
-      when 'FaceAccessories' then v_slugs := array_append(v_slugs, 'roblox-accessories/face-accessories');
-      when 'NeckAccessories' then v_slugs := array_append(v_slugs, 'roblox-accessories/neck-accessories');
-      when 'ShoulderAccessories' then v_slugs := array_append(v_slugs, 'roblox-accessories/shoulder-accessories');
-      when 'FrontAccessories' then v_slugs := array_append(v_slugs, 'roblox-accessories/front-accessories');
-      when 'BackAccessories' then v_slugs := array_append(v_slugs, 'roblox-accessories/back-accessories');
-      when 'WaistAccessories' then v_slugs := array_append(v_slugs, 'roblox-accessories/waist-accessories');
-      when 'Gear' then v_slugs := array_append(v_slugs, 'roblox-accessories/gear');
+      when 'HeadAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/head-accessories');
+      when 'FaceAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/face-accessories');
+      when 'NeckAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/neck-accessories');
+      when 'ShoulderAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/shoulder-accessories');
+      when 'FrontAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/front-accessories');
+      when 'BackAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/back-accessories');
+      when 'WaistAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/waist-accessories');
+      when 'Gear' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/gear');
       else null;
     end case;
   end if;
 
   if v_category = 'Body' and v_subcategory = 'HairAccessories' then
-    v_slugs := array_append(v_slugs, 'roblox-accessories');
-    v_slugs := array_append(v_slugs, 'roblox-accessories/hair-accessories');
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories');
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/hair-accessories');
   elsif v_category = 'Body' then
-    v_slugs := array_append(v_slugs, 'roblox-body-parts');
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-body-parts');
     case v_subcategory
-      when 'BodyPartsBundles' then v_slugs := array_append(v_slugs, 'roblox-body-parts/full-bodies');
-      when 'DynamicHeads' then v_slugs := array_append(v_slugs, 'roblox-body-parts/dynamic-heads');
-      when 'Heads' then v_slugs := array_append(v_slugs, 'roblox-body-parts/classic-heads');
-      when 'Faces' then v_slugs := array_append(v_slugs, 'roblox-body-parts/classic-faces');
+      when 'BodyPartsBundles' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-body-parts/full-bodies');
+      when 'DynamicHeads' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-body-parts/dynamic-heads');
+      when 'Heads' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-body-parts/classic-heads');
+      when 'Faces' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-body-parts/classic-faces');
       else null;
     end case;
   end if;
 
   if v_category = 'Clothing' then
-    v_slugs := array_append(v_slugs, 'roblox-clothing');
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing');
     case v_subcategory
-      when 'TShirtAccessories' then v_slugs := array_append(v_slugs, 'roblox-clothing/layered-t-shirts');
-      when 'ShirtAccessories' then v_slugs := array_append(v_slugs, 'roblox-clothing/shirts');
-      when 'SweaterAccessories' then v_slugs := array_append(v_slugs, 'roblox-clothing/sweaters');
-      when 'JacketAccessories' then v_slugs := array_append(v_slugs, 'roblox-clothing/jackets');
-      when 'PantsAccessories' then v_slugs := array_append(v_slugs, 'roblox-clothing/pants');
-      when 'ShortsAccessories' then v_slugs := array_append(v_slugs, 'roblox-clothing/shorts');
-      when 'DressSkirtAccessories' then v_slugs := array_append(v_slugs, 'roblox-clothing/dresses-skirts');
-      when 'ShoesBundles' then v_slugs := array_append(v_slugs, 'roblox-clothing/shoes');
-      when 'ClassicShirts' then v_slugs := array_append(v_slugs, 'roblox-clothing/classic-shirts');
-      when 'ClassicTShirts' then v_slugs := array_append(v_slugs, 'roblox-clothing/classic-t-shirts');
-      when 'ClassicPants' then v_slugs := array_append(v_slugs, 'roblox-clothing/classic-pants');
+      when 'TShirtAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/layered-t-shirts');
+      when 'ShirtAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/shirts');
+      when 'SweaterAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/sweaters');
+      when 'JacketAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/jackets');
+      when 'PantsAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/pants');
+      when 'ShortsAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/shorts');
+      when 'DressSkirtAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/dresses-skirts');
+      when 'ShoesBundles' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/shoes');
+      when 'ClassicShirts' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/classic-shirts');
+      when 'ClassicTShirts' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/classic-t-shirts');
+      when 'ClassicPants' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/classic-pants');
       else null;
     end case;
   end if;
 
   if v_category = 'AvatarAnimations' then
     case v_subcategory
-      when 'EmoteAnimations' then v_slugs := array_append(v_slugs, 'roblox-emotes');
-      when 'AnimationBundles' then v_slugs := array_append(v_slugs, 'roblox-animations');
+      when 'EmoteAnimations' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-emotes');
+      when 'AnimationBundles' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-animations');
       else null;
     end case;
   end if;
 
   if v_category = 'Makeup' or p_asset_type_id = any(array[76, 77, 88, 89, 90]::integer[]) then
-    v_slugs := array_append(v_slugs, 'roblox-makeup');
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-makeup');
   end if;
 
   return array(
