@@ -15,7 +15,6 @@ import {
   type PuzzlePage
 } from "@/lib/puzzles";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
-import { PuzzleIndexIcon, puzzleCardName } from "./components/PuzzleIndexIcon";
 import { PuzzleVisualAnswer } from "./components/PuzzleVisualAnswer";
 
 export const PUZZLES_DESCRIPTION =
@@ -23,12 +22,33 @@ export const PUZZLES_DESCRIPTION =
 
 type AnyRecord = Record<string, unknown>;
 
+const puzzleCardNames: Record<string, string> = {
+  wordle: "Wordle",
+  connections: "Connections",
+  strands: "Strands",
+  "spelling-bee": "Spelling Bee",
+  "letter-boxed": "Letter Boxed",
+  sudoku: "Sudoku",
+  pips: "NYT Pips",
+  contexto: "Contexto",
+  letroso: "Letroso",
+  "linkedin-zip": "LinkedIn Zip",
+  "linkedin-crossclimb": "LinkedIn Crossclimb",
+  "linkedin-queens": "LinkedIn Queens",
+  "linkedin-tango": "LinkedIn Tango",
+  "linkedin-mini-sudoku": "LinkedIn Mini Sudoku"
+};
+
 function asRecord(value: unknown): AnyRecord {
   return value && typeof value === "object" && !Array.isArray(value) ? (value as AnyRecord) : {};
 }
 
 function asString(value: unknown): string {
   return typeof value === "string" ? value : "";
+}
+
+function puzzleCardName(page: PuzzlePage) {
+  return puzzleCardNames[page.slug] ?? page.title.replace(/^Today's\s+/i, "").replace(/\s+Answer$/i, "");
 }
 
 function summaryOf(answer: PuzzleAnswer | null): AnyRecord {
@@ -203,18 +223,30 @@ export async function renderPuzzlesIndex({ pages }: Awaited<ReturnType<typeof lo
         <p className="max-w-2xl text-base text-muted md:text-lg">{PUZZLES_DESCRIPTION}</p>
       </header>
 
-      <div className="grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="grid grid-cols-3 gap-x-3 gap-y-8 min-[560px]:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
         {pages.map((page) => (
           <Link
             key={page.slug}
             href={`/puzzles/${page.slug}`}
-            className="group flex flex-col items-center rounded-lg p-2 text-center outline-none transition focus-visible:ring-2 focus-visible:ring-accent/70"
+            className="group flex min-w-0 flex-col items-center rounded-lg px-1 py-2 text-center outline-none transition focus-visible:ring-2 focus-visible:ring-accent/70"
           >
-            <span className="flex aspect-[4/3] w-full max-w-[178px] items-center justify-center transition duration-200 group-hover:-translate-y-0.5 group-hover:scale-[1.02]">
-              <PuzzleIndexIcon slug={page.slug} title={page.title} />
+            <span className="flex aspect-square w-full max-w-[138px] items-center justify-center transition duration-200 group-hover:-translate-y-0.5 group-hover:scale-[1.03] min-[560px]:max-w-[146px] md:max-w-[158px]">
+              {page.icon_url ? (
+                <img
+                  src={page.icon_url}
+                  alt=""
+                  className="h-full w-full rounded-lg object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <span className="flex h-full w-full items-center justify-center rounded-lg border border-border/70 bg-card px-4 text-sm font-semibold text-muted">
+                  {puzzleCardName(page)}
+                </span>
+              )}
             </span>
-            <h2 className="mt-3 text-base font-bold leading-tight text-foreground transition group-hover:text-accent md:text-lg">
-              {puzzleCardName(page.slug, page.title)}
+            <h2 className="mt-2.5 text-sm font-bold leading-tight text-foreground transition group-hover:text-accent md:text-base">
+              {puzzleCardName(page)}
             </h2>
           </Link>
         ))}

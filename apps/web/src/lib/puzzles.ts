@@ -17,6 +17,7 @@ export type PuzzlePage = {
   description_md?: string | null;
   faq_json?: PuzzleFaqEntry[] | null;
   source_url?: string | null;
+  icon_url?: string | null;
   sort_order?: number | null;
   is_published: boolean;
   published_at?: string | null;
@@ -50,7 +51,7 @@ export type PuzzlePageWithAnswers = {
 };
 
 const PUZZLE_PAGE_SELECT =
-  "id, slug, provider, title, seo_title, meta_description, intro_md, answer_intro_md, how_to_play_md, description_md, faq_json, source_url, sort_order, is_published, published_at, created_at, updated_at, content_updated_at, latest_answer_date, latest_fetched_at";
+  "id, slug, provider, title, seo_title, meta_description, intro_md, answer_intro_md, how_to_play_md, description_md, faq_json, source_url, icon_url, sort_order, is_published, published_at, created_at, updated_at, content_updated_at, latest_answer_date, latest_fetched_at";
 
 function normalizeSlug(value: string) {
   return value.trim().toLowerCase().replace(/^\/+|\/+$/g, "");
