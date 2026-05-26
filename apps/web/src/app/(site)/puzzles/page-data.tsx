@@ -15,6 +15,7 @@ import {
   type PuzzlePage
 } from "@/lib/puzzles";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
+import { PuzzleIndexIcon, puzzleCardName } from "./components/PuzzleIndexIcon";
 import { PuzzleVisualAnswer } from "./components/PuzzleVisualAnswer";
 
 export const PUZZLES_DESCRIPTION =
@@ -93,11 +94,6 @@ function answerTitle(label: string, answer: PuzzleAnswer | null) {
   return [label, date, id].filter(Boolean).join(" - ");
 }
 
-function MarkdownBlock({ html }: { html: string }) {
-  if (!html) return null;
-  return <div className="article-content md-copy-scope game-copy">{renderHtmlAsReactNodes(html, { keyPrefix: "md" })}</div>;
-}
-
 function PuzzleFaq({ items }: { items: ContentFaqItem[] }) {
   if (!items.length) return null;
 
@@ -119,10 +115,10 @@ function PuzzleFaq({ items }: { items: ContentFaqItem[] }) {
   );
 }
 
-async function markdownNodes(markdown?: string | null) {
+async function markdownNodes(markdown?: string | null, keyPrefix = "md") {
   if (!markdown) return null;
   const html = await renderMarkdown(markdown, { paragraphizeLineBreaks: true });
-  return <MarkdownBlock html={html} />;
+  return renderHtmlAsReactNodes(html, { keyPrefix });
 }
 
 async function buildFaqItems(page: PuzzlePage): Promise<ContentFaqItem[]> {
@@ -133,7 +129,7 @@ async function buildFaqItems(page: PuzzlePage): Promise<ContentFaqItem[]> {
       return {
         id: `${page.slug}-faq-${index}`,
         question: entry.q,
-        answer: <MarkdownBlock html={html} />
+        answer: <>{renderHtmlAsReactNodes(html, { keyPrefix: `${page.slug}-faq-${index}` })}</>
       };
     })
   );
@@ -207,13 +203,19 @@ export async function renderPuzzlesIndex({ pages }: Awaited<ReturnType<typeof lo
         <p className="max-w-2xl text-base text-muted md:text-lg">{PUZZLES_DESCRIPTION}</p>
       </header>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {pages.map((page) => (
-          <Link key={page.slug} href={`/puzzles/${page.slug}`} className="group rounded-lg border border-border/70 bg-card p-5 transition-colors hover:border-border">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">{page.provider}</p>
-            <h2 className="mt-2 text-xl font-semibold text-foreground group-hover:text-accent">{page.title}</h2>
-            <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted">{page.meta_description}</p>
-            {page.latest_answer_date ? <p className="mt-4 text-xs font-semibold text-foreground/70">Latest: {formatDateShort(page.latest_answer_date)}</p> : null}
+          <Link
+            key={page.slug}
+            href={`/puzzles/${page.slug}`}
+            className="group flex flex-col items-center rounded-lg p-2 text-center outline-none transition focus-visible:ring-2 focus-visible:ring-accent/70"
+          >
+            <span className="flex aspect-[4/3] w-full max-w-[178px] items-center justify-center transition duration-200 group-hover:-translate-y-0.5 group-hover:scale-[1.02]">
+              <PuzzleIndexIcon slug={page.slug} title={page.title} />
+            </span>
+            <h2 className="mt-3 text-base font-bold leading-tight text-foreground transition group-hover:text-accent md:text-lg">
+              {puzzleCardName(page.slug, page.title)}
+            </h2>
           </Link>
         ))}
       </div>
@@ -229,10 +231,10 @@ export async function loadPuzzleDetailData(slug: string) {
 
 export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<typeof loadPuzzleDetailData>>>) {
   const { page, today, yesterday, archive } = data;
-  const intro = await markdownNodes(page.intro_md);
-  const answerIntro = await markdownNodes(page.answer_intro_md);
-  const how = await markdownNodes(page.how_to_play_md);
-  const description = await markdownNodes(page.description_md);
+  const intro = await markdownNodes(page.intro_md, `${page.slug}-intro`);
+  const answerIntro = await markdownNodes(page.answer_intro_md, `${page.slug}-answer-intro`);
+  const how = await markdownNodes(page.how_to_play_md, `${page.slug}-how`);
+  const description = await markdownNodes(page.description_md, `${page.slug}-description`);
   const faqItems = await buildFaqItems(page);
   const updatedLabel = formatUpdatedDate(today?.fetched_at ?? page.content_updated_at ?? page.updated_at ?? page.published_at);
   const baseUrl = SITE_URL.replace(/\/$/, "");
@@ -257,7 +259,7 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
       <div>
         <PageBreadcrumb
           className="mb-4 text-xs uppercase tracking-[0.25em] text-muted"
-          items={[{ label: "Puzzles", href: "/puzzles" }, { label: page.title }]}
+          items={[{ label: "Home", href: "/" }, { label: "Puzzles", href: "/puzzles" }, { label: page.title }]}
         />
         <header className="mb-6">
           <h1 className="text-4xl font-bold text-foreground md:text-5xl">{page.title}</h1>
@@ -271,47 +273,54 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
               </div>
             </div>
           ) : null}
-          {intro ? <div className="mt-5">{intro}</div> : null}
         </header>
       </div>
 
-      {answerIntro ? <section>{answerIntro}</section> : null}
+      <section id="article-body" className="article-content md-copy-scope game-copy puzzle-copy">
+        {intro}
+        {answerIntro}
 
-      <div className="space-y-8">
-        <AnswerShell title="Today's Answer" answer={today}>{today ? renderAnswerContent(page, today) : null}</AnswerShell>
-        <AnswerShell title="Yesterday's Answer" answer={yesterday}>{yesterday ? renderAnswerContent(page, yesterday) : null}</AnswerShell>
-      </div>
+        <div className="space-y-8">
+          <AnswerShell title="Today's Answer" answer={today}>{today ? renderAnswerContent(page, today) : null}</AnswerShell>
+          <AnswerShell title="Yesterday's Answer" answer={yesterday}>{yesterday ? renderAnswerContent(page, yesterday) : null}</AnswerShell>
+        </div>
 
-      {how ? <section><h2 className="mb-4 text-2xl font-semibold text-foreground">How to Play</h2>{how}</section> : null}
-      {description ? <section>{description}</section> : null}
+        {how ? (
+          <>
+            <h2>How to Play</h2>
+            {how}
+          </>
+        ) : null}
+        {description}
 
-      {archive.length ? (
-        <section>
-          <h2 className="text-2xl font-semibold text-foreground">Answer Archive</h2>
-          <div className="mt-4 overflow-x-auto">
-            <table className="w-full min-w-[420px] border-collapse text-sm">
-              <thead>
-                <tr className="text-left text-xs uppercase tracking-[0.18em] text-muted">
-                  <th className="py-2 pr-4">Date</th>
-                  <th className="py-2 pr-4">Puzzle</th>
-                  <th className="py-2">Archive</th>
-                </tr>
-              </thead>
-              <tbody>
-                {archive.map((answer) => (
-                  <tr key={answer.id}>
-                    <td className="py-3 pr-4 text-foreground">{formatDate(answer.answer_date)}</td>
-                    <td className="py-3 pr-4 text-muted">{puzzleIdLabel(answer) ?? "-"}</td>
-                    <td className="py-3"><Link className="font-semibold text-accent hover:underline" href={`/puzzles/${page.slug}/${answer.answer_date}`}>View answer</Link></td>
+        {archive.length ? (
+          <section>
+            <h2>Answer Archive</h2>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full min-w-[420px] border-collapse text-sm">
+                <thead>
+                  <tr className="text-left text-xs uppercase tracking-[0.18em] text-muted">
+                    <th className="py-2 pr-4">Date</th>
+                    <th className="py-2 pr-4">Puzzle</th>
+                    <th className="py-2">Archive</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      ) : null}
+                </thead>
+                <tbody>
+                  {archive.map((answer) => (
+                    <tr key={answer.id}>
+                      <td className="py-3 pr-4 text-foreground">{formatDate(answer.answer_date)}</td>
+                      <td className="py-3 pr-4 text-muted">{puzzleIdLabel(answer) ?? "-"}</td>
+                      <td className="py-3"><Link className="font-semibold text-accent hover:underline" href={`/puzzles/${page.slug}/${answer.answer_date}`}>View answer</Link></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ) : null}
 
-      <PuzzleFaq items={faqItems} />
+        <PuzzleFaq items={faqItems} />
+      </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPage) }} />
@@ -333,6 +342,7 @@ export async function renderPuzzleArchive(data: NonNullable<Awaited<ReturnType<t
     <div className="space-y-8">
       <PageBreadcrumb
         items={[
+          { label: "Home", href: "/" },
           { label: "Puzzles", href: "/puzzles" },
           { label: page.title, href: `/puzzles/${page.slug}` },
           { label: formatDateShort(answer.answer_date) }

@@ -1,3 +1,4 @@
+import "@/styles/article-content.css";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL } from "@/lib/seo";

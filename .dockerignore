@@ -1,4 +1,9 @@
-.git
+.git/*
+!.git/HEAD
+!.git/FETCH_HEAD
+!.git/packed-refs
+!.git/refs
+!.git/refs/**
 .github
 .next
 apps/extension/dist

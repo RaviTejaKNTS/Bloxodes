@@ -17,6 +17,26 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV BLOXODES_BUILD_SHA=$BLOXODES_BUILD_SHA
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN set -eu; \
+  sha="$BLOXODES_BUILD_SHA"; \
+  if [ "$sha" = "unknown" ] && [ -f .git/HEAD ]; then \
+    head="$(cat .git/HEAD)"; \
+    case "$head" in \
+      ref:\ *) \
+        ref="${head#ref: }"; \
+        if [ -f ".git/$ref" ]; then \
+          sha="$(cat ".git/$ref")"; \
+        elif [ -f .git/packed-refs ]; then \
+          packed="$(awk -v ref="$ref" '$2 == ref { print $1; exit }' .git/packed-refs)"; \
+          if [ -n "$packed" ]; then sha="$packed"; fi; \
+        fi; \
+        ;; \
+      *) \
+        sha="$head"; \
+        ;; \
+    esac; \
+  fi; \
+  printf '%s\n' "$sha" > /app/build-sha
 RUN npm run build
 
 FROM node:20-bookworm-slim AS runner
@@ -37,6 +57,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/data ./data
+COPY --from=builder --chown=nextjs:nodejs /app/build-sha ./build-sha
 
 USER nextjs
 EXPOSE 3000

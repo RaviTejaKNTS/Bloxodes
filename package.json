@@ -33,6 +33,7 @@
     "articles:update": "tsx scripts/articles/update-articles.ts",
     "refresh:codes": "tsx scripts/codes/update-codes.ts",
     "sync:puzzles": "tsx scripts/puzzles/sync-puzzles.ts",
+    "upsert:puzzle-pages": "tsx scripts/puzzles/upsert-puzzle-page-copy.ts",
     "rewrite:codes": "tsx scripts/codes/rewrite-codes-articles.ts",
     "content:check-copy": "tsx scripts/content/check-public-copy.ts",
     "import:content-final": "tsx scripts/content/import-content-final.ts",
