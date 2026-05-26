@@ -210,6 +210,17 @@ const WIKI_COPY: Record<string, WikiCopy> = {
 - Zones raise the reward ceiling as the block travels farther, while tsunami pressure makes return speed and positioning part of the route.
 - Luck-source details beyond normal item and progression systems are still source-disputed, so keep boost planning flexible until in-game values are verified.`,
     controlsJson: []
+  },
+  rivals: {
+    metaDescription:
+      "RIVALS wiki hub with codes, weapons, maps, skins, wraps, charms, finishers, emotes, UGC items, Roblox details, and practical duel tips.",
+    tipsMd: `- RIVALS is built around short first-to-5 duels, so judge your loadout by repeated rounds, not one lucky fight.
+- Spend Keys with every weapon slot in mind. Primary, Secondary, Melee, and Utility choices all change how you handle peeks, pressure, and cleanup rounds.
+- Start contracts on weapons you actually use. A contract reward is easier to finish when the weapon already fits your normal duel plan.
+- Learn the map before blaming the weapon. Regular, big, experimental, legacy, and private-server maps can change sightlines, team size pressure, and safe angles.
+- Cosmetic source matters more than rarity alone. Skins, wraps, charms, finishers, and emotes can come from cases, boxes, capsules, shop routes, bundles, milestones, old code or event origins, ranked sources, UGC rewards, or special grants.
+- Official RIVALS UGC is Roblox avatar gear from Nosniy Games. It is separate from weapon skins, and official purchases can count toward the in-game UGC reward track.`,
+    controlsJson: []
   }
 };
 

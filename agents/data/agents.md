@@ -49,7 +49,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `roblox_music_genres_view`, `roblox_music_artists_view`
   - Music filters and taxonomy views.
 - `roblox_catalog_items`
-  - Free-item and broader catalog ingestion data.
+  - Free-item and broad avatar marketplace ingestion data. Broad `/catalog/roblox-*` avatar pages use category/subcategory, item type, sale status, price, creator, favorite, limited, resale, and thumbnail rows from this table.
+- `roblox_catalog_item_images`, `roblox_catalog_categories`, `roblox_catalog_subcategories`, `roblox_catalog_refresh_queue`
+  - Avatar marketplace thumbnail cache, taxonomy cache, and enrichment queue for Roblox catalog item routes. Bundle thumbnails must come from the Roblox bundle thumbnail endpoint, while asset thumbnails use the asset endpoint.
 
 ## Supabase: User, Community, And Ops
 
@@ -113,6 +115,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/The Forge/*.json`
   - Forge catalog and calculator datasets consumed by `src/lib/forge/*` and catalog routes.
   - The Forge collection pages also use `quests.json`, `skills.json`, `blueprints.json`, and `npcs.json` through `src/app/(site)/catalog/the-forge/page-data.tsx`.
+- `data/RIVALS/*.json`
+  - Local RIVALS game datasets for wiki/catalog page work, including weapons, maps, skins, wraps, charms, finishers, emotes, official UGC items, and quiz content.
+  - `quiz.json` is the local question pool for `/quizzes/rivals`; use the `QuizData` shape with 10 easy, 10 medium, and 10 hard questions when possible.
+  - Keep RIVALS catalog datasets limited to durable in-game item collections plus the official UGC exception. Do not store gamepasses, badges, servers, current event reward tracks, ranked-season reward lists, or manual active-code data here.
 - `data/Wizard Alchemy/*.json`
   - Local Wizard Alchemy game datasets for wiki/catalog page work, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
   - `potions.json`, `materials.json`, and `races.json` also power the Wizard Alchemy potion planner and race reroll calculator through `src/lib/wizard-alchemy/data.ts`.

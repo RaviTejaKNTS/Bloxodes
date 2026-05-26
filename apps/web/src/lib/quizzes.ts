@@ -48,7 +48,8 @@ const QUIZ_DATA_MAP: Record<string, string> = {
   "wizard-alchemy": repoPath("data", "Wizard Alchemy", "quiz.json"),
   "the-forge": repoPath("data", "The Forge", "quiz.json"),
   "grow-a-garden": repoPath("data", "Grow a Garden", "quiz.json"),
-  "slime-rng": repoPath("data", "Slime RNG", "quiz.json")
+  "slime-rng": repoPath("data", "Slime RNG", "quiz.json"),
+  "rivals": repoPath("data", "RIVALS", "quiz.json")
 };
 
 function normalizeCode(value: string): string {

@@ -714,6 +714,55 @@ const KICK_A_LUCKY_BLOCK_WEIGHT_SECTION_ORDER = [
 ];
 
 const KICK_A_LUCKY_BLOCK_ZONE_SECTION_ORDER = ["Starter zones", "Progression zones", "Endgame zones"];
+const RIVALS_WEAPON_SECTION_ORDER = ["Primary", "Secondary", "Melee", "Utility"];
+const RIVALS_MAP_SECTION_ORDER = [
+  "Current regular maps",
+  "Big maps",
+  "Experimental maps",
+  "Legacy private-server maps",
+  "Private-server-only maps"
+];
+const RIVALS_SKIN_SECTION_ORDER = [
+  "Case and Daily Shop skins",
+  "Event case source skins",
+  "Bundle and currency source skins",
+  "Pass, ranked, and Glory source skins",
+  "Code-origin, UGC, mode, and special-source skins"
+];
+const RIVALS_WRAP_SECTION_ORDER = [
+  "Box and chest roll wraps",
+  "Weapon contract and milestone wraps",
+  "Shop and bundle purchase wraps",
+  "Limited-source cosmetic wraps",
+  "Special grant and unobtainable wraps"
+];
+const RIVALS_CHARM_SECTION_ORDER = [
+  "Capsule, chest, and shop source rows",
+  "Bundle and paid-offer source rows",
+  "Limited-origin source rows",
+  "Social, creator, and developer source rows",
+  "Restricted and unobtainable source rows"
+];
+const RIVALS_FINISHER_SECTION_ORDER = [
+  "Finisher Pack Sources",
+  "Event Chest Sources",
+  "Season and Ranked Sources",
+  "Bundle and Shop Sources",
+  "Contract, UGC, and Milestone Sources",
+  "Default and Unobtainable"
+];
+const RIVALS_EMOTE_SECTION_ORDER = [
+  "Shop emotes",
+  "Progression and bundle emotes",
+  "Limited-source emotes",
+  "Special and milestone emotes"
+];
+const RIVALS_UGC_SECTION_ORDER = [
+  "Clothing and character set",
+  "Key and weapon accessories",
+  "Joke and mascot accessories",
+  "Rank badge accessories"
+];
 
 const SAILOR_PIECE_RAW_CARD_KEYS = [
   "description",
@@ -733,6 +782,129 @@ const SAILOR_PIECE_RAW_CARD_KEYS = [
 ];
 
 const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
+  "rivals-weapons": {
+    groupKey: "slot",
+    groupLabel: "Weapon slot",
+    sectionOrder: RIVALS_WEAPON_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.slot),
+    hiddenKeys: [
+      "slot",
+      "isDefault",
+      "modeExclusive",
+      "modeNote",
+      "imageStatus",
+      "sourcePage",
+      "wikiUrl",
+      "sourceImageUrl",
+      "verificationNote",
+      "contractFamilies"
+    ],
+    maxStats: 6
+  },
+  "rivals-maps": {
+    groupKey: "catalogSection",
+    groupLabel: "Map availability",
+    sectionOrder: RIVALS_MAP_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "mapPool",
+      "imageStatus",
+      "sourcePage",
+      "wikiUrl",
+      "sourceImageUrl",
+      "verificationNote"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "rivals-skins": {
+    groupKey: "catalogSection",
+    groupLabel: "Skin source",
+    sectionOrder: RIVALS_SKIN_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "imageStatus", "sourcePage", "wikiUrl", "sourceImageUrl", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "rivals-wraps": {
+    groupKey: "catalogSection",
+    groupLabel: "Wrap source",
+    sectionOrder: RIVALS_WRAP_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "imageStatus",
+      "sourcePage",
+      "wikiUrl",
+      "sourceImageUrl",
+      "verificationNote"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 7
+  },
+  "rivals-charms": {
+    groupKey: "catalogSection",
+    groupLabel: "Charm source",
+    sectionOrder: RIVALS_CHARM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "imageStatus",
+      "sourcePage",
+      "wikiUrl",
+      "sourceImageUrl",
+      "verificationNote"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    transformItem: withRivalsCharmFields
+  },
+  "rivals-finishers": {
+    groupKey: "catalogSection",
+    groupLabel: "Finisher source",
+    sectionOrder: RIVALS_FINISHER_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "sourceType",
+      "imageStatus",
+      "sourcePage",
+      "wikiUrl",
+      "sourceFile",
+      "sourceImageUrl",
+      "sourceCheckedAt",
+      "verificationNote"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 4
+  },
+  "rivals-emotes": {
+    groupKey: "catalogSection",
+    groupLabel: "Emote source",
+    sectionOrder: RIVALS_EMOTE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "imageStatus", "sourcePage", "wikiUrl", "sourceImageUrl", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 5
+  },
+  "rivals-ugc": {
+    groupKey: "catalogSection",
+    groupLabel: "UGC item type",
+    sectionOrder: RIVALS_UGC_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "priceRobux",
+      "robloxUrl",
+      "imageStatus",
+      "sourcePage",
+      "wikiSourceStatus",
+      "verificationNote"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 5
+  },
   "blox-fruits-accessories": {
     groupKey: "catalogSection",
     groupLabel: "Availability",
@@ -1542,6 +1714,17 @@ function getSeaSection(item: GameDatasetCatalogItem): string | null {
 
 function getCatalogSection(item: GameDatasetCatalogItem): string | null {
   return normalizeValue(item.catalogSection);
+}
+
+function withRivalsCharmFields(item: GameDatasetCatalogItem): GameDatasetCatalogItem {
+  const normalizedScope = normalizeValue(item.weaponScope);
+  const normalizedWeapon = normalizeValue(item.relatedWeapon);
+
+  return {
+    ...item,
+    weaponScope: normalizedScope === "Not listed" ? null : item.weaponScope,
+    relatedWeapon: normalizedWeapon === "Not listed" ? null : item.relatedWeapon
+  };
 }
 
 function getBossStage(item: GameDatasetCatalogItem): string | null {

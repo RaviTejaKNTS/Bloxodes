@@ -1,0 +1,728 @@
+{
+  "easy": [
+    {
+      "id": "RV-E1",
+      "question": "Who created RIVALS on Roblox?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nosniy Games"
+        },
+        {
+          "id": "B",
+          "text": "Uplift Games"
+        },
+        {
+          "id": "C",
+          "text": "Gamer Robot"
+        },
+        {
+          "id": "D",
+          "text": "Twin Atlas"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "RV-E2",
+      "question": "What match format is RIVALS best known for?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Pet hatching races"
+        },
+        {
+          "id": "B",
+          "text": "First-to-5 duels"
+        },
+        {
+          "id": "C",
+          "text": "Restaurant building"
+        },
+        {
+          "id": "D",
+          "text": "Obby speedruns"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "RV-E3",
+      "question": "Which currency is used for many RIVALS weapon and cosmetic unlocks?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bucks"
+        },
+        {
+          "id": "B",
+          "text": "Gems"
+        },
+        {
+          "id": "C",
+          "text": "Keys"
+        },
+        {
+          "id": "D",
+          "text": "Beli"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "RV-E4",
+      "question": "How many main weapon slots make up a normal RIVALS loadout?",
+      "options": [
+        {
+          "id": "A",
+          "text": "One"
+        },
+        {
+          "id": "B",
+          "text": "Two"
+        },
+        {
+          "id": "C",
+          "text": "Three"
+        },
+        {
+          "id": "D",
+          "text": "Four"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "RV-E5",
+      "question": "Which Primary weapon is part of the default free loadout?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Assault Rifle"
+        },
+        {
+          "id": "B",
+          "text": "Distortion"
+        },
+        {
+          "id": "C",
+          "text": "Paintball Gun"
+        },
+        {
+          "id": "D",
+          "text": "Minigun"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "RV-E6",
+      "question": "Which Secondary weapon starts in the free default loadout?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Warper"
+        },
+        {
+          "id": "B",
+          "text": "Handgun"
+        },
+        {
+          "id": "C",
+          "text": "Exogun"
+        },
+        {
+          "id": "D",
+          "text": "Energy Pistols"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "RV-E7",
+      "question": "Pick the default Melee option.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Katana"
+        },
+        {
+          "id": "B",
+          "text": "Scythe"
+        },
+        {
+          "id": "C",
+          "text": "Fists"
+        },
+        {
+          "id": "D",
+          "text": "Maul"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "RV-E8",
+      "question": "Which Utility item is part of the default free loadout?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Jump Pad"
+        },
+        {
+          "id": "B",
+          "text": "War Horn"
+        },
+        {
+          "id": "C",
+          "text": "Medkit"
+        },
+        {
+          "id": "D",
+          "text": "Grenade"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "RV-E9",
+      "question": "What are official RIVALS UGC items?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Roblox avatar items made by Nosniy Games"
+        },
+        {
+          "id": "B",
+          "text": "Private server maps"
+        },
+        {
+          "id": "C",
+          "text": "Temporary match power-ups"
+        },
+        {
+          "id": "D",
+          "text": "Fan-made weapon tier lists"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "RV-E10",
+      "question": "In RIVALS, maps mainly decide where players do what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bake food for pets"
+        },
+        {
+          "id": "B",
+          "text": "Fight duel rounds"
+        },
+        {
+          "id": "C",
+          "text": "Open garden plots"
+        },
+        {
+          "id": "D",
+          "text": "Trade house furniture"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    }
+  ],
+  "medium": [
+    {
+      "id": "RV-M1",
+      "question": "Jump Pad is not a normal Keys unlock. What does it require?",
+      "options": [
+        {
+          "id": "A",
+          "text": "700 Keys"
+        },
+        {
+          "id": "B",
+          "text": "A Ranked Shop purchase"
+        },
+        {
+          "id": "C",
+          "text": "9 Jump Shards"
+        },
+        {
+          "id": "D",
+          "text": "A Season 0 badge"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "RV-M2",
+      "question": "Which Utility weapon is marked as mode-exclusive for RIVALS RNG only?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Grenade"
+        },
+        {
+          "id": "B",
+          "text": "Jump Pad"
+        },
+        {
+          "id": "C",
+          "text": "War Horn"
+        },
+        {
+          "id": "D",
+          "text": "RNG Dice"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "RV-M3",
+      "question": "Warper belongs to which loadout slot?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Secondary"
+        },
+        {
+          "id": "B",
+          "text": "Primary"
+        },
+        {
+          "id": "C",
+          "text": "Melee"
+        },
+        {
+          "id": "D",
+          "text": "Utility"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "RV-M4",
+      "question": "Distortion's use note describes which kind of effect?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Healing teammates over time"
+        },
+        {
+          "id": "B",
+          "text": "Creating a pull-in vortex"
+        },
+        {
+          "id": "C",
+          "text": "Launching a smoke screen"
+        },
+        {
+          "id": "D",
+          "text": "Blocking bullets with a shield"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "RV-M5",
+      "question": "Which map is listed as private-server-only?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Arena"
+        },
+        {
+          "id": "B",
+          "text": "Big Crossroads"
+        },
+        {
+          "id": "C",
+          "text": "Baseplate"
+        },
+        {
+          "id": "D",
+          "text": "Docks"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "RV-M6",
+      "question": "Which Crossroads-style map supports Ranked 3v3?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Big Splash"
+        },
+        {
+          "id": "B",
+          "text": "Big Backrooms"
+        },
+        {
+          "id": "C",
+          "text": "Big Onyx"
+        },
+        {
+          "id": "D",
+          "text": "Big Arena"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "RV-M7",
+      "question": "Which set of team sizes does Ranked use in RIVALS?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1v1, 2v2, and 3v3"
+        },
+        {
+          "id": "B",
+          "text": "4v4 and 5v5 only"
+        },
+        {
+          "id": "C",
+          "text": "Free For All only"
+        },
+        {
+          "id": "D",
+          "text": "2v2v2 and 5v5 only"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "RV-M8",
+      "question": "A player mentions lava hazards on a RIVALS map. Which map name should come to mind first?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Backrooms"
+        },
+        {
+          "id": "B",
+          "text": "Onyx"
+        },
+        {
+          "id": "C",
+          "text": "Chess"
+        },
+        {
+          "id": "D",
+          "text": "Village"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "RV-M9",
+      "question": "Glorious weapon skins in the local skins data come from which source?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Charm Capsule"
+        },
+        {
+          "id": "B",
+          "text": "Starter Bundle"
+        },
+        {
+          "id": "C",
+          "text": "Ranked Shop with Glory"
+        },
+        {
+          "id": "D",
+          "text": "Private-server voting"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "RV-M10",
+      "question": "What does one official RIVALS UGC purchase count toward in the UGC data?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A map ban"
+        },
+        {
+          "id": "B",
+          "text": "A weapon contract reset"
+        },
+        {
+          "id": "C",
+          "text": "A free ranked placement"
+        },
+        {
+          "id": "D",
+          "text": "1 official UGC purchase"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    }
+  ],
+  "hard": [
+    {
+      "id": "RV-H1",
+      "question": "Using the Glory formula, which expression matches the end-of-season formula before the cap?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1250 x ranked wins / 250 + 1250 x final ELO / 3600"
+        },
+        {
+          "id": "B",
+          "text": "1000 x level / 100 + 500 x win streak / 25"
+        },
+        {
+          "id": "C",
+          "text": "2500 x Keys spent / 700 + final damage / 3600"
+        },
+        {
+          "id": "D",
+          "text": "500 x tasks completed / 30 + 500 x duels played / 10"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "RV-H2",
+      "question": "The Glory formula caps at 2500 Glory, and the Ranked Contract can add 500 more. What total does that make?",
+      "options": [
+        {
+          "id": "A",
+          "text": "2500 Glory"
+        },
+        {
+          "id": "B",
+          "text": "3000 Glory"
+        },
+        {
+          "id": "C",
+          "text": "3600 Glory"
+        },
+        {
+          "id": "D",
+          "text": "4100 Glory"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "RV-H3",
+      "question": "Before a starting ranked rank is revealed, how many placement matches do players complete?",
+      "options": [
+        {
+          "id": "A",
+          "text": "3"
+        },
+        {
+          "id": "B",
+          "text": "5"
+        },
+        {
+          "id": "C",
+          "text": "10"
+        },
+        {
+          "id": "D",
+          "text": "15"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "RV-H4",
+      "question": "Which rank threshold pairing matches RIVALS Ranked?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gold I at 600 ELO and Diamond I at 1800 ELO"
+        },
+        {
+          "id": "B",
+          "text": "Onyx I at 2400 ELO and Nemesis at 3000 ELO"
+        },
+        {
+          "id": "C",
+          "text": "Platinum I at 1200 ELO and Archnemesis at 3600 ELO"
+        },
+        {
+          "id": "D",
+          "text": "Onyx I at 3000 ELO and Nemesis at 3600 ELO"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "RV-H5",
+      "question": "In Ranked banning, what can each team ban before the match?",
+      "options": [
+        {
+          "id": "A",
+          "text": "One map and two weapons"
+        },
+        {
+          "id": "B",
+          "text": "Two maps and one utility"
+        },
+        {
+          "id": "C",
+          "text": "Every default weapon"
+        },
+        {
+          "id": "D",
+          "text": "One rank tier and one map"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "RV-H6",
+      "question": "Pick the map that appears in the Ranked 1v1 pool.",
+      "options": [
+        {
+          "id": "A",
+          "text": "Battleground"
+        },
+        {
+          "id": "B",
+          "text": "Dimension"
+        },
+        {
+          "id": "C",
+          "text": "Big Splash"
+        },
+        {
+          "id": "D",
+          "text": "Baseplate"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "RV-H7",
+      "question": "Warper's weapon contract families are a good detail check. Which pair is listed?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Damage Dealt and Playtime"
+        },
+        {
+          "id": "B",
+          "text": "Heals Given and Playtime"
+        },
+        {
+          "id": "C",
+          "text": "Portals Spawned and Playtime"
+        },
+        {
+          "id": "D",
+          "text": "Players Bounced and Playtime"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "RV-H8",
+      "question": "Which weapon is a Contraband Utility with a Robux bundle route and an `Enemies hooked` contract family?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Warpstone"
+        },
+        {
+          "id": "B",
+          "text": "Medkit"
+        },
+        {
+          "id": "C",
+          "text": "Subspace Tripmine"
+        },
+        {
+          "id": "D",
+          "text": "Grappler"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "RV-H9",
+      "question": "Among normal non-mode-exclusive weapons in the local weapons data, which one has the highest listed key cost?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Distortion at 700 Keys"
+        },
+        {
+          "id": "B",
+          "text": "Warper at 650 Keys"
+        },
+        {
+          "id": "C",
+          "text": "Permafrost at 600 Keys"
+        },
+        {
+          "id": "D",
+          "text": "Maul at 550 Keys"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "RV-H10",
+      "question": "Ranked queue rules keep party members within what range?",
+      "options": [
+        {
+          "id": "A",
+          "text": "One tier or 100 ELO"
+        },
+        {
+          "id": "B",
+          "text": "Two tiers or 400 ELO"
+        },
+        {
+          "id": "C",
+          "text": "Three tiers or 600 ELO"
+        },
+        {
+          "id": "D",
+          "text": "Four tiers or 800 ELO"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    }
+  ]
+}

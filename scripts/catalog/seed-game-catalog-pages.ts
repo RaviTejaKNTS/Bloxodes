@@ -104,7 +104,18 @@ async function readFinalJsonOverride(config: GameDatasetCatalogConfig) {
   if (!finalJsonRoot) return null;
 
   const root = path.isAbsolute(finalJsonRoot) ? finalJsonRoot : repoPath(finalJsonRoot);
-  const finalJsonPath = path.join(root, config.code, "final.json");
+  const candidatePaths = [
+    path.join(root, config.code, "final.json"),
+    path.join(root, config.slug, "final.json"),
+    path.join(root, "final.json")
+  ];
+  const finalJsonPath = await findExistingFile(candidatePaths);
+  if (!finalJsonPath) {
+    throw new Error(
+      `Failed to find final JSON override for ${config.code}. Checked: ${candidatePaths.join(", ")}`
+    );
+  }
+
   try {
     const parsed = JSON.parse(await fs.readFile(finalJsonPath, "utf8")) as Partial<
       Pick<
@@ -129,6 +140,18 @@ async function readFinalJsonOverride(config: GameDatasetCatalogConfig) {
   } catch (error) {
     throw new Error(`Failed to read final JSON override for ${config.code} at ${finalJsonPath}: ${String(error)}`);
   }
+}
+
+async function findExistingFile(candidatePaths: string[]) {
+  for (const candidatePath of candidatePaths) {
+    try {
+      const stat = await fs.stat(candidatePath);
+      if (stat.isFile()) return candidatePath;
+    } catch {
+      // Keep trying the next supported workspace shape.
+    }
+  }
+  return null;
 }
 
 function getTargetGroups(targetCatalogs: GameDatasetCatalogConfig[]) {

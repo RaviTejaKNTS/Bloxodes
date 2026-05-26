@@ -25,6 +25,10 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
   - Dataset-backed Blox Fruits wiki/catalog content, including fruits, swords, guns, accessories, materials, fighting styles, quests, enemies, titles, boats, Aura, Instinct, bosses, NPCs, locations, races, sea events, abilities, item index entries, and game info.
 - `data/The Forge/*.json`
   - Structured catalog and calculator data used by Forge catalog pages and Forge tools.
+- `data/RIVALS/*`
+  - Dataset-backed RIVALS wiki/catalog content, including weapons, maps, skins, wraps, charms, finishers, emotes, official UGC items, and `quiz.json`.
+  - `quiz.json` is the local question pool for `/quizzes/rivals`; follow `agents/content/page-types/quizzes.md` when editing it.
+  - Keep RIVALS catalogs focused on durable in-game item collections. Do not add gamepasses, badges, servers, current event reward tracks, or ranked-season reward lists as catalog datasets.
 - `data/Wizard Alchemy/*`
   - Dataset-backed Wizard Alchemy wiki/catalog content, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
   - `quiz.json` is the local question pool for `/quizzes/wizard-alchemy`; follow `agents/content/page-types/quizzes.md` when editing it.
