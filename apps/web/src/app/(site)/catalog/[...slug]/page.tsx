@@ -21,6 +21,14 @@ const RESERVED_CATALOG_PREFIXES = [
   "free-roblox-items",
   "roblox-free-items",
   "roblox-music-ids",
+  "roblox-items-and-bundles",
+  "roblox-avatar-items",
+  "roblox-accessories",
+  "roblox-clothing",
+  "roblox-body-parts",
+  "roblox-emotes",
+  "roblox-animations",
+  "roblox-makeup",
   "the-forge",
   "grow-a-garden"
 ];

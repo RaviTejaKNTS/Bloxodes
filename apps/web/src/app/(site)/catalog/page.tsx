@@ -5,6 +5,12 @@ import { CatalogCard } from "@/components/CatalogCard";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
+import {
+  AVATAR_CATALOG_FAMILY_CODES,
+  AVATAR_CATALOG_LEGACY_MASTER_CODE,
+  AVATAR_CATALOG_MASTER_CODE,
+  AVATAR_CATALOG_MASTER_TITLE
+} from "@/lib/roblox-avatar-catalog";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 
 export const revalidate = 0;
@@ -28,6 +34,43 @@ export const metadata: Metadata = {
 };
 
 const CATALOG_CARD_TONES = ["indigo", "amber", "emerald"] as const;
+const GENERAL_CATALOG_ORDER = [
+  AVATAR_CATALOG_MASTER_CODE,
+  "roblox-music-ids",
+  "free-roblox-items",
+  "roblox-decal-ids",
+  "roblox-color-codes",
+  "admin-commands"
+];
+const AVATAR_CATALOG_CHILD_CODES = new Set<string>(
+  AVATAR_CATALOG_FAMILY_CODES.filter((code) => code !== AVATAR_CATALOG_MASTER_CODE)
+);
+
+type CatalogIndexCard = {
+  id: string;
+  href: string;
+  title: string;
+  description: string;
+  category: string;
+  metricLabel: null;
+  metricValue: null;
+  tileLabel: string;
+  coverImage: string | null;
+  tone: (typeof CATALOG_CARD_TONES)[number];
+  updatedLabel: string | null;
+  updatedAt: string | null;
+  universeId: number | null;
+  universeName: string | null;
+};
+
+function normalizeCatalogIndexCode(code: string): string {
+  return code === AVATAR_CATALOG_LEGACY_MASTER_CODE ? AVATAR_CATALOG_MASTER_CODE : code;
+}
+
+function shouldShowOnCatalogIndex(card: CatalogIndexCard): boolean {
+  if (card.universeId) return false;
+  return !AVATAR_CATALOG_CHILD_CODES.has(card.id);
+}
 
 function parseDate(value: string | null): number | null {
   if (!value) return null;
@@ -51,19 +94,40 @@ function summarizeCatalogDescription(value: string | null | undefined): string {
   return trimmed && trimmed.length > 0 ? trimmed : "Open this Roblox catalog hub for the latest published content.";
 }
 
+function getOrderedCatalogCards(cards: CatalogIndexCard[], order: readonly string[]): CatalogIndexCard[] {
+  const orderMap = new Map(order.map((code, index) => [code, index]));
+  return [...cards].sort((a, b) => {
+    const left = orderMap.get(a.id) ?? Number.MAX_SAFE_INTEGER;
+    const right = orderMap.get(b.id) ?? Number.MAX_SAFE_INTEGER;
+    if (left !== right) return left - right;
+
+    const leftUpdated = parseDate(a.updatedAt) ?? 0;
+    const rightUpdated = parseDate(b.updatedAt) ?? 0;
+    if (leftUpdated !== rightUpdated) return rightUpdated - leftUpdated;
+
+    return a.title.localeCompare(b.title);
+  });
+}
+
 async function buildCatalogCards() {
   const pages = await listPublishedTopLevelCatalogPages();
-  const results = pages.map((entry, index) => {
+  const resultsById = new Map<string, CatalogIndexCard>();
+  for (const [index, entry] of pages.entries()) {
     const updatedAt = entry.content_updated_at ?? entry.updated_at ?? entry.published_at ?? entry.created_at ?? null;
-    return {
-      id: entry.code,
-      href: `/catalog/${entry.code}`,
-      title: entry.title,
-      description: summarizeCatalogDescription(entry.meta_description),
+    const normalizedCode = normalizeCatalogIndexCode(entry.code);
+    const existing = resultsById.get(normalizedCode);
+    const next: CatalogIndexCard = {
+      id: normalizedCode,
+      href: `/catalog/${normalizedCode}`,
+      title: normalizedCode === AVATAR_CATALOG_MASTER_CODE ? AVATAR_CATALOG_MASTER_TITLE : entry.title,
+      description:
+        normalizedCode === AVATAR_CATALOG_MASTER_CODE
+          ? "Browse Roblox Marketplace items and bundles by type, price, creator, sale status, favorites, and limited state."
+          : summarizeCatalogDescription(entry.meta_description),
       category: "Catalog",
       metricLabel: null,
       metricValue: null,
-      tileLabel: entry.title,
+      tileLabel: normalizedCode === AVATAR_CATALOG_MASTER_CODE ? AVATAR_CATALOG_MASTER_TITLE : entry.title,
       coverImage: entry.thumb_url ?? null,
       tone: CATALOG_CARD_TONES[index % CATALOG_CARD_TONES.length],
       updatedLabel: formatUpdatedLabel(updatedAt),
@@ -71,16 +135,29 @@ async function buildCatalogCards() {
       universeId: entry.universe_id ?? null,
       universeName: entry.universe_name ?? null
     };
-  });
+    if (!existing || (parseDate(next.updatedAt) ?? 0) > (parseDate(existing.updatedAt) ?? 0)) {
+      resultsById.set(normalizedCode, next);
+    }
+  }
 
-  const latestUpdated = latestTimestamp(results.map((entry) => parseDate(entry.updatedAt)));
-  const genericCards = results.filter((entry) => !entry.universeId);
+  const results = Array.from(resultsById.values());
+
+  const groupedItems: CatalogIndexCard[] = [];
+  for (const entry of results) {
+    if (entry.universeId) groupedItems.push(entry);
+  }
+  const visibleResults = results.filter((entry) => shouldShowOnCatalogIndex(entry) || entry.universeId);
+  const latestUpdated = latestTimestamp(visibleResults.map((entry) => parseDate(entry.updatedAt)));
+  const genericCards = getOrderedCatalogCards(
+    results.filter(shouldShowOnCatalogIndex),
+    GENERAL_CATALOG_ORDER
+  );
   const groupedMap = new Map<
     string,
     {
       universeId: number;
       gameName: string;
-      items: typeof results;
+      items: CatalogIndexCard[];
       latestUpdatedAt: number | null;
     }
   >();
@@ -119,7 +196,7 @@ async function buildCatalogCards() {
   return {
     genericCards,
     groupedCatalogs,
-    total: results.length,
+    total: genericCards.length + groupedItems.length,
     refreshedLabel:
       typeof latestUpdated === "number" ? formatDistanceToNow(new Date(latestUpdated), { addSuffix: true }) : null
   };

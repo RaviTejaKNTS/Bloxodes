@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { purgeCloudflarePublicCache, warmCloudflarePaths } from "@/lib/cloudflare-cache";
 import { cacheTagsForEvent, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
+import { AVATAR_CATALOG_MASTER_CODE, buildAvatarCatalogPath } from "@/lib/roblox-avatar-catalog";
 import { supabaseAdmin } from "@/lib/supabase";
 
 type SinglePayload = PublicCacheEvent;
@@ -28,6 +29,16 @@ const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
 const FREE_ITEMS_CATALOG_PREFIXES = [FREE_ITEMS_CATALOG_CODE, LEGACY_FREE_ITEMS_CATALOG_CODE];
 const FREE_ITEMS_BASE_PATH = `/catalog/${FREE_ITEMS_CATALOG_CODE}`;
 const MUSIC_BASE_PATH = "/catalog/roblox-music-ids";
+const AVATAR_CATALOG_PREFIXES = [
+  "roblox-items-and-bundles",
+  "roblox-avatar-items",
+  "roblox-accessories",
+  "roblox-clothing",
+  "roblox-body-parts",
+  "roblox-emotes",
+  "roblox-animations",
+  "roblox-makeup"
+];
 const SITEMAP_INDEX_PATH = "/sitemap.xml";
 const ARTICLES_SITEMAP_PATH = "/sitemaps/articles.xml";
 const CODES_SITEMAP_PATH = "/sitemaps/codes.xml";
@@ -230,6 +241,41 @@ function revalidateForFreeItems(slug = FREE_ITEMS_CATALOG_CODE) {
       CATALOG_SITEMAP_PATH
     ],
     ["free-items-catalog", "home"]
+  );
+}
+
+function isAvatarCatalogSlug(slug: string) {
+  return AVATAR_CATALOG_PREFIXES.some((prefix) => slug === prefix || slug.startsWith(`${prefix}/`));
+}
+
+function revalidateForAvatarCatalog(slug: string) {
+  const normalizedSlug = normalizeSlug(slug);
+  const [prefix] = normalizedSlug.split("/");
+  const basePath = buildAvatarCatalogPath(normalizedSlug);
+  const legacyBasePath = `/catalog/${normalizedSlug}`;
+  const routePatterns = [
+    `/catalog/${AVATAR_CATALOG_MASTER_CODE}/[[...segments]]`,
+    prefix ? `/catalog/${prefix}/[[...segments]]` : ""
+  ].filter(Boolean) as string[];
+
+  return applyRevalidation(
+    [
+      "/catalog",
+      ...paginatedIndexPaths(basePath),
+      ...(legacyBasePath !== basePath ? paginatedIndexPaths(legacyBasePath) : []),
+      ...routePatterns,
+      "/",
+      SITEMAP_INDEX_PATH,
+      CATALOG_SITEMAP_PATH
+    ].filter(Boolean) as string[],
+    [
+      "avatar-catalog",
+      normalizedSlug ? `avatar-catalog:${normalizedSlug}` : "",
+      prefix ? `avatar-catalog:${prefix}` : "",
+      normalizedSlug ? `catalog:${normalizedSlug}` : "",
+      "catalog-index",
+      "home"
+    ]
   );
 }
 
@@ -515,6 +561,9 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       }
       if (isFreeItemsCatalogSlug(slug)) {
         purgePaths = [...purgePaths, ...revalidateForFreeItems(slug)];
+      }
+      if (isAvatarCatalogSlug(slug)) {
+        purgePaths = [...purgePaths, ...revalidateForAvatarCatalog(slug)];
       }
       purgePaths = [...purgePaths, ...revalidateForCatalog(slug)];
       break;

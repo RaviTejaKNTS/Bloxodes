@@ -22,6 +22,18 @@ export type PublicCacheEvent = {
 const MUSIC_CATALOG_CODE = "roblox-music-ids";
 const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
 const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
+const AVATAR_CATALOG_MASTER_CODE = "roblox-items-and-bundles";
+const AVATAR_CATALOG_LEGACY_MASTER_CODE = "roblox-avatar-items";
+const AVATAR_CATALOG_PREFIXES = [
+  AVATAR_CATALOG_MASTER_CODE,
+  AVATAR_CATALOG_LEGACY_MASTER_CODE,
+  "roblox-accessories",
+  "roblox-clothing",
+  "roblox-body-parts",
+  "roblox-emotes",
+  "roblox-animations",
+  "roblox-makeup"
+];
 
 function unique(values: string[]) {
   return Array.from(new Set(values.map((value) => value.trim()).filter(Boolean)));
@@ -76,6 +88,34 @@ function musicScopeTags(slug: string) {
   if (section === "artists" && value) tags.push(`music-artist:${value}`);
 
   return tags;
+}
+
+function normalizeAvatarCatalogSlugForTags(slug: string) {
+  const parts = normalizeCacheSlug(slug).split("/").filter(Boolean);
+  const [prefix, ...rest] = parts;
+
+  if (prefix === AVATAR_CATALOG_MASTER_CODE || prefix === AVATAR_CATALOG_LEGACY_MASTER_CODE) {
+    return rest.length ? rest.join("/") : AVATAR_CATALOG_MASTER_CODE;
+  }
+
+  return parts.join("/");
+}
+
+function isAvatarCatalogSlug(slug: string) {
+  const normalized = normalizeAvatarCatalogSlugForTags(slug);
+  return AVATAR_CATALOG_PREFIXES.some((prefix) => normalized === prefix || normalized.startsWith(`${prefix}/`));
+}
+
+function avatarCatalogScopeTags(slug: string) {
+  const normalized = normalizeAvatarCatalogSlugForTags(slug);
+  const [prefix] = normalized.split("/");
+  return unique([
+    "avatar-catalog",
+    slugTag("avatar-catalog", AVATAR_CATALOG_MASTER_CODE),
+    slugTag("avatar-catalog", normalized),
+    prefix ? slugTag("avatar-catalog", prefix) : "",
+    slugTag("catalog", normalized)
+  ]);
 }
 
 export function cacheTagsForPath(pathname: string) {
@@ -157,6 +197,7 @@ export function cacheTagsForPath(pathname: string) {
     if (!second || second === "page") return unique([...tags, "catalog-index"]);
 
     const catalogSlug = segments.slice(1).join("/");
+    const catalogSlugForTags = catalogSlug.replace(/\/page(?:\/\d+)?$/i, "");
     const catalogTags = [...tags, "catalog", slugTag("catalog", second)];
 
     if (second === FREE_ITEMS_CATALOG_CODE || second === LEGACY_FREE_ITEMS_CATALOG_CODE) {
@@ -171,6 +212,10 @@ export function cacheTagsForPath(pathname: string) {
       catalogTags.push(...musicScopeTags(catalogSlug));
       if (third === "genres" && fourth) catalogTags.push(`music-genre:${fourth}`);
       if (third === "artists" && fourth) catalogTags.push(`music-artist:${fourth}`);
+    }
+
+    if (isAvatarCatalogSlug(catalogSlugForTags)) {
+      catalogTags.push(...avatarCatalogScopeTags(catalogSlugForTags));
     }
 
     return unique(catalogTags);
@@ -255,6 +300,10 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         normalized.startsWith(`${LEGACY_FREE_ITEMS_CATALOG_CODE}/`)
       ) {
         tags.push(...freeItemScopeTags(normalized));
+      }
+
+      if (isAvatarCatalogSlug(normalized)) {
+        tags.push(...avatarCatalogScopeTags(normalized));
       }
 
       return unique(tags);

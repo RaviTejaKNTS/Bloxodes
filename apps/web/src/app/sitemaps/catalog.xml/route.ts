@@ -1,4 +1,5 @@
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
+import { buildAvatarCatalogPath, isAvatarCatalogCode } from "@/lib/roblox-avatar-catalog";
 import { supabaseAdmin } from "@/lib/supabase";
 import { NextResponse } from "next/server";
 
@@ -32,7 +33,7 @@ export async function GET() {
       const code = row.code?.trim();
       if (!code) continue;
 
-      const path = `/catalog/${code}`;
+      const path = isAvatarCatalogCode(code) ? buildAvatarCatalogPath(code) : `/catalog/${code}`;
       const updated = row.content_updated_at ?? row.updated_at ?? row.published_at;
       pageMap.set(path, {
         loc: withSiteUrl(path),
