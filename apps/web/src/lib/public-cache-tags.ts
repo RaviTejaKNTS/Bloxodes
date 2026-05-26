@@ -24,9 +24,7 @@ const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
 const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
 const AVATAR_CATALOG_MASTER_CODE = "roblox-items-and-bundles";
 const AVATAR_CATALOG_LEGACY_MASTER_CODE = "roblox-avatar-items";
-const AVATAR_CATALOG_PREFIXES = [
-  AVATAR_CATALOG_MASTER_CODE,
-  AVATAR_CATALOG_LEGACY_MASTER_CODE,
+const AVATAR_CATALOG_LEGACY_PREFIXES = [
   "roblox-accessories",
   "roblox-clothing",
   "roblox-body-parts",
@@ -94,8 +92,16 @@ function normalizeAvatarCatalogSlugForTags(slug: string) {
   const parts = normalizeCacheSlug(slug).split("/").filter(Boolean);
   const [prefix, ...rest] = parts;
 
-  if (prefix === AVATAR_CATALOG_MASTER_CODE || prefix === AVATAR_CATALOG_LEGACY_MASTER_CODE) {
-    return rest.length ? rest.join("/") : AVATAR_CATALOG_MASTER_CODE;
+  if (prefix === AVATAR_CATALOG_MASTER_CODE) {
+    return parts.join("/");
+  }
+
+  if (prefix === AVATAR_CATALOG_LEGACY_MASTER_CODE) {
+    return [AVATAR_CATALOG_MASTER_CODE, ...rest].join("/");
+  }
+
+  if (AVATAR_CATALOG_LEGACY_PREFIXES.some((entry) => entry === prefix)) {
+    return [AVATAR_CATALOG_MASTER_CODE, ...parts].join("/");
   }
 
   return parts.join("/");
@@ -103,17 +109,18 @@ function normalizeAvatarCatalogSlugForTags(slug: string) {
 
 function isAvatarCatalogSlug(slug: string) {
   const normalized = normalizeAvatarCatalogSlugForTags(slug);
-  return AVATAR_CATALOG_PREFIXES.some((prefix) => normalized === prefix || normalized.startsWith(`${prefix}/`));
+  return normalized === AVATAR_CATALOG_MASTER_CODE || normalized.startsWith(`${AVATAR_CATALOG_MASTER_CODE}/`);
 }
 
 function avatarCatalogScopeTags(slug: string) {
   const normalized = normalizeAvatarCatalogSlugForTags(slug);
-  const [prefix] = normalized.split("/");
+  const parts = normalized.split("/").filter(Boolean);
+  const familyCode = parts.length > 1 ? parts.slice(0, 2).join("/") : "";
   return unique([
     "avatar-catalog",
     slugTag("avatar-catalog", AVATAR_CATALOG_MASTER_CODE),
     slugTag("avatar-catalog", normalized),
-    prefix ? slugTag("avatar-catalog", prefix) : "",
+    familyCode ? slugTag("avatar-catalog", familyCode) : "",
     slugTag("catalog", normalized)
   ]);
 }

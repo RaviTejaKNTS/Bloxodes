@@ -7,6 +7,7 @@ import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
 import {
   AVATAR_CATALOG_FAMILY_CODES,
+  AVATAR_CATALOG_LEGACY_FAMILY_CODES,
   AVATAR_CATALOG_LEGACY_MASTER_CODE,
   AVATAR_CATALOG_MASTER_CODE,
   AVATAR_CATALOG_MASTER_TITLE
@@ -43,7 +44,10 @@ const GENERAL_CATALOG_ORDER = [
   "admin-commands"
 ];
 const AVATAR_CATALOG_CHILD_CODES = new Set<string>(
-  AVATAR_CATALOG_FAMILY_CODES.filter((code) => code !== AVATAR_CATALOG_MASTER_CODE)
+  [
+    ...AVATAR_CATALOG_FAMILY_CODES.filter((code) => code !== AVATAR_CATALOG_MASTER_CODE),
+    ...AVATAR_CATALOG_LEGACY_FAMILY_CODES
+  ]
 );
 
 type CatalogIndexCard = {

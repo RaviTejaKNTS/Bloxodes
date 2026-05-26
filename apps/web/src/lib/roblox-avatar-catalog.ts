@@ -124,14 +124,34 @@ const MAKEUP_ASSET_TYPES = [76, 77, 88, 89, 90];
 export const AVATAR_CATALOG_MASTER_CODE = "roblox-items-and-bundles";
 export const AVATAR_CATALOG_LEGACY_MASTER_CODE = "roblox-avatar-items";
 export const AVATAR_CATALOG_MASTER_TITLE = "Roblox Items and Bundles";
+const AVATAR_ACCESSORIES_SLUG = "roblox-accessories";
+const AVATAR_CLOTHING_SLUG = "roblox-clothing";
+const AVATAR_BODY_PARTS_SLUG = "roblox-body-parts";
+const AVATAR_EMOTES_SLUG = "roblox-emotes";
+const AVATAR_ANIMATIONS_SLUG = "roblox-animations";
+const AVATAR_MAKEUP_SLUG = "roblox-makeup";
+export const AVATAR_ACCESSORIES_CODE = `${AVATAR_CATALOG_MASTER_CODE}/${AVATAR_ACCESSORIES_SLUG}`;
+export const AVATAR_CLOTHING_CODE = `${AVATAR_CATALOG_MASTER_CODE}/${AVATAR_CLOTHING_SLUG}`;
+export const AVATAR_BODY_PARTS_CODE = `${AVATAR_CATALOG_MASTER_CODE}/${AVATAR_BODY_PARTS_SLUG}`;
+export const AVATAR_EMOTES_CODE = `${AVATAR_CATALOG_MASTER_CODE}/${AVATAR_EMOTES_SLUG}`;
+export const AVATAR_ANIMATIONS_CODE = `${AVATAR_CATALOG_MASTER_CODE}/${AVATAR_ANIMATIONS_SLUG}`;
+export const AVATAR_MAKEUP_CODE = `${AVATAR_CATALOG_MASTER_CODE}/${AVATAR_MAKEUP_SLUG}`;
+export const AVATAR_CATALOG_LEGACY_FAMILY_CODES = [
+  AVATAR_ACCESSORIES_SLUG,
+  AVATAR_CLOTHING_SLUG,
+  AVATAR_BODY_PARTS_SLUG,
+  AVATAR_EMOTES_SLUG,
+  AVATAR_ANIMATIONS_SLUG,
+  AVATAR_MAKEUP_SLUG
+] as const;
 export const AVATAR_CATALOG_FAMILY_CODES = [
   AVATAR_CATALOG_MASTER_CODE,
-  "roblox-accessories",
-  "roblox-clothing",
-  "roblox-body-parts",
-  "roblox-emotes",
-  "roblox-animations",
-  "roblox-makeup"
+  AVATAR_ACCESSORIES_CODE,
+  AVATAR_CLOTHING_CODE,
+  AVATAR_BODY_PARTS_CODE,
+  AVATAR_EMOTES_CODE,
+  AVATAR_ANIMATIONS_CODE,
+  AVATAR_MAKEUP_CODE
 ] as const;
 
 function normalizeAvatarCatalogPathParts(value: string): string[] {
@@ -151,7 +171,8 @@ export function isAvatarCatalogCode(value: string): boolean {
   const [prefix] = normalizeAvatarCatalogPathParts(value);
   return (
     prefix === AVATAR_CATALOG_LEGACY_MASTER_CODE ||
-    AVATAR_CATALOG_FAMILY_CODES.some((code) => code === prefix)
+    prefix === AVATAR_CATALOG_MASTER_CODE ||
+    AVATAR_CATALOG_LEGACY_FAMILY_CODES.some((code) => code === prefix)
   );
 }
 
@@ -164,7 +185,7 @@ export function buildAvatarCatalogPath(code: string, trailingSegments: string[] 
     return joinCatalogPath(["catalog", AVATAR_CATALOG_MASTER_CODE, ...rest, ...normalizedTrailing]);
   }
 
-  if (AVATAR_CATALOG_FAMILY_CODES.some((familyCode) => familyCode === prefix)) {
+  if (AVATAR_CATALOG_LEGACY_FAMILY_CODES.some((familyCode) => familyCode === prefix)) {
     return joinCatalogPath(["catalog", AVATAR_CATALOG_MASTER_CODE, ...parts, ...normalizedTrailing]);
   }
 
@@ -196,63 +217,63 @@ export function buildAvatarCatalogRedirectHref(
 export const ACCESSORY_CHILDREN: AvatarCatalogChild[] = [
   {
     slug: "hair-accessories",
-    code: "roblox-accessories/hair-accessories",
+    code: `${AVATAR_ACCESSORIES_CODE}/hair-accessories`,
     title: "Roblox Hair Accessories",
     description: "Hair items for layered and classic Roblox avatars.",
     scope: { kind: "subcategory", category: "Body", subcategory: "HairAccessories" }
   },
   {
     slug: "head-accessories",
-    code: "roblox-accessories/head-accessories",
+    code: `${AVATAR_ACCESSORIES_CODE}/head-accessories`,
     title: "Roblox Head Accessories",
     description: "Hats, helmets, crowns, and other head-slot accessories.",
     scope: { kind: "subcategory", category: "Accessories", subcategory: "HeadAccessories" }
   },
   {
     slug: "face-accessories",
-    code: "roblox-accessories/face-accessories",
+    code: `${AVATAR_ACCESSORIES_CODE}/face-accessories`,
     title: "Roblox Face Accessories",
     description: "Masks, glasses, facial add-ons, and face-slot avatar items.",
     scope: { kind: "subcategory", category: "Accessories", subcategory: "FaceAccessories" }
   },
   {
     slug: "neck-accessories",
-    code: "roblox-accessories/neck-accessories",
+    code: `${AVATAR_ACCESSORIES_CODE}/neck-accessories`,
     title: "Roblox Neck Accessories",
     description: "Neck-slot accessories such as chains, scarves, collars, and ties.",
     scope: { kind: "subcategory", category: "Accessories", subcategory: "NeckAccessories" }
   },
   {
     slug: "shoulder-accessories",
-    code: "roblox-accessories/shoulder-accessories",
+    code: `${AVATAR_ACCESSORIES_CODE}/shoulder-accessories`,
     title: "Roblox Shoulder Accessories",
     description: "Shoulder pets, shoulder props, and avatar shoulder-slot items.",
     scope: { kind: "subcategory", category: "Accessories", subcategory: "ShoulderAccessories" }
   },
   {
     slug: "front-accessories",
-    code: "roblox-accessories/front-accessories",
+    code: `${AVATAR_ACCESSORIES_CODE}/front-accessories`,
     title: "Roblox Front Accessories",
     description: "Front-slot accessories that sit on the chest or front of an avatar.",
     scope: { kind: "subcategory", category: "Accessories", subcategory: "FrontAccessories" }
   },
   {
     slug: "back-accessories",
-    code: "roblox-accessories/back-accessories",
+    code: `${AVATAR_ACCESSORIES_CODE}/back-accessories`,
     title: "Roblox Back Accessories",
     description: "Wings, backpacks, tails, capes, and other back-slot accessories.",
     scope: { kind: "subcategory", category: "Accessories", subcategory: "BackAccessories" }
   },
   {
     slug: "waist-accessories",
-    code: "roblox-accessories/waist-accessories",
+    code: `${AVATAR_ACCESSORIES_CODE}/waist-accessories`,
     title: "Roblox Waist Accessories",
     description: "Belts, side props, tails, and other waist-slot accessories.",
     scope: { kind: "subcategory", category: "Accessories", subcategory: "WaistAccessories" }
   },
   {
     slug: "gear",
-    code: "roblox-accessories/gear",
+    code: `${AVATAR_ACCESSORIES_CODE}/gear`,
     title: "Roblox Gear",
     description: "Roblox gear items from the Marketplace.",
     scope: { kind: "subcategory", category: "Accessories", subcategory: "Gear" }
@@ -262,77 +283,77 @@ export const ACCESSORY_CHILDREN: AvatarCatalogChild[] = [
 export const CLOTHING_CHILDREN: AvatarCatalogChild[] = [
   {
     slug: "layered-t-shirts",
-    code: "roblox-clothing/layered-t-shirts",
+    code: `${AVATAR_CLOTHING_CODE}/layered-t-shirts`,
     title: "Roblox Layered T-Shirts",
     description: "Layered t-shirt accessories for 3D avatar clothing.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "TShirtAccessories" }
   },
   {
     slug: "shirts",
-    code: "roblox-clothing/shirts",
+    code: `${AVATAR_CLOTHING_CODE}/shirts`,
     title: "Roblox Layered Shirts",
     description: "Layered shirt accessories that fit over Roblox avatar bodies.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "ShirtAccessories" }
   },
   {
     slug: "sweaters",
-    code: "roblox-clothing/sweaters",
+    code: `${AVATAR_CLOTHING_CODE}/sweaters`,
     title: "Roblox Sweaters",
     description: "Layered sweaters and knitwear for Roblox avatars.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "SweaterAccessories" }
   },
   {
     slug: "jackets",
-    code: "roblox-clothing/jackets",
+    code: `${AVATAR_CLOTHING_CODE}/jackets`,
     title: "Roblox Jackets",
     description: "Layered jackets, coats, hoodies, and outerwear.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "JacketAccessories" }
   },
   {
     slug: "pants",
-    code: "roblox-clothing/pants",
+    code: `${AVATAR_CLOTHING_CODE}/pants`,
     title: "Roblox Layered Pants",
     description: "Layered pants for modern Roblox avatar outfits.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "PantsAccessories" }
   },
   {
     slug: "shorts",
-    code: "roblox-clothing/shorts",
+    code: `${AVATAR_CLOTHING_CODE}/shorts`,
     title: "Roblox Shorts",
     description: "Layered shorts for Roblox avatar outfits.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "ShortsAccessories" }
   },
   {
     slug: "dresses-skirts",
-    code: "roblox-clothing/dresses-skirts",
+    code: `${AVATAR_CLOTHING_CODE}/dresses-skirts`,
     title: "Roblox Dresses and Skirts",
     description: "Layered dresses and skirt accessories for Roblox avatars.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "DressSkirtAccessories" }
   },
   {
     slug: "shoes",
-    code: "roblox-clothing/shoes",
+    code: `${AVATAR_CLOTHING_CODE}/shoes`,
     title: "Roblox Shoes",
     description: "Shoe bundles for Roblox avatar outfits.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "ShoesBundles" }
   },
   {
     slug: "classic-shirts",
-    code: "roblox-clothing/classic-shirts",
+    code: `${AVATAR_CLOTHING_CODE}/classic-shirts`,
     title: "Roblox Classic Shirts",
     description: "Classic 2D shirt assets for Roblox avatars.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "ClassicShirts" }
   },
   {
     slug: "classic-t-shirts",
-    code: "roblox-clothing/classic-t-shirts",
+    code: `${AVATAR_CLOTHING_CODE}/classic-t-shirts`,
     title: "Roblox Classic T-Shirts",
     description: "Classic t-shirt image assets for Roblox avatars.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "ClassicTShirts" }
   },
   {
     slug: "classic-pants",
-    code: "roblox-clothing/classic-pants",
+    code: `${AVATAR_CLOTHING_CODE}/classic-pants`,
     title: "Roblox Classic Pants",
     description: "Classic 2D pants assets for Roblox avatars.",
     scope: { kind: "subcategory", category: "Clothing", subcategory: "ClassicPants" }
@@ -342,28 +363,28 @@ export const CLOTHING_CHILDREN: AvatarCatalogChild[] = [
 export const BODY_CHILDREN: AvatarCatalogChild[] = [
   {
     slug: "full-bodies",
-    code: "roblox-body-parts/full-bodies",
+    code: `${AVATAR_BODY_PARTS_CODE}/full-bodies`,
     title: "Roblox Full Bodies",
     description: "Full avatar body bundles from the Roblox marketplace.",
     scope: { kind: "subcategory", category: "Body", subcategory: "BodyPartsBundles" }
   },
   {
     slug: "dynamic-heads",
-    code: "roblox-body-parts/dynamic-heads",
+    code: `${AVATAR_BODY_PARTS_CODE}/dynamic-heads`,
     title: "Roblox Dynamic Heads",
     description: "Dynamic heads with modern facial animation support.",
     scope: { kind: "subcategory", category: "Body", subcategory: "DynamicHeads" }
   },
   {
     slug: "classic-heads",
-    code: "roblox-body-parts/classic-heads",
+    code: `${AVATAR_BODY_PARTS_CODE}/classic-heads`,
     title: "Roblox Classic Heads",
     description: "Classic head shapes for Roblox avatars.",
     scope: { kind: "subcategory", category: "Body", subcategory: "Heads" }
   },
   {
     slug: "classic-faces",
-    code: "roblox-body-parts/classic-faces",
+    code: `${AVATAR_BODY_PARTS_CODE}/classic-faces`,
     title: "Roblox Classic Faces",
     description: "Classic face assets for Roblox avatars.",
     scope: { kind: "subcategory", category: "Body", subcategory: "Faces" }
@@ -379,43 +400,43 @@ export const TOP_LEVEL_AVATAR_CATALOGS: AvatarCatalogConfig[] = [
     scope: { kind: "avatar" },
     children: [
       {
-        slug: "roblox-accessories",
-        code: "roblox-accessories",
+        slug: AVATAR_ACCESSORIES_SLUG,
+        code: AVATAR_ACCESSORIES_CODE,
         title: "Roblox Accessories",
         description: "Hair, head, face, neck, shoulder, front, back, waist, and gear items.",
         scope: { kind: "accessories" }
       },
       {
-        slug: "roblox-clothing",
-        code: "roblox-clothing",
+        slug: AVATAR_CLOTHING_SLUG,
+        code: AVATAR_CLOTHING_CODE,
         title: "Roblox Clothing",
         description: "Layered clothing, shoes, and classic shirt, t-shirt, and pants assets.",
         scope: { kind: "category", category: "Clothing" }
       },
       {
-        slug: "roblox-body-parts",
-        code: "roblox-body-parts",
+        slug: AVATAR_BODY_PARTS_SLUG,
+        code: AVATAR_BODY_PARTS_CODE,
         title: "Roblox Body Parts",
         description: "Full bodies, dynamic heads, classic heads, and classic faces.",
         scope: { kind: "category", category: "Body", excludeSubcategories: ["HairAccessories"] }
       },
       {
-        slug: "roblox-emotes",
-        code: "roblox-emotes",
+        slug: AVATAR_EMOTES_SLUG,
+        code: AVATAR_EMOTES_CODE,
         title: "Roblox Emotes",
         description: "Emote animation assets players can equip on Roblox avatars.",
         scope: { kind: "subcategory", category: "AvatarAnimations", subcategory: "EmoteAnimations" }
       },
       {
-        slug: "roblox-animations",
-        code: "roblox-animations",
+        slug: AVATAR_ANIMATIONS_SLUG,
+        code: AVATAR_ANIMATIONS_CODE,
         title: "Roblox Animations",
         description: "Animation bundles that change how Roblox avatars idle, walk, run, jump, fall, swim, and climb.",
         scope: { kind: "subcategory", category: "AvatarAnimations", subcategory: "AnimationBundles" }
       },
       {
-        slug: "roblox-makeup",
-        code: "roblox-makeup",
+        slug: AVATAR_MAKEUP_SLUG,
+        code: AVATAR_MAKEUP_CODE,
         title: "Roblox Makeup",
         description: "Eyes, face, lips, eyelashes, eyebrows, and full-face makeup looks.",
         scope: { kind: "makeup" }
@@ -423,58 +444,58 @@ export const TOP_LEVEL_AVATAR_CATALOGS: AvatarCatalogConfig[] = [
     ]
   },
   {
-    code: "roblox-accessories",
+    code: AVATAR_ACCESSORIES_CODE,
     title: "Roblox Accessories",
     description: "Browse Roblox avatar accessories by slot, including hair, head, face, neck, shoulder, front, back, waist, and gear.",
-    basePath: buildAvatarCatalogPath("roblox-accessories"),
+    basePath: buildAvatarCatalogPath(AVATAR_ACCESSORIES_CODE),
     parentCode: AVATAR_CATALOG_MASTER_CODE,
     parentTitle: AVATAR_CATALOG_MASTER_TITLE,
     scope: { kind: "accessories" },
     children: ACCESSORY_CHILDREN
   },
   {
-    code: "roblox-clothing",
+    code: AVATAR_CLOTHING_CODE,
     title: "Roblox Clothing",
     description: "Browse layered clothing, shoes, and classic clothing assets for Roblox avatars.",
-    basePath: buildAvatarCatalogPath("roblox-clothing"),
+    basePath: buildAvatarCatalogPath(AVATAR_CLOTHING_CODE),
     parentCode: AVATAR_CATALOG_MASTER_CODE,
     parentTitle: AVATAR_CATALOG_MASTER_TITLE,
     scope: { kind: "category", category: "Clothing" },
     children: CLOTHING_CHILDREN
   },
   {
-    code: "roblox-body-parts",
+    code: AVATAR_BODY_PARTS_CODE,
     title: "Roblox Body Parts",
     description: "Browse Roblox full bodies, dynamic heads, classic heads, and classic faces.",
-    basePath: buildAvatarCatalogPath("roblox-body-parts"),
+    basePath: buildAvatarCatalogPath(AVATAR_BODY_PARTS_CODE),
     parentCode: AVATAR_CATALOG_MASTER_CODE,
     parentTitle: AVATAR_CATALOG_MASTER_TITLE,
     scope: { kind: "category", category: "Body", excludeSubcategories: ["HairAccessories"] },
     children: BODY_CHILDREN
   },
   {
-    code: "roblox-emotes",
+    code: AVATAR_EMOTES_CODE,
     title: "Roblox Emotes",
     description: "Browse Roblox emote animations players can equip and trigger from the avatar emote wheel.",
-    basePath: buildAvatarCatalogPath("roblox-emotes"),
+    basePath: buildAvatarCatalogPath(AVATAR_EMOTES_CODE),
     parentCode: AVATAR_CATALOG_MASTER_CODE,
     parentTitle: AVATAR_CATALOG_MASTER_TITLE,
     scope: { kind: "subcategory", category: "AvatarAnimations", subcategory: "EmoteAnimations" }
   },
   {
-    code: "roblox-animations",
+    code: AVATAR_ANIMATIONS_CODE,
     title: "Roblox Animations",
     description: "Browse Roblox animation bundles for avatar movement styles.",
-    basePath: buildAvatarCatalogPath("roblox-animations"),
+    basePath: buildAvatarCatalogPath(AVATAR_ANIMATIONS_CODE),
     parentCode: AVATAR_CATALOG_MASTER_CODE,
     parentTitle: AVATAR_CATALOG_MASTER_TITLE,
     scope: { kind: "subcategory", category: "AvatarAnimations", subcategory: "AnimationBundles" }
   },
   {
-    code: "roblox-makeup",
+    code: AVATAR_MAKEUP_CODE,
     title: "Roblox Makeup",
     description: "Browse Roblox makeup items for eyes, face, lips, eyelashes, eyebrows, and full-face looks.",
-    basePath: buildAvatarCatalogPath("roblox-makeup"),
+    basePath: buildAvatarCatalogPath(AVATAR_MAKEUP_CODE),
     parentCode: AVATAR_CATALOG_MASTER_CODE,
     parentTitle: AVATAR_CATALOG_MASTER_TITLE,
     scope: { kind: "makeup" }
@@ -483,6 +504,11 @@ export const TOP_LEVEL_AVATAR_CATALOGS: AvatarCatalogConfig[] = [
 
 const TOP_LEVEL_BY_CODE = new Map(TOP_LEVEL_AVATAR_CATALOGS.map((config) => [config.code, config]));
 TOP_LEVEL_BY_CODE.set(AVATAR_CATALOG_LEGACY_MASTER_CODE, TOP_LEVEL_BY_CODE.get(AVATAR_CATALOG_MASTER_CODE)!);
+for (const config of TOP_LEVEL_AVATAR_CATALOGS) {
+  if (config.parentCode !== AVATAR_CATALOG_MASTER_CODE) continue;
+  const legacyPrefix = config.code.replace(`${AVATAR_CATALOG_MASTER_CODE}/`, "");
+  TOP_LEVEL_BY_CODE.set(legacyPrefix, config);
+}
 
 export function resolveAvatarCatalogConfig(prefix: string, childSlug?: string): AvatarCatalogConfig | null {
   const parent = TOP_LEVEL_BY_CODE.get(prefix);
@@ -666,7 +692,7 @@ function getFeaturedBuckets(config: AvatarCatalogConfig): AvatarCatalogFeaturedB
     ];
   }
 
-  if (config.code === "roblox-clothing") {
+  if (config.code === AVATAR_CLOTHING_CODE) {
     return [
       featuredBucket("paid-shirts", { scope: { kind: "subcategory", category: "Clothing", subcategory: "ShirtAccessories" }, price: "paid" }),
       featuredBucket("paid-jackets", { scope: { kind: "subcategory", category: "Clothing", subcategory: "JacketAccessories" }, price: "paid" }),
@@ -678,7 +704,7 @@ function getFeaturedBuckets(config: AvatarCatalogConfig): AvatarCatalogFeaturedB
     ];
   }
 
-  if (config.code === "roblox-accessories") {
+  if (config.code === AVATAR_ACCESSORIES_CODE) {
     return [
       featuredBucket("paid-hair", { scope: { kind: "subcategory", category: "Body", subcategory: "HairAccessories" }, price: "paid" }),
       featuredBucket("paid-head", { scope: { kind: "subcategory", category: "Accessories", subcategory: "HeadAccessories" }, price: "paid" }),
@@ -690,7 +716,7 @@ function getFeaturedBuckets(config: AvatarCatalogConfig): AvatarCatalogFeaturedB
     ];
   }
 
-  if (config.code === "roblox-body-parts") {
+  if (config.code === AVATAR_BODY_PARTS_CODE) {
     return [
       featuredBucket("paid-bodies", { scope: { kind: "subcategory", category: "Body", subcategory: "BodyPartsBundles" }, price: "paid" }),
       featuredBucket("paid-dynamic-heads", { scope: { kind: "subcategory", category: "Body", subcategory: "DynamicHeads" }, price: "paid" }),
@@ -700,7 +726,7 @@ function getFeaturedBuckets(config: AvatarCatalogConfig): AvatarCatalogFeaturedB
     ];
   }
 
-  if (config.code === "roblox-makeup") {
+  if (config.code === AVATAR_MAKEUP_CODE) {
     return [
       featuredBucket("paid-makeup", { price: "paid" }),
       featuredBucket("makeup", {}),
@@ -746,7 +772,7 @@ function getFeaturedPattern(config: AvatarCatalogConfig): string[] {
     ];
   }
 
-  if (config.code === "roblox-clothing") {
+  if (config.code === AVATAR_CLOTHING_CODE) {
     return [
       "paid-shirts",
       "paid-jackets",
@@ -775,7 +801,7 @@ function getFeaturedPattern(config: AvatarCatalogConfig): string[] {
     ];
   }
 
-  if (config.code === "roblox-accessories") {
+  if (config.code === AVATAR_ACCESSORIES_CODE) {
     return [
       "paid-hair",
       "paid-head",
@@ -804,7 +830,7 @@ function getFeaturedPattern(config: AvatarCatalogConfig): string[] {
     ];
   }
 
-  if (config.code === "roblox-body-parts") {
+  if (config.code === AVATAR_BODY_PARTS_CODE) {
     return [
       "paid-bodies",
       "paid-dynamic-heads",
@@ -833,7 +859,7 @@ function getFeaturedPattern(config: AvatarCatalogConfig): string[] {
     ];
   }
 
-  if (config.code === "roblox-makeup") {
+  if (config.code === AVATAR_MAKEUP_CODE) {
     return [
       "paid-makeup",
       "makeup",
