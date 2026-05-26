@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { purgeCloudflarePublicCache, warmCloudflarePaths } from "@/lib/cloudflare-cache";
 import { cacheTagsForEvent, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
+import { AVATAR_CATALOG_MASTER_CODE, buildAvatarCatalogPath } from "@/lib/roblox-avatar-catalog";
 import { supabaseAdmin } from "@/lib/supabase";
 
 type SinglePayload = PublicCacheEvent;
@@ -18,8 +19,10 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
   "catalog",
   "music",
   "quiz",
+  "puzzle",
   "wiki",
-  "wiki_catalog"
+  "wiki_catalog",
+  "stats"
 ]);
 
 const MUSIC_CATALOG_CODES = new Set(["roblox-music-ids"]);
@@ -28,6 +31,16 @@ const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
 const FREE_ITEMS_CATALOG_PREFIXES = [FREE_ITEMS_CATALOG_CODE, LEGACY_FREE_ITEMS_CATALOG_CODE];
 const FREE_ITEMS_BASE_PATH = `/catalog/${FREE_ITEMS_CATALOG_CODE}`;
 const MUSIC_BASE_PATH = "/catalog/roblox-music-ids";
+const AVATAR_CATALOG_PREFIXES = [
+  "roblox-items-and-bundles",
+  "roblox-avatar-items",
+  "roblox-accessories",
+  "roblox-clothing",
+  "roblox-body-parts",
+  "roblox-emotes",
+  "roblox-animations",
+  "roblox-makeup"
+];
 const SITEMAP_INDEX_PATH = "/sitemap.xml";
 const ARTICLES_SITEMAP_PATH = "/sitemaps/articles.xml";
 const CODES_SITEMAP_PATH = "/sitemaps/codes.xml";
@@ -36,9 +49,11 @@ const AUTHORS_SITEMAP_PATH = "/sitemaps/authors.xml";
 const EVENTS_SITEMAP_PATH = "/sitemaps/events.xml";
 const CHECKLISTS_SITEMAP_PATH = "/sitemaps/checklists.xml";
 const QUIZZES_SITEMAP_PATH = "/sitemaps/quizzes.xml";
+const PUZZLES_SITEMAP_PATH = "/sitemaps/puzzles.xml";
 const TOOLS_SITEMAP_PATH = "/sitemaps/tools.xml";
 const CATALOG_SITEMAP_PATH = "/sitemaps/catalog.xml";
 const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
+const STATS_SITEMAP_PATH = "/sitemaps/stats.xml";
 const FEED_PATH = "/feed.xml";
 const PAGINATED_INDEX_PURGE_LIMIT = 50;
 
@@ -163,10 +178,41 @@ function revalidateForQuizzes(slug: string) {
   );
 }
 
+function revalidateForPuzzle(slug: string) {
+  const normalized = normalizeSlug(slug);
+  const [puzzleSlug, answerDate] = normalized.split("/");
+  const scopedPaths = [
+    "/puzzles",
+    puzzleSlug ? `/puzzles/${puzzleSlug}` : "",
+    puzzleSlug && answerDate ? `/puzzles/${puzzleSlug}/${answerDate}` : ""
+  ].filter(Boolean) as string[];
+
+  return applyRevalidation(
+    [...scopedPaths, "/", FEED_PATH, SITEMAP_INDEX_PATH, PUZZLES_SITEMAP_PATH],
+    ["puzzles-index", puzzleSlug ? `puzzle:${puzzleSlug}` : "", "home"]
+  );
+}
+
 function revalidateForWiki(slug: string) {
   return applyRevalidation(
     ["/wiki", `/wiki/${slug}`, "/", SITEMAP_INDEX_PATH, WIKI_SITEMAP_PATH],
     [`wiki:${slug}`, "wiki-index", "home"]
+  );
+}
+
+function revalidateForStats(slug: string) {
+  const normalized = normalizeSlug(slug);
+  const scopedPaths =
+    normalized === "home" || normalized === "stats"
+      ? ["/stats"]
+      : normalized === "games"
+        ? ["/stats", "/stats/games"]
+        : normalized.startsWith("games/")
+          ? ["/stats", "/stats/games", `/stats/games/${normalized.replace(/^games\//, "")}`]
+          : ["/stats", "/stats/games"];
+  return applyRevalidation(
+    [...scopedPaths, "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
+    ["stats", "stats-home", "stats-games", "home"]
   );
 }
 
@@ -230,6 +276,41 @@ function revalidateForFreeItems(slug = FREE_ITEMS_CATALOG_CODE) {
       CATALOG_SITEMAP_PATH
     ],
     ["free-items-catalog", "home"]
+  );
+}
+
+function isAvatarCatalogSlug(slug: string) {
+  return AVATAR_CATALOG_PREFIXES.some((prefix) => slug === prefix || slug.startsWith(`${prefix}/`));
+}
+
+function revalidateForAvatarCatalog(slug: string) {
+  const normalizedSlug = normalizeSlug(slug);
+  const [prefix] = normalizedSlug.split("/");
+  const basePath = buildAvatarCatalogPath(normalizedSlug);
+  const legacyBasePath = `/catalog/${normalizedSlug}`;
+  const routePatterns = [
+    `/catalog/${AVATAR_CATALOG_MASTER_CODE}/[[...segments]]`,
+    prefix ? `/catalog/${prefix}/[[...segments]]` : ""
+  ].filter(Boolean) as string[];
+
+  return applyRevalidation(
+    [
+      "/catalog",
+      ...paginatedIndexPaths(basePath),
+      ...(legacyBasePath !== basePath ? paginatedIndexPaths(legacyBasePath) : []),
+      ...routePatterns,
+      "/",
+      SITEMAP_INDEX_PATH,
+      CATALOG_SITEMAP_PATH
+    ].filter(Boolean) as string[],
+    [
+      "avatar-catalog",
+      normalizedSlug ? `avatar-catalog:${normalizedSlug}` : "",
+      prefix ? `avatar-catalog:${prefix}` : "",
+      normalizedSlug ? `catalog:${normalizedSlug}` : "",
+      "catalog-index",
+      "home"
+    ]
   );
 }
 
@@ -500,8 +581,14 @@ async function collectRevalidationTargets(payload: SinglePayload) {
     case "quiz":
       purgePaths = revalidateForQuizzes(slug);
       break;
+    case "puzzle":
+      purgePaths = revalidateForPuzzle(slug);
+      break;
     case "wiki":
       purgePaths = revalidateForWiki(slug);
+      break;
+    case "stats":
+      purgePaths = revalidateForStats(slug);
       break;
     case "wiki_catalog":
       purgePaths = revalidateForWikiCatalog(slug);
@@ -515,6 +602,9 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       }
       if (isFreeItemsCatalogSlug(slug)) {
         purgePaths = [...purgePaths, ...revalidateForFreeItems(slug)];
+      }
+      if (isAvatarCatalogSlug(slug)) {
+        purgePaths = [...purgePaths, ...revalidateForAvatarCatalog(slug)];
       }
       purgePaths = [...purgePaths, ...revalidateForCatalog(slug)];
       break;

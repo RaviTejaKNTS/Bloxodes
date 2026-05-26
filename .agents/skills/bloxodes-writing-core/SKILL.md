@@ -44,7 +44,8 @@ When producing content, return the target database shape when possible:
 
 - Supabase fields as JSON for catalog, wiki, and tool-like pages.
 - For code pages, return only the `games` row fields and source URLs. Do not return a manual `codes` array.
+- For event pages, return only evergreen `events_pages` fields. Do not return manual timeline rows or live event claims.
 - Article fields as JSON, with Markdown inside `content_md`.
-- `research-notes.md` and `final.json` as the only local generated artifacts for serious content work.
+- `todo.md`, `research-notes.md`, and `final.json` as the local generated artifacts for serious content work.
 
 Do not call content finished until `bloxodes-final-edit` has been applied.

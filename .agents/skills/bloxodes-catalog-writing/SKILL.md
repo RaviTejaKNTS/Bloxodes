@@ -19,6 +19,19 @@ If these files have not been read in the current task, read them before writing.
 
 If the catalog is for a specific Roblox game dataset, use `bloxodes-game-catalog-writing` instead or additionally.
 
+For game-specific catalogs, use the durable-item scope from `agents/content/page-types/game-catalog-pages.md`: no current season tracks, one-off event reward lists, ranked-season reward lists, gamepasses, badges, servers, developer products, broad update summaries, or raw Roblox media. UGC is a special exception only when the game has meaningful UGC items.
+
+Create or update the workspace before writing:
+
+```text
+tmp/content-workspace/<topic-or-game-slug>/catalogs/<catalog-code-or-collection-slug>/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/catalog.md` into the folder as `todo.md` and update it as work progresses.
+
 ## What To Understand Before Writing
 
 Before public copy starts, understand the collection as a real thing a player interacts with. A catalog page should not feel like fields were translated into sentences. It should explain what the collection is, what players do with it, how they get or compare items, and why the visible values matter.
@@ -81,7 +94,7 @@ Set `seo_title` to the visible `title` by default, including item counts. Count-
 
 Use `description_json` for short section-level notes when a useful section split exists. Use `description_md` for page-level mechanics: how the system works, where to find it, how players obtain items, and mistakes that apply across the whole collection. Do not repeat the same idea in both fields. During FLOW, reject `description_md` that feels like a pile of random mini sections or card notes.
 
-Choose sections by the strongest in-game meaning. Rarity, item type, source, event, location, shop, tier, world, and unlock route are all possible. The right choice is the one that helps players understand the collection long-term, not the field that happens to be easiest to sort.
+Choose sections by the strongest in-game meaning. Rarity, item type, source, location, shop, tier, world, and unlock route are all possible. Event can be a source or availability note for durable items, but not an excuse to create a temporary event-reward catalog. The right choice is the one that helps players understand the collection long-term, not the field that happens to be easiest to sort.
 
 Explain unclear card or table values in player language. If a value is `Yes`, `No`, a number, a rarity, or a source label, make sure the surrounding copy or UI label tells the reader what that value means.
 

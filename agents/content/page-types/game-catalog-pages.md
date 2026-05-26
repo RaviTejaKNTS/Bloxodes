@@ -1,6 +1,6 @@
 # Game-Specific Catalog Pages
 
-Use this guide for dataset-backed game catalog pages such as Grow a Garden crops, Adopt Me pets, Blox Fruits accessories, Brookhaven vehicles, or any future `data/<Game>/` collection.
+Use this guide for dataset-backed game catalog pages such as Grow a Garden crops, Adopt Me pets, Blox Fruits accessories, Brookhaven vehicles, or any future durable `data/<Game>/` item collection.
 
 Use the guide flexibly. The work should always begin with the game system, but the final structure should come from the collection itself. A pet page, a crop page, a vehicle page, a boss page, and a prize page should not sound like the same page with nouns swapped.
 
@@ -12,7 +12,39 @@ The writing standard is closer to a useful wiki explanation than a database capt
 
 The data standard is just as important as the writing standard. A game catalog page should not polish stale data. If research finds missing items, wrong counts, missing images, or fields that do not support useful cards, fix or explicitly approve the data state before final writing.
 
+## Catalog Scope Gate
+
+Game catalogs are for core in-game item collections that stay useful beyond one update cycle. The collection should have repeatable player value: collect, unlock, compare, equip, farm, craft, hatch, buy, roll, trade, fight, visit, or use.
+
+Good game-catalog candidates include:
+
+- weapons, abilities, fruits, styles, races, traits, clans, gear, tools, pets, eggs, crops, seeds, materials, fish, bosses, enemies, drops, maps, islands, vehicles, furniture, cosmetics, skins, wraps, charms, titles, emotes, mounts, recipes, enchantments, and potions
+- UGC collections only as a special exception when the game has meaningful UGC items; use the item-card pattern from the free Roblox items page instead of treating UGC like normal game gear
+- quests, contracts, currencies, or achievements only when they behave like stable item/system collections with row-level data and repeatable player decisions
+
+Do not create game catalog pages for:
+
+- current season pass reward tracks
+- one-off event reward lists
+- current ranked season rewards
+- temporary event timelines or event-only reward summaries
+- broad shop/update summaries that are not item collections
+- gamepasses, badges, developer products, servers, private server settings, social links, or raw Roblox media
+
+If a temporary event or season introduces permanent items, record those items inside the durable collection they belong to, such as skins, pets, vehicles, or titles. Do not create a separate catalog just because the source route was an event.
+
 ## Required Context
+
+Create or update:
+
+```text
+tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/game-catalog.md` into the folder as `todo.md` before research starts.
 
 Before writing, inspect:
 
@@ -105,7 +137,7 @@ After the user approves the data action, update the local dataset and image wiri
 
 Before writing or updating a game-catalog page, research the collection and propose the data action, title promise, item-card section style, and card data shape to the user. This applies whether the page already exists or the page is being created fresh.
 
-Choose the grouping with the strongest in-game meaning. Rarity is often better than refresh date when rarity is how the game divides rewards. Source can be better than rarity when obtainment is the real player decision. Item type can be better when the collection mixes tools, vehicles, strollers, weapons, or materials. Other useful grouping axes can be event, location, shop, world, tier, level range, unlock route, crop type, resource type, or boss.
+Choose the grouping with the strongest in-game meaning. Rarity is often better than refresh date when rarity is how the game divides rewards. Source can be better than rarity when obtainment is the real player decision. Item type can be better when the collection mixes tools, vehicles, strollers, weapons, or materials. Other useful grouping axes can be location, shop, world, tier, level range, unlock route, crop type, resource type, or boss. Event can be a source or availability field for permanent items, but do not use current-event grouping to justify a temporary reward-track catalog.
 
 The proposal must include:
 
@@ -255,9 +287,9 @@ Focus on source, value, conversion, refresh timers, crafting, farming, and wheth
 
 Focus on level range, location, rewards, unlocks, and progression order.
 
-### Events
+### Event-origin items
 
-Focus on start/end times, event status, rewards, and what changes while the event is active.
+Only include event-origin items when they belong to a durable collection, such as pets, skins, weapons, vehicles, titles, or cosmetics. Explain the old source and availability on those item cards. Do not turn a current event timeline, season pass track, or one-off reward list into a game catalog.
 
 ## Output Shape
 

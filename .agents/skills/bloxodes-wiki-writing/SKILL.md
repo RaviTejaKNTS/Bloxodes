@@ -17,11 +17,24 @@ Read:
 
 If these files have not been read in the current task, read them before writing.
 
+Create or update the game-first workspace before writing:
+
+```text
+tmp/content-workspace/<game-slug>/wiki/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/wiki.md` into the folder as `todo.md` and update it as work progresses.
+
 ## What This Skill Is For
 
 A wiki page is the hub for a Roblox game. It should orient the reader and let the live related sections carry current details such as codes, events, catalog collections, tools, articles, checklists, quizzes, and Roblox metadata.
 
 Do not turn the wiki page into a giant article. The hub copy should explain how the game works at a useful level, then leave room for the related blocks to do their jobs.
+
+For new game coverage, prefer writing the wiki after at least one core catalog or strong catalog-led discovery exists. The wiki should be grounded in real item systems and gameplay loops, not surface-level guesses from the Roblox description alone.
 
 Use these inputs:
 

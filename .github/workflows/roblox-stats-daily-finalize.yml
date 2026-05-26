@@ -1,0 +1,49 @@
+name: Roblox Stats Daily Finalize
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "20 0 * * *"
+
+concurrency:
+  group: roblox-stats-daily-finalize
+  cancel-in-progress: false
+
+jobs:
+  stats-daily-finalize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Finalize yesterday daily stats
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+        run: npm run stats:rollup-daily -- --date yesterday --finalize --quality-only
+
+      - name: Revalidate public stats pages
+        env:
+          REVALIDATE_ENDPOINT: ${{ secrets.REVALIDATE_ENDPOINT }}
+          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
+        run: |
+          if [ -z "$REVALIDATE_ENDPOINT" ] || [ -z "$REVALIDATE_SECRET" ]; then
+            echo "Skipping stats revalidation because REVALIDATE_ENDPOINT or REVALIDATE_SECRET is not configured."
+            exit 0
+          fi
+
+          curl --fail --show-error --silent \
+            --request POST "$REVALIDATE_ENDPOINT" \
+            --header "Authorization: Bearer $REVALIDATE_SECRET" \
+            --header "Content-Type: application/json" \
+            --data '{"type":"batch","events":[{"type":"stats","slug":"stats"},{"type":"stats","slug":"games"}]}'

@@ -2,7 +2,7 @@
 
 Use this as a mandatory quality gate during the same writing workflow and again before writing to local Supabase.
 
-The final edit is internal. It does not create `review.md`; it either improves `final.json`, marks the work blocked, or records unresolved risk inside `research-notes.md`.
+The final edit is internal. It does not create `review.md`; it either improves `final.json`, marks the work blocked, or records unresolved risk inside `research-notes.md`. Update the page folder's `todo.md` during this gate; if the folder has no tracker, copy `agents/content/todo-templates/final-verification.md` into the folder first.
 
 For catalog, game-catalog, article, and tool pages with meaningful body copy, the final edit assumes the FLOW pass has already rewritten the draft. If the FLOW pass has not happened, stop and run `agents/content/flow-pass.md` first. Final edit is the gate after flow, not a replacement for flow.
 
@@ -33,20 +33,21 @@ A vehicle from the current car showroom can be bought again with Bucks or Robux.
 ## Core Pass
 
 1. Re-read the player-facing research sections in `research-notes.md`.
-2. Confirm the page type and target fields.
-3. For catalog and game-catalog pages, confirm the data and image audit exists and is resolved.
-4. Confirm the FLOW pass happened when the page has `description_md`, `how_it_works_md`, article body, or tool explanation.
-5. Remove generic opening lines.
-6. Remove unsupported claims.
-7. Cut repeated ideas across fields.
-8. Replace broad field claims with exact game or dataset details.
-9. Keep the useful answer close to the top.
-10. Add missing context where the copy jumps too quickly between mechanics, fields, or item groups.
-11. Split paragraphs that mix unrelated concepts.
-12. Check headings are clear sentence-style fragments, not rigid one-word labels.
-13. Check Markdown and JSON are valid.
-14. Check the visible title and `seo_title` are unique, well-defined, count-accurate, and fully supported by the page body.
-15. Check the final output can be pasted or upserted without reshaping.
+2. Re-read `todo.md` and confirm required gates through the current stage are checked or explicitly blocked.
+3. Confirm the page type and target fields.
+4. For catalog and game-catalog pages, confirm the data and image audit exists and is resolved.
+5. Confirm the FLOW pass happened when the page has `description_md`, `how_it_works_md`, article body, or tool explanation.
+6. Remove generic opening lines.
+7. Remove unsupported claims.
+8. Cut repeated ideas across fields.
+9. Replace broad field claims with exact game or dataset details.
+10. Keep the useful answer close to the top.
+11. Add missing context where the copy jumps too quickly between mechanics, fields, or item groups.
+12. Split paragraphs that mix unrelated concepts.
+13. Check headings are clear sentence-style fragments, not rigid one-word labels.
+14. Check Markdown and JSON are valid.
+15. Check the visible title and `seo_title` are unique, well-defined, count-accurate, and fully supported by the page body.
+16. Check the final output can be pasted or upserted without reshaping.
 
 ## Understanding Questions
 
@@ -78,6 +79,7 @@ Fail the final edit and rewrite before import if public copy contains:
 - unexplained values such as `Yes`, `No`, `3`, `common`, `available`, or `limited` in public prose without a visible label or gameplay explanation
 - catalog cards or tables that render raw long descriptions, raw HTML, raw `pros`/`cons`, nested object dumps, vague meta descriptions, or unlabeled values that do not help the player compare items
 - catalog research that found missing items, mismatched counts, or missing expected images but continued to final copy without a resolved data action
+- game-catalog scope that turns current season tracks, one-off event rewards, ranked season rewards, gamepasses, badges, servers, developer products, broad update summaries, or raw Roblox media into catalog pages
 - catalog or game-catalog final copy that skipped the FLOW pass
 - catalog `description_md` that repeats card-section notes instead of explaining the whole collection or mechanic
 - catalog `description_md` with no useful action/use/how-to section when the collection has a clear player action behind it
@@ -131,6 +133,13 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - `rewards_md` may use a table, but the table explains durable reward types and player use. It must not map current code names to rewards.
 - The completion note confirms that live code rows must come from `npm run refresh:codes -- --slug <game-slug>`, not from manual entry.
 
+### Events Page
+
+- The output writes only evergreen `events_pages` fields.
+- `content_md` does not contain manual current/upcoming/past event rows, live status, exact live dates, current reward timelines, or one-off current event claims.
+- Public copy does not use stale wording such as `latest event`, `current event`, or "updated" promises that automation cannot support.
+- Research notes confirm timeline data comes from `roblox_virtual_events` or another approved importer, or the page is marked `blocked` / `do not create`.
+
 ### Catalog
 
 - `intro_md` explains what the collection is in the game.
@@ -176,6 +185,8 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 ### Article
 
 - The first paragraph gives useful context immediately.
+- The topic is focused and evergreen, not generic news, current event coverage, codes troubleshooting, broad beginner content, or a catalog/wiki duplicate.
+- Research notes include an overlap check against codes, events, wiki, catalogs, tools, checklists, and quizzes.
 - The article has source-backed claims where needed.
 - The visible title is natural, SEO-friendly, and not a flat database label. Keep the main keyword near the front, and use a short outcome phrase when it helps the reader understand why to open it.
 - `author_id` is set before import. If no author was specified, the importer should randomly choose one from `authors`.

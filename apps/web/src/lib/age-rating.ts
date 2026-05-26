@@ -18,10 +18,10 @@ export function formatAgeRating(value?: string | null): string | null {
   if (!normalized) return null;
 
   const upper = normalized.toUpperCase();
-  if (upper === "AGE_RATING_UNSPECIFIED") return "9+";
+  if (upper === "AGE_RATING_UNSPECIFIED") return "All Ages";
 
   if (["AGE_RATING_ALL", "AGE_RATING_ALL_AGES", "ALL_AGES", "ALL AGES"].includes(upper)) {
-    return "All ages";
+    return "All Ages";
   }
 
   const plusMatch = upper.match(/(\d+)\s*(?:_PLUS|\+)/);

@@ -1,0 +1,57 @@
+name: Roblox Stats Hourly
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "12 * * * *"
+
+concurrency:
+  group: roblox-stats-hourly
+  cancel-in-progress: false
+
+jobs:
+  stats-hourly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Update hourly stats and today rollup
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+          UNIVERSE_HOURLY_STATS_BATCH_SIZE: 50
+          UNIVERSE_HOURLY_STATS_REQUEST_DELAY_MS: 1200
+        run: npm run update:hourly-stats -- --quality-only --rollup-today --limit 10000
+
+      - name: Snapshot stats ranks
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+        run: npm run stats:rank -- --quality-only --limit 10000
+
+      - name: Revalidate public stats pages
+        env:
+          REVALIDATE_ENDPOINT: ${{ secrets.REVALIDATE_ENDPOINT }}
+          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
+        run: |
+          if [ -z "$REVALIDATE_ENDPOINT" ] || [ -z "$REVALIDATE_SECRET" ]; then
+            echo "Skipping stats revalidation because REVALIDATE_ENDPOINT or REVALIDATE_SECRET is not configured."
+            exit 0
+          fi
+
+          curl --fail --show-error --silent \
+            --request POST "$REVALIDATE_ENDPOINT" \
+            --header "Authorization: Bearer $REVALIDATE_SECRET" \
+            --header "Content-Type: application/json" \
+            --data '{"type":"batch","events":[{"type":"stats","slug":"stats"},{"type":"stats","slug":"games"}]}'

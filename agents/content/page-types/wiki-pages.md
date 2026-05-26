@@ -8,6 +8,8 @@ Treat the wiki as a live hub. The best copy here is calm, useful orientation. It
 
 A wiki page is the center page for a Roblox game on Bloxodes. It should orient the player, then let live related sections carry the current details.
 
+For new game coverage, prefer writing the wiki after catalog-led discovery or the first core catalog data pass. The hub should be grounded in real systems, item collections, routes, and gameplay loops, not only the Roblox description and generic genre assumptions.
+
 The wiki hub is not a full article dump. It should connect the reader to:
 
 - live Roblox metadata
@@ -22,7 +24,20 @@ The wiki hub is not a full article dump. It should connect the reader to:
 
 Connection happens through the UI and related sections. Public copy should explain the game and its systems, not tell the reader to click cards.
 
+Codes and events remain automation-owned on the wiki too. The wiki can mention that the game has codes or events when related sections exist, but it should not hard-code current code names, active-code counts, live event statuses, current event dates, or temporary reward timelines.
+
 ## Database Fields
+
+Create or update:
+
+```text
+tmp/content-workspace/<game-slug>/wiki/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/wiki.md` into the folder as `todo.md` before research starts.
 
 Write in this shape:
 

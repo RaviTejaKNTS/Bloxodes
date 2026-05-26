@@ -39,7 +39,7 @@ This system follows a few working patterns:
 - Keep generated content and research notes in ignored local workspaces.
 - Require a final compression/edit pass before database import, but keep it internal.
 - Shape final output like the destination Supabase fields, not loose prose.
-- Keep the generated workflow to two files per page: `research-notes.md` and `final.json`.
+- Keep the generated workflow to one tracker plus the content artifacts: `todo.md`, `research-notes.md`, and `final.json`.
 - Make `research-notes.md` read like plain-language topic research, not a field checklist.
 - Use `description_json` as short section-level context when catalog cards are divided into meaningful in-game groups.
 - Add a mandatory FLOW pass after the first-pass `final.json` for catalog, game-catalog, article, and tool pages with body copy.
@@ -66,8 +66,11 @@ Suggested structure:
     catalog-pages.md
     game-catalog-pages.md
     wiki-pages.md
+    code-pages.md
+    events.md
     articles.md
     tools.md
+    checklists.md
     quizzes.md
 ```
 
@@ -83,8 +86,11 @@ Implemented files:
 - `agents/content/page-types/catalog-pages.md`
 - `agents/content/page-types/game-catalog-pages.md`
 - `agents/content/page-types/wiki-pages.md`
+- `agents/content/page-types/code-pages.md`
+- `agents/content/page-types/events.md`
 - `agents/content/page-types/articles.md`
 - `agents/content/page-types/tools.md`
+- `agents/content/page-types/checklists.md`
 - `agents/content/page-types/quizzes.md`
 
 ## Skills
@@ -100,9 +106,13 @@ Initial skills to create:
   bloxodes-final-edit/SKILL.md
   bloxodes-catalog-writing/SKILL.md
   bloxodes-game-catalog-writing/SKILL.md
+  bloxodes-game-page-discovery/SKILL.md
   bloxodes-wiki-writing/SKILL.md
+  bloxodes-code-writing/SKILL.md
+  bloxodes-events-writing/SKILL.md
   bloxodes-article-writing/SKILL.md
   bloxodes-tool-writing/SKILL.md
+  bloxodes-checklist-writing/SKILL.md
   bloxodes-quiz-writing/SKILL.md
 ```
 
@@ -110,12 +120,16 @@ The first page-specific skills should be:
 
 - `bloxodes-catalog-writing`
 - `bloxodes-game-catalog-writing`
+- `bloxodes-game-page-discovery`
 - `bloxodes-wiki-writing`
+- `bloxodes-code-writing`
+- `bloxodes-events-writing`
 - `bloxodes-article-writing`
 - `bloxodes-tool-writing`
+- `bloxodes-checklist-writing`
 - `bloxodes-quiz-writing`
 
-Later page-specific skills can cover codes, lists, and other content types.
+Later page-specific skills can cover lists and other content types.
 
 Implemented initial skills under `.agents/skills/`:
 
@@ -124,9 +138,13 @@ Implemented initial skills under `.agents/skills/`:
 - `bloxodes-final-edit`
 - `bloxodes-catalog-writing`
 - `bloxodes-game-catalog-writing`
+- `bloxodes-game-page-discovery`
 - `bloxodes-wiki-writing`
+- `bloxodes-code-writing`
+- `bloxodes-events-writing`
 - `bloxodes-article-writing`
 - `bloxodes-tool-writing`
+- `bloxodes-checklist-writing`
 - `bloxodes-quiz-writing`
 
 ## Local Content Workspace
@@ -137,25 +155,35 @@ Use the existing ignored `tmp/` folder:
 
 ```text
 tmp/content-workspace/
-  YYYY-MM-DD/
-    catalog/
-      page-code/
-        research-notes.md
-        final.json
-    game-catalog/
-      game-slug-collection/
-        research-notes.md
-        final.json
+  game-or-topic-slug/
+    discovery/
+      todo.md
+      research-notes.md
     wiki/
-      game-slug/
+      todo.md
+      research-notes.md
+      final.json
+    codes/
+      todo.md
+      research-notes.md
+      final.json
+    events/
+      todo.md
+      research-notes.md
+      final.json
+    catalogs/
+      collection-slug/
+        todo.md
         research-notes.md
         final.json
     articles/
       article-slug/
+        todo.md
         research-notes.md
         final.json
     tools/
       tool-code/
+        todo.md
         research-notes.md
         final.json
 ```
@@ -188,21 +216,22 @@ Article-style pages should still use `final.json`. Put Markdown in `content_md` 
 
 Use this flow for every serious rewrite:
 
-1. Create a local folder under `tmp/content-workspace/YYYY-MM-DD/...`.
-2. Research the topic deeply in plain language and save it in `research-notes.md`.
-3. Confirm the notes explain what the thing is, how it works, important terms, item groups, real examples, and common mistakes.
-4. For catalog and game-catalog pages, propose the item-card section style and wait for user confirmation.
-5. Write researched first-pass content using the relevant page-specific skill.
-6. Run the FLOW pass and rewrite the public fields so the page reads in a clear player-facing order.
-7. Run the Bloxodes final edit gate inside the same workflow.
-8. Save approved output to `final.json`.
-9. Push only the approved final content into local Supabase.
-10. Preview locally.
-11. Promote to production only through the normal controlled Supabase process.
+1. Create a local folder under `tmp/content-workspace/<game-or-topic-slug>/...`.
+2. Copy the matching template from `agents/content/todo-templates/` into the folder as `todo.md`.
+3. Research the topic deeply in plain language and save it in `research-notes.md`.
+4. Confirm the notes explain what the thing is, how it works, important terms, item groups, real examples, and common mistakes.
+5. For catalog and game-catalog pages, propose the item-card section style and wait for user confirmation.
+6. Write researched first-pass content using the relevant page-specific skill.
+7. Run the FLOW pass and rewrite the public fields so the page reads in a clear player-facing order.
+8. Run the Bloxodes final edit gate inside the same workflow.
+9. Save approved output to `final.json`.
+10. Push only the approved final content into local Supabase.
+11. Preview locally.
+12. Promote to production only through the normal controlled Supabase process.
 
 For catalog and game catalog work, apply this flow to one page first. Do not rewrite a whole game at once until the first page becomes the approved standard.
 
-When catalog cards are divided into sections, choose the grouping that has the strongest in-game meaning. Rarity, item type, source, event, location, shop, tier, world, and unlock route are all possible. Do not default to the easiest dataset field if another grouping helps players understand the collection better. Put the short section setup in `description_json`, then keep `description_md` focused on whole-page mechanics instead of repeating those notes.
+When catalog cards are divided into sections, choose the grouping that has the strongest in-game meaning. Rarity, item type, source, location, shop, tier, world, and unlock route are all possible. Event can be a source or availability note for permanent items, but do not use current-event grouping to justify a temporary reward-track catalog. Do not default to the easiest dataset field if another grouping helps players understand the collection better. Put the short section setup in `description_json`, then keep `description_md` focused on whole-page mechanics instead of repeating those notes.
 
 For catalog and game-catalog pages, the FLOW pass is not optional. It should check whether `description_md` explains the whole page, whether the page has a useful action/how-to/use section when the topic has player action behind it, whether tables or numbered steps would explain faster than paragraphs, and whether the headings guide the reader instead of reflecting database fields.
 

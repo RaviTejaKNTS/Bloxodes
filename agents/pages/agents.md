@@ -36,16 +36,19 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Checklists | `/checklists`, `/checklists/page/[page]`, `/checklists/[slug]` | `src/app/(site)/checklists/*`, shared helpers in `src/app/(site)/checklists/page-data.tsx` |
 | Events | `/events`, `/events/[slug]` | `src/app/(site)/events/*`, shared loaders in `src/app/(site)/events/page-data.tsx`, detail composition in `events/[slug]/events-page.tsx` |
 | Quizzes | `/quizzes`, `/quizzes/[slug]` | `src/app/(site)/quizzes/*`, scoped guide in `src/app/(site)/quizzes/AGENTS.md`, shared helpers in `src/app/(site)/quizzes/page-data.tsx`. Use `agents/content/page-types/quizzes.md` and `$bloxodes-quiz-writing` for metadata, local question pools, and validation. Detail pages should keep the user in the quiz experience: use the page intro plus the interactive quiz, not a separate "what this quiz covers" about block. |
+| Puzzles | `/puzzles`, `/puzzles/[slug]`, `/puzzles/[slug]/[date]` | `src/app/(site)/puzzles/*`, shared helpers in `src/app/(site)/puzzles/page-data.tsx`, read layer in `src/lib/puzzles.ts`, and synced answer rows in `puzzle_answers`. Current puzzle pages are indexable; dated archives are `noindex, follow`. |
 | Wiki | `/wiki`, `/wiki/[slug]` | `src/app/(site)/wiki/*`, shared helpers in `page-data.tsx`, Supabase read layer in `src/lib/wiki.ts` |
 | Authors | `/authors`, `/authors/[slug]` | `src/app/(site)/authors/*` |
+| Stats | `/stats`, `/stats/games`, `/stats/games/[slug]` | `src/app/(site)/stats/*`, shared read layer in `src/lib/stats.ts`, chart UI in `stats/components/*`, backed by `roblox_universes`, `roblox_universe_stats_hourly`, `roblox_universe_stats_daily`, and rank snapshots |
 
 ## Catalog Families
 
 | Area | Routes | Files / Notes |
 | --- | --- | --- |
-| Catalog hub | `/catalog` | `src/app/(site)/catalog/page.tsx` |
+| Catalog hub | `/catalog` | `src/app/(site)/catalog/page.tsx`; keeps the standard catalog card grid, shows only parent catalog hubs, and keeps Roblox item-family children inside `/catalog/roblox-items-and-bundles` |
 | Catalog workflow guide | all catalog routes | `src/app/(site)/catalog/AGENTS.md` |
 | Free Roblox items | `/catalog/free-roblox-items`, paginated routes, category routes, subcategory routes, and mirrored `categories/*` routes | `src/app/(site)/catalog/free-roblox-items/*`, helpers in `page-data.tsx`, client browser in `FreeItemsBrowser.tsx` |
+| Roblox item and bundle catalogs | `/catalog/roblox-items-and-bundles`, nested family routes like `/catalog/roblox-items-and-bundles/roblox-accessories`, `/catalog/roblox-items-and-bundles/roblox-accessories/[slot]`, `/catalog/roblox-items-and-bundles/roblox-clothing`, `/catalog/roblox-items-and-bundles/roblox-clothing/[type]`, `/catalog/roblox-items-and-bundles/roblox-body-parts`, `/catalog/roblox-items-and-bundles/roblox-body-parts/[type]`, `/catalog/roblox-items-and-bundles/roblox-emotes`, `/catalog/roblox-items-and-bundles/roblox-animations`, `/catalog/roblox-items-and-bundles/roblox-makeup`, plus `/page/[page]` under each; old `/catalog/roblox-avatar-items` and flat family routes redirect into the nested hub | `src/app/(site)/catalog/roblox-items-and-bundles/[[...segments]]/page.tsx`, redirect shims in `src/app/(site)/catalog/roblox-*/[[...segments]]/page.tsx`, shared renderer in `src/app/(site)/catalog/avatar-marketplace/page-data.tsx`, data/config in `src/lib/roblox-avatar-catalog.ts`, rows from `roblox_catalog_items` and copy from `catalog_pages` |
 | Roblox music IDs | `/catalog/roblox-music-ids`, `/page/[page]`, `/trending`, `/genres`, `/artists`, and their paginated/detail routes | `src/app/(site)/catalog/roblox-music-ids/*`, client browser in `MusicIdsBrowser.tsx`, shared helpers in `page-data.tsx` |
 | Roblox color codes | `/catalog/roblox-color-codes` | `src/app/(site)/catalog/roblox-color-codes/*`, data helper in `page-data.tsx` |
 | Roblox decal IDs | `/catalog/roblox-decal-ids`, `/catalog/roblox-decal-ids/page/[page]` | `src/app/(site)/catalog/roblox-decal-ids/*`, helpers in `page-data.tsx` |

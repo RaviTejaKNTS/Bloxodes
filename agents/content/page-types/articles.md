@@ -6,9 +6,22 @@ Use this guide as a writing coach, not a fixed article template. The article sha
 
 ## Purpose
 
-Articles should explain a game update, guide, event, system, or Roblox topic with more narrative depth than a catalog or wiki page. They still need to stay practical, source-aware, and player-first.
+Articles should answer a focused evergreen player question with more narrative depth than a catalog or wiki page. They still need to stay practical, source-aware, and player-first.
+
+Articles are not the place to duplicate other page types. Do not create articles for current codes, code troubleshooting, events, event timelines, current update news, broad catalog explanations, or generic "beginner guide" topics. Use codes pages for code help, events pages for event timelines, wiki hubs for broad orientation, and catalog pages for item collections.
 
 ## Database Fields
+
+Create or update:
+
+```text
+tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/article.md` into the folder as `todo.md` before research starts.
 
 Write in this shape:
 
@@ -32,23 +45,31 @@ The current `articles` table does not have `seo_title`. Use the visible `title` 
 
 Article ingestion writes only to the `articles` table. Do not write reviewed article content into article views or index projections; those are read paths and should derive from the same saved article row.
 
-## Article Types
+## Article Scope Gate
 
-Pick the primary type before writing:
+Pick the exact evergreen player job before writing. Good article topics are narrow and durable:
 
-- game guide
-- event guide
-- update explainer
-- system explainer
 - how-to
-- troubleshooting
-- comparison
-- list
-- Roblox codes support article
+- specific quest/objective guide
+- specific item unlock or obtainment guide
+- specific mode, map, boss, route, or mechanic guide
+- stable farming or progression process
+- focused comparison only when the comparison is not already answered by cards/tables
+- troubleshooting only for a durable gameplay/account/input problem that does not belong on a codes page
 
-If the work is a `/codes/<slug>` page backed by the `games` table, use `agents/content/page-types/code-pages.md` instead of this article guide. Code pages are source-driven: never invent or manually enter codes.
+If the work is a `/codes/<slug>` page backed by the `games` table, use `bloxodes-code-writing` and `agents/content/page-types/code-pages.md` instead of this article guide. Code pages are source-driven: never invent or manually enter codes.
 
-If a normal article is about codes, verify active rewards and expired status with current sources. Do not invent codes.
+Do not write normal articles about current codes or events. If a user asks for one, redirect the work to the proper codes/events page workflow or mark it as not recommended.
+
+Before approving an article topic, explicitly check overlap:
+
+- Does a catalog page already answer this with item cards or tables?
+- Does a wiki hub already cover the broad system?
+- Does a codes page cover the redemption/troubleshooting need?
+- Does an events page own the timeline/reward status?
+- Is the angle specific enough to be useful after the next update?
+
+If the answer is weak, mark the article `do not create` or `blocked until catalog data`.
 
 ## Structure
 
@@ -56,7 +77,7 @@ Choose structure based on reader intent, not a fixed template.
 
 Common useful flow:
 
-1. Lead with the current problem, update, event, or decision.
+1. Lead with the specific problem, objective, mechanic, item, mode, map, or decision.
 2. Explain what matters first.
 3. Put steps, lists, or tables where they help.
 4. Add caveats near the claim they affect.
@@ -79,7 +100,7 @@ Avoid:
 
 Better:
 
-- name the exact update, event, reward, mechanic, or problem
+- name the exact item, quest, mode, map, mechanic, unlock path, reward, or problem
 - say why it matters to the player now
 - tell the reader what they can do with the article
 
@@ -90,10 +111,8 @@ Use sources for:
 - official announcements
 - Roblox pages
 - game/community links
-- event dates
-- code rewards
 - item stats
-- update claims
+- durable mechanic claims
 - formulas or tool logic
 - screenshots or media claims
 

@@ -25,12 +25,26 @@ For catalog, game catalog, wiki, article, and tool writing, do one page first.
 
 Do not batch-write a whole game or category until one page is researched, written, previewed, and approved as the gold standard. Batch generation is allowed only after the first page proves the research and writing standard.
 
-Every page gets exactly:
+Every serious page workflow gets:
 
+- `todo.md`
 - `research-notes.md`
 - `final.json`
 
 No separate `brief.md`, `review.md`, fan-out plan files, SEO draft files, article body draft files, or generic batch research file.
+
+Use the game-first workspace shape:
+
+```text
+tmp/content-workspace/<game-or-topic-slug>/<page-folder>/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+For game discovery, use `tmp/content-workspace/<game-slug>/discovery/` and omit `final.json` unless a later workflow explicitly needs it. Copy the matching tracker from `agents/content/todo-templates/` into the folder as `todo.md` before research starts.
+
+For full game coverage, use two passes. Pass 1 is catalog-led: resolve the game, audit existing coverage, verify automation-owned codes/events eligibility, and find durable core in-game item collections. Pass 2 happens after core catalog data exists and uses that data to decide wiki, checklist, quiz, tools, and focused evergreen articles. If a recommendation depends on item data that has not been researched yet, mark it `blocked until catalog data` instead of guessing.
 
 ## Research Notes Must Be Human Notes
 
@@ -62,7 +76,7 @@ Use this structure:
 # Research Notes: Page Title
 
 Date: YYYY-MM-DD
-Page Type: catalog | game-catalog | wiki | code-page | article | tool
+Page Type: discovery | catalog | game-catalog | wiki | code-page | events | article | tool | checklist | quiz
 Target: /path-or-code
 Status: researching | needs data update | needs section confirmation | ready to write | needs review
 
@@ -158,9 +172,11 @@ Research the collection and its item groups. For small catalogs, inspect every i
 
 The notes should explain the collection itself before they explain fields.
 
+For game-specific catalogs, reject weak scopes before data work starts. Catalogs should cover durable in-game item collections, not current season pass reward tracks, one-off event reward lists, current ranked season rewards, broad update summaries, gamepasses, badges, servers, developer products, or raw Roblox media. Event/season-origin items belong inside the durable collection they are part of, with source and availability recorded there. UGC is a special exception only when the game has meaningful UGC items and should follow the free Roblox items card pattern.
+
 Run the data and image audit before proposing final copy. Compare local item count with current source counts, page title count, and rendered card count. If a source shows more items than local data, list the missing names and mark the work `needs data update` instead of writing around the gap. If images matter for the collection, count missing images and say whether they can be found locally, need to be gathered, or should be intentionally left blank.
 
-After research, propose the title promise and section style before writing. The title should be unique, well-defined, and tied to the collection's real intent, such as obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison. Choose the strongest in-game grouping, such as rarity, item type, source, event, location, tier, shop, unlock route, or world. The best grouping is the one that helps players understand the collection long-term, not necessarily the dataset's first category field.
+After research, propose the title promise and section style before writing. The title should be unique, well-defined, and tied to the collection's real intent, such as obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison. Choose the strongest in-game grouping, such as rarity, item type, source, location, tier, shop, unlock route, or world. The best grouping is the one that helps players understand the collection long-term, not necessarily the dataset's first category field.
 
 When the route can render copy between item sections, plan `description_json` as short section context. These notes should set up the cards in that section with useful game meaning and should not be repeated in `description_md`.
 
@@ -205,7 +221,7 @@ Research the game as a whole:
 - creator/developer
 - genre and age rating
 - current update direction
-- active codes and events when relevant
+- code/event availability when related sections exist, without copying live rows into wiki copy
 - major systems
 - related catalog collections
 - tools, checklists, quizzes, articles, and social/developer context
@@ -216,7 +232,19 @@ Do not use wiki research as a shortcut to rewrite every related catalog blurb. C
 
 ### Articles
 
-Research the exact niche question, update, event, mechanic, comparison, or guide angle. The article should move like a clear explanation, similar to a good editorial guide: what changed, why it matters, how it works, limitations, and what the reader should do next.
+Research the exact narrow evergreen player question before approving an article. The article should not overlap a codes page, events page, wiki hub, catalog, checklist, quiz, or tool. Avoid generic beginner guides, codes troubleshooting, event topics, current update news, and broad item/category explainers that belong in catalog or wiki copy.
+
+Good article research starts with a specific durable job: how to get a specific item, complete a specific quest/objective, use a specific mode or map, unlock a stable mechanic, farm a stable resource, solve a durable gameplay problem, or compare a narrow set of choices that cards/tables do not already answer.
+
+The article should move like a clear explanation: what the player is trying to do, what requirement or mechanic matters, the steps or decision path, limitations, and what to check next.
+
+### Events Pages
+
+Research event pages as event hubs backed by `events_pages` and sourced timeline rows in `roblox_virtual_events`. First decide whether the page should exist. A game updating often is not enough; event coverage needs named events, phases, dates, rewards, mechanics, or Roblox virtual event feed evidence.
+
+Record source confidence for dates, rewards, and status labels. If the event evidence is weak, mark the page `do not create` or `blocked` instead of writing a generic event page.
+
+Never inject event timeline data manually. Current/upcoming/past rows, live status labels, dates, reward timelines, and one-off current event claims belong in `roblox_virtual_events` or another approved importer, not in `events_pages.content_md`, JSON, SQL, or prose. Event page copy should stay evergreen and orient the player to the automated timeline.
 
 ### Code Pages
 
@@ -230,13 +258,15 @@ Before writing or updating a code page, confirm the source wiring:
 - `seo_title` is empty or null unless the user explicitly asks for a custom value.
 - `scripts/codes/update-codes.ts` can read the row because the game is published and the supported source URLs are in the first two source fields.
 
-Never manually write code rows, active codes, expired codes, code names, `first_seen_at` dates, or reward rows into local JSON, SQL, Supabase, or `final.json`. The code data must come from the codes refresh workflow. After the `games` row has the right source URLs, run `npm run refresh:codes -- --slug <game-slug>` and let the script scrape RobloxDen and Beebom, upsert active codes, expire missing codes, and update `expired_codes`.
+Never manually write code rows, active codes, expired codes, code names, active-code counts, `first_seen_at` dates, reward rows, or source-copied code tables into local JSON, SQL, Supabase, or `final.json`. The code data must come from the codes refresh workflow. After the `games` row has the right source URLs, run `npm run refresh:codes -- --slug <game-slug>` and let the script scrape RobloxDen and Beebom, upsert active codes, expire missing codes, and update `expired_codes`.
 
 The article fields on a code page must work long-term. `seo_description`, `intro_md`, `rewards_md`, `troubleshoot_md`, and `find_codes_md` should not name active codes, include exact dates, mention a month/year, promise daily updates, quote active-code counts, or use stale wording such as `latest` or `current`. A rewards table is fine when it explains reward types and how they affect the game, but it must not map current code names to rewards.
 
 ### Tool Pages
 
 Research the formula, input, output, unit, edge case, and user misunderstanding. Inspect the tool client logic when available.
+
+Use a hard gate before recommending or writing a tool. Check gameplay, search intent, and competing calculators/planners/trackers. A tool needs a real input/output job, reliable formula or data support, and a result that helps players make a decision. If it only duplicates a catalog, article, checklist, or wiki section, mark it `do not create` or `potential future`.
 
 The copy should explain what the result means, not simply say the tool calculates something.
 
@@ -256,6 +286,12 @@ The research should identify:
 - which facts should be grouped instead of repeated for every item
 
 Keep the style close to The Forge, Jailbreak, or 99 Nights in the Forest: compact, direct, and playable. Avoid oversized Blox Fruits-style dumps unless the user wants a very large completion board.
+
+### Quiz Pages
+
+Research quizzes as replayable tests of real game knowledge. Record the game systems, route facts, item details, formulas, thresholds, and common mistakes that can support easy, medium, and hard questions.
+
+Do not write a quiz from vague game familiarity. Easy questions should be friendly, medium questions should require actual play knowledge, and hard questions should be pro-level but source-supported.
 
 ## Current Facts That Need Fresh Checks
 

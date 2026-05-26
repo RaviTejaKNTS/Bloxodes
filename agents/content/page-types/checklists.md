@@ -17,6 +17,8 @@ A good checklist turns a game into a clear route:
 
 Bloxodes normally creates one combined checklist per game. Split a game into multiple checklist pages only when the user explicitly asks or when the game is large enough that one board would become unusable.
 
+For new game coverage, checklist planning should usually wait until catalog-led discovery or core catalog data has identified the real systems, item collections, unlock routes, maps, bosses, shops, and repeatable goals. Do not turn surface-level discovery guesses into a checklist.
+
 ## Database Fields
 
 Write in this shape:
@@ -92,6 +94,17 @@ For normal game checklists, target about 130-190 leaf tasks. This range is deep 
 Use more tasks only when the game has a real completionist surface and the tasks still help a player. Use fewer tasks when the game is small, event-limited, or does not have many repeatable systems.
 
 ## Research Pattern
+
+Create or update:
+
+```text
+tmp/content-workspace/<game-slug>/checklist/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/checklist.md` into the folder as `todo.md` before research starts.
 
 Research should answer:
 

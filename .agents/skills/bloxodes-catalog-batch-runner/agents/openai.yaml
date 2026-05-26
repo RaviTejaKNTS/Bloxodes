@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Catalog Batch Runner"
+  short_description: "Orchestrate approved catalog batches"
+  default_prompt: "Use $bloxodes-catalog-batch-runner to complete approved game catalog pages with one subagent per catalog. Create a parent batch-todo.md, prompt each subagent with exactly one page scope, require a planning gate before data/images/content work, review and approve or request fixes, then parent-QA each completed catalog against data counts, image coverage, card fields, route behavior, FLOW, and final-edit checks."

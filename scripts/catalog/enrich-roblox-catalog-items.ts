@@ -3,7 +3,8 @@ import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 const CATALOG_ITEM_DETAILS_BATCH_API = "https://catalog.roblox.com/v1/catalog/items/details";
-const THUMBNAILS_API = "https://thumbnails.roblox.com/v1/assets";
+const ASSET_THUMBNAILS_API = "https://thumbnails.roblox.com/v1/assets";
+const BUNDLE_THUMBNAILS_API = "https://thumbnails.roblox.com/v1/bundles/thumbnails";
 const USER_AGENT = "BloxodesCatalogBot/1.0";
 
 const ENRICH_LIMIT = Math.max(1, Math.floor(Number(process.env.ROBLOX_CATALOG_ENRICH_LIMIT ?? "200")));
@@ -85,6 +86,7 @@ type QueueRow = {
 
 type ExistingItemRow = {
   asset_id: number;
+  item_type: string | null;
   raw_catalog_json: Record<string, unknown> | null;
   rap: number | null;
   rap_sales: number | null;
@@ -148,6 +150,13 @@ type ThumbnailEntry = {
   imageUrl?: string;
   version?: string;
 };
+
+type CatalogItemRequest = {
+  asset_id: number;
+  item_type: string | null;
+};
+
+type ThumbnailTarget = CatalogItemRequest;
 
 type HistoryRow = {
   asset_id: number;
@@ -245,6 +254,10 @@ function normalizeIdText(value: unknown): string | null {
     return String(Math.trunc(value));
   }
   return null;
+}
+
+function normalizeCatalogItemType(value: unknown): "Asset" | "Bundle" {
+  return normalizeText(value) === "Bundle" ? "Bundle" : "Asset";
 }
 
 function derivePriceStatus(isForSale: boolean | null, fallback: string | null) {
@@ -357,9 +370,9 @@ async function sleep(ms: number) {
   await new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function postCatalogItemDetailsBatch(assetIds: number[]): Promise<Response> {
+async function postCatalogItemDetailsBatch(items: CatalogItemRequest[]): Promise<Response> {
   const body = JSON.stringify({
-    items: assetIds.map((id) => ({ itemType: "Asset", id }))
+    items: items.map((item) => ({ itemType: normalizeCatalogItemType(item.item_type), id: item.asset_id }))
   });
 
   const headers: Record<string, string> = {
@@ -396,13 +409,13 @@ async function postCatalogItemDetailsBatch(assetIds: number[]): Promise<Response
   return res;
 }
 
-async function fetchCatalogItemDetailsBatch(assetIds: number[]): Promise<{
+async function fetchCatalogItemDetailsBatch(items: CatalogItemRequest[]): Promise<{
   ok: boolean;
   status: number;
   payload?: CatalogItemDetails[];
   error?: string;
 }> {
-  if (!assetIds.length) {
+  if (!items.length) {
     return { ok: true, status: 200, payload: [] };
   }
 
@@ -411,7 +424,7 @@ async function fetchCatalogItemDetailsBatch(assetIds: number[]): Promise<{
 
   while (true) {
     await throttleRequest();
-    const res = await postCatalogItemDetailsBatch(assetIds);
+    const res = await postCatalogItemDetailsBatch(items);
 
     if (res.ok) {
       const payload = (await res.json().catch(() => null)) as { data?: CatalogItemDetails[] } | null;
@@ -456,14 +469,7 @@ async function fetchCatalogItemDetailsBatch(assetIds: number[]): Promise<{
   }
 }
 
-async function fetchThumbnails(assetIds: number[]): Promise<ThumbnailEntry[]> {
-  if (!assetIds.length) return [];
-  const params = new URLSearchParams({
-    assetIds: assetIds.join(","),
-    size: THUMBNAIL_SIZE,
-    format: THUMBNAIL_FORMAT
-  });
-  const url = `${THUMBNAILS_API}?${params.toString()}`;
+async function fetchThumbnailEntries(url: string): Promise<ThumbnailEntry[]> {
   let attempt = 0;
   let rateLimitRetries = 0;
 
@@ -508,6 +514,46 @@ async function fetchThumbnails(assetIds: number[]): Promise<ThumbnailEntry[]> {
     attempt += 1;
     await sleep(withJitter(backoff, RETRY_JITTER_MS));
   }
+}
+
+async function fetchAssetThumbnails(assetIds: number[]): Promise<ThumbnailEntry[]> {
+  if (!assetIds.length) return [];
+  const params = new URLSearchParams({
+    assetIds: assetIds.join(","),
+    size: THUMBNAIL_SIZE,
+    format: THUMBNAIL_FORMAT
+  });
+  return fetchThumbnailEntries(`${ASSET_THUMBNAILS_API}?${params.toString()}`);
+}
+
+async function fetchBundleThumbnails(bundleIds: number[]): Promise<ThumbnailEntry[]> {
+  if (!bundleIds.length) return [];
+  const params = new URLSearchParams({
+    bundleIds: bundleIds.join(","),
+    size: THUMBNAIL_SIZE,
+    format: THUMBNAIL_FORMAT,
+    isCircular: "false"
+  });
+  return fetchThumbnailEntries(`${BUNDLE_THUMBNAILS_API}?${params.toString()}`);
+}
+
+async function fetchThumbnails(targets: ThumbnailTarget[]): Promise<ThumbnailEntry[]> {
+  const assetIds: number[] = [];
+  const bundleIds: number[] = [];
+  for (const target of targets) {
+    const type = normalizeCatalogItemType(target.item_type);
+    if (type === "Bundle") {
+      bundleIds.push(target.asset_id);
+    } else {
+      assetIds.push(target.asset_id);
+    }
+  }
+
+  const [assetEntries, bundleEntries] = await Promise.all([
+    fetchAssetThumbnails(assetIds),
+    fetchBundleThumbnails(bundleIds)
+  ]);
+  return [...assetEntries, ...bundleEntries];
 }
 
 async function pickQueueItems(limit: number): Promise<QueueRow[]> {
@@ -558,7 +604,7 @@ async function loadExistingItems(assetIds: number[]): Promise<Map<number, Existi
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from("roblox_catalog_items")
-    .select("asset_id,raw_catalog_json,rap,rap_sales,price_robux,is_for_sale,favorite_count")
+    .select("asset_id,item_type,raw_catalog_json,rap,rap_sales,price_robux,is_for_sale,favorite_count")
     .in("asset_id", assetIds);
 
   if (error) {
@@ -656,7 +702,7 @@ async function run() {
     const itemUpdates: Record<string, unknown>[] = [];
     const queueUpdates: Record<string, unknown>[] = [];
     const historyRows: HistoryRow[] = [];
-    const thumbnailTargets: number[] = [];
+    const thumbnailTargets: ThumbnailTarget[] = [];
     const errorStats = new Map<string, number>();
     let loggedErrors = 0;
     const existingItems = await loadExistingItems(queue.map((row) => row.asset_id));
@@ -685,7 +731,7 @@ async function run() {
             is_for_sale: existing?.is_for_sale ?? null,
             favorite_count: existing?.favorite_count ?? null
           });
-          thumbnailTargets.push(assetId);
+          thumbnailTargets.push({ asset_id: assetId, item_type: existing?.item_type ?? null });
           queueUpdates.push({
             asset_id: assetId,
             priority,
@@ -700,7 +746,12 @@ async function run() {
       }
 
       try {
-        details = await fetchCatalogItemDetailsBatch(detailBatch.map((entry) => entry.asset_id));
+        details = await fetchCatalogItemDetailsBatch(
+          detailBatch.map((entry) => ({
+            asset_id: entry.asset_id,
+            item_type: existingItems.get(entry.asset_id)?.item_type ?? null
+          }))
+        );
       } catch (error) {
         const message = (error as Error).message ?? "Catalog batch fetch failed";
         const key = `fetch_error:${message.slice(0, 80)}`;
@@ -754,7 +805,7 @@ async function run() {
               is_for_sale: existing?.is_for_sale ?? null,
               favorite_count: existing?.favorite_count ?? null
             });
-            thumbnailTargets.push(assetId);
+            thumbnailTargets.push({ asset_id: assetId, item_type: existing?.item_type ?? null });
             queueUpdates.push({
               asset_id: assetId,
               priority,
@@ -951,7 +1002,7 @@ async function run() {
           is_for_sale: isForSale,
           favorite_count: favoriteCount
         });
-        thumbnailTargets.push(assetId);
+        thumbnailTargets.push({ asset_id: assetId, item_type: existing?.item_type ?? null });
 
         queueUpdates.push({
           asset_id: assetId,

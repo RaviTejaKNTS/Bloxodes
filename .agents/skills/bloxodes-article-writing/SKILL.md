@@ -1,6 +1,6 @@
 ---
 name: bloxodes-article-writing
-description: Write or rewrite researched Bloxodes articles backed by the articles table. Use for Roblox game guides, event guides, update explainers, system explainers, how-tos, troubleshooting, comparisons, lists, article SEO, content_md, tags, sources, and article output that needs current research and player-first structure.
+description: Write or rewrite researched evergreen Bloxodes articles backed by the articles table. Use for focused Roblox how-tos, specific item/quest/mode/map/mechanic guides, narrow comparisons, article SEO, content_md, tags, sources, and article output that must avoid overlap with codes, events, wiki hubs, and catalog pages.
 ---
 
 # Bloxodes Article Writing
@@ -16,19 +16,39 @@ Read:
 
 If these files have not been read in the current task, read them before writing.
 
-If the target is a `/codes/<slug>` page backed by the `games` table, stop and use `agents/content/page-types/code-pages.md` instead. Code pages are source-driven and must not manually include active code rows, expired code rows, code dates, or current-code reward mappings in article fields or metadata.
+If the target is a `/codes/<slug>` page backed by the `games` table, stop and use `bloxodes-code-writing` instead. Code pages are source-driven and must not manually include active code rows, expired code rows, code dates, or current-code reward mappings in article fields or metadata.
+
+Create or update the workspace before writing:
+
+```text
+tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/article.md` into the folder as `todo.md` and update it as work progresses.
 
 ## What This Skill Is For
 
-Use this for researched articles: guides, update explainers, event guides, system explainers, how-tos, troubleshooting, comparisons, lists, and Roblox support-style pieces.
+Use this for researched evergreen articles: focused how-tos, specific item or quest guides, mode/map/mechanic explainers, narrow comparisons, and durable troubleshooting that does not belong on a codes page.
 
 Articles can be more narrative than catalog or wiki pages, but they still need to stay useful. The reader should understand the topic better after each section, not feel like they are being carried through SEO filler.
+
+Hard pass on overlap:
+
+- no current codes, code troubleshooting, or code reward articles
+- no event articles, event timelines, or current event reward guides
+- no broad "beginner guide"
+- no broad "maps explained", "skins explained", or collection overview topics that should be catalog/wiki copy
+- no current update/news article; permanent mechanics should be framed as evergreen how-to or system guides
 
 Use these inputs:
 
 - `research-notes.md`
 - article type
 - exact niche question or angle
+- overlap check against codes, events, wiki, catalog, checklist, quiz, and tool pages
 - target game or universe if relevant
 - related Bloxodes pages
 - source links for unstable claims
@@ -68,11 +88,11 @@ The feature image should also appear inside `content_md` before the first H2, ma
 
 ## How To Write The Article
 
-Verify unstable facts before writing. If the article covers an event, update, code reward, date, item stat, formula, or live game state, check current sources and record them in `research-notes.md`.
+Verify unstable facts before writing. If the article covers an item stat, formula, unlock condition, durable mechanic, price, route, or live game state, check current sources and record them in `research-notes.md`. If the topic depends on current codes or events, stop and use the proper automation-owned page workflow instead of writing an article.
 
-Research the exact question or angle before choosing structure. A how-to, a comparison, a troubleshooting piece, and an update explainer should not all share the same rhythm.
+Research the exact question or angle before choosing structure. A how-to, a narrow comparison, and a troubleshooting piece should not all share the same rhythm. If the topic cannot be stated as one specific player question, it is probably not ready.
 
-Start with the useful issue: the current update, the mechanic, the decision, the problem, or the reward the reader came to understand. Avoid broad Roblox setup and do not repeat the title in different words.
+Start with the useful issue: the specific mechanic, item, quest, map, mode, decision, or problem the reader came to understand. Avoid broad Roblox setup and do not repeat the title in different words.
 
 Use headings that tell the reader what the section explains. Put context before tables, lists, or steps. Use numbered lists for processes, bullets for scan-heavy details, and paragraphs when the reader needs explanation or judgment.
 

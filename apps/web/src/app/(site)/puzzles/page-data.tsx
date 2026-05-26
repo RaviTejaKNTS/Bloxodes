@@ -1,0 +1,356 @@
+import Link from "next/link";
+import type { ReactNode } from "react";
+import { FiClock } from "react-icons/fi";
+import { Check } from "lucide-react";
+import type { ContentFaqItem } from "@/components/ContentFaq";
+import { PageBreadcrumb } from "@/components/PageBreadcrumb";
+import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
+import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
+import {
+  getPuzzleAnswerByDate,
+  getPuzzlePageBySlug,
+  getPuzzlePageWithAnswers,
+  listPublishedPuzzlePages,
+  type PuzzleAnswer,
+  type PuzzlePage
+} from "@/lib/puzzles";
+import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
+import { PuzzleVisualAnswer } from "./components/PuzzleVisualAnswer";
+
+export const PUZZLES_DESCRIPTION =
+  "Daily puzzle answers for Wordle, Connections, Strands, Spelling Bee, Letter Boxed, Sudoku, Pips, Contexto, Letroso, and LinkedIn games.";
+
+type AnyRecord = Record<string, unknown>;
+
+function asRecord(value: unknown): AnyRecord {
+  return value && typeof value === "object" && !Array.isArray(value) ? (value as AnyRecord) : {};
+}
+
+function asString(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
+function summaryOf(answer: PuzzleAnswer | null): AnyRecord {
+  return asRecord(answer?.answer_summary);
+}
+
+function formatDate(value?: string | null, options: Intl.DateTimeFormatOptions = { month: "long", day: "numeric", year: "numeric" }) {
+  if (!value) return "";
+  const date = new Date(`${value.slice(0, 10)}T12:00:00Z`);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat("en-US", { timeZone: "UTC", ...options }).format(date);
+}
+
+function formatDateShort(value?: string | null) {
+  return formatDate(value, { month: "short", day: "numeric", year: "numeric" });
+}
+
+function formatUpdated(value?: string | null) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC"
+  }).format(date);
+}
+
+function formatRelativeChecked(value?: string | null) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  const now = new Date();
+  const todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  const checkedUtc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+  const diffDays = Math.round((todayUtc - checkedUtc) / (24 * 60 * 60 * 1000));
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays === 2) return "2 days ago";
+  return null;
+}
+
+function formatUpdatedDate(value?: string | null) {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  }).format(date);
+}
+
+function puzzleIdLabel(answer: PuzzleAnswer | null) {
+  const id = answer?.puzzle_id || asString(summaryOf(answer).puzzleId);
+  return id ? `Puzzle #${id}` : null;
+}
+
+function answerTitle(label: string, answer: PuzzleAnswer | null) {
+  const date = answer?.answer_date ? formatDateShort(answer.answer_date) : "";
+  const id = puzzleIdLabel(answer);
+  return [label, date, id].filter(Boolean).join(" - ");
+}
+
+function MarkdownBlock({ html }: { html: string }) {
+  if (!html) return null;
+  return <div className="article-content md-copy-scope game-copy">{renderHtmlAsReactNodes(html, { keyPrefix: "md" })}</div>;
+}
+
+function PuzzleFaq({ items }: { items: ContentFaqItem[] }) {
+  if (!items.length) return null;
+
+  return (
+    <section>
+      <h2 className="text-2xl font-semibold tracking-tight text-foreground">FAQ</h2>
+      <div className="mt-4 space-y-5">
+        {items.map((item) => (
+          <div key={item.id}>
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 shrink-0 text-xs font-semibold uppercase tracking-[0.18em] text-muted">Q.</span>
+              <p className="text-base font-semibold leading-6 text-foreground">{item.question}</p>
+            </div>
+            <div className="content-faq-answer md-copy-scope mt-2 sm:pl-8">{item.answer}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+async function markdownNodes(markdown?: string | null) {
+  if (!markdown) return null;
+  const html = await renderMarkdown(markdown, { paragraphizeLineBreaks: true });
+  return <MarkdownBlock html={html} />;
+}
+
+async function buildFaqItems(page: PuzzlePage): Promise<ContentFaqItem[]> {
+  const entries = Array.isArray(page.faq_json) ? page.faq_json : [];
+  const items = await Promise.all(
+    entries.map(async (entry, index) => {
+      const html = await renderMarkdown(entry.a ?? "", { paragraphizeLineBreaks: true });
+      return {
+        id: `${page.slug}-faq-${index}`,
+        question: entry.q,
+        answer: <MarkdownBlock html={html} />
+      };
+    })
+  );
+  return items;
+}
+
+function AnswerShell({
+  title,
+  answer,
+  children
+}: {
+  title: string;
+  answer: PuzzleAnswer | null;
+  children: ReactNode;
+}) {
+  if (!answer) {
+    return (
+      <section>
+        <h2 className="text-xl font-semibold text-foreground">{title}</h2>
+        <p className="mt-2 text-sm text-muted">No saved answer is available yet.</p>
+      </section>
+    );
+  }
+
+  const fetched = formatUpdated(answer.fetched_at);
+  const fetchedRelative = formatRelativeChecked(answer.fetched_at);
+  return (
+    <section>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h2 className="text-xl font-semibold text-foreground">{answerTitle(title, answer)}</h2>
+          {fetched ? (
+            <p className="mt-1 flex items-center gap-1.5 text-sm leading-5 text-muted">
+              <Check className="h-3.5 w-3.5 shrink-0" aria-hidden />
+              <span>
+                Checked and verified on {fetched}
+                {fetchedRelative ? <span> ({fetchedRelative})</span> : null}
+              </span>
+            </p>
+          ) : null}
+        </div>
+      </div>
+      <div className="mt-4">{children}</div>
+    </section>
+  );
+}
+
+function renderAnswerContent(page: PuzzlePage, answer: PuzzleAnswer) {
+  return <PuzzleVisualAnswer puzzleSlug={page.slug} payload={answer.payload} summary={answer.answer_summary} />;
+}
+
+export async function loadPuzzlesIndexData() {
+  const pages = await listPublishedPuzzlePages();
+  return { pages };
+}
+
+export async function renderPuzzlesIndex({ pages }: Awaited<ReturnType<typeof loadPuzzlesIndexData>>) {
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Puzzle Answers",
+    description: PUZZLES_DESCRIPTION,
+    url: `${SITE_URL.replace(/\/$/, "")}/puzzles`
+  };
+
+  return (
+    <div className="space-y-8">
+      <header className="space-y-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Puzzle Answers</p>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">Daily puzzle answers in one clean place</h1>
+        <p className="max-w-2xl text-base text-muted md:text-lg">{PUZZLES_DESCRIPTION}</p>
+      </header>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {pages.map((page) => (
+          <Link key={page.slug} href={`/puzzles/${page.slug}`} className="group rounded-lg border border-border/70 bg-card p-5 transition-colors hover:border-border">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">{page.provider}</p>
+            <h2 className="mt-2 text-xl font-semibold text-foreground group-hover:text-accent">{page.title}</h2>
+            <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted">{page.meta_description}</p>
+            {page.latest_answer_date ? <p className="mt-4 text-xs font-semibold text-foreground/70">Latest: {formatDateShort(page.latest_answer_date)}</p> : null}
+          </Link>
+        ))}
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
+    </div>
+  );
+}
+
+export async function loadPuzzleDetailData(slug: string) {
+  return getPuzzlePageWithAnswers(slug);
+}
+
+export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<typeof loadPuzzleDetailData>>>) {
+  const { page, today, yesterday, archive } = data;
+  const intro = await markdownNodes(page.intro_md);
+  const answerIntro = await markdownNodes(page.answer_intro_md);
+  const how = await markdownNodes(page.how_to_play_md);
+  const description = await markdownNodes(page.description_md);
+  const faqItems = await buildFaqItems(page);
+  const updatedLabel = formatUpdatedDate(today?.fetched_at ?? page.content_updated_at ?? page.updated_at ?? page.published_at);
+  const baseUrl = SITE_URL.replace(/\/$/, "");
+  const breadcrumb = breadcrumbJsonLd([
+    { name: "Home", url: baseUrl },
+    { name: "Puzzles", url: `${baseUrl}/puzzles` },
+    { name: page.title, url: `${baseUrl}/puzzles/${page.slug}` }
+  ]);
+  const webPage = webPageJsonLd({
+    title: page.seo_title || page.title,
+    description: page.meta_description || PUZZLES_DESCRIPTION,
+    slug: `/puzzles/${page.slug}`,
+    siteUrl: baseUrl,
+    image: "/og-image.png",
+    author: null,
+    publishedAt: page.published_at,
+    updatedAt: page.content_updated_at ?? page.updated_at
+  });
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <PageBreadcrumb
+          className="mb-4 text-xs uppercase tracking-[0.25em] text-muted"
+          items={[{ label: "Puzzles", href: "/puzzles" }, { label: page.title }]}
+        />
+        <header className="mb-6">
+          <h1 className="text-4xl font-bold text-foreground md:text-5xl">{page.title}</h1>
+          {updatedLabel ? (
+            <div className="mt-4 flex flex-col gap-3 text-sm text-muted">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 text-foreground/80">
+                  <FiClock className="h-4 w-4 shrink-0" aria-hidden />
+                  Updated on <span className="font-semibold text-foreground">{updatedLabel}</span>
+                </span>
+              </div>
+            </div>
+          ) : null}
+          {intro ? <div className="mt-5">{intro}</div> : null}
+        </header>
+      </div>
+
+      {answerIntro ? <section>{answerIntro}</section> : null}
+
+      <div className="space-y-8">
+        <AnswerShell title="Today's Answer" answer={today}>{today ? renderAnswerContent(page, today) : null}</AnswerShell>
+        <AnswerShell title="Yesterday's Answer" answer={yesterday}>{yesterday ? renderAnswerContent(page, yesterday) : null}</AnswerShell>
+      </div>
+
+      {how ? <section><h2 className="mb-4 text-2xl font-semibold text-foreground">How to Play</h2>{how}</section> : null}
+      {description ? <section>{description}</section> : null}
+
+      {archive.length ? (
+        <section>
+          <h2 className="text-2xl font-semibold text-foreground">Answer Archive</h2>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[420px] border-collapse text-sm">
+              <thead>
+                <tr className="text-left text-xs uppercase tracking-[0.18em] text-muted">
+                  <th className="py-2 pr-4">Date</th>
+                  <th className="py-2 pr-4">Puzzle</th>
+                  <th className="py-2">Archive</th>
+                </tr>
+              </thead>
+              <tbody>
+                {archive.map((answer) => (
+                  <tr key={answer.id}>
+                    <td className="py-3 pr-4 text-foreground">{formatDate(answer.answer_date)}</td>
+                    <td className="py-3 pr-4 text-muted">{puzzleIdLabel(answer) ?? "-"}</td>
+                    <td className="py-3"><Link className="font-semibold text-accent hover:underline" href={`/puzzles/${page.slug}/${answer.answer_date}`}>View answer</Link></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
+
+      <PuzzleFaq items={faqItems} />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPage) }} />
+    </div>
+  );
+}
+
+export async function loadPuzzleArchiveData(slug: string, date: string) {
+  const [page, answer] = await Promise.all([getPuzzlePageBySlug(slug), getPuzzleAnswerByDate(slug, date)]);
+  if (!page || !answer) return null;
+  return { page, answer };
+}
+
+export async function renderPuzzleArchive(data: NonNullable<Awaited<ReturnType<typeof loadPuzzleArchiveData>>>) {
+  const { page, answer } = data;
+  const description = page.description_md ? markdownToPlainText(page.description_md).slice(0, 220) : page.meta_description;
+
+  return (
+    <div className="space-y-8">
+      <PageBreadcrumb
+        items={[
+          { label: "Puzzles", href: "/puzzles" },
+          { label: page.title, href: `/puzzles/${page.slug}` },
+          { label: formatDateShort(answer.answer_date) }
+        ]}
+      />
+      <header className="space-y-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Puzzle archive</p>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
+          {page.title} for {formatDate(answer.answer_date)}
+        </h1>
+        {description ? <p className="max-w-2xl text-base text-muted md:text-lg">{description}</p> : null}
+      </header>
+
+      <AnswerShell title="Archived Answer" answer={answer}>{renderAnswerContent(page, answer)}</AnswerShell>
+
+      <div className="rounded-lg border border-border/70 bg-surface/60 p-4 text-sm text-muted">
+        Looking for the newest answer? <Link className="font-semibold text-accent hover:underline" href={`/puzzles/${page.slug}`}>Open the current {page.title} page</Link>.
+      </div>
+    </div>
+  );
+}

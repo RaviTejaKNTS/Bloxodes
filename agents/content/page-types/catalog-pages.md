@@ -12,6 +12,8 @@ Do not start from fields. Start from the collection.
 
 Do not start from stale data either. If the collection has item cards, tables, images, counts, prices, sources, or availability states, research must check whether those facts are current enough before public copy is written.
 
+For game-specific catalogs, keep the scope to durable in-game item collections. Do not create catalogs for current season tracks, one-off event rewards, ranked-season rewards, broad update summaries, gamepasses, badges, servers, developer products, or raw Roblox media. If an event or season created permanent items, put those items inside their core collection and mark the source/availability there. UGC is a special exception only when the game has meaningful UGC items, and it should use the item-card pattern from the free Roblox items page.
+
 Bad:
 
 ```markdown
@@ -25,6 +27,17 @@ Items from a current shop can usually be bought again. Items from an old event, 
 ```
 
 ## Database Fields
+
+Create or update:
+
+```text
+tmp/content-workspace/<topic-or-game-slug>/catalogs/<catalog-code-or-collection-slug>/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/catalog.md` into the folder as `todo.md` before research starts. Use the game-catalog template for dataset-backed pages under `/wiki/<game-slug>/<collection-slug>`.
 
 Write in this shape:
 
@@ -55,7 +68,7 @@ Only include fields you are updating. Do not invent image URLs or schema payload
 - `meta_description`: under 160 characters, specific to the collection.
 - `intro_md`: short context before the primary data section.
 - `description_md`: page-level Markdown for the whole collection: mechanics, obtainment, location, overall rules, and mistakes that apply beyond one item section.
-- `description_json`: section-level context shown between item-card groups. Use it when the page is divided by rarity, item type, source, event, location, tier, shop, or another meaningful in-game grouping.
+- `description_json`: section-level context shown between item-card groups. Use it when the page is divided by rarity, item type, source, location, tier, shop, or another meaningful in-game grouping.
 - `how_it_works_md`: explain how players should interpret the data in gameplay terms.
 - `faq_json`: real questions players would ask after seeing the data.
 - `wiki_md`: compact game-system explanation for the game wiki hub. It is not CTA/link-card copy.
@@ -90,7 +103,7 @@ The proposal should include:
 - data update plan if the current local data is stale, incomplete, poorly shaped, or missing expected images
 - recommended visible title and `seo_title`
 - exact title promise and the content coverage needed to satisfy it
-- the recommended grouping axis, such as rarity, item type, source, event, location, tier, shop, world, or unlock route
+- the recommended grouping axis, such as rarity, item type, source, location, tier, shop, world, or unlock route
 - why that grouping has real in-game meaning
 - alternatives considered and why they are weaker
 - the planned `description_json` keys and short notes for each section

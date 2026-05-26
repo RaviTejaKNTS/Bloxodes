@@ -138,8 +138,8 @@ Options:
   --quality-creators-only   Seed creator expansion only from A/B quality candidates
   --light-limit <number>    Light enrichment limit; 0 skips (default: 500)
   --score-limit <number>    Quality scoring limit; 0 scores all (default: 1000)
-  --playing-limit <number>  Update playing for top quality rows; 0 skips
-  --stats-limit <number>    Update stats for top quality rows; 0 skips
+  --playing-limit <number>  Legacy alias for hourly public stats limit; 0 skips
+  --stats-limit <number>    Update hourly public stats and today's daily rollup; 0 skips
   --deep-limit <number>     Deep-enrich top quality rows; 0 skips
   --refresh-lists           Refresh game lists at the end
   --skip-search             Skip search discovery
@@ -172,6 +172,7 @@ function npmStep(name: string, script: string, args: string[], enabled: boolean)
 }
 
 function buildSteps(options: Options): Step[] {
+  const hourlyStatsLimit = Math.max(options.statsLimit, options.playingLimit);
   return [
     npmStep(
       "Search discovery",
@@ -214,16 +215,16 @@ function buildSteps(options: Options): Step[] {
       !options.skipCreators && options.creatorJobs >= 0
     ),
     npmStep(
-      "Playing refresh",
-      "update:playing",
-      ["--quality-only", "--limit", String(options.playingLimit)],
-      options.playingLimit > 0
+      "Hourly stats refresh",
+      "update:hourly-stats",
+      ["--quality-only", "--rollup-today", "--limit", String(hourlyStatsLimit)],
+      hourlyStatsLimit > 0
     ),
     npmStep(
-      "Stats refresh",
-      "update:stats",
-      ["--quality-only", "--limit", String(options.statsLimit)],
-      options.statsLimit > 0
+      "Stats rank snapshots",
+      "stats:rank",
+      ["--quality-only", "--limit", String(Math.max(hourlyStatsLimit, 250))],
+      hourlyStatsLimit > 0
     ),
     npmStep(
       "Deep enrichment",

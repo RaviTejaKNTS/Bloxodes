@@ -16,11 +16,24 @@ Read:
 
 If these files have not been read in the current task, read them before writing or importing a checklist.
 
+Create or update the game-first workspace before writing:
+
+```text
+tmp/content-workspace/<game-slug>/checklist/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/checklist.md` into the folder as `todo.md` and update it as work progresses.
+
 ## What This Skill Is For
 
 Use this when the page is an interactive progress board under `/checklists/<slug>`. A checklist is not an article and it is not a full item database. It helps a player track real tasks while playing: first-session setup, major systems, important collection goals, route checks, boss clears, shop/service visits, and final completion audits.
 
 Bloxodes normally creates one combined checklist per game unless the user explicitly asks for multiple. For a game-specific checklist, use the game slug as the checklist slug. Example: `wizard-alchemy`, not `wizard-alchemy-checklist`.
+
+For new game coverage, prefer writing the checklist after core catalog data or catalog-led discovery has identified the real systems, unlocks, item collections, routes, and repeatable goals. Do not turn vague page-discovery guesses into checkable tasks.
 
 ## Required Shape
 
@@ -69,8 +82,6 @@ The `section_code` controls rendering:
 Only leaf rows count toward progress. Parent and subsection rows should label the board and explain why that group matters.
 
 ## Workflow
-
-Create or update `tmp/content-workspace/YYYY-MM-DD/checklists/<slug>/research-notes.md`.
 
 Research the game like a player. Explain the game loop, progression systems, item collections, repeatable routes, confusing terms, and what a player would naturally want to track. Inspect existing Bloxodes checklist pages and the current `checklist_pages_view` / `checklist_items` rows before choosing the new structure.
 

@@ -11,8 +11,10 @@ export type PublicCacheEventType =
   | "catalog"
   | "music"
   | "quiz"
+  | "puzzle"
   | "wiki"
-  | "wiki_catalog";
+  | "wiki_catalog"
+  | "stats";
 
 export type PublicCacheEvent = {
   type: PublicCacheEventType;
@@ -22,6 +24,16 @@ export type PublicCacheEvent = {
 const MUSIC_CATALOG_CODE = "roblox-music-ids";
 const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
 const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
+const AVATAR_CATALOG_MASTER_CODE = "roblox-items-and-bundles";
+const AVATAR_CATALOG_LEGACY_MASTER_CODE = "roblox-avatar-items";
+const AVATAR_CATALOG_LEGACY_PREFIXES = [
+  "roblox-accessories",
+  "roblox-clothing",
+  "roblox-body-parts",
+  "roblox-emotes",
+  "roblox-animations",
+  "roblox-makeup"
+];
 
 function unique(values: string[]) {
   return Array.from(new Set(values.map((value) => value.trim()).filter(Boolean)));
@@ -78,6 +90,43 @@ function musicScopeTags(slug: string) {
   return tags;
 }
 
+function normalizeAvatarCatalogSlugForTags(slug: string) {
+  const parts = normalizeCacheSlug(slug).split("/").filter(Boolean);
+  const [prefix, ...rest] = parts;
+
+  if (prefix === AVATAR_CATALOG_MASTER_CODE) {
+    return parts.join("/");
+  }
+
+  if (prefix === AVATAR_CATALOG_LEGACY_MASTER_CODE) {
+    return [AVATAR_CATALOG_MASTER_CODE, ...rest].join("/");
+  }
+
+  if (AVATAR_CATALOG_LEGACY_PREFIXES.some((entry) => entry === prefix)) {
+    return [AVATAR_CATALOG_MASTER_CODE, ...parts].join("/");
+  }
+
+  return parts.join("/");
+}
+
+function isAvatarCatalogSlug(slug: string) {
+  const normalized = normalizeAvatarCatalogSlugForTags(slug);
+  return normalized === AVATAR_CATALOG_MASTER_CODE || normalized.startsWith(`${AVATAR_CATALOG_MASTER_CODE}/`);
+}
+
+function avatarCatalogScopeTags(slug: string) {
+  const normalized = normalizeAvatarCatalogSlugForTags(slug);
+  const parts = normalized.split("/").filter(Boolean);
+  const familyCode = parts.length > 1 ? parts.slice(0, 2).join("/") : "";
+  return unique([
+    "avatar-catalog",
+    slugTag("avatar-catalog", AVATAR_CATALOG_MASTER_CODE),
+    slugTag("avatar-catalog", normalized),
+    familyCode ? slugTag("avatar-catalog", familyCode) : "",
+    slugTag("catalog", normalized)
+  ]);
+}
+
 export function cacheTagsForPath(pathname: string) {
   const pathnameOnly = normalizePathname(pathname);
   const segments = pathnameOnly.split("/").filter(Boolean);
@@ -130,6 +179,11 @@ export function cacheTagsForPath(pathname: string) {
     return unique([...tags, "quizzes", slugTag("quiz", second)]);
   }
 
+  if (first === "puzzles") {
+    if (!second || second === "page") return unique([...tags, "puzzles-index"]);
+    return unique([...tags, "puzzles", slugTag("puzzle", second)]);
+  }
+
   if (first === "tools") {
     if (!second || second === "page") return unique([...tags, "tools-index"]);
     return unique([...tags, "tools", slugTag("tool", segments.join("/").replace(/^tools\//, ""))]);
@@ -138,6 +192,13 @@ export function cacheTagsForPath(pathname: string) {
   if (first === "lists") {
     if (!second || second === "page") return unique([...tags, "lists-index"]);
     return unique([...tags, "lists", slugTag("list", second)]);
+  }
+
+  if (first === "stats") {
+    if (!second) return unique([...tags, "stats", "stats-home"]);
+    if (second === "games" && !third) return unique([...tags, "stats", "stats-games"]);
+    if (second === "games" && third) return unique([...tags, "stats", "stats-games", slugTag("stats-game", third)]);
+    return unique([...tags, "stats"]);
   }
 
   if (first === "wiki") {
@@ -157,6 +218,7 @@ export function cacheTagsForPath(pathname: string) {
     if (!second || second === "page") return unique([...tags, "catalog-index"]);
 
     const catalogSlug = segments.slice(1).join("/");
+    const catalogSlugForTags = catalogSlug.replace(/\/page(?:\/\d+)?$/i, "");
     const catalogTags = [...tags, "catalog", slugTag("catalog", second)];
 
     if (second === FREE_ITEMS_CATALOG_CODE || second === LEGACY_FREE_ITEMS_CATALOG_CODE) {
@@ -171,6 +233,10 @@ export function cacheTagsForPath(pathname: string) {
       catalogTags.push(...musicScopeTags(catalogSlug));
       if (third === "genres" && fourth) catalogTags.push(`music-genre:${fourth}`);
       if (third === "artists" && fourth) catalogTags.push(`music-artist:${fourth}`);
+    }
+
+    if (isAvatarCatalogSlug(catalogSlugForTags)) {
+      catalogTags.push(...avatarCatalogScopeTags(catalogSlugForTags));
     }
 
     return unique(catalogTags);
@@ -216,8 +282,32 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
       return unique([...base, slugTag("tool", normalized), "tools-index", "home", "sitemap", "sitemap:tools"]);
     case "quiz":
       return unique([...base, slugTag("quiz", normalized), "quizzes-index", "home", "sitemap", "sitemap:quizzes"]);
+    case "puzzle": {
+      const [puzzleSlug] = normalized.split("/");
+      return unique([
+        ...base,
+        puzzleSlug ? slugTag("puzzle", puzzleSlug) : "",
+        "puzzles-index",
+        "home",
+        "feed",
+        "sitemap",
+        "sitemap:puzzles"
+      ]);
+    }
     case "wiki":
       return unique([...base, slugTag("wiki", normalized), "wiki-index", "home", "sitemap", "sitemap:wiki"]);
+    case "stats":
+      return unique([
+        ...base,
+        "stats",
+        normalized === "home" || normalized === "stats" ? "stats-home" : "",
+        normalized === "games" ? "stats-games" : "",
+        normalized.startsWith("games/") ? "stats-games" : "",
+        normalized.startsWith("games/") ? slugTag("stats-game", normalized.replace(/^games\//, "")) : "",
+        "home",
+        "sitemap",
+        "sitemap:stats"
+      ]);
     case "wiki_catalog": {
       const [wikiSlug, collectionSlug] = normalized.split("/");
       const flatCatalogSlug = wikiSlug && collectionSlug ? `${wikiSlug}-${collectionSlug}` : "";
@@ -255,6 +345,10 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         normalized.startsWith(`${LEGACY_FREE_ITEMS_CATALOG_CODE}/`)
       ) {
         tags.push(...freeItemScopeTags(normalized));
+      }
+
+      if (isAvatarCatalogSlug(normalized)) {
+        tags.push(...avatarCatalogScopeTags(normalized));
       }
 
       return unique(tags);

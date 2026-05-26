@@ -4,6 +4,8 @@ Use this after the first `final.json` draft and before the final edit gate. The 
 
 The failure this pass prevents is easy to spot: the facts may be true, but the page feels like random sections were stitched together from fields. A normal reader should never wonder why a heading exists, why the paragraph jumped there, or what the section is trying to help them do.
 
+Before the pass starts, open the page folder's `todo.md` and confirm the research/data/approval gates that apply to the page type are checked or explicitly blocked. After the rewrite, mark the FLOW item complete in `todo.md` and record the pass in `research-notes.md`.
+
 ## What FLOW Means
 
 FLOW means the public copy moves like a player explanation:

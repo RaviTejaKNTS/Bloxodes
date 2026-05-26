@@ -49,8 +49,19 @@ type ListRow = {
   refreshed_at: string | null;
 };
 
+type PuzzleRow = {
+  slug: string | null;
+  title: string | null;
+  meta_description: string | null;
+  content_updated_at: string | null;
+  latest_fetched_at: string | null;
+  updated_at: string | null;
+  published_at: string | null;
+};
+
 const FEED_LIMIT = 120;
-const FEED_DESCRIPTION = "Latest Roblox codes, guides, checklists, rankings, and event updates from Bloxodes.";
+const FEED_DESCRIPTION =
+  "Latest Roblox codes, guides, checklists, rankings, puzzle answers, and event updates from Bloxodes.";
 
 function escapeXml(value: string): string {
   return value
@@ -86,7 +97,7 @@ function toFeedItem(input: {
 
 async function loadFeedItems(): Promise<FeedItem[]> {
   const sb = supabaseAdmin();
-  const [articlesRes, gamesRes, checklistsRes, eventsRes, listsRes] = await Promise.all([
+  const [articlesRes, gamesRes, checklistsRes, eventsRes, listsRes, puzzlesRes] = await Promise.all([
     sb
       .from("articles")
       .select("slug, title, updated_at, published_at")
@@ -121,11 +132,23 @@ async function loadFeedItems(): Promise<FeedItem[]> {
       .eq("is_published", true)
       .not("slug", "is", null)
       .order("updated_at", { ascending: false })
+      .limit(40),
+    sb
+      .from("puzzle_pages_view")
+      .select("slug, title, meta_description, content_updated_at, latest_fetched_at, updated_at, published_at")
+      .eq("is_published", true)
+      .not("slug", "is", null)
+      .order("content_updated_at", { ascending: false, nullsFirst: false })
       .limit(40)
   ]);
 
   const firstError =
-    articlesRes.error || gamesRes.error || checklistsRes.error || eventsRes.error || listsRes.error;
+    articlesRes.error ||
+    gamesRes.error ||
+    checklistsRes.error ||
+    eventsRes.error ||
+    listsRes.error ||
+    puzzlesRes.error;
   if (firstError) {
     throw firstError;
   }
@@ -193,6 +216,19 @@ async function loadFeedItems(): Promise<FeedItem[]> {
         description: "Live ranking list update.",
         updatedAt: list.refreshed_at ?? list.updated_at,
         publishedAt: list.updated_at
+      })
+    );
+  }
+
+  for (const puzzle of (puzzlesRes.data ?? []) as PuzzleRow[]) {
+    if (!puzzle.slug || !puzzle.title) continue;
+    items.push(
+      toFeedItem({
+        title: puzzle.title,
+        path: `/puzzles/${puzzle.slug}`,
+        description: puzzle.meta_description ?? "Daily puzzle answer update.",
+        updatedAt: puzzle.content_updated_at ?? puzzle.latest_fetched_at ?? puzzle.updated_at,
+        publishedAt: puzzle.published_at
       })
     );
   }

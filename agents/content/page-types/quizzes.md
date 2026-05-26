@@ -17,6 +17,8 @@ A good game quiz checks whether a player understands the systems that matter in 
 
 Bloxodes normally creates one combined quiz per game. Do not split a game into multiple quiz pages unless the user explicitly asks or the game has a clear reason for separate quiz markets.
 
+For new game coverage, quiz writing should usually wait until catalog-led discovery or core catalog data has produced stable facts. Do not build quiz questions from surface-level guesses, current code names, current event status, or temporary reward tracks.
+
 ## Database And Data Shape
 
 The page metadata lives in `quiz_pages`:
@@ -120,10 +122,13 @@ Do not use joke answers unless the whole quiz style calls for it. Bloxodes quizz
 Create or update:
 
 ```text
-tmp/content-workspace/YYYY-MM-DD/quizzes/<slug>/
+tmp/content-workspace/<game-slug>/quiz/
+  todo.md
   research-notes.md
   final.json
 ```
+
+Copy `agents/content/todo-templates/quiz.md` into the folder as `todo.md` before research starts.
 
 `research-notes.md` should include:
 

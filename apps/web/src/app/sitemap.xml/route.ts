@@ -13,10 +13,12 @@ const SITEMAP_PATHS = [
   "/sitemaps/tools.xml",
   "/sitemaps/checklists.xml",
   "/sitemaps/quizzes.xml",
+  "/sitemaps/puzzles.xml",
   "/sitemaps/wiki.xml",
   "/sitemaps/events.xml",
   "/sitemaps/authors.xml",
-  "/sitemaps/catalog.xml"
+  "/sitemaps/catalog.xml",
+  "/sitemaps/stats.xml"
 ];
 
 export async function GET() {

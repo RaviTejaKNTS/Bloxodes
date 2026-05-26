@@ -20,9 +20,13 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `google-indexing-submit.ts` is a guarded Google Indexing API job. It loads `.env.indexing*`, requires `--apply` plus `GOOGLE_INDEXING_API_ENABLED=true` before calling Google, and should use Supabase state in recurring production/GitHub runs so the daily cap and URL rotation persist.
   - `warm-cloudflare-cache.mjs` warms public pages from the sitemap after deploy. Use `CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm`; do not send cache-bypass request headers during warmup because the goal is to fill Cloudflare.
 - `backfill/`: repair jobs for existing content/data.
-- `catalog/`: Roblox catalog and avatar item collection plus enrichment.
+- `catalog/`: Roblox item and bundle collection plus enrichment.
+  - Broad Roblox Marketplace collectors write to `roblox_catalog_items` and enqueue `roblox_catalog_refresh_queue`. Use `npm run collect:catalog-items` for accessories, body, clothing, avatar animations, and makeup. The live Roblox catalog search API only accepts `limit` values `10`, `28`, or `30`; keep collectors clamped to those values. Bundle-returning categories such as full bodies, shoes, and animation bundles must preserve `item_type = 'Bundle'` so the enrichment job can request bundle thumbnails.
+  - `collect-roblox-makeup-items.ts` discovers Makeup items through keyword searches and filters asset type IDs `76`, `77`, `88`, `89`, and `90`, because Makeup is not exposed in the normal category list.
+  - `enrich-roblox-catalog-items.ts` refreshes metadata/history and caches thumbnails. It must call the asset thumbnail endpoint for assets and the bundle thumbnail endpoint for bundles.
   - `collect-slime-rng-data.ts` collects Slime RNG wiki source data into `data/Slime RNG/` and downloads available source images into `apps/web/public/Slime RNG/`. It is a local dataset collector and does not mutate Supabase.
-  - `seed-game-catalog-pages.ts` upserts local game dataset collection copy into `wiki_catalog_pages`; use `--dry-run` before writing and `--draft` when pages should stay unpublished. Pass `--final-json-root tmp/content-workspace/<date>/game-catalog` when approved per-page `final.json` files should override generated copy during local review/import.
+  - `seed-game-catalog-pages.ts` upserts local game dataset collection copy into `wiki_catalog_pages`; use `--dry-run` before writing and `--draft` when pages should stay unpublished. Pass `--final-json-root tmp/content-workspace/<game-slug>/catalogs` when approved per-page `final.json` files should override generated copy during local review/import. The script accepts both the new game-first `<collection-slug>/final.json` layout and older `<catalog-code>/final.json` folders.
+  - `seed-catalog-pages.ts` upserts reviewed broad `/catalog` page `final.json` rows into `catalog_pages`; use `--dry-run` before writing and `--draft` when pages should stay unpublished. Content rows should be local-db imports first, not schema migrations.
   - `seed-game-wiki-pages.ts` upserts game hub rows into `wiki_pages` and links them to matching `roblox_universes`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
   - Both seed scripts accept `--game <slug>` for narrow production publishes. Catalog seeding also accepts `--collection <slug>` for single-page retries.
   - For production runs, use `NODE_ENV=production` plus `--allow-prod` only after a clean production dry-run. Confirm the scripts are targeting the production Supabase host, not local Supabase.
@@ -42,9 +46,15 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - `lists/`: curated and trending list refresh jobs.
 - `music/`: music ID collection, import, enrichment, verification, thumbnails.
 - `posts/`: outbound posting jobs.
+- `puzzles/`: daily puzzle answer collectors for `/puzzles`, writing durable answer rows into `puzzle_answers`.
+  - `sync-puzzles.ts` syncs Wordle, Connections, Strands, Spelling Bee, Letter Boxed, NYT Sudoku, NYT Pips, Contexto, Letroso, and LinkedIn puzzle answers. Use `npm run sync:puzzles -- --dry-run` before writing. Pass `-- --skip-linkedin` when `LINKEDIN_LI_AT` is unavailable or stale.
 - `shared/`: helpers reused by multiple scripts.
 - `trading/`: trading-related collection.
 - `universes/`: universe collection, enrichment, slugs, stats, playing counts, descriptions.
+  - `update-universe-hourly-stats.ts` is the public stats collector for `/stats`; it fetches Roblox public game details, updates latest values on `roblox_universes`, upserts `roblox_universe_stats_hourly`, and can roll up today's row in `roblox_universe_stats_daily`.
+  - `rollup-universe-daily-stats.ts` rolls hourly rows into the existing daily table. Use `npm run stats:rollup-daily -- --date yesterday --finalize` after the UTC day ends so daily `playing` means the highest recorded CCU for that day.
+  - `rank-universe-stats.ts` snapshots hourly public rankings into `roblox_universe_rank_snapshots`; run it after the hourly collector when `/stats` rank movement needs fresh data.
+  - `enrich-roblox-universes.ts` no longer writes same-day stat rows by default; set `ROBLOX_ENRICH_WRITE_DAILY_STATS=true` only for a legacy one-off where hourly rollups are not being used.
 
 ## Operational Expectations
 

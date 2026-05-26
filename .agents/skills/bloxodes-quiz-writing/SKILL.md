@@ -16,11 +16,24 @@ Read:
 
 If these files have not been read in the current task, read them before writing or importing a quiz.
 
+Create or update the game-first workspace before writing:
+
+```text
+tmp/content-workspace/<game-slug>/quiz/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/quiz.md` into the folder as `todo.md` and update it as work progresses.
+
 ## What This Skill Is For
 
 Use this when the page is an interactive quiz under `/quizzes/<slug>`. A quiz is not an article and should not become a guide page with a small quiz attached. It should be a replayable test built from real game knowledge.
 
 Bloxodes normally creates one combined quiz per game unless the user explicitly asks for multiple. Use the game slug as the quiz code. Example: `wizard-alchemy`, not `wizard-alchemy-quiz`.
+
+For new game coverage, prefer writing the quiz after core catalog data or catalog-led discovery exists. A good quiz needs stable item, map, mode, mechanic, and progression facts; do not make questions from surface-level guesses or current live codes/events.
 
 ## Required Shape
 
@@ -64,8 +77,6 @@ Questions live in a local `QuizData` file:
 The public attempt uses 5 easy, 5 medium, and 5 hard questions. Keep at least 10 questions in each difficulty pool for replay variety unless the user accepts a smaller quiz.
 
 ## Workflow
-
-Create or update `tmp/content-workspace/YYYY-MM-DD/quizzes/<slug>/research-notes.md`.
 
 Research the game like a player. Explain the loop, core systems, important routes, confusing details, and what expert players would know. Inspect existing local datasets, existing quiz rows, route behavior, and related wiki/catalog/tool/checklist pages before writing.
 

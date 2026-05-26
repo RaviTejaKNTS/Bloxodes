@@ -16,11 +16,24 @@ Read:
 
 If these files have not been read in the current task, read them before writing.
 
+Create or update the workspace before writing:
+
+```text
+tmp/content-workspace/<game-or-topic-slug>/tools/<tool-code>/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/tool.md` into the folder as `todo.md` and update it as work progresses.
+
 ## What This Skill Is For
 
 Use this when the page is centered on an interactive tool: a calculator, optimizer, converter, extractor, planner, checker, or helper tied to Roblox or a specific game.
 
 The copy should make the tool result easier to trust and understand. It should not compete with the tool UI or bury the interactive experience under prose.
+
+Use a hard gate before writing. The tool must have a real input/output job, reliable formula/data support, and evidence that players need this helper. Check gameplay, search intent, and competing calculators/planners/trackers before recommending or writing the page. If it only duplicates a catalog, article, checklist, or wiki section, hard pass and record it as not recommended or potential future.
 
 Use these inputs:
 
@@ -30,6 +43,7 @@ Use these inputs:
 - tool client behavior if formulas, inputs, or result labels matter
 - related game or `universe_id` when relevant
 - current rates, formulas, item values, or dataset rows when the tool depends on changing data
+- competing tools or proof that this use case is not already better served elsewhere
 - user questions and edge cases around the calculation, optimizer, extractor, converter, or planner
 
 ## Output Shape
@@ -59,7 +73,7 @@ Only include fields being written.
 
 Inspect the row, route, and tool client behavior before writing. If formulas, rates, item values, or datasets affect the result, verify them before making claims.
 
-Research the use case in plain language. What is the user trying to calculate, compare, optimize, extract, or plan? What inputs matter? What does the output mean? Where can the result be wrong, stale, or approximate?
+Research the use case in plain language. What is the user trying to calculate, compare, optimize, extract, or plan? What inputs matter? What does the output mean? Where can the result be wrong, stale, or approximate? Why is this a tool instead of a catalog, article, checklist, or wiki section?
 
 Write directly in final JSON using the core Bloxodes voice. Keep the research internal and explain the useful result directly.
 

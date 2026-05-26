@@ -20,6 +20,7 @@ const indexLinks = [
   { href: "/catalog", label: "Catalog" },
   { href: "/checklists", label: "Checklists" },
   { href: "/events", label: "Events" },
+  { href: "/puzzles", label: "Puzzles" },
   { href: "/quizzes", label: "Quizzes" }
 ];
 

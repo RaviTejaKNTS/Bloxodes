@@ -23,6 +23,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Checklist detail and checklist index content.
 - `quiz_pages`, `quiz_pages_view`
   - Quiz detail and quiz index metadata. Quiz detail rendering does not use `about_md`; keep quiz value in the intro copy and question pool. Use `agents/content/page-types/quizzes.md` for page shape and validation.
+- `puzzle_pages`, `puzzle_pages_view`, `puzzle_answers`, `puzzle_sync_runs`
+  - Daily puzzle answer pages under `/puzzles`. `puzzle_pages` stores durable page copy and SEO; `puzzle_answers` stores one row per puzzle/date with `answer_summary` and raw `payload`; dated archive pages are noindex and excluded from the puzzles sitemap.
 - `wiki_pages`, `wiki_pages_view`
   - Game wiki hubs that link editorial controls/tips to `roblox_universes` automation.
 - `wiki_catalog_pages`, `wiki_catalog_pages_view`
@@ -38,6 +40,12 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 - `roblox_universes`
   - Universe metadata, stats, flags, icons, links.
+- `roblox_universe_stats_hourly`
+  - Public stats history for `/stats`; one row per universe per hour with latest, average, peak, min, deltas, sample counts, and raw snapshot JSON.
+- `roblox_universe_stats_daily`
+  - Long-range public stats summaries; daily `playing` is the highest recorded CCU for that day after hourly rollup.
+- `roblox_universe_rank_snapshots`
+  - Hourly public rank snapshots for global playing, visits, favorites, and rating leaderboards.
 - `roblox_groups`
   - Group details used by the ID extractor.
 - `roblox_universe_gamepasses`, `roblox_universe_badges`
@@ -49,7 +57,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `roblox_music_genres_view`, `roblox_music_artists_view`
   - Music filters and taxonomy views.
 - `roblox_catalog_items`
-  - Free-item and broad avatar marketplace ingestion data. Broad `/catalog/roblox-*` avatar pages use category/subcategory, item type, sale status, price, creator, favorite, limited, resale, and thumbnail rows from this table.
+  - Free-item and broad Roblox item and bundle ingestion data. Broad `/catalog/roblox-*` Marketplace pages use category/subcategory, item type, sale status, price, creator, favorite, limited, resale, and thumbnail rows from this table.
 - `roblox_catalog_item_images`, `roblox_catalog_categories`, `roblox_catalog_subcategories`, `roblox_catalog_refresh_queue`
   - Avatar marketplace thumbnail cache, taxonomy cache, and enrichment queue for Roblox catalog item routes. Bundle thumbnails must come from the Roblox bundle thumbnail endpoint, while asset thumbnails use the asset endpoint.
 

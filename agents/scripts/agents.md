@@ -63,6 +63,13 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes`, `npm run enrich:universes:light`, `npm run enrich:universes:deep` |
 | Update universe stats | `scripts/universes/update-universe-stats.ts` | `npm run update:stats` |
 | Update current playing counts | `scripts/universes/update-universe-playing.ts` | `npm run update:playing` |
+| Update hourly public stats | `scripts/universes/update-universe-hourly-stats.ts` | `npm run update:hourly-stats`; use `-- --rollup-today` only when the hourly job should also refresh today's daily row |
+| Roll hourly stats into daily rows | `scripts/universes/rollup-universe-daily-stats.ts` | `npm run stats:rollup-daily -- --date today`; use `-- --date yesterday --finalize` after the UTC day ends |
+| Snapshot public stats rankings | `scripts/universes/rank-universe-stats.ts` | `npm run stats:rank` |
+
+`enrich-roblox-universes.ts` should not be the normal source for `roblox_universe_stats_daily` now that public stats use hourly rollups. It writes same-day daily stat rows only when `ROBLOX_ENRICH_WRITE_DAILY_STATS=true` is set for a legacy one-off.
+
+| Sync daily puzzle answers | `scripts/puzzles/sync-puzzles.ts` | `npm run sync:puzzles`; use `-- --puzzle wordle`, `-- --date YYYY-MM-DD`, `-- --backfill-days 30`, `-- --dry-run`, or `-- --skip-linkedin` as needed. LinkedIn puzzle sync requires `LINKEDIN_LI_AT` in local/production env. |
 | Fix games with article content but missing Roblox link/universe ID | `scripts/games/fix-missing-roblox-links-and-universes.ts` | `npm run fix:game-links` local dry run, `npm run fix:game-links -- --prod --apply` to write prod |
 | Backfill social links | `scripts/backfill/backfill-social-links.ts` | `npm run links:backfill` |
 | Backfill missing cover images | `scripts/backfill/backfill-missing-cover-images.ts` | `npm run cover:backfill` |
@@ -100,11 +107,13 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Collect body catalog items | `scripts/catalog/collect-roblox-body-items.ts` | `npm run collect:body-items` |
 | Collect clothing catalog items | `scripts/catalog/collect-roblox-clothing-items.ts` | `npm run collect:clothing-items` |
 | Collect avatar animation items | `scripts/catalog/collect-roblox-avatar-animation-items.ts` | `npm run collect:avatar-animation-items` |
+| Collect Roblox makeup avatar items | `scripts/catalog/collect-roblox-makeup-items.ts` | `npm run collect:makeup-items` |
 | Collect Grow a Garden local catalog images | `scripts/catalog/collect-grow-a-garden-images.ts` | `npm run collect:grow-a-garden-images` |
 | Collect Slime RNG local catalog data and images | `scripts/catalog/collect-slime-rng-data.ts` | `npm run collect:slime-rng-data` |
-| Seed gathered game catalog pages into Supabase | `scripts/catalog/seed-game-catalog-pages.ts` | `npm run seed:game-catalog-pages`, add `-- --dry-run` to preview; add `-- --final-json-root tmp/content-workspace/<date>/game-catalog` when approved page `final.json` files should override generated copy |
+| Seed gathered game catalog pages into Supabase | `scripts/catalog/seed-game-catalog-pages.ts` | `npm run seed:game-catalog-pages`, add `-- --dry-run` to preview; add `-- --final-json-root tmp/content-workspace/<game-slug>/catalogs` when approved page `final.json` files should override generated copy; supports new `<collection-slug>/final.json` and older `<catalog-code>/final.json` folders |
+| Seed broad catalog pages into Supabase | `scripts/catalog/seed-catalog-pages.ts` | `npm run seed:catalog-pages -- --file tmp/content-workspace/<topic>/catalogs/<batch>/final.json --dry-run`; writes to local Supabase by default and refuses production unless `--allow-prod` is supplied |
 | Seed gathered game wiki pages into Supabase | `scripts/catalog/seed-game-wiki-pages.ts` | `npm run seed:game-wiki-pages`, add `-- --dry-run` to preview |
-| Import reviewed content final JSON into Supabase | `scripts/content/import-content-final.ts` | `npm run import:content-final -- --file tmp/content-workspace/<date>/<type>/<slug>/final.json --dry-run`; article imports write only to `articles`, fill missing authors randomly, create edited game-thumbnail covers when needed, inject the feature image before the first H2, and require `/articles` plus `/articles/<slug>` verification against the same saved row |
+| Import reviewed content final JSON into Supabase | `scripts/content/import-content-final.ts` | `npm run import:content-final -- --file tmp/content-workspace/<game-or-topic-slug>/<page-folder>/final.json --dry-run`; article imports write only to `articles`, fill missing authors randomly, create edited game-thumbnail covers when needed, inject the feature image before the first H2, and require `/articles` plus `/articles/<slug>` verification against the same saved row |
 | Collect all catalog item families | multiple catalog collectors | `npm run collect:catalog-items` |
 | Enrich catalog items | `scripts/catalog/enrich-roblox-catalog-items.ts` | `npm run enrich:catalog-items` |
 | Import RobloxDen free items | `scripts/catalog/import-robloxden-free-items.py` | direct `python scripts/catalog/import-robloxden-free-items.py` |

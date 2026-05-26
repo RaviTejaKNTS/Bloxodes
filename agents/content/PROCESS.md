@@ -16,13 +16,57 @@ Do one page well before doing many pages.
 
 No batch rewriting until one page has become the gold standard and the user has approved that standard. If the user asks for 15 catalog pages, pick one representative page first, finish it, preview it, and get approval before scaling.
 
-The workflow has only two generated files:
+After a gold-standard game catalog is approved and the user asks for an approved multi-catalog run, use `bloxodes-catalog-batch-runner` with `agents/content/todo-templates/catalog-batch.md`. The batch runner coordinates one catalog page per subagent, but each page still needs its own research notes, data/image audit, FLOW pass, final edit, and parent QA.
+
+For full game coverage, use a two-pass discovery process. Pass 1 is catalog-led: resolve the game, audit existing Bloxodes coverage, confirm codes/events automation eligibility, and identify the durable in-game item collections that can become real catalogs. Build or plan the catalog data first. Pass 2 happens after the core catalog data exists: use the item data and gameplay understanding to decide the wiki hub, checklist, quiz, tools, and focused evergreen articles. Do not let first-pass discovery become a loose list of page ideas.
+
+Codes and events are automation-owned page families. The page copy is evergreen orientation only. Never manually inject current code rows, expired code rows, current event rows, event statuses, dates, reward timelines, or "latest/current" claims into public prose or JSON. Codes come from the code refresh pipeline. Event timelines come from `roblox_virtual_events` or another approved importer.
+
+Use a game-first local workspace so all related work for one game stays together. For non-game or global content, use a stable topic slug as the workspace root.
 
 ```text
-tmp/content-workspace/YYYY-MM-DD/<page-type>/<slug-or-code>/
-  research-notes.md
-  final.json
+tmp/content-workspace/<game-or-topic-slug>/
+  discovery/
+    todo.md
+    research-notes.md
+  wiki/
+    todo.md
+    research-notes.md
+    final.json
+  codes/
+    todo.md
+    research-notes.md
+    final.json
+  events/
+    todo.md
+    research-notes.md
+    final.json
+  catalogs/<collection-slug>/
+    todo.md
+    research-notes.md
+    final.json
+  articles/<article-slug>/
+    todo.md
+    research-notes.md
+    final.json
+  tools/<tool-code>/
+    todo.md
+    research-notes.md
+    final.json
+  checklist/
+    todo.md
+    research-notes.md
+    final.json
+  quiz/
+    todo.md
+    research-notes.md
+    final.json
+  subagents/<task-slug>/
+    prompt.md
+    response.md
 ```
+
+Each serious workflow starts by copying the matching template from `agents/content/todo-templates/` into the page folder as `todo.md`. Read its `Use With` section before working so the tracker leads back to the right skill and docs. Keep the checklist crisp and update it as work progresses. It is a tracker, not a replacement for research notes.
 
 No `brief.md`. No `review.md`. No fan-out plan file. No draft file. No generic shared batch research file pretending to cover every page.
 
@@ -46,15 +90,35 @@ Choose one target page and identify the page type:
 - game-specific catalog page
 - wiki page
 - code page
+- events page
 - article
 - tool page
 - checklist page
+- quiz page
 
 For catalog and game catalog work, do not rewrite every page in a game at once. Build one gold-standard page first. Good choices are pages with enough variety to expose the real writing standard, such as `adopt-me-food`, `adopt-me-vehicles`, `blox-fruits-accessories`, or `grow-a-garden-crops`.
 
+## 1.5. Create The Todo Tracker
+
+Before research starts, copy the matching checklist template into the page workspace as `todo.md`:
+
+- discovery: `agents/content/todo-templates/discovery.md`
+- wiki: `agents/content/todo-templates/wiki.md`
+- code page: `agents/content/todo-templates/codes.md`
+- events: `agents/content/todo-templates/events.md`
+- catalog: `agents/content/todo-templates/catalog.md`
+- game catalog: `agents/content/todo-templates/game-catalog.md`
+- approved game catalog batch: `agents/content/todo-templates/catalog-batch.md`
+- article: `agents/content/todo-templates/article.md`
+- tool: `agents/content/todo-templates/tool.md`
+- checklist: `agents/content/todo-templates/checklist.md`
+- quiz: `agents/content/todo-templates/quiz.md`
+
+Use `agents/content/todo-templates/page-research.md` only when no specific template fits. The `Use With` section in each template is mandatory context, not decoration: load the named skill/docs when the task depends on them. Update the checklist as work progresses. Do not let the tracker become a second research file; detailed facts, decisions, and risks belong in `research-notes.md`.
+
 ## 2. Research Like A Player, Not A Database
 
-Create `research-notes.md` before writing `final.json`.
+Create or update `todo.md` first, then create `research-notes.md` before writing `final.json`.
 
 The notes must explain the topic in simple language. A good research file should feel like a smart player explaining the system to another player before any polished copy exists.
 
@@ -86,7 +150,7 @@ Use this structure unless a page type clearly needs a small adjustment:
 # Research Notes: Page Title
 
 Date: YYYY-MM-DD
-Page Type: catalog | game-catalog | wiki | code-page | article | tool
+Page Type: discovery | catalog | game-catalog | wiki | code-page | events | article | tool | checklist | quiz
 Target: /path-or-code
 Status: researching | needs data update | needs section confirmation | ready to write | needs review
 
@@ -325,6 +389,24 @@ Never write active codes, expired codes, code names, `first_seen_at`, or other c
 
 Code page prose and metadata must be evergreen. Do not include active code names, current reward tables tied to specific codes, month/year labels, exact dates, active-code counts, "latest", "current", "updated daily", or any other wording that will age between code refresh runs. The live codes UI owns active codes, dates, counts, and status. The article fields should explain reward types, redemption steps, troubleshooting, and official places to watch in a long-term way.
 
+Events page output:
+
+```json
+{
+  "universe_id": null,
+  "slug": "",
+  "title": "",
+  "seo_title": "",
+  "meta_description": "",
+  "content_md": "",
+  "is_published": true
+}
+```
+
+Events pages are backed by `events_pages` and timeline rows from `roblox_virtual_events`. Do not create an events page just because a game updates often. Event coverage needs sourced event names, status, dates or phases, rewards, mechanics, or Roblox virtual event feed evidence. If the evidence is weak, mark the page `do not create` or `blocked` in `research-notes.md`.
+
+Never write event rows, current/upcoming/past status, exact live dates, current reward timelines, or one-off event claims manually in `final.json`, local JSON, SQL, Supabase, or `events_pages.content_md`. Event page prose and metadata must be evergreen. The timeline UI owns current event data through `roblox_virtual_events` or another approved importer.
+
 Only include fields the page type owns. Leave unknown optional fields out instead of inventing values.
 
 Wiki page work should not rewrite catalog-page blurbs. A wiki workflow owns game-level copy such as `meta_description`, `tips_md`, and verified `controls_json`; related catalog summaries should already come from each catalog page's `wiki_md`. If those blurbs are weak, switch to the matching catalog or game-catalog workflow for that one catalog page instead of patching them inside the wiki pass.
@@ -426,6 +508,7 @@ After the first page is approved as the gold standard, repeat the same process p
 
 For multiple catalog pages, every page still needs its own:
 
+- `todo.md`
 - `research-notes.md`
 - `final.json`
 - a recorded FLOW pass inside those files, not a separate artifact

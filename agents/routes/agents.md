@@ -33,6 +33,9 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/roblox-music-ids` | `GET` | `src/app/api/roblox-music-ids/route.ts` | Paginated/searchable music ID catalog data. |
 | `/api/search/all` | `GET` | `src/app/api/search/all/route.ts` | Site-wide aggregated search. |
 | `/api/search/games` | `GET` | `src/app/api/search/games/route.ts` | Lightweight games search for UI autocomplete. |
+| `/api/stats/games` | `GET` | `src/app/api/stats/games/route.ts` | Public stats game table payload with search, sort, genre, and minimum-player filters. |
+| `/api/stats/games/[universeId]` | `GET` | `src/app/api/stats/games/[universeId]/route.ts` | Public stats summary for one Roblox universe. |
+| `/api/stats/games/[universeId]/chart` | `GET` | `src/app/api/stats/games/[universeId]/chart/route.ts` | Public chart payload for hourly and daily stats ranges. |
 
 ## Auth Routes
 
@@ -57,6 +60,8 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/sitemaps/codes.xml` | `GET` | `src/app/sitemaps/codes.xml/route.ts` | Codes sitemap. |
 | `/sitemaps/events.xml` | `GET` | `src/app/sitemaps/events.xml/route.ts` | Events sitemap. |
 | `/sitemaps/lists.xml` | `GET` | `src/app/sitemaps/lists.xml/route.ts` | Lists sitemap. |
+| `/sitemaps/puzzles.xml` | `GET` | `src/app/sitemaps/puzzles.xml/route.ts` | Indexable current puzzle-answer pages sitemap. Dated puzzle archives are excluded because they are noindex reference pages. |
 | `/sitemaps/quizzes.xml` | `GET` | `src/app/sitemaps/quizzes.xml/route.ts` | Quizzes sitemap. |
+| `/sitemaps/stats.xml` | `GET` | `src/app/sitemaps/stats.xml/route.ts` | Stats sitemap for `/stats`, `/stats/games`, and selected quality game stat pages. |
 | `/sitemaps/tools.xml` | `GET` | `src/app/sitemaps/tools.xml/route.ts` | Tools sitemap. |
 | `/sitemaps/wiki.xml` | `GET` | `src/app/sitemaps/wiki.xml/route.ts` | Wiki sitemap. |

@@ -1,6 +1,6 @@
 ---
 name: bloxodes-game-catalog-writing
-description: Write or rewrite Bloxodes game-specific dataset catalog content for pages like Grow a Garden crops, Adopt Me pets, Blox Fruits accessories, Brookhaven vehicles, and other data-backed Roblox game collections. Use for catalog_pages fields, wiki_md, dataset field explanations, local image-aware catalog copy, and game catalog SEO.
+description: Write or rewrite Bloxodes game-specific dataset catalog content for durable in-game item collections like Grow a Garden crops, Adopt Me pets, Blox Fruits accessories, Brookhaven vehicles, weapons, maps, cosmetics, and UGC exceptions. Use for wiki_catalog_pages fields, wiki_md, dataset field explanations, local image-aware catalog copy, and game catalog SEO while rejecting temporary season/event reward tracks and platform metadata.
 ---
 
 # Bloxodes Game Catalog Writing
@@ -19,11 +19,24 @@ Read:
 
 If these files have not been read in the current task, read them before writing.
 
+Create or update the game-first workspace before writing:
+
+```text
+tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/game-catalog.md` into the folder as `todo.md` and update it as work progresses.
+
 ## What This Skill Is For
 
-Use this when a catalog page is powered by a game dataset, such as pets, crops, vehicles, accessories, eggs, bosses, currencies, tools, prizes, or other game-specific collections.
+Use this when a catalog page is powered by a game dataset, such as pets, crops, vehicles, accessories, eggs, bosses, weapons, maps, materials, cosmetics, or other durable game-specific item collections.
 
 The job is not to turn fields into prose. The job is to understand the game system well enough that the cards make sense to a casual player.
+
+Reject weak catalog scopes before writing. Do not create game catalog pages for current season pass reward tracks, one-off event reward lists, current ranked season rewards, broad update summaries, gamepasses, badges, servers, developer products, or raw Roblox media. If an event/season created permanent items, keep those items inside their durable collection and record the source/availability on the cards. UGC is a special exception only when the game has meaningful UGC items; use the free Roblox items card style.
 
 The job also includes data readiness. If the item list, source count, rendered card count, title count, image coverage, or card fields are stale or incomplete, do not write around the problem. Record the gap, propose the data/image update, and only write final copy after the data state is approved and fixed or explicitly accepted.
 
@@ -32,7 +45,7 @@ Inspect:
 - `research-notes.md`
 - `data/<Game>/` item dataset
 - `apps/web/src/lib/game-dataset-catalogs.ts`
-- target `catalog_pages` row
+- target `wiki_catalog_pages` row
 - route renderer if the page has custom behavior
 - local image paths when images matter
 - game system context behind the collection
@@ -75,7 +88,7 @@ Keep cards as clean, scannable data. They should show pure player-useful facts s
 
 Keep `description_md` focused on whole-page mechanics: how the system works, where it is in-game, how players obtain items, how prices, odds, or availability work, and mistakes that apply across the full collection. Do not repeat the `description_json` notes there. The FLOW pass should reject random sections that only exist because a field or card group existed.
 
-Choose the section split by the strongest in-game meaning. Rarity, item type, source, event, location, shop, tier, world, unlock route, crop type, resource type, and boss are all possible. Pick the structure that helps players understand the collection, not the structure that is merely convenient.
+Choose the section split by the strongest in-game meaning. Rarity, item type, source, location, shop, tier, world, unlock route, crop type, resource type, and boss are all possible. Event can be a source/availability note for permanent items, but a current event should not become a standalone catalog. Pick the structure that helps players understand the collection, not the structure that is merely convenient.
 
 Do not invent missing item stats, image paths, rewards, or requirements. If the dataset has a gap, record it in research notes and write around it honestly.
 

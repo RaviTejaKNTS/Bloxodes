@@ -121,6 +121,16 @@ Code pages must separate evergreen article copy from live code data. The public 
 
 The live codes table and `scripts/codes/update-codes.ts` own active codes, expired codes, dates, counts, and reward rows. When writing code-page fields, return only the `games` row fields and source URLs. Do not include a manual `codes` array.
 
+## Event Page Standard
+
+Event pages must separate evergreen page copy from automated timeline data. The public prose should explain how events work for the game, what players usually track, and where the timeline information appears. It should not name a current event as live, list current/upcoming/past event rows, hard-code event dates, repeat reward timelines, or use freshness wording such as `latest event` or `current event`.
+
+The `roblox_virtual_events` table or another approved importer owns event rows, status labels, dates, and timelines. When writing event-page fields, return only evergreen `events_pages` fields and metadata.
+
+## Article Scope Standard
+
+Articles should answer focused evergreen player questions. Do not use articles to duplicate codes, events, wiki hubs, catalogs, checklists, quizzes, or tools. Avoid current codes, code troubleshooting, event topics, broad update news, generic beginner guides, and broad item/category explainers. A strong article usually starts with a specific item, quest, mode, map, mechanic, farm route, unlock path, or durable gameplay problem.
+
 ## Non-Negotiable Writing Rules
 
 1. No vague writing. Every sentence needs clear context and useful information.
@@ -142,7 +152,7 @@ The live codes table and `scripts/codes/update-codes.ts` own active codes, expir
 Every serious content task should produce researched, final-shaped copy in one workflow:
 
 1. Confirm the page type and exact database fields.
-2. Create or update `research-notes.md` with plain-language topic research before implementation notes.
+2. Create or update `todo.md` from `agents/content/todo-templates/`, then create or update `research-notes.md` with plain-language topic research before implementation notes.
 3. Inspect the current row, local dataset, route behavior, or source material.
 4. For catalog work, audit data and images before writing: local count, source count, rendered count, title count, image coverage, and missing or stale rows.
 5. Verify unstable facts before writing.

@@ -4,7 +4,20 @@ Use this guide for `/codes/<game-slug>` pages backed by the `games` row plus liv
 
 Code pages are not manually maintained code lists. The public article fields explain the game, rewards, redemption, troubleshooting, and official places to watch. The active and expired code rows must come from the codes refresh pipeline.
 
+Non-negotiable: never inject code data by hand. Do not write code names, active/expired rows, reward mappings tied to a current code, first-seen dates, expiry dates, active counts, or "latest/current/fresh" claims into JSON, SQL, Supabase, Markdown, or prose. The only content work is evergreen `games` row copy and source URL wiring; the automation owns live code data.
+
 ## Required Shape
+
+Create or update:
+
+```text
+tmp/content-workspace/<game-slug>/codes/
+  todo.md
+  research-notes.md
+  final.json
+```
+
+Copy `agents/content/todo-templates/codes.md` into the folder as `todo.md` before research starts.
 
 ```json
 {
@@ -81,6 +94,6 @@ Bad columns:
 3. Keep `seo_title` empty or null.
 4. Do not insert code rows.
 5. Run `npm run refresh:codes -- --slug <game-slug>`.
-6. Verify the code page locally and confirm the code table came from the refresh script, not from manual JSON.
+6. Verify the code page locally and confirm the code table came from the refresh script, not from manual JSON, SQL, or copied source text.
 
 The final check should name both things separately: article fields are evergreen, and live codes were sourced by `scripts/codes/update-codes.ts`.
