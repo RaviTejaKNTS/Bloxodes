@@ -17,6 +17,7 @@ export async function GET() {
       },
       features: {
         cacheTags: true,
+        cacheHeaderVersion: 2,
         cloudflarePurgeStrategy: process.env.CLOUDFLARE_PURGE_STRATEGY || "tags"
       }
     },
