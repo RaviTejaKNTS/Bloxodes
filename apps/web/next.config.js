@@ -38,6 +38,33 @@ if (cspMode !== "off" && (!publicCsp || !secureCsp)) {
 }
 
 const publicHtmlCacheControl = "public, max-age=0, s-maxage=31536000, stale-while-revalidate=31536000";
+const publicHtmlCacheSources = [
+  "/",
+  "/codes",
+  "/codes/:path*",
+  "/articles",
+  "/articles/:path*",
+  "/lists",
+  "/lists/:path*",
+  "/tools",
+  "/tools/:path*",
+  "/wiki",
+  "/wiki/:path*",
+  "/checklists",
+  "/checklists/:path*",
+  "/quizzes",
+  "/quizzes/:path*",
+  "/events",
+  "/events/:path*",
+  "/catalog",
+  "/catalog/:path*",
+  "/authors",
+  "/authors/:path*",
+  "/sitemap.xml",
+  "/sitemaps/:path*",
+  "/robots.txt",
+  "/feed.xml"
+];
 
 const nextConfig = {
   poweredByHeader: false,
@@ -46,98 +73,12 @@ const nextConfig = {
   outputFileTracingRoot: repoRoot,
   staticPageGenerationTimeout: 120,
   async headers() {
-    return [
-      {
-        source: "/",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/codes/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/articles/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/lists/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/tools/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/wiki/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/checklists/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/quizzes/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/events/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/catalog/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/authors/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/sitemap.xml",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/sitemaps/:path*",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/robots.txt",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      },
-      {
-        source: "/feed.xml",
-        headers: [
-          { key: "Cache-Control", value: publicHtmlCacheControl }
-        ]
-      }
-    ];
+    return publicHtmlCacheSources.map((source) => ({
+      source,
+      headers: [
+        { key: "Cache-Control", value: publicHtmlCacheControl }
+      ]
+    }));
   },
   images: {
     // Disable the built-in image optimizer so the app stays portable across hosts/CDNs.
