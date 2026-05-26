@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import legacySlugs from "@/data/slug_oldslugs.json";
+import { CACHE_TAG_HEADER, cacheTagsForPath, serializeCacheTags } from "@/lib/public-cache-tags";
 import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } from "@/lib/privacy/consent";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
@@ -54,6 +55,11 @@ const LEGACY_SLUG_MAP = new Map<string, string>(
 function applySecurityHeaders(res: NextResponse, pathname: string) {
   for (const { key, value } of buildSecurityHeaders(pathname)) {
     res.headers.set(key, value);
+  }
+
+  const cacheTags = serializeCacheTags(cacheTagsForPath(pathname));
+  if (cacheTags) {
+    res.headers.set(CACHE_TAG_HEADER, cacheTags);
   }
 
   if (!SEARCH_INDEXING_ENABLED) {

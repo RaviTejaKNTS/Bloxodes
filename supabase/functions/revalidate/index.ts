@@ -58,8 +58,17 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function revalidateEvent(event: EventRow): Promise<boolean> {
+async function revalidateEvents(events: EventRow[]): Promise<boolean> {
   if (!revalidateEndpoint || !revalidateSecret) return false;
+  if (!events.length) return true;
+
+  const body =
+    events.length === 1
+      ? { type: events[0].entity_type, slug: events[0].slug }
+      : {
+          type: "batch",
+          events: events.map((event) => ({ type: event.entity_type, slug: event.slug }))
+        };
 
   for (let attempt = 1; attempt <= 3; attempt++) {
     const res = await fetch(revalidateEndpoint, {
@@ -68,7 +77,7 @@ async function revalidateEvent(event: EventRow): Promise<boolean> {
         "Content-Type": "application/json",
         Authorization: `Bearer ${revalidateSecret}`
       },
-      body: JSON.stringify({ type: event.entity_type, slug: event.slug })
+      body: JSON.stringify(body)
     });
 
     if (res.ok) return true;
@@ -80,12 +89,12 @@ async function revalidateEvent(event: EventRow): Promise<boolean> {
       continue;
     }
 
-    const body = await res.text().catch(() => "");
+    const responseBody = await res.text().catch(() => "");
     logError("Revalidate request failed", {
       status: res.status,
       statusText: res.statusText,
-      body,
-      event,
+      body: responseBody,
+      events: events.map((event) => ({ type: event.entity_type, slug: event.slug })),
       attempt
     });
   }
@@ -105,39 +114,28 @@ serve(async (req) => {
   try {
     const events = await fetchEvents(100);
     logInfo("Fetched events", { count: events.length });
-    const successIds: string[] = [];
-    const failures: EventRow[] = [];
-
     const eventsToProcess = events.slice(0, Math.max(1, batchSize));
+    const ok = await revalidateEvents(eventsToProcess);
 
-    for (const event of eventsToProcess) {
-      const ok = await revalidateEvent(event);
-      if (ok) {
-        successIds.push(event.id);
-      } else {
-        failures.push(event);
-      }
-
-      if (requestDelayMs > 0) {
-        await sleep(requestDelayMs);
-      }
+    if (requestDelayMs > 0) {
+      await sleep(requestDelayMs);
     }
 
-    if (successIds.length) {
-      await deleteEvents(successIds);
+    if (ok) {
+      await deleteEvents(eventsToProcess.map((event) => event.id));
     }
 
     logInfo("Batch result", {
-      processed: successIds.length,
-      failed: failures.length,
-      failedEvents: failures.map((f) => ({ type: f.entity_type, slug: f.slug }))
+      processed: ok ? eventsToProcess.length : 0,
+      failed: ok ? 0 : eventsToProcess.length,
+      failedEvents: ok ? [] : eventsToProcess.map((f) => ({ type: f.entity_type, slug: f.slug }))
     });
 
     return new Response(
       JSON.stringify({
-        processed: successIds.length,
-        failed: failures.length,
-        failures
+        processed: ok ? eventsToProcess.length : 0,
+        failed: ok ? 0 : eventsToProcess.length,
+        failures: ok ? [] : eventsToProcess
       }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );

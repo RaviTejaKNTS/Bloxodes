@@ -1,0 +1,282 @@
+export const CACHE_TAG_HEADER = "Cache-Tag";
+
+export type PublicCacheEventType =
+  | "code"
+  | "article"
+  | "list"
+  | "author"
+  | "event"
+  | "checklist"
+  | "tool"
+  | "catalog"
+  | "music"
+  | "quiz"
+  | "wiki"
+  | "wiki_catalog";
+
+export type PublicCacheEvent = {
+  type: PublicCacheEventType;
+  slug: string;
+};
+
+const MUSIC_CATALOG_CODE = "roblox-music-ids";
+const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
+const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
+
+function unique(values: string[]) {
+  return Array.from(new Set(values.map((value) => value.trim()).filter(Boolean)));
+}
+
+export function normalizeCacheSlug(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/^\/+|\/+$/g, "");
+}
+
+function normalizePathname(pathname: string) {
+  const path = pathname.split("?")[0]?.split("#")[0] || "/";
+  if (path === "/") return "/";
+  return `/${path.replace(/^\/+|\/+$/g, "")}`;
+}
+
+function slugTag(prefix: string, slug: string) {
+  const normalized = normalizeCacheSlug(slug);
+  return normalized ? `${prefix}:${normalized}` : "";
+}
+
+function sitemapTags(name?: string) {
+  return unique(name ? ["site", `sitemap:${name}`] : ["site", "sitemap"]);
+}
+
+function freeItemScopeTags(slug: string) {
+  const parts = normalizeCacheSlug(slug).split("/").filter(Boolean);
+  const prefix = parts[0];
+  const category = parts[1];
+  const subcategory = parts[2];
+  const tags = ["free-items-catalog", slugTag("catalog", FREE_ITEMS_CATALOG_CODE)];
+
+  if (prefix === FREE_ITEMS_CATALOG_CODE || prefix === LEGACY_FREE_ITEMS_CATALOG_CODE) {
+    if (category && category !== "page") tags.push(`free-items-category:${category}`);
+    if (category && category !== "page" && subcategory && subcategory !== "page") {
+      tags.push(`free-items-subcategory:${category}/${subcategory}`);
+    }
+  }
+
+  return tags;
+}
+
+function musicScopeTags(slug: string) {
+  const parts = normalizeCacheSlug(slug).split("/").filter(Boolean);
+  const section = parts[1];
+  const value = parts[2];
+  const tags = ["music-catalog", slugTag("catalog", MUSIC_CATALOG_CODE)];
+
+  if (section === "genres" && value) tags.push(`music-genre:${value}`);
+  if (section === "artists" && value) tags.push(`music-artist:${value}`);
+
+  return tags;
+}
+
+export function cacheTagsForPath(pathname: string) {
+  const pathnameOnly = normalizePathname(pathname);
+  const segments = pathnameOnly.split("/").filter(Boolean);
+  const [first, second, third, fourth] = segments;
+  const tags = ["site"];
+
+  if (pathnameOnly === "/") {
+    return unique([...tags, "home"]);
+  }
+
+  if (pathnameOnly === "/feed.xml") {
+    return unique([...tags, "feed"]);
+  }
+
+  if (pathnameOnly === "/sitemap.xml") {
+    return sitemapTags();
+  }
+
+  if (first === "sitemaps") {
+    return sitemapTags(second?.replace(/\.xml$/i, ""));
+  }
+
+  if (first === "codes") {
+    if (!second || second === "page") return unique([...tags, "codes-index"]);
+    return unique([...tags, "codes", slugTag("code", second)]);
+  }
+
+  if (first === "articles") {
+    if (!second || second === "page") return unique([...tags, "articles-index"]);
+    return unique([...tags, "articles", slugTag("article", second)]);
+  }
+
+  if (first === "authors") {
+    if (!second || second === "page") return unique([...tags, "authors-index"]);
+    return unique([...tags, "authors", slugTag("author", second)]);
+  }
+
+  if (first === "events") {
+    if (!second || second === "page") return unique([...tags, "events-index"]);
+    return unique([...tags, "events", slugTag("event", second)]);
+  }
+
+  if (first === "checklists") {
+    if (!second || second === "page") return unique([...tags, "checklists-index"]);
+    return unique([...tags, "checklists", slugTag("checklist", second)]);
+  }
+
+  if (first === "quizzes") {
+    if (!second || second === "page") return unique([...tags, "quizzes-index"]);
+    return unique([...tags, "quizzes", slugTag("quiz", second)]);
+  }
+
+  if (first === "tools") {
+    if (!second || second === "page") return unique([...tags, "tools-index"]);
+    return unique([...tags, "tools", slugTag("tool", segments.join("/").replace(/^tools\//, ""))]);
+  }
+
+  if (first === "lists") {
+    if (!second || second === "page") return unique([...tags, "lists-index"]);
+    return unique([...tags, "lists", slugTag("list", second)]);
+  }
+
+  if (first === "wiki") {
+    if (!second || second === "page") return unique([...tags, "wiki-index"]);
+    if (third && third !== "page") {
+      return unique([
+        ...tags,
+        "wiki-catalog-index",
+        slugTag("wiki", second),
+        slugTag("wiki-catalog", `${second}/${third}`)
+      ]);
+    }
+    return unique([...tags, "wiki", slugTag("wiki", second)]);
+  }
+
+  if (first === "catalog") {
+    if (!second || second === "page") return unique([...tags, "catalog-index"]);
+
+    const catalogSlug = segments.slice(1).join("/");
+    const catalogTags = [...tags, "catalog", slugTag("catalog", second)];
+
+    if (second === FREE_ITEMS_CATALOG_CODE || second === LEGACY_FREE_ITEMS_CATALOG_CODE) {
+      catalogTags.push(...freeItemScopeTags(catalogSlug));
+      if (third && third !== "page") catalogTags.push(`free-items-category:${third}`);
+      if (third && third !== "page" && fourth && fourth !== "page") {
+        catalogTags.push(`free-items-subcategory:${third}/${fourth}`);
+      }
+    }
+
+    if (second === MUSIC_CATALOG_CODE) {
+      catalogTags.push(...musicScopeTags(catalogSlug));
+      if (third === "genres" && fourth) catalogTags.push(`music-genre:${fourth}`);
+      if (third === "artists" && fourth) catalogTags.push(`music-artist:${fourth}`);
+    }
+
+    return unique(catalogTags);
+  }
+
+  return [];
+}
+
+export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
+  const normalized = normalizeCacheSlug(slug);
+  const base: string[] = [];
+
+  switch (type) {
+    case "code":
+      return unique([...base, slugTag("code", normalized), "codes-index", "home", "feed", "sitemap", "sitemap:codes"]);
+    case "article":
+      return unique([
+        ...base,
+        slugTag("article", normalized),
+        "articles-index",
+        "home",
+        "feed",
+        "sitemap",
+        "sitemap:articles"
+      ]);
+    case "list":
+      return unique([...base, slugTag("list", normalized), "lists-index", "home", "feed", "sitemap", "sitemap:lists"]);
+    case "author":
+      return unique([...base, slugTag("author", normalized), "authors-index", "sitemap", "sitemap:authors"]);
+    case "event":
+      return unique([...base, slugTag("event", normalized), "events-index", "home", "feed", "sitemap", "sitemap:events"]);
+    case "checklist":
+      return unique([
+        ...base,
+        slugTag("checklist", normalized),
+        "checklists-index",
+        "home",
+        "feed",
+        "sitemap",
+        "sitemap:checklists"
+      ]);
+    case "tool":
+      return unique([...base, slugTag("tool", normalized), "tools-index", "home", "sitemap", "sitemap:tools"]);
+    case "quiz":
+      return unique([...base, slugTag("quiz", normalized), "quizzes-index", "home", "sitemap", "sitemap:quizzes"]);
+    case "wiki":
+      return unique([...base, slugTag("wiki", normalized), "wiki-index", "home", "sitemap", "sitemap:wiki"]);
+    case "wiki_catalog": {
+      const [wikiSlug, collectionSlug] = normalized.split("/");
+      const flatCatalogSlug = wikiSlug && collectionSlug ? `${wikiSlug}-${collectionSlug}` : "";
+      return unique([
+        ...base,
+        wikiSlug ? slugTag("wiki", wikiSlug) : "",
+        wikiSlug && collectionSlug ? slugTag("wiki-catalog", `${wikiSlug}/${collectionSlug}`) : "",
+        flatCatalogSlug ? slugTag("catalog", flatCatalogSlug) : "",
+        "wiki-index",
+        "wiki-catalog-index",
+        "home",
+        "sitemap",
+        "sitemap:wiki",
+        "sitemap:catalog"
+      ]);
+    }
+    case "catalog": {
+      const tags = [
+        ...base,
+        slugTag("catalog", normalized),
+        "catalog-index",
+        "home",
+        "sitemap",
+        "sitemap:catalog"
+      ];
+
+      if (normalized === MUSIC_CATALOG_CODE || normalized.startsWith(`${MUSIC_CATALOG_CODE}/`)) {
+        tags.push(...musicScopeTags(normalized));
+      }
+
+      if (
+        normalized === FREE_ITEMS_CATALOG_CODE ||
+        normalized.startsWith(`${FREE_ITEMS_CATALOG_CODE}/`) ||
+        normalized === LEGACY_FREE_ITEMS_CATALOG_CODE ||
+        normalized.startsWith(`${LEGACY_FREE_ITEMS_CATALOG_CODE}/`)
+      ) {
+        tags.push(...freeItemScopeTags(normalized));
+      }
+
+      return unique(tags);
+    }
+    case "music":
+      return unique([
+        ...base,
+        ...musicScopeTags(normalized || MUSIC_CATALOG_CODE),
+        "catalog-index",
+        "home",
+        "sitemap",
+        "sitemap:catalog"
+      ]);
+    default:
+      return unique(base);
+  }
+}
+
+export function cacheTagsForEvents(events: PublicCacheEvent[]) {
+  return unique(events.flatMap((event) => cacheTagsForEvent(event.type, event.slug)));
+}
+
+export function serializeCacheTags(tags: string[]) {
+  return unique(tags).join(",");
+}

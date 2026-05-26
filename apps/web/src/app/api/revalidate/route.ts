@@ -1,21 +1,26 @@
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { purgeCloudflarePaths, warmCloudflarePaths } from "@/lib/cloudflare-cache";
+import { purgeCloudflarePublicCache, warmCloudflarePaths } from "@/lib/cloudflare-cache";
+import { cacheTagsForEvent, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
 import { supabaseAdmin } from "@/lib/supabase";
 
-type Payload =
-  | { type: "code"; slug: string }
-  | { type: "article"; slug: string }
-  | { type: "list"; slug: string }
-  | { type: "author"; slug: string }
-  | { type: "event"; slug: string }
-  | { type: "checklist"; slug: string }
-  | { type: "tool"; slug: string }
-  | { type: "catalog"; slug: string }
-  | { type: "music"; slug: string }
-  | { type: "quiz"; slug: string }
-  | { type: "wiki"; slug: string }
-  | { type: "wiki_catalog"; slug: string };
+type SinglePayload = PublicCacheEvent;
+type Payload = SinglePayload | { type: "batch"; events: SinglePayload[] };
+
+const EVENT_TYPES = new Set<PublicCacheEventType>([
+  "code",
+  "article",
+  "list",
+  "author",
+  "event",
+  "checklist",
+  "tool",
+  "catalog",
+  "music",
+  "quiz",
+  "wiki",
+  "wiki_catalog"
+]);
 
 const MUSIC_CATALOG_CODES = new Set(["roblox-music-ids"]);
 const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
@@ -387,7 +392,7 @@ async function lookupWikiSlugsByUniverseIds(universeIds: number[]): Promise<stri
   );
 }
 
-async function lookupRelatedWikiSlugs(type: Payload["type"], slug: string): Promise<string[]> {
+async function lookupRelatedWikiSlugs(type: SinglePayload["type"], slug: string): Promise<string[]> {
   if (type === "wiki" || type === "author" || type === "music") return [];
 
   let universeIds: number[] = [];
@@ -416,35 +421,60 @@ async function lookupRelatedWikiSlugs(type: Payload["type"], slug: string): Prom
   return lookupWikiSlugsByUniverseIds(universeIds);
 }
 
-async function lookupRelatedListSlugs(type: Payload["type"], slug: string): Promise<string[]> {
+async function lookupRelatedListSlugs(type: SinglePayload["type"], slug: string): Promise<string[]> {
   if (type !== "code") return [];
   const universeIds = await lookupUniverseIdsBySlug("games", "slug", [slug]);
   return lookupListSlugsByUniverseIds(universeIds);
 }
 
-export async function POST(request: Request) {
-  const authError = assertSecret(request);
-  if (authError) {
-    return NextResponse.json({ error: authError }, { status: 401 });
+function parsePayloadEvents(payload: Payload): SinglePayload[] | { error: string } {
+  if (!payload || typeof payload !== "object") {
+    return { error: "Invalid payload" };
   }
 
-  let payload: Payload;
-  try {
-    payload = (await request.json()) as Payload;
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  if ((payload as { type?: unknown }).type === "batch") {
+    const events = (payload as { events?: unknown }).events;
+    if (!Array.isArray(events) || events.length === 0) {
+      return { error: "Batch payload requires events" };
+    }
+
+    if (events.length > 100) {
+      return { error: "Batch payload cannot exceed 100 events" };
+    }
+
+    const parsedEvents: SinglePayload[] = [];
+    for (const event of events) {
+      if (!event || typeof event !== "object") {
+        return { error: "Invalid batch event" };
+      }
+      const type = (event as { type?: unknown }).type;
+      const slug = (event as { slug?: unknown }).slug;
+      if (typeof type !== "string" || !EVENT_TYPES.has(type as PublicCacheEventType)) {
+        return { error: "Invalid batch event type" };
+      }
+      if (typeof slug !== "string" || !normalizeSlug(slug)) {
+        return { error: "Invalid batch event slug" };
+      }
+      parsedEvents.push({ type: type as PublicCacheEventType, slug: normalizeSlug(slug) });
+    }
+    return parsedEvents;
   }
 
-  if (!payload || typeof payload !== "object" || typeof (payload as any).slug !== "string") {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+  const type = (payload as { type?: unknown }).type;
+  const slug = (payload as { slug?: unknown }).slug;
+  if (typeof type !== "string" || !EVENT_TYPES.has(type as PublicCacheEventType)) {
+    return { error: "Unknown type" };
   }
+  if (typeof slug !== "string" || !normalizeSlug(slug)) {
+    return { error: "Missing slug" };
+  }
+  return [{ type: type as PublicCacheEventType, slug: normalizeSlug(slug) }];
+}
 
+async function collectRevalidationTargets(payload: SinglePayload) {
   const slug = normalizeSlug(payload.slug);
-  if (!slug) {
-    return NextResponse.json({ error: "Missing slug" }, { status: 400 });
-  }
-
   let purgePaths: string[] = [];
+  let purgeTags: string[] = cacheTagsForEvent(payload.type, slug);
   let impactedWikiSlugs: string[] = [];
   let impactedListSlugs: string[] = [];
 
@@ -491,21 +521,65 @@ export async function POST(request: Request) {
     case "music":
       purgePaths = revalidateForMusic(slug);
       break;
-    default:
-      return NextResponse.json({ error: "Unknown type" }, { status: 400 });
   }
 
   impactedWikiSlugs = await lookupRelatedWikiSlugs(payload.type, slug);
   for (const wikiSlug of impactedWikiSlugs) {
     purgePaths = [...purgePaths, ...revalidateForWiki(wikiSlug)];
+    purgeTags = [...purgeTags, ...cacheTagsForEvent("wiki", wikiSlug)];
   }
 
   impactedListSlugs = await lookupRelatedListSlugs(payload.type, slug);
   for (const listSlug of impactedListSlugs) {
     purgePaths = [...purgePaths, ...revalidateForList(listSlug)];
+    purgeTags = [...purgeTags, ...cacheTagsForEvent("list", listSlug)];
   }
 
-  const cloudflare = await purgeCloudflarePaths(purgePaths);
+  return {
+    paths: purgePaths,
+    tags: purgeTags,
+    impactedWikiSlugs,
+    impactedListSlugs
+  };
+}
+
+export async function POST(request: Request) {
+  const authError = assertSecret(request);
+  if (authError) {
+    return NextResponse.json({ error: authError }, { status: 401 });
+  }
+
+  let payload: Payload;
+  try {
+    payload = (await request.json()) as Payload;
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const parsedEvents = parsePayloadEvents(payload);
+  if ("error" in parsedEvents) {
+    return NextResponse.json({ error: parsedEvents.error }, { status: 400 });
+  }
+
+  let purgePaths: string[] = [];
+  let purgeTags: string[] = [];
+  let impactedWikiSlugs: string[] = [];
+  let impactedListSlugs: string[] = [];
+
+  for (const event of parsedEvents) {
+    const targets = await collectRevalidationTargets(event);
+    purgePaths = [...purgePaths, ...targets.paths];
+    purgeTags = [...purgeTags, ...targets.tags];
+    impactedWikiSlugs = [...impactedWikiSlugs, ...targets.impactedWikiSlugs];
+    impactedListSlugs = [...impactedListSlugs, ...targets.impactedListSlugs];
+  }
+
+  purgePaths = Array.from(new Set(purgePaths));
+  purgeTags = Array.from(new Set(purgeTags));
+  impactedWikiSlugs = Array.from(new Set(impactedWikiSlugs));
+  impactedListSlugs = Array.from(new Set(impactedListSlugs));
+
+  const cloudflare = await purgeCloudflarePublicCache({ paths: purgePaths, tags: purgeTags });
   const cloudflareWarm = cloudflare.enabled && cloudflare.ok
     ? await warmCloudflarePaths(purgePaths)
     : {
@@ -530,10 +604,11 @@ export async function POST(request: Request) {
       {
         error: "Cloudflare purge failed",
         revalidated: true,
-        type: payload.type,
-        slug,
+        events: parsedEvents,
+        processed: parsedEvents.length,
         impactedWikiSlugs,
         impactedListSlugs,
+        cacheTags: purgeTags,
         indexNow,
         cloudflare,
         cloudflareWarm
@@ -544,10 +619,13 @@ export async function POST(request: Request) {
 
   return NextResponse.json({
     revalidated: true,
-    type: payload.type,
-    slug,
+    type: parsedEvents.length === 1 ? parsedEvents[0].type : "batch",
+    slug: parsedEvents.length === 1 ? parsedEvents[0].slug : undefined,
+    events: parsedEvents,
+    processed: parsedEvents.length,
     impactedWikiSlugs,
     impactedListSlugs,
+    cacheTags: purgeTags,
     indexNow,
     cloudflare,
     cloudflareWarm

@@ -5,6 +5,7 @@ const DEFAULT_REQUEST_TIMEOUT_MS = 20000;
 const DEFAULT_REQUEST_DELAY_MS = 0;
 
 function clampNumber(value, fallback, min, max) {
+  if (value == null || String(value).trim() === "") return fallback;
   const parsed = Number(value);
   if (!Number.isFinite(parsed)) return fallback;
   return Math.min(Math.max(parsed, min), max);

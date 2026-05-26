@@ -11,18 +11,22 @@ RUN npm ci
 
 FROM node:20-bookworm-slim AS builder
 WORKDIR /app
+ARG BLOXODES_BUILD_SHA=unknown
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV BLOXODES_BUILD_SHA=$BLOXODES_BUILD_SHA
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
 FROM node:20-bookworm-slim AS runner
 WORKDIR /app
+ARG BLOXODES_BUILD_SHA=unknown
 ENV NODE_ENV=production
 ENV HOSTNAME=0.0.0.0
 ENV PORT=3000
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV BLOXODES_BUILD_SHA=$BLOXODES_BUILD_SHA
 
 RUN groupadd --gid 1001 nodejs \
   && useradd --uid 1001 --gid nodejs --no-create-home --shell /usr/sbin/nologin nextjs \

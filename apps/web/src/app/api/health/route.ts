@@ -7,7 +7,18 @@ export async function GET() {
   return NextResponse.json(
     {
       ok: true,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      build: {
+        sha:
+          process.env.BLOXODES_BUILD_SHA ||
+          process.env.GIT_COMMIT_SHA ||
+          process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ||
+          "unknown"
+      },
+      features: {
+        cacheTags: true,
+        cloudflarePurgeStrategy: process.env.CLOUDFLARE_PURGE_STRATEGY || "tags"
+      }
     },
     {
       headers: {

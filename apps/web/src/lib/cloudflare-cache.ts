@@ -12,6 +12,7 @@ export type CloudflarePurgeResult = {
   ok: boolean;
   attempted: number;
   purged: string[];
+  method?: string;
   reason?: string;
   status?: number;
   errors?: string[];
@@ -29,6 +30,7 @@ export type CloudflareWarmResult = {
 
 const CLOUDFLARE_API_BASE = "https://api.cloudflare.com/client/v4";
 const CLOUDFLARE_PURGE_BATCH_SIZE = 30;
+const CLOUDFLARE_GRANULAR_PURGE_BATCH_SIZE = 100;
 const DEFAULT_WARM_CONCURRENCY = 4;
 const DEFAULT_WARM_MAX_PATHS = 80;
 
@@ -59,6 +61,32 @@ function buildPurgeUrls(paths: string[]) {
   return uniquePaths.map((path) => `${origin}${path === "/" ? "/" : path}`);
 }
 
+function buildPurgePrefixes(paths: string[]) {
+  const origin = normalizeOrigin(SITE_URL) ?? SITE_URL.replace(/\/$/, "");
+  const { host } = new URL(origin);
+  const uniquePaths = Array.from(
+    new Set(
+      paths
+        .map(normalizePath)
+        .filter((value): value is string => Boolean(value))
+        .filter((path) => path !== "/")
+        .map((path) => `${host}${path}`)
+    )
+  );
+
+  return uniquePaths;
+}
+
+function normalizeTag(tag: string) {
+  const trimmed = tag.trim();
+  if (!trimmed) return null;
+  return trimmed.length > 128 ? trimmed.slice(0, 128) : trimmed;
+}
+
+function normalizeTags(tags: string[]) {
+  return Array.from(new Set(tags.map(normalizeTag).filter((value): value is string => Boolean(value))));
+}
+
 function readPositiveInt(name: string, fallback: number, max: number) {
   const raw = readEnv(name);
   if (!raw) return fallback;
@@ -79,6 +107,24 @@ async function runLimited<T, R>(items: T[], concurrency: number, worker: (item: 
   }
   await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, runWorker));
   return results;
+}
+
+function mergePurgeResults(method: string, results: CloudflarePurgeResult[]): CloudflarePurgeResult {
+  const enabled = results.some((result) => result.enabled);
+  const purged = results.flatMap((result) => result.purged);
+  const errors = results.flatMap((result) => result.errors ?? []);
+  const failed = results.find((result) => result.enabled && !result.ok);
+
+  return {
+    enabled,
+    ok: enabled ? results.every((result) => !result.enabled || result.ok) : false,
+    attempted: results.reduce((sum, result) => sum + result.attempted, 0),
+    purged,
+    method,
+    status: failed?.status ?? [...results].reverse().find((result) => result.status)?.status,
+    reason: failed?.reason,
+    errors: errors.length ? errors : undefined
+  };
 }
 
 function extractErrors(payload: unknown) {
@@ -107,6 +153,7 @@ export async function purgeCloudflarePaths(paths: string[]): Promise<CloudflareP
       ok: false,
       attempted: 0,
       purged: [],
+      method: "files",
       reason: "missing-config"
     };
   }
@@ -118,6 +165,7 @@ export async function purgeCloudflarePaths(paths: string[]): Promise<CloudflareP
       ok: true,
       attempted: 0,
       purged: [],
+      method: "files",
       reason: "no-cacheable-paths"
     };
   }
@@ -160,6 +208,7 @@ export async function purgeCloudflarePaths(paths: string[]): Promise<CloudflareP
       ok: purged.length === files.length,
       attempted: files.length,
       purged,
+      method: "files",
       status: responseStatus,
       reason: purged.length === files.length ? undefined : "cloudflare-api-error",
       errors
@@ -170,10 +219,267 @@ export async function purgeCloudflarePaths(paths: string[]): Promise<CloudflareP
       ok: false,
       attempted: files.length,
       purged: files,
+      method: "files",
       status: responseStatus || undefined,
       reason: error instanceof Error ? error.message : "cloudflare-request-failed"
     };
   }
+}
+
+export async function purgeCloudflareTags(tags: string[]): Promise<CloudflarePurgeResult> {
+  const apiToken = readEnv("CLOUDFLARE_API_TOKEN");
+  const zoneId = readEnv("CLOUDFLARE_ZONE_ID");
+
+  if (!apiToken || !zoneId) {
+    return {
+      enabled: false,
+      ok: false,
+      attempted: 0,
+      purged: [],
+      method: "tags",
+      reason: "missing-config"
+    };
+  }
+
+  const normalizedTags = normalizeTags(tags);
+  if (normalizedTags.length === 0) {
+    return {
+      enabled: true,
+      ok: true,
+      attempted: 0,
+      purged: [],
+      method: "tags",
+      reason: "no-cacheable-tags"
+    };
+  }
+
+  let responseStatus = 0;
+  const purged: string[] = [];
+  const errors: string[] = [];
+
+  try {
+    for (let index = 0; index < normalizedTags.length; index += CLOUDFLARE_GRANULAR_PURGE_BATCH_SIZE) {
+      const batch = normalizedTags.slice(index, index + CLOUDFLARE_GRANULAR_PURGE_BATCH_SIZE);
+      const response = await fetch(`${CLOUDFLARE_API_BASE}/zones/${zoneId}/purge_cache`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ tags: batch })
+      });
+
+      responseStatus = response.status;
+      const payload = await response.json().catch(() => null);
+      const successFlag =
+        payload && typeof payload === "object" && typeof (payload as { success?: unknown }).success === "boolean"
+          ? Boolean((payload as { success: boolean }).success)
+          : response.ok;
+
+      if (response.ok && successFlag) {
+        purged.push(...batch);
+      } else {
+        errors.push(...extractErrors(payload));
+        if (!errors.length) {
+          errors.push(`Cloudflare tag purge batch failed with status ${response.status}`);
+        }
+      }
+    }
+
+    return {
+      enabled: true,
+      ok: purged.length === normalizedTags.length,
+      attempted: normalizedTags.length,
+      purged,
+      method: "tags",
+      status: responseStatus,
+      reason: purged.length === normalizedTags.length ? undefined : "cloudflare-api-error",
+      errors
+    };
+  } catch (error) {
+    return {
+      enabled: true,
+      ok: false,
+      attempted: normalizedTags.length,
+      purged: normalizedTags,
+      method: "tags",
+      status: responseStatus || undefined,
+      reason: error instanceof Error ? error.message : "cloudflare-request-failed"
+    };
+  }
+}
+
+export async function purgeCloudflarePrefixes(paths: string[]): Promise<CloudflarePurgeResult> {
+  const apiToken = readEnv("CLOUDFLARE_API_TOKEN");
+  const zoneId = readEnv("CLOUDFLARE_ZONE_ID");
+
+  if (!apiToken || !zoneId) {
+    return {
+      enabled: false,
+      ok: false,
+      attempted: 0,
+      purged: [],
+      method: "prefixes",
+      reason: "missing-config"
+    };
+  }
+
+  const prefixes = buildPurgePrefixes(paths);
+  if (prefixes.length === 0) {
+    return {
+      enabled: true,
+      ok: true,
+      attempted: 0,
+      purged: [],
+      method: "prefixes",
+      reason: "no-cacheable-prefixes"
+    };
+  }
+
+  let responseStatus = 0;
+  const purged: string[] = [];
+  const errors: string[] = [];
+
+  try {
+    for (let index = 0; index < prefixes.length; index += CLOUDFLARE_GRANULAR_PURGE_BATCH_SIZE) {
+      const batch = prefixes.slice(index, index + CLOUDFLARE_GRANULAR_PURGE_BATCH_SIZE);
+      const response = await fetch(`${CLOUDFLARE_API_BASE}/zones/${zoneId}/purge_cache`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ prefixes: batch })
+      });
+
+      responseStatus = response.status;
+      const payload = await response.json().catch(() => null);
+      const successFlag =
+        payload && typeof payload === "object" && typeof (payload as { success?: unknown }).success === "boolean"
+          ? Boolean((payload as { success: boolean }).success)
+          : response.ok;
+
+      if (response.ok && successFlag) {
+        purged.push(...batch);
+      } else {
+        errors.push(...extractErrors(payload));
+        if (!errors.length) {
+          errors.push(`Cloudflare prefix purge batch failed with status ${response.status}`);
+        }
+      }
+    }
+
+    return {
+      enabled: true,
+      ok: purged.length === prefixes.length,
+      attempted: prefixes.length,
+      purged,
+      method: "prefixes",
+      status: responseStatus,
+      reason: purged.length === prefixes.length ? undefined : "cloudflare-api-error",
+      errors
+    };
+  } catch (error) {
+    return {
+      enabled: true,
+      ok: false,
+      attempted: prefixes.length,
+      purged: prefixes,
+      method: "prefixes",
+      status: responseStatus || undefined,
+      reason: error instanceof Error ? error.message : "cloudflare-request-failed"
+    };
+  }
+}
+
+export async function purgeCloudflareEverything(): Promise<CloudflarePurgeResult> {
+  const apiToken = readEnv("CLOUDFLARE_API_TOKEN");
+  const zoneId = readEnv("CLOUDFLARE_ZONE_ID");
+
+  if (!apiToken || !zoneId) {
+    return {
+      enabled: false,
+      ok: false,
+      attempted: 0,
+      purged: [],
+      method: "everything",
+      reason: "missing-config"
+    };
+  }
+
+  try {
+    const response = await fetch(`${CLOUDFLARE_API_BASE}/zones/${zoneId}/purge_cache`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiToken}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ purge_everything: true })
+    });
+
+    const payload = await response.json().catch(() => null);
+    const successFlag =
+      payload && typeof payload === "object" && typeof (payload as { success?: unknown }).success === "boolean"
+        ? Boolean((payload as { success: boolean }).success)
+        : response.ok;
+
+    return {
+      enabled: true,
+      ok: response.ok && successFlag,
+      attempted: 1,
+      purged: response.ok && successFlag ? ["*"] : [],
+      method: "everything",
+      status: response.status,
+      reason: response.ok && successFlag ? undefined : "cloudflare-api-error",
+      errors: response.ok && successFlag ? undefined : extractErrors(payload)
+    };
+  } catch (error) {
+    return {
+      enabled: true,
+      ok: false,
+      attempted: 1,
+      purged: [],
+      method: "everything",
+      reason: error instanceof Error ? error.message : "cloudflare-request-failed"
+    };
+  }
+}
+
+export async function purgeCloudflarePublicCache({
+  paths,
+  tags
+}: {
+  paths: string[];
+  tags: string[];
+}): Promise<CloudflarePurgeResult> {
+  const strategy = readEnv("CLOUDFLARE_PURGE_STRATEGY") ?? "tags";
+
+  if (strategy === "everything") {
+    return purgeCloudflareEverything();
+  }
+
+  if (strategy === "files") {
+    return purgeCloudflarePaths(paths);
+  }
+
+  if (strategy === "prefixes") {
+    return purgeCloudflarePrefixes(paths);
+  }
+
+  if (strategy === "tags-and-prefixes") {
+    return mergePurgeResults("tags-and-prefixes", [
+      await purgeCloudflareTags(tags),
+      await purgeCloudflarePrefixes(paths)
+    ]);
+  }
+
+  const tagResult = await purgeCloudflareTags(tags);
+  if (tagResult.ok || readEnv("CLOUDFLARE_TAG_PURGE_FALLBACK") === "false") {
+    return tagResult;
+  }
+
+  const fallback = await purgeCloudflarePrefixes(paths);
+  return mergePurgeResults("tags-with-prefix-fallback", [tagResult, fallback]);
 }
 
 export async function warmCloudflarePaths(paths: string[]): Promise<CloudflareWarmResult> {
