@@ -6,6 +6,7 @@
 !.git/refs/**
 .github
 .next
+apps/web/.next
 apps/extension/dist
 apps/extension/*.zip
 apps/mobile/.expo

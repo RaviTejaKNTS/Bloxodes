@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-FROM node:20-bookworm-slim AS deps
+FROM node:24-bookworm-slim AS deps
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY package.json package-lock.json ./
@@ -9,7 +9,7 @@ COPY apps/extension/package.json ./apps/extension/package.json
 COPY apps/mobile/package.json ./apps/mobile/package.json
 RUN npm ci
 
-FROM node:20-bookworm-slim AS builder
+FROM node:24-bookworm-slim AS builder
 WORKDIR /app
 ARG BLOXODES_BUILD_SHA=unknown
 ENV NODE_ENV=production
@@ -39,7 +39,7 @@ RUN set -eu; \
   printf '%s\n' "$sha" > /app/build-sha
 RUN npm run build
 
-FROM node:20-bookworm-slim AS runner
+FROM node:24-bookworm-slim AS runner
 WORKDIR /app
 ARG BLOXODES_BUILD_SHA=unknown
 ENV NODE_ENV=production

@@ -27,12 +27,12 @@ jobs:
       SUPABASE_MEDIA_BUCKET: ${{ secrets.SUPABASE_MEDIA_BUCKET }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
           cache: "npm"
 
       - name: Random human-like delay (0-20 min)

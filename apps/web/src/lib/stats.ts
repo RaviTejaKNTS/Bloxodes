@@ -532,12 +532,11 @@ export async function getStatsHome(): Promise<StatsHomeData> {
   const platformTrend = await getPlatformTrend(topGames);
   const livePlayers = topGames.reduce((sum, game) => sum + (game.playing ?? 0), 0);
   const totalVisits = mostVisited.reduce((sum, game) => sum + (game.visits ?? 0), 0);
-  const lastUpdatedAt =
-    topGames
-      .map((game) => game.lastStatsRefreshedAt ?? game.lastPlayingRefreshedAt)
-      .filter((value): value is string => Boolean(value))
-      .sort()
-      .at(-1) ?? null;
+  const sortedRefreshTimes = topGames
+    .map((game) => game.lastStatsRefreshedAt ?? game.lastPlayingRefreshedAt)
+    .filter((value): value is string => Boolean(value))
+    .sort();
+  const lastUpdatedAt = sortedRefreshTimes[sortedRefreshTimes.length - 1] ?? null;
 
   return {
     totals: {
