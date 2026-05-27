@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 export const dynamic = "force-dynamic";
@@ -15,12 +15,22 @@ function readBuildSha() {
     return envSha;
   }
 
-  try {
-    const fileSha = readFileSync(join(process.cwd(), "build-sha"), "utf8").trim();
-    return fileSha || "unknown";
-  } catch {
-    return envSha || "unknown";
+  const buildShaPaths = [
+    join(process.cwd(), "build-sha"),
+    join(process.cwd(), "..", "..", "build-sha"),
+    "/app/build-sha"
+  ];
+
+  for (const buildShaPath of buildShaPaths) {
+    if (!existsSync(buildShaPath)) continue;
+
+    const fileSha = readFileSync(buildShaPath, "utf8").trim();
+    if (fileSha) {
+      return fileSha;
+    }
   }
+
+  return envSha || "unknown";
 }
 
 export async function GET() {
