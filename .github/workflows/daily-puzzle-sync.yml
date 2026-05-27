@@ -1,0 +1,183 @@
+name: Daily Puzzle Sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      group:
+        description: Puzzle group to sync
+        required: false
+        default: all
+        type: choice
+        options:
+          - all
+          - early-nyt
+          - beebom
+          - beebom-with-early
+          - late-nyt
+          - linkedin
+          - late-nyt-and-linkedin
+      puzzle:
+        description: Optional single puzzle slug
+        required: false
+        type: string
+      dry_run:
+        description: Run without writing to Supabase
+        required: false
+        default: false
+        type: boolean
+      skip_linkedin:
+        description: Skip LinkedIn puzzles
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    # NYT early games: after midnight Eastern during daylight time.
+    - cron: "10 4 * * *"
+    # Beebom observed update window: 10:15, 10:30, and 11:00 IST.
+    - cron: "45 4 * * *"
+    - cron: "0 5 * * *"
+    - cron: "30 5 * * *"
+    # NYT 3 AM Eastern games and LinkedIn midnight Pacific games during daylight time.
+    - cron: "10 7 * * *"
+    # Standard-time fallback for NYT 3 AM Eastern and LinkedIn midnight Pacific.
+    - cron: "10 8 * * *"
+    # Final sweep: 2:00 PM IST.
+    - cron: "30 8 * * *"
+
+concurrency:
+  group: daily-puzzle-sync
+  cancel-in-progress: false
+
+jobs:
+  sync-puzzles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      LINKEDIN_LI_AT: ${{ secrets.LINKEDIN_LI_AT }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Record start time
+        run: |
+          START_TIME=$(date -u '+%Y-%m-%d %H:%M:%SZ')
+          echo "RUN_START_TIME=$START_TIME" >> $GITHUB_ENV
+          echo "RUN_START_EPOCH=$(date +%s)" >> $GITHUB_ENV
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Resolve puzzle group
+        id: resolve
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+          INPUT_GROUP: ${{ inputs.group }}
+          INPUT_PUZZLE: ${{ inputs.puzzle }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+          INPUT_SKIP_LINKEDIN: ${{ inputs.skip_linkedin }}
+        run: |
+          set -euo pipefail
+
+          GROUP="${INPUT_GROUP:-all}"
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            case "$EVENT_SCHEDULE" in
+              "10 4 * * *") GROUP="early-nyt" ;;
+              "45 4 * * *") GROUP="beebom-with-early" ;;
+              "0 5 * * *") GROUP="beebom-with-early" ;;
+              "30 5 * * *") GROUP="beebom-with-early" ;;
+              "10 7 * * *") GROUP="late-nyt-and-linkedin" ;;
+              "10 8 * * *") GROUP="late-nyt-and-linkedin" ;;
+              "30 8 * * *") GROUP="all" ;;
+              *) GROUP="all" ;;
+            esac
+          fi
+
+          case "$GROUP" in
+            early-nyt)
+              PUZZLES="wordle connections strands sudoku pips"
+              ;;
+            beebom)
+              PUZZLES="contexto letroso"
+              ;;
+            beebom-with-early)
+              PUZZLES="contexto letroso wordle connections strands sudoku pips"
+              ;;
+            late-nyt)
+              PUZZLES="spelling-bee letter-boxed"
+              ;;
+            linkedin)
+              PUZZLES="linkedin-zip linkedin-crossclimb linkedin-queens linkedin-tango linkedin-mini-sudoku"
+              ;;
+            late-nyt-and-linkedin)
+              PUZZLES="spelling-bee letter-boxed linkedin-zip linkedin-crossclimb linkedin-queens linkedin-tango linkedin-mini-sudoku"
+              ;;
+            all)
+              PUZZLES="wordle connections strands spelling-bee letter-boxed sudoku pips contexto letroso linkedin-zip linkedin-crossclimb linkedin-queens linkedin-tango linkedin-mini-sudoku"
+              ;;
+            *)
+              echo "Unsupported group: $GROUP" >&2
+              exit 1
+              ;;
+          esac
+
+          if [ -n "${INPUT_PUZZLE:-}" ]; then
+            PUZZLES="$INPUT_PUZZLE"
+          fi
+
+          ARGS=""
+          for puzzle in $PUZZLES; do
+            ARGS="$ARGS --puzzle $puzzle"
+          done
+
+          if [ "${INPUT_DRY_RUN:-false}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+
+          if [ "${INPUT_SKIP_LINKEDIN:-false}" = "true" ]; then
+            ARGS="$ARGS --skip-linkedin"
+          fi
+
+          if [ -z "${LINKEDIN_LI_AT:-}" ]; then
+            ARGS="$ARGS --skip-linkedin"
+          fi
+
+          echo "group=$GROUP" >> "$GITHUB_OUTPUT"
+          echo "puzzles=$PUZZLES" >> "$GITHUB_OUTPUT"
+          echo "args=$ARGS" >> "$GITHUB_OUTPUT"
+          echo "Resolved group: $GROUP"
+          echo "Resolved puzzles: $PUZZLES"
+
+      - name: Sync puzzle answers
+        run: npm run sync:puzzles -- ${{ steps.resolve.outputs.args }}
+
+      - name: Send automation summary
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.AUTOMATION_REPORT_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.AUTOMATION_REPORT_CHAT_ID }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+          JOB_STATUS: ${{ job.status }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          END_TIME=$(date -u '+%Y-%m-%d %H:%M:%SZ')
+          END_EPOCH=$(date +%s)
+          if [ -n "${RUN_START_EPOCH:-}" ]; then
+            DURATION=$((END_EPOCH - RUN_START_EPOCH))
+          else
+            DURATION=0
+          fi
+          RUN_END_TIME="$END_TIME" \
+          RUN_DURATION_SECONDS="$DURATION" \
+          AUTOMATION_SUMMARY_TEXT="Group: ${{ steps.resolve.outputs.group }}\nPuzzles: ${{ steps.resolve.outputs.puzzles }}" \
+          node scripts/automation/report-automation.mjs

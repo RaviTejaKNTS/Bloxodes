@@ -69,7 +69,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 
 `enrich-roblox-universes.ts` should not be the normal source for `roblox_universe_stats_daily` now that public stats use hourly rollups. It writes same-day daily stat rows only when `ROBLOX_ENRICH_WRITE_DAILY_STATS=true` is set for a legacy one-off.
 
-| Sync daily puzzle answers | `scripts/puzzles/sync-puzzles.ts` | `npm run sync:puzzles`; use `-- --puzzle wordle`, `-- --date YYYY-MM-DD`, `-- --backfill-days 30`, `-- --dry-run`, or `-- --skip-linkedin` as needed. LinkedIn puzzle sync requires `LINKEDIN_LI_AT` in local/production env. |
+| Sync daily puzzle answers | `scripts/puzzles/sync-puzzles.ts` | `npm run sync:puzzles`; use `-- --puzzle wordle`, `-- --date YYYY-MM-DD`, `-- --backfill-days 30`, `-- --dry-run`, or `-- --skip-linkedin` as needed. LinkedIn puzzle sync requires `LINKEDIN_LI_AT` in local/production env. GitHub runs `.github/workflows/daily-puzzle-sync.yml` at staggered UTC windows for NYT early games, Beebom fallbacks, NYT 3 AM ET games, LinkedIn midnight PT games, and a final 2:00 PM IST full sweep. |
 | Fix games with article content but missing Roblox link/universe ID | `scripts/games/fix-missing-roblox-links-and-universes.ts` | `npm run fix:game-links` local dry run, `npm run fix:game-links -- --prod --apply` to write prod |
 | Backfill social links | `scripts/backfill/backfill-social-links.ts` | `npm run links:backfill` |
 | Backfill missing cover images | `scripts/backfill/backfill-missing-cover-images.ts` | `npm run cover:backfill` |

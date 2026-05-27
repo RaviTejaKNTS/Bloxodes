@@ -129,6 +129,7 @@ async function main() {
   const endTime = loadEnv('RUN_END_TIME', true) || '';
   const durationSeconds = loadEnv('RUN_DURATION_SECONDS', true) || '0';
   const summaryPath = loadEnv('AUTOMATION_SUMMARY_PATH', true) || '';
+  const summaryText = loadEnv('AUTOMATION_SUMMARY_TEXT', true) || '';
 
   let summary;
   if (summaryPath) {
@@ -154,6 +155,9 @@ async function main() {
   ].filter(Boolean);
 
   lines.push(...buildSummaryLines(summary));
+  if (summaryText) {
+    lines.push('', ...summaryText.split('\n').filter(Boolean));
+  }
 
   const message = lines.join('\n');
   await sendTelegramMessage(token, chatId, message);
