@@ -449,21 +449,21 @@ function StrandsVisual({ payload }: { payload: AnyRecord }) {
 
 function BeeHoneycomb({ center, outer }: { center: string; outer: string[] }) {
   const positions = [
-    "left-[3.15rem] top-0",
-    "left-[6.3rem] top-[1.8rem]",
-    "left-[6.3rem] top-[5.4rem]",
-    "left-[3.15rem] top-[7.2rem]",
-    "left-0 top-[5.4rem]",
-    "left-0 top-[1.8rem]"
+    "left-[3.6rem] top-0",
+    "left-[7.2rem] top-[2.05rem]",
+    "left-[7.2rem] top-[6.15rem]",
+    "left-[3.6rem] top-[8.2rem]",
+    "left-0 top-[6.15rem]",
+    "left-0 top-[2.05rem]"
   ];
   return (
-    <div className="relative h-[10.8rem] w-[10.8rem]">
+    <div className="relative h-[12.3rem] w-[12.3rem]">
       {outer.slice(0, 6).map((letter, index) => (
-        <span key={`${letter}-${index}`} className={`absolute ${positions[index]} flex h-14 w-14 items-center justify-center bg-[#e6e6e6] text-xl font-bold uppercase text-[#1f1f1f] [clip-path:polygon(25%_5%,75%_5%,100%_50%,75%_95%,25%_95%,0_50%)]`}>
+        <span key={`${letter}-${index}`} className={`absolute ${positions[index]} flex h-16 w-16 items-center justify-center bg-[#e6e6e6] text-2xl font-bold uppercase text-[#1f1f1f] [clip-path:polygon(25%_5%,75%_5%,100%_50%,75%_95%,25%_95%,0_50%)]`}>
           {letter}
         </span>
       ))}
-      <span className="absolute left-[3.15rem] top-[3.6rem] flex h-14 w-14 items-center justify-center bg-[#f7da21] text-xl font-bold uppercase text-[#1f1f1f] [clip-path:polygon(25%_5%,75%_5%,100%_50%,75%_95%,25%_95%,0_50%)]">
+      <span className="absolute left-[3.6rem] top-[4.1rem] flex h-16 w-16 items-center justify-center bg-[#f7da21] text-2xl font-bold uppercase text-[#1f1f1f] [clip-path:polygon(25%_5%,75%_5%,100%_50%,75%_95%,25%_95%,0_50%)]">
         {center}
       </span>
     </div>
@@ -471,34 +471,156 @@ function BeeHoneycomb({ center, outer }: { center: string; outer: string[] }) {
 }
 
 function SpellingBeeVisual({ payload }: { payload: AnyRecord }) {
-  const [showPangrams, setShowPangrams] = useState(false);
-  const [showWords, setShowWords] = useState(false);
   const pangrams = asStringArray(payload.pangrams);
   const answers = asStringArray(payload.answers);
+  const [revealedWords, setRevealedWords] = useState<Set<string>>(() => new Set());
+  const pangramSet = useMemo(() => new Set(pangrams.map((word) => word.toLowerCase())), [pangrams]);
+  const groupedAnswers = useMemo(() => {
+    const groups = new Map<number, string[]>();
+    answers.forEach((word) => {
+      const length = word.length;
+      groups.set(length, [...(groups.get(length) ?? []), word]);
+    });
+    return [...groups.entries()]
+      .sort(([lengthA], [lengthB]) => lengthA - lengthB)
+      .map(([length, words]) => ({ length, words: [...words].sort((a, b) => a.localeCompare(b)) }));
+  }, [answers]);
+  const revealedPangrams = pangrams.filter((word) => revealedWords.has(word.toLowerCase()));
+  const allPangramsRevealed = pangrams.length > 0 && revealedPangrams.length === pangrams.length;
+
+  function revealNextWord(words: string[]) {
+    setRevealedWords((current) => {
+      const next = new Set(current);
+      const hiddenWord = words.find((word) => !next.has(word.toLowerCase()));
+      if (hiddenWord) next.add(hiddenWord.toLowerCase());
+      return next;
+    });
+  }
+
+  function revealWordGroup(words: string[]) {
+    setRevealedWords((current) => {
+      const next = new Set(current);
+      words.forEach((word) => next.add(word.toLowerCase()));
+      return next;
+    });
+  }
+
+  function hideWordGroup(words: string[]) {
+    setRevealedWords((current) => {
+      const next = new Set(current);
+      words.forEach((word) => next.delete(word.toLowerCase()));
+      return next;
+    });
+  }
+
+  function revealPangrams() {
+    setRevealedWords((current) => {
+      const next = new Set(current);
+      pangrams.forEach((word) => next.add(word.toLowerCase()));
+      return next;
+    });
+  }
+
   return (
-    <div className="grid gap-6 lg:grid-cols-[auto_minmax(0,1fr)]">
-      <button type="button" className="text-left" onClick={() => setShowPangrams(true)} aria-label="Open Spelling Bee pangrams">
+    <div className="grid gap-7 lg:grid-cols-[13rem_minmax(0,1fr)] lg:items-start">
+      <div className="flex justify-center lg:justify-start">
         <BeeHoneycomb center={asString(payload.centerLetter)} outer={asStringArray(payload.outerLetters)} />
-      </button>
-      <div className="space-y-4">
-        <div>
-          <button type="button" className="text-xs font-semibold uppercase tracking-[0.18em] text-muted" onClick={() => setShowPangrams(true)}>
-            Pangrams
-          </button>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {(showPangrams ? pangrams : pangrams.map((_, index) => `Pangram ${index + 1}`)).map((word) => (
-              <span key={word} className="rounded-full bg-[#f7da21] px-3 py-1 text-sm font-bold uppercase text-[#1f1f1f]">{word}</span>
-            ))}
-          </div>
-        </div>
-        <button type="button" className="text-sm text-muted" onClick={() => setShowWords(true)}>
-          {showWords ? `${answers.length} accepted answers` : "Tap to open the full accepted word list"}
-        </button>
-        {showWords ? (
-          <div className="flex flex-wrap gap-2">
-            {answers.map((word) => <span key={word} className="rounded-md bg-surface px-2 py-1 text-xs font-semibold text-foreground">{word}</span>)}
+      </div>
+
+      <div className="space-y-5">
+        {pangrams.length ? (
+          <div className="rounded-md border border-border bg-surface p-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="text-sm font-semibold text-foreground">
+                Pangram{pangrams.length === 1 ? "" : "s"}: {revealedPangrams.length} of {pangrams.length} revealed
+              </p>
+              <button
+                type="button"
+                onClick={revealPangrams}
+                disabled={allPangramsRevealed}
+                className="inline-flex min-w-36 items-center justify-center rounded-md bg-[#f7da21] px-4 py-2 text-sm font-extrabold text-[#1f1f1f] transition hover:bg-[#efd01e] disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {allPangramsRevealed ? "Pangram revealed" : "Reveal pangram"}
+              </button>
+            </div>
+            <div className="mt-3 flex min-h-9 flex-wrap gap-2">
+              {pangrams.map((word, index) => {
+                const isVisible = revealedWords.has(word.toLowerCase());
+                return (
+                  <span key={`${word}-${index}`} className={`flex min-h-9 items-center justify-center rounded-md px-3 py-1 text-sm font-bold uppercase ${isVisible ? "bg-[#f7da21] text-[#1f1f1f]" : "bg-card text-muted ring-1 ring-border"}`}>
+                    {isVisible ? word : `Pangram ${index + 1}`}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         ) : null}
+
+        <div className="space-y-4">
+          {groupedAnswers.map(({ length, words }) => {
+            const visibleCount = words.filter((word) => revealedWords.has(word.toLowerCase())).length;
+            const allVisible = visibleCount === words.length;
+            return (
+              <section key={length} className="space-y-3 rounded-md border border-border bg-surface p-4">
+                <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(18rem,22rem)] sm:items-center">
+                  <div>
+                    <h4 className="text-base font-semibold text-foreground">
+                      There {words.length === 1 ? "is" : "are"} {words.length} {words.length === 1 ? "word" : "words"} with {length} letters
+                    </h4>
+                    <p className="mt-1 text-sm text-muted">{visibleCount} of {words.length} revealed</p>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => revealNextWord(words)}
+                      disabled={allVisible}
+                      className="inline-flex min-h-10 w-full items-center justify-center rounded-md border border-border bg-card px-2 py-2 text-xs font-semibold text-foreground transition hover:bg-background disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm"
+                    >
+                      One word
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => revealWordGroup(words)}
+                      disabled={allVisible}
+                      className="inline-flex min-h-10 w-full items-center justify-center rounded-md bg-accent px-2 py-2 text-xs font-semibold text-accent-foreground transition hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm"
+                    >
+                      Reveal all
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => hideWordGroup(words)}
+                      disabled={visibleCount === 0}
+                      className="inline-flex min-h-10 w-full items-center justify-center rounded-md border border-border bg-background px-2 py-2 text-xs font-semibold text-foreground transition hover:bg-card disabled:cursor-not-allowed disabled:opacity-60 sm:text-sm"
+                    >
+                      Hide all
+                    </button>
+                  </div>
+                </div>
+                <div className="grid min-h-10 grid-cols-2 gap-2 sm:grid-cols-3 xl:grid-cols-4">
+                  {words.map((word, index) => {
+                    const isVisible = revealedWords.has(word.toLowerCase());
+                    const isPangram = pangramSet.has(word.toLowerCase());
+                    return (
+                      <span
+                        key={`${word}-${index}`}
+                        className={[
+                          "flex min-h-9 items-center justify-center rounded-md px-2 text-center text-xs font-bold uppercase transition-colors",
+                          isVisible
+                            ? isPangram
+                              ? "bg-[#f7da21] text-[#1f1f1f]"
+                              : "bg-card text-foreground ring-1 ring-border"
+                            : "bg-background text-muted/70 ring-1 ring-border/60"
+                        ].join(" ")}
+                      >
+                        {isVisible ? word : `Word ${index + 1}`}
+                      </span>
+                    );
+                  })}
+                </div>
+              </section>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
@@ -582,94 +704,623 @@ function NumberGrid({
   );
 }
 
-function SudokuVisual({ payload }: { payload: AnyRecord }) {
-  const [rows, setRows] = useState<Record<DifficultyKey, number>>({ easy: 0, medium: 0, hard: 0 });
+function asSudokuValues(value: unknown): number[] {
+  return Array.isArray(value)
+    ? value.map((entry) => {
+        if (typeof entry === "number" && Number.isFinite(entry)) return entry;
+        if (typeof entry === "string") {
+          const parsed = Number.parseInt(entry, 10);
+          return Number.isFinite(parsed) ? parsed : 0;
+        }
+        return 0;
+      })
+    : [];
+}
+
+function SudokuBoard({
+  puzzle,
+  solution,
+  revealed,
+  onToggle
+}: {
+  puzzle: number[];
+  solution: number[];
+  revealed: Set<number>;
+  onToggle: (index: number) => void;
+}) {
   return (
-    <div className="grid gap-4 lg:grid-cols-3">
-      {(["easy", "medium", "hard"] as DifficultyKey[]).map((difficulty) => {
-        const entry = asRecord(payload[difficulty]);
-        const solution = asNumberArray(entry.solution);
-        const visible = new Set(Array.from({ length: Math.min(rows[difficulty], 9) * 9 }, (_, index) => index));
+    <div className="grid aspect-square w-full max-w-[29rem] grid-cols-9 overflow-hidden rounded-md border-[3px] border-[#111111] bg-[#111111] shadow-sm dark:border-foreground/90 dark:bg-foreground/90">
+      {Array.from({ length: 81 }, (_, index) => {
+        const row = Math.floor(index / 9);
+        const col = index % 9;
+        const given = puzzle[index] ?? 0;
+        const value = solution[index] ?? 0;
+        const isGiven = given > 0;
+        const isRevealed = isGiven || revealed.has(index);
+        const thickRight = col === 2 || col === 5;
+        const thickBottom = row === 2 || row === 5;
+        const borderClasses = [
+          "border-[#9d9d9d] dark:border-[#555a61]",
+          thickRight ? "border-r-[3px] border-r-[#777777] dark:border-r-foreground/75" : "border-r",
+          thickBottom ? "border-b-[3px] border-b-[#777777] dark:border-b-foreground/75" : "border-b",
+          col === 8 ? "border-r-0" : "",
+          row === 8 ? "border-b-0" : ""
+        ].join(" ");
+        const baseClasses =
+          "flex aspect-square items-center justify-center text-xl font-black leading-none transition-colors duration-200 sm:text-2xl md:text-3xl";
+
+        if (isGiven) {
+          return (
+            <span key={index} className={`${baseClasses} ${borderClasses} bg-[#d9d9d9] text-[#111111] dark:bg-[#262a31] dark:text-foreground`}>
+              {given}
+            </span>
+          );
+        }
+
         return (
-          <div key={difficulty} className="space-y-3">
-            <p className="text-sm font-semibold capitalize text-foreground">{difficulty} puzzle {asNumber(entry.puzzleId) ? `#${asNumber(entry.puzzleId)}` : ""}</p>
-            <div className="overflow-x-auto">
-              <NumberGrid values={solution} cols={9} visible={visible} onClick={() => setRows((prev) => ({ ...prev, [difficulty]: nextValue(prev[difficulty], 9) }))} />
-            </div>
-          </div>
+          <button
+            key={index}
+            type="button"
+            aria-pressed={revealed.has(index)}
+            aria-label={isRevealed ? `Hide row ${row + 1} column ${col + 1}` : `Reveal row ${row + 1} column ${col + 1}`}
+            onClick={() => onToggle(index)}
+            className={`${baseClasses} ${borderClasses} ${
+              isRevealed
+                ? "bg-[#f4c45f] text-[#111111] shadow-inner dark:bg-[#e0ad43] dark:text-[#111111]"
+                : "bg-[#fff1c8] text-transparent hover:bg-[#f8e5ad] dark:bg-[#111318] dark:hover:bg-[#191d24]"
+            }`}
+          >
+            {isRevealed ? value : ""}
+          </button>
         );
       })}
     </div>
   );
 }
 
-function PipsBoard({ entry, revealed }: { entry: AnyRecord; revealed: number }) {
-  const regions = Array.isArray(entry.regions) ? (entry.regions as AnyRecord[]) : [];
-  const dominoes = Array.isArray(entry.dominoes) ? (entry.dominoes as unknown[]) : [];
-  const solution = Array.isArray(entry.solution) ? (entry.solution as unknown[]) : [];
-  const coords = [
-    ...regions.flatMap((region) => (Array.isArray(region.indices) ? (region.indices as number[][]) : [])),
-    ...solution.flatMap((pair) => (Array.isArray(pair) ? (pair as number[][]) : []))
-  ];
-  const rows = Math.max(0, ...coords.map((coord) => coord[0] ?? 0)) + 1;
-  const cols = Math.max(0, ...coords.map((coord) => coord[1] ?? 0)) + 1;
-  const values = new Map<string, number>();
-  const dominoIds = new Map<string, number>();
-  solution.slice(0, revealed).forEach((pair, index) => {
-    if (!Array.isArray(pair)) return;
-    const dots = Array.isArray(dominoes[index]) ? (dominoes[index] as number[]) : [];
-    pair.forEach((coord, coordIndex) => {
-      if (!Array.isArray(coord)) return;
-      values.set(coordKey(coord[0], coord[1]), dots[coordIndex] ?? 0);
-      dominoIds.set(coordKey(coord[0], coord[1]), index);
+function SudokuDifficulty({
+  difficulty,
+  entry
+}: {
+  difficulty: DifficultyKey;
+  entry: AnyRecord;
+}) {
+  const puzzle = asSudokuValues(entry.puzzle).slice(0, 81);
+  const solution = asSudokuValues(entry.solution).slice(0, 81);
+  const revealableIndexes = useMemo(
+    () => solution.map((value, index) => (value > 0 && !(puzzle[index] > 0) ? index : -1)).filter((index) => index >= 0),
+    [puzzle, solution]
+  );
+  const [revealedCells, setRevealedCells] = useState<Set<number>>(() => new Set());
+  const allVisible = revealableIndexes.length > 0 && revealedCells.size >= revealableIndexes.length;
+  const puzzleId = asNumber(entry.puzzleId);
+
+  function toggleCell(index: number) {
+    setRevealedCells((current) => {
+      const next = new Set(current);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
     });
-  });
-  const regionByCell = new Map<string, number>();
-  const regionLabelByCell = new Map<string, string>();
-  regions.forEach((region, index) => {
-    const indices = Array.isArray(region.indices) ? (region.indices as number[][]) : [];
-    const label = [asString(region.type), asNumber(region.target)].filter((value) => value !== null && value !== "").join(" ");
-    indices.forEach((coord, coordIndex) => {
-      regionByCell.set(coordKey(coord[0], coord[1]), index);
-      if (coordIndex === 0 && label) regionLabelByCell.set(coordKey(coord[0], coord[1]), label);
-    });
-  });
-  const colors = ["bg-[#f5d0a9]", "bg-[#c6e6c1]", "bg-[#c9d8f0]", "bg-[#ead2f0]", "bg-[#f4e6a6]", "bg-[#cce8e5]"];
+  }
+
+  function showAll() {
+    setRevealedCells(new Set(revealableIndexes));
+  }
+
+  function hideAll() {
+    setRevealedCells(new Set());
+  }
+
+  if (solution.length < 81) {
+    return (
+      <section className="space-y-3">
+        <h3 className="text-lg font-semibold capitalize text-foreground">{difficulty}</h3>
+        <WordSlots answer="Grid data unavailable" />
+      </section>
+    );
+  }
+
   return (
-    <div className="inline-grid gap-1 rounded-2xl bg-[#ede8df] p-3" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 2.6rem))` }}>
-      {Array.from({ length: rows * cols }, (_, index) => {
-        const row = Math.floor(index / cols);
-        const col = index % cols;
-        const key = coordKey(row, col);
-        const region = regionByCell.get(key) ?? 0;
-        const domino = dominoIds.get(key);
-        return (
-          <span key={key} className={`relative flex aspect-square items-center justify-center rounded-md text-lg font-bold text-[#1f1f1f] ${colors[region % colors.length]}`}>
-            {regionLabelByCell.get(key) ? <span className="absolute left-1 top-0.5 text-[0.48rem] font-bold uppercase text-[#1f1f1f]/60">{regionLabelByCell.get(key)}</span> : null}
-            {values.get(key) ?? ""}
-            {domino !== undefined ? <span className="absolute bottom-0.5 right-1 text-[0.45rem] text-[#1f1f1f]/50">#{domino + 1}</span> : null}
-          </span>
-        );
+    <section className="space-y-4">
+      <div>
+        <h3 className="text-xl font-semibold capitalize text-foreground">
+          {difficulty} Sudoku {puzzleId ? <span className="text-muted">#{puzzleId}</span> : null}
+        </h3>
+        <p className="mt-1 text-sm text-muted">
+          Fixed clues are already filled. Tap any empty cell to reveal or hide only that answer.
+        </p>
+      </div>
+
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,29rem)_10rem] lg:items-start">
+        <SudokuBoard puzzle={puzzle} solution={solution} revealed={revealedCells} onToggle={toggleCell} />
+        <div className="flex flex-wrap gap-2 lg:flex-col">
+          <button
+            type="button"
+            onClick={showAll}
+            disabled={allVisible}
+            className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Reveal all
+          </button>
+          <button
+            type="button"
+            onClick={hideAll}
+            disabled={!revealedCells.size}
+            className="inline-flex items-center justify-center rounded-md border border-border bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-card disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Hide all
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SudokuVisual({ payload }: { payload: AnyRecord }) {
+  return (
+    <div className="space-y-10">
+      {(["easy", "medium", "hard"] as DifficultyKey[]).map((difficulty) => {
+        const entry = asRecord(payload[difficulty]);
+        return <SudokuDifficulty key={difficulty} difficulty={difficulty} entry={entry} />;
       })}
     </div>
+  );
+}
+
+type PipsCoord = [number, number];
+type PipsDomino = [number, number];
+type PipsRegionPalette = { fill: string; stroke: string; badge: string };
+type PipsRegion = { indices: PipsCoord[]; type: string; target: number | null; palette: PipsRegionPalette | null };
+
+const PIPS_REGION_PALETTES: PipsRegionPalette[] = [
+  { fill: "#c7a8c8", stroke: "#7617d6", badge: "#9251ca" },
+  { fill: "#e49baa", stroke: "#c70042", badge: "#db137a" },
+  { fill: "#a8bec4", stroke: "#006c7b", badge: "#008ea4" },
+  { fill: "#ebbf97", stroke: "#b94b00", badge: "#d35a08" },
+  { fill: "#b5b0bf", stroke: "#0c386a", badge: "#124076" },
+  { fill: "#bcb589", stroke: "#486700", badge: "#618200" }
+];
+
+function asPipsCoord(value: unknown): PipsCoord | null {
+  if (!Array.isArray(value) || value.length < 2) return null;
+  const row = asNumber(value[0]);
+  const col = asNumber(value[1]);
+  return row === null || col === null ? null : [row, col];
+}
+
+function asPipsDomino(value: unknown): PipsDomino | null {
+  if (!Array.isArray(value) || value.length < 2) return null;
+  const first = asNumber(value[0]);
+  const second = asNumber(value[1]);
+  return first === null || second === null ? null : [first, second];
+}
+
+function asPipsRegions(value: unknown): PipsRegion[] {
+  if (!Array.isArray(value)) return [];
+  let paletteIndex = 0;
+  return value.map(asRecord).map((region) => {
+    const indices = Array.isArray(region.indices) ? region.indices.map(asPipsCoord).filter((coord): coord is PipsCoord => Boolean(coord)) : [];
+    const type = asString(region.type);
+    const palette = type === "empty" ? null : PIPS_REGION_PALETTES[paletteIndex % PIPS_REGION_PALETTES.length] ?? null;
+    if (palette) paletteIndex += 1;
+    return { indices, type, target: asNumber(region.target), palette };
+  });
+}
+
+function asPipsSolution(value: unknown): [PipsCoord, PipsCoord][] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((pair) => {
+      if (!Array.isArray(pair) || pair.length < 2) return null;
+      const first = asPipsCoord(pair[0]);
+      const second = asPipsCoord(pair[1]);
+      return first && second ? ([first, second] as [PipsCoord, PipsCoord]) : null;
+    })
+    .filter((pair): pair is [PipsCoord, PipsCoord] => Boolean(pair));
+}
+
+function pipsDotOffsets(value: number, spreadX: number, spreadY: number): [number, number][] {
+  const left = -spreadX;
+  const right = spreadX;
+  const top = -spreadY;
+  const bottom = spreadY;
+  if (value === 1) return [[0, 0]];
+  if (value === 2) return [[left, top], [right, bottom]];
+  if (value === 3) return [[left, top], [0, 0], [right, bottom]];
+  if (value === 4) return [[left, top], [right, top], [left, bottom], [right, bottom]];
+  if (value === 5) return [[left, top], [right, top], [0, 0], [left, bottom], [right, bottom]];
+  if (value === 6) return [[left, top], [right, top], [left, 0], [right, 0], [left, bottom], [right, bottom]];
+  return [];
+}
+
+function pipsClueLabel(region: PipsRegion) {
+  if (region.type === "equals") return "=";
+  if (region.type === "unequal") return "≠";
+  if (region.type === "sum") return String(region.target ?? "");
+  if (region.type === "greater") return `>${region.target ?? ""}`;
+  if (region.type === "less") return `<${region.target ?? ""}`;
+  return "";
+}
+
+function pipsCellBackgroundPath(cells: Set<string>, cellTopLeft: (row: number, col: number) => { x: number; y: number }, cellSize: number, gap: number, radius: number, outlinePad = 0) {
+  const paths: string[] = [];
+  const size = cellSize + outlinePad * 2;
+  const bridgeGap = Math.max(0, gap - outlinePad * 2);
+
+  cells.forEach((key) => {
+    const [row, col] = key.split(",").map(Number);
+    const raw = cellTopLeft(row, col);
+    const x = raw.x - outlinePad;
+    const y = raw.y - outlinePad;
+    const top = !cells.has(coordKey(row - 1, col));
+    const right = !cells.has(coordKey(row, col + 1));
+    const bottom = !cells.has(coordKey(row + 1, col));
+    const left = !cells.has(coordKey(row, col - 1));
+    const rightNeighbor = cells.has(coordKey(row, col + 1));
+    const bottomNeighbor = cells.has(coordKey(row + 1, col));
+    const rTopLeft = top || left ? radius : 0;
+    const rTopRight = top || right ? radius : 0;
+    const rBottomRight = bottom || right ? radius : 0;
+    const rBottomLeft = bottom || left ? radius : 0;
+
+    if (rightNeighbor) {
+      paths.push(`M ${x + size - radius} ${y} H ${x + size + bridgeGap + radius} V ${y + size} H ${x + size - radius} Z`);
+    }
+
+    if (bottomNeighbor) {
+      paths.push(`M ${x} ${y + size - radius} H ${x + size} V ${y + size + bridgeGap + radius} H ${x} Z`);
+    }
+
+    if (rightNeighbor && bottomNeighbor && cells.has(coordKey(row + 1, col + 1))) {
+      paths.push(`M ${x + size - radius} ${y + size - radius} H ${x + size + bridgeGap + radius} V ${y + size + bridgeGap + radius} H ${x + size - radius} Z`);
+    }
+
+    paths.push([
+      `M ${x + rTopLeft} ${y}`,
+      `H ${x + size - rTopRight}`,
+      rTopRight ? `Q ${x + size} ${y} ${x + size} ${y + rTopRight}` : `L ${x + size} ${y}`,
+      `V ${y + size - rBottomRight}`,
+      rBottomRight ? `Q ${x + size} ${y + size} ${x + size - rBottomRight} ${y + size}` : `L ${x + size} ${y + size}`,
+      `H ${x + rBottomLeft}`,
+      rBottomLeft ? `Q ${x} ${y + size} ${x} ${y + size - rBottomLeft}` : `L ${x} ${y + size}`,
+      `V ${y + rTopLeft}`,
+      rTopLeft ? `Q ${x} ${y} ${x + rTopLeft} ${y}` : `L ${x} ${y}`,
+      "Z"
+    ].join(" "));
+  });
+
+  return paths.join(" ");
+}
+
+function PipsTrayDomino({ domino, index, placed, onClick }: { domino: PipsDomino; index: number; placed: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`rounded-lg transition ${placed ? "opacity-45 hover:opacity-85" : "hover:-translate-y-0.5 hover:opacity-95"}`}
+      aria-label={placed ? `Remove domino ${domino[0]}-${domino[1]}` : `Place domino ${domino[0]}-${domino[1]}`}
+    >
+      <svg viewBox="0 0 118 56" className="h-14 w-[7.4rem]" aria-hidden>
+        <rect x="2" y="2" width="114" height="48" rx="12" fill="#f6f6f6" stroke="#444444" strokeWidth="3" />
+        <path d="M 59 9 L 59 43" fill="none" stroke="#e2dbdb" strokeWidth="2" strokeLinecap="round" />
+        {[0, 1].map((half) => {
+          const centerX = half === 0 ? 30 : 88;
+          return pipsDotOffsets(domino[half] ?? 0, 9, 9).map(([dx, dy], dotIndex) => (
+            <circle key={`${index}-${half}-${dotIndex}`} cx={centerX + dx} cy={26 + dy} r="4.5" fill="#3f3f3f" />
+          ));
+        })}
+        <path d="M 10 51 H 108" stroke="#9a9a9a" strokeWidth="3" strokeLinecap="round" opacity="0.55" />
+      </svg>
+    </button>
+  );
+}
+
+function PipsDifficulty({ difficulty, entry }: { difficulty: DifficultyKey; entry: AnyRecord }) {
+  const regions = useMemo(() => asPipsRegions(entry.regions), [entry.regions]);
+  const dominoes = useMemo(() => (Array.isArray(entry.dominoes) ? entry.dominoes.map(asPipsDomino).filter((domino): domino is PipsDomino => Boolean(domino)) : []), [entry.dominoes]);
+  const solution = useMemo(() => asPipsSolution(entry.solution), [entry.solution]);
+  const [placedDominoes, setPlacedDominoes] = useState<Set<number>>(() => new Set());
+  const puzzleId = asNumber(entry.puzzleId);
+
+  const context = useMemo(() => {
+    const occupied = new Set<string>();
+    const regionByCell = new Map<string, PipsRegion>();
+    const solutionByCell = new Map<string, number>();
+    const rows: number[] = [];
+    const cols: number[] = [];
+
+    regions.forEach((region) => {
+      region.indices.forEach(([row, col]) => {
+        occupied.add(coordKey(row, col));
+        regionByCell.set(coordKey(row, col), region);
+        rows.push(row);
+        cols.push(col);
+      });
+    });
+
+    solution.forEach((pair, index) => {
+      pair.forEach(([row, col]) => {
+        occupied.add(coordKey(row, col));
+        solutionByCell.set(coordKey(row, col), index);
+        rows.push(row);
+        cols.push(col);
+      });
+    });
+
+    const maxRow = Math.max(0, ...rows);
+    const maxCol = Math.max(0, ...cols);
+    const metrics = maxRow >= 7
+      ? { cell: 72, gap: 10, boardPad: 14, radius: 15, dashRadius: 15 }
+      : maxCol >= 4
+        ? { cell: 76, gap: 10, boardPad: 14, radius: 16, dashRadius: 16 }
+        : { cell: 82, gap: 10, boardPad: 14, radius: 17, dashRadius: 17 };
+    const originX = 30;
+    const originY = 30;
+    const gridWidth = (maxCol + 1) * metrics.cell + maxCol * metrics.gap;
+    const gridHeight = (maxRow + 1) * metrics.cell + maxRow * metrics.gap;
+
+    return {
+      occupied,
+      regionByCell,
+      solutionByCell,
+      maxRow,
+      maxCol,
+      metrics,
+      originX,
+      originY,
+      gridWidth,
+      gridHeight,
+      svgWidth: originX + gridWidth + 86,
+      svgHeight: originY + gridHeight + 86
+    };
+  }, [regions, solution]);
+
+  function cellTopLeft(row: number, col: number) {
+    return {
+      x: context.originX + col * (context.metrics.cell + context.metrics.gap),
+      y: context.originY + row * (context.metrics.cell + context.metrics.gap)
+    };
+  }
+
+  function toggleDomino(index: number) {
+    setPlacedDominoes((current) => {
+      const next = new Set(current);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  }
+
+  function placeDomino(index: number) {
+    setPlacedDominoes((current) => new Set(current).add(index));
+  }
+
+  function handleCellAction(index: number | undefined) {
+    if (index === undefined) return;
+    placeDomino(index);
+  }
+
+  function handleSvgKey(event: React.KeyboardEvent<SVGRectElement>, index: number | undefined) {
+    if (index === undefined) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      placeDomino(index);
+    }
+  }
+
+  const allPlaced = solution.length > 0 && placedDominoes.size >= solution.length;
+  const outlinePaths: { d: string; stroke: string }[] = [];
+  regions.forEach((region) => {
+    const palette = region.palette;
+    if (!palette) return;
+    const sameRegion = new Set(region.indices.map(([row, col]) => coordKey(row, col)));
+    region.indices.forEach(([row, col]) => {
+      const { x, y } = cellTopLeft(row, col);
+      const top = !sameRegion.has(coordKey(row - 1, col));
+      const right = !sameRegion.has(coordKey(row, col + 1));
+      const bottom = !sameRegion.has(coordKey(row + 1, col));
+      const left = !sameRegion.has(coordKey(row, col - 1));
+      const rightNeighbor = sameRegion.has(coordKey(row, col + 1));
+      const bottomNeighbor = sameRegion.has(coordKey(row + 1, col));
+      const r = context.metrics.dashRadius;
+      const size = context.metrics.cell;
+      const stroke = palette.stroke;
+      const addLine = (x1: number, y1: number, x2: number, y2: number) => outlinePaths.push({ d: `M ${x1} ${y1} L ${x2} ${y2}`, stroke });
+      const addArc = (x1: number, y1: number, x2: number, y2: number, sweep: 0 | 1) => outlinePaths.push({ d: `M ${x1} ${y1} A ${r} ${r} 0 0 ${sweep} ${x2} ${y2}`, stroke });
+
+      if (top) addLine(x + r, y, x + size - r, y);
+      if (right) addLine(x + size, y + r, x + size, y + size - r);
+      if (bottom) addLine(x + r, y + size, x + size - r, y + size);
+      if (left) addLine(x, y + r, x, y + size - r);
+      if (top && left) addArc(x + r, y, x, y + r, 0);
+      if (top && right) addArc(x + size - r, y, x + size, y + r, 1);
+      if (bottom && right) addArc(x + size, y + size - r, x + size - r, y + size, 1);
+      if (bottom && left) addArc(x + r, y + size, x, y + size - r, 1);
+
+      if (rightNeighbor) {
+        const neighborTop = !sameRegion.has(coordKey(row - 1, col + 1));
+        const neighborBottom = !sameRegion.has(coordKey(row + 1, col + 1));
+        if (top && neighborTop) addLine(x + size - r, y, x + size + context.metrics.gap + r, y);
+        if (bottom && neighborBottom) addLine(x + size - r, y + size, x + size + context.metrics.gap + r, y + size);
+      }
+
+      if (bottomNeighbor) {
+        const neighborLeft = !sameRegion.has(coordKey(row + 1, col - 1));
+        const neighborRight = !sameRegion.has(coordKey(row + 1, col + 1));
+        if (left && neighborLeft) addLine(x, y + size - r, x, y + size + context.metrics.gap + r);
+        if (right && neighborRight) addLine(x + size, y + size - r, x + size, y + size + context.metrics.gap + r);
+      }
+    });
+  });
+
+  return (
+    <section className="space-y-4">
+      <style>{`@keyframes pips-pop{0%{opacity:0;transform:scale(.82)}70%{opacity:1;transform:scale(1.04)}100%{opacity:1;transform:scale(1)}}.pips-domino-enter{animation:pips-pop .26s ease-out;transform-box:fill-box;transform-origin:center}`}</style>
+      <div>
+        <h3 className="text-xl font-semibold capitalize text-foreground">
+          {difficulty} Pips {puzzleId ? <span className="text-muted">#{puzzleId}</span> : null}
+        </h3>
+        <p className="mt-1 text-sm text-muted">
+          Start with the empty clue board. Tap a cell or an available domino to place the matching solved piece.
+        </p>
+      </div>
+
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,34rem)_minmax(16rem,1fr)] xl:items-start">
+        <div className="overflow-x-auto">
+          <svg
+            viewBox={`0 0 ${context.svgWidth} ${context.svgHeight}`}
+            className="h-auto w-full min-w-[18rem] max-w-[30rem]"
+            role="img"
+            aria-label={`${difficulty} Pips answer board`}
+          >
+            <path d={pipsCellBackgroundPath(context.occupied, cellTopLeft, context.metrics.cell, context.metrics.gap, context.metrics.radius + 7, 7)} fill="#dbc2b9" />
+            {Array.from({ length: (context.maxRow + 1) * (context.maxCol + 1) }, (_, index) => {
+              const row = Math.floor(index / (context.maxCol + 1));
+              const col = index % (context.maxCol + 1);
+              const key = coordKey(row, col);
+              if (!context.occupied.has(key)) return null;
+              const region = context.regionByCell.get(key);
+              const { x, y } = cellTopLeft(row, col);
+              return (
+                <g key={`cell-${key}`}>
+                  <rect x={x} y={y} width={context.metrics.cell} height={context.metrics.cell} rx={context.metrics.radius} fill="#e1cbc5" />
+                  {region?.palette ? <rect x={x} y={y} width={context.metrics.cell} height={context.metrics.cell} rx={context.metrics.radius} fill={region.palette.fill} /> : null}
+                </g>
+              );
+            })}
+            {outlinePaths.map((path, index) => (
+              <path key={`outline-${index}`} d={path.d} fill="none" stroke={path.stroke} strokeWidth="4.5" strokeLinecap="round" strokeDasharray="10 10" />
+            ))}
+            {regions.map((region, index) => {
+              if (!region.palette || region.type === "empty") return null;
+              const label = pipsClueLabel(region);
+              if (!label) return null;
+              const anchor = [...region.indices].sort((a, b) => (a[0] !== b[0] ? b[0] - a[0] : b[1] - a[1]))[0];
+              if (!anchor) return null;
+              const [row, col] = anchor;
+              const belowOpen = !context.occupied.has(coordKey(row + 1, col));
+              const placement = row === context.maxRow || belowOpen ? "bottom" : "right";
+              const { x, y } = cellTopLeft(row, col);
+              const centerX = placement === "right" ? x + context.metrics.cell + 18 : x + context.metrics.cell - 18;
+              const centerY = placement === "right" ? y + context.metrics.cell - 18 : y + context.metrics.cell + 18;
+              return (
+                <g key={`badge-${index}`}>
+                  <rect x={centerX - 20} y={centerY - 20} width="40" height="40" rx="7" fill={region.palette.badge} transform={`rotate(45 ${centerX} ${centerY})`} />
+                  <text x={centerX} y={centerY + 1} textAnchor="middle" dominantBaseline="middle" fontSize={label.length >= 3 ? 18 : label.length === 2 ? 22 : 30} fontWeight="800" fill="#ffffff">
+                    {label}
+                  </text>
+                </g>
+              );
+            })}
+            {Array.from(context.occupied).map((key) => {
+              const [row, col] = key.split(",").map(Number);
+              const dominoIndex = context.solutionByCell.get(key);
+              const { x, y } = cellTopLeft(row, col);
+              return (
+                <rect
+                  key={`hit-${key}`}
+                  x={x}
+                  y={y}
+                  width={context.metrics.cell}
+                  height={context.metrics.cell}
+                  fill="transparent"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={dominoIndex === undefined ? "Pips board cell" : `Place domino ${dominoIndex + 1}`}
+                  onClick={() => handleCellAction(dominoIndex)}
+                  onKeyDown={(event) => handleSvgKey(event, dominoIndex)}
+                />
+              );
+            })}
+            {solution.map((pair, index) => {
+              if (!placedDominoes.has(index)) return null;
+              const domino = dominoes[index];
+              if (!domino) return null;
+              const [firstCell, secondCell] = pair;
+              const [r1, c1] = firstCell;
+              const [r2, c2] = secondCell;
+              const firstPos = cellTopLeft(r1, c1);
+              const secondPos = cellTopLeft(r2, c2);
+              const horizontal = r1 === r2;
+              const inset = Math.round(context.metrics.cell * 0.12);
+              const x = Math.min(firstPos.x, secondPos.x) + inset;
+              const y = Math.min(firstPos.y, secondPos.y) + inset;
+              const width = horizontal ? context.metrics.cell * 2 + context.metrics.gap - inset * 2 : context.metrics.cell - inset * 2;
+              const height = horizontal ? context.metrics.cell - inset * 2 : context.metrics.cell * 2 + context.metrics.gap - inset * 2;
+              const dividerX = horizontal ? Math.min(firstPos.x, secondPos.x) + context.metrics.cell + context.metrics.gap / 2 : null;
+              const dividerY = horizontal ? null : Math.min(firstPos.y, secondPos.y) + context.metrics.cell + context.metrics.gap / 2;
+              const pipRadius = Math.max(3.5, context.metrics.cell * 0.055);
+              const spread = context.metrics.cell * 0.15;
+              return (
+                <g key={`domino-${index}`} className="pips-domino-enter cursor-pointer" role="button" tabIndex={0} aria-label={`Remove domino ${domino[0]}-${domino[1]}`} onClick={(event) => {
+                  event.stopPropagation();
+                  toggleDomino(index);
+                }} onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    toggleDomino(index);
+                  }
+                }}>
+                  <rect x={x} y={y} width={width} height={height} rx={Math.max(11, context.metrics.radius - 3)} fill="#f6f6f6" stroke="#444444" strokeWidth="3" />
+                  {horizontal && dividerX !== null ? <path d={`M ${dividerX} ${y + 8} L ${dividerX} ${y + height - 8}`} fill="none" stroke="#e2dbdb" strokeWidth="3" strokeLinecap="round" /> : null}
+                  {!horizontal && dividerY !== null ? <path d={`M ${x + 8} ${dividerY} L ${x + width - 8} ${dividerY}`} fill="none" stroke="#e2dbdb" strokeWidth="3" strokeLinecap="round" /> : null}
+                  {pair.map(([row, col], halfIndex) => {
+                    const centerX = context.originX + col * (context.metrics.cell + context.metrics.gap) + context.metrics.cell / 2;
+                    const centerY = context.originY + row * (context.metrics.cell + context.metrics.gap) + context.metrics.cell / 2;
+                    return pipsDotOffsets(domino[halfIndex] ?? 0, spread, spread).map(([dx, dy], dotIndex) => (
+                      <circle key={`pip-${index}-${halfIndex}-${dotIndex}`} cx={centerX + dx} cy={centerY + dy} r={pipRadius} fill="#2c2c2c" />
+                    ));
+                  })}
+                  <rect x={x} y={y} width={width} height={height} rx={Math.max(11, context.metrics.radius - 3)} fill="transparent" onClick={(event) => {
+                    event.stopPropagation();
+                    toggleDomino(index);
+                  }} />
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+
+        <div className="space-y-4">
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => setPlacedDominoes(new Set(solution.map((_, index) => index)))}
+              disabled={allPlaced}
+              className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Place all
+            </button>
+            <button
+              type="button"
+              onClick={() => setPlacedDominoes(new Set())}
+              disabled={!placedDominoes.size}
+              className="inline-flex items-center justify-center rounded-md border border-border bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-card disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Remove all
+            </button>
+          </div>
+          <div>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted">Dominoes</p>
+            <div className="flex flex-wrap gap-2">
+              {dominoes.map((domino, index) => (
+                <PipsTrayDomino key={`${domino[0]}-${domino[1]}-${index}`} domino={domino} index={index} placed={placedDominoes.has(index)} onClick={() => toggleDomino(index)} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
 function PipsVisual({ payload }: { payload: AnyRecord }) {
-  const [revealed, setRevealed] = useState<Record<DifficultyKey, number>>({ easy: 0, medium: 0, hard: 0 });
   return (
-    <div className="grid gap-4 lg:grid-cols-3">
+    <div className="space-y-10">
       {(["easy", "medium", "hard"] as DifficultyKey[]).map((difficulty) => {
         const entry = asRecord(payload[difficulty]);
-        const max = Array.isArray(entry.solution) ? entry.solution.length : 0;
-        return (
-          <div key={difficulty} className="space-y-3">
-            <p className="text-sm font-semibold capitalize text-foreground">{difficulty} puzzle {asNumber(entry.puzzleId) ? `#${asNumber(entry.puzzleId)}` : ""}</p>
-            <button type="button" className="overflow-x-auto text-left" onClick={() => setRevealed((prev) => ({ ...prev, [difficulty]: nextValue(prev[difficulty], max) }))}>
-              <PipsBoard entry={entry} revealed={revealed[difficulty]} />
-            </button>
-          </div>
-        );
+        return <PipsDifficulty key={difficulty} difficulty={difficulty} entry={entry} />;
       })}
     </div>
   );
