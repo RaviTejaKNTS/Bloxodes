@@ -3148,7 +3148,7 @@ CREATE TABLE IF NOT EXISTS "public"."revalidation_events" (
     "slug" "text" NOT NULL,
     "source" "text",
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    CONSTRAINT "revalidation_events_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'list'::"text", 'author'::"text", 'event'::"text", 'checklist'::"text", 'tool'::"text", 'catalog'::"text", 'music'::"text", 'quiz'::"text", 'wiki'::"text", 'wiki_catalog'::"text"])))
+    CONSTRAINT "revalidation_events_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'list'::"text", 'author'::"text", 'event'::"text", 'checklist'::"text", 'tool'::"text", 'catalog'::"text", 'music'::"text", 'quiz'::"text", 'wiki'::"text", 'wiki_catalog'::"text", 'stats'::"text", 'puzzle'::"text"])))
 );
 
 
@@ -6494,7 +6494,6 @@ ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TAB
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "anon";
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "authenticated";
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "service_role";
-
 
 
 

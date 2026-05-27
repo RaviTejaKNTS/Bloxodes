@@ -128,7 +128,8 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Update `ads.txt` | `scripts/ads/update-ads-txt.ts` | `npm run ads:update` |
 | IndexNow bootstrap | `scripts/automation/indexnow-bootstrap.ts` | `npm run indexnow:bootstrap` |
 | Google Indexing API submitter | `scripts/automation/google-indexing-submit.ts` | `npm run indexing:google -- --dry-run`, live only with `--apply` and `GOOGLE_INDEXING_API_ENABLED=true` |
-| Warm Cloudflare cache | `scripts/automation/warm-cloudflare-cache.mjs` | `CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm`; run after deploy/purge to fill Cloudflare from the sitemap |
+| Warm Cloudflare cache | `scripts/automation/warm-cloudflare-cache.mjs` | `CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm`; default deploy mode warms main/index/legal URLs, all wiki/catalog/tool URLs, sitemap files, and a recent slice from DB-backed detail sitemaps; use `CACHE_WARM_MODE=full` only for intentional full-site warming |
+| Queue revalidation events | `scripts/automation/enqueue-revalidation-events.ts` | `npm run enqueue:revalidation -- --event stats:stats --event stats:games`; writes coalesced rows to `revalidation_events` for the Supabase worker |
 | Automation reporting | `scripts/automation/report-automation.mjs` | direct `node scripts/automation/report-automation.mjs` |
 | Report redeem markdown image gaps | `scripts/backfill/report-redeem-md-missing-images.ts` | direct `tsx scripts/backfill/report-redeem-md-missing-images.ts` |
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |

@@ -21,6 +21,7 @@
     "ads:update": "tsx scripts/ads/update-ads-txt.ts",
     "indexnow:bootstrap": "tsx scripts/automation/indexnow-bootstrap.ts",
     "cache:warm": "node scripts/automation/warm-cloudflare-cache.mjs",
+    "enqueue:revalidation": "tsx scripts/automation/enqueue-revalidation-events.ts",
     "indexing:google": "tsx scripts/automation/google-indexing-submit.ts",
     "prebuild": "npm run ads:update",
     "build": "npm run build:web",

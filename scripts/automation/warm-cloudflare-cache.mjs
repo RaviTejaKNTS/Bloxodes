@@ -4,6 +4,21 @@ const DEFAULT_MAX_URLS = 5000;
 const DEFAULT_REQUEST_TIMEOUT_MS = 20000;
 const DEFAULT_REQUEST_DELAY_MS = 0;
 const DEFAULT_RETRIES = 2;
+const DEFAULT_WARM_MODE = "deploy";
+const DEFAULT_RECENT_PER_SITEMAP = 30;
+
+const CODEBASE_BACKED_SITEMAPS = new Set(["wiki", "catalog", "tools"]);
+const RECENT_DETAIL_SITEMAPS = new Set([
+  "codes",
+  "articles",
+  "lists",
+  "events",
+  "stats",
+  "puzzles",
+  "quizzes",
+  "checklists",
+  "authors"
+]);
 
 function clampNumber(value, fallback, min, max) {
   if (value == null || String(value).trim() === "") return fallback;
@@ -21,21 +36,58 @@ function normalizeAbsoluteUrl(value, base) {
   return url.toString();
 }
 
+function decodeXml(value) {
+  return value
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&#39;/g, "'");
+}
+
+function extractTagValue(xml, tagName) {
+  const match = xml.match(new RegExp(`<${tagName}[^>]*>([\\s\\S]*?)<\\/${tagName}>`, "i"));
+  const raw = match?.[1]?.trim();
+  return raw ? decodeXml(raw) : null;
+}
+
 function extractLocValues(xml) {
-  const matches = xml.matchAll(/<loc>([\s\S]*?)<\/loc>/gi);
-  const values = [];
-  for (const match of matches) {
-    const raw = match[1]?.trim();
-    if (!raw) continue;
-    const decoded = raw
-      .replace(/&amp;/g, "&")
-      .replace(/&lt;/g, "<")
-      .replace(/&gt;/g, ">")
-      .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'");
-    values.push(decoded);
-  }
-  return values;
+  return Array.from(xml.matchAll(/<loc[^>]*>([\s\S]*?)<\/loc>/gi))
+    .map((match) => match[1]?.trim())
+    .filter(Boolean)
+    .map(decodeXml);
+}
+
+function extractUrlSetEntries(xml) {
+  const entries = Array.from(xml.matchAll(/<url\b[^>]*>([\s\S]*?)<\/url>/gi))
+    .map((match) => {
+      const block = match[1] ?? "";
+      const loc = extractTagValue(block, "loc");
+      if (!loc) return null;
+      return {
+        loc,
+        lastmod: extractTagValue(block, "lastmod")
+      };
+    })
+    .filter(Boolean);
+
+  if (entries.length) return entries;
+  return extractLocValues(xml).map((loc) => ({ loc, lastmod: null }));
+}
+
+function sitemapNameFromUrl(url) {
+  const pathname = new URL(url).pathname;
+  const match = pathname.match(/\/sitemaps\/([^/.]+)\.xml$/i);
+  if (match?.[1]) return match[1].toLowerCase();
+  if (pathname === "/sitemap.xml") return "index";
+  return "unknown";
+}
+
+function compareLastmodDesc(a, b) {
+  const aTime = a.lastmod ? Date.parse(a.lastmod) : 0;
+  const bTime = b.lastmod ? Date.parse(b.lastmod) : 0;
+  return (Number.isFinite(bTime) ? bTime : 0) - (Number.isFinite(aTime) ? aTime : 0);
 }
 
 async function fetchText(url) {
@@ -67,7 +119,7 @@ async function collectUrlsFromSitemaps({ sitemapUrl, siteOrigin, maxSitemaps, ma
   const root = new URL(siteOrigin);
   const queue = [normalizeAbsoluteUrl(sitemapUrl, siteOrigin)];
   const seenSitemaps = new Set();
-  const pageUrls = new Set();
+  const pageEntries = new Map();
 
   while (queue.length) {
     const current = queue.shift();
@@ -97,24 +149,115 @@ async function collectUrlsFromSitemaps({ sitemapUrl, siteOrigin, maxSitemaps, ma
     }
 
     if (/<\s*urlset\b/i.test(xml)) {
-      for (const loc of locValues) {
+      const sitemapName = sitemapNameFromUrl(current);
+      for (const entry of extractUrlSetEntries(xml)) {
         let pageUrl;
         try {
-          pageUrl = normalizeAbsoluteUrl(loc, current);
+          pageUrl = normalizeAbsoluteUrl(entry.loc, current);
         } catch {
           continue;
         }
         if (new URL(pageUrl).host !== root.host) continue;
-        pageUrls.add(pageUrl);
-        if (pageUrls.size >= maxUrls) {
+        const existing = pageEntries.get(pageUrl);
+        if (!existing || compareLastmodDesc(entry, existing) < 0) {
+          pageEntries.set(pageUrl, {
+            url: pageUrl,
+            lastmod: entry.lastmod,
+            sitemapUrl: current,
+            sitemapName
+          });
+        }
+        if (pageEntries.size >= maxUrls) {
           console.warn(`Reached CACHE_WARM_MAX_URLS=${maxUrls}; truncating warmup list.`);
-          return { urls: Array.from(pageUrls), sitemapCount: seenSitemaps.size };
+          return {
+            entries: Array.from(pageEntries.values()),
+            sitemapUrls: Array.from(seenSitemaps),
+            sitemapCount: seenSitemaps.size
+          };
         }
       }
     }
   }
 
-  return { urls: Array.from(pageUrls), sitemapCount: seenSitemaps.size };
+  return {
+    entries: Array.from(pageEntries.values()),
+    sitemapUrls: Array.from(seenSitemaps),
+    sitemapCount: seenSitemaps.size
+  };
+}
+
+function addSelectedUrl(selected, summary, url, reason) {
+  if (!url || selected.has(url)) return;
+  selected.set(url, reason);
+  summary[reason] = (summary[reason] ?? 0) + 1;
+}
+
+function groupedEntriesBySitemap(entries) {
+  const groups = new Map();
+  for (const entry of entries) {
+    const key = entry.sitemapName || "unknown";
+    const group = groups.get(key) ?? [];
+    group.push(entry);
+    groups.set(key, group);
+  }
+  return groups;
+}
+
+function selectWarmupUrls({ discovered, normalizedSiteOrigin, sitemapUrl, mode, recentPerSitemap }) {
+  if (mode === "full") {
+    const urls = [
+      sitemapUrl,
+      ...discovered.sitemapUrls,
+      ...discovered.entries.map((entry) => entry.url)
+    ].filter((url, index, arr) => arr.indexOf(url) === index);
+    return {
+      urls,
+      summary: {
+        full: urls.length
+      }
+    };
+  }
+
+  const selected = new Map();
+  const summary = {};
+  const entriesBySitemap = groupedEntriesBySitemap(discovered.entries);
+  const normalizedSitemapUrl = normalizeAbsoluteUrl(sitemapUrl, normalizedSiteOrigin);
+
+  addSelectedUrl(selected, summary, normalizedSitemapUrl, "sitemap-index");
+
+  for (const entry of entriesBySitemap.get("main") ?? []) {
+    addSelectedUrl(selected, summary, entry.url, "main-index-and-legal");
+  }
+
+  for (const sitemapName of CODEBASE_BACKED_SITEMAPS) {
+    for (const entry of entriesBySitemap.get(sitemapName) ?? []) {
+      addSelectedUrl(selected, summary, entry.url, `all-${sitemapName}`);
+    }
+  }
+
+  if (recentPerSitemap > 0) {
+    for (const sitemapName of RECENT_DETAIL_SITEMAPS) {
+      const recentEntries = [...(entriesBySitemap.get(sitemapName) ?? [])]
+        .sort(compareLastmodDesc)
+        .slice(0, recentPerSitemap);
+      for (const entry of recentEntries) {
+        addSelectedUrl(selected, summary, entry.url, `recent-${sitemapName}`);
+      }
+    }
+  }
+
+  for (const sitemap of discovered.sitemapUrls) {
+    addSelectedUrl(selected, summary, sitemap, "sitemap-file");
+  }
+
+  if (!selected.has(`${normalizedSiteOrigin}/`)) {
+    addSelectedUrl(selected, summary, `${normalizedSiteOrigin}/`, "home-fallback");
+  }
+
+  return {
+    urls: Array.from(selected.keys()),
+    summary
+  };
 }
 
 async function warmUrl(url) {
@@ -226,13 +369,24 @@ async function main() {
   const maxUrls = clampNumber(process.env.CACHE_WARM_MAX_URLS, DEFAULT_MAX_URLS, 1, 50000);
   const requestDelayMs = clampNumber(process.env.CACHE_WARM_REQUEST_DELAY_MS, DEFAULT_REQUEST_DELAY_MS, 0, 5000);
   const retries = clampNumber(process.env.CACHE_WARM_RETRIES, DEFAULT_RETRIES, 0, 5);
+  const dryRun = process.env.CACHE_WARM_DRY_RUN === "true";
+  const recentPerSitemap = clampNumber(
+    process.env.CACHE_WARM_RECENT_PER_SITEMAP,
+    DEFAULT_RECENT_PER_SITEMAP,
+    0,
+    1000
+  );
+  const mode = (process.env.CACHE_WARM_MODE?.trim().toLowerCase() || DEFAULT_WARM_MODE) === "full" ? "full" : "deploy";
 
   console.log(`Warmup site origin: ${normalizedSiteOrigin}`);
   console.log(`Warmup sitemap: ${sitemapUrl}`);
+  console.log(`Warmup mode: ${mode}`);
   console.log(`Concurrency: ${concurrency}`);
   console.log(`Max sitemaps: ${maxSitemaps}`);
   console.log(`Max urls: ${maxUrls}`);
+  console.log(`Recent urls per DB-backed sitemap: ${recentPerSitemap}`);
   console.log(`Retries: ${retries}`);
+  console.log(`Dry run: ${dryRun ? "true" : "false"}`);
 
   const discovered = await collectUrlsFromSitemaps({
     sitemapUrl,
@@ -241,15 +395,30 @@ async function main() {
     maxUrls
   });
 
-  const urls = [
-    `${normalizedSiteOrigin}/sitemap.xml`,
-    ...discovered.urls.filter((url, index, arr) => arr.indexOf(url) === index)
-  ];
+  const selection = selectWarmupUrls({
+    discovered,
+    normalizedSiteOrigin,
+    sitemapUrl,
+    mode,
+    recentPerSitemap
+  });
 
-  console.log(`Discovered ${discovered.urls.length} page URLs from ${discovered.sitemapCount} sitemap files.`);
-  console.log(`Warming ${urls.length} URLs including sitemap index.`);
+  const summary = Object.entries(selection.summary)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([reason, count]) => `${reason}=${count}`)
+    .join(", ");
+  console.log(`Discovered ${discovered.entries.length} page URLs from ${discovered.sitemapCount} sitemap files.`);
+  console.log(`Warmup selection: ${summary}`);
+  console.log(`Warming ${selection.urls.length} URLs.`);
 
-  const results = await warmUrls(urls, { concurrency, requestDelayMs, retries });
+  if (dryRun) {
+    for (const url of selection.urls) {
+      console.log(`[dry-run] ${url}`);
+    }
+    return;
+  }
+
+  const results = await warmUrls(selection.urls, { concurrency, requestDelayMs, retries });
 
   const okCount = results.filter((result) => result?.ok).length;
   const failed = results.filter((result) => result && !result.ok);

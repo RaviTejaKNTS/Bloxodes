@@ -39,30 +39,11 @@ if (cspMode !== "off" && (!publicCsp || !secureCsp)) {
 
 const publicHtmlCacheControl = "public, max-age=0, s-maxage=31536000, stale-while-revalidate=31536000";
 const publicHtmlCacheSources = [
-  "/",
-  "/codes",
-  "/codes/:path*",
-  "/articles",
-  "/articles/:path*",
-  "/lists",
-  "/lists/:path*",
-  "/tools",
-  "/tools/:path*",
-  "/wiki",
-  "/wiki/:path*",
-  "/checklists",
-  "/checklists/:path*",
-  "/quizzes",
-  "/quizzes/:path*",
-  "/events",
-  "/events/:path*",
-  "/catalog",
-  "/catalog/:path*",
-  "/authors",
-  "/authors/:path*",
+  "/((?!api(?:/|$)|auth(?:/|$)|account(?:/|$)|login(?:/|$)|_next(?:/|$)|.*\\..*).*)",
   "/sitemap.xml",
   "/sitemaps/:path*",
   "/robots.txt",
+  "/ads.txt",
   "/feed.xml"
 ];
 

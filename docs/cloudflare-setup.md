@@ -136,19 +136,23 @@ Action:
 
 **Rule 4 — Cache HTML pages (the main performance win)**
 
-Trigger:
+Expression:
 ```
-URI path does not start with /api
-AND URI path does not start with /auth
-AND URI path does not start with /account
-AND URI path does not start with /login
-AND Hostname equals bloxodes.com
+(http.request.method in {"GET" "HEAD"}
+ and http.host eq "bloxodes.com"
+ and not starts_with(http.request.uri.path, "/api/")
+ and not starts_with(http.request.uri.path, "/auth/")
+ and not starts_with(http.request.uri.path, "/account")
+ and not starts_with(http.request.uri.path, "/login")
+ and not starts_with(http.request.uri.path, "/_next/")
+ and not starts_with(http.request.uri.path, "/cdn-cgi/"))
 ```
 
 Action:
 - Cache status: **Cache Everything**
 - Edge Cache TTL: **Respect Cache-Control header from origin**
 - Browser Cache TTL: Respect Existing Headers
+- Cache key: keep query strings in the cache key; do not enable "Ignore query string" for HTML pages.
 
 > This rule makes Cloudflare the primary public-page cache. The VPS renders fresh HTML on a Cloudflare miss; Supabase revalidation events purge and warm affected URLs when content changes.
 
@@ -156,7 +160,7 @@ Action:
 
 ### 3.4 Cache-Until-Purged Headers
 
-The app now sends the same public HTML cache policy for public pages, sitemaps, robots, and the feed:
+The app now sends the same public HTML cache policy for public pages, sitemaps, robots, ads.txt, and the feed:
 
 ```http
 Cache-Control: public, max-age=0, s-maxage=31536000, stale-while-revalidate=31536000
@@ -302,7 +306,7 @@ In the Cloudflare dashboard, go to the bloxodes.com overview page. The **Zone ID
 
 ### 7.3 Add Purge And Warm Steps To Deploy
 
-The repo workflow `.github/workflows/dokploy-production-deploy.yml` is the preferred place for deploy-wide purge and warm. On pushes to `production`, it triggers Dokploy, waits for the site, purges Cloudflare, and warms the sitemap.
+The repo workflow `.github/workflows/dokploy-production-deploy.yml` is the preferred place for deploy-wide purge and warm. On pushes to `production`, it triggers Dokploy, waits for the site, purges Cloudflare, and warms the selected deploy URLs from the sitemap.
 
 If you deploy manually from Dokploy, open the workflow in GitHub Actions and run it manually with:
 
@@ -329,6 +333,8 @@ Then warm Cloudflare from the sitemap so normal visitors hit the edge cache inst
 CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm
 ```
 
+The default `CACHE_WARM_MODE=deploy` warms homepage/index/legal URLs, all wiki/catalog/tool URLs, sitemap files, and the most recent URLs from codes/articles/events/stats/puzzles/quizzes/checklists/lists/authors. Use `CACHE_WARM_MODE=full` only for an intentional full-site warm. Use `CACHE_WARM_DRY_RUN=true` to inspect the selected URLs without warming them.
+
 For normal content updates, do not purge everything. Supabase triggers write to `revalidation_events`, the Supabase revalidation function calls `/api/revalidate`, and the app purges plus warms only the affected URLs.
 
 ### 7.4 Store API Token as a Secret
@@ -348,6 +354,8 @@ In Dokploy app environment variables:
 - add `CLOUDFLARE_ZONE_ID`
 - add `CLOUDFLARE_WARM_AFTER_PURGE=true`
 - optionally tune `CLOUDFLARE_WARM_MAX_PATHS` and `CLOUDFLARE_WARM_CONCURRENCY`
+
+To edit Cache Rules through the Cloudflare API instead of the dashboard, create a separate scoped API token for only `bloxodes.com` with **Zone → Cache Rules → Edit**, **Account Rulesets → Edit**, and **Account Filter Lists → Edit**. The purge-only token is not enough for ruleset reads or edits.
 
 Why both places:
 
