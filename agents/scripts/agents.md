@@ -134,6 +134,47 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Report redeem markdown image gaps | `scripts/backfill/report-redeem-md-missing-images.ts` | direct `tsx scripts/backfill/report-redeem-md-missing-images.ts` |
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |
 
+### Wiki And Game Catalog Production Publish
+
+Use this only after local content, data, images, DB readback, and rendered routes are clean.
+
+1. Confirm production env:
+   - `NODE_ENV=production`
+   - Supabase host is production, not local.
+2. Confirm or create the production `roblox_universes` row first. Check universe ID, slug, display name, root place, creator, Roblox URL, and needed companion fields such as `game_description_md`.
+3. Check existing production rows before writing:
+   - `wiki_pages.slug = <game-slug>`
+   - `wiki_catalog_pages.code in (<game-slug>-<collection-slug>...)`
+   - `wiki_catalog_pages.wiki_slug` and `collection_slug`
+4. Run production dry-runs:
+
+```bash
+NODE_ENV=production npm run seed:game-wiki-pages -- --dry-run --game <game-slug>
+NODE_ENV=production npm run seed:game-catalog-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/catalogs
+```
+
+5. Push in order:
+
+```bash
+NODE_ENV=production npm run seed:game-wiki-pages -- --game <game-slug> --allow-prod
+NODE_ENV=production npm run seed:game-catalog-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/catalogs --allow-prod
+```
+
+Read back the production wiki row after the wiki push, before catalog seeding, so catalog rows can link to the production `wiki_page_id`.
+
+After DB publish, push and deploy only the current game's repo artifacts required by those pages: `data/<Game>/`, `apps/web/public/<Game>/`, game dataset config/rendering code, and approved seed-script changes for that game. Do not include unrelated docs, other game data, temporary workspace files, or unrelated code in the game release commit.
+
+Do not manually queue revalidation by default. Wait and poll live pages for up to 5 minutes because the app/database revalidation path should handle the update. If pages are still stale after that, inspect the revalidation queue or worker and report the blocker.
+
+The publish is done only when live production pages return 200 and render the expected content:
+
+- `/wiki/<game-slug>`
+- `/wiki/<game-slug>/<collection-slug>` for every pushed catalog
+- item names, counts, sections, fields, descriptions, FAQs, and wired images
+- sitemap entries when applicable
+
+If live routes or images 404, the DB publish is not a completed site release. Confirm the deployed app includes route/config changes, `data/<Game>/`, and `apps/web/public/<Game>/`.
+
 ### Google Indexing API Workflow
 
 The Google Indexing API job is separate from `.env.analytics`. Local settings belong in ignored `.env.indexing` files; production/GitHub settings should be injected as secrets or variables. The script is guarded twice: it needs `--apply`, and it still exits without submitting unless `GOOGLE_INDEXING_API_ENABLED=true`.

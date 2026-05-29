@@ -6,6 +6,8 @@ Use this before writing any Bloxodes page that depends on game data, codes, even
 
 The notes should sound like a real explanation, not a checklist with nicer words. Keep the required structure, but write in clear sentences that show the connection between facts. A good note explains why a detail matters to the page, not only that the detail exists.
 
+For catalog and game-catalog pages, research must pass a player-usefulness gate before it can become final copy. The agent must identify the real player task, list the facts required to solve it, check whether those facts are source-backed and present in local data, and block writing when useful source-backed facts are missing. Safe-but-thin prose is not a substitute for data work.
+
 ## Source Priority
 
 Prefer sources in this order:
@@ -59,6 +61,8 @@ The top of the notes must be readable by a human editor who has never seen the d
 - how players get it
 - why it matters or does not matter
 - what readers came to solve on this page
+- what in-game action or decision the final page should make easier
+- what facts are required for that action or decision
 - what structure will answer those questions in the cleanest order
 - what information should be cut because it does not help the page
 - what words and fields need explanation
@@ -100,6 +104,28 @@ Break the topic into useful groups that players actually understand.
 
 Explain usefulness, collection value, trade value, progression value, reward value, replacement difficulty, event timing, or other real decisions.
 
+## Player usefulness gate
+
+For catalog and game-catalog pages, define the real reader job. Name what the player is trying to do, choose, unlock, buy, upgrade, farm, compare, equip, trade, reach, or avoid. Then state what the finished page should let that reader do in-game.
+
+If the answer is vague, the topic or dataset is not ready.
+
+## Required fact matrix
+
+For catalog and game-catalog pages, connect player needs to source-backed facts and local data. Adjust rows to the collection:
+
+| Reader need | Required facts | Source found? | In dataset/cards? | Public location |
+| --- | --- | --- | --- | --- |
+| Buy or unlock item | price, currency, shop, requirement, route | yes/no | yes/no | cards + how-to |
+| Compare item | stat, role, rarity, source, limit, best use | yes/no | yes/no | cards/table |
+| Use, upgrade, or farm item | NPC/station, cost, levels, process, reset rule | yes/no | yes/no | `description_md` |
+
+If a required fact is source-backed but missing from local data or the planned card fields, mark the work `needs data update`. Do not continue by writing around that missing fact.
+
+## Competitor usefulness check
+
+When SEO or traffic potential is part of the decision, inspect top useful competitor/source pages and record the player questions they answer, useful facts they expose, sections that help, and weaknesses Bloxodes can improve. This is a coverage check only. Do not copy prose, tables, or structure blindly.
+
 ## Real examples from the data
 
 Use actual item names, values, sections, or source rows. Explain why each example matters.
@@ -114,11 +140,11 @@ Include:
 - current source counts found during research
 - existing page title count, if a page already exists
 - rendered card count, if the route already exists
-- missing items, extra local items, renamed items, duplicate rows, stale fields, or unclear rows
+- missing items, extra local items, renamed items, duplicate rows, stale fields, unclear rows, missing required facts, or weak card fields
 - image coverage: cards with images, cards without images, local image files that are not wired, and images that need to be gathered
 - data action: `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`
 
-If current sources show more items than the local dataset, or if important images are missing, do not hide that under a writing task. Record the issue here and keep the status at `needs data update` until the user approves how to fix it or explicitly accepts the current dataset.
+If current sources show more items than the local dataset, if important images are missing, or if source-backed player-useful facts are missing from local data, do not hide that under a writing task. Record the issue here and keep the status at `needs data update` until the user approves how to fix it or explicitly accepts the current dataset.
 
 ## Common mistakes or confusion
 
@@ -132,6 +158,7 @@ Include:
 
 - the primary reader goal
 - sections that must exist because readers care about them
+- how the required fact matrix will be satisfied by cards, tables, `description_md`, `how_it_works_md`, FAQ, or route changes
 - sections to skip or cut because they would pad the page
 - where a table, bullet list, or numbered list would explain faster than paragraphs
 - the story flow from opening context to final takeaway
@@ -176,6 +203,8 @@ For game-specific catalogs, reject weak scopes before data work starts. Catalogs
 
 Run the data and image audit before proposing final copy. Compare local item count with current source counts, page title count, and rendered card count. If a source shows more items than local data, list the missing names and mark the work `needs data update` instead of writing around the gap. If images matter for the collection, count missing images and say whether they can be found locally, need to be gathered, or should be intentionally left blank.
 
+Run the player-usefulness gate before the section proposal. A catalog page should not only list items; it should help the player buy, unlock, compare, upgrade, farm, equip, trade, find, or understand the collection. If important facts such as prices, shop/NPC names, damage values, chances, upgrade steps, locations, route order, requirements, or availability exist in reliable sources but are absent locally, update the dataset or mark the page blocked before writing.
+
 After research, propose the title promise and section style before writing. The title should be unique, well-defined, and tied to the collection's real intent, such as obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison. Choose the strongest in-game grouping, such as rarity, item type, source, location, tier, shop, unlock route, or world. The best grouping is the one that helps players understand the collection long-term, not necessarily the dataset's first category field.
 
 When the route can render copy between item sections, plan `description_json` as short section context. These notes should set up the cards in that section with useful game meaning and should not be repeated in `description_md`.
@@ -196,6 +225,9 @@ A good game catalog research file should answer:
 - How does a player normally get it?
 - What makes one item different from another?
 - Which values change a decision?
+- What required facts does a player need before acting on this page?
+- Are those facts present in the local dataset and rendered card fields?
+- What useful competitor/source facts are missing from Bloxodes?
 - What does a confusing field mean in actual gameplay?
 - Which items are current, old, limited, premium, event-only, or trade-only?
 - What would a new player misunderstand?
@@ -225,6 +257,18 @@ Research the game as a whole:
 - major systems
 - related catalog collections
 - tools, checklists, quizzes, articles, and social/developer context
+
+Wiki research must include a rendered field map before writing. Record which visible areas come from `wiki_pages`, which come from the linked `roblox_universes` row, and which come from related page tables. The visible game summary usually comes from `roblox_universes.game_description_md`; if that field is empty or weak, mark a companion universe-description update as part of the wiki workflow.
+
+The notes must answer the minimum useful wiki questions:
+
+- What is this game?
+- What does the player do in a normal session?
+- Which systems drive progress, rewards, combat, collection, trading, or role choice?
+- What should a new or returning player check first?
+- Which controls are verified, and which controls should be omitted instead of guessed?
+- Which related sections exist locally, and which likely sections are missing?
+- What should the wiki skip because related cards already carry the live detail?
 
 The wiki hub should orient the player, not become a full article. Related sections can carry live detail, but the hub copy still needs practical context.
 

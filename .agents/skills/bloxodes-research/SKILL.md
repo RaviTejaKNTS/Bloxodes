@@ -40,21 +40,23 @@ For game discovery, use `tmp/content-workspace/<game-slug>/discovery/`. For game
 
 Before research starts, copy the most specific tracker from `agents/content/todo-templates/` into the folder as `todo.md` and update it as work progresses. Use `page-research.md` only when no page-type template fits.
 
-Write the notes so a human editor can understand the topic before seeing any database row. Explain what the thing is, how it works, what the player actually does, which terms need definition, which groups matter, and where people usually get confused.
+Write the notes so a human editor can understand the topic before seeing any database row. Explain what the thing is, how it works, what the player actually does, which terms need definition, which groups matter, where people usually get confused, and what in-game task the page should help the reader complete.
 
 For full game coverage, research in two passes. Pass 1 is catalog-led: resolve the game, audit coverage, confirm codes/events automation eligibility, and identify durable core in-game item collections. Pass 2 happens after the core catalog data exists and uses that data to decide wiki, checklist, quiz, tools, and focused evergreen articles. If a recommendation depends on item data or gameplay systems that have not been researched yet, mark it `blocked until catalog data` instead of guessing.
 
 Then inspect the implementation context: local datasets, target Supabase rows, route behavior, official Roblox or developer facts, established community context, and any page-specific source material.
 
-For catalog and game-catalog pages, inspect the data as part of research. Count the local items, compare current source counts, check the rendered card count and title count when the page already exists, and count image coverage when images matter. If the sources show more items than the local dataset, or if expected images are missing, record the gap and mark the notes `needs data update` instead of pushing ahead to final copy.
+For catalog and game-catalog pages, inspect the data as part of research. Count the local items, compare current source counts, check the rendered card count and title count when the page already exists, and count image coverage when images matter. Also complete a player-usefulness gate and required fact matrix: what the player came to do, which facts are needed, whether sources support those facts, whether local data/cards include them, and where the finished page will show them. If sources show more items than the local dataset, expected images are missing, or player-useful facts are source-backed but absent locally, record the gap and mark the notes `needs data update` instead of pushing ahead to final copy.
 
 For game-specific catalog ideas, keep the scope to durable in-game item collections. Reject current season pass reward tracks, one-off event reward lists, current ranked season rewards, broad update summaries, gamepasses, badges, servers, developer products, and raw Roblox media. If an event or season creates permanent items, put those items inside the durable collection and mark source/availability there. UGC is a special exception only when the game has meaningful UGC items and should use the free Roblox items card pattern.
 
-Build the page structure inside the notes. This is not a formality. The outline should show the reader goal, the questions the page must answer, the order that will make sense, which details should be cut, and where a table, bullet list, numbered list, or short paragraph will explain the idea best.
+Build the page structure inside the notes. This is not a formality. The outline should show the reader goal, the in-game task, the questions the page must answer, the required facts that support those answers, the order that will make sense, which details should be cut, and where a table, bullet list, numbered list, or short paragraph will explain the idea best.
+
+When SEO or traffic potential is part of the page decision, run a competitor usefulness check. Inspect top useful competitor/source pages and record the player questions they answer, facts they expose, sections that help, and where Bloxodes will be stronger or weaker. Use this as coverage guidance only; do not copy their wording.
 
 For catalog and game-catalog pages, also plan the later FLOW pass while the research is still fresh. Name what the page-level `description_md` should teach as a whole, what action/how-to/use section the reader needs, and which details belong in `description_json` because they only explain one card section. This prevents the final page from turning into a pile of accurate but disconnected headings.
 
-For catalog and game-catalog pages, stop after research and propose the data action, title promise, item-card section style, and card data shape. Name the local/source/rendered counts, image coverage, any missing or stale items, the recommended visible title and `seo_title`, the exact promise the title makes to the reader, the grouping axis, why it has real in-game meaning, weaker alternatives, the `description_json` notes, and what should stay in `description_md`. Mark the notes `needs data update` when the dataset or images need work. Mark the notes `needs section confirmation` until the user approves the data, title promise, section, and card plan.
+For catalog and game-catalog pages, stop after research and propose the player-usefulness gate, data action, title promise, item-card section style, and card data shape. Name the primary player task, required fact matrix, local/source/rendered counts, image coverage, any missing or stale items or useful facts, the recommended visible title and `seo_title`, the exact promise the title makes to the reader, the grouping axis, why it has real in-game meaning, weaker alternatives, the `description_json` notes, and what should stay in `description_md`. Mark the notes `needs data update` when the dataset, images, or required facts need work. Mark the notes `needs section confirmation` until the user approves the data, title promise, section, and card plan.
 
 Verify facts that can change: codes, events, prices, availability, dates, stats, formulas, and active reward pools. Record source links and checked dates in the notes. If a fact is missing or uncertain, say so there instead of hiding the gap with generic copy.
 
@@ -66,7 +68,7 @@ For tools, use a hard gate. Check gameplay, search intent, and competing calcula
 
 For articles, check overlap before researching. Do not create articles for current codes, code troubleshooting, events, event timelines, generic beginner guides, broad catalog explanations, or topics already owned by wiki/catalog/checklist/quiz/tool pages. Good article research starts from one focused evergreen player question, such as how to get a specific item, complete a specific quest, use a specific mode/map, unlock a durable mechanic, or farm a stable resource.
 
-Only mark research `ready to write` when the content can be written without guessing, any required data/image update is complete or accepted, and any required title promise, section style, and card data shape have been confirmed.
+Only mark research `ready to write` when the content can be written without guessing, the player-usefulness gate and required fact matrix are resolved, any required data/image update is complete or accepted, and any required title promise, section style, and card data shape have been confirmed.
 
 ## What Good Research Feels Like
 
@@ -84,10 +86,11 @@ Do not create `brief.md`, `review.md`, separate fan-out files, or draft artifact
 
 Return a concise summary of:
 
-- reader goal
+- reader goal and player task
 - sources checked
 - facts confirmed
 - unknowns
+- required fact matrix and competitor/source coverage when relevant
 - data/image action for catalog pages
 - recommended catalog title, title promise, and how the page will satisfy it
 - source URL and refresh action for code pages

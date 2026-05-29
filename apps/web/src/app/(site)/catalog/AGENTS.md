@@ -57,10 +57,11 @@ Do not re-implement these patterns inside each route unless the catalog page gen
 ## New Catalog Page Checklist
 
 1. Decide whether the primary data comes from Supabase, a local dataset, or both.
-2. Add or reuse a `page-data.tsx` helper if the route family has multiple pages.
-3. Use the shared breadcrumb, updated timestamp, FAQ, and pagination primitives.
-4. Add metadata, canonical handling, and JSON-LD.
-5. Use published-only content loaders.
-6. Set `revalidate` intentionally instead of copying another route blindly.
-7. Update sitemap and revalidation coverage if the route is publishable.
-8. Update `agents/pages/agents.md` if the route surface changes.
+2. For item-backed pages, confirm the player-usefulness gate and required fact matrix from `agents/content/PROCESS.md`; route fields should expose source-backed facts players need, not only whatever data is easiest to render.
+3. Add or reuse a `page-data.tsx` helper if the route family has multiple pages.
+4. Use the shared breadcrumb, updated timestamp, FAQ, and pagination primitives.
+5. Add metadata, canonical handling, and JSON-LD.
+6. Use published-only content loaders.
+7. Set `revalidate` intentionally instead of copying another route blindly.
+8. Update sitemap and revalidation coverage if the route is publishable.
+9. Update `agents/pages/agents.md` if the route surface changes.

@@ -12,6 +12,8 @@ The writing standard is closer to a useful wiki explanation than a database capt
 
 The data standard is just as important as the writing standard. A game catalog page should not polish stale data. If research finds missing items, wrong counts, missing images, or fields that do not support useful cards, fix or explicitly approve the data state before final writing.
 
+The usefulness standard is the hard gate. A game catalog page must help the player complete a real in-game job: buy, unlock, upgrade, farm, compare, equip, trade, reach, use, or avoid something. If the current dataset cannot answer that job and sources can, the work is a data update, not a writing pass.
+
 ## Catalog Scope Gate
 
 Game catalogs are for core in-game item collections that stay useful beyond one update cycle. The collection should have repeatable player value: collect, unlock, compare, equip, farm, craft, hatch, buy, roll, trade, fight, visit, or use.
@@ -55,6 +57,8 @@ Before writing, inspect:
 - `agents/wiki-catalog-workflow.md`
 
 Check item examples, not just field names. If research notes do not include real examples and plain-language system explanation, do not write final copy.
+
+For game catalog pages, also require a player-usefulness gate, a required fact matrix, and a competitor usefulness check when the page is meant to compete in search. These sections must appear before the data/title/section proposal. They should identify the player task, the facts needed for that task, whether those facts are source-backed, whether local data/cards contain them, and where the finished page will expose them.
 
 ## One-Page Standard
 
@@ -120,6 +124,7 @@ For existing pages, compare:
 - current page title count
 - source counts found during research
 - local image count and missing image count
+- required fact coverage from the player-usefulness matrix
 
 For new game pages, create or update the local dataset as part of the workflow. The model should gather the item list, useful card fields, and image paths before writing final copy. If repeatable collection will matter later, prefer a collector script under `scripts/catalog/collect-<game>-data.ts` instead of one-off manual data.
 
@@ -131,6 +136,8 @@ If sources disagree, do not pretend the local count is correct. Use judgment, bu
 - If Blox Fruits accessories have local image files but cards are not showing images, mark it `needs image wiring`, not a writing issue.
 - If a source count includes removed, admin-only, duplicate, or unreleased entries, explain why the local dataset may intentionally differ.
 
+If sources include player-useful fields that local data is missing, make that visible too. Prices, currencies, shop or NPC names, damage, upgrade paths, roll chances, location landmarks, requirements, limits, role, and practical priority notes are not optional when they are central to the player task and can be verified.
+
 After the user approves the data action, update the local dataset and image wiring before writing `final.json`. Public copy should match the final local dataset, not the stale dataset from the start of research.
 
 ## Section Style Confirmation
@@ -141,6 +148,9 @@ Choose the grouping with the strongest in-game meaning. Rarity is often better t
 
 The proposal must include:
 
+- primary player task and the decision the page should make easier
+- required fact matrix with source status, local dataset/card status, and planned public placement
+- competitor usefulness check when SEO/search traffic is part of the page decision
 - dataset status: local count, source count, rendered count, title count, image count, and missing image count
 - data update plan if needed: missing items to add, stale fields to clean, image work to do, and whether a collector script is needed
 - recommended visible title and `seo_title`
@@ -180,6 +190,8 @@ Before writing public copy, make an outline in `research-notes.md`. The outline 
 The outline must also explain how the page will satisfy the approved title promise. A page titled `All Materials and How to Get Them` needs more than a source column; it needs clear obtainment context, route advice, source groups, and FAQ coverage where useful. A page titled `Chest Locations` needs practical landmarks and route order, not only chest names.
 
 For sectioned catalog pages, the outline must separate `description_json` and `description_md` jobs. `description_json` sets up each item section near the cards. `description_md` explains the full game system, such as where the system lives in-game, how players obtain items, how prices or odds work, and what mistakes apply across the whole collection. Do not repeat the same section notes in both fields.
+
+The outline must also say where every required fact will be answered. Cards can carry row-level facts such as price, damage, source, chance, requirement, or role. `description_md` should carry process facts such as how to buy, unlock, upgrade, farm, roll, equip, or use the collection. `how_it_works_md` should explain how to read the visible values. FAQs should clear up edge cases, not carry the only explanation of a core process.
 
 After the first-pass `final.json`, run the FLOW pass before final edit. This pass should reshape `description_md`, `how_it_works_md`, FAQs, and headings until the page reads like a useful player explanation instead of a stack of facts. The pass must rewrite weak structure, not only check for banned phrases.
 

@@ -65,6 +65,7 @@ The parent agent is the editor, coordinator, and final quality gate.
 4. Give each subagent exactly one catalog page and a clear write scope.
 5. Require the subagent to stop after the planning gate.
 6. Review each plan for data completeness, image quality, section logic, card fields, title promise, route/config needs, and exclusions.
+   Require a player-usefulness gate, required fact matrix, and competitor/source coverage check when SEO matters. Do not approve a plan that can only produce safe generic copy because useful source-backed facts are missing locally.
 7. Approve, revise, or reject the plan.
 8. After build completion, audit the returned files and verification evidence before marking the catalog done.
 9. Keep `batch-todo.md` updated as each catalog moves stages.
@@ -114,6 +115,9 @@ The first subagent response must be a plan, not final content. Require:
 - page identity: game, collection, route, code, universe ID
 - durable scope decision and excluded surfaces
 - source list and source-count confidence
+- primary player task, supported decisions, and what the reader can do after reading
+- required fact matrix: reader need, required facts, source status, local data/card status, and public placement
+- competitor/source usefulness check when SEO or traffic potential matters
 - local dataset state, expected item count, image state, and route/config state
 - data action: `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`
 - proposed visible title, `seo_title`, and exact title promise
@@ -145,10 +149,12 @@ Before marking any catalog `done`, check:
 
 - subagent `todo.md` is complete or honestly blocked
 - `research-notes.md` explains the collection like a game system, not a schema
+- `research-notes.md` includes and resolves the player-usefulness gate and required fact matrix
 - catalog scope still matches the approved list
 - source count, local data count, rendered/title count, and image coverage are recorded
 - missing or uncertain items/images are fixed, accepted, or blocked
 - title promise is delivered by data and copy
+- the page answers what the player can do next in-game
 - grouping and card fields match actual route behavior
 - public copy is evergreen, specific, and not generic
 - `description_md` explains the whole collection, not only card sections

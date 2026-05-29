@@ -6,6 +6,8 @@ The failure this pass prevents is easy to spot: the facts may be true, but the p
 
 Before the pass starts, open the page folder's `todo.md` and confirm the research/data/approval gates that apply to the page type are checked or explicitly blocked. After the rewrite, mark the FLOW item complete in `todo.md` and record the pass in `research-notes.md`.
 
+For catalog and game-catalog pages, also open the player-usefulness gate and required fact matrix in `research-notes.md`. FLOW must make sure the finished copy answers the promised player task. If the matrix says the reader needs prices, damage, upgrade steps, locations, chances, requirements, or route order, those facts must appear in the planned cards/tables/body or be marked unavailable. Do not turn missing facts into vague sections.
+
 ## What FLOW Means
 
 FLOW means the public copy moves like a player explanation:
@@ -16,10 +18,13 @@ FLOW means the public copy moves like a player explanation:
 4. Use `description_md` for the whole system: how it works, how players get or use the items, which mistakes matter, and what the cards mean in practice.
 5. Use `how_it_works_md` to explain how to read the data without sounding like field commands.
 6. Use FAQs only for real follow-up questions.
+7. End with a page where a reader can name what to do next in the game.
 
 The pass should change `final.json` when the structure is weak. Do not only say the draft is bad. Rewrite it.
 
 For catalog and game-catalog pages, also read the approved title as a promise. If the title says `how to get them`, `locations`, `drops`, `chances`, `what they do`, `bonuses`, `value`, or another specific answer, the FLOW pass must make sure the body actually answers it. Do not leave the promise trapped in a card column when the title needs a real explanation.
+
+Read the approved player task the same way. If the page is meant to help players buy weapons, it needs the buy path. If it is meant to help players upgrade weapons, it needs the upgrade process. If it is meant to help players choose a class, it needs role and unlock context. Remove headings that explain internal uncertainty instead of helping the player act.
 
 ## Catalog FLOW Rules
 
@@ -33,6 +38,7 @@ For catalog and game-catalog pages, `description_md` must not be a second set of
 - What values on the cards actually change a decision?
 - What do new players misunderstand?
 - What should I save, farm, buy, open, unlock, equip, trade, or skip?
+- Which exact facts from the required fact matrix should be visible before the reader needs another guide?
 
 Every catalog or game-catalog `description_md` should include at least one useful action section when the collection has an action behind it. That section can be a how-to, use, unlock, farm, obtain, find, hatch, roll, craft, grow, redeem, equip, travel, or compare section. If the collection is purely cosmetic or passive, the copy should still explain how players actually encounter or apply it.
 

@@ -84,6 +84,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 ## Local Datasets
 
+- Wiki/catalog datasets should satisfy the player-usefulness gate from `agents/content/PROCESS.md`. Keep source-backed fields that players need for decisions, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability, instead of storing only easy-to-scrape labels.
+
 - `data/Admin commands/*.md`
   - Parsed by `src/lib/admin-commands.ts`.
 - `data/Grow a Garden/crops.json`

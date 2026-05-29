@@ -39,6 +39,9 @@ Stages: `queued`, `planning`, `revision needed`, `plan approved`, `data/images`,
 ## Plan Review Gate
 
 - [ ] Review each plan for durable scope and explicit exclusions.
+- [ ] Check each plan has a player-usefulness gate: primary player task, supported decisions, and what the reader can do after reading.
+- [ ] Check each plan has a required fact matrix and does not proceed when source-backed useful facts are missing locally.
+- [ ] Check competitor/source usefulness coverage when SEO or traffic potential matters.
 - [ ] Check source list, source count confidence, local/source/rendered/title counts, and row state.
 - [ ] Check data action: `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`.
 - [ ] Check image plan rejects weak substitutions.
@@ -61,6 +64,7 @@ Stages: `queued`, `planning`, `revision needed`, `plan approved`, `data/images`,
 
 - [ ] Check each subagent `todo.md` is complete or honestly blocked.
 - [ ] Read each `research-notes.md` and verify it explains the collection as a game system.
+- [ ] Verify each completed page answers its primary player task and required fact matrix.
 - [ ] Verify title promise, grouping, card fields, section labels, image behavior, FAQ, and `wiki_md`.
 - [ ] Run or review local import/readback and route preview checks when pages are being promoted.
 - [ ] Mark each catalog `done` only after data, images, copy, and render assumptions are clean.

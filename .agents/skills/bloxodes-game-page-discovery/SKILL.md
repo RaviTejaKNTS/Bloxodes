@@ -57,6 +57,7 @@ Answer these questions deeply:
 - Does the game have real events that Bloxodes can track through automation/imported event rows?
 - Which durable core in-game item collections deserve catalog pages?
 - Which catalogs need data/images before copy can be written?
+- Which catalogs have enough player-useful facts to answer real buy, unlock, upgrade, farm, compare, equip, trade, reach, or use decisions?
 - Which non-catalog pages should wait for the second pass?
 - What catalog should be built first?
 
@@ -189,6 +190,9 @@ For each catalog candidate, record:
 - rendered card/table count, if route exists
 - title count, if page exists
 - image coverage expectation and known gaps
+- primary player task and required facts needed to satisfy it
+- source-backed useful facts missing from local data, such as prices, currencies, shops, damage, upgrade paths, chances, requirements, locations, roles, limits, or availability
+- competitor/source usefulness notes when search potential matters
 - whether the collection is current, retired, event-limited, premium, trade-only, mode-specific, or unclear
 - strongest evergreen grouping axis, such as slot, rarity, source, location, unlock route, shop, tier, world, mode, role, or item type
 - likely card fields and what each means to players
@@ -196,7 +200,7 @@ For each catalog candidate, record:
 - whether route/config/data/image work is needed
 - status: `skip`, `update`, `create`, `blocked`, or `do not create`
 
-Be deep, not bloated. Bloxodes should cover detailed games thoroughly, but a catalog candidate must be a real durable in-game collection. Separate `core catalog`, `later after data`, `UGC exception`, `second-pass only`, and `do not create` instead of padding the plan with temporary rewards or generic systems.
+Be deep, not bloated. Bloxodes should cover detailed games thoroughly, but a catalog candidate must be a real durable in-game collection with facts that can help players act. Separate `core catalog`, `later after data`, `UGC exception`, `second-pass only`, and `do not create` instead of padding the plan with temporary rewards or generic systems.
 
 ## Tools, Checklists, Quizzes, And Articles
 
@@ -260,7 +264,7 @@ Evidence for or against event coverage. Include automation/import path, source q
 
 ## Catalog discovery
 
-Deep list of durable core in-game item collections. Include proposed route, code, source count, local data state, image state, grouping axis, card fields, and status. Mark temporary rewards, current season/event rewards, and generic progression systems as `do not create` or `second-pass only`.
+Deep list of durable core in-game item collections. Include proposed route, code, source count, local data state, image state, primary player task, required facts, missing useful facts, grouping axis, card fields, and status. Mark temporary rewards, current season/event rewards, and generic progression systems as `do not create` or `second-pass only`.
 
 ## Tools opportunities
 
@@ -299,7 +303,7 @@ Prefer this order unless the game demands otherwise:
 2. Audit existing Bloxodes pages.
 3. Decide codes and events automation eligibility without writing live data.
 4. Discover durable core in-game catalogs and reject temporary/weak catalog ideas.
-5. Pick one gold-standard catalog and define the data/image action needed.
+5. Pick one gold-standard catalog and define the data/image/useful-facts action needed.
 6. Defer wiki, checklist, quiz, tools, and articles that depend on catalog understanding to second-pass discovery unless the evidence is already strong.
 7. Return the ranked catalog-first plan and stop.
 

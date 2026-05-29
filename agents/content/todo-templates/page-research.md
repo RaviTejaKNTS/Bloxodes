@@ -20,6 +20,9 @@ Workspace: `tmp/content-workspace/<game-or-topic-slug>/<page-folder>/`
 ## Research
 
 - [ ] Explain the topic in plain player language before implementation notes.
+- [ ] For catalog-like or item-backed pages, identify the primary player task and what the reader can do after reading.
+- [ ] For catalog-like or item-backed pages, build the required fact matrix and mark missing useful facts as data gaps.
+- [ ] For SEO-sensitive pages, run a competitor/source usefulness check before recommending writing.
 - [ ] Verify unstable facts with current sources.
 - [ ] Inspect local datasets, existing rows, route behavior, and related Bloxodes pages.
 - [ ] Record source links, unknowns, and common player confusion.

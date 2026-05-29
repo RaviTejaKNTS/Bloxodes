@@ -36,18 +36,19 @@ A vehicle from the current car showroom can be bought again with Bucks or Robux.
 2. Re-read `todo.md` and confirm required gates through the current stage are checked or explicitly blocked.
 3. Confirm the page type and target fields.
 4. For catalog and game-catalog pages, confirm the data and image audit exists and is resolved.
-5. Confirm the FLOW pass happened when the page has `description_md`, `how_it_works_md`, article body, or tool explanation.
-6. Remove generic opening lines.
-7. Remove unsupported claims.
-8. Cut repeated ideas across fields.
-9. Replace broad field claims with exact game or dataset details.
-10. Keep the useful answer close to the top.
-11. Add missing context where the copy jumps too quickly between mechanics, fields, or item groups.
-12. Split paragraphs that mix unrelated concepts.
-13. Check headings are clear sentence-style fragments, not rigid one-word labels.
-14. Check Markdown and JSON are valid.
-15. Check the visible title and `seo_title` are unique, well-defined, count-accurate, and fully supported by the page body.
-16. Check the final output can be pasted or upserted without reshaping.
+5. For catalog and game-catalog pages, confirm the player-usefulness gate and required fact matrix exist and are resolved.
+6. Confirm the FLOW pass happened when the page has `description_md`, `how_it_works_md`, article body, or tool explanation.
+7. Remove generic opening lines.
+8. Remove unsupported claims.
+9. Cut repeated ideas across fields.
+10. Replace broad field claims with exact game or dataset details.
+11. Keep the useful answer close to the top.
+12. Add missing context where the copy jumps too quickly between mechanics, fields, or item groups.
+13. Split paragraphs that mix unrelated concepts.
+14. Check headings are clear sentence-style fragments, not rigid one-word labels.
+15. Check Markdown and JSON are valid.
+16. Check the visible title and `seo_title` are unique, well-defined, count-accurate, and fully supported by the page body.
+17. Check the final output can be pasted or upserted without reshaping.
 
 ## Understanding Questions
 
@@ -55,6 +56,7 @@ For every paragraph, ask:
 
 - Does this teach the game system, tool result, article topic, or item group?
 - Could a reader explain the idea back after reading it once?
+- Could a reader act in-game from this page without needing another guide for the same promised task?
 - Does the paragraph define unclear terms before using them as advice?
 - Does it use at least one real item, mechanic, reward, source, example, or player action when the topic needs proof?
 - Does it explain what the player actually does in the game?
@@ -79,6 +81,8 @@ Fail the final edit and rewrite before import if public copy contains:
 - unexplained values such as `Yes`, `No`, `3`, `common`, `available`, or `limited` in public prose without a visible label or gameplay explanation
 - catalog cards or tables that render raw long descriptions, raw HTML, raw `pros`/`cons`, nested object dumps, vague meta descriptions, or unlabeled values that do not help the player compare items
 - catalog research that found missing items, mismatched counts, or missing expected images but continued to final copy without a resolved data action
+- catalog research that found source-backed player-useful facts, such as prices, stats, upgrade steps, shops, chances, requirements, locations, or route order, but continued to final copy without adding them to data/cards/body or marking them unavailable
+- catalog or game-catalog copy that explains why data is missing more prominently than it explains what the player should do
 - game-catalog scope that turns current season tracks, one-off event rewards, ranked season rewards, gamepasses, badges, servers, developer products, broad update summaries, or raw Roblox media into catalog pages
 - catalog or game-catalog final copy that skipped the FLOW pass
 - catalog `description_md` that repeats card-section notes instead of explaining the whole collection or mechanic
@@ -114,6 +118,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - `description_md` has gone through the FLOW pass and reads as whole-page explanation, not a pile of unrelated mini sections.
 - `description_md` includes a useful action/use/how-to section when the catalog item type has a player action behind it.
 - `title` and `seo_title` match the approved title promise. If they promise obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison, the page body must fully answer that promise.
+- The primary player task and required fact matrix are answered by visible card fields, body sections, FAQs, or an explicit unavailable/blocked note in research.
 - For catalog and game-catalog pages, the data and image audit in `research-notes.md` is resolved before import. Missing items, stale fields, and image gaps must be fixed or explicitly accepted.
 - The confirmed `description_json` keys match the route's actual section labels. If the route renders `Other`, `Rarity`, or another unexpected group while the notes are written for different sections, the page fails final edit.
 - The confirmed card/table fields match the route's actual rendered fields. If the cards are still showing raw descriptions, raw `pros`/`cons`, nested stats, source HTML, vague meta text, or unexplained yes/no values, the page fails final edit even if the prose is good.
@@ -144,6 +149,8 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 
 - `intro_md` explains what the collection is in the game.
 - `research-notes.md` includes local item count, source count, rendered count, title count, image coverage, and any missing/extra/stale items.
+- `research-notes.md` includes the player-usefulness gate, required fact matrix, and competitor/source coverage check when search competition matters.
+- The page answers what the player can do after reading it.
 - If the data audit found missing items or missing images, the local dataset/image wiring was updated or the remaining gap was explicitly accepted.
 - If the page is sectioned, research notes record the confirmed section style before final writing.
 - Research notes record the confirmed card data shape before final writing: fields to show, fields to hide, and route changes needed.
@@ -163,6 +170,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 
 - The copy reflects local dataset fields and real item examples.
 - The copy reflects the final local dataset after any approved data update, not the stale dataset from the start of research.
+- The copy and cards reflect source-backed facts required by the player task, such as prices, currencies, shops, damage, chances, upgrade paths, locations, requirements, limits, roles, or availability when those facts are central to the page.
 - The title count, dataset count, and rendered card count align or have a written reason for the difference.
 - The title is not only a generic wiki label unless the collection is truly a simple list. It should reflect the strongest player intent, and the page should deliver that promise in detail.
 - Images are present when expected, or the missing image count is recorded and accepted.
@@ -177,10 +185,17 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 ### Wiki
 
 - The hub orients the player around the game loop and important systems.
+- `research-notes.md` records the rendered wiki contract: which visible sections come from `wiki_pages`, linked `roblox_universes`, and related page tables.
+- The visible game summary from `roblox_universes.game_description_md` is useful, or the reason it is intentionally blank is recorded.
+- The wiki answers what the game is, what a normal session looks like, which systems matter, and what a new or returning player should check first.
 - Tips are specific enough to be useful.
+- Controls are filled only when verified, and omitted controls are not guessed.
+- Related codes, events, catalogs, tools, articles, checklists, quizzes, media, badges, passes, servers, and developer sections have been checked for local existence.
 - Related sections can carry live detail, but the wiki copy must still give context.
 - The wiki output does not include catalog-page fields such as `wiki_md`; those belong to the catalog or game-catalog workflow.
 - If related catalog blurbs are weak, the fix is a separate catalog-page rewrite, not a wiki-page rewrite.
+- Local DB readback confirms the saved `wiki_pages` row and the linked `roblox_universes` row.
+- Local render verification confirms the title, metadata, game summary, tips, controls, related sections, and images when applicable.
 
 ### Article
 
@@ -239,9 +254,11 @@ Do not call content ready unless:
 
 - `research-notes.md` has real human topic research before implementation notes.
 - Catalog and game-catalog research includes a resolved data and image audit.
+- Catalog and game-catalog research includes a resolved player-usefulness gate and required fact matrix.
 - Catalog, game-catalog, article, and tool pages with body copy have gone through the FLOW pass.
 - `final.json` is valid JSON in the target table shape.
 - Public copy passes the hard blockers.
 - Important terms are defined or naturally clear.
 - Any remaining uncertainty is recorded in `research-notes.md`.
+- Wiki pages have rendered-field proof, companion universe-description proof or an explicit blank decision, related-section proof, local DB readback for `wiki_pages` and linked `roblox_universes`, and local page proof before the work is called complete.
 - Catalog and game-catalog pages have explicit data-state confirmation, explicit section confirmation, explicit card-data confirmation, rendered-count proof, rendered-section proof, rendered-card proof, image proof when images matter, local DB readback after import, and local page proof before the work is called complete.

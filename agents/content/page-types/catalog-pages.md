@@ -12,6 +12,8 @@ Do not start from fields. Start from the collection.
 
 Do not start from stale data either. If the collection has item cards, tables, images, counts, prices, sources, or availability states, research must check whether those facts are current enough before public copy is written.
 
+Do not start from "safe" copy either. Start from the player task. Before writing, name what the reader wants to do in the game and what facts they need to do it. If those facts exist in sources but not in the dataset, update the data or block the page instead of filling the gap with general advice.
+
 For game-specific catalogs, keep the scope to durable in-game item collections. Do not create catalogs for current season tracks, one-off event rewards, ranked-season rewards, broad update summaries, gamepasses, badges, servers, developer products, or raw Roblox media. If an event or season created permanent items, put those items inside their core collection and mark the source/availability there. UGC is a special exception only when the game has meaningful UGC items, and it should use the item-card pattern from the free Roblox items page.
 
 Bad:
@@ -99,6 +101,9 @@ For catalog and game-catalog changes, research the collection first, then propos
 
 The proposal should include:
 
+- primary player task and the decision the page should make easier
+- required fact matrix: reader need, required facts, source status, local data/card status, and public placement
+- competitor usefulness check when search competition matters: what top useful sources answer, where Bloxodes matches or beats them, and what local facts are weaker
 - local item count, rendered card/table count, page title count, source count, image count, and missing image count when the page has item data
 - data update plan if the current local data is stale, incomplete, poorly shaped, or missing expected images
 - recommended visible title and `seo_title`
@@ -135,9 +140,12 @@ Include:
 
 If the audit finds more real items than local data, or finds that important images are missing, the page is not ready for final copy. Propose the data update and get approval first.
 
+If the audit finds source-backed facts that are required for the player task but absent from the dataset or cards, the page is also not ready. Examples include prices, currencies, shop/NPC names, upgrade costs, damage, drop chances, locations, requirements, route order, limits, or availability. These belong in the data/card plan first, not as vague prose later.
+
 ## Writing Rules
 
 - Explain the fields players actually scan.
+- Explain the player action before explaining field labels. A reader should know what the page helps them buy, unlock, upgrade, farm, equip, trade, find, compare, or avoid.
 - Make the page satisfy its title. If the title says `how to get them`, `locations`, `drops`, `chances`, `what they do`, or another specific promise, the cards and copy must answer it completely enough that the reader does not need a separate article.
 - Define the field in gameplay terms before using it as advice.
 - Name the game mechanic, not just the collection.
@@ -256,6 +264,9 @@ Avoid FAQ entries like:
 ## Final Checks
 
 - Does the intro explain the collection's role in the game?
+- Did research define the primary player task and required fact matrix before writing?
+- Are all source-backed required facts either in the dataset/cards/body or explicitly marked unavailable?
+- Did competitor/source coverage reveal a core player action that this page still does not answer?
 - Did `research-notes.md` include a data and image audit when the page has item data?
 - Do local item count, rendered card/table count, title count, and source count match or have a written reason for the difference?
 - If the audit found missing items or missing images, was that fixed or explicitly accepted before writing?

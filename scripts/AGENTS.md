@@ -31,6 +31,12 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `seed-game-wiki-pages.ts` upserts game hub rows into `wiki_pages` and links them to matching `roblox_universes`; use `--dry-run` before writing and `--draft` when pages should stay unpublished.
   - Both seed scripts accept `--game <slug>` for narrow production publishes. Catalog seeding also accepts `--collection <slug>` for single-page retries.
   - For production runs, use `NODE_ENV=production` plus `--allow-prod` only after a clean production dry-run. Confirm the scripts are targeting the production Supabase host, not local Supabase.
+  - For wiki/catalog production publishes, confirm the production `roblox_universes` row exists first. If it is missing, collect/import/enrich the universe before seeding `wiki_pages` or `wiki_catalog_pages`.
+  - Before writing production wiki/catalog rows, read existing production `wiki_pages` and `wiki_catalog_pages` rows for the target game/code so you know whether this is a create or update and can catch duplicates or wrong slugs.
+  - Publish game wiki/catalog pages in order: universe first when needed, `seed-game-wiki-pages` second, production wiki readback third, `seed-game-catalog-pages` last so catalog rows can link to the production `wiki_page_id`.
+  - After DB publish, push/deploy only the current game's repo artifacts required by the pages: `data/<Game>/`, `apps/web/public/<Game>/`, game dataset config/rendering code, and approved seed-script changes for that game. Do not include unrelated docs, other game data, temporary workspace files, or unrelated code in the game release commit.
+  - Do not manually enqueue revalidation by default after wiki/catalog production publishes. The app/database revalidation path should handle it; poll live pages for up to 5 minutes, then inspect the queue/worker if pages are still stale.
+  - A wiki/catalog production publish is not complete until the live production wiki and catalog URLs return 200 and render the expected title, content, data, and images. If live routes or images 404, check whether the production deploy includes the route/config changes, `data/<Game>/`, and `apps/web/public/<Game>/`.
   - Scripts that match against `roblox_universes` must page through production rows explicitly; do not assume the default Supabase result limit is enough.
   - Keep reusable seed/upsert scripts for repeated wiki/catalog work. Delete temporary collector/import scripts after their data is stable and committed.
 - `content/`: local content QA helpers.

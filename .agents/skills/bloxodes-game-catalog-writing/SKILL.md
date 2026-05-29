@@ -34,11 +34,11 @@ Copy `agents/content/todo-templates/game-catalog.md` into the folder as `todo.md
 
 Use this when a catalog page is powered by a game dataset, such as pets, crops, vehicles, accessories, eggs, bosses, weapons, maps, materials, cosmetics, or other durable game-specific item collections.
 
-The job is not to turn fields into prose. The job is to understand the game system well enough that the cards make sense to a casual player.
+The job is not to turn fields into prose. The job is to understand the game system well enough that the cards make sense to a casual player and the page helps them complete a real in-game task.
 
 Reject weak catalog scopes before writing. Do not create game catalog pages for current season pass reward tracks, one-off event reward lists, current ranked season rewards, broad update summaries, gamepasses, badges, servers, developer products, or raw Roblox media. If an event/season created permanent items, keep those items inside their durable collection and record the source/availability on the cards. UGC is a special exception only when the game has meaningful UGC items; use the free Roblox items card style.
 
-The job also includes data readiness. If the item list, source count, rendered card count, title count, image coverage, or card fields are stale or incomplete, do not write around the problem. Record the gap, propose the data/image update, and only write final copy after the data state is approved and fixed or explicitly accepted.
+The job also includes data readiness. If the item list, source count, rendered card count, title count, image coverage, card fields, or player-useful facts are stale or incomplete, do not write around the problem. Record the gap, propose the data/image update, and only write final copy after the data state is approved and fixed or explicitly accepted.
 
 Inspect:
 
@@ -58,17 +58,21 @@ Identify the collection type and inspect real item examples before writing anyth
 
 Translate raw fields only after the gameplay term is clear. A field like `source`, `chance`, `rarity`, `seats`, `uses`, `refresh`, or `availability` is not useful until the page explains what it changes for the player.
 
+Complete the player-usefulness gate before proposing sections. Identify the player's real task, the decisions the page should make easier, and what the reader can do after reading. Create a required fact matrix that maps reader needs to required facts, source status, local data/card status, and public placement. If prices, currencies, shops, NPCs, damage, chances, upgrade paths, locations, route order, requirements, limits, or other central facts are source-backed but missing locally, mark the work `needs dataset update`.
+
+When SEO or traffic potential matters, run a competitor usefulness check. Inspect top useful competitor/source pages for coverage: what player questions they answer, what facts they expose, what sections help, and where Bloxodes can be stronger. This is a research coverage check, not permission to copy wording.
+
 Create a reader-first outline inside `research-notes.md`. It should name the reader questions, section order, details to cut, and places where a table, bullet list, numbered list, or short paragraph will help.
 
-Before the section proposal, add a required data and image audit to `research-notes.md`. Compare local dataset count, rendered card count, page title count, source counts, and image coverage. List missing items, extra items, renamed items, stale fields, duplicate rows, missing images, and local images that are not wired. Mark the data action as `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`.
+Before the section proposal, add a required data and image audit to `research-notes.md`. Compare local dataset count, rendered card count, page title count, source counts, image coverage, and required fact coverage. List missing items, extra items, renamed items, stale fields, duplicate rows, missing useful facts, missing images, and local images that are not wired. Mark the data action as `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`.
 
 For new games or new collections, gather or build the local dataset as part of this workflow. Research should produce the complete item list, clean names/slugs, useful card fields, and image plan before final writing. If repeatable updates will matter, prefer a collector script over a one-off manual dump.
 
 The image plan must reject weak substitutions. Use direct in-game item art, enemy/object cutouts, NPC screenshots, station screenshots, or location screenshots where the catalog subject is clearly visible. Do not use edited guide thumbnails, site-branded cover art, arrows/callouts, generic hero art, or broad nearby screenshots that do not actually show the row subject. If no clean image exists, leave the row image empty and record the capture/source gap.
 
-Before final writing, propose the data action, title promise, item-card section style, and card data shape. Explain the count/image audit, any dataset updates needed, the recommended visible title and `seo_title`, the exact reader promise in that title, the grouping axis, why it has in-game meaning, weaker alternatives, planned `description_json` keys and notes, what stays in `description_md`, which fields should appear on cards, which raw fields should be hidden, and whether the route needs a renderer override. Wait for explicit user confirmation before writing `final.json` or updating Supabase. A request like "write this page" or "continue" is not approval unless the user has already seen and accepted the data, title promise, section, and card proposal.
+Before final writing, propose the player-usefulness gate, data action, title promise, item-card section style, and card data shape. Explain the primary player task, required fact matrix, count/image audit, any dataset updates needed, the recommended visible title and `seo_title`, the exact reader promise in that title, the grouping axis, why it has in-game meaning, weaker alternatives, planned `description_json` keys and notes, what stays in `description_md`, which fields should appear on cards, which raw fields should be hidden, and whether the route needs a renderer override. Wait for explicit user confirmation before writing `final.json` or updating Supabase. A request like "write this page" or "continue" is not approval unless the user has already seen and accepted the data, title promise, section, and card proposal.
 
-Once the data and structure are confirmed, update the local dataset/images first when needed, then write the page fields directly in first-pass final JSON. Include `wiki_md` and `wiki_sort_order` when the catalog belongs on a wiki hub.
+Once the data and structure are confirmed, update the local dataset/images and required player-useful fields first when needed, then write the page fields directly in first-pass final JSON. Include `wiki_md` and `wiki_sort_order` when the catalog belongs on a wiki hub.
 
 Before the final edit gate, run the mandatory FLOW pass. Rewrite `description_md`, `how_it_works_md`, FAQs, headings, and transitions until the page reads like a useful player explanation. `description_md` must explain the whole collection or mechanic, not the card sections. When the collection has player action behind it, add a clear action section such as how to get, find, unlock, farm, grow, hatch, roll, craft, equip, travel, compare, or use the items. Use a table, bullets, or numbered steps when that explains faster than paragraphs. Then run the final edit gate before saving.
 
@@ -90,11 +94,13 @@ Keep `description_md` focused on whole-page mechanics: how the system works, whe
 
 Choose the section split by the strongest in-game meaning. Rarity, item type, source, location, shop, tier, world, unlock route, crop type, resource type, and boss are all possible. Event can be a source/availability note for permanent items, but a current event should not become a standalone catalog. Pick the structure that helps players understand the collection, not the structure that is merely convenient.
 
-Do not invent missing item stats, image paths, rewards, or requirements. If the dataset has a gap, record it in research notes and write around it honestly.
+Do not invent missing item stats, image paths, rewards, or requirements. If the dataset has a gap, record it in research notes. Write around it only after the gap is explicitly accepted or the fact is genuinely unavailable; source-backed useful facts should become a data update first.
 
-If research finds missing items or expected images, do not treat that as a copy caveat by default. The first move is to update the dataset or image wiring after approval. Only write around the gap when the user explicitly accepts the current data state or the source disagreement is explained.
+If research finds missing items, expected images, or source-backed useful facts that are missing locally, do not treat that as a copy caveat by default. The first move is to update the dataset, fields, or image wiring after approval. Only write around the gap when the user explicitly accepts the current data state or the source disagreement is explained.
 
 Use practical player judgment when the facts support it: easy to replace, mostly collectible, good for quick tasks, gated by an event, trade-aware, or worth saving. Do not force opinions when the data does not support them.
+
+Public copy should answer what the player can do next. If the strongest sentence on the page is an internal caveat about why data is missing, the page is not ready.
 
 Public copy should explain the collection itself. Avoid `Use the X catalog`, `check the catalog`, `this page`, `dataset`, or `Bloxodes` in public fields.
 

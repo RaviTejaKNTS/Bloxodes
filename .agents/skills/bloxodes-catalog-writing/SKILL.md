@@ -36,6 +36,8 @@ Copy `agents/content/todo-templates/catalog.md` into the folder as `todo.md` and
 
 Before public copy starts, understand the collection as a real thing a player interacts with. A catalog page should not feel like fields were translated into sentences. It should explain what the collection is, what players do with it, how they get or compare items, and why the visible values matter.
 
+Also understand the player task. Name what the reader wants to do, choose, unlock, buy, upgrade, farm, compare, equip, trade, find, or avoid. Then build a required fact matrix that maps reader needs to required facts, source status, local data/card status, and public placement. If useful facts are source-backed but absent from the data, the page needs a data update before writing.
+
 Also understand whether the data is ready. If item counts, source counts, title counts, rendered cards, or images disagree, the workflow should stop and propose a data or image update before final copy.
 
 Use these inputs:
@@ -72,9 +74,11 @@ Only include fields being written.
 
 Inspect the row, route, and item examples first. Then research the collection in plain language and save that work in `research-notes.md`.
 
-For any item-backed catalog, add a data and image audit before final copy. Compare local item count, rendered card/table count, title count, source count, and image coverage. If the audit finds missing items, stale fields, duplicate rows, raw HTML, bad card values, or missing expected images, propose the data action and wait for approval before writing.
+For any item-backed catalog, add a data and image audit before final copy. Compare local item count, rendered card/table count, title count, source count, image coverage, and required fact coverage. If the audit finds missing items, stale fields, duplicate rows, raw HTML, bad card values, missing useful facts, or missing expected images, propose the data action and wait for approval before writing.
 
-If the page can be divided into item-card sections, propose the data state, title promise, and section style before writing final copy. The proposal should explain whether the dataset is ready, the recommended visible title and `seo_title`, the exact answer that title promises, the grouping axis, why it has in-game meaning, which alternatives are weaker, what short `description_json` notes would appear between sections, and what should stay in `description_md`.
+When SEO or traffic potential matters, run a competitor usefulness check. Record what top useful sources answer for players, what practical facts they expose, where Bloxodes will match or beat them, and where local data is weaker. Use this to improve coverage, not to copy their wording.
+
+If the page can be divided into item-card sections, propose the player-usefulness gate, data state, title promise, and section style before writing final copy. The proposal should explain whether the dataset is ready, the primary player task, the required facts and where they will appear, the recommended visible title and `seo_title`, the exact answer that title promises, the grouping axis, why it has in-game meaning, which alternatives are weaker, what short `description_json` notes would appear between sections, and what should stay in `description_md`.
 
 Propose the card data shape in the same pass. Name the fields that should appear on cards or tables, the player meaning of each field, which raw fields should stay hidden, and whether the route needs a renderer override. Cards should be clean data surfaces, not mini articles. Do not let raw long descriptions, raw HTML, raw `pros`/`cons`, nested stats objects, vague meta text, or unexplained `Yes`/`No` values appear just because they exist in the dataset.
 

@@ -26,6 +26,32 @@ Connection happens through the UI and related sections. Public copy should expla
 
 Codes and events remain automation-owned on the wiki too. The wiki can mention that the game has codes or events when related sections exist, but it should not hard-code current code names, active-code counts, live event statuses, current event dates, or temporary reward timelines.
 
+## Rendered Page Contract
+
+Before writing, map every visible wiki area to the field or related table that renders it. A wiki page is not complete just because the `wiki_pages` row is filled.
+
+- `wiki_pages` owns `title`, `seo_title`, `meta_description`, `tips_md`, `controls_json`, `cover_image`, publish fields, and the linked `universe_id`.
+- `roblox_universes.game_description_md` owns the visible game summary/description on the wiki hub.
+- `roblox_universes` owns live game metadata such as creator, genre, visits, favorites, created/updated dates, device support, social links, media, badges, passes, and servers.
+- Catalog sections render from related catalog pages. Their short hub blurbs come from each catalog page's `wiki_md`.
+- Codes, events, tools, articles, checklists, quizzes, and other game/developer sections render only when the related rows exist.
+
+Record this map in `research-notes.md`. If the visible game summary is empty, update `roblox_universes.game_description_md` through the local seed/import workflow or explicitly record why it is intentionally blank. Do not hide a missing summary with extra tips.
+
+## Minimum Useful Wiki
+
+A finished wiki hub must answer the basic player questions even when some related sections do not exist yet:
+
+- What is this game?
+- What does the player do in a normal session?
+- What are the core progression, combat, collection, reward, or role systems?
+- What should a new or returning player check first?
+- Which controls are verified, or why are controls omitted?
+- Which related sections exist locally, and which expected sections are missing?
+- What should the wiki skip because related cards already carry that live detail?
+
+If these questions are not answered in `research-notes.md`, companion game description, tips, controls, or rendered related sections, the wiki is still incomplete.
+
 ## Database Fields
 
 Create or update:
@@ -55,6 +81,8 @@ Write in this shape:
 ```
 
 Most rich content on the page comes from related data, not from long wiki body fields.
+
+The visible game summary is companion data, not a `wiki_pages` field. When it needs work, write or update `roblox_universes.game_description_md` separately and record that action in `research-notes.md`. Workspace `final.json` may include a clearly named `game_description_md` value for review, but the import or seed script must write it to `roblox_universes`, not `wiki_pages`.
 
 ## Game Metadata Labels
 
@@ -179,6 +207,9 @@ For event sections:
 ## Final Checks
 
 - Does the page feel like a hub, not a full article?
+- Does the rendered field contract show where title, meta, game summary, tips, controls, metadata, and related sections come from?
+- Is `roblox_universes.game_description_md` useful, or is the decision to leave it blank recorded?
+- Does the page answer what the game is, what players do, and which systems matter?
 - Does it avoid repeating related cards and sections?
 - Are catalog section blurbs coming from catalog-page `wiki_md` instead of being newly written in the wiki page pass?
 - If a catalog blurb is weak, did you move that work into a separate catalog-page workflow?
@@ -186,4 +217,6 @@ For event sections:
 - Are tips specific and useful?
 - Is the meta description specific to this game's hub?
 - Are catalog sections linked through `universe_id` and catalog code patterns?
+- Did local DB readback include both `wiki_pages` and the linked `roblox_universes` row?
+- Did local render verification confirm title, metadata, game summary, tips, controls, related sections, and images when applicable?
 - Would a player know where to go next from this hub?

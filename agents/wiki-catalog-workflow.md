@@ -22,6 +22,8 @@ Catalog scope is deliberately narrow. Game-specific catalog pages are for durabl
 
 For catalog copy changes, research first and propose the data state, title promise, item-card section style, and card data shape before writing final content. The user should see local item count, source count, rendered card count, title count, image coverage, missing or extra items, any required dataset/image update, the recommended visible title and `seo_title`, and the exact answer the title promises. The user should also confirm whether sections are divided by rarity, item type, source, location, shop, tier, world, unlock route, or another evergreen in-game grouping. Also confirm which fields should appear on the cards and which raw fields should stay hidden. The confirmation must be explicit; a normal request to write or continue is not enough. After confirmation, use `description_json` for short notes between those sections and keep `description_md` focused on whole-page mechanics that fully delivers the title promise.
 
+For catalog and game-catalog pages, research must also pass a player-usefulness gate before writing. Identify what the player came to do, choose, buy, unlock, upgrade, farm, compare, equip, trade, reach, or avoid. Build a required fact matrix that maps each reader need to required facts, source status, local dataset/card status, and public placement. When SEO or traffic potential is part of the page decision, inspect top useful competitor/source pages as a coverage check. If a source-backed fact is central to the player task but missing locally, update the dataset/card shape or mark the page blocked. Do not hide weak data behind cautious prose.
+
 After the first-pass `final.json`, run the FLOW pass from `agents/content/flow-pass.md`. This is mandatory for catalog and game-catalog pages. The pass rewrites `description_md`, `how_it_works_md`, FAQs, headings, and transitions so the page reads like a useful player explanation with a clear action/how-to/use section where the collection has player action behind it.
 
 Before importing catalog copy, verify that the route actually renders the confirmed item count, card sections, card fields, and images. Do not assume the renderer will pick the right field because the dataset contains it. If the cards should be grouped by `Walls` and `Floors` but the route is grouping by blank `rarity` values, fix the renderer or add the confirmed grouping behavior first. If the cards show raw prose, raw pros/cons arrays, nested stats, unclear yes/no values, or fields that do not help the player compare items, clean the data shape or add a renderer override before calling the page done.
@@ -41,6 +43,8 @@ Follow this workflow when adding pages for a game dataset under `data/<Game>/`, 
 - Wiki page rows for gathered game datasets can be generated with `npm run seed:game-wiki-pages -- --dry-run`, then written locally with `npm run seed:game-wiki-pages`.
 
 For new games, data gathering is part of this workflow. Research should produce the first item list, useful card fields, local image plan, and collection structure before copy is written. If a source says a collection has more items than the current local file, update or intentionally accept the data gap before writing public fields.
+
+Research should also produce the player-useful facts needed for the page promise. For example, a weapons page may need price, currency, damage, Armory slot, unlock route, VIP/Gamepass/Robux/crate status, upgrade process, and purchase priority. A maps page may need layout landmarks, spawn pressure, hold spots, objective flow, and gear placement. A classes page may need role, unlock cost, best use, solo/team value, and progression limits. Use the collection's real player task to decide the fields instead of accepting whatever fields are easiest to scrape.
 
 Image plan means clean catalog images, not just any image from a guide page. Use direct in-game item art, enemy/object cutouts, NPC screenshots, station screenshots, or location screenshots where the catalog subject is clearly visible. Do not use edited guide thumbnails, site-branded cover art, arrows/callouts, generic hero art, or broad nearby screenshots that do not actually show the row subject. If no clean image exists, leave the row image empty and record the capture/source gap instead of filling it with a weak substitute.
 
@@ -78,6 +82,7 @@ Important fields:
    - Item counts match current source counts, or the difference is explained.
    - Rendered card counts match dataset counts.
    - Count-based page titles match the dataset count.
+   - Required player-useful facts are present in local data/card fields or explicitly marked unavailable.
    - Referenced local images exist.
    - Image coverage is counted.
    - No unreferenced generated images remain.
@@ -178,6 +183,7 @@ Good catalog copy usually follows this shape:
 4. Main groups and why they differ.
 5. Important terms explained in gameplay language.
 6. Any current, retired, event, premium, reward, trade-only, or uncertain caveats.
+7. The real player task and the exact facts needed to complete it.
 
 When item cards are sectioned, put the section-specific setup in `description_json` and keep `description_md` shorter. `description_md` should explain the whole system, such as where the mechanic lives in-game, how players acquire items, how odds or prices work, and what mistakes apply across the collection. The FLOW pass should reject `description_md` that only turns card sections into larger article headings.
 
@@ -251,27 +257,57 @@ After writing:
 
 Only after local is clean:
 
-1. Use a forward-only migration or a controlled seed/upsert script.
-2. Keep production SQL idempotent with `on conflict` upserts.
-3. Preserve existing published timestamps unless intentionally republishing.
-4. Run production dry-runs before writing:
-   - Use `NODE_ENV=production` so `scripts/shared/load-env.ts` reads `.env` instead of `.env.development.local`.
-   - Confirm the target host is production, not `127.0.0.1:54321`.
-   - Run `NODE_ENV=production npm run seed:game-catalog-pages -- --game <game-slug> --dry-run`.
-   - Run `NODE_ENV=production npm run seed:game-wiki-pages -- --game <game-slug> --dry-run`.
-   - Confirm expected row counts.
-   - Confirm wiki rows show real `universe_id` values, not `not linked`.
-5. Apply to production only after dry-runs are clean:
-   - Run `NODE_ENV=production npm run seed:game-catalog-pages -- --game <game-slug> --allow-prod`.
-   - Run `NODE_ENV=production npm run seed:game-wiki-pages -- --game <game-slug> --allow-prod`.
-   - Do not use `--draft` for production publish unless the pages must stay hidden.
-6. Verify production DB state after writing:
-   - All expected `wiki_catalog_pages` rows exist.
-   - All expected `wiki_pages` rows exist.
-   - `is_published = true` for rows meant to go live.
-   - No expected catalog or wiki rows have missing `universe_id`.
-7. Verify production URLs and sitemap entries.
-8. Trigger or confirm revalidation for `wiki` and `catalog` entities.
+Production promotion is a release workflow, not only a database write. The work is not done until the live production pages render the expected content.
+
+1. Confirm production environment and scope:
+   - Use `NODE_ENV=production`.
+   - Confirm `SUPABASE_URL` points to the production Supabase host, not `127.0.0.1:54321`.
+   - Use the narrowest `--game <game-slug>` and, for retries, `--collection <collection-slug>`.
+   - Use `--final-json-root tmp/content-workspace/<game-slug>/catalogs` when approved per-page catalog `final.json` files should override generated copy.
+2. Resolve the production Roblox universe first:
+   - Check `roblox_universes` by universe ID, slug, and display name.
+   - If the universe is missing, collect/import/enrich it before seeding wiki or catalog pages.
+   - Confirm `universe_id`, `slug`, `display_name`, root place, creator, Roblox URL, and any needed `game_description_md`.
+   - Do not seed catalog/wiki rows against a missing or wrong production universe.
+3. Check existing production page state before writing:
+   - Read `wiki_pages` by game slug.
+   - Read `wiki_catalog_pages` by expected `code`, `wiki_slug`, and `collection_slug`.
+   - Decide whether each row is a create or update.
+   - Stop on duplicate rows, wrong slugs, wrong codes, missing `universe_id`, or unexpected existing content.
+4. Run local proof before production:
+   - Public copy check passes.
+   - Local seed/import succeeds.
+   - Local DB readback confirms `wiki_pages`, linked `roblox_universes`, and all expected `wiki_catalog_pages`.
+   - Local routes render `/wiki/<game-slug>` and every `/wiki/<game-slug>/<collection-slug>`.
+   - Local route checks confirm titles, item counts, card sections, card fields, descriptions, FAQs, wiki blurbs, and all wired images.
+5. Run production dry-runs before writing:
+   - `NODE_ENV=production npm run seed:game-wiki-pages -- --dry-run --game <game-slug>`
+   - `NODE_ENV=production npm run seed:game-catalog-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/catalogs`
+   - Confirm expected row counts, titles, item counts, and real `universe_id` values.
+   - Stop if dry-run output is broader than intended or says `not linked`.
+6. Apply to production in this order:
+   - Universe first if it was missing or needed enrichment.
+   - Wiki second: `NODE_ENV=production npm run seed:game-wiki-pages -- --game <game-slug> --allow-prod`
+   - Read back the production `wiki_pages` row and linked `roblox_universes` row.
+   - Catalog pages third: `NODE_ENV=production npm run seed:game-catalog-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/catalogs --allow-prod`
+   - Do not use `--draft` for a live publish unless the pages must stay hidden.
+7. Verify production DB state after writing:
+   - The wiki row exists, is published, has the expected `universe_id`, and has required wiki fields.
+   - The linked universe exists and has the expected companion fields such as `game_description_md` when needed.
+   - Every expected catalog row exists, is published, links to the production `wiki_page_id`, has the expected `universe_id`, and includes intro, description, how-it-works, section notes, FAQ, `wiki_md`, and thumbnail.
+8. Push and deploy only the game-scoped repo artifacts:
+   - Commit only the files needed for this game's public pages, such as `data/<Game>/`, `apps/web/public/<Game>/`, game dataset config/rendering code for the collections, and approved seed-script changes that reproduce the pushed rows.
+   - Do not include unrelated workflow docs, other game data, temporary workspace files, or unrelated code in the game release commit.
+   - Push the commit and make sure production deploys it before declaring the publish complete.
+9. Wait for app revalidation:
+   - Do not manually enqueue revalidation by default. The app/database revalidation path should handle content updates.
+   - Poll live pages for up to 5 minutes after the production write.
+   - If pages do not update within that window, inspect the revalidation queue/worker and report the blockage instead of calling the publish complete.
+10. Verify live production pages:
+   - `/wiki/<game-slug>` returns 200 and shows title, metadata, game description, controls or intentional absence, tips, related catalog cards, and images where applicable.
+   - Every `/wiki/<game-slug>/<collection-slug>` returns 200 and shows the expected title, intro, item names, card sections, card fields, page descriptions, FAQ, and wired images.
+   - Sitemaps include the pages when applicable.
+   - If live routes or images 404, the database publish is not a completed site release. Confirm the production deploy includes required route/config changes, `data/<Game>/`, and `apps/web/public/<Game>/`.
 
 Production notes:
 

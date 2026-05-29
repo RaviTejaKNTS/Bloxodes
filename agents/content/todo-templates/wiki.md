@@ -14,6 +14,7 @@ Workspace: `tmp/content-workspace/<game-slug>/wiki/`
 
 - [ ] Confirm game slug, universe ID, place ID, creator, official Roblox URL, and existing `wiki_pages` row.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
+- [ ] Map rendered wiki sections to source fields: `wiki_pages`, linked `roblox_universes`, and related page tables.
 - [ ] Check related codes, events, catalogs, tools, articles, checklist, quiz, media, badges, passes, and universe metadata.
 - [ ] Pull useful context from game discovery notes if they exist.
 - [ ] Confirm catalog-led discovery or core catalog data exists, or mark the wiki as early/limited instead of guessing systems.
@@ -22,6 +23,7 @@ Workspace: `tmp/content-workspace/<game-slug>/wiki/`
 
 - [ ] Explain the core game loop in `research-notes.md` before implementation notes.
 - [ ] Verify current Roblox metadata and any unstable game/update/event facts.
+- [ ] Decide whether `roblox_universes.game_description_md` needs to be written or updated for the visible game summary.
 - [ ] Identify useful player tips and verified controls only.
 - [ ] Note related page gaps without rewriting catalog `wiki_md` inside the wiki workflow.
 - [ ] Do not hard-code current code names, active counts, live event status, event dates, or temporary reward timelines.
@@ -30,6 +32,7 @@ Workspace: `tmp/content-workspace/<game-slug>/wiki/`
 ## Write
 
 - [ ] Write `final.json` in the `wiki_pages` shape.
+- [ ] Write or update the companion game description when the rendered summary needs it.
 - [ ] Keep `tips_md` short, specific, and practical.
 - [ ] Leave `controls_json` empty unless controls are verified.
 
@@ -37,4 +40,5 @@ Workspace: `tmp/content-workspace/<game-slug>/wiki/`
 
 - [ ] Run final edit.
 - [ ] Import or preview locally when applicable.
-- [ ] Verify `/wiki/<slug>` renders the title, metadata, tips, controls, and related sections correctly.
+- [ ] Read back local `wiki_pages` and linked `roblox_universes` rows after import or seed.
+- [ ] Verify `/wiki/<slug>` renders the title, metadata, game summary, tips, controls, related sections, and images when applicable.

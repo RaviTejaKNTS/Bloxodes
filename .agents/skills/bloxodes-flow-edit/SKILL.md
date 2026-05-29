@@ -24,6 +24,8 @@ The FLOW pass is a rewrite pass. It does not only check whether the copy follows
 
 Before editing, open the page folder's `todo.md` and confirm the research/data gates that apply to the page type are checked or intentionally blocked. After rewriting, mark the FLOW item complete in `todo.md` and record the pass in `research-notes.md`.
 
+For catalog and game-catalog pages, also confirm the player-usefulness gate and required fact matrix are present. FLOW should make the copy answer the player task, not explain around missing data. If the page needs prices, damage, upgrade steps, shops, chances, locations, requirements, or route order and those facts are source-backed but absent from data/cards/body, stop and mark the work as needing data update.
+
 For catalog and game-catalog pages, focus hardest on `description_md`, `how_it_works_md`, FAQs, headings, and transitions. Weak pages often have true facts but weird sections. Fix the shape, not only the sentences.
 
 Also check the approved title promise during FLOW. If the title says `how to get them`, `locations`, `drops`, `chances`, `what they do`, or another specific answer, reshape `description_md`, `how_it_works_md`, FAQs, and headings until the page actually delivers that answer.

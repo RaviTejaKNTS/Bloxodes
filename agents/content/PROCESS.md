@@ -8,7 +8,35 @@ The current standard is outline-first, and for catalog work it is data-first and
 
 For catalog and game-catalog pages, the workflow is also data-confirmation-first, title-confirmation-first, and section-confirmation-first. After research, audit the local dataset against current sources, check image coverage, propose any dataset updates that are needed, propose the visible title and `seo_title`, state the exact promise that title makes, propose how the item cards should be divided into sections, explain why that section style is the strongest in-game grouping, propose the clean card fields, and wait for explicit user confirmation before writing final copy or updating Supabase. Do not treat a general request like "write this page", "continue", or "go ahead" as approval unless the user has already seen the exact data, title, section, and card-data proposal.
 
+Catalog and game-catalog research also has to pass the player-usefulness gate. The agent must identify the in-game jobs the reader came to solve, name the exact facts required to solve those jobs, and prove those facts are either in the dataset/card fields or intentionally unavailable. Do not replace missing player-useful facts with safe prose. If a source has prices, shops, upgrade paths, damage, locations, odds, requirements, or other decision-making facts and the local data does not, the page is `needs dataset update`, not `ready to write`.
+
 Write workflow notes in a human editorial voice. The process should be strict, but the language should still explain the reason behind the step. A clear reason helps the model apply the workflow to a catalog page, article, tool, or wiki hub without turning every output into the same template.
+
+## Player Usefulness Gate
+
+For catalog and game-catalog pages, research must prove the page will help a player do something in the game. This gate happens before the data/title/section proposal.
+
+Answer these questions in `research-notes.md`:
+
+- What did the reader probably search because they want to do, choose, unlock, buy, upgrade, farm, compare, equip, trade, reach, or avoid?
+- What decisions should the page make easier after one read?
+- What exact facts are required for those decisions?
+- Which required facts are already in the local dataset?
+- Which required facts exist in sources but are missing locally?
+- Which required facts are genuinely unknown, unstable, or not source-backed?
+- After reading the finished page, what can the player now do in-game?
+
+For item-backed pages, also create a required fact matrix:
+
+| Reader need | Required facts | Source found? | In dataset/cards? | Public location |
+| --- | --- | --- | --- | --- |
+| Buy or unlock item | price, currency, shop, requirement, route | yes/no | yes/no | cards + how-to |
+| Compare item | stat, role, rarity, source, limit, best use | yes/no | yes/no | cards/table |
+| Use or upgrade item | NPC/station, cost, levels, process, reset rule | yes/no | yes/no | `description_md` |
+
+Adjust the rows to the collection. A weapons page may need damage, price, currency, Armory slot, VIP/Gamepass/Robux/crate route, upgrade station, and priority advice. A map page may need location, spawn pressure, hold spots, objectives, and gear placement. A classes page may need unlock cost, role, team value, solo value, and upgrade or progression limits.
+
+When search traffic matters or a user asks whether a page is worth writing, inspect top useful competitor/source pages as a coverage check. Do not copy their prose. Record which player tasks they answer, what useful facts or sections they include, where Bloxodes will match or beat them, and where the local data is weaker. If a competitor answers a core player action that Bloxodes does not, the page is not ready for final writing.
 
 ## Non-Negotiable Standard
 
@@ -67,6 +95,15 @@ tmp/content-workspace/<game-or-topic-slug>/
 ```
 
 Each serious workflow starts by copying the matching template from `agents/content/todo-templates/` into the page folder as `todo.md`. Read its `Use With` section before working so the tracker leads back to the right skill and docs. Keep the checklist crisp and update it as work progresses. It is a tracker, not a replacement for research notes.
+
+A copied page todo is not a scratchpad. After copying a template into a workspace, only update `Status`, `Updated`, `Workspace`, and checkbox states. Do not add, remove, rename, reorder, or rewrite checklist items inside a page todo. If a gate is missing, update the master template and process docs, then copy that shape for future work.
+
+A checkbox can only be marked done when the matching evidence exists. Do not check an item because the work is planned, partially done, or expected to pass later. Examples:
+
+- `Import or preview locally` needs an import, seed, or local preview command.
+- `Verify /wiki/<slug> renders...` needs rendered HTML or browser proof for the visible page.
+- `Identify verified controls` needs a source note or an explicit decision to leave controls empty.
+- `Check related sections` needs the actual related rows or routes to be inspected and recorded.
 
 No `brief.md`. No `review.md`. No fan-out plan file. No draft file. No generic shared batch research file pretending to cover every page.
 
@@ -130,6 +167,9 @@ Research must answer:
 - What does the player actually do with it?
 - How does it work during normal gameplay?
 - What did the reader probably come here to answer?
+- What in-game job should the page help the reader complete?
+- What exact facts are required for that job?
+- Which useful facts do current sources or competitor pages include that our local data is missing?
 - What terms does a new or casual player need explained?
 - What are the main item groups, reward groups, mechanics, or exceptions?
 - How do players get, use, compare, trade, farm, craft, hatch, unlock, redeem, or calculate it?
@@ -174,6 +214,24 @@ Break down the natural groups that matter to players. Examples: normal food vs e
 
 Explain what is useful, collectible, easy to replace, hard to get, event-gated, premium, trade-only, worth saving, or mostly cosmetic.
 
+## Player usefulness gate
+
+For catalog and game-catalog pages, define the reader's real in-game job, the decision the page should support, and the answer a reader should have after finishing the page. If the page cannot make a player better at doing something, choosing something, finding something, buying something, upgrading something, or understanding a real mechanic, the topic or data is not ready.
+
+## Required fact matrix
+
+For catalog and game-catalog pages, make a small table that connects reader needs to facts, sources, local data, and public placement:
+
+| Reader need | Required facts | Source found? | In dataset/cards? | Public location |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+
+If a required fact is source-backed but missing from local data or card fields, mark the status `needs data update`. Do not continue by writing around the gap.
+
+## Competitor usefulness check
+
+When the page is meant to compete in search, compare at least the strongest useful source or competitor page. Record the practical questions they answer, facts they expose, sections that help, and gaps Bloxodes can improve. This is a coverage audit, not permission to copy structure or wording.
+
 ## Real examples from the data
 
 Use actual item names, groups, values, or rows from the local dataset or source material. Explain why each example matters.
@@ -188,11 +246,11 @@ Include:
 - source counts found during research, with dates or source names
 - rendered card count if the route exists
 - page title count if the page already exists
-- missing items, extra items, renamed items, duplicate items, or stale fields
+- missing items, extra items, renamed items, duplicate items, stale fields, missing required facts, or weak card fields
 - image coverage: cards with images, cards without images, images that exist locally but are not wired, and images that still need sourcing
 - data action: `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`
 
-If research finds more items than the local dataset, or finds that images are missing even though images are expected for the collection, stop here and make the data issue visible. Do not write public copy on top of stale data.
+If research finds more items than the local dataset, finds that images are missing even though images are expected for the collection, or finds source-backed useful facts that are missing from the dataset, stop here and make the data issue visible. Do not write public copy on top of stale data or thin fields.
 
 ## Common mistakes or confusion
 
@@ -206,6 +264,7 @@ Include:
 
 - primary reader goal
 - must-answer questions
+- how the required fact matrix will be satisfied in cards, body copy, FAQs, or route changes
 - final section order
 - parts to cut
 - where bullets, tables, or numbered steps should be used
@@ -231,7 +290,7 @@ Explain what the final page should teach, what it should skip, the tone to use, 
 
 If the `What this is`, `How it works in the game`, `Real examples from the data`, and `Reader questions and page outline` sections are weak, the research is not ready.
 
-For catalog and game-catalog work, do not move from research to final copy until the data state, title promise, proposed section style, and card data shape are confirmed. The proposal should name the dataset status, source-count agreement or disagreement, missing image count, recommended title, title promise, grouping axis, fields that belong on the cards, and raw fields that should not render. Choose the title, grouping, and card fields that have the clearest in-game meaning, not merely the fields that are easiest to sort.
+For catalog and game-catalog work, do not move from research to final copy until the player-usefulness gate, data state, title promise, proposed section style, and card data shape are confirmed. The proposal should name the primary player task, the required facts, dataset status, source-count agreement or disagreement, missing image count, recommended title, title promise, grouping axis, fields that belong on the cards, and raw fields that should not render. Choose the title, grouping, and card fields that have the clearest in-game meaning, not merely the fields that are easiest to sort.
 
 The research notes must keep `Status: needs data update` when the item list or image coverage is not ready. They must keep `Status: needs section confirmation` until the title, section, and card plan is approved. When approval happens, record it plainly, for example: `Title, data, and section plan confirmed by user on YYYY-MM-DD: title promises how to get materials, update missing materials, group by source route, and show source, drop chance, Magic Power, and farming stage.` Do not write vague lines such as `user requested final copy` as a substitute for confirmation.
 
@@ -239,9 +298,9 @@ The research notes must keep `Status: needs data update` when the item list or i
 
 For existing games, the data step is an audit first. For new games, the data step is a real build step.
 
-After research and approval, update the local dataset before writing public copy when the audit says it is needed. That can mean adding missing items, cleaning names and slugs, adding useful card fields, removing raw HTML, normalizing yes/no values into labeled fields, wiring local images, or creating a collector script when this game will need repeatable refreshes.
+After research and approval, update the local dataset before writing public copy when the audit says it is needed. That can mean adding missing items, cleaning names and slugs, adding useful card fields, adding source-backed prices, damage, locations, shops, odds, requirements, upgrade data, route notes, removing raw HTML, normalizing yes/no values into labeled fields, wiring local images, or creating a collector script when this game will need repeatable refreshes.
 
-Only continue to `final.json` after the local dataset is in the shape the page will use. The page title count, local dataset count, rendered card count, and expected source count should either match or have a written reason for the difference. If the title promises obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison, the outline must show which fields and sections will answer that promise.
+Only continue to `final.json` after the local dataset is in the shape the page will use. The page title count, local dataset count, rendered card count, expected source count, and required fact matrix should either match or have a written reason for the difference. If the title promises obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison, the outline must show which fields and sections will answer that promise.
 
 ## 4. Write First-Pass `final.json`
 
@@ -250,6 +309,7 @@ Only write `final.json` after `research-notes.md` is marked `ready to write`. Fo
 Before importing the final JSON, prove the render contract:
 
 - list the local dataset count, rendered card count, and title count
+- list the primary player task and required facts the page answers
 - state the approved title promise and how the body satisfies it
 - list the image count and missing image count when images matter
 - list the actual section labels the route will render
@@ -409,7 +469,17 @@ Never write event rows, current/upcoming/past status, exact live dates, current 
 
 Only include fields the page type owns. Leave unknown optional fields out instead of inventing values.
 
-Wiki page work should not rewrite catalog-page blurbs. A wiki workflow owns game-level copy such as `meta_description`, `tips_md`, and verified `controls_json`; related catalog summaries should already come from each catalog page's `wiki_md`. If those blurbs are weak, switch to the matching catalog or game-catalog workflow for that one catalog page instead of patching them inside the wiki pass.
+Wiki page work has a rendered-page contract. Before writing, map the visible wiki page areas to their source fields:
+
+- `wiki_pages` owns `title`, `seo_title`, `meta_description`, `tips_md`, `controls_json`, `cover_image`, publish fields, and the linked `universe_id`.
+- `roblox_universes.game_description_md` owns the visible game summary used by the wiki hub.
+- `roblox_universes` owns live game metadata such as creator, genre, visits, favorites, dates, device support, and media.
+- Related catalog sections come from catalog pages and their `wiki_md` blurbs.
+- Codes, events, tools, articles, checklists, quizzes, media, badges, passes, servers, and other developer games are related sections that must be checked for existence.
+
+If the visible game summary is empty or weak, the wiki workflow must update `roblox_universes.game_description_md` or record why it is intentionally left blank. Do not call a wiki complete when only `wiki_pages` fields are filled but the rendered page is still thin.
+
+Wiki page work should not rewrite catalog-page blurbs. A wiki workflow owns game-level copy such as `meta_description`, `tips_md`, verified `controls_json`, and any needed companion `roblox_universes.game_description_md`; related catalog summaries should already come from each catalog page's `wiki_md`. If those blurbs are weak, switch to the matching catalog or game-catalog workflow for that one catalog page instead of patching them inside the wiki pass.
 
 For catalog-style pages, `description_json` is the section-level context layer when item cards are divided into meaningful sections. Keep each entry short, usually one to three useful sentences, and place the explanation near the card section it supports. Do not repeat those same notes later in `description_md`.
 
@@ -464,7 +534,7 @@ The most important v2 blocker:
 
 If a normal player can ask "what does that mean?" after a sentence, the sentence fails.
 
-For catalog and game-catalog pages, the final edit also fails if section confirmation, render-contract proof, FLOW-pass rewrite, local DB readback, or rendered-page proof is missing. A page is not done because `final.json` exists. It is done only after local Supabase contains the updated fields and the local page visibly renders the intended intro, section notes, and page-level Markdown.
+For catalog and game-catalog pages, the final edit also fails if section confirmation, render-contract proof, FLOW-pass rewrite, local DB readback, or rendered-page proof is missing. For wiki pages, final edit fails if the rendered field contract, companion universe description decision, related-section check, local DB readback, or rendered-page proof is missing. A page is not done because `final.json` exists. It is done only after local Supabase contains the updated fields and the local page visibly renders the intended copy and related sections.
 
 Bad:
 
@@ -501,6 +571,17 @@ Check the rendered page, not just the JSON:
 - FAQ
 - mobile readability
 - whether the copy feels like it teaches the topic
+
+For wiki pages, also check:
+
+- title, meta description, and canonical metadata
+- visible game summary from `roblox_universes.game_description_md`
+- verified controls or the intentional absence of controls
+- practical gameplay tips
+- related catalog sections and catalog-card images when catalogs exist
+- codes, events, tools, articles, checklists, quizzes, media, badges, passes, servers, and developer sections that should appear or be absent based on local data
+
+When the user asks to push wiki or game-catalog pages to production, switch to the production promotion checklist in `agents/wiki-catalog-workflow.md`. Do not call the work complete after the database write alone. Production completion requires the production universe row, existing production page audit, production dry-run, ordered wiki-then-catalog push, production DB readback, a git push/deploy of only the current game's required data/assets/config/script changes, up to 5 minutes of live-page polling for app revalidation, and live URL/content/image proof.
 
 ## 9. Scale Only After Approval
 

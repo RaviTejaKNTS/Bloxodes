@@ -54,6 +54,7 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
 ## Rules
 
 - Treat local data files as content sources, not ad hoc dumps. Keep filenames and object shapes stable once routes depend on them.
+- For wiki/catalog datasets, include the source-backed fields required by the page's player-usefulness gate, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability when those facts drive player decisions.
 - When changing a dataset, update the parser/helper in `src/lib/*` or the route-family helper in `src/app/(site)`.
 - If a dataset powers a public route, verify SEO text, pagination, and revalidation behavior still make sense after the change.
 - If a `quiz.json` file powers a public quiz route, validate the `QuizData` shape, difficulty counts, option IDs, answer IDs, and rendered `/quizzes/<slug>` page after editing.

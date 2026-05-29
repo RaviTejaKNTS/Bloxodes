@@ -35,5 +35,6 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 
 - Update the closest scoped `AGENTS.md` when behavior or workflow changes.
 - Update these `agents/*.md` files when the repo surface area changes: new routes, scripts, datasets, or major architecture moves.
+- For game wiki/catalog workflow changes, keep `agents/wiki-catalog-workflow.md`, `agents/content/PROCESS.md`, matching page-type docs, todo templates, and `.agents/skills/*` prompts aligned so agents inherit the same player-usefulness gate.
 - Treat this folder as the discovery layer and the scoped `AGENTS.md` files as the operating layer.
 - For workspace-level changes, keep root `package.json`, root `Dockerfile`, `.dockerignore`, and Dokploy notes aligned so production stays web-only unless intentionally expanded.

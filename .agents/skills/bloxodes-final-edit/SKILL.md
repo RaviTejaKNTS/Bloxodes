@@ -39,6 +39,8 @@ For catalog and game-catalog pages, confirm that `research-notes.md` records the
 
 Also confirm the data and image audit. `research-notes.md` should show local item count, source count, rendered card/table count, title count, image coverage, missing or extra items, and the data action. If research found missing items or expected images and the gap was not fixed or explicitly accepted, the content is not ready.
 
+Also confirm the player-usefulness gate and required fact matrix. `research-notes.md` should state the primary player task, the decisions the page supports, the source-backed facts required for those decisions, whether local data/cards include them, and where the finished page answers them. If research found source-backed prices, stats, shops, upgrade steps, chances, requirements, locations, or route-order facts that are central to the player task and they were not added or explicitly marked unavailable, the content is not ready.
+
 Also confirm the rendered section and card contracts. The `description_json` keys must match the sections the route actually renders, not the sections the writer hopes it renders. If the route groups by `rarity`, `Other`, or another field while the copy is written for `Walls`, `Floors`, `Common`, `Legendary`, or another section set, the content is not ready. If the cards show raw long descriptions, raw `pros`/`cons`, nested objects, source HTML, vague meta text, or unexplained yes/no values, the content is not ready either.
 
 Count contracts matter too. Count-based titles should match local data and rendered cards unless the notes explain why they intentionally differ. Intent contracts matter as much as counts: if the title promises `how to get`, `locations`, `drops`, `chances`, `brewing`, `crafting`, `value`, `effects`, or another specific answer, the page must deliver that answer in the intro, cards, `description_md`, `how_it_works_md`, and FAQ where appropriate.
@@ -55,6 +57,7 @@ Do not mark the content ready unless:
 - `research-notes.md` has the reader goal, sources/data checked, confirmed facts, and unknowns
 - `research-notes.md` explains the topic in plain language before implementation notes
 - catalog or game-catalog notes contain a resolved data and image audit
+- catalog or game-catalog notes contain a resolved player-usefulness gate and required fact matrix
 - catalog or game-catalog notes contain an explicit user confirmation line for the title promise, card section style, and card data shape
 - any approved dataset or image update has been completed before final copy is imported
 - the visible title and `seo_title` are unique, well-defined, count-accurate when they include a count, and fully supported by the page body

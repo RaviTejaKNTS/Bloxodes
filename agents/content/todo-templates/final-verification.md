@@ -14,6 +14,7 @@ Workspace: same folder as the page being verified
 
 - [ ] Confirm `todo.md`, `research-notes.md`, and `final.json` exist when the workflow requires them.
 - [ ] Confirm unresolved facts are recorded instead of hidden in public copy.
+- [ ] For catalog and game-catalog pages, confirm the player-usefulness gate and required fact matrix are resolved.
 - [ ] Confirm FLOW pass happened for catalog, game-catalog, article, and tool body copy.
 - [ ] Confirm the page-specific todo has not skipped approval or data gates.
 
@@ -25,7 +26,7 @@ Workspace: same folder as the page being verified
 
 ## Data And Route Gate
 
-- [ ] For catalogs, confirm data/image audit, user-confirmed title promise, section plan, card fields, and count contracts.
+- [ ] For catalogs, confirm data/image audit, player-usefulness gate, required fact matrix, user-confirmed title promise, section plan, card fields, and count contracts.
 - [ ] For codes, confirm no manual code rows and correct RobloxDen/Beebom source fields.
 - [ ] For events, confirm no manual timeline rows, live status/date/reward claims, or stale freshness wording.
 - [ ] For articles, confirm author handling and edited cover image when required.

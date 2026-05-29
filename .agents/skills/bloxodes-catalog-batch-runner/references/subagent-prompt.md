@@ -50,13 +50,19 @@ Phase 1: planning only
 1. Copy agents/content/todo-templates/game-catalog.md to your workspace as todo.md.
 2. Create or update research-notes.md.
 3. Research this one collection deeply enough to explain it as a game system.
-4. Audit local data, source count, item count, rendered/title count when available, image coverage, route/config state, and row state.
-5. Propose the data action, title promise, grouping axis, card fields, image plan, route/config plan, public content plan, and risks.
-6. Stop. Do not write final.json, update datasets/images, import Supabase rows, or edit shared files until I approve the plan.
+4. Complete the player-usefulness gate: identify the primary player task, decisions supported, and what the reader should be able to do in-game after reading.
+5. Build the required fact matrix: reader need, required facts, source status, local data/card status, and public placement. If source-backed useful facts are missing locally, mark `needs dataset update`.
+6. Run a competitor/source usefulness check when SEO or traffic potential matters. Record useful questions, facts, sections, and where Bloxodes is weaker or stronger.
+7. Audit local data, source count, item count, rendered/title count when available, image coverage, route/config state, row state, and required fact coverage.
+8. Propose the data action, title promise, grouping axis, card fields, image plan, route/config plan, public content plan, and risks.
+9. Stop. Do not write final.json, update datasets/images, import Supabase rows, or edit shared files until I approve the plan.
 
 Your Phase 1 response must include:
 - status: ready for approval | needs revision | blocked
 - durable scope decision and exclusions
+- primary player task and what the reader can do after reading
+- required fact matrix with source/local/public placement status
+- competitor/source usefulness coverage when relevant
 - source list and confidence
 - local/source/rendered/title counts, or what still needs checking
 - image coverage and image-quality plan

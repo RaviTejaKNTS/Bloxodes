@@ -38,9 +38,9 @@ Workspace: `tmp/content-workspace/<game-slug>/discovery/`
 - [ ] Research durable core in-game item collections first.
 - [ ] Exclude current season tracks, one-off event rewards, ranked season rewards, generic update summaries, servers, gamepasses, badges, developer products, and platform metadata.
 - [ ] Mark UGC only as a special catalog exception when the game has meaningful UGC items.
-- [ ] For each catalog idea, record route, code, source count, local data state, image needs, grouping axis, card fields, and status.
+- [ ] For each catalog idea, record route, code, source count, local data state, image needs, primary player task, required facts, missing useful facts, grouping axis, card fields, and status.
 - [ ] Separate core catalogs from later/data-heavy catalogs, UGC exceptions, second-pass ideas, and `do not create` ideas.
-- [ ] Mark which catalog should become the first gold-standard page and why.
+- [ ] Mark which catalog should become the first gold-standard page and why, including why its data can satisfy the player-usefulness gate.
 
 ## Second-Pass Page Opportunities
 
@@ -52,7 +52,7 @@ Workspace: `tmp/content-workspace/<game-slug>/discovery/`
 
 ## Finish
 
-- [ ] Write a ranked two-pass build order and name the first gold-standard catalog/data step.
+- [ ] Write a ranked two-pass build order and name the first gold-standard catalog/data/useful-facts step.
 - [ ] Record sources checked and unresolved facts.
 - [ ] Include next action for every `create`, `update`, and `blocked` recommendation.
 - [ ] Return a concise summary with the research notes path.
