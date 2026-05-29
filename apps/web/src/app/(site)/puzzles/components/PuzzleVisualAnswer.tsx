@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 
 type AnyRecord = Record<string, unknown>;
@@ -626,50 +627,123 @@ function SpellingBeeVisual({ payload }: { payload: AnyRecord }) {
   );
 }
 
+function asLetterBoxedSides(value: unknown) {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((side) => {
+      if (Array.isArray(side)) return side.map((letter) => String(letter ?? "").trim().toUpperCase()).join("");
+      return String(side ?? "").trim().toUpperCase();
+    })
+    .map((side) => side.replace(/[^A-Z]/g, ""))
+    .filter(Boolean);
+}
+
 function letterPosition(sideIndex: number, letterIndex: number) {
-  const step = 50;
-  const offset = 50 + letterIndex * step;
-  if (sideIndex === 0) return { x: offset, y: 0 };
-  if (sideIndex === 1) return { x: 200, y: offset };
-  if (sideIndex === 2) return { x: 150 - letterIndex * step, y: 200 };
-  return { x: 0, y: 150 - letterIndex * step };
+  const min = 72;
+  const max = 288;
+  const offset = 126 + letterIndex * 54;
+  if (sideIndex === 0) return { x: offset, y: min };
+  if (sideIndex === 1) return { x: max, y: offset };
+  if (sideIndex === 2) return { x: 234 - letterIndex * 54, y: max };
+  return { x: min, y: 234 - letterIndex * 54 };
 }
 
 function LetterBoxedVisual({ payload }: { payload: AnyRecord }) {
-  const solution = asStringArray(payload.solution);
-  const sides = asStringArray(payload.sides);
-  const [revealed, setRevealed] = useState(0);
-  const positions = new Map<string, { x: number; y: number }>();
-  sides.forEach((side, sideIndex) => side.split("").forEach((letter, letterIndex) => positions.set(letter, letterPosition(sideIndex, letterIndex))));
-  const paths = solution.map((word) => word.toUpperCase().split("").map((letter) => positions.get(letter)).filter((point): point is { x: number; y: number } => Boolean(point)));
+  const solution = asStringArray(payload.solution).map((word) => word.toUpperCase());
+  const sides = asLetterBoxedSides(payload.sides);
+  const [activeWord, setActiveWord] = useState<number | null>(null);
+  const [animationSeed, setAnimationSeed] = useState(0);
+  const positions = useMemo(() => {
+    const map = new Map<string, { x: number; y: number; sideIndex: number }>();
+    sides.forEach((side, sideIndex) => {
+      side.split("").forEach((letter, letterIndex) => map.set(letter, { ...letterPosition(sideIndex, letterIndex), sideIndex }));
+    });
+    return map;
+  }, [sides]);
+  const paths = useMemo(
+    () =>
+      solution.map((word) => ({
+        word,
+        points: word
+          .split("")
+          .map((letter) => positions.get(letter))
+          .filter((point): point is { x: number; y: number; sideIndex: number } => Boolean(point))
+      })),
+    [positions, solution]
+  );
+  const routeColors = ["#e33555", "#f6c945", "#35a7c9", "#8d63d8"];
+
+  function toggleWord(index: number) {
+    setActiveWord((current) => (current === index ? null : index));
+    setAnimationSeed((value) => value + 1);
+  }
+
+  if (!solution.length || sides.length < 4) {
+    return <WordSlots answer={solution.join(" ") || "Letter Boxed answer saved"} />;
+  }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
-      <button type="button" className="text-left" onClick={() => setRevealed((value) => nextValue(value, solution.length))} aria-label="Draw next Letter Boxed solution path">
-        <svg viewBox="-30 -30 260 260" className="h-60 w-60 overflow-visible rounded-2xl bg-surface p-4">
-          <rect x="0" y="0" width="200" height="200" fill="none" stroke="rgb(var(--color-border))" strokeWidth="2" />
-          {paths.slice(0, revealed).map((path, index) => (
-            <polyline key={`${solution[index]}-${index}`} points={path.map((point) => `${point.x},${point.y}`).join(" ")} fill="none" stroke={index === 0 ? "rgb(var(--color-accent))" : "#f6c945"} strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" opacity="0.85" />
-          ))}
+    <div className="grid gap-5 lg:grid-cols-[minmax(18rem,24rem)_minmax(0,1fr)] lg:items-center">
+      <style>{`@keyframes letter-boxed-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}.letter-boxed-path{stroke-dasharray:1;animation:letter-boxed-draw .75s ease-out both}`}</style>
+      <div className="mx-auto block w-full max-w-[24rem]" aria-label="Letter Boxed answer board">
+        <svg viewBox="0 0 360 360" className="h-auto w-full overflow-visible" role="img" aria-label="Letter Boxed board with revealable solution paths">
+          <rect x="72" y="72" width="216" height="216" rx="6" fill="rgb(var(--color-surface))" stroke="rgb(var(--color-border))" strokeWidth="3" />
+          {paths.map((path, index) => {
+            if (activeWord !== index || path.points.length < 2) return null;
+            const color = routeColors[index % routeColors.length] ?? "rgb(var(--color-accent))";
+            return (
+              <polyline
+                key={`${path.word}-${index}-${animationSeed}`}
+                className="letter-boxed-path"
+                points={path.points.map((point) => `${point.x},${point.y}`).join(" ")}
+                fill="none"
+                stroke={color}
+                strokeWidth="6"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                opacity="0.9"
+                pathLength={1}
+                style={{ animationDuration: `${Math.max(500, (path.points.length - 1) * 250)}ms` }}
+              />
+            );
+          })}
           {sides.map((side, sideIndex) =>
             side.split("").map((letter, letterIndex) => {
               const point = letterPosition(sideIndex, letterIndex);
+              const isUsed = activeWord !== null && paths[activeWord]?.word.includes(letter);
               return (
                 <g key={`${letter}-${sideIndex}-${letterIndex}`}>
-                  <circle cx={point.x} cy={point.y} r="15" fill="rgb(var(--color-background))" stroke="rgb(var(--color-border))" />
-                  <text x={point.x} y={point.y + 5} textAnchor="middle" className="fill-foreground text-sm font-bold">{letter}</text>
+                  <circle cx={point.x} cy={point.y} r="22" fill={isUsed ? "rgb(var(--color-accent))" : "rgb(var(--color-background))"} stroke="rgb(var(--color-border))" strokeWidth="2.5" />
+                  <text x={point.x} y={point.y + 7} textAnchor="middle" fill={isUsed ? "rgb(var(--color-accent-foreground))" : "rgb(var(--color-foreground))"} className="text-xl font-black">{letter}</text>
                 </g>
               );
             })
           )}
         </svg>
-      </button>
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Solution chain</p>
-        <ol className="list-decimal space-y-1 pl-5 text-lg font-semibold text-foreground">
-          {solution.map((word, index) => <li key={word}>{index < revealed ? word : `Word ${index + 1}`}</li>)}
-        </ol>
-        {asNumber(payload.par) ? <p className="mt-2 text-sm text-muted">Par: {asNumber(payload.par)}</p> : null}
+      </div>
+      <div className="space-y-4">
+        <div className="grid gap-2 sm:grid-cols-2">
+          {solution.map((word, index) => {
+            const isVisible = activeWord === index;
+            return (
+              <button
+                key={`${word}-${index}`}
+                type="button"
+                onClick={() => toggleWord(index)}
+                aria-pressed={isVisible}
+                className={[
+                  "min-h-12 rounded-md px-4 py-3 text-left text-sm font-extrabold uppercase tracking-wide transition",
+                  isVisible
+                    ? "bg-accent text-accent-foreground shadow-sm"
+                    : "bg-surface text-muted ring-1 ring-border hover:text-foreground"
+                ].join(" ")}
+              >
+                <span className="block text-[0.65rem] font-bold uppercase tracking-[0.16em] opacity-75">Word {index + 1}</span>
+                <span className="block truncate">{isVisible ? word : "Reveal route"}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
@@ -1325,49 +1399,345 @@ function PipsVisual({ payload }: { payload: AnyRecord }) {
   );
 }
 
+function zipEdgeKey(from: number, to: number) {
+  return [from, to].sort((a, b) => a - b).join("-");
+}
+
+function zipWallEdges(value: unknown, gridSize: number) {
+  const edges = new Set<string>();
+  if (!Array.isArray(value) || gridSize <= 0) return edges;
+
+  function addDirectionalWall(cell: number, direction: string) {
+    const normalized = direction.toLowerCase();
+    const { row, col } = coordFromCell(cell, gridSize);
+    let neighbor: number | null = null;
+    if ((normalized === "right" || normalized === "r" || normalized === "east") && col < gridSize - 1) neighbor = cell + 1;
+    if ((normalized === "left" || normalized === "l" || normalized === "west") && col > 0) neighbor = cell - 1;
+    if ((normalized === "down" || normalized === "bottom" || normalized === "d" || normalized === "south") && row < gridSize - 1) neighbor = cell + gridSize;
+    if ((normalized === "up" || normalized === "top" || normalized === "u" || normalized === "north") && row > 0) neighbor = cell - gridSize;
+    if (neighbor !== null) edges.add(zipEdgeKey(cell, neighbor));
+  }
+
+  value.forEach((wall) => {
+    if (Array.isArray(wall)) {
+      const first = asNumber(wall[0]);
+      const second = asNumber(wall[1]);
+      if (first !== null && second !== null) edges.add(zipEdgeKey(first, second));
+      return;
+    }
+
+    const row = asRecord(wall);
+    const from = asNumber(row.from ?? row.source ?? row.cell ?? row.cellIndex ?? row.start);
+    const to = asNumber(row.to ?? row.target ?? row.neighbor ?? row.end);
+    if (from !== null && to !== null) {
+      edges.add(zipEdgeKey(from, to));
+      return;
+    }
+
+    const direction = asString(row.direction ?? row.side ?? row.wall);
+    if (from !== null && direction) addDirectionalWall(from, direction);
+  });
+
+  return edges;
+}
+
 function ZipVisual({ payload }: { payload: AnyRecord }) {
   const gridSize = asNumber(payload.gridSize) ?? 0;
   const solution = asNumberArray(payload.solution);
   const waypoints = asNumberArray(payload.orderedSequence);
-  const waypointSet = new Set(waypoints);
-  const waypointIndex = new Map(waypoints.map((cell, index) => [cell, index + 1]));
-  const [progress, setProgress] = useState(0);
-  const points = solution.slice(0, progress).map((cell) => coordFromCell(cell, gridSize));
-  const step = Math.max(3, Math.ceil(solution.length / 8));
+  const [revealed, setRevealed] = useState(false);
+  const cell = 64;
+  const pad = 20;
+  const stroke = 52;
+  const waypointRadius = 18;
+  const svgSize = gridSize * cell + pad * 2;
+  const segmentColors = ["#b42ac3", "#883bc4", "#5252c7", "#0d69df", "#1e8bd6", "#2aa778"];
+  const cellCenter = (cellIndex: number) => {
+    const { row, col } = coordFromCell(cellIndex, gridSize);
+    return { x: pad + col * cell + cell / 2, y: pad + row * cell + cell / 2 };
+  };
+  const cellToStep = useMemo(() => {
+    const map = new Map<number, number>();
+    solution.forEach((cellIndex, step) => map.set(cellIndex, step));
+    return map;
+  }, [solution]);
+  const segments = useMemo(() => {
+    const waypointBreaks = waypoints
+      .map((cellIndex) => cellToStep.get(cellIndex) ?? -1)
+      .filter((step) => step >= 0)
+      .sort((a, b) => a - b);
+    const breaks = [...new Set([0, ...waypointBreaks, solution.length - 1])].sort((a, b) => a - b);
+    let delay = 0;
+    return breaks.slice(0, -1).map((start, index) => {
+      const end = breaks[index + 1] ?? start;
+      const cells = solution.slice(start, end + 1);
+      const duration = Math.max(100, Math.max(0, cells.length - 1) * 100);
+      const segment = { cells, delay, duration };
+      delay += duration;
+      return segment;
+    }).filter((segment) => segment.cells.length >= 2);
+  }, [cellToStep, solution, waypoints]);
   if (!gridSize || !solution.length) return <WordSlots answer="Path data unavailable" />;
   return (
-    <button type="button" className="relative inline-block rounded-2xl bg-[#eef3f8] p-3 text-left" onClick={() => setProgress((value) => nextValue(value, solution.length, step))}>
-      <svg className="pointer-events-none absolute left-3 top-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)]" viewBox={`0 0 ${gridSize} ${gridSize}`} preserveAspectRatio="none" aria-hidden>
-        <polyline points={points.map((point) => `${point.col + 0.5},${point.row + 0.5}`).join(" ")} fill="none" stroke="#0a66c2" strokeWidth="0.16" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <div className="relative grid gap-1" style={{ gridTemplateColumns: `repeat(${gridSize}, minmax(0, 2.4rem))` }}>
-        {Array.from({ length: gridSize * gridSize }, (_, cell) => (
-          <span key={cell} className="z-10 flex aspect-square items-center justify-center rounded-md bg-white text-xs font-bold text-[#0a66c2]">
-            {waypointSet.has(cell) ? waypointIndex.get(cell) : ""}
-          </span>
-        ))}
+    <div className="mx-auto max-w-[24rem] space-y-4">
+      <style>{`@keyframes zip-path-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}@keyframes zip-waypoint-pop{0%{opacity:.35;transform:scale(.82)}100%{opacity:1;transform:scale(1)}}.zip-path-line{stroke-dasharray:1;animation:zip-path-draw var(--zip-duration) ease-out both}.zip-waypoint{animation:zip-waypoint-pop .18s ease-out both;transform-box:fill-box;transform-origin:center}`}</style>
+      <button
+        type="button"
+        onClick={() => setRevealed((value) => !value)}
+        aria-pressed={revealed}
+        className="relative block w-full rounded-md bg-transparent p-0 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/70"
+        aria-label={revealed ? "Hide LinkedIn Zip path" : "Reveal LinkedIn Zip path"}
+      >
+        <svg viewBox={`0 0 ${svgSize} ${svgSize}`} className="h-auto w-full overflow-visible" role="img" aria-label="LinkedIn Zip answer board">
+          {Array.from({ length: gridSize * gridSize }, (_, index) => {
+            const { x, y } = cellCenter(index);
+            return (
+              <rect
+                key={`cell-${index}`}
+                x={x - cell / 2}
+                y={y - cell / 2}
+                width={cell}
+                height={cell}
+                fill="transparent"
+                stroke="rgb(var(--color-border))"
+                strokeOpacity="0.82"
+                strokeWidth="2"
+              />
+            );
+          })}
+          {revealed
+            ? segments.map((segment, index) => (
+                <polyline
+                  key={`zip-segment-${index}-${revealed}`}
+                  className="zip-path-line"
+                  points={segment.cells.map((cellIndex) => {
+                    const { x, y } = cellCenter(cellIndex);
+                    return `${x},${y}`;
+                  }).join(" ")}
+                  fill="none"
+                  stroke={segmentColors[index % segmentColors.length]}
+                  strokeWidth={stroke}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  pathLength={1}
+                  style={{ "--zip-duration": `${segment.duration}ms`, animationDelay: `${segment.delay}ms` } as CSSProperties}
+                />
+              ))
+            : null}
+          {waypoints.map((cellIndex, index) => {
+            const { x, y } = cellCenter(cellIndex);
+            return (
+              <g key={`zip-waypoint-${cellIndex}-${index}`} className={revealed ? "zip-waypoint" : ""}>
+                <circle cx={x} cy={y} r={waypointRadius} fill="#050505" stroke="#2b2b2b" strokeWidth="2" />
+                <text x={x} y={y + 1} textAnchor="middle" dominantBaseline="middle" fontSize="15" fontWeight="800" fill="#ffffff">
+                  {index + 1}
+                </text>
+              </g>
+            );
+          })}
+        </svg>
+      </button>
+      <div className="flex justify-center">
+        <button
+          type="button"
+          onClick={() => setRevealed((value) => !value)}
+          className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition hover:bg-accent/90"
+        >
+          {revealed ? "Hide path" : "Reveal path"}
+        </button>
       </div>
-    </button>
+    </div>
   );
 }
+
+const QUEENS_REGION_COLORS = [
+  "#e8a0bf",
+  "#a0c4e8",
+  "#a0e8b4",
+  "#e8d4a0",
+  "#c4a0e8",
+  "#e8a0a0",
+  "#a0e8e0",
+  "#e8c8a0",
+  "#b4e8a0",
+  "#d4a0e8"
+];
 
 function QueensVisual({ payload }: { payload: AnyRecord }) {
   const gridSize = asNumber(payload.gridSize) ?? 0;
   const colorGrid = asNumberArray(payload.colorGrid);
   const solution = Array.isArray(payload.solution) ? payload.solution.map(asRecord) : [];
-  const [revealed, setRevealed] = useState(0);
-  const queens = new Set(solution.slice(0, revealed).map((entry) => `${asNumber(entry.row) ?? -1},${asNumber(entry.col) ?? -1}`));
-  const colors = ["bg-[#f5a6aa]", "bg-[#9ed7f5]", "bg-[#a9d79e]", "bg-[#f3dc83]", "bg-[#c9a7e8]", "bg-[#f0b37e]"];
+  const queensByRegion = useMemo(() => {
+    const map = new Map<number, { row: number; col: number }>();
+    solution.forEach((entry) => {
+      const row = asNumber(entry.row);
+      const col = asNumber(entry.col);
+      if (row === null || col === null || gridSize <= 0) return;
+      const region = colorGrid[row * gridSize + col];
+      if (region !== undefined) map.set(region, { row, col });
+    });
+    return map;
+  }, [colorGrid, gridSize, solution]);
+  const regions = useMemo(() => [...new Set(colorGrid)].sort((a, b) => a - b), [colorGrid]);
+  const [revealedRegions, setRevealedRegions] = useState<Set<number>>(() => new Set());
+  const allVisible = regions.length > 0 && revealedRegions.size >= regions.length;
+  const boardLines = useMemo(() => {
+    const lines: Array<{ x1: number; y1: number; x2: number; y2: number }> = [];
+    if (gridSize <= 0) return lines;
+    for (let row = 0; row < gridSize; row += 1) {
+      for (let col = 0; col < gridSize; col += 1) {
+        const region = colorGrid[row * gridSize + col];
+        if (col < gridSize - 1 && colorGrid[row * gridSize + col + 1] !== region) {
+          lines.push({ x1: col + 1, y1: row, x2: col + 1, y2: row + 1 });
+        }
+        if (row < gridSize - 1 && colorGrid[(row + 1) * gridSize + col] !== region) {
+          lines.push({ x1: col, y1: row + 1, x2: col + 1, y2: row + 1 });
+        }
+      }
+    }
+    return lines;
+  }, [colorGrid, gridSize]);
+
+  function toggleRegion(region: number) {
+    setRevealedRegions((current) => {
+      const next = new Set(current);
+      if (next.has(region)) next.delete(region);
+      else next.add(region);
+      return next;
+    });
+  }
+
+  function revealAll() {
+    setRevealedRegions(new Set(regions));
+  }
+
+  function hideAll() {
+    setRevealedRegions(new Set());
+  }
+
   if (!gridSize) return <WordSlots answer="Grid data unavailable" />;
   return (
-    <button type="button" className="inline-grid gap-0.5 rounded-2xl bg-surface p-3 text-left" style={{ gridTemplateColumns: `repeat(${gridSize}, minmax(0, 2.4rem))` }} onClick={() => setRevealed((value) => nextValue(value, solution.length))}>
-      {Array.from({ length: gridSize * gridSize }, (_, index) => {
-        const row = Math.floor(index / gridSize);
-        const col = index % gridSize;
-        const tone = (colorGrid[index] ?? 0) % colors.length;
-        return <span key={index} className={`flex aspect-square items-center justify-center rounded-[0.2rem] text-lg font-black text-[#1f1f1f] transition-transform ${colors[tone]}`}>{queens.has(`${row},${col}`) ? "♛" : ""}</span>;
-      })}
-    </button>
+    <div className="mx-auto max-w-lg space-y-4">
+      <div className="relative aspect-square w-full overflow-hidden rounded-md border-[5px] border-[#050505] bg-[#050505] shadow-sm" aria-label="LinkedIn Queens answer board">
+        <svg className="absolute inset-0 h-full w-full" viewBox={`0 0 ${gridSize} ${gridSize}`} role="img" aria-label="LinkedIn Queens answer board">
+          {Array.from({ length: gridSize * gridSize }, (_, index) => {
+            const row = Math.floor(index / gridSize);
+            const col = index % gridSize;
+            const region = colorGrid[index] ?? 0;
+            const color = QUEENS_REGION_COLORS[region % QUEENS_REGION_COLORS.length] ?? QUEENS_REGION_COLORS[0];
+            return <rect key={`queen-cell-${index}`} x={col} y={row} width="1" height="1" fill={color} stroke="#050505" strokeWidth="0.018" />;
+          })}
+          {boardLines.map((line, index) => (
+            <line key={`region-border-${index}`} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="#050505" strokeWidth="0.055" strokeLinecap="square" />
+          ))}
+          {Array.from(queensByRegion.entries()).map(([region, queen]) => {
+            if (!revealedRegions.has(region)) return null;
+            return (
+              <g
+                key={`queen-${region}`}
+                transform={`translate(${queen.col + 0.5} ${queen.row + 0.5}) scale(0.68)`}
+                className="animate-in fade-in zoom-in-75"
+              >
+                <circle cx="-0.25" cy="-0.14" r="0.032" fill="#050505" />
+                <circle cx="-0.12" cy="-0.24" r="0.032" fill="#050505" />
+                <circle cx="0" cy="-0.13" r="0.032" fill="#050505" />
+                <circle cx="0.12" cy="-0.24" r="0.032" fill="#050505" />
+                <circle cx="0.25" cy="-0.14" r="0.032" fill="#050505" />
+                <path
+                  d="M-0.30 -0.07 L-0.20 0.18 H0.20 L0.30 -0.07 L0.13 0.08 L0 -0.12 L-0.13 0.08 Z"
+                  fill="#050505"
+                  stroke="#050505"
+                  strokeWidth="0.026"
+                  strokeLinejoin="round"
+                />
+                <path d="M-0.22 0.23 H0.22 V0.29 H-0.22 Z M-0.29 0.34 H0.29 V0.41 H-0.29 Z" fill="#050505" />
+              </g>
+            );
+          })}
+        </svg>
+        {Array.from({ length: gridSize * gridSize }, (_, index) => {
+          const row = Math.floor(index / gridSize);
+          const col = index % gridSize;
+          const region = colorGrid[index] ?? 0;
+          const isVisible = revealedRegions.has(region);
+          return (
+            <button
+              key={`queen-hit-${index}`}
+              type="button"
+              onClick={() => toggleRegion(region)}
+              aria-pressed={isVisible}
+              aria-label={isVisible ? `Hide queen in region ${region + 1}` : `Reveal queen in region ${region + 1}`}
+              className="absolute z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              style={{
+                left: `${(col / gridSize) * 100}%`,
+                top: `${(row / gridSize) * 100}%`,
+                width: `${100 / gridSize}%`,
+                height: `${100 / gridSize}%`
+              }}
+            />
+          );
+        })}
+      </div>
+      <div className="flex justify-center gap-2">
+        <button
+          type="button"
+          onClick={revealAll}
+          disabled={allVisible}
+          className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Reveal all
+        </button>
+        <button
+          type="button"
+          onClick={hideAll}
+          disabled={!revealedRegions.size}
+          className="inline-flex items-center justify-center rounded-md border border-border bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-card disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Hide all
+        </button>
+      </div>
+    </div>
+  );
+}
+
+type TangoEdge = { startIdx: number; endIdx: number; isEqual: boolean };
+
+function asTangoEdges(value: unknown): TangoEdge[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((entry) => {
+      const row = asRecord(entry);
+      const startIdx = asNumber(row.startIdx ?? row.start_idx ?? row.start);
+      const endIdx = asNumber(row.endIdx ?? row.end_idx ?? row.end);
+      if (startIdx === null || endIdx === null) return null;
+      return { startIdx, endIdx, isEqual: Boolean(row.isEqual ?? row.is_equal) };
+    })
+    .filter((edge): edge is TangoEdge => edge !== null);
+}
+
+function TangoSymbol({ value }: { value: string }) {
+  const isSun = value === "ONE";
+  if (isSun) {
+    return (
+      <svg viewBox="0 0 48 48" className="h-[68%] w-[68%]" aria-hidden>
+        <circle cx="24" cy="24" r="11" fill="#f6c445" />
+        {Array.from({ length: 8 }, (_, index) => {
+          const angle = (Math.PI * 2 * index) / 8;
+          const x1 = 24 + Math.cos(angle) * 16;
+          const y1 = 24 + Math.sin(angle) * 16;
+          const x2 = 24 + Math.cos(angle) * 20;
+          const y2 = 24 + Math.sin(angle) * 20;
+          return <line key={index} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#f6c445" strokeWidth="4" strokeLinecap="round" />;
+        })}
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 48 48" className="h-[68%] w-[68%]" aria-hidden>
+      <circle cx="24" cy="24" r="16" fill="#6aa6ee" />
+      <circle cx="31" cy="18" r="16" fill="rgb(var(--color-background))" />
+    </svg>
   );
 }
 
@@ -1375,21 +1745,90 @@ function TangoVisual({ payload }: { payload: AnyRecord }) {
   const gridSize = asNumber(payload.gridSize) ?? 0;
   const solution = asStringArray(payload.solution);
   const presets = new Set(asNumberArray(payload.presetCellIdxes));
-  const fillOrder = solution.map((_, index) => index).filter((index) => !presets.has(index));
-  const [revealed, setRevealed] = useState(0);
-  const visible = new Set([...Array.from(presets), ...fillOrder.slice(0, revealed)]);
+  const revealableIndexes = useMemo(() => solution.map((value, index) => (value && !presets.has(index) ? index : -1)).filter((index) => index >= 0), [presets, solution]);
+  const [revealedCells, setRevealedCells] = useState<Set<number>>(() => new Set());
+  const edges = useMemo(() => asTangoEdges(payload.edges), [payload.edges]);
+  const allVisible = revealableIndexes.length > 0 && revealedCells.size >= revealableIndexes.length;
+
+  function toggleCell(index: number) {
+    if (presets.has(index)) return;
+    setRevealedCells((current) => {
+      const next = new Set(current);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  }
+
+  function revealAll() {
+    setRevealedCells(new Set(revealableIndexes));
+  }
+
+  function hideAll() {
+    setRevealedCells(new Set());
+  }
+
   if (!gridSize) return <WordSlots answer="Grid data unavailable" />;
   return (
-    <button type="button" className="inline-grid gap-1 rounded-2xl bg-[#f3f0ea] p-3 text-left" style={{ gridTemplateColumns: `repeat(${gridSize}, minmax(0, 2.6rem))` }} onClick={() => setRevealed((value) => nextValue(value, fillOrder.length))}>
-      {Array.from({ length: gridSize * gridSize }, (_, index) => {
-        const isOne = solution[index] === "ONE";
-        return (
-          <span key={index} className={`flex aspect-square items-center justify-center rounded-md text-lg font-bold ${isOne ? "bg-[#f7d66f]" : "bg-[#b8d5f0]"} text-[#1f1f1f] ${presets.has(index) ? "ring-2 ring-[#1f1f1f]/50" : ""}`}>
-            {visible.has(index) ? (isOne ? "☀" : "☾") : ""}
-          </span>
-        );
-      })}
-    </button>
+    <div className="mx-auto max-w-md space-y-4">
+      <div className="relative aspect-square rounded-md border-[3px] border-foreground/80 bg-border p-px shadow-sm" aria-label="LinkedIn Tango answer board">
+        <div className="grid h-full w-full gap-px" style={{ gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))` }}>
+          {Array.from({ length: gridSize * gridSize }, (_, index) => {
+            const isPreset = presets.has(index);
+            const isVisible = isPreset || revealedCells.has(index);
+            const value = solution[index] ?? "";
+            return (
+              <button
+                key={index}
+                type="button"
+                onClick={() => toggleCell(index)}
+                aria-pressed={isVisible}
+                aria-label={isPreset ? `Preset Tango cell ${index + 1}` : isVisible ? `Hide Tango cell ${index + 1}` : `Reveal Tango cell ${index + 1}`}
+                className={[
+                  "flex aspect-square items-center justify-center bg-background transition focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+                  isPreset ? "shadow-[inset_0_0_0_3px_rgba(17,17,17,0.35)]" : "hover:bg-surface"
+                ].join(" ")}
+              >
+                {isVisible ? <TangoSymbol value={value} /> : null}
+              </button>
+            );
+          })}
+        </div>
+        {edges.map((edge, index) => {
+          const start = coordFromCell(edge.startIdx, gridSize);
+          const end = coordFromCell(edge.endIdx, gridSize);
+          const left = ((start.col + end.col + 1) / 2 / gridSize) * 100;
+          const top = ((start.row + end.row + 1) / 2 / gridSize) * 100;
+          return (
+            <span
+              key={`${edge.startIdx}-${edge.endIdx}-${index}`}
+              className="pointer-events-none absolute z-20 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background text-sm font-black shadow-sm"
+              style={{ left: `${left}%`, top: `${top}%`, color: edge.isEqual ? "#4f46e5" : "#dc2626" }}
+            >
+              {edge.isEqual ? "=" : "×"}
+            </span>
+          );
+        })}
+      </div>
+      <div className="flex justify-center gap-2">
+        <button
+          type="button"
+          onClick={revealAll}
+          disabled={allVisible}
+          className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Reveal all
+        </button>
+        <button
+          type="button"
+          onClick={hideAll}
+          disabled={!revealedCells.size}
+          className="inline-flex items-center justify-center rounded-md border border-border bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-card disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Hide all
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -1411,28 +1850,94 @@ function MiniSudokuVisual({ payload }: { payload: AnyRecord }) {
 }
 
 function CrossclimbVisual({ payload }: { payload: AnyRecord }) {
-  const words = asStringArray(payload.words);
+  const words = asStringArray(payload.words).map((word) => word.toUpperCase());
   const clues = asStringArray(payload.clues);
-  const [revealed, setRevealed] = useState(0);
+  const [revealedRows, setRevealedRows] = useState<Set<number>>(() => new Set());
+  const allVisible = words.length > 0 && revealedRows.size >= words.length;
+
+  function changedIndex(word: string, index: number) {
+    const previous = words[index - 1] ?? "";
+    if (!previous || previous.length !== word.length) return -1;
+    return word.split("").findIndex((letter, letterIndex) => previous[letterIndex] !== letter);
+  }
+
+  function toggleRow(index: number) {
+    setRevealedRows((current) => {
+      const next = new Set(current);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
+  }
+
+  function revealAll() {
+    setRevealedRows(new Set(words.map((_, index) => index)));
+  }
+
+  function hideAll() {
+    setRevealedRows(new Set());
+  }
+
+  if (!words.length) return <WordSlots answer="Crossclimb answer saved" />;
+
   return (
-    <button type="button" className="max-w-xl space-y-2 text-left" onClick={() => setRevealed((value) => nextValue(value, words.length))}>
-      {words.map((word, index) => {
-        const previous = words[index - 1] ?? "";
-        const isVisible = index < revealed;
-        return (
-          <div key={`${word}-${index}`} className="grid gap-3 sm:grid-cols-[10rem_minmax(0,1fr)] sm:items-center">
-            <div className="flex justify-center rounded-md bg-[#dbeafe] px-4 py-3 font-mono text-lg font-black uppercase tracking-[0.22em] text-[#1f1f1f]">
-              {(isVisible ? word : " ".repeat(word.length || 5)).split("").map((letter, letterIndex) => (
-                <span key={`${letter}-${letterIndex}`} className={previous && previous[letterIndex] !== letter ? "text-[#0a66c2]" : ""}>
-                  {letter || "_"}
-                </span>
-              ))}
-            </div>
-            <p className="text-sm text-muted">{clues[index] ?? ""}</p>
-          </div>
-        );
-      })}
-    </button>
+    <div className="max-w-2xl space-y-4">
+      <div className="space-y-2" aria-label="LinkedIn Crossclimb answer ladder">
+        {words.map((word, index) => {
+          const isVisible = revealedRows.has(index);
+          const changed = changedIndex(word, index);
+          return (
+            <button
+              key={`${word}-${index}`}
+              type="button"
+              onClick={() => toggleRow(index)}
+              aria-pressed={isVisible}
+              className="group grid w-full gap-3 rounded-md border border-border bg-surface p-3 text-left transition hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:grid-cols-[minmax(10rem,12rem)_minmax(0,1fr)] sm:items-center"
+            >
+              <span className="flex justify-center gap-1" aria-label={isVisible ? word : `Hidden word ${index + 1}`}>
+                {word.split("").map((letter, letterIndex) => (
+                  <span
+                    key={`${word}-${letterIndex}`}
+                    className={[
+                      "flex h-10 min-w-8 items-center justify-center rounded-md font-mono text-lg font-black uppercase transition sm:h-11 sm:min-w-9",
+                      isVisible
+                        ? letterIndex === changed
+                          ? "bg-accent text-accent-foreground"
+                          : "bg-background text-foreground ring-1 ring-border"
+                        : "bg-background text-muted ring-1 ring-border/70 group-hover:text-foreground"
+                    ].join(" ")}
+                  >
+                    {isVisible ? letter : ""}
+                  </span>
+                ))}
+              </span>
+              <span className="text-sm leading-6 text-muted">
+                <span className="mr-2 text-xs font-semibold uppercase tracking-[0.16em] text-muted">Clue {index + 1}</span>
+                {clues[index] ?? ""}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={revealAll}
+          disabled={allVisible}
+          className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Reveal all
+        </button>
+        <button
+          type="button"
+          onClick={hideAll}
+          disabled={!revealedRows.size}
+          className="inline-flex items-center justify-center rounded-md border border-border bg-surface px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-card disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          Hide all
+        </button>
+      </div>
+    </div>
   );
 }
 
