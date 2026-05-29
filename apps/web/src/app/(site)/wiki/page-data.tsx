@@ -794,7 +794,7 @@ function WikiControlsTable({
           <thead className="bg-muted/20 text-xs uppercase tracking-[0.14em] text-muted-foreground">
             <tr>
               <th scope="col" className="min-w-36 border-b border-border/70 px-4 py-3 font-semibold">
-                Move
+                Action
               </th>
               {columns.map((column) => (
                 <th key={column.key} scope="col" className="min-w-40 border-b border-border/70 px-4 py-3 font-semibold">

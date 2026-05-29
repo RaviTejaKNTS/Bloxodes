@@ -18,6 +18,7 @@ type WikiCopy = {
   metaDescription: string;
   tipsMd: string;
   controlsJson?: Array<Record<string, string>>;
+  gameDescriptionMd?: string;
 };
 
 const rawArgs = process.argv.slice(2);
@@ -211,6 +212,27 @@ const WIKI_COPY: Record<string, WikiCopy> = {
 - Luck-source details beyond normal item and progression systems are still source-disputed, so keep boost planning flexible until in-game values are verified.`,
     controlsJson: []
   },
+  "survive-zombie-arena": {
+    metaDescription:
+      "Survive Zombie Arena wiki with classes, weapons, gear, maps, upgrades, Roblox stats, and wave-survival planning.",
+    gameDescriptionMd:
+      "Survive Zombie Arena is a wave-survival shooter where each run starts with preparation in the lobby, then turns into a fight against huge zombie waves. You earn Credits by killing zombies and surviving longer, then spend them on class unlocks, Armory weapons, gear, and Mr. Santito upgrades before the next push. The game rewards a clear role more than random spending: pick a class, cover a Rooftop lane, upgrade the weapon you actually use, and build enough damage and delay tools to keep the horde from collapsing your hold.",
+    tipsMd: `- Treat each run as a Credits problem. Zombies and waves feed your economy, and the best spend is usually the class, weapon, or upgrade that stops the next wave from breaking your hold.
+- Pick a class for the job you expect to do. Medic and Marksman are cleaner early unlocks, Engineer and Tactician help lane holds, and Necromancer is a long-term Credit sink for late-wave scaling.
+- Buy weapons by Armory slot instead of collecting every sidegrade. Shotgun-style weapons help early packs, Rifle/Burst/AK style guns cover mid-wave pressure, and heavy or crate weapons make more sense once your Credit route is stable.
+- Upgrade the weapon you are actually firing at Mr. Santito's shop. Damage or fire-rate improvements on your main lane gun usually beat saving for a flashy weapon that will sit unused.
+- Build gear around a shared hold point. Barricades, turrets, traps, healing tools, bunkers, and drones work when the team commits to a Rooftop lane before zombies start flooding the stairs and ramps.
+- Use current map status before copying older farming advice. Rooftop Map is the current reference, Square Arena is retired context, and Atlantis belongs outside planning until its live layout is confirmed.
+- Keep preview and event claims separate from your main plan. Unverified enemies, crate pools, map previews, and event reward rumors should not replace a guaranteed Credit upgrade or class unlock.`,
+    controlsJson: [
+      { action: "Move", desktop: "W / A / S / D" },
+      { action: "Jump", desktop: "Spacebar" },
+      { action: "Fire weapon", desktop: "Left Mouse Button" },
+      { action: "Equip weapon slot", desktop: "1 / 2 / 3 / 4" },
+      { action: "Reload", desktop: "R" },
+      { action: "Sprint", desktop: "Shift" }
+    ]
+  },
   rivals: {
     metaDescription:
       "RIVALS wiki hub with codes, weapons, maps, skins, wraps, charms, finishers, emotes, UGC items, Roblox details, and practical duel tips.",
@@ -372,6 +394,18 @@ async function main() {
     }
 
     const { error } = await sb.from("wiki_pages").insert(row);
+    if (error) throw error;
+  }
+
+  for (const group of getTargetGroups()) {
+    const copy = WIKI_COPY[group.gameSlug];
+    const universeId = universeIdsByGameSlug.get(group.gameSlug);
+    if (!copy?.gameDescriptionMd || !universeId) continue;
+
+    const { error } = await sb
+      .from("roblox_universes")
+      .update({ game_description_md: copy.gameDescriptionMd })
+      .eq("universe_id", universeId);
     if (error) throw error;
   }
 

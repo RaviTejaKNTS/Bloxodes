@@ -1,0 +1,239 @@
+{
+  "meta": {
+    "title": "Survive Zombie Arena classes data",
+    "updatedAt": "2026-05-29",
+    "sources": [
+      {
+        "label": "Pro Game Guides - Survive Zombie Arena Class Tier List",
+        "url": "https://progameguides.com/roblox/survive-zombie-arena-class-tier-list/",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "SurviveZombieArena.com - Classes",
+        "url": "https://survivezombiearena.com/classes/",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "Destructoid - Survive Zombie Arena Tier List",
+        "url": "https://www.destructoid.com/survive-zombie-arena-tier-list/",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "Games.GG - Survive Zombie Arena Class Tier List",
+        "url": "https://games.gg/roblox/guides/survive-zombie-arena-class-tier-list/",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "Roonby - Survive Zombie Arena Class Tier List",
+        "url": "https://roonby.com/2026/04/28/survive-zombie-arena-class-tier-list-best-classes-for-long-runs/",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "GamesToUse - Survive Zombie Arena Class Tier List",
+        "url": "https://gamestouse.com/tier-list/survive-zombie-arena-class-tier-list/",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "Roblox - Survive Zombie Arena",
+        "url": "https://www.roblox.com/games/114204398207377/Survive-Zombie-Arena",
+        "accessed": "2026-05-29"
+      }
+    ],
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "rarity",
+      "cost",
+      "role",
+      "kitSummary",
+      "bestFor",
+      "soloTeamNote",
+      "unlockPriority",
+      "availability",
+      "sourceConfidence",
+      "verificationNote",
+      "sourceImageUrl",
+      "imageStatus"
+    ],
+    "sourceCountSummary": {
+      "acceptedClassRows": 9,
+      "proGameGuidesRoster": 9,
+      "surviveZombieArenaComRoster": 9,
+      "gamesToUseRoster": 9,
+      "roonbyEarlyRoster": 8,
+      "officialRobloxPage": "No class table in public description"
+    },
+    "uncertainFacts": [
+      "Exact Credit costs are guide-reported and should be rechecked in-game when direct capture is available.",
+      "Bastion tier placement differs between sources, so public copy avoids a definitive tier-list promise.",
+      "Necromancer is listed at 250,000 Credits in current May 2026 guide sources; older references may show different values.",
+      "Class portraits are local 220x220 crops from row-specific Pro Game Guides class images. Replace with direct in-game class cards/icons if those become available."
+    ]
+  },
+  "items": [
+    {
+      "name": "Survivor",
+      "slug": "survivor",
+      "image": "/Survive%20Zombie%20Arena/classes/survivor.jpg",
+      "catalogSection": "Starter and first unlocks",
+      "rarity": "Common",
+      "cost": "Free",
+      "role": "Starter defense",
+      "kitSummary": "Barricade; Auto Turret; Landmine",
+      "bestFor": "Learning lane control before spending Credits on a class unlock.",
+      "soloTeamNote": "Usable as the free baseline, but it falls behind stronger damage, healing, and structure classes.",
+      "unlockPriority": "Free starter; replace with Medic or Marksman once Credits allow.",
+      "availability": "Free starter class",
+      "sourceConfidence": "medium-high",
+      "verificationNote": "Roster, rarity, and kit cross-checked against Pro Game Guides and GamesToUse. Cost is free in all checked class summaries.",
+      "sourceImageUrl": "https://progameguides.com/wp-content/uploads/2026/05/survive-zombie-arena-survivor.jpg?resize=150%2C150",
+      "imageStatus": "local row-specific class image"
+    },
+    {
+      "name": "Medic",
+      "slug": "medic",
+      "image": "/Survive%20Zombie%20Arena/classes/medic.jpg",
+      "catalogSection": "Starter and first unlocks",
+      "rarity": "Uncommon",
+      "cost": "10,000 Credits",
+      "role": "Team sustain",
+      "kitSummary": "StimShot; Mending Tower; Healing Station",
+      "bestFor": "Public squads, structure-heavy teams, and players who want the cheapest strong support unlock.",
+      "soloTeamNote": "Best in co-op because healing players and structures keeps a defensive lane alive longer.",
+      "unlockPriority": "Best cheap support unlock; buy early if your squad needs sustain.",
+      "availability": "Permanent Credit unlock",
+      "sourceConfidence": "medium-high",
+      "verificationNote": "Cost from SurviveZombieArena.com and GamesToUse. Kit and support role cross-checked with Pro Game Guides and Destructoid.",
+      "sourceImageUrl": "https://progameguides.com/wp-content/uploads/2026/05/survive-zombie-arena-medic.jpg?resize=150%2C150",
+      "imageStatus": "local row-specific class image"
+    },
+    {
+      "name": "Marksman",
+      "slug": "marksman",
+      "image": "/Survive%20Zombie%20Arena/classes/marksman.jpg",
+      "catalogSection": "Starter and first unlocks",
+      "rarity": "Uncommon",
+      "cost": "15,000 Credits",
+      "role": "Gun DPS",
+      "kitSummary": "Frag Grenade; Deadeye; Sonar Ping",
+      "bestFor": "Solo players or small groups that need direct weapon damage before expensive classes.",
+      "soloTeamNote": "Strong first damage unlock, but it needs movement and positioning because it does not bring healing or barricades.",
+      "unlockPriority": "Best early damage unlock; a practical first buy after Survivor.",
+      "availability": "Permanent Credit unlock",
+      "sourceConfidence": "medium-high",
+      "verificationNote": "Cost from SurviveZombieArena.com and GamesToUse. Kit and damage role cross-checked with Pro Game Guides and Roonby.",
+      "sourceImageUrl": "https://progameguides.com/wp-content/uploads/2026/05/survive-zombie-arena-marksman.jpg?resize=150%2C150",
+      "imageStatus": "local row-specific class image"
+    },
+    {
+      "name": "Engineer",
+      "slug": "engineer",
+      "image": "/Survive%20Zombie%20Arena/classes/engineer.jpg",
+      "catalogSection": "Early utility unlocks",
+      "rarity": "Rare",
+      "cost": "20,000 Credits",
+      "role": "Early lane control",
+      "kitSummary": "Flame Turret; Auto Turret; Steel Barricade",
+      "bestFor": "Holding a chokepoint with automated damage before Tactician is affordable.",
+      "soloTeamNote": "Works better with a Medic or teammates because structures need protection as waves scale.",
+      "unlockPriority": "Useful structure step, but Tactician is the stronger long-term defense path.",
+      "availability": "Permanent Credit unlock",
+      "sourceConfidence": "medium-high",
+      "verificationNote": "Cost from SurviveZombieArena.com and GamesToUse. Kit and scaling caveat cross-checked with Pro Game Guides.",
+      "sourceImageUrl": "https://progameguides.com/wp-content/uploads/2026/05/survive-zombie-arena-engineer.jpg?resize=150%2C150",
+      "imageStatus": "local row-specific class image"
+    },
+    {
+      "name": "Ninja",
+      "slug": "ninja",
+      "image": "/Survive%20Zombie%20Arena/classes/ninja.jpg",
+      "catalogSection": "Early utility unlocks",
+      "rarity": "Rare",
+      "cost": "25,000 Credits",
+      "role": "Stealth and close-range burst",
+      "kitSummary": "Cloak; Blade Fury; Shuriken",
+      "bestFor": "Short escape windows, clutch movement, and players who specifically want the stealth kit.",
+      "soloTeamNote": "Risky in later waves because the class wants closer range than most safer damage options.",
+      "unlockPriority": "Low priority for progression; skip unless you want the stealth playstyle.",
+      "availability": "Permanent Credit unlock",
+      "sourceConfidence": "medium-high",
+      "verificationNote": "Cost from SurviveZombieArena.com and GamesToUse. Kit and close-range risk cross-checked with Pro Game Guides and Roonby.",
+      "sourceImageUrl": "https://progameguides.com/wp-content/uploads/2026/05/survive-zombie-arena-ninja.jpg?resize=150%2C150",
+      "imageStatus": "local row-specific class image"
+    },
+    {
+      "name": "Demolitionist",
+      "slug": "demolitionist",
+      "image": "/Survive%20Zombie%20Arena/classes/demolitionist.jpg",
+      "catalogSection": "Mid-cost role picks",
+      "rarity": "Epic",
+      "cost": "50,000 Credits",
+      "role": "Crowd control",
+      "kitSummary": "StimShot; Shockwave Bomb; Molotov",
+      "bestFor": "Stalling and punishing packed zombie groups while teammates reposition.",
+      "soloTeamNote": "Useful for AoE pressure, but less consistent than classes that bring stronger lane control or team sustain.",
+      "unlockPriority": "Mid-cost specialty pick; buy when pack control is the problem you need to solve.",
+      "availability": "Permanent Credit unlock",
+      "sourceConfidence": "medium-high",
+      "verificationNote": "Cost from SurviveZombieArena.com and GamesToUse. Kit and AoE role cross-checked with Pro Game Guides and Roonby.",
+      "sourceImageUrl": "https://progameguides.com/wp-content/uploads/2026/05/survive-zombie-arena-demolitionist.jpg?resize=150%2C150",
+      "imageStatus": "local row-specific class image"
+    },
+    {
+      "name": "Tactician",
+      "slug": "tactician",
+      "image": "/Survive%20Zombie%20Arena/classes/tactician.jpg",
+      "catalogSection": "Mid-cost role picks",
+      "rarity": "Epic",
+      "cost": "75,000 Credits",
+      "role": "Defensive anchor",
+      "kitSummary": "Vanguard Turret; Spikes; Steel Barricade",
+      "bestFor": "Team holds, chokepoints, and defensive setups that need structures to target tougher enemies.",
+      "soloTeamNote": "Pairs especially well with Medic because healing support keeps structures alive through heavy waves.",
+      "unlockPriority": "Strong mid-progression defense goal after early Credit unlocks.",
+      "availability": "Permanent Credit unlock",
+      "sourceConfidence": "medium-high",
+      "verificationNote": "Cost from SurviveZombieArena.com and GamesToUse. Vanguard Turret behavior and Medic pairing cross-checked with Pro Game Guides and Destructoid.",
+      "sourceImageUrl": "https://progameguides.com/wp-content/uploads/2026/05/survive-zombie-arena-tactician.jpg?resize=150%2C150",
+      "imageStatus": "local row-specific class image"
+    },
+    {
+      "name": "Bastion",
+      "slug": "bastion",
+      "image": "/Survive%20Zombie%20Arena/classes/bastion.jpg",
+      "catalogSection": "Legendary endgame classes",
+      "rarity": "Legendary",
+      "cost": "200,000 Credits",
+      "role": "Squad defense",
+      "kitSummary": "Bunker; Laser Turret; Drone",
+      "bestFor": "Team survival, defensive holds, and squads that want a shelter-style tool during wave spikes.",
+      "soloTeamNote": "Strongest when the team can hold around Bunker and let automated support keep pressure off the group.",
+      "unlockPriority": "Late goal for squad-focused players; compare against Necromancer before saving 200,000 Credits.",
+      "availability": "Permanent Credit unlock",
+      "sourceConfidence": "medium",
+      "verificationNote": "Cost from SurviveZombieArena.com and GamesToUse. Kit from Pro Game Guides. Tier placement differs between sources, so no public tier field is used.",
+      "sourceImageUrl": "https://progameguides.com/wp-content/uploads/2026/05/survive-zombie-arena-bastion.jpg?resize=150%2C150",
+      "imageStatus": "local row-specific class image"
+    },
+    {
+      "name": "Necromancer",
+      "slug": "necromancer",
+      "image": "/Survive%20Zombie%20Arena/classes/necromancer.jpg",
+      "catalogSection": "Legendary endgame classes",
+      "rarity": "Legendary",
+      "cost": "250,000 Credits",
+      "role": "Summon scaling",
+      "kitSummary": "Soul Harvester; Raise Undead; Death Nova",
+      "bestFor": "Late-wave pushes where dense zombie waves feed the soul, minion, and detonation loop.",
+      "soloTeamNote": "Works in solo or teams, but it needs active timing so Death Nova does not erase your own frontline too early.",
+      "unlockPriority": "Most expensive long-term damage goal; save for it after early class and weapon needs are stable.",
+      "availability": "Permanent Credit unlock",
+      "sourceConfidence": "medium-high",
+      "verificationNote": "Cost from current May 2026 guide sources. Kit and late-wave loop cross-checked with Pro Game Guides, Games.GG, Roonby, and Destructoid.",
+      "sourceImageUrl": "https://progameguides.com/wp-content/uploads/2026/05/survive-zombie-arena-necromancer.jpg?resize=150%2C150",
+      "imageStatus": "local row-specific class image"
+    }
+  ]
+}

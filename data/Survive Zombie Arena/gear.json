@@ -1,0 +1,254 @@
+{
+  "meta": {
+    "title": "Survive Zombie Arena gear data",
+    "updatedAt": "2026-05-29",
+    "sources": [
+      {
+        "label": "Pro Game Guides - Survive Zombie Arena Class Tier List",
+        "url": "https://progameguides.com/roblox/survive-zombie-arena-class-tier-list/",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "Survive Zombie Arena Wiki - Beginner Guide",
+        "url": "https://www.survivezombiearena.wiki/guide/Survive-Zombie-Arena-beginner-guide",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "Survive Zombie Arena Wiki - Engineer Defense Guide",
+        "url": "https://www.survivezombiearena.wiki/guide/Survive-Zombie-Arena-guide",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "Survive Zombie Arena Wiki - Gun Tutorial",
+        "url": "https://www.survivezombiearena.wiki/weapons/Survive-Zombie-Arena-gun-tutorial",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "Survive Zombie Arena Wiki - Classes",
+        "url": "https://survivezombiearena.com/classes/",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "Roblox - Survive Zombie Arena",
+        "url": "https://www.roblox.com/games/114204398207377/Survive-Zombie-Arena",
+        "accessed": "2026-05-29"
+      },
+      {
+        "label": "Roblox games API - universe 9348272796",
+        "url": "https://games.roblox.com/v1/games?universeIds=9348272796",
+        "accessed": "2026-05-29"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "catalogSection",
+      "role",
+      "sourceClass",
+      "rarity",
+      "effect",
+      "bestUse",
+      "placementNote",
+      "availability",
+      "sourceImageUrl",
+      "imageStatus"
+    ]
+  },
+  "items": [
+    {
+      "name": "Barricade",
+      "slug": "barricade",
+      "image": "/Survive%20Zombie%20Arena/gear/barricade.jpg",
+      "catalogSection": "Defensive structures",
+      "role": "Basic barricade",
+      "sourceClass": "Survivor / basic support gear",
+      "rarity": "Common",
+      "effect": "Blocks zombie pathing and absorbs damage so a lane slows down before it reaches players.",
+      "bestUse": "Buying breathing room when a wave starts pushing through one approach.",
+      "placementNote": "Place it at a natural funnel with player or turret coverage behind it.",
+      "availability": "Starter or basic run gear in current source lists",
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-af77d7ac7b1dcaa1871cf661c376611c/768/432/Image/Png/noFilter",
+      "imageStatus": "local official-thumbnail crop showing barricade"
+    },
+    {
+      "name": "Steel Barricade",
+      "slug": "steel-barricade",
+      "image": null,
+      "catalogSection": "Defensive structures",
+      "role": "Heavy barricade",
+      "sourceClass": "Engineer, Tactician",
+      "rarity": "Rare",
+      "effect": "Creates a stronger pathing block with more durability than a normal barricade.",
+      "bestUse": "Holding chokepoints where zombies need to stall in front of team damage.",
+      "placementNote": "Use it to shape a lane first, then protect it with turret angles or teammates.",
+      "availability": "Class-locked support gear",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    },
+    {
+      "name": "Bunker",
+      "slug": "bunker",
+      "image": null,
+      "catalogSection": "Defensive structures",
+      "role": "Squad shelter",
+      "sourceClass": "Bastion",
+      "rarity": "Rare",
+      "effect": "Places a fortress shelter where players inside become invincible, regenerate HP, and gain a damage boost.",
+      "bestUse": "Stabilizing the squad when dense waves or elite pressure would otherwise force a wipe.",
+      "placementNote": "Drop it where teammates can keep firing from safety without blocking escape paths.",
+      "availability": "Bastion class gear",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    },
+    {
+      "name": "Auto Turret",
+      "slug": "auto-turret",
+      "image": "/Survive%20Zombie%20Arena/gear/auto-turret.jpg",
+      "catalogSection": "Automated damage",
+      "role": "Sustained turret",
+      "sourceClass": "Survivor, Engineer",
+      "rarity": "Rare",
+      "effect": "Automatically targets and shoots nearby zombies for steady extra damage.",
+      "bestUse": "Covering a lane while players reload, kite, or watch another angle.",
+      "placementNote": "Set it behind protection so it keeps firing instead of getting destroyed early.",
+      "availability": "Listed in Survivor and Engineer gear sources",
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-ef0366aa6c27ac4a1ccd59d4cd7684f3/768/432/Image/Png/noFilter",
+      "imageStatus": "local official-thumbnail crop showing turret"
+    },
+    {
+      "name": "Flame Turret",
+      "slug": "flame-turret",
+      "image": null,
+      "catalogSection": "Automated damage",
+      "role": "Cone damage turret",
+      "sourceClass": "Engineer",
+      "rarity": "Rare",
+      "effect": "Sprays fire in a cone and burns multiple zombies when they group together.",
+      "bestUse": "Punishing tight chokepoints where zombie packs move through the same space.",
+      "placementNote": "Angle it across the funnel, not into open ground with low traffic.",
+      "availability": "Engineer class gear",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    },
+    {
+      "name": "Vanguard Turret",
+      "slug": "vanguard-turret",
+      "image": null,
+      "catalogSection": "Automated damage",
+      "role": "Elite-focus turret",
+      "sourceClass": "Tactician",
+      "rarity": "Epic",
+      "effect": "Places a heavy turret that targets the strongest zombie with high single-target damage.",
+      "bestUse": "Anchoring a defensive lane when elites or tougher zombies need priority damage.",
+      "placementNote": "Protect it with barricades and keep players close enough to clear smaller enemies.",
+      "availability": "Tactician class gear",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    },
+    {
+      "name": "Laser Turret",
+      "slug": "laser-turret",
+      "image": null,
+      "catalogSection": "Automated damage",
+      "role": "Long-range turret",
+      "sourceClass": "Bastion",
+      "rarity": "Epic",
+      "effect": "Auto-tracks zombies and fires fast red lasers at range.",
+      "bestUse": "Adding reliable ranged pressure around a Bastion defensive hold.",
+      "placementNote": "Keep the fight inside its firing lanes so the tracking damage stays active.",
+      "availability": "Bastion class gear",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    },
+    {
+      "name": "Drone",
+      "slug": "drone",
+      "image": null,
+      "catalogSection": "Automated damage",
+      "role": "Automated support unit",
+      "sourceClass": "Bastion",
+      "rarity": "Epic",
+      "effect": "Creates a hovering combat drone that auto-shoots zombies and can soak damage for the player.",
+      "bestUse": "Adding mobile pressure and extra safety around Bastion setups.",
+      "placementNote": "Stay close enough to the fight for the drone's shots and damage soak to matter.",
+      "availability": "Bastion class gear",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    },
+    {
+      "name": "Landmine",
+      "slug": "landmine",
+      "image": null,
+      "catalogSection": "Traps and area denial",
+      "role": "Burst trap",
+      "sourceClass": "Survivor / basic support gear",
+      "rarity": "Uncommon",
+      "effect": "Detonates when zombies step on it and deals area damage.",
+      "bestUse": "Stopping a packed push right before it reaches a barricade or player route.",
+      "placementNote": "Put it on predictable paths or breach points, not random empty floor.",
+      "availability": "Starter or basic run gear in current source lists",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    },
+    {
+      "name": "Spikes",
+      "slug": "spikes",
+      "image": null,
+      "catalogSection": "Traps and area denial",
+      "role": "Repeat trap",
+      "sourceClass": "Tactician",
+      "rarity": "Uncommon",
+      "effect": "Extends spikes from the ground periodically to damage nearby zombies.",
+      "bestUse": "Softening enemies that are already being held in a chokepoint.",
+      "placementNote": "Place it where zombies stay long enough for repeated spike hits.",
+      "availability": "Tactician class gear",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    },
+    {
+      "name": "Shockwave Bomb",
+      "slug": "shockwave-bomb",
+      "image": null,
+      "catalogSection": "Traps and area denial",
+      "role": "Crowd-control trap",
+      "sourceClass": "Demolitionist",
+      "rarity": "Epic",
+      "effect": "Releases a shockwave that knocks back and stuns zombies.",
+      "bestUse": "Buying recovery time when a dense pack is about to break the defensive line.",
+      "placementNote": "Use it on grouped zombies so the knockback and stun affect the whole push.",
+      "availability": "Demolitionist class gear",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    },
+    {
+      "name": "Mending Tower",
+      "slug": "mending-tower",
+      "image": null,
+      "catalogSection": "Healing and repair support",
+      "role": "Structure repair",
+      "sourceClass": "Medic",
+      "rarity": "Rare",
+      "effect": "Continuously heals nearby structures within its radius.",
+      "bestUse": "Keeping barricades and turrets alive during structure-heavy team holds.",
+      "placementNote": "Place it behind the defensive line so it repairs without taking direct pressure.",
+      "availability": "Medic class gear",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    },
+    {
+      "name": "Healing Station",
+      "slug": "healing-station",
+      "image": null,
+      "catalogSection": "Healing and repair support",
+      "role": "Player healing",
+      "sourceClass": "Medic",
+      "rarity": "Rare",
+      "effect": "Continuously heals players standing within its radius.",
+      "bestUse": "Sustaining teammates who need to hold a firing lane through chip damage.",
+      "placementNote": "Keep it near the team's hold point but behind the front barricades.",
+      "availability": "Medic class gear",
+      "sourceImageUrl": null,
+      "imageStatus": "missing exact clean local gear image"
+    }
+  ]
+}

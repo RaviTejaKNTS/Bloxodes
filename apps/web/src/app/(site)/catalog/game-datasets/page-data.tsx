@@ -764,6 +764,38 @@ const RIVALS_UGC_SECTION_ORDER = [
   "Rank badge accessories"
 ];
 
+const SURVIVE_ZOMBIE_ARENA_CLASS_SECTION_ORDER = [
+  "Starter and first unlocks",
+  "Early utility unlocks",
+  "Mid-cost role picks",
+  "Legendary endgame classes"
+];
+
+const SURVIVE_ZOMBIE_ARENA_WEAPON_SECTION_ORDER = [
+  "Starter and early Armory weapons",
+  "High-wave Credit and F2P weapons",
+  "VIP and Robux weapons",
+  "Lava Crate weapons",
+  "Galactic Crate weapons"
+];
+
+const SURVIVE_ZOMBIE_ARENA_GEAR_SECTION_ORDER = [
+  "Defensive structures",
+  "Automated damage",
+  "Traps and area denial",
+  "Healing and repair support"
+];
+
+const SURVIVE_ZOMBIE_ARENA_MAP_SECTION_ORDER = ["Active maps", "Retired maps"];
+
+const SURVIVE_ZOMBIE_ARENA_SOURCE_KEYS = [
+  "sourcePage",
+  "sourceConfidence",
+  "verificationNote",
+  "imageStatus",
+  "sourceImageUrl"
+];
+
 const SAILOR_PIECE_RAW_CARD_KEYS = [
   "description",
   "stats",
@@ -904,6 +936,38 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     ],
     additionalColumns: ["catalogSection"],
     maxStats: 5
+  },
+  "survive-zombie-arena-classes": {
+    groupKey: "catalogSection",
+    groupLabel: "Unlock bracket",
+    sectionOrder: SURVIVE_ZOMBIE_ARENA_CLASS_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "availability", ...SURVIVE_ZOMBIE_ARENA_SOURCE_KEYS],
+    maxStats: 7
+  },
+  "survive-zombie-arena-weapons": {
+    groupKey: "unlockStage",
+    groupLabel: "Unlock route",
+    sectionOrder: SURVIVE_ZOMBIE_ARENA_WEAPON_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.unlockStage),
+    hiddenKeys: ["unlockStage", "upgradeNote", ...SURVIVE_ZOMBIE_ARENA_SOURCE_KEYS],
+    maxStats: 8
+  },
+  "survive-zombie-arena-gear": {
+    groupKey: "catalogSection",
+    groupLabel: "Gear role",
+    sectionOrder: SURVIVE_ZOMBIE_ARENA_GEAR_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", ...SURVIVE_ZOMBIE_ARENA_SOURCE_KEYS],
+    maxStats: 7
+  },
+  "survive-zombie-arena-maps": {
+    groupKey: "statusSection",
+    groupLabel: "Map status",
+    sectionOrder: SURVIVE_ZOMBIE_ARENA_MAP_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.statusSection),
+    hiddenKeys: ["statusSection", ...SURVIVE_ZOMBIE_ARENA_SOURCE_KEYS],
+    maxStats: 8
   },
   "blox-fruits-accessories": {
     groupKey: "catalogSection",
