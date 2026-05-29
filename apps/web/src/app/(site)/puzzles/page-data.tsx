@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { FiClock } from "react-icons/fi";
-import { Check } from "lucide-react";
 import type { ContentFaqItem } from "@/components/ContentFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
@@ -76,20 +75,6 @@ function formatUpdated(value?: string | null) {
     year: "numeric",
     timeZone: "UTC"
   }).format(date);
-}
-
-function formatRelativeChecked(value?: string | null) {
-  if (!value) return null;
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return null;
-  const now = new Date();
-  const todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-  const checkedUtc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
-  const diffDays = Math.round((todayUtc - checkedUtc) / (24 * 60 * 60 * 1000));
-  if (diffDays === 0) return "Today";
-  if (diffDays === 1) return "Yesterday";
-  if (diffDays === 2) return "2 days ago";
-  return null;
 }
 
 function formatUpdatedDate(value?: string | null) {
@@ -174,25 +159,10 @@ function AnswerShell({
     );
   }
 
-  const fetched = formatUpdated(answer.fetched_at);
-  const fetchedRelative = formatRelativeChecked(answer.fetched_at);
   return (
-    <section>
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <h2 className="text-xl font-semibold text-foreground">{answerTitle(title, answer)}</h2>
-          {fetched ? (
-            <p className="mt-1 flex items-center gap-1.5 text-sm leading-5 text-muted">
-              <Check className="h-3.5 w-3.5 shrink-0" aria-hidden />
-              <span>
-                Checked and verified on {fetched}
-                {fetchedRelative ? <span> ({fetchedRelative})</span> : null}
-              </span>
-            </p>
-          ) : null}
-        </div>
-      </div>
-      <div className="mt-4">{children}</div>
+    <section className="space-y-4">
+      <h2 className="text-xl font-semibold text-foreground">{answerTitle(title, answer)}</h2>
+      {children}
     </section>
   );
 }
@@ -270,6 +240,7 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
   const faqItems = await buildFaqItems(page);
   const updatedLabel = formatUpdatedDate(today?.fetched_at ?? page.content_updated_at ?? page.updated_at ?? page.published_at);
   const baseUrl = SITE_URL.replace(/\/$/, "");
+  const previousAnswers = [yesterday, ...archive].filter((answer): answer is PuzzleAnswer => Boolean(answer));
   const breadcrumb = breadcrumbJsonLd([
     { name: "Home", url: baseUrl },
     { name: "Puzzles", url: `${baseUrl}/puzzles` },
@@ -287,35 +258,30 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
   });
 
   return (
-    <div className="space-y-8">
-      <div>
-        <PageBreadcrumb
-          className="mb-4 text-xs uppercase tracking-[0.25em] text-muted"
-          items={[{ label: "Home", href: "/" }, { label: "Puzzles", href: "/puzzles" }, { label: page.title }]}
-        />
-        <header className="mb-6">
-          <h1 className="text-4xl font-bold text-foreground md:text-5xl">{page.title}</h1>
-          {updatedLabel ? (
-            <div className="mt-4 flex flex-col gap-3 text-sm text-muted">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 text-foreground/80">
-                  <FiClock className="h-4 w-4 shrink-0" aria-hidden />
-                  Updated on <span className="font-semibold text-foreground">{updatedLabel}</span>
-                </span>
-              </div>
+    <article className="space-y-8">
+      <PageBreadcrumb
+        className="mb-4 text-xs uppercase tracking-[0.25em] text-muted"
+        items={[{ label: "Home", href: "/" }, { label: "Puzzles", href: "/puzzles" }, { label: page.title }]}
+      />
+      <header className="mb-6">
+        <h1 className="text-4xl font-bold text-foreground md:text-5xl">{page.title}</h1>
+        {updatedLabel ? (
+          <div className="mt-4 flex flex-col gap-3 text-sm text-muted">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 text-foreground/80">
+                <FiClock className="h-4 w-4 shrink-0" aria-hidden />
+                Updated on <span className="font-semibold text-foreground">{updatedLabel}</span>
+              </span>
             </div>
-          ) : null}
-        </header>
-      </div>
+          </div>
+        ) : null}
+      </header>
 
       <section id="article-body" className="article-content md-copy-scope game-copy puzzle-copy">
         {intro}
         {answerIntro}
 
-        <div className="space-y-8">
-          <AnswerShell title="Today's Answer" answer={today}>{today ? renderAnswerContent(page, today) : null}</AnswerShell>
-          <AnswerShell title="Yesterday's Answer" answer={yesterday}>{yesterday ? renderAnswerContent(page, yesterday) : null}</AnswerShell>
-        </div>
+        <AnswerShell title="Today's Answer" answer={today}>{today ? renderAnswerContent(page, today) : null}</AnswerShell>
 
         {how ? (
           <>
@@ -325,7 +291,7 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
         ) : null}
         {description}
 
-        {archive.length ? (
+        {previousAnswers.length ? (
           <section>
             <h2>Answer Archive</h2>
             <div className="mt-4 overflow-x-auto">
@@ -338,9 +304,12 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
                   </tr>
                 </thead>
                 <tbody>
-                  {archive.map((answer) => (
+                  {previousAnswers.map((answer) => (
                     <tr key={answer.id}>
-                      <td className="py-3 pr-4 text-foreground">{formatDate(answer.answer_date)}</td>
+                      <td className="py-3 pr-4 text-foreground">
+                        {formatDate(answer.answer_date)}
+                        {yesterday?.id === answer.id ? <span className="ml-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">Yesterday</span> : null}
+                      </td>
                       <td className="py-3 pr-4 text-muted">{puzzleIdLabel(answer) ?? "-"}</td>
                       <td className="py-3"><Link className="font-semibold text-accent hover:underline" href={`/puzzles/${page.slug}/${answer.answer_date}`}>View answer</Link></td>
                     </tr>
@@ -356,7 +325,7 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPage) }} />
-    </div>
+    </article>
   );
 }
 
@@ -371,7 +340,7 @@ export async function renderPuzzleArchive(data: NonNullable<Awaited<ReturnType<t
   const description = page.description_md ? markdownToPlainText(page.description_md).slice(0, 220) : page.meta_description;
 
   return (
-    <div className="space-y-8">
+    <article className="space-y-8">
       <PageBreadcrumb
         items={[
           { label: "Home", href: "/" },
@@ -393,6 +362,6 @@ export async function renderPuzzleArchive(data: NonNullable<Awaited<ReturnType<t
       <div className="rounded-lg border border-border/70 bg-surface/60 p-4 text-sm text-muted">
         Looking for the newest answer? <Link className="font-semibold text-accent hover:underline" href={`/puzzles/${page.slug}`}>Open the current {page.title} page</Link>.
       </div>
-    </div>
+    </article>
   );
 }

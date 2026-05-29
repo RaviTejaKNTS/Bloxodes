@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 import legacySlugs from "@/data/slug_oldslugs.json";
 import { CACHE_TAG_HEADER, cacheTagsForPath, serializeCacheTags } from "@/lib/public-cache-tags";
 import { CONSENT_HEADER, resolveRequiresConsent, serializeConsentRequirement } from "@/lib/privacy/consent";
+import { REQUEST_PATHNAME_HEADER } from "@/lib/request-headers";
 import { SEARCH_INDEXING_ENABLED } from "@/lib/site-config";
 import { buildSecurityHeaders } from "@/lib/security/csp";
 
@@ -153,6 +154,7 @@ export function proxy(req: NextRequest) {
   // Pass a header downstream for routes that need request-time consent context.
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set(CONSENT_HEADER, serializeConsentRequirement(requiresConsent));
+  requestHeaders.set(REQUEST_PATHNAME_HEADER, url.pathname);
 
   return applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname);
 }

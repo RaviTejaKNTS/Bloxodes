@@ -1302,7 +1302,6 @@ function PipsDifficulty({ difficulty, entry }: { difficulty: DifficultyKey; entr
             </button>
           </div>
           <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted">Dominoes</p>
             <div className="flex flex-wrap gap-2">
               {dominoes.map((domino, index) => (
                 <PipsTrayDomino key={`${domino[0]}-${domino[1]}-${index}`} domino={domino} index={index} placed={placedDominoes.has(index)} onClick={() => toggleDomino(index)} />
