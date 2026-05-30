@@ -22,6 +22,15 @@ function normalizeDescription(value?: string | null): string | null {
   return `${lastSpace > 130 ? slice.slice(0, lastSpace) : slice}…`;
 }
 
+function normalizeMetadataImage(value?: string | null): string {
+  if (!value) return `${SITE_URL}/og-image.png`;
+  try {
+    return new URL(value, SITE_URL).toString();
+  } catch {
+    return `${SITE_URL}/og-image.png`;
+  }
+}
+
 export async function generateStaticParams() {
   return [];
 }
@@ -43,7 +52,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     normalizeDescription(page.universe_game_description_md) ??
     normalizeDescription(page.universe_description) ??
     WIKI_DESCRIPTION;
-  const image = page.icon_url || `${SITE_URL}/og-image.png`;
+  const image = normalizeMetadataImage(page.cover_image ?? page.icon_url);
   const publishedAt = page.published_at ?? page.created_at ?? null;
   const modifiedAt = page.content_updated_at ?? page.updated_at ?? publishedAt;
   const publishedTime = publishedAt ? new Date(publishedAt).toISOString() : undefined;

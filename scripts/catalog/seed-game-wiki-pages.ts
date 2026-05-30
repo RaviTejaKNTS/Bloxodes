@@ -10,6 +10,7 @@ type WikiPageUpsert = {
   universe_id: number | null;
   controls_json: Array<Record<string, string>>;
   tips_md: string;
+  cover_image?: string | null;
   is_published: boolean;
   published_at: string | null;
 };
@@ -19,6 +20,7 @@ type WikiCopy = {
   tipsMd: string;
   controlsJson?: Array<Record<string, string>>;
   gameDescriptionMd?: string;
+  coverImage?: string | null;
 };
 
 const rawArgs = process.argv.slice(2);
@@ -233,6 +235,53 @@ const WIKI_COPY: Record<string, WikiCopy> = {
       { action: "Sprint", desktop: "Shift" }
     ]
   },
+  "99-nights-in-the-forest": {
+    metaDescription:
+      "99 Nights in the Forest wiki with survival tips, classes, crafting, materials, weapons, tools, food, locations, entities, and animals.",
+    coverImage: "/99%20Nights%20in%20the%20Forest/Entities/the-deer.webp",
+    gameDescriptionMd:
+      "99 Nights in the Forest is a co-op survival game about keeping a camp alive while the forest gets more dangerous at night. A normal run moves between fueling the Campfire, gathering food and materials, crafting upgrades, rescuing missing children, and choosing when to push into cultist, cave, snow, or volcano routes. Classes, tools, weapons, food, tameable animals, entities, and locations all change how safely you can leave camp and return before hunger, darkness, raids, or major threats punish an overextended trip.",
+    tipsMd: `- Fuel the Campfire and plan a safe return before long routes. A good loot run can fall apart if the team comes back hungry, underarmed, or too late at night.
+- Pick a class around the job you want to handle. Some classes make early gathering easier, while others matter more for combat, support, building, food, or late-run goals.
+- Build around the Crafting Bench instead of spending rare materials at random. Better storage, light, food support, defenses, and station upgrades can make the next rescue or biome route safer.
+- Bring food, weapons, and utility tools before pushing cultist, cave, snow, or volcano routes. The destination can be dangerous, but the return trip also needs enough hunger, health, and fuel left.
+- Treat limited, removed, event-only, and admin-only rows as reference context unless the active route still exists. A normal survival plan should focus on gear, materials, and locations you can actually use in a run.`,
+    controlsJson: [
+      {
+        action: "Move",
+        desktop: "W / A / S / D",
+        mobile: "Virtual joystick"
+      },
+      {
+        action: "Jump",
+        desktop: "Space"
+      },
+      {
+        action: "Sprint",
+        desktop: "Left Shift",
+        mobile: "Sprint button"
+      },
+      {
+        action: "Attack / use equipped tool",
+        desktop: "Left Mouse Button",
+        mobile: "Tap target or on-screen attack button"
+      },
+      {
+        action: "Interact / pick up",
+        desktop: "Press or hold E",
+        mobile: "Tap the on-screen prompt"
+      },
+      {
+        action: "Open map after crafting it",
+        desktop: "M",
+        mobile: "Map icon in the top-right"
+      },
+      {
+        action: "Store items with a sack equipped",
+        desktop: "F"
+      }
+    ]
+  },
   rivals: {
     metaDescription:
       "RIVALS wiki hub with codes, weapons, maps, skins, wraps, charms, finishers, emotes, UGC items, Roblox details, and practical duel tips.",
@@ -308,7 +357,7 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
     const copy = WIKI_COPY[group.gameSlug];
     if (!copy) continue;
 
-    rows.push({
+    const row: WikiPageUpsert = {
       slug: group.gameSlug,
       title: `${group.gameName} Wiki`,
       seo_title: `${group.gameName} Wiki`,
@@ -318,7 +367,11 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
       tips_md: copy.tipsMd,
       is_published: !draft,
       published_at: draft ? existingPublishedAt.get(group.gameSlug) ?? null : existingPublishedAt.get(group.gameSlug) ?? now
-    });
+    };
+    if ("coverImage" in copy) {
+      row.cover_image = copy.coverImage ?? null;
+    }
+    rows.push(row);
   }
 
   return rows;

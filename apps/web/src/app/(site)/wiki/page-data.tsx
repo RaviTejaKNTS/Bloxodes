@@ -303,7 +303,7 @@ function getSummary(page: WikiPageContent): string | null {
 
 function getHeroImage(page: WikiPageContent, related: WikiRelatedData): string | null {
   const mediaImage = related.media.find((item) => item.is_primary && item.image_url)?.image_url ?? related.media.find((item) => item.image_url)?.image_url;
-  return normalizeImageSrc(mediaImage) ?? pickThumbnail(page.thumbnail_urls) ?? normalizeImageSrc(page.icon_url);
+  return normalizeImageSrc(page.cover_image) ?? normalizeImageSrc(mediaImage) ?? pickThumbnail(page.thumbnail_urls) ?? normalizeImageSrc(page.icon_url);
 }
 
 function compactMeta(items: Array<string | null | undefined>): string | null {
@@ -681,7 +681,19 @@ const CONTROL_DEVICE_ALIASES: Record<ControlDeviceKey, string[]> = {
   vr: ["vr", "virtual_reality", "virtualReality"]
 };
 
-function getControlDeviceColumns(page: WikiPageContent): ControlDeviceColumn[] {
+function hasDeviceControlValue(raw: unknown, key: ControlDeviceKey): boolean {
+  if (!raw) return false;
+  if (Array.isArray(raw)) return raw.some((entry) => hasDeviceControlValue(entry, key));
+  if (typeof raw !== "object") return false;
+
+  const record = raw as Record<string, unknown>;
+  if (CONTROL_DEVICE_ALIASES[key].some((alias) => Boolean(stringifyControlValue(record[alias])))) {
+    return true;
+  }
+  return Object.values(record).some((value) => value && typeof value === "object" && hasDeviceControlValue(value, key));
+}
+
+function getControlDeviceColumns(page: WikiPageContent, rawControls: unknown): ControlDeviceColumn[] {
   const enabledByDevice: Record<ControlDeviceKey, boolean | null | undefined> = {
     desktop: page.desktop_enabled,
     mobile: page.mobile_enabled,
@@ -694,7 +706,11 @@ function getControlDeviceColumns(page: WikiPageContent): ControlDeviceColumn[] {
     enabled: enabledByDevice[column.key]
   }));
   const enabledColumns = columns.filter((column) => column.enabled === true);
-  return enabledColumns.length ? enabledColumns : columns.slice(0, 1);
+  const columnsWithValues = columns.filter((column) => hasDeviceControlValue(rawControls, column.key));
+  const mergedColumns = columns.filter((column) =>
+    [...enabledColumns, ...columnsWithValues].some((candidate) => candidate.key === column.key)
+  );
+  return mergedColumns.length ? mergedColumns : columns.slice(0, 1);
 }
 
 function getControlActionLabel(record: Record<string, unknown>, fallback: string): string {
@@ -1267,7 +1283,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const universeLabel = getUniverseLabel(page);
   const summary = getSummary(page);
   const heroImage = getHeroImage(page, related);
-  const controlColumns = getControlDeviceColumns(page);
+  const controlColumns = getControlDeviceColumns(page, page.controls_json);
   const controlRows = parseControls(page.controls_json, controlColumns);
   const hasControlsSection = controlColumns.length > 0 && controlRows.length > 0;
   const tipsNodes = await renderTipsNodes(page.tips_md);

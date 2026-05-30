@@ -796,6 +796,101 @@ const SURVIVE_ZOMBIE_ARENA_SOURCE_KEYS = [
   "sourceImageUrl"
 ];
 
+const NINETY_NINE_NIGHTS_CLASS_SECTION_ORDER = [
+  "Active classes",
+  "Limited and event classes",
+  "Removed classes"
+];
+
+const NINETY_NINE_NIGHTS_CRAFTING_SECTION_ORDER = [
+  "Crafting Bench Tier 1",
+  "Crafting Bench Tier 2",
+  "Crafting Bench Tier 3",
+  "Crafting Bench Tier 4",
+  "Crafting Bench Tier 5",
+  "Tool Workshop Anvil",
+  "Meteor Anvil",
+  "Removed and event-only craftables"
+];
+
+const NINETY_NINE_NIGHTS_ENTITY_SECTION_ORDER = [
+  "Major monsters and bosses",
+  "Hostile enemies and raiders",
+  "Tameable, neutral, and passive animals",
+  "Traders, helpers, and rescue NPCs",
+  "Special, event, and admin-only entities"
+];
+
+const NINETY_NINE_NIGHTS_FOOD_SECTION_ORDER = [
+  "Map, farm, and structure food",
+  "Meat and cooked meat",
+  "Fish and pond food",
+  "Crock Pot and Chef dishes",
+  "Special survival food",
+  "Event-only or removed food"
+];
+
+const NINETY_NINE_NIGHTS_LOCATION_SECTION_ORDER = [
+  "Forest structures",
+  "Cultist and combat locations",
+  "Special or gated locations",
+  "Snow Biome locations",
+  "Volcanic Biome locations"
+];
+
+const NINETY_NINE_NIGHTS_MATERIAL_SECTION_ORDER = [
+  "Fuel and camp resources",
+  "Scrap sources",
+  "Core and trade resources",
+  "Pelts and entity drops",
+  "Potion ingredients",
+  "Meteor and Obsidiron materials"
+];
+
+const NINETY_NINE_NIGHTS_WEAPON_SECTION_ORDER = [
+  "Melee weapons",
+  "Ranged weapons",
+  "Throwables and limited-use weapons",
+  "Special combat items",
+  "Defensive combat gear",
+  "Unavailable and admin-only weapons"
+];
+
+const NINETY_NINE_NIGHTS_TOOL_SECTION_ORDER = [
+  "Storage and sacks",
+  "Axes and chopping",
+  "Fishing rods",
+  "Taming flutes",
+  "Flashlights and light",
+  "Base utility",
+  "Navigation and run control",
+  "Hard Mode utility",
+  "Admin and update-party tools"
+];
+
+const NINETY_NINE_NIGHTS_TAMEABLE_ANIMAL_SECTION_ORDER = [
+  "Old Taming Flute",
+  "Good Taming Flute",
+  "Strong Taming Flute"
+];
+
+const NINETY_NINE_NIGHTS_SOURCE_KEYS = [
+  "sourcePage",
+  "sourceNote",
+  "sourceConfidence",
+  "secondarySourcePage",
+  "sourceStatus",
+  "sourceUrls",
+  "sourceImage",
+  "imageStatus",
+  "imageSource",
+  "imageMissingReason",
+  "sourceImageUrl",
+  "verificationNote",
+  "blocker",
+  "sortOrder"
+];
+
 const SAILOR_PIECE_RAW_CARD_KEYS = [
   "description",
   "stats",
@@ -936,6 +1031,90 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     ],
     additionalColumns: ["catalogSection"],
     maxStats: 5
+  },
+  "99-nights-in-the-forest-classes": {
+    groupKey: "status",
+    groupLabel: "Availability",
+    sectionOrder: NINETY_NINE_NIGHTS_CLASS_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.status),
+    hiddenKeys: ["status", "currency", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
+    maxStats: 9
+  },
+  "99-nights-in-the-forest-crafting": {
+    groupKey: "catalogSection",
+    groupLabel: "Crafting group",
+    sectionOrder: NINETY_NINE_NIGHTS_CRAFTING_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "ingredients", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
+    maxStats: 9
+  },
+  "99-nights-in-the-forest-entities": {
+    groupKey: "catalogSection",
+    groupLabel: "Encounter type",
+    sectionOrder: NINETY_NINE_NIGHTS_ENTITY_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
+    maxStats: 9
+  },
+  "99-nights-in-the-forest-locations": {
+    groupKey: "biomeGroup",
+    groupLabel: "Route group",
+    sectionOrder: NINETY_NINE_NIGHTS_LOCATION_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.biomeGroup),
+    hiddenKeys: ["biomeGroup", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
+    maxStats: 8
+  },
+  "99-nights-in-the-forest-weapons": {
+    groupKey: "category",
+    groupLabel: "Combat role",
+    sectionOrder: NINETY_NINE_NIGHTS_WEAPON_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.category),
+    hiddenKeys: ["category", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
+    maxStats: 9
+  },
+  "99-nights-in-the-forest-tools": {
+    groupKey: "category",
+    groupLabel: "Tool group",
+    sectionOrder: NINETY_NINE_NIGHTS_TOOL_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.category),
+    hiddenKeys: ["category", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
+    maxStats: 8
+  },
+  "99-nights-in-the-forest-tameable-animals": {
+    groupKey: "fluteLevel",
+    groupLabel: "Flute tier",
+    sectionOrder: NINETY_NINE_NIGHTS_TAMEABLE_ANIMAL_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.fluteLevel),
+    hiddenKeys: [
+      "fluteLevel",
+      "aliases",
+      "foodPerStage",
+      "totalFood",
+      "imageSource",
+      "sourceUrls",
+      "sourceStatus",
+      "sourceNote",
+      "verificationNote",
+      "imageStatus",
+      "sortOrder"
+    ],
+    maxStats: 9
+  },
+  "99-nights-in-the-forest-food": {
+    groupKey: "type",
+    groupLabel: "Food group",
+    sectionOrder: NINETY_NINE_NIGHTS_FOOD_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.type),
+    hiddenKeys: ["type", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
+    maxStats: 9
+  },
+  "99-nights-in-the-forest-materials": {
+    groupKey: "catalogSection",
+    groupLabel: "Material group",
+    sectionOrder: NINETY_NINE_NIGHTS_MATERIAL_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
+    maxStats: 9
   },
   "survive-zombie-arena-classes": {
     groupKey: "catalogSection",
@@ -4026,6 +4205,7 @@ const DESCRIPTION_KEY_PRIORITY = [
   "use",
   "effect",
   "benefits",
+  "benefit",
   "obtainment",
   "acquisition",
   "unlock",
