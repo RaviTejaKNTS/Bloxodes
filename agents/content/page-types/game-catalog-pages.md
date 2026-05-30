@@ -80,19 +80,25 @@ Examples:
 - `adopt-me-pets`
 - `blox-fruits-accessories`
 
-The title should be unique, well-defined, and matched to the collection's real search intent. A plain wiki-style title such as `All <Collection> in <Game>` is acceptable only when the page is truly a simple list. Most game catalogs should promise the main answer players came for.
+The title should be unique, well-defined, and matched to the collection's real search intent. For wiki catalog pages, the default title shape is:
+
+```text
+All <N> <Item Or Collection> in <Game>: <Real Player SEO Question>
+```
+
+The question after the colon must come from research and should answer a decision players actually care about: how to get the items, where to go first, which option to unlock, what to build, what to save, when to farm, or which entries are worth using. Do not use filler questions such as `What Are They?`, `What Should You Know?`, or a generic `Complete Guide` tail. A plain wiki-style title such as `All <Collection> in <Game>` is only acceptable for a simple list page that has no stronger player question.
 
 Good title patterns include:
 
-- `All 26 Wizard Alchemy Materials and How to Get Them`
-- `All 10 Wizard Alchemy Chest Locations`
-- `All 10 Wizard Alchemy Enchantments and What They Do`
-- `All 7 Wizard Alchemy Wands and How to Get Them`
-- `All 10 Wizard Alchemy Races, Chances, and Bonuses`
+- `All 43 Classes in 99 Nights in the Forest: Which Should You Unlock First?`
+- `All 59 Materials in 99 Nights in the Forest: How Do You Get Each One?`
+- `All 68 Locations in 99 Nights in the Forest: Where Should You Go First?`
+- `All 33 Weapons in 99 Nights in the Forest: Which Ones Are Worth Using?`
+- `All 10 Enchantments in Wizard Alchemy: What Do They Do?`
 
 For game-catalog pages, `seo_title` should usually match the visible `title` exactly, including the item count when the title has one. Do not simplify `All 1,898 Furniture Items in Adopt Me` into `All Adopt Me Furniture`; the count is useful search context and can improve click appeal.
 
-The title is a promise. If it says `how to get them`, the page must explain sources, routes, requirements, drops, shops, or repeatability in enough detail. If it says `locations`, the cards and body must give usable location guidance. If it says `what they do`, the page must explain effects, bonuses, stats, or roles in gameplay language.
+The title is a promise. If it asks `How do you get each one?`, the page must explain sources, routes, requirements, drops, shops, or repeatability in enough detail. If it asks `Where should you go first?`, the cards and body must give usable route guidance. If it asks `Which should you unlock first?`, the body needs enough role, cost, requirement, and mistake-avoidance context for that decision.
 
 The public route should be `/wiki/<game-slug>/<collection-slug>`, for example `/wiki/adopt-me/pets`. Do not create new game-specific pages under `/catalog`; old `/catalog/<game-slug>-<collection-slug>` URLs should redirect to the wiki route.
 
@@ -210,7 +216,7 @@ Do not let a game catalog page land on random sections because the data had conv
 
 Do not make the reader sprint through the system. Explain the collection first, then separate obtainment, comparison, availability, trading, crafting, or value notes into their own paragraphs when those ideas are not directly connected.
 
-Headings should read like useful sentence fragments. Prefer `How retired eggs change trade value` over `Value`, or `Why source matters before rarity` over `Source`.
+Headings should read like useful sentence fragments that tell the reader what the section helps them decide. Avoid lazy labels such as `How classes work`, `How weapons work`, `Overview`, `Value`, `Source`, or `Progression` unless the section immediately makes that phrase specific. Prefer `Where classes unlock and why stock matters`, `What to build first at each station`, `Why source matters before rarity`, or `When retired eggs change trade value`.
 
 Use article-style structure when it helps the catalog page become useful:
 
@@ -335,6 +341,8 @@ Only include event-origin items when they belong to a durable collection, such a
 - Does `description_md` stay focused on whole-page mechanics instead of repeating section notes?
 - Did the FLOW pass rewrite `description_md`, headings, and transitions before final edit?
 - Does `description_md` include a useful action/how-to/use section, or do notes explain why the collection is passive?
+- Does the visible title follow `All <N> <Item> in <Game>: <real player question>` unless a recorded reason explains a simpler title?
+- Are `description_md` headings specific, action-led, and more useful than generic `How <collection> works` headings?
 - Did you explain unclear fields?
 - Did you define the game meaning of any field used as advice?
 - Does the page teach the system before it talks about comparison?

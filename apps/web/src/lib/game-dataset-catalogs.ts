@@ -826,7 +826,7 @@ export function buildGameDatasetCatalogCopy({
   const focus = getCollectionFocus(config.slug);
   const columnLabels = getUsefulColumnLabels(columns, 7);
   const fieldSummary = toReadableList(columnLabels.length ? columnLabels : ["names", "images", "details"]);
-  const title = `All ${countLabel} ${config.label} in ${config.gameName}`;
+  const title = `All ${countLabel} ${config.label} in ${config.gameName}: What Should You Compare First?`;
   const metaDescription = truncateMeta(
     `Compare ${countLabel} ${config.gameName} ${lowerLabel} by ${fieldSummary}.`
   );

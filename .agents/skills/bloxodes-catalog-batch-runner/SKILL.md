@@ -120,7 +120,7 @@ The first subagent response must be a plan, not final content. Require:
 - competitor/source usefulness check when SEO or traffic potential matters
 - local dataset state, expected item count, image state, and route/config state
 - data action: `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`
-- proposed visible title, `seo_title`, and exact title promise
+- proposed visible title, `seo_title`, and exact title promise; wiki catalog titles should usually use `All <N> <Item Or Collection> in <Game>: <real player SEO question>`
 - grouping axis and why it is the strongest in-game grouping
 - card fields to show and raw fields to hide
 - `description_json`, `description_md`, `how_it_works_md`, FAQ, and `wiki_md` plan
@@ -155,9 +155,11 @@ Before marking any catalog `done`, check:
 - missing or uncertain items/images are fixed, accepted, or blocked
 - title promise is delivered by data and copy
 - the page answers what the player can do next in-game
+- the title question is a real player decision, not a generic SEO tail
 - grouping and card fields match actual route behavior
 - public copy is evergreen, specific, and not generic
 - `description_md` explains the whole collection, not only card sections
+- `description_md` headings are specific and communicative, not generic labels like `How <collection> works`
 - `description_json` notes match rendered section labels
 - `wiki_md` is useful on the wiki hub
 - JSON parses and field shapes match `wiki_catalog_pages`

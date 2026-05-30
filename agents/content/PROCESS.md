@@ -269,7 +269,7 @@ Include:
 - parts to cut
 - where bullets, tables, or numbered steps should be used
 - how the page flows from context to action to caveats
-- for catalog and game-catalog pages, the proposed data update plan if needed, recommended visible title and `seo_title`, exact title promise, content coverage needed to satisfy that title, item-card section style, the reason that grouping matches the game, alternatives considered, card fields to show or hide, and the `description_json` keys/notes that should appear between sections
+- for catalog and game-catalog pages, the proposed data update plan if needed, recommended visible title and `seo_title`, exact title promise, content coverage needed to satisfy that title, item-card section style, the reason that grouping matches the game, alternatives considered, card fields to show or hide, and the `description_json` keys/notes that should appear between sections. For wiki catalog pages, the title should normally follow `All <N> <Item Or Collection> in <Game>: <real player SEO question>`.
 
 ## Missing or uncertain facts
 
@@ -290,7 +290,7 @@ Explain what the final page should teach, what it should skip, the tone to use, 
 
 If the `What this is`, `How it works in the game`, `Real examples from the data`, and `Reader questions and page outline` sections are weak, the research is not ready.
 
-For catalog and game-catalog work, do not move from research to final copy until the player-usefulness gate, data state, title promise, proposed section style, and card data shape are confirmed. The proposal should name the primary player task, the required facts, dataset status, source-count agreement or disagreement, missing image count, recommended title, title promise, grouping axis, fields that belong on the cards, and raw fields that should not render. Choose the title, grouping, and card fields that have the clearest in-game meaning, not merely the fields that are easiest to sort.
+For catalog and game-catalog work, do not move from research to final copy until the player-usefulness gate, data state, title promise, proposed section style, and card data shape are confirmed. The proposal should name the primary player task, the required facts, dataset status, source-count agreement or disagreement, missing image count, recommended title, title promise, grouping axis, fields that belong on the cards, and raw fields that should not render. Choose the title, grouping, and card fields that have the clearest in-game meaning, not merely the fields that are easiest to sort. A wiki catalog title should not be only `All <N> <Collection> in <Game>` when research points to a real question such as which to unlock, how to get each one, where to go first, what to build first, or which entries are worth using.
 
 The research notes must keep `Status: needs data update` when the item list or image coverage is not ready. They must keep `Status: needs section confirmation` until the title, section, and card plan is approved. When approval happens, record it plainly, for example: `Title, data, and section plan confirmed by user on YYYY-MM-DD: title promises how to get materials, update missing materials, group by source route, and show source, drop chance, Magic Power, and farming stage.` Do not write vague lines such as `user requested final copy` as a substitute for confirmation.
 
@@ -496,7 +496,7 @@ For catalog and game-catalog pages, the FLOW pass must confirm:
 - `description_md` explains the whole collection or mechanic, not individual card sections.
 - `description_json` owns the section-level notes near the cards.
 - `description_md` includes at least one useful action section when the collection has a player action behind it, such as how to get, find, unlock, farm, grow, hatch, roll, craft, equip, travel, compare, or use the items.
-- headings read like useful sentence fragments, not one-word labels or random fact snippets.
+- headings read like useful sentence fragments, not one-word labels, random fact snippets, or generic `How <collection> work(s)` labels.
 - at least one table, bullet list, or numbered process is used when it would explain faster than prose.
 - the copy moves from context to action to interpretation to caveats in a clean pace.
 - the page sounds like a practical Roblox player explaining the system, not a database row translated into paragraphs.

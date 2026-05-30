@@ -50,12 +50,18 @@ Good section ideas:
 - `How to farm materials without wasting time`
 - `How to read fruit stock and spawn timing`
 - `What the rarity tiers mean before you trade`
+- `Where classes unlock and why stock matters`
+- `What to build first at each station`
+- `Which weapons are worth ammo in hard fights`
 
 Weak section ideas:
 
 - `Value`
 - `Source`
 - `Progression`
+- `How classes work`
+- `How tools work`
+- `How weapons work`
 - `Instinct EXP comes from dodging` when the section never explains the player action clearly
 - Any heading that only restates a field name or one card value
 
@@ -113,7 +119,7 @@ Before the pass is complete, confirm:
 - `description_md` explains the whole page, not individual card sections.
 - The page has a useful action/how-to/use section when the collection has player action behind it.
 - The visible title and `seo_title` promise is answered by the cards, `description_md`, `how_it_works_md`, and FAQs.
-- Headings explain what the section helps the reader understand.
+- Headings explain what the section helps the reader understand and are specific enough for search intent. Replace vague headings such as `How classes work` with a sharper decision phrase such as `Where classes unlock and why stock matters`.
 - The first paragraph under a heading deepens the idea instead of repeating the heading.
 - Paragraphs do not mix unrelated concepts.
 - At least one list, table, or numbered process is used when it would explain faster than prose.

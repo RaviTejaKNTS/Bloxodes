@@ -87,6 +87,8 @@ Fail the final edit and rewrite before import if public copy contains:
 - catalog or game-catalog final copy that skipped the FLOW pass
 - catalog `description_md` that repeats card-section notes instead of explaining the whole collection or mechanic
 - catalog `description_md` with no useful action/use/how-to section when the collection has a clear player action behind it
+- wiki catalog titles that stop at `All <N> <Collection> in <Game>` when research found a real player question to answer
+- generic catalog headings such as `How classes work`, `How tools work`, `Overview`, `Value`, or `Source` when the section can say the decision it helps with
 - catalog or game-catalog titles that promise how to get items, locations, drops, chances, brewing, crafting, effects, value, or comparison when the body, cards, and FAQ do not answer that promise in enough detail
 - random headings that do not create a clear reader path
 - count-based titles that disagree with local dataset or rendered card counts without an intentional explanation
@@ -100,7 +102,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 
 - Clean paragraph breaks.
 - Sentence-case headings.
-- Headings should usually explain what the section covers, not use one-word labels such as `Sources`, `Value`, `Tips`, or `Overview`.
+- Headings should usually explain what the section covers, not use one-word labels such as `Sources`, `Value`, `Tips`, or `Overview`, or generic labels such as `How classes work`.
 - The paragraph after a heading should deepen the idea, not repeat it.
 - One paragraph should explain one connected concept.
 - Copy should use player-perspective language: practical `you` and `your` guidance with Roblox-gamer judgment, not stiff help-center narration.
@@ -117,7 +119,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - `description_md` does not repeat the same section notes already carried by `description_json`.
 - `description_md` has gone through the FLOW pass and reads as whole-page explanation, not a pile of unrelated mini sections.
 - `description_md` includes a useful action/use/how-to section when the catalog item type has a player action behind it.
-- `title` and `seo_title` match the approved title promise. If they promise obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison, the page body must fully answer that promise.
+- `title` and `seo_title` match the approved title promise. For wiki catalog pages, this usually means `All <N> <Item Or Collection> in <Game>: <real player SEO question>`. If they promise obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, priority, or comparison, the page body must fully answer that promise.
 - The primary player task and required fact matrix are answered by visible card fields, body sections, FAQs, or an explicit unavailable/blocked note in research.
 - For catalog and game-catalog pages, the data and image audit in `research-notes.md` is resolved before import. Missing items, stale fields, and image gaps must be fixed or explicitly accepted.
 - The confirmed `description_json` keys match the route's actual section labels. If the route renders `Other`, `Rarity`, or another unexpected group while the notes are written for different sections, the page fails final edit.

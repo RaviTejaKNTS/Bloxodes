@@ -45,7 +45,7 @@ Stages: `queued`, `planning`, `revision needed`, `plan approved`, `data/images`,
 - [ ] Check source list, source count confidence, local/source/rendered/title counts, and row state.
 - [ ] Check data action: `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`.
 - [ ] Check image plan rejects weak substitutions.
-- [ ] Check proposed title, `seo_title`, and exact title promise.
+- [ ] Check proposed title, `seo_title`, and exact title promise. Wiki catalog titles should usually follow `All <N> <Item Or Collection> in <Game>: <real player SEO question>`.
 - [ ] Check grouping axis and card fields are useful for players.
 - [ ] Check raw fields to hide, `description_json`, `description_md`, FAQ, and `wiki_md` plan.
 - [ ] Approve, request revision, or block each catalog before build work starts.
@@ -65,7 +65,7 @@ Stages: `queued`, `planning`, `revision needed`, `plan approved`, `data/images`,
 - [ ] Check each subagent `todo.md` is complete or honestly blocked.
 - [ ] Read each `research-notes.md` and verify it explains the collection as a game system.
 - [ ] Verify each completed page answers its primary player task and required fact matrix.
-- [ ] Verify title promise, grouping, card fields, section labels, image behavior, FAQ, and `wiki_md`.
+- [ ] Verify title promise, grouping, card fields, section labels, image behavior, FAQ, and `wiki_md`. Reject generic `description_md` headings such as `How <collection> works` when a sharper player decision heading is available.
 - [ ] Run or review local import/readback and route preview checks when pages are being promoted.
 - [ ] Mark each catalog `done` only after data, images, copy, and render assumptions are clean.
 - [ ] Record blocked catalogs and the exact blocker.

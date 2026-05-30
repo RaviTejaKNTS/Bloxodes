@@ -72,7 +72,7 @@ Important fields:
 
 - Game wiki slug: lowercase kebab-case, e.g. `blox-fruits`.
 - Wiki catalog code: `<game-slug>-<collection-slug>`, e.g. `blox-fruits-swords`.
-- Catalog title: unique, well-defined, and intent-matched. Use `All <Collection> in <Game>` only for simple list pages; prefer titles such as `All 26 Wizard Alchemy Materials and How to Get Them`, `All 10 Wizard Alchemy Chest Locations`, or `All 10 Wizard Alchemy Enchantments and What They Do` when the content answers that promise.
+- Catalog title: unique, well-defined, and intent-matched. For wiki catalog pages, prefer `All <N> <Item Or Collection> in <Game>: <real player SEO question>`, such as `All 43 Classes in 99 Nights in the Forest: Which Should You Unlock First?`, `All 59 Materials in 99 Nights in the Forest: How Do You Get Each One?`, or `All 68 Locations in 99 Nights in the Forest: Where Should You Go First?`. Use `All <Collection> in <Game>` only for simple list pages with no stronger player question.
 - Route should be predictable and SEO-readable: `/wiki/blox-fruits/swords`.
 
 ## Local-First Process
@@ -165,7 +165,7 @@ Do not write public copy from a database-field mindset. Explain the game system 
 
 Each `wiki_catalog_pages` row should have useful copy, not just SEO filler.
 
-- `title`: short, scannable, unique, and matched to the collection's real player intent. If the title promises how to get, locations, drops, chances, brewing, crafting, effects, value, or comparison, the public fields and card data must answer that in detail.
+- `title`: short, scannable, unique, and matched to the collection's real player intent. For wiki catalog pages, use `All <N> <Item Or Collection> in <Game>: <real player SEO question>` unless the notes record a reason for a simpler title. If the title promises how to get, locations, drops, chances, brewing, crafting, effects, value, priority, or comparison, the public fields and card data must answer that in detail.
 - `seo_title`: for catalog pages, default to the visible title with the item count, for example `All 1,898 Furniture Items in Adopt Me`. Do not simplify count-based catalog titles unless the title is genuinely too long or the route has a special SEO format.
 - `meta_description`: specific, under 160 characters, and mentions the game plus the collection.
 - `intro_md`: explain what the collection controls in the game and what the page helps players compare.
@@ -185,7 +185,7 @@ Good catalog copy usually follows this shape:
 6. Any current, retired, event, premium, reward, trade-only, or uncertain caveats.
 7. The real player task and the exact facts needed to complete it.
 
-When item cards are sectioned, put the section-specific setup in `description_json` and keep `description_md` shorter. `description_md` should explain the whole system, such as where the mechanic lives in-game, how players acquire items, how odds or prices work, and what mistakes apply across the collection. The FLOW pass should reject `description_md` that only turns card sections into larger article headings.
+When item cards are sectioned, put the section-specific setup in `description_json` and keep `description_md` shorter. `description_md` should explain the whole system, such as where the mechanic lives in-game, how players acquire items, how odds or prices work, and what mistakes apply across the collection. The FLOW pass should reject `description_md` that only turns card sections into larger article headings, and it should rewrite generic headings like `How classes work` into specific headings such as `Where classes unlock and why stock matters`.
 
 ### Wiki Page Content
 

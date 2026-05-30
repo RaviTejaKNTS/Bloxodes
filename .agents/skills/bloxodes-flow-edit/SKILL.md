@@ -28,7 +28,7 @@ For catalog and game-catalog pages, also confirm the player-usefulness gate and 
 
 For catalog and game-catalog pages, focus hardest on `description_md`, `how_it_works_md`, FAQs, headings, and transitions. Weak pages often have true facts but weird sections. Fix the shape, not only the sentences.
 
-Also check the approved title promise during FLOW. If the title says `how to get them`, `locations`, `drops`, `chances`, `what they do`, or another specific answer, reshape `description_md`, `how_it_works_md`, FAQs, and headings until the page actually delivers that answer.
+Also check the approved title promise during FLOW. If the title says `how to get them`, `locations`, `drops`, `chances`, `what they do`, `which should you unlock first`, `what should you build first`, or another specific answer, reshape `description_md`, `how_it_works_md`, FAQs, and headings until the page actually delivers that answer.
 
 ## Catalog Rules
 
@@ -41,7 +41,7 @@ Every catalog or game-catalog `description_md` should include at least one usefu
 
 Use tables, bullets, or numbered steps when they explain faster than paragraphs. Do not force formatting when a paragraph is clearer.
 
-Rewrite headings that feel random, field-shaped, or disconnected. A heading should tell the reader what the section is about to help them understand.
+Rewrite headings that feel random, field-shaped, disconnected, or too generic. A heading should tell the reader what the section is about to help them understand. Do not leave headings like `How classes work`, `How tools work`, `Overview`, or `Value` when the section can say `Where classes unlock and why stock matters` or `What to upgrade before pushing farther`.
 
 ## Finish
 
