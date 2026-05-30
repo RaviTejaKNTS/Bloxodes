@@ -2,6 +2,7 @@ import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { slugify } from "@/lib/slug";
+import { cleanRobloxUniverseDisplayName, isDirtyRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
 
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";
 const GAME_ICONS_API = "https://thumbnails.roblox.com/v1/games/icons";
@@ -229,17 +230,6 @@ function toSlug(value?: string | null): string | null {
   if (!value) return null;
   const slug = slugify(value);
   return slug || null;
-}
-
-function sanitizeDisplayName(value?: string | null): string | null {
-  if (!value) return null;
-  let result = value.replace(/[\[\{\(][^\]\}\)]*[\]\}\)]/g, " ");
-  result = result.replace(/[\p{Extended_Pictographic}\p{Emoji_Presentation}]/gu, " ");
-  // Drop embedded version strings like "v3.2.7"
-  result = result.replace(/\bv\d+(?:\.\d+){1,3}\b/gi, " ");
-  result = result.replace(/[^A-Za-z0-9\s]/g, " ");
-  result = result.replace(/\s+/g, " ").trim();
-  return result.length ? result : null;
 }
 
 function retryAfterMs(headers: Headers): number | null {
@@ -734,7 +724,6 @@ function mapGameDetail(
     universe_id: game.id,
     root_place_id: rootPlaceId,
     name: metadata?.displayName ?? game.name ?? `Universe ${game.id}`,
-    display_name: metadata?.displayName ?? game.name ?? null,
     description: metadata?.description ?? game.description ?? null,
     description_source: metadata?.description
       ? metadata.descriptionSource ?? "open_cloud"
@@ -807,12 +796,9 @@ function mapGameDetail(
     social_links: metadata?.socialLinks ?? {}
   };
 
-  const displaySource =
-    (payload.display_name as string | null) ??
-    (payload.name as string | null) ??
-    `Universe ${game.id}`;
-  const sanitizedDisplay = sanitizeDisplayName(displaySource);
-  payload.display_name = sanitizedDisplay ?? displaySource;
+  const displaySource = (payload.name as string | null) ?? `Universe ${game.id}`;
+  const sanitizedDisplay = cleanRobloxUniverseDisplayName(displaySource);
+  payload.display_name = sanitizedDisplay;
   const slugSource =
     sanitizedDisplay ?? (payload.name as string | null) ?? `universe-${game.id}`;
   const safeSlug =
@@ -829,11 +815,23 @@ function mergeWithExistingValues(
   existing?: UniverseDbRow | null
 ): UniverseUpsertRecord {
   if (!existing) return incoming;
-  const lockedFields = new Set(["display_name", "slug"]);
+  const lockedFields = new Set(["slug"]);
   const merged: Record<string, unknown> = { ...existing };
 
   for (const [key, value] of Object.entries(incoming)) {
     if (key === "universe_id") continue;
+
+    if (key === "display_name") {
+      const existingValue = existing[key];
+      const incomingValue = typeof value === "string" ? value.trim() : null;
+      const hasExistingValue =
+        existingValue !== null &&
+        existingValue !== undefined &&
+        (typeof existingValue !== "string" || existingValue.trim().length > 0);
+      if (hasExistingValue && (!isDirtyRobloxUniverseDisplayName(existingValue as string) || !incomingValue)) {
+        continue; // keep existing clean/editorial display_name values
+      }
+    }
 
     if (lockedFields.has(key)) {
       const existingValue = existing[key];
@@ -842,7 +840,7 @@ function mergeWithExistingValues(
         existingValue !== undefined &&
         (typeof existingValue !== "string" || existingValue.trim().length > 0);
       if (hasValue) {
-        continue; // keep existing display_name/slug if set
+        continue; // keep existing locked values if set
       }
     }
 

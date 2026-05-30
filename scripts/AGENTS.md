@@ -62,6 +62,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `rollup-universe-daily-stats.ts` rolls hourly rows into the existing daily table. Use `npm run stats:rollup-daily -- --date yesterday --finalize` after the UTC day ends so daily `playing` means the highest recorded CCU for that day.
   - `rank-universe-stats.ts` snapshots hourly public rankings into `roblox_universe_rank_snapshots`; run it after the hourly collector when `/stats` rank movement needs fresh data.
   - `enrich-roblox-universes.ts` no longer writes same-day stat rows by default; set `ROBLOX_ENRICH_WRITE_DAILY_STATS=true` only for a legacy one-off where hourly rollups are not being used.
+  - `backfill-clean-display-names.ts` cleans `roblox_universes.display_name` from raw Roblox titles while leaving `name` as the raw source value. It is dry-run by default; use `--apply` locally, and pair `NODE_ENV=production` with `--allow-prod` only after a clean production dry-run.
 
 ## Operational Expectations
 

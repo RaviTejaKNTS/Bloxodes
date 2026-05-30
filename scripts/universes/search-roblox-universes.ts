@@ -629,7 +629,6 @@ function mapGameToUniversePayload(
     universe_id: candidate.universeId,
     root_place_id: rootPlaceId,
     name,
-    display_name: name,
     slug: slugify(name) || `universe-${candidate.universeId}`,
     description: detail?.description ?? candidate.description ?? null,
     description_source: detail?.description ? "games" : null,

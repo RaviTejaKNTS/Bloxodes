@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { slugify } from "@/lib/slug";
+import { cleanRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
 import { extractPlaceId, scrapeRobloxGameMetadata, type RobloxGameMetadata } from "@/lib/roblox/game-metadata";
 
 const USER_AGENT =
@@ -180,7 +181,7 @@ export async function ensureUniverseForRobloxLink(
     universe_id: universeId,
     root_place_id: fallbackRoot,
     name: canonicalName,
-    display_name: canonicalName,
+    display_name: cleanRobloxUniverseDisplayName(canonicalName),
     slug: slug ?? null,
     description: gameDetail?.description ?? null,
     description_source: gameDetail?.description ? "games_api" : null,

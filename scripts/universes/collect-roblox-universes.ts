@@ -494,7 +494,6 @@ async function collectSortContent(
         universe_id: universeId,
         root_place_id: rootPlaceId,
         name: baseName ?? `Universe ${universeId}`,
-        display_name: baseName ?? null,
         slug: null,
         description: null,
         description_source: null,

@@ -61,6 +61,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Update universe slugs | `scripts/universes/update-universe-slugs.ts` | direct `tsx scripts/universes/update-universe-slugs.ts` |
 | Sync game slugs | `scripts/universes/sync-game-slugs.ts` | direct `tsx scripts/universes/sync-game-slugs.ts` |
 | Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes`, `npm run enrich:universes:light`, `npm run enrich:universes:deep` |
+| Backfill clean universe display names | `scripts/universes/backfill-clean-display-names.ts` | `npm run backfill:universe-display-names`; write locally with `-- --apply`, write production only with `NODE_ENV=production npm run backfill:universe-display-names -- --apply --allow-prod` after a clean production dry-run |
 | Update universe stats | `scripts/universes/update-universe-stats.ts` | `npm run update:stats` |
 | Update current playing counts | `scripts/universes/update-universe-playing.ts` | `npm run update:playing` |
 | Update hourly public stats | `scripts/universes/update-universe-hourly-stats.ts` | `npm run update:hourly-stats`; use `-- --rollup-today` only when the hourly job should also refresh today's daily row |
