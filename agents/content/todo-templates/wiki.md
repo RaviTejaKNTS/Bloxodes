@@ -24,7 +24,7 @@ Workspace: `tmp/content-workspace/<game-slug>/wiki/`
 - [ ] Explain the core game loop in `research-notes.md` before implementation notes.
 - [ ] Verify current Roblox metadata and any unstable game/update/event facts.
 - [ ] Decide whether `roblox_universes.game_description_md` needs to be written or updated for the visible game summary.
-- [ ] Identify useful player tips and verified controls only.
+- [ ] Research accurate controls, record verification notes, and write `controls_json`.
 - [ ] Note related page gaps without rewriting catalog `wiki_md` inside the wiki workflow.
 - [ ] Do not hard-code current code names, active counts, live event status, event dates, or temporary reward timelines.
 - [ ] Decide what the wiki should skip because related sections already render it.
@@ -34,7 +34,7 @@ Workspace: `tmp/content-workspace/<game-slug>/wiki/`
 - [ ] Write `final.json` in the `wiki_pages` shape.
 - [ ] Write or update the companion game description when the rendered summary needs it.
 - [ ] Keep `tips_md` short, specific, and practical.
-- [ ] Leave `controls_json` empty unless controls are verified.
+- [ ] Write verified `controls_json`; if controls cannot be verified, mark the wiki blocked instead of complete.
 
 ## Verify
 

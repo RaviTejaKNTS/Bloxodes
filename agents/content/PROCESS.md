@@ -102,7 +102,7 @@ A checkbox can only be marked done when the matching evidence exists. Do not che
 
 - `Import or preview locally` needs an import, seed, or local preview command.
 - `Verify /wiki/<slug> renders...` needs rendered HTML or browser proof for the visible page.
-- `Identify verified controls` needs a source note or an explicit decision to leave controls empty.
+- `Research and write controls_json` needs a source note or verification note for the controls. If controls cannot be verified, the page stays blocked or needs controls research.
 - `Check related sections` needs the actual related rows or routes to be inspected and recorded.
 
 No `brief.md`. No `review.md`. No fan-out plan file. No draft file. No generic shared batch research file pretending to cover every page.
@@ -349,7 +349,9 @@ Wiki output:
   "seo_title": "",
   "meta_description": "",
   "tips_md": "",
-  "controls_json": []
+  "controls_json": [
+    { "action": "Interact", "desktop": "E" }
+  ]
 }
 ```
 
@@ -479,7 +481,7 @@ Wiki page work has a rendered-page contract. Before writing, map the visible wik
 
 If the visible game summary is empty or weak, the wiki workflow must update `roblox_universes.game_description_md` or record why it is intentionally left blank. Do not call a wiki complete when only `wiki_pages` fields are filled but the rendered page is still thin.
 
-Wiki page work should not rewrite catalog-page blurbs. A wiki workflow owns game-level copy such as `meta_description`, `tips_md`, verified `controls_json`, and any needed companion `roblox_universes.game_description_md`; related catalog summaries should already come from each catalog page's `wiki_md`. If those blurbs are weak, switch to the matching catalog or game-catalog workflow for that one catalog page instead of patching them inside the wiki pass.
+Wiki page work should not rewrite catalog-page blurbs. A wiki workflow owns game-level copy such as `meta_description`, `tips_md`, researched `controls_json`, and any needed companion `roblox_universes.game_description_md`; related catalog summaries should already come from each catalog page's `wiki_md`. If those blurbs are weak, switch to the matching catalog or game-catalog workflow for that one catalog page instead of patching them inside the wiki pass.
 
 For catalog-style pages, `description_json` is the section-level context layer when item cards are divided into meaningful sections. Keep each entry short, usually one to three useful sentences, and place the explanation near the card section it supports. Do not repeat those same notes later in `description_md`.
 
@@ -576,7 +578,7 @@ For wiki pages, also check:
 
 - title, meta description, and canonical metadata
 - visible game summary from `roblox_universes.game_description_md`
-- verified controls or the intentional absence of controls
+- verified controls rendered from `controls_json`
 - practical gameplay tips
 - related catalog sections and catalog-card images when catalogs exist
 - codes, events, tools, articles, checklists, quizzes, media, badges, passes, servers, and developer sections that should appear or be absent based on local data

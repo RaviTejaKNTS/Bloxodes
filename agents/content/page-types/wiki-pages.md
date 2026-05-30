@@ -46,7 +46,7 @@ A finished wiki hub must answer the basic player questions even when some relate
 - What does the player do in a normal session?
 - What are the core progression, combat, collection, reward, or role systems?
 - What should a new or returning player check first?
-- Which controls are verified, or why are controls omitted?
+- Which controls were researched, verified, and written into `controls_json`?
 - Which related sections exist locally, and which expected sections are missing?
 - What should the wiki skip because related cards already carry that live detail?
 
@@ -74,7 +74,9 @@ Write in this shape:
   "seo_title": "",
   "meta_description": "",
   "tips_md": "",
-  "controls_json": [],
+  "controls_json": [
+    { "action": "Interact", "desktop": "E" }
+  ],
   "cover_image": null,
   "universe_id": null
 }
@@ -120,18 +122,20 @@ Bad tips:
 
 ## Controls JSON
 
-Fill `controls_json` only when controls are known and useful. Do not guess.
+`controls_json` is required wiki data. Research the game's controls before the wiki is marked complete, then write the verified controls into `controls_json`. Do not guess, and do not leave controls empty as a normal completion path.
+
+Use reliable evidence: in-game control prompts, official Roblox/developer instructions, source-backed gameplay pages, screenshots, or another documented verification pass. Record the source or verification note in `research-notes.md`. If the available evidence only verifies desktop controls, write the desktop controls and record which device controls remain unverified. If no useful controls can be verified, mark the wiki `blocked` or `needs controls research` instead of publishing or calling the page complete.
 
 Good entries should be simple:
 
 ```json
 [
-  { "label": "Sprint", "value": "Shift" },
-  { "label": "Interact", "value": "E" }
+  { "action": "Sprint", "desktop": "Shift" },
+  { "action": "Interact", "desktop": "E", "mobile": "Tap the prompt" }
 ]
 ```
 
-Leave it empty when controls are not verified.
+Avoid stuffing controls with generic Roblox defaults unless they were checked for the target game. Controls should help the player use the actual experience, not only document platform assumptions.
 
 ## Related Data Awareness
 
@@ -200,7 +204,9 @@ For event sections:
   "seo_title": "Grow a Garden Wiki",
   "meta_description": "Grow a Garden wiki hub with active codes, events, catalog links, gameplay tips, and Roblox universe details.",
   "tips_md": "- Seed Shop stock refreshes every 5 minutes, so short check-ins matter more than long waiting sessions.\n- Pet eggs rotate on their own timer, which makes source and availability important when comparing pets.\n- Mutations and weather can change crop value, so value planning depends on timing as much as planting.",
-  "controls_json": []
+  "controls_json": [
+    { "action": "Interact", "desktop": "E" }
+  ]
 }
 ```
 
@@ -216,6 +222,7 @@ For event sections:
 - Are game created/updated dates clearly game metadata?
 - Are tips specific and useful?
 - Is the meta description specific to this game's hub?
+- Are controls researched, source-noted, accurate, and rendered on the page?
 - Are catalog sections linked through `universe_id` and catalog code patterns?
 - Did local DB readback include both `wiki_pages` and the linked `roblox_universes` row?
 - Did local render verification confirm title, metadata, game summary, tips, controls, related sections, and images when applicable?

@@ -58,7 +58,9 @@ Return valid JSON:
   "seo_title": "",
   "meta_description": "",
   "tips_md": "",
-  "controls_json": []
+  "controls_json": [
+    { "action": "Interact", "desktop": "E" }
+  ]
 }
 ```
 
@@ -70,9 +72,11 @@ If the rendered game summary needs work, also prepare the companion `roblox_univ
 
 Inspect the wiki row, Roblox universe row, and live related sections before writing. Then research the game loop in plain language. The copy should show that you understand what the player does in the game, what systems matter, and what a returning player may want to check quickly.
 
-The wiki must answer the minimum player questions: what the game is, what a normal session looks like, which systems drive progress, what a new or returning player should check first, which verified controls exist, which related sections exist locally, and which details are better left to related cards.
+The wiki must answer the minimum player questions: what the game is, what a normal session looks like, which systems drive progress, what a new or returning player should check first, which researched and verified controls exist, which related sections exist locally, and which details are better left to related cards.
 
 Keep `tips_md` short, practical, and game-specific. A good tip makes one clear point and gives enough context for the reader to know why it matters. Avoid generic advice that could fit any Roblox game.
+
+Research controls as a required data point. Write accurate controls into `controls_json` and record the verification source or in-game check in `research-notes.md`. Do not guess generic Roblox controls. If useful controls cannot be verified, mark the wiki blocked or `needs controls research`; do not call it complete with an empty controls array.
 
 Do not repeat details already shown in live related sections. If active codes, events, catalog collections, or tools are already rendered below, the wiki copy should orient the reader rather than restating every item.
 
@@ -84,4 +88,4 @@ Use `Game created on` and `Game last updated on` for Roblox metadata. Keep Bloxo
 
 ## Finish
 
-Run the final edit gate before saving `final.json`. Then seed or import locally, read back both `wiki_pages` and the linked `roblox_universes` row, and preview `/wiki/<slug>` locally. The rendered page must show the expected title, metadata, game summary, tips, verified controls or intentionally omitted controls, related sections, and images when applicable before the todo can be marked complete or the work can be promoted.
+Run the final edit gate before saving `final.json`. Then seed or import locally, read back both `wiki_pages` and the linked `roblox_universes` row, and preview `/wiki/<slug>` locally. The rendered page must show the expected title, metadata, game summary, tips, verified controls, related sections, and images when applicable before the todo can be marked complete or the work can be promoted.

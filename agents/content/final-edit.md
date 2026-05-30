@@ -122,7 +122,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - For catalog and game-catalog pages, the data and image audit in `research-notes.md` is resolved before import. Missing items, stale fields, and image gaps must be fixed or explicitly accepted.
 - The confirmed `description_json` keys match the route's actual section labels. If the route renders `Other`, `Rarity`, or another unexpected group while the notes are written for different sections, the page fails final edit.
 - The confirmed card/table fields match the route's actual rendered fields. If the cards are still showing raw descriptions, raw `pros`/`cons`, nested stats, source HTML, vague meta text, or unexplained yes/no values, the page fails final edit even if the prose is good.
-- `controls_json` is filled only when controls are known and useful.
+- `controls_json` is researched, source-noted, accurate, and not empty for a completed wiki page.
 - Only include fields the destination table owns.
 
 ## Page-Specific Final Checks
@@ -189,7 +189,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - The visible game summary from `roblox_universes.game_description_md` is useful, or the reason it is intentionally blank is recorded.
 - The wiki answers what the game is, what a normal session looks like, which systems matter, and what a new or returning player should check first.
 - Tips are specific enough to be useful.
-- Controls are filled only when verified, and omitted controls are not guessed.
+- Controls are researched and filled when the wiki is completed. If accurate controls cannot be verified, the wiki is blocked or needs controls research; it is not complete.
 - Related codes, events, catalogs, tools, articles, checklists, quizzes, media, badges, passes, servers, and developer sections have been checked for local existence.
 - Related sections can carry live detail, but the wiki copy must still give context.
 - The wiki output does not include catalog-page fields such as `wiki_md`; those belong to the catalog or game-catalog workflow.

@@ -266,7 +266,7 @@ The notes must answer the minimum useful wiki questions:
 - What does the player do in a normal session?
 - Which systems drive progress, rewards, combat, collection, trading, or role choice?
 - What should a new or returning player check first?
-- Which controls are verified, and which controls should be omitted instead of guessed?
+- Which controls are verified, how they were verified, and how they should be written into `controls_json`?
 - Which related sections exist locally, and which likely sections are missing?
 - What should the wiki skip because related cards already carry the live detail?
 

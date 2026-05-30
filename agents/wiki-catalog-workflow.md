@@ -194,7 +194,7 @@ Each `wiki_pages` row is a game hub, not a full article dump.
 - `title`: `<Game> Wiki`.
 - `meta_description`: explain the hub in one specific sentence.
 - `tips_md`: short practical bullets that are specific to the game.
-- `controls_json`: fill only when controls are known and useful.
+- `controls_json`: research accurate controls, record verification notes, and fill the field before the wiki is called complete. If controls cannot be verified, mark the wiki blocked or needing controls research.
 - `cover_image`: use a strong local or Roblox image when available.
 - The wiki hub should connect the player to catalog pages, tools, codes, articles, checklists, events, and game metadata through existing related-data blocks.
 
@@ -304,7 +304,7 @@ Production promotion is a release workflow, not only a database write. The work 
    - Poll live pages for up to 5 minutes after the production write.
    - If pages do not update within that window, inspect the revalidation queue/worker and report the blockage instead of calling the publish complete.
 10. Verify live production pages:
-   - `/wiki/<game-slug>` returns 200 and shows title, metadata, game description, controls or intentional absence, tips, related catalog cards, and images where applicable.
+   - `/wiki/<game-slug>` returns 200 and shows title, metadata, game description, controls, tips, related catalog cards, and images where applicable.
    - Every `/wiki/<game-slug>/<collection-slug>` returns 200 and shows the expected title, intro, item names, card sections, card fields, page descriptions, FAQ, and wired images.
    - Sitemaps include the pages when applicable.
    - If live routes or images 404, the database publish is not a completed site release. Confirm the production deploy includes required route/config changes, `data/<Game>/`, and `apps/web/public/<Game>/`.
