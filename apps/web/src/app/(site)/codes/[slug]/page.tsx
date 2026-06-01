@@ -670,7 +670,7 @@ export default async function GamePage({ params }: Params) {
     }
   }
 
-  const universeLabel = universe?.display_name ?? universe?.name ?? game.name;
+  const universeLabel = game.name;
   const universeId = game.universe_id ?? null;
   const relatedChecklists = universeId ? await listPublishedChecklistsByUniverseId(universeId, 1) : [];
   const relatedArticles = universeId ? await listPublishedArticlesByUniverseId(universeId, 3) : [];
@@ -690,7 +690,7 @@ export default async function GamePage({ params }: Params) {
       slug: row.slug,
       title: row.title,
       summary,
-      universeName: row.universe?.display_name ?? row.universe?.name ?? null,
+      universeName: game.name,
       coverImage: row.universe?.icon_url ?? `${SITE_URL}/og-image.png`,
       updatedAt: row.updated_at || row.published_at || row.created_at || null,
       itemsCount
