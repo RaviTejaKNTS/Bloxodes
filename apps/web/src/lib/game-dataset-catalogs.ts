@@ -1,6 +1,7 @@
 export type GameDatasetCatalogGroup = {
   gameSlug: string;
   gameName: string;
+  universeId?: number;
   dataDir: string;
   universeNames: string[];
   collections: string[];
@@ -230,6 +231,14 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
       "materials",
       "tameable-animals"
     ]
+  },
+  {
+    gameSlug: "murderers-vs-sheriffs",
+    gameName: "Murderers VS Sheriffs",
+    universeId: 7219654364,
+    dataDir: "Murderers VS Sheriffs",
+    universeNames: ["[DUELS] Murderers VS Sheriffs", "[🏖️DUELS] Murderers VS Sheriffs", "Murderers VS Sheriffs"],
+    collections: ["weapons", "crates", "modes", "death-effects", "bundles"]
   }
 ];
 
@@ -239,6 +248,7 @@ const COLLECTION_LABEL_OVERRIDES: Record<string, string> = {
   "aura-visuals": "Aura Visuals",
   crafting: "Crafting Recipes",
   "crafting-recipes": "Crafting Recipes",
+  "death-effects": "Death Effects",
   "fighting-styles": "Fighting Styles",
   "fuse-machine": "Fuse Machine Results",
   gamepasses: "Gamepasses",
@@ -274,12 +284,15 @@ const COLLECTION_FOCUS: Record<string, string> = {
   bosses: "boss names, locations, levels, drops, rewards, and fight details",
   brainrots: "rarity, income, cost, status, rituals, mutations, traits, and release details",
   brooms: "prices, locations, travel stats, availability, and movement value",
+  bundles: "pack prices, confirmed contents, source proof, availability, and related collections",
   charms: "rarity, source route, availability, weapon scope, and cosmetic collection context",
   chests: "route order, landmarks, location hints, reward notes, and travel tips",
   clans: "clan effects, bonuses, rarity, requirements, and obtainment",
   classes: "class costs, starter tools, run roles, perks, level requirements, and solo or team unlock value",
   crafting: "crafting stations, bench tiers, recipe costs, effects, limits, unlock requirements, and availability",
   "crafting-recipes": "crafted results, recipe areas, result odds, required slimes, and crafting progression",
+  crates: "box prices, purchase routes, availability, reward-pool notes, odds status, and source confidence",
+  "death-effects": "kill effect names, prices, unlock routes, bundle families, availability, and source proof",
   dungeons: "entry rules, wave structure, rewards, difficulty, and dungeon purpose",
   eggs: "price, rarity chances, availability, events, and obtainment",
   emotes: "emote sources, rarity, key prices, availability, and cosmetic use",
@@ -391,6 +404,7 @@ const FIELD_LABELS: Record<string, string> = {
   bosses: "bosses",
   buildRole: "build role",
   building: "building",
+  bundleFamily: "bundle family",
   cashBonus: "cash bonus",
   catalogSection: "section",
   capacityOrStat: "capacity / stat",
@@ -403,6 +417,7 @@ const FIELD_LABELS: Record<string, string> = {
   compatibleRace: "compatible race",
   classRestriction: "class restriction",
   confidence: "confidence",
+  contents: "contents",
   cooldown: "cooldown",
   cooldownReduction: "cooldown reduction",
   cost: "cost",
@@ -419,7 +434,9 @@ const FIELD_LABELS: Record<string, string> = {
   craftingStage: "crafting stage",
   craftingRequirement: "crafting requirement",
   cookMethod: "cook method",
+  currency: "currency",
   damage: "damage",
+  demand: "demand",
   damageMultiplier: "damage multiplier",
   damageReduction: "damage reduction",
   danger: "danger",
@@ -455,6 +472,7 @@ const FIELD_LABELS: Record<string, string> = {
   dropSummary: "drop summary",
   duration: "duration",
   effect: "effect",
+  effectType: "effect type",
   enemyHealth: "enemy health",
   encounter: "encounter",
   encounterType: "encounter type",
@@ -496,6 +514,7 @@ const FIELD_LABELS: Record<string, string> = {
   importantRule: "important rule",
   islandArea: "island / area",
   islandRegion: "island / region",
+  itemTypes: "item types",
   itemType: "type",
   keyNpcs: "key NPCs",
   keyContent: "key content",
@@ -573,7 +592,9 @@ const FIELD_LABELS: Record<string, string> = {
   progressionRole: "progression role",
   progressionNote: "progression note",
   progressionUse: "route use",
+  priceOrRoute: "price / route",
   priceRobux: "Robux price",
+  purchaseRoute: "purchase route",
   rebirthNumber: "rebirth",
   rebirthRange: "rebirth range",
   questGiverName: "quest giver",
@@ -593,6 +614,7 @@ const FIELD_LABELS: Record<string, string> = {
   requirements: "requirements",
   requirementMastery: "requirement / mastery",
   relatedRoute: "related route",
+  relatedCatalogs: "related catalogs",
   relatedWeapon: "related weapon",
   relatedSystem: "related system",
   relatedTarget: "related target",
@@ -606,6 +628,7 @@ const FIELD_LABELS: Record<string, string> = {
   rewardTwo: "Reward 2",
   rewardThree: "Reward 3",
   rewardSummary: "rewards",
+  rewardPool: "reward pool",
   robloxId: "Roblox ID",
   robloxUrl: "Roblox URL",
   robux: "Robux cost",
@@ -626,6 +649,7 @@ const FIELD_LABELS: Record<string, string> = {
   rerollStatus: "reroll status",
   rateOrReload: "rate / reload",
   runType: "run type",
+  saleState: "sale state",
   sea: "sea",
   seaStage: "sea / stage",
   seaEventRole: "sea-event role",
@@ -686,6 +710,8 @@ const FIELD_LABELS: Record<string, string> = {
   totalZoneLuck: "total zone luck",
   goopPerKill: "Goop per kill",
   goopRequired: "Goop required",
+  tradeNote: "trade note",
+  trend: "trend",
   type: "type",
   unlock: "unlock",
   unlockPriority: "unlock priority",
@@ -706,6 +732,8 @@ const FIELD_LABELS: Record<string, string> = {
   combatTravelRole: "combat / travel role",
   v4Title: "V4 title",
   v4Trial: "V4 trial",
+  value: "value",
+  valueStatus: "value status",
   visualRole: "visual role",
   visualStage: "visual stage",
   whatItDoes: "what it does",
@@ -714,6 +742,8 @@ const FIELD_LABELS: Record<string, string> = {
   weapon: "weapon",
   weaponBonus: "weapon bonus",
   weaponScope: "weapon scope",
+  weaponSubtype: "weapon subtype",
+  weaponType: "weapon type",
   wikiSourceStatus: "wiki source status",
   statEffect: "stat effect",
   stoneRoute: "stone route",

@@ -1,0 +1,368 @@
+{
+  "easy": [
+    {
+      "id": "MVS-E01",
+      "question": "Who created the Murderers VS Sheriffs game covered by this quiz?",
+      "options": [
+        { "id": "A", "text": "MVS Duels Community" },
+        { "id": "B", "text": "RED21 Games" },
+        { "id": "C", "text": "Duel Core" },
+        { "id": "D", "text": "Nosniy Games" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "MVS-E02",
+      "question": "What is the main match style in Murderers VS Sheriffs?",
+      "options": [
+        { "id": "A", "text": "Pet hatching and egg trading" },
+        { "id": "B", "text": "Short sheriff-and-murderer duels" },
+        { "id": "C", "text": "Restaurant building with customers" },
+        { "id": "D", "text": "Obstacle races with checkpoints" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "MVS-E03",
+      "question": "Which set lists the verified public duel queues?",
+      "options": [
+        { "id": "A", "text": "Solo, Duo, Squad" },
+        { "id": "B", "text": "Casual, Ranked, Clan" },
+        { "id": "C", "text": "1v1, 2v2, 3v3" },
+        { "id": "D", "text": "Arena, Raid, Boss" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "MVS-E04",
+      "question": "Which mode is the cleanest fit for solo aim practice?",
+      "options": [
+        { "id": "A", "text": "2v2" },
+        { "id": "B", "text": "3v3" },
+        { "id": "C", "text": "Pro Servers" },
+        { "id": "D", "text": "1v1" }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "MVS-E05",
+      "question": "Which queue is the natural pick when you have one friend with you?",
+      "options": [
+        { "id": "A", "text": "2v2" },
+        { "id": "B", "text": "1v1" },
+        { "id": "C", "text": "Pro Servers" },
+        { "id": "D", "text": "Root lobby" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "MVS-E06",
+      "question": "What kind of access does Pro Servers use?",
+      "options": [
+        { "id": "A", "text": "Free daily login access" },
+        { "id": "B", "text": "A pass-gated place" },
+        { "id": "C", "text": "A code-only portal" },
+        { "id": "D", "text": "A clan-only queue" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "MVS-E07",
+      "question": "What are PRO Box and GOD Box in the verified data?",
+      "options": [
+        { "id": "A", "text": "Map names used in duel rotation" },
+        { "id": "B", "text": "Team sizes for ranked matches" },
+        { "id": "C", "text": "Robux box purchase rows" },
+        { "id": "D", "text": "Creator group reward badges" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "MVS-E08",
+      "question": "What comes in the Dragon Pack?",
+      "options": [
+        { "id": "A", "text": "Dragon Sword and Dragon Gun" },
+        { "id": "B", "text": "Batwing Scythe and Red Hyper Laser" },
+        { "id": "C", "text": "PRO Box and GOD Box" },
+        { "id": "D", "text": "Hexa Kill and Eggsplosion" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "MVS-E09",
+      "question": "What is a death effect in Murderers VS Sheriffs?",
+      "options": [
+        { "id": "A", "text": "A weapon damage upgrade" },
+        { "id": "B", "text": "A cosmetic kill visual" },
+        { "id": "C", "text": "A private server setting" },
+        { "id": "D", "text": "A box reward timer" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "MVS-E10",
+      "question": "Which item category is the main collectible and trading surface?",
+      "options": [
+        { "id": "A", "text": "Weapon skins" },
+        { "id": "B", "text": "Player homes" },
+        { "id": "C", "text": "Vehicle seats" },
+        { "id": "D", "text": "Restaurant recipes" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    }
+  ],
+  "medium": [
+    {
+      "id": "MVS-M01",
+      "question": "How much is the verified Pro Servers Pass?",
+      "options": [
+        { "id": "A", "text": "49 Robux" },
+        { "id": "B", "text": "69 Robux" },
+        { "id": "C", "text": "99 Robux" },
+        { "id": "D", "text": "299 Robux" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "MVS-M02",
+      "question": "Which box row is listed at 49 Robux?",
+      "options": [
+        { "id": "A", "text": "PRO Box" },
+        { "id": "B", "text": "PRO Box Daily" },
+        { "id": "C", "text": "GOD Box" },
+        { "id": "D", "text": "GOD Box [Discount]" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "MVS-M03",
+      "question": "Which pairing matches the verified GOD box prices?",
+      "options": [
+        { "id": "A", "text": "GOD Box 49, discount 29" },
+        { "id": "B", "text": "GOD Box 99, discount 69" },
+        { "id": "C", "text": "GOD Box 299, discount 199" },
+        { "id": "D", "text": "GOD Box 69, discount 49" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "MVS-M04",
+      "question": "What is the safest way to read PRO Box Daily?",
+      "options": [
+        { "id": "A", "text": "It is a 29 Robux PRO-named row; reset rules still need proof" },
+        { "id": "B", "text": "It is a 29 Robux GOD-named row; odds are fully listed" },
+        { "id": "C", "text": "It is a free coin box row; limits are fully listed" },
+        { "id": "D", "text": "It is a 49 Robux PRO row; rewards are fully listed" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "MVS-M05",
+      "question": "Which pack includes Batwing Scythe and Red Hyper Laser?",
+      "options": [
+        { "id": "A", "text": "Dragon Pack" },
+        { "id": "B", "text": "Duskveil Bundle" },
+        { "id": "C", "text": "Batwing Pack" },
+        { "id": "D", "text": "Cupid Bundle" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "MVS-M06",
+      "question": "Why are only Dragon Pack and Batwing Pack used as verified pack rows?",
+      "options": [
+        { "id": "A", "text": "They have explicit official contents and usable images" },
+        { "id": "B", "text": "They are the only boxes with public reward odds" },
+        { "id": "C", "text": "They are the only effects with trading values" },
+        { "id": "D", "text": "They are the only maps with official names" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "MVS-M07",
+      "question": "Which death effects are both listed at 79 Robux?",
+      "options": [
+        { "id": "A", "text": "Hexa Kill and Egged" },
+        { "id": "B", "text": "Snowman and Santa" },
+        { "id": "C", "text": "Eggsplosion and Gifted" },
+        { "id": "D", "text": "Cupid and Spirit Omen" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "MVS-M08",
+      "question": "Which statement correctly separates bundle effects from full bundles?",
+      "options": [
+        { "id": "A", "text": "A bundle effect is the effect item, not the whole themed bundle" },
+        { "id": "B", "text": "A bundle effect always includes every knife and gun in the set" },
+        { "id": "C", "text": "A bundle effect is a queue mode with private server access" },
+        { "id": "D", "text": "A bundle effect is a box tier with confirmed reward odds" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "MVS-M09",
+      "question": "What should you do with item data from older similarly named MVS games?",
+      "options": [
+        { "id": "A", "text": "Merge it when the item name sounds familiar" },
+        { "id": "B", "text": "Use it only if it ties back to universe 7219654364" },
+        { "id": "C", "text": "Prefer it when it has more rows than local data" },
+        { "id": "D", "text": "Treat it as official if it includes rarity labels" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "MVS-M10",
+      "question": "What do weapon value, demand, and trend fields represent in this work?",
+      "options": [
+        { "id": "A", "text": "Official Roblox sale-state fields" },
+        { "id": "B", "text": "Current code reward fields" },
+        { "id": "C", "text": "Community-maintained trade fields" },
+        { "id": "D", "text": "Map rotation chance fields" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    }
+  ],
+  "hard": [
+    {
+      "id": "MVS-H01",
+      "question": "How many public weapon rows are in the prepared weapons dataset?",
+      "options": [
+        { "id": "A", "text": "166 rows" },
+        { "id": "B", "text": "190 rows" },
+        { "id": "C", "text": "239 rows" },
+        { "id": "D", "text": "269 rows" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "MVS-H02",
+      "question": "Which weapon type split matches the prepared public weapon rows?",
+      "options": [
+        { "id": "A", "text": "119 Knife and 120 Gun" },
+        { "id": "B", "text": "120 Knife and 119 Gun" },
+        { "id": "C", "text": "121 Knife and 118 Gun" },
+        { "id": "D", "text": "118 Knife and 121 Gun" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "MVS-H03",
+      "question": "Which rarity has the most public weapon rows?",
+      "options": [
+        { "id": "A", "text": "Ancient, with 43 rows" },
+        { "id": "B", "text": "Mythic, with 65 rows" },
+        { "id": "C", "text": "Common, with 40 rows" },
+        { "id": "D", "text": "Rare, with 29 rows" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "MVS-H04",
+      "question": "Which pair was excluded before the public weapon count was set?",
+      "options": [
+        { "id": "A", "text": "29 Effect rows and one staff/internal row" },
+        { "id": "B", "text": "16 death effects and two verified pack rows" },
+        { "id": "C", "text": "4 box rows and one Pro Servers row" },
+        { "id": "D", "text": "31 Legendary rows and 29 Rare rows" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "MVS-H05",
+      "question": "Which weapon value coverage count is correct?",
+      "options": [
+        { "id": "A", "text": "120 with values and 119 without values" },
+        { "id": "B", "text": "166 with values and 73 without values" },
+        { "id": "C", "text": "190 with values and 49 without values" },
+        { "id": "D", "text": "239 with values and 0 without values" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "MVS-H06",
+      "question": "A weapon has no listed community value. What is the safest interpretation?",
+      "options": [
+        { "id": "A", "text": "It has no value data yet; do not treat blank as worthless" },
+        { "id": "B", "text": "It is confirmed worthless; trade it for any Common row" },
+        { "id": "C", "text": "It is staff-only; remove it from every public list" },
+        { "id": "D", "text": "It is a box product; move it into the crates list" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "MVS-H07",
+      "question": "Why is 4v4 not treated as a verified quiz answer?",
+      "options": [
+        { "id": "A", "text": "It appears only as an item rarity, not a queue label" },
+        { "id": "B", "text": "It lacks active exact-universe queue or place proof" },
+        { "id": "C", "text": "It is confirmed as a Pro Servers-only reward mode" },
+        { "id": "D", "text": "It was renamed into GOD Box [Discount]" }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "MVS-H08",
+      "question": "Which statement keeps box spending advice within the verified data?",
+      "options": [
+        { "id": "A", "text": "Compare prices first; reward pools and odds are not verified" },
+        { "id": "B", "text": "Assume GOD Box has better odds because it costs more" },
+        { "id": "C", "text": "Treat Daily and Discount rows as proven reset timers" },
+        { "id": "D", "text": "Use older MVS2 crate odds when exact data is missing" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "MVS-H09",
+      "question": "Which row should stay in the death-effects system rather than the weapons system?",
+      "options": [
+        { "id": "A", "text": "Dragon Gun" },
+        { "id": "B", "text": "Red Hyper Laser" },
+        { "id": "C", "text": "Cupid Bundle Effect" },
+        { "id": "D", "text": "Batwing Scythe" }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "MVS-H10",
+      "question": "Which trading check best protects you from mixing the wrong Murderers VS Sheriffs game data?",
+      "options": [
+        { "id": "A", "text": "Match the item to the MVS Duels Community universe before using values" },
+        { "id": "B", "text": "Trust any list that has the same item name and a rarity label" },
+        { "id": "C", "text": "Prefer the older game if it has more screenshots or more rows" },
+        { "id": "D", "text": "Use box prices as proof that a weapon still drops from that box" }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    }
+  ]
+}

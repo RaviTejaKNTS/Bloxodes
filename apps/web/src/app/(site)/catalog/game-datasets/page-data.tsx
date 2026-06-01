@@ -796,6 +796,19 @@ const SURVIVE_ZOMBIE_ARENA_SOURCE_KEYS = [
   "sourceImageUrl"
 ];
 
+const MURDERERS_VS_SHERIFFS_WEAPON_SECTION_ORDER = [
+  "Ancient",
+  "Mythic",
+  "Legendary",
+  "Rare",
+  "Uncommon",
+  "Common"
+];
+const MURDERERS_VS_SHERIFFS_CRATE_SECTION_ORDER = ["PRO Box", "GOD Box"];
+const MURDERERS_VS_SHERIFFS_MODE_SECTION_ORDER = ["Solo practice", "Team queues", "Pro access"];
+const MURDERERS_VS_SHERIFFS_DEATH_EFFECT_SECTION_ORDER = ["Direct Robux effects", "Bundle effects"];
+const MURDERERS_VS_SHERIFFS_BUNDLE_SECTION_ORDER = ["Verified packs"];
+
 const NINETY_NINE_NIGHTS_CLASS_SECTION_ORDER = [
   "Active classes",
   "Limited and event classes",
@@ -1147,6 +1160,134 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: (item) => normalizeValue(item.statusSection),
     hiddenKeys: ["statusSection", ...SURVIVE_ZOMBIE_ARENA_SOURCE_KEYS],
     maxStats: 8
+  },
+  "murderers-vs-sheriffs-weapons": {
+    groupKey: "catalogSection",
+    groupLabel: "Rarity",
+    sectionOrder: MURDERERS_VS_SHERIFFS_WEAPON_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "slug",
+      "sourceStatus",
+      "imageStatus",
+      "imageMissingReason",
+      "sourcePage",
+      "sourceUrls",
+      "sourceImageUrl",
+      "productId",
+      "sourceGeneratedAt",
+      "valueCheckedAt",
+      "sortOrder"
+    ],
+    additionalColumns: [
+      "weaponType",
+      "weaponSubtype",
+      "rarity",
+      "source",
+      "availability",
+      "priceOrRoute",
+      "value",
+      "demand",
+      "trend",
+      "valueStatus",
+      "tradeNote",
+      "sourceConfidence"
+    ],
+    maxStats: 10
+  },
+  "murderers-vs-sheriffs-crates": {
+    groupKey: "catalogSection",
+    groupLabel: "Box tier",
+    sectionOrder: MURDERERS_VS_SHERIFFS_CRATE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "slug",
+      "priceRobux",
+      "saleState",
+      "verificationNote",
+      "sourcePage",
+      "sourceUrls",
+      "sourceImageUrl",
+      "imageStatus",
+      "sortOrder"
+    ],
+    additionalColumns: [
+      "tier",
+      "price",
+      "currency",
+      "purchaseRoute",
+      "availability",
+      "rewardPool",
+      "odds",
+      "bestUse",
+      "sourceConfidence"
+    ],
+    maxStats: 8
+  },
+  "murderers-vs-sheriffs-modes": {
+    groupKey: "catalogSection",
+    groupLabel: "Mode type",
+    sectionOrder: MURDERERS_VS_SHERIFFS_MODE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "placeId", "sourceStatus", "sourceUrls", "sourceCheckedAt", "verificationNote"],
+    additionalColumns: [
+      "teamSize",
+      "queuePlace",
+      "availability",
+      "accessRequirement",
+      "bestFor",
+      "difficulty",
+      "rewardNotes",
+      "partyFriendSupport"
+    ],
+    maxStats: 8
+  },
+  "murderers-vs-sheriffs-death-effects": {
+    groupKey: "catalogSection",
+    groupLabel: "Effect source",
+    sectionOrder: MURDERERS_VS_SHERIFFS_DEATH_EFFECT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "slug",
+      "sourcePage",
+      "sourceUrls",
+      "sourceImageUrl",
+      "imageStatus",
+      "imageMissingReason",
+      "verificationNote",
+      "sortOrder"
+    ],
+    additionalColumns: [
+      "effectType",
+      "source",
+      "sourceType",
+      "price",
+      "unlockRoute",
+      "availability",
+      "bundleFamily",
+      "sourceConfidence"
+    ],
+    maxStats: 8
+  },
+  "murderers-vs-sheriffs-bundles": {
+    groupKey: "catalogSection",
+    groupLabel: "Pack status",
+    sectionOrder: MURDERERS_VS_SHERIFFS_BUNDLE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "slug",
+      "sourceConfidence",
+      "sourceStatus",
+      "sourceEvidence",
+      "sourceUrls",
+      "sortOrder"
+    ],
+    additionalColumns: ["price", "contents", "itemTypes", "availability", "source", "relatedCatalogs"],
+    maxStats: 6
   },
   "blox-fruits-accessories": {
     groupKey: "catalogSection",

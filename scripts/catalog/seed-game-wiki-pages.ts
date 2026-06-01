@@ -235,6 +235,37 @@ const WIKI_COPY: Record<string, WikiCopy> = {
       { action: "Sprint", desktop: "Shift" }
     ]
   },
+  "murderers-vs-sheriffs": {
+    metaDescription:
+      "Murderers VS Sheriffs wiki with duel modes, weapons, crates, bundles, death effects, events, codes, trading tips, and Roblox details.",
+    gameDescriptionMd:
+      "Murderers VS Sheriffs is a fast duel game where players queue into short sheriff-and-murderer fights and practice aim, dodging, knife timing, and round reads. The verified queue structure for the MVS Duels Community version covers solo `1v1`, team `2v2` and `3v3`, plus pass-gated Pro Servers access.\n\nProgress around the matches is mostly cosmetic and collection-driven. Coins, codes, PRO and GOD boxes, weapon skins, bundles, death effects, emotes, event rewards, and trading all feed into the inventory loop, so source and availability matter before you spend or accept a trade.\n\nThis version is separate from older similarly named Murderers VS Sheriffs games. Treat item lists, values, maps, battle pass notes, and reward claims as useful only when they tie back to this exact MVS Duels Community experience.",
+    tipsMd: `- Start with 1v1 when you want clean aim and knife timing practice. Move into 2v2 or 3v3 when you want teammate spacing, trades, and crossfire to matter more.
+- Treat Pro Servers as pass-gated access first. The verified data proves the Pro Servers Pass requirement, but not special rewards, matchmaking rules, or a guaranteed harder queue.
+- Compare boxes by the facts the game shows before spending heavily. A PRO or GOD label is useful, but reward pools, odds, discounts, and duplicate rules matter more than the name alone.
+- Check source and availability before trading for a weapon, bundle, death effect, or event item. Rarity and community value help, but they do not replace exact-game proof for this MVS Duels Community version.
+- Read the arena quickly after a round starts. Open sightlines favor patient gun angles, while tighter cover gives knife pressure and teammate trades more room to work.
+- Use codes and event rewards as bonus routes, not the whole plan. Live rewards can change, while queue practice, careful spending, and source checks stay useful every session.`,
+    controlsJson: [
+      {
+        action: "Move",
+        desktop: "W / A / S / D or arrow keys"
+      },
+      {
+        action: "Jump",
+        desktop: "Space"
+      },
+      {
+        action: "Adjust camera",
+        desktop: "Hold right mouse button and drag"
+      },
+      {
+        action: "Zoom camera",
+        desktop: "Mouse wheel"
+      }
+    ],
+    coverImage: null
+  },
   "99-nights-in-the-forest": {
     metaDescription:
       "99 Nights in the Forest wiki with survival tips, classes, crafting, materials, weapons, tools, food, locations, entities, and animals.",
@@ -315,6 +346,7 @@ async function loadUniverseIdsByGameSlug() {
 
   return new Map(
     getTargetGroups().map((group) => {
+      if (group.universeId) return [group.gameSlug, group.universeId];
       const candidates = new Set([group.gameSlug, group.gameName, ...group.universeNames].map(normalizeLookup));
       const match = rows.find((row) =>
         [row.slug, row.name, row.display_name].some((value) => candidates.has(normalizeLookup(value)))

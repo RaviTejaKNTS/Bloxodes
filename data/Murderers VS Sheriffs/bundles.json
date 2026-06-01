@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "title": "Murderers VS Sheriffs packs",
+    "updatedAt": "2026-06-01",
+    "status": "strict_explicit_pack_scope_ready_for_page_copy",
+    "publicationGate": "Public items include only Dragon Pack and Batwing Pack because official game-pass descriptions explicitly list contents and usable local images exist. Other bundle families remain candidate metadata until exact contents and images are strong enough.",
+    "universeId": 7219654364,
+    "placeId": 135856908115931,
+    "gameSlug": "murderers-vs-sheriffs",
+    "catalogCode": "murderers-vs-sheriffs-bundles",
+    "route": "/wiki/murderers-vs-sheriffs/bundles",
+    "groupBy": "catalogSection",
+    "columns": [
+      "name",
+      "catalogSection",
+      "sourceConfidence",
+      "sourceStatus",
+      "price",
+      "contents",
+      "itemTypes",
+      "availability",
+      "source",
+      "relatedCatalogs",
+      "image"
+    ],
+    "sources": [
+      {
+        "label": "Official Roblox gamepasses API for universe 7219654364",
+        "url": "https://apis.roblox.com/game-passes/v1/universes/7219654364/game-passes?limit=100&sortOrder=Asc",
+        "accessed": "2026-06-01"
+      },
+      {
+        "label": "Official Dragon Pack product-info API",
+        "url": "https://apis.roblox.com/game-passes/v1/game-passes/1222006279/product-info",
+        "accessed": "2026-06-01"
+      },
+      {
+        "label": "Official Batwing Pack product-info API",
+        "url": "https://apis.roblox.com/game-passes/v1/game-passes/1222054278/product-info",
+        "accessed": "2026-06-01"
+      },
+      {
+        "label": "Official Roblox developer-products API for universe 7219654364",
+        "url": "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100",
+        "accessed": "2026-06-01"
+      },
+      {
+        "label": "Official Roblox virtual-events API for universe 7219654364",
+        "url": "https://apis.roblox.com/virtual-events/v1/universes/7219654364/virtual-events",
+        "accessed": "2026-06-01"
+      },
+      {
+        "label": "Official Roblox thumbnails API for verified pack icons",
+        "url": "https://thumbnails.roblox.com/v1/assets?assetIds=71666983671128,96682039336720&size=420x420&format=Png&isCircular=false",
+        "accessed": "2026-06-01"
+      }
+    ],
+    "sourceNotes": [
+      "Rows are limited to named packs with explicit official contents for exact universe 7219654364.",
+      "Dragon Pack and Batwing Pack are public rows because official game-pass product-info confirms name, price, sale state, creator group, contents, and icon asset IDs.",
+      "Medium-confidence developer-product bundle families are preserved as blocked candidate metadata, not public item rows.",
+      "Dragonpetal Bundle is not included because the official event name does not match the available Dragon Blossom Bundle developer-product row.",
+      "Raw cash packs, gift duplicates, VIP, coin multipliers, Pro Servers Pass, battlepass skips, badges, broad event-all purchases, and generic developer products without explicit contents are excluded."
+    ],
+    "confidenceBreakdown": {
+      "high": 2,
+      "mediumBlockedCandidates": 8,
+      "blockedOrExcluded": 18
+    },
+    "imageCoverage": {
+      "itemRows": 2,
+      "localImages": 2,
+      "missingImages": 0,
+      "missingImagePolicy": "Do not use weak substitutions. Future bundle candidates need direct in-game/shop captures or exact official icon captures before becoming public item rows."
+    },
+    "blockedCandidates": [
+      {
+        "name": "Dragon Blossom Bundle",
+        "sourceStatus": "Exact-universe bundle and same-family component products, but contents are inferred.",
+        "knownEvidence": "Official developer-products data includes Dragon Blossom Bundle at 1000 Robux plus Dragon Sniper, Dragon Revolver, Dragon Blossom, and Dragon Axe.",
+        "blockingIssue": "No explicit bundle-description contents and no usable icon image.",
+        "neededForPublicRow": [
+          "explicit shop or product contents",
+          "item type confirmation for Dragon Blossom",
+          "usable exact-target image"
+        ]
+      },
+      {
+        "name": "Duskveil Bundle",
+        "sourceStatus": "Exact-universe bundle and same-family component products, but contents are inferred.",
+        "knownEvidence": "Official developer-products data includes Duskveil Bundle at 849 Robux plus Duskveil Knife, Duskveil Gun, and Duskveil Effect. The official virtual event also names Duskveil Bundle.",
+        "blockingIssue": "No explicit bundle-description contents and no usable icon image.",
+        "neededForPublicRow": [
+          "explicit shop or product contents",
+          "usable exact-target image",
+          "final in-game shop route verification"
+        ]
+      },
+      {
+        "name": "Jelly Bundle",
+        "sourceStatus": "Exact-universe bundle and same-family component products, but contents are inferred.",
+        "knownEvidence": "Official developer-products data includes Jelly Bundle at 849 Robux plus Jelly Axe, Jelly Uzi, and Jelly Death Effect.",
+        "blockingIssue": "No explicit bundle-description contents and no usable icon image."
+      },
+      {
+        "name": "Blueberry Jelly Bundle",
+        "sourceStatus": "Exact-universe bundle and same-family component products, but contents are inferred.",
+        "knownEvidence": "Official developer-products data includes Blueberry Jelly Bundle at 849 Robux plus Blueberry Jelly Axe, Blueberry Jelly Uzi, and Blueberry Jelly Death Effect.",
+        "blockingIssue": "No explicit bundle-description contents and no usable icon image."
+      },
+      {
+        "name": "Grape Jelly Bundle",
+        "sourceStatus": "Exact-universe bundle and same-family component products, but contents are inferred.",
+        "knownEvidence": "Official developer-products data includes Grape Jelly Bundle at 849 Robux plus Grape Jelly Axe, Grape Jelly Uzi, and Grape Jelly Death Effect.",
+        "blockingIssue": "No explicit bundle-description contents and no usable icon image."
+      },
+      {
+        "name": "Lime Jelly Bundle",
+        "sourceStatus": "Exact-universe bundle and same-family component products, but contents are inferred.",
+        "knownEvidence": "Official developer-products data includes Lime Jelly Bundle at 849 Robux plus Lime Jelly Axe, Lime Jelly Uzi, and Lime Jelly Death Effect.",
+        "blockingIssue": "No explicit bundle-description contents and no usable icon image."
+      },
+      {
+        "name": "Strawberry Jelly Bundle",
+        "sourceStatus": "Exact-universe bundle and same-family component products, but contents are inferred.",
+        "knownEvidence": "Official developer-products data includes Strawberry Jelly Bundle at 849 Robux plus Strawberry Jelly Axe, Strawberry Jelly Uzi, and Strawberry Jelly Death Effect.",
+        "blockingIssue": "No explicit bundle-description contents and no usable icon image."
+      },
+      {
+        "name": "Cupid Bundle [All]",
+        "sourceStatus": "Exact-universe bundle and same-family component products, but contents are inferred.",
+        "knownEvidence": "Official developer-products data includes Cupid Bundle [All] at 899 Robux plus Cupid Bundle [Knife], [Gun], [Bow], and [Effect] rows.",
+        "blockingIssue": "No explicit bundle-description contents and no local exact-target image."
+      },
+      {
+        "name": "Dragonpetal Bundle",
+        "sourceStatus": "Official virtual-event name only.",
+        "knownEvidence": "The official SUMMER EVENT+BUNDLES virtual event names Dragonpetal Bundle as a limited-time bundle.",
+        "blockingIssue": "No exact Dragonpetal Bundle developer-product row was found. A Dragon Blossom Bundle row exists, but the name mismatch is unresolved.",
+        "neededForPublicRow": [
+          "Dragonpetal versus Dragon Blossom identity",
+          "explicit contents",
+          "usable exact-target image",
+          "final shop availability route"
+        ]
+      }
+    ],
+    "excludedRows": [
+      "Starter Pack",
+      "ALL Easter Items",
+      "Spirit Omen Bundle [All]",
+      "Hexa Bundle [All]",
+      "Divine Bundle [All]",
+      "Heartslayer Bundle",
+      "Lovestruck Bundle",
+      "Valentine Event [EVERYTHING Bundle]",
+      "Valentine Event [LITE Bundle]",
+      "Valkyrie Bundle",
+      "VIP",
+      "Pro Servers Pass",
+      "2x Coins",
+      "x2 Hearts",
+      "x2 Clovers",
+      "x2 Sombreros",
+      "Gift Dragon Pack",
+      "Gift Batwing Pack",
+      "cash packs",
+      "private servers",
+      "badges",
+      "battlepass skips"
+    ]
+  },
+  "items": [
+    {
+      "name": "Dragon Pack",
+      "slug": "dragon-pack",
+      "catalogSection": "Verified packs",
+      "sourceConfidence": "high",
+      "sourceStatus": "Explicit contents from official game-pass description",
+      "price": "299 Robux",
+      "contents": [
+        "Dragon Sword",
+        "Dragon Gun"
+      ],
+      "itemTypes": [
+        "Melee weapon skin",
+        "Gun skin"
+      ],
+      "availability": "For sale through Roblox game-pass purchase.",
+      "source": "Roblox gamepass",
+      "relatedCatalogs": [
+        "Weapons"
+      ],
+      "image": "/Murderers%20VS%20Sheriffs/bundles/dragon-pack.png",
+      "sourceEvidence": {
+        "gamePassId": 1222006279,
+        "productId": 3286427024,
+        "iconImageAssetId": 71666983671128,
+        "isForSale": true,
+        "contentsEvidence": "Official product-info description lists Dragon Sword and Dragon Gun."
+      },
+      "sourceUrls": [
+        "https://apis.roblox.com/game-passes/v1/game-passes/1222006279/product-info"
+      ],
+      "sortOrder": 10
+    },
+    {
+      "name": "Batwing Pack",
+      "slug": "batwing-pack",
+      "catalogSection": "Verified packs",
+      "sourceConfidence": "high",
+      "sourceStatus": "Explicit contents from official game-pass description",
+      "price": "299 Robux",
+      "contents": [
+        "Batwing Scythe",
+        "Red Hyper Laser"
+      ],
+      "itemTypes": [
+        "Melee weapon skin",
+        "Gun skin"
+      ],
+      "availability": "For sale through Roblox game-pass purchase.",
+      "source": "Roblox gamepass",
+      "relatedCatalogs": [
+        "Weapons"
+      ],
+      "image": "/Murderers%20VS%20Sheriffs/bundles/batwing-pack.png",
+      "sourceEvidence": {
+        "gamePassId": 1222054278,
+        "productId": 3286427479,
+        "iconImageAssetId": 96682039336720,
+        "isForSale": true,
+        "contentsEvidence": "Official product-info description lists Batwing Scythe and Red Hyper Laser."
+      },
+      "sourceUrls": [
+        "https://apis.roblox.com/game-passes/v1/game-passes/1222054278/product-info"
+      ],
+      "sortOrder": 20
+    }
+  ]
+}

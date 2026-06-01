@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "title": "Murderers VS Sheriffs crates and box purchases",
+    "game": "Murderers VS Sheriffs",
+    "gameSlug": "murderers-vs-sheriffs",
+    "collection": "crates",
+    "route": "/wiki/murderers-vs-sheriffs/crates",
+    "catalogCode": "murderers-vs-sheriffs-crates",
+    "universeId": 7219654364,
+    "rootPlaceId": 135856908115931,
+    "updatedAt": "2026-06-01",
+    "publishStatus": "blocked-needs-parent-decision",
+    "itemCount": 4,
+    "coverageDecision": "These four rows are exact-universe official developer-product box purchases. They are enough for a narrow box-purchase dataset, but not enough for a final public page promising which box to open because reward pools, odds, daily reset behavior, duplicate handling, and coin routes are not verified.",
+    "imageCoverage": {
+      "officialThumbnailRows": 4,
+      "localImages": 4,
+      "missingLocalImages": 0,
+      "decision": "Rows use official Roblox thumbnail assets for the box products. PRO Box and PRO Box Daily share the same thumbnail image. GOD Box and GOD Box [Discount] share the same thumbnail image."
+    },
+    "groupBy": "catalogSection",
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "tier",
+      "catalogSection",
+      "purchaseRoute",
+      "price",
+      "priceRobux",
+      "currency",
+      "saleState",
+      "rewardPool",
+      "odds",
+      "availability",
+      "bestUse",
+      "sourceConfidence",
+      "verificationNote",
+      "sourcePage",
+      "sourceUrls",
+      "sourceImageUrl",
+      "imageStatus",
+      "sortOrder"
+    ],
+    "sources": [
+      {
+        "label": "Roblox developer-products API - universe 7219654364",
+        "url": "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100",
+        "accessed": "2026-06-01",
+        "usage": "Official exact-universe names, prices, sale state, product IDs, developer product IDs, and icon asset IDs for PRO Box, GOD Box, PRO Box Daily, and GOD Box [Discount]."
+      },
+      {
+        "label": "Roblox thumbnails API - box icon assets",
+        "url": "https://thumbnails.roblox.com/v1/assets?assetIds=95259946831720,115589513254730,133445973798424,139146932166331&size=420x420&format=Png&isCircular=false",
+        "accessed": "2026-06-01",
+        "usage": "Official thumbnail URLs used to create local box images."
+      }
+    ],
+    "blockers": [
+      "Official APIs do not expose box reward pools.",
+      "Official APIs do not expose box odds or rarity chances.",
+      "Daily reset behavior, per-player purchase limits, and discount timing are not verified.",
+      "No coin or in-game currency box route has been verified.",
+      "Duplicate handling and tradeability of box rewards are not verified.",
+      "The route config does not yet include the crates collection for this game."
+    ],
+    "notIncluded": [
+      {
+        "source": "Cash or currency products",
+        "reason": "Currency packs are not crates or boxes."
+      },
+      {
+        "source": "Direct weapon, effect, and bundle developer products",
+        "reason": "Direct purchases belong in weapons, death-effects, or bundles, not the crates catalog."
+      },
+      {
+        "source": "Gamepasses, VIP, multipliers, Pro Servers, battlepass skips, badges, and event currency multipliers",
+        "reason": "These are not durable crate or box rows."
+      },
+      {
+        "source": "MVS2 or older MVSD crate/rarity pages",
+        "reason": "They are not verified for the exact MVS Duels Community universe 7219654364."
+      }
+    ]
+  },
+  "items": [
+    {
+      "name": "PRO Box",
+      "slug": "pro-box",
+      "image": "/Murderers%20VS%20Sheriffs/crates/pro-box.png",
+      "tier": "PRO",
+      "catalogSection": "PRO Box",
+      "purchaseRoute": "Normal box purchase",
+      "price": "49 Robux",
+      "priceRobux": 49,
+      "currency": "Robux",
+      "saleState": "For sale",
+      "rewardPool": "Needs in-game verification",
+      "odds": "Not listed",
+      "availability": "Current developer product",
+      "bestUse": "Lower-cost verified box purchase; final opening advice needs reward-pool proof.",
+      "sourceConfidence": "high for product row, pending for reward pool",
+      "verificationNote": "Exact-universe developer-products API row confirms the name, Robux price, sale state, and icon asset. It does not confirm rewards or odds.",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-3eebbaaa2cfb2103636cfe8edc095992/420/420/Image/Png/noFilter",
+      "imageStatus": "local official product thumbnail",
+      "sortOrder": 10
+    },
+    {
+      "name": "PRO Box Daily",
+      "slug": "pro-box-daily",
+      "image": "/Murderers%20VS%20Sheriffs/crates/pro-box-daily.png",
+      "tier": "PRO",
+      "catalogSection": "PRO Box",
+      "purchaseRoute": "Daily-priced box purchase; reset or limit unverified",
+      "price": "29 Robux",
+      "priceRobux": 29,
+      "currency": "Robux",
+      "saleState": "For sale",
+      "rewardPool": "Needs in-game verification",
+      "odds": "Not listed",
+      "availability": "Current developer product",
+      "bestUse": "Cheaper PRO-named purchase row; do not describe daily limits until in-game UI confirms them.",
+      "sourceConfidence": "high for product row, pending for daily behavior and reward pool",
+      "verificationNote": "Exact-universe developer-products API row confirms the name, Robux price, sale state, and icon asset. The thumbnail matches PRO Box, but shared reward pool and daily reset behavior are not verified.",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-3eebbaaa2cfb2103636cfe8edc095992/420/420/Image/Png/noFilter",
+      "imageStatus": "local official product thumbnail; visually same as PRO Box thumbnail",
+      "sortOrder": 20
+    },
+    {
+      "name": "GOD Box",
+      "slug": "god-box",
+      "image": "/Murderers%20VS%20Sheriffs/crates/god-box.png",
+      "tier": "GOD",
+      "catalogSection": "GOD Box",
+      "purchaseRoute": "Normal box purchase",
+      "price": "99 Robux",
+      "priceRobux": 99,
+      "currency": "Robux",
+      "saleState": "For sale",
+      "rewardPool": "Needs in-game verification",
+      "odds": "Not listed",
+      "availability": "Current developer product",
+      "bestUse": "Higher-cost verified box purchase; do not claim better rewards until the pool or odds are confirmed.",
+      "sourceConfidence": "high for product row, pending for reward pool",
+      "verificationNote": "Exact-universe developer-products API row confirms the name, Robux price, sale state, and icon asset. It does not confirm rewards or odds.",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-764b356251314760902d9d374346c44f/420/420/Image/Png/noFilter",
+      "imageStatus": "local official product thumbnail",
+      "sortOrder": 30
+    },
+    {
+      "name": "GOD Box [Discount]",
+      "slug": "god-box-discount",
+      "image": "/Murderers%20VS%20Sheriffs/crates/god-box-discount.png",
+      "tier": "GOD",
+      "catalogSection": "GOD Box",
+      "purchaseRoute": "Discount-priced box purchase; timing or limit unverified",
+      "price": "69 Robux",
+      "priceRobux": 69,
+      "currency": "Robux",
+      "saleState": "For sale",
+      "rewardPool": "Needs in-game verification",
+      "odds": "Not listed",
+      "availability": "Current developer product",
+      "bestUse": "Cheaper GOD-named purchase row; do not describe it as timed, daily, or limited until in-game UI confirms that behavior.",
+      "sourceConfidence": "high for product row, pending for discount behavior and reward pool",
+      "verificationNote": "Exact-universe developer-products API row confirms the name, Robux price, sale state, and icon asset. The thumbnail matches GOD Box, but shared reward pool and discount timing are not verified.",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-764b356251314760902d9d374346c44f/420/420/Image/Png/noFilter",
+      "imageStatus": "local official product thumbnail; visually same as GOD Box thumbnail",
+      "sortOrder": 40
+    }
+  ]
+}

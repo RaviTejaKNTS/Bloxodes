@@ -279,6 +279,7 @@ async function loadUniverseIdsByGameSlug() {
 
   return new Map(
     getTargetGroups(getTargetCatalogs()).map((group) => {
+      if (group.universeId) return [group.gameSlug, group.universeId];
       const candidates = new Set([group.gameSlug, group.gameName, ...group.universeNames].map(normalizeLookup));
       const match = rows.find((row) =>
         [row.slug, row.name, row.display_name].some((value) => candidates.has(normalizeLookup(value)))

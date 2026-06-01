@@ -1,0 +1,476 @@
+{
+  "meta": {
+    "title": "Murderers VS Sheriffs death effects",
+    "game": "Murderers VS Sheriffs",
+    "gameSlug": "murderers-vs-sheriffs",
+    "collection": "death-effects",
+    "route": "/wiki/murderers-vs-sheriffs/death-effects",
+    "catalogCode": "murderers-vs-sheriffs-death-effects",
+    "universeId": 7219654364,
+    "rootPlaceId": 135856908115931,
+    "updatedAt": "2026-06-01",
+    "publishStatus": "official-product-seed-ready-for-parent-integration",
+    "itemCount": 16,
+    "coverageDecision": "Rows are limited to exact-universe official developer products whose names clearly identify them as Effect, Kill Effect, or Death Effect cosmetics. MVS community value-list candidates are excluded until their source route or exact item existence is verified beyond the values endpoint.",
+    "groupBy": "catalogSection",
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "imageMissingReason",
+      "catalogSection",
+      "effectType",
+      "source",
+      "sourceType",
+      "price",
+      "unlockRoute",
+      "availability",
+      "bundleFamily",
+      "sourceConfidence",
+      "sourcePage",
+      "sourceUrls",
+      "sourceImageUrl",
+      "imageStatus",
+      "verificationNote",
+      "sortOrder"
+    ],
+    "sources": [
+      {
+        "label": "Official Roblox games API - universe 7219654364",
+        "url": "https://games.roblox.com/v1/games?universeIds=7219654364",
+        "accessed": "2026-06-01",
+        "usage": "Exact game identity, creator group, root place, and universe confirmation."
+      },
+      {
+        "label": "Official Roblox developer-products API page 1 - universe 7219654364",
+        "url": "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100",
+        "accessed": "2026-06-01",
+        "usage": "Exact-universe effect product names, Robux prices, sale state, timestamps, and icon asset IDs where present."
+      },
+      {
+        "label": "Official Roblox developer-products API page 2 - universe 7219654364",
+        "url": "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100&cursor=id_2tFN0cmF3YmVycnkgSmVsbHkgVXppztZsySM",
+        "accessed": "2026-06-01",
+        "usage": "Additional exact-universe effect products after the first-page cursor."
+      },
+      {
+        "label": "Official Roblox thumbnails API for effect icons",
+        "url": "https://thumbnails.roblox.com/v1/assets?assetIds=92513778772112,71301190759144,105802404666328,112831361777875,132998598400144,91171464786949&size=420x420&format=Png&isCircular=false",
+        "accessed": "2026-06-01",
+        "usage": "Official thumbnail image URLs for the six effect products with usable icon asset IDs."
+      },
+      {
+        "label": "Official Roblox virtual-events API - universe 7219654364",
+        "url": "https://apis.roblox.com/virtual-events/v1/universes/7219654364/virtual-events",
+        "accessed": "2026-06-01",
+        "usage": "Category evidence that the Summer event reward pool includes death effects. No event death-effect names were added from this source."
+      }
+    ],
+    "sourceNotes": [
+      "Every public row in this file is backed by an official developer product in exact universe 7219654364.",
+      "Rows with IconImageAssetId 0 intentionally leave image blank and use imageMissingReason instead of weak substitutes.",
+      "The official Summer event mentions death effects as a reward category, but no unnamed Summer event effects are included.",
+      "The MVS community values endpoint includes effect-like entries such as batstorm, ghosted, pumpkin-curse, and soul-reaper, but those rows are excluded until source route or exact item existence is verified beyond the value endpoint.",
+      "Wrong-universe MVS, MVS2, and RED21 sources are excluded."
+    ],
+    "excludedCandidates": [
+      {
+        "source": "MVS community values endpoint",
+        "names": [
+          "confetti",
+          "frostbite",
+          "heartbeat",
+          "love-explosion",
+          "batstorm",
+          "default-effect",
+          "ghosted",
+          "pumpkin-curse",
+          "soul-reaper"
+        ],
+        "reason": "Not included in public rows because Phase 2 approval required source route or exact item existence beyond the values endpoint."
+      },
+      {
+        "source": "Official Summer event row",
+        "names": [],
+        "reason": "The event confirms death effects as a reward category but does not name exact death-effect items."
+      }
+    ],
+    "imageCoverage": {
+      "verifiedRows": 16,
+      "localImages": 6,
+      "missingImages": 10,
+      "officialIconAssetRows": 6,
+      "decision": "Use official Roblox thumbnails for rows with nonzero icon assets; leave other image fields empty until in-game captures or official icons are available."
+    }
+  },
+  "items": [
+    {
+      "name": "Hexa Kill",
+      "slug": "hexa-kill",
+      "image": "/Murderers%20VS%20Sheriffs/death-effects/hexa-kill.png",
+      "imageMissingReason": null,
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Kill effect",
+      "source": "Hexa Kill [Effect]",
+      "sourceType": "Direct Robux product",
+      "price": "199 Robux",
+      "unlockRoute": "Buy the standalone Hexa Kill effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Hexa",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-35b98b33400c68340160c0c4f12e12ce/420/420/Image/Png/noFilter",
+      "imageStatus": "downloaded official Roblox thumbnail",
+      "verificationNote": "Official exact-universe developer product named Hexa Kill [Effect], price 199 Robux, for sale.",
+      "sortOrder": 10
+    },
+    {
+      "name": "Eggsplosion",
+      "slug": "eggsplosion",
+      "image": "/Murderers%20VS%20Sheriffs/death-effects/eggsplosion.png",
+      "imageMissingReason": null,
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "Eggsplosion [Effect]",
+      "sourceType": "Direct Robux product",
+      "price": "99 Robux",
+      "unlockRoute": "Buy the standalone Eggsplosion effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Easter",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-7d20ca7eb7483d2350b7976498ab214f/420/420/Image/Png/noFilter",
+      "imageStatus": "downloaded official Roblox thumbnail",
+      "verificationNote": "Official exact-universe developer product named Eggsplosion [Effect], price 99 Robux, for sale.",
+      "sortOrder": 20
+    },
+    {
+      "name": "Egged",
+      "slug": "egged",
+      "image": "/Murderers%20VS%20Sheriffs/death-effects/egged.png",
+      "imageMissingReason": null,
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "Egged [Effect]",
+      "sourceType": "Direct Robux product",
+      "price": "199 Robux",
+      "unlockRoute": "Buy the standalone Egged effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Easter",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-abcffca9fe830602e1f248c4a65e4dac/420/420/Image/Png/noFilter",
+      "imageStatus": "downloaded official Roblox thumbnail",
+      "verificationNote": "Official exact-universe developer product named Egged [Effect], price 199 Robux, for sale.",
+      "sortOrder": 30
+    },
+    {
+      "name": "Bunny Boys",
+      "slug": "bunny-boys",
+      "image": "/Murderers%20VS%20Sheriffs/death-effects/bunny-boys.png",
+      "imageMissingReason": null,
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "Bunny Boys [Effect]",
+      "sourceType": "Direct Robux product",
+      "price": "149 Robux",
+      "unlockRoute": "Buy the standalone Bunny Boys effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Easter",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-b495d21226177ea7b97673595b760466/420/420/Image/Png/noFilter",
+      "imageStatus": "downloaded official Roblox thumbnail",
+      "verificationNote": "Official exact-universe developer product named Bunny Boys [Effect], price 149 Robux, for sale.",
+      "sortOrder": 40
+    },
+    {
+      "name": "Sakura Kill Effect",
+      "slug": "sakura-kill-effect",
+      "image": null,
+      "imageMissingReason": "Official developer product has IconImageAssetId 0, so no usable official icon was available during Phase 2.",
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Kill effect",
+      "source": "Sakura Kill Effect",
+      "sourceType": "Direct Robux product",
+      "price": "199 Robux",
+      "unlockRoute": "Buy the standalone Sakura Kill Effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Sakura",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": null,
+      "imageStatus": "missing official icon",
+      "verificationNote": "Official exact-universe developer product named Sakura Kill Effect, price 199 Robux, for sale.",
+      "sortOrder": 50
+    },
+    {
+      "name": "Jelly Death Effect",
+      "slug": "jelly-death-effect",
+      "image": null,
+      "imageMissingReason": "Official developer product has IconImageAssetId 0, so no usable official icon was available during Phase 2.",
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "Jelly Death Effect",
+      "sourceType": "Direct Robux product",
+      "price": "249 Robux",
+      "unlockRoute": "Buy the standalone Jelly Death Effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Jelly",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": null,
+      "imageStatus": "missing official icon",
+      "verificationNote": "Official exact-universe developer product named Jelly Death Effect, price 249 Robux, for sale.",
+      "sortOrder": 60
+    },
+    {
+      "name": "Lime Jelly Death Effect",
+      "slug": "lime-jelly-death-effect",
+      "image": null,
+      "imageMissingReason": "Official developer product has IconImageAssetId 0, so no usable official icon was available during Phase 2.",
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "Lime Jelly Death Effect",
+      "sourceType": "Direct Robux product",
+      "price": "249 Robux",
+      "unlockRoute": "Buy the standalone Lime Jelly Death Effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Jelly",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": null,
+      "imageStatus": "missing official icon",
+      "verificationNote": "Official exact-universe developer product named Lime Jelly Death Effect, price 249 Robux, for sale.",
+      "sortOrder": 70
+    },
+    {
+      "name": "Grape Jelly Death Effect",
+      "slug": "grape-jelly-death-effect",
+      "image": null,
+      "imageMissingReason": "Official developer product has IconImageAssetId 0, so no usable official icon was available during Phase 2.",
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "Grape Jelly Death Effect",
+      "sourceType": "Direct Robux product",
+      "price": "249 Robux",
+      "unlockRoute": "Buy the standalone Grape Jelly Death Effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Jelly",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": null,
+      "imageStatus": "missing official icon",
+      "verificationNote": "Official exact-universe developer product named Grape Jelly Death Effect, price 249 Robux, for sale.",
+      "sortOrder": 80
+    },
+    {
+      "name": "Strawberry Jelly Death Effect",
+      "slug": "strawberry-jelly-death-effect",
+      "image": null,
+      "imageMissingReason": "Official developer product has IconImageAssetId 0, so no usable official icon was available during Phase 2.",
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "Strawberry Jelly Death Effect",
+      "sourceType": "Direct Robux product",
+      "price": "249 Robux",
+      "unlockRoute": "Buy the standalone Strawberry Jelly Death Effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Jelly",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": null,
+      "imageStatus": "missing official icon",
+      "verificationNote": "Official exact-universe developer product named Strawberry Jelly Death Effect, price 249 Robux, for sale.",
+      "sortOrder": 90
+    },
+    {
+      "name": "Blueberry Jelly Death Effect",
+      "slug": "blueberry-jelly-death-effect",
+      "image": null,
+      "imageMissingReason": "Official developer product has IconImageAssetId 0, so no usable official icon was available during Phase 2.",
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "Blueberry Jelly Death Effect",
+      "sourceType": "Direct Robux product",
+      "price": "249 Robux",
+      "unlockRoute": "Buy the standalone Blueberry Jelly Death Effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Jelly",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": null,
+      "imageStatus": "missing official icon",
+      "verificationNote": "Official exact-universe developer product named Blueberry Jelly Death Effect, price 249 Robux, for sale.",
+      "sortOrder": 100
+    },
+    {
+      "name": "Duskveil Effect",
+      "slug": "duskveil-effect",
+      "image": null,
+      "imageMissingReason": "Official developer product has IconImageAssetId 0, so no usable official icon was available during Phase 2.",
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "Duskveil Effect",
+      "sourceType": "Direct Robux product",
+      "price": "199 Robux",
+      "unlockRoute": "Buy the standalone Duskveil Effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Duskveil",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100&cursor=id_2tFN0cmF3YmVycnkgSmVsbHkgVXppztZsySM"
+      ],
+      "sourceImageUrl": null,
+      "imageStatus": "missing official icon",
+      "verificationNote": "Official exact-universe developer product named Duskveil Effect, price 199 Robux, for sale.",
+      "sortOrder": 110
+    },
+    {
+      "name": "Snowman",
+      "slug": "snowman",
+      "image": null,
+      "imageMissingReason": "Official developer product has IconImageAssetId 0, so no usable official icon was available during Phase 2.",
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "[Effect] Snowman",
+      "sourceType": "Direct Robux product",
+      "price": "79 Robux",
+      "unlockRoute": "Buy the standalone Snowman effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Winter",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100&cursor=id_2tFN0cmF3YmVycnkgSmVsbHkgVXppztZsySM"
+      ],
+      "sourceImageUrl": null,
+      "imageStatus": "missing official icon",
+      "verificationNote": "Official exact-universe developer product named [Effect] Snowman, price 79 Robux, for sale.",
+      "sortOrder": 120
+    },
+    {
+      "name": "Santa",
+      "slug": "santa",
+      "image": null,
+      "imageMissingReason": "Official developer product has IconImageAssetId 0, so no usable official icon was available during Phase 2.",
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "[Effect] Santa",
+      "sourceType": "Direct Robux product",
+      "price": "79 Robux",
+      "unlockRoute": "Buy the standalone Santa effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Winter",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100&cursor=id_2tFN0cmF3YmVycnkgSmVsbHkgVXppztZsySM"
+      ],
+      "sourceImageUrl": null,
+      "imageStatus": "missing official icon",
+      "verificationNote": "Official exact-universe developer product named [Effect] Santa, price 79 Robux, for sale.",
+      "sortOrder": 130
+    },
+    {
+      "name": "Gifted",
+      "slug": "gifted",
+      "image": null,
+      "imageMissingReason": "Official developer product has IconImageAssetId 0, so no usable official icon was available during Phase 2.",
+      "catalogSection": "Direct Robux effects",
+      "effectType": "Death effect",
+      "source": "[Effect] Gifted",
+      "sourceType": "Direct Robux product",
+      "price": "129 Robux",
+      "unlockRoute": "Buy the standalone Gifted effect product.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Winter",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100&cursor=id_2tFN0cmF3YmVycnkgSmVsbHkgVXppztZsySM"
+      ],
+      "sourceImageUrl": null,
+      "imageStatus": "missing official icon",
+      "verificationNote": "Official exact-universe developer product named [Effect] Gifted, price 129 Robux, for sale.",
+      "sortOrder": 140
+    },
+    {
+      "name": "Spirit Omen Bundle Effect",
+      "slug": "spirit-omen-bundle-effect",
+      "image": "/Murderers%20VS%20Sheriffs/death-effects/spirit-omen-bundle-effect.png",
+      "imageMissingReason": null,
+      "catalogSection": "Bundle effects",
+      "effectType": "Death effect",
+      "source": "Spirit Omen Bundle [Effect]",
+      "sourceType": "Bundle component product",
+      "price": "299 Robux",
+      "unlockRoute": "Buy the Spirit Omen effect product from the bundle family.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Spirit Omen",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100"
+      ],
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-9f671c3e9e4eccec84f1b633240bb31b/420/420/Image/Png/noFilter",
+      "imageStatus": "downloaded official Roblox thumbnail",
+      "verificationNote": "Official exact-universe developer product named Spirit Omen Bundle [Effect], price 299 Robux, for sale.",
+      "sortOrder": 210
+    },
+    {
+      "name": "Cupid Bundle Effect",
+      "slug": "cupid-bundle-effect",
+      "image": "/Murderers%20VS%20Sheriffs/death-effects/cupid-bundle-effect.png",
+      "imageMissingReason": null,
+      "catalogSection": "Bundle effects",
+      "effectType": "Death effect",
+      "source": "Cupid Bundle [Effect]",
+      "sourceType": "Bundle component product",
+      "price": "149 Robux",
+      "unlockRoute": "Buy the Cupid effect product from the bundle family.",
+      "availability": "For sale in the official developer-products API.",
+      "bundleFamily": "Cupid",
+      "sourceConfidence": "high",
+      "sourcePage": "Roblox developer-products API",
+      "sourceUrls": [
+        "https://apis.roblox.com/developer-products/v2/universes/7219654364/developerproducts?limit=100&cursor=id_2tFN0cmF3YmVycnkgSmVsbHkgVXppztZsySM"
+      ],
+      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-e4c96227dcbbefad5b52153210ebca1f/420/420/Image/Png/noFilter",
+      "imageStatus": "downloaded official Roblox thumbnail",
+      "verificationNote": "Official exact-universe developer product named Cupid Bundle [Effect], price 149 Robux, for sale.",
+      "sortOrder": 220
+    }
+  ]
+}
