@@ -583,7 +583,6 @@ async function crawlRoute(route: RouteSeed, routeIndex: number, routeTotal: numb
       console.log(`  page budget reached (${options.pageBudget}); stopping route.`);
       return false;
     }
-    await sleep(options.pageDelayMs);
     const existing = options.apply ? await getCrawledPage(route.path, page) : null;
     if (options.skipFetched && existing?.status === "fetched") {
       stats.pagesSkipped += 1;
@@ -593,6 +592,7 @@ async function crawlRoute(route: RouteSeed, routeIndex: number, routeTotal: numb
       continue;
     }
 
+    await sleep(options.pageDelayMs);
     const parsed = await crawlPage(route.path, page, options, stats, existing, maxPage);
     if (parsed) {
       console.log(`  page ${page}/${pagesToFetch}: ${parsed.placeIds.length} links`);
