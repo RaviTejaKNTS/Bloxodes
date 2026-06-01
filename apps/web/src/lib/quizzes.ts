@@ -50,6 +50,7 @@ const QUIZ_DATA_MAP: Record<string, string> = {
   "the-forge": repoPath("data", "The Forge", "quiz.json"),
   "grow-a-garden": repoPath("data", "Grow a Garden", "quiz.json"),
   "slime-rng": repoPath("data", "Slime RNG", "quiz.json"),
+  "dress-to-impress": repoPath("data", "Dress To Impress", "quiz.json"),
   "rivals": repoPath("data", "RIVALS", "quiz.json"),
   "survive-zombie-arena": repoPath("data", "Survive Zombie Arena", "quiz.json"),
   "murderers-vs-sheriffs": repoPath("data", "Murderers VS Sheriffs", "quiz.json"),

@@ -31,58 +31,19 @@
       "note": "The local dataset uses the Code Items table plus Code Collection category-only item pages with row-level proof. Redirected/renamed rows are deduped by canonical item page."
     },
     "columns": [
-      {
-        "key": "name",
-        "label": "Item"
-      },
-      {
-        "key": "image",
-        "label": "Image"
-      },
-      {
-        "key": "catalogSection",
-        "label": "Source family"
-      },
-      {
-        "key": "itemType",
-        "label": "Item type"
-      },
-      {
-        "key": "setOrFamily",
-        "label": "Set"
-      },
-      {
-        "key": "sourceType",
-        "label": "Source type"
-      },
-      {
-        "key": "sourceRoute",
-        "label": "Source route"
-      },
-      {
-        "key": "obtainability",
-        "label": "Obtainability"
-      },
-      {
-        "key": "dateAdded",
-        "label": "Date added"
-      },
-      {
-        "key": "reworkOrAliasNote",
-        "label": "Rework or alias note"
-      },
-      {
-        "key": "bodyBase",
-        "label": "Body base"
-      },
-      {
-        "key": "toggles",
-        "label": "Toggles"
-      },
-      {
-        "key": "colorOptions",
-        "label": "Color options"
-      }
+      "name",
+      "image",
+      "catalogSection",
+      "itemType",
+      "setOrFamily",
+      "sourceType",
+      "sourceRoute",
+      "obtainability",
+      "dateAdded",
+      "reworkOrAliasNote",
+      "bodyBase",
+      "toggles",
+      "colorOptions"
     ]
   },
   "items": [

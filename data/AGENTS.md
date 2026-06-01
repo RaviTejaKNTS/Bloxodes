@@ -24,8 +24,8 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
 - `data/Blox Fruits/*`
   - Dataset-backed Blox Fruits wiki/catalog content, including fruits, swords, guns, accessories, materials, fighting styles, quests, enemies, titles, boats, Aura, Instinct, bosses, NPCs, locations, races, sea events, abilities, item index entries, and game info.
 - `data/Dress To Impress/*`
-  - Dataset-backed Dress To Impress wiki/catalog content, including themes, pose packs, currency items, ranks, walk packs, runway effects, pattern packs, reward items, and VIP items.
-  - Theme rows are intentionally text-only. Other collection rows use matching item or pack images under `apps/web/public/Dress To Impress/` when a clean source image exists.
+  - Dataset-backed Dress To Impress wiki/catalog and quiz content, including themes, free items, code items, currency items, pose packs, ranks, walk packs, runway effects, pattern packs, hairstyles, makeup, nails, reward items, Robux items, VIP items, and `quiz.json`.
+  - Theme rows are intentionally text-only. Other collection rows use matching item, pack, salon, or unlock images under `apps/web/public/Dress To Impress/` when a clean source image exists; the free-items catalog has one documented image gap for Gingerbread Suit.
   - Hairstyles are intentionally not seeded until the available source rows have player-readable names or a cleaner visual-identification dataset.
 - `data/The Forge/*.json`
   - Structured catalog and calculator data used by Forge catalog pages and Forge tools.

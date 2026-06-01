@@ -1233,6 +1233,24 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     additionalColumns: ["catalogSection"],
     maxStats: 6
   },
+  "dress-to-impress-free-items": {
+    groupKey: "catalogSection",
+    groupLabel: "Wardrobe section",
+    sectionOrder: DRESS_TO_IMPRESS_FREE_ITEM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 7
+  },
+  "dress-to-impress-code-items": {
+    groupKey: "catalogSection",
+    groupLabel: "Source family",
+    sectionOrder: DRESS_TO_IMPRESS_CODE_ITEM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [...DRESS_TO_IMPRESS_SOURCE_KEYS, "membershipBasis"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 7
+  },
   "dress-to-impress-ranks": {
     groupKey: "catalogSection",
     groupLabel: "Rank section",
@@ -1269,10 +1287,46 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     additionalColumns: ["catalogSection"],
     maxStats: 6
   },
+  "dress-to-impress-hairstyles": {
+    groupKey: "catalogSection",
+    groupLabel: "Hair area",
+    sectionOrder: DRESS_TO_IMPRESS_HAIRSTYLE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 7
+  },
+  "dress-to-impress-makeup": {
+    groupKey: "catalogSection",
+    groupLabel: "Salon section",
+    sectionOrder: DRESS_TO_IMPRESS_MAKEUP_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 7
+  },
+  "dress-to-impress-nails": {
+    groupKey: "catalogSection",
+    groupLabel: "Nail source",
+    sectionOrder: DRESS_TO_IMPRESS_NAIL_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
   "dress-to-impress-reward-items": {
     groupKey: "catalogSection",
     groupLabel: "Reward route",
     sectionOrder: DRESS_TO_IMPRESS_REWARD_ITEM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 7
+  },
+  "dress-to-impress-robux-items": {
+    groupKey: "catalogSection",
+    groupLabel: "Robux set",
+    sectionOrder: DRESS_TO_IMPRESS_ROBUX_ITEM_SECTION_ORDER,
     getSectionLabel: getCatalogSection,
     hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
     additionalColumns: ["catalogSection"],
