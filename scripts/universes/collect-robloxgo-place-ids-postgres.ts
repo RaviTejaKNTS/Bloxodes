@@ -7,6 +7,9 @@ const ROBLOXGO_BASE = "https://www.robloxgo.com";
 const DEFAULT_PAGE_DELAY_MS = Number(process.env.ROBLOXGO_PAGE_DELAY_MS ?? "1500");
 const DEFAULT_PAGE_RETRY_LIMIT = Number(process.env.ROBLOXGO_PAGE_RETRY_LIMIT ?? "3");
 const DEFAULT_RATE_LIMIT_COOLDOWN_MS = Number(process.env.ROBLOXGO_RATE_LIMIT_COOLDOWN_MS ?? "60000");
+const DEFAULT_PAGE_BUDGET = process.env.ROBLOXGO_PAGE_BUDGET
+  ? Number(process.env.ROBLOXGO_PAGE_BUDGET)
+  : null;
 const DEFAULT_MAX_PAGES_PER_ROUTE =
   process.env.ROBLOXGO_MAX_PAGES_PER_ROUTE === "all"
     ? null
@@ -77,7 +80,7 @@ function parseArgs(): Options {
     ensureSchema: true,
     maxPagesPerRoute: DEFAULT_MAX_PAGES_PER_ROUTE,
     maxRoutes: null,
-    pageBudget: null,
+    pageBudget: DEFAULT_PAGE_BUDGET,
     routeFilters: [],
     pageDelayMs: DEFAULT_PAGE_DELAY_MS
   };
@@ -148,7 +151,7 @@ Options:
   --no-ensure-schema          Do not create staging tables before running.
   --max-pages-per-route <n>   Limit pages per route. Use "all" for no cap. Default all.
   --max-routes <n>            Limit discovered routes after filtering.
-  --page-budget <n>           Stop after fetching this many uncached route pages.
+  --page-budget <n>           Stop after fetching this many uncached route pages. Also supports ROBLOXGO_PAGE_BUDGET.
   --route <text>              Only process routes containing this text. Repeatable.
   --page-delay-ms <n>         Delay between RobloxGo page requests. Default ${DEFAULT_PAGE_DELAY_MS}.
   -h, --help                  Show this help.

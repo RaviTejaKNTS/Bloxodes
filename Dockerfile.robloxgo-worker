@@ -14,4 +14,4 @@ RUN npm ci
 
 COPY scripts ./scripts
 
-CMD ["npm", "run", "collect:robloxgo-postgres", "--", "--apply", "--max-pages-per-route", "all", "--page-delay-ms", "1500", "--page-budget", "1500"]
+CMD ["npm", "run", "collect:robloxgo-postgres", "--", "--apply"]
