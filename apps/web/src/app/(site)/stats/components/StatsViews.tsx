@@ -353,7 +353,13 @@ function RelatedLinks({ links }: { links: StatsRelatedLink[] }) {
   return (
     <div className="flex flex-wrap gap-2">
       {links.map((link) => (
-        <Button key={`${link.type}-${link.href}`} asChild variant="outline" size="sm" className="h-8 rounded-md">
+        <Button
+          key={`${link.type}-${link.href}`}
+          asChild
+          variant="outline"
+          size="sm"
+          className="h-auto min-h-8 max-w-full justify-start whitespace-normal rounded-md py-1.5 text-left leading-snug"
+        >
           <Link href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}>
             {link.label}
             {link.href.startsWith("http") ? <ExternalLink className="ml-1.5 h-3.5 w-3.5" aria-hidden /> : null}
@@ -415,30 +421,31 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
         <MetricCard label="Rating" value={formatPercent(game.ratingPercent)} detail={`${formatCompactNumber(game.likes)} likes`} icon={Star} />
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_320px]">
-        <StatsChartPanel title={`${game.name} chart`} subtitle="Public Roblox data tracked by Bloxodes" charts={data.charts} defaultMetric="players" />
-        <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
-          <CardHeader className="border-b border-border/60 p-4">
-            <CardTitle className="m-0 text-base font-semibold text-foreground">Game summary</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 p-4 text-sm">
-            {[
-              ["Universe ID", String(game.universeId)],
-              ["Creator", game.creatorName ?? "Not tracked"],
-              ["Genre", game.genre ?? "Not tracked"],
-              ["Subgenre", game.subgenre ?? "Not tracked"],
-              ["Created", game.createdAtApi ? new Date(game.createdAtApi).toLocaleDateString("en-US") : "Not tracked"],
-              ["Updated", game.updatedAtApi ? new Date(game.updatedAtApi).toLocaleDateString("en-US") : "Not tracked"],
-              ["Favorites", formatCompactNumber(game.favorites)]
-            ].map(([label, value]) => (
-              <div key={label} className="flex items-center justify-between gap-3 border-b border-border/50 pb-2 last:border-0 last:pb-0">
-                <span className="text-muted">{label}</span>
-                <span className="text-right font-semibold text-foreground">{value}</span>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </div>
+      <StatsChartPanel title={`${game.name} chart`} subtitle="Public Roblox data tracked by Bloxodes" charts={data.charts} defaultMetric="players" />
+
+      <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+        <CardHeader className="border-b border-border/60 p-4">
+          <CardTitle className="m-0 text-base font-semibold text-foreground">Game summary</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-x-6 gap-y-4 p-4 text-sm sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            ["Universe ID", String(game.universeId)],
+            ["Creator", game.creatorName ?? "Not tracked"],
+            ["Genre", game.genre ?? "Not tracked"],
+            ["Subgenre", game.subgenre ?? "Not tracked"],
+            ["Created", game.createdAtApi ? new Date(game.createdAtApi).toLocaleDateString("en-US") : "Not tracked"],
+            ["Updated", game.updatedAtApi ? new Date(game.updatedAtApi).toLocaleDateString("en-US") : "Not tracked"],
+            ["Favorites", formatCompactNumber(game.favorites)]
+          ].map(([label, value]) => (
+            <div key={label} className="min-w-0 space-y-1">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{label}</p>
+              <p className="truncate font-semibold text-foreground" title={value}>
+                {value}
+              </p>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
 
       <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
         <CardHeader className="border-b border-border/60 p-4">
