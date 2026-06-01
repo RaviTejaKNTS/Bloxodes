@@ -122,6 +122,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Blox Fruits/*.json`
   - Local Blox Fruits in-game datasets collected from the Blox Fruits Wiki and Roblox public APIs for wiki/catalog page work.
   - Matching source-provided images live under `apps/web/public/Blox Fruits/`.
+- `data/Dress To Impress/*.json`
+  - Local Dress To Impress game datasets for wiki/catalog page work, including themes, pose packs, currency items, ranks, walk packs, runway effects, pattern packs, reward items, and VIP items.
+  - Matching source-provided images live under `apps/web/public/Dress To Impress/` where useful item, pack, or unlock art exists. Themes stay text-only, and hairstyles stay out of the seeded set until the source data has readable player-facing names or clean visual IDs.
 - `data/The Forge/*.json`
   - Forge catalog and calculator datasets consumed by `src/lib/forge/*` and catalog routes.
   - The Forge collection pages also use `quests.json`, `skills.json`, `blueprints.json`, and `npcs.json` through `src/app/(site)/catalog/the-forge/page-data.tsx`.

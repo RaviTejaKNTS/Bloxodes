@@ -266,6 +266,63 @@ const WIKI_COPY: Record<string, WikiCopy> = {
     ],
     coverImage: null
   },
+  "dress-to-impress": {
+    metaDescription:
+      "Dress To Impress wiki hub with codes, events, theme help, item catalogs, gameplay tips, controls, and Roblox game details.",
+    gameDescriptionMd:
+      "Dress To Impress is a timed fashion-round game where each player gets a theme, builds an outfit in the dressing room and salon, then walks the runway for votes. The round is about reading the prompt quickly, choosing clothing, hair, makeup, colors, patterns, and accessories that make the idea obvious, then using poses and presentation to sell the look.\n\nStars come from runway voting and move players through ranks, while Cash and seasonal currencies help unlock more wardrobe and presentation options. Codes, events, reward items, VIP pieces, pose packs, walk packs, runway effects, pattern packs, and theme knowledge all feed into the same goal: having more ways to answer a prompt before the timer ends.\n\nUse the wiki hub as the high-level map. The detailed catalog pages handle row-by-row theme meanings, rank thresholds, item sources, prices, unlock routes, images, and availability notes.",
+    tipsMd: `- Read the theme first, then choose one clear silhouette or color direction before adding small accessories.
+- Jump out of stations as soon as a choice is done so the dressing timer does not get eaten by menus.
+- Use Freeplay to test outfits, colors, pattern packs, poses, walk packs, and runway effects before trying them in a timed round.
+- Spend Cash around items or packs you will reuse across many themes before chasing a display item you may wear once.
+- Treat codes, events, and reward routes as bonus wardrobe sources. The related pages should handle exact code and event details.
+- Ranks explain Star progression, while item, pose, walk, pattern, VIP, and reward rows carry the exact unlock details.`,
+    controlsJson: [
+      {
+        action: "Move",
+        desktop: "W/A/S/D or arrow keys",
+        mobile: "Drag the on-screen joystick",
+        console: "Left stick"
+      },
+      {
+        action: "Interact with a station",
+        desktop: "E",
+        mobile: "Tap the station or item",
+        console: "X on Xbox / Square on PlayStation"
+      },
+      {
+        action: "Choose station options",
+        desktop: "Click with the mouse",
+        mobile: "Tap the option",
+        console: "Controller mode, then A on Xbox / Circle on PlayStation"
+      },
+      {
+        action: "Leave a station",
+        desktop: "Space",
+        mobile: "Jump button",
+        console: "A on Xbox / X on PlayStation"
+      },
+      {
+        action: "Zoom camera",
+        desktop: "Mouse wheel",
+        mobile: "Two-finger pinch",
+        console: "Press the right stick"
+      },
+      {
+        action: "Vote on the runway",
+        desktop: "Click the star rating",
+        mobile: "Tap the star rating",
+        console: "Controller mode, navigate to stars, then A on Xbox / Circle on PlayStation"
+      },
+      {
+        action: "Open worn-item customization",
+        desktop: "Click the outfit/customization icon",
+        mobile: "Tap the outfit/customization icon",
+        console: "Controller mode from minus/touchpad, then navigate with stick or D-pad"
+      }
+    ],
+    coverImage: null
+  },
   "99-nights-in-the-forest": {
     metaDescription:
       "99 Nights in the Forest wiki with survival tips, classes, crafting, materials, weapons, tools, food, locations, entities, and animals.",

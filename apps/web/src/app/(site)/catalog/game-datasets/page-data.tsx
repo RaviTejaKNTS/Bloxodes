@@ -1008,7 +1008,278 @@ const SAILOR_PIECE_RAW_CARD_KEYS = [
   "category"
 ];
 
+const SPEED_KEYBOARD_TRAIL_SECTION_ORDER = ["Current Robux trails", "Retired or event trails"];
+const SPEED_KEYBOARD_AURA_SECTION_ORDER = ["Starter cost tier", "Mid cost tier", "High cost tier"];
+const SPEED_KEYBOARD_STAGE_SECTION_ORDER = ["World 1 stages", "World 2 stages"];
+const SPEED_KEYBOARD_TREADMILL_SECTION_ORDER = ["Free trainer", "Premium treadmill upgrades"];
+
+const DRESS_TO_IMPRESS_SOURCE_KEYS = [
+  "catalogSection",
+  "categoryIncluded",
+  "categoryTags",
+  "poseCountStatus",
+  "priceValue",
+  "priceStatus",
+  "rawAvailability",
+  "rawSourceRoute",
+  "sourcePage",
+  "source",
+  "sourceImageFile",
+  "sourceImagePage",
+  "secondarySourcePage",
+  "sourceNote",
+  "wikiUrl",
+  "sourceUrl",
+  "sourceUrls",
+  "sourceImageUrl",
+  "sourceCheckedAt",
+  "sourceConfidence",
+  "sourceNotes",
+  "sourceStatus",
+  "verificationNote",
+  "rawText",
+  "rawInfobox",
+  "rawHtml",
+  "sourceTables",
+  "imageStatus",
+  "imageMissingReason",
+  "sortOrder"
+];
+
+const DRESS_TO_IMPRESS_THEME_SECTION_ORDER = [
+  "Decades and historical eras",
+  "Aesthetics and fashion styles",
+  "Colors, patterns, and materials",
+  "Formal, glam, and runway",
+  "Casual life and daily activities",
+  "School, work, and professions",
+  "Places, travel, and events",
+  "Fantasy, mythology, and royalty",
+  "Spooky, horror, and mystery",
+  "Nature, seasons, and weather",
+  "Media, characters, and pop culture",
+  "Duo, versus, and group prompts",
+  "Food, objects, and abstract ideas"
+];
+
+const DRESS_TO_IMPRESS_POSE_PACK_SECTION_ORDER = [
+  "Starter pose packs",
+  "Standard shop pose packs",
+  "Seasonal pose packs",
+  "Reward pose packs",
+  "Collaboration pose packs",
+  "Retired pose packs"
+];
+
+const DRESS_TO_IMPRESS_CURRENCY_ITEM_SECTION_ORDER = [
+  "Cash shop items",
+  "Weekly Boutique history",
+  "Taiyaki seasonal items",
+  "Candy Hearts seasonal items",
+  "Snowflake seasonal items",
+  "Candy seasonal items",
+  "Seashell seasonal items",
+  "Removed currency items"
+];
+
+const DRESS_TO_IMPRESS_RANK_SECTION_ORDER = ["Star ranks", "Unlock items"];
+
+const DRESS_TO_IMPRESS_WALK_PACK_SECTION_ORDER = [
+  "Cash shop walk packs",
+  "Seasonal currency walk packs",
+  "Baddie Pass reward walk packs",
+  "Advent and special gift walk packs"
+];
+
+const DRESS_TO_IMPRESS_RUNWAY_EFFECT_SECTION_ORDER = [
+  "Standard Shop effects",
+  "Spring seasonal effects",
+  "Winter seasonal effects",
+  "Halloween seasonal effects",
+  "Removed effects"
+];
+
+const DRESS_TO_IMPRESS_PATTERN_PACK_SECTION_ORDER = [
+  "Seasonal pattern packs",
+  "Reward pattern packs",
+  "Collaboration pattern packs",
+  "Shop pattern packs",
+  "DLC fashion pattern packs"
+];
+
+const DRESS_TO_IMPRESS_REWARD_ITEM_SECTION_ORDER = [
+  "Quest and challenge rewards",
+  "Style Showdown and mode rewards",
+  "Collaboration rewards",
+  "Limited and retired event rewards"
+];
+
+const DRESS_TO_IMPRESS_VIP_ITEM_SECTION_ORDER = [
+  "Dresses",
+  "Tops",
+  "Bottoms",
+  "Shoes",
+  "Bags",
+  "Accessories",
+  "Jewelry"
+];
+
 const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
+  "dress-to-impress-themes": {
+    groupKey: "catalogSection",
+    groupLabel: "Theme type",
+    sectionOrder: DRESS_TO_IMPRESS_THEME_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    hideImages: true
+  },
+  "dress-to-impress-pose-packs": {
+    groupKey: "catalogSection",
+    groupLabel: "Unlock route",
+    sectionOrder: DRESS_TO_IMPRESS_POSE_PACK_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "dress-to-impress-currency-items": {
+    groupKey: "catalogSection",
+    groupLabel: "Item source",
+    sectionOrder: DRESS_TO_IMPRESS_CURRENCY_ITEM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "dress-to-impress-ranks": {
+    groupKey: "catalogSection",
+    groupLabel: "Rank section",
+    sectionOrder: DRESS_TO_IMPRESS_RANK_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "dress-to-impress-walk-packs": {
+    groupKey: "catalogSection",
+    groupLabel: "Unlock route",
+    sectionOrder: DRESS_TO_IMPRESS_WALK_PACK_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "dress-to-impress-runway-effects": {
+    groupKey: "catalogSection",
+    groupLabel: "Effect source",
+    sectionOrder: DRESS_TO_IMPRESS_RUNWAY_EFFECT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "dress-to-impress-pattern-packs": {
+    groupKey: "catalogSection",
+    groupLabel: "Unlock route",
+    sectionOrder: DRESS_TO_IMPRESS_PATTERN_PACK_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "dress-to-impress-reward-items": {
+    groupKey: "catalogSection",
+    groupLabel: "Reward route",
+    sectionOrder: DRESS_TO_IMPRESS_REWARD_ITEM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 7
+  },
+  "dress-to-impress-vip-items": {
+    groupKey: "catalogSection",
+    groupLabel: "VIP section",
+    sectionOrder: DRESS_TO_IMPRESS_VIP_ITEM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: DRESS_TO_IMPRESS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "1-speed-keyboard-escape-trails": {
+    groupKey: "catalogSection",
+    groupLabel: "Trail availability",
+    sectionOrder: SPEED_KEYBOARD_TRAIL_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "freeOrPremium",
+      "notes",
+      "robloxGamePassId",
+      "robloxProductId",
+      "robloxIconAssetId",
+      "officialName",
+      "officialCreated",
+      "officialUpdated",
+      "sourceStatus",
+      "sourcePage",
+      "secondarySourcePage",
+      "imageStatus",
+      "sortOrder"
+    ],
+    maxStats: 5
+  },
+  "1-speed-keyboard-escape-auras": {
+    groupKey: "catalogSection",
+    groupLabel: "Aura cost tier",
+    sectionOrder: SPEED_KEYBOARD_AURA_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "verificationNote",
+      "robloxGamePassId",
+      "robloxProductId",
+      "robloxIconAssetId",
+      "officialName",
+      "officialCreated",
+      "officialUpdated",
+      "sourceStatus",
+      "sourcePage",
+      "secondarySourcePage",
+      "imageStatus",
+      "sortOrder"
+    ],
+    maxStats: 5
+  },
+  "1-speed-keyboard-escape-stages": {
+    groupKey: "catalogSection",
+    groupLabel: "World",
+    sectionOrder: SPEED_KEYBOARD_STAGE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "imageStatus", "sortOrder"],
+    maxStats: 9
+  },
+  "1-speed-keyboard-escape-treadmills": {
+    groupKey: "catalogSection",
+    groupLabel: "Trainer type",
+    sectionOrder: SPEED_KEYBOARD_TREADMILL_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "robloxGamePassId",
+      "robloxProductId",
+      "robloxIconAssetId",
+      "officialName",
+      "officialCreated",
+      "officialUpdated",
+      "sourcePage",
+      "secondarySourcePage",
+      "imageStatus",
+      "sortOrder"
+    ],
+    maxStats: 7
+  },
   "rivals-weapons": {
     groupKey: "slot",
     groupLabel: "Weapon slot",

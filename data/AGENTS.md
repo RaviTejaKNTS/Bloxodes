@@ -23,6 +23,10 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
   - Dataset-backed Adopt Me wiki/catalog content, including pets, eggs, vehicles, toys, strollers, food, potions, gifts, gift prizes, furniture, house surfaces, gamepasses, star rewards, accessory-shop entries, pet ages, and game info.
 - `data/Blox Fruits/*`
   - Dataset-backed Blox Fruits wiki/catalog content, including fruits, swords, guns, accessories, materials, fighting styles, quests, enemies, titles, boats, Aura, Instinct, bosses, NPCs, locations, races, sea events, abilities, item index entries, and game info.
+- `data/Dress To Impress/*`
+  - Dataset-backed Dress To Impress wiki/catalog content, including themes, pose packs, currency items, ranks, walk packs, runway effects, pattern packs, reward items, and VIP items.
+  - Theme rows are intentionally text-only. Other collection rows use matching item or pack images under `apps/web/public/Dress To Impress/` when a clean source image exists.
+  - Hairstyles are intentionally not seeded until the available source rows have player-readable names or a cleaner visual-identification dataset.
 - `data/The Forge/*.json`
   - Structured catalog and calculator data used by Forge catalog pages and Forge tools.
 - `data/RIVALS/*`
