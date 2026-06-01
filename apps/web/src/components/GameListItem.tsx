@@ -173,127 +173,127 @@ export function GameListItem({ entry, rank, metricLabel, listSlug }: GameListIte
   const primaryMetric = formatPrimaryMetric(metricKey, metricLabelResolved, entry.metric_value, universe);
 
   return (
-    <article className="rounded-[var(--radius-xl)] border border-border/60 bg-surface/80 p-3 shadow-soft transition hover:border-accent/80 hover:shadow-[0_20px_38px_-34px_rgba(59,70,128,0.72)] sm:p-4">
-      <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(300px,360px)] lg:items-center xl:grid-cols-[minmax(0,1fr)_minmax(380px,440px)]">
-        <div className="flex min-w-0 gap-3 sm:gap-4">
+    <article className="rounded-[var(--radius-xl)] border border-border/60 bg-surface/80 p-4 shadow-soft transition hover:border-accent/80 hover:shadow-[0_20px_38px_-34px_rgba(59,70,128,0.72)] sm:p-5">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+        <div className="flex shrink-0 items-start gap-3">
+          <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/15 text-sm font-bold text-accent">
+            #{rank}
+          </span>
           <ExternalLinkWrapper
             href={primaryHref}
-            className="group relative h-20 w-20 shrink-0 overflow-hidden rounded-[var(--radius-lg)] border border-border/60 bg-black/20 sm:h-24 sm:w-24"
+            className="group relative h-24 w-24 shrink-0 overflow-hidden rounded-[var(--radius-lg)] border border-border/60 bg-black/20 sm:h-28 sm:w-28"
           >
             <Image
               src={coverImage}
               alt={universeTitle(universe)}
               fill
-              sizes="(min-width: 640px) 96px, 80px"
+              sizes="(min-width: 640px) 112px, 96px"
               className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
             />
-            <span className="absolute left-2 top-2 rounded-full bg-background/90 px-2 py-0.5 text-xs font-bold text-accent shadow-sm">
-              #{rank}
-            </span>
           </ExternalLinkWrapper>
+        </div>
 
-          <div className="min-w-0 flex-1 space-y-2">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-              <div className="min-w-0">
-                <ExternalLinkWrapper
-                  href={primaryHref}
-                  className="line-clamp-2 text-base font-semibold leading-tight text-foreground transition hover:text-accent sm:text-lg"
-                >
-                  {universeTitle(universe)}
-                </ExternalLinkWrapper>
-                <p className="mt-1 text-xs text-muted">
-                  <FiClock className="mr-1 inline h-3 w-3 align-[-0.2em] text-muted/70" aria-hidden />
-                  Updated {updatedLabel ?? "recently"}
-                </p>
-              </div>
-              {primaryMetric ? (
-                <div
-                  className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 text-xs font-semibold text-foreground"
-                  title={primaryMetric.raw}
-                >
-                  <FiTrendingUp className="h-3.5 w-3.5 text-accent" aria-hidden />
-                  <span>{primaryMetric.value}</span>
-                  <span className="text-muted">{primaryMetric.label}</span>
-                </div>
-              ) : null}
+        <div className="min-w-0 flex-1 space-y-3">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+            <div className="min-w-0">
+              <ExternalLinkWrapper
+                href={primaryHref}
+                className="line-clamp-2 text-xl font-semibold leading-tight text-foreground transition hover:text-accent"
+              >
+                {universeTitle(universe)}
+              </ExternalLinkWrapper>
+              <p className="mt-1 inline-flex items-center gap-1 text-xs text-muted">
+                <FiClock className="h-3 w-3 text-muted/70" aria-hidden />
+                Updated {updatedLabel ?? "recently"}
+              </p>
             </div>
-
-            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted">
-              <div className="flex items-center gap-1.5">
-                <DeviceBadge label="Desktop" icon={FiMonitor} enabled={universe.desktop_enabled} />
-                <DeviceBadge label="Mobile" icon={FiSmartphone} enabled={universe.mobile_enabled} />
-                <DeviceBadge label="Tablet" icon={FiTablet} enabled={universe.tablet_enabled} />
-                <DeviceBadge label="Console" icon={FiTv} enabled={universe.console_enabled} />
-                <DeviceBadge label="VR" icon={TbAugmentedReality} enabled={universe.vr_enabled} />
-              </div>
-              {ageRating ? (
-                <span className="inline-flex items-center gap-1 rounded-full border border-border/60 px-2.5 py-1">
-                  <FiShield className="h-3 w-3" />
-                  {ageRating}
-                </span>
-              ) : null}
-              {Number(game?.active_count ?? 0) > 0 && activeCodesHref ? (
-                <Link
-                  href={activeCodesHref}
-                  prefetch={false}
-                  data-analytics-event="list_game_codes_click"
-                  data-analytics-list-slug={listSlug}
-                  data-analytics-game-slug={game?.slug ?? ""}
-                  data-analytics-rank={rank}
-                  className="inline-flex items-center gap-1 rounded-full border border-border/60 px-2.5 py-1 transition hover:border-accent hover:text-accent"
-                >
-                  <FiHash className="h-3 w-3" />
-                  {activeCodesValue} active codes
-                </Link>
-              ) : null}
-              {statsHref ? (
-                <Link
-                  href={statsHref}
-                  prefetch={false}
-                  data-analytics-event="list_game_stats_click"
-                  data-analytics-list-slug={listSlug}
-                  data-analytics-universe-id={universe.universe_id}
-                  data-analytics-rank={rank}
-                  className="inline-flex items-center gap-1 rounded-full border border-border/60 px-2.5 py-1 transition hover:border-accent hover:text-accent"
-                >
-                  <FiTrendingUp className="h-3 w-3" />
-                  Stats
-                </Link>
-              ) : null}
-            </div>
-
-            {visibleBadges?.length ? (
-              <div className="flex flex-wrap items-center gap-2">
-                {visibleBadges.slice(0, 3).map((badge) => {
-                  const Icon = badgeIconForRank(badge.rank);
-                  const labelBase =
-                    (badge as any).list_display_name ||
-                    badge.list_title ||
-                    badge.list_slug ||
-                    universeTitle(universe);
-                  const label = `#${badge.rank} on ${labelBase}`;
-                  return (
-                    <Link
-                      key={`${badge.list_id}-${badge.rank}`}
-                      href={`/lists/${badge.list_slug}`}
-                      prefetch={false}
-                      className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-border/60 px-2.5 py-1 text-xs font-semibold text-foreground transition hover:border-accent hover:text-accent"
-                    >
-                      <Icon className="h-4 w-4 text-accent" aria-hidden />
-                      <span className="truncate">{label}</span>
-                    </Link>
-                  );
-                })}
+            {primaryMetric ? (
+              <div
+                className="inline-flex w-fit max-w-full shrink-0 items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-sm font-semibold text-foreground"
+                title={primaryMetric.raw}
+              >
+                <FiTrendingUp className="h-4 w-4 text-accent" aria-hidden />
+                <span>{primaryMetric.value}</span>
+                <span className="text-muted">{primaryMetric.label}</span>
               </div>
             ) : null}
           </div>
-        </div>
 
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-          <Stat icon={FiUsers} label="Playing" value={universe.playing} />
-          <Stat icon={FiEye} label="Visits" value={universe.visits} />
-          <Stat icon={FiStar} label="Favorites" value={universe.favorites} />
-          <Stat icon={FiThumbsUp} label="Like Ratio" valueLabel={formatRatio(universe.likes, universe.dislikes)} />
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
+            <Stat icon={FiUsers} label="Playing" value={universe.playing} />
+            <Stat icon={FiEye} label="Visits" value={universe.visits} />
+            <Stat icon={FiStar} label="Favorites" value={universe.favorites} />
+            <Stat icon={FiThumbsUp} label="Like Ratio" valueLabel={formatRatio(universe.likes, universe.dislikes)} />
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted">
+            <div className="flex items-center gap-1.5">
+              <DeviceBadge label="Desktop" icon={FiMonitor} enabled={universe.desktop_enabled} />
+              <DeviceBadge label="Mobile" icon={FiSmartphone} enabled={universe.mobile_enabled} />
+              <DeviceBadge label="Tablet" icon={FiTablet} enabled={universe.tablet_enabled} />
+              <DeviceBadge label="Console" icon={FiTv} enabled={universe.console_enabled} />
+              <DeviceBadge label="VR" icon={TbAugmentedReality} enabled={universe.vr_enabled} />
+            </div>
+            {ageRating ? (
+              <span className="inline-flex items-center gap-1 rounded-full border border-border/60 px-3 py-1.5">
+                <FiShield className="h-3.5 w-3.5" />
+                {ageRating}
+              </span>
+            ) : null}
+            {Number(game?.active_count ?? 0) > 0 && activeCodesHref ? (
+              <Link
+                href={activeCodesHref}
+                prefetch={false}
+                data-analytics-event="list_game_codes_click"
+                data-analytics-list-slug={listSlug}
+                data-analytics-game-slug={game?.slug ?? ""}
+                data-analytics-rank={rank}
+                className="inline-flex items-center gap-1 rounded-full border border-border/60 px-3 py-1.5 transition hover:border-accent hover:text-accent"
+              >
+                <FiHash className="h-3.5 w-3.5" />
+                {activeCodesValue} active codes
+              </Link>
+            ) : null}
+            {statsHref ? (
+              <Link
+                href={statsHref}
+                prefetch={false}
+                data-analytics-event="list_game_stats_click"
+                data-analytics-list-slug={listSlug}
+                data-analytics-universe-id={universe.universe_id}
+                data-analytics-rank={rank}
+                className="inline-flex items-center gap-1 rounded-full border border-border/60 px-3 py-1.5 transition hover:border-accent hover:text-accent"
+              >
+                <FiTrendingUp className="h-3.5 w-3.5" />
+                Stats
+              </Link>
+            ) : null}
+          </div>
+
+          {visibleBadges?.length ? (
+            <div className="flex flex-wrap items-center gap-2">
+              {visibleBadges.slice(0, 3).map((badge) => {
+                const Icon = badgeIconForRank(badge.rank);
+                const labelBase =
+                  (badge as any).list_display_name ||
+                  badge.list_title ||
+                  badge.list_slug ||
+                  universeTitle(universe);
+                const label = `#${badge.rank} on ${labelBase}`;
+                return (
+                  <Link
+                    key={`${badge.list_id}-${badge.rank}`}
+                    href={`/lists/${badge.list_slug}`}
+                    prefetch={false}
+                    className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-border/60 px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                  >
+                    <Icon className="h-4 w-4 text-accent" aria-hidden />
+                    <span className="truncate">{label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : null}
         </div>
       </div>
     </article>
@@ -312,13 +312,13 @@ function Stat({
   valueLabel?: string;
 }) {
   return (
-    <div className="flex min-w-0 items-center gap-2 rounded-xl bg-background/60 px-3 py-2">
+    <div className="flex min-w-0 items-center gap-2 rounded-xl border border-border/50 bg-background/50 px-3 py-2">
       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-border/35 text-muted">
         <Icon className="h-4 w-4" aria-hidden />
       </div>
       <div className="min-w-0 flex-1">
-        <p className="truncate text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted">{label}</p>
-        <p className="truncate text-sm font-semibold text-foreground">{valueLabel ?? formatNumber(value ?? null)}</p>
+        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-muted">{label}</p>
+        <p className="text-base font-semibold leading-tight text-foreground">{valueLabel ?? formatNumber(value ?? null)}</p>
       </div>
     </div>
   );
