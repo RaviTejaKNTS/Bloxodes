@@ -313,6 +313,69 @@ const WIKI_COPY: Record<string, WikiCopy> = {
       }
     ]
   },
+  "jujutsu-shenanigans": {
+    metaDescription:
+      "Jujutsu Shenanigans wiki hub with characters, domains, items, maps, modes, emotes, achievements, Build Mode, controls, and Roblox details.",
+    gameDescriptionMd:
+      "Jujutsu Shenanigans is a Roblox battlegrounds fighting game built around public-server brawls, destructible city movement, character kits, domains, items, and mode queues. A normal session starts with choosing a moveset, landing M1 chains and four skills, using dash or block to survive pressure, and building Awakening by dealing damage. Public servers are the sandbox, but Duels, Ranked Duels, Roulette minigames, private servers, Build Mode, Workshop, and Skill Builder give the game more structure than a simple free-for-all.\n\nThe main thing to learn first is how each character turns neutral hits into pressure. Characters such as Honored One, Vessel, Perfection, Restless Gambler, Ten Shadows, and the Early Access roster all change what your base moves, special, Awakening, or domain can do. Items, throwables, vending machines, map hazards, emotes, achievements, titles, and cosmetic rewards sit around that combat loop. Build Mode is its own creative layer, with blocks, tools, Workshop maps, and Skill Builder nodes for private-server movesets.\n\nReturning players should check character status, new domains, map or Roulette changes, item availability, achievement rewards, emote sources, and Build Mode systems before assuming an older video still matches the game. Jujutsu Shenanigans updates often change kits, modes, and side systems, so public fights and private-server building can feel different after a major patch.",
+    tipsMd: `- Keep M1, dash, block, and special timing clean before swapping characters often. Most kits still rely on opening hits, avoiding endlag, and using the right move variant.
+- Awakening bar fills through damage and can reset when you switch characters, so do not change kits right before you are ready to use G.
+- Public map items, vending machines, throwables, the station train, and sewer routes matter in open fights, but Duels and Roulette use separate match rules.
+- Character status matters. Complete kits are safer to learn, Early Access characters can change, and Base Only characters do not play like full awakening kits.
+- Build Mode, Workshop, and Skill Builder belong to private-server creation. They are powerful, but they are separate from normal public-server progression.`,
+    controlsJson: [
+      {
+        action: "Melee combo",
+        desktop: "Left click / M1",
+        mobile: "Punch button"
+      },
+      {
+        action: "Use skills",
+        desktop: "1, 2, 3, 4",
+        mobile: "On-screen skill buttons"
+      },
+      {
+        action: "Dash / evasive",
+        desktop: "Q",
+        mobile: "Dash button"
+      },
+      {
+        action: "Block",
+        desktop: "F",
+        mobile: "Block button"
+      },
+      {
+        action: "Special",
+        desktop: "R",
+        mobile: "Special button"
+      },
+      {
+        action: "Awaken",
+        desktop: "G",
+        mobile: "Tap the Awakening bar"
+      },
+      {
+        action: "Sprint",
+        desktop: "W twice",
+        mobile: "Auto Run setting or forward movement"
+      },
+      {
+        action: "Shift-lock",
+        desktop: "Left Shift",
+        mobile: "Lock button"
+      },
+      {
+        action: "Zoom",
+        desktop: "I / O or mouse wheel",
+        mobile: "Pinch on the right side of the screen"
+      },
+      {
+        action: "Beam clash quick-time input",
+        desktop: "W, A, D",
+        mobile: "Tap the shown on-screen button"
+      }
+    ]
+  },
   rivals: {
     metaDescription:
       "RIVALS wiki hub with codes, weapons, maps, skins, wraps, charms, finishers, emotes, UGC items, Roblox details, and practical duel tips.",

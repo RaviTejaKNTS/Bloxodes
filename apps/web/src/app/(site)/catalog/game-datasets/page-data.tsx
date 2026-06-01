@@ -78,6 +78,7 @@ type CatalogSectionOverride = {
   hiddenKeys?: string[];
   additionalColumns?: string[];
   maxStats?: number;
+  hideImages?: boolean;
   transformItem?: (item: GameDatasetCatalogItem) => GameDatasetCatalogItem;
   transformItems?: (items: GameDatasetCatalogItem[]) => GameDatasetCatalogItem[];
 };
@@ -764,6 +765,92 @@ const RIVALS_UGC_SECTION_ORDER = [
   "Rank badge accessories"
 ];
 
+const JUJUTSU_SHENANIGANS_CHARACTER_SECTION_ORDER = ["Complete", "Early Access", "Base Only"];
+const JUJUTSU_SHENANIGANS_DOMAIN_SECTION_ORDER = [
+  "Full combat domains",
+  "Non-lethal and awakening domains",
+  "Alternate and invasion mechanics",
+  "Restricted and special domains"
+];
+const JUJUTSU_SHENANIGANS_ITEM_SECTION_ORDER = [
+  "Public shop, spawn, and map items",
+  "Character-created and secret items",
+  "Private-server Item Block items"
+];
+const JUJUTSU_SHENANIGANS_GAMEMODE_SECTION_ORDER = [
+  "Public Servers",
+  "Duels and Ranked",
+  "Roulette Minigames",
+  "Custom and Private Servers",
+  "Creator Clash"
+];
+const JUJUTSU_SHENANIGANS_MAP_SECTION_ORDER = [
+  "Main public map",
+  "Main map landmarks",
+  "Duels arenas",
+  "Roulette large maps",
+  "Roulette small maps",
+  "Old and retired maps"
+];
+const JUJUTSU_SHENANIGANS_EMOTE_SECTION_ORDER = [
+  "Stationary",
+  "Cosmetic",
+  "Traversal",
+  "Partner",
+  "Kill",
+  "Interactive",
+  "Limited/Exclusive"
+];
+const JUJUTSU_SHENANIGANS_COSMETIC_SECTION_ORDER = [
+  "Victory Flashes",
+  "Taunts",
+  "Removed and unavailable taunts"
+];
+const JUJUTSU_SHENANIGANS_TITLE_SECTION_ORDER = [
+  "Leaderboard kill titles",
+  "Staff and team titles",
+  "Custom and creator titles"
+];
+const JUJUTSU_SHENANIGANS_INTERACTABLE_SECTION_ORDER = [
+  "Throwables",
+  "Paid map interactables",
+  "Map mechanisms",
+  "Minigame interactables"
+];
+const JUJUTSU_SHENANIGANS_ACHIEVEMENT_SECTION_ORDER = [
+  "Stats and server milestones",
+  "Mode challenges",
+  "General fight interactions",
+  "Honored One challenges",
+  "Vessel challenges",
+  "Restless Gambler challenges",
+  "Ten Shadows and Mahoraga challenges",
+  "Perfection challenges",
+  "Blood Manipulator challenges",
+  "Switcher challenges",
+  "Defense Attorney challenges",
+  "Cursed Partners challenges",
+  "Head of the Hei challenges",
+  "Salaryman challenges",
+  "Other character challenges",
+  "Black Death challenges"
+];
+const JUJUTSU_SHENANIGANS_BUILD_BLOCK_SECTION_ORDER = [
+  "Building Blocks",
+  "Input Blocks",
+  "Output Blocks",
+  "Interaction Blocks",
+  "Logic Gates",
+  "Build Tools"
+];
+const JUJUTSU_SHENANIGANS_SKILL_BUILDER_SECTION_ORDER = [
+  "Timeline nodes",
+  "Conditions",
+  "Properties",
+  "Variant triggers",
+  "Timing references"
+];
+
 const SURVIVE_ZOMBIE_ARENA_CLASS_SECTION_ORDER = [
   "Starter and first unlocks",
   "Early utility unlocks",
@@ -1044,6 +1131,204 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     ],
     additionalColumns: ["catalogSection"],
     maxStats: 5
+  },
+  "jujutsu-shenanigans-characters": {
+    groupKey: "status",
+    groupLabel: "Character status",
+    sectionOrder: JUJUTSU_SHENANIGANS_CHARACTER_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.status),
+    hiddenKeys: [
+      "status",
+      "sourcePage",
+      "wikiUrl",
+      "sourceImageUrl",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus",
+      "sortOrder"
+    ],
+    maxStats: 11
+  },
+  "jujutsu-shenanigans-domains": {
+    groupKey: "catalogSection",
+    groupLabel: "Domain type",
+    sectionOrder: JUJUTSU_SHENANIGANS_DOMAIN_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "sourcePage",
+      "wikiUrl",
+      "sourceImageUrl",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus",
+      "sortOrder"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 9
+  },
+  "jujutsu-shenanigans-items": {
+    groupKey: "catalogSection",
+    groupLabel: "Item source",
+    sectionOrder: JUJUTSU_SHENANIGANS_ITEM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "sourcePage",
+      "wikiUrl",
+      "sourceImageUrl",
+      "imageStatus",
+      "imageMissingReason",
+      "verificationNote",
+      "sortOrder"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 10
+  },
+  "jujutsu-shenanigans-gamemodes": {
+    groupKey: "modeGroup",
+    groupLabel: "Mode group",
+    sectionOrder: JUJUTSU_SHENANIGANS_GAMEMODE_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.modeGroup),
+    hiddenKeys: [
+      "modeGroup",
+      "category",
+      "sourceStatus",
+      "sourcePage",
+      "supportingSources",
+      "sourceImageUrl",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus",
+      "sortOrder"
+    ],
+    additionalColumns: ["modeGroup"],
+    maxStats: 10
+  },
+  "jujutsu-shenanigans-maps": {
+    groupKey: "catalogSection",
+    groupLabel: "Map section",
+    sectionOrder: JUJUTSU_SHENANIGANS_MAP_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "sourcePage",
+      "sourceImageUrl",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus",
+      "sortOrder"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 8
+  },
+  "jujutsu-shenanigans-emotes": {
+    groupKey: "catalogSection",
+    groupLabel: "Emote type",
+    sectionOrder: JUJUTSU_SHENANIGANS_EMOTE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "imageStatus",
+      "sourcePage",
+      "sourceImageUrl",
+      "rawText",
+      "verificationNote",
+      "sortOrder"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 8,
+    hideImages: true
+  },
+  "jujutsu-shenanigans-cosmetics": {
+    groupKey: "category",
+    groupLabel: "Cosmetic type",
+    sectionOrder: JUJUTSU_SHENANIGANS_COSMETIC_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.category),
+    hiddenKeys: ["category", "imageStatus", "sourcePage", "wikiUrl", "sourceImageUrl", "verificationNote"],
+    additionalColumns: ["category"],
+    maxStats: 9,
+    hideImages: true
+  },
+  "jujutsu-shenanigans-titles": {
+    groupKey: "catalogSection",
+    groupLabel: "Title route",
+    sectionOrder: JUJUTSU_SHENANIGANS_TITLE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "sourcePage",
+      "wikiUrl",
+      "imageStatus",
+      "verificationNote",
+      "sortOrder"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6,
+    hideImages: true
+  },
+  "jujutsu-shenanigans-interactables": {
+    groupKey: "catalogSection",
+    groupLabel: "Interactable type",
+    sectionOrder: JUJUTSU_SHENANIGANS_INTERACTABLE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "sourcePage",
+      "wikiUrl",
+      "sourceImageUrl",
+      "imageStatus",
+      "imageMissingReason",
+      "verificationNote",
+      "sortOrder"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 11
+  },
+  "jujutsu-shenanigans-achievements": {
+    groupKey: "catalogSection",
+    groupLabel: "Achievement group",
+    sectionOrder: JUJUTSU_SHENANIGANS_ACHIEVEMENT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["catalogSection", "sourcePage", "wikiUrl", "verificationNote"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 8,
+    hideImages: true
+  },
+  "jujutsu-shenanigans-build-blocks": {
+    groupKey: "catalogSection",
+    groupLabel: "Build block type",
+    sectionOrder: JUJUTSU_SHENANIGANS_BUILD_BLOCK_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "sourcePage",
+      "supportingSources",
+      "sourceConfidence",
+      "imageStatus",
+      "verificationNote",
+      "sortOrder"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 8,
+    hideImages: true
+  },
+  "jujutsu-shenanigans-skill-builder-nodes": {
+    groupKey: "catalogSection",
+    groupLabel: "Skill Builder section",
+    sectionOrder: JUJUTSU_SHENANIGANS_SKILL_BUILDER_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "catalogSection",
+      "sourcePage",
+      "sourceRevision",
+      "imageStatus",
+      "verificationNote",
+      "sortOrder"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 7,
+    hideImages: true
   },
   "99-nights-in-the-forest-classes": {
     groupKey: "status",
@@ -4709,7 +4994,7 @@ function buildViewConfig(
     cardDescriptionKey: descriptionKey ?? undefined,
     stats,
     maxStats,
-    hideImages: !hasImages
+    hideImages: sectionOverride?.hideImages ?? !hasImages
   };
 }
 
