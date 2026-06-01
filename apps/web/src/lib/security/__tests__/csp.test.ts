@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { buildSecurityHeaders, getCspForPath, isSecurePath, publicCsp, secureCsp, shouldNoIndexPath } from "@/lib/security/csp";
+import {
+  buildSecurityHeaders,
+  developmentCsp,
+  getCspForPath,
+  isSecurePath,
+  publicCsp,
+  secureCsp,
+  shouldNoIndexPath
+} from "@/lib/security/csp";
 
 function headerValue(headers: { key: string; value: string }[], key: string) {
   return headers.find((header) => header.key === key)?.value;
@@ -48,5 +56,16 @@ describe("security CSP routing", () => {
     expect(headerValue(localHeaders, "Permissions-Policy")).toContain("microphone=()");
     expect(headerValue(localHeaders, "Strict-Transport-Security")).toBeUndefined();
     expect(headerValue(productionHeaders, "Strict-Transport-Security")).toBe("max-age=31536000; includeSubDomains");
+  });
+
+  it("can use the development image policy for local production previews", () => {
+    const headers = buildSecurityHeaders("/", "enforce", {
+      enableHsts: false,
+      useDevelopmentCsp: true
+    });
+
+    expect(headerValue(headers, "Content-Security-Policy")).toBe(developmentCsp);
+    expect(headerValue(headers, "Content-Security-Policy")).toContain("img-src 'self' data: blob: http: https:");
+    expect(headerValue(headers, "Strict-Transport-Security")).toBeUndefined();
   });
 });

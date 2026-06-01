@@ -53,8 +53,11 @@ const LEGACY_SLUG_MAP = new Map<string, string>(
   })
 );
 
-function applySecurityHeaders(res: NextResponse, pathname: string) {
-  for (const { key, value } of buildSecurityHeaders(pathname)) {
+function applySecurityHeaders(res: NextResponse, pathname: string, hostname: string) {
+  for (const { key, value } of buildSecurityHeaders(pathname, undefined, {
+    enableHsts: !isLocalHostname(hostname),
+    useDevelopmentCsp: isLocalHostname(hostname)
+  })) {
     res.headers.set(key, value);
   }
 
@@ -68,6 +71,11 @@ function applySecurityHeaders(res: NextResponse, pathname: string) {
   }
 
   return res;
+}
+
+function isLocalHostname(hostname: string) {
+  const normalized = hostname.trim().toLowerCase();
+  return normalized === "localhost" || normalized === "127.0.0.1" || normalized === "::1" || normalized === "[::1]";
 }
 
 function normalizeSlugSegment(value: string) {
@@ -110,6 +118,7 @@ function getRequestHostname(req: NextRequest) {
     req.headers.get("host") ||
     req.nextUrl.host;
 
+  if (host.startsWith("[::1]")) return "[::1]";
   return host.split(":")[0].toLowerCase();
 }
 
@@ -148,7 +157,7 @@ export function proxy(req: NextRequest) {
     if (legacyPath) {
       redirectUrl.pathname = legacyPath;
     }
-    return applySecurityHeaders(redirectWithStatus(redirectUrl, 301), redirectUrl.pathname);
+    return applySecurityHeaders(redirectWithStatus(redirectUrl, 301), redirectUrl.pathname, hostname);
   }
 
   // Pass a header downstream for routes that need request-time consent context.
@@ -156,7 +165,7 @@ export function proxy(req: NextRequest) {
   requestHeaders.set(CONSENT_HEADER, serializeConsentRequirement(requiresConsent));
   requestHeaders.set(REQUEST_PATHNAME_HEADER, url.pathname);
 
-  return applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname);
+  return applySecurityHeaders(NextResponse.next({ request: { headers: requestHeaders } }), url.pathname, hostname);
 }
 
 export const config = {

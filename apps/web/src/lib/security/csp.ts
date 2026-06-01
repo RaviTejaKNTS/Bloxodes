@@ -9,6 +9,7 @@ type SecurityHeader = {
 
 type SecurityHeaderOptions = {
   enableHsts?: boolean;
+  useDevelopmentCsp?: boolean;
 };
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -48,6 +49,8 @@ export const secureCsp = (
   isProduction ? cspDirectives.secureProductionDirectives : cspDirectives.developmentDirectives
 ).join("; ");
 
+export const developmentCsp = cspDirectives.developmentDirectives.join("; ");
+
 export function isSecurePath(pathname: string) {
   return securePathPrefixes.some((prefix) => matchesPathPrefix(pathname, prefix));
 }
@@ -56,7 +59,8 @@ export function shouldNoIndexPath(pathname: string) {
   return noIndexPathPrefixes.some((prefix) => matchesPathPrefix(pathname, prefix));
 }
 
-export function getCspForPath(pathname: string) {
+export function getCspForPath(pathname: string, options: Pick<SecurityHeaderOptions, "useDevelopmentCsp"> = {}) {
+  if (options.useDevelopmentCsp) return developmentCsp;
   return isSecurePath(pathname) ? secureCsp : publicCsp;
 }
 
@@ -85,7 +89,7 @@ export function buildSecurityHeaders(
   if (mode !== "off") {
     headers.unshift({
       key: mode === "report-only" ? "Content-Security-Policy-Report-Only" : "Content-Security-Policy",
-      value: securePath ? secureCsp : publicCsp
+      value: getCspForPath(pathname, options)
     });
   }
 
