@@ -32,7 +32,7 @@ type OtherListLink = {
   updated_at?: string | null;
 };
 
-export const PAGE_SIZE = 10;
+export const PAGE_SIZE = 25;
 
 function isSupabasePoolTimeoutError(error: unknown): boolean {
   if (!error || typeof error !== "object") return false;
