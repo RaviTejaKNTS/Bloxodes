@@ -53,6 +53,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | --- | --- | --- |
 | Import games into Supabase | `scripts/games/import-games.ts` | `npm run import:games` |
 | Collect Roblox universes | `scripts/universes/collect-roblox-universes.ts` | `npm run collect:universes` |
+| Stage RobloxGo place IDs in plain Postgres | `scripts/universes/collect-robloxgo-place-ids-postgres.ts` | `npm run collect:robloxgo-postgres -- --apply` |
 | Discover universes from Roblox search | `scripts/universes/search-roblox-universes.ts` | `npm run search:universes` |
 | Expand universes from creators/groups | `scripts/universes/expand-roblox-creators.ts` | `npm run expand:creators` |
 | Score universe quality tiers | `scripts/universes/score-universe-quality.ts` | `npm run score:universes` |

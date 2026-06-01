@@ -1,0 +1,17 @@
+# syntax=docker/dockerfile:1.7
+
+FROM node:24-bookworm-slim
+
+WORKDIR /app
+ENV NODE_ENV=development
+
+COPY package.json package-lock.json ./
+COPY apps/web/package.json ./apps/web/package.json
+COPY apps/extension/package.json ./apps/extension/package.json
+COPY apps/mobile/package.json ./apps/mobile/package.json
+
+RUN npm ci
+
+COPY scripts ./scripts
+
+CMD ["npm", "run", "collect:robloxgo-postgres", "--", "--apply", "--max-pages-per-route", "all", "--page-delay-ms", "1500", "--page-budget", "1500"]
