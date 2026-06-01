@@ -42,6 +42,8 @@ Easy should be easy. Medium should require real game familiarity. Hard should be
 
 Question rhythm should feel natural. Mix ordinary quiz phrasing with scenarios, calculations, route checks, and comparison prompts. Do not overfit to one starter or ban normal `What`, `Which`, `Who`, and `Where` questions.
 
+Answer choices should be balanced within each question. The correct option must not stand out as the only long or highly detailed answer while the distractors are short, generic, or joke-like. When one option names exact values, routes, materials, stages, or mechanics, the other options should use comparable detail from the same game system.
+
 ## Validation
 
 Before calling a quiz route update complete:
@@ -50,8 +52,9 @@ Before calling a quiz route update complete:
 2. Confirm each difficulty pool has the intended count.
 3. Confirm every question has four options.
 4. Confirm every `correctOptionId` matches an option in the same question.
-5. Preview `/quizzes/<slug>` and verify the updated pool is rendered.
-6. Preview `/quizzes` when metadata, index card text, image, or publish state changed.
-7. Run `npm run typecheck:web` when route or shared TypeScript changed.
+5. Confirm no question has the correct option as the unique obvious longest or most detailed answer.
+6. Preview `/quizzes/<slug>` and verify the updated pool is rendered.
+7. Preview `/quizzes` when metadata, index card text, image, or publish state changed.
+8. Run `npm run typecheck:web` when route or shared TypeScript changed.
 
 If the dev page shows old questions after editing JSON, restart the local dev server or clear the relevant Next cache before judging the page.

@@ -134,6 +134,72 @@ function scanRepeatedStarts(strings: Array<{ field: string; value: string }>, fi
   return findings;
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value));
+}
+
+function countWords(value: string): number {
+  return value.trim().split(/\s+/).filter(Boolean).length;
+}
+
+function scanQuizOptionBalance(value: unknown, file: string): Finding[] {
+  const root = isRecord(value) && "quizData" in value ? value.quizData : value;
+  if (!isRecord(root)) return [];
+
+  const findings: Finding[] = [];
+
+  for (const level of ["easy", "medium", "hard"]) {
+    const questions = root[level];
+    if (!Array.isArray(questions)) continue;
+
+    questions.forEach((entry, index) => {
+      if (!isRecord(entry)) return;
+      const questionId = typeof entry.id === "string" && entry.id.trim() ? entry.id : `${level}[${index}]`;
+      const correctOptionId = typeof entry.correctOptionId === "string" ? entry.correctOptionId : null;
+      const rawOptions = Array.isArray(entry.options) ? entry.options : [];
+      const options = rawOptions
+        .filter(isRecord)
+        .map((option) => ({
+          id: typeof option.id === "string" ? option.id : "",
+          text: typeof option.text === "string" ? option.text : ""
+        }))
+        .filter((option) => option.id && option.text);
+
+      if (!correctOptionId || options.length !== 4) return;
+
+      const counts = options.map((option) => ({
+        ...option,
+        words: countWords(option.text)
+      }));
+      const sorted = [...counts].sort((a, b) => b.words - a.words);
+      const [longest, secondLongest] = sorted;
+      const max = longest?.words ?? 0;
+      const min = Math.min(...counts.map((option) => option.words));
+      const summary = counts.map((option) => `${option.id}:${option.words}w`).join(", ");
+
+      if (longest && secondLongest && longest.id === correctOptionId && longest.words - secondLongest.words >= 3) {
+        findings.push({
+          file,
+          field: `quizData.${level}.${questionId}.options`,
+          rule: "quiz answer length tell",
+          excerpt: `Correct option ${correctOptionId} is uniquely longest (${summary})`
+        });
+      }
+
+      if (max - min > 8) {
+        findings.push({
+          file,
+          field: `quizData.${level}.${questionId}.options`,
+          rule: "quiz option length imbalance",
+          excerpt: `Option word counts are too spread out (${summary})`
+        });
+      }
+    });
+  }
+
+  return findings;
+}
+
 async function readJson(file: string): Promise<unknown> {
   const raw = await fs.readFile(file, "utf8");
   return JSON.parse(raw);
@@ -145,7 +211,8 @@ async function scanFile(file: string): Promise<Finding[]> {
   const strings = collectPublicStrings(parsed);
   return [
     ...strings.flatMap((entry) => scanString(entry.value, file, entry.field)),
-    ...scanRepeatedStarts(strings, file)
+    ...scanRepeatedStarts(strings, file),
+    ...scanQuizOptionBalance(parsed, file)
   ];
 }
 

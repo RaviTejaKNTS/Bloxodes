@@ -31,11 +31,12 @@ Workspace: `tmp/content-workspace/<game-slug>/quiz/`
 - [ ] Keep at least 10 questions per difficulty unless the user accepts fewer.
 - [ ] Give every question four options and a valid `correctOptionId`.
 - [ ] Keep page copy compact and avoid a guide-shaped coverage block.
-- [ ] Avoid repeated question rhythm and ambiguous distractors.
+- [ ] Avoid repeated question rhythm, ambiguous distractors, and answer-length tells.
 
 ## Verify
 
 - [ ] Validate JSON parsing, difficulty counts, answer IDs, and question rhythm.
+- [ ] Confirm the correct answer is not the unique obvious longest or most detailed option in any question.
 - [ ] Confirm easy is easy, medium requires familiarity, and hard is pro-level but fair.
 - [ ] Import metadata locally when needed.
 - [ ] Preview `/quizzes/<slug>` and `/quizzes`, then start a 15-question attempt.

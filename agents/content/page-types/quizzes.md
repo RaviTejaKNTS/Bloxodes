@@ -113,6 +113,8 @@ Each question needs four options with stable IDs `A`, `B`, `C`, and `D`.
 
 Distractors should be plausible enough to test knowledge but not so close that the answer becomes unfair. Prefer wrong options from the same game system when possible: other potions for potion questions, other enemies for drop questions, other races for race questions, and other locations for route questions.
 
+Answer length is part of fairness. Do not make the right answer the only detailed sentence while the wrong answers are tiny labels or obvious jokes. If the correct answer includes a cost, route, stage count, material set, stat, or mechanic, write the distractors with similar structure and specificity: other costs, other routes, other stage counts, other material sets, other stats, or other mechanics from the same game. The player should not be able to beat the quiz by picking the longest option.
+
 Spread correct answers across options. The UI shuffles options during attempts, but the source file should still avoid obvious `A`-only or `B`-only patterns.
 
 Do not use joke answers unless the whole quiz style calls for it. Bloxodes quizzes should feel playful through the game topic, not through throwaway choices.
@@ -152,6 +154,7 @@ After writing:
 - confirm every question has four options
 - confirm every `correctOptionId` exists in that question's options
 - inspect the question text for repeated rhythm
+- inspect answer choices for length tells, especially correct answers that are uniquely longer or more detailed than all distractors
 - check hard questions are actually hard
 - seed or upsert the local `quiz_pages` row when metadata changes
 - preview `/quizzes/<slug>` and `/quizzes`
@@ -171,5 +174,5 @@ Before calling a quiz ready:
 - Medium questions require real game familiarity.
 - Hard questions are pro-level and source-supported.
 - Question rhythm feels natural across the whole pool.
-- Answer options are plausible, clean, and not ambiguous.
+- Answer options are plausible, clean, not ambiguous, and balanced enough that the longest or most detailed option is not an answer tell.
 - The local route renders and a player can start the quiz.

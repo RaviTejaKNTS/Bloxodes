@@ -320,6 +320,104 @@ $$;
 
 ALTER FUNCTION "public"."article_generation_queue_idempotency_key"("title" "text", "universe_id" bigint) OWNER TO "postgres";
 
+
+CREATE OR REPLACE FUNCTION "public"."avatar_catalog_slugs_for_catalog_item"("p_category" "text", "p_subcategory" "text", "p_asset_type_id" integer) RETURNS "text"[]
+    LANGUAGE "plpgsql" IMMUTABLE
+    AS $$
+declare
+  v_category text := coalesce(p_category, '');
+  v_subcategory text := coalesce(p_subcategory, '');
+  v_slugs text[] := array[]::text[];
+begin
+  if v_category in ('Accessories', 'Body', 'Clothing', 'AvatarAnimations', 'Makeup')
+    or p_asset_type_id = any(array[76, 77, 88, 89, 90]::integer[])
+  then
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles');
+  end if;
+
+  if v_category = 'Accessories' then
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories');
+    case v_subcategory
+      when 'HeadAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/head-accessories');
+      when 'FaceAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/face-accessories');
+      when 'NeckAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/neck-accessories');
+      when 'ShoulderAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/shoulder-accessories');
+      when 'FrontAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/front-accessories');
+      when 'BackAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/back-accessories');
+      when 'WaistAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/waist-accessories');
+      when 'Gear' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/gear');
+      else null;
+    end case;
+  end if;
+
+  if v_category = 'Body' and v_subcategory = 'HairAccessories' then
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories');
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-accessories/hair-accessories');
+  elsif v_category = 'Body' then
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-body-parts');
+    case v_subcategory
+      when 'BodyPartsBundles' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-body-parts/full-bodies');
+      when 'DynamicHeads' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-body-parts/dynamic-heads');
+      when 'Heads' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-body-parts/classic-heads');
+      when 'Faces' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-body-parts/classic-faces');
+      else null;
+    end case;
+  end if;
+
+  if v_category = 'Clothing' then
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing');
+    case v_subcategory
+      when 'TShirtAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/layered-t-shirts');
+      when 'ShirtAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/shirts');
+      when 'SweaterAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/sweaters');
+      when 'JacketAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/jackets');
+      when 'PantsAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/pants');
+      when 'ShortsAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/shorts');
+      when 'DressSkirtAccessories' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/dresses-skirts');
+      when 'ShoesBundles' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/shoes');
+      when 'ClassicShirts' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/classic-shirts');
+      when 'ClassicTShirts' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/classic-t-shirts');
+      when 'ClassicPants' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-clothing/classic-pants');
+      else null;
+    end case;
+  end if;
+
+  if v_category = 'AvatarAnimations' then
+    case v_subcategory
+      when 'EmoteAnimations' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-emotes');
+      when 'AnimationBundles' then v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-animations');
+      else null;
+    end case;
+  end if;
+
+  if v_category = 'Makeup' or p_asset_type_id = any(array[76, 77, 88, 89, 90]::integer[]) then
+    v_slugs := array_append(v_slugs, 'roblox-items-and-bundles/roblox-makeup');
+  end if;
+
+  return array(
+    select distinct slug
+    from unnest(v_slugs) as slug
+    where slug is not null and slug <> ''
+  );
+end;
+$$;
+
+
+ALTER FUNCTION "public"."avatar_catalog_slugs_for_catalog_item"("p_category" "text", "p_subcategory" "text", "p_asset_type_id" integer) OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."calculate_roblox_rating_percent"("p_likes" bigint, "p_dislikes" bigint) RETURNS numeric
+    LANGUAGE "sql" IMMUTABLE
+    AS $$
+  select case
+    when coalesce(p_likes, 0) + coalesce(p_dislikes, 0) <= 0 then null
+    else round((coalesce(p_likes, 0)::numeric / (coalesce(p_likes, 0) + coalesce(p_dislikes, 0))::numeric) * 100, 2)
+  end;
+$$;
+
+
+ALTER FUNCTION "public"."calculate_roblox_rating_percent"("p_likes" bigint, "p_dislikes" bigint) OWNER TO "postgres";
+
 SET default_tablespace = '';
 
 SET default_table_access_method = "heap";
@@ -440,6 +538,107 @@ $$;
 ALTER FUNCTION "public"."claim_article_generation_queue_item"("p_queue_id" "uuid", "p_worker_id" "text", "p_max_attempts" integer) OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."enqueue_author_revalidation_for_author_id"("p_author_id" "uuid", "p_source" "text") RETURNS "void"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  if p_author_id is null then
+    return;
+  end if;
+
+  insert into public.revalidation_events (entity_type, slug, source)
+  select distinct 'author', lower(a.slug), p_source
+  from public.authors a
+  where a.id = p_author_id
+    and a.slug is not null
+    and trim(a.slug) <> ''
+  on conflict (entity_type, slug)
+  do update set
+    created_at = now(),
+    source = excluded.source;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."enqueue_author_revalidation_for_author_id"("p_author_id" "uuid", "p_source" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."enqueue_free_items_catalog_scope"("p_category" "text", "p_subcategory" "text", "p_source" "text") RETURNS "void"
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  category_slug text := public.revalidation_slugify(p_category);
+  subcategory_slug text := public.revalidation_slugify(p_subcategory);
+begin
+  if category_slug is null then
+    return;
+  end if;
+
+  perform public.enqueue_revalidation('catalog', 'free-roblox-items/' || category_slug, p_source);
+
+  if subcategory_slug is not null then
+    perform public.enqueue_revalidation(
+      'catalog',
+      'free-roblox-items/' || category_slug || '/' || subcategory_slug,
+      p_source
+    );
+  end if;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."enqueue_free_items_catalog_scope"("p_category" "text", "p_subcategory" "text", "p_source" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."enqueue_list_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") RETURNS "void"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  if p_universe_id is null then
+    return;
+  end if;
+
+  insert into public.revalidation_events (entity_type, slug, source)
+  select distinct 'list', lower(gl.slug), p_source
+  from public.game_lists gl
+  join public.game_list_entries gle on gle.list_id = gl.id
+  where gle.universe_id = p_universe_id
+    and gl.is_published = true
+    and gl.slug is not null
+    and trim(gl.slug) <> ''
+  on conflict (entity_type, slug)
+  do update set
+    created_at = now(),
+    source = excluded.source;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."enqueue_list_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."enqueue_music_revalidation_scope"("p_section" "text", "p_value" "text", "p_source" "text") RETURNS "void"
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  value_slug text := public.revalidation_slugify(p_value);
+begin
+  if value_slug is null then
+    return;
+  end if;
+
+  if p_section = 'genres' then
+    perform public.enqueue_revalidation('music', 'roblox-music-ids/genres/' || value_slug, p_source);
+  elsif p_section = 'artists' then
+    perform public.enqueue_revalidation('music', 'roblox-music-ids/artists/' || value_slug, p_source);
+  end if;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."enqueue_music_revalidation_scope"("p_section" "text", "p_value" "text", "p_source" "text") OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text" DEFAULT NULL::"text") RETURNS "void"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
@@ -460,6 +659,32 @@ $$;
 
 
 ALTER FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."enqueue_wiki_revalidation_for_list"("p_list_id" "uuid", "p_source" "text") RETURNS "void"
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  target_universe_id bigint;
+begin
+  if p_list_id is null then
+    return;
+  end if;
+
+  for target_universe_id in
+    select distinct gle.universe_id
+    from public.game_list_entries gle
+    where gle.list_id = p_list_id
+      and gle.rank between 1 and 3
+      and gle.universe_id is not null
+  loop
+    perform public.enqueue_wiki_revalidation_for_universe(target_universe_id, p_source);
+  end loop;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."enqueue_wiki_revalidation_for_list"("p_list_id" "uuid", "p_source" "text") OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."enqueue_wiki_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") RETURNS "void"
@@ -560,6 +785,45 @@ COMMENT ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "
 
 
 
+CREATE OR REPLACE FUNCTION "public"."invoke_revalidation_worker"() RETURNS bigint
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'net', 'vault'
+    AS $$
+declare
+  revalidate_jwt text;
+  request_id bigint;
+begin
+  select decrypted_secret
+  into revalidate_jwt
+  from vault.decrypted_secrets
+  where name = 'revalidate_cron_jwt'
+  limit 1;
+
+  if nullif(trim(coalesce(revalidate_jwt, '')), '') is null then
+    raise exception 'Missing Vault secret revalidate_cron_jwt for revalidation cron';
+  end if;
+
+  select net.http_post(
+    url := 'https://bmwksaykcsndsvgspapz.supabase.co/functions/v1/revalidate',
+    body := '{}'::jsonb,
+    params := '{}'::jsonb,
+    headers := jsonb_build_object(
+      'Authorization', 'Bearer ' || revalidate_jwt,
+      'apikey', revalidate_jwt,
+      'Content-Type', 'application/json'
+    ),
+    timeout_milliseconds := 60000
+  )
+  into request_id;
+
+  return request_id;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."invoke_revalidation_worker"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."is_admin"("user_uuid" "uuid") RETURNS boolean
     LANGUAGE "sql" STABLE SECURITY DEFINER
     SET "search_path" TO 'pg_catalog', 'public'
@@ -645,6 +909,175 @@ $$;
 
 
 ALTER FUNCTION "public"."refresh_search_index_music"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."revalidation_slugify"("p_value" "text") RETURNS "text"
+    LANGUAGE "sql" IMMUTABLE
+    AS $$
+  select nullif(
+    regexp_replace(
+      trim(regexp_replace(lower(replace(coalesce(p_value, ''), '&', 'and')), '[^a-z0-9]+', ' ', 'g')),
+      '[[:space:]]+',
+      '-',
+      'g'
+    ),
+    ''
+  );
+$$;
+
+
+ALTER FUNCTION "public"."revalidation_slugify"("p_value" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."rollup_roblox_universe_stats_daily"("p_stat_date" "date", "p_finalize" boolean DEFAULT false, "p_universe_ids" bigint[] DEFAULT NULL::bigint[]) RETURNS integer
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  affected_count integer := 0;
+begin
+  with hourly as (
+    select *
+    from public.roblox_universe_stats_hourly h
+    where h.hour_start >= p_stat_date::timestamptz
+      and h.hour_start < (p_stat_date + 1)::timestamptz
+      and (p_universe_ids is null or h.universe_id = any(p_universe_ids))
+  ),
+  numbered as (
+    select
+      h.*,
+      row_number() over (partition by h.universe_id order by h.hour_start asc) as rn_first,
+      row_number() over (partition by h.universe_id order by h.hour_start desc) as rn_last
+    from hourly h
+  ),
+  rolled as (
+    select
+      universe_id,
+      max(peak_playing) as peak_playing,
+      sum(avg_playing * greatest(sample_count, 1)) filter (where avg_playing is not null)
+        / nullif(sum(greatest(sample_count, 1)) filter (where avg_playing is not null), 0) as avg_playing,
+      min(min_playing) as min_playing,
+      max(visits_start) filter (where rn_first = 1) as visits_start,
+      max(visits_end) filter (where rn_last = 1) as visits_end,
+      max(favorites_start) filter (where rn_first = 1) as favorites_start,
+      max(favorites_end) filter (where rn_last = 1) as favorites_end,
+      max(likes_start) filter (where rn_first = 1) as likes_start,
+      max(likes_end) filter (where rn_last = 1) as likes_end,
+      max(dislikes_start) filter (where rn_first = 1) as dislikes_start,
+      max(dislikes_end) filter (where rn_last = 1) as dislikes_end,
+      max(rating_percent) filter (where rn_first = 1) as rating_start,
+      max(rating_percent) filter (where rn_last = 1) as rating_end,
+      sum(sample_count) as sample_count,
+      max(last_sampled_at) as recorded_at
+    from numbered
+    group by universe_id
+  ),
+  upserted as (
+    insert into public.roblox_universe_stats_daily (
+      universe_id,
+      stat_date,
+      playing,
+      visits,
+      favorites,
+      likes,
+      dislikes,
+      avg_playing,
+      peak_playing,
+      min_playing,
+      visits_start,
+      visits_end,
+      visit_delta,
+      favorites_start,
+      favorites_end,
+      favorite_delta,
+      likes_start,
+      likes_end,
+      like_delta,
+      dislikes_start,
+      dislikes_end,
+      dislike_delta,
+      rating_start,
+      rating_end,
+      sample_count,
+      snapshot,
+      recorded_at,
+      is_finalized,
+      finalized_at
+    )
+    select
+      universe_id,
+      p_stat_date,
+      peak_playing,
+      visits_end,
+      favorites_end,
+      likes_end,
+      dislikes_end,
+      avg_playing,
+      peak_playing,
+      min_playing,
+      visits_start,
+      visits_end,
+      case when visits_end is null or visits_start is null then null else visits_end - visits_start end,
+      favorites_start,
+      favorites_end,
+      case when favorites_end is null or favorites_start is null then null else favorites_end - favorites_start end,
+      likes_start,
+      likes_end,
+      case when likes_end is null or likes_start is null then null else likes_end - likes_start end,
+      dislikes_start,
+      dislikes_end,
+      case when dislikes_end is null or dislikes_start is null then null else dislikes_end - dislikes_start end,
+      rating_start,
+      rating_end,
+      sample_count,
+      jsonb_build_object(
+        'source', 'roblox_universe_stats_hourly',
+        'finalized', p_finalize,
+        'rating_end', rating_end,
+        'rolled_up_at', now()
+      ),
+      coalesce(recorded_at, now()),
+      p_finalize,
+      case when p_finalize then now() else null end
+    from rolled
+    on conflict (universe_id, stat_date) do update
+    set
+      playing = excluded.playing,
+      visits = excluded.visits,
+      favorites = excluded.favorites,
+      likes = excluded.likes,
+      dislikes = excluded.dislikes,
+      avg_playing = excluded.avg_playing,
+      peak_playing = excluded.peak_playing,
+      min_playing = excluded.min_playing,
+      visits_start = excluded.visits_start,
+      visits_end = excluded.visits_end,
+      visit_delta = excluded.visit_delta,
+      favorites_start = excluded.favorites_start,
+      favorites_end = excluded.favorites_end,
+      favorite_delta = excluded.favorite_delta,
+      likes_start = excluded.likes_start,
+      likes_end = excluded.likes_end,
+      like_delta = excluded.like_delta,
+      dislikes_start = excluded.dislikes_start,
+      dislikes_end = excluded.dislikes_end,
+      dislike_delta = excluded.dislike_delta,
+      rating_start = excluded.rating_start,
+      rating_end = excluded.rating_end,
+      sample_count = excluded.sample_count,
+      snapshot = coalesce(roblox_universe_stats_daily.snapshot, '{}'::jsonb) || excluded.snapshot,
+      recorded_at = excluded.recorded_at,
+      is_finalized = excluded.is_finalized,
+      finalized_at = excluded.finalized_at
+    returning 1
+  )
+  select count(*) into affected_count from upserted;
+
+  return affected_count;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."rollup_roblox_universe_stats_daily"("p_stat_date" "date", "p_finalize" boolean, "p_universe_ids" bigint[]) OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer DEFAULT NULL::integer) RETURNS TABLE("universe_id" bigint, "rank" integer, "metric_value" numeric, "reason" "text", "extra" "jsonb", "game_id" "uuid", "playing" bigint, "visits" bigint, "favorites" bigint, "likes" bigint, "dislikes" bigint)
@@ -818,6 +1251,36 @@ $$;
 ALTER FUNCTION "public"."set_game_published_at"() OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."set_google_indexing_url_state_updated_at"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."set_google_indexing_url_state_updated_at"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."set_puzzle_page_published_at"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  if new.is_published = true
+     and (tg_op = 'INSERT' or old.is_published is distinct from true)
+     and new.published_at is null then
+    new.published_at := now();
+  end if;
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."set_puzzle_page_published_at"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."set_quiz_page_published_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
@@ -910,18 +1373,135 @@ $$;
 ALTER FUNCTION "public"."trg_comments_revalidate_code"() OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."trg_comments_revalidate_entity"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  target_entity_type text;
+  target_entity_id uuid;
+  should_revalidate boolean := false;
+begin
+  if tg_op = 'DELETE' then
+    target_entity_type := old.entity_type;
+    target_entity_id := old.entity_id;
+    should_revalidate := old.status = 'approved';
+  elsif tg_op = 'INSERT' then
+    target_entity_type := new.entity_type;
+    target_entity_id := new.entity_id;
+    should_revalidate := new.status = 'approved';
+  else
+    target_entity_type := new.entity_type;
+    target_entity_id := new.entity_id;
+    should_revalidate :=
+      old.status = 'approved'
+      or new.status = 'approved'
+      or old.body_md is distinct from new.body_md
+      or old.entity_type is distinct from new.entity_type
+      or old.entity_id is distinct from new.entity_id;
+  end if;
+
+  if not should_revalidate or target_entity_id is null then
+    return null;
+  end if;
+
+  if target_entity_type = 'code' then
+    insert into public.revalidation_events (entity_type, slug, source)
+    select 'code', lower(g.slug), 'comments_code_' || lower(tg_op)
+    from public.games g
+    where g.id = target_entity_id
+      and g.is_published = true
+      and g.slug is not null
+      and trim(g.slug) <> ''
+    on conflict (entity_type, slug)
+    do update set created_at = now(), source = excluded.source;
+  elsif target_entity_type = 'article' then
+    insert into public.revalidation_events (entity_type, slug, source)
+    select 'article', lower(a.slug), 'comments_article_' || lower(tg_op)
+    from public.articles a
+    where a.id = target_entity_id
+      and a.is_published = true
+      and a.slug is not null
+      and trim(a.slug) <> ''
+    on conflict (entity_type, slug)
+    do update set created_at = now(), source = excluded.source;
+  elsif target_entity_type = 'catalog' then
+    insert into public.revalidation_events (entity_type, slug, source)
+    select 'catalog', lower(c.code), 'comments_catalog_' || lower(tg_op)
+    from public.catalog_pages c
+    where c.id = target_entity_id
+      and c.is_published = true
+      and c.code is not null
+      and trim(c.code) <> ''
+    on conflict (entity_type, slug)
+    do update set created_at = now(), source = excluded.source;
+  elsif target_entity_type = 'event' then
+    insert into public.revalidation_events (entity_type, slug, source)
+    select 'event', lower(e.slug), 'comments_event_' || lower(tg_op)
+    from public.events_pages e
+    where e.id = target_entity_id
+      and e.is_published = true
+      and e.slug is not null
+      and trim(e.slug) <> ''
+    on conflict (entity_type, slug)
+    do update set created_at = now(), source = excluded.source;
+  elsif target_entity_type = 'list' then
+    insert into public.revalidation_events (entity_type, slug, source)
+    select 'list', lower(gl.slug), 'comments_list_' || lower(tg_op)
+    from public.game_lists gl
+    where gl.id = target_entity_id
+      and gl.is_published = true
+      and gl.slug is not null
+      and trim(gl.slug) <> ''
+    on conflict (entity_type, slug)
+    do update set created_at = now(), source = excluded.source;
+  elsif target_entity_type = 'tool' then
+    insert into public.revalidation_events (entity_type, slug, source)
+    select 'tool', lower(t.code), 'comments_tool_' || lower(tg_op)
+    from public.tools t
+    where t.id = target_entity_id
+      and t.is_published = true
+      and t.code is not null
+      and trim(t.code) <> ''
+    on conflict (entity_type, slug)
+    do update set created_at = now(), source = excluded.source;
+  end if;
+
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_comments_revalidate_entity"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_articles"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 begin
   if tg_op = 'DELETE' then
-    perform public.enqueue_revalidation('article', old.slug, 'articles_delete');
-  elsif new.is_published = true then
-    perform public.enqueue_revalidation('article', new.slug, 'articles_' || lower(tg_op));
-  elsif tg_op = 'UPDATE' and old.is_published = true then
-    perform public.enqueue_revalidation('article', old.slug, 'articles_unpublish');
+    if old.is_published = true then
+      perform public.enqueue_revalidation('article', old.slug, 'articles_delete');
+      perform public.enqueue_author_revalidation_for_author_id(old.author_id, 'articles_author_delete');
+      perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'articles_wiki_delete');
+    end if;
+    return null;
   end if;
+
+  if new.is_published = true then
+    perform public.enqueue_revalidation('article', new.slug, 'articles_' || lower(tg_op));
+    perform public.enqueue_author_revalidation_for_author_id(new.author_id, 'articles_author_' || lower(tg_op));
+    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'articles_wiki_' || lower(tg_op));
+  end if;
+
+  if tg_op = 'UPDATE' and old.is_published = true then
+    perform public.enqueue_author_revalidation_for_author_id(old.author_id, 'articles_author_update_old');
+    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'articles_wiki_update_old');
+
+    if old.slug is distinct from new.slug or new.is_published is distinct from true then
+      perform public.enqueue_revalidation('article', old.slug, 'articles_old_slug_or_unpublish');
+    end if;
+  end if;
+
   return null;
 end;
 $$;
@@ -964,18 +1544,108 @@ $$;
 ALTER FUNCTION "public"."trg_enqueue_revalidation_authors"() OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_images"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  target_asset_id bigint;
+  item_record record;
+  page_slug text;
+begin
+  if tg_op = 'DELETE' then
+    target_asset_id := old.asset_id;
+  else
+    target_asset_id := new.asset_id;
+  end if;
+
+  if target_asset_id is null then
+    return null;
+  end if;
+
+  select item.category, item.subcategory, item.asset_type_id
+  into item_record
+  from public.roblox_catalog_items item
+  where item.asset_id = target_asset_id;
+
+  if not found then
+    return null;
+  end if;
+
+  for page_slug in
+    select distinct slug
+    from unnest(public.avatar_catalog_slugs_for_catalog_item(
+      item_record.category,
+      item_record.subcategory,
+      item_record.asset_type_id
+    )) as slug
+  loop
+    perform public.enqueue_revalidation('catalog', page_slug, 'roblox_avatar_catalog_images_' || lower(tg_op));
+  end loop;
+
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_images"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_items"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  page_slug text;
+  old_slugs text[] := array[]::text[];
+  new_slugs text[] := array[]::text[];
+begin
+  if tg_op <> 'INSERT' then
+    old_slugs := public.avatar_catalog_slugs_for_catalog_item(old.category, old.subcategory, old.asset_type_id);
+  end if;
+
+  if tg_op <> 'DELETE' then
+    new_slugs := public.avatar_catalog_slugs_for_catalog_item(new.category, new.subcategory, new.asset_type_id);
+  end if;
+
+  for page_slug in
+    select distinct slug
+    from unnest(old_slugs || new_slugs) as slug
+  loop
+    perform public.enqueue_revalidation('catalog', page_slug, 'roblox_avatar_catalog_items_' || lower(tg_op));
+  end loop;
+
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_items"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_catalog_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 begin
   if tg_op = 'DELETE' then
-    perform public.enqueue_revalidation('catalog', old.code, 'catalog_pages_delete');
-  elsif new.is_published = true then
-    perform public.enqueue_revalidation('catalog', new.code, 'catalog_pages_' || lower(tg_op));
-  elsif tg_op = 'UPDATE' and old.is_published = true then
-    perform public.enqueue_revalidation('catalog', old.code, 'catalog_pages_unpublish');
+    if old.is_published = true then
+      perform public.enqueue_revalidation('catalog', old.code, 'catalog_pages_delete');
+      perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'catalog_pages_wiki_delete');
+    end if;
+    return null;
   end if;
+
+  if new.is_published = true then
+    perform public.enqueue_revalidation('catalog', new.code, 'catalog_pages_' || lower(tg_op));
+    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'catalog_pages_wiki_' || lower(tg_op));
+  end if;
+
+  if tg_op = 'UPDATE' and old.is_published = true then
+    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'catalog_pages_wiki_update_old');
+
+    if old.code is distinct from new.code or new.is_published is distinct from true then
+      perform public.enqueue_revalidation('catalog', old.code, 'catalog_pages_old_code_or_unpublish');
+    end if;
+  end if;
+
   return null;
 end;
 $$;
@@ -986,20 +1656,34 @@ ALTER FUNCTION "public"."trg_enqueue_revalidation_catalog_pages"() OWNER TO "pos
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_checklist_items"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 declare
-  page_slug text;
+  target_page_ids uuid[];
+  page_record record;
 begin
   if tg_op = 'DELETE' then
-    select slug into page_slug from public.checklist_pages where id = old.page_id;
+    target_page_ids := array_remove(array[old.page_id], null);
+  elsif tg_op = 'INSERT' then
+    target_page_ids := array_remove(array[new.page_id], null);
   else
-    select slug into page_slug from public.checklist_pages where id = new.page_id;
+    target_page_ids := array_remove(array[old.page_id, new.page_id], null);
   end if;
 
-  if page_slug is not null and trim(page_slug) <> '' then
-    perform public.enqueue_revalidation('checklist', page_slug, 'checklist_items_' || lower(tg_op));
-  end if;
+  for page_record in
+    select distinct cp.slug, cp.universe_id
+    from public.checklist_pages cp
+    where cp.id = any(target_page_ids)
+      and cp.is_public = true
+      and cp.slug is not null
+      and trim(cp.slug) <> ''
+  loop
+    perform public.enqueue_revalidation('checklist', page_record.slug, 'checklist_items_' || lower(tg_op));
+    perform public.enqueue_wiki_revalidation_for_universe(
+      page_record.universe_id,
+      'checklist_items_wiki_' || lower(tg_op)
+    );
+  end loop;
+
   return null;
 end;
 $$;
@@ -1010,16 +1694,29 @@ ALTER FUNCTION "public"."trg_enqueue_revalidation_checklist_items"() OWNER TO "p
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 begin
   if tg_op = 'DELETE' then
-    perform public.enqueue_revalidation('checklist', old.slug, 'checklist_pages_delete');
-  elsif new.is_public = true then
-    perform public.enqueue_revalidation('checklist', new.slug, 'checklist_pages_' || lower(tg_op));
-  elsif tg_op = 'UPDATE' and old.is_public = true then
-    perform public.enqueue_revalidation('checklist', old.slug, 'checklist_pages_unpublish');
+    if old.is_public = true then
+      perform public.enqueue_revalidation('checklist', old.slug, 'checklist_pages_delete');
+      perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'checklist_pages_wiki_delete');
+    end if;
+    return null;
   end if;
+
+  if new.is_public = true then
+    perform public.enqueue_revalidation('checklist', new.slug, 'checklist_pages_' || lower(tg_op));
+    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'checklist_pages_wiki_' || lower(tg_op));
+  end if;
+
+  if tg_op = 'UPDATE' and old.is_public = true then
+    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'checklist_pages_wiki_update_old');
+
+    if old.slug is distinct from new.slug or new.is_public is distinct from true then
+      perform public.enqueue_revalidation('checklist', old.slug, 'checklist_pages_old_slug_or_unpublish');
+    end if;
+  end if;
+
   return null;
 end;
 $$;
@@ -1030,20 +1727,31 @@ ALTER FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"() OWNER TO "p
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_codes"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 declare
-  game_slug text;
+  target_game_ids uuid[];
+  game_record record;
 begin
   if tg_op = 'DELETE' then
-    select slug into game_slug from public.games where id = old.game_id;
+    target_game_ids := array_remove(array[old.game_id], null);
+  elsif tg_op = 'INSERT' then
+    target_game_ids := array_remove(array[new.game_id], null);
   else
-    select slug into game_slug from public.games where id = new.game_id;
+    target_game_ids := array_remove(array[old.game_id, new.game_id], null);
   end if;
 
-  if game_slug is not null then
-    perform public.enqueue_revalidation('code', game_slug, 'codes_' || lower(tg_op));
-  end if;
+  for game_record in
+    select distinct g.id, g.slug, g.universe_id
+    from public.games g
+    where g.id = any(target_game_ids)
+      and g.is_published = true
+      and g.slug is not null
+      and trim(g.slug) <> ''
+  loop
+    perform public.enqueue_revalidation('code', game_record.slug, 'codes_' || lower(tg_op));
+    perform public.enqueue_list_revalidation_for_universe(game_record.universe_id, 'codes_lists_' || lower(tg_op));
+  end loop;
+
   return null;
 end;
 $$;
@@ -1077,32 +1785,44 @@ CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_free_item_images"(
     AS $$
 declare
   target_asset_id bigint;
-  should_revalidate boolean := false;
+  item_record record;
 begin
-  target_asset_id := coalesce(new.asset_id, old.asset_id);
+  if tg_op = 'DELETE' then
+    target_asset_id := old.asset_id;
+  else
+    target_asset_id := new.asset_id;
+  end if;
+
   if target_asset_id is null then
     return null;
   end if;
 
-  select public.qualifies_for_free_items_catalog(
-    item.price_robux,
-    item.is_deleted,
-    item.raw_economy_json,
-    item.has_resellers,
-    item.lowest_resale_price_robux,
-    item.name,
-    item.category,
-    item.subcategory,
-    item.favorite_count
-  )
-  into should_revalidate
+  select *
+  into item_record
   from public.roblox_catalog_items item
   where item.asset_id = target_asset_id;
 
-  should_revalidate := coalesce(should_revalidate, false);
+  if not found then
+    return null;
+  end if;
 
-  if should_revalidate then
-    perform public.enqueue_revalidation('catalog', 'roblox-free-items', 'roblox_catalog_item_images_' || lower(tg_op));
+  if public.qualifies_for_free_items_catalog(
+    item_record.price_robux,
+    item_record.is_deleted,
+    item_record.raw_economy_json,
+    item_record.has_resellers,
+    item_record.lowest_resale_price_robux,
+    item_record.name,
+    item_record.category,
+    item_record.subcategory,
+    item_record.favorite_count
+  ) then
+    perform public.enqueue_revalidation('catalog', 'free-roblox-items', 'roblox_catalog_item_images_' || lower(tg_op));
+    perform public.enqueue_free_items_catalog_scope(
+      item_record.category,
+      item_record.subcategory,
+      'roblox_catalog_item_images_scope_' || lower(tg_op)
+    );
   end if;
 
   return null;
@@ -1149,7 +1869,23 @@ begin
   end if;
 
   if old_qualifies or new_qualifies then
-    perform public.enqueue_revalidation('catalog', 'roblox-free-items', 'roblox_catalog_items_' || lower(tg_op));
+    perform public.enqueue_revalidation('catalog', 'free-roblox-items', 'roblox_catalog_items_' || lower(tg_op));
+  end if;
+
+  if old_qualifies then
+    perform public.enqueue_free_items_catalog_scope(
+      old.category,
+      old.subcategory,
+      'roblox_catalog_items_scope_old_' || lower(tg_op)
+    );
+  end if;
+
+  if new_qualifies then
+    perform public.enqueue_free_items_catalog_scope(
+      new.category,
+      new.subcategory,
+      'roblox_catalog_items_scope_' || lower(tg_op)
+    );
   end if;
 
   return null;
@@ -1162,20 +1898,34 @@ ALTER FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"() OWNER TO
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 declare
+  target_list_ids uuid[];
   list_slug text;
 begin
   if tg_op = 'DELETE' then
-    select slug into list_slug from public.game_lists where id = old.list_id;
+    target_list_ids := array_remove(array[old.list_id], null);
+    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'game_list_entries_wiki_delete');
+  elsif tg_op = 'INSERT' then
+    target_list_ids := array_remove(array[new.list_id], null);
+    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'game_list_entries_wiki_insert');
   else
-    select slug into list_slug from public.game_lists where id = new.list_id;
+    target_list_ids := array_remove(array[old.list_id, new.list_id], null);
+    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'game_list_entries_wiki_update_old');
+    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'game_list_entries_wiki_update');
   end if;
 
-  if list_slug is not null then
+  for list_slug in
+    select distinct gl.slug
+    from public.game_lists gl
+    where gl.id = any(target_list_ids)
+      and gl.is_published = true
+      and gl.slug is not null
+      and trim(gl.slug) <> ''
+  loop
     perform public.enqueue_revalidation('list', list_slug, 'game_list_entries_' || lower(tg_op));
-  end if;
+  end loop;
+
   return null;
 end;
 $$;
@@ -1186,16 +1936,29 @@ ALTER FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() OWNER TO 
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_game_lists"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 begin
   if tg_op = 'DELETE' then
-    perform public.enqueue_revalidation('list', old.slug, 'game_lists_delete');
-  elsif new.is_published = true then
-    perform public.enqueue_revalidation('list', new.slug, 'game_lists_' || lower(tg_op));
-  elsif tg_op = 'UPDATE' and old.is_published = true then
-    perform public.enqueue_revalidation('list', old.slug, 'game_lists_unpublish');
+    if old.is_published = true then
+      perform public.enqueue_revalidation('list', old.slug, 'game_lists_delete');
+      perform public.enqueue_wiki_revalidation_for_list(old.id, 'game_lists_wiki_delete');
+    end if;
+    return null;
   end if;
+
+  if new.is_published = true then
+    perform public.enqueue_revalidation('list', new.slug, 'game_lists_' || lower(tg_op));
+    perform public.enqueue_wiki_revalidation_for_list(new.id, 'game_lists_wiki_' || lower(tg_op));
+  end if;
+
+  if tg_op = 'UPDATE' and old.is_published = true then
+    perform public.enqueue_wiki_revalidation_for_list(old.id, 'game_lists_wiki_update_old');
+
+    if old.slug is distinct from new.slug or new.is_published is distinct from true then
+      perform public.enqueue_revalidation('list', old.slug, 'game_lists_old_slug_or_unpublish');
+    end if;
+  end if;
+
   return null;
 end;
 $$;
@@ -1206,16 +1969,32 @@ ALTER FUNCTION "public"."trg_enqueue_revalidation_game_lists"() OWNER TO "postgr
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_games"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 begin
   if tg_op = 'DELETE' then
-    perform public.enqueue_revalidation('code', old.slug, 'games_delete');
-  elsif new.is_published = true then
-    perform public.enqueue_revalidation('code', new.slug, 'games_' || lower(tg_op));
-  elsif tg_op = 'UPDATE' and old.is_published = true then
-    perform public.enqueue_revalidation('code', old.slug, 'games_unpublish');
+    if old.is_published = true then
+      perform public.enqueue_revalidation('code', old.slug, 'games_delete');
+      perform public.enqueue_list_revalidation_for_universe(old.universe_id, 'games_lists_delete');
+      perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'games_wiki_delete');
+    end if;
+    return null;
   end if;
+
+  if new.is_published = true then
+    perform public.enqueue_revalidation('code', new.slug, 'games_' || lower(tg_op));
+    perform public.enqueue_list_revalidation_for_universe(new.universe_id, 'games_lists_' || lower(tg_op));
+    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'games_wiki_' || lower(tg_op));
+  end if;
+
+  if tg_op = 'UPDATE' and old.is_published = true then
+    perform public.enqueue_list_revalidation_for_universe(old.universe_id, 'games_lists_update_old');
+    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'games_wiki_update_old');
+
+    if old.slug is distinct from new.slug or new.is_published is distinct from true then
+      perform public.enqueue_revalidation('code', old.slug, 'games_old_slug_or_unpublish');
+    end if;
+  end if;
+
   return null;
 end;
 $$;
@@ -1224,12 +2003,35 @@ $$;
 ALTER FUNCTION "public"."trg_enqueue_revalidation_games"() OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  perform public.enqueue_list_revalidation_for_universe(new.universe_id, 'roblox_universes_lists_update');
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_music_ids"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 begin
   perform public.enqueue_revalidation('music', 'roblox-music-ids', 'roblox_music_ids_' || lower(tg_op));
+
+  if tg_op <> 'INSERT' then
+    perform public.enqueue_music_revalidation_scope('genres', old.genre, 'roblox_music_ids_genre_old_' || lower(tg_op));
+    perform public.enqueue_music_revalidation_scope('artists', old.artist, 'roblox_music_ids_artist_old_' || lower(tg_op));
+  end if;
+
+  if tg_op <> 'DELETE' then
+    perform public.enqueue_music_revalidation_scope('genres', new.genre, 'roblox_music_ids_genre_' || lower(tg_op));
+    perform public.enqueue_music_revalidation_scope('artists', new.artist, 'roblox_music_ids_artist_' || lower(tg_op));
+  end if;
+
   return null;
 end;
 $$;
@@ -1238,18 +2040,75 @@ $$;
 ALTER FUNCTION "public"."trg_enqueue_revalidation_music_ids"() OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() RETURNS "trigger"
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_puzzle_answers"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
+    AS $$
+declare
+  v_slug text;
+  v_answer_date text;
+begin
+  if tg_op = 'DELETE' then
+    v_slug := old.puzzle_slug;
+    v_answer_date := old.answer_date::text;
+  else
+    v_slug := new.puzzle_slug;
+    v_answer_date := new.answer_date::text;
+  end if;
+
+  perform public.enqueue_revalidation('puzzle', v_slug, 'puzzle_answers_' || lower(tg_op));
+  perform public.enqueue_revalidation('puzzle', v_slug || '/' || v_answer_date, 'puzzle_answers_archive_' || lower(tg_op));
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_puzzle_answers"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_puzzle_pages"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
     AS $$
 begin
   if tg_op = 'DELETE' then
-    perform public.enqueue_revalidation('quiz', old.code, 'quiz_pages_delete');
+    perform public.enqueue_revalidation('puzzle', old.slug, 'puzzle_pages_delete');
   elsif new.is_published = true then
-    perform public.enqueue_revalidation('quiz', new.code, 'quiz_pages_' || lower(tg_op));
+    perform public.enqueue_revalidation('puzzle', new.slug, 'puzzle_pages_' || lower(tg_op));
   elsif tg_op = 'UPDATE' and old.is_published = true then
-    perform public.enqueue_revalidation('quiz', old.code, 'quiz_pages_unpublish');
+    perform public.enqueue_revalidation('puzzle', old.slug, 'puzzle_pages_unpublish');
   end if;
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_puzzle_pages"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  if tg_op = 'DELETE' then
+    if old.is_published = true then
+      perform public.enqueue_revalidation('quiz', old.code, 'quiz_pages_delete');
+      perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'quiz_pages_wiki_delete');
+    end if;
+    return null;
+  end if;
+
+  if new.is_published = true then
+    perform public.enqueue_revalidation('quiz', new.code, 'quiz_pages_' || lower(tg_op));
+    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'quiz_pages_wiki_' || lower(tg_op));
+  end if;
+
+  if tg_op = 'UPDATE' and old.is_published = true then
+    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'quiz_pages_wiki_update_old');
+
+    if old.code is distinct from new.code or new.is_published is distinct from true then
+      perform public.enqueue_revalidation('quiz', old.code, 'quiz_pages_old_code_or_unpublish');
+    end if;
+  end if;
+
   return null;
 end;
 $$;
@@ -1260,16 +2119,29 @@ ALTER FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() OWNER TO "postgr
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_tools"() RETURNS "trigger"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 begin
   if tg_op = 'DELETE' then
-    perform public.enqueue_revalidation('tool', old.code, 'tools_delete');
-  elsif new.is_published = true then
-    perform public.enqueue_revalidation('tool', new.code, 'tools_' || lower(tg_op));
-  elsif tg_op = 'UPDATE' and old.is_published = true then
-    perform public.enqueue_revalidation('tool', old.code, 'tools_unpublish');
+    if old.is_published = true then
+      perform public.enqueue_revalidation('tool', old.code, 'tools_delete');
+      perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'tools_wiki_delete');
+    end if;
+    return null;
   end if;
+
+  if new.is_published = true then
+    perform public.enqueue_revalidation('tool', new.code, 'tools_' || lower(tg_op));
+    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'tools_wiki_' || lower(tg_op));
+  end if;
+
+  if tg_op = 'UPDATE' and old.is_published = true then
+    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'tools_wiki_update_old');
+
+    if old.code is distinct from new.code or new.is_published is distinct from true then
+      perform public.enqueue_revalidation('tool', old.code, 'tools_old_code_or_unpublish');
+    end if;
+  end if;
+
   return null;
 end;
 $$;
@@ -1350,18 +2222,35 @@ CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 declare
-  v_slug text;
+  new_slug text;
+  old_slug text;
 begin
   if tg_op = 'DELETE' then
-    v_slug := old.wiki_slug || '/' || old.collection_slug;
-    perform public.enqueue_revalidation('wiki_catalog', v_slug, 'wiki_catalog_pages_delete');
-  elsif new.is_published = true then
-    v_slug := new.wiki_slug || '/' || new.collection_slug;
-    perform public.enqueue_revalidation('wiki_catalog', v_slug, 'wiki_catalog_pages_' || lower(tg_op));
-  elsif tg_op = 'UPDATE' and old.is_published = true then
-    v_slug := old.wiki_slug || '/' || old.collection_slug;
-    perform public.enqueue_revalidation('wiki_catalog', v_slug, 'wiki_catalog_pages_unpublish');
+    if old.is_published = true then
+      old_slug := old.wiki_slug || '/' || old.collection_slug;
+      perform public.enqueue_revalidation('wiki_catalog', old_slug, 'wiki_catalog_pages_delete');
+      perform public.enqueue_revalidation('wiki', old.wiki_slug, 'wiki_catalog_pages_wiki_delete');
+    end if;
+    return null;
   end if;
+
+  if new.is_published = true then
+    new_slug := new.wiki_slug || '/' || new.collection_slug;
+    perform public.enqueue_revalidation('wiki_catalog', new_slug, 'wiki_catalog_pages_' || lower(tg_op));
+    perform public.enqueue_revalidation('wiki', new.wiki_slug, 'wiki_catalog_pages_wiki_' || lower(tg_op));
+  end if;
+
+  if tg_op = 'UPDATE' and old.is_published = true then
+    perform public.enqueue_revalidation('wiki', old.wiki_slug, 'wiki_catalog_pages_wiki_update_old');
+
+    if old.wiki_slug is distinct from new.wiki_slug
+      or old.collection_slug is distinct from new.collection_slug
+      or new.is_published is distinct from true then
+      old_slug := old.wiki_slug || '/' || old.collection_slug;
+      perform public.enqueue_revalidation('wiki_catalog', old_slug, 'wiki_catalog_pages_old_slug_or_unpublish');
+    end if;
+  end if;
+
   return null;
 end;
 $$;
@@ -1375,12 +2264,22 @@ CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_wiki_pages"() RETU
     AS $$
 begin
   if tg_op = 'DELETE' then
-    perform public.enqueue_revalidation('wiki', old.slug, 'wiki_pages_delete');
-  elsif new.is_published = true then
-    perform public.enqueue_revalidation('wiki', new.slug, 'wiki_pages_' || lower(tg_op));
-  elsif tg_op = 'UPDATE' and old.is_published = true then
-    perform public.enqueue_revalidation('wiki', old.slug, 'wiki_pages_unpublish');
+    if old.is_published = true then
+      perform public.enqueue_revalidation('wiki', old.slug, 'wiki_pages_delete');
+    end if;
+    return null;
   end if;
+
+  if new.is_published = true then
+    perform public.enqueue_revalidation('wiki', new.slug, 'wiki_pages_' || lower(tg_op));
+  end if;
+
+  if tg_op = 'UPDATE' and old.is_published = true then
+    if old.slug is distinct from new.slug or new.is_published is distinct from true then
+      perform public.enqueue_revalidation('wiki', old.slug, 'wiki_pages_old_slug_or_unpublish');
+    end if;
+  end if;
+
   return null;
 end;
 $$;
@@ -1779,6 +2678,55 @@ $$;
 ALTER FUNCTION "public"."trg_search_index_games"() OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_puzzle_pages"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  v_search text;
+begin
+  if (tg_op = 'DELETE') then
+    delete from public.search_index
+    where entity_type = 'puzzle'
+      and entity_id = old.id::text;
+    return null;
+  end if;
+
+  v_search := left(
+    concat_ws(
+      ' ',
+      new.title,
+      new.slug,
+      new.provider,
+      new.seo_title,
+      new.meta_description,
+      new.intro_md,
+      new.answer_intro_md,
+      new.how_to_play_md,
+      new.description_md
+    ),
+    3000
+  );
+
+  perform public.upsert_search_index(
+    'puzzle',
+    new.id::text,
+    new.slug,
+    new.title,
+    'Puzzle',
+    '/puzzles/' || new.slug,
+    new.updated_at,
+    new.is_published,
+    v_search
+  );
+
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_search_index_puzzle_pages"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."trg_search_index_quiz_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
@@ -2052,6 +3000,135 @@ $$;
 
 
 ALTER FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."upsert_roblox_universe_stats_hourly"("p_universe_id" bigint, "p_sampled_at" timestamp with time zone, "p_playing" bigint DEFAULT NULL::bigint, "p_visits" bigint DEFAULT NULL::bigint, "p_favorites" bigint DEFAULT NULL::bigint, "p_likes" bigint DEFAULT NULL::bigint, "p_dislikes" bigint DEFAULT NULL::bigint, "p_snapshot" "jsonb" DEFAULT '{}'::"jsonb") RETURNS "void"
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  bucket timestamptz := date_trunc('hour', coalesce(p_sampled_at, now()));
+  rating numeric := public.calculate_roblox_rating_percent(p_likes, p_dislikes);
+begin
+  insert into public.roblox_universe_stats_hourly (
+    universe_id,
+    hour_start,
+    playing,
+    avg_playing,
+    peak_playing,
+    min_playing,
+    visits,
+    visits_start,
+    visits_end,
+    visit_delta,
+    favorites,
+    favorites_start,
+    favorites_end,
+    favorite_delta,
+    likes,
+    likes_start,
+    likes_end,
+    like_delta,
+    dislikes,
+    dislikes_start,
+    dislikes_end,
+    dislike_delta,
+    rating_percent,
+    sample_count,
+    first_sampled_at,
+    last_sampled_at,
+    snapshot
+  )
+  values (
+    p_universe_id,
+    bucket,
+    p_playing,
+    p_playing,
+    p_playing,
+    p_playing,
+    p_visits,
+    p_visits,
+    p_visits,
+    0,
+    p_favorites,
+    p_favorites,
+    p_favorites,
+    0,
+    p_likes,
+    p_likes,
+    p_likes,
+    0,
+    p_dislikes,
+    p_dislikes,
+    p_dislikes,
+    0,
+    rating,
+    1,
+    coalesce(p_sampled_at, now()),
+    coalesce(p_sampled_at, now()),
+    coalesce(p_snapshot, '{}'::jsonb)
+  )
+  on conflict (universe_id, hour_start) do update
+  set
+    playing = coalesce(excluded.playing, roblox_universe_stats_hourly.playing),
+    avg_playing = case
+      when excluded.playing is null then roblox_universe_stats_hourly.avg_playing
+      when roblox_universe_stats_hourly.avg_playing is null then excluded.playing
+      else ((roblox_universe_stats_hourly.avg_playing * roblox_universe_stats_hourly.sample_count) + excluded.playing)
+        / (roblox_universe_stats_hourly.sample_count + 1)
+    end,
+    peak_playing = greatest(
+      coalesce(roblox_universe_stats_hourly.peak_playing, excluded.peak_playing),
+      coalesce(excluded.peak_playing, roblox_universe_stats_hourly.peak_playing)
+    ),
+    min_playing = least(
+      coalesce(roblox_universe_stats_hourly.min_playing, excluded.min_playing),
+      coalesce(excluded.min_playing, roblox_universe_stats_hourly.min_playing)
+    ),
+    visits = coalesce(excluded.visits, roblox_universe_stats_hourly.visits),
+    visits_start = coalesce(roblox_universe_stats_hourly.visits_start, excluded.visits_start),
+    visits_end = coalesce(excluded.visits_end, roblox_universe_stats_hourly.visits_end),
+    visit_delta = case
+      when coalesce(excluded.visits_end, roblox_universe_stats_hourly.visits_end) is null
+        or coalesce(roblox_universe_stats_hourly.visits_start, excluded.visits_start) is null then null
+      else coalesce(excluded.visits_end, roblox_universe_stats_hourly.visits_end)
+        - coalesce(roblox_universe_stats_hourly.visits_start, excluded.visits_start)
+    end,
+    favorites = coalesce(excluded.favorites, roblox_universe_stats_hourly.favorites),
+    favorites_start = coalesce(roblox_universe_stats_hourly.favorites_start, excluded.favorites_start),
+    favorites_end = coalesce(excluded.favorites_end, roblox_universe_stats_hourly.favorites_end),
+    favorite_delta = case
+      when coalesce(excluded.favorites_end, roblox_universe_stats_hourly.favorites_end) is null
+        or coalesce(roblox_universe_stats_hourly.favorites_start, excluded.favorites_start) is null then null
+      else coalesce(excluded.favorites_end, roblox_universe_stats_hourly.favorites_end)
+        - coalesce(roblox_universe_stats_hourly.favorites_start, excluded.favorites_start)
+    end,
+    likes = coalesce(excluded.likes, roblox_universe_stats_hourly.likes),
+    likes_start = coalesce(roblox_universe_stats_hourly.likes_start, excluded.likes_start),
+    likes_end = coalesce(excluded.likes_end, roblox_universe_stats_hourly.likes_end),
+    like_delta = case
+      when coalesce(excluded.likes_end, roblox_universe_stats_hourly.likes_end) is null
+        or coalesce(roblox_universe_stats_hourly.likes_start, excluded.likes_start) is null then null
+      else coalesce(excluded.likes_end, roblox_universe_stats_hourly.likes_end)
+        - coalesce(roblox_universe_stats_hourly.likes_start, excluded.likes_start)
+    end,
+    dislikes = coalesce(excluded.dislikes, roblox_universe_stats_hourly.dislikes),
+    dislikes_start = coalesce(roblox_universe_stats_hourly.dislikes_start, excluded.dislikes_start),
+    dislikes_end = coalesce(excluded.dislikes_end, roblox_universe_stats_hourly.dislikes_end),
+    dislike_delta = case
+      when coalesce(excluded.dislikes_end, roblox_universe_stats_hourly.dislikes_end) is null
+        or coalesce(roblox_universe_stats_hourly.dislikes_start, excluded.dislikes_start) is null then null
+      else coalesce(excluded.dislikes_end, roblox_universe_stats_hourly.dislikes_end)
+        - coalesce(roblox_universe_stats_hourly.dislikes_start, excluded.dislikes_start)
+    end,
+    rating_percent = coalesce(excluded.rating_percent, roblox_universe_stats_hourly.rating_percent),
+    sample_count = roblox_universe_stats_hourly.sample_count + 1,
+    last_sampled_at = greatest(roblox_universe_stats_hourly.last_sampled_at, excluded.last_sampled_at),
+    snapshot = coalesce(roblox_universe_stats_hourly.snapshot, '{}'::jsonb) || coalesce(excluded.snapshot, '{}'::jsonb);
+end;
+$$;
+
+
+ALTER FUNCTION "public"."upsert_roblox_universe_stats_hourly"("p_universe_id" bigint, "p_sampled_at" timestamp with time zone, "p_playing" bigint, "p_visits" bigint, "p_favorites" bigint, "p_likes" bigint, "p_dislikes" bigint, "p_snapshot" "jsonb") OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."upsert_search_index"("p_entity_type" "text", "p_entity_id" "text", "p_slug" "text", "p_title" "text", "p_subtitle" "text", "p_url" "text", "p_updated_at" timestamp with time zone, "p_is_published" boolean, "p_search_text" "text") RETURNS "void"
@@ -2864,6 +3941,55 @@ CREATE OR REPLACE VIEW "public"."game_pages_index_view" WITH ("security_invoker"
 ALTER VIEW "public"."game_pages_index_view" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."google_indexing_attempts" (
+    "id" bigint NOT NULL,
+    "url" "text" NOT NULL,
+    "notification_type" "text" NOT NULL,
+    "submitted_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "status_code" integer,
+    "response_status" "text",
+    "error_message" "text",
+    "success" boolean DEFAULT false NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "google_indexing_attempts_notification_type_check" CHECK (("notification_type" = ANY (ARRAY['URL_UPDATED'::"text", 'URL_DELETED'::"text"])))
+);
+
+
+ALTER TABLE "public"."google_indexing_attempts" OWNER TO "postgres";
+
+
+CREATE SEQUENCE IF NOT EXISTS "public"."google_indexing_attempts_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE "public"."google_indexing_attempts_id_seq" OWNER TO "postgres";
+
+
+ALTER SEQUENCE "public"."google_indexing_attempts_id_seq" OWNED BY "public"."google_indexing_attempts"."id";
+
+
+
+CREATE TABLE IF NOT EXISTS "public"."google_indexing_url_state" (
+    "url" "text" NOT NULL,
+    "notification_type" "text" NOT NULL,
+    "last_submitted_at" timestamp with time zone,
+    "last_status_code" integer,
+    "last_error" "text",
+    "attempt_count" integer DEFAULT 0 NOT NULL,
+    "success_count" integer DEFAULT 0 NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "google_indexing_url_state_notification_type_check" CHECK (("notification_type" = ANY (ARRAY['URL_UPDATED'::"text", 'URL_DELETED'::"text"])))
+);
+
+
+ALTER TABLE "public"."google_indexing_url_state" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_items" (
     "asset_id" bigint NOT NULL,
     "item_type" "text" DEFAULT 'Asset'::"text" NOT NULL,
@@ -2886,7 +4012,7 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_items" (
     "creator_type" "text",
     "creator_has_verified_badge" boolean,
     "product_id" bigint,
-    "collectible_item_id" bigint,
+    "collectible_item_id" "text",
     "favorite_count" bigint,
     "has_resellers" boolean,
     "total_quantity" bigint,
@@ -3096,6 +4222,96 @@ ALTER VIEW "public"."limited_items_trading_view" OWNER TO "postgres";
 
 COMMENT ON VIEW "public"."limited_items_trading_view" IS 'Simplified view of Limited items with trading data and freshness indicators for frontend';
 
+
+
+CREATE TABLE IF NOT EXISTS "public"."puzzle_answers" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "puzzle_slug" "text" NOT NULL,
+    "answer_date" "date" NOT NULL,
+    "puzzle_id" "text",
+    "source_url" "text",
+    "fetched_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "extracted_from" "text",
+    "answer_summary" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "payload" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."puzzle_answers" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."puzzle_pages" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "slug" "text" NOT NULL,
+    "provider" "text" NOT NULL,
+    "title" "text" NOT NULL,
+    "seo_title" "text",
+    "meta_description" "text",
+    "intro_md" "text",
+    "answer_intro_md" "text",
+    "how_to_play_md" "text",
+    "description_md" "text",
+    "faq_json" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "source_url" "text",
+    "sort_order" integer DEFAULT 100 NOT NULL,
+    "is_published" boolean DEFAULT true NOT NULL,
+    "published_at" timestamp with time zone,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "icon_url" "text"
+);
+
+
+ALTER TABLE "public"."puzzle_pages" OWNER TO "postgres";
+
+
+CREATE OR REPLACE VIEW "public"."puzzle_pages_view" AS
+ SELECT "pp"."id",
+    "pp"."slug",
+    "pp"."provider",
+    "pp"."title",
+    "pp"."seo_title",
+    "pp"."meta_description",
+    "pp"."intro_md",
+    "pp"."answer_intro_md",
+    "pp"."how_to_play_md",
+    "pp"."description_md",
+    "pp"."faq_json",
+    "pp"."source_url",
+    "pp"."sort_order",
+    "pp"."is_published",
+    "pp"."published_at",
+    "pp"."created_at",
+    "pp"."updated_at",
+    "pp"."icon_url",
+    COALESCE("latest"."latest_answer_date", NULL::"date") AS "latest_answer_date",
+    COALESCE("latest"."latest_fetched_at", NULL::timestamp with time zone) AS "latest_fetched_at",
+    GREATEST("pp"."updated_at", COALESCE("pp"."published_at", "pp"."updated_at"), COALESCE("latest"."latest_fetched_at", "pp"."updated_at")) AS "content_updated_at"
+   FROM ("public"."puzzle_pages" "pp"
+     LEFT JOIN LATERAL ( SELECT "pa"."answer_date" AS "latest_answer_date",
+            "pa"."fetched_at" AS "latest_fetched_at"
+           FROM "public"."puzzle_answers" "pa"
+          WHERE ("pa"."puzzle_slug" = "pp"."slug")
+          ORDER BY "pa"."answer_date" DESC
+         LIMIT 1) "latest" ON (true));
+
+
+ALTER VIEW "public"."puzzle_pages_view" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."puzzle_sync_runs" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "puzzle_slug" "text",
+    "ran_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "status" "text" NOT NULL,
+    "issue" "text",
+    "payload" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL
+);
+
+
+ALTER TABLE "public"."puzzle_sync_runs" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."quiz_pages" (
@@ -3545,6 +4761,19 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_universe_place_servers" (
 ALTER TABLE "public"."roblox_universe_place_servers" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_rank_snapshots" (
+    "universe_id" bigint NOT NULL,
+    "rank_type" "text" NOT NULL,
+    "rank_value" integer NOT NULL,
+    "metric_value" numeric,
+    "sampled_at" timestamp with time zone NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."roblox_universe_rank_snapshots" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."roblox_universe_search_snapshots" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "query" "text" NOT NULL,
@@ -3636,11 +4865,68 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_universe_stats_daily" (
     "engagement_score" numeric,
     "payout_robux" numeric,
     "snapshot" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
-    "recorded_at" timestamp with time zone DEFAULT "now"() NOT NULL
+    "recorded_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "avg_playing" numeric,
+    "peak_playing" bigint,
+    "min_playing" bigint,
+    "visits_start" bigint,
+    "visits_end" bigint,
+    "visit_delta" bigint,
+    "favorites_start" bigint,
+    "favorites_end" bigint,
+    "favorite_delta" bigint,
+    "likes_start" bigint,
+    "likes_end" bigint,
+    "like_delta" bigint,
+    "dislikes_start" bigint,
+    "dislikes_end" bigint,
+    "dislike_delta" bigint,
+    "rating_start" numeric,
+    "rating_end" numeric,
+    "sample_count" integer,
+    "is_finalized" boolean DEFAULT false NOT NULL,
+    "finalized_at" timestamp with time zone
 );
 
 
 ALTER TABLE "public"."roblox_universe_stats_daily" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_stats_hourly" (
+    "universe_id" bigint NOT NULL,
+    "hour_start" timestamp with time zone NOT NULL,
+    "playing" bigint,
+    "avg_playing" numeric,
+    "peak_playing" bigint,
+    "min_playing" bigint,
+    "visits" bigint,
+    "visits_start" bigint,
+    "visits_end" bigint,
+    "visit_delta" bigint,
+    "favorites" bigint,
+    "favorites_start" bigint,
+    "favorites_end" bigint,
+    "favorite_delta" bigint,
+    "likes" bigint,
+    "likes_start" bigint,
+    "likes_end" bigint,
+    "like_delta" bigint,
+    "dislikes" bigint,
+    "dislikes_start" bigint,
+    "dislikes_end" bigint,
+    "dislike_delta" bigint,
+    "rating_percent" numeric,
+    "sample_count" integer DEFAULT 1 NOT NULL,
+    "first_sampled_at" timestamp with time zone NOT NULL,
+    "last_sampled_at" timestamp with time zone NOT NULL,
+    "snapshot" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "roblox_universe_stats_hourly_sample_count_check" CHECK (("sample_count" > 0))
+);
+
+
+ALTER TABLE "public"."roblox_universe_stats_hourly" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."roblox_virtual_event_categories" (
@@ -3951,6 +5237,10 @@ CREATE OR REPLACE VIEW "public"."wiki_pages_view" WITH ("security_invoker"='true
 ALTER VIEW "public"."wiki_pages_view" OWNER TO "postgres";
 
 
+ALTER TABLE ONLY "public"."google_indexing_attempts" ALTER COLUMN "id" SET DEFAULT "nextval"('"public"."google_indexing_attempts_id_seq"'::"regclass");
+
+
+
 ALTER TABLE ONLY "public"."app_sessions"
     ADD CONSTRAINT "app_sessions_pkey" PRIMARY KEY ("id");
 
@@ -4086,6 +5376,41 @@ ALTER TABLE ONLY "public"."games"
 
 
 
+ALTER TABLE ONLY "public"."google_indexing_attempts"
+    ADD CONSTRAINT "google_indexing_attempts_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."google_indexing_url_state"
+    ADD CONSTRAINT "google_indexing_url_state_pkey" PRIMARY KEY ("url", "notification_type");
+
+
+
+ALTER TABLE ONLY "public"."puzzle_answers"
+    ADD CONSTRAINT "puzzle_answers_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."puzzle_answers"
+    ADD CONSTRAINT "puzzle_answers_puzzle_slug_answer_date_key" UNIQUE ("puzzle_slug", "answer_date");
+
+
+
+ALTER TABLE ONLY "public"."puzzle_pages"
+    ADD CONSTRAINT "puzzle_pages_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."puzzle_pages"
+    ADD CONSTRAINT "puzzle_pages_slug_key" UNIQUE ("slug");
+
+
+
+ALTER TABLE ONLY "public"."puzzle_sync_runs"
+    ADD CONSTRAINT "puzzle_sync_runs_pkey" PRIMARY KEY ("id");
+
+
+
 ALTER TABLE ONLY "public"."quiz_pages"
     ADD CONSTRAINT "quiz_pages_code_key" UNIQUE ("code");
 
@@ -4191,6 +5516,11 @@ ALTER TABLE ONLY "public"."roblox_universe_place_servers"
 
 
 
+ALTER TABLE ONLY "public"."roblox_universe_rank_snapshots"
+    ADD CONSTRAINT "roblox_universe_rank_snapshots_pkey" PRIMARY KEY ("universe_id", "rank_type", "sampled_at");
+
+
+
 ALTER TABLE ONLY "public"."roblox_universe_search_snapshots"
     ADD CONSTRAINT "roblox_universe_search_snapshots_pkey" PRIMARY KEY ("id");
 
@@ -4233,6 +5563,11 @@ ALTER TABLE ONLY "public"."roblox_universe_stats_daily"
 
 ALTER TABLE ONLY "public"."roblox_universe_stats_daily"
     ADD CONSTRAINT "roblox_universe_stats_daily_universe_id_stat_date_key" UNIQUE ("universe_id", "stat_date");
+
+
+
+ALTER TABLE ONLY "public"."roblox_universe_stats_hourly"
+    ADD CONSTRAINT "roblox_universe_stats_hourly_pkey" PRIMARY KEY ("universe_id", "hour_start");
 
 
 
@@ -4498,6 +5833,42 @@ CREATE INDEX "idx_games_universe_id" ON "public"."games" USING "btree" ("univers
 
 
 
+CREATE INDEX "idx_google_indexing_attempts_submitted_at" ON "public"."google_indexing_attempts" USING "btree" ("submitted_at" DESC);
+
+
+
+CREATE INDEX "idx_google_indexing_attempts_type_submitted_at" ON "public"."google_indexing_attempts" USING "btree" ("notification_type", "submitted_at" DESC);
+
+
+
+CREATE INDEX "idx_google_indexing_attempts_url" ON "public"."google_indexing_attempts" USING "btree" ("url");
+
+
+
+CREATE INDEX "idx_google_indexing_url_state_last_submitted_at" ON "public"."google_indexing_url_state" USING "btree" ("notification_type", "last_submitted_at" NULLS FIRST);
+
+
+
+CREATE INDEX "idx_puzzle_answers_fetched_at" ON "public"."puzzle_answers" USING "btree" ("fetched_at" DESC);
+
+
+
+CREATE INDEX "idx_puzzle_answers_slug_date" ON "public"."puzzle_answers" USING "btree" ("puzzle_slug", "answer_date" DESC);
+
+
+
+CREATE INDEX "idx_puzzle_pages_published_sort" ON "public"."puzzle_pages" USING "btree" ("is_published", "sort_order", "title");
+
+
+
+CREATE INDEX "idx_puzzle_sync_runs_slug_ran_at" ON "public"."puzzle_sync_runs" USING "btree" ("puzzle_slug", "ran_at" DESC);
+
+
+
+CREATE INDEX "idx_puzzle_sync_runs_status_ran_at" ON "public"."puzzle_sync_runs" USING "btree" ("status", "ran_at" DESC);
+
+
+
 CREATE INDEX "idx_quiz_pages_is_published" ON "public"."quiz_pages" USING "btree" ("is_published", "published_at" DESC NULLS LAST, "updated_at" DESC);
 
 
@@ -4530,6 +5901,10 @@ CREATE INDEX "idx_roblox_catalog_item_images_state" ON "public"."roblox_catalog_
 
 
 
+CREATE INDEX "idx_roblox_catalog_items_asset_type_favorites" ON "public"."roblox_catalog_items" USING "btree" ("asset_type_id", "favorite_count" DESC NULLS LAST) WHERE ("is_deleted" = false);
+
+
+
 CREATE INDEX "idx_roblox_catalog_items_asset_type_id" ON "public"."roblox_catalog_items" USING "btree" ("asset_type_id");
 
 
@@ -4538,7 +5913,15 @@ CREATE INDEX "idx_roblox_catalog_items_category" ON "public"."roblox_catalog_ite
 
 
 
+CREATE INDEX "idx_roblox_catalog_items_category_subcategory_favorites" ON "public"."roblox_catalog_items" USING "btree" ("category", "subcategory", "favorite_count" DESC NULLS LAST) WHERE ("is_deleted" = false);
+
+
+
 CREATE INDEX "idx_roblox_catalog_items_creator_id" ON "public"."roblox_catalog_items" USING "btree" ("creator_id");
+
+
+
+CREATE INDEX "idx_roblox_catalog_items_creator_target_id" ON "public"."roblox_catalog_items" USING "btree" ("creator_target_id");
 
 
 
@@ -4559,6 +5942,10 @@ CREATE INDEX "idx_roblox_catalog_items_is_for_sale" ON "public"."roblox_catalog_
 
 
 CREATE INDEX "idx_roblox_catalog_items_is_limited" ON "public"."roblox_catalog_items" USING "btree" ("is_limited");
+
+
+
+CREATE INDEX "idx_roblox_catalog_items_item_type" ON "public"."roblox_catalog_items" USING "btree" ("item_type");
 
 
 
@@ -4658,6 +6045,14 @@ CREATE INDEX "idx_roblox_universe_place_servers_universe" ON "public"."roblox_un
 
 
 
+CREATE INDEX "idx_roblox_universe_rank_snapshots_type_time" ON "public"."roblox_universe_rank_snapshots" USING "btree" ("rank_type", "sampled_at" DESC, "rank_value");
+
+
+
+CREATE INDEX "idx_roblox_universe_rank_snapshots_universe" ON "public"."roblox_universe_rank_snapshots" USING "btree" ("universe_id", "sampled_at" DESC);
+
+
+
 CREATE INDEX "idx_roblox_universe_search_snapshots_query" ON "public"."roblox_universe_search_snapshots" USING "btree" ("query", "fetched_at" DESC);
 
 
@@ -4675,6 +6070,22 @@ CREATE INDEX "idx_roblox_universe_sort_entries_universe" ON "public"."roblox_uni
 
 
 CREATE INDEX "idx_roblox_universe_stats_daily" ON "public"."roblox_universe_stats_daily" USING "btree" ("universe_id", "stat_date" DESC);
+
+
+
+CREATE INDEX "idx_roblox_universe_stats_hourly_hour" ON "public"."roblox_universe_stats_hourly" USING "btree" ("hour_start" DESC);
+
+
+
+CREATE INDEX "idx_roblox_universe_stats_hourly_peak_playing" ON "public"."roblox_universe_stats_hourly" USING "btree" ("peak_playing" DESC, "hour_start" DESC);
+
+
+
+CREATE INDEX "idx_roblox_universe_stats_hourly_playing" ON "public"."roblox_universe_stats_hourly" USING "btree" ("playing" DESC, "hour_start" DESC);
+
+
+
+CREATE INDEX "idx_roblox_universe_stats_hourly_universe_hour" ON "public"."roblox_universe_stats_hourly" USING "btree" ("universe_id", "hour_start" DESC);
 
 
 
@@ -4887,7 +6298,7 @@ CREATE OR REPLACE TRIGGER "trg_checklist_pages_updated_at" BEFORE UPDATE ON "pub
 
 
 
-CREATE OR REPLACE TRIGGER "trg_comments_revalidate_code" AFTER INSERT OR UPDATE ON "public"."comments" FOR EACH ROW EXECUTE FUNCTION "public"."trg_comments_revalidate_code"();
+CREATE OR REPLACE TRIGGER "trg_comments_revalidate_entity" AFTER INSERT OR DELETE OR UPDATE ON "public"."comments" FOR EACH ROW EXECUTE FUNCTION "public"."trg_comments_revalidate_entity"();
 
 
 
@@ -4896,6 +6307,14 @@ CREATE OR REPLACE TRIGGER "trg_comments_updated_at" BEFORE UPDATE ON "public"."c
 
 
 CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_articles" AFTER INSERT OR DELETE OR UPDATE ON "public"."articles" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_articles"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_avatar_catalog_images" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_catalog_item_images" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_images"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_avatar_catalog_items" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_catalog_items" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_items"();
 
 
 
@@ -4939,7 +6358,19 @@ CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_games" AFTER INSERT OR DELET
 
 
 
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_lists_roblox_universes" AFTER UPDATE OF "root_place_id", "name", "display_name", "slug", "description", "game_description_md", "age_rating", "desktop_enabled", "mobile_enabled", "tablet_enabled", "console_enabled", "vr_enabled", "playing", "visits", "favorites", "likes", "dislikes", "icon_url", "updated_at", "updated_at_api" ON "public"."roblox_universes" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"();
+
+
+
 CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_music_ids" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_music_ids" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_music_ids"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_puzzle_answers" AFTER INSERT OR DELETE OR UPDATE ON "public"."puzzle_answers" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_puzzle_answers"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_puzzle_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."puzzle_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_puzzle_pages"();
 
 
 
@@ -5019,6 +6450,18 @@ CREATE OR REPLACE TRIGGER "trg_games_updated_at" BEFORE UPDATE ON "public"."game
 
 
 
+CREATE OR REPLACE TRIGGER "trg_google_indexing_url_state_updated_at" BEFORE UPDATE ON "public"."google_indexing_url_state" FOR EACH ROW EXECUTE FUNCTION "public"."set_google_indexing_url_state_updated_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_puzzle_answers_updated_at" BEFORE UPDATE ON "public"."puzzle_answers" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_puzzle_pages_updated_at" BEFORE UPDATE ON "public"."puzzle_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
 CREATE OR REPLACE TRIGGER "trg_quiz_pages_updated_at" BEFORE UPDATE ON "public"."quiz_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
@@ -5059,6 +6502,10 @@ CREATE OR REPLACE TRIGGER "trg_roblox_universe_discovery_jobs_updated_at" BEFORE
 
 
 
+CREATE OR REPLACE TRIGGER "trg_roblox_universe_stats_hourly_updated_at" BEFORE UPDATE ON "public"."roblox_universe_stats_hourly" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
 CREATE OR REPLACE TRIGGER "trg_roblox_universes_updated_at" BEFORE UPDATE ON "public"."roblox_universes" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
@@ -5088,6 +6535,10 @@ CREATE OR REPLACE TRIGGER "trg_search_index_game_lists" AFTER INSERT OR DELETE O
 
 
 CREATE OR REPLACE TRIGGER "trg_search_index_games" AFTER INSERT OR DELETE OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_games"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_search_index_puzzle_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."puzzle_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_puzzle_pages"();
 
 
 
@@ -5124,6 +6575,10 @@ CREATE OR REPLACE TRIGGER "trg_set_events_pages_published_at" BEFORE INSERT OR U
 
 
 CREATE OR REPLACE TRIGGER "trg_set_game_published_at" BEFORE INSERT OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."set_game_published_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_set_puzzle_page_published_at" BEFORE INSERT OR UPDATE ON "public"."puzzle_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_puzzle_page_published_at"();
 
 
 
@@ -5282,6 +6737,11 @@ ALTER TABLE ONLY "public"."games"
 
 
 
+ALTER TABLE ONLY "public"."puzzle_answers"
+    ADD CONSTRAINT "puzzle_answers_puzzle_slug_fkey" FOREIGN KEY ("puzzle_slug") REFERENCES "public"."puzzle_pages"("slug") ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+
 ALTER TABLE ONLY "public"."quiz_pages"
     ADD CONSTRAINT "quiz_pages_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
 
@@ -5337,6 +6797,11 @@ ALTER TABLE ONLY "public"."roblox_universe_place_servers"
 
 
 
+ALTER TABLE ONLY "public"."roblox_universe_rank_snapshots"
+    ADD CONSTRAINT "roblox_universe_rank_snapshots_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
+
+
+
 ALTER TABLE ONLY "public"."roblox_universe_search_snapshots"
     ADD CONSTRAINT "roblox_universe_search_snapshots_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
@@ -5364,6 +6829,11 @@ ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
 
 ALTER TABLE ONLY "public"."roblox_universe_stats_daily"
     ADD CONSTRAINT "roblox_universe_stats_daily_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."roblox_universe_stats_hourly"
+    ADD CONSTRAINT "roblox_universe_stats_hourly_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
 
@@ -5495,6 +6965,43 @@ ALTER TABLE "public"."game_lists" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "public"."games" ENABLE ROW LEVEL SECURITY;
 
 
+ALTER TABLE "public"."google_indexing_attempts" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."google_indexing_url_state" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."puzzle_answers" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "puzzle_answers_admin_full_access" ON "public"."puzzle_answers" USING ("public"."is_admin"("auth"."uid"())) WITH CHECK ("public"."is_admin"("auth"."uid"()));
+
+
+
+CREATE POLICY "puzzle_answers_public_read" ON "public"."puzzle_answers" FOR SELECT USING ((EXISTS ( SELECT 1
+   FROM "public"."puzzle_pages" "pp"
+  WHERE (("pp"."slug" = "puzzle_answers"."puzzle_slug") AND ("pp"."is_published" = true)))));
+
+
+
+ALTER TABLE "public"."puzzle_pages" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "puzzle_pages_admin_full_access" ON "public"."puzzle_pages" USING ("public"."is_admin"("auth"."uid"())) WITH CHECK ("public"."is_admin"("auth"."uid"()));
+
+
+
+CREATE POLICY "puzzle_pages_public_read" ON "public"."puzzle_pages" FOR SELECT USING (("is_published" = true));
+
+
+
+ALTER TABLE "public"."puzzle_sync_runs" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "puzzle_sync_runs_admin_full_access" ON "public"."puzzle_sync_runs" USING ("public"."is_admin"("auth"."uid"())) WITH CHECK ("public"."is_admin"("auth"."uid"()));
+
+
+
 ALTER TABLE "public"."quiz_pages" ENABLE ROW LEVEL SECURITY;
 
 
@@ -5554,6 +7061,13 @@ ALTER TABLE "public"."roblox_universe_media" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "public"."roblox_universe_place_servers" ENABLE ROW LEVEL SECURITY;
 
 
+ALTER TABLE "public"."roblox_universe_rank_snapshots" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "roblox_universe_rank_snapshots_select" ON "public"."roblox_universe_rank_snapshots" FOR SELECT USING (true);
+
+
+
 ALTER TABLE "public"."roblox_universe_search_snapshots" ENABLE ROW LEVEL SECURITY;
 
 
@@ -5570,6 +7084,13 @@ ALTER TABLE "public"."roblox_universe_sort_runs" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."roblox_universe_stats_daily" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."roblox_universe_stats_hourly" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "roblox_universe_stats_hourly_select" ON "public"."roblox_universe_stats_hourly" FOR SELECT USING (true);
+
 
 
 ALTER TABLE "public"."roblox_universes" ENABLE ROW LEVEL SECURITY;
@@ -5698,6 +7219,17 @@ GRANT ALL ON FUNCTION "public"."article_generation_queue_idempotency_key"("title
 
 
 
+GRANT ALL ON FUNCTION "public"."avatar_catalog_slugs_for_catalog_item"("p_category" "text", "p_subcategory" "text", "p_asset_type_id" integer) TO "anon";
+GRANT ALL ON FUNCTION "public"."avatar_catalog_slugs_for_catalog_item"("p_category" "text", "p_subcategory" "text", "p_asset_type_id" integer) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."avatar_catalog_slugs_for_catalog_item"("p_category" "text", "p_subcategory" "text", "p_asset_type_id" integer) TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."calculate_roblox_rating_percent"("p_likes" bigint, "p_dislikes" bigint) FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."calculate_roblox_rating_percent"("p_likes" bigint, "p_dislikes" bigint) TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."article_generation_queue" TO "anon";
 GRANT ALL ON TABLE "public"."article_generation_queue" TO "authenticated";
 GRANT ALL ON TABLE "public"."article_generation_queue" TO "service_role";
@@ -5711,9 +7243,39 @@ GRANT ALL ON FUNCTION "public"."claim_article_generation_queue_item"("p_queue_id
 
 
 
+GRANT ALL ON FUNCTION "public"."enqueue_author_revalidation_for_author_id"("p_author_id" "uuid", "p_source" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."enqueue_author_revalidation_for_author_id"("p_author_id" "uuid", "p_source" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."enqueue_author_revalidation_for_author_id"("p_author_id" "uuid", "p_source" "text") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."enqueue_free_items_catalog_scope"("p_category" "text", "p_subcategory" "text", "p_source" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."enqueue_free_items_catalog_scope"("p_category" "text", "p_subcategory" "text", "p_source" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."enqueue_free_items_catalog_scope"("p_category" "text", "p_subcategory" "text", "p_source" "text") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."enqueue_list_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."enqueue_list_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."enqueue_list_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."enqueue_music_revalidation_scope"("p_section" "text", "p_value" "text", "p_source" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."enqueue_music_revalidation_scope"("p_section" "text", "p_value" "text", "p_source" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."enqueue_music_revalidation_scope"("p_section" "text", "p_value" "text", "p_source" "text") TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") TO "anon";
 GRANT ALL ON FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") TO "authenticated";
 GRANT ALL ON FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."enqueue_wiki_revalidation_for_list"("p_list_id" "uuid", "p_source" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."enqueue_wiki_revalidation_for_list"("p_list_id" "uuid", "p_source" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."enqueue_wiki_revalidation_for_list"("p_list_id" "uuid", "p_source" "text") TO "service_role";
 
 
 
@@ -5732,6 +7294,13 @@ GRANT ALL ON FUNCTION "public"."get_items_needing_metrics_calculation"("p_limit"
 GRANT ALL ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) TO "anon";
 GRANT ALL ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) TO "authenticated";
 GRANT ALL ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."invoke_revalidation_worker"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."invoke_revalidation_worker"() TO "anon";
+GRANT ALL ON FUNCTION "public"."invoke_revalidation_worker"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."invoke_revalidation_worker"() TO "service_role";
 
 
 
@@ -5756,6 +7325,17 @@ GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux
 GRANT ALL ON FUNCTION "public"."refresh_search_index_music"() TO "anon";
 GRANT ALL ON FUNCTION "public"."refresh_search_index_music"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."refresh_search_index_music"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."revalidation_slugify"("p_value" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."revalidation_slugify"("p_value" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."revalidation_slugify"("p_value" "text") TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."rollup_roblox_universe_stats_daily"("p_stat_date" "date", "p_finalize" boolean, "p_universe_ids" bigint[]) FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."rollup_roblox_universe_stats_daily"("p_stat_date" "date", "p_finalize" boolean, "p_universe_ids" bigint[]) TO "service_role";
 
 
 
@@ -5801,6 +7381,18 @@ GRANT ALL ON FUNCTION "public"."set_game_published_at"() TO "service_role";
 
 
 
+GRANT ALL ON FUNCTION "public"."set_google_indexing_url_state_updated_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_google_indexing_url_state_updated_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_google_indexing_url_state_updated_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."set_puzzle_page_published_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_puzzle_page_published_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_puzzle_page_published_at"() TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."set_quiz_page_published_at"() TO "anon";
 GRANT ALL ON FUNCTION "public"."set_quiz_page_published_at"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."set_quiz_page_published_at"() TO "service_role";
@@ -5831,6 +7423,12 @@ GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_code"() TO "service_role
 
 
 
+GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_entity"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_entity"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_comments_revalidate_entity"() TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_articles"() TO "anon";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_articles"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_articles"() TO "service_role";
@@ -5840,6 +7438,18 @@ GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_articles"() TO "service
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_authors"() TO "anon";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_authors"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_authors"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_images"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_images"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_images"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_items"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_items"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_avatar_catalog_items"() TO "service_role";
 
 
 
@@ -5903,9 +7513,27 @@ GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_games"() TO "service_ro
 
 
 
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"() TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_music_ids"() TO "anon";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_music_ids"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_music_ids"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_puzzle_answers"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_puzzle_answers"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_puzzle_answers"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_puzzle_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_puzzle_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_puzzle_pages"() TO "service_role";
 
 
 
@@ -6005,6 +7633,12 @@ GRANT ALL ON FUNCTION "public"."trg_search_index_games"() TO "service_role";
 
 
 
+GRANT ALL ON FUNCTION "public"."trg_search_index_puzzle_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_puzzle_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_puzzle_pages"() TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."trg_search_index_quiz_pages"() TO "anon";
 GRANT ALL ON FUNCTION "public"."trg_search_index_quiz_pages"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."trg_search_index_quiz_pages"() TO "service_role";
@@ -6038,6 +7672,11 @@ GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text"
 GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "anon";
 GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "authenticated";
 GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."upsert_roblox_universe_stats_hourly"("p_universe_id" bigint, "p_sampled_at" timestamp with time zone, "p_playing" bigint, "p_visits" bigint, "p_favorites" bigint, "p_likes" bigint, "p_dislikes" bigint, "p_snapshot" "jsonb") FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."upsert_roblox_universe_stats_hourly"("p_universe_id" bigint, "p_sampled_at" timestamp with time zone, "p_playing" bigint, "p_visits" bigint, "p_favorites" bigint, "p_likes" bigint, "p_dislikes" bigint, "p_snapshot" "jsonb") TO "service_role";
 
 
 
@@ -6209,6 +7848,24 @@ GRANT ALL ON TABLE "public"."game_pages_index_view" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."google_indexing_attempts" TO "anon";
+GRANT ALL ON TABLE "public"."google_indexing_attempts" TO "authenticated";
+GRANT ALL ON TABLE "public"."google_indexing_attempts" TO "service_role";
+
+
+
+GRANT ALL ON SEQUENCE "public"."google_indexing_attempts_id_seq" TO "anon";
+GRANT ALL ON SEQUENCE "public"."google_indexing_attempts_id_seq" TO "authenticated";
+GRANT ALL ON SEQUENCE "public"."google_indexing_attempts_id_seq" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."google_indexing_url_state" TO "anon";
+GRANT ALL ON TABLE "public"."google_indexing_url_state" TO "authenticated";
+GRANT ALL ON TABLE "public"."google_indexing_url_state" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."roblox_catalog_items" TO "anon";
 GRANT ALL ON TABLE "public"."roblox_catalog_items" TO "authenticated";
 GRANT ALL ON TABLE "public"."roblox_catalog_items" TO "service_role";
@@ -6218,6 +7875,30 @@ GRANT ALL ON TABLE "public"."roblox_catalog_items" TO "service_role";
 GRANT ALL ON TABLE "public"."limited_items_trading_view" TO "anon";
 GRANT ALL ON TABLE "public"."limited_items_trading_view" TO "authenticated";
 GRANT ALL ON TABLE "public"."limited_items_trading_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."puzzle_answers" TO "anon";
+GRANT ALL ON TABLE "public"."puzzle_answers" TO "authenticated";
+GRANT ALL ON TABLE "public"."puzzle_answers" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."puzzle_pages" TO "anon";
+GRANT ALL ON TABLE "public"."puzzle_pages" TO "authenticated";
+GRANT ALL ON TABLE "public"."puzzle_pages" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."puzzle_pages_view" TO "anon";
+GRANT ALL ON TABLE "public"."puzzle_pages_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."puzzle_pages_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."puzzle_sync_runs" TO "anon";
+GRANT ALL ON TABLE "public"."puzzle_sync_runs" TO "authenticated";
+GRANT ALL ON TABLE "public"."puzzle_sync_runs" TO "service_role";
 
 
 
@@ -6347,6 +8028,12 @@ GRANT ALL ON TABLE "public"."roblox_universe_place_servers" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."roblox_universe_rank_snapshots" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_rank_snapshots" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_rank_snapshots" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."roblox_universe_search_snapshots" TO "anon";
 GRANT ALL ON TABLE "public"."roblox_universe_search_snapshots" TO "authenticated";
 GRANT ALL ON TABLE "public"."roblox_universe_search_snapshots" TO "service_role";
@@ -6380,6 +8067,12 @@ GRANT ALL ON TABLE "public"."roblox_universe_sort_runs" TO "service_role";
 GRANT ALL ON TABLE "public"."roblox_universe_stats_daily" TO "anon";
 GRANT ALL ON TABLE "public"."roblox_universe_stats_daily" TO "authenticated";
 GRANT ALL ON TABLE "public"."roblox_universe_stats_daily" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_stats_hourly" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_stats_hourly" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_stats_hourly" TO "service_role";
 
 
 
@@ -6494,9 +8187,3 @@ ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TAB
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "anon";
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "authenticated";
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES TO "service_role";
-
-
-
-
-
-

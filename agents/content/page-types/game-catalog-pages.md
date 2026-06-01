@@ -134,6 +134,8 @@ For existing pages, compare:
 
 For new game pages, create or update the local dataset as part of the workflow. The model should gather the item list, useful card fields, and image paths before writing final copy. If repeatable collection will matter later, prefer a collector script under `scripts/catalog/collect-<game>-data.ts` instead of one-off manual data.
 
+Gather game catalog item rows through online research and source collection. Use official/developer sources, current community wikis or databases, guides, videos, screenshots, changelogs, and other player-facing sources. Do not use Roblox APIs as the catalog item source of truth; APIs can only help confirm game identity, Roblox metadata, thumbnails, or obvious cross-checks. If an API has no item list, keep researching online instead of marking the catalog blocked.
+
 Write the audit in `research-notes.md`. It should say which data files were checked, which sources disagree, what items are missing or extra, which images are missing, and whether the page is `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`.
 
 If sources disagree, do not pretend the local count is correct. Use judgment, but make the disagreement visible:

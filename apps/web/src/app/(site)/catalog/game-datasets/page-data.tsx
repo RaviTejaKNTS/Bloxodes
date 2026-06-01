@@ -1022,10 +1022,14 @@ const DRESS_TO_IMPRESS_SOURCE_KEYS = [
   "priceStatus",
   "rawAvailability",
   "rawSourceRoute",
+  "rawSourceId",
   "sourcePage",
   "source",
+  "collectionSourcePage",
   "sourceImageFile",
+  "sourceImageMime",
   "sourceImagePage",
+  "sourcePageTitle",
   "secondarySourcePage",
   "sourceNote",
   "wikiUrl",
@@ -1036,6 +1040,20 @@ const DRESS_TO_IMPRESS_SOURCE_KEYS = [
   "sourceConfidence",
   "sourceNotes",
   "sourceStatus",
+  "setPriceValue",
+  "setItemCountValue",
+  "officialPriceInRobux",
+  "officialName",
+  "officialIsForSale",
+  "officialCreated",
+  "officialUpdated",
+  "robloxGamePassId",
+  "robloxProductId",
+  "robloxIconImageAssetId",
+  "variantLightImage",
+  "variantDarkImage",
+  "codeStatus",
+  "liveCodeRows",
   "verificationNote",
   "rawText",
   "rawInfobox",
@@ -1082,6 +1100,26 @@ const DRESS_TO_IMPRESS_CURRENCY_ITEM_SECTION_ORDER = [
   "Removed currency items"
 ];
 
+const DRESS_TO_IMPRESS_FREE_ITEM_SECTION_ORDER = [
+  "Full-body",
+  "Tops",
+  "Skirts",
+  "Pants & Shorts",
+  "Heels & Shoes",
+  "Purses & Bags",
+  "Head Accessories",
+  "Jewelry & Body Wear",
+  "Props",
+  "Hidden Items"
+];
+
+const DRESS_TO_IMPRESS_CODE_ITEM_SECTION_ORDER = [
+  "Creator and influencer code items",
+  "Developer, seasonal, and milestone code items",
+  "Partnership and collaboration code items",
+  "Quest, drop, and special-claim code items"
+];
+
 const DRESS_TO_IMPRESS_RANK_SECTION_ORDER = ["Star ranks", "Unlock items"];
 
 const DRESS_TO_IMPRESS_WALK_PACK_SECTION_ORDER = [
@@ -1107,11 +1145,53 @@ const DRESS_TO_IMPRESS_PATTERN_PACK_SECTION_ORDER = [
   "DLC fashion pattern packs"
 ];
 
+const DRESS_TO_IMPRESS_HAIRSTYLE_SECTION_ORDER = [
+  "Feminine salon hairstyles",
+  "Masculine salon hairstyles",
+  "Bangs",
+  "Reward hairstyles",
+  "Shop and paid set hairstyles",
+  "Code-origin hairstyles"
+];
+
+const DRESS_TO_IMPRESS_MAKEUP_SECTION_ORDER = [
+  "Classic Feminine",
+  "Classic Masculine",
+  "Toy-code presets",
+  "Custom Eyes",
+  "Custom Eyebrows",
+  "Custom Lips",
+  "Custom Contour",
+  "Custom Touches/details",
+  "Makeup rewards",
+  "Makeup packs"
+];
+
+const DRESS_TO_IMPRESS_NAIL_SECTION_ORDER = [
+  "Standard nails",
+  "Reward nails",
+  "Rank nails",
+  "Code-origin nails",
+  "Retired nails"
+];
+
 const DRESS_TO_IMPRESS_REWARD_ITEM_SECTION_ORDER = [
   "Quest and challenge rewards",
   "Style Showdown and mode rewards",
   "Collaboration rewards",
   "Limited and retired event rewards"
+];
+
+const DRESS_TO_IMPRESS_ROBUX_ITEM_SECTION_ORDER = [
+  "Sweet Berry Set",
+  "Queen of Hearts Set",
+  "French Luxury Set",
+  "Haunting Beauty Set",
+  "Rich Girl Set",
+  "Moongazer Set",
+  "Denim Star Set",
+  "Limited Luxury Dress",
+  "Unavailable Robux items"
 ];
 
 const DRESS_TO_IMPRESS_VIP_ITEM_SECTION_ORDER = [

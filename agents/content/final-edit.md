@@ -248,6 +248,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - Hard questions are genuinely pro-level and supported by checked facts, such as exact values, drops, formulas, thresholds, route comparisons, or multi-step reasoning.
 - Question rhythm is varied in a natural way. Normal `What`, `Which`, `Who`, and `Where` questions are allowed, but the pool should not collapse into one repeated sentence shape.
 - Every question has four clean options, every `correctOptionId` exists in its question, and distractors are plausible without being ambiguous.
+- Answer options are balanced inside each question. The correct answer must not be the unique obvious longest or most detailed option, and short joke-like distractors must be rewritten into plausible same-system alternatives.
 - The local `/quizzes/<slug>` route and `/quizzes` index have been rendered when metadata or question pools change.
 
 ## Completion Rule

@@ -1,19 +1,18 @@
 ---
 name: bloxodes-game-page-discovery
-description: Find Bloxodes page opportunities for a specific Roblox game using a two-pass, catalog-led workflow. Use when auditing existing pages; confirming automation-owned codes/events eligibility; discovering durable in-game item catalogs; deciding skip/update/create/blocked/do-not-create status; and deferring wiki, checklist, quiz, tools, and focused evergreen articles until enough catalog/gameplay data exists.
+description: Find the complete Bloxodes page coverage plan for a specific Roblox game. Use when auditing existing pages; deciding which catalog pages, articles, tools, codes page, wiki, checklist, and quiz should exist; identifying pages already covered; and producing a compact table-first research note that names the pages to build without treating missing data as a reason to avoid recommending a page.
 ---
 
 # Bloxodes Game Page Discovery
 
 ## Start Here
 
-Use this skill before creating or rewriting a full game coverage set. It is a planning and research skill, not a final writing skill.
+Use this skill before creating or rewriting a full game coverage set. It is a page-discovery skill: the job is to decide what Bloxodes should cover for the game, what already exists, and what should be built next.
 
 Read:
 
 - `agents/content/research-policy.md`
 - `agents/content/PROCESS.md`
-- `agents/wiki-catalog-workflow.md`
 - the relevant page-type guides under `agents/content/page-types/`
 
 Also use `bloxodes-research` rules for source priority, current-fact verification, and `research-notes.md` standards.
@@ -30,18 +29,24 @@ tmp/content-workspace/<game-slug>/discovery/
 
 Before research starts, copy `agents/content/todo-templates/discovery.md` into that folder as `todo.md` and check off items as the audit progresses.
 
-Do not create `brief.md`, `review.md`, separate fan-out plans, or final page JSON during discovery. The research file is the base for later wiki, codes, catalog, article, checklist, quiz, tool, and events work.
+Do not create `brief.md`, `review.md`, separate fan-out plans, or final page JSON during discovery. The research file is the base for later wiki, codes, catalog, article, checklist, quiz, and tool work.
 
-Discovery stops with recommendations. Do not write final public copy, seed Supabase rows, inject code/event data, or build datasets unless the user explicitly asks for the next page or data step after seeing the discovery plan.
+Discovery stops with recommendations. Do not write final public copy, seed Supabase rows, inject code rows, or build datasets unless the user explicitly asks for the next page or data step after seeing the discovery plan.
 
-## Professional Discovery Shape
+## Discovery Shape
 
-Use two passes for full game coverage:
+Research the game fully enough to answer what Bloxodes should publish around it. Do not stop at surface genre facts, but also do not turn discovery into a data-readiness audit. Missing data is normal. If a page is needed, recommend it and list the data/items that must be gathered later.
 
-1. **Pass 1: catalog-led discovery.** Resolve the game, audit existing Bloxodes coverage, confirm codes/events automation eligibility, then find only durable in-game item collections that can become high-quality catalogs. This pass should end with a ranked catalog/data plan and one first gold-standard catalog.
-2. **Pass 2: page discovery after catalog data.** After the core catalog data has been fetched or built, use that gameplay understanding to decide the wiki hub, checklist, quiz, tools, and focused evergreen article topics.
+Discovery should cover:
 
-Do not brainstorm a broad page list from surface research. If a recommendation depends on item data, gameplay loops, unlock routes, or actual player pain points that have not been researched yet, mark it `blocked until catalog data` or `second-pass only`.
+- exact game identity and ambiguity with similarly named games
+- existing Bloxodes pages and local datasets to skip
+- all catalog pages needed for durable in-game item/system collections
+- all focused article topics that would make coverage feel complete
+- practical tools/calculators/planners/checkers worth building
+- whether a codes page should exist and whether one is already published
+- wiki, checklist, and quiz, which are normally created for every covered game
+- events page status only as `skip events in this workflow`; do not plan event pages here
 
 ## Core Goal
 
@@ -52,14 +57,14 @@ Answer these questions deeply:
 - Which Bloxodes pages already exist for that game?
 - Which existing pages are published and complete enough to skip?
 - Which existing pages are unpublished, thin, stale, missing data, or worth updating?
-- Which missing page types should be created?
+- Which missing page types and topics should be created?
 - Does the game have a real codes system and supported code source wiring, so automation can own code rows?
-- Does the game have real events that Bloxodes can track through automation/imported event rows?
-- Which durable core in-game item collections deserve catalog pages?
-- Which catalogs need data/images before copy can be written?
-- Which catalogs have enough player-useful facts to answer real buy, unlock, upgrade, farm, compare, equip, trade, reach, or use decisions?
-- Which non-catalog pages should wait for the second pass?
-- What catalog should be built first?
+- Which durable in-game item collections need catalog pages?
+- Which items/systems belong inside each catalog?
+- Which experience-style, tutorial, opinionated, or player-question articles should exist without repeating catalogs/wiki/codes?
+- Which tools can exist because they have a real input/output job?
+- Which pages should be skipped because they already exist?
+- Which catalog should be researched and built first?
 
 ## Resolve The Game First
 
@@ -78,6 +83,8 @@ Record:
 - official social/developer links if available
 - likely ambiguity with similarly named games
 
+Roblox API checks in discovery are only for identity and metadata. Do not use API item availability to decide catalog coverage, because game catalog item rows must be found through online research and source gathering.
+
 If the request names a game loosely, verify the exact target with current sources. Do not merge pages for games that only share a name pattern, such as `RIVALS`, `Blue Lock Rivals`, and `Racket Rivals`.
 
 ## Audit Existing Bloxodes Coverage
@@ -90,7 +97,6 @@ Check every relevant page type:
 
 - codes page in `games`
 - wiki page in `wiki_pages`
-- event records or event pages
 - checklist page and items
 - quiz page and local quiz data
 - tools linked by universe ID or game slug
@@ -100,15 +106,16 @@ Check every relevant page type:
 - local datasets in `data/<Game>/` and `apps/web/src/data/`
 - local route/config support, especially `apps/web/src/lib/game-dataset-catalogs.ts`
 
-For each page, assign one status:
+Use these labels in the discovery tables:
 
-- `skip` - published, correctly linked, and complete enough for the current scope
-- `update` - exists but is stale, thin, unpublished, missing data, weakly linked, or not aligned with current standards
-- `create` - useful page does not exist
-- `do not create` - no real in-game system or source support justifies the page
-- `blocked` - useful page exists as an idea but sources, data, permissions, or route support are not enough yet
+- `[we already have a page]` - published or existing coverage is already present; note if it needs an update in the next-action column.
+- `[must create]` - highest-priority page needed for complete game coverage.
+- `[have to create]` - useful page needed after the must-create items.
+- `[create]` - only for wiki, checklist, and quiz when missing.
+- `[does not have codes system]` - codes-only label when no real code system exists.
+- `[no tool recommended]` - tools-only label when research finds no real tool use case.
 
-Do not mark a page `skip` just because a row exists. Check whether it is published, linked to the correct universe, has useful copy/data, and still matches current facts.
+Do not mark a page `[we already have a page]` just because a row exists. Check whether it is published, linked to the correct universe, has useful copy/data, and still matches current facts.
 
 ## Codes Eligibility
 
@@ -128,7 +135,7 @@ Codes pages are automation-owned. The discovery output may recommend creating or
 Recommended result shape:
 
 ```markdown
-Codes page: create | update | skip | do not create | blocked
+Codes page: [must create] | [have to create] | [we already have a page] | [does not have codes system]
 Reason:
 Roblox URL:
 RobloxDen:
@@ -136,26 +143,19 @@ Beebom:
 Refresh action:
 ```
 
-## Events Eligibility
+## Events
 
-Only recommend an events page or event records when the game has meaningful events that can be tracked from stable sources.
+Do not plan event pages in this workflow. Record one short note if the game has visible event evidence, then move on. Event-page work uses its own events workflow later.
 
-Check:
-
-- Roblox API metadata and description for active event language
-- developer posts, Discord, X/Twitter, YouTube, Trello, changelogs, or official docs
-- community wiki/event pages when official sources are incomplete
-- existing local event records and route behavior
-
-Do not create event coverage only because a game updates often. Events need trackable names, phases, rewards, mechanics, or timeline rows from `roblox_virtual_events` or another approved importer. If event data cannot be automated or imported reliably, mark the work `blocked` or `do not create`.
-
-Events pages are automation-owned. Discovery may recommend refreshing or importing event rows, but it must not write current event rows, live event status, dates, reward timelines, or one-off event claims into page copy. Public `events_pages.content_md` should be evergreen orientation around the game's event system and the automated timeline surface.
-
-## Catalog Discovery
+## Catalog Pages
 
 Catalog discovery is the most important part of this skill.
 
-Find durable in-game item collections that players can collect, compare, unlock, farm, buy, roll, craft, equip, fight, visit, or use repeatedly. Catalogs should be built around core evergreen game systems, not every temporary reward list that happens to exist. Good catalog candidates include:
+Find every durable in-game item collection that Bloxodes should cover so the game feels complete. A catalog recommendation does not require the dataset to already exist. It does require enough research to believe the item/system exists and belongs on its own page.
+
+Use online research for catalog discovery: official/developer sources, Roblox experience pages, community wikis or databases, guides, videos, screenshots, changelogs, and competitor/source pages. Do not drift into Roblox APIs for item rows. API gaps are not catalog blockers; put the needed online data/source work in the next-action column.
+
+Good catalog candidates include:
 
 - weapons, guns, swords, abilities, spells, styles, fruits, races, clans, traits, perks
 - pets, eggs, crops, seeds, materials, fish, bosses, enemies, drops, islands, locations, maps
@@ -180,55 +180,57 @@ Do not make catalog pages for weak or temporary surfaces:
 - generic social links
 - raw Roblox thumbnails/media
 
-For each catalog candidate, record:
+For each catalog candidate, record in a compact table:
 
 - recommended route: `/wiki/<game-slug>/<collection-slug>`
 - stable code: `<game-slug>-<collection-slug>`
-- source count and source names, if available
-- local dataset path, if it exists
-- local item count
-- rendered card/table count, if route exists
-- title count, if page exists
-- image coverage expectation and known gaps
-- primary player task and required facts needed to satisfy it
-- source-backed useful facts missing from local data, such as prices, currencies, shops, damage, upgrade paths, chances, requirements, locations, roles, limits, or availability
-- competitor/source usefulness notes when search potential matters
-- whether the collection is current, retired, event-limited, premium, trade-only, mode-specific, or unclear
-- strongest evergreen grouping axis, such as slot, rarity, source, location, unlock route, shop, tier, world, mode, role, or item type
-- likely card fields and what each means to players
-- raw fields to hide
-- whether route/config/data/image work is needed
-- status: `skip`, `update`, `create`, `blocked`, or `do not create`
+- status: `[must create]`, `[have to create]`, or `[we already have a page]`
+- what items/systems belong inside it
+- why players need it
+- likely card fields and grouping axis
+- existing page/data status, if any
+- next data/source task
 
-Be deep, not bloated. Bloxodes should cover detailed games thoroughly, but a catalog candidate must be a real durable in-game collection with facts that can help players act. Separate `core catalog`, `later after data`, `UGC exception`, `second-pass only`, and `do not create` instead of padding the plan with temporary rewards or generic systems.
+Do not label needed catalogs as blocked because data must be gathered. Put the data work in the next-action column. Only omit a catalog idea when it is not a real durable item/system collection.
 
-## Tools, Checklists, Quizzes, And Articles
+## Articles
 
-Recommend these only when they have a real player use.
+Articles should make the game feel fully covered beyond database pages. They can be opinionated, experience-based, communicative, tutorial-style, or route/advice driven, but they must not repeat what a catalog, wiki, codes page, checklist, quiz, or tool already covers better.
 
-Tools:
+Good article candidates include:
 
-- Use a hard gate. Research whether players or competing sites already use a calculator, planner, tracker, optimizer, converter, or checker for this game mechanic.
+- which item/ability/weapon/map to prioritize first
+- how to play a mode or role well
+- how to complete a specific durable objective
+- how to farm or progress through a stable system
+- mistakes new players make
+- comparison or recommendation topics based on experience and data
+
+Avoid generic beginner guides, update/news articles, event timelines, and broad catalog explanations.
+
+For each article candidate, record:
+
+- status: `[must create]`, `[have to create]`, or `[we already have a page]`
+- title/angle
+- reader question
+- why it does not repeat another page
+- sources/data needed
+
+## Tools
+
+Use a hard gate. Research whether players or competing sites already use a calculator, planner, tracker, optimizer, converter, or checker for this game mechanic.
+
 - Recommend a tool only when it has a real input/output job, enough reliable data or formula support, and clear player value beyond a catalog or article.
 - Do not recommend a tool just to duplicate a catalog.
-- If the idea is plausible but unproven, put it under `potential future tools`, not `create`.
+- If no real tool exists, say `[no tool recommended]`.
 
-Checklist:
+## Wiki, Checklist, And Quiz
 
-- Usually one combined checklist per game.
-- Recommend `create` or `update` when the game has progression, unlocks, collections, bosses, maps, quests, tasks, ranks, or repeatable goals worth tracking.
+Wiki, checklist, and quiz are common game-coverage pages.
 
-Quiz:
-
-- Usually one combined quiz per game.
-- Recommend after enough stable facts exist for easy/medium/hard questions.
-- Mark `blocked` if the game is too volatile or lacks reliable facts.
-
-Articles:
-
-- Recommend only focused evergreen topics that do not overlap codes, events, wiki hubs, or catalog pages.
-- Avoid generic beginner guides. Avoid codes troubleshooting, event articles, update-timeline articles, and broad "maps/skins/items explained" topics that a catalog or wiki page should cover.
-- Good article candidates answer a narrow player job after catalog data is understood: how to get a specific item, how to complete a specific quest/objective, how a specific mode or map works, how to unlock a durable mechanic, how to farm a stable resource, or how to solve a specific evergreen gameplay problem.
+- Use `[create]` when missing.
+- Use `[we already have a page]` when existing.
+- Do not defer these in discovery. If they need data later, list that in next action.
 
 ## Research Notes Shape
 
@@ -240,59 +242,47 @@ Use this structure for `research-notes.md`:
 Date: YYYY-MM-DD
 Page Type: game-page-discovery
 Target: /wiki/<game-slug> and related pages
-Status: researching | needs data update | needs verification | ready for first page
+Status: researching | complete
 
 ## Game identity
 
-Canonical game, universe ID, place ID, creator, official links, description, timestamps, and ambiguity notes.
-
-## What players do in this game
-
-Explain the real gameplay loop and why players return.
+One compact row or bullet list with canonical game, universe ID, place ID, creator, official URL, and ambiguity notes.
 
 ## Existing Bloxodes coverage audit
 
-Coverage matrix with one row per page type or existing page. Include status, current evidence, gaps, and next action.
+Small table with page type, status label, existing page/data evidence, and next action.
 
-## Codes eligibility
+## Codes page
 
 Evidence for or against a codes page. Include RobloxDen and Beebom status. No manual codes.
 
-## Events eligibility
+## Catalog pages
 
-Evidence for or against event coverage. Include automation/import path, source quality, and whether dates/rewards belong in timeline rows instead of evergreen copy.
+Table of all catalog pages needed. Include route/code, status label, items included, why players need it, fields/grouping, existing data/page, and next action.
 
-## Catalog discovery
+## Article pages
 
-Deep list of durable core in-game item collections. Include proposed route, code, source count, local data state, image state, primary player task, required facts, missing useful facts, grouping axis, card fields, and status. Mark temporary rewards, current season/event rewards, and generic progression systems as `do not create` or `second-pass only`.
+Table of all article topics needed. Include status label, title/angle, reader question, why it does not repeat another page, and source/data needs.
 
-## Tools opportunities
+## Tools
 
-Only practical calculators/planners/trackers with real input and output logic, reliable data/formulas, and evidence that players need the tool. Otherwise hard-pass or mark as potential future.
+Table of practical tool ideas, or `[no tool recommended]` with a reason.
 
-## Checklist plan
+## Wiki, checklist, quiz
 
-Whether a checklist should exist, the major sections it would track, and any blockers.
+Small table with each page and `[create]` or `[we already have a page]`.
 
-## Quiz plan
+## Events
 
-Whether a quiz should exist, likely question areas, and whether facts are stable enough.
-
-## Article opportunities
-
-Specific evergreen article titles or angles, with the narrow reader question each would answer and the page type it does not overlap.
+One-line note: skipped in this workflow.
 
 ## Recommended build order
 
-Ranked two-pass sequence with reasons. Name the first gold-standard catalog and what data must be fetched before second-pass page recommendations.
+Ranked page build order. Start with must-create catalog and codes/wiki/checklist/quiz decisions, then have-to-create catalogs/articles/tools.
 
-## Missing or uncertain facts
+## Source notes
 
-Unverified counts, stale source risks, missing source URLs, data/image gaps, route blockers, and facts needing current verification.
-
-## Sources checked
-
-Official Roblox/API, developer sources, community sources, local files, Supabase rows/views, and docs checked.
+Compact source list and unresolved ambiguity.
 ```
 
 ## Build Order Rules
@@ -300,23 +290,24 @@ Official Roblox/API, developer sources, community sources, local files, Supabase
 Prefer this order unless the game demands otherwise:
 
 1. Resolve game identity and universe ID.
-2. Audit existing Bloxodes pages.
-3. Decide codes and events automation eligibility without writing live data.
-4. Discover durable core in-game catalogs and reject temporary/weak catalog ideas.
-5. Pick one gold-standard catalog and define the data/image/useful-facts action needed.
-6. Defer wiki, checklist, quiz, tools, and articles that depend on catalog understanding to second-pass discovery unless the evidence is already strong.
-7. Return the ranked catalog-first plan and stop.
+2. Audit existing Bloxodes pages and local datasets.
+3. Decide whether a codes page should exist without writing live code rows.
+4. List every catalog page needed, including what items belong inside each one.
+5. List article topics that complete coverage without repeating catalogs/wiki/codes.
+6. List tool opportunities with real input/output value.
+7. Mark wiki, checklist, and quiz as `[create]` or `[we already have a page]`.
+8. Return a compact table-first plan and stop.
 
 For most new games, the first useful work is:
 
 - codes page, only when eligible
-- events page, only when automation/imported event rows support it
-- one gold-standard catalog with strong data
-- wiki hub after at least one core catalog or strong game-system understanding exists
-- checklist after enough systems are known from data
-- quiz after enough stable facts exist
+- wiki hub
+- checklist
+- quiz
+- first must-create catalog
+- remaining must-create/have-to-create catalogs
 - tools only after a hard-gated use case is proven
-- articles only after catalogs reveal narrow non-overlapping evergreen search intents
+- articles that add experience, advice, tutorials, or opinionated guidance without repeating page types
 
 For catalog-heavy games, the first gold-standard page should usually be the core evergreen collection with the clearest player decision and best source data, not necessarily the largest collection.
 
@@ -325,14 +316,14 @@ For catalog-heavy games, the first gold-standard page should usually be the core
 Return a concise summary of:
 
 - canonical game and universe ID
-- existing pages to skip
-- pages to update
-- pages to create
-- pages not recommended and why
-- catalog opportunities, grouped by priority
-- codes/events eligibility
-- first recommended catalog/data step to build next
-- what must wait for second-pass discovery
+- pages we already have
+- pages to create, grouped by page type
+- all catalog pages and items/systems they should include
+- article topics
+- tool ideas
+- codes-page decision
+- wiki/checklist/quiz decision
+- first catalog/page to build next
 - research notes path
 
 Keep the detailed evidence in `research-notes.md`.

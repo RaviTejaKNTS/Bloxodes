@@ -48,6 +48,8 @@ Then inspect the implementation context: local datasets, target Supabase rows, r
 
 For catalog and game-catalog pages, inspect the data as part of research. Count the local items, compare current source counts, check the rendered card count and title count when the page already exists, and count image coverage when images matter. Also complete a player-usefulness gate and required fact matrix: what the player came to do, which facts are needed, whether sources support those facts, whether local data/cards include them, and where the finished page will show them. If sources show more items than the local dataset, expected images are missing, or player-useful facts are source-backed but absent locally, record the gap and mark the notes `needs data update` instead of pushing ahead to final copy.
 
+For game catalog datasets, gather item rows through online research and source collection. Use official/developer sources, community wikis or databases, guides, videos, screenshots, changelogs, and other player-facing sources to build or repair the local dataset. Do not default to Roblox APIs for catalog items; APIs may support game identity, Roblox metadata, thumbnails, or ID cross-checks only. Missing API item rows are not a blocker when online sources can provide the collection.
+
 For game-specific catalog ideas, keep the scope to durable in-game item collections. Reject current season pass reward tracks, one-off event reward lists, current ranked season rewards, broad update summaries, gamepasses, badges, servers, developer products, and raw Roblox media. If an event or season creates permanent items, put those items inside the durable collection and mark source/availability there. UGC is a special exception only when the game has meaningful UGC items and should use the free Roblox items card pattern.
 
 Build the page structure inside the notes. This is not a formality. The outline should show the reader goal, the in-game task, the questions the page must answer, the required facts that support those answers, the order that will make sense, which details should be cut, and where a table, bullet list, numbered list, or short paragraph will explain the idea best.
@@ -76,7 +78,7 @@ Good research reads like someone genuinely learned the topic. It does not sound 
 
 For catalog research, good research also proves the data can carry the page. It says whether the local dataset is complete enough, whether images are wired, and whether the renderer will show the same sections and fields the page is about to explain.
 
-Prefer local datasets, Supabase rows, official Roblox APIs, Roblox pages, and developer sources. Use community wikis when official details are incomplete, but keep unstable claims checked against the best current source you can find.
+Prefer local datasets, Supabase rows, Roblox experience pages, developer sources, and current online source gathering. Use Roblox APIs only for game identity, Roblox metadata, thumbnails, or cross-checks unless a page type explicitly says otherwise. For game catalog item rows, online research is the required path; API absence does not block dataset creation.
 
 For multi-page jobs, one page still gets one research file. Shared game-level notes can support the work, but they do not replace page-specific research.
 

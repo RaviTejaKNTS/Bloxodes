@@ -58,11 +58,12 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 ### Game wiki and catalog pages
 
 1. Follow `agents/wiki-catalog-workflow.md`.
-2. Before writing, complete the player-usefulness gate, required fact matrix, and data/image audit. Do not write around source-backed facts that are missing locally.
-3. Seed and preview `wiki_pages` and `catalog_pages` locally before production.
-4. Keep catalog codes in `<game-slug>-<collection-slug>` format.
-5. Verify local dataset images, item counts, useful card fields, metadata, sitemaps, search, and revalidation before publishing.
-6. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
+2. Gather game catalog item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a catalog because an API does not expose item rows.
+3. Before writing, complete the player-usefulness gate, required fact matrix, and data/image audit. Do not write around source-backed facts that are missing locally.
+4. Seed and preview `wiki_pages` and `catalog_pages` locally before production.
+5. Keep catalog codes in `<game-slug>-<collection-slug>` format.
+6. Verify local dataset images, item counts, useful card fields, metadata, sitemaps, search, and revalidation before publishing.
+7. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
 
 ### Codes pages
 

@@ -204,6 +204,36 @@ const WIKI_COPY: Record<string, WikiCopy> = {
 - Claim index rewards as collection milestones across Basic, Big, Huge, Shiny, and Inverted tracks. Those rewards can feed the next roll, fight, item window, or rebirth push.`,
     controlsJson: []
   },
+  "1-speed-keyboard-escape": {
+    metaDescription:
+      "+1 Speed Keyboard Escape wiki hub for codes, trails, auras, stages, treadmills, rebirth tips, and Roblox game details.",
+    tipsMd: `- Build Speed before forcing a stage, but learn each route at a controllable pace first. High Speed helps you cross gaps, yet it can also send you back to the start faster if you hold a direction too long.
+- Rebirth when the game offers it and the multiplier is your next real progress step. The reset hurts for a moment, but the permanent bonus makes later Speed grinding easier.
+- Treat Wins as upgrade currency before convenience currency. Teleports help once you already know a route, while Trails and Auras affect how quickly your Speed grows afterward.
+- Use treadmills when you are short of a stage recommendation or rebuilding after a rebirth, then return to stage clears when you need Wins.
+- In tight turns, maze sections, or chaser routes, use short movement taps instead of holding a key through every corner.`,
+    controlsJson: [
+      {
+        action: "Move",
+        desktop: "W / A / S / D or arrow keys"
+      },
+      {
+        action: "Jump",
+        desktop: "Space"
+      },
+      {
+        action: "Adjust camera",
+        desktop: "Hold right mouse button and drag"
+      },
+      {
+        action: "Zoom camera",
+        desktop: "Mouse wheel"
+      }
+    ],
+    coverImage: null,
+    gameDescriptionMd:
+      "+1 Speed Keyboard Escape | Candy & Chocolate is an incremental obby where every step builds Speed. You run and jump across candy-and-chocolate keyboard routes, then try to clear stage sections without losing control and being sent back to the start.\n\nProgress comes from more than walking. Stage clears feed Wins, Wins connect into upgrade choices, and Rebirths turn a reset into a stronger long-term Speed multiplier. Trails, Auras, and Treadmills all sit around that same loop: they help you rebuild faster, push into harder routes, or train Speed when active stage runs start to stall.\n\nThe smartest path is to understand the loop before spending. Build enough Speed for the route in front of you, use Wins on upgrades that keep helping after the next run, and treat exact item bonuses or treadmill options as details to compare before committing."
+  },
   "kick-a-lucky-block": {
     metaDescription:
       "Kick a Lucky Block wiki hub with brainrots, mutations, weights, zones, Roblox details, and progression tips.",

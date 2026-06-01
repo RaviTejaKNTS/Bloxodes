@@ -14,12 +14,14 @@ Prefer sources in this order:
 
 1. Local structured datasets in `data/` and `apps/web/src/data/`.
 2. Supabase rows and views for the target page.
-3. Official Roblox APIs and Roblox experience pages.
+3. Roblox experience pages and official Roblox APIs for universe identity, Roblox metadata, thumbnails, and cross-checks.
 4. Official developer pages, groups, Discord announcements, X/Twitter, YouTube, Trello, changelogs, or docs.
 5. Established game wikis or community databases when official data is incomplete.
 6. Other code sites or fan pages only as cross-checks, never as sole authority for important facts.
 
 For unstable facts, browse or query current data. Do not rely on memory.
+
+For game catalog datasets, the required path is online research and source gathering. Build item rows from official/developer sources, current community wikis or databases, guides, videos, screenshots, update notes, and other player-facing sources. Do not drift into treating Roblox APIs as the item source of truth; APIs are helpers for identity and metadata only. Never block a catalog page because an API does not expose the in-game item list.
 
 ## One-Page Gold Standard
 
@@ -46,7 +48,7 @@ tmp/content-workspace/<game-or-topic-slug>/<page-folder>/
 
 For game discovery, use `tmp/content-workspace/<game-slug>/discovery/` and omit `final.json` unless a later workflow explicitly needs it. Copy the matching tracker from `agents/content/todo-templates/` into the folder as `todo.md` before research starts.
 
-For full game coverage, use two passes. Pass 1 is catalog-led: resolve the game, audit existing coverage, verify automation-owned codes/events eligibility, and find durable core in-game item collections. Pass 2 happens after core catalog data exists and uses that data to decide wiki, checklist, quiz, tools, and focused evergreen articles. If a recommendation depends on item data that has not been researched yet, mark it `blocked until catalog data` instead of guessing.
+For full game coverage, discovery should produce a compact page map, not a data-readiness report. Resolve the game, audit existing coverage, decide whether a codes page should exist, list every catalog page needed for durable in-game item collections, list article topics that complete coverage without repeating other page types, identify any real tool opportunities, and mark wiki/checklist/quiz as create or already covered. If a needed page requires item data, images, or route work, recommend the page and record that work as the next action instead of marking the idea blocked. Event pages are handled by the events workflow, not by game-page discovery.
 
 ## Research Notes Must Be Human Notes
 
@@ -202,6 +204,8 @@ The notes should explain the collection itself before they explain fields.
 For game-specific catalogs, reject weak scopes before data work starts. Catalogs should cover durable in-game item collections, not current season pass reward tracks, one-off event reward lists, current ranked season rewards, broad update summaries, gamepasses, badges, servers, developer products, or raw Roblox media. Event/season-origin items belong inside the durable collection they are part of, with source and availability recorded there. UGC is a special exception only when the game has meaningful UGC items and should follow the free Roblox items card pattern.
 
 Run the data and image audit before proposing final copy. Compare local item count with current source counts, page title count, and rendered card count. If a source shows more items than local data, list the missing names and mark the work `needs data update` instead of writing around the gap. If images matter for the collection, count missing images and say whether they can be found locally, need to be gathered, or should be intentionally left blank.
+
+For game-specific catalogs, source counts and missing item names must come from online research, not from Roblox API availability. Roblox APIs may confirm the game/universe or provide Roblox metadata, but they do not decide whether the catalog data can be gathered.
 
 Run the player-usefulness gate before the section proposal. A catalog page should not only list items; it should help the player buy, unlock, compare, upgrade, farm, equip, trade, find, or understand the collection. If important facts such as prices, shop/NPC names, damage values, chances, upgrade steps, locations, route order, requirements, or availability exist in reliable sources but are absent locally, update the dataset or mark the page blocked before writing.
 

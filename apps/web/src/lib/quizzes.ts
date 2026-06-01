@@ -46,12 +46,15 @@ const QUIZ_SELECT_FIELDS_BASE =
 
 const QUIZ_DATA_MAP: Record<string, string> = {
   "wizard-alchemy": repoPath("data", "Wizard Alchemy", "quiz.json"),
+  "jujutsu-shenanigans": repoPath("data", "Jujutsu Shenanigans", "quiz.json"),
   "the-forge": repoPath("data", "The Forge", "quiz.json"),
   "grow-a-garden": repoPath("data", "Grow a Garden", "quiz.json"),
   "slime-rng": repoPath("data", "Slime RNG", "quiz.json"),
   "rivals": repoPath("data", "RIVALS", "quiz.json"),
+  "survive-zombie-arena": repoPath("data", "Survive Zombie Arena", "quiz.json"),
   "murderers-vs-sheriffs": repoPath("data", "Murderers VS Sheriffs", "quiz.json"),
-  "1-speed-keyboard-escape": repoPath("data", "+1 Speed Keyboard Escape", "quiz.json")
+  "1-speed-keyboard-escape": repoPath("data", "+1 Speed Keyboard Escape", "quiz.json"),
+  "99-nights-in-the-forest": repoPath("data", "99 Nights in the Forest", "quiz.json")
 };
 
 function normalizeCode(value: string): string {

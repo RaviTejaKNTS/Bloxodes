@@ -50,6 +50,11 @@ type ChecklistFinal = {
   }>;
 };
 
+type LegacyChecklistFinal = {
+  checklist_pages: ChecklistFinal["page"];
+  checklist_items: ChecklistFinal["items"];
+};
+
 type QuizFinal = {
   page: {
     universe_id?: number | null;
@@ -130,6 +135,23 @@ function isArticleFinal(value: unknown): value is ArticleFinal {
 function isChecklistFinal(value: unknown): value is ChecklistFinal {
   const candidate = value as Partial<ChecklistFinal>;
   return Boolean(candidate?.page?.slug && candidate?.page?.title && Array.isArray(candidate.items));
+}
+
+function isLegacyChecklistFinal(value: unknown): value is LegacyChecklistFinal {
+  const candidate = value as Partial<LegacyChecklistFinal>;
+  return Boolean(
+    candidate?.checklist_pages?.slug &&
+      candidate?.checklist_pages?.title &&
+      Array.isArray(candidate.checklist_items)
+  );
+}
+
+function normalizeChecklistFinal(finalJson: ChecklistFinal | LegacyChecklistFinal): ChecklistFinal {
+  if ("page" in finalJson) return finalJson;
+  return {
+    page: finalJson.checklist_pages,
+    items: finalJson.checklist_items
+  };
 }
 
 function isQuizFinal(value: unknown): value is QuizFinal {
@@ -396,7 +418,8 @@ async function importArticle(finalJson: ArticleFinal, dryRun: boolean) {
   console.log(existing ? `Updated article ${slug}` : `Created article ${slug}`);
 }
 
-async function importChecklist(finalJson: ChecklistFinal, dryRun: boolean) {
+async function importChecklist(rawFinalJson: ChecklistFinal | LegacyChecklistFinal, dryRun: boolean) {
+  const finalJson = normalizeChecklistFinal(rawFinalJson);
   const sb = supabaseAdmin();
   const page = finalJson.page;
   const slug = page.slug.trim().toLowerCase();
@@ -504,7 +527,7 @@ async function main() {
     const value = await readJson(file);
     if (isArticleFinal(value)) {
       await importArticle(value, options.dryRun);
-    } else if (isChecklistFinal(value)) {
+    } else if (isChecklistFinal(value) || isLegacyChecklistFinal(value)) {
       await importChecklist(value, options.dryRun);
     } else if (isQuizFinal(value)) {
       await importQuiz(value, options.dryRun);

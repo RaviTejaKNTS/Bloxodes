@@ -140,6 +140,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Local Slime RNG game datasets for wiki/catalog page work, including slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.
   - `quiz.json` is the local question pool for `/quizzes/slime-rng`; follow `agents/content/page-types/quizzes.md` when editing it.
   - Matching source-provided images live under `apps/web/public/Slime RNG/`. Rebirth and index reward rows are text-only because the source data is milestone-based rather than item-image based.
+- `data/99 Nights in the Forest/*.json`
+  - Local 99 Nights in the Forest game datasets for wiki/catalog page work, including classes, crafting, materials, weapons, tools, food, tameable animals, entities, locations, and quiz content.
+  - `quiz.json` is the local question pool for `/quizzes/99-nights-in-the-forest`; use the `QuizData` shape with 10 easy, 10 medium, and 10 hard questions when possible.
+  - Keep quiz questions tied to stable survival, crafting, rescue, class, taming, weapon, material, and route facts. Do not store active codes, live event statuses, temporary reward tracks, or unresolved disputed facts here.
 - `data/Kick a Lucky Block/*.json`
   - Local Kick a Lucky Block game datasets for wiki/catalog page work, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki catalogs.
   - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.

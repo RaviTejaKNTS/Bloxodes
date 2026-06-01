@@ -38,6 +38,12 @@ Adjust the rows to the collection. A weapons page may need damage, price, curren
 
 When search traffic matters or a user asks whether a page is worth writing, inspect top useful competitor/source pages as a coverage check. Do not copy their prose. Record which player tasks they answer, what useful facts or sections they include, where Bloxodes will match or beat them, and where the local data is weaker. If a competitor answers a core player action that Bloxodes does not, the page is not ready for final writing.
 
+## Quiz Answer Option Gate
+
+For quiz pages, research-backed facts are not enough. The answer choices must also be fair as a playable test. Do not let the correct answer stand out because it is the only long, detailed, qualified, or game-specific option. Distractors should usually come from the same system and use comparable specificity: other costs for a cost question, other routes for a route question, other stage counts for a taming question, other stats for a weapon question, and other mechanics for a mechanic question.
+
+Before calling a quiz ready, check the question pool for answer tells. If the correct answer is the unique obvious longest option, or if the wrong answers are short joke labels beside a precise correct answer, rewrite the options. The player should have to know the game, not read the formatting.
+
 ## Non-Negotiable Standard
 
 Do one page well before doing many pages.
@@ -46,7 +52,9 @@ No batch rewriting until one page has become the gold standard and the user has 
 
 After a gold-standard game catalog is approved and the user asks for an approved multi-catalog run, use `bloxodes-catalog-batch-runner` with `agents/content/todo-templates/catalog-batch.md`. The batch runner coordinates one catalog page per subagent, but each page still needs its own research notes, data/image audit, FLOW pass, final edit, and parent QA.
 
-For full game coverage, use a two-pass discovery process. Pass 1 is catalog-led: resolve the game, audit existing Bloxodes coverage, confirm codes/events automation eligibility, and identify the durable in-game item collections that can become real catalogs. Build or plan the catalog data first. Pass 2 happens after the core catalog data exists: use the item data and gameplay understanding to decide the wiki hub, checklist, quiz, tools, and focused evergreen articles. Do not let first-pass discovery become a loose list of page ideas.
+For full game coverage, discovery is a compact page map. Resolve the game, audit existing Bloxodes coverage, decide whether a codes page should exist, list every catalog page needed for durable in-game item collections, list article topics that complete coverage without repeating other page types, identify any real tool opportunities, and mark wiki/checklist/quiz as create or already covered. Do not treat missing catalog data as a reason to avoid recommending a needed page; record the item/source/image work as the next action. Event pages are handled by the events workflow, not by game-page discovery.
+
+Catalog item rows are gathered through online research and source collection, not Roblox APIs. Use developer sources, Roblox experience pages, community wikis/databases, guides, videos, screenshots, changelogs, and competitor/source pages to build or repair the local dataset. Roblox APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks. Missing API item rows must never be used as a reason to block, skip, or shrink a needed catalog.
 
 Codes and events are automation-owned page families. The page copy is evergreen orientation only. Never manually inject current code rows, expired code rows, current event rows, event statuses, dates, reward timelines, or "latest/current" claims into public prose or JSON. Codes come from the code refresh pipeline. Event timelines come from `roblox_virtual_events` or another approved importer.
 

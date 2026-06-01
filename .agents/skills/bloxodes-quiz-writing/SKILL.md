@@ -98,6 +98,8 @@ Question rhythm should feel natural across the pool. Mix plain `What`, `Which`, 
 
 Answer options should be clean and plausible. Use wrong answers from the same game system when possible, and avoid ambiguity. The UI shuffles options, but the source file should still avoid obvious correct-answer patterns.
 
+Balance answer length and specificity. Do not make the correct answer the only long, detailed, qualified option while the distractors are short or silly. If one option names exact costs, stages, routes, or mechanics, the wrong options should usually name comparable costs, stages, routes, or mechanics too. A player should need game knowledge to choose, not a guess that the longest answer is probably right.
+
 ## Final Checks
 
 Before calling a quiz ready:
@@ -108,6 +110,7 @@ Before calling a quiz ready:
 - Each difficulty has the intended question count.
 - Every question has four options.
 - Every `correctOptionId` exists in that question's options.
+- No question has the correct answer as the unique obvious longest option, and distractors are comparable in detail to the correct answer.
 - Easy questions are actually easy.
 - Medium questions are not throwaway beginner prompts.
 - Hard questions are pro-level and supported by checked facts.
