@@ -744,24 +744,44 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
   noStore();
   const sb = supabaseAdmin();
   const numericSlug = Number(slug);
-  const slugFilter = Number.isFinite(numericSlug) ? `slug.eq.${slug},universe_id.eq.${numericSlug}` : `slug.eq.${slug}`;
+  const fields = `
+    universe_id, root_place_id, name, display_name, slug, description,
+    creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
+    icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
+    stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+    last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
+    console_enabled, vr_enabled
+  `;
+
+  if (Number.isFinite(numericSlug)) {
+    const { data, error } = await sb
+      .from("roblox_universes")
+      .select(fields)
+      .eq("universe_id", numericSlug)
+      .limit(1)
+      .maybeSingle();
+    if (error) throw error;
+    if (data) return buildStatsGameDetail(data as UniverseRow);
+  }
+
   const { data, error } = await sb
     .from("roblox_universes")
-    .select(`
-      universe_id, root_place_id, name, display_name, slug, description,
-      creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
-      icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-      stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
-      last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
-      console_enabled, vr_enabled
-    `)
-    .or(slugFilter)
+    .select(fields)
+    .eq("slug", slug)
+    .order("visits", { ascending: false, nullsFirst: false })
+    .order("playing", { ascending: false, nullsFirst: false })
+    .order("last_stats_refreshed_at", { ascending: false, nullsFirst: false })
+    .order("universe_id", { ascending: true })
     .limit(1)
     .maybeSingle();
   if (error) throw error;
   if (!data) return null;
 
-  const baseGame = (await attachGrowth([mapUniverse(data as UniverseRow)]))[0];
+  return buildStatsGameDetail(data as UniverseRow);
+}
+
+async function buildStatsGameDetail(row: UniverseRow): Promise<StatsGameDetailData> {
+  const baseGame = (await attachGrowth([mapUniverse(row)]))[0];
   const [charts, relatedLinks, sameCreator, similarGames, includedInLists, globalRank] = await Promise.all([
     getStatsGameCharts(baseGame.universeId),
     loadRelatedLinks(baseGame.universeId, baseGame),
