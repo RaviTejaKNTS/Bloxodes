@@ -3,6 +3,7 @@ import * as cheerio from "cheerio";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 type AnyRecord = Record<string, unknown>;
+type PuzzleId = string | number | null;
 type PuzzleSlug =
   | "wordle"
   | "connections"
@@ -158,6 +159,11 @@ function normalizeLetterList(values: unknown) {
   return Array.isArray(values) ? values.map((value) => String(value ?? "").trim().toUpperCase()).filter(Boolean) : [];
 }
 
+function normalizePuzzleId(value: unknown): PuzzleId {
+  if (typeof value === "string" || typeof value === "number") return value;
+  return null;
+}
+
 function toPlainObject<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T;
 }
@@ -215,7 +221,7 @@ async function revealWordle(answerDate?: string): Promise<PuzzleAnswerResult> {
   return {
     puzzleSlug: "wordle",
     answerDate: answerDateValue,
-    puzzleId: payload.id ?? payload.days_since_launch,
+    puzzleId: normalizePuzzleId(payload.id ?? payload.days_since_launch),
     sourceUrl,
     fetchedAt: new Date().toISOString(),
     extractedFrom: "nyt:wordle-endpoint",
@@ -263,7 +269,7 @@ async function revealConnections(answerDate?: string): Promise<PuzzleAnswerResul
   return {
     puzzleSlug: "connections",
     answerDate: answerDateValue,
-    puzzleId: payload.id,
+    puzzleId: normalizePuzzleId(payload.id),
     sourceUrl,
     fetchedAt: new Date().toISOString(),
     extractedFrom: "nyt:connections-endpoint",
@@ -284,7 +290,7 @@ async function revealStrands(answerDate?: string): Promise<PuzzleAnswerResult> {
   return {
     puzzleSlug: "strands",
     answerDate: answerDateValue,
-    puzzleId: payload.id,
+    puzzleId: normalizePuzzleId(payload.id),
     sourceUrl,
     fetchedAt: new Date().toISOString(),
     extractedFrom: "nyt:strands-endpoint",
@@ -330,7 +336,7 @@ async function revealSpellingBee(answerDate?: string): Promise<PuzzleAnswerResul
   return {
     puzzleSlug: "spelling-bee",
     answerDate: answerDateValue,
-    puzzleId: payload.id,
+    puzzleId: normalizePuzzleId(payload.id),
     sourceUrl: SPELLING_BEE_SOURCE_URL,
     fetchedAt: new Date().toISOString(),
     extractedFrom: "nyt:spelling-bee-window-gameData",
@@ -360,7 +366,7 @@ async function revealLetterBoxed(answerDate?: string): Promise<PuzzleAnswerResul
   return {
     puzzleSlug: "letter-boxed",
     answerDate: answerDateValue,
-    puzzleId: payload.id,
+    puzzleId: normalizePuzzleId(payload.id),
     sourceUrl: LETTER_BOXED_SOURCE_URL,
     fetchedAt: new Date().toISOString(),
     extractedFrom: "nyt:letter-boxed-window-gameData",
