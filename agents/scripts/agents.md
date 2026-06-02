@@ -45,26 +45,22 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Refresh active/expired codes | `scripts/codes/update-codes.ts` | `npm run refresh:codes` |
 | Post code updates | `scripts/posts/post-codes.ts` | `npm run post:codes` |
 | Post one game update | `scripts/posts/post-online.ts` | `npm run post:online` |
-| Post Roblox vibes updates | `scripts/posts/post-roblox-vibes.ts` | `npm run post:vibes` |
 
 ## Universe And Metadata Jobs
 
 | Purpose | File | Preferred command |
 | --- | --- | --- |
 | Import games into Supabase | `scripts/games/import-games.ts` | `npm run import:games` |
-| Collect Roblox universes | `scripts/universes/collect-roblox-universes.ts` | `npm run collect:universes` |
-| Discover universes from Roblox search | `scripts/universes/search-roblox-universes.ts` | `npm run search:universes` |
-| Expand universes from creators/groups | `scripts/universes/expand-roblox-creators.ts` | `npm run expand:creators` |
-| Score universe quality tiers | `scripts/universes/score-universe-quality.ts` | `npm run score:universes` |
+| Collect Roblox universes from Explore | `scripts/universes/collect-roblox-universes.ts` | `npm run collect:universes` |
 | Run local-safe universe pipeline | `scripts/universes/run-universe-pipeline.ts` | `npm run pipeline:universes` |
 | Backfill missing universe IDs | `scripts/backfill/backfill-game-universes.ts` | `npm run backfill:universes` |
 | Update universe slugs | `scripts/universes/update-universe-slugs.ts` | direct `tsx scripts/universes/update-universe-slugs.ts` |
 | Sync game slugs | `scripts/universes/sync-game-slugs.ts` | direct `tsx scripts/universes/sync-game-slugs.ts` |
 | Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes`, `npm run enrich:universes:light`, `npm run enrich:universes:deep` |
 | Backfill clean universe display names | `scripts/universes/backfill-clean-display-names.ts` | `npm run backfill:universe-display-names`; write locally with `-- --apply`, write production only with `NODE_ENV=production npm run backfill:universe-display-names -- --apply --allow-prod` after a clean production dry-run |
-| Update universe stats | `scripts/universes/update-universe-stats.ts` | `npm run update:stats` |
-| Update current playing counts | `scripts/universes/update-universe-playing.ts` | `npm run update:playing` |
-| Update hourly public stats | `scripts/universes/update-universe-hourly-stats.ts` | `npm run update:hourly-stats`; use `-- --rollup-today` only when the hourly job should also refresh today's daily row |
+| Refresh tiered public stats | `scripts/universes/update-universe-hourly-stats.ts` | `npm run stats:refresh:hot`, `npm run stats:refresh:warm`, `npm run stats:refresh:cold`; use `npm run stats:refresh -- --tier NEW` for NEW rows |
+| Assign stats tiers | `scripts/universes/assign-universe-stats-tier.ts` | `npm run stats:tier` |
+| Audit stats workflow | `scripts/universes/audit-universe-stats-workflow.ts` | `npm run stats:audit` |
 | Roll hourly stats into daily rows | `scripts/universes/rollup-universe-daily-stats.ts` | `npm run stats:rollup-daily -- --date today`; use `-- --date yesterday --finalize` after the UTC day ends |
 | Snapshot public stats rankings | `scripts/universes/rank-universe-stats.ts` | `npm run stats:rank` |
 

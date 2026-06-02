@@ -4,24 +4,16 @@ import { spawn } from "node:child_process";
 
 type Options = {
   allowLive: boolean;
-  seed: boolean;
-  seedContent: boolean;
-  searchJobs: number;
-  searchPages: number;
-  creatorJobs: number;
-  creatorPages: number;
-  creatorSeedLimit: number;
-  creatorQualityOnly: boolean;
   lightLimit: number;
-  scoreLimit: number;
-  playingLimit: number;
-  statsLimit: number;
+  newStatsLimit: number;
+  hotStatsLimit: number;
+  warmStatsLimit: number;
+  coldStatsLimit: number;
   deepLimit: number;
   refreshLists: boolean;
-  skipSearch: boolean;
-  skipCreators: boolean;
+  skipDiscovery: boolean;
   skipLight: boolean;
-  skipScore: boolean;
+  skipTier: boolean;
 };
 
 type Step = {
@@ -40,77 +32,48 @@ function parseArgs(): Options {
   const args = process.argv.slice(2);
   const options: Options = {
     allowLive: false,
-    seed: true,
-    seedContent: true,
-    searchJobs: readNumber(process.env.UNIVERSE_PIPELINE_SEARCH_JOBS, 100),
-    searchPages: readNumber(process.env.UNIVERSE_PIPELINE_SEARCH_PAGES, 2),
-    creatorJobs: readNumber(process.env.UNIVERSE_PIPELINE_CREATOR_JOBS, 50),
-    creatorPages: readNumber(process.env.UNIVERSE_PIPELINE_CREATOR_PAGES, 3),
-    creatorSeedLimit: readNumber(process.env.UNIVERSE_PIPELINE_CREATOR_SEED_LIMIT, 1000),
-    creatorQualityOnly: process.env.UNIVERSE_PIPELINE_CREATOR_QUALITY_ONLY === "true",
     lightLimit: readNumber(process.env.UNIVERSE_PIPELINE_LIGHT_LIMIT, 500),
-    scoreLimit: readNumber(process.env.UNIVERSE_PIPELINE_SCORE_LIMIT, 1000),
-    playingLimit: readNumber(process.env.UNIVERSE_PIPELINE_PLAYING_LIMIT, 0),
-    statsLimit: readNumber(process.env.UNIVERSE_PIPELINE_STATS_LIMIT, 0),
+    newStatsLimit: readNumber(process.env.UNIVERSE_PIPELINE_NEW_STATS_LIMIT, 1000),
+    hotStatsLimit: readNumber(process.env.UNIVERSE_PIPELINE_HOT_STATS_LIMIT, 0),
+    warmStatsLimit: readNumber(process.env.UNIVERSE_PIPELINE_WARM_STATS_LIMIT, 0),
+    coldStatsLimit: readNumber(process.env.UNIVERSE_PIPELINE_COLD_STATS_LIMIT, 0),
     deepLimit: readNumber(process.env.UNIVERSE_PIPELINE_DEEP_LIMIT, 0),
     refreshLists: false,
-    skipSearch: false,
-    skipCreators: false,
+    skipDiscovery: false,
     skipLight: false,
-    skipScore: false
+    skipTier: false
   };
 
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
     if (arg === "--allow-live") {
       options.allowLive = true;
-    } else if (arg === "--no-seed") {
-      options.seed = false;
-      options.seedContent = false;
-    } else if (arg === "--no-content-seed") {
-      options.seedContent = false;
-    } else if (arg === "--search-jobs") {
-      options.searchJobs = readNumber(args[i + 1], options.searchJobs);
-      i += 1;
-    } else if (arg === "--search-pages") {
-      options.searchPages = readNumber(args[i + 1], options.searchPages);
-      i += 1;
-    } else if (arg === "--creator-jobs") {
-      options.creatorJobs = readNumber(args[i + 1], options.creatorJobs);
-      i += 1;
-    } else if (arg === "--creator-pages") {
-      options.creatorPages = readNumber(args[i + 1], options.creatorPages);
-      i += 1;
-    } else if (arg === "--creator-seed-limit") {
-      options.creatorSeedLimit = readNumber(args[i + 1], options.creatorSeedLimit);
-      i += 1;
-    } else if (arg === "--quality-creators-only") {
-      options.creatorQualityOnly = true;
     } else if (arg === "--light-limit") {
       options.lightLimit = readNumber(args[i + 1], options.lightLimit);
       i += 1;
-    } else if (arg === "--score-limit") {
-      options.scoreLimit = readNumber(args[i + 1], options.scoreLimit);
+    } else if (arg === "--new-stats-limit") {
+      options.newStatsLimit = readNumber(args[i + 1], options.newStatsLimit);
       i += 1;
-    } else if (arg === "--playing-limit") {
-      options.playingLimit = readNumber(args[i + 1], options.playingLimit);
+    } else if (arg === "--hot-stats-limit") {
+      options.hotStatsLimit = readNumber(args[i + 1], options.hotStatsLimit);
       i += 1;
-    } else if (arg === "--stats-limit") {
-      options.statsLimit = readNumber(args[i + 1], options.statsLimit);
+    } else if (arg === "--warm-stats-limit") {
+      options.warmStatsLimit = readNumber(args[i + 1], options.warmStatsLimit);
+      i += 1;
+    } else if (arg === "--cold-stats-limit") {
+      options.coldStatsLimit = readNumber(args[i + 1], options.coldStatsLimit);
       i += 1;
     } else if (arg === "--deep-limit") {
       options.deepLimit = readNumber(args[i + 1], options.deepLimit);
       i += 1;
     } else if (arg === "--refresh-lists") {
       options.refreshLists = true;
-    } else if (arg === "--skip-search") {
-      options.skipSearch = true;
-    } else if (arg === "--skip-creators") {
-      options.skipCreators = true;
+    } else if (arg === "--skip-discovery" || arg === "--skip-search" || arg === "--skip-creators") {
+      options.skipDiscovery = true;
     } else if (arg === "--skip-light") {
       options.skipLight = true;
-    } else if (arg === "--skip-score") {
-      options.skipScore = true;
+    } else if (arg === "--skip-tier") {
+      options.skipTier = true;
     } else if (arg === "--help" || arg === "-h") {
       printHelp();
       process.exit(0);
@@ -128,24 +91,16 @@ Local-safe orchestration for the universe discovery pipeline.
 
 Options:
   --allow-live              Allow non-local SUPABASE_URL targets
-  --no-seed                 Do not seed default search jobs this run
-  --no-content-seed         Do not seed search jobs from existing site content
-  --search-jobs <number>    Pending search jobs to process (default: 100)
-  --search-pages <number>   Search pages per job (default: 2)
-  --creator-jobs <number>   Creator/group expansion jobs to process (default: 50)
-  --creator-pages <number>  Creator game pages per job (default: 3)
-  --creator-seed-limit <n>  Universe rows to inspect when seeding creator jobs (default: 1000)
-  --quality-creators-only   Seed creator expansion only from A/B quality candidates
+  --skip-discovery          Skip Explore universe collection
   --light-limit <number>    Light enrichment limit; 0 skips (default: 500)
-  --score-limit <number>    Quality scoring limit; 0 scores all (default: 1000)
-  --playing-limit <number>  Legacy alias for hourly public stats limit; 0 skips
-  --stats-limit <number>    Update hourly public stats and today's daily rollup; 0 skips
-  --deep-limit <number>     Deep-enrich top quality rows; 0 skips
+  --new-stats-limit <n>     Refresh NEW game stats; 0 skips
+  --hot-stats-limit <n>     Refresh HOT game stats and today's rollup; 0 skips
+  --warm-stats-limit <n>    Refresh WARM game stats; 0 skips
+  --cold-stats-limit <n>    Refresh COLD game stats; 0 skips
+  --deep-limit <number>     Deep-enrich HOT rows; 0 skips
   --refresh-lists           Refresh game lists at the end
-  --skip-search             Skip search discovery
-  --skip-creators           Skip creator/group expansion
   --skip-light              Skip light enrichment
-  --skip-score              Skip quality scoring
+  --skip-tier               Skip stats tier assignment
   -h, --help                Show this help text
 `);
 }
@@ -172,21 +127,8 @@ function npmStep(name: string, script: string, args: string[], enabled: boolean)
 }
 
 function buildSteps(options: Options): Step[] {
-  const hourlyStatsLimit = Math.max(options.statsLimit, options.playingLimit);
   return [
-    npmStep(
-      "Search discovery",
-      "search:universes",
-      [
-        ...(options.seed ? ["--seed"] : []),
-        ...(options.seedContent ? ["--seed-content"] : []),
-        "--limit",
-        String(options.searchJobs),
-        "--max-pages",
-        String(options.searchPages)
-      ],
-      !options.skipSearch && options.searchJobs >= 0
-    ),
+    npmStep("Explore discovery", "collect:universes", [], !options.skipDiscovery),
     npmStep(
       "Light enrichment",
       "enrich:universes:light",
@@ -194,42 +136,45 @@ function buildSteps(options: Options): Step[] {
       !options.skipLight && options.lightLimit > 0
     ),
     npmStep(
-      "Quality scoring",
-      "score:universes",
-      ["--limit", String(options.scoreLimit)],
-      !options.skipScore
+      "NEW stats refresh",
+      "stats:refresh",
+      ["--tier", "NEW", "--limit", String(options.newStatsLimit)],
+      options.newStatsLimit > 0
     ),
     npmStep(
-      "Creator expansion",
-      "expand:creators",
-      [
-        ...(options.seed ? ["--seed"] : []),
-        ...(options.creatorQualityOnly ? ["--quality-creators-only"] : []),
-        "--seed-limit",
-        String(options.creatorSeedLimit),
-        "--limit",
-        String(options.creatorJobs),
-        "--max-pages",
-        String(options.creatorPages)
-      ],
-      !options.skipCreators && options.creatorJobs >= 0
+      "Stats tier assignment",
+      "stats:tier",
+      ["--limit", "0"],
+      !options.skipTier
     ),
     npmStep(
-      "Hourly stats refresh",
-      "update:hourly-stats",
-      ["--quality-only", "--rollup-today", "--limit", String(hourlyStatsLimit)],
-      hourlyStatsLimit > 0
+      "HOT stats refresh",
+      "stats:refresh",
+      ["--tier", "HOT", "--rollup-today", "--limit", String(options.hotStatsLimit)],
+      options.hotStatsLimit > 0
+    ),
+    npmStep(
+      "WARM stats refresh",
+      "stats:refresh",
+      ["--tier", "WARM", "--limit", String(options.warmStatsLimit)],
+      options.warmStatsLimit > 0
+    ),
+    npmStep(
+      "COLD stats refresh",
+      "stats:refresh",
+      ["--tier", "COLD", "--limit", String(options.coldStatsLimit)],
+      options.coldStatsLimit > 0
     ),
     npmStep(
       "Stats rank snapshots",
       "stats:rank",
-      ["--quality-only", "--limit", String(Math.max(hourlyStatsLimit, 250))],
-      hourlyStatsLimit > 0
+      ["--all", "--limit", String(Math.max(options.hotStatsLimit, 250))],
+      options.hotStatsLimit > 0
     ),
     npmStep(
       "Deep enrichment",
       "enrich:universes:deep",
-      ["--quality-only", "--limit", String(options.deepLimit)],
+      ["--tier", "HOT", "--limit", String(options.deepLimit)],
       options.deepLimit > 0
     ),
     npmStep("List refresh", "lists:refresh", [], options.refreshLists)

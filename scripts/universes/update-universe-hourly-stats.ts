@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { assignStatsTier, isStatsTier, type StatsTier } from "./stats-tier";
 
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";
 const BATCH_SIZE = readPositiveNumber("UNIVERSE_HOURLY_STATS_BATCH_SIZE", 50);
@@ -26,6 +27,13 @@ type RobloxGameDetail = {
 type UniverseRow = {
   universe_id: number;
   root_place_id: number | null;
+  playing: number | null;
+  visits: number | null;
+  favorites: number | null;
+  likes: number | null;
+  dislikes: number | null;
+  stats_tier: StatsTier | null;
+  last_stats_refreshed_at: string | null;
 };
 
 type HourlyRow = {
@@ -54,7 +62,7 @@ type PublicStats = {
 
 type Options = {
   limit: number;
-  qualityOnly: boolean;
+  tier: StatsTier | "ALL";
   rollupToday: boolean;
 };
 
@@ -124,17 +132,20 @@ async function fetchUniverses(options: Options): Promise<UniverseRow[]> {
     const pageSize = Math.min(BATCH_SIZE, remaining);
     let query = sb
       .from("roblox_universes")
-      .select("universe_id, root_place_id")
+      .select("universe_id, root_place_id, playing, visits, favorites, likes, dislikes, stats_tier, last_stats_refreshed_at")
       .not("root_place_id", "is", null);
 
-    if (options.qualityOnly) {
-      query = query.eq("is_quality_candidate", true);
+    if (options.tier === "NEW") {
+      query = query.or("stats_tier.eq.NEW,last_stats_refreshed_at.is.null,playing.is.null,visits.is.null");
+    } else if (options.tier !== "ALL") {
+      query = query.eq("stats_tier", options.tier);
     }
 
     const { data, error } = await query
       .order("last_stats_refreshed_at", { ascending: true, nullsFirst: true })
       .order("last_playing_refreshed_at", { ascending: true, nullsFirst: true })
-      .order("quality_score", { ascending: false })
+      .order("playing", { ascending: false, nullsFirst: false })
+      .order("visits", { ascending: false, nullsFirst: false })
       .order("universe_id", { ascending: true })
       .range(from, from + pageSize - 1);
     if (error) throw error;
@@ -269,18 +280,39 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
   for (const row of chunk) {
     const stats = values[row.universe_id];
     if (!stats) continue;
+    const hasAnyFreshStat =
+      stats.playing != null || stats.visits != null || stats.favorites != null || stats.likes != null || stats.dislikes != null;
+    if (!hasAnyFreshStat) continue;
     hourlyPayloads.push(buildHourlyPayload(row, stats, existingHourly.get(row.universe_id), hourStart, sampledAtIso));
+    const latest = {
+      playing: stats.playing ?? row.playing,
+      visits: stats.visits ?? row.visits,
+      favorites: stats.favorites ?? row.favorites,
+      likes: stats.likes ?? row.likes,
+      dislikes: stats.dislikes ?? row.dislikes
+    };
+    const tier = assignStatsTier({
+      playing: latest.playing,
+      visits: latest.visits,
+      lastStatsRefreshedAt: sampledAtIso
+    });
+    const updatePayload: Record<string, unknown> = {
+      stats_tier: tier.tier,
+      stats_tier_reason: tier.reason,
+      stats_tier_updated_at: sampledAtIso,
+      last_stats_refreshed_at: sampledAtIso
+    };
+    if (stats.playing != null) {
+      updatePayload.playing = stats.playing;
+      updatePayload.last_playing_refreshed_at = sampledAtIso;
+    }
+    if (stats.visits != null) updatePayload.visits = stats.visits;
+    if (stats.favorites != null) updatePayload.favorites = stats.favorites;
+    if (stats.likes != null) updatePayload.likes = stats.likes;
+    if (stats.dislikes != null) updatePayload.dislikes = stats.dislikes;
     const { error } = await sb
       .from("roblox_universes")
-      .update({
-        playing: stats.playing,
-        visits: stats.visits,
-        favorites: stats.favorites,
-        likes: stats.likes,
-        dislikes: stats.dislikes,
-        last_playing_refreshed_at: sampledAtIso,
-        last_stats_refreshed_at: sampledAtIso
-      })
+      .update(updatePayload)
       .eq("universe_id", row.universe_id)
       .limit(1);
     if (error) {
@@ -301,7 +333,7 @@ function parseArgs(): Options {
   const args = process.argv.slice(2);
   const options: Options = {
     limit: Number.isFinite(DEFAULT_LIMIT) && DEFAULT_LIMIT > 0 ? DEFAULT_LIMIT : 0,
-    qualityOnly: process.env.UNIVERSE_HOURLY_STATS_QUALITY_ONLY !== "false",
+    tier: isStatsTier(process.env.UNIVERSE_STATS_TIER) ? process.env.UNIVERSE_STATS_TIER : "HOT",
     rollupToday: false
   };
   for (let i = 0; i < args.length; i += 1) {
@@ -310,10 +342,18 @@ function parseArgs(): Options {
       const parsed = Number(args[i + 1]);
       options.limit = Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
       i += 1;
+    } else if (arg === "--tier") {
+      const tier = String(args[i + 1] ?? "").toUpperCase();
+      if (tier === "ALL" || isStatsTier(tier)) {
+        options.tier = tier;
+      } else {
+        throw new Error(`Invalid --tier value: ${tier}. Use NEW, HOT, WARM, COLD, or ALL.`);
+      }
+      i += 1;
     } else if (arg === "--all") {
-      options.qualityOnly = false;
+      options.tier = "ALL";
     } else if (arg === "--quality-only") {
-      options.qualityOnly = true;
+      options.tier = "HOT";
     } else if (arg === "--rollup-today") {
       options.rollupToday = true;
     } else if (arg === "--help" || arg === "-h") {
@@ -322,7 +362,7 @@ Usage: npm run update:hourly-stats -- [options]
 
 Options:
   -l, --limit <number>   Max universes to refresh; 0 means all (default: ${DEFAULT_LIMIT})
-  --quality-only         Only refresh rows marked is_quality_candidate (default)
+  --tier <tier>          Refresh NEW, HOT, WARM, COLD, or ALL rows (default: HOT)
   --all                  Refresh all universes with a root place id
   --rollup-today         Also run the daily rollup for today's date after hourly writes
   -h, --help             Show this help text
@@ -336,7 +376,7 @@ Options:
 async function rollupTodayIfRequested(options: Options, sampledAt: Date) {
   if (!options.rollupToday) return;
   const { main } = await import("./rollup-universe-daily-stats");
-  await main({ date: isoDate(sampledAt), finalize: false, limit: options.limit, qualityOnly: options.qualityOnly });
+  await main({ date: isoDate(sampledAt), finalize: false, limit: options.limit });
 }
 
 async function main() {
@@ -350,7 +390,7 @@ async function main() {
     return;
   }
 
-  console.log(`Updating hourly stats for ${universes.length} universes (qualityOnly=${options.qualityOnly})...`);
+  console.log(`Updating hourly stats for ${universes.length} universes (tier=${options.tier})...`);
   for (let i = 0; i < universes.length; i += BATCH_SIZE) {
     const chunk = universes.slice(i, i + BATCH_SIZE);
     const ids = chunk.map((row) => row.universe_id);

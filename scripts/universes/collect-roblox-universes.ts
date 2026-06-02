@@ -19,6 +19,8 @@ const DEVICE_DELAY_MS = readPositiveNumber("ROBLOX_EXPLORE_DEVICE_DELAY_MS", 500
 const RETRY_LIMIT = readPositiveNumber("ROBLOX_EXPLORE_RETRY_LIMIT", 6);
 const RETRY_BASE_DELAY_MS = readPositiveNumber("ROBLOX_EXPLORE_RETRY_BASE_DELAY_MS", 4000);
 const RETRY_MAX_DELAY_MS = readPositiveNumber("ROBLOX_EXPLORE_RETRY_MAX_DELAY_MS", 90000);
+const MAX_SORTS = readPositiveNumber("ROBLOX_EXPLORE_MAX_SORTS", 0);
+const MAX_PAGES_PER_SORT = readPositiveNumber("ROBLOX_EXPLORE_MAX_PAGES_PER_SORT", 0);
 const DEVICES = readList("ROBLOX_DEVICES", DEFAULT_DEVICES);
 const COUNTRIES = readList("ROBLOX_COUNTRIES", DEFAULT_COUNTRIES);
 
@@ -212,6 +214,12 @@ function loadExtraSorts(): ExtraSortConfig[] {
     .map((sortId) => ({ sortId }));
 }
 
+function isCollectableSort(sort: ExploreSort): boolean {
+  const sortId = sort.sortId?.trim();
+  if (!sortId) return false;
+  return !["filters"].includes(sortId);
+}
+
 type ExploreGameEntry = {
   universeId?: number | string;
   placeId?: number | string;
@@ -254,7 +262,6 @@ type FetchResult = {
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const todayIsoDate = () => new Date().toISOString().slice(0, 10);
 let lastRequestAt = 0;
 
 function readPositiveNumber(name: string, fallback: number): number {
@@ -430,21 +437,20 @@ function normalizeThumbnails(entry: ExploreGameEntry) {
 async function collectSortContent(
   sort: ExploreSort,
   sessionId: string,
-  runId: string,
-  fetchedAt: string,
   sb: ReturnType<typeof supabaseAdmin>,
   globalSeen: Set<number>,
   device: string,
   country: string
-): Promise<{ entries: number; universes: number; recordedSnapshotCount: number }> {
+): Promise<{ entries: number; universes: number }> {
   const sortId = sort.sortId;
   let nextToken: string | null | undefined;
   let rankOffset = 0;
   let entriesStored = 0;
   const seen = new Set<number>();
-  let snapshotsRecorded = 0;
+  let pagesProcessed = 0;
 
   do {
+    if (MAX_PAGES_PER_SORT > 0 && pagesProcessed >= MAX_PAGES_PER_SORT) break;
     const params = new URLSearchParams({
       device,
       country,
@@ -470,13 +476,12 @@ async function collectSortContent(
       params.set("pageToken", nextToken);
     }
     const payload = await fetchJson(`${EXPLORE_BASE}/get-sort-content?${params.toString()}`, `sort content ${sortId}`);
+    pagesProcessed += 1;
     const games = extractGames(payload);
     if (!games.length) break;
 
     const insertUniversesPayload: any[] = [];
-    const sortEntriesPayload: any[] = [];
     const now = new Date().toISOString();
-    const statDate = todayIsoDate();
 
     games.forEach((game, index) => {
       const universeId = toNumber(game.universeId);
@@ -530,20 +535,6 @@ async function collectSortContent(
         raw_details: {},
         last_seen_in_sort: now
       });
-
-      sortEntriesPayload.push({
-        sort_id: sortId,
-        universe_id: universeId,
-        place_id: rootPlaceId,
-        rank,
-        session_id: sessionId,
-        run_id: runId,
-        device,
-        country,
-        source: "explore",
-        is_sponsored: Boolean(game.isSponsored ?? false),
-        fetched_at: fetchedAt
-      });
     });
 
     if (insertUniversesPayload.length) {
@@ -556,15 +547,7 @@ async function collectSortContent(
       }
     }
 
-    if (sortEntriesPayload.length) {
-      const { error } = await sb.from("roblox_universe_sort_entries").insert(sortEntriesPayload).select("id");
-      if (error && !error.message.includes("duplicate key")) {
-        throw new Error(`Failed to insert sort entries: ${error.message}`);
-      }
-    }
-
-    // Skip daily stats when only inserting minimal universe records
-    entriesStored += sortEntriesPayload.length;
+    entriesStored += insertUniversesPayload.length;
     rankOffset += games.length;
     nextToken = typeof payload?.nextPageToken === "string" && payload.nextPageToken.length ? payload.nextPageToken : null;
 
@@ -573,7 +556,7 @@ async function collectSortContent(
     }
   } while (nextToken);
 
-  return { entries: entriesStored, universes: seen.size, recordedSnapshotCount: snapshotsRecorded };
+  return { entries: entriesStored, universes: seen.size };
 }
 
 async function run(): Promise<FetchResult> {
@@ -585,7 +568,6 @@ async function run(): Promise<FetchResult> {
   for (const device of DEVICES) {
     for (const country of COUNTRIES) {
       const sessionId = randomUUID();
-      const runStartedAt = new Date().toISOString();
 
       console.log(`🚀 Starting Roblox explore crawl (session ${sessionId}, device ${device}, country ${country})...`);
       const sorts = await fetchSorts(sessionId, device, country);
@@ -598,53 +580,23 @@ async function run(): Promise<FetchResult> {
           extraParams: extra.params ?? {}
         });
       }
+      const collectableSorts = sorts.filter(isCollectableSort);
+      const targetSorts = MAX_SORTS > 0 ? collectableSorts.slice(0, MAX_SORTS) : collectableSorts;
 
-      if (!sorts.length) {
+      if (!targetSorts.length) {
         console.log("ℹ️ No sorts returned; skipping.");
         continue;
       }
-      console.log(`📋 Retrieved ${sorts.length} sorts (including ${extraSorts.length} extras).`);
+      console.log(
+        `📋 Retrieved ${sorts.length} sorts (including ${extraSorts.length} extras); processing ${targetSorts.length} collectable sorts.`
+      );
 
-      const { data: runRecord, error: runError } = await sb
-        .from("roblox_universe_sort_runs")
-        .insert({
-          session_id: sessionId,
-          device,
-          country,
-          retrieved_at: runStartedAt
-        })
-        .select("id")
-        .single();
-
-      if (runError || !runRecord) {
-        console.error(`Failed to record sort run for ${device}/${country}: ${runError?.message ?? "unknown error"}`);
-        continue;
-      }
-
-      for (const sort of sorts) {
+      for (const sort of targetSorts) {
         if (!sort.sortId) continue;
-        const definitionPayload = {
-          sort_id: sort.sortId,
-          title: sort.title ?? sort.displayName ?? sort.name ?? null,
-          description: sort.description ?? null,
-          layout: sort.layout ?? sort.layoutType ?? {},
-          experiments: sort.experiments ?? {},
-          last_seen_at: runStartedAt
-        };
-        const { error: definitionError } = await sb.from("roblox_universe_sort_definitions").upsert(definitionPayload, {
-          onConflict: "sort_id"
-        });
-        if (definitionError) {
-          console.warn(`⚠️ Failed to upsert sort definition for ${sort.sortId}: ${definitionError.message}`);
-          continue;
-        }
-
         try {
-          const { entries, universes, recordedSnapshotCount } = await collectSortContent(
+          const { entries, universes } = await collectSortContent(
             sort,
             sessionId,
-            runRecord.id,
-            runStartedAt,
             sb,
             globalSeen,
             device,
@@ -652,9 +604,7 @@ async function run(): Promise<FetchResult> {
           );
           sortsProcessed += 1;
           totalEntries += entries;
-          console.log(
-            ` • ${sort.title ?? sort.sortId}: ${entries} entries (${universes} unique universes, ${recordedSnapshotCount} snapshots)`
-          );
+          console.log(` • ${sort.title ?? sort.sortId}: ${entries} entries (${universes} unique universes)`);
         } catch (error) {
           console.error(`❌ Failed to process sort ${sort.sortId} (${device}/${country}):`, (error as Error).message);
         }

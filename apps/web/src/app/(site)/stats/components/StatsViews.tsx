@@ -20,6 +20,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { LocalRefreshTime } from "@/app/(site)/stats/components/LocalRefreshTime";
 import { StatsChartPanel } from "@/app/(site)/stats/components/StatsChartPanel";
 import {
   STATS_SORT_OPTIONS,
@@ -39,20 +40,6 @@ export function StatsPageShell({ children }: { children: ReactNode }) {
       {children}
     </div>
   );
-}
-
-function statUpdatedLabel(value?: string | null) {
-  if (!value) return "Waiting for refresh";
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "Recently";
-  return date.toLocaleString("en-US", {
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    timeZone: "UTC",
-    timeZoneName: "short"
-  });
 }
 
 function gameImage(game: Pick<StatsGame, "iconUrl" | "name">, size = 44) {
@@ -101,7 +88,7 @@ function MetricCard({
   icon: Icon
 }: {
   label: string;
-  value: string;
+  value: ReactNode;
   detail?: string | null;
   icon: typeof Users;
 }) {
@@ -181,10 +168,20 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
       </header>
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <MetricCard label="Live players" value={formatCompactNumber(data.totals.livePlayers)} detail="Top tracked games right now" icon={Users} />
-        <MetricCard label="Games shown" value={formatFullNumber(data.totals.trackedGames)} detail="Public stats index sample" icon={Gamepad2} />
-        <MetricCard label="Top visits" value={formatCompactNumber(data.totals.totalVisits)} detail="From most visited games" icon={Trophy} />
-        <MetricCard label="Last refresh" value={statUpdatedLabel(data.totals.lastUpdatedAt)} detail="UTC public data sample" icon={CalendarDays} />
+        <MetricCard
+          label="Top live players"
+          value={formatCompactNumber(data.totals.livePlayers)}
+          detail={`Top ${formatFullNumber(data.totals.featuredGames)} games by current players`}
+          icon={Users}
+        />
+        <MetricCard label="Tracked games" value={formatFullNumber(data.totals.trackedGames)} detail="Public stats index" icon={Gamepad2} />
+        <MetricCard
+          label="Top visits"
+          value={formatCompactNumber(data.totals.totalVisits)}
+          detail={`Top ${formatFullNumber(data.mostVisited.length)} games by visits`}
+          icon={Trophy}
+        />
+        <MetricCard label="Last refresh" value={<LocalRefreshTime value={data.totals.lastUpdatedAt} showZoneDetail />} icon={CalendarDays} />
       </div>
 
       <div className="grid gap-4 xl:grid-cols-2">
@@ -306,7 +303,7 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
                   <TableCell className="text-right">{formatCompactNumber(game.visits)}</TableCell>
                   <TableCell className="text-right">{formatPercent(game.ratingPercent)}</TableCell>
                   <TableCell className="text-right"><Badge variant="outline" className="rounded-md">{game.trendScore}</Badge></TableCell>
-                  <TableCell className="text-right text-xs text-muted">{statUpdatedLabel(game.lastStatsRefreshedAt)}</TableCell>
+                  <TableCell className="text-right text-xs text-muted"><LocalRefreshTime value={game.lastStatsRefreshedAt} /></TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -394,7 +391,7 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
               <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
               <h1 className="mb-0 mt-2 text-3xl font-semibold leading-tight text-foreground md:text-5xl">{game.name}</h1>
               <p className="mt-2 text-sm font-medium text-muted">
-                {game.creatorName ? `by ${game.creatorName}` : "Creator not tracked"} · Updated {statUpdatedLabel(game.lastStatsRefreshedAt)}
+                {game.creatorName ? `by ${game.creatorName}` : "Creator not tracked"} · Updated <LocalRefreshTime value={game.lastStatsRefreshedAt} />
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {game.genre ? <Badge variant="outline" className="rounded-md">{game.genre}</Badge> : null}

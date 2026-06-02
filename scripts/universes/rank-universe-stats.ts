@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { isStatsTier, type StatsTier } from "./stats-tier";
 
 const DEFAULT_LIMIT = Number(process.env.UNIVERSE_RANK_LIMIT ?? "250");
 const RANK_TYPES = ["global_playing", "global_visits", "global_favorites", "global_rating"] as const;
@@ -18,7 +19,7 @@ type UniverseRankRow = {
 
 type Options = {
   limit: number;
-  qualityOnly: boolean;
+  tier: StatsTier | "ALL";
 };
 
 function metricFor(row: UniverseRankRow, rankType: RankType): number | null {
@@ -49,8 +50,10 @@ async function fetchRankRows(rankType: RankType, options: Options): Promise<Univ
     .order(orderColumn, { ascending: false })
     .limit(options.limit);
 
-  if (options.qualityOnly) {
-    query = query.eq("is_quality_candidate", true);
+  if (options.tier !== "ALL") {
+    query = query.eq("stats_tier", options.tier);
+  } else {
+    query = query.neq("stats_tier", "NEW");
   }
 
   const { data, error } = await query;
@@ -88,7 +91,7 @@ function parseArgs(): Options {
   const args = process.argv.slice(2);
   const options: Options = {
     limit: Number.isFinite(DEFAULT_LIMIT) && DEFAULT_LIMIT > 0 ? DEFAULT_LIMIT : 250,
-    qualityOnly: true
+    tier: "ALL"
   };
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
@@ -96,18 +99,26 @@ function parseArgs(): Options {
       const parsed = Number(args[i + 1]);
       options.limit = Number.isFinite(parsed) && parsed > 0 ? parsed : options.limit;
       i += 1;
+    } else if (arg === "--tier") {
+      const tier = String(args[i + 1] ?? "").toUpperCase();
+      if (tier === "ALL" || isStatsTier(tier)) {
+        options.tier = tier;
+      } else {
+        throw new Error(`Invalid --tier value: ${tier}. Use HOT, WARM, COLD, NEW, or ALL.`);
+      }
+      i += 1;
     } else if (arg === "--all") {
-      options.qualityOnly = false;
+      options.tier = "ALL";
     } else if (arg === "--quality-only") {
-      options.qualityOnly = true;
+      options.tier = "HOT";
     } else if (arg === "--help" || arg === "-h") {
       console.log(`
 Usage: npm run stats:rank -- [options]
 
 Options:
   -l, --limit <number>   Number of rows to rank per metric (default: ${DEFAULT_LIMIT})
-  --quality-only         Only rank quality candidate universes (default)
-  --all                  Rank all universes
+  --tier <tier>          Rank one stats tier: HOT, WARM, COLD, NEW, or ALL (default: ALL except NEW)
+  --all                  Rank all non-NEW universes
   -h, --help             Show this help text
 `);
       process.exit(0);

@@ -58,11 +58,17 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `sync-puzzles.ts` syncs Wordle, Connections, Strands, Spelling Bee, Letter Boxed, NYT Sudoku, NYT Pips, Contexto, Letroso, and LinkedIn puzzle answers. Use `npm run sync:puzzles -- --dry-run` before writing. Pass `-- --skip-linkedin` when `LINKEDIN_LI_AT` is unavailable or stale.
 - `shared/`: helpers reused by multiple scripts.
 - `trading/`: trading-related collection.
-- `universes/`: universe collection, enrichment, slugs, stats, playing counts, descriptions.
-  - `update-universe-hourly-stats.ts` is the public stats collector for `/stats`; it fetches Roblox public game details, updates latest values on `roblox_universes`, upserts `roblox_universe_stats_hourly`, and can roll up today's row in `roblox_universe_stats_daily`.
+- `universes/`: universe collection, enrichment, slugs, tiered stats, media, and descriptions.
+  - `collect-roblox-universes.ts` is the lean Explore discovery collector. It upserts newly seen Roblox universe IDs into `roblox_universes` only; it no longer stores Explore sort history, search snapshots, or discovery queue rows.
+  - Public stats use one `stats_tier`: `NEW`, `HOT`, `WARM`, or `COLD`. `HOT` means `playing >= 100` or `visits >= 250M`; `WARM` means `playing >= 30` or `visits >= 10M`; `NEW` means newly discovered/never refreshed/missing basic stats; all other valid games are `COLD`.
+  - Keep NEW refresh in its own workflow so discovery/backlog rows move quickly into HOT, WARM, or COLD without blocking HOT hourly freshness.
+  - `update-universe-hourly-stats.ts` is the tiered public stats collector for `/stats`; run it through `npm run stats:refresh -- --tier HOT|WARM|COLD|NEW` or the dedicated aliases `stats:refresh:hot`, `stats:refresh:warm`, and `stats:refresh:cold`. It fetches Roblox public game details, updates latest non-null values on `roblox_universes`, upserts `roblox_universe_stats_hourly`, assigns `stats_tier`, and can roll up today's row in `roblox_universe_stats_daily`.
+  - Keep WARM and COLD refreshes in separate workflows. COLD rotating batches can run longer and should not block WARM freshness.
+  - `assign-universe-stats-tier.ts` backfills or repairs `stats_tier`; use `npm run stats:tier`.
+  - `audit-universe-stats-workflow.ts` reports tier counts, stale stats, missing media, and latest hourly coverage; use `npm run stats:audit`.
   - `rollup-universe-daily-stats.ts` rolls hourly rows into the existing daily table. Use `npm run stats:rollup-daily -- --date yesterday --finalize` after the UTC day ends so daily `playing` means the highest recorded CCU for that day.
   - `rank-universe-stats.ts` snapshots hourly public rankings into `roblox_universe_rank_snapshots`; run it after the hourly collector when `/stats` rank movement needs fresh data.
-  - `enrich-roblox-universes.ts` no longer writes same-day stat rows by default; set `ROBLOX_ENRICH_WRITE_DAILY_STATS=true` only for a legacy one-off where hourly rollups are not being used.
+  - `enrich-roblox-universes.ts` preserves existing non-null universe data and stores every distinct icon/screenshot URL in `roblox_universe_media`; it should not delete previous media or replace existing media fields with `null`.
   - `backfill-clean-display-names.ts` cleans `roblox_universes.display_name` from raw Roblox titles while leaving `name` as the raw source value. It is dry-run by default; use `--apply` locally, and pair `NODE_ENV=production` with `--allow-prod` only after a clean production dry-run.
 
 ## Operational Expectations

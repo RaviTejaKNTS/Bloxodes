@@ -1,16 +1,16 @@
-name: Roblox Stats Hourly
+name: Universe Warm Refresh
 
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "12 * * * *"
+    - cron: "32 */12 * * *"
 
 concurrency:
-  group: roblox-stats-hourly
+  group: universe-warm-refresh
   cancel-in-progress: false
 
 jobs:
-  stats-hourly:
+  warm-refresh:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -26,22 +26,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Refresh HOT stats and today rollup
+      - name: Refresh WARM stats
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
           UNIVERSE_HOURLY_STATS_BATCH_SIZE: 50
           UNIVERSE_HOURLY_STATS_REQUEST_DELAY_MS: 1200
-        run: npm run stats:refresh -- --tier HOT --rollup-today --limit 10000
+        run: npm run stats:refresh:warm -- --limit 20000
 
-      - name: Snapshot stats ranks
+      - name: Assign stats tiers
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-        run: npm run stats:rank -- --all --limit 10000
+        run: npm run stats:tier -- --tier WARM
 
       - name: Queue public stats revalidation
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-        run: npm run enqueue:revalidation -- --source stats_hourly_workflow --event stats:stats --event stats:games
+        run: npm run enqueue:revalidation -- --source stats_warm_workflow --event stats:stats --event stats:games

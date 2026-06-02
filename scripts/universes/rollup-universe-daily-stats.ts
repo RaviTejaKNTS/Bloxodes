@@ -9,7 +9,6 @@ type Options = {
   date: string;
   finalize: boolean;
   limit: number;
-  qualityOnly: boolean;
 };
 
 type HourlyRow = {
@@ -167,8 +166,7 @@ async function fetchHourlyRows(options: Options, offset: number): Promise<Hourly
         "rating_percent",
         "sample_count",
         "first_sampled_at",
-        "last_sampled_at",
-        "universe:roblox_universes!inner(is_quality_candidate)"
+        "last_sampled_at"
       ].join(", ")
     )
     .gte("hour_start", start)
@@ -176,10 +174,6 @@ async function fetchHourlyRows(options: Options, offset: number): Promise<Hourly
     .order("universe_id", { ascending: true })
     .order("hour_start", { ascending: true })
     .range(offset, offset + BATCH_SIZE - 1);
-
-  if (options.qualityOnly) {
-    query = query.eq("universe.is_quality_candidate", true);
-  }
 
   const { data, error } = await query;
   if (error) throw error;
@@ -345,7 +339,7 @@ export async function main(overrides?: Partial<Options>) {
 
   await writeRollups(allRollups);
   console.log(
-    `Rolled up ${allRollups.length} daily rows for ${options.date} (finalize=${options.finalize}, qualityOnly=${options.qualityOnly}).`
+    `Rolled up ${allRollups.length} daily rows for ${options.date} (finalize=${options.finalize}).`
   );
 }
 
@@ -354,8 +348,7 @@ function parseArgs(): Options {
   const options: Options = {
     date: todayIsoDate(),
     finalize: false,
-    limit: Number.isFinite(DEFAULT_LIMIT) && DEFAULT_LIMIT > 0 ? DEFAULT_LIMIT : 0,
-    qualityOnly: false
+    limit: Number.isFinite(DEFAULT_LIMIT) && DEFAULT_LIMIT > 0 ? DEFAULT_LIMIT : 0
   };
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
@@ -369,7 +362,7 @@ function parseArgs(): Options {
       options.limit = Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
       i += 1;
     } else if (arg === "--quality-only") {
-      options.qualityOnly = true;
+      // Deprecated no-op kept so older manual commands do not fail.
     } else if (arg === "--help" || arg === "-h") {
       console.log(`
 Usage: npm run stats:rollup-daily -- [options]
@@ -378,7 +371,6 @@ Options:
   --date <today|yesterday|YYYY-MM-DD>  Date to roll up (default: today)
   --finalize                           Mark snapshot as finalized
   -l, --limit <number>                 Max universe rollups to write; 0 means all
-  --quality-only                       Only roll up quality candidate universes
   -h, --help                           Show this help text
 `);
       process.exit(0);

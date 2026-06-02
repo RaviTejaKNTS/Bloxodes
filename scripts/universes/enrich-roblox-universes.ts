@@ -3,6 +3,7 @@ import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { slugify } from "@/lib/slug";
 import { cleanRobloxUniverseDisplayName, isDirtyRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
+import { isStatsTier, type StatsTier } from "./stats-tier";
 
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";
 const GAME_ICONS_API = "https://thumbnails.roblox.com/v1/games/icons";
@@ -34,6 +35,9 @@ type UniverseRow = {
   last_seen_in_sort: string | null;
   updated_at: string | null;
   name?: string | null;
+  playing?: number | null;
+  visits?: number | null;
+  stats_tier?: StatsTier | null;
 };
 
 type RobloxGameDetail = {
@@ -225,6 +229,14 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const nowIso = () => new Date().toISOString();
 let nextRequestAt = 0;
+
+function supabaseHost() {
+  try {
+    return new URL(process.env.SUPABASE_URL ?? "").host;
+  } catch {
+    return "unknown Supabase host";
+  }
+}
 
 function toSlug(value?: string | null): string | null {
   if (!value) return null;
@@ -518,28 +530,32 @@ async function fetchUniversePage(
   offset: number,
   count: number,
   mode: EnrichmentMode,
-  qualityOnly: boolean
+  tier: StatsTier | "ALL"
 ): Promise<UniverseRow[]> {
   const supabase = supabaseAdmin();
   let query = supabase
     .from("roblox_universes")
-    .select("universe_id, root_place_id, last_seen_in_sort, updated_at, name")
+    .select("universe_id, root_place_id, last_seen_in_sort, updated_at, name, playing, visits, stats_tier")
     .not("root_place_id", "is", null);
 
-  if (qualityOnly) {
-    query = query.eq("is_quality_candidate", true);
+  if (tier !== "ALL") {
+    query = query.eq("stats_tier", tier);
   }
 
   if (mode === "light") {
     query = query
-      .order("last_light_enriched_at", { ascending: true })
+      .order("last_light_enriched_at", { ascending: true, nullsFirst: true })
+      .order("stats_tier", { ascending: true, nullsFirst: false })
+      .order("playing", { ascending: false, nullsFirst: false })
+      .order("visits", { ascending: false, nullsFirst: false })
       .order("last_seen_in_search", { ascending: false })
       .order("last_seen_in_sort", { ascending: false })
       .order("updated_at", { ascending: false });
   } else {
     query = query
-      .order("last_deep_enriched_at", { ascending: true })
-      .order("quality_score", { ascending: false })
+      .order("last_deep_enriched_at", { ascending: true, nullsFirst: true })
+      .order("playing", { ascending: false, nullsFirst: false })
+      .order("visits", { ascending: false, nullsFirst: false })
       .order("last_seen_in_sort", { ascending: false })
       .order("updated_at", { ascending: false });
   }
@@ -905,6 +921,26 @@ function normalizeIconEntries(icons: IconResponse["data"]) {
   return map;
 }
 
+type StoredThumbnail = { url: string; state?: string | null; type?: string | null };
+
+function normalizeStoredThumbnails(value: unknown): StoredThumbnail[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((entry): StoredThumbnail | null => {
+      if (typeof entry === "string") return { url: entry };
+      if (!entry || typeof entry !== "object") return null;
+      const record = entry as Record<string, unknown>;
+      const url = typeof record.url === "string" ? record.url : typeof record.imageUrl === "string" ? record.imageUrl : null;
+      if (!url) return null;
+      return {
+        url,
+        state: typeof record.state === "string" ? record.state : null,
+        type: typeof record.type === "string" ? record.type : null
+      };
+    })
+    .filter((entry): entry is StoredThumbnail => entry != null);
+}
+
 async function upsertMedia(
   supabase = supabaseAdmin(),
   universeIds: number[],
@@ -929,6 +965,7 @@ async function upsertMedia(
     icon_url?: string | null;
     thumbnail_urls?: unknown;
   }> = [];
+  const seenAt = nowIso();
 
   for (const universeId of universeIds) {
     const icon = iconMap.get(universeId);
@@ -961,34 +998,92 @@ async function upsertMedia(
       });
     });
 
-    gameUpdates.push({
-      universe_id: universeId,
-      icon_url: icon?.url ?? null,
-      thumbnail_urls: thumbs.map((thumb) => ({
-        url: thumb.url,
-        state: thumb.state ?? null,
-        type: thumb.type ?? null
-      }))
+    if (icon || thumbs.length) {
+      gameUpdates.push({
+        universe_id: universeId,
+        icon_url: icon?.url ?? null,
+        thumbnail_urls: thumbs.map((thumb) => ({
+          url: thumb.url,
+          state: thumb.state ?? null,
+          type: thumb.type ?? null
+        }))
+      });
+    }
+  }
+
+  if (mediaRows.length) {
+    const { data: existingMedia, error: existingError } = await supabase
+      .from("roblox_universe_media")
+      .select("universe_id, media_type, image_url")
+      .in("universe_id", universeIds)
+      .not("image_url", "is", null);
+    if (existingError) throw existingError;
+    const existingKeys = new Set(
+      ((existingMedia ?? []) as Array<{ universe_id: number; media_type: string; image_url: string | null }>).map(
+        (row) => `${row.universe_id}:${row.media_type}:${row.image_url}`
+      )
+    );
+    const freshRows = mediaRows
+      .filter((row) => !existingKeys.has(`${row.universe_id}:${row.media_type}:${row.image_url}`))
+      .map((row) => ({
+        ...row,
+        source: "roblox_thumbnails",
+        first_seen_at: seenAt,
+        last_seen_at: seenAt,
+        fetched_at: seenAt
+      }));
+    const seenRows = mediaRows.filter((row) => existingKeys.has(`${row.universe_id}:${row.media_type}:${row.image_url}`));
+
+    if (freshRows.length) {
+      const { error } = await supabase.from("roblox_universe_media").insert(freshRows);
+      if (error) throw error;
+    }
+    await promisePool(seenRows, ATTACHMENT_CONCURRENCY, async (row) => {
+      const { error } = await supabase
+        .from("roblox_universe_media")
+        .update({
+          last_seen_at: seenAt,
+          fetched_at: seenAt,
+          extra: row.extra
+        })
+        .eq("universe_id", row.universe_id)
+        .eq("media_type", row.media_type)
+        .eq("image_url", row.image_url);
+      if (error) throw error;
     });
   }
 
-  if (universeIds.length) {
-    await supabase.from("roblox_universe_media").delete().in("universe_id", universeIds);
-  }
-  if (mediaRows.length) {
-    const { error } = await supabase.from("roblox_universe_media").insert(mediaRows);
-    if (error) throw error;
-  }
-
   if (gameUpdates.length) {
+    const { data: existingGames, error: existingGamesError } = await supabase
+      .from("roblox_universes")
+      .select("universe_id, icon_url, thumbnail_urls")
+      .in(
+        "universe_id",
+        gameUpdates.map((update) => update.universe_id)
+      );
+    if (existingGamesError) throw existingGamesError;
+    const existingById = new Map(
+      ((existingGames ?? []) as Array<{ universe_id: number; icon_url: string | null; thumbnail_urls: unknown }>).map(
+        (row) => [row.universe_id, row]
+      )
+    );
+
     await promisePool(gameUpdates, ATTACHMENT_CONCURRENCY, async (update) => {
-      const { error } = await supabase
-        .from("roblox_universes")
-        .update({
-          icon_url: update.icon_url ?? null,
-          thumbnail_urls: update.thumbnail_urls ?? null
-        })
-        .eq("universe_id", update.universe_id);
+      const existing = existingById.get(update.universe_id);
+      const existingThumbs = normalizeStoredThumbnails(existing?.thumbnail_urls);
+      const incomingThumbs = normalizeStoredThumbnails(update.thumbnail_urls);
+      const mergedThumbs = Array.from(
+        new Map([...existingThumbs, ...incomingThumbs].map((thumb) => [thumb.url, thumb])).values()
+      );
+      const updatePayload: Record<string, unknown> = {};
+      if (!existing?.icon_url && update.icon_url) {
+        updatePayload.icon_url = update.icon_url;
+      }
+      if (incomingThumbs.length) {
+        updatePayload.thumbnail_urls = mergedThumbs;
+      }
+      if (!Object.keys(updatePayload).length) return;
+      const { error } = await supabase.from("roblox_universes").update(updatePayload).eq("universe_id", update.universe_id);
       if (error) throw error;
     });
   }
@@ -1323,7 +1418,15 @@ function parseArgs() {
       options.mode = args[i + 1];
       i += 1;
     } else if (arg === "--quality-only") {
-      options.qualityOnly = true;
+      options.tier = "HOT";
+    } else if (arg === "--tier") {
+      const tier = String(args[i + 1] ?? "").toUpperCase();
+      if (tier === "ALL" || isStatsTier(tier)) {
+        options.tier = tier;
+      } else {
+        throw new Error(`Invalid --tier value: ${tier}. Use NEW, HOT, WARM, COLD, or ALL.`);
+      }
+      i += 1;
     } else if (arg === "--help" || arg === "-h") {
       options.help = true;
     }
@@ -1346,7 +1449,7 @@ Options:
   -l, --limit <number>   Total universes to process (default: ${DEFAULT_TOTAL_LIMIT})
   -b, --batch <number>   Batch size per Roblox API request (default: ${BATCH_SIZE})
   -m, --mode <mode>      light = details/media only; deep = Open Cloud, links, passes, badges (default: deep)
-  --quality-only         Only process rows marked is_quality_candidate
+  --tier <tier>          Only process NEW, HOT, WARM, COLD, or ALL rows (default: ALL)
   -h, --help             Show this help text
 `);
 }
@@ -1365,13 +1468,14 @@ async function main() {
   const batchSize =
     typeof options.batch === "number" && !Number.isNaN(options.batch) && options.batch > 0 ? options.batch : BATCH_SIZE;
   const mode = parseMode(options.mode);
-  const qualityOnly = options.qualityOnly === true;
+  const tier = typeof options.tier === "string" && (options.tier === "ALL" || isStatsTier(options.tier)) ? options.tier : "ALL";
 
   const supabase = supabaseAdmin();
   const targetDescription = totalLimit > 0 ? `${totalLimit}` : "all available";
   console.log(
-    `🚀 Enriching ${targetDescription} universes (${mode} mode, qualityOnly=${qualityOnly}, batch size ${batchSize}, concurrency ${ATTACHMENT_CONCURRENCY})`
+    `🚀 Enriching ${targetDescription} universes (${mode} mode, tier=${tier}, batch size ${batchSize}, concurrency ${ATTACHMENT_CONCURRENCY})`
   );
+  console.log(`🎯 Supabase target: ${supabaseHost()} (NODE_ENV=${process.env.NODE_ENV ?? "development"})`);
 
   let processed = 0;
   let pageOffset = 0;
@@ -1383,7 +1487,7 @@ async function main() {
     const pageSize =
       totalLimit > 0 ? Math.min(SUPABASE_PAGE_LIMIT, Math.max(remaining, 0)) : SUPABASE_PAGE_LIMIT;
 
-    const page = await fetchUniversePage(pageOffset, pageSize, mode, qualityOnly);
+    const page = await fetchUniversePage(pageOffset, pageSize, mode, tier);
     if (!page.length) break;
 
     for (let i = 0; i < page.length; i += batchSize) {

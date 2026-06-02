@@ -30,20 +30,36 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-        run: npm run stats:rollup-daily -- --date yesterday --finalize --quality-only
+        run: npm run stats:rollup-daily -- --date yesterday --finalize
 
-      - name: Revalidate public stats pages
+      - name: Audit stats workflow
         env:
-          REVALIDATE_ENDPOINT: ${{ secrets.REVALIDATE_ENDPOINT }}
-          REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
-        run: |
-          if [ -z "$REVALIDATE_ENDPOINT" ] || [ -z "$REVALIDATE_SECRET" ]; then
-            echo "Skipping stats revalidation because REVALIDATE_ENDPOINT or REVALIDATE_SECRET is not configured."
-            exit 0
-          fi
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+        run: npm run stats:audit
 
-          curl --fail --show-error --silent \
-            --request POST "$REVALIDATE_ENDPOINT" \
-            --header "Authorization: Bearer $REVALIDATE_SECRET" \
-            --header "Content-Type: application/json" \
-            --data '{"type":"batch","events":[{"type":"stats","slug":"stats"},{"type":"stats","slug":"games"}]}'
+      - name: Repair HOT media
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+          ROBLOX_ENRICH_BATCH: 25
+          ROBLOX_ENRICH_REQUEST_INTERVAL_MS: 2500
+          ROBLOX_ENRICH_BATCH_DELAY_MS: 4000
+          ROBLOX_ENRICH_RETRY_LIMIT: 6
+        run: npm run enrich:universes:light -- --tier HOT --limit 1000 --batch 25
+
+      - name: Repair WARM media
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+          ROBLOX_ENRICH_BATCH: 25
+          ROBLOX_ENRICH_REQUEST_INTERVAL_MS: 2500
+          ROBLOX_ENRICH_BATCH_DELAY_MS: 4000
+          ROBLOX_ENRICH_RETRY_LIMIT: 6
+        run: npm run enrich:universes:light -- --tier WARM --limit 1000 --batch 25
+
+      - name: Queue public stats revalidation
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+        run: npm run enqueue:revalidation -- --source stats_daily_finalize_workflow --event stats:stats --event stats:games

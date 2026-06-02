@@ -17,8 +17,7 @@ export type StatsSortKey =
   | "rating"
   | "peak"
   | "updated"
-  | "created"
-  | "quality";
+  | "created";
 
 export type StatsTimeRange = "24h" | "7d" | "30d" | "90d" | "all";
 export type StatsMetricKey = "players" | "visits" | "favorites" | "rating";
@@ -44,7 +43,7 @@ export type StatsGame = {
   likes: number | null;
   dislikes: number | null;
   ratingPercent: number | null;
-  qualityScore: number | null;
+  statsTier: "NEW" | "HOT" | "WARM" | "COLD" | null;
   createdAtApi: string | null;
   updatedAtApi: string | null;
   lastStatsRefreshedAt: string | null;
@@ -95,6 +94,7 @@ export type StatsGenreSummary = {
 export type StatsHomeData = {
   totals: {
     trackedGames: number;
+    featuredGames: number;
     livePlayers: number;
     totalVisits: number;
     lastUpdatedAt: string | null;
@@ -152,7 +152,7 @@ type UniverseRow = {
   favorites: number | null;
   likes: number | null;
   dislikes: number | null;
-  quality_score: number | null;
+  stats_tier: "NEW" | "HOT" | "WARM" | "COLD" | null;
   created_at_api: string | null;
   updated_at_api: string | null;
   last_stats_refreshed_at: string | null;
@@ -199,8 +199,7 @@ const SORT_COLUMNS: Partial<Record<StatsSortKey, keyof UniverseRow>> = {
   visits: "visits",
   favorites: "favorites",
   updated: "updated_at_api",
-  created: "created_at_api",
-  quality: "quality_score"
+  created: "created_at_api"
 };
 
 export const STATS_SORT_OPTIONS: Array<{ value: StatsSortKey; label: string }> = [
@@ -212,8 +211,7 @@ export const STATS_SORT_OPTIONS: Array<{ value: StatsSortKey; label: string }> =
   { value: "rating", label: "Rating" },
   { value: "peak", label: "Peak CCU" },
   { value: "updated", label: "Roblox updated" },
-  { value: "created", label: "Created date" },
-  { value: "quality", label: "Bloxodes quality" }
+  { value: "created", label: "Created date" }
 ];
 
 export const STATS_TIME_RANGES: Array<{ value: StatsTimeRange; label: string }> = [
@@ -302,7 +300,7 @@ function mapUniverse(row: UniverseRow): StatsGame {
     likes: toNumber(row.likes),
     dislikes: toNumber(row.dislikes),
     ratingPercent,
-    qualityScore: toNumber(row.quality_score),
+    statsTier: row.stats_tier,
     createdAtApi: row.created_at_api,
     updatedAtApi: row.updated_at_api,
     lastStatsRefreshedAt: row.last_stats_refreshed_at,
@@ -388,22 +386,21 @@ async function listBaseGames(options: {
   minPlayers?: number | null;
   sort?: StatsSortKey;
   count?: "exact" | null;
-  qualityForSitemap?: boolean;
+  tierForSitemap?: boolean;
 }) {
   const sb = supabaseAdmin();
   const select = `
     universe_id, root_place_id, name, display_name, slug, description,
     creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
     icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-    quality_score, created_at_api, updated_at_api, last_stats_refreshed_at,
+    stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
     last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
     console_enabled, vr_enabled
   `;
   let query = sb
     .from("roblox_universes")
     .select(select, { count: options.count ?? undefined })
-    .not("slug", "is", null)
-    .not("icon_url", "is", null);
+    .not("slug", "is", null);
 
   if (options.q?.trim()) {
     const pattern = `%${options.q.trim().replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
@@ -418,8 +415,8 @@ async function listBaseGames(options: {
     query = query.gte("playing", options.minPlayers);
   }
 
-  if (options.qualityForSitemap) {
-    query = query.or("is_quality_candidate.eq.true,playing.gte.1000,quality_tier.in.(A,B)");
+  if (options.tierForSitemap) {
+    query = query.or("stats_tier.in.(HOT,WARM),playing.gte.100,visits.gte.10000000");
   }
 
   const sort = options.sort ?? "playing";
@@ -517,9 +514,10 @@ async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> 
 
 export async function getStatsHome(): Promise<StatsHomeData> {
   noStore();
-  const [{ rows: topBase }, { rows: visitedBase }, genres] = await Promise.all([
+  const [{ rows: topBase }, { rows: visitedBase }, { total: trackedGames }, genres] = await Promise.all([
     listBaseGames({ limit: 16, sort: "playing" }),
     listBaseGames({ limit: 10, sort: "visits" }),
+    listBaseGames({ limit: 1, sort: "playing", count: "exact" }),
     listStatsGenres(10)
   ]);
   const [topGames, mostVisited] = await Promise.all([attachGrowth(topBase), attachGrowth(visitedBase)]);
@@ -540,7 +538,8 @@ export async function getStatsHome(): Promise<StatsHomeData> {
 
   return {
     totals: {
-      trackedGames: topGames.length,
+      trackedGames,
+      featuredGames: topGames.length,
       livePlayers,
       totalVisits,
       lastUpdatedAt
@@ -637,7 +636,6 @@ export async function getStatsGenreOptions(): Promise<string[]> {
     .from("roblox_universes")
     .select("genre_l1, genre")
     .not("slug", "is", null)
-    .not("icon_url", "is", null)
     .order("genre_l1", { ascending: true })
     .limit(1000);
   if (error) return [];
@@ -753,7 +751,7 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
       universe_id, root_place_id, name, display_name, slug, description,
       creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
       icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-      quality_score, created_at_api, updated_at_api, last_stats_refreshed_at,
+      stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
       last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
       console_enabled, vr_enabled
     `)
@@ -791,7 +789,7 @@ export async function getStatsGameSummaryByUniverseId(universeId: number): Promi
       universe_id, root_place_id, name, display_name, slug, description,
       creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
       icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-      quality_score, created_at_api, updated_at_api, last_stats_refreshed_at,
+      stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
       last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
       console_enabled, vr_enabled
     `)
@@ -876,7 +874,7 @@ async function loadLatestRank(universeId: number): Promise<number | null> {
 }
 
 export async function listStatsSitemapGames(limit = 200): Promise<Array<{ slug: string; updatedAt: string | null }>> {
-  const { rows } = await listBaseGames({ limit, sort: "playing", qualityForSitemap: true });
+  const { rows } = await listBaseGames({ limit, sort: "playing", tierForSitemap: true });
   return rows.map((game) => ({
     slug: game.slug,
     updatedAt: game.lastStatsRefreshedAt ?? game.lastPlayingRefreshedAt ?? game.updatedAtApi

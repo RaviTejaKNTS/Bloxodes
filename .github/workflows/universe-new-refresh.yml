@@ -1,18 +1,18 @@
-name: Universe Discovery
+name: Universe New Refresh
 
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "35 1 * * *"
+    - cron: "7 */2 * * *"
 
 concurrency:
-  group: universe-discovery
+  group: universe-new-refresh
   cancel-in-progress: false
 
 jobs:
-  universe-discovery:
+  new-refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 90
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -26,20 +26,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Collect Explore universes
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-          ROBLOX_EXPLORE_REQUEST_INTERVAL_MS: 1200
-          ROBLOX_EXPLORE_PAGE_DELAY_MS: 1200
-          ROBLOX_EXPLORE_SORT_DELAY_MS: 1500
-          ROBLOX_EXPLORE_DEVICE_DELAY_MS: 6000
-          ROBLOX_EXPLORE_RETRY_LIMIT: 6
-          ROBLOX_EXPLORE_MAX_SORTS: 30
-          ROBLOX_EXPLORE_MAX_PAGES_PER_SORT: 2
-        run: npm run collect:universes
-
-      - name: Light enrich new Explore universes
+      - name: Light enrich NEW universes
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
@@ -55,10 +42,16 @@ jobs:
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
           UNIVERSE_HOURLY_STATS_BATCH_SIZE: 50
           UNIVERSE_HOURLY_STATS_REQUEST_DELAY_MS: 1200
-        run: npm run stats:refresh -- --tier NEW --limit 2000
+        run: npm run stats:refresh:new -- --limit 5000
 
       - name: Assign stats tiers
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
-        run: npm run stats:tier -- --limit 0
+        run: npm run stats:tier -- --tier NEW
+
+      - name: Queue public stats revalidation
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+        run: npm run enqueue:revalidation -- --source stats_new_workflow --event stats:stats --event stats:games
