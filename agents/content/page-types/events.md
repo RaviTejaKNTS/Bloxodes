@@ -63,7 +63,7 @@ Do not promise that the page has every current event unless the source feed prov
 
 ## Final Checks
 
-- `events_pages.slug` is the game slug.
+- `events_pages.slug` is the editorial game slug, not `roblox_universes.slug`.
 - `universe_id` matches the canonical Roblox game.
 - Event rows are sourced from Roblox/developer/community evidence, not invented.
 - `meta_description` is specific and under 160 characters.

@@ -33,6 +33,7 @@ Copy `agents/content/todo-templates/game-catalog.md` into the folder as `todo.md
 ## What This Skill Is For
 
 Use this when a catalog page is powered by a game dataset, such as pets, crops, vehicles, accessories, eggs, bosses, weapons, maps, materials, cosmetics, or other durable game-specific item collections.
+Use the editorial game slug for `wiki_slug` and the route. Do not copy `roblox_universes.slug`; universe slugs belong to `/stats/games/*` and may include universe IDs.
 
 The job is not to turn fields into prose. The job is to understand the game system well enough that the cards make sense to a casual player and the page helps them complete a real in-game task.
 

@@ -296,7 +296,7 @@ Never inject event timeline data manually. Current/upcoming/past rows, live stat
 
 ### Code Pages
 
-Research code pages as source-driven `games` rows, not as hand-maintained code lists. The public path is `/codes/<game-slug>`, so the stored `games.slug` must be the game slug only, such as `wizard-alchemy`, never `wizard-alchemy-codes`.
+Research code pages as source-driven `games` rows, not as hand-maintained code lists. The public path is `/codes/<game-slug>`, so the stored `games.slug` must be the editorial game slug only, such as `wizard-alchemy`, never `wizard-alchemy-codes` and never `roblox_universes.slug`.
 
 Before writing or updating a code page, confirm the source wiring:
 
@@ -322,7 +322,7 @@ The copy should explain what the result means, not simply say the tool calculate
 
 Research checklists as playable progress boards. Inspect existing `/checklists` pages and the `checklist_pages_view` / `checklist_items` rows before writing a new one. The goal is to decide what a player should actually tick off while playing, not to translate every guide fact into a checkbox.
 
-Use one combined checklist per game unless the user explicitly asks for more. The slug should be the game slug only, such as `wizard-alchemy`. Record the planned parent sections, subsection rows, expected leaf task count, and which local datasets or source rows support item-level tasks.
+Use one combined checklist per game unless the user explicitly asks for more. The slug should be the editorial game slug only, such as `wizard-alchemy`, not `roblox_universes.slug`. Record the planned parent sections, subsection rows, expected leaf task count, and which local datasets or source rows support item-level tasks.
 
 The research should identify:
 

@@ -12,7 +12,7 @@ Workspace: `tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/`
 
 ## Setup
 
-- [ ] Confirm game slug, universe ID, collection slug, stable code, route, and existing `wiki_catalog_pages` row.
+- [ ] Confirm editorial game slug, universe ID, collection slug, stable code, route, and existing `wiki_catalog_pages` row.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
 - [ ] Confirm this is a durable in-game item collection, UGC exception, or stable row-level system, not a temporary reward track or platform metadata.
 - [ ] Inspect `data/<Game>/`, route/config support, existing local images, and renderer behavior.

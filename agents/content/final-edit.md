@@ -132,7 +132,8 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 ### Code Page
 
 - The output writes only `games` row fields. It does not include a manual `codes` array, `expired_codes`, code names, `first_seen_at`, or code dates.
-- `slug` is the game slug only, such as `wizard-alchemy`, with no `-codes` suffix.
+- `slug` is the editorial game slug only, such as `wizard-alchemy`, with no `-codes` suffix.
+- `slug` is not copied from `roblox_universes.slug`; universe slugs are stats-only identifiers and may include universe IDs.
 - `roblox_link` is the Roblox experience URL.
 - `source_url` is the RobloxDen codes page URL and `source_url_2` is the Beebom codes page URL.
 - `seo_title` is empty or null unless the user explicitly asked for a custom value.
@@ -224,7 +225,8 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 ### Checklist
 
 - The output includes a `checklist_pages` shaped page row and `checklist_items` shaped task rows.
-- The slug is the game slug only, such as `wizard-alchemy`.
+- The slug is the editorial game slug only, such as `wizard-alchemy`.
+- The slug is not copied from `roblox_universes.slug`.
 - The visible title is spelled correctly and usually follows `<Game> Checklist`.
 - `seo_description` and `description_md` are not empty for a new checklist.
 - Parent section rows use `section_code` depth 1, subsection rows use depth 2, and checkable tasks use depth 3 or deeper.
@@ -239,7 +241,8 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 ### Quiz
 
 - The output includes a `quiz_pages` shaped metadata row when page metadata changes and a valid `QuizData` pool when questions change.
-- The code is the game slug only, such as `wizard-alchemy`, with no `-quiz` suffix.
+- The code is the editorial game slug only, such as `wizard-alchemy`, with no `-quiz` suffix.
+- The code is not copied from `roblox_universes.slug`.
 - `description_md` is compact and useful; it should not become a separate guide or answer key.
 - The detail route does not reintroduce a “what this quiz covers” / about section.
 - Each difficulty has enough questions for the intended public attempt. Current Bloxodes quiz attempts use 5 easy, 5 medium, and 5 hard questions, so keep at least 10 per difficulty when possible.

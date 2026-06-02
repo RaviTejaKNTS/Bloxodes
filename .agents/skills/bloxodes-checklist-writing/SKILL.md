@@ -31,7 +31,7 @@ Copy `agents/content/todo-templates/checklist.md` into the folder as `todo.md` a
 
 Use this when the page is an interactive progress board under `/checklists/<slug>`. A checklist is not an article and it is not a full item database. It helps a player track real tasks while playing: first-session setup, major systems, important collection goals, route checks, boss clears, shop/service visits, and final completion audits.
 
-Bloxodes normally creates one combined checklist per game unless the user explicitly asks for multiple. For a game-specific checklist, use the game slug as the checklist slug. Example: `wizard-alchemy`, not `wizard-alchemy-checklist`.
+Bloxodes normally creates one combined checklist per game unless the user explicitly asks for multiple. For a game-specific checklist, use the game slug as the checklist slug. Example: `wizard-alchemy`, not `wizard-alchemy-checklist`. Do not use `roblox_universes.slug` as the checklist slug; universe slugs belong to `/stats/games/*` and may include universe IDs.
 
 For new game coverage, prefer writing the checklist after core catalog data or catalog-led discovery has identified the real systems, unlocks, item collections, routes, and repeatable goals. Do not turn vague page-discovery guesses into checkable tasks.
 
@@ -135,6 +135,7 @@ Before calling a checklist ready:
 
 - `final.json` is valid.
 - The slug is the game slug.
+- The slug is not `roblox_universes.slug`.
 - The title is spelled correctly.
 - Parent rows have useful descriptions.
 - Leaf tasks are actions a player can check off.

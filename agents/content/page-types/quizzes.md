@@ -58,7 +58,7 @@ The question pool lives in local JSON:
 }
 ```
 
-Use the game slug as `quiz_pages.code`, for example `wizard-alchemy`, not `wizard-alchemy-quiz`. The route already supplies `/quizzes/`.
+Use the editorial game slug as `quiz_pages.code`, for example `wizard-alchemy`, not `wizard-alchemy-quiz`. The route already supplies `/quizzes/`. Do not copy `roblox_universes.slug`; universe slugs belong to `/stats/games/*` and may include universe IDs.
 
 The current quiz runner builds each public attempt from 5 easy, 5 medium, and 5 hard questions. Keep at least 10 questions per difficulty for replay variety unless the user accepts a smaller pool.
 
@@ -166,7 +166,7 @@ For local development, quiz JSON should be read fresh enough that edits appear d
 
 Before calling a quiz ready:
 
-- `quiz_pages.code` is the game slug.
+- `quiz_pages.code` is the editorial game slug, not `roblox_universes.slug`.
 - `description_md` is useful but not a guide-shaped info dump.
 - There is no separate coverage/about section.
 - `quiz.json` is valid and follows the `QuizData` shape.

@@ -27,7 +27,7 @@ Copy `agents/content/todo-templates/events.md` into the folder as `todo.md` and 
 
 ## What This Skill Is For
 
-Use this for `/events/<game-slug>` pages backed by `events_pages` and timeline data in `roblox_virtual_events`.
+Use this for `/events/<game-slug>` pages backed by `events_pages` and timeline data in `roblox_virtual_events`. Use the editorial game slug for `events_pages.slug`. Do not use `roblox_universes.slug`; universe slugs belong to `/stats/games/*` and may include universe IDs.
 
 The first job is eligibility. Do not create an event page only because a game updates often. Recommend or write one only when the game has trackable Roblox/developer/community event evidence.
 

@@ -41,7 +41,7 @@ Do not include `codes`, `expired_codes`, `firstSeenAt`, `first_seen_at`, or any 
 
 ## Hard Rules
 
-- The slug is the game slug only. Use `wizard-alchemy`, not `wizard-alchemy-codes`, because the route already says `/codes/`.
+- The slug is the editorial game slug only. Use `wizard-alchemy`, not `wizard-alchemy-codes`, because the route already says `/codes/`. Do not copy `roblox_universes.slug`.
 - `roblox_link` must be the official Roblox experience URL.
 - `source_url` must be the RobloxDen codes page URL.
 - `source_url_2` must be the Beebom codes page URL.

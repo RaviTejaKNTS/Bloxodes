@@ -4,6 +4,7 @@ import path from "node:path";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { computeGameDetails, syncGameCodesFromSources } from "@/lib/admin/game-import";
+import { assertEditorialSlug } from "../shared/editorial-slugs";
 
 export type ImportPayload = {
   sourceUrl: string;
@@ -224,6 +225,7 @@ async function importSingleGame(
     name,
     sourceUrl
   });
+  assertEditorialSlug(derivedSlug, "games.slug");
   const publishFlag = publish ?? true;
 
   const normalizeOptionalUrl = (value: string | null | undefined) => {

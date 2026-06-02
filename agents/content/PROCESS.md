@@ -431,7 +431,7 @@ Checklist output:
 }
 ```
 
-Checklist pages use `section_code` depth as the render contract. Parent rows such as `1` create major board sections, child rows such as `1.1` create labels inside a section, and leaf rows such as `1.1.1` become checkable tasks. Use the game slug only for the public route, such as `/checklists/wizard-alchemy`. New checklist rows should include `seo_description` and `description_md`, and task titles must not include Markdown bullets.
+Checklist pages use `section_code` depth as the render contract. Parent rows such as `1` create major board sections, child rows such as `1.1` create labels inside a section, and leaf rows such as `1.1.1` become checkable tasks. Use the editorial game slug only for the public route, such as `/checklists/wizard-alchemy`; do not copy `roblox_universes.slug`. New checklist rows should include `seo_description` and `description_md`, and task titles must not include Markdown bullets.
 
 Code page output:
 
@@ -453,7 +453,7 @@ Code page output:
 }
 ```
 
-Code pages are backed by `games` plus the `codes` table, but the content workflow only writes the `games` row. The slug is the game slug only, such as `wizard-alchemy`, because the public route is already `/codes/<slug>`. `roblox_link` must hold the Roblox experience URL. `source_url` must hold the RobloxDen codes page URL, and `source_url_2` must hold the Beebom codes page URL so `scripts/codes/update-codes.ts` can collect live codes. Keep `seo_title` empty or null unless the user explicitly asks otherwise.
+Code pages are backed by `games` plus the `codes` table, but the content workflow only writes the `games` row. The slug is the editorial game slug only, such as `wizard-alchemy`, because the public route is already `/codes/<slug>`; do not copy `roblox_universes.slug`. `roblox_link` must hold the Roblox experience URL. `source_url` must hold the RobloxDen codes page URL, and `source_url_2` must hold the Beebom codes page URL so `scripts/codes/update-codes.ts` can collect live codes. Keep `seo_title` empty or null unless the user explicitly asks otherwise.
 
 Never write active codes, expired codes, code names, `first_seen_at`, or other code rows manually in `final.json`, local JSON, SQL, or Supabase. After the game row is inserted or updated with the correct source URLs, run the codes refresh workflow, usually `npm run refresh:codes -- --slug <game-slug>`, and let that script upsert active and expired codes from the configured sources.
 

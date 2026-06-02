@@ -6,6 +6,13 @@ export function slugify(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
+export function statsUniverseSlug(value: string | null | undefined, universeId: number | string) {
+  const id = String(universeId).trim();
+  const base = slugify(value ?? "").replace(new RegExp(`-${id}$`), "");
+  const prefix = base && base !== id ? base : "roblox-game";
+  return `${prefix}-${id}`;
+}
+
 export function appendCodesSuffix(value: string) {
   const base = slugify(value);
   if (!base) return "";

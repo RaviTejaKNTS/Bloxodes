@@ -71,6 +71,8 @@ Return:
 }
 ```
 
+For game-linked articles, generate the article slug from the article topic/title. Do not copy `roblox_universes.slug`; universe slugs are stats-only identifiers and may include universe IDs.
+
 Use Markdown in `content_md`.
 Do not include `seo_title` for articles unless the `articles` schema changes.
 

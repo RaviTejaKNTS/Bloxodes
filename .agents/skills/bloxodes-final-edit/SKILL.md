@@ -67,6 +67,7 @@ Do not mark the content ready unless:
 - `final.json` is valid and shaped for the target table
 - article output uses a simple SEO-friendly title, a non-null author, an edited feature image, and the card/detail pages are verified to show the same author and cover after import
 - code-page `final.json` contains only `games` row fields, uses the game slug without `-codes`, leaves `seo_title` empty or null, puts RobloxDen in `source_url`, Beebom in `source_url_2`, and contains no manual `codes` array or code dates
+- editorial page slugs/codes are not copied from `roblox_universes.slug`, because universe slugs are stats-only identifiers and may include universe IDs
 - events-page `final.json` contains only evergreen `events_pages` fields and no manual timeline rows, live statuses, current event dates, one-off reward timelines, or freshness claims
 - article output is focused and evergreen, with an overlap check against codes, events, wiki, catalogs, tools, checklists, and quizzes
 - quiz output uses the game slug without `-quiz`, keeps page copy compact, validates the local `QuizData` shape, keeps easy questions easy, makes hard questions pro-level, and varies question rhythm without banning normal quiz phrasing

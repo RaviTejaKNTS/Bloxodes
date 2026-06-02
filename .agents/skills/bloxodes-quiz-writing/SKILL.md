@@ -31,7 +31,7 @@ Copy `agents/content/todo-templates/quiz.md` into the folder as `todo.md` and up
 
 Use this when the page is an interactive quiz under `/quizzes/<slug>`. A quiz is not an article and should not become a guide page with a small quiz attached. It should be a replayable test built from real game knowledge.
 
-Bloxodes normally creates one combined quiz per game unless the user explicitly asks for multiple. Use the game slug as the quiz code. Example: `wizard-alchemy`, not `wizard-alchemy-quiz`.
+Bloxodes normally creates one combined quiz per game unless the user explicitly asks for multiple. Use the game slug as the quiz code. Example: `wizard-alchemy`, not `wizard-alchemy-quiz`. Do not use `roblox_universes.slug` as `quiz_pages.code`; universe slugs belong to `/stats/games/*` and may include universe IDs.
 
 For new game coverage, prefer writing the quiz after core catalog data or catalog-led discovery exists. A good quiz needs stable item, map, mode, mechanic, and progression facts; do not make questions from surface-level guesses or current live codes/events.
 
@@ -105,7 +105,8 @@ Balance answer length and specificity. Do not make the correct answer the only l
 Before calling a quiz ready:
 
 - `final.json` is valid when used.
-- `quiz_pages.code` is the game slug.
+- `quiz_pages.code` is the editorial game slug.
+- `quiz_pages.code` is not `roblox_universes.slug`.
 - The local quiz JSON parses.
 - Each difficulty has the intended question count.
 - Every question has four options.

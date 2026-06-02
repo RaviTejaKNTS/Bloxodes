@@ -69,7 +69,7 @@ The DB normalizes `section_code`, so write clean numeric codes from the start. D
 
 ## Page Fields
 
-- `slug`: game slug only, such as `wizard-alchemy`.
+- `slug`: editorial game slug only, such as `wizard-alchemy`; do not copy `roblox_universes.slug`.
 - `title`: usually `<Game> Checklist`.
 - `seo_title`: usually `null` unless there is a clear SEO reason.
 - `seo_description`: concise card/meta summary. Do not leave this empty.

@@ -5,6 +5,7 @@ import path from "node:path";
 import { slugify, stripCodesSuffix } from "@/lib/slug";
 import { ensureUniverseForRobloxLink } from "@/lib/roblox/universe";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { assertEditorialSlug } from "../shared/editorial-slugs";
 
 type SourceUrlFields = Partial<Record<`source_url${"" | "_2" | "_3" | "_4" | "_5" | "_6" | "_7" | "_8" | "_9" | "_10"}`, string | null>>;
 
@@ -190,6 +191,7 @@ async function fetchRobloxThumbnail(
 async function upsertGamePage(payload: CodePagePayload, options: CliOptions) {
   const sb = supabaseAdmin();
   const slug = slugify(stripCodesSuffix(payload.slug ?? payload.name));
+  assertEditorialSlug(slug, "games.slug");
   const publish = options.publish ?? payload.publish ?? true;
 
   const { data: existing, error: existingError } = await sb

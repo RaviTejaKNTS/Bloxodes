@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { statsUniverseSlug } from "@/lib/slug";
 
 export const dynamic = "force-dynamic";
 
@@ -123,7 +124,6 @@ async function searchStatsGames(query: string, limit: number, entityTypes: strin
   const { data, error } = await sb
     .from("roblox_universes")
     .select("universe_id, slug, name, display_name, creator_name, genre_l1, genre, updated_at, last_stats_refreshed_at, playing")
-    .not("slug", "is", null)
     .not("icon_url", "is", null)
     .or(`name.ilike.${pattern},display_name.ilike.${pattern},creator_name.ilike.${pattern}`)
     .order("playing", { ascending: false, nullsFirst: false })
@@ -146,18 +146,21 @@ async function searchStatsGames(query: string, limit: number, entityTypes: strin
     last_stats_refreshed_at: string | null;
     playing: number | null;
   }>)
-    .filter((row) => row.slug && (row.display_name || row.name))
-    .map((row) => ({
-      entity_type: "stats_game",
-      entity_id: String(row.universe_id),
-      slug: row.slug ?? "",
-      title: `${row.display_name ?? row.name} Stats`,
-      subtitle: [row.creator_name, row.genre_l1 ?? row.genre].filter(Boolean).join(" · ") || "Roblox game stats",
-      url: `/stats/games/${row.slug}`,
-      updated_at: row.last_stats_refreshed_at ?? row.updated_at,
-      active_code_count: null,
-      search_text: [row.display_name, row.name, row.creator_name, row.genre_l1, row.genre].filter(Boolean).join(" ")
-    }));
+    .filter((row) => row.display_name || row.name || row.slug)
+    .map((row) => {
+      const statsSlug = statsUniverseSlug(row.slug ?? row.display_name ?? row.name, row.universe_id);
+      return {
+        entity_type: "stats_game",
+        entity_id: String(row.universe_id),
+        slug: statsSlug,
+        title: `${row.display_name ?? row.name ?? row.slug} Stats`,
+        subtitle: [row.creator_name, row.genre_l1 ?? row.genre].filter(Boolean).join(" · ") || "Roblox game stats",
+        url: `/stats/games/${statsSlug}`,
+        updated_at: row.last_stats_refreshed_at ?? row.updated_at,
+        active_code_count: null,
+        search_text: [row.display_name, row.name, row.creator_name, row.genre_l1, row.genre].filter(Boolean).join(" ")
+      };
+    });
 }
 
 function rowKey(row: SearchRow): string {

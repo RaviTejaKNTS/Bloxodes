@@ -28,7 +28,7 @@ This file is the quick reference for what exists today and how to invoke it.
 
 For new or corrected code pages:
 
-- Use the game slug only, such as `wizard-alchemy`, because the route is already `/codes/<slug>`.
+- Use the editorial game slug only, such as `wizard-alchemy`, because the route is already `/codes/<slug>`. Do not use `roblox_universes.slug`.
 - Store the Roblox experience URL in `roblox_link`, not in `source_url`.
 - Store the RobloxDen codes page in `source_url`.
 - Store the Beebom codes page in `source_url_2`.
@@ -54,8 +54,6 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Collect Roblox universes from Explore | `scripts/universes/collect-roblox-universes.ts` | `npm run collect:universes` |
 | Run local-safe universe pipeline | `scripts/universes/run-universe-pipeline.ts` | `npm run pipeline:universes` |
 | Backfill missing universe IDs | `scripts/backfill/backfill-game-universes.ts` | `npm run backfill:universes` |
-| Update universe slugs | `scripts/universes/update-universe-slugs.ts` | direct `tsx scripts/universes/update-universe-slugs.ts` |
-| Sync game slugs | `scripts/universes/sync-game-slugs.ts` | direct `tsx scripts/universes/sync-game-slugs.ts` |
 | Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes`, `npm run enrich:universes:light`, `npm run enrich:universes:deep` |
 | Backfill clean universe display names | `scripts/universes/backfill-clean-display-names.ts` | `npm run backfill:universe-display-names`; write locally with `-- --apply`, write production only with `NODE_ENV=production npm run backfill:universe-display-names -- --apply --allow-prod` after a clean production dry-run |
 | Refresh tiered public stats | `scripts/universes/update-universe-hourly-stats.ts` | `npm run stats:refresh:hot`, `npm run stats:refresh:warm`, `npm run stats:refresh:cold`; use `npm run stats:refresh -- --tier NEW` for NEW rows |
@@ -139,11 +137,11 @@ Use this only after local content, data, images, DB readback, and rendered route
 1. Confirm production env:
    - `NODE_ENV=production`
    - Supabase host is production, not local.
-2. Confirm or create the production `roblox_universes` row first. Check universe ID, slug, display name, root place, creator, Roblox URL, and needed companion fields such as `game_description_md`.
+2. Confirm or create the production `roblox_universes` row first. Prefer universe ID, root place ID, display name, creator, and Roblox URL. Treat `roblox_universes.slug` as a stats-only URL slug, not as the source for page slugs.
 3. Check existing production rows before writing:
-   - `wiki_pages.slug = <game-slug>`
+   - `wiki_pages.slug = <editorial-game-slug>`
    - `wiki_catalog_pages.code in (<game-slug>-<collection-slug>...)`
-   - `wiki_catalog_pages.wiki_slug` and `collection_slug`
+   - `wiki_catalog_pages.wiki_slug = <editorial-game-slug>` and `collection_slug`
 4. Run production dry-runs:
 
 ```bash

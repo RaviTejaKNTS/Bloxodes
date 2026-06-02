@@ -56,12 +56,13 @@ Image plan means clean catalog images, not just any image from a guide page. Use
 - `wiki_catalog_pages`: one game-specific collection page at `/wiki/[game-slug]/[collection-slug]`.
 - `catalog_pages`: general Roblox catalog hubs that are not tied to a specific game, such as music IDs, decal IDs, free Roblox items, and admin commands.
 - `roblox_universes`: provides universe metadata, icon, thumbnails, stats, and the shared `universe_id`.
+- `roblox_universes.slug` is for `/stats/games/*` only and may include a universe ID. Do not use it as the game slug for wiki, catalog, codes, events, checklist, quiz, article, or tool pages.
 
 Important fields:
 
-- `wiki_pages.slug`: game slug, for example `adopt-me`.
+- `wiki_pages.slug`: editorial game slug, for example `adopt-me`.
 - `wiki_pages.title`, `seo_title`, `meta_description`, `tips_md`, `cover_image`, `controls_json`.
-- `wiki_catalog_pages.wiki_slug`: game slug, for example `adopt-me`.
+- `wiki_catalog_pages.wiki_slug`: editorial game slug, for example `adopt-me`.
 - `wiki_catalog_pages.collection_slug`: collection slug, for example `pets`.
 - `wiki_catalog_pages.code`: stable collection code, for example `adopt-me-pets` or `blox-fruits-fruits`, kept for scripts and old URL redirects.
 - `wiki_catalog_pages.title`, `seo_title`, `meta_description`, `intro_md`, `description_md`, `how_it_works_md`, `description_json`, `faq_json`, `thumb_url`.
@@ -267,9 +268,9 @@ Production promotion is a release workflow, not only a database write. The work 
    - Use the narrowest `--game <game-slug>` and, for retries, `--collection <collection-slug>`.
    - Use `--final-json-root tmp/content-workspace/<game-slug>/catalogs` when approved per-page catalog `final.json` files should override generated copy.
 2. Resolve the production Roblox universe first:
-   - Check `roblox_universes` by universe ID, slug, and display name.
+   - Check `roblox_universes` by universe ID first, then root place ID, display name, creator, and Roblox URL.
    - If the universe is missing, collect/import/enrich it before seeding wiki or catalog pages.
-   - Confirm `universe_id`, `slug`, `display_name`, root place, creator, Roblox URL, and any needed `game_description_md`.
+   - Confirm `universe_id`, `display_name`, root place, creator, Roblox URL, and any needed `game_description_md`.
    - Do not seed catalog/wiki rows against a missing or wrong production universe.
 3. Check existing production page state before writing:
    - Read `wiki_pages` by game slug.

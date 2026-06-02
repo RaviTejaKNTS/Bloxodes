@@ -12,7 +12,7 @@ Workspace: `tmp/content-workspace/<game-slug>/codes/`
 
 ## Setup
 
-- [ ] Confirm game slug, universe ID, place ID, official Roblox URL, and existing `games` row.
+- [ ] Confirm editorial game slug, universe ID, place ID, official Roblox URL, and existing `games` row.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
 - [ ] Verify the game has an actual codes system.
 - [ ] Search existing old slugs/source URL docs so the row is not duplicated.
@@ -21,7 +21,7 @@ Workspace: `tmp/content-workspace/<game-slug>/codes/`
 
 - [ ] Confirm RobloxDen source URL or record the gap.
 - [ ] Confirm Beebom source URL or record the gap.
-- [ ] Confirm `slug` uses the game slug only, without `-codes`.
+- [ ] Confirm `slug` uses the editorial game slug only, without `-codes`, and is not copied from `roblox_universes.slug`.
 - [ ] Confirm `roblox_link`, `source_url`, and `source_url_2` are assigned to the correct source types.
 - [ ] If RobloxDen or Beebom is missing, mark the page blocked or ask before using another source.
 

@@ -499,7 +499,7 @@ async function loadUniverseIdsByGameSlug() {
       if (group.universeId) return [group.gameSlug, group.universeId];
       const candidates = new Set([group.gameSlug, group.gameName, ...group.universeNames].map(normalizeLookup));
       const match = rows.find((row) =>
-        [row.slug, row.name, row.display_name].some((value) => candidates.has(normalizeLookup(value)))
+        [row.name, row.display_name].some((value) => candidates.has(normalizeLookup(value)))
       );
       return [group.gameSlug, match?.universe_id ?? null];
     })
@@ -510,7 +510,6 @@ async function loadRobloxUniverseLookupRows() {
   const sb = supabaseAdmin();
   const rows: Array<{
     universe_id: number;
-    slug?: string | null;
     name?: string | null;
     display_name?: string | null;
   }> = [];
@@ -519,7 +518,7 @@ async function loadRobloxUniverseLookupRows() {
     const to = from + UNIVERSE_LOOKUP_PAGE_SIZE - 1;
     const { data, error } = await sb
       .from("roblox_universes")
-      .select("universe_id, slug, name, display_name")
+      .select("universe_id, name, display_name")
       .order("universe_id", { ascending: true })
       .range(from, to);
 

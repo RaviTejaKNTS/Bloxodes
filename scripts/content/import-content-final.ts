@@ -5,6 +5,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { assertEditorialSlug } from "../shared/editorial-slugs";
 
 type CliOptions = {
   files: string[];
@@ -355,6 +356,7 @@ async function importArticle(finalJson: ArticleFinal, dryRun: boolean) {
   const slug = finalJson.slug.trim().toLowerCase();
   const isPublished = finalJson.is_published ?? true;
   const universeId = finalJson.universe_id ?? null;
+  assertEditorialSlug(slug, "articles.slug", universeId, { matchAnyTrailingId: false });
 
   const { data: existing, error: existingError } = await sb
     .from("articles")
@@ -424,6 +426,7 @@ async function importChecklist(rawFinalJson: ChecklistFinal | LegacyChecklistFin
   const page = finalJson.page;
   const slug = page.slug.trim().toLowerCase();
   const universeId = Number(page.universe_id);
+  assertEditorialSlug(slug, "checklist_pages.slug", universeId);
   const isPublic = page.is_public ?? true;
 
   const pagePayload = {
@@ -484,6 +487,7 @@ async function importQuiz(finalJson: QuizFinal, dryRun: boolean) {
   const sb = supabaseAdmin();
   const page = finalJson.page;
   const code = page.code.trim().toLowerCase();
+  assertEditorialSlug(code, "quiz_pages.code", page.universe_id ?? null);
   const isPublished = page.is_published ?? true;
   const payload = {
     universe_id: page.universe_id ?? null,

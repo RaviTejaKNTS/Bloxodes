@@ -238,12 +238,6 @@ function supabaseHost() {
   }
 }
 
-function toSlug(value?: string | null): string | null {
-  if (!value) return null;
-  const slug = slugify(value);
-  return slug || null;
-}
-
 function retryAfterMs(headers: Headers): number | null {
   const value = headers.get("retry-after");
   if (!value) return null;
@@ -704,7 +698,7 @@ function mapGameDetail(
   }
 
   const baseName = metadata?.displayName ?? game.name ?? null;
-  const computedSlug = toSlug(baseName);
+  const computedSlug = slugify(baseName ?? "") || `universe-${game.id}`;
 
   const metadataGenre = pickString(metadata?.raw ?? null, "genre");
   const metadataGenreL1 = pickString(metadata?.raw ?? null, "genre_l1", "genreL1");
@@ -817,11 +811,7 @@ function mapGameDetail(
   payload.display_name = sanitizedDisplay;
   const slugSource =
     sanitizedDisplay ?? (payload.name as string | null) ?? `universe-${game.id}`;
-  const safeSlug =
-    toSlug(slugSource) ??
-    toSlug((payload.name as string | null) ?? `universe-${game.id}`) ??
-    `universe-${game.id}`;
-  payload.slug = safeSlug;
+  payload.slug = slugify(slugSource) || `universe-${game.id}`;
 
   return payload as UniverseUpsertRecord;
 }

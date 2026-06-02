@@ -45,7 +45,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `import-content-final.ts` upserts reviewed article, checklist, and quiz `final.json` files into Supabase. Article imports write only to the `articles` table, pick a random author when missing, create an edited 16:9 cover from the linked Roblox universe thumbnail when no cover image is provided, and inject the feature image before the first H2 like generated articles. After article imports, verify both `/articles` and `/articles/<slug>` show the same title, author, and cover from the saved article row. It is local-first by default and refuses production writes unless `NODE_ENV=production` is paired with `--allow-prod`.
 - `codes/`: code refresh and code-article rewrite jobs.
   - Code rows must come from `scripts/codes/update-codes.ts`, not from manual JSON, SQL, Supabase edits, or hand-written script payloads.
-  - For a code page, insert or update the `games` row first: `slug` is the game slug only, `roblox_link` is the Roblox experience URL, `source_url` is the RobloxDen codes page, `source_url_2` is the Beebom codes page, and `seo_title` stays empty or null unless the user explicitly asks otherwise.
+  - For a code page, insert or update the `games` row first: `slug` is the editorial game slug only, not `roblox_universes.slug`; `roblox_link` is the Roblox experience URL, `source_url` is the RobloxDen codes page, `source_url_2` is the Beebom codes page, and `seo_title` stays empty or null unless the user explicitly asks otherwise.
   - After source URLs are set, run `npm run refresh:codes -- --slug <game-slug>` so the scraper reads RobloxDen and Beebom, upserts active codes, and expires missing codes.
   - Code-page article fields and metadata must be evergreen. Do not write active code names, current-code reward mappings, active counts, exact dates, month/year labels, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily` into prose or metadata.
 - `decal-ids/`: decal scraping and enrichment.
@@ -58,7 +58,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `sync-puzzles.ts` syncs Wordle, Connections, Strands, Spelling Bee, Letter Boxed, NYT Sudoku, NYT Pips, Contexto, Letroso, and LinkedIn puzzle answers. Use `npm run sync:puzzles -- --dry-run` before writing. Pass `-- --skip-linkedin` when `LINKEDIN_LI_AT` is unavailable or stale.
 - `shared/`: helpers reused by multiple scripts.
 - `trading/`: trading-related collection.
-- `universes/`: universe collection, enrichment, slugs, tiered stats, media, and descriptions.
+- `universes/`: universe collection, enrichment, stats route slugs, tiered stats, media, and descriptions.
   - `collect-roblox-universes.ts` is the lean Explore discovery collector. It upserts newly seen Roblox universe IDs into `roblox_universes` only; it no longer stores Explore sort history, search snapshots, or discovery queue rows.
   - Public stats use one `stats_tier`: `NEW`, `HOT`, `WARM`, or `COLD`. `HOT` means `playing >= 100` or `visits >= 250M`; `WARM` means `playing >= 30` or `visits >= 10M`; `NEW` means newly discovered/never refreshed/missing basic stats; all other valid games are `COLD`.
   - Keep NEW refresh in its own workflow so discovery/backlog rows move quickly into HOT, WARM, or COLD without blocking HOT hourly freshness.
@@ -69,6 +69,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `rollup-universe-daily-stats.ts` rolls hourly rows into the existing daily table. Use `npm run stats:rollup-daily -- --date yesterday --finalize` after the UTC day ends so daily `playing` means the highest recorded CCU for that day.
   - `rank-universe-stats.ts` snapshots hourly public rankings into `roblox_universe_rank_snapshots`; run it after the hourly collector when `/stats` rank movement needs fresh data.
   - `enrich-roblox-universes.ts` preserves existing non-null universe data and stores every distinct icon/screenshot URL in `roblox_universe_media`; it should not delete previous media or replace existing media fields with `null`.
+  - Universe slugs are stats route identifiers. They should be generated and maintained independently from editorial page slugs, and no script should sync them to or from `games.slug`.
   - `backfill-clean-display-names.ts` cleans `roblox_universes.display_name` from raw Roblox titles while leaving `name` as the raw source value. It is dry-run by default; use `--apply` locally, and pair `NODE_ENV=production` with `--allow-prod` only after a clean production dry-run.
 
 ## Operational Expectations
@@ -76,6 +77,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - Treat scripts as data pipelines: know whether the job reads only, mutates Supabase, writes local files, calls external APIs, or triggers revalidation.
 - If a script creates or updates publishable content, review `/api/revalidate` coverage and any relevant Supabase revalidation trigger flow.
 - If a job becomes part of the normal workflow, add a package script and update `agents/scripts/agents.md`.
+- Keep editorial page slugs separate from stats slugs. `roblox_universes.slug` belongs to `/stats/games/*`; scripts must not copy it into `games.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_catalog_pages.wiki_slug`.
 
 ## Script Authoring Checklist
 

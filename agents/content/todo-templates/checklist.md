@@ -12,9 +12,9 @@ Workspace: `tmp/content-workspace/<game-slug>/checklist/`
 
 ## Setup
 
-- [ ] Confirm game slug, universe ID, existing checklist page/items, and related wiki/catalog/data pages.
+- [ ] Confirm editorial game slug, universe ID, existing checklist page/items, and related wiki/catalog/data pages.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
-- [ ] Use the game slug for the checklist slug.
+- [ ] Use the editorial game slug for the checklist slug, not `roblox_universes.slug`.
 - [ ] Confirm catalog-led discovery or core data exists, or mark any missing system knowledge before drafting tasks.
 - [ ] Inspect cleaner existing checklist examples before choosing structure.
 

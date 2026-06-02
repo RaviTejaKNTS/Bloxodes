@@ -36,6 +36,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - For public content changes, check all of: metadata, JSON-LD, pagination, sitemap coverage, feed coverage, and `/api/revalidate`.
 - For mutations, keep origin validation, rate limiting, and tag revalidation explicit.
 - Prefer `npm run ...` aliases over direct `tsx path/to/script.ts` when an alias already exists.
+- Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `games.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_catalog_pages.wiki_slug`.
 
 ## Design Direction
 
@@ -68,11 +69,12 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 ### Codes pages
 
 1. Use the game slug only for `games.slug`, for example `wizard-alchemy`; do not append `-codes` because the route is already `/codes/<slug>`.
-2. Put the Roblox experience URL in `roblox_link`, not in any `source_url` field.
-3. Put the RobloxDen codes page in `source_url` and the Beebom codes page in `source_url_2`; `scripts/codes/update-codes.ts` reads those two fields for the refresh workflow.
-4. Keep `seo_title` empty or null unless the user explicitly asks for a custom title.
-5. Never manually enter active codes, expired codes, code names, rewards tied to current code names, or code dates. Insert or update the `games` row, then run the codes refresh script to populate `codes`.
-6. Write code-page prose and metadata for long-term use. Do not include active code names, exact dates, month/year labels, active-code counts, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily`.
+2. Do not use `roblox_universes.slug` for `games.slug`; universe slugs are stats-only identifiers and can include universe IDs.
+3. Put the Roblox experience URL in `roblox_link`, not in any `source_url` field.
+4. Put the RobloxDen codes page in `source_url` and the Beebom codes page in `source_url_2`; `scripts/codes/update-codes.ts` reads those two fields for the refresh workflow.
+5. Keep `seo_title` empty or null unless the user explicitly asks for a custom title.
+6. Never manually enter active codes, expired codes, code names, rewards tied to current code names, or code dates. Insert or update the `games` row, then run the codes refresh script to populate `codes`.
+7. Write code-page prose and metadata for long-term use. Do not include active code names, exact dates, month/year labels, active-code counts, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily`.
 
 ### API or auth flow
 

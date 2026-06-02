@@ -7,6 +7,7 @@ import type { GameListUniverseEntry, ListUniverseDetails, UniverseListBadge } fr
 import { FaCrown, FaMedal, FaTrophy } from "react-icons/fa";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 import { formatAgeRating } from "@/lib/age-rating";
+import { statsUniverseSlug } from "@/lib/slug";
 
 const numberFormatter = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 });
 
@@ -161,7 +162,7 @@ export function GameListItem({ entry, rank, metricLabel, listSlug }: GameListIte
   const activeCodesValue =
     typeof game?.active_count === "number" ? game.active_count.toLocaleString() : "—";
   const activeCodesHref = game?.slug ? `/codes/${game.slug}` : null;
-  const statsHref = universe.slug ? `/stats/games/${universe.slug}` : null;
+  const statsHref = `/stats/games/${statsUniverseSlug(universe.slug ?? universe.display_name ?? universe.name, universe.universe_id)}`;
   const badges = (entry as any).badges as UniverseListBadge[] | undefined;
   const visibleBadges = badges?.filter((badge) => badge.rank >= 1 && badge.rank <= 3);
   const metricKey = (entry as any).metric_key ?? (entry.extra as any)?.metric ?? null;

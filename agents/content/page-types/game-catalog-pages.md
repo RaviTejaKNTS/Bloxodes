@@ -106,7 +106,7 @@ The public route should be `/wiki/<game-slug>/<collection-slug>`, for example `/
 
 Use the same content fields as normal catalog pages, but write them into `wiki_catalog_pages` for game-specific collections. Pay extra attention to:
 
-- `wiki_slug`: game slug used in `/wiki/<game-slug>/<collection-slug>`.
+- `wiki_slug`: editorial game slug used in `/wiki/<game-slug>/<collection-slug>`; do not copy `roblox_universes.slug`.
 - `collection_slug`: collection slug used in `/wiki/<game-slug>/<collection-slug>`.
 - `code`: stable old-style code such as `adopt-me-pets`, used by scripts, search, and redirects.
 - `universe_id`: links the wiki catalog page to the wiki hub.

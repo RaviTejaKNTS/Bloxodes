@@ -12,7 +12,7 @@ Workspace: `tmp/content-workspace/<game-slug>/wiki/`
 
 ## Setup
 
-- [ ] Confirm game slug, universe ID, place ID, creator, official Roblox URL, and existing `wiki_pages` row.
+- [ ] Confirm editorial game slug, universe ID, place ID, creator, official Roblox URL, and existing `wiki_pages` row.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
 - [ ] Map rendered wiki sections to source fields: `wiki_pages`, linked `roblox_universes`, and related page tables.
 - [ ] Check related codes, events, catalogs, tools, articles, checklist, quiz, media, badges, passes, and universe metadata.

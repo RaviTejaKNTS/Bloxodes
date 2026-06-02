@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { StatsGameDetailView, StatsPageShell } from "../../components/StatsViews";
 import { getStatsGameBySlug, robloxGameUrl } from "@/lib/stats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
@@ -13,7 +13,7 @@ type PageProps = {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const data = await getStatsGameBySlug(slug);
-  const canonical = `${SITE_URL}/stats/games/${slug}`;
+  const canonical = `${SITE_URL}/stats/games/${data?.game.slug ?? slug}`;
   if (!data) return { alternates: buildAlternates(canonical) };
 
   const title = `${data.game.displayName} Stats | ${SITE_NAME}`;
@@ -44,6 +44,9 @@ export default async function StatsGameDetailPage({ params }: PageProps) {
   if (!data) notFound();
 
   const game = data.game;
+  if (slug !== game.slug) {
+    redirect(`/stats/games/${game.slug}`);
+  }
 
   return (
     <StatsPageShell>

@@ -12,9 +12,9 @@ Workspace: `tmp/content-workspace/<game-slug>/quiz/`
 
 ## Setup
 
-- [ ] Confirm game slug, universe ID, existing quiz page, local quiz JSON path, and related wiki/catalog/checklist pages.
+- [ ] Confirm editorial game slug, universe ID, existing quiz page, local quiz JSON path, and related wiki/catalog/checklist pages.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
-- [ ] Use the game slug for `quiz_pages.code`.
+- [ ] Use the editorial game slug for `quiz_pages.code`, not `roblox_universes.slug`.
 - [ ] Check whether catalog-led discovery, local datasets, or related pages already define stable facts.
 
 ## Research And Plan

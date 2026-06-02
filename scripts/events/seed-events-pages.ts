@@ -4,6 +4,7 @@ import OpenAI from "openai";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { slugify } from "@/lib/slug";
+import { assertEditorialSlug } from "../shared/editorial-slugs";
 import { revalidateEventSlugs } from "../shared/revalidate-events";
 import { tavilySearch } from "../shared/tavily";
 
@@ -278,7 +279,8 @@ async function ensureUniverseHasEvents(universeId: number): Promise<void> {
 async function ensureUniqueSlug(base: string, universeId: number): Promise<string> {
   const sb = supabaseAdmin();
   const fallbackBase = base || `universe-${universeId}`;
-  let slug = fallbackBase;
+  const slug = fallbackBase;
+  assertEditorialSlug(slug, "events_pages.slug", universeId);
 
   const { data, error } = await sb
     .from("events_pages")
@@ -294,9 +296,9 @@ async function ensureUniqueSlug(base: string, universeId: number): Promise<strin
     return slug;
   }
 
-  slug = `${fallbackBase}-${universeId}`;
-
-  return slug;
+  throw new Error(
+    `events_pages.slug "${slug}" is already used by universe ${data.universe_id}. Choose a distinct editorial slug instead of appending the universe ID.`
+  );
 }
 
 async function buildResearchNotes(gameName: string): Promise<string> {
@@ -494,6 +496,7 @@ async function main() {
   }
 
   const slug = normalizeText(existingPage?.slug) ?? (await ensureUniqueSlug(slugify(displayName), universeId));
+  assertEditorialSlug(slug, "events_pages.slug", universeId);
   console.log(`Generating events page copy for "${displayName}" (universe ${universeId})...`);
 
   const notes = await buildResearchNotes(displayName);

@@ -57,7 +57,8 @@ Return valid JSON shaped for the `games` row:
 
 ## Hard Rules
 
-- Use the game slug only, such as `rivals`, not `rivals-codes`.
+- Use the editorial game slug only, such as `rivals`, not `rivals-codes`.
+- Do not use `roblox_universes.slug` for `games.slug`; universe slugs are stats-only identifiers and may include universe IDs.
 - Put the official Roblox experience URL in `roblox_link`.
 - Put the RobloxDen codes page in `source_url`.
 - Put the Beebom codes page in `source_url_2`.

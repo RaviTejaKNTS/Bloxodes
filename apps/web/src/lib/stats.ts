@@ -2,6 +2,7 @@ import "server-only";
 import { unstable_noStore as noStore } from "next/cache";
 import { formatAgeRating } from "@/lib/age-rating";
 import { supabaseAdmin } from "@/lib/supabase";
+import { slugify, statsUniverseSlug } from "@/lib/slug";
 export { formatCompactNumber, formatFullNumber, formatPercent } from "@/lib/stats-format";
 
 export const STATS_PAGE_SIZE = 50;
@@ -229,16 +230,19 @@ export const STATS_METRICS: Array<{ value: StatsMetricKey; label: string }> = [
   { value: "rating", label: "Rating" }
 ];
 
-function compactSlug(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 90);
+function statsSlugBase(row: Pick<UniverseRow, "slug" | "name" | "universe_id">) {
+  return row.slug?.trim() || row.name || "roblox-game";
 }
 
 function ensureSlug(row: Pick<UniverseRow, "slug" | "name" | "universe_id">) {
-  return row.slug?.trim() || `${compactSlug(row.name || "roblox-game")}-${row.universe_id}`;
+  return statsUniverseSlug(statsSlugBase(row), row.universe_id);
+}
+
+function parseStatsUniverseIdSlug(slug: string): number | null {
+  const match = slug.trim().match(/(?:^|-)(\d+)$/);
+  if (!match) return null;
+  const universeId = Number(match[1]);
+  return Number.isSafeInteger(universeId) && universeId > 0 ? universeId : null;
 }
 
 function toNumber(value: unknown): number | null {
@@ -443,7 +447,7 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
   const map = new Map<string, StatsGenreSummary>();
   for (const game of rows) {
     const label = game.genre || "Uncategorized";
-    const slug = compactSlug(label);
+    const slug = slugify(label) || "uncategorized";
     const current = map.get(label) ?? {
       genre: label,
       slug,
@@ -743,6 +747,7 @@ export async function getStatsGameCharts(universeId: number): Promise<Record<Sta
 export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailData | null> {
   noStore();
   const sb = supabaseAdmin();
+  const parsedUniverseId = parseStatsUniverseIdSlug(slug);
   const numericSlug = Number(slug);
   const fields = `
     universe_id, root_place_id, name, display_name, slug, description,
@@ -753,11 +758,11 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
     console_enabled, vr_enabled
   `;
 
-  if (Number.isFinite(numericSlug)) {
+  if (parsedUniverseId || Number.isFinite(numericSlug)) {
     const { data, error } = await sb
       .from("roblox_universes")
       .select(fields)
-      .eq("universe_id", numericSlug)
+      .eq("universe_id", parsedUniverseId ?? numericSlug)
       .limit(1)
       .maybeSingle();
     if (error) throw error;

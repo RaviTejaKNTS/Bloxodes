@@ -46,7 +46,7 @@ Use these inputs:
 - game-specific datasets or notes
 - current research on the game loop, creator, systems, events, codes, catalog collections, tools, and social/developer context
 
-Before writing, map the rendered wiki page. `wiki_pages` owns title, SEO, tips, controls, cover, publish state, and the linked universe. The visible game summary comes from `roblox_universes.game_description_md`, not from `tips_md`. Related catalog sections come from catalog pages and their `wiki_md`. Codes, events, tools, articles, checklists, quizzes, media, badges, passes, servers, and developer sections appear only when local related rows exist. Record this map and the companion-data decision in `research-notes.md`.
+Before writing, map the rendered wiki page. `wiki_pages` owns title, SEO, tips, controls, cover, publish state, and the linked universe. The visible game summary comes from `roblox_universes.game_description_md`, not from `tips_md`. Related catalog sections come from catalog pages and their `wiki_md`. Codes, events, tools, articles, checklists, quizzes, media, badges, passes, servers, and developer sections appear only when local related rows exist. Record this map and the companion-data decision in `research-notes.md`. Use the editorial game slug for `/wiki/<slug>`. Do not copy `roblox_universes.slug`; universe slugs belong to `/stats/games/*` and may include universe IDs.
 
 ## Output Shape
 
