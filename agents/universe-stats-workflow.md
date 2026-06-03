@@ -7,6 +7,7 @@ This workflow powers `/stats` and Roblox universe metadata.
 - Use one tier column: `roblox_universes.stats_tier`.
 - Do not use the old quality scoring model.
 - Do not overwrite existing good data with `null` when Roblox omits a field.
+- Fetch favorites from Roblox game details and likes/dislikes from the separate Roblox votes API.
 - Do not delete old icons or thumbnails.
 - Store every distinct icon/screenshot URL in `roblox_universe_media`.
 - `roblox_universes.icon_url` and `thumbnail_urls` are convenience fields only; the durable media history is `roblox_universe_media`.
@@ -53,6 +54,7 @@ npm run stats:refresh -- --tier NEW|HOT|WARM|COLD|ALL
 npm run stats:refresh:hot
 npm run stats:refresh:warm
 npm run stats:refresh:cold
+npm run stats:refresh -- --universe-id <id>
 npm run stats:tier
 npm run stats:rank -- --all
 npm run stats:rollup-daily -- --date yesterday --finalize

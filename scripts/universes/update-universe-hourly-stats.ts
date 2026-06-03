@@ -4,6 +4,7 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { assignStatsTier, isStatsTier, type StatsTier } from "./stats-tier";
 
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";
+const GAME_VOTES_API = "https://games.roblox.com/v1/games/votes";
 const BATCH_SIZE = readPositiveNumber("UNIVERSE_HOURLY_STATS_BATCH_SIZE", 50);
 const DEFAULT_LIMIT = readPositiveNumber("UNIVERSE_HOURLY_STATS_LIMIT", 0);
 const REQUEST_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_REQUEST_DELAY_MS", 1000);
@@ -18,10 +19,19 @@ type RobloxGameDetail = {
   visits?: number;
   favorites?: number;
   favoriteCount?: number;
+  favoritedCount?: number;
   likes?: number;
   upVotes?: number;
   downVotes?: number;
+  totalUpVotes?: number;
+  totalDownVotes?: number;
   votes?: { upVotes?: number; downVotes?: number };
+};
+
+type RobloxGameVote = {
+  id: number;
+  upVotes?: number;
+  downVotes?: number;
 };
 
 type UniverseRow = {
@@ -57,13 +67,14 @@ type PublicStats = {
   likes: number | null;
   dislikes: number | null;
   ratingPercent: number | null;
-  raw: RobloxGameDetail;
+  raw: RobloxGameDetail & { votesApi?: RobloxGameVote };
 };
 
 type Options = {
   limit: number;
   tier: StatsTier | "ALL";
   rollupToday: boolean;
+  universeIds: number[];
 };
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -122,6 +133,35 @@ function jitter(ms: number) {
   return Math.round(ms * (0.75 + Math.random() * 0.5));
 }
 
+async function fetchRobloxJson(url: string, label: string): Promise<any> {
+  for (let attempt = 0; attempt <= RETRY_LIMIT; attempt += 1) {
+    let res: Response;
+    try {
+      res = await fetch(url, {
+        headers: { "user-agent": "BloxodesBot/1.0" }
+      });
+    } catch (error) {
+      if (attempt >= RETRY_LIMIT) throw error;
+      const delayMs = jitter(Math.min(RETRY_BASE_DELAY_MS * 2 ** attempt, RETRY_MAX_DELAY_MS));
+      console.warn(`${label} request failed; retrying in ${Math.round(delayMs / 1000)}s`);
+      await sleep(delayMs);
+      continue;
+    }
+    if (res.ok) {
+      return res.json();
+    }
+    const body = await res.text().catch(() => "");
+    const retryable = res.status === 429 || res.status >= 500;
+    if (!retryable || attempt >= RETRY_LIMIT) {
+      throw new Error(`Failed to fetch ${label} (${res.status}): ${body.slice(0, 200)}`);
+    }
+    const delayMs = retryAfterMs(res.headers) ?? jitter(Math.min(RETRY_BASE_DELAY_MS * 2 ** attempt, RETRY_MAX_DELAY_MS));
+    console.warn(`${label} returned ${res.status}; retrying in ${Math.round(delayMs / 1000)}s`);
+    await sleep(delayMs);
+  }
+  throw new Error(`${label} failed after retries`);
+}
+
 async function fetchUniverses(options: Options): Promise<UniverseRow[]> {
   const sb = supabaseAdmin();
   const rows: UniverseRow[] = [];
@@ -135,7 +175,9 @@ async function fetchUniverses(options: Options): Promise<UniverseRow[]> {
       .select("universe_id, root_place_id, playing, visits, favorites, likes, dislikes, stats_tier, last_stats_refreshed_at")
       .not("root_place_id", "is", null);
 
-    if (options.tier === "NEW") {
+    if (options.universeIds.length) {
+      query = query.in("universe_id", options.universeIds);
+    } else if (options.tier === "NEW") {
       query = query.or("stats_tier.eq.NEW,last_stats_refreshed_at.is.null,playing.is.null,visits.is.null");
     } else if (options.tier !== "ALL") {
       query = query.eq("stats_tier", options.tier);
@@ -161,41 +203,24 @@ async function fetchStats(universeIds: number[]): Promise<Record<number, PublicS
   const result: Record<number, PublicStats> = {};
   if (!universeIds.length) return result;
   const params = new URLSearchParams({ universeIds: universeIds.join(",") });
-  let data: any = null;
-  for (let attempt = 0; attempt <= RETRY_LIMIT; attempt += 1) {
-    let res: Response;
-    try {
-      res = await fetch(`${GAME_DETAILS_API}?${params.toString()}`, {
-        headers: { "user-agent": "BloxodesBot/1.0" }
-      });
-    } catch (error) {
-      if (attempt >= RETRY_LIMIT) throw error;
-      const delayMs = jitter(Math.min(RETRY_BASE_DELAY_MS * 2 ** attempt, RETRY_MAX_DELAY_MS));
-      console.warn(`Game details request failed; retrying in ${Math.round(delayMs / 1000)}s`);
-      await sleep(delayMs);
-      continue;
-    }
-    if (res.ok) {
-      data = await res.json();
-      break;
-    }
-    const body = await res.text().catch(() => "");
-    const retryable = res.status === 429 || res.status >= 500;
-    if (!retryable || attempt >= RETRY_LIMIT) {
-      throw new Error(`Failed to fetch game details (${res.status}): ${body.slice(0, 200)}`);
-    }
-    const delayMs = retryAfterMs(res.headers) ?? jitter(Math.min(RETRY_BASE_DELAY_MS * 2 ** attempt, RETRY_MAX_DELAY_MS));
-    console.warn(`Game details returned ${res.status}; retrying in ${Math.round(delayMs / 1000)}s`);
-    await sleep(delayMs);
+  const data = await fetchRobloxJson(`${GAME_DETAILS_API}?${params.toString()}`, "game details");
+  let votesByUniverseId = new Map<number, RobloxGameVote>();
+  try {
+    const votesData = await fetchRobloxJson(`${GAME_VOTES_API}?${params.toString()}`, "game votes");
+    const votes: RobloxGameVote[] = Array.isArray(votesData?.data) ? votesData.data : [];
+    votesByUniverseId = new Map(votes.filter((vote) => typeof vote?.id === "number").map((vote) => [vote.id, vote]));
+  } catch (error) {
+    console.warn("Game votes request failed; continuing without fresh rating data:", (error as Error).message);
   }
   const entries: RobloxGameDetail[] = Array.isArray(data?.data) ? data.data : [];
   for (const entry of entries) {
     if (typeof entry?.id !== "number") continue;
-    const likes = toNumber(entry.likes ?? entry.upVotes ?? entry.votes?.upVotes ?? null);
-    const dislikes = toNumber(entry.downVotes ?? entry.votes?.downVotes ?? null);
+    const vote = votesByUniverseId.get(entry.id);
+    const likes = toNumber(vote?.upVotes ?? entry.likes ?? entry.upVotes ?? entry.votes?.upVotes ?? entry.totalUpVotes ?? null);
+    const dislikes = toNumber(vote?.downVotes ?? entry.downVotes ?? entry.votes?.downVotes ?? entry.totalDownVotes ?? null);
     const playing = toNumber(entry.playing ?? entry.playerCount ?? null);
     const visits = toNumber(entry.visits ?? null);
-    const favorites = toNumber(entry.favorites ?? entry.favoriteCount ?? null);
+    const favorites = toNumber(entry.favorites ?? entry.favoriteCount ?? entry.favoritedCount ?? null);
     result[entry.id] = {
       playing,
       visits,
@@ -203,7 +228,7 @@ async function fetchStats(universeIds: number[]): Promise<Record<number, PublicS
       likes,
       dislikes,
       ratingPercent: ratingPercent(likes, dislikes),
-      raw: entry
+      raw: vote ? { ...entry, votesApi: vote } : entry
     };
   }
   return result;
@@ -334,7 +359,8 @@ function parseArgs(): Options {
   const options: Options = {
     limit: Number.isFinite(DEFAULT_LIMIT) && DEFAULT_LIMIT > 0 ? DEFAULT_LIMIT : 0,
     tier: isStatsTier(process.env.UNIVERSE_STATS_TIER) ? process.env.UNIVERSE_STATS_TIER : "HOT",
-    rollupToday: false
+    rollupToday: false,
+    universeIds: []
   };
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
@@ -342,6 +368,23 @@ function parseArgs(): Options {
       const parsed = Number(args[i + 1]);
       options.limit = Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
       i += 1;
+    } else if (arg === "--universe-id" || arg === "--universe-ids") {
+      const raw = String(args[i + 1] ?? "");
+      const ids = raw
+        .split(",")
+        .map((value) => Number(value.trim()))
+        .filter((value) => Number.isSafeInteger(value) && value > 0);
+      if (!ids.length) throw new Error(`Invalid ${arg} value: ${raw}`);
+      options.universeIds.push(...ids);
+      i += 1;
+    } else if (arg.startsWith("--universe-id=") || arg.startsWith("--universe-ids=")) {
+      const raw = arg.slice(arg.indexOf("=") + 1);
+      const ids = raw
+        .split(",")
+        .map((value) => Number(value.trim()))
+        .filter((value) => Number.isSafeInteger(value) && value > 0);
+      if (!ids.length) throw new Error(`Invalid universe id value: ${raw}`);
+      options.universeIds.push(...ids);
     } else if (arg === "--tier") {
       const tier = String(args[i + 1] ?? "").toUpperCase();
       if (tier === "ALL" || isStatsTier(tier)) {
@@ -363,6 +406,7 @@ Usage: npm run update:hourly-stats -- [options]
 Options:
   -l, --limit <number>   Max universes to refresh; 0 means all (default: ${DEFAULT_LIMIT})
   --tier <tier>          Refresh NEW, HOT, WARM, COLD, or ALL rows (default: HOT)
+  --universe-id <id>     Refresh one universe ID; can repeat or accept comma-separated IDs
   --all                  Refresh all universes with a root place id
   --rollup-today         Also run the daily rollup for today's date after hourly writes
   -h, --help             Show this help text

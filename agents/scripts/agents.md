@@ -56,7 +56,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Backfill missing universe IDs | `scripts/backfill/backfill-game-universes.ts` | `npm run backfill:universes` |
 | Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes`, `npm run enrich:universes:light`, `npm run enrich:universes:deep` |
 | Backfill clean universe display names | `scripts/universes/backfill-clean-display-names.ts` | `npm run backfill:universe-display-names`; write locally with `-- --apply`, write production only with `NODE_ENV=production npm run backfill:universe-display-names -- --apply --allow-prod` after a clean production dry-run |
-| Refresh tiered public stats | `scripts/universes/update-universe-hourly-stats.ts` | `npm run stats:refresh:hot`, `npm run stats:refresh:warm`, `npm run stats:refresh:cold`; use `npm run stats:refresh -- --tier NEW` for NEW rows |
+| Refresh tiered public stats | `scripts/universes/update-universe-hourly-stats.ts` | `npm run stats:refresh:hot`, `npm run stats:refresh:warm`, `npm run stats:refresh:cold`; use `npm run stats:refresh -- --tier NEW` for NEW rows, or `npm run stats:refresh -- --universe-id <id>` for one-game repairs |
 | Assign stats tiers | `scripts/universes/assign-universe-stats-tier.ts` | `npm run stats:tier` |
 | Audit stats workflow | `scripts/universes/audit-universe-stats-workflow.ts` | `npm run stats:audit` |
 | Roll hourly stats into daily rows | `scripts/universes/rollup-universe-daily-stats.ts` | `npm run stats:rollup-daily -- --date today`; use `-- --date yesterday --finalize` after the UTC day ends |
