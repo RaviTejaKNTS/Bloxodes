@@ -8,11 +8,13 @@ import { XAxis } from "recharts/es6/cartesian/XAxis";
 import { YAxis } from "recharts/es6/cartesian/YAxis";
 import { AreaChart } from "recharts/es6/chart/AreaChart";
 import { LineChart } from "recharts/es6/chart/LineChart";
-import { Activity, BarChart3 } from "lucide-react";
+import { Activity, BarChart3, Maximize2, Minimize2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, type ChartConfig } from "@/components/ui/chart";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { formatCompactNumber, formatPercent } from "@/lib/stats-format";
 import { cn } from "@/lib/utils";
 
@@ -144,6 +146,25 @@ function usablePointCount(points: ChartPoint[], metric: MetricKey) {
   return points.filter((point) => typeof point[metric] === "number").length;
 }
 
+function chartDomain(points: ChartPoint[], metric: MetricKey, startsAtZero: boolean): [number | "auto", number | "auto"] {
+  if (startsAtZero) return metric === "rating" ? [0, 100] : [0, "auto"];
+
+  const values = points
+    .map((point) => point[metric])
+    .filter((value): value is number => typeof value === "number" && Number.isFinite(value));
+
+  if (!values.length) return ["auto", "auto"];
+
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const spread = max - min;
+  const padding = spread > 0 ? spread * 0.12 : metric === "rating" ? 1 : Math.max(Math.abs(max) * 0.02, 1);
+  const lower = metric === "rating" ? Math.max(0, min - padding) : Math.max(0, min - padding);
+  const upper = metric === "rating" ? Math.min(100, max + padding) : max + padding;
+
+  return [lower, upper];
+}
+
 export function StatsChartPanel({
   title,
   subtitle,
@@ -174,6 +195,7 @@ export function StatsChartPanel({
   const [lastRenderedChart, setLastRenderedChart] = useState<ChartData | undefined>(initialChart);
   const [loadingKey, setLoadingKey] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [startsAtZero, setStartsAtZero] = useState(false);
   const initialChartKey = initialChart ? chartCacheKey(initialChart.range, initialChart.requestedResolution) : null;
   const activeKey = chartCacheKey(range, resolution);
   const loadedChart = chartCache[activeKey] ?? (initialChartKey === activeKey ? initialChart : undefined);
@@ -194,6 +216,7 @@ export function StatsChartPanel({
   );
   const isLoading = loadingKey === activeKey;
   const isShowingPreviousChart = Boolean(isLoading && !loadedChart && hasRenderableData);
+  const yDomain = useMemo(() => chartDomain(points, metric, startsAtZero), [metric, points, startsAtZero]);
 
   useEffect(() => {
     if (loadedChart) {
@@ -260,20 +283,6 @@ export function StatsChartPanel({
               </TabsList>
             </Tabs>
           ) : null}
-          {initialChart ? (
-            <Select value={resolution} onValueChange={(value) => setResolution(value as ResolutionKey)}>
-              <SelectTrigger className="h-9 w-[112px] rounded-md border-border/70 bg-background/80 text-xs font-semibold text-muted shadow-none">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {(["hourly", "daily", "weekly", "monthly"] as ResolutionKey[]).map((item) => (
-                  <SelectItem key={item} value={item}>
-                    {resolutionLabels[item]}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          ) : null}
         </div>
       </CardHeader>
 
@@ -299,7 +308,7 @@ export function StatsChartPanel({
                   tickMargin={8}
                   tickFormatter={(value: unknown) => formatAxisTick(String(value), range)}
                 />
-                <YAxis tickLine={false} axisLine={false} tickMargin={8} width={42} tickFormatter={axisTick} />
+                <YAxis tickLine={false} axisLine={false} tickMargin={8} width={42} domain={yDomain} tickFormatter={axisTick} />
                 <ChartTooltip cursor={false} content={<StatsTooltip metric={metric} />} />
                 {area ? (
                   <Area
@@ -332,6 +341,40 @@ export function StatsChartPanel({
             ) : null}
           </div>
         )}
+        <div className="mt-3 flex items-center justify-end gap-2">
+          {initialChart ? (
+            <Select value={resolution} onValueChange={(value) => setResolution(value as ResolutionKey)}>
+              <SelectTrigger className="h-8 w-[110px] rounded-md border-border/70 bg-background/80 text-xs font-semibold text-muted shadow-none">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {(["hourly", "daily", "weekly", "monthly"] as ResolutionKey[]).map((item) => (
+                  <SelectItem key={item} value={item}>
+                    {resolutionLabels[item]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          ) : null}
+          <TooltipProvider delayDuration={150}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  aria-pressed={startsAtZero}
+                  aria-label={startsAtZero ? "Use zoomed y-axis" : "Start y-axis at zero"}
+                  className="h-8 w-8 rounded-md border-border/70 bg-background/80 text-muted shadow-none"
+                  onClick={() => setStartsAtZero((value) => !value)}
+                >
+                  {startsAtZero ? <Minimize2 className="h-3.5 w-3.5" aria-hidden /> : <Maximize2 className="h-3.5 w-3.5" aria-hidden />}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="top">{startsAtZero ? "Use zoomed y-axis" : "Start y-axis at zero"}</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
       </CardContent>
     </Card>
   );

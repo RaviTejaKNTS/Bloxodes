@@ -423,7 +423,7 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
   ];
   return (
     <div className="stats-surface space-y-5">
-      <header className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-b border-border/60 bg-surface shadow-none xl:w-[calc(100vw-15.5rem)]">
+      <header className="relative left-1/2 -mt-6 w-screen -translate-x-1/2 overflow-hidden border-b border-border/60 bg-surface pt-6 shadow-none md:-mt-8 md:pt-8 xl:-mt-10 xl:w-[calc(100vw-15.5rem)] xl:pt-10">
         {game.thumbnailUrls[0] || game.iconUrl ? (
           <div className="absolute inset-0">
             <Image src={game.thumbnailUrls[0] ?? game.iconUrl ?? ""} alt="" fill sizes="100vw" className="object-cover opacity-50 blur-[1px] saturate-75" priority />
@@ -481,30 +481,6 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
         initialChart={data.initialChart}
         defaultMetric="players"
       />
-
-      <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
-        <CardHeader className="border-b border-border/60 p-4">
-          <CardTitle className="m-0 text-base font-semibold text-foreground">Game summary</CardTitle>
-        </CardHeader>
-        <CardContent className="grid gap-x-6 gap-y-4 p-4 text-sm sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            ["Universe ID", String(game.universeId)],
-            ["Creator", game.creatorName ?? "Not tracked"],
-            ["Genre", game.genre ?? "Not tracked"],
-            ["Subgenre", game.subgenre ?? "Not tracked"],
-            ["Created", game.createdAtApi ? new Date(game.createdAtApi).toLocaleDateString("en-US") : "Not tracked"],
-            ["Updated", game.updatedAtApi ? new Date(game.updatedAtApi).toLocaleDateString("en-US") : "Not tracked"],
-            ["Favorites", formatCompactNumber(game.favorites)]
-          ].map(([label, value]) => (
-            <div key={label} className="min-w-0 space-y-1">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{label}</p>
-              <p className="truncate font-semibold text-foreground" title={value}>
-                {value}
-              </p>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
 
       <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
         <CardHeader className="border-b border-border/60 p-4">
