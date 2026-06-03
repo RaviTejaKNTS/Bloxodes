@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   }
 };
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 export default async function AuthorsIndexPage() {
   const authors = await listAuthors();

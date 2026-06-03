@@ -2,7 +2,7 @@ import { renderEventsPage } from "./events-page";
 import { listPublishedEventsPageSlugs } from "@/lib/db";
 
 // Must be a literal for Next segment config extraction.
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export { generateMetadata } from "./events-page";
 

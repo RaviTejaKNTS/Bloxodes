@@ -48,7 +48,7 @@ import { formatUpdatedLabel } from "@/lib/updated-label";
 import { getUniverseEventSummary } from "@/lib/events-summary";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 
-export const revalidate = 0;
+export const revalidate = 86400;
 const MAX_STATIC_ARTICLE_SLUGS = 150;
 
 type Params = { params: Promise<{ slug: string }> };

@@ -15,7 +15,7 @@ import {
   loadArtistOptionBySlug
 } from "../../page-data";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 export const metadata: Metadata = {
   title: `Artist Music IDs | ${SITE_NAME}`,

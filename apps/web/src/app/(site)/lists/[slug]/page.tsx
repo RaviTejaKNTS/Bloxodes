@@ -5,7 +5,7 @@ import { renderMarkdown } from "@/lib/markdown";
 import { buildListData, buildMetadata, ListPageView } from "./page-data";
 import "@/styles/article-content.css";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 const MAX_STATIC_LIST_SLUGS = 120;
 
 type PageProps = {

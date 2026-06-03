@@ -12,7 +12,7 @@ import { getToolContentWithDevFallback } from "@/lib/tools";
 import { loadWizardAlchemyPotionPlannerData } from "@/lib/wizard-alchemy/data";
 import { WizardAlchemyPotionPlannerClient } from "./WizardAlchemyPotionPlannerClient";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 const TOOL_CODE = "wizard-alchemy-potion-planner";
 const TOOL_TITLE = "Wizard Alchemy Potion Planner";

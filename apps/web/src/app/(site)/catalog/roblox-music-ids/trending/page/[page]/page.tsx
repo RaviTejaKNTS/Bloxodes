@@ -15,7 +15,7 @@ import {
 } from "../../../page-data";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 const MAX_STATIC_PAGES = 20;
 
 type PageProps = {

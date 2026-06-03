@@ -9,7 +9,7 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export const revalidate = 0;
+export const revalidate = 900;
 
 export async function generateStaticParams() {
   const slugs = await listPublishedPuzzleSlugs();

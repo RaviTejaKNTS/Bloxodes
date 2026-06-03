@@ -4,7 +4,7 @@ import { loadArticlesPageData, renderArticlesPage } from "../../page-data";
 import { ARTICLES_DESCRIPTION, buildAlternates } from "@/lib/seo";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 0;
+export const revalidate = 86400;
 const MAX_STATIC_PAGES = 15;
 
 type PageProps = {

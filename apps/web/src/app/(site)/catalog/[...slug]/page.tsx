@@ -13,7 +13,7 @@ import { buildGameDatasetCatalogCopy, getGameDatasetCatalogConfigByCode } from "
 import { getWikiCatalogPageByCode } from "@/lib/wiki-catalog";
 import { loadGameDatasetCatalogDataset } from "../game-datasets/page-data";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 const RESERVED_CATALOG_PREFIXES = [
   "admin-commands",
   "roblox-color-codes",

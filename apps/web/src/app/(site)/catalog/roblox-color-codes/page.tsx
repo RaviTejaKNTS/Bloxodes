@@ -10,7 +10,7 @@ import {
   type CatalogContentHtml
 } from "./page-data";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-color-codes"];
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;

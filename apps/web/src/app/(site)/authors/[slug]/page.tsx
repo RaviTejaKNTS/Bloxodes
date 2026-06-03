@@ -19,7 +19,7 @@ import {
 } from "@/lib/seo";
 
 // Cache author pages for a month; on-demand revalidation keeps them fresh
-export const revalidate = 0;
+export const revalidate = 21600;
 
 type Params = { params: Promise<{ slug: string }> };
 

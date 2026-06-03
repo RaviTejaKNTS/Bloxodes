@@ -8,7 +8,7 @@ type PageProps = {
   params: Promise<{ slug: string; date: string }>;
 };
 
-export const revalidate = 0;
+export const revalidate = 900;
 
 function isIsoDate(value: string) {
   return /^\d{4}-\d{2}-\d{2}$/.test(value);

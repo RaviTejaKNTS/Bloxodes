@@ -3,7 +3,7 @@ import { StatsHomeView, StatsPageShell } from "./components/StatsViews";
 import { getStatsHome } from "@/lib/stats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
-export const revalidate = 0;
+export const revalidate = 600;
 
 export const metadata: Metadata = {
   title: `Roblox Stats | ${SITE_NAME}`,

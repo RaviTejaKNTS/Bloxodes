@@ -15,7 +15,7 @@ import {
   renderRobloxFreeItemsPage
 } from "../../page-data";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 type PageProps = {
   params: Promise<{ category: string; subcategory: string }>;

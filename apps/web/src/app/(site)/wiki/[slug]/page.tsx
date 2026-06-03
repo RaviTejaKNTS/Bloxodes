@@ -6,7 +6,7 @@ import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL, WIKI_DESCRIPTION
 import { getWikiPageBySlug, listPublishedWikiSlugs } from "@/lib/wiki";
 import { loadWikiDetailPageData, renderWikiDetailPage } from "../page-data";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 type PageProps = {
   params: Promise<{ slug: string }>;

@@ -1,5 +1,4 @@
 import "server-only";
-import { unstable_noStore as noStore } from "next/cache";
 import { formatAgeRating } from "@/lib/age-rating";
 import { supabaseAdmin } from "@/lib/supabase";
 import { slugify, statsUniverseSlug } from "@/lib/slug";
@@ -436,7 +435,6 @@ async function listBaseGames(options: {
 }
 
 export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> {
-  noStore();
   const { rows } = await listBaseGames({ limit: 500, sort: "playing" });
   const map = new Map<string, StatsGenreSummary>();
   for (const game of rows) {
@@ -511,7 +509,6 @@ async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> 
 }
 
 export async function getStatsHome(): Promise<StatsHomeData> {
-  noStore();
   const [{ rows: topBase }, { rows: visitedBase }, { total: trackedGames }, genres] = await Promise.all([
     listBaseGames({ limit: 16, sort: "playing" }),
     listBaseGames({ limit: 10, sort: "visits" }),
@@ -582,7 +579,6 @@ export async function listStatsGames(input: {
   sort?: string | null;
   minPlayers?: number | null;
 }): Promise<StatsGamesPageData> {
-  noStore();
   const page = Math.max(1, input.page ?? 1);
   const pageSize = Math.min(Math.max(input.pageSize ?? STATS_PAGE_SIZE, 10), 100);
   const sort = normalizeStatsSort(input.sort);
@@ -817,7 +813,6 @@ export async function getStatsGameChart(
 }
 
 export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailData | null> {
-  noStore();
   const sb = supabaseAdmin();
   const parsedUniverseId = parseStatsUniverseIdSlug(slug);
   const numericSlug = Number(slug);

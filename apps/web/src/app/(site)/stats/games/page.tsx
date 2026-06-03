@@ -3,7 +3,7 @@ import { StatsGamesView, StatsPageShell } from "../components/StatsViews";
 import { listStatsGames, parseStatsSearchParams } from "@/lib/stats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
-export const revalidate = 0;
+export const revalidate = 600;
 
 type PageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;

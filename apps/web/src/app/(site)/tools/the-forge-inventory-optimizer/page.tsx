@@ -14,7 +14,7 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 const TOOL_CODE = "the-forge-inventory-optimizer";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/the-forge-inventory-optimizer`;

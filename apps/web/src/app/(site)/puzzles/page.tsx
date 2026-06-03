@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { loadPuzzlesIndexData, PUZZLES_DESCRIPTION, renderPuzzlesIndex } from "./page-data";
 
-export const revalidate = 0;
+export const revalidate = 900;
 
 export const metadata: Metadata = {
   title: `Puzzle Answers | ${SITE_NAME}`,

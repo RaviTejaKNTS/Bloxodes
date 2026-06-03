@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { CHECKLISTS_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { loadChecklistsPageData, renderChecklistsPage } from "./page-data";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 export const metadata = {
   title: `Roblox Checklists | ${SITE_NAME}`,

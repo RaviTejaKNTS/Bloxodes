@@ -5,9 +5,7 @@ import { SITE_URL, organizationJsonLd, siteJsonLd } from "@/lib/seo";
 
 const JOURNEY_SCRIPT_SRC = "//scripts.scriptwrapper.com/tags/75d9ab7d-268c-4e03-bb6c-180ca4b8d5ed.js";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-export const fetchCache = "force-no-store";
+export const revalidate = 3600;
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
   const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;

@@ -5,6 +5,7 @@ import {
   Activity,
   ArrowDownRight,
   ArrowUpRight,
+  BookOpen,
   CalendarDays,
   Clock3,
   ExternalLink,
@@ -414,6 +415,7 @@ function RelatedLinks({ links }: { links: StatsRelatedLink[] }) {
 
 export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
   const { game } = data;
+  const wikiLink = data.relatedLinks.find((link) => link.type === "wiki");
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Stats", href: "/stats" },
@@ -443,12 +445,14 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
               </div>
             </div>
             <div className="flex shrink-0 gap-2">
-              <Button asChild variant="outline" size="sm" className="h-8 rounded-md border-white/15 bg-white/8 px-3 text-white shadow-none hover:bg-white/15">
-                <Link href={robloxGameUrl(game)} target="_blank" rel="noopener noreferrer">
-                  Visit
-                  <ExternalLink className="ml-1.5 h-3.5 w-3.5" aria-hidden />
-                </Link>
-              </Button>
+              {wikiLink ? (
+                <Button asChild variant="outline" size="sm" className="h-8 rounded-md border-white/15 bg-white/8 px-3 text-white shadow-none hover:bg-white/15">
+                  <Link href={wikiLink.href}>
+                    Wiki
+                    <BookOpen className="ml-1.5 h-3.5 w-3.5" aria-hidden />
+                  </Link>
+                </Button>
+              ) : null}
               <Button asChild size="sm" className="h-8 rounded-md px-3">
                 <Link href={robloxGameUrl(game)} target="_blank" rel="noopener noreferrer">
                   Play

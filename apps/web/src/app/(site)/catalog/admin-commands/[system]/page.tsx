@@ -12,7 +12,7 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 const CANONICAL_BASE = `${SITE_URL.replace(/\/$/, "")}/catalog/admin-commands`;
 const INLINE_PREFIX_PATTERN = /^[;:!\/]/;

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { TOOLS_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { loadToolsPageData, renderToolsPage } from "./page-data";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 export const metadata: Metadata = {
   title: `Roblox Tools & Calculators | ${SITE_NAME}`,

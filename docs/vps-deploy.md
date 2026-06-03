@@ -57,7 +57,9 @@ Use Cloudflare cache rules for public HTML. Do not rely on blanket origin HTML `
 - Bypass cache, or set Edge TTL `0`, for origin statuses `400-599`. This prevents Cloudflare from storing a temporary Next.js server error as the public page.
 - Cache static assets aggressively: `/_next/static/*`, images, icons, fonts, `robots.txt`, and sitemap files.
 - Bypass cache for `/api/*`, `/auth/*`, `/account*`, `/login*`, and any other user-specific or mutation routes.
-- A persistent Docker volume at `/app/apps/web/.next/cache` is optional now. Public Supabase-backed pages are rendered fresh on origin misses and held by Cloudflare until purge, so this volume is not the main freshness mechanism.
+- Public Supabase-backed pages use Next ISR plus Cloudflare. Cloudflare shields visitors and the Next cache shields origin/database work during regeneration windows.
+- Keep a persistent Docker volume at `/app/apps/web/.next/cache` when possible so Next ISR survives container restarts and deploy churn.
+- Do not set the public site layout to `force-dynamic` or `force-no-store` unless the affected page family genuinely depends on request-time personalization.
 
 ### Code deploy cache flow
 

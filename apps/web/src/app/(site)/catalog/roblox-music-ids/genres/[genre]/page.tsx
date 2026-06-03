@@ -15,7 +15,7 @@ import {
   loadGenreOptionBySlug
 } from "../../page-data";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 export const metadata: Metadata = {
   title: `Genre Music IDs | ${SITE_NAME}`,

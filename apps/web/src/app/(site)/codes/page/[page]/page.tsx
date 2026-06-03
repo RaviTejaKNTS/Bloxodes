@@ -4,7 +4,7 @@ import { loadCodesPageData, renderCodesPage } from "../../page-data";
 import { CODES_DESCRIPTION, buildAlternates } from "@/lib/seo";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 0;
+export const revalidate = 3600;
 const MAX_STATIC_PAGES = 15;
 
 type PageProps = {

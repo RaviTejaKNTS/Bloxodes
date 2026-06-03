@@ -33,7 +33,7 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
 const TOOL_AD_SLOT = "3529946151";

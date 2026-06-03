@@ -21,7 +21,7 @@ import {
   selectBestRobuxPlan
 } from "./robux-plans";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 const TOOL_CODE = "robux-to-usd-calculator";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/robux-to-usd-calculator`;

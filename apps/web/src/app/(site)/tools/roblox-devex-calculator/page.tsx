@@ -16,7 +16,7 @@ import {
   DEVEX_MIN
 } from "@/lib/devex/constants";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 const TOOL_CODE = "roblox-devex-calculator";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/roblox-devex-calculator`;

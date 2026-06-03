@@ -10,7 +10,7 @@ import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
 import { CHECKLISTS_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 const MAX_STATIC_CHECKLIST_SLUGS = 120;
 
 type PageProps = {

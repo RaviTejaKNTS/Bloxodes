@@ -4,7 +4,7 @@ import { StatsGameDetailView, StatsPageShell } from "../../components/StatsViews
 import { getStatsGameBySlug, robloxGameUrl } from "@/lib/stats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
-export const revalidate = 0;
+export const revalidate = 600;
 
 type PageProps = {
   params: Promise<{ slug: string }>;

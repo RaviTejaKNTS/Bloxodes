@@ -17,7 +17,7 @@ import { buildServerQuizAttempt } from "@/lib/quiz-attempts";
 import type { QuizData } from "@/lib/quiz-types";
 import { QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 type PageProps = {
   params: Promise<{ slug: string }>;

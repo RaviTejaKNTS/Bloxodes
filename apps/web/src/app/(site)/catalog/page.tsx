@@ -14,7 +14,7 @@ import {
 } from "@/lib/roblox-avatar-catalog";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 export const metadata: Metadata = {
   title: `Roblox Catalogs | ${SITE_NAME}`,

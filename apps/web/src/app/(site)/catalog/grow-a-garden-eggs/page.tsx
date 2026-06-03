@@ -2,7 +2,7 @@ import { generateGrowGardenCollectionMetadata, renderGrowGardenCollectionRoute }
 
 const COLLECTION = "eggs";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 export async function generateMetadata() {
   return generateGrowGardenCollectionMetadata(COLLECTION);

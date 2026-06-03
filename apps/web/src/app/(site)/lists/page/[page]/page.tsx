@@ -4,7 +4,7 @@ import { loadListsPageData, renderListsPage } from "../../page-data";
 import { LISTS_DESCRIPTION, buildAlternates } from "@/lib/seo";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 const MAX_STATIC_PAGES = 10;
 
 type PageProps = {

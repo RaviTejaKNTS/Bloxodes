@@ -12,7 +12,7 @@ import { getToolContentWithDevFallback } from "@/lib/tools";
 import { loadWizardAlchemyRaceRerollData } from "@/lib/wizard-alchemy/data";
 import { WizardAlchemyRaceRerollCalculatorClient } from "./WizardAlchemyRaceRerollCalculatorClient";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 const TOOL_CODE = "wizard-alchemy-race-reroll-calculator";
 const TOOL_TITLE = "Wizard Alchemy Race Reroll Calculator";

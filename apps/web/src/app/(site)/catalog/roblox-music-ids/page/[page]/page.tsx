@@ -10,7 +10,7 @@ import {
 import { CATALOG_DESCRIPTION, buildAlternates } from "@/lib/seo";
 import { buildPageParams } from "@/lib/static-params";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-music-ids"];
 const MAX_STATIC_PAGES = 20;

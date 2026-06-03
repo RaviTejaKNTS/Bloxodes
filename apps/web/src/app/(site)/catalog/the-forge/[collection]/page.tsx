@@ -7,7 +7,7 @@ import {
 } from "../page-data";
 import { generateForgeCollectionMetadata } from "../collection-route";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 type PageProps = {
   params: Promise<{ collection: string }>;

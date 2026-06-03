@@ -2,7 +2,7 @@ import { permanentRedirect } from "next/navigation";
 import { AVATAR_CATALOG_MASTER_CODE } from "@/lib/roblox-avatar-catalog";
 import type { AvatarCatalogSearchParamsInput } from "../../avatar-marketplace/page-data";
 
-export const revalidate = 0;
+export const revalidate = 21600;
 
 type PageProps = {
   params?: Promise<{ segments?: string[] }>;

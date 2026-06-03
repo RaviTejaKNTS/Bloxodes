@@ -9,7 +9,7 @@ type PageProps = {
   params: Promise<{ slug: string; page: string }>;
 };
 
-export const revalidate = 0;
+export const revalidate = 21600;
 const MAX_STATIC_LIST_SLUGS = 80;
 const MAX_STATIC_PAGES_PER_LIST = 2;
 const STATIC_PAGE_START = 2;
