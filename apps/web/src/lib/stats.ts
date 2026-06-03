@@ -20,9 +20,9 @@ export type StatsSortKey =
   | "updated"
   | "created";
 
-export type StatsTimeRange = "24h" | "7d" | "30d" | "90d" | "all";
+export type StatsTimeRange = "1d" | "7d" | "14d" | "30d" | "90d";
 export type StatsMetricKey = "players" | "visits" | "favorites" | "rating";
-export type StatsChartResolution = "auto" | "hourly" | "daily" | "monthly";
+export type StatsChartResolution = "hourly" | "daily" | "weekly" | "monthly";
 
 export type StatsGame = {
   universeId: number;
@@ -74,6 +74,7 @@ export type StatsRelatedLink = {
 
 export type StatsChartPoint = {
   label: string;
+  tooltipLabel?: string;
   sampledAt: string;
   players: number | null;
   peakPlayers: number | null;
@@ -136,7 +137,7 @@ export type StatsGameDetailData = {
 export type StatsGameChartData = {
   range: StatsTimeRange;
   requestedResolution: StatsChartResolution;
-  resolution: Exclude<StatsChartResolution, "auto">;
+  resolution: StatsChartResolution;
   points: StatsChartPoint[];
 };
 
@@ -187,22 +188,6 @@ type HourlyRow = {
   sample_count: number | null;
 };
 
-type DailyRow = {
-  stat_date: string;
-  playing: number | null;
-  visits: number | null;
-  favorites: number | null;
-  likes: number | null;
-  dislikes: number | null;
-  avg_playing?: number | null;
-  peak_playing?: number | null;
-  visits_end?: number | null;
-  favorites_end?: number | null;
-  rating_end?: number | null;
-  sample_count?: number | null;
-  snapshot: Record<string, unknown> | null;
-};
-
 const SORT_COLUMNS: Partial<Record<StatsSortKey, keyof UniverseRow>> = {
   playing: "playing",
   visits: "visits",
@@ -224,11 +209,11 @@ export const STATS_SORT_OPTIONS: Array<{ value: StatsSortKey; label: string }> =
 ];
 
 export const STATS_TIME_RANGES: Array<{ value: StatsTimeRange; label: string }> = [
-  { value: "24h", label: "24h" },
+  { value: "1d", label: "1d" },
   { value: "7d", label: "7d" },
+  { value: "14d", label: "14d" },
   { value: "30d", label: "30d" },
-  { value: "90d", label: "90d" },
-  { value: "all", label: "All" }
+  { value: "90d", label: "90d" }
 ];
 
 export const STATS_METRICS: Array<{ value: StatsMetricKey; label: string }> = [
@@ -239,9 +224,9 @@ export const STATS_METRICS: Array<{ value: StatsMetricKey; label: string }> = [
 ];
 
 export const STATS_CHART_RESOLUTIONS: Array<{ value: StatsChartResolution; label: string }> = [
-  { value: "auto", label: "Auto" },
   { value: "hourly", label: "Hourly" },
   { value: "daily", label: "Daily" },
+  { value: "weekly", label: "Weekly" },
   { value: "monthly", label: "Monthly" }
 ];
 
@@ -262,12 +247,6 @@ function parseStatsUniverseIdSlug(slug: string): number | null {
 
 function toNumber(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
-}
-
-function nestedNumber(value: Record<string, unknown>, key: string, childKey: string): number | null {
-  const nested = value[key];
-  if (!nested || typeof nested !== "object") return null;
-  return toNumber((nested as Record<string, unknown>)[childKey]);
 }
 
 function toJsonStringArray(value: unknown): string[] {
@@ -509,7 +488,7 @@ async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> 
   const byHour = new Map<string, StatsChartPoint>();
   for (const row of (data ?? []) as HourlyRow[]) {
     const existing = byHour.get(row.hour_start) ?? {
-      label: formatChartLabel(row.hour_start, "24h"),
+      label: new Date(row.hour_start).toLocaleTimeString("en-US", { hour: "numeric", hour12: true, timeZone: "UTC" }),
       sampledAt: row.hour_start,
       players: 0,
       peakPlayers: 0,
@@ -578,7 +557,8 @@ export function normalizeStatsSort(value?: string | null): StatsSortKey {
 }
 
 export function normalizeStatsRange(value?: string | null): StatsTimeRange {
-  return STATS_TIME_RANGES.some((option) => option.value === value) ? (value as StatsTimeRange) : "24h";
+  if (value === "24h") return "1d";
+  return STATS_TIME_RANGES.some((option) => option.value === value) ? (value as StatsTimeRange) : "1d";
 }
 
 export function parseStatsSearchParams(searchParams?: Record<string, string | string[] | undefined>) {
@@ -666,180 +646,172 @@ export async function getStatsGenreOptions(): Promise<string[]> {
   ).sort((a, b) => a.localeCompare(b));
 }
 
-function formatChartLabel(value: string, range: StatsTimeRange, resolution: Exclude<StatsChartResolution, "auto"> = "hourly") {
-  const date = new Date(value);
-  if (resolution === "monthly") {
-    return date.toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
-  }
-  if (range === "24h" && resolution === "hourly") {
-    return date.toLocaleTimeString("en-US", { hour: "numeric", hour12: true, timeZone: "UTC" });
-  }
-  if (range === "7d" || range === "30d" || range === "90d") {
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
-  }
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "2-digit", timeZone: "UTC" });
+const RANGE_DAYS: Record<StatsTimeRange, number> = {
+  "1d": 1,
+  "7d": 7,
+  "14d": 14,
+  "30d": 30,
+  "90d": 90
+};
+
+const RESOLUTION_HOURS: Record<StatsChartResolution, number> = {
+  hourly: 1,
+  daily: 24,
+  weekly: 24 * 7,
+  monthly: 24 * 30
+};
+
+function chartRangeStart(range: StatsTimeRange) {
+  return hoursAgo(RANGE_DAYS[range] * 24);
 }
 
-function hourlyRangeStart(range: StatsTimeRange) {
-  if (range === "24h") return hoursAgo(24);
-  if (range === "7d") return hoursAgo(24 * 7);
-  return hoursAgo(24 * 30);
+function formatChartDate(date: Date, withYear = false) {
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: withYear ? "numeric" : undefined,
+    timeZone: "UTC"
+  });
 }
 
-async function getHourlyChart(universeId: number, range: Extract<StatsTimeRange, "24h" | "7d" | "30d">): Promise<StatsChartPoint[]> {
-  const sb = supabaseAdmin();
-  const { data, error } = await sb
-    .from("roblox_universe_stats_hourly")
-    .select("universe_id, hour_start, playing, avg_playing, peak_playing, visits_end, favorites_end, likes_end, dislikes_end, rating_percent, sample_count")
-    .eq("universe_id", universeId)
-    .gte("hour_start", hourlyRangeStart(range))
-    .order("hour_start", { ascending: true });
-  if (error) {
-    console.warn("Failed to load hourly chart", error.message);
-    return [];
+function formatBucketLabel(start: Date, end: Date, resolution: StatsChartResolution) {
+  if (resolution === "hourly") {
+    return end.toLocaleTimeString("en-US", { hour: "numeric", hour12: true, timeZone: "UTC" });
   }
-  return ((data ?? []) as HourlyRow[]).map((row) => ({
-    label: formatChartLabel(row.hour_start, range, "hourly"),
-    sampledAt: row.hour_start,
-    players: row.avg_playing ?? row.playing,
-    peakPlayers: row.peak_playing,
-    avgPlayers: row.avg_playing,
-    visits: row.visits_end,
-    favorites: row.favorites_end,
-    rating: row.rating_percent,
-    samples: row.sample_count
-  }));
-}
-
-async function getDailyRows(universeId: number, range: Exclude<StatsTimeRange, "24h">): Promise<DailyRow[]> {
-  const sb = supabaseAdmin();
-  let query = sb
-    .from("roblox_universe_stats_daily")
-    .select("stat_date, playing, visits, favorites, likes, dislikes, avg_playing, peak_playing, visits_end, favorites_end, rating_end, sample_count, snapshot")
-    .eq("universe_id", universeId)
-    .order("stat_date", { ascending: true });
-  if (range !== "all") {
-    const days = range === "7d" ? 7 : range === "30d" ? 30 : 90;
-    const start = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
-    query = query.gte("stat_date", start);
+  if (resolution === "daily") {
+    return formatChartDate(end);
   }
-  const { data, error } = await query.limit(range === "all" ? 1000 : 120);
-  if (error) {
-    console.warn("Failed to load daily chart", error.message);
-    return [];
+  const startLabel = formatChartDate(start);
+  const endLabel = formatChartDate(end, start.getUTCFullYear() !== end.getUTCFullYear());
+  return startLabel === endLabel ? endLabel : `${startLabel}-${endLabel}`;
+}
+
+function formatBucketTooltip(start: Date, end: Date, resolution: StatsChartResolution) {
+  if (resolution === "hourly") {
+    return end.toLocaleString(undefined, {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      timeZoneName: "short"
+    });
   }
-  return (data ?? []) as DailyRow[];
+  if (resolution === "daily") {
+    return formatChartDate(end, true);
+  }
+  return `${formatChartDate(start, true)} - ${formatChartDate(end, true)}`;
 }
 
-function mapDailyChartRow(row: DailyRow, range: Exclude<StatsTimeRange, "24h">): StatsChartPoint {
-    const snapshot = row.snapshot ?? {};
-    const avgPlaying = toNumber(row.avg_playing) ?? toNumber(snapshot.avg_playing) ?? nestedNumber(snapshot, "playing", "average");
-    const peakPlaying = toNumber(row.peak_playing) ?? toNumber(snapshot.peak_playing) ?? nestedNumber(snapshot, "playing", "peak") ?? row.playing;
-    const playing = avgPlaying ?? row.playing;
-    const visitsEnd = toNumber(row.visits_end) ?? toNumber(snapshot.visits_end) ?? nestedNumber(snapshot, "visits", "end") ?? row.visits;
-    const favoritesEnd =
-      toNumber(row.favorites_end) ?? toNumber(snapshot.favorites_end) ?? nestedNumber(snapshot, "favorites", "end") ?? row.favorites;
-    const rating = toNumber(row.rating_end) ?? toNumber(snapshot.rating_end) ?? nestedNumber(snapshot, "rating", "end") ?? getRatingPercent(row.likes, row.dislikes);
-    const samples = toNumber(row.sample_count) ?? toNumber(snapshot.sample_count);
-    return {
-      label: formatChartLabel(row.stat_date, range, "daily"),
-      sampledAt: row.stat_date,
-      players: playing,
-      peakPlayers: peakPlaying,
-      avgPlayers: avgPlaying,
-      visits: visitsEnd,
-      favorites: favoritesEnd,
-      rating,
-      samples
-    };
+function latestNumber<T extends keyof HourlyRow>(rows: HourlyRow[], key: T): number | null {
+  for (let index = rows.length - 1; index >= 0; index -= 1) {
+    const value = rows[index]?.[key];
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+  }
+  return null;
 }
 
-async function getDailyChart(universeId: number, range: Exclude<StatsTimeRange, "24h">): Promise<StatsChartPoint[]> {
-  const rows = await getDailyRows(universeId, range);
-  return rows.map((row) => mapDailyChartRow(row, range));
-}
+function bucketRows(rows: HourlyRow[], range: StatsTimeRange, resolution: StatsChartResolution): StatsChartPoint[] {
+  if (!rows.length) return [];
+  const rangeStart = new Date(chartRangeStart(range));
+  const rangeEnd = new Date();
+  const bucketMs = RESOLUTION_HOURS[resolution] * 60 * 60 * 1000;
+  const buckets = new Map<number, HourlyRow[]>();
 
-async function getMonthlyChart(universeId: number, range: Extract<StatsTimeRange, "90d" | "all">): Promise<StatsChartPoint[]> {
-  const rows = await getDailyRows(universeId, range);
-  const months = new Map<string, StatsChartPoint & { likesEnd: number | null; dislikesEnd: number | null; playingWeight: number }>();
   for (const row of rows) {
-    const daily = mapDailyChartRow(row, range);
-    const date = new Date(`${row.stat_date}T00:00:00.000Z`);
-    const key = `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}`;
-    const existing = months.get(key);
-    const samples = daily.samples ?? 0;
-    const playingWeight = typeof daily.players === "number" ? Math.max(samples, 1) : 0;
-    const likesEnd = toNumber(row.likes);
-    const dislikesEnd = toNumber(row.dislikes);
-    if (!existing) {
-      months.set(key, {
-        label: formatChartLabel(row.stat_date, range, "monthly"),
-        sampledAt: row.stat_date,
-        players: daily.players,
-        peakPlayers: daily.peakPlayers,
-        avgPlayers: daily.avgPlayers,
-        visits: daily.visits,
-        favorites: daily.favorites,
-        rating: daily.rating,
-        samples,
-        likesEnd,
-        dislikesEnd,
-        playingWeight
-      });
-      continue;
-    }
-    const nextSamples = (existing.samples ?? 0) + samples;
-    const nextPlayingWeight = existing.playingWeight + playingWeight;
-    existing.sampledAt = row.stat_date;
-    existing.players =
-      typeof existing.players === "number" && typeof daily.players === "number"
-        ? (existing.players * existing.playingWeight + daily.players * playingWeight) / Math.max(1, nextPlayingWeight)
-        : existing.players ?? daily.players;
-    existing.peakPlayers = Math.max(existing.peakPlayers ?? 0, daily.peakPlayers ?? 0);
-    existing.avgPlayers =
-      typeof existing.avgPlayers === "number" && typeof daily.avgPlayers === "number"
-        ? (existing.avgPlayers * (existing.samples ?? 0) + daily.avgPlayers * samples) / Math.max(1, nextSamples)
-        : existing.avgPlayers ?? daily.avgPlayers;
-    existing.visits = daily.visits ?? existing.visits;
-    existing.favorites = daily.favorites ?? existing.favorites;
-    existing.samples = nextSamples;
-    existing.playingWeight = nextPlayingWeight;
-    existing.likesEnd = likesEnd ?? existing.likesEnd;
-    existing.dislikesEnd = dislikesEnd ?? existing.dislikesEnd;
-    existing.rating = getRatingPercent(existing.likesEnd, existing.dislikesEnd) ?? daily.rating ?? existing.rating;
+    const sampledMs = Date.parse(row.hour_start);
+    if (!Number.isFinite(sampledMs)) continue;
+    const bucketIndex = Math.max(0, Math.floor((sampledMs - rangeStart.getTime()) / bucketMs));
+    const bucket = buckets.get(bucketIndex) ?? [];
+    bucket.push(row);
+    buckets.set(bucketIndex, bucket);
   }
-  return Array.from(months.values()).map(({ likesEnd: _likesEnd, dislikesEnd: _dislikesEnd, playingWeight: _playingWeight, ...point }) => point);
+
+  return Array.from(buckets.entries())
+    .sort(([a], [b]) => a - b)
+    .map(([bucketIndex, bucket]) => {
+      bucket.sort((a, b) => Date.parse(a.hour_start) - Date.parse(b.hour_start));
+      const bucketStart = new Date(rangeStart.getTime() + bucketIndex * bucketMs);
+      const bucketEnd = new Date(Math.min(rangeStart.getTime() + (bucketIndex + 1) * bucketMs, rangeEnd.getTime()));
+      const sampledAt = bucket[bucket.length - 1]?.hour_start ?? bucketEnd.toISOString();
+      let playingTotal = 0;
+      let playingWeight = 0;
+      let peakPlayers: number | null = null;
+      let samples = 0;
+
+      for (const row of bucket) {
+        const sampleCount = Math.max(row.sample_count ?? 1, 1);
+        const playing = row.avg_playing ?? row.playing;
+        if (typeof playing === "number") {
+          playingTotal += playing * sampleCount;
+          playingWeight += sampleCount;
+        }
+        if (typeof row.peak_playing === "number") {
+          peakPlayers = peakPlayers == null ? row.peak_playing : Math.max(peakPlayers, row.peak_playing);
+        }
+        samples += row.sample_count ?? 0;
+      }
+
+      const likesEnd = latestNumber(bucket, "likes_end");
+      const dislikesEnd = latestNumber(bucket, "dislikes_end");
+      const rating = getRatingPercent(likesEnd, dislikesEnd) ?? latestNumber(bucket, "rating_percent");
+      const players = playingWeight > 0 ? playingTotal / playingWeight : null;
+
+      return {
+        label: formatBucketLabel(bucketStart, bucketEnd, resolution),
+        tooltipLabel: formatBucketTooltip(bucketStart, bucketEnd, resolution),
+        sampledAt,
+        players,
+        peakPlayers,
+        avgPlayers: players,
+        visits: latestNumber(bucket, "visits_end"),
+        favorites: latestNumber(bucket, "favorites_end"),
+        rating,
+        samples
+      };
+    });
+}
+
+async function getBucketedChart(universeId: number, range: StatsTimeRange, resolution: StatsChartResolution): Promise<StatsChartPoint[]> {
+  const sb = supabaseAdmin();
+  const rows: HourlyRow[] = [];
+  const pageSize = 1000;
+  let offset = 0;
+
+  while (true) {
+    const { data, error } = await sb
+      .from("roblox_universe_stats_hourly")
+      .select("universe_id, hour_start, playing, avg_playing, peak_playing, visits_end, favorites_end, likes_end, dislikes_end, rating_percent, sample_count")
+      .eq("universe_id", universeId)
+      .gte("hour_start", chartRangeStart(range))
+      .order("hour_start", { ascending: true })
+      .range(offset, offset + pageSize - 1);
+    if (error) {
+      console.warn("Failed to load chart stats", error.message);
+      return [];
+    }
+    const chunk = (data ?? []) as HourlyRow[];
+    rows.push(...chunk);
+    if (chunk.length < pageSize) break;
+    offset += pageSize;
+  }
+
+  return bucketRows(rows, range, resolution);
 }
 
 export function normalizeStatsResolution(value?: string | null): StatsChartResolution {
-  return STATS_CHART_RESOLUTIONS.some((option) => option.value === value) ? (value as StatsChartResolution) : "auto";
-}
-
-function resolveStatsChartResolution(range: StatsTimeRange, resolution: StatsChartResolution): Exclude<StatsChartResolution, "auto"> {
-  if (resolution === "hourly" && (range === "24h" || range === "7d" || range === "30d")) return "hourly";
-  if (resolution === "daily" && range !== "24h") return "daily";
-  if (resolution === "monthly" && (range === "90d" || range === "all")) return "monthly";
-  if (range === "24h" || range === "7d") return "hourly";
-  if (range === "all") return "monthly";
-  return "daily";
+  return STATS_CHART_RESOLUTIONS.some((option) => option.value === value) ? (value as StatsChartResolution) : "hourly";
 }
 
 export async function getStatsGameChart(
   universeId: number,
-  range: StatsTimeRange = "24h",
-  resolution: StatsChartResolution = "auto"
+  range: StatsTimeRange = "1d",
+  resolution: StatsChartResolution = "hourly"
 ): Promise<StatsGameChartData> {
-  const resolvedResolution = resolveStatsChartResolution(range, resolution);
-  const points =
-    resolvedResolution === "hourly"
-      ? await getHourlyChart(universeId, range === "30d" ? "30d" : range === "7d" ? "7d" : "24h")
-      : resolvedResolution === "daily"
-        ? await getDailyChart(universeId, range === "24h" ? "7d" : range)
-        : await getMonthlyChart(universeId, range === "all" ? "all" : "90d");
+  const points = await getBucketedChart(universeId, range, resolution);
   return {
     range,
     requestedResolution: resolution,
-    resolution: resolvedResolution,
+    resolution,
     points
   };
 }
@@ -888,7 +860,7 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
 async function buildStatsGameDetail(row: UniverseRow): Promise<StatsGameDetailData> {
   const baseGame = (await attachGrowth([mapUniverse(row)]))[0];
   const [initialChart, relatedLinks, sameCreator, similarGames, includedInLists, globalRank] = await Promise.all([
-    getStatsGameChart(baseGame.universeId, "24h", "auto"),
+    getStatsGameChart(baseGame.universeId, "1d", "hourly"),
     loadRelatedLinks(baseGame.universeId, baseGame),
     loadSameCreatorGames(baseGame),
     loadSimilarGames(baseGame),

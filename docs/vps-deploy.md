@@ -51,9 +51,10 @@ The app listens on port `3000` inside the container and exposes `/api/health` fo
 
 ### 5. Cache rules
 
-Use Cloudflare cache rules that respect the origin `Cache-Control` headers from `apps/web/next.config.js`.
+Use Cloudflare cache rules for public HTML. Do not rely on blanket origin HTML `Cache-Control` headers, because Next can attach those headers to a server error page too.
 
-- Cache public HTML using the origin headers.
+- Cache public HTML only when the origin response status is `200`.
+- Bypass cache, or set Edge TTL `0`, for origin statuses `400-599`. This prevents Cloudflare from storing a temporary Next.js server error as the public page.
 - Cache static assets aggressively: `/_next/static/*`, images, icons, fonts, `robots.txt`, and sitemap files.
 - Bypass cache for `/api/*`, `/auth/*`, `/account*`, `/login*`, and any other user-specific or mutation routes.
 - A persistent Docker volume at `/app/apps/web/.next/cache` is optional now. Public Supabase-backed pages are rendered fresh on origin misses and held by Cloudflare until purge, so this volume is not the main freshness mechanism.
@@ -75,6 +76,6 @@ Use Cloudflare cache rules that respect the origin `Cache-Control` headers from 
 1. Deploy on a staging subdomain first.
 2. Confirm `/api/health` returns `200`.
 3. Confirm `/api/revalidate` still refreshes content after a publish event.
-4. Verify `cf-cache-status: HIT` on cacheable public pages.
+4. Verify successful public pages can reach `cf-cache-status: HIT`, and verify a temporary `500` is not cached.
 5. Check Journey ad loading, GDPR consent flow, and GA events in production mode.
 6. Switch the primary DNS record only after those checks pass.

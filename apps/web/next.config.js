@@ -37,30 +37,12 @@ if (cspMode !== "off" && (!publicCsp || !secureCsp)) {
   throw new Error("CSP directives must not be empty.");
 }
 
-const publicHtmlCacheControl = "public, max-age=0, s-maxage=31536000, stale-while-revalidate=31536000";
-const publicHtmlCacheSources = [
-  "/((?!api(?:/|$)|auth(?:/|$)|account(?:/|$)|login(?:/|$)|_next(?:/|$)|.*\\..*).*)",
-  "/sitemap.xml",
-  "/sitemaps/:path*",
-  "/robots.txt",
-  "/ads.txt",
-  "/feed.xml"
-];
-
 const nextConfig = {
   poweredByHeader: false,
   devIndicators: false,
   output: "standalone",
   outputFileTracingRoot: repoRoot,
   staticPageGenerationTimeout: 120,
-  async headers() {
-    return publicHtmlCacheSources.map((source) => ({
-      source,
-      headers: [
-        { key: "Cache-Control", value: publicHtmlCacheControl }
-      ]
-    }));
-  },
   images: {
     // Disable the built-in image optimizer so the app stays portable across hosts/CDNs.
     unoptimized: true,

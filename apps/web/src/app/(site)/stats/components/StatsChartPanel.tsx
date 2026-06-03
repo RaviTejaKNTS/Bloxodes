@@ -11,12 +11,14 @@ import { LineChart } from "recharts/es6/chart/LineChart";
 import { Activity, BarChart3 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, type ChartConfig } from "@/components/ui/chart";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatCompactNumber, formatPercent } from "@/lib/stats-format";
 import { cn } from "@/lib/utils";
 
 type ChartPoint = {
   label: string;
+  tooltipLabel?: string;
   sampledAt: string;
   players: number | null;
   peakPlayers: number | null;
@@ -28,20 +30,18 @@ type ChartPoint = {
 };
 
 type ChartPointForRender = ChartPoint & {
-  axisLabel: string;
-  chartResolution: EffectiveResolutionKey;
+  chartResolution: ResolutionKey;
   tooltipLabel: string;
 };
 
 type MetricKey = "players" | "visits" | "favorites" | "rating";
-type RangeKey = "24h" | "7d" | "30d" | "90d" | "all";
-type ResolutionKey = "auto" | "hourly" | "daily" | "monthly";
-type EffectiveResolutionKey = Exclude<ResolutionKey, "auto">;
+type RangeKey = "1d" | "7d" | "14d" | "30d" | "90d";
+type ResolutionKey = "hourly" | "daily" | "weekly" | "monthly";
 
 type ChartData = {
   range: RangeKey;
   requestedResolution: ResolutionKey;
-  resolution: EffectiveResolutionKey;
+  resolution: ResolutionKey;
   points: ChartPoint[];
 };
 
@@ -59,6 +59,13 @@ const metricConfig: ChartConfig = {
   rating: { label: "Rating", color: "#38bdf8" }
 };
 
+const resolutionLabels: Record<ResolutionKey, string> = {
+  hourly: "Hourly",
+  daily: "Daily",
+  weekly: "Weekly",
+  monthly: "Monthly"
+};
+
 const chartTabsListClass =
   "h-auto min-h-9 flex-wrap justify-start gap-1 rounded-md border border-border/70 bg-background/80 p-1 text-muted shadow-none";
 const chartTabsTriggerClass =
@@ -73,7 +80,19 @@ function axisTick(value: unknown) {
   return formatCompactNumber(typeof value === "number" ? value : Number(value), 0);
 }
 
-function formatTooltipTimestamp(sampledAt: string, resolution: EffectiveResolutionKey) {
+function formatAxisTick(sampledAt: string, range: RangeKey) {
+  const date = new Date(sampledAt);
+  if (!Number.isFinite(date.getTime())) return sampledAt;
+  if (range === "1d") {
+    return date.toLocaleTimeString("en-US", { hour: "numeric", hour12: true });
+  }
+  if (range === "90d") {
+    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  }
+  return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
+function formatTooltipTimestamp(sampledAt: string, resolution: ResolutionKey) {
   const date = new Date(resolution === "daily" && /^\d{4}-\d{2}-\d{2}$/.test(sampledAt) ? `${sampledAt}T00:00:00.000Z` : sampledAt);
   if (!Number.isFinite(date.getTime())) return sampledAt;
   if (resolution === "hourly") {
@@ -86,7 +105,7 @@ function formatTooltipTimestamp(sampledAt: string, resolution: EffectiveResoluti
     });
   }
   if (resolution === "monthly") {
-    return date.toLocaleDateString(undefined, { month: "short", year: "numeric", timeZone: "UTC" });
+    return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
   }
   return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 }
@@ -125,12 +144,6 @@ function usablePointCount(points: ChartPoint[], metric: MetricKey) {
   return points.filter((point) => typeof point[metric] === "number").length;
 }
 
-function autoResolution(range: RangeKey): EffectiveResolutionKey {
-  if (range === "24h" || range === "7d") return "hourly";
-  if (range === "all") return "monthly";
-  return "daily";
-}
-
 export function StatsChartPanel({
   title,
   subtitle,
@@ -138,7 +151,7 @@ export function StatsChartPanel({
   initialChart,
   universeId,
   defaultMetric = "players",
-  defaultRange = "24h",
+  defaultRange = "1d",
   compact = false,
   area = false
 }: {
@@ -154,6 +167,7 @@ export function StatsChartPanel({
 }) {
   const [metric, setMetric] = useState<MetricKey>(defaultMetric);
   const [range, setRange] = useState<RangeKey>(defaultRange);
+  const [resolution, setResolution] = useState<ResolutionKey>(initialChart?.requestedResolution ?? "hourly");
   const [chartCache, setChartCache] = useState<Record<string, ChartData>>(() =>
     initialChart ? { [chartCacheKey(initialChart.range, initialChart.requestedResolution)]: initialChart } : {}
   );
@@ -161,21 +175,20 @@ export function StatsChartPanel({
   const [loadingKey, setLoadingKey] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const initialChartKey = initialChart ? chartCacheKey(initialChart.range, initialChart.requestedResolution) : null;
-  const activeResolution: ResolutionKey = "auto";
-  const activeKey = chartCacheKey(range, activeResolution);
+  const activeKey = chartCacheKey(range, resolution);
   const loadedChart = chartCache[activeKey] ?? (initialChartKey === activeKey ? initialChart : undefined);
   const displayChart = loadedChart ?? lastRenderedChart;
   const points = useMemo(() => (initialChart ? displayChart?.points ?? [] : chart ?? []), [chart, displayChart, initialChart]);
-  const hasRenderableData = usablePointCount(points, metric) >= 2;
+  const hasRenderableData = usablePointCount(points, metric) >= 1;
   const Chart = area ? AreaChart : LineChart;
-  const resolvedResolution = displayChart?.resolution ?? (activeResolution === "auto" ? autoResolution(range) : activeResolution);
+  const resolvedResolution = displayChart?.resolution ?? resolution;
+  const activePointCount = usablePointCount(points, metric);
   const chartPoints = useMemo<ChartPointForRender[]>(
     () =>
       points.map((point) => ({
         ...point,
-        axisLabel: point.label,
         chartResolution: resolvedResolution,
-        tooltipLabel: formatTooltipTimestamp(point.sampledAt, resolvedResolution)
+        tooltipLabel: point.tooltipLabel ?? formatTooltipTimestamp(point.sampledAt, resolvedResolution)
       })),
     [points, resolvedResolution]
   );
@@ -193,7 +206,7 @@ export function StatsChartPanel({
     let cancelled = false;
     setLoadingKey(activeKey);
     setLoadError(null);
-    fetch(`/api/stats/games/${universeId}/chart?range=${encodeURIComponent(range)}&resolution=${encodeURIComponent(activeResolution)}`)
+    fetch(`/api/stats/games/${universeId}/chart?range=${encodeURIComponent(range)}&resolution=${encodeURIComponent(resolution)}`)
       .then(async (response) => {
         if (!response.ok) throw new Error(`Chart request failed (${response.status})`);
         return (await response.json()) as ChartData;
@@ -211,7 +224,7 @@ export function StatsChartPanel({
     return () => {
       cancelled = true;
     };
-  }, [activeKey, activeResolution, chartCache, initialChart, range, universeId]);
+  }, [activeKey, chartCache, initialChart, range, resolution, universeId]);
 
   return (
     <Card className={cn("overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none", compact ? "min-h-[230px]" : "min-h-[360px]")}>
@@ -239,13 +252,27 @@ export function StatsChartPanel({
           {initialChart ? (
             <Tabs value={range} onValueChange={(value) => setRange(value as RangeKey)}>
               <TabsList className={chartTabsListClass}>
-                {(["24h", "7d", "30d", "90d", "all"] as RangeKey[]).map((item) => (
+                {(["1d", "7d", "14d", "30d", "90d"] as RangeKey[]).map((item) => (
                   <TabsTrigger key={item} value={item} className={chartTabsTriggerClass}>
-                    {item === "all" ? "All" : item}
+                    {item}
                   </TabsTrigger>
                 ))}
               </TabsList>
             </Tabs>
+          ) : null}
+          {initialChart ? (
+            <Select value={resolution} onValueChange={(value) => setResolution(value as ResolutionKey)}>
+              <SelectTrigger className="h-9 w-[112px] rounded-md border-border/70 bg-background/80 text-xs font-semibold text-muted shadow-none">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {(["hourly", "daily", "weekly", "monthly"] as ResolutionKey[]).map((item) => (
+                  <SelectItem key={item} value={item}>
+                    {resolutionLabels[item]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           ) : null}
         </div>
       </CardHeader>
@@ -264,7 +291,14 @@ export function StatsChartPanel({
             <ChartContainer config={metricConfig} className={compact ? "h-[190px] w-full min-w-0" : "h-[300px] w-full min-w-0"}>
               <Chart data={chartPoints} margin={{ left: 0, right: 8, top: 10, bottom: 0 }}>
                 <CartesianGrid vertical={false} />
-                <XAxis dataKey="axisLabel" tickLine={false} axisLine={false} minTickGap={24} tickMargin={8} />
+                <XAxis
+                  dataKey="sampledAt"
+                  tickLine={false}
+                  axisLine={false}
+                  minTickGap={24}
+                  tickMargin={8}
+                  tickFormatter={(value: unknown) => formatAxisTick(String(value), range)}
+                />
                 <YAxis tickLine={false} axisLine={false} tickMargin={8} width={42} tickFormatter={axisTick} />
                 <ChartTooltip cursor={false} content={<StatsTooltip metric={metric} />} />
                 {area ? (
@@ -275,7 +309,7 @@ export function StatsChartPanel({
                     fill={`var(--color-${metric})`}
                     fillOpacity={0.12}
                     strokeWidth={2.5}
-                    dot={false}
+                    dot={activePointCount === 1 ? { r: 4 } : false}
                     name={metric}
                   />
                 ) : (
@@ -284,7 +318,7 @@ export function StatsChartPanel({
                     dataKey={metric}
                     stroke={`var(--color-${metric})`}
                     strokeWidth={2.5}
-                    dot={false}
+                    dot={activePointCount === 1 ? { r: 4 } : false}
                     name={metric}
                     activeDot={{ r: 4 }}
                   />

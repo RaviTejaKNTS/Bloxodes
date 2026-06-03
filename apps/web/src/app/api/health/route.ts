@@ -43,7 +43,8 @@ export async function GET() {
       },
       features: {
         cacheTags: true,
-        cacheHeaderVersion: 2,
+        cacheHeaderVersion: 3,
+        publicHtmlCacheHeaders: "cloudflare-200-only",
         cloudflarePurgeStrategy: process.env.CLOUDFLARE_PURGE_STRATEGY || "tags"
       }
     },
