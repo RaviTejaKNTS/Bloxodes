@@ -232,7 +232,7 @@ export const STATS_TIME_RANGES: Array<{ value: StatsTimeRange; label: string }> 
 ];
 
 export const STATS_METRICS: Array<{ value: StatsMetricKey; label: string }> = [
-  { value: "players", label: "Players" },
+  { value: "players", label: "Playing" },
   { value: "visits", label: "Visits" },
   { value: "favorites", label: "Favorites" },
   { value: "rating", label: "Rating" }
@@ -519,7 +519,7 @@ async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> 
       rating: null,
       samples: 0
     };
-    existing.players = (existing.players ?? 0) + (row.playing ?? 0);
+    existing.players = (existing.players ?? 0) + (row.avg_playing ?? row.playing ?? 0);
     existing.peakPlayers = (existing.peakPlayers ?? 0) + (row.peak_playing ?? 0);
     existing.avgPlayers = (existing.avgPlayers ?? 0) + (row.avg_playing ?? row.playing ?? 0);
     existing.visits = (existing.visits ?? 0) + (row.visits_end ?? 0);
@@ -701,7 +701,7 @@ async function getHourlyChart(universeId: number, range: Extract<StatsTimeRange,
   return ((data ?? []) as HourlyRow[]).map((row) => ({
     label: formatChartLabel(row.hour_start, range, "hourly"),
     sampledAt: row.hour_start,
-    players: row.playing,
+    players: row.avg_playing ?? row.playing,
     peakPlayers: row.peak_playing,
     avgPlayers: row.avg_playing,
     visits: row.visits_end,
@@ -735,6 +735,7 @@ function mapDailyChartRow(row: DailyRow, range: Exclude<StatsTimeRange, "24h">):
     const snapshot = row.snapshot ?? {};
     const avgPlaying = toNumber(row.avg_playing) ?? toNumber(snapshot.avg_playing) ?? nestedNumber(snapshot, "playing", "average");
     const peakPlaying = toNumber(row.peak_playing) ?? toNumber(snapshot.peak_playing) ?? nestedNumber(snapshot, "playing", "peak") ?? row.playing;
+    const playing = avgPlaying ?? row.playing;
     const visitsEnd = toNumber(row.visits_end) ?? toNumber(snapshot.visits_end) ?? nestedNumber(snapshot, "visits", "end") ?? row.visits;
     const favoritesEnd =
       toNumber(row.favorites_end) ?? toNumber(snapshot.favorites_end) ?? nestedNumber(snapshot, "favorites", "end") ?? row.favorites;
@@ -743,7 +744,7 @@ function mapDailyChartRow(row: DailyRow, range: Exclude<StatsTimeRange, "24h">):
     return {
       label: formatChartLabel(row.stat_date, range, "daily"),
       sampledAt: row.stat_date,
-      players: peakPlaying,
+      players: playing,
       peakPlayers: peakPlaying,
       avgPlayers: avgPlaying,
       visits: visitsEnd,
@@ -760,13 +761,14 @@ async function getDailyChart(universeId: number, range: Exclude<StatsTimeRange, 
 
 async function getMonthlyChart(universeId: number, range: Extract<StatsTimeRange, "90d" | "all">): Promise<StatsChartPoint[]> {
   const rows = await getDailyRows(universeId, range);
-  const months = new Map<string, StatsChartPoint & { likesEnd: number | null; dislikesEnd: number | null }>();
+  const months = new Map<string, StatsChartPoint & { likesEnd: number | null; dislikesEnd: number | null; playingWeight: number }>();
   for (const row of rows) {
     const daily = mapDailyChartRow(row, range);
     const date = new Date(`${row.stat_date}T00:00:00.000Z`);
     const key = `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}`;
     const existing = months.get(key);
     const samples = daily.samples ?? 0;
+    const playingWeight = typeof daily.players === "number" ? Math.max(samples, 1) : 0;
     const likesEnd = toNumber(row.likes);
     const dislikesEnd = toNumber(row.dislikes);
     if (!existing) {
@@ -781,13 +783,18 @@ async function getMonthlyChart(universeId: number, range: Extract<StatsTimeRange
         rating: daily.rating,
         samples,
         likesEnd,
-        dislikesEnd
+        dislikesEnd,
+        playingWeight
       });
       continue;
     }
     const nextSamples = (existing.samples ?? 0) + samples;
+    const nextPlayingWeight = existing.playingWeight + playingWeight;
     existing.sampledAt = row.stat_date;
-    existing.players = Math.max(existing.players ?? 0, daily.players ?? 0);
+    existing.players =
+      typeof existing.players === "number" && typeof daily.players === "number"
+        ? (existing.players * existing.playingWeight + daily.players * playingWeight) / Math.max(1, nextPlayingWeight)
+        : existing.players ?? daily.players;
     existing.peakPlayers = Math.max(existing.peakPlayers ?? 0, daily.peakPlayers ?? 0);
     existing.avgPlayers =
       typeof existing.avgPlayers === "number" && typeof daily.avgPlayers === "number"
@@ -796,11 +803,12 @@ async function getMonthlyChart(universeId: number, range: Extract<StatsTimeRange
     existing.visits = daily.visits ?? existing.visits;
     existing.favorites = daily.favorites ?? existing.favorites;
     existing.samples = nextSamples;
+    existing.playingWeight = nextPlayingWeight;
     existing.likesEnd = likesEnd ?? existing.likesEnd;
     existing.dislikesEnd = dislikesEnd ?? existing.dislikesEnd;
     existing.rating = getRatingPercent(existing.likesEnd, existing.dislikesEnd) ?? daily.rating ?? existing.rating;
   }
-  return Array.from(months.values()).map(({ likesEnd: _likesEnd, dislikesEnd: _dislikesEnd, ...point }) => point);
+  return Array.from(months.values()).map(({ likesEnd: _likesEnd, dislikesEnd: _dislikesEnd, playingWeight: _playingWeight, ...point }) => point);
 }
 
 export function normalizeStatsResolution(value?: string | null): StatsChartResolution {

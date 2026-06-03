@@ -11,7 +11,6 @@ import { LineChart } from "recharts/es6/chart/LineChart";
 import { Activity, BarChart3 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, type ChartConfig } from "@/components/ui/chart";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { formatCompactNumber, formatPercent } from "@/lib/stats-format";
 import { cn } from "@/lib/utils";
@@ -47,21 +46,14 @@ type ChartData = {
 };
 
 const metricLabels: Record<MetricKey, string> = {
-  players: "Players",
+  players: "Playing",
   visits: "Visits",
   favorites: "Favorites",
   rating: "Rating"
 };
 
-const resolutionLabels: Record<ResolutionKey, string> = {
-  auto: "Auto",
-  hourly: "Hourly",
-  daily: "Daily",
-  monthly: "Monthly"
-};
-
 const metricConfig: ChartConfig = {
-  players: { label: "Players", color: "rgb(var(--color-accent))" },
+  players: { label: "Playing", color: "rgb(var(--color-accent))" },
   visits: { label: "Visits", color: "#22c55e" },
   favorites: { label: "Favorites", color: "#f59e0b" },
   rating: { label: "Rating", color: "#38bdf8" }
@@ -75,23 +67,6 @@ const chartTabsTriggerClass =
 function formatMetricValue(metric: MetricKey, value?: number | null) {
   if (metric === "rating") return formatPercent(value);
   return formatCompactNumber(value);
-}
-
-function latestValue(points: ChartPoint[], metric: MetricKey) {
-  for (let index = points.length - 1; index >= 0; index -= 1) {
-    const value = points[index]?.[metric];
-    if (typeof value === "number") return value;
-  }
-  return null;
-}
-
-function rangeValue(points: ChartPoint[], metric: MetricKey) {
-  const values = points.map((point) => point[metric]).filter((value): value is number => typeof value === "number");
-  if (!values.length) return { peak: null, average: null };
-  return {
-    peak: Math.max(...values),
-    average: values.reduce((sum, value) => sum + value, 0) / values.length
-  };
 }
 
 function axisTick(value: unknown) {
@@ -150,13 +125,6 @@ function usablePointCount(points: ChartPoint[], metric: MetricKey) {
   return points.filter((point) => typeof point[metric] === "number").length;
 }
 
-function canUseResolution(range: RangeKey, resolution: ResolutionKey) {
-  if (resolution === "auto") return true;
-  if (resolution === "hourly") return range === "24h" || range === "7d" || range === "30d";
-  if (resolution === "daily") return range !== "24h";
-  return range === "90d" || range === "all";
-}
-
 function autoResolution(range: RangeKey): EffectiveResolutionKey {
   if (range === "24h" || range === "7d") return "hourly";
   if (range === "all") return "monthly";
@@ -186,7 +154,6 @@ export function StatsChartPanel({
 }) {
   const [metric, setMetric] = useState<MetricKey>(defaultMetric);
   const [range, setRange] = useState<RangeKey>(defaultRange);
-  const [resolution, setResolution] = useState<ResolutionKey>(initialChart?.requestedResolution ?? "auto");
   const [chartCache, setChartCache] = useState<Record<string, ChartData>>(() =>
     initialChart ? { [chartCacheKey(initialChart.range, initialChart.requestedResolution)]: initialChart } : {}
   );
@@ -194,13 +161,11 @@ export function StatsChartPanel({
   const [loadingKey, setLoadingKey] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const initialChartKey = initialChart ? chartCacheKey(initialChart.range, initialChart.requestedResolution) : null;
-  const activeResolution = canUseResolution(range, resolution) ? resolution : "auto";
+  const activeResolution: ResolutionKey = "auto";
   const activeKey = chartCacheKey(range, activeResolution);
   const loadedChart = chartCache[activeKey] ?? (initialChartKey === activeKey ? initialChart : undefined);
   const displayChart = loadedChart ?? lastRenderedChart;
   const points = useMemo(() => (initialChart ? displayChart?.points ?? [] : chart ?? []), [chart, displayChart, initialChart]);
-  const current = latestValue(points, metric);
-  const summary = rangeValue(points, metric);
   const hasRenderableData = usablePointCount(points, metric) >= 2;
   const Chart = area ? AreaChart : LineChart;
   const resolvedResolution = displayChart?.resolution ?? (activeResolution === "auto" ? autoResolution(range) : activeResolution);
@@ -216,12 +181,6 @@ export function StatsChartPanel({
   );
   const isLoading = loadingKey === activeKey;
   const isShowingPreviousChart = Boolean(isLoading && !loadedChart && hasRenderableData);
-
-  useEffect(() => {
-    if (!canUseResolution(range, resolution)) {
-      setResolution("auto");
-    }
-  }, [range, resolution]);
 
   useEffect(() => {
     if (loadedChart) {
@@ -255,21 +214,17 @@ export function StatsChartPanel({
   }, [activeKey, activeResolution, chartCache, initialChart, range, universeId]);
 
   return (
-    <Card className={cn("overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none", compact ? "min-h-[260px]" : "min-h-[420px]")}>
-      <CardHeader className="flex flex-col gap-4 border-b border-border/60 p-4 lg:flex-row lg:items-start lg:justify-between">
+    <Card className={cn("overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none", compact ? "min-h-[230px]" : "min-h-[360px]")}>
+      <CardHeader className="flex flex-col gap-3 border-b border-border/60 p-4 xl:flex-row xl:items-center xl:justify-between">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
             <BarChart3 className="h-4 w-4 text-accent" aria-hidden />
             <CardTitle className="m-0 text-base font-semibold text-foreground">{title}</CardTitle>
           </div>
           {subtitle ? <p className="mt-1 text-xs font-medium text-muted">{subtitle}</p> : null}
-          <div className="mt-3 flex items-end gap-3">
-            <p className="text-2xl font-semibold leading-none text-foreground">{formatMetricValue(metric, current)}</p>
-            <p className="text-xs font-medium text-muted">{metricLabels[metric]}</p>
-          </div>
         </div>
 
-        <div className="flex flex-col gap-2 lg:items-end">
+        <div className="flex flex-wrap items-center gap-2 xl:justify-end">
           {!compact ? (
             <Tabs value={metric} onValueChange={(value) => setMetric(value as MetricKey)}>
               <TabsList className={chartTabsListClass}>
@@ -281,34 +236,17 @@ export function StatsChartPanel({
               </TabsList>
             </Tabs>
           ) : null}
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between lg:justify-end">
-            {initialChart ? (
-              <Tabs value={range} onValueChange={(value) => setRange(value as RangeKey)}>
-                <TabsList className={chartTabsListClass}>
-                  {(["24h", "7d", "30d", "90d", "all"] as RangeKey[]).map((item) => (
-                    <TabsTrigger key={item} value={item} className={chartTabsTriggerClass}>
-                      {item === "all" ? "All" : item}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-              </Tabs>
-            ) : null}
-            {initialChart ? (
-              <Select value={activeResolution} onValueChange={(value) => setResolution(value as ResolutionKey)}>
-                <SelectTrigger className="h-9 w-full rounded-md border-border/70 bg-background/80 text-xs font-semibold text-muted shadow-none sm:w-[160px]">
-                  <span className="mr-1 text-muted">Granularity</span>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {(["auto", "hourly", "daily", "monthly"] as ResolutionKey[]).map((item) => (
-                    <SelectItem key={item} value={item} disabled={!canUseResolution(range, item)}>
-                      {resolutionLabels[item]}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            ) : null}
-          </div>
+          {initialChart ? (
+            <Tabs value={range} onValueChange={(value) => setRange(value as RangeKey)}>
+              <TabsList className={chartTabsListClass}>
+                {(["24h", "7d", "30d", "90d", "all"] as RangeKey[]).map((item) => (
+                  <TabsTrigger key={item} value={item} className={chartTabsTriggerClass}>
+                    {item === "all" ? "All" : item}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+          ) : null}
         </div>
       </CardHeader>
 
@@ -318,7 +256,7 @@ export function StatsChartPanel({
             <div className="max-w-sm px-6">
               <Activity className="mx-auto h-5 w-5 text-muted" aria-hidden />
               <p className="mt-3 text-sm font-semibold text-foreground">{isLoading ? "Loading chart" : "Not enough history yet"}</p>
-              <p className="mt-1 text-xs text-muted">{loadError ?? "The latest public stats are available, but this chart needs a few history samples."}</p>
+              <p className="mt-1 text-xs text-muted">{loadError ?? "This chart needs a few history samples before it can render cleanly."}</p>
             </div>
           </div>
         ) : (
@@ -360,21 +298,6 @@ export function StatsChartPanel({
             ) : null}
           </div>
         )}
-
-        <div className="mt-4 grid grid-cols-3 gap-3 border-t border-border/60 pt-3 text-xs">
-          <div>
-            <p className="font-semibold text-foreground">{formatMetricValue(metric, summary.peak)}</p>
-            <p className="text-muted">Peak</p>
-          </div>
-          <div>
-            <p className="font-semibold text-foreground">{formatMetricValue(metric, summary.average)}</p>
-            <p className="text-muted">Average</p>
-          </div>
-          <div>
-            <p className="font-semibold text-foreground">{points.length}</p>
-            <p className="text-muted">{resolvedResolution === "hourly" ? "Hours" : resolvedResolution === "daily" ? "Days" : "Months"}</p>
-          </div>
-        </div>
       </CardContent>
     </Card>
   );

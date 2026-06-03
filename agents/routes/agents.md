@@ -35,7 +35,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/search/games` | `GET` | `src/app/api/search/games/route.ts` | Lightweight games search for UI autocomplete. |
 | `/api/stats/games` | `GET` | `src/app/api/stats/games/route.ts` | Public stats game table payload with search, sort, genre, and minimum-player filters. |
 | `/api/stats/games/[universeId]` | `GET` | `src/app/api/stats/games/[universeId]/route.ts` | Public stats summary for one Roblox universe. |
-| `/api/stats/games/[universeId]/chart` | `GET` | `src/app/api/stats/games/[universeId]/chart/route.ts` | Public chart payload for hourly and daily stats ranges. |
+| `/api/stats/games/[universeId]/chart` | `GET` | `src/app/api/stats/games/[universeId]/chart/route.ts` | Public chart payload for lazy-loaded hourly, daily, and monthly stats views. |
 
 ## Auth Routes
 
