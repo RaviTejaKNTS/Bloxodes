@@ -6,8 +6,13 @@ import {
   ArrowDownRight,
   ArrowUpRight,
   CalendarDays,
+  Clock3,
   ExternalLink,
   Gamepad2,
+  Heart,
+  IdCard,
+  Layers,
+  Play,
   Search,
   Star,
   Trophy,
@@ -42,7 +47,7 @@ export function StatsPageShell({ children }: { children: ReactNode }) {
   );
 }
 
-function gameImage(game: Pick<StatsGame, "iconUrl" | "name">, size = 44) {
+function gameImage(game: Pick<StatsGame, "iconUrl" | "name">, size = 44, loading: "eager" | "lazy" = "lazy") {
   if (!game.iconUrl) {
     return (
       <span className="flex shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-sm font-semibold text-muted" style={{ width: size, height: size }}>
@@ -56,6 +61,7 @@ function gameImage(game: Pick<StatsGame, "iconUrl" | "name">, size = 44) {
       alt={`${game.name} icon`}
       width={size}
       height={size}
+      loading={loading}
       className="shrink-0 rounded-md border border-border/70 object-cover"
       style={{ width: size, height: size }}
     />
@@ -103,6 +109,45 @@ function MetricCard({
         {detail ? <p className="mt-2 text-xs font-medium text-muted">{detail}</p> : null}
       </CardContent>
     </Card>
+  );
+}
+
+function formatStatsDate(value?: string | null) {
+  if (!value) return "Not tracked";
+  return new Date(value).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function formatRelativeStatsDate(value?: string | null) {
+  if (!value) return "Not tracked";
+  const date = new Date(value);
+  const diffMs = Date.now() - date.getTime();
+  if (!Number.isFinite(diffMs)) return "Not tracked";
+  const minutes = Math.max(0, Math.round(diffMs / 60000));
+  if (minutes < 60) return `${Math.max(1, minutes)}m ago`;
+  const hours = Math.round(minutes / 60);
+  if (hours < 48) return `${hours}h ago`;
+  const days = Math.round(hours / 24);
+  if (days < 60) return `${days}d ago`;
+  return formatStatsDate(value);
+}
+
+function HeaderStat({
+  label,
+  value,
+  icon: Icon
+}: {
+  label: string;
+  value: ReactNode;
+  icon: typeof Users;
+}) {
+  return (
+    <div className="flex min-w-[96px] shrink-0 flex-col items-center justify-center gap-0.5 border-r border-white/10 px-4 py-1 last:border-r-0">
+      <p className="whitespace-nowrap text-center text-[10px] font-semibold uppercase tracking-[0.12em] text-white/45">{label}</p>
+      <div className="flex max-w-[150px] items-center justify-center gap-1 text-center text-[13px] font-semibold text-white">
+        <Icon className="h-3 w-3 shrink-0 text-white/60" aria-hidden />
+        <span className="truncate">{value}</span>
+      </div>
+    </div>
   );
 }
 
@@ -303,7 +348,7 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
                   <TableCell className="text-right">{formatCompactNumber(game.visits)}</TableCell>
                   <TableCell className="text-right">{formatPercent(game.ratingPercent)}</TableCell>
                   <TableCell className="text-right"><Badge variant="outline" className="rounded-md">{game.trendScore}</Badge></TableCell>
-                  <TableCell className="text-right text-xs text-muted"><LocalRefreshTime value={game.lastStatsRefreshedAt} /></TableCell>
+                  <TableCell className="text-right text-xs text-muted">{formatRelativeStatsDate(game.updatedAtApi)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -378,47 +423,64 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
   ];
   return (
     <div className="stats-surface space-y-5">
-      <header className="relative overflow-hidden rounded-lg border border-border/70 bg-surface/80 p-4 shadow-none">
+      <header className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-b border-border/60 bg-surface shadow-none xl:w-[calc(100vw-15.5rem)]">
         {game.thumbnailUrls[0] || game.iconUrl ? (
-          <div className="absolute inset-0 opacity-20 blur-sm">
-            <Image src={game.thumbnailUrls[0] ?? game.iconUrl ?? ""} alt="" fill sizes="100vw" className="object-cover" />
+          <div className="absolute inset-0">
+            <Image src={game.thumbnailUrls[0] ?? game.iconUrl ?? ""} alt="" fill sizes="100vw" className="object-cover opacity-50 blur-[1px] saturate-75" priority />
           </div>
         ) : null}
-        <div className="relative flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-          <div className="flex min-w-0 gap-4">
-            {gameImage(game, 76)}
-            <div className="min-w-0">
-              <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
-              <h1 className="mb-0 mt-2 text-3xl font-semibold leading-tight text-foreground md:text-5xl">{game.name}</h1>
-              <p className="mt-2 text-sm font-medium text-muted">
-                {game.creatorName ? `by ${game.creatorName}` : "Creator not tracked"} · Updated <LocalRefreshTime value={game.lastStatsRefreshedAt} />
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {game.genre ? <Badge variant="outline" className="rounded-md">{game.genre}</Badge> : null}
-                {game.ageRating ? <Badge variant="outline" className="rounded-md">{game.ageRating}</Badge> : null}
-                <Badge variant="outline" className="rounded-md">{formatPercent(game.ratingPercent)} rating</Badge>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(6_8_12)_0%,rgba(6,8,12,0.94)_28%,rgba(6,8,12,0.74)_62%,rgb(6_8_12)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background/80 to-transparent" />
+
+        <div className="relative mx-auto max-w-[1800px] px-4 pb-4 pt-0 md:px-6">
+          <PageBreadcrumb items={breadcrumbItems} className="mb-4 text-[11px] uppercase tracking-[0.16em] text-white/50" />
+          <div className="flex min-w-0 items-center justify-between gap-3">
+            <div className="flex min-w-0 items-center gap-3">
+              {gameImage(game, 52, "eager")}
+              <div className="min-w-0">
+                <h1 className="mb-0 truncate text-2xl font-semibold leading-tight text-white md:text-4xl">{game.name}</h1>
+                <p className="mt-0.5 truncate text-xs font-semibold text-white/55 md:text-sm">{game.creatorName ? game.creatorName : "Creator not tracked"}</p>
               </div>
             </div>
+            <div className="flex shrink-0 gap-2">
+              <Button asChild variant="outline" size="sm" className="h-8 rounded-md border-white/15 bg-white/8 px-3 text-white shadow-none hover:bg-white/15">
+                <Link href={robloxGameUrl(game)} target="_blank" rel="noopener noreferrer">
+                  Visit
+                  <ExternalLink className="ml-1.5 h-3.5 w-3.5" aria-hidden />
+                </Link>
+              </Button>
+              <Button asChild size="sm" className="h-8 rounded-md px-3">
+                <Link href={robloxGameUrl(game)} target="_blank" rel="noopener noreferrer">
+                  Play
+                  <Play className="ml-1.5 h-3.5 w-3.5" aria-hidden />
+                </Link>
+              </Button>
+            </div>
           </div>
-          <div className="ml-[92px] flex gap-2 lg:ml-0">
-            <Button asChild className="rounded-md">
-              <Link href={robloxGameUrl(game)} target="_blank" rel="noopener noreferrer">
-                Play
-                <ExternalLink className="ml-1.5 h-4 w-4" aria-hidden />
-              </Link>
-            </Button>
+
+          <div className="-mx-4 mt-3 overflow-x-auto px-4 md:-mx-6 md:px-6">
+            <div className="flex min-w-max items-center justify-center xl:min-w-0">
+              <HeaderStat label="Global" value={game.rank ? `#${formatFullNumber(game.rank)}` : "Not tracked"} icon={Trophy} />
+              <HeaderStat label="24h peak" value={formatCompactNumber(game.peak24h)} icon={ArrowUpRight} />
+              <HeaderStat label="Visits" value={formatCompactNumber(game.visits)} icon={Play} />
+              <HeaderStat label="Favorites" value={formatCompactNumber(game.favorites)} icon={Heart} />
+              <HeaderStat label="Rating" value={formatPercent(game.ratingPercent)} icon={Star} />
+              <HeaderStat label="Updated" value={formatRelativeStatsDate(game.updatedAtApi)} icon={Clock3} />
+              <HeaderStat label="Created" value={formatStatsDate(game.createdAtApi)} icon={CalendarDays} />
+              <HeaderStat label="Genre" value={game.genre ?? "Not tracked"} icon={Layers} />
+              <HeaderStat label="Subgenre" value={game.subgenre ?? "Not tracked"} icon={Layers} />
+              <HeaderStat label="Maturity" value={game.ageRating ?? "Not tracked"} icon={IdCard} />
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <MetricCard label="Current CCU" value={formatCompactNumber(game.playing)} detail={`${formatCompactNumber(game.peak24h)} 24h peak`} icon={Users} />
-        <MetricCard label="24h movement" value={formatDelta(game.growth24h)} detail={formatDeltaPercent(game.growth24hPercent)} icon={ArrowUpRight} />
-        <MetricCard label="Visits" value={formatCompactNumber(game.visits)} detail={formatFullNumber(game.visits)} icon={Trophy} />
-        <MetricCard label="Rating" value={formatPercent(game.ratingPercent)} detail={`${formatCompactNumber(game.likes)} likes`} icon={Star} />
-      </div>
-
-      <StatsChartPanel title={`${game.name} chart`} subtitle="Public Roblox data tracked by Bloxodes" charts={data.charts} defaultMetric="players" />
+      <StatsChartPanel
+        title={`${game.name} chart`}
+        universeId={game.universeId}
+        initialChart={data.initialChart}
+        defaultMetric="players"
+      />
 
       <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
         <CardHeader className="border-b border-border/60 p-4">
