@@ -241,7 +241,7 @@ async function fetchNextPlaceIds(limit: number) {
      where universe_id is null
        and status in ('pending', 'failed')
        and resolve_attempts < $2
-     order by place_id
+     order by last_seen_at desc, place_id
      limit $1`,
     [limit, DEFAULT_RETRY_LIMIT + 1]
   );
