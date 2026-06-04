@@ -536,13 +536,18 @@ Use raw snapshots for:
 
 For MVP, hourly rows are enough.
 
-### `roblox_universe_rank_snapshots`
+### Rank Snapshot Tables
 
 Optional, but useful after the main stats pages work.
 
 Stores rank changes over time.
 
-Suggested fields:
+Use the same mental model as stats history:
+
+- `roblox_universe_rank_snapshots_hourly`: short-range hourly rank chart data.
+- `roblox_universe_rank_snapshots_daily`: long-range daily rank history.
+
+Suggested shared fields:
 
 ```txt
 universe_id bigint not null
@@ -550,6 +555,8 @@ rank_type text not null
 rank_value integer not null
 metric_value numeric
 sampled_at timestamptz not null
+hour_start timestamptz -- hourly table only
+stat_date date -- daily table only
 ```
 
 Example `rank_type` values:
@@ -824,7 +831,8 @@ Build rank snapshots and trend lists.
 Run:
 
 ```txt
-every 60 minutes
+hourly playing ranks after HOT stats refresh
+daily full rank snapshots after UTC day ends
 ```
 
 ### Suggested Root Commands
@@ -1451,7 +1459,7 @@ Build:
 
 - stronger daily rollups on the existing daily table
 - trend score
-- rank snapshots
+- hourly and daily rank snapshots
 - better genre pages
 - top movers
 - rank history

@@ -89,6 +89,7 @@
     "stats:audit": "tsx scripts/universes/audit-universe-stats-workflow.ts",
     "stats:rollup-daily": "tsx scripts/universes/rollup-universe-daily-stats.ts",
     "stats:rank": "tsx scripts/universes/rank-universe-stats.ts",
+    "stats:prune-hourly": "tsx scripts/universes/prune-universe-hourly-history.ts",
     "generate:universe-description": "tsx scripts/universes/generate-universe-description.ts",
     "backfill:interlinking": "tsx scripts/backfill/backfill-interlinking.ts",
     "seed:trending-lists": "tsx scripts/lists/seed-trending-lists.ts",

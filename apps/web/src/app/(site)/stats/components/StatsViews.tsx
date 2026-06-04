@@ -28,6 +28,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { LocalRefreshTime } from "@/app/(site)/stats/components/LocalRefreshTime";
 import { StatsChartPanel } from "@/app/(site)/stats/components/StatsChartPanel";
+import { StatsRankChartPanel } from "@/app/(site)/stats/components/StatsRankChartPanel";
 import {
   STATS_SORT_OPTIONS,
   type StatsGame,
@@ -416,6 +417,7 @@ function RelatedLinks({ links }: { links: StatsRelatedLink[] }) {
 export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
   const { game } = data;
   const wikiLink = data.relatedLinks.find((link) => link.type === "wiki");
+  const globalRank = data.initialRankChart.summaries.find((summary) => summary.key === "global")?.currentRank ?? game.rank;
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Stats", href: "/stats" },
@@ -464,7 +466,7 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
 
           <div className="-mx-4 mt-3 overflow-x-auto px-4 md:-mx-6 md:px-6">
             <div className="flex min-w-max items-center justify-center xl:min-w-0">
-              <HeaderStat label="Global" value={game.rank ? `#${formatFullNumber(game.rank)}` : "Not tracked"} icon={Trophy} />
+              <HeaderStat label="Global rank" value={globalRank ? `#${formatFullNumber(globalRank)}` : "Not tracked"} icon={Trophy} />
               <HeaderStat label="24h peak" value={formatCompactNumber(game.peak24h)} icon={ArrowUpRight} />
               <HeaderStat label="Visits" value={formatCompactNumber(game.visits)} icon={Play} />
               <HeaderStat label="Favorites" value={formatCompactNumber(game.favorites)} icon={Heart} />
@@ -484,6 +486,12 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
         universeId={game.universeId}
         initialChart={data.initialChart}
         defaultMetric="players"
+      />
+
+      <StatsRankChartPanel
+        title={`${game.name} rank history`}
+        universeId={game.universeId}
+        initialChart={data.initialRankChart}
       />
 
       <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">

@@ -44,8 +44,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Public stats history for `/stats`; one row per universe per hour with latest, average, peak, min, deltas, sample counts, and raw snapshot JSON.
 - `roblox_universe_stats_daily`
   - Long-range public stats summaries; daily `playing` is the highest recorded CCU for that day after hourly rollup.
-- `roblox_universe_rank_snapshots`
-  - Hourly public rank snapshots for global playing, visits, favorites, and rating leaderboards.
+- `roblox_universe_rank_snapshots_hourly`
+  - Short-range public rank snapshots for chart views. Hourly automation computes all-game playing ranks, then stores rank-relevant global, genre, and subgenre rows.
+- `roblox_universe_rank_snapshots_daily`
+  - Long-range public rank snapshots. Daily automation stores full all-game rank rows for playing, visits, favorites, and rating.
 - `roblox_groups`
   - Group details used by the ID extractor.
 - `roblox_universe_gamepasses`, `roblox_universe_badges`

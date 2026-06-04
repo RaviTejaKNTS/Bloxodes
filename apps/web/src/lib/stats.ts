@@ -84,6 +84,35 @@ export type StatsChartPoint = {
   samples: number | null;
 };
 
+export type StatsRankPoint = {
+  label: string;
+  tooltipLabel?: string;
+  sampledAt: string;
+  globalRank: number | null;
+  genreRank: number | null;
+  subgenreRank: number | null;
+  globalPlayers: number | null;
+  genrePlayers: number | null;
+  subgenrePlayers: number | null;
+  samples: number | null;
+};
+
+export type StatsRankSummary = {
+  key: "global" | "genre" | "subgenre";
+  label: string;
+  scopeLabel: string | null;
+  currentRank: number | null;
+  currentAt: string | null;
+  bestRank: number | null;
+  bestAt: string | null;
+  firstTop1At: string | null;
+  lastTop1At: string | null;
+  lastExitedTop1At: string | null;
+  firstTop10At: string | null;
+  lastExitedTop10At: string | null;
+  sampleCount: number;
+};
+
 export type StatsGenreSummary = {
   genre: string;
   slug: string;
@@ -127,6 +156,7 @@ export type StatsGamesPageData = {
 export type StatsGameDetailData = {
   game: StatsGame;
   initialChart: StatsGameChartData;
+  initialRankChart: StatsGameRankChartData;
   relatedLinks: StatsRelatedLink[];
   sameCreator: StatsGame[];
   similarGames: StatsGame[];
@@ -138,6 +168,14 @@ export type StatsGameChartData = {
   requestedResolution: StatsChartResolution;
   resolution: StatsChartResolution;
   points: StatsChartPoint[];
+};
+
+export type StatsGameRankChartData = {
+  range: StatsTimeRange;
+  requestedResolution: StatsChartResolution;
+  resolution: StatsChartResolution;
+  points: StatsRankPoint[];
+  summaries: StatsRankSummary[];
 };
 
 type UniverseRow = {
@@ -185,6 +223,21 @@ type HourlyRow = {
   dislikes_end: number | null;
   rating_percent: number | null;
   sample_count: number | null;
+};
+
+type RankSnapshotRow = {
+  rank_type: string;
+  rank_value: number;
+  metric_value: number | null;
+  sampled_at: string;
+};
+
+type HourlyRankSnapshotRow = {
+  rank_type: string;
+  rank_value: number;
+  metric_value: number | null;
+  hour_start: string;
+  sampled_at: string | null;
 };
 
 const SORT_COLUMNS: Partial<Record<StatsSortKey, keyof UniverseRow>> = {
@@ -812,6 +865,182 @@ export async function getStatsGameChart(
   };
 }
 
+const RANK_TYPES_BY_KEY = {
+  global: "global_playing",
+  genre: "genre_playing",
+  subgenre: "subgenre_playing"
+} as const;
+
+type StatsRankKey = keyof typeof RANK_TYPES_BY_KEY;
+
+function latestRankValue(rows: RankSnapshotRow[], rankType: string) {
+  for (let index = rows.length - 1; index >= 0; index -= 1) {
+    const row = rows[index];
+    if (row?.rank_type === rankType && typeof row.rank_value === "number") return row.rank_value;
+  }
+  return null;
+}
+
+function latestRankMetric(rows: RankSnapshotRow[], rankType: string) {
+  for (let index = rows.length - 1; index >= 0; index -= 1) {
+    const row = rows[index];
+    if (row?.rank_type === rankType && typeof row.metric_value === "number") return row.metric_value;
+  }
+  return null;
+}
+
+function bucketRankRows(rows: RankSnapshotRow[], range: StatsTimeRange, resolution: StatsChartResolution): StatsRankPoint[] {
+  if (!rows.length) return [];
+  const rangeStart = new Date(chartRangeStart(range));
+  const rangeEnd = new Date();
+  const bucketMs = RESOLUTION_HOURS[resolution] * 60 * 60 * 1000;
+  const buckets = new Map<number, RankSnapshotRow[]>();
+
+  for (const row of rows) {
+    const sampledMs = Date.parse(row.sampled_at);
+    if (!Number.isFinite(sampledMs)) continue;
+    const bucketIndex = Math.max(0, Math.floor((sampledMs - rangeStart.getTime()) / bucketMs));
+    const bucket = buckets.get(bucketIndex) ?? [];
+    bucket.push(row);
+    buckets.set(bucketIndex, bucket);
+  }
+
+  return Array.from(buckets.entries())
+    .sort(([a], [b]) => a - b)
+    .map(([bucketIndex, bucket]) => {
+      bucket.sort((a, b) => Date.parse(a.sampled_at) - Date.parse(b.sampled_at));
+      const bucketStart = new Date(rangeStart.getTime() + bucketIndex * bucketMs);
+      const bucketEnd = new Date(Math.min(rangeStart.getTime() + (bucketIndex + 1) * bucketMs, rangeEnd.getTime()));
+      const sampledAt = bucket[bucket.length - 1]?.sampled_at ?? bucketEnd.toISOString();
+      return {
+        label: formatBucketLabel(bucketStart, bucketEnd, resolution),
+        tooltipLabel: formatBucketTooltip(bucketStart, bucketEnd, resolution),
+        sampledAt,
+        globalRank: latestRankValue(bucket, RANK_TYPES_BY_KEY.global),
+        genreRank: latestRankValue(bucket, RANK_TYPES_BY_KEY.genre),
+        subgenreRank: latestRankValue(bucket, RANK_TYPES_BY_KEY.subgenre),
+        globalPlayers: latestRankMetric(bucket, RANK_TYPES_BY_KEY.global),
+        genrePlayers: latestRankMetric(bucket, RANK_TYPES_BY_KEY.genre),
+        subgenrePlayers: latestRankMetric(bucket, RANK_TYPES_BY_KEY.subgenre),
+        samples: bucket.length
+      };
+    });
+}
+
+function summarizeRankRows(rows: RankSnapshotRow[], game: Pick<StatsGame, "genre" | "subgenre">): StatsRankSummary[] {
+  const labels: Record<StatsRankKey, { label: string; scopeLabel: string | null }> = {
+    global: { label: "Global", scopeLabel: null },
+    genre: { label: "Genre", scopeLabel: game.genre },
+    subgenre: { label: "Subgenre", scopeLabel: game.subgenre }
+  };
+
+  return (["global", "genre", "subgenre"] as StatsRankKey[]).map((key) => {
+    const rankType = RANK_TYPES_BY_KEY[key];
+    const scopedRows = rows
+      .filter((row) => row.rank_type === rankType && typeof row.rank_value === "number")
+      .sort((a, b) => Date.parse(a.sampled_at) - Date.parse(b.sampled_at));
+    const current = scopedRows[scopedRows.length - 1];
+    const best = scopedRows.reduce<RankSnapshotRow | null>(
+      (candidate, row) => (!candidate || row.rank_value < candidate.rank_value ? row : candidate),
+      null
+    );
+    const firstTop1 = scopedRows.find((row) => row.rank_value === 1) ?? null;
+    const lastTop1 = [...scopedRows].reverse().find((row) => row.rank_value === 1) ?? null;
+    const firstTop10 = scopedRows.find((row) => row.rank_value <= 10) ?? null;
+    let lastExitedTop1: RankSnapshotRow | null = null;
+    let lastExitedTop10: RankSnapshotRow | null = null;
+    for (let index = 1; index < scopedRows.length; index += 1) {
+      if (scopedRows[index - 1]?.rank_value === 1 && scopedRows[index]?.rank_value > 1) {
+        lastExitedTop1 = scopedRows[index] ?? null;
+      }
+      if (scopedRows[index - 1]?.rank_value <= 10 && scopedRows[index]?.rank_value > 10) {
+        lastExitedTop10 = scopedRows[index] ?? null;
+      }
+    }
+
+    return {
+      key,
+      label: labels[key].label,
+      scopeLabel: labels[key].scopeLabel,
+      currentRank: current?.rank_value ?? null,
+      currentAt: current?.sampled_at ?? null,
+      bestRank: best?.rank_value ?? null,
+      bestAt: best?.sampled_at ?? null,
+      firstTop1At: firstTop1?.sampled_at ?? null,
+      lastTop1At: lastTop1?.sampled_at ?? null,
+      lastExitedTop1At: lastExitedTop1?.sampled_at ?? null,
+      firstTop10At: firstTop10?.sampled_at ?? null,
+      lastExitedTop10At: lastExitedTop10?.sampled_at ?? null,
+      sampleCount: scopedRows.length
+    };
+  });
+}
+
+async function getRankRows(universeId: number, range: StatsTimeRange): Promise<RankSnapshotRow[]> {
+  const sb = supabaseAdmin();
+  const rows: RankSnapshotRow[] = [];
+  const pageSize = 1000;
+  let offset = 0;
+  while (true) {
+    const { data, error } = await sb
+      .from("roblox_universe_rank_snapshots_hourly")
+      .select("rank_type, rank_value, metric_value, hour_start, sampled_at")
+      .eq("universe_id", universeId)
+      .in("rank_type", Object.values(RANK_TYPES_BY_KEY))
+      .gte("hour_start", chartRangeStart(range))
+      .order("hour_start", { ascending: true })
+      .range(offset, offset + pageSize - 1);
+    if (error) {
+      console.warn("Failed to load rank chart stats", error.message);
+      return [];
+    }
+    const chunk = (data ?? []) as HourlyRankSnapshotRow[];
+    rows.push(
+      ...chunk.map((row) => ({
+        rank_type: row.rank_type,
+        rank_value: row.rank_value,
+        metric_value: row.metric_value,
+        sampled_at: row.hour_start
+      }))
+    );
+    if (chunk.length < pageSize) break;
+    offset += pageSize;
+  }
+  return rows;
+}
+
+export async function getStatsGameRankChart(
+  game: Pick<StatsGame, "universeId" | "genre" | "subgenre">,
+  range: StatsTimeRange = "1d",
+  resolution: StatsChartResolution = "hourly"
+): Promise<StatsGameRankChartData> {
+  const rows = await getRankRows(game.universeId, range);
+  return {
+    range,
+    requestedResolution: resolution,
+    resolution,
+    points: bucketRankRows(rows, range, resolution),
+    summaries: summarizeRankRows(rows, game)
+  };
+}
+
+export async function getStatsGameRankChartByUniverseId(
+  universeId: number,
+  range: StatsTimeRange = "1d",
+  resolution: StatsChartResolution = "hourly"
+): Promise<StatsGameRankChartData> {
+  const game = await getStatsGameSummaryByUniverseId(universeId);
+  return getStatsGameRankChart(
+    {
+      universeId,
+      genre: game?.genre ?? null,
+      subgenre: game?.subgenre ?? null
+    },
+    range,
+    resolution
+  );
+}
+
 export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailData | null> {
   const sb = supabaseAdmin();
   const parsedUniverseId = parseStatsUniverseIdSlug(slug);
@@ -854,8 +1083,9 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
 
 async function buildStatsGameDetail(row: UniverseRow): Promise<StatsGameDetailData> {
   const baseGame = (await attachGrowth([mapUniverse(row)]))[0];
-  const [initialChart, relatedLinks, sameCreator, similarGames, includedInLists, globalRank] = await Promise.all([
+  const [initialChart, initialRankChart, relatedLinks, sameCreator, similarGames, includedInLists, globalRank] = await Promise.all([
     getStatsGameChart(baseGame.universeId, "1d", "hourly"),
+    getStatsGameRankChart(baseGame, "1d", "hourly"),
     loadRelatedLinks(baseGame.universeId, baseGame),
     loadSameCreatorGames(baseGame),
     loadSimilarGames(baseGame),
@@ -866,6 +1096,7 @@ async function buildStatsGameDetail(row: UniverseRow): Promise<StatsGameDetailDa
   return {
     game: { ...baseGame, rank: globalRank, links: relatedLinks },
     initialChart,
+    initialRankChart,
     relatedLinks,
     sameCreator,
     similarGames,
@@ -951,11 +1182,11 @@ async function loadListLinks(universeId: number): Promise<StatsRelatedLink[]> {
 async function loadLatestRank(universeId: number): Promise<number | null> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("roblox_universe_rank_snapshots")
+    .from("roblox_universe_rank_snapshots_hourly")
     .select("rank_value")
     .eq("universe_id", universeId)
     .eq("rank_type", "global_playing")
-    .order("sampled_at", { ascending: false })
+    .order("hour_start", { ascending: false })
     .limit(1)
     .maybeSingle();
   if (error) {

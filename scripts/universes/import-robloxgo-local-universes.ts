@@ -152,6 +152,8 @@ const DELETE_UNIVERSE_REFERENCES = [
   "roblox_universe_media",
   "roblox_universe_place_servers",
   "roblox_universe_rank_snapshots",
+  "roblox_universe_rank_snapshots_daily",
+  "roblox_universe_rank_snapshots_hourly",
   "roblox_universe_social_links",
   "roblox_universe_stats_daily",
   "roblox_universe_stats_hourly",

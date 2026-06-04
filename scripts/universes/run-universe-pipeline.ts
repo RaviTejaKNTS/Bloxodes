@@ -166,9 +166,19 @@ function buildSteps(options: Options): Step[] {
       options.coldStatsLimit > 0
     ),
     npmStep(
-      "Stats rank snapshots",
+      "Hourly stats rank snapshots",
       "stats:rank",
-      ["--all", "--limit", String(Math.max(options.hotStatsLimit, 250))],
+      [
+        "--all",
+        "--granularity",
+        "hourly",
+        "--rank-set",
+        "playing",
+        "--snapshot-scope",
+        "relevant",
+        "--limit",
+        String(Math.max(options.hotStatsLimit, 250))
+      ],
       options.hotStatsLimit > 0
     ),
     npmStep(

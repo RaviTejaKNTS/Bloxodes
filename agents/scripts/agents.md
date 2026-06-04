@@ -60,7 +60,8 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Assign stats tiers | `scripts/universes/assign-universe-stats-tier.ts` | `npm run stats:tier` |
 | Audit stats workflow | `scripts/universes/audit-universe-stats-workflow.ts` | `npm run stats:audit` |
 | Roll hourly stats into daily rows | `scripts/universes/rollup-universe-daily-stats.ts` | `npm run stats:rollup-daily -- --date today`; use `-- --date yesterday --finalize` after the UTC day ends |
-| Snapshot public stats rankings | `scripts/universes/rank-universe-stats.ts` | `npm run stats:rank` |
+| Snapshot public stats rankings | `scripts/universes/rank-universe-stats.ts` | Hourly: `npm run stats:rank -- --all --granularity hourly --rank-set playing --snapshot-scope relevant`; daily full: `npm run stats:rank -- --all --granularity daily --rank-set all --snapshot-scope all` |
+| Prune short-range hourly history | `scripts/universes/prune-universe-hourly-history.ts` | `npm run stats:prune-hourly -- --days 90 --apply`; deletes old hourly stats and hourly rank snapshots only |
 
 `enrich-roblox-universes.ts` should not be the normal source for `roblox_universe_stats_daily` now that public stats use hourly rollups. It writes same-day daily stat rows only when `ROBLOX_ENRICH_WRITE_DAILY_STATS=true` is set for a legacy one-off.
 

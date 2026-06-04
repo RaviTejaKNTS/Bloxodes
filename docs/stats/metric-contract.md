@@ -175,6 +175,38 @@ Use fields:
 
 Do not call this Playing. It is traffic growth from Roblox's cumulative visit counter.
 
+## Rank History
+
+Rank History is separate from Playing, Visits, Favorites, and Rating.
+
+Use rank snapshots written by `npm run stats:rank` for rank charts and rank milestones.
+
+The rank workflow mirrors metric history with two tables:
+
+- `roblox_universe_rank_snapshots_hourly`: short-range chart data. Compute playing ranks across all eligible games, but store only rank-relevant snapshots (`HOT`, `WARM`, top global ranks, top genre ranks, top subgenre ranks).
+- `roblox_universe_rank_snapshots_daily`: long-range rank history. Store full all-game daily snapshots.
+
+Current rank types:
+
+| Rank type | Meaning |
+| --- | --- |
+| `global_playing` | Rank among tracked games by current playing |
+| `genre_playing` | Rank among tracked games in the same genre by current playing |
+| `subgenre_playing` | Rank among tracked games in the same subgenre by current playing |
+
+Rank charts use the same period and resolution selectors as metric charts. The y-axis must be reversed so `#1` appears at the top.
+
+Rank milestone table values should come from the selected rank snapshot window:
+
+| UI value | Logic |
+| --- | --- |
+| Current | latest rank sample in the selected period |
+| Best | lowest rank number in the selected period |
+| First #1 | first sample where rank equals `1` |
+| Left #1 | latest transition from rank `1` to rank `> 1` |
+| First Top 10 | first sample where rank is `<= 10` |
+| Left Top 10 | latest transition from rank `<= 10` to rank `> 10` |
+
 ## Confidence Rules
 
 Every period value should know how complete it is.
@@ -208,3 +240,6 @@ Needed improvements:
 - Use `visit_delta` only for Period Growth.
 - Use cumulative endpoints for Visits and Favorites.
 - Use rating endpoint values, not average rating.
+- Keep hourly `stats:rank -- --all --granularity hourly --rank-set playing --snapshot-scope relevant` running after HOT refresh so global, genre, and subgenre rank history stays fresh without storing every game every hour.
+- Keep daily `stats:rank -- --all --granularity daily --rank-set all --snapshot-scope all` running so every tracked game gets complete long-term rank history.
+- Prune only hourly history older than 90 days. Keep daily stats and daily ranks for longer history.

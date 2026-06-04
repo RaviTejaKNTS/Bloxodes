@@ -56,8 +56,10 @@ npm run stats:refresh:warm
 npm run stats:refresh:cold
 npm run stats:refresh -- --universe-id <id>
 npm run stats:tier
-npm run stats:rank -- --all
+npm run stats:rank -- --all --granularity hourly --rank-set playing --snapshot-scope relevant
+npm run stats:rank -- --all --granularity daily --rank-set all --snapshot-scope all
 npm run stats:rollup-daily -- --date yesterday --finalize
+npm run stats:prune-hourly -- --days 90 --apply
 npm run stats:audit
 npm run enrich:universes:deep -- --tier HOT
 ```
@@ -68,7 +70,9 @@ npm run enrich:universes:deep -- --tier HOT
 | --- | --- | --- |
 | `universe-explore-discovery.yml` | Daily `01:35` UTC, `07:05` IST | Lean Explore discovery, max 30 sorts x 2 pages, light enrich NEW, refresh NEW stats, assign tiers |
 | `universe-new-refresh.yml` | Every 2 hours at `:07` UTC, `:37` IST | Light enrich NEW backlog, refresh 5,000 NEW stats, assign NEW tiers |
-| `roblox-stats-hourly.yml` | Hourly at `:12` UTC, `:42` IST | Refresh HOT stats, roll up today, rank, revalidate `/stats` |
+| `roblox-stats-hourly.yml` | Hourly at `:12` UTC, `:42` IST | Refresh HOT stats, roll up today, compute all-game playing ranks, store rank-relevant hourly snapshots, revalidate `/stats` |
+| `roblox-stats-daily-ranks.yml` | Daily `00:50` UTC, `06:20` IST | Store full all-game daily rank snapshots for playing, visits, favorites, and rating |
+| `roblox-stats-hourly-retention.yml` | Daily `01:25` UTC, `06:55` IST | Delete hourly stats and hourly rank rows older than 90 days |
 | `universe-warm-refresh.yml` | Every 12 hours at `:32` UTC, `:02` IST | Refresh WARM only, then reassign WARM tiers |
 | `universe-cold-refresh.yml` | Every 6 hours at `:47` UTC, `:17` IST | Refresh rotating COLD batches only, then reassign COLD tiers |
 | `roblox-stats-daily-finalize.yml` | Daily `00:20` UTC, `05:50` IST | Finalize yesterday, audit, repair HOT/WARM media, revalidate `/stats` |
@@ -85,6 +89,22 @@ roblox_universes.stats_tier
 roblox_universes.stats_tier_updated_at
 roblox_universes.stats_tier_reason
 ```
+
+Stats history tables:
+
+```txt
+roblox_universe_stats_hourly
+roblox_universe_stats_daily
+```
+
+Rank history tables:
+
+```txt
+roblox_universe_rank_snapshots_hourly
+roblox_universe_rank_snapshots_daily
+```
+
+Hourly tables are short-range working history and can be pruned after 90 days. Daily tables are the long-range record.
 
 Old quality columns are removed by migration:
 
