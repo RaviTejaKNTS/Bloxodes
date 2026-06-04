@@ -48,6 +48,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Short-range public rank snapshots for chart views. Hourly automation computes all-game playing ranks, then stores rank-relevant global, genre, and subgenre rows.
 - `roblox_universe_rank_snapshots_daily`
   - Long-range public rank snapshots. Daily automation stores full all-game rank rows for playing, visits, favorites, and rating.
+- `roblox_universe_update_events`
+  - Historical Roblox game update markers detected during hourly stats refreshes. Use this for stats chart update overlays; `roblox_universes.updated_at_api` is latest-state only.
 - `roblox_groups`
   - Group details used by the ID extractor.
 - `roblox_universe_gamepasses`, `roblox_universe_badges`

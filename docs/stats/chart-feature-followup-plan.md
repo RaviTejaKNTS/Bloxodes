@@ -59,10 +59,11 @@ Event history:
   - Editorial event landing pages only.
   - Do not use this as the chart event timeline source.
 
-Missing update history:
+Update history:
 
-- `roblox_universes.updated_at_api` stores only the latest Roblox game update timestamp.
-- It is not enough for chart update markers because old updates disappear when the universe row changes.
+- `roblox_universe_update_events`
+  - Stores historical Roblox game update markers detected by the hourly stats/details refresh.
+  - `roblox_universes.updated_at_api` stores only the latest Roblox game update timestamp, so old markers must live here.
 
 ## Current Automation
 
@@ -169,9 +170,9 @@ Note:
 
 ## 3. Game Updates Overlay
 
-Create a new table because `roblox_universes.updated_at_api` is only latest state.
+Use `roblox_universe_update_events` because `roblox_universes.updated_at_api` is only latest state.
 
-Recommended table:
+Current table:
 
 ```txt
 roblox_universe_update_events
@@ -180,21 +181,30 @@ roblox_universe_update_events
 Recommended columns:
 
 ```txt
-id uuid primary key default uuid_generate_v4()
-universe_id bigint not null references roblox_universes(universe_id) on delete cascade
-updated_at_api timestamptz not null
-detected_at timestamptz not null default now()
-source text not null default 'roblox_game_details'
-label text
-description text
-raw_payload jsonb
-unique (universe_id, updated_at_api)
+id
+universe_id
+previous_updated_at_api
+updated_at_api
+detected_at
+sampled_at
+source
+label
+description
+stats_tier
+playing
+visits
+favorites
+likes
+dislikes
+rating_percent
+raw_game_json
+created_at
 ```
 
 Automation:
 
 - In the hourly stats/details refresh, compare fetched `updated_at_api` with the previous non-null value on `roblox_universes`.
-- If it changed, insert one row into `roblox_universe_update_events`.
+- If it changed, upsert one row into `roblox_universe_update_events` on `(universe_id, updated_at_api)`.
 - Do not delete or overwrite old update event rows.
 - Do not invent update numbers unless Roblox gives us a real update/version label.
 
@@ -281,11 +291,9 @@ Default states:
 
 1. Previous period toggle for metric chart and rank chart.
 2. Events overlay from `roblox_virtual_events`.
-3. Migration for `roblox_universe_update_events`.
-4. Update detection in the hourly stats/details workflow.
-5. Updates overlay from `roblox_universe_update_events`.
-6. Compare games for metric charts.
-7. Optional global-rank comparison later.
+3. Updates overlay from `roblox_universe_update_events`.
+4. Compare games for metric charts.
+5. Optional global-rank comparison later.
 
 ## Gotchas
 

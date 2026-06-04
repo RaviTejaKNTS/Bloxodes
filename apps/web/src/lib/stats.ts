@@ -84,6 +84,34 @@ export type StatsChartPoint = {
   samples: number | null;
 };
 
+export type StatsChartAnnotation = {
+  type: "event" | "update";
+  id: string;
+  label: string;
+  startAt: string;
+  endAt: string | null;
+  status: string | null;
+  href: string | null;
+  source: string | null;
+};
+
+export type StatsChartComparison = {
+  universeId: number;
+  name: string;
+  slug: string;
+  iconUrl: string | null;
+  points: StatsChartPoint[];
+};
+
+export type StatsGameSearchResult = {
+  universeId: number;
+  name: string;
+  slug: string;
+  iconUrl: string | null;
+  playing: number | null;
+  visits: number | null;
+};
+
 export type StatsRankPoint = {
   label: string;
   tooltipLabel?: string;
@@ -168,6 +196,9 @@ export type StatsGameChartData = {
   requestedResolution: StatsChartResolution;
   resolution: StatsChartResolution;
   points: StatsChartPoint[];
+  previousPoints?: StatsChartPoint[];
+  comparisons?: StatsChartComparison[];
+  annotations?: StatsChartAnnotation[];
 };
 
 export type StatsGameRankChartData = {
@@ -175,6 +206,8 @@ export type StatsGameRankChartData = {
   requestedResolution: StatsChartResolution;
   resolution: StatsChartResolution;
   points: StatsRankPoint[];
+  previousPoints?: StatsRankPoint[];
+  annotations?: StatsChartAnnotation[];
   summaries: StatsRankSummary[];
 };
 
@@ -230,6 +263,26 @@ type RankSnapshotRow = {
   rank_value: number;
   metric_value: number | null;
   sampled_at: string;
+};
+
+type EventAnnotationRow = {
+  event_id: string;
+  title: string | null;
+  display_title: string | null;
+  start_utc: string | null;
+  end_utc: string | null;
+  created_utc: string | null;
+  updated_utc: string | null;
+  event_status: string | null;
+  guide_slug: string | null;
+};
+
+type UpdateAnnotationRow = {
+  id: string;
+  updated_at_api: string;
+  detected_at: string | null;
+  label: string | null;
+  source: string | null;
 };
 
 type HourlyRankSnapshotRow = {
@@ -695,6 +748,31 @@ export async function getStatsGenreOptions(): Promise<string[]> {
   ).sort((a, b) => a.localeCompare(b));
 }
 
+export async function searchStatsGamesForCompare(input: {
+  q?: string | null;
+  excludeUniverseIds?: number[];
+  limit?: number;
+}): Promise<StatsGameSearchResult[]> {
+  const q = input.q?.trim() ?? "";
+  if (q.length < 2) return [];
+  const exclude = new Set(input.excludeUniverseIds ?? []);
+  const { rows } = await listBaseGames({
+    limit: Math.min(Math.max(input.limit ?? 8, 1), 12),
+    q,
+    sort: "playing"
+  });
+  return rows
+    .filter((game) => !exclude.has(game.universeId))
+    .map((game) => ({
+      universeId: game.universeId,
+      name: game.name,
+      slug: game.slug,
+      iconUrl: game.iconUrl,
+      playing: game.playing,
+      visits: game.visits
+    }));
+}
+
 const RANGE_DAYS: Record<StatsTimeRange, number> = {
   "1d": 1,
   "7d": 7,
@@ -712,6 +790,13 @@ const RESOLUTION_HOURS: Record<StatsChartResolution, number> = {
 
 function chartRangeStart(range: StatsTimeRange) {
   return hoursAgo(RANGE_DAYS[range] * 24);
+}
+
+function chartWindow(range: StatsTimeRange, offsetPeriods = 0) {
+  const durationMs = RANGE_DAYS[range] * 24 * 60 * 60 * 1000;
+  const end = new Date(Date.now() - offsetPeriods * durationMs);
+  const start = new Date(end.getTime() - durationMs);
+  return { start, end };
 }
 
 function formatChartDate(date: Date, withYear = false) {
@@ -759,16 +844,22 @@ function latestNumber<T extends keyof HourlyRow>(rows: HourlyRow[], key: T): num
   return null;
 }
 
-function bucketRows(rows: HourlyRow[], range: StatsTimeRange, resolution: StatsChartResolution): StatsChartPoint[] {
+function bucketRows(
+  rows: HourlyRow[],
+  range: StatsTimeRange,
+  resolution: StatsChartResolution,
+  window = chartWindow(range)
+): StatsChartPoint[] {
   if (!rows.length) return [];
-  const rangeStart = new Date(chartRangeStart(range));
-  const rangeEnd = new Date();
+  const rangeStart = window.start;
+  const rangeEnd = window.end;
   const bucketMs = RESOLUTION_HOURS[resolution] * 60 * 60 * 1000;
   const buckets = new Map<number, HourlyRow[]>();
 
   for (const row of rows) {
     const sampledMs = Date.parse(row.hour_start);
     if (!Number.isFinite(sampledMs)) continue;
+    if (sampledMs < rangeStart.getTime() || sampledMs > rangeEnd.getTime()) continue;
     const bucketIndex = Math.max(0, Math.floor((sampledMs - rangeStart.getTime()) / bucketMs));
     const bucket = buckets.get(bucketIndex) ?? [];
     bucket.push(row);
@@ -820,7 +911,12 @@ function bucketRows(rows: HourlyRow[], range: StatsTimeRange, resolution: StatsC
     });
 }
 
-async function getBucketedChart(universeId: number, range: StatsTimeRange, resolution: StatsChartResolution): Promise<StatsChartPoint[]> {
+async function getBucketedChart(
+  universeId: number,
+  range: StatsTimeRange,
+  resolution: StatsChartResolution,
+  window = chartWindow(range)
+): Promise<StatsChartPoint[]> {
   const sb = supabaseAdmin();
   const rows: HourlyRow[] = [];
   const pageSize = 1000;
@@ -831,7 +927,8 @@ async function getBucketedChart(universeId: number, range: StatsTimeRange, resol
       .from("roblox_universe_stats_hourly")
       .select("universe_id, hour_start, playing, avg_playing, peak_playing, visits_end, favorites_end, likes_end, dislikes_end, rating_percent, sample_count")
       .eq("universe_id", universeId)
-      .gte("hour_start", chartRangeStart(range))
+      .gte("hour_start", window.start.toISOString())
+      .lte("hour_start", window.end.toISOString())
       .order("hour_start", { ascending: true })
       .range(offset, offset + pageSize - 1);
     if (error) {
@@ -844,24 +941,138 @@ async function getBucketedChart(universeId: number, range: StatsTimeRange, resol
     offset += pageSize;
   }
 
-  return bucketRows(rows, range, resolution);
+  return bucketRows(rows, range, resolution, window);
 }
 
 export function normalizeStatsResolution(value?: string | null): StatsChartResolution {
   return STATS_CHART_RESOLUTIONS.some((option) => option.value === value) ? (value as StatsChartResolution) : "hourly";
 }
 
+function parsePositiveUniverseIds(value: string | null, limit = 2): number[] {
+  if (!value) return [];
+  return Array.from(
+    new Set(
+      value
+        .split(",")
+        .map((item) => Number(item.trim()))
+        .filter((id) => Number.isSafeInteger(id) && id > 0)
+    )
+  ).slice(0, limit);
+}
+
+export function normalizeStatsCompareIds(value: string | null, currentUniverseId?: number): number[] {
+  return parsePositiveUniverseIds(value, 2).filter((id) => id !== currentUniverseId);
+}
+
+async function getStatsGameComparisons(
+  universeIds: number[],
+  range: StatsTimeRange,
+  resolution: StatsChartResolution,
+  window = chartWindow(range)
+): Promise<StatsChartComparison[]> {
+  if (!universeIds.length) return [];
+  const games = await Promise.all(universeIds.map((id) => getStatsGameSummaryByUniverseId(id)));
+  const comparisons: StatsChartComparison[] = [];
+  for (const game of games) {
+    if (!game) continue;
+    comparisons.push({
+      universeId: game.universeId,
+      name: game.name,
+      slug: game.slug,
+      iconUrl: game.iconUrl,
+      points: await getBucketedChart(game.universeId, range, resolution, window)
+    });
+  }
+  return comparisons;
+}
+
+function annotationTime(annotation: Pick<StatsChartAnnotation, "startAt" | "endAt">) {
+  return annotation.startAt || annotation.endAt || "";
+}
+
+async function getStatsChartAnnotations(universeId: number, start: Date, end: Date): Promise<StatsChartAnnotation[]> {
+  const sb = supabaseAdmin();
+  const [eventsResult, updatesResult] = await Promise.all([
+    sb
+      .from("roblox_virtual_events")
+      .select("event_id, title, display_title, start_utc, end_utc, created_utc, updated_utc, event_status, guide_slug")
+      .eq("universe_id", universeId)
+      .lte("start_utc", end.toISOString())
+      .or(`end_utc.gte.${start.toISOString()},end_utc.is.null,updated_utc.gte.${start.toISOString()},created_utc.gte.${start.toISOString()}`)
+      .order("start_utc", { ascending: true })
+      .limit(50),
+    sb
+      .from("roblox_universe_update_events")
+      .select("id, updated_at_api, detected_at, label, source")
+      .eq("universe_id", universeId)
+      .gte("updated_at_api", start.toISOString())
+      .lte("updated_at_api", end.toISOString())
+      .order("updated_at_api", { ascending: true })
+      .limit(100)
+  ]);
+
+  const annotations: StatsChartAnnotation[] = [];
+  if (!eventsResult.error) {
+    for (const row of (eventsResult.data ?? []) as EventAnnotationRow[]) {
+      const startAt = row.start_utc ?? row.updated_utc ?? row.created_utc;
+      if (!startAt) continue;
+      annotations.push({
+        type: "event",
+        id: row.event_id,
+        label: row.display_title || row.title || "Roblox event",
+        startAt,
+        endAt: row.end_utc,
+        status: row.event_status,
+        href: row.guide_slug ? `/events/${row.guide_slug}` : null,
+        source: "roblox_virtual_events"
+      });
+    }
+  } else if (eventsResult.error.code !== "42P01") {
+    console.warn("Failed to load stats event annotations", eventsResult.error.message);
+  }
+
+  if (!updatesResult.error) {
+    for (const row of (updatesResult.data ?? []) as UpdateAnnotationRow[]) {
+      annotations.push({
+        type: "update",
+        id: row.id,
+        label: row.label || "Game updated",
+        startAt: row.updated_at_api,
+        endAt: null,
+        status: null,
+        href: null,
+        source: row.source
+      });
+    }
+  } else if (updatesResult.error.code !== "42P01") {
+    console.warn("Failed to load stats update annotations", updatesResult.error.message);
+  }
+
+  return annotations.sort((a, b) => Date.parse(annotationTime(a)) - Date.parse(annotationTime(b)));
+}
+
 export async function getStatsGameChart(
   universeId: number,
   range: StatsTimeRange = "1d",
-  resolution: StatsChartResolution = "hourly"
+  resolution: StatsChartResolution = "hourly",
+  options: { includePrevious?: boolean; includeAnnotations?: boolean; compareUniverseIds?: number[] } = {}
 ): Promise<StatsGameChartData> {
-  const points = await getBucketedChart(universeId, range, resolution);
+  const window = chartWindow(range);
+  const previousWindow = chartWindow(range, 1);
+  const [points, previousPoints, comparisons, annotations] = await Promise.all([
+    getBucketedChart(universeId, range, resolution, window),
+    options.includePrevious ? getBucketedChart(universeId, range, resolution, previousWindow) : Promise.resolve(undefined),
+    getStatsGameComparisons(options.compareUniverseIds ?? [], range, resolution, window),
+    options.includeAnnotations ? getStatsChartAnnotations(universeId, window.start, window.end) : Promise.resolve(undefined)
+  ]);
   return {
     range,
     requestedResolution: resolution,
     resolution,
-    points
+    points,
+    previousPoints,
+    comparisons,
+    annotations
   };
 }
 
@@ -889,16 +1100,22 @@ function latestRankMetric(rows: RankSnapshotRow[], rankType: string) {
   return null;
 }
 
-function bucketRankRows(rows: RankSnapshotRow[], range: StatsTimeRange, resolution: StatsChartResolution): StatsRankPoint[] {
+function bucketRankRows(
+  rows: RankSnapshotRow[],
+  range: StatsTimeRange,
+  resolution: StatsChartResolution,
+  window = chartWindow(range)
+): StatsRankPoint[] {
   if (!rows.length) return [];
-  const rangeStart = new Date(chartRangeStart(range));
-  const rangeEnd = new Date();
+  const rangeStart = window.start;
+  const rangeEnd = window.end;
   const bucketMs = RESOLUTION_HOURS[resolution] * 60 * 60 * 1000;
   const buckets = new Map<number, RankSnapshotRow[]>();
 
   for (const row of rows) {
     const sampledMs = Date.parse(row.sampled_at);
     if (!Number.isFinite(sampledMs)) continue;
+    if (sampledMs < rangeStart.getTime() || sampledMs > rangeEnd.getTime()) continue;
     const bucketIndex = Math.max(0, Math.floor((sampledMs - rangeStart.getTime()) / bucketMs));
     const bucket = buckets.get(bucketIndex) ?? [];
     bucket.push(row);
@@ -976,7 +1193,7 @@ function summarizeRankRows(rows: RankSnapshotRow[], game: Pick<StatsGame, "genre
   });
 }
 
-async function getRankRows(universeId: number, range: StatsTimeRange): Promise<RankSnapshotRow[]> {
+async function getRankRows(universeId: number, range: StatsTimeRange, window = chartWindow(range)): Promise<RankSnapshotRow[]> {
   const sb = supabaseAdmin();
   const rows: RankSnapshotRow[] = [];
   const pageSize = 1000;
@@ -987,7 +1204,8 @@ async function getRankRows(universeId: number, range: StatsTimeRange): Promise<R
       .select("rank_type, rank_value, metric_value, hour_start, sampled_at")
       .eq("universe_id", universeId)
       .in("rank_type", Object.values(RANK_TYPES_BY_KEY))
-      .gte("hour_start", chartRangeStart(range))
+      .gte("hour_start", window.start.toISOString())
+      .lte("hour_start", window.end.toISOString())
       .order("hour_start", { ascending: true })
       .range(offset, offset + pageSize - 1);
     if (error) {
@@ -1012,14 +1230,23 @@ async function getRankRows(universeId: number, range: StatsTimeRange): Promise<R
 export async function getStatsGameRankChart(
   game: Pick<StatsGame, "universeId" | "genre" | "subgenre">,
   range: StatsTimeRange = "1d",
-  resolution: StatsChartResolution = "hourly"
+  resolution: StatsChartResolution = "hourly",
+  options: { includePrevious?: boolean; includeAnnotations?: boolean } = {}
 ): Promise<StatsGameRankChartData> {
-  const rows = await getRankRows(game.universeId, range);
+  const window = chartWindow(range);
+  const previousWindow = chartWindow(range, 1);
+  const [rows, previousRows, annotations] = await Promise.all([
+    getRankRows(game.universeId, range, window),
+    options.includePrevious ? getRankRows(game.universeId, range, previousWindow) : Promise.resolve(undefined),
+    options.includeAnnotations ? getStatsChartAnnotations(game.universeId, window.start, window.end) : Promise.resolve(undefined)
+  ]);
   return {
     range,
     requestedResolution: resolution,
     resolution,
-    points: bucketRankRows(rows, range, resolution),
+    points: bucketRankRows(rows, range, resolution, window),
+    previousPoints: previousRows ? bucketRankRows(previousRows, range, resolution, previousWindow) : undefined,
+    annotations,
     summaries: summarizeRankRows(rows, game)
   };
 }
@@ -1027,7 +1254,8 @@ export async function getStatsGameRankChart(
 export async function getStatsGameRankChartByUniverseId(
   universeId: number,
   range: StatsTimeRange = "1d",
-  resolution: StatsChartResolution = "hourly"
+  resolution: StatsChartResolution = "hourly",
+  options: { includePrevious?: boolean; includeAnnotations?: boolean } = {}
 ): Promise<StatsGameRankChartData> {
   const game = await getStatsGameSummaryByUniverseId(universeId);
   return getStatsGameRankChart(
@@ -1037,7 +1265,8 @@ export async function getStatsGameRankChartByUniverseId(
       subgenre: game?.subgenre ?? null
     },
     range,
-    resolution
+    resolution,
+    options
   );
 }
 
@@ -1084,8 +1313,8 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
 async function buildStatsGameDetail(row: UniverseRow): Promise<StatsGameDetailData> {
   const baseGame = (await attachGrowth([mapUniverse(row)]))[0];
   const [initialChart, initialRankChart, relatedLinks, sameCreator, similarGames, includedInLists, globalRank] = await Promise.all([
-    getStatsGameChart(baseGame.universeId, "1d", "hourly"),
-    getStatsGameRankChart(baseGame, "1d", "hourly"),
+    getStatsGameChart(baseGame.universeId, "1d", "hourly", { includeAnnotations: true }),
+    getStatsGameRankChart(baseGame, "1d", "hourly", { includeAnnotations: true }),
     loadRelatedLinks(baseGame.universeId, baseGame),
     loadSameCreatorGames(baseGame),
     loadSimilarGames(baseGame),

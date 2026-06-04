@@ -6,7 +6,8 @@ import { CartesianGrid } from "recharts/es6/cartesian/CartesianGrid";
 import { XAxis } from "recharts/es6/cartesian/XAxis";
 import { YAxis } from "recharts/es6/cartesian/YAxis";
 import { LineChart } from "recharts/es6/chart/LineChart";
-import { Activity, Maximize2, Minimize2, Trophy } from "lucide-react";
+import { ReferenceArea, ReferenceLine } from "recharts";
+import { Activity, CalendarDays, Maximize2, Minimize2, RefreshCw, RotateCcw, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, type ChartConfig } from "@/components/ui/chart";
@@ -32,6 +33,21 @@ type RankPoint = {
   samples: number | null;
 };
 
+type RankPointForRender = RankPoint & {
+  previousValue?: number | null;
+};
+
+type ChartAnnotation = {
+  type: "event" | "update";
+  id: string;
+  label: string;
+  startAt: string;
+  endAt: string | null;
+  status: string | null;
+  href: string | null;
+  source: string | null;
+};
+
 type RankSummary = {
   key: RankScopeKey;
   label: string;
@@ -53,6 +69,8 @@ type RankChartData = {
   requestedResolution: ResolutionKey;
   resolution: ResolutionKey;
   points: RankPoint[];
+  previousPoints?: RankPoint[];
+  annotations?: ChartAnnotation[];
   summaries: RankSummary[];
 };
 
@@ -98,8 +116,8 @@ const chartTabsListClass =
 const chartTabsTriggerClass =
   "h-7 rounded-sm px-2.5 text-xs font-semibold text-muted transition-colors hover:bg-secondary/70 hover:text-foreground data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-none";
 
-function rankCacheKey(range: RangeKey, resolution: ResolutionKey) {
-  return `${range}:${resolution}`;
+function rankCacheKey(range: RangeKey, resolution: ResolutionKey, previous: boolean) {
+  return `${range}:${resolution}:${previous ? "previous" : "current"}`;
 }
 
 function formatRank(value?: number | null) {
@@ -117,7 +135,7 @@ function formatDate(value?: string | null) {
   if (!value) return "Not tracked";
   const date = new Date(value);
   if (!Number.isFinite(date.getTime())) return "Not tracked";
-  return date.toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric" });
+  return date.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", hour12: true, timeZone: "UTC" });
 }
 
 function formatAxisTick(sampledAt: string, range: RangeKey) {
@@ -134,14 +152,35 @@ function usablePointCount(points: RankPoint[], scope: RankScopeKey) {
   return points.filter((point) => typeof point[key] === "number").length;
 }
 
-function rankDomain(points: RankPoint[], scope: RankScopeKey, startsAtOne: boolean): [number, number] {
+function rankDomain(points: RankPointForRender[], scope: RankScopeKey, startsAtOne: boolean): [number, number] {
   const key = rankDataKeys[scope];
-  const values = points.map((point) => point[key]).filter((value): value is number => typeof value === "number" && Number.isFinite(value));
+  const values = points
+    .flatMap((point) => [point[key], point.previousValue])
+    .filter((value): value is number => typeof value === "number" && Number.isFinite(value));
   if (!values.length) return [1, 10];
   const min = Math.min(...values);
   const max = Math.max(...values);
   const padding = Math.max(1, Math.ceil((max - min) * 0.16));
   return [startsAtOne ? 1 : Math.max(1, min - padding), max + padding];
+}
+
+function closestSampledAt(points: RankPoint[], value: string) {
+  const target = Date.parse(value);
+  if (!Number.isFinite(target) || !points.length) return value;
+  let closest = points[0]?.sampledAt ?? value;
+  let closestDiff = Math.abs(Date.parse(closest) - target);
+  for (const point of points) {
+    const diff = Math.abs(Date.parse(point.sampledAt) - target);
+    if (Number.isFinite(diff) && diff < closestDiff) {
+      closest = point.sampledAt;
+      closestDiff = diff;
+    }
+  }
+  return closest;
+}
+
+function numberValue(value: unknown): number | null {
+  return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
 function StatsRankTooltip({
@@ -150,23 +189,29 @@ function StatsRankTooltip({
   scope
 }: {
   active?: boolean;
-  payload?: Array<{ color?: string; value?: unknown; payload?: Partial<RankPoint> }>;
+  payload?: Array<{ color?: string; name?: string; value?: unknown; dataKey?: string | number; payload?: Partial<RankPoint> }>;
   scope: RankScopeKey;
 }) {
   if (!active || !payload?.length) return null;
-  const item = payload[0];
+  const visiblePayload = payload.filter((item) => item.value != null && Number.isFinite(Number(item.value)));
+  if (!visiblePayload.length) return null;
+  const item = visiblePayload[0];
   const point = item.payload;
-  const rank = typeof item.value === "number" ? item.value : Number(item.value);
   const playersValue = point?.[rankPlayerKeys[scope]];
   const players = typeof playersValue === "number" ? playersValue : null;
   return (
     <div className="grid min-w-[11rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl">
       <div className="font-medium">{point?.tooltipLabel ?? point?.sampledAt ?? ""}</div>
-      <div className="flex w-full items-center gap-2">
-        <span className="h-3 w-1 shrink-0 rounded-[2px]" style={{ backgroundColor: item.color ?? rankColors[scope] }} />
-        <span className="text-muted-foreground">{rankLabels[scope]} rank</span>
-        <span className="ml-auto font-mono font-medium tabular-nums text-foreground">{formatRank(Number.isFinite(rank) ? rank : null)}</span>
-      </div>
+      {visiblePayload.map((entry) => {
+        const rank = typeof entry.value === "number" ? entry.value : Number(entry.value);
+        return (
+          <div key={String(entry.dataKey ?? entry.name)} className="flex w-full items-center gap-2">
+            <span className="h-3 w-1 shrink-0 rounded-[2px]" style={{ backgroundColor: entry.color ?? rankColors[scope] }} />
+            <span className="text-muted-foreground">{entry.name ?? `${rankLabels[scope]} rank`}</span>
+            <span className="ml-auto font-mono font-medium tabular-nums text-foreground">{formatRank(Number.isFinite(rank) ? rank : null)}</span>
+          </div>
+        );
+      })}
       <div className="flex w-full items-center gap-2 text-muted-foreground">
         <span>Playing</span>
         <span className="ml-auto font-mono tabular-nums text-foreground">{formatCompactNumber(players)}</span>
@@ -175,11 +220,29 @@ function StatsRankTooltip({
   );
 }
 
-function SummaryCell({ value, date }: { value?: number | null; date?: string | null }) {
+function RankSummaryCard({ summary }: { summary: RankSummary }) {
+  const title = summary.key === "global" ? "Global rank" : summary.scopeLabel ? `${summary.scopeLabel} rank` : `${summary.label} rank`;
+  const eyebrow = summary.key === "global" ? "All tracked games" : summary.key === "genre" ? "Genre" : "Subgenre";
   return (
-    <div className="space-y-0.5">
-      <p className="font-semibold text-foreground">{formatRank(value)}</p>
-      <p className="text-[11px] text-muted">{formatDate(date)}</p>
+    <div className="min-w-0 rounded-lg border border-border/60 bg-background/45 p-3">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted">{eyebrow}</p>
+          <p className="mt-1 truncate text-sm font-semibold text-foreground">{title}</p>
+        </div>
+        <Trophy className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden />
+      </div>
+      <div className="mt-4 flex items-end justify-between gap-3">
+        <div>
+          <p className="text-[11px] font-medium text-muted">Current</p>
+          <p className="mt-0.5 font-mono text-3xl font-semibold leading-none tracking-normal text-foreground">{formatRank(summary.currentRank)}</p>
+        </div>
+        <div className="min-w-0 text-right">
+          <p className="text-[11px] font-medium text-muted">Best</p>
+          <p className="mt-0.5 font-mono text-base font-semibold text-foreground">{formatRank(summary.bestRank)}</p>
+          <p className="mt-0.5 truncate text-[11px] text-muted">{formatDate(summary.bestAt)}</p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -196,24 +259,39 @@ export function StatsRankChartPanel({
   const [scope, setScope] = useState<RankScopeKey>("global");
   const [range, setRange] = useState<RangeKey>(initialChart.range ?? "1d");
   const [resolution, setResolution] = useState<ResolutionKey>(initialChart.requestedResolution ?? "hourly");
+  const [showPrevious, setShowPrevious] = useState(false);
+  const [showEvents, setShowEvents] = useState(false);
+  const [showUpdates, setShowUpdates] = useState(false);
   const [chartCache, setChartCache] = useState<Record<string, RankChartData>>(() => ({
-    [rankCacheKey(initialChart.range, initialChart.requestedResolution)]: initialChart
+    [rankCacheKey(initialChart.range, initialChart.requestedResolution, false)]: initialChart
   }));
   const [lastRenderedChart, setLastRenderedChart] = useState<RankChartData>(initialChart);
   const [loadingKey, setLoadingKey] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [startsAtOne, setStartsAtOne] = useState(false);
-  const activeKey = rankCacheKey(range, resolution);
+  const activeKey = rankCacheKey(range, resolution, showPrevious);
   const loadedChart = chartCache[activeKey];
   const displayChart = loadedChart ?? lastRenderedChart;
   const points = displayChart.points;
+  const previousPoints = displayChart.previousPoints ?? [];
+  const annotations = displayChart.annotations ?? [];
+  const eventAnnotations = annotations.filter((annotation) => annotation.type === "event");
+  const updateAnnotations = annotations.filter((annotation) => annotation.type === "update");
   const summaries = displayChart.summaries;
   const activePointCount = usablePointCount(points, scope);
   const hasRenderableData = activePointCount >= 1;
   const dataKey = rankDataKeys[scope];
   const isLoading = loadingKey === activeKey;
   const isShowingPreviousChart = Boolean(isLoading && !loadedChart && hasRenderableData);
-  const yDomain = useMemo(() => rankDomain(points, scope, startsAtOne), [points, scope, startsAtOne]);
+  const chartPoints = useMemo<RankPointForRender[]>(
+    () =>
+      points.map((point, index) => ({
+        ...point,
+        previousValue: numberValue(previousPoints[index]?.[dataKey])
+      })),
+    [dataKey, points, previousPoints]
+  );
+  const yDomain = useMemo(() => rankDomain(chartPoints, scope, startsAtOne), [chartPoints, scope, startsAtOne]);
 
   useEffect(() => {
     if (loadedChart) setLastRenderedChart(loadedChart);
@@ -224,7 +302,13 @@ export function StatsRankChartPanel({
     let cancelled = false;
     setLoadingKey(activeKey);
     setLoadError(null);
-    fetch(`/api/stats/games/${universeId}/rank-chart?range=${encodeURIComponent(range)}&resolution=${encodeURIComponent(resolution)}`)
+    const params = new URLSearchParams({
+      range,
+      resolution,
+      annotations: "1"
+    });
+    if (showPrevious) params.set("previous", "1");
+    fetch(`/api/stats/games/${universeId}/rank-chart?${params.toString()}`)
       .then(async (response) => {
         if (!response.ok) throw new Error(`Rank chart request failed (${response.status})`);
         return (await response.json()) as RankChartData;
@@ -242,7 +326,7 @@ export function StatsRankChartPanel({
     return () => {
       cancelled = true;
     };
-  }, [activeKey, chartCache, range, resolution, universeId]);
+  }, [activeKey, chartCache, range, resolution, showPrevious, universeId]);
 
   return (
     <Card className="overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
@@ -287,7 +371,7 @@ export function StatsRankChartPanel({
         ) : (
           <div className="relative">
             <ChartContainer config={rankConfig} className="h-[280px] w-full min-w-0">
-              <LineChart data={points} margin={{ left: 0, right: 8, top: 10, bottom: 0 }}>
+              <LineChart data={chartPoints} margin={{ left: 0, right: 8, top: 10, bottom: 0 }}>
                 <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey="sampledAt"
@@ -308,6 +392,44 @@ export function StatsRankChartPanel({
                   tickFormatter={(value: unknown) => formatRank(Number(value))}
                 />
                 <ChartTooltip cursor={false} content={<StatsRankTooltip scope={scope} />} />
+                {showEvents
+                  ? eventAnnotations.map((annotation) => {
+                      const startAt = closestSampledAt(chartPoints, annotation.startAt);
+                      const endAt = annotation.endAt ? closestSampledAt(chartPoints, annotation.endAt) : null;
+                      if (endAt && endAt !== startAt) {
+                        return (
+                          <ReferenceArea
+                            key={annotation.id}
+                            x1={startAt}
+                            x2={endAt}
+                            fill="rgb(var(--color-accent))"
+                            fillOpacity={0.08}
+                            strokeOpacity={0}
+                          />
+                        );
+                      }
+                      return (
+                        <ReferenceLine
+                          key={annotation.id}
+                          x={startAt}
+                          stroke="rgb(var(--color-accent))"
+                          strokeDasharray="3 3"
+                          strokeOpacity={0.45}
+                        />
+                      );
+                    })
+                  : null}
+                {showUpdates
+                  ? updateAnnotations.map((annotation) => (
+                      <ReferenceLine
+                        key={annotation.id}
+                        x={closestSampledAt(chartPoints, annotation.startAt)}
+                        stroke="#f59e0b"
+                        strokeDasharray="2 4"
+                        strokeOpacity={0.6}
+                      />
+                    ))
+                  : null}
                 <Line
                   type="linear"
                   dataKey={dataKey}
@@ -317,6 +439,19 @@ export function StatsRankChartPanel({
                   name={`${rankLabels[scope]} rank`}
                   activeDot={{ r: 4 }}
                 />
+                {showPrevious ? (
+                  <Line
+                    type="linear"
+                    dataKey="previousValue"
+                    stroke={rankColors[scope]}
+                    strokeWidth={2}
+                    strokeDasharray="5 5"
+                    strokeOpacity={0.6}
+                    dot={false}
+                    name="Previous period"
+                    activeDot={{ r: 3 }}
+                  />
+                ) : null}
               </LineChart>
             </ChartContainer>
             {isShowingPreviousChart ? (
@@ -327,7 +462,65 @@ export function StatsRankChartPanel({
           </div>
         )}
 
-        <div className="mt-3 flex items-center justify-end gap-2">
+        <div className="mt-3 flex flex-wrap items-center justify-end gap-2">
+          <TooltipProvider delayDuration={120}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  aria-pressed={showPrevious}
+                  aria-label={showPrevious ? "Hide previous period" : "Show previous period"}
+                  className={`h-8 w-8 rounded-md border-border/70 bg-background/80 text-muted shadow-none ${showPrevious ? "bg-accent text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground" : ""}`}
+                  onClick={() => setShowPrevious((value) => !value)}
+                >
+                  <RotateCcw className="h-3.5 w-3.5" aria-hidden />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="top">{showPrevious ? "Hide previous period" : "Show previous period"}</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          {eventAnnotations.length ? (
+            <TooltipProvider delayDuration={120}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    aria-pressed={showEvents}
+                    aria-label={showEvents ? "Hide events" : "Show events"}
+                    className={`h-8 w-8 rounded-md border-border/70 bg-background/80 text-muted shadow-none ${showEvents ? "bg-accent text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground" : ""}`}
+                    onClick={() => setShowEvents((value) => !value)}
+                  >
+                    <CalendarDays className="h-3.5 w-3.5" aria-hidden />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="top">{showEvents ? "Hide events" : "Show events"}</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          ) : null}
+          {updateAnnotations.length ? (
+            <TooltipProvider delayDuration={120}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    aria-pressed={showUpdates}
+                    aria-label={showUpdates ? "Hide updates" : "Show updates"}
+                    className={`h-8 w-8 rounded-md border-border/70 bg-background/80 text-muted shadow-none ${showUpdates ? "bg-accent text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground" : ""}`}
+                    onClick={() => setShowUpdates((value) => !value)}
+                  >
+                    <RefreshCw className="h-3.5 w-3.5" aria-hidden />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="top">{showUpdates ? "Hide updates" : "Show updates"}</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          ) : null}
           <Select value={resolution} onValueChange={(value) => setResolution(value as ResolutionKey)}>
             <SelectTrigger className="h-8 w-[110px] rounded-md border-border/70 bg-background/80 text-xs font-semibold text-muted shadow-none">
               <SelectValue />
@@ -359,36 +552,13 @@ export function StatsRankChartPanel({
           </TooltipProvider>
         </div>
 
-        <div className="mt-4 overflow-x-auto rounded-lg border border-border/60 bg-background/35">
-          <table className="w-full min-w-[820px] text-left text-xs">
-            <thead className="border-b border-border/60 text-muted">
-              <tr>
-                <th className="px-3 py-2 font-semibold">Scope</th>
-                <th className="px-3 py-2 font-semibold">Current</th>
-                <th className="px-3 py-2 font-semibold">Best</th>
-                <th className="px-3 py-2 font-semibold">First #1</th>
-                <th className="px-3 py-2 font-semibold">Left #1</th>
-                <th className="px-3 py-2 font-semibold">First Top 10</th>
-                <th className="px-3 py-2 font-semibold">Left Top 10</th>
-              </tr>
-            </thead>
-            <tbody>
-              {summaries.map((summary) => (
-                <tr key={summary.key} className="border-b border-border/40 last:border-b-0">
-                  <td className="px-3 py-2">
-                    <p className="font-semibold text-foreground">{summary.label}</p>
-                    {summary.scopeLabel ? <p className="mt-0.5 text-[11px] text-muted">{summary.scopeLabel}</p> : null}
-                  </td>
-                  <td className="px-3 py-2"><SummaryCell value={summary.currentRank} date={summary.currentAt} /></td>
-                  <td className="px-3 py-2"><SummaryCell value={summary.bestRank} date={summary.bestAt} /></td>
-                  <td className="px-3 py-2 text-muted">{formatDate(summary.firstTop1At)}</td>
-                  <td className="px-3 py-2 text-muted">{formatDate(summary.lastExitedTop1At)}</td>
-                  <td className="px-3 py-2 text-muted">{formatDate(summary.firstTop10At)}</td>
-                  <td className="px-3 py-2 text-muted">{formatDate(summary.lastExitedTop10At)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="mt-4 grid gap-3 md:grid-cols-3">
+          {(["global", "genre", "subgenre"] as RankScopeKey[])
+            .map((key) => summaries.find((summary) => summary.key === key))
+            .filter((summary): summary is RankSummary => Boolean(summary))
+            .map((summary) => (
+              <RankSummaryCard key={summary.key} summary={summary} />
+            ))}
         </div>
       </CardContent>
     </Card>

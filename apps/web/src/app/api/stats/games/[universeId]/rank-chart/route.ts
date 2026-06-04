@@ -17,7 +17,10 @@ export async function GET(request: Request, context: RouteContext) {
     const { searchParams } = new URL(request.url);
     const range = normalizeStatsRange(searchParams.get("range"));
     const resolution = normalizeStatsResolution(searchParams.get("resolution"));
-    const chart = await getStatsGameRankChartByUniverseId(id, range, resolution);
+    const chart = await getStatsGameRankChartByUniverseId(id, range, resolution, {
+      includePrevious: searchParams.get("previous") === "1",
+      includeAnnotations: searchParams.get("annotations") !== "0"
+    });
     return NextResponse.json(chart, {
       headers: {
         "cache-control": "public, max-age=300, stale-while-revalidate=1800"

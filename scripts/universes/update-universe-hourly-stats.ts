@@ -14,6 +14,8 @@ const RETRY_MAX_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_RETRY_MAX_D
 
 type RobloxGameDetail = {
   id: number;
+  created?: string;
+  updated?: string;
   playing?: number;
   playerCount?: number;
   visits?: number;
@@ -42,6 +44,8 @@ type UniverseRow = {
   favorites: number | null;
   likes: number | null;
   dislikes: number | null;
+  created_at_api: string | null;
+  updated_at_api: string | null;
   stats_tier: StatsTier | null;
   last_stats_refreshed_at: string | null;
 };
@@ -67,6 +71,8 @@ type PublicStats = {
   likes: number | null;
   dislikes: number | null;
   ratingPercent: number | null;
+  createdAtApi: string | null;
+  updatedAtApi: string | null;
   raw: RobloxGameDetail & { votesApi?: RobloxGameVote };
 };
 
@@ -98,6 +104,13 @@ function isoDate(date: Date): string {
 
 function toNumber(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
+}
+
+function normalizeTimestamp(value: unknown): string | null {
+  if (typeof value !== "string" || !value.trim()) return null;
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return null;
+  return date.toISOString();
 }
 
 function ratingPercent(likes: number | null, dislikes: number | null): number | null {
@@ -172,7 +185,7 @@ async function fetchUniverses(options: Options): Promise<UniverseRow[]> {
     const pageSize = Math.min(BATCH_SIZE, remaining);
     let query = sb
       .from("roblox_universes")
-      .select("universe_id, root_place_id, playing, visits, favorites, likes, dislikes, stats_tier, last_stats_refreshed_at")
+      .select("universe_id, root_place_id, playing, visits, favorites, likes, dislikes, created_at_api, updated_at_api, stats_tier, last_stats_refreshed_at")
       .not("root_place_id", "is", null);
 
     if (options.universeIds.length) {
@@ -228,6 +241,8 @@ async function fetchStats(universeIds: number[]): Promise<Record<number, PublicS
       likes,
       dislikes,
       ratingPercent: ratingPercent(likes, dislikes),
+      createdAtApi: normalizeTimestamp(entry.created),
+      updatedAtApi: normalizeTimestamp(entry.updated),
       raw: vote ? { ...entry, votesApi: vote } : entry
     };
   }
@@ -302,6 +317,7 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
   const hourStart = compactIsoHour(sampledAt);
   const existingHourly = await fetchExistingHourly(chunk.map((row) => row.universe_id), hourStart);
   const hourlyPayloads = [];
+  const updateEventPayloads = [];
   for (const row of chunk) {
     const stats = values[row.universe_id];
     if (!stats) continue;
@@ -327,6 +343,30 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
       stats_tier_updated_at: sampledAtIso,
       last_stats_refreshed_at: sampledAtIso
     };
+    if (!row.created_at_api && stats.createdAtApi) updatePayload.created_at_api = stats.createdAtApi;
+    if (!row.updated_at_api && stats.updatedAtApi) updatePayload.updated_at_api = stats.updatedAtApi;
+    const previousUpdatedAt = normalizeTimestamp(row.updated_at_api);
+    const nextUpdatedAt = stats.updatedAtApi;
+    if (nextUpdatedAt && previousUpdatedAt && Date.parse(nextUpdatedAt) > Date.parse(previousUpdatedAt)) {
+      updatePayload.updated_at_api = nextUpdatedAt;
+      updateEventPayloads.push({
+        universe_id: row.universe_id,
+        previous_updated_at_api: previousUpdatedAt,
+        updated_at_api: nextUpdatedAt,
+        detected_at: sampledAtIso,
+        sampled_at: sampledAtIso,
+        source: "update-universe-hourly-stats",
+        label: "Game updated",
+        stats_tier: tier.tier,
+        playing: latest.playing,
+        visits: latest.visits,
+        favorites: latest.favorites,
+        likes: latest.likes,
+        dislikes: latest.dislikes,
+        rating_percent: stats.ratingPercent,
+        raw_game_json: stats.raw
+      });
+    }
     if (stats.playing != null) {
       updatePayload.playing = stats.playing;
       updatePayload.last_playing_refreshed_at = sampledAtIso;
@@ -350,6 +390,14 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
       .upsert(hourlyPayloads, { onConflict: "universe_id,hour_start" });
     if (error) {
       throw new Error(`Failed to upsert hourly stats: ${error.message}`);
+    }
+  }
+  if (updateEventPayloads.length) {
+    const { error } = await sb
+      .from("roblox_universe_update_events")
+      .upsert(updateEventPayloads, { onConflict: "universe_id,updated_at_api" });
+    if (error) {
+      throw new Error(`Failed to upsert universe update events: ${error.message}`);
     }
   }
 }

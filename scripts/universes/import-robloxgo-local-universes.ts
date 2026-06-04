@@ -155,6 +155,7 @@ const DELETE_UNIVERSE_REFERENCES = [
   "roblox_universe_rank_snapshots_daily",
   "roblox_universe_rank_snapshots_hourly",
   "roblox_universe_social_links",
+  "roblox_universe_update_events",
   "roblox_universe_stats_daily",
   "roblox_universe_stats_hourly",
   "roblox_virtual_events"

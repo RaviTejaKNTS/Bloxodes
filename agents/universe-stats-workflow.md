@@ -102,9 +102,11 @@ Rank history tables:
 ```txt
 roblox_universe_rank_snapshots_hourly
 roblox_universe_rank_snapshots_daily
+roblox_universe_update_events
 ```
 
 Hourly tables are short-range working history and can be pruned after 90 days. Daily tables are the long-range record.
+`roblox_universe_update_events` is a durable marker table for Roblox `updated_at_api` changes detected by the hourly stats refresh.
 
 Old quality columns are removed by migration:
 
