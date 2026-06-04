@@ -124,6 +124,10 @@ function formatRank(value?: number | null) {
   return typeof value === "number" && Number.isFinite(value) ? `#${value.toLocaleString("en-US")}` : "Not tracked";
 }
 
+function isTrackedRank(value?: number | null) {
+  return typeof value === "number" && Number.isFinite(value);
+}
+
 function scopeTabLabel(scope: RankScopeKey, summaries: RankSummary[]) {
   if (scope === "global") return "Global";
   const scopeName = summaries.find((summary) => summary.key === scope)?.scopeLabel?.trim();
@@ -223,6 +227,8 @@ function StatsRankTooltip({
 function RankSummaryCard({ summary }: { summary: RankSummary }) {
   const title = summary.key === "global" ? "Global rank" : summary.scopeLabel ? `${summary.scopeLabel} rank` : `${summary.label} rank`;
   const eyebrow = summary.key === "global" ? "All tracked games" : summary.key === "genre" ? "Genre" : "Subgenre";
+  const hasCurrentRank = isTrackedRank(summary.currentRank);
+  const hasBestRank = isTrackedRank(summary.bestRank);
   return (
     <div className="min-w-0 rounded-lg border border-border/60 bg-background/45 p-3">
       <div className="flex items-start justify-between gap-3">
@@ -235,12 +241,22 @@ function RankSummaryCard({ summary }: { summary: RankSummary }) {
       <div className="mt-4 flex items-end justify-between gap-3">
         <div>
           <p className="text-[11px] font-medium text-muted">Current</p>
-          <p className="mt-0.5 font-mono text-3xl font-semibold leading-none tracking-normal text-foreground">{formatRank(summary.currentRank)}</p>
+          <p
+            className={
+              hasCurrentRank
+                ? "mt-0.5 font-mono text-3xl font-semibold leading-none tracking-normal text-foreground"
+                : "mt-1 text-sm font-semibold leading-tight text-muted-foreground"
+            }
+          >
+            {formatRank(summary.currentRank)}
+          </p>
         </div>
         <div className="min-w-0 text-right">
           <p className="text-[11px] font-medium text-muted">Best</p>
-          <p className="mt-0.5 font-mono text-base font-semibold text-foreground">{formatRank(summary.bestRank)}</p>
-          <p className="mt-0.5 truncate text-[11px] text-muted">{formatDate(summary.bestAt)}</p>
+          <p className={hasBestRank ? "mt-0.5 font-mono text-base font-semibold text-foreground" : "mt-1 text-sm font-semibold leading-tight text-muted-foreground"}>
+            {formatRank(summary.bestRank)}
+          </p>
+          {hasBestRank ? <p className="mt-0.5 truncate text-[11px] text-muted">{formatDate(summary.bestAt)}</p> : null}
         </div>
       </div>
     </div>
