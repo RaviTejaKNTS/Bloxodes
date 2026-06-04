@@ -14,4 +14,4 @@ RUN npm ci
 
 COPY scripts ./scripts
 
-CMD ["npm", "run", "collect:robloxgo-postgres", "--", "--apply"]
+CMD ["sh", "-lc", "${ROBLOXGO_WORKER_COMMAND:-npm run collect:robloxgo-postgres -- --apply}"]
