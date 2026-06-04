@@ -52,6 +52,7 @@
     "cover:backfill": "tsx scripts/backfill/backfill-missing-cover-images.ts",
     "collect:universes": "tsx scripts/universes/collect-roblox-universes.ts",
     "collect:robloxgo-postgres": "tsx scripts/universes/collect-robloxgo-place-ids-postgres.ts",
+    "resolve:robloxgo-postgres": "tsx scripts/universes/resolve-robloxgo-place-ids-postgres.ts",
     "search:universes": "tsx scripts/universes/search-roblox-universes.ts",
     "expand:creators": "tsx scripts/universes/expand-roblox-creators.ts",
     "score:universes": "tsx scripts/universes/score-universe-quality.ts",
