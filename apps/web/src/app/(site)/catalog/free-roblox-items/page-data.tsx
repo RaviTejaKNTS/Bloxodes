@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { PagePagination } from "@/components/PagePagination";
@@ -18,6 +19,7 @@ import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } fr
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
+import { FreeItemsBrowser } from "./FreeItemsBrowser";
 
 const PAGE_SIZE = 24;
 
@@ -614,16 +616,33 @@ export async function renderRobloxFreeItemsPage({
           </section>
         ) : null}
 
-        <div className="catalog-surface space-y-6">
-          <FreeItemsFilterForm basePath={basePath} search={search} sort={sort} />
-          <FreeItemsGrid items={items} />
-          <PagePagination
-            basePath={basePath}
+        <Suspense
+          fallback={
+            <div className="catalog-surface space-y-6">
+              <FreeItemsFilterForm basePath={basePath} search={search} sort={sort} />
+              <FreeItemsGrid items={items} />
+              <PagePagination
+                basePath={basePath}
+                currentPage={currentPage}
+                totalPages={totalPages}
+                query={searchQueryString || undefined}
+              />
+            </div>
+          }
+        >
+          <FreeItemsBrowser
+            initialItems={items}
+            initialTotalPages={totalPages}
             currentPage={currentPage}
-            totalPages={totalPages}
-            query={searchQueryString || undefined}
+            basePath={basePath}
+            category={categoryLabel}
+            subcategory={
+              activeSubcategorySlug
+                ? subcategories?.find((entry) => entry.slug === activeSubcategorySlug)?.label
+                : undefined
+            }
           />
-        </div>
+        </Suspense>
 
         <CatalogAdSlot />
 

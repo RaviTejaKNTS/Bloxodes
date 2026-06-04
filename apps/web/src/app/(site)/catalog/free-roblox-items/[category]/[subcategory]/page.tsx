@@ -6,12 +6,10 @@ import {
   BASE_PATH,
   appendItemCountToSeoTitle,
   buildFreeItemCategoryPath,
-  loadFreeItemCategories,
   loadFreeItemCategoryBySlug,
   loadFreeItemSubcategories,
   loadFreeItemSubcategoryBySlug,
   loadFreeItemsPageData,
-  resolveFreeItemsSearch,
   renderRobloxFreeItemsPage
 } from "../../page-data";
 
@@ -19,7 +17,6 @@ export const revalidate = 21600;
 
 type PageProps = {
   params: Promise<{ category: string; subcategory: string }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateStaticParams() {
@@ -76,7 +73,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function RobloxFreeItemsSubcategoryPage({ params, searchParams }: PageProps) {
+export default async function RobloxFreeItemsSubcategoryPage({ params }: PageProps) {
   const { category: categorySlug, subcategory: subcategorySlug } = await params;
   const category = await loadFreeItemCategoryBySlug(categorySlug);
   if (!category) {
@@ -87,15 +84,12 @@ export default async function RobloxFreeItemsSubcategoryPage({ params, searchPar
   if (!subcategory) {
     notFound();
   }
-  const search = await resolveFreeItemsSearch(searchParams);
 
   const [subcategories, pageData] = await Promise.all([
     loadFreeItemSubcategories(category.label),
     loadFreeItemsPageData(1, {
       category: category.label,
-      subcategory: subcategory.label,
-      search: search.search,
-      sort: search.sort
+      subcategory: subcategory.label
     })
   ]);
   const { items, total, totalPages } = pageData;
@@ -124,8 +118,6 @@ export default async function RobloxFreeItemsSubcategoryPage({ params, searchPar
     categorySlug: category.slug,
     categoryLabel: category.label,
     subcategories,
-    activeSubcategorySlug: subcategory.slug,
-    search: search.search,
-    sort: search.sort
+    activeSubcategorySlug: subcategory.slug
   });
 }

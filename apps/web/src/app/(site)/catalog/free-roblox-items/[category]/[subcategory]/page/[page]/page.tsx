@@ -9,12 +9,10 @@ import {
   buildFreeItemCatalogCodeCandidates,
   buildFreeItemCategoryPath,
   buildFreeItemsCatalogContentHtml,
-  loadFreeItemCategories,
   loadFreeItemCategoryBySlug,
   loadFreeItemSubcategories,
   loadFreeItemSubcategoryBySlug,
   loadFreeItemsPageData,
-  resolveFreeItemsSearch,
   renderRobloxFreeItemsPage
 } from "../../../../page-data";
 
@@ -22,7 +20,6 @@ export const revalidate = 21600;
 
 type PageProps = {
   params: Promise<{ category: string; subcategory: string; page: string }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 const FREE_ITEMS_CONTENT_CODES = buildFreeItemCatalogCodeCandidates();
@@ -85,7 +82,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function RobloxFreeItemsSubcategoryPaginatedPage({ params, searchParams }: PageProps) {
+export default async function RobloxFreeItemsSubcategoryPaginatedPage({ params }: PageProps) {
   const { category: categorySlug, subcategory: subcategorySlug, page } = await params;
   const category = await loadFreeItemCategoryBySlug(categorySlug);
   if (!category) {
@@ -99,15 +96,12 @@ export default async function RobloxFreeItemsSubcategoryPaginatedPage({ params, 
 
   const pageNumber = Number.parseInt(page, 10);
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
-  const search = await resolveFreeItemsSearch(searchParams);
 
   const [subcategories, pageData, catalog] = await Promise.all([
     loadFreeItemSubcategories(category.label),
     loadFreeItemsPageData(safePageNumber, {
       category: category.label,
-      subcategory: subcategory.label,
-      search: search.search,
-      sort: search.sort
+      subcategory: subcategory.label
     }),
     getCatalogPageContentByCodes(FREE_ITEMS_CONTENT_CODES)
   ]);
@@ -139,8 +133,6 @@ export default async function RobloxFreeItemsSubcategoryPaginatedPage({ params, 
     categoryLabel: category.label,
     subcategories,
     activeSubcategorySlug: subcategory.slug,
-    contentHtml,
-    search: search.search,
-    sort: search.sort
+    contentHtml
   });
 }
