@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, User, X } from "lucide-react";
@@ -13,6 +13,7 @@ import {
   SheetTitle
 } from "@/components/ui/sheet";
 import { SidebarSearch } from "@/components/SidebarSearch";
+import { SiteFeedbackButton } from "@/components/SiteFeedbackButton";
 import { SiteLogo } from "@/components/SiteLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { isNavLinkActive, siteNavLinks, type SidebarAccount } from "@/lib/site-navigation";
@@ -48,6 +49,10 @@ export function MobileSiteHeader({ account, initialPathname }: MobileSiteHeaderP
   const pathname = usePathname() ?? initialPathname;
   const closeMenu = () => setOpen(false);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/95 backdrop-blur xl:hidden">
@@ -63,6 +68,7 @@ export function MobileSiteHeader({ account, initialPathname }: MobileSiteHeaderP
             <Menu aria-hidden className="h-5 w-5" />
           </Button>
           <SiteLogo className="h-8" />
+          <SiteFeedbackButton className="ml-auto px-3" labelClassName="hidden sm:inline" />
         </div>
       </header>
 
@@ -78,18 +84,18 @@ export function MobileSiteHeader({ account, initialPathname }: MobileSiteHeaderP
 
           <div className="flex h-full w-full flex-col">
             <div className="px-3 pb-2 pt-5">
-              <div className="relative flex min-h-11 items-center justify-center">
-                <SiteLogo className="h-10" />
+              <div className="flex min-h-11 items-center gap-3">
                 <Button
                   type="button"
                   variant="ghost"
                   size="icon"
                   onClick={closeMenu}
                   aria-label="Close menu"
-                  className="absolute right-0 h-9 w-9 rounded-lg text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                  className="h-9 w-9 rounded-lg text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
                 >
                   <X aria-hidden className="h-4 w-4" />
                 </Button>
+                <SiteLogo className="h-10" />
               </div>
             </div>
 

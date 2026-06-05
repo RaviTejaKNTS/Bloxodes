@@ -436,6 +436,17 @@ function buildGroupedSections(items: ForgeCatalogItem[], groupKey: string) {
   }));
 }
 
+export function buildForgeCatalogSidebarSections(
+  config: ForgeCatalogConfig,
+  dataset: ForgeCatalogDataset
+): Array<{ id: string; label: string; count: number }> {
+  return buildGroupedSections(dataset.items, config.groupKey).map((section) => ({
+    id: section.id,
+    label: section.label,
+    count: section.items.length
+  }));
+}
+
 function resolveDataUpdatedAt(meta: ForgeDatasetMeta | null): string | null {
   if (!meta) return null;
   if (meta.updatedAt) return meta.updatedAt;

@@ -30,6 +30,8 @@ After the first-pass `final.json`, run the FLOW pass from `agents/content/flow-p
 
 Before importing catalog copy, verify that the route actually renders the confirmed item count, card sections, card fields, and images. Do not assume the renderer will pick the right field because the dataset contains it. If the cards should be grouped by `Walls` and `Floors` but the route is grouping by blank `rarity` values, fix the renderer or add the confirmed grouping behavior first. If the cards show raw prose, raw pros/cons arrays, nested stats, unclear yes/no values, or fields that do not help the player compare items, clean the data shape or add a renderer override before calling the page done.
 
+Card compactness is part of the data contract. Game-catalog item cards should be minimal quick-reference cards: image/name/status, one compact item description, then a small key-value block with only decision-changing facts. Model cards after the Bagel Bunny shape, not the overstuffed Honored One shape. Long move lists, strategy paragraphs, awakened variants, version history, caveats, and raw field dumps belong in a table, details view, page copy, or a separate guide section when they are genuinely needed. The card should let a player understand and compare the item at a glance, without reading paragraphs inside the card.
+
 ## Trigger
 
 Follow this workflow when adding pages for a game dataset under `data/<Game>/`, especially for repeated Roblox game wiki/catalog work such as Adopt Me, Blox Fruits, Brookhaven RP, Sailor Piece, Steal a Brainrot, The Forge, Grow a Garden, or future games.
@@ -212,8 +214,14 @@ Catalog blurbs on wiki hubs must explain the collection as a game system. They a
 - Do not expose raw internal keys when a clean label is possible.
 - Group items by the field players naturally scan first, such as rarity, category, region, world, source, or type.
 - Use badges for short category/status values.
-- Use table/card descriptions for details that need a sentence.
+- Use one short card description for the item's core role or obtainment when that helps scanning. Do not write paragraphs inside cards.
+- Use key-value data points for comparison facts, and choose the few that matter for the collection instead of showing every available field.
+- Do not repeat the same fact in the card description and the key-value data. If data already says availability, cost, HP, source, or role, the description should add different item-specific meaning or be skipped.
+- It is acceptable for a card to have only data, only a description, or both. Choose the shape that gives the most useful information with the least repetition.
+- Use color only for one actionable status signal, such as available, unavailable, retired, trade-only, event, limited, or seasonal.
+- Give slightly stronger visual weight to one primary decision field for the collection, such as source, value, price, damage, level, or unlock route. Keep the rest quiet.
 - Keep empty values visually quiet. Prefer `Not listed` or blank over invented filler.
+- Move long move lists, pros/cons, strategy, version history, and edge-case caveats out of cards unless the route has a deliberate compact details mode.
 - If a dataset is huge, add simple navigation or filters before adding more prose.
 - Include all items. Do not cherry-pick only popular items.
 

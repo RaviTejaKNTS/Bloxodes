@@ -878,8 +878,6 @@ export function renderRobloxMusicIdsPage({
 
         <CatalogAdSlot />
 
-        <MusicCatalogNav active="all" />
-
         <div className="catalog-surface space-y-6">
           <MusicIdsFilterForm basePath={BASE_PATH} search={search} sort={sort} />
           <MusicIdGrid songs={songs} />

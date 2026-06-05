@@ -80,6 +80,7 @@ Fail the final edit and rewrite before import if public copy contains:
 - vague field-first claims without definition: `source explains`, `availability explains`, `rarity explains`, `seats explain`, `price explains`, `uses explain`, `field matters`, `value context`
 - unexplained values such as `Yes`, `No`, `3`, `common`, `available`, or `limited` in public prose without a visible label or gameplay explanation
 - catalog cards or tables that render raw long descriptions, raw HTML, raw `pros`/`cons`, nested object dumps, vague meta descriptions, or unlabeled values that do not help the player compare items
+- game-catalog cards that read like mini articles instead of quick references: full move lists, long awakened/special variants, strategy paragraphs, version history, raw caveats, or every available data field crammed into the card
 - catalog research that found missing items, mismatched counts, or missing expected images but continued to final copy without a resolved data action
 - catalog research that found source-backed player-useful facts, such as prices, stats, upgrade steps, shops, chances, requirements, locations, or route order, but continued to final copy without adding them to data/cards/body or marking them unavailable
 - catalog or game-catalog copy that explains why data is missing more prominently than it explains what the player should do
@@ -124,6 +125,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - For catalog and game-catalog pages, the data and image audit in `research-notes.md` is resolved before import. Missing items, stale fields, and image gaps must be fixed or explicitly accepted.
 - The confirmed `description_json` keys match the route's actual section labels. If the route renders `Other`, `Rarity`, or another unexpected group while the notes are written for different sections, the page fails final edit.
 - The confirmed card/table fields match the route's actual rendered fields. If the cards are still showing raw descriptions, raw `pros`/`cons`, nested stats, source HTML, vague meta text, or unexplained yes/no values, the page fails final edit even if the prose is good.
+- For game-catalog cards, the route follows the minimal quick-reference shape from `agents/content/page-types/game-catalog-pages.md`: one compact item description plus a small set of chosen key-value facts. Depth is still required, but it should live in body copy, tables, details views, or guide sections when it cannot stay scannable.
 - `controls_json` is researched, source-noted, accurate, and not empty for a completed wiki page.
 - Only include fields the destination table owns.
 
@@ -162,6 +164,9 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - The route's actual section labels have been checked against `description_json`.
 - The route's actual card/table fields have been checked against the approved card data plan.
 - Cards and tables contain clean comparison data, not raw prose, raw arrays, nested objects, HTML, or unlabeled yes/no values.
+- Game-catalog cards are compact enough to scan at a glance. They should not contain paragraphs, long move lists, raw caveat blocks, full version history, or every field in the dataset.
+- Game-catalog card visuals use restraint: color is reserved for one actionable status signal, and only one primary decision field gets stronger visual weight.
+- Game-catalog card descriptions and key-value rows do not repeat the same facts. If the description only restates visible data, the card fails final edit.
 - `description_json` explains the confirmed sections in concise player language when section notes are used.
 - `description_md` gives whole-page context about mechanics, obtainment, value, availability, or player mistakes without repeating section-level notes.
 - `description_md` includes at least one clear action section, such as how to get, find, unlock, farm, grow, hatch, roll, craft, equip, travel, compare, or use the items, unless research notes explain why the collection is passive.
@@ -180,6 +185,9 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - Confusing fields are defined in gameplay terms.
 - The item-card section style is based on real in-game meaning, not only the easiest dataset sort.
 - The item-card data shape is based on player usefulness, not on whatever fields happen to exist in the dataset.
+- Each default item card uses one short description and only the key-value facts that help the player compare, unlock, buy, use, trade, or avoid the item.
+- Each default item card has at most one colored status signal and one visually emphasized decision field.
+- Each default item card gives the description and the data rows separate jobs. Cards may skip the description, skip the data block, or show both when both add distinct value.
 - `description_md` has enough depth when the system needs it. Do not compress complex systems into two vague paragraphs.
 - The FLOW pass has rewritten awkward section order, random headings, and choppy transitions before final edit.
 - The page teaches the collection before asking the reader to compare values.

@@ -29,6 +29,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Game wiki hubs that link editorial controls/tips to `roblox_universes` automation.
 - `wiki_catalog_pages`, `wiki_catalog_pages_view`
   - Game-specific collection pages rendered under `/wiki/<game-slug>/<collection-slug>`, with stable `code` values kept for scripts, search, and old catalog URL redirects.
+  - Use `display_name` for clean navigation labels such as `Domains` or `Characters`; keep `title`/`seo_title` as full page/SEO titles. Use `item_count` for catalog navigation counts instead of parsing titles.
 - `tools`, `tools_view`
   - Tool copy and tool indexes.
 - `catalog_pages`, `catalog_pages_view`

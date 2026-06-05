@@ -179,6 +179,62 @@ After confirmation, check the route's real section output before writing to the 
 
 Check the route's real card output too. Cards should be clean reference surfaces, not mini articles. Keep pure data that helps a player compare items: source, price, rarity, chance, requirement, best use, role, strength, limit, availability, damage, seats, reward type, or a similar concrete field. Do not render raw long descriptions, raw pros/cons arrays, nested object dumps, unexplained yes/no values, or vague meta text. If a page needs pros and cons, translate them into short fields like `Strength`, `Limit`, `Best for`, or `Trade note`.
 
+## Minimal Card Standard
+
+Game-catalog cards should feel closer to the Bagel Bunny card than the Honored One card. A card is a quick reference surface. It is not the place to squeeze in every paragraph, every caveat, every move list, and every database field.
+
+Use this shape for each item card:
+
+1. Name, image, and the strongest status label when available, such as rarity, availability, type, or source.
+2. One short description paragraph that explains the item's core role in plain player language. This paragraph should be unique to the item, but it should stay compact. One or two short sentences is usually enough.
+3. A small key-value data block with only the facts a player would scan to compare, unlock, buy, use, trade, or avoid the item.
+
+The description and data block must not repeat each other. The description should add item-specific meaning that the data rows do not already say: how the item feels in play, what its role changes, why it is awkward, what situation it fits, or what makes it different from nearby entries. Do not write `Availability Free public character` or `Cost Free` in the description when those same facts appear as data rows. If the only thing you can say is already covered by data, skip the description. If the item is better explained as one sentence and there are no useful row-level facts, skip the data block. Depth is welcome, but each piece of the card needs its own job.
+
+There is no fixed number of data points. Choose the useful facts, then stop. A pet card might only need `Eggs`, `Merchants`, and `Abilities`. A weapon card might need `Source`, `Damage`, `Requirement`, and `Best for`. A vehicle card might need `Price`, `Shop`, `Seats`, and `Availability`. If a field does not change a player decision, hide it from the card or explain it elsewhere.
+
+Keep the visual emphasis just as selective. Cards may use color for one actionable status signal, such as `Available`, `Unavailable`, `Retired`, `Trade only`, `Event`, `Limited`, or `Seasonal`. Use green for available, red or muted red for unavailable/retired/trade-only, and amber for event/limited/seasonal. Cards may also visually strengthen one primary decision field for the collection, such as `Source` for pets, `Value` for crops, `Price` for vehicles, `Damage` for weapons, `Level` for islands, or `Unlock` for cosmetics. Everything else should stay quiet key-value text.
+
+Good minimal card description:
+
+```text
+Bagel Bunny is a common Grow a Garden pet that hatches from Gourmet Egg.
+```
+
+Good card data:
+
+```text
+Eggs: 1
+Merchants: 0
+Abilities: 0
+```
+
+Avoid this pattern:
+
+```text
+Availability Free public character • Cost Free
+Base Moves 5
+1: Lapse Blue
+2: Reversal Red
+3: Rapid Punches
+4: Twofold Kick
+R: Limitless
+Awakening or Special Six Eyes: Lapse Blue MAX, Reversal Red MAX, Hollow Purple, Infinite Void, Limitless, Unlimited Purple, 0.2 Domain
+Role Ranged pressure and domain control
+Strength Blue, Red, Purple, and Infinite Void give clear ranged and domain pressure.
+Limit Strong tools still need clean spacing because predictable ranged pressure can be blocked, baited, or interrupted.
+Version Added V1.00
+Version Finished V1.00
+```
+
+That card has useful facts, but it forces the user to read a mini article inside a card. Split this kind of material instead:
+
+- Keep the card to `Availability`, `Cost`, `HP`, `Role`, and maybe one compact `Special` or `Best for` field.
+- Move long move lists, awakened variants, combos, strategy, version history, and caveats into a table, details view, `description_md`, or a dedicated guide section if the page truly needs them.
+- Convert paragraphs into short key-value fields only when the label is obvious and the value can be scanned quickly.
+
+The card test is simple: a player should understand the item in one glance, then use the data points to compare it with nearby cards. If the card needs multiple wrapped paragraphs to be understood, the page needs a cleaner card shape or a separate explanatory section.
+
 ## Writing Pattern
 
 Good game catalog copy usually covers:

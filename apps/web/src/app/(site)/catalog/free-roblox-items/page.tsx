@@ -81,7 +81,6 @@ export default async function RobloxFreeItemsPage() {
       { label: "Catalog", href: "/catalog" },
       { label: "Roblox free items", href: null }
     ],
-    basePath: BASE_PATH,
-    navActive: "all"
+    basePath: BASE_PATH
   });
 }

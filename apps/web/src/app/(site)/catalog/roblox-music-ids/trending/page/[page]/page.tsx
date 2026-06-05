@@ -8,7 +8,6 @@ import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates }
 import {
   BASE_PATH,
   MusicBreadcrumb,
-  MusicCatalogNav,
   TrendingMusicList,
   buildMusicItemListSchema,
   loadTrendingMusicIdsPageData
@@ -113,8 +112,6 @@ export default async function TrendingMusicIdsPaginatedPage({ params }: PageProp
       </header>
 
       <CatalogAdSlot />
-
-      <MusicCatalogNav active="trending" />
 
       <TrendingMusicList songs={songs} />
 

@@ -22,24 +22,17 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
       enableJourney={isProduction && enableLocalConsent}
       enableLocalConsent={enableLocalConsent}
     >
-      <SiteShell
-        integrations={
-          <>
-            {!enableLocalConsent && isProduction ? (
-              <script
-                type="text/javascript"
-                async
-                data-noptimize="1"
-                data-cfasync="false"
-                src={JOURNEY_SCRIPT_SRC}
-              />
-            ) : null}
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
-          </>
-        }
-      >
-        {children}
-      </SiteShell>
+      {!enableLocalConsent && isProduction ? (
+        <script
+          type="text/javascript"
+          async
+          data-noptimize="1"
+          data-cfasync="false"
+          src={JOURNEY_SCRIPT_SRC}
+        />
+      ) : null}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
+      <SiteShell>{children}</SiteShell>
     </PublicSiteProviders>
   );
 }

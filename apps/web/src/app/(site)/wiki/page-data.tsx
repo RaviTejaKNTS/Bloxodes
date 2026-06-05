@@ -1052,6 +1052,7 @@ function WikiCatalogCta({
   return (
     <Link
       href={href}
+      scroll
       className="group relative isolate flex min-h-[128px] w-full overflow-hidden rounded-lg border border-border/60 bg-surface/80 px-6 py-5 text-foreground shadow-sm transition hover:border-accent/60 dark:text-white md:min-h-[136px]"
     >
       {images.length ? (

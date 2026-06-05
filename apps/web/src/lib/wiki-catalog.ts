@@ -12,6 +12,8 @@ export type WikiCatalogPageContent = {
   collection_slug: string;
   code: string;
   title: string;
+  display_name?: string | null;
+  item_count?: number | null;
   seo_title: string;
   meta_description: string;
   intro_md: string | null;
@@ -39,6 +41,8 @@ export type WikiCatalogListEntry = Pick<
   | "collection_slug"
   | "code"
   | "title"
+  | "display_name"
+  | "item_count"
   | "meta_description"
   | "thumb_url"
   | "wiki_md"
@@ -51,7 +55,7 @@ export type WikiCatalogListEntry = Pick<
 
 const WIKI_CATALOG_REVALIDATE_SECONDS = 86400;
 const WIKI_CATALOG_SELECT_FIELDS =
-  "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at, content_updated_at";
+  "id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, seo_title, meta_description, intro_md, how_it_works_md, description_md, description_json, faq_json, schema_ld_json, thumb_url, wiki_md, wiki_sort_order, is_published, published_at, created_at, updated_at, content_updated_at";
 const BYPASS_WIKI_CATALOG_CACHE = process.env.NODE_ENV === "development";
 
 function normalizeSlug(value: string): string {
@@ -183,7 +187,7 @@ export async function listPublishedWikiCatalogPagesByUniverseId(
   const supabase = supabaseAdmin();
   let query = supabase
     .from("wiki_catalog_pages_view")
-    .select("id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, published_at, created_at, updated_at, content_updated_at")
+    .select("id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, meta_description, thumb_url, wiki_md, wiki_sort_order, published_at, created_at, updated_at, content_updated_at")
     .eq("is_published", true)
     .eq("universe_id", universeId)
     .order("wiki_sort_order", { ascending: true, nullsFirst: false })
@@ -211,7 +215,7 @@ export async function listPublishedWikiCatalogPagesByWikiSlug(
   const supabase = supabaseAdmin();
   let query = supabase
     .from("wiki_catalog_pages_view")
-    .select("id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, meta_description, thumb_url, wiki_md, wiki_sort_order, published_at, created_at, updated_at, content_updated_at")
+    .select("id, wiki_page_id, universe_id, wiki_slug, collection_slug, code, title, display_name, item_count, meta_description, thumb_url, wiki_md, wiki_sort_order, published_at, created_at, updated_at, content_updated_at")
     .eq("is_published", true)
     .eq("wiki_slug", normalizedWikiSlug)
     .order("wiki_sort_order", { ascending: true, nullsFirst: false })

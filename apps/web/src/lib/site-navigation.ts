@@ -57,6 +57,14 @@ export const siteNavLinks: SiteNavLink[] = [
   { href: "/quizzes", label: "Quizzes", icon: Award }
 ];
 
+export const topNavLinks: SiteNavLink[] = [
+  { href: "/wiki", label: "Wiki", icon: BookOpen },
+  { href: "/codes", label: "Codes", icon: KeyRound },
+  { href: "/catalog", label: "Catalogs", icon: LayoutGrid },
+  { href: "/tools", label: "Tools", icon: Wrench },
+  { href: "/stats", label: "Stats", icon: BarChart3 }
+];
+
 export const signedOutSidebarAccount: SidebarAccount = {
   avatarUrl: null,
   href: "/login?next=%2Faccount",

@@ -43,6 +43,8 @@ Also confirm the player-usefulness gate and required fact matrix. `research-note
 
 Also confirm the rendered section and card contracts. The `description_json` keys must match the sections the route actually renders, not the sections the writer hopes it renders. If the route groups by `rarity`, `Other`, or another field while the copy is written for `Walls`, `Floors`, `Common`, `Legendary`, or another section set, the content is not ready. If the cards show raw long descriptions, raw `pros`/`cons`, nested objects, source HTML, vague meta text, or unexplained yes/no values, the content is not ready either.
 
+For game-catalog cards, enforce the minimal card standard from `agents/content/page-types/game-catalog-pages.md`. Cards should have one compact item description and a small key-value block of player-useful facts. Reject cards that read like mini articles, especially cards with full move lists, long awakened/special variants, repeated strategy paragraphs, version history, raw caveats, or every available data field. Useful depth belongs in the page body, a table, a details view, or a separate guide section when needed, not in the default card surface.
+
 Count contracts matter too. Count-based titles should match local data and rendered cards unless the notes explain why they intentionally differ. Intent contracts matter as much as counts: if the title promises `how to get`, `locations`, `drops`, `chances`, `brewing`, `crafting`, `value`, `effects`, or another specific answer, the page must deliver that answer in the intro, cards, `description_md`, `how_it_works_md`, and FAQ where appropriate.
 
 If a normal player can ask "what does that mean?" after a sentence and the surrounding copy does not answer it, the sentence still fails.
@@ -63,6 +65,7 @@ Do not mark the content ready unless:
 - the visible title and `seo_title` are unique, well-defined, count-accurate when they include a count, and fully supported by the page body
 - `description_json` keys match the route's actual rendered section labels
 - rendered card/table fields match the approved card data plan
+- game-catalog cards follow the minimal quick-reference shape: short description plus chosen key-value facts, not paragraphs or raw field dumps
 - title counts, dataset counts, and rendered counts match or have a recorded intentional reason
 - `final.json` is valid and shaped for the target table
 - article output uses a simple SEO-friendly title, a non-null author, an edited feature image, and the card/detail pages are verified to show the same author and cover after import

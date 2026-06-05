@@ -83,16 +83,6 @@ function buildAllNavTitle(parent: AvatarCatalogConfig): string {
   return `All ${parent.title}`;
 }
 
-function resolveAvatarCatalogPrimaryNavParent(route: AvatarCatalogRouteState): AvatarCatalogConfig {
-  return resolveAvatarCatalogTopLevelConfig(AVATAR_CATALOG_MASTER_CODE) ?? route.topLevelConfig;
-}
-
-function resolveAvatarCatalogPrimaryActiveCode(route: AvatarCatalogRouteState): string {
-  if (route.config.code === AVATAR_CATALOG_MASTER_CODE) return AVATAR_CATALOG_MASTER_CODE;
-  if (route.topLevelConfig.parentCode === AVATAR_CATALOG_MASTER_CODE) return route.topLevelConfig.code;
-  return route.config.code;
-}
-
 function resolveAvatarCatalogSecondaryNavParent(route: AvatarCatalogRouteState): AvatarCatalogConfig | null {
   if (route.config.code === AVATAR_CATALOG_MASTER_CODE) return null;
   if (route.topLevelConfig.parentCode !== AVATAR_CATALOG_MASTER_CODE) return null;
@@ -206,26 +196,6 @@ export async function loadAvatarCatalogPageData(
   }
 }
 
-async function loadAvatarCatalogNavCounts(parent: AvatarCatalogConfig): Promise<Map<string, number>> {
-  const navTargets: Array<Pick<AvatarCatalogConfig, "code" | "scope">> = [
-    { code: parent.code, scope: parent.scope },
-    ...(parent.children ?? []).map((child) => ({ code: child.code, scope: child.scope }))
-  ];
-  if (!navTargets.length) return new Map();
-
-  const entries = await Promise.all(
-    navTargets.map(async (target) => {
-      try {
-        return [target.code, await getAvatarCatalogCount({ code: target.code, scope: target.scope })] as const;
-      } catch (error) {
-        console.error(`Failed to load avatar catalog count for ${target.code}`, error);
-        return [target.code, 0] as const;
-      }
-    })
-  );
-  return new Map(entries);
-}
-
 function buildAvatarCatalogItemListSchema({
   title,
   description,
@@ -273,85 +243,6 @@ function buildAvatarCatalogItemListSchema({
     numberOfItems: total,
     itemListElement
   });
-}
-
-function AvatarCatalogNav({
-  parent,
-  activeCode,
-  navCounts
-}: {
-  parent: AvatarCatalogConfig;
-  activeCode: string;
-  navCounts: Map<string, number>;
-}) {
-  const children = parent.children ?? [];
-  if (!children.length) return null;
-  const navItems = [
-    {
-      code: parent.code,
-      title: buildAllNavTitle(parent),
-      description: parent.description,
-      href: parent.basePath
-    },
-    ...children.map((child) => ({
-      code: child.code,
-      title: child.title,
-      description: child.description,
-      href: buildChildHref(parent, child)
-    }))
-  ];
-
-  return (
-    <section className="catalog-surface grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      {navItems.map((item) => {
-        const isActive = item.code === activeCode;
-        const count = navCounts.get(item.code) ?? 0;
-        const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${
-          isActive
-            ? "border-accent/60 bg-accent/10"
-            : "border-border/70 bg-surface/80 hover:border-accent/55"
-        }`;
-        const card = (
-          <article className={cardClasses} aria-current={isActive ? "page" : undefined}>
-            <span
-              aria-hidden
-              className={`absolute inset-x-0 top-0 h-1 ${
-                isActive ? "bg-accent" : "bg-accent/30 group-hover:bg-accent/60"
-              }`}
-            />
-            <div className="flex h-full flex-col gap-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="text-lg font-semibold text-foreground">{item.title}</p>
-                {isActive ? (
-                  <span className="rounded-md bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
-                    Active
-                  </span>
-                ) : null}
-              </div>
-              <p className="text-sm text-muted">{item.description}</p>
-              <p className="mt-auto text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                {formatCount(count)} {count === 1 ? "item" : "items"}
-              </p>
-            </div>
-          </article>
-        );
-
-        if (isActive) {
-          return (
-            <div key={item.code} className="h-full" aria-current="page">
-              {card}
-            </div>
-          );
-        }
-
-        return (
-          <Link key={item.code} href={item.href} className="block h-full">
-            {card}
-          </Link>
-        );
-      })}
-    </section>
-  );
 }
 
 function AvatarCatalogSubnav({
@@ -585,13 +476,10 @@ export async function renderAvatarCatalogPage({
   route: AvatarCatalogRouteState;
   filters: AvatarCatalogResolvedSearch;
 }) {
-  const primaryNavParent = resolveAvatarCatalogPrimaryNavParent(route);
   const secondaryNavParent = resolveAvatarCatalogSecondaryNavParent(route);
-  const primaryActiveCode = resolveAvatarCatalogPrimaryActiveCode(route);
-  const [{ items, total, totalPages }, catalog, navCounts] = await Promise.all([
+  const [{ items, total, totalPages }, catalog] = await Promise.all([
     loadAvatarCatalogPageData(route.config, route.page, filters),
-    getCatalogPageContentByCodes([route.config.code]),
-    loadAvatarCatalogNavCounts(primaryNavParent)
+    getCatalogPageContentByCodes([route.config.code])
   ]);
   const contentHtml = await buildAvatarCatalogContentHtml(catalog);
   const pageTitle = contentHtml?.title?.trim() ? contentHtml.title.trim() : route.config.title;
@@ -667,8 +555,6 @@ export async function renderAvatarCatalogPage({
         {introNodes && showHero ? introNodes : null}
 
         <CatalogAdSlot />
-
-        <AvatarCatalogNav parent={primaryNavParent} activeCode={primaryActiveCode} navCounts={navCounts} />
 
         <AvatarCatalogSubnav parent={secondaryNavParent} activeCode={route.config.code} />
 

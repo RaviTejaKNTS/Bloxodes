@@ -105,7 +105,6 @@ export default async function RobloxFreeItemsCategoryPage({ params }: PageProps)
       { label: category.label, href: null }
     ],
     basePath,
-    navActive: category.slug,
     categorySlug: category.slug,
     categoryLabel: category.label,
     subcategories,

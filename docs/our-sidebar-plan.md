@@ -24,6 +24,8 @@ The left sidebar should answer: "What is useful from here?"
 
 It should change by page type and page context instead of showing the same list everywhere.
 
+Current implementation rule: keep the left sidebar global and stable. Put game/catalog-specific navigation in the page top bar, and render no top bar on pages that do not have contextual navigation.
+
 ## Page Examples
 
 Game pages:

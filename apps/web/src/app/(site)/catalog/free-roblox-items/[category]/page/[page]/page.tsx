@@ -116,7 +116,6 @@ export default async function RobloxFreeItemsCategoryPaginatedPage({ params }: P
       { label: `Page ${safePageNumber}`, href: null }
     ],
     basePath,
-    navActive: category.slug,
     categorySlug: category.slug,
     categoryLabel: category.label,
     subcategories,

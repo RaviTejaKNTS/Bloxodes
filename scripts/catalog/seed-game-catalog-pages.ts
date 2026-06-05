@@ -27,6 +27,8 @@ type WikiCatalogPageUpsert = {
   collection_slug: string;
   code: string;
   title: string;
+  display_name: string;
+  item_count: number;
   seo_title: string;
   meta_description: string;
   intro_md: string;
@@ -226,6 +228,8 @@ async function buildRows(
       collection_slug: config.slug,
       code: pageCopy.code,
       title: pageCopy.title,
+      display_name: config.label,
+      item_count: dataset.rows.length,
       seo_title: pageCopy.seo_title,
       meta_description: pageCopy.meta_description,
       intro_md: pageCopy.intro_md,

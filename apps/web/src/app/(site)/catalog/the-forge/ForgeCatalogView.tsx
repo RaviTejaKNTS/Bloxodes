@@ -41,7 +41,7 @@ type ForgeCatalogDisplayStat = {
   label: string;
   value: string;
   parts?: string[];
-  tone?: "positive" | "negative" | "neutral";
+  tone?: "positive" | "negative" | "warning" | "neutral";
 };
 
 type BooleanishValue = {
@@ -196,135 +196,18 @@ const CARD_STAT_OVERRIDES: Record<string, string[]> = {
   "rivals-wraps": ["source", "sourceType", "appliesTo", "sourceWeapon", "availability", "motion", "specialNote"],
   "rivals-finishers": ["source", "availability", "sourceNote", "rarity"],
   "rivals-ugc": ["itemType", "price", "availability", "rewardSummary", "creatorName", "robloxId", "sourceNote"],
-  "jujutsu-shenanigans-characters": [
-    "availability",
-    "cost",
-    "hp",
-    "baseMoves",
-    "awakeningOrSpecial",
-    "domain",
-    "role",
-    "strength",
-    "limit",
-    "versionAdded",
-    "versionFinished"
-  ],
-  "jujutsu-shenanigans-domains": [
-    "character",
-    "domainType",
-    "trigger",
-    "duration",
-    "effect",
-    "counterplay",
-    "clashInvasionRule",
-    "availability",
-    "notes"
-  ],
-  "jujutsu-shenanigans-items": [
-    "type",
-    "source",
-    "price",
-    "location",
-    "effect",
-    "damageHeal",
-    "usesBreakRule",
-    "storageDropDespawn",
-    "availability",
-    "modeServerLimitation"
-  ],
-  "jujutsu-shenanigans-gamemodes": [
-    "access",
-    "objective",
-    "playersTeams",
-    "lives",
-    "mapPool",
-    "winCondition",
-    "rewardSummary",
-    "progressionImpact",
-    "specialRules",
-    "availability"
-  ],
-  "jujutsu-shenanigans-maps": [
-    "status",
-    "modeAccess",
-    "arenaType",
-    "bestFor",
-    "landmarks",
-    "itemSpawns",
-    "hazards",
-    "specialRules"
-  ],
-  "jujutsu-shenanigans-emotes": [
-    "category",
-    "source",
-    "availability",
-    "costObtainment",
-    "movement",
-    "partnerType",
-    "killInteractiveBehavior",
-    "effect"
-  ],
-  "jujutsu-shenanigans-cosmetics": [
-    "type",
-    "unlockRoute",
-    "cost",
-    "currency",
-    "availability",
-    "status",
-    "equipUseContext",
-    "achievementRequirement",
-    "audioStatus"
-  ],
-  "jujutsu-shenanigans-titles": [
-    "titleType",
-    "requirement",
-    "availability",
-    "whoCanUse",
-    "displayBehavior",
-    "sourceNote"
-  ],
-  "jujutsu-shenanigans-interactables": [
-    "type",
-    "location",
-    "cost",
-    "requirement",
-    "modeServerLimitation",
-    "effect",
-    "baseDamage",
-    "specialInteractions",
-    "relatedMoves",
-    "availability",
-    "itemsPageOverlap"
-  ],
-  "jujutsu-shenanigans-achievements": [
-    "requirement",
-    "reward",
-    "titleReward",
-    "emoteReward",
-    "difficulty",
-    "availability",
-    "modeOrCharacter",
-    "notes"
-  ],
-  "jujutsu-shenanigans-build-blocks": [
-    "category",
-    "function",
-    "inputs",
-    "outputs",
-    "triggerBehavior",
-    "settings",
-    "builderUse",
-    "limitations"
-  ],
-  "jujutsu-shenanigans-skill-builder-nodes": [
-    "nodeType",
-    "purpose",
-    "valueType",
-    "defaultOrRange",
-    "usedFor",
-    "relatedNodes",
-    "notes"
-  ],
+  "jujutsu-shenanigans-characters": ["availability", "cost", "hp", "role"],
+  "jujutsu-shenanigans-domains": ["availability", "character", "duration", "domainType"],
+  "jujutsu-shenanigans-items": ["availability", "source", "price", "damageHeal", "location"],
+  "jujutsu-shenanigans-gamemodes": ["availability", "access", "lives", "mapPool", "rewardSummary"],
+  "jujutsu-shenanigans-maps": ["status", "modeAccess", "arenaType", "bestFor"],
+  "jujutsu-shenanigans-emotes": ["availability", "source", "costObtainment", "movement"],
+  "jujutsu-shenanigans-cosmetics": ["availability", "unlockRoute", "cost", "type", "audioStatus"],
+  "jujutsu-shenanigans-titles": ["availability", "requirement", "titleType", "sourceNote"],
+  "jujutsu-shenanigans-interactables": ["availability", "location", "cost", "baseDamage", "type"],
+  "jujutsu-shenanigans-achievements": ["availability", "requirement", "reward", "difficulty", "modeOrCharacter"],
+  "jujutsu-shenanigans-build-blocks": ["availability", "category", "inputs", "outputs", "builderUse"],
+  "jujutsu-shenanigans-skill-builder-nodes": ["status", "nodeType", "valueType", "defaultOrRange", "usedFor"],
   ores: ["dropChance", "multiplier", "sellPrice", "trait"],
   weapons: ["baseDamage", "attackSpeed", "range", "sellPrice"],
   armors: ["baseHealth", "sellPrice", "chance"],
@@ -518,6 +401,29 @@ function formatBooleanStat(label: string, value: string): ForgeCatalogDisplaySta
   };
 }
 
+function getStatusTone(label: string, value: string): ForgeCatalogDisplayStat["tone"] | null {
+  const loweredLabel = label.trim().toLowerCase();
+  if (!["availability", "available", "status"].includes(loweredLabel)) return null;
+
+  const loweredValue = value.toLowerCase();
+  if (/\b(retired|removed|unavailable|not available|trade only|unobtainable|not obtainable|disabled|inactive)\b/.test(loweredValue)) {
+    return "negative";
+  }
+  if (/\b(event|limited|seasonal|early access|exclusive|shop pool|random roll|maintain)\b/.test(loweredValue)) {
+    return "warning";
+  }
+  if (/\b(available|current|free|default|source-backed|public|private server|obtainable|complete)\b/.test(loweredValue)) {
+    return "positive";
+  }
+
+  return null;
+}
+
+function getStatusLabel(label: string): string {
+  const loweredLabel = label.trim().toLowerCase();
+  return ["availability", "available", "status"].includes(loweredLabel) ? "Status" : label;
+}
+
 function formatBadgeValue(key: string, value: unknown): string | null {
   const normalized = normalizeValue(value);
   if (!normalized) return null;
@@ -605,10 +511,12 @@ function buildDisplayStat(label: string, value: unknown): ForgeCatalogDisplaySta
 
   const displayValue = normalizeDisplayText(normalized);
   const parts = splitStatParts(label, displayValue);
+  const statusTone = getStatusTone(label, displayValue);
   return {
-    label,
+    label: statusTone ? getStatusLabel(label) : label,
     value: displayValue,
-    parts: parts ?? undefined
+    parts: parts ?? undefined,
+    tone: statusTone ?? undefined
   };
 }
 
@@ -640,6 +548,7 @@ function buildStatEntries(item: ForgeCatalogItem, config: ForgeCatalogConfig) {
 function getStatToneClass(stat: ForgeCatalogDisplayStat): string {
   if (stat.tone === "positive") return "text-emerald-300";
   if (stat.tone === "negative") return "text-rose-300";
+  if (stat.tone === "warning") return "text-amber-300";
   return "text-foreground";
 }
 
@@ -791,6 +700,7 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
   const stats = buildStatEntries(item, config);
   const image = resolveImageSrc(item.image ?? null);
   const showImage = !config.hideImages;
+  const primaryStatIndex = stats.findIndex((stat) => !stat.tone);
 
   return (
     <article
@@ -835,19 +745,16 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
           <dl className="mt-auto space-y-3 border-t border-border/60 pt-4">
             {stats.map((stat, index) =>
               stat.parts?.length ? (
-                <div key={`${stat.label}-${index}`} className="space-y-2">
-                  <div className="flex items-center justify-between gap-3">
-                    <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{stat.label}</dt>
-                    <dd className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
-                      {stat.parts.length.toLocaleString("en-US")}
-                    </dd>
-                  </div>
-                  <dd>
+                <div key={`${stat.label}-${index}`} className="grid grid-cols-[minmax(5rem,0.42fr)_minmax(0,1fr)] gap-3">
+                  <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{stat.label}</dt>
+                  <dd className="min-w-0">
                     <ul className="space-y-1">
                       {stat.parts.slice(0, 6).map((part, partIndex) => (
                         <li
                           key={`${part}-${partIndex}`}
-                          className="text-sm font-medium leading-snug text-foreground [overflow-wrap:anywhere]"
+                          className={`leading-snug [overflow-wrap:anywhere] ${
+                            index === primaryStatIndex ? "text-[0.94rem] font-bold" : "text-sm font-semibold"
+                          } ${getStatToneClass(stat)}`}
                         >
                           {part}
                         </li>
@@ -864,7 +771,9 @@ function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: Forge
                 <div key={`${stat.label}-${index}`} className="grid grid-cols-[minmax(5rem,0.42fr)_minmax(0,1fr)] gap-3">
                   <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{stat.label}</dt>
                   <dd
-                    className={`min-w-0 text-sm font-semibold leading-snug [overflow-wrap:anywhere] ${getStatToneClass(stat)}`}
+                    className={`min-w-0 leading-snug [overflow-wrap:anywhere] ${
+                      index === primaryStatIndex ? "text-[0.94rem] font-bold" : "text-sm font-semibold"
+                    } ${getStatToneClass(stat)}`}
                   >
                     {stat.value}
                   </dd>

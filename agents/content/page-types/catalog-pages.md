@@ -123,6 +123,8 @@ Before saving or importing, verify the route will actually render those sections
 
 Verify the rendered card fields too. Cards and tables should show pure comparison data that helps the player act: source, price, rarity, chance, requirement, best use, role, strength, limit, availability, damage, seats, reward type, or another concrete field. Do not render raw long prose, raw `pros`/`cons`, nested object dumps, source HTML, vague meta descriptions, or unexplained `Yes`/`No` values. If a page needs pros and cons, translate them into short labeled fields such as `Strength`, `Limit`, `Best for`, `Trade note`, or the equivalent for that collection.
 
+For game-catalog item cards, also apply the minimal card standard in `agents/content/page-types/game-catalog-pages.md`: one compact item description plus a small key-value block of chosen player-useful facts. Do not let default cards become mini articles with long move lists, strategy paragraphs, version history, raw caveats, or every available field.
+
 ## Data And Image Audit
 
 When a catalog page has item data, add a `Data and image audit` section to `research-notes.md` before final writing.
@@ -279,6 +281,7 @@ Avoid FAQ entries like:
 - Did the route actually render those section labels, and do the `description_json` keys match them?
 - Did the route actually render the approved card/table fields?
 - Are raw descriptions, raw `pros`/`cons`, nested stats, HTML, vague meta fields, and unexplained yes/no values absent from the cards?
+- For game-catalog cards, does each default card stay compact enough to scan at a glance?
 - After import, did local Supabase read back the updated `description_json`, and did the local page visibly render at least one section note?
 - Does `description_json` explain each section in one to three useful sentences without repeating `description_md`?
 - Does the page define unclear terms before relying on them?

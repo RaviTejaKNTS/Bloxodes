@@ -35,7 +35,7 @@ Workspace: `tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/`
 - [ ] Propose visible title, matching `seo_title`, exact title promise, and required coverage. For wiki catalog pages, use `All <N> <Item Or Collection> in <Game>: <real player SEO question>` unless notes justify a simpler title.
 - [ ] Propose how every required fact will be answered in cards, tables, `description_md`, `how_it_works_md`, FAQ, or route changes.
 - [ ] Propose strongest grouping axis and why it fits the game.
-- [ ] Propose card fields, raw fields to hide, `description_json` keys, and whole-page `description_md` plan.
+- [ ] Propose compact card shape: one short item description, key-value facts to show, raw/long fields to hide, `description_json` keys, and whole-page `description_md` plan.
 - [ ] Get explicit user confirmation before final copy, dataset updates, or Supabase updates.
 
 ## Write And Verify
@@ -45,4 +45,6 @@ Workspace: `tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/`
 - [ ] Run FLOW pass and record it in `research-notes.md`.
 - [ ] Run final edit.
 - [ ] Confirm `description_md` headings are specific and communicative, not generic labels such as `How <collection> works`, `Overview`, `Value`, or `Source`.
+- [ ] Confirm rendered cards follow the minimal card standard: no paragraphs, long move lists, raw caveats, full version history, or every available field in the default card.
+- [ ] Confirm rendered cards use only one colored status signal and one visually emphasized primary decision field.
 - [ ] Verify local import/readback and rendered route counts, sections, fields, images, intro, descriptions, FAQs, and wiki hub blurb.

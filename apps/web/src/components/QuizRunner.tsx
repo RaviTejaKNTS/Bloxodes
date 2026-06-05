@@ -53,10 +53,6 @@ function formatDifficulty(value: Difficulty) {
   return "Hard";
 }
 
-function getStorageKey(quizCode: string) {
-  return `quiz:${quizCode}:state:v${STORAGE_VERSION}`;
-}
-
 function buildQuestionMap(quizData: QuizData) {
   const map = new Map<string, { question: QuizQuestion; difficulty: Difficulty }>();
   for (const question of quizData.easy ?? []) {
@@ -145,6 +141,10 @@ function sanitizeAnswers(
     }
   }
   return result;
+}
+
+function getStorageKey(quizCode: string) {
+  return `quiz:${quizCode}:state:v${STORAGE_VERSION}`;
 }
 
 export function QuizRunner(props: QuizRunnerProps) {

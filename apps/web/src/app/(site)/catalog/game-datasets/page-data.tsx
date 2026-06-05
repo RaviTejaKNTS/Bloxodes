@@ -79,6 +79,7 @@ type CatalogSectionOverride = {
   additionalColumns?: string[];
   maxStats?: number;
   hideImages?: boolean;
+  subtitleKeys?: string[];
   transformItem?: (item: GameDatasetCatalogItem) => GameDatasetCatalogItem;
   transformItems?: (items: GameDatasetCatalogItem[]) => GameDatasetCatalogItem[];
 };
@@ -851,6 +852,56 @@ const JUJUTSU_SHENANIGANS_SKILL_BUILDER_SECTION_ORDER = [
   "Timing references"
 ];
 
+const JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS = [
+  "baseMoves",
+  "awakeningOrSpecial",
+  "trigger",
+  "counterplay",
+  "clashInvasionRule",
+  "usesBreakRule",
+  "storageDropDespawn",
+  "objective",
+  "playersTeams",
+  "winCondition",
+  "progressionImpact",
+  "specialRules",
+  "landmarks",
+  "itemSpawns",
+  "hazards",
+  "killInteractiveBehavior",
+  "equipUseContext",
+  "achievementRequirement",
+  "whoCanUse",
+  "displayBehavior",
+  "modeServerLimitation",
+  "specialInteractions",
+  "relatedMoves",
+  "titleReward",
+  "emoteReward",
+  "modeOrCharacter",
+  "triggerBehavior",
+  "settings",
+  "limitations",
+  "relatedNodes",
+  "verificationNote",
+  "notes"
+];
+
+function firstJujutsuValue(item: GameDatasetCatalogItem, keys: string[]): string | null {
+  for (const key of keys) {
+    const value = normalizeValue(item[key]);
+    if (value) return value;
+  }
+  return null;
+}
+
+function withJujutsuCardSummary(keys: string[]) {
+  return (item: GameDatasetCatalogItem): GameDatasetCatalogItem => ({
+    ...item,
+    cardSummary: firstJujutsuValue(item, keys)
+  });
+}
+
 const SURVIVE_ZOMBIE_ARENA_CLASS_SECTION_ORDER = [
   "Starter and first unlocks",
   "Early utility unlocks",
@@ -1544,6 +1595,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: (item) => normalizeValue(item.status),
     hiddenKeys: [
       "status",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
       "sourcePage",
       "wikiUrl",
       "sourceImageUrl",
@@ -1552,7 +1604,10 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "imageStatus",
       "sortOrder"
     ],
-    maxStats: 11
+    additionalColumns: ["cardSummary"],
+    maxStats: 4,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["strength", "limit"])
   },
   "jujutsu-shenanigans-domains": {
     groupKey: "catalogSection",
@@ -1561,6 +1616,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: getCatalogSection,
     hiddenKeys: [
       "catalogSection",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
       "sourcePage",
       "wikiUrl",
       "sourceImageUrl",
@@ -1569,8 +1625,10 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "imageStatus",
       "sortOrder"
     ],
-    additionalColumns: ["catalogSection"],
-    maxStats: 9
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 4,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["effect", "notes", "counterplay"])
   },
   "jujutsu-shenanigans-items": {
     groupKey: "catalogSection",
@@ -1579,6 +1637,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: getCatalogSection,
     hiddenKeys: [
       "catalogSection",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
       "sourcePage",
       "wikiUrl",
       "sourceImageUrl",
@@ -1587,8 +1646,10 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "verificationNote",
       "sortOrder"
     ],
-    additionalColumns: ["catalogSection"],
-    maxStats: 10
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["effect"])
   },
   "jujutsu-shenanigans-gamemodes": {
     groupKey: "modeGroup",
@@ -1598,6 +1659,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     hiddenKeys: [
       "modeGroup",
       "category",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
       "sourceStatus",
       "sourcePage",
       "supportingSources",
@@ -1607,8 +1669,10 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "imageStatus",
       "sortOrder"
     ],
-    additionalColumns: ["modeGroup"],
-    maxStats: 10
+    additionalColumns: ["modeGroup", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["objective", "progressionImpact"])
   },
   "jujutsu-shenanigans-maps": {
     groupKey: "catalogSection",
@@ -1617,6 +1681,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: getCatalogSection,
     hiddenKeys: [
       "catalogSection",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
       "sourcePage",
       "sourceImageUrl",
       "sourceConfidence",
@@ -1624,8 +1689,10 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "imageStatus",
       "sortOrder"
     ],
-    additionalColumns: ["catalogSection"],
-    maxStats: 8
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["specialRules", "landmarks", "itemSpawns"])
   },
   "jujutsu-shenanigans-emotes": {
     groupKey: "catalogSection",
@@ -1634,6 +1701,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: getCatalogSection,
     hiddenKeys: [
       "catalogSection",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
       "imageStatus",
       "sourcePage",
       "sourceImageUrl",
@@ -1641,19 +1709,31 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "verificationNote",
       "sortOrder"
     ],
-    additionalColumns: ["catalogSection"],
-    maxStats: 8,
-    hideImages: true
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 4,
+    hideImages: true,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["effect", "source", "movement"])
   },
   "jujutsu-shenanigans-cosmetics": {
     groupKey: "category",
     groupLabel: "Cosmetic type",
     sectionOrder: JUJUTSU_SHENANIGANS_COSMETIC_SECTION_ORDER,
     getSectionLabel: (item) => normalizeValue(item.category),
-    hiddenKeys: ["category", "imageStatus", "sourcePage", "wikiUrl", "sourceImageUrl", "verificationNote"],
-    additionalColumns: ["category"],
-    maxStats: 9,
-    hideImages: true
+    hiddenKeys: [
+      "category",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
+      "imageStatus",
+      "sourcePage",
+      "wikiUrl",
+      "sourceImageUrl",
+      "verificationNote"
+    ],
+    additionalColumns: ["category", "cardSummary"],
+    maxStats: 5,
+    hideImages: true,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["equipUseContext", "unlockRoute", "audioStatus"])
   },
   "jujutsu-shenanigans-titles": {
     groupKey: "catalogSection",
@@ -1662,15 +1742,18 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: getCatalogSection,
     hiddenKeys: [
       "catalogSection",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
       "sourcePage",
       "wikiUrl",
       "imageStatus",
       "verificationNote",
       "sortOrder"
     ],
-    additionalColumns: ["catalogSection"],
-    maxStats: 6,
-    hideImages: true
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 4,
+    hideImages: true,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["whoCanUse", "displayBehavior"])
   },
   "jujutsu-shenanigans-interactables": {
     groupKey: "catalogSection",
@@ -1679,6 +1762,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: getCatalogSection,
     hiddenKeys: [
       "catalogSection",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
       "sourcePage",
       "wikiUrl",
       "sourceImageUrl",
@@ -1687,18 +1771,22 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "verificationNote",
       "sortOrder"
     ],
-    additionalColumns: ["catalogSection"],
-    maxStats: 11
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["effect", "specialInteractions"])
   },
   "jujutsu-shenanigans-achievements": {
     groupKey: "catalogSection",
     groupLabel: "Achievement group",
     sectionOrder: JUJUTSU_SHENANIGANS_ACHIEVEMENT_SECTION_ORDER,
     getSectionLabel: getCatalogSection,
-    hiddenKeys: ["catalogSection", "sourcePage", "wikiUrl", "verificationNote"],
-    additionalColumns: ["catalogSection"],
-    maxStats: 8,
-    hideImages: true
+    hiddenKeys: ["catalogSection", ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS, "sourcePage", "wikiUrl", "verificationNote"],
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    hideImages: true,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["notes"])
   },
   "jujutsu-shenanigans-build-blocks": {
     groupKey: "catalogSection",
@@ -1707,6 +1795,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: getCatalogSection,
     hiddenKeys: [
       "catalogSection",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
       "sourcePage",
       "supportingSources",
       "sourceConfidence",
@@ -1714,9 +1803,11 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "verificationNote",
       "sortOrder"
     ],
-    additionalColumns: ["catalogSection"],
-    maxStats: 8,
-    hideImages: true
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    hideImages: true,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["function", "triggerBehavior"])
   },
   "jujutsu-shenanigans-skill-builder-nodes": {
     groupKey: "catalogSection",
@@ -1725,15 +1816,18 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: getCatalogSection,
     hiddenKeys: [
       "catalogSection",
+      ...JUJUTSU_SHENANIGANS_VERBOSE_CARD_KEYS,
       "sourcePage",
       "sourceRevision",
       "imageStatus",
       "verificationNote",
       "sortOrder"
     ],
-    additionalColumns: ["catalogSection"],
-    maxStats: 7,
-    hideImages: true
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    hideImages: true,
+    subtitleKeys: [],
+    transformItem: withJujutsuCardSummary(["purpose", "notes"])
   },
   "99-nights-in-the-forest-classes": {
     groupKey: "status",
@@ -5029,6 +5123,7 @@ const SUBTITLE_KEY_PRIORITY = [
 ];
 
 const DESCRIPTION_KEY_PRIORITY = [
+  "cardSummary",
   "description",
   "overview",
   "summary",
@@ -5357,14 +5452,16 @@ function buildViewConfig(
     dataset,
     DESCRIPTION_KEY_PRIORITY.filter((key) => !hiddenFieldKeys.has(key))
   );
-  const subtitleKeys = SUBTITLE_KEY_PRIORITY.filter(
-    (key) =>
-      columns.includes(key) &&
-      !hiddenFieldKeys.has(key) &&
-      key !== groupKey &&
-      key !== badgeKey &&
-      hasUsefulValues(dataset.items, key)
-  ).slice(0, 2);
+  const subtitleKeys =
+    sectionOverride?.subtitleKeys ??
+    SUBTITLE_KEY_PRIORITY.filter(
+      (key) =>
+        columns.includes(key) &&
+        !hiddenFieldKeys.has(key) &&
+        key !== groupKey &&
+        key !== badgeKey &&
+        hasUsefulValues(dataset.items, key)
+    ).slice(0, 2);
   const statKeys = [
     ...STAT_KEY_PRIORITY.filter((key) => columns.includes(key) && hasUsefulValues(dataset.items, key)),
     ...columns.filter((key) => !hiddenFieldKeys.has(key) && hasUsefulValues(dataset.items, key))
@@ -5486,6 +5583,19 @@ function buildGroupedSections(
       label,
       items: entries
     }));
+}
+
+export function buildGameDatasetCatalogSidebarSections(
+  config: GameDatasetCatalogConfig,
+  dataset: GameDatasetCatalogDataset
+): Array<{ id: string; label: string; count: number }> {
+  const { dataset: displayDataset, sectionOverride } = withCatalogSectionOverride(config, dataset);
+  const viewConfig = buildViewConfig(config, displayDataset, sectionOverride);
+  return buildGroupedSections(displayDataset.items, viewConfig.groupKey, sectionOverride?.sectionOrder).map((section) => ({
+    id: section.id,
+    label: section.label,
+    count: section.items.length
+  }));
 }
 
 function pickFirstExistingKey(columns: string[], keys: string[]): string | null {

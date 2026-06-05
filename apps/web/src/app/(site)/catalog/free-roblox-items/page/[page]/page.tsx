@@ -96,7 +96,6 @@ export default async function RobloxFreeItemsPaginatedPage({ params }: PageProps
       { label: `Page ${safePageNumber}`, href: null }
     ],
     basePath: BASE_PATH,
-    navActive: "all",
     contentHtml
   });
 }

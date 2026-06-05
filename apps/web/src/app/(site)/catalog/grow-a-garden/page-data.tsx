@@ -653,6 +653,17 @@ function buildGroupedSections(items: GrowGardenCatalogItem[], groupKey: string) 
     }));
 }
 
+export function buildGrowGardenCatalogSidebarSections(
+  config: GrowGardenCatalogConfig,
+  dataset: GrowGardenCatalogDataset
+): Array<{ id: string; label: string; count: number }> {
+  return buildGroupedSections(dataset.items, config.groupKey).map((section) => ({
+    id: section.id,
+    label: section.label,
+    count: section.items.length
+  }));
+}
+
 export async function loadGrowGardenCatalogDataset(config: GrowGardenCatalogConfig): Promise<GrowGardenCatalogDataset> {
   try {
     return await readGrowGardenDataset(config);

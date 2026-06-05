@@ -7,12 +7,12 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { isNavLinkActive, siteNavLinks, type SidebarAccount } from "@/lib/site-navigation";
 import { cn } from "@/lib/utils";
 
-const DESKTOP_NAV_ID = "site-sidebar-primary-nav";
-
 type SiteSidebarProps = {
   account: SidebarAccount;
   pathname: string;
 };
+
+const DESKTOP_NAV_ID = "site-sidebar-primary-nav";
 
 function AccountIcon({ account }: { account: SidebarAccount }) {
   if (account.avatarUrl) {
