@@ -17,13 +17,25 @@ export async function GET(request: Request) {
     return NextResponse.json({ gameNav: null, catalogNav: null });
   }
 
-  const [gameNav, catalogNav] = await Promise.all([getGameTopNavContext(path), getCatalogTopNavContext(path)]);
-  return NextResponse.json(
-    { gameNav, catalogNav },
-    {
-      headers: {
-        "Cache-Control": "no-store"
+  try {
+    const [gameNav, catalogNav] = await Promise.all([getGameTopNavContext(path), getCatalogTopNavContext(path)]);
+    return NextResponse.json(
+      { gameNav, catalogNav },
+      {
+        headers: {
+          "Cache-Control": "no-store"
+        }
       }
-    }
-  );
+    );
+  } catch (error) {
+    console.error("Failed to load game top nav", error);
+    return NextResponse.json(
+      { gameNav: null, catalogNav: null },
+      {
+        headers: {
+          "Cache-Control": "no-store"
+        }
+      }
+    );
+  }
 }
