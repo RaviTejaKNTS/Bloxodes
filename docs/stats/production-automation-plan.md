@@ -29,6 +29,7 @@ As of this setup pass:
 - Northflank account `_1` has two cron jobs in project `bloxodes`:
   - `stats-hot-hourly`
   - `stats-daily-ranks`
+- Both Northflank jobs successfully built from commit `1074eed3df6af4e88a3932435a7f3aef0c22bdbf`.
 - Those Northflank jobs are intentionally suspended until the production `SUPABASE_SERVICE_ROLE` is set in Northflank and the jobs are unsuspended.
 - The VPS has a separate user-level Docker worker under:
   - `/home/codex-admin/bloxodes-stats-worker`
