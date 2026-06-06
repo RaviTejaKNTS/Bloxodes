@@ -536,7 +536,12 @@ async function fetchUniversePage(
     query = query.eq("stats_tier", tier);
   }
 
-  if (mode === "light") {
+  if (tier !== "ALL") {
+    const enrichedColumn = mode === "light" ? "last_light_enriched_at" : "last_deep_enriched_at";
+    query = query
+      .order(enrichedColumn, { ascending: true, nullsFirst: true })
+      .order("universe_id", { ascending: true });
+  } else if (mode === "light") {
     query = query
       .order("last_light_enriched_at", { ascending: true, nullsFirst: true })
       .order("stats_tier", { ascending: true, nullsFirst: false })

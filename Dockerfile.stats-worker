@@ -20,4 +20,4 @@ COPY apps/web/tsconfig.json ./apps/web/tsconfig.json
 COPY types ./types
 COPY data ./data
 
-CMD ["sh", "-lc", "${STATS_WORKER_COMMAND:-npm run stats:audit}"]
+CMD ["sh", "-lc", "eval \"${STATS_WORKER_COMMAND:-npm run stats:audit}\""]
