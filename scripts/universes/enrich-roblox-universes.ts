@@ -26,6 +26,7 @@ const RETRY_LIMIT = Number(process.env.ROBLOX_ENRICH_RETRY_LIMIT ?? "6");
 const RETRY_BASE_DELAY_MS = Number(process.env.ROBLOX_ENRICH_RETRY_BASE_DELAY_MS ?? "5000");
 const RETRY_MAX_DELAY_MS = Number(process.env.ROBLOX_ENRICH_RETRY_MAX_DELAY_MS ?? "120000");
 const WRITE_LEGACY_DAILY_STATS = process.env.ROBLOX_ENRICH_WRITE_DAILY_STATS === "true";
+const MIN_TIERED_ENRICHMENT_PAGE_SIZE = Number(process.env.ROBLOX_ENRICH_MIN_TIERED_PAGE_SIZE ?? "100");
 
 type EnrichmentMode = "light" | "deep";
 
@@ -1481,8 +1482,12 @@ async function main() {
     if (totalLimit > 0 && remaining <= 0) break;
     const pageSize =
       totalLimit > 0 ? Math.min(SUPABASE_PAGE_LIMIT, Math.max(remaining, 0)) : SUPABASE_PAGE_LIMIT;
+    const fetchSize =
+      tier !== "ALL" && pageSize > 0
+        ? Math.min(SUPABASE_PAGE_LIMIT, Math.max(pageSize, MIN_TIERED_ENRICHMENT_PAGE_SIZE))
+        : pageSize;
 
-    const page = await fetchUniversePage(pageOffset, pageSize, mode, tier);
+    const page = await fetchUniversePage(pageOffset, fetchSize, mode, tier);
     if (!page.length) break;
 
     for (let i = 0; i < page.length; i += batchSize) {
