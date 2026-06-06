@@ -29,20 +29,20 @@ As of this setup pass:
 - Northflank account `_1` has two cron jobs in project `bloxodes`:
   - `stats-hot-hourly`
   - `stats-daily-ranks`
-- Both Northflank jobs successfully built from commit `1074eed3df6af4e88a3932435a7f3aef0c22bdbf`.
-- Those Northflank jobs are intentionally suspended until the production `SUPABASE_SERVICE_ROLE` is set in Northflank and the jobs are unsuspended.
+- Both Northflank jobs successfully built from commit `eb80aef9dc6aa556f90062e921c4cf2c18bd56d3`.
+- Both Northflank jobs have production runtime env set in Northflank and automatic cron scheduling enabled.
+- `stats-hot-hourly` runs at `12 * * * *` UTC with `Forbid` concurrency.
+- `stats-daily-ranks` runs at `50 0 * * *` UTC with `Forbid` concurrency.
+- One-off Northflank audit override runs succeeded after activation:
+  - `stats-hot-hourly`: `2026-06-06T09:44:08Z` to `2026-06-06T09:45:08Z`
+  - `stats-daily-ranks`: `2026-06-06T09:44:12Z` to `2026-06-06T09:45:07Z`
 - The VPS has a separate user-level Docker worker under:
   - `/home/codex-admin/bloxodes-stats-worker`
 - The VPS worker image `bloxodes-stats-worker:production` has been built from the `production` branch.
 - The VPS user crontab has the marked `BLOXODES_STATS_WORKER` block for NEW, WARM, COLD, discovery, deep enrichment, audit, and daily worker image refresh.
 - A manual VPS `stats:audit` run succeeded against production.
 
-Remaining activation step:
-
-1. Add the production `SUPABASE_SERVICE_ROLE` to the two Northflank jobs.
-2. Unsuspend `stats-hot-hourly` and `stats-daily-ranks`.
-
-That final Northflank secret step must be done manually in Northflank or explicitly approved in this thread because it uploads the production service-role key to a third-party service.
+The Northflank `_1` secret upload was explicitly approved in-thread before activation.
 
 References:
 
