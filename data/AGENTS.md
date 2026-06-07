@@ -45,6 +45,9 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
   - Dataset-backed 99 Nights in the Forest wiki/catalog content, including classes, crafting, materials, weapons, tools, food, tameable animals, entities, locations, and `quiz.json`.
   - `quiz.json` is the local question pool for `/quizzes/99-nights-in-the-forest`; follow `agents/content/page-types/quizzes.md` when editing it.
   - Keep quiz and catalog facts source-backed. Do not add active code names, live event statuses, temporary reward tracks, or disputed exact values such as unresolved item costs.
+- `data/Sell Lemons/*`
+  - Dataset-backed Sell Lemons wiki/catalog and quiz content, including income sources, powers, secret unlocks, evolution stages, locations, and `quiz.json`.
+  - `quiz.json` is the local question pool for `/quizzes/sell-lemons`; use stable progression, power, secret, Evolution, and location facts rather than unverified upgrade rows or source-conflicted secret-step sequences.
 - `data/Kick a Lucky Block/*`
   - Dataset-backed Kick a Lucky Block wiki/catalog content, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki catalogs.
   - Matching item images live under `apps/web/public/Kick a Lucky Block/` for brainrots, weights, zones, and official Roblox page media. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.

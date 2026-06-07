@@ -149,6 +149,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Local 99 Nights in the Forest game datasets for wiki/catalog page work, including classes, crafting, materials, weapons, tools, food, tameable animals, entities, locations, and quiz content.
   - `quiz.json` is the local question pool for `/quizzes/99-nights-in-the-forest`; use the `QuizData` shape with 10 easy, 10 medium, and 10 hard questions when possible.
   - Keep quiz questions tied to stable survival, crafting, rescue, class, taming, weapon, material, and route facts. Do not store active codes, live event statuses, temporary reward tracks, or unresolved disputed facts here.
+- `data/Sell Lemons/*.json`
+  - Local Sell Lemons game datasets for wiki/catalog and quiz page work, including income sources, powers, secret unlocks, evolution stages, locations, and quiz content.
+  - `quiz.json` is the local question pool for `/quizzes/sell-lemons`; keep hard questions tied to stable progression and reset concepts, not unverified upgrade rows, unstable exact costs, or source-conflicted UFO/Purity/Sewer step sequences.
 - `data/Kick a Lucky Block/*.json`
   - Local Kick a Lucky Block game datasets for wiki/catalog page work, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki catalogs.
   - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
