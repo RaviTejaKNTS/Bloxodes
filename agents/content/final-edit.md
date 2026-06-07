@@ -81,6 +81,9 @@ Fail the final edit and rewrite before import if public copy contains:
 - unexplained values such as `Yes`, `No`, `3`, `common`, `available`, or `limited` in public prose without a visible label or gameplay explanation
 - catalog cards or tables that render raw long descriptions, raw HTML, raw `pros`/`cons`, nested object dumps, vague meta descriptions, or unlabeled values that do not help the player compare items
 - game-catalog cards that read like mini articles instead of quick references: full move lists, long awakened/special variants, strategy paragraphs, version history, raw caveats, or every available data field crammed into the card
+- game-catalog cards that do not follow the production card template: valid image when available, name/status, one short player-facing description, and a compact key-value block
+- game-catalog card values or descriptions that expose research/process language such as `source notes`, `source estimate`, `source-backed`, `needs in-game check`, `needs verification`, `verification`, `partial`, `source-conflicted`, `reported by`, `current sources`, `dataset`, `API`, or similar wording
+- row images filled with weak substitutes such as raw Roblox API thumbnails, generic game icons, broad hero art, edited guide thumbnails, site-branded cover art, arrows/callouts, or nearby screenshots that do not clearly show the card subject
 - catalog research that found missing items, mismatched counts, or missing expected images but continued to final copy without a resolved data action
 - catalog research that found source-backed player-useful facts, such as prices, stats, upgrade steps, shops, chances, requirements, locations, or route order, but continued to final copy without adding them to data/cards/body or marking them unavailable
 - catalog or game-catalog copy that explains why data is missing more prominently than it explains what the player should do
@@ -165,6 +168,11 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - The route's actual card/table fields have been checked against the approved card data plan.
 - Cards and tables contain clean comparison data, not raw prose, raw arrays, nested objects, HTML, or unlabeled yes/no values.
 - Game-catalog cards are compact enough to scan at a glance. They should not contain paragraphs, long move lists, raw caveat blocks, full version history, or every field in the dataset.
+- Game-catalog cards follow the production card template: row image only when valid, name/status, one short description by default, then a compact key-value block.
+- Game-catalog cards usually show 3-5 key-value facts. If more than 5 are shown, research notes explain why and rendered proof shows the card still scans cleanly.
+- Game-catalog card descriptions are present unless research notes explain why the collection works better as pure data.
+- Game-catalog card text is casual player-facing game language. It does not mention sources, verification, research, datasets, APIs, or internal uncertainty states.
+- Game-catalog row images are real row-representative images when present. If valid images are missing, image fields stay empty and the missing image count is recorded.
 - Game-catalog card visuals use restraint: color is reserved for one actionable status signal, and only one primary decision field gets stronger visual weight.
 - Game-catalog card descriptions and key-value rows do not repeat the same facts. If the description only restates visible data, the card fails final edit.
 - `description_json` explains the confirmed sections in concise player language when section notes are used.
@@ -186,6 +194,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - The item-card section style is based on real in-game meaning, not only the easiest dataset sort.
 - The item-card data shape is based on player usefulness, not on whatever fields happen to exist in the dataset.
 - Each default item card uses one short description and only the key-value facts that help the player compare, unlock, buy, use, trade, or avoid the item.
+- Each default item card follows this order: image when valid, name/status, short description, compact key-value facts.
 - Each default item card has at most one colored status signal and one visually emphasized decision field.
 - Each default item card gives the description and the data rows separate jobs. Cards may skip the description, skip the data block, or show both when both add distinct value.
 - `description_md` has enough depth when the system needs it. Do not compress complex systems into two vague paragraphs.

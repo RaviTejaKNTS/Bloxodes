@@ -1256,6 +1256,83 @@ const DRESS_TO_IMPRESS_VIP_ITEM_SECTION_ORDER = [
 ];
 
 const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
+  "sell-lemons-income-sources": {
+    groupKey: "progression_stage",
+    groupLabel: "Progression stage",
+    sectionOrder: ["Early active setup", "Mid-game scaling", "Late-game reset value", "Endgame/global scaling"],
+    getSectionLabel: (item) => normalizeValue(item.progression_stage) ?? "Other",
+    hiddenKeys: [
+      "progression_stage",
+      "sourcePage",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus",
+      "sourceImageUrl",
+      "wikiUrl"
+    ],
+    additionalColumns: ["progression_stage"],
+    maxStats: 4,
+    subtitleKeys: []
+  },
+  "sell-lemons-powers": {
+    groupKey: "catalogSection",
+    groupLabel: "Power phase",
+    sectionOrder: ["Early and midgame utility", "Scaling and automation", "Deep reset and endgame"],
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: ["catalogSection", "phase", "order", "unlock", "resetNote", "sourceConfidence", "verificationNote", "imageStatus", "sourcePage"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 3,
+    subtitleKeys: []
+  },
+  "sell-lemons-secret-unlocks": {
+    groupKey: "unlockChain",
+    groupLabel: "Unlock chain",
+    sectionOrder: ["Sewer chain", "UFO chain", "Completion chain"],
+    getSectionLabel: (item) => normalizeValue(item.unlockChain) ?? "Other",
+    hiddenKeys: [
+      "unlockChain",
+      "evidenceBadges",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus",
+      "sourcePage",
+      "prerequisite",
+      "verification"
+    ],
+    additionalColumns: ["unlockChain"],
+    maxStats: 4,
+    subtitleKeys: []
+  },
+  "sell-lemons-evolution-stages": {
+    groupKey: "catalogSection",
+    groupLabel: "Stage group",
+    sectionOrder: ["Current fruit stages"],
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Current fruit stages",
+    hiddenKeys: [
+      "catalogSection",
+      "stageOrder",
+      "sourceStatus",
+      "sourcePage",
+      "secondarySourcePage",
+      "imageStatus",
+      "sortOrder",
+      "verification",
+      "incomeSourceNaming"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 4,
+    subtitleKeys: []
+  },
+  "sell-lemons-locations": {
+    groupKey: "catalogSection",
+    groupLabel: "Route section",
+    sectionOrder: ["Early and mid-game route", "Secret route", "Endgame route"],
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: ["catalogSection", "sortOrder", "keyObjectsOrNpcs", "rewardOrReason", "verification"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 4,
+    subtitleKeys: []
+  },
   "dress-to-impress-themes": {
     groupKey: "catalogSection",
     groupLabel: "Theme type",
@@ -1442,8 +1519,9 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupLabel: "World",
     sectionOrder: SPEED_KEYBOARD_STAGE_SECTION_ORDER,
     getSectionLabel: getCatalogSection,
-    hiddenKeys: ["catalogSection", "imageStatus", "sortOrder"],
-    maxStats: 9
+    hiddenKeys: ["catalogSection", "imageStatus", "sortOrder", "sourcePage", "secondarySourcePage", "sourceStatus"],
+    maxStats: 4,
+    hideImages: true
   },
   "1-speed-keyboard-escape-treadmills": {
     groupKey: "catalogSection",
@@ -1835,7 +1913,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: NINETY_NINE_NIGHTS_CLASS_SECTION_ORDER,
     getSectionLabel: (item) => normalizeValue(item.status),
     hiddenKeys: ["status", "currency", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
-    maxStats: 9
+    maxStats: 5
   },
   "99-nights-in-the-forest-crafting": {
     groupKey: "catalogSection",
@@ -1843,7 +1921,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: NINETY_NINE_NIGHTS_CRAFTING_SECTION_ORDER,
     getSectionLabel: getCatalogSection,
     hiddenKeys: ["catalogSection", "ingredients", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
-    maxStats: 9
+    maxStats: 5
   },
   "99-nights-in-the-forest-entities": {
     groupKey: "catalogSection",
@@ -1851,7 +1929,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: NINETY_NINE_NIGHTS_ENTITY_SECTION_ORDER,
     getSectionLabel: getCatalogSection,
     hiddenKeys: ["catalogSection", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
-    maxStats: 9
+    maxStats: 5
   },
   "99-nights-in-the-forest-locations": {
     groupKey: "biomeGroup",
@@ -1859,7 +1937,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: NINETY_NINE_NIGHTS_LOCATION_SECTION_ORDER,
     getSectionLabel: (item) => normalizeValue(item.biomeGroup),
     hiddenKeys: ["biomeGroup", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
-    maxStats: 8
+    maxStats: 5
   },
   "99-nights-in-the-forest-weapons": {
     groupKey: "category",
@@ -1867,7 +1945,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: NINETY_NINE_NIGHTS_WEAPON_SECTION_ORDER,
     getSectionLabel: (item) => normalizeValue(item.category),
     hiddenKeys: ["category", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
-    maxStats: 9
+    maxStats: 5
   },
   "99-nights-in-the-forest-tools": {
     groupKey: "category",
@@ -1875,7 +1953,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: NINETY_NINE_NIGHTS_TOOL_SECTION_ORDER,
     getSectionLabel: (item) => normalizeValue(item.category),
     hiddenKeys: ["category", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
-    maxStats: 8
+    maxStats: 5
   },
   "99-nights-in-the-forest-tameable-animals": {
     groupKey: "fluteLevel",
@@ -1895,7 +1973,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "imageStatus",
       "sortOrder"
     ],
-    maxStats: 9
+    maxStats: 5
   },
   "99-nights-in-the-forest-food": {
     groupKey: "type",
@@ -1903,7 +1981,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: NINETY_NINE_NIGHTS_FOOD_SECTION_ORDER,
     getSectionLabel: (item) => normalizeValue(item.type),
     hiddenKeys: ["type", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
-    maxStats: 9
+    maxStats: 5
   },
   "99-nights-in-the-forest-materials": {
     groupKey: "catalogSection",
@@ -1911,7 +1989,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: NINETY_NINE_NIGHTS_MATERIAL_SECTION_ORDER,
     getSectionLabel: getCatalogSection,
     hiddenKeys: ["catalogSection", ...NINETY_NINE_NIGHTS_SOURCE_KEYS],
-    maxStats: 9
+    maxStats: 5
   },
   "survive-zombie-arena-classes": {
     groupKey: "catalogSection",
@@ -1927,7 +2005,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: SURVIVE_ZOMBIE_ARENA_WEAPON_SECTION_ORDER,
     getSectionLabel: (item) => normalizeValue(item.unlockStage),
     hiddenKeys: ["unlockStage", "upgradeNote", ...SURVIVE_ZOMBIE_ARENA_SOURCE_KEYS],
-    maxStats: 8
+    maxStats: 5
   },
   "survive-zombie-arena-gear": {
     groupKey: "catalogSection",
@@ -1943,7 +2021,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: SURVIVE_ZOMBIE_ARENA_MAP_SECTION_ORDER,
     getSectionLabel: (item) => normalizeValue(item.statusSection),
     hiddenKeys: ["statusSection", ...SURVIVE_ZOMBIE_ARENA_SOURCE_KEYS],
-    maxStats: 8
+    maxStats: 5
   },
   "murderers-vs-sheriffs-weapons": {
     groupKey: "catalogSection",
@@ -1964,21 +2042,8 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "valueCheckedAt",
       "sortOrder"
     ],
-    additionalColumns: [
-      "weaponType",
-      "weaponSubtype",
-      "rarity",
-      "source",
-      "availability",
-      "priceOrRoute",
-      "value",
-      "demand",
-      "trend",
-      "valueStatus",
-      "tradeNote",
-      "sourceConfidence"
-    ],
-    maxStats: 10
+    additionalColumns: ["weaponType", "rarity", "source", "availability", "value"],
+    maxStats: 5
   },
   "murderers-vs-sheriffs-crates": {
     groupKey: "catalogSection",
@@ -1997,18 +2062,8 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "imageStatus",
       "sortOrder"
     ],
-    additionalColumns: [
-      "tier",
-      "price",
-      "currency",
-      "purchaseRoute",
-      "availability",
-      "rewardPool",
-      "odds",
-      "bestUse",
-      "sourceConfidence"
-    ],
-    maxStats: 8
+    additionalColumns: ["tier", "price", "purchaseRoute", "availability", "rewardPool"],
+    maxStats: 5
   },
   "murderers-vs-sheriffs-modes": {
     groupKey: "catalogSection",
@@ -2016,17 +2071,8 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: MURDERERS_VS_SHERIFFS_MODE_SECTION_ORDER,
     getSectionLabel: getCatalogSection,
     hiddenKeys: ["catalogSection", "placeId", "sourceStatus", "sourceUrls", "sourceCheckedAt", "verificationNote"],
-    additionalColumns: [
-      "teamSize",
-      "queuePlace",
-      "availability",
-      "accessRequirement",
-      "bestFor",
-      "difficulty",
-      "rewardNotes",
-      "partyFriendSupport"
-    ],
-    maxStats: 8
+    additionalColumns: ["teamSize", "queuePlace", "accessRequirement", "bestFor", "difficulty"],
+    maxStats: 5
   },
   "murderers-vs-sheriffs-death-effects": {
     groupKey: "catalogSection",
@@ -2044,17 +2090,8 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "verificationNote",
       "sortOrder"
     ],
-    additionalColumns: [
-      "effectType",
-      "source",
-      "sourceType",
-      "price",
-      "unlockRoute",
-      "availability",
-      "bundleFamily",
-      "sourceConfidence"
-    ],
-    maxStats: 8
+    additionalColumns: ["effectType", "source", "price", "unlockRoute", "availability"],
+    maxStats: 5
   },
   "murderers-vs-sheriffs-bundles": {
     groupKey: "catalogSection",
@@ -2127,9 +2164,9 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "Unlock route",
     sectionOrder: BLOX_FRUITS_RACE_SECTION_ORDER,
-    additionalColumns: ["unlockRoute", "rerollStatus", "bestFor", "mainStrength", "mainLimit", "v4Trial", "v4Title"],
+    additionalColumns: ["unlockRoute", "rerollStatus", "bestFor", "mainStrength", "mainLimit"],
     hiddenKeys: BLOX_FRUITS_RACE_HIDDEN_KEYS,
-    maxStats: 7,
+    maxStats: 5,
     transformItem: withBloxFruitsRaceFields,
     getSectionLabel: getCatalogSection
   },
@@ -2147,18 +2184,10 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "Enemy stage",
     sectionOrder: BLOX_FRUITS_ENEMY_SECTION_ORDER,
-    additionalColumns: [
-      "seaStage",
-      "level",
-      "islandRegion",
-      "questSource",
-      "elementalBladeLevel",
-      "dropsRewards",
-      "accessRespawn",
-      "grindNote"
-    ],
+    additionalColumns: ["seaStage", "level", "islandRegion", "questSource", "dropsRewards"],
     hiddenKeys: BLOX_FRUITS_ENEMY_HIDDEN_KEYS,
-    maxStats: 8,
+    maxStats: 5,
+    hideImages: true,
     transformItem: withBloxFruitsEnemyFields,
     getSectionLabel: getCatalogSection
   },
@@ -2166,9 +2195,9 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "Location route",
     sectionOrder: BLOX_FRUITS_LOCATION_SECTION_ORDER,
-    additionalColumns: ["displaySea", "levelRange", "locationType", "routeRole", "mainNpcs", "accessTravel", "purpose"],
+    additionalColumns: ["displaySea", "levelRange", "locationType", "routeRole", "accessTravel"],
     hiddenKeys: BLOX_FRUITS_LOCATION_HIDDEN_KEYS,
-    maxStats: 7,
+    maxStats: 5,
     transformItem: withBloxFruitsLocationFields,
     getSectionLabel: getCatalogSection
   },
@@ -2176,19 +2205,10 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "Sea",
     sectionOrder: BLOX_FRUITS_QUEST_SECTION_ORDER,
-    additionalColumns: [
-      "displaySea",
-      "levelRequirement",
-      "islandArea",
-      "questGiverName",
-      "objective",
-      "targetType",
-      "expReward",
-      "moneyReward",
-      "routeNote"
-    ],
+    additionalColumns: ["displaySea", "levelRequirement", "islandArea", "questGiverName", "objective"],
     hiddenKeys: BLOX_FRUITS_QUEST_HIDDEN_KEYS,
-    maxStats: 9,
+    maxStats: 5,
+    hideImages: true,
     transformItems: withBloxFruitsQuestFields,
     getSectionLabel: getCatalogSection
   },
@@ -2196,9 +2216,9 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "Hunt route",
     sectionOrder: BLOX_FRUITS_SEA_EVENT_SECTION_ORDER,
-    additionalColumns: ["dangerLevel", "displayArea", "spawnAccess", "mainReward", "requiredSetup", "crewNote", "farmRoute"],
+    additionalColumns: ["dangerLevel", "displayArea", "spawnAccess", "mainReward", "requiredSetup"],
     hiddenKeys: BLOX_FRUITS_SEA_EVENT_HIDDEN_KEYS,
-    maxStats: 7,
+    maxStats: 5,
     transformItem: withBloxFruitsSeaEventFields,
     getSectionLabel: getCatalogSection
   },
@@ -2206,18 +2226,9 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "Ability role",
     sectionOrder: BLOX_FRUITS_ABILITY_SECTION_ORDER,
-    additionalColumns: [
-      "unlockRoute",
-      "displayCost",
-      "teacherSource",
-      "levelMasteryRequirement",
-      "combatTravelRole",
-      "upgradePath",
-      "keyUse",
-      "limitation"
-    ],
+    additionalColumns: ["unlockRoute", "displayCost", "teacherSource", "levelMasteryRequirement", "keyUse"],
     hiddenKeys: BLOX_FRUITS_ABILITY_HIDDEN_KEYS,
-    maxStats: 8,
+    maxStats: 5,
     transformItem: withBloxFruitsAbilityFields,
     getSectionLabel: getCatalogSection
   },
@@ -2245,9 +2256,9 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "Boat route",
     sectionOrder: BLOX_FRUITS_BOAT_SECTION_ORDER,
-    additionalColumns: ["sourceAccess", "displayPrice", "displayHealth", "displaySeats", "displayCannons", "displaySpeed", "seaEventRole", "specialUse"],
+    additionalColumns: ["sourceAccess", "displayPrice", "displayHealth", "displaySeats", "displaySpeed"],
     hiddenKeys: BLOX_FRUITS_BOAT_HIDDEN_KEYS,
-    maxStats: 8,
+    maxStats: 5,
     transformItem: withBloxFruitsBoatFields,
     getSectionLabel: getCatalogSection
   },
@@ -2255,9 +2266,9 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "Gun route",
     sectionOrder: BLOX_FRUITS_GUN_SECTION_ORDER,
-    additionalColumns: ["displaySea", "sourceRoute", "costOrDrop", "requirementMastery", "combatRole", "upgradeUse", "availability"],
+    additionalColumns: ["displaySea", "sourceRoute", "costOrDrop", "requirementMastery", "combatRole"],
     hiddenKeys: BLOX_FRUITS_GUN_HIDDEN_KEYS,
-    maxStats: 7,
+    maxStats: 5,
     transformItem: withBloxFruitsGunFields,
     getSectionLabel: getCatalogSection
   },
@@ -2275,19 +2286,9 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "NPC role",
     sectionOrder: BLOX_FRUITS_NPC_SECTION_ORDER,
-    additionalColumns: [
-      "npcRole",
-      "displaySea",
-      "displayLocation",
-      "purpose",
-      "combatLevel",
-      "accessSpawn",
-      "combat",
-      "availability",
-      "relatedRoute"
-    ],
+    additionalColumns: ["npcRole", "displaySea", "displayLocation", "purpose", "combatLevel"],
     hiddenKeys: BLOX_FRUITS_NPC_HIDDEN_KEYS,
-    maxStats: 9,
+    maxStats: 5,
     transformItem: withBloxFruitsNpcFields,
     getSectionLabel: getCatalogSection
   },
@@ -2298,6 +2299,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     additionalColumns: ["displayTitleNumber", "unlockRequirement", "unlockRoute", "relatedTarget", "availabilityNote"],
     hiddenKeys: BLOX_FRUITS_TITLE_HIDDEN_KEYS,
     maxStats: 5,
+    hideImages: true,
     transformItem: withBloxFruitsTitleFields,
     getSectionLabel: getCatalogSection
   },
@@ -2361,6 +2363,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
       "boss",
       "time"
     ],
+    hideImages: true,
     getSectionLabel: getSeaSection
   },
   "sailor-piece-accessories": {
@@ -2375,19 +2378,9 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "Dungeon type",
     sectionOrder: SAILOR_PIECE_DUNGEONS_SECTION_ORDER,
-    additionalColumns: [
-      "runType",
-      "level",
-      "entryItem",
-      "location",
-      "maxPlayers",
-      "formatTime",
-      "bossCheckpoint",
-      "mainRewards",
-      "importantRule"
-    ],
+    additionalColumns: ["runType", "level", "entryItem", "location", "mainRewards"],
     hiddenKeys: SAILOR_PIECE_RAW_CARD_KEYS,
-    maxStats: 8,
+    maxStats: 5,
     getSectionLabel: getCatalogSection
   },
   "sailor-piece-races": {
@@ -2404,24 +2397,25 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     sectionOrder: SAILOR_PIECE_TIER_SECTION_ORDER,
     additionalColumns: ["damageMultiplier", "defenseMultiplier", "cooldownReduction", "bestFor"],
     hiddenKeys: SAILOR_PIECE_RAW_CARD_KEYS,
+    hideImages: true,
     getSectionLabel: getTierSection
   },
   "sailor-piece-bloodlines": {
     groupKey: "tier",
     groupLabel: "Bloodline tier",
     sectionOrder: ["S+", "A", "B", "C", "D"],
-    additionalColumns: ["damage", "hp", "luck", "weaponBonus", "sustainDefense", "utilityBonus", "sourcePity", "specialUse"],
+    additionalColumns: ["damage", "hp", "luck", "weaponBonus", "sourcePity"],
     hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "effect", "bonus", "recipe", "requirements", "tags", "rarity"],
-    maxStats: 8,
+    maxStats: 5,
     getSectionLabel: getTierSection
   },
   "sailor-piece-bosses": {
     groupKey: "bossStage",
     groupLabel: "Boss stage",
     sectionOrder: SAILOR_PIECE_ISLANDS_SECTION_ORDER,
-    additionalColumns: ["difficulty", "level", "hp", "encounterType", "respawnAccess", "dropCount", "notableDrops"],
+    additionalColumns: ["difficulty", "level", "hp", "respawnAccess", "notableDrops"],
     hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "tier", "rarity", "region"],
-    maxStats: 7,
+    maxStats: 5,
     getSectionLabel: getBossStage
   },
   "sailor-piece-swords": {
@@ -2436,53 +2430,37 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     groupKey: "catalogSection",
     groupLabel: "Guild system",
     sectionOrder: SAILOR_PIECE_GUILD_SECTION_ORDER,
-    additionalColumns: [
-      "location",
-      "encounter",
-      "dropChance",
-      "spawnRequirement",
-      "maxBonus",
-      "appliesTo",
-      "upgradeRole"
-    ],
+    additionalColumns: ["location", "encounter", "dropChance", "spawnRequirement", "maxBonus"],
     hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "tier", "rarity", "effect", "bonus", "recipe", "requirements", "tags"],
-    maxStats: 7,
+    maxStats: 5,
     getSectionLabel: getCatalogSection
   },
   "sailor-piece-titles": {
     groupKey: "titleRole",
     groupLabel: "Title role",
     sectionOrder: SAILOR_PIECE_TITLE_SECTION_ORDER,
-    additionalColumns: ["tier", "bonus", "unlockRoute", "requirement", "dropOrPity", "availability", "bestFor"],
+    additionalColumns: ["tier", "bonus", "unlockRoute", "requirement", "dropOrPity"],
     hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "effect", "recipe", "requirements", "tags", "rarity"],
-    maxStats: 7,
+    maxStats: 5,
+    hideImages: true,
     getSectionLabel: getTitleRoleSection
   },
   "sailor-piece-melee-specs": {
     groupKey: "tier",
     groupLabel: "Melee tier",
     sectionOrder: SAILOR_PIECE_TIER_SECTION_ORDER,
-    additionalColumns: [
-      "statPriority",
-      "unlockRoute",
-      "sourceLocation",
-      "abilityCount",
-      "signatureMove",
-      "mainStrength",
-      "mainLimit",
-      "verificationNote"
-    ],
-    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "rarity"],
-    maxStats: 8,
+    additionalColumns: ["statPriority", "unlockRoute", "sourceLocation", "abilityCount", "signatureMove"],
+    hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "rarity", "verificationNote"],
+    maxStats: 5,
     getSectionLabel: getTierSection
   },
   "sailor-piece-runes": {
     groupKey: "tier",
     groupLabel: "Rune tier",
     sectionOrder: SAILOR_PIECE_TIER_SECTION_ORDER,
-    additionalColumns: ["displayRarity", "source", "bonusType", "baseEffect", "maxEffect", "bestFor", "dropNote"],
+    additionalColumns: ["displayRarity", "source", "bonusType", "baseEffect", "maxEffect"],
     hiddenKeys: [...SAILOR_PIECE_RAW_CARD_KEYS, "rarity"],
-    maxStats: 7,
+    maxStats: 5,
     getSectionLabel: getTierSection
   },
   "sailor-piece-clans": {
@@ -2809,7 +2787,8 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: getCatalogSection,
     hiddenKeys: ["catalogSection", "rebirthRange", "resetNote", "sortOrder", "sourcePage", "sourceImageUrl"],
     additionalColumns: ["catalogSection"],
-    maxStats: 3
+    maxStats: 3,
+    hideImages: true
   },
   "slime-rng-index-rewards": {
     groupKey: "catalogSection",
@@ -2818,7 +2797,8 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     getSectionLabel: getCatalogSection,
     hiddenKeys: ["catalogSection", "sortOrder", "sourcePage", "rewardSummary"],
     additionalColumns: ["catalogSection"],
-    maxStats: 5
+    maxStats: 5,
+    hideImages: true
   },
   "kick-a-lucky-block-brainrots": {
     groupKey: "catalogSection",
@@ -5160,7 +5140,6 @@ const STAT_KEY_PRIORITY = [
   "incomeMultiplier",
   "income",
   "chance",
-  "confidence",
   "cost",
   "price",
   "costBucks",
@@ -5230,11 +5209,30 @@ const HIDDEN_FIELD_KEYS = new Set([
   "name",
   "image",
   "imageStatus",
+  "imageMissingReason",
+  "imageSource",
   "sourceImageUrl",
+  "sourceImage",
   "sourcePage",
+  "secondarySourcePage",
+  "sourceUrl",
+  "sourceUrls",
+  "sourceFile",
+  "sourceTables",
+  "sourceStatus",
+  "sourceConfidence",
+  "sourceCheckedAt",
+  "sourceGeneratedAt",
+  "sourceNote",
+  "sourceNotes",
+  "sourceEvidence",
+  "wikiSourceStatus",
+  "verification",
+  "verificationNote",
+  "confidence",
+  "blocker",
   "wikiUrl",
   "imageCandidate",
-  "sourceTables",
   "fields",
   "raw",
   "rawText",

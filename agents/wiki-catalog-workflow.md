@@ -32,6 +32,17 @@ Before importing catalog copy, verify that the route actually renders the confir
 
 Card compactness is part of the data contract. Game-catalog item cards should be minimal quick-reference cards: image/name/status, one compact item description, then a small key-value block with only decision-changing facts. Model cards after the Bagel Bunny shape, not the overstuffed Honored One shape. Long move lists, strategy paragraphs, awakened variants, version history, caveats, and raw field dumps belong in a table, details view, page copy, or a separate guide section when they are genuinely needed. The card should let a player understand and compare the item at a glance, without reading paragraphs inside the card.
 
+The default production card template is strict:
+
+```text
+[Valid row image if research found one]
+Name / short status
+1-2 sentence player-facing description
+3-5 key-value facts
+```
+
+Do not fill image slots with raw Roblox API thumbnails, game icons, broad hero art, guide thumbnails, site-branded images, arrows, or screenshots where the row subject is not clear. If research does not find a clean row image, leave the image empty and record the missing image count. Do not use public card text for research caveats. Values such as `source estimate`, `needs in-game check`, `verification`, `partial`, `source-conflicted`, `reported by`, `current sources`, `dataset`, or `API` belong in `research-notes.md`, not on production pages. Public cards should casually explain the game row: what it does, where it fits, when to use it, how to get it, or why it matters.
+
 ## Trigger
 
 Follow this workflow when adding pages for a game dataset under `data/<Game>/`, especially for repeated Roblox game wiki/catalog work such as Adopt Me, Blox Fruits, Brookhaven RP, Sailor Piece, Steal a Brainrot, The Forge, Grow a Garden, or future games.
@@ -51,6 +62,8 @@ For new games, data gathering is part of this workflow. Research should produce 
 Research should also produce the player-useful facts needed for the page promise. For example, a weapons page may need price, currency, damage, Armory slot, unlock route, VIP/Gamepass/Robux/crate status, upgrade process, and purchase priority. A maps page may need layout landmarks, spawn pressure, hold spots, objective flow, and gear placement. A classes page may need role, unlock cost, best use, solo/team value, and progression limits. Use the collection's real player task to decide the fields instead of accepting whatever fields are easiest to scrape.
 
 Image plan means clean catalog images, not just any image from a guide page. Use direct in-game item art, enemy/object cutouts, NPC screenshots, station screenshots, or location screenshots where the catalog subject is clearly visible. Do not use edited guide thumbnails, site-branded cover art, arrows/callouts, generic hero art, or broad nearby screenshots that do not actually show the row subject. If no clean image exists, leave the row image empty and record the capture/source gap instead of filling it with a weak substitute.
+
+Do not use Roblox API thumbnails as row images. Roblox API media can support identity checks, universe metadata, or a wiki/game hero decision, but it is not catalog row research. Row images must come from item/station/location research or stay blank.
 
 ## DB Targets
 

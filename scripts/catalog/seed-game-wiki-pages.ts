@@ -473,6 +473,37 @@ const WIKI_COPY: Record<string, WikiCopy> = {
 - Cosmetic source matters more than rarity alone. Skins, wraps, charms, finishers, and emotes can come from cases, boxes, capsules, shop routes, bundles, milestones, old code or event origins, ranked sources, UGC rewards, or special grants.
 - Official RIVALS UGC is Roblox avatar gear from Nosniy Games. It is separate from weapon skins, and official purchases can count toward the in-game UGC reward track.`,
     controlsJson: []
+  },
+  "sell-lemons": {
+    metaDescription:
+      "Sell Lemons wiki hub with income sources, powers, secrets, Evolution stages, locations, controls, and Roblox game details.",
+    gameDescriptionMd:
+      "Sell Lemons is a Roblox tycoon and idle game by BloxByte Games where a tiny lemon stand turns into a layered fruit empire. A normal run starts with clicking the stand, collecting dropped cash, buying early upgrades such as the Juicer and Cup Stand, then unlocking larger systems like LemonDash, Lemon Depot, Trading, Labs, Robotics, Republic, and Orange X.\n\nThe game rewards routing, timing, and checking what each purchase opens. Some useful upgrades appear after decoration or building purchases, managers turn active income sources into idle earners, and offline income makes automation worth planning around. As the numbers grow, Investors, Ascend, Evolution, powers, and permanent upgrades decide whether you should keep pushing the current run or reset for a faster rebuild.\n\nReturning players should check the systems that changed their route first: which income source is next, whether a manager is now worth buying, whether hidden Sewer or UFO unlocks are ready, and whether Evolution or First Tier progress is stronger than another normal cash push.",
+    tipsMd: `- Rebuild the Lemon Stand cleanly after every reset. Juicer, Cup Stand, and the Cash Register Automator are early priorities because they restore the basic cash loop while you move toward the next source.
+- Walk newly purchased areas before teleporting away. Sell Lemons hides useful buttons behind walls, roofs, floors, and other building pieces, so a new room or hill layer can matter as much as a visible income upgrade.
+- Treat managers as timing purchases. The Stand Automator is useful early, but Depot, Trading, Labs, and Robotics managers make more sense after that source already earns enough for automation to pay off.
+- Keep some cash outside Lemon Trading until you understand the price swings. Trading can speed up a run, but dumping the whole balance into a bad cycle can slow the next unlock.
+- Check Investors before Evolution. Evolution gives a major fruit-stage speed boost, but giving up a strong Investor count too early can make the rebuild feel worse than expected.
+- Use the map routes as progression clues. Lemon Depot, Hill Expansion, Sewer Maze, UFO, and First Tier Staircase each point to a system, secret, or permanent milestone.`,
+    controlsJson: [
+      {
+        action: "Produce lemons",
+        desktop: "Click the Lemon Stand"
+      },
+      {
+        action: "Collect ground cash",
+        desktop: "Walk over dropped bills and coins"
+      },
+      {
+        action: "Open upgrades",
+        desktop: "Click the dollar-sign shop button"
+      },
+      {
+        action: "Teleport between unlocked sources",
+        desktop: "Click the bottom-screen arrow buttons"
+      }
+    ],
+    coverImage: null
   }
 };
 

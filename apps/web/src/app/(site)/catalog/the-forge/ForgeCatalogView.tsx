@@ -51,6 +51,26 @@ type BooleanishValue = {
 };
 
 const CARD_STAT_OVERRIDES: Record<string, string[]> = {
+  "sell-lemons-income-sources": [
+    "unlock",
+    "role",
+    "managerAutomation",
+    "bestUse"
+  ],
+  "sell-lemons-powers": ["effect", "bestUse", "priority"],
+  "sell-lemons-secret-unlocks": ["type", "location", "stepType", "rewardEffect"],
+  "sell-lemons-evolution-stages": [
+    "stage",
+    "requirement",
+    "multiplierEffect",
+    "investorResetImpact"
+  ],
+  "sell-lemons-locations": [
+    "stage",
+    "unlock",
+    "connectedSystem",
+    "travelNote"
+  ],
   "blox-fruits-accessories": ["displaySea", "bestFor", "damage", "defense", "mobility", "utility"],
   "blox-fruits-fruits": ["displayType", "moneyPrice", "permanentPrice", "awakeningCost", "status", "baseFruit"],
   "blox-fruits-swords": ["displaySea", "sourceRoute", "displayCost", "progressionUse"],
@@ -63,139 +83,41 @@ const CARD_STAT_OVERRIDES: Record<string, string[]> = {
     "bestFor"
   ],
   "blox-fruits-materials": ["displaySea", "sourceRoute", "use", "farmRoute", "craftCost"],
-  "blox-fruits-races": ["unlockRoute", "rerollStatus", "bestFor", "mainStrength", "mainLimit", "v4Trial", "v4Title"],
+  "blox-fruits-races": ["unlockRoute", "rerollStatus", "bestFor", "mainStrength", "mainLimit"],
   "blox-fruits-bosses": ["displaySea", "location", "level", "respawnAccess", "dropsRewards", "routeUse"],
-  "blox-fruits-enemies": [
-    "seaStage",
-    "level",
-    "islandRegion",
-    "questSource",
-    "elementalBladeLevel",
-    "dropsRewards",
-    "accessRespawn",
-    "grindNote"
-  ],
-  "blox-fruits-locations": ["displaySea", "levelRange", "locationType", "routeRole", "mainNpcs", "accessTravel", "purpose"],
-  "blox-fruits-quests": [
-    "displaySea",
-    "levelRequirement",
-    "islandArea",
-    "questGiverName",
-    "objective",
-    "targetType",
-    "expReward",
-    "moneyReward",
-    "routeNote"
-  ],
-  "blox-fruits-sea-events": [
-    "dangerLevel",
-    "displayArea",
-    "spawnAccess",
-    "mainReward",
-    "requiredSetup",
-    "crewNote",
-    "farmRoute"
-  ],
-  "blox-fruits-abilities": [
-    "unlockRoute",
-    "displayCost",
-    "teacherSource",
-    "levelMasteryRequirement",
-    "combatTravelRole",
-    "upgradePath",
-    "keyUse",
-    "limitation"
-  ],
+  "blox-fruits-enemies": ["seaStage", "level", "islandRegion", "questSource", "dropsRewards"],
+  "blox-fruits-locations": ["displaySea", "levelRange", "locationType", "routeRole", "accessTravel"],
+  "blox-fruits-quests": ["displaySea", "levelRequirement", "islandArea", "questGiverName", "objective"],
+  "blox-fruits-sea-events": ["dangerLevel", "displayArea", "spawnAccess", "mainReward", "requiredSetup"],
+  "blox-fruits-abilities": ["unlockRoute", "displayCost", "teacherSource", "levelMasteryRequirement", "keyUse"],
   "blox-fruits-aura-stages": ["displayStage", "coverage", "auraExpNeeded", "bonusEffect", "progressionNote"],
   "blox-fruits-aura-visuals": ["visualStage", "bodyCoverage", "armsVisual", "legsVisual", "statEffect", "equipUseNote"],
-  "blox-fruits-boats": [
-    "sourceAccess",
-    "displayPrice",
-    "displayHealth",
-    "displaySeats",
-    "displayCannons",
-    "displaySpeed",
-    "seaEventRole",
-    "specialUse"
-  ],
-  "blox-fruits-guns": [
-    "displaySea",
-    "sourceRoute",
-    "costOrDrop",
-    "requirementMastery",
-    "combatRole",
-    "upgradeUse",
-    "availability"
-  ],
+  "blox-fruits-boats": ["sourceAccess", "displayPrice", "displayHealth", "displaySeats", "displaySpeed"],
+  "blox-fruits-guns": ["displaySea", "sourceRoute", "costOrDrop", "requirementMastery", "combatRole"],
   "blox-fruits-instinct-levels": ["displayLevel", "expRange", "baseDodges", "progressNote"],
-  "blox-fruits-npcs": [
-    "npcRole",
-    "displaySea",
-    "displayLocation",
-    "purpose",
-    "combatLevel",
-    "accessSpawn",
-    "combat",
-    "availability",
-    "relatedRoute"
-  ],
+  "blox-fruits-npcs": ["npcRole", "displaySea", "displayLocation", "purpose", "combatLevel"],
   "blox-fruits-titles": ["displayTitleNumber", "unlockRequirement", "unlockRoute", "relatedTarget", "availabilityNote"],
   "blox-fruits-special-titles": ["grantRoute", "holderTarget", "obtainmentNote", "normalPlayerRoute"],
   "blox-fruits-title-colors": ["unlockRequirement", "titleCountNeeded", "unlockStage", "visualRole"],
   "sailor-piece-fruits": ["bestFor", "combatRole", "mainStrength", "mainLimit", "spinChance"],
   "sailor-piece-islands": ["bosses", "mainRole", "keyContent", "progressionUse"],
   "sailor-piece-accessories": ["defense", "damage", "damageReduction", "sourceRoute", "dropOrCost", "bestFor"],
-  "sailor-piece-dungeons": [
-    "runType",
-    "entryItem",
-    "location",
-    "maxPlayers",
-    "formatTime",
-    "bossCheckpoint",
-    "mainRewards",
-    "importantRule"
-  ],
+  "sailor-piece-dungeons": ["runType", "level", "entryItem", "location", "mainRewards"],
   "sailor-piece-races": ["rollRarity", "bestFor", "coreBonus", "hasV4", "requiredFor"],
   "sailor-piece-traits": ["damageMultiplier", "defenseMultiplier", "cooldownReduction", "bestFor"],
-  "sailor-piece-bloodlines": [
-    "damage",
-    "hp",
-    "luck",
-    "weaponBonus",
-    "sustainDefense",
-    "utilityBonus",
-    "sourcePity",
-    "specialUse"
-  ],
-  "sailor-piece-bosses": ["difficulty", "level", "hp", "encounterType", "respawnAccess", "dropCount", "notableDrops"],
+  "sailor-piece-bloodlines": ["damage", "hp", "luck", "weaponBonus", "sourcePity"],
+  "sailor-piece-bosses": ["difficulty", "level", "hp", "respawnAccess", "notableDrops"],
   "sailor-piece-swords": ["baseDamage", "attackSpeed", "masteryRequired", "sourceRoute", "bestFor", "unlockNote"],
-  "sailor-piece-guilds": [
-    "location",
-    "encounter",
-    "dropChance",
-    "spawnRequirement",
-    "maxBonus",
-    "appliesTo",
-    "upgradeRole"
-  ],
-  "sailor-piece-titles": ["tier", "bonus", "unlockRoute", "requirement", "dropOrPity", "availability", "bestFor"],
-  "sailor-piece-melee-specs": [
-    "statPriority",
-    "unlockRoute",
-    "sourceLocation",
-    "abilityCount",
-    "signatureMove",
-    "mainStrength",
-    "mainLimit",
-    "verificationNote"
-  ],
-  "sailor-piece-runes": ["displayRarity", "source", "bonusType", "baseEffect", "maxEffect", "bestFor", "dropNote"],
+  "sailor-piece-guilds": ["location", "encounter", "dropChance", "spawnRequirement", "maxBonus"],
+  "sailor-piece-titles": ["tier", "bonus", "unlockRoute", "requirement", "dropOrPity"],
+  "sailor-piece-melee-specs": ["statPriority", "unlockRoute", "sourceLocation", "abilityCount", "signatureMove"],
+  "sailor-piece-runes": ["displayRarity", "source", "bonusType", "baseEffect", "maxEffect"],
   "sailor-piece-clans": ["rarity", "bestFor", "bonusSummary", "passive", "requirement"],
   "sailor-piece-relics": ["effect", "recipe", "partRoute", "bestFor"],
   "sailor-piece-haki": ["role", "unlockRoute", "requirements", "maxLevel", "maxEffect", "levelingRoute"],
   "rivals-wraps": ["source", "sourceType", "appliesTo", "sourceWeapon", "availability", "motion", "specialNote"],
-  "rivals-finishers": ["source", "availability", "sourceNote", "rarity"],
-  "rivals-ugc": ["itemType", "price", "availability", "rewardSummary", "creatorName", "robloxId", "sourceNote"],
+  "rivals-finishers": ["source", "availability", "rarity"],
+  "rivals-ugc": ["itemType", "price", "availability", "rewardSummary", "creatorName", "robloxId"],
   "jujutsu-shenanigans-characters": ["availability", "cost", "hp", "role"],
   "jujutsu-shenanigans-domains": ["availability", "character", "duration", "domainType"],
   "jujutsu-shenanigans-items": ["availability", "source", "price", "damageHeal", "location"],
@@ -203,7 +125,7 @@ const CARD_STAT_OVERRIDES: Record<string, string[]> = {
   "jujutsu-shenanigans-maps": ["status", "modeAccess", "arenaType", "bestFor"],
   "jujutsu-shenanigans-emotes": ["availability", "source", "costObtainment", "movement"],
   "jujutsu-shenanigans-cosmetics": ["availability", "unlockRoute", "cost", "type", "audioStatus"],
-  "jujutsu-shenanigans-titles": ["availability", "requirement", "titleType", "sourceNote"],
+  "jujutsu-shenanigans-titles": ["availability", "requirement", "titleType"],
   "jujutsu-shenanigans-interactables": ["availability", "location", "cost", "baseDamage", "type"],
   "jujutsu-shenanigans-achievements": ["availability", "requirement", "reward", "difficulty", "modeOrCharacter"],
   "jujutsu-shenanigans-build-blocks": ["availability", "category", "inputs", "outputs", "builderUse"],
@@ -267,7 +189,16 @@ function normalizeValue(value: unknown): string | null {
 }
 
 function normalizeDisplayText(value: string): string {
-  return value.replace(/\s+/g, " ").trim();
+  return value
+    .replace(/\bsource-backed\b/gi, "listed")
+    .replace(/\bsource estimate\b/gi, "estimate")
+    .replace(/\bneeds in-game check\b/gi, "limited details")
+    .replace(/\bcurrent source notes?\b/gi, "notes")
+    .replace(/\bpartial cost source\b/gi, "partial cost")
+    .replace(/\blower confidence\b/gi, "limited details")
+    .replace(/\bduring planning\b/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function formatKeyLabel(value: string): string {
@@ -598,7 +529,6 @@ function RivalsUgcItemCard({ item }: { item: ForgeCatalogItem }) {
   const availability = normalizeValue(item.availability);
   const rewardSummary = normalizeValue(item.rewardSummary);
   const robloxId = normalizeValue(item.robloxId);
-  const sourceNote = normalizeValue(item.sourceNote);
   const robloxUrl = buildRobloxCatalogUrl(item);
 
   return (
@@ -664,12 +594,6 @@ function RivalsUgcItemCard({ item }: { item: ForgeCatalogItem }) {
               <dd className="mt-1 text-sm font-semibold leading-snug text-foreground [overflow-wrap:anywhere]">
                 {robloxId}
               </dd>
-            </div>
-          ) : null}
-          {sourceNote ? (
-            <div>
-              <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Source note</dt>
-              <dd className="mt-1 text-sm font-semibold leading-snug text-foreground">{sourceNote}</dd>
             </div>
           ) : null}
         </dl>

@@ -183,15 +183,35 @@ Check the route's real card output too. Cards should be clean reference surfaces
 
 Game-catalog cards should feel closer to the Bagel Bunny card than the Honored One card. A card is a quick reference surface. It is not the place to squeeze in every paragraph, every caveat, every move list, and every database field.
 
+This is a production contract, not a style preference. Every default game-catalog card should render in this order:
+
+```text
+[Image, only when it is a real row-representative image]
+Name
+Short description, usually 1-2 sentences
+Small key-value block, usually 3-5 facts
+```
+
+The card should let a normal player understand the item or row in one glance. If the reader has to read a long paragraph, parse an internal caveat, or compare eight loosely related fields, the card failed even if every fact is technically true.
+
 Use this shape for each item card:
 
-1. Name, image, and the strongest status label when available, such as rarity, availability, type, or source.
-2. One short description paragraph that explains the item's core role in plain player language. This paragraph should be unique to the item, but it should stay compact. One or two short sentences is usually enough.
-3. A small key-value data block with only the facts a player would scan to compare, unlock, buy, use, trade, or avoid the item.
+1. Image only when research found a clean row-representative image: direct item art, object cutout, NPC screenshot, station screenshot, location screenshot, or another in-game visual where the row subject is clearly visible. If no acceptable image exists, leave the image empty.
+2. Name and the strongest status label when available, such as rarity, availability, type, or source.
+3. One short description paragraph that explains the item's core role in plain player language. This paragraph should be unique to the item, but it should stay compact. One or two short sentences is usually enough.
+4. A small key-value data block with only the facts a player would scan to compare, unlock, buy, use, trade, or avoid the item.
+
+Images are optional only because weak images are worse than blank cards. Never fill row images with raw Roblox API thumbnails, generic game icons, broad hero art, edited guide thumbnails, site-branded cover art, arrows/callouts, or nearby screenshots that do not actually show the row subject. Roblox APIs can confirm identity or metadata; they are not a substitute for catalog image research. If research cannot produce clean row images, record the image gap in `research-notes.md` and keep the card image blank.
+
+Default card descriptions are required unless the notes explain why this collection works better as pure data. The description should sound like a Roblox player explaining the row in-game, not like a database note. Good descriptions say what the item/row changes for the player: role, route fit, use case, weakness, why it is awkward, or why it is different from nearby entries.
 
 The description and data block must not repeat each other. The description should add item-specific meaning that the data rows do not already say: how the item feels in play, what its role changes, why it is awkward, what situation it fits, or what makes it different from nearby entries. Do not write `Availability Free public character` or `Cost Free` in the description when those same facts appear as data rows. If the only thing you can say is already covered by data, skip the description. If the item is better explained as one sentence and there are no useful row-level facts, skip the data block. Depth is welcome, but each piece of the card needs its own job.
 
 There is no fixed number of data points. Choose the useful facts, then stop. A pet card might only need `Eggs`, `Merchants`, and `Abilities`. A weapon card might need `Source`, `Damage`, `Requirement`, and `Best for`. A vehicle card might need `Price`, `Shop`, `Seats`, and `Availability`. If a field does not change a player decision, hide it from the card or explain it elsewhere.
+
+As a practical default, aim for 3-5 visible key-value facts. More than 5 fields needs a written reason in `research-notes.md` and rendered proof that the card still scans cleanly. More than 6 fields is usually a fail for the default card surface and should become a table, details view, body section, or separate guide. Do not show every useful fact just because it exists in the dataset.
+
+Never expose research or workflow language in public cards. Card descriptions, labels, and values must not say `source notes`, `source estimate`, `source-backed`, `needs in-game check`, `needs verification`, `verification`, `partial`, `source-conflicted`, `reported by`, `current sources`, `dataset`, `research`, `API`, or similar process wording. Keep those notes in `research-notes.md`. Public cards should talk about the game: where to go, what it does, when to use it, what it costs, what unlocks it, or why it matters.
 
 Keep the visual emphasis just as selective. Cards may use color for one actionable status signal, such as `Available`, `Unavailable`, `Retired`, `Trade only`, `Event`, `Limited`, or `Seasonal`. Use green for available, red or muted red for unavailable/retired/trade-only, and amber for event/limited/seasonal. Cards may also visually strengthen one primary decision field for the collection, such as `Source` for pets, `Value` for crops, `Price` for vehicles, `Damage` for weapons, `Level` for islands, or `Unlock` for cosmetics. Everything else should stay quiet key-value text.
 

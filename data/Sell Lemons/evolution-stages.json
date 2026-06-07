@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "title": "Sell Lemons Evolution Stages",
+    "game": "Sell Lemons",
+    "gameSlug": "sell-lemons",
+    "collection": "evolution-stages",
+    "route": "/wiki/sell-lemons/evolution-stages",
+    "catalogCode": "sell-lemons-evolution-stages",
+    "updatedAt": "2026-06-07",
+    "itemCount": 3,
+    "counts": {
+      "Current fruit stages": 3
+    },
+    "imageCoverage": {
+      "present": 0,
+      "missing": 3
+    },
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "stage",
+      "stageOrder",
+      "fruitTheme",
+      "cardSummary",
+      "requirement",
+      "multiplierEffect",
+      "incomeSourceNaming",
+      "investorResetImpact",
+      "verification",
+      "sourceStatus",
+      "sourcePage",
+      "secondarySourcePage",
+      "imageStatus",
+      "sortOrder"
+    ],
+    "sources": [
+      {
+        "label": "Roblox - Sell Lemons official experience page",
+        "url": "https://www.roblox.com/games/79268393072444/Sell-Lemons",
+        "accessed": "2026-06-07"
+      },
+      {
+        "label": "SellLemons.com - Evolution System",
+        "url": "https://selllemons.com/systems/evolution",
+        "accessed": "2026-06-07"
+      },
+      {
+        "label": "SellLemons.com - Ascend System",
+        "url": "https://selllemons.com/systems/ascend",
+        "accessed": "2026-06-07"
+      },
+      {
+        "label": "SellLemons.com - Burst Tier caveat",
+        "url": "https://selllemons.com/systems/burst-tier",
+        "accessed": "2026-06-07"
+      },
+      {
+        "label": "Pro Game Guides - Sell Lemons Beginner's Guide",
+        "url": "https://progameguides.com/roblox/sell-lemons-beginners-guide-roblox/",
+        "accessed": "2026-06-07"
+      }
+    ],
+    "sourceCounts": {
+      "playableStageRows": 3,
+      "localRows": 3,
+      "excludedRows": "Burst Tier is excluded from items because parent review approved it as copy or FAQ caveat only."
+    },
+    "notes": [
+      "Rows are limited to the three confirmed playable fruit stages: Lemon, Orange, and Lime.",
+      "Burst Tier is intentionally not included as an item row because it is locked/future content with no confirmed playable fruit name, requirement, multiplier, or release date.",
+      "Orange and Lime requirements use broad player-facing wording because exact threshold screenshots were not available in this phase.",
+      "No acceptable direct stage screenshots were found in the research pass, so row image fields stay empty."
+    ],
+    "unresolvedGaps": [
+      "Exact Lemon to Orange requirement needs direct current in-game UI verification.",
+      "Exact Orange to Lime requirement needs direct current in-game UI verification.",
+      "All three rows need clean direct screenshots if image cards are required."
+    ]
+  },
+  "items": [
+    {
+      "name": "Lemon",
+      "slug": "lemon",
+      "image": null,
+      "catalogSection": "Current fruit stages",
+      "stage": "Stage 1",
+      "stageOrder": 1,
+      "fruitTheme": "Lemon",
+      "cardSummary": "Lemon is the baseline fruit stage. Use it to build the first economy, learn the reset loop, and prepare for the first real Evolution choice.",
+      "requirement": "Starting stage",
+      "multiplierEffect": "Base fruit stage before Evolution multipliers",
+      "incomeSourceNaming": "Lemon Stand, LemonDash, Lemon Depot, Lemon Trading, Lemon Labs, Lemon Robotics, Lemon Republic, and Lemon or Orange X naming before later theme changes",
+      "investorResetImpact": "Investors build during normal Ascend/Rebirth progress; no Evolution reset happens before this starting stage",
+      "verification": "Confirmed playable starting stage",
+      "sourceStatus": "official game theme and fan-system source verified",
+      "sourcePage": "https://www.roblox.com/games/79268393072444/Sell-Lemons",
+      "secondarySourcePage": "https://selllemons.com/systems/evolution",
+      "imageStatus": "No clean direct stage screenshot saved",
+      "sortOrder": 1
+    },
+    {
+      "name": "Orange",
+      "slug": "orange",
+      "image": null,
+      "catalogSection": "Current fruit stages",
+      "stage": "Stage 2",
+      "stageOrder": 2,
+      "fruitTheme": "Orange",
+      "cardSummary": "Orange is the first evolved fruit theme. It is the point where the speed boost has to be weighed against losing your current Investor count.",
+      "requirement": "First Evolution after deep investment progress",
+      "multiplierEffect": "42x income speed boost",
+      "incomeSourceNaming": "Orange Stand, Orange Dash, Orange Depot, Orange Trading, Orange Labs, Orange Robotics, Orange Republic, and Orange X",
+      "investorResetImpact": "Evolution resets Investor count, so the 42x jump should be weighed against the Investor bonus being lost",
+      "verification": "Playable evolved fruit stage",
+      "sourceStatus": "stage and effect source verified; threshold approximate",
+      "sourcePage": "https://selllemons.com/systems/evolution",
+      "secondarySourcePage": "https://selllemons.com/systems/ascend",
+      "imageStatus": "No clean direct stage screenshot saved",
+      "sortOrder": 2
+    },
+    {
+      "name": "Lime",
+      "slug": "lime",
+      "image": null,
+      "catalogSection": "Current fruit stages",
+      "stage": "Stage 3",
+      "stageOrder": 3,
+      "fruitTheme": "Lime",
+      "cardSummary": "Lime is the later tracked fruit theme. It belongs to deeper runs where Investor progress, Ascend timing, and Evolution speed all matter together.",
+      "requirement": "Later Evolution stage after Orange and deep investor progress",
+      "multiplierEffect": "42x income speed boost",
+      "incomeSourceNaming": "Lime-themed versions of the same Stand, Dash, Depot, Trading, Labs, Robotics, Republic, and X source ladder",
+      "investorResetImpact": "Evolution still resets Investor count; push enough Investor progress before committing to the stage jump",
+      "verification": "Highest tracked playable fruit stage",
+      "sourceStatus": "stage and effect source verified; threshold approximate",
+      "sourcePage": "https://selllemons.com/systems/evolution",
+      "secondarySourcePage": "https://selllemons.com/systems/first-tier",
+      "imageStatus": "No clean direct stage screenshot saved",
+      "sortOrder": 3
+    }
+  ]
+}

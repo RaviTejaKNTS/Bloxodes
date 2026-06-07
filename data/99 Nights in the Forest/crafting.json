@@ -1635,7 +1635,7 @@
       "catalogSection": "Tool Workshop Anvil",
       "station": "Tool Workshop Anvil",
       "tier": "Workshop",
-      "availability": "Current - random workshop recipe, partial cost source",
+      "availability": "Current - random workshop recipe",
       "costSummary": "4 Cultist Gems, 4 Bear Pelts, 2 Alpha Wolf Pelts, 10 Scrap",
       "ingredients": [
         {
@@ -1680,7 +1680,7 @@
       "catalogSection": "Tool Workshop Anvil",
       "station": "Tool Workshop Anvil",
       "tier": "Workshop",
-      "availability": "Current - random workshop recipe, partial cost source",
+      "availability": "Current - random workshop recipe",
       "costSummary": "4 Cultist Gems, 4 Bear Pelts, 2 Alpha Wolf Pelts, 10 Scrap",
       "ingredients": [
         {
