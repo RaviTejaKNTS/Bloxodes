@@ -1255,7 +1255,231 @@ const DRESS_TO_IMPRESS_VIP_ITEM_SECTION_ORDER = [
   "Jewelry"
 ];
 
+const PET_SIMULATOR_99_PET_SECTION_ORDER = [
+  "World and stat pets",
+  "Limited and event-origin pets",
+  "Regular Exclusive pets",
+  "Huge pets",
+  "Titanic pets",
+  "Gargantuan pets",
+  "Admin, merch, and special grants"
+];
+
+const PET_SIMULATOR_99_EGG_SECTION_ORDER = [
+  "World 1 eggs",
+  "Tech World eggs",
+  "Void World eggs",
+  "Fantasy World eggs",
+  "Permanent event-world eggs",
+  "PS99 exclusive eggs"
+];
+
+const PET_SIMULATOR_99_ENCHANT_SECTION_ORDER = [
+  "Farming boosts",
+  "Damage and tapping",
+  "Hatching and pet odds",
+  "Collection and movement",
+  "Chest, drop, and event spawns"
+];
+
+const PET_SIMULATOR_99_POTION_SECTION_ORDER = ["Standard boost potions", "Special potions", "XP potions"];
+const PET_SIMULATOR_99_AREA_SECTION_ORDER = [
+  "World 1 - Spawn World",
+  "World 2 - Tech World",
+  "World 3 - Void World",
+  "World 4 - Fantasy World"
+];
+const PET_SIMULATOR_99_MACHINE_SECTION_ORDER = [
+  "Pet and hatch progression",
+  "Item upgrade and crafting",
+  "Rewards, quests, and boosts",
+  "Travel and management hubs"
+];
+const PET_SIMULATOR_99_CHARM_SECTION_ORDER = [
+  "Farming and currency charms",
+  "Damage and breakable charms",
+  "Movement, leveling, and slot charms",
+  "Charm support items"
+];
+const PET_SIMULATOR_99_HOVERBOARD_SECTION_ORDER = [
+  "Free and gameplay unlocks",
+  "Achievement and merch-code rewards",
+  "Shop, pack, and VIP boards",
+  "Gift and event boards",
+  "Clan, leaderboard, and partner rewards"
+];
+const PET_SIMULATOR_99_BOOTH_SECTION_ORDER = [
+  "Direct unlocks and shop booths",
+  "Gift, pack, and event booths",
+  "Clan battle reward booths",
+  "Trade-only and retired storefront booths",
+  "Untradable account unlocks"
+];
+const PET_SIMULATOR_99_MASTERY_SECTION_ORDER = [
+  "Core farming and hatching",
+  "Item upgrade and consume loops",
+  "Chest, key, and gift rewards",
+  "Minigame and machine grinds"
+];
+const PET_SIMULATOR_99_MINIGAME_SECTION_ORDER = [
+  "Spawn World",
+  "Tech World",
+  "Void World",
+  "Fantasy World"
+];
+const PET_SIMULATOR_99_SHINY_RELIC_SECTION_ORDER = [
+  "Trading Plaza",
+  "World 1 - Spawn World",
+  "World 2 - Tech World",
+  "World 3 - Void World",
+  "World 4 - Fantasy World"
+];
+
+const PET_SIMULATOR_99_HIDDEN_KEYS = [
+  "catalogSection",
+  "sortOrder",
+  "sourcePage",
+  "secondarySourcePage",
+  "sourceCheckedAt",
+  "sourceGeneratedAt",
+  "sourceStatus",
+  "sourceTables",
+  "sourceTemplate",
+  "sourceImageFile",
+  "sourceImageUrl",
+  "sourceImage",
+  "sourceNotes",
+  "imageStatus",
+  "imageMissingReason",
+  "verificationNote",
+  "wikiUrl",
+  "rawText",
+  "rawHtml",
+  "rawWikitext",
+  "fields"
+];
+
 const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
+  "pet-simulator-99-pets": {
+    groupKey: "catalogSection",
+    groupLabel: "Pet group",
+    sectionOrder: PET_SIMULATOR_99_PET_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["petClass"]
+  },
+  "pet-simulator-99-eggs": {
+    groupKey: "catalogSection",
+    groupLabel: "Egg group",
+    sectionOrder: PET_SIMULATOR_99_EGG_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["route", "world"]
+  },
+  "pet-simulator-99-enchants": {
+    groupKey: "catalogSection",
+    groupLabel: "Enchant group",
+    sectionOrder: PET_SIMULATOR_99_ENCHANT_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["role"]
+  },
+  "pet-simulator-99-potions": {
+    groupKey: "catalogSection",
+    groupLabel: "Potion group",
+    sectionOrder: PET_SIMULATOR_99_POTION_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["type", "family"]
+  },
+  "pet-simulator-99-areas": {
+    groupKey: "catalogSection",
+    groupLabel: "World",
+    sectionOrder: PET_SIMULATOR_99_AREA_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["areaLabel", "subWorld"]
+  },
+  "pet-simulator-99-machines": {
+    groupKey: "catalogSection",
+    groupLabel: "Machine type",
+    sectionOrder: PET_SIMULATOR_99_MACHINE_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["task", "location"]
+  },
+  "pet-simulator-99-charms": {
+    groupKey: "catalogSection",
+    groupLabel: "Charm group",
+    sectionOrder: PET_SIMULATOR_99_CHARM_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["role", "type"]
+  },
+  "pet-simulator-99-hoverboards": {
+    groupKey: "catalogSection",
+    groupLabel: "Unlock route",
+    sectionOrder: PET_SIMULATOR_99_HOVERBOARD_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["rarity", "source"]
+  },
+  "pet-simulator-99-booths": {
+    groupKey: "catalogSection",
+    groupLabel: "Booth route",
+    sectionOrder: PET_SIMULATOR_99_BOOTH_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["rarity", "sourceType"]
+  },
+  "pet-simulator-99-mastery": {
+    groupKey: "catalogSection",
+    groupLabel: "Mastery group",
+    sectionOrder: PET_SIMULATOR_99_MASTERY_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["activity", "bestFor"]
+  },
+  "pet-simulator-99-minigames": {
+    groupKey: "catalogSection",
+    groupLabel: "World",
+    sectionOrder: PET_SIMULATOR_99_MINIGAME_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: [...PET_SIMULATOR_99_HIDDEN_KEYS, "world", "areaNumber", "areaName"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["location", "type"]
+  },
+  "pet-simulator-99-shiny-relics": {
+    groupKey: "catalogSection",
+    groupLabel: "World",
+    sectionOrder: PET_SIMULATOR_99_SHINY_RELIC_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: PET_SIMULATOR_99_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["areaLabel", "locationHint"]
+  },
   "sell-lemons-income-sources": {
     groupKey: "progression_stage",
     groupLabel: "Progression stage",

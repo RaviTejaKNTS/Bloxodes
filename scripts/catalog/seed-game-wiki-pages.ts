@@ -86,6 +86,50 @@ const WIKI_COPY: Record<string, WikiCopy> = {
 - Pet ages are a small reference, but they matter because tricks unlock as pets grow.
 - Furniture and house surfaces are large catalogs, so use categories and prices to narrow home customization choices.`
   },
+  "pet-simulator-99": {
+    metaDescription:
+      "Pet Simulator 99 wiki hub with pets, eggs, areas, machines, enchants, potions, mastery, minigames, relics, and trading cosmetics.",
+    gameDescriptionMd: `Pet Simulator 99 is a pet-collecting progression game where your pets break objects for coins and other currencies. Those currencies feed the main route: hatch better pets, unlock more areas, reach new worlds, and open the machines, eggs, minigames, chests, and rebirth gates tied to each part of the map.
+
+Progress gets deeper once the early route opens up. Enchant books shape your loadout, potions add timed boosts, charms modify valuable pets, machines convert or upgrade pets and items, and mastery tracks reward repeated activities such as breaking objects, hatching, fishing, digging, keys, gifts, and machines.
+
+The collection side matters just as much as raw progress. Huge, Titanic, and Gargantuan pets, retired eggs, hoverboards, booth skins, Shiny Relics, and Trading Plaza routes all depend on source, availability, and how hard something is to replace. Exact item names, locations, unlock routes, and counts are best handled by the matching system list.`,
+    tipsMd: `- Push areas first when you are stuck. New areas unlock stronger eggs, better farming zones, machines, minigames, rebirth gates, and later worlds.
+- Hatch around the egg you can afford to repeat. A rare pet is useful, but steady hatching and area progress usually matter more than chasing one expensive pull too early.
+- Check machine inputs before spending pets or items. Some stations are simple upgrades, while others consume valuable pets, lock rewards behind timers, or use limited recipes.
+- Time potions and enchants around one job. Farming, hatching, damage, drops, mastery XP, and chest runs all want different boost setups.
+- Treat mastery as a long grind, not a side note. Breakables, eggs, gifts, keys, potions, enchants, fishing, digging, and machines all improve when you keep using their systems.
+- Use minigame timers and Shiny Relic routes as repeat goals between area pushes. They are easiest to manage when you know the area or world each one belongs to.
+- For hoverboards, booths, retired eggs, and older pets, source and availability matter more than rarity alone. Some items are direct unlocks, while others mostly depend on trading.`,
+    controlsJson: [
+      {
+        action: "Move",
+        desktop: "W / A / S / D or arrow keys",
+        mobile: "Virtual joystick"
+      },
+      {
+        action: "Jump",
+        desktop: "Space",
+        mobile: "Jump button"
+      },
+      {
+        action: "Break objects and collect rewards",
+        desktop: "Click breakables, rewards, or UI buttons",
+        mobile: "Tap breakables, rewards, or UI buttons"
+      },
+      {
+        action: "Use machines, eggs, menus, and prompts",
+        desktop: "Click the prompt or button",
+        mobile: "Tap the prompt or button"
+      },
+      {
+        action: "Equip or unequip hoverboard",
+        desktop: "Q or the hoverboard icon",
+        mobile: "Hoverboard icon"
+      }
+    ],
+    coverImage: null
+  },
   "blox-fruits": {
     metaDescription: "Blox Fruits wiki hub with active codes, fruit and weapon catalogs, quest routes, bosses, sea events, controls, and Roblox game details.",
     tipsMd: `- Follow the quest route before chasing random bosses. First Sea teaches the basic loop, Second Sea starts at Level 700, and Third Sea opens around Level 1500 with late-game islands leading toward the 2800 cap.
