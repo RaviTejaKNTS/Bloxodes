@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { SiteFeedbackButton } from "@/components/SiteFeedbackButton";
 import { SiteTopNav } from "@/components/SiteTopNav";
 import type { CatalogTopNavContext, GameTopNavContext } from "@/lib/game-top-nav-types";
+import { cn } from "@/lib/utils";
 
 type SiteGameTopBarClientProps = {
   initialGameNav: GameTopNavContext | null;
@@ -65,10 +66,15 @@ export function SiteGameTopBarClient({ initialGameNav, initialCatalogNav, initia
     };
   }, [initialCatalogNav, initialGameNav, initialPathname, pathname]);
 
-  if (!gameNav && !catalogNav) return null;
+  const hasTopNav = Boolean(gameNav || catalogNav);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-border/60 bg-background/95 backdrop-blur">
+    <header
+      className={cn(
+        "sticky top-0 z-30 border-b border-border/60 bg-background/95 backdrop-blur",
+        !hasTopNav ? "hidden xl:block" : ""
+      )}
+    >
       <div className="container flex min-h-14 items-center gap-3 py-2">
         <SiteTopNav gameNav={gameNav} catalogNav={catalogNav} />
         <SiteFeedbackButton className="ml-auto hidden shrink-0 xl:inline-flex" labelClassName="inline" />
