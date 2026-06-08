@@ -89,17 +89,17 @@ Retention:
 - Hourly metric and hourly rank tables should be pruned after 90 days.
 - Daily tables should stay.
 
-Current GitHub Actions:
+Current automation:
 
-| Workflow | UTC schedule | Main outcome |
+| Job | Owner | Main outcome |
 | --- | --- | --- |
-| `.github/workflows/roblox-stats-hourly.yml` | `12 * * * *` | Refresh HOT stats, roll up today, snapshot relevant hourly playing ranks. |
-| `.github/workflows/universe-new-refresh.yml` | `7 */2 * * *` | Enrich NEW universes, refresh NEW stats, assign tiers. |
-| `.github/workflows/universe-warm-refresh.yml` | `32 */12 * * *` | Refresh WARM stats and assign tiers. |
-| `.github/workflows/universe-cold-refresh.yml` | `47 */6 * * *` | Refresh rotating COLD batch and assign tiers. |
-| `.github/workflows/roblox-stats-daily-finalize.yml` | `20 0 * * *` | Finalize yesterday daily stats, audit workflow, repair HOT/WARM media. |
-| `.github/workflows/roblox-stats-daily-ranks.yml` | `50 0 * * *` | Snapshot full daily all-game ranks. |
-| `.github/workflows/roblox-stats-hourly-retention.yml` | `25 1 * * *` | Prune hourly metric and rank history older than 90 days. |
+| `stats-hot-hourly` | Northflank | Refresh HOT stats, snapshot relevant hourly playing ranks, enqueue stats revalidation. |
+| `stats-daily-ranks` | Northflank | Snapshot full daily all-game ranks. |
+| `stats-new-refresh` | VPS worker | Enrich NEW universes, refresh NEW stats, assign tiers. |
+| `stats-warm-refresh` | VPS worker | Refresh WARM stats and assign tiers. |
+| `stats-cold-refresh` | VPS worker | Refresh rotating COLD batch and assign tiers. |
+| `stats-discovery` | VPS worker | Discover new universes and lightly enrich NEW rows. |
+| Daily rollup/prune | Supabase cron/RPC | Finalize daily stats and prune hourly history older than 90 days. |
 
 ## Planned Feature Layers
 

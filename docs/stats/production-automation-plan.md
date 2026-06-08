@@ -119,7 +119,7 @@ The Dockerfile reads `STATS_WORKER_COMMAND`, so each job can use the same image 
 
 | Job | Schedule UTC | Deadline | Command |
 | --- | --- | --- | --- |
-| `stats-hot-hourly` | `12 * * * *` | 90 min | `npm run stats:refresh -- --tier HOT --rollup-today --limit 10000 && npm run stats:rank -- --all --granularity hourly --rank-set playing --snapshot-scope relevant && npm run enqueue:revalidation -- --source stats_hot_northflank --event stats:stats --event stats:games` |
+| `stats-hot-hourly` | `12 * * * *` | 90 min | `npm run stats:refresh -- --tier HOT --limit 10000 && npm run stats:rank -- --all --granularity hourly --rank-set playing --snapshot-scope relevant && npm run enqueue:revalidation -- --source stats_hot_northflank --event stats:stats --event stats:games` |
 | `stats-daily-ranks` | `50 0 * * *` | 90 min | `npm run stats:rank -- --all --granularity daily --rank-set all --snapshot-scope all && npm run enqueue:revalidation -- --source stats_daily_ranks_northflank --event stats:games` |
 
 Recommended Northflank env:
@@ -442,7 +442,7 @@ Use monthly partitions first. Once partitioned, retention should drop old partit
 7. Move NEW/WARM/COLD/discovery/enrichment to VPS worker.
 8. Add batch stats/rank RPCs.
 9. Add table partitioning for hourly tables.
-10. Disable old GitHub stats workflows after equivalent jobs are verified.
+10. Monitor Northflank/VPS run durations and tune limits as universe volume grows.
 
 ## Verification Checklist
 

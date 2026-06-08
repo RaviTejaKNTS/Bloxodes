@@ -150,7 +150,7 @@ function buildSteps(options: Options): Step[] {
     npmStep(
       "HOT stats refresh",
       "stats:refresh",
-      ["--tier", "HOT", "--rollup-today", "--limit", String(options.hotStatsLimit)],
+      ["--tier", "HOT", "--limit", String(options.hotStatsLimit)],
       options.hotStatsLimit > 0
     ),
     npmStep(

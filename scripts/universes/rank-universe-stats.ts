@@ -74,11 +74,15 @@ function scopeFor(row: UniverseRankRow, rankType: RankType): string | null {
   return "global";
 }
 
-function orderColumnFor(rankType: RankType) {
+function orderColumnFor(rankType: RankType): "playing" | "visits" | "favorites" | "likes" {
   if (rankType === "global_visits") return "visits";
   if (rankType === "global_favorites") return "favorites";
   if (rankType === "global_rating") return "likes";
   return "playing";
+}
+
+function orderValueFor(row: UniverseRankRow, orderColumn: ReturnType<typeof orderColumnFor>) {
+  return row[orderColumn];
 }
 
 function isRelevantSnapshot(row: UniverseRankRow, rankType: RankType, rank: number, options: Options) {
@@ -93,8 +97,9 @@ async function fetchRankRows(rankType: RankType, options: Options): Promise<Univ
   const sb = supabaseAdmin();
   const orderColumn = orderColumnFor(rankType);
   const rows: UniverseRankRow[] = [];
-  let from = 0;
   const pageSize = Math.max(1, options.pageSize);
+  let lastOrderValue: number | null = null;
+  let lastUniverseId: number | null = null;
 
   while (true) {
     if (options.limit > 0 && rows.length >= options.limit) break;
@@ -111,15 +116,21 @@ async function fetchRankRows(rankType: RankType, options: Options): Promise<Univ
       query = query.or("stats_tier.neq.NEW,stats_tier.is.null");
     }
 
+    if (lastOrderValue != null && lastUniverseId != null) {
+      query = query.or(`${orderColumn}.lt.${lastOrderValue},and(${orderColumn}.eq.${lastOrderValue},universe_id.gt.${lastUniverseId})`);
+    }
+
     const { data, error } = await query
       .order(orderColumn, { ascending: false, nullsFirst: false })
       .order("universe_id", { ascending: true })
-      .range(from, from + currentPageSize - 1);
+      .limit(currentPageSize);
     if (error) throw error;
     const chunk = (data ?? []) as UniverseRankRow[];
     rows.push(...chunk);
     if (chunk.length < currentPageSize) break;
-    from += currentPageSize;
+    const lastRow = chunk[chunk.length - 1];
+    lastOrderValue = orderValueFor(lastRow, orderColumn);
+    lastUniverseId = lastRow.universe_id;
   }
 
   if (rankType !== "global_rating") return rows;
@@ -154,6 +165,26 @@ function snapshotBase(options: Options, sampledAt: string) {
   return { ...base, hour_start: sampledAt };
 }
 
+function snapshotKey(row: RankSnapshotPayload, options: Options) {
+  const timestampKey = options.granularity === "daily" ? row.stat_date : row.hour_start;
+  return `${row.universe_id}:${row.rank_type}:${timestampKey ?? ""}`;
+}
+
+function dedupePayload(payload: RankSnapshotPayload[], options: Options) {
+  if (payload.length < 2) return payload;
+  const rowsByKey = new Map<string, RankSnapshotPayload>();
+  let duplicateCount = 0;
+  for (const row of payload) {
+    const key = snapshotKey(row, options);
+    if (rowsByKey.has(key)) duplicateCount += 1;
+    rowsByKey.set(key, row);
+  }
+  if (duplicateCount > 0) {
+    console.warn(`Dropped ${duplicateCount} duplicate rank snapshot row(s) before upsert.`);
+  }
+  return [...rowsByKey.values()];
+}
+
 async function writeGlobalRankType(rankType: RankType, rows: UniverseRankRow[], options: Options, sampledAt: string) {
   const payload: RankSnapshotPayload[] = [];
   rows.forEach((row, index) => {
@@ -168,7 +199,7 @@ async function writeGlobalRankType(rankType: RankType, rows: UniverseRankRow[], 
       ...snapshotBase(options, sampledAt)
     });
   });
-  return writePayload(payload, options);
+  return writePayload(dedupePayload(payload, options), options);
 }
 
 async function writeScopedPlayingRankType(rankType: "genre_playing" | "subgenre_playing", rows: UniverseRankRow[], options: Options, sampledAt: string) {
@@ -196,7 +227,7 @@ async function writeScopedPlayingRankType(rankType: "genre_playing" | "subgenre_
         });
       });
   }
-  return writePayload(payload, options);
+  return writePayload(dedupePayload(payload, options), options);
 }
 
 async function writeRankType(rankType: RankType, options: Options, sampledAt: string) {
