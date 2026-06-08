@@ -52,6 +52,8 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | --- | --- | --- |
 | Import games into Supabase | `scripts/games/import-games.ts` | `npm run import:games` |
 | Collect Roblox universes from Explore | `scripts/universes/collect-roblox-universes.ts` | `npm run collect:universes` |
+| Discover Roblox universes from omni-search | `scripts/universes/search-roblox-universes.ts` | `npm run discover:universes:search` |
+| Discover Roblox universes from known creators/groups | `scripts/universes/expand-roblox-creators.ts` | `npm run discover:universes:creators` |
 | Run local-safe universe pipeline | `scripts/universes/run-universe-pipeline.ts` | `npm run pipeline:universes` |
 | Backfill missing universe IDs | `scripts/backfill/backfill-game-universes.ts` | `npm run backfill:universes` |
 | Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes`, `npm run enrich:universes:light`, `npm run enrich:universes:deep` |
