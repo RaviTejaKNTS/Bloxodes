@@ -126,7 +126,9 @@ Current VPS crontab block:
 32 */12 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-warm-refresh "npm run stats:refresh:warm -- --limit 20000 && npm run stats:tier -- --tier WARM && npm run enqueue:revalidation -- --source stats_warm_vps --event stats:stats --event stats:games"
 47 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-cold-refresh "npm run stats:refresh:cold -- --limit 10000 && npm run stats:tier -- --tier COLD && npm run enqueue:revalidation -- --source stats_cold_vps --event stats:stats --event stats:games"
 35 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery "npm run collect:universes && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
-5 2 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-deep-enrichment "npm run enrich:universes:deep -- --tier HOT --limit 500 --batch 25"
+20 3 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-search "npm run discover:universes:search -- --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
+10 4 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-creators "npm run discover:universes:creators -- --limit 500 --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
+5 5 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-deep-enrichment "npm run enrich:universes:deep -- --tier HOT --limit 500 --batch 25"
 10 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-audit "npm run stats:audit"
 # BLOXODES_STATS_WORKER_END
 ```
@@ -145,7 +147,13 @@ VPS logs live here:
 
 ### VPS Discovery Detail
 
-Current verified VPS discovery is Explore-only until the expanded discovery cron lines are installed on the VPS.
+Current verified VPS discovery has three separate cron jobs:
+
+```txt
+stats-discovery           -> Roblox Explore
+stats-discovery-search    -> Roblox omni-search
+stats-discovery-creators  -> known creator/group expansion
+```
 
 The cron runs:
 
@@ -181,9 +189,7 @@ roblox_universes
 
 It sets `raw_metadata.source = "explore"` and updates `last_seen_in_sort`.
 
-As of the last check, the VPS worker did not have active `search:universes` or `expand:creators` commands in the production worker repo. The only active universe discovery command there was `collect:universes`.
-
-Known limitation: if a Roblox game is not returned by the Explore sort pages for the configured country/devices during the crawl, this workflow will not discover it.
+Known limitation: if a Roblox game is not returned by Explore, search, or creator/group expansion, this workflow will not discover it.
 
 Recent verified discovery run:
 
@@ -191,6 +197,18 @@ Recent verified discovery run:
 2026-06-08T01:35:01+00:00 starting stats-discovery
 2026-06-08T01:42:46+00:00 finished stats-discovery
 Explore crawl complete: 125 sorts, 6780 entries stored, 1166 total unique universes
+```
+
+Recent verified VPS smoke checks after adding search/creator discovery:
+
+```txt
+stats-discovery-search-smoke:
+npm run discover:universes:search -- --query "VV ULTIMATUM" --max-pages 1 --dry-run
+40 candidates, 28 existing, 12 insertable, 0 inserted
+
+stats-discovery-creators-smoke:
+npm run discover:universes:creators -- --limit 1 --max-pages 1 --dry-run
+1 candidate, 1 existing, 0 insertable, 0 inserted
 ```
 
 The recurring `try-voice-chat` 404 in discovery logs is non-fatal:
@@ -225,7 +243,7 @@ source: public games from creators/groups behind known HOT/WARM universes
 purpose: catch other active games from creators we already know
 ```
 
-Suggested VPS cron additions after the worker image has the new scripts:
+Current VPS cron lines:
 
 ```cron
 20 3 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-search "npm run discover:universes:search -- --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
@@ -325,9 +343,9 @@ npm run enrich:universes:deep -- --tier HOT
 | WARM refresh | VPS worker `stats-warm-refresh` | Every 12 hours at `:32` UTC, `:02` IST |
 | COLD refresh | VPS worker `stats-cold-refresh` | Every 6 hours at `:47` UTC, `:17` IST |
 | Discovery | VPS worker `stats-discovery` | Daily `01:35` UTC, `07:05` IST |
-| Search discovery | VPS worker `stats-discovery-search` | Suggested daily `03:20` UTC, `08:50` IST |
-| Creator/group discovery | VPS worker `stats-discovery-creators` | Suggested daily `04:10` UTC, `09:40` IST |
-| Deep enrichment | VPS worker `stats-deep-enrichment` | Daily `02:05` UTC, `07:35` IST |
+| Search discovery | VPS worker `stats-discovery-search` | Daily `03:20` UTC, `08:50` IST |
+| Creator/group discovery | VPS worker `stats-discovery-creators` | Daily `04:10` UTC, `09:40` IST |
+| Deep enrichment | VPS worker `stats-deep-enrichment` | Daily `05:05` UTC, `10:35` IST |
 | Daily rollup + hourly prune | Supabase cron/RPC | Daily after UTC day boundary |
 
 ## Schema
