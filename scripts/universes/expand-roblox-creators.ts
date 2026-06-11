@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 import {
   fetchGameDetails,
   fetchJson,
@@ -26,6 +27,7 @@ const REQUEST_OPTIONS: FetchJsonOptions = {
 
 const DEFAULT_SEED_LIMIT = readPositiveNumber("ROBLOX_CREATOR_EXPAND_SEED_LIMIT", 500);
 const DEFAULT_MAX_PAGES = readPositiveNumber("ROBLOX_CREATOR_EXPAND_MAX_PAGES", 2);
+const CREATOR_GAMES_PAGE_LIMIT = clampCreatorGamesLimit(readPositiveNumber("ROBLOX_CREATOR_GAMES_PAGE_LIMIT", 50));
 
 type CreatorSeed = {
   type: "group" | "user";
@@ -98,6 +100,12 @@ Options:
 `);
 }
 
+function clampCreatorGamesLimit(value: number) {
+  if (value <= 10) return 10;
+  if (value <= 25) return 25;
+  return 50;
+}
+
 function normalizeCreatorType(value: string | null | undefined) {
   return value?.trim().toLowerCase() ?? "";
 }
@@ -139,7 +147,7 @@ function buildCreatorGamesUrl(seed: CreatorSeed, cursor: string | null) {
   const params = new URLSearchParams({
     accessFilter: "Public",
     sortOrder: "Asc",
-    limit: "100"
+    limit: String(CREATOR_GAMES_PAGE_LIMIT)
   });
   if (cursor) params.set("cursor", cursor);
   return seed.type === "group"
@@ -176,7 +184,7 @@ async function fetchCreatorCandidates(seed: CreatorSeed, maxPages: number) {
     const raw = await fetchJson(buildCreatorGamesUrl(seed, cursor), `${seed.type}:${seed.id}`, REQUEST_OPTIONS);
     const rows = Array.isArray(raw.data) ? raw.data : [];
     rows.forEach((row, index) => {
-      const candidate = candidateFromCreatorGame(row, seed, page * 100 + index + 1);
+      const candidate = candidateFromCreatorGame(row, seed, page * CREATOR_GAMES_PAGE_LIMIT + index + 1);
       if (candidate && !candidates.has(candidate.universeId)) candidates.set(candidate.universeId, candidate);
     });
     cursor = pickString(raw, ["nextPageCursor", "nextCursor"]);
@@ -188,39 +196,81 @@ async function fetchCreatorCandidates(seed: CreatorSeed, maxPages: number) {
 
 async function main() {
   const options = parseArgs();
-  const fetchedAt = new Date().toISOString();
-  const seeds = await fetchCreatorSeeds(options.seedLimit);
-  if (!seeds.length) {
-    console.log("No creator seeds found.");
-    return;
-  }
-
-  const candidates = new Map<number, UniverseDiscoveryCandidate>();
-  console.log(
-    `Starting creator discovery: ${seeds.length} creator seeds, max pages ${options.maxPages}, dryRun=${options.dryRun}`
-  );
-
-  for (const [index, seed] of seeds.entries()) {
-    const results = await fetchCreatorCandidates(seed, options.maxPages);
-    for (const candidate of results) {
-      if (!candidates.has(candidate.universeId)) candidates.set(candidate.universeId, candidate);
+  const run = await startStatsJobRun({
+    jobName: "discover_universes_creators",
+    metadata: {
+      seed_limit: options.seedLimit,
+      max_pages: options.maxPages,
+      creator_games_page_limit: CREATOR_GAMES_PAGE_LIMIT,
+      dry_run: options.dryRun
     }
-    console.log(` • ${index + 1}/${seeds.length} ${seed.type}:${seed.id}: ${results.length} candidates`);
-  }
-
-  const candidateRows = Array.from(candidates.values());
-  const details = await fetchGameDetails(candidateRows.map((candidate) => candidate.universeId), REQUEST_OPTIONS);
-  const result = await insertNewUniverseCandidates({
-    source: "roblox_creator_games",
-    candidates: candidateRows,
-    details,
-    fetchedAt,
-    dryRun: options.dryRun
   });
 
-  console.log(
-    `Creator discovery complete: ${result.candidates} candidates, ${result.existing} existing, ${result.insertable} insertable, ${result.inserted} inserted.`
-  );
+  const fetchedAt = new Date().toISOString();
+
+  try {
+    const seeds = await fetchCreatorSeeds(options.seedLimit);
+    if (!seeds.length) {
+      console.log("No creator seeds found.");
+      await finishStatsJobRun(run, { status: "skipped", metadata: { reason: "no_creator_seeds" } });
+      return;
+    }
+
+    const candidates = new Map<number, UniverseDiscoveryCandidate>();
+    let failedSeeds = 0;
+    console.log(
+      `Starting creator discovery: ${seeds.length} creator seeds, max pages ${options.maxPages}, page limit ${CREATOR_GAMES_PAGE_LIMIT}, dryRun=${options.dryRun}`
+    );
+
+    for (const [index, seed] of seeds.entries()) {
+      try {
+        const results = await fetchCreatorCandidates(seed, options.maxPages);
+        for (const candidate of results) {
+          if (!candidates.has(candidate.universeId)) candidates.set(candidate.universeId, candidate);
+        }
+        console.log(` • ${index + 1}/${seeds.length} ${seed.type}:${seed.id}: ${results.length} candidates`);
+      } catch (error) {
+        failedSeeds += 1;
+        console.warn(
+          ` • ${index + 1}/${seeds.length} ${seed.type}:${seed.id}: skipped after error: ${
+            error instanceof Error ? error.message : String(error)
+          }`
+        );
+      }
+    }
+
+    const candidateRows = Array.from(candidates.values());
+    const details = await fetchGameDetails(candidateRows.map((candidate) => candidate.universeId), REQUEST_OPTIONS);
+    const result = await insertNewUniverseCandidates({
+      source: "roblox_creator_games",
+      candidates: candidateRows,
+      details,
+      fetchedAt,
+      dryRun: options.dryRun
+    });
+
+    const status = failedSeeds > 0 ? "partial" : "success";
+    await finishStatsJobRun(run, {
+      status,
+      rowsClaimed: seeds.length,
+      rowsSucceeded: result.inserted,
+      rowsFailed: failedSeeds,
+      metadata: {
+        candidates: result.candidates,
+        existing: result.existing,
+        insertable: result.insertable,
+        inserted: result.inserted,
+        failed_seeds: failedSeeds
+      }
+    });
+
+    console.log(
+      `Creator discovery complete: ${result.candidates} candidates, ${result.existing} existing, ${result.insertable} insertable, ${result.inserted} inserted, ${failedSeeds} failed seeds.`
+    );
+  } catch (error) {
+    await finishStatsJobRun(run, { status: "failed", error });
+    throw error;
+  }
 }
 
 main().catch((error) => {

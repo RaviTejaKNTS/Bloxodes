@@ -22,6 +22,10 @@ type EventRow = {
   slug: string;
 };
 
+type WorkerRunRow = {
+  id?: string;
+};
+
 // Accept both legacy and dashboard-provided env names.
 const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
 const serviceRoleKey =
@@ -42,13 +46,27 @@ function logError(message: string, data?: Record<string, unknown>) {
 }
 
 async function fetchEvents(limit = 50): Promise<EventRow[]> {
+  const statsLimit = Math.max(1, Math.ceil(limit / 2));
+  const { data: statsData, error: statsError } = await supabase
+    .from("revalidation_events")
+    .select("id, entity_type, slug")
+    .eq("entity_type", "stats")
+    .order("created_at", { ascending: true })
+    .limit(statsLimit);
+  if (statsError) throw statsError;
+
+  const statsEvents = (statsData ?? []) as EventRow[];
+  const remaining = Math.max(0, limit - statsEvents.length);
+  if (remaining <= 0) return statsEvents;
+
   const { data, error } = await supabase
     .from("revalidation_events")
     .select("id, entity_type, slug")
+    .neq("entity_type", "stats")
     .order("created_at", { ascending: true })
-    .limit(limit);
+    .limit(remaining);
   if (error) throw error;
-  return (data ?? []) as EventRow[];
+  return [...statsEvents, ...((data ?? []) as EventRow[])];
 }
 
 async function deleteEvents(ids: string[]) {
@@ -104,6 +122,59 @@ async function revalidateEvents(events: EventRow[]): Promise<boolean> {
   return false;
 }
 
+async function startWorkerRun(batchSizeValue: number): Promise<string | null> {
+  try {
+    const { data, error } = await supabase
+      .from("revalidation_worker_runs")
+      .insert({
+        status: "running",
+        batch_size: batchSizeValue
+      })
+      .select("id")
+      .single();
+    if (error) throw error;
+    return ((data ?? {}) as WorkerRunRow).id ?? null;
+  } catch (error) {
+    logError("Failed to record revalidation worker start", { error: String(error) });
+    return null;
+  }
+}
+
+async function finishWorkerRun(
+  id: string | null,
+  input: {
+    status: "success" | "failed" | "skipped";
+    fetchedCount: number;
+    processedCount: number;
+    failedCount: number;
+    durationMs: number;
+    error?: string;
+    events: EventRow[];
+    responseBody?: string;
+  }
+) {
+  if (!id) return;
+  try {
+    const { error } = await supabase
+      .from("revalidation_worker_runs")
+      .update({
+        finished_at: new Date().toISOString(),
+        status: input.status,
+        fetched_count: input.fetchedCount,
+        processed_count: input.processedCount,
+        failed_count: input.failedCount,
+        duration_ms: input.durationMs,
+        error: input.error ?? null,
+        events: input.events.map((event) => ({ type: event.entity_type, slug: event.slug })),
+        response_body: input.responseBody ?? null
+      })
+      .eq("id", id);
+    if (error) throw error;
+  } catch (error) {
+    logError("Failed to record revalidation worker finish", { error: String(error) });
+  }
+}
+
 serve(async (req) => {
   if (!revalidateEndpoint || !revalidateSecret) {
     logError("Missing REVALIDATE env vars");
@@ -113,10 +184,14 @@ serve(async (req) => {
     );
   }
 
+  const startedAt = Date.now();
+  const effectiveBatchSize = Math.max(1, batchSize);
+  const runId = await startWorkerRun(effectiveBatchSize);
+
   try {
     const events = await fetchEvents(100);
     logInfo("Fetched events", { count: events.length });
-    const eventsToProcess = events.slice(0, Math.max(1, batchSize));
+    const eventsToProcess = events.slice(0, effectiveBatchSize);
     const ok = await revalidateEvents(eventsToProcess);
 
     if (requestDelayMs > 0) {
@@ -126,6 +201,15 @@ serve(async (req) => {
     if (ok) {
       await deleteEvents(eventsToProcess.map((event) => event.id));
     }
+
+    await finishWorkerRun(runId, {
+      status: ok ? "success" : "failed",
+      fetchedCount: events.length,
+      processedCount: ok ? eventsToProcess.length : 0,
+      failedCount: ok ? 0 : eventsToProcess.length,
+      durationMs: Date.now() - startedAt,
+      events: eventsToProcess
+    });
 
     logInfo("Batch result", {
       processed: ok ? eventsToProcess.length : 0,
@@ -143,6 +227,15 @@ serve(async (req) => {
     );
   } catch (error) {
     logError("Unhandled error", { error: String(error) });
+    await finishWorkerRun(runId, {
+      status: "failed",
+      fetchedCount: 0,
+      processedCount: 0,
+      failedCount: 0,
+      durationMs: Date.now() - startedAt,
+      error: String(error),
+      events: []
+    });
     return new Response(JSON.stringify({ error: String(error) }), {
       status: 500,
       headers: { "Content-Type": "application/json" }

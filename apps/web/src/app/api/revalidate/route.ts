@@ -56,6 +56,7 @@ const WIKI_SITEMAP_PATH = "/sitemaps/wiki.xml";
 const STATS_SITEMAP_PATH = "/sitemaps/stats.xml";
 const FEED_PATH = "/feed.xml";
 const PAGINATED_INDEX_PURGE_LIMIT = 50;
+const STATS_DETAIL_PATH_PATTERN = /^\/stats\/games\/[^/?#]+$/;
 
 function assertSecret(request: Request) {
   const secret = process.env.REVALIDATE_SECRET;
@@ -210,10 +211,15 @@ function revalidateForStats(slug: string) {
         : normalized.startsWith("games/")
           ? ["/stats", "/stats/games", `/stats/games/${normalized.replace(/^games\//, "")}`]
           : ["/stats", "/stats/games"];
+  const detailSlug = normalized.startsWith("games/") ? normalized.replace(/^games\//, "") : null;
   return applyRevalidation(
-    [...scopedPaths, "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
-    ["stats", "stats-home", "stats-games", "home"]
+    [...scopedPaths, "/api/stats/games", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
+    ["stats", "stats-home", "stats-games", detailSlug ? `stats-game:${detailSlug}` : "", "home"]
   );
+}
+
+function warmableRevalidationPaths(paths: string[]) {
+  return paths.filter((path) => !STATS_DETAIL_PATH_PATTERN.test(path));
 }
 
 function revalidateForTools(slug: string) {
@@ -670,8 +676,9 @@ export async function POST(request: Request) {
   impactedListSlugs = Array.from(new Set(impactedListSlugs));
 
   const cloudflare = await purgeCloudflarePublicCache({ paths: purgePaths, tags: purgeTags });
+  const warmPaths = warmableRevalidationPaths(purgePaths);
   const cloudflareWarm = cloudflare.enabled && cloudflare.ok
-    ? await warmCloudflarePaths(purgePaths)
+    ? await warmCloudflarePaths(warmPaths)
     : {
         enabled: false,
         ok: true,

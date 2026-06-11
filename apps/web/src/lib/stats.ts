@@ -5,6 +5,15 @@ import { slugify, statsUniverseSlug } from "@/lib/slug";
 export { formatCompactNumber, formatFullNumber, formatPercent } from "@/lib/stats-format";
 
 export const STATS_PAGE_SIZE = 50;
+const STATS_HOME_TOP_GAMES_LIMIT = 10;
+const STATS_HOME_RISERS_LIMIT = 10;
+const STATS_HOME_GENRES_LIMIT = 10;
+const STATS_HOME_RISERS_MIN_PLAYERS = 5000;
+const STATS_HOME_RISERS_MIN_GAIN = 1000;
+const SUPABASE_READ_PAGE_SIZE = 1000;
+const SUPABASE_IN_CHUNK_SIZE = 500;
+const STATS_GROWTH_BASELINE_TOLERANCE_MS = 90 * 60 * 1000;
+let statsIndexAvailability: Promise<boolean> | null = null;
 export const STATS_DESCRIPTION =
   "Live Roblox game stats tracked by Bloxodes, including current players, visits, favorites, ratings, trends, and public history charts.";
 
@@ -244,6 +253,20 @@ type UniverseRow = {
   vr_enabled: boolean | null;
 };
 
+type StatsGameIndexRow = UniverseRow & {
+  rating_percent: number | null;
+  baseline_playing_24h: number | null;
+  baseline_playing_7d: number | null;
+  growth_24h: number | null;
+  growth_24h_percent: number | null;
+  growth_7d: number | null;
+  growth_7d_percent: number | null;
+  peak_24h: number | null;
+  peak_7d: number | null;
+  global_playing_rank: number | null;
+  indexed_at: string | null;
+};
+
 type HourlyRow = {
   universe_id: number;
   hour_start: string;
@@ -297,6 +320,18 @@ const SORT_COLUMNS: Partial<Record<StatsSortKey, keyof UniverseRow>> = {
   playing: "playing",
   visits: "visits",
   favorites: "favorites",
+  updated: "updated_at_api",
+  created: "created_at_api"
+};
+
+const INDEX_SORT_COLUMNS: Record<StatsSortKey, keyof StatsGameIndexRow> = {
+  playing: "playing",
+  growth_24h: "growth_24h",
+  growth_7d: "growth_7d",
+  visits: "visits",
+  favorites: "favorites",
+  rating: "rating_percent",
+  peak: "peak_24h",
   updated: "updated_at_api",
   created: "created_at_api"
 };
@@ -380,6 +415,21 @@ function trendScore(row: StatsGame) {
   return Math.round(playerScore + weekScore + ratingScore + trafficScore);
 }
 
+function momentumRiserScore(row: StatsGame) {
+  const absoluteGainScore = Math.min(Math.max(row.growth24h ?? 0, 0), 50_000) / 50_000 * 55;
+  const percentGainScore = Math.min(Math.max(row.growth24hPercent ?? 0, 0), 300) / 300 * 30;
+  const playerScaleScore = row.playing ? Math.min(Math.log10(Math.max(row.playing, 1)) / 6, 1) * 15 : 0;
+  return absoluteGainScore + percentGainScore + playerScaleScore;
+}
+
+function isEligibleHomeRiser(row: StatsGame) {
+  return (
+    (row.playing ?? 0) >= STATS_HOME_RISERS_MIN_PLAYERS &&
+    (row.growth24h ?? 0) >= STATS_HOME_RISERS_MIN_GAIN &&
+    typeof row.growth24hPercent === "number"
+  );
+}
+
 function mapUniverse(row: UniverseRow): StatsGame {
   const ratingPercent = getRatingPercent(row.likes, row.dislikes);
   return {
@@ -424,61 +474,204 @@ function mapUniverse(row: UniverseRow): StatsGame {
   };
 }
 
+function mapIndexedGame(row: StatsGameIndexRow): StatsGame {
+  const base = mapUniverse(row);
+  const hydrated = {
+    ...base,
+    ratingPercent: toNumber(row.rating_percent) ?? base.ratingPercent,
+    rank: toNumber(row.global_playing_rank),
+    growth24h: toNumber(row.growth_24h),
+    growth24hPercent: toNumber(row.growth_24h_percent),
+    growth7d: toNumber(row.growth_7d),
+    growth7dPercent: toNumber(row.growth_7d_percent),
+    peak24h: toNumber(row.peak_24h),
+    peak7d: toNumber(row.peak_7d)
+  };
+  return { ...hydrated, trendScore: trendScore(hydrated) };
+}
+
+async function isStatsIndexAvailable() {
+  statsIndexAvailability ??= (async () => {
+    try {
+      const { data, error } = await supabaseAdmin()
+        .from("stats_game_current_index")
+        .select("universe_id")
+        .limit(1);
+      return !error && (data?.length ?? 0) > 0;
+    } catch {
+      return false;
+    }
+  })();
+  return statsIndexAvailability;
+}
+
 function hoursAgo(hours: number) {
   return new Date(Date.now() - hours * 60 * 60 * 1000).toISOString();
+}
+
+function chunkArray<T>(items: T[], size: number): T[][] {
+  const chunks: T[][] = [];
+  for (let index = 0; index < items.length; index += size) {
+    chunks.push(items.slice(index, index + size));
+  }
+  return chunks;
+}
+
+type GrowthHourlyRow = {
+  universe_id: number;
+  hour_start: string;
+  playing: number | null;
+  peak_playing: number | null;
+};
+
+async function loadHourlyGrowthRows(
+  universeIds: number[],
+  options: { startIso: string; endIso?: string | null }
+): Promise<GrowthHourlyRow[]> {
+  if (!universeIds.length) return [];
+  const sb = supabaseAdmin();
+  const rows: GrowthHourlyRow[] = [];
+
+  for (const ids of chunkArray(universeIds, SUPABASE_IN_CHUNK_SIZE)) {
+    let offset = 0;
+    while (true) {
+      let query = sb
+        .from("roblox_universe_stats_hourly")
+        .select("universe_id, hour_start, playing, peak_playing")
+        .in("universe_id", ids)
+        .gte("hour_start", options.startIso);
+
+      if (options.endIso) {
+        query = query.lte("hour_start", options.endIso);
+      }
+
+      const { data, error } = await query
+        .order("hour_start", { ascending: true })
+        .range(offset, offset + SUPABASE_READ_PAGE_SIZE - 1);
+
+      if (error) throw error;
+
+      const chunk = (data ?? []) as GrowthHourlyRow[];
+      rows.push(...chunk);
+      if (chunk.length < SUPABASE_READ_PAGE_SIZE) break;
+      offset += SUPABASE_READ_PAGE_SIZE;
+    }
+  }
+
+  return rows;
+}
+
+function groupHourlyRows(rows: GrowthHourlyRow[]) {
+  const byId = new Map<number, GrowthHourlyRow[]>();
+  for (const row of rows) {
+    const current = byId.get(row.universe_id) ?? [];
+    current.push(row);
+    byId.set(row.universe_id, current);
+  }
+  return byId;
+}
+
+function closestPlayingRow(rows: GrowthHourlyRow[], targetMs: number): GrowthHourlyRow | null {
+  return rows.reduce<GrowthHourlyRow | null>((best, row) => {
+    if (row.playing == null) return best;
+    const time = Date.parse(row.hour_start);
+    if (!Number.isFinite(time)) return best;
+    if (!best) return row;
+    return Math.abs(time - targetMs) < Math.abs(Date.parse(best.hour_start) - targetMs) ? row : best;
+  }, null);
+}
+
+function hydrateGrowthFromRows(game: StatsGame, index: number, rows: GrowthHourlyRow[], nowMs = Date.now()): StatsGame {
+  const cutoff24 = nowMs - 24 * 60 * 60 * 1000;
+  const cutoff7d = nowMs - 7 * 24 * 60 * 60 * 1000;
+  const first24 = closestPlayingRow(
+    rows.filter((row) => {
+      const time = Date.parse(row.hour_start);
+      return Number.isFinite(time) && Math.abs(time - cutoff24) <= STATS_GROWTH_BASELINE_TOLERANCE_MS;
+    }),
+    cutoff24
+  );
+  const first7d = closestPlayingRow(
+    rows.filter((row) => {
+      const time = Date.parse(row.hour_start);
+      return Number.isFinite(time) && Math.abs(time - cutoff7d) <= STATS_GROWTH_BASELINE_TOLERANCE_MS;
+    }),
+    cutoff7d
+  );
+  const peak24h = rows
+    .filter((row) => Date.parse(row.hour_start) >= cutoff24)
+    .reduce<number | null>((max, row) => (row.peak_playing == null ? max : max == null ? row.peak_playing : Math.max(max, row.peak_playing)), null);
+  const peak7d = rows.reduce<number | null>(
+    (max, row) => (row.peak_playing == null ? max : max == null ? row.peak_playing : Math.max(max, row.peak_playing)),
+    null
+  );
+  const growth24h = game.playing != null && first24?.playing != null ? game.playing - first24.playing : null;
+  const growth7d = game.playing != null && first7d?.playing != null ? game.playing - first7d.playing : null;
+  const hydrated = {
+    ...game,
+    rank: index + 1,
+    growth24h,
+    growth24hPercent: percentChange(game.playing, first24?.playing ?? null),
+    growth7d,
+    growth7dPercent: percentChange(game.playing, first7d?.playing ?? null),
+    peak24h,
+    peak7d
+  };
+  return { ...hydrated, trendScore: trendScore(hydrated) };
 }
 
 async function attachGrowth(games: StatsGame[]): Promise<StatsGame[]> {
   if (!games.length) return games;
   const ids = games.map((game) => game.universeId);
-  const sb = supabaseAdmin();
-  const { data, error } = await sb
-    .from("roblox_universe_stats_hourly")
-    .select("universe_id, hour_start, playing, peak_playing")
-    .in("universe_id", ids)
-    .gte("hour_start", hoursAgo(24 * 7 + 2))
-    .order("hour_start", { ascending: true });
+  const nowMs = Date.now();
+  const startIso = new Date(nowMs - (24 * 7 + 3) * 60 * 60 * 1000).toISOString();
+  let data: GrowthHourlyRow[];
 
-  if (error) {
-    console.warn("Failed to load hourly growth stats", error.message);
+  try {
+    data = await loadHourlyGrowthRows(ids, { startIso });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn("Failed to load hourly growth stats", message);
     return games.map((game, index) => ({ ...game, rank: index + 1, trendScore: trendScore(game) }));
   }
 
-  const byId = new Map<number, Array<{ hour_start: string; playing: number | null; peak_playing: number | null }>>();
-  for (const row of (data ?? []) as Array<{ universe_id: number; hour_start: string; playing: number | null; peak_playing: number | null }>) {
-    const current = byId.get(row.universe_id) ?? [];
-    current.push(row);
-    byId.set(row.universe_id, current);
-  }
-
-  const cutoff24 = Date.now() - 24 * 60 * 60 * 1000;
-  const cutoff7d = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const byId = groupHourlyRows(data);
 
   return games.map((game, index) => {
     const rows = byId.get(game.universeId) ?? [];
-    const first24 = rows.find((row) => Date.parse(row.hour_start) >= cutoff24);
-    const first7d = rows.find((row) => Date.parse(row.hour_start) >= cutoff7d);
-    const peak24h = rows
-      .filter((row) => Date.parse(row.hour_start) >= cutoff24)
-      .reduce<number | null>((max, row) => (row.peak_playing == null ? max : max == null ? row.peak_playing : Math.max(max, row.peak_playing)), null);
-    const peak7d = rows.reduce<number | null>(
-      (max, row) => (row.peak_playing == null ? max : max == null ? row.peak_playing : Math.max(max, row.peak_playing)),
-      null
-    );
-    const growth24h = game.playing != null && first24?.playing != null ? game.playing - first24.playing : null;
-    const growth7d = game.playing != null && first7d?.playing != null ? game.playing - first7d.playing : null;
-    const hydrated = {
-      ...game,
-      rank: index + 1,
-      growth24h,
-      growth24hPercent: percentChange(game.playing, first24?.playing ?? null),
-      growth7d,
-      growth7dPercent: percentChange(game.playing, first7d?.playing ?? null),
-      peak24h,
-      peak7d
-    };
-    return { ...hydrated, trendScore: trendScore(hydrated) };
+    return hydrateGrowthFromRows(game, index, rows, nowMs);
   });
+}
+
+async function attachGrowthBaselines(games: StatsGame[]): Promise<StatsGame[]> {
+  if (!games.length) return games;
+  const nowMs = Date.now();
+  const cutoff24 = nowMs - 24 * 60 * 60 * 1000;
+  const cutoff7d = nowMs - 7 * 24 * 60 * 60 * 1000;
+  const ids = games.map((game) => game.universeId);
+  const baselineWindows = [
+    {
+      startIso: new Date(cutoff24 - STATS_GROWTH_BASELINE_TOLERANCE_MS).toISOString(),
+      endIso: new Date(cutoff24 + STATS_GROWTH_BASELINE_TOLERANCE_MS).toISOString()
+    },
+    {
+      startIso: new Date(cutoff7d - STATS_GROWTH_BASELINE_TOLERANCE_MS).toISOString(),
+      endIso: new Date(cutoff7d + STATS_GROWTH_BASELINE_TOLERANCE_MS).toISOString()
+    }
+  ];
+  let data: GrowthHourlyRow[];
+
+  try {
+    const chunks = await Promise.all(baselineWindows.map((window) => loadHourlyGrowthRows(ids, window)));
+    data = chunks.flat();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn("Failed to load hourly growth baselines", message);
+    return games.map((game, index) => ({ ...game, rank: index + 1, trendScore: trendScore(game) }));
+  }
+
+  const byId = groupHourlyRows(data);
+  return games.map((game, index) => hydrateGrowthFromRows(game, index, byId.get(game.universeId) ?? [], nowMs));
 }
 
 async function listBaseGames(options: {
@@ -492,6 +685,59 @@ async function listBaseGames(options: {
   tierForSitemap?: boolean;
 }) {
   const sb = supabaseAdmin();
+  const indexSelect = `
+    universe_id, root_place_id, name, display_name, slug, description,
+    creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
+    icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
+    rating_percent, stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+    last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
+    console_enabled, vr_enabled, baseline_playing_24h, baseline_playing_7d,
+    growth_24h, growth_24h_percent, growth_7d, growth_7d_percent, peak_24h,
+    peak_7d, global_playing_rank, indexed_at
+  `;
+  let indexQuery = sb
+    .from("stats_game_current_index")
+    .select(indexSelect, { count: options.count ?? undefined })
+    .not("slug", "is", null);
+
+  if (options.q?.trim()) {
+    const pattern = `%${options.q.trim().replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
+    indexQuery = indexQuery.or(`name.ilike.${pattern},display_name.ilike.${pattern},creator_name.ilike.${pattern}`);
+  }
+
+  if (options.genre && options.genre !== "all") {
+    indexQuery = indexQuery.or(`genre.eq.${options.genre},genre_l1.eq.${options.genre}`);
+  }
+
+  if (typeof options.minPlayers === "number" && options.minPlayers > 0) {
+    indexQuery = indexQuery.gte("playing", options.minPlayers);
+  }
+
+  if (options.tierForSitemap) {
+    indexQuery = indexQuery.or("stats_tier.in.(HOT,WARM),playing.gte.100,visits.gte.10000000");
+  }
+
+  const indexSort = options.sort ?? "playing";
+  const indexSortColumn = INDEX_SORT_COLUMNS[indexSort];
+  indexQuery = indexQuery
+    .order(indexSortColumn, { ascending: indexSort === "created", nullsFirst: false })
+    .order("universe_id", { ascending: true })
+    .range(options.offset ?? 0, (options.offset ?? 0) + options.limit - 1);
+
+  const indexResult = await indexQuery;
+  if (!indexResult.error) {
+    const indexRows = (indexResult.data ?? []) as StatsGameIndexRow[];
+    if (indexRows.length > 0 || (await isStatsIndexAvailable())) {
+      return {
+        rows: indexRows.map(mapIndexedGame),
+        total: indexResult.count ?? 0
+      };
+    }
+  }
+  if (indexResult.error && indexResult.error.code !== "42P01") {
+    console.warn("Failed to read stats_game_current_index; falling back to roblox_universes", indexResult.error.message);
+  }
+
   const select = `
     universe_id, root_place_id, name, display_name, slug, description,
     creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
@@ -522,10 +768,10 @@ async function listBaseGames(options: {
     query = query.or("stats_tier.in.(HOT,WARM),playing.gte.100,visits.gte.10000000");
   }
 
-  const sort = options.sort ?? "playing";
-  const sortColumn = SORT_COLUMNS[sort];
+  const fallbackSort = options.sort ?? "playing";
+  const sortColumn = SORT_COLUMNS[fallbackSort];
   if (sortColumn) {
-    query = query.order(sortColumn, { ascending: sort === "created", nullsFirst: false });
+    query = query.order(sortColumn, { ascending: fallbackSort === "created", nullsFirst: false });
   } else {
     query = query.order("playing", { ascending: false, nullsFirst: false });
   }
@@ -540,7 +786,97 @@ async function listBaseGames(options: {
   };
 }
 
+async function listAllBaseGames(options: Omit<Parameters<typeof listBaseGames>[0], "limit" | "offset" | "count"> & { maxRows?: number }) {
+  const { maxRows: requestedMaxRows, ...listOptions } = options;
+  const maxRows = Math.max(requestedMaxRows ?? 5000, STATS_HOME_RISERS_LIMIT);
+  const rows: StatsGame[] = [];
+  let offset = 0;
+
+  while (rows.length < maxRows) {
+    const { rows: chunk } = await listBaseGames({
+      ...listOptions,
+      limit: Math.min(SUPABASE_READ_PAGE_SIZE, maxRows - rows.length),
+      offset,
+      count: null
+    });
+    rows.push(...chunk);
+    if (chunk.length < SUPABASE_READ_PAGE_SIZE) break;
+    offset += SUPABASE_READ_PAGE_SIZE;
+  }
+
+  return rows;
+}
+
+async function listCurrentRisers(limit: number): Promise<StatsGame[]> {
+  const sb = supabaseAdmin();
+  const risers = await sb
+    .from("stats_risers_current_index")
+    .select("universe_id, rank_value")
+    .order("rank_value", { ascending: true })
+    .limit(limit);
+  if (risers.error || !(risers.data?.length)) {
+    return [];
+  }
+
+  const rankById = new Map(
+    ((risers.data ?? []) as Array<{ universe_id: number; rank_value: number }>).map((row) => [row.universe_id, row.rank_value])
+  );
+  const ids = [...rankById.keys()];
+  const indexRows = await sb
+    .from("stats_game_current_index")
+    .select(`
+      universe_id, root_place_id, name, display_name, slug, description,
+      creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
+      icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
+      rating_percent, stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+      last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
+      console_enabled, vr_enabled, baseline_playing_24h, baseline_playing_7d,
+      growth_24h, growth_24h_percent, growth_7d, growth_7d_percent, peak_24h,
+      peak_7d, global_playing_rank, indexed_at
+    `)
+    .in("universe_id", ids);
+  if (indexRows.error) return [];
+  return ((indexRows.data ?? []) as StatsGameIndexRow[])
+    .map(mapIndexedGame)
+    .sort((a, b) => (rankById.get(a.universeId) ?? Infinity) - (rankById.get(b.universeId) ?? Infinity))
+    .map((game) => ({ ...game, rank: rankById.get(game.universeId) ?? game.rank }));
+}
+
 export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> {
+  const { data, error } = await supabaseAdmin()
+    .from("stats_genre_current_index")
+    .select("genre, genre_slug, games, playing, visits, top_name, top_slug, top_icon_url, top_playing")
+    .order("playing", { ascending: false })
+    .limit(limit);
+
+  if (!error) {
+    return ((data ?? []) as Array<{
+      genre: string;
+      genre_slug: string;
+      games: number;
+      playing: number;
+      visits: number;
+      top_name: string | null;
+      top_slug: string | null;
+      top_icon_url: string | null;
+      top_playing: number | null;
+    }>).map((row) => ({
+      genre: row.genre,
+      slug: row.genre_slug,
+      games: row.games,
+      playing: row.playing,
+      visits: row.visits,
+      topGame: row.top_slug
+        ? {
+            name: row.top_name ?? row.genre,
+            slug: row.top_slug,
+            iconUrl: row.top_icon_url,
+            playing: row.top_playing
+          }
+        : null
+    }));
+  }
+
   const { rows } = await listBaseGames({ limit: 500, sort: "playing" });
   const map = new Map<string, StatsGenreSummary>();
   for (const game of rows) {
@@ -579,7 +915,7 @@ async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> 
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from("roblox_universe_stats_hourly")
-    .select("universe_id, hour_start, playing, peak_playing, avg_playing, visits_end, favorites_end, rating_percent, sample_count")
+    .select("universe_id, hour_start, playing, peak_playing, avg_playing, visits_end, favorites_end, likes_end, dislikes_end, rating_percent, sample_count")
     .in("universe_id", ids)
     .gte("hour_start", hoursAgo(24))
     .order("hour_start", { ascending: true });
@@ -590,6 +926,7 @@ async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> 
   }
 
   const byHour = new Map<string, StatsChartPoint>();
+  const ratingByHour = new Map<string, { total: number; weight: number }>();
   for (const row of (data ?? []) as HourlyRow[]) {
     const existing = byHour.get(row.hour_start) ?? {
       label: new Date(row.hour_start).toLocaleTimeString("en-US", { hour: "numeric", hour12: true, timeZone: "UTC" }),
@@ -608,21 +945,49 @@ async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> 
     existing.visits = (existing.visits ?? 0) + (row.visits_end ?? 0);
     existing.favorites = (existing.favorites ?? 0) + (row.favorites_end ?? 0);
     existing.samples = (existing.samples ?? 0) + (row.sample_count ?? 0);
+    const rating = getRatingPercent(row.likes_end, row.dislikes_end) ?? row.rating_percent;
+    if (typeof rating === "number") {
+      const sampleCount = Math.max(row.sample_count ?? 1, 1);
+      const current = ratingByHour.get(row.hour_start) ?? { total: 0, weight: 0 };
+      current.total += rating * sampleCount;
+      current.weight += sampleCount;
+      ratingByHour.set(row.hour_start, current);
+    }
     byHour.set(row.hour_start, existing);
+  }
+
+  for (const [hour, rating] of ratingByHour.entries()) {
+    const point = byHour.get(hour);
+    if (point && rating.weight > 0) {
+      point.rating = Math.round((rating.total / rating.weight) * 10) / 10;
+    }
   }
 
   return Array.from(byHour.values()).sort((a, b) => Date.parse(a.sampledAt) - Date.parse(b.sampledAt));
 }
 
 export async function getStatsHome(): Promise<StatsHomeData> {
-  const [{ rows: topBase }, { rows: visitedBase }, { total: trackedGames }, genres] = await Promise.all([
-    listBaseGames({ limit: 16, sort: "playing" }),
+  const [{ rows: topBase }, { rows: visitedBase }, { total: trackedGames }, genres, riserBase] = await Promise.all([
+    listBaseGames({ limit: STATS_HOME_TOP_GAMES_LIMIT, sort: "playing" }),
     listBaseGames({ limit: 10, sort: "visits" }),
     listBaseGames({ limit: 1, sort: "playing", count: "exact" }),
-    listStatsGenres(10)
+    listStatsGenres(STATS_HOME_GENRES_LIMIT),
+    listCurrentRisers(STATS_HOME_RISERS_LIMIT)
   ]);
-  const [topGames, mostVisited] = await Promise.all([attachGrowth(topBase), attachGrowth(visitedBase)]);
-  const sortedByTrend = [...topGames].sort((a, b) => b.trendScore - a.trendScore);
+  const [topGames, mostVisited, activeRisers] = await Promise.all([
+    Promise.resolve(topBase),
+    Promise.resolve(visitedBase),
+    Promise.resolve(riserBase)
+  ]);
+  const sortedByTrend = activeRisers
+    .filter(isEligibleHomeRiser)
+    .sort((a, b) => {
+      const scoreDelta = momentumRiserScore(b) - momentumRiserScore(a);
+      if (scoreDelta !== 0) return scoreDelta;
+      const growthDelta = (b.growth24h ?? -Infinity) - (a.growth24h ?? -Infinity);
+      if (growthDelta !== 0) return growthDelta;
+      return (b.playing ?? -Infinity) - (a.playing ?? -Infinity);
+    });
   const fallers = [...topGames]
     .filter((game) => typeof game.growth24h === "number" && game.growth24h < 0)
     .sort((a, b) => (a.growth24h ?? 0) - (b.growth24h ?? 0))
@@ -645,8 +1010,8 @@ export async function getStatsHome(): Promise<StatsHomeData> {
       totalVisits,
       lastUpdatedAt
     },
-    topGames: topGames.slice(0, 8),
-    risers: sortedByTrend.slice(0, 8),
+    topGames: topGames.slice(0, STATS_HOME_TOP_GAMES_LIMIT),
+    risers: sortedByTrend.slice(0, STATS_HOME_RISERS_LIMIT),
     fallers,
     mostVisited,
     genres,
@@ -693,17 +1058,14 @@ export async function listStatsGames(input: {
   const genre = input.genre?.trim() ?? "all";
   const minPlayers = typeof input.minPlayers === "number" && Number.isFinite(input.minPlayers) ? input.minPlayers : null;
 
-  const needsComputedSort = sort === "growth_24h" || sort === "growth_7d" || sort === "rating" || sort === "peak";
-  const baseLimit = needsComputedSort ? Math.max(250, pageSize) : pageSize;
-  const baseOffset = needsComputedSort ? 0 : offset;
   const [{ rows, total }, genreOptions] = await Promise.all([
     listBaseGames({
-      limit: baseLimit,
-      offset: baseOffset,
+      limit: pageSize,
+      offset,
       q,
       genre,
       minPlayers,
-      sort: needsComputedSort ? "playing" : sort,
+      sort,
       count: "planned"
     }),
     getStatsGenreOptions()
@@ -712,14 +1074,7 @@ export async function listStatsGames(input: {
     ? [genre, ...genreOptions].sort((a, b) => a.localeCompare(b))
     : genreOptions;
 
-  let games = await attachGrowth(rows);
-  if (sort === "growth_24h") games = games.sort((a, b) => (b.growth24h ?? -Infinity) - (a.growth24h ?? -Infinity));
-  if (sort === "growth_7d") games = games.sort((a, b) => (b.growth7d ?? -Infinity) - (a.growth7d ?? -Infinity));
-  if (sort === "rating") games = games.sort((a, b) => (b.ratingPercent ?? -Infinity) - (a.ratingPercent ?? -Infinity));
-  if (sort === "peak") games = games.sort((a, b) => (b.peak24h ?? -Infinity) - (a.peak24h ?? -Infinity));
-  if (needsComputedSort) {
-    games = games.slice(offset, offset + pageSize).map((game, index) => ({ ...game, rank: offset + index + 1 }));
-  }
+  const games = rows.map((game, index) => ({ ...game, rank: game.rank ?? offset + index + 1 }));
 
   return {
     games,
@@ -733,6 +1088,17 @@ export async function listStatsGames(input: {
 
 export async function getStatsGenreOptions(): Promise<string[]> {
   const sb = supabaseAdmin();
+  const genreIndex = await sb
+    .from("stats_genre_current_index")
+    .select("genre")
+    .order("genre", { ascending: true })
+    .limit(500);
+  if (!genreIndex.error) {
+    return ((genreIndex.data ?? []) as Array<{ genre: string | null }>)
+      .map((row) => row.genre)
+      .filter((value): value is string => Boolean(value?.trim()));
+  }
+
   const { data, error } = await sb
     .from("roblox_universes")
     .select("genre_l1, genre")
@@ -1274,6 +1640,16 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
   const sb = supabaseAdmin();
   const parsedUniverseId = parseStatsUniverseIdSlug(slug);
   const numericSlug = Number(slug);
+  const indexFields = `
+    universe_id, root_place_id, name, display_name, slug, description,
+    creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
+    icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
+    rating_percent, stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+    last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
+    console_enabled, vr_enabled, baseline_playing_24h, baseline_playing_7d,
+    growth_24h, growth_24h_percent, growth_7d, growth_7d_percent, peak_24h,
+    peak_7d, global_playing_rank, indexed_at
+  `;
   const fields = `
     universe_id, root_place_id, name, display_name, slug, description,
     creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
@@ -1284,6 +1660,14 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
   `;
 
   if (parsedUniverseId || Number.isFinite(numericSlug)) {
+    const indexed = await sb
+      .from("stats_game_current_index")
+      .select(indexFields)
+      .eq("universe_id", parsedUniverseId ?? numericSlug)
+      .limit(1)
+      .maybeSingle();
+    if (!indexed.error && indexed.data) return buildStatsGameDetail(indexed.data as StatsGameIndexRow);
+
     const { data, error } = await sb
       .from("roblox_universes")
       .select(fields)
@@ -1293,6 +1677,18 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
     if (error) throw error;
     if (data) return buildStatsGameDetail(data as UniverseRow);
   }
+
+  const indexed = await sb
+    .from("stats_game_current_index")
+    .select(indexFields)
+    .eq("slug", slug)
+    .order("visits", { ascending: false, nullsFirst: false })
+    .order("playing", { ascending: false, nullsFirst: false })
+    .order("last_stats_refreshed_at", { ascending: false, nullsFirst: false })
+    .order("universe_id", { ascending: true })
+    .limit(1)
+    .maybeSingle();
+  if (!indexed.error && indexed.data) return buildStatsGameDetail(indexed.data as StatsGameIndexRow);
 
   const { data, error } = await sb
     .from("roblox_universes")
@@ -1310,8 +1706,11 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
   return buildStatsGameDetail(data as UniverseRow);
 }
 
-async function buildStatsGameDetail(row: UniverseRow): Promise<StatsGameDetailData> {
-  const baseGame = (await attachGrowth([mapUniverse(row)]))[0];
+async function buildStatsGameDetail(row: UniverseRow | StatsGameIndexRow): Promise<StatsGameDetailData> {
+  const baseGame =
+    "indexed_at" in row
+      ? mapIndexedGame(row)
+      : (await attachGrowth([mapUniverse(row)]))[0];
   const [initialChart, initialRankChart, relatedLinks, sameCreator, similarGames, includedInLists, globalRank] = await Promise.all([
     getStatsGameChart(baseGame.universeId, "1d", "hourly", { includeAnnotations: true }),
     getStatsGameRankChart(baseGame, "1d", "hourly", { includeAnnotations: true }),
@@ -1335,6 +1734,23 @@ async function buildStatsGameDetail(row: UniverseRow): Promise<StatsGameDetailDa
 
 export async function getStatsGameSummaryByUniverseId(universeId: number): Promise<StatsGame | null> {
   const sb = supabaseAdmin();
+  const indexed = await sb
+    .from("stats_game_current_index")
+    .select(`
+      universe_id, root_place_id, name, display_name, slug, description,
+      creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
+      icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
+      rating_percent, stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+      last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
+      console_enabled, vr_enabled, baseline_playing_24h, baseline_playing_7d,
+      growth_24h, growth_24h_percent, growth_7d, growth_7d_percent, peak_24h,
+      peak_7d, global_playing_rank, indexed_at
+    `)
+    .eq("universe_id", universeId)
+    .limit(1)
+    .maybeSingle();
+  if (!indexed.error && indexed.data) return mapIndexedGame(indexed.data as StatsGameIndexRow);
+
   const { data, error } = await sb
     .from("roblox_universes")
     .select(`

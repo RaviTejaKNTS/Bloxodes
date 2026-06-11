@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 import { isStatsTier, type StatsTier } from "./stats-tier";
 
 const DEFAULT_LIMIT = readNonNegativeInteger("UNIVERSE_RANK_LIMIT", 0);
@@ -327,28 +328,68 @@ Options:
 
 async function main() {
   const options = parseArgs();
+  const run = await startStatsJobRun({
+    jobName: options.rankSet === "playing" ? "stats_rank_playing" : "stats_rank_all",
+    metadata: {
+      granularity: options.granularity,
+      rank_set: options.rankSet,
+      snapshot_scope: options.snapshotScope,
+      limit: options.limit,
+      page_size: options.pageSize,
+      upsert_chunk_size: options.upsertChunkSize,
+      dry_run: options.dryRun
+    }
+  });
   const sampledAt = new Date();
   sampledAt.setUTCMinutes(0, 0, 0);
   const sampledAtIso = sampledAt.toISOString();
-  console.log(
-    `Snapshotting ranks (granularity=${options.granularity}, rankSet=${options.rankSet}, snapshotScope=${options.snapshotScope}, limit=${options.limit || "all"}, pageSize=${options.pageSize}, dryRun=${options.dryRun})...`
-  );
+  let totalRanked = 0;
 
-  if (options.rankSet === "playing") {
-    const counts = await writePlayingRankTypes(options, sampledAtIso);
-    for (const rankType of PLAYING_RANK_TYPES) {
-      console.log(`Ranked ${counts.get(rankType) ?? 0} rows for ${rankType}.`);
+  try {
+    console.log(
+      `Snapshotting ranks (granularity=${options.granularity}, rankSet=${options.rankSet}, snapshotScope=${options.snapshotScope}, limit=${options.limit || "all"}, pageSize=${options.pageSize}, dryRun=${options.dryRun})...`
+    );
+
+    const countsByType: Record<string, number> = {};
+
+    if (options.rankSet === "playing") {
+      const counts = await writePlayingRankTypes(options, sampledAtIso);
+      for (const rankType of PLAYING_RANK_TYPES) {
+        const count = counts.get(rankType) ?? 0;
+        totalRanked += count;
+        countsByType[rankType] = count;
+        console.log(`Ranked ${count} rows for ${rankType}.`);
+      }
+      await finishStatsJobRun(run, {
+        status: "success",
+        rowsSucceeded: totalRanked,
+        metadata: { sampled_at: sampledAtIso, counts_by_type: countsByType }
+      });
+      return;
     }
-    return;
-  }
 
-  const playingCounts = await writePlayingRankTypes(options, sampledAtIso);
-  for (const rankType of PLAYING_RANK_TYPES) {
-    console.log(`Ranked ${playingCounts.get(rankType) ?? 0} rows for ${rankType}.`);
-  }
-  for (const rankType of ["global_visits", "global_favorites", "global_rating"] as const) {
-    const count = await writeRankType(rankType, options, sampledAtIso);
-    console.log(`Ranked ${count} rows for ${rankType}.`);
+    const playingCounts = await writePlayingRankTypes(options, sampledAtIso);
+    for (const rankType of PLAYING_RANK_TYPES) {
+      const count = playingCounts.get(rankType) ?? 0;
+      totalRanked += count;
+      countsByType[rankType] = count;
+      console.log(`Ranked ${count} rows for ${rankType}.`);
+    }
+    for (const rankType of ["global_visits", "global_favorites", "global_rating"] as const) {
+      const count = await writeRankType(rankType, options, sampledAtIso);
+      totalRanked += count;
+      countsByType[rankType] = count;
+      console.log(`Ranked ${count} rows for ${rankType}.`);
+    }
+
+    await finishStatsJobRun(run, {
+      status: "success",
+      rowsSucceeded: totalRanked,
+      metadata: { sampled_at: sampledAtIso, counts_by_type: countsByType }
+    });
+  } catch (error) {
+    await finishStatsJobRun(run, { status: "failed", rowsSucceeded: totalRanked, error });
+    throw error;
   }
 }
 

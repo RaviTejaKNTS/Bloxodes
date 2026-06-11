@@ -98,6 +98,7 @@ const metricConfig: ChartConfig = {
   rating: { label: "Rating", color: "#38bdf8" }
 };
 
+const metricKeys: MetricKey[] = ["players", "visits", "favorites", "rating"];
 const comparisonColors = ["#ec4899", "#14b8a6"] as const;
 
 const resolutionLabels: Record<ResolutionKey, string> = {
@@ -279,6 +280,10 @@ export function StatsChartPanel({
   const annotations = displayChart?.annotations ?? [];
   const eventAnnotations = annotations.filter((annotation) => annotation.type === "event");
   const updateAnnotations = annotations.filter((annotation) => annotation.type === "update");
+  const usableMetrics = useMemo(
+    () => new Set(metricKeys.filter((item) => usablePointCount(points, item) >= 1)),
+    [points]
+  );
   const hasRenderableData = usablePointCount(points, metric) >= 1;
   const Chart = area ? AreaChart : LineChart;
   const resolvedResolution = displayChart?.resolution ?? resolution;
@@ -304,6 +309,14 @@ export function StatsChartPanel({
       setLastRenderedChart(loadedChart);
     }
   }, [loadedChart]);
+
+  useEffect(() => {
+    if (usableMetrics.has(metric)) return;
+    const fallbackMetric = metricKeys.find((item) => usableMetrics.has(item));
+    if (fallbackMetric) {
+      setMetric(fallbackMetric);
+    }
+  }, [metric, usableMetrics]);
 
   useEffect(() => {
     if (!initialChart || !universeId || chartCache[activeKey]) return;
@@ -399,8 +412,8 @@ export function StatsChartPanel({
           {!compact ? (
             <Tabs value={metric} onValueChange={(value) => setMetric(value as MetricKey)}>
               <TabsList className={chartTabsListClass}>
-                {(["players", "visits", "favorites", "rating"] as MetricKey[]).map((item) => (
-                  <TabsTrigger key={item} value={item} className={chartTabsTriggerClass}>
+                {metricKeys.map((item) => (
+                  <TabsTrigger key={item} value={item} disabled={!usableMetrics.has(item)} className={chartTabsTriggerClass}>
                     {metricLabels[item]}
                   </TabsTrigger>
                 ))}

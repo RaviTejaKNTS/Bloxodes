@@ -14,6 +14,7 @@ import {
   IdCard,
   Layers,
   Play,
+  List,
   Search,
   Star,
   Trophy,
@@ -177,11 +178,33 @@ function CompactGameRow({ game, rank, metric }: { game: StatsGame; rank?: number
   );
 }
 
-function GameListPanel({ title, games, metric }: { title: string; games: StatsGame[]; metric?: "playing" | "trend" | "visits" }) {
+function GameListPanel({
+  title,
+  subtitle,
+  games,
+  metric,
+  href
+}: {
+  title: string;
+  subtitle?: string;
+  games: StatsGame[];
+  metric?: "playing" | "trend" | "visits";
+  href?: string;
+}) {
   return (
     <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
-      <CardHeader className="border-b border-border/60 p-4">
-        <CardTitle className="m-0 text-base font-semibold text-foreground">{title}</CardTitle>
+      <CardHeader className="flex flex-row items-start justify-between gap-3 border-b border-border/60 p-4">
+        <div className="min-w-0">
+          <CardTitle className="m-0 text-base font-semibold text-foreground">{title}</CardTitle>
+          {subtitle ? <p className="mt-1 text-xs font-medium text-muted">{subtitle}</p> : null}
+        </div>
+        {href ? (
+          <Button asChild variant="outline" size="icon" className="h-8 w-8 shrink-0 rounded-md border-border/70 bg-background/80 text-muted shadow-none">
+            <Link href={href} aria-label={`View full ${title.toLowerCase()} list`}>
+              <List className="h-3.5 w-3.5" aria-hidden />
+            </Link>
+          </Button>
+        ) : null}
       </CardHeader>
       <CardContent className="space-y-2 p-3">
         {games.length ? games.map((game, index) => <CompactGameRow key={game.universeId} game={game} rank={index + 1} metric={metric} />) : (
@@ -232,8 +255,8 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
       </div>
 
       <div className="grid gap-4 xl:grid-cols-2">
-        <GameListPanel title="Top games right now" games={data.topGames} metric="playing" />
-        <GameListPanel title="Fastest risers" games={data.risers} metric="trend" />
+        <GameListPanel title="Top games right now" subtitle="Ranked by latest current players; pill shows 24h movement." games={data.topGames} metric="playing" href="/stats/games" />
+        <GameListPanel title="Fastest risers" subtitle="Ranked by 24h momentum across active games with meaningful gains." games={data.risers} metric="playing" href="/stats/games?sort=growth_24h" />
       </div>
 
       <StatsChartPanel title="Platform CCU trend" subtitle="Top tracked games, last 24 hours" chart={data.platformTrend} defaultMetric="players" compact={false} area />
@@ -242,6 +265,7 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
         <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
           <CardHeader className="border-b border-border/60 p-4">
             <CardTitle className="m-0 text-base font-semibold text-foreground">Trending genres</CardTitle>
+            <p className="mt-1 text-xs font-medium text-muted">Ranked by current players across top tracked games.</p>
           </CardHeader>
           <CardContent className="space-y-3 p-4">
             {data.genres.map((genre) => (
@@ -260,7 +284,7 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
             ))}
           </CardContent>
         </Card>
-        <GameListPanel title="Most visited games" games={data.mostVisited.slice(0, 8)} metric="visits" />
+        <GameListPanel title="Most visited games" games={data.mostVisited.slice(0, 8)} metric="visits" href="/stats/games?sort=visits" />
       </div>
     </div>
   );

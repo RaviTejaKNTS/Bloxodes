@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { enqueueRevalidationEvents } from "../shared/revalidation-events";
+import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 
 const VALID_TYPES = new Set([
   "code",
@@ -93,22 +94,26 @@ Examples:
 
 async function main() {
   const options = parseArgs();
-  const createdAt = new Date().toISOString();
-  const rows = Array.from(
-    new Map(options.events.map((event) => [`${event.type}:${event.slug}`, event])).values()
-  ).map((event) => ({
-    entity_type: event.type,
-    slug: event.slug,
-    source: options.source,
-    created_at: createdAt
-  }));
+  const run = await startStatsJobRun({
+    jobName: "enqueue_revalidation_events",
+    metadata: {
+      source: options.source,
+      requested_events: options.events.map((event) => `${event.type}:${event.slug}`)
+    }
+  });
 
-  const { error } = await supabaseAdmin()
-    .from("revalidation_events")
-    .upsert(rows, { onConflict: "entity_type,slug" });
-
-  if (error) throw error;
-  console.log(`Queued ${rows.length} revalidation event(s): ${rows.map((row) => `${row.entity_type}:${row.slug}`).join(", ")}`);
+  try {
+    const result = await enqueueRevalidationEvents(options.events, options.source);
+    await finishStatsJobRun(run, {
+      status: "success",
+      rowsSucceeded: result.queued,
+      metadata: { source: options.source, events: result.events }
+    });
+    console.log(`Queued ${result.queued} revalidation event(s): ${result.events.join(", ")}`);
+  } catch (error) {
+    await finishStatsJobRun(run, { status: "failed", error });
+    throw error;
+  }
 }
 
 main().catch((error) => {
