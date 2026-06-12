@@ -52,6 +52,7 @@ const nextConfig = {
       { protocol: "https", hostname: "**.ggpht.com" },
       { protocol: "https", hostname: "**.googleusercontent.com" },
       { protocol: "https", hostname: "bmwksaykcsndsvgspapz.supabase.co" },
+      { protocol: "https", hostname: "bloxodesdb.ravitejaknts.com" },
       { protocol: "https", hostname: "rbxcdn.com" },
       { protocol: "https", hostname: "**.rbxcdn.com" },
       { protocol: "https", hostname: "tr.rbxcdn.com" },
