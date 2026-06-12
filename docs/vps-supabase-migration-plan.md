@@ -2,19 +2,20 @@
 
 This document captures the safe path for moving Bloxodes from managed Supabase to a self-hosted Supabase/Postgres stack on the VPS.
 
-The immediate goal is not an instant production cutover. The first goal is to create a verified VPS copy while managed Supabase remains the production source of truth. After validation, automation and heavy stats workloads can move to the VPS path first. A full app cutover should happen only after the clone is proven and rollback is clear.
+The migration started as a parallel-copy validation project and moved into production cutover on 2026-06-12 after the final managed Supabase sync passed row-count, freshness, storage, app, and SEO checks.
 
 ## Current Emergency Context
 
-- Managed Supabase is under high CPU and memory pressure.
-- The public site is protected by Cloudflare emergency cache mode.
-- Cloudflare cache has been warmed for the main public sitemap and code pages.
-- Backfills, stats refreshes, broad revalidation, and other heavy jobs should stay paused until the DB has headroom.
-- The VPS is available and should be used first as a parallel copy, not as an untested production replacement.
+- Managed Supabase was under high CPU and memory pressure, so the hot production path was moved to the VPS Supabase stack.
+- The public web app now points at `https://bloxodesdb.ravitejaknts.com`.
+- VPS-local stats worker cron is restored and uses the VPS Supabase endpoint.
+- VPS Supabase revalidation is wired through the self-hosted `revalidate` Edge Function, Vault `revalidate_cron_jwt`, and a VPS-local minute cron that calls `public.invoke_revalidation_worker()`.
+- Cloudflare emergency cache still needs to be disabled once a Cloudflare token with Cache Rules/ruleset edit permission is available.
+- GitHub Actions and Northflank writer/stat jobs that store `SUPABASE_SERVICE_ROLE` should remain paused until the VPS service-role secret is explicitly approved for those external platforms.
 
 ## Execution Status: 2026-06-12
 
-Production was not cut over. Managed Supabase remains the source of truth.
+Production web was cut over to VPS Supabase.
 
 What is complete:
 
@@ -36,14 +37,23 @@ What is complete:
   - Studio endpoint: `https://bloxodesstudio.ravitejaknts.com`
 - `bloxodesdb.ravitejaknts.com` routes to Supabase Kong. `bloxodesstudio.ravitejaknts.com` routes to Supabase Studio with Traefik Basic Auth and admin security headers.
 - The self-hosted Supabase `.env` now uses `https://bloxodesdb.ravitejaknts.com` for `SUPABASE_PUBLIC_URL` and `API_EXTERNAL_URL`.
+- Final managed Supabase dump was restored to the VPS and analyzed before app cutover.
+- Dokploy web runtime env now points at `https://bloxodesdb.ravitejaknts.com` with the VPS anon and service-role keys.
+- Production app build `912adbb500719938b84e9cb72cb22d3741b2eb2a` is live.
+- The VPS stats worker env file `/home/codex-admin/bloxodes-stats-worker/env.stats-worker` now points at the VPS Supabase endpoint.
+- VPS-local stats worker cron has been restored.
+- The `revalidate` Edge Function has been copied to `/home/codex-admin/bloxodes-supabase/volumes/functions/revalidate/index.ts`.
+- VPS Edge Functions now have `REVALIDATE_ENDPOINT=https://bloxodes.com/api/revalidate`, `REVALIDATE_SECRET`, and `REVALIDATE_BATCH_SIZE`.
+- `public.invoke_revalidation_worker()` now posts to `https://bloxodesdb.ravitejaknts.com/functions/v1/revalidate`.
+- A VPS-local cron invokes `public.invoke_revalidation_worker()` every minute.
 
 Database validation results:
 
-- Core row counts matched the dump for public content tables and storage metadata.
+- Core row counts matched the final managed Supabase dump for public content tables, stats tables, views, and storage metadata.
 - Key restored counts:
   - `articles`: 287
   - `catalog_pages`: 40
-  - `codes`: 21,639
+  - `codes`: 21,647
   - `games`: 3,909
   - `roblox_universes`: 96,436
   - `stats_game_current_index`: 95,195
@@ -55,8 +65,8 @@ Database validation results:
   - `tools_view`: 8
   - `wiki_pages_view`: 19
   - `stats_game_current_index` sample returned rows.
-- `roblox_universe_stats_hourly` restored 1,663,182 rows with data through `2026-06-12 12:00:00+00`.
-- Managed Supabase had newer stats rows after the dump completed, so the stats-hourly delta is expected data drift, not a known restore loss.
+- `roblox_universe_stats_hourly` restored 1,708,481 rows with data through `2026-06-12 16:00:00+00`.
+- Final managed and VPS freshness matched for hourly stats, daily stats, current stats indexes, code timestamps, and universe `updated_at`.
 - Installed extensions on the VPS include `pg_graphql`, `pg_net`, `pg_stat_statements`, `pg_trgm`, `pgcrypto`, `plpgsql`, `supabase_vault`, and `uuid-ossp`.
 
 HTTP API validation results:
@@ -75,20 +85,25 @@ App-level validation results:
 - A temporary Bloxodes web container was started on the VPS using the production web image with Supabase envs pointed at the VPS clone.
 - Public page smoke returned HTTP 200 for `/`, `/codes`, `/codes/<slug>`, `/stats`, `/stats/games`, `/stats/games/<slug>`, `/wiki`, `/wiki/<slug>`, `/catalog`, `/catalog/<code>`, `/articles`, `/articles/<slug>`, `/events`, `/events/<slug>`, `/tools`, `/tools/<code>`, `/quizzes`, `/quizzes/<code>`, `/checklists`, `/checklists/<slug>`, `/feed.xml`, and `/sitemap.xml`.
 - API smoke returned HTTP 200 for search, stats list/search/chart/rank-chart, mobile codes index/detail, mobile content index/detail, extension codes lookup, and game top nav.
+- Live production smoke after cutover returned HTTP 200 for `/`, `/codes`, `/codes/grow-a-garden`, `/stats`, `/stats/games`, `/wiki`, `/catalog`, `/articles`, `/events`, `/tools`, `/sitemap.xml`, `/robots.txt`, `/api/health`, `/api/mobile/codes`, and `/api/stats/games`.
+- Uncached query-string origin smoke returned HTTP 200 for sampled wiki, catalog, article, event, tool, stats, and code pages.
+- A 60-URL sitemap SEO audit returned 60/60 HTTP 200 and indexable.
+- Revalidation smoke passed: a queued `stats:stats` event was processed by the VPS Edge Function and deleted from `revalidation_events`.
 
 VPS resource snapshot after restore:
 
 - VPS has about 2 vCPU and 7.8 GiB RAM.
-- Root disk is about 96 GB total, 57 GB used, 40 GB free after Storage object migration.
-- Memory had about 3.3 GiB available, but swap was already using about 1.1 GiB.
-- This VPS is acceptable for validation and staging, but it is not the recommended long-term production database size while also running the existing site stack and stats workloads.
+- Root disk is about 96 GB total, about 62 GB used, and about 35 GB free after final sync and backups.
+- Memory has several GiB available during normal checks, but swap usage is high.
+- This VPS is acceptable for the cutover window, but it is not the recommended long-term database size while also running the web app, Supabase, and stats workloads.
 
 Current recommendation:
 
-- The VPS Supabase clone is now validated as a working copy for public app reads, REST writes, and Storage object reads.
-- Do not rotate production app envs until a final sync window is chosen, backups are configured and restore-tested, and the public Supabase URL/TLS/reverse-proxy shape is decided.
-- Treat the current clone as stale relative to managed Supabase after the dump timestamp. A final sync/dump is still required immediately before production cutover.
+- The VPS Supabase stack is now the production web app database endpoint.
+- Keep managed Supabase available as rollback until the VPS has scheduled backups, restore tests, and at least one full day of stable automation.
 - Before long-term production use, move this to a dedicated or larger VPS class, preferably at least 4 vCPU, 16 GB RAM, and 160 GB or more SSD for the current Bloxodes growth path.
+- Disable Cloudflare emergency cache after a Cloudflare token with the required Cache Rules/ruleset permissions is available.
+- Resume GitHub Actions and Northflank jobs only after the VPS service-role key is approved for those platforms and their envs are rotated.
 
 Cutover env inventory:
 
