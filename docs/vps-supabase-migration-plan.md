@@ -11,7 +11,8 @@ The migration started as a parallel-copy validation project and moved into produ
 - VPS-local stats worker cron is restored and uses the VPS Supabase endpoint.
 - VPS Supabase revalidation is wired through the self-hosted `revalidate` Edge Function, Vault `revalidate_cron_jwt`, and a VPS-local minute cron that calls `public.invoke_revalidation_worker()`.
 - GitHub Actions and Northflank writer/stat jobs have been rotated to the VPS Supabase endpoint and service-role key, then restored to their normal schedules.
-- Cloudflare emergency cache still needs to be disabled once `CLOUDFLARE_BLOXODES_API` is accepted by Cloudflare from the CLI environment.
+- Cloudflare emergency cache has been disabled through `CLOUDFLARE_BLOXODES_API`.
+- Cloudflare purge remains enabled, but synchronous warm-after-purge is disabled in production with `CLOUDFLARE_WARM_AFTER_PURGE=false` so broad list/stat revalidation calls do not hit 524 timeouts.
 
 ## Execution Status: 2026-06-12
 
@@ -39,15 +40,17 @@ What is complete:
 - The self-hosted Supabase `.env` now uses `https://bloxodesdb.ravitejaknts.com` for `SUPABASE_PUBLIC_URL` and `API_EXTERNAL_URL`.
 - Final managed Supabase dump was restored to the VPS and analyzed before app cutover.
 - Dokploy web runtime env now points at `https://bloxodesdb.ravitejaknts.com` with the VPS anon and service-role keys.
-- Production app build `912adbb500719938b84e9cb72cb22d3741b2eb2a` is live.
+- Production app build `2144136595f34417c5faa53e64d3d33dbb90182d` is live.
 - The VPS stats worker env file `/home/codex-admin/bloxodes-stats-worker/env.stats-worker` now points at the VPS Supabase endpoint.
 - VPS-local stats worker cron has been restored.
 - GitHub Actions `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE` secrets have been rotated to the VPS Supabase endpoint/key, and cutover-paused workflows have been re-enabled.
 - Northflank `stats-hot-hourly` and `stats-daily-ranks` runtime envs now point at `https://bloxodesdb.ravitejaknts.com` with the VPS service-role key, and their original schedules were restored.
+- Cloudflare emergency public HTML cache rule `bloxodes_emergency_public_html_cache` is disabled.
 - The `revalidate` Edge Function has been copied to `/home/codex-admin/bloxodes-supabase/volumes/functions/revalidate/index.ts`.
-- VPS Edge Functions now have `REVALIDATE_ENDPOINT=https://bloxodes.com/api/revalidate`, `REVALIDATE_SECRET`, and `REVALIDATE_BATCH_SIZE`.
+- VPS Edge Functions now have `REVALIDATE_ENDPOINT=https://bloxodes.com/api/revalidate`, `REVALIDATE_SECRET`, and `REVALIDATE_BATCH_SIZE=10`.
 - `public.invoke_revalidation_worker()` now posts to `https://bloxodesdb.ravitejaknts.com/functions/v1/revalidate`.
 - A VPS-local cron invokes `public.invoke_revalidation_worker()` every minute.
+- The initial cutover revalidation backlog was manually drained after disabling Cloudflare warmup. Fresh list events may appear as automation runs, but recent worker rows are succeeding and the queue is in normal steady-state churn rather than an old backlog.
 
 Database validation results:
 
@@ -91,6 +94,8 @@ App-level validation results:
 - Uncached query-string origin smoke returned HTTP 200 for sampled wiki, catalog, article, event, tool, stats, and code pages.
 - A 60-URL sitemap SEO audit returned 60/60 HTTP 200 and indexable.
 - Revalidation smoke passed: a queued `stats:stats` event was processed by the VPS Edge Function and deleted from `revalidation_events`.
+- Broad list revalidation smoke passed after disabling Cloudflare warmup: `list:top-trending-roblox-games` returned HTTP 200, Cloudflare tag purge succeeded, and `cloudflareWarm.reason` was `disabled`.
+- Final live smoke after emergency cache removal returned HTTP 200 for `/`, `/codes`, `/codes/grow-a-garden`, `/stats`, `/stats/games`, `/wiki`, `/catalog`, `/articles`, `/events`, `/tools`, `/sitemap.xml`, `/robots.txt`, `/api/health`, `/api/mobile/codes`, and `/api/stats/games`.
 
 VPS resource snapshot after restore:
 
@@ -104,7 +109,7 @@ Current recommendation:
 - The VPS Supabase stack is now the production web app database endpoint.
 - Keep managed Supabase available as rollback until the VPS has scheduled backups, restore tests, and at least one full day of stable automation.
 - Before long-term production use, move this to a dedicated or larger VPS class, preferably at least 4 vCPU, 16 GB RAM, and 160 GB or more SSD for the current Bloxodes growth path.
-- Disable Cloudflare emergency cache after `CLOUDFLARE_BLOXODES_API` authenticates from the CLI. Current observed failure is `401 Invalid API Token`, likely from an IP allowlist mismatch or stale local token value.
+- Keep Cloudflare emergency cache disabled during normal operations. Re-enable it only for a future origin/database incident.
 - Upgrade or separate the VPS soon. The current server is functional, but swap usage has been high during verification.
 
 Cutover env inventory:
