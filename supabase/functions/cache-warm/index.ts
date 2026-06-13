@@ -150,11 +150,16 @@ async function warmPath(path: string) {
     });
     await response.arrayBuffer();
     if (response.ok) {
-      return { ok: true, path: normalizedPath };
+      return { ok: true, path: normalizedPath, retryable: false };
     }
-    return { ok: false, path: normalizedPath, error: `http-${response.status}` };
+    return { ok: false, path: normalizedPath, error: `http-${response.status}`, retryable: response.status !== 404 };
   } catch (error) {
-    return { ok: false, path: normalizedPath, error: error instanceof Error ? error.message : String(error) };
+    return {
+      ok: false,
+      path: normalizedPath,
+      error: error instanceof Error ? error.message : String(error),
+      retryable: true
+    };
   } finally {
     clearTimeout(timeout);
   }
@@ -196,8 +201,8 @@ serve(async (req) => {
 
     const successfulIds = results.filter((entry) => entry.result.ok).map((entry) => entry.event.id);
     const failed = results.filter((entry) => !entry.result.ok);
-    const retryFailures = failed.filter((entry) => entry.event.attempts + 1 < maxAttempts);
-    const droppedFailures = failed.filter((entry) => entry.event.attempts + 1 >= maxAttempts);
+    const retryFailures = failed.filter((entry) => entry.result.retryable && entry.event.attempts + 1 < maxAttempts);
+    const droppedFailures = failed.filter((entry) => !entry.result.retryable || entry.event.attempts + 1 >= maxAttempts);
 
     if (successfulIds.length) {
       await supabase.from("cache_warm_events").delete().in("id", successfulIds);

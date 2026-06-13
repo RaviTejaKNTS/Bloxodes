@@ -244,6 +244,7 @@ function normalizeWarmPath(path: string) {
   const trimmed = path.trim();
   if (!trimmed || !trimmed.startsWith("/") || !WARM_ROUTE_PATTERN_PATH.test(trimmed)) return null;
   if (/\[[^/\]]+\]/.test(trimmed)) return null;
+  if (trimmed.includes("/page/")) return null;
   if (trimmed === "/") return "/";
   return trimmed.replace(/\/+$/, "");
 }
@@ -264,7 +265,6 @@ function warmPathPriority(path: string) {
   ) {
     return 20;
   }
-  if (/^\/[^/]+\/page\/\d+$/.test(path) || path.includes("/page/")) return 80;
   if (path.startsWith("/api/")) return 90;
   return 40;
 }
