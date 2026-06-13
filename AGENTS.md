@@ -24,10 +24,12 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - Next.js App Router application in `apps/web`, with public content in `apps/web/src/app/(site)` and account/auth flows in `apps/web/src/app/(secure)` plus `apps/web/src/app/auth`.
 - Chrome extension source lives in `apps/extension`. It builds a Chrome MV3 upload package and calls Bloxodes web APIs; it is not part of Dokploy deployment.
 - Expo React Native mobile source lives in `apps/mobile`. The current mobile V1 is a codes index/detail client backed by `/api/mobile/*` web routes.
-- Supabase is the primary content and product data store. Pages usually read from views via `apps/web/src/lib/db.ts`, `apps/web/src/lib/catalog.ts`, and `apps/web/src/lib/tools.ts`.
+- Supabase is the primary content and product data store. Production now uses the self-hosted Supabase stack on the same Hostinger VPS as the web app, with API at `https://bloxodesdb.ravitejaknts.com` and Studio at `https://bloxodesstudio.ravitejaknts.com`; the old managed Supabase project is rollback/source-of-truth fallback only.
 - Local datasets in `data/` and `apps/web/src/data/` back a few tools/catalog sections where structured content does not live in Supabase.
 - Operational work happens through root `scripts/` and Supabase edge functions in `supabase/functions/`.
 - Dokploy deploys the public web app from the root Dockerfile, which builds `@bloxodes/web` and runs `apps/web/server.js`.
+- Production web and database now share VPS CPU, memory, disk, and bandwidth. After deploys or infrastructure work, check both the app container and the Supabase stack instead of treating them as separate platforms.
+- Runtime freshness uses `revalidation_events` plus the VPS `revalidate` Edge Function. `/api/revalidate` applies Next revalidation and Cloudflare tag purge, then queues `cache_warm_events`; the VPS `cache-warm` Edge Function warms those URLs separately.
 
 ## Working Defaults
 

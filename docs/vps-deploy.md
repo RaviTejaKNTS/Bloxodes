@@ -13,13 +13,14 @@ This repo is set up as an npm-workspaces monorepo. The production web app lives 
 - Install Docker Engine and the Compose plugin.
 - Keep this app as a single replica unless you add a shared Next cache handler later.
 - Leave the scheduled content jobs in GitHub Actions for now so article generation and scraping do not compete with the web app.
+- Production web and self-hosted Supabase now run on the same VPS. Before broad deploys, cache warms, imports, or stats backfills, check VPS CPU, memory, disk, and Supabase container health because the app and database share the same resource pool.
 
 ### 2. Prepare environment variables
 
 1. Copy `.env.example` to `.env.production`.
 2. Set at minimum:
    - `NEXT_PUBLIC_SITE_URL`
-   - `SUPABASE_URL`
+   - `SUPABASE_URL` (`https://bloxodesdb.ravitejaknts.com` in production)
    - `SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE`
    - `AUTH_SESSION_SECRET`
@@ -65,7 +66,7 @@ Use Cloudflare cache rules for public HTML. Do not rely on blanket origin HTML `
 
 - Automatic path: push to `production`, let `.github/workflows/dokploy-production-deploy.yml` trigger Dokploy through the Dokploy API or webhook fallback, wait for health, purge Cloudflare, and warm pages from the sitemap.
 - Manual Dokploy path: deploy in Dokploy, then manually run the GitHub workflow with `trigger_dokploy=false` so it only waits for the live site, purges Cloudflare, and warms from the sitemap.
-- Content update path: Supabase writes `revalidation_events`; the scheduled Supabase function calls `https://bloxodes.com/api/revalidate`; the app purges and warms only the affected pages.
+- Content update path: Supabase writes `revalidation_events`; the scheduled VPS Supabase function calls `https://bloxodes.com/api/revalidate`; the app purges affected Cloudflare tags and enqueues `cache_warm_events`; the scheduled VPS `cache-warm` function warms those pages separately.
 
 ### 6. Ads and consent
 

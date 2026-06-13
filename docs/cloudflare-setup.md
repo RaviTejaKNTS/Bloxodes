@@ -335,7 +335,7 @@ CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm
 
 The default `CACHE_WARM_MODE=deploy` warms homepage/index/legal URLs, all wiki/catalog/tool URLs, sitemap files, and the most recent URLs from codes/articles/events/stats/puzzles/quizzes/checklists/lists/authors. Use `CACHE_WARM_MODE=full` only for an intentional full-site warm. Use `CACHE_WARM_DRY_RUN=true` to inspect the selected URLs without warming them.
 
-For normal content updates, do not purge everything. Supabase triggers write to `revalidation_events`, the Supabase revalidation function calls `/api/revalidate`, and the app purges plus warms only the affected URLs.
+For normal content updates, do not purge everything. Supabase triggers write to `revalidation_events`, the VPS Supabase revalidation function calls `/api/revalidate`, and the app purges affected Cloudflare tags plus queues warm paths in `cache_warm_events`. The VPS `cache-warm` Edge Function warms those URLs separately so revalidation stays fast.
 
 ### 7.4 Store API Token as a Secret
 
@@ -352,17 +352,66 @@ In Dokploy app environment variables:
 
 - add `CLOUDFLARE_API_TOKEN`
 - add `CLOUDFLARE_ZONE_ID`
-- add `CLOUDFLARE_WARM_AFTER_PURGE=true`
-- optionally tune `CLOUDFLARE_WARM_MAX_PATHS` and `CLOUDFLARE_WARM_CONCURRENCY`
+- add `CLOUDFLARE_WARM_AFTER_PURGE=deferred`
+- add `CLOUDFLARE_DEFERRED_WARM_MAX_PATHS=40`
+- avoid inline warm settings for normal runtime; `CLOUDFLARE_WARM_MAX_PATHS` and `CLOUDFLARE_WARM_CONCURRENCY` only apply when intentionally using synchronous warming
 
-To edit Cache Rules through the Cloudflare API instead of the dashboard, create a separate scoped API token for only `bloxodes.com` with **Zone → Cache Rules → Edit**, **Account Rulesets → Edit**, and **Account Filter Lists → Edit**. The purge-only token is not enough for ruleset reads or edits.
+### 7.5 Local Operator Token For Rule Changes
+
+The deployed app uses `CLOUDFLARE_API_TOKEN` for cache purge and warm behavior. Keep that token narrow and runtime-safe.
+
+For local operator work, such as temporarily changing Cache Rules from the CLI, use a separate token in `.env.codex`:
+
+```bash
+CLOUDFLARE_ACCOUNT_ID=
+CLOUDFLARE_BLOXODES_API=
+```
+
+`CLOUDFLARE_BLOXODES_API` should be scoped to the `bloxodes.com` zone and include the Cloudflare permissions required for Cache Rules API management:
+
+- `Zone > Cache Rules > Edit`
+- `Account Rulesets > Edit`
+- `Account Filter Lists > Edit`
+- `Zone > Zone > Read`
+
+The Cloudflare Cache Rules API uses the Rulesets API, the `set_cache_settings` action, and the `http_request_cache_settings` phase. Cloudflare documents these as the required shape for creating Cache Rules through the API.
+
+### 7.6 Emergency Public HTML Cache
+
+When origin or Supabase is unhealthy, public pages can be protected by enabling the emergency cache rule:
+
+```bash
+npm run cloudflare:emergency-cache:status
+npm run cloudflare:emergency-cache:on
+```
+
+Turn it off after the incident:
+
+```bash
+npm run cloudflare:emergency-cache:off
+```
+
+The emergency rule is intentionally temporary. During a DB/origin incident, it:
+
+- matches public `GET` and `HEAD` requests, including browsers with cookies,
+- matches `bloxodes.com` and `www.bloxodes.com`,
+- excludes `/api`, `/auth`, `/account`, `/login`, `/admin`, `/dashboard`, `/_next/`, and `/cdn-cgi/`,
+- keeps browser TTL respecting origin headers,
+- sets Cloudflare edge TTL for successful public responses,
+- sets redirects to no-cache,
+- sets `5xx` responses to no-store so server error pages are not cached,
+- serves stale while Cloudflare updates cached content.
+
+Keep this rule off during normal operation. Normal mode should rely on origin headers, targeted purge, and cache warmup. Emergency mode trades freshness for availability so visitors and crawlers can keep receiving valid public pages when the DB or origin is struggling.
+
+This rule only helps once Cloudflare has a cacheable copy. If a page is not already cached, Cloudflare still needs one successful origin response before it can serve that URL from cache during the incident. Do not run a broad cache warm while the database is saturated; warm only a few critical URLs, or wait until the origin has breathing room.
 
 Why both places:
 
 - GitHub Actions uses these values to purge Cloudflare after code deployments
-- the app runtime uses these values inside `/api/revalidate` so Supabase-triggered content updates purge and warm the relevant Cloudflare HTML entries
+- the app runtime uses these values inside `/api/revalidate` so Supabase-triggered content updates purge relevant Cloudflare HTML entries and enqueue deferred warm paths
 
-Without the Dokploy runtime env vars, content revalidation cannot purge Cloudflare, so long-lived edge HTML can stay stale until manually purged.
+Without the Dokploy runtime env vars, content revalidation cannot purge Cloudflare, so long-lived edge HTML can stay stale until manually purged. The deploy-wide `npm run cache:warm` path is still useful after code deploys or intentional broad warms; it is separate from the runtime deferred warm queue.
 
 ---
 
