@@ -15,6 +15,7 @@ const RETRY_BASE_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_RETRY_BASE
 const RETRY_MAX_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_RETRY_MAX_DELAY_MS", 90000);
 const DETAIL_REVALIDATION_LIMIT = readPositiveNumber("UNIVERSE_STATS_DETAIL_REVALIDATION_LIMIT", 1000);
 const LEASE_MINUTES = readPositiveNumber("UNIVERSE_STATS_REFRESH_LEASE_MINUTES", 45);
+const LEASE_CHUNK_SIZE = readPositiveNumber("UNIVERSE_STATS_REFRESH_LEASE_CHUNK_SIZE", 100);
 const WORKER_ID =
   process.env.STATS_WORKER_ID ||
   process.env.NORTHFLANK_JOB_NAME ||
@@ -58,6 +59,8 @@ type UniverseRow = {
   updated_at_api: string | null;
   stats_tier: StatsTier | null;
   last_stats_refreshed_at: string | null;
+  last_seen_in_search: string | null;
+  last_seen_in_sort: string | null;
 };
 
 type HourlyRow = {
@@ -196,7 +199,7 @@ async function fetchUniverses(options: Options): Promise<UniverseRow[]> {
     const pageSize = Math.min(BATCH_SIZE, remaining);
     let query = sb
       .from("roblox_universes")
-      .select("universe_id, root_place_id, slug, playing, visits, favorites, likes, dislikes, created_at_api, updated_at_api, stats_tier, last_stats_refreshed_at")
+      .select("universe_id, root_place_id, slug, playing, visits, favorites, likes, dislikes, created_at_api, updated_at_api, stats_tier, last_stats_refreshed_at, last_seen_in_search, last_seen_in_sort")
       .not("root_place_id", "is", null)
       .or(`stats_refresh_locked_at.is.null,stats_refresh_locked_at.lt.${leaseCutoff}`);
 
@@ -208,9 +211,17 @@ async function fetchUniverses(options: Options): Promise<UniverseRow[]> {
       query = query.eq("stats_tier", options.tier);
     }
 
-    const { data, error } = await query
+    let orderedQuery = query
       .order("last_stats_refreshed_at", { ascending: true, nullsFirst: true })
-      .order("last_playing_refreshed_at", { ascending: true, nullsFirst: true })
+      .order("last_playing_refreshed_at", { ascending: true, nullsFirst: true });
+
+    if (!options.universeIds.length && options.tier === "NEW") {
+      orderedQuery = orderedQuery
+        .order("last_seen_in_sort", { ascending: false, nullsFirst: false })
+        .order("last_seen_in_search", { ascending: false, nullsFirst: false });
+    }
+
+    const { data, error } = await orderedQuery
       .order("playing", { ascending: false, nullsFirst: false })
       .order("visits", { ascending: false, nullsFirst: false })
       .order("universe_id", { ascending: true })
@@ -226,32 +237,37 @@ async function fetchUniverses(options: Options): Promise<UniverseRow[]> {
 
 async function claimUniverseLeases(rows: UniverseRow[]) {
   if (!rows.length) return rows;
-  const ids = rows.map((row) => row.universe_id);
-  const { error } = await supabaseAdmin()
-    .from("roblox_universes")
-    .update({
-      stats_refresh_locked_at: new Date().toISOString(),
-      stats_refresh_locked_by: WORKER_ID
-    })
-    .in("universe_id", ids);
-  if (error) {
-    console.warn("Failed to claim stats refresh leases:", error.message);
+  for (let index = 0; index < rows.length; index += LEASE_CHUNK_SIZE) {
+    const ids = rows.slice(index, index + LEASE_CHUNK_SIZE).map((row) => row.universe_id);
+    const { error } = await supabaseAdmin()
+      .from("roblox_universes")
+      .update({
+        stats_refresh_locked_at: new Date().toISOString(),
+        stats_refresh_locked_by: WORKER_ID
+      })
+      .in("universe_id", ids);
+    if (error) {
+      console.warn("Failed to claim stats refresh leases:", error.message);
+    }
   }
   return rows;
 }
 
 async function releaseUniverseLeases(universeIds: number[]) {
   if (!universeIds.length) return;
-  const { error } = await supabaseAdmin()
-    .from("roblox_universes")
-    .update({
-      stats_refresh_locked_at: null,
-      stats_refresh_locked_by: null
-    })
-    .in("universe_id", universeIds)
-    .eq("stats_refresh_locked_by", WORKER_ID);
-  if (error) {
-    console.warn("Failed to release stats refresh leases:", error.message);
+  for (let index = 0; index < universeIds.length; index += LEASE_CHUNK_SIZE) {
+    const ids = universeIds.slice(index, index + LEASE_CHUNK_SIZE);
+    const { error } = await supabaseAdmin()
+      .from("roblox_universes")
+      .update({
+        stats_refresh_locked_at: null,
+        stats_refresh_locked_by: null
+      })
+      .in("universe_id", ids)
+      .eq("stats_refresh_locked_by", WORKER_ID);
+    if (error) {
+      console.warn("Failed to release stats refresh leases:", error.message);
+    }
   }
 }
 

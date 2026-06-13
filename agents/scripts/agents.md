@@ -51,6 +51,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Purpose | File | Preferred command |
 | --- | --- | --- |
 | Import games into Supabase | `scripts/games/import-games.ts` | `npm run import:games` |
+| Discover priority Roblox universes from Explore | `scripts/universes/discover-priority-roblox-universes.ts` | `npm run discover:universes:priority` |
 | Collect Roblox universes from Explore | `scripts/universes/collect-roblox-universes.ts` | `npm run collect:universes` |
 | Discover Roblox universes from omni-search | `scripts/universes/search-roblox-universes.ts` | `npm run discover:universes:search` |
 | Discover Roblox universes from known creators/groups | `scripts/universes/expand-roblox-creators.ts` | `npm run discover:universes:creators` |

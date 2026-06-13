@@ -123,6 +123,7 @@ Current VPS crontab block:
 # BLOXODES_STATS_WORKER_START
 5 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/build-image.sh >> /home/codex-admin/bloxodes-stats-worker/logs/build-image.log 2>&1
 7 */2 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-new-refresh "npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25 && npm run stats:refresh:new -- --limit 5000 && npm run stats:tier -- --tier NEW && npm run enqueue:revalidation -- --source stats_new_vps --event stats:stats --event stats:games"
+22 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "npm run discover:universes:priority && npm run enrich:universes:light -- --tier NEW --limit 500 --batch 25 && npm run stats:refresh:new -- --limit 1000 && npm run stats:tier -- --tier NEW && npm run enqueue:revalidation -- --source stats_discovery_priority_vps --event stats:stats --event stats:games"
 32 */12 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-warm-refresh "npm run stats:refresh:warm -- --limit 20000 && npm run stats:tier -- --tier WARM && npm run enqueue:revalidation -- --source stats_warm_vps --event stats:stats --event stats:games"
 47 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-cold-refresh "npm run stats:refresh:cold -- --limit 10000 && npm run stats:tier -- --tier COLD && npm run enqueue:revalidation -- --source stats_cold_vps --event stats:stats --event stats:games"
 35 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery "npm run collect:universes && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
@@ -151,6 +152,7 @@ Current verified VPS discovery has three separate cron jobs:
 
 ```txt
 stats-discovery           -> Roblox Explore
+stats-discovery-priority  -> top-playing/trending/up-and-coming Explore
 stats-discovery-search    -> Roblox omni-search
 stats-discovery-creators  -> known creator/group expansion
 ```
@@ -246,6 +248,7 @@ purpose: catch other active games from creators we already know
 Current VPS cron lines:
 
 ```cron
+22 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "npm run discover:universes:priority && npm run enrich:universes:light -- --tier NEW --limit 500 --batch 25 && npm run stats:refresh:new -- --limit 1000 && npm run stats:tier -- --tier NEW && npm run enqueue:revalidation -- --source stats_discovery_priority_vps --event stats:stats --event stats:games"
 20 3 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-search "npm run discover:universes:search -- --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
 10 4 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-creators "npm run discover:universes:creators -- --limit 500 --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
 ```
@@ -316,6 +319,7 @@ Supabase should not be treated as the owner of `collect:universes`.
 
 ```txt
 npm run collect:universes
+npm run discover:universes:priority
 npm run discover:universes:search
 npm run discover:universes:creators
 npm run enrich:universes:light -- --tier NEW
@@ -340,6 +344,7 @@ npm run enrich:universes:deep -- --tier HOT
 | HOT refresh + hourly playing ranks | Northflank `stats-hot-hourly` | Hourly at `:12` UTC, `:42` IST |
 | Daily all-game ranks | Northflank `stats-daily-ranks` | Daily `00:50` UTC, `06:20` IST |
 | NEW refresh | VPS worker `stats-new-refresh` | Every 2 hours at `:07` UTC, `:37` IST |
+| Priority discovery | VPS worker `stats-discovery-priority` | Hourly at `:22` UTC, `:52` IST |
 | WARM refresh | VPS worker `stats-warm-refresh` | Every 12 hours at `:32` UTC, `:02` IST |
 | COLD refresh | VPS worker `stats-cold-refresh` | Every 6 hours at `:47` UTC, `:17` IST |
 | Discovery | VPS worker `stats-discovery` | Daily `01:35` UTC, `07:05` IST |

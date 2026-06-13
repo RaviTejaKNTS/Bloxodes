@@ -181,18 +181,31 @@ async function fetchExistingUniverseIds(universeIds: number[]) {
 export async function insertNewUniverseCandidates(params: {
   source: string;
   candidates: UniverseDiscoveryCandidate[];
-  details: Map<number, RobloxGameDetail>;
+  details?: Map<number, RobloxGameDetail>;
+  fetchDetailsOptions?: FetchJsonOptions;
   fetchedAt: string;
+  seenField?: "last_seen_in_search" | "last_seen_in_sort";
   dryRun?: boolean;
 }) {
   const uniqueCandidates = Array.from(
     new Map(params.candidates.map((candidate) => [candidate.universeId, candidate])).values()
   ).filter((candidate) => Number.isSafeInteger(candidate.universeId) && candidate.universeId > 0);
   const existingIds = await fetchExistingUniverseIds(uniqueCandidates.map((candidate) => candidate.universeId));
-  const insertRows = uniqueCandidates
-    .filter((candidate) => !existingIds.has(candidate.universeId))
+  const missingCandidates = uniqueCandidates.filter((candidate) => !existingIds.has(candidate.universeId));
+  const details = params.details ?? new Map<number, RobloxGameDetail>();
+  if (params.fetchDetailsOptions) {
+    const missingDetailIds = missingCandidates
+      .map((candidate) => candidate.universeId)
+      .filter((universeId) => !details.has(universeId));
+    const fetchedDetails = await fetchGameDetails(missingDetailIds, params.fetchDetailsOptions);
+    for (const [universeId, detail] of fetchedDetails) {
+      details.set(universeId, detail);
+    }
+  }
+
+  const insertRows = missingCandidates
     .map((candidate) => {
-      const detail = params.details.get(candidate.universeId);
+      const detail = details.get(candidate.universeId);
       const rootPlaceId = detail?.rootPlaceId ?? candidate.rootPlaceId ?? null;
       if (!rootPlaceId) return null;
       const name = detail?.name ?? candidate.name ?? `Universe ${candidate.universeId}`;
@@ -201,6 +214,7 @@ export async function insertNewUniverseCandidates(params: {
       const creatorName = detail?.creator?.name ?? candidate.creatorName ?? null;
       const creatorIsGroup = creatorType?.toLowerCase() === "group";
 
+      const seenField = params.seenField ?? "last_seen_in_search";
       return {
         universe_id: candidate.universeId,
         root_place_id: rootPlaceId,
@@ -236,7 +250,7 @@ export async function insertNewUniverseCandidates(params: {
         raw_details: detail ? { games: detail } : {},
         created_at_api: typeof detail?.created === "string" ? detail.created : null,
         updated_at_api: typeof detail?.updated === "string" ? detail.updated : null,
-        last_seen_in_search: params.fetchedAt,
+        [seenField]: params.fetchedAt,
         stats_tier: "NEW",
         stats_tier_reason: "discovered_not_refreshed",
         stats_tier_updated_at: params.fetchedAt

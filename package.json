@@ -53,6 +53,7 @@
     "fix:game-links": "tsx scripts/games/fix-missing-roblox-links-and-universes.ts",
     "cover:backfill": "tsx scripts/backfill/backfill-missing-cover-images.ts",
     "collect:universes": "tsx scripts/universes/collect-roblox-universes.ts",
+    "discover:universes:priority": "tsx scripts/universes/discover-priority-roblox-universes.ts",
     "discover:universes:search": "tsx scripts/universes/search-roblox-universes.ts",
     "discover:universes:creators": "tsx scripts/universes/expand-roblox-creators.ts",
     "pipeline:universes": "tsx scripts/universes/run-universe-pipeline.ts",

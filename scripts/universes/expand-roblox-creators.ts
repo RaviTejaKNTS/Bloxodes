@@ -3,7 +3,6 @@ import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 import {
-  fetchGameDetails,
   fetchJson,
   insertNewUniverseCandidates,
   pickNumber,
@@ -216,8 +215,11 @@ async function main() {
       return;
     }
 
-    const candidates = new Map<number, UniverseDiscoveryCandidate>();
     let failedSeeds = 0;
+    let candidatesSeen = 0;
+    let existing = 0;
+    let insertable = 0;
+    let inserted = 0;
     console.log(
       `Starting creator discovery: ${seeds.length} creator seeds, max pages ${options.maxPages}, page limit ${CREATOR_GAMES_PAGE_LIMIT}, dryRun=${options.dryRun}`
     );
@@ -225,10 +227,20 @@ async function main() {
     for (const [index, seed] of seeds.entries()) {
       try {
         const results = await fetchCreatorCandidates(seed, options.maxPages);
-        for (const candidate of results) {
-          if (!candidates.has(candidate.universeId)) candidates.set(candidate.universeId, candidate);
-        }
-        console.log(` • ${index + 1}/${seeds.length} ${seed.type}:${seed.id}: ${results.length} candidates`);
+        const result = await insertNewUniverseCandidates({
+          source: "roblox_creator_games",
+          candidates: results,
+          fetchDetailsOptions: REQUEST_OPTIONS,
+          fetchedAt,
+          dryRun: options.dryRun
+        });
+        candidatesSeen += result.candidates;
+        existing += result.existing;
+        insertable += result.insertable;
+        inserted += result.inserted;
+        console.log(
+          ` • ${index + 1}/${seeds.length} ${seed.type}:${seed.id}: ${result.candidates} candidates, ${result.inserted}/${result.insertable} inserted`
+        );
       } catch (error) {
         failedSeeds += 1;
         console.warn(
@@ -239,33 +251,23 @@ async function main() {
       }
     }
 
-    const candidateRows = Array.from(candidates.values());
-    const details = await fetchGameDetails(candidateRows.map((candidate) => candidate.universeId), REQUEST_OPTIONS);
-    const result = await insertNewUniverseCandidates({
-      source: "roblox_creator_games",
-      candidates: candidateRows,
-      details,
-      fetchedAt,
-      dryRun: options.dryRun
-    });
-
     const status = failedSeeds > 0 ? "partial" : "success";
     await finishStatsJobRun(run, {
       status,
       rowsClaimed: seeds.length,
-      rowsSucceeded: result.inserted,
+      rowsSucceeded: inserted,
       rowsFailed: failedSeeds,
       metadata: {
-        candidates: result.candidates,
-        existing: result.existing,
-        insertable: result.insertable,
-        inserted: result.inserted,
+        candidates: candidatesSeen,
+        existing,
+        insertable,
+        inserted,
         failed_seeds: failedSeeds
       }
     });
 
     console.log(
-      `Creator discovery complete: ${result.candidates} candidates, ${result.existing} existing, ${result.insertable} insertable, ${result.inserted} inserted, ${failedSeeds} failed seeds.`
+      `Creator discovery complete: ${candidatesSeen} candidates, ${existing} existing, ${insertable} insertable, ${inserted} inserted, ${failedSeeds} failed seeds.`
     );
   } catch (error) {
     await finishStatsJobRun(run, { status: "failed", error });

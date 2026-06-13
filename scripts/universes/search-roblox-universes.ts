@@ -4,7 +4,6 @@ import { randomUUID } from "node:crypto";
 
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 import {
-  fetchGameDetails,
   fetchJson,
   insertNewUniverseCandidates,
   pickBoolean,
@@ -306,8 +305,11 @@ async function main() {
   }
 
   const fetchedAt = new Date().toISOString();
-  const candidates = new Map<number, UniverseDiscoveryCandidate>();
   const failedQueries: Array<{ query: string; error: string }> = [];
+  let candidatesSeen = 0;
+  let existing = 0;
+  let insertable = 0;
+  let inserted = 0;
   console.log(
     `Starting Roblox search discovery: ${options.queries.length} queries, max pages ${options.maxPages}, dryRun=${options.dryRun}`
   );
@@ -316,10 +318,20 @@ async function main() {
     for (const [index, query] of options.queries.entries()) {
       try {
         const results = await fetchSearchCandidates(query, options.maxPages);
-        for (const candidate of results) {
-          if (!candidates.has(candidate.universeId)) candidates.set(candidate.universeId, candidate);
-        }
-        console.log(` • ${index + 1}/${options.queries.length} "${query}": ${results.length} candidates`);
+        const result = await insertNewUniverseCandidates({
+          source: "roblox_omni_search",
+          candidates: results,
+          fetchDetailsOptions: REQUEST_OPTIONS,
+          fetchedAt,
+          dryRun: options.dryRun
+        });
+        candidatesSeen += result.candidates;
+        existing += result.existing;
+        insertable += result.insertable;
+        inserted += result.inserted;
+        console.log(
+          ` • ${index + 1}/${options.queries.length} "${query}": ${result.candidates} candidates, ${result.inserted}/${result.insertable} inserted`
+        );
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         failedQueries.push({ query, error: message });
@@ -327,32 +339,22 @@ async function main() {
       }
     }
 
-    const candidateRows = Array.from(candidates.values());
-    const details = await fetchGameDetails(candidateRows.map((candidate) => candidate.universeId), REQUEST_OPTIONS);
-    const result = await insertNewUniverseCandidates({
-      source: "roblox_omni_search",
-      candidates: candidateRows,
-      details,
-      fetchedAt,
-      dryRun: options.dryRun
-    });
-
     await finishStatsJobRun(run, {
       status: failedQueries.length ? "partial" : "success",
       rowsClaimed: options.queries.length,
-      rowsSucceeded: result.inserted,
+      rowsSucceeded: inserted,
       rowsFailed: failedQueries.length,
       metadata: {
-        candidates: result.candidates,
-        existing: result.existing,
-        insertable: result.insertable,
-        inserted: result.inserted,
+        candidates: candidatesSeen,
+        existing,
+        insertable,
+        inserted,
         failed_queries: failedQueries
       }
     });
 
     console.log(
-      `Search discovery complete: ${result.candidates} candidates, ${result.existing} existing, ${result.insertable} insertable, ${result.inserted} inserted, ${failedQueries.length} failed queries.`
+      `Search discovery complete: ${candidatesSeen} candidates, ${existing} existing, ${insertable} insertable, ${inserted} inserted, ${failedQueries.length} failed queries.`
     );
   } catch (error) {
     await finishStatsJobRun(run, { status: "failed", error });
