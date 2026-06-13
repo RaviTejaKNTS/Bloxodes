@@ -3,6 +3,7 @@ returns jsonb
 language plpgsql
 security definer
 set search_path = public, extensions
+set statement_timeout = '120s'
 as $$
 declare
   refreshed_at timestamptz := now();
