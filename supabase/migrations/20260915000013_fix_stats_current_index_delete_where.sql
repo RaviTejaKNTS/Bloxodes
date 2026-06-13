@@ -12,6 +12,8 @@ declare
   genre_count integer := 0;
   riser_count integer := 0;
 begin
+  perform set_config('statement_timeout', '120000', true);
+
   delete from public.stats_risers_current_index where true;
   delete from public.stats_genre_current_index where true;
   delete from public.stats_game_current_index where true;
