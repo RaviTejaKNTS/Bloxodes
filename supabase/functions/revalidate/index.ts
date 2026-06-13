@@ -33,6 +33,7 @@ const serviceRoleKey =
 const revalidateEndpoint = Deno.env.get("REVALIDATE_ENDPOINT");
 const revalidateSecret = Deno.env.get("REVALIDATE_SECRET");
 const batchSize = Number(Deno.env.get("REVALIDATE_BATCH_SIZE") ?? 100);
+const statsBatchShare = Math.min(Math.max(Number(Deno.env.get("REVALIDATE_STATS_BATCH_SHARE") ?? 0.8), 0), 1);
 const requestDelayMs = Number(Deno.env.get("REVALIDATE_REQUEST_DELAY_MS") ?? 0);
 
 const supabase = createClient(supabaseUrl, serviceRoleKey);
@@ -46,7 +47,7 @@ function logError(message: string, data?: Record<string, unknown>) {
 }
 
 async function fetchEvents(limit = 50): Promise<EventRow[]> {
-  const statsLimit = Math.max(1, Math.ceil(limit / 2));
+  const statsLimit = Math.max(1, Math.ceil(limit * statsBatchShare));
   const { data: statsData, error: statsError } = await supabase
     .from("revalidation_events")
     .select("id, entity_type, slug")

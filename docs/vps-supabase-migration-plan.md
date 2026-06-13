@@ -12,7 +12,7 @@ The migration started as a parallel-copy validation project and moved into produ
 - VPS Supabase revalidation is wired through the self-hosted `revalidate` Edge Function, Vault `revalidate_cron_jwt`, and a VPS-local minute cron that calls `public.invoke_revalidation_worker()`.
 - GitHub Actions and Northflank writer/stat jobs have been rotated to the VPS Supabase endpoint and service-role key, then restored to their normal schedules.
 - Cloudflare emergency cache has been disabled through `CLOUDFLARE_BLOXODES_API`.
-- Cloudflare purge remains enabled, but synchronous warm-after-purge is disabled in production with `CLOUDFLARE_WARM_AFTER_PURGE=false` so broad list/stat revalidation calls do not hit 524 timeouts.
+- Cloudflare purge remains enabled. Cache warming is separated from revalidation through `CLOUDFLARE_WARM_AFTER_PURGE=deferred`, `cache_warm_events`, and a VPS-local cache warm worker so broad list/stat revalidation calls do not block on page warming.
 
 ## Execution Status: 2026-06-12
 
@@ -47,9 +47,10 @@ What is complete:
 - Northflank `stats-hot-hourly` and `stats-daily-ranks` runtime envs now point at `https://bloxodesdb.ravitejaknts.com` with the VPS service-role key, and their original schedules were restored.
 - Cloudflare emergency public HTML cache rule `bloxodes_emergency_public_html_cache` is disabled.
 - The `revalidate` Edge Function has been copied to `/home/codex-admin/bloxodes-supabase/volumes/functions/revalidate/index.ts`.
-- VPS Edge Functions now have `REVALIDATE_ENDPOINT=https://bloxodes.com/api/revalidate`, `REVALIDATE_SECRET`, and `REVALIDATE_BATCH_SIZE=20`.
+- VPS Edge Functions now have `REVALIDATE_ENDPOINT=https://bloxodes.com/api/revalidate`, `REVALIDATE_SECRET`, `REVALIDATE_BATCH_SIZE=100`, and `REVALIDATE_STATS_BATCH_SHARE=0.8`.
 - `public.invoke_revalidation_worker()` now posts to `https://bloxodesdb.ravitejaknts.com/functions/v1/revalidate`.
 - A VPS-local cron invokes `public.invoke_revalidation_worker()` every minute.
+- A second VPS-local cron invokes `public.invoke_cache_warm_worker()` every minute. The `cache-warm` Edge Function drains `cache_warm_events`, warms important public URLs through Cloudflare, deletes successful rows, and retries temporary failures.
 - The initial cutover revalidation backlog was manually drained after disabling Cloudflare warmup. Fresh stats/list events may appear as automation runs, but recent worker rows are succeeding and the queue is in normal steady-state churn rather than an old backlog.
 
 Database validation results:

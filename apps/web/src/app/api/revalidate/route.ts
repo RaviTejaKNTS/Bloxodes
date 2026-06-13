@@ -57,6 +57,9 @@ const STATS_SITEMAP_PATH = "/sitemaps/stats.xml";
 const FEED_PATH = "/feed.xml";
 const PAGINATED_INDEX_PURGE_LIMIT = 50;
 const STATS_DETAIL_PATH_PATTERN = /^\/stats\/games\/[^/?#]+$/;
+const WARM_ROUTE_PATTERN_PATH = /^\/[^?#]*$/;
+
+type WarmMode = "inline" | "deferred" | "disabled";
 
 function assertSecret(request: Request) {
   const secret = process.env.REVALIDATE_SECRET;
@@ -220,6 +223,101 @@ function revalidateForStats(slug: string) {
 
 function warmableRevalidationPaths(paths: string[]) {
   return paths.filter((path) => !STATS_DETAIL_PATH_PATTERN.test(path));
+}
+
+function readPositiveInt(name: string, fallback: number, max: number) {
+  const raw = process.env[name]?.trim();
+  if (!raw) return fallback;
+  const value = Number(raw);
+  if (!Number.isFinite(value) || value < 1) return fallback;
+  return Math.min(Math.floor(value), max);
+}
+
+function readWarmMode(): WarmMode {
+  const value = process.env.CLOUDFLARE_WARM_AFTER_PURGE?.trim().toLowerCase();
+  if (value === "false" || value === "0" || value === "off" || value === "disabled") return "disabled";
+  if (value === "deferred" || value === "async" || value === "queued") return "deferred";
+  return "inline";
+}
+
+function normalizeWarmPath(path: string) {
+  const trimmed = path.trim();
+  if (!trimmed || !trimmed.startsWith("/") || !WARM_ROUTE_PATTERN_PATH.test(trimmed)) return null;
+  if (/\[[^/\]]+\]/.test(trimmed)) return null;
+  if (trimmed === "/") return "/";
+  return trimmed.replace(/\/+$/, "");
+}
+
+function warmPathPriority(path: string) {
+  if (path === "/") return 1;
+  if (path === FEED_PATH || path === SITEMAP_INDEX_PATH || path.startsWith("/sitemaps/")) return 10;
+  if (
+    path === "/codes" ||
+    path === "/stats" ||
+    path === "/stats/games" ||
+    path === "/wiki" ||
+    path === "/catalog" ||
+    path === "/articles" ||
+    path === "/events" ||
+    path === "/tools" ||
+    path === "/lists"
+  ) {
+    return 20;
+  }
+  if (/^\/[^/]+\/page\/\d+$/.test(path) || path.includes("/page/")) return 80;
+  if (path.startsWith("/api/")) return 90;
+  return 40;
+}
+
+function prioritizedWarmPaths(paths: string[]) {
+  const maxPaths = readPositiveInt("CLOUDFLARE_DEFERRED_WARM_MAX_PATHS", 40, 500);
+  return Array.from(new Set(paths.map(normalizeWarmPath).filter((path): path is string => Boolean(path))))
+    .sort((a, b) => warmPathPriority(a) - warmPathPriority(b) || a.localeCompare(b))
+    .slice(0, maxPaths);
+}
+
+async function queueCloudflareWarmPaths(paths: string[]) {
+  const queuedPaths = prioritizedWarmPaths(paths);
+  if (!queuedPaths.length) {
+    return {
+      ok: true,
+      attempted: 0,
+      queued: 0,
+      skipped: 0,
+      reason: "no-cacheable-paths"
+    };
+  }
+
+  const rows = queuedPaths.map((path) => ({
+    path,
+    source: "revalidate",
+    priority: warmPathPriority(path),
+    attempts: 0,
+    last_error: null,
+    updated_at: new Date().toISOString()
+  }));
+
+  const { error } = await supabaseAdmin()
+    .from("cache_warm_events")
+    .upsert(rows, { onConflict: "path" });
+
+  if (error) {
+    return {
+      ok: false,
+      attempted: queuedPaths.length,
+      queued: 0,
+      skipped: Math.max(0, paths.length - queuedPaths.length),
+      reason: error.message
+    };
+  }
+
+  return {
+    ok: true,
+    attempted: queuedPaths.length,
+    queued: queuedPaths.length,
+    skipped: Math.max(0, paths.length - queuedPaths.length),
+    reason: "deferred"
+  };
 }
 
 function revalidateForTools(slug: string) {
@@ -677,8 +775,30 @@ export async function POST(request: Request) {
 
   const cloudflare = await purgeCloudflarePublicCache({ paths: purgePaths, tags: purgeTags });
   const warmPaths = warmableRevalidationPaths(purgePaths);
+  const warmMode = readWarmMode();
   const cloudflareWarm = cloudflare.enabled && cloudflare.ok
-    ? await warmCloudflarePaths(warmPaths)
+    ? warmMode === "deferred"
+      ? await queueCloudflareWarmPaths(warmPaths).then((result) => ({
+          enabled: true,
+          ok: true,
+          attempted: 0,
+          warmed: [],
+          skipped: result.skipped,
+          reason: result.ok ? "deferred" : "deferred-queue-failed",
+          queued: result.queued,
+          queueAttempted: result.attempted,
+          queueError: result.ok ? undefined : result.reason
+        }))
+      : warmMode === "disabled"
+        ? {
+            enabled: false,
+            ok: true,
+            attempted: 0,
+            warmed: [],
+            skipped: warmPaths.length,
+            reason: "disabled"
+          }
+        : await warmCloudflarePaths(warmPaths)
     : {
         enabled: false,
         ok: true,
