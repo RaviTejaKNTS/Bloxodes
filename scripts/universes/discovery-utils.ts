@@ -1,4 +1,6 @@
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { cleanRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
+import { slugify } from "@/lib/slug";
 
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";
 
@@ -213,13 +215,16 @@ export async function insertNewUniverseCandidates(params: {
       const creatorId = detail?.creator?.id ?? candidate.creatorId ?? null;
       const creatorName = detail?.creator?.name ?? candidate.creatorName ?? null;
       const creatorIsGroup = creatorType?.toLowerCase() === "group";
+      const displayName = cleanRobloxUniverseDisplayName(name);
+      const slug = slugify(displayName ?? name) || `universe-${candidate.universeId}`;
 
       const seenField = params.seenField ?? "last_seen_in_search";
       return {
         universe_id: candidate.universeId,
         root_place_id: rootPlaceId,
         name,
-        slug: null,
+        display_name: displayName,
+        slug,
         description: detail?.description ?? candidate.description ?? null,
         description_source: detail?.description ? "games" : candidate.description ? params.source : null,
         creator_id: creatorId,

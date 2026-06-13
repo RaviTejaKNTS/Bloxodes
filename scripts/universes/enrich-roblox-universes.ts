@@ -2,7 +2,7 @@ import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { slugify } from "@/lib/slug";
-import { cleanRobloxUniverseDisplayName, isDirtyRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
+import { cleanRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
 import { isStatsTier, type StatsTier } from "./stats-tier";
 
 const GAME_DETAILS_API = "https://games.roblox.com/v1/games";
@@ -703,9 +703,6 @@ function mapGameDetail(
     rawDetails.openCloud = metadata.raw;
   }
 
-  const baseName = metadata?.displayName ?? game.name ?? null;
-  const computedSlug = slugify(baseName ?? "") || `universe-${game.id}`;
-
   const metadataGenre = pickString(metadata?.raw ?? null, "genre");
   const metadataGenreL1 = pickString(metadata?.raw ?? null, "genre_l1", "genreL1");
   const metadataGenreL2 = pickString(metadata?.raw ?? null, "genre_l2", "genreL2");
@@ -746,7 +743,7 @@ function mapGameDetail(
       : typeof game.description === "string"
         ? "games"
         : null,
-    slug: computedSlug,
+    slug: null,
     creator_id: game.creator?.id ?? null,
     creator_name: game.creator?.name ?? null,
     creator_type: game.creator?.type ?? null,
@@ -840,8 +837,8 @@ function mergeWithExistingValues(
         existingValue !== null &&
         existingValue !== undefined &&
         (typeof existingValue !== "string" || existingValue.trim().length > 0);
-      if (hasExistingValue && (!isDirtyRobloxUniverseDisplayName(existingValue as string) || !incomingValue)) {
-        continue; // keep existing clean/editorial display_name values
+      if (hasExistingValue && !incomingValue) {
+        continue; // keep existing display_name when the incoming clean value is empty
       }
     }
 

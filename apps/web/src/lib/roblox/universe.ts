@@ -169,7 +169,8 @@ export async function ensureUniverseForRobloxLink(
     placeDetails?.name ??
     scrapedMetadata?.genre ??
     `Universe ${universeId}`;
-  const slug = slugify(canonicalName);
+  const displayName = cleanRobloxUniverseDisplayName(canonicalName);
+  const slug = slugify(displayName ?? canonicalName) || `universe-${universeId}`;
   const favorites = gameDetail?.favorites ?? gameDetail?.favoritedCount ?? null;
   const votes = gameDetail?.votes ?? {};
   const likes = votes?.upVotes ?? gameDetail?.totalUpVotes ?? null;
@@ -181,7 +182,7 @@ export async function ensureUniverseForRobloxLink(
     universe_id: universeId,
     root_place_id: fallbackRoot,
     name: canonicalName,
-    display_name: cleanRobloxUniverseDisplayName(canonicalName),
+    display_name: displayName,
     slug: slug ?? null,
     description: gameDetail?.description ?? null,
     description_source: gameDetail?.description ? "games_api" : null,
