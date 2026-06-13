@@ -19,6 +19,12 @@ Bloxodes normally creates one combined quiz per game. Do not split a game into m
 
 For new game coverage, quiz writing should usually wait until catalog-led discovery or core catalog data has produced stable facts. Do not build quiz questions from surface-level guesses, current code names, current event status, or temporary reward tracks.
 
+## Scope Guard
+
+Quiz work owns the `quiz_pages` row and the local question pool for that quiz. Do not edit shared quiz routes, quiz runner components, result screens, page chrome, CTAs, sidebars, ads, sitemap/feed code, or unrelated page copy unless the user explicitly asks for implementation work.
+
+If preview reveals a runner/template issue, report it as a separate implementation task instead of changing it inside the quiz content workflow.
+
 ## Database And Data Shape
 
 The page metadata lives in `quiz_pages`:

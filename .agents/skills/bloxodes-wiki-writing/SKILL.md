@@ -34,6 +34,8 @@ A wiki page is the hub for a Roblox game. It should orient the reader and let th
 
 Do not turn the wiki page into a giant article. The hub copy should explain how the game works at a useful level, then leave room for the related blocks to do their jobs.
 
+Do not edit shared wiki routes, hub layouts, related-card components, navigation, CTAs, sidebars, ads, sitemap/feed code, or unrelated page copy while using this skill unless the user explicitly asks for implementation work. Wiki work owns `wiki_pages` fields, approved companion universe summary updates, and related-row verification. If preview exposes shared UI problems, report them separately.
+
 For new game coverage, prefer writing the wiki after at least one core catalog or strong catalog-led discovery exists. The wiki should be grounded in real item systems and gameplay loops, not surface-level guesses from the Roblox description alone.
 
 Use these inputs:

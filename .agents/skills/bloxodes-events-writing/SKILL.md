@@ -33,6 +33,8 @@ The first job is eligibility. Do not create an event page only because a game up
 
 Never inject event data by hand. This skill may write evergreen `events_pages` copy and metadata only. Current/upcoming/past event rows, live status, dates, rewards, and timelines must come from `roblox_virtual_events` or another approved importer. Do not write "current event", "latest event", exact live dates, or one-off event reward claims into public copy.
 
+Do not edit shared event routes, timeline components, page chrome, CTAs, sidebars, ads, sitemap/feed code, or unrelated copy while using this skill unless the user explicitly asks for implementation work. Event work owns `events_pages` fields and the approved timeline importer/data path. If preview exposes a shared template issue, report it separately.
+
 ## Output Shape
 
 Return valid JSON shaped for `events_pages`:

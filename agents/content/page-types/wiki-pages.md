@@ -26,6 +26,12 @@ Connection happens through the UI and related sections. Public copy should expla
 
 Codes and events remain automation-owned on the wiki too. The wiki can mention that the game has codes or events when related sections exist, but it should not hard-code current code names, active-code counts, live event statuses, current event dates, or temporary reward timelines.
 
+## Scope Guard
+
+Wiki work owns the `wiki_pages` row, the companion `roblox_universes.game_description_md` update when explicitly part of the wiki workflow, and related row verification. Do not edit shared wiki routes, hub layouts, related-card components, navigation, CTAs, sidebars, ads, sitemap/feed code, or unrelated page copy unless the user explicitly asks for implementation work.
+
+If preview exposes bad shared hub copy or a route/rendering issue, record it separately and ask before changing shared UI.
+
 ## Rendered Page Contract
 
 Before writing, map every visible wiki area to the field or related table that renders it. A wiki page is not complete just because the `wiki_pages` row is filled.

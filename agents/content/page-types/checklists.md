@@ -19,6 +19,12 @@ Bloxodes normally creates one combined checklist per game. Split a game into mul
 
 For new game coverage, checklist planning should usually wait until catalog-led discovery or core catalog data has identified the real systems, item collections, unlock routes, maps, bosses, shops, and repeatable goals. Do not turn surface-level discovery guesses into a checklist.
 
+## Scope Guard
+
+Checklist work owns the `checklist_pages` row, `checklist_items`, and the approved import/verification path. Do not edit shared checklist routes, board components, cards, page chrome, CTAs, sidebars, ads, sitemap/feed code, or unrelated page copy unless the user explicitly asks for implementation work.
+
+If preview shows a board/template issue, report it separately and keep the current task limited to checklist content and data.
+
 ## Database Fields
 
 Write in this shape:

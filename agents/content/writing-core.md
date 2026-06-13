@@ -10,6 +10,18 @@ Bloxodes should read like a useful Roblox live database written for players. The
 
 The same idea applies to internal guidance. A useful instruction should explain what to care about and why it matters. If a rule is only written as a command, add enough context for the model to make the right call on a different page type later.
 
+## Owned-Surface Scope Guard
+
+Content workflows must only change the surface the user asked for. If the request is to write, update, import, publish, or preview a page backed by a database row or local dataset, stay inside that row, dataset, source wiring, seed/import script, and verification path.
+
+Do not edit shared routes, templates, layouts, components, navigation, generic page chrome, CTA blocks, sidebar modules, ad slots, SEO helpers, sitemap code, feed code, or unrelated copy unless the user explicitly asks for that implementation change. A preview can reveal template or route problems, but the correct response is to report the issue and ask before changing shared UI.
+
+For code pages, this guard is stricter: write the `games` row, set the allowed source URLs, run `npm run refresh:codes -- --slug <game-slug>`, verify the generated rows, and stop. Do not "improve" the codes route, template text, shared social block, or generic codes page module while doing a game codes row.
+
+For articles, wiki pages, events, checklists, and quizzes, the same rule applies: write the owned content fields and data files only. If the renderer is broken or the shared template copy is bad, record it as a separate follow-up instead of folding it into the content task.
+
+Catalog, game-catalog, and tool workflows are different when the approved page requires code to render the data or tool correctly. They may edit their owned dataset config, renderer override, collector, or tool implementation when that code is part of the requested page surface. They still must not drift into unrelated shared chrome, global templates, CTAs, sidebars, ads, feed/sitemap code, or other page families without an explicit request.
+
 ## Instruction Voice
 
 When writing or updating skills, agent notes, and workflow docs, use the same practical clarity we want in public copy.

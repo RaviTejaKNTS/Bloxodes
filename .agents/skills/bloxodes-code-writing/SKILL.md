@@ -33,6 +33,8 @@ Do not create a codes page unless research confirms a real code system and suppo
 
 Never inject code data by hand. This skill may write evergreen `games` row fields and source URLs only. Do not write current code names, active or expired code rows, current reward mappings, active counts, dates, or freshness claims into `final.json`, SQL, Supabase, Markdown, or public prose.
 
+Do not edit shared `/codes` route files, templates, page chrome, social/source blocks, cards, CTAs, sidebars, ads, sitemap/feed code, or unrelated copy while using this skill unless the user explicitly asks for that implementation change. A codes-page task writes the `games` row, runs `npm run refresh:codes -- --slug <game-slug>`, verifies the generated rows, and stops.
+
 ## Output Shape
 
 Return valid JSON shaped for the `games` row:

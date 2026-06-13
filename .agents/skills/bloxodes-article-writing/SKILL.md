@@ -35,6 +35,8 @@ Use this for researched evergreen articles: focused how-tos, specific item or qu
 
 Articles can be more narrative than catalog or wiki pages, but they still need to stay useful. The reader should understand the topic better after each section, not feel like they are being carried through SEO filler.
 
+Do not edit shared article routes, templates, page chrome, cards, CTAs, sidebars, ads, sitemap/feed code, or unrelated copy while using this skill unless the user explicitly asks for implementation work. Article work owns the `articles` row, approved cover asset, source list, and import/verification path. If preview exposes a shared UI issue, report it separately and stop.
+
 Hard pass on overlap:
 
 - no current codes, code troubleshooting, or code reward articles

@@ -10,6 +10,12 @@ Articles should answer a focused evergreen player question with more narrative d
 
 Articles are not the place to duplicate other page types. Do not create articles for current codes, code troubleshooting, events, event timelines, current update news, broad catalog explanations, or generic "beginner guide" topics. Use codes pages for code help, events pages for event timelines, wiki hubs for broad orientation, and catalog pages for item collections.
 
+## Scope Guard
+
+Article work owns the `articles` row, approved cover asset, internal source list, and article import/verification path. Do not edit article route templates, shared article chrome, cards, sidebars, CTAs, comments, ads, feed/sitemap code, or unrelated page copy while writing or publishing an article unless the user directly asks for that implementation change.
+
+If preview shows a shared template problem, record it as a separate issue. Do not silently fix it inside the article task.
+
 ## Database Fields
 
 Create or update:

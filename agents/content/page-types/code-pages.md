@@ -6,6 +6,12 @@ Code pages are not manually maintained code lists. The public article fields exp
 
 Non-negotiable: never inject code data by hand. Do not write code names, active/expired rows, reward mappings tied to a current code, first-seen dates, expiry dates, active counts, or "latest/current/fresh" claims into JSON, SQL, Supabase, Markdown, or prose. The only content work is evergreen `games` row copy and source URL wiring; the automation owns live code data.
 
+## Scope Guard
+
+A codes-page task writes the `games` row and runs the codes refresh pipeline. That is it.
+
+Do not edit `/codes` route files, shared codes templates, generic source/social sections, sidebar CTAs, components, layouts, or page chrome during a codes content task unless the user explicitly asks for a route or template change. If preview exposes bad shared copy or a renderer issue, report it as a separate follow-up and keep the current task limited to the `games` row plus refresh verification.
+
 ## Required Shape
 
 Create or update:
@@ -95,5 +101,6 @@ Bad columns:
 4. Do not insert code rows.
 5. Run `npm run refresh:codes -- --slug <game-slug>`.
 6. Verify the code page locally and confirm the code table came from the refresh script, not from manual JSON, SQL, or copied source text.
+7. Stop after row/writeback/refresh verification. Do not bundle template, route, component, CTA, or shared copy edits into the codes task.
 
 The final check should name both things separately: article fields are evergreen, and live codes were sourced by `scripts/codes/update-codes.ts`.

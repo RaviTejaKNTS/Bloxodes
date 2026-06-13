@@ -6,6 +6,12 @@ An event page should exist only when a game has real trackable events. Normal up
 
 Non-negotiable: never inject event timeline data by hand. Do not write current event rows, active/upcoming/past status, live dates, reward timelines, one-off current event claims, or "latest/current" event wording into page prose or manual JSON. Event rows must come from `roblox_virtual_events` or another approved importer. The page copy is evergreen orientation; the timeline surface is automation-owned.
 
+## Scope Guard
+
+Event-page work owns the `events_pages` row and approved event importer/timeline data path. Do not edit shared event routes, timeline components, generic event cards, page chrome, sidebars, CTAs, ads, sitemap/feed code, or unrelated page copy unless the user explicitly asks for route or component work.
+
+If preview shows a template or renderer issue, report it separately and keep the current task limited to event data/content.
+
 ## Database Fields
 
 Create or update:

@@ -31,6 +31,8 @@ Copy `agents/content/todo-templates/quiz.md` into the folder as `todo.md` and up
 
 Use this when the page is an interactive quiz under `/quizzes/<slug>`. A quiz is not an article and should not become a guide page with a small quiz attached. It should be a replayable test built from real game knowledge.
 
+Do not edit shared quiz routes, quiz runner components, result screens, page chrome, CTAs, sidebars, ads, sitemap/feed code, or unrelated copy while using this skill unless the user explicitly asks for implementation work. Quiz work owns `quiz_pages` and the local question pool. If preview exposes a runner/template issue, report it separately.
+
 Bloxodes normally creates one combined quiz per game unless the user explicitly asks for multiple. Use the game slug as the quiz code. Example: `wizard-alchemy`, not `wizard-alchemy-quiz`. Do not use `roblox_universes.slug` as `quiz_pages.code`; universe slugs belong to `/stats/games/*` and may include universe IDs.
 
 For new game coverage, prefer writing the quiz after core catalog data or catalog-led discovery exists. A good quiz needs stable item, map, mode, mechanic, and progression facts; do not make questions from surface-level guesses or current live codes/events.

@@ -825,12 +825,50 @@ export default async function GamePage({ params }: Params) {
                   </div>
                 ) : (
                   <p data-md-copy="true" className="md-copy-node md-copy-p">
-                    Official code drops usually appear around game updates, community milestones, or developer posts. If no official channel is listed here, use the Roblox experience page to find the game's group or Discord.
+                    We haven't found any official social media links yet.
                   </p>
                 )}
                 <p data-md-copy="true" className="md-copy-node md-copy-p">
-                  Redeem rewards only inside the Roblox experience, then check your inventory, currency, or reward popup before spending anything on the next upgrade.
+                  We keep track of these sources and update this page as soon as new codes drop. Bookmark this page or follow our channels to get the codes right away.
                 </p>
+                <div data-md-copy="true" className="md-copy-node flex flex-wrap gap-3">
+                  <a
+                    href="https://t.me/bloxodes"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-analytics-event="social_follow_click"
+                    data-analytics-platform="telegram"
+                    data-analytics-game-slug={game.slug}
+                    className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                  >
+                    <FaTelegramPlane className="h-4 w-4" aria-hidden />
+                    <span>@bloxodes</span>
+                  </a>
+                  <a
+                    href="https://twitter.com/bloxodes"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-analytics-event="social_follow_click"
+                    data-analytics-platform="x"
+                    data-analytics-game-slug={game.slug}
+                    className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                  >
+                    <RiTwitterXLine className="h-4 w-4" aria-hidden />
+                    <span>@bloxodes</span>
+                  </a>
+                  <a
+                    href="https://chromewebstore.google.com/detail/bloxodes-%E2%80%93-roblox-game-co/mammkedlehmpechknaicfakljaogcmhc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-analytics-event="social_follow_click"
+                    data-analytics-platform="chrome_extension"
+                    data-analytics-game-slug={game.slug}
+                    className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                  >
+                    <SiGooglechrome className="h-4 w-4" aria-hidden />
+                    <span>Install Chrome Extension</span>
+                  </a>
+                </div>
               </>
             ) : null}
 
