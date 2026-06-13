@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "title": "Grow a Garden 2 night stealing data",
+    "updatedAt": "2026-06-13",
+    "sources": [
+      {
+        "label": "Beebom - Grow a Garden 2 Wiki",
+        "url": "https://beebom.com/grow-a-garden-2-wiki/",
+        "accessed": "2026-06-13"
+      },
+      {
+        "label": "Beebom - All Grow a Garden 2 Pets Guide",
+        "url": "https://beebom.com/grow-a-garden-2-pets/",
+        "accessed": "2026-06-13"
+      },
+      {
+        "label": "Beebom - All Grow a Garden 2 Gears Guide",
+        "url": "https://beebom.com/grow-a-garden-gear-shop-guide/",
+        "accessed": "2026-06-13"
+      },
+      {
+        "label": "Beebom - All Grow a Garden 2 Crates Guide",
+        "url": "https://beebom.com/grow-a-garden-2-crates/",
+        "accessed": "2026-06-13"
+      },
+      {
+        "label": "Grow a Garden Calculator - Grow a Garden 2 Wiki",
+        "url": "https://www.growagardencalculator.com/grow-a-garden-2/wiki/",
+        "accessed": "2026-06-13"
+      }
+    ],
+    "columns": [
+      "name",
+      "type",
+      "whereToGet",
+      "effect",
+      "role"
+    ]
+  },
+  "items": [
+    {
+      "id": "raccoon",
+      "name": "Raccoon",
+      "type": "Pet",
+      "effect": "Steals fruit from empty gardens at night and increases steal limit by +25",
+      "role": "Stealing",
+      "image": "/Grow%20a%20Garden%202/Pets/raccoon.webp",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "owl",
+      "name": "Owl",
+      "type": "Pet",
+      "effect": "Extends view distance by 12.5% at night",
+      "role": "Night awareness",
+      "image": "/Grow%20a%20Garden%202/Pets/owl.webp",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "bee",
+      "name": "Bee",
+      "type": "Pet",
+      "effect": "Patrols the garden and swarms intruders",
+      "role": "Defense",
+      "image": "/Grow%20a%20Garden%202/Pets/bee.webp",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "black-dragon",
+      "name": "Black Dragon",
+      "type": "Pet",
+      "effect": "Breathes fire on players who try to steal",
+      "role": "Defense",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "ice-serpent",
+      "name": "Ice Serpent",
+      "type": "Pet",
+      "effect": "Breathes frost on players who try to steal",
+      "role": "Defense",
+      "image": "/Grow%20a%20Garden%202/Pets/ice-serpent.webp",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "lantern",
+      "name": "Lantern",
+      "type": "Gear",
+      "effect": "Gives clearer view during the night",
+      "role": "Night awareness",
+      "image": "/Grow%20a%20Garden%202/Gears/lantern.webp",
+      "whereToGet": "Gears Shop"
+    },
+    {
+      "id": "gnome",
+      "name": "Gnome",
+      "type": "Gear",
+      "effect": "Protects crops from other players",
+      "role": "Defense",
+      "image": "/Grow%20a%20Garden%202/Gears/gnome.webp",
+      "whereToGet": "Gears Shop"
+    },
+    {
+      "id": "flashbang",
+      "name": "Flashbang",
+      "type": "Gear",
+      "effect": "Blinds opponents",
+      "role": "Defense/escape",
+      "image": "/Grow%20a%20Garden%202/Gears/flashbang.webp",
+      "whereToGet": "Gears Shop"
+    },
+    {
+      "id": "invisibility-mushroom",
+      "name": "Invisibility Mushroom",
+      "type": "Gear",
+      "effect": "Turns the player invisible for 1 minute",
+      "role": "Stealth",
+      "image": "/Grow%20a%20Garden%202/Gears/invisibility-mushroom.webp",
+      "whereToGet": "Gears Shop"
+    },
+    {
+      "id": "teleporter",
+      "name": "Teleporter",
+      "type": "Gear",
+      "effect": "Sets a clone at another player's base and lets you teleport there",
+      "role": "Stealing mobility",
+      "image": "/Grow%20a%20Garden%202/Gears/teleporter.webp",
+      "whereToGet": "Gears Shop"
+    },
+    {
+      "id": "owner-door-crate",
+      "name": "Owner Door Crate",
+      "type": "Crate",
+      "effect": "Contains owner-door props",
+      "role": "Access control",
+      "image": "/Grow%20a%20Garden%202/Crates/owner-door-crate.webp",
+      "whereToGet": "Props Shop"
+    },
+    {
+      "id": "bear-trap-crate",
+      "name": "Bear Trap Crate",
+      "type": "Crate",
+      "effect": "Contains bear trap variants",
+      "role": "Defense/trap",
+      "image": "/Grow%20a%20Garden%202/Crates/bear-trap-crate.webp",
+      "whereToGet": "Props Shop"
+    },
+    {
+      "id": "fence-crate",
+      "name": "Fence Crate",
+      "type": "Crate",
+      "effect": "Contains multiple fence types",
+      "role": "Barrier defense",
+      "image": "/Grow%20a%20Garden%202/Crates/fence-crate.webp",
+      "whereToGet": "Props Shop"
+    }
+  ]
+}

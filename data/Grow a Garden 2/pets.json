@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "title": "Grow a Garden 2 pets data",
+    "updatedAt": "2026-06-13",
+    "sources": [
+      {
+        "label": "Beebom - All Grow a Garden 2 Pets Guide",
+        "url": "https://beebom.com/grow-a-garden-2-pets/",
+        "accessed": "2026-06-13"
+      },
+      {
+        "label": "BloxInformer - Grow a Garden 2 Wiki",
+        "url": "https://bloxinformer.com/wikis/grow-a-garden-2/",
+        "accessed": "2026-06-13"
+      }
+    ],
+    "columns": [
+      "name",
+      "price",
+      "rarity",
+      "ability",
+      "whereToGet",
+      "role"
+    ]
+  },
+  "items": [
+    {
+      "id": "frog",
+      "name": "Frog",
+      "price": "10K Sheckles",
+      "rarity": "Common",
+      "ability": "Boosts jump height by +5",
+      "role": "Movement",
+      "image": "/Grow%20a%20Garden%202/Pets/frog.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Frog.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "bunny",
+      "name": "Bunny",
+      "price": "20K Sheckles",
+      "rarity": "Common",
+      "ability": "Boosts walk speed by +5",
+      "role": "Movement",
+      "image": "/Grow%20a%20Garden%202/Pets/bunny.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Bunny.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "owl",
+      "name": "Owl",
+      "price": "25K Sheckles",
+      "rarity": "Uncommon",
+      "ability": "Extends night view distance by 12.5% and alerts when a rare pet spawns",
+      "role": "Night visibility",
+      "image": "/Grow%20a%20Garden%202/Pets/owl.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Owl-Pet-Grow-a-Garden-2.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "bee",
+      "name": "Bee",
+      "price": "1M Sheckles",
+      "rarity": "Legendary",
+      "ability": "Patrols your garden and swarms intruders to defend fruit",
+      "role": "Defense",
+      "image": "/Grow%20a%20Garden%202/Pets/bee.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Bee-Grow-a-Garden-2.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "deer",
+      "name": "Deer",
+      "price": "50K Sheckles",
+      "rarity": "Rare",
+      "ability": "Helps plants grow 10% faster",
+      "role": "Growth",
+      "image": "/Grow%20a%20Garden%202/Pets/deer.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Deer_200839.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "robin",
+      "name": "Robin",
+      "price": "75K Sheckles",
+      "rarity": "Legendary",
+      "ability": "Eats ripe fruits and sometimes drops seeds",
+      "role": "Seed support",
+      "image": "/Grow%20a%20Garden%202/Pets/robin.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Robin.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "monkey",
+      "name": "Monkey",
+      "price": "1M Sheckles",
+      "rarity": "Mythic",
+      "ability": "Brings ripe fruits straight to you",
+      "role": "Harvest convenience",
+      "image": "/Grow%20a%20Garden%202/Pets/monkey.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Monkey-pet.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "golden-dragonfly",
+      "name": "Golden Dragonfly",
+      "price": "3M Sheckles",
+      "rarity": "Mythic",
+      "ability": "Increases gold chance by 2x",
+      "role": "Mutation/value support",
+      "image": "/Grow%20a%20Garden%202/Pets/golden-dragonfly.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Golden-Dragonfly.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "unicorn",
+      "name": "Unicorn",
+      "price": "4M Sheckles",
+      "rarity": "Mythic",
+      "ability": "Doubles the chance of fruits turning rainbow",
+      "role": "Mutation/value support",
+      "image": "/Grow%20a%20Garden%202/Pets/unicorn.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Unicorn.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "raccoon",
+      "name": "Raccoon",
+      "price": "5M Sheckles",
+      "rarity": "Super",
+      "ability": "Steals fruit from empty gardens at night and increases steal limit by +25",
+      "role": "Night stealing",
+      "image": "/Grow%20a%20Garden%202/Pets/raccoon.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Raccoon.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "black-dragon",
+      "name": "Black Dragon",
+      "price": "1M Sheckles",
+      "rarity": "Super",
+      "ability": "Breathes fire on players who try to steal",
+      "role": "Defense",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "ice-serpent",
+      "name": "Ice Serpent",
+      "price": "20M Sheckles",
+      "rarity": "Super",
+      "ability": "Breathes frost on players who try to steal",
+      "role": "Defense",
+      "image": "/Grow%20a%20Garden%202/Pets/ice-serpent.webp",
+      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Ice-Serpent.jpg",
+      "whereToGet": "Lobby pet spawn"
+    }
+  ]
+}

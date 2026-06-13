@@ -13,6 +13,9 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
   - Used by catalog admin-command routes.
 - `data/Grow a Garden/*`
   - Dataset-backed Grow a Garden catalog content, including crops, seeds, pets, eggs, gears, mutations, weather, merchants, NPCs, shops, seed packs, crafting recipes, food, currencies, and `quiz.json`.
+- `data/Grow a Garden 2/*`
+  - Dataset-backed Grow a Garden 2 wiki/catalog content, including seeds, crops, pets, gears, sprinklers, crates, mutations, shops, and night-stealing tools.
+  - Keep rows source-backed to Grow a Garden 2 specifically. Do not fill crop sell values, sprinkler prices, mutation multipliers, guild rewards, or egg rows from Grow a Garden 1 or unverified calculator assumptions.
 - `data/Steal a Brainrot/*`
   - Dataset-backed Steal a Brainrot wiki/catalog content, including brainrots, rarities, mutations, traits, rebirths, gears, lucky blocks, rituals, machines, and fuse-machine entries.
 - `data/Sailor Piece/*`

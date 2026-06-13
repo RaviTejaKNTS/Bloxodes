@@ -320,6 +320,24 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
     dataDir: "+1 Speed Keyboard Escape",
     universeNames: ["+1 Speed Keyboard Escape", "+1 Speed Keyboard Escape | Candy & Chocolate"],
     collections: ["trails", "auras", "stages", "treadmills"]
+  },
+  {
+    gameSlug: "grow-a-garden-2",
+    gameName: "Grow a Garden 2",
+    universeId: 10200395747,
+    dataDir: "Grow a Garden 2",
+    universeNames: ["Grow a Garden 2"],
+    collections: [
+      "seeds",
+      "crops",
+      "pets",
+      "gears",
+      "sprinklers",
+      "crates",
+      "mutations",
+      "shops",
+      "night-stealing"
+    ]
   }
 ];
 
@@ -347,6 +365,7 @@ const COLLECTION_LABEL_OVERRIDES: Record<string, string> = {
   "melee-specs": "Melee Specs",
   npcs: "NPCs",
   nails: "Nails",
+  "night-stealing": "Night Stealing",
   "pet-ages": "Pet Ages",
   "power-fruits": "Power Fruits",
   "pattern-packs": "Pattern Packs",
@@ -442,6 +461,9 @@ const COLLECTION_FOCUS: Record<string, string> = {
   "pose-packs": "pose pack prices, currencies, unlock routes, availability, duo notes, and runway presentation value",
   "power-fruits": "fruit spawn chances, powers, abilities, upgrade notes, and use restrictions",
   props: "prop categories, names, and catalog images for roleplay setup",
+  seeds: "seed prices, rarities, where to get each seed, harvest type, and starter-to-late-game planning",
+  shops: "shop location, currency, what each shop sells, and when players should check it",
+  sprinklers: "sprinkler prices, tiers, durations, farming effects, mutation support, and where to buy them",
   quests: "quest givers, islands, levels, XP, money, objectives, and special rewards",
   races: "race names, rarity, effects, bonuses, requirements, and progression use",
   rarities: "rarity counts, income ranges, cost ranges, spawn chance, and descriptions",
@@ -481,6 +503,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   weapons: "weapon type, damage or effect, source route, ammo or use limits, requirements, availability, and combat role",
   weights: "rarity, kick power, cost, progression stage, and weight upgrade value",
   "walk-packs": "walk pack prices, currencies, unlock routes, availability, idle or walk style, and presentation value",
+  "night-stealing": "night raid tools, defensive pets, protective props, visibility helpers, and steal-limit choices",
   wraps: "rarity, source route, weapon scope, availability, and animated or special cosmetic notes",
   "wizard-hats": "HP bonuses, Gold costs, lava resistance, source locations, and defensive gear value",
   zones: "zone order, rarity, kick power bands, reward bands, mutation notes, and return-risk context"
@@ -646,6 +669,7 @@ const FIELD_LABELS: Record<string, string> = {
   function: "function",
   hasV4: "V4 status",
   hazards: "hazards",
+  harvestType: "harvest type",
   killInteractiveBehavior: "kill / interactive behavior",
   holdStyle: "hold style",
   howToReach: "how to reach",
@@ -838,6 +862,7 @@ const FIELD_LABELS: Record<string, string> = {
   runType: "run type",
   saleState: "sale state",
   sea: "sea",
+  seedSource: "seed source",
   seaStage: "sea / stage",
   seaEventRole: "sea-event role",
   seats: "seats",
@@ -848,6 +873,7 @@ const FIELD_LABELS: Record<string, string> = {
   signatureMove: "signature move",
   slot: "slot",
   sellPrice: "sell price",
+  sellValueStatus: "sell value status",
   source: "source",
   sourceClass: "source class",
   sourceConfidence: "source confidence",
@@ -863,10 +889,14 @@ const FIELD_LABELS: Record<string, string> = {
   sourceRoute: "source",
   sourceDetail: "source detail",
   sourceStatus: "source status",
+  cropRole: "crop role",
+  bestUse: "best use",
+  whyItMatters: "why it matters",
   sourceTeacher: "teacher",
   sourceType: "source type",
   sourceWeapon: "source weapon",
   sourceAccess: "source / access",
+  whereToGet: "where to get",
   spawnAccess: "spawn / access",
   spawnBehavior: "spawn behavior",
   spawnCondition: "spawn condition",
@@ -1150,6 +1180,10 @@ function buildGameDatasetCatalogCopyOverride({
   countLabel,
   imageUrls
 }: Omit<GameDatasetCatalogCopyInput, "columns"> & { countLabel: string }): GameDatasetCatalogCopy | null {
+  if (config.gameSlug === "grow-a-garden-2") {
+    return buildGrowGarden2CatalogCopyOverride({ config, itemCount, countLabel, imageUrls });
+  }
+
   if (config.gameSlug === "slime-rng") {
     return buildSlimeRngCatalogCopyOverride({ config, itemCount, countLabel, imageUrls });
   }
@@ -1896,6 +1930,356 @@ function buildGameDatasetCatalogCopyOverride({
     wiki_item_count: itemCount,
     thumb_url: imageUrls[0] ?? null
   };
+}
+
+function buildGrowGarden2CatalogCopyOverride({
+  config,
+  itemCount,
+  countLabel,
+  imageUrls
+}: Omit<GameDatasetCatalogCopyInput, "columns"> & { countLabel: string }): GameDatasetCatalogCopy | null {
+  const base = {
+    code: config.code,
+    cta_label: `Open ${config.label.toLowerCase()} catalog`,
+    cta_url: buildGameDatasetCatalogPath(config.code),
+    wiki_sort_order: config.sortOrder,
+    wiki_item_count: itemCount,
+    thumb_url: imageUrls[0] ?? null
+  };
+
+  const copies: Record<
+    string,
+    Omit<GameDatasetCatalogCopy, keyof typeof base> & {
+      faq_json: Array<{ q: string; a: string }>;
+      description_json: Record<string, string>;
+    }
+  > = {
+    seeds: {
+      title: `All ${countLabel} Seeds in Grow a Garden 2`,
+      seo_title: `All ${countLabel} Grow a Garden 2 Seeds, Prices, Rarities, and Harvest Types`,
+      meta_description:
+        "Grow a Garden 2 seeds list with Seed Shop prices, rarities, harvest type, Ghost Pepper Pack plants, and where to get each seed.",
+      intro_md:
+        "Seeds are the main money route in Grow a Garden 2. The important details are price, rarity, where to get the seed, and whether the crop is single-harvest or multi-harvest.\n\nCheap multi-harvest seeds are better for early cash flow because they keep producing after the first harvest. Higher-rarity plants are the longer-term targets once your garden can afford slower, more expensive upgrades.",
+      description_md:
+        "## How to read the seed list\n\n`Price` is the Sheckles cost when the seed is sold through the Seed Shop. `Where to get` separates normal shop seeds from Ghost Pepper Pack plants. `Rarity` helps you scan upgrades, but `harvest type` is what changes the farming rhythm.\n\nSingle-harvest plants are straightforward: plant, grow, harvest, then replant. Multi-harvest plants keep producing, so they are usually more comfortable for steady income and mutation attempts.",
+      how_it_works_md:
+        "Start with price and harvest type. Early players should compare cheap multi-harvest seeds such as Strawberry and Blueberry against single-harvest upgrades. Later, use rarity and where to get each seed to spot expensive targets and pack-only plants.",
+      description_json: {
+        "Seed Shop seeds":
+          "Seed Shop rows are the core progression path. They are the plants you compare when deciding what to buy with Sheckles.",
+        "Ghost Pepper Pack plants":
+          "Ghost Pepper Pack plants sit outside the normal Seed Shop route, so compare them separately from regular Sheckles purchases."
+      },
+      faq_json: [
+        {
+          q: "What is the best early seed in Grow a Garden 2?",
+          a: "Use cheap multi-harvest seeds first if you want steady income. Strawberry and Blueberry are easier to keep producing than single-harvest starter crops."
+        },
+        {
+          q: "Why do some seed details show Unknown?",
+          a: "Some plants already appear in the game lists before every price or harvest detail is easy to compare. Treat Unknown rows as watchlist plants, not early purchase targets."
+        },
+        {
+          q: "Are Ghost Pepper Pack plants normal Seed Shop seeds?",
+          a: "No. They are tracked separately because they come from the Ghost Pepper Pack route, not the standard Seed Shop list."
+        }
+      ],
+      wiki_md:
+        "Grow a Garden 2 seeds cover Seed Shop prices, rarity, harvest type, and Ghost Pepper Pack plants. They are the first catalog to check before planning a crop route."
+    },
+    crops: {
+      title: `All ${countLabel} Crops in Grow a Garden 2`,
+      seo_title: `All ${countLabel} Grow a Garden 2 Crops, Rarities, Seed Routes, and Harvest Types`,
+      meta_description:
+        "Grow a Garden 2 crops list with where to get each crop, rarity, harvest behavior, and farming role for single-harvest and multi-harvest plants.",
+      intro_md:
+        "Crops are what your seeds become after planting, growing, and harvesting. The useful comparison is where the crop comes from, how rare it is, and whether it keeps producing after the first harvest.\n\nSingle-harvest crops are simple one-time plants. Multi-harvest crops are better for steady farming because they keep giving fruit without a full replant every time.",
+      description_md:
+        "## How to choose crops to plant\n\nStart with harvest type. Multi-harvest crops are usually easier to run as a steady garden because they keep producing, while single-harvest crops need a fresh seed after each harvest.\n\nThen compare rarity and where to get the crop. Seed Shop crops are the normal progression route, while Ghost Pepper Pack plants are better treated as separate pack plants when planning your garden.",
+      how_it_works_md:
+        "Compare `harvest type` first. Multi-harvest crops are better for steady collection and mutation attempts, while single-harvest crops are simpler but need replanting. Use rarity and where to get each crop to separate normal shop plants from pack plants.",
+      description_json: {
+        "Single-harvest crops":
+          "Single-harvest crops are best read as one-and-done plantings. They can still be useful, but you need to replant after harvesting.",
+        "Multi-harvest crops":
+          "Multi-harvest crops are better for repeat income and mutation attempts because the plant can keep producing after the first harvest.",
+        "Pack crops":
+          "Ghost Pepper Pack crops should be planned separately from the normal Seed Shop route because they do not follow the same purchase path."
+      },
+      faq_json: [
+        {
+          q: "What is the most important crop field to compare?",
+          a: "Harvest type is the first field to check. Multi-harvest crops are better for steady farming, while single-harvest crops need replanting after harvest."
+        },
+        {
+          q: "Are these copied from Grow a Garden 1?",
+          a: "No. This Grow a Garden 2 list stays separate from the first Grow a Garden because the sequel has its own shops, pets, stealing, and crop planning."
+        },
+        {
+          q: "Which crop type is easier for steady farming?",
+          a: "Multi-harvest crops are usually easier for steady farming because they keep producing after the first harvest."
+        }
+      ],
+      wiki_md:
+        "Grow a Garden 2 crops help players compare where each plant comes from, how rare it is, and whether it is single-harvest or multi-harvest."
+    },
+    pets: {
+      title: `All ${countLabel} Pets in Grow a Garden 2`,
+      seo_title: `All ${countLabel} Grow a Garden 2 Pets, Prices, Rarities, and Abilities`,
+      meta_description:
+        "Grow a Garden 2 pets list with prices, rarities, abilities, lobby spawn notes, movement boosts, crop support, mutations, and night defense roles.",
+      intro_md:
+        "Pets are one of the biggest planning pieces in Grow a Garden 2. They do more than follow you around: some help movement, some grow plants faster, some improve mutation chances, and the strongest pets can steal or defend fruit at night.\n\nCompare price, rarity, ability, and role to decide whether a pet is a farming helper, a night defense pick, or a luxury value booster.",
+      description_md:
+        "## How pet buying works\n\nPets spawn in the lobby and can be bought with Sheckles while their timer is active. Other players can outbid you, so the practical question is not only whether you can afford a pet, but whether you can buy it before someone else does.\n\n## Which pet roles matter\n\nMovement pets are useful early because they make garden checks and hub movement smoother. Growth and harvest pets help with the farming loop. Mutation pets such as Golden Dragonfly and Unicorn matter once your garden is already producing enough fruit to make value boosts worth chasing. Night pets are different: Raccoon supports stealing, while Bee, Black Dragon, and Ice Serpent defend against thieves.",
+      how_it_works_md:
+        "Use `role` as the first filter, then compare price and rarity. A cheap movement pet can be more useful than an expensive mutation pet if you are still early. Once your garden holds valuable crops overnight, defense and night-stealing pets become much more important.",
+      description_json: {
+        "Movement and farming pets":
+          "Frog, Bunny, Deer, Robin, and Monkey help with movement, growth, seed support, or harvest convenience. They are practical before chasing the most expensive pets.",
+        "Mutation and value pets":
+          "Golden Dragonfly and Unicorn support Gold and Rainbow outcomes, which makes them more useful once you already have crops worth improving.",
+        "Night pets":
+          "Raccoon, Bee, Black Dragon, and Ice Serpent connect directly to stealing or defending fruit at night."
+      },
+      faq_json: [
+        {
+          q: "How do you get pets in Grow a Garden 2?",
+          a: "Pets spawn around the lobby and can be bought with Sheckles before their timer runs out."
+        },
+        {
+          q: "Which pet helps with stealing?",
+          a: "Raccoon is the stealing pet. It can steal fruit from empty gardens at night and raises the steal limit by 25."
+        },
+        {
+          q: "Which pets help defend your garden?",
+          a: "Bee, Black Dragon, and Ice Serpent are the clearest defensive pets in the current list."
+        }
+      ],
+      wiki_md:
+        "Grow a Garden 2 pets cover movement, growth, mutations, harvesting, night stealing, and garden defense. Pet choice changes both farming speed and night safety."
+    },
+    gears: {
+      title: `All ${countLabel} Gears in Grow a Garden 2`,
+      seo_title: `All ${countLabel} Grow a Garden 2 Gears, Prices, Effects, and Shop Roles`,
+      meta_description:
+        "Grow a Garden 2 gears list with Gears Shop prices, effects, sprinklers, mushrooms, defensive tools, night visibility items, and garden utility roles.",
+      intro_md:
+        "Gears are the tool side of Grow a Garden 2. They cover growth boosts, plant movement, sprinklers, temporary mushrooms, night visibility, defense, and player-control items.\n\nCompare each gear by price, effect, and role so you know what belongs in your farming setup, what helps during night stealing, and what is mostly cosmetic or utility.",
+      description_md:
+        "## How to compare gears\n\nDo not sort gears only by price. A cheap Trowel can matter if you need to move plants, while a Lantern becomes more useful when night visibility is your problem. Sprinklers are farming tools, mushrooms are temporary movement or stealth tools, and items like Gnome or Flashbang are more about defending against other players.\n\nGrowth gear helps crops. Movement and stealth gear helps routing or raids. Defense gear helps protect fruit when other players are the threat.",
+      how_it_works_md:
+        "Use `role` to decide why the item exists, then compare price and effect. Growth gear helps crops. Movement and stealth gear helps routing or raids. Defense gear helps protect fruit when other players are the threat.",
+      description_json: {
+        "Growth tools":
+          "Watering cans and sprinklers speed up the garden loop. Sprinklers also connect to fruit size and mutation chances.",
+        "Movement and stealth tools":
+          "Jump, speed, shrink, supersize, invisibility, and teleporter items change how players move around or approach other gardens.",
+        "Defense tools":
+          "Gnome, Flashbang, and several player-control tools matter most when stealing and defense become part of the server."
+      },
+      faq_json: [
+        {
+          q: "Where do you buy gears in Grow a Garden 2?",
+          a: "Gears are bought from the Gears Shop, with prices listed in Sheckles when available."
+        },
+        {
+          q: "Are sprinklers gears too?",
+          a: "Yes. Sprinklers appear in the gear list, but they also have a dedicated sprinkler catalog because their farming effects matter enough to compare separately."
+        },
+        {
+          q: "Which gear helps at night?",
+          a: "Lantern helps visibility, while Gnome, Flashbang, Invisibility Mushroom, and Teleporter connect to defense or stealing routes."
+        }
+      ],
+      wiki_md:
+        "Grow a Garden 2 gears cover the Gears Shop tools used for growth, movement, stealth, defense, sprinklers, and night play."
+    },
+    sprinklers: {
+      title: `All ${countLabel} Sprinklers in Grow a Garden 2`,
+      seo_title: `All ${countLabel} Grow a Garden 2 Sprinklers, Prices, Durations, and Effects`,
+      meta_description:
+        "Grow a Garden 2 sprinklers list with tiers, prices, durations, growth effects, fruit size boosts, mutation chance notes, and where to buy them.",
+      intro_md:
+        "Sprinklers are farming gear for players who want faster growth, bigger fruit, and better mutation chances. The list is short, but the differences matter because higher tiers cost much more and fit better into planned farming windows.\n\nUse sprinklers when you are actively planting and harvesting, not when your garden is idle. The stronger tiers matter most once you are chasing bigger fruit and mutation value.",
+      description_md:
+        "## How sprinklers fit farming\n\nSprinklers sit inside the Gears Shop, but they affect the farming loop more directly than most other gear. Common Sprinkler is a starter growth tool, while Uncommon, Rare, Legendary, and Super Sprinkler rows add stronger growth, fruit size, and mutation support.\n\nPlan sprinkler use around crops that are already planted and ready to benefit. A stronger sprinkler is wasted if you place it when there is nothing important growing nearby.",
+      how_it_works_md:
+        "Compare tier, price, duration, and effect together. A sprinkler only matters if you can place it while crops are actively growing, so short duration rows reward focused planting windows rather than casual use.",
+      description_json: {
+        "Starter sprinkler":
+          "Common Sprinkler is the cheapest listed sprinkler and mainly helps with basic growth and fruit size.",
+        "Mutation support":
+          "Uncommon and higher tiers add mutation chance support, which is why sprinklers become more important once you are chasing value boosts.",
+        "High-tier sprinklers":
+          "Legendary and Super Sprinkler are the rows to watch when fruit size and mutation chances matter more than the basic growth boost."
+      },
+      faq_json: [
+        {
+          q: "What do sprinklers do in Grow a Garden 2?",
+          a: "They speed plant growth, increase fruit size, and higher tiers can improve mutation chances."
+        },
+        {
+          q: "When should you use a sprinkler?",
+          a: "Use a sprinkler when valuable crops are already planted and can benefit from faster growth, bigger fruit, or better mutation chances."
+        },
+        {
+          q: "Which sprinkler should I buy first?",
+          a: "Start with the cheapest sprinkler you can use during active growing. Upgrade when mutation chance and longer farming windows matter more than the Sheckles cost."
+        }
+      ],
+      wiki_md:
+        "Grow a Garden 2 sprinklers are growth and mutation support gear. Compare tier, price, duration, effect, and where to buy each one."
+    },
+    crates: {
+      title: `All ${countLabel} Crates in Grow a Garden 2`,
+      seo_title: `All ${countLabel} Grow a Garden 2 Crates, Prices, Rarities, and Contents`,
+      meta_description:
+        "Grow a Garden 2 crates list with rarity, Sheckles prices, crate contents, Props Shop route, decoration roles, and defensive utility crates.",
+      intro_md:
+        "Crates are the prop and structure side of Grow a Garden 2. Some crates are mostly decoration, while others contain owner doors, bear traps, fences, teleporter pads, conveyors, or other utility pieces that can change how a garden is defended or navigated.\n\nCompare crate price, rarity, contents, and role before spending Sheckles on a crate pool.",
+      description_md:
+        "## How crates fit into the garden\n\nThe early crate rows are mostly for building and decoration: ladders, benches, lights, signs, arches, bridges, and roleplay props. Later crates start to matter for function. Owner Door, Bear Trap, Fence, Conveyor, Spring, and Teleporter Pad crates are the rows to watch when garden layout and defense matter more than looks.\n\nTreat crate contents as the item pool you are chasing. If you only need defense, prioritize crates with owner doors, traps, or fences instead of spending on purely decorative pools.",
+      how_it_works_md:
+        "Compare `rarity`, `price`, and `contents` together. Decoration crates are easier to judge by theme, while utility and defense crates should be judged by whether the pool contains pieces you will actually place in your garden.",
+      description_json: {
+        "Decoration crates":
+          "Ladder, Bench, Light, Sign, Arch, Roleplay, and Bridge crates are mainly garden-building and visual rows.",
+        "Utility crates":
+          "Spring, Seesaw, Conveyor, and Teleporter Pad crates add interactive or movement pieces.",
+        "Defense crates":
+          "Owner Door, Bear Trap, and Fence crates are the clearest defensive crate pools for protecting garden space."
+      },
+      faq_json: [
+        {
+          q: "Where do crates come from in Grow a Garden 2?",
+          a: "Crates are tied to the Props Shop and use Sheckles prices where listed."
+        },
+        {
+          q: "Do crates show exact drop odds?",
+          a: "No. Use the contents field as the crate pool, not as a guaranteed drop order."
+        },
+        {
+          q: "Which crates are useful for defense?",
+          a: "Owner Door Crate, Bear Trap Crate, and Fence Crate are the strongest defense-focused rows in the current list."
+        }
+      ],
+      wiki_md:
+        "Grow a Garden 2 crates cover Props Shop crate pools, prices, rarity, decorations, utility props, and defensive garden pieces."
+    },
+    mutations: {
+      title: `All ${countLabel} Mutations in Grow a Garden 2`,
+      seo_title: `All ${countLabel} Grow a Garden 2 Mutations, Multipliers, Events, and Value Notes`,
+      meta_description:
+        "Grow a Garden 2 mutations list with multipliers, weather events, pet support, random chances, and crop value planning notes.",
+      intro_md:
+        "Mutations are the value layer on top of crops in Grow a Garden 2. Gold, Rainbow, Electric, Frozen, Starstruck, and Bloodlit all change how a harvest should be valued.\n\nUse the mutation list to compare multiplier, trigger, and best use. Electric is the strongest listed value boost, while weather-based mutations depend on the right event showing up.",
+      description_md:
+        "## How mutations happen\n\nMutations come from weather events, pets, sprinklers, seed events, or random chances. Electric comes from Lightning, Frozen from Snowfall, and Starstruck from Starfall. Gold and Rainbow can happen through mutated plants or random chance, while Unicorn support helps Rainbow chances.\n\n## How to chase better mutation value\n\nStart by improving the crops that are already worth harvesting. A high multiplier matters most when it lands on valuable fruit. Sprinklers and mutation-friendly pets become stronger once your garden has crops that are worth boosting.",
+      how_it_works_md:
+        "Use `multiplier` for value planning, then read `where to get` to understand how realistic the mutation is to chase. Unknown multipliers are still useful to track, but do not plan your best crop route around them yet.",
+      description_json: {
+        "Weather mutations":
+          "Electric, Frozen, and Starstruck are tied to weather or sky events, so they depend on the right event window.",
+        "Pet-supported mutations":
+          "Rainbow becomes more interesting when Unicorn is part of your pet plan, because Unicorn improves Rainbow chances.",
+        "Unknown multipliers":
+          "Starstruck and Bloodlit are worth watching, but crops with known multipliers are easier to plan around."
+      },
+      faq_json: [
+        {
+          q: "What is the best listed mutation in Grow a Garden 2?",
+          a: "Electric has the highest Beebom-listed multiplier at 25x."
+        },
+        {
+          q: "Can mutations stack?",
+          a: "The current Beebom mutation FAQ says mutations do not stack."
+        },
+        {
+          q: "How do you improve mutation chances?",
+          a: "Use mutation-friendly pets and sprinklers, then focus them around crops that are already worth harvesting."
+        }
+      ],
+      wiki_md:
+        "Grow a Garden 2 mutations track crop value multipliers, weather events, pet support, and mutation routes for better harvest value."
+    },
+    shops: {
+      title: `All ${countLabel} Shops and Purchase Spots in Grow a Garden 2`,
+      seo_title: `Grow a Garden 2 Shops, Purchase Spots, Currencies, and What They Sell`,
+      meta_description:
+        "Grow a Garden 2 shops and purchase spots list covering Seed Shop, Gears Shop, Props Shop, lobby pet spawns, guild counter, currencies, and what to check there.",
+      intro_md:
+        "Grow a Garden 2 does not route every purchase through one normal shop. Seeds, gear, crates, pets, and guild creation use different counters, shops, or lobby spawn systems.\n\nIf you want crops, start with Seed Shop. If you want growth tools or defense, check Gears Shop. If you want props and crate pools, use Props Shop. Pets are handled through timed lobby spawns.",
+      description_md:
+        "## How to use shops without wasting checks\n\nUse the shop list as a route map. Seed Shop is for crop planning, Gears Shop is for growth and defense tools, Props Shop is for crates, and lobby pet spawns are for timed pet purchases.\n\nThe Guilds Counter belongs here because guild creation is a purchase decision. Treat it as a group-management stop, not as a normal item shop.",
+      how_it_works_md:
+        "Use `sells` to pick the right place, then compare currency and why it matters. The row tells you whether the spot is for seeds, gear, crates, pets, or guild creation.",
+      description_json: {
+        "Normal item shops":
+          "Seed Shop, Gears Shop, and Props Shop are the main item-buying stops because they connect directly to seeds, tools, and crates.",
+        "Lobby purchases":
+          "Pet spawns are buyable with Sheckles while the timer is active, so pet buying is more timing-sensitive than normal shop checking.",
+        "Guilds":
+          "Guild creation is a Robux purchase and group-management decision, not a normal crop or gear purchase."
+      },
+      faq_json: [
+        {
+          q: "Is there a Guild Rewards catalog for Grow a Garden 2?",
+          a: "No. Guild creation is available, but there is not enough reward detail to make a useful rewards page yet."
+        },
+        {
+          q: "Where do you buy pets?",
+          a: "Pets spawn around the lobby and can be bought with Sheckles while their timer is active."
+        },
+        {
+          q: "Which shop sells sprinklers?",
+          a: "Sprinklers are tied to the Gears Shop, and they also have their own catalog because their growth and mutation effects are important."
+        }
+      ],
+      wiki_md:
+        "Grow a Garden 2 shops map the Seed Shop, Gears Shop, Props Shop, lobby pet purchases, and guild counter so players know where to spend time and currency."
+    },
+    "night-stealing": {
+      title: `All ${countLabel} Night Stealing Tools in Grow a Garden 2`,
+      seo_title: `Grow a Garden 2 Night Stealing Tools, Pets, Defense Gear, and Garden Protection`,
+      meta_description:
+        "Grow a Garden 2 night stealing list with Raccoon, defensive pets, Lantern, Gnome, Flashbang, stealth gear, crates, barriers, and garden protection roles.",
+      intro_md:
+        "Night stealing is one of the systems that makes Grow a Garden 2 different from a quiet farming loop. The useful items are split across pets, gear, and crates: some help you steal, some help you see, and some help stop other players from taking fruit.\n\nCompare each row by type and role before deciding whether your garden needs stealing power, better visibility, or stronger defense.",
+      description_md:
+        "## How night stealing choices split\n\nRaccoon is the clearest stealing pet because it can steal fruit from empty gardens at night and raises the steal limit. Owl and Lantern help with night visibility. Bee, Black Dragon, Ice Serpent, Gnome, and several defensive crate pools help protect your garden.\n\nStealth and mobility gear such as Invisibility Mushroom and Teleporter fit aggressive routes. Defensive pets, owner doors, traps, and fences fit players who would rather protect fruit than raid other gardens.",
+      how_it_works_md:
+        "Use `role` first: stealing, visibility, defense, stealth, access control, or barrier defense. Then check the original item type so you know whether to chase the row through pets, Gears Shop, or Props Shop crates.",
+      description_json: {
+        "Stealing tools":
+          "Raccoon, Teleporter, and Invisibility Mushroom are the clearest rows for aggressive night routes.",
+        "Visibility tools":
+          "Owl and Lantern help you see or respond better at night.",
+        "Defense tools":
+          "Bee, Black Dragon, Ice Serpent, Gnome, Owner Door Crate, Bear Trap Crate, and Fence Crate are defensive choices for protecting crops."
+      },
+      faq_json: [
+        {
+          q: "Which Grow a Garden 2 pet helps with night stealing?",
+          a: "Raccoon is the stealing pet. It steals fruit from empty gardens at night and adds 25 to the steal limit."
+        },
+        {
+          q: "How do you defend against stealing?",
+          a: "Use defensive pets, Gnome, visibility tools, and defensive crate pieces such as owner doors, traps, and fences."
+        },
+        {
+          q: "Should you focus on stealing or defense first?",
+          a: "If your garden already has valuable crops, defense usually matters first. If your garden is safer and you want to raid, Raccoon, stealth gear, and mobility tools become more useful."
+        }
+      ],
+      wiki_md:
+        "Grow a Garden 2 night stealing brings together stealing pets, defensive pets, night visibility gear, stealth tools, and protective crates."
+    }
+  };
+
+  const copy = copies[config.slug];
+  return copy ? { ...base, ...copy } : null;
 }
 
 function buildSlimeRngCatalogCopyOverride({

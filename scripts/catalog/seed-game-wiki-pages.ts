@@ -58,6 +58,50 @@ function getTargetGroups() {
 }
 
 const WIKI_COPY: Record<string, WikiCopy> = {
+  "grow-a-garden-2": {
+    metaDescription:
+      "Grow a Garden 2 wiki hub with seeds, crops, pets, gears, sprinklers, crates, mutations, shops, night stealing, codes, and Roblox game details.",
+    gameDescriptionMd:
+      "Grow a Garden 2 is a farming and garden-defense Roblox game where every session starts with seeds, crops, and Sheckles. You buy seeds, plant them on your farm, wait for crops to grow, harvest the fruit, and sell it so the next round of seeds, pets, gears, crates, and upgrades is easier to afford.\n\nThe sequel adds more pressure around the garden itself. Daytime is the cleaner farming window, while night turns the map into a stealing and defense problem. If you leave your plot open at night, other players can try to take fruit, so pets, props, crates, mushrooms, lanterns, and defensive setups matter alongside normal crop value.\n\nMost progress comes from choosing what to spend on next. Multi-harvest plants are better for steady farming, sprinklers help crops grow and improve special results, pets can boost farming or protect the plot, and mutations can turn a normal harvest into a much better sale. Guilds and weekly rewards give returning players another reason to keep the garden moving instead of only planting the most expensive seed they can afford.",
+    tipsMd: `- Start with seeds and crops before chasing expensive pets or crates. A steady Sheckles route makes every later upgrade easier to afford.
+- Keep multi-harvest plants working in your plot when you can. They keep producing after the first pickup, while single-harvest crops need replanting.
+- Watch the day and night cycle. Daytime is better for planting and selling, while night is when stealing and garden defense become the main problem.
+- Buy gears for a job, not just rarity. Sprinklers help growth and crop results, mushrooms help stealing or movement, and defensive tools help protect valuable fruit.
+- Pets matter more once your garden has value worth protecting. Some help farming, some improve movement or mutations, and stronger defensive pets are better when night stealing becomes a real risk.
+- Crates and props are part of the garden plan. Owner doors, traps, fences, conveyors, and teleporter pieces can change how easy your plot is to enter or defend.
+- Treat mutations as value boosts on top of farming. Weather, pet support, and special effects can make one harvest much stronger than a normal crop sale.`,
+    controlsJson: [
+      {
+        action: "Move",
+        desktop: "W / A / S / D or arrow keys",
+        mobile: "Virtual joystick",
+        console: "Left stick"
+      },
+      {
+        action: "Jump",
+        desktop: "Space",
+        mobile: "Jump button",
+        console: "A"
+      },
+      {
+        action: "Adjust camera",
+        desktop: "Hold right mouse button and drag",
+        mobile: "Drag on the right side of the screen",
+        console: "Right stick"
+      },
+      {
+        action: "Zoom camera",
+        desktop: "Mouse wheel",
+        mobile: "Pinch the screen"
+      },
+      {
+        action: "Use shop, garden, sell, and prompt buttons",
+        desktop: "Click the on-screen button or prompt",
+        mobile: "Tap the on-screen button or prompt"
+      }
+    ],
+    coverImage: null
+  },
   "steal-a-brainrot": {
     metaDescription: "Steal a Brainrot wiki hub with brainrots, rebirths, traits, mutations, gears, rituals, machines, and lucky blocks.",
     tipsMd: `- Start with the brainrots catalog when you need income, cost, rarity, status, and release details.
@@ -566,11 +610,16 @@ async function loadExistingPublishedAt() {
 }
 
 async function loadUniverseIdsByGameSlug() {
+  const targetGroups = getTargetGroups();
+  if (targetGroups.every((group) => group.universeId)) {
+    return new Map(targetGroups.map((group) => [group.gameSlug, group.universeId ?? null]));
+  }
+
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, number | null>();
   const rows = await loadRobloxUniverseLookupRows();
 
   return new Map(
-    getTargetGroups().map((group) => {
+    targetGroups.map((group) => {
       if (group.universeId) return [group.gameSlug, group.universeId];
       const candidates = new Set([group.gameSlug, group.gameName, ...group.universeNames].map(normalizeLookup));
       const match = rows.find((row) =>

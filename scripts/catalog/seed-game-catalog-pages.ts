@@ -263,6 +263,9 @@ async function loadExistingPublishedAt() {
 }
 
 async function loadWikiPageIdsBySlug() {
+  if (dryRun) {
+    return new Map(getTargetGroups(getTargetCatalogs()).map((group) => [group.gameSlug, null]));
+  }
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, string | null>();
   const sb = supabaseAdmin();
   const targetGroups = getTargetGroups(getTargetCatalogs());
@@ -278,6 +281,9 @@ async function loadWikiPageIdsBySlug() {
 }
 
 async function loadUniverseIdsByGameSlug() {
+  if (dryRun) {
+    return new Map(getTargetGroups(getTargetCatalogs()).map((group) => [group.gameSlug, group.universeId ?? null]));
+  }
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, number | null>();
   const rows = await loadRobloxUniverseLookupRows();
 
