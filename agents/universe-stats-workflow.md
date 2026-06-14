@@ -123,7 +123,7 @@ Current VPS crontab block:
 # BLOXODES_STATS_WORKER_START
 5 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/build-image.sh >> /home/codex-admin/bloxodes-stats-worker/logs/build-image.log 2>&1
 7 */2 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-new-refresh "npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25 && npm run stats:refresh:new -- --limit 5000 && npm run stats:tier -- --tier NEW && npm run enqueue:revalidation -- --source stats_new_vps --event stats:stats --event stats:games"
-22 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "npm run discover:universes:priority && npm run enrich:universes:light -- --tier NEW --limit 500 --batch 25 && npm run stats:refresh:new -- --limit 1000 && npm run stats:tier -- --tier NEW && npm run enqueue:revalidation -- --source stats_discovery_priority_vps --event stats:stats --event stats:games"
+22 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "npm run discover:universes:priority && npm run enrich:universes:light -- --tier NEW --limit 500 --batch 25 && npm run stats:refresh:new -- --limit 1000 && npm run stats:tier -- --tier NEW && npm run enrich:universes:light -- --tier HOT --limit 250 --batch 25 && npm run enqueue:revalidation -- --source stats_discovery_priority_vps --event stats:stats --event stats:games"
 32 */12 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-warm-refresh "npm run stats:refresh:warm -- --limit 20000 && npm run stats:tier -- --tier WARM && npm run enqueue:revalidation -- --source stats_warm_vps --event stats:stats --event stats:games"
 47 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-cold-refresh "npm run stats:refresh:cold -- --limit 10000 && npm run stats:tier -- --tier COLD && npm run enqueue:revalidation -- --source stats_cold_vps --event stats:stats --event stats:games"
 35 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery "npm run collect:universes && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
@@ -248,7 +248,7 @@ purpose: catch other active games from creators we already know
 Current VPS cron lines:
 
 ```cron
-22 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "npm run discover:universes:priority && npm run enrich:universes:light -- --tier NEW --limit 500 --batch 25 && npm run stats:refresh:new -- --limit 1000 && npm run stats:tier -- --tier NEW && npm run enqueue:revalidation -- --source stats_discovery_priority_vps --event stats:stats --event stats:games"
+22 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "npm run discover:universes:priority && npm run enrich:universes:light -- --tier NEW --limit 500 --batch 25 && npm run stats:refresh:new -- --limit 1000 && npm run stats:tier -- --tier NEW && npm run enrich:universes:light -- --tier HOT --limit 250 --batch 25 && npm run enqueue:revalidation -- --source stats_discovery_priority_vps --event stats:stats --event stats:games"
 20 3 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-search "npm run discover:universes:search -- --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
 10 4 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-creators "npm run discover:universes:creators -- --limit 500 --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
 ```

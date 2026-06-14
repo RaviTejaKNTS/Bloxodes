@@ -34,6 +34,7 @@ type UniverseRow = {
   universe_id: number;
   root_place_id: number | null;
   last_seen_in_sort: string | null;
+  last_seen_in_search: string | null;
   updated_at: string | null;
   name?: string | null;
   playing?: number | null;
@@ -525,23 +526,44 @@ async function fetchUniversePage(
   offset: number,
   count: number,
   mode: EnrichmentMode,
-  tier: StatsTier | "ALL"
+  tier: StatsTier | "ALL",
+  universeIds: number[] = []
 ): Promise<UniverseRow[]> {
   const supabase = supabaseAdmin();
   let query = supabase
     .from("roblox_universes")
-    .select("universe_id, root_place_id, last_seen_in_sort, updated_at, name, playing, visits, stats_tier")
+    .select("universe_id, root_place_id, last_seen_in_sort, last_seen_in_search, updated_at, name, playing, visits, stats_tier")
     .not("root_place_id", "is", null);
 
-  if (tier !== "ALL") {
+  if (universeIds.length) {
+    query = query.in("universe_id", universeIds);
+  } else if (tier !== "ALL") {
     query = query.eq("stats_tier", tier);
   }
 
-  if (tier !== "ALL") {
+  if (universeIds.length) {
+    query = query.order("playing", { ascending: false, nullsFirst: false }).order("universe_id", { ascending: true });
+  } else if (tier !== "ALL") {
     const enrichedColumn = mode === "light" ? "last_light_enriched_at" : "last_deep_enriched_at";
-    query = query
-      .order(enrichedColumn, { ascending: true, nullsFirst: true })
-      .order("universe_id", { ascending: true });
+    query = query.order(enrichedColumn, { ascending: true, nullsFirst: true });
+    if (tier === "HOT") {
+      query = query
+        .order("playing", { ascending: false, nullsFirst: false })
+        .order("visits", { ascending: false, nullsFirst: false })
+        .order("last_seen_in_sort", { ascending: false, nullsFirst: false })
+        .order("last_seen_in_search", { ascending: false, nullsFirst: false });
+    } else if (tier === "NEW") {
+      query = query
+        .order("last_seen_in_sort", { ascending: false, nullsFirst: false })
+        .order("last_seen_in_search", { ascending: false, nullsFirst: false })
+        .order("playing", { ascending: false, nullsFirst: false })
+        .order("visits", { ascending: false, nullsFirst: false });
+    } else {
+      query = query
+        .order("playing", { ascending: false, nullsFirst: false })
+        .order("visits", { ascending: false, nullsFirst: false });
+    }
+    query = query.order("universe_id", { ascending: true });
   } else if (mode === "light") {
     query = query
       .order("last_light_enriched_at", { ascending: true, nullsFirst: true })
@@ -1399,6 +1421,7 @@ const [icons, thumbs] = await Promise.all([
 function parseArgs() {
   const args = process.argv.slice(2);
   const options: Record<string, string | number | boolean> = {};
+  const universeIds: number[] = [];
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
     if (arg === "--limit" || arg === "-l") {
@@ -1412,6 +1435,17 @@ function parseArgs() {
       i += 1;
     } else if (arg === "--quality-only") {
       options.tier = "HOT";
+    } else if (arg === "--universe-id" || arg === "--id") {
+      const parsed = Number(args[i + 1]);
+      if (Number.isSafeInteger(parsed) && parsed > 0) universeIds.push(parsed);
+      i += 1;
+    } else if (arg === "--universe-ids" || arg === "--ids") {
+      const values = String(args[i + 1] ?? "")
+        .split(",")
+        .map((value) => Number(value.trim()))
+        .filter((value) => Number.isSafeInteger(value) && value > 0);
+      universeIds.push(...values);
+      i += 1;
     } else if (arg === "--tier") {
       const tier = String(args[i + 1] ?? "").toUpperCase();
       if (tier === "ALL" || isStatsTier(tier)) {
@@ -1424,6 +1458,7 @@ function parseArgs() {
       options.help = true;
     }
   }
+  if (universeIds.length) options.universeIds = Array.from(new Set(universeIds)).join(",");
   return options;
 }
 
@@ -1443,6 +1478,8 @@ Options:
   -b, --batch <number>   Batch size per Roblox API request (default: ${BATCH_SIZE})
   -m, --mode <mode>      light = details/media only; deep = Open Cloud, links, passes, badges (default: deep)
   --tier <tier>          Only process NEW, HOT, WARM, COLD, or ALL rows (default: ALL)
+  --universe-id <id>     Process one universe id directly
+  --universe-ids <ids>   Process comma-separated universe ids directly
   -h, --help             Show this help text
 `);
 }
@@ -1462,9 +1499,20 @@ async function main() {
     typeof options.batch === "number" && !Number.isNaN(options.batch) && options.batch > 0 ? options.batch : BATCH_SIZE;
   const mode = parseMode(options.mode);
   const tier = typeof options.tier === "string" && (options.tier === "ALL" || isStatsTier(options.tier)) ? options.tier : "ALL";
+  const universeIds =
+    typeof options.universeIds === "string"
+      ? options.universeIds
+          .split(",")
+          .map((value) => Number(value.trim()))
+          .filter((value) => Number.isSafeInteger(value) && value > 0)
+      : [];
 
   const supabase = supabaseAdmin();
-  const targetDescription = totalLimit > 0 ? `${totalLimit}` : "all available";
+  const targetDescription = universeIds.length
+    ? `${universeIds.length} targeted`
+    : totalLimit > 0
+      ? `${totalLimit}`
+      : "all available";
   console.log(
     `🚀 Enriching ${targetDescription} universes (${mode} mode, tier=${tier}, batch size ${batchSize}, concurrency ${ATTACHMENT_CONCURRENCY})`
   );
@@ -1484,7 +1532,7 @@ async function main() {
         ? Math.min(SUPABASE_PAGE_LIMIT, Math.max(pageSize, MIN_TIERED_ENRICHMENT_PAGE_SIZE))
         : pageSize;
 
-    const page = await fetchUniversePage(pageOffset, fetchSize, mode, tier);
+    const page = await fetchUniversePage(pageOffset, fetchSize, mode, tier, universeIds);
     if (!page.length) break;
 
     for (let i = 0; i < page.length; i += batchSize) {
