@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 type CommentsClientProps = {
-  entityType: "code" | "article" | "catalog" | "event" | "list" | "tool";
+  entityType: "code" | "article" | "catalog" | "event" | "list" | "tool" | "wiki" | "wiki_catalog";
   entityId: string;
   initialComments: CommentEntry[];
 };

@@ -73,7 +73,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `app_sessions`
   - Session storage for signed-in flows.
 - `comments`
-  - Comment threads for supported content types.
+  - Comment threads for supported content types, including codes, articles, catalogs, events, lists, tools, wiki pages, and wiki catalog pages. Stores server-resolved `page_type` and `page_url` for operator review.
 - `user_code_progress`
   - Used-code progress per user/game.
 - `user_checklist_progress`

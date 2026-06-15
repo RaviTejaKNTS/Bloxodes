@@ -883,7 +883,7 @@ export function renderGrowGardenCatalogPage({
 
       {contentHtml?.id ? (
         <div className="mt-10">
-          <CommentsSection entityType="catalog" entityId={contentHtml.id} />
+          <CommentsSection entityType="wiki_catalog" entityId={contentHtml.id} />
         </div>
       ) : null}
 

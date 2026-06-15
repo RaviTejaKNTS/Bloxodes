@@ -51,6 +51,7 @@ import { ToolCard } from "@/components/ToolCard";
 import { WikiCard } from "@/components/WikiCard";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
+import { CommentsSection } from "@/components/comments/CommentsSection";
 import { cleanRewardsText, isCodeNew } from "@/lib/code-utils";
 import { listGameDatasetCatalogImageUrls } from "@/lib/game-dataset-catalog-images";
 import { buildWikiCatalogPath } from "@/lib/wiki-catalog";
@@ -1573,6 +1574,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             universeLabel={universeLabel}
           />
 
+          <CommentsSection entityType="wiki" entityId={page.id} />
         </article>
 
         <aside className="space-y-4">
