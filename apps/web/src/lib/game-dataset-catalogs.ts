@@ -338,6 +338,14 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
       "shops",
       "night-stealing"
     ]
+  },
+  {
+    gameSlug: "untitled-boxing-game",
+    gameName: "Untitled Boxing Game",
+    universeId: 4730278139,
+    dataDir: "Untitled Boxing Game",
+    universeNames: ["Untitled Boxing Game", "untitled boxing game"],
+    collections: ["styles", "gloves", "emotes", "knockout-effects", "titles"]
   }
 ];
 
@@ -359,6 +367,7 @@ const COLLECTION_LABEL_OVERRIDES: Record<string, string> = {
   "instinct-levels": "Instinct Levels",
   "index-rewards": "Index Rewards",
   "inventory-items": "Inventory Items",
+  "knockout-effects": "Knockout Effects",
   "lucky-blocks": "Lucky Blocks",
   "map-themes": "Map Themes",
   makeup: "Makeup",
@@ -439,6 +448,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   islands: "level ranges, seas, bosses, costs, and travel progression",
   items: "source routes, prices, effects, damage or healing, use limits, storage rules, and availability",
   jobs: "job names, categories, buildings, images, and roleplay use",
+  "knockout-effects": "daily-shop animations, visual changes, prices where known, and refresh context",
   locations: "areas, structures, access notes, risks, loot, entities, and route value",
   "lucky-blocks": "cost, rarity, status, contents, appearance, and reward context",
   machines: "machine names, how to use them, what they do, and whether they are in game",
@@ -853,6 +863,7 @@ const FIELD_LABELS: Record<string, string> = {
   resultChance: "result odds",
   resultRarity: "result rarity",
   restrictions: "restrictions",
+  refresh: "refresh",
   rankedPool: "ranked pool",
   rule: "rule",
   rerollStatus: "reroll status",
@@ -906,6 +917,7 @@ const FIELD_LABELS: Record<string, string> = {
   specialEffects: "special effects",
   specialNote: "special note",
   specialInteractions: "special interactions",
+  specialProperties: "special properties",
   specialRules: "special rules",
   specialUse: "special use",
   spellRole: "spell role",
@@ -930,6 +942,9 @@ const FIELD_LABELS: Record<string, string> = {
   titleType: "title type",
   titleReward: "title reward",
   titleRole: "title role",
+  quality: "quality",
+  displayName: "display name",
+  effectSummary: "effect summary",
   toggleCount: "toggle count",
   emoteReward: "emote reward",
   usedFor: "used for",

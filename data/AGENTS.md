@@ -54,6 +54,10 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
 - `data/Kick a Lucky Block/*`
   - Dataset-backed Kick a Lucky Block wiki/catalog content, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki catalogs.
   - Matching item images live under `apps/web/public/Kick a Lucky Block/` for brainrots, weights, zones, and official Roblox page media. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
+- `data/Untitled Boxing Game/*`
+  - Dataset-backed Untitled Boxing Game wiki/catalog content, including styles, gloves, emotes, knockout effects, and titles.
+  - Matching style, glove, and knockout effect images live under `apps/web/public/Untitled Boxing Game/` where clean row-level art exists. Emotes and titles stay text-only unless clean row-level captures are available.
+  - Keep catalogs focused on durable style/cosmetic/title systems. Do not add live trade values, manual active-code lists, gamepasses, badges, servers, or current event reward-track planning here.
 - `data/Fisch/fish.json`
   - Fisch catalog content.
 - `data/Color Codes/roblox-color-codes.json`

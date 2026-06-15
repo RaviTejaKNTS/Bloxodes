@@ -58,6 +58,65 @@ function getTargetGroups() {
 }
 
 const WIKI_COPY: Record<string, WikiCopy> = {
+  "untitled-boxing-game": {
+    metaDescription:
+      "Untitled Boxing Game wiki hub with styles, gloves, emotes, knockout effects, titles, controls, and Roblox game details.",
+    gameDescriptionMd:
+      "Untitled Boxing Game is a skill-based Roblox boxing battleground where most fights come down to stamina, reads, side dodges, back dashes, blocks, feints, and knowing what your fighting style wants to do. A normal match is not button mashing: every punch, dash, block, and feint can spend stamina, so strong players win by creating openings instead of throwing every heavy attack on cooldown.\n\nProgress sits around that fight loop. Cash, spins, lucky spins, daily quests, title quests, style rolls, ranked rating, and cosmetic shops all give players something to chase between matches. Styles shape combat, while gloves, emotes, maps, knockout effects, and titles let players customize how their fighter looks, celebrates, enters fights, or marks achievements.\n\nThe official Roblox description says every style can work, and the stronger community references make the same point in practice: rarity helps, but timing still matters. Learn the core controls first, then use styles, gloves, emotes, knockout effects, and title requirements to decide what to keep, trade, buy, or chase next.",
+    tipsMd: `- Manage stamina before trying flashy pressure. Punches, dashes, blocks, and feints all matter more when you leave enough stamina to defend after your combo.
+- Learn the difference between side dodges and back dashes. Side dodges help you slip left or right around an attack, while a back dash creates space when pressure is too close.
+- Use feints to punish defensive habits. A cancelled attack can bait a block or dodge, then open a heavier hit or ultimate attempt.
+- Treat styles as playstyle choices. The game says every style is viable, so keep a kit long enough to learn its rhythm before rerolling it away.
+- Save spins and lucky spins for a goal. Preferred Legendary boosts and pity systems make more sense when you know which style you actually want.
+- Practice in casual before ranked. Casual can use cosmetic maps and is safer for learning timing, while ranked uses standard rules and default-map pressure.
+- Check glove availability before trading. Standard crate gloves are easier to understand than beta, ranked, holiday, event, or special-route gloves that may be harder to replace.
+- Knockout effects, emotes, maps, and titles are identity systems, not direct power upgrades. Pick them for source, availability, behavior, or the achievement they represent.`,
+    controlsJson: [
+      {
+        action: "Light punch",
+        desktop: "M1 / left mouse button",
+        mobile: "Tap left side",
+        console: "Xbox X / PlayStation Square"
+      },
+      {
+        action: "Heavy punch",
+        desktop: "M2 / right mouse button",
+        mobile: "Tap right side",
+        console: "Xbox Y / PlayStation Triangle"
+      },
+      {
+        action: "Dodge left / right",
+        desktop: "Q",
+        mobile: "Swipe left / right",
+        console: "Xbox LB / RB, PlayStation L1 / R1"
+      },
+      {
+        action: "Back dash",
+        desktop: "E",
+        mobile: "Swipe back",
+        console: "Xbox LT / PlayStation L2"
+      },
+      {
+        action: "Block",
+        desktop: "Hold F",
+        mobile: "Hold Block button",
+        console: "Hold Xbox RT / PlayStation R2"
+      },
+      {
+        action: "Feint",
+        desktop: "V",
+        mobile: "Feint button",
+        console: "Xbox A / PlayStation Cross"
+      },
+      {
+        action: "Ultimate",
+        desktop: "R",
+        mobile: "Ultimate button",
+        console: "Xbox B / PlayStation Circle"
+      }
+    ],
+    coverImage: "https://tr.rbxcdn.com/180DAY-91b9e5091f844a9a2630ca702e4d4334/512/512/Image/Png/noFilter"
+  },
   "grow-a-garden-2": {
     metaDescription:
       "Grow a Garden 2 wiki hub with seeds, crops, pets, gears, sprinklers, crates, mutations, shops, night stealing, codes, and Roblox game details.",

@@ -1063,6 +1063,54 @@ const SPEED_KEYBOARD_TRAIL_SECTION_ORDER = ["Current Robux trails", "Retired or 
 const SPEED_KEYBOARD_AURA_SECTION_ORDER = ["Starter cost tier", "Mid cost tier", "High cost tier"];
 const SPEED_KEYBOARD_STAGE_SECTION_ORDER = ["World 1 stages", "World 2 stages"];
 const SPEED_KEYBOARD_TREADMILL_SECTION_ORDER = ["Free trainer", "Premium treadmill upgrades"];
+const UNTITLED_BOXING_GAME_STYLE_SECTION_ORDER = [
+  "Uncommon styles",
+  "Rare styles",
+  "Mythic styles",
+  "Legendary styles",
+  "Shiny styles",
+  "Unobtainable styles",
+  "Removed styles"
+];
+const UNTITLED_BOXING_GAME_GLOVE_SECTION_ORDER = [
+  "Standard crate",
+  "Holiday crate",
+  "Ranked gloves",
+  "Event gloves",
+  "Original line and beta gloves"
+];
+const UNTITLED_BOXING_GAME_EMOTE_SECTION_ORDER = [
+  "Uncommon emotes",
+  "Rare emotes",
+  "Mythic emotes",
+  "Legendary emotes"
+];
+const UNTITLED_BOXING_GAME_KNOCKOUT_EFFECT_SECTION_ORDER = ["Default", "Daily shop rotation", "Event reward"];
+const UNTITLED_BOXING_GAME_TITLE_SECTION_ORDER = [
+  "Default",
+  "Knockdowns",
+  "Streak",
+  "Streak Hunter",
+  "Defense",
+  "Punches",
+  "Ultimates",
+  "Perfect Dodge",
+  "Counters",
+  "Cash",
+  "Ranked",
+  "Style titles",
+  "Seasonal leaderboard titles",
+  "Miscellaneous titles"
+];
+const UNTITLED_BOXING_GAME_SOURCE_KEYS = [
+  "catalogSection",
+  "sourcePage",
+  "imageStatus",
+  "imageSource",
+  "sourceStatus",
+  "sourceNote",
+  "sourceNotes"
+];
 
 const DRESS_TO_IMPRESS_SOURCE_KEYS = [
   "catalogSection",
@@ -3067,6 +3115,53 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     hiddenKeys: ["catalogSection", "sortOrder", "sourcePage", "sourceStatus"],
     additionalColumns: ["catalogSection"],
     maxStats: 6
+  },
+  "untitled-boxing-game-styles": {
+    groupKey: "catalogSection",
+    groupLabel: "Style group",
+    sectionOrder: UNTITLED_BOXING_GAME_STYLE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [...UNTITLED_BOXING_GAME_SOURCE_KEYS],
+    additionalColumns: ["catalogSection"],
+    maxStats: 5
+  },
+  "untitled-boxing-game-gloves": {
+    groupKey: "catalogSection",
+    groupLabel: "Glove route",
+    sectionOrder: UNTITLED_BOXING_GAME_GLOVE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [...UNTITLED_BOXING_GAME_SOURCE_KEYS, "crate"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 6
+  },
+  "untitled-boxing-game-emotes": {
+    groupKey: "catalogSection",
+    groupLabel: "Emote rarity",
+    sectionOrder: UNTITLED_BOXING_GAME_EMOTE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [...UNTITLED_BOXING_GAME_SOURCE_KEYS],
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    hideImages: true
+  },
+  "untitled-boxing-game-knockout-effects": {
+    groupKey: "catalogSection",
+    groupLabel: "Effect route",
+    sectionOrder: UNTITLED_BOXING_GAME_KNOCKOUT_EFFECT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [...UNTITLED_BOXING_GAME_SOURCE_KEYS, "effectSummary"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 5
+  },
+  "untitled-boxing-game-titles": {
+    groupKey: "catalogSection",
+    groupLabel: "Unlock category",
+    sectionOrder: UNTITLED_BOXING_GAME_TITLE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [...UNTITLED_BOXING_GAME_SOURCE_KEYS, "displayName"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    hideImages: true
   }
 };
 

@@ -155,6 +155,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Kick a Lucky Block/*.json`
   - Local Kick a Lucky Block game datasets for wiki/catalog page work, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki catalogs.
   - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
+- `data/Untitled Boxing Game/*.json`
+  - Local Untitled Boxing Game datasets for wiki/catalog page work, including styles, gloves, emotes, knockout effects, and titles.
+  - Matching style, glove, and knockout effect images live under `apps/web/public/Untitled Boxing Game/` where clean item art exists. Emotes and titles stay text-only unless clean row-level captures are available.
+  - Keep UBG catalogs limited to durable style, cosmetic, and title systems. Do not store live trade values, manual active-code data, gamepasses, badges, servers, or current event reward tracks here.
 - `data/Wizard Alchemy/quiz.json`
   - Local Wizard Alchemy quiz question pool for `/quizzes/wizard-alchemy`.
   - Quiz pools use `QuizData` shape with `easy`, `medium`, and `hard` arrays. Keep easy questions beginner-friendly, make hard questions pro-level, and vary question rhythm naturally.
