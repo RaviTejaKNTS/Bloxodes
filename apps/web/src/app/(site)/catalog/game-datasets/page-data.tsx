@@ -144,6 +144,65 @@ const ADOPT_ME_GIFTS_SECTION_BY_NAME: Record<string, string> = {
   "Golden Mistletoe": "Mixed seasonal gift boxes"
 };
 
+const ADOPT_ME_PET_SECTION_ORDER = [
+  "Current and basic egg pets",
+  "Retired and limited egg pets",
+  "Robux shop and premium treat pets",
+  "Event and seasonal pets",
+  "Reward, box, lure, and activity pets",
+  "Temporary and special-case pets"
+];
+
+const ADOPT_ME_CURRENT_EGG_TAGS = new Set([
+  "JapanLegend",
+  "SoutheastAsiaLegend",
+  "UrbanLegend",
+  "DesertLegend",
+  "DangerLegend",
+  "GardenLegend",
+  "MoonLegend",
+  "AztecLegend",
+  "EndangeredLegend"
+]);
+
+const ADOPT_ME_RETIRED_EGG_TAGS = new Set([
+  "SafariLegend",
+  "JungleLegend",
+  "FarmLegend",
+  "AussieLegend",
+  "FossilLegend",
+  "OceanLegend",
+  "MythicLegend",
+  "WoodlandLegend"
+]);
+
+const ADOPT_ME_EVENT_TAGS = new Set([
+  "ChristmasEventLegend",
+  "HalloweenEventLegend",
+  "LunarLegend",
+  "StateFair",
+  "FossilExcavation",
+  "FoolEggLegend"
+]);
+
+const ADOPT_ME_REWARD_TAGS = new Set(["FairgroundBox", "GoldenEgg", "DiamondEgg", "SpecialLegend"]);
+
+const ADOPT_ME_ROBUX_TREAT_KEYWORDS = [
+  "golden clam",
+  "honey",
+  "golden wheat",
+  "golden bone",
+  "golden goldfish",
+  "golden lettuce",
+  "golden corn",
+  "golden dandelion",
+  "golden seed ball",
+  "maple leaf treat",
+  "mud ball",
+  "diamond lavender",
+  "golden petunia"
+];
+
 const BLOX_FRUITS_ACCESSORY_SECTION_ORDER = [
   "First Sea accessories",
   "Second Sea accessories",
@@ -2811,16 +2870,12 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
   "adopt-me-pets": {
     groupKey: "catalogSection",
     groupLabel: "Source family",
-    sectionOrder: [
-      "Egg and hatch-pool pets",
-      "Robux shop and premium treat pets",
-      "Event and seasonal pets",
-      "Reward, box, lure, and activity pets",
-      "Temporary and special-case pets"
-    ],
+    sectionOrder: ADOPT_ME_PET_SECTION_ORDER,
     getSectionLabel: getAdoptMePetSection,
-    hiddenKeys: ["rarity"],
-    additionalColumns: ["displayRarity"],
+    hiddenKeys: ["rarity", "sourceTags", "sourceImageUrl", "wikiUrl", "fields"],
+    additionalColumns: ["displayRarity", "source", "cost", "chance", "availability", "cardSummary"],
+    maxStats: 4,
+    subtitleKeys: [],
     transformItem: withDisplayRarity
   },
   "adopt-me-potions": {
@@ -5212,12 +5267,20 @@ function getAdoptMePotionSection(item: GameDatasetCatalogItem): string {
 
 function getAdoptMePetSection(item: GameDatasetCatalogItem): string {
   const name = normalizeValue(item.name) ?? "";
+  const source = normalizeValue(item.source) ?? "";
   const cost = normalizeValue(item.cost) ?? "";
   const availability = normalizeValue(item.availability) ?? "";
-  const sourceTables = Array.isArray(item.sourceTables)
-    ? item.sourceTables.map((value) => normalizeValue(value) ?? "").join(" ")
-    : normalizeValue(item.sourceTables) ?? "";
-  const haystack = `${name} ${cost} ${availability} ${sourceTables}`.toLowerCase();
+  const sourceTags: string[] = Array.isArray(item.sourceTags)
+    ? item.sourceTags.flatMap((value) => {
+        const normalized = normalizeValue(value);
+        return normalized ? [normalized] : [];
+      })
+    : (normalizeValue(item.sourceTags)
+        ?.split(";")
+        .map((value) => value.trim())
+        .filter(Boolean) ?? []);
+  const tagSet = new Set(sourceTags);
+  const haystack = `${name} ${source} ${cost} ${availability} ${sourceTags.join(" ")}`.toLowerCase();
 
   if (
     haystack.includes("temporary") ||
@@ -5229,43 +5292,36 @@ function getAdoptMePetSection(item: GameDatasetCatalogItem): string {
   }
 
   if (
-    haystack.includes("robux pets") ||
+    tagSet.has("RobuxLegend") ||
     haystack.includes("robux") ||
     haystack.includes("bundle") ||
-    haystack.includes("golden clam") ||
-    haystack.includes("honey") ||
-    haystack.includes("golden wheat") ||
-    haystack.includes("golden bone") ||
-    haystack.includes("golden goldfish") ||
-    haystack.includes("golden lettuce") ||
-    haystack.includes("golden corn") ||
-    haystack.includes("golden dandelion") ||
-    haystack.includes("golden seed ball") ||
-    haystack.includes("maple leaf treat") ||
-    haystack.includes("mud ball") ||
-    haystack.includes("diamond lavender") ||
-    haystack.includes("golden petunia")
+    ADOPT_ME_ROBUX_TREAT_KEYWORDS.some((keyword) => haystack.includes(keyword))
   ) {
     return "Robux shop and premium treat pets";
   }
 
   if (
+    sourceTags.some((tag) => ADOPT_ME_REWARD_TAGS.has(tag)) ||
     haystack.includes("box") ||
     haystack.includes("reward") ||
     haystack.includes("lure") ||
     haystack.includes("star reward") ||
+    haystack.includes("login") ||
     haystack.includes("mission") ||
     haystack.includes("ticket") ||
     haystack.includes("pet releaser") ||
     haystack.includes("rgb") ||
     haystack.includes("subscription") ||
     haystack.includes("pass") ||
-    haystack.includes("task")
+    haystack.includes("task") ||
+    haystack.includes("admin abuse") ||
+    haystack.includes("dagi bot")
   ) {
     return "Reward, box, lure, and activity pets";
   }
 
   if (
+    sourceTags.some((tag) => ADOPT_ME_EVENT_TAGS.has(tag)) ||
     haystack.includes("event") ||
     haystack.includes("festival") ||
     haystack.includes("winter") ||
@@ -5293,7 +5349,25 @@ function getAdoptMePetSection(item: GameDatasetCatalogItem): string {
     return "Event and seasonal pets";
   }
 
-  return "Egg and hatch-pool pets";
+  if (
+    sourceTags.some((tag) => ADOPT_ME_RETIRED_EGG_TAGS.has(tag)) ||
+    haystack.includes("safari egg") ||
+    haystack.includes("jungle egg") ||
+    haystack.includes("farm egg") ||
+    haystack.includes("aussie egg") ||
+    haystack.includes("fossil egg") ||
+    haystack.includes("ocean egg") ||
+    haystack.includes("mythic egg") ||
+    haystack.includes("woodland egg")
+  ) {
+    return "Retired and limited egg pets";
+  }
+
+  if (sourceTags.some((tag) => ADOPT_ME_CURRENT_EGG_TAGS.has(tag))) {
+    return "Current and basic egg pets";
+  }
+
+  return availability.toLowerCase().includes("trade") ? "Retired and limited egg pets" : "Current and basic egg pets";
 }
 
 function getAdoptMeToySection(item: GameDatasetCatalogItem): string {

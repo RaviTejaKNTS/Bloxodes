@@ -99,6 +99,7 @@ const CARD_STAT_OVERRIDES: Record<string, string[]> = {
   "blox-fruits-titles": ["displayTitleNumber", "unlockRequirement", "unlockRoute", "relatedTarget", "availabilityNote"],
   "blox-fruits-special-titles": ["grantRoute", "holderTarget", "obtainmentNote", "normalPlayerRoute"],
   "blox-fruits-title-colors": ["unlockRequirement", "titleCountNeeded", "unlockStage", "visualRole"],
+  "adopt-me-pets": ["source", "cost", "chance", "availability"],
   "sailor-piece-fruits": ["bestFor", "combatRole", "mainStrength", "mainLimit", "spinChance"],
   "sailor-piece-islands": ["bosses", "mainRole", "keyContent", "progressionUse"],
   "sailor-piece-accessories": ["defense", "damage", "damageReduction", "sourceRoute", "dropOrCost", "bestFor"],
