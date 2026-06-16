@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
-import { buildGameDatasetCatalogCopy, getGameDatasetCatalogConfigByWikiPath } from "@/lib/game-dataset-catalogs";
+import { getGameDatasetCatalogConfigByWikiPath } from "@/lib/game-dataset-catalogs";
 import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL, WIKI_DESCRIPTION } from "@/lib/seo";
 import { buildPageContentHtml } from "@/lib/page-content";
 import {
@@ -100,16 +100,6 @@ function resolveContext(wikiSlug: string, collectionSlug: string): WikiCatalogCo
     : null;
 }
 
-function getImageUrls(items: Array<{ image?: string | null }>): string[] {
-  return Array.from(
-    new Set(
-      items
-        .map((item) => item.image)
-        .filter((image): image is string => typeof image === "string" && image.length > 0)
-    )
-  ).slice(0, 6);
-}
-
 export async function generateStaticParams() {
   return [];
 }
@@ -134,16 +124,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   let image = page?.thumb_url ?? `${SITE_URL}/og-image.png`;
 
   if (context.kind === "generic") {
-    const dataset = await loadGameDatasetCatalogDataset(context.config);
-    const generated = buildGameDatasetCatalogCopy({
-      config: context.config,
-      itemCount: dataset.items.length,
-      columns: dataset.columns,
-      imageUrls: getImageUrls(dataset.items)
-    });
-    fallbackTitle = generated.title;
-    fallbackDescription = generated.meta_description;
-    image = page?.thumb_url ?? generated.thumb_url ?? image;
+    if (!page) {
+      return {
+        title: `Roblox Wiki | ${SITE_NAME}`,
+        description: WIKI_DESCRIPTION,
+        alternates: buildAlternates(canonical),
+        robots: { index: false, follow: false }
+      };
+    }
   } else if (context.kind === "grow-a-garden") {
     const dataset = await loadGrowGardenCatalogDataset(context.config);
     fallbackTitle = `All ${dataset.items.length.toLocaleString("en-US")} ${context.config.label} in Grow a Garden`;
@@ -188,14 +176,11 @@ export default async function WikiCatalogPage({ params }: PageProps) {
   const page = await getWikiCatalogPageByPath(context.wikiSlug, context.collectionSlug);
 
   if (context.kind === "generic") {
+    if (!page) {
+      notFound();
+    }
     const dataset = await loadGameDatasetCatalogDataset(context.config);
-    const generated = buildGameDatasetCatalogCopy({
-      config: context.config,
-      itemCount: dataset.items.length,
-      columns: dataset.columns,
-      imageUrls: getImageUrls(dataset.items)
-    });
-    const contentHtml = await buildPageContentHtml(page ?? generated);
+    const contentHtml = await buildPageContentHtml(page);
     return renderGameDatasetCatalogPage({
       config: context.config,
       dataset,

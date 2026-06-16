@@ -1,6 +1,11 @@
 import "../shared/load-env";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { GAME_DATASET_CATALOG_GROUPS } from "@/lib/game-dataset-catalogs";
+import { repoPath } from "@/lib/paths";
+
+type GameDatasetCatalogGroup = (typeof GAME_DATASET_CATALOG_GROUPS)[number];
 
 type WikiPageUpsert = {
   slug: string;
@@ -16,9 +21,33 @@ type WikiPageUpsert = {
 };
 
 type WikiCopy = {
+  title?: string;
+  seoTitle?: string;
   metaDescription: string;
   tipsMd: string;
   controlsJson?: Array<Record<string, string>>;
+  gameDescriptionMd?: string;
+  coverImage?: string | null;
+};
+
+type WikiFinalJson = Partial<{
+  slug: string;
+  title: string;
+  seo_title: string;
+  meta_description: string;
+  universe_id: number | null;
+  controls_json: Array<Record<string, string>>;
+  tips_md: string;
+  cover_image: string | null;
+  game_description_md: string;
+}>;
+
+type ResolvedWikiCopy = {
+  title: string;
+  seoTitle: string;
+  metaDescription: string;
+  tipsMd: string;
+  controlsJson: Array<Record<string, string>>;
   gameDescriptionMd?: string;
   coverImage?: string | null;
 };
@@ -29,6 +58,7 @@ const dryRun = args.has("--dry-run");
 const draft = args.has("--draft");
 const allowProd = args.has("--allow-prod");
 const targetGameSlugs = collectArgValues(rawArgs, ["--game", "--game-slug", "--wiki-slug"]);
+const finalJsonRoot = collectSingleArgValue(rawArgs, ["--final-json-root", "--final-json-dir"]);
 const UNIVERSE_LOOKUP_PAGE_SIZE = 1000;
 
 function collectArgValues(argv: string[], names: string[]): string[] {
@@ -51,10 +81,94 @@ function collectArgValues(argv: string[], names: string[]): string[] {
   return Array.from(new Set(values));
 }
 
+function collectSingleArgValue(argv: string[], names: string[]): string | null {
+  let found: string | null = null;
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    const inlineName = names.find((name) => arg.startsWith(`${name}=`));
+    if (inlineName) {
+      const value = arg.slice(inlineName.length + 1).trim();
+      if (!value) throw new Error(`Missing value for ${inlineName}`);
+      if (found && found !== value) throw new Error(`Multiple values provided for ${inlineName}`);
+      found = value;
+      continue;
+    }
+    if (names.includes(arg)) {
+      const value = argv[i + 1]?.trim();
+      if (!value) throw new Error(`Missing value for ${arg}`);
+      if (found && found !== value) throw new Error(`Multiple values provided for ${arg}`);
+      found = value;
+      i += 1;
+    }
+  }
+  return found;
+}
+
 function getTargetGroups() {
   return GAME_DATASET_CATALOG_GROUPS.filter(
     (group) => !targetGameSlugs.length || targetGameSlugs.includes(group.gameSlug)
   );
+}
+
+async function findExistingFile(candidates: string[]) {
+  for (const candidate of candidates) {
+    try {
+      const stat = await fs.stat(candidate);
+      if (stat.isFile()) return candidate;
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+    }
+  }
+  return null;
+}
+
+async function readFinalJsonOverride(group: GameDatasetCatalogGroup): Promise<WikiFinalJson | null> {
+  if (!finalJsonRoot) return null;
+
+  const root = path.isAbsolute(finalJsonRoot) ? finalJsonRoot : repoPath(finalJsonRoot);
+  const filePath = await findExistingFile([
+    path.join(root, group.gameSlug, "wiki", "final.json"),
+    path.join(root, group.gameSlug, "final.json"),
+    path.join(root, "wiki", "final.json"),
+    path.join(root, "final.json")
+  ]);
+
+  if (!filePath) {
+    throw new Error(`Missing wiki final.json for ${group.gameSlug} under ${root}`);
+  }
+
+  const parsed = JSON.parse(await fs.readFile(filePath, "utf8")) as WikiFinalJson;
+  if (parsed.slug && parsed.slug !== group.gameSlug) {
+    throw new Error(`Wiki final.json slug ${parsed.slug} does not match ${group.gameSlug}`);
+  }
+  return parsed;
+}
+
+async function resolveWikiCopy(group: GameDatasetCatalogGroup): Promise<ResolvedWikiCopy | null> {
+  const finalJson = await readFinalJsonOverride(group);
+  const legacyCopy = WIKI_COPY[group.gameSlug];
+
+  if (!finalJson && !legacyCopy) return null;
+
+  const metaDescription = finalJson?.meta_description ?? legacyCopy?.metaDescription;
+  const tipsMd = finalJson?.tips_md ?? legacyCopy?.tipsMd;
+  if (!metaDescription) throw new Error(`Missing meta_description for ${group.gameSlug}`);
+  if (!tipsMd) throw new Error(`Missing tips_md for ${group.gameSlug}`);
+
+  return {
+    title: finalJson?.title ?? legacyCopy?.title ?? `${group.gameName} Wiki`,
+    seoTitle: finalJson?.seo_title ?? legacyCopy?.seoTitle ?? `${group.gameName} Wiki`,
+    metaDescription,
+    tipsMd,
+    controlsJson: finalJson?.controls_json ?? legacyCopy?.controlsJson ?? [],
+    gameDescriptionMd: finalJson?.game_description_md ?? legacyCopy?.gameDescriptionMd,
+    coverImage:
+      finalJson && "cover_image" in finalJson
+        ? finalJson.cover_image ?? null
+        : legacyCopy && "coverImage" in legacyCopy
+          ? legacyCopy.coverImage ?? null
+          : undefined
+  };
 }
 
 const WIKI_COPY: Record<string, WikiCopy> = {
@@ -755,16 +869,16 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
   const rows: WikiPageUpsert[] = [];
 
   for (const group of getTargetGroups()) {
-    const copy = WIKI_COPY[group.gameSlug];
+    const copy = await resolveWikiCopy(group);
     if (!copy) continue;
 
     const row: WikiPageUpsert = {
       slug: group.gameSlug,
-      title: `${group.gameName} Wiki`,
-      seo_title: `${group.gameName} Wiki`,
+      title: copy.title,
+      seo_title: copy.seoTitle,
       meta_description: copy.metaDescription,
       universe_id: universeIdsByGameSlug.get(group.gameSlug) ?? null,
-      controls_json: copy.controlsJson ?? [],
+      controls_json: copy.controlsJson,
       tips_md: copy.tipsMd,
       is_published: !draft,
       published_at: draft ? existingPublishedAt.get(group.gameSlug) ?? null : existingPublishedAt.get(group.gameSlug) ?? now
@@ -852,7 +966,7 @@ async function main() {
   }
 
   for (const group of getTargetGroups()) {
-    const copy = WIKI_COPY[group.gameSlug];
+    const copy = await resolveWikiCopy(group);
     const universeId = universeIdsByGameSlug.get(group.gameSlug);
     if (!copy?.gameDescriptionMd || !universeId) continue;
 

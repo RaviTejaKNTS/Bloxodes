@@ -48,6 +48,7 @@ const args = new Set(rawArgs);
 const dryRun = args.has("--dry-run");
 const draft = args.has("--draft");
 const allowProd = args.has("--allow-prod");
+const allowGeneratedCopy = args.has("--allow-generated-copy");
 const targetGameSlugs = collectArgValues(rawArgs, ["--game", "--game-slug", "--wiki-slug"]);
 const targetCollections = collectArgValues(rawArgs, ["--collection", "--collection-slug"]);
 const finalJsonRoot = collectSingleArgValue(rawArgs, ["--final-json-root", "--final-json-dir"]);
@@ -219,6 +220,11 @@ async function buildRows(
       imageUrls: dataset.imageUrls
     });
     const finalJson = await readFinalJsonOverride(config);
+    if (!finalJson && !allowGeneratedCopy) {
+      throw new Error(
+        `Refusing to generate public copy for ${config.code}. Pass --final-json-root with an approved final.json, or use --allow-generated-copy only for an intentional one-off.`
+      );
+    }
     const pageCopy = finalJson ? { ...copy, ...finalJson } : copy;
 
     rows.push({

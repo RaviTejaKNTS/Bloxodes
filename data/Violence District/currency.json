@@ -1,0 +1,160 @@
+{
+  "meta": {
+    "title": "Violence District currency data",
+    "game": "Violence District",
+    "gameSlug": "violence-district",
+    "collection": "currency",
+    "route": "/wiki/violence-district/currency",
+    "catalogCode": "violence-district-currency",
+    "universeId": 6739698191,
+    "rootPlaceId": 93978595733734,
+    "updatedAt": "2026-06-16",
+    "publishStatus": "phase-2-dataset-ready-parent-route-needed",
+    "itemCount": 4,
+    "counts": {
+      "bySection": {
+        "Regular currency": 2,
+        "Event currency": 2
+      },
+      "currentRegular": 2,
+      "currentlyUnavailableEvent": 2,
+      "withRewardRate": 3,
+      "images": 4
+    },
+    "imageCoverage": {
+      "present": 4,
+      "missing": 0,
+      "source": "Violence District Fandom MediaWiki imageinfo",
+      "localDirectory": "apps/web/public/Violence District/Currency"
+    },
+    "groupBy": "catalogSection",
+    "defaultCardFields": [
+      "availability",
+      "source",
+      "shop",
+      "mainUse",
+      "rewardRate"
+    ],
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "availability",
+      "source",
+      "obtainment",
+      "shop",
+      "mainUse",
+      "rewardRate",
+      "spendingPriority",
+      "cardSummary",
+      "sourcePage",
+      "sourceImageUrl",
+      "sourceImageFile",
+      "sourceCheckedAt",
+      "imageStatus",
+      "sortOrder"
+    ],
+    "sources": [
+      {
+        "label": "Violence District Wiki - Currency MediaWiki API",
+        "url": "https://violencedistrict.fandom.com/api.php?action=parse&page=Currency&prop=wikitext%7Cimages%7Clinks&format=json&origin=*",
+        "accessed": "2026-06-16",
+        "usage": "Primary currency count, regular/event grouping, top-level uses, and icon filename source."
+      },
+      {
+        "label": "Violence District Wiki - individual currency pages",
+        "url": "https://violencedistrict.fandom.com/wiki/Currency",
+        "accessed": "2026-06-16",
+        "usage": "Linked pages checked through MediaWiki API for obtainment, shop uses, availability context, and reward rates where listed."
+      },
+      {
+        "label": "Violence District Wiki - currency imageinfo",
+        "url": "https://violencedistrict.fandom.com/api.php?action=query&titles=File:Screws.png%7CFile:Emblems.png%7CFile:Candies.png%7CFile:Ornaments.png&prop=imageinfo&iiprop=url%7Csize%7Cmime&format=json&origin=*",
+        "accessed": "2026-06-16",
+        "usage": "Currency icon download source and image coverage proof."
+      }
+    ]
+  },
+  "items": [
+    {
+      "name": "Screws",
+      "slug": "screws",
+      "image": "/Violence District/Currency/screws.webp",
+      "catalogSection": "Regular currency",
+      "availability": "Current regular currency",
+      "source": "Match actions and Robux Shop",
+      "obtainment": "Survivor objectives, stuns, heals, chases, escapes; killer spikes and kills",
+      "shop": "Shop",
+      "mainUse": "Killers, Items, Emotes, and perk upgrades",
+      "rewardRate": "Varies by action; generators 1/sec, chase 2/sec capped at 202, escape about 200, spike about 50, kill about 100",
+      "spendingPriority": "Core progression currency",
+      "cardSummary": "Screws are the main currency for normal progression in Violence District. They matter first because they pay for killers, survivor items, emotes, and perk upgrades.",
+      "sourcePage": "https://violencedistrict.fandom.com/wiki/Screws",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/c/ce/Screws.png/revision/latest?cb=20250907101911",
+      "sourceImageFile": "Screws.png",
+      "sourceCheckedAt": "2026-06-16",
+      "imageStatus": "downloaded Fandom static image as WebP",
+      "sortOrder": 10
+    },
+    {
+      "name": "Emblems",
+      "slug": "emblems",
+      "image": "/Violence District/Currency/emblems.webp",
+      "catalogSection": "Regular currency",
+      "availability": "Current regular currency",
+      "source": "Match results and Robux Shop",
+      "obtainment": "Match results and Robux Shop",
+      "shop": "Shop",
+      "mainUse": "Perks, Emotes, and Skins",
+      "spendingPriority": "Rarer shop purchases",
+      "cardSummary": "Emblems are the rarer regular currency. They are best treated as a separate shop resource for perks, emotes, and skins instead of the main grind currency.",
+      "sourcePage": "https://violencedistrict.fandom.com/wiki/Emblems",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/d/d3/Emblems.png/revision/latest?cb=20250820221700",
+      "sourceImageFile": "Emblems.png",
+      "sourceCheckedAt": "2026-06-16",
+      "imageStatus": "downloaded Fandom static image as WebP",
+      "sortOrder": 20
+    },
+    {
+      "name": "Candies",
+      "slug": "candies",
+      "image": "/Violence District/Currency/candies.webp",
+      "catalogSection": "Event currency",
+      "availability": "Currently unavailable event currency",
+      "source": "Halloween event pumpkins",
+      "obtainment": "Destroy pumpkins on maps as Survivor during the Halloween event",
+      "shop": "Halloween Shop",
+      "mainUse": "Killer Skins and Emotes",
+      "rewardRate": "5 Candies per crushed pumpkin",
+      "spendingPriority": "Halloween event cosmetics",
+      "cardSummary": "Candies are the Halloween event currency. They belong on the currency list so old Halloween Shop rewards make sense, but they are not a normal farming target right now.",
+      "sourcePage": "https://violencedistrict.fandom.com/wiki/Candies",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/d/df/Candies.png/revision/latest?cb=20251101110121",
+      "sourceImageFile": "Candies.png",
+      "sourceCheckedAt": "2026-06-16",
+      "imageStatus": "downloaded Fandom static image as WebP",
+      "sortOrder": 30
+    },
+    {
+      "name": "Ornaments",
+      "slug": "ornaments",
+      "image": "/Violence District/Currency/ornaments.webp",
+      "catalogSection": "Event currency",
+      "availability": "Currently unavailable event currency",
+      "source": "Christmas event gifts and Robux Shop",
+      "obtainment": "Deliver gifts to the Christmas tree during the Christmas event; killers could hit gift-carrying survivors for a reward",
+      "shop": "Christmas Shop",
+      "mainUse": "Killer Skins, Emotes, and Item Skins",
+      "rewardRate": "5 Ornaments per gift; 15 during the last event week",
+      "spendingPriority": "Christmas event cosmetics",
+      "cardSummary": "Ornaments are the Christmas event currency. Their route is tied to gift delivery and event shop rewards, so they should be read as unavailable unless the Christmas event returns.",
+      "sourcePage": "https://violencedistrict.fandom.com/wiki/Ornaments",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/4/49/Ornaments.png/revision/latest?cb=20251231132942",
+      "sourceImageFile": "Ornaments.png",
+      "sourceCheckedAt": "2026-06-16",
+      "imageStatus": "downloaded Fandom static image as WebP",
+      "sortOrder": 40
+    }
+  ]
+}

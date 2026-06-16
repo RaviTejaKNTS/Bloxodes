@@ -779,7 +779,6 @@ export function renderGrowGardenCatalogPage({
   const pageDescription = config.description;
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml.introHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
-  const howHtml = contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
   const faqHtml = contentHtml?.faqHtml ?? [];
   const dataUpdatedAt = resolveDataUpdatedAt(dataset.meta);
   const contentUpdatedAt = contentHtml?.updatedAt ?? null;
@@ -794,7 +793,7 @@ export function renderGrowGardenCatalogPage({
     label: section.label,
     count: section.items.length
   }));
-  const hasDetails = Boolean(descriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length);
+  const hasDetails = Boolean(descriptionHtml.length) || Boolean(faqHtml.length);
 
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
@@ -836,7 +835,6 @@ export function renderGrowGardenCatalogPage({
   const descriptionNodes = descriptionHtml.flatMap((entry) =>
     renderPageContentNodes(entry.html, `grow-garden-description-${entry.key}`)
   );
-  const howNodes = howHtml ? renderPageContentNodes(howHtml, "grow-garden-how") : null;
   const faqNodes = faqHtml.map((faq, idx) => ({
     ...faq,
     nodes: renderPageContentNodes(faq.a, `grow-garden-faq-${idx}`)
@@ -867,8 +865,6 @@ export function renderGrowGardenCatalogPage({
         {hasDetails ? (
           <>
             {descriptionNodes.length ? descriptionNodes : null}
-
-            {howNodes ? howNodes : null}
 
             <ContentFaq
               items={faqNodes.map((faq, idx) => ({

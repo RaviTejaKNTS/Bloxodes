@@ -20,7 +20,7 @@ Every public catalog page should follow this structure unless there is a strong 
 3. Updated timestamp if a real content or dataset date exists
 4. Intro copy
 5. Primary interactive/data section
-6. Secondary long-form sections: description, how-it-works
+6. Secondary long-form sections: description, plus how-it-works only when the route has a real non-wiki-catalog use for it
 7. FAQ
 8. Comments
 9. JSON-LD / breadcrumbs / item-list schema where relevant
@@ -52,6 +52,7 @@ Do not re-implement these patterns inside each route unless the catalog page gen
 
 - Supabase copy should be loaded through `apps/web/src/lib/catalog.ts`.
 - Dataset-backed pages should still use the shared page contract and shared UI primitives.
+- Wiki catalog pages should not render or create a generic "how to read/use this page" section. Put gameplay explanation in the intro, item cards, section notes, description, or FAQ instead.
 - Keep route files thin and move repeated rendering or loader logic into `page-data.tsx`.
 
 ## New Catalog Page Checklist

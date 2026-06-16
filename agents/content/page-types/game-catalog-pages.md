@@ -2,11 +2,11 @@
 
 Use this guide for dataset-backed game catalog pages such as Grow a Garden crops, Adopt Me pets, Blox Fruits accessories, Brookhaven vehicles, or any future durable `data/<Game>/` item collection.
 
-Use the guide flexibly. The work should always begin with the game system, but the final structure should come from the collection itself. A pet page, a crop page, a vehicle page, a boss page, and a prize page should not sound like the same page with nouns swapped.
+Use the guide flexibly. The work should always begin with the game system, but the final structure should come from the actual items or mechanic. A pet page, a crop page, a vehicle page, a boss page, and a prize page should not sound like the same page with nouns swapped.
 
 ## Purpose
 
-Game catalog pages should turn local structured datasets into readable player references. The copy should explain how the collection works in that game, while the item cards or tables carry the detailed data.
+Game catalog pages should turn local structured datasets into readable player references. The copy should explain how the items or mechanic work in that game, while the item cards or tables carry the detailed data.
 
 The writing standard is closer to a useful wiki explanation than a database caption. The page does not need to become a full article, but it must teach the system before it asks the reader to compare items.
 
@@ -16,7 +16,7 @@ The usefulness standard is the hard gate. A game catalog page must help the play
 
 ## Catalog Scope Gate
 
-Game catalogs are for core in-game item collections that stay useful beyond one update cycle. The collection should have repeatable player value: collect, unlock, compare, equip, farm, craft, hatch, buy, roll, trade, fight, visit, or use.
+Game catalogs are for core in-game item groups that stay useful beyond one update cycle. The items or mechanic should have repeatable player value: collect, unlock, compare, equip, farm, craft, hatch, buy, roll, trade, fight, visit, or use.
 
 Good game-catalog candidates include:
 
@@ -113,6 +113,7 @@ Use the same content fields as normal catalog pages, but write them into `wiki_c
 - `wiki_md`: shown on the game wiki catalog section.
 - `wiki_sort_order`: controls the wiki hub order.
 - `description_json`: short section notes shown between item-card groups when the route divides the collection into meaningful sections.
+- `how_it_works_md`: leave empty for normal wiki catalog pages. Do not create a standalone section about how to read, use, scan, or interpret the page itself.
 - local images: derived from the codebase/dataset, not stored as per-page image arrays in Supabase.
 
 `wiki_md` is not a CTA. It is the wiki hub's short explanation of the collection as a game concept.
@@ -156,7 +157,7 @@ Choose the grouping with the strongest in-game meaning. Rarity is often better t
 
 The proposal must include:
 
-- primary player task and the decision the page should make easier
+- primary player task and the in-game decision players are making
 - required fact matrix with source status, local dataset/card status, and planned public placement
 - competitor usefulness check when SEO/search traffic is part of the page decision
 - dataset status: local count, source count, rendered count, title count, image count, and missing image count
@@ -165,7 +166,7 @@ The proposal must include:
 - exact title promise: what answer the page is promising, such as obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison
 - content coverage required to satisfy that title promise
 - recommended grouping axis
-- why that axis helps players understand the collection long-term
+- why that axis helps players understand the items or mechanic long-term
 - weaker alternatives and why they are not the first choice
 - planned `description_json` keys and one-to-three-sentence notes for each section
 - which parts stay in `description_md` as whole-page explanation
@@ -176,6 +177,8 @@ The proposal must include:
 Wait for explicit user confirmation before writing `final.json` or updating local Supabase. If the dataset needs changes, update the local dataset after approval and before writing final copy. If the user changes the title, section style, or card fields, use the confirmed version. A broad page request is not data, title, or section approval. The notes should say what the user approved, such as `confirmed title/data/section plan: title promises chest locations, group by route stage, and show landmark, route order, reward notes, and travel tip`, instead of saying the user merely requested the page.
 
 After confirmation, check the route's real section output before writing to the database. The rendered card sections must match the `description_json` keys. If the dataset has a blank `rarity` field and the generic renderer would choose it over the intended category, fix the renderer or add the confirmed grouping override first. Public copy written for `Walls` and `Floors` is not ready while the page renders `Other` or `Rarity`.
+
+Do not accept generated fallback copy as a preview. A game-catalog page without a published `wiki_catalog_pages` row should not render public copy, and the normal seed path should require the approved page-local `final.json`. If a route opens but the visible H1, intro, section notes, body, or FAQ differ from `final.json`, the page is not verified. Record that as a failed import/readback, not as a successful route preview.
 
 Check the route's real card output too. Cards should be clean reference surfaces, not mini articles. Keep pure data that helps a player compare items: source, price, rarity, chance, requirement, best use, role, strength, limit, availability, damage, seats, reward type, or a similar concrete field. Do not render raw long descriptions, raw pros/cons arrays, nested object dumps, unexplained yes/no values, or vague meta text. If a page needs pros and cons, translate them into short fields like `Strength`, `Limit`, `Best for`, or `Trade note`.
 
@@ -203,7 +206,7 @@ Use this shape for each item card:
 
 Images are optional only because weak images are worse than blank cards. Never fill row images with raw Roblox API thumbnails, generic game icons, broad hero art, edited guide thumbnails, site-branded cover art, arrows/callouts, or nearby screenshots that do not actually show the row subject. Roblox APIs can confirm identity or metadata; they are not a substitute for catalog image research. If research cannot produce clean row images, record the image gap in `research-notes.md` and keep the card image blank.
 
-Default card descriptions are required unless the notes explain why this collection works better as pure data. The description should sound like a Roblox player explaining the row in-game, not like a database note. Good descriptions say what the item/row changes for the player: role, route fit, use case, weakness, why it is awkward, or why it is different from nearby entries.
+Default card descriptions are required unless the notes explain why this item set works better as pure data. The description should sound like a Roblox player explaining the row in-game, not like a database note. Good descriptions say what the item/row changes for the player: role, route fit, use case, weakness, why it is awkward, or why it is different from nearby entries.
 
 The description and data block must not repeat each other. The description should add item-specific meaning that the data rows do not already say: how the item feels in play, what its role changes, why it is awkward, what situation it fits, or what makes it different from nearby entries. Do not write `Availability Free public character` or `Cost Free` in the description when those same facts appear as data rows. If the only thing you can say is already covered by data, skip the description. If the item is better explained as one sentence and there are no useful row-level facts, skip the data block. Depth is welcome, but each piece of the card needs its own job.
 
@@ -211,7 +214,7 @@ There is no fixed number of data points. Choose the useful facts, then stop. A p
 
 As a practical default, aim for 3-5 visible key-value facts. More than 5 fields needs a written reason in `research-notes.md` and rendered proof that the card still scans cleanly. More than 6 fields is usually a fail for the default card surface and should become a table, details view, body section, or separate guide. Do not show every useful fact just because it exists in the dataset.
 
-Never expose research or workflow language in public cards. Card descriptions, labels, and values must not say `source notes`, `source estimate`, `source-backed`, `needs in-game check`, `needs verification`, `verification`, `partial`, `source-conflicted`, `reported by`, `current sources`, `dataset`, `research`, `API`, or similar process wording. Keep those notes in `research-notes.md`. Public cards should talk about the game: where to go, what it does, when to use it, what it costs, what unlocks it, or why it matters.
+Never expose research or workflow language in public cards. Card descriptions, labels, and values must not say `source notes`, `source estimate`, `source-backed`, `needs in-game check`, `needs verification`, `verification`, `partial`, `source-conflicted`, `reported by`, `current sources`, `dataset`, `research`, `API`, or similar process wording. Keep those notes in `research-notes.md`. Public cards should talk about the game: where to go, what it does, when to use it, what it costs, or what unlocks it.
 
 Keep the visual emphasis just as selective. Cards may use color for one actionable status signal, such as `Available`, `Unavailable`, `Retired`, `Trade only`, `Event`, `Limited`, or `Seasonal`. Use green for available, red or muted red for unavailable/retired/trade-only, and amber for event/limited/seasonal. Cards may also visually strengthen one primary decision field for the collection, such as `Source` for pets, `Value` for crops, `Price` for vehicles, `Damage` for weapons, `Level` for islands, or `Unlock` for cosmetics. Everything else should stay quiet key-value text.
 
@@ -257,9 +260,22 @@ The card test is simple: a player should understand the item in one glance, then
 
 ## Writing Pattern
 
+Hard public-copy rules for wiki catalog pages:
+
+- Public fields must talk only about the game, items, mechanics, unlocks, shops, zones, odds, values, trading, crafting, farming, or other in-game details that help the player.
+- Never mention sources, research, workflow, data collection, dataset state, API behavior, verification gaps, or what could not be found. Those notes belong in `research-notes.md`, not `intro_md`, `description_md`, `description_json`, cards, `faq_json`, or `wiki_md`.
+- If a useful fact is missing, fix the data or write only with confirmed in-game facts. Do not publish caveats like `sources do not confirm`, `we could not find`, `needs verification`, `reported by`, `source-backed`, or `partial`.
+- Write like a Roblox player who understands the game and is helping another player. Use full sentences, simple wording, and enough setup for a new player to follow.
+- Do not use analogies or em dashes.
+- Keep `intro_md` short and engaging, usually one compact paragraph about the game items or mechanic: what they are, where they appear, how players use or get them, or what decision they affect.
+- `description_md` should use only useful, SEO-friendly headings that match real player questions or actions, such as how to get items, when to save them, where to farm them, which ones matter first, what values change a decision, or what mistakes to avoid.
+- `description_md` may link naturally to other Bloxodes pages with the same `universe_id`, including the wiki hub, codes page, tools, articles, events, or other wiki catalog pages for the same game. Add links only where they help the sentence. Do not add special link sections, do not use phrases like `in our guide`, and do not pile every link into one paragraph.
+- FAQs should usually stop at 3-4 questions. They should answer follow-up questions, not repeat facts already covered by the intro, cards, section notes, or `description_md`.
+- The copy should move like a story: set context, show the collection, explain the next practical decision, and connect later sections back to earlier ideas when that helps a new player.
+
 Good game catalog copy usually covers:
 
-1. What the collection is in the game.
+1. What the items or mechanic are in the game.
 2. What the player actually does with it.
 3. How players get, unlock, buy, hatch, craft, farm, earn, or trade it.
 4. Main item groups and why they differ.
@@ -273,15 +289,17 @@ Before writing public copy, make an outline in `research-notes.md`. The outline 
 
 The outline must also explain how the page will satisfy the approved title promise. A page titled `All Materials and How to Get Them` needs more than a source column; it needs clear obtainment context, route advice, source groups, and FAQ coverage where useful. A page titled `Chest Locations` needs practical landmarks and route order, not only chest names.
 
-For sectioned catalog pages, the outline must separate `description_json` and `description_md` jobs. `description_json` sets up each item section near the cards. `description_md` explains the full game system, such as where the system lives in-game, how players obtain items, how prices or odds work, and what mistakes apply across the whole collection. Do not repeat the same section notes in both fields.
+For sectioned catalog pages, the outline must separate `description_json` and `description_md` jobs. `description_json` sets up each item section near the cards. `description_md` explains the game system, such as where the system lives in-game, how players obtain items, how prices or odds work, and what mistakes apply while using or chasing the items. Do not repeat the same section notes in both fields.
 
-The outline must also say where every required fact will be answered. Cards can carry row-level facts such as price, damage, source, chance, requirement, or role. `description_md` should carry process facts such as how to buy, unlock, upgrade, farm, roll, equip, or use the collection. `how_it_works_md` should explain how to read the visible values. FAQs should clear up edge cases, not carry the only explanation of a core process.
+The outline must also say where every required fact will be answered. Cards can carry row-level facts such as price, damage, source, chance, requirement, or role. `description_md` should carry process facts such as how to buy, unlock, upgrade, farm, roll, equip, or use the items. `description_json` should explain section-specific context near the cards. FAQs should clear up edge cases, not carry the only explanation of a core process.
 
-After the first-pass `final.json`, run the FLOW pass before final edit. This pass should reshape `description_md`, `how_it_works_md`, FAQs, and headings until the page reads like a useful player explanation instead of a stack of facts. The pass must rewrite weak structure, not only check for banned phrases.
+Do not add a `How to read this page`, `How to use this list`, or similar meta section. If visible values need explanation, define their gameplay meaning in the body, section notes, card labels, or FAQ.
 
-For game catalog pages, `description_md` should almost always contain one practical action section. The action depends on the collection: how to train Instinct, how to reach islands, how to farm materials, how to unlock swords, how to roll gifts, how to hatch eggs, how to grow crops, how to equip accessories, or how to compare old rewards before trading.
+After the first-pass `final.json`, run the FLOW pass before final edit. This pass should reshape `description_md`, FAQs, headings, section notes, and card context until the page reads like a useful player explanation instead of a stack of facts. The pass must rewrite weak structure, not only check for banned phrases.
 
-If the collection has no direct action, explain the nearest player behavior. A title color page can explain how title-count milestones unlock colors. A special-title page can explain why most entries are not normal player goals. A cosmetic page can explain where the cosmetic applies and how players usually encounter it.
+For game catalog pages, `description_md` should almost always contain one practical action section. The action depends on the game items or mechanic: how to train Instinct, how to reach islands, how to farm materials, how to unlock swords, how to roll gifts, how to hatch eggs, how to grow crops, how to equip accessories, or how to compare old rewards before trading.
+
+If the items have no direct action, explain the nearest player behavior. A title color page can explain how title-count milestones unlock colors. A special-title page can explain why most entries are not normal player goals. A cosmetic page can explain where the cosmetic applies and how players usually encounter it.
 
 The page should use formatting when it helps:
 
@@ -292,7 +310,7 @@ The page should use formatting when it helps:
 
 Do not let a game catalog page land on random sections because the data had convenient fields. A Blox Fruits Instinct Levels page should explain how to train Instinct, what the 2824 and 5000 EXP milestones mean, and how normal Instinct connects to Instinct V2. It should not feel like three card notes were enlarged into article headings.
 
-Do not make the reader sprint through the system. Explain the collection first, then separate obtainment, comparison, availability, trading, crafting, or value notes into their own paragraphs when those ideas are not directly connected.
+Do not make the reader sprint through the system. Explain the game items or mechanic first, then separate obtainment, comparison, availability, trading, crafting, or value notes into their own paragraphs when those ideas are not directly connected.
 
 Headings should read like useful sentence fragments that tell the reader what the section helps them decide. Avoid lazy labels such as `How classes work`, `How weapons work`, `Overview`, `Value`, `Source`, or `Progression` unless the section immediately makes that phrase specific. Prefer `Where classes unlock and why stock matters`, `What to build first at each station`, `Why source matters before rarity`, or `When retired eggs change trade value`.
 
@@ -303,7 +321,7 @@ Use article-style structure when it helps the catalog page become useful:
 - bullets for quick groups, examples, and mistakes
 - paragraphs for the connective explanation that makes the page feel like one story
 
-Do not include every researched fact. Keep facts that explain the collection, support a decision, or prevent a common mistake.
+Do not include every researched fact. Keep facts that explain the game items or mechanic, support a decision, or prevent a common mistake.
 
 When a field name is unclear, define it before using it:
 
@@ -313,7 +331,7 @@ When a field name is unclear, define it before using it:
 - `uses` means how many times the item can be consumed or applied before it is gone.
 - `chance` means the roll odds only when the unit is known; do not invent percentages.
 
-Public copy should talk about the collection, not the website surface. `catalog` can appear in titles or UI labels, but intro, description, FAQ, and wiki copy should usually say `pets`, `eggs`, `vehicles`, `crops`, `accessories`, or the real collection name.
+Public copy should talk about the game items or mechanic, not the website surface. `catalog` can appear in titles or UI labels, but intro, description, FAQ, and wiki copy should usually say `pets`, `eggs`, `vehicles`, `crops`, `accessories`, or the real in-game name.
 
 Avoid:
 
@@ -404,6 +422,8 @@ Only include event-origin items when they belong to a durable collection, such a
 }
 ```
 
+For wiki catalog output, keep `how_it_works_md` as an empty string unless a special route explicitly asks for it.
+
 ## Final Checks
 
 - Did you inspect actual item examples?
@@ -418,19 +438,19 @@ Only include event-origin items when they belong to a durable collection, such a
 - After local import, did the database row read back with the updated `description_json`, and did the local page render those notes?
 - Does `description_md` stay focused on whole-page mechanics instead of repeating section notes?
 - Did the FLOW pass rewrite `description_md`, headings, and transitions before final edit?
-- Does `description_md` include a useful action/how-to/use section, or do notes explain why the collection is passive?
+- Does `description_md` include a useful action/how-to/use section, or do notes explain why the items are passive?
 - Does the visible title follow `All <N> <Item> in <Game>: <real player question>` unless a recorded reason explains a simpler title?
 - Are `description_md` headings specific, action-led, and more useful than generic `How <collection> works` headings?
 - Did you explain unclear fields?
 - Did you define the game meaning of any field used as advice?
 - Does the page teach the system before it talks about comparison?
-- Is there enough depth for a new or casual player to understand the collection?
+- Is there enough depth for a new or casual player to understand the game items or mechanic?
 - Did you avoid raw internal keys?
-- Does copy match the collection type?
+- Does copy match the item type or mechanic?
 - Does the copy give enough context before jumping into fields or exceptions?
 - Does each paragraph explain one connected concept?
 - Are headings clear sentence-style fragments instead of rigid one-word labels?
-- Does `wiki_md` explain the collection in the game without saying `Use the catalog`?
+- Does `wiki_md` explain the game items or mechanic without saying `Use the catalog`?
 - Did each catalog page get its own `research-notes.md` and `final.json`?
 - If this is the first page in a batch, did the user approve it as the gold standard?
 - Are images expected from local dataset/codebase rather than Supabase page fields?

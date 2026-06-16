@@ -1463,6 +1463,60 @@ const PUSH_ROCK_FOR_BRAINROTS_SOURCE_KEYS = [
   "verificationNote"
 ];
 
+const VIOLENCE_DISTRICT_KILLER_SECTION_ORDER = [
+  "Starter and ambush pressure",
+  "Stealth and chase builders",
+  "Chain and stance pressure",
+  "Anti-loop and map control"
+];
+
+const VIOLENCE_DISTRICT_ITEM_SECTION_ORDER = [
+  "Healing and recovery",
+  "Killer tracking and information",
+  "Rescue and stun tools",
+  "Escape and misdirection",
+  "Area control and slowdown"
+];
+
+const VIOLENCE_DISTRICT_PERK_SECTION_ORDER = [
+  "Survivor speed and chase",
+  "Survivor healing and rescue",
+  "Survivor aura and objectives",
+  "Survivor utility and recovery",
+  "Killer aura and generator pressure",
+  "Killer anti-heal and debuffs",
+  "Killer chase speed",
+  "Killer window and utility control"
+];
+
+const VIOLENCE_DISTRICT_CURRENCY_SECTION_ORDER = ["Regular currency", "Event currency"];
+
+const VIOLENCE_DISTRICT_SOURCE_KEYS = [
+  "catalogSection",
+  "sortOrder",
+  "sourcePage",
+  "sourceImageUrl",
+  "sourceImageFile",
+  "sourceCheckedAt",
+  "imageStatus",
+  "effect",
+  "price",
+  "currency"
+];
+
+const VIOLENCE_DISTRICT_PERK_SOURCE_KEYS = [
+  ...VIOLENCE_DISTRICT_SOURCE_KEYS,
+  "rawEffect",
+  "flavorText",
+  "effectSummary"
+];
+
+const VIOLENCE_DISTRICT_CURRENCY_SOURCE_KEYS = [
+  ...VIOLENCE_DISTRICT_SOURCE_KEYS,
+  "sourceConfidence",
+  "sourceNotes"
+];
+
 const PET_SIMULATOR_99_HIDDEN_KEYS = [
   "catalogSection",
   "sortOrder",
@@ -3268,6 +3322,46 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     additionalColumns: ["catalogSection", "cardSummary"],
     maxStats: 5,
     subtitleKeys: ["upgradeType"]
+  },
+  "violence-district-killers": {
+    groupKey: "catalogSection",
+    groupLabel: "Pressure style",
+    sectionOrder: VIOLENCE_DISTRICT_KILLER_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [...VIOLENCE_DISTRICT_SOURCE_KEYS, "baseSpeed", "intentRadius"],
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["status"]
+  },
+  "violence-district-items": {
+    groupKey: "catalogSection",
+    groupLabel: "Item role",
+    sectionOrder: VIOLENCE_DISTRICT_ITEM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: VIOLENCE_DISTRICT_SOURCE_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["role"]
+  },
+  "violence-district-perks": {
+    groupKey: "catalogSection",
+    groupLabel: "Perk role",
+    sectionOrder: VIOLENCE_DISTRICT_PERK_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: VIOLENCE_DISTRICT_PERK_SOURCE_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["side", "role"]
+  },
+  "violence-district-currency": {
+    groupKey: "catalogSection",
+    groupLabel: "Currency type",
+    sectionOrder: VIOLENCE_DISTRICT_CURRENCY_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: VIOLENCE_DISTRICT_CURRENCY_SOURCE_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["availability"]
   }
 };
 
@@ -6164,7 +6258,6 @@ export function renderGameDatasetCatalogPage({
   const pageDescription = `${config.gameName} ${config.label.toLowerCase()} catalog with ${itemCount.toLocaleString("en-US")} tracked entries.`;
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml.introHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
-  const howHtml = contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
   const faqHtml = contentHtml?.faqHtml ?? [];
   const dataUpdatedAt = resolveDataUpdatedAt(dataset.meta);
   const contentUpdatedAt = contentHtml?.updatedAt ?? null;
@@ -6201,7 +6294,7 @@ export function renderGameDatasetCatalogPage({
     label: section.label,
     count: section.items.length
   }));
-  const hasDetails = Boolean(detailDescriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length);
+  const hasDetails = Boolean(detailDescriptionHtml.length) || Boolean(faqHtml.length);
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
@@ -6214,8 +6307,6 @@ export function renderGameDatasetCatalogPage({
   const descriptionNodes = detailDescriptionHtml.flatMap((entry) =>
     renderPageContentNodes(entry.html, `${config.code}-description-${entry.key}`)
   );
-  const howNodes = howHtml ? renderPageContentNodes(howHtml, `${config.code}-how`) : null;
-  const howHeading = `How to Use This ${config.gameName} ${config.label} List`;
   const faqNodes = faqHtml.map((faq, idx) => ({
     ...faq,
     nodes: renderPageContentNodes(faq.a, `${config.code}-faq-${idx}`)
@@ -6275,15 +6366,6 @@ export function renderGameDatasetCatalogPage({
         {hasDetails ? (
           <>
             {descriptionNodes.length ? descriptionNodes : null}
-
-            {howNodes ? (
-              <>
-                <h2 data-md-copy className="md-copy-node md-copy-heading md-copy-h2">
-                  {howHeading}
-                </h2>
-                {howNodes}
-              </>
-            ) : null}
 
             <ContentFaq
               items={faqNodes.map((faq, idx) => ({
