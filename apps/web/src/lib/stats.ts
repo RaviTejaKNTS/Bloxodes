@@ -482,9 +482,16 @@ function uniqueCleanStrings(values: Array<string | null | undefined>) {
   return [...new Set(values.map((value) => value?.trim() ?? "").filter(Boolean))];
 }
 
+function cleanStatsTaxonomyLabel(value: string | null | undefined) {
+  const label = value?.trim() ?? "";
+  if (!label) return null;
+  const normalized = label.toLowerCase();
+  return normalized === "all" || normalized === "uncategorized" ? null : label;
+}
+
 function normalizeFilterValues(value?: string | string[] | null) {
   const values = Array.isArray(value) ? value : value ? [value] : [];
-  return uniqueCleanStrings(values).filter((item) => item !== "all");
+  return uniqueCleanStrings(values).filter((item) => cleanStatsTaxonomyLabel(item));
 }
 
 function normalizeStatsColumns(value?: string | string[] | null): StatsGameColumnKey[] {
@@ -492,10 +499,6 @@ function normalizeStatsColumns(value?: string | string[] | null): StatsGameColum
   const allowed = new Set(STATS_GAME_COLUMN_OPTIONS.map((option) => option.value));
   const columns = uniqueCleanStrings(values).filter((item): item is StatsGameColumnKey => allowed.has(item as StatsGameColumnKey));
   return columns.length ? columns : DEFAULT_STATS_GAME_COLUMNS;
-}
-
-function postgrestInList(values: string[]) {
-  return `(${values.map((value) => `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`).join(",")})`;
 }
 
 export function getRatingPercent(likes?: number | null, dislikes?: number | null): number | null {
@@ -546,8 +549,8 @@ function mapUniverse(row: UniverseRow): StatsGame {
     creatorName: row.creator_name,
     creatorType: row.creator_type,
     creatorId: row.creator_id,
-    genre: row.genre_l1 || row.genre,
-    subgenre: row.genre_l2,
+    genre: cleanStatsTaxonomyLabel(row.genre_l1),
+    subgenre: cleanStatsTaxonomyLabel(row.genre_l2),
     ageRating: formatAgeRating(row.age_rating),
     iconUrl: row.icon_url,
     thumbnailUrls: toJsonStringArray(row.thumbnail_urls),
@@ -814,10 +817,9 @@ async function listBaseGames(options: {
   const subgenreFilters = normalizeFilterValues(options.subgenre);
 
   if (genreFilters.length === 1) {
-    indexQuery = indexQuery.or(`genre.eq.${genreFilters[0]},genre_l1.eq.${genreFilters[0]}`);
+    indexQuery = indexQuery.eq("genre_l1", genreFilters[0]);
   } else if (genreFilters.length > 1) {
-    const values = postgrestInList(genreFilters);
-    indexQuery = indexQuery.or(`genre.in.${values},genre_l1.in.${values}`);
+    indexQuery = indexQuery.in("genre_l1", genreFilters);
   }
 
   if (subgenreFilters.length === 1) {
@@ -874,10 +876,9 @@ async function listBaseGames(options: {
   }
 
   if (genreFilters.length === 1) {
-    query = query.or(`genre.eq.${genreFilters[0]},genre_l1.eq.${genreFilters[0]}`);
+    query = query.eq("genre_l1", genreFilters[0]);
   } else if (genreFilters.length > 1) {
-    const values = postgrestInList(genreFilters);
-    query = query.or(`genre.in.${values},genre_l1.in.${values}`);
+    query = query.in("genre_l1", genreFilters);
   }
 
   if (subgenreFilters.length === 1) {
@@ -989,7 +990,7 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
       top_playing: number | null;
     }>)
       .map((row) => {
-        const label = row.genre?.trim();
+        const label = cleanStatsTaxonomyLabel(row.genre);
         if (!label) return null;
         return {
           genre: label,
@@ -1014,7 +1015,8 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
   const { rows } = await listBaseGames({ limit: 500, sort: "playing" });
   const map = new Map<string, StatsGenreSummary>();
   for (const game of rows) {
-    const label = game.genre || "Uncategorized";
+    const label = game.genre;
+    if (!label) continue;
     const slug = slugify(label) || "uncategorized";
     const current = map.get(label) ?? {
       genre: label,
@@ -1293,20 +1295,20 @@ export async function getStatsGenreOptions(): Promise<string[]> {
     .limit(500);
   if (!genreIndex.error) {
     return ((genreIndex.data ?? []) as Array<{ genre: string | null }>)
-      .map((row) => row.genre)
+      .map((row) => cleanStatsTaxonomyLabel(row.genre))
       .filter((value): value is string => Boolean(value?.trim()));
   }
 
   const { data, error } = await sb
     .from("roblox_universes")
-    .select("genre_l1, genre")
+    .select("genre_l1")
     .not("slug", "is", null)
     .limit(1000);
   if (error) return [];
   return Array.from(
     new Set(
-      ((data ?? []) as Array<{ genre_l1: string | null; genre: string | null }>)
-        .map((row) => row.genre_l1 || row.genre)
+      ((data ?? []) as Array<{ genre_l1: string | null }>)
+        .map((row) => cleanStatsTaxonomyLabel(row.genre_l1))
         .filter((value): value is string => Boolean(value?.trim()))
     )
   ).sort((a, b) => a.localeCompare(b));
@@ -1316,12 +1318,18 @@ export async function getStatsSubgenreOptions(): Promise<StatsSubgenreOption[]> 
   const rpcResult = await supabaseAdmin().rpc("get_stats_subgenre_options");
   if (!rpcResult.error) {
     return ((rpcResult.data ?? []) as Array<{ genre: string; subgenre: string; games: number; playing: number | string }>)
-      .map((row) => ({
-        genre: row.genre,
-        subgenre: row.subgenre,
-        games: row.games,
-        playing: toFiniteNumber(row.playing) ?? 0
-      }))
+      .map((row) => {
+        const genre = cleanStatsTaxonomyLabel(row.genre);
+        const subgenre = cleanStatsTaxonomyLabel(row.subgenre);
+        if (!genre || !subgenre) return null;
+        return {
+          genre,
+          subgenre,
+          games: row.games,
+          playing: toFiniteNumber(row.playing) ?? 0
+        };
+      })
+      .filter((row): row is StatsSubgenreOption => Boolean(row))
       .sort((a, b) => a.genre.localeCompare(b.genre) || b.playing - a.playing || a.subgenre.localeCompare(b.subgenre));
   }
 
@@ -1343,9 +1351,9 @@ export async function getStatsSubgenreOptions(): Promise<StatsSubgenreOption[]> 
 
   const byKey = new Map<string, StatsSubgenreOption>();
   for (const row of (data ?? []) as Array<{ genre: string | null; genre_l1: string | null; genre_l2: string | null; playing: number | null }>) {
-    const genre = row.genre_l1 || row.genre || "Uncategorized";
-    const subgenre = row.genre_l2?.trim();
-    if (!subgenre) continue;
+    const genre = cleanStatsTaxonomyLabel(row.genre_l1);
+    const subgenre = cleanStatsTaxonomyLabel(row.genre_l2);
+    if (!genre || !subgenre) continue;
     const key = `${genre}\u0000${subgenre}`;
     const current = byKey.get(key) ?? { genre, subgenre, games: 0, playing: 0 };
     current.games += 1;

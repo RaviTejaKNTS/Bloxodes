@@ -154,11 +154,11 @@ async function searchStatsGames(query: string, limit: number, entityTypes: strin
         entity_id: String(row.universe_id),
         slug: statsSlug,
         title: `${row.display_name ?? row.name ?? row.slug} Stats`,
-        subtitle: [row.creator_name, row.genre_l1 ?? row.genre].filter(Boolean).join(" · ") || "Roblox game stats",
+        subtitle: [row.creator_name, row.genre_l1].filter(Boolean).join(" · ") || "Roblox game stats",
         url: `/stats/games/${statsSlug}`,
         updated_at: row.last_stats_refreshed_at ?? row.updated_at,
         active_code_count: null,
-        search_text: [row.display_name, row.name, row.creator_name, row.genre_l1, row.genre].filter(Boolean).join(" ")
+        search_text: [row.display_name, row.name, row.creator_name, row.genre_l1].filter(Boolean).join(" ")
       };
     });
 }

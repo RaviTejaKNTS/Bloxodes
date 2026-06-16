@@ -70,7 +70,7 @@ function metricFor(row: UniverseRankRow, rankType: RankType): number | null {
 }
 
 function scopeFor(row: UniverseRankRow, rankType: RankType): string | null {
-  if (rankType === "genre_playing") return row.genre_l1 ?? row.genre ?? null;
+  if (rankType === "genre_playing") return row.genre_l1?.trim() || null;
   if (rankType === "subgenre_playing") return row.genre_l2 ?? null;
   return "global";
 }

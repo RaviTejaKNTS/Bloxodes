@@ -304,7 +304,87 @@ function columnHeaderLabel(column: StatsGameColumnKey) {
 }
 
 function isRightAlignedColumn(column: StatsGameColumnKey) {
-  return !["rank", "genre", "subgenre", "creator", "ageRating", "created", "updated", "statsRefresh"].includes(column);
+  return !["rank", "genre", "subgenre", "creator", "ageRating"].includes(column);
+}
+
+function isCenterAlignedColumn(column: StatsGameColumnKey) {
+  return column === "rank";
+}
+
+const STATS_GAME_COLUMN_WIDTHS: Record<StatsGameColumnKey, number> = {
+  rank: 64,
+  playing: 112,
+  growth24h: 126,
+  growth7d: 126,
+  visits: 116,
+  favorites: 120,
+  rating: 96,
+  likes: 112,
+  dislikes: 124,
+  genre: 160,
+  subgenre: 190,
+  creator: 220,
+  ageRating: 120,
+  peak24h: 112,
+  peak7d: 112,
+  created: 128,
+  updated: 112,
+  statsRefresh: 112
+};
+
+function statsGamesTableMinWidth(columns: StatsGameColumnKey[]) {
+  const gameColumnWidth = 320;
+  return Math.max(980, gameColumnWidth + columns.reduce((total, column) => total + STATS_GAME_COLUMN_WIDTHS[column], 0));
+}
+
+function statsColumnWidthClass(column: StatsGameColumnKey) {
+  switch (column) {
+    case "rank":
+      return "w-16 min-w-16";
+    case "playing":
+      return "min-w-[112px]";
+    case "growth24h":
+    case "growth7d":
+      return "min-w-[126px]";
+    case "visits":
+      return "min-w-[116px]";
+    case "favorites":
+      return "min-w-[120px]";
+    case "rating":
+      return "min-w-24";
+    case "likes":
+      return "min-w-[112px]";
+    case "dislikes":
+      return "min-w-[124px]";
+    case "genre":
+      return "min-w-40 max-w-[210px] whitespace-normal leading-snug";
+    case "subgenre":
+      return "min-w-[190px] max-w-[260px] whitespace-normal leading-snug";
+    case "creator":
+      return "min-w-[220px] max-w-[300px] whitespace-normal leading-snug";
+    case "ageRating":
+      return "min-w-[120px] whitespace-normal leading-snug";
+    case "peak24h":
+    case "peak7d":
+      return "min-w-[112px]";
+    case "created":
+      return "min-w-32 whitespace-normal leading-snug";
+    case "updated":
+    case "statsRefresh":
+      return "min-w-[112px]";
+    default:
+      return undefined;
+  }
+}
+
+function statsColumnCellClass(column: StatsGameColumnKey) {
+  const wraps = ["genre", "subgenre", "creator", "ageRating", "created"].includes(column);
+  return cn(
+    statsColumnWidthClass(column),
+    "align-middle",
+    wraps ? "whitespace-normal leading-snug" : "whitespace-nowrap",
+    isCenterAlignedColumn(column) ? "text-center" : isRightAlignedColumn(column) ? "text-right" : "text-left"
+  );
 }
 
 function sortForStatsColumn(column: StatsGameColumnKey): StatsSortKey | null {
@@ -356,8 +436,9 @@ function SortableTableHead({
       <Link
         href={statsPageHref(data, 1, { sort })}
         className={cn(
-          "inline-flex items-center gap-1 rounded-sm text-muted transition hover:text-foreground focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+          "inline-flex w-full items-center gap-1 rounded-sm text-muted transition hover:text-foreground focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           isRightAlignedColumn(column) && "justify-end",
+          isCenterAlignedColumn(column) && "justify-center",
           active && "text-foreground"
         )}
         aria-label={`Sort by ${label}`}
@@ -390,9 +471,9 @@ function renderStatsColumnValue(game: StatsGame, column: StatsGameColumnKey) {
     case "dislikes":
       return formatCompactNumber(game.dislikes);
     case "genre":
-      return game.genre ?? "Not tracked";
+      return game.genre ?? <span className="text-muted">-</span>;
     case "subgenre":
-      return game.subgenre ?? "Not tracked";
+      return game.subgenre ?? <span className="text-muted">-</span>;
     case "creator":
       return game.creatorName ?? "Not tracked";
     case "ageRating":
@@ -634,22 +715,22 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
       </div>
 
       <Card className="overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
-        <div className="hidden md:block">
-          <Table>
+        <div className="hidden overflow-x-auto md:block">
+          <Table className="table-auto" style={{ minWidth: statsGamesTableMinWidth(visibleColumns) }}>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
-                {visibleColumns.includes("rank") ? <SortableTableHead data={data} column="rank" className="w-14" /> : null}
-                <TableHead>Game</TableHead>
+                {visibleColumns.includes("rank") ? <SortableTableHead data={data} column="rank" className={statsColumnCellClass("rank")} /> : null}
+                <TableHead className="min-w-[320px] text-left align-middle">Game</TableHead>
                 {dataColumns.map((column) => (
-                  <SortableTableHead key={column} data={data} column={column} className={cn(isRightAlignedColumn(column) && "text-right")} />
+                  <SortableTableHead key={column} data={data} column={column} className={statsColumnCellClass(column)} />
                 ))}
               </TableRow>
             </TableHeader>
             <TableBody>
               {data.games.map((game) => (
                 <TableRow key={game.universeId} className="border-border/60 hover:bg-background/40">
-                  {visibleColumns.includes("rank") ? <TableCell className="font-mono text-xs text-muted">#{game.rank ?? "-"}</TableCell> : null}
-                  <TableCell>
+                  {visibleColumns.includes("rank") ? <TableCell className={cn(statsColumnCellClass("rank"), "font-mono text-xs text-muted")}>#{game.rank ?? "-"}</TableCell> : null}
+                  <TableCell className="min-w-[320px] align-middle">
                     <Link href={`/stats/games/${game.slug}`} className="flex items-center gap-3">
                       {gameImage(game, 38)}
                       <span className="min-w-0">
@@ -662,7 +743,7 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
                     </Link>
                   </TableCell>
                   {dataColumns.map((column) => (
-                    <TableCell key={`${game.universeId}-${column}`} className={cn(isRightAlignedColumn(column) && "text-right", ["created", "updated", "statsRefresh"].includes(column) && "text-xs text-muted", column === "playing" && "font-semibold")}>
+                    <TableCell key={`${game.universeId}-${column}`} className={cn(statsColumnCellClass(column), ["created", "updated", "statsRefresh"].includes(column) && "text-xs text-muted", column === "playing" && "font-semibold")}>
                       {renderStatsColumnValue(game, column)}
                     </TableCell>
                   ))}
@@ -741,9 +822,7 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Stats", href: "/stats" },
-    { label: "Games", href: "/stats/games" },
-    ...(game.genre ? [{ label: game.genre, href: `/stats/games?genre=${encodeURIComponent(game.genre)}` }] : []),
-    ...(game.subgenre ? [{ label: game.subgenre, href: null }] : [])
+    { label: "Games", href: "/stats/games" }
   ];
   return (
     <div className="stats-surface space-y-5">
