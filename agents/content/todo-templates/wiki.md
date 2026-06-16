@@ -33,7 +33,7 @@ Workspace: `tmp/content-workspace/<game-slug>/wiki/`
 
 - [ ] Write `final.json` in the `wiki_pages` shape.
 - [ ] Write or update the companion game description when the rendered summary needs it.
-- [ ] Keep `tips_md` short, specific, and practical.
+- [ ] Keep `tips_md` to exactly 3-4 short, specific, practical gameplay tips.
 - [ ] Write verified `controls_json`; if controls cannot be verified, mark the wiki blocked instead of complete.
 
 ## Verify

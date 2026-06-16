@@ -491,6 +491,8 @@ If the visible game summary is empty or weak, the wiki workflow must update `rob
 
 Wiki page work should not rewrite catalog-page blurbs. A wiki workflow owns game-level copy such as `meta_description`, `tips_md`, researched `controls_json`, and any needed companion `roblox_universes.game_description_md`; related catalog summaries should already come from each catalog page's `wiki_md`. If those blurbs are weak, switch to the matching catalog or game-catalog workflow for that one catalog page instead of patching them inside the wiki pass.
 
+For wiki pages, `tips_md` must stay tight: exactly 3-4 concrete gameplay tips, no fewer and no more. Each tip should help a player make one in-game decision, avoid one mistake, or understand one core system. Do not turn gameplay tips into a long checklist.
+
 For catalog-style pages, `description_json` is the section-level context layer when item cards are divided into meaningful sections. Keep each entry short, usually one to three useful sentences, and place the explanation near the card section it supports. Do not repeat those same notes later in `description_md`.
 
 ## 5. Run The FLOW Pass
@@ -587,7 +589,7 @@ For wiki pages, also check:
 - title, meta description, and canonical metadata
 - visible game summary from `roblox_universes.game_description_md`
 - verified controls rendered from `controls_json`
-- practical gameplay tips
+- exactly 3-4 practical gameplay tips
 - related catalog sections and catalog-card images when catalogs exist
 - codes, events, tools, articles, checklists, quizzes, media, badges, passes, servers, and developer sections that should appear or be absent based on local data
 

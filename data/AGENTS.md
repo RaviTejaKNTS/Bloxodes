@@ -58,6 +58,9 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
   - Dataset-backed Untitled Boxing Game wiki/catalog content, including styles, gloves, emotes, knockout effects, and titles.
   - Matching style, glove, and knockout effect images live under `apps/web/public/Untitled Boxing Game/` where clean row-level art exists. Emotes and titles stay text-only unless clean row-level captures are available.
   - Keep catalogs focused on durable style/cosmetic/title systems. Do not add live trade values, manual active-code lists, gamepasses, badges, servers, or current event reward-track planning here.
+- `data/Push Rock for Brainrots/*`
+  - Dataset-backed Push Rock for Brainrots wiki/catalog content, including Brainrots, rocks/gates, and upgrades.
+  - Matching source-backed images live under `apps/web/public/Push Rock for Brainrots/` by collection folder. Keep gamepasses and generic Hunter mentions out of these datasets unless row-level, player-useful facts are available.
 - `data/Fisch/fish.json`
   - Fisch catalog content.
 - `data/Color Codes/roblox-color-codes.json`

@@ -76,7 +76,7 @@ Inspect the wiki row, Roblox universe row, and live related sections before writ
 
 The wiki must answer the minimum player questions: what the game is, what a normal session looks like, which systems drive progress, what a new or returning player should check first, which researched and verified controls exist, which related sections exist locally, and which details are better left to related cards.
 
-Keep `tips_md` short, practical, and game-specific. A good tip makes one clear point and gives enough context for the reader to know why it matters. Avoid generic advice that could fit any Roblox game.
+Keep `tips_md` to exactly 3-4 short, practical, game-specific bullets. Do not write fewer than 3 tips or more than 4 tips. A good tip makes one clear point and gives enough context for the reader to know why it matters. Avoid generic advice that could fit any Roblox game.
 
 Research controls as a required data point. Write accurate controls into `controls_json` and record the verification source or in-game check in `research-notes.md`. Do not guess generic Roblox controls. If useful controls cannot be verified, mark the wiki blocked or `needs controls research`; do not call it complete with an empty controls array.
 

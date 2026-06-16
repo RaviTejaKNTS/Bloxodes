@@ -277,12 +277,14 @@ function formatKeyLabel(value: string): string {
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
-function summarizeWords(value: string | null, wordLimit = 100): string | null {
-  const normalized = normalizeText(value);
+function firstMarkdownParagraph(value?: string | null): string | null {
+  const normalized = normalizeMarkdownText(value);
   if (!normalized) return null;
-  const words = normalized.split(/\s+/).filter(Boolean);
-  if (words.length <= wordLimit) return normalized;
-  return `${words.slice(0, wordLimit).join(" ")}…`;
+  const firstParagraph = normalized
+    .split(/\n\s*\n/)
+    .map((paragraph) => normalizeText(markdownToPlainText(paragraph)))
+    .find((paragraph): paragraph is string => Boolean(paragraph));
+  return firstParagraph ?? null;
 }
 
 function summarizeCardText(value: string | null | undefined, fallback: string): string {
@@ -299,7 +301,7 @@ function getUniverseLabel(page: WikiPageContent): string {
 }
 
 function getSummary(page: WikiPageContent): string | null {
-  return summarizeWords(page.universe_game_description_md ? markdownToPlainText(page.universe_game_description_md) : null, 100);
+  return firstMarkdownParagraph(page.universe_game_description_md);
 }
 
 function getHeroImage(page: WikiPageContent, related: WikiRelatedData): string | null {
@@ -1461,7 +1463,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
               ) : null}
 
               {summary ? (
-                <p className="max-w-3xl text-base leading-7 text-foreground md:text-lg">
+                <p className="max-w-3xl text-[1.08rem] leading-[1.85] tracking-[0.012em] text-foreground/90 md:text-[1.14rem] md:leading-[1.95] md:tracking-[0.014em]">
                   {summary}
                 </p>
               ) : null}

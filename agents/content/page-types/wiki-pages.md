@@ -105,7 +105,7 @@ Use a separate page freshness label for Bloxodes content, such as the existing u
 
 ## What To Put In Tips
 
-`tips_md` should be short practical bullets specific to the game.
+`tips_md` must contain exactly 3-4 short, concrete gameplay tips specific to the game. Do not write fewer than 3 tips, more than 4 tips, or a long checklist that competes with related catalog cards.
 
 Even short wiki copy needs context. A tip should make one clear point, explain why it matters, and avoid jumping through several systems in one bullet.
 

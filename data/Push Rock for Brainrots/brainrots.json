@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "game": "Push Rock for Brainrots",
+    "collection": "brainrots",
+    "updatedAt": "2026-06-16",
+    "columns": [
+      "name",
+      "rarity",
+      "income",
+      "route",
+      "availability",
+      "catalogSection",
+      "cardSummary",
+      "image"
+    ],
+    "sources": [
+      {
+        "label": "Roblox official media",
+        "url": "https://www.roblox.com/games/75888315541325/Push-Rock-for-Brainrots",
+        "accessed": "2026-06-16"
+      },
+      {
+        "label": "YouTube gameplay: WORLDS FIRST MOST INSANE BRAINROT in Push Rock for Brainrots",
+        "url": "https://www.youtube.com/watch?v=AcqVum2IG1E",
+        "accessed": "2026-06-16"
+      },
+      {
+        "label": "YouTube gameplay: Starting OVER as NOOB with OP DIVINE in Push Rock For Brainrots",
+        "url": "https://www.youtube.com/watch?v=VfoboJQtyLA",
+        "accessed": "2026-06-16"
+      }
+    ]
+  },
+  "items": [
+    {
+      "name": "Strawberry Elephant",
+      "slug": "strawberry-elephant",
+      "rarity": "Exotic",
+      "income": "Not listed",
+      "route": "Rock rescue lane",
+      "availability": "Rescuable",
+      "catalogSection": "Exotic Brainrots",
+      "cardSummary": "Strawberry Elephant is an Exotic rescue target behind a rock lane. Treat it as an early high-rarity goal once basic rescues stop moving your Cash fast enough.",
+      "image": "/Push%20Rock%20for%20Brainrots/Brainrots/strawberry-elephant.jpg",
+      "sourcePage": "https://www.roblox.com/games/75888315541325/Push-Rock-for-Brainrots"
+    },
+    {
+      "name": "Quesadilla Crocodilla",
+      "slug": "quesadilla-crocodilla",
+      "rarity": "Divine",
+      "income": "$9999.9SX/s",
+      "route": "Base / rescue showcase",
+      "availability": "Rescuable",
+      "catalogSection": "Divine Brainrots",
+      "cardSummary": "Quesadilla Crocodilla is a Divine Brainrot with a huge displayed income rate, making it a late-route Cash target.",
+      "image": "/Push%20Rock%20for%20Brainrots/Brainrots/quesadilla-crocodilla.jpg",
+      "sourcePage": "https://www.youtube.com/watch?v=AcqVum2IG1E"
+    },
+    {
+      "name": "Trollface",
+      "slug": "trollface",
+      "rarity": "Divine",
+      "income": "$1.10d/s",
+      "route": "Rock rescue route",
+      "availability": "Rescuable",
+      "catalogSection": "Divine Brainrots",
+      "cardSummary": "Trollface is shown as a Divine Brainrot with a much higher displayed cash rate than early visible pulls.",
+      "image": "/Push%20Rock%20for%20Brainrots/Brainrots/trollface.jpg",
+      "sourcePage": "https://www.youtube.com/watch?v=VfoboJQtyLA"
+    },
+    {
+      "name": "Esok Sekolah",
+      "slug": "esok-sekolah",
+      "rarity": "Secret",
+      "income": "Not listed",
+      "route": "Hill rock path",
+      "availability": "Rescuable",
+      "catalogSection": "Secret Brainrots",
+      "cardSummary": "Esok Sekolah sits in the Secret tier and fits as a rarer rescue goal once your Strength can handle longer rock routes.",
+      "image": "/Push%20Rock%20for%20Brainrots/Brainrots/esok-sekolah.jpg",
+      "sourcePage": "https://www.roblox.com/games/75888315541325/Push-Rock-for-Brainrots"
+    },
+    {
+      "name": "Elephant",
+      "slug": "elephant",
+      "rarity": "Secret",
+      "income": "Not listed",
+      "route": "Rock rescue lane",
+      "availability": "Rescuable",
+      "catalogSection": "Secret Brainrots",
+      "cardSummary": "Elephant is a Secret Brainrot target. Keep it separate from Strawberry Elephant when comparing rarity and route value.",
+      "image": "/Push%20Rock%20for%20Brainrots/Brainrots/elephant.jpg",
+      "sourcePage": "https://www.roblox.com/games/75888315541325/Push-Rock-for-Brainrots"
+    }
+  ]
+}

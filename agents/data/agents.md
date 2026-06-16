@@ -159,6 +159,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Local Untitled Boxing Game datasets for wiki/catalog page work, including styles, gloves, emotes, knockout effects, and titles.
   - Matching style, glove, and knockout effect images live under `apps/web/public/Untitled Boxing Game/` where clean item art exists. Emotes and titles stay text-only unless clean row-level captures are available.
   - Keep UBG catalogs limited to durable style, cosmetic, and title systems. Do not store live trade values, manual active-code data, gamepasses, badges, servers, or current event reward tracks here.
+- `data/Push Rock for Brainrots/*.json`
+  - Local Push Rock for Brainrots datasets for wiki/catalog page work, including Brainrots, rocks/gates, and upgrades.
+  - Matching row or system images live under `apps/web/public/Push Rock for Brainrots/` by collection folder. Keep gamepasses, badges, developer products, and generic Hunter mentions out of the datasets unless the row-level facts are source-backed and useful to players.
 - `data/Wizard Alchemy/quiz.json`
   - Local Wizard Alchemy quiz question pool for `/quizzes/wizard-alchemy`.
   - Quiz pools use `QuizData` shape with `easy`, `medium`, and `hard` arrays. Keep easy questions beginner-friendly, make hard questions pro-level, and vary question rhythm naturally.

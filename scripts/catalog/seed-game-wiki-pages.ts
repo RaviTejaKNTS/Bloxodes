@@ -161,6 +161,43 @@ const WIKI_COPY: Record<string, WikiCopy> = {
     ],
     coverImage: null
   },
+  "push-rock-for-brainrots": {
+    metaDescription:
+      "Push Rock for Brainrots wiki hub with Brainrots, rock gates, upgrades, rebirths, controls, and Roblox game details.",
+    gameDescriptionMd:
+      "Push Rock for Brainrots is a Roblox rescue and tycoon game where rocks are the main gate between you and better Brainrots. A normal run is simple: push a rock, open the lane, rescue the Brainrot behind it, bring that Brainrot home, and use the Cash income to get stronger for the next push.\n\nThe loop gets harder as the route moves into stronger rarity gates. Strength decides whether a rock is worth fighting through, Carry decides how many rescued Brainrots you can move before returning home, and Rebirth turns a strong cash run into longer-term progress. Hunters add pressure while you are moving through the route, so cash upgrades and clean return trips matter more than just chasing the rarest visible Brainrot.\n\nStart by learning which rarity gate you are pushing toward, then use Brainrot income and upgrade panels to decide whether to spend Cash on Strength, Carry, or a Rebirth reset.",
+    tipsMd: `- Upgrade Strength first when a rock gate barely moves. Bigger rocks are the main blocker between early rescues and stronger rarity lanes.
+- Upgrade Carry when return trips start wasting time. More Carry means you can bring home more rescued Brainrots before heading back to base.
+- Treat Rebirth as a reset decision. The panel gives stronger long-term rewards, but you still need enough Cash to rebuild after using it.
+- Watch for Hunters while pushing or carrying Brainrots. A risky route only helps if you actually bring the rescue home and bank the Cash.`,
+    controlsJson: [
+      {
+        action: "Move",
+        desktop: "W / A / S / D or arrow keys",
+        mobile: "Virtual joystick",
+        console: "Left stick"
+      },
+      {
+        action: "Jump",
+        desktop: "Space",
+        mobile: "Jump button",
+        console: "A"
+      },
+      {
+        action: "Push rocks",
+        desktop: "Walk into the rock lane",
+        mobile: "Move into the rock lane",
+        console: "Move into the rock lane"
+      },
+      {
+        action: "Use prompts, shop, upgrades, and rebirth",
+        desktop: "Click the on-screen button or prompt",
+        mobile: "Tap the on-screen button or prompt",
+        console: "Use the on-screen prompt"
+      }
+    ],
+    coverImage: "https://tr.rbxcdn.com/180DAY-78502ae7ad5eb1cd679d9d5d755901f8/512/512/Image/Png/noFilter"
+  },
   "steal-a-brainrot": {
     metaDescription: "Steal a Brainrot wiki hub with brainrots, rebirths, traits, mutations, gears, rituals, machines, and lucky blocks.",
     tipsMd: `- Start with the brainrots catalog when you need income, cost, rarity, status, and release details.

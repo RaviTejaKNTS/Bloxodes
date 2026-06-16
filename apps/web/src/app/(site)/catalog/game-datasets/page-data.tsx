@@ -1442,6 +1442,27 @@ const PET_SIMULATOR_99_SHINY_RELIC_SECTION_ORDER = [
   "World 4 - Fantasy World"
 ];
 
+const PUSH_ROCK_FOR_BRAINROTS_BRAINROT_SECTION_ORDER = [
+  "Exotic Brainrots",
+  "Divine Brainrots",
+  "Secret Brainrots"
+];
+const PUSH_ROCK_FOR_BRAINROTS_ROCK_SECTION_ORDER = [
+  "Push obstacles",
+  "Rarity gates",
+  "High-rarity gates"
+];
+const PUSH_ROCK_FOR_BRAINROTS_UPGRADE_SECTION_ORDER = ["Core upgrades", "Reset upgrades"];
+const PUSH_ROCK_FOR_BRAINROTS_SOURCE_KEYS = [
+  "catalogSection",
+  "sortOrder",
+  "sourcePage",
+  "sourceStatus",
+  "sourceConfidence",
+  "sourceCheckedAt",
+  "verificationNote"
+];
+
 const PET_SIMULATOR_99_HIDDEN_KEYS = [
   "catalogSection",
   "sortOrder",
@@ -3217,6 +3238,36 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     additionalColumns: ["catalogSection"],
     maxStats: 5,
     hideImages: true
+  },
+  "push-rock-for-brainrots-brainrots": {
+    groupKey: "catalogSection",
+    groupLabel: "Brainrot rarity",
+    sectionOrder: PUSH_ROCK_FOR_BRAINROTS_BRAINROT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: PUSH_ROCK_FOR_BRAINROTS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 4,
+    subtitleKeys: ["rarity"]
+  },
+  "push-rock-for-brainrots-rocks": {
+    groupKey: "catalogSection",
+    groupLabel: "Rock route",
+    sectionOrder: PUSH_ROCK_FOR_BRAINROTS_ROCK_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: PUSH_ROCK_FOR_BRAINROTS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 4,
+    subtitleKeys: ["gateType"]
+  },
+  "push-rock-for-brainrots-upgrades": {
+    groupKey: "catalogSection",
+    groupLabel: "Upgrade type",
+    sectionOrder: PUSH_ROCK_FOR_BRAINROTS_UPGRADE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: PUSH_ROCK_FOR_BRAINROTS_SOURCE_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["upgradeType"]
   }
 };
 

@@ -208,7 +208,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - `research-notes.md` records the rendered wiki contract: which visible sections come from `wiki_pages`, linked `roblox_universes`, and related page tables.
 - The visible game summary from `roblox_universes.game_description_md` is useful, or the reason it is intentionally blank is recorded.
 - The wiki answers what the game is, what a normal session looks like, which systems matter, and what a new or returning player should check first.
-- Tips are specific enough to be useful.
+- Tips are specific enough to be useful and `tips_md` contains exactly 3-4 concrete gameplay tips, no fewer and no more.
 - Controls are researched and filled when the wiki is completed. If accurate controls cannot be verified, the wiki is blocked or needs controls research; it is not complete.
 - Related codes, events, catalogs, tools, articles, checklists, quizzes, media, badges, passes, servers, and developer sections have been checked for local existence.
 - Related sections can carry live detail, but the wiki copy must still give context.

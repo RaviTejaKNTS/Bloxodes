@@ -346,6 +346,14 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
     dataDir: "Untitled Boxing Game",
     universeNames: ["Untitled Boxing Game", "untitled boxing game"],
     collections: ["styles", "gloves", "emotes", "knockout-effects", "titles"]
+  },
+  {
+    gameSlug: "push-rock-for-brainrots",
+    gameName: "Push Rock for Brainrots",
+    universeId: 10138988383,
+    dataDir: "Push Rock for Brainrots",
+    universeNames: ["Push Rock for Brainrots", "[🔥] Push Rock for Brainrots!"],
+    collections: ["brainrots", "rocks", "upgrades"]
   }
 ];
 
@@ -516,7 +524,9 @@ const COLLECTION_FOCUS: Record<string, string> = {
   "night-stealing": "night raid tools, defensive pets, protective props, visibility helpers, and steal-limit choices",
   wraps: "rarity, source route, weapon scope, availability, and animated or special cosmetic notes",
   "wizard-hats": "HP bonuses, Gold costs, lava resistance, source locations, and defensive gear value",
-  zones: "zone order, rarity, kick power bands, reward bands, mutation notes, and return-risk context"
+  zones: "zone order, rarity, kick power bands, reward bands, mutation notes, and return-risk context",
+  rocks: "push obstacles, rarity gates, unlocked Brainrot areas, and route progress",
+  upgrades: "strength, carry capacity, rebirth effects, costs, and priority"
 };
 
 const FIELD_LABELS: Record<string, string> = {
