@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "title": "Animal Hospital rooms and camera zones data",
+    "updatedAt": "2026-06-17",
+    "sources": [
+      {
+        "label": "Roblox - Animal Hospital",
+        "url": "https://www.roblox.com/games/78515283254292/Animal-Hospital",
+        "accessed": "2026-06-17"
+      },
+      {
+        "label": "YouTube - Animal Hospital - FULL GAME + ALL ANOMALIES | Roblox",
+        "url": "https://www.youtube.com/watch?v=VxcJQcE14cw",
+        "accessed": "2026-06-17"
+      },
+      {
+        "label": "YouTube - Roblox: Animal Hospital[Anomaly] [All Anomalies]",
+        "url": "https://www.youtube.com/watch?v=Mv6KhgFidLI",
+        "accessed": "2026-06-17"
+      }
+    ],
+    "itemCount": 5,
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "shift",
+      "roomRole",
+      "objective",
+      "anomalyRisk",
+      "warningSigns",
+      "safeAction",
+      "failConsequence",
+      "relatedPatientOrStory",
+      "cardSummary",
+      "sourcePage",
+      "sourceTimestamp",
+      "verificationNote",
+      "imageStatus"
+    ]
+  },
+  "items": [
+    {
+      "name": "Heart Monitor Room",
+      "slug": "heart-monitor-room",
+      "image": null,
+      "catalogSection": "Treatment rooms",
+      "shift": "Shift 3",
+      "roomRole": "Treatment station",
+      "objective": "Check the patient's heart on the monitor sequence.",
+      "anomalyRisk": "Normal treatment can stall the run if the patient check is ignored or left incomplete.",
+      "warningSigns": "The room shows a heart-monitor screen and a patient-check sequence.",
+      "safeAction": "Stay on the heart-monitor prompt until the patient check completes before moving to the next room.",
+      "failConsequence": "Patient-care failure or blocked shift progress.",
+      "relatedPatientOrStory": "Shift 3 patient treatment",
+      "cardSummary": "The Heart Monitor Room starts the Shift 3 treatment chain. It matters because the player has to finish the monitor check before the later treatment rooms make sense.",
+      "sourcePage": "https://www.youtube.com/watch?v=VxcJQcE14cw",
+      "sourceTimestamp": "04:38",
+      "verificationNote": "Video description names Heart Monitor Room at 04:38; storyboard frames around the timestamp show the heart-monitor room and monitor minigame.",
+      "imageStatus": "No clean production image; YouTube storyboard crop is low-resolution and UI-covered."
+    },
+    {
+      "name": "X-Ray Room",
+      "slug": "x-ray-room",
+      "image": null,
+      "catalogSection": "Treatment rooms",
+      "shift": "Shift 3",
+      "roomRole": "Treatment station",
+      "objective": "Move the patient through the X-ray step after the heart-monitor check.",
+      "anomalyRisk": "Skipping the scan step can leave the treatment sequence unresolved.",
+      "warningSigns": "The chapter begins at the X-Ray Room door after the monitor check.",
+      "safeAction": "Enter the X-Ray Room when prompted and finish the scan step before continuing.",
+      "failConsequence": "Blocked treatment progress.",
+      "relatedPatientOrStory": "Shift 3 patient treatment",
+      "cardSummary": "The X-Ray Room is the middle treatment stop in Shift 3. It is useful as a route marker because it comes after the heart monitor and before surgery.",
+      "sourcePage": "https://www.youtube.com/watch?v=VxcJQcE14cw",
+      "sourceTimestamp": "05:10",
+      "verificationNote": "Video description names X-Ray Room at 05:10; storyboard frames around 05:10 show the room door and the next medical-station sequence.",
+      "imageStatus": "No clean production image; available storyboard evidence is too compressed for a catalog card."
+    },
+    {
+      "name": "Surgery Room",
+      "slug": "surgery-room",
+      "image": null,
+      "catalogSection": "Treatment rooms",
+      "shift": "Shift 3",
+      "roomRole": "Treatment station",
+      "objective": "Treat the patient on the surgery table during the final Shift 3 room step.",
+      "anomalyRisk": "The patient is exposed on the surgery table, so leaving the sequence unfinished risks a failed treatment chain.",
+      "warningSigns": "The room has an operating table, medical lights, and a patient lying on the table.",
+      "safeAction": "Complete the surgery-room treatment prompt before returning to normal shift movement.",
+      "failConsequence": "Patient-care failure or blocked shift progress.",
+      "relatedPatientOrStory": "Shift 3 patient treatment",
+      "cardSummary": "The Surgery Room closes the main Shift 3 treatment route. It is the most obvious room to remember because the patient is already on the operating table.",
+      "sourcePage": "https://www.youtube.com/watch?v=VxcJQcE14cw",
+      "sourceTimestamp": "05:51",
+      "verificationNote": "Video description names Surgery Room at 05:51; storyboard frames around the timestamp show the patient on an operating table.",
+      "imageStatus": "No clean production image; available storyboard evidence has UI and YouTube compression."
+    },
+    {
+      "name": "Camera 1",
+      "slug": "camera-1",
+      "image": null,
+      "catalogSection": "Camera zones",
+      "shift": "Camera anomaly segment",
+      "roomRole": "Camera feed",
+      "objective": "Check a monitored hospital zone for an anomaly instead of walking into the room first.",
+      "anomalyRisk": "Camera-feed anomalies can raise the hospital incident count if they are ignored.",
+      "warningSigns": "The CCTV-style view shows the monitored zone with a shift report and incident count nearby.",
+      "safeAction": "Use the camera interface to inspect the feed and respond to the anomaly prompt before leaving it unresolved.",
+      "failConsequence": "Hospital death or anomaly count can increase.",
+      "relatedPatientOrStory": "Camera anomaly",
+      "cardSummary": "Camera 1 is a monitored zone rather than a normal room. It matters because the player has to read the feed and react from the camera interface.",
+      "sourcePage": "https://www.youtube.com/watch?v=Mv6KhgFidLI",
+      "sourceTimestamp": "00:00",
+      "verificationNote": "All-anomalies source names Camera 1 at 00:00; storyboard frames show CCTV-style hospital feeds and shift-report incident tracking.",
+      "imageStatus": "No clean production image; storyboard frames are low-resolution and UI-heavy."
+    },
+    {
+      "name": "Camera 2",
+      "slug": "camera-2",
+      "image": null,
+      "catalogSection": "Camera zones",
+      "shift": "Camera anomaly segment",
+      "roomRole": "Camera feed",
+      "objective": "Check a second monitored hospital zone for a separate camera anomaly.",
+      "anomalyRisk": "A second camera feed can carry a different anomaly check from Camera 1.",
+      "warningSigns": "The camera interface stays active while the feed changes to another hospital view.",
+      "safeAction": "Inspect the second feed separately and use the emergency or interaction prompt if the anomaly appears.",
+      "failConsequence": "Hospital death or anomaly count can increase.",
+      "relatedPatientOrStory": "Camera anomaly",
+      "cardSummary": "Camera 2 should stay separate from Camera 1 because it appears as its own camera anomaly check. Treat it as a second monitored zone until later gameplay proves the feeds share the same room.",
+      "sourcePage": "https://www.youtube.com/watch?v=Mv6KhgFidLI",
+      "sourceTimestamp": "00:38",
+      "verificationNote": "All-anomalies source names Camera 2 at 00:38; full-game source also has a Camera Anomalies chapter at 08:11.",
+      "imageStatus": "No clean production image; storyboard frames are low-resolution and UI-heavy."
+    }
+  ]
+}

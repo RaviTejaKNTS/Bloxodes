@@ -1463,6 +1463,24 @@ const PUSH_ROCK_FOR_BRAINROTS_SOURCE_KEYS = [
   "verificationNote"
 ];
 
+const ANIMAL_HOSPITAL_ANOMALY_SECTION_ORDER = [
+  "Camera and surveillance anomalies",
+  "Patient and room hazards",
+  "Choice and ritual events",
+  "Chase and hostile encounters"
+];
+const ANIMAL_HOSPITAL_ROOM_SECTION_ORDER = ["Treatment rooms", "Camera zones"];
+const ANIMAL_HOSPITAL_SOURCE_KEYS = [
+  "aliases",
+  "catalogSection",
+  "sortOrder",
+  "sourcePage",
+  "sourceTimestamp",
+  "sourceStatus",
+  "verificationNote",
+  "imageStatus"
+];
+
 const VIOLENCE_DISTRICT_KILLER_SECTION_ORDER = [
   "Starter and ambush pressure",
   "Stealth and chase builders",
@@ -3322,6 +3340,28 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     additionalColumns: ["catalogSection", "cardSummary"],
     maxStats: 5,
     subtitleKeys: ["upgradeType"]
+  },
+  "animal-hospital-anomalies": {
+    groupKey: "catalogSection",
+    groupLabel: "Anomaly type",
+    sectionOrder: ANIMAL_HOSPITAL_ANOMALY_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ANIMAL_HOSPITAL_SOURCE_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["threatType", "location"],
+    hideImages: true
+  },
+  "animal-hospital-rooms": {
+    groupKey: "catalogSection",
+    groupLabel: "Area type",
+    sectionOrder: ANIMAL_HOSPITAL_ROOM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ANIMAL_HOSPITAL_SOURCE_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["shift", "roomRole"],
+    hideImages: true
   },
   "violence-district-killers": {
     groupKey: "catalogSection",

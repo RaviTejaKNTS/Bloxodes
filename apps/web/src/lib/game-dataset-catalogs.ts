@@ -362,6 +362,14 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
     dataDir: "Push Rock for Brainrots",
     universeNames: ["Push Rock for Brainrots", "[🔥] Push Rock for Brainrots!"],
     collections: ["brainrots", "rocks", "upgrades"]
+  },
+  {
+    gameSlug: "animal-hospital",
+    gameName: "Animal Hospital",
+    universeId: 10148749921,
+    dataDir: "Animal Hospital",
+    universeNames: ["Animal Hospital", "Animal Hospital (Anomaly)", "Animal Hospital (Anomaly) 🧪"],
+    collections: ["anomalies", "rooms"]
   }
 ];
 
@@ -413,6 +421,7 @@ const COLLECTION_LABEL_OVERRIDES: Record<string, string> = {
 
 const COLLECTION_FOCUS: Record<string, string> = {
   abilities: "what each ability does, where it comes from, and what it changes in play",
+  anomalies: "warning signs, encounter type, location, best action, and consequence",
   accessories: "rarity, type, stats, obtainment, and build value",
   "accessory-shop": "chests, accessory shop items, prices, rarity chances, and obtainment notes",
   "aura-stages": "aura progression, stage requirements, visuals, and buffs",
@@ -537,6 +546,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   "wizard-hats": "HP bonuses, Gold costs, lava resistance, source locations, and defensive gear value",
   zones: "zone order, rarity, kick power bands, reward bands, mutation notes, and return-risk context",
   rocks: "push obstacles, rarity gates, unlocked Brainrot areas, and route progress",
+  rooms: "room roles, shift objectives, anomaly risks, warning signs, and safe actions",
   upgrades: "strength, carry capacity, rebirth effects, costs, and priority"
 };
 
