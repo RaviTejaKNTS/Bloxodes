@@ -12,19 +12,26 @@ For catalog and game-catalog pages, also open the player-usefulness gate and req
 
 FLOW means the public copy moves like a player explanation:
 
-1. Start with the collection or mechanic in normal game language.
+1. Start with the game items or mechanic in normal game language.
 2. Show the primary cards or table early.
 3. Use `description_json` for short notes tied to card sections.
 4. Use `description_md` for the whole system: how it works, how players get or use the items, which mistakes matter, and what the cards mean in practice.
-5. Use `how_it_works_md` to explain how to read the data without sounding like field commands.
-6. Use FAQs only for real follow-up questions.
-7. End with a page where a reader can name what to do next in the game.
+5. Use FAQs only for real follow-up questions.
+6. End with a page where a reader can name what to do next in the game.
+
+For wiki catalog pages, do not create a separate `how_it_works_md` section. Leave that field empty and fold useful gameplay interpretation into `description_md`, `description_json`, card labels, or FAQs. Avoid headings like `How to read this page`, `How to use this list`, or `How to scan the cards`; readers can understand the page UI, and public copy should focus on the game and items.
 
 The pass should change `final.json` when the structure is weak. Do not only say the draft is bad. Rewrite it.
 
+For articles, FLOW should simplify before it expands. Read the title, then make the body move from that exact player need to the answer in the fewest clear sections possible. A short complete article is good. Do not add headings, definitions, conclusions, or extra background just to make the article feel longer.
+
+For how-to articles, start with the action or steps. If a definition is needed, keep it to one or two setup sentences before the how-to. Merge small side notes into the nearest useful section, cut anything that does not support the title, and keep tables or bullets only when they make the answer easier to scan.
+
 For catalog and game-catalog pages, also read the approved title as a promise. If the title says `how to get them`, `locations`, `drops`, `chances`, `what they do`, `bonuses`, `value`, or another specific answer, the FLOW pass must make sure the body actually answers it. Do not leave the promise trapped in a card column when the title needs a real explanation.
 
-Read the approved player task the same way. If the page is meant to help players buy weapons, it needs the buy path. If it is meant to help players upgrade weapons, it needs the upgrade process. If it is meant to help players choose a class, it needs role and unlock context. Remove headings that explain internal uncertainty instead of helping the player act.
+Read the approved player task the same way. If players are buying weapons, explain the buy path. If players are upgrading weapons, explain the upgrade process. If players are choosing a class, give role and unlock context. Remove headings that explain internal uncertainty instead of helping the player act.
+
+For wiki catalog pages, public copy must stay inside the game. Remove any sentence that talks about sources, research, workflow, dataset state, API behavior, verification gaps, or what could not be found. The finished page should sound like a Roblox player who understands the game and is helping another player, including someone new to the game. Do not use analogies or em dashes.
 
 ## Catalog FLOW Rules
 
@@ -40,7 +47,7 @@ For catalog and game-catalog pages, `description_md` must not be a second set of
 - What should I save, farm, buy, open, unlock, equip, trade, or skip?
 - Which exact facts from the required fact matrix should be visible before the reader needs another guide?
 
-Every catalog or game-catalog `description_md` should include at least one useful action section when the collection has an action behind it. That section can be a how-to, use, unlock, farm, obtain, find, hatch, roll, craft, grow, redeem, equip, travel, or compare section. If the collection is purely cosmetic or passive, the copy should still explain how players actually encounter or apply it.
+Every catalog or game-catalog `description_md` should include at least one useful action section when the items or mechanic involve a player action. That section can be a how-to, use, unlock, farm, obtain, find, hatch, roll, craft, grow, redeem, equip, travel, or compare section. If the items are purely cosmetic or passive, the copy should still explain how players actually encounter or apply them.
 
 Good section ideas:
 
@@ -95,12 +102,11 @@ During the FLOW pass, read the page from top to bottom and ask whether the next 
 
 A strong catalog flow often looks like this:
 
-1. `intro_md`: what the collection is and why it matters in the game.
+1. `intro_md`: what the game items or mechanic are and how players interact with them.
 2. Cards/table: the data the reader came for.
 3. `description_json`: short section notes near each card group.
 4. `description_md`: whole-system explanation with a clear action section and practical context.
-5. `how_it_works_md`: how to interpret the visible card/table fields in player language.
-6. `faq_json`: real questions the card data naturally creates.
+5. `faq_json`: real questions the card data naturally creates.
 
 Do not make `description_md` chase each card section. If the cards are already split into `Starter Instinct`, `Main training climb`, and `V2 preparation`, the markdown below should not become three more tiny sections that say the same thing in larger text. It should explain how to train Instinct, what the EXP milestones mean, and how normal Instinct connects to Instinct V2.
 
@@ -116,15 +122,22 @@ Do not polish the page into lifeless help-center copy. Do not turn it into force
 
 Before the pass is complete, confirm:
 
+- For articles, the body answers the title directly with the smallest complete outline.
+- For articles, how-to topics start with the action or steps instead of a broad `What is...` setup.
+- For articles, weak headings, padded conclusions, and non-core sections have been removed or merged.
 - `description_md` explains the whole page, not individual card sections.
-- The page has a useful action/how-to/use section when the collection has player action behind it.
-- The visible title and `seo_title` promise is answered by the cards, `description_md`, `how_it_works_md`, and FAQs.
+- `intro_md` is short, engaging, and usually one compact paragraph.
+- The page has a useful action/how-to/use section when the items or mechanic involve player action.
+- The visible title and `seo_title` promise is answered by the cards, `description_md`, `description_json`, and FAQs.
+- `description_md` headings are SEO-friendly player questions or actions, not generic field labels.
+- Internal links, if used, point naturally to same-universe Bloxodes pages and are spaced where they add context.
+- FAQs are usually 3-4 items max and do not repeat facts already answered on the page.
 - Headings explain what the section helps the reader understand and are specific enough for search intent. Replace vague headings such as `How classes work` with a sharper decision phrase such as `Where classes unlock and why stock matters`.
 - The first paragraph under a heading deepens the idea instead of repeating the heading.
 - Paragraphs do not mix unrelated concepts.
 - At least one list, table, or numbered process is used when it would explain faster than prose.
 - The copy moves from context to action to interpretation to caveats.
-- The page does not mention the website, catalog, dataset, or internal process.
+- The page does not mention the website, catalog, dataset, sources, research, API, verification, missing evidence, or internal process.
 - The draft has been rewritten where needed, not merely judged.
 
 If the FLOW pass changes public fields, update `final.json` directly and record the change in `research-notes.md` under `Implementation notes` or `Writing angle`.

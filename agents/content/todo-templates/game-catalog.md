@@ -14,13 +14,14 @@ Workspace: `tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/`
 
 - [ ] Confirm editorial game slug, universe ID, collection slug, stable code, route, and existing `wiki_catalog_pages` row.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
+- [ ] Check production DB or public production URLs first for an existing wiki catalog, catalog page, article, tool, or related page that already covers this collection or topic.
 - [ ] Confirm this is a durable in-game item collection, UGC exception, or stable row-level system, not a temporary reward track or platform metadata.
 - [ ] Inspect `data/<Game>/`, route/config support, existing local images, and renderer behavior.
 - [ ] Check whether discovery notes already ranked this catalog or named blockers.
 
 ## Research And Data
 
-- [ ] Explain what the collection does in the game and how players get/use/compare it.
+- [ ] Explain what the game items or mechanic do and how players get/use/compare them.
 - [ ] Complete player-usefulness gate: primary player task, decisions supported, and what the reader can do after reading.
 - [ ] Complete required fact matrix: reader need, required facts, source status, local data/card status, and public placement.
 - [ ] Complete competitor/source usefulness check when SEO or traffic potential matters.
@@ -35,7 +36,8 @@ Workspace: `tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/`
 ## Approval Gate
 
 - [ ] Propose visible title, matching `seo_title`, exact title promise, and required coverage. For wiki catalog pages, use `All <N> <Item Or Collection> in <Game>: <real player SEO question>` unless notes justify a simpler title.
-- [ ] Propose how every required fact will be answered in cards, tables, `description_md`, `how_it_works_md`, FAQ, or route changes.
+- [ ] Propose how every required fact will be answered in cards, tables, `description_md`, `description_json`, FAQ, or route changes.
+- [ ] Propose the public-copy plan: short gripping intro, game/items-only body, no public source/process language, natural same-universe links if useful, and 3-4 non-repeating FAQs.
 - [ ] Propose strongest grouping axis and why it fits the game.
 - [ ] Propose compact card shape using the production template: valid image if available, name/status, one short player-facing description, and usually 3-5 key-value facts.
 - [ ] Propose raw/long/internal fields to hide, including source notes, verification state, API/source caveats, long descriptions, raw arrays, nested stats, and strategy paragraphs.
@@ -47,9 +49,14 @@ Workspace: `tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/`
 - [ ] Write `final.json` with catalog fields and `wiki_md`.
 - [ ] Run FLOW pass and record it in `research-notes.md`.
 - [ ] Run final edit.
+- [ ] Confirm `intro_md` is short, engaging, and usually one compact paragraph.
+- [ ] Confirm public copy talks only about the game, items, mechanics, and in-game decisions.
+- [ ] Confirm public copy does not mention sources, research, workflow, dataset state, API behavior, verification gaps, or missing evidence.
+- [ ] Confirm any internal links are natural same-universe Bloxodes links, spaced where they add context, not collected in one special link section.
+- [ ] Confirm FAQ has 3-4 questions max unless notes explain why more are needed, and no FAQ repeats information already answered on the page.
 - [ ] Confirm `description_md` headings are specific and communicative, not generic labels such as `How <collection> works`, `Overview`, `Value`, or `Source`.
 - [ ] Confirm rendered cards follow the minimal card standard: no paragraphs, long move lists, raw caveats, full version history, or every available field in the default card.
-- [ ] Confirm every rendered default card has a short description unless research notes explain why the collection is pure data.
+- [ ] Confirm every rendered default card has a short description unless research notes explain why the item set is pure data.
 - [ ] Confirm rendered card values do not expose research/process wording such as `source estimate`, `needs in-game check`, `verification`, `partial`, `source-conflicted`, `reported by`, `dataset`, or `API`.
 - [ ] Confirm cards usually show 3-5 key-value facts; if more than 5 are visible, record why and prove the rendered card still scans cleanly.
 - [ ] Confirm rendered cards use only one colored status signal and one visually emphasized primary decision field.

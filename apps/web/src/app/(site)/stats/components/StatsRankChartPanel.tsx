@@ -7,10 +7,12 @@ import { XAxis } from "recharts/es6/cartesian/XAxis";
 import { YAxis } from "recharts/es6/cartesian/YAxis";
 import { LineChart } from "recharts/es6/chart/LineChart";
 import { ReferenceArea, ReferenceLine } from "recharts";
-import { Activity, CalendarDays, Maximize2, Minimize2, RefreshCw, RotateCcw, Trophy } from "lucide-react";
+import { Activity, CalendarDays, GitCompare, Maximize2, Minimize2, Plus, RefreshCw, RotateCcw, Trophy, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, type ChartConfig } from "@/components/ui/chart";
+import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -19,6 +21,8 @@ import { formatCompactNumber } from "@/lib/stats-format";
 type RankScopeKey = "global" | "genre" | "subgenre";
 type RangeKey = "1d" | "7d" | "14d" | "30d" | "90d";
 type ResolutionKey = "hourly" | "daily" | "weekly" | "monthly";
+const defaultChartRange: RangeKey = "14d";
+const defaultChartResolution: ResolutionKey = "hourly";
 
 type RankPoint = {
   label: string;
@@ -35,6 +39,8 @@ type RankPoint = {
 
 type RankPointForRender = RankPoint & {
   previousValue?: number | null;
+  comparison0Value?: number | null;
+  comparison1Value?: number | null;
 };
 
 type ChartAnnotation = {
@@ -70,8 +76,28 @@ type RankChartData = {
   resolution: ResolutionKey;
   points: RankPoint[];
   previousPoints?: RankPoint[];
+  comparisons?: RankComparison[];
   annotations?: ChartAnnotation[];
   summaries: RankSummary[];
+};
+
+type RankComparison = {
+  universeId: number;
+  name: string;
+  slug: string;
+  iconUrl: string | null;
+  points: RankPoint[];
+};
+
+type SearchResult = {
+  universeId: number;
+  name: string;
+  slug: string;
+  iconUrl: string | null;
+  playing: number | null;
+  visits: number | null;
+  genre: string | null;
+  subgenre: string | null;
 };
 
 const rankLabels: Record<RankScopeKey, string> = {
@@ -103,6 +129,7 @@ const rankColors: Record<RankScopeKey, string> = {
   genre: "var(--color-genreRank)",
   subgenre: "var(--color-subgenreRank)"
 };
+const comparisonColors = ["#ec4899", "#14b8a6"] as const;
 
 const resolutionLabels: Record<ResolutionKey, string> = {
   hourly: "Hourly",
@@ -116,8 +143,8 @@ const chartTabsListClass =
 const chartTabsTriggerClass =
   "h-7 rounded-sm px-2.5 text-xs font-semibold text-muted transition-colors hover:bg-secondary/70 hover:text-foreground data-[state=active]:bg-accent data-[state=active]:text-accent-foreground data-[state=active]:shadow-none";
 
-function rankCacheKey(range: RangeKey, resolution: ResolutionKey, previous: boolean) {
-  return `${range}:${resolution}:${previous ? "previous" : "current"}`;
+function rankCacheKey(range: RangeKey, resolution: ResolutionKey, previous: boolean, compareIds: number[]) {
+  return `${range}:${resolution}:${previous ? "previous" : "current"}:${compareIds.join(",")}`;
 }
 
 function formatRank(value?: number | null) {
@@ -159,7 +186,7 @@ function usablePointCount(points: RankPoint[], scope: RankScopeKey) {
 function rankDomain(points: RankPointForRender[], scope: RankScopeKey, startsAtOne: boolean): [number, number] {
   const key = rankDataKeys[scope];
   const values = points
-    .flatMap((point) => [point[key], point.previousValue])
+    .flatMap((point) => [point[key], point.previousValue, point.comparison0Value, point.comparison1Value])
     .filter((value): value is number => typeof value === "number" && Number.isFinite(value));
   if (!values.length) return [1, 10];
   const min = Math.min(...values);
@@ -193,7 +220,7 @@ function StatsRankTooltip({
   scope
 }: {
   active?: boolean;
-  payload?: Array<{ color?: string; name?: string; value?: unknown; dataKey?: string | number; payload?: Partial<RankPoint> }>;
+  payload?: Array<{ color?: string; name?: string; value?: unknown; dataKey?: string | number; payload?: Partial<RankPointForRender> }>;
   scope: RankScopeKey;
 }) {
   if (!active || !payload?.length) return null;
@@ -273,23 +300,30 @@ export function StatsRankChartPanel({
   initialChart: RankChartData;
 }) {
   const [scope, setScope] = useState<RankScopeKey>("global");
-  const [range, setRange] = useState<RangeKey>(initialChart.range ?? "1d");
-  const [resolution, setResolution] = useState<ResolutionKey>(initialChart.requestedResolution ?? "hourly");
+  const [range, setRange] = useState<RangeKey>(initialChart.range ?? defaultChartRange);
+  const [resolution, setResolution] = useState<ResolutionKey>(initialChart.requestedResolution ?? defaultChartResolution);
   const [showPrevious, setShowPrevious] = useState(false);
   const [showEvents, setShowEvents] = useState(false);
   const [showUpdates, setShowUpdates] = useState(false);
+  const [selectedComparisons, setSelectedComparisons] = useState<RankComparison[]>([]);
+  const [compareOpen, setCompareOpen] = useState(false);
+  const [compareQuery, setCompareQuery] = useState("");
+  const [compareResults, setCompareResults] = useState<SearchResult[]>([]);
+  const [compareLoading, setCompareLoading] = useState(false);
   const [chartCache, setChartCache] = useState<Record<string, RankChartData>>(() => ({
-    [rankCacheKey(initialChart.range, initialChart.requestedResolution, false)]: initialChart
+    [rankCacheKey(initialChart.range, initialChart.requestedResolution, false, [])]: initialChart
   }));
   const [lastRenderedChart, setLastRenderedChart] = useState<RankChartData>(initialChart);
   const [loadingKey, setLoadingKey] = useState<string | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [startsAtOne, setStartsAtOne] = useState(false);
-  const activeKey = rankCacheKey(range, resolution, showPrevious);
+  const compareIds = useMemo(() => selectedComparisons.map((item) => item.universeId).sort((a, b) => a - b), [selectedComparisons]);
+  const activeKey = rankCacheKey(range, resolution, showPrevious, compareIds);
   const loadedChart = chartCache[activeKey];
   const displayChart = loadedChart ?? lastRenderedChart;
   const points = displayChart.points;
   const previousPoints = displayChart.previousPoints ?? [];
+  const comparisons = displayChart.comparisons ?? [];
   const annotations = displayChart.annotations ?? [];
   const eventAnnotations = annotations.filter((annotation) => annotation.type === "event");
   const updateAnnotations = annotations.filter((annotation) => annotation.type === "update");
@@ -303,11 +337,17 @@ export function StatsRankChartPanel({
     () =>
       points.map((point, index) => ({
         ...point,
-        previousValue: numberValue(previousPoints[index]?.[dataKey])
+        previousValue: numberValue(previousPoints[index]?.[dataKey]),
+        comparison0Value: numberValue(comparisons[0]?.points[index]?.[dataKey]),
+        comparison1Value: numberValue(comparisons[1]?.points[index]?.[dataKey])
       })),
-    [dataKey, points, previousPoints]
+    [comparisons, dataKey, points, previousPoints]
   );
   const yDomain = useMemo(() => rankDomain(chartPoints, scope, startsAtOne), [chartPoints, scope, startsAtOne]);
+  const scopeSummary = summaries.find((summary) => summary.key === scope);
+  const scopeFilterLabel = scopeSummary?.scopeLabel?.trim() ?? "";
+  const canCompareGames = scope === "global" || Boolean(scopeFilterLabel);
+  const comparePlaceholder = scope === "global" ? "Search games" : `Search ${scopeFilterLabel}`;
 
   useEffect(() => {
     if (loadedChart) setLastRenderedChart(loadedChart);
@@ -324,6 +364,10 @@ export function StatsRankChartPanel({
       annotations: "1"
     });
     if (showPrevious) params.set("previous", "1");
+    if (compareIds.length) {
+      params.set("compare", compareIds.join(","));
+      params.set("scope", scope);
+    }
     fetch(`/api/stats/games/${universeId}/rank-chart?${params.toString()}`)
       .then(async (response) => {
         if (!response.ok) throw new Error(`Rank chart request failed (${response.status})`);
@@ -342,7 +386,64 @@ export function StatsRankChartPanel({
     return () => {
       cancelled = true;
     };
-  }, [activeKey, chartCache, range, resolution, showPrevious, universeId]);
+  }, [activeKey, chartCache, compareIds, range, resolution, scope, showPrevious, universeId]);
+
+  useEffect(() => {
+    if (!compareOpen || !universeId || compareQuery.trim().length < 2 || !canCompareGames) {
+      setCompareResults([]);
+      return;
+    }
+    let cancelled = false;
+    const timeout = window.setTimeout(() => {
+      setCompareLoading(true);
+      const exclude = [universeId, ...selectedComparisons.map((item) => item.universeId)].join(",");
+      const params = new URLSearchParams({ q: compareQuery.trim(), exclude });
+      if (scope === "genre" && scopeFilterLabel) params.set("genre", scopeFilterLabel);
+      if (scope === "subgenre" && scopeFilterLabel) params.set("subgenre", scopeFilterLabel);
+      fetch(`/api/stats/games/search?${params.toString()}`)
+        .then(async (response) => {
+          if (!response.ok) throw new Error(`Search failed (${response.status})`);
+          return (await response.json()) as { games?: SearchResult[] };
+        })
+        .then((data) => {
+          if (!cancelled) setCompareResults(data.games ?? []);
+        })
+        .catch(() => {
+          if (!cancelled) setCompareResults([]);
+        })
+        .finally(() => {
+          if (!cancelled) setCompareLoading(false);
+        });
+    }, 220);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeout);
+    };
+  }, [canCompareGames, compareOpen, compareQuery, scope, scopeFilterLabel, selectedComparisons, universeId]);
+
+  function handleScopeChange(value: string) {
+    setScope(value as RankScopeKey);
+    setSelectedComparisons([]);
+    setCompareQuery("");
+    setCompareResults([]);
+    setCompareOpen(false);
+  }
+
+  function addComparison(game: SearchResult) {
+    if (selectedComparisons.some((item) => item.universeId === game.universeId) || selectedComparisons.length >= 2) return;
+    setSelectedComparisons((items) => [
+      ...items,
+      {
+        universeId: game.universeId,
+        name: game.name,
+        slug: game.slug,
+        iconUrl: game.iconUrl,
+        points: []
+      }
+    ]);
+    setCompareQuery("");
+    setCompareOpen(false);
+  }
 
   return (
     <Card className="overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
@@ -354,7 +455,7 @@ export function StatsRankChartPanel({
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-2 xl:justify-end">
-          <Tabs value={scope} onValueChange={(value) => setScope(value as RankScopeKey)}>
+          <Tabs value={scope} onValueChange={handleScopeChange}>
             <TabsList className={chartTabsListClass}>
               {(["global", "genre", "subgenre"] as RankScopeKey[]).map((item) => (
                 <TabsTrigger key={item} value={item} className={chartTabsTriggerClass}>
@@ -468,6 +569,28 @@ export function StatsRankChartPanel({
                     activeDot={{ r: 3 }}
                   />
                 ) : null}
+                {comparisons[0] ? (
+                  <Line
+                    type="linear"
+                    dataKey="comparison0Value"
+                    stroke={comparisonColors[0]}
+                    strokeWidth={2}
+                    dot={false}
+                    name={comparisons[0].name}
+                    activeDot={{ r: 3 }}
+                  />
+                ) : null}
+                {comparisons[1] ? (
+                  <Line
+                    type="linear"
+                    dataKey="comparison1Value"
+                    stroke={comparisonColors[1]}
+                    strokeWidth={2}
+                    dot={false}
+                    name={comparisons[1].name}
+                    activeDot={{ r: 3 }}
+                  />
+                ) : null}
               </LineChart>
             </ChartContainer>
             {isShowingPreviousChart ? (
@@ -479,19 +602,100 @@ export function StatsRankChartPanel({
         )}
 
         <div className="mt-3 flex flex-wrap items-center justify-end gap-2">
+          <Popover open={compareOpen} onOpenChange={setCompareOpen}>
+            <TooltipProvider delayDuration={120}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <PopoverTrigger asChild>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      disabled={!canCompareGames || selectedComparisons.length >= 2}
+                      aria-label="Compare games"
+                      className="h-8 rounded-md border-border/70 bg-background/80 px-2.5 text-xs font-semibold text-muted shadow-none"
+                    >
+                      <span>Compare games</span>
+                      <GitCompare className="ml-1.5 h-3.5 w-3.5" aria-hidden />
+                    </Button>
+                  </PopoverTrigger>
+                </TooltipTrigger>
+                <TooltipContent side="top">
+                  {canCompareGames ? "Compare games" : "This rank scope needs a tracked category before comparisons are available"}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            <PopoverContent align="end" className="w-[300px] p-2">
+              <Input
+                value={compareQuery}
+                onChange={(event) => setCompareQuery(event.target.value)}
+                placeholder={comparePlaceholder}
+                className="h-9 rounded-md border-border/70 bg-background text-sm shadow-none"
+              />
+              <div className="mt-2 max-h-[260px] overflow-y-auto">
+                {compareQuery.trim().length < 2 ? (
+                  <p className="px-2 py-4 text-center text-xs text-muted">Type at least 2 characters</p>
+                ) : compareLoading ? (
+                  <p className="px-2 py-4 text-center text-xs text-muted">Searching...</p>
+                ) : compareResults.length ? (
+                  <div className="space-y-1">
+                    {compareResults.map((game) => (
+                      <button
+                        key={game.universeId}
+                        type="button"
+                        className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-foreground hover:bg-secondary/70"
+                        onClick={() => addComparison(game)}
+                      >
+                        <Plus className="h-3.5 w-3.5 shrink-0 text-muted" aria-hidden />
+                        {game.iconUrl ? (
+                          <img
+                            src={game.iconUrl}
+                            alt=""
+                            loading="lazy"
+                            className="h-8 w-8 shrink-0 rounded-md border border-border/60 bg-surface object-cover"
+                          />
+                        ) : (
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border/60 bg-secondary/60 text-xs font-semibold text-muted">
+                            {game.name.slice(0, 1).toUpperCase()}
+                          </span>
+                        )}
+                        <span className="min-w-0 flex-1 truncate">{game.name}</span>
+                        <span className="font-mono text-[11px] text-muted">{formatCompactNumber(game.playing)}</span>
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="px-2 py-4 text-center text-xs text-muted">No matching games found</p>
+                )}
+              </div>
+            </PopoverContent>
+          </Popover>
+          {selectedComparisons.map((item, index) => (
+            <span key={item.universeId} className="inline-flex h-8 items-center gap-1.5 rounded-md border border-border/70 bg-background/80 px-2 text-xs font-semibold text-muted">
+              <span className="h-4 w-1.5 shrink-0 rounded-[2px]" style={{ backgroundColor: comparisonColors[index] ?? comparisonColors[0] }} aria-hidden />
+              {item.name}
+              <button
+                type="button"
+                className="rounded-sm text-muted hover:text-foreground"
+                aria-label={`Remove ${item.name} comparison`}
+                onClick={() => setSelectedComparisons((items) => items.filter((candidate) => candidate.universeId !== item.universeId))}
+              >
+                <X className="h-3 w-3" aria-hidden />
+              </button>
+            </span>
+          ))}
           <TooltipProvider delayDuration={120}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   type="button"
                   variant="outline"
-                  size="icon"
                   aria-pressed={showPrevious}
                   aria-label={showPrevious ? "Hide previous period" : "Show previous period"}
-                  className={`h-8 w-8 rounded-md border-border/70 bg-background/80 text-muted shadow-none ${showPrevious ? "bg-accent text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground" : ""}`}
+                  className={`h-8 rounded-md border-border/70 bg-background/80 px-2.5 text-xs font-semibold text-muted shadow-none ${showPrevious ? "bg-accent text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground" : ""}`}
                   onClick={() => setShowPrevious((value) => !value)}
                 >
-                  <RotateCcw className="h-3.5 w-3.5" aria-hidden />
+                  <span>Compare previous</span>
+                  <RotateCcw className="ml-1.5 h-3.5 w-3.5" aria-hidden />
                 </Button>
               </TooltipTrigger>
               <TooltipContent side="top">{showPrevious ? "Hide previous period" : "Show previous period"}</TooltipContent>

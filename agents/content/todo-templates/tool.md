@@ -14,6 +14,7 @@ Workspace: `tmp/content-workspace/<game-or-topic-slug>/tools/<tool-code>/`
 
 - [ ] Confirm tool code, target route, existing `tools` row, universe ID if relevant, and tool client behavior.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
+- [ ] Check production DB or public production URLs first for an existing tool, article, catalog, checklist, quiz, or wiki section that already solves this use case.
 - [ ] Identify the real input, output, formula, planner, converter, or checker use case.
 - [ ] Check whether this should be a tool instead of a catalog, article, checklist, quiz, or wiki section.
 - [ ] Inspect the actual tool UI/client labels before naming inputs or results.

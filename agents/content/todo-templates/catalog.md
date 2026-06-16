@@ -14,6 +14,7 @@ Workspace: `tmp/content-workspace/<topic-or-game-slug>/catalogs/<catalog-code-or
 
 - [ ] Confirm catalog code, page route, target table, existing row, and item data source.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
+- [ ] Check production DB or public production URLs first for an existing catalog, wiki catalog, article, tool, or related page that already covers this topic.
 - [ ] Use the game-catalog template instead if this is a game dataset page under `/wiki/<game>/<collection>`.
 - [ ] If game-specific, confirm the scope is a durable item collection or UGC exception, not a temporary reward track or platform metadata.
 - [ ] Inspect route renderer behavior before promising sections or card fields.

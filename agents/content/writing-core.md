@@ -143,12 +143,14 @@ The `roblox_virtual_events` table or another approved importer owns event rows, 
 
 Articles should answer focused evergreen player questions. Do not use articles to duplicate codes, events, wiki hubs, catalogs, checklists, quizzes, or tools. Avoid current codes, code troubleshooting, event topics, broad update news, generic beginner guides, and broad item/category explainers. A strong article usually starts with a specific item, quest, mode, map, mechanic, farm route, unlock path, or durable gameplay problem.
 
+Article structure should stay as small as the topic allows. A useful article can be two sections or around 300 words if that fully answers the title. Do not add background, extra H2s, recap sections, or broad definitions to make the article look longer. For how-to topics, start with the action or steps, with only one or two setup sentences when the player needs them.
+
 ## Non-Negotiable Writing Rules
 
 1. No vague writing. Every sentence needs clear context and useful information.
 2. If a sentence does not add value for the user, it should not exist.
 3. Do not mention source gathering, research, checking, or internal evidence in public copy. Explain the player-facing fact directly.
-4. Every page should flow from top to bottom like a clear story: why the page matters, what the user can do, what details matter, and what to check next.
+4. Every page should flow from top to bottom like a clear story: what the player is trying to do, what to do next, which details matter, and what to check next.
 5. Do not write lines just to be engaging. Write useful information in an engaging way.
 6. The intro must be crisp, clean, and specific enough to pull the reader in. Keep that clarity and momentum through the rest of the page.
 7. Give enough context before moving into details. Do not jump from one system, field, item group, or mechanic to another before the reader understands the first one.

@@ -70,7 +70,8 @@ Your Phase 1 response must include:
 - proposed visible title, seo_title, and exact title promise
 - grouping axis and why it is best for players
 - card fields to show and raw fields to hide
-- description_json / description_md / how_it_works_md / FAQ / wiki_md plan
+- intro_md / description_json / description_md / FAQ / wiki_md plan, with how_it_works_md left empty for normal wiki catalog pages
+- public-copy plan: game/items only, no source/research/workflow/process caveats, short intro, player-question headings, natural same-universe links, and 3-4 non-repeating FAQs
 - exact files you expect to edit in Phase 2
 - questions or risks for parent review
 

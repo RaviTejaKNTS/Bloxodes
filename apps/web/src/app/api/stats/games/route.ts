@@ -11,7 +11,8 @@ export async function GET(request: Request) {
     const data = await listStatsGames({
       page,
       q: searchParams.get("q") ?? "",
-      genre: searchParams.get("genre") ?? "all",
+      genres: searchParams.getAll("genre"),
+      subgenres: searchParams.getAll("subgenre"),
       sort: searchParams.get("sort") ?? "playing",
       minPlayers: Number.isFinite(minPlayers) ? minPlayers : null
     });

@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes FLOW Edit"
   short_description: "Rewrite content for reader flow"
-  default_prompt: "Use $bloxodes-flow-edit after first-pass final.json and before final edit. Rewrite description_md, how_it_works_md, FAQs, headings, and section order so the page reads like a useful Roblox player explanation with clear action/how-to context."
+  default_prompt: "Use $bloxodes-flow-edit after first-pass final.json and before final edit. Rewrite intro_md, description_md, FAQs, headings, and section order so the page reads like a useful Roblox player explanation with clear action/how-to context. For articles, answer the title with the smallest complete outline, start how-to topics with the action or steps, merge weak headings, and do not pad short complete articles. For wiki catalog pages, write only about the game and items, remove source/research/workflow/dataset/API/verification caveats, keep intro_md short, use natural same-universe internal links only where helpful, keep FAQs to 3-4 non-repeating questions, leave how_it_works_md empty, and do not add how-to-read-this-page sections."

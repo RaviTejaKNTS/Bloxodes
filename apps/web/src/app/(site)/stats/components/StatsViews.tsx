@@ -7,6 +7,7 @@ import {
   ArrowUpRight,
   BookOpen,
   CalendarDays,
+  ChevronDown,
   Clock3,
   ExternalLink,
   Gamepad2,
@@ -14,7 +15,6 @@ import {
   IdCard,
   Layers,
   Play,
-  List,
   Search,
   Star,
   Trophy,
@@ -27,16 +27,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { LocalRefreshTime } from "@/app/(site)/stats/components/LocalRefreshTime";
+import { StatsGamesAutoSubmit } from "@/app/(site)/stats/components/StatsGamesAutoSubmit";
 import { StatsChartPanel } from "@/app/(site)/stats/components/StatsChartPanel";
 import { StatsRankChartPanel } from "@/app/(site)/stats/components/StatsRankChartPanel";
 import {
+  DEFAULT_STATS_GAME_COLUMNS,
+  STATS_GAME_COLUMN_OPTIONS,
   STATS_SORT_OPTIONS,
   type StatsGame,
+  type StatsGameColumnKey,
   type StatsGameDetailData,
   type StatsGamesPageData,
   type StatsHomeData,
   type StatsRelatedLink,
+  type StatsSortKey,
+  type StatsSubgenreOption,
   robloxGameUrl
 } from "@/lib/stats";
 import { formatCompactNumber, formatDelta, formatDeltaPercent, formatFullNumber, formatPercent } from "@/lib/stats-format";
@@ -94,15 +99,17 @@ function MetricCard({
   label,
   value,
   detail,
-  icon: Icon
+  icon: Icon,
+  href
 }: {
   label: string;
   value: ReactNode;
   detail?: string | null;
   icon: typeof Users;
+  href?: string;
 }) {
-  return (
-    <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+  const card = (
+    <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none transition hover:border-accent/70 hover:bg-surface">
       <CardContent className="p-4">
         <div className="flex items-center justify-between gap-3">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{label}</p>
@@ -113,6 +120,16 @@ function MetricCard({
       </CardContent>
     </Card>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="group block rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label={label}>
+        {card}
+      </Link>
+    );
+  }
+
+  return card;
 }
 
 function formatStatsDate(value?: string | null) {
@@ -199,9 +216,9 @@ function GameListPanel({
           {subtitle ? <p className="mt-1 text-xs font-medium text-muted">{subtitle}</p> : null}
         </div>
         {href ? (
-          <Button asChild variant="outline" size="icon" className="h-8 w-8 shrink-0 rounded-md border-border/70 bg-background/80 text-muted shadow-none">
+          <Button asChild variant="outline" size="icon" className="h-8 w-8 shrink-0 rounded-md border-border/70 bg-background/80 text-muted shadow-none hover:border-accent/70 hover:text-accent">
             <Link href={href} aria-label={`View full ${title.toLowerCase()} list`}>
-              <List className="h-3.5 w-3.5" aria-hidden />
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
             </Link>
           </Button>
         ) : null}
@@ -212,6 +229,223 @@ function GameListPanel({
         )}
       </CardContent>
     </Card>
+  );
+}
+
+function selectedSummary(selected: string[], fallback: string) {
+  if (!selected.length) return fallback;
+  if (selected.length === 1) return selected[0];
+  return `${selected.length} selected`;
+}
+
+function MultiCheckboxPanel({
+  label,
+  name,
+  summary,
+  options,
+  selected,
+  emptyLabel
+}: {
+  label: string;
+  name: string;
+  summary: string;
+  options: Array<{ value: string; label: string; detail?: string | null }>;
+  selected: string[];
+  emptyLabel: string;
+}) {
+  const selectedSet = new Set(selected);
+  const stateKey = `${name}:${selected.join("\u0001")}`;
+  return (
+    <div key={stateKey} className="min-w-0 space-y-1">
+      <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">{label}</label>
+      <details className="group relative">
+        <summary className="flex h-10 cursor-pointer list-none items-center justify-between gap-3 rounded-md border border-border/80 bg-surface/60 px-3 text-sm font-medium text-foreground shadow-none transition hover:border-border hover:bg-surface marker:hidden">
+          <span className="truncate">{summary}</span>
+          <ChevronDown className="h-4 w-4 shrink-0 text-muted transition group-open:rotate-180" aria-hidden />
+        </summary>
+        <div className="absolute z-30 mt-2 max-h-80 w-full min-w-[260px] overflow-y-auto rounded-md border border-border/80 bg-popover p-2 text-popover-foreground shadow-xl">
+          {options.length ? options.map((option) => (
+            <label key={`${name}-${option.value}-${option.detail ?? ""}`} className="flex cursor-pointer items-start gap-2 rounded-md px-2 py-2 text-sm hover:bg-secondary/70">
+              <input
+                type="checkbox"
+                name={name}
+                value={option.value}
+                defaultChecked={selectedSet.has(option.value)}
+                className="mt-0.5 h-4 w-4 rounded border-border bg-background accent-current"
+              />
+              <span className="min-w-0">
+                <span className="block truncate font-medium text-foreground">{option.label}</span>
+                {option.detail ? <span className="mt-0.5 block truncate text-xs text-muted">{option.detail}</span> : null}
+              </span>
+            </label>
+          )) : (
+            <p className="px-2 py-3 text-sm text-muted">{emptyLabel}</p>
+          )}
+        </div>
+      </details>
+    </div>
+  );
+}
+
+function columnsEqual(left: StatsGameColumnKey[], right: StatsGameColumnKey[]) {
+  return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+function columnHeaderLabel(column: StatsGameColumnKey) {
+  if (column === "playing") return "CCU";
+  if (column === "growth24h") return "24h";
+  if (column === "growth7d") return "7d";
+  if (column === "likes") return "Upvotes";
+  if (column === "dislikes") return "Downvotes";
+  if (column === "peak24h") return "24h peak";
+  if (column === "peak7d") return "7d peak";
+  if (column === "statsRefresh") return "Refresh";
+  return STATS_GAME_COLUMN_OPTIONS.find((option) => option.value === column)?.label ?? column;
+}
+
+function isRightAlignedColumn(column: StatsGameColumnKey) {
+  return !["rank", "genre", "subgenre", "creator", "ageRating", "created", "updated", "statsRefresh"].includes(column);
+}
+
+function sortForStatsColumn(column: StatsGameColumnKey): StatsSortKey | null {
+  switch (column) {
+    case "rank":
+    case "playing":
+      return "playing";
+    case "growth24h":
+      return "growth_24h";
+    case "growth7d":
+      return "growth_7d";
+    case "visits":
+      return "visits";
+    case "favorites":
+      return "favorites";
+    case "rating":
+      return "rating";
+    case "peak24h":
+    case "peak7d":
+      return "peak";
+    case "created":
+      return "created";
+    case "updated":
+    case "statsRefresh":
+      return "updated";
+    default:
+      return null;
+  }
+}
+
+function SortableTableHead({
+  data,
+  column,
+  label = columnHeaderLabel(column),
+  className
+}: {
+  data: StatsGamesPageData;
+  column: StatsGameColumnKey;
+  label?: string;
+  className?: string;
+}) {
+  const sort = sortForStatsColumn(column);
+  const active = sort === data.filters.sort;
+  if (!sort) {
+    return <TableHead className={className}>{label}</TableHead>;
+  }
+  return (
+    <TableHead className={className}>
+      <Link
+        href={statsPageHref(data, 1, { sort })}
+        className={cn(
+          "inline-flex items-center gap-1 rounded-sm text-muted transition hover:text-foreground focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+          isRightAlignedColumn(column) && "justify-end",
+          active && "text-foreground"
+        )}
+        aria-label={`Sort by ${label}`}
+      >
+        <span>{label}</span>
+        {active ? <ChevronDown className="h-3.5 w-3.5" aria-hidden /> : null}
+      </Link>
+    </TableHead>
+  );
+}
+
+function renderStatsColumnValue(game: StatsGame, column: StatsGameColumnKey) {
+  switch (column) {
+    case "rank":
+      return `#${game.rank ?? "-"}`;
+    case "playing":
+      return formatCompactNumber(game.playing);
+    case "growth24h":
+      return <DeltaPill value={game.growth24h} percent={game.growth24hPercent} />;
+    case "growth7d":
+      return <DeltaPill value={game.growth7d} percent={game.growth7dPercent} />;
+    case "visits":
+      return formatCompactNumber(game.visits);
+    case "favorites":
+      return formatCompactNumber(game.favorites);
+    case "rating":
+      return formatPercent(game.ratingPercent);
+    case "likes":
+      return formatCompactNumber(game.likes);
+    case "dislikes":
+      return formatCompactNumber(game.dislikes);
+    case "genre":
+      return game.genre ?? "Not tracked";
+    case "subgenre":
+      return game.subgenre ?? "Not tracked";
+    case "creator":
+      return game.creatorName ?? "Not tracked";
+    case "ageRating":
+      return game.ageRating ?? "Not tracked";
+    case "peak24h":
+      return formatCompactNumber(game.peak24h);
+    case "peak7d":
+      return formatCompactNumber(game.peak7d);
+    case "created":
+      return formatStatsDate(game.createdAtApi);
+    case "updated":
+      return formatRelativeStatsDate(game.updatedAtApi);
+    case "statsRefresh":
+      return formatRelativeStatsDate(game.lastStatsRefreshedAt ?? game.lastPlayingRefreshedAt);
+    default:
+      return null;
+  }
+}
+
+function StatsGameCardRow({ game, columns }: { game: StatsGame; columns: StatsGameColumnKey[] }) {
+  const selected = new Set(columns);
+  const detailColumns = columns.filter((column) => !["rank", "playing", "growth24h"].includes(column));
+  return (
+    <Link
+      href={`/stats/games/${game.slug}`}
+      className="group block rounded-lg border border-border/60 bg-background/35 px-3 py-3 transition hover:border-accent/70 hover:bg-background/65"
+    >
+      <div className="flex items-center gap-3">
+        {selected.has("rank") ? <span className="w-7 shrink-0 text-center text-xs font-bold text-muted">#{game.rank ?? "-"}</span> : null}
+        {gameImage(game, 40)}
+        <span className="min-w-0 flex-1">
+          <span className="block truncate text-sm font-semibold text-foreground group-hover:text-accent">{game.name}</span>
+          <span className="mt-0.5 flex flex-wrap items-center gap-2 text-xs text-muted">
+            {game.genre ? <span>{game.genre}</span> : null}
+            {game.ratingPercent != null ? <span>{formatPercent(game.ratingPercent)} rating</span> : null}
+          </span>
+        </span>
+        <span className="shrink-0 text-right">
+          {selected.has("playing") ? <span className="block text-sm font-semibold text-foreground">{formatCompactNumber(game.playing)}</span> : null}
+          {selected.has("growth24h") ? <span className="mt-1 block"><DeltaPill value={game.growth24h} percent={game.growth24hPercent} /></span> : null}
+        </span>
+      </div>
+      {detailColumns.length ? (
+        <div className="mt-3 grid grid-cols-2 gap-2 border-t border-border/50 pt-3 text-xs sm:grid-cols-3">
+          {detailColumns.map((column) => (
+            <span key={column} className="min-w-0">
+              <span className="block truncate font-medium uppercase tracking-[0.08em] text-muted">{columnHeaderLabel(column)}</span>
+              <span className="mt-1 block truncate font-semibold text-foreground">{renderStatsColumnValue(game, column)}</span>
+            </span>
+          ))}
+        </div>
+      ) : null}
+    </Link>
   );
 }
 
@@ -237,21 +471,22 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
         </form>
       </header>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         <MetricCard
-          label="Top live players"
+          label="Platform CCU"
           value={formatCompactNumber(data.totals.livePlayers)}
-          detail={`Top ${formatFullNumber(data.totals.featuredGames)} games by current players`}
+          detail={`Across ${formatFullNumber(data.totals.trackedGames)} tracked games`}
           icon={Users}
+          href="#platform-ccu-trend"
         />
-        <MetricCard label="Tracked games" value={formatFullNumber(data.totals.trackedGames)} detail="Public stats index" icon={Gamepad2} />
+        <MetricCard label="Tracked games" value={formatFullNumber(data.totals.trackedGames)} detail="Public stats index" icon={Gamepad2} href="/stats/games" />
         <MetricCard
-          label="Top visits"
+          label="Platform visits"
           value={formatCompactNumber(data.totals.totalVisits)}
-          detail={`Top ${formatFullNumber(data.mostVisited.length)} games by visits`}
+          detail={`Across ${formatFullNumber(data.totals.trackedGames)} tracked games`}
           icon={Trophy}
+          href="/stats/games?sort=visits"
         />
-        <MetricCard label="Last refresh" value={<LocalRefreshTime value={data.totals.lastUpdatedAt} showZoneDetail />} icon={CalendarDays} />
       </div>
 
       <div className="grid gap-4 xl:grid-cols-2">
@@ -259,7 +494,9 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
         <GameListPanel title="Fastest risers" subtitle="Ranked by 24h momentum across active games with meaningful gains." games={data.risers} metric="playing" href="/stats/games?sort=growth_24h" />
       </div>
 
-      <StatsChartPanel title="Platform CCU trend" subtitle="Top tracked games, last 24 hours" chart={data.platformTrend} defaultMetric="players" compact={false} area />
+      <div id="platform-ccu-trend" className="scroll-mt-24">
+        <StatsChartPanel title="Platform CCU trend" subtitle="Tracked Roblox games, last 24 hours" chart={data.platformTrend} defaultMetric="players" compact={false} area />
+      </div>
 
       <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
         <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
@@ -291,7 +528,9 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
 }
 
 export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
-  const activeGenre = data.filters.genre && data.filters.genre !== "all" ? data.filters.genre : null;
+  const activeGenres = data.filters.genres;
+  const activeSubgenres = data.filters.subgenres;
+  const activeGenre = activeGenres.length === 1 ? activeGenres[0] : null;
   const title = activeGenre ? `${activeGenre} Roblox game stats` : "Roblox game stats table";
   const description = activeGenre
     ? `Sort ${activeGenre} Roblox games by current players, growth, visits, rating, and tracked peaks.`
@@ -299,63 +538,117 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Stats", href: "/stats" },
-    { label: "Games", href: activeGenre ? "/stats/games" : null },
-    ...(activeGenre ? [{ label: activeGenre, href: null }] : [])
+    { label: "Games", href: activeGenres.length ? "/stats/games" : null },
+    ...(activeGenre ? [{ label: activeGenre, href: null }] : activeGenres.length ? [{ label: `${activeGenres.length} genres`, href: null }] : [])
   ];
+  const activeGenreSet = new Set(activeGenres);
+  const showSubgenreFilter = activeGenres.length > 0;
+  const subgenreOptions = showSubgenreFilter
+    ? data.subgenres.filter((option) => activeGenreSet.has(option.genre) || activeSubgenres.includes(option.subgenre))
+    : [];
+  const subgenreChoices = subgenreOptions.map((option: StatsSubgenreOption) => ({
+    value: option.subgenre,
+    label: option.subgenre,
+    detail: `${option.genre} • ${formatCompactNumber(option.playing)} players`
+  }));
+  const genreChoices = data.genres.map((genre) => ({ value: genre, label: genre }));
+  const columnChoices = STATS_GAME_COLUMN_OPTIONS.map((option) => ({ value: option.value, label: option.label }));
+  const visibleColumns = STATS_GAME_COLUMN_OPTIONS
+    .map((option) => option.value)
+    .filter((column) => data.filters.columns.includes(column));
+  const dataColumns = visibleColumns.filter((column) => column !== "rank");
+  const usesDefaultColumns = columnsEqual(data.filters.columns, DEFAULT_STATS_GAME_COLUMNS);
+  const formStateKey = [
+    data.filters.q,
+    data.filters.sort,
+    data.filters.minPlayers ?? "",
+    activeGenres.join("\u0001"),
+    activeSubgenres.join("\u0001"),
+    data.filters.columns.join("\u0001")
+  ].join("\u0002");
   return (
-    <div className="stats-surface space-y-5">
-      <header className="space-y-3">
-        <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
-        <h1 className="mb-0 text-3xl font-semibold leading-tight text-foreground md:text-4xl">{title}</h1>
-        <p className="text-sm font-medium text-muted">{description}</p>
+    <form key={formStateKey} action="/stats/games" className="stats-surface space-y-5" data-stats-games-form>
+      <StatsGamesAutoSubmit />
+      <header className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="space-y-3">
+          <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
+          <div>
+            <h1 className="mb-0 text-3xl font-semibold leading-tight text-foreground md:text-4xl">{title}</h1>
+            <p className="mt-2 text-sm font-medium text-muted">{description}</p>
+          </div>
+        </div>
+        <div className="flex w-full max-w-xl gap-2">
+          <div className="relative flex-1">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" aria-hidden />
+            <Input id="stats-game-search" name="q" type="search" defaultValue={data.filters.q} placeholder="Search games" className="h-10 rounded-md border-0 bg-surface pl-9 shadow-none" />
+          </div>
+          <Button type="submit" className="h-10 rounded-md px-4">Search</Button>
+        </div>
       </header>
 
-      <form action="/stats/games" className="grid gap-3 md:grid-cols-[minmax(0,1.4fr)_220px_180px_160px_auto]">
-        <div className="relative">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" aria-hidden />
-          <Input name="q" type="search" defaultValue={data.filters.q} placeholder="Search name or creator" className="h-11 rounded-md border-border/80 bg-surface/60 pl-9 shadow-none" />
+      <div className="flex flex-col gap-3 xl:flex-row xl:items-end xl:justify-between">
+        <div className="grid flex-1 gap-2 sm:grid-cols-2 md:grid-cols-[minmax(150px,1fr)_minmax(170px,1fr)_minmax(150px,0.9fr)]">
+          <MultiCheckboxPanel
+            label="Genre"
+            name="genre"
+            summary={selectedSummary(activeGenres, "All genres")}
+            options={genreChoices}
+            selected={activeGenres}
+            emptyLabel="No genres available."
+          />
+          {showSubgenreFilter ? (
+            <MultiCheckboxPanel
+              label="Subgenre"
+              name="subgenre"
+              summary={selectedSummary(activeSubgenres, activeGenres.length === 1 ? `${activeGenres[0]} subgenres` : "Selected genre subgenres")}
+              options={subgenreChoices}
+              selected={activeSubgenres}
+              emptyLabel="No subgenres in selected genres."
+            />
+          ) : null}
+          <div className="space-y-1 md:hidden">
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Sort by</label>
+            <Select name="sort" defaultValue={data.filters.sort}>
+              <SelectTrigger className="h-10 rounded-md border-border/80 bg-surface/60 shadow-none hover:border-border hover:bg-surface">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                {STATS_SORT_OPTIONS.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}
+              </SelectContent>
+            </Select>
+          </div>
+          <MultiCheckboxPanel
+            label="Columns"
+            name="column"
+            summary={usesDefaultColumns ? "Default columns" : `${data.filters.columns.length} columns`}
+            options={columnChoices}
+            selected={data.filters.columns}
+            emptyLabel="No columns available."
+          />
         </div>
-        <Select name="genre" defaultValue={data.filters.genre || "all"}>
-          <SelectTrigger className="h-11 rounded-md border-border/80 bg-surface/60 shadow-none">
-            <SelectValue placeholder="Genre" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All genres</SelectItem>
-            {data.genres.map((genre) => <SelectItem key={genre} value={genre}>{genre}</SelectItem>)}
-          </SelectContent>
-        </Select>
-        <Select name="sort" defaultValue={data.filters.sort}>
-          <SelectTrigger className="h-11 rounded-md border-border/80 bg-surface/60 shadow-none">
-            <SelectValue placeholder="Sort" />
-          </SelectTrigger>
-          <SelectContent>
-            {STATS_SORT_OPTIONS.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}
-          </SelectContent>
-        </Select>
-        <Input name="minPlayers" type="number" min="0" defaultValue={data.filters.minPlayers ?? ""} placeholder="Min players" className="h-11 rounded-md border-border/80 bg-surface/60 shadow-none" />
-        <Button type="submit" className="h-11 rounded-md px-5">Apply</Button>
-      </form>
+        <div className="flex shrink-0 flex-wrap gap-2">
+          <Button asChild type="button" variant="ghost" className="h-10 rounded-md px-4">
+            <Link href="/stats/games" data-stats-games-reset>Reset</Link>
+          </Button>
+        </div>
+      </div>
 
       <Card className="overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
         <div className="hidden md:block">
           <Table>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
-                <TableHead className="w-14">Rank</TableHead>
+                {visibleColumns.includes("rank") ? <SortableTableHead data={data} column="rank" className="w-14" /> : null}
                 <TableHead>Game</TableHead>
-                <TableHead className="text-right">CCU</TableHead>
-                <TableHead className="text-right">24h</TableHead>
-                <TableHead className="text-right">7d</TableHead>
-                <TableHead className="text-right">Visits</TableHead>
-                <TableHead className="text-right">Rating</TableHead>
-                <TableHead className="text-right">Trend</TableHead>
-                <TableHead className="text-right">Updated</TableHead>
+                {dataColumns.map((column) => (
+                  <SortableTableHead key={column} data={data} column={column} className={cn(isRightAlignedColumn(column) && "text-right")} />
+                ))}
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.games.map((game, index) => (
+              {data.games.map((game) => (
                 <TableRow key={game.universeId} className="border-border/60 hover:bg-background/40">
-                  <TableCell className="font-mono text-xs text-muted">#{game.rank ?? (data.page - 1) * 50 + index + 1}</TableCell>
+                  {visibleColumns.includes("rank") ? <TableCell className="font-mono text-xs text-muted">#{game.rank ?? "-"}</TableCell> : null}
                   <TableCell>
                     <Link href={`/stats/games/${game.slug}`} className="flex items-center gap-3">
                       {gameImage(game, 38)}
@@ -368,13 +661,11 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
                       </span>
                     </Link>
                   </TableCell>
-                  <TableCell className="text-right font-semibold">{formatCompactNumber(game.playing)}</TableCell>
-                  <TableCell className="text-right"><DeltaPill value={game.growth24h} percent={game.growth24hPercent} /></TableCell>
-                  <TableCell className="text-right"><DeltaPill value={game.growth7d} percent={game.growth7dPercent} /></TableCell>
-                  <TableCell className="text-right">{formatCompactNumber(game.visits)}</TableCell>
-                  <TableCell className="text-right">{formatPercent(game.ratingPercent)}</TableCell>
-                  <TableCell className="text-right"><Badge variant="outline" className="rounded-md">{game.trendScore}</Badge></TableCell>
-                  <TableCell className="text-right text-xs text-muted">{formatRelativeStatsDate(game.updatedAtApi)}</TableCell>
+                  {dataColumns.map((column) => (
+                    <TableCell key={`${game.universeId}-${column}`} className={cn(isRightAlignedColumn(column) && "text-right", ["created", "updated", "statsRefresh"].includes(column) && "text-xs text-muted", column === "playing" && "font-semibold")}>
+                      {renderStatsColumnValue(game, column)}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
             </TableBody>
@@ -382,7 +673,7 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
         </div>
 
         <div className="space-y-2 p-3 md:hidden">
-          {data.games.map((game, index) => <CompactGameRow key={game.universeId} game={game} rank={game.rank ?? index + 1} />)}
+          {data.games.map((game) => <StatsGameCardRow key={game.universeId} game={game} columns={visibleColumns} />)}
         </div>
       </Card>
 
@@ -399,17 +690,22 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
           </div>
         </div>
       ) : null}
-    </div>
+    </form>
   );
 }
 
-function statsPageHref(data: StatsGamesPageData, page: number) {
+function statsPageHref(data: StatsGamesPageData, page: number, overrides: { sort?: StatsSortKey } = {}) {
   const params = new URLSearchParams();
   if (page > 1) params.set("page", String(page));
   if (data.filters.q) params.set("q", data.filters.q);
-  if (data.filters.genre && data.filters.genre !== "all") params.set("genre", data.filters.genre);
-  if (data.filters.sort !== "playing") params.set("sort", data.filters.sort);
+  for (const genre of data.filters.genres) params.append("genre", genre);
+  for (const subgenre of data.filters.subgenres) params.append("subgenre", subgenre);
+  const sort = overrides.sort ?? data.filters.sort;
+  if (sort !== "playing") params.set("sort", sort);
   if (data.filters.minPlayers) params.set("minPlayers", String(data.filters.minPlayers));
+  if (!columnsEqual(data.filters.columns, DEFAULT_STATS_GAME_COLUMNS)) {
+    for (const column of data.filters.columns) params.append("column", column);
+  }
   const query = params.toString();
   return query ? `/stats/games?${query}` : "/stats/games";
 }

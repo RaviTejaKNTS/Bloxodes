@@ -101,7 +101,7 @@ For catalog and game-catalog changes, research the collection first, then propos
 
 The proposal should include:
 
-- primary player task and the decision the page should make easier
+- primary player task and the in-game decision players are making
 - required fact matrix: reader need, required facts, source status, local data/card status, and public placement
 - competitor usefulness check when search competition matters: what top useful sources answer, where Bloxodes matches or beats them, and what local facts are weaker
 - local item count, rendered card/table count, page title count, source count, image count, and missing image count when the page has item data
@@ -147,7 +147,7 @@ If the audit finds source-backed facts that are required for the player task but
 ## Writing Rules
 
 - Explain the fields players actually scan.
-- Explain the player action before explaining field labels. A reader should know what the page helps them buy, unlock, upgrade, farm, equip, trade, find, compare, or avoid.
+- Explain the player action before explaining field labels. A reader should know what they are buying, unlocking, upgrading, farming, equipping, trading, finding, comparing, or avoiding in the game.
 - Make the page satisfy its title. If the title says `how to get them`, `locations`, `drops`, `chances`, `what they do`, or another specific promise, the cards and copy must answer it completely enough that the reader does not need a separate article.
 - Define the field in gameplay terms before using it as advice.
 - Name the game mechanic, not just the collection.

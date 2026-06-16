@@ -1,11 +1,15 @@
 import { NextResponse } from "next/server";
-import { getStatsGameRankChartByUniverseId, normalizeStatsRange, normalizeStatsResolution } from "@/lib/stats";
+import { getStatsGameRankChartByUniverseId, normalizeStatsCompareIds, normalizeStatsRange, normalizeStatsResolution } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
 
 type RouteContext = {
   params: Promise<{ universeId: string }>;
 };
+
+function normalizeRankScope(value: string | null) {
+  return value === "genre" || value === "subgenre" ? value : "global";
+}
 
 export async function GET(request: Request, context: RouteContext) {
   try {
@@ -19,7 +23,9 @@ export async function GET(request: Request, context: RouteContext) {
     const resolution = normalizeStatsResolution(searchParams.get("resolution"));
     const chart = await getStatsGameRankChartByUniverseId(id, range, resolution, {
       includePrevious: searchParams.get("previous") === "1",
-      includeAnnotations: searchParams.get("annotations") !== "0"
+      includeAnnotations: searchParams.get("annotations") !== "0",
+      compareUniverseIds: normalizeStatsCompareIds(searchParams.get("compare"), id),
+      compareScope: normalizeRankScope(searchParams.get("scope"))
     });
     return NextResponse.json(chart, {
       headers: {

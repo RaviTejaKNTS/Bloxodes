@@ -31,6 +31,49 @@ export type StatsSortKey =
 export type StatsTimeRange = "1d" | "7d" | "14d" | "30d" | "90d";
 export type StatsMetricKey = "players" | "visits" | "favorites" | "rating";
 export type StatsChartResolution = "hourly" | "daily" | "weekly" | "monthly";
+export type StatsGameColumnKey =
+  | "rank"
+  | "playing"
+  | "growth24h"
+  | "growth7d"
+  | "visits"
+  | "favorites"
+  | "rating"
+  | "likes"
+  | "dislikes"
+  | "genre"
+  | "subgenre"
+  | "creator"
+  | "ageRating"
+  | "peak24h"
+  | "peak7d"
+  | "created"
+  | "updated"
+  | "statsRefresh";
+
+export const DEFAULT_STATS_CHART_RANGE: StatsTimeRange = "14d";
+export const DEFAULT_STATS_CHART_RESOLUTION: StatsChartResolution = "hourly";
+export const DEFAULT_STATS_GAME_COLUMNS: StatsGameColumnKey[] = ["rank", "playing", "growth24h", "growth7d", "visits", "rating", "updated"];
+export const STATS_GAME_COLUMN_OPTIONS: Array<{ value: StatsGameColumnKey; label: string }> = [
+  { value: "rank", label: "Rank" },
+  { value: "playing", label: "Current players" },
+  { value: "growth24h", label: "24h change" },
+  { value: "growth7d", label: "7d change" },
+  { value: "visits", label: "Visits" },
+  { value: "favorites", label: "Favorites" },
+  { value: "rating", label: "Rating" },
+  { value: "likes", label: "Upvotes" },
+  { value: "dislikes", label: "Downvotes" },
+  { value: "genre", label: "Genre" },
+  { value: "subgenre", label: "Subgenre" },
+  { value: "creator", label: "Creator" },
+  { value: "ageRating", label: "Age rating" },
+  { value: "peak24h", label: "24h peak CCU" },
+  { value: "peak7d", label: "7d peak CCU" },
+  { value: "created", label: "Created" },
+  { value: "updated", label: "Updated" },
+  { value: "statsRefresh", label: "Stats refresh" }
+];
 
 export type StatsGame = {
   universeId: number;
@@ -112,6 +155,14 @@ export type StatsChartComparison = {
   points: StatsChartPoint[];
 };
 
+export type StatsRankChartComparison = {
+  universeId: number;
+  name: string;
+  slug: string;
+  iconUrl: string | null;
+  points: StatsRankPoint[];
+};
+
 export type StatsGameSearchResult = {
   universeId: number;
   name: string;
@@ -119,6 +170,8 @@ export type StatsGameSearchResult = {
   iconUrl: string | null;
   playing: number | null;
   visits: number | null;
+  genre: string | null;
+  subgenre: string | null;
 };
 
 export type StatsRankPoint = {
@@ -182,12 +235,22 @@ export type StatsGamesPageData = {
   page: number;
   totalPages: number;
   genres: string[];
+  subgenres: StatsSubgenreOption[];
   filters: {
     q: string;
-    genre: string;
+    genres: string[];
+    subgenres: string[];
     sort: StatsSortKey;
     minPlayers: number | null;
+    columns: StatsGameColumnKey[];
   };
+};
+
+export type StatsSubgenreOption = {
+  genre: string;
+  subgenre: string;
+  games: number;
+  playing: number;
 };
 
 export type StatsGameDetailData = {
@@ -216,6 +279,7 @@ export type StatsGameRankChartData = {
   resolution: StatsChartResolution;
   points: StatsRankPoint[];
   previousPoints?: StatsRankPoint[];
+  comparisons?: StatsRankChartComparison[];
   annotations?: StatsChartAnnotation[];
   summaries: StatsRankSummary[];
 };
@@ -279,6 +343,17 @@ type HourlyRow = {
   dislikes_end: number | null;
   rating_percent: number | null;
   sample_count: number | null;
+};
+
+type PlatformTrendRow = {
+  hour_start: string;
+  players: number | string | null;
+  peak_players: number | string | null;
+  avg_players: number | string | null;
+  visits: number | string | null;
+  favorites: number | string | null;
+  rating: number | string | null;
+  samples: number | string | null;
 };
 
 type RankSnapshotRow = {
@@ -389,9 +464,38 @@ function toNumber(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
+function toFiniteNumber(value: unknown): number | null {
+  if (typeof value === "number") return Number.isFinite(value) ? value : null;
+  if (typeof value === "string" && value.trim().length > 0) {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  return null;
+}
+
 function toJsonStringArray(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.filter((item): item is string => typeof item === "string" && item.length > 0);
+}
+
+function uniqueCleanStrings(values: Array<string | null | undefined>) {
+  return [...new Set(values.map((value) => value?.trim() ?? "").filter(Boolean))];
+}
+
+function normalizeFilterValues(value?: string | string[] | null) {
+  const values = Array.isArray(value) ? value : value ? [value] : [];
+  return uniqueCleanStrings(values).filter((item) => item !== "all");
+}
+
+function normalizeStatsColumns(value?: string | string[] | null): StatsGameColumnKey[] {
+  const values = Array.isArray(value) ? value : value ? [value] : [];
+  const allowed = new Set(STATS_GAME_COLUMN_OPTIONS.map((option) => option.value));
+  const columns = uniqueCleanStrings(values).filter((item): item is StatsGameColumnKey => allowed.has(item as StatsGameColumnKey));
+  return columns.length ? columns : DEFAULT_STATS_GAME_COLUMNS;
+}
+
+function postgrestInList(values: string[]) {
+  return `(${values.map((value) => `"${value.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`).join(",")})`;
 }
 
 export function getRatingPercent(likes?: number | null, dislikes?: number | null): number | null {
@@ -678,7 +782,8 @@ async function listBaseGames(options: {
   limit: number;
   offset?: number;
   q?: string;
-  genre?: string;
+  genre?: string | string[];
+  subgenre?: string | string[];
   minPlayers?: number | null;
   sort?: StatsSortKey;
   count?: "exact" | "planned" | "estimated" | null;
@@ -705,8 +810,20 @@ async function listBaseGames(options: {
     indexQuery = indexQuery.or(`name.ilike.${pattern},display_name.ilike.${pattern},creator_name.ilike.${pattern}`);
   }
 
-  if (options.genre && options.genre !== "all") {
-    indexQuery = indexQuery.or(`genre.eq.${options.genre},genre_l1.eq.${options.genre}`);
+  const genreFilters = normalizeFilterValues(options.genre);
+  const subgenreFilters = normalizeFilterValues(options.subgenre);
+
+  if (genreFilters.length === 1) {
+    indexQuery = indexQuery.or(`genre.eq.${genreFilters[0]},genre_l1.eq.${genreFilters[0]}`);
+  } else if (genreFilters.length > 1) {
+    const values = postgrestInList(genreFilters);
+    indexQuery = indexQuery.or(`genre.in.${values},genre_l1.in.${values}`);
+  }
+
+  if (subgenreFilters.length === 1) {
+    indexQuery = indexQuery.eq("genre_l2", subgenreFilters[0]);
+  } else if (subgenreFilters.length > 1) {
+    indexQuery = indexQuery.in("genre_l2", subgenreFilters);
   }
 
   if (typeof options.minPlayers === "number" && options.minPlayers > 0) {
@@ -756,8 +873,17 @@ async function listBaseGames(options: {
     query = query.or(`name.ilike.${pattern},display_name.ilike.${pattern},creator_name.ilike.${pattern}`);
   }
 
-  if (options.genre && options.genre !== "all") {
-    query = query.or(`genre.eq.${options.genre},genre_l1.eq.${options.genre}`);
+  if (genreFilters.length === 1) {
+    query = query.or(`genre.eq.${genreFilters[0]},genre_l1.eq.${genreFilters[0]}`);
+  } else if (genreFilters.length > 1) {
+    const values = postgrestInList(genreFilters);
+    query = query.or(`genre.in.${values},genre_l1.in.${values}`);
+  }
+
+  if (subgenreFilters.length === 1) {
+    query = query.eq("genre_l2", subgenreFilters[0]);
+  } else if (subgenreFilters.length > 1) {
+    query = query.in("genre_l2", subgenreFilters);
   }
 
   if (typeof options.minPlayers === "number" && options.minPlayers > 0) {
@@ -843,16 +969,17 @@ async function listCurrentRisers(limit: number): Promise<StatsGame[]> {
 }
 
 export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> {
+  const fetchLimit = Math.max(limit * 3, limit + 20);
   const { data, error } = await supabaseAdmin()
     .from("stats_genre_current_index")
     .select("genre, genre_slug, games, playing, visits, top_name, top_slug, top_icon_url, top_playing")
     .order("playing", { ascending: false })
-    .limit(limit);
+    .limit(fetchLimit);
 
   if (!error) {
     return ((data ?? []) as Array<{
-      genre: string;
-      genre_slug: string;
+      genre: string | null;
+      genre_slug: string | null;
       games: number;
       playing: number;
       visits: number;
@@ -860,21 +987,28 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
       top_slug: string | null;
       top_icon_url: string | null;
       top_playing: number | null;
-    }>).map((row) => ({
-      genre: row.genre,
-      slug: row.genre_slug,
-      games: row.games,
-      playing: row.playing,
-      visits: row.visits,
-      topGame: row.top_slug
-        ? {
-            name: row.top_name ?? row.genre,
-            slug: row.top_slug,
-            iconUrl: row.top_icon_url,
-            playing: row.top_playing
-          }
-        : null
-    }));
+    }>)
+      .map((row) => {
+        const label = row.genre?.trim();
+        if (!label) return null;
+        return {
+          genre: label,
+          slug: row.genre_slug?.trim() || slugify(label) || "uncategorized",
+          games: row.games,
+          playing: row.playing,
+          visits: row.visits,
+          topGame: row.top_slug
+            ? {
+                name: row.top_name ?? label,
+                slug: row.top_slug,
+                iconUrl: row.top_icon_url,
+                playing: row.top_playing
+              }
+            : null
+        };
+      })
+      .filter((row): row is StatsGenreSummary => Boolean(row))
+      .slice(0, limit);
   }
 
   const { rows } = await listBaseGames({ limit: 500, sort: "playing" });
@@ -909,7 +1043,33 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
     .slice(0, limit);
 }
 
-async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> {
+async function getStatsPlatformTotals(): Promise<{ livePlayers: number; totalVisits: number; lastUpdatedAt: string | null } | null> {
+  const { data, error } = await supabaseAdmin()
+    .from("stats_genre_current_index")
+    .select("playing, visits, indexed_at")
+    .limit(1000);
+
+  if (error) {
+    if (error.code !== "42P01") {
+      console.warn("Failed to load platform CCU totals", error.message);
+    }
+    return null;
+  }
+
+  const rows = (data ?? []) as Array<{ playing: number | string | null; visits: number | string | null; indexed_at: string | null }>;
+  if (!rows.length) return null;
+
+  const livePlayers = rows.reduce((sum, row) => sum + (toFiniteNumber(row.playing) ?? 0), 0);
+  const totalVisits = rows.reduce((sum, row) => sum + (toFiniteNumber(row.visits) ?? 0), 0);
+  const lastUpdatedAt = rows
+    .map((row) => row.indexed_at)
+    .filter((value): value is string => Boolean(value))
+    .sort();
+
+  return { livePlayers, totalVisits, lastUpdatedAt: lastUpdatedAt[lastUpdatedAt.length - 1] ?? null };
+}
+
+async function getPlatformTrendFallback(games: StatsGame[]): Promise<StatsChartPoint[]> {
   const ids = games.slice(0, 100).map((game) => game.universeId);
   if (!ids.length) return [];
   const sb = supabaseAdmin();
@@ -966,13 +1126,42 @@ async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> 
   return Array.from(byHour.values()).sort((a, b) => Date.parse(a.sampledAt) - Date.parse(b.sampledAt));
 }
 
+async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> {
+  const { data, error } = await supabaseAdmin().rpc("get_stats_platform_ccu_trend", {
+    p_since: hoursAgo(24)
+  });
+
+  if (!error) {
+    return ((data ?? []) as PlatformTrendRow[]).map((row) => {
+      const sampledAt = row.hour_start;
+      return {
+        label: new Date(sampledAt).toLocaleTimeString("en-US", { hour: "numeric", hour12: true, timeZone: "UTC" }),
+        sampledAt,
+        players: toFiniteNumber(row.players),
+        peakPlayers: toFiniteNumber(row.peak_players),
+        avgPlayers: toFiniteNumber(row.avg_players),
+        visits: toFiniteNumber(row.visits),
+        favorites: toFiniteNumber(row.favorites),
+        rating: toFiniteNumber(row.rating),
+        samples: toFiniteNumber(row.samples)
+      };
+    });
+  }
+
+  if (error.code !== "42883") {
+    console.warn("Failed to load platform CCU trend", error.message);
+  }
+  return getPlatformTrendFallback(games);
+}
+
 export async function getStatsHome(): Promise<StatsHomeData> {
-  const [{ rows: topBase }, { rows: visitedBase }, { total: trackedGames }, genres, riserBase] = await Promise.all([
+  const [{ rows: topBase }, { rows: visitedBase }, { total: trackedGames }, genres, riserBase, platformTotals] = await Promise.all([
     listBaseGames({ limit: STATS_HOME_TOP_GAMES_LIMIT, sort: "playing" }),
     listBaseGames({ limit: 10, sort: "visits" }),
     listBaseGames({ limit: 1, sort: "playing", count: "exact" }),
     listStatsGenres(STATS_HOME_GENRES_LIMIT),
-    listCurrentRisers(STATS_HOME_RISERS_LIMIT)
+    listCurrentRisers(STATS_HOME_RISERS_LIMIT),
+    getStatsPlatformTotals()
   ]);
   const [topGames, mostVisited, activeRisers] = await Promise.all([
     Promise.resolve(topBase),
@@ -994,13 +1183,13 @@ export async function getStatsHome(): Promise<StatsHomeData> {
     .slice(0, 6);
   const { rows: recentGames } = await listBaseGames({ limit: 8, sort: "updated" });
   const platformTrend = await getPlatformTrend(topGames);
-  const livePlayers = topGames.reduce((sum, game) => sum + (game.playing ?? 0), 0);
-  const totalVisits = mostVisited.reduce((sum, game) => sum + (game.visits ?? 0), 0);
+  const livePlayers = platformTotals?.livePlayers ?? topGames.reduce((sum, game) => sum + (game.playing ?? 0), 0);
+  const totalVisits = platformTotals?.totalVisits ?? mostVisited.reduce((sum, game) => sum + (game.visits ?? 0), 0);
   const sortedRefreshTimes = topGames
     .map((game) => game.lastStatsRefreshedAt ?? game.lastPlayingRefreshedAt)
     .filter((value): value is string => Boolean(value))
     .sort();
-  const lastUpdatedAt = sortedRefreshTimes[sortedRefreshTimes.length - 1] ?? null;
+  const lastUpdatedAt = platformTotals?.lastUpdatedAt ?? sortedRefreshTimes[sortedRefreshTimes.length - 1] ?? null;
 
   return {
     totals: {
@@ -1026,7 +1215,7 @@ export function normalizeStatsSort(value?: string | null): StatsSortKey {
 
 export function normalizeStatsRange(value?: string | null): StatsTimeRange {
   if (value === "24h") return "1d";
-  return STATS_TIME_RANGES.some((option) => option.value === value) ? (value as StatsTimeRange) : "1d";
+  return STATS_TIME_RANGES.some((option) => option.value === value) ? (value as StatsTimeRange) : DEFAULT_STATS_CHART_RANGE;
 }
 
 export function parseStatsSearchParams(searchParams?: Record<string, string | string[] | undefined>) {
@@ -1036,9 +1225,11 @@ export function parseStatsSearchParams(searchParams?: Record<string, string | st
   return {
     page: Number.isFinite(pageValue) && pageValue > 0 ? Math.floor(pageValue) : 1,
     q: first(searchParams?.q)?.trim() ?? "",
-    genre: first(searchParams?.genre)?.trim() || "all",
+    genres: normalizeFilterValues(searchParams?.genre),
+    subgenres: normalizeFilterValues(searchParams?.subgenre),
     sort: normalizeStatsSort(first(searchParams?.sort)),
-    minPlaying: Number.isFinite(minValue) && minValue > 0 ? Math.floor(minValue) : 0
+    minPlaying: Number.isFinite(minValue) && minValue > 0 ? Math.floor(minValue) : 0,
+    columns: normalizeStatsColumns(searchParams?.column)
   };
 }
 
@@ -1046,35 +1237,41 @@ export async function listStatsGames(input: {
   page?: number;
   pageSize?: number;
   q?: string;
-  genre?: string;
+  genres?: string[];
+  subgenres?: string[];
   sort?: string | null;
   minPlayers?: number | null;
+  columns?: StatsGameColumnKey[];
 }): Promise<StatsGamesPageData> {
   const page = Math.max(1, input.page ?? 1);
   const pageSize = Math.min(Math.max(input.pageSize ?? STATS_PAGE_SIZE, 10), 100);
   const sort = normalizeStatsSort(input.sort);
   const offset = (page - 1) * pageSize;
   const q = input.q?.trim() ?? "";
-  const genre = input.genre?.trim() ?? "all";
+  const selectedGenres = uniqueCleanStrings(input.genres ?? []);
+  const selectedSubgenres = selectedGenres.length ? uniqueCleanStrings(input.subgenres ?? []) : [];
   const minPlayers = typeof input.minPlayers === "number" && Number.isFinite(input.minPlayers) ? input.minPlayers : null;
+  const columns = input.columns?.length ? input.columns : DEFAULT_STATS_GAME_COLUMNS;
 
-  const [{ rows, total }, genreOptions] = await Promise.all([
+  const [{ rows, total }, genreOptions, subgenreOptions] = await Promise.all([
     listBaseGames({
       limit: pageSize,
       offset,
       q,
-      genre,
+      genre: selectedGenres,
+      subgenre: selectedSubgenres,
       minPlayers,
       sort,
       count: "planned"
     }),
-    getStatsGenreOptions()
+    getStatsGenreOptions(),
+    getStatsSubgenreOptions()
   ]);
-  const genres = genre !== "all" && !genreOptions.includes(genre)
-    ? [genre, ...genreOptions].sort((a, b) => a.localeCompare(b))
+  const genres = selectedGenres.some((genre) => !genreOptions.includes(genre))
+    ? [...new Set([...selectedGenres, ...genreOptions])].sort((a, b) => a.localeCompare(b))
     : genreOptions;
 
-  const games = rows.map((game, index) => ({ ...game, rank: game.rank ?? offset + index + 1 }));
+  const games = rows.map((game, index) => ({ ...game, rank: offset + index + 1 }));
 
   return {
     games,
@@ -1082,7 +1279,8 @@ export async function listStatsGames(input: {
     page,
     totalPages: Math.max(1, Math.ceil(total / pageSize)),
     genres,
-    filters: { q, genre, sort, minPlayers }
+    subgenres: subgenreOptions,
+    filters: { q, genres: selectedGenres, subgenres: selectedSubgenres, sort, minPlayers, columns }
   };
 }
 
@@ -1114,17 +1312,67 @@ export async function getStatsGenreOptions(): Promise<string[]> {
   ).sort((a, b) => a.localeCompare(b));
 }
 
+export async function getStatsSubgenreOptions(): Promise<StatsSubgenreOption[]> {
+  const rpcResult = await supabaseAdmin().rpc("get_stats_subgenre_options");
+  if (!rpcResult.error) {
+    return ((rpcResult.data ?? []) as Array<{ genre: string; subgenre: string; games: number; playing: number | string }>)
+      .map((row) => ({
+        genre: row.genre,
+        subgenre: row.subgenre,
+        games: row.games,
+        playing: toFiniteNumber(row.playing) ?? 0
+      }))
+      .sort((a, b) => a.genre.localeCompare(b.genre) || b.playing - a.playing || a.subgenre.localeCompare(b.subgenre));
+  }
+
+  if (rpcResult.error.code !== "42883" && rpcResult.error.code !== "PGRST202") {
+    console.warn("Failed to load stats subgenre options aggregate", rpcResult.error.message);
+  }
+
+  const { data, error } = await supabaseAdmin()
+    .from("stats_game_current_index")
+    .select("genre, genre_l1, genre_l2, playing")
+    .not("genre_l2", "is", null)
+    .order("playing", { ascending: false, nullsFirst: false })
+    .limit(20000);
+
+  if (error) {
+    console.warn("Failed to load stats subgenre options", error.message);
+    return [];
+  }
+
+  const byKey = new Map<string, StatsSubgenreOption>();
+  for (const row of (data ?? []) as Array<{ genre: string | null; genre_l1: string | null; genre_l2: string | null; playing: number | null }>) {
+    const genre = row.genre_l1 || row.genre || "Uncategorized";
+    const subgenre = row.genre_l2?.trim();
+    if (!subgenre) continue;
+    const key = `${genre}\u0000${subgenre}`;
+    const current = byKey.get(key) ?? { genre, subgenre, games: 0, playing: 0 };
+    current.games += 1;
+    current.playing += row.playing ?? 0;
+    byKey.set(key, current);
+  }
+
+  return [...byKey.values()].sort((a, b) => a.genre.localeCompare(b.genre) || b.playing - a.playing || a.subgenre.localeCompare(b.subgenre));
+}
+
 export async function searchStatsGamesForCompare(input: {
   q?: string | null;
   excludeUniverseIds?: number[];
   limit?: number;
+  genre?: string | null;
+  subgenre?: string | null;
 }): Promise<StatsGameSearchResult[]> {
   const q = input.q?.trim() ?? "";
   if (q.length < 2) return [];
   const exclude = new Set(input.excludeUniverseIds ?? []);
+  const genre = input.genre?.trim() || undefined;
+  const subgenre = input.subgenre?.trim() || undefined;
   const { rows } = await listBaseGames({
     limit: Math.min(Math.max(input.limit ?? 8, 1), 12),
     q,
+    genre,
+    subgenre,
     sort: "playing"
   });
   return rows
@@ -1135,7 +1383,9 @@ export async function searchStatsGamesForCompare(input: {
       slug: game.slug,
       iconUrl: game.iconUrl,
       playing: game.playing,
-      visits: game.visits
+      visits: game.visits,
+      genre: game.genre,
+      subgenre: game.subgenre
     }));
 }
 
@@ -1311,7 +1561,7 @@ async function getBucketedChart(
 }
 
 export function normalizeStatsResolution(value?: string | null): StatsChartResolution {
-  return STATS_CHART_RESOLUTIONS.some((option) => option.value === value) ? (value as StatsChartResolution) : "hourly";
+  return STATS_CHART_RESOLUTIONS.some((option) => option.value === value) ? (value as StatsChartResolution) : DEFAULT_STATS_CHART_RESOLUTION;
 }
 
 function parsePositiveUniverseIds(value: string | null, limit = 2): number[] {
@@ -1347,6 +1597,41 @@ async function getStatsGameComparisons(
       slug: game.slug,
       iconUrl: game.iconUrl,
       points: await getBucketedChart(game.universeId, range, resolution, window)
+    });
+  }
+  return comparisons;
+}
+
+function rankComparisonMatchesScope(
+  game: Pick<StatsGame, "genre" | "subgenre">,
+  baseGame: Pick<StatsGame, "genre" | "subgenre">,
+  scope: StatsRankKey
+) {
+  if (scope === "global") return true;
+  if (scope === "genre") return Boolean(baseGame.genre && game.genre === baseGame.genre);
+  return Boolean(baseGame.subgenre && game.subgenre === baseGame.subgenre);
+}
+
+async function getStatsRankChartComparisons(
+  universeIds: number[],
+  baseGame: Pick<StatsGame, "genre" | "subgenre">,
+  scope: StatsRankKey,
+  range: StatsTimeRange,
+  resolution: StatsChartResolution,
+  window = chartWindow(range)
+): Promise<StatsRankChartComparison[]> {
+  if (!universeIds.length) return [];
+  const games = await Promise.all(universeIds.map((id) => getStatsGameSummaryByUniverseId(id)));
+  const comparisons: StatsRankChartComparison[] = [];
+  for (const game of games) {
+    if (!game || !rankComparisonMatchesScope(game, baseGame, scope)) continue;
+    const rows = await getRankRows(game.universeId, range, window);
+    comparisons.push({
+      universeId: game.universeId,
+      name: game.name,
+      slug: game.slug,
+      iconUrl: game.iconUrl,
+      points: bucketRankRows(rows, range, resolution, window)
     });
   }
   return comparisons;
@@ -1419,8 +1704,8 @@ async function getStatsChartAnnotations(universeId: number, start: Date, end: Da
 
 export async function getStatsGameChart(
   universeId: number,
-  range: StatsTimeRange = "1d",
-  resolution: StatsChartResolution = "hourly",
+  range: StatsTimeRange = DEFAULT_STATS_CHART_RANGE,
+  resolution: StatsChartResolution = DEFAULT_STATS_CHART_RESOLUTION,
   options: { includePrevious?: boolean; includeAnnotations?: boolean; compareUniverseIds?: number[] } = {}
 ): Promise<StatsGameChartData> {
   const window = chartWindow(range);
@@ -1595,15 +1880,16 @@ async function getRankRows(universeId: number, range: StatsTimeRange, window = c
 
 export async function getStatsGameRankChart(
   game: Pick<StatsGame, "universeId" | "genre" | "subgenre">,
-  range: StatsTimeRange = "1d",
-  resolution: StatsChartResolution = "hourly",
-  options: { includePrevious?: boolean; includeAnnotations?: boolean } = {}
+  range: StatsTimeRange = DEFAULT_STATS_CHART_RANGE,
+  resolution: StatsChartResolution = DEFAULT_STATS_CHART_RESOLUTION,
+  options: { includePrevious?: boolean; includeAnnotations?: boolean; compareUniverseIds?: number[]; compareScope?: StatsRankKey } = {}
 ): Promise<StatsGameRankChartData> {
   const window = chartWindow(range);
   const previousWindow = chartWindow(range, 1);
-  const [rows, previousRows, annotations] = await Promise.all([
+  const [rows, previousRows, comparisons, annotations] = await Promise.all([
     getRankRows(game.universeId, range, window),
     options.includePrevious ? getRankRows(game.universeId, range, previousWindow) : Promise.resolve(undefined),
+    getStatsRankChartComparisons(options.compareUniverseIds ?? [], game, options.compareScope ?? "global", range, resolution, window),
     options.includeAnnotations ? getStatsChartAnnotations(game.universeId, window.start, window.end) : Promise.resolve(undefined)
   ]);
   return {
@@ -1612,6 +1898,7 @@ export async function getStatsGameRankChart(
     resolution,
     points: bucketRankRows(rows, range, resolution, window),
     previousPoints: previousRows ? bucketRankRows(previousRows, range, resolution, previousWindow) : undefined,
+    comparisons,
     annotations,
     summaries: summarizeRankRows(rows, game)
   };
@@ -1619,9 +1906,9 @@ export async function getStatsGameRankChart(
 
 export async function getStatsGameRankChartByUniverseId(
   universeId: number,
-  range: StatsTimeRange = "1d",
-  resolution: StatsChartResolution = "hourly",
-  options: { includePrevious?: boolean; includeAnnotations?: boolean } = {}
+  range: StatsTimeRange = DEFAULT_STATS_CHART_RANGE,
+  resolution: StatsChartResolution = DEFAULT_STATS_CHART_RESOLUTION,
+  options: { includePrevious?: boolean; includeAnnotations?: boolean; compareUniverseIds?: number[]; compareScope?: StatsRankKey } = {}
 ): Promise<StatsGameRankChartData> {
   const game = await getStatsGameSummaryByUniverseId(universeId);
   return getStatsGameRankChart(
@@ -1712,8 +1999,8 @@ async function buildStatsGameDetail(row: UniverseRow | StatsGameIndexRow): Promi
       ? mapIndexedGame(row)
       : (await attachGrowth([mapUniverse(row)]))[0];
   const [initialChart, initialRankChart, relatedLinks, sameCreator, similarGames, includedInLists, globalRank] = await Promise.all([
-    getStatsGameChart(baseGame.universeId, "1d", "hourly", { includeAnnotations: true }),
-    getStatsGameRankChart(baseGame, "1d", "hourly", { includeAnnotations: true }),
+    getStatsGameChart(baseGame.universeId, DEFAULT_STATS_CHART_RANGE, DEFAULT_STATS_CHART_RESOLUTION, { includeAnnotations: true }),
+    getStatsGameRankChart(baseGame, DEFAULT_STATS_CHART_RANGE, DEFAULT_STATS_CHART_RESOLUTION, { includeAnnotations: true }),
     loadRelatedLinks(baseGame.universeId, baseGame),
     loadSameCreatorGames(baseGame),
     loadSimilarGames(baseGame),

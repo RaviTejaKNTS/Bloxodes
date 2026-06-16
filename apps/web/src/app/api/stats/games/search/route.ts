@@ -8,7 +8,13 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const q = searchParams.get("q") ?? "";
     const exclude = normalizeStatsCompareIds(searchParams.get("exclude"));
-    const games = await searchStatsGamesForCompare({ q, excludeUniverseIds: exclude, limit: 8 });
+    const games = await searchStatsGamesForCompare({
+      q,
+      excludeUniverseIds: exclude,
+      limit: 8,
+      genre: searchParams.get("genre"),
+      subgenre: searchParams.get("subgenre")
+    });
     return NextResponse.json(
       { games },
       {

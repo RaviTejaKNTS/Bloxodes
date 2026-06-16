@@ -8,6 +8,16 @@ The notes should sound like a real explanation, not a checklist with nicer words
 
 For catalog and game-catalog pages, research must pass a player-usefulness gate before it can become final copy. The agent must identify the real player task, list the facts required to solve it, check whether those facts are source-backed and present in local data, and block writing when useful source-backed facts are missing. Safe-but-thin prose is not a substitute for data work.
 
+## Production Coverage Gate
+
+Before suggesting or writing any Bloxodes page, check production coverage first. Search production by universe ID, slug, title, route, source URLs, related game name, and topic synonyms across the relevant page families: `games`, `wiki_pages`, `wiki_catalog_pages`, `catalog_pages`, `articles`, `events_pages`, `tools`, `checklist_pages`, and `quiz_pages` when applicable.
+
+This is the first gate for articles, catalogs, wiki pages, code pages, events pages, tools, checklists, quizzes, and game-page discovery. Do not brainstorm a new topic list before this check.
+
+If production already has the same page or a page that clearly answers the same topic, do not recommend a duplicate. Mark it `[we already have a page]`, record the URL or row evidence, and recommend an update only if the existing page is thin, stale, unpublished, broken, or missing required data. Then look for new uncovered topics.
+
+If production cannot be checked, mark the research `blocked` or `needs production coverage check`. Do not call a topic new based only on local files, memory, or competitor pages.
+
 ## Source Priority
 
 Prefer sources in this order:
@@ -48,7 +58,7 @@ tmp/content-workspace/<game-or-topic-slug>/<page-folder>/
 
 For game discovery, use `tmp/content-workspace/<game-slug>/discovery/` and omit `final.json` unless a later workflow explicitly needs it. Copy the matching tracker from `agents/content/todo-templates/` into the folder as `todo.md` before research starts.
 
-For full game coverage, discovery should produce a compact page map, not a data-readiness report. Resolve the game, audit existing coverage, decide whether a codes page should exist, list every catalog page needed for durable in-game item collections, list article topics that complete coverage without repeating other page types, identify any real tool opportunities, and mark wiki/checklist/quiz as create or already covered. If a needed page requires item data, images, or route work, recommend the page and record that work as the next action instead of marking the idea blocked. Event pages are handled by the events workflow, not by game-page discovery.
+For full game coverage, discovery should produce a compact page map, not a data-readiness report. Resolve the game, check production coverage before topic ideation, decide whether a codes page should exist, list every catalog page needed for durable in-game item collections, list article topics that complete coverage without repeating other page types, identify any real tool opportunities, and mark wiki/checklist/quiz as create or already covered. If a needed page requires item data, images, or route work, recommend the page and record that work as the next action instead of marking the idea blocked. Event pages are handled by the events workflow, not by game-page discovery.
 
 ## Research Notes Must Be Human Notes
 
@@ -61,9 +71,9 @@ The top of the notes must be readable by a human editor who has never seen the d
 - what this thing is in the game
 - how players use it
 - how players get it
-- why it matters or does not matter
+- what player action or decision it affects
 - what readers came to solve on this page
-- what in-game action or decision the final page should make easier
+- what in-game action or decision players are trying to handle
 - what facts are required for that action or decision
 - what structure will answer those questions in the cleanest order
 - what information should be cut because it does not help the page
@@ -160,12 +170,12 @@ Include:
 
 - the primary reader goal
 - sections that must exist because readers care about them
-- how the required fact matrix will be satisfied by cards, tables, `description_md`, `how_it_works_md`, FAQ, or route changes
+- how the required fact matrix will be satisfied by cards, tables, `description_md`, `description_json`, FAQ, or route changes
 - sections to skip or cut because they would pad the page
 - where a table, bullet list, or numbered list would explain faster than paragraphs
 - the story flow from opening context to final takeaway
 - the action, how-to, obtainment, use, or comparison section the page needs when the topic has player action behind it
-- for catalog and game-catalog pages, the proposed data update plan if needed, recommended visible title and `seo_title`, exact title promise, required content coverage for that promise, item-card section style, the in-game reason for that grouping, alternatives rejected, card fields to show or hide, and the `description_json` notes that should appear between those sections
+- for catalog and game-catalog pages, the proposed data update plan if needed, recommended visible title and `seo_title`, exact title promise, required content coverage for that promise, item-card section style, the in-game reason for that grouping, alternatives rejected, card fields to show or hide, the `description_json` notes that should appear between those sections, short-intro angle, internal-link opportunities for same-universe pages, and FAQ plan capped at 3-4 non-repeating questions unless the notes justify more
 - for catalog and game-catalog pages, what `description_md` should explain as a whole-page story so it does not repeat the same notes as `description_json`
 
 Do not mark research ready if this section is only a list of database fields. The outline should feel like an article editor decided the shape of the page before the writer started drafting.
@@ -199,7 +209,7 @@ Do not mark notes `ready to write` until the player-facing sections and the outl
 
 Research the collection and its item groups. For small catalogs, inspect every item when practical. For large catalogs, inspect representative items from each type, source, rarity, price range, availability state, or reward group.
 
-The notes should explain the collection itself before they explain fields.
+The notes should explain the game items or mechanic before they explain fields.
 
 For game-specific catalogs, reject weak scopes before data work starts. Catalogs should cover durable in-game item collections, not current season pass reward tracks, one-off event reward lists, current ranked season rewards, broad update summaries, gamepasses, badges, servers, developer products, or raw Roblox media. Event/season-origin items belong inside the durable collection they are part of, with source and availability recorded there. UGC is a special exception only when the game has meaningful UGC items and should follow the free Roblox items card pattern.
 
@@ -207,13 +217,13 @@ Run the data and image audit before proposing final copy. Compare local item cou
 
 For game-specific catalogs, source counts and missing item names must come from online research, not from Roblox API availability. Roblox APIs may confirm the game/universe or provide Roblox metadata, but they do not decide whether the catalog data can be gathered.
 
-Run the player-usefulness gate before the section proposal. A catalog page should not only list items; it should help the player buy, unlock, compare, upgrade, farm, equip, trade, find, or understand the collection. If important facts such as prices, shop/NPC names, damage values, chances, upgrade steps, locations, route order, requirements, or availability exist in reliable sources but are absent locally, update the dataset or mark the page blocked before writing.
+Run the player-usefulness gate before the section proposal. A catalog page should not only list items; it should help the player buy, unlock, compare, upgrade, farm, equip, trade, find, or understand the game items or mechanic. If important facts such as prices, shop/NPC names, damage values, chances, upgrade steps, locations, route order, requirements, or availability exist in reliable sources but are absent locally, update the dataset or mark the page blocked before writing.
 
-After research, propose the title promise and section style before writing. The title should be unique, well-defined, and tied to the collection's real intent, such as obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison. Choose the strongest in-game grouping, such as rarity, item type, source, location, tier, shop, unlock route, or world. The best grouping is the one that helps players understand the collection long-term, not necessarily the dataset's first category field.
+After research, propose the title promise and section style before writing. The title should be unique, well-defined, and tied to the real player intent, such as obtainment, locations, drops, chances, brewing, crafting, effects, bonuses, value, or comparison. Choose the strongest in-game grouping, such as rarity, item type, source, location, tier, shop, unlock route, or world. The best grouping is the one that helps players understand the items or mechanic long-term, not necessarily the dataset's first category field.
 
 When the route can render copy between item sections, plan `description_json` as short section context. These notes should set up the cards in that section with useful game meaning and should not be repeated in `description_md`.
 
-Plan the `description_md` separately. It should explain the full collection or mechanic, including how players get, use, compare, unlock, travel to, farm, hatch, roll, craft, equip, or avoid mistakes around the items when that action exists. A catalog page can have cards first and still need a clear how-to section later, because the cards show data while `description_md` teaches how the system actually works. If the approved title promises an answer, `description_md`, `how_it_works_md`, FAQs, and card fields must together satisfy that promise.
+Plan the `description_md` separately. It should explain the full collection or mechanic, including how players get, use, compare, unlock, travel to, farm, hatch, roll, craft, equip, or avoid mistakes around the items when that action exists. A catalog page can have cards first and still need a clear how-to section later, because the cards show data while `description_md` teaches how the system actually works. If the approved title promises an answer, `description_md`, `description_json`, FAQs, and card fields must together satisfy that promise. For wiki catalog pages, do not plan a separate how-to-read-this-page section. Plan public copy as game/items-only, with no source, research, workflow, dataset, API, verification, or missing-evidence language.
 
 The route must be checked as part of research. Record the actual section labels the renderer will produce from the current dataset. A column existing in the JSON is not enough. If a blank `rarity` field exists and the route would group every item under `Other`, the research must call that out and block final writing until the grouping behavior is fixed or a confirmed override is planned.
 
@@ -280,11 +290,17 @@ Do not use wiki research as a shortcut to rewrite every related catalog blurb. C
 
 ### Articles
 
-Research the exact narrow evergreen player question before approving an article. The article should not overlap a codes page, events page, wiki hub, catalog, checklist, quiz, or tool. Avoid generic beginner guides, codes troubleshooting, event topics, current update news, and broad item/category explainers that belong in catalog or wiki copy.
+Research the exact narrow evergreen player question before approving an article. The article should not overlap a codes page, events page, wiki hub, catalog, checklist, quiz, tool, or existing production article. Avoid generic beginner guides, codes troubleshooting, event topics, current update news, Discord/Trello/wiki link pages, complete item lists, and broad item/category explainers that belong in catalog or wiki copy.
 
-Good article research starts with a specific durable job: how to get a specific item, complete a specific quest/objective, use a specific mode or map, unlock a stable mechanic, farm a stable resource, solve a durable gameplay problem, or compare a narrow set of choices that cards/tables do not already answer.
+Before suggesting article topics, search production articles and related page families for the same title, slug, universe ID, tags, source URLs, item/mechanic name, and search-intent wording. If a production page already covers the intent, reject the duplicate and find a new uncovered article angle.
 
-The article should move like a clear explanation: what the player is trying to do, what requirement or mechanic matters, the steps or decision path, limitations, and what to check next.
+Good article research starts with a specific durable job: choose what to buy first, decide what to skip, rank a small set of options, explain a named mechanic, get a specific item, complete a specific quest/objective, use a specific mode or map, unlock a stable mechanic, farm a stable resource, solve a durable gameplay problem, or compare a narrow set of choices that cards/tables do not already answer.
+
+`All <core items>` topics are catalog work. Do not turn them into articles. If search results show complete item lists, use them to plan or improve the matching catalog page, then look for article angles around priority, ranking, mistakes, routes, comparisons, worth-it decisions, or specific mechanics.
+
+The article should move like a clear explanation: what the player is trying to do, what requirement or mechanic matters, the steps or path, limitations, and what to check next.
+
+Research should produce the simplest useful outline, not a fixed H2 plan. If the answer only needs two sections or a short article, keep it short. For how-to topics, plan the article around the action first instead of adding a broad `What is...` setup before the useful steps.
 
 ### Events Pages
 

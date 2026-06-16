@@ -15,14 +15,17 @@ Workspace: `tmp/content-workspace/<game-slug>/discovery/`
 - [ ] Confirm canonical game name, slug, place ID, universe ID, creator, and official Roblox URL.
 - [ ] Create or update `research-notes.md` in this folder.
 - [ ] Note ambiguous similarly named games so coverage does not merge the wrong title.
-- [ ] Check local docs/source URL candidates before assuming the game is new.
+- [ ] Check production DB or public production URLs before assuming any page or topic is new.
+- [ ] Check local docs/source URL candidates only after the production coverage gate.
 
 ## Existing Coverage
 
+- [ ] Run the production coverage gate first: search by universe ID, slug, title, route, old slugs, source URLs, item/system names, and topic synonyms.
 - [ ] Check existing Bloxodes rows/pages by universe ID, slug, title, old slugs, and source URLs.
-- [ ] Confirm whether the coverage audit is using live production, local Supabase, or the public site; use `NODE_ENV=production` for live DB checks.
+- [ ] Confirm whether the coverage audit is using live production, local Supabase, or the public site; use `NODE_ENV=production` for live DB checks, and do not recommend new topics from local-only evidence.
 - [ ] Audit codes, wiki, checklist, quiz, tools, catalogs, articles, and local datasets.
 - [ ] Mark existing pages as `[we already have a page]` only when the page is truly present for the correct game.
+- [ ] Reject duplicate article/catalog/tool/checklist/quiz/wiki ideas already covered in production, then look for uncovered topics.
 - [ ] Note missing or stale page/data work in the next-action column, not as a blocker status.
 
 ## Codes Check
@@ -46,7 +49,9 @@ Workspace: `tmp/content-workspace/<game-slug>/discovery/`
 ## Articles, Tools, Wiki, Checklist, Quiz
 
 - [ ] List article topics that make coverage complete without repeating codes, wiki, catalogs, checklist, quiz, or tools.
-- [ ] Include opinionated, experience-based, tutorial, comparison, and player-advice article angles when they fit.
+- [ ] Include priority, ranking, mechanic, comparison, mistake, progression, route, location, unlock, opinionated, experience-based, tutorial, and player-advice article angles when they fit.
+- [ ] Reject Discord/Trello/wiki link pages and `All <core items>` article ideas; those belong outside articles, usually as wiki/catalog coverage.
+- [ ] If every article idea is a how-to guide, rerun topic discovery across non-how-to search intents before finalizing.
 - [ ] Identify tool opportunities only after checking real input/output value, gameplay need, and competing tools; otherwise mark `[no tool recommended]`.
 - [ ] Mark wiki, checklist, and quiz as `[create]` or `[we already have a page]`.
 - [ ] Skip event pages in this workflow; add only a short note if event evidence exists.

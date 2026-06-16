@@ -35,20 +35,21 @@ A vehicle from the current car showroom can be bought again with Bucks or Robux.
 1. Re-read the player-facing research sections in `research-notes.md`.
 2. Re-read `todo.md` and confirm required gates through the current stage are checked or explicitly blocked.
 3. Confirm the page type and target fields.
-4. For catalog and game-catalog pages, confirm the data and image audit exists and is resolved.
-5. For catalog and game-catalog pages, confirm the player-usefulness gate and required fact matrix exist and are resolved.
-6. Confirm the FLOW pass happened when the page has `description_md`, `how_it_works_md`, article body, or tool explanation.
-7. Remove generic opening lines.
-8. Remove unsupported claims.
-9. Cut repeated ideas across fields.
-10. Replace broad field claims with exact game or dataset details.
-11. Keep the useful answer close to the top.
-12. Add missing context where the copy jumps too quickly between mechanics, fields, or item groups.
-13. Split paragraphs that mix unrelated concepts.
-14. Check headings are clear sentence-style fragments, not rigid one-word labels.
-15. Check Markdown and JSON are valid.
-16. Check the visible title and `seo_title` are unique, well-defined, count-accurate, and fully supported by the page body.
-17. Check the final output can be pasted or upserted without reshaping.
+4. Confirm `research-notes.md` records the production coverage gate for any new page or topic. If production was not checked, the content is not ready.
+5. For catalog and game-catalog pages, confirm the data and image audit exists and is resolved.
+6. For catalog and game-catalog pages, confirm the player-usefulness gate and required fact matrix exist and are resolved.
+7. Confirm the FLOW pass happened when the page has `description_md`, `how_it_works_md`, article body, or tool explanation.
+8. Remove generic opening lines.
+9. Remove unsupported claims.
+10. Cut repeated ideas across fields.
+11. Replace broad field claims with exact game or dataset details.
+12. Keep the useful answer close to the top.
+13. Add missing context where the copy jumps too quickly between mechanics, fields, or item groups.
+14. Split paragraphs that mix unrelated concepts.
+15. Check headings are clear sentence-style fragments, not rigid one-word labels.
+16. Check Markdown and JSON are valid.
+17. Check the visible title and `seo_title` are unique, well-defined, count-accurate, and fully supported by the page body.
+18. Check the final output can be pasted or upserted without reshaping.
 
 ## Understanding Questions
 
@@ -220,8 +221,13 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 ### Article
 
 - The first paragraph gives useful context immediately.
+- How-to articles start with the action, steps, or method. They do not open with a broad `What is...` section unless a short definition is necessary.
 - The topic is focused and evergreen, not generic news, current event coverage, codes troubleshooting, broad beginner content, or a catalog/wiki duplicate.
-- Research notes include an overlap check against codes, events, wiki, catalogs, tools, checklists, and quizzes.
+- The article answers the title directly and does not drift into side topics.
+- The article uses the fewest headings that still make the answer easy to scan.
+- Small complete articles are allowed. Do not fail an article for being around 300 words if it fully answers the title.
+- Extra setup, recap, padded conclusions, and tiny non-core headings have been cut or merged.
+- Research notes include a production duplicate check and an overlap check against codes, events, wiki, catalogs, tools, checklists, and quizzes.
 - The article has source-backed claims where needed.
 - The visible title is natural, SEO-friendly, and not a flat database label. Keep the main keyword near the front, and use a short outcome phrase when it helps the reader understand why to open it.
 - `author_id` is set before import. If no author was specified, the importer should randomly choose one from `authors`.
@@ -230,6 +236,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 - The `/articles` card and `/articles/<slug>` detail page show the same author name and same edited cover after import or revalidation.
 - Headings fit the story and reader flow.
 - Paragraphs do not jump between unrelated points too quickly.
+- Full sentences and transitions carry the reader from the title to the answer without sounding like a list of disconnected notes.
 - `sources` includes the important URLs.
 - `tags` are useful for grouping, not decoration.
 
@@ -276,6 +283,7 @@ For `wiki_md`, also fail if the line reads like a link-card caption instead of a
 Do not call content ready unless:
 
 - `research-notes.md` has real human topic research before implementation notes.
+- `research-notes.md` records production coverage checked first, or the work is marked blocked / needs production coverage check.
 - Catalog and game-catalog research includes a resolved data and image audit.
 - Catalog and game-catalog research includes a resolved player-usefulness gate and required fact matrix.
 - Catalog, game-catalog, article, and tool pages with body copy have gone through the FLOW pass.

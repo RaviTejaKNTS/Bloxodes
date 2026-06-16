@@ -14,6 +14,7 @@ Workspace: `tmp/content-workspace/<game-slug>/codes/`
 
 - [ ] Confirm editorial game slug, universe ID, place ID, official Roblox URL, and existing `games` row.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
+- [ ] Check production DB or public production URLs first for an existing codes page or old slug/source URL coverage for this game.
 - [ ] Verify the game has an actual codes system.
 - [ ] Search existing old slugs/source URL docs so the row is not duplicated.
 

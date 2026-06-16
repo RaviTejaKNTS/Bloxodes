@@ -45,6 +45,8 @@ type ChartPointForRender = ChartPoint & {
 type MetricKey = "players" | "visits" | "favorites" | "rating";
 type RangeKey = "1d" | "7d" | "14d" | "30d" | "90d";
 type ResolutionKey = "hourly" | "daily" | "weekly" | "monthly";
+const defaultChartRange: RangeKey = "14d";
+const defaultChartResolution: ResolutionKey = "hourly";
 
 type ChartData = {
   range: RangeKey;
@@ -237,7 +239,7 @@ export function StatsChartPanel({
   initialChart,
   universeId,
   defaultMetric = "players",
-  defaultRange = "1d",
+  defaultRange,
   compact = false,
   area = false
 }: {
@@ -251,9 +253,10 @@ export function StatsChartPanel({
   compact?: boolean;
   area?: boolean;
 }) {
+  const initialRange = defaultRange ?? initialChart?.range ?? defaultChartRange;
   const [metric, setMetric] = useState<MetricKey>(defaultMetric);
-  const [range, setRange] = useState<RangeKey>(defaultRange);
-  const [resolution, setResolution] = useState<ResolutionKey>(initialChart?.requestedResolution ?? "hourly");
+  const [range, setRange] = useState<RangeKey>(initialRange);
+  const [resolution, setResolution] = useState<ResolutionKey>(initialChart?.requestedResolution ?? defaultChartResolution);
   const [showPrevious, setShowPrevious] = useState(false);
   const [showEvents, setShowEvents] = useState(false);
   const [showUpdates, setShowUpdates] = useState(false);
@@ -602,16 +605,28 @@ export function StatsChartPanel({
                   ) : compareResults.length ? (
                     <div className="space-y-1">
                       {compareResults.map((game) => (
-                        <button
-                          key={game.universeId}
-                          type="button"
-                          className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-foreground hover:bg-secondary/70"
-                          onClick={() => addComparison(game)}
-                        >
-                          <Plus className="h-3.5 w-3.5 shrink-0 text-muted" aria-hidden />
-                          <span className="min-w-0 flex-1 truncate">{game.name}</span>
-                          <span className="font-mono text-[11px] text-muted">{formatCompactNumber(game.playing)}</span>
-                        </button>
+                      <button
+                        key={game.universeId}
+                        type="button"
+                        className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-foreground hover:bg-secondary/70"
+                        onClick={() => addComparison(game)}
+                      >
+                        <Plus className="h-3.5 w-3.5 shrink-0 text-muted" aria-hidden />
+                        {game.iconUrl ? (
+                          <img
+                            src={game.iconUrl}
+                            alt=""
+                            loading="lazy"
+                            className="h-8 w-8 shrink-0 rounded-md border border-border/60 bg-surface object-cover"
+                          />
+                        ) : (
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border/60 bg-secondary/60 text-xs font-semibold text-muted">
+                            {game.name.slice(0, 1).toUpperCase()}
+                          </span>
+                        )}
+                        <span className="min-w-0 flex-1 truncate">{game.name}</span>
+                        <span className="font-mono text-[11px] text-muted">{formatCompactNumber(game.playing)}</span>
+                      </button>
                       ))}
                     </div>
                   ) : (

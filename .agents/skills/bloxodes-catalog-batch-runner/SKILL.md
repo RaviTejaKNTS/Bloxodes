@@ -123,7 +123,8 @@ The first subagent response must be a plan, not final content. Require:
 - proposed visible title, `seo_title`, and exact title promise; wiki catalog titles should usually use `All <N> <Item Or Collection> in <Game>: <real player SEO question>`
 - grouping axis and why it is the strongest in-game grouping
 - card fields to show and raw fields to hide
-- `description_json`, `description_md`, `how_it_works_md`, FAQ, and `wiki_md` plan
+- `intro_md`, `description_json`, `description_md`, FAQ, and `wiki_md` plan; `how_it_works_md` should stay empty for normal wiki catalog pages
+- public-copy plan: game/items only, no source/research/workflow/process caveats, short intro, player-question headings, natural same-universe links, and 3-4 non-repeating FAQs
 - files the subagent expects to edit
 - risks or questions requiring parent approval
 
@@ -148,7 +149,7 @@ Do not accept a completion report that only says the content is written. The pag
 Before marking any catalog `done`, check:
 
 - subagent `todo.md` is complete or honestly blocked
-- `research-notes.md` explains the collection like a game system, not a schema
+- `research-notes.md` explains the game items or mechanic, not a schema
 - `research-notes.md` includes and resolves the player-usefulness gate and required fact matrix
 - catalog scope still matches the approved list
 - source count, local data count, rendered/title count, and image coverage are recorded
@@ -158,7 +159,7 @@ Before marking any catalog `done`, check:
 - the title question is a real player decision, not a generic SEO tail
 - grouping and card fields match actual route behavior
 - public copy is evergreen, specific, and not generic
-- `description_md` explains the whole collection, not only card sections
+- `description_md` explains the game items or mechanic, not only card sections
 - `description_md` headings are specific and communicative, not generic labels like `How <collection> works`
 - `description_json` notes match rendered section labels
 - `wiki_md` is useful on the wiki hub

@@ -6,6 +6,10 @@ Use this process for serious rewrites, new page copy, or any content that will b
 
 The current standard is outline-first, and for catalog work it is data-first and flow-first too. Research does not stop at facts. It must decide what the reader cares about, whether the item data is complete enough, which sections should exist, which sections should be cut, and which details are better shown as bullets, tables, numbered steps, or section-level `description_json` notes before `final.json` is written. After the first-pass JSON exists, the FLOW pass must rewrite the public fields so the page reads in an order that makes sense to a normal player.
 
+Production coverage comes first. Before suggesting, writing, or approving any article, catalog, wiki, code page, event page, tool, checklist, or quiz, check the production database or public production page for existing coverage by universe ID, slug, title, topic wording, route, source URLs, and related page family. Do this before brainstorming new topics. If production already covers the same page or topic, mark the work as `[we already have a page]`, update or refresh only when needed, and look for a genuinely new topic instead of suggesting a duplicate.
+
+If production coverage cannot be checked, do not pretend the topic is new. Record the gap in `research-notes.md`, mark the work `blocked` or `needs production coverage check`, and stop before recommending new page ideas.
+
 For catalog and game-catalog pages, the workflow is also data-confirmation-first, title-confirmation-first, and section-confirmation-first. After research, audit the local dataset against current sources, check image coverage, propose any dataset updates that are needed, propose the visible title and `seo_title`, state the exact promise that title makes, propose how the item cards should be divided into sections, explain why that section style is the strongest in-game grouping, propose the clean card fields, and wait for explicit user confirmation before writing final copy or updating Supabase. Do not treat a general request like "write this page", "continue", or "go ahead" as approval unless the user has already seen the exact data, title, section, and card-data proposal.
 
 Catalog and game-catalog research also has to pass the player-usefulness gate. The agent must identify the in-game jobs the reader came to solve, name the exact facts required to solve those jobs, and prove those facts are either in the dataset/card fields or intentionally unavailable. Do not replace missing player-useful facts with safe prose. If a source has prices, shops, upgrade paths, damage, locations, odds, requirements, or other decision-making facts and the local data does not, the page is `needs dataset update`, not `ready to write`.
@@ -52,7 +56,7 @@ No batch rewriting until one page has become the gold standard and the user has 
 
 After a gold-standard game catalog is approved and the user asks for an approved multi-catalog run, use `bloxodes-catalog-batch-runner` with `agents/content/todo-templates/catalog-batch.md`. The batch runner coordinates one catalog page per subagent, but each page still needs its own research notes, data/image audit, FLOW pass, final edit, and parent QA.
 
-For full game coverage, discovery is a compact page map. Resolve the game, audit existing Bloxodes coverage, decide whether a codes page should exist, list every catalog page needed for durable in-game item collections, list article topics that complete coverage without repeating other page types, identify any real tool opportunities, and mark wiki/checklist/quiz as create or already covered. Do not treat missing catalog data as a reason to avoid recommending a needed page; record the item/source/image work as the next action. Event pages are handled by the events workflow, not by game-page discovery.
+For full game coverage, discovery is a compact page map. Resolve the game, check production coverage before topic ideation, decide whether a codes page should exist, list every catalog page needed for durable in-game item collections, list article topics that complete coverage without repeating other page types, identify any real tool opportunities, and mark wiki/checklist/quiz as create or already covered. Do not treat missing catalog data as a reason to avoid recommending a needed page; record the item/source/image work as the next action. Event pages are handled by the events workflow, not by game-page discovery.
 
 Catalog item rows are gathered through online research and source collection, not Roblox APIs. Use developer sources, Roblox experience pages, community wikis/databases, guides, videos, screenshots, changelogs, and competitor/source pages to build or repair the local dataset. Roblox APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks. Missing API item rows must never be used as a reason to block, skip, or shrink a needed catalog.
 
@@ -165,6 +169,8 @@ Use `agents/content/todo-templates/page-research.md` only when no specific templ
 
 Create or update `todo.md` first, then create `research-notes.md` before writing `final.json`.
 
+The first content action inside `research-notes.md` is the production coverage gate. Record which production tables or public URLs were checked, what existing rows/pages were found, and which candidate topics were rejected because production already covers them. Local rows are useful for draft state, but they do not replace the production check when deciding whether to suggest a new public page.
+
 The notes must explain the topic in simple language. A good research file should feel like a smart player explaining the system to another player before any polished copy exists.
 
 Do not make the notes sound like a form was filled out. Use the required headings, but write under them in normal sentences. The notes should make it obvious that the writer understands the topic, not only the table schema.
@@ -186,7 +192,9 @@ Research must answer:
 - What do players misunderstand?
 - What should the page teach before and after the cards, table, tool, or article body?
 - What should be cut because it repeats the cards or adds trivia without helping a decision?
-- What is the clean section outline?
+- What is the simplest clean structure for the finished page?
+
+These are research questions, not required public headings. Do not turn `What is this thing?` into a default article section. For how-to articles, the public article should start with the action or steps unless a short definition is truly needed.
 
 Schema, table fields, route files, and Supabase rows still matter, but they belong after the game/topic understanding. They are implementation context, not the research itself.
 
@@ -224,7 +232,7 @@ Explain what is useful, collectible, easy to replace, hard to get, event-gated, 
 
 ## Player usefulness gate
 
-For catalog and game-catalog pages, define the reader's real in-game job, the decision the page should support, and the answer a reader should have after finishing the page. If the page cannot make a player better at doing something, choosing something, finding something, buying something, upgrading something, or understanding a real mechanic, the topic or data is not ready.
+For catalog and game-catalog pages, define the reader's real in-game job, the decision players are making, and the in-game answer they need. If the topic or data cannot help a player do, choose, find, buy, upgrade, or understand something real in the game, it is not ready.
 
 ## Required fact matrix
 
@@ -538,9 +546,11 @@ Use formatting when it helps:
 
 Do not pad. But do not compress away the context.
 
+For articles, the same rule is stricter: do not stretch a focused answer. If the title is fully answered in two sections or around 300 words, keep it there. Start how-to topics with the action, use the fewest headings that still scan well, and only use tables, lists, or a deeper outline when the topic genuinely needs them.
+
 ## 7. Final Edit Gate
 
-Run `agents/content/final-edit.md` before writing to local Supabase or calling the work ready. The final edit gate assumes the FLOW pass has already happened. If a catalog or game-catalog page has not gone through FLOW, the final edit fails.
+Run `agents/content/final-edit.md` before writing to local Supabase or calling the work ready. The final edit gate assumes the FLOW pass has already happened for catalog, game-catalog, article, and tool pages with meaningful body copy. If that pass is missing, the final edit fails.
 
 The most important v2 blocker:
 

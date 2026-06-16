@@ -12,7 +12,7 @@ type PageProps = {
 
 export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
   const parsed = parseStatsSearchParams(await searchParams);
-  const genre = parsed.genre && parsed.genre !== "all" ? parsed.genre : null;
+  const genre = parsed.genres.length === 1 ? parsed.genres[0] : null;
   return {
     title: genre ? `${genre} Roblox Game Stats | ${SITE_NAME}` : `Roblox Game Stats | ${SITE_NAME}`,
     description: genre
@@ -29,9 +29,11 @@ export default async function StatsGamesPage({ searchParams }: PageProps) {
   const data = await listStatsGames({
     page: parsed.page,
     q: parsed.q,
-    genre: parsed.genre,
+    genres: parsed.genres,
+    subgenres: parsed.subgenres,
     sort: parsed.sort,
-    minPlayers: parsed.minPlaying
+    minPlayers: parsed.minPlaying,
+    columns: parsed.columns
   });
   return (
     <StatsPageShell>

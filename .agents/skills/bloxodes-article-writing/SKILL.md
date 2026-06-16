@@ -43,6 +43,8 @@ Hard pass on overlap:
 - no event articles, event timelines, or current event reward guides
 - no broad "beginner guide"
 - no broad "maps explained", "skins explained", or collection overview topics that should be catalog/wiki copy
+- no Discord, Trello, wiki link, or official-links articles
+- no `All <core items>` articles; complete item lists belong to catalog pages
 - no current update/news article; permanent mechanics should be framed as evergreen how-to or system guides
 
 Use these inputs:
@@ -50,6 +52,7 @@ Use these inputs:
 - `research-notes.md`
 - article type
 - exact niche question or angle
+- production duplicate check across articles and related page families
 - overlap check against codes, events, wiki, catalog, checklist, quiz, and tool pages
 - target game or universe if relevant
 - related Bloxodes pages
@@ -94,11 +97,19 @@ The feature image should also appear inside `content_md` before the first H2, ma
 
 Verify unstable facts before writing. If the article covers an item stat, formula, unlock condition, durable mechanic, price, route, or live game state, check current sources and record them in `research-notes.md`. If the topic depends on current codes or events, stop and use the proper automation-owned page workflow instead of writing an article.
 
+Before choosing or approving the article, check production coverage first. Search production articles and related page families by universe ID, slug, title, tags, source URLs, item/mechanic names, and search-intent wording. If an article, catalog, wiki, tool, checklist, quiz, codes page, or events page already covers the same intent, do not write a duplicate. Record the existing URL or row in `research-notes.md`, then either update that page if the user asked for a refresh or find a new uncovered angle.
+
 Research the exact question or angle before choosing structure. A how-to, a narrow comparison, and a troubleshooting piece should not all share the same rhythm. If the topic cannot be stated as one specific player question, it is probably not ready.
 
-Start with the useful issue: the specific mechanic, item, quest, map, mode, decision, or problem the reader came to understand. Avoid broad Roblox setup and do not repeat the title in different words.
+Write the smallest complete article that answers the title. A complete 300-word article is fine when the topic is simple. Do not pad the article to hit a length, add extra sections for balance, or stretch a short answer into a fake deep dive.
 
-Use headings that tell the reader what the section explains. Put context before tables, lists, or steps. Use numbered lists for processes, bullets for scan-heavy details, and paragraphs when the reader needs explanation or judgment.
+Start with the useful issue: the specific mechanic, item, quest, map, mode, action, or problem the reader came to understand. For how-to articles, start with the how-to. Do not add a `What is...` section first unless the player cannot follow the steps without one or two setup sentences.
+
+Use as few headings as the topic needs. If two sections can carry the whole answer, use two sections. Merge weak headings, cut tiny side sections, and keep the outline simple enough that a reader can understand the whole article path at a glance.
+
+Use headings that tell the reader what the section explains. Put context before tables, lists, or steps. Use numbered lists for processes, bullets for scan-heavy details, and paragraphs when the reader needs explanation or judgment. Tables, lists, and deep dives are welcome only when the topic genuinely needs that shape.
+
+Each paragraph should move the story forward from the title to the answer. Use full sentences, clear transitions, and plain player language so even a newer player can follow the article without extra background.
 
 A light player perspective is welcome when the angle supports it, especially in guides or opinion-aware explainers. Keep it grounded. Do not invent authority, community consensus, or personal experience the research does not support.
 

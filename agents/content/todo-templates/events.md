@@ -14,6 +14,7 @@ Workspace: `tmp/content-workspace/<game-slug>/events/`
 
 - [ ] Confirm editorial game slug, universe ID, place ID, official Roblox URL, and existing event records/routes.
 - [ ] Copy this file as `todo.md` before writing or updating `research-notes.md`.
+- [ ] Check production DB or public production URLs first for an existing events page or timeline coverage for this game.
 - [ ] Decide whether the game has real trackable events, not just normal updates.
 - [ ] Check existing `events_pages` and `roblox_virtual_events` rows before writing.
 

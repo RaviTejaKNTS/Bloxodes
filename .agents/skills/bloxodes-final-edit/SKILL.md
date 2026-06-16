@@ -35,6 +35,8 @@ Check the shape as carefully as the prose: Markdown should render cleanly, JSON 
 
 For articles, also check publishing metadata. The visible title should be SEO-friendly and human, with the main keyword near the front and an outcome phrase only when it makes the headline clearer or more inviting. Published articles need an `author_id`; if none is provided, the import workflow should pick one random author from `authors`. Game articles need an edited 1200x675 feature image made from the game thumbnail with a dark overlay and short centered title text, plus that image injected before the first H2 in `content_md`. Do not approve a raw game thumbnail as the final article cover unless generation is blocked and recorded.
 
+For articles, also enforce the compact-flow standard. The article must answer the title directly, use the fewest headings that keep it easy to scan, and move in full sentences from the opening to the answer. A complete 300-word article is valid. Reject padding, forced H2s, generic setup sections, broad `What is...` openings before how-to steps, recap sections that add nothing, and tiny headings that split one simple idea into fragments.
+
 For catalog and game-catalog pages, confirm that `research-notes.md` records the user-confirmed title promise, item-card section style, and card data shape before final copy. The confirmation must be explicit. Do not accept "user asked me to write the page" as approval of the title, card sections, or card fields. If `description_json` is used, it should contain short section-level notes, and `description_md` should not repeat those same notes.
 
 Also confirm the data and image audit. `research-notes.md` should show local item count, source count, rendered card/table count, title count, image coverage, missing or extra items, and the data action. If research found missing items or expected images and the gap was not fixed or explicitly accepted, the content is not ready.
@@ -47,7 +49,9 @@ For game-catalog cards, enforce the minimal card standard from `agents/content/p
 
 Also reject cards that miss the production card template: valid row image when research found one, name/status, one short player-facing description by default, and usually 3-5 key-value facts. If clean row images are unavailable, image fields should stay empty and the image gap should be recorded; do not accept Roblox API thumbnails, game icons, broad hero art, guide thumbnails, branded images, arrows/callouts, or non-specific screenshots as row images. Public card text must talk casually about the game and must not expose research/process language such as source notes, source estimate, needs in-game check, verification, partial, source-conflicted, reported by, dataset, or API.
 
-Count contracts matter too. Count-based titles should match local data and rendered cards unless the notes explain why they intentionally differ. Intent contracts matter as much as counts: if the title promises `how to get`, `locations`, `drops`, `chances`, `brewing`, `crafting`, `value`, `effects`, or another specific answer, the page must deliver that answer in the intro, cards, `description_md`, `how_it_works_md`, and FAQ where appropriate.
+Count contracts matter too. Count-based titles should match local data and rendered cards unless the notes explain why they intentionally differ. Intent contracts matter as much as counts: if the title promises `how to get`, `locations`, `drops`, `chances`, `brewing`, `crafting`, `value`, `effects`, or another specific answer, the page must deliver that answer in the intro, cards, `description_md`, `description_json`, and FAQ where appropriate. For wiki catalog pages, `how_it_works_md` should stay empty unless a special route explicitly renders it.
+
+For wiki catalog public copy, reject any mention of sources, research, workflow, dataset state, API behavior, verification gaps, or what could not be found. The page must talk about the game, items, mechanics, and in-game decisions only. Reject analogies and em dashes. `intro_md` should be short and engaging, usually one compact paragraph. `description_md` headings should answer real player questions or actions. Internal links should be natural same-universe links that add context, not special link lists. FAQs should usually be 3-4 items max and must not repeat answers already visible on the page.
 
 If a normal player can ask "what does that mean?" after a sentence and the surrounding copy does not answer it, the sentence still fails.
 
@@ -59,6 +63,7 @@ Do not mark the content ready unless:
 
 - `todo.md` exists, required gates through final edit are checked, and import/preview gates are checked before the page is called complete
 - `research-notes.md` has the reader goal, sources/data checked, confirmed facts, and unknowns
+- `research-notes.md` records production coverage checked first, or the work is marked blocked / needs production coverage check
 - `research-notes.md` explains the topic in plain language before implementation notes
 - catalog or game-catalog notes contain a resolved data and image audit
 - catalog or game-catalog notes contain a resolved player-usefulness gate and required fact matrix
@@ -71,10 +76,11 @@ Do not mark the content ready unless:
 - title counts, dataset counts, and rendered counts match or have a recorded intentional reason
 - `final.json` is valid and shaped for the target table
 - article output uses a simple SEO-friendly title, a non-null author, an edited feature image, and the card/detail pages are verified to show the same author and cover after import
+- article output answers the title directly, starts how-to topics with the action, and avoids padded sections or forced headings
 - code-page `final.json` contains only `games` row fields, uses the game slug without `-codes`, leaves `seo_title` empty or null, puts RobloxDen in `source_url`, Beebom in `source_url_2`, and contains no manual `codes` array or code dates
 - editorial page slugs/codes are not copied from `roblox_universes.slug`, because universe slugs are stats-only identifiers and may include universe IDs
 - events-page `final.json` contains only evergreen `events_pages` fields and no manual timeline rows, live statuses, current event dates, one-off reward timelines, or freshness claims
-- article output is focused and evergreen, with an overlap check against codes, events, wiki, catalogs, tools, checklists, and quizzes
+- article output is focused and evergreen, with a production duplicate check and overlap check against codes, events, wiki, catalogs, tools, checklists, and quizzes
 - quiz output uses the game slug without `-quiz`, keeps page copy compact, validates the local `QuizData` shape, keeps easy questions easy, makes hard questions pro-level, and varies question rhythm without banning normal quiz phrasing
 - public copy passes the blockers in `final-edit.md`
 - catalog, game-catalog, article, and tool body copy has gone through the FLOW pass when applicable

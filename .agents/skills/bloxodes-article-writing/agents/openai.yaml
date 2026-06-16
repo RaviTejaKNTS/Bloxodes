@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Article Writing"
   short_description: "Write researched Bloxodes articles"
-  default_prompt: "Use $bloxodes-article-writing to write research-notes.md and final.json for one article after plain-language topic research."
+  default_prompt: "Use $bloxodes-article-writing to write research-notes.md and final.json for one focused article after plain-language topic research. Keep the outline as small as the title allows, start how-to topics with the action or steps, and do not pad short complete articles."

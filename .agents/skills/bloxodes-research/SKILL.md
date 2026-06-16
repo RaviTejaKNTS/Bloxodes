@@ -40,9 +40,11 @@ For game discovery, use `tmp/content-workspace/<game-slug>/discovery/`. For game
 
 Before research starts, copy the most specific tracker from `agents/content/todo-templates/` into the folder as `todo.md` and update it as work progresses. Use `page-research.md` only when no page-type template fits.
 
+Production coverage is the first content gate. Before suggesting, writing, or approving a page or topic, check the production database or public production URLs for existing coverage by universe ID, slug, title, route, source URLs, item/system names, and topic synonyms across the relevant page families. If production already covers the same intent, record the existing page or row, mark the idea `[we already have a page]` or `do not create`, and look for a new uncovered topic instead of writing a duplicate. If production cannot be checked, mark the notes `blocked` or `needs production coverage check`.
+
 Write the notes so a human editor can understand the topic before seeing any database row. Explain what the thing is, how it works, what the player actually does, which terms need definition, which groups matter, where people usually get confused, and what in-game task the page should help the reader complete.
 
-For full game coverage, research in two passes. Pass 1 is catalog-led: resolve the game, audit coverage, confirm codes/events automation eligibility, and identify durable core in-game item collections. Pass 2 happens after the core catalog data exists and uses that data to decide wiki, checklist, quiz, tools, and focused evergreen articles. If a recommendation depends on item data or gameplay systems that have not been researched yet, mark it `blocked until catalog data` instead of guessing.
+For full game coverage, research in two passes. Pass 1 is catalog-led: resolve the game, audit production coverage first, confirm codes/events automation eligibility, and identify durable core in-game item collections. Pass 2 happens after the core catalog data exists and uses that data to decide wiki, checklist, quiz, tools, and focused evergreen articles. If a recommendation depends on item data or gameplay systems that have not been researched yet, mark it `blocked until catalog data` instead of guessing.
 
 Then inspect the implementation context: local datasets, target Supabase rows, route behavior, official Roblox or developer facts, established community context, and any page-specific source material.
 
@@ -68,7 +70,7 @@ For event pages, verify whether rows can come from `roblox_virtual_events` or an
 
 For tools, use a hard gate. Check gameplay, search intent, and competing calculators/planners/trackers. Recommend or write a tool only when the input/output job, formula/data source, and player value are real. Otherwise mark it `do not create` or `potential future`.
 
-For articles, check overlap before researching. Do not create articles for current codes, code troubleshooting, events, event timelines, generic beginner guides, broad catalog explanations, or topics already owned by wiki/catalog/checklist/quiz/tool pages. Good article research starts from one focused evergreen player question, such as how to get a specific item, complete a specific quest, use a specific mode/map, unlock a durable mechanic, or farm a stable resource.
+For articles, check production overlap before researching. Do not create articles for current codes, code troubleshooting, events, event timelines, generic beginner guides, broad catalog explanations, or topics already owned by production article/wiki/catalog/checklist/quiz/tool pages. Good article research starts from one focused evergreen player question, such as how to get a specific item, complete a specific quest, use a specific mode/map, unlock a durable mechanic, or farm a stable resource.
 
 Only mark research `ready to write` when the content can be written without guessing, the player-usefulness gate and required fact matrix are resolved, any required data/image update is complete or accepted, and any required title promise, section style, and card data shape have been confirmed.
 
