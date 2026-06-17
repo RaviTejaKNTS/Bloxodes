@@ -1,13 +1,16 @@
 ---
 name: bloxodes-game-page-discovery
-description: Find the complete Bloxodes page coverage plan for a specific Roblox game. Use when auditing existing pages; deciding which catalog pages, articles, tools, codes page, wiki, checklist, and quiz should exist; identifying pages already covered; and producing a compact table-first research note that names the pages to build without treating missing data as a reason to avoid recommending a page.
+description: Find Bloxodes page coverage for a specific Roblox game. Use catalog-only mode when the user asks what catalog pages can be made for a game; use full coverage mode only when the user asks for all page families, codes/wiki/articles/tools/checklist/quiz, or a complete game plan.
 ---
 
 # Bloxodes Game Page Discovery
 
 ## Start Here
 
-Use this skill before creating or rewriting a full game coverage set. It is a page-discovery skill: the job is to decide what Bloxodes should cover for the game, what already exists, and what should be built next.
+Use this skill before creating or rewriting game coverage. It has two modes:
+
+- Catalog-only discovery: use when the user asks what catalog pages can be made for a game, asks to check catalog pages, or asks for catalog ideas/recommendations.
+- Full game coverage discovery: use only when the user asks for all page families, a complete game plan, or explicitly mentions codes/wiki/articles/tools/checklist/quiz alongside catalogs.
 
 Read:
 
@@ -33,7 +36,67 @@ Do not create `brief.md`, `review.md`, separate fan-out plans, or final page JSO
 
 Discovery stops with recommendations. Do not write final public copy, seed Supabase rows, inject code rows, or build datasets unless the user explicitly asks for the next page or data step after seeing the discovery plan.
 
-## Discovery Shape
+## Catalog-Only Discovery Mode
+
+Catalog-only discovery is the default for prompts like `what catalog pages can we do for this game`, `check catalog pages for <game>`, or `what wiki catalog pages should we make`.
+
+Do not expand catalog-only discovery into a full page-family audit. Do not check or recommend codes, articles, tools, wiki, checklist, quiz, events, gamepasses, badges, developer products, servers, raw Roblox media, or generic platform data unless the check is needed to avoid a duplicate catalog or reject a weak catalog candidate. If those surfaces appear in sources, ignore them or mention them in one short `Skipped scope` note.
+
+Catalog-only discovery should follow this order:
+
+1. Resolve the canonical game identity: game name, preferred Bloxodes slug, universe ID, root place ID, creator, official Roblox URL, and ambiguity notes.
+2. Check production `wiki_catalog_pages` first by universe ID, `wiki_slug`, `collection_slug`, `code`, title, route, old slug, and topic synonyms. Also check public production URLs for `/wiki/<game-slug>/<collection-slug>`.
+3. Check `catalog_pages` only for global Roblox catalog overlap, such as platform-wide avatar items, free items, music IDs, decal IDs, or admin commands, so game-specific duplicates are not recommended.
+4. Check local datasets and route/config support after the production duplicate gate.
+5. Research online sources for durable in-game collections. Prefer official/developer sources, the Roblox experience page, game-specific wiki pages, Fandom or Miraheze when used by that game, Game8, BloxInformer, Beebom, community databases, serious guide pages, videos/screenshots, and changelogs. Use broad web results only to find these stronger sources.
+6. Return only the catalog recommendation table and the first catalog to build next.
+
+Use this clean catalog-only status set:
+
+- `[create]` - durable in-game item/system collection with enough source evidence and no existing production page.
+- `[we already have a page]` - production already has the correct game catalog page; note update only if the row/page is stale, thin, unpublished, broken, or missing required data.
+- `[skip]` - not a durable catalog, already covered by a global catalog, too temporary, or belongs to gamepasses/badges/products/events/servers/raw media/platform metadata.
+
+Do not use vague recommendation language such as `maybe`, `could do`, `can do`, `potential`, or `nice to have` in catalog-only output. If evidence is not strong enough for `[create]`, mark `[skip]` and give the reason. If a good collection exists but item rows/images must be gathered later, keep it `[create]` and put that work in `next data/source task`.
+
+Catalog-only `research-notes.md` may use this compact shape:
+
+```markdown
+# Research Notes: <Game> Catalog Discovery
+
+Date: YYYY-MM-DD
+Page Type: catalog-discovery
+Target: /wiki/<game-slug>/* catalog pages
+Status: complete | needs production coverage check
+
+## Game identity
+
+Canonical game, universe ID, place ID, creator, official URL, and ambiguity notes.
+
+## Production catalog coverage
+
+Table of existing `wiki_catalog_pages`, relevant old routes, public URLs, and global `catalog_pages` overlap.
+
+## Source scan
+
+Compact source list grouped by official/developer, wiki/database, guide/competitor, video/screenshot/changelog.
+
+## Catalog recommendations
+
+Table with route, code, status, collection, items/systems included, why players need it, likely fields/grouping, existing page/data, and next data/source task.
+
+## Skipped scope
+
+One compact list for gamepasses, badges, temporary rewards, event tracks, developer products, servers, raw media, global Roblox catalog duplicates, or weak ideas rejected.
+
+## Build first
+
+Name the first catalog to build and why.
+```
+
+The final response for catalog-only discovery should be short: canonical game, existing catalog pages, the clean catalog list, skipped ideas, first catalog to build, and the notes path. Do not include article topics, tool ideas, codes decisions, wiki/checklist/quiz decisions, or a full game build order.
+
+## Full Discovery Shape
 
 Research the game fully enough to answer what Bloxodes should publish around it. Do not stop at surface genre facts, but also do not turn discovery into a data-readiness audit. Missing data is normal. If a page is needed, recommend it and list the data/items that must be gathered later.
 
@@ -97,6 +160,8 @@ Search by universe ID, slug, title, old slugs, and source URLs.
 
 Be explicit about which Bloxodes environment you are auditing. Production is required before new topic recommendations. The default repo env can point at local Supabase in development, so do not call a read "production" unless you intentionally used the production env, checked the public site, or otherwise proved the source is live. For live coverage checks from repo scripts, set `NODE_ENV=production` so `scripts/shared/load-env.ts` loads `.env` instead of `.env.local` / `.env.development.local`. If the public site disagrees with a DB result, treat the environment mismatch as a blocker and resolve it before writing recommendations.
 
+For catalog-only discovery, narrow this audit to `wiki_catalog_pages`, relevant public wiki catalog routes, local game dataset/config support, and global `catalog_pages` overlap. Do not audit every page family just because the full discovery checklist exists.
+
 Check every relevant page type:
 
 - codes page in `games`
@@ -157,7 +222,7 @@ Catalog discovery is the most important part of this skill.
 
 Find every durable in-game item collection that Bloxodes should cover so the game feels complete. A catalog recommendation does not require the dataset to already exist. It does require enough research to believe the item/system exists and belongs on its own page.
 
-Use online research for catalog discovery: official/developer sources, Roblox experience pages, community wikis or databases, guides, videos, screenshots, changelogs, and competitor/source pages. Do not drift into Roblox APIs for item rows. API gaps are not catalog blockers; put the needed online data/source work in the next-action column.
+Use online research for catalog discovery: official/developer sources, Roblox experience pages, game-specific wiki pages, Fandom or Miraheze when relevant, Game8, BloxInformer, Beebom, community databases, serious guide pages, videos, screenshots, changelogs, and competitor/source pages. Do not drift into Roblox APIs for item rows. API gaps are not catalog blockers; put the needed online data/source work in the next-action column.
 
 Good catalog candidates include:
 
@@ -196,6 +261,8 @@ For each catalog candidate, record in a compact table:
 - next data/source task
 
 Do not label needed catalogs as blocked because data must be gathered. Put the data work in the next-action column. Only omit a catalog idea when it is not a real durable item/system collection.
+
+For catalog-only discovery, use `[create]`, `[we already have a page]`, and `[skip]` instead of the full-coverage priority labels. The output should be a clean decision list, not a brainstorm.
 
 ## Articles
 

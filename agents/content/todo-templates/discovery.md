@@ -13,17 +13,33 @@ Workspace: `tmp/content-workspace/<game-slug>/discovery/`
 ## Setup
 
 - [ ] Confirm canonical game name, slug, place ID, universe ID, creator, and official Roblox URL.
+- [ ] Choose discovery mode: catalog-only for catalog-page asks, or full coverage only when the user asks for all page families.
 - [ ] Create or update `research-notes.md` in this folder.
 - [ ] Note ambiguous similarly named games so coverage does not merge the wrong title.
 - [ ] Check production DB or public production URLs before assuming any page or topic is new.
 - [ ] Check local docs/source URL candidates only after the production coverage gate.
+
+## Catalog-Only Mode
+
+Use this section when the user asks what catalog pages can be made for a game, asks to check catalog pages, or asks for wiki catalog recommendations. Skip the full `Codes Check` and `Articles, Tools, Wiki, Checklist, Quiz` sections unless the user explicitly asks for full coverage.
+
+- [ ] Check production `wiki_catalog_pages` first by universe ID, `wiki_slug`, `collection_slug`, `code`, title, route, old slug, and topic synonyms.
+- [ ] Check public production URLs for existing `/wiki/<game-slug>/<collection-slug>` pages.
+- [ ] Check `catalog_pages` only for global Roblox catalog overlap that would make a game-specific page duplicate.
+- [ ] Check local datasets and route/config support after the production duplicate gate.
+- [ ] Research trusted online sources for durable in-game collections: official/developer sources, Roblox experience page, game-specific wiki pages, Fandom or Miraheze when relevant, Game8, BloxInformer, Beebom, community databases, serious guide pages, videos/screenshots, and changelogs.
+- [ ] Exclude current season tracks, one-off event rewards, ranked season rewards, generic update summaries, servers, gamepasses, badges, developer products, raw Roblox media, and platform metadata.
+- [ ] Return only catalog decisions with `[create]`, `[we already have a page]`, or `[skip]`; do not use `maybe`, `could do`, `can do`, `potential`, or `nice to have`.
+- [ ] For each catalog, record route, code, collection, items/systems included, player need, fields/grouping, existing page/data, and next data/source task.
+- [ ] Add one short skipped-scope note for rejected gamepasses, badges, products, servers, events, raw media, global catalog duplicates, or weak ideas.
+- [ ] Name the first catalog to build next and stop.
 
 ## Existing Coverage
 
 - [ ] Run the production coverage gate first: search by universe ID, slug, title, route, old slugs, source URLs, item/system names, and topic synonyms.
 - [ ] Check existing Bloxodes rows/pages by universe ID, slug, title, old slugs, and source URLs.
 - [ ] Confirm whether the coverage audit is using live production, local Supabase, or the public site; use `NODE_ENV=production` for live DB checks, and do not recommend new topics from local-only evidence.
-- [ ] Audit codes, wiki, checklist, quiz, tools, catalogs, articles, and local datasets.
+- [ ] For full coverage, audit codes, wiki, checklist, quiz, tools, catalogs, articles, and local datasets. For catalog-only mode, audit only catalog coverage, global catalog overlap, and local dataset/config support.
 - [ ] Mark existing pages as `[we already have a page]` only when the page is truly present for the correct game.
 - [ ] Reject duplicate article/catalog/tool/checklist/quiz/wiki ideas already covered in production, then look for uncovered topics.
 - [ ] Note missing or stale page/data work in the next-action column, not as a blocker status.

@@ -8,7 +8,7 @@ export const fetchCache = "force-no-store";
 
 export async function GET() {
   try {
-    const games = await listStatsSitemapGames(250);
+    const games = await listStatsSitemapGames(1000);
     const pages: SitemapUrlSetEntry[] = [
       { loc: withSiteUrl("/stats"), changefreq: "hourly", priority: "0.8" },
       { loc: withSiteUrl("/stats/games"), changefreq: "hourly", priority: "0.8" },
