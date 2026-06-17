@@ -24,7 +24,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - Next.js App Router application in `apps/web`, with public content in `apps/web/src/app/(site)` and account/auth flows in `apps/web/src/app/(secure)` plus `apps/web/src/app/auth`.
 - Chrome extension source lives in `apps/extension`. It builds a Chrome MV3 upload package and calls Bloxodes web APIs; it is not part of Dokploy deployment.
 - Expo React Native mobile source lives in `apps/mobile`. The current mobile V1 is a codes index/detail client backed by `/api/mobile/*` web routes.
-- Supabase is the primary content and product data store. Production now uses the self-hosted Supabase stack on the same Hostinger VPS as the web app, with API at `https://bloxodesdb.ravitejaknts.com` and Studio at `https://bloxodesstudio.ravitejaknts.com`; the old managed Supabase project is rollback/source-of-truth fallback only.
+- Supabase is the primary content and product data store. Production now uses the self-hosted Supabase stack on the same Hostinger VPS as the web app, with API at `https://database.bloxodes.com`, Studio at `https://studio.bloxodes.com`, and public storage/media URLs at `https://media.bloxodes.com`; the old managed Supabase project is rollback/source-of-truth fallback only until deletion.
 - Local datasets in `data/` and `apps/web/src/data/` back a few tools/catalog sections where structured content does not live in Supabase.
 - Operational work happens through root `scripts/` and Supabase edge functions in `supabase/functions/`.
 - Dokploy deploys the public web app from the root Dockerfile, which builds `@bloxodes/web` and runs `apps/web/server.js`.

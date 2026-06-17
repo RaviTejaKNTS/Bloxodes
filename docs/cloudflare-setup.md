@@ -26,9 +26,13 @@ Cloudflare will give you two nameservers (e.g. `kali.ns.cloudflare.com`, `rob.ns
 |---|---|---|---|
 | A | `bloxodes.com` | `187.124.68.197` | **Proxied (orange cloud)** |
 | A | `www` | `187.124.68.197` | **Proxied (orange cloud)** |
+| A | `database` | `187.124.68.197` | **Proxied (orange cloud)** |
+| A | `media` | `187.124.68.197` | **Proxied (orange cloud)** |
+| A | `studio` | `187.124.68.197` | **Proxied (orange cloud)** |
 | CNAME | `ravitejaknts.com` | *(keep separate, not on this account)* | — |
 
 > The orange cloud (proxied) is what routes traffic through Cloudflare's CDN. Do NOT set it to DNS-only (grey cloud) or you lose all CDN benefits.
+> `database.bloxodes.com` routes to Supabase Kong, `media.bloxodes.com` serves public Supabase storage URLs through the same Kong route, and `studio.bloxodes.com` routes to Supabase Studio behind Traefik Basic Auth.
 
 ---
 

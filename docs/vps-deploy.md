@@ -20,7 +20,7 @@ This repo is set up as an npm-workspaces monorepo. The production web app lives 
 1. Copy `.env.example` to `.env.production`.
 2. Set at minimum:
    - `NEXT_PUBLIC_SITE_URL`
-   - `SUPABASE_URL` (`https://bloxodesdb.ravitejaknts.com` in production)
+   - `SUPABASE_URL` (`https://database.bloxodes.com` in production)
    - `SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE`
    - `AUTH_SESSION_SECRET`
@@ -67,6 +67,7 @@ Use Cloudflare cache rules for public HTML. Do not rely on blanket origin HTML `
 - Automatic path: push to `production`, let `.github/workflows/dokploy-production-deploy.yml` trigger Dokploy through the Dokploy API or webhook fallback, wait for health, purge Cloudflare, and warm pages from the sitemap.
 - Manual Dokploy path: deploy in Dokploy, then manually run the GitHub workflow with `trigger_dokploy=false` so it only waits for the live site, purges Cloudflare, and warms from the sitemap.
 - Content update path: Supabase writes `revalidation_events`; the scheduled VPS Supabase function calls `https://bloxodes.com/api/revalidate`; the app purges affected Cloudflare tags and enqueues `cache_warm_events`; the scheduled VPS `cache-warm` function warms those pages separately.
+- Supabase public storage/media URLs should be emitted as `https://media.bloxodes.com/...`, not the raw Supabase API host.
 
 ### 6. Ads and consent
 

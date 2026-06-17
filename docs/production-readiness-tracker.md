@@ -10,7 +10,7 @@ This document tracks the remaining work to get the VPS deployment to a strong pr
 - `bloxodes.ravitejaknts.com` is live as the Dokploy admin panel over HTTPS.
 - The repo deploy source of truth is `RaviTejaKNTS/Bloxodes`.
 - Dokploy deploys from the `production` branch.
-- Production web and self-hosted Supabase now run on the same Hostinger VPS. The Supabase API is `https://bloxodesdb.ravitejaknts.com`, Supabase Studio is `https://bloxodesstudio.ravitejaknts.com`, and the former managed Supabase project is rollback/source fallback only.
+- Production web and self-hosted Supabase now run on the same Hostinger VPS. The Supabase API is `https://database.bloxodes.com`, Supabase Studio is `https://studio.bloxodes.com`, public storage/media URLs use `https://media.bloxodes.com`, and the former managed Supabase project is rollback/source fallback only until final deletion.
 - GitHub Actions can trigger Dokploy deploys automatically on `production` when `DOKPLOY_DEPLOY_WEBHOOK_URL` or `DOKPLOY_WEBHOOK_URL` is configured. The webhook call must include a GitHub-style push event header and `ref=refs/heads/production`; a bare `{}` payload returns `Branch Not Match`. A Dokploy API deploy remains available as a fallback when the token, URL, and application id are all configured. The same workflow can also be run manually with `trigger_dokploy=false` after a Dokploy-only manual deploy.
 - `bloxodes.com` and `www.bloxodes.com` have been cut over from Vercel to the VPS.
 - The Cloudflare zone has been cleaned up to a normalized production shape:
@@ -42,7 +42,7 @@ This document tracks the remaining work to get the VPS deployment to a strong pr
   - `SITE_URL=https://bloxodes.com`
   - `NEXT_PUBLIC_SITE_URL=https://bloxodes.com`
   - `REVALIDATE_ENDPOINT=https://bloxodes.com/api/revalidate`
-- Dokploy runtime Supabase values now point to the VPS Supabase API at `https://bloxodesdb.ravitejaknts.com`.
+- Dokploy runtime Supabase values should point to the VPS Supabase API at `https://database.bloxodes.com`.
 - Runtime content freshness now uses two scheduled VPS Supabase workers:
   - `revalidate` drains `revalidation_events` every minute with `REVALIDATE_BATCH_SIZE=100` and `REVALIDATE_STATS_BATCH_SHARE=0.8`
   - `cache-warm` drains `cache_warm_events` every minute with `CACHE_WARM_BATCH_SIZE=120` and `CACHE_WARM_CONCURRENCY=4`
