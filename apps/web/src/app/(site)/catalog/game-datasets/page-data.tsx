@@ -767,6 +767,60 @@ const KICK_A_LUCKY_BLOCK_MUTATION_SECTION_ORDER = [
   "Limited-data mutations"
 ];
 
+const CATCH_AND_TAME_MUTATION_SECTION_ORDER = [
+  "Wild spawn mutations",
+  "Weather mutations",
+  "Event and machine mutations"
+];
+
+const CATCH_AND_TAME_PET_SECTION_ORDER = ["Common", "Uncommon", "Rare", "Epic", "Legendary", "Mythic"];
+
+const CATCH_AND_TAME_BREEDING_RECIPE_SECTION_ORDER = [
+  "Mythic chain starters",
+  "Advanced mythic chain",
+  "Lower-tier recipes"
+];
+
+const CATCH_AND_TAME_WEATHER_EVENT_SECTION_ORDER = [
+  "Default and luck weather",
+  "Mutation weather",
+  "Event and admin weather",
+  "Spawn-focused weather"
+];
+
+const CATCH_AND_TAME_TRAIT_SECTION_ORDER = [
+  "Income and pen value",
+  "Breeding and egg outcomes",
+  "Travel utility"
+];
+
+const CATCH_AND_TAME_BIOME_SECTION_ORDER = [
+  "Free starter route",
+  "Early paid route",
+  "Mid-game unlocks",
+  "Late-game islands",
+  "Secret route"
+];
+
+const CATCH_AND_TAME_LASSO_SECTION_ORDER = ["Basic", "Rare", "Epic", "Legendary", "Legendary+", "Rainbow", "Exclusive"];
+
+const CATCH_AND_TAME_ITEM_SECTION_ORDER = [
+  "Food and bait",
+  "Mutation consumables",
+  "Machines",
+  "Lucky Blocks",
+  "Weather Totems"
+];
+
+const CATCH_AND_TAME_HIDDEN_KEYS = [
+  "catalogSection",
+  "sortOrder",
+  "sourceStatus",
+  "sourcePage",
+  "secondarySourcePage",
+  "imageStatus"
+];
+
 const KICK_A_LUCKY_BLOCK_WEIGHT_SECTION_ORDER = [
   "Starter weights",
   "Early shop upgrades",
@@ -3245,6 +3299,86 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     hiddenKeys: ["catalogSection", "sortOrder", "sourcePage", "sourceStatus"],
     additionalColumns: ["catalogSection"],
     maxStats: 4
+  },
+  "catch-and-tame-mutations": {
+    groupKey: "catalogSection",
+    groupLabel: "Mutation source",
+    sectionOrder: CATCH_AND_TAME_MUTATION_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: CATCH_AND_TAME_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["category", "trigger"]
+  },
+  "catch-and-tame-pets": {
+    groupKey: "rarity",
+    groupLabel: "Rarity",
+    sectionOrder: CATCH_AND_TAME_PET_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.rarity) ?? "Other",
+    hiddenKeys: [...CATCH_AND_TAME_HIDDEN_KEYS, "notes"],
+    additionalColumns: ["rarity", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["biome"]
+  },
+  "catch-and-tame-breeding-recipes": {
+    groupKey: "catalogSection",
+    groupLabel: "Recipe group",
+    sectionOrder: CATCH_AND_TAME_BREEDING_RECIPE_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: CATCH_AND_TAME_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["parentOne", "parentTwo"]
+  },
+  "catch-and-tame-weather-events": {
+    groupKey: "catalogSection",
+    groupLabel: "Weather group",
+    sectionOrder: CATCH_AND_TAME_WEATHER_EVENT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: CATCH_AND_TAME_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["category", "activation"]
+  },
+  "catch-and-tame-traits": {
+    groupKey: "catalogSection",
+    groupLabel: "Trait role",
+    sectionOrder: CATCH_AND_TAME_TRAIT_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: CATCH_AND_TAME_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 4,
+    subtitleKeys: ["role"]
+  },
+  "catch-and-tame-biomes": {
+    groupKey: "catalogSection",
+    groupLabel: "Route stage",
+    sectionOrder: CATCH_AND_TAME_BIOME_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: CATCH_AND_TAME_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 6,
+    subtitleKeys: ["difficulty", "unlockCost"]
+  },
+  "catch-and-tame-lassos": {
+    groupKey: "catalogSection",
+    groupLabel: "Lasso tier",
+    sectionOrder: CATCH_AND_TAME_LASSO_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: CATCH_AND_TAME_HIDDEN_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["availability"]
+  },
+  "catch-and-tame-items": {
+    groupKey: "catalogSection",
+    groupLabel: "Item group",
+    sectionOrder: CATCH_AND_TAME_ITEM_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [...CATCH_AND_TAME_HIDDEN_KEYS, "category"],
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["type", "availability"]
   },
   "kick-a-lucky-block-weights": {
     groupKey: "catalogSection",
