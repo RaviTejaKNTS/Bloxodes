@@ -5,7 +5,7 @@ import OpenAI from "openai";
 import { JSDOM } from "jsdom";
 import { createClient } from "@supabase/supabase-js";
 
-type GameRow = {
+type CodePageRow = {
   id: string;
   name: string;
   slug: string;
@@ -111,7 +111,7 @@ function truncate(value: string, max: number): string {
   return value.length > max ? `${value.slice(0, max)}…` : value;
 }
 
-function buildExistingArticleContext(game: GameRow): string {
+function buildExistingArticleContext(game: CodePageRow): string {
   const parts: string[] = [];
   if (game.intro_md) parts.push(`## Intro\n${game.intro_md}`);
   if (game.redeem_md) parts.push(`## Redeem\n${game.redeem_md}`);
@@ -123,7 +123,7 @@ function buildExistingArticleContext(game: GameRow): string {
   return truncate(combined, MAX_CONTEXT_ARTICLE);
 }
 
-function hasOldSlug(game: GameRow): boolean {
+function hasOldSlug(game: CodePageRow): boolean {
   const oldSlugs = Array.isArray(game.old_slugs) ? game.old_slugs : [];
   const canonical = (game.slug || "").toLowerCase();
   return oldSlugs
@@ -173,7 +173,7 @@ async function fetchSourceExcerpt(url: string): Promise<string | null> {
   }
 }
 
-async function loadSourceExcerpts(game: GameRow): Promise<string> {
+async function loadSourceExcerpts(game: CodePageRow): Promise<string> {
   const urls = [game.source_url, game.source_url_2, game.source_url_3]
     .filter((url): url is string => isAllowedSource(url));
 
@@ -251,7 +251,7 @@ function isRewritePayload(value: unknown): value is RewritePayload {
   return requiredKeys.every((key) => typeof candidate[key] === "string" && (candidate[key] as string).trim().length > 0);
 }
 
-function buildPrompt(game: GameRow, existingArticle: string, sources: string): string {
+function buildPrompt(game: CodePageRow, existingArticle: string, sources: string): string {
   const gameName = game.name;
   const createdAt = game.created_at ? new Date(game.created_at).toISOString() : "unknown date";
   const troubleshootHeading = resolveSectionTitle("codeNotWorking", gameName, 0);
@@ -291,7 +291,7 @@ Return valid JSON with these keys:
 `;
 }
 
-async function rewriteGame(game: GameRow, dryRun: boolean): Promise<void> {
+async function rewriteCodePage(game: CodePageRow, dryRun: boolean): Promise<void> {
   const existingArticle = buildExistingArticleContext(game);
   const sources = await loadSourceExcerpts(game);
   const hasSources = !sources.startsWith("No Beebom") && !sources.startsWith("No readable");
@@ -347,7 +347,7 @@ async function rewriteGame(game: GameRow, dryRun: boolean): Promise<void> {
   }
 
   const { error } = await supabase
-    .from("games")
+    .from("code_pages")
     .update(updatePayload)
     .eq("id", game.id);
 
@@ -358,12 +358,12 @@ async function rewriteGame(game: GameRow, dryRun: boolean): Promise<void> {
   console.log(`✅ Rewrote ${game.slug} (${displayName})`);
 }
 
-async function fetchNextGame(options: CliOptions): Promise<GameRow | null> {
+async function fetchNextCodePage(options: CliOptions): Promise<CodePageRow | null> {
   let page = 0;
 
   while (true) {
     let query = supabase
-      .from("games")
+      .from("code_pages")
       .select(
         "id, name, slug, old_slugs, created_at, intro_md, redeem_md, troubleshoot_md, rewards_md, seo_description, roblox_link, source_url, source_url_2, source_url_3, re_rewritten_at, is_published"
       )
@@ -379,13 +379,13 @@ async function fetchNextGame(options: CliOptions): Promise<GameRow | null> {
     }
 
     const { data, error } = await query;
-    if (error) throw new Error(`Failed to load games: ${error.message}`);
+    if (error) throw new Error(`Failed to load code pages: ${error.message}`);
 
-    const games = (data as GameRow[]) ?? [];
-    if (!games.length) return null;
+    const codePages = (data as CodePageRow[]) ?? [];
+    if (!codePages.length) return null;
 
-    const eligible = games.find(hasOldSlug);
-    const skipped = games.filter((game) => !hasOldSlug(game));
+    const eligible = codePages.find(hasOldSlug);
+    const skipped = codePages.filter((game) => !hasOldSlug(game));
 
     for (const game of skipped) {
       if (!skippedWithoutOldSlug.has(game.slug)) {
@@ -398,7 +398,7 @@ async function fetchNextGame(options: CliOptions): Promise<GameRow | null> {
       return eligible;
     }
 
-    if (games.length < PAGE_SIZE) {
+    if (codePages.length < PAGE_SIZE) {
       return null;
     }
 
@@ -414,17 +414,17 @@ async function main() {
   }
 
   while (true) {
-    const game = await fetchNextGame(options);
-    if (!game) {
-      console.log("No games to rewrite with an available old slug.");
+    const codePage = await fetchNextCodePage(options);
+    if (!codePage) {
+      console.log("No code pages to rewrite with an available old slug.");
       break;
     }
 
     try {
-      await rewriteGame(game, options.dryRun);
+      await rewriteCodePage(codePage, options.dryRun);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      console.error(`❌ Failed to rewrite ${game.slug}: ${message}`);
+      console.error(`❌ Failed to rewrite ${codePage.slug}: ${message}`);
     }
 
     if (options.slugs.length) {

@@ -106,7 +106,7 @@ async function loadFeedItems(): Promise<FeedItem[]> {
       .order("updated_at", { ascending: false })
       .limit(60),
     sb
-      .from("games")
+      .from("code_pages")
       .select("slug, name, updated_at, published_at")
       .eq("is_published", true)
       .not("slug", "is", null)

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { GameWithCounts } from "@/lib/db";
+import type { CodePageWithCounts } from "@/lib/db";
 import { FiClock } from "react-icons/fi";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 
@@ -10,7 +10,7 @@ const BLUR_DATA_URL =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwMCcgaGVpZ2h0PSc1NjInIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHJlY3Qgd2lkdGg9JzEwMDAnIGhlaWdodD0nNTYyJyBmaWxsPSdyZ2JhKDQ4LDUwLDU4LDAuMyknIC8+PC9zdmc+";
 
 type GameCardProps = {
-  game: GameWithCounts;
+  game: CodePageWithCounts;
   className?: string;
   titleAs?: "h2" | "p";
   priority?: boolean;

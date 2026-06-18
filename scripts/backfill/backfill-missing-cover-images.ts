@@ -240,7 +240,7 @@ async function selectImageForGame(game: GameRecord): Promise<string | null> {
 
 async function main() {
   const { data, error } = await supabase
-    .from("games")
+    .from("code_pages")
     .select("id, name, slug, cover_image, roblox_link, community_link, source_url, source_url_2, source_url_3")
     .order("name", { ascending: true });
 
@@ -293,7 +293,7 @@ async function main() {
       }
 
       const { error: updateError } = await supabase
-        .from("games")
+        .from("code_pages")
         .update({ cover_image: uploadedUrl })
         .eq("id", game.id);
 

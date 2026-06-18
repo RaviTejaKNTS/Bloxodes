@@ -14,7 +14,8 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `scripts/AGENTS.md`: automation jobs, preferred npm commands, and script authoring rules.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
-- `agents/content-writing/agents.md`: shared Bloxodes content writing rules and page-skill routing.
+- `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
+- `.agents/skills/bloxodes-*-research/SKILL.md`: focused content research and source proof before writing.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
@@ -39,7 +40,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - For public content changes, check all of: metadata, JSON-LD, pagination, sitemap coverage, feed coverage, and `/api/revalidate`.
 - For mutations, keep origin validation, rate limiting, and tag revalidation explicit.
 - Prefer `npm run ...` aliases over direct `tsx path/to/script.ts` when an alias already exists.
-- Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `games.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_catalog_pages.wiki_slug`.
+- Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_catalog_pages.wiki_slug`.
 
 ## Design Direction
 
@@ -61,7 +62,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ### Game wiki and catalog pages
 
-1. Follow `agents/content-writing/agents.md`, then use `bloxodes-wiki-writing` or `bloxodes-game-catalog-writing`.
+1. Use the matching `.agents/skills/bloxodes-*` skill directly. For full jobs, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-catalog-workflow-runner`.
 2. Gather game catalog item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a catalog because an API does not expose item rows.
 3. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
 4. Seed and preview `wiki_pages` and `catalog_pages` locally before production.
@@ -71,12 +72,12 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ### Codes pages
 
-1. Use the game slug only for `games.slug`, for example `wizard-alchemy`; do not append `-codes` because the route is already `/codes/<slug>`.
-2. Do not use `roblox_universes.slug` for `games.slug`; universe slugs are stats-only identifiers and can include universe IDs.
+1. Use the game slug only for `code_pages.slug`, for example `wizard-alchemy`; do not append `-codes` because the route is already `/codes/<slug>`.
+2. Do not use `roblox_universes.slug` for `code_pages.slug`; universe slugs are stats-only identifiers and can include universe IDs.
 3. Put the Roblox experience URL in `roblox_link`, not in any `source_url` field.
 4. Put the RobloxDen codes page in `source_url` and the Beebom codes page in `source_url_2`; `scripts/codes/update-codes.ts` reads those two fields for the refresh workflow.
 5. Keep `seo_title` empty or null unless the user explicitly asks for a custom title.
-6. Never manually enter active codes, expired codes, code names, rewards tied to current code names, or code dates. Insert or update the `games` row, then run the codes refresh script to populate `codes`.
+6. Never manually enter active codes, expired codes, code names, rewards tied to current code names, or code dates. Insert or update the `code_pages` row, then run the codes refresh script to populate `codes`.
 7. Write code-page prose and metadata for long-term use. Do not include active code names, exact dates, month/year labels, active-code counts, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily`.
 
 ### API or auth flow

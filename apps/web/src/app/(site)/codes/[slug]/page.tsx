@@ -24,13 +24,13 @@ import { CodeBlockEnhancer } from "@/components/CodeBlockEnhancer";
 import { monthYear } from "@/lib/date";
 import { sortCodesByFirstSeenDesc } from "@/lib/code-utils";
 import {
-  getGameBySlug,
+  getCodePageBySlug,
   getEventsPageByUniverseId,
-  listGamesWithActiveCounts,
+  listCodePagesWithActiveCounts,
   listPublishedArticlesByUniverseId,
   listPublishedChecklistsByUniverseId
 } from "@/lib/db";
-import type { Code, GameWithCounts } from "@/lib/db";
+import type { Code, CodePageWithCounts } from "@/lib/db";
 import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
 import {
   CHECKLISTS_DESCRIPTION,
@@ -186,11 +186,11 @@ function normalizeCategory(value?: string | null): string | null {
 }
 
 function pickSuggestedCodes(
-  allGames: GameWithCounts[],
+  allGames: CodePageWithCounts[],
   currentGameId: string,
   genreL1: string | null,
   genreL2: string | null
-): GameWithCounts[] {
+): CodePageWithCounts[] {
   const pool = allGames.filter((g) => g.id !== currentGameId);
   const sorted = [...pool].sort((a, b) => {
     const aDate = a.content_updated_at || a.updated_at || a.created_at;
@@ -200,9 +200,9 @@ function pickSuggestedCodes(
     return bTime - aTime;
   });
 
-  const result: GameWithCounts[] = [];
+  const result: CodePageWithCounts[] = [];
   const seen = new Set<string>();
-  const add = (items: GameWithCounts[]) => {
+  const add = (items: CodePageWithCounts[]) => {
     for (const item of items) {
       if (seen.has(item.id)) continue;
       result.push(item);
@@ -339,7 +339,7 @@ function formatSocialLabel(platform: string, link: UniverseSocialLink, creatorNa
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
-  const game = await getGameBySlug(slug);
+  const game = await getCodePageBySlug(slug);
 
   if (!game || !game.is_published) {
     notFound();
@@ -408,7 +408,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 async function fetchGameData(slug: string) {
   try {
-    const game = await getGameBySlug(slug);
+    const game = await getCodePageBySlug(slug);
     if (!game || !game.is_published) return { error: 'NOT_FOUND' as const };
 
     const codes = Array.isArray((game as any).codes) ? ((game as any).codes as Code[]) : [];
@@ -489,7 +489,7 @@ export default async function GamePage({ params }: Params) {
   });
 
   const lastChecked = codes.reduce((acc, c) => (acc > c.last_seen_at ? acc : c.last_seen_at), game.updated_at);
-  const allCodePages = await listGamesWithActiveCounts();
+  const allCodePages = await listCodePagesWithActiveCounts();
   const currentGenreL2 = normalizeCategory(universe?.genre_l2 ?? (game as any).genre_l2 ?? null);
   const currentGenreL1 = normalizeCategory(universe?.genre_l1 ?? (game as any).genre_l1 ?? null);
   const suggestedCodes = pickSuggestedCodes(allCodePages, game.id, currentGenreL1, currentGenreL2);

@@ -81,7 +81,7 @@ async function resolveCommentPageTarget(entityType: CommentEntityType, entityId:
 
   if (entityType === "code") {
     const { data, error } = await admin
-      .from("games")
+      .from("code_pages")
       .select("slug")
       .eq("id", entityId)
       .eq("is_published", true)

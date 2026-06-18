@@ -2067,7 +2067,7 @@ export async function getStatsGameSummaryByUniverseId(universeId: number): Promi
 async function loadRelatedLinks(universeId: number, game: StatsGame): Promise<StatsRelatedLink[]> {
   const sb = supabaseAdmin();
   const [codes, wiki, catalogs, events, tools, quizzes, checklists, articles] = await Promise.all([
-    sb.from("games").select("slug, name").eq("universe_id", universeId).eq("is_published", true).limit(1),
+    sb.from("code_pages").select("slug, name").eq("universe_id", universeId).eq("is_published", true).limit(1),
     sb.from("wiki_pages").select("slug, title").eq("universe_id", universeId).eq("is_published", true).limit(1),
     sb.from("catalog_pages").select("code, title").eq("universe_id", universeId).eq("is_published", true).limit(4),
     sb.from("events_pages").select("slug, title").eq("universe_id", universeId).eq("is_published", true).limit(1),

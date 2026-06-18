@@ -1,5 +1,5 @@
 import { cleanRewardsText, isCodeNew, sortCodesByFirstSeenDesc } from "@/lib/code-utils";
-import { getGameBySlug, listCodesForGame, listGamesWithActiveCounts, listGamesWithActiveCountsPage, type Code, type GameWithCounts } from "@/lib/db";
+import { getCodePageBySlug, listCodesForCodePage, listCodePagesWithActiveCounts, listCodePagesWithActiveCountsPage, type Code, type CodePageWithCounts } from "@/lib/db";
 import { SITE_URL } from "@/lib/seo";
 
 const DEFAULT_PAGE_SIZE = 20;
@@ -42,7 +42,7 @@ function normalizeSearchQuery(value: string | null): string | null {
   return normalized ? normalized : null;
 }
 
-function gameMatchesQuery(game: GameWithCounts, query: string | null): boolean {
+function gameMatchesQuery(game: CodePageWithCounts, query: string | null): boolean {
   if (!query) return true;
   return [game.name, game.slug, game.genre_l1, game.genre_l2]
     .filter((value): value is string => typeof value === "string" && value.length > 0)
@@ -82,7 +82,7 @@ function absoluteAssetUrl(value: string | null | undefined): string | null {
   return `${SITE_URL.replace(/\/$/, "")}/${value.replace(/^\//, "")}`;
 }
 
-function mapIndexGame(game: GameWithCounts): MobileCodesIndexItem {
+function mapIndexGame(game: CodePageWithCounts): MobileCodesIndexItem {
   return {
     id: game.id,
     name: game.name,
@@ -115,7 +115,7 @@ export async function getMobileCodesIndex(searchParams: URLSearchParams): Promis
   const query = normalizeSearchQuery(searchParams.get("q"));
 
   if (query) {
-    const allGames = await listGamesWithActiveCounts();
+    const allGames = await listCodePagesWithActiveCounts();
     const filtered = allGames.filter((game) => gameMatchesQuery(game, query));
     const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
     const safePage = Math.min(page, totalPages);
@@ -130,7 +130,7 @@ export async function getMobileCodesIndex(searchParams: URLSearchParams): Promis
     };
   }
 
-  const { games, total } = await listGamesWithActiveCountsPage(page, pageSize);
+  const { games, total } = await listCodePagesWithActiveCountsPage(page, pageSize);
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
   return {
@@ -147,11 +147,11 @@ export async function getMobileCodeDetail(slug: string): Promise<MobileCodeDetai
   const normalizedSlug = slug.trim().toLowerCase();
   if (!normalizedSlug) return null;
 
-  const game = await getGameBySlug(normalizedSlug);
+  const game = await getCodePageBySlug(normalizedSlug);
   if (!game || !game.is_published) return null;
 
   const nowMs = Date.now();
-  const codes = await listCodesForGame(game.id);
+  const codes = await listCodesForCodePage(game.id);
   const activeCodes = sortCodesByFirstSeenDesc(codes.filter((code) => code.status === "active")).map((code) => mapCode(code, nowMs));
   const expiredCodes = sortCodesByFirstSeenDesc(codes.filter((code) => code.status === "expired")).map((code) => mapCode(code, nowMs));
 

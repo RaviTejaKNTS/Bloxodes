@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Events Writing"
+  short_description: "Write events pages"
+  default_prompt: "Use $bloxodes-events-writing to write one Bloxodes events page final.json from approved brief.md. Keep copy evergreen and never write manual timeline rows or live event claims."

@@ -5,12 +5,16 @@ import { parse as parseDotenv } from "dotenv";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 type Row = Record<string, unknown>;
+type AwaitableQuery = PromiseLike<{
+  data: Row[] | null;
+  error: { message?: string } | null;
+}>;
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const args = new Set(process.argv.slice(2));
 const dryRun = args.has("--dry-run");
 
-const preferredGameHints = [
+const preferredCodePageHints = [
   "adopt-me",
   "grow-a-garden",
   "blox-fruits",
@@ -88,15 +92,12 @@ function getNumber(row: Row, key: string): number | null {
 async function fetchAll(
   client: SupabaseClient,
   table: string,
-  build: (query: ReturnType<SupabaseClient["from"]>) => unknown
+  build: (query: any) => AwaitableQuery
 ): Promise<Row[]> {
   const rows: Row[] = [];
   for (let from = 0; ; from += pageSize) {
     const to = from + pageSize - 1;
-    const query = build(client.from(table).select("*").range(from, to)) as PromiseLike<{
-      data: Row[] | null;
-      error: { message?: string } | null;
-    }>;
+    const query = build(client.from(table).select("*").range(from, to));
     const { data, error } = await query;
     if (error) throw new Error(`${table}: ${error.message ?? "query failed"}`);
     rows.push(...(data ?? []));
@@ -165,32 +166,32 @@ async function optionalUpsert(table: string, rows: Row[], onConflict: string): P
   }
 }
 
-async function fetchPreferredGames(): Promise<Row[]> {
-  const bySlug = await fetchByValues("games", "slug", preferredGameHints);
+async function fetchPreferredCodePages(): Promise<Row[]> {
+  const bySlug = await fetchByValues("code_pages", "slug", preferredCodePageHints);
   const foundSlugs = new Set(bySlug.map((row) => getString(row, "slug")).filter(Boolean));
   const rows = [...bySlug];
 
-  for (const hint of preferredGameHints) {
+  for (const hint of preferredCodePageHints) {
     if (foundSlugs.has(hint)) continue;
     const search = hint.replace(/-/g, " ");
     const { data, error } = await source
-      .from("games")
+      .from("code_pages")
       .select("*")
       .or(`slug.ilike.%${hint}%,name.ilike.%${search}%`)
       .eq("is_published", true)
       .limit(3);
-    if (error) throw new Error(`games search ${hint}: ${error.message}`);
+    if (error) throw new Error(`code pages search ${hint}: ${error.message}`);
     rows.push(...((data ?? []) as Row[]));
   }
 
-  const { data: recentGames, error: recentError } = await source
-    .from("games")
+  const { data: recentCodePages, error: recentError } = await source
+    .from("code_pages")
     .select("*")
     .eq("is_published", true)
     .order("updated_at", { ascending: false })
     .limit(12);
-  if (recentError) throw new Error(`recent games: ${recentError.message}`);
-  rows.push(...((recentGames ?? []) as Row[]));
+  if (recentError) throw new Error(`recent code pages: ${recentError.message}`);
+  rows.push(...((recentCodePages ?? []) as Row[]));
 
   const byId = new Map<string, Row>();
   for (const row of rows) {
@@ -226,8 +227,8 @@ async function main() {
 
   [tools, catalogPages, wikiCatalogPages, quizPages, checklistPages, eventsPages].forEach((rows) => addUniverseIds(universeIds, rows));
 
-  const games = await fetchPreferredGames();
-  addUniverseIds(universeIds, games);
+  const codePages = await fetchPreferredCodePages();
+  addUniverseIds(universeIds, codePages);
 
   const wikiPageIds = uniq(wikiCatalogPages.map((row) => getString(row, "wiki_page_id")));
   const wikiSlugs = uniq(wikiCatalogPages.map((row) => getString(row, "wiki_slug")));
@@ -239,8 +240,8 @@ async function main() {
     .filter((row): row is Row => Boolean(row));
   addUniverseIds(universeIds, wikiPages);
 
-  const gameIds = uniq(games.map((row) => getString(row, "id")));
-  const codes = await fetchByValues("codes", "game_id", gameIds);
+  const codePageIds = uniq(codePages.map((row) => getString(row, "id")));
+  const codes = await fetchByValues("codes", "code_page_id", codePageIds);
 
   const checklistItems = await fetchByValues("checklist_items", "page_id", uniq(checklistPages.map((row) => getString(row, "id"))));
 
@@ -259,9 +260,9 @@ async function main() {
   const gameListEntries = await fetchByValues("game_list_entries", "list_id", uniq(gameLists.map((row) => getString(row, "id"))));
   addUniverseIds(universeIds, gameListEntries);
 
-  const listEntryGameIds = uniq(gameListEntries.map((row) => getString(row, "game_id")));
-  const listEntryGames = await fetchByValues("games", "id", listEntryGameIds);
-  addUniverseIds(universeIds, listEntryGames);
+  const listEntryCodePageIds = uniq(gameListEntries.map((row) => getString(row, "code_page_id")));
+  const listEntryCodePages = await fetchByValues("code_pages", "id", listEntryCodePageIds);
+  addUniverseIds(universeIds, listEntryCodePages);
 
   const universes = await fetchByValues("roblox_universes", "universe_id", [...universeIds]);
   const finalUniverseIds = uniq(universes.map((row) => getNumber(row, "universe_id")));
@@ -279,7 +280,7 @@ async function main() {
 
   await upsertRows("roblox_universes", universes, "universe_id");
   await upsertRows("authors", authors, "id");
-  await upsertRows("games", [...games, ...listEntryGames], "id");
+  await upsertRows("code_pages", [...codePages, ...listEntryCodePages], "id");
   await upsertRows("wiki_pages", wikiPages, "id");
   await upsertRows("catalog_pages", catalogPages, "code");
   await upsertRows("wiki_catalog_pages", wikiCatalogPages, "code");

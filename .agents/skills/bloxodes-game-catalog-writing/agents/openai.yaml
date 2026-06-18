@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Game Catalog Writing"
   short_description: "Write game catalog pages"
-  default_prompt: "Use $bloxodes-game-catalog-writing for one durable in-game collection. Read agents/content-writing/agents.md, check production coverage, verify item data/images, then write research-notes.md and final.json for wiki_catalog_pages."
+  default_prompt: "Use $bloxodes-game-catalog-writing to write one Bloxodes game catalog final.json from approved brief.md and approved data readiness. Keep copy simple, explain the game system, and do not repeat item cards."

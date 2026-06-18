@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Catalog Runner"
+  short_description: "Run global catalog QA"
+  default_prompt: "Use $bloxodes-catalog-workflow-runner for one approved global catalog page. Have one subagent research with $bloxodes-catalog-research, wait for approval, write final.json with $bloxodes-catalog-writing, run verify:catalog-finals, open the localhost catalog link in Codex Browser, and return the link."

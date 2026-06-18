@@ -253,7 +253,7 @@ async function postVideoToTelegram(videoPath: string, caption: string) {
   console.log('🔍 Checking for unposted active codes...');
   const { data: codes, error } = await supabase
     .from('codes')
-    .select('id, code, game_id, last_seen_at')
+    .select('id, code, code_page_id, last_seen_at')
     .eq('status', 'active')
     .eq('posted_online', false)
     .order('last_seen_at', { ascending: true });
@@ -265,16 +265,16 @@ async function postVideoToTelegram(videoPath: string, caption: string) {
   }
 
   const grouped = codes.reduce((acc: Record<string, any[]>, c) => {
-    acc[c.game_id] = acc[c.game_id] || [];
-    acc[c.game_id].push(c);
+    acc[c.code_page_id] = acc[c.code_page_id] || [];
+    acc[c.code_page_id].push(c);
     return acc;
   }, {});
 
-  for (const [gameId, gameCodes] of Object.entries(grouped)) {
+  for (const [codePageId, gameCodes] of Object.entries(grouped)) {
     const { data: game, error: gErr } = await supabase
-      .from('games')
+      .from('code_pages')
       .select('name, cover_image')
-      .eq('id', gameId)
+      .eq('id', codePageId)
       .single();
     if (gErr || !game) continue;
 

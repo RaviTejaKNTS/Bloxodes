@@ -5,8 +5,6 @@ description: Suggest focused Bloxodes article ideas for one Roblox game, platfor
 
 # Bloxodes Article Suggestions
 
-Read `agents/content-writing/agents.md` first. 
-
 Use this to suggest article topics only. Do not start writing any articles at this stage. Only continue once approved by user. This is a read-only skill.
 
 ## Start

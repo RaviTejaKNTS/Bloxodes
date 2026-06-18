@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import {
-  listGamesWithActiveCounts,
+  listCodePagesWithActiveCounts,
   listPublishedArticles,
   listPublishedChecklists,
   listPublishedGameLists
@@ -118,7 +118,7 @@ function summarize(descriptionMd: string | null | undefined, fallback: string): 
 
 export default async function HomePage() {
   const [games, articles, checklistRows, lists, tools, wikiPages, quizzes, eventsPayload, catalogPages] = await Promise.all([
-    listGamesWithActiveCounts(),
+    listCodePagesWithActiveCounts(),
     listPublishedArticles(12),
     listPublishedChecklists(INITIAL_CHECKLISTS * 2),
     listPublishedGameLists(),

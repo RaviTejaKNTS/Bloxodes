@@ -9,7 +9,7 @@ type SupabaseLike = {
 
 export type CodeStatus = "active" | "expired" | "check";
 
-export type GameCodeInput = {
+export type CodePageCodeInput = {
   code: string;
   status?: CodeStatus;
   rewardsText?: string | null;
@@ -32,7 +32,7 @@ type ExistingCodeRow = {
   provider_priority: number | null;
 };
 
-function toCodeInput(code: ScrapedCode): GameCodeInput {
+function toCodeInput(code: ScrapedCode): CodePageCodeInput {
   return {
     code: code.code,
     status: code.status,
@@ -44,7 +44,7 @@ function toCodeInput(code: ScrapedCode): GameCodeInput {
   };
 }
 
-function toExpiredInput(code: ScrapedExpiredCode): GameCodeInput | null {
+function toExpiredInput(code: ScrapedExpiredCode): CodePageCodeInput | null {
   const displayCode = sanitizeCodeDisplay(typeof code === "string" ? code : code.code);
   if (!displayCode) return null;
   return {
@@ -59,12 +59,12 @@ function sameStringArray(a: string[], b: string[]) {
   return a.every((value, index) => value === b[index]);
 }
 
-export async function upsertCodesForGame(
+export async function upsertCodesForCodePage(
   sb: SupabaseLike,
   params: {
-    gameId: string;
+    codePageId: string;
     existingExpiredCodes?: unknown;
-    codes?: GameCodeInput[];
+    codes?: CodePageCodeInput[];
     expiredCodes?: ScrapedExpiredCode[];
     expireMissingActive?: boolean;
   }
@@ -72,7 +72,7 @@ export async function upsertCodesForGame(
   const activeOrCheckCodes = params.codes ?? [];
   const explicitExpiredCodes = (params.expiredCodes ?? [])
     .map(toExpiredInput)
-    .filter((entry): entry is GameCodeInput => Boolean(entry));
+    .filter((entry): entry is CodePageCodeInput => Boolean(entry));
   const allIncoming = [...activeOrCheckCodes, ...explicitExpiredCodes];
   const result: CodeUpsertResult = {
     codesFound: allIncoming.length,
@@ -84,7 +84,7 @@ export async function upsertCodesForGame(
   const { data: existingRows, error: existingError } = await sb
     .from("codes")
     .select("code, status, provider_priority")
-    .eq("game_id", params.gameId);
+    .eq("code_page_id", params.codePageId);
 
   if (existingError) {
     return {
@@ -140,7 +140,7 @@ export async function upsertCodesForGame(
     }
 
     const { error } = await sb.rpc("upsert_code", {
-      p_game_id: params.gameId,
+      p_code_page_id: params.codePageId,
       p_code: displayCode,
       p_status: status,
       p_rewards_text: entry.rewardsText ?? null,
@@ -170,7 +170,7 @@ export async function upsertCodesForGame(
           is_new: false,
           last_seen_at: new Date().toISOString(),
         })
-        .eq("game_id", params.gameId)
+        .eq("code_page_id", params.codePageId)
         .in("code", missingActiveCodes.map((entry) => entry.display));
 
       if (expireError) {
@@ -189,9 +189,9 @@ export async function upsertCodesForGame(
   const updatedExpiredCodes = Array.from(expiredByNormalized.values()).map((entry) => entry.display);
   if (!sameStringArray(updatedExpiredCodes, existingExpiredArray)) {
     const { error: expiredUpdateError } = await sb
-      .from("games")
+      .from("code_pages")
       .update({ expired_codes: updatedExpiredCodes })
-      .eq("id", params.gameId);
+      .eq("id", params.codePageId);
 
     if (expiredUpdateError) {
       result.errors.push(`Failed to update expired_codes: ${expiredUpdateError.message}`);
@@ -201,18 +201,18 @@ export async function upsertCodesForGame(
   return result;
 }
 
-export async function upsertScrapedCodesForGame(
+export async function upsertScrapedCodesForCodePage(
   sb: SupabaseLike,
   params: {
-    gameId: string;
+    codePageId: string;
     existingExpiredCodes?: unknown;
     codes: ScrapedCode[];
     expiredCodes?: ScrapedExpiredCode[];
     expireMissingActive?: boolean;
   }
 ): Promise<CodeUpsertResult> {
-  return upsertCodesForGame(sb, {
-    gameId: params.gameId,
+  return upsertCodesForCodePage(sb, {
+    codePageId: params.codePageId,
     existingExpiredCodes: params.existingExpiredCodes,
     codes: params.codes.map(toCodeInput),
     expiredCodes: params.expiredCodes,

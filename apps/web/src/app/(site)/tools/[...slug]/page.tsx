@@ -5,7 +5,7 @@ import { markdownToPlainText } from "@/lib/markdown";
 import { CHECKLISTS_DESCRIPTION, EVENTS_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import {
   getEventsPageByUniverseId,
-  listGamesWithActiveCountsByUniverseId,
+  listCodePagesWithActiveCountsByUniverseId,
   listPublishedArticlesByUniverseId,
   listPublishedChecklistsByUniverseId
 } from "@/lib/db";
@@ -136,7 +136,7 @@ export default async function ToolFallbackPage({ params }: PageProps) {
   const publishedTime = resolvePublishedAt(tool);
   const modifiedTime = resolveModifiedAt(tool);
   const universeId = tool.universe_id ?? null;
-  const relatedCodes = universeId ? await listGamesWithActiveCountsByUniverseId(universeId, 1) : [];
+  const relatedCodes = universeId ? await listCodePagesWithActiveCountsByUniverseId(universeId, 1) : [];
   const relatedChecklists = universeId ? await listPublishedChecklistsByUniverseId(universeId, 1) : [];
   const relatedArticles = universeId ? await listPublishedArticlesByUniverseId(universeId, 3, 0) : [];
   const relatedToolsRaw: ToolListEntry[] = universeId ? await listPublishedToolsByUniverseId(universeId, 3) : [];

@@ -63,7 +63,7 @@ type ListEntryInput = {
   metricValue?: number | null;
   reason?: string | null;
   extra?: Record<string, unknown> | null;
-  game_id?: string | null;
+  code_page_id?: string | null;
   playing?: number | null;
   visits?: number | null;
   favorites?: number | null;
@@ -71,7 +71,7 @@ type ListEntryInput = {
   dislikes?: number | null;
 };
 
-type PublishedGamePreview = {
+type PublishedCodePagePreview = {
   id: string;
   slug: string;
   universe_id: number | null;
@@ -231,7 +231,7 @@ async function fetchSqlEntries(sql: string, limit: number): Promise<ListEntryInp
     metric_value?: number | null;
     reason?: string | null;
     extra?: Record<string, unknown> | null;
-    game_id?: string | null;
+    code_page_id?: string | null;
     playing?: number | null;
     visits?: number | null;
     favorites?: number | null;
@@ -250,7 +250,7 @@ async function fetchSqlEntries(sql: string, limit: number): Promise<ListEntryInp
         : Number(row.metric_value),
     reason: row.reason ?? null,
     extra: row.extra ?? null,
-    game_id: row.game_id ?? null,
+    code_page_id: row.code_page_id ?? null,
     playing: row.playing ?? null,
     visits: row.visits ?? null,
     favorites: row.favorites ?? null,
@@ -259,24 +259,24 @@ async function fetchSqlEntries(sql: string, limit: number): Promise<ListEntryInp
   }));
 }
 
-async function fetchPublishedGamesForUniverses(universeIds: number[]): Promise<Map<number, PublishedGamePreview>> {
+async function fetchPublishedCodePagesForUniverses(universeIds: number[]): Promise<Map<number, PublishedCodePagePreview>> {
   if (!universeIds.length) return new Map();
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("games")
+    .from("code_pages")
     .select("id,slug,universe_id")
     .eq("is_published", true)
     .in("universe_id", universeIds);
 
   if (error) {
-    throw new Error(`failed to fetch games for universes: ${error.message}`);
+    throw new Error(`failed to fetch code pages for universes: ${error.message}`);
   }
 
-  const map = new Map<number, PublishedGamePreview>();
+  const map = new Map<number, PublishedCodePagePreview>();
   for (const row of data ?? []) {
     if (!row?.universe_id) continue;
     if (map.has(row.universe_id)) continue;
-    map.set(row.universe_id, row as PublishedGamePreview);
+    map.set(row.universe_id, row as PublishedCodePagePreview);
   }
   return map;
 }
@@ -299,12 +299,12 @@ async function fetchLists(): Promise<GameListRecord[]> {
 async function replaceEntries(list: GameListRecord, entries: ListEntryInput[]): Promise<void> {
   const sb = supabaseAdmin();
   const universeIds = entries.map((entry) => entry.universe_id);
-  const gameMap = await fetchPublishedGamesForUniverses(universeIds);
+  const codePageMap = await fetchPublishedCodePagesForUniverses(universeIds);
 
   const payload = entries.map((entry, index) => ({
     list_id: list.id,
     universe_id: entry.universe_id,
-    game_id: entry.game_id ?? gameMap.get(entry.universe_id)?.id ?? null,
+    code_page_id: entry.code_page_id ?? codePageMap.get(entry.universe_id)?.id ?? null,
     rank: entry.rank ?? index + 1,
     metric_value: entry.metricValue ?? null,
     reason: entry.reason ?? null,

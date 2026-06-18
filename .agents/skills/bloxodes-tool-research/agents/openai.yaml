@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Tool Research"
+  short_description: "Research one tool"
+  default_prompt: "Use $bloxodes-tool-research for one approved tool idea. Check overlap, player input/output need, formula or data source, assumptions, limits, edge cases, related pages, and gaps in brief.md, then stop."

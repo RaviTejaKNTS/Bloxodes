@@ -5,26 +5,19 @@ description: Suggest Bloxodes tool page opportunities for one Roblox game or Rob
 
 # Bloxodes Tool Suggestions
 
-Read `agents/content-writing/agents.md` first.
-
 Use this to decide whether Bloxodes should build tool pages. Do not write tool-page content or app code here.
 
 ## Start
 
 1. Resolve the game or platform topic.
 2. Check existing Bloxodes tools and related pages. Do not suggest a tool we already cover or a tool that should just be an article/catalog/wiki page.
-3. Record notes in:
-
-```text
-tmp/content-workspace/<topic-or-game-slug>/suggestions/tools/research-notes.md
-```
 
 ## Source Check
 
-Before recommendations, include:
+Do not hide the research in a file. Put the proof in the final reply:
 
 ```text
-Source check:
+Evidence checked:
 - Existing Bloxodes tools:
 - Game/system sources:
 - Formula or data source:
@@ -45,7 +38,7 @@ Skip static lists, vague helpers, pure content pages, and ideas where the answer
 
 ## Output
 
-Use these labels:
+Start with `Evidence checked`, then use these labels:
 
 - `[create]` real tool with clear inputs, outputs, and source-backed logic
 - `[we already have a tool]` production already covers it

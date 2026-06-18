@@ -16,7 +16,8 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `scripts/AGENTS.md`: automation/script authoring and execution rules.
 - `supabase/AGENTS.md`: schema and edge-function guidance.
 - `data/AGENTS.md`: local datasets and their consumers.
-- `agents/content-writing/agents.md`: shared content writing rules and page-skill routing.
+- `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
+- `.agents/skills/bloxodes-*-research/SKILL.md`: focused content research and source proof before writing.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `DESIGN.md`: public live-database design direction, shadcn component usage, design tokens, and readable content rules.
@@ -33,6 +34,6 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 
 - Update the closest scoped `AGENTS.md` when behavior or workflow changes.
 - Update these `agents/*.md` files when the repo surface area changes: new routes, scripts, datasets, or major architecture moves.
-- For writing workflow changes, keep `agents/content-writing/agents.md` and the relevant `.agents/skills/*/SKILL.md` files aligned.
+- For writing workflow changes, update the relevant `.agents/skills/*/SKILL.md` files directly.
 - Treat this folder as the discovery layer and the scoped `AGENTS.md` files as the operating layer.
 - For workspace-level changes, keep root `package.json`, root `Dockerfile`, `.dockerignore`, and Dokploy notes aligned so production stays web-only unless intentionally expanded.

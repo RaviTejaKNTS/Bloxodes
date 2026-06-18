@@ -123,7 +123,7 @@ async function main() {
   const openai = new OpenAI({ apiKey: openaiKey });
 
   const { data: games, error } = await supabase
-    .from("games")
+    .from("code_pages")
     .select(
       `
         id,
@@ -251,7 +251,7 @@ async function main() {
 
   for (const { id, interlinking_ai, interlinking_ai_copy_md } of updates) {
     const { error: upError } = await supabase
-      .from("games")
+      .from("code_pages")
       .update({
         interlinking_ai,
         interlinking_ai_copy_md
@@ -271,7 +271,7 @@ async function main() {
 
     for (const { id, internal_links } of incrementPayloads) {
       const { error: incError } = await supabase
-        .from("games")
+        .from("code_pages")
         .update({ internal_links })
         .eq("id", id);
       if (incError) {

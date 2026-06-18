@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Checklist Research"
+  short_description: "Research one checklist"
+  default_prompt: "Use $bloxodes-checklist-research for one approved Bloxodes checklist. Check overlap, source proof, player goal, section plan, task examples, skipped tasks, and gaps in brief.md, then stop."

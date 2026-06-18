@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
-import { listGamesWithActiveCountsPage, type GameWithCounts } from "@/lib/db";
+import { listCodePagesWithActiveCountsPage, type CodePageWithCounts } from "@/lib/db";
 import { CODES_DESCRIPTION, SITE_URL, buildAlternates } from "@/lib/seo";
 import { GameCard } from "@/components/GameCard";
 import { IndexPageStats } from "@/components/IndexPageStats";
@@ -10,13 +10,13 @@ import { PagePagination } from "@/components/PagePagination";
 export const CODES_PAGE_SIZE = 20;
 
 export type CodesPageData = {
-  games: GameWithCounts[];
+  games: CodePageWithCounts[];
   total: number;
   totalPages: number;
 };
 
 export async function loadCodesPageData(pageNumber: number): Promise<CodesPageData> {
-  const { games, total } = await listGamesWithActiveCountsPage(pageNumber, CODES_PAGE_SIZE);
+  const { games, total } = await listCodePagesWithActiveCountsPage(pageNumber, CODES_PAGE_SIZE);
   const totalPages = Math.max(1, Math.ceil(total / CODES_PAGE_SIZE));
   return { games, total, totalPages };
 }
@@ -28,7 +28,7 @@ function CodesPageView({
   currentPage,
   showHero
 }: {
-  games: GameWithCounts[];
+  games: CodePageWithCounts[];
   totalGames: number;
   totalPages: number;
   currentPage: number;

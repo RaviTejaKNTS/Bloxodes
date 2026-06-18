@@ -39,7 +39,7 @@ When turning a game dataset into public wiki or catalog pages, use `agents/conte
 - `data/Wizard Alchemy/*`
   - Dataset-backed Wizard Alchemy wiki/catalog content, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
   - `quiz.json` is the local question pool for `/quizzes/wizard-alchemy`; use `bloxodes-quiz-writing` when editing quiz content.
-  - Code pages must not keep manual code seed payloads. For Wizard Alchemy or any other game, update the `games` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then let `scripts/codes/update-codes.ts` populate `codes`.
+  - Code pages must not keep manual code seed payloads. For Wizard Alchemy or any other game, update the `code_pages` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then let `scripts/codes/update-codes.ts` populate `codes`.
 - `data/Slime RNG/*`
   - Dataset-backed Slime RNG wiki/catalog content, including slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.
   - `quiz.json` is the local question pool for `/quizzes/slime-rng`; use `bloxodes-quiz-writing` when editing quiz content.

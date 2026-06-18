@@ -32,7 +32,7 @@ import {
   listPublishedArticlesByUniverseId,
   listPublishedArticlesPage,
   listPublishedChecklistsByUniverseId,
-  listGamesWithActiveCountsByUniverseId
+  listCodePagesWithActiveCountsByUniverseId
 } from "@/lib/db";
 import { extractHowToSteps } from "@/lib/how-to";
 import { ChecklistCard } from "@/components/ChecklistCard";
@@ -233,7 +233,7 @@ async function renderArticlePage(article: ArticleWithRelations) {
   const processedAuthorBioHtml = authorBioHtml ? processHtmlLinks(authorBioHtml) : null;
 
   const relatedChecklists = universeId ? await listPublishedChecklistsByUniverseId(universeId, 1) : [];
-  const relatedCodes = universeId ? await listGamesWithActiveCountsByUniverseId(universeId, 1) : [];
+  const relatedCodes = universeId ? await listCodePagesWithActiveCountsByUniverseId(universeId, 1) : [];
   const relatedChecklistCards = relatedChecklists.map((row) => {
     const summaryPlain =
       markdownToPlainText(row.seo_description ?? row.description_md ?? "") || CHECKLISTS_DESCRIPTION;

@@ -20,7 +20,7 @@ export type Author = {
   updated_at: string;
 };
 
-export type Game = {
+export type CodePage = {
   id: string;
   name: string;
   slug: string;
@@ -200,7 +200,7 @@ export type GameList = {
 export type GameListEntry = {
   list_id: string;
   universe_id: number;
-  game_id: string | null;
+  code_page_id: string | null;
   rank: number;
   metric_value: number | null;
   metric_key?: string | null;
@@ -209,7 +209,7 @@ export type GameListEntry = {
   extra: Record<string, unknown> | null;
 };
 
-type GamePreview = Pick<Game, "id" | "slug" | "name" | "universe_id"> & {
+type GamePreview = Pick<CodePage, "id" | "slug" | "name" | "universe_id"> & {
   active_count?: number | null;
 };
 
@@ -297,7 +297,7 @@ function sortChecklistItems(items: ChecklistItem[]): ChecklistItem[] {
 
 export type Code = {
   id: string;
-  game_id: string;
+  code_page_id: string;
   code: string;
   status: "active"|"expired"|"check";
   rewards_text: string | null;
@@ -308,15 +308,15 @@ export type Code = {
   last_seen_at: string;
 };
 
-export async function listPublishedGames(): Promise<Game[]> {
+export async function listPublishedCodePages(): Promise<CodePage[]> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("games")
+    .from("code_pages")
     .select("*")
     .eq("is_published", true)
     .order("name", { ascending: true });
   if (error) throw error;
-  return data as Game[];
+  return data as CodePage[];
 }
 
 export async function listAuthors(): Promise<Author[]> {
@@ -378,9 +378,9 @@ export async function getAuthorBySlug(slug: string): Promise<Author | null> {
   return (data as Author) || null;
 }
 
-type GameSummaryFields = Pick<Game, "id" | "name" | "slug" | "cover_image" | "created_at" | "updated_at" | "universe_id">;
+type CodePageSummaryFields = Pick<CodePage, "id" | "name" | "slug" | "cover_image" | "created_at" | "updated_at" | "universe_id">;
 
-export type GameWithCounts = GameSummaryFields & {
+export type CodePageWithCounts = CodePageSummaryFields & {
   active_count: number;
   latest_code_first_seen_at: string | null;
   content_updated_at: string | null;
@@ -389,17 +389,17 @@ export type GameWithCounts = GameSummaryFields & {
 };
 
 
-export async function listAllGames(): Promise<Game[]> {
+export async function listAllCodePages(): Promise<CodePage[]> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("games")
+    .from("code_pages")
     .select("*")
     .order("name", { ascending: true });
   if (error) throw error;
-  return data as Game[];
+  return data as CodePage[];
 }
 
-type CodePageSummary = GameSummaryFields & {
+type CodePageSummary = CodePageSummaryFields & {
   active_code_count?: number | null;
   latest_code_first_seen_at?: string | null;
   content_updated_at?: string | null;
@@ -408,7 +408,7 @@ type CodePageSummary = GameSummaryFields & {
   universe?: { genre_l1?: string | null; genre_l2?: string | null } | null;
 };
 
-function mapCodePageRowToCounts(row: CodePageSummary): GameWithCounts {
+function mapCodePageRowToCounts(row: CodePageSummary): CodePageWithCounts {
   return {
     ...row,
     active_count: row.active_code_count ?? 0,
@@ -419,10 +419,10 @@ function mapCodePageRowToCounts(row: CodePageSummary): GameWithCounts {
   };
 }
 
-async function fetchGamesWithActiveCounts(): Promise<GameWithCounts[]> {
+async function fetchCodePagesWithActiveCounts(): Promise<CodePageWithCounts[]> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("game_pages_index_view")
+    .from("code_pages_index_view")
     .select("id,name,slug,cover_image,created_at,updated_at,universe_id,genre_l1,genre_l2,active_code_count,latest_code_first_seen_at,content_updated_at")
     .eq("is_published", true)
     .order("content_updated_at", { ascending: false });
@@ -431,17 +431,17 @@ async function fetchGamesWithActiveCounts(): Promise<GameWithCounts[]> {
   return (data ?? []).map((row) => mapCodePageRowToCounts(row as CodePageSummary));
 }
 
-const cachedListGamesWithActiveCounts = publicContentCache(
-  fetchGamesWithActiveCounts,
-  ["listGamesWithActiveCounts"],
+const cachedListCodePagesWithActiveCounts = publicContentCache(
+  fetchCodePagesWithActiveCounts,
+  ["listCodePagesWithActiveCounts"],
   {
     revalidate: 21600, // 6 hours
     tags: ["codes-index", "home"]
   }
 );
 
-export async function listGamesWithActiveCounts(): Promise<GameWithCounts[]> {
-  return cachedListGamesWithActiveCounts();
+export async function listCodePagesWithActiveCounts(): Promise<CodePageWithCounts[]> {
+  return cachedListCodePagesWithActiveCounts();
 }
 
 export async function listPublishedCodeSlugs(): Promise<string[]> {
@@ -449,7 +449,7 @@ export async function listPublishedCodeSlugs(): Promise<string[]> {
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
-        .from("game_pages_index_view")
+        .from("code_pages_index_view")
         .select("slug")
         .eq("is_published", true)
         .not("slug", "is", null)
@@ -469,7 +469,7 @@ export async function listPublishedCodeSlugs(): Promise<string[]> {
   return cached();
 }
 
-export async function listGamesWithActiveCountsPage(page: number, pageSize: number): Promise<{ games: GameWithCounts[]; total: number }> {
+export async function listCodePagesWithActiveCountsPage(page: number, pageSize: number): Promise<{ games: CodePageWithCounts[]; total: number }> {
   const safePage = normalizePositivePage(page);
   const safePageSize = Math.max(1, pageSize);
   const offset = (safePage - 1) * safePageSize;
@@ -479,7 +479,7 @@ export async function listGamesWithActiveCountsPage(page: number, pageSize: numb
       const sb = supabaseAdmin();
       try {
         const { data, count, error, status } = await sb
-          .from("game_pages_index_view")
+          .from("code_pages_index_view")
           .select(
             "id,name,slug,cover_image,created_at,updated_at,universe_id,genre_l1,genre_l2,active_code_count,latest_code_first_seen_at,content_updated_at",
             { count: "exact" }
@@ -492,7 +492,7 @@ export async function listGamesWithActiveCountsPage(page: number, pageSize: numb
         if (error) {
           if (!isOutOfRangePaginationFailure(status, error)) throw error;
           const { count, error: countError } = await sb
-            .from("game_pages_index_view")
+            .from("code_pages_index_view")
             .select("id", { count: "exact", head: true })
             .eq("is_published", true);
           if (countError) throw countError;
@@ -503,14 +503,14 @@ export async function listGamesWithActiveCountsPage(page: number, pageSize: numb
       } catch (error) {
         if (!isOutOfRangePaginationError(error)) throw error;
         const { count, error: countError } = await sb
-          .from("game_pages_index_view")
+          .from("code_pages_index_view")
           .select("id", { count: "exact", head: true })
           .eq("is_published", true);
         if (countError) throw countError;
         return { games: [], total: count ?? 0 };
       }
     },
-    [`listGamesWithActiveCountsPage:${safePage}:${safePageSize}`],
+    [`listCodePagesWithActiveCountsPage:${safePage}:${safePageSize}`],
     {
       revalidate: 21600, // 6 hours
       tags: ["codes-index", "home"]
@@ -520,35 +520,35 @@ export async function listGamesWithActiveCountsPage(page: number, pageSize: numb
   return cached();
 }
 
-export async function listGamesWithActiveCountsForIds(gameIds: string[]): Promise<GameWithCounts[]> {
-  if (!gameIds.length) {
+export async function listCodePagesWithActiveCountsForIds(codePageIds: string[]): Promise<CodePageWithCounts[]> {
+  if (!codePageIds.length) {
     return [];
   }
 
-  const uniqueIds = Array.from(new Set(gameIds));
+  const uniqueIds = Array.from(new Set(codePageIds));
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("game_pages_index_view")
+    .from("code_pages_index_view")
     .select("id,name,slug,cover_image,created_at,updated_at,universe_id,genre_l1,genre_l2,active_code_count,latest_code_first_seen_at,content_updated_at")
     .eq("is_published", true)
     .in("id", uniqueIds);
   if (error) throw error;
 
-  const gameList = (data ?? []) as CodePageSummary[];
-  if (!gameList.length) {
+  const codePageList = (data ?? []) as CodePageSummary[];
+  if (!codePageList.length) {
     return [];
   }
 
-  const withCounts = gameList.map((row) => mapCodePageRowToCounts(row));
-  const map = new Map(withCounts.map((game) => [game.id, game]));
+  const withCounts = codePageList.map((row) => mapCodePageRowToCounts(row));
+  const map = new Map(withCounts.map((codePage) => [codePage.id, codePage]));
 
-  return gameIds.map((id) => map.get(id)).filter((game): game is GameWithCounts => Boolean(game));
+  return codePageIds.map((id) => map.get(id)).filter((codePage): codePage is CodePageWithCounts => Boolean(codePage));
 }
 
-export async function listGamesWithActiveCountsByUniverseId(universeId: number, limit = 1): Promise<GameWithCounts[]> {
+export async function listCodePagesWithActiveCountsByUniverseId(universeId: number, limit = 1): Promise<CodePageWithCounts[]> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
-    .from("game_pages_index_view")
+    .from("code_pages_index_view")
     .select(
       "id,name,slug,cover_image,created_at,updated_at,universe_id,genre_l1,genre_l2,active_code_count,latest_code_first_seen_at,content_updated_at"
     )
@@ -796,7 +796,7 @@ export async function getGameListEntriesPage(
         `
           list_id,
           universe_id,
-          game_id,
+          code_page_id,
           rank,
           metric_value,
           reason,
@@ -823,7 +823,7 @@ export async function getGameListEntriesPage(
           description,
           game_description_md
         ),
-        game:games(
+        game:code_pages(
             id,
             slug,
             name,
@@ -858,7 +858,7 @@ export async function getGameListEntriesPage(
           `
             list_id,
             universe_id,
-            game_id,
+            code_page_id,
             rank,
             metric_value,
             reason,
@@ -884,7 +884,7 @@ export async function getGameListEntriesPage(
               description,
               game_description_md
             ),
-            game:games(
+            game:code_pages(
               id,
               slug,
               name,
@@ -934,7 +934,7 @@ export async function getGameListBySlug(
     });
 
   if (missingGameIds.length) {
-    const withCounts = await listGamesWithActiveCountsForIds(missingGameIds);
+    const withCounts = await listCodePagesWithActiveCountsForIds(missingGameIds);
     const map = new Map(withCounts.map((g) => [g.id, g]));
     for (const entry of entries) {
       const gid = entry.game?.id;
@@ -973,7 +973,7 @@ export async function getGameListNavEntries(listId: string): Promise<GameListNav
           display_name,
           name
         ),
-        game:games(
+        game:code_pages(
           name
         )
       `
@@ -1628,7 +1628,7 @@ export async function listPublishedEventsPageSlugs(): Promise<string[]> {
   return cached();
 }
 
-export async function getGameBySlug(slug: string): Promise<Game | null> {
+export async function getCodePageBySlug(slug: string): Promise<CodePage | null> {
   const normalizedSlug = slug.trim().toLowerCase();
   const cached = publicContentCache(
     async () => {
@@ -1641,9 +1641,9 @@ export async function getGameBySlug(slug: string): Promise<Game | null> {
       if (error) throw error;
       if (!data) return null;
 
-      return data as Game;
+      return data as CodePage;
     },
-    [`getGameBySlug:${normalizedSlug}`],
+    [`getCodePageBySlug:${normalizedSlug}`],
     {
       revalidate: 21600, // 6 hours
       tags: ["codes-index", `code:${normalizedSlug}`]
@@ -1676,28 +1676,28 @@ export async function getRobloxUniverseById(universeId: number): Promise<RobloxU
   return cachedGetRobloxUniverseById(universeId);
 }
 
-const cachedListCodesForGame = publicContentCache(
-  async (gameId: string) => {
+const cachedListCodesForCodePage = publicContentCache(
+  async (codePageId: string) => {
     const sb = supabaseAdmin();
     const { data, error } = await sb
       .from("code_pages_view")
       .select("codes")
-      .eq("id", gameId)
+      .eq("id", codePageId)
       .maybeSingle();
     if (error) throw error;
     const codes = (data as { codes?: unknown })?.codes;
     if (!Array.isArray(codes)) return [];
     return codes as Code[];
   },
-  ["listCodesForGame"],
+  ["listCodesForCodePage"],
   {
     revalidate: 21600, // 6 hours
     tags: ["codes-index"]
   }
 );
 
-export async function listCodesForGame(gameId: string): Promise<Code[]> {
-  return cachedListCodesForGame(gameId);
+export async function listCodesForCodePage(codePageId: string): Promise<Code[]> {
+  return cachedListCodesForCodePage(codePageId);
 }
 // ========================================
 // Free Roblox Items Catalog

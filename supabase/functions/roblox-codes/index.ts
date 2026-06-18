@@ -26,37 +26,37 @@ Deno.serve(async (req) => {
 
     if (!placeId) return emptyPayload();
 
-    const { data: gameData, error: gameError } = await supabase
-        .from('games')
+    const { data: codePageData, error: codePageError } = await supabase
+        .from('code_pages')
         .select('id,name,slug,updated_at')
         .ilike('roblox_link', `%${placeId}%`)
         .maybeSingle();
 
-    if (gameError || !gameData) {
-        if (gameError) console.error('game lookup failed', { placeId, gameError });
+    if (codePageError || !codePageData) {
+        if (codePageError) console.error('code page lookup failed', { placeId, codePageError });
         return emptyPayload();
     }
 
     const { data: codesData, error: codesError } = await supabase
         .from('codes')
         .select('code,status,rewards_text,is_new,level_requirement,first_seen_at,last_seen_at')
-        .eq('game_id', gameData.id)
+        .eq('code_page_id', codePageData.id)
         .eq('status', 'active')
         .order('first_seen_at', { ascending: false })
         .limit(9);
 
     if (codesError) {
-        console.error('codes lookup failed', { gameId: gameData.id, codesError });
+        console.error('codes lookup failed', { codePageId: codePageData.id, codesError });
     }
 
     const { count: activeCountAll, error: activeCountError } = await supabase
         .from('codes')
         .select('id', { count: 'exact', head: true })
-        .eq('game_id', gameData.id)
+        .eq('code_page_id', codePageData.id)
         .eq('status', 'active');
 
     if (activeCountError) {
-        console.error('active count lookup failed', { gameId: gameData.id, activeCountError });
+        console.error('active count lookup failed', { codePageId: codePageData.id, activeCountError });
     }
 
     const codes = Array.isArray(codesData) ? codesData : [];
@@ -66,7 +66,7 @@ Deno.serve(async (req) => {
 
     return new Response(
         JSON.stringify({
-            game: { name: gameData.name, slug: gameData.slug, updated_at: gameData.updated_at },
+            game: { name: codePageData.name, slug: codePageData.slug, updated_at: codePageData.updated_at },
             codes: codes,
             totalCodes,
             activeCount: activeCountDisplay,

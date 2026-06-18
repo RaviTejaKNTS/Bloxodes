@@ -2257,7 +2257,7 @@ async function fetchRelatedUniversePages(params: {
 
   try {
     const { data, error } = await supabase
-      .from("games")
+      .from("code_pages")
       .select("name, slug, seo_description, updated_at")
       .eq("universe_id", universeId)
       .eq("is_published", true)

@@ -100,7 +100,7 @@ async function fetchGames(
   publishedOnly: boolean
 ): Promise<GameRow[]> {
   let query = supabase
-    .from("games")
+    .from("code_pages")
     .select("id, slug, redeem_md")
     .order("slug", { ascending: true })
     .range(offset, offset + pageSize - 1);

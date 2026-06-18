@@ -1,30 +1,25 @@
 ---
 name: bloxodes-quiz-writing
-description: Write, review, or seed Bloxodes quiz pages backed by quiz_pages and local QuizData JSON. Use for /quizzes pages, metadata, Roblox game question pools, easy/medium/hard difficulty design, local imports, and question-quality review.
+description: Write one Bloxodes quiz final.json after brief approval. Use for /quizzes pages, metadata, quizData, Roblox game question pools, easy/medium/hard difficulty design, and question-quality review.
 ---
 
 # Bloxodes Quiz Writing
 
-Read `agents/content-writing/agents.md` first.
-
-Use this for quiz pages that test useful knowledge about a Roblox game. Questions should be clear, fair, and based on facts a player can learn from the game or reliable sources.
+Use this after `bloxodes-quiz-research` and parent approval. Questions should be clear, fair, and based on facts a player can learn from the game or reliable sources.
 
 ## Workflow
 
-1. Check production for an existing quiz for the game.
-2. Resolve the game identity and universe ID.
-3. Inspect any existing `data/<Game>/quiz.json`.
-4. Create workspace:
+1. Read the approved `brief.md`.
+2. Create or update:
 
 ```text
 tmp/content-workspace/<game-slug>/quizzes/<quiz-code>/
-  research-notes.md
+  brief.md
   final.json
 ```
 
-5. Write `research-notes.md` with topic coverage, source notes, question groups, difficulty plan, and gaps.
-6. Write page metadata and quiz data in `final.json`.
-7. Parse JSON and validate the quiz shape.
+3. Write page metadata and quiz data in `final.json`.
+4. Parse JSON and validate the quiz shape.
 
 ## Question Rules
 

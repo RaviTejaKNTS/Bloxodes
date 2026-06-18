@@ -11,7 +11,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 ## Supabase: Core Public Content
 
-- `games`, `code_pages_view`, `game_pages_index_view`
+- `code_pages`, `code_pages_view`, `code_pages_index_view`
   - Code pages and code index views.
 - `articles`, `article_pages_view`, `article_pages_index_view`
   - `articles` is the article write source. Article views are read projections only; article imports should not write separate index/detail data.
@@ -22,7 +22,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `checklist_pages`, `checklist_pages_view`, `checklist_items`
   - Checklist detail and checklist index content.
 - `quiz_pages`, `quiz_pages_view`
-  - Quiz detail and quiz index metadata. Quiz detail rendering does not use `about_md`; keep quiz value in the intro copy and question pool. Use `agents/content-writing/agents.md` and `bloxodes-quiz-writing` for page shape and validation.
+  - Quiz detail and quiz index metadata. Quiz detail rendering does not use `about_md`; keep quiz value in the intro copy and question pool. Use `bloxodes-quiz-writing` for page shape and validation.
 - `puzzle_pages`, `puzzle_pages_view`, `puzzle_answers`, `puzzle_sync_runs`
   - Daily puzzle answer pages under `/puzzles`. `puzzle_pages` stores durable page copy and SEO; `puzzle_answers` stores one row per puzzle/date with `answer_summary` and raw `payload`; dated archive pages are noindex and excluded from the puzzles sitemap.
 - `wiki_pages`, `wiki_pages_view`
@@ -140,7 +140,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Wizard Alchemy/*.json`
   - Local Wizard Alchemy game datasets for wiki/catalog page work, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
   - `potions.json`, `materials.json`, and `races.json` also power the Wizard Alchemy potion planner and race reroll calculator through `src/lib/wizard-alchemy/data.ts`.
-  - Do not store manual code-page payloads with active codes or dates here. Code pages should update the `games` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then rely on `scripts/codes/update-codes.ts` to populate `codes`.
+  - Do not store manual code-page payloads with active codes or dates here. Code pages should update the `code_pages` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then rely on `scripts/codes/update-codes.ts` to populate `codes`.
 - `data/Slime RNG/*.json`
   - Local Slime RNG game datasets for wiki/catalog page work, including slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.
   - `quiz.json` is the local question pool for `/quizzes/slime-rng`; use `bloxodes-quiz-writing` when editing it.

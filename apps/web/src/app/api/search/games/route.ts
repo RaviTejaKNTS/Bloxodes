@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import { listGamesWithActiveCounts } from "@/lib/db";
+import { listCodePagesWithActiveCounts } from "@/lib/db";
 
 export const revalidate = 600;
 
 export async function GET() {
   try {
-    const games = await listGamesWithActiveCounts();
+    const games = await listCodePagesWithActiveCounts();
     const payload = games.map((game) => ({
       id: game.id,
       name: game.name,

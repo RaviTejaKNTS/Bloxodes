@@ -1,4 +1,0 @@
-interface:
-  display_name: "Bloxodes Catalog Batch Runner"
-  short_description: "Run approved catalog batches"
-  default_prompt: "Use $bloxodes-catalog-batch-runner to coordinate multiple approved game catalog pages. Read agents/content-writing/agents.md, give each worker one catalog, review research/data/images/final.json, and keep the batch scoped."

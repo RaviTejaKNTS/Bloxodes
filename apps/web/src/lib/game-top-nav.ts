@@ -35,7 +35,7 @@ function parsePath(path: string | null | undefined): RouteTarget | null {
     .map((segment) => decodeURIComponent(segment).trim().toLowerCase());
 
   if (segments.length === 2 && segments[0] === "codes" && segments[1]) {
-    return { type: "codes", table: "game_pages_index_view", slugField: "slug", slug: segments[1] };
+    return { type: "codes", table: "code_pages_index_view", slugField: "slug", slug: segments[1] };
   }
   if (segments.length === 2 && segments[0] === "events" && segments[1]) {
     return { type: "events", table: "events_pages", slugField: "slug", slug: segments[1] };
@@ -148,7 +148,7 @@ export async function getGameTopNavContext(path: string | null | undefined): Pro
       .limit(1)
       .maybeSingle(),
     supabase
-      .from("game_pages_index_view")
+      .from("code_pages_index_view")
       .select("slug, name")
       .eq("is_published", true)
       .eq("universe_id", resolved.universeId)

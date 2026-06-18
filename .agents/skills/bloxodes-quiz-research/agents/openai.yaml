@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Quiz Research"
+  short_description: "Research one quiz"
+  default_prompt: "Use $bloxodes-quiz-research for one approved Bloxodes quiz. Check overlap, source proof, stable fact pool, difficulty topics, facts to avoid, and gaps in brief.md, then stop."

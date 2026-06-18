@@ -101,7 +101,7 @@ async function processGame(game: GameRow, supabase: SupabaseClient, sourceOverri
   }
 
   const { error } = await supabase
-    .from("games")
+    .from("code_pages")
     .update(updates)
     .eq("id", game.id);
 
@@ -194,7 +194,7 @@ async function main() {
 
   const supabase = supabaseAdmin();
   let query = supabase
-    .from("games")
+    .from("code_pages")
     .select(
       "id, name, slug, source_url, source_url_2, source_url_3, roblox_link, community_link, discord_link, twitter_link, youtube_link"
     )

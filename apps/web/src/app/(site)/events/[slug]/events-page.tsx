@@ -16,7 +16,7 @@ import { CommentsSection } from "@/components/comments/CommentsSection";
 import {
   listPublishedArticlesByUniverseId,
   listPublishedChecklistsByUniverseId,
-  listGamesWithActiveCountsByUniverseId
+  listCodePagesWithActiveCountsByUniverseId
 } from "@/lib/db";
 import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
 import { processHtmlLinks } from "@/lib/link-utils";
@@ -835,7 +835,7 @@ export async function renderEventsPage({ slug }: { slug: string }) {
   const coverImage = resolveImageUrl(heroImageCandidate) ?? `${SITE_URL}/og-image.png`;
 
   const relatedChecklists = universeId ? await listPublishedChecklistsByUniverseId(universeId, 1) : [];
-  const relatedCodes = universeId ? await listGamesWithActiveCountsByUniverseId(universeId, 1) : [];
+  const relatedCodes = universeId ? await listCodePagesWithActiveCountsByUniverseId(universeId, 1) : [];
   const relatedArticles = universeId ? await listPublishedArticlesByUniverseId(universeId, 5, 0) : [];
   const relatedTools: ToolListEntry[] = universeId ? await listPublishedToolsByUniverseId(universeId, 3) : [];
   const relatedHeading = relatedArticles.length ? `${universeLabel} articles` : null;

@@ -24,17 +24,17 @@ type GameRelation = { id: string; name: string; slug: string } | null;
 
 type PendingCodeRow = {
   id: string;
-  game_id: string;
+  code_page_id: string;
   code: string;
   first_seen_at: string;
-    game: GameRelation;
+  game: GameRelation;
 };
 
 async function fetchNextPendingGame() {
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from('codes')
-    .select('id, game_id, code, first_seen_at, games(id, name, slug)')
+    .select('id, code_page_id, code, first_seen_at, code_page:code_pages(id, name, slug)')
     .eq('posted_online', false)
     .eq('status', 'active')
     .order('first_seen_at', { ascending: true })
@@ -45,17 +45,17 @@ async function fetchNextPendingGame() {
 
   const row = data[0] as {
     id: string;
-    game_id: string;
+    code_page_id: string;
     code: string;
     first_seen_at: string;
-    games: { id: string; name: string; slug: string } | { id: string; name: string; slug: string }[] | null;
+    code_page: { id: string; name: string; slug: string } | { id: string; name: string; slug: string }[] | null;
   };
 
-  const gameRelation = Array.isArray(row.games) ? row.games[0] ?? null : row.games;
+  const gameRelation = Array.isArray(row.code_page) ? row.code_page[0] ?? null : row.code_page;
 
   return {
     id: row.id,
-    game_id: row.game_id,
+    code_page_id: row.code_page_id,
     code: row.code,
     first_seen_at: row.first_seen_at,
     game: gameRelation
@@ -68,12 +68,12 @@ async function fetchNextPendingGame() {
   } satisfies PendingCodeRow;
 }
 
-async function fetchCodesForGame(gameId: string) {
+async function fetchCodesForCodePage(codePageId: string) {
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from('codes')
     .select('id, code')
-    .eq('game_id', gameId)
+    .eq('code_page_id', codePageId)
     .eq('status', 'active')
     .eq('posted_online', false)
     .order('first_seen_at', { ascending: true });
@@ -429,7 +429,7 @@ async function main() {
     return;
   }
 
-  const codes = await fetchCodesForGame(pending.game_id);
+  const codes = await fetchCodesForCodePage(pending.code_page_id);
   if (codes.length === 0) {
     console.log(`No Telegram-ready codes found for game ${game.name}.`);
     return;

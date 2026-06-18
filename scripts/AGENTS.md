@@ -14,6 +14,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
 
 ## Folder Map
 
+- `dev/`: local development launch guards. `start-local-dev.ts` powers `npm run dev:local`, loads `.env.local` through the shared env loader, and refuses to start if `SUPABASE_URL` is not local.
 - `ads/`: build-time ad and policy helpers.
 - `articles/`: article generation and article refresh.
 - `automation/`: queue runners, IndexNow/bootstrap helpers, Google Indexing API submitter, cache warming, reporting.
@@ -46,14 +47,16 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `check-public-copy.ts` blocks self-referential public copy such as `Use the X catalog`, `this catalog`, `dataset`, and `Bloxodes`, weak field-command copy such as `Read category first`, and AI-ish contrast filler such as `not just`; run it against generated `final.json` files before local Supabase import.
   - `import-content-final.ts` upserts reviewed article, checklist, and quiz `final.json` files into Supabase. Article imports write only to the `articles` table, pick a random author when missing, create an edited 16:9 cover from the linked Roblox universe thumbnail when no cover image is provided, and inject the feature image before the first H2 like generated articles. After article imports, verify both `/articles` and `/articles/<slug>` show the same title, author, and cover from the saved article row. It is local-first by default and refuses production writes unless `NODE_ENV=production` is paired with `--allow-prod`.
   - `verify-article-finals.ts` is the batch verifier for reviewed article `final.json` files. Start or reuse the local web server first, then run `npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json> [...]`; it parses finals, runs copy checks, imports locally, reads back `articles` rows, and verifies each `/articles/<slug>` route returns 200.
+  - `verify-engagement-finals.ts` verifies checklist and quiz `final.json` files through the same local-first path: copy check, `import-content-final`, table readback, and `/checklists/<slug>` or `/quizzes/<code>` route checks.
+  - `verify-wiki-final.ts`, `verify-game-catalog-finals.ts`, and `verify-catalog-finals.ts` wrap the approved seed scripts with copy checks, local table readback, and route checks before Browser preview.
+  - `verify-simple-page-finals.ts` locally verifies simple tool and events page `final.json` rows by copy checking, upserting to `tools` or `events_pages`, reading back the row, and checking `/tools/<code>` or `/events/<slug>`.
 - `codes/`: code refresh and code-article rewrite jobs.
   - Code rows must come from `scripts/codes/update-codes.ts`, not from manual JSON, SQL, Supabase edits, or hand-written script payloads.
-  - For a code page, insert or update the `games` row first: `slug` is the editorial game slug only, not `roblox_universes.slug`; `roblox_link` is the Roblox experience URL, `source_url` is the RobloxDen codes page, `source_url_2` is the Beebom codes page, and `seo_title` stays empty or null unless the user explicitly asks otherwise.
+  - For a code page, insert or update the `code_pages` row first: `slug` is the editorial game slug only, not `roblox_universes.slug`; `roblox_link` is the Roblox experience URL, `source_url` is the RobloxDen codes page, `source_url_2` is the Beebom codes page, and `seo_title` stays empty or null unless the user explicitly asks otherwise.
   - After source URLs are set, run `npm run refresh:codes -- --slug <game-slug>` so the scraper reads RobloxDen and Beebom, upserts active codes, and expires missing codes.
   - Code-page article fields and metadata must be evergreen. Do not write active code names, current-code reward mappings, active counts, exact dates, month/year labels, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily` into prose or metadata.
 - `decal-ids/`: decal scraping and enrichment.
 - `events/`: event ingestion, page seeding, event detail hydration, event guide generation.
-- `games/`: import jobs and single-game article generation.
 - `lists/`: curated and trending list refresh jobs.
 - `music/`: music ID collection, import, enrichment, verification, thumbnails.
 - `posts/`: outbound posting jobs.
@@ -78,7 +81,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `rank-universe-stats.ts` snapshots public rankings into `roblox_universe_rank_snapshots_hourly` or `roblox_universe_rank_snapshots_daily`; it pages through all eligible universes by default. Hourly runs should use `--granularity hourly --rank-set playing --snapshot-scope relevant` so global/genre/subgenre playing ranks are computed for all games but only rank-relevant hourly rows are stored. Daily runs should use `--granularity daily --rank-set all --snapshot-scope all` for complete all-game rank history, including visits, favorites, and rating.
   - `prune-universe-hourly-history.ts` trims short-range history through `npm run stats:prune-hourly -- --days 90 --apply`; it deletes only `roblox_universe_stats_hourly` and `roblox_universe_rank_snapshots_hourly` rows older than the cutoff.
   - `enrich-roblox-universes.ts` preserves existing non-null universe data and stores every distinct icon/screenshot URL in `roblox_universe_media`; it should not delete previous media or replace existing media fields with `null`.
-  - Universe slugs are stats route identifiers. They should be generated and maintained independently from editorial page slugs, and no script should sync them to or from `games.slug`.
+  - Universe slugs are stats route identifiers. They should be generated and maintained independently from editorial page slugs, and no script should sync them to or from `code_pages.slug`.
   - `backfill-clean-display-names.ts` cleans `roblox_universes.display_name` from raw Roblox titles while leaving `name` as the raw source value. It is dry-run by default; use `--apply` locally, and pair `NODE_ENV=production` with `--allow-prod` only after a clean production dry-run.
 
 ## Operational Expectations
@@ -86,7 +89,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - Treat scripts as data pipelines: know whether the job reads only, mutates Supabase, writes local files, calls external APIs, or triggers revalidation.
 - If a script creates or updates publishable content, review `/api/revalidate` coverage and any relevant Supabase revalidation trigger flow.
 - If a job becomes part of the normal workflow, add a package script and update `agents/scripts/agents.md`.
-- Keep editorial page slugs separate from stats slugs. `roblox_universes.slug` belongs to `/stats/games/*`; scripts must not copy it into `games.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_catalog_pages.wiki_slug`.
+- Keep editorial page slugs separate from stats slugs. `roblox_universes.slug` belongs to `/stats/games/*`; scripts must not copy it into `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_catalog_pages.wiki_slug`.
 
 ## Script Authoring Checklist
 

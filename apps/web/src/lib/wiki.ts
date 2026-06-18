@@ -2,15 +2,15 @@ import "server-only";
 import { publicContentCache } from "@/lib/public-content-cache";
 import {
   getEventsPageByUniverseId,
-  listCodesForGame,
-  listGamesWithActiveCountsByUniverseId,
+  listCodesForCodePage,
+  listCodePagesWithActiveCountsByUniverseId,
   listPublishedArticlesByUniverseId,
   listPublishedChecklistsByUniverseId,
   listRanksForUniverses,
   type ArticleWithRelations,
   type ChecklistSummaryRow,
   type EventsPageSummary,
-  type GameWithCounts,
+  type CodePageWithCounts,
   type Code,
   type UniverseListBadge
 } from "@/lib/db";
@@ -160,7 +160,7 @@ export type WikiDeveloperGame = {
 };
 
 export type WikiRelatedData = {
-  codes: GameWithCounts[];
+  codes: CodePageWithCounts[];
   activeCodes: Code[];
   tools: ToolListEntry[];
   articles: ArticleWithRelations[];
@@ -539,7 +539,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     servers,
     developerGames
   ] = await Promise.all([
-    safeList("codes", () => listGamesWithActiveCountsByUniverseId(universeId, 1)),
+    safeList("codes", () => listCodePagesWithActiveCountsByUniverseId(universeId, 1)),
     safeList("tools", () => listPublishedToolsByUniverseId(universeId, 6)),
     safeList("articles", () => listPublishedArticlesByUniverseId(universeId, 8, 0)),
     safeList("checklists", () => listPublishedChecklistsByUniverseId(universeId, 4)),
@@ -560,7 +560,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
   const primaryCodePage = codePages[0] ?? null;
   const activeCodes = primaryCodePage
     ? sortCodesByFirstSeenDesc(
-        (await safeList("active codes", () => listCodesForGame(primaryCodePage.id))).filter((code) => code.status === "active")
+        (await safeList("active codes", () => listCodesForCodePage(primaryCodePage.id))).filter((code) => code.status === "active")
       ).slice(0, 3)
     : [];
 

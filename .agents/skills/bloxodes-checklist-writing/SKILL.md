@@ -1,30 +1,25 @@
 ---
 name: bloxodes-checklist-writing
-description: Write, review, or seed Bloxodes checklist pages backed by checklist_pages and checklist_items. Use for /checklists pages, metadata, section_code planning, interactive task boards, local imports, and practical Roblox progression tasks.
+description: Write one Bloxodes checklist final.json after brief approval. Use for /checklists pages, metadata, section_code planning, checklist_items, and practical Roblox progression tasks.
 ---
 
 # Bloxodes Checklist Writing
 
-Read `agents/content-writing/agents.md` first.
-
-Use this for interactive task lists that help players complete a progression path, event prep path, beginner route, collection route, or repeatable in-game routine.
+Use this after `bloxodes-checklist-research` and parent approval. Checklists help players complete a progression path, prep path, collection route, or repeatable in-game routine.
 
 ## Workflow
 
-1. Check production for an existing checklist or related page that already covers the same task path.
-2. Resolve the game identity and universe ID.
-3. Research the player route and split it into practical sections.
-4. Create workspace:
+1. Read the approved `brief.md`.
+2. Create or update:
 
 ```text
 tmp/content-workspace/<game-slug>/checklists/<checklist-slug>/
-  research-notes.md
+  brief.md
   final.json
 ```
 
-5. Write `research-notes.md` with the player goal, source notes, section plan, skipped tasks, and gaps.
-6. Write checklist page metadata and task rows in `final.json`.
-7. Parse JSON and validate that section codes are consistent.
+3. Write checklist page metadata and task rows in `final.json`.
+4. Parse JSON and validate that section codes are consistent.
 
 ## Writing Rules
 

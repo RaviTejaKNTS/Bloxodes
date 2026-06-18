@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Wiki Research"
+  short_description: "Research one wiki hub"
+  default_prompt: "Use $bloxodes-wiki-research for one approved Bloxodes wiki hub. Check game identity, existing coverage, source proof, controls, related pages, core loop, facts to use, facts to avoid, and gaps in brief.md, then stop."

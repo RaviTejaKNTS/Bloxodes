@@ -2,11 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { GameCard } from "@/components/GameCard";
-import type { GameWithCounts } from "@/lib/db";
+import type { CodePageWithCounts } from "@/lib/db";
 
 type MoreGamesProps = {
   games: Array<{
-    data: GameWithCounts;
+    data: CodePageWithCounts;
     articleUpdatedAt: string | null;
   }>;
 };

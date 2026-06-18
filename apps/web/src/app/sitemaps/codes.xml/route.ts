@@ -16,7 +16,7 @@ export async function GET() {
   try {
     const sb = supabaseAdmin();
     const { data, error } = await sb
-      .from("game_pages_index_view")
+      .from("code_pages_index_view")
       .select("slug, updated_at, content_updated_at")
       .eq("is_published", true)
       .not("slug", "is", null)

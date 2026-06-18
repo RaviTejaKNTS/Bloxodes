@@ -375,8 +375,8 @@ async function main() {
   const lines = [
     "# Pro Game Guides Source URL 4 Candidates",
     "",
-    "Source: local `public.games` plus `docs/Pro Game Guides Roblox Codes Articles.md`.",
-    "Purpose: review Pro Game Guides URLs that can be placed in `games.source_url_4`.",
+    "Source: local `public.code_pages` plus `docs/Pro Game Guides Roblox Codes Articles.md`.",
+    "Purpose: review Pro Game Guides URLs that can be placed in `code_pages.source_url_4`.",
     "",
     `Local games checked: ${games.length}`,
     `Pro Game Guides articles checked: ${articles.length}`,

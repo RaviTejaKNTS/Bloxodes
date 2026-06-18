@@ -2,7 +2,7 @@ import "../shared/load-env";
 import { promises as fs } from "node:fs";
 import { detectProvider, getCodeDisplayPriority, scrapeSources } from "@/lib/scraper";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import type { Game } from "@/lib/db";
+import type { CodePage } from "@/lib/db";
 import { sanitizeCodeDisplay, normalizeCodeKey } from "@/lib/code-normalization";
 
 const PAGE_SIZE = Number(process.env.REFRESH_PAGE_SIZE ?? 500);
@@ -41,7 +41,7 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-type GameRow = Game & {
+type CodePageRow = CodePage & {
   source_url: string | null;
   source_url_2: string | null;
 };
@@ -57,31 +57,31 @@ type ProcessResult = {
   error?: string;
 };
 
-async function fetchPublishedGames() {
+async function fetchPublishedCodePages() {
   const sb = supabaseAdmin();
-  const all: GameRow[] = [];
+  const all: CodePageRow[] = [];
   let from = 0;
 
   while (true) {
     const to = from + PAGE_SIZE - 1;
     const { data, error } = await sb
-      .from("games")
+      .from("code_pages")
       .select("*")
       .eq("is_published", true)
       .order("name", { ascending: true })
       .range(from, to);
 
     if (error) throw error;
-    const chunk = (data ?? []) as GameRow[];
+    const chunk = (data ?? []) as CodePageRow[];
     all.push(...chunk);
     if (chunk.length < PAGE_SIZE) break;
     from += PAGE_SIZE;
   }
 
-  return { sb, games: all };
+  return { sb, codePages: all };
 }
 
-async function processGame(sb: ReturnType<typeof supabaseAdmin>, game: GameRow): Promise<ProcessResult> {
+async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodePageRow): Promise<ProcessResult> {
   const sourceUrls = [game.source_url, game.source_url_2]
     .map((url) => (typeof url === "string" ? url.trim() : ""))
     .filter((url) => url.length > 0);
@@ -139,7 +139,7 @@ async function processGame(sb: ReturnType<typeof supabaseAdmin>, game: GameRow):
   const { data: existingRows, error: existingError } = await sb
     .from("codes")
     .select("code, status, provider_priority, first_seen_at")
-    .eq("game_id", game.id);
+    .eq("code_page_id", game.id);
 
   if (existingError) {
     throw new Error(`failed to load existing codes for ${game.slug}: ${existingError.message}`);
@@ -187,7 +187,7 @@ async function processGame(sb: ReturnType<typeof supabaseAdmin>, game: GameRow):
     }
     incomingNormalized.add(normalized);
 
-    // Skip if a code with the same normalized value already exists for this game
+    // Skip if a code with the same normalized value already exists for this code page
     const existingEntry = existingNormalizedMap.get(normalized);
     if (existingEntry) {
       const existingExpired = existingEntry.status === "expired";
@@ -199,7 +199,7 @@ async function processGame(sb: ReturnType<typeof supabaseAdmin>, game: GameRow):
         const { error: touchError } = await sb
           .from("codes")
           .update({ last_seen_at: new Date().toISOString() })
-          .eq("game_id", game.id)
+          .eq("code_page_id", game.id)
           .ilike("code", existingEntry.code);
 
         if (touchError) {
@@ -224,7 +224,7 @@ async function processGame(sb: ReturnType<typeof supabaseAdmin>, game: GameRow):
     const status = c.status === "check" ? "expired" : c.status;
     const shouldResetFirstSeen = status === "active" && expiredInDb.has(normalized);
     const { error } = await sb.rpc("upsert_code", {
-      p_game_id: game.id,
+      p_code_page_id: game.id,
       p_code: displayCode,
       p_status: status,
       p_rewards_text: c.rewardsText ?? null,
@@ -242,7 +242,7 @@ async function processGame(sb: ReturnType<typeof supabaseAdmin>, game: GameRow):
       const { error: resetError } = await sb
         .from("codes")
         .update({ first_seen_at: nowIso })
-        .eq("game_id", game.id)
+        .eq("code_page_id", game.id)
         .ilike("code", displayCode);
 
       if (resetError) {
@@ -280,7 +280,7 @@ async function processGame(sb: ReturnType<typeof supabaseAdmin>, game: GameRow):
           is_new: false,
           last_seen_at: new Date().toISOString(),
         })
-        .eq("game_id", game.id)
+        .eq("code_page_id", game.id)
         .in("code", codesToMove);
 
       if (moveError) {
@@ -320,7 +320,7 @@ async function processGame(sb: ReturnType<typeof supabaseAdmin>, game: GameRow):
         is_new: false,
         last_seen_at: new Date().toISOString(),
       })
-      .eq("game_id", game.id)
+      .eq("code_page_id", game.id)
       .in("code", codesToExpire);
 
     if (expireError) {
@@ -346,7 +346,7 @@ async function processGame(sb: ReturnType<typeof supabaseAdmin>, game: GameRow):
 
   if (expiredArrayChanged) {
     const { error: expiredUpdateError } = await sb
-      .from("games")
+      .from("code_pages")
       .update({ expired_codes: updatedExpiredCodes })
       .eq("id", game.id);
 
@@ -372,15 +372,15 @@ async function main() {
     console.log(`   Filtering to slugs: ${TARGET_SLUGS.join(", ")}`);
   }
 
-  const { sb, games } = await fetchPublishedGames();
-  const candidates = games.filter((g) => !TARGET_SLUGS.length || TARGET_SLUGS.includes(g.slug));
+  const { sb, codePages } = await fetchPublishedCodePages();
+  const candidates = codePages.filter((g) => !TARGET_SLUGS.length || TARGET_SLUGS.includes(g.slug));
 
   if (!candidates.length) {
-    console.log("No games to refresh. Exiting.");
+    console.log("No code pages to refresh. Exiting.");
     return;
   }
 
-  console.log(`Found ${candidates.length} published games to refresh (page size ${PAGE_SIZE}, concurrency ${CONCURRENCY}).`);
+  console.log(`Found ${candidates.length} published code pages to refresh (page size ${PAGE_SIZE}, concurrency ${CONCURRENCY}).`);
 
   const stats = {
     processed: 0,
@@ -402,7 +402,7 @@ async function main() {
     const results = await Promise.all(
       batch.map(async (game) => {
         try {
-          const result = await processGame(sb, game);
+          const result = await processCodePage(sb, game);
           return result;
         } catch (err: any) {
           return {

@@ -1,15 +1,15 @@
 # Destructoid Source URL 3 Candidates
 
-Source: local `public.games` plus `docs/Destructoid Roblox Codes Articles.md`.
-Purpose: review Destructoid URLs that can be placed in `games.source_url_3`.
+Source: local `public.code_pages` plus `docs/Destructoid Roblox Codes Articles.md`.
+Purpose: review Destructoid URLs that can be placed in `code_pages.source_url_3`.
 
-Local games checked: 3906
+Local code pages checked: 3906
 Destructoid articles checked: 1797
 Ready high-confidence updates: 0
 Already present in source_url_3: 1271
 Ambiguous article matches: 0
 Possible fuzzy matches: 0
-Multiple Destructoid URLs matched the same empty local game: 0
+Multiple Destructoid URLs matched the same empty local code page: 0
 No local match: 526
 
 ## Ready to Update Source URL 3

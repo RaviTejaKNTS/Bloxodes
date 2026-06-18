@@ -9,7 +9,7 @@ import { GameCard } from "@/components/GameCard";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ToolCard } from "@/components/ToolCard";
 import { getQuizPageByCode, listPublishedQuizCodes, loadQuizData } from "@/lib/quizzes";
-import { listGamesWithActiveCountsByUniverseId, listPublishedArticlesByUniverseId } from "@/lib/db";
+import { listCodePagesWithActiveCountsByUniverseId, listPublishedArticlesByUniverseId } from "@/lib/db";
 import { listPublishedToolsByUniverseId } from "@/lib/tools";
 import { buildWikiCatalogPath, listPublishedWikiCatalogPagesByUniverseId } from "@/lib/wiki-catalog";
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
@@ -122,7 +122,7 @@ export default async function QuizPage({ params }: PageProps) {
 
   const [relatedCodes, relatedArticles, relatedTools, relatedCatalogPagesRaw] = universeId
     ? await Promise.all([
-        listGamesWithActiveCountsByUniverseId(universeId, 2),
+        listCodePagesWithActiveCountsByUniverseId(universeId, 2),
         listPublishedArticlesByUniverseId(universeId, 3, 0),
         listPublishedToolsByUniverseId(universeId, 2),
         listPublishedWikiCatalogPagesByUniverseId(universeId, 2)

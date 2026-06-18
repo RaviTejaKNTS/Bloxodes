@@ -118,7 +118,7 @@ async function processQueueItem(entry: QueueRow) {
   const slug = normalizeGameSlug(entry.game_name, entry.game_name);
 
   const { data: existing, error: existingError } = await supabase
-    .from("games")
+    .from("code_pages")
     .select("id, is_published")
     .eq("slug", slug)
     .maybeSingle();

@@ -60,14 +60,14 @@ Database validation results:
   - `articles`: 287
   - `catalog_pages`: 40
   - `codes`: 21,647
-  - `games`: 3,909
+  - `code_pages` (recorded before the table rename in the original cutover notes): 3,909
   - `roblox_universes`: 96,436
   - `stats_game_current_index`: 95,195
   - `storage.objects`: 2,416
   - `auth.users`: 1
 - Key app-facing views returned rows:
   - `code_pages_view`: 3,909
-  - `game_pages_index_view`: 3,909
+  - `code_pages_index_view`: 3,909
   - `tools_view`: 8
   - `wiki_pages_view`: 19
   - `stats_game_current_index` sample returned rows.
@@ -79,7 +79,7 @@ HTTP API validation results:
 
 - Auth through Kong returned HTTP 200.
 - Storage through Kong returned HTTP 200.
-- REST through Kong returned HTTP 200 for `games`, `code_pages_view`, and `stats_game_current_index`.
+- REST through Kong returned HTTP 200 for the codes-page table, `code_pages_view`, and `stats_game_current_index`.
 - Public REST through `https://bloxodesdb.ravitejaknts.com` returned HTTP 200 with the anon key.
 - Public Studio through `https://bloxodesstudio.ravitejaknts.com` returns HTTP 401 without credentials and HTTP 200 with the protected dashboard credentials.
 - Clone-only REST write/delete smoke passed on `revalidation_events`: insert returned HTTP 201, delete returned HTTP 204, and the test row count returned to 0.
@@ -190,7 +190,7 @@ Run these checks before any app uses the VPS database.
 - Public schema table list matches.
 - Important private/auth/storage schemas are present if required.
 - Row counts match for major tables:
-  - `games`
+  - `code_pages`
   - `codes`
   - `roblox_universes`
   - `roblox_universe_stats_current`
@@ -204,7 +204,7 @@ Run these checks before any app uses the VPS database.
   - `quiz_pages`
   - `revalidation_events`
 - Views compile and return rows:
-  - `game_pages_index_view`
+  - `code_pages_index_view`
   - stats index/current views used by the web app
   - search/list views used by public pages
 - Functions exist and execute for read-only smoke inputs.

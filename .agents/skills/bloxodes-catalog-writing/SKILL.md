@@ -1,31 +1,25 @@
 ---
 name: bloxodes-catalog-writing
-description: Write or rewrite global Bloxodes catalog page content backed by catalog_pages. Use for /catalog pages, metadata, intro_md, description_md, description_json, faq_json, wiki_md, source-aware item explanations, and catalog final.json output.
+description: Write one global Bloxodes catalog final.json after brief approval. Use for /catalog pages backed by catalog_pages, metadata, intro_md, description_md, how_it_works_md, description_json, faq_json, wiki_md, and final.json output.
 ---
 
 # Bloxodes Catalog Writing
 
-Read `agents/content-writing/agents.md` first.
-
-Use this for global catalogs such as Roblox avatar items, free items, music IDs, decal IDs, color codes, or admin commands. For one Roblox game's item collection, use `bloxodes-game-catalog-writing`.
+Use this after `bloxodes-catalog-research` and parent approval. For one Roblox game's item collection, use `bloxodes-game-catalog-writing`.
 
 ## Workflow
 
-1. Check production for existing catalog coverage by code, title, route, source URL, and topic synonyms.
-2. Inspect the current row, local dataset, rendered page behavior, and item examples.
-3. If the page is item-backed, verify item count, rendered count, title count, useful fields, and image coverage.
-4. Create workspace:
+1. Read the approved `brief.md`.
+2. Create or update:
 
 ```text
 tmp/content-workspace/<topic-slug>/catalogs/<catalog-code>/
-  research-notes.md
+  brief.md
   final.json
 ```
 
-5. Write `research-notes.md` with what the catalog covers, production coverage, sources, data/image state, useful fields, and gaps.
-6. If data or images are missing, update them or record the accepted gap before writing final copy.
-7. Write `final.json`.
-8. Parse JSON and verify the public route will show the intended fields and sections.
+3. Write `final.json`.
+4. Parse JSON before returning.
 
 ## Writing Rules
 

@@ -1,29 +1,25 @@
 ---
 name: bloxodes-tool-writing
-description: Write or rewrite Bloxodes tool page content backed by the tools table. Use for /tools pages, metadata, intro_md, how_it_works_md, description_json, faq_json, CTA fields, formula assumptions, input/result copy, and tool final.json.
+description: Write one Bloxodes tool final.json after brief approval. Use for /tools pages backed by the tools table, metadata, intro_md, how_it_works_md, description_json, faq_json, CTA fields, formula assumptions, input/result copy, and tool final.json.
 ---
 
 # Bloxodes Tool Writing
 
-Read `agents/content-writing/agents.md` first.
-
-Use this when the page has a real tool job: calculator, planner, converter, checker, tracker, or optimizer. Do not create a tool page if the input, output, or formula is weak.
+Use this after `bloxodes-tool-research` and parent approval. Do not create a tool page if the input, output, or formula is weak.
 
 ## Workflow
 
-1. Check production for an existing tool or related page that already solves the job.
-2. Confirm the player task, inputs, outputs, formula or data source, and limitations.
-3. Create workspace:
+1. Read the approved `brief.md`.
+2. Create or update:
 
 ```text
 tmp/content-workspace/<game-or-topic-slug>/tools/<tool-code>/
-  research-notes.md
+  brief.md
   final.json
 ```
 
-4. Write `research-notes.md` with the tool job, sources, formula assumptions, edge cases, related pages, and gaps.
-5. Write `final.json`.
-6. Parse JSON and verify fields match the tools table and route behavior.
+3. Write `final.json`.
+4. Parse JSON before returning.
 
 ## Writing Rules
 

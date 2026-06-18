@@ -346,8 +346,8 @@ async function main() {
   const lines = [
     "# Destructoid Source URL 3 Candidates",
     "",
-    "Source: local `public.games` plus `docs/Destructoid Roblox Codes Articles.md`.",
-    "Purpose: review Destructoid URLs that can be placed in `games.source_url_3`.",
+    "Source: local `public.code_pages` plus `docs/Destructoid Roblox Codes Articles.md`.",
+    "Purpose: review Destructoid URLs that can be placed in `code_pages.source_url_3`.",
     "",
     `Local games checked: ${games.length}`,
     `Destructoid articles checked: ${articles.length}`,

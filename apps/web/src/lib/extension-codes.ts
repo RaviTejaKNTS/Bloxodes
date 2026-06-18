@@ -1,6 +1,6 @@
 import { publicContentCache } from "@/lib/public-content-cache";
 import { cleanRewardsText, isCodeNew, sortCodesByFirstSeenDesc } from "@/lib/code-utils";
-import type { Code, Game } from "@/lib/db";
+import type { Code, CodePage } from "@/lib/db";
 import {
   extractPlaceIdFromRobloxUrl,
   normalizeExtensionLimit,
@@ -15,7 +15,7 @@ import { supabaseAdmin } from "@/lib/supabase";
 
 type MatchSource = "place-id" | "roblox-link" | "game-name";
 
-type CodePageRow = Game & {
+type CodePageRow = CodePage & {
   codes?: Code[] | null;
   active_code_count?: number | null;
   latest_code_first_seen_at?: string | null;

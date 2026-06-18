@@ -273,7 +273,7 @@ Existing useful tables:
 - `roblox_universe_gamepasses`
 - `game_lists`
 - `game_list_entries`
-- `games`
+- `code_pages`
 - `wiki_pages`
 - `catalog_pages`
 - `events_pages`

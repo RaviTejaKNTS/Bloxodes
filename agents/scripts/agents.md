@@ -13,7 +13,7 @@ This file is the quick reference for what exists today and how to invoke it.
 | Purpose | File | Preferred command |
 | --- | --- | --- |
 | Batch article generation | `scripts/articles/generate-articles.ts` | `npm run generate:articles` |
-| Draft code page generation | `scripts/games/generate-game-article.ts` | `npm run generate` |
+| Draft code page generation | `scripts/codes/generate-code-page-copy.ts` | `npm run generate` |
 | Event guide generation | `scripts/events/generate-events-articles.ts` | `npm run generate:events-articles` |
 | Article generation queue worker | `scripts/automation/run-article-generation-queue.ts` | `npm run articles:queue` |
 | Generic generation queue worker | `scripts/automation/run-generation-queue.ts` | `npm run generate:queue` |
@@ -24,7 +24,7 @@ This file is the quick reference for what exists today and how to invoke it.
 | Public copy quality check | `scripts/content/check-public-copy.ts` | `npm run content:check-copy -- <final.json>` |
 ### Code Page Workflow Hard Rules
 
-`scripts/codes/update-codes.ts` is the source of truth for active and expired code rows. It reads `games.source_url` and `games.source_url_2`, detects supported providers, scrapes the source pages, upserts active codes, and expires codes that disappear from the supported sources.
+`scripts/codes/update-codes.ts` is the source of truth for active and expired code rows. It reads `code_pages.source_url` and `code_pages.source_url_2`, detects supported providers, scrapes the source pages, upserts active codes, and expires codes that disappear from the supported sources.
 
 For new or corrected code pages:
 
@@ -34,7 +34,7 @@ For new or corrected code pages:
 - Store the Beebom codes page in `source_url_2`.
 - Keep `seo_title` empty or null unless the user explicitly asks for a custom title.
 - Do not manually insert `codes` rows, `expired_codes`, code names, rewards tied to current code names, or `first_seen_at` dates.
-- After the game row is ready, run `npm run refresh:codes -- --slug <game-slug>`.
+- After the code page row is ready, run `npm run refresh:codes -- --slug <game-slug>`.
 
 Code-page article copy must be long-term. Metadata and prose should explain reward types, redemption steps, troubleshooting, and official source locations without naming active codes, exact dates, month/year labels, active-code counts, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily`.
 
@@ -50,7 +50,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 
 | Purpose | File | Preferred command |
 | --- | --- | --- |
-| Import games into Supabase | `scripts/games/import-games.ts` | `npm run import:games` |
+| Import code pages into Supabase | `scripts/codes/import-code-pages.ts` | `npm run import:code-pages` |
 | Discover priority Roblox universes from Explore | `scripts/universes/discover-priority-roblox-universes.ts` | `npm run discover:universes:priority` |
 | Collect Roblox universes from Explore | `scripts/universes/collect-roblox-universes.ts` | `npm run collect:universes` |
 | Discover Roblox universes from omni-search | `scripts/universes/search-roblox-universes.ts` | `npm run discover:universes:search` |
@@ -69,7 +69,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 `enrich-roblox-universes.ts` should not be the normal source for `roblox_universe_stats_daily` now that public stats use hourly rollups. It writes same-day daily stat rows only when `ROBLOX_ENRICH_WRITE_DAILY_STATS=true` is set for a legacy one-off.
 
 | Sync daily puzzle answers | `scripts/puzzles/sync-puzzles.ts` | `npm run sync:puzzles`; use `-- --puzzle wordle`, `-- --date YYYY-MM-DD`, `-- --backfill-days 30`, `-- --dry-run`, or `-- --skip-linkedin` as needed. LinkedIn puzzle sync requires `LINKEDIN_LI_AT` in local/production env. GitHub runs `.github/workflows/daily-puzzle-sync.yml` at staggered UTC windows for NYT early games, Beebom fallbacks, NYT 3 AM ET games, LinkedIn midnight PT games, and a final 2:00 PM IST full sweep. |
-| Fix games with article content but missing Roblox link/universe ID | `scripts/games/fix-missing-roblox-links-and-universes.ts` | `npm run fix:game-links` local dry run, `npm run fix:game-links -- --prod --apply` to write prod |
+| Fix code pages with article content but missing Roblox link/universe ID | `scripts/codes/fix-missing-code-page-roblox-links-and-universes.ts` | `npm run fix:code-page-links` local dry run, `npm run fix:code-page-links -- --prod --apply` to write prod |
 | Backfill social links | `scripts/backfill/backfill-social-links.ts` | `npm run links:backfill` |
 | Backfill missing cover images | `scripts/backfill/backfill-missing-cover-images.ts` | `npm run cover:backfill` |
 | Backfill interlinking copy | `scripts/backfill/backfill-interlinking.ts` | `npm run backfill:interlinking` |

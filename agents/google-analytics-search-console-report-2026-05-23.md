@@ -362,7 +362,7 @@ The codebase has a real migration layer:
 - `apps/web/src/proxy.ts` imports `apps/web/src/data/slug_oldslugs.json`.
 - The old-root slug map has 360 mappings.
 - Old root code slugs redirect with 301 to `/codes/<canonical-slug>`.
-- The current code sitemap emits `/codes/${row.slug}` from `game_pages_index_view`.
+- The current code sitemap emits `/codes/${row.slug}` from `code_pages_index_view`.
 
 Examples:
 

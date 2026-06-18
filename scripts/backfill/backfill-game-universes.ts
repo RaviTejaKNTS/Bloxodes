@@ -43,7 +43,7 @@ async function processGames() {
 
   while (true) {
     let query = supabase
-      .from("games")
+      .from("code_pages")
       .select("id, name, slug, roblox_link, universe_id")
       .order("updated_at", { ascending: true });
 
@@ -82,7 +82,7 @@ async function processGames() {
         }
 
         const { error: updateError } = await supabase
-          .from("games")
+          .from("code_pages")
           .update({ universe_id: ensured.universeId })
           .eq("id", game.id);
         if (updateError) {

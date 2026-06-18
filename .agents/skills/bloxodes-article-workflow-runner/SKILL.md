@@ -5,8 +5,6 @@ description: Run one or many Bloxodes article writing jobs with parent review. U
 
 # Bloxodes Article Workflow Runner
 
-Read `agents/content-writing/agents.md` first.
-
 Use this as the parent review workflow for one article or a list of articles.
 
 Use subagents and give each subagent one article. The same subagent should research that article, create `brief.md`, wait for parent approval, then write `final.json`.
@@ -34,7 +32,7 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
 5. Send feedback to the same subagent, or approve the brief.
 6. After approval, ask the same subagent to use `bloxodes-article-writing` skill and create `final.json`.
 7. Review the final article and send fixes back to the same subagent when needed.
-8. Start or reuse the local web server with `.env.local` loaded.
+8. Start or reuse the local web server with `npm run dev:local`.
 9. Run the batch verifier on reviewed final files. If it fails, send the findings back to the same subagent and do not open Browser yet.
 10. Open verified localhost article links in the Codex Browser.
 11. Return approved paths, localhost article links, blocked articles, and remaining risks.
@@ -62,6 +60,7 @@ Do not rewrite the article from the parent role unless the fix is tiny. Send cle
 
 Check:
 
+- Check against the Writing Rules in bloxodes-article-writing/SKILL.md
 - `final.json` parses
 - title, slug, meta, tags, sources, and universe ID make sense
 - game-specific article titles and slugs include the game name; use `Roblox` wording when it helps readers understand the topic
@@ -79,7 +78,7 @@ After this review, run the batch verifier on the files that look ready. Treat fa
 
 Before final output, the parent model must preview every approved article on the real local route.
 
-1. Start or reuse the local web server with `.env.local` loaded. Use `npm run dev` from the repo root unless the current local setup requires another command.
+1. Start or reuse the local web server with `npm run dev:local`.
 2. Run:
 
 ```bash

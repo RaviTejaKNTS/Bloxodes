@@ -1,13 +1,11 @@
 ---
 name: bloxodes-events-writing
-description: Write or update Bloxodes event pages backed by events_pages. Use for /events/<game-slug> evergreen page copy, metadata, source verification, and deciding when an events page should not be created. Do not manually write timeline rows.
+description: Write one Bloxodes events page final.json after brief approval. Use for /events/<game-slug> evergreen page copy backed by events_pages, metadata, source verification, and final.json output. Do not manually write timeline rows.
 ---
 
 # Bloxodes Events Writing
 
-Read `agents/content-writing/agents.md` first.
-
-Events pages explain how event tracking works for a game. Timeline rows, live statuses, dates, and guide links belong to `roblox_virtual_events` or another approved importer.
+Use this after `bloxodes-events-research` and parent approval. Timeline rows, live statuses, dates, and guide links belong to `roblox_virtual_events` or another approved importer.
 
 ## Hard Rules
 
@@ -18,19 +16,17 @@ Events pages explain how event tracking works for a game. Timeline rows, live st
 
 ## Workflow
 
-1. Check production for an existing events page and related timeline rows.
-2. Verify the game identity and whether it has enough event history or event tracking value.
-3. Create workspace:
+1. Read the approved `brief.md`.
+2. Create or update:
 
 ```text
 tmp/content-workspace/<game-slug>/events/<game-slug>/
-  research-notes.md
+  brief.md
   final.json
 ```
 
-4. Write `research-notes.md` with the source path for timeline data, existing coverage, and whether the page should exist.
-5. Write evergreen page fields only.
-6. Parse JSON before import.
+3. Write evergreen page fields only.
+4. Parse JSON before returning.
 
 ## Field Jobs
 

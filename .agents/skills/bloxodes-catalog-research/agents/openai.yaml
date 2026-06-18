@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Catalog Research"
+  short_description: "Research one catalog page"
+  default_prompt: "Use $bloxodes-catalog-research for one approved global catalog page. Check overlap, source/data state, item count, useful fields, image support, reader need, facts to use, facts to avoid, and gaps in brief.md, then stop."

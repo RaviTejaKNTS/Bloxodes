@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Events Research"
+  short_description: "Research one events page"
+  default_prompt: "Use $bloxodes-events-research for one approved events page. Check overlap, game identity, event source path, timeline ownership, evergreen page value, facts to avoid, and gaps in brief.md, then stop."

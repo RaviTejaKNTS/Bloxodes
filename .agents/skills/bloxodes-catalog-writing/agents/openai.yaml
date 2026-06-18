@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Catalog Writing"
   short_description: "Write global catalog pages"
-  default_prompt: "Use $bloxodes-catalog-writing for one global catalog page. Read agents/content-writing/agents.md, check production coverage, verify data/images when item-backed, then write research-notes.md and final.json in simple player-facing language."
+  default_prompt: "Use $bloxodes-catalog-writing to write one global catalog final.json from approved brief.md. Explain the collection clearly, avoid website-first wording, and parse-check final.json."

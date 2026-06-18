@@ -583,7 +583,7 @@ async function lookupRelatedWikiSlugs(type: SinglePayload["type"], slug: string)
   let universeIds: number[] = [];
 
   if (type === "code") {
-    universeIds = await lookupUniverseIdsBySlug("games", "slug", [slug]);
+    universeIds = await lookupUniverseIdsBySlug("code_pages", "slug", [slug]);
   } else if (type === "article") {
     universeIds = await lookupUniverseIdsBySlug("articles", "slug", [slug]);
   } else if (type === "event") {
@@ -608,7 +608,7 @@ async function lookupRelatedWikiSlugs(type: SinglePayload["type"], slug: string)
 
 async function lookupRelatedListSlugs(type: SinglePayload["type"], slug: string): Promise<string[]> {
   if (type !== "code") return [];
-  const universeIds = await lookupUniverseIdsBySlug("games", "slug", [slug]);
+  const universeIds = await lookupUniverseIdsBySlug("code_pages", "slug", [slug]);
   return lookupListSlugsByUniverseIds(universeIds);
 }
 

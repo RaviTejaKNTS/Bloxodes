@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Game Catalog Runner"
+  short_description: "Run catalog research/data/write QA"
+  default_prompt: "Use $bloxodes-game-catalog-workflow-runner for approved Bloxodes game catalogs. Give one collection to each subagent, queue extras, keep research/data/writing with the same subagent, run verify:game-catalog-finals, open passed localhost links in the Codex Browser, and return links."

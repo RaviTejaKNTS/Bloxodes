@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Wiki Runner"
+  short_description: "Run wiki research/write QA"
+  default_prompt: "Use $bloxodes-wiki-workflow-runner for one approved Bloxodes wiki hub. Have one subagent research with $bloxodes-wiki-research, wait for approval, write final.json with $bloxodes-wiki-writing, run verify:wiki-final, open the localhost wiki link in Codex Browser, and return the link."

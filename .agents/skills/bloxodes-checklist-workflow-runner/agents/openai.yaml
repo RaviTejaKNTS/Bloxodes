@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Checklist Runner"
+  short_description: "Run checklist research/write QA"
+  default_prompt: "Use $bloxodes-checklist-workflow-runner for one approved Bloxodes checklist. Have one subagent research with $bloxodes-checklist-research, wait for approval, write final.json with $bloxodes-checklist-writing, run verify:engagement-finals, open the localhost checklist link in Codex Browser, and return the link."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Checklist Writing"
+  short_description: "Write checklist pages"
+  default_prompt: "Use $bloxodes-checklist-writing to write one Bloxodes checklist final.json from approved brief.md. Keep tasks concrete, section codes consistent, and public copy focused on player progress."

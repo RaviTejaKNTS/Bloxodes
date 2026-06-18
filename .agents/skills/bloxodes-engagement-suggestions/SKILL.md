@@ -5,26 +5,19 @@ description: Suggest Bloxodes codes, checklist, quiz, and event page opportuniti
 
 # Bloxodes Engagement Suggestions
 
-Read `agents/content-writing/agents.md` first.
-
 Use this to decide whether Bloxodes should create codes, checklist, quiz, or event pages for one Roblox game. Do not write the pages here.
 
 ## Start
 
 1. Resolve the exact game: name, universe ID, root place ID, creator, official Roblox URL, and editorial slug.
-2. Check existing Bloxodes `games`, `checklist_pages`, `quiz_pages`, `events_pages`, and related routes for that universe/topic.
-3. Record notes in:
-
-```text
-tmp/content-workspace/<game-slug>/suggestions/engagement/research-notes.md
-```
+2. Check existing Bloxodes `code_pages`, `checklist_pages`, `quiz_pages`, `events_pages`, and related routes for that universe/topic.
 
 ## Source Check
 
-Before recommendations, include:
+Do not hide the research in a file. Put the proof in the final reply:
 
 ```text
-Source check:
+Evidence checked:
 - Existing Bloxodes coverage:
 - Codes sources:
 - Progression/task sources:
@@ -45,7 +38,7 @@ Skip gamepasses, badges, developer products, servers, raw Roblox media, thin tri
 
 ## Output
 
-Return one section for each family: codes, checklist, quiz, events.
+Start with `Evidence checked`, then return one section for each family: codes, checklist, quiz, events.
 
 Use these labels:
 

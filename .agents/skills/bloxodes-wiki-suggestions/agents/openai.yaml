@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Wiki Suggestions"
+  short_description: "Suggest wiki hub pages"
+  default_prompt: "Use $bloxodes-wiki-suggestions to research one Roblox game and decide whether Bloxodes should create a wiki hub page. Check existing wiki coverage first, complete the source check, then label the result create, already covered, skip, or source discovery incomplete."
