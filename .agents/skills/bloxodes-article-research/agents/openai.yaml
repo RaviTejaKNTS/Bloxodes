@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Article Research"
+  short_description: "Research article briefs"
+  default_prompt: "Use $bloxodes-article-research for one approved Bloxodes article idea. Check Bloxodes overlap and source coverage, create brief.md with evidence, title/slug direction, outline, facts to use, facts to avoid, and open gaps, then stop without writing final.json."

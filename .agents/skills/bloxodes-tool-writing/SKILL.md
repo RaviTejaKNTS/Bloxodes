@@ -1,54 +1,53 @@
 ---
 name: bloxodes-tool-writing
-description: Write or rewrite Bloxodes tool page content for the tools table. Use for /tools pages, tool metadata, intro_md, how_it_works_md, description_json, faq_json, CTA fields, tool SEO, calculator explanations, formula assumptions, input/result copy, and Roblox tool pages that need clear final-shaped Supabase output.
+description: Write or rewrite Bloxodes tool page content backed by the tools table. Use for /tools pages, metadata, intro_md, how_it_works_md, description_json, faq_json, CTA fields, formula assumptions, input/result copy, and tool final.json.
 ---
 
 # Bloxodes Tool Writing
 
-## Start Here
+Read `agents/content-writing/agents.md` first.
 
-Read:
+Use this when the page has a real tool job: calculator, planner, converter, checker, tracker, or optimizer. Do not create a tool page if the input, output, or formula is weak.
 
-- `agents/content/writing-core.md`
-- `agents/content/research-policy.md`
-- `agents/content/page-types/tools.md`
-- `agents/content/final-edit.md`
+## Workflow
 
-If these files have not been read in the current task, read them before writing.
-
-Create or update the workspace before writing:
+1. Check production for an existing tool or related page that already solves the job.
+2. Confirm the player task, inputs, outputs, formula or data source, and limitations.
+3. Create workspace:
 
 ```text
 tmp/content-workspace/<game-or-topic-slug>/tools/<tool-code>/
-  todo.md
   research-notes.md
   final.json
 ```
 
-Copy `agents/content/todo-templates/tool.md` into the folder as `todo.md` and update it as work progresses.
+4. Write `research-notes.md` with the tool job, sources, formula assumptions, edge cases, related pages, and gaps.
+5. Write `final.json`.
+6. Parse JSON and verify fields match the tools table and route behavior.
 
-## What This Skill Is For
+## Writing Rules
 
-Use this when the page is centered on an interactive tool: a calculator, optimizer, converter, extractor, planner, checker, or helper tied to Roblox or a specific game.
+- Explain what the tool result means and how players should use it.
+- Keep the intro short and useful.
+- Put formulas, assumptions, and limits in plain language.
+- Do not overpromise exactness when the result depends on changing game data or user assumptions.
+- FAQs should answer real tool-use questions.
 
-The copy should make the tool result easier to trust and understand. It should not compete with the tool UI or bury the interactive experience under prose.
+## Field Jobs
 
-Use a hard gate before writing. The tool must have a real input/output job, reliable formula/data support, and evidence that players need this helper. Check gameplay, search intent, and competing calculators/planners/trackers before recommending or writing the page. If it only duplicates a catalog, article, checklist, or wiki section, hard pass and record it as not recommended or potential future.
-
-Use these inputs:
-
-- `research-notes.md`
-- current `tools` schema or row
-- target route behavior
-- tool client behavior if formulas, inputs, or result labels matter
-- related game or `universe_id` when relevant
-- current rates, formulas, item values, or dataset rows when the tool depends on changing data
-- competing tools or proof that this use case is not already better served elsewhere
-- user questions and edge cases around the calculation, optimizer, extractor, converter, or planner
+- `code`: Use the stable tool route code.
+- `title`: Name the tool by the job it performs.
+- `seo_title`: Keep it readable for search and close to the visible title.
+- `meta_description`: Say what result the tool gives.
+- `intro_md`: Explain when to use the tool and what decision it helps with.
+- `how_it_works_md`: Explain inputs, outputs, formulas, assumptions, and limits in plain language.
+- `description_json`: Add deeper notes for edge cases, examples, or result interpretation.
+- `faq_json`: Answer real questions users have after using the tool.
+- `cta_label` and `cta_url`: Use only when there is a clear next action.
+- `thumb_url`: Use an approved image when the page needs one.
+- `universe_id`: Set only when the tool belongs to one Roblox game.
 
 ## Output Shape
-
-Return valid JSON shaped for `tools`:
 
 ```json
 {
@@ -63,36 +62,7 @@ Return valid JSON shaped for `tools`:
   "cta_label": null,
   "cta_url": null,
   "thumb_url": null,
-  "universe_id": null
+  "universe_id": null,
+  "is_published": true
 }
 ```
-
-Only include fields being written.
-
-## Workflow
-
-Inspect the row, route, and tool client behavior before writing. If formulas, rates, item values, or datasets affect the result, verify them before making claims.
-
-Research the use case in plain language. What is the user trying to calculate, compare, optimize, extract, or plan? What inputs matter? What does the output mean? Where can the result be wrong, stale, or approximate? Why is this a tool instead of a catalog, article, checklist, or wiki section?
-
-Write directly in final JSON using the core Bloxodes voice. Keep the research internal and explain the useful result directly.
-
-Run the final edit gate before returning output.
-
-## Writing Guidance
-
-The intro should quickly say what the tool helps the user calculate, compare, optimize, extract, or plan.
-
-`how_it_works_md` renders directly below the interactive tool, so write it as the practical "how to use this tool" section. Explain what to click or enter, what to check in the result panel, what each important number means, and which output should drive the next player decision. Use numbered steps or compact bullets when they make the workflow clearer.
-
-After the workflow is clear, explain assumptions and limits in plain English. Give enough context before formulas or caveats so the user understands what the result means.
-
-Do not claim exact accuracy when the result depends on changing data, player-entered estimates, hidden formulas, or incomplete datasets. Say what the tool can safely estimate and where the user should treat the result as guidance.
-
-Keep each paragraph focused on one input, output, assumption, or edge case. FAQs should answer real tool-use questions, not generic page questions.
-
-Keep the interactive tool as the main experience.
-
-## Finish
-
-Save or return only `final.json` shaped fields. Do not return preliminary copy for later cleanup, and do not create `brief.md` or `review.md`.

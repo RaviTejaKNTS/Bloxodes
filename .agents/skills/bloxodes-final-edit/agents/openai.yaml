@@ -1,4 +1,0 @@
-interface:
-  display_name: "Bloxodes Final Edit"
-  short_description: "Gate Bloxodes content quality"
-  default_prompt: "Use $bloxodes-final-edit to verify this Bloxodes content output before database import. Confirm the FLOW pass already happened for catalog, game-catalog, article, tool, and other body-copy pages. Fail skipped FLOW work, unclear field-first writing, description_md that repeats card-section notes, missing how-to/action context where the topic has action, unresolved catalog data/image audits, mismatched counts, bad card fields, and any sentence a normal player cannot understand."

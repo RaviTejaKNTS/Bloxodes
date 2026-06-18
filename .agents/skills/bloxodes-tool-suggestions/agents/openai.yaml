@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Tool Suggestions"
+  short_description: "Suggest tool ideas"
+  default_prompt: "Use $bloxodes-tool-suggestions to suggest Roblox tool opportunities. Check existing Bloxodes tools, verify source-backed inputs and outputs, then label ideas create, already covered, skip, or research incomplete."

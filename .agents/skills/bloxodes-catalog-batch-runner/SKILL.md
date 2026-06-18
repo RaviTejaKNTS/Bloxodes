@@ -1,49 +1,28 @@
 ---
 name: bloxodes-catalog-batch-runner
-description: Orchestrate multiple approved Bloxodes game catalog pages with one subagent per catalog. Use after game-page discovery and one gold-standard catalog are approved, when batching durable in-game item catalogs through per-page planning, parent review, data/image gathering, final.json writing, flow/final edit, and parent QA.
+description: Orchestrate multiple approved Bloxodes game catalog pages with one worker per catalog after discovery or a user-approved catalog list. Use for batching durable game catalog research, datasets, images, final.json files, and parent QA.
 ---
 
 # Bloxodes Catalog Batch Runner
 
-## Start Here
+Read `agents/content-writing/agents.md` first.
 
-Use this skill only when the user wants to complete multiple approved game catalog pages in a coordinated batch. This is an orchestration skill. Each catalog page still follows `bloxodes-game-catalog-writing`.
-
-Read:
-
-- `tmp/content-workspace/<game-slug>/discovery/research-notes.md`
-- `agents/content/todo-templates/catalog-batch.md`
-- `agents/content/todo-templates/game-catalog.md`
-- `.agents/skills/bloxodes-game-catalog-writing/SKILL.md`
-- `.agents/skills/bloxodes-research/SKILL.md`
-- `.agents/skills/bloxodes-flow-edit/SKILL.md`
-- `.agents/skills/bloxodes-final-edit/SKILL.md`
-- `agents/content/page-types/game-catalog-pages.md`
-- `agents/wiki-catalog-workflow.md`
-
-Load `references/subagent-prompt.md` before spawning or hand-writing a per-catalog subagent prompt.
+Use this only when the user wants multiple approved game catalog pages completed together. Each page still follows `bloxodes-game-catalog-writing`.
 
 ## Preconditions
 
-Do not start a batch until:
-
-- discovery has an approved catalog list or the user gives a clear approved list
-- one gold-standard catalog page for the game has already been completed and accepted, or the user explicitly asks this batch to include the first gold-standard page first
-- each target is a durable in-game item/location collection or approved UGC exception
-- codes and events are excluded from the batch
-- temporary season tracks, one-off event rewards, ranked season rewards, gamepasses, badges, servers, developer products, and platform metadata are excluded
-
-Subagents may suggest a possible extra catalog, but they must not create it. The parent keeps scope to the approved page list.
+- The game identity is known.
+- The user approved the catalog list, or `bloxodes-wiki-catalog-suggestions` produced a clear catalog list.
+- Each target is a durable in-game collection or approved UGC exception.
+- Codes, events, gamepasses, badges, developer products, servers, temporary reward tracks, and raw Roblox media are excluded.
+- Production duplicate checks are done before workers create new pages.
 
 ## Workspace
 
-Use the game-first workspace:
-
 ```text
 tmp/content-workspace/<game-slug>/catalogs/
-  batch-todo.md
+  batch-notes.md
   <collection-slug>/
-    todo.md
     research-notes.md
     final.json
   subagents/
@@ -51,130 +30,44 @@ tmp/content-workspace/<game-slug>/catalogs/
     <collection-slug>-response.md
 ```
 
-Copy `agents/content/todo-templates/catalog-batch.md` to `batch-todo.md` before spawning agents. Each subagent copies `agents/content/todo-templates/game-catalog.md` to its own `<collection-slug>/todo.md`.
+## Parent Workflow
 
-The parent updates `batch-todo.md` and saved prompt/response artifacts. Each subagent updates only its own catalog workspace plus explicitly assigned data/image files.
+1. Create `batch-notes.md` with the approved catalog list, status, and shared game facts.
+2. Give each worker exactly one catalog.
+3. Ask each worker to research first, then stop with a plan if data/images are missing or the card shape is unclear.
+4. Review scope, source count, item count, missing items, image coverage, card fields, grouping, and title.
+5. Approve data/image work or request fixes.
+6. Review final `research-notes.md` and `final.json` for each page.
+7. Import/verify only after the page files are clean.
 
-## Parent Role
+If subagents are not available, run the same process sequentially.
 
-The parent agent is the editor, coordinator, and final quality gate.
+## Worker Prompt
 
-1. Convert the approved catalog list into a compact batch tracker.
-2. Create one detailed prompt per catalog from `references/subagent-prompt.md`.
-3. Spawn one subagent per catalog only when subagents are explicitly part of the user request or current workflow.
-4. Give each subagent exactly one catalog page and a clear write scope.
-5. Require the subagent to stop after the planning gate.
-6. Review each plan for data completeness, image quality, section logic, card fields, title promise, route/config needs, and exclusions.
-   Require a player-usefulness gate, required fact matrix, and competitor/source coverage check when SEO matters. Do not approve a plan that can only produce safe generic copy because useful source-backed facts are missing locally.
-7. Approve, revise, or reject the plan.
-8. After build completion, audit the returned files and verification evidence before marking the catalog done.
-9. Keep `batch-todo.md` updated as each catalog moves stages.
+Use `references/subagent-prompt.md` as the starting point for each worker prompt.
 
-If multi-agent tools are unavailable, run the same workflow sequentially yourself and still keep the per-catalog folders and parent tracker.
+## Parent QA
 
-## Subagent Rules
+Before marking a catalog done, confirm:
 
-Each subagent owns exactly one catalog page. It must not:
+- the scope matches the approved list
+- production duplicate check is recorded
+- sources support the item list and important fields
+- local count, title count, rendered count, and image coverage are recorded
+- missing items/images are fixed, accepted, or blocked
+- cards show useful player-facing facts
+- copy is simple and specific
+- JSON parses
+- route/import assumptions are verified when publishing
+- local preview is clean before production import
+- production promotion uses the normal controlled seed, upsert, or migration path
 
-- create another catalog page
-- widen the collection scope
-- add temporary reward-track catalogs
-- manually create codes or events data
-- edit another catalog's workspace
-- edit shared route/config/collector files unless the parent explicitly assigned that shared file ownership
-- hide missing data or missing images behind generic copy
+## Final Batch Output
 
-For parallel work, avoid shared-file conflicts. Prefer this pattern:
+Return:
 
-- subagents write page-local `todo.md`, `research-notes.md`, `final.json`
-- subagents write or update only their assigned dataset and collection images
-- subagents propose shared config or collector changes in notes unless the parent gave them ownership
-- parent applies or reconciles shared config changes after review
-
-## Stage Model
-
-Use these stages in `batch-todo.md`:
-
-- `queued`
-- `planning`
-- `revision needed`
-- `plan approved`
-- `data/images`
-- `content`
-- `subagent qa`
-- `parent qa`
-- `done`
-- `blocked`
-
-The parent should not mark a catalog `done` until all verification checks pass.
-
-## Planning Gate
-
-The first subagent response must be a plan, not final content. Require:
-
-- page identity: game, collection, route, code, universe ID
-- durable scope decision and excluded surfaces
-- source list and source-count confidence
-- primary player task, supported decisions, and what the reader can do after reading
-- required fact matrix: reader need, required facts, source status, local data/card status, and public placement
-- competitor/source usefulness check when SEO or traffic potential matters
-- local dataset state, expected item count, image state, and route/config state
-- data action: `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`
-- proposed visible title, `seo_title`, and exact title promise; wiki catalog titles should usually use `All <N> <Item Or Collection> in <Game>: <real player SEO question>`
-- grouping axis and why it is the strongest in-game grouping
-- card fields to show and raw fields to hide
-- `intro_md`, `description_json`, `description_md`, FAQ, and `wiki_md` plan; `how_it_works_md` should stay empty for normal wiki catalog pages
-- public-copy plan: game/items only, no source/research/workflow/process caveats, short intro, player-question headings, natural same-universe links, and 3-4 non-repeating FAQs
-- files the subagent expects to edit
-- risks or questions requiring parent approval
-
-Reject plans that are generic, overlap another page, lean on weak images, use temporary rewards as the catalog, or cannot prove data/image readiness.
-
-## Build Gate
-
-After parent approval, tell the subagent exactly what changed in the plan and what it may edit. The subagent should then:
-
-- complete approved data and image updates
-- write `final.json`
-- run the FLOW pass
-- run the final edit gate
-- verify JSON shape, item counts, image paths, route/config behavior, rendered sections, card fields, metadata, FAQ, and `wiki_md`
-- record verification results in `research-notes.md`
-- return a concise completion report with changed files, counts, blockers, and commands/checks run
-
-Do not accept a completion report that only says the content is written. The page is not done until the parent can see evidence that data, images, copy, and render assumptions are clean.
-
-## Parent QA Checklist
-
-Before marking any catalog `done`, check:
-
-- subagent `todo.md` is complete or honestly blocked
-- `research-notes.md` explains the game items or mechanic, not a schema
-- `research-notes.md` includes and resolves the player-usefulness gate and required fact matrix
-- catalog scope still matches the approved list
-- source count, local data count, rendered/title count, and image coverage are recorded
-- missing or uncertain items/images are fixed, accepted, or blocked
-- title promise is delivered by data and copy
-- the page answers what the player can do next in-game
-- the title question is a real player decision, not a generic SEO tail
-- grouping and card fields match actual route behavior
-- public copy is evergreen, specific, and not generic
-- `description_md` explains the game items or mechanic, not only card sections
-- `description_md` headings are specific and communicative, not generic labels like `How <collection> works`
-- `description_json` notes match rendered section labels
-- `wiki_md` is useful on the wiki hub
-- JSON parses and field shapes match `wiki_catalog_pages`
-- local import/readback and preview/render checks are done when the page is being promoted
-
-If something is missing, send the subagent a focused fix request and keep the stage at `revision needed` or `parent qa`.
-
-## Output
-
-At the end of a batch, return:
-
-- path to `batch-todo.md`
+- batch notes path
 - completed catalogs
 - blocked catalogs and why
-- shared config/data/image changes that still need integration
-- verification summary
-- recommended next page family, if any, based on the finished catalog data
+- changed data/image files
+- import and verification status

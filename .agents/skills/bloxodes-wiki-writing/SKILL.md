@@ -1,93 +1,73 @@
 ---
 name: bloxodes-wiki-writing
-description: Write or rewrite Bloxodes Roblox game wiki hub content for wiki_pages fields. Use for /wiki pages, game hub meta descriptions, tips_md, controls_json, wiki SEO, Roblox universe-aware copy, and pages that should connect codes, catalog pages, events, tools, articles, checklists, quizzes, and live game metadata.
+description: Write or update Bloxodes Roblox game wiki hub content backed by wiki_pages. Use for /wiki/<game-slug> page copy, metadata, tips_md, controls_json, related-page context, and source-aware game hub writing.
 ---
 
 # Bloxodes Wiki Writing
 
-## Start Here
+Read `agents/content-writing/agents.md` first.
 
-Read:
+Wiki hubs explain one Roblox game clearly. They should help a new or returning player understand what the game is, what they do in a normal session, and which related Bloxodes pages matter.
 
-- `agents/content/writing-core.md`
-- `agents/content/research-policy.md`
-- `agents/content/page-types/wiki-pages.md`
-- `agents/wiki-catalog-workflow.md`
-- `agents/content/final-edit.md`
+## Workflow
 
-If these files have not been read in the current task, read them before writing.
-
-Create or update the game-first workspace before writing:
+1. Resolve the exact Roblox game: universe ID, root place ID, creator, official URL, and preferred editorial slug.
+2. Check production for existing wiki, codes, catalogs, events, tools, articles, checklists, and quizzes for the same universe.
+3. Inspect the linked `roblox_universes` row and related local datasets.
+4. Create workspace:
 
 ```text
-tmp/content-workspace/<game-slug>/wiki/
-  todo.md
+tmp/content-workspace/<game-slug>/wiki/<game-slug>/
   research-notes.md
   final.json
 ```
 
-Copy `agents/content/todo-templates/wiki.md` into the folder as `todo.md` and update it as work progresses.
+5. Write `research-notes.md` with game identity, production coverage, useful related pages, controls sources, and gaps.
+6. Write `final.json` for `wiki_pages`.
+7. Parse JSON and verify route assumptions before import.
 
-## What This Skill Is For
+## Local Dataset Work
 
-A wiki page is the hub for a Roblox game. It should orient the reader and let the live related sections carry current details such as codes, events, catalog collections, tools, articles, checklists, quizzes, and Roblox metadata.
+Use this when a local game dataset is becoming a public wiki page.
 
-Do not turn the wiki page into a giant article. The hub copy should explain how the game works at a useful level, then leave room for the related blocks to do their jobs.
+- Confirm local JSON parses before writing around it.
+- Check that useful related catalog datasets exist and have clear collection names.
+- Preview locally before production when importing a new wiki page.
+- Verify title, metadata, related catalog links, images, sitemap coverage, and revalidation behavior before publishing.
+- Promote production content only through the normal controlled seed, upsert, or migration path.
 
-Do not edit shared wiki routes, hub layouts, related-card components, navigation, CTAs, sidebars, ads, sitemap/feed code, or unrelated page copy while using this skill unless the user explicitly asks for implementation work. Wiki work owns `wiki_pages` fields, approved companion universe summary updates, and related-row verification. If preview exposes shared UI problems, report them separately.
+## Writing Rules
 
-For new game coverage, prefer writing the wiki after at least one core catalog or strong catalog-led discovery exists. The wiki should be grounded in real item systems and gameplay loops, not surface-level guesses from the Roblox description alone.
+- Start with what the player does in the game.
+- Keep `tips_md` to 3-4 useful gameplay tips.
+- Fill `controls_json` only with verified controls. If controls cannot be verified, say so in research notes.
+- Do not rewrite catalog blurbs inside a wiki task. Use catalog skills for catalog copy.
+- Do not pad with generic Roblox controls or generic beginner advice.
 
-Use these inputs:
+## Field Jobs
 
-- `research-notes.md`
-- target `wiki_pages` row
-- linked `roblox_universes` row
-- related catalog pages by `universe_id` and code prefix
-- active code and event availability when relevant
-- game-specific datasets or notes
-- current research on the game loop, creator, systems, events, codes, catalog collections, tools, and social/developer context
-
-Before writing, map the rendered wiki page. `wiki_pages` owns title, SEO, tips, controls, cover, publish state, and the linked universe. The visible game summary comes from `roblox_universes.game_description_md`, not from `tips_md`. Related catalog sections come from catalog pages and their `wiki_md`. Codes, events, tools, articles, checklists, quizzes, media, badges, passes, servers, and developer sections appear only when local related rows exist. Record this map and the companion-data decision in `research-notes.md`. Use the editorial game slug for `/wiki/<slug>`. Do not copy `roblox_universes.slug`; universe slugs belong to `/stats/games/*` and may include universe IDs.
+- `universe_id`: Link the wiki to the exact Roblox universe.
+- `slug`: Use the editorial game slug.
+- `title`: Use the simple hub pattern `<Game> Wiki`.
+- `seo_title`: Keep it close to the title and readable in search.
+- `meta_description`: Say what the hub helps players check or understand.
+- `tips_md`: Write 3-4 concrete gameplay tips that help a new or returning player.
+- `controls_json`: Write only verified game controls. Record gaps in research notes.
+- `cover_image`: Use a suitable game image when available.
+- `game_description_md`: When included in the workflow, explain the normal game loop and core systems for the visible wiki summary.
 
 ## Output Shape
 
-Return valid JSON:
-
 ```json
 {
+  "universe_id": 0,
+  "slug": "",
   "title": "",
   "seo_title": "",
   "meta_description": "",
   "tips_md": "",
-  "controls_json": [
-    { "action": "Interact", "desktop": "E" }
-  ]
+  "controls_json": [],
+  "cover_image": null,
+  "is_published": true
 }
 ```
-
-Only include fields being written.
-
-If the rendered game summary needs work, also prepare the companion `roblox_universes.game_description_md` value and update it through the local seed/import workflow. Do not try to write that field into `wiki_pages`, and do not call the wiki complete while the visible summary is empty or weak.
-
-## How To Write The Wiki Copy
-
-Inspect the wiki row, Roblox universe row, and live related sections before writing. Then research the game loop in plain language. The copy should show that you understand what the player does in the game, what systems matter, and what a returning player may want to check quickly.
-
-The wiki must answer the minimum player questions: what the game is, what a normal session looks like, which systems drive progress, what a new or returning player should check first, which researched and verified controls exist, which related sections exist locally, and which details are better left to related cards.
-
-Keep `tips_md` to exactly 3-4 short, practical, game-specific bullets. Do not write fewer than 3 tips or more than 4 tips. A good tip makes one clear point and gives enough context for the reader to know why it matters. Avoid generic advice that could fit any Roblox game.
-
-Research controls as a required data point. Write accurate controls into `controls_json` and record the verification source or in-game check in `research-notes.md`. Do not guess generic Roblox controls. If useful controls cannot be verified, mark the wiki blocked or `needs controls research`; do not call it complete with an empty controls array.
-
-Do not repeat details already shown in live related sections. If active codes, events, catalog collections, or tools are already rendered below, the wiki copy should orient the reader rather than restating every item.
-
-Do not write or rewrite `catalog_pages.wiki_md` during a wiki workflow. Those blurbs belong to the matching catalog or game-catalog workflow because they need collection-specific research. If a catalog blurb on the wiki is weak, treat that as a separate one-page catalog task.
-
-If a tip uses terms such as source, availability, rarity, refresh, weather, Full Grown, or Neon, give enough context for a casual player to understand the term.
-
-Use `Game created on` and `Game last updated on` for Roblox metadata. Keep Bloxodes freshness labels separate from game metadata. Fill controls only when verified.
-
-## Finish
-
-Run the final edit gate before saving `final.json`. Then seed or import locally, read back both `wiki_pages` and the linked `roblox_universes` row, and preview `/wiki/<slug>` locally. The rendered page must show the expected title, metadata, game summary, tips, verified controls, related sections, and images when applicable before the todo can be marked complete or the work can be promoted.

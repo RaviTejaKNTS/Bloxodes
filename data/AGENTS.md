@@ -4,7 +4,7 @@ Scope: `data/` plus related static data under `src/data/`.
 
 These files back tools and catalog sections that are not fully modeled in Supabase.
 
-When turning a game dataset into public wiki and catalog pages, follow `agents/wiki-catalog-workflow.md`.
+When turning a game dataset into public wiki or catalog pages, use `agents/content-writing/agents.md` and the matching wiki or game catalog skill.
 
 ## Dataset Map
 
@@ -34,19 +34,19 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
   - Structured catalog and calculator data used by Forge catalog pages and Forge tools.
 - `data/RIVALS/*`
   - Dataset-backed RIVALS wiki/catalog content, including weapons, maps, skins, wraps, charms, finishers, emotes, official UGC items, and `quiz.json`.
-  - `quiz.json` is the local question pool for `/quizzes/rivals`; follow `agents/content/page-types/quizzes.md` when editing it.
+  - `quiz.json` is the local question pool for `/quizzes/rivals`; use `bloxodes-quiz-writing` when editing quiz content.
   - Keep RIVALS catalogs focused on durable in-game item collections. Do not add gamepasses, badges, servers, current event reward tracks, or ranked-season reward lists as catalog datasets.
 - `data/Wizard Alchemy/*`
   - Dataset-backed Wizard Alchemy wiki/catalog content, including materials, potions, races, wands, brooms, robes, wizard hats, enemies, chests, enchantments, locations, NPCs, and resource nodes.
-  - `quiz.json` is the local question pool for `/quizzes/wizard-alchemy`; follow `agents/content/page-types/quizzes.md` when editing it.
+  - `quiz.json` is the local question pool for `/quizzes/wizard-alchemy`; use `bloxodes-quiz-writing` when editing quiz content.
   - Code pages must not keep manual code seed payloads. For Wizard Alchemy or any other game, update the `games` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then let `scripts/codes/update-codes.ts` populate `codes`.
 - `data/Slime RNG/*`
   - Dataset-backed Slime RNG wiki/catalog content, including slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.
-  - `quiz.json` is the local question pool for `/quizzes/slime-rng`; follow `agents/content/page-types/quizzes.md` when editing it.
+  - `quiz.json` is the local question pool for `/quizzes/slime-rng`; use `bloxodes-quiz-writing` when editing quiz content.
   - Matching source-provided images live under `apps/web/public/Slime RNG/` when the source file exists. Rebirths and index rewards are intentionally text-only catalogs.
 - `data/99 Nights in the Forest/*`
   - Dataset-backed 99 Nights in the Forest wiki/catalog content, including classes, crafting, materials, weapons, tools, food, tameable animals, entities, locations, and `quiz.json`.
-  - `quiz.json` is the local question pool for `/quizzes/99-nights-in-the-forest`; follow `agents/content/page-types/quizzes.md` when editing it.
+  - `quiz.json` is the local question pool for `/quizzes/99-nights-in-the-forest`; use `bloxodes-quiz-writing` when editing quiz content.
   - Keep quiz and catalog facts source-backed. Do not add active code names, live event statuses, temporary reward tracks, or disputed exact values such as unresolved item costs.
 - `data/Sell Lemons/*`
   - Dataset-backed Sell Lemons wiki/catalog and quiz content, including income sources, powers, secret unlocks, evolution stages, locations, and `quiz.json`.
@@ -54,6 +54,9 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
 - `data/Kick a Lucky Block/*`
   - Dataset-backed Kick a Lucky Block wiki/catalog content, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki catalogs.
   - Matching item images live under `apps/web/public/Kick a Lucky Block/` for brainrots, weights, zones, and official Roblox page media. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
+- `data/Catch And Tame/*`
+  - Dataset-backed Catch And Tame wiki/catalog content, including mutations, pets, breeding recipes, weather events, traits, biomes, lassos, and items.
+  - Keep rows source-backed to game-specific wiki pages. Mutation rows are currently text-only until clean local row icons are collected.
 - `data/Untitled Boxing Game/*`
   - Dataset-backed Untitled Boxing Game wiki/catalog content, including styles, gloves, emotes, knockout effects, and titles.
   - Matching style, glove, and knockout effect images live under `apps/web/public/Untitled Boxing Game/` where clean row-level art exists. Emotes and titles stay text-only unless clean row-level captures are available.
@@ -75,7 +78,7 @@ When turning a game dataset into public wiki and catalog pages, follow `agents/w
 ## Rules
 
 - Treat local data files as content sources, not ad hoc dumps. Keep filenames and object shapes stable once routes depend on them.
-- For wiki/catalog datasets, include the source-backed fields required by the page's player-usefulness gate, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability when those facts drive player decisions.
+- For wiki/catalog datasets, include source-backed fields players need, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability when those facts drive decisions.
 - When changing a dataset, update the parser/helper in `src/lib/*` or the route-family helper in `src/app/(site)`.
 - If a dataset powers a public route, verify SEO text, pagination, and revalidation behavior still make sense after the change.
 - If a `quiz.json` file powers a public quiz route, validate the `QuizData` shape, difficulty counts, option IDs, answer IDs, and rendered `/quizzes/<slug>` page after editing.

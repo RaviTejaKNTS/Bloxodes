@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Game Catalog Writing"
-  short_description: "Write game dataset catalog copy"
-  default_prompt: "Use $bloxodes-game-catalog-writing for one game-specific catalog page. Read the required docs, create plain-language research-notes.md first, include the player-usefulness gate, required fact matrix, competitor/source coverage when SEO matters, required data/image audit, missing useful facts, and proposed dataset/image updates plus section/card structure. Wait for approval, then update local data if needed. Write a first-pass final.json in player-first Roblox language only: no public source, research, workflow, dataset, API, or verification caveats. Keep intro_md short and gripping, make description_md solve real How/When/Where/Which player questions, use only natural same-universe internal links, keep FAQ to 3-4 non-repeating questions, leave wiki_catalog_pages how_it_works_md empty, run $bloxodes-flow-edit, then run $bloxodes-final-edit before saving final.json with wiki_md for the wiki hub."
+  short_description: "Write game catalog pages"
+  default_prompt: "Use $bloxodes-game-catalog-writing for one durable in-game collection. Read agents/content-writing/agents.md, check production coverage, verify item data/images, then write research-notes.md and final.json for wiki_catalog_pages."

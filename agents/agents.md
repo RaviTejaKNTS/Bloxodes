@@ -16,9 +16,9 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `scripts/AGENTS.md`: automation/script authoring and execution rules.
 - `supabase/AGENTS.md`: schema and edge-function guidance.
 - `data/AGENTS.md`: local datasets and their consumers.
-- `agents/wiki-catalog-workflow.md`: local-first workflow for publishing game datasets as wiki and catalog pages.
-- `agents/content/page-types/checklists.md`: workflow and schema guidance for interactive checklist pages.
-- `agents/content/page-types/quizzes.md`: workflow and schema guidance for quiz pages and easy/medium/hard question pools.
+- `agents/content-writing/agents.md`: shared content writing rules and page-skill routing.
+- `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
+- `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `DESIGN.md`: public live-database design direction, shadcn component usage, design tokens, and readable content rules.
 - `docs/platform-monorepo-extension-mobile-plan.md`: current platform snapshot plus longer-term admin, extension, and mobile roadmap.
 
@@ -28,13 +28,11 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `agents/routes/agents.md`: API, auth, feed, and sitemap route inventory.
 - `agents/scripts/agents.md`: script inventory grouped by job type plus preferred npm commands.
 - `agents/data/agents.md`: data-source inventory across Supabase, local datasets, and external APIs.
-- `agents/wiki-catalog-workflow.md`: repeatable checklist for local `wiki_pages` and `catalog_pages` seeding, rendering, verification, and prod promotion.
-- `agents/content/page-types/quizzes.md`: quiz-page workflow, local `QuizData` shape, difficulty design, and validation checks.
 
 ## Maintenance Rules
 
 - Update the closest scoped `AGENTS.md` when behavior or workflow changes.
 - Update these `agents/*.md` files when the repo surface area changes: new routes, scripts, datasets, or major architecture moves.
-- For game wiki/catalog workflow changes, keep `agents/wiki-catalog-workflow.md`, `agents/content/PROCESS.md`, matching page-type docs, todo templates, and `.agents/skills/*` prompts aligned so agents inherit the same player-usefulness gate.
+- For writing workflow changes, keep `agents/content-writing/agents.md` and the relevant `.agents/skills/*/SKILL.md` files aligned.
 - Treat this folder as the discovery layer and the scoped `AGENTS.md` files as the operating layer.
 - For workspace-level changes, keep root `package.json`, root `Dockerfile`, `.dockerignore`, and Dokploy notes aligned so production stays web-only unless intentionally expanded.

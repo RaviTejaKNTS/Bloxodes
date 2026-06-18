@@ -1,138 +1,91 @@
 ---
 name: bloxodes-game-catalog-writing
-description: Write or rewrite Bloxodes game-specific dataset catalog content for durable in-game item collections like Grow a Garden crops, Adopt Me pets, Blox Fruits accessories, Brookhaven vehicles, weapons, maps, cosmetics, and UGC exceptions. Use for wiki_catalog_pages fields, wiki_md, dataset field explanations, local image-aware catalog copy, and game catalog SEO while rejecting temporary season/event reward tracks and platform metadata.
+description: Write or rewrite Bloxodes game-specific catalog content for durable in-game collections backed by local datasets and wiki_catalog_pages. Use for pets, crops, vehicles, weapons, accessories, maps, materials, cosmetics, UGC exceptions, item data checks, images, wiki_md, metadata, and final.json.
 ---
 
 # Bloxodes Game Catalog Writing
 
-## Start Here
+Read `agents/content-writing/agents.md` first.
 
-Read:
+Use this for one durable item or system collection inside one Roblox game. Good scopes include pets, crops, vehicles, weapons, accessories, maps, materials, bosses, classes, currencies, cosmetics, and useful UGC collections. Skip temporary reward tracks, one-off event lists, current ranked rewards, gamepasses, badges, developer products, servers, broad update summaries, and raw Roblox media.
 
-- `agents/content/writing-core.md`
-- `agents/content/research-policy.md`
-- `agents/content/page-types/catalog-pages.md`
-- `agents/content/page-types/game-catalog-pages.md`
-- `agents/wiki-catalog-workflow.md`
-- `agents/content/flow-pass.md`
-- `agents/content/final-edit.md`
+## Workflow
 
-If these files have not been read in the current task, read them before writing.
-
-Create or update the game-first workspace before writing:
+1. Resolve the game identity: universe ID, root place ID, creator, Roblox URL, and editorial wiki slug.
+2. Check production for an existing `/wiki/<game-slug>/<collection-slug>` page by universe ID, wiki slug, collection slug, code, title, route, and synonyms.
+3. Inspect local data under `data/<Game>/`, image folders, and `apps/web/src/lib/game-dataset-catalogs.ts` when relevant.
+4. Gather or verify item rows from online sources. Roblox APIs can help with game identity and media, but not as the source of in-game item lists.
+5. Create workspace:
 
 ```text
 tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/
-  todo.md
   research-notes.md
   final.json
 ```
 
-Copy `agents/content/todo-templates/game-catalog.md` into the folder as `todo.md` and update it as work progresses.
+6. Write `research-notes.md` with the collection scope, sources, item count, missing/extra items, image coverage, useful fields, grouping, and route assumptions.
+7. Fix data/images if needed, or clearly record any accepted gap.
+8. Write `final.json`.
+9. Parse JSON and verify item count, title count, rendered sections, card fields, image paths, and metadata before import.
 
-## What This Skill Is For
+## Local Dataset Work
 
-Use this when a catalog page is powered by a game dataset, such as pets, crops, vehicles, accessories, eggs, bosses, weapons, maps, materials, cosmetics, or other durable game-specific item collections.
-Use the editorial game slug for `wiki_slug` and the route. Do not copy `roblox_universes.slug`; universe slugs belong to `/stats/games/*` and may include universe IDs.
+Use this process when a local game dataset is becoming a public catalog page.
 
-The job is not to turn fields into prose. The job is to understand the game system well enough that the cards make sense to a casual player and the player can complete a real in-game task.
+1. Confirm local JSON parses.
+2. Confirm the item count against sources, or record the accepted gap in `research-notes.md`.
+3. Confirm each public card has fields players can use, such as source, location, price, requirement, rarity, chance, damage, role, availability, or effect.
+4. Confirm expected image paths exist, or record why a row is text-only.
+5. Confirm the route can render the chosen fields before publishing.
+6. Seed and preview locally first when importing a new catalog page.
+7. Verify title, metadata, item count, card fields, images, FAQ, wiki hub links, sitemap coverage, search, and revalidation.
+8. Promote production content only through the normal controlled seed, upsert, or migration path.
 
-Reject weak catalog scopes before writing. Do not create game catalog pages for current season pass reward tracks, one-off event reward lists, current ranked season rewards, broad update summaries, gamepasses, badges, servers, developer products, or raw Roblox media. If an event/season created permanent items, keep those items inside their durable collection and record the source/availability on the cards. UGC is a special exception only when the game has meaningful UGC items; use the free Roblox items card style.
+## Writing Rules
 
-The job also includes data readiness. If the item list, source count, rendered card count, title count, image coverage, card fields, or player-useful facts are stale or incomplete, do not write around the problem. Record the gap, propose the data/image update, and only write final copy after the data state is approved and fixed or explicitly accepted.
+- Write for the player who wants to find, compare, unlock, buy, farm, equip, trade, or understand the items.
+- Start with what the collection is in the game.
+- Keep card copy short. Cards should show one compact description plus useful facts.
+- Put deeper explanation in `description_md`, not inside every card.
+- Use clear fields: source, location, price, requirement, rarity, chance, damage, role, availability, or effect when those facts help players.
+- Do not write copy that explains how to use the page. Write copy that explains the game system.
+- The cards already list the items, so paragraphs should add context, strategy, warnings, or decisions.
+- Section blurbs must not restate item names or card facts; use them only for group-level strategy, tradeoffs, warnings, or progression context.
+- Do not show raw research notes, uncertainty labels, raw source language, or internal dataset language in public copy.
+- `wiki_md` should be a short useful blurb for the game wiki hub.
 
-Inspect:
+## Field Jobs
 
-- `research-notes.md`
-- `data/<Game>/` item dataset
-- `apps/web/src/lib/game-dataset-catalogs.ts`
-- target `wiki_catalog_pages` row
-- route renderer if the page has custom behavior
-- local image paths when images matter
-- game system context behind the items or mechanic
-- current source counts and item names from research
-- rendered card count and image coverage when the route exists
+- `title`: Use the Bloxodes catalog title pattern: `All N <Collection> in <Game>`. Add one short reader-focused angle only when it makes the title clearer.
+- `seo_title`: Keep it close to the title, but make it natural for search.
+- `meta_description`: Say what the reader can compare or learn from the page.
+- `intro_md`: Explain what this collection is in the game and why players compare it.
+- `description_md`: Answer the main question raised by the title in more depth.
+- `how_it_works_md`: Explain page fields only when the fields need context. Keep it short.
+- `description_json`: Explain section groups only when it adds context beyond the cards.
+- `faq_json`: Answer useful follow-up questions not already covered.
+- `wiki_md`: Give the wiki hub one short blurb about why this collection matters.
 
-## Workflow
+## Output Shape
 
-Identify the collection type and inspect real item examples before writing anything public. Research how players obtain, compare, use, trade, craft, hatch, farm, unlock, or save the items. The notes should explain the game system in plain English before implementation details.
+```json
+{
+  "universe_id": 0,
+  "wiki_slug": "",
+  "collection_slug": "",
+  "code": "",
+  "title": "",
+  "seo_title": "",
+  "meta_description": "",
+  "intro_md": "",
+  "description_md": "",
+  "description_json": {},
+  "faq_json": [],
+  "wiki_md": "",
+  "is_published": true
+}
+```
 
-Translate raw fields only after the gameplay term is clear. A field like `source`, `chance`, `rarity`, `seats`, `uses`, `refresh`, or `availability` is not useful until the page explains what it changes for the player.
-
-Complete the player-usefulness gate before proposing sections. Identify the player's real task, the in-game decisions players are making, and what the reader can do after reading. Create a required fact matrix that maps reader needs to required facts, source status, local data/card status, and public placement. If prices, currencies, shops, NPCs, damage, chances, upgrade paths, locations, route order, requirements, limits, or other central facts are source-backed but missing locally, mark the work `needs dataset update`.
-
-When SEO or traffic potential matters, run a competitor usefulness check. Inspect top useful competitor/source pages for coverage: what player questions they answer, what facts they expose, what sections help, and where Bloxodes can be stronger. This is a research coverage check, not permission to copy wording.
-
-Create a reader-first outline inside `research-notes.md`. It should name the reader questions, section order, details to cut, and places where a table, bullet list, numbered list, or short paragraph will help.
-
-Before the section proposal, add a required data and image audit to `research-notes.md`. Compare local dataset count, rendered card count, page title count, source counts, image coverage, and required fact coverage. List missing items, extra items, renamed items, stale fields, duplicate rows, missing useful facts, missing images, and local images that are not wired. Mark the data action as `ready as-is`, `needs dataset update`, `needs image update`, or `blocked`.
-
-For new games or new collections, gather or build the local dataset as part of this workflow. Research should produce the complete item list, clean names/slugs, useful card fields, and image plan before final writing. If repeatable updates will matter, prefer a collector script over a one-off manual dump.
-
-Catalog item data for game-specific pages must come from online research and source gathering: official/developer sources, current community wikis or databases, guides, videos, screenshots, update notes, and other player-facing sources. Roblox APIs are not the source of truth for full in-game item lists. Use APIs only to confirm game/universe identity, Roblox metadata, thumbnails, or obvious ID cross-checks; never mark a catalog blocked just because an API does not expose item rows.
-
-The image plan must reject weak substitutions. Use direct in-game item art, enemy/object cutouts, NPC screenshots, station screenshots, or location screenshots where the catalog subject is clearly visible. Do not use edited guide thumbnails, site-branded cover art, arrows/callouts, generic hero art, or broad nearby screenshots that do not actually show the row subject. If no clean image exists, leave the row image empty and record the capture/source gap.
-
-Before final writing, propose the player-usefulness gate, data action, title promise, item-card section style, and card data shape. Explain the primary player task, required fact matrix, count/image audit, any dataset updates needed, the recommended visible title and `seo_title`, the exact reader promise in that title, the grouping axis, why it has in-game meaning, weaker alternatives, planned `description_json` keys and notes, what stays in `description_md`, which fields should appear on cards, which raw fields should be hidden, and whether the route needs a renderer override. For wiki catalog pages, prefer the title shape `All <N> <Item Or Collection> in <Game>: <real player SEO question>` and make the question specific to the researched player decision. Wait for explicit user confirmation before writing `final.json` or updating Supabase. A request like "write this page" or "continue" is not approval unless the user has already seen and accepted the data, title promise, section, and card proposal.
-
-Once the data and structure are confirmed, update the local dataset/images and required player-useful fields first when needed, then write the page fields directly in first-pass final JSON. Include `wiki_md` and `wiki_sort_order` when the catalog belongs on a wiki hub.
-
-Before the final edit gate, run the mandatory FLOW pass. Rewrite `description_md`, FAQs, headings, and transitions until the page reads like a useful player explanation. `description_md` must explain the game items or mechanic, not the card sections. When the items or mechanic involve player action, add a clear action section such as how to get, find, unlock, farm, grow, hatch, roll, craft, equip, travel, compare, or use the items. Headings must be specific and communicative; do not leave generic headings such as `How classes work`, `How tools work`, `Overview`, or `Value` when the section can say what the reader will decide. Use a table, bullets, or numbered steps when that explains faster than paragraphs. Then run the final edit gate before saving.
-
-For `wiki_catalog_pages`, leave `how_it_works_md` empty unless a route explicitly renders it for a special surface. Do not create public sections that teach readers how to read, use, scan, or interpret the page itself. If a field needs explanation, explain the gameplay term in `description_md`, a short `description_json` section note, a card label, or an FAQ.
-
-Before importing or calling the page done, prove the content can render. Compare the local dataset count, rendered card count, title count, and image coverage. Compare the planned `description_json` keys with the actual section labels produced by the route. Compare the planned card fields with the actual card fields too. Do not assume a field such as `rarity`, `category`, or `type` will be used because it exists in the dataset; inspect the rendered grouping or the same grouping logic used by the route. If the page needs `Walls` and `Floors` but the route is grouping by `rarity` or `Other`, fix the renderer or add the proper grouping behavior before importing. If the cards are showing raw descriptions, generic pros/cons blobs, nested stats, unexplained yes/no values, or fields that do not help a player decide, clean the dataset fields or add a route override before importing.
-
-After importing to local Supabase, read the row back and verify the updated fields exist in the database. Then fetch or open the local page and confirm visible strings from `intro_md`, `description_json`, and `description_md` actually render. Also confirm card counts and image behavior. `final.json` by itself is not a completed page update.
-
-For multiple catalog pages, finish one user-approved gold-standard page first. After approval, repeat the full workflow per catalog code. Each catalog needs its own `research-notes.md` and `final.json`.
-
-## Writing Guidance
-
-Hard public-copy rules for wiki catalog pages:
-
-- Write only about the game, items, mechanics, and in-game decisions. Public copy should never talk about sources, research, workflow, local data, missing evidence, or what Bloxodes could or could not verify.
-- If a useful fact is missing, fix the dataset or keep the public copy focused on confirmed in-game facts. Do not write public caveats such as `sources do not say`, `we could not find`, `needs verification`, `reported by`, `source-backed`, `dataset`, `API`, or `research`.
-- Write like a Roblox player explaining the system to another Roblox player. Use full sentences, plain language, and enough context for a new player to follow without knowing the game yet.
-- Do not use analogies or em dashes. Keep the voice direct, practical, and player-aware.
-- The intro should usually be one short, gripping paragraph about the game items or mechanic: what they are, where they show up, how players use or get them, or what in-game decision players are making.
-- `description_md` should only use headings players care about, usually `How`, `When`, `Where`, `Which`, `What`, or mistake-avoidance questions that are core to the game topic. Keep the body simple, SEO-friendly, and focused on solving the player task.
-- `description_md` may link naturally to other Bloxodes pages for the same `universe_id`, including the wiki hub, codes page, tools, articles, events, or other wiki catalog pages for the same game. Link casually inside helpful sentences, not in special link-list lines. Do not cluster every link in one section; space links where they add context.
-- FAQs should usually be 3-4 items max. Add more only when the game topic genuinely needs it. Never repeat information the intro, cards, `description_md`, or section notes already answer.
-- The page should flow like a story from context to cards, then to the next practical player question. Bring up earlier ideas when useful so the reader feels carried through the topic instead of dropped into disconnected sections.
-
-Keep the copy specific to the game system. Say what the items do in play, how players get or use them, and which values change a decision.
-
-Use `description_json` as the section-level context layer when item cards are divided into meaningful groups. Keep each note short and useful, usually one to three sentences, and place it near the cards it explains.
-
-Keep cards as clean, scannable data. Use the production card template from `agents/content/page-types/game-catalog-pages.md`: valid row image when research found one, name/status, one compact item description, then a small key-value block with only decision-changing facts. Think Bagel Bunny, not Honored One. Cards should show pure player-useful facts such as role, source, price, rarity, chance, requirement, strength, limit, availability, damage, seats, or reward type. Do not show long marketing descriptions, raw HTML, raw `pros` and `cons` arrays, nested stats objects, unlabeled values, full move lists, awakened variants, version history, or strategy paragraphs. If pros and cons matter, translate them into short data fields such as `Strength`, `Limit`, `Best for`, or `Trade note`; if the detail is still long, move it into page copy, a table, or a separate details surface.
-
-Default card descriptions are expected. They should be one or two short sentences in casual player-facing game language: what the item or row does, where it fits, when to use it, how it feels, or what kind of player action it supports. Skip the description only when the item set is genuinely better as pure data and record that reason in `research-notes.md`.
-
-There is no required number of card data points, but 3-5 facts is the normal target. Choose the facts that help the player compare, unlock, buy, use, trade, or avoid the item, then stop. A card with three useful fields is better than a card with ten fields that makes the reader work. More than 5 visible facts needs a written reason and rendered proof that the card still scans cleanly.
-
-Never expose research or workflow language in public cards or page copy. Card descriptions, labels, values, intro, body, FAQ, and wiki copy must not say `source notes`, `source estimate`, `source-backed`, `needs in-game check`, `needs verification`, `verification`, `partial`, `source-conflicted`, `reported by`, `current sources`, `dataset`, `API`, `we checked`, `our research`, or similar process wording. Keep those notes in `research-notes.md`; public fields should write about the game.
-
-Do not repeat facts between the description and the data block. A card description should add specific context the data rows do not already carry, such as playstyle, fit, weakness, use case, or what makes the item different from nearby entries. If the description would only restate availability, cost, source, HP, role, or another visible key-value row, omit it. If a card has useful description context but no useful row-level facts, omit the data block instead. The goal is extensive useful information without clutter or repetition.
-
-Visual emphasis should stay tied to player meaning. Use color for only one actionable status signal per card, such as available, unavailable, retired, trade-only, event, limited, or seasonal. Then choose one primary decision field for the items or mechanic and let that value carry slightly more visual weight, such as source for pets, value for crops, price for vehicles, damage for weapons, level for islands, or unlock route for cosmetics. Do not add extra badges or colors just to make the card feel busy.
-
-Keep `description_md` focused on game mechanics: how the system works, where it is in-game, how players obtain items, how prices, odds, or availability work, and mistakes that apply while using or chasing the items. Do not repeat the `description_json` notes there. The FLOW pass should reject random sections that only exist because a field or card group existed.
-
-Choose the section split by the strongest in-game meaning. Rarity, item type, source, location, shop, tier, world, unlock route, crop type, resource type, and boss are all possible. Event can be a source/availability note for permanent items, but a current event should not become a standalone catalog. Pick the structure that helps players understand the items or mechanic, not the structure that is merely convenient.
-
-Do not invent missing item stats, image paths, rewards, or requirements. If the dataset has a gap, record it in research notes. Write around it only after the gap is explicitly accepted or the fact is genuinely unavailable; source-backed useful facts should become a data update first.
-
-If research finds missing items, expected images, or source-backed useful facts that are missing locally, do not treat that as a copy caveat by default. The first move is to update the dataset, fields, or image wiring after approval. Only write around the gap when the user explicitly accepts the current data state or the source disagreement is explained.
-
-Use practical player judgment when the facts support it: easy to replace, mostly collectible, good for quick tasks, gated by an event, trade-aware, or worth saving. Do not force opinions when the data does not support them.
-
-Public copy should answer what the player can do next. If the strongest sentence on the page is an internal caveat about why data is missing, the page is not ready.
-
-Public copy should explain the game items or mechanic. Avoid `Use the X catalog`, `check the catalog`, `this page`, `dataset`, or `Bloxodes` in public fields.
-
-Set `seo_title` to the visible `title` by default, including item counts. For wiki catalog pages, do not stop at `All <count> <collection> in <game>` when research shows a useful player question. Prefer `All <N> <Item Or Collection> in <Game>: <real player SEO question>`, such as `All 43 Classes in 99 Nights in the Forest: Which Should You Unlock First?`, `All 59 Materials in 99 Nights in the Forest: How Do You Get Each One?`, or `All 33 Weapons in 99 Nights in the Forest: Which Ones Are Worth Using?`. If the title promises obtainment, locations, drops, chances, brewing, crafting, value, priority, or effects, the page body must answer that promise in complete detail.
-
-## Output
-
-Save or return `final.json` ready for local Supabase review after the FLOW pass and final edit gate. Do not return preliminary copy for later cleanup, and do not create `brief.md` or `review.md`.
+Use `<game-slug>-<collection-slug>` for `code`.
+Use `<game-slug>` for `wiki_slug` and `<collection-slug>` for `collection_slug`.
+Do not use `roblox_universes.slug` for editorial slugs.

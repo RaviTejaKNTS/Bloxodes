@@ -1,122 +1,68 @@
 ---
 name: bloxodes-quiz-writing
-description: Write, review, or seed Bloxodes quiz pages backed by quiz_pages and local QuizData JSON. Use for /quizzes pages, quiz metadata, Roblox game question pools, easy/medium/hard difficulty design, quiz page copy, local Supabase quiz imports, and question-quality review.
+description: Write, review, or seed Bloxodes quiz pages backed by quiz_pages and local QuizData JSON. Use for /quizzes pages, metadata, Roblox game question pools, easy/medium/hard difficulty design, local imports, and question-quality review.
 ---
 
 # Bloxodes Quiz Writing
 
-## Start Here
+Read `agents/content-writing/agents.md` first.
 
-Read:
+Use this for quiz pages that test useful knowledge about a Roblox game. Questions should be clear, fair, and based on facts a player can learn from the game or reliable sources.
 
-- `agents/content/writing-core.md`
-- `agents/content/research-policy.md`
-- `agents/content/page-types/quizzes.md`
-- `agents/content/final-edit.md`
+## Workflow
 
-If these files have not been read in the current task, read them before writing or importing a quiz.
-
-Create or update the game-first workspace before writing:
+1. Check production for an existing quiz for the game.
+2. Resolve the game identity and universe ID.
+3. Inspect any existing `data/<Game>/quiz.json`.
+4. Create workspace:
 
 ```text
-tmp/content-workspace/<game-slug>/quiz/
-  todo.md
+tmp/content-workspace/<game-slug>/quizzes/<quiz-code>/
   research-notes.md
   final.json
 ```
 
-Copy `agents/content/todo-templates/quiz.md` into the folder as `todo.md` and update it as work progresses.
+5. Write `research-notes.md` with topic coverage, source notes, question groups, difficulty plan, and gaps.
+6. Write page metadata and quiz data in `final.json`.
+7. Parse JSON and validate the quiz shape.
 
-## What This Skill Is For
+## Question Rules
 
-Use this when the page is an interactive quiz under `/quizzes/<slug>`. A quiz is not an article and should not become a guide page with a small quiz attached. It should be a replayable test built from real game knowledge.
+- Use easy, medium, and hard questions when the game has enough depth.
+- Each question needs one correct answer and plausible wrong answers.
+- Avoid trick questions, stale current-event claims, and questions that depend on private servers or rumors.
+- Do not ask about exact dates, code names, or temporary events unless the quiz is explicitly about a stable historical fact.
+- Explanations should teach the fact in one or two simple sentences.
 
-Do not edit shared quiz routes, quiz runner components, result screens, page chrome, CTAs, sidebars, ads, sitemap/feed code, or unrelated copy while using this skill unless the user explicitly asks for implementation work. Quiz work owns `quiz_pages` and the local question pool. If preview exposes a runner/template issue, report it separately.
+## Field Jobs
 
-Bloxodes normally creates one combined quiz per game unless the user explicitly asks for multiple. Use the game slug as the quiz code. Example: `wizard-alchemy`, not `wizard-alchemy-quiz`. Do not use `roblox_universes.slug` as `quiz_pages.code`; universe slugs belong to `/stats/games/*` and may include universe IDs.
+- `page.universe_id`: Link the quiz to the exact game universe.
+- `page.code`: Use the editorial game slug. The route already adds `/quizzes/`.
+- `page.title`: Name the game and the quiz promise in a readable way.
+- `page.description_md`: Tell players what knowledge the quiz tests without giving away answers.
+- `page.seo_title`: Keep null or close to the title unless search needs custom text.
+- `page.seo_description`: Summarize the quiz topic and player value in one durable snippet.
+- `quizData`: Store the full question pool in the shape the route expects.
+- `question`: Test one clear fact, decision, route, or system.
+- `options`: Provide four plausible choices with similar specificity.
+- `correctOptionId`: Match one option ID exactly.
+- `explanation`: Teach the answer briefly when the data shape supports it.
 
-For new game coverage, prefer writing the quiz after core catalog data or catalog-led discovery exists. A good quiz needs stable item, map, mode, mechanic, and progression facts; do not make questions from surface-level guesses or current live codes/events.
-
-## Required Shape
-
-Quiz metadata lives in `quiz_pages`:
-
-```json
-{
-  "universe_id": null,
-  "code": "",
-  "title": "",
-  "description_md": "",
-  "seo_title": null,
-  "seo_description": "",
-  "is_published": true
-}
-```
-
-Questions live in a local `QuizData` file:
+## Output Shape
 
 ```json
 {
-  "easy": [
-    {
-      "id": "",
-      "question": "",
-      "options": [
-        { "id": "A", "text": "" },
-        { "id": "B", "text": "" },
-        { "id": "C", "text": "" },
-        { "id": "D", "text": "" }
-      ],
-      "correctOptionId": "A",
-      "image": null
-    }
-  ],
-  "medium": [],
-  "hard": []
+  "page": {
+    "universe_id": 0,
+    "code": "",
+    "title": "",
+    "description_md": "",
+    "seo_title": "",
+    "seo_description": "",
+    "is_published": true
+  },
+  "quizData": {
+    "questions": []
+  }
 }
 ```
-
-The public attempt uses 5 easy, 5 medium, and 5 hard questions. Keep at least 10 questions in each difficulty pool for replay variety unless the user accepts a smaller quiz.
-
-## Workflow
-
-Research the game like a player. Explain the loop, core systems, important routes, confusing details, and what expert players would know. Inspect existing local datasets, existing quiz rows, route behavior, and related wiki/catalog/tool/checklist pages before writing.
-
-Then write `final.json` with:
-
-- the `quiz_pages` row fields being inserted or updated
-- the full `QuizData` object or a pointer to the local file being updated
-- a summary with question counts, validation results, and remaining uncertainty
-
-Seed local Supabase first when metadata changes. Preview `/quizzes/<slug>` and `/quizzes` before calling the work complete.
-
-## Writing Guidance
-
-Keep the page copy short and useful. `description_md` should tell the player what kind of knowledge the quiz checks, but it should not give away answers or become a separate coverage section. Do not add a “what this quiz covers” block.
-
-Easy questions should be easy and friendly. Medium questions should require real game familiarity. Hard questions should be very hard and pro level: exact thresholds, drop comparisons, material math, chance calculations, late-game routes, build tradeoffs, and multi-system details are all good hard-question material when the facts are supported.
-
-Question rhythm should feel natural across the pool. Mix plain `What`, `Which`, `Who`, and `Where` questions with scenarios, compare-and-pick prompts, calculations, route checks, and mistake-catching prompts. Do not turn rhythm guidance into a rigid count rule. The goal is a human-feeling quiz, not a new template.
-
-Answer options should be clean and plausible. Use wrong answers from the same game system when possible, and avoid ambiguity. The UI shuffles options, but the source file should still avoid obvious correct-answer patterns.
-
-Balance answer length and specificity. Do not make the correct answer the only long, detailed, qualified option while the distractors are short or silly. If one option names exact costs, stages, routes, or mechanics, the wrong options should usually name comparable costs, stages, routes, or mechanics too. A player should need game knowledge to choose, not a guess that the longest answer is probably right.
-
-## Final Checks
-
-Before calling a quiz ready:
-
-- `final.json` is valid when used.
-- `quiz_pages.code` is the editorial game slug.
-- `quiz_pages.code` is not `roblox_universes.slug`.
-- The local quiz JSON parses.
-- Each difficulty has the intended question count.
-- Every question has four options.
-- Every `correctOptionId` exists in that question's options.
-- No question has the correct answer as the unique obvious longest option, and distractors are comparable in detail to the correct answer.
-- Easy questions are actually easy.
-- Medium questions are not throwaway beginner prompts.
-- Hard questions are pro-level and supported by checked facts.
-- The pool uses varied question rhythms without banning normal quiz phrasing.
-- The detail page renders the updated pool and starts a 15-question attempt.
-- The index card has a useful title, summary, and image.

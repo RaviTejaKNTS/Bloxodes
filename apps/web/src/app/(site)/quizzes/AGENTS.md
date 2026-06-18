@@ -16,9 +16,7 @@ Shared route-family data belongs in `page-data.tsx`. Quiz detail rendering shoul
 Use:
 
 - `$bloxodes-quiz-writing`
-- `agents/content/page-types/quizzes.md`
-- `agents/content/writing-core.md`
-- `agents/content/final-edit.md`
+- `agents/content-writing/agents.md`
 
 For a new game quiz, create or update a `quiz_pages` row and a local `data/<Game>/quiz.json` pool. The quiz code should be the game slug, such as `wizard-alchemy`, because the route already supplies `/quizzes/`.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Article Suggestions"
+  short_description: "Suggest article ideas"
+  default_prompt: "Use $bloxodes-article-suggestions to suggest focused Bloxodes article ideas. Check existing Bloxodes coverage, verify sources, avoid overlap with other page types, and label each idea create, already covered, skip or research incomplete."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Engagement Suggestions"
+  short_description: "Suggest codes, quizzes, checklists, events"
+  default_prompt: "Use $bloxodes-engagement-suggestions to decide whether one Roblox game should have codes, checklist, quiz, or event pages. Check existing Bloxodes coverage, verify page-family sources, then label each family create, already covered, skip, or research incomplete."

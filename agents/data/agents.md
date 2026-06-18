@@ -22,7 +22,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `checklist_pages`, `checklist_pages_view`, `checklist_items`
   - Checklist detail and checklist index content.
 - `quiz_pages`, `quiz_pages_view`
-  - Quiz detail and quiz index metadata. Quiz detail rendering does not use `about_md`; keep quiz value in the intro copy and question pool. Use `agents/content/page-types/quizzes.md` for page shape and validation.
+  - Quiz detail and quiz index metadata. Quiz detail rendering does not use `about_md`; keep quiz value in the intro copy and question pool. Use `agents/content-writing/agents.md` and `bloxodes-quiz-writing` for page shape and validation.
 - `puzzle_pages`, `puzzle_pages_view`, `puzzle_answers`, `puzzle_sync_runs`
   - Daily puzzle answer pages under `/puzzles`. `puzzle_pages` stores durable page copy and SEO; `puzzle_answers` stores one row per puzzle/date with `answer_summary` and raw `payload`; dated archive pages are noindex and excluded from the puzzles sitemap.
 - `wiki_pages`, `wiki_pages_view`
@@ -89,7 +89,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 ## Local Datasets
 
-- Wiki/catalog datasets should satisfy the player-usefulness gate from `agents/content/PROCESS.md`. Keep source-backed fields that players need for decisions, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability, instead of storing only easy-to-scrape labels.
+- Wiki/catalog datasets should keep source-backed fields that players need for decisions, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability, instead of storing only easy-to-scrape labels.
 
 - `data/Admin commands/*.md`
   - Parsed by `src/lib/admin-commands.ts`.
@@ -143,7 +143,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Do not store manual code-page payloads with active codes or dates here. Code pages should update the `games` row with `roblox_link`, RobloxDen `source_url`, and Beebom `source_url_2`, then rely on `scripts/codes/update-codes.ts` to populate `codes`.
 - `data/Slime RNG/*.json`
   - Local Slime RNG game datasets for wiki/catalog page work, including slimes, zones, crafting recipes, items, Power Fruits, rebirths, and index rewards.
-  - `quiz.json` is the local question pool for `/quizzes/slime-rng`; follow `agents/content/page-types/quizzes.md` when editing it.
+  - `quiz.json` is the local question pool for `/quizzes/slime-rng`; use `bloxodes-quiz-writing` when editing it.
   - Matching source-provided images live under `apps/web/public/Slime RNG/`. Rebirth and index reward rows are text-only because the source data is milestone-based rather than item-image based.
 - `data/99 Nights in the Forest/*.json`
   - Local 99 Nights in the Forest game datasets for wiki/catalog page work, including classes, crafting, materials, weapons, tools, food, tameable animals, entities, locations, and quiz content.
@@ -155,6 +155,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Kick a Lucky Block/*.json`
   - Local Kick a Lucky Block game datasets for wiki/catalog page work, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki catalogs.
   - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
+- `data/Catch And Tame/*.json`
+  - Local Catch And Tame game datasets for wiki/catalog page work, including mutations, pets, breeding recipes, weather events, traits, biomes, lassos, and items.
+  - Rows are source-backed to Catch And Tame wiki pages and stay text-only until clean local row images are collected.
 - `data/Untitled Boxing Game/*.json`
   - Local Untitled Boxing Game datasets for wiki/catalog page work, including styles, gloves, emotes, knockout effects, and titles.
   - Matching style, glove, and knockout effect images live under `apps/web/public/Untitled Boxing Game/` where clean item art exists. Emotes and titles stay text-only unless clean row-level captures are available.

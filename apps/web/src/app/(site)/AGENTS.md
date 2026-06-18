@@ -54,7 +54,7 @@ Scoped route-family guides:
 ### New catalog or tool
 
 1. Decide whether the long-form copy lives in Supabase, local data files, or both.
-2. For catalog pages, follow the player-usefulness gate and required fact matrix in `agents/wiki-catalog-workflow.md` before shaping route fields.
+2. For catalog pages, use `agents/content-writing/agents.md` and the matching catalog skill before shaping route fields.
 3. Update `apps/web/src/lib/catalog.ts`, `apps/web/src/lib/tools.ts`, `apps/web/src/lib/db.ts`, or the relevant dataset parser.
 4. Keep route slugs, API filtering, and revalidation behavior aligned.
 5. If the page is commentable, wire it through the existing comments flow instead of inventing a new one.

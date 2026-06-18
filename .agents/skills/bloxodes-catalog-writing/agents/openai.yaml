@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Catalog Writing"
-  short_description: "Write Supabase catalog page fields"
-  default_prompt: "Use $bloxodes-catalog-writing for one catalog page. Read the required docs, create plain-language research-notes.md first, include the player-usefulness gate, required fact matrix, competitor/source coverage when SEO matters, and a data/image audit when the page has item data. Propose any missing useful facts, data update, section/card structure, and wait for approval. Then write a first-pass final.json, run $bloxodes-flow-edit so description_md answers the player task instead of repeating card-section notes, includes a how-to/action section when useful, and uses tables/lists/steps where they make the page easier to understand. Run $bloxodes-final-edit before saving final.json with catalog fields and wiki_md when the page appears on a wiki hub."
+  short_description: "Write global catalog pages"
+  default_prompt: "Use $bloxodes-catalog-writing for one global catalog page. Read agents/content-writing/agents.md, check production coverage, verify data/images when item-backed, then write research-notes.md and final.json in simple player-facing language."

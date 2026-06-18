@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Wiki/Catalog Suggestions"
+  short_description: "Suggest wiki and catalog pages"
+  default_prompt: "Use $bloxodes-wiki-catalog-suggestions to research one Roblox game and return only wiki/catalog page recommendations. Check existing Bloxodes pages first, complete the source check, then label each idea create, already covered, skip, or source discovery incomplete."

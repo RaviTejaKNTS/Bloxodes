@@ -14,8 +14,9 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `scripts/AGENTS.md`: automation jobs, preferred npm commands, and script authoring rules.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
-- `agents/content/page-types/quizzes.md`: quiz page workflow, metadata shape, question pool design, and validation rules.
-- `agents/wiki-catalog-workflow.md`: repeatable local-first process for turning game datasets into wiki and catalog pages.
+- `agents/content-writing/agents.md`: shared Bloxodes content writing rules and page-skill routing.
+- `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
+- `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
 
 ## Architecture Snapshot
@@ -60,9 +61,9 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ### Game wiki and catalog pages
 
-1. Follow `agents/wiki-catalog-workflow.md`.
+1. Follow `agents/content-writing/agents.md`, then use `bloxodes-wiki-writing` or `bloxodes-game-catalog-writing`.
 2. Gather game catalog item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a catalog because an API does not expose item rows.
-3. Before writing, complete the player-usefulness gate, required fact matrix, and data/image audit. Do not write around source-backed facts that are missing locally.
+3. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
 4. Seed and preview `wiki_pages` and `catalog_pages` locally before production.
 5. Keep catalog codes in `<game-slug>-<collection-slug>` format.
 6. Verify local dataset images, item counts, useful card fields, metadata, sitemaps, search, and revalidation before publishing.

@@ -1,74 +1,68 @@
 ---
 name: bloxodes-code-writing
-description: Write or update Bloxodes code pages backed by the games table. Use for /codes/<game-slug> page copy, evergreen code reward/redeem/troubleshooting fields, Roblox link and source URL wiring, RobloxDen and Beebom code source checks, and workflows that must avoid manual active or expired code rows.
+description: Write or update Bloxodes code pages backed by the games table. Use for /codes/<game-slug> page copy, evergreen code reward/redeem/troubleshooting fields, Roblox link and source URL wiring, RobloxDen and Beebom source checks, and refresh workflow guidance without manually entering code rows.
 ---
 
 # Bloxodes Code Writing
 
-## Start Here
+Read `agents/content-writing/agents.md` first.
 
-Read:
+Code pages are source-wired pages. The script owns active codes, expired codes, rewards tied to code names, dates, and counts.
 
-- `agents/content/writing-core.md`
-- `agents/content/research-policy.md`
-- `agents/content/page-types/code-pages.md`
-- `agents/content/final-edit.md`
+## Hard Rules
 
-Create or update the game-first workspace:
+- Do not manually write active codes, expired codes, code names, code dates, first-seen dates, active counts, or current reward mappings.
+- `games.slug` is the game slug only, such as `wizard-alchemy`. Do not add `-codes`.
+- Do not use `roblox_universes.slug` for `games.slug`.
+- Put the Roblox experience URL in `roblox_link`.
+- Put the RobloxDen codes page in `source_url`.
+- Put the Beebom codes page in `source_url_2`.
+- Keep `seo_title` null or empty unless the user explicitly asks for custom SEO title text.
+
+## Workflow
+
+1. Check production for an existing `games` row and live `/codes/<slug>` page.
+2. Verify the exact Roblox experience and whether the game has a real codes system.
+3. Check RobloxDen and Beebom source pages.
+4. Create workspace:
 
 ```text
-tmp/content-workspace/<game-slug>/codes/
-  todo.md
+tmp/content-workspace/<game-slug>/codes/<game-slug>/
   research-notes.md
   final.json
 ```
 
-Copy `agents/content/todo-templates/codes.md` into the folder as `todo.md` and update it as work progresses.
+5. Write `research-notes.md` with the game identity, existing row/page, source URLs, and refresh action.
+6. Write only evergreen `games` row fields in `final.json`.
+7. After importing/upserting the game row, run `npm run refresh:codes -- --slug <game-slug>` when code rows should be populated.
 
-## What This Skill Is For
+## Public Copy
 
-Use this for `/codes/<game-slug>` pages backed by the `games` row. The page copy explains the game, durable reward types, redemption, troubleshooting, and where new codes usually appear. The live `codes` table is owned by `scripts/codes/update-codes.ts`.
+Write simply:
 
-Do not create a codes page unless research confirms a real code system and supported source wiring.
+- what the game is
+- what code rewards usually help with
+- how players normally redeem codes
+- why a code might fail
+- where new codes usually appear
 
-Never inject code data by hand. This skill may write evergreen `games` row fields and source URLs only. Do not write current code names, active or expired code rows, current reward mappings, active counts, dates, or freshness claims into `final.json`, SQL, Supabase, Markdown, or public prose.
+Do not promise freshness with phrases like `latest`, `current`, `fresh`, or `updated daily`.
 
-Do not edit shared `/codes` route files, templates, page chrome, social/source blocks, cards, CTAs, sidebars, ads, sitemap/feed code, or unrelated copy while using this skill unless the user explicitly asks for that implementation change. A codes-page task writes the `games` row, runs `npm run refresh:codes -- --slug <game-slug>`, verifies the generated rows, and stops.
+## Field Jobs
+
+- `name`: Use the official game name as players know it.
+- `slug`: Use the editorial game slug only. The route already adds `/codes/`.
+- `roblox_link`: Use the official Roblox experience URL.
+- `source_url`: Use the RobloxDen codes source when available.
+- `source_url_2`: Use the Beebom codes source when available.
+- `seo_title`: Keep null or empty unless the user asks for custom text.
+- `seo_description`: Explain the code page in evergreen terms without active counts or date claims.
+- `intro_md`: Explain the game and how codes usually fit its rewards or progression.
+- `redeem_md`: Explain verified redemption steps. Do not guess UI steps.
+- `rewards_md`: Explain reward types and smart use, not current code-name mappings.
+- `troubleshoot_md`: Explain durable reasons a code can fail.
+- `find_codes_md`: Point to official places where the game usually announces codes.
 
 ## Output Shape
 
-Return valid JSON shaped for the `games` row:
-
-```json
-{
-  "name": "",
-  "slug": "",
-  "is_published": true,
-  "roblox_link": "",
-  "source_url": "",
-  "source_url_2": "",
-  "seo_title": null,
-  "seo_description": "",
-  "intro_md": "",
-  "redeem_md": "",
-  "rewards_md": "",
-  "troubleshoot_md": "",
-  "find_codes_md": ""
-}
-```
-
-## Hard Rules
-
-- Use the editorial game slug only, such as `rivals`, not `rivals-codes`.
-- Do not use `roblox_universes.slug` for `games.slug`; universe slugs are stats-only identifiers and may include universe IDs.
-- Put the official Roblox experience URL in `roblox_link`.
-- Put the RobloxDen codes page in `source_url`.
-- Put the Beebom codes page in `source_url_2`.
-- Leave `seo_title` null unless the user explicitly asks otherwise.
-- Do not write active codes, expired codes, code names, code dates, code reward mappings, `first_seen_at`, or a manual `codes` array.
-- Keep all copy evergreen. Explain the game, normal reward categories, redemption flow, official places codes usually appear, and common durable failure reasons. Do not mention current/active/latest codes in prose.
-- After the row is saved with source URLs, run `npm run refresh:codes -- --slug <game-slug>`.
-
-## Finish
-
-Run final edit before saving `final.json`. After import, refresh codes and preview `/codes/<slug>` to confirm live code rows came from the refresh workflow.
+Return the `games` row fields needed by the existing upsert/import path. Do not include a `codes` array.

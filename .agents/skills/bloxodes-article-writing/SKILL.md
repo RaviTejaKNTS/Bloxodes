@@ -1,66 +1,70 @@
 ---
 name: bloxodes-article-writing
-description: Write or rewrite researched evergreen Bloxodes articles backed by the articles table. Use for focused Roblox how-tos, specific item/quest/mode/map/mechanic guides, narrow comparisons, article SEO, content_md, tags, sources, and article output that must avoid overlap with codes, events, wiki hubs, and catalog pages.
+description: Write one Bloxodes article final.json from an approved brief.md. Use after bloxodes-article-research and parent approval for Roblox how-tos, focused guides, comparisons, news tests approved for /articles, content_md, tags, sources, and article metadata.
 ---
 
 # Bloxodes Article Writing
 
-## Start Here
+Read `agents/content-writing/agents.md` first.
 
-Read:
+Use this after `brief.md` is approved. Do not use this for first-pass research; use `bloxodes-article-research`.
 
-- `agents/content/writing-core.md`
-- `agents/content/research-policy.md`
-- `agents/content/page-types/articles.md`
-- `agents/content/final-edit.md`
+Use this for one article only. Do not handle batches here; use `bloxodes-article-workflow-runner`.
 
-If these files have not been read in the current task, read them before writing.
-
-If the target is a `/codes/<slug>` page backed by the `games` table, stop and use `bloxodes-code-writing` instead. Code pages are source-driven and must not manually include active code rows, expired code rows, code dates, or current-code reward mappings in article fields or metadata.
-
-Create or update the workspace before writing:
+## Workspace
 
 ```text
 tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
-  todo.md
-  research-notes.md
+  brief.md
   final.json
 ```
 
-Copy `agents/content/todo-templates/article.md` into the folder as `todo.md` and update it as work progresses.
+## Before Writing
 
-## What This Skill Is For
+Read the approved `brief.md`.
 
-Use this for researched evergreen articles: focused how-tos, specific item or quest guides, mode/map/mechanic explainers, narrow comparisons, and durable troubleshooting that does not belong on a codes page.
+If the brief is missing, weak, unapproved, or has unresolved source gaps, stop and ask for the article research step to be fixed first.
 
-Articles can be more narrative than catalog or wiki pages, but they still need to stay useful. The reader should understand the topic better after each section, not feel like they are being carried through SEO filler.
+## Writing Rules
 
-Do not edit shared article routes, templates, page chrome, cards, CTAs, sidebars, ads, sitemap/feed code, or unrelated copy while using this skill unless the user explicitly asks for implementation work. Article work owns the `articles` row, approved cover asset, source list, and import/verification path. If preview exposes a shared UI issue, report it separately and stop.
+- Article need to be written in simple language and clean flow for people to follow along the article. You are writing for roblox players who need help or want to know info, you need to provide that cleanly.
+- Open with the exact thing that changed, the action, or the problem. You need to directly get into the topic without any suspense or mood-setting lines.
+- Do not use vague lines like `this is a big change`, `this matters`, or `the shift is bigger than it looks`.
+- Most importantly, every sentence should add value to the user, in easy to understand pace and style.
+- If the article can be done in less than 300 words, go for it. There are no hard rules on word count. But article needs depth, again opt for it. Think of it like how can I tell more clearly without fluffing it up
+- The outline already provided, you are flexible enough to make needed changes if that helps flow. But use fewer headings that help user to quickly scan the entire article and structure easily
+- Headings should be sentence like and should give away the needed core info. Keep the sentence reasonably small for people to read clearly.
+- The body below the headings should not repeat the same info, instead they need to build on it and add more depth to it.
+- Use tables and lists when useful to present the information cleanly.
+- Use numbered lists when providing step by step instructions.
+- Do not include two structured elements like tables and lists inside same section. keep things simple.
+- Prefer para and always communicate with the user. tables, lists, etc should be useful only for info that are like core of the topic and makes sense to include in that structure. Else clear communication with simple english should be prioritized.
+- For game-specific articles, include the game name in the title and slug so people know which game the article is about. Use `Roblox` wording when it helps search or clarity.
+- If you find any missing gaps in info, research the needed part with a fan out query rather than leaving the gap in our article.
+- Add related internal links in a clean flow. No specific mentions like "read this". Just casually include the internal links of this game or needed bloxodes pages.
+- Do not mention research, sources checked, competitors, databases, or internal notes in public article copy.
+- Do not use self-referential wording like `this article`, `this guide`, `this page`, `this catalog`, `this dataset`, or `this database`. Just explain the game topic directly.
 
-Hard pass on overlap:
+Once done, read the article again as a normal reader. Cut any sentence that does not add value, make sure the article solved the reader's requirement.
 
-- no current codes, code troubleshooting, or code reward articles
-- no event articles, event timelines, or current event reward guides
-- no broad "beginner guide"
-- no broad "maps explained", "skins explained", or collection overview topics that should be catalog/wiki copy
-- no Discord, Trello, wiki link, or official-links articles
-- no `All <core items>` articles; complete item lists belong to catalog pages
-- no current update/news article; permanent mechanics should be framed as evergreen how-to or system guides
 
-Use these inputs:
+## Writing and Field Jobs
 
-- `research-notes.md`
-- article type
-- exact niche question or angle
-- production duplicate check across articles and related page families
-- overlap check against codes, events, wiki, catalog, checklist, quiz, and tool pages
-- target game or universe if relevant
-- related Bloxodes pages
-- source links for unstable claims
+Write `final.json` only.
+
+- `title`: State the exact reader question, action, story, or guide promise in human search language. Include the game name for game-specific articles.
+- `slug`: Use a short stable editorial slug for the article topic. Include the game name for game-specific articles.
+- `meta_description`: Summarize the answer or reader outcome in one specific search snippet.
+- `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy.
+- `cover_image`: final image URL or path.
+- `author_id`: Set when known, or let the import path assign it if that is the project flow.
+- `universe_id`: Set only when the article belongs to one Roblox game.
+- `tags`: Use specific reusable labels, not loose keyword stuffing.
+- `sources`: Keep the URLs that support important facts. Do not pad with weak repeats.
+
+Parse-check JSON before returning.
 
 ## Output Shape
-
-Return:
 
 ```json
 {
@@ -72,49 +76,15 @@ Return:
   "author_id": null,
   "universe_id": null,
   "tags": [],
-  "sources": []
+  "sources": [],
+  "is_published": true
 }
 ```
 
-For game-linked articles, generate the article slug from the article topic/title. Do not copy `roblox_universes.slug`; universe slugs are stats-only identifiers and may include universe IDs.
+Do not include `seo_title`; the articles table does not use it.
 
-Use Markdown in `content_md`.
-Do not include `seo_title` for articles unless the `articles` schema changes.
+For game-linked articles, use the article topic and game name for the slug. Do not use `roblox_universes.slug`.
 
-## Article Metadata And Feature Images
+If the article topic is about some specific roblox game, then you must include universe id.
 
-Use the same publishing shape as `scripts/articles/generate-articles.ts` and `scripts/content/import-content-final.ts`.
-
-Article titles should be SEO-friendly without feeling like database labels. Keep the primary keyword near the front, then add a short human outcome when it helps the card feel worth opening, such as `Slime RNG Rebirth Guide: When Resetting Is Worth It` or `Slime RNG Items Guide: What to Use, Save, and Spend First`. Avoid clickbait, fake urgency, or subtitles so long that the card becomes hard to scan.
-
-Every article needs an author. If the workflow is importing reviewed `final.json` and no explicit author is provided, the importer must pick one author randomly from `authors`, matching the generator behavior. Do not leave `author_id` null for a published article.
-
-Every game article needs a feature image. Use the linked Roblox universe thumbnail as the source image, then create an edited 1200x675 WebP cover like the generator: crop to 16:9, apply a dark overlay, and place a short centered title such as `Rebirth Guide` or `Power Fruits Guide`. Do not use a raw Roblox thumbnail as the article cover unless cover generation is blocked and the gap is recorded.
-
-The feature image should also appear inside `content_md` before the first H2, matching `generate-articles.ts`. After import, verify both `/articles` and `/articles/<slug>` show the same author and edited cover.
-
-## How To Write The Article
-
-Verify unstable facts before writing. If the article covers an item stat, formula, unlock condition, durable mechanic, price, route, or live game state, check current sources and record them in `research-notes.md`. If the topic depends on current codes or events, stop and use the proper automation-owned page workflow instead of writing an article.
-
-Before choosing or approving the article, check production coverage first. Search production articles and related page families by universe ID, slug, title, tags, source URLs, item/mechanic names, and search-intent wording. If an article, catalog, wiki, tool, checklist, quiz, codes page, or events page already covers the same intent, do not write a duplicate. Record the existing URL or row in `research-notes.md`, then either update that page if the user asked for a refresh or find a new uncovered angle.
-
-Research the exact question or angle before choosing structure. A how-to, a narrow comparison, and a troubleshooting piece should not all share the same rhythm. If the topic cannot be stated as one specific player question, it is probably not ready.
-
-Write the smallest complete article that answers the title. A complete 300-word article is fine when the topic is simple. Do not pad the article to hit a length, add extra sections for balance, or stretch a short answer into a fake deep dive.
-
-Start with the useful issue: the specific mechanic, item, quest, map, mode, action, or problem the reader came to understand. For how-to articles, start with the how-to. Do not add a `What is...` section first unless the player cannot follow the steps without one or two setup sentences.
-
-Use as few headings as the topic needs. If two sections can carry the whole answer, use two sections. Merge weak headings, cut tiny side sections, and keep the outline simple enough that a reader can understand the whole article path at a glance.
-
-Use headings that tell the reader what the section explains. Put context before tables, lists, or steps. Use numbered lists for processes, bullets for scan-heavy details, and paragraphs when the reader needs explanation or judgment. Tables, lists, and deep dives are welcome only when the topic genuinely needs that shape.
-
-Each paragraph should move the story forward from the title to the answer. Use full sentences, clear transitions, and plain player language so even a newer player can follow the article without extra background.
-
-A light player perspective is welcome when the angle supports it, especially in guides or opinion-aware explainers. Keep it grounded. Do not invent authority, community consensus, or personal experience the research does not support.
-
-Link only useful sources and related Bloxodes pages. Public article copy should explain the facts directly; it should not talk about how research was gathered.
-
-## Finish
-
-Run `bloxodes-final-edit` before saving `final.json`. Do not return preliminary copy for later cleanup, and do not create separate article or SEO draft files.
+Before returning final.json, run or mentally apply the public-copy rules: avoid self-referential phrases like "this article/guide/page/catalog", avoid "row-by-row/full reference" framing, avoid "not just" contrast filler, and write the copy as direct player help.
