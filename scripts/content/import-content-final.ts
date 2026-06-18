@@ -6,6 +6,7 @@ import sharp from "sharp";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { assertEditorialSlug } from "../shared/editorial-slugs";
+import { toMediaPublicUrl } from "../shared/storage-public-url";
 
 type CliOptions = {
   files: string[];
@@ -334,7 +335,7 @@ async function uploadEditedArticleCover(params: {
       return null;
     }
 
-    return storage.getPublicUrl(storagePath).data.publicUrl ?? null;
+    return toMediaPublicUrl(storage.getPublicUrl(storagePath).data.publicUrl);
   } catch (error) {
     console.warn(`Unable to create edited cover for ${params.slug}: ${error instanceof Error ? error.message : String(error)}`);
     return null;

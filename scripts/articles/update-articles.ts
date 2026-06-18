@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import { JSDOM } from "jsdom";
 import sharp from "sharp";
 import { createHash } from "node:crypto";
+import { toMediaPublicUrl } from "../shared/storage-public-url";
 import { tavilySearch } from "../shared/tavily";
 
 type CliOptions = {
@@ -766,7 +767,7 @@ async function uploadSourceImagesForArticle(params: {
       continue;
     }
 
-    const publicUrl = storageClient.getPublicUrl(path).data.publicUrl ?? null;
+    const publicUrl = toMediaPublicUrl(storageClient.getPublicUrl(path).data.publicUrl);
     const tableKey = image.isTable ? normalizeImageFileBase(image.name) : null;
 
     rows.push({

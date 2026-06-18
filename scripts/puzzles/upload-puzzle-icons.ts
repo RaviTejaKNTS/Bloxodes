@@ -2,6 +2,7 @@ import "../shared/load-env";
 import * as cheerio from "cheerio";
 import sharp from "sharp";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { toMediaPublicUrl } from "../shared/storage-public-url";
 
 type PuzzleIconSource = {
   slug: string;
@@ -138,7 +139,7 @@ async function uploadAndUpdate(source: PuzzleIconSource) {
   });
   if (uploadError) throw new Error(`Failed to upload ${source.slug}: ${uploadError.message}`);
 
-  const publicUrl = supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl;
+  const publicUrl = toMediaPublicUrl(supabase.storage.from(bucket).getPublicUrl(path).data.publicUrl);
   const { error: updateError } = await supabase
     .from("puzzle_pages")
     .update({ icon_url: publicUrl })

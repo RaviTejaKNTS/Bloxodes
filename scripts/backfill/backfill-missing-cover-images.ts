@@ -3,6 +3,7 @@ import "../shared/load-env";
 import { createClient } from "@supabase/supabase-js";
 import { JSDOM } from "jsdom";
 import sharp from "sharp";
+import { toMediaPublicUrl } from "../shared/storage-public-url";
 
 type GameRecord = {
   id: string;
@@ -216,7 +217,7 @@ async function downloadResizeAndUploadImage(params: UploadParams): Promise<strin
   }
 
   const publicUrl = storageClient.getPublicUrl(path);
-  return publicUrl.data.publicUrl;
+  return toMediaPublicUrl(publicUrl.data.publicUrl);
 }
 
 async function selectImageForGame(game: GameRecord): Promise<string | null> {

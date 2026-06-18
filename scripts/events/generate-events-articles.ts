@@ -8,6 +8,7 @@ import sharp from "sharp";
 import { createHash } from "node:crypto";
 
 import { slugify } from "@/lib/slug";
+import { toMediaPublicUrl } from "../shared/storage-public-url";
 import { tavilySearch } from "../shared/tavily";
 
 type QueueRow = {
@@ -1092,7 +1093,7 @@ async function downloadResizeAndUploadCover(params: {
     }
 
     const publicUrl = storageClient.getPublicUrl(path);
-    return publicUrl.data.publicUrl ?? null;
+    return toMediaPublicUrl(publicUrl.data.publicUrl);
   } catch (error) {
     console.warn("⚠️ Could not process cover image:", error instanceof Error ? error.message : String(error));
     return null;
@@ -1143,7 +1144,7 @@ async function downloadResizeAndUploadEventCover(params: {
     }
 
     const publicUrl = storageClient.getPublicUrl(path);
-    return publicUrl.data.publicUrl ?? null;
+    return toMediaPublicUrl(publicUrl.data.publicUrl);
   } catch (error) {
     console.warn("⚠️ Could not process event cover image:", error instanceof Error ? error.message : String(error));
     return null;
@@ -2841,7 +2842,7 @@ async function uploadSourceImagesForArticle(params: {
         continue;
       }
 
-      const publicUrl = storageClient.getPublicUrl(path).data.publicUrl ?? null;
+      const publicUrl = toMediaPublicUrl(storageClient.getPublicUrl(path).data.publicUrl);
       const tableKey = image.isTable ? normalizeImageFileBase(image.name) : null;
 
       rows.push({

@@ -7,6 +7,7 @@ import sharp from "sharp";
 import { scrapeRobloxGameMetadata } from "@/lib/roblox/game-metadata";
 import { ensureUniverseForRobloxLink } from "@/lib/roblox/universe";
 import { scrapeSocialLinksFromSources, type SocialLinks as ScrapedSocialLinks } from "@/lib/social-links";
+import { toMediaPublicUrl } from "../shared/storage-public-url";
 
 type GameRow = {
   id: string;
@@ -457,7 +458,7 @@ async function downloadResizeAndUploadImage(params: {
   }
 
   const publicUrl = storageClient.getPublicUrl(path);
-  return publicUrl.data.publicUrl;
+  return toMediaPublicUrl(publicUrl.data.publicUrl);
 }
 
 async function resolveCoverImage(game: GameRow, robloxLink: string | null, stats: EnrichmentStats): Promise<string | null> {

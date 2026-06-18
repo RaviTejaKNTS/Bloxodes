@@ -8,6 +8,7 @@ import sharp from "sharp";
 import { z } from "zod";
 
 import { slugify } from "@/lib/slug";
+import { toMediaPublicUrl } from "../shared/storage-public-url";
 import { tavilySearch } from "../shared/tavily";
 
 const GENERATOR_PROMPT_VERSION = "article-generator-v2-2026-09-03";
@@ -763,7 +764,7 @@ async function downloadResizeAndUploadCover(params: {
     }
 
     const publicUrl = storageClient.getPublicUrl(path);
-    return publicUrl.data.publicUrl ?? null;
+    return toMediaPublicUrl(publicUrl.data.publicUrl);
   } catch (error) {
     console.warn("⚠️ Could not process cover image:", error instanceof Error ? error.message : String(error));
     return null;
