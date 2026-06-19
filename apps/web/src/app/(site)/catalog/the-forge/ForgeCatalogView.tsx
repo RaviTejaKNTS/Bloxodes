@@ -801,6 +801,9 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
 
 export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
   const hasItems = sections.some((section) => section.items.length > 0);
+  const totalItemCount = sections.reduce((sum, section) => sum + section.items.length, 0);
+  const renderCards = totalItemCount <= 600;
+  const renderList = true;
 
   if (!hasItems) {
     return (
@@ -811,7 +814,7 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
   }
 
   return (
-    <ForgeCatalogViewShell>
+    <ForgeCatalogViewShell availableViews={renderCards ? ["cards", "list"] : ["list"]}>
       <div className="space-y-12">
         {sections.map((section) => (
           <section key={section.id} id={section.id} className="space-y-5 scroll-mt-28">
@@ -834,16 +837,20 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
               />
             ) : null}
 
-            <div className="forge-catalog-cards-view">
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                {section.items.map((item) => (
-                  <ForgeItemCard key={item.id} item={item} config={config} />
-                ))}
+            {renderCards ? (
+              <div className="forge-catalog-cards-view">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                  {section.items.map((item) => (
+                    <ForgeItemCard key={item.id} item={item} config={config} />
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="forge-catalog-list-view">
-              <ForgeItemTable section={section} config={config} />
-            </div>
+            ) : null}
+            {renderList ? (
+              <div className="forge-catalog-list-view">
+                <ForgeItemTable section={section} config={config} />
+              </div>
+            ) : null}
           </section>
         ))}
       </div>

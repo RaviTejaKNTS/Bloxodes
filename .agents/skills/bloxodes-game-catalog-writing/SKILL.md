@@ -10,7 +10,7 @@ Use this after `brief.md` and data readiness are approved. Use it for one durabl
 ## Workflow
 
 1. Read the approved `brief.md`.
-2. Confirm `Data readiness` says the dataset, useful fields, image coverage, and route assumptions are ready.
+2. Confirm `Data readiness` says the dataset, section field, card fields, image coverage, and renderer/config support are ready.
 3. Create or update:
 
 ```text
@@ -24,16 +24,54 @@ tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/
 
 ## Writing Rules
 
-- Write for the player who wants to find, compare, unlock, buy, farm, equip, trade, or understand the items.
-- Start with what the collection is in the game.
-- Keep card copy short. Cards should show one compact description plus useful facts.
-- Put deeper explanation in `description_md`, not inside every card.
-- Use clear fields: source, location, price, requirement, rarity, chance, damage, role, availability, or effect when those facts help players.
+**Key rules**
+
+- Always write in simple English that is easy for anyone to understand.
+- Write for Roblox players like a Roblox player who gathered the catalog for everyone to check.
+
+**Do Not**
+
+- Do not write about sources, dataset, or what this page is about.
+- Do not write about your actions. Always focus on the game, items, and players.
 - Do not write copy that explains how to use the page. Write copy that explains the game system.
-- The cards already list the items, so paragraphs should add context, strategy, warnings, or decisions.
-- Section blurbs must not restate item names or card facts; use them only for group-level strategy, tradeoffs, warnings, or progression context.
-- Do not show internal brief details, uncertainty labels, raw source language, or internal dataset language in public copy.
-- `wiki_md` should be a short useful blurb for the game wiki hub.
+
+
+**intro_md**
+
+- Write one small paragraph that gets directly into the game item system.
+- Give context and cue to the catalog with no repeated info that's anywhere on this page.
+
+**Card copy**
+
+The card should have only this and nothing more:
+
+- Name of the item
+- Short description of the item
+- Useful key-value facts that are easy to scan.
+- There is no limit on how many key value pairs you can have, but only include the ones that are useful for players to compare items.
+- Card details come from the dataset. Do not invent fields in `final.json`; make sure the dataset already has the fields the page needs.
+
+**description_json**
+
+Explain section groups only when it adds context beyond the cards.
+This goes above each cards section and should not repeat the card copy. It should be a small paragraph that gives context to the group of items in that section.
+`description_json` keys must match the actual rendered section labels from the dataset. If the dataset sections are `Basic`, `Rare`, and `Exclusive`, use those exact keys.
+Do not create a section note for every section unless it helps. Empty `description_json` is fine when the section labels already explain enough.
+
+
+**Description_md**
+
+Write 2-3 small sections giving more context, strategy, warnings, or decisions. Do not repeat the card copy. The sections should be small and easy to read.
+
+You can use headings that are almost like sentences. Do not use more than 2 headings. The sections should be small and easy to read.
+
+Do not fluff up, repeat info. Give the available info that is needed and helpful for people
+
+Write in simple English that is easy for anyone to understand.
+
+**wiki_md**
+
+Write one short useful blurb for the game wiki hub.
 
 ## Field Jobs
 
@@ -43,7 +81,7 @@ tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/
 - `intro_md`: Explain what this collection is in the game and why players compare it.
 - `description_md`: Answer the main question raised by the title in more depth.
 - `how_it_works_md`: Explain page fields only when the fields need context. Keep it short.
-- `description_json`: Explain section groups only when it adds context beyond the cards.
+- `description_json`: Explain section groups only when it adds context beyond the cards. Keys must match rendered section labels.
 - `faq_json`: Answer useful follow-up questions not already covered.
 - `wiki_md`: Give the wiki hub one short blurb about why this collection matters.
 

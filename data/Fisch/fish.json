@@ -14,6 +14,16 @@
         "accessed": "2026-02-07"
       }
     ],
+    "groupBy": "rarity",
+    "defaultCardFields": [
+      "area",
+      "weather",
+      "time",
+      "season",
+      "bait",
+      "radarLocation",
+      "avgValue"
+    ],
     "columns": [
       "name",
       "image",
@@ -546,7 +556,7 @@
     },
     {
       "name": "Meg's Fang",
-      "image": "/Fisch/Fish/256px-Meg%27s_Fang.png",
+      "image": "/Fisch/Fish/256px-Meg%2527s_Fang.png",
       "rarity": "Mythic",
       "area": "Ancient Isle",
       "weather": "None",
@@ -562,7 +572,7 @@
     },
     {
       "name": "Meg's Spine",
-      "image": "/Fisch/Fish/256px-Meg%27s_Spine.png",
+      "image": "/Fisch/Fish/256px-Meg%2527s_Spine.png",
       "rarity": "Mythic",
       "area": "Ancient Isle",
       "weather": "None",
@@ -1010,7 +1020,7 @@
     },
     {
       "name": "Neptune's Nibbler",
-      "image": "/Fisch/Fish/256px-Neptune%27s_Nibbler.png",
+      "image": "/Fisch/Fish/256px-Neptune%2527s_Nibbler.png",
       "rarity": "Common",
       "area": "Atlantis",
       "weather": "Clear",
@@ -1042,7 +1052,7 @@
     },
     {
       "name": "Poseidon's Perch",
-      "image": "/Fisch/Fish/256px-Poseidon%27s_Perch.png",
+      "image": "/Fisch/Fish/256px-Poseidon%2527s_Perch.png",
       "rarity": "Common",
       "area": "Atlantis",
       "weather": "Clear",
@@ -1346,7 +1356,7 @@
     },
     {
       "name": "Oracle's Eye",
-      "image": "/Fisch/Fish/256px-Oracle%27s_Eye.png",
+      "image": "/Fisch/Fish/256px-Oracle%2527s_Eye.png",
       "rarity": "Unusual",
       "area": "Atlantis",
       "weather": "Foggy",
@@ -1362,7 +1372,7 @@
     },
     {
       "name": "Philosopher's Fish",
-      "image": "/Fisch/Fish/256px-Philosopher%27s_Fish.png",
+      "image": "/Fisch/Fish/256px-Philosopher%2527s_Fish.png",
       "rarity": "Unusual",
       "area": "Atlantis",
       "weather": "Clear",
@@ -1586,7 +1596,7 @@
     },
     {
       "name": "Triton's Herald",
-      "image": "/Fisch/Fish/256px-Triton%27s_Herald.png",
+      "image": "/Fisch/Fish/256px-Triton%2527s_Herald.png",
       "rarity": "Rare",
       "area": "Atlantis",
       "weather": "None",
@@ -1698,7 +1708,7 @@
     },
     {
       "name": "Kraken's Herald",
-      "image": "/Fisch/Fish/256px-Kraken%27s_Herald.png",
+      "image": "/Fisch/Fish/256px-Kraken%2527s_Herald.png",
       "rarity": "Legendary",
       "area": "Atlantis",
       "weather": "None",
@@ -1826,7 +1836,7 @@
     },
     {
       "name": "Zeus' Herald",
-      "image": "/Fisch/Fish/256px-Zeus%27_Herald.png",
+      "image": "/Fisch/Fish/256px-Zeus%2527_Herald.png",
       "rarity": "Mythic",
       "area": "Atlantis",
       "weather": "Rain",
@@ -3586,7 +3596,7 @@
     },
     {
       "name": "Sloane's Viperfish",
-      "image": "/Fisch/Fish/256px-Sloane%27s_Viperfish.png",
+      "image": "/Fisch/Fish/256px-Sloane%2527s_Viperfish.png",
       "rarity": "Rare",
       "area": "Cultist Lair",
       "weather": "Windy",
@@ -4386,7 +4396,7 @@
     },
     {
       "name": "Captain's Goldfish",
-      "image": "/Fisch/Fish/256px-Captain%27s_Goldfish.png",
+      "image": "/Fisch/Fish/256px-Captain%2527s_Goldfish.png",
       "rarity": "Mythic",
       "area": "Forsaken Shores",
       "weather": "None",
@@ -4418,7 +4428,7 @@
     },
     {
       "name": "Pirate Captain's Goldfish",
-      "image": "/Fisch/Fish/256px-Pirate_Captain%27s_Goldfish.png",
+      "image": "/Fisch/Fish/256px-Pirate_Captain%2527s_Goldfish.png",
       "rarity": "Secret",
       "area": "Forsaken Shores",
       "weather": "None",
@@ -9874,7 +9884,7 @@
     },
     {
       "name": "🐋",
-      "image": "/Fisch/Fish/256px-%F0%9F%90%8B.png",
+      "image": "/Fisch/Fish/256px-%25F0%259F%2590%258B.png",
       "rarity": "Secret",
       "area": "Regionless",
       "weather": "None",
@@ -9890,7 +9900,7 @@
     },
     {
       "name": "🐟",
-      "image": "/Fisch/Fish/256px-%F0%9F%90%9F.png",
+      "image": "/Fisch/Fish/256px-%25F0%259F%2590%259F.png",
       "rarity": "Secret",
       "area": "Regionless",
       "weather": "None",
@@ -9906,7 +9916,7 @@
     },
     {
       "name": "🐡",
-      "image": "/Fisch/Fish/256px-%F0%9F%90%A1.png",
+      "image": "/Fisch/Fish/256px-%25F0%259F%2590%25A1.png",
       "rarity": "Secret",
       "area": "Regionless",
       "weather": "None",
@@ -9922,7 +9932,7 @@
     },
     {
       "name": "🦈",
-      "image": "/Fisch/Fish/256px-%F0%9F%A6%88.png",
+      "image": "/Fisch/Fish/256px-%25F0%259F%25A6%2588.png",
       "rarity": "Secret",
       "area": "Regionless",
       "weather": "None",
@@ -9938,7 +9948,7 @@
     },
     {
       "name": "🦑",
-      "image": "/Fisch/Fish/256px-%F0%9F%A6%91.png",
+      "image": "/Fisch/Fish/256px-%25F0%259F%25A6%2591.png",
       "rarity": "Secret",
       "area": "Regionless",
       "weather": "None",
@@ -10258,7 +10268,7 @@
     },
     {
       "name": "Barracuda's Spine",
-      "image": "/Fisch/Fish/256px-Barracuda%27s_Spine.png",
+      "image": "/Fisch/Fish/256px-Barracuda%2527s_Spine.png",
       "rarity": "Event",
       "area": "Archaeological Hunt",
       "weather": "None",
@@ -10306,7 +10316,7 @@
     },
     {
       "name": "Nessie's Spine",
-      "image": "/Fisch/Fish/256px-Nessie%27s_Spine.png",
+      "image": "/Fisch/Fish/256px-Nessie%2527s_Spine.png",
       "rarity": "Event",
       "area": "Archaeological Hunt",
       "weather": "None",
@@ -11058,7 +11068,7 @@
     },
     {
       "name": "O'Mango Goldgrin",
-      "image": "/Fisch/Fish/256px-O%27Mango_Goldgrin.png",
+      "image": "/Fisch/Fish/256px-O%2527Mango_Goldgrin.png",
       "rarity": "Event",
       "area": "Lucky Event",
       "weather": "Rain",
@@ -11074,7 +11084,7 @@
     },
     {
       "name": "Plumrick O'Luck",
-      "image": "/Fisch/Fish/256px-Plumrick_O%27Luck.png",
+      "image": "/Fisch/Fish/256px-Plumrick_O%2527Luck.png",
       "rarity": "Event",
       "area": "Lucky Event",
       "weather": "Rain",
@@ -11106,7 +11116,7 @@
     },
     {
       "name": "Sunny O'Coin",
-      "image": "/Fisch/Fish/256px-Sunny_O%27Coin.png",
+      "image": "/Fisch/Fish/256px-Sunny_O%2527Coin.png",
       "rarity": "Event",
       "area": "Lucky Event",
       "weather": "Rain",
@@ -11202,7 +11212,7 @@
     },
     {
       "name": "Siren's Guppy",
-      "image": "/Fisch/Fish/256px-Siren%27s_Guppy.png",
+      "image": "/Fisch/Fish/256px-Siren%2527s_Guppy.png",
       "rarity": "Event",
       "area": "Crypt",
       "weather": "None",
@@ -15026,7 +15036,7 @@
     },
     {
       "name": "Baby's First Balloon",
-      "image": "/Fisch/Fish/Baby%27s_First_Balloon.png",
+      "image": "/Fisch/Fish/Baby%2527s_First_Balloon.png",
       "rarity": "Event",
       "area": "Fisch Anniversary",
       "weather": "None",
@@ -16194,7 +16204,7 @@
     },
     {
       "name": "Santa's Present",
-      "image": "/Fisch/Fish/256px-Santa%27s_Present.png",
+      "image": "/Fisch/Fish/256px-Santa%2527s_Present.png",
       "rarity": "Event",
       "area": "Fischmas 2",
       "weather": "Clear",
@@ -16210,7 +16220,7 @@
     },
     {
       "name": "Santa's Relic",
-      "image": "/Fisch/Fish/256px-Santa%27s_Relic.png",
+      "image": "/Fisch/Fish/256px-Santa%2527s_Relic.png",
       "rarity": "Event",
       "area": "Fischmas 2",
       "weather": "Clear",

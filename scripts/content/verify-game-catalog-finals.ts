@@ -170,6 +170,19 @@ async function main() {
   const finals = await Promise.all(finalFiles.map(readFinal));
 
   await runCommand("npm", ["run", "content:check-copy", "--", ...finalFiles]);
+  for (let index = 0; index < collections.length; index += 1) {
+    await runCommand("npm", [
+      "run",
+      "check:game-catalog-data",
+      "--",
+      "--game",
+      options.game,
+      "--collection",
+      collections[index],
+      "--final-json",
+      finalFiles[index],
+    ]);
+  }
   await runCommand("npm", [
     "run",
     "seed:game-catalog-pages",

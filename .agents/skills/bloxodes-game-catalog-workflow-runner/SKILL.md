@@ -13,6 +13,8 @@ The parent owns judgment: approve scope, data readiness, final copy, and verific
 
 ## Workspace
 
+For each approved game catalog collection:
+
 ```text
 tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/
   brief.md
@@ -23,14 +25,15 @@ tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/
 
 1. Confirm the approved game, universe ID, and catalog list.
 2. Give each subagent exactly one collection.
-3. Ask the subagent to use `bloxodes-game-catalog-research` and return `brief.md`.
+3. Ask the subagent to use `bloxodes-game-catalog-research` and return `brief.md`. Subagents will create their workspace.
 4. Review source proof, scope, existing Bloxodes coverage, and whether the collection is worth a catalog.
-5. If approved, ask the same subagent to use `bloxodes-game-catalog-data` and update data/images plus data notes.
-6. Review item count, missing items, useful fields, grouping, image coverage, and route assumptions.
-7. If approved, ask the same subagent to use `bloxodes-game-catalog-writing` and create `final.json`.
-8. Review final copy and JSON. Send fixes back to the same subagent.
-9. Start or reuse localhost with `npm run dev:local`.
-10. Run:
+5. Provide feedback, approve, or block the collection according to the checks.
+6. If approved, ask the same subagent to use `bloxodes-game-catalog-data` and update data/images plus data notes.
+7. Review item count, missing items, section plan, useful fields, grouping, image coverage, and route assumptions.
+8. If approved, ask the same subagent to use `bloxodes-game-catalog-writing` and create `final.json`.
+9. Review final copy and JSON. Send fixes back to the same subagent.
+10. Start or reuse localhost with `npm run dev:local`.
+11. Run:
 
 ```bash
 npm run verify:game-catalog-finals -- --base-url http://localhost:<port> --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/catalogs --collection <collection-slug>
@@ -38,8 +41,45 @@ npm run verify:game-catalog-finals -- --base-url http://localhost:<port> --game 
 
 Use one `--collection` for each approved catalog.
 
-11. If the verifier passes, open each verified `/wiki/<game-slug>/<collection-slug>` link in the Codex Browser.
-12. Return paths, localhost links, blocked catalogs, and remaining risks.
+12. If the verifier passes, open each verified `/wiki/<game-slug>/<collection-slug>` link in the Codex Browser.
+13. Return paths, localhost links, blocked catalogs, and remaining risks.
+
+## Research Checks
+
+Once the research subagent returns `brief.md`, check that:
+- source proof is strong and complete
+- collection is durable, useful, and source-backed
+- item fields are useful for players to compare items
+- section plan is clear and useful for players
+- section labels are not source-table noise
+
+## Data Checks
+
+Once the data subagent completes the process and updates the `brief.md`, check that:
+- Data is complete, accurate, and matches the approved brief.
+- `npm run check:game-catalog-data` passed or the remaining warning is accepted.
+- Section field, section counts, and section order are recorded.
+- Every item lands in the right section.
+- Card fields help players compare items.
+- Card summaries are present when the collection needs plain-English item context.
+- Hidden/source fields are not exposed as public card fields.
+- Images are complete and accurate, or missing images are accepted with a clear reason.
+- The route renderer/config can show the sections, fields, images, and item count.
+- If the data is not ready, send it back to the subagent for fixes.
+
+## Final Checks
+
+Before approving any final.json, make sure all the following are met:
+- Check if item count and title count agree.
+- All the writing is simple and easy for everyone to read.
+- Check if card fields help players compare items.
+- Check if sections are useful and labels are easy to understand.
+- Check if `description_json` keys match actual rendered section labels.
+- No public copy mentions research, datasets, workflow, or page usage.
+- Check if the title follows the pattern `All N <Collection> in <Game>`.
+- Check if the paragraphs add context beyond the cards.
+- Check if `final.json` parses.
+- Check if the verifier and Browser preview look good before calling it done.
 
 ## Parent Checks
 

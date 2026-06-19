@@ -33,7 +33,7 @@ Only mark `[create]` when there is at least one decent public source and enough 
 
 ## Output
 
-Start with `Evidence checked`, 
+Start with `Evidence checked`,
 
 ```text
 Evidence checked:

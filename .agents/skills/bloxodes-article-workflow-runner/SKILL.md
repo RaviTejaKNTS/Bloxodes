@@ -54,13 +54,13 @@ Check:
 
 If the brief is weak, ask for more research or mark the article blocked.
 
-Do not rewrite the article from the parent role unless the fix is tiny. Send clear feedback back to the same article subagent so the person who researched the article also fixes the article.
+Do not rewrite the article from the parent role unless the fix is tiny. Send clear feedback back to the same article subagent so the agent who researched the article also fixes the article.
 
 ## Final Article Review
 
 Check:
 
-- Check against the Writing Rules in bloxodes-article-writing/SKILL.md
+- Check against the Writing Rules in `bloxodes-article-writing/SKILL.md`
 - `final.json` parses
 - title, slug, meta, tags, sources, and universe ID make sense
 - game-specific article titles and slugs include the game name; use `Roblox` wording when it helps readers understand the topic

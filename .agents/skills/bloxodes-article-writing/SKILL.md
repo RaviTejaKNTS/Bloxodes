@@ -37,10 +37,11 @@ If the brief is missing, weak, unapproved, or has unresolved source gaps, stop a
 
 **Structure**
 - Follow the provided outline, but adjust it if a different flow serves the reader better.
-- Use fewer headings so the article stays scannable.
+- Use fewer headings so the article stays scannable. If 2 headings can help the user, we can just use 2.
+- However keep each section also small, do not cramp a lot of info into one section making it hard to read.
 - Headings should read like sentences and reveal the core info, not tease it. Keep them short.
 - Each section must build on the last, not re-explain it.
-- One structured element per section — never a table and a list together. Keep it simple.
+- One structured element per section, never a table and a list together. Keep it simple.
 - Use tables and lists only for core, structured info (stats, steps, comparisons). Otherwise default to plain prose.
 - Use numbered lists for step-by-step instructions.
 

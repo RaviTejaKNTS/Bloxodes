@@ -16,7 +16,7 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
 
 ## Start
 
-Start by checking if we have already covered in this article on the production db. if the article belongs to a game, you can check the db with the universe id to find the articles of that specific game easily. This is to make sure we are not writing an existing article.
+Start by checking if we have already covered in this article on the production db. If the article belongs to a game, you can check the db with the universe id to find the articles of that specific game easily. This is to make sure we are not writing an existing article.
 
 ## Research
 
@@ -28,9 +28,9 @@ Start by checking if we have already covered in this article on the production d
 
 4. Do not stop at first indexed results, dig deeper, click though internal links of the sources to get a holistic understanding.
 
-5. Once done, understand what will be useful for people reading this article and what can be skipped. We write simple, clean and easy to understand and quick to read kind of articles that are deep and helpful. So make sure our research is helpful for that.
+5. Once done, understand what will be useful for people reading this article and what can be skipped. We write simple, clean and easy to understand and quick to read kind of articles. So make sure our research is helpful for that.
 
-6. Write `brief.md` and stop.
+6. Only one you have searched all the sources and only when you think there are no gaps in the info, then continue and write `brief.md`.
 
 ## Article Outline
 
@@ -41,7 +41,7 @@ In the `brief.md`, you need to include the article outline. Follow these rules:
 3. So use fewer headings that are simple to read and almost sentence like (not generic SEO headings).
 4. Headings can give away the info without people needing to dig into the text.
 5. In outline, you just need to provide headings and a small one to two lines of what needs to be included under it.
-6. If required, you can suggest to include table, lists or numbered lists that can go into any section that makes sense.
+6. If required, you can suggest to include table, lists or numbered lists that can go into any section when it makes sense.
 7. For example, when writing how to, do not write "What it is" headings when it is obvious. Things can simply go into intro, directly to point without any fluff. So your outline should respect that.
 
 Title need to be in simple human language, small but full sentence, people seeing this title on search should understand and open our page.

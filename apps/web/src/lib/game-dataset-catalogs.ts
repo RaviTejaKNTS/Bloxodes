@@ -372,6 +372,14 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
     collections: ["brainrots", "rocks", "upgrades"]
   },
   {
+    gameSlug: "fisch",
+    gameName: "Fisch",
+    universeId: 5750914919,
+    dataDir: "Fisch",
+    universeNames: ["Fisch", "Fisch [ENCHANT UPDATE]", "Fisch 🎨 [CUSTOMIZATION]"],
+    collections: ["fish", "rods", "baits", "enchantments", "mutations", "totems", "locations"]
+  },
+  {
     gameSlug: "animal-hospital",
     gameName: "Animal Hospital",
     universeId: 10148749921,
@@ -457,8 +465,9 @@ const COLLECTION_FOCUS: Record<string, string> = {
   dungeons: "entry rules, wave structure, rewards, difficulty, and dungeon purpose",
   eggs: "price, rarity chances, availability, events, and obtainment",
   emotes: "emote sources, rarity, key prices, availability, and cosmetic use",
-  enchantments: "roll stats, tier values, Enchanted Stone costs, build roles, and wand upgrade value",
+  enchantments: "effects, obtainment, target gear, build roles, and upgrade value",
   enemies: "enemy levels, seas, locations, notes, and progression value",
+  fish: "rarity, area, weather, time, season, bait, radar notes, value, and catch planning",
   "fighting-styles": "price, requirements, obtainment, upgrading, and combat role",
   "fuse-machine": "possible fuse results, rarities, income values, and max chances",
   food: "food names, prices, effects, uses, availability, and event notes",
@@ -555,6 +564,9 @@ const COLLECTION_FOCUS: Record<string, string> = {
   zones: "zone order, rarity, kick power bands, reward bands, mutation notes, and return-risk context",
   rocks: "push obstacles, rarity gates, unlocked Brainrot areas, and route progress",
   rooms: "room roles, shift objectives, anomaly risks, warning signs, and safe actions",
+  rods: "prices, obtainment, lure speed, luck, control, resilience, max weight, and passives",
+  baits: "luck bonuses, lure speed, resilience, preferred fish use, passives, and obtainment",
+  totems: "effects, source, cost, trigger use, availability, and weather or event control",
   upgrades: "strength, carry capacity, rebirth effects, costs, and priority"
 };
 
