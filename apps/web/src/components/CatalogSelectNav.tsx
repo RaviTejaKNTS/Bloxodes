@@ -33,17 +33,28 @@ export function CatalogSelectNav({
     const option = options.find((entry) => entry.value === event.currentTarget.value);
     if (!option) return;
 
-    if (option.targetId) {
-      document.getElementById(option.targetId)?.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-      window.history.replaceState(null, "", `#${option.targetId}`);
-      event.currentTarget.value = "";
-      return;
+    if (option.href) {
+      const targetUrl = new URL(option.href, window.location.origin);
+      if (targetUrl.pathname !== window.location.pathname) {
+        window.location.assign(option.href);
+        return;
+      }
     }
 
-    if (option.href && option.href !== window.location.pathname) {
+    if (option.targetId) {
+      const target = document.getElementById(option.targetId);
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+        window.history.replaceState(null, "", option.href ?? `#${option.targetId}`);
+        event.currentTarget.value = "";
+        return;
+      }
+    }
+
+    if (option.href && option.href !== `${window.location.pathname}${window.location.hash}`) {
       window.location.assign(option.href);
     }
   }

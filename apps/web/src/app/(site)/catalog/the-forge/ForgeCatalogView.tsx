@@ -1,10 +1,12 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { PagePagination } from "@/components/PagePagination";
+import type { CatalogPaginationInfo } from "./catalog-pagination";
 import { ForgeCatalogViewShell } from "./ForgeCatalogViewShell";
 
 type ForgeCatalogStat = { key: string; label: string };
 
-type ForgeCatalogConfig = {
+export type ForgeCatalogConfig = {
   slug: string;
   label: string;
   groupLabel: string;
@@ -17,24 +19,29 @@ type ForgeCatalogConfig = {
   hideImages?: boolean;
 };
 
-type ForgeCatalogItem = {
+export type ForgeCatalogItem = {
   id: string;
   name: string;
   image?: string | null;
   [key: string]: unknown;
 };
 
-type ForgeCatalogSection = {
+export type ForgeCatalogSection = {
   id: string;
   label: string;
   items: ForgeCatalogItem[];
   noteHtml?: string | null;
   noteNodes?: ReactNode[] | null;
+  totalItemCount?: number;
+  isContinuation?: boolean;
+  startPage?: number;
+  startHref?: string;
 };
 
 type ForgeCatalogViewProps = {
   sections: ForgeCatalogSection[];
   config: ForgeCatalogConfig;
+  pagination?: CatalogPaginationInfo | null;
 };
 
 type ForgeCatalogDisplayStat = {
@@ -799,7 +806,7 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
   );
 }
 
-export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
+export function ForgeCatalogView({ sections, config, pagination }: ForgeCatalogViewProps) {
   const hasItems = sections.some((section) => section.items.length > 0);
   const totalItemCount = sections.reduce((sum, section) => sum + section.items.length, 0);
   const renderCards = totalItemCount <= 600;
@@ -815,6 +822,19 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
 
   return (
     <ForgeCatalogViewShell availableViews={renderCards ? ["cards", "list"] : ["list"]}>
+      {pagination && pagination.totalPages > 1 ? (
+        <div className="space-y-3 border-b border-border/60 pb-6">
+          <p className="text-sm text-muted">
+            Showing {pagination.pageItemCount.toLocaleString("en-US")} of{" "}
+            {pagination.totalItems.toLocaleString("en-US")} items.
+          </p>
+          <PagePagination
+            basePath={pagination.basePath}
+            currentPage={pagination.currentPage}
+            totalPages={pagination.totalPages}
+          />
+        </div>
+      ) : null}
       <div className="space-y-12">
         {sections.map((section) => (
           <section key={section.id} id={section.id} className="space-y-5 scroll-mt-28">
@@ -822,11 +842,17 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
               <div className="space-y-1">
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">{config.groupLabel}</p>
                 <h2 className="text-2xl font-semibold text-foreground">{section.label}</h2>
+                {section.isContinuation ? (
+                  <p className="text-sm font-medium text-muted">Continued from previous page</p>
+                ) : null}
               </div>
               <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                {section.items.length.toLocaleString("en-US")} items
+                {(section.totalItemCount ?? section.items.length).toLocaleString("en-US")} items
               </span>
             </div>
+            {section.isContinuation ? (
+              <p className="text-sm text-muted">Showing {section.items.length.toLocaleString("en-US")} items on this page.</p>
+            ) : null}
 
             {section.noteNodes?.length ? <div className="max-w-3xl">{section.noteNodes}</div> : null}
 
@@ -854,6 +880,14 @@ export function ForgeCatalogView({ sections, config }: ForgeCatalogViewProps) {
           </section>
         ))}
       </div>
+      {pagination && pagination.totalPages > 1 ? (
+        <PagePagination
+          basePath={pagination.basePath}
+          currentPage={pagination.currentPage}
+          totalPages={pagination.totalPages}
+          className="flex flex-wrap items-center gap-2 border-t border-border/60 pt-6"
+        />
+      ) : null}
     </ForgeCatalogViewShell>
   );
 }

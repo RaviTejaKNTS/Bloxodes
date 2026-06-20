@@ -428,11 +428,16 @@ function revalidateForCatalog(slug: string) {
 function revalidateForWikiCatalog(slug: string) {
   const [wikiSlug, collectionSlug] = slug.split("/");
   const oldFlatCatalogSlug = wikiSlug && collectionSlug ? `${wikiSlug}-${collectionSlug}` : "";
+  const wikiCatalogBasePath = wikiSlug && collectionSlug ? `/wiki/${wikiSlug}/${collectionSlug}` : "";
+  const wikiCatalogContinuationPaths = wikiCatalogBasePath
+    ? Array.from({ length: 39 }, (_, index) => `${wikiCatalogBasePath}/page/${index + 2}`)
+    : [];
   return applyRevalidation(
     [
       "/wiki",
       wikiSlug ? `/wiki/${wikiSlug}` : "",
-      wikiSlug && collectionSlug ? `/wiki/${wikiSlug}/${collectionSlug}` : "",
+      wikiCatalogBasePath,
+      ...wikiCatalogContinuationPaths,
       oldFlatCatalogSlug ? `/catalog/${oldFlatCatalogSlug}` : "",
       "/",
       SITEMAP_INDEX_PATH,

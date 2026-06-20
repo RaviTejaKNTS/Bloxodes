@@ -20,7 +20,8 @@ Use this after `brief.md` is approved. Prepare the local data and image support 
 9. Gather images when the catalog needs images. Find clean item images, not edited website thumbnails. Prefer wiki-style item images, but use Fandom, BloxInformer, Beebom, Game8, Pro Game Guides, and similar Roblox guide sites when they have better usable images.
 10. Add or verify images under the expected public image path when the catalog needs images.
 11. Confirm `apps/web/src/lib/game-dataset-catalogs.ts` can render the collection, card fields, grouping, item count, and image paths.
-12. If the collection is missing from `apps/web/src/lib/game-dataset-catalogs.ts`, run:
+12. Confirm section labels are stable and useful enough for the shared renderer's section dropdown. Do not split, rename, or reorder sections only for page-size reasons; pagination is handled by the renderer.
+13. If the collection is missing from `apps/web/src/lib/game-dataset-catalogs.ts`, run:
 
 ```bash
 npm run register:game-catalog -- --game <game-slug> --collection <collection-slug> --dry-run
@@ -28,7 +29,7 @@ npm run register:game-catalog -- --game <game-slug> --collection <collection-slu
 
 If the dry run looks right and the game group already exists, run it again without `--dry-run`.
 
-13. If you have an image manifest, collect images with:
+14. If you have an image manifest, collect images with:
 
 ```bash
 npm run collect:catalog-images -- --manifest <images.json> --dataset data/<Game>/<collection>.json --game-name "<Game>" --collection-name "<Collection>" --dry-run
@@ -36,7 +37,7 @@ npm run collect:catalog-images -- --manifest <images.json> --dataset data/<Game>
 
 If the dry run looks right, run it again without `--dry-run`.
 
-14. Run the dataset readiness check:
+15. Run the dataset readiness check:
 
 ```bash
 npm run check:game-catalog-data -- --game <game-slug> --collection <collection-slug>
@@ -44,7 +45,7 @@ npm run check:game-catalog-data -- --game <game-slug> --collection <collection-s
 
 Use `--file <dataset.json>` if the catalog is not registered yet. Add `--require-images` only when the catalog must have images.
 
-15. Update `brief.md` with data status and gaps from the checker.
+16. Update `brief.md` with data status and gaps from the checker.
 
 ## Data Approval Notes
 

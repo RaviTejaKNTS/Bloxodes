@@ -7,7 +7,7 @@ import {
   buildGrowGardenCatalogCodeCandidates,
   buildGrowGardenCatalogPath,
   getGrowGardenCatalogConfig,
-  loadGrowGardenCatalogDataset
+  loadPreparedGrowGardenCatalog
 } from "./page-data";
 
 export const revalidate = 21600;
@@ -25,8 +25,8 @@ export async function generateGrowGardenCollectionMetadata(collection: string): 
     };
   }
 
-  const dataset = await loadGrowGardenCatalogDataset(config);
-  const count = dataset.items.length;
+  const prepared = await loadPreparedGrowGardenCatalog(config);
+  const count = prepared.itemCount;
   const fallbackTitle = `All ${count.toLocaleString("en-US")} ${config.label} in Grow a Garden`;
   const catalog = await getWikiCatalogPageByCode(buildGrowGardenCatalogCodeCandidates(config)[0]);
   const title = resolveSeoTitle(catalog?.seo_title) ?? catalog?.title ?? fallbackTitle;

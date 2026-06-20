@@ -10,17 +10,20 @@ import {
   listPublishedWikiCatalogPaths
 } from "@/lib/wiki-catalog";
 import {
-  loadGameDatasetCatalogDataset,
+  getPreparedGameDatasetCatalogPageCount,
+  loadPreparedGameDatasetCatalog,
   renderGameDatasetCatalogPage
 } from "@/app/(site)/catalog/game-datasets/page-data";
 import {
   getGrowGardenCatalogConfig,
-  loadGrowGardenCatalogDataset,
+  getPreparedGrowGardenCatalogPageCount,
+  loadPreparedGrowGardenCatalog,
   renderGrowGardenCatalogPage
 } from "@/app/(site)/catalog/grow-a-garden/page-data";
 import {
   getForgeCatalogConfig,
-  loadForgeCatalogDataset,
+  getPreparedForgeCatalogPageCount,
+  loadPreparedForgeCatalog,
   renderForgeCatalogPage
 } from "@/app/(site)/catalog/the-forge/page-data";
 
@@ -106,8 +109,21 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug, collection } = await params;
+  return generateWikiCatalogMetadata({ slug, collection, currentPage: 1 });
+}
+
+export async function generateWikiCatalogMetadata({
+  slug,
+  collection,
+  currentPage
+}: {
+  slug: string;
+  collection: string;
+  currentPage: number;
+}): Promise<Metadata> {
   const context = resolveContext(slug, collection);
-  const canonicalPath = buildWikiCatalogPath(slug, collection);
+  const basePath = buildWikiCatalogPath(slug, collection);
+  const canonicalPath = currentPage <= 1 ? basePath : `${basePath}/page/${currentPage}`;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
 
   if (!context) {
@@ -133,22 +149,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       };
     }
   } else if (context.kind === "grow-a-garden") {
-    const dataset = await loadGrowGardenCatalogDataset(context.config);
-    fallbackTitle = `All ${dataset.items.length.toLocaleString("en-US")} ${context.config.label} in Grow a Garden`;
+    const prepared = await loadPreparedGrowGardenCatalog(context.config);
+    fallbackTitle = `All ${prepared.itemCount.toLocaleString("en-US")} ${context.config.label} in Grow a Garden`;
     fallbackDescription = context.config.description;
   } else {
-    const dataset = await loadForgeCatalogDataset(context.config);
-    fallbackTitle = `All ${dataset.items.length.toLocaleString("en-US")} ${context.config.label} in The Forge`;
+    const prepared = await loadPreparedForgeCatalog(context.config);
+    fallbackTitle = `All ${prepared.itemCount.toLocaleString("en-US")} ${context.config.label} in The Forge`;
     fallbackDescription = context.config.description;
   }
 
-  const title = resolveSeoTitle(page?.seo_title) ?? page?.title ?? fallbackTitle;
-  const description = page?.meta_description ?? fallbackDescription;
+  const baseTitle = resolveSeoTitle(page?.seo_title) ?? page?.title ?? fallbackTitle;
+  const baseDescription = page?.meta_description ?? fallbackDescription;
+  const title = currentPage <= 1 ? baseTitle : `${baseTitle} - Page ${currentPage}`;
+  const description = currentPage <= 1 ? baseDescription : `${baseDescription} Page ${currentPage}.`;
 
   return {
     title,
     description,
     alternates: buildAlternates(canonical),
+    robots: currentPage > 1 ? { index: false, follow: true } : undefined,
     openGraph: {
       type: "website",
       url: canonical,
@@ -168,6 +187,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function WikiCatalogPage({ params }: PageProps) {
   const { slug, collection } = await params;
+  return renderWikiCatalogPage({ slug, collection, currentPage: 1 });
+}
+
+export async function renderWikiCatalogPage({
+  slug,
+  collection,
+  currentPage
+}: {
+  slug: string;
+  collection: string;
+  currentPage: number;
+}) {
   const context = resolveContext(slug, collection);
   if (!context) {
     notFound();
@@ -179,30 +210,60 @@ export default async function WikiCatalogPage({ params }: PageProps) {
     if (!page) {
       notFound();
     }
-    const dataset = await loadGameDatasetCatalogDataset(context.config);
+    const prepared = await loadPreparedGameDatasetCatalog(context.config);
+    if (currentPage > prepared.totalPages) {
+      notFound();
+    }
     const contentHtml = await buildPageContentHtml(page);
     return renderGameDatasetCatalogPage({
       config: context.config,
-      dataset,
-      contentHtml
+      dataset: prepared.dataset,
+      contentHtml,
+      currentPage,
+      prepared
     });
   }
 
   if (context.kind === "grow-a-garden") {
-    const dataset = await loadGrowGardenCatalogDataset(context.config);
+    const prepared = await loadPreparedGrowGardenCatalog(context.config);
+    if (currentPage > prepared.totalPages) {
+      notFound();
+    }
     const contentHtml = await buildPageContentHtml(page);
     return renderGrowGardenCatalogPage({
       config: context.config,
-      dataset,
-      contentHtml
+      dataset: prepared.dataset,
+      contentHtml,
+      currentPage,
+      prepared
     });
   }
 
-  const dataset = await loadForgeCatalogDataset(context.config);
+  const prepared = await loadPreparedForgeCatalog(context.config);
+  if (currentPage > prepared.totalPages) {
+    notFound();
+  }
   const contentHtml = await buildPageContentHtml(page);
   return renderForgeCatalogPage({
     config: context.config,
-    dataset,
-    contentHtml
+    dataset: prepared.dataset,
+    contentHtml,
+    currentPage,
+    prepared
   });
+}
+
+export async function getWikiCatalogPageCount(wikiSlug: string, collectionSlug: string): Promise<number> {
+  const context = resolveContext(wikiSlug, collectionSlug);
+  if (!context) return 1;
+
+  if (context.kind === "generic") {
+    return getPreparedGameDatasetCatalogPageCount(context.config);
+  }
+
+  if (context.kind === "grow-a-garden") {
+    return getPreparedGrowGardenCatalogPageCount(context.config);
+  }
+
+  return getPreparedForgeCatalogPageCount(context.config);
 }

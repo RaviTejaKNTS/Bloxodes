@@ -41,8 +41,19 @@ npm run verify:game-catalog-finals -- --base-url http://localhost:<port> --game 
 
 Use one `--collection` for each approved catalog.
 
-12. If the verifier passes, open each verified `/wiki/<game-slug>/<collection-slug>` link in the Codex Browser.
-13. Return paths, localhost links, blocked catalogs, and remaining risks.
+12. Run the HTML size gate against each verified catalog URL:
+
+```bash
+npm run audit:html-size -- --url http://localhost:<port>/wiki/<game-slug>/<collection-slug> --fail-on-limit
+```
+
+13. If the verifier and size gate pass, open each verified `/wiki/<game-slug>/<collection-slug>` link in the Codex Browser.
+14. For large catalogs with pagination, verify:
+- the section dropdown lists all real sections, not only the current page section
+- choosing a section on another page opens that page at the correct section anchor
+- `/wiki/<game-slug>/<collection-slug>/page/2` returns 200 and has `noindex, follow`
+- paginated catalog URLs are not listed in `/sitemaps/wiki.xml`
+15. Return paths, localhost links, blocked catalogs, size-gate results, pagination checks, and remaining risks.
 
 ## Research Checks
 
@@ -79,7 +90,7 @@ Before approving any final.json, make sure all the following are met:
 - Check if the title follows the pattern `All N <Collection> in <Game>`.
 - Check if the paragraphs add context beyond the cards.
 - Check if `final.json` parses.
-- Check if the verifier and Browser preview look good before calling it done.
+- Check if the verifier, HTML size gate, pagination checks, and Browser preview look good before calling it done.
 
 ## Parent Checks
 
@@ -92,4 +103,4 @@ Before approving any final.json, make sure all the following are met:
 - paragraphs add context beyond the cards
 - no public copy mentions research, datasets, workflow, or page usage
 - `final.json` parses
-- verifier and Browser preview pass before calling it done
+- verifier, HTML size gate, pagination checks, and Browser preview pass before calling it done

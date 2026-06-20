@@ -10,6 +10,7 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
+import { buildCatalogPagination } from "../the-forge/catalog-pagination";
 import {
   buildGameDatasetCatalogPath,
   GAME_DATASET_CATALOGS,
@@ -6295,17 +6296,67 @@ function buildGroupedSections(
     }));
 }
 
+type GameDatasetPreparedCatalog = {
+  dataset: GameDatasetCatalogDataset;
+  viewConfig: GenericViewConfig;
+  groupedSections: ReturnType<typeof buildGroupedSections>;
+  itemCount: number;
+  totalPages: number;
+};
+
+const gameDatasetPreparedCatalogCache = new Map<string, Promise<GameDatasetPreparedCatalog>>();
+
+function buildGameDatasetPreparedCatalog(
+  config: GameDatasetCatalogConfig,
+  dataset: GameDatasetCatalogDataset
+): GameDatasetPreparedCatalog {
+  const { dataset: displayDataset, sectionOverride } = withCatalogSectionOverride(config, dataset);
+  const viewConfig = buildViewConfig(config, displayDataset, sectionOverride);
+  const groupedSections = buildGroupedSections(displayDataset.items, viewConfig.groupKey, sectionOverride?.sectionOrder);
+  const totalPages = buildCatalogPagination({
+    sections: groupedSections,
+    currentPage: 1,
+    basePath: buildGameDatasetCatalogPath(config.code)
+  }).info.totalPages;
+
+  return {
+    dataset: displayDataset,
+    viewConfig,
+    groupedSections,
+    itemCount: displayDataset.items.length,
+    totalPages
+  };
+}
+
+export async function loadPreparedGameDatasetCatalog(
+  config: GameDatasetCatalogConfig
+): Promise<GameDatasetPreparedCatalog> {
+  const cached = gameDatasetPreparedCatalogCache.get(config.code);
+  if (cached) return cached;
+
+  const next = loadGameDatasetCatalogDataset(config).then((dataset) => buildGameDatasetPreparedCatalog(config, dataset));
+  gameDatasetPreparedCatalogCache.set(config.code, next);
+  return next;
+}
+
+export async function getPreparedGameDatasetCatalogPageCount(config: GameDatasetCatalogConfig) {
+  return (await loadPreparedGameDatasetCatalog(config)).totalPages;
+}
+
 export function buildGameDatasetCatalogSidebarSections(
   config: GameDatasetCatalogConfig,
   dataset: GameDatasetCatalogDataset
 ): Array<{ id: string; label: string; count: number }> {
-  const { dataset: displayDataset, sectionOverride } = withCatalogSectionOverride(config, dataset);
-  const viewConfig = buildViewConfig(config, displayDataset, sectionOverride);
-  return buildGroupedSections(displayDataset.items, viewConfig.groupKey, sectionOverride?.sectionOrder).map((section) => ({
+  const prepared = buildGameDatasetPreparedCatalog(config, dataset);
+  return prepared.groupedSections.map((section) => ({
     id: section.id,
     label: section.label,
     count: section.items.length
   }));
+}
+
+export function getGameDatasetCatalogPageCount(config: GameDatasetCatalogConfig, dataset: GameDatasetCatalogDataset) {
+  return buildGameDatasetPreparedCatalog(config, dataset).totalPages;
 }
 
 function pickFirstExistingKey(columns: string[], keys: string[]): string | null {
@@ -6346,16 +6397,20 @@ function buildItemListSchema({
   title,
   description,
   url,
-  items
+  items,
+  positionOffset = 0,
+  totalItems
 }: {
   title: string;
   description: string;
   url: string;
   items: GameDatasetCatalogItem[];
+  positionOffset?: number;
+  totalItems?: number;
 }) {
   const itemListElement = items.map((item, index) => ({
     "@type": "ListItem",
-    position: index + 1,
+    position: positionOffset + index + 1,
     item: {
       "@type": "Thing",
       name: item.name,
@@ -6370,7 +6425,7 @@ function buildItemListSchema({
     name: title,
     description,
     url,
-    numberOfItems: items.length,
+    numberOfItems: totalItems ?? items.length,
     itemListElement
   });
 }
@@ -6395,7 +6450,7 @@ function SectionNav({
   sections,
   className
 }: {
-  sections: Array<{ id: string; label: string; count: number }>;
+  sections: Array<{ id: string; label: string; count: number; href?: string }>;
   className?: string;
 }) {
   if (!sections.length) return null;
@@ -6408,6 +6463,7 @@ function SectionNav({
         value: section.id,
         label: section.label,
         count: section.count,
+        href: section.href,
         targetId: section.id
       }))}
     />
@@ -6417,15 +6473,20 @@ function SectionNav({
 export function renderGameDatasetCatalogPage({
   config,
   dataset,
-  contentHtml
+  contentHtml,
+  currentPage = 1,
+  prepared
 }: {
   config: GameDatasetCatalogConfig;
   dataset: GameDatasetCatalogDataset;
   contentHtml?: GameDatasetCatalogContentHtml | null;
+  currentPage?: number;
+  prepared?: GameDatasetPreparedCatalog;
 }) {
-  const { dataset: displayDataset, sectionOverride } = withCatalogSectionOverride(config, dataset);
+  const preparedCatalog = prepared ?? buildGameDatasetPreparedCatalog(config, dataset);
+  const displayDataset = preparedCatalog.dataset;
   const items = displayDataset.items;
-  const itemCount = items.length;
+  const itemCount = preparedCatalog.itemCount;
   const pageTitle =
     contentHtml?.title?.trim() ||
     `All ${itemCount.toLocaleString("en-US")} ${config.label} in ${config.gameName}`;
@@ -6437,11 +6498,24 @@ export function renderGameDatasetCatalogPage({
   const contentUpdatedAt = contentHtml?.updatedAt ?? null;
   const updatedAt = resolveLatestUpdatedAt([dataUpdatedAt, contentUpdatedAt]);
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
-  const canonicalPath = buildGameDatasetCatalogPath(config.code);
-  const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
+  const basePath = buildGameDatasetCatalogPath(config.code);
   const updatedIso = updatedDate?.toISOString() ?? null;
-  const viewConfig = buildViewConfig(config, displayDataset, sectionOverride);
-  const groupedSections = buildGroupedSections(items, viewConfig.groupKey, sectionOverride?.sectionOrder);
+  const pagination = buildCatalogPagination({
+    sections: preparedCatalog.groupedSections,
+    currentPage,
+    basePath
+  });
+  const pageSections = pagination.sections;
+  const pageItems = pageSections.flatMap((section) => section.items);
+  const canonicalPath =
+    pagination.info.currentPage === 1 ? basePath : `${basePath}/page/${pagination.info.currentPage}`;
+  const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
+  const pageTitleWithPage =
+    pagination.info.currentPage === 1 ? pageTitle : `${pageTitle} - Page ${pagination.info.currentPage}`;
+  const pageDescriptionWithPage =
+    pagination.info.currentPage === 1
+      ? pageDescription
+      : `${pageDescription} Page ${pagination.info.currentPage} of ${pagination.info.totalPages}.`;
   const sectionNoteEntries = new Map<string, { key: string; html: string }>();
   descriptionHtml
     .filter((entry) => entry.key !== DESCRIPTION_MD_KEY)
@@ -6449,8 +6523,8 @@ export function renderGameDatasetCatalogPage({
       sectionNoteEntries.set(toSectionKey(entry.key), entry);
     });
   const usedSectionNoteKeys = new Set<string>();
-  const groupedSectionsWithNotes = groupedSections.map((section) => {
-    const noteEntry = sectionNoteEntries.get(toSectionKey(section.label));
+  const groupedSectionsWithNotes = pageSections.map((section) => {
+    const noteEntry = section.isContinuation ? null : sectionNoteEntries.get(toSectionKey(section.label));
     if (noteEntry) {
       usedSectionNoteKeys.add(toSectionKey(noteEntry.key));
     }
@@ -6460,21 +6534,23 @@ export function renderGameDatasetCatalogPage({
       noteNodes: noteEntry ? renderPageContentNodes(noteEntry.html, `${config.code}-section-note-${section.id}`) : null
     };
   });
-  const detailDescriptionHtml = descriptionHtml.filter(
-    (entry) => entry.key === DESCRIPTION_MD_KEY || !usedSectionNoteKeys.has(toSectionKey(entry.key))
-  );
-  const sectionNav = groupedSections.map((section) => ({
-    id: section.id,
-    label: section.label,
-    count: section.items.length
-  }));
-  const hasDetails = Boolean(detailDescriptionHtml.length) || Boolean(faqHtml.length);
+  const detailDescriptionHtml =
+    pagination.info.currentPage === 1
+      ? descriptionHtml.filter(
+          (entry) => entry.key === DESCRIPTION_MD_KEY || !usedSectionNoteKeys.has(toSectionKey(entry.key))
+        )
+      : [];
+  const sectionNav = pagination.sectionLinks;
+  const hasDetails = pagination.info.currentPage === 1 && (Boolean(detailDescriptionHtml.length) || Boolean(faqHtml.length));
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Wiki", href: "/wiki" },
     { label: config.gameName, href: `/wiki/${config.gameSlug}` },
-    { label: config.label, href: null }
+    {
+      label: pagination.info.currentPage === 1 ? config.label : `${config.label} page ${pagination.info.currentPage}`,
+      href: null
+    }
   ];
 
   const introNodes = introHtml ? renderPageContentNodes(introHtml, `${config.code}-intro`) : null;
@@ -6491,23 +6567,25 @@ export function renderGameDatasetCatalogPage({
       { name: "Home", url: SITE_URL },
       { name: "Wiki", url: `${SITE_URL.replace(/\/$/, "")}/wiki` },
       { name: config.gameName, url: `${SITE_URL.replace(/\/$/, "")}/wiki/${config.gameSlug}` },
-      { name: config.label, url: canonicalUrl }
+      { name: pagination.info.currentPage === 1 ? config.label : `${config.label} page ${pagination.info.currentPage}`, url: canonicalUrl }
     ])
   );
 
   const listSchema = buildItemListSchema({
-    title: pageTitle,
-    description: pageDescription,
+    title: pageTitleWithPage,
+    description: pageDescriptionWithPage,
     url: canonicalUrl,
-    items
+    items: pageItems,
+    positionOffset: pagination.info.pageStartIndex,
+    totalItems: itemCount
   });
 
   const pageSchema = JSON.stringify(
     webPageJsonLd({
       siteUrl: SITE_URL,
       slug: canonicalPath.replace(/^\//, ""),
-      title: pageTitle,
-      description: pageDescription,
+      title: pageTitleWithPage,
+      description: pageDescriptionWithPage,
       image: `${SITE_URL}${FALLBACK_IMAGE}`,
       author: null,
       publishedAt: updatedIso,
@@ -6519,12 +6597,12 @@ export function renderGameDatasetCatalogPage({
     <div className="catalog-surface space-y-10">
       <header className="space-y-4">
         <PageBreadcrumb items={breadcrumbItems} />
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{pageTitle}</h1>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{pageTitleWithPage}</h1>
         <UpdatedTimestamp value={updatedDate} />
       </header>
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
-        {introNodes ? introNodes : null}
+        {pagination.info.currentPage === 1 && introNodes ? introNodes : null}
 
         <CatalogAdSlot />
 
@@ -6533,7 +6611,7 @@ export function renderGameDatasetCatalogPage({
           {sectionNav.length > 1 ? <SectionNav sections={sectionNav} className="max-w-none" /> : null}
         </div>
 
-        <ForgeCatalogView sections={groupedSectionsWithNotes} config={viewConfig} />
+        <ForgeCatalogView sections={groupedSectionsWithNotes} config={preparedCatalog.viewConfig} pagination={pagination.info} />
 
         <CatalogAdSlot />
 
@@ -6552,7 +6630,7 @@ export function renderGameDatasetCatalogPage({
         ) : null}
       </section>
 
-      {contentHtml?.id ? (
+      {pagination.info.currentPage === 1 && contentHtml?.id ? (
         <div className="mt-10">
           <CommentsSection entityType="wiki_catalog" entityId={contentHtml.id} />
         </div>

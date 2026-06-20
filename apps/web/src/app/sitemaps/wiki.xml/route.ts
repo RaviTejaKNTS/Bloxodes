@@ -23,7 +23,7 @@ export async function GET() {
         .filter((row) => row.slug)
         .map((row) => listPublishedWikiCatalogPagesByWikiSlug(row.slug))
     );
-    const wikiCatalogPages: SitemapUrlSetEntry[] = catalogGroups.flat().map((row) => ({
+    const wikiCatalogPages = catalogGroups.flat().map((row) => ({
       loc: withSiteUrl(buildWikiCatalogPath(row.wiki_slug, row.collection_slug)),
       changefreq: "weekly",
       priority: "0.9",

@@ -7,7 +7,7 @@ import {
   buildForgeCatalogCodeCandidates,
   buildForgeCatalogPath,
   getForgeCatalogConfig,
-  loadForgeCatalogDataset
+  loadPreparedForgeCatalog
 } from "./page-data";
 
 export const revalidate = 21600;
@@ -25,8 +25,8 @@ export async function generateForgeCollectionMetadata(collection: string): Promi
     };
   }
 
-  const dataset = await loadForgeCatalogDataset(config);
-  const count = dataset.items.length;
+  const prepared = await loadPreparedForgeCatalog(config);
+  const count = prepared.itemCount;
   const fallbackTitle = `All ${count.toLocaleString("en-US")} ${config.label} in The Forge`;
   const catalog = await getWikiCatalogPageByCode(buildForgeCatalogCodeCandidates(config)[0]);
   const title = resolveSeoTitle(catalog?.seo_title) ?? catalog?.title ?? fallbackTitle;

@@ -27,6 +27,7 @@
     "cloudflare:emergency-cache:off": "node scripts/automation/cloudflare-emergency-cache.mjs off",
     "cloudflare:emergency-cache:status": "node scripts/automation/cloudflare-emergency-cache.mjs status",
     "audit:seo": "tsx scripts/automation/audit-sitemap-seo.ts",
+    "audit:html-size": "tsx scripts/automation/audit-html-size.ts",
     "enqueue:revalidation": "tsx scripts/automation/enqueue-revalidation-events.ts",
     "indexing:google": "tsx scripts/automation/google-indexing-submit.ts",
     "prebuild": "npm run ads:update",

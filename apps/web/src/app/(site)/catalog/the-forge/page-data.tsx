@@ -9,6 +9,7 @@ import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
+import { buildCatalogPagination } from "./catalog-pagination";
 
 const FALLBACK_IMAGE = "/og-image.png";
 
@@ -440,11 +441,15 @@ export function buildForgeCatalogSidebarSections(
   config: ForgeCatalogConfig,
   dataset: ForgeCatalogDataset
 ): Array<{ id: string; label: string; count: number }> {
-  return buildGroupedSections(dataset.items, config.groupKey).map((section) => ({
+  return buildForgePreparedCatalog(config, dataset).groupedSections.map((section) => ({
     id: section.id,
     label: section.label,
     count: section.items.length
   }));
+}
+
+export function getForgeCatalogPageCount(config: ForgeCatalogConfig, dataset: ForgeCatalogDataset) {
+  return buildForgePreparedCatalog(config, dataset).totalPages;
 }
 
 function resolveDataUpdatedAt(meta: ForgeDatasetMeta | null): string | null {
@@ -461,6 +466,44 @@ export async function loadForgeCatalogDataset(config: ForgeCatalogConfig): Promi
     console.error("Failed to load Forge catalog dataset", error);
     return { meta: null, items: [] };
   }
+}
+
+type ForgePreparedCatalog = {
+  dataset: ForgeCatalogDataset;
+  groupedSections: ReturnType<typeof buildGroupedSections>;
+  itemCount: number;
+  totalPages: number;
+};
+
+const forgePreparedCatalogCache = new Map<string, Promise<ForgePreparedCatalog>>();
+
+function buildForgePreparedCatalog(config: ForgeCatalogConfig, dataset: ForgeCatalogDataset): ForgePreparedCatalog {
+  const groupedSections = buildGroupedSections(dataset.items, config.groupKey);
+  const totalPages = buildCatalogPagination({
+    sections: groupedSections,
+    currentPage: 1,
+    basePath: buildForgeCatalogPath(config.slug)
+  }).info.totalPages;
+
+  return {
+    dataset,
+    groupedSections,
+    itemCount: dataset.items.length,
+    totalPages
+  };
+}
+
+export async function loadPreparedForgeCatalog(config: ForgeCatalogConfig): Promise<ForgePreparedCatalog> {
+  const cached = forgePreparedCatalogCache.get(config.slug);
+  if (cached) return cached;
+
+  const next = loadForgeCatalogDataset(config).then((dataset) => buildForgePreparedCatalog(config, dataset));
+  forgePreparedCatalogCache.set(config.slug, next);
+  return next;
+}
+
+export async function getPreparedForgeCatalogPageCount(config: ForgeCatalogConfig) {
+  return (await loadPreparedForgeCatalog(config)).totalPages;
 }
 
 export function ForgeCatalogNav({
@@ -492,7 +535,7 @@ function ForgeSectionNav({
   sections,
   className
 }: {
-  sections: Array<{ id: string; label: string; count: number }>;
+  sections: Array<{ id: string; label: string; count: number; href?: string }>;
   className?: string;
 }) {
   if (!sections.length) return null;
@@ -505,6 +548,7 @@ function ForgeSectionNav({
         value: section.id,
         label: section.label,
         count: section.count,
+        href: section.href,
         targetId: section.id
       }))}
     />
@@ -515,19 +559,23 @@ export function buildForgeItemListSchema({
   title,
   description,
   url,
-  items
+  items,
+  positionOffset = 0,
+  totalItems
 }: {
   title: string;
   description: string;
   url: string;
   items: ForgeCatalogItem[];
+  positionOffset?: number;
+  totalItems?: number;
 }) {
   const itemListElement = items.map((item, index) => {
     const image = resolveAbsoluteUrl(item.image ?? FALLBACK_IMAGE);
     const itemUrl = `${url}#item-${item.id}`;
     return {
       "@type": "ListItem",
-      position: index + 1,
+      position: positionOffset + index + 1,
       item: {
         "@type": "Thing",
         name: item.name,
@@ -543,7 +591,7 @@ export function buildForgeItemListSchema({
     name: title,
     description,
     url,
-    numberOfItems: items.length,
+    numberOfItems: totalItems ?? items.length,
     itemListElement
   });
 }
@@ -551,39 +599,57 @@ export function buildForgeItemListSchema({
 export function renderForgeCatalogPage({
   config,
   dataset,
-  contentHtml
+  contentHtml,
+  currentPage = 1,
+  prepared
 }: {
   config: ForgeCatalogConfig;
   dataset: ForgeCatalogDataset;
   contentHtml?: CatalogContentHtml | null;
+  currentPage?: number;
+  prepared?: ForgePreparedCatalog;
 }) {
-  const items = dataset.items;
-  const itemCount = items.length;
+  const preparedCatalog = prepared ?? buildForgePreparedCatalog(config, dataset);
+  const items = preparedCatalog.dataset.items;
+  const itemCount = preparedCatalog.itemCount;
   const pageTitle = `All ${itemCount.toLocaleString("en-US")} ${config.label} in The Forge`;
   const pageDescription = config.description;
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml.introHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const faqHtml = contentHtml?.faqHtml ?? [];
-  const dataUpdatedAt = resolveDataUpdatedAt(dataset.meta);
+  const dataUpdatedAt = resolveDataUpdatedAt(preparedCatalog.dataset.meta);
   const contentUpdatedAt = contentHtml?.updatedAt ?? null;
   const updatedAt = dataUpdatedAt ?? contentUpdatedAt;
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
-  const canonicalPath = buildForgeCatalogPath(config.slug);
+  const basePath = buildForgeCatalogPath(config.slug);
+  const pagination = buildCatalogPagination({
+    sections: preparedCatalog.groupedSections,
+    currentPage,
+    basePath
+  });
+  const pageSections = pagination.sections;
+  const pageItems = pageSections.flatMap((section) => section.items);
+  const canonicalPath =
+    pagination.info.currentPage === 1 ? basePath : `${basePath}/page/${pagination.info.currentPage}`;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
+  const pageTitleWithPage =
+    pagination.info.currentPage === 1 ? pageTitle : `${pageTitle} - Page ${pagination.info.currentPage}`;
+  const pageDescriptionWithPage =
+    pagination.info.currentPage === 1
+      ? pageDescription
+      : `${pageDescription} Page ${pagination.info.currentPage} of ${pagination.info.totalPages}.`;
   const updatedIso = updatedDate?.toISOString() ?? null;
-  const groupedSections = buildGroupedSections(items, config.groupKey);
-  const sectionNav = groupedSections.map((section) => ({
-    id: section.id,
-    label: section.label,
-    count: section.items.length
-  }));
-  const hasDetails = Boolean(descriptionHtml.length) || Boolean(faqHtml.length);
+  const sectionNav = pagination.sectionLinks;
+  const hasDetails = pagination.info.currentPage === 1 && (Boolean(descriptionHtml.length) || Boolean(faqHtml.length));
 
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
     { label: "Wiki", href: "/wiki" },
     { label: "The Forge", href: "/wiki/the-forge" },
-    { label: config.label, href: null }
+    {
+      label: pagination.info.currentPage === 1 ? config.label : `${config.label} page ${pagination.info.currentPage}`,
+      href: null
+    }
   ];
 
   const breadcrumbSchema = JSON.stringify(
@@ -591,23 +657,25 @@ export function renderForgeCatalogPage({
       { name: "Home", url: SITE_URL },
       { name: "Wiki", url: `${SITE_URL.replace(/\/$/, "")}/wiki` },
       { name: "The Forge", url: `${SITE_URL.replace(/\/$/, "")}/wiki/the-forge` },
-      { name: config.label, url: canonicalUrl }
+      { name: pagination.info.currentPage === 1 ? config.label : `${config.label} page ${pagination.info.currentPage}`, url: canonicalUrl }
     ])
   );
 
   const listSchema = buildForgeItemListSchema({
-    title: pageTitle,
-    description: pageDescription,
+    title: pageTitleWithPage,
+    description: pageDescriptionWithPage,
     url: canonicalUrl,
-    items
+    items: pageItems,
+    positionOffset: pagination.info.pageStartIndex,
+    totalItems: itemCount
   });
 
   const pageSchema = JSON.stringify(
     webPageJsonLd({
       siteUrl: SITE_URL,
       slug: canonicalPath.replace(/^\//, ""),
-      title: pageTitle,
-      description: pageDescription,
+      title: pageTitleWithPage,
+      description: pageDescriptionWithPage,
       image: `${SITE_URL}/og-image.png`,
       author: null,
       publishedAt: updatedIso,
@@ -627,12 +695,12 @@ export function renderForgeCatalogPage({
     <div className="catalog-surface space-y-10">
       <header className="space-y-4">
         <ForgeBreadcrumb items={breadcrumbNavItems} />
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{pageTitle}</h1>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{pageTitleWithPage}</h1>
         <UpdatedTimestamp value={updatedDate} />
       </header>
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
-        {introNodes ? introNodes : null}
+        {pagination.info.currentPage === 1 && introNodes ? introNodes : null}
 
         <CatalogAdSlot />
 
@@ -641,7 +709,7 @@ export function renderForgeCatalogPage({
           {sectionNav.length > 1 ? <ForgeSectionNav sections={sectionNav} className="max-w-none" /> : null}
         </div>
 
-        <ForgeCatalogView sections={groupedSections} config={config} />
+        <ForgeCatalogView sections={pageSections} config={config} pagination={pagination.info} />
 
         <CatalogAdSlot />
 
@@ -660,7 +728,7 @@ export function renderForgeCatalogPage({
         ) : null}
       </section>
 
-      {contentHtml?.id ? (
+      {pagination.info.currentPage === 1 && contentHtml?.id ? (
         <div className="mt-10">
           <CommentsSection entityType="wiki_catalog" entityId={contentHtml.id} />
         </div>
