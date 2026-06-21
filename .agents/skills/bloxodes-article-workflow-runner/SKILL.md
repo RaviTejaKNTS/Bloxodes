@@ -65,6 +65,7 @@ Check:
 - title, slug, meta, tags, sources, and universe ID make sense
 - game-specific article titles and slugs include the game name; use `Roblox` wording when it helps readers understand the topic
 - `content_md` answers the approved brief
+- `faq_json` answers useful follow-up questions without repeating the article body
 - the opening starts with the topic, action, or problem
 - every section adds value
 - language is simple enough for Roblox players

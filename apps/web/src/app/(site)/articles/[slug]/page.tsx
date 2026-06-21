@@ -7,7 +7,9 @@ import "@/styles/article-content.css";
 import { AuthorCard } from "@/components/AuthorCard";
 import { SocialShare } from "@/components/SocialShare";
 import { CodeBlockEnhancer } from "@/components/CodeBlockEnhancer";
+import { ContentFaq } from "@/components/ContentFaq";
 import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
+import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
 import { processHtmlLinks } from "@/lib/link-utils";
 import { buildImageGalleries } from "@/lib/article-galleries";
 import { authorAvatarUrl } from "@/lib/avatar";
@@ -61,6 +63,16 @@ function collectAuthorSameAs(author?: Author | null): string[] {
   if (!author) return [];
   const socials = collectAuthorSocials(author);
   return Array.from(new Set(socials.map((link) => link.url)));
+}
+
+function normalizeArticleFaqEntries(value: ArticleWithRelations["faq_json"]) {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((entry) => ({
+      q: typeof entry?.q === "string" ? entry.q.trim() : "",
+      a: typeof entry?.a === "string" ? entry.a.trim() : ""
+    }))
+    .filter((entry) => entry.q && entry.a);
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
@@ -124,10 +136,23 @@ async function renderArticlePage(article: ArticleWithRelations) {
     ? `${SITE_URL.replace(/\/$/, "")}/${article.cover_image.replace(/^\//, "")}`
     : null;
   const descriptionPlain = (article.meta_description || markdownToPlainText(article.content_md)).trim();
-  const [articleHtml, authorBioHtml] = await Promise.all([
+  const faqEntries = normalizeArticleFaqEntries(article.faq_json);
+  const [articleHtml, authorBioHtml, faqHtml] = await Promise.all([
     renderMarkdown(article.content_md),
-    article.author?.bio_md ? renderMarkdown(article.author.bio_md) : Promise.resolve("")
+    article.author?.bio_md ? renderMarkdown(article.author.bio_md) : Promise.resolve(""),
+    Promise.all(faqEntries.map((entry) => renderMarkdown(entry.a, { paragraphizeLineBreaks: true })))
   ]);
+  const faqItems = faqEntries.map((entry, index) => ({
+    id: `${article.slug}-faq-${index}`,
+    question: entry.q,
+    answer: (
+      <>
+        {renderHtmlAsReactNodes(processHtmlLinks(faqHtml[index] ?? "").__html, {
+          keyPrefix: `${article.slug}-faq-${index}`
+        })}
+      </>
+    )
+  }));
 
   const universeId = (article as any).universe_id ?? null;
   const universeLabel = article.universe?.display_name ?? article.universe?.name ?? article.title;
@@ -194,6 +219,20 @@ async function renderArticlePage(article: ArticleWithRelations) {
           description: `Step-by-step guide derived from "${article.title}".`
         })
       )
+    : null;
+  const faqData = faqEntries.length
+    ? JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqEntries.map((entry) => ({
+          "@type": "Question",
+          name: entry.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: markdownToPlainText(entry.a)
+          }
+        }))
+      })
     : null;
 
   const structuredData = {
@@ -361,6 +400,8 @@ async function renderArticlePage(article: ArticleWithRelations) {
         />
         <ArticleImageLightbox />
 
+        {faqItems.length ? <ContentFaq items={faqItems} className="mt-10 border-t border-border/60 pt-6" /> : null}
+
         {article.author ? (
           <AuthorCard author={article.author} bioHtml={processedAuthorBioHtml ?? ""} />
         ) : null}
@@ -373,6 +414,7 @@ async function renderArticlePage(article: ArticleWithRelations) {
         {articleHowToData ? (
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: articleHowToData }} />
         ) : null}
+        {faqData ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqData }} /> : null}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbData }} />
       <CodeBlockEnhancer />
       </article>

@@ -32,6 +32,8 @@ Start by checking if we have already covered in this article on the production d
 
 6. Only one you have searched all the sources and only when you think there are no gaps in the info, then continue and write `brief.md`.
 
+7. Note useful FAQ questions only when they answer real follow-up points that do not fit naturally inside the article body.
+
 ## Article Outline
 
 In the `brief.md`, you need to include the article outline. Follow these rules:
@@ -66,6 +68,7 @@ Article plan:
 - Reader need:
 - Facts to use:
 - Facts to avoid:
+- FAQ opportunities:
 - Open gaps or risks:
 
 Outline:

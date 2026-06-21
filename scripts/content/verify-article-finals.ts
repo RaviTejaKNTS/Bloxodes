@@ -16,7 +16,13 @@ type ArticleFinal = {
   universe_id?: number | null;
   tags?: string[];
   sources?: string[];
+  faq_json?: ArticleFaqEntry[] | null;
   is_published?: boolean;
+};
+
+type ArticleFaqEntry = {
+  q: string;
+  a: string;
 };
 
 type CliOptions = {
@@ -37,6 +43,7 @@ type ArticleRow = {
   meta_description: string | null;
   tags: unknown;
   sources: unknown;
+  faq_json: unknown;
   published_at: string | null;
 };
 
@@ -119,7 +126,25 @@ async function readArticleFinal(filePath: string): Promise<ArticleFinal> {
     title: parsed.title.trim(),
     slug: parsed.slug.trim().toLowerCase(),
     content_md: parsed.content_md.trim(),
+    faq_json: normalizeFaqJson((parsed as ArticleFinal).faq_json, filePath),
   };
+}
+
+function normalizeFaqJson(value: unknown, label: string): ArticleFaqEntry[] {
+  if (value == null) return [];
+  if (!Array.isArray(value)) throw new Error(`${label} faq_json must be an array`);
+
+  return value.map((entry, index) => {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
+      throw new Error(`${label} faq_json[${index}] must be an object`);
+    }
+
+    const candidate = entry as { q?: unknown; a?: unknown };
+    const q = typeof candidate.q === "string" ? candidate.q.trim() : "";
+    const a = typeof candidate.a === "string" ? candidate.a.trim() : "";
+    if (!q || !a) throw new Error(`${label} faq_json[${index}] must include non-empty q and a strings`);
+    return { q, a };
+  });
 }
 
 function runCommand(command: string, args: string[]) {
@@ -168,6 +193,11 @@ function assertRowMatchesFinal(row: ArticleRow | null, finalJson: ArticleFinal) 
   if (finalJson.meta_description && row.meta_description !== finalJson.meta_description) {
     throw new Error(`Readback meta_description mismatch for ${finalJson.slug}`);
   }
+  const expectedFaq = normalizeFaqJson(finalJson.faq_json, finalJson.slug);
+  const actualFaq = normalizeFaqJson(row.faq_json, `${finalJson.slug} readback`);
+  if (JSON.stringify(actualFaq) !== JSON.stringify(expectedFaq)) {
+    throw new Error(`Readback faq_json mismatch for ${finalJson.slug}`);
+  }
 }
 
 async function readBackRows(finals: ArticleFinal[]) {
@@ -176,7 +206,7 @@ async function readBackRows(finals: ArticleFinal[]) {
   const { data, error } = await sb
     .from("articles")
     .select(
-      "id,title,slug,content_md,cover_image,author_id,universe_id,is_published,word_count,meta_description,tags,sources,published_at"
+      "id,title,slug,content_md,cover_image,author_id,universe_id,is_published,word_count,meta_description,tags,sources,faq_json,published_at"
     )
     .in("slug", slugs);
 

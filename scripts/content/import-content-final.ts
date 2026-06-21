@@ -24,7 +24,13 @@ type ArticleFinal = {
   universe_id?: number | null;
   tags?: string[];
   sources?: string[];
+  faq_json?: ArticleFaqEntry[] | null;
   is_published?: boolean;
+};
+
+type ArticleFaqEntry = {
+  q: string;
+  a: string;
 };
 
 type SupabaseAdminClient = ReturnType<typeof supabaseAdmin>;
@@ -132,6 +138,23 @@ function wordCount(markdown: string): number {
 function isArticleFinal(value: unknown): value is ArticleFinal {
   const candidate = value as Partial<ArticleFinal>;
   return Boolean(candidate?.slug && candidate?.title && candidate?.content_md);
+}
+
+function normalizeFaqJson(value: unknown, label: string): ArticleFaqEntry[] {
+  if (value == null) return [];
+  if (!Array.isArray(value)) throw new Error(`${label} faq_json must be an array`);
+
+  return value.map((entry, index) => {
+    if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
+      throw new Error(`${label} faq_json[${index}] must be an object`);
+    }
+
+    const candidate = entry as { q?: unknown; a?: unknown };
+    const q = typeof candidate.q === "string" ? candidate.q.trim() : "";
+    const a = typeof candidate.a === "string" ? candidate.a.trim() : "";
+    if (!q || !a) throw new Error(`${label} faq_json[${index}] must include non-empty q and a strings`);
+    return { q, a };
+  });
 }
 
 function isChecklistFinal(value: unknown): value is ChecklistFinal {
@@ -402,6 +425,7 @@ async function importArticle(finalJson: ArticleFinal, dryRun: boolean) {
     meta_description: finalJson.meta_description ?? null,
     tags: finalJson.tags ?? [],
     sources: finalJson.sources ?? [],
+    faq_json: normalizeFaqJson(finalJson.faq_json, slug),
   };
 
   if (existing?.published_at && isPublished) {

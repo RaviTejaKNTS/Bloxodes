@@ -3262,7 +3262,8 @@ CREATE TABLE IF NOT EXISTS "public"."articles" (
     "meta_description" "text",
     "universe_id" bigint,
     "tags" "text"[] DEFAULT '{}'::"text"[] NOT NULL,
-    "sources" "text"[] DEFAULT '{}'::"text"[] NOT NULL
+    "sources" "text"[] DEFAULT '{}'::"text"[] NOT NULL,
+    "faq_json" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL
 );
 
 
@@ -3409,6 +3410,8 @@ CREATE OR REPLACE VIEW "public"."article_pages_view" WITH ("security_invoker"='t
     "art"."meta_description",
     "art"."universe_id",
     "art"."tags",
+    "art"."sources",
+    "art"."faq_json",
         CASE
             WHEN ("a"."id" IS NULL) THEN NULL::"jsonb"
             ELSE "jsonb_build_object"('id', "a"."id", 'name', "a"."name", 'slug', "a"."slug", 'gravatar_email', "a"."gravatar_email", 'avatar_url', "a"."avatar_url", 'bio_md', "a"."bio_md", 'twitter', "a"."twitter", 'youtube', "a"."youtube", 'website', "a"."website", 'facebook', "a"."facebook", 'linkedin', "a"."linkedin", 'instagram', "a"."instagram", 'roblox', "a"."roblox", 'discord', "a"."discord", 'created_at', "a"."created_at", 'updated_at', "a"."updated_at")

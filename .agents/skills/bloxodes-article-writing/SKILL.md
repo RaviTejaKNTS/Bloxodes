@@ -1,6 +1,6 @@
 ---
 name: bloxodes-article-writing
-description: Write one Bloxodes article final.json from an approved brief.md. Use after bloxodes-article-research and parent approval for Roblox how-tos, focused guides, comparisons, news tests approved for /articles, content_md, tags, sources, and article metadata.
+description: Write one Bloxodes article final.json from an approved brief.md. Use after bloxodes-article-research and parent approval for Roblox how-tos, focused guides, comparisons, news tests approved for /articles, content_md, faq_json, tags, sources, and article metadata.
 ---
 
 # Bloxodes Article Writing
@@ -67,6 +67,7 @@ Write `final.json` only.
 - `slug`: Use a short stable editorial slug for the article topic. Include the game name for game-specific articles.
 - `meta_description`: Summarize the answer or reader outcome in one specific search snippet.
 - `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy.
+- `faq_json`: Add 2-4 useful questions only when they cover follow-up points not already answered in the article. Keep answers short, clear, and source-backed. Use `[]` if FAQs would repeat the body.
 - `cover_image`: final image URL or path.
 - `author_id`: Set when known, or let the import path assign it if that is the project flow.
 - `universe_id`: Set only when the article belongs to one Roblox game.
@@ -83,6 +84,7 @@ Parse-check JSON before returning.
   "slug": "",
   "meta_description": "",
   "content_md": "",
+  "faq_json": [],
   "cover_image": null,
   "author_id": null,
   "universe_id": null,

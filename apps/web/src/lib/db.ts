@@ -85,6 +85,12 @@ export type Article = {
   meta_description: string | null;
   sources: string[];
   tags: string[];
+  faq_json: ArticleFaqEntry[];
+};
+
+export type ArticleFaqEntry = {
+  q: string;
+  a: string;
 };
 
 export type UniverseSummary = {
@@ -1036,6 +1042,7 @@ function mapArticleIndexRows(rows: unknown[] | null | undefined): ArticleWithRel
     content_md: "",
     tags: [],
     sources: [],
+    faq_json: [],
     word_count: null,
     author: (row as any).author ?? null,
     universe: (row as any).universe ?? null
