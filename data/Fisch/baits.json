@@ -73,7 +73,7 @@
       "Rows come from the current Template:Baits list transcluded on the Fisch Wiki Baits page.",
       "The template has 66 row entries, but Umbrella appears twice with matching stats; this dataset stores 65 unique bait cards.",
       "The Baits page stat tables mention additional stat-only bait names not present in the rendered Baits List; those were not added as catalog cards without full row/list support.",
-      "Item images are intentionally not wired because clean local row images were not collected in this pass."
+      "Item images are collected under /Fisch/Baits/ from Fisch Wiki/Fandom source files."
     ]
   },
   "items": [
@@ -93,8 +93,8 @@
       "obtainment": "Low-tier bait source not itemized on the Baits page.",
       "cardSummary": "Ant is a Trash bait with preferred luck (40%), universal luck (5%), slower lure speed (-10%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Ant.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/ant.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Ant.png."
     },
     {
       "id": "bagel",
@@ -109,8 +109,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Bagel is a Common bait with preferred luck (25%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Bagel.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/bagel.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Bagel.png."
     },
     {
       "id": "worm",
@@ -125,8 +125,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Worm is a Common bait with preferred luck (25%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Worm.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/worm.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Worm.png."
     },
     {
       "id": "insect",
@@ -141,8 +141,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Insect is a Common bait with preferred luck (35%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Insect.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/insect.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Insect.png."
     },
     {
       "id": "flakes",
@@ -158,8 +158,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Flakes is a Common bait with preferred luck (55%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Flakes.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/flakes.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Flakes.png."
     },
     {
       "id": "garbage",
@@ -175,8 +175,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Garbage is a Common bait with slower lure speed (-5%), high resilience (50%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Garbage New.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/garbage.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Garbage New.png."
     },
     {
       "id": "lushrooms",
@@ -193,8 +193,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Lushrooms is a Common bait with preferred luck (50%), universal luck (20%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Lushrooms.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/lushrooms.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Lushrooms.png."
     },
     {
       "id": "maggot",
@@ -209,8 +209,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Maggot is a Uncommon bait with universal luck (35%), slower lure speed (-10%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Maggot.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/maggot.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Maggot.png."
     },
     {
       "id": "shrimp",
@@ -226,8 +226,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Shrimp is a Uncommon bait with preferred luck (45%), universal luck (25%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Shrimp.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/shrimp.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Shrimp.png."
     },
     {
       "id": "beetle-grub",
@@ -246,8 +246,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Beetle Grub is a Uncommon bait with preferred luck (70%), universal luck (15%), slower lure speed (-5%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists BeetleGrub.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/beetle-grub.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file BeetleGrub.png."
     },
     {
       "id": "snail",
@@ -265,8 +265,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Snail is a Rare bait with preferred luck (80%), slower lure speed (-20%), 0.1 control.",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Snail.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/snail.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Snail.png."
     },
     {
       "id": "coal",
@@ -281,8 +281,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Coal is a Rare bait with preferred luck (45%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Coal baits.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/coal.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Coal baits.png."
     },
     {
       "id": "rapid-catcher",
@@ -297,8 +297,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Rapid Catcher is a Rare bait with simple stat trade-offs.",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Rapid catchers.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/rapid-catcher.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Rapid catchers.png."
     },
     {
       "id": "glass-beetle",
@@ -315,8 +315,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Glass Beetle is a Rare bait with preferred luck (125%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Glass beetle.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/glass-beetle.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Glass beetle.png."
     },
     {
       "id": "phantom-leech",
@@ -333,8 +333,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Phantom Leech is a Rare bait with preferred luck (55%), universal luck (30%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Phantom leech.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/phantom-leech.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Phantom leech.png."
     },
     {
       "id": "crystal-bananas",
@@ -351,8 +351,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Crystal Bananas is a Rare bait with preferred luck (150%), universal luck (90%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists CrystalBananas.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/crystal-bananas.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file CrystalBananas.png."
     },
     {
       "id": "cricket",
@@ -368,8 +368,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Cricket is a Unusual bait with preferred luck (90%), universal luck (25%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Cricket.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/cricket.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Cricket.png."
     },
     {
       "id": "squid",
@@ -385,8 +385,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Squid is a Unusual bait with preferred luck (55%), universal luck (45%), slower lure speed (-25%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Squid bait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/squid.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Squid bait.png."
     },
     {
       "id": "seaweed",
@@ -402,8 +402,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Seaweed is a Unusual bait with preferred luck (35%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Seaweedbait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/seaweed.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Seaweedbait.png."
     },
     {
       "id": "minnow",
@@ -418,8 +418,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Minnow is a Unusual bait with preferred luck (65%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Minnowbait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/minnow.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Minnowbait.png."
     },
     {
       "id": "coral",
@@ -434,8 +434,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Coral is a Unusual bait with simple stat trade-offs.",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Coral.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/coral.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Coral.png."
     },
     {
       "id": "ember-berries",
@@ -452,8 +452,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Ember Berries is a Unusual bait with preferred luck (120%), universal luck (45%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists EmberBerries.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/ember-berries.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file EmberBerries.png."
     },
     {
       "id": "peppermint-worm",
@@ -470,8 +470,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Peppermint Worm is a Unusual bait with preferred luck (50%), universal luck (30%), slower lure speed (-5%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Peppermint Worm.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/peppermint-worm.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Peppermint Worm.png."
     },
     {
       "id": "truffle-worm",
@@ -486,8 +486,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Truffle Worm is a Legendary bait with strong preferred luck (300%), slower lure speed (-10%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Truffle Worms.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/truffle-worm.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Truffle Worms.png."
     },
     {
       "id": "weird-algae",
@@ -502,8 +502,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Weird Algae is a Legendary bait with strong universal luck (200%), slower lure speed (-35%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Weird algae.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/weird-algae.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Weird algae.png."
     },
     {
       "id": "fish-head",
@@ -519,8 +519,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Fish Head is a Legendary bait with preferred luck (150%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Fish Head.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/fish-head.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Fish Head.png."
     },
     {
       "id": "night-shrimp",
@@ -535,8 +535,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Night Shrimp is a Legendary bait with universal luck (90%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Night Shrimp Bait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/night-shrimp.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Night Shrimp Bait.png."
     },
     {
       "id": "instant-catcher",
@@ -552,8 +552,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Instant Catcher is a Legendary bait with fast lure speed (65%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Instant Catcher.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/instant-catcher.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Instant Catcher.png."
     },
     {
       "id": "deep-coral",
@@ -568,8 +568,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Deep Coral is a Legendary bait with high resilience (50%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Deep Coral.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/deep-coral.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Deep Coral.png."
     },
     {
       "id": "holly-berry",
@@ -586,8 +586,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Holly Berry is a Legendary bait with preferred luck (80%), universal luck (30%), slower lure speed (-5%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Holly Berry.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/holly-berry.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Holly Berry.png."
     },
     {
       "id": "kraken-tentacle",
@@ -604,8 +604,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Kraken Tentacle is a Legendary bait with preferred luck (100%), universal luck (35%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists KrakenTentacle.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/kraken-tentacle.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file KrakenTentacle.png."
     },
     {
       "id": "neuro-slug",
@@ -622,8 +622,8 @@
       "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
       "cardSummary": "Neuro Slug is a Legendary bait with preferred luck (90%), universal luck (100%), slower lure speed (-20%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Neuro slug.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/neuro-slug.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Neuro slug.png."
     },
     {
       "id": "stag-beetle",
@@ -642,8 +642,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Stag Beetle is a Mythical bait with preferred luck (120%), universal luck (35%), 10% slash chance.",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists SlagBeetle.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/stag-beetle.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file SlagBeetle.png."
     },
     {
       "id": "nightmare-larva",
@@ -660,8 +660,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Nightmare Larva is a Mythical bait with preferred luck (120%), universal luck (35%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists NightmareLarva.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/nightmare-larva.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file NightmareLarva.png."
     },
     {
       "id": "chocolate-fish",
@@ -678,8 +678,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Chocolate Fish is a Mythical bait with strong preferred luck (200%), strong universal luck (150%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Chocolate Fish.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/chocolate-fish.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Chocolate Fish.png."
     },
     {
       "id": "lucky",
@@ -696,8 +696,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Lucky is a Mythical bait with strong preferred luck (200%), strong universal luck (150%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Lucky_Bait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/lucky.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Lucky_Bait.png."
     },
     {
       "id": "moonhaze",
@@ -714,8 +714,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Moonhaze is a Mythical bait with strong preferred luck (225%), strong universal luck (230%), fast lure speed (60%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Moonhaze.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/moonhaze.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Moonhaze.png."
     },
     {
       "id": "umbrella",
@@ -733,8 +733,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Umbrella is a Mythical bait with preferred luck (125%), universal luck (50%), fast lure speed (50%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Umbrella.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/umbrella.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Umbrella.png."
     },
     {
       "id": "dragonfly",
@@ -752,8 +752,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Dragonfly is a Exotic bait with preferred luck (160%), universal luck (50%), +20% progress boost.",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Dragonfly.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/dragonfly.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Dragonfly.png."
     },
     {
       "id": "golden-worm",
@@ -770,8 +770,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Golden Worm is a Exotic bait with strong preferred luck (200%), universal luck (100%), high resilience (45%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Goldenwormimage.webp; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/golden-worm.webp",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Goldenwormimage.webp."
     },
     {
       "id": "luminous-larva",
@@ -788,8 +788,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Luminous Larva is a Exotic bait with strong preferred luck (200%), strong universal luck (175%), high resilience (50%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists LuminousLarva.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/luminous-larva.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file LuminousLarva.png."
     },
     {
       "id": "glowworm",
@@ -808,8 +808,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Glowworm is a Secret bait with strong preferred luck (300%), universal luck (100%), Glowy mutation.",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Glowworm.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/glowworm.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Glowworm.png."
     },
     {
       "id": "crawlurion",
@@ -826,8 +826,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Crawlurion is a Secret bait with preferred luck (25%), universal luck (30%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Crawlurion.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/crawlurion.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Crawlurion.png."
     },
     {
       "id": "astrolure",
@@ -846,8 +846,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Astrolure is a Secret bait with preferred luck (175%), universal luck (60%), fast lure speed (90%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Astrolure.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/astrolure.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Astrolure.png."
     },
     {
       "id": "nullbit",
@@ -866,8 +866,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Nullbit is a Secret bait with preferred luck (120%), universal luck (120%), fast lure speed (60%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Nullbit.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/nullbit.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Nullbit.png."
     },
     {
       "id": "snare",
@@ -885,8 +885,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Snare is a Secret bait with preferred luck (125%), fast lure speed (80%), 1x XP boost.",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Snare.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/snare.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Snare.png."
     },
     {
       "id": "starlight-worm",
@@ -904,8 +904,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Starlight Worm is a Secret bait with strong preferred luck (300%), universal luck (100%), +20% progress boost.",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists StarlightWorm.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/starlight-worm.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file StarlightWorm.png."
     },
     {
       "id": "gourd-bites",
@@ -921,8 +921,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Gourd Bites is a Limited bait with preferred luck (100%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists GourdBites.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/gourd-bites.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file GourdBites.png."
     },
     {
       "id": "pumpkin-pieces",
@@ -938,8 +938,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Pumpkin Pieces is a Limited bait with preferred luck (120%), high resilience (50%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists PumpkinPieces.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/pumpkin-pieces.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file PumpkinPieces.png."
     },
     {
       "id": "cranberry-cluster",
@@ -955,8 +955,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Cranberry Cluster is a Limited bait with preferred luck (70%), fast lure speed (60%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists CranberryCluster.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/cranberry-cluster.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file CranberryCluster.png."
     },
     {
       "id": "tryhard-worm",
@@ -972,8 +972,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Tryhard Worm is a Limited bait with strong preferred luck (5000%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists TryhardWorm.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/tryhard-worm.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file TryhardWorm.png."
     },
     {
       "id": "meteor",
@@ -990,8 +990,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Meteor is a Limited bait with preferred luck (55%), universal luck (65%), high resilience (100%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists MeteorBait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/meteor.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file MeteorBait.png."
     },
     {
       "id": "beach-ball",
@@ -1008,8 +1008,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Beach Ball is a Limited bait with preferred luck (5%), universal luck (5%), fast lure speed (150%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists BeachBall.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/beach-ball.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file BeachBall.png."
     },
     {
       "id": "beached-pearl",
@@ -1026,8 +1026,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Beached Pearl is a Limited bait with strong preferred luck (250%), strong universal luck (300%), fast lure speed (95%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists BeachedPearl.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/beached-pearl.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file BeachedPearl.png."
     },
     {
       "id": "stud-bait",
@@ -1044,8 +1044,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Stud Bait is a Limited bait with preferred luck (150%), universal luck (40%), fast lure speed (50%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists StudBait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/stud-bait.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file StudBait.png."
     },
     {
       "id": "colossal-ink-bait",
@@ -1063,8 +1063,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Colossal Ink Bait is a Limited bait with preferred luck (150%), strong universal luck (150%), high resilience (40%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists ColossalInkBait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/colossal-ink-bait.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file ColossalInkBait.png."
     },
     {
       "id": "hourglass-bait",
@@ -1083,8 +1083,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Hourglass Bait is a Limited bait with preferred luck (150%), strong universal luck (150%), high resilience (40%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists HourglassBait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/hourglass-bait.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file HourglassBait.png."
     },
     {
       "id": "golden-shrimp-bait",
@@ -1101,8 +1101,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Golden Shrimp Bait is a Limited bait with preferred luck (120%), universal luck (90%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists GoldenShrimpBait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/golden-shrimp-bait.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file GoldenShrimpBait.png."
     },
     {
       "id": "whale-bait",
@@ -1119,8 +1119,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Whale Bait is a Limited bait with preferred luck (180%), universal luck (20%), slower lure speed (-5%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists WhaleBait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/whale-bait.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file WhaleBait.png."
     },
     {
       "id": "gobstopper",
@@ -1137,8 +1137,8 @@
       "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
       "cardSummary": "Gobstopper is a Limited bait with strong preferred luck (500%), strong universal luck (500%), slower lure speed (-50%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Gobstopper.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/gobstopper.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Gobstopper.png."
     },
     {
       "id": "star",
@@ -1157,8 +1157,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Star is a Special bait with preferred luck (120%), universal luck (120%), fast lure speed (100%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Star.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/star.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Star.png."
     },
     {
       "id": "golden-coin",
@@ -1177,8 +1177,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Golden Coin is a Special bait with strong preferred luck (1000%), strong universal luck (1000%), Radiant mutation.",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists GoldenCoin.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/golden-coin.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file GoldenCoin.png."
     },
     {
       "id": "singularity",
@@ -1197,8 +1197,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Singularity is a Special bait with slower lure speed (-20%), high resilience (150%), Surreal mutation.",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists Singularity.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/singularity.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file Singularity.png."
     },
     {
       "id": "ufo",
@@ -1217,8 +1217,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "UFO is a Special bait with preferred luck (110%), strong universal luck (177%), fast lure speed (77%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists UFO.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/ufo.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file UFO.png."
     },
     {
       "id": "taco",
@@ -1236,8 +1236,8 @@
       "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
       "cardSummary": "Taco is a Special bait with preferred luck (100%), universal luck (100%), fast lure speed (100%).",
       "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": null,
-      "imageStatus": "Fisch Wiki lists TacoBait.png; clean local image not collected for this pass."
+      "image": "/Fisch/Baits/taco.png",
+      "imageStatus": "Collected from Fisch Wiki/Fandom source file TacoBait.png."
     }
   ]
 }

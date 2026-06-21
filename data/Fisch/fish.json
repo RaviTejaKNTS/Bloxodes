@@ -2860,7 +2860,7 @@
     },
     {
       "name": "Razorfin",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Razorfin.png",
       "rarity": "Divine Secret",
       "area": "Castaway Cliffs",
       "weather": "None",
@@ -4236,7 +4236,7 @@
     },
     {
       "name": "Lumilotl",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Lumilotl.png",
       "rarity": "Divine Secret",
       "area": "Desolate Deep",
       "weather": "None",
@@ -4956,7 +4956,7 @@
     },
     {
       "name": "Boulder",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Boulder.png",
       "rarity": "Divine Secret",
       "area": "Keepers Altar",
       "weather": "None",
@@ -5244,7 +5244,7 @@
     },
     {
       "name": "Paradox Piranha",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Paradox_Piranha.png",
       "rarity": "Divine Secret",
       "area": "Lost Jungle",
       "weather": "None",
@@ -5756,7 +5756,7 @@
     },
     {
       "name": "Cataclysm Carp",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Cataclysm_Carp.png",
       "rarity": "Divine Secret",
       "area": "Moosewood",
       "weather": "None",
@@ -6956,7 +6956,7 @@
     },
     {
       "name": "Tuskmaw",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Tuskmaw.png",
       "rarity": "Divine Secret",
       "area": "Ocean",
       "weather": "None",
@@ -7532,7 +7532,7 @@
     },
     {
       "name": "Aetherfin",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Aetherfin.png",
       "rarity": "Divine Secret",
       "area": "Roslit Bay",
       "weather": "None",
@@ -8332,7 +8332,7 @@
     },
     {
       "name": "Crustal Colossus",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Crustal_Colossus.png",
       "rarity": "Divine Secret",
       "area": "Sunstone Island",
       "weather": "None",
@@ -10124,7 +10124,7 @@
     },
     {
       "name": "Seraphfin",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Seraphfin.png",
       "rarity": "Divine Secret",
       "area": "Regionless",
       "weather": "None",
@@ -20316,7 +20316,7 @@
     },
     {
       "name": "Ancestral Pliosaur",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Ancestral_Pliosaur.png",
       "rarity": "Secret",
       "area": "Collapsed Ruins",
       "weather": "Foggy",
@@ -20332,7 +20332,7 @@
     },
     {
       "name": "Anchor",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Anchor.png",
       "rarity": "Mythic",
       "area": "Tidefall",
       "weather": "None",
@@ -20348,7 +20348,7 @@
     },
     {
       "name": "Ancient Goldwraith",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Ancient_Goldwraith.png",
       "rarity": "Secret",
       "area": "Crowned Ruins",
       "weather": "None",
@@ -20364,7 +20364,7 @@
     },
     {
       "name": "Armorhead",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Armorhead.png",
       "rarity": "Unusual",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -20380,7 +20380,7 @@
     },
     {
       "name": "Atlantic Goliath Grouper",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Atlantic_Goliath_Grouper.png",
       "rarity": "Legendary",
       "area": "Coral Bastion",
       "weather": "Clear, Rain",
@@ -20396,7 +20396,7 @@
     },
     {
       "name": "Atlantic Halosaur",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Atlantic_Halosaur.png",
       "rarity": "Uncommon",
       "area": "Collapsed Ruins",
       "weather": "Clear",
@@ -20412,7 +20412,7 @@
     },
     {
       "name": "Awakened Omnithal",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Awakened_Omnithal.png",
       "rarity": "Secret",
       "area": "Sunken Reliquary",
       "weather": "Foggy",
@@ -20428,7 +20428,7 @@
     },
     {
       "name": "Batfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Batfish.png",
       "rarity": "Common",
       "area": "Coral Bastion",
       "weather": "Clear",
@@ -20444,7 +20444,7 @@
     },
     {
       "name": "Bigeye Houndshark",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Bigeye_Houndshark.png",
       "rarity": "Unusual",
       "area": "Collapsed Ruins",
       "weather": "Clear",
@@ -20460,7 +20460,7 @@
     },
     {
       "name": "Bigeye Trevally",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Bigeye_Trevally.png",
       "rarity": "Unusual",
       "area": "Coral Bastion",
       "weather": "Windy",
@@ -20476,7 +20476,7 @@
     },
     {
       "name": "Black Scabbardfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Black_Scabbardfish.png",
       "rarity": "Mythic",
       "area": "Collapsed Ruins",
       "weather": "Windy",
@@ -20492,7 +20492,7 @@
     },
     {
       "name": "Black Snoek",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Black_Snoek.png",
       "rarity": "Legendary",
       "area": "Crowned Ruins",
       "weather": "Windy",
@@ -20508,7 +20508,7 @@
     },
     {
       "name": "Blackfin Barracuda",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Blackfin_Barracuda.png",
       "rarity": "Legendary",
       "area": "Collapsed Ruins",
       "weather": "Clear",
@@ -20524,7 +20524,7 @@
     },
     {
       "name": "Blackfin Icefish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Blackfin_Icefish.png",
       "rarity": "Uncommon",
       "area": "Collapsed Ruins",
       "weather": "Clear",
@@ -20540,7 +20540,7 @@
     },
     {
       "name": "Blackmouth Catshark",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Blackmouth_Catshark.png",
       "rarity": "Mythic",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -20556,7 +20556,7 @@
     },
     {
       "name": "Blackspot Tuskfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Blackspot_Tuskfish.png",
       "rarity": "Unusual",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -20572,7 +20572,7 @@
     },
     {
       "name": "Bumpy Snailfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Bumpy_Snailfish.png",
       "rarity": "Common",
       "area": "Tidefall",
       "weather": "Clear",
@@ -20588,7 +20588,7 @@
     },
     {
       "name": "Colossus Reef Titan",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Colossus_Reef_Titan.png",
       "rarity": "Secret",
       "area": "Coral Bastion",
       "weather": "None",
@@ -20604,7 +20604,7 @@
     },
     {
       "name": "Conger Eel",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Conger_Eel.png",
       "rarity": "Rare",
       "area": "Tidefall",
       "weather": "Rain, Foggy",
@@ -20620,7 +20620,7 @@
     },
     {
       "name": "Copper Rockfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Copper_Rockfish.png",
       "rarity": "Common",
       "area": "Collapsed Ruins",
       "weather": "Clear",
@@ -20636,7 +20636,7 @@
     },
     {
       "name": "Cornetfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Cornetfish.png",
       "rarity": "Common",
       "area": "Sunken Reliquary",
       "weather": "Clear",
@@ -20652,7 +20652,7 @@
     },
     {
       "name": "Cusk Eel",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Cusk_Eel.png",
       "rarity": "Rare",
       "area": "Sunken Reliquary",
       "weather": "Foggy",
@@ -20668,7 +20668,7 @@
     },
     {
       "name": "Deepwater Stingray",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Deepwater_Stingray.png",
       "rarity": "Unusual",
       "area": "Sunken Reliquary",
       "weather": "Clear",
@@ -20684,7 +20684,7 @@
     },
     {
       "name": "Dripstone",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Dripstone.png",
       "rarity": "Trash",
       "area": "Tidefall , Collapsed Ruins",
       "weather": "None",
@@ -20700,7 +20700,7 @@
     },
     {
       "name": "Emperor Angelfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Emperor_Angelfish.png",
       "rarity": "Uncommon",
       "area": "Coral Bastion",
       "weather": "Clear",
@@ -20716,7 +20716,7 @@
     },
     {
       "name": "Escolar",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Escolar.png",
       "rarity": "Unusual",
       "area": "Sunken Reliquary",
       "weather": "Windy",
@@ -20732,7 +20732,7 @@
     },
     {
       "name": "Flying Gurnard",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Flying_Gurnard.png",
       "rarity": "Legendary",
       "area": "Sunken Reliquary",
       "weather": "Clear",
@@ -20748,7 +20748,7 @@
     },
     {
       "name": "Forbidden Plesiosaur",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Forbidden_Plesiosaur.png",
       "rarity": "Divine Secret",
       "area": "Tidefall",
       "weather": "None",
@@ -20764,7 +20764,7 @@
     },
     {
       "name": "Giant Grouper",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Giant_Grouper.png",
       "rarity": "Rare",
       "area": "Tidefall",
       "weather": "Clear, Rain",
@@ -20780,7 +20780,7 @@
     },
     {
       "name": "Gnomefish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Gnomefish.png",
       "rarity": "Common",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -20796,7 +20796,7 @@
     },
     {
       "name": "Goldwraith",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Goldwraith.png",
       "rarity": "Exotic",
       "area": "Crowned Ruins",
       "weather": "None",
@@ -20812,7 +20812,7 @@
     },
     {
       "name": "Greater Weever",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Greater_Weever.png",
       "rarity": "Uncommon",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -20828,7 +20828,7 @@
     },
     {
       "name": "Gulper Eel",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Gulper_Eel.png",
       "rarity": "Unusual",
       "area": "Tidefall",
       "weather": "Clear",
@@ -20844,7 +20844,7 @@
     },
     {
       "name": "John Dory",
-      "image": null,
+      "image": "/Fisch/Fish/256px-John_Dory.png",
       "rarity": "Uncommon",
       "area": "Sunken Reliquary",
       "weather": "Clear",
@@ -20860,7 +20860,7 @@
     },
     {
       "name": "Lanternfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Lanternfish.png",
       "rarity": "Common",
       "area": "Tidefall",
       "weather": "Clear",
@@ -20876,7 +20876,7 @@
     },
     {
       "name": "Lizardfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Lizardfish.png",
       "rarity": "Common",
       "area": "Coral Bastion",
       "weather": "Clear",
@@ -20892,7 +20892,7 @@
     },
     {
       "name": "Longnose Chimaera",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Longnose_Chimaera.png",
       "rarity": "Unusual",
       "area": "Collapsed Ruins",
       "weather": "Foggy",
@@ -20908,7 +20908,7 @@
     },
     {
       "name": "Metal Strongbox",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Metal_Strongbox.png",
       "rarity": "Rare",
       "area": "Tidefall",
       "weather": "None",
@@ -20924,7 +20924,7 @@
     },
     {
       "name": "Moray Eel",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Moray_Eel.png",
       "rarity": "Unusual",
       "area": "Tidefall",
       "weather": "Clear",
@@ -20940,7 +20940,7 @@
     },
     {
       "name": "Oil Sardine",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Oil_Sardine.png",
       "rarity": "Common",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -20956,7 +20956,7 @@
     },
     {
       "name": "Oilfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Oilfish.png",
       "rarity": "Unusual",
       "area": "Sunken Reliquary",
       "weather": "Rain",
@@ -20972,7 +20972,7 @@
     },
     {
       "name": "Omnithal",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Omnithal.png",
       "rarity": "Exotic",
       "area": "Sunken Reliquary",
       "weather": "Foggy",
@@ -20988,7 +20988,7 @@
     },
     {
       "name": "Opah",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Opah.png",
       "rarity": "Rare",
       "area": "Collapsed Ruins",
       "weather": "Clear",
@@ -21004,7 +21004,7 @@
     },
     {
       "name": "Pelagic Cod",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Pelagic_Cod.png",
       "rarity": "Common",
       "area": "Tidefall",
       "weather": "Clear, Windy",
@@ -21020,7 +21020,7 @@
     },
     {
       "name": "Plesiosaur",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Plesiosaur.png",
       "rarity": "Exotic",
       "area": "Tidefall",
       "weather": "Foggy",
@@ -21036,7 +21036,7 @@
     },
     {
       "name": "Pliosaur",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Pliosaur.png",
       "rarity": "Exotic",
       "area": "Collapsed Ruins",
       "weather": "Foggy",
@@ -21052,7 +21052,7 @@
     },
     {
       "name": "Porcupinefish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Porcupinefish.png",
       "rarity": "Uncommon",
       "area": "Sunken Reliquary",
       "weather": "Clear",
@@ -21068,7 +21068,7 @@
     },
     {
       "name": "Reef Titan",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Reef_Titan.png",
       "rarity": "Exotic",
       "area": "Coral Bastion",
       "weather": "None",
@@ -21084,7 +21084,7 @@
     },
     {
       "name": "Regal Angelfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Regal_Angelfish.png",
       "rarity": "Uncommon",
       "area": "Coral Bastion",
       "weather": "Clear",
@@ -21100,7 +21100,7 @@
     },
     {
       "name": "Roughhead Grenadier",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Roughhead_Grenadier.png",
       "rarity": "Common",
       "area": "Collapsed Ruins",
       "weather": "Clear",
@@ -21116,7 +21116,7 @@
     },
     {
       "name": "Roundnose Grenadier",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Roundnose_Grenadier.png",
       "rarity": "Common",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -21132,7 +21132,7 @@
     },
     {
       "name": "Sand Tiger Shark",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Sand_Tiger_Shark.png",
       "rarity": "Mythic",
       "area": "Coral Bastion",
       "weather": "Clear",
@@ -21148,7 +21148,7 @@
     },
     {
       "name": "Scorpionfish",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Scorpionfish.png",
       "rarity": "Uncommon",
       "area": "Coral Bastion",
       "weather": "Clear",
@@ -21164,7 +21164,7 @@
     },
     {
       "name": "Shortnose Chimaera",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Shortnose_Chimaera.png",
       "rarity": "Uncommon",
       "area": "Collapsed Ruins",
       "weather": "Clear",
@@ -21180,7 +21180,7 @@
     },
     {
       "name": "Silver Roughy",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Silver_Roughy.png",
       "rarity": "Uncommon",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -21196,7 +21196,7 @@
     },
     {
       "name": "Sixgill Shark",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Sixgill_Shark.png",
       "rarity": "Legendary",
       "area": "Tidefall",
       "weather": "Foggy",
@@ -21212,7 +21212,7 @@
     },
     {
       "name": "Small-Spotted Catshark",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Small-Spotted_Catshark.png",
       "rarity": "Mythic",
       "area": "Sunken Reliquary",
       "weather": "Clear",
@@ -21228,7 +21228,7 @@
     },
     {
       "name": "Spotted Drum",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Spotted_Drum.png",
       "rarity": "Uncommon",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -21244,7 +21244,7 @@
     },
     {
       "name": "Tompot Blenny",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Tompot_Blenny.png",
       "rarity": "Rare",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -21260,7 +21260,7 @@
     },
     {
       "name": "Warty Oreo",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Warty_Oreo.png",
       "rarity": "Uncommon",
       "area": "Crowned Ruins",
       "weather": "Clear",
@@ -21276,7 +21276,7 @@
     },
     {
       "name": "Wobbegong Shark",
-      "image": null,
+      "image": "/Fisch/Fish/256px-Wobbegong_Shark.png",
       "rarity": "Mythic",
       "area": "Coral Bastion",
       "weather": "Clear",

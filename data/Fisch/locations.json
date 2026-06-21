@@ -7,7 +7,7 @@
     "collection": "locations",
     "route": "/wiki/fisch/locations",
     "catalogCode": "fisch-locations",
-    "updatedAt": "2026-06-19",
+    "updatedAt": "2026-06-21",
     "itemCount": 52,
     "groupBy": "catalogSection",
     "defaultCardFields": [
@@ -35,7 +35,8 @@
       "imageStatus",
       "sourcePage",
       "sourceNote",
-      "sortOrder"
+      "sortOrder",
+      "sourceImageUrl"
     ],
     "sources": [
       {
@@ -57,8 +58,12 @@
     "notes": [
       "Scope is durable route anchors from Fisch Wiki location navigation and internal location pages.",
       "Limited-time events, templates, generic mechanics pages, and tiny fish-pool-only rows are intentionally excluded.",
-      "Images are intentionally empty for this pass because clean row-level screenshots were inconsistent across location pages."
-    ]
+      "Location images were collected from clean Fisch Wiki/Fandom page lead, gallery, or tabber media on 2026-06-21."
+    ],
+    "imageCoverage": {
+      "present": 52,
+      "missing": 0
+    }
   },
   "items": [
     {
@@ -73,11 +78,12 @@
       "risk": "Low",
       "routeUse": "Use as the first selling, appraising, quest, spawn, and boat unlock hub.",
       "cardSummary": "The main starter island with early shops, appraising, Angler quests, spawn setting, and boat access.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/moosewood.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Moosewood",
       "sourceNote": "Source page identifies Moosewood as the first island and lists core NPCs and starter fish.",
-      "sortOrder": 1
+      "sortOrder": 1,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/f/fd/Moosewood.png/revision/latest?cb=20241015201420"
     },
     {
       "name": "The Ocean",
@@ -91,11 +97,12 @@
       "risk": "Low to medium",
       "routeUse": "Use as the connector for island travel, boat movement, and broad fish hunting.",
       "cardSummary": "The map-wide water route that connects islands and supports general fishing between named areas.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/the-ocean.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/The_Ocean",
       "sourceNote": "Listed as a major location in Fisch Wiki location navigation.",
-      "sortOrder": 2
+      "sortOrder": 2,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/8/89/Ocean.png/revision/latest?cb=20241015220633"
     },
     {
       "name": "Roslit Bay",
@@ -109,11 +116,12 @@
       "risk": "Low to medium",
       "routeUse": "Use for early-to-mid island fish, NPC stops, and volcano progression.",
       "cardSummary": "A major first-sea island that anchors Roslit fishing and the volcano sub-route.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/roslit-bay.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Roslit_Bay",
       "sourceNote": "Listed as a major location and linked to Roslit Volcano in location navigation.",
-      "sortOrder": 3
+      "sortOrder": 3,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/1/10/Roslitbay.png/revision/latest?cb=20241015221930"
     },
     {
       "name": "Sunstone Island",
@@ -127,11 +135,12 @@
       "risk": "Low",
       "routeUse": "Use as a mid-map fishing and quest landmark.",
       "cardSummary": "A stable first-sea island used for normal fishing and several clue-style progression routes.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/sunstone-island.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Sunstone_Island",
       "sourceNote": "Listed as a major location in Fisch Wiki location navigation.",
-      "sortOrder": 4
+      "sortOrder": 4,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/5/57/Sunstone.png/revision/latest?cb=20241015222102"
     },
     {
       "name": "Snowcap Island",
@@ -145,11 +154,12 @@
       "risk": "Low",
       "routeUse": "Use when targeting cold-island fish before harder expedition routes.",
       "cardSummary": "The main snow island for first-sea fishing before Northern Expedition becomes the stronger cold route.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/snowcap-island.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Snowcap_Island",
       "sourceNote": "Listed as a major location; Snowcap Pond is listed separately as a category member.",
-      "sortOrder": 5
+      "sortOrder": 5,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/6/6b/Snowcap-Front.jpeg/revision/latest?cb=20241017025311"
     },
     {
       "name": "Terrapin Island",
@@ -163,11 +173,12 @@
       "risk": "Low to medium",
       "routeUse": "Use as a normal fish route and as a landmark for hidden route clues.",
       "cardSummary": "A first-sea island that matters for both fishing and several hidden-route clues.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/terrapin-island.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Terrapin_Island",
       "sourceNote": "Listed as a major location in Fisch Wiki location navigation.",
-      "sortOrder": 6
+      "sortOrder": 6,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/9/94/Terrapin.png/revision/latest?cb=20241015212915"
     },
     {
       "name": "Mushgrove Swamp",
@@ -181,11 +192,12 @@
       "risk": "Low to medium",
       "routeUse": "Use when rotating through first-sea island bestiary pools.",
       "cardSummary": "The swamp island route for region-specific fish and first-sea completion.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/mushgrove-swamp.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Mushgrove_Swamp",
       "sourceNote": "Listed as a major location in Fisch Wiki location navigation.",
-      "sortOrder": 7
+      "sortOrder": 7,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/f/fd/Mushgrove.png/revision/latest?cb=20241015213435"
     },
     {
       "name": "Forsaken Shores",
@@ -199,11 +211,12 @@
       "risk": "Low to medium",
       "routeUse": "Use for separate shore and pond fishing checks.",
       "cardSummary": "A first-sea island with multiple local fishing pools instead of one simple shoreline.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/forsaken-shores.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Forsaken_Shores",
       "sourceNote": "Listed as a major location; source category includes Forsaken Shores Ocean and Pond.",
-      "sortOrder": 8
+      "sortOrder": 8,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/7/7a/ForsakenShores.png/revision/latest?cb=20241109134732"
     },
     {
       "name": "Ancient Isle",
@@ -217,11 +230,12 @@
       "risk": "Medium",
       "routeUse": "Use as the anchor for Ancient Archives and island bestiary work.",
       "cardSummary": "A major island that feeds into Ancient Archives and ancient-themed fish routes.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/ancient-isle.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Ancient_Isle",
       "sourceNote": "Listed as a major location with Ancient Archives as a sub-location.",
-      "sortOrder": 9
+      "sortOrder": 9,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/4/4b/AncientIsle.png/revision/latest?cb=20241130143150"
     },
     {
       "name": "Grand Reef",
@@ -235,11 +249,12 @@
       "risk": "Medium",
       "routeUse": "Use as the reef route and entry context for Atlantis content.",
       "cardSummary": "A reef route that matters for normal fishing and the Atlantis branch.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/grand-reef.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Grand_Reef",
       "sourceNote": "Listed as a major location; Atlantis source lists Grand Reef as its location context.",
-      "sortOrder": 10
+      "sortOrder": 10,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/0/02/Grand_Reef.png/revision/latest?cb=20250104134616"
     },
     {
       "name": "Castaway Cliffs",
@@ -253,11 +268,12 @@
       "risk": "Low to medium",
       "routeUse": "Use as a first-sea island completion route.",
       "cardSummary": "A main island stop for cliff-area fish and first-sea route completion.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/castaway-cliffs.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Castaway_Cliffs",
       "sourceNote": "Listed as a major location in Fisch Wiki location navigation.",
-      "sortOrder": 11
+      "sortOrder": 11,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/1/12/Castaway_Cliffs_View.png/revision/latest?cb=20250608214240"
     },
     {
       "name": "Lost Jungle",
@@ -271,11 +287,12 @@
       "risk": "Medium",
       "routeUse": "Use for jungle bestiary work, Mossjaw hunts, and hidden temple routes.",
       "cardSummary": "A jungle island with its own fish pool, hunts, and temple-style sub-routes.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/lost-jungle.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Lost_Jungle",
       "sourceNote": "Source page lists Forgotten Temple, Mossjaw Rest, coordinates, hunts, and fish.",
-      "sortOrder": 12
+      "sortOrder": 12,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/6/65/Lost_Jungle_%28winter%29.png/revision/latest?cb=20251006155004"
     },
     {
       "name": "Cursed Isle",
@@ -289,11 +306,12 @@
       "risk": "Medium",
       "routeUse": "Use when targeting cursed-region fish or route checks.",
       "cardSummary": "A first-sea island focused on cursed-region fishing and route completion.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/cursed-isle.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Cursed_Isle",
       "sourceNote": "Listed as a major location in Fisch Wiki location navigation.",
-      "sortOrder": 13
+      "sortOrder": 13,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/8/85/Cursed_Shores_Island.png/revision/latest?cb=20250330140122"
     },
     {
       "name": "Treasure Island",
@@ -307,11 +325,12 @@
       "risk": "Low to medium",
       "routeUse": "Use as a treasure-themed island stop in broader route planning.",
       "cardSummary": "A named island route for treasure-themed fishing and exploration.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/treasure-island.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Treasure_Island",
       "sourceNote": "Listed as a major location in Fisch Wiki location navigation.",
-      "sortOrder": 14
+      "sortOrder": 14,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/6/6c/Treasure_Island_fisch.png/revision/latest?cb=20250620093617"
     },
     {
       "name": "Statue of Sovereignty",
@@ -325,11 +344,12 @@
       "risk": "Low",
       "routeUse": "Use when routing into enchantment and altar systems.",
       "cardSummary": "A key structure because it leads into Keeper's Altar and enchantment progression.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/statue-of-sovereignty.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Statue_of_Sovereignty",
       "sourceNote": "Location navigation lists Statue of Sovereignty and Keeper's Altar.",
-      "sortOrder": 15
+      "sortOrder": 15,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/2/27/Statue_of_Sovereignty.png/revision/latest?cb=20241015212818"
     },
     {
       "name": "The Arch",
@@ -343,11 +363,12 @@
       "risk": "Low",
       "routeUse": "Use as a simple named fishing landmark and navigation point.",
       "cardSummary": "A major landmark that doubles as a straightforward fishing and navigation stop.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/the-arch.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/The_Arch",
       "sourceNote": "Listed in both major and sub-location navigation.",
-      "sortOrder": 16
+      "sortOrder": 16,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/0/00/Arch_down.png/revision/latest?cb=20241025034802"
     },
     {
       "name": "Vertigo",
@@ -361,11 +382,12 @@
       "risk": "Medium",
       "routeUse": "Use when you need the whirlpool route or Vertigo-only catches.",
       "cardSummary": "A special whirlpool-linked location with its own fish pool and progression context.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/vertigo.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Vertigo",
       "sourceNote": "Listed as a major location and linked from Moosewood's Synph notes.",
-      "sortOrder": 17
+      "sortOrder": 17,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/9/91/Vertigo.png/revision/latest?cb=20241015213253"
     },
     {
       "name": "The Depths",
@@ -379,11 +401,12 @@
       "risk": "Medium to high",
       "routeUse": "Use for deeper progression, special catches, and quest routes.",
       "cardSummary": "A deeper progression area used for late fish, quests, and hidden-route systems.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/the-depths.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/The_Depths",
       "sourceNote": "Listed as a major location and a sub-location in navigation.",
-      "sortOrder": 18
+      "sortOrder": 18,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/9/9f/Screenshot_2024-11-16_083807.png/revision/latest?cb=20241116144147"
     },
     {
       "name": "Desolate Deep",
@@ -397,11 +420,12 @@
       "risk": "High",
       "routeUse": "Use for underwater progression and the Brine Pool route.",
       "cardSummary": "The main underwater deep route that leads into Desolate Pocket and Brine Pool.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/desolate-deep.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Desolate_Deep",
       "sourceNote": "Listed as a major location; Brine Pool page explains Desolate Deep access context.",
-      "sortOrder": 19
+      "sortOrder": 19,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/4/46/Desolate_Deep.png/revision/latest?cb=20241028114317"
     },
     {
       "name": "Desolate Pocket",
@@ -415,11 +439,12 @@
       "risk": "High",
       "routeUse": "Use as the staging area before Brine Pool and other deep-water goals.",
       "cardSummary": "A Desolate Deep sub-location that works as the practical staging point for deeper goals.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/desolate-pocket.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Desolate_Pocket",
       "sourceNote": "Listed as a sub-location in location navigation.",
-      "sortOrder": 20
+      "sortOrder": 20,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/d/d3/Desolate_Pocket.png/revision/latest?cb=20241028120800"
     },
     {
       "name": "Brine Pool",
@@ -433,11 +458,12 @@
       "risk": "High",
       "routeUse": "Use when prepared for acid risk and brine-only fish.",
       "cardSummary": "A dangerous acid pool with strict rod/enchantment needs and valuable brine fish.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/brine-pool.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Brine_Pool",
       "sourceNote": "Source page lists acid death risk, access costs, Reinforced Rod or Invincible requirement, and fish.",
-      "sortOrder": 21
+      "sortOrder": 21,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/4/45/BrinePool2.png/revision/latest?cb=20260425235416"
     },
     {
       "name": "Keeper's Altar",
@@ -451,11 +477,12 @@
       "risk": "Low",
       "routeUse": "Use when spending relics and upgrading rod builds.",
       "cardSummary": "The altar route players care about when they are ready to enchant or improve rods.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/keepers-altar.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Statue_of_Sovereignty#Keepers_Altar",
       "sourceNote": "Location navigation lists Keeper's Altar as a sub-location under Statue of Sovereignty context.",
-      "sortOrder": 22
+      "sortOrder": 22,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/1/19/KeepersAltar.png/revision/latest?cb=20241015135004"
     },
     {
       "name": "Roslit Volcano",
@@ -469,11 +496,12 @@
       "risk": "Medium",
       "routeUse": "Use for volcano catches and lava-route planning.",
       "cardSummary": "The Roslit Bay volcano route for lava-area catches and later item checks.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/roslit-volcano.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Roslit_Bay#Roslit_Volcano",
       "sourceNote": "Listed as a sub-location in Fisch Wiki location navigation.",
-      "sortOrder": 23
+      "sortOrder": 23,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/8/80/RoslitVolcano.png/revision/latest?cb=20241203121832"
     },
     {
       "name": "Ancient Archives",
@@ -487,11 +515,12 @@
       "risk": "Medium",
       "routeUse": "Use when working through Ancient Isle hidden progression.",
       "cardSummary": "An Ancient Isle progression area for archive-style unlocks and hidden systems.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/ancient-archives.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Ancient_Archives",
       "sourceNote": "Listed as a sub-location in Fisch Wiki location navigation.",
-      "sortOrder": 24
+      "sortOrder": 24,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/8/82/Ancient_Archives.png/revision/latest?cb=20241201114103"
     },
     {
       "name": "Atlantean Storm",
@@ -505,11 +534,12 @@
       "risk": "Medium",
       "routeUse": "Use for storm-related Atlantean catches.",
       "cardSummary": "A storm-focused route for Atlantean fish outside the normal island loop.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/atlantean-storm.gif",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Atlantean_Storm",
       "sourceNote": "Listed as both a major and sub-location in Fisch Wiki navigation.",
-      "sortOrder": 25
+      "sortOrder": 25,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/1/11/Atlantean_Storm.gif/revision/latest?cb=20250119080259"
     },
     {
       "name": "Cultist Lair",
@@ -523,11 +553,12 @@
       "risk": "High",
       "routeUse": "Use when ready for hidden lair access and key-item fishing.",
       "cardSummary": "A hidden foggy-night lair with rare cave fish, key items, and higher-risk routing.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/cultist-lair.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Cultist_Lair",
       "sourceNote": "Source page lists foggy-night lever access and lair fish/reward entries.",
-      "sortOrder": 26
+      "sortOrder": 26,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/c/c5/Cult_Lair.png/revision/latest?cb=20251108210859"
     },
     {
       "name": "Underground Music Venue",
@@ -541,11 +572,12 @@
       "risk": "Medium",
       "routeUse": "Use for music-themed quest and item routes.",
       "cardSummary": "A hidden music-themed location for special progression, not a normal island loop.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/underground-music-venue.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Underground_Music_Venue",
       "sourceNote": "Listed as a sub-location in Fisch Wiki location navigation and category pages.",
-      "sortOrder": 27
+      "sortOrder": 27,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/a/a8/Underground_Music_Vanue.png/revision/latest?cb=20250719034331"
     },
     {
       "name": "Northern Expedition",
@@ -559,11 +591,12 @@
       "risk": "High",
       "routeUse": "Use for cold-route progression, summit travel, and expedition fishing.",
       "cardSummary": "The main cold expedition route with several mountain sub-locations and higher travel risk.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/northern-expedition.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Northern_Expedition",
       "sourceNote": "Location navigation lists Northern Expedition and five expedition sub-locations.",
-      "sortOrder": 28
+      "sortOrder": 28,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/3/3e/Northern_Expedition_entrance_portal.png/revision/latest?cb=20241222070024"
     },
     {
       "name": "Northern Summit",
@@ -577,11 +610,12 @@
       "risk": "High",
       "routeUse": "Use as the top-end landmark of Northern Expedition.",
       "cardSummary": "The summit stop for Northern Expedition routing and cold-area progression.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/northern-summit.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Northern_Summit",
       "sourceNote": "Listed under Northern Expedition locations in navigation.",
-      "sortOrder": 29
+      "sortOrder": 29,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/1/15/Northern-Expedition.jpg/revision/latest?cb=20241221141515"
     },
     {
       "name": "Overgrowth Caves",
@@ -595,11 +629,12 @@
       "risk": "Medium to high",
       "routeUse": "Use as an early expedition cave stop.",
       "cardSummary": "A Northern Expedition cave stop for cold-route fish and route progression.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/overgrowth-caves.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Overgrowth_Caves",
       "sourceNote": "Listed under Northern Expedition locations in navigation.",
-      "sortOrder": 30
+      "sortOrder": 30,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/2/2e/Overgrowth_Caves.png/revision/latest?cb=20241222012526"
     },
     {
       "name": "Frigid Cavern",
@@ -613,11 +648,12 @@
       "risk": "High",
       "routeUse": "Use for deeper cold-cave fishing.",
       "cardSummary": "A colder cave layer in the Northern Expedition chain.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/frigid-cavern.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Frigid_Cavern",
       "sourceNote": "Listed under Northern Expedition locations in navigation.",
-      "sortOrder": 31
+      "sortOrder": 31,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/e/ee/FRIGID.png/revision/latest?cb=20241222055417"
     },
     {
       "name": "Cryogenic Canal",
@@ -631,11 +667,12 @@
       "risk": "High",
       "routeUse": "Use for canal-specific expedition fish.",
       "cardSummary": "A cold canal stop inside the Northern Expedition route.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/cryogenic-canal.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Cryogenic_Canal",
       "sourceNote": "Listed under Northern Expedition locations in navigation.",
-      "sortOrder": 32
+      "sortOrder": 32,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/7/7b/Cryogenic_Canal.png/revision/latest?cb=20250107020153"
     },
     {
       "name": "Glacial Grotto",
@@ -649,11 +686,12 @@
       "risk": "High",
       "routeUse": "Use as a late expedition fishing stop.",
       "cardSummary": "A glacial sub-location for later Northern Expedition catches.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/glacial-grotto.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Glacial_Grotto",
       "sourceNote": "Listed under Northern Expedition locations in navigation.",
-      "sortOrder": 33
+      "sortOrder": 33,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/0/0f/Glacialgrotto.png/revision/latest?cb=20241223054944"
     },
     {
       "name": "Atlantis",
@@ -667,11 +705,12 @@
       "risk": "High",
       "routeUse": "Use for underwater city progression, trials, and Atlantis fish completion.",
       "cardSummary": "A large underwater city with shops, trials, and several named fishing pools.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/atlantis.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Atlantis",
       "sourceNote": "Source page lists Atlantis NPCs, Grand Reef context, and Atlantis sub-locations.",
-      "sortOrder": 34
+      "sortOrder": 34,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/e/ee/Atlantis.png/revision/latest?cb=20250125144851"
     },
     {
       "name": "Poseidon Trial Pool",
@@ -685,11 +724,12 @@
       "risk": "High",
       "routeUse": "Use for Atlantis trial-pool completion.",
       "cardSummary": "An Atlantis sub-location tied to Poseidon trial fishing.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/poseidon-trial-pool.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Poseidon_Trial_Pool",
       "sourceNote": "Listed under Atlantis Locations in navigation.",
-      "sortOrder": 35
+      "sortOrder": 35,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/9/9b/PosidenPool.png/revision/latest?cb=20260425145306"
     },
     {
       "name": "Kraken Pool",
@@ -703,11 +743,12 @@
       "risk": "High",
       "routeUse": "Use for Kraken-pool fish and Atlantis completion.",
       "cardSummary": "A high-interest Atlantis pool for Kraken-themed catches.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/kraken-pool.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Kraken_Pool",
       "sourceNote": "Listed under Atlantis Locations in navigation.",
-      "sortOrder": 36
+      "sortOrder": 36,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/1/17/KrakenPool.png/revision/latest?cb=20260425145936"
     },
     {
       "name": "Ethereal Abyss Pool",
@@ -721,11 +762,12 @@
       "risk": "High",
       "routeUse": "Use for one of the named Atlantis pool sets.",
       "cardSummary": "A named Atlantis pool for ethereal-themed fish checks.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/ethereal-abyss-pool.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Ethereal_Abyss_Pool",
       "sourceNote": "Listed under Atlantis Locations in navigation.",
-      "sortOrder": 37
+      "sortOrder": 37,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/5/5e/EtherealFishingLocation.png/revision/latest?cb=20250127001455"
     },
     {
       "name": "Mariana's Veil",
@@ -739,11 +781,12 @@
       "risk": "High",
       "routeUse": "Use for submarine progression and deep-sea region completion.",
       "cardSummary": "A deep-sea region with several named sub-locations and submarine-based routing.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/marianas-veil.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Mariana%27s_Veil",
       "sourceNote": "Source page lists submarine NPCs and five Mariana's Veil sub-locations.",
-      "sortOrder": 38
+      "sortOrder": 38,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/1/1f/Mariana%27s_Veil.Entrance.jpg/revision/latest?cb=20250222182727"
     },
     {
       "name": "Volcanic Vents",
@@ -757,11 +800,12 @@
       "risk": "High",
       "routeUse": "Use for the volcanic branch of Mariana's Veil.",
       "cardSummary": "The volcanic branch of Mariana's Veil for deep-sea fish checks.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/volcanic-vents.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Volcanic_Vents",
       "sourceNote": "Listed under Mariana's Veil locations in navigation.",
-      "sortOrder": 39
+      "sortOrder": 39,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/7/79/Volcanic_Vents.png/revision/latest?cb=20250223044504"
     },
     {
       "name": "Challenger's Deep",
@@ -775,11 +819,12 @@
       "risk": "High",
       "routeUse": "Use for deeper Mariana fish and route completion.",
       "cardSummary": "A deep branch of Mariana's Veil for higher-risk fishing.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/challengers-deep.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Challenger%27s_Deep",
       "sourceNote": "Listed under Mariana's Veil locations in navigation.",
-      "sortOrder": 40
+      "sortOrder": 40,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/6/6f/Challenger%27s_Deep.png/revision/latest?cb=20250223044233"
     },
     {
       "name": "Abyssal Zenith",
@@ -793,11 +838,12 @@
       "risk": "High",
       "routeUse": "Use for abyssal Mariana fish checks.",
       "cardSummary": "An abyssal branch of Mariana's Veil for deeper fish completion.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/abyssal-zenith.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Abyssal_Zenith",
       "sourceNote": "Listed under Mariana's Veil locations in navigation.",
-      "sortOrder": 41
+      "sortOrder": 41,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/f/f8/Abyssal_Zenith_HD.png/revision/latest?cb=20250225124832"
     },
     {
       "name": "Calm Zone",
@@ -811,11 +857,12 @@
       "risk": "Medium to high",
       "routeUse": "Use as the safer-feeling branch in Mariana's Veil routing.",
       "cardSummary": "A named Mariana's Veil branch for calmer deep-sea fishing checks.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/calm-zone.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Calm_Zone",
       "sourceNote": "Listed under Mariana's Veil locations in navigation.",
-      "sortOrder": 42
+      "sortOrder": 42,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/b/bf/Calm_Zone_Night_time_HD.png/revision/latest?cb=20250225053456"
     },
     {
       "name": "Veil of the Forsaken",
@@ -829,11 +876,12 @@
       "risk": "High",
       "routeUse": "Use for the forsaken branch of Mariana's Veil completion.",
       "cardSummary": "A high-risk Mariana's Veil branch for deeper completion work.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/veil-of-the-forsaken.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Veil_of_the_Forsaken",
       "sourceNote": "Listed under Mariana's Veil locations in navigation.",
-      "sortOrder": 43
+      "sortOrder": 43,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/8/86/Screenshot_2025-02-23_012205.png/revision/latest?cb=20250223162737"
     },
     {
       "name": "Tidefall",
@@ -847,11 +895,12 @@
       "risk": "High",
       "routeUse": "Use for cave-system fishing, hunts, rods, items, and Tidefall progression.",
       "cardSummary": "A large underwater cave system with several branches, hunts, rods, items, and a big bestiary.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/tidefall.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Tidefall",
       "sourceNote": "Source page describes Tidefall as a cave system under The Ocean with five primary sub-locations.",
-      "sortOrder": 44
+      "sortOrder": 44,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/1/1d/Tidefallzz.png/revision/latest?cb=20260213112137"
     },
     {
       "name": "Coral Bastion",
@@ -865,11 +914,12 @@
       "risk": "High",
       "routeUse": "Use for one Tidefall branch and its specific fish/hunt checks.",
       "cardSummary": "A Tidefall branch used for cave-system fish and hunt completion.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/coral-bastion.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Coral_Bastion",
       "sourceNote": "Listed under Tidefall locations in navigation and Tidefall page.",
-      "sortOrder": 45
+      "sortOrder": 45,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/3/3b/Coral_Bastion.png/revision/latest?cb=20260222062340"
     },
     {
       "name": "Collapsed Ruins",
@@ -883,11 +933,12 @@
       "risk": "High",
       "routeUse": "Use for one Tidefall branch and its specific fish/hunt checks.",
       "cardSummary": "A Tidefall ruins branch for cave-system completion.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/collapsed-ruins.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Collapsed_Ruins",
       "sourceNote": "Listed under Tidefall locations in navigation and Tidefall page.",
-      "sortOrder": 46
+      "sortOrder": 46,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/7/7f/CollapsedRuins.png/revision/latest?cb=20260512235635"
     },
     {
       "name": "Crowned Ruins",
@@ -901,11 +952,12 @@
       "risk": "High",
       "routeUse": "Use for one Tidefall branch and its specific fish/hunt checks.",
       "cardSummary": "A crowned ruins branch inside Tidefall for focused fish checks.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/crowned-ruins.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Crowned_Ruins",
       "sourceNote": "Listed under Tidefall locations in navigation and Tidefall page.",
-      "sortOrder": 47
+      "sortOrder": 47,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/8/8d/Crowned_RuinsRender.webp/revision/latest?cb=20260419171719"
     },
     {
       "name": "Sunken Reliquary",
@@ -919,11 +971,12 @@
       "risk": "High",
       "routeUse": "Use for the reliquary branch of Tidefall completion.",
       "cardSummary": "A Tidefall reliquary branch for fish, hunt, and item-route checks.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/sunken-reliquary.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Sunken_Reliquary",
       "sourceNote": "Listed under Tidefall locations in navigation and Tidefall page.",
-      "sortOrder": 48
+      "sortOrder": 48,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/6/6b/Sunken_Reliquary.png/revision/latest?cb=20260524165314"
     },
     {
       "name": "Tidefall Castle",
@@ -937,11 +990,12 @@
       "risk": "High",
       "routeUse": "Use for castle-branch fish and Tidefall completion.",
       "cardSummary": "The castle branch of Tidefall for cave-system fish and hunt completion.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/tidefall-castle.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Tidefall_Castle",
       "sourceNote": "Listed under Tidefall locations in navigation and Tidefall page.",
-      "sortOrder": 49
+      "sortOrder": 49,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/9/91/Tidefall_Castle.webp/revision/latest?cb=20260419172129"
     },
     {
       "name": "Scoria Reach",
@@ -955,11 +1009,12 @@
       "risk": "High",
       "routeUse": "Use for volcanic second-sea fishing, fragments, gemstones, and Scoria sub-routes.",
       "cardSummary": "A volcanic second-sea island with town services, mines, volcano routes, fragments, and gemstones.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/scoria-reach.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Scoria_Reach",
       "sourceNote": "Source page lists Scoria NPCs, sub-locations, east-of-Lost-Jungle location, and fish/reward rows.",
-      "sortOrder": 50
+      "sortOrder": 50,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/4/47/Scoriareach.png/revision/latest?cb=20260216035226"
     },
     {
       "name": "Everturn Forest",
@@ -973,11 +1028,12 @@
       "risk": "Medium to high",
       "routeUse": "Use for second-sea forest fish and route completion.",
       "cardSummary": "A second-sea forest island for newer fish and progression routes.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/everturn-forest.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Everturn_Forest",
       "sourceNote": "Listed as a major location in location navigation and category output.",
-      "sortOrder": 51
+      "sortOrder": 51,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/2/23/Everturn_Forest.png/revision/latest?cb=20260329075333"
     },
     {
       "name": "Above The Clouds",
@@ -991,11 +1047,12 @@
       "risk": "Medium to high",
       "routeUse": "Use for sky-route fish and newer progression checks.",
       "cardSummary": "A sky-themed location for newer route completion and fish checks.",
-      "image": null,
-      "imageStatus": "not collected",
+      "image": "/Fisch/Locations/above-the-clouds.webp",
+      "imageStatus": "local source image present",
       "sourcePage": "https://fisch.fandom.com/wiki/Above_The_Clouds",
       "sourceNote": "Listed as a major location in Fisch Wiki location navigation.",
-      "sortOrder": 52
+      "sortOrder": 52,
+      "sourceImageUrl": "https://static.wikia.nocookie.net/fisch/images/c/ca/AboveTheClouds.png/revision/latest?cb=20260301124729"
     }
   ]
 }

@@ -16,6 +16,7 @@
     ],
     "columns": [
       "name",
+      "image",
       "effect",
       "price",
       "sourceLocation",
@@ -43,7 +44,8 @@
       "catalogSection": "Weather Control",
       "cardSummary": "Speeds the server through day and night cycles, which helps fish, events, and hunts tied to time.",
       "sourcePage": "https://fisch.fandom.com/wiki/Sundial_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/sundial-totem.webp"
     },
     {
       "name": "Clearcast Totem",
@@ -54,7 +56,8 @@
       "catalogSection": "Weather Control",
       "cardSummary": "Forces clear weather when a catch, condition, or event setup needs the sky reset.",
       "sourcePage": "https://fisch.fandom.com/wiki/Clearcast_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/clearcast-totem.webp"
     },
     {
       "name": "Tempest Totem",
@@ -65,7 +68,8 @@
       "catalogSection": "Weather Control",
       "cardSummary": "Forces rain for rain-preferred fish and rain-linked server activity.",
       "sourcePage": "https://fisch.fandom.com/wiki/Tempest_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/tempest-totem.webp"
     },
     {
       "name": "Windset Totem",
@@ -76,7 +80,8 @@
       "catalogSection": "Weather Control",
       "cardSummary": "Forces windy weather for wind-preferred fish and wind-based rod/enchant setups.",
       "sourcePage": "https://fisch.fandom.com/wiki/Windset_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/windset-totem.webp"
     },
     {
       "name": "Smokescreen Totem",
@@ -87,7 +92,8 @@
       "catalogSection": "Weather Control",
       "cardSummary": "Forces fog for fog-preferred fish and event setups that need foggy weather.",
       "sourcePage": "https://fisch.fandom.com/wiki/Smokescreen_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/smokescreen-totem.webp"
     },
     {
       "name": "Aurora Totem",
@@ -98,7 +104,8 @@
       "catalogSection": "Special Weather and Sky Events",
       "cardSummary": "Starts Aurora Borealis for a major server luck window.",
       "sourcePage": "https://fisch.fandom.com/wiki/Aurora_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/aurora-totem.webp"
     },
     {
       "name": "Eclipse Totem",
@@ -109,7 +116,8 @@
       "catalogSection": "Special Weather and Sky Events",
       "cardSummary": "Starts the Eclipse event, mainly used when a player needs that special sky condition.",
       "sourcePage": "https://fisch.fandom.com/wiki/Eclipse_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/eclipse-totem.webp"
     },
     {
       "name": "Blue Moon Totem",
@@ -120,7 +128,8 @@
       "catalogSection": "Special Weather and Sky Events",
       "cardSummary": "Starts Blue Moon when the season, weather, and night-cycle requirements line up.",
       "sourcePage": "https://fisch.fandom.com/wiki/Blue_Moon_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/blue-moon-totem.webp"
     },
     {
       "name": "Starfall Totem",
@@ -131,7 +140,8 @@
       "catalogSection": "Special Weather and Sky Events",
       "cardSummary": "Starts Starfall for star-linked catches and event windows.",
       "sourcePage": "https://fisch.fandom.com/wiki/Starfall_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/starfall-totem.webp"
     },
     {
       "name": "Rainbow Totem",
@@ -142,7 +152,8 @@
       "catalogSection": "Special Weather and Sky Events",
       "cardSummary": "Starts Rainbow weather, one of the strongest special weather windows for fishing.",
       "sourcePage": "https://fisch.fandom.com/wiki/Rainbow_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/rainbow-totem.webp"
     },
     {
       "name": "Sparkling Totem",
@@ -153,7 +164,8 @@
       "catalogSection": "Special Weather and Sky Events",
       "cardSummary": "Starts a luminous event, with day or night behavior depending on the current server state.",
       "sourcePage": "https://fisch.fandom.com/wiki/Sparkling_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/sparkling-totem.webp"
     },
     {
       "name": "Zeus Storm Totem",
@@ -164,7 +176,8 @@
       "catalogSection": "Special Weather and Sky Events",
       "cardSummary": "Starts Zeus Storm and can trigger Zeus Trial room hazards and lightning-related rewards.",
       "sourcePage": "https://fisch.fandom.com/wiki/Zeus_Storm_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/zeus-storm-totem.webp"
     },
     {
       "name": "Cursed Storm Totem",
@@ -175,7 +188,8 @@
       "catalogSection": "Special Weather and Sky Events",
       "cardSummary": "Starts a Cursed Storm pool for Cursed mutation and XP-focused fishing.",
       "sourcePage": "https://fisch.fandom.com/wiki/Cursed_Storm_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/cursed-storm-totem.webp"
     },
     {
       "name": "Brine Storm Totem",
@@ -197,7 +211,8 @@
       "catalogSection": "Location Events",
       "cardSummary": "Starts a meteor event from several shop, chest, and map sources.",
       "sourcePage": "https://fisch.fandom.com/wiki/Meteor_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/meteor-totem.webp"
     },
     {
       "name": "Avalanche Totem",
@@ -208,7 +223,8 @@
       "catalogSection": "Location Events",
       "cardSummary": "Starts the Avalanche event in Northern Summit/Northern Expedition progression.",
       "sourcePage": "https://fisch.fandom.com/wiki/Avalanche_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/avalanche-totem.webp"
     },
     {
       "name": "Blizzard Totem",
@@ -219,7 +235,8 @@
       "catalogSection": "Location Events",
       "cardSummary": "Starts Blizzard conditions, including mutation-focused fishing during the event.",
       "sourcePage": "https://fisch.fandom.com/wiki/Blizzard_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/blizzard-totem.webp"
     },
     {
       "name": "Poseidon Wrath Totem",
@@ -230,7 +247,8 @@
       "catalogSection": "Location Events",
       "cardSummary": "Starts Poseidon Wrath and ties into Atlantis/Kraken-focused progression.",
       "sourcePage": "https://fisch.fandom.com/wiki/Poseidon%27s_Wrath_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/poseidon-wrath-totem.webp"
     },
     {
       "name": "Dripstone Collapse Totem",
@@ -263,7 +281,8 @@
       "catalogSection": "Surge Totems",
       "cardSummary": "Starts a Shiny Surge for players chasing shiny catches.",
       "sourcePage": "https://fisch.fandom.com/wiki/Shiny_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/shiny-totem.webp"
     },
     {
       "name": "Mutation Totem",
@@ -274,7 +293,8 @@
       "catalogSection": "Surge Totems",
       "cardSummary": "Starts a Mutation Surge for players chasing mutated fish.",
       "sourcePage": "https://fisch.fandom.com/wiki/Mutation_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/mutation-totem.webp"
     },
     {
       "name": "Megalodon Hunt Totem",
@@ -285,7 +305,8 @@
       "catalogSection": "Hunt Summons",
       "cardSummary": "Starts a Megalodon Hunt directly instead of waiting on natural hunt timing.",
       "sourcePage": "https://fisch.fandom.com/wiki/Megalodon_Hunt_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/megalodon-hunt-totem.webp"
     },
     {
       "name": "Kraken Hunt Totem",
@@ -296,7 +317,8 @@
       "catalogSection": "Hunt Summons",
       "cardSummary": "Starts a Kraken Hunt directly for players targeting Kraken hunt catches.",
       "sourcePage": "https://fisch.fandom.com/wiki/Kraken_Hunt_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/kraken-hunt-totem.webp"
     },
     {
       "name": "Colossal Dragon Hunt Totem",
@@ -307,7 +329,8 @@
       "catalogSection": "Hunt Summons",
       "cardSummary": "Starts one of the Colossal Dragon hunt variants.",
       "sourcePage": "https://fisch.fandom.com/wiki/Colossal_Dragon_Hunt_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/colossal-dragon-hunt-totem.webp"
     },
     {
       "name": "Scylla Hunt Totem",
@@ -318,7 +341,8 @@
       "catalogSection": "Hunt Summons",
       "cardSummary": "Starts a Scylla Hunt directly for players targeting Scylla hunt catches.",
       "sourcePage": "https://fisch.fandom.com/wiki/Scylla_Hunt_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "sourceStatus": "Official table plus internal page",
+      "image": "/Fisch/Totems/scylla-hunt-totem.webp"
     }
   ]
 }
