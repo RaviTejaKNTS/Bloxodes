@@ -14,7 +14,7 @@ const companyLinks = [
 const indexLinks = [
   { href: "/codes", label: "Codes" },
   { href: "/articles", label: "Articles" },
-  { href: "/lists", label: "Lists" },
+  { href: "/stats", label: "Stats" },
   { href: "/wiki", label: "Wiki" },
   { href: "/tools", label: "Tools" },
   { href: "/catalog", label: "Catalog" },

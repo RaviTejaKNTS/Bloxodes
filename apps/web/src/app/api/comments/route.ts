@@ -15,7 +15,6 @@ const ALLOWED_ENTITY_TYPES = new Set([
   "article",
   "catalog",
   "event",
-  "list",
   "tool",
   "wiki",
   "wiki_catalog"
@@ -29,7 +28,7 @@ const COMMENT_WRITE_RATE_LIMIT = {
   windowMs: 10 * 60 * 1000
 };
 
-type CommentEntityType = "code" | "article" | "catalog" | "event" | "list" | "tool" | "wiki" | "wiki_catalog";
+type CommentEntityType = "code" | "article" | "catalog" | "event" | "tool" | "wiki" | "wiki_catalog";
 
 type CommentPageTarget = {
   pageType: string;
@@ -121,17 +120,6 @@ async function resolveCommentPageTarget(entityType: CommentEntityType, entityId:
       .maybeSingle();
     if (error || !hasSlug(data) || !data.slug.trim()) return null;
     return { pageType: "Event", pageUrl: buildPageUrl(`/events/${data.slug}`) };
-  }
-
-  if (entityType === "list") {
-    const { data, error } = await admin
-      .from("game_lists")
-      .select("slug")
-      .eq("id", entityId)
-      .eq("is_published", true)
-      .maybeSingle();
-    if (error || !hasSlug(data) || !data.slug.trim()) return null;
-    return { pageType: "List", pageUrl: buildPageUrl(`/lists/${data.slug}`) };
   }
 
   if (entityType === "tool") {

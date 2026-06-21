@@ -6,7 +6,6 @@ import {
   FileText,
   KeyRound,
   LayoutGrid,
-  List,
   Music,
   SquareCheckBig,
   Wrench
@@ -16,7 +15,7 @@ import { cn } from "@/lib/utils";
 type IndexPageStatsProps = {
   items: Array<{
     label: string;
-    icon?: "articles" | "catalog" | "checklists" | "clock" | "codes" | "events" | "lists" | "music" | "quizzes" | "tools" | "wiki";
+    icon?: "articles" | "catalog" | "checklists" | "clock" | "codes" | "events" | "music" | "quizzes" | "tools" | "wiki";
     tone?: "accent" | "muted";
   }>;
   className?: string;
@@ -29,7 +28,6 @@ const iconMap = {
   clock: Clock,
   codes: KeyRound,
   events: Calendar,
-  lists: List,
   music: Music,
   quizzes: Award,
   tools: Wrench,

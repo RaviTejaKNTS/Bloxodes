@@ -50,7 +50,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 
 | Route | Methods | File | Purpose |
 | --- | --- | --- | --- |
-| `/feed.xml` | `GET` | `src/app/feed.xml/route.ts` | RSS feed for recent articles, codes, lists, events, and checklists. |
+| `/feed.xml` | `GET` | `src/app/feed.xml/route.ts` | RSS feed for recent articles, codes, events, puzzles, and checklists. |
 | `/robots.txt` | route module | `src/app/robots.ts` | Robots directives built from site config. |
 | `/sitemap.xml` | `GET` | `src/app/sitemap.xml/route.ts` | Top-level sitemap index builder. |
 | `/sitemaps/main.xml` | `GET` | `src/app/sitemaps/main.xml/route.ts` | Static route sitemap. |
@@ -60,7 +60,6 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/sitemaps/checklists.xml` | `GET` | `src/app/sitemaps/checklists.xml/route.ts` | Checklists sitemap. |
 | `/sitemaps/codes.xml` | `GET` | `src/app/sitemaps/codes.xml/route.ts` | Codes sitemap. |
 | `/sitemaps/events.xml` | `GET` | `src/app/sitemaps/events.xml/route.ts` | Events sitemap. |
-| `/sitemaps/lists.xml` | `GET` | `src/app/sitemaps/lists.xml/route.ts` | Lists sitemap. |
 | `/sitemaps/puzzles.xml` | `GET` | `src/app/sitemaps/puzzles.xml/route.ts` | Indexable current puzzle-answer pages sitemap. Dated puzzle archives are excluded because they are noindex reference pages. |
 | `/sitemaps/quizzes.xml` | `GET` | `src/app/sitemaps/quizzes.xml/route.ts` | Quizzes sitemap. |
 | `/sitemaps/stats.xml` | `GET` | `src/app/sitemaps/stats.xml/route.ts` | Stats sitemap for `/stats`, `/stats/games`, and selected quality game stat pages. |

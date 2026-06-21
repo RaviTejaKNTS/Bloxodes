@@ -14,7 +14,7 @@ export default function SiteNotFound() {
           We couldn&apos;t find the page you were looking for.
         </h1>
         <p className="mx-auto max-w-2xl text-base text-muted md:text-lg">
-          The link may be outdated, or the page might have moved. Explore the latest Roblox code drops, curated game lists, and in-depth articles, or head back to the {SITE_NAME} home page.
+          The link may be outdated, or the page might have moved. Explore the latest Roblox code drops, live stats, and in-depth articles, or head back to the {SITE_NAME} home page.
         </p>
       </div>
 
@@ -33,10 +33,10 @@ export default function SiteNotFound() {
             See Roblox codes
           </Link>
           <Link
-            href="/lists"
+            href="/stats"
             className="inline-flex items-center justify-center rounded-full border border-border/60 px-5 py-3 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
           >
-            Browse game lists
+            Browse game stats
           </Link>
           <Link
             href="/articles"

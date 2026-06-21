@@ -4,7 +4,7 @@ import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 
 const title = "About Bloxodes.com";
 const description =
-  "Learn how Bloxodes.com grew from a Robux calculator into a Roblox hub for tools, checklists, live lists, codes, guides, and optional accounts.";
+  "Learn how Bloxodes.com grew from a Robux calculator into a Roblox hub for tools, checklists, live stats, codes, guides, and optional accounts.";
 const canonical = `${SITE_URL.replace(/\/$/, "")}/about`;
 const ogImage = `${SITE_URL}/og-image.png`;
 
@@ -48,7 +48,7 @@ export default function AboutPage() {
         <header className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">About Bloxodes.com</h1>
           <p className="text-base text-muted sm:text-lg">
-            Today, Bloxodes is a growing Roblox hub with tools, checklists, live lists, codes, reference pages, and optional accounts to help
+            Today, Bloxodes is a growing Roblox hub with tools, checklists, live stats, codes, reference pages, and optional accounts to help
             players stay informed and connected.
           </p>
         </header>
@@ -67,7 +67,7 @@ export default function AboutPage() {
           <p>
             Slowly, we added more and more to the platform. I partnered with my friends who play Roblox and we dabbed into providing Roblox
             Codes and wanted to make the site a codes hub. Now it is slowly turning into a full Roblox platform with guides, checklists, live
-            lists, and many other tools.
+            stats, and many other tools.
           </p>
           <p>What started as a tiny calculator has turned into a platform.</p>
         </section>
@@ -99,9 +99,9 @@ export default function AboutPage() {
             </li>
             <li>
               <strong>
-                <a href="/lists">Live lists &amp; rankings</a>
+                <a href="/stats">Live stats &amp; rankings</a>
               </strong>
-              : Roblox trends move fast. A game that is huge today can disappear tomorrow. Our live lists are built to show what players are
+              : Roblox trends move fast. A game that is huge today can disappear tomorrow. Our stats pages show what players are
               actually playing right now, using real Roblox data (not votes or opinions). They are meant for discovery: "What should I play
               next?" and "What is blowing up today?".
             </li>
@@ -122,7 +122,7 @@ export default function AboutPage() {
           <p>
             The goal is simple: make Bloxodes the place you check when you need something specific related to Bloxodes either that is for
             latest active codes, tools that help you calculate and plan, checklists that keeps track of your gameplay progress from start to
-            end, lists you can use to find and discover new games and even experience based guides across the Roblox games.
+            end, stats you can use to find and discover new games and even experience based guides across the Roblox games.
           </p>
         </section>
 

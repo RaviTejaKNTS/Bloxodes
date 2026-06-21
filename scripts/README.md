@@ -10,7 +10,6 @@ The `scripts/` folder is organized by task area so it's easier to find the right
 - `codes/`: code-page import, source repair, refresh, and code-article jobs. Code rows come from `scripts/codes/update-codes.ts` using `code_pages.source_url` for RobloxDen and `code_pages.source_url_2` for Beebom; do not seed codes manually.
 - `decal-ids/`: decal scraping and enrichment tooling
 - `events/`: event ingestion, event page seeding, and event article generation
-- `lists/`: trending and curated list refresh jobs
 - `music/`: Roblox music ID collection, enrichment, verification, and imports
 - `posts/`: outbound posting and distribution scripts
 - `shared/`: shared helpers used by multiple scripts

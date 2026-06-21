@@ -51,7 +51,7 @@ export type ApiErrorResponse = {
   error: string;
 };
 
-export type MobileContentKind = "articles" | "catalog" | "checklists" | "events" | "lists" | "quizzes" | "tools" | "wiki";
+export type MobileContentKind = "articles" | "catalog" | "checklists" | "events" | "quizzes" | "tools" | "wiki";
 
 export type MobileContentItem = {
   id: string;
@@ -118,7 +118,6 @@ export type SearchItemType =
   | "checklist"
   | "codes"
   | "event"
-  | "list"
   | "music"
   | "quiz"
   | "tool"

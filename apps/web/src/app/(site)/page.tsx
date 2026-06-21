@@ -4,8 +4,7 @@ import { formatDistanceToNow } from "date-fns";
 import {
   listCodePagesWithActiveCounts,
   listPublishedArticles,
-  listPublishedChecklists,
-  listPublishedGameLists
+  listPublishedChecklists
 } from "@/lib/db";
 import { listPublishedQuizzes } from "@/lib/quizzes";
 import { listPublishedTools } from "@/lib/tools";
@@ -15,7 +14,6 @@ import { listPublishedWikiPages } from "@/lib/wiki";
 import { GameCard } from "@/components/GameCard";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ChecklistCard } from "@/components/ChecklistCard";
-import { ListCard } from "@/components/ListCard";
 import { ToolCard } from "@/components/ToolCard";
 import { EventsPageCard } from "@/components/EventsPageCard";
 import { CatalogCard } from "@/components/CatalogCard";
@@ -26,7 +24,6 @@ import { buildEventsCards } from "./events/page-data";
 const INITIAL_FEATURED_GAMES = 8;
 const INITIAL_ARTICLES = 8;
 const INITIAL_CHECKLISTS = 6;
-const INITIAL_LISTS = 6;
 const INITIAL_TOOLS = 6;
 const INITIAL_WIKI = 8;
 const INITIAL_EVENTS = 3;
@@ -117,11 +114,10 @@ function summarize(descriptionMd: string | null | undefined, fallback: string): 
 }
 
 export default async function HomePage() {
-  const [games, articles, checklistRows, lists, tools, wikiPages, quizzes, eventsPayload, catalogPages] = await Promise.all([
+  const [games, articles, checklistRows, tools, wikiPages, quizzes, eventsPayload, catalogPages] = await Promise.all([
     listCodePagesWithActiveCounts(),
     listPublishedArticles(12),
     listPublishedChecklists(INITIAL_CHECKLISTS * 2),
-    listPublishedGameLists(),
     listPublishedTools(),
     listPublishedWikiPages(),
     listPublishedQuizzes(),
@@ -177,20 +173,6 @@ export default async function HomePage() {
       };
     })
   );
-
-  const listCards = (lists ?? []).slice(0, INITIAL_LISTS).map((list) => {
-    const displayName = list.display_name || list.title;
-    const topImage = (list as any).top_entry_image ?? null;
-    return {
-      id: list.id,
-      title: list.title,
-      displayName,
-      slug: list.slug,
-      coverImage: list.cover_image || topImage || `${SITE_URL}/og-image.png`,
-      updatedAt: list.updated_at ?? list.refreshed_at ?? list.created_at,
-      itemsCount: typeof list.limit_count === "number" ? list.limit_count : null
-    };
-  });
 
   const toolCards = tools.slice(0, INITIAL_TOOLS);
   const wikiCards = wikiPages.slice(0, INITIAL_WIKI);
@@ -302,18 +284,6 @@ export default async function HomePage() {
       },
       {
         "@type": "ItemList",
-        name: "Game lists",
-        numberOfItems: listCards.length,
-        itemListElement: listCards.map((list, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: list.displayName ?? list.title,
-          url: `${SITE_URL}/lists/${list.slug}`,
-          dateModified: list.updatedAt ?? undefined
-        }))
-      },
-      {
-        "@type": "ItemList",
         name: "Checklists",
         numberOfItems: checklistCards.length,
         itemListElement: checklistCards.map((card, index) => ({
@@ -361,10 +331,10 @@ export default async function HomePage() {
       <header className="space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Roblox Hub</p>
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-          Roblox hub for guides, checklists, tools, active codes, and live ranking game lists
+          Roblox hub for guides, checklists, tools, active codes, and live game stats
         </h1>
         <p className="max-w-3xl text-base text-muted md:text-lg">
-          Guides, checklists, tools, active codes, and live data-driven lists in one place. Updated throughout the day with fresh rewards,
+          Guides, checklists, tools, active codes, and live stats in one place. Updated throughout the day with fresh rewards,
           tips, and insights.
         </p>
       </header>
@@ -536,47 +506,6 @@ export default async function HomePage() {
           </div>
         ) : (
           <p className="text-sm text-muted">No quizzes have been published yet. Check back soon.</p>
-        )}
-      </section>
-
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Lists</h2>
-          <Link
-            href="/lists"
-            data-analytics-event="view_all_click"
-            data-analytics-section="lists"
-            className="text-sm font-semibold text-accent underline-offset-2 hover:underline"
-          >
-            View all lists
-          </Link>
-        </div>
-        {listCards.length ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {listCards.map((card, index) => (
-              <div
-                key={card.id}
-                className="contents"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="home_lists"
-                data-analytics-item-id={card.slug}
-                data-analytics-item-name={card.displayName}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="list"
-              >
-                <ListCard
-                  displayName={card.displayName}
-                  title={card.title}
-                  slug={card.slug}
-                  coverImage={card.coverImage}
-                  updatedAt={card.updatedAt}
-                  itemsCount={card.itemsCount}
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-muted">No published lists yet. Check back soon.</p>
         )}
       </section>
 

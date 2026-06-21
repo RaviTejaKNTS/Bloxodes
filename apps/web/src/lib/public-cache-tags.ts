@@ -3,7 +3,6 @@ export const CACHE_TAG_HEADER = "Cache-Tag";
 export type PublicCacheEventType =
   | "code"
   | "article"
-  | "list"
   | "author"
   | "event"
   | "checklist"
@@ -189,11 +188,6 @@ export function cacheTagsForPath(pathname: string) {
     return unique([...tags, "tools", slugTag("tool", segments.join("/").replace(/^tools\//, ""))]);
   }
 
-  if (first === "lists") {
-    if (!second || second === "page") return unique([...tags, "lists-index"]);
-    return unique([...tags, "lists", slugTag("list", second)]);
-  }
-
   if (first === "stats") {
     if (!second) return unique([...tags, "stats", "stats-home"]);
     if (second === "games" && !third) return unique([...tags, "stats", "stats-games"]);
@@ -262,8 +256,6 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         "sitemap",
         "sitemap:articles"
       ]);
-    case "list":
-      return unique([...base, slugTag("list", normalized), "lists-index", "home", "feed", "sitemap", "sitemap:lists"]);
     case "author":
       return unique([...base, slugTag("author", normalized), "authors-index", "sitemap", "sitemap:authors"]);
     case "event":

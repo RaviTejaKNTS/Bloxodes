@@ -61,7 +61,6 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - Code-page article fields and metadata must be evergreen. Do not write active code names, current-code reward mappings, active counts, exact dates, month/year labels, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily` into prose or metadata.
 - `decal-ids/`: decal scraping and enrichment.
 - `events/`: event ingestion, page seeding, event detail hydration, event guide generation.
-- `lists/`: curated and trending list refresh jobs.
 - `music/`: music ID collection, import, enrichment, verification, thumbnails.
 - `posts/`: outbound posting jobs.
 - `puzzles/`: daily puzzle answer collectors for `/puzzles`, writing durable answer rows into `puzzle_answers`.

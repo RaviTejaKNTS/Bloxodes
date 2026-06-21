@@ -215,14 +215,13 @@ async function main() {
 
   const universeIds = new Set<number>();
 
-  const [tools, catalogPages, wikiCatalogPages, quizPages, checklistPages, eventsPages, gameLists] = await Promise.all([
+  const [tools, catalogPages, wikiCatalogPages, quizPages, checklistPages, eventsPages] = await Promise.all([
     fetchAll(source, "tools", (query) => query.order("updated_at", { ascending: false })),
     fetchAll(source, "catalog_pages", (query) => query.order("updated_at", { ascending: false })),
     fetchAll(source, "wiki_catalog_pages", (query) => query.order("updated_at", { ascending: false })),
     fetchAll(source, "quiz_pages", (query) => query.eq("is_published", true).order("updated_at", { ascending: false }).limit(50)),
     fetchAll(source, "checklist_pages", (query) => query.eq("is_public", true).order("updated_at", { ascending: false }).limit(50)),
-    fetchAll(source, "events_pages", (query) => query.eq("is_published", true).order("updated_at", { ascending: false }).limit(50)),
-    fetchAll(source, "game_lists", (query) => query.eq("is_published", true).order("updated_at", { ascending: false }))
+    fetchAll(source, "events_pages", (query) => query.eq("is_published", true).order("updated_at", { ascending: false }).limit(50))
   ]);
 
   [tools, catalogPages, wikiCatalogPages, quizPages, checklistPages, eventsPages].forEach((rows) => addUniverseIds(universeIds, rows));
@@ -257,13 +256,6 @@ async function main() {
   const authorIds = uniq(articles.map((row) => getString(row, "author_id")));
   const authors = await fetchByValues("authors", "id", authorIds);
 
-  const gameListEntries = await fetchByValues("game_list_entries", "list_id", uniq(gameLists.map((row) => getString(row, "id"))));
-  addUniverseIds(universeIds, gameListEntries);
-
-  const listEntryCodePageIds = uniq(gameListEntries.map((row) => getString(row, "code_page_id")));
-  const listEntryCodePages = await fetchByValues("code_pages", "id", listEntryCodePageIds);
-  addUniverseIds(universeIds, listEntryCodePages);
-
   const universes = await fetchByValues("roblox_universes", "universe_id", [...universeIds]);
   const finalUniverseIds = uniq(universes.map((row) => getNumber(row, "universe_id")));
   const richUniverseIds = finalUniverseIds.slice(0, 40);
@@ -280,7 +272,7 @@ async function main() {
 
   await upsertRows("roblox_universes", universes, "universe_id");
   await upsertRows("authors", authors, "id");
-  await upsertRows("code_pages", [...codePages, ...listEntryCodePages], "id");
+  await upsertRows("code_pages", codePages, "id");
   await upsertRows("wiki_pages", wikiPages, "id");
   await upsertRows("catalog_pages", catalogPages, "code");
   await upsertRows("wiki_catalog_pages", wikiCatalogPages, "code");
@@ -291,8 +283,6 @@ async function main() {
   await upsertRows("events_pages", eventsPages, "id");
   await upsertRows("articles", articles, "id");
   await upsertRows("codes", codes, "id");
-  await upsertRows("game_lists", gameLists, "id");
-  await upsertRows("game_list_entries", gameListEntries, "list_id,universe_id");
   await optionalUpsert("roblox_universe_media", media, "id");
   await optionalUpsert("roblox_universe_badges", badges, "badge_id");
   await optionalUpsert("roblox_universe_gamepasses", gamepasses, "pass_id");

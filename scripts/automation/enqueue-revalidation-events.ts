@@ -6,7 +6,6 @@ import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 const VALID_TYPES = new Set([
   "code",
   "article",
-  "list",
   "author",
   "event",
   "checklist",

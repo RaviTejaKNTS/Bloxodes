@@ -16,7 +16,7 @@ This folder defines the app's database contract and edge-function behavior.
 ## Current Responsibilities
 
 - Production Supabase is self-hosted on the same VPS as the web app. The production API endpoint is `https://database.bloxodes.com`; Studio is `https://studio.bloxodes.com`; public storage/media URLs should use `https://media.bloxodes.com`. Managed Supabase is a rollback/source fallback, not the hot production path, and should not be referenced by runtime rows before the old project is deleted.
-- Core public content tables and views for codes, articles, lists, checklists, quizzes, wiki pages, tools, catalog pages, authors, and events.
+- Core public content tables and views for codes, articles, checklists, quizzes, wiki pages, tools, catalog pages, authors, puzzles, stats, and events.
 - User/account data in `app_users` plus session/progress/comment tables used by account and community features.
 - Search, ranking, music IDs, free items, and universe enrichment data that power public pages and API routes.
 - Revalidation queueing, publish-trigger automation, and deferred cache warming through `revalidation_events`, `cache_warm_events`, and their worker-run audit tables.

@@ -3,15 +3,12 @@ import {
   getArticleBySlug,
   getFreeItemCategories,
   getChecklistPageBySlug,
-  getGameListBySlug,
   listFreeItems,
   listPublishedArticlesPage,
   listPublishedChecklistsPage,
-  listPublishedGameListsPage,
   type ArticleWithRelations,
   type ChecklistSummaryRow,
-  type FreeItem,
-  type GameList
+  type FreeItem
 } from "@/lib/db";
 import { buildEventsCards } from "@/app/(site)/events/page-data";
 import {
@@ -39,7 +36,7 @@ import { getForgeCatalogConfig, loadForgeCatalogDataset } from "@/app/(site)/cat
 const PAGE_SIZE = 20;
 const DETAIL_ITEM_LIMIT = 36;
 
-export type MobileContentKind = "articles" | "catalog" | "checklists" | "events" | "lists" | "quizzes" | "tools" | "wiki";
+export type MobileContentKind = "articles" | "catalog" | "checklists" | "events" | "quizzes" | "tools" | "wiki";
 
 export type MobileContentItem = {
   id: string;
@@ -505,21 +502,6 @@ function mapCatalog(row: CatalogIndexEntry): MobileContentItem {
     updatedAt,
     url: `${SITE_URL}/catalog/${row.code}`,
     badge: "Catalog"
-  };
-}
-
-function mapList(row: GameList): MobileContentItem {
-  const updatedAt = row.refreshed_at || row.updated_at || row.created_at || null;
-
-  return {
-    id: row.id,
-    title: row.display_name || row.title,
-    subtitle: row.primary_metric_label ?? null,
-    summary: summarize(row.meta_description ?? row.intro_md ?? row.hero_md ?? null, "Curated Roblox game list from Bloxodes."),
-    coverImage: absoluteAssetUrl(row.top_entry_image || row.cover_image || "/og-image.png"),
-    updatedAt,
-    url: `${SITE_URL}/lists/${row.slug}`,
-    badge: row.limit_count ? `${row.limit_count} games` : "List"
   };
 }
 
@@ -1073,23 +1055,6 @@ export async function getMobileContentIndex(kind: MobileContentKind, searchParam
     };
   }
 
-  if (kind === "lists") {
-    const { lists, total } = await listPublishedGameListsPage(query ? 1 : page, query ? 500 : pageSize);
-    const mapped = lists.map(mapList);
-    const paged = query ? paginateMobileItems(mapped, page, pageSize, query) : { items: mapped, page, total, totalPages: Math.max(1, Math.ceil(total / pageSize)) };
-    return {
-      ok: true,
-      kind,
-      page: paged.page,
-      pageSize,
-      total: paged.total,
-      totalPages: paged.totalPages,
-      latestUpdatedAt: latest(lists.map((item) => item.refreshed_at || item.updated_at || item.created_at || null)),
-      query,
-      items: paged.items
-    };
-  }
-
   if (kind === "wiki") {
     const all = await listPublishedWikiPages();
     const paged = paginateMobileItems(all.map(mapWiki), page, pageSize, query);
@@ -1289,41 +1254,6 @@ export async function getMobileContentDetail(
     };
   }
 
-  if (kind === "lists") {
-    const data = await getGameListBySlug(normalizedSlug, 1, 30);
-    if (!data) return null;
-    const { list, entries, total } = data;
-    const updatedAt = list.refreshed_at || list.updated_at || list.created_at || null;
-    const sections = [
-      section("overview", "Overview", { body: toPlainText(list.meta_description) ?? toPlainText(list.intro_md) ?? toPlainText(list.hero_md) }),
-      section("games", "Ranked games", {
-        subtitle: `${total} games`,
-        items: entries.map((entry) => {
-          const name = entry.universe.display_name ?? entry.universe.name ?? entry.game?.name ?? `#${entry.rank}`;
-          const metric = entry.metric_label || compactNumber(entry.metric_value) || null;
-          return detailItem(`${entry.universe_id}`, `#${entry.rank} ${name}`, {
-            badge: metric,
-            body: entry.reason ?? entry.universe.description,
-            image: entry.universe.icon_url
-          });
-        })
-      })
-    ].filter(Boolean) as MobileContentDetailSection[];
-
-    return {
-      ok: true,
-      kind,
-      title: list.display_name || list.title,
-      subtitle: list.primary_metric_label ?? null,
-      summary: toPlainText(list.meta_description) ?? toPlainText(list.intro_md),
-      coverImage: absoluteAssetUrl(list.top_entry_image || list.cover_image || "/og-image.png"),
-      updatedAt,
-      url: `${SITE_URL}/lists/${list.slug}`,
-      badge: `${total} games`,
-      sections
-    };
-  }
-
   if (kind === "quizzes") {
     const [page, quizData] = await Promise.all([getQuizPageByCode(normalizedSlug), loadQuizData(normalizedSlug)]);
     if (!page) return null;
@@ -1509,15 +1439,6 @@ export async function getMobileContentDetail(
           items: [detailItem(related.eventsPage.slug, related.eventsPage.title, { badge: "Event" })]
         })
       : null,
-    related.rankingBadges.length
-      ? section("rankings", "List rankings", {
-          items: related.rankingBadges.map((badge) =>
-            detailItem(`${badge.list_slug}-${badge.rank}`, badge.list_title, {
-              badge: `#${badge.rank}`
-            })
-          )
-        })
-      : null,
     related.media.length
       ? section("media", "Media", {
           items: related.media.map((media) =>
@@ -1599,7 +1520,6 @@ export function isMobileContentKind(value: string): value is MobileContentKind {
     value === "catalog" ||
     value === "checklists" ||
     value === "events" ||
-    value === "lists" ||
     value === "quizzes" ||
     value === "tools" ||
     value === "wiki"

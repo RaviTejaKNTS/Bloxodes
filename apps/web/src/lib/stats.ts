@@ -120,7 +120,7 @@ export type StatsGame = {
 export type StatsRelatedLink = {
   label: string;
   href: string;
-  type: "codes" | "wiki" | "catalog" | "event" | "tool" | "quiz" | "checklist" | "article" | "list" | "roblox";
+  type: "codes" | "wiki" | "catalog" | "event" | "tool" | "quiz" | "checklist" | "article" | "roblox";
 };
 
 export type StatsChartPoint = {
@@ -260,7 +260,6 @@ export type StatsGameDetailData = {
   relatedLinks: StatsRelatedLink[];
   sameCreator: StatsGame[];
   similarGames: StatsGame[];
-  includedInLists: StatsRelatedLink[];
 };
 
 export type StatsGameChartData = {
@@ -2006,13 +2005,12 @@ async function buildStatsGameDetail(row: UniverseRow | StatsGameIndexRow): Promi
     "indexed_at" in row
       ? mapIndexedGame(row)
       : (await attachGrowth([mapUniverse(row)]))[0];
-  const [initialChart, initialRankChart, relatedLinks, sameCreator, similarGames, includedInLists, globalRank] = await Promise.all([
+  const [initialChart, initialRankChart, relatedLinks, sameCreator, similarGames, globalRank] = await Promise.all([
     getStatsGameChart(baseGame.universeId, DEFAULT_STATS_CHART_RANGE, DEFAULT_STATS_CHART_RESOLUTION, { includeAnnotations: true }),
     getStatsGameRankChart(baseGame, DEFAULT_STATS_CHART_RANGE, DEFAULT_STATS_CHART_RESOLUTION, { includeAnnotations: true }),
     loadRelatedLinks(baseGame.universeId, baseGame),
     loadSameCreatorGames(baseGame),
     loadSimilarGames(baseGame),
-    loadListLinks(baseGame.universeId),
     loadLatestRank(baseGame.universeId)
   ]);
 
@@ -2022,8 +2020,7 @@ async function buildStatsGameDetail(row: UniverseRow | StatsGameIndexRow): Promi
     initialRankChart,
     relatedLinks,
     sameCreator,
-    similarGames,
-    includedInLists
+    similarGames
   };
 }
 
@@ -2099,24 +2096,6 @@ async function loadSameCreatorGames(game: StatsGame): Promise<StatsGame[]> {
 async function loadSimilarGames(game: StatsGame): Promise<StatsGame[]> {
   const { rows } = await listBaseGames({ limit: 20, sort: "playing", genre: game.genre ?? undefined });
   return attachGrowth(rows.filter((row) => row.universeId !== game.universeId).slice(0, 6));
-}
-
-async function loadListLinks(universeId: number): Promise<StatsRelatedLink[]> {
-  const sb = supabaseAdmin();
-  const { data, error } = await sb
-    .from("game_list_entries")
-    .select("rank, list:game_lists(slug, title, is_published)")
-    .eq("universe_id", universeId)
-    .order("rank", { ascending: true })
-    .limit(6);
-  if (error) return [];
-  return ((data ?? []) as Array<{ rank: number | null; list: { slug?: string | null; title?: string | null; is_published?: boolean | null } | Array<{ slug?: string | null; title?: string | null; is_published?: boolean | null }> | null }>)
-    .flatMap((row) => {
-      const list = Array.isArray(row.list) ? row.list[0] : row.list;
-      if (!list?.slug || list.is_published !== true) return [];
-      const label = row.rank ? `#${row.rank} on ${list.title ?? "List"}` : list.title ?? "List";
-      return [{ label, href: `/lists/${list.slug}`, type: "list" as const }];
-    });
 }
 
 async function loadLatestRank(universeId: number): Promise<number | null> {

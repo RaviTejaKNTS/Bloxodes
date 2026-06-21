@@ -10,7 +10,6 @@ type Options = {
   warmStatsLimit: number;
   coldStatsLimit: number;
   deepLimit: number;
-  refreshLists: boolean;
   skipDiscovery: boolean;
   skipLight: boolean;
   skipTier: boolean;
@@ -38,7 +37,6 @@ function parseArgs(): Options {
     warmStatsLimit: readNumber(process.env.UNIVERSE_PIPELINE_WARM_STATS_LIMIT, 0),
     coldStatsLimit: readNumber(process.env.UNIVERSE_PIPELINE_COLD_STATS_LIMIT, 0),
     deepLimit: readNumber(process.env.UNIVERSE_PIPELINE_DEEP_LIMIT, 0),
-    refreshLists: false,
     skipDiscovery: false,
     skipLight: false,
     skipTier: false
@@ -66,8 +64,6 @@ function parseArgs(): Options {
     } else if (arg === "--deep-limit") {
       options.deepLimit = readNumber(args[i + 1], options.deepLimit);
       i += 1;
-    } else if (arg === "--refresh-lists") {
-      options.refreshLists = true;
     } else if (arg === "--skip-discovery" || arg === "--skip-search" || arg === "--skip-creators") {
       options.skipDiscovery = true;
     } else if (arg === "--skip-light") {
@@ -98,7 +94,6 @@ Options:
   --warm-stats-limit <n>    Refresh WARM game stats; 0 skips
   --cold-stats-limit <n>    Refresh COLD game stats; 0 skips
   --deep-limit <number>     Deep-enrich HOT rows; 0 skips
-  --refresh-lists           Refresh game lists at the end
   --skip-light              Skip light enrichment
   --skip-tier               Skip stats tier assignment
   -h, --help                Show this help text
@@ -186,8 +181,7 @@ function buildSteps(options: Options): Step[] {
       "enrich:universes:deep",
       ["--tier", "HOT", "--limit", String(options.deepLimit)],
       options.deepLimit > 0
-    ),
-    npmStep("List refresh", "lists:refresh", [], options.refreshLists)
+    )
   ];
 }
 

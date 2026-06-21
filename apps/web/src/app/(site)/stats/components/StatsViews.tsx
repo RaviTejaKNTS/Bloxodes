@@ -898,7 +898,7 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
           <CardTitle className="m-0 text-base font-semibold text-foreground">Bloxodes pages for this game</CardTitle>
         </CardHeader>
         <CardContent className="p-4">
-          <RelatedLinks links={[...data.relatedLinks, ...data.includedInLists]} />
+          <RelatedLinks links={data.relatedLinks} />
         </CardContent>
       </Card>
 

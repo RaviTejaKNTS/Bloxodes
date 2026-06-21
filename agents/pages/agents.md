@@ -32,7 +32,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | --- | --- | --- |
 | Codes | `/codes`, `/codes/page/[page]`, `/codes/[slug]` | `src/app/(site)/codes/*`, shared helpers in `src/app/(site)/codes/page-data.tsx`. Slugs are game slugs only, not `<game>-codes`; code rows come from `scripts/codes/update-codes.ts` using RobloxDen in `source_url` and Beebom in `source_url_2`. |
 | Articles | `/articles`, `/articles/page/[page]`, `/articles/[slug]` | `src/app/(site)/articles/*`, shared helpers in `src/app/(site)/articles/page-data.tsx` |
-| Lists | `/lists`, `/lists/page/[page]`, `/lists/[slug]`, `/lists/[slug]/page/[page]` | `src/app/(site)/lists/*`, shared helpers in `src/app/(site)/lists/page-data.tsx` and `src/app/(site)/lists/[slug]/page-data.tsx` |
+| Retired lists redirect | `/lists`, `/lists/*` | `src/app/(site)/lists/[[...slug]]/page.tsx`; old list URLs permanently redirect to `/stats` |
 | Checklists | `/checklists`, `/checklists/page/[page]`, `/checklists/[slug]` | `src/app/(site)/checklists/*`, shared helpers in `src/app/(site)/checklists/page-data.tsx` |
 | Events | `/events`, `/events/[slug]` | `src/app/(site)/events/*`, shared loaders in `src/app/(site)/events/page-data.tsx`, detail composition in `events/[slug]/events-page.tsx` |
 | Quizzes | `/quizzes`, `/quizzes/[slug]` | `src/app/(site)/quizzes/*`, scoped guide in `src/app/(site)/quizzes/AGENTS.md`, shared helpers in `src/app/(site)/quizzes/page-data.tsx`. Use `$bloxodes-quiz-writing` for metadata, local question pools, and validation. Detail pages should keep the user in the quiz experience: use the page intro plus the interactive quiz, not a separate "what this quiz covers" about block. |
@@ -98,8 +98,6 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `src/app/(site)/checklists/page-data.tsx`
 - `src/app/(site)/codes/page-data.tsx`
 - `src/app/(site)/events/page-data.tsx`
-- `src/app/(site)/lists/page-data.tsx`
-- `src/app/(site)/lists/[slug]/page-data.tsx`
 - `src/app/(site)/quizzes/page-data.tsx`
 - `src/app/(site)/tools/page-data.tsx`
 - `src/app/(site)/wiki/page-data.tsx`

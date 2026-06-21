@@ -11,7 +11,6 @@ type Payload = SinglePayload | { type: "batch"; events: SinglePayload[] };
 const EVENT_TYPES = new Set<PublicCacheEventType>([
   "code",
   "article",
-  "list",
   "author",
   "event",
   "checklist",
@@ -44,7 +43,6 @@ const AVATAR_CATALOG_PREFIXES = [
 const SITEMAP_INDEX_PATH = "/sitemap.xml";
 const ARTICLES_SITEMAP_PATH = "/sitemaps/articles.xml";
 const CODES_SITEMAP_PATH = "/sitemaps/codes.xml";
-const LISTS_SITEMAP_PATH = "/sitemaps/lists.xml";
 const AUTHORS_SITEMAP_PATH = "/sitemaps/authors.xml";
 const EVENTS_SITEMAP_PATH = "/sitemaps/events.xml";
 const CHECKLISTS_SITEMAP_PATH = "/sitemaps/checklists.xml";
@@ -130,20 +128,6 @@ function revalidateForArticle(slug: string) {
   return applyRevalidation(
     [`/articles/${slug}`, ...paginatedIndexPaths("/articles"), "/", FEED_PATH, SITEMAP_INDEX_PATH, ARTICLES_SITEMAP_PATH],
     [`article:${slug}`, "articles", "articles-index", "home"]
-  );
-}
-
-function revalidateForList(slug: string) {
-  return applyRevalidation(
-    [
-      ...paginatedIndexPaths(`/lists/${slug}`),
-      ...paginatedIndexPaths("/lists"),
-      "/",
-      FEED_PATH,
-      SITEMAP_INDEX_PATH,
-      LISTS_SITEMAP_PATH
-    ],
-    [`list:${slug}`, "lists", "lists-index", "home"]
   );
 }
 
@@ -260,8 +244,7 @@ function warmPathPriority(path: string) {
     path === "/catalog" ||
     path === "/articles" ||
     path === "/events" ||
-    path === "/tools" ||
-    path === "/lists"
+    path === "/tools"
   ) {
     return 20;
   }
@@ -492,70 +475,6 @@ async function lookupUniverseIdsBySlug(table: string, slugColumn: string, values
   return uniqueUniverseIds((data ?? []) as Array<{ universe_id?: unknown }>);
 }
 
-async function lookupListUniverseIds(slug: string): Promise<number[]> {
-  const sb = supabaseAdmin();
-  const { data: lists, error: listError } = await sb
-    .from("game_lists")
-    .select("id")
-    .eq("slug", slug)
-    .eq("is_published", true);
-
-  if (listError) {
-    console.warn("Wiki revalidation lookup failed for game_lists", listError.message);
-    return [];
-  }
-
-  const listIds = (lists ?? [])
-    .map((row) => (row as { id?: unknown }).id)
-    .filter((id): id is string => typeof id === "string" && id.length > 0);
-
-  if (!listIds.length) return [];
-
-  const { data: entries, error: entriesError } = await sb
-    .from("game_list_entries")
-    .select("universe_id")
-    .in("list_id", listIds)
-    .lte("rank", 3)
-    .not("universe_id", "is", null);
-
-  if (entriesError) {
-    console.warn("Wiki revalidation lookup failed for game_list_entries", entriesError.message);
-    return [];
-  }
-
-  return uniqueUniverseIds((entries ?? []) as Array<{ universe_id?: unknown }>);
-}
-
-async function lookupListSlugsByUniverseIds(universeIds: number[]): Promise<string[]> {
-  const ids = Array.from(new Set(universeIds.filter((id) => Number.isFinite(id))));
-  if (!ids.length) return [];
-
-  const sb = supabaseAdmin();
-  const { data, error } = await sb
-    .from("game_list_entries")
-    .select("list:game_lists(slug, is_published)")
-    .in("universe_id", ids);
-
-  if (error) {
-    console.warn("List revalidation lookup failed for game_list_entries", error.message);
-    return [];
-  }
-
-  return Array.from(
-    new Set(
-      (data ?? [])
-        .flatMap((row) => {
-          const list = (row as { list?: unknown }).list;
-          return Array.isArray(list) ? list : list ? [list] : [];
-        })
-        .filter((list): list is { slug?: string | null; is_published?: boolean | null } => Boolean(list))
-        .filter((list) => list.is_published === true)
-        .map((list) => normalizeSlug(list.slug ?? ""))
-        .filter(Boolean)
-    )
-  );
-}
-
 async function lookupWikiSlugsByUniverseIds(universeIds: number[]): Promise<string[]> {
   const ids = Array.from(new Set(universeIds.filter((id) => Number.isFinite(id))));
   if (!ids.length) return [];
@@ -604,17 +523,9 @@ async function lookupRelatedWikiSlugs(type: SinglePayload["type"], slug: string)
   } else if (type === "wiki_catalog") {
     const [wikiSlug] = slug.split("/");
     return wikiSlug ? [wikiSlug] : [];
-  } else if (type === "list") {
-    universeIds = await lookupListUniverseIds(slug);
   }
 
   return lookupWikiSlugsByUniverseIds(universeIds);
-}
-
-async function lookupRelatedListSlugs(type: SinglePayload["type"], slug: string): Promise<string[]> {
-  if (type !== "code") return [];
-  const universeIds = await lookupUniverseIdsBySlug("code_pages", "slug", [slug]);
-  return lookupListSlugsByUniverseIds(universeIds);
 }
 
 function parsePayloadEvents(payload: Payload): SinglePayload[] | { error: string } {
@@ -666,7 +577,6 @@ async function collectRevalidationTargets(payload: SinglePayload) {
   let purgePaths: string[] = [];
   let purgeTags: string[] = cacheTagsForEvent(payload.type, slug);
   let impactedWikiSlugs: string[] = [];
-  let impactedListSlugs: string[] = [];
 
   switch (payload.type) {
     case "code":
@@ -674,9 +584,6 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       break;
     case "article":
       purgePaths = revalidateForArticle(slug);
-      break;
-    case "list":
-      purgePaths = revalidateForList(slug);
       break;
     case "author":
       purgePaths = revalidateForAuthor(slug);
@@ -728,17 +635,11 @@ async function collectRevalidationTargets(payload: SinglePayload) {
     purgeTags = [...purgeTags, ...cacheTagsForEvent("wiki", wikiSlug)];
   }
 
-  impactedListSlugs = await lookupRelatedListSlugs(payload.type, slug);
-  for (const listSlug of impactedListSlugs) {
-    purgePaths = [...purgePaths, ...revalidateForList(listSlug)];
-    purgeTags = [...purgeTags, ...cacheTagsForEvent("list", listSlug)];
-  }
-
   return {
     paths: purgePaths,
     tags: purgeTags,
     impactedWikiSlugs,
-    impactedListSlugs
+    impactedListSlugs: []
   };
 }
 

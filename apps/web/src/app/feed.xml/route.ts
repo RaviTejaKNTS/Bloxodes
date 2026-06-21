@@ -42,13 +42,6 @@ type EventsRow = {
   published_at: string | null;
 };
 
-type ListRow = {
-  slug: string | null;
-  title: string | null;
-  updated_at: string | null;
-  refreshed_at: string | null;
-};
-
 type PuzzleRow = {
   slug: string | null;
   title: string | null;
@@ -61,7 +54,7 @@ type PuzzleRow = {
 
 const FEED_LIMIT = 120;
 const FEED_DESCRIPTION =
-  "Latest Roblox codes, guides, checklists, rankings, puzzle answers, and event updates from Bloxodes.";
+  "Latest Roblox codes, guides, checklists, stats, puzzle answers, and event updates from Bloxodes.";
 
 function escapeXml(value: string): string {
   return value
@@ -97,7 +90,7 @@ function toFeedItem(input: {
 
 async function loadFeedItems(): Promise<FeedItem[]> {
   const sb = supabaseAdmin();
-  const [articlesRes, gamesRes, checklistsRes, eventsRes, listsRes, puzzlesRes] = await Promise.all([
+  const [articlesRes, gamesRes, checklistsRes, eventsRes, puzzlesRes] = await Promise.all([
     sb
       .from("articles")
       .select("slug, title, updated_at, published_at")
@@ -127,13 +120,6 @@ async function loadFeedItems(): Promise<FeedItem[]> {
       .order("updated_at", { ascending: false })
       .limit(40),
     sb
-      .from("game_lists")
-      .select("slug, title, updated_at, refreshed_at")
-      .eq("is_published", true)
-      .not("slug", "is", null)
-      .order("updated_at", { ascending: false })
-      .limit(40),
-    sb
       .from("puzzle_pages_view")
       .select("slug, title, meta_description, content_updated_at, latest_fetched_at, updated_at, published_at")
       .eq("is_published", true)
@@ -147,7 +133,6 @@ async function loadFeedItems(): Promise<FeedItem[]> {
     gamesRes.error ||
     checklistsRes.error ||
     eventsRes.error ||
-    listsRes.error ||
     puzzlesRes.error;
   if (firstError) {
     throw firstError;
@@ -203,19 +188,6 @@ async function loadFeedItems(): Promise<FeedItem[]> {
         description: "Event schedule and status update.",
         updatedAt: eventsPage.updated_at,
         publishedAt: eventsPage.published_at
-      })
-    );
-  }
-
-  for (const list of (listsRes.data ?? []) as ListRow[]) {
-    if (!list.slug || !list.title) continue;
-    items.push(
-      toFeedItem({
-        title: list.title,
-        path: `/lists/${list.slug}`,
-        description: "Live ranking list update.",
-        updatedAt: list.refreshed_at ?? list.updated_at,
-        publishedAt: list.updated_at
       })
     );
   }

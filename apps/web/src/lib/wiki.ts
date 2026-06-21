@@ -6,13 +6,11 @@ import {
   listCodePagesWithActiveCountsByUniverseId,
   listPublishedArticlesByUniverseId,
   listPublishedChecklistsByUniverseId,
-  listRanksForUniverses,
   type ArticleWithRelations,
   type ChecklistSummaryRow,
   type EventsPageSummary,
   type CodePageWithCounts,
-  type Code,
-  type UniverseListBadge
+  type Code
 } from "@/lib/db";
 import { getUniverseEventSummary, listUniverseEventTimeline, type UniverseEventSummary, type UniverseTimelineEvent } from "@/lib/events-summary";
 import {
@@ -170,7 +168,6 @@ export type WikiRelatedData = {
   eventsPage: EventsPageSummary | null;
   eventSummary: UniverseEventSummary | null;
   eventTimeline: UniverseTimelineEvent[];
-  rankingBadges: UniverseListBadge[];
   media: WikiMediaItem[];
   badges: WikiBadgeItem[];
   gamePasses: WikiGamePassItem[];
@@ -189,7 +186,6 @@ export const EMPTY_WIKI_RELATED_DATA: WikiRelatedData = {
   eventsPage: null,
   eventSummary: null,
   eventTimeline: [],
-  rankingBadges: [],
   media: [],
   badges: [],
   gamePasses: [],
@@ -532,7 +528,6 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     eventsPage,
     eventSummary,
     eventTimeline,
-    rankMap,
     media,
     badges,
     gamePasses,
@@ -549,7 +544,6 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     safeValue("events page", () => getEventsPageByUniverseId(universeId)),
     safeValue("event summary", () => getUniverseEventSummary(universeId)),
     safeList("event timeline", () => listUniverseEventTimeline(universeId, 7)),
-    safeValue("rankings", () => listRanksForUniverses([universeId])),
     safeList("media", () => listWikiMediaByUniverseId(universeId, 8)),
     safeList("badges", () => listWikiBadgesByUniverseId(universeId, 8)),
     safeList("game passes", () => listWikiGamePassesByUniverseId(universeId, 8)),
@@ -575,7 +569,6 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     eventsPage,
     eventSummary,
     eventTimeline,
-    rankingBadges: rankMap?.get(universeId) ?? [],
     media,
     badges,
     gamePasses,

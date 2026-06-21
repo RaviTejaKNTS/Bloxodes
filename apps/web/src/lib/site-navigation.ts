@@ -8,7 +8,6 @@ import {
   Home,
   KeyRound,
   LayoutGrid,
-  List,
   Puzzle,
   SquareCheckBig,
   Wrench
@@ -25,7 +24,7 @@ export type SearchItem = {
   title: string;
   subtitle?: string | null;
   url: string;
-  type: "codes" | "article" | "checklist" | "quiz" | "puzzle" | "list" | "stats" | "tool" | "catalog" | "event" | "author" | "music" | "wiki";
+  type: "codes" | "article" | "checklist" | "quiz" | "puzzle" | "stats" | "tool" | "catalog" | "event" | "author" | "music" | "wiki";
   updatedAt?: string | null;
   badge?: string | null;
 };
@@ -45,7 +44,6 @@ export type SidebarAccount = {
 export const siteNavLinks: SiteNavLink[] = [
   { href: "/", label: "Home", icon: Home },
   { href: "/codes", label: "Codes", icon: KeyRound },
-  { href: "/lists", label: "Lists", icon: List },
   { href: "/stats", label: "Stats", icon: BarChart3 },
   { href: "/wiki", label: "Wiki", icon: BookOpen },
   { href: "/tools", label: "Tools", icon: Wrench },
@@ -92,7 +90,6 @@ export function resolveSearchScope(pathname: string | null | undefined): SearchS
     return { scope: "global", label: "Bloxodes" };
   }
   if (path.startsWith("/codes")) return { scope: "codes", label: "codes" };
-  if (path.startsWith("/lists")) return { scope: "lists", label: "lists" };
   if (path.startsWith("/stats")) return { scope: "stats", label: "stats" };
   if (path.startsWith("/wiki")) return { scope: "wiki", label: "wiki" };
   if (path.startsWith("/tools")) return { scope: "tools", label: "tools" };

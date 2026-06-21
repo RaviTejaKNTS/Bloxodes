@@ -17,8 +17,6 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - `articles` is the article write source. Article views are read projections only; article imports should not write separate index/detail data.
 - `authors`
   - Author profiles.
-- `game_lists`, `game_lists_index_view`, `game_list_entries`
-  - Rankings and list pages.
 - `checklist_pages`, `checklist_pages_view`, `checklist_items`
   - Checklist detail and checklist index content.
 - `quiz_pages`, `quiz_pages_view`
@@ -73,7 +71,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `app_sessions`
   - Session storage for signed-in flows.
 - `comments`
-  - Comment threads for supported content types, including codes, articles, catalogs, events, lists, tools, wiki pages, and wiki catalog pages. Stores server-resolved `page_type` and `page_url` for operator review.
+  - Comment threads for supported content types, including codes, articles, catalogs, events, tools, wiki pages, and wiki catalog pages. Stores server-resolved `page_type` and `page_url` for operator review.
 - `user_code_progress`
   - Used-code progress per user/game.
 - `user_checklist_progress`

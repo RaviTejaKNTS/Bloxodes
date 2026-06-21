@@ -7,7 +7,6 @@ type EventRow = {
   entity_type:
     | "code"
     | "article"
-    | "list"
     | "author"
     | "event"
     | "checklist"

@@ -17,7 +17,7 @@ import {
   FiUser,
   FiUsers
 } from "react-icons/fi";
-import { FaCrown, FaDiscord, FaFacebook, FaMedal, FaTrophy, FaTwitch, FaYoutube } from "react-icons/fa";
+import { FaDiscord, FaFacebook, FaTwitch, FaYoutube } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { SiGuilded, SiGooglechrome, SiRoblox } from "react-icons/si";
 import { TbAugmentedReality } from "react-icons/tb";
@@ -1084,21 +1084,6 @@ function WikiCatalogCta({
   );
 }
 
-function buildRankLinks(related: WikiRelatedData): WikiLinkItem[] {
-  return related.rankingBadges.map((rank) => ({
-    href: `/lists/${rank.list_slug}`,
-    title: rank.list_title,
-    description: `This game is currently ranked #${rank.rank} on this Bloxodes list.`,
-    meta: `#${rank.rank}`
-  }));
-}
-
-function rankBadgeIconForRank(rank: number): IconType {
-  if (rank === 1) return FaCrown;
-  if (rank === 2) return FaTrophy;
-  return FaMedal;
-}
-
 function mediaToDisplayItems(page: WikiPageContent, related: WikiRelatedData): WikiMediaItem[] {
   const existing = related.media.filter((item) => item.image_url || item.video_url);
   if (existing.length) return existing;
@@ -1302,10 +1287,6 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const creatorUrl = buildCreatorUrl(page);
   const creatorLabel = normalizeText(page.universe_creator_name) ?? "Developer";
   const socialLinks = buildSocialLinkButtons(extractSocialLinks(page.social_links), creatorLabel);
-  const heroRankingBadges = related.rankingBadges
-    .filter((badge) => badge.rank >= 1 && badge.rank <= 3)
-    .sort((a, b) => a.rank - b.rank)
-    .slice(0, 3);
   const published = page.published_at ?? page.created_at ?? null;
   const hubUpdatedAt = resolveWikiHubUpdatedAt(page, related) ?? page.content_updated_at ?? page.updated_at ?? published;
   const hubUpdatedRelativeLabel = formatRelativeUpdated(hubUpdatedAt);
@@ -1440,28 +1421,8 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(20rem,1fr)]">
         <article className="min-w-0 space-y-9">
-          {heroRankingBadges.length || summary || gameDetailItems.length || heroStats.length ? (
+          {summary || gameDetailItems.length || heroStats.length ? (
             <section className="space-y-4">
-              {heroRankingBadges.length ? (
-                <div className="flex flex-wrap gap-2">
-                  {heroRankingBadges.map((badge) => {
-                    const Icon = rankBadgeIconForRank(badge.rank);
-                    const label = `#${badge.rank} on ${badge.list_title}`;
-                    return (
-                      <Link
-                        key={`${badge.list_id}-${badge.rank}`}
-                        href={`/lists/${badge.list_slug}`}
-                        prefetch={false}
-                        className="inline-flex items-center gap-1.5 rounded-full border border-border/60 px-2.5 py-1 text-xs font-semibold text-foreground transition hover:border-accent hover:text-accent"
-                      >
-                        <Icon className="h-3.5 w-3.5 text-accent" aria-hidden />
-                        <span>{label}</span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              ) : null}
-
               {summary ? (
                 <p className="max-w-3xl text-[1.08rem] leading-[1.85] tracking-[0.012em] text-foreground/90 md:text-[1.14rem] md:leading-[1.95] md:tracking-[0.014em]">
                   {summary}

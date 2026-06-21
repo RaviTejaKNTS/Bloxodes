@@ -46,7 +46,7 @@ These routes back interactive site features, search, tool data, session/progress
 
 ## Revalidation Notes
 
-- `/api/revalidate` is the central publish hook for codes, articles, lists, authors, events, checklists, quizzes, wiki pages, tools, catalog, and music pages. It accepts single events and batched events from the Supabase revalidation worker.
+- `/api/revalidate` is the central publish hook for codes, articles, authors, events, checklists, quizzes, wiki pages, tools, catalog, music, puzzle, and stats pages. It accepts single events and batched events from the Supabase revalidation worker.
 - It builds the impacted URL set and Cloudflare `Cache-Tag` set, purges tags by default, and warms those URLs again so Cloudflare remains the primary public-page cache.
 - Keep `apps/web/src/lib/public-cache-tags.ts` in sync with route families. Public pages must emit tags that match the tags purged here.
 - If you add a new publishable content type, update the payload type union and path mapping here before relying on TTL expiry.

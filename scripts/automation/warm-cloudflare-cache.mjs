@@ -11,7 +11,6 @@ const CODEBASE_BACKED_SITEMAPS = new Set(["wiki", "catalog", "tools"]);
 const RECENT_DETAIL_SITEMAPS = new Set([
   "codes",
   "articles",
-  "lists",
   "events",
   "stats",
   "puzzles",

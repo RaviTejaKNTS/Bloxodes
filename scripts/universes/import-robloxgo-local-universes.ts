@@ -146,7 +146,6 @@ const NULLABLE_UNIVERSE_REFERENCES = [
 const DELETE_UNIVERSE_REFERENCES = [
   "checklist_pages",
   "events_pages",
-  "game_list_entries",
   "roblox_universe_badges",
   "roblox_universe_gamepasses",
   "roblox_universe_media",

@@ -31,7 +31,7 @@ Use this file for route-level work. For public content route specifics, also rea
 
 ## SEO, Feed, and Sitemap Hooks
 
-- Public publishable content currently spans codes, articles, lists, authors, events, checklists, quizzes, wiki pages, tools, and catalog pages.
+- Public publishable content currently spans codes, articles, authors, events, checklists, quizzes, wiki pages, tools, catalog pages, puzzles, and stats.
 - If you add a new public content type or route family, review:
   - `apps/web/src/app/api/revalidate/route.ts`
   - `apps/web/src/app/feed.xml/route.ts`
@@ -40,7 +40,7 @@ Use this file for route-level work. For public content route specifics, also rea
 
 ## Current App-Level Patterns
 
-- Route families such as codes, events, lists, tools, catalog/free-items, and quizzes use sidecar helpers instead of pushing all logic into page files.
+- Route families such as codes, events, tools, catalog/free-items, puzzles, stats, and quizzes use sidecar helpers instead of pushing all logic into page files.
 - Account and session state are split between `(secure)` UI, `api/*/session`, and `apps/web/src/lib/auth/*`.
 - Several public pages combine Supabase content with local datasets or API-driven clients. Keep that split obvious.
 

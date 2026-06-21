@@ -12,7 +12,7 @@ Scoped route-family guides:
 
 ## Route Families
 
-- Core content: home, codes, articles, lists, checklists, events, quizzes, wiki pages, authors.
+- Core content: home, codes, articles, stats, checklists, events, quizzes, wiki pages, puzzles, authors.
 - Catalog: music IDs, free Roblox items, admin commands, color codes, decal IDs, The Forge, and generic catalog fallback routes.
 - Tools: Roblox ID extractor, Robux/USD, DevEx, The Forge calculators, Grow a Garden calculator, and generic tool fallback routes.
 - Static pages: about, contact, policies, disclaimer, editorial, cookie settings.
@@ -37,7 +37,7 @@ Scoped route-family guides:
 
 ## Data Source Split
 
-- Codes, articles, lists, checklists, quizzes, wiki pages, authors, and much of catalog/tools content come from Supabase.
+- Codes, articles, stats, checklists, quizzes, wiki pages, authors, puzzles, and much of catalog/tools content come from Supabase.
 - Some catalog/tools pages blend Supabase intro copy with local datasets in `data/`.
 - Free items, music IDs, and ID-extractor flows also depend on API routes under `apps/web/src/app/api`.
 

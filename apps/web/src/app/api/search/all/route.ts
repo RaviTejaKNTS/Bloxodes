@@ -10,7 +10,6 @@ type SearchItemType =
   | "checklist"
   | "quiz"
   | "puzzle"
-  | "list"
   | "stats"
   | "tool"
   | "catalog"
@@ -47,7 +46,6 @@ const TYPE_MAP: Record<string, SearchItemType> = {
   checklist: "checklist",
   quiz: "quiz",
   puzzle: "puzzle",
-  list: "list",
   tool: "tool",
   catalog: "catalog",
   event: "event",
@@ -66,7 +64,6 @@ const SCOPE_ENTITY_TYPES: Record<string, string[]> = {
   checklists: ["checklist"],
   quizzes: ["quiz"],
   puzzles: ["puzzle"],
-  lists: ["list"],
   stats: ["stats_game"],
   tools: ["tool"],
   catalog: ["catalog"],
