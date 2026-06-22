@@ -7,6 +7,7 @@ import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates }
 import {
   BASE_PATH,
   MusicBreadcrumb,
+  MusicCatalogNav,
   buildGenreCards,
   buildSimpleItemListSchema,
   loadPagedGenreOptions
@@ -105,6 +106,8 @@ export default async function MusicIdGenresPaginatedPage({ params }: PageProps) 
       </header>
 
       <CatalogAdSlot />
+
+      <MusicCatalogNav active="genres" />
 
       {buildGenreCards(genres)}
 

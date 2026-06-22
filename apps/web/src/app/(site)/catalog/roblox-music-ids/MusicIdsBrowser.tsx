@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { MusicCoverImage } from "@/components/MusicCoverImage";
@@ -26,6 +27,7 @@ type MusicRow = {
   rank: number | null;
   source: string | null;
   last_seen_at: string | null;
+  popularity_score?: number | null;
 };
 
 type ApiResponse = {
@@ -57,6 +59,65 @@ function buildThumbnailUrl(song: MusicRow): string {
 
 function buildRobloxUrl(assetId: number): string {
   return `https://www.roblox.com/library/${assetId}`;
+}
+
+function isRecentlySeen(value: string | null, days = 30): boolean {
+  if (!value) return false;
+  const time = new Date(value).getTime();
+  if (!Number.isFinite(time)) return false;
+  return Date.now() - time <= days * 24 * 60 * 60 * 1000;
+}
+
+function getSourceBadgeLabel(source: string | null): string | null {
+  switch (source) {
+    case "creator_store_trending":
+      return "Trending";
+    case "creator_store_top_current":
+      return "Current chart";
+    case "creator_store_top_week":
+      return "Weekly chart";
+    case "creator_store_top_month":
+      return "Monthly chart";
+    case "creator_store_top_year":
+      return "Yearly chart";
+    case "music_discovery_top_100":
+    case "music_discovery_top_songs":
+      return "Top chart";
+    default:
+      return null;
+  }
+}
+
+function getMusicBadgeLabels(song: MusicRow): string[] {
+  const labels: string[] = [];
+  const sourceBadge = getSourceBadgeLabel(song.source);
+  if (sourceBadge) labels.push(sourceBadge);
+  if (isRecentlySeen(song.last_seen_at)) labels.push("Recently seen");
+  if (!labels.length && (song.popularity_score ?? 0) >= 1500) labels.push("Popular");
+  return labels.slice(0, 2);
+}
+
+function normalizeKey(value: string): string {
+  return value
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function slugify(value: string): string {
+  return normalizeKey(value).replace(/\s+/g, "-");
+}
+
+function buildArtistPath(artist: string): string {
+  return `/catalog/roblox-music-ids/artists/${slugify(artist)}`;
+}
+
+function buildGenrePath(genre: string): string {
+  return `/catalog/roblox-music-ids/genres/${slugify(genre)}`;
 }
 
 export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, basePath }: Props) {
@@ -206,6 +267,7 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
           {songs.map((song) => {
             const durationLabel = formatDuration(song.duration_seconds);
+            const badges = getMusicBadgeLabels(song);
             return (
               <article
                 key={song.asset_id}
@@ -226,7 +288,12 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
                       <div className="space-y-1 text-xs text-muted">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Artist</span>
-                          <span className="font-semibold text-foreground">{song.artist}</span>
+                          <Link
+                            href={buildArtistPath(song.artist)}
+                            className="font-semibold text-foreground transition hover:text-accent"
+                          >
+                            {song.artist}
+                          </Link>
                         </div>
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Album</span>
@@ -259,6 +326,14 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
                         Top #{song.rank}
                       </span>
                     ) : null}
+                    {badges.map((badge) => (
+                      <span
+                        key={badge}
+                        className="inline-flex items-center rounded-md border border-border/60 bg-background/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted"
+                      >
+                        {badge}
+                      </span>
+                    ))}
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
@@ -268,7 +343,16 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
                     </span>
                     <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
                       <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
-                      <span className="font-semibold text-foreground">{song.genre ?? "-"}</span>
+                      {song.genre ? (
+                        <Link
+                          href={buildGenrePath(song.genre)}
+                          className="font-semibold text-foreground transition hover:text-accent"
+                        >
+                          {song.genre}
+                        </Link>
+                      ) : (
+                        <span className="font-semibold text-foreground">-</span>
+                      )}
                     </span>
                   </div>
 

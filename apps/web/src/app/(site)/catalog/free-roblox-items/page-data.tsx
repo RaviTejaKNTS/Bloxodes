@@ -483,6 +483,7 @@ export async function renderRobloxFreeItemsPage({
   description,
   breadcrumbItems,
   basePath = BASE_PATH,
+  navActive,
   categorySlug,
   categoryLabel,
   subcategories,
@@ -500,6 +501,7 @@ export async function renderRobloxFreeItemsPage({
   description: string;
   breadcrumbItems: BreadcrumbItem[];
   basePath?: string;
+  navActive?: string;
   categorySlug?: string;
   categoryLabel?: string;
   subcategories?: SubcategoryOption[];
@@ -507,6 +509,7 @@ export async function renderRobloxFreeItemsPage({
   search?: string;
   sort?: FreeItemsSortKey;
 }) {
+  const navCategories = await loadFreeItemCategories();
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml.introHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
@@ -579,6 +582,8 @@ export async function renderRobloxFreeItemsPage({
         {introNodes && showHero ? introNodes : null}
 
         <CatalogAdSlot />
+
+        <FreeItemsNav active={navActive ?? categorySlug ?? "all"} categories={navCategories} />
 
         {subcategories?.length && categorySlug ? (
           <section className="flex flex-wrap gap-2">

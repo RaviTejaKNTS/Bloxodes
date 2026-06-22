@@ -90,6 +90,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Collect Roblox music IDs | `scripts/music/collect-roblox-music-ids.ts` | `npm run collect:music-ids` |
 | Collect curated music IDs | `scripts/music/collect-curated-roblox-music-ids.ts` | `npm run collect:music-ids-curated` |
 | Collect top songs | `scripts/music/collect-top-100-songs.ts` | `npm run collect:top-songs` |
+| Rerank music IDs | `scripts/music/rerank-roblox-music-ids.ts` | `npm run rerank:music-ids`; recomputes `popularity_score` from source, rank, recency, votes, creator/metadata quality, and chart rank |
 | Import music ID seeds | `scripts/music/import-roblox-music-id-seeds.ts` | `npm run import:music-id-seeds` |
 | Scrape music ID seeds | `scripts/music/scrape-roblox-music-id-seeds.ts` | direct `tsx scripts/music/scrape-roblox-music-id-seeds.ts` |
 | Enrich music IDs | `scripts/music/enrich-roblox-music-ids.ts` | `npm run enrich:music-ids` |

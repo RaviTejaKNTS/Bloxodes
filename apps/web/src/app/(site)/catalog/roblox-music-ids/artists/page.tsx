@@ -6,6 +6,7 @@ import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates }
 import {
   BASE_PATH,
   MusicBreadcrumb,
+  MusicCatalogNav,
   buildArtistCards,
   buildSimpleItemListSchema,
   loadPagedArtistOptions
@@ -78,6 +79,8 @@ export default async function MusicIdArtistsPage() {
       </header>
 
       <CatalogAdSlot />
+
+      <MusicCatalogNav active="artists" />
 
       {buildArtistCards(artists)}
 

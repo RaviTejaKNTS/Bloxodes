@@ -1,4 +1,5 @@
 import "../shared/load-env";
+import { writeFile } from "node:fs/promises";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 const TOP_SONGS_API = "https://apis.roblox.com/music-discovery/v1/top-songs";
@@ -16,6 +17,14 @@ const THUMBNAIL_BATCH = 50;
 const THUMBNAIL_SIZE = "420x420";
 const THUMBNAIL_FORMAT = "Png";
 const AUDIO_ASSET_TYPE_ID = 3;
+const TOP_SONGS_TARGET = clampNumber(process.env.ROBLOX_TOP_SONGS_TARGET, 500, 1, 1000);
+const TOP_SONGS_PAGE_LIMIT = clampNumber(process.env.ROBLOX_TOP_SONGS_PAGE_LIMIT, 50, 1, 100);
+const TOP_SONGS_MAX_PAGES = clampNumber(
+    process.env.ROBLOX_TOP_SONGS_MAX_PAGES,
+    Math.ceil(TOP_SONGS_TARGET / TOP_SONGS_PAGE_LIMIT),
+    1,
+    50
+);
 
 type RobloxTopSong = {
     assetId?: number;
@@ -45,6 +54,25 @@ type MusicRow = {
     last_seen_at: string;
 };
 
+type AutomationSummary = {
+    type: "music-ids";
+    stats: {
+        topSongsTarget: number;
+        topSongsFetched: number;
+        topSongsUpserted: number;
+        enriched: number;
+        ranksCleared: boolean;
+        catalogTimestampUpdated: boolean;
+    };
+};
+
+function clampNumber(raw: string | undefined, fallback: number, min: number, max: number): number {
+    if (raw === undefined) return fallback;
+    const parsed = Number(raw);
+    if (!Number.isFinite(parsed)) return fallback;
+    return Math.min(max, Math.max(min, parsed));
+}
+
 function normalizeOptionalText(value?: string | null): string | null {
     if (typeof value !== "string") return null;
     const trimmed = value.trim();
@@ -62,10 +90,10 @@ async function sleep(ms: number) {
     await new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function fetchTopSongs(): Promise<RobloxTopSongsResponse> {
+async function fetchTopSongsPage(pageToken: string, limit: number): Promise<RobloxTopSongsResponse> {
     const params = new URLSearchParams({
-        pageToken: "0",
-        limit: "100"
+        pageToken,
+        limit: String(limit)
     });
     const url = `${TOP_SONGS_API}?${params.toString()}`;
 
@@ -95,6 +123,36 @@ async function fetchTopSongs(): Promise<RobloxTopSongsResponse> {
     }
 }
 
+async function fetchTopSongs(target: number): Promise<RobloxTopSong[]> {
+    const songs: RobloxTopSong[] = [];
+    const seenTokens = new Set<string>();
+    let pageToken: string | null = "0";
+    let pageCount = 0;
+
+    while (pageToken && pageCount < TOP_SONGS_MAX_PAGES && songs.length < target) {
+        if (seenTokens.has(pageToken)) {
+            console.log(`Stopping top songs fetch: pageToken ${pageToken} repeated.`);
+            break;
+        }
+        seenTokens.add(pageToken);
+
+        const remaining = target - songs.length;
+        const payload = await fetchTopSongsPage(pageToken, Math.min(TOP_SONGS_PAGE_LIMIT, remaining));
+        const pageSongs = Array.isArray(payload.songs) ? payload.songs : [];
+        if (!pageSongs.length) break;
+
+        songs.push(...pageSongs);
+        pageCount += 1;
+
+        pageToken =
+            typeof payload.nextPageToken === "string" && payload.nextPageToken.trim().length
+                ? payload.nextPageToken.trim()
+                : null;
+    }
+
+    return songs.slice(0, target);
+}
+
 function buildMusicRows(songs: RobloxTopSong[], fetchedAt: string): MusicRow[] {
     const rows: MusicRow[] = [];
     songs.forEach((song, index) => {
@@ -107,8 +165,8 @@ function buildMusicRows(songs: RobloxTopSong[], fetchedAt: string): MusicRow[] {
             genre: null,
             duration_seconds: typeof song.duration === "number" ? song.duration : null,
             album_art_asset_id: typeof song.albumArtAssetId === "number" ? song.albumArtAssetId : null,
-            rank: index + 1, // Rank from 1 to 100
-            source: "music_discovery_top_100",
+            rank: index + 1,
+            source: "music_discovery_top_songs",
             raw_payload: song as Record<string, unknown>,
             last_seen_at: fetchedAt
         });
@@ -344,8 +402,8 @@ async function enrichSong(assetId: number, rank: number, thumbnailUrl: string | 
     };
 }
 
-async function enrichTop100(assetIds: number[], ranks: Map<number, number>) {
-    console.log("\n🔍 Enriching top 100 songs with metadata...");
+async function enrichTopSongs(assetIds: number[], ranks: Map<number, number>): Promise<number> {
+    console.log(`\n🔍 Enriching top ${assetIds.length} songs with metadata...`);
 
     try {
         const thumbnails = await fetchThumbnails(assetIds);
@@ -393,12 +451,14 @@ async function enrichTop100(assetIds: number[], ranks: Map<number, number>) {
         }
 
         console.log(`✅ Successfully enriched ${successCount}/${assetIds.length} top songs.`);
+        return successCount;
     } catch (error) {
         console.error(`⚠️  Enrichment failed: ${error}`);
+        return 0;
     }
 }
 
-async function updateCatalogPageTimestamp() {
+async function updateCatalogPageTimestamp(): Promise<boolean> {
     console.log("\nUpdating catalog page timestamp...");
     const sb = supabaseAdmin();
 
@@ -409,9 +469,17 @@ async function updateCatalogPageTimestamp() {
 
     if (error) {
         console.error(`⚠️  Failed to update catalog page timestamp: ${error.message}`);
+        return false;
     } else {
         console.log("✅ Catalog page timestamp updated.");
+        return true;
     }
+}
+
+async function writeAutomationSummary(summary: AutomationSummary) {
+    const summaryPath = process.env.AUTOMATION_SUMMARY_PATH;
+    if (!summaryPath) return;
+    await writeFile(summaryPath, `${JSON.stringify(summary, null, 2)}\n`, "utf8");
 }
 
 async function run() {
@@ -419,16 +487,12 @@ async function run() {
         throw new Error("SUPABASE_URL and SUPABASE_SERVICE_ROLE must be set.");
     }
 
-    console.log("🎵 Starting Top 100 Songs Collection...\n");
+    console.log(`🎵 Starting Top ${TOP_SONGS_TARGET} Songs Collection...\n`);
 
-    // Step 1: Clear all existing ranks
-    await clearAllRanks();
-
-    // Step 2: Fetch the top 100 songs
-    console.log("\nFetching top 100 songs from Roblox Music Discovery API...");
+    // Step 1: Fetch the top songs before clearing existing ranks.
+    console.log(`\nFetching top ${TOP_SONGS_TARGET} songs from Roblox Music Discovery API...`);
     const fetchedAt = new Date().toISOString();
-    const response = await fetchTopSongs();
-    const songs = Array.isArray(response.songs) ? response.songs : [];
+    const songs = await fetchTopSongs(TOP_SONGS_TARGET);
 
     console.log(`✅ Received ${songs.length} songs from API.\n`);
 
@@ -437,20 +501,35 @@ async function run() {
         return;
     }
 
-    // Step 3: Build database rows with ranks
+    // Step 2: Build database rows with ranks
     const rows = buildMusicRows(songs, fetchedAt);
     console.log(`📊 Prepared ${rows.length} music rows with ranks 1-${rows.length}.\n`);
+
+    // Step 3: Clear old ranks only after the replacement list is ready.
+    await clearAllRanks();
 
     // Step 4: Upsert songs (keeping existing data for old IDs, updating ranks)
     await upsertTopSongs(rows);
 
-    // Step 5: Enrich all top 100 songs with metadata
+    // Step 5: Enrich all top songs with metadata
     const assetIds = rows.map(row => row.asset_id);
     const ranks = new Map(rows.map(row => [row.asset_id, row.rank]));
-    await enrichTop100(assetIds, ranks);
+    const enrichedCount = await enrichTopSongs(assetIds, ranks);
 
     // Step 6: Update catalog page timestamp
-    await updateCatalogPageTimestamp();
+    const catalogTimestampUpdated = await updateCatalogPageTimestamp();
+
+    await writeAutomationSummary({
+        type: "music-ids",
+        stats: {
+            topSongsTarget: TOP_SONGS_TARGET,
+            topSongsFetched: songs.length,
+            topSongsUpserted: rows.length,
+            enriched: enrichedCount,
+            ranksCleared: true,
+            catalogTimestampUpdated
+        }
+    });
 
     console.log(`\n✅ Done! Successfully processed ${rows.length} top songs.`);
     console.log(`   - Old songs: Kept existing data, updated rank`);

@@ -24,6 +24,7 @@ import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } fr
 const PAGE_SIZE = 24;
 const OPTION_PAGE_SIZE = 24;
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
+const TOP_SONGS_TRENDING_LIMIT = 500;
 
 export const BASE_PATH = "/catalog/roblox-music-ids";
 export const CANONICAL = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
@@ -40,6 +41,7 @@ export type MusicRow = {
   rank: number | null;
   source: string | null;
   last_seen_at: string | null;
+  popularity_score?: number | null;
 };
 
 export type CatalogContentHtml = PageContentHtml;
@@ -60,7 +62,8 @@ export type MusicResolvedSearch = {
   sort: MusicSortKey;
 };
 
-export type MusicNavKey = "all" | "trending" | "genres" | "artists";
+export type MusicNavKey = "all" | "trending" | "charts" | "genres" | "artists";
+export type MusicChartKey = "trending" | "weekly" | "monthly" | "yearly";
 
 type MusicNavItem = {
   id: MusicNavKey;
@@ -100,28 +103,74 @@ const MUSIC_NAV_ITEMS: MusicNavItem[] = [
   {
     id: "all",
     title: "All Music Codes",
-    description: "Every Roblox music ID we track, updated throughout the day.",
+    description: "Broad music ID discovery beyond the daily top list.",
     href: BASE_PATH
   },
   {
     id: "trending",
-    title: "Trending Music IDs",
-    description: "Ranked IDs pulled straight from the top charts.",
+    title: "Trending",
+    description: "Daily Roblox top songs, capped at 500 music IDs.",
     href: `${BASE_PATH}/trending`
   },
   {
-    id: "genres",
-    title: "Genres",
-    description: "Jump into genre collections and find the right vibe.",
-    href: `${BASE_PATH}/genres`
-  },
-  {
-    id: "artists",
-    title: "Artists",
-    description: "Browse every artist with music IDs in our catalog.",
-    href: `${BASE_PATH}/artists`
+    id: "charts",
+    title: "Charts",
+    description: "Weekly, monthly, and yearly Creator Store music charts.",
+    href: `${BASE_PATH}/charts`
   }
 ];
+
+const MUSIC_CHARTS: Record<MusicChartKey, {
+  activeNav: MusicNavKey;
+  path: string;
+  title: string;
+  heading: string;
+  description: string;
+  breadcrumbLabel: string;
+  statLabel: string;
+  source: string | null;
+}> = {
+  trending: {
+    activeNav: "trending",
+    path: `${BASE_PATH}/trending`,
+    title: "Trending Roblox music IDs",
+    heading: "Trending Roblox music IDs",
+    description: "The daily Roblox top songs list, capped to the first 500 music IDs.",
+    breadcrumbLabel: "Trending",
+    statLabel: "ranked songs",
+    source: null
+  },
+  weekly: {
+    activeNav: "charts",
+    path: `${BASE_PATH}/charts`,
+    title: "Weekly Roblox music ID chart",
+    heading: "Weekly Roblox music ID chart",
+    description: "Roblox Creator Store music IDs from the weekly chart.",
+    breadcrumbLabel: "Weekly Chart",
+    statLabel: "weekly chart songs",
+    source: "creator_store_top_week"
+  },
+  monthly: {
+    activeNav: "charts",
+    path: `${BASE_PATH}/charts`,
+    title: "Monthly Roblox music ID chart",
+    heading: "Monthly Roblox music ID chart",
+    description: "Roblox Creator Store music IDs from the monthly chart.",
+    breadcrumbLabel: "Monthly Chart",
+    statLabel: "monthly chart songs",
+    source: "creator_store_top_month"
+  },
+  yearly: {
+    activeNav: "charts",
+    path: `${BASE_PATH}/charts`,
+    title: "Yearly Roblox music ID chart",
+    heading: "Yearly Roblox music ID chart",
+    description: "Roblox Creator Store music IDs from the yearly chart.",
+    breadcrumbLabel: "Yearly Chart",
+    statLabel: "yearly chart songs",
+    source: "creator_store_top_year"
+  }
+};
 
 function formatLoadError(error: unknown) {
   if (!error) return "Unknown error";
@@ -164,6 +213,42 @@ function formatCount(value: number): string {
   return value.toLocaleString("en-US");
 }
 
+function isRecentlySeen(value: string | null, days = 30): boolean {
+  if (!value) return false;
+  const time = new Date(value).getTime();
+  if (!Number.isFinite(time)) return false;
+  return Date.now() - time <= days * 24 * 60 * 60 * 1000;
+}
+
+function getSourceBadgeLabel(source: string | null): string | null {
+  switch (source) {
+    case "creator_store_trending":
+      return "Trending";
+    case "creator_store_top_current":
+      return "Current chart";
+    case "creator_store_top_week":
+      return "Weekly chart";
+    case "creator_store_top_month":
+      return "Monthly chart";
+    case "creator_store_top_year":
+      return "Yearly chart";
+    case "music_discovery_top_100":
+    case "music_discovery_top_songs":
+      return "Top chart";
+    default:
+      return null;
+  }
+}
+
+function getMusicBadgeLabels(song: MusicRow): string[] {
+  const labels: string[] = [];
+  const sourceBadge = getSourceBadgeLabel(song.source);
+  if (sourceBadge) labels.push(sourceBadge);
+  if (isRecentlySeen(song.last_seen_at)) labels.push("Recently seen");
+  if (!labels.length && (song.popularity_score ?? 0) >= 1500) labels.push("Popular");
+  return labels.slice(0, 2);
+}
+
 function normalizeKey(value: string): string {
   return value
     .toLowerCase()
@@ -175,6 +260,14 @@ function normalizeKey(value: string): string {
 function slugify(value: string): string {
   const normalized = normalizeKey(value);
   return normalized.replace(/\s+/g, "-");
+}
+
+function buildArtistPath(artist: string): string {
+  return `${BASE_PATH}/artists/${slugify(artist)}`;
+}
+
+function buildGenrePath(genre: string): string {
+  return `${BASE_PATH}/genres/${slugify(genre)}`;
 }
 
 function buildLoosePattern(value: string): string {
@@ -249,6 +342,8 @@ async function loadOptionBySlug(
 }
 
 const MUSIC_SOURCE_VIEW = "roblox_music_ids_ranked_view";
+const MUSIC_SELECT_FIELDS =
+  "asset_id, title, artist, album, genre, duration_seconds, album_art_asset_id, thumbnail_url, rank, source, last_seen_at, popularity_score";
 
 async function loadMusicIdsPage(
   pageNumber: number,
@@ -260,9 +355,7 @@ async function loadMusicIdsPage(
     const supabase = supabaseAdmin();
     let query = supabase
       .from(MUSIC_SOURCE_VIEW)
-      .select("asset_id, title, artist, album, genre, duration_seconds, album_art_asset_id, thumbnail_url, rank, source, last_seen_at", {
-        count: "exact"
-      });
+      .select(MUSIC_SELECT_FIELDS, { count: "exact" });
 
     // Filter out songs without duration
     query = query.not("duration_seconds", "is", null).gt("duration_seconds", 0);
@@ -322,11 +415,11 @@ async function loadMusicIdsPage(
         case "recommended":
         default:
           query = query
-            .order("duration_bucket", { ascending: true, nullsFirst: false })
             .order("popularity_score", { ascending: false, nullsFirst: false })
+            .order("last_seen_at", { ascending: false, nullsFirst: false })
+            .order("duration_bucket", { ascending: true, nullsFirst: false })
             .order("duration_seconds", { ascending: false, nullsFirst: false })
-            .order("rank", { ascending: true, nullsFirst: false })
-            .order("last_seen_at", { ascending: false, nullsFirst: false });
+            .order("rank", { ascending: true, nullsFirst: false });
       }
     }
 
@@ -348,6 +441,68 @@ async function loadMusicIdsPage(
   }
 }
 
+async function loadDailyTop500MusicIdsPage(pageNumber: number): Promise<PageData> {
+  try {
+    const safePage = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
+    const offset = (safePage - 1) * PAGE_SIZE;
+    const supabase = supabaseAdmin();
+
+    const { data, error, count } = await supabase
+      .from(MUSIC_SOURCE_VIEW)
+      .select(MUSIC_SELECT_FIELDS, { count: "exact" })
+      .not("duration_seconds", "is", null)
+      .gt("duration_seconds", 0)
+      .not("rank", "is", null)
+      .lte("rank", TOP_SONGS_TRENDING_LIMIT)
+      .order("rank", { ascending: true, nullsFirst: false })
+      .order("asset_id", { ascending: true })
+      .range(offset, offset + PAGE_SIZE - 1);
+
+    if (error) {
+      reportLoadError("Failed to load daily top Roblox music IDs", error);
+      return { songs: [], total: 0, totalPages: 1 };
+    }
+
+    const total = Math.min(count ?? data?.length ?? 0, TOP_SONGS_TRENDING_LIMIT);
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    return { songs: (data ?? []) as MusicRow[], total, totalPages };
+  } catch (error) {
+    reportLoadError("Failed to load daily top Roblox music IDs", error);
+    return { songs: [], total: 0, totalPages: 1 };
+  }
+}
+
+async function loadSourceChartMusicIdsPage(pageNumber: number, source: string): Promise<PageData> {
+  try {
+    const safePage = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
+    const offset = (safePage - 1) * PAGE_SIZE;
+    const supabase = supabaseAdmin();
+
+    const { data, error, count } = await supabase
+      .from(MUSIC_SOURCE_VIEW)
+      .select(MUSIC_SELECT_FIELDS, { count: "exact" })
+      .not("duration_seconds", "is", null)
+      .gt("duration_seconds", 0)
+      .eq("source", source)
+      .order("last_seen_at", { ascending: false, nullsFirst: false })
+      .order("popularity_score", { ascending: false, nullsFirst: false })
+      .order("asset_id", { ascending: true })
+      .range(offset, offset + PAGE_SIZE - 1);
+
+    if (error) {
+      reportLoadError(`Failed to load ${source} Roblox music IDs`, error);
+      return { songs: [], total: 0, totalPages: 1 };
+    }
+
+    const total = count ?? data?.length ?? 0;
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    return { songs: (data ?? []) as MusicRow[], total, totalPages };
+  } catch (error) {
+    reportLoadError(`Failed to load ${source} Roblox music IDs`, error);
+    return { songs: [], total: 0, totalPages: 1 };
+  }
+}
+
 export async function loadRobloxMusicIdsPageData(
   page: number,
   options?: { search?: string; sort?: MusicSortKey }
@@ -356,7 +511,19 @@ export async function loadRobloxMusicIdsPageData(
 }
 
 export async function loadTrendingMusicIdsPageData(page: number): Promise<PageData> {
-  return loadMusicIdsPage(page, { trending: true });
+  return loadDailyTop500MusicIdsPage(page);
+}
+
+export function getMusicChartConfig(key: MusicChartKey) {
+  return MUSIC_CHARTS[key];
+}
+
+export async function loadMusicChartPageData(key: MusicChartKey, page: number): Promise<PageData> {
+  const config = getMusicChartConfig(key);
+  if (!config.source) {
+    return loadDailyTop500MusicIdsPage(page);
+  }
+  return loadSourceChartMusicIdsPage(page, config.source);
 }
 
 export async function loadGenreMusicIdsPageData(page: number, genre: string): Promise<PageData> {
@@ -385,7 +552,7 @@ export async function loadArtistOptionBySlug(slug: string) {
 
 export function MusicCatalogNav({ active }: { active: MusicNavKey }) {
   return (
-    <section className="catalog-surface grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <section className="catalog-surface grid gap-4 md:grid-cols-3">
       {MUSIC_NAV_ITEMS.map((item) => {
         const isActive = item.id === active;
         const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${isActive
@@ -527,6 +694,7 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
       {songs.map((song) => {
         const durationLabel = formatDuration(song.duration_seconds);
+        const badges = getMusicBadgeLabels(song);
         return (
           <article
             key={song.asset_id}
@@ -547,7 +715,12 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
                   <div className="space-y-1 text-xs text-muted">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Artist</span>
-                      <span className="font-semibold text-foreground">{song.artist}</span>
+                      <Link
+                        href={buildArtistPath(song.artist)}
+                        className="font-semibold text-foreground transition hover:text-accent"
+                      >
+                        {song.artist}
+                      </Link>
                     </div>
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Album</span>
@@ -580,6 +753,14 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
                     Top #{song.rank}
                   </span>
                 ) : null}
+                {badges.map((badge) => (
+                  <span
+                    key={badge}
+                    className="inline-flex items-center rounded-md border border-border/60 bg-background/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted"
+                  >
+                    {badge}
+                  </span>
+                ))}
               </div>
 
               <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
@@ -589,7 +770,13 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
                 </span>
                 <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
                   <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
-                  <span className="font-semibold text-foreground">{song.genre ?? "—"}</span>
+                  {song.genre ? (
+                    <Link href={buildGenrePath(song.genre)} className="font-semibold text-foreground transition hover:text-accent">
+                      {song.genre}
+                    </Link>
+                  ) : (
+                    <span className="font-semibold text-foreground">—</span>
+                  )}
                 </span>
               </div>
 
@@ -671,7 +858,7 @@ function MusicIdsFilterForm({
   );
 }
 
-export function TrendingMusicList({ songs }: { songs: MusicRow[] }) {
+export function TrendingMusicList({ songs, startIndex = 0 }: { songs: MusicRow[]; startIndex?: number }) {
   if (!songs.length) {
     return (
       <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
@@ -684,32 +871,56 @@ export function TrendingMusicList({ songs }: { songs: MusicRow[] }) {
     <ol className="space-y-4">
       {songs.map((song, index) => {
         const durationLabel = formatDuration(song.duration_seconds);
-        const rank = song.rank ?? index + 1;
+        const rank = song.rank ?? startIndex + index + 1;
+        const badges = getMusicBadgeLabels(song);
         return (
           <li
             key={song.asset_id}
-            className="group flex flex-col gap-4 rounded-lg border border-border/70 bg-surface px-4 py-5 transition hover:border-accent/55"
+            className="group flex flex-col gap-4 rounded-lg border border-border/70 bg-surface p-4 transition hover:border-accent/55 sm:p-5"
           >
-            <div className="flex flex-wrap items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-md border border-accent/20 bg-accent/10 text-xl font-semibold text-accent">
-                #{rank}
-              </div>
-              <div className="relative h-14 w-14 overflow-hidden rounded-md border border-border/60 bg-background/60">
-                <MusicCoverImage
-                  src={buildThumbnailUrl(song)}
-                  alt={`${song.title} Roblox music`}
-                  sizes="56px"
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="min-w-0 flex-1 space-y-1">
-                <p className="text-lg font-semibold text-foreground line-clamp-2">{song.title}</p>
-                <div className="flex flex-wrap items-center gap-3 text-xs text-muted">
-                  <span className="font-semibold text-foreground">{song.artist}</span>
-                  <span>{song.album ?? "Single / Unknown"}</span>
+            <div className="space-y-4">
+              <div className="flex min-w-0 items-start gap-3 sm:gap-4">
+                <div className="flex h-11 w-12 flex-shrink-0 items-center justify-center rounded-md border border-accent/20 bg-accent/10 px-2 text-base font-semibold text-accent sm:h-12 sm:w-14 sm:text-xl">
+                  #{rank}
+                </div>
+                <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md border border-border/60 bg-background/60 sm:h-14 sm:w-14">
+                  <MusicCoverImage
+                    src={buildThumbnailUrl(song)}
+                    alt={`${song.title} Roblox music`}
+                    sizes="56px"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="min-w-0 flex-1 space-y-1">
+                  <p className="break-words text-base font-semibold leading-snug text-foreground line-clamp-2 sm:text-lg">
+                    {song.title}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
+                    <Link
+                      href={buildArtistPath(song.artist)}
+                      className="font-semibold text-foreground transition hover:text-accent"
+                    >
+                      {song.artist}
+                    </Link>
+                    <span className="min-w-0 truncate">{song.album ?? "Single / Unknown"}</span>
+                  </div>
                 </div>
               </div>
+
               <div className="flex flex-wrap items-center gap-2">
+                {song.rank ? (
+                  <span className="inline-flex items-center rounded-md bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-accent">
+                    Top #{song.rank}
+                  </span>
+                ) : null}
+                {badges.map((badge) => (
+                  <span
+                    key={badge}
+                    className="inline-flex items-center rounded-md border border-border/60 bg-background/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted"
+                  >
+                    {badge}
+                  </span>
+                ))}
                 <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
                   <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
                   <span className="font-semibold text-foreground">{durationLabel ?? "—"}</span>
@@ -717,7 +928,9 @@ export function TrendingMusicList({ songs }: { songs: MusicRow[] }) {
                 {song.genre ? (
                   <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
                     <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
-                    <span className="font-semibold text-foreground">{song.genre}</span>
+                    <Link href={buildGenrePath(song.genre)} className="font-semibold text-foreground transition hover:text-accent">
+                      {song.genre}
+                    </Link>
                   </span>
                 ) : null}
               </div>
@@ -763,6 +976,7 @@ export function renderRobloxMusicIdsPage({
   currentPage,
   showHero,
   contentHtml,
+  activeNav = "all",
   search = "",
   sort = DEFAULT_SORT
 }: {
@@ -772,6 +986,7 @@ export function renderRobloxMusicIdsPage({
   currentPage: number;
   showHero: boolean;
   contentHtml?: CatalogContentHtml | null;
+  activeNav?: MusicNavKey;
   search?: string;
   sort?: MusicSortKey;
 }) {
@@ -878,6 +1093,8 @@ export function renderRobloxMusicIdsPage({
 
         <CatalogAdSlot />
 
+        <MusicCatalogNav active={activeNav} />
+
         <div className="catalog-surface space-y-6">
           <MusicIdsFilterForm basePath={BASE_PATH} search={search} sort={sort} />
           <MusicIdGrid songs={songs} />
@@ -938,17 +1155,13 @@ export function buildGenreCards(genres: ValueOption[]) {
           href={`${BASE_PATH}/genres/${genre.slug}`}
           className="group block h-full"
         >
-          <article className="relative h-full overflow-hidden rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/55">
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(255,255,255,0.3),transparent_55%)]"
-            />
-            <div className="relative space-y-3">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted">Genre</div>
-              <h2 className="text-xl font-semibold text-foreground">{genre.label}</h2>
-              <div className="flex items-center justify-between text-sm text-muted">
+          <article className="h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-border hover:bg-muted/20">
+            <div className="space-y-3">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Genre</div>
+              <h2 className="text-lg font-semibold leading-snug text-foreground">{genre.label}</h2>
+              <div className="flex items-center justify-between gap-4 text-sm text-muted">
                 <span>{formatCount(genre.count)} songs</span>
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/80">Explore</span>
+                <span className="text-xs font-semibold text-accent transition group-hover:text-accent">Explore</span>
               </div>
             </div>
           </article>
@@ -975,17 +1188,13 @@ export function buildArtistCards(artists: ValueOption[]) {
           href={`${BASE_PATH}/artists/${artist.slug}`}
           className="group block h-full"
         >
-          <article className="relative h-full overflow-hidden rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/55">
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(255,255,255,0.3),transparent_55%)]"
-            />
-            <div className="relative space-y-3">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted">Artist</div>
-              <h2 className="text-xl font-semibold text-foreground">{artist.label}</h2>
-              <div className="flex items-center justify-between text-sm text-muted">
+          <article className="h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-border hover:bg-muted/20">
+            <div className="space-y-3">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Artist</div>
+              <h2 className="text-lg font-semibold leading-snug text-foreground">{artist.label}</h2>
+              <div className="flex items-center justify-between gap-4 text-sm text-muted">
                 <span>{formatCount(artist.count)} songs</span>
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/80">Browse</span>
+                <span className="text-xs font-semibold text-accent transition group-hover:text-accent">Browse</span>
               </div>
             </div>
           </article>

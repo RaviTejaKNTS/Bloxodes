@@ -95,6 +95,27 @@ function buildSummaryLines(summary) {
       }
       break;
     }
+    case 'music-ids': {
+      const stats = summary.stats ?? {};
+      lines.push('', 'Music ID Details:');
+      if (stats.topSongsTarget) {
+        lines.push(`• Top songs: ${stats.topSongsUpserted ?? 0}/${stats.topSongsTarget} upserted, ${stats.enriched ?? 0} enriched`);
+      }
+      if (typeof stats.creatorStoreCharts === 'number') {
+        const chartTypes = Array.isArray(stats.chartTypes) ? stats.chartTypes.join(', ') : 'n/a';
+        const trending = stats.trendingIncluded ? 'yes' : 'no';
+        lines.push(`• Creator Store charts: ${stats.creatorStoreCharts} upserted`);
+        lines.push(`• Chart types: ${chartTypes}; trending: ${trending}`);
+      }
+      if (typeof stats.reranked === 'number') {
+        const dryRun = stats.dryRun ? ' dry-run' : '';
+        lines.push(`• Reranked${dryRun}: ${stats.updated ?? 0}/${stats.reranked} score updates`);
+      }
+      if (typeof stats.catalogTimestampUpdated === 'boolean') {
+        lines.push(`• Catalog timestamp updated: ${stats.catalogTimestampUpdated ? 'yes' : 'no'}`);
+      }
+      break;
+    }
     default:
       break;
   }

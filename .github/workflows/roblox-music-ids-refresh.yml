@@ -1,0 +1,177 @@
+name: Roblox Music IDs Refresh
+
+on:
+  schedule:
+    # Top 500 songs + Week/Month/Year Creator Store charts daily.
+    - cron: '20 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  top-songs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      ROBLOX_TOP_SONGS_TARGET: '500'
+      ROBLOX_TOP_SONGS_PAGE_LIMIT: '50'
+      ROBLOX_TOP_SONGS_MAX_PAGES: '10'
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Record start time
+        run: |
+          START_TIME=$(date -u '+%Y-%m-%d %H:%M:%SZ')
+          echo "RUN_START_TIME=$START_TIME" >> $GITHUB_ENV
+          echo "RUN_START_EPOCH=$(date +%s)" >> $GITHUB_ENV
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Collect top 500 songs
+        run: |
+          SUMMARY_PATH="$RUNNER_TEMP/top-songs-summary.json"
+          echo "AUTOMATION_SUMMARY_PATH=$SUMMARY_PATH" >> $GITHUB_ENV
+          AUTOMATION_SUMMARY_PATH="$SUMMARY_PATH" npm run collect:top-songs
+
+      - name: Send automation summary
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.AUTOMATION_REPORT_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.AUTOMATION_REPORT_CHAT_ID }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+          JOB_STATUS: ${{ job.status }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          AUTOMATION_SUMMARY_PATH: ${{ env.AUTOMATION_SUMMARY_PATH }}
+        run: |
+          END_TIME=$(date -u '+%Y-%m-%d %H:%M:%SZ')
+          END_EPOCH=$(date +%s)
+          if [ -n "${RUN_START_EPOCH}" ]; then
+            DURATION=$((END_EPOCH - RUN_START_EPOCH))
+          else
+            DURATION=0
+          fi
+          RUN_END_TIME="$END_TIME" \
+          RUN_DURATION_SECONDS="$DURATION" \
+          node scripts/automation/report-automation.mjs
+
+  daily-deep-charts:
+    runs-on: ubuntu-latest
+    needs: top-songs
+    timeout-minutes: 35
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      ROBLOX_CURATED_INCLUDE_TOP_SONGS: 'false'
+      ROBLOX_CURATED_TOOLBOX_CHART_TYPES: 'Week,Month,Year'
+      ROBLOX_CURATED_TOOLBOX_INCLUDE_TRENDING: 'false'
+      ROBLOX_CURATED_TOOLBOX_MAX_PAGES: '10'
+      ROBLOX_CURATED_MAX_ASSETS: '3000'
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Record start time
+        run: |
+          START_TIME=$(date -u '+%Y-%m-%d %H:%M:%SZ')
+          echo "RUN_START_TIME=$START_TIME" >> $GITHUB_ENV
+          echo "RUN_START_EPOCH=$(date +%s)" >> $GITHUB_ENV
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Collect Week, Month, and Year charts
+        run: |
+          SUMMARY_PATH="$RUNNER_TEMP/deep-charts-summary.json"
+          echo "AUTOMATION_SUMMARY_PATH=$SUMMARY_PATH" >> $GITHUB_ENV
+          AUTOMATION_SUMMARY_PATH="$SUMMARY_PATH" npm run collect:music-ids-curated
+
+      - name: Send automation summary
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.AUTOMATION_REPORT_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.AUTOMATION_REPORT_CHAT_ID }}
+          WORKFLOW_NAME: ${{ github.workflow }} - Deep Charts
+          JOB_STATUS: ${{ job.status }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          AUTOMATION_SUMMARY_PATH: ${{ env.AUTOMATION_SUMMARY_PATH }}
+        run: |
+          END_TIME=$(date -u '+%Y-%m-%d %H:%M:%SZ')
+          END_EPOCH=$(date +%s)
+          if [ -n "${RUN_START_EPOCH}" ]; then
+            DURATION=$((END_EPOCH - RUN_START_EPOCH))
+          else
+            DURATION=0
+          fi
+          RUN_END_TIME="$END_TIME" \
+          RUN_DURATION_SECONDS="$DURATION" \
+          node scripts/automation/report-automation.mjs
+
+  rerank:
+    runs-on: ubuntu-latest
+    needs: daily-deep-charts
+    timeout-minutes: 25
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Record start time
+        run: |
+          START_TIME=$(date -u '+%Y-%m-%d %H:%M:%SZ')
+          echo "RUN_START_TIME=$START_TIME" >> $GITHUB_ENV
+          echo "RUN_START_EPOCH=$(date +%s)" >> $GITHUB_ENV
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Rerank music IDs
+        run: |
+          SUMMARY_PATH="$RUNNER_TEMP/rerank-summary.json"
+          echo "AUTOMATION_SUMMARY_PATH=$SUMMARY_PATH" >> $GITHUB_ENV
+          AUTOMATION_SUMMARY_PATH="$SUMMARY_PATH" npm run rerank:music-ids
+
+      - name: Send automation summary
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.AUTOMATION_REPORT_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.AUTOMATION_REPORT_CHAT_ID }}
+          WORKFLOW_NAME: ${{ github.workflow }} - Rerank
+          JOB_STATUS: ${{ job.status }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          AUTOMATION_SUMMARY_PATH: ${{ env.AUTOMATION_SUMMARY_PATH }}
+        run: |
+          END_TIME=$(date -u '+%Y-%m-%d %H:%M:%SZ')
+          END_EPOCH=$(date +%s)
+          if [ -n "${RUN_START_EPOCH}" ]; then
+            DURATION=$((END_EPOCH - RUN_START_EPOCH))
+          else
+            DURATION=0
+          fi
+          RUN_END_TIME="$END_TIME" \
+          RUN_DURATION_SECONDS="$DURATION" \
+          node scripts/automation/report-automation.mjs

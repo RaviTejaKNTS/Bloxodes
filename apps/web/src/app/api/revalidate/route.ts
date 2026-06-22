@@ -323,6 +323,7 @@ function revalidateForMusic(slug = "roblox-music-ids") {
     "/catalog",
     ...paginatedIndexPaths(MUSIC_BASE_PATH),
     ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/trending`),
+    ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/charts`),
     ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/genres`),
     `${MUSIC_BASE_PATH}/genres/[genre]`,
     `${MUSIC_BASE_PATH}/genres/[genre]/page/[page]`,

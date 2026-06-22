@@ -9,51 +9,41 @@ import {
   BASE_PATH,
   MusicBreadcrumb,
   MusicCatalogNav,
-  MusicIdGrid,
+  TrendingMusicList,
   buildMusicItemListSchema,
-  loadArtistMusicIdsPageData,
-  loadArtistOptionBySlug
-} from "../../../../page-data";
+  getMusicChartConfig,
+  loadMusicChartPageData,
+  type MusicChartKey
+} from "./page-data";
 
-export const revalidate = 21600;
+const PAGE_SIZE = 24;
 
-type PageProps = {
-  params: Promise<{ artist: string; page: string }>;
-};
+export function buildMusicChartMetadata(key: MusicChartKey, pageNumber?: number): Metadata {
+  const config = getMusicChartConfig(key);
+  const title = pageNumber && pageNumber > 1
+    ? `${config.title} - Page ${pageNumber} | ${SITE_NAME}`
+    : `${config.title} | ${SITE_NAME}`;
+  const path = pageNumber && pageNumber > 1 ? `${config.path}/page/${pageNumber}` : config.path;
 
-export async function generateStaticParams() {
-  return [];
-}
-
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { artist, page } = await params;
-  const pageNumber = Number(page);
-  if (!Number.isFinite(pageNumber) || pageNumber < 1) return {};
   return {
-    title: `Artist Music IDs - Page ${pageNumber} | ${SITE_NAME}`,
+    title,
+    description: config.description,
     robots: { index: false, follow: true },
-    alternates: buildAlternates(`${BASE_PATH}/artists/${artist}/page/${pageNumber}`)
+    alternates: buildAlternates(path)
   };
 }
 
-export default async function ArtistMusicIdsPaginatedPage({ params }: PageProps) {
-  const { artist: artistSlug, page } = await params;
-  const pageNumber = Number(page);
+export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicChartKey; pageNumber?: number }) {
   if (!Number.isFinite(pageNumber) || pageNumber < 1) {
     notFound();
   }
 
-  const artist = await loadArtistOptionBySlug(artistSlug);
-  if (!artist) {
-    notFound();
-  }
-
-  const { songs, total, totalPages } = await loadArtistMusicIdsPageData(pageNumber, artist.label);
+  const config = getMusicChartConfig(chart);
+  const { songs, total, totalPages } = await loadMusicChartPageData(chart, pageNumber);
   if (pageNumber > totalPages) {
     notFound();
   }
 
-  const description = `Roblox music IDs credited to ${artist.label}.`;
   const latest = songs.reduce<Date | null>((latestDate, song) => {
     if (!song.last_seen_at) return latestDate;
     const candidate = new Date(song.last_seen_at);
@@ -61,42 +51,40 @@ export default async function ArtistMusicIdsPaginatedPage({ params }: PageProps)
     return latestDate;
   }, null);
   const refreshedLabel = latest ? formatDistanceToNow(latest, { addSuffix: true }) : null;
-  const canonicalPath = `${BASE_PATH}/artists/${artist.slug}/page/${pageNumber}`;
+  const canonicalPath = pageNumber > 1 ? `${config.path}/page/${pageNumber}` : config.path;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const pageTitle = `${artist.label} Roblox music IDs - Page ${pageNumber}`;
+  const pageTitle = pageNumber > 1 ? `${config.title} - Page ${pageNumber}` : config.title;
   const updatedIso = latest?.toISOString() ?? null;
   const breadcrumbNavItems = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },
     { label: "Roblox music IDs", href: BASE_PATH },
-    { label: "Artists", href: `${BASE_PATH}/artists` },
-    { label: artist.label, href: `${BASE_PATH}/artists/${artist.slug}` },
-    { label: `Page ${pageNumber}`, href: null }
+    { label: config.breadcrumbLabel, href: pageNumber > 1 ? config.path : null },
+    ...(pageNumber > 1 ? [{ label: `Page ${pageNumber}`, href: null }] : [])
   ];
   const breadcrumbSchema = JSON.stringify(
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
       { name: "Catalog", url: `${SITE_URL.replace(/\/$/, "")}/catalog` },
       { name: "Roblox music IDs", url: `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}` },
-      { name: "Artists", url: `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}/artists` },
-      { name: artist.label, url: `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}/artists/${artist.slug}` },
-      { name: `Page ${pageNumber}`, url: canonicalUrl }
+      { name: config.breadcrumbLabel, url: `${SITE_URL.replace(/\/$/, "")}${config.path}` },
+      ...(pageNumber > 1 ? [{ name: `Page ${pageNumber}`, url: canonicalUrl }] : [])
     ])
   );
   const listSchema = buildMusicItemListSchema({
     title: pageTitle,
-    description,
+    description: config.description,
     url: canonicalUrl,
     songs,
     total,
-    startIndex: (pageNumber - 1) * 24
+    startIndex: (pageNumber - 1) * PAGE_SIZE
   });
   const pageSchema = JSON.stringify(
     webPageJsonLd({
       siteUrl: SITE_URL,
       slug: canonicalPath.replace(/^\//, ""),
       title: pageTitle,
-      description,
+      description: config.description,
       image: `${SITE_URL}/og-image.png`,
       author: null,
       publishedAt: updatedIso,
@@ -106,29 +94,30 @@ export default async function ArtistMusicIdsPaginatedPage({ params }: PageProps)
 
   return (
     <div className="space-y-10">
-      <header className="space-y-2">
+      <header className={pageNumber > 1 ? "space-y-2" : "space-y-4"}>
         <MusicBreadcrumb items={breadcrumbNavItems} />
-        <h1 className="text-3xl font-semibold text-foreground">{artist.label} Roblox music IDs</h1>
+        <h1 className={pageNumber > 1 ? "text-3xl font-semibold text-foreground" : "text-4xl font-semibold leading-tight text-foreground md:text-5xl"}>
+          {config.heading}
+        </h1>
+        {pageNumber === 1 ? (
+          <p className="max-w-2xl text-base text-muted md:text-lg">{config.description}</p>
+        ) : null}
         <IndexPageStats
           items={[
-            { label: `${total.toLocaleString("en-US")} songs`, icon: "music", tone: "accent" },
+            { label: `${total.toLocaleString("en-US")} ${config.statLabel}`, icon: "music", tone: "accent" },
             ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : []),
-            { label: `Page ${pageNumber} of ${totalPages}` }
+            { label: pageNumber > 1 ? `Page ${pageNumber} of ${totalPages}` : "24 per page" }
           ]}
         />
       </header>
 
       <CatalogAdSlot />
 
-      <MusicCatalogNav active="artists" />
+      <MusicCatalogNav active={config.activeNav} />
 
-      <MusicIdGrid songs={songs} />
+      <TrendingMusicList songs={songs} startIndex={(pageNumber - 1) * PAGE_SIZE} />
 
-      <PagePagination
-        basePath={`${BASE_PATH}/artists/${artist.slug}`}
-        currentPage={pageNumber}
-        totalPages={totalPages}
-      />
+      <PagePagination basePath={config.path} currentPage={pageNumber} totalPages={totalPages} />
 
       <CatalogAdSlot />
 

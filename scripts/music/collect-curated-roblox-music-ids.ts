@@ -1,4 +1,5 @@
 import "../shared/load-env";
+import { writeFile } from "node:fs/promises";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
@@ -9,13 +10,14 @@ const USER_AGENT = "BloxodesCuratedMusicBot/1.0";
 
 const MAX_ASSETS = clampNumber(process.env.ROBLOX_CURATED_MAX_ASSETS, 5000, 0, Number.POSITIVE_INFINITY);
 
+const INCLUDE_TOP_SONGS = toBoolean(process.env.ROBLOX_CURATED_INCLUDE_TOP_SONGS, true);
 const TOP_SONGS_PAGE_LIMIT = clampNumber(process.env.ROBLOX_CURATED_TOP_SONGS_LIMIT, 100, 1, 100);
 const TOP_SONGS_MAX_PAGES = clampNumber(process.env.ROBLOX_CURATED_TOP_SONGS_MAX_PAGES, 5, 1, 50);
 const TOP_SONGS_DELAY_MS = clampNumber(process.env.ROBLOX_CURATED_TOP_SONGS_DELAY_MS, 200, 0, 10000);
 const TOP_SONGS_MAX_RETRIES = clampNumber(process.env.ROBLOX_CURATED_TOP_SONGS_MAX_RETRIES, 3, 0, 10);
 
 const TOOLBOX_PAGE_SIZE = clampNumber(process.env.ROBLOX_CURATED_TOOLBOX_PAGE_SIZE, 100, 1, 100);
-const TOOLBOX_MAX_PAGES = clampNumber(process.env.ROBLOX_CURATED_TOOLBOX_MAX_PAGES, 5, 1, 50);
+const TOOLBOX_MAX_PAGES = clampNumber(process.env.ROBLOX_CURATED_TOOLBOX_MAX_PAGES, 10, 1, 50);
 const TOOLBOX_SORT_CATEGORY = process.env.ROBLOX_CURATED_TOOLBOX_SORT_CATEGORY ?? "Top";
 const TOOLBOX_SORT_DIRECTION = process.env.ROBLOX_CURATED_TOOLBOX_SORT_DIRECTION ?? "Descending";
 const TOOLBOX_SEARCH_VIEW = process.env.ROBLOX_CURATED_TOOLBOX_SEARCH_VIEW ?? "Full";
@@ -96,6 +98,17 @@ type ChartPass = {
   sortCategory: string;
   label: string;
   maxPages: number;
+};
+
+type AutomationSummary = {
+  type: "music-ids";
+  stats: {
+    curatedTopSongs: number;
+    creatorStoreCharts: number;
+    topSongsIncluded: boolean;
+    chartTypes: string[];
+    trendingIncluded: boolean;
+  };
 };
 
 function clampNumber(raw: string | undefined, fallback: number, min: number, max: number): number {
@@ -294,6 +307,11 @@ function buildToolboxRows(
 }
 
 async function collectTopSongs(seen: Set<number>, maxAssets: number | null): Promise<number> {
+  if (!INCLUDE_TOP_SONGS) {
+    console.log("Skipping curated top songs pass.");
+    return 0;
+  }
+
   const fetchedAt = new Date().toISOString();
   const seenTokens = new Set<string>();
   let pageToken: string | null = "0";
@@ -347,6 +365,12 @@ async function collectTopSongs(seen: Set<number>, maxAssets: number | null): Pro
 
   console.log(`Upserted ${totalUpserts} top songs.`);
   return totalUpserts;
+}
+
+async function writeAutomationSummary(summary: AutomationSummary) {
+  const summaryPath = process.env.AUTOMATION_SUMMARY_PATH;
+  if (!summaryPath) return;
+  await writeFile(summaryPath, `${JSON.stringify(summary, null, 2)}\n`, "utf8");
 }
 
 async function collectCreatorStoreCharts(seen: Set<number>, maxAssets: number | null): Promise<number> {
@@ -444,6 +468,16 @@ async function run() {
   const chartCount = await collectCreatorStoreCharts(seenAssetIds, remaining);
 
   console.log(`Done. Top songs: ${topSongsCount}. Creator Store charts: ${chartCount}.`);
+  await writeAutomationSummary({
+    type: "music-ids",
+    stats: {
+      curatedTopSongs: topSongsCount,
+      creatorStoreCharts: chartCount,
+      topSongsIncluded: INCLUDE_TOP_SONGS,
+      chartTypes: TOOLBOX_CHART_TYPES,
+      trendingIncluded: TOOLBOX_INCLUDE_TRENDING
+    }
+  });
 }
 
 run().catch((error) => {

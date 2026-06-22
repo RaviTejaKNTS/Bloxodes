@@ -8,6 +8,7 @@ import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates }
 import {
   BASE_PATH,
   MusicBreadcrumb,
+  MusicCatalogNav,
   MusicIdGrid,
   buildMusicItemListSchema,
   loadGenreMusicIdsPageData,
@@ -118,6 +119,8 @@ export default async function GenreMusicIdsPaginatedPage({ params }: PageProps) 
       </header>
 
       <CatalogAdSlot />
+
+      <MusicCatalogNav active="genres" />
 
       <MusicIdGrid songs={songs} />
 

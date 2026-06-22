@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 const PAGE_SIZE = 24;
 const MUSIC_SOURCE_VIEW = "roblox_music_ids_ranked_view";
 const SELECT_FIELDS =
-  "asset_id, title, artist, album, genre, duration_seconds, album_art_asset_id, thumbnail_url, rank, source, last_seen_at";
+  "asset_id, title, artist, album, genre, duration_seconds, album_art_asset_id, thumbnail_url, rank, source, last_seen_at, popularity_score";
 
 type OrderableQuery<T> = {
   order: (...args: any[]) => T;
@@ -49,11 +49,11 @@ function applySort<T extends OrderableQuery<T>>(query: T, sort: MusicSortKey): T
     case "recommended":
     default:
       return query
-        .order("duration_bucket", { ascending: true, nullsFirst: false })
         .order("popularity_score", { ascending: false, nullsFirst: false })
+        .order("last_seen_at", { ascending: false, nullsFirst: false })
+        .order("duration_bucket", { ascending: true, nullsFirst: false })
         .order("duration_seconds", { ascending: false, nullsFirst: false })
-        .order("rank", { ascending: true, nullsFirst: false })
-        .order("last_seen_at", { ascending: false, nullsFirst: false });
+        .order("rank", { ascending: true, nullsFirst: false });
   }
 }
 

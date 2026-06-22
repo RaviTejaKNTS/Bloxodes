@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { getCatalogTopNavContext } from "@/lib/catalog-top-nav";
 import { getGameTopNavContext } from "@/lib/game-top-nav";
 
 export const dynamic = "force-dynamic";
@@ -18,9 +17,9 @@ export async function GET(request: Request) {
   }
 
   try {
-    const [gameNav, catalogNav] = await Promise.all([getGameTopNavContext(path), getCatalogTopNavContext(path)]);
+    const gameNav = await getGameTopNavContext(path);
     return NextResponse.json(
-      { gameNav, catalogNav },
+      { gameNav, catalogNav: null },
       {
         headers: {
           "Cache-Control": "no-store"
