@@ -213,42 +213,6 @@ function formatCount(value: number): string {
   return value.toLocaleString("en-US");
 }
 
-function isRecentlySeen(value: string | null, days = 30): boolean {
-  if (!value) return false;
-  const time = new Date(value).getTime();
-  if (!Number.isFinite(time)) return false;
-  return Date.now() - time <= days * 24 * 60 * 60 * 1000;
-}
-
-function getSourceBadgeLabel(source: string | null): string | null {
-  switch (source) {
-    case "creator_store_trending":
-      return "Trending";
-    case "creator_store_top_current":
-      return "Current chart";
-    case "creator_store_top_week":
-      return "Weekly chart";
-    case "creator_store_top_month":
-      return "Monthly chart";
-    case "creator_store_top_year":
-      return "Yearly chart";
-    case "music_discovery_top_100":
-    case "music_discovery_top_songs":
-      return "Top chart";
-    default:
-      return null;
-  }
-}
-
-function getMusicBadgeLabels(song: MusicRow): string[] {
-  const labels: string[] = [];
-  const sourceBadge = getSourceBadgeLabel(song.source);
-  if (sourceBadge) labels.push(sourceBadge);
-  if (isRecentlySeen(song.last_seen_at)) labels.push("Recently seen");
-  if (!labels.length && (song.popularity_score ?? 0) >= 1500) labels.push("Popular");
-  return labels.slice(0, 2);
-}
-
 function normalizeKey(value: string): string {
   return value
     .toLowerCase()
@@ -694,7 +658,6 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
       {songs.map((song) => {
         const durationLabel = formatDuration(song.duration_seconds);
-        const badges = getMusicBadgeLabels(song);
         return (
           <article
             key={song.asset_id}
@@ -748,19 +711,6 @@ export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
                     }}
                   />
                 </div>
-                {song.rank ? (
-                  <span className="inline-flex items-center rounded-md bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-accent">
-                    Top #{song.rank}
-                  </span>
-                ) : null}
-                {badges.map((badge) => (
-                  <span
-                    key={badge}
-                    className="inline-flex items-center rounded-md border border-border/60 bg-background/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted"
-                  >
-                    {badge}
-                  </span>
-                ))}
               </div>
 
               <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
@@ -872,7 +822,6 @@ export function TrendingMusicList({ songs, startIndex = 0 }: { songs: MusicRow[]
       {songs.map((song, index) => {
         const durationLabel = formatDuration(song.duration_seconds);
         const rank = song.rank ?? startIndex + index + 1;
-        const badges = getMusicBadgeLabels(song);
         return (
           <li
             key={song.asset_id}
@@ -908,19 +857,6 @@ export function TrendingMusicList({ songs, startIndex = 0 }: { songs: MusicRow[]
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
-                {song.rank ? (
-                  <span className="inline-flex items-center rounded-md bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-accent">
-                    Top #{song.rank}
-                  </span>
-                ) : null}
-                {badges.map((badge) => (
-                  <span
-                    key={badge}
-                    className="inline-flex items-center rounded-md border border-border/60 bg-background/60 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-muted"
-                  >
-                    {badge}
-                  </span>
-                ))}
                 <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
                   <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
                   <span className="font-semibold text-foreground">{durationLabel ?? "—"}</span>
