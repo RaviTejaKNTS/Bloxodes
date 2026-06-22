@@ -1,8 +1,12 @@
 name: Draft Code Page Generation
 
 on:
-  # schedule:
-  #   - cron: "20 2,14 * * *"
+  schedule:
+    - cron: "20 0,12 * * *"
+    - cron: "44 2,14 * * *"
+    - cron: "8 5,17 * * *"
+    - cron: "32 7,19 * * *"
+    - cron: "56 9,21 * * *"
   workflow_dispatch:
     inputs:
       limit:

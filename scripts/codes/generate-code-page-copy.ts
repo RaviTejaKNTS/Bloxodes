@@ -7,6 +7,7 @@ import { JSDOM } from "jsdom";
 import { Readability } from "@mozilla/readability";
 import sharp from "sharp";
 
+import { syncCodePageCodesFromSources } from "@/lib/admin/code-page-import";
 import { scrapeRobloxGameMetadata } from "@/lib/roblox/game-metadata";
 import { ensureUniverseForRobloxLink } from "@/lib/roblox/universe";
 import { scrapeSocialLinksFromSources, type SocialLinks as ScrapedSocialLinks } from "@/lib/social-links";
@@ -879,6 +880,30 @@ async function processDraftCodePage(game: ExistingCodePageRecord): Promise<void>
   }
   if (resolvedUniverseId != null) {
     updatePayload.universe_id = resolvedUniverseId;
+  }
+
+  let codesSynced = false;
+  if (resolvedUniverseId != null) {
+    const codeSourceUrls = sourceUrlsFromFields(game, ALL_ARTICLE_RESEARCH_SOURCE_FIELDS);
+    console.log(`🔁 Refreshing code rows for ${game.slug} before publish...`);
+    const syncResult = await syncCodePageCodesFromSources(supabase, game.id, codeSourceUrls);
+    codesSynced = syncResult.errors.length === 0;
+    if (codesSynced) {
+      console.log(
+        `✅ ${game.slug} codes refreshed: ${syncResult.codesUpserted} upserted from ${syncResult.codesFound} found.`
+      );
+    } else {
+      console.warn(`⚠️ ${game.slug} code refresh failed; keeping page as draft: ${syncResult.errors.join(", ")}`);
+    }
+  }
+
+  if (resolvedUniverseId != null && codesSynced) {
+    updatePayload.is_published = true;
+    updatePayload.published_at = new Date().toISOString();
+    console.log(`🚀 ${game.slug} resolved universe ${resolvedUniverseId} and refreshed codes; publishing code page.`);
+  } else {
+    updatePayload.is_published = false;
+    console.log(`📝 ${game.slug} is missing a resolved universe ID or clean code refresh; keeping code page as draft.`);
   }
 
   const { error: updateError } = await supabase
