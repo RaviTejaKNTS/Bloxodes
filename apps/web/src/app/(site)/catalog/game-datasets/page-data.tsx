@@ -1614,7 +1614,91 @@ const PET_SIMULATOR_99_HIDDEN_KEYS = [
   "fields"
 ];
 
+const ANIME_SQUADRON_SOURCE_KEYS = [
+  "catalogSection",
+  "slug",
+  "sortOrder",
+  "sourceUrl",
+  "sourceUrls",
+  "sourceNotes",
+  "sourceConfidence",
+  "sourceModifiedAt",
+  "sourceRowOrder",
+  "sourceImageUrl",
+  "sourceImageAlt",
+  "sourceImageFile",
+  "beebomImageUrl",
+  "plannedImagePath",
+  "imageStatus",
+  "verificationNote",
+  "alternateSpellings"
+];
+
+const ANIME_SQUADRON_EQUIPMENT_SECTION_ORDER = [
+  "Rare Equipment",
+  "Epic Equipment",
+  "Legendary Equipment",
+  "Mythic Equipment",
+  "Secret Equipment"
+];
+
+const ANIME_SQUADRON_TRAIT_SECTION_ORDER = [
+  "Common 20% Traits",
+  "Mid-Chance 11.3% Traits",
+  "Rare 1.25% Traits",
+  "Ultra-Rare Chase Traits"
+];
+
+const ANIME_SQUADRON_UNIT_SECTION_ORDER = [
+  "Evolved and Secret Units",
+  "Damage Carries",
+  "Support and Utility",
+  "Tanks and Survival",
+  "Economy Units",
+  "Speed Farming Units",
+  "Early Fillers"
+];
+
 const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
+  "anime-squadron-equipment": {
+    groupKey: "catalogSection",
+    groupLabel: "Equipment group",
+    sectionOrder: ANIME_SQUADRON_EQUIPMENT_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: ANIME_SQUADRON_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 10,
+    subtitleKeys: ["gearSet", "craftCost"]
+  },
+  "anime-squadron-traits": {
+    groupKey: "catalogSection",
+    groupLabel: "Trait chance",
+    sectionOrder: ANIME_SQUADRON_TRAIT_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: [
+      ...ANIME_SQUADRON_SOURCE_KEYS,
+      "chanceBand",
+      "chanceNumeric"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 8,
+    subtitleKeys: ["chance"]
+  },
+  "anime-squadron-units": {
+    groupKey: "catalogSection",
+    groupLabel: "Unit role",
+    sectionOrder: ANIME_SQUADRON_UNIT_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: [
+      ...ANIME_SQUADRON_SOURCE_KEYS,
+      "unitName",
+      "variant",
+      "ultimateOrActive"
+    ],
+    additionalColumns: ["catalogSection"],
+    maxStats: 8,
+    subtitleKeys: ["role", "metaTier"]
+  },
   "pet-simulator-99-pets": {
     groupKey: "catalogSection",
     groupLabel: "Pet group",
