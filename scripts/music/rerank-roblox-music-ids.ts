@@ -51,6 +51,12 @@ type MusicRow = {
 
 type ScoreUpdate = {
   asset_id: number;
+  title: string;
+  artist: string;
+  source: string;
+  raw_payload: Record<string, unknown>;
+  first_seen_at: string;
+  last_seen_at: string;
   popularity_score: number;
 };
 
@@ -269,7 +275,19 @@ async function run() {
   }));
   const updates = scored
     .filter(({ row, score }) => Math.abs(score - (row.popularity_score ?? 0)) >= MIN_SCORE_DELTA)
-    .map(({ row, score }) => ({ asset_id: row.asset_id, popularity_score: score }));
+    .flatMap(({ row, score }) => {
+      if (!row.title || !row.artist || !row.source || !row.first_seen_at || !row.last_seen_at) return [];
+      return [{
+        asset_id: row.asset_id,
+        title: row.title,
+        artist: row.artist,
+        source: row.source,
+        raw_payload: row.raw_payload ?? {},
+        first_seen_at: row.first_seen_at,
+        last_seen_at: row.last_seen_at,
+        popularity_score: score
+      }];
+    });
 
   await writeUpdates(updates);
   const catalogTimestampUpdated = await updateCatalogTimestamp();

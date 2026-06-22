@@ -84,7 +84,7 @@ type MusicRow = {
   genre: string | null;
   duration_seconds: number | null;
   album_art_asset_id: number | null;
-  rank: number | null;
+  rank?: number | null;
   source: string;
   vote_count?: number | null;
   upvote_percent?: number | null;
@@ -294,7 +294,6 @@ function buildToolboxRows(
       genre: normalizeOptionalText(asset.genre ?? null),
       duration_seconds: typeof asset.durationSeconds === "number" ? asset.durationSeconds : null,
       album_art_asset_id: typeof previewId === "number" ? previewId : null,
-      rank: null,
       source,
       vote_count: voteCount,
       upvote_percent: upvotePercent,
