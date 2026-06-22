@@ -1,4 +1,4 @@
 interface:
-  display_name: "Bloxodes Catalog Research"
+  display_name: "Bloxodes Game Catalog Research"
   short_description: "Research one game catalog"
   default_prompt: "Use $bloxodes-game-catalog-research for one approved game catalog collection. Check production overlap and source proof, define scope, item count, section plan, card fields, image needs, and gaps in brief.md, then stop without writing final.json."

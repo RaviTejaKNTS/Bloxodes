@@ -23,6 +23,11 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
 
 ## Writing Rules
 
+- write in a simple language that anyone can undestand and follow through. 
+- Write for Roblox players like a Roblox player who gathered the wiki for everyone to check.
+- Do not write about sources, dataset, or what this page is about.
+- Do not write about your actions. Always focus on the game and players.
+
 - Start with what the player does in the game.
 - Keep `tips_md` to 3-4 useful gameplay tips.
 - Fill `controls_json` only with verified controls. If controls cannot be verified, leave it empty and make sure the gap is listed in `brief.md`.

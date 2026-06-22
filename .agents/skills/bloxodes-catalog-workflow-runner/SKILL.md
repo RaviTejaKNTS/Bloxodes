@@ -7,12 +7,29 @@ description: Run one approved global Bloxodes /catalog page with parent review. 
 
 Use one subagent for one global catalog page. The same subagent researches the collection, waits for parent approval, then writes `final.json`.
 
+## Subagent Handoff
+
+Every subagent message must set the role and exact skill:
+
+- You are the subagent for one global catalog page only.
+- Do not run `/bloxodes-catalog-workflow-runner`.
+- Do not create or call other subagents.
+- Start with `/bloxodes-catalog-research`.
+- Skill file: `.agents/skills/bloxodes-catalog-research/SKILL.md`.
+- Return `brief.md` only and wait for parent approval.
+
+After the parent approves the brief, send the same subagent:
+
+- Continue with `/bloxodes-catalog-writing`.
+- Skill file: `.agents/skills/bloxodes-catalog-writing/SKILL.md`.
+- Create `final.json` for the approved brief only.
+
 ## Workflow
 
 1. Confirm the catalog idea and route code.
-2. Ask the subagent to use `bloxodes-catalog-research` and return `brief.md`.
+2. Ask the subagent to use `/bloxodes-catalog-research` and return `brief.md`.
 3. Review existing coverage, data state, sources, useful fields, and gaps.
-4. Ask the same subagent to use `bloxodes-catalog-writing` and create `final.json`.
+4. Ask the same subagent to use `/bloxodes-catalog-writing` and create `final.json`.
 5. Review copy, metadata, FAQs, and JSON.
 6. Start or reuse localhost with `npm run dev:local`.
 7. Run:

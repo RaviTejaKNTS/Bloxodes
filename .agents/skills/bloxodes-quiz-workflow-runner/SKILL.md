@@ -7,12 +7,29 @@ description: Run one approved Bloxodes quiz page with parent review. Use when th
 
 Use one subagent for one quiz. The same subagent researches the game facts, waits for parent approval, then writes `final.json`.
 
+## Subagent Handoff
+
+Every subagent message must set the role and exact skill:
+
+- You are the subagent for one quiz only.
+- Do not run `/bloxodes-quiz-workflow-runner`.
+- Do not create or call other subagents.
+- Start with `/bloxodes-quiz-research`.
+- Skill file: `.agents/skills/bloxodes-quiz-research/SKILL.md`.
+- Return `brief.md` only and wait for parent approval.
+
+After the parent approves the brief, send the same subagent:
+
+- Continue with `/bloxodes-quiz-writing`.
+- Skill file: `.agents/skills/bloxodes-quiz-writing/SKILL.md`.
+- Create `final.json` for the approved brief only.
+
 ## Workflow
 
 1. Confirm the game, universe ID, and quiz idea.
-2. Ask the subagent to use `bloxodes-quiz-research` and return `brief.md`.
+2. Ask the subagent to use `/bloxodes-quiz-research` and return `brief.md`.
 3. Review source proof, topic coverage, difficulty plan, and facts to avoid.
-4. Ask the same subagent to use `bloxodes-quiz-writing` and create `final.json`.
+4. Ask the same subagent to use `/bloxodes-quiz-writing` and create `final.json`.
 5. Review that questions are fair, stable, and useful.
 6. Start or reuse localhost with `npm run dev:local`.
 7. Run:

@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Events Runner"
   short_description: "Run events page QA"
-  default_prompt: "Use $bloxodes-events-workflow-runner for one approved Bloxodes events page. Have one subagent research with $bloxodes-events-research, wait for approval, write final.json with $bloxodes-events-writing, run verify:simple-page-finals, open the localhost events link in Codex Browser, and return the link."
+  default_prompt: "Use /bloxodes-events-workflow-runner for one approved Bloxodes events page. Tell the subagent not to run the workflow runner or create more subagents. Have one subagent research with /bloxodes-events-research, wait for approval, write final.json with /bloxodes-events-writing, run verify:simple-page-finals, open the localhost events link in Codex Browser, and return the link."

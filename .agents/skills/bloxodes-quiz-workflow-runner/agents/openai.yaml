@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Quiz Runner"
   short_description: "Run quiz research/write QA"
-  default_prompt: "Use $bloxodes-quiz-workflow-runner for one approved Bloxodes quiz. Have one subagent research with $bloxodes-quiz-research, wait for approval, write final.json with $bloxodes-quiz-writing, run verify:engagement-finals, open the localhost quiz link in Codex Browser, and return the link."
+  default_prompt: "Use /bloxodes-quiz-workflow-runner for one approved Bloxodes quiz. Tell the subagent not to run the workflow runner or create more subagents. Have one subagent research with /bloxodes-quiz-research, wait for approval, write final.json with /bloxodes-quiz-writing, run verify:engagement-finals, open the localhost quiz link in Codex Browser, and return the link."

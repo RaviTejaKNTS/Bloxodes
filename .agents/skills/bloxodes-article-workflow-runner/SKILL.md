@@ -13,6 +13,23 @@ If there are more article ideas than available subagent slots, queue the extra a
 
 The parent owns judgment: approve the brief, ask for refinement, review the final article, and decide whether it is done. The parent should not take over the writing unless the fix is tiny.
 
+## Subagent Handoff
+
+Every subagent message must set the role and exact skill:
+
+- You are the subagent for one article only.
+- Do not run `/bloxodes-article-workflow-runner`.
+- Do not create or call other subagents.
+- Start with `/bloxodes-article-research`.
+- Skill file: `.agents/skills/bloxodes-article-research/SKILL.md`.
+- Return `brief.md` only and wait for parent approval.
+
+After the parent approves the brief, send the same subagent:
+
+- Continue with `/bloxodes-article-writing`.
+- Skill file: `.agents/skills/bloxodes-article-writing/SKILL.md`.
+- Create `final.json` for the approved brief only.
+
 ## Workspace
 
 For each article:
@@ -27,10 +44,10 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
 
 1. Confirm the approved article idea or list of ideas.
 2. Give each subagent exactly one article idea.
-3. Ask each subagent to start with `bloxodes-article-research` skill and return `brief.md` only.
+3. Ask each subagent to start with `/bloxodes-article-research` and return `brief.md` only.
 4. Review each brief. Do not approve weak research just because the angle sounds good.
 5. Send feedback to the same subagent, or approve the brief.
-6. After approval, ask the same subagent to use `bloxodes-article-writing` skill and create `final.json`.
+6. After approval, ask the same subagent to use `/bloxodes-article-writing` and create `final.json`.
 7. Review the final article and send fixes back to the same subagent when needed.
 8. Start or reuse the local web server with `npm run dev:local`.
 9. Run the batch verifier on reviewed final files. If it fails, send the findings back to the same subagent and do not open Browser yet.

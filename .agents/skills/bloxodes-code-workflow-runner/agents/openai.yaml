@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Codes Runner"
   short_description: "Run codes page setup"
-  default_prompt: "Use $bloxodes-code-workflow-runner for one Bloxodes codes page. Have one subagent prepare the code-page payload with $bloxodes-code-writing, review that no code rows are manual, run upsert:code-page and refresh:codes, then preview /codes/<slug> on localhost."
+  default_prompt: "Use /bloxodes-code-workflow-runner for one Bloxodes codes page. Tell the subagent not to run the workflow runner or create more subagents. Have one subagent prepare the code-page payload with /bloxodes-code-writing, review that no code rows are manual, run upsert:code-page and refresh:codes, then preview /codes/<slug> on localhost."

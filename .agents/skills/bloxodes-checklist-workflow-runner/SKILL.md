@@ -7,12 +7,29 @@ description: Run one approved Bloxodes checklist page with parent review. Use wh
 
 Use one subagent for one checklist. The same subagent researches the player route, waits for parent approval, then writes `final.json`.
 
+## Subagent Handoff
+
+Every subagent message must set the role and exact skill:
+
+- You are the subagent for one checklist only.
+- Do not run `/bloxodes-checklist-workflow-runner`.
+- Do not create or call other subagents.
+- Start with `/bloxodes-checklist-research`.
+- Skill file: `.agents/skills/bloxodes-checklist-research/SKILL.md`.
+- Return `brief.md` only and wait for parent approval.
+
+After the parent approves the brief, send the same subagent:
+
+- Continue with `/bloxodes-checklist-writing`.
+- Skill file: `.agents/skills/bloxodes-checklist-writing/SKILL.md`.
+- Create `final.json` for the approved brief only.
+
 ## Workflow
 
 1. Confirm the game, universe ID, and checklist idea.
-2. Ask the subagent to use `bloxodes-checklist-research` and return `brief.md`.
+2. Ask the subagent to use `/bloxodes-checklist-research` and return `brief.md`.
 3. Review the route, sections, existing coverage, source proof, and gaps.
-4. Ask the same subagent to use `bloxodes-checklist-writing` and create `final.json`.
+4. Ask the same subagent to use `/bloxodes-checklist-writing` and create `final.json`.
 5. Review that tasks are concrete actions players can complete.
 6. Start or reuse localhost with `npm run dev:local`.
 7. Run:

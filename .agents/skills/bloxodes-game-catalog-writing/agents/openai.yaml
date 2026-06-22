@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Game Catalog Writing"
   short_description: "Write game catalog pages"
-  default_prompt: "Use $bloxodes-game-catalog-writing to write one Bloxodes game catalog final.json from approved brief.md and approved data readiness. Keep copy simple, match description_json to real section labels, explain the game system, and do not repeat item cards."
+  default_prompt: "Use $bloxodes-game-catalog-writing to write one Bloxodes game catalog final.json from approved brief.md, approved data readiness, and approved image readiness. Keep copy simple, match description_json to real section labels, explain the game system, and do not repeat item cards."

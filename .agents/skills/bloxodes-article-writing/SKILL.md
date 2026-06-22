@@ -34,6 +34,8 @@ If the brief is missing, weak, unapproved, or has unresolved source gaps, stop a
 - Every sentence must add value. No padding, no repetition, ever.
 - If 300 words covers it fully, stop at 300. There's no minimum or maximum — the only test is whether more words add real depth.
 - Never restate something already said elsewhere in the article, even in different phrasing.
+- However, do not skip on any info. Do not asssume people already know something, make it clear for everyone to understand.
+- We may not need an what it is headings, but definitely need to cover all such info in the article. We need to make a detailed article that can rank better than all competitors. If the article is missing any info, run a fan-out research query and fill it — never leave a gap.
 
 **Structure**
 - Follow the provided outline, but adjust it if a different flow serves the reader better.

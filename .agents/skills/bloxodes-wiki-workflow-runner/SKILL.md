@@ -9,6 +9,23 @@ Use one subagent for one wiki hub. The same subagent researches the game, waits 
 
 The parent owns judgment: approve the research, review the wiki copy, run local verification, and preview the route.
 
+## Subagent Handoff
+
+Every subagent message must set the role and exact skill:
+
+- You are the subagent for one wiki hub only.
+- Do not run `/bloxodes-wiki-workflow-runner`.
+- Do not create or call other subagents.
+- Start with `/bloxodes-wiki-research`.
+- Skill file: `.agents/skills/bloxodes-wiki-research/SKILL.md`.
+- Return `brief.md` only and wait for parent approval.
+
+After the parent approves the brief, send the same subagent:
+
+- Continue with `/bloxodes-wiki-writing`.
+- Skill file: `.agents/skills/bloxodes-wiki-writing/SKILL.md`.
+- Create `final.json` for the approved brief only.
+
 ## Workspace
 
 ```text
@@ -20,10 +37,10 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
 ## Workflow
 
 1. Confirm the game, universe ID, and editorial slug.
-2. Ask the subagent to use `bloxodes-wiki-research` and return `brief.md`.
+2. Ask the subagent to use `/bloxodes-wiki-research` and return `brief.md`.
 3. Review identity, existing coverage, game loop, controls proof, related pages, and gaps.
 4. Send feedback or approve the research.
-5. Ask the same subagent to use `bloxodes-wiki-writing` and create `final.json`.
+5. Ask the same subagent to use `/bloxodes-wiki-writing` and create `final.json`.
 6. Review `final.json`, simple language, controls, tips, metadata, and related-page assumptions.
 7. Start or reuse localhost with `npm run dev:local`.
 8. Run:

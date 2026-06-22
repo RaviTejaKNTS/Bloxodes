@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Game Catalog Data"
-  short_description: "Prepare game catalog data and images"
-  default_prompt: "Use $bloxodes-game-catalog-data after catalog brief approval. Prepare or verify dataset rows, section field/order, card fields, card summaries, image coverage, and renderer support, update brief.md with data readiness, then stop unless data is blocked."
+  short_description: "Prepare game catalog data"
+  default_prompt: "Use $bloxodes-game-catalog-data after catalog brief approval. Prepare or verify dataset rows, section field/order, card fields, card summaries, image field planning, and renderer support, update brief.md with data readiness, then stop unless data is blocked."

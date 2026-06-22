@@ -39,13 +39,16 @@ Start with `Evidence checked`,
 Evidence checked:
 - Bloxodes existing pages:
 - BloxInformer:
+- Beebom:
+- Game8:
+- Pro Game Guides:
 - Fandom/game wiki:
 - standalone wiki:
-- guide sites:
+- All other sources:
 - keyword searches:
 ```
 
-If any source-check line is not actually checked, do not decide. Return `[source discovery incomplete]` with the missing checks.
+If any source-check line is not actually checked, do not decide. Return `[source discovery incomplete]` with the missing checks. If you have checked, always provide the link to all the pages you have checked. 
 
 then return only game catalog recommendations:
 

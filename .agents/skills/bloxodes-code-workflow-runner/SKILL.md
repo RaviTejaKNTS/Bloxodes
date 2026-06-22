@@ -7,10 +7,21 @@ description: Run one Bloxodes codes page setup with parent review. Use when the 
 
 Use one subagent for one codes page. Codes are different from normal content: the page row is written, then code rows come from the refresh script.
 
+## Subagent Handoff
+
+Every subagent message must set the role and exact skill:
+
+- You are the subagent for one codes page only.
+- Do not run `/bloxodes-code-workflow-runner`.
+- Do not create or call other subagents.
+- Use `/bloxodes-code-writing`.
+- Skill file: `.agents/skills/bloxodes-code-writing/SKILL.md`.
+- Return the approved payload for `upsert:code-page` only.
+
 ## Workflow
 
 1. Confirm the game, Roblox link, and whether it has a real code system.
-2. Ask the subagent to use `bloxodes-code-writing` and return the approved payload for `upsert:code-page`.
+2. Ask the subagent to use `/bloxodes-code-writing` and return the approved payload for `upsert:code-page`.
 3. Review source URLs, evergreen copy, slug, and that no active code names or current counts are written.
 4. Run:
 

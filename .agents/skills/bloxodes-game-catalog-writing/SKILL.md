@@ -1,17 +1,18 @@
 ---
 name: bloxodes-game-catalog-writing
-description: Write one Bloxodes game-specific catalog final.json after catalog research and data approval. Use for durable in-game collections backed by local datasets and wiki_catalog_pages, metadata, intro_md, description_md, description_json, faq_json, wiki_md, and final.json output.
+description: Write one Bloxodes game-specific catalog final.json after catalog research, data approval, and image approval. Use for durable in-game collections backed by local datasets and wiki_catalog_pages, metadata, intro_md, description_md, description_json, faq_json, wiki_md, and final.json output.
 ---
 
 # Bloxodes Game Catalog Writing
 
-Use this after `brief.md` and data readiness are approved. Use it for one durable item or system collection inside one Roblox game.
+Use this after `brief.md`, data readiness, and image readiness are approved. Use it for one durable item or system collection inside one Roblox game.
 
 ## Workflow
 
 1. Read the approved `brief.md`.
-2. Confirm `Data readiness` says the dataset, section field, card fields, image coverage, and renderer/config support are ready.
-3. Create or update:
+2. Confirm `Data readiness` says the dataset, section field, card fields, and renderer/config support are ready.
+3. Confirm `Image readiness` is approved, or missing images were clearly accepted.
+4. Create or update:
 
 ```text
 tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/
@@ -19,8 +20,8 @@ tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/
   final.json
 ```
 
-4. Write `final.json`.
-5. Parse JSON before returning.
+5. Write `final.json`.
+6. Parse JSON before returning.
 
 ## Writing Rules
 

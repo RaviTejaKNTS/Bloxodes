@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Tool Runner"
   short_description: "Run tool research/write QA"
-  default_prompt: "Use $bloxodes-tool-workflow-runner for one approved Bloxodes tool page. Have one subagent research with $bloxodes-tool-research, wait for approval, write final.json with $bloxodes-tool-writing, run verify:simple-page-finals, open the localhost tool link in Codex Browser, and return the link."
+  default_prompt: "Use /bloxodes-tool-workflow-runner for one approved Bloxodes tool page. Tell the subagent not to run the workflow runner or create more subagents. Have one subagent research with /bloxodes-tool-research, wait for approval, write final.json with /bloxodes-tool-writing, run verify:simple-page-finals, open the localhost tool link in Codex Browser, and return the link."
