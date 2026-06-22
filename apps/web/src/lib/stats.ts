@@ -28,6 +28,9 @@ export type StatsSortKey =
   | "updated"
   | "created";
 
+export type StatsCreatorSortKey = "playing" | "visits" | "favorites" | "games" | "hot_games" | "members";
+export type StatsCreatorTypeFilter = "all" | "group" | "user";
+
 export type StatsTimeRange = "1d" | "7d" | "14d" | "30d" | "90d";
 export type StatsMetricKey = "players" | "visits" | "favorites" | "rating";
 export type StatsChartResolution = "hourly" | "daily" | "weekly" | "monthly";
@@ -212,6 +215,31 @@ export type StatsGenreSummary = {
   topGame: Pick<StatsGame, "name" | "slug" | "iconUrl" | "playing"> | null;
 };
 
+export type StatsCreator = {
+  creatorKey: string;
+  creatorType: "group" | "user" | string;
+  creatorId: number;
+  creatorName: string;
+  creatorSlug: string;
+  gameCount: number;
+  hotGameCount: number;
+  warmGameCount: number;
+  newGameCount: number;
+  coldGameCount: number;
+  playing: number;
+  visits: number;
+  favorites: number;
+  likes: number;
+  dislikes: number;
+  ratingPercent: number | null;
+  topGame: Pick<StatsGame, "universeId" | "name" | "displayName" | "slug" | "iconUrl" | "playing" | "visits" | "favorites"> | null;
+  memberCount: number | null;
+  hasVerifiedBadge: boolean | null;
+  lastStatsRefreshedAt: string | null;
+  indexedAt: string | null;
+  rank: number | null;
+};
+
 export type StatsHomeData = {
   totals: {
     trackedGames: number;
@@ -243,6 +271,18 @@ export type StatsGamesPageData = {
     sort: StatsSortKey;
     minPlayers: number | null;
     columns: StatsGameColumnKey[];
+  };
+};
+
+export type StatsCreatorsPageData = {
+  creators: StatsCreator[];
+  total: number;
+  page: number;
+  totalPages: number;
+  filters: {
+    q: string;
+    sort: StatsCreatorSortKey;
+    creatorType: StatsCreatorTypeFilter;
   };
 };
 
@@ -330,6 +370,37 @@ type StatsGameIndexRow = UniverseRow & {
   indexed_at: string | null;
 };
 
+type StatsCreatorIndexRow = {
+  creator_key: string;
+  creator_type: string;
+  creator_id: number;
+  creator_name: string;
+  creator_slug: string;
+  game_count: number;
+  hot_game_count: number;
+  warm_game_count: number;
+  new_game_count: number;
+  cold_game_count: number;
+  playing: number | null;
+  visits: number | null;
+  favorites: number | null;
+  likes: number | null;
+  dislikes: number | null;
+  rating_percent: number | null;
+  top_universe_id: number | null;
+  top_slug: string | null;
+  top_name: string | null;
+  top_display_name: string | null;
+  top_icon_url: string | null;
+  top_playing: number | null;
+  top_visits: number | null;
+  top_favorites: number | null;
+  member_count: number | null;
+  has_verified_badge: boolean | null;
+  last_stats_refreshed_at: string | null;
+  indexed_at: string | null;
+};
+
 type HourlyRow = {
   universe_id: number;
   hour_start: string;
@@ -410,6 +481,15 @@ const INDEX_SORT_COLUMNS: Record<StatsSortKey, keyof StatsGameIndexRow> = {
   created: "created_at_api"
 };
 
+const CREATOR_SORT_COLUMNS: Record<StatsCreatorSortKey, keyof StatsCreatorIndexRow> = {
+  playing: "playing",
+  visits: "visits",
+  favorites: "favorites",
+  games: "game_count",
+  hot_games: "hot_game_count",
+  members: "member_count"
+};
+
 export const STATS_SORT_OPTIONS: Array<{ value: StatsSortKey; label: string }> = [
   { value: "playing", label: "Current players" },
   { value: "growth_24h", label: "24h growth" },
@@ -420,6 +500,15 @@ export const STATS_SORT_OPTIONS: Array<{ value: StatsSortKey; label: string }> =
   { value: "peak", label: "Peak CCU" },
   { value: "updated", label: "Roblox updated" },
   { value: "created", label: "Created date" }
+];
+
+export const STATS_CREATOR_SORT_OPTIONS: Array<{ value: StatsCreatorSortKey; label: string }> = [
+  { value: "playing", label: "Current players" },
+  { value: "visits", label: "Visits" },
+  { value: "favorites", label: "Favorites" },
+  { value: "games", label: "Tracked games" },
+  { value: "hot_games", label: "Hot games" },
+  { value: "members", label: "Group members" }
 ];
 
 export const STATS_TIME_RANGES: Array<{ value: StatsTimeRange; label: string }> = [
@@ -498,6 +587,14 @@ function normalizeStatsColumns(value?: string | string[] | null): StatsGameColum
   const allowed = new Set(STATS_GAME_COLUMN_OPTIONS.map((option) => option.value));
   const columns = uniqueCleanStrings(values).filter((item): item is StatsGameColumnKey => allowed.has(item as StatsGameColumnKey));
   return columns.length ? columns : DEFAULT_STATS_GAME_COLUMNS;
+}
+
+function normalizeStatsCreatorSort(value?: string | null): StatsCreatorSortKey {
+  return STATS_CREATOR_SORT_OPTIONS.some((option) => option.value === value) ? (value as StatsCreatorSortKey) : "playing";
+}
+
+function normalizeStatsCreatorType(value?: string | null): StatsCreatorTypeFilter {
+  return value === "group" || value === "user" ? value : "all";
 }
 
 export function getRatingPercent(likes?: number | null, dislikes?: number | null): number | null {
@@ -594,6 +691,46 @@ function mapIndexedGame(row: StatsGameIndexRow): StatsGame {
     peak7d: toNumber(row.peak_7d)
   };
   return { ...hydrated, trendScore: trendScore(hydrated) };
+}
+
+function mapStatsCreator(row: StatsCreatorIndexRow): StatsCreator {
+  const topGame = row.top_universe_id && row.top_slug && row.top_name
+    ? {
+        universeId: row.top_universe_id,
+        slug: row.top_slug,
+        name: row.top_display_name || row.top_name,
+        displayName: row.top_display_name || row.top_name,
+        iconUrl: row.top_icon_url,
+        playing: toNumber(row.top_playing),
+        visits: toNumber(row.top_visits),
+        favorites: toNumber(row.top_favorites)
+      }
+    : null;
+
+  return {
+    creatorKey: row.creator_key,
+    creatorType: row.creator_type,
+    creatorId: row.creator_id,
+    creatorName: row.creator_name,
+    creatorSlug: row.creator_slug,
+    gameCount: row.game_count,
+    hotGameCount: row.hot_game_count,
+    warmGameCount: row.warm_game_count,
+    newGameCount: row.new_game_count,
+    coldGameCount: row.cold_game_count,
+    playing: toNumber(row.playing) ?? 0,
+    visits: toNumber(row.visits) ?? 0,
+    favorites: toNumber(row.favorites) ?? 0,
+    likes: toNumber(row.likes) ?? 0,
+    dislikes: toNumber(row.dislikes) ?? 0,
+    ratingPercent: toNumber(row.rating_percent),
+    topGame,
+    memberCount: toNumber(row.member_count),
+    hasVerifiedBadge: row.has_verified_badge,
+    lastStatsRefreshedAt: row.last_stats_refreshed_at,
+    indexedAt: row.indexed_at,
+    rank: null
+  };
 }
 
 async function isStatsIndexAvailable() {
@@ -1231,6 +1368,84 @@ export function parseStatsSearchParams(searchParams?: Record<string, string | st
     sort: normalizeStatsSort(first(searchParams?.sort)),
     minPlaying: Number.isFinite(minValue) && minValue > 0 ? Math.floor(minValue) : 0,
     columns: normalizeStatsColumns(searchParams?.column)
+  };
+}
+
+export function parseStatsCreatorsSearchParams(searchParams?: Record<string, string | string[] | undefined>) {
+  const first = (value: string | string[] | undefined) => (Array.isArray(value) ? value[0] : value);
+  const pageValue = Number(first(searchParams?.page) ?? "1");
+  return {
+    page: Number.isFinite(pageValue) && pageValue > 0 ? Math.floor(pageValue) : 1,
+    q: first(searchParams?.q)?.trim() ?? "",
+    sort: normalizeStatsCreatorSort(first(searchParams?.sort)),
+    creatorType: normalizeStatsCreatorType(first(searchParams?.type))
+  };
+}
+
+export async function listStatsCreators(input: {
+  page?: number;
+  pageSize?: number;
+  q?: string;
+  sort?: string | null;
+  creatorType?: string | null;
+}): Promise<StatsCreatorsPageData> {
+  const page = Math.max(1, input.page ?? 1);
+  const pageSize = Math.min(Math.max(input.pageSize ?? STATS_PAGE_SIZE, 10), 100);
+  const offset = (page - 1) * pageSize;
+  const q = input.q?.trim() ?? "";
+  const sort = normalizeStatsCreatorSort(input.sort);
+  const creatorType = normalizeStatsCreatorType(input.creatorType);
+  const selectColumns = `
+    creator_key, creator_type, creator_id, creator_name, creator_slug,
+    game_count, hot_game_count, warm_game_count, new_game_count, cold_game_count,
+    playing, visits, favorites, likes, dislikes, rating_percent,
+    top_universe_id, top_slug, top_name, top_display_name, top_icon_url,
+    top_playing, top_visits, top_favorites, member_count, has_verified_badge,
+    last_stats_refreshed_at, indexed_at
+  `;
+
+  let query = supabaseAdmin()
+    .from("stats_creator_current_index")
+    .select(selectColumns, { count: "exact" });
+
+  if (q) {
+    const pattern = `%${q.replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
+    query = query.or(`creator_name.ilike.${pattern},top_name.ilike.${pattern},top_display_name.ilike.${pattern}`);
+  }
+
+  if (creatorType !== "all") {
+    query = query.eq("creator_type", creatorType);
+  }
+
+  const sortColumn = CREATOR_SORT_COLUMNS[sort];
+  const { data, error, count } = await query
+    .order(sortColumn, { ascending: false, nullsFirst: false })
+    .order("creator_key", { ascending: true })
+    .range(offset, offset + pageSize - 1);
+
+  if (error) {
+    console.warn("Failed to load stats_creator_current_index", error.message);
+    return {
+      creators: [],
+      total: 0,
+      page,
+      totalPages: 1,
+      filters: { q, sort, creatorType }
+    };
+  }
+
+  const creators = ((data ?? []) as StatsCreatorIndexRow[]).map((row, index) => ({
+    ...mapStatsCreator(row),
+    rank: offset + index + 1
+  }));
+  const total = count ?? creators.length;
+
+  return {
+    creators,
+    total,
+    page,
+    totalPages: Math.max(1, Math.ceil(total / pageSize)),
+    filters: { q, sort, creatorType }
   };
 }
 

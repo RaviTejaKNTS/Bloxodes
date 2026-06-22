@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const AUTO_SUBMIT_FIELDS = new Set(["genre", "subgenre", "sort", "minPlayers", "column"]);
+const AUTO_SUBMIT_FIELDS = new Set(["genre", "subgenre", "sort", "minPlayers", "column", "type"]);
 
 export function StatsGamesAutoSubmit() {
   useEffect(() => {

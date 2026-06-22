@@ -39,7 +39,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Puzzles | `/puzzles`, `/puzzles/[slug]`, `/puzzles/[slug]/[date]` | `src/app/(site)/puzzles/*`, shared helpers in `src/app/(site)/puzzles/page-data.tsx`, read layer in `src/lib/puzzles.ts`, and synced answer rows in `puzzle_answers`. Current puzzle pages are indexable; dated archives are `noindex, follow`. |
 | Wiki | `/wiki`, `/wiki/[slug]` | `src/app/(site)/wiki/*`, shared helpers in `page-data.tsx`, Supabase read layer in `src/lib/wiki.ts` |
 | Authors | `/authors`, `/authors/[slug]` | `src/app/(site)/authors/*` |
-| Stats | `/stats`, `/stats/games`, `/stats/games/[slug]` | `src/app/(site)/stats/*`, shared read layer in `src/lib/stats.ts`, chart UI in `stats/components/*`, backed by `roblox_universes`, hourly/daily stats tables, and hourly/daily rank snapshot tables |
+| Stats | `/stats`, `/stats/games`, `/stats/games/[slug]`, `/stats/creators` | `src/app/(site)/stats/*`, shared read layer in `src/lib/stats.ts`, chart UI in `stats/components/*`, backed by `roblox_universes`, stats current-index tables, hourly/daily stats tables, and hourly/daily rank snapshot tables |
 
 ## Catalog Families
 

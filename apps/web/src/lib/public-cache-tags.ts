@@ -192,6 +192,7 @@ export function cacheTagsForPath(pathname: string) {
     if (!second) return unique([...tags, "stats", "stats-home"]);
     if (second === "games" && !third) return unique([...tags, "stats", "stats-games"]);
     if (second === "games" && third) return unique([...tags, "stats", "stats-games", slugTag("stats-game", third)]);
+    if (second === "creators") return unique([...tags, "stats", "stats-creators"]);
     return unique([...tags, "stats"]);
   }
 
@@ -294,6 +295,7 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         "stats",
         normalized === "home" || normalized === "stats" ? "stats-home" : "",
         normalized === "games" ? "stats-games" : "",
+        normalized === "creators" ? "stats-creators" : "",
         normalized.startsWith("games/") ? "stats-games" : "",
         normalized.startsWith("games/") ? slugTag("stats-game", normalized.replace(/^games\//, "")) : "",
         "home",

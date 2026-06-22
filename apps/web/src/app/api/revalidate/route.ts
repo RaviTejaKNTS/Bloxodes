@@ -195,13 +195,15 @@ function revalidateForStats(slug: string) {
       ? ["/stats"]
       : normalized === "games"
         ? ["/stats", "/stats/games"]
-        : normalized.startsWith("games/")
-          ? ["/stats", "/stats/games", `/stats/games/${normalized.replace(/^games\//, "")}`]
-          : ["/stats", "/stats/games"];
+        : normalized === "creators"
+          ? ["/stats", "/stats/creators"]
+          : normalized.startsWith("games/")
+            ? ["/stats", "/stats/games", `/stats/games/${normalized.replace(/^games\//, "")}`]
+            : ["/stats", "/stats/games", "/stats/creators"];
   const detailSlug = normalized.startsWith("games/") ? normalized.replace(/^games\//, "") : null;
   return applyRevalidation(
-    [...scopedPaths, "/api/stats/games", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
-    ["stats", "stats-home", "stats-games", detailSlug ? `stats-game:${detailSlug}` : "", "home"]
+    [...scopedPaths, "/api/stats/games", "/api/stats/creators", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
+    ["stats", "stats-home", "stats-games", "stats-creators", detailSlug ? `stats-game:${detailSlug}` : "", "home"]
   );
 }
 
@@ -240,6 +242,7 @@ function warmPathPriority(path: string) {
     path === "/codes" ||
     path === "/stats" ||
     path === "/stats/games" ||
+    path === "/stats/creators" ||
     path === "/wiki" ||
     path === "/catalog" ||
     path === "/articles" ||

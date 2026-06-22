@@ -30,6 +30,11 @@ describe("public cache tags", () => {
     expect(cacheTagsForPath("/sitemaps/codes.xml")).not.toContain("sitemap");
   });
 
+  it("tags stats creators separately from games", () => {
+    expect(cacheTagsForPath("/stats/creators")).toEqual(expect.arrayContaining(["site", "stats", "stats-creators"]));
+    expect(cacheTagsForEvent("stats", "creators")).toEqual(expect.arrayContaining(["stats", "stats-creators", "sitemap:stats"]));
+  });
+
   it("serializes unique Cloudflare cache tags", () => {
     expect(serializeCacheTags(["home", "home", "codes-index"])).toBe("home,codes-index");
   });

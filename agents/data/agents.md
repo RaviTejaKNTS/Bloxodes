@@ -49,6 +49,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Long-range public rank snapshots. Daily automation stores full all-game rank rows for playing, visits, favorites, and rating.
 - `roblox_universe_update_events`
   - Historical Roblox game update markers detected during hourly stats refreshes. Use this for stats chart update overlays; `roblox_universes.updated_at_api` is latest-state only.
+- `stats_game_current_index`, `stats_genre_current_index`, `stats_risers_current_index`, `stats_creator_current_index`
+  - Public `/stats` read models for game listings, genre summaries, risers, and creator leaderboards. Rebuild through the stats current-index refresh workflow.
 - `roblox_groups`
   - Group details used by the ID extractor.
 - `roblox_universe_gamepasses`, `roblox_universe_badges`

@@ -565,9 +565,15 @@ async function rollupTodayIfRequested(options: Options, sampledAt: Date) {
 
 async function refreshStatsIndexes() {
   try {
-    const { data, error } = await supabaseAdmin().rpc("refresh_stats_current_indexes");
+    const sb = supabaseAdmin();
+    const { data, error } = await sb.rpc("refresh_stats_current_indexes");
     if (error) throw error;
-    return data as Record<string, unknown> | null;
+    const { data: creatorData, error: creatorError } = await sb.rpc("refresh_stats_creator_current_index");
+    if (creatorError) throw creatorError;
+    return {
+      ...((data ?? {}) as Record<string, unknown>),
+      ...((creatorData ?? {}) as Record<string, unknown>)
+    };
   } catch (error) {
     console.warn("Failed to refresh stats current indexes:", error instanceof Error ? error.message : String(error));
     return null;
