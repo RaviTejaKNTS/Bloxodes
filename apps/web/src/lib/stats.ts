@@ -1360,7 +1360,7 @@ async function listBaseGames(options: {
     universe_id, root_place_id, name, display_name, slug, description,
     creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
     icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-    stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+    created_at_api, updated_at_api, last_stats_refreshed_at,
     last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
     console_enabled, vr_enabled
   `;
@@ -1391,7 +1391,7 @@ async function listBaseGames(options: {
   }
 
   if (options.tierForSitemap) {
-    query = query.or("stats_tier.in.(HOT,WARM),playing.gte.100,visits.gte.10000000");
+    query = query.or("playing.gte.100,visits.gte.10000000");
   }
 
   const fallbackSort = options.sort ?? "playing";

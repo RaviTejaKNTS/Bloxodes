@@ -573,10 +573,10 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Roblox Stats</p>
           <h1 className="mb-0 mt-2 text-3xl font-semibold leading-tight text-foreground md:text-4xl">Live Roblox game stats</h1>
           <p className="mt-3 text-sm font-medium leading-6 text-muted">
-            Public Roblox game, creator, and marketplace item data tracked by Bloxodes for players, creators, and researchers.
+            Public Roblox game data tracked by Bloxodes, refreshed regularly for players and researchers.
           </p>
         </div>
-        <form action="/stats/games" className="flex w-full max-w-2xl flex-wrap gap-2">
+        <form action="/stats/games" className="flex w-full max-w-xl gap-2">
           <div className="relative flex-1">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" aria-hidden />
             <Input name="q" type="search" placeholder="Search games" className="h-10 rounded-md bg-surface pl-9" />
@@ -584,16 +584,10 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           <Button asChild className="rounded-md">
             <Link href="/stats/games">Games</Link>
           </Button>
-          <Button asChild variant="outline" className="rounded-md">
-            <Link href="/stats/creators">Creators</Link>
-          </Button>
-          <Button asChild variant="outline" className="rounded-md">
-            <Link href="/stats/items">Items</Link>
-          </Button>
         </form>
       </header>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         <MetricCard
           label="Platform CCU"
           value={formatCompactNumber(data.totals.livePlayers)}
@@ -602,7 +596,6 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           href="#platform-ccu-trend"
         />
         <MetricCard label="Tracked games" value={formatFullNumber(data.totals.trackedGames)} detail="Public stats index" icon={Gamepad2} href="/stats/games" />
-        <MetricCard label="Marketplace items" value="Browse" detail="Favorites, prices, resale, and creators" icon={ShoppingBag} href="/stats/items" />
         <MetricCard
           label="Platform visits"
           value={formatCompactNumber(data.totals.totalVisits)}
@@ -610,7 +603,6 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           icon={Trophy}
           href="/stats/games?sort=visits"
         />
-        <MetricCard label="Creators" value="Leaderboard" detail="Groups and users by game stats" icon={IdCard} href="/stats/creators" />
       </div>
 
       <div className="grid gap-4 xl:grid-cols-2">
