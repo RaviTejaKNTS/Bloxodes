@@ -1,3 +1,6 @@
+import fs from "node:fs/promises";
+
+import { repoPath } from "@/lib/paths";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
 
@@ -89,7 +92,37 @@ export async function getToolContentWithDevFallback(code: string): Promise<ToolC
     return null;
   }
 
-  return (data as ToolContent | null) ?? null;
+  return (data as ToolContent | null) ?? await getToolContentFromLocalFinal(code);
+}
+
+async function getToolContentFromLocalFinal(code: string): Promise<ToolContent | null> {
+  const workspaceRoot = repoPath("tmp", "content-workspace");
+
+  let gameDirs;
+  try {
+    gameDirs = await fs.readdir(workspaceRoot, { withFileTypes: true });
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      console.error("Error reading local tool finals", error);
+    }
+    return null;
+  }
+
+  for (const dir of gameDirs) {
+    if (!dir.isDirectory()) continue;
+    const finalPath = repoPath("tmp", "content-workspace", dir.name, "tools", code, "final.json");
+    try {
+      const raw = await fs.readFile(finalPath, "utf8");
+      const parsed = JSON.parse(raw) as ToolContent;
+      return parsed?.code === code ? parsed : null;
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+        console.error(`Error reading local tool final for ${code}`, error);
+      }
+    }
+  }
+
+  return null;
 }
 
 export type ToolListEntry = Pick<

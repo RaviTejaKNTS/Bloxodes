@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Grow a Garden 2 seeds data",
-    "updatedAt": "2026-06-13",
+    "updatedAt": "2026-06-23",
     "sources": [
       {
         "label": "Beebom - All Grow a Garden 2 Plants and Seeds Guide",
         "url": "https://beebom.com/grow-a-garden-2-plants-and-seeds/",
-        "accessed": "2026-06-13"
+        "accessed": "2026-06-23"
       },
       {
         "label": "Grow a Garden 2 Wiki - Fandom",
@@ -153,7 +153,7 @@
     {
       "id": "green-bean",
       "name": "Green Bean",
-      "price": "Unknown",
+      "price": "20K Sheckles",
       "rarity": "Epic",
       "harvestType": "Multi",
       "availability": "Main hub shop",
@@ -208,7 +208,7 @@
     {
       "id": "acorn",
       "name": "Acorn",
-      "price": "200K Sheckles",
+      "price": "700K Sheckles",
       "rarity": "Legendary",
       "harvestType": "Multi",
       "availability": "Main hub shop",
@@ -241,9 +241,9 @@
     {
       "id": "dragons-breath",
       "name": "Dragon's Breath",
-      "price": "Unknown",
+      "price": "90M Sheckles",
       "rarity": "Super",
-      "harvestType": "Unknown",
+      "harvestType": "Multi",
       "availability": "Main hub shop",
       "image": "/Grow%20a%20Garden%202/Crops/dragons-breath.webp",
       "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_521444.png?w=150&quality=75",
@@ -252,9 +252,9 @@
     {
       "id": "moon-bloom",
       "name": "Moon Bloom",
-      "price": "Unknown",
+      "price": "65M Sheckles",
       "rarity": "Super",
-      "harvestType": "Unknown",
+      "harvestType": "Multi",
       "availability": "Main hub shop",
       "image": "/Grow%20a%20Garden%202/Crops/moon-bloom.webp",
       "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_54_150.webp?w=200",
@@ -263,9 +263,9 @@
     {
       "id": "poison-apple",
       "name": "Poison Apple",
-      "price": "Unknown",
+      "price": "25M Sheckles",
       "rarity": "Mythic",
-      "harvestType": "Unknown",
+      "harvestType": "Multi",
       "availability": "Main hub shop",
       "image": "/Grow%20a%20Garden%202/Crops/poison-apple.webp",
       "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_49_150.webp?w=200",
@@ -274,7 +274,7 @@
     {
       "id": "pomegranate",
       "name": "Pomegranate",
-      "price": "2M Sheckles",
+      "price": "12M Sheckles",
       "rarity": "Mythic",
       "harvestType": "Multi",
       "availability": "Main hub shop",
@@ -285,7 +285,7 @@
     {
       "id": "sunflower",
       "name": "Sunflower",
-      "price": "Unknown",
+      "price": "5M Sheckles",
       "rarity": "Legendary",
       "harvestType": "Unknown",
       "availability": "Main hub shop",
@@ -294,11 +294,20 @@
       "whereToGet": "Seed Shop"
     },
     {
+      "id": "venom-spitter",
+      "name": "Venom Spitter",
+      "price": "TBA",
+      "rarity": "Mythic",
+      "harvestType": "Multi",
+      "availability": "Main hub shop",
+      "whereToGet": "Seed Shop"
+    },
+    {
       "id": "venus-fly-trap",
       "name": "Venus Fly Trap",
       "price": "7M Sheckles",
       "rarity": "Mythic",
-      "harvestType": "Unknown",
+      "harvestType": "Multi",
       "availability": "Main hub shop",
       "image": "/Grow%20a%20Garden%202/Crops/venus-fly-trap.webp",
       "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_47_150.webp?w=200",

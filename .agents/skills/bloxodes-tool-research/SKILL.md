@@ -24,3 +24,5 @@ Include:
 - edge cases
 - why this should be a tool, not an article/catalog/wiki page
 - open gaps or risks
+
+Keep source/provenance details in `brief.md`. When the tool later moves to writing, public-facing fields should talk about the game problem and player workflow, not about sources, datasets, rows, or research process.
