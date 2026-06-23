@@ -420,6 +420,36 @@ function parseSlugFilter(args: string[]): string | null {
   return null;
 }
 
+function parseIdFilter(args: string[]): string[] {
+  const values: string[] = [];
+
+  const pushValues = (value: string | undefined) => {
+    if (!value) return;
+    for (const part of value.split(",")) {
+      const trimmed = part.trim();
+      if (trimmed) values.push(trimmed);
+    }
+  };
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (arg.startsWith("--ids=")) {
+      pushValues(arg.slice("--ids=".length));
+      continue;
+    }
+    if (arg.startsWith("--id=")) {
+      pushValues(arg.slice("--id=".length));
+      continue;
+    }
+    if (arg === "--ids" || arg === "--id") {
+      pushValues(args[index + 1]);
+      index += 1;
+    }
+  }
+
+  return Array.from(new Set(values));
+}
+
 function splitSourceUrls(value: string | null | undefined): string[] {
   if (!value) return [];
   return value
@@ -511,7 +541,30 @@ function compareDraftCodePagePriority(a: ExistingCodePageRecord, b: ExistingCode
   return a.name.localeCompare(b.name);
 }
 
-async function loadDraftCodePages(limit: number, slug: string | null): Promise<ExistingCodePageRecord[]> {
+async function loadDraftCodePages(
+  limit: number,
+  slug: string | null,
+  ids: string[]
+): Promise<ExistingCodePageRecord[]> {
+  if (ids.length > 0) {
+    const { data, error } = await supabase
+      .from("code_pages")
+      .select(CODE_PAGE_ARTICLE_SELECT)
+      .eq("is_published", false)
+      .in("id", ids);
+
+    if (error) throw new Error(`Failed to load targeted draft code pages: ${error.message}`);
+    const selected = ((data ?? []) as ExistingCodePageRecord[])
+      .filter((game) => Boolean(game.id && game.name && game.slug))
+      .filter(hasArticleSourcesBeyondPrimary);
+    const foundIds = new Set(selected.map((game) => game.id));
+    const missingIds = ids.filter((id) => !foundIds.has(id));
+    if (missingIds.length) {
+      console.log(`⏭️ ${missingIds.length} targeted draft page ID${missingIds.length === 1 ? "" : "s"} not eligible: ${missingIds.join(", ")}`);
+    }
+    return selected.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
+  }
+
   if (slug) {
     const { data, error } = await supabase
       .from("code_pages")
@@ -994,7 +1047,8 @@ async function main() {
   const args = process.argv.slice(2);
   const limit = parseLimit(args);
   const slug = parseSlugFilter(args);
-  const codePages = await loadDraftCodePages(limit, slug);
+  const ids = parseIdFilter(args);
+  const codePages = await loadDraftCodePages(limit, slug, ids);
 
   if (!codePages.length) {
     console.log("No unpublished code pages with missing article content found.");
