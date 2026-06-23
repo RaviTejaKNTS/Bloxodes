@@ -104,6 +104,7 @@ type ExistingCodePageRecord = {
   find_codes_md: string | null;
   seo_description: string | null;
   created_at: string | null;
+  universe: { playing: number | null } | { playing: number | null }[] | null;
 };
 
 type UniverseMeta = {
@@ -136,10 +137,12 @@ type InterlinkPromptContext = {
 };
 
 const CODE_PAGE_ARTICLE_SELECT =
-  "id, name, slug, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, source_url_4, source_url_5, source_url_6, source_url_7, source_url_8, source_url_9, source_url_10, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, seo_description, created_at";
+  "id, name, slug, is_published, roblox_link, community_link, discord_link, twitter_link, youtube_link, source_url, source_url_2, source_url_3, source_url_4, source_url_5, source_url_6, source_url_7, source_url_8, source_url_9, source_url_10, universe_id, intro_md, redeem_md, troubleshoot_md, rewards_md, find_codes_md, seo_description, created_at, universe:roblox_universes(playing)";
 const MISSING_ARTICLE_CONTENT_FILTER =
   "intro_md.is.null,redeem_md.is.null,troubleshoot_md.is.null,rewards_md.is.null,find_codes_md.is.null,seo_description.is.null";
 const DRAFT_CODE_PAGE_SIZE = 1000;
+const NEW_CODE_PAGE_CUTOFF = Date.parse("2026-06-22T00:00:00.000Z");
+const POPULAR_GAME_PLAYING_THRESHOLD = 1000;
 const PRIMARY_SOURCE_FIELDS = ["source_url"] as const;
 const ARTICLE_SOURCE_FIELDS = [
   "source_url_2",
@@ -452,7 +455,39 @@ function sourceFieldCount(game: ExistingCodePageRecord, field: ArticleSourceFiel
   return splitSourceUrls(game[field]).length;
 }
 
+function codePageCreatedAt(game: ExistingCodePageRecord): number | null {
+  const createdAt = Date.parse(game.created_at ?? "");
+  return Number.isFinite(createdAt) ? createdAt : null;
+}
+
+function codePagePlaying(game: ExistingCodePageRecord): number {
+  const universe = Array.isArray(game.universe) ? game.universe[0] ?? null : game.universe;
+  return universe?.playing ?? 0;
+}
+
+function isNewCodePage(game: ExistingCodePageRecord): boolean {
+  const createdAt = codePageCreatedAt(game);
+  return createdAt != null && createdAt >= NEW_CODE_PAGE_CUTOFF;
+}
+
 function compareDraftCodePagePriority(a: ExistingCodePageRecord, b: ExistingCodePageRecord): number {
+  const aIsNew = isNewCodePage(a) ? 1 : 0;
+  const bIsNew = isNewCodePage(b) ? 1 : 0;
+  if (aIsNew !== bIsNew) return bIsNew - aIsNew;
+
+  const aCreated = codePageCreatedAt(a);
+  const bCreated = codePageCreatedAt(b);
+  if (aIsNew && bIsNew && aCreated != null && bCreated != null && aCreated !== bCreated) {
+    return bCreated - aCreated;
+  }
+
+  const aPlaying = codePagePlaying(a);
+  const bPlaying = codePagePlaying(b);
+  const aIsPopular = aPlaying >= POPULAR_GAME_PLAYING_THRESHOLD ? 1 : 0;
+  const bIsPopular = bPlaying >= POPULAR_GAME_PLAYING_THRESHOLD ? 1 : 0;
+  if (aIsPopular !== bIsPopular) return bIsPopular - aIsPopular;
+  if (aIsPopular && bIsPopular && aPlaying !== bPlaying) return bPlaying - aPlaying;
+
   const aSourceCount = articleSourceUrls(a).length;
   const bSourceCount = articleSourceUrls(b).length;
   if (aSourceCount !== bSourceCount) return bSourceCount - aSourceCount;
@@ -469,9 +504,7 @@ function compareDraftCodePagePriority(a: ExistingCodePageRecord, b: ExistingCode
   const bHasSourceUrl4 = sourceFieldCount(b, "source_url_4") > 0 ? 1 : 0;
   if (aHasSourceUrl4 !== bHasSourceUrl4) return bHasSourceUrl4 - aHasSourceUrl4;
 
-  const aCreated = Date.parse(a.created_at ?? "");
-  const bCreated = Date.parse(b.created_at ?? "");
-  if (Number.isFinite(aCreated) && Number.isFinite(bCreated) && aCreated !== bCreated) {
+  if (aCreated != null && bCreated != null && aCreated !== bCreated) {
     return aCreated - bCreated;
   }
 
@@ -500,12 +533,17 @@ async function loadDraftCodePages(limit: number, slug: string | null): Promise<E
   const candidates = await loadDraftCodePagesWithArticleSources();
   const selected = candidates.sort(compareDraftCodePagePriority).slice(0, limit);
   if (selected.length > 0) {
+    const newCodePages = selected.filter(isNewCodePage).length;
+    const popularCodePages = selected.filter(
+      (game) => !isNewCodePage(game) && codePagePlaying(game) >= POPULAR_GAME_PLAYING_THRESHOLD
+    ).length;
     const withSourceUrl2 = selected.filter((game) => sourceFieldCount(game, "source_url_2") > 0).length;
     const withSourceUrl3 = selected.filter((game) => sourceFieldCount(game, "source_url_3") > 0).length;
     const withSourceUrl4 = selected.filter((game) => sourceFieldCount(game, "source_url_4") > 0).length;
     console.log(
       `🎯 Picked ${selected.length} sourced draft code page${selected.length === 1 ? "" : "s"} ` +
-        `(source_url_2: ${withSourceUrl2}, source_url_3: ${withSourceUrl3}, source_url_4: ${withSourceUrl4}).`
+        `(new since 2026-06-22: ${newCodePages}, playing >= ${POPULAR_GAME_PLAYING_THRESHOLD}: ${popularCodePages}, ` +
+        `source_url_2: ${withSourceUrl2}, source_url_3: ${withSourceUrl3}, source_url_4: ${withSourceUrl4}).`
     );
   }
   return selected;
