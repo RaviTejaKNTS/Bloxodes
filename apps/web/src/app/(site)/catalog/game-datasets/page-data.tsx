@@ -1659,6 +1659,214 @@ const ANIME_SQUADRON_UNIT_SECTION_ORDER = [
   "Early Fillers"
 ];
 
+const ANIME_VANGUARDS_UNIT_SECTION_ORDER = [
+  "Vanguard",
+  "Secret",
+  "Exclusive",
+  "Mythic",
+  "Legendary",
+  "Epic",
+  "Rare"
+];
+
+const ANIME_VANGUARDS_ITEM_SECTION_ORDER = [
+  "Evolution Items",
+  "Currencies",
+  "Food",
+  "Essence Stones",
+  "Portals",
+  "Quest Items",
+  "Miscellaneous"
+];
+
+const ANIME_VANGUARDS_EVOLUTION_SECTION_ORDER = [
+  "Vanguard Evolutions",
+  "Secret Evolutions",
+  "Exclusive Evolutions",
+  "Mythic Evolutions"
+];
+
+const ANIME_VANGUARDS_TRAIT_SECTION_ORDER = [
+  "Mythic pity traits",
+  "Combat stat traits",
+  "Utility traits",
+  "Basic tiered traits"
+];
+
+const ANIME_VANGUARDS_FAMILIAR_SECTION_ORDER = [
+  "Vanguard Familiars",
+  "Dungeon / Raid Shops",
+  "Rift Shop",
+  "Story / Legend Stages",
+  "Permanent",
+  "Unobtainable"
+];
+
+const ANIME_VANGUARDS_ELEMENT_SECTION_ORDER = [
+  "Debuff Protection",
+  "Team Aura Buffs",
+  "Damage Modifiers",
+  "Self Cleanse / Special"
+];
+
+const ANIME_VANGUARDS_UNIT_SOURCE_KEYS = [
+  "catalogSection",
+  "slug",
+  "sortOrder",
+  "sourceStatus",
+  "sourceUrls",
+  "wikiUrl",
+  "rawTowerType",
+  "moduleRarity",
+  "moduleGroups",
+  "obtainmentStatus"
+];
+
+const ANIME_VANGUARDS_COMMON_SOURCE_KEYS = [
+  "slug",
+  "sourceStatus",
+  "wikiUrl",
+  "sourceUrls",
+  "sourceRevision",
+  "sourceCheckedAt",
+  "sourceOrder",
+  "sortOrder",
+  "imageStatus",
+  "imageSource",
+  "imageSourceUrl",
+  "imageCandidateFile",
+  "imageMissingReason",
+  "rawImageName",
+  "rawSection",
+  "rawWikiText",
+  "rawEffectMarkup",
+  "rawLuaKey",
+  "rawPassiveData",
+  "rawEvolutionMaterials",
+  "rawEvolutionUsageKey",
+  "rawItemGroup",
+  "rawRarity",
+  "rawTraitGroup",
+  "normalizationNotes"
+];
+
+const ANIME_VANGUARDS_ITEM_SOURCE_KEYS = [
+  ...ANIME_VANGUARDS_COMMON_SOURCE_KEYS,
+  "sourcePage",
+  "stackable",
+  "tradeable",
+  "maxGlobalInventoryAmount"
+];
+
+const ANIME_VANGUARDS_EVOLUTION_SOURCE_KEYS = [
+  ...ANIME_VANGUARDS_COMMON_SOURCE_KEYS,
+  "sourcePageTitle",
+  "baseRarity",
+  "requiredMaterials",
+  "goldCost",
+  "extraRequirements",
+  "requirementSourceStatus",
+  "baseUnitRaritySource",
+  "resultRaritySource",
+  "chainSortKey"
+];
+
+const ANIME_VANGUARDS_TRAIT_SOURCE_KEYS = [
+  ...ANIME_VANGUARDS_COMMON_SOURCE_KEYS,
+  "oddsText",
+  "cashOrCostEffect",
+  "expEffect"
+];
+
+const ANIME_VANGUARDS_MEMORIA_SOURCE_KEYS = [
+  ...ANIME_VANGUARDS_COMMON_SOURCE_KEYS,
+  "rarityTextSource",
+  "passiveNames",
+  "lockedPassiveNames",
+  "lockedPassiveSummary",
+  "evolutionMaterials",
+  "evolutionMaterialCount"
+];
+
+const ANIME_VANGUARDS_FAMILIAR_SOURCE_KEYS = [
+  ...ANIME_VANGUARDS_COMMON_SOURCE_KEYS
+];
+
+const ANIME_VANGUARDS_ELEMENT_SOURCE_KEYS = [
+  ...ANIME_VANGUARDS_COMMON_SOURCE_KEYS,
+  "worldlinesNote",
+  "tournamentNote",
+  "historyNote",
+  "unitFilterSource"
+];
+
+const ANIME_VANGUARDS_MAPS_STAGES_SECTION_ORDER = [
+  "Story",
+  "Legend Stages",
+  "Raids",
+  "Dungeons",
+  "Boss Events",
+  "Rifts",
+  "PvP"
+];
+
+const ANIME_VANGUARDS_MAPS_STAGES_SOURCE_KEYS = [
+  "mode",
+  "slug",
+  "sortOrder",
+  "sourcePage",
+  "sourceUrls",
+  "sourceStatus",
+  "sourceCheckedAt",
+  "rawMapTemplates",
+  "rawTabName",
+  "lastSourceTimestamp",
+  "availabilityStatus",
+  "imageStatus"
+];
+
+const ANIME_VANGUARDS_ENEMY_SECTION_ORDER = [
+  "Planet Namak",
+  "Sand Village",
+  "Double Dungeon",
+  "Shibuya Station",
+  "Underground Church",
+  "Spirit Society",
+  "Martial Island",
+  "Edge of Heaven",
+  "Lebereo Raid",
+  "Hill of Swords",
+  "Frozen Port",
+  "Downtown Tokyo",
+  "Hidden Village",
+  "Flower Country",
+  "Spider Forest",
+  "Tracks at the Edge of the World"
+];
+
+const ANIME_VANGUARDS_ENEMY_SOURCE_KEYS = [
+  "catalogSection",
+  "indexSection",
+  "map",
+  "slug",
+  "sourceStatus",
+  "wikiUrl",
+  "sourceUrls",
+  "sourceRevision",
+  "sourceCheckedAt",
+  "sourceOrder",
+  "sourceUnitKey",
+  "rawMapHeading",
+  "rawEnemyTypeHeading",
+  "rawMechanics",
+  "quote",
+  "description",
+  "imageSource",
+  "imageCandidateFile",
+  "normalizationNotes",
+  "sortOrder"
+];
+
 const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
   "anime-squadron-equipment": {
     groupKey: "catalogSection",
@@ -1698,6 +1906,96 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     additionalColumns: ["catalogSection"],
     maxStats: 8,
     subtitleKeys: ["role", "metaTier"]
+  },
+  "anime-vanguards-units": {
+    groupKey: "rarity",
+    groupLabel: "Rarity",
+    sectionOrder: ANIME_VANGUARDS_UNIT_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.rarity) ?? "Other",
+    hiddenKeys: ANIME_VANGUARDS_UNIT_SOURCE_KEYS,
+    additionalColumns: ["rarity"],
+    maxStats: 7,
+    subtitleKeys: ["element", "battlefieldType"]
+  },
+  "anime-vanguards-items": {
+    groupKey: "catalogSection",
+    groupLabel: "Item group",
+    sectionOrder: ANIME_VANGUARDS_ITEM_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: ANIME_VANGUARDS_ITEM_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 5,
+    subtitleKeys: ["rarity", "source"]
+  },
+  "anime-vanguards-evolutions": {
+    groupKey: "catalogSection",
+    groupLabel: "Evolution group",
+    sectionOrder: ANIME_VANGUARDS_EVOLUTION_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: ANIME_VANGUARDS_EVOLUTION_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 6,
+    subtitleKeys: ["baseUnit", "resultRarity"]
+  },
+  "anime-vanguards-traits": {
+    groupKey: "catalogSection",
+    groupLabel: "Trait group",
+    sectionOrder: ANIME_VANGUARDS_TRAIT_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: ANIME_VANGUARDS_TRAIT_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 10,
+    subtitleKeys: ["chance", "pity"]
+  },
+  "anime-vanguards-memorias": {
+    groupKey: "catalogSection",
+    groupLabel: "Rarity",
+    sectionOrder: ANIME_VANGUARDS_UNIT_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: ANIME_VANGUARDS_MEMORIA_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 7,
+    subtitleKeys: ["rarity", "exclusiveUnits"]
+  },
+  "anime-vanguards-familiars": {
+    groupKey: "catalogSection",
+    groupLabel: "Familiar group",
+    sectionOrder: ANIME_VANGUARDS_FAMILIAR_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: ANIME_VANGUARDS_FAMILIAR_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 9,
+    subtitleKeys: ["rarity", "familiarType"]
+  },
+  "anime-vanguards-elements": {
+    groupKey: "catalogSection",
+    groupLabel: "Element role",
+    sectionOrder: ANIME_VANGUARDS_ELEMENT_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: ANIME_VANGUARDS_ELEMENT_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 7,
+    subtitleKeys: ["effectCategory", "affectedStat"]
+  },
+  "anime-vanguards-maps-stages": {
+    groupKey: "mode",
+    groupLabel: "Mode",
+    sectionOrder: ANIME_VANGUARDS_MAPS_STAGES_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.mode) ?? "Other",
+    hiddenKeys: ANIME_VANGUARDS_MAPS_STAGES_SOURCE_KEYS,
+    additionalColumns: ["mode"],
+    maxStats: 8,
+    subtitleKeys: ["mapName", "stageCount"]
+  },
+  "anime-vanguards-enemies": {
+    groupKey: "catalogSection",
+    groupLabel: "Map",
+    sectionOrder: ANIME_VANGUARDS_ENEMY_SECTION_ORDER,
+    getSectionLabel: (item) => normalizeValue(item.catalogSection) ?? "Other",
+    hiddenKeys: ANIME_VANGUARDS_ENEMY_SOURCE_KEYS,
+    additionalColumns: ["catalogSection"],
+    maxStats: 9,
+    subtitleKeys: ["enemyType", "dangerLevel"]
   },
   "pet-simulator-99-pets": {
     groupKey: "catalogSection",

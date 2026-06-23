@@ -1,0 +1,3484 @@
+{
+  "meta": {
+    "game": "Anime Vanguards",
+    "gameSlug": "anime-vanguards",
+    "collection": "memorias",
+    "title": "Anime Vanguards Memorias",
+    "source": "https://wiki.vanguards.gg/Memoria",
+    "sourceUrls": [
+      "https://wiki.vanguards.gg/Memoria",
+      "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+      "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+    ],
+    "sourceCheckedAt": "2026-06-22",
+    "sourceRevision": "Memoria page rev 31285; Module:MemoriaData/data rev 31306; Module:MemoriaData rev 30667",
+    "count": 55,
+    "groupBy": "catalogSection",
+    "sectionOrder": [
+      "Vanguard",
+      "Secret",
+      "Exclusive",
+      "Mythic",
+      "Legendary",
+      "Epic",
+      "Rare"
+    ],
+    "defaultCardFields": [
+      "rarity",
+      "baseDamage",
+      "baseRange",
+      "exclusiveUnits",
+      "passiveSummary",
+      "evolvable",
+      "evolutionCost"
+    ],
+    "imageField": "image",
+    "imageStatus": "pending-image-pass",
+    "notes": [
+      "Collection slug is plural memorias, but the source page is singular Memoria.",
+      "Non-standard raw rarity codes are preserved in rawRarity and normalized to Vanguard for public sections."
+    ]
+  },
+  "items": [
+    {
+      "name": "Battle of the Strongest",
+      "slug": "battle-of-the-strongest",
+      "image": null,
+      "catalogSection": "Vanguard",
+      "rarity": "Vanguard",
+      "rawRarity": "Vanguard",
+      "baseDamage": "2800",
+      "baseRange": "2",
+      "exclusiveUnits": "Today's Strongest vs History's Strongest, Today's Strongest, History's Strongest",
+      "passiveNames": "Wanton Destruction",
+      "passiveSummary": "Wanton Destruction: Buff damage dealt to Timestopped enemies or enemies inflicted with Dismantle by 45%. Locked specialty passives: King of Curses, Inheritor of the 6 Eyes.",
+      "lockedPassiveNames": "King of Curses, Inheritor of the 6 Eyes",
+      "lockedPassiveSummary": "King of Curses: Critical hits from this unit inflict Bleed for 10% of this unit's damage over 8 seconds. | Inheritor of the 6 Eyes: When this unit is placed for the first time, buff damage by 150% for 60 seconds.",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Battle_of_the_Strongest",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 1,
+      "rawLuaKey": "Battle of the Strongest",
+      "rawPassiveData": [
+        {
+          "description": "Buff damage dealt to Timestopped enemies or enemies inflicted with Dismantle by 45%.",
+          "name": "Wanton Destruction"
+        },
+        {
+          "locked": true,
+          "name": "King of Curses",
+          "description": "Critical hits from this unit inflict Bleed for 10% of this unit's damage over 8 seconds."
+        },
+        {
+          "locked": true,
+          "name": "Inheritor of the 6 Eyes",
+          "description": "When this unit is placed for the first time, buff damage by 150% for 60 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 1,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "missing-source-file",
+      "imageSource": "https://wiki.vanguards.gg/Special:Redirect/file/Battle_of_the_Strongest.png",
+      "imageCandidateFile": "Battle_of_the_Strongest.png",
+      "cardSummary": "Battle of the Strongest is a Vanguard Memoria with 2800 base damage and 2 base range. It has specialty support for Today's Strongest vs History's Strongest, Today's Strongest, History's Strongest. It is not marked as evolvable in the current source module.",
+      "imageMissingReason": "Memoria page API references this Memoria image filename, but Special:Redirect/file returned 404; MediaWiki imageinfo marks the file page missing, and allimages search found no clean Memoria-specific alternate."
+    },
+    {
+      "name": "One Above All",
+      "slug": "one-above-all",
+      "image": null,
+      "catalogSection": "Vanguard",
+      "rarity": "Vanguard",
+      "rawRarity": "Vanguard",
+      "baseDamage": "2800",
+      "baseRange": "2",
+      "exclusiveUnits": "Iscanur (Pride)",
+      "passiveNames": "Lone Fighter",
+      "passiveSummary": "Lone Fighter: Buff this unit's damage by 100%; Reduce this unit's damage by 50% per other unit placed. Locked specialty passives: Above All Races, Unstoppable Pride.",
+      "lockedPassiveNames": "Above All Races, Unstoppable Pride",
+      "lockedPassiveSummary": "Above All Races: For stages with negative status changes, this unit ignores those changes; This unit is treated as any category for stage buffs; This unit ignores Weather Effects. | Unstoppable Pride: While at least 5 team slots are burned, this unit retains upgrades across placements after being sold.",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#One_Above_All",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 2,
+      "rawLuaKey": "One Above All",
+      "rawPassiveData": [
+        {
+          "description": "Buff this unit's damage by 100%; Reduce this unit's damage by 50% per other unit placed.",
+          "name": "Lone Fighter"
+        },
+        {
+          "locked": true,
+          "name": "Above All Races",
+          "description": "For stages with negative status changes, this unit ignores those changes; This unit is treated as any category for stage buffs; This unit ignores Weather Effects."
+        },
+        {
+          "locked": true,
+          "name": "Unstoppable Pride",
+          "description": "While at least 5 team slots are burned, this unit retains upgrades across placements after being sold."
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 2,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "missing-source-file",
+      "imageSource": "https://wiki.vanguards.gg/Special:Redirect/file/One_Above_All.png",
+      "imageCandidateFile": "One_Above_All.png",
+      "cardSummary": "One Above All is a Vanguard Memoria with 2800 base damage and 2 base range. It has specialty support for Iscanur (Pride). It is not marked as evolvable in the current source module.",
+      "imageMissingReason": "Memoria page API references this Memoria image filename, but Special:Redirect/file returned 404; MediaWiki imageinfo marks the file page missing, and allimages search found no clean Memoria-specific alternate."
+    },
+    {
+      "name": "He Laughed",
+      "slug": "he-laughed",
+      "image": "/Anime%20Vanguards/Memorias/he-laughed.png",
+      "catalogSection": "Vanguard",
+      "rarity": "Vanguard",
+      "rawRarity": "CogFive",
+      "baseDamage": "2800",
+      "baseRange": "2",
+      "exclusiveUnits": "Elastic Captain (Cog 5th)",
+      "passiveNames": "Moment of Opportunity",
+      "passiveSummary": "Moment of Opportunity: When attacking an enemy on Repulse lockout, deal 35% more damage. Locked specialty passives: Loveable Captain, The Banging Drums.",
+      "lockedPassiveNames": "Loveable Captain, The Banging Drums",
+      "lockedPassiveSummary": "Loveable Captain: After this unit uses meter, gain meter 30% faster for 20 seconds; Non-Enhanced skills generate 10% meter per use; Enhanced attacks inflict Rupture. | The Banging Drums: When an enemy in range leaves Repulse lockout, inflict Repulse on that enemy.",
+      "evolvable": "Yes",
+      "evolutionCost": "100,000",
+      "evolutionMaterials": "Pink Essence x15; Blue Essence x15; Red Essence x15; Green Essence x50; Yellow Essence x15; Purple Essence x15; Rainbow Essence x5",
+      "evolutionMaterialCount": "7",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#He_Laughed",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 9,
+      "rawLuaKey": "He Laughed",
+      "rawPassiveData": [
+        {
+          "description": "When attacking an enemy on Repulse lockout, deal 35% more damage.",
+          "name": "Moment of Opportunity"
+        },
+        {
+          "locked": true,
+          "name": "Loveable Captain",
+          "description": "After this unit uses meter, gain meter 30% faster for 20 seconds; Non-Enhanced skills generate 10% meter per use; Enhanced attacks inflict Rupture."
+        },
+        {
+          "locked": true,
+          "name": "The Banging Drums",
+          "description": "When an enemy in range leaves Repulse lockout, inflict Repulse on that enemy."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Pink Essence",
+          "amount": 15
+        },
+        {
+          "name": "Blue Essence",
+          "amount": 15
+        },
+        {
+          "name": "Red Essence",
+          "amount": 15
+        },
+        {
+          "name": "Green Essence",
+          "amount": 50
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 15
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 15
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 5
+        }
+      ],
+      "sortOrder": 9,
+      "rarityTextSource": "Source raw rarity CogFive normalized to Vanguard by Module:MemoriaData rarity_text behavior",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/c/c3/He_Laughed.png",
+      "imageCandidateFile": "He_Laughed.png",
+      "cardSummary": "He Laughed is a Vanguard Memoria with 2800 base damage and 2 base range. It has specialty support for Elastic Captain (Cog 5th). It can evolve for 100,000 using Pink Essence x15; Blue Essence x15; Red Essence x15; Green Essence x50; Yellow Essence x15; Purple Essence x15; Rainbow Essence x5."
+    },
+    {
+      "name": "Goddess of Spring",
+      "slug": "goddess-of-spring",
+      "image": "/Anime%20Vanguards/Memorias/goddess-of-spring.png",
+      "catalogSection": "Vanguard",
+      "rarity": "Vanguard",
+      "rawRarity": "Goddess",
+      "baseDamage": "2800",
+      "baseRange": "2",
+      "exclusiveUnits": "Koguro (Unsealed)",
+      "passiveNames": "Founder's Domain",
+      "passiveSummary": "Founder's Domain: Whenever this unit creates a Domain, buff this unit's damage by 50% for the Domain's duration. Locked specialty passives: The First Shinobi, Lover of Nature.",
+      "lockedPassiveNames": "The First Shinobi, Lover of Nature",
+      "lockedPassiveSummary": "The First Shinobi: This unit now has Ninjutsu; When this unit is placed via Ninjutsu, buff damage by 30% for 60 seconds. | Lover of Nature: Whenever this unit activates a Domain, buff damage of all Nature element units on the field by 50% for that Domain's duration.",
+      "evolvable": "Yes",
+      "evolutionCost": "100,000",
+      "evolutionMaterials": "Shamrock x1; Pink Essence x15; Blue Essence x15; Red Essence x15; Green Essence x50; Yellow Essence x15; Purple Essence x15; Rainbow Essence x5",
+      "evolutionMaterialCount": "8",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Goddess_of_Spring",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 15,
+      "rawLuaKey": "Goddess of Spring",
+      "rawPassiveData": [
+        {
+          "description": "Whenever this unit creates a Domain, buff this unit's damage by 50% for the Domain's duration.",
+          "name": "Founder's Domain"
+        },
+        {
+          "locked": true,
+          "name": "The First Shinobi",
+          "description": "This unit now has Ninjutsu; When this unit is placed via Ninjutsu, buff damage by 30% for 60 seconds."
+        },
+        {
+          "locked": true,
+          "name": "Lover of Nature",
+          "description": "Whenever this unit activates a Domain, buff damage of all Nature element units on the field by 50% for that Domain's duration."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Shamrock",
+          "amount": 1
+        },
+        {
+          "name": "Pink Essence",
+          "amount": 15
+        },
+        {
+          "name": "Blue Essence",
+          "amount": 15
+        },
+        {
+          "name": "Red Essence",
+          "amount": 15
+        },
+        {
+          "name": "Green Essence",
+          "amount": 50
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 15
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 15
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 5
+        }
+      ],
+      "sortOrder": 15,
+      "rarityTextSource": "Source raw rarity Goddess normalized to Vanguard by Module:MemoriaData rarity_text behavior",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/c/c1/Goddess_of_Spring.png",
+      "imageCandidateFile": "Goddess_of_Spring.png",
+      "cardSummary": "Goddess of Spring is a Vanguard Memoria with 2800 base damage and 2 base range. It has specialty support for Koguro (Unsealed). It can evolve for 100,000 using Shamrock x1; Pink Essence x15; Blue Essence x15; Red Essence x15; Green Essence x50; Yellow Essence x15; Purple Essence x15; Rainbow Essence x5."
+    },
+    {
+      "name": "Peak of Shinobi",
+      "slug": "peak-of-shinobi",
+      "image": "/Anime%20Vanguards/Memorias/peak-of-shinobi.png",
+      "catalogSection": "Vanguard",
+      "rarity": "Vanguard",
+      "rawRarity": "ShinobiGod",
+      "baseDamage": "2800",
+      "baseRange": "2",
+      "exclusiveUnits": "Shinobi God (Infinite Dreams)",
+      "passiveNames": "Shinobi Above All",
+      "passiveSummary": "Shinobi Above All: Buff this unit's damage by 5% per upgrade gained; Lose 5% of this damage buff per upgrade lost (buff resets if this unit is sold). Locked specialty passives: No Escape, Next Generation.",
+      "lockedPassiveNames": "No Escape, Next Generation",
+      "lockedPassiveSummary": "No Escape: Whenever this unit applies a Debuff to an enemy, inflict Burn for 40% of this unit's damage over 8 seconds. | Next Generation: When this unit is sold, buff the damage of the next unit placed by 40% for 30 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "100,000",
+      "evolutionMaterials": "Shamrock x1; Pink Essence x15; Blue Essence x15; Red Essence x15; Green Essence x50; Yellow Essence x15; Purple Essence x15; Rainbow Essence x5",
+      "evolutionMaterialCount": "8",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Peak_of_Shinobi",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 16,
+      "rawLuaKey": "Peak of Shinobi",
+      "rawPassiveData": [
+        {
+          "description": "Buff this unit's damage by 5% per upgrade gained; Lose 5% of this damage buff per upgrade lost (buff resets if this unit is sold).",
+          "name": "Shinobi Above All"
+        },
+        {
+          "locked": true,
+          "name": "No Escape",
+          "description": "Whenever this unit applies a Debuff to an enemy, inflict Burn for 40% of this unit's damage over 8 seconds."
+        },
+        {
+          "locked": true,
+          "name": "Next Generation",
+          "description": "When this unit is sold, buff the damage of the next unit placed by 40% for 30 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Shamrock",
+          "amount": 1
+        },
+        {
+          "name": "Pink Essence",
+          "amount": 15
+        },
+        {
+          "name": "Blue Essence",
+          "amount": 15
+        },
+        {
+          "name": "Red Essence",
+          "amount": 15
+        },
+        {
+          "name": "Green Essence",
+          "amount": 50
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 15
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 15
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 5
+        }
+      ],
+      "sortOrder": 16,
+      "rarityTextSource": "Source raw rarity ShinobiGod normalized to Vanguard by Module:MemoriaData rarity_text behavior",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/8/8d/Peak_of_Shinobi.png",
+      "imageCandidateFile": "Peak_of_Shinobi.png",
+      "cardSummary": "Peak of Shinobi is a Vanguard Memoria with 2800 base damage and 2 base range. It has specialty support for Shinobi God (Infinite Dreams). It can evolve for 100,000 using Shamrock x1; Pink Essence x15; Blue Essence x15; Red Essence x15; Green Essence x50; Yellow Essence x15; Purple Essence x15; Rainbow Essence x5."
+    },
+    {
+      "name": "The True Savior",
+      "slug": "the-true-savior",
+      "image": "/Anime%20Vanguards/Memorias/the-true-savior.png",
+      "catalogSection": "Vanguard",
+      "rarity": "Vanguard",
+      "rawRarity": "Savior",
+      "baseDamage": "2800",
+      "baseRange": "2",
+      "exclusiveUnits": "Savior (Moonless)",
+      "passiveNames": "Living Out Your Fantasy",
+      "passiveSummary": "Living Out Your Fantasy: Anytime this unit does follow up, buff damage by 30% for 20 seconds. (Non Stacking) Locked specialty passives: The Brightest Star, For All to See.",
+      "lockedPassiveNames": "The Brightest Star, For All to See",
+      "lockedPassiveSummary": "The Brightest Star: Whenever this unit removes a buff from self, buff self by 50% for 20 seconds. (Non Stacking) | For All to See: Whenever this unit does an attack that is different than the previous one, buff self by 10% for 20 seconds. (Non Stacking)",
+      "evolvable": "Yes",
+      "evolutionCost": "100,000",
+      "evolutionMaterials": "Pink Essence x15; Blue Essence x15; Red Essence x15; Green Essence x50; Yellow Essence x15; Purple Essence x15; Rainbow Essence x5",
+      "evolutionMaterialCount": "7",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#The_True_Savior",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 29,
+      "rawLuaKey": "The True Savior",
+      "rawPassiveData": [
+        {
+          "description": "Anytime this unit does follow up, buff damage by 30% for 20 seconds. (Non Stacking)",
+          "name": "Living Out Your Fantasy"
+        },
+        {
+          "locked": true,
+          "name": "The Brightest Star",
+          "description": "Whenever this unit removes a buff from self, buff self by 50% for 20 seconds. (Non Stacking)"
+        },
+        {
+          "locked": true,
+          "name": "For All to See",
+          "description": "Whenever this unit does an attack that is different than the previous one, buff self by 10% for 20 seconds. (Non Stacking)"
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Pink Essence",
+          "amount": 15
+        },
+        {
+          "name": "Blue Essence",
+          "amount": 15
+        },
+        {
+          "name": "Red Essence",
+          "amount": 15
+        },
+        {
+          "name": "Green Essence",
+          "amount": 50
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 15
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 15
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 5
+        }
+      ],
+      "sortOrder": 29,
+      "rarityTextSource": "Source raw rarity Savior normalized to Vanguard by Module:MemoriaData rarity_text behavior",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/c/c2/The_True_Savior.png",
+      "imageCandidateFile": "The_True_Savior.png",
+      "cardSummary": "The True Savior is a Vanguard Memoria with 2800 base damage and 2 base range. It has specialty support for Savior (Moonless). It can evolve for 100,000 using Pink Essence x15; Blue Essence x15; Red Essence x15; Green Essence x50; Yellow Essence x15; Purple Essence x15; Rainbow Essence x5."
+    },
+    {
+      "name": "Enthusiastic Walks",
+      "slug": "enthusiastic-walks",
+      "image": "/Anime%20Vanguards/Memorias/enthusiastic-walks.png",
+      "catalogSection": "Vanguard",
+      "rarity": "Vanguard",
+      "rawRarity": "Enthusiastic",
+      "baseDamage": "2800",
+      "baseRange": "2",
+      "exclusiveUnits": "Alocard",
+      "passiveNames": "Vampiric Chaser",
+      "passiveSummary": "Vampiric Chaser: Deals 30% more damage when attacking a Bleeding enemy. Locked specialty passives: Bloody Shower, King of the Vampires.",
+      "lockedPassiveNames": "Bloody Shower, King of the Vampires",
+      "lockedPassiveSummary": "Bloody Shower: All enemies in this units range are inflicted with Bleed for 5% damage over 6 seconds, every second. | King of the Vampires: Increases damage by 5% for every summon of this unit on the track. (Up to 100%)",
+      "evolvable": "Yes",
+      "evolutionCost": "100,000",
+      "evolutionMaterials": "Green Essence x50; Pink Essence x15; Red Essence x15; Blue Essence x15; Yellow Essence x15; Purple Essence x15; Rainbow Essence x5",
+      "evolutionMaterialCount": "7",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Enthusiastic_Walks",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 32,
+      "rawLuaKey": "Enthusiastic Walks",
+      "rawPassiveData": [
+        {
+          "description": "Deals 30% more damage when attacking a Bleeding enemy.",
+          "name": "Vampiric Chaser"
+        },
+        {
+          "locked": true,
+          "name": "Bloody Shower",
+          "description": " All enemies in this units range are inflicted with Bleed for 5% damage over 6 seconds, every second."
+        },
+        {
+          "locked": true,
+          "name": "King of the Vampires",
+          "description": "Increases damage by 5% for every summon of this unit on the track. (Up to 100%)"
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 50
+        },
+        {
+          "name": "Pink Essence",
+          "amount": 15
+        },
+        {
+          "name": "Red Essence",
+          "amount": 15
+        },
+        {
+          "name": "Blue Essence",
+          "amount": 15
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 15
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 15
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 5
+        }
+      ],
+      "sortOrder": 32,
+      "rarityTextSource": "Source raw rarity Enthusiastic normalized to Vanguard by Module:MemoriaData rarity_text behavior",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/5/55/Enthusiastic_Walks.png",
+      "imageCandidateFile": "Enthusiastic_Walks.png",
+      "cardSummary": "Enthusiastic Walks is a Vanguard Memoria with 2800 base damage and 2 base range. It has specialty support for Alocard. It can evolve for 100,000 using Green Essence x50; Pink Essence x15; Red Essence x15; Blue Essence x15; Yellow Essence x15; Purple Essence x15; Rainbow Essence x5."
+    },
+    {
+      "name": "Ice Queen's Rest",
+      "slug": "ice-queen-s-rest",
+      "image": "/Anime%20Vanguards/Memorias/ice-queen-s-rest.png",
+      "catalogSection": "Vanguard",
+      "rarity": "Vanguard",
+      "rawRarity": "IceQueen",
+      "baseDamage": "2600",
+      "baseRange": "2",
+      "exclusiveUnits": "Ice Queen (Release)",
+      "passiveNames": "Queen of Ice",
+      "passiveSummary": "Queen of Ice: Anytime Absolute Zero is Triggered in this units range, it is immediately re-applied. (10 second cooldown.) Locked specialty passives: Full Power Assist, Being of Ice.",
+      "lockedPassiveNames": "Full Power Assist, Being of Ice",
+      "lockedPassiveSummary": "Full Power Assist: Anytime this unit attacks via Unyielding Support, it now pulls its damage stat from the upgrade respective to the unit that it is assisting; Reduces the damage bonus from Frozen Cancellation by 20% x the assisted units upgrade level. | Being of Ice: Immune to Status Effects and Status Debuffs; Anytime a Status Effect is resisted, Freeze all enemies in range for 2 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "100,000",
+      "evolutionMaterials": "Snowflake x4; Green Essence x50; Pink Essence x10; Red Essence x10; Blue Essence x10; Yellow Essence x10; Purple Essence x10; Rainbow Essence x5",
+      "evolutionMaterialCount": "8",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Ice_Queen's_Rest",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 46,
+      "rawLuaKey": "Ice Queen's Rest",
+      "rawPassiveData": [
+        {
+          "description": "Anytime Absolute Zero is Triggered in this units range, it is immediately re-applied. (10 second cooldown.)",
+          "name": "Queen of Ice"
+        },
+        {
+          "locked": true,
+          "name": "Full Power Assist",
+          "description": "Anytime this unit attacks via Unyielding Support, it now pulls its damage stat from the upgrade respective to the unit that it is assisting; Reduces the damage bonus from Frozen Cancellation by 20% x the assisted units upgrade level."
+        },
+        {
+          "locked": true,
+          "name": "Being of Ice",
+          "description": "Immune to Status Effects and Status Debuffs; Anytime a Status Effect is resisted, Freeze all enemies in range for 2 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Snowflake",
+          "amount": 4
+        },
+        {
+          "name": "Green Essence",
+          "amount": 50
+        },
+        {
+          "name": "Pink Essence",
+          "amount": 10
+        },
+        {
+          "name": "Red Essence",
+          "amount": 10
+        },
+        {
+          "name": "Blue Essence",
+          "amount": 10
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 10
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 10
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 5
+        }
+      ],
+      "sortOrder": 46,
+      "rarityTextSource": "Source raw rarity IceQueen normalized to Vanguard by Module:MemoriaData rarity_text behavior",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/0/0e/Ice_Queen%27s_Rest.png",
+      "imageCandidateFile": "Ice_Queen's_Rest.png",
+      "cardSummary": "Ice Queen's Rest is a Vanguard Memoria with 2600 base damage and 2 base range. It has specialty support for Ice Queen (Release). It can evolve for 100,000 using Snowflake x4; Green Essence x50; Pink Essence x10; Red Essence x10; Blue Essence x10; Yellow Essence x10; Purple Essence x10; Rainbow Essence x5."
+    },
+    {
+      "name": "Anger vs Discipline",
+      "slug": "anger-vs-discipline",
+      "image": null,
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Raging Oni vs Wrath God, Raging Oni, Wrath God",
+      "passiveNames": "Precision Strike",
+      "passiveSummary": "Precision Strike: Critical hits from this unit generate 5% meter; Buff damage by 30% of this unit's current total meter. Locked specialty passives: Even Angrier, Corruption of the Dark Chi.",
+      "lockedPassiveNames": "Even Angrier, Corruption of the Dark Chi",
+      "lockedPassiveSummary": "Even Angrier: After a Winner is chosen, buff this unit's damage by 100%. | Corruption of the Dark Chi: When attacking an enemy inflicted with Corruption, deal 20% more damage.",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Anger_vs_Discipline",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 3,
+      "rawLuaKey": "Anger vs Discipline",
+      "rawPassiveData": [
+        {
+          "description": "Critical hits from this unit generate 5% meter; Buff damage by 30% of this unit's current total meter.",
+          "name": "Precision Strike"
+        },
+        {
+          "locked": true,
+          "name": "Even Angrier",
+          "description": "After a Winner is chosen, buff this unit's damage by 100%."
+        },
+        {
+          "locked": true,
+          "name": "Corruption of the Dark Chi",
+          "description": "When attacking an enemy inflicted with Corruption, deal 20% more damage."
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 1003,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "missing-source-file",
+      "imageSource": "https://wiki.vanguards.gg/Special:Redirect/file/Anger_vs_Discipline.png",
+      "imageCandidateFile": "Anger_vs_Discipline.png",
+      "cardSummary": "Anger vs Discipline is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Raging Oni vs Wrath God, Raging Oni, Wrath God. It is not marked as evolvable in the current source module.",
+      "imageMissingReason": "Memoria page API references this Memoria image filename, but Special:Redirect/file returned 404; MediaWiki imageinfo marks the file page missing, and allimages search found no clean Memoria-specific alternate."
+    },
+    {
+      "name": "Blazing Inferno",
+      "slug": "blazing-inferno",
+      "image": "/Anime%20Vanguards/Memorias/blazing-inferno.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Yomomata (Captain)",
+      "passiveNames": "Fires of Destruction",
+      "passiveSummary": "Fires of Destruction: Does 30% more damage to enemies inflicted with burn. Locked specialty passives: Concentrated Flames, Intimidation of a Long Life.",
+      "lockedPassiveNames": "Concentrated Flames, Intimidation of a Long Life",
+      "lockedPassiveSummary": "Concentrated Flames: When doing a basic attack on an enemy with 10 stacks of burn or more, inflicts Intense Burn for 100% of this units damage. | Intimidation of a Long Life: For every Skeleton alive from South, increases damage by 1%.",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Blazing_Inferno",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 8,
+      "rawLuaKey": "Blazing Inferno",
+      "rawPassiveData": [
+        {
+          "description": "Does 30% more damage to enemies inflicted with burn.",
+          "name": "Fires of Destruction"
+        },
+        {
+          "description": "When doing a basic attack on an enemy with 10 stacks of burn or more, inflicts Intense Burn for 100% of this units damage.",
+          "locked": true,
+          "name": "Concentrated Flames"
+        },
+        {
+          "description": "For every Skeleton alive from South, increases damage by 1%.",
+          "locked": true,
+          "name": "Intimidation of a Long Life"
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 1008,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/6/62/Blazing_Inferno.png",
+      "imageCandidateFile": "Blazing_Inferno.png",
+      "cardSummary": "Blazing Inferno is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Yomomata (Captain). It is not marked as evolvable in the current source module."
+    },
+    {
+      "name": "Hellfire",
+      "slug": "hellfire",
+      "image": "/Anime%20Vanguards/Memorias/hellfire.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Bounty Hunter (King of Hell), Bounty Hunter",
+      "passiveNames": "Bounty Spotted",
+      "passiveSummary": "Bounty Spotted: Deal 50% more damage inside Rifts. Locked specialty passives: Finisher, 3 Swords.",
+      "lockedPassiveNames": "Finisher, 3 Swords",
+      "lockedPassiveSummary": "Finisher: Deal 30% more damage to enemies inflicted with Rupture. | 3 Swords: For every 1% damage buff on this unit, buff Crit Chance by 0.25%.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Green Essence x30; Rainbow Essence x2; Red Essence x20",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Hellfire",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 10,
+      "rawLuaKey": "Hellfire",
+      "rawPassiveData": [
+        {
+          "description": "Deal 50% more damage inside Rifts.",
+          "name": "Bounty Spotted"
+        },
+        {
+          "locked": true,
+          "name": "Finisher",
+          "description": "Deal 30% more damage to enemies inflicted with Rupture."
+        },
+        {
+          "locked": true,
+          "name": "3 Swords",
+          "description": "For every 1% damage buff on this unit, buff Crit Chance by 0.25%."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        },
+        {
+          "name": "Red Essence",
+          "amount": 20
+        }
+      ],
+      "sortOrder": 1010,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/4/4e/Hellfire.png",
+      "imageCandidateFile": "Hellfire.png",
+      "cardSummary": "Hellfire is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Bounty Hunter (King of Hell), Bounty Hunter. It can evolve for 50,000 using Green Essence x30; Rainbow Essence x2; Red Essence x20."
+    },
+    {
+      "name": "The Beast King",
+      "slug": "the-beast-king",
+      "image": "/Anime%20Vanguards/Memorias/the-beast-king.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Beast Pirate (Half-Dragon)",
+      "passiveNames": "Leader of Beasts",
+      "passiveSummary": "Leader of Beasts: Buff damage from summons by 40%. Locked specialty passives: Draconic Might, Pressure of the Strong.",
+      "lockedPassiveNames": "Draconic Might, Pressure of the Strong",
+      "lockedPassiveSummary": "Draconic Might: The first attack this unit lands on an enemy deals 100% more damage. | Pressure of the Strong: Enemies within 30 range of this unit are Slowed by 50%.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Green Essence x30; Blue Essence x30; Rainbow Essence x2",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#The_Beast_King",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 11,
+      "rawLuaKey": "The Beast King",
+      "rawPassiveData": [
+        {
+          "description": "Buff damage from summons by 40%.",
+          "name": "Leader of Beasts"
+        },
+        {
+          "locked": true,
+          "name": "Draconic Might",
+          "description": "The first attack this unit lands on an enemy deals 100% more damage."
+        },
+        {
+          "locked": true,
+          "name": "Pressure of the Strong",
+          "description": "Enemies within 30 range of this unit are Slowed by 50%."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Blue Essence",
+          "amount": 30
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        }
+      ],
+      "sortOrder": 1011,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/d/d2/The_Beast_King.png",
+      "imageCandidateFile": "The_Beast_King.png",
+      "cardSummary": "The Beast King is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Beast Pirate (Half-Dragon). It can evolve for 50,000 using Green Essence x30; Blue Essence x30; Rainbow Essence x2."
+    },
+    {
+      "name": "Deceptive Innocence",
+      "slug": "deceptive-innocence",
+      "image": "/Anime%20Vanguards/Memorias/deceptive-innocence.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Time Goddess (Crazed)",
+      "passiveNames": "Time Stop",
+      "passiveSummary": "Time Stop: When attacking a Time Stopped enemy, deal 30% more damage. Locked specialty passives: Parallel World, Endless Selves.",
+      "lockedPassiveNames": "Parallel World, Endless Selves",
+      "lockedPassiveSummary": "Parallel World: When attacking an enemy on Repulse lockout, buff damage by 20% for 60 seconds. | Endless Selves: When this unit spawns a clone, that clone gains any buffs this unit has.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Green Essence x30; Pink Essence x20; Rainbow Essence x2",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Deceptive_Innocence",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 17,
+      "rawLuaKey": "Deceptive Innocence",
+      "rawPassiveData": [
+        {
+          "description": "When attacking a Time Stopped enemy, deal 30% more damage.",
+          "name": "Time Stop"
+        },
+        {
+          "locked": true,
+          "name": "Parallel World",
+          "description": "When attacking an enemy on Repulse lockout, buff damage by 20% for 60 seconds."
+        },
+        {
+          "locked": true,
+          "name": "Endless Selves",
+          "description": "When this unit spawns a clone, that clone gains any buffs this unit has."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Pink Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        }
+      ],
+      "sortOrder": 1017,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/4/42/Deceptive_Innocence.png",
+      "imageCandidateFile": "Deceptive_Innocence.png",
+      "cardSummary": "Deceptive Innocence is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Time Goddess (Crazed). It can evolve for 50,000 using Green Essence x30; Pink Essence x20; Rainbow Essence x2."
+    },
+    {
+      "name": "All I've Got",
+      "slug": "all-i-ve-got",
+      "image": "/Anime%20Vanguards/Memorias/all-i-ve-got.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Strongest Shinobi",
+      "passiveNames": "Perseverance of Hard Work",
+      "passiveSummary": "Perseverance of Hard Work: When this unit loses any amount of a buff, buff damage by 5% (up to 40%). Locked specialty passives: Burning Youth, Teacher of Taijutsu.",
+      "lockedPassiveNames": "Burning Youth, Teacher of Taijutsu",
+      "lockedPassiveSummary": "Burning Youth: When this unit applies Burn, cleanse this unit of Status Debuffs. | Teacher of Taijutsu: When this unit is sold, buff the damage of the next unit placed by 20% for 30 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Red Essence x30; Green Essence x30; Shamrock x1; Rainbow Essence x2; Sentimental Scarf x1",
+      "evolutionMaterialCount": "5",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#All_I've_Got",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 18,
+      "rawLuaKey": "All I've Got",
+      "rawPassiveData": [
+        {
+          "description": "When this unit loses any amount of a buff, buff damage by 5% (up to 40%).",
+          "name": "Perseverance of Hard Work"
+        },
+        {
+          "locked": true,
+          "name": "Burning Youth",
+          "description": "When this unit applies Burn, cleanse this unit of Status Debuffs."
+        },
+        {
+          "locked": true,
+          "name": "Teacher of Taijutsu",
+          "description": "When this unit is sold, buff the damage of the next unit placed by 20% for 30 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Red Essence",
+          "amount": 30
+        },
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Shamrock",
+          "amount": 1
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        },
+        {
+          "name": "Sentimental Scarf",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 1018,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/2/2c/All_I%27ve_Got.png",
+      "imageCandidateFile": "All_I've_Got.png",
+      "cardSummary": "All I've Got is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Strongest Shinobi. It can evolve for 50,000 using Red Essence x30; Green Essence x30; Shamrock x1; Rainbow Essence x2; Sentimental Scarf x1."
+    },
+    {
+      "name": "Shall Know Pain",
+      "slug": "shall-know-pain",
+      "image": "/Anime%20Vanguards/Memorias/shall-know-pain.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Agony Shinobi",
+      "passiveNames": "Deliverance of Pain",
+      "passiveSummary": "Deliverance of Pain: Whenever this unit Toggles an Active, increase Damage by 50% for 30 seconds. Locked specialty passives: Course Correction, Teacher of Tragedy.",
+      "lockedPassiveNames": "Course Correction, Teacher of Tragedy",
+      "lockedPassiveSummary": "Course Correction: Anytime this unit places a seperate unit via Active or Ninjutsu, buff that unit's damage by 20% for 30 seconds. | Teacher of Tragedy: Whenever a unit is Sold or Deleted in this units range, buff this unit's Damage by 20% for 30 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Green Essence x30; Rainbow Essence x2; Energy Rod x12; Red Essence x30",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Shall_Know_Pain",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 22,
+      "rawLuaKey": "Shall Know Pain",
+      "rawPassiveData": [
+        {
+          "description": "Whenever this unit Toggles an Active, increase Damage by 50% for 30 seconds.",
+          "name": "Deliverance of Pain"
+        },
+        {
+          "locked": true,
+          "name": "Course Correction",
+          "description": "Anytime this unit places a seperate unit via Active or Ninjutsu, buff that unit's damage by 20% for 30 seconds."
+        },
+        {
+          "locked": true,
+          "name": "Teacher of Tragedy",
+          "description": "Whenever a unit is Sold or Deleted in this units range, buff this unit's Damage by 20% for 30 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        },
+        {
+          "name": "Energy Rod",
+          "amount": 12
+        },
+        {
+          "name": "Red Essence",
+          "amount": 30
+        }
+      ],
+      "sortOrder": 1022,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/0/03/Shall_Know_Pain.png",
+      "imageCandidateFile": "Shall_Know_Pain.png",
+      "cardSummary": "Shall Know Pain is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Agony Shinobi. It can evolve for 50,000 using Green Essence x30; Rainbow Essence x2; Energy Rod x12; Red Essence x30."
+    },
+    {
+      "name": "Trust of Others",
+      "slug": "trust-of-others",
+      "image": "/Anime%20Vanguards/Memorias/trust-of-others.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Shinobi Sage",
+      "passiveNames": "Power of Friendship",
+      "passiveSummary": "Power of Friendship: Whenever this unit enters via Ninjutsu, buff damage by 50% for 30 seconds. Locked specialty passives: Taught by Nature, Forbidden Technique.",
+      "lockedPassiveNames": "Taught by Nature, Forbidden Technique",
+      "lockedPassiveSummary": "Taught by Nature: Buffs all Nature category allies in range by 30% Damage. | Forbidden Technique: Anytime a clone of this unit despawns, increase this unit's Damage by 30% for 30 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Chi Spheres x12; Yellow Essence x20; Rainbow Essence x2; Green Essence x30",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Trust_of_Others",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 23,
+      "rawLuaKey": "Trust of Others",
+      "rawPassiveData": [
+        {
+          "description": "Whenever this unit enters via Ninjutsu, buff damage by 50% for 30 seconds.",
+          "name": "Power of Friendship"
+        },
+        {
+          "locked": true,
+          "name": "Taught by Nature",
+          "description": "Buffs all Nature category allies in range by 30% Damage."
+        },
+        {
+          "locked": true,
+          "name": "Forbidden Technique",
+          "description": "Anytime a clone of this unit despawns, increase this unit's Damage by 30% for 30 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Chi Spheres",
+          "amount": 12
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        },
+        {
+          "name": "Green Essence",
+          "amount": 30
+        }
+      ],
+      "sortOrder": 1023,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/b/bd/Trust_of_Others.png",
+      "imageCandidateFile": "Trust_of_Others.png",
+      "cardSummary": "Trust of Others is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Shinobi Sage. It can evolve for 50,000 using Chi Spheres x12; Yellow Essence x20; Rainbow Essence x2; Green Essence x30."
+    },
+    {
+      "name": "Bond of Master and Disciple",
+      "slug": "bond-of-master-and-disciple",
+      "image": "/Anime%20Vanguards/Memorias/bond-of-master-and-disciple.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Teacher (Final Stand)",
+      "passiveNames": "Vital Strike",
+      "passiveSummary": "Vital Strike: Increases Critical Damage by 30%. Locked specialty passives: Tough Teaching, Trial By Fire.",
+      "lockedPassiveNames": "Tough Teaching, Trial By Fire",
+      "lockedPassiveSummary": "Tough Teaching: Whenever this unit Crits, cleanse self of all Debuffs. | Trial By Fire: Whenever this unit does a Follow Up, Increases Crit Chance of self by 30% for 20 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Green Essence x30; Yellow Essence x15; Blue Essence x15; Rainbow Essence x2",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Bond_of_Master_and_Disciple",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 28,
+      "rawLuaKey": "Bond of Master and Disciple",
+      "rawPassiveData": [
+        {
+          "description": "Increases Critical Damage by 30%.",
+          "name": "Vital Strike"
+        },
+        {
+          "locked": true,
+          "name": "Tough Teaching",
+          "description": "Whenever this unit Crits, cleanse self of all Debuffs."
+        },
+        {
+          "locked": true,
+          "name": "Trial By Fire",
+          "description": "Whenever this unit does a Follow Up, Increases Crit Chance of self by 30% for 20 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 15
+        },
+        {
+          "name": "Blue Essence",
+          "amount": 15
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        }
+      ],
+      "sortOrder": 1028,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/f/fa/Bond_of_Master_and_Disciple.png",
+      "imageCandidateFile": "Bond_of_Master_and_Disciple.png",
+      "cardSummary": "Bond of Master and Disciple is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Teacher (Final Stand). It can evolve for 50,000 using Green Essence x30; Yellow Essence x15; Blue Essence x15; Rainbow Essence x2."
+    },
+    {
+      "name": "Ultimate Deceiver",
+      "slug": "ultimate-deceiver",
+      "image": "/Anime%20Vanguards/Memorias/ultimate-deceiver.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Deceiver",
+      "passiveNames": "Opportune Attack",
+      "passiveSummary": "Opportune Attack: When attacking a slowed enemy does 30% more damage. Locked specialty passives: Immortal Monster, Illusionary Being.",
+      "lockedPassiveNames": "Immortal Monster, Illusionary Being",
+      "lockedPassiveSummary": "Immortal Monster: When this units Revival is triggered increases damage by 50%. | Illusionary Being: Reflects Status Effects back to enemies.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Fused Spirit Orb x1; Rainbow Essence x2; Purple Essence x30; Green Essence x30",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Ultimate_Deceiver",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 30,
+      "rawLuaKey": "Ultimate Deceiver",
+      "rawPassiveData": [
+        {
+          "description": "When attacking a slowed enemy does 30% more damage.",
+          "name": "Opportune Attack"
+        },
+        {
+          "locked": true,
+          "name": "Immortal Monster",
+          "description": "When this units Revival is triggered increases damage by 50%."
+        },
+        {
+          "locked": true,
+          "name": "Illusionary Being",
+          "description": "Reflects Status Effects back to enemies."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Fused Spirit Orb",
+          "amount": 1
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 30
+        },
+        {
+          "name": "Green Essence",
+          "amount": 30
+        }
+      ],
+      "sortOrder": 1030,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/1/15/Ultimate_Deceiver.png",
+      "imageCandidateFile": "Ultimate_Deceiver.png",
+      "cardSummary": "Ultimate Deceiver is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Deceiver. It can evolve for 50,000 using Fused Spirit Orb x1; Rainbow Essence x2; Purple Essence x30; Green Essence x30."
+    },
+    {
+      "name": "Death, Resurrected",
+      "slug": "death-resurrected",
+      "image": "/Anime%20Vanguards/Memorias/death-resurrected.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Diablo",
+      "passiveNames": "Resurrection Evolved",
+      "passiveSummary": "Resurrection Evolved: When this unit is placed, buffs damage by 50% for 60 seconds. Locked specialty passives: Long Ranged Throw, Devastating Power.",
+      "lockedPassiveNames": "Long Ranged Throw, Devastating Power",
+      "lockedPassiveSummary": "Long Ranged Throw: When attacking an enemy further than 60% of this units range, inflicts slow for 30% for 10 seconds. | Devastating Power: Any buff to this units range also buffs his damage.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Pink Essence x15; Red Essence x15; Green Essence x30; Rainbow Essence x2; Spirit Javelin x1",
+      "evolutionMaterialCount": "5",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Death%2C_Resurrected",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 31,
+      "rawLuaKey": "Death, Resurrected",
+      "rawPassiveData": [
+        {
+          "description": "When this unit is placed, buffs damage by 50% for 60 seconds.",
+          "name": "Resurrection Evolved"
+        },
+        {
+          "locked": true,
+          "name": "Long Ranged Throw",
+          "description": "When attacking an enemy further than 60% of this units range, inflicts slow for 30% for 10 seconds."
+        },
+        {
+          "locked": true,
+          "name": "Devastating Power",
+          "description": "Any buff to this units range also buffs his damage."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Pink Essence",
+          "amount": 15
+        },
+        {
+          "name": "Red Essence",
+          "amount": 15
+        },
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        },
+        {
+          "name": "Spirit Javelin",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 1031,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/d/de/Death%2C_Resurrected.png",
+      "imageCandidateFile": "Death,_Resurrected.png",
+      "cardSummary": "Death, Resurrected is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Diablo. It can evolve for 50,000 using Pink Essence x15; Red Essence x15; Green Essence x30; Rainbow Essence x2; Spirit Javelin x1."
+    },
+    {
+      "name": "Shackled Sight",
+      "slug": "shackled-sight",
+      "image": "/Anime%20Vanguards/Memorias/shackled-sight.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Demon Leader",
+      "passiveNames": "Bleeding Devotion",
+      "passiveSummary": "Bleeding Devotion: Attacks apply Bleed for 5% of this units damage for 8 seconds. Locked specialty passives: Control Freak, Dangerous Love.",
+      "lockedPassiveNames": "Control Freak, Dangerous Love",
+      "lockedPassiveSummary": "Control Freak: Anytime a Demon Hunter ally is chained, increases damage by 10%; When this buff reaches 50%, buff all chained allies by 30% damage. | Dangerous Love: When Demon Hybrid is in this units range that unit gains 40% damage.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Cup of Coffee x12; Pink Essence x20; Green Essence x30; Rainbow Essence x2",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Shackled_Sight",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 33,
+      "rawLuaKey": "Shackled Sight",
+      "rawPassiveData": [
+        {
+          "description": "Attacks apply Bleed for 5% of this units damage for 8 seconds.",
+          "name": "Bleeding Devotion"
+        },
+        {
+          "locked": true,
+          "name": "Control Freak",
+          "description": "Anytime a Demon Hunter ally is chained, increases damage by 10%; When this buff reaches 50%, buff all chained allies by 30% damage."
+        },
+        {
+          "locked": true,
+          "name": "Dangerous Love",
+          "description": "When Demon Hybrid is in this units range that unit gains 40% damage."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Cup of Coffee",
+          "amount": 12
+        },
+        {
+          "name": "Pink Essence",
+          "amount": 20
+        },
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        }
+      ],
+      "sortOrder": 1033,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/e/e8/Shackled_Sight.png",
+      "imageCandidateFile": "Shackled_Sight.png",
+      "cardSummary": "Shackled Sight is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Demon Leader. It can evolve for 50,000 using Cup of Coffee x12; Pink Essence x20; Green Essence x30; Rainbow Essence x2."
+    },
+    {
+      "name": "Perpetual Motion",
+      "slug": "perpetual-motion",
+      "image": "/Anime%20Vanguards/Memorias/perpetual-motion.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2400",
+      "baseRange": "2",
+      "exclusiveUnits": "Demon Hybrid",
+      "passiveNames": "Going Wild",
+      "passiveSummary": "Going Wild: When performing a follow up, do 30% more damage. Locked specialty passives: I Can Keep Going, The First to Fight.",
+      "lockedPassiveNames": "I Can Keep Going, The First to Fight",
+      "lockedPassiveSummary": "I Can Keep Going: Whenever this unit loses meter gain a buff equal to the meter lost (Up to 100%, this buff is lost when this unit hits 0 meter.) | The First to Fight: Anytime this unit removes a Bleed via Rookie Demon Hunter, that Bleed is then reapplied for 20% of its original value for 8 seconds. (Occurs once per Bleed)",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Green Essence x30; Red Essence x30; Rainbow Essence x2",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Perpetual_Motion",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 34,
+      "rawLuaKey": "Perpetual Motion",
+      "rawPassiveData": [
+        {
+          "description": "When performing a follow up, do 30% more damage.",
+          "name": "Going Wild"
+        },
+        {
+          "locked": true,
+          "name": "I Can Keep Going",
+          "description": "Whenever this unit loses meter gain a buff equal to the meter lost (Up to 100%, this buff is lost when this unit hits 0 meter.)"
+        },
+        {
+          "locked": true,
+          "name": "The First to Fight",
+          "description": "Anytime this unit removes a Bleed via Rookie Demon Hunter, that Bleed is then reapplied for 20% of its original value for 8 seconds. (Occurs once per Bleed)"
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Red Essence",
+          "amount": 30
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        }
+      ],
+      "sortOrder": 1034,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/6/6a/Perpetual_Motion.png",
+      "imageCandidateFile": "Perpetual_Motion.png",
+      "cardSummary": "Perpetual Motion is a Secret Memoria with 2400 base damage and 2 base range. It has specialty support for Demon Hybrid. It can evolve for 50,000 using Green Essence x30; Red Essence x30; Rainbow Essence x2."
+    },
+    {
+      "name": "Armored Mage's Day Off",
+      "slug": "armored-mage-s-day-off",
+      "image": "/Anime%20Vanguards/Memorias/armored-mage-s-day-off.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Armored Mage",
+      "passiveNames": "Unstoppable Pressure",
+      "passiveSummary": "Unstoppable Pressure: DoTs applied by this unit now bypass shields. Locked specialty passives: Requipping Goddess, Teamplayer.",
+      "lockedPassiveNames": "Requipping Goddess, Teamplayer",
+      "lockedPassiveSummary": "Requipping Goddess: Anytime this unit spends meter, refunds 30% of the meter spent. | Teamplayer: Whenever this units buff expire on an ally, that buff is reapplied for the same duration.",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Guild Flag x1; Snowflake x1; Green Essence x30; Pink Essence x15; Red Essence x10; Rainbow Essence x2",
+      "evolutionMaterialCount": "6",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Armored_Mage's_Day_Off",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 47,
+      "rawLuaKey": "Armored Mage's Day Off",
+      "rawPassiveData": [
+        {
+          "description": "DoTs applied by this unit now bypass shields.",
+          "name": "Unstoppable Pressure"
+        },
+        {
+          "locked": true,
+          "name": "Requipping Goddess",
+          "description": "Anytime this unit spends meter, refunds 30% of the meter spent."
+        },
+        {
+          "locked": true,
+          "name": "Teamplayer",
+          "description": "Whenever this units buff expire on an ally, that buff is reapplied for the same duration."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Guild Flag",
+          "amount": 1
+        },
+        {
+          "name": "Snowflake",
+          "amount": 1
+        },
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Pink Essence",
+          "amount": 15
+        },
+        {
+          "name": "Red Essence",
+          "amount": 10
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        }
+      ],
+      "sortOrder": 1047,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/c/c9/Armored_Mage%27s_Day_Off.png",
+      "imageCandidateFile": "Armored_Mage's_Day_Off.png",
+      "cardSummary": "Armored Mage's Day Off is a Secret Memoria with 2300 base damage and 2 base range. It has specialty support for Armored Mage. It can evolve for 50,000 using Guild Flag x1; Snowflake x1; Green Essence x30; Pink Essence x15; Red Essence x10; Rainbow Essence x2."
+    },
+    {
+      "name": "Company Captain's Presence",
+      "slug": "company-captain-s-presence",
+      "image": "/Anime%20Vanguards/Memorias/company-captain-s-presence.png",
+      "catalogSection": "Secret",
+      "rarity": "Secret",
+      "rawRarity": "Secret",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Company Captain (Hybrid)",
+      "passiveNames": "Fire's Warmth",
+      "passiveSummary": "Fire's Warmth: Increases damage by 30% when attacking an enemy inflicted with Burn. Locked specialty passives: Second Generation, Third Generation.",
+      "lockedPassiveNames": "Second Generation, Third Generation",
+      "lockedPassiveSummary": "Second Generation: Anytime this unit attacks an enemy inflicted with Conflagration, Slow that enemy by 40% for 20 seconds. | Third Generation: When an enemy inflicted with Conflagration dies, fires a broom at that location. (5 Second Cooldown)",
+      "evolvable": "Yes",
+      "evolutionCost": "50,000",
+      "evolutionMaterials": "Green Essence x30; Red Essence x30; Rainbow Essence x2",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Company_Captain's_Presence",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 53,
+      "rawLuaKey": "Company Captain's Presence",
+      "rawPassiveData": [
+        {
+          "description": "Increases damage by 30% when attacking an enemy inflicted with Burn.",
+          "name": "Fire's Warmth"
+        },
+        {
+          "locked": true,
+          "name": "Second Generation",
+          "description": "Anytime this unit attacks an enemy inflicted with Conflagration, Slow that enemy by 40% for 20 seconds."
+        },
+        {
+          "locked": true,
+          "name": "Third Generation",
+          "description": "When an enemy inflicted with Conflagration dies, fires a broom at that location. (5 Second Cooldown)"
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 30
+        },
+        {
+          "name": "Red Essence",
+          "amount": 30
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        }
+      ],
+      "sortOrder": 1053,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/e/ed/Company_Captain%27s_Presence.png",
+      "imageCandidateFile": "Company_Captain's_Presence.png",
+      "cardSummary": "Company Captain's Presence is a Secret Memoria with 2300 base damage and 2 base range. It has specialty support for Company Captain (Hybrid). It can evolve for 50,000 using Green Essence x30; Red Essence x30; Rainbow Essence x2."
+    },
+    {
+      "name": "Messenger of Destruction",
+      "slug": "messenger-of-destruction",
+      "image": null,
+      "catalogSection": "Exclusive",
+      "rarity": "Exclusive",
+      "rawRarity": "Exclusive",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Envoy of Destruction",
+      "passiveNames": "Defensive Destruction",
+      "passiveSummary": "Defensive Destruction: Damage bypasses 30% of enemy Damage Reduction. Locked specialty passives: 33550336.",
+      "lockedPassiveNames": "33550336",
+      "lockedPassiveSummary": "33550336: Buff damage dealt by this unit's Damage Reduction bypass percentage; After this unit uses an active ability, gain Blazing Sun for 20 seconds; Blazing Sun buffs damage by 50% and Damage Reduction bypass by 80%.",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Messenger_of_Destruction",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 7,
+      "rawLuaKey": "Messenger of Destruction",
+      "rawPassiveData": [
+        {
+          "description": "Damage bypasses 30% of enemy Damage Reduction.",
+          "name": "Defensive Destruction"
+        },
+        {
+          "locked": true,
+          "name": "33550336",
+          "description": "Buff damage dealt by this unit's Damage Reduction bypass percentage; After this unit uses an active ability, gain Blazing Sun for 20 seconds; Blazing Sun buffs damage by 50% and Damage Reduction bypass by 80%."
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 2007,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "missing-source-file",
+      "imageSource": "https://wiki.vanguards.gg/Special:Redirect/file/Messenger_of_Destruction.png",
+      "imageCandidateFile": "Messenger_of_Destruction.png",
+      "cardSummary": "Messenger of Destruction is a Exclusive Memoria with 2300 base damage and 2 base range. It has specialty support for Envoy of Destruction. It is not marked as evolvable in the current source module.",
+      "imageMissingReason": "Memoria page API references this Memoria image filename, but Special:Redirect/file returned 404; MediaWiki imageinfo marks the file page missing, and allimages search found no clean Memoria-specific alternate."
+    },
+    {
+      "name": "Destroyer of Worlds",
+      "slug": "destroyer-of-worlds",
+      "image": "/Anime%20Vanguards/Memorias/destroyer-of-worlds.png",
+      "catalogSection": "Exclusive",
+      "rarity": "Exclusive",
+      "rawRarity": "Exclusive",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Cat God",
+      "passiveNames": "God of Destruction",
+      "passiveSummary": "God of Destruction: While an active is on cooldown, buff damage by 40%. Locked specialty passives: Sleepy God.",
+      "lockedPassiveNames": "Sleepy God",
+      "lockedPassiveSummary": "Sleepy God: After this unit uses an active, Stun this unit for 10 seconds (bypasses immunities), then buff damage by 100% for 30 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Green Essence x20; Purple Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Destroyer_of_Worlds",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 13,
+      "rawLuaKey": "Destroyer of Worlds",
+      "rawPassiveData": [
+        {
+          "description": "While an active is on cooldown, buff damage by 40%.",
+          "name": "God of Destruction"
+        },
+        {
+          "locked": true,
+          "name": "Sleepy God",
+          "description": "After this unit uses an active, Stun this unit for 10 seconds (bypasses immunities), then buff damage by 100% for 30 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 2013,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/f/f6/Destroyer_of_Worlds.png",
+      "imageCandidateFile": "Destroyer_of_Worlds.png",
+      "cardSummary": "Destroyer of Worlds is a Exclusive Memoria with 2300 base damage and 2 base range. It has specialty support for Cat God. It can evolve for 30,000 using Green Essence x20; Purple Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Regretful Past",
+      "slug": "regretful-past",
+      "image": "/Anime%20Vanguards/Memorias/regretful-past.png",
+      "catalogSection": "Exclusive",
+      "rarity": "Exclusive",
+      "rawRarity": "Exclusive",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Reasonable Person",
+      "passiveNames": "Angry Man",
+      "passiveSummary": "Angry Man: Buff damage by half of the current meter value as a percentage. Locked specialty passives: Flaming Chains.",
+      "lockedPassiveNames": "Flaming Chains",
+      "lockedPassiveSummary": "Flaming Chains: Whenever this unit applies Chaos, inflict Burn for 20% of this unit's damage over 8 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Green Essence x20; Rainbow Essence x1; Red Essence x20",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Regretful_Past",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 14,
+      "rawLuaKey": "Regretful Past",
+      "rawPassiveData": [
+        {
+          "description": "Buff damage by half of the current meter value as a percentage.",
+          "name": "Angry Man"
+        },
+        {
+          "locked": true,
+          "name": "Flaming Chains",
+          "description": "Whenever this unit applies Chaos, inflict Burn for 20% of this unit's damage over 8 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        },
+        {
+          "name": "Red Essence",
+          "amount": 20
+        }
+      ],
+      "sortOrder": 2014,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/2/20/Regretful_Past.png",
+      "imageCandidateFile": "Regretful_Past.png",
+      "cardSummary": "Regretful Past is a Exclusive Memoria with 2300 base damage and 2 base range. It has specialty support for Reasonable Person. It can evolve for 30,000 using Green Essence x20; Rainbow Essence x1; Red Essence x20."
+    },
+    {
+      "name": "Sinful Priest",
+      "slug": "sinful-priest",
+      "image": "/Anime%20Vanguards/Memorias/sinful-priest.png",
+      "catalogSection": "Exclusive",
+      "rarity": "Exclusive",
+      "rawRarity": "Exclusive",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Preacher",
+      "passiveNames": "Large Cannon",
+      "passiveSummary": "Large Cannon: For every enemy hit increases next attacks damage by 5%. (Up to 35%, Resets every attack) Locked specialty passives: Seeker of Paradise.",
+      "lockedPassiveNames": "Seeker of Paradise",
+      "lockedPassiveSummary": "Seeker of Paradise: For every enemy in range increase damage by 5%. (Up to 100%)",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Green Essence x20; Blue Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Sinful_Priest",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 26,
+      "rawLuaKey": "Sinful Priest",
+      "rawPassiveData": [
+        {
+          "description": "For every enemy hit increases next attacks damage by 5%. (Up to 35%, Resets every attack)",
+          "name": "Large Cannon"
+        },
+        {
+          "locked": true,
+          "name": "Seeker of Paradise",
+          "description": "For every enemy in range increase damage by 5%. (Up to 100%)"
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Blue Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 2026,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/a/ab/Sinful_Priest.png",
+      "imageCandidateFile": "Sinful_Priest.png",
+      "cardSummary": "Sinful Priest is a Exclusive Memoria with 2300 base damage and 2 base range. It has specialty support for Preacher. It can evolve for 30,000 using Green Essence x20; Blue Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Purveyor of Peace",
+      "slug": "purveyor-of-peace",
+      "image": "/Anime%20Vanguards/Memorias/purveyor-of-peace.png",
+      "catalogSection": "Exclusive",
+      "rarity": "Exclusive",
+      "rawRarity": "Exclusive",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Fallen Angel",
+      "passiveNames": "Intense Battle",
+      "passiveSummary": "Intense Battle: Anytime this unit becomes stunned, increase Damage by 40% for 60 seconds. Locked specialty passives: Deadeye.",
+      "lockedPassiveNames": "Deadeye",
+      "lockedPassiveSummary": "Deadeye: This unit gains 40% Critical Chance and 50% Critical Damage.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Green Essence x20; Yellow Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Purveyor_of_Peace",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 27,
+      "rawLuaKey": "Purveyor of Peace",
+      "rawPassiveData": [
+        {
+          "description": "Anytime this unit becomes stunned, increase Damage by 40% for 60 seconds.",
+          "name": "Intense Battle"
+        },
+        {
+          "locked": true,
+          "name": "Deadeye",
+          "description": "This unit gains 40% Critical Chance and 50% Critical Damage."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 2027,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/0/09/Purveyor_of_Peace.png",
+      "imageCandidateFile": "Purveyor_of_Peace.png",
+      "cardSummary": "Purveyor of Peace is a Exclusive Memoria with 2300 base damage and 2 base range. It has specialty support for Fallen Angel. It can evolve for 30,000 using Green Essence x20; Yellow Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Along Came a Spider",
+      "slug": "along-came-a-spider",
+      "image": "/Anime%20Vanguards/Memorias/along-came-a-spider.png",
+      "catalogSection": "Exclusive",
+      "rarity": "Exclusive",
+      "rawRarity": "Exclusive",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Manipulator",
+      "passiveNames": "Elegant Violence",
+      "passiveSummary": "Elegant Violence: When a DoT is applied in this units range, increase damage by 5%. (Up to 30%) Locked specialty passives: Ruination.",
+      "lockedPassiveNames": "Ruination",
+      "lockedPassiveSummary": "Ruination: When this unit attacks a Bleeding enemy, inflict Slow for 30% for 10 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Pink Essence x20; Green Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Along_Came_a_Spider",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 35,
+      "rawLuaKey": "Along Came a Spider",
+      "rawPassiveData": [
+        {
+          "description": "When a DoT is applied in this units range, increase damage by 5%. (Up to 30%)",
+          "name": "Elegant Violence"
+        },
+        {
+          "locked": true,
+          "name": "Ruination",
+          "description": "When this unit attacks a Bleeding enemy, inflict Slow for 30% for 10 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Pink Essence",
+          "amount": 20
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 2035,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/4/4a/Along_Came_a_Spider.png",
+      "imageCandidateFile": "Along_Came_a_Spider.png",
+      "cardSummary": "Along Came a Spider is a Exclusive Memoria with 2300 base damage and 2 base range. It has specialty support for Manipulator. It can evolve for 30,000 using Pink Essence x20; Green Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Empty Reflections",
+      "slug": "empty-reflections",
+      "image": "/Anime%20Vanguards/Memorias/empty-reflections.png",
+      "catalogSection": "Exclusive",
+      "rarity": "Exclusive",
+      "rawRarity": "Exclusive",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Arbiter",
+      "passiveNames": "Emptiness Becoming",
+      "passiveSummary": "Emptiness Becoming: Increases Cosmic damage by 30%. Locked specialty passives: Wilting Aggression.",
+      "lockedPassiveNames": "Wilting Aggression",
+      "lockedPassiveSummary": "Wilting Aggression: Whenever this unit uses its active, increases damage by 50% for 20 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Purple Essence x20; Green Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Empty_Reflections",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 36,
+      "rawLuaKey": "Empty Reflections",
+      "rawPassiveData": [
+        {
+          "description": "Increases Cosmic damage by 30%.",
+          "name": "Emptiness Becoming"
+        },
+        {
+          "locked": true,
+          "name": "Wilting Aggression",
+          "description": "Whenever this unit uses its active, increases damage by 50% for 20 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Purple Essence",
+          "amount": 20
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 2036,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/6/63/Empty_Reflections.png",
+      "imageCandidateFile": "Empty_Reflections.png",
+      "cardSummary": "Empty Reflections is a Exclusive Memoria with 2300 base damage and 2 base range. It has specialty support for Arbiter. It can evolve for 30,000 using Purple Essence x20; Green Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Lord of the Fairies",
+      "slug": "lord-of-the-fairies",
+      "image": null,
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Lord",
+      "passiveNames": "Lazy Lord",
+      "passiveSummary": "Lazy Lord: When this unit stuns an enemy, buff damage by 50% for 10 seconds. Locked specialty passives: Remorseful Existence.",
+      "lockedPassiveNames": "Remorseful Existence",
+      "lockedPassiveSummary": "Remorseful Existence: When this unit inflicts Stone on an enemy, follow up with Attack 1 for 200% damage (20-second local cooldown).",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Lord_of_the_Fairies",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 4,
+      "rawLuaKey": "Lord of the Fairies",
+      "rawPassiveData": [
+        {
+          "description": "When this unit stuns an enemy, buff damage by 50% for 10 seconds.",
+          "name": "Lazy Lord"
+        },
+        {
+          "locked": true,
+          "name": "Remorseful Existence",
+          "description": "When this unit inflicts Stone on an enemy, follow up with Attack 1 for 200% damage (20-second local cooldown)."
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 3004,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "missing-source-file",
+      "imageSource": "https://wiki.vanguards.gg/Special:Redirect/file/Lord_of_the_Fairies.png",
+      "imageCandidateFile": "Lord_of_the_Fairies.png",
+      "cardSummary": "Lord of the Fairies is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Lord. It is not marked as evolvable in the current source module.",
+      "imageMissingReason": "Memoria page API references this Memoria image filename, but Special:Redirect/file returned 404; MediaWiki imageinfo marks the file page missing, and allimages search found no clean Memoria-specific alternate."
+    },
+    {
+      "name": "Snip Snip",
+      "slug": "snip-snip",
+      "image": null,
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Reaper",
+      "passiveNames": "Surprise Firearm",
+      "passiveSummary": "Surprise Firearm: Follow-up attacks deal 50% more damage to Bleeding enemies. Locked specialty passives: Formidable Fighter.",
+      "lockedPassiveNames": "Formidable Fighter",
+      "lockedPassiveSummary": "Formidable Fighter: Whenever this unit detonates Bleed, buff range by 30% for 20 seconds.",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Snip_Snip",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 5,
+      "rawLuaKey": "Snip Snip",
+      "rawPassiveData": [
+        {
+          "description": "Follow-up attacks deal 50% more damage to Bleeding enemies.",
+          "name": "Surprise Firearm"
+        },
+        {
+          "locked": true,
+          "name": "Formidable Fighter",
+          "description": "Whenever this unit detonates Bleed, buff range by 30% for 20 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 3005,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "missing-source-file",
+      "imageSource": "https://wiki.vanguards.gg/Special:Redirect/file/Snip_Snip.png",
+      "imageCandidateFile": "Snip_Snip.png",
+      "cardSummary": "Snip Snip is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Reaper. It is not marked as evolvable in the current source module.",
+      "imageMissingReason": "Memoria page API references this Memoria image filename, but Special:Redirect/file returned 404; MediaWiki imageinfo marks the file page missing, and allimages search found no clean Memoria-specific alternate."
+    },
+    {
+      "name": "Unlikely Doctor",
+      "slug": "unlikely-doctor",
+      "image": null,
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Cursed Doctor",
+      "passiveNames": "Top Tier Support",
+      "passiveSummary": "Top Tier Support: On placement, gain 2 upgrades (cannot be equipped on Ninjutsu units). Locked specialty passives: Bad Habit.",
+      "lockedPassiveNames": "Bad Habit",
+      "lockedPassiveSummary": "Bad Habit: When a unit is inflicted with a Status Effect or Status Debuff, buff that unit's range by 20% for 20 seconds.",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Unlikely_Doctor",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 6,
+      "rawLuaKey": "Unlikely Doctor",
+      "rawPassiveData": [
+        {
+          "description": "On placement, gain 2 upgrades (cannot be equipped on Ninjutsu units).",
+          "name": "Top Tier Support"
+        },
+        {
+          "locked": true,
+          "name": "Bad Habit",
+          "description": "When a unit is inflicted with a Status Effect or Status Debuff, buff that unit's range by 20% for 20 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 3006,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "missing-source-file",
+      "imageSource": "https://wiki.vanguards.gg/Special:Redirect/file/Unlikely_Doctor.png",
+      "imageCandidateFile": "Unlikely_Doctor.png",
+      "cardSummary": "Unlikely Doctor is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Cursed Doctor. It is not marked as evolvable in the current source module.",
+      "imageMissingReason": "Memoria page API references this Memoria image filename, but Special:Redirect/file returned 404; MediaWiki imageinfo marks the file page missing, and allimages search found no clean Memoria-specific alternate."
+    },
+    {
+      "name": "Scrap Metal Master",
+      "slug": "scrap-metal-master",
+      "image": "/Anime%20Vanguards/Memorias/scrap-metal-master.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Scrap Pirate",
+      "passiveNames": "Captain of the Crew",
+      "passiveSummary": "Captain of the Crew: Buff damage from Active abilities, and damage dealt while an Active is active, by 50%. Locked specialty passives: Heavy Metal.",
+      "lockedPassiveNames": "Heavy Metal",
+      "lockedPassiveSummary": "Heavy Metal: Damage dealt by this unit's Active abilities inflicts Bleed for 50% of the damage dealt over 8 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Green Essence x20; Pink Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "3",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Scrap_Metal_Master",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 12,
+      "rawLuaKey": "Scrap Metal Master",
+      "rawPassiveData": [
+        {
+          "description": "Buff damage from Active abilities, and damage dealt while an Active is active, by 50%.",
+          "name": "Captain of the Crew"
+        },
+        {
+          "locked": true,
+          "name": "Heavy Metal",
+          "description": "Damage dealt by this unit's Active abilities inflicts Bleed for 50% of the damage dealt over 8 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Pink Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3012,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/8/86/Scrap_Metal_Master.png",
+      "imageCandidateFile": "Scrap_Metal_Master.png",
+      "cardSummary": "Scrap Metal Master is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Scrap Pirate. It can evolve for 30,000 using Green Essence x20; Pink Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Master of Toads",
+      "slug": "master-of-toads",
+      "image": "/Anime%20Vanguards/Memorias/master-of-toads.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Toad Shinobi",
+      "passiveNames": "Sage of Toads",
+      "passiveSummary": "Sage of Toads: Whenever this unit applies Slow, also apply Nullify. Locked specialty passives: Summoning of Toads.",
+      "lockedPassiveNames": "Summoning of Toads",
+      "lockedPassiveSummary": "Summoning of Toads: When this unit is placed via Ninjutsu, buff this unit's damage by 80% for 30 seconds.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Yellow Essence x20; Green Essence x20; Hand-Written Book x1; Rainbow Essence x2; Shamrock x1",
+      "evolutionMaterialCount": "5",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Master_of_Toads",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 19,
+      "rawLuaKey": "Master of Toads",
+      "rawPassiveData": [
+        {
+          "description": "Whenever this unit applies Slow, also apply Nullify.",
+          "name": "Sage of Toads"
+        },
+        {
+          "locked": true,
+          "name": "Summoning of Toads",
+          "description": "When this unit is placed via Ninjutsu, buff this unit's damage by 80% for 30 seconds."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Yellow Essence",
+          "amount": 20
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Hand-Written Book",
+          "amount": 1
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 2
+        },
+        {
+          "name": "Shamrock",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3019,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/4/4f/Master_of_Toads.png",
+      "imageCandidateFile": "Master_of_Toads.png",
+      "cardSummary": "Master of Toads is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Toad Shinobi. It can evolve for 30,000 using Yellow Essence x20; Green Essence x20; Hand-Written Book x1; Rainbow Essence x2; Shamrock x1."
+    },
+    {
+      "name": "Lifeforce Absorption",
+      "slug": "lifeforce-absorption",
+      "image": "/Anime%20Vanguards/Memorias/lifeforce-absorption.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Fruit Eater",
+      "passiveNames": "Category Leader",
+      "passiveSummary": "Category Leader: Whenever this unit spends meter, refund 30% of the meter spent; If this unit is a Dragon Sphere category unit, increase the refund to 60%. Locked specialty passives: Space Traveling Warrior.",
+      "lockedPassiveNames": "Space Traveling Warrior",
+      "lockedPassiveSummary": "Space Traveling Warrior: When this unit buffs another unit, buff this unit by the same amount.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Rainbow Essence x1; Green Essence x20; Shamrock x1; Purple Essence x20; Strong Fruit x1",
+      "evolutionMaterialCount": "5",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Lifeforce_Absorption",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 20,
+      "rawLuaKey": "Lifeforce Absorption",
+      "rawPassiveData": [
+        {
+          "description": "Whenever this unit spends meter, refund 30% of the meter spent; If this unit is a Dragon Sphere category unit, increase the refund to 60%.",
+          "name": "Category Leader"
+        },
+        {
+          "locked": true,
+          "name": "Space Traveling Warrior",
+          "description": "When this unit buffs another unit, buff this unit by the same amount."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Shamrock",
+          "amount": 1
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 20
+        },
+        {
+          "name": "Strong Fruit",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3020,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/a/ac/Lifeforce_Absorption.png",
+      "imageCandidateFile": "Lifeforce_Absorption.png",
+      "cardSummary": "Lifeforce Absorption is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Fruit Eater. It can evolve for 30,000 using Rainbow Essence x1; Green Essence x20; Shamrock x1; Purple Essence x20; Strong Fruit x1."
+    },
+    {
+      "name": "Devoted Dedication",
+      "slug": "devoted-dedication",
+      "image": "/Anime%20Vanguards/Memorias/devoted-dedication.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Devoted Demon",
+      "passiveNames": "Undead Army",
+      "passiveSummary": "Undead Army: If this unit is a Curse unit, buff this unit's damage by 40%. Locked specialty passives: Lover's Support.",
+      "lockedPassiveNames": "Lover's Support",
+      "lockedPassiveSummary": "Lover's Support: Buff damage of any unit in range with Affection by 20%.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Shamrock x1; Green Essence x20; Cursed Axe x1; Purple Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "5",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Devoted_Dedication",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 21,
+      "rawLuaKey": "Devoted Dedication",
+      "rawPassiveData": [
+        {
+          "description": "If this unit is a Curse unit, buff this unit's damage by 40%.",
+          "name": "Undead Army"
+        },
+        {
+          "locked": true,
+          "name": "Lover's Support",
+          "description": "Buff damage of any unit in range with Affection by 20%."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Shamrock",
+          "amount": 1
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Cursed Axe",
+          "amount": 1
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3021,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/c/c6/Devoted_Dedication.png",
+      "imageCandidateFile": "Devoted_Dedication.png",
+      "cardSummary": "Devoted Dedication is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Devoted Demon. It can evolve for 30,000 using Shamrock x1; Green Essence x20; Cursed Axe x1; Purple Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Revenge of the Cursed One",
+      "slug": "revenge-of-the-cursed-one",
+      "image": "/Anime%20Vanguards/Memorias/revenge-of-the-cursed-one.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Cursed Shinobi",
+      "passiveNames": "Black Flames",
+      "passiveSummary": "Black Flames: When this unit applies a DoT on an enemy for the first time, that DoT does 50% more damage. Locked specialty passives: Hunter of Revenge.",
+      "lockedPassiveNames": "Hunter of Revenge",
+      "lockedPassiveSummary": "Hunter of Revenge: Whenever an enemy that was inflicted by Black Flames in this unit's range dies, this unit does a follow up attack. (2 second cooldown)",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Cursed Chakra x1; Rainbow Essence x1; Purple Essence x20; Green Essence x20",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Revenge_of_the_Cursed_One",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 24,
+      "rawLuaKey": "Revenge of the Cursed One",
+      "rawPassiveData": [
+        {
+          "description": "When this unit applies a DoT on an enemy for the first time, that DoT does 50% more damage.",
+          "name": "Black Flames"
+        },
+        {
+          "locked": true,
+          "name": "Hunter of Revenge",
+          "description": "Whenever an enemy that was inflicted by Black Flames in this unit's range dies, this unit does a follow up attack. (2 second cooldown)"
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Cursed Chakra",
+          "amount": 1
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 20
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        }
+      ],
+      "sortOrder": 3024,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/a/a9/Revenge_of_the_Cursed_One.png",
+      "imageCandidateFile": "Revenge_of_the_Cursed_One.png",
+      "cardSummary": "Revenge of the Cursed One is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Cursed Shinobi. It can evolve for 30,000 using Cursed Chakra x1; Rainbow Essence x1; Purple Essence x20; Green Essence x20."
+    },
+    {
+      "name": "A Father's Sacrifice",
+      "slug": "a-father-s-sacrifice",
+      "image": "/Anime%20Vanguards/Memorias/a-father-s-sacrifice.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Fastest Shinobi",
+      "passiveNames": "The Teleporting Shinobi",
+      "passiveSummary": "The Teleporting Shinobi: Anytime this unit moves locations, buff Damage by 30% for 30 seconds. Locked specialty passives: A Father's Duty.",
+      "lockedPassiveNames": "A Father's Duty",
+      "lockedPassiveSummary": "A Father's Duty: Anytime this unit does Attack 4, does 50% more damage.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Green Essence x20; Yellow Essence x20; Lightning Kunai x12; Rainbow Essence x1",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#A_Father's_Sacrifice",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 25,
+      "rawLuaKey": "A Father's Sacrifice",
+      "rawPassiveData": [
+        {
+          "description": "Anytime this unit moves locations, buff Damage by 30% for 30 seconds.",
+          "name": "The Teleporting Shinobi"
+        },
+        {
+          "locked": true,
+          "name": "A Father's Duty",
+          "description": "Anytime this unit does Attack 4, does 50% more damage."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 20
+        },
+        {
+          "name": "Lightning Kunai",
+          "amount": 12
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3025,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/0/08/A_Father%27s_Sacrifice.png",
+      "imageCandidateFile": "A_Father's_Sacrifice.png",
+      "cardSummary": "A Father's Sacrifice is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Fastest Shinobi. It can evolve for 30,000 using Green Essence x20; Yellow Essence x20; Lightning Kunai x12; Rainbow Essence x1."
+    },
+    {
+      "name": "Late Night Shift",
+      "slug": "late-night-shift",
+      "image": "/Anime%20Vanguards/Memorias/late-night-shift.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Demon Hunter",
+      "passiveNames": "Expiration of Life",
+      "passiveSummary": "Expiration of Life: Anytime this unit Slows an enemy, deal an instance of damage equal to 50% of this units damage. Locked specialty passives: Demonic Contractor.",
+      "lockedPassiveNames": "Demonic Contractor",
+      "lockedPassiveSummary": "Demonic Contractor: When placed is given the option to buff own damage by 50% but increase cost by 30%.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Cursed Bullet x1; Purple Essence x20; Green Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Late_Night_Shift",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 37,
+      "rawLuaKey": "Late Night Shift",
+      "rawPassiveData": [
+        {
+          "description": "Anytime this unit Slows an enemy, deal an instance of damage equal to 50% of this units damage.",
+          "name": "Expiration of Life"
+        },
+        {
+          "locked": true,
+          "name": "Demonic Contractor",
+          "description": "When placed is given the option to buff own damage by 50% but increase cost by 30%."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Cursed Bullet",
+          "amount": 1
+        },
+        {
+          "name": "Purple Essence",
+          "amount": 20
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3037,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/b/bb/Late_Night_Shift.png",
+      "imageCandidateFile": "Late_Night_Shift.png",
+      "cardSummary": "Late Night Shift is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Demon Hunter. It can evolve for 30,000 using Cursed Bullet x1; Purple Essence x20; Green Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Drops of Serenity",
+      "slug": "drops-of-serenity",
+      "image": "/Anime%20Vanguards/Memorias/drops-of-serenity.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Explosive Demon",
+      "passiveNames": "Foreign Training",
+      "passiveSummary": "Foreign Training: When attacking a Primed enemy deal 30% more damage Locked specialty passives: Shockwave.",
+      "lockedPassiveNames": "Shockwave",
+      "lockedPassiveSummary": "Shockwave: Anytime a Primed enemy is detonated, Repulse all enemies hit by the explosion.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Grenade Pin x12; Yellow Essence x20; Green Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Drops_of_Serenity",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 38,
+      "rawLuaKey": "Drops of Serenity",
+      "rawPassiveData": [
+        {
+          "description": "When attacking a Primed enemy deal 30% more damage",
+          "name": "Foreign Training"
+        },
+        {
+          "locked": true,
+          "name": "Shockwave",
+          "description": "Anytime a Primed enemy is detonated, Repulse all enemies hit by the explosion."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Grenade Pin",
+          "amount": 12
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 20
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3038,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/6/66/Drops_of_Serenity.png",
+      "imageCandidateFile": "Drops_of_Serenity.png",
+      "cardSummary": "Drops of Serenity is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Explosive Demon. It can evolve for 30,000 using Grenade Pin x12; Yellow Essence x20; Green Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "POWAHH!!!",
+      "slug": "powahh",
+      "image": "/Anime%20Vanguards/Memorias/powahh.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Delusional Demon",
+      "passiveNames": "Coagulation",
+      "passiveSummary": "Coagulation: When this unit applies Bleed, buff damage by 30% for 10 seconds. Locked specialty passives: Chaotic Delusions.",
+      "lockedPassiveNames": "Chaotic Delusions",
+      "lockedPassiveSummary": "Chaotic Delusions: Anytime a Bleed is applied in range, gain 5% meter.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Blood Sword x12; Red Essence x20; Green Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#POWAHH!!!",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 39,
+      "rawLuaKey": "POWAHH!!!",
+      "rawPassiveData": [
+        {
+          "description": "When this unit applies Bleed, buff damage by 30% for 10 seconds.",
+          "name": "Coagulation"
+        },
+        {
+          "locked": true,
+          "name": "Chaotic Delusions",
+          "description": "Anytime a Bleed is applied in range, gain 5% meter."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Blood Sword",
+          "amount": 12
+        },
+        {
+          "name": "Red Essence",
+          "amount": 20
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3039,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/2/27/POWAHH%21%21%21.png",
+      "imageCandidateFile": "POWAHH!!!.png",
+      "cardSummary": "POWAHH!!! is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Delusional Demon. It can evolve for 30,000 using Blood Sword x12; Red Essence x20; Green Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Golden Obsessions",
+      "slug": "golden-obsessions",
+      "image": "/Anime%20Vanguards/Memorias/golden-obsessions.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Tempest Pirate",
+      "passiveNames": "All That Glitters",
+      "passiveSummary": "All That Glitters: Increases Yen gain by 20%. Locked specialty passives: Treasure Hunter.",
+      "lockedPassiveNames": "Treasure Hunter",
+      "lockedPassiveSummary": "Treasure Hunter: Every Chest obtained increases the amount of yen the next chest gives by 10%. (Player Specific and Stacking)",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Weather Rod x12; Yellow Essence x20; Green Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "4",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Golden_Obsessions",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 40,
+      "rawLuaKey": "Golden Obsessions",
+      "rawPassiveData": [
+        {
+          "description": "Increases Yen gain by 20%.",
+          "name": "All That Glitters"
+        },
+        {
+          "locked": true,
+          "name": "Treasure Hunter",
+          "description": "Every Chest obtained increases the amount of yen the next chest gives by 10%. (Player Specific and Stacking)"
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Weather Rod",
+          "amount": 12
+        },
+        {
+          "name": "Yellow Essence",
+          "amount": 20
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3040,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/4/45/Golden_Obsessions.png",
+      "imageCandidateFile": "Golden_Obsessions.png",
+      "cardSummary": "Golden Obsessions is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Tempest Pirate. It can evolve for 30,000 using Weather Rod x12; Yellow Essence x20; Green Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Frozen Admiral",
+      "slug": "frozen-admiral",
+      "image": "/Anime%20Vanguards/Memorias/frozen-admiral.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Ice Manipulator",
+      "passiveNames": "Pirate Hunter",
+      "passiveSummary": "Pirate Hunter: When attacking an enemy inflicted with Wanted, increases damage dealt by 30%. Locked specialty passives: Admiral of Ice.",
+      "lockedPassiveNames": "Admiral of Ice",
+      "lockedPassiveSummary": "Admiral of Ice: When attacking an enemy inflicted with Wanted, follows up with Attack 2 for 30% of this units damage. (5 second cooldown)",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Ice Fruit x1; Snowflake x1; Green Essence x20; Blue Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "5",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Frozen_Admiral",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 41,
+      "rawLuaKey": "Frozen Admiral",
+      "rawPassiveData": [
+        {
+          "description": "When attacking an enemy inflicted with Wanted, increases damage dealt by 30%.",
+          "name": "Pirate Hunter"
+        },
+        {
+          "locked": true,
+          "name": "Admiral of Ice",
+          "description": "When attacking an enemy inflicted with Wanted, follows up with Attack 2 for 30% of this units damage. (5 second cooldown)"
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Ice Fruit",
+          "amount": 1
+        },
+        {
+          "name": "Snowflake",
+          "amount": 1
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Blue Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3041,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/c/ce/Frozen_Admiral.png",
+      "imageCandidateFile": "Frozen_Admiral.png",
+      "cardSummary": "Frozen Admiral is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Ice Manipulator. It can evolve for 30,000 using Ice Fruit x1; Snowflake x1; Green Essence x20; Blue Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Tough Bunny",
+      "slug": "tough-bunny",
+      "image": "/Anime%20Vanguards/Memorias/tough-bunny.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Rabbit Hero",
+      "passiveNames": "Brawler",
+      "passiveSummary": "Brawler: Stun duration on this unit is halved. Locked specialty passives: Prey Becomes Predator.",
+      "lockedPassiveNames": "Prey Becomes Predator",
+      "lockedPassiveSummary": "Prey Becomes Predator: Whenever this unit follows up with Attack 3, move this unit to the nearest available position next to the track.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Carrot x1; Snowflake x1; Green Essence x20; Pink Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "5",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Tough_Bunny",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 48,
+      "rawLuaKey": "Tough Bunny",
+      "rawPassiveData": [
+        {
+          "description": "Stun duration on this unit is halved.",
+          "name": "Brawler"
+        },
+        {
+          "locked": true,
+          "name": "Prey Becomes Predator",
+          "description": "Whenever this unit follows up with Attack 3, move this unit to the nearest available position next to the track."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Carrot",
+          "amount": 1
+        },
+        {
+          "name": "Snowflake",
+          "amount": 1
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Pink Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3048,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/3/33/Tough_Bunny.png",
+      "imageCandidateFile": "Tough_Bunny.png",
+      "cardSummary": "Tough Bunny is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Rabbit Hero. It can evolve for 30,000 using Carrot x1; Snowflake x1; Green Essence x20; Pink Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "King of the Trash",
+      "slug": "king-of-the-trash",
+      "image": "/Anime%20Vanguards/Memorias/king-of-the-trash.png",
+      "catalogSection": "Mythic",
+      "rarity": "Mythic",
+      "rawRarity": "Mythic",
+      "baseDamage": "2300",
+      "baseRange": "2",
+      "exclusiveUnits": "Trash Gamer",
+      "passiveNames": "Expert Skill",
+      "passiveSummary": "Expert Skill: Gains 10% Crit Chance; Anytime a status effect or debuff would apply to this unit, ignores that application and becomes immune to both for 5 seconds. (40 Second cooldown) Locked specialty passives: Loot Goblin.",
+      "lockedPassiveNames": "Loot Goblin",
+      "lockedPassiveSummary": "Loot Goblin: Gains 20% more yen when killing an enemy, this number becomes 40% after the ability Skill Garden is first used.",
+      "evolvable": "Yes",
+      "evolutionCost": "30,000",
+      "evolutionMaterials": "Deadly Dagger x1; Snowflake x1; Green Essence x20; Red Essence x20; Rainbow Essence x1",
+      "evolutionMaterialCount": "5",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#King_of_the_Trash",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 54,
+      "rawLuaKey": "King of the Trash",
+      "rawPassiveData": [
+        {
+          "description": "Gains 10% Crit Chance; Anytime a status effect or debuff would apply to this unit, ignores that application and becomes immune to both for 5 seconds. (40 Second cooldown)",
+          "name": "Expert Skill"
+        },
+        {
+          "locked": true,
+          "name": "Loot Goblin",
+          "description": "Gains 20% more yen when killing an enemy, this number becomes 40% after the ability Skill Garden is first used."
+        }
+      ],
+      "rawEvolutionMaterials": [
+        {
+          "name": "Deadly Dagger",
+          "amount": 1
+        },
+        {
+          "name": "Snowflake",
+          "amount": 1
+        },
+        {
+          "name": "Green Essence",
+          "amount": 20
+        },
+        {
+          "name": "Red Essence",
+          "amount": 20
+        },
+        {
+          "name": "Rainbow Essence",
+          "amount": 1
+        }
+      ],
+      "sortOrder": 3054,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/2/2e/King_of_the_Trash.png",
+      "imageCandidateFile": "King_of_the_Trash.png",
+      "cardSummary": "King of the Trash is a Mythic Memoria with 2300 base damage and 2 base range. It has specialty support for Trash Gamer. It can evolve for 30,000 using Deadly Dagger x1; Snowflake x1; Green Essence x20; Red Essence x20; Rainbow Essence x1."
+    },
+    {
+      "name": "Power Surge",
+      "slug": "power-surge",
+      "image": "/Anime%20Vanguards/Memorias/power-surge.png",
+      "catalogSection": "Legendary",
+      "rarity": "Legendary",
+      "rawRarity": "Legendary",
+      "baseDamage": "1200",
+      "baseRange": "1",
+      "exclusiveUnits": "",
+      "passiveNames": "Power Surge",
+      "passiveSummary": "Power Surge: Increases Damage by 20%.",
+      "lockedPassiveNames": "",
+      "lockedPassiveSummary": "",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Power_Surge",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 43,
+      "rawLuaKey": "Power Surge",
+      "rawPassiveData": [
+        {
+          "description": "Increases Damage by 20%.",
+          "name": "Power Surge"
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 4043,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/f/f1/Power_Surge.png",
+      "imageCandidateFile": "Power_Surge.png",
+      "cardSummary": "Power Surge is a Legendary Memoria with 1200 base damage and 1 base range. It is not marked as evolvable in the current source module."
+    },
+    {
+      "name": "Artist's Blessing",
+      "slug": "artist-s-blessing",
+      "image": "/Anime%20Vanguards/Memorias/artist-s-blessing.png",
+      "catalogSection": "Legendary",
+      "rarity": "Legendary",
+      "rawRarity": "Legendary",
+      "baseDamage": "1200",
+      "baseRange": "1",
+      "exclusiveUnits": "",
+      "passiveNames": "Event Currency Boost",
+      "passiveSummary": "Event Currency Boost: Increases Seasonal Event Currency Earned by 5%.",
+      "lockedPassiveNames": "",
+      "lockedPassiveSummary": "",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Artist's_Blessing",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 44,
+      "rawLuaKey": "Artist's Blessing",
+      "rawPassiveData": [
+        {
+          "description": "Increases Seasonal Event Currency Earned by 5%.",
+          "name": "Event Currency Boost"
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 4044,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/1/18/Artist%27s_Blessing.png",
+      "imageCandidateFile": "Artist's_Blessing.png",
+      "cardSummary": "Artist's Blessing is a Legendary Memoria with 1200 base damage and 1 base range. It is not marked as evolvable in the current source module."
+    },
+    {
+      "name": "Gambling Fanatic",
+      "slug": "gambling-fanatic",
+      "image": "/Anime%20Vanguards/Memorias/gambling-fanatic.png",
+      "catalogSection": "Legendary",
+      "rarity": "Legendary",
+      "rawRarity": "Legendary",
+      "baseDamage": "1200",
+      "baseRange": "1",
+      "exclusiveUnits": "Takaroda",
+      "passiveNames": "",
+      "passiveSummary": "Hardcore Gambler: Upgrades decrease cost by 5%. (Stacking) Locked specialty passives: Hardcore Gambler.",
+      "lockedPassiveNames": "Hardcore Gambler",
+      "lockedPassiveSummary": "Hardcore Gambler: Upgrades decrease cost by 5%. (Stacking)",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Gambling_Fanatic",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 45,
+      "rawLuaKey": "Gambling Fanatic",
+      "rawPassiveData": [
+        {
+          "locked": true,
+          "name": "Hardcore Gambler",
+          "description": "Upgrades decrease cost by 5%. (Stacking)"
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 4045,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/b/b8/Gambling_Fanatic.png",
+      "imageCandidateFile": "Gambling_Fanatic.png",
+      "cardSummary": "Gambling Fanatic is a Legendary Memoria with 1200 base damage and 1 base range. It has specialty support for Takaroda. It is not marked as evolvable in the current source module."
+    },
+    {
+      "name": "Water Goddess's Cheer",
+      "slug": "water-goddess-s-cheer",
+      "image": "/Anime%20Vanguards/Memorias/water-goddess-s-cheer.png",
+      "catalogSection": "Epic",
+      "rarity": "Epic",
+      "rawRarity": "Epic",
+      "baseDamage": "600",
+      "baseRange": "1",
+      "exclusiveUnits": "",
+      "passiveNames": "Wave Power",
+      "passiveSummary": "Wave Power: Increases Damage by 2% per wave. (Up to 30%)",
+      "lockedPassiveNames": "",
+      "lockedPassiveSummary": "",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Water_Goddess's_Cheer",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 42,
+      "rawLuaKey": "Water Goddess's Cheer",
+      "rawPassiveData": [
+        {
+          "description": "Increases Damage by 2% per wave. (Up to 30%)",
+          "name": "Wave Power"
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 5042,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/2/22/Water_Goddess%27s_Cheer.png",
+      "imageCandidateFile": "Water_Goddess's_Cheer.png",
+      "cardSummary": "Water Goddess's Cheer is a Epic Memoria with 600 base damage and 1 base range. It is not marked as evolvable in the current source module."
+    },
+    {
+      "name": "DoT Amplifier",
+      "slug": "dot-amplifier",
+      "image": "/Anime%20Vanguards/Memorias/dot-amplifier.png",
+      "catalogSection": "Epic",
+      "rarity": "Epic",
+      "rawRarity": "Epic",
+      "baseDamage": "600",
+      "baseRange": "1",
+      "exclusiveUnits": "",
+      "passiveNames": "DoT Amplifier",
+      "passiveSummary": "DoT Amplifier: Increases DoT damage by 30%.",
+      "lockedPassiveNames": "",
+      "lockedPassiveSummary": "",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#DoT_Amplifier",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 50,
+      "rawLuaKey": "DoT Amplifier",
+      "rawPassiveData": [
+        {
+          "description": "Increases DoT damage by 30%.",
+          "name": "DoT Amplifier"
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 5050,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/5/54/DoT_Amplifier.png",
+      "imageCandidateFile": "DoT_Amplifier.png",
+      "cardSummary": "DoT Amplifier is a Epic Memoria with 600 base damage and 1 base range. It is not marked as evolvable in the current source module."
+    },
+    {
+      "name": "Young Entrepreneur",
+      "slug": "young-entrepreneur",
+      "image": "/Anime%20Vanguards/Memorias/young-entrepreneur.png",
+      "catalogSection": "Epic",
+      "rarity": "Epic",
+      "rawRarity": "Epic",
+      "baseDamage": "600",
+      "baseRange": "1",
+      "exclusiveUnits": "Sprintwagon",
+      "passiveNames": "Yen Mastery",
+      "passiveSummary": "Yen Mastery: (Sprintwagon Exclusive) Increases Yen gain by 100%; Every placed placement of Sprintwagon reduces this amount by 50% excluding the first.",
+      "lockedPassiveNames": "",
+      "lockedPassiveSummary": "",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Young_Entrepreneur",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 52,
+      "rawLuaKey": "Young Entrepreneur",
+      "rawPassiveData": [
+        {
+          "description": "(Sprintwagon Exclusive) Increases Yen gain by 100%; Every placed placement of Sprintwagon reduces this amount by 50% excluding the first.",
+          "name": "Yen Mastery"
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 5052,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/4/49/Young_Entrepreneur.png",
+      "imageCandidateFile": "Young_Entrepreneur.png",
+      "cardSummary": "Young Entrepreneur is a Epic Memoria with 600 base damage and 1 base range. It has specialty support for Sprintwagon. It is not marked as evolvable in the current source module."
+    },
+    {
+      "name": "Range Boost I",
+      "slug": "range-boost-i",
+      "image": "/Anime%20Vanguards/Memorias/range-boost-i.png",
+      "catalogSection": "Rare",
+      "rarity": "Rare",
+      "rawRarity": "Rare",
+      "baseDamage": "100",
+      "baseRange": "1",
+      "exclusiveUnits": "",
+      "passiveNames": "Range Boost",
+      "passiveSummary": "Range Boost: Buffs Range by 5%.",
+      "lockedPassiveNames": "",
+      "lockedPassiveSummary": "",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Range_Boost_I",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 49,
+      "rawLuaKey": "Range Boost I",
+      "rawPassiveData": [
+        {
+          "description": "Buffs Range by 5%.",
+          "name": "Range Boost"
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 6049,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/d/de/Range_Boost_I.png",
+      "imageCandidateFile": "Range_Boost_I.png",
+      "cardSummary": "Range Boost I is a Rare Memoria with 100 base damage and 1 base range. It is not marked as evolvable in the current source module."
+    },
+    {
+      "name": "Speed Boost I",
+      "slug": "speed-boost-i",
+      "image": "/Anime%20Vanguards/Memorias/speed-boost-i.png",
+      "catalogSection": "Rare",
+      "rarity": "Rare",
+      "rawRarity": "Rare",
+      "baseDamage": "100",
+      "baseRange": "1",
+      "exclusiveUnits": "",
+      "passiveNames": "Speed Boost",
+      "passiveSummary": "Speed Boost: Decreases SPA by 5%.",
+      "lockedPassiveNames": "",
+      "lockedPassiveSummary": "",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Speed_Boost_I",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 51,
+      "rawLuaKey": "Speed Boost I",
+      "rawPassiveData": [
+        {
+          "description": "Decreases SPA by 5%.",
+          "name": "Speed Boost"
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 6051,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/1/16/Speed_Boost_I.png",
+      "imageCandidateFile": "Speed_Boost_I.png",
+      "cardSummary": "Speed Boost I is a Rare Memoria with 100 base damage and 1 base range. It is not marked as evolvable in the current source module."
+    },
+    {
+      "name": "Damage Boost I",
+      "slug": "damage-boost-i",
+      "image": "/Anime%20Vanguards/Memorias/damage-boost-i.png",
+      "catalogSection": "Rare",
+      "rarity": "Rare",
+      "rawRarity": "Rare",
+      "baseDamage": "100",
+      "baseRange": "1",
+      "exclusiveUnits": "",
+      "passiveNames": "Damage Boost",
+      "passiveSummary": "Damage Boost: Buffs Damage by 10%.",
+      "lockedPassiveNames": "",
+      "lockedPassiveSummary": "",
+      "evolvable": "No",
+      "evolutionCost": "",
+      "evolutionMaterials": "",
+      "evolutionMaterialCount": "",
+      "sourceStatus": "Memoria page + MemoriaData module",
+      "wikiUrl": "https://wiki.vanguards.gg/Memoria#Damage_Boost_I",
+      "sourceUrls": [
+        "https://wiki.vanguards.gg/Memoria",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData/data?action=raw",
+        "https://wiki.vanguards.gg/wiki/Module:MemoriaData?action=raw"
+      ],
+      "sourceRevision": "Module:MemoriaData/data rev 31306; Memoria page rev 31285",
+      "sourceCheckedAt": "2026-06-22",
+      "sourceOrder": 55,
+      "rawLuaKey": "Damage Boost I",
+      "rawPassiveData": [
+        {
+          "description": "Buffs Damage by 10%.",
+          "name": "Damage Boost"
+        }
+      ],
+      "rawEvolutionMaterials": [],
+      "sortOrder": 6055,
+      "rarityTextSource": "Source rarity used directly",
+      "imageStatus": "downloaded-from-wiki-memoria-page",
+      "imageSource": "https://static.wikitide.net/vanguardswiki/3/31/Damage_Boost_I.png",
+      "imageCandidateFile": "Damage_Boost_I.png",
+      "cardSummary": "Damage Boost I is a Rare Memoria with 100 base damage and 1 base range. It is not marked as evolvable in the current source module."
+    }
+  ]
+}
