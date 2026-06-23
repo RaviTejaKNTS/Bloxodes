@@ -23,6 +23,7 @@ This file is the quick reference for what exists today and how to invoke it.
 | Universe description generation | `scripts/universes/generate-universe-description.ts` | `npm run generate:universe-description` |
 | Queue event guides | `scripts/events/queue-event-guides.ts` | `npm run queue:event-guides` |
 | Public copy quality check | `scripts/content/check-public-copy.ts` | `npm run content:check-copy -- <final.json>` |
+| Import reviewed tool final JSON into Supabase | `scripts/content/import-tool-finals.ts` | `npm run import:tool-finals -- --file tmp/content-workspace/<topic-slug>/tools/<tool-code>/final.json --dry-run`; production writes require `NODE_ENV=production` plus `--allow-prod` and verify the saved `tools` row |
 ### Code Page Workflow Hard Rules
 
 `scripts/codes/update-codes.ts` is the source of truth for active and expired code rows. It reads `code_pages.source_url` and `code_pages.source_url_2`, detects supported providers, scrapes the source pages, upserts active codes, and expires codes that disappear from the supported sources.
