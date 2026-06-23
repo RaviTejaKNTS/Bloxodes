@@ -6,6 +6,7 @@ import {
   ArrowDownRight,
   ArrowUpRight,
   BadgeCheck,
+  BarChart3,
   BookOpen,
   CalendarDays,
   ChevronDown,
@@ -17,6 +18,7 @@ import {
   Layers,
   Play,
   Search,
+  ShoppingBag,
   Star,
   Trophy,
   Users
@@ -30,11 +32,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { StatsGamesAutoSubmit } from "@/app/(site)/stats/components/StatsGamesAutoSubmit";
 import { StatsChartPanel } from "@/app/(site)/stats/components/StatsChartPanel";
+import { StatsItemImage } from "@/app/(site)/stats/components/StatsItemImage";
+import { StatsItemChartPanel } from "@/app/(site)/stats/components/StatsItemChartPanel";
 import { StatsRankChartPanel } from "@/app/(site)/stats/components/StatsRankChartPanel";
 import {
   DEFAULT_STATS_GAME_COLUMNS,
   STATS_CREATOR_SORT_OPTIONS,
   STATS_GAME_COLUMN_OPTIONS,
+  STATS_ITEM_CATEGORY_OPTIONS,
+  STATS_ITEM_CREATOR_OPTIONS,
+  STATS_ITEM_SALE_OPTIONS,
+  STATS_ITEM_SORT_OPTIONS,
+  STATS_ITEM_SUBCATEGORY_OPTIONS,
   STATS_SORT_OPTIONS,
   type StatsCreator,
   type StatsCreatorSortKey,
@@ -45,6 +54,10 @@ import {
   type StatsGameDetailData,
   type StatsGamesPageData,
   type StatsHomeData,
+  type StatsItem,
+  type StatsItemDetailData,
+  type StatsItemSortKey,
+  type StatsItemsPageData,
   type StatsRelatedLink,
   type StatsSortKey,
   type StatsSubgenreOption,
@@ -80,6 +93,22 @@ function gameImage(game: Pick<StatsGame, "iconUrl" | "name">, size = 44, loading
       style={{ width: size, height: size }}
     />
   );
+}
+
+function itemImage(item: Pick<StatsItem, "thumbnailUrl" | "name">, size = 44, loading: "eager" | "lazy" = "lazy") {
+  return (
+    <StatsItemImage
+      src={item.thumbnailUrl}
+      alt={`${item.name} thumbnail`}
+      size={size}
+      loading={loading}
+    />
+  );
+}
+
+function itemStatsHref(item: Pick<StatsItem, "assetId" | "itemType">) {
+  const routeId = item.itemType === "Bundle" ? Math.abs(item.assetId) : item.assetId;
+  return `/stats/items/${routeId}`;
 }
 
 function DeltaPill({ value, percent }: { value?: number | null; percent?: number | null }) {
@@ -544,10 +573,10 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Roblox Stats</p>
           <h1 className="mb-0 mt-2 text-3xl font-semibold leading-tight text-foreground md:text-4xl">Live Roblox game stats</h1>
           <p className="mt-3 text-sm font-medium leading-6 text-muted">
-            Public Roblox game data tracked by Bloxodes, refreshed regularly for players, creators, and researchers.
+            Public Roblox game, creator, and marketplace item data tracked by Bloxodes for players, creators, and researchers.
           </p>
         </div>
-        <form action="/stats/games" className="flex w-full max-w-xl gap-2">
+        <form action="/stats/games" className="flex w-full max-w-2xl flex-wrap gap-2">
           <div className="relative flex-1">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" aria-hidden />
             <Input name="q" type="search" placeholder="Search games" className="h-10 rounded-md bg-surface pl-9" />
@@ -558,10 +587,13 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           <Button asChild variant="outline" className="rounded-md">
             <Link href="/stats/creators">Creators</Link>
           </Button>
+          <Button asChild variant="outline" className="rounded-md">
+            <Link href="/stats/items">Items</Link>
+          </Button>
         </form>
       </header>
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
         <MetricCard
           label="Platform CCU"
           value={formatCompactNumber(data.totals.livePlayers)}
@@ -570,6 +602,7 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           href="#platform-ccu-trend"
         />
         <MetricCard label="Tracked games" value={formatFullNumber(data.totals.trackedGames)} detail="Public stats index" icon={Gamepad2} href="/stats/games" />
+        <MetricCard label="Marketplace items" value="Browse" detail="Favorites, prices, resale, and creators" icon={ShoppingBag} href="/stats/items" />
         <MetricCard
           label="Platform visits"
           value={formatCompactNumber(data.totals.totalVisits)}
@@ -614,6 +647,400 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
         </Card>
         <GameListPanel title="Most visited games" games={data.mostVisited.slice(0, 8)} metric="visits" href="/stats/games?sort=visits" />
       </div>
+    </div>
+  );
+}
+
+function prettyStatsItemLabel(value: string | null | undefined) {
+  if (!value) return "All";
+  return value
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/\bT Shirt\b/g, "T-Shirt")
+    .replace(/\bDress Skirt\b/g, "Dresses & skirts")
+    .replace(/\bBody Parts Bundles\b/g, "Full bodies")
+    .replace(/\bAvatar Animations\b/g, "Avatar animations")
+    .trim();
+}
+
+function itemPriceLabel(value: number | null | undefined) {
+  if (value == null) return "-";
+  if (value === 0) return "Free";
+  return `R$ ${formatFullNumber(value)}`;
+}
+
+function itemPageHref(
+  data: StatsItemsPageData,
+  page: number,
+  overrides: Partial<Pick<StatsItemsPageData["filters"], "sort" | "category" | "subcategory" | "sale" | "creator">> = {}
+) {
+  const params = new URLSearchParams();
+  if (data.filters.q) params.set("q", data.filters.q);
+  const sort = overrides.sort ?? data.filters.sort;
+  const category = overrides.category ?? data.filters.category;
+  const subcategory = overrides.subcategory ?? data.filters.subcategory;
+  const sale = overrides.sale ?? data.filters.sale;
+  const creator = overrides.creator ?? data.filters.creator;
+  if (sort !== "favorites") params.set("sort", sort);
+  if (category) params.set("category", category);
+  if (subcategory) params.set("subcategory", subcategory);
+  if (sale !== "all") params.set("sale", sale);
+  if (creator !== "all") params.set("creator", creator);
+  if (page > 1) params.set("page", String(page));
+  const query = params.toString();
+  return query ? `/stats/items?${query}` : "/stats/items";
+}
+
+function StatsItemSortableTableHead({
+  data,
+  sort,
+  label,
+  className
+}: {
+  data: StatsItemsPageData;
+  sort: StatsItemSortKey;
+  label: string;
+  className?: string;
+}) {
+  const active = sort === data.filters.sort;
+  return (
+    <TableHead className={className}>
+      <Link
+        href={itemPageHref(data, 1, { sort })}
+        className={cn(
+          "inline-flex w-full items-center justify-end gap-1 rounded-sm text-muted transition hover:text-foreground focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+          active && "text-foreground"
+        )}
+        aria-label={`Sort by ${label}`}
+      >
+        <span>{label}</span>
+        {active ? <ChevronDown className="h-3.5 w-3.5" aria-hidden /> : null}
+      </Link>
+    </TableHead>
+  );
+}
+
+function StatsItemMobileCard({ item }: { item: StatsItem }) {
+  return (
+    <div className="rounded-lg border border-border/60 bg-background/35 px-3 py-3">
+      <div className="flex items-start gap-3">
+        <span className="w-7 shrink-0 pt-1 text-center text-xs font-bold text-muted">#{item.rank ?? "-"}</span>
+        {itemImage(item, 44)}
+        <div className="min-w-0 flex-1">
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
+            <Link href={itemStatsHref(item)} className="mb-0 truncate text-sm font-semibold text-foreground hover:text-accent">
+              {item.name}
+            </Link>
+            {item.creatorHasVerifiedBadge ? <Badge variant="secondary" className="rounded-md px-1.5 py-0 text-[10px]"><BadgeCheck className="mr-1 h-3 w-3" aria-hidden />Verified</Badge> : null}
+          </div>
+          <p className="mt-0.5 text-xs text-muted">{prettyStatsItemLabel(item.category)} / {prettyStatsItemLabel(item.subcategory)}</p>
+          <p className="mt-1 truncate text-xs text-muted">{item.creatorName}</p>
+        </div>
+        <div className="shrink-0 text-right">
+          <p className="mb-0 text-sm font-semibold text-foreground">{formatCompactNumber(item.favoriteCount)}</p>
+          <p className="text-[11px] font-medium text-muted">favorites</p>
+        </div>
+      </div>
+      <div className="mt-3 grid grid-cols-2 gap-2 border-t border-border/50 pt-3 text-xs sm:grid-cols-3">
+        <span>
+          <span className="block font-medium uppercase tracking-[0.08em] text-muted">Price</span>
+          <span className="mt-1 block font-semibold text-foreground">{itemPriceLabel(item.priceRobux)}</span>
+        </span>
+        <span>
+          <span className="block font-medium uppercase tracking-[0.08em] text-muted">Resale</span>
+          <span className="mt-1 block font-semibold text-foreground">{item.hasResellers ? itemPriceLabel(item.lowestResalePriceRobux) : "-"}</span>
+        </span>
+        <span>
+          <span className="block font-medium uppercase tracking-[0.08em] text-muted">Seen</span>
+          <span className="mt-1 block font-semibold text-foreground">{formatRelativeStatsDate(item.lastSeenAt)}</span>
+        </span>
+      </div>
+      <Button asChild variant="outline" className="mt-3 h-9 w-full rounded-md">
+        <Link href={itemStatsHref(item)}>
+          <BarChart3 className="mr-2 h-4 w-4" aria-hidden />Stats
+        </Link>
+      </Button>
+    </div>
+  );
+}
+
+export function StatsItemsView({ data }: { data: StatsItemsPageData }) {
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Stats", href: "/stats" },
+    { label: "Items", href: null }
+  ];
+  const formStateKey = [data.filters.q, data.filters.sort, data.filters.category, data.filters.subcategory, data.filters.sale, data.filters.creator].join("\u0002");
+  const subcategoryOptions = data.filters.category
+    ? STATS_ITEM_SUBCATEGORY_OPTIONS[data.filters.category] ?? []
+    : Object.values(STATS_ITEM_SUBCATEGORY_OPTIONS).flat();
+
+  return (
+    <form key={formStateKey} action="/stats/items" className="stats-surface space-y-5" data-stats-games-form>
+      <StatsGamesAutoSubmit />
+      <header className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="space-y-3">
+          <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
+          <div>
+            <h1 className="mb-0 text-3xl font-semibold leading-tight text-foreground md:text-4xl">Roblox item stats</h1>
+            <p className="mt-2 text-sm font-medium text-muted">
+              Search Roblox marketplace items by favorites, price, resale, category, creator, and recent catalog sightings.
+            </p>
+          </div>
+        </div>
+        <div className="flex w-full max-w-xl gap-2">
+          <div className="relative flex-1">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" aria-hidden />
+            <Input name="q" type="search" defaultValue={data.filters.q} placeholder="Search items" className="h-10 rounded-md border-0 bg-surface pl-9 shadow-none" />
+          </div>
+          <Button type="submit" className="h-10 rounded-md px-4">Search</Button>
+        </div>
+      </header>
+
+      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div className="grid flex-1 gap-2 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="space-y-1">
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Category</label>
+            <Select name="category" defaultValue={data.filters.category || "all"}>
+              <SelectTrigger className="h-10 rounded-md border-border/80 bg-surface/60 shadow-none hover:border-border hover:bg-surface">
+                <SelectValue placeholder="Category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All categories</SelectItem>
+                {STATS_ITEM_CATEGORY_OPTIONS.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-1">
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Type</label>
+            <Select name="subcategory" defaultValue={data.filters.subcategory || "all"}>
+              <SelectTrigger className="h-10 rounded-md border-border/80 bg-surface/60 shadow-none hover:border-border hover:bg-surface">
+                <SelectValue placeholder="Item type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All types</SelectItem>
+                {subcategoryOptions.map((option) => <SelectItem key={`${option.value}-${option.label}`} value={option.value}>{option.label}</SelectItem>)}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-1">
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Sale</label>
+            <Select name="sale" defaultValue={data.filters.sale}>
+              <SelectTrigger className="h-10 rounded-md border-border/80 bg-surface/60 shadow-none hover:border-border hover:bg-surface">
+                <SelectValue placeholder="Sale state" />
+              </SelectTrigger>
+              <SelectContent>
+                {STATS_ITEM_SALE_OPTIONS.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-1">
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Creator</label>
+            <Select name="creator" defaultValue={data.filters.creator}>
+              <SelectTrigger className="h-10 rounded-md border-border/80 bg-surface/60 shadow-none hover:border-border hover:bg-surface">
+                <SelectValue placeholder="Creator" />
+              </SelectTrigger>
+              <SelectContent>
+                {STATS_ITEM_CREATOR_OPTIONS.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-1">
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">Sort by</label>
+            <Select name="sort" defaultValue={data.filters.sort}>
+              <SelectTrigger className="h-10 rounded-md border-border/80 bg-surface/60 shadow-none hover:border-border hover:bg-surface">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                {STATS_ITEM_SORT_OPTIONS.map((option) => <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>)}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <Button asChild type="button" variant="ghost" className="h-10 rounded-md px-4">
+          <Link href="/stats/items" data-stats-games-reset>Reset</Link>
+        </Button>
+      </div>
+
+      <Card className="overflow-hidden rounded-lg border-border/70 bg-surface/80 shadow-none">
+        <div className="hidden overflow-x-auto md:block">
+          <Table className="min-w-[1240px] table-auto">
+            <TableHeader>
+              <TableRow className="hover:bg-transparent">
+                <TableHead className="w-16 text-center">Rank</TableHead>
+                <TableHead className="min-w-[340px] text-left">Item</TableHead>
+                <TableHead className="min-w-[180px] text-left">Creator</TableHead>
+                <StatsItemSortableTableHead data={data} sort="favorites" label="Favorites" className="min-w-[120px] text-right" />
+                <StatsItemSortableTableHead data={data} sort="price_high" label="Price" className="min-w-[110px] text-right" />
+                <StatsItemSortableTableHead data={data} sort="resale_low" label="Resale" className="min-w-[110px] text-right" />
+                <TableHead className="min-w-[170px] text-left">Category</TableHead>
+                <StatsItemSortableTableHead data={data} sort="updated" label="Seen" className="min-w-[112px] text-right" />
+                <TableHead className="min-w-[96px] text-right">Roblox</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {data.items.map((item) => (
+                <TableRow key={item.assetId} className="border-border/60 hover:bg-background/40">
+                  <TableCell className="w-16 text-center font-mono text-xs text-muted">#{item.rank ?? "-"}</TableCell>
+                  <TableCell className="min-w-[340px] align-middle">
+                    <div className="flex min-w-0 items-center gap-3">
+                      <Link href={itemStatsHref(item)} aria-label={`Open stats for ${item.name}`}>
+                        {itemImage(item, 42)}
+                      </Link>
+                      <div className="min-w-0">
+                        <Link href={itemStatsHref(item)} className="block truncate text-sm font-semibold text-foreground hover:text-accent">
+                          {item.name}
+                        </Link>
+                        <p className="mt-0.5 truncate text-xs text-muted">{item.itemType} #{item.assetId}</p>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell className="min-w-[180px]">
+                    <div className="flex min-w-0 items-center gap-2">
+                      <span className="truncate text-sm text-foreground">{item.creatorName}</span>
+                      {item.creatorHasVerifiedBadge ? <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-accent" aria-hidden /> : null}
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-right font-semibold">{formatCompactNumber(item.favoriteCount)}</TableCell>
+                  <TableCell className="text-right">{itemPriceLabel(item.priceRobux)}</TableCell>
+                  <TableCell className="text-right">{item.hasResellers ? itemPriceLabel(item.lowestResalePriceRobux) : <span className="text-muted">-</span>}</TableCell>
+                  <TableCell className="min-w-[170px]">
+                    <span className="block text-sm text-foreground">{prettyStatsItemLabel(item.category)}</span>
+                    <span className="text-xs text-muted">{prettyStatsItemLabel(item.subcategory)}</span>
+                  </TableCell>
+                  <TableCell className="text-right text-xs text-muted">{formatRelativeStatsDate(item.lastSeenAt)}</TableCell>
+                  <TableCell className="text-right">
+                    <Button asChild variant="ghost" size="sm" className="h-8 rounded-md px-2">
+                      <Link href={item.robloxUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${item.name} on Roblox`}>
+                        <ExternalLink className="h-4 w-4" aria-hidden />
+                      </Link>
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+
+        <div className="space-y-2 p-3 md:hidden">
+          {data.items.map((item) => <StatsItemMobileCard key={item.assetId} item={item} />)}
+        </div>
+
+        {!data.items.length ? (
+          <div className="border-t border-border/60 p-8 text-center text-sm text-muted">No items match the current filters.</div>
+        ) : null}
+      </Card>
+
+      {data.totalPages > 1 ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
+          <span>Page {data.page} of {data.totalPages}</span>
+          <div className="flex gap-2">
+            <Button asChild variant="outline" className="rounded-md" aria-disabled={data.page <= 1}>
+              <Link href={itemPageHref(data, Math.max(1, data.page - 1))}>Previous</Link>
+            </Button>
+            <Button asChild variant="outline" className="rounded-md" aria-disabled={data.page >= data.totalPages}>
+              <Link href={itemPageHref(data, Math.min(data.totalPages, data.page + 1))}>Next</Link>
+            </Button>
+          </div>
+        </div>
+      ) : null}
+    </form>
+  );
+}
+
+export function StatsItemDetailView({ data }: { data: StatsItemDetailData }) {
+  const { item } = data;
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Stats", href: "/stats" },
+    { label: "Items", href: "/stats/items" },
+    { label: item.name, href: null }
+  ];
+
+  return (
+    <div className="stats-surface space-y-6">
+      <header className="space-y-4">
+        <PageBreadcrumb items={breadcrumbItems} className="text-xs uppercase tracking-[0.22em] text-muted" />
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex min-w-0 items-start gap-4">
+            {itemImage(item, 86, "eager")}
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="secondary" className="rounded-md">{prettyStatsItemLabel(item.category)}</Badge>
+                <Badge variant="outline" className="rounded-md">{prettyStatsItemLabel(item.subcategory)}</Badge>
+                {item.itemStatsTier ? <Badge className="rounded-md">{item.itemStatsTier}</Badge> : null}
+              </div>
+              <h1 className="mt-3 mb-0 text-3xl font-semibold leading-tight text-foreground md:text-4xl">{item.name}</h1>
+              <p className="mt-2 max-w-3xl text-sm text-muted">{item.description || `${item.name} Roblox marketplace stats, price signals, resale history, and favorites tracked by Bloxodes.`}</p>
+              <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted">
+                <span>{item.itemType} #{item.assetId}</span>
+                <span>{item.creatorName}</span>
+                {item.creatorHasVerifiedBadge ? <span className="inline-flex items-center gap-1 text-accent"><BadgeCheck className="h-4 w-4" aria-hidden />Verified</span> : null}
+              </div>
+            </div>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-2">
+            <Button asChild variant="outline" className="rounded-md">
+              <Link href="/stats/items">All items</Link>
+            </Button>
+            <Button asChild className="rounded-md">
+              <Link href={item.robloxUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="mr-2 h-4 w-4" aria-hidden />Roblox
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <MetricCard label="Favorites" value={formatFullNumber(item.favoriteCount)} detail={item.favoriteChange24h != null ? `${formatDelta(item.favoriteChange24h)} in 24h` : "Current tracked count"} icon={Heart} />
+        <MetricCard label="Price" value={itemPriceLabel(item.priceRobux)} detail={item.priceChange24h != null ? `${formatDelta(item.priceChange24h)} in 24h` : item.priceStatus || "Marketplace price"} icon={ShoppingBag} />
+        <MetricCard label="Lowest resale" value={item.hasResellers ? itemPriceLabel(item.lowestResalePriceRobux) : "No resale"} detail={item.resaleChange24h != null ? `${formatDelta(item.resaleChange24h)} in 24h` : "Reseller floor price"} icon={BarChart3} />
+        <MetricCard label="Refreshed" value={formatRelativeStatsDate(item.lastItemStatsRefreshedAt ?? item.lastSeenAt)} detail={item.lastResaleDataFetchedAt ? `Resale ${formatRelativeStatsDate(item.lastResaleDataFetchedAt)}` : "Stats refresh status"} icon={Clock3} />
+      </div>
+
+      <div className="grid gap-3 md:grid-cols-3">
+        <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+          <CardHeader><CardTitle className="text-base">Ranks</CardTitle></CardHeader>
+          <CardContent className="space-y-2 text-sm">
+            <div className="flex justify-between gap-3"><span className="text-muted">Favorites rank</span><span className="font-semibold">{item.globalFavoritesRank ? `#${formatFullNumber(item.globalFavoritesRank)}` : "Not indexed"}</span></div>
+            <div className="flex justify-between gap-3"><span className="text-muted">Resale rank</span><span className="font-semibold">{item.globalResaleRank ? `#${formatFullNumber(item.globalResaleRank)}` : "Not indexed"}</span></div>
+          </CardContent>
+        </Card>
+        <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+          <CardHeader><CardTitle className="text-base">24h movement</CardTitle></CardHeader>
+          <CardContent className="flex flex-wrap gap-2">
+            <DeltaPill value={item.favoriteChange24h} />
+            <DeltaPill value={item.priceChange24h} />
+            <DeltaPill value={item.resaleChange24h} />
+          </CardContent>
+        </Card>
+        <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+          <CardHeader><CardTitle className="text-base">Supply</CardTitle></CardHeader>
+          <CardContent className="space-y-2 text-sm">
+            <div className="flex justify-between gap-3"><span className="text-muted">Total quantity</span><span className="font-semibold">{formatFullNumber(item.totalQuantity)}</span></div>
+            <div className="flex justify-between gap-3"><span className="text-muted">Available</span><span className="font-semibold">{formatFullNumber(item.unitsAvailableForConsumption)}</span></div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <StatsItemChartPanel hourlyPoints={data.hourlyPoints} dailyPoints={data.dailyPoints} resalePoints={data.resalePoints} />
+
+      {data.similarItems.length ? (
+        <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+          <CardHeader><CardTitle className="text-base">Similar items</CardTitle></CardHeader>
+          <CardContent className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {data.similarItems.map((similar) => (
+              <Link key={similar.assetId} href={itemStatsHref(similar)} className="flex min-w-0 gap-3 rounded-lg border border-border/70 bg-background/40 p-3 hover:border-accent/50">
+                {itemImage(similar, 44)}
+                <span className="min-w-0">
+                  <span className="block truncate text-sm font-semibold text-foreground">{similar.name}</span>
+                  <span className="mt-1 block text-xs text-muted">{formatCompactNumber(similar.favoriteCount)} favorites</span>
+                </span>
+              </Link>
+            ))}
+          </CardContent>
+        </Card>
+      ) : null}
     </div>
   );
 }
@@ -682,14 +1109,10 @@ function StatsCreatorMobileCard({ creator }: { creator: StatsCreator }) {
           <p className="text-[11px] font-medium text-muted">players</p>
         </div>
       </div>
-      <div className="mt-3 grid grid-cols-2 gap-2 border-t border-border/50 pt-3 text-xs sm:grid-cols-4">
+      <div className="mt-3 grid grid-cols-2 gap-2 border-t border-border/50 pt-3 text-xs sm:grid-cols-3">
         <span>
           <span className="block font-medium uppercase tracking-[0.08em] text-muted">Games</span>
           <span className="mt-1 block font-semibold text-foreground">{formatFullNumber(creator.gameCount)}</span>
-        </span>
-        <span>
-          <span className="block font-medium uppercase tracking-[0.08em] text-muted">Hot</span>
-          <span className="mt-1 block font-semibold text-foreground">{formatFullNumber(creator.hotGameCount)}</span>
         </span>
         <span>
           <span className="block font-medium uppercase tracking-[0.08em] text-muted">Visits</span>
@@ -742,7 +1165,7 @@ export function StatsCreatorsView({ data }: { data: StatsCreatorsPageData }) {
           <div>
             <h1 className="mb-0 text-3xl font-semibold leading-tight text-foreground md:text-4xl">{title}</h1>
             <p className="mt-2 text-sm font-medium text-muted">
-              Sort Roblox creators by live players, visits, favorites, tracked games, hot games, and group size.
+              Sort Roblox creators by live players, visits, favorites, tracked games, and group size.
             </p>
           </div>
         </div>
@@ -794,7 +1217,6 @@ export function StatsCreatorsView({ data }: { data: StatsCreatorsPageData }) {
                 <TableHead className="min-w-[300px] text-left">Creator</TableHead>
                 <CreatorSortableTableHead data={data} sort="playing" label="CCU" className="min-w-[110px] text-right" />
                 <CreatorSortableTableHead data={data} sort="games" label="Games" className="min-w-[100px] text-right" />
-                <CreatorSortableTableHead data={data} sort="hot_games" label="Hot" className="min-w-[90px] text-right" />
                 <CreatorSortableTableHead data={data} sort="visits" label="Visits" className="min-w-[120px] text-right" />
                 <CreatorSortableTableHead data={data} sort="favorites" label="Favorites" className="min-w-[120px] text-right" />
                 <TableHead className="min-w-[260px] text-left">Top game</TableHead>
@@ -817,7 +1239,6 @@ export function StatsCreatorsView({ data }: { data: StatsCreatorsPageData }) {
                   </TableCell>
                   <TableCell className="text-right font-semibold">{formatCompactNumber(creator.playing)}</TableCell>
                   <TableCell className="text-right">{formatFullNumber(creator.gameCount)}</TableCell>
-                  <TableCell className="text-right">{formatFullNumber(creator.hotGameCount)}</TableCell>
                   <TableCell className="text-right">{formatCompactNumber(creator.visits)}</TableCell>
                   <TableCell className="text-right">{formatCompactNumber(creator.favorites)}</TableCell>
                   <TableCell className="min-w-[260px]">

@@ -1,0 +1,98 @@
+name: Roblox Item Stats Refresh
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "10 * * * *"
+    - cron: "40 * * * *"
+
+concurrency:
+  group: roblox-item-stats-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh-items:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      ROBLOX_ITEM_STATS_LIMIT: "250"
+      ROBLOX_ITEM_STATS_MIN_REQUEST_MS: "1400"
+      ROBLOX_ITEM_STATS_DETAILS_BATCH: "10"
+      ROBLOX_ITEM_STATS_REFRESH_INDEXES: "false"
+      ROBLOX_ITEM_RESALE_LIMIT: "60"
+      ROBLOX_ITEM_RESALE_MIN_REQUEST_MS: "1800"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Assign item stats tiers
+        run: npm run stats:items:tier -- --apply --limit 5000
+
+      - name: Refresh trade item stats
+        run: npm run stats:items:refresh -- --tier TRADE --limit 180
+
+      - name: Refresh hot item stats
+        run: npm run stats:items:refresh -- --tier HOT --limit 180
+
+      - name: Refresh new item stats
+        run: npm run stats:items:refresh -- --tier NEW --limit 120
+
+      - name: Refresh broken media item stats
+        run: npm run stats:items:refresh -- --tier BROKEN_MEDIA --limit 80
+
+      - name: Sync resale history
+        run: npm run stats:items:resale -- --limit 60 --max-age-hours 24
+
+      - name: Rebuild item stats indexes
+        run: npm run stats:items:index:refresh
+
+      - name: Audit item stats workflow
+        if: always()
+        run: npm run stats:items:audit
+
+  rotate-long-tail:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    needs: refresh-items
+    if: always() && (github.event.schedule == '10 * * * *' || github.event_name == 'workflow_dispatch')
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      ROBLOX_ITEM_STATS_LIMIT: "250"
+      ROBLOX_ITEM_STATS_MIN_REQUEST_MS: "1600"
+      ROBLOX_ITEM_STATS_REFRESH_INDEXES: "false"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Refresh warm item stats
+        run: npm run stats:items:refresh -- --tier WARM --limit 160
+
+      - name: Refresh cold item stats
+        run: npm run stats:items:refresh -- --tier COLD --limit 90
+
+      - name: Rebuild item stats indexes
+        run: npm run stats:items:index:refresh
+
+      - name: Roll up yesterday item stats
+        run: npm run stats:items:rollup-daily -- --date yesterday --finalize

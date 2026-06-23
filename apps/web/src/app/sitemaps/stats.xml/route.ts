@@ -1,5 +1,5 @@
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
-import { listStatsSitemapGames } from "@/lib/stats";
+import { listStatsSitemapGames, listStatsSitemapItems } from "@/lib/stats";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -10,7 +10,8 @@ export async function GET() {
   const pages: SitemapUrlSetEntry[] = [
     { loc: withSiteUrl("/stats"), changefreq: "hourly", priority: "0.8" },
     { loc: withSiteUrl("/stats/games"), changefreq: "hourly", priority: "0.8" },
-    { loc: withSiteUrl("/stats/creators"), changefreq: "hourly", priority: "0.8" }
+    { loc: withSiteUrl("/stats/creators"), changefreq: "hourly", priority: "0.8" },
+    { loc: withSiteUrl("/stats/items"), changefreq: "hourly", priority: "0.8" }
   ];
 
   try {
@@ -20,6 +21,13 @@ export async function GET() {
       changefreq: "hourly",
       priority: "0.7",
       lastmod: toIsoDate(game.updatedAt)
+    })));
+    const items = await listStatsSitemapItems(1000);
+    pages.push(...items.map((item) => ({
+      loc: withSiteUrl(`/stats/items/${item.assetId}`),
+      changefreq: "hourly",
+      priority: "0.6",
+      lastmod: toIsoDate(item.updatedAt)
     })));
   } catch (error) {
     console.error("Failed to build stats sitemap", error);

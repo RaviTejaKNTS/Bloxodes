@@ -15,8 +15,8 @@ export async function generateMetadata({ searchParams }: PageProps): Promise<Met
   const typeLabel = parsed.creatorType === "group" ? "Group" : parsed.creatorType === "user" ? "User" : "";
   const title = typeLabel ? `Roblox ${typeLabel} Creator Stats | ${SITE_NAME}` : `Roblox Creator Stats | ${SITE_NAME}`;
   const description = typeLabel
-    ? `Search and sort Roblox ${typeLabel.toLowerCase()} creators by current players, visits, favorites, tracked games, hot games, and group members.`
-    : "Search and sort Roblox creators by current players, visits, favorites, tracked games, hot games, and group members.";
+    ? `Search and sort Roblox ${typeLabel.toLowerCase()} creators by current players, visits, favorites, tracked games, and group members.`
+    : "Search and sort Roblox creators by current players, visits, favorites, tracked games, and group members.";
   const params = new URLSearchParams();
   if (parsed.creatorType !== "all") params.set("type", parsed.creatorType);
   if (parsed.sort !== "playing") params.set("sort", parsed.sort);

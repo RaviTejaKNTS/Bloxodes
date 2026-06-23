@@ -75,8 +75,8 @@ function parseArgs(): Options {
 Usage: npm run enqueue:revalidation -- --event <type:slug> [--event <type:slug>]
 
 Examples:
-  npm run enqueue:revalidation -- --event stats:stats --event stats:games --source stats_hourly
-  npm run enqueue:revalidation -- stats:stats stats:games
+  npm run enqueue:revalidation -- --event stats:stats --event stats:games --event stats:creators --event stats:items --source stats_hourly
+  npm run enqueue:revalidation -- stats:stats stats:games stats:creators stats:items
 `);
       process.exit(0);
     } else {

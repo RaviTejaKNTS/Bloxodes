@@ -23,7 +23,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `cloudflare-emergency-cache.mjs` toggles a temporary Cloudflare Cache Rule for anonymous public HTML when origin/Supabase is unhealthy. It uses the local operator token `CLOUDFLARE_BLOXODES_API`, not the runtime purge token. Use `npm run cloudflare:emergency-cache:status`, `npm run cloudflare:emergency-cache:on`, and `npm run cloudflare:emergency-cache:off`; keep it off during normal operations.
   - `audit-sitemap-seo.ts` crawls the sitemap index, checks each page response, and writes SEO/indexability reports to `tmp/seo-audits/`. It is read-only, uses live HTTP requests only, and can be limited with `npm run audit:seo -- --limit 100` for smoke tests.
   - `audit-html-size.ts` measures uncompressed HTML bytes for explicit URLs or sitemap URLs and writes reports to `tmp/html-size-audits/`. Use `npm run audit:html-size -- --url <url> --fail-on-limit` as a pre-publish guard for large catalog pages; add `--rewrite-origin https://bloxodes.com http://127.0.0.1:<port>` when testing a production sitemap against localhost.
-  - `enqueue-revalidation-events.ts` inserts coalesced rows into `revalidation_events` for the Supabase revalidation worker. Use `npm run enqueue:revalidation -- --event stats:stats --event stats:games --event stats:creators` for script/workflow-driven events that should follow the same queue as table triggers.
+  - `enqueue-revalidation-events.ts` inserts coalesced rows into `revalidation_events` for the Supabase revalidation worker. Use `npm run enqueue:revalidation -- --event stats:stats --event stats:games --event stats:creators --event stats:items` for script/workflow-driven events that should follow the same queue as table triggers.
   - Revalidation events are drained by the VPS Supabase `revalidate` Edge Function every minute. Do not warm Cloudflare synchronously from scripts; `/api/revalidate` queues `cache_warm_events`, and the VPS `cache-warm` Edge Function warms URLs separately.
 - `backfill/`: repair jobs for existing content/data.
 - `catalog/`: Roblox item and bundle collection plus enrichment.
@@ -63,6 +63,13 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - `decal-ids/`: decal scraping and enrichment.
 - `events/`: event ingestion, page seeding, event detail hydration, event guide generation.
 - `music/`: music ID collection, import, enrichment, verification, thumbnails.
+- `items/`: public `/stats/items` automation and read-model maintenance.
+  - `assign-item-stats-tier.ts` classifies Roblox marketplace rows into `NEW`, `HOT`, `WARM`, `COLD`, `TRADE`, or `BROKEN_MEDIA`; it is dry-run by default and writes only with `--apply`.
+  - `update-item-hourly-stats.ts` refreshes public Roblox catalog detail data, thumbnails, optional economy detail data, and hourly item snapshots. Use tiered runs such as `npm run stats:items:refresh -- --tier TRADE --limit 180`; use `--asset-id <id>` for targeted repairs.
+  - `sync-item-resale-history.ts` fetches Roblox public resale price/volume points for resale-capable items and updates resale freshness markers.
+  - `rollup-item-daily-stats.ts` rolls hourly snapshots into daily open/close/min/max rows; use `--date yesterday --finalize` after the UTC day ends.
+  - `rebuild-stats-item-indexes.ts` calls `refresh_stats_item_current_indexes()` and queues `/stats/items` revalidation; run it after bulk item refreshes.
+  - `audit-item-stats-workflow.ts` reports item stats freshness, index coverage, hourly/daily rows, resale coverage, and broken media counts.
 - `posts/`: outbound posting jobs.
 - `puzzles/`: daily puzzle answer collectors for `/puzzles`, writing durable answer rows into `puzzle_answers`.
   - `sync-puzzles.ts` syncs Wordle, Connections, Strands, Spelling Bee, Letter Boxed, NYT Sudoku, NYT Pips, Contexto, Letroso, and LinkedIn puzzle answers. Use `npm run sync:puzzles -- --dry-run` before writing. Pass `-- --skip-linkedin` when `LINKEDIN_LI_AT` is unavailable or stale.

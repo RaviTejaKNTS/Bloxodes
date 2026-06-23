@@ -14,6 +14,8 @@ const SUPABASE_READ_PAGE_SIZE = 1000;
 const SUPABASE_IN_CHUNK_SIZE = 500;
 const STATS_GROWTH_BASELINE_TOLERANCE_MS = 90 * 60 * 1000;
 let statsIndexAvailability: Promise<boolean> | null = null;
+let statsItemIndexAvailability: Promise<boolean> | null = null;
+let statsItemHistoryAvailability: Promise<boolean> | null = null;
 export const STATS_DESCRIPTION =
   "Live Roblox game stats tracked by Bloxodes, including current players, visits, favorites, ratings, trends, and public history charts.";
 
@@ -28,8 +30,11 @@ export type StatsSortKey =
   | "updated"
   | "created";
 
-export type StatsCreatorSortKey = "playing" | "visits" | "favorites" | "games" | "hot_games" | "members";
+export type StatsCreatorSortKey = "playing" | "visits" | "favorites" | "games" | "members";
 export type StatsCreatorTypeFilter = "all" | "group" | "user";
+export type StatsItemSortKey = "favorites" | "price_high" | "price_low" | "resale_low" | "newest" | "updated";
+export type StatsItemSaleFilter = "all" | "free" | "paid" | "resale";
+export type StatsItemCreatorFilter = "all" | "roblox" | "creators" | "verified";
 
 export type StatsTimeRange = "1d" | "7d" | "14d" | "30d" | "90d";
 export type StatsMetricKey = "players" | "visits" | "favorites" | "rating";
@@ -222,10 +227,6 @@ export type StatsCreator = {
   creatorName: string;
   creatorSlug: string;
   gameCount: number;
-  hotGameCount: number;
-  warmGameCount: number;
-  newGameCount: number;
-  coldGameCount: number;
   playing: number;
   visits: number;
   favorites: number;
@@ -237,6 +238,50 @@ export type StatsCreator = {
   hasVerifiedBadge: boolean | null;
   lastStatsRefreshedAt: string | null;
   indexedAt: string | null;
+  rank: number | null;
+};
+
+export type StatsItem = {
+  assetId: number;
+  itemType: string;
+  assetTypeId: number | null;
+  name: string;
+  description: string | null;
+  category: string;
+  subcategory: string;
+  creatorName: string;
+  creatorId: number | null;
+  creatorType: string | null;
+  creatorHasVerifiedBadge: boolean | null;
+  favoriteCount: number;
+  priceRobux: number | null;
+  priceStatus: string | null;
+  lowestPriceRobux: number | null;
+  lowestResalePriceRobux: number | null;
+  isForSale: boolean | null;
+  isLimited: boolean | null;
+  isLimitedUnique: boolean | null;
+  hasResellers: boolean | null;
+  totalQuantity: number | null;
+  unitsAvailableForConsumption?: number | null;
+  quantityLimitPerUser?: number | null;
+  collectibleItemId?: string | null;
+  itemStatsTier?: string | null;
+  remaining: number | null;
+  lastSeenAt: string | null;
+  lastItemStatsRefreshedAt?: string | null;
+  lastResaleDataFetchedAt?: string | null;
+  priceChange24h?: number | null;
+  resaleChange24h?: number | null;
+  favoriteChange24h?: number | null;
+  priceChange7d?: number | null;
+  resaleChange7d?: number | null;
+  favoriteChange7d?: number | null;
+  globalFavoritesRank?: number | null;
+  globalResaleRank?: number | null;
+  createdAt: string | null;
+  robloxUrl: string;
+  thumbnailUrl: string | null;
   rank: number | null;
 };
 
@@ -284,6 +329,39 @@ export type StatsCreatorsPageData = {
     sort: StatsCreatorSortKey;
     creatorType: StatsCreatorTypeFilter;
   };
+};
+
+export type StatsItemsPageData = {
+  items: StatsItem[];
+  total: number;
+  page: number;
+  totalPages: number;
+  filters: {
+    q: string;
+    sort: StatsItemSortKey;
+    category: string;
+    subcategory: string;
+    sale: StatsItemSaleFilter;
+    creator: StatsItemCreatorFilter;
+  };
+};
+
+export type StatsItemChartPoint = {
+  label: string;
+  sampledAt: string;
+  priceRobux: number | null;
+  lowestResalePriceRobux: number | null;
+  favoriteCount: number | null;
+  availableUnits: number | null;
+  resaleVolume: number | null;
+};
+
+export type StatsItemDetailData = {
+  item: StatsItem;
+  hourlyPoints: StatsItemChartPoint[];
+  dailyPoints: StatsItemChartPoint[];
+  resalePoints: StatsItemChartPoint[];
+  similarItems: StatsItem[];
 };
 
 export type StatsSubgenreOption = {
@@ -377,10 +455,6 @@ type StatsCreatorIndexRow = {
   creator_name: string;
   creator_slug: string;
   game_count: number;
-  hot_game_count: number;
-  warm_game_count: number;
-  new_game_count: number;
-  cold_game_count: number;
   playing: number | null;
   visits: number | null;
   favorites: number | null;
@@ -399,6 +473,60 @@ type StatsCreatorIndexRow = {
   has_verified_badge: boolean | null;
   last_stats_refreshed_at: string | null;
   indexed_at: string | null;
+};
+
+type StatsItemIndexRow = {
+  asset_id: number;
+  item_type: string;
+  asset_type_id: number | null;
+  name: string;
+  description: string | null;
+  category: string;
+  subcategory: string;
+  creator_name: string;
+  creator_id: number | null;
+  creator_type: string | null;
+  creator_has_verified_badge: boolean | null;
+  favorite_count: number | null;
+  price_robux: number | null;
+  price_status: string | null;
+  lowest_price_robux: number | null;
+  lowest_resale_price_robux: number | null;
+  is_for_sale: boolean | null;
+  is_limited: boolean | null;
+  is_limited_unique: boolean | null;
+  has_resellers: boolean | null;
+  total_quantity: number | null;
+  units_available_for_consumption?: number | null;
+  quantity_limit_per_user?: number | null;
+  collectible_item_id?: string | null;
+  item_stats_tier?: string | null;
+  first_seen_at?: string | null;
+  remaining: number | null;
+  last_seen_at: string | null;
+  last_item_stats_refreshed_at?: string | null;
+  last_resale_data_fetched_at?: string | null;
+  thumbnail_url?: string | null;
+  thumbnail_state?: string | null;
+  roblox_url?: string | null;
+  price_change_24h?: number | null;
+  resale_change_24h?: number | null;
+  favorite_change_24h?: number | null;
+  price_change_7d?: number | null;
+  resale_change_7d?: number | null;
+  favorite_change_7d?: number | null;
+  global_favorites_rank?: number | null;
+  global_resale_rank?: number | null;
+  created_at: string | null;
+  raw_catalog_json?: Record<string, unknown> | null;
+};
+
+type StatsItemThumbnailRow = {
+  asset_id: number;
+  size: string | null;
+  format: string | null;
+  state: string | null;
+  image_url: string | null;
 };
 
 type HourlyRow = {
@@ -486,7 +614,6 @@ const CREATOR_SORT_COLUMNS: Record<StatsCreatorSortKey, keyof StatsCreatorIndexR
   visits: "visits",
   favorites: "favorites",
   games: "game_count",
-  hot_games: "hot_game_count",
   members: "member_count"
 };
 
@@ -507,9 +634,75 @@ export const STATS_CREATOR_SORT_OPTIONS: Array<{ value: StatsCreatorSortKey; lab
   { value: "visits", label: "Visits" },
   { value: "favorites", label: "Favorites" },
   { value: "games", label: "Tracked games" },
-  { value: "hot_games", label: "Hot games" },
   { value: "members", label: "Group members" }
 ];
+
+export const STATS_ITEM_SORT_OPTIONS: Array<{ value: StatsItemSortKey; label: string }> = [
+  { value: "favorites", label: "Most favorited" },
+  { value: "price_high", label: "Price: high to low" },
+  { value: "price_low", label: "Price: low to high" },
+  { value: "resale_low", label: "Lowest resale" },
+  { value: "newest", label: "Recently created" },
+  { value: "updated", label: "Recently seen" }
+];
+
+export const STATS_ITEM_SALE_OPTIONS: Array<{ value: StatsItemSaleFilter; label: string }> = [
+  { value: "all", label: "All sale states" },
+  { value: "free", label: "Free" },
+  { value: "paid", label: "Paid" },
+  { value: "resale", label: "Has resale" }
+];
+
+export const STATS_ITEM_CREATOR_OPTIONS: Array<{ value: StatsItemCreatorFilter; label: string }> = [
+  { value: "all", label: "All creators" },
+  { value: "roblox", label: "Roblox-made" },
+  { value: "creators", label: "Creator-made" },
+  { value: "verified", label: "Verified creators" }
+];
+
+export const STATS_ITEM_CATEGORY_OPTIONS = [
+  { value: "Accessories", label: "Accessories" },
+  { value: "Clothing", label: "Clothing" },
+  { value: "Body", label: "Body" },
+  { value: "AvatarAnimations", label: "Avatar animations" }
+] as const;
+
+export const STATS_ITEM_SUBCATEGORY_OPTIONS: Record<string, Array<{ value: string; label: string }>> = {
+  Accessories: [
+    { value: "HeadAccessories", label: "Head" },
+    { value: "FaceAccessories", label: "Face" },
+    { value: "NeckAccessories", label: "Neck" },
+    { value: "ShoulderAccessories", label: "Shoulder" },
+    { value: "FrontAccessories", label: "Front" },
+    { value: "BackAccessories", label: "Back" },
+    { value: "WaistAccessories", label: "Waist" },
+    { value: "Gear", label: "Gear" }
+  ],
+  Clothing: [
+    { value: "ClassicShirts", label: "Classic shirts" },
+    { value: "ClassicTShirts", label: "Classic T-shirts" },
+    { value: "ClassicPants", label: "Classic pants" },
+    { value: "ShirtAccessories", label: "Layered shirts" },
+    { value: "TShirtAccessories", label: "Layered T-shirts" },
+    { value: "PantsAccessories", label: "Layered pants" },
+    { value: "JacketAccessories", label: "Jackets" },
+    { value: "SweaterAccessories", label: "Sweaters" },
+    { value: "ShortsAccessories", label: "Shorts" },
+    { value: "DressSkirtAccessories", label: "Dresses & skirts" }
+  ],
+  Body: [
+    { value: "HairAccessories", label: "Hair" },
+    { value: "BodyPartsBundles", label: "Full bodies" },
+    { value: "Bodies", label: "Bodies" },
+    { value: "Heads", label: "Heads" },
+    { value: "Faces", label: "Faces" },
+    { value: "DynamicHeads", label: "Dynamic heads" }
+  ],
+  AvatarAnimations: [
+    { value: "EmoteAnimations", label: "Emotes" },
+    { value: "Emotes", label: "Emotes legacy" }
+  ]
+};
 
 export const STATS_TIME_RANGES: Array<{ value: StatsTimeRange; label: string }> = [
   { value: "1d", label: "1d" },
@@ -595,6 +788,29 @@ function normalizeStatsCreatorSort(value?: string | null): StatsCreatorSortKey {
 
 function normalizeStatsCreatorType(value?: string | null): StatsCreatorTypeFilter {
   return value === "group" || value === "user" ? value : "all";
+}
+
+function normalizeStatsItemSort(value?: string | null): StatsItemSortKey {
+  return STATS_ITEM_SORT_OPTIONS.some((option) => option.value === value) ? (value as StatsItemSortKey) : "favorites";
+}
+
+function normalizeStatsItemSale(value?: string | null): StatsItemSaleFilter {
+  return value === "free" || value === "paid" || value === "resale" ? value : "all";
+}
+
+function normalizeStatsItemCreator(value?: string | null): StatsItemCreatorFilter {
+  return value === "roblox" || value === "creators" || value === "verified" ? value : "all";
+}
+
+function normalizeStatsItemCategory(value?: string | null): string {
+  const normalized = value?.trim() ?? "";
+  return STATS_ITEM_CATEGORY_OPTIONS.some((option) => option.value === normalized) ? normalized : "";
+}
+
+function normalizeStatsItemSubcategory(category: string, value?: string | null): string {
+  const normalized = value?.trim() ?? "";
+  const options = category ? STATS_ITEM_SUBCATEGORY_OPTIONS[category] ?? [] : Object.values(STATS_ITEM_SUBCATEGORY_OPTIONS).flat();
+  return options.some((option) => option.value === normalized) ? normalized : "";
 }
 
 export function getRatingPercent(likes?: number | null, dislikes?: number | null): number | null {
@@ -714,10 +930,6 @@ function mapStatsCreator(row: StatsCreatorIndexRow): StatsCreator {
     creatorName: row.creator_name,
     creatorSlug: row.creator_slug,
     gameCount: row.game_count,
-    hotGameCount: row.hot_game_count,
-    warmGameCount: row.warm_game_count,
-    newGameCount: row.new_game_count,
-    coldGameCount: row.cold_game_count,
     playing: toNumber(row.playing) ?? 0,
     visits: toNumber(row.visits) ?? 0,
     favorites: toNumber(row.favorites) ?? 0,
@@ -729,6 +941,126 @@ function mapStatsCreator(row: StatsCreatorIndexRow): StatsCreator {
     hasVerifiedBadge: row.has_verified_badge,
     lastStatsRefreshedAt: row.last_stats_refreshed_at,
     indexedAt: row.indexed_at,
+    rank: null
+  };
+}
+
+const STATS_ITEM_THUMBNAIL_SIZE = "420x420";
+const STATS_ITEM_THUMBNAIL_FORMAT = "Png";
+
+function statsItemThumbnailPriority(row: StatsItemThumbnailRow): number {
+  let score = 0;
+  if (row.image_url) score += 100;
+  if (row.state === "Completed") score += 40;
+  if (row.size === STATS_ITEM_THUMBNAIL_SIZE) score += 20;
+  if (row.format === STATS_ITEM_THUMBNAIL_FORMAT) score += 10;
+  return score;
+}
+
+async function loadStatsItemThumbnailUrls(assetIds: number[]): Promise<Map<number, string>> {
+  const requestedAssetIds = Array.from(new Set(assetIds.filter((assetId) => Number.isFinite(assetId)).map((assetId) => Math.trunc(assetId))));
+  if (!requestedAssetIds.length) return new Map();
+  const lookupAssetIds = Array.from(
+    new Set(requestedAssetIds.flatMap((assetId) => [assetId, Math.abs(assetId), -Math.abs(assetId)]).filter((assetId) => assetId !== 0))
+  );
+
+  const { data, error } = await supabaseAdmin()
+    .from("roblox_catalog_item_images")
+    .select("asset_id, size, format, state, image_url")
+    .in("asset_id", lookupAssetIds)
+    .not("image_url", "is", null);
+
+  if (error) {
+    console.warn("Failed to load stats item thumbnails", error.message);
+    return new Map();
+  }
+
+  const bestRows = new Map<number, StatsItemThumbnailRow>();
+  for (const row of (data ?? []) as StatsItemThumbnailRow[]) {
+    if (typeof row.asset_id !== "number" || typeof row.image_url !== "string" || row.image_url.length === 0) continue;
+    const existing = bestRows.get(row.asset_id);
+    if (!existing || statsItemThumbnailPriority(row) > statsItemThumbnailPriority(existing)) {
+      bestRows.set(row.asset_id, row);
+    }
+  }
+
+  const thumbnailMap = new Map<number, string>();
+  for (const assetId of requestedAssetIds) {
+    const candidates = [assetId, -Math.abs(assetId), Math.abs(assetId)]
+      .map((candidateAssetId) => bestRows.get(candidateAssetId))
+      .filter((row): row is StatsItemThumbnailRow => Boolean(row?.image_url));
+    const best = candidates.sort((a, b) => statsItemThumbnailPriority(b) - statsItemThumbnailPriority(a))[0];
+    if (best?.image_url) thumbnailMap.set(assetId, best.image_url);
+  }
+  return thumbnailMap;
+}
+
+function statsItemRobloxUrl(row: Pick<StatsItemIndexRow, "asset_id" | "item_type" | "raw_catalog_json">): string {
+  const explicitUrl = row.raw_catalog_json?.roblox_url;
+  if (typeof explicitUrl === "string" && explicitUrl.length > 0) return explicitUrl;
+  if (row.item_type === "Bundle") return `https://www.roblox.com/bundles/${Math.abs(Math.trunc(row.asset_id))}`;
+  return `https://www.roblox.com/catalog/${row.asset_id}`;
+}
+
+function statsItemCanonicalKey(row: Pick<StatsItemIndexRow, "asset_id" | "item_type">): string {
+  return row.item_type === "Bundle" ? `Bundle:${Math.abs(Math.trunc(row.asset_id))}` : `Asset:${Math.trunc(row.asset_id)}`;
+}
+
+function dedupeStatsItemRows(rows: StatsItemIndexRow[], limit: number) {
+  const seen = new Set<string>();
+  const deduped: StatsItemIndexRow[] = [];
+  for (const row of rows) {
+    const key = statsItemCanonicalKey(row);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    deduped.push(row);
+    if (deduped.length >= limit) break;
+  }
+  return deduped;
+}
+
+function mapStatsItem(row: StatsItemIndexRow, thumbnailUrl: string | null): StatsItem {
+  return {
+    assetId: row.asset_id,
+    itemType: row.item_type,
+    assetTypeId: row.asset_type_id,
+    name: row.name,
+    description: row.description,
+    category: row.category,
+    subcategory: row.subcategory,
+    creatorName: row.creator_name,
+    creatorId: row.creator_id,
+    creatorType: row.creator_type,
+    creatorHasVerifiedBadge: row.creator_has_verified_badge,
+    favoriteCount: toNumber(row.favorite_count) ?? 0,
+    priceRobux: toNumber(row.price_robux),
+    priceStatus: row.price_status,
+    lowestPriceRobux: toNumber(row.lowest_price_robux),
+    lowestResalePriceRobux: toNumber(row.lowest_resale_price_robux),
+    isForSale: row.is_for_sale,
+    isLimited: row.is_limited,
+    isLimitedUnique: row.is_limited_unique,
+    hasResellers: row.has_resellers,
+    totalQuantity: toNumber(row.total_quantity),
+    unitsAvailableForConsumption: toNumber(row.units_available_for_consumption),
+    quantityLimitPerUser: toNumber(row.quantity_limit_per_user),
+    collectibleItemId: row.collectible_item_id ?? null,
+    itemStatsTier: row.item_stats_tier ?? null,
+    remaining: toNumber(row.remaining),
+    lastSeenAt: row.last_seen_at,
+    lastItemStatsRefreshedAt: row.last_item_stats_refreshed_at ?? null,
+    lastResaleDataFetchedAt: row.last_resale_data_fetched_at ?? null,
+    priceChange24h: toNumber(row.price_change_24h),
+    resaleChange24h: toNumber(row.resale_change_24h),
+    favoriteChange24h: toNumber(row.favorite_change_24h),
+    priceChange7d: toNumber(row.price_change_7d),
+    resaleChange7d: toNumber(row.resale_change_7d),
+    favoriteChange7d: toNumber(row.favorite_change_7d),
+    globalFavoritesRank: toNumber(row.global_favorites_rank),
+    globalResaleRank: toNumber(row.global_resale_rank),
+    createdAt: row.created_at,
+    robloxUrl: row.roblox_url || statsItemRobloxUrl(row),
+    thumbnailUrl: row.thumbnail_url || thumbnailUrl,
     rank: null
   };
 }
@@ -746,6 +1078,37 @@ async function isStatsIndexAvailable() {
     }
   })();
   return statsIndexAvailability;
+}
+
+async function isStatsItemIndexAvailable() {
+  statsItemIndexAvailability ??= (async () => {
+    try {
+      const { data, error } = await supabaseAdmin()
+        .from("stats_item_current_index")
+        .select("asset_id")
+        .limit(1);
+      return !error && (data?.length ?? 0) > 0;
+    } catch {
+      return false;
+    }
+  })();
+  return statsItemIndexAvailability;
+}
+
+async function isStatsItemHistoryAvailable() {
+  statsItemHistoryAvailability ??= (async () => {
+    try {
+      const [hourly, daily, resale] = await Promise.all([
+        supabaseAdmin().from("roblox_catalog_item_stats_hourly").select("asset_id").limit(1),
+        supabaseAdmin().from("roblox_catalog_item_stats_daily").select("asset_id").limit(1),
+        supabaseAdmin().from("roblox_catalog_item_resale_points").select("asset_id").limit(1)
+      ]);
+      return !hourly.error && !daily.error && !resale.error;
+    } catch {
+      return false;
+    }
+  })();
+  return statsItemHistoryAvailability;
 }
 
 function hoursAgo(hours: number) {
@@ -1382,6 +1745,348 @@ export function parseStatsCreatorsSearchParams(searchParams?: Record<string, str
   };
 }
 
+export function parseStatsItemsSearchParams(searchParams?: Record<string, string | string[] | undefined>) {
+  const first = (value: string | string[] | undefined) => (Array.isArray(value) ? value[0] : value);
+  const pageValue = Number(first(searchParams?.page) ?? "1");
+  const category = normalizeStatsItemCategory(first(searchParams?.category));
+  return {
+    page: Number.isFinite(pageValue) && pageValue > 0 ? Math.floor(pageValue) : 1,
+    q: first(searchParams?.q)?.trim() ?? "",
+    sort: normalizeStatsItemSort(first(searchParams?.sort)),
+    category,
+    subcategory: normalizeStatsItemSubcategory(category, first(searchParams?.subcategory)),
+    sale: normalizeStatsItemSale(first(searchParams?.sale)),
+    creator: normalizeStatsItemCreator(first(searchParams?.creator))
+  };
+}
+
+export async function listStatsItems(input: {
+  page?: number;
+  pageSize?: number;
+  q?: string;
+  sort?: string | null;
+  category?: string | null;
+  subcategory?: string | null;
+  sale?: string | null;
+  creator?: string | null;
+}): Promise<StatsItemsPageData> {
+  const page = Math.max(1, input.page ?? 1);
+  const pageSize = Math.min(Math.max(input.pageSize ?? STATS_PAGE_SIZE, 10), 100);
+  const offset = (page - 1) * pageSize;
+  const q = input.q?.trim() ?? "";
+  const sort = normalizeStatsItemSort(input.sort);
+  const category = normalizeStatsItemCategory(input.category);
+  const subcategory = normalizeStatsItemSubcategory(category, input.subcategory);
+  const sale = normalizeStatsItemSale(input.sale);
+  const creator = normalizeStatsItemCreator(input.creator);
+  const hasItemIndex = await isStatsItemIndexAvailable();
+  const tableName = hasItemIndex ? "stats_item_current_index" : "roblox_catalog_items";
+  const selectColumns = hasItemIndex
+    ? `
+      asset_id, item_type, asset_type_id, name, description, category, subcategory,
+      creator_name, creator_id, creator_type, creator_has_verified_badge,
+      favorite_count, price_robux, price_status, lowest_price_robux,
+      lowest_resale_price_robux, is_for_sale, is_limited, is_limited_unique,
+      has_resellers, total_quantity, units_available_for_consumption,
+      quantity_limit_per_user, collectible_item_id, remaining, item_stats_tier,
+      last_seen_at, last_item_stats_refreshed_at, last_resale_data_fetched_at,
+      thumbnail_url, thumbnail_state, roblox_url,
+      price_change_24h, resale_change_24h, favorite_change_24h,
+      price_change_7d, resale_change_7d, favorite_change_7d,
+      global_favorites_rank, global_resale_rank, first_seen_at, created_at
+    `
+    : `
+      asset_id, item_type, asset_type_id, name, description, category, subcategory,
+      creator_name, creator_id, creator_type, creator_has_verified_badge,
+      favorite_count, price_robux, price_status, lowest_price_robux,
+      lowest_resale_price_robux, is_for_sale, is_limited, is_limited_unique,
+      has_resellers, total_quantity, remaining, last_seen_at, created_at,
+      raw_catalog_json
+    `;
+
+  let query = supabaseAdmin()
+    .from(tableName)
+    .select(selectColumns, { count: "exact" })
+    .not("name", "is", null)
+    .not("category", "is", null)
+    .not("subcategory", "is", null)
+    .not("favorite_count", "is", null);
+
+  if (!hasItemIndex) {
+    query = query.eq("is_deleted", false);
+  }
+
+  if (q) {
+    const pattern = `%${q.replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
+    const orParts = [
+      `name.ilike.${pattern}`,
+      `description.ilike.${pattern}`,
+      `creator_name.ilike.${pattern}`
+    ];
+    if (/^\d+$/.test(q)) {
+      orParts.unshift(`asset_id.eq.${q}`);
+    }
+    query = query.or(orParts.join(","));
+  }
+
+  if (category) query = query.eq("category", category);
+  if (subcategory) query = query.eq("subcategory", subcategory);
+
+  if (sale === "free") {
+    query = query.eq("price_robux", 0).or("has_resellers.is.false,has_resellers.is.null");
+  } else if (sale === "paid") {
+    query = query.gt("price_robux", 0);
+  } else if (sale === "resale") {
+    query = query.eq("has_resellers", true).gt("lowest_resale_price_robux", 0);
+  }
+
+  if (creator === "roblox") {
+    query = query.eq("creator_name", "Roblox");
+  } else if (creator === "creators") {
+    query = query.neq("creator_name", "Roblox");
+  } else if (creator === "verified") {
+    query = query.eq("creator_has_verified_badge", true);
+  }
+
+  switch (sort) {
+    case "price_high":
+      query = query.order("price_robux", { ascending: false, nullsFirst: false }).order("favorite_count", { ascending: false, nullsFirst: false });
+      break;
+    case "price_low":
+      query = query.order("price_robux", { ascending: true, nullsFirst: false }).order("favorite_count", { ascending: false, nullsFirst: false });
+      break;
+    case "resale_low":
+      query = query
+        .eq("has_resellers", true)
+        .gt("lowest_resale_price_robux", 0)
+        .order("lowest_resale_price_robux", { ascending: true, nullsFirst: false })
+        .order("favorite_count", { ascending: false, nullsFirst: false });
+      break;
+    case "newest":
+      query = query.order(hasItemIndex ? "created_at" : "created_at", { ascending: false, nullsFirst: false }).order("favorite_count", { ascending: false, nullsFirst: false });
+      break;
+    case "updated":
+      query = query.order("last_seen_at", { ascending: false, nullsFirst: false }).order("favorite_count", { ascending: false, nullsFirst: false });
+      break;
+    case "favorites":
+    default:
+      query = query.order("favorite_count", { ascending: false, nullsFirst: false });
+      break;
+  }
+
+  const fetchSize = Math.min(pageSize * 3, 300);
+  const { data, error, count } = await query
+    .order("asset_id", { ascending: true })
+    .range(offset, offset + fetchSize - 1);
+
+  if (error) {
+    console.warn(`Failed to load ${tableName} for stats`, error.message);
+    return {
+      items: [],
+      total: 0,
+      page,
+      totalPages: 1,
+      filters: { q, sort, category, subcategory, sale, creator }
+    };
+  }
+
+  const rows = dedupeStatsItemRows((data ?? []) as unknown as StatsItemIndexRow[], pageSize);
+  const thumbnailMap = hasItemIndex ? new Map<number, string>() : await loadStatsItemThumbnailUrls(rows.map((row) => row.asset_id));
+  const items = rows.map((row, index) => ({
+    ...mapStatsItem(row, thumbnailMap.get(row.asset_id) ?? null),
+    rank: offset + index + 1
+  }));
+  const total = count ?? items.length;
+
+  return {
+    items,
+    total,
+    page,
+    totalPages: Math.max(1, Math.ceil(total / pageSize)),
+    filters: { q, sort, category, subcategory, sale, creator }
+  };
+}
+
+function statsItemChartLabel(value: string) {
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) return value;
+  return date.toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+}
+
+async function loadStatsItemRow(assetId: number): Promise<{ row: StatsItemIndexRow | null; indexed: boolean }> {
+  const hasItemIndex = await isStatsItemIndexAvailable();
+  if (hasItemIndex) {
+    const { data, error } = await supabaseAdmin()
+      .from("stats_item_current_index")
+      .select(`
+        asset_id, item_type, asset_type_id, name, description, category, subcategory,
+        creator_name, creator_id, creator_type, creator_has_verified_badge,
+        favorite_count, price_robux, price_status, lowest_price_robux,
+        lowest_resale_price_robux, is_for_sale, is_limited, is_limited_unique,
+        has_resellers, total_quantity, units_available_for_consumption,
+        quantity_limit_per_user, collectible_item_id, remaining, item_stats_tier,
+        last_seen_at, last_item_stats_refreshed_at, last_resale_data_fetched_at,
+        thumbnail_url, thumbnail_state, roblox_url,
+        price_change_24h, resale_change_24h, favorite_change_24h,
+        price_change_7d, resale_change_7d, favorite_change_7d,
+        global_favorites_rank, global_resale_rank, first_seen_at, created_at
+      `)
+      .eq("asset_id", assetId)
+      .maybeSingle();
+    if (!error && data) return { row: data as unknown as StatsItemIndexRow, indexed: true };
+  }
+
+  const { data, error } = await supabaseAdmin()
+    .from("roblox_catalog_items")
+    .select(`
+      asset_id, item_type, asset_type_id, name, description, category, subcategory,
+      creator_name, creator_id, creator_type, creator_has_verified_badge,
+      favorite_count, price_robux, price_status, lowest_price_robux,
+      lowest_resale_price_robux, is_for_sale, is_limited, is_limited_unique,
+      has_resellers, total_quantity, remaining, last_seen_at, created_at,
+      raw_catalog_json
+    `)
+    .eq("asset_id", assetId)
+    .eq("is_deleted", false)
+    .maybeSingle();
+  if (error) {
+    console.warn("Failed to load stats item detail", error.message);
+    return { row: null, indexed: false };
+  }
+  return { row: (data as StatsItemIndexRow | null) ?? null, indexed: false };
+}
+
+async function loadSimilarStatsItems(item: StatsItem, indexed: boolean): Promise<StatsItem[]> {
+  const tableName = indexed ? "stats_item_current_index" : "roblox_catalog_items";
+  const selectColumns = indexed
+    ? `
+      asset_id, item_type, asset_type_id, name, description, category, subcategory,
+      creator_name, creator_id, creator_type, creator_has_verified_badge,
+      favorite_count, price_robux, price_status, lowest_price_robux,
+      lowest_resale_price_robux, is_for_sale, is_limited, is_limited_unique,
+      has_resellers, total_quantity, remaining, last_seen_at, created_at,
+      thumbnail_url, roblox_url
+    `
+    : `
+      asset_id, item_type, asset_type_id, name, description, category, subcategory,
+      creator_name, creator_id, creator_type, creator_has_verified_badge,
+      favorite_count, price_robux, price_status, lowest_price_robux,
+      lowest_resale_price_robux, is_for_sale, is_limited, is_limited_unique,
+      has_resellers, total_quantity, remaining, last_seen_at, created_at,
+      raw_catalog_json
+    `;
+  let query = supabaseAdmin()
+    .from(tableName)
+    .select(selectColumns)
+    .eq("category", item.category)
+    .neq("asset_id", item.assetId)
+    .not("name", "is", null)
+    .order("favorite_count", { ascending: false, nullsFirst: false })
+    .limit(6);
+  if (!indexed) query = query.eq("is_deleted", false);
+
+  const { data, error } = await query;
+  if (error) {
+    console.warn("Failed to load similar stats items", error.message);
+    return [];
+  }
+  const rows = (data ?? []) as unknown as StatsItemIndexRow[];
+  const thumbnailMap = indexed ? new Map<number, string>() : await loadStatsItemThumbnailUrls(rows.map((row) => row.asset_id));
+  return rows.map((row, index) => ({ ...mapStatsItem(row, thumbnailMap.get(row.asset_id) ?? null), rank: index + 1 }));
+}
+
+async function loadStatsItemHourlyPoints(assetId: number): Promise<StatsItemChartPoint[]> {
+  const startIso = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  const { data, error } = await supabaseAdmin()
+    .from("roblox_catalog_item_stats_hourly")
+    .select("hour_start,price_robux,lowest_resale_price_robux,favorite_count,units_available_for_consumption")
+    .eq("asset_id", assetId)
+    .gte("hour_start", startIso)
+    .order("hour_start", { ascending: true });
+  if (error) {
+    console.warn("Failed to load item hourly points", error.message);
+    return [];
+  }
+  return ((data ?? []) as Array<Record<string, unknown>>).map((row) => ({
+    label: statsItemChartLabel(String(row.hour_start)),
+    sampledAt: String(row.hour_start),
+    priceRobux: toNumber(row.price_robux),
+    lowestResalePriceRobux: toNumber(row.lowest_resale_price_robux),
+    favoriteCount: toNumber(row.favorite_count),
+    availableUnits: toNumber(row.units_available_for_consumption),
+    resaleVolume: null
+  }));
+}
+
+async function loadStatsItemDailyPoints(assetId: number): Promise<StatsItemChartPoint[]> {
+  const startDate = new Date(Date.now() - 180 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const { data, error } = await supabaseAdmin()
+    .from("roblox_catalog_item_stats_daily")
+    .select("stat_date,price_close,resale_close,favorites_close,units_available_close")
+    .eq("asset_id", assetId)
+    .gte("stat_date", startDate)
+    .order("stat_date", { ascending: true });
+  if (error) {
+    console.warn("Failed to load item daily points", error.message);
+    return [];
+  }
+  return ((data ?? []) as Array<Record<string, unknown>>).map((row) => ({
+    label: statsItemChartLabel(String(row.stat_date)),
+    sampledAt: String(row.stat_date),
+    priceRobux: toNumber(row.price_close),
+    lowestResalePriceRobux: toNumber(row.resale_close),
+    favoriteCount: toNumber(row.favorites_close),
+    availableUnits: toNumber(row.units_available_close),
+    resaleVolume: null
+  }));
+}
+
+async function loadStatsItemResalePoints(assetId: number): Promise<StatsItemChartPoint[]> {
+  const startDate = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const { data, error } = await supabaseAdmin()
+    .from("roblox_catalog_item_resale_points")
+    .select("point_date,resale_price_robux,resale_volume")
+    .eq("asset_id", assetId)
+    .gte("point_date", startDate)
+    .order("point_date", { ascending: true });
+  if (error) {
+    console.warn("Failed to load item resale points", error.message);
+    return [];
+  }
+  return ((data ?? []) as Array<Record<string, unknown>>).map((row) => ({
+    label: statsItemChartLabel(String(row.point_date)),
+    sampledAt: String(row.point_date),
+    priceRobux: null,
+    lowestResalePriceRobux: toNumber(row.resale_price_robux),
+    favoriteCount: null,
+    availableUnits: null,
+    resaleVolume: toNumber(row.resale_volume)
+  }));
+}
+
+export async function getStatsItemDetail(assetId: number): Promise<StatsItemDetailData | null> {
+  if (!Number.isFinite(assetId) || assetId <= 0) return null;
+  const routeAssetId = Math.trunc(assetId);
+  let { row, indexed } = await loadStatsItemRow(routeAssetId);
+  if (!row) {
+    const fallback = await loadStatsItemRow(-routeAssetId);
+    row = fallback.row;
+    indexed = fallback.indexed;
+  }
+  if (!row) return null;
+  const thumbnailMap = indexed ? new Map<number, string>() : await loadStatsItemThumbnailUrls([row.asset_id]);
+  const item = mapStatsItem(row, thumbnailMap.get(row.asset_id) ?? null);
+  const hasHistory = await isStatsItemHistoryAvailable();
+  const [hourlyPoints, dailyPoints, resalePoints, similarItems] = await Promise.all([
+    hasHistory ? loadStatsItemHourlyPoints(item.assetId) : Promise.resolve([]),
+    hasHistory ? loadStatsItemDailyPoints(item.assetId) : Promise.resolve([]),
+    hasHistory ? loadStatsItemResalePoints(item.assetId) : Promise.resolve([]),
+    loadSimilarStatsItems(item, indexed)
+  ]);
+
+  return { item, hourlyPoints, dailyPoints, resalePoints, similarItems };
+}
+
 export async function listStatsCreators(input: {
   page?: number;
   pageSize?: number;
@@ -1397,7 +2102,7 @@ export async function listStatsCreators(input: {
   const creatorType = normalizeStatsCreatorType(input.creatorType);
   const selectColumns = `
     creator_key, creator_type, creator_id, creator_name, creator_slug,
-    game_count, hot_game_count, warm_game_count, new_game_count, cold_game_count,
+    game_count,
     playing, visits, favorites, likes, dislikes, rating_percent,
     top_universe_id, top_slug, top_name, top_display_name, top_icon_url,
     top_playing, top_visits, top_favorites, member_count, has_verified_badge,
@@ -2336,6 +3041,53 @@ export async function listStatsSitemapGames(limit = 200): Promise<Array<{ slug: 
     slug: game.slug,
     updatedAt: game.lastStatsRefreshedAt ?? game.lastPlayingRefreshedAt ?? game.updatedAtApi
   }));
+}
+
+export async function listStatsSitemapItems(limit = 1000): Promise<Array<{ assetId: number; updatedAt: string | null }>> {
+  const cappedLimit = Math.min(Math.max(Math.trunc(limit), 1), 5000);
+  const hasItemIndex = await isStatsItemIndexAvailable();
+  const tableName = hasItemIndex ? "stats_item_current_index" : "roblox_catalog_items";
+  const selectColumns = hasItemIndex
+    ? "asset_id,item_type,last_item_stats_refreshed_at,last_seen_at,created_at,favorite_count,lowest_resale_price_robux"
+    : "asset_id,item_type,last_seen_at,created_at,favorite_count,lowest_resale_price_robux,is_deleted,name,category,subcategory";
+
+  let query = supabaseAdmin()
+    .from(tableName)
+    .select(selectColumns)
+    .not("name", "is", null)
+    .not("category", "is", null)
+    .not("subcategory", "is", null)
+    .order("favorite_count", { ascending: false, nullsFirst: false })
+    .order("lowest_resale_price_robux", { ascending: false, nullsFirst: false })
+    .limit(cappedLimit * 2);
+
+  if (!hasItemIndex) query = query.eq("is_deleted", false);
+
+  const { data, error } = await query;
+  if (error) {
+    console.warn(`Failed to load ${tableName} for stats item sitemap`, error.message);
+    return [];
+  }
+
+  const seen = new Set<number>();
+  const items: Array<{ assetId: number; updatedAt: string | null }> = [];
+  for (const row of (data ?? []) as unknown as Array<Record<string, unknown>>) {
+    const rawAssetId = toNumber(row.asset_id);
+    if (!rawAssetId) continue;
+    const itemType = typeof row.item_type === "string" ? row.item_type : "Asset";
+    const routeAssetId = itemType === "Bundle" ? Math.abs(Math.trunc(rawAssetId)) : Math.trunc(rawAssetId);
+    if (!routeAssetId || seen.has(routeAssetId)) continue;
+    seen.add(routeAssetId);
+    items.push({
+      assetId: routeAssetId,
+      updatedAt:
+        (typeof row.last_item_stats_refreshed_at === "string" ? row.last_item_stats_refreshed_at : null) ??
+        (typeof row.last_seen_at === "string" ? row.last_seen_at : null) ??
+        (typeof row.created_at === "string" ? row.created_at : null)
+    });
+    if (items.length >= cappedLimit) break;
+  }
+  return items;
 }
 
 export function robloxGameUrl(game: Pick<StatsGame, "rootPlaceId" | "universeId">) {

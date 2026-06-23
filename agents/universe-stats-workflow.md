@@ -134,6 +134,22 @@ Current VPS crontab block:
 # BLOXODES_STATS_WORKER_END
 ```
 
+Repo-ready item stats cron lines to add after the item stats migration is applied and the stats worker image is rebuilt from a branch containing the `scripts/items/` jobs:
+
+```cron
+# BLOXODES_ITEM_STATS_WORKER_START
+10,40 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-fresh "npm run stats:items:tier -- --apply --limit 5000 && npm run stats:items:refresh -- --tier TRADE --limit 180 && npm run stats:items:refresh -- --tier HOT --limit 180 && npm run stats:items:refresh -- --tier NEW --limit 120 && npm run stats:items:refresh -- --tier BROKEN_MEDIA --limit 80 && npm run stats:items:resale -- --limit 60 --max-age-hours 24 && npm run stats:items:index:refresh"
+15 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-long-tail "npm run stats:items:refresh -- --tier WARM --limit 160 && npm run stats:items:refresh -- --tier COLD --limit 90 && npm run stats:items:index:refresh"
+25 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-rollup "npm run stats:items:rollup-daily -- --date yesterday --finalize && npm run stats:items:audit"
+# BLOXODES_ITEM_STATS_WORKER_END
+```
+
+Do not install these lines before `public.refresh_stats_item_current_indexes()` exists in production. First proof should be a targeted one-off run:
+
+```txt
+/home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-smoke "npm run stats:items:tier -- --apply --limit 100 && npm run stats:items:refresh -- --tier NEW --limit 10 --skip-index-refresh && npm run stats:items:index:refresh && npm run stats:items:audit"
+```
+
 VPS logs live here:
 
 ```txt

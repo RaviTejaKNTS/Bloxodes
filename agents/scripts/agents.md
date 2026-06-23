@@ -113,6 +113,12 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Import reviewed content final JSON into Supabase | `scripts/content/import-content-final.ts` | `npm run import:content-final -- --file tmp/content-workspace/<game-or-topic-slug>/<page-folder>/final.json --dry-run`; article imports write only to `articles`, fill missing authors randomly, create edited game-thumbnail covers when needed, inject the feature image before the first H2, and require `/articles` plus `/articles/<slug>` verification against the same saved row |
 | Collect all catalog item families | multiple catalog collectors | `npm run collect:catalog-items` |
 | Enrich catalog items | `scripts/catalog/enrich-roblox-catalog-items.ts` | `npm run enrich:catalog-items` |
+| Assign public item stats tiers | `scripts/items/assign-item-stats-tier.ts` | `npm run stats:items:tier -- --apply`; dry-run by default without `--apply` |
+| Refresh hourly public item stats | `scripts/items/update-item-hourly-stats.ts` | `npm run stats:items:refresh -- --tier TRADE --limit 180`; refreshes Roblox catalog details, thumbnails, hourly snapshots, and optionally item indexes |
+| Sync item resale history | `scripts/items/sync-item-resale-history.ts` | `npm run stats:items:resale -- --limit 60 --max-age-hours 24`; fetches public Roblox resale price and volume points for resale-capable items |
+| Roll up item daily stats | `scripts/items/rollup-item-daily-stats.ts` | `npm run stats:items:rollup-daily -- --date yesterday --finalize` |
+| Rebuild item stats indexes | `scripts/items/rebuild-stats-item-indexes.ts` | `npm run stats:items:index:refresh`; rebuilds `/stats/items` read indexes and queues stats revalidation |
+| Audit item stats workflow | `scripts/items/audit-item-stats-workflow.ts` | `npm run stats:items:audit`; reports current index, hourly, daily, resale, stale, due, and broken-media counts |
 | Import RobloxDen free items | `scripts/catalog/import-robloxden-free-items.py` | direct `python scripts/catalog/import-robloxden-free-items.py` |
 | Trading limiteds collection | `scripts/trading/collect-all-limiteds.ts` | `npm run trading:collect` |
 | Scrape decal IDs | `scripts/decal-ids/scrape-decal-ids.ts` | `npm run scrape:decal-ids` |
@@ -128,7 +134,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Warm Cloudflare cache | `scripts/automation/warm-cloudflare-cache.mjs` | `CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm`; default deploy mode warms main/index/legal URLs, all wiki/catalog/tool URLs, sitemap files, and a recent slice from DB-backed detail sitemaps; use `CACHE_WARM_MODE=full` only for intentional full-site warming |
 | Audit sitemap SEO and indexability signals | `scripts/automation/audit-sitemap-seo.ts` | `npm run audit:seo`; add `-- --limit 100` for a quick smoke test, `-- --site https://bloxodes.com` to force the live origin, and `-- --fail-on-error` for CI-style failures. Writes JSON and CSV reports under `tmp/seo-audits/` |
 | Audit uncompressed HTML size | `scripts/automation/audit-html-size.ts` | `npm run audit:html-size -- --url <url> --fail-on-limit`; use `--sitemap <url>` for batches and `--rewrite-origin https://bloxodes.com http://127.0.0.1:<port>` for localhost sitemap checks. Writes TSV and JSON reports under `tmp/html-size-audits/` |
-| Queue revalidation events | `scripts/automation/enqueue-revalidation-events.ts` | `npm run enqueue:revalidation -- --event stats:stats --event stats:games --event stats:creators`; writes coalesced rows to `revalidation_events` for the Supabase worker |
+| Queue revalidation events | `scripts/automation/enqueue-revalidation-events.ts` | `npm run enqueue:revalidation -- --event stats:stats --event stats:games --event stats:creators --event stats:items`; writes coalesced rows to `revalidation_events` for the Supabase worker |
 | Automation reporting | `scripts/automation/report-automation.mjs` | direct `node scripts/automation/report-automation.mjs` |
 | Report redeem markdown image gaps | `scripts/backfill/report-redeem-md-missing-images.ts` | direct `tsx scripts/backfill/report-redeem-md-missing-images.ts` |
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |
