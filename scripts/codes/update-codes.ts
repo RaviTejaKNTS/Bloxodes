@@ -4,6 +4,7 @@ import { detectProvider, getCodeDisplayPriority, scrapeSources } from "@/lib/scr
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import type { CodePage } from "@/lib/db";
 import { sanitizeCodeDisplay, normalizeCodeKey } from "@/lib/code-normalization";
+import { isLikelyNonCodeText } from "@/lib/beebom";
 
 const PAGE_SIZE = Number(process.env.REFRESH_PAGE_SIZE ?? 500);
 const CONCURRENCY = Math.max(1, Number(process.env.REFRESH_CONCURRENCY ?? 5));
@@ -53,6 +54,7 @@ type ProcessResult = {
   found?: number;
   upserted?: number;
   expired?: number;
+  removedInvalid?: number;
   newCodes?: number;
   error?: string;
 };
@@ -119,7 +121,7 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
   const existingExpiredArray = Array.isArray(game.expired_codes) ? game.expired_codes : [];
   for (const code of existingExpiredArray) {
     const displayCode = sanitizeCodeDisplay(code);
-    if (!displayCode) continue;
+    if (!displayCode || isLikelyNonCodeText(displayCode)) continue;
     const normalized = normalizeCodeKey(displayCode);
     if (normalized) {
       setExpired(normalized, displayCode, -1);
@@ -145,9 +147,30 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     throw new Error(`failed to load existing codes for ${game.slug}: ${existingError.message}`);
   }
 
+  const invalidExistingCodes = (existingRows ?? [])
+    .map((row) => sanitizeCodeDisplay(row.code))
+    .filter((code): code is string => Boolean(code && isLikelyNonCodeText(code)));
+
+  if (invalidExistingCodes.length) {
+    const { error: deleteError } = await sb
+      .from("codes")
+      .delete()
+      .eq("code_page_id", game.id)
+      .in("code", invalidExistingCodes);
+
+    if (deleteError) {
+      throw new Error(`failed to remove invalid codes for ${game.slug}: ${deleteError.message}`);
+    }
+  }
+
+  const validExistingRows = (existingRows ?? []).filter((row) => {
+    const code = sanitizeCodeDisplay(row.code);
+    return !code || !isLikelyNonCodeText(code);
+  });
+
   const existingNormalizedMap = new Map<string, { code: string; providerPriority: number; status: string; firstSeenAt?: string | null }>();
   const expiredInDb = new Set<string>();
-  for (const row of existingRows ?? []) {
+  for (const row of validExistingRows) {
     const existingCode = sanitizeCodeDisplay(row.code);
     if (!existingCode) continue;
     const normalized = normalizeCodeKey(existingCode);
@@ -266,7 +289,7 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     upserted += 1;
   }
 
-  const existingCheckRows = (existingRows ?? []).filter((row) => row.status === "check");
+  const existingCheckRows = validExistingRows.filter((row) => row.status === "check");
   if (existingCheckRows.length) {
     const codesToMove = existingCheckRows
       .map((row) => sanitizeCodeDisplay(row.code))
@@ -296,7 +319,7 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     }
   }
 
-  const existingActiveOrCheck = (existingRows ?? []).filter((row) => row.status === "active");
+  const existingActiveOrCheck = validExistingRows.filter((row) => row.status === "active");
 
   const toExpireEntries = existingActiveOrCheck
     .map((row) => {
@@ -362,6 +385,7 @@ async function processCodePage(sb: ReturnType<typeof supabaseAdmin>, game: CodeP
     found: codes.length,
     upserted,
     expired: toExpireEntries.length,
+    removedInvalid: invalidExistingCodes.length,
     newCodes: newCodesCount,
   };
 }
@@ -390,6 +414,7 @@ async function main() {
     totalCodesFound: 0,
     totalCodesUpserted: 0,
     totalCodesExpired: 0,
+    totalInvalidCodesRemoved: 0,
     totalNewCodes: 0,
   };
 
@@ -422,10 +447,12 @@ async function main() {
         stats.totalCodesFound += res.found ?? 0;
         stats.totalCodesUpserted += res.upserted ?? 0;
         stats.totalCodesExpired += res.expired ?? 0;
+        stats.totalInvalidCodesRemoved += res.removedInvalid ?? 0;
         stats.totalNewCodes += res.newCodes ?? 0;
         const expiredNote = res.expired ? `, expired ${res.expired}` : "";
+        const removedNote = res.removedInvalid ? `, removed invalid ${res.removedInvalid}` : "";
         console.log(
-          `✔ ${res.slug} — ${res.upserted ?? 0} codes upserted (found ${res.found ?? 0}${expiredNote})`
+          `✔ ${res.slug} — ${res.upserted ?? 0} codes upserted (found ${res.found ?? 0}${expiredNote}${removedNote})`
         );
         successDetails.push({
           slug: res.slug,
@@ -434,6 +461,7 @@ async function main() {
           found: res.found ?? 0,
           upserted: res.upserted ?? 0,
           expired: res.expired ?? 0,
+          removedInvalid: res.removedInvalid ?? 0,
           newCodes: res.newCodes ?? 0,
         });
       } else if (res.status === "skipped") {
@@ -461,6 +489,7 @@ async function main() {
   console.log(`   Codes found:    ${stats.totalCodesFound}`);
   console.log(`   Codes upserted: ${stats.totalCodesUpserted}`);
   console.log(`   Codes expired: ${stats.totalCodesExpired}`);
+  console.log(`   Invalid codes removed: ${stats.totalInvalidCodesRemoved}`);
   console.log(`   New codes:      ${stats.totalNewCodes}`);
 
   if (stats.failed > 0) {
@@ -473,7 +502,9 @@ async function main() {
       type: "refresh-codes" as const,
       generatedAt: new Date().toISOString(),
       stats,
-      successes: successDetails.filter((detail) => detail.upserted || detail.expired || detail.newCodes),
+      successes: successDetails.filter(
+        (detail) => detail.upserted || detail.expired || detail.removedInvalid || detail.newCodes
+      ),
       skipped: skippedDetails,
       failures: failureDetails,
     };

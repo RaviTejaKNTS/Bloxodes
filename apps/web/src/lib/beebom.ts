@@ -4,6 +4,19 @@ import type { ScrapeResult, ScrapedCode } from "./scraper-types";
 const USER_AGENT = "Mozilla/5.0 (compatible; RobloxCodesBot/1.0)";
 const LIST_SEPARATOR_REGEX = /\s*:\s*|\s*[–—]\s*|(?:\s+-\s*|\s*-\s+)/;
 const HEADING_SELECTOR = "h1, h2, h3, h4, h5, h6";
+const CODES_CONTAINER_SELECTOR = "ul, ol, table";
+const ACTIVE_CODES_HEADING_REGEX =
+  /(?:\b(?:active|working)\b.*\bcodes?\b|\bcodes?\b.*\b(?:active|working)\b)/i;
+const NON_ACTIVE_SECTION_REGEX = /\b(?:expired|inactive|redeem|how to)\b/i;
+const REDEMPTION_INSTRUCTION_REGEXES = [
+  /^go(?:to)?(?:the)?shop$/i,
+  /^select(?:the)?redeem(?:option|button)?$/i,
+  /^enter(?:the)?code(?:and)?redeem$/i,
+  /^click(?:the|on|a|an).*(?:arrow|button|menu|screen|server)$/i,
+  /^run(?:the)?.*experience(?:onroblox)?$/i,
+];
+const NO_CODES_STATUS_REGEX =
+  /^(?:thereare)?(?:currently)?no(?:working|active|new|valid|available|redeemable)*codes?(?:for.*)?$/i;
 
 function normalizeCode(raw: string): string | null {
   if (!raw) return null;
@@ -23,6 +36,16 @@ function normalizeCode(raw: string): string | null {
   return code.replace(/\s+/g, "");
 }
 
+export function isLikelyRedemptionInstruction(raw: string): boolean {
+  const compact = raw.replace(/[^a-z0-9]/gi, "");
+  return REDEMPTION_INSTRUCTION_REGEXES.some((pattern) => pattern.test(compact));
+}
+
+export function isLikelyNonCodeText(raw: string): boolean {
+  const compact = raw.replace(/[^a-z0-9]/gi, "");
+  return isLikelyRedemptionInstruction(raw) || NO_CODES_STATUS_REGEX.test(compact);
+}
+
 const NEW_REGEX = /\(\s*new\s*(?:code)?\s*\)/i;
 
 function stripNewFlag(value: string): { cleaned: string; isNew: boolean } {
@@ -37,56 +60,63 @@ function stripNewFlag(value: string): { cleaned: string; isNew: boolean } {
  * - Skips divider lists and menus
  * - No regex restriction for code patterns (Beebom may list codes without rewards)
  */
+function findContainerBeforeNextHeading(
+  $: cheerio.CheerioAPI,
+  heading: cheerio.Cheerio<cheerio.Element>
+): cheerio.Cheerio<cheerio.Element> | null {
+  const isEligible = (el: cheerio.Element) => {
+    const container = $(el);
+    return (
+      !container.hasClass("is-style-inline-divider-list") &&
+      !container.hasClass("menu") &&
+      container.attr("id") !== "primary-menu" &&
+      Boolean(container.text().trim())
+    );
+  };
+  let pointer = heading.next();
+
+  while (pointer.length) {
+    if (pointer.is(HEADING_SELECTOR)) return null;
+
+    if (pointer.is(CODES_CONTAINER_SELECTOR) && isEligible(pointer.get(0)!)) {
+      return pointer;
+    }
+
+    const nested = pointer.find(CODES_CONTAINER_SELECTOR).filter((_, el) => isEligible(el)).first();
+    if (nested.length) return nested;
+
+    pointer = pointer.next();
+  }
+
+  return null;
+}
+
 function findCodesContainer($: cheerio.CheerioAPI): cheerio.Cheerio<cheerio.Element> | null {
   const content = $(".beebom-single-content.entry-content.highlight");
   if (!content.length) return null;
 
-  // 1️⃣ Try headings like "Active Codes" / "Working Codes"
-  let section = content.find(
-    "h2:contains('Active Codes'), h3:contains('Active Codes'), h2:contains('Working Codes'), h3:contains('Working Codes')"
-  ).first();
+  const activeHeadings = content.find(HEADING_SELECTOR).filter((_, el) => {
+    const text = $(el).text().replace(/\s+/g, " ").trim();
+    return ACTIVE_CODES_HEADING_REGEX.test(text) && !text.toLowerCase().includes("expired");
+  });
 
-  // 2️⃣ Fallback: find any list/table that isn't a menu, divider, or redeem section
-  if (!section.length) {
-    const candidates = content.find("ul, ol, table");
-
-    // ✅ Fix: initialize as an empty Cheerio collection instead of null
-    let probable: cheerio.Cheerio<cheerio.Element> = $([]);
-
-    candidates.each((_: number, el: cheerio.Element) => {
-      const elem = $(el);
-
-      if (
-        elem.hasClass("is-style-inline-divider-list") ||
-        elem.hasClass("menu") ||
-        elem.attr("id") === "primary-menu"
-      ) {
-        return;
-      }
-
-      const text = elem.text().trim();
-      if (!text) return;
-
-      const prevHeading = elem.prevAll("h2, h3").first().text().toLowerCase();
-      if (prevHeading.includes("redeem") || prevHeading.includes("expired")) return;
-
-      probable = elem;
-      return false; // stop at the first valid one
-    });
-
-    if (probable.length) return probable;
+  for (const headingEl of activeHeadings.toArray()) {
+    const container = findContainerBeforeNextHeading($, $(headingEl));
+    if (container?.length) return container;
   }
 
-  // 3️⃣ If found via heading, locate the list/table below it
-  if (section.length) {
-    const next = section
-      .nextAll("ul, ol, table")
-      .not(".is-style-inline-divider-list")
-      .not(".menu")
-      .filter((_: number, el: cheerio.Element) => $(el).attr("id") !== "primary-menu")
-      .first();
+  // Some older Beebom pages use a plain "Codes" heading. Keep this fallback
+  // heading-bound so navigation and redemption lists cannot become code data.
+  if (!activeHeadings.length) {
+    const genericHeadings = content.find(HEADING_SELECTOR).filter((_, el) => {
+      const text = $(el).text().replace(/\s+/g, " ").trim();
+      return /\bcodes?\b/i.test(text) && !NON_ACTIVE_SECTION_REGEX.test(text);
+    });
 
-    if (next.length) return next;
+    for (const headingEl of genericHeadings.toArray()) {
+      const container = findContainerBeforeNextHeading($, $(headingEl));
+      if (container?.length) return container;
+    }
   }
 
   return null;
@@ -125,7 +155,7 @@ function findExpiredCodes($: cheerio.CheerioAPI): { code: string; provider: "bee
 
     list.find("li").each((_: number, li: cheerio.Element) => {
       const text = $(li).text().trim();
-      if (!text) return;
+      if (!text || isLikelyNonCodeText(text)) return;
       expired.push({ code: text, provider: "beebom" });
     });
   });
@@ -133,13 +163,7 @@ function findExpiredCodes($: cheerio.CheerioAPI): { code: string; provider: "bee
   return expired;
 }
 
-export async function scrapeBeebomPage(url: string): Promise<ScrapeResult> {
-  const res = await fetch(url, { headers: { "user-agent": USER_AGENT } });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch ${url}: ${res.status}`);
-  }
-
-  const html = await res.text();
+export function parseBeebomHtml(html: string): ScrapeResult {
   const $ = cheerio.load(html);
   const container = findCodesContainer($);
   const codes: ScrapedCode[] = [];
@@ -163,7 +187,7 @@ export async function scrapeBeebomPage(url: string): Promise<ScrapeResult> {
 
         const { cleaned: codeClean, isNew: codeNew } = stripNewFlag(codeText);
         const normalized = normalizeCode(codeClean);
-        if (!normalized) return;
+        if (!normalized || isLikelyNonCodeText(codeClean)) return;
 
         const entry: ScrapedCode = {
           code: normalized,
@@ -186,7 +210,7 @@ export async function scrapeBeebomPage(url: string): Promise<ScrapeResult> {
 
         const { cleaned: codeClean, isNew: codeNew } = stripNewFlag(beforeSeparator);
         const normalized = normalizeCode(codeClean);
-        if (!normalized) return;
+        if (!normalized || isLikelyNonCodeText(codeClean)) return;
         const entry: ScrapedCode = {
           code: normalized,
           status: "active",
@@ -205,4 +229,13 @@ export async function scrapeBeebomPage(url: string): Promise<ScrapeResult> {
     codes,
     expiredCodes,
   };
+}
+
+export async function scrapeBeebomPage(url: string): Promise<ScrapeResult> {
+  const res = await fetch(url, { headers: { "user-agent": USER_AGENT } });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch ${url}: ${res.status}`);
+  }
+
+  return parseBeebomHtml(await res.text());
 }
