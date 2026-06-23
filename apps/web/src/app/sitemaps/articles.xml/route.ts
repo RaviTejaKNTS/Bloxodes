@@ -1,4 +1,5 @@
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
+import { listArticleGameSummaries } from "@/lib/db";
 import { supabaseAdmin } from "@/lib/supabase";
 import { NextResponse } from "next/server";
 
@@ -23,8 +24,16 @@ export async function GET() {
 
     if (error) throw error;
 
-    const rows = (data ?? []) as ArticleSitemapRow[];
+    const [rows, articleGames] = [(data ?? []) as ArticleSitemapRow[], await listArticleGameSummaries()];
     const pages: SitemapUrlSetEntry[] = [];
+    for (const game of articleGames) {
+      pages.push({
+        loc: withSiteUrl(`/articles/games/${game.slug}`),
+        changefreq: "weekly",
+        priority: game.articleCount > 1 ? "0.8" : "0.6",
+        lastmod: toIsoDate(game.latestUpdatedAt)
+      });
+    }
     for (const row of rows) {
       if (!row.slug) continue;
       pages.push({

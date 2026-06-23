@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Award, BarChart3, BookOpen, Calendar, ChevronDown, KeyRound, SquareCheckBig, Wrench } from "lucide-react";
+import { Award, BarChart3, BookOpen, Calendar, ChevronDown, FileText, KeyRound, SquareCheckBig, Wrench } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,6 +23,7 @@ type SiteTopNavProps = {
 const gameNavIcons = {
   wiki: BookOpen,
   stats: BarChart3,
+  articles: FileText,
   codes: KeyRound,
   events: Calendar,
   checklists: SquareCheckBig,
@@ -32,10 +33,11 @@ const gameNavIcons = {
 const gameNavOrder = {
   wiki: 0,
   stats: 1,
-  codes: 2,
-  events: 3,
-  checklists: 4,
-  quizzes: 5
+  articles: 2,
+  codes: 3,
+  events: 4,
+  checklists: 5,
+  quizzes: 6
 } satisfies Record<GameTopNavLink["type"], number>;
 
 export function SiteTopNav({ className, catalogNav = null, gameNav = null, onNavigate }: SiteTopNavProps) {

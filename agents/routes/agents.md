@@ -55,7 +55,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/robots.txt` | route module | `src/app/robots.ts` | Robots directives built from site config. |
 | `/sitemap.xml` | `GET` | `src/app/sitemap.xml/route.ts` | Top-level sitemap index builder. |
 | `/sitemaps/main.xml` | `GET` | `src/app/sitemaps/main.xml/route.ts` | Static route sitemap. |
-| `/sitemaps/articles.xml` | `GET` | `src/app/sitemaps/articles.xml/route.ts` | Articles sitemap. |
+| `/sitemaps/articles.xml` | `GET` | `src/app/sitemaps/articles.xml/route.ts` | Articles sitemap, including `/articles/games/[slug]` hubs and `/articles/games/roblox`. |
 | `/sitemaps/authors.xml` | `GET` | `src/app/sitemaps/authors.xml/route.ts` | Authors sitemap. |
 | `/sitemaps/catalog.xml` | `GET` | `src/app/sitemaps/catalog.xml/route.ts` | Catalog sitemap. |
 | `/sitemaps/checklists.xml` | `GET` | `src/app/sitemaps/checklists.xml/route.ts` | Checklists sitemap. |

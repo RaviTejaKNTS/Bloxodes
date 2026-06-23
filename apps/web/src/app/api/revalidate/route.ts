@@ -3,6 +3,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { purgeCloudflarePublicCache, warmCloudflarePaths } from "@/lib/cloudflare-cache";
 import { cacheTagsForEvent, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
 import { AVATAR_CATALOG_MASTER_CODE, buildAvatarCatalogPath } from "@/lib/roblox-avatar-catalog";
+import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
 
 type SinglePayload = PublicCacheEvent;
@@ -124,10 +125,30 @@ function revalidateForCode(slug: string) {
   );
 }
 
-function revalidateForArticle(slug: string) {
+function revalidateForArticle(slug: string, articleGameSlug?: string | null) {
+  const articleGamePaths = articleGameSlug
+    ? paginatedIndexPaths(`/articles/games/${articleGameSlug}`)
+    : ["/articles/games/[slug]", "/articles/games/[slug]/page/[page]"];
   return applyRevalidation(
-    [`/articles/${slug}`, ...paginatedIndexPaths("/articles"), "/", FEED_PATH, SITEMAP_INDEX_PATH, ARTICLES_SITEMAP_PATH],
-    [`article:${slug}`, "articles", "articles-index", "home"]
+    [
+      `/articles/${slug}`,
+      ...paginatedIndexPaths("/articles"),
+      ...articleGamePaths,
+      "/articles/games/[slug]",
+      "/articles/games/[slug]/page/[page]",
+      "/",
+      FEED_PATH,
+      SITEMAP_INDEX_PATH,
+      ARTICLES_SITEMAP_PATH
+    ],
+    [
+      `article:${slug}`,
+      articleGameSlug ? `article-game:${articleGameSlug}` : "",
+      "articles",
+      "articles-index",
+      "articles-games",
+      "home"
+    ]
   );
 }
 
@@ -532,6 +553,21 @@ async function lookupRelatedWikiSlugs(type: SinglePayload["type"], slug: string)
   return lookupWikiSlugsByUniverseIds(universeIds);
 }
 
+async function lookupArticleGameSlugByArticleSlug(slug: string): Promise<string | null> {
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from("articles")
+    .select("universe_id, universe:roblox_universes(universe_id,slug,display_name,name)")
+    .eq("slug", slug)
+    .limit(1)
+    .maybeSingle();
+
+  if (error || !data) return null;
+  if (!data.universe_id) return ROBLOX_ARTICLE_GAME_SLUG;
+  const universe = Array.isArray(data.universe) ? data.universe[0] ?? null : data.universe ?? null;
+  return universe ? articleGameSlugFromUniverse(universe) : null;
+}
+
 function parsePayloadEvents(payload: Payload): SinglePayload[] | { error: string } {
   if (!payload || typeof payload !== "object") {
     return { error: "Invalid payload" };
@@ -586,9 +622,12 @@ async function collectRevalidationTargets(payload: SinglePayload) {
     case "code":
       purgePaths = revalidateForCode(slug);
       break;
-    case "article":
-      purgePaths = revalidateForArticle(slug);
+    case "article": {
+      const articleGameSlug = await lookupArticleGameSlugByArticleSlug(slug);
+      purgePaths = revalidateForArticle(slug, articleGameSlug);
+      if (articleGameSlug) purgeTags = [...purgeTags, `article-game:${articleGameSlug}`];
       break;
+    }
     case "author":
       purgePaths = revalidateForAuthor(slug);
       break;

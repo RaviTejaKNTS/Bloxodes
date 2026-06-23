@@ -49,6 +49,7 @@ import { CommentsSection } from "@/components/comments/CommentsSection";
 import { formatUpdatedLabel } from "@/lib/updated-label";
 import { getUniverseEventSummary } from "@/lib/events-summary";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
+import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 
 export const revalidate = 86400;
 const MAX_STATIC_ARTICLE_SLUGS = 150;
@@ -195,17 +196,19 @@ async function renderArticlePage(article: ArticleWithRelations) {
   const authorSameAs = collectAuthorSameAs(article.author);
   const authorBioPlain = article.author?.bio_md ? markdownToPlainText(article.author.bio_md) : null;
   const universeName = article.universe?.display_name ?? article.universe?.name ?? null;
-  const breadcrumbLeaf = universeName ?? article.title;
+  const articleGameTitle = universeName ?? "Roblox";
+  const articleGameSlug = article.universe ? articleGameSlugFromUniverse(article.universe) : ROBLOX_ARTICLE_GAME_SLUG;
+  const articleGameHref = `/articles/games/${articleGameSlug}`;
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Articles", href: "/articles" },
-    { label: breadcrumbLeaf, href: null }
+    { label: `${articleGameTitle} articles`, href: articleGameHref }
   ];
   const breadcrumbData = JSON.stringify(
     breadcrumbJsonLd([
       { name: "Home", url: SITE_URL },
       { name: "Articles", url: `${SITE_URL}/articles` },
-      { name: article.title, url: canonicalUrl }
+      { name: `${articleGameTitle} articles`, url: `${SITE_URL}${articleGameHref}` }
     ])
   );
   const howToSteps = extractHowToSteps(article.content_md);

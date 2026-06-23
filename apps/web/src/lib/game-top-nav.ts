@@ -1,13 +1,15 @@
 import "server-only";
+import { getArticleGameSummaryBySlug } from "@/lib/db";
 import type { GameTopNavContext, GameTopNavLink, GameTopNavToolLink } from "@/lib/game-top-nav-types";
-import { statsUniverseSlug } from "@/lib/slug";
+import { articleGameSlugFromUniverse, statsUniverseSlug } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
 
 type RouteTarget =
-  | { type: Exclude<GameTopNavLink["type"], "stats">; table: string; slugField: "slug" | "code"; slug: string }
+  | { type: Exclude<GameTopNavLink["type"], "stats" | "articles">; table: string; slugField: "slug" | "code"; slug: string }
   | { type: "tools"; table: "tools_view"; slugField: "code"; slug: string }
   | { type: "stats"; statsSlug: string }
-  | { type: "articles"; slug: string }
+  | { type: "articleDetail"; slug: string }
+  | { type: "articleGame"; slug: string }
   | { type: "wikiCatalog"; wikiSlug: string };
 
 type TargetResolution = {
@@ -59,8 +61,14 @@ function parsePath(path: string | null | undefined): RouteTarget | null {
   if (segments.length === 3 && segments[0] === "wiki" && segments[1] && segments[2]) {
     return { type: "wikiCatalog", wikiSlug: segments[1] };
   }
+  if (segments.length === 3 && segments[0] === "articles" && segments[1] === "games" && segments[2]) {
+    return { type: "articleGame", slug: segments[2] };
+  }
+  if (segments.length === 5 && segments[0] === "articles" && segments[1] === "games" && segments[2] && segments[3] === "page") {
+    return { type: "articleGame", slug: segments[2] };
+  }
   if (segments.length === 2 && segments[0] === "articles" && segments[1]) {
-    return { type: "articles", slug: segments[1] };
+    return { type: "articleDetail", slug: segments[1] };
   }
   return null;
 }
@@ -96,16 +104,34 @@ async function resolveRouteTarget(target: RouteTarget): Promise<TargetResolution
     return { universeId: data.universe_id, activeType: "wiki", activeHref: `/wiki/${data.slug}` };
   }
 
-  if (target.type === "articles") {
+  if (target.type === "articleDetail") {
     const { data, error } = await supabase
       .from("articles")
-      .select("universe_id, slug")
+      .select("universe_id, slug, universe:roblox_universes(universe_id,slug,display_name,name)")
       .eq("slug", target.slug)
       .eq("is_published", true)
       .limit(1)
       .maybeSingle();
     if (error || !data?.universe_id) return null;
-    return { universeId: data.universe_id, activeType: null, activeHref: null };
+    const universe = (Array.isArray(data.universe) ? data.universe[0] ?? null : data.universe ?? null) as Parameters<
+      typeof articleGameSlugFromUniverse
+    >[0] | null;
+    const articleGameSlug = universe ? articleGameSlugFromUniverse(universe) : null;
+    return {
+      universeId: data.universe_id,
+      activeType: "articles",
+      activeHref: articleGameSlug ? `/articles/games/${articleGameSlug}` : null
+    };
+  }
+
+  if (target.type === "articleGame") {
+    const game = await getArticleGameSummaryBySlug(target.slug);
+    if (!game?.universeId) return null;
+    return {
+      universeId: game.universeId,
+      activeType: "articles",
+      activeHref: `/articles/games/${game.slug}`
+    };
   }
 
   const { data, error } = await supabase
@@ -140,7 +166,7 @@ export async function getGameTopNavContext(path: string | null | undefined): Pro
   if (!resolved) return null;
 
   const supabase = supabaseAdmin();
-  const [universeResult, codes, wiki, events, checklists, quizzes, tools] = await Promise.all([
+  const [universeResult, codes, wiki, events, checklists, quizzes, tools, articles] = await Promise.all([
     supabase
       .from("roblox_universes")
       .select("universe_id, slug, display_name, name, icon_url")
@@ -185,7 +211,13 @@ export async function getGameTopNavContext(path: string | null | undefined): Pro
       .eq("is_published", true)
       .eq("universe_id", resolved.universeId)
       .order("content_updated_at", { ascending: false })
-      .limit(8)
+      .limit(8),
+    supabase
+      .from("articles")
+      .select("id")
+      .eq("is_published", true)
+      .eq("universe_id", resolved.universeId)
+      .limit(1)
   ]);
 
   if (universeResult.error || !universeResult.data) return null;
@@ -198,6 +230,9 @@ export async function getGameTopNavContext(path: string | null | undefined): Pro
     if (row.slug) links.push({ label: "Wiki", href: `/wiki/${row.slug}`, type: "wiki" });
   }
   links.push({ label: "Stats", href: `/stats/games/${statsSlug}`, type: "stats" });
+  if ((articles.data ?? []).length) {
+    links.push({ label: "Articles", href: `/articles/games/${articleGameSlugFromUniverse(universe)}`, type: "articles" });
+  }
   for (const row of (codes.data ?? []) as Array<{ slug?: string | null }>) {
     if (row.slug) links.push({ label: "Codes", href: `/codes/${row.slug}`, type: "codes" });
   }

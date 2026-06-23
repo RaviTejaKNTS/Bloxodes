@@ -1,4 +1,5 @@
 import { publicContentCache } from "@/lib/public-content-cache";
+import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type Author = {
@@ -108,6 +109,16 @@ export type ArticleWithRelations = Article & {
   universe: UniverseSummary | null;
 };
 
+export type ArticleGameSummary = {
+  slug: string;
+  title: string;
+  universeId: number | null;
+  articleCount: number;
+  latestUpdatedAt: string | null;
+  iconUrl: string | null;
+  universe: UniverseSummary | null;
+};
+
 function normalizePositivePage(page: number): number {
   if (!Number.isFinite(page) || page < 1) return 1;
   const floored = Math.floor(page);
@@ -145,6 +156,12 @@ function isOutOfRangePaginationError(error: unknown): boolean {
 function isOutOfRangePaginationFailure(status: unknown, error: unknown): boolean {
   if (status === 416 || status === "416") return true;
   return isOutOfRangePaginationError(error);
+}
+
+function latestTimestamp(left: string | null, right: string | null): string | null {
+  if (!left) return right;
+  if (!right) return left;
+  return new Date(right).getTime() > new Date(left).getTime() ? right : left;
 }
 
 const ARTICLE_INDEX_FIELDS =
@@ -573,6 +590,115 @@ async function fetchPublishedArticlesByUniverseId(
   return mapArticleIndexRows(data);
 }
 
+async function fetchArticleGameSummaries(): Promise<ArticleGameSummary[]> {
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from("articles")
+    .select(
+      "id,universe_id,published_at,created_at,updated_at,universe:roblox_universes(universe_id,slug,display_name,name,icon_url)"
+    )
+    .eq("is_published", true)
+    .order("published_at", { ascending: false })
+    .limit(10000);
+
+  if (error) throw error;
+
+  const groups = new Map<string, ArticleGameSummary>();
+  for (const row of (data ?? []) as unknown as Array<{
+    universe_id: number | null;
+    published_at: string | null;
+    created_at: string | null;
+    updated_at: string | null;
+    universe?: UniverseSummary | UniverseSummary[] | null;
+  }>) {
+    const universe = Array.isArray(row.universe) ? row.universe[0] ?? null : row.universe ?? null;
+    const slug = universe ? articleGameSlugFromUniverse(universe) : ROBLOX_ARTICLE_GAME_SLUG;
+    const title = universe?.display_name ?? universe?.name ?? "Roblox";
+    const existing = groups.get(slug);
+    const latest = row.updated_at ?? row.published_at ?? row.created_at ?? null;
+
+    if (existing) {
+      existing.articleCount += 1;
+      existing.latestUpdatedAt = latestTimestamp(existing.latestUpdatedAt, latest);
+      continue;
+    }
+
+    groups.set(slug, {
+      slug,
+      title,
+      universeId: row.universe_id ?? null,
+      articleCount: 1,
+      latestUpdatedAt: latest,
+      iconUrl: universe?.icon_url ?? null,
+      universe
+    });
+  }
+
+  return Array.from(groups.values()).sort(
+    (left, right) =>
+      right.articleCount - left.articleCount ||
+      (right.latestUpdatedAt ? new Date(right.latestUpdatedAt).getTime() : 0) -
+        (left.latestUpdatedAt ? new Date(left.latestUpdatedAt).getTime() : 0) ||
+      left.title.localeCompare(right.title)
+  );
+}
+
+async function fetchArticleGameSummaryBySlug(slug: string): Promise<ArticleGameSummary | null> {
+  const normalizedSlug = slug.trim().toLowerCase();
+  if (!normalizedSlug) return null;
+  const groups = await fetchArticleGameSummaries();
+  return groups.find((group) => group.slug === normalizedSlug) ?? null;
+}
+
+async function fetchPublishedArticlesByArticleGameSlugPage(
+  slug: string,
+  safePage: number,
+  safePageSize: number
+): Promise<{ game: ArticleGameSummary; articles: ArticleWithRelations[]; total: number; totalPages: number } | null> {
+  const game = await fetchArticleGameSummaryBySlug(slug);
+  if (!game) return null;
+
+  const offset = (safePage - 1) * safePageSize;
+  const sb = supabaseAdmin();
+  let query = sb
+    .from("articles")
+    .select(ARTICLE_INDEX_FIELDS, { count: "exact" })
+    .eq("is_published", true);
+  query = game.universeId == null ? query.is("universe_id", null) : query.eq("universe_id", game.universeId);
+  const scopedQuery = query
+    .order("published_at", { ascending: false })
+    .order("id", { ascending: true })
+    .range(offset, offset + safePageSize - 1);
+
+  try {
+    const { data, count, error, status } = await scopedQuery;
+    if (error) {
+      if (!isOutOfRangePaginationFailure(status, error)) throw error;
+      return {
+        game,
+        articles: [],
+        total: game.articleCount,
+        totalPages: Math.max(1, Math.ceil(game.articleCount / safePageSize))
+      };
+    }
+    const total = count ?? game.articleCount;
+    return {
+      game: { ...game, articleCount: total },
+      articles: mapArticleIndexRows(data),
+      total,
+      totalPages: Math.max(1, Math.ceil(total / safePageSize))
+    };
+  } catch (error) {
+    if (!isOutOfRangePaginationError(error)) throw error;
+    return {
+      game,
+      articles: [],
+      total: game.articleCount,
+      totalPages: Math.max(1, Math.ceil(game.articleCount / safePageSize))
+    };
+  }
+}
+
 async function fetchArticleBySlug(normalizedSlug: string): Promise<ArticleWithRelations | null> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
@@ -679,6 +805,57 @@ export async function listPublishedArticlesByUniverseId(
     }
   );
 
+  return cached();
+}
+
+export async function listArticleGameSummaries(): Promise<ArticleGameSummary[]> {
+  if (BYPASS_ARTICLE_CACHE) {
+    return fetchArticleGameSummaries();
+  }
+  const cached = publicContentCache(fetchArticleGameSummaries, ["listArticleGameSummaries"], {
+    revalidate: 21600,
+    tags: ["articles-index"]
+  });
+  return cached();
+}
+
+export async function getArticleGameSummaryBySlug(slug: string): Promise<ArticleGameSummary | null> {
+  const normalizedSlug = slug.trim().toLowerCase();
+  if (!normalizedSlug) return null;
+  if (BYPASS_ARTICLE_CACHE) {
+    return fetchArticleGameSummaryBySlug(normalizedSlug);
+  }
+  const cached = publicContentCache(
+    () => fetchArticleGameSummaryBySlug(normalizedSlug),
+    [`getArticleGameSummary:${normalizedSlug}`],
+    {
+      revalidate: 21600,
+      tags: ["articles-index", `article-game:${normalizedSlug}`]
+    }
+  );
+  return cached();
+}
+
+export async function listPublishedArticlesByArticleGameSlugPage(
+  slug: string,
+  page: number,
+  pageSize: number
+): Promise<{ game: ArticleGameSummary; articles: ArticleWithRelations[]; total: number; totalPages: number } | null> {
+  const normalizedSlug = slug.trim().toLowerCase();
+  const safePage = normalizePositivePage(page);
+  const safePageSize = Math.max(1, pageSize);
+  if (!normalizedSlug) return null;
+  if (BYPASS_ARTICLE_CACHE) {
+    return fetchPublishedArticlesByArticleGameSlugPage(normalizedSlug, safePage, safePageSize);
+  }
+  const cached = publicContentCache(
+    () => fetchPublishedArticlesByArticleGameSlugPage(normalizedSlug, safePage, safePageSize),
+    [`listPublishedArticlesByArticleGameSlugPage:${normalizedSlug}:${safePage}:${safePageSize}`],
+    {
+      revalidate: 21600,
+      tags: ["articles-index", `article-game:${normalizedSlug}`]
+    }
+  );
   return cached();
 }
 

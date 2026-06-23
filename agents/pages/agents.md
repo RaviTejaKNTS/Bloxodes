@@ -31,7 +31,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Area | Routes | Files / Notes |
 | --- | --- | --- |
 | Codes | `/codes`, `/codes/page/[page]`, `/codes/[slug]` | `src/app/(site)/codes/*`, shared helpers in `src/app/(site)/codes/page-data.tsx`. Slugs are game slugs only, not `<game>-codes`; code rows come from `scripts/codes/update-codes.ts` using RobloxDen in `source_url` and Beebom in `source_url_2`. |
-| Articles | `/articles`, `/articles/page/[page]`, `/articles/[slug]` | `src/app/(site)/articles/*`, shared helpers in `src/app/(site)/articles/page-data.tsx` |
+| Articles | `/articles`, `/articles/page/[page]`, `/articles/games/[slug]`, `/articles/games/[slug]/page/[page]`, `/articles/[slug]` | `src/app/(site)/articles/*`, shared helpers in `src/app/(site)/articles/page-data.tsx`; game article hubs use `src/app/(site)/articles/games/[slug]/page-data.tsx` and send articles without `universe_id` to `/articles/games/roblox` |
 | Retired lists redirect | `/lists`, `/lists/*` | `src/app/(site)/lists/[[...slug]]/page.tsx`; old list URLs permanently redirect to `/stats` |
 | Checklists | `/checklists`, `/checklists/page/[page]`, `/checklists/[slug]` | `src/app/(site)/checklists/*`, shared helpers in `src/app/(site)/checklists/page-data.tsx` |
 | Events | `/events`, `/events/[slug]` | `src/app/(site)/events/*`, shared loaders in `src/app/(site)/events/page-data.tsx`, detail composition in `events/[slug]/events-page.tsx` |
@@ -89,6 +89,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 ## Route-Family Sidecars Worth Checking First
 
 - `src/app/(site)/articles/page-data.tsx`
+- `src/app/(site)/articles/games/[slug]/page-data.tsx`
 - `src/app/(site)/catalog/free-roblox-items/page-data.tsx`
 - `src/app/(site)/catalog/roblox-color-codes/page-data.tsx`
 - `src/app/(site)/catalog/roblox-decal-ids/page-data.tsx`

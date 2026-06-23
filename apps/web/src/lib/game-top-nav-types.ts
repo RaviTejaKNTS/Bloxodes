@@ -7,7 +7,7 @@ export type GameTopNavToolLink = {
 export type GameTopNavLink = {
   label: string;
   href: string;
-  type: "wiki" | "stats" | "codes" | "events" | "checklists" | "quizzes";
+  type: "wiki" | "stats" | "codes" | "events" | "checklists" | "quizzes" | "articles";
   active?: boolean;
 };
 

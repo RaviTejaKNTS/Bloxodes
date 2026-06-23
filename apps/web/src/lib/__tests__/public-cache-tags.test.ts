@@ -18,6 +18,18 @@ describe("public cache tags", () => {
     expect(tags).not.toContain("site");
   });
 
+  it("tags article game hubs separately from article detail pages", () => {
+    expect(cacheTagsForPath("/articles/games/fisch")).toEqual(
+      expect.arrayContaining(["site", "articles-index", "articles-games", "article-game:fisch"])
+    );
+    expect(cacheTagsForPath("/articles/games/fisch/page/2")).toEqual(
+      expect.arrayContaining(["site", "articles-index", "articles-games", "article-game:fisch"])
+    );
+    expect(cacheTagsForEvent("article", "fisch-guide")).toEqual(
+      expect.arrayContaining(["article:fisch-guide", "articles-index", "articles-games", "sitemap:articles"])
+    );
+  });
+
   it("tags wiki catalog pages with both wiki and collection tags", () => {
     expect(cacheTagsForPath("/wiki/slime-rng/slimes")).toEqual(
       expect.arrayContaining(["wiki:slime-rng", "wiki-catalog:slime-rng/slimes", "wiki-catalog-index"])

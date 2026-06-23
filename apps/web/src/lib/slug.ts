@@ -13,6 +13,23 @@ export function statsUniverseSlug(value: string | null | undefined, universeId: 
   return `${prefix}-${id}`;
 }
 
+export const ROBLOX_ARTICLE_GAME_SLUG = "roblox";
+
+export function articleGameSlugFromUniverse(universe: {
+  universe_id?: number | string | null;
+  slug?: string | null;
+  display_name?: string | null;
+  name?: string | null;
+}) {
+  const id = universe.universe_id == null ? "" : String(universe.universe_id).trim();
+  const rawFallbackSlug = slugify(universe.slug ?? "");
+  const fallbackSlug = id ? rawFallbackSlug.replace(new RegExp(`-${id}$`), "") : rawFallbackSlug;
+  const base = slugify(universe.display_name ?? universe.name ?? "") || fallbackSlug;
+  if (!base) return id ? `roblox-game-${id}` : "roblox-game";
+  if (base === ROBLOX_ARTICLE_GAME_SLUG) return id ? `roblox-game-${id}` : "roblox-game";
+  return base;
+}
+
 export function appendCodesSuffix(value: string) {
   const base = slugify(value);
   if (!base) return "";

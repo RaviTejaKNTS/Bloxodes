@@ -155,6 +155,10 @@ export function cacheTagsForPath(pathname: string) {
 
   if (first === "articles") {
     if (!second || second === "page") return unique([...tags, "articles-index"]);
+    if (second === "games") {
+      if (!third || third === "page") return unique([...tags, "articles-index", "articles-games"]);
+      return unique([...tags, "articles-index", "articles-games", slugTag("article-game", third)]);
+    }
     return unique([...tags, "articles", slugTag("article", second)]);
   }
 
@@ -252,6 +256,7 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         ...base,
         slugTag("article", normalized),
         "articles-index",
+        "articles-games",
         "home",
         "feed",
         "sitemap",
