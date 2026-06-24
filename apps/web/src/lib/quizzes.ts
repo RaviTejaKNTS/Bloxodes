@@ -156,6 +156,26 @@ const cachedListPublishedQuizzes = publicContentCache(
   }
 );
 
+export async function getQuizByUniverseId(universeId: number): Promise<QuizListEntry | null> {
+  const cached = publicContentCache(
+    async () => {
+      const supabase = supabaseAdmin();
+      const { data } = await supabase
+        .from("quiz_pages_view")
+        .select(QUIZ_SELECT_FIELDS_VIEW)
+        .eq("is_published", true)
+        .eq("universe_id", universeId)
+        .order("content_updated_at", { ascending: false })
+        .limit(1);
+      const row = (data ?? [])[0];
+      return row ? (row as QuizListEntry) : null;
+    },
+    [`quiz-by-universe:${universeId}`],
+    { revalidate: 21600, tags: ["quizzes-index"] }
+  );
+  return cached();
+}
+
 export async function listPublishedQuizzes(): Promise<QuizListEntry[]> {
   return cachedListPublishedQuizzes();
 }

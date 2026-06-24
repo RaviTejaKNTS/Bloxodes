@@ -20,6 +20,8 @@ type QuizRunnerProps = {
   initialAttempt?: AttemptQuestion[];
   heroImage?: string | null;
   heroAlt?: string | null;
+  /** Deep-link from the sidebar quiz card: pre-answers question 1 and starts at question 2. */
+  startAnswerOptionId?: string;
 };
 
 type SessionState = { status: "loading" | "ready"; userId: string | null };
@@ -250,6 +252,20 @@ export function QuizRunner(props: QuizRunnerProps) {
     if (!readyToStart) return;
     if (initializedStorageKey.current === storageKey) return;
     initializedStorageKey.current = storageKey;
+
+    if (props.startAnswerOptionId && initialAttempt.length) {
+      const first = initialAttempt[0];
+      if (first && (first.options ?? []).some((option) => option.id === props.startAnswerOptionId)) {
+        setAttempt(initialAttempt);
+        setAnswers({ [first.id]: props.startAnswerOptionId });
+        setCurrentIndex(1);
+        setShowSummary(false);
+        setSavedAttemptKey(null);
+        lastSavedAttempt.current = null;
+        return;
+      }
+    }
+
     if (typeof window !== "undefined") {
       try {
         const raw = window.localStorage.getItem(storageKey);
@@ -304,7 +320,7 @@ export function QuizRunner(props: QuizRunnerProps) {
     }
 
     startNewAttempt();
-  }, [readyToStart, startNewAttempt, questions, storageKey, initialAttempt, seenQuestionIds.length]);
+  }, [readyToStart, startNewAttempt, questions, storageKey, initialAttempt, seenQuestionIds.length, props.startAnswerOptionId]);
 
   const currentQuestion = attempt[currentIndex] ?? null;
   const currentAnswer = currentQuestion ? answers[currentQuestion.id] : null;

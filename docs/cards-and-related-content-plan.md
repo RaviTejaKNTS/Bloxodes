@@ -120,10 +120,11 @@ Every detail page ends in a consistent, reason-labeled "everything for this game
 
 ## Build sequence
 
-1. [x] `ContentCard` primitive + `media`/`row`/`overlay` variants → migrate the 8 cards (visual parity). **Done — see Progress below.**
-2. [ ] `<RelatedContent>` module + resolver → swap into all detail pages, add the 3 missing ones.
-3. [ ] Live slots (quiz preview, checklist ring, countdown) as opt-in overlays.
-4. [ ] Per-type signatures (icons/accents), card content enhancements, and homepage composition (handoff to homepage plan).
+1. [x] `ContentCard` primitive + `media`/`row`/`overlay`/`bar` variants → migrate the 8 cards. **Done.**
+2. [x] Game discovery sidebar on codes / articles / events / quizzes. **Done — see Progress.**
+3. [ ] Live slots beyond quiz/checklist (if any) and further polish.
+4. [ ] Per-type signatures (icons/accents) sweep, and homepage composition (handoff to homepage plan).
+5. [ ] Wiki page sidebar — its own treatment (deferred; main content already links out).
 
 ## Progress log
 
@@ -157,6 +158,24 @@ Feedback: round 1 added info but kept the same shapes → read as "more text, mo
 ### 2026-06-24 — Card polish (round 3)
 - **Tools** (`bar` variant): image is now an inset rounded square (equal corners on all sides, no half-rounded edge), more padding/breathing room, title up to 3 lines. Tool grids widened to max 3 columns (homepage + `/tools`) so long titles fit.
 - **Events**: unified every status to the same 3-line shape — status label / big time / `game · event`. Past events now show the elapsed time ("3 months ago") as the hero instead of the game name, matching upcoming countdowns. The `game · event` line wraps to a 2nd line when long, but the height is reserved so the big time stays anchored at the same position across every card (`overlaySubtitleReserve`).
+
+### 2026-06-24 — Game discovery sidebar (step 2) done
+Scope: a single uniform, server-rendered "discover more of this game" sidebar on **codes, articles, events, quizzes** detail pages (not wiki/stats/catalog/tools/checklists). Driven only by `(universeId, universeName, currentType)`; the page's own type is excluded. No per-page special-casing.
+
+- New `lib/game-sidebar.ts` — `getGameSidebarData(universeId)` fetches everything in one parallel pass: wiki, game catalogs (+ item counts), stats (rank/CCU/slug), next event (only upcoming/live), single codes page, checklist, quiz (+ deterministic first question), tools, articles. Falls back to general articles + global catalogs when the game has < 3 of its own cards.
+- New helpers: `getWikiByUniverseId` (wiki.ts), `getQuizByUniverseId` (quizzes.ts), `getUniverseStatsSummary` (stats.ts).
+- New components under `components/game-sidebar/`:
+  - `GameDiscoverySidebar.tsx` (server container; ordered stack: wiki → catalog list → stats → event → codes → checklist → quiz → tools → articles → fallback). Server sub-cards (wiki, catalog list, stats, codes, articles) inline.
+  - `QuizSidebarCard.tsx` (client island) — first question server-rendered for SEO; answering shows correct/incorrect feedback and deep-links to `/quizzes/<code>?qa=<optionId>`.
+  - `ChecklistSidebarCard.tsx` (client island) — server shell + per-user progress bar.
+  - Reuses `EventsPageCard` (countdown tile) and `ToolCard` (bar) directly.
+- `QuizRunner` honors `startAnswerOptionId` (from `?qa=`): pins the server attempt, records Q1, starts at Q2.
+- Pages: codes/articles already had a right aside → swapped hand-rolled related sections for `<GameDiscoverySidebar>`. events already had a 2-col aside → same swap. quizzes converted to 2-col and its in-body recommendations removed.
+- Verified on `localhost:5050` (prod DB): typecheck clean, no server errors; sidebar renders SSR on all four page types; quiz card excluded on quiz page; catalog list shows "All N <items>"; stats shows rank + live CCU; quiz answer → `?qa=` → quiz opens at Question 2.
+
+#### Sidebar follow-ups (not blocking)
+- The old per-universe related fetches still run on codes/articles/events (now unused) — can be deleted for a small perf win.
+- Catalog list can get long for content-rich games (e.g. 16 entries) — consider a cap + "view all".
 
 ### Deferred to refinement (intentional parity choices, revisit in step 4)
 - **Date format still mixed** — kept the existing `formatUpdatedLabel` behavior (relative for recent, absolute for older; ArticleCard absolute). Plan calls for unifying to relative everywhere.

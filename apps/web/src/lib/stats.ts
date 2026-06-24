@@ -1468,6 +1468,27 @@ async function listCurrentRisers(limit: number): Promise<StatsGame[]> {
     .map((game) => ({ ...game, rank: rankById.get(game.universeId) ?? game.rank }));
 }
 
+export async function getUniverseStatsSummary(
+  universeId: number
+): Promise<{ rank: number | null; playing: number | null; slug: string | null } | null> {
+  try {
+    const { data, error } = await supabaseAdmin()
+      .from("stats_game_current_index")
+      .select("playing, global_playing_rank, slug")
+      .eq("universe_id", universeId)
+      .limit(1);
+    if (error) throw error;
+    const row = (data ?? [])[0] as
+      | { playing?: number | null; global_playing_rank?: number | null; slug?: string | null }
+      | undefined;
+    if (!row) return null;
+    return { rank: row.global_playing_rank ?? null, playing: row.playing ?? null, slug: row.slug ?? null };
+  } catch (error) {
+    console.error("Error fetching universe stats summary", error);
+    return null;
+  }
+}
+
 export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> {
   const fetchLimit = Math.max(limit * 3, limit + 20);
   const { data, error } = await supabaseAdmin()

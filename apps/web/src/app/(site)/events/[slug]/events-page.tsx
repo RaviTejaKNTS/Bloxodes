@@ -11,6 +11,7 @@ import { ChecklistCard } from "@/components/ChecklistCard";
 import { ContentSlot } from "@/components/ContentSlot";
 import { GameCard } from "@/components/GameCard";
 import { SocialShare } from "@/components/SocialShare";
+import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
 import { ToolCard } from "@/components/ToolCard";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import {
@@ -1119,85 +1120,7 @@ export async function renderEventsPage({ slug }: { slug: string }) {
           />
         </section>
 
-        {relatedCodes.length ? (
-          <section className="space-y-3">
-            <h3 className="text-lg font-semibold text-foreground">Codes for {universeLabel}</h3>
-            <div className="grid gap-3">
-              {relatedCodes.map((g) => (
-                <div
-                  key={g.id}
-                  className="block"
-                  data-analytics-event="related_content_click"
-                  data-analytics-source-type="events_sidebar"
-                  data-analytics-target-type="codes"
-                  data-analytics-target-slug={g.slug}
-                >
-                  <GameCard game={g} titleAs="p" />
-                </div>
-              ))}
-            </div>
-          </section>
-        ) : null}
-
-        {relatedChecklistCards.length ? (
-          <section className="space-y-3">
-            <h3 className="text-lg font-semibold text-foreground">{universeLabel} checklist</h3>
-            <div className="space-y-3">
-              {relatedChecklistCards.map((card) => (
-                <div
-                  key={card.id}
-                  className="block"
-                  data-analytics-event="related_content_click"
-                  data-analytics-source-type="events_sidebar"
-                  data-analytics-target-type="checklist"
-                  data-analytics-target-slug={card.slug}
-                >
-                  <ChecklistCard {...card} />
-                </div>
-              ))}
-            </div>
-          </section>
-        ) : null}
-
-        {relatedArticles.length ? (
-          <section className="space-y-3">
-            {relatedHeading ? <h3 className="text-lg font-semibold text-foreground">{relatedHeading}</h3> : null}
-            <div className="space-y-4">
-              {relatedArticles.map((item) => (
-                <div
-                  key={item.id}
-                  className="block"
-                  data-analytics-event="related_content_click"
-                  data-analytics-source-type="events_sidebar"
-                  data-analytics-target-type="article"
-                  data-analytics-target-slug={item.slug}
-                >
-                  <ArticleCard article={item} />
-                </div>
-              ))}
-            </div>
-          </section>
-        ) : null}
-
-        {relatedTools.length ? (
-          <section className="space-y-3">
-            <h3 className="text-lg font-semibold text-foreground">Tools for {universeLabel}</h3>
-            <div className="space-y-4">
-              {relatedTools.map((tool) => (
-                <div
-                  key={tool.id ?? tool.code}
-                  className="block"
-                  data-analytics-event="related_content_click"
-                  data-analytics-source-type="events_sidebar"
-                  data-analytics-target-type="tool"
-                  data-analytics-target-slug={tool.code}
-                >
-                  <ToolCard tool={tool} />
-                </div>
-              ))}
-            </div>
-          </section>
-        ) : null}
+        <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="events" />
       </aside>
     </div>
   );

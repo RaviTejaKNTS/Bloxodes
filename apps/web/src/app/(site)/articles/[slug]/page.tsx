@@ -6,6 +6,7 @@ import { FiClock } from "react-icons/fi";
 import "@/styles/article-content.css";
 import { AuthorCard } from "@/components/AuthorCard";
 import { SocialShare } from "@/components/SocialShare";
+import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
 import { CodeBlockEnhancer } from "@/components/CodeBlockEnhancer";
 import { ContentFaq } from "@/components/ContentFaq";
 import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
@@ -440,102 +441,7 @@ async function renderArticlePage(article: ArticleWithRelations) {
           minHeight="clamp(280px, 40vw, 600px)"
         />
 
-        {relatedCodes.length ? (
-          <section className="space-y-3">
-            <h3 className="text-lg font-semibold text-foreground">Codes for {universeLabel}</h3>
-            <div className="grid gap-3">
-              {relatedCodes.map((g) => (
-                <div
-                  key={g.id}
-                  className="block"
-                  data-analytics-event="related_content_click"
-                  data-analytics-source-type="article_sidebar"
-                  data-analytics-target-type="codes"
-                  data-analytics-target-slug={g.slug}
-                >
-                  <GameCard game={g} titleAs="p" />
-                </div>
-              ))}
-            </div>
-          </section>
-        ) : null}
-
-        {eventsCard ? (
-          <section className="space-y-3">
-            <h3 className="text-lg font-semibold text-foreground">Events for {universeLabel}</h3>
-            <div className="space-y-3">
-              <div
-                className="block"
-                data-analytics-event="related_content_click"
-                data-analytics-source-type="article_sidebar"
-                data-analytics-target-type="event"
-                data-analytics-target-slug={eventsCard.slug}
-              >
-                <EventsPageCard {...eventsCard} />
-              </div>
-            </div>
-          </section>
-        ) : null}
-
-        {relatedChecklistCards.length ? (
-          <section className="space-y-3">
-            <h3 className="text-lg font-semibold text-foreground">{universeLabel} checklist</h3>
-            <div className="space-y-3">
-              {relatedChecklistCards.map((card) => (
-                <div
-                  key={card.id}
-                  className="block"
-                  data-analytics-event="related_content_click"
-                  data-analytics-source-type="article_sidebar"
-                  data-analytics-target-type="checklist"
-                  data-analytics-target-slug={card.slug}
-                >
-                  <ChecklistCard {...card} />
-                </div>
-              ))}
-            </div>
-          </section>
-        ) : null}
-
-        {relatedArticles.length ? (
-          <section className="space-y-3">
-            {relatedHeading ? <h3 className="text-lg font-semibold text-foreground">{relatedHeading}</h3> : null}
-            <div className="space-y-4">
-              {relatedArticles.slice(0, 5).map((item) => (
-                <div
-                  key={item.id}
-                  className="block"
-                  data-analytics-event="related_content_click"
-                  data-analytics-source-type="article_sidebar"
-                  data-analytics-target-type="article"
-                  data-analytics-target-slug={item.slug}
-                >
-                  <ArticleCard article={item} />
-                </div>
-              ))}
-            </div>
-          </section>
-        ) : null}
-
-        {relatedTools.length ? (
-          <section className="space-y-3">
-            <h3 className="text-lg font-semibold text-foreground">Tools for {universeLabel}</h3>
-            <div className="space-y-4">
-              {relatedTools.map((tool) => (
-                <div
-                  key={tool.id ?? tool.code}
-                  className="block"
-                  data-analytics-event="related_content_click"
-                  data-analytics-source-type="article_sidebar"
-                  data-analytics-target-type="tool"
-                  data-analytics-target-slug={tool.code}
-                >
-                  <ToolCard tool={tool} />
-                </div>
-              ))}
-            </div>
-          </section>
-        ) : null}
+        <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="articles" />
       </aside>
     </div>
   );

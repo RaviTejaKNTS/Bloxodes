@@ -20,6 +20,7 @@ import { ToolCard } from "@/components/ToolCard";
 import { EventsPageCard, type EventsPageCardProps } from "@/components/EventsPageCard";
 import { SocialShare } from "@/components/SocialShare";
 import { ContentSlot } from "@/components/ContentSlot";
+import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
 import { CodeBlockEnhancer } from "@/components/CodeBlockEnhancer";
 import { monthYear } from "@/lib/date";
 import { sortCodesByFirstSeenDesc } from "@/lib/code-utils";
@@ -952,8 +953,7 @@ export default async function GamePage({ params }: Params) {
         <CodeBlockEnhancer />
       </article>
 
-      {(suggestedCodes.length > 0 || relatedChecklistCards.length > 0 || relatedArticles.length > 0 || relatedTools.length > 0 || Boolean(eventsCard)) ? (
-        <aside className="space-y-4">
+      <aside className="space-y-4">
           <SocialShare
             url={canonicalUrl}
             title={`${game.name} Codes (${monthYear()})`}
@@ -968,150 +968,8 @@ export default async function GamePage({ params }: Params) {
             minHeight="clamp(280px, 40vw, 600px)"
           />
 
-          {eventsCard ? (
-            <section className="space-y-3">
-              <h3 className="text-lg font-semibold text-foreground">Events for {universeLabel}</h3>
-              <div className="space-y-3">
-                <div
-                  className="block"
-                  data-analytics-event="related_content_click"
-                  data-analytics-source-type="codes_sidebar"
-                  data-analytics-target-type="event"
-                  data-analytics-target-slug={eventsCard.slug}
-                >
-                  <EventsPageCard {...eventsCard} />
-                </div>
-              </div>
-            </section>
-          ) : null}
-
-          {relatedChecklistCards.length ? (
-            <section className="space-y-3">
-              <h3 className="text-lg font-semibold text-foreground">{universeLabel} checklist</h3>
-              <div className="space-y-4">
-                {relatedChecklistCards.map((card) => (
-                  <div
-                    key={card.id}
-                    className="block"
-                    data-analytics-event="related_content_click"
-                    data-analytics-source-type="codes_sidebar"
-                    data-analytics-target-type="checklist"
-                    data-analytics-target-slug={card.slug}
-                  >
-                    <ChecklistCard {...card} />
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {relatedArticles.length ? (
-            <section className="space-y-3">
-              <h3 className="text-lg font-semibold text-foreground">Articles on {universeLabel}</h3>
-              <div className="space-y-4">
-                {relatedArticles.slice(0, 3).map((item) => (
-                  <div
-                    key={item.id}
-                    className="block"
-                    data-analytics-event="related_content_click"
-                    data-analytics-source-type="codes_sidebar"
-                    data-analytics-target-type="article"
-                    data-analytics-target-slug={item.slug}
-                  >
-                    <ArticleCard article={item} />
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {relatedTools.length ? (
-            <section className="space-y-3">
-              <h3 className="text-lg font-semibold text-foreground">Tools for {universeLabel}</h3>
-              <div className="space-y-4">
-                {relatedTools.map((tool) => (
-                  <div
-                    key={tool.id ?? tool.code}
-                    className="block"
-                    data-analytics-event="related_content_click"
-                    data-analytics-source-type="codes_sidebar"
-                    data-analytics-target-type="tool"
-                    data-analytics-target-slug={tool.code}
-                  >
-                    <ToolCard tool={tool} />
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {suggestedCodes.length > 0 ? (
-            <>
-              <section className="space-y-3 px-1 py-1">
-                <h3 className="text-base font-semibold leading-6 text-foreground">
-                  Get Roblox codes directly on
-                </h3>
-                <div className="space-y-2">
-                  <Link
-                    href="https://t.me/bloxodes"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-4 rounded-md px-2 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted/20"
-                  >
-                    <span className="flex items-center gap-2">
-                      <FaTelegramPlane className="h-4 w-4" aria-hidden />
-                      Telegram
-                    </span>
-                    <span className="text-xs text-muted-foreground">@bloxodes</span>
-                  </Link>
-                  <Link
-                    href="https://x.com/bloxodes"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-4 rounded-md px-2 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted/20"
-                  >
-                    <span className="flex items-center gap-2">
-                      <RiTwitterXLine className="h-4 w-4" aria-hidden />
-                      X (Twitter)
-                    </span>
-                    <span className="text-xs text-muted-foreground">@bloxodes</span>
-                  </Link>
-                  <Link
-                    href="https://chromewebstore.google.com/detail/bloxodes-%E2%80%93-roblox-game-co/mammkedlehmpechknaicfakljaogcmhc?authuser=0&hl=en"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between gap-4 rounded-md px-2 py-2 text-sm font-medium text-foreground transition-colors hover:bg-muted/20"
-                  >
-                    <span className="flex items-center gap-2">
-                      <SiGooglechrome className="h-4 w-4" aria-hidden />
-                      Chrome Extension
-                    </span>
-                    <span className="text-xs text-muted-foreground">Add to Chrome</span>
-                  </Link>
-                </div>
-              </section>
-
-              <section className="space-y-1 px-1 py-1">
-                <h3 className="text-base font-semibold leading-6 text-foreground">More games with codes</h3>
-              </section>
-              <div className="grid gap-4">
-                {suggestedCodes.map((g) => (
-                  <div
-                    key={g.id}
-                    className="block"
-                    data-analytics-event="related_content_click"
-                    data-analytics-source-type="codes_sidebar"
-                    data-analytics-target-type="codes"
-                    data-analytics-target-slug={g.slug}
-                  >
-                    <GameCard game={g} titleAs="p" articleUpdatedAt={g.content_updated_at} />
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : null}
+          <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="codes" />
         </aside>
-      ) : null}
     </div>
   );
 }

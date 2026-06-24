@@ -318,6 +318,27 @@ export async function listPublishedWikiSlugs(): Promise<string[]> {
   return cached();
 }
 
+export async function getWikiByUniverseId(universeId: number): Promise<{ slug: string; title: string } | null> {
+  const cached = publicContentCache(
+    async () => {
+      const supabase = supabaseAdmin();
+      const { data } = await supabase
+        .from("wiki_pages_view")
+        .select("slug, title")
+        .eq("is_published", true)
+        .eq("universe_id", universeId)
+        .order("content_updated_at", { ascending: false })
+        .limit(1);
+      const row = (data ?? [])[0] as { slug?: string | null; title?: string | null } | undefined;
+      if (row?.slug && row.title) return { slug: row.slug, title: row.title };
+      return null;
+    },
+    [`wiki-by-universe:${universeId}`],
+    { revalidate: WIKI_REVALIDATE_SECONDS, tags: ["wiki-index"] }
+  );
+  return cached();
+}
+
 async function safeList<T>(label: string, loader: () => Promise<T[]>): Promise<T[]> {
   try {
     return await loader();
