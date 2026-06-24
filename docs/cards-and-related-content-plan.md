@@ -154,6 +154,10 @@ Feedback: round 1 added info but kept the same shapes → read as "more text, mo
 - **Tools** → compact horizontal `bar` card: small edge-to-edge image left, tool name + updated right. Dropped the description and type/game chips (wrong direction — tools want scannable, not dense).
 - Verified on `localhost:5050` (prod DB): typecheck clean, no server errors; catalog counts render live; events countdowns tick; tools compact.
 
+### 2026-06-24 — Card polish (round 3)
+- **Tools** (`bar` variant): image is now an inset rounded square (equal corners on all sides, no half-rounded edge), more padding/breathing room, title up to 3 lines. Tool grids widened to max 3 columns (homepage + `/tools`) so long titles fit.
+- **Events**: unified every status to the same 3-line shape — status label / big time / `game · event`. Past events now show the elapsed time ("3 months ago") as the hero instead of the game name, matching upcoming countdowns. The `game · event` line wraps to a 2nd line when long, but the height is reserved so the big time stays anchored at the same position across every card (`overlaySubtitleReserve`).
+
 ### Deferred to refinement (intentional parity choices, revisit in step 4)
 - **Date format still mixed** — kept the existing `formatUpdatedLabel` behavior (relative for recent, absolute for older; ArticleCard absolute). Plan calls for unifying to relative everywhere.
 - **No type icons/accents yet** — only the `data-card-type` hook is in place.

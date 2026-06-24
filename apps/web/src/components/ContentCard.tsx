@@ -75,6 +75,8 @@ type ContentCardProps = {
   overlayScrim?: boolean;
   /** overlay center only: base text color for the centered block. */
   overlayTextClassName?: string;
+  /** overlay center only: let the subtitle wrap to 2 lines while reserving that height (keeps the hero anchored across cards). */
+  overlaySubtitleReserve?: boolean;
 
   /** Outer container override. */
   className?: string;
@@ -116,6 +118,7 @@ export function ContentCard({
   overlayAlign = "bottom",
   overlayScrim = false,
   overlayTextClassName,
+  overlaySubtitleReserve = false,
   className,
   thumbClassName
 }: ContentCardProps) {
@@ -164,7 +167,16 @@ export function ContentCard({
                     <Title as={titleAs} className={cn("text-3xl font-bold tracking-tight sm:text-4xl", titleClassName)}>
                       {title}
                     </Title>
-                    {subtitle ? <div className="line-clamp-1 text-sm opacity-80">{subtitle}</div> : null}
+                    {subtitle ? (
+                      <div
+                        className={cn(
+                          "text-sm opacity-80",
+                          overlaySubtitleReserve ? "line-clamp-2 min-h-[2.5em] leading-snug" : "line-clamp-1"
+                        )}
+                      >
+                        {subtitle}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </>
@@ -188,12 +200,12 @@ export function ContentCard({
     );
   }
 
-  // ---------- BAR (edge-to-edge image left, compact body) ----------
+  // ---------- BAR (compact horizontal: inset image left + body) ----------
   if (variant === "bar") {
     return (
       <div {...dataType} className={cn(OUTER_BASE, "border-border/70 hover:border-border", className)}>
-        <Link href={href} prefetch={prefetch} className="flex flex-1 items-stretch">
-          <div className="relative w-20 shrink-0 overflow-hidden bg-surface-muted">
+        <Link href={href} prefetch={prefetch} className="flex flex-1 items-center gap-3.5 p-3">
+          <div className="relative h-[4.25rem] w-[4.25rem] shrink-0 overflow-hidden rounded-lg bg-surface-muted">
             {image?.src ? (
               <CardImage
                 src={image.src}
@@ -205,11 +217,11 @@ export function ContentCard({
               imageFallback ?? <CardImage src={null} alt={image?.alt ?? ""} />
             )}
           </div>
-          <div className="flex min-w-0 flex-1 flex-col justify-center gap-1 px-4 py-3">
+          <div className="flex min-w-0 flex-1 flex-col gap-1">
             {eyebrow ? (
               <p className="mb-0 text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/55">{eyebrow}</p>
             ) : null}
-            <Title as={titleAs} className={cn("line-clamp-1 text-base", titleClassName)}>
+            <Title as={titleAs} className={cn("text-base", titleClassName)}>
               {title}
             </Title>
             {subtitle ? <div className="text-xs text-foreground/70">{subtitle}</div> : null}

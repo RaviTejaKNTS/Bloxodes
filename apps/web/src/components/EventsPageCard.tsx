@@ -117,18 +117,25 @@ export function EventsPageCard({
   const eventTitle = eventName || title || "Events overview";
 
   const hasTimer = Boolean(timerLabel) && timerLabel !== "No event time";
-  const useTimerHero = (status === "current" || status === "upcoming") && hasTimer;
 
+  // Consistent layout for every status: status label / big time / game · event.
   const eyebrowText =
-    status === "current" ? "Live now" : status === "upcoming" ? "Starts in" : status === "past" ? "Last event" : "Events";
-  const heroText = useTimerHero ? timerLabel : gameTitle;
-  const subtitleText = useTimerHero ? gameTitle : eventTitle;
-  const heroColor = !useTimerHero
-    ? ""
-    : status === "current"
+    status === "current"
+      ? "Live now"
+      : status === "upcoming"
+        ? "Starts in"
+        : status === "past"
+          ? "Last event ended"
+          : "Events";
+  const heroText = hasTimer ? timerLabel : gameTitle;
+  const heroColor =
+    hasTimer && status === "current"
       ? "text-emerald-500 dark:text-emerald-400"
-      : "text-accent";
-  const heroSize = useTimerHero ? "text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl" : "text-xl font-bold";
+      : hasTimer && status === "upcoming"
+        ? "text-accent"
+        : "";
+  const heroSize = hasTimer ? "text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl" : "text-xl font-bold";
+  const subtitleText = hasTimer ? (eventName ? `${gameTitle} · ${eventName}` : gameTitle) : eventTitle;
 
   return (
     <ContentCard
@@ -136,6 +143,7 @@ export function EventsPageCard({
       variant="overlay"
       overlayAlign="center"
       overlayScrim
+      overlaySubtitleReserve
       href={`/events/${slug}`}
       prefetch={false}
       image={{ src: imageUrl, alt: gameTitle, ratio: "16:9" }}

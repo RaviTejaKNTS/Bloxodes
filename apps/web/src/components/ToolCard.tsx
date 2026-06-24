@@ -18,7 +18,7 @@ export function ToolCard({ tool }: ToolCardProps) {
       variant="bar"
       href={`/tools/${tool.code}`}
       title={tool.title}
-      titleClassName="line-clamp-2"
+      titleClassName="line-clamp-3"
       image={{ src: thumb, alt: tool.title }}
       subtitle={
         updatedLabel ? (
