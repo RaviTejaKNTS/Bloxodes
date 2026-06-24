@@ -4,20 +4,12 @@ import {
   BarChart3,
   BookOpen,
   CalendarClock,
-  Gift,
-  Image as ImageIcon,
   Key,
   LayoutGrid,
   ListChecks,
   Music,
   Newspaper,
-  Package,
-  Palette,
   Puzzle,
-  Smile,
-  Sparkles,
-  Shirt,
-  Terminal,
   TrendingUp,
   Wrench
 } from "lucide-react";
@@ -29,8 +21,7 @@ import { getStatsHome } from "@/lib/stats";
 import { getGameSidebarData } from "@/lib/game-sidebar";
 import { getContentCounts } from "@/lib/content-counts";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
-import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
-import { resolveCatalogCardMeta, type CatalogIconKey } from "@/lib/catalog-card-meta";
+import { resolveCatalogCardMeta } from "@/lib/catalog-card-meta";
 import { listPublishedWikiPages, type WikiListEntry } from "@/lib/wiki";
 import { EventsPageCard } from "@/components/EventsPageCard";
 import { WikiCard } from "@/components/WikiCard";
@@ -44,18 +35,6 @@ export const revalidate = 3600;
 
 const PAGE_TITLE = `${SITE_NAME} | Roblox stats, wikis, codes, events, quizzes & checklists`;
 const PAGE_DESCRIPTION = SITE_DESCRIPTION;
-
-const CATALOG_ICONS: Record<CatalogIconKey, typeof Music> = {
-  music: Music,
-  gift: Gift,
-  package: Package,
-  shirt: Shirt,
-  image: ImageIcon,
-  palette: Palette,
-  terminal: Terminal,
-  smile: Smile,
-  sparkles: Sparkles
-};
 
 const HUB_TONES: Record<string, string> = {
   codes: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-300",
@@ -110,18 +89,17 @@ function pickThumbnail(value: unknown): string | null {
 }
 
 export default async function HomePage() {
-  const [statsHome, codeGames, wikiPages, eventsPayload, quizzes, tools, catalogPages, counts] = await Promise.all([
+  const [statsHome, codeGames, wikiPages, eventsPayload, quizzes, tools, counts, musicMeta] = await Promise.all([
     getStatsHome(),
     listCodePagesWithActiveCounts(),
     listPublishedWikiPages(),
     buildEventsCards(6),
     listPublishedQuizzes(),
     listPublishedTools(),
-    listPublishedTopLevelCatalogPages(),
-    getContentCounts()
+    getContentCounts(),
+    resolveCatalogCardMeta("roblox-music-ids")
   ]);
 
-  const totalActiveCodes = codeGames.reduce((sum, game) => sum + (game.active_count ?? 0), 0);
   const topGames = statsHome.topGames.slice(0, 5);
 
   const wikiByUniverse = new Map<number, WikiListEntry>();
@@ -151,14 +129,6 @@ export default async function HomePage() {
     .slice(0, 2);
   const spotlightUniverseIds = new Set(spotlightGames.map((s) => s.game.universeId));
 
-  // Catalog list (compact, with counts).
-  const catalogList = await Promise.all(
-    catalogPages.slice(0, 5).map(async (page) => {
-      const meta = await resolveCatalogCardMeta(page.code);
-      return { href: `/catalog/${page.code}`, label: meta.shortLabel ?? page.title, count: meta.count, icon: meta.icon };
-    })
-  );
-
   // Quiz of the day.
   const quizPick = quizzes[0] ?? null;
   const quizData = quizPick ? await loadQuizData(quizPick.code) : null;
@@ -178,11 +148,10 @@ export default async function HomePage() {
         }
       : null;
 
-  // Events.
   const liveEvents = eventsPayload.cards.filter((c) => c.status === "current" || c.status === "upcoming");
   const events = (liveEvents.length ? liveEvents : eventsPayload.cards).slice(0, 2);
 
-  // Game hub card: a trending game we cover (prefer one not already in the hero spotlight).
+  // Game hub: a trending game we cover (prefer one not in the hero spotlight).
   const hubCandidate =
     statsHome.risers.find(
       (game) => typeof game.universeId === "number" && wikiByUniverse.has(game.universeId) && !spotlightUniverseIds.has(game.universeId)
@@ -205,6 +174,7 @@ export default async function HomePage() {
     : [];
 
   const toolCards = tools.slice(0, 3);
+  const musicCount = typeof musicMeta.count === "number" ? musicMeta.count.toLocaleString("en-US") : null;
 
   const browse = [
     { href: "/codes", label: "Codes", icon: Key, count: counts.codes },
@@ -241,9 +211,7 @@ export default async function HomePage() {
   const cardClass = "rounded-xl border border-border/70 bg-card p-4";
 
   return (
-    <div className="space-y-12 -mt-6 md:-mt-8">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
-
+    <div className="space-y-12">
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent/80">Roblox · live</p>
         <h1 className="max-w-4xl text-3xl font-bold leading-tight text-foreground md:text-4xl">
@@ -255,7 +223,7 @@ export default async function HomePage() {
         </p>
       </header>
 
-      {/* TOP ROW — trending leaderboard · catalogs · spotlight */}
+      {/* TOP ROW — trending leaderboard · music catalog · spotlight */}
       <section className="grid gap-4 lg:grid-cols-3 lg:items-stretch">
         <div className={`${cardClass} flex flex-col`}>
           <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
@@ -282,34 +250,17 @@ export default async function HomePage() {
           </Link>
         </div>
 
-        <div className={`${cardClass} flex flex-col`}>
-          <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
-            <LayoutGrid className="h-4 w-4 text-accent" aria-hidden /> Catalogs
-          </div>
-          <ul className="flex-1 space-y-1">
-            {catalogList.map((catalog) => {
-              const Icon = catalog.icon ? CATALOG_ICONS[catalog.icon] : LayoutGrid;
-              return (
-                <li key={catalog.href}>
-                  <Link href={catalog.href} className="flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-surface-muted/60">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent/10 text-accent">
-                      <Icon className="h-4 w-4" aria-hidden />
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block truncate text-sm font-medium text-foreground">{catalog.label}</span>
-                      {typeof catalog.count === "number" ? (
-                        <span className="block text-xs text-muted">{catalog.count.toLocaleString("en-US")} items</span>
-                      ) : null}
-                    </span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-          <Link href="/catalog" className="mt-3 inline-block text-xs font-semibold text-accent hover:underline">
-            All catalogs →
-          </Link>
-        </div>
+        <Link
+          href="/catalog/roblox-music-ids"
+          className="group relative flex flex-col items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-700 p-6 text-center text-white"
+        >
+          <Music className="absolute -bottom-5 -right-4 h-32 w-32 text-white/15 transition duration-500 group-hover:scale-105" aria-hidden />
+          <span className="relative">
+            {musicCount ? <span className="block text-4xl font-bold tracking-tight">{musicCount}</span> : null}
+            <span className="mt-1 block text-sm font-medium text-white/85">Roblox Music IDs</span>
+            <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white/90">Browse all music codes →</span>
+          </span>
+        </Link>
 
         <div className="grid grid-rows-2 gap-4">
           {spotlightGames.map(({ game, wiki }) => (
@@ -332,7 +283,76 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* TRENDING WIKIS */}
+      {/* QUIZ — full width, image left */}
+      {quizOfDay ? (
+        <section className="space-y-4">
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-xl font-semibold text-foreground">Quiz of the day</h2>
+            <span className="text-xs text-muted">{quizOfDay.gameName}</span>
+          </div>
+          <FeaturedQuizCard code={quizOfDay.code} gameName={quizOfDay.gameName} imageUrl={quizOfDay.imageUrl} question={quizOfDay.question} />
+        </section>
+      ) : null}
+
+      {/* EVERYTHING FOR ONE GAME — above the happening-now band */}
+      {hubGame && hubLinks.length ? (
+        <section className="space-y-4">
+          <h2 className="text-xl font-semibold text-foreground">Everything for {hubGame.name}</h2>
+          <div className={cardClass}>
+            <p className="mb-3 text-xs text-muted">{abbreviateCount(hubGame.playing)} playing · jump into any page for this game</p>
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+              {hubLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link key={link.href + link.label} href={link.href} className={`flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-medium ${HUB_TONES[link.tone] ?? "bg-surface-muted text-foreground"}`}>
+                    <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                    <span className="truncate">{link.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {/* HAPPENING NOW + BROWSE EVERYTHING */}
+      <section className="grid gap-6 lg:grid-cols-[1fr_1.6fr] lg:items-start">
+        {events.length ? (
+          <div className="space-y-3">
+            <h2 className="text-xl font-semibold text-foreground">Happening now</h2>
+            <div className="space-y-3">
+              {events.map(({ id, ...card }) => (
+                <EventsPageCard key={id} {...card} />
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        <div className="space-y-3">
+          <h2 className="text-xl font-semibold text-foreground">Browse everything on Bloxodes</h2>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {browse.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link key={item.href} href={item.href} className="flex items-center gap-2.5 rounded-lg border border-border/70 bg-card px-3 py-3 transition-colors hover:border-border">
+                  <Icon className="h-5 w-5 text-accent" aria-hidden />
+                  <span className="text-sm font-semibold text-foreground">{item.label}</span>
+                  <span className="ml-auto text-xs text-muted">{item.count.toLocaleString("en-US")}</span>
+                </Link>
+              );
+            })}
+          </div>
+          {toolCards.length ? (
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              {toolCards.map((tool) => (
+                <ToolCard key={tool.id ?? tool.code} tool={tool} />
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </section>
+
+      {/* TRENDING WIKIS — above the platform stats chart */}
       {trendingWikis.length ? (
         <section className="space-y-4">
           <div className="flex items-baseline justify-between">
@@ -349,80 +369,7 @@ export default async function HomePage() {
         </section>
       ) : null}
 
-      {/* QUIZ — full width, image left */}
-      {quizOfDay ? (
-        <section className="space-y-4">
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-xl font-semibold text-foreground">Quiz of the day</h2>
-            <span className="text-xs text-muted">{quizOfDay.gameName}</span>
-          </div>
-          <FeaturedQuizCard code={quizOfDay.code} gameName={quizOfDay.gameName} imageUrl={quizOfDay.imageUrl} question={quizOfDay.question} />
-        </section>
-      ) : null}
-
-      {/* EVENTS (left) + GAME HUB (right) */}
-      <section className="grid gap-6 lg:grid-cols-[1fr_1.6fr] lg:items-start">
-        {events.length ? (
-          <div className="space-y-3">
-            <h2 className="text-xl font-semibold text-foreground">Happening now</h2>
-            <div className="space-y-3">
-              {events.map(({ id, ...card }) => (
-                <EventsPageCard key={id} {...card} />
-              ))}
-            </div>
-          </div>
-        ) : null}
-
-        {hubGame && hubLinks.length ? (
-          <div className="space-y-3">
-            <h2 className="text-xl font-semibold text-foreground">Everything for {hubGame.name}</h2>
-            <div className={cardClass}>
-              <p className="mb-3 text-xs text-muted">{abbreviateCount(hubGame.playing)} playing · jump into any page for this game</p>
-              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-                {hubLinks.map((link) => {
-                  const Icon = link.icon;
-                  return (
-                    <Link
-                      key={link.href + link.label}
-                      href={link.href}
-                      className={`flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-medium ${HUB_TONES[link.tone] ?? "bg-surface-muted text-foreground"}`}
-                    >
-                      <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                      <span className="truncate">{link.label}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        ) : null}
-      </section>
-
-      {/* BROWSE everything + tools */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Browse everything on Bloxodes</h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {browse.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link key={item.href} href={item.href} className="flex items-center gap-2.5 rounded-lg border border-border/70 bg-card px-3 py-3 transition-colors hover:border-border">
-                <Icon className="h-5 w-5 text-accent" aria-hidden />
-                <span className="text-sm font-semibold text-foreground">{item.label}</span>
-                <span className="ml-auto text-xs text-muted">{item.count.toLocaleString("en-US")}</span>
-              </Link>
-            );
-          })}
-        </div>
-        {toolCards.length ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {toolCards.map((tool) => (
-              <ToolCard key={tool.id ?? tool.code} tool={tool} />
-            ))}
-          </div>
-        ) : null}
-      </section>
-
-      {/* PLATFORM CCU CHART — full width, same component as /stats */}
+      {/* PLATFORM CCU CHART */}
       <section className="space-y-4">
         <h2 className="text-xl font-semibold text-foreground">Platform player activity</h2>
         <StatsChartPanel
@@ -434,6 +381,8 @@ export default async function HomePage() {
           area
         />
       </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
     </div>
   );
 }
