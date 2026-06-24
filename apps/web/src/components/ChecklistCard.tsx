@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { FiClock } from "react-icons/fi";
+import { ProgressBar } from "@/components/ProgressBar";
 import {
   readLocalChecklistProgress,
   useChecklistProgressIndex,
@@ -102,13 +103,7 @@ export function ChecklistCard({ slug, title, coverImage, universeName, updatedAt
             <span>{progressLabel}</span>
             <span className="font-medium">{progress.percent}%</span>
           </div>
-          <div className="h-1.5 overflow-hidden rounded-full bg-surface-muted">
-            <div
-              className="h-full rounded-full bg-accent transition-[width] duration-300"
-              style={{ width: `${progress.percent}%` }}
-              aria-hidden
-            />
-          </div>
+          <ProgressBar percent={progress.percent} label={`${title} progress`} />
         </>
       }
     />

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { readLocalChecklistProgress, useChecklistSession } from "@/lib/checklist-progress-client";
+import { ProgressBar } from "@/components/ProgressBar";
 
 type Progress = { done: number; total: number; percent: number };
 
@@ -68,19 +69,7 @@ export function ChecklistProgressHeader({ title, slug, totalItems }: ChecklistPr
 
   return (
     <div className="flex w-full flex-col gap-2 sm:flex-1 sm:flex-row sm:items-center sm:gap-3">
-      <div
-        className="h-2.5 w-full overflow-hidden rounded-full bg-border/70 sm:flex-1"
-        role="progressbar"
-        aria-label={`Overall progress for ${title}`}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={progress.percent}
-      >
-        <div
-          className="h-full rounded-full bg-accent transition-[width] duration-300 ease-out"
-          style={{ width: `${progress.percent}%` }}
-        />
-      </div>
+      <ProgressBar percent={progress.percent} className="h-2.5 sm:flex-1" label={`Overall progress for ${title}`} />
       <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/70 px-3 py-[6px] text-[11px] font-semibold text-muted-foreground shadow-sm whitespace-nowrap sm:self-auto">
         <span className="text-foreground">{progress.done}/{progress.total}</span>
         <span>tasks done</span>

@@ -7,6 +7,7 @@ import {
   useChecklistProgressIndex,
   useChecklistSession
 } from "@/lib/checklist-progress-client";
+import { ProgressBar } from "@/components/ProgressBar";
 
 type ChecklistSidebarCardProps = {
   slug: string;
@@ -51,9 +52,7 @@ export function ChecklistSidebarCard({ slug, title, itemsCount }: ChecklistSideb
         </span>
         <span className="font-medium">{progress.percent}%</span>
       </div>
-      <div className="h-1.5 overflow-hidden rounded-full bg-surface-muted">
-        <div className="h-full rounded-full bg-accent transition-[width] duration-300" style={{ width: `${progress.percent}%` }} aria-hidden />
-      </div>
+      <ProgressBar percent={progress.percent} label={`${title} progress`} />
     </Link>
   );
 }

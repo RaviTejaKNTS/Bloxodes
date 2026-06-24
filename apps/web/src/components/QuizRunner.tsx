@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { QuizData, QuizOption, QuizQuestion } from "@/lib/quiz-types";
+import { ProgressBar } from "@/components/ProgressBar";
 import {
   buildQuizAttempt,
   QUIZ_LEVEL_CONFIG,
@@ -478,9 +479,7 @@ export function QuizRunner(props: QuizRunnerProps) {
             </span>
           </div>
 
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-muted">
-            <div className="h-full rounded-full bg-accent transition-all" style={{ width: `${progressPercent}%` }} />
-          </div>
+          <ProgressBar percent={progressPercent} label="Quiz progress" />
 
           <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] md:items-start">
             <h2 className="text-2xl font-semibold leading-snug text-foreground md:text-3xl">{currentQuestion?.question}</h2>

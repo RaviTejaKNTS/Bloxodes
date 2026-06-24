@@ -188,6 +188,12 @@ Scope: a single uniform, server-rendered "discover more of this game" sidebar on
 - The old per-universe related fetches still run on codes/articles/events (now unused) — can be deleted for a small perf win.
 - Catalog list can get long for content-rich games (e.g. 16 entries) — consider a cap + "view all".
 
+### 2026-06-24 — Shared ProgressBar (dark-mode visibility fix)
+Problem: progress bars used a `bg-surface-muted` track (`rgb(20,23,29)`) sitting on a `bg-card`/`surface` card (`rgb(12,14,18)`) — ~indistinguishable in dark mode, so empty/low bars (fresh checklists at 0/120, quiz start) were invisible.
+- New `components/ProgressBar.tsx` — one component: track `bg-foreground/10` (visible against cards in both themes), accent fill with a `max(0.375rem, N%)` min width so tiny progress still shows, clamped value, and built-in `role="progressbar"` + aria.
+- Migrated all 7 usages onto it: ChecklistCard, ChecklistSidebarCard, ChecklistProgressHeader, ChecklistBoard (×2), QuizRunner, Forge crafting calculator. (Some already used `bg-border/70`; now all consistent.)
+- Verified dark mode: track renders `rgba(238,241,247,0.1)` and is clearly visible at 0%.
+
 ### Deferred to refinement (intentional parity choices, revisit in step 4)
 - **Date format still mixed** — kept the existing `formatUpdatedLabel` behavior (relative for recent, absolute for older; ArticleCard absolute). Plan calls for unifying to relative everywhere.
 - **No type icons/accents yet** — only the `data-card-type` hook is in place.

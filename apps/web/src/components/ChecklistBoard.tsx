@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { FiCheckCircle, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import type { ChecklistItem } from "@/lib/db";
 import { ContentSlot } from "@/components/ContentSlot";
+import { ProgressBar } from "@/components/ProgressBar";
 import { trackEvent } from "@/lib/analytics";
 import {
   loadAccountChecklistProgress,
@@ -732,19 +733,7 @@ export function ChecklistBoard({ slug, items, descriptionHtml, className }: Chec
                   {group.topCode}. {group.topLabel}
                 </h2>
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <div
-                    className="h-2.5 flex-1 overflow-hidden rounded-full bg-border/70"
-                    role="progressbar"
-                    aria-label={`Progress for ${group.topLabel}`}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-valuenow={progress.percent}
-                  >
-                    <div
-                      className="h-full rounded-full bg-accent transition-[width] duration-300 ease-out"
-                      style={{ width: `${progress.percent}%` }}
-                    />
-                  </div>
+                  <ProgressBar percent={progress.percent} className="h-2.5 flex-1" label={`Progress for ${group.topLabel}`} />
                   <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/70 px-3 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm">
                     <span className="text-foreground">{progress.done}/{progress.total}</span>
                     <span>tasks done</span>
@@ -949,19 +938,7 @@ export function ChecklistBoard({ slug, items, descriptionHtml, className }: Chec
                       {group.topCode}. {group.topLabel}
                     </h2>
                     <div className="flex flex-wrap items-center gap-2.5">
-                      <div
-                        className="h-2.5 flex-1 overflow-hidden rounded-full bg-border/70"
-                        role="progressbar"
-                        aria-label={`Progress for ${group.topLabel}`}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                        aria-valuenow={progress.percent}
-                      >
-                        <div
-                          className="h-full rounded-full bg-accent transition-[width] duration-300 ease-out"
-                          style={{ width: `${progress.percent}%` }}
-                        />
-                      </div>
+                      <ProgressBar percent={progress.percent} className="h-2.5 flex-1" label={`Progress for ${group.topLabel}`} />
                       <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/70 px-3 py-1 text-[11px] font-semibold text-muted-foreground shadow-sm">
                         <span className="text-foreground">{progress.done}/{progress.total}</span>
                         <span>tasks done</span>

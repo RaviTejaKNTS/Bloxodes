@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import { ProgressBar } from "@/components/ProgressBar";
 import {
   ARMOR_SLOTS,
   MAX_ORE_TYPES,
@@ -116,12 +117,7 @@ function ProbabilityRow({
         </div>
         <span className="text-sm font-semibold text-foreground">{formatPercent(probability)}</span>
       </div>
-      <div className="mt-2 h-2 rounded-full bg-surface-muted">
-        <div
-          className="h-2 rounded-full bg-accent transition-[width]"
-          style={{ width: `${Math.min(100, Math.max(0, probability * 100))}%` }}
-        />
-      </div>
+      <ProgressBar percent={probability * 100} className="mt-2 h-2" label="Probability" />
       {children ? <div className="mt-2 text-xs text-muted">{children}</div> : null}
     </div>
   );
