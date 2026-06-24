@@ -18,6 +18,7 @@ import {
   normalizeText,
   readNumber,
   robloxTargetId,
+  RobloxRateLimitError,
   toBoolean,
   type CatalogItemDetails,
   type ItemStatsSourceRow,
@@ -315,6 +316,10 @@ async function markFailures(rows: ItemStatsSourceRow[], error: unknown) {
   await upsertRows("roblox_catalog_items", updates, "asset_id", 100);
 }
 
+function summarizeRows(rows: ItemStatsSourceRow[]) {
+  return rows.map((row) => row.asset_id).slice(0, 10);
+}
+
 async function refreshIndexes() {
   const { result, method } = await refreshStatsItemCurrentIndexes();
   await enqueueRevalidationEvents([{ type: "stats", slug: "items" }], "stats_items_refresh");
@@ -352,20 +357,40 @@ async function main() {
     const itemUpdates: Record<string, unknown>[] = [];
     const hourlyRows: Record<string, unknown>[] = [];
     const thumbnailRows: Record<string, unknown>[] = [];
+    let rateLimitedBatches = 0;
+    let rateLimitedRows = 0;
+    const rateLimitedSamples: number[] = [];
 
     for (const detailBatch of chunkArray(rows, DETAILS_BATCH)) {
-      const payloads = await fetchCatalogItemDetailsBatch(detailBatch, {
-        userAgent: USER_AGENT,
-        minRequestMs: REQUEST_MIN_MS,
-        maxRetries: MAX_RETRIES
-      });
+      let payloads: CatalogItemDetails[];
+      let thumbnails: Awaited<ReturnType<typeof fetchThumbnails>>;
+
+      try {
+        payloads = await fetchCatalogItemDetailsBatch(detailBatch, {
+          userAgent: USER_AGENT,
+          minRequestMs: REQUEST_MIN_MS,
+          maxRetries: MAX_RETRIES
+        });
+        thumbnails = await fetchThumbnails(detailBatch, {
+          userAgent: USER_AGENT,
+          size: THUMBNAIL_SIZE,
+          format: THUMBNAIL_FORMAT,
+          maxRetries: MAX_RETRIES
+        });
+      } catch (error) {
+        if (!(error instanceof RobloxRateLimitError)) throw error;
+
+        rateLimitedBatches += 1;
+        rateLimitedRows += detailBatch.length;
+        rateLimitedSamples.push(...summarizeRows(detailBatch).slice(0, Math.max(0, 10 - rateLimitedSamples.length)));
+        console.warn(
+          `Roblox rate limited ${detailBatch.length} item stats rows; backing off batch. Sample asset ids: ${summarizeRows(detailBatch).join(", ")}`
+        );
+        if (!options.dryRun) await markFailures(detailBatch, error);
+        continue;
+      }
+
       const payloadById = catalogPayloadByTargetId(payloads);
-      const thumbnails = await fetchThumbnails(detailBatch, {
-        userAgent: USER_AGENT,
-        size: THUMBNAIL_SIZE,
-        format: THUMBNAIL_FORMAT,
-        maxRetries: MAX_RETRIES
-      });
 
       for (const row of detailBatch) {
         const targetId = robloxTargetId(row);
@@ -409,14 +434,19 @@ async function main() {
     }
 
     const indexResult = !options.dryRun && options.refreshIndexes ? await refreshIndexes() : null;
+    const status = rateLimitedRows > 0 ? "partial" : "success";
 
     await finishStatsJobRun(run, {
-      status: "success",
+      status,
       rowsClaimed: rows.length,
       rowsSucceeded: itemUpdates.length,
+      rowsFailed: rateLimitedRows,
       metadata: {
         hourly_rows: hourlyRows.length,
         thumbnail_rows: thumbnailRows.length,
+        rate_limited_batches: rateLimitedBatches,
+        rate_limited_rows: rateLimitedRows,
+        rate_limited_sample_asset_ids: rateLimitedSamples,
         index_result: indexResult
       }
     });
@@ -425,7 +455,11 @@ async function main() {
       JSON.stringify(
         {
           dryRun: options.dryRun,
+          status,
           refreshed: itemUpdates.length,
+          rateLimitedRows,
+          rateLimitedBatches,
+          rateLimitedSamples,
           hourlyRows: hourlyRows.length,
           thumbnailRows: thumbnailRows.length,
           indexResult

@@ -75,6 +75,17 @@ const RESALE_DATA_API = (assetId: number) => `https://economy.roblox.com/v1/asse
 let csrfToken: string | null = null;
 let lastRequestAt = 0;
 
+export class RobloxRateLimitError extends Error {
+  readonly status = 429;
+  readonly retryAfterMs: number | null;
+
+  constructor(message: string, retryAfterMs: number | null) {
+    super(message);
+    this.name = "RobloxRateLimitError";
+    this.retryAfterMs = retryAfterMs;
+  }
+}
+
 export function toBoolean(value: string | undefined, fallback: boolean) {
   if (value == null || value === "") return fallback;
   return ["1", "true", "yes", "on"].includes(value.toLowerCase());
@@ -192,13 +203,17 @@ export async function fetchCatalogItemDetailsBatch(
       return Array.isArray(payload?.data) ? payload.data : [];
     }
 
+    const rateLimitRetryMs = response.status === 429 ? retryAfterMs(response) : null;
     if (response.status === 429 && attempt < options.maxRetries) {
       attempt += 1;
-      await sleep(retryAfterMs(response) ?? 5_000 * attempt);
+      await sleep(rateLimitRetryMs ?? 5_000 * attempt);
       continue;
     }
 
     const text = await response.text().catch(() => "");
+    if (response.status === 429) {
+      throw new RobloxRateLimitError(`Catalog item details rate limited (429): ${text.slice(0, 180)}`, rateLimitRetryMs);
+    }
     throw new Error(`Catalog item details failed (${response.status}): ${text.slice(0, 180)}`);
   }
 }
@@ -256,10 +271,14 @@ async function fetchThumbnailEntries(url: string, options: { userAgent: string; 
       const payload = (await response.json().catch(() => null)) as { data?: ThumbnailEntry[] } | null;
       return Array.isArray(payload?.data) ? payload.data : [];
     }
+    const rateLimitRetryMs = response.status === 429 ? retryAfterMs(response) : null;
     if (response.status === 429 && attempt < options.maxRetries) {
       attempt += 1;
-      await sleep(retryAfterMs(response) ?? 2_000 * attempt);
+      await sleep(rateLimitRetryMs ?? 2_000 * attempt);
       continue;
+    }
+    if (response.status === 429) {
+      throw new RobloxRateLimitError(`Thumbnail request rate limited (429)`, rateLimitRetryMs);
     }
     throw new Error(`Thumbnail request failed (${response.status})`);
   }

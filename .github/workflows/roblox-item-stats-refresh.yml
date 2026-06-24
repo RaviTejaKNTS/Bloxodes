@@ -18,8 +18,8 @@ jobs:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
       ROBLOX_ITEM_STATS_LIMIT: "250"
-      ROBLOX_ITEM_STATS_MIN_REQUEST_MS: "1400"
-      ROBLOX_ITEM_STATS_DETAILS_BATCH: "10"
+      ROBLOX_ITEM_STATS_MIN_REQUEST_MS: "2500"
+      ROBLOX_ITEM_STATS_DETAILS_BATCH: "5"
       ROBLOX_ITEM_STATS_REFRESH_INDEXES: "false"
       ROBLOX_ITEM_RESALE_LIMIT: "60"
       ROBLOX_ITEM_RESALE_MIN_REQUEST_MS: "1800"
@@ -40,16 +40,16 @@ jobs:
         run: npm run stats:items:tier -- --apply --limit 5000
 
       - name: Refresh trade item stats
-        run: npm run stats:items:refresh -- --tier TRADE --limit 180
+        run: npm run stats:items:refresh -- --tier TRADE --limit 60
 
       - name: Refresh hot item stats
-        run: npm run stats:items:refresh -- --tier HOT --limit 180
+        run: npm run stats:items:refresh -- --tier HOT --limit 60
 
       - name: Refresh new item stats
-        run: npm run stats:items:refresh -- --tier NEW --limit 120
+        run: npm run stats:items:refresh -- --tier NEW --limit 60
 
       - name: Refresh broken media item stats
-        run: npm run stats:items:refresh -- --tier BROKEN_MEDIA --limit 80
+        run: npm run stats:items:refresh -- --tier BROKEN_MEDIA --limit 30
 
       - name: Sync resale history
         run: npm run stats:items:resale -- --limit 60 --max-age-hours 24
@@ -70,7 +70,8 @@ jobs:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
       ROBLOX_ITEM_STATS_LIMIT: "250"
-      ROBLOX_ITEM_STATS_MIN_REQUEST_MS: "1600"
+      ROBLOX_ITEM_STATS_MIN_REQUEST_MS: "2500"
+      ROBLOX_ITEM_STATS_DETAILS_BATCH: "5"
       ROBLOX_ITEM_STATS_REFRESH_INDEXES: "false"
     steps:
       - name: Checkout
@@ -86,10 +87,10 @@ jobs:
         run: npm ci
 
       - name: Refresh warm item stats
-        run: npm run stats:items:refresh -- --tier WARM --limit 160
+        run: npm run stats:items:refresh -- --tier WARM --limit 80
 
       - name: Refresh cold item stats
-        run: npm run stats:items:refresh -- --tier COLD --limit 90
+        run: npm run stats:items:refresh -- --tier COLD --limit 50
 
       - name: Rebuild item stats indexes
         run: npm run stats:items:index:refresh
