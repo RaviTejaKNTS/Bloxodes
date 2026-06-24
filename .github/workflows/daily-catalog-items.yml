@@ -2,8 +2,8 @@ name: Daily Roblox Catalog Collection
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "30 5 * * *"
+  # Scheduled Roblox catalog discovery runs on the VPS stats worker. Keep this
+  # workflow manual-only so GitHub runner IP limits do not throttle discovery.
 
 concurrency:
   group: daily-catalog-items
