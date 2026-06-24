@@ -199,6 +199,13 @@ Bug: sidebar rank ≠ stats page rank. Root cause = two rank sources. The stats 
 - Fix: exported `loadLatestRank`; `getUniverseStatsSummary` (SSR seed) now returns `loadLatestRank` for rank; `/api/stats/games/[universeId]` overrides `game.rank` with `loadLatestRank` (that endpoint is sidebar-only — charts use `/chart` + `/rank-chart`). Did **not** touch `getStatsGameSummaryByUniverseId` itself (reused by list builders in `Promise.all`, would add N queries).
 - Verified: sidebar API rank 16 == stats page #16 for grow-a-garden.
 
+### 2026-06-24 — On-demand revalidation now covers the sidebar
+Findings while checking the on-demand flow (Supabase `revalidation_events` → `revalidate` edge fn → `/api/revalidate`):
+- `lib/public-content-cache.ts` `publicContentCache` is a **no-op** (ignores its `tags`), so `revalidateTag` calls are effectively dead — all real revalidation is `revalidatePath` (ISR full-route cache).
+- Cross-content revalidation previously only re-rendered the universe's **wiki** page (`lookupRelatedWikiSlugs`). The new discovery sidebar lives on **codes/articles/events/quizzes**, which were never cross-revalidated → sidebar went stale after sibling content changes.
+- Fix (`app/api/revalidate/route.ts`): added `resolveUniverseIdsForEvent` + `lookupSlugsByUniverseIds` + `lookupSidebarHostPaths`. Any content event now also revalidates the universe's `/codes/<slug>`, `/articles/<slug>`, `/events/<slug>`, `/quizzes/<code>` (uses the same proven columns as `loadRelatedLinks`). `author`/`music`/`stats` excluded (stats sidebar is a live 60s client poll, so its host pages don't need revalidation).
+- Volume note: `code` events are high-frequency (daily codes refresh) and now fan out to a game's article/event/quiz pages to refresh the sidebar codes card's active count. If that's too much churn, drop `code` from `resolveUniverseIdsForEvent`.
+
 #### Stats freshness / revalidation (findings — NOT changed; needs a decision)
 Same source now, but cache TTLs differ:
 - `/stats/games` index → `revalidate = 0` (always live).

@@ -556,6 +556,88 @@ async function lookupRelatedWikiSlugs(type: SinglePayload["type"], slug: string)
   return lookupWikiSlugsByUniverseIds(universeIds);
 }
 
+async function resolveUniverseIdsForEvent(type: SinglePayload["type"], slug: string): Promise<number[]> {
+  switch (type) {
+    case "code":
+      return lookupUniverseIdsBySlug("code_pages", "slug", [slug]);
+    case "article":
+      return lookupUniverseIdsBySlug("articles", "slug", [slug]);
+    case "event":
+      return lookupUniverseIdsBySlug("events_pages", "slug", [slug]);
+    case "checklist":
+      return lookupUniverseIdsBySlug("checklist_pages", "slug", [slug]);
+    case "tool":
+      return lookupUniverseIdsBySlug("tools", "code", [slug]);
+    case "quiz":
+      return lookupUniverseIdsBySlug("quiz_pages", "code", [slug]);
+    case "catalog":
+      return lookupUniverseIdsBySlug("catalog_pages", "code", [slug, slug.replace(/\//g, "-")]);
+    case "wiki":
+      return lookupUniverseIdsBySlug("wiki_pages", "slug", [slug]);
+    case "wiki_catalog": {
+      const [wikiSlug] = slug.split("/");
+      return wikiSlug ? lookupUniverseIdsBySlug("wiki_pages", "slug", [wikiSlug]) : [];
+    }
+    default:
+      // author, music, stats — not shown in the game discovery sidebar
+      // (stats is a live client poll, so its host pages don't need revalidation).
+      return [];
+  }
+}
+
+async function lookupSlugsByUniverseIds(table: string, slugColumn: string, universeIds: number[]): Promise<string[]> {
+  const ids = Array.from(new Set(universeIds.filter((id) => Number.isFinite(id))));
+  if (!ids.length) return [];
+
+  const sb = supabaseAdmin();
+  const { data, error } = await sb
+    .from(table)
+    .select(slugColumn)
+    .in("universe_id", ids)
+    .eq("is_published", true)
+    .not(slugColumn, "is", null);
+
+  if (error) {
+    console.warn(`Sidebar revalidation lookup failed for ${table}.${slugColumn}`, error.message);
+    return [];
+  }
+
+  return Array.from(
+    new Set(
+      (data ?? [])
+        .map((row) => {
+          const value = (row as unknown as Record<string, unknown>)[slugColumn];
+          return normalizeSlug(typeof value === "string" ? value : "");
+        })
+        .filter(Boolean)
+    )
+  );
+}
+
+/**
+ * The game discovery sidebar lives on codes/articles/events/quizzes pages, so any
+ * change to a game's content must revalidate those four page types for the universe
+ * (not just its wiki page). Stats are excluded — the sidebar stats card is a live poll.
+ */
+async function lookupSidebarHostPaths(type: SinglePayload["type"], slug: string): Promise<string[]> {
+  const universeIds = await resolveUniverseIdsForEvent(type, slug);
+  if (!universeIds.length) return [];
+
+  const [codeSlugs, articleSlugs, eventSlugs, quizCodes] = await Promise.all([
+    lookupSlugsByUniverseIds("code_pages", "slug", universeIds),
+    lookupSlugsByUniverseIds("articles", "slug", universeIds),
+    lookupSlugsByUniverseIds("events_pages", "slug", universeIds),
+    lookupSlugsByUniverseIds("quiz_pages", "code", universeIds)
+  ]);
+
+  return [
+    ...codeSlugs.map((value) => `/codes/${value}`),
+    ...articleSlugs.map((value) => `/articles/${value}`),
+    ...eventSlugs.map((value) => `/events/${value}`),
+    ...quizCodes.map((value) => `/quizzes/${value}`)
+  ];
+}
+
 async function lookupArticleGameSlugByArticleSlug(slug: string): Promise<string | null> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
@@ -679,6 +761,13 @@ async function collectRevalidationTargets(payload: SinglePayload) {
   for (const wikiSlug of impactedWikiSlugs) {
     purgePaths = [...purgePaths, ...revalidateForWiki(wikiSlug)];
     purgeTags = [...purgeTags, ...cacheTagsForEvent("wiki", wikiSlug)];
+  }
+
+  // The discovery sidebar embeds the same game's content on codes/articles/events/quizzes
+  // pages, so revalidate those host pages for the universe too.
+  const sidebarHostPaths = await lookupSidebarHostPaths(payload.type, slug);
+  if (sidebarHostPaths.length) {
+    purgePaths = [...purgePaths, ...sidebarHostPaths];
   }
 
   return {
