@@ -316,7 +316,7 @@ export default async function HomePage() {
       ) : null}
 
       {/* HAPPENING NOW + BROWSE EVERYTHING */}
-      <section className="grid gap-6 lg:grid-cols-[1fr_1.6fr] lg:items-start">
+      <section className="grid gap-6 lg:grid-cols-[1fr_1.6fr] lg:items-stretch">
         {events.length ? (
           <div className="space-y-3">
             <h2 className="text-xl font-semibold text-foreground">Happening now</h2>
@@ -328,22 +328,24 @@ export default async function HomePage() {
           </div>
         ) : null}
 
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           <h2 className="text-xl font-semibold text-foreground">Browse everything on Bloxodes</h2>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="grid flex-1 auto-rows-fr grid-cols-2 gap-3 sm:grid-cols-4">
             {browse.map((item) => {
               const Icon = item.icon;
               return (
-                <Link key={item.href} href={item.href} className="flex items-center gap-2.5 rounded-lg border border-border/70 bg-card px-3 py-3 transition-colors hover:border-border">
+                <Link key={item.href} href={item.href} className="flex flex-col justify-between gap-2 rounded-lg border border-border/70 bg-card p-3 transition-colors hover:border-border">
                   <Icon className="h-5 w-5 text-accent" aria-hidden />
-                  <span className="text-sm font-semibold text-foreground">{item.label}</span>
-                  <span className="ml-auto text-xs text-muted">{item.count.toLocaleString("en-US")}</span>
+                  <span>
+                    <span className="block text-sm font-semibold text-foreground">{item.label}</span>
+                    <span className="block text-xs text-muted">{item.count.toLocaleString("en-US")}</span>
+                  </span>
                 </Link>
               );
             })}
           </div>
           {toolCards.length ? (
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-3 sm:grid-cols-3">
               {toolCards.map((tool) => (
                 <ToolCard key={tool.id ?? tool.code} tool={tool} />
               ))}
@@ -370,8 +372,7 @@ export default async function HomePage() {
       ) : null}
 
       {/* PLATFORM CCU CHART */}
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground">Platform player activity</h2>
+      <section>
         <StatsChartPanel
           title="Platform CCU trend"
           subtitle="Tracked Roblox games, last 24 hours"
