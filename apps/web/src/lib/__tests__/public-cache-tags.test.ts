@@ -13,7 +13,7 @@ describe("public cache tags", () => {
   it("purges code detail, indexes, home, feed, and sitemap tags for code events", () => {
     const tags = cacheTagsForEvent("code", "Car-Wash-Tycoon");
     expect(tags).toEqual(
-      expect.arrayContaining(["code:car-wash-tycoon", "codes-index", "home", "feed", "sitemap", "sitemap:codes"])
+      expect.arrayContaining(["code:car-wash-tycoon", "codes", "codes-index", "home", "feed", "sitemap", "sitemap:codes"])
     );
     expect(tags).not.toContain("site");
   });
@@ -26,8 +26,15 @@ describe("public cache tags", () => {
       expect.arrayContaining(["site", "articles-index", "articles-games", "article-game:fisch"])
     );
     expect(cacheTagsForEvent("article", "fisch-guide")).toEqual(
-      expect.arrayContaining(["article:fisch-guide", "articles-index", "articles-games", "sitemap:articles"])
+      expect.arrayContaining(["article:fisch-guide", "articles", "articles-index", "articles-games", "sitemap:articles"])
     );
+  });
+
+  it("purges family detail tags for cross-detail recommendation rows", () => {
+    expect(cacheTagsForEvent("event", "grow-a-garden")).toEqual(expect.arrayContaining(["events", "events-index"]));
+    expect(cacheTagsForEvent("tool", "robux-to-usd-calculator")).toEqual(expect.arrayContaining(["tools", "tools-index"]));
+    expect(cacheTagsForEvent("quiz", "fisch-quiz")).toEqual(expect.arrayContaining(["quizzes", "quizzes-index"]));
+    expect(cacheTagsForEvent("puzzle", "connections/2026-06-24")).toEqual(expect.arrayContaining(["puzzles", "puzzles-index"]));
   });
 
   it("tags wiki catalog pages with both wiki and collection tags", () => {

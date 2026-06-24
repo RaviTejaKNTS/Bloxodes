@@ -18,8 +18,6 @@ import { authorAvatarUrl } from "@/lib/avatar";
 import { collectAuthorSocials } from "@/lib/author-socials";
 import {
   ARTICLES_DESCRIPTION,
-  CHECKLISTS_DESCRIPTION,
-  EVENTS_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
   breadcrumbJsonLd,
@@ -29,27 +27,14 @@ import {
 } from "@/lib/seo";
 import {
   getArticleBySlug,
-  getEventsPageByUniverseId,
   type ArticleWithRelations,
   type Author,
   listPublishedArticleSlugs,
-  listPublishedArticlesByUniverseId,
-  listPublishedArticlesPage,
-  listPublishedChecklistsByUniverseId,
-  listCodePagesWithActiveCountsByUniverseId
 } from "@/lib/db";
 import { extractHowToSteps } from "@/lib/how-to";
-import { ChecklistCard } from "@/components/ChecklistCard";
-import { GameCard } from "@/components/GameCard";
-import { ArticleCard } from "@/components/ArticleCard";
-import { ToolCard } from "@/components/ToolCard";
-import { EventsPageCard, type EventsPageCardProps } from "@/components/EventsPageCard";
-import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
 import { ContentSlot } from "@/components/ContentSlot";
 import { ArticleImageLightbox } from "@/components/ArticleImageLightbox";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { formatUpdatedLabel } from "@/lib/updated-label";
-import { getUniverseEventSummary } from "@/lib/events-summary";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 
@@ -159,27 +144,6 @@ async function renderArticlePage(article: ArticleWithRelations) {
 
   const universeId = (article as any).universe_id ?? null;
   const universeLabel = article.universe?.display_name ?? article.universe?.name ?? article.title;
-  const relatedTools: ToolListEntry[] = universeId ? await listPublishedToolsByUniverseId(universeId, 3) : [];
-  const relatedEventsPage = universeId ? await getEventsPageByUniverseId(universeId) : null;
-  const eventSummary = universeId ? await getUniverseEventSummary(universeId) : null;
-
-  // Prefer articles in the same universe; fall back to latest articles if none
-  let relatedArticles: ArticleWithRelations[] = [];
-  let relatedFromUniverse = false;
-  if (universeId) {
-    const sameUniverse = await listPublishedArticlesByUniverseId(universeId, 6, 0);
-    relatedArticles = sameUniverse.filter((entry) => entry.id !== article.id).slice(0, 5);
-    relatedFromUniverse = relatedArticles.length > 0;
-  }
-  if (!relatedArticles.length) {
-    const { articles: latestArticles } = await listPublishedArticlesPage(1, 5);
-    relatedArticles = latestArticles.filter((entry) => entry.id !== article.id).slice(0, 5);
-  }
-  const relatedHeading = relatedArticles.length
-    ? relatedFromUniverse
-      ? `${universeLabel} articles`
-      : "Latest articles"
-    : null;
   const authorAvatar = article.author ? authorAvatarUrl(article.author, 72) : null;
   const authorName = article.author?.name?.trim() || article.author?.name || null;
   const publishedAt = resolvePublishedAt(article) ?? article.created_at;
@@ -275,54 +239,6 @@ async function renderArticlePage(article: ArticleWithRelations) {
   const processedArticleHtml = processHtmlLinks(articleHtml);
   const articleHtmlWithGalleries = buildImageGalleries(processedArticleHtml.__html);
   const processedAuthorBioHtml = authorBioHtml ? processHtmlLinks(authorBioHtml) : null;
-
-  const relatedChecklists = universeId ? await listPublishedChecklistsByUniverseId(universeId, 1) : [];
-  const relatedCodes = universeId ? await listCodePagesWithActiveCountsByUniverseId(universeId, 1) : [];
-  const relatedChecklistCards = relatedChecklists.map((row) => {
-    const summaryPlain =
-      markdownToPlainText(row.seo_description ?? row.description_md ?? "") || CHECKLISTS_DESCRIPTION;
-    const itemsCount =
-      typeof row.leaf_item_count === "number"
-        ? row.leaf_item_count
-        : typeof row.item_count === "number"
-          ? row.item_count
-          : null;
-    return {
-      id: row.id,
-      slug: row.slug,
-      title: row.title,
-      summary: summaryPlain,
-      universeName: row.universe?.display_name ?? row.universe?.name ?? null,
-      coverImage: row.universe?.icon_url ?? `${SITE_URL}/og-image.png`,
-      updatedAt: row.updated_at || row.published_at || row.created_at || null,
-      itemsCount
-    };
-  });
-  const eventsSummary = relatedEventsPage?.meta_description?.trim() || EVENTS_DESCRIPTION;
-  const eventsUpdatedLabel = relatedEventsPage
-    ? formatUpdatedLabel(relatedEventsPage.updated_at || relatedEventsPage.published_at || relatedEventsPage.created_at)
-    : null;
-  const eventsCard: EventsPageCardProps | null =
-    relatedEventsPage && relatedEventsPage.slug
-      ? {
-          slug: relatedEventsPage.slug,
-          title: relatedEventsPage.title,
-          summary: eventsSummary,
-          universeName:
-            relatedEventsPage.universe?.display_name ??
-            relatedEventsPage.universe?.name ??
-            universeLabel,
-          coverImage: null,
-          fallbackIcon: relatedEventsPage.universe?.icon_url ?? null,
-          eventName: eventSummary?.featured?.name ?? null,
-          eventTimeLabel: eventSummary?.featured?.timeLabel ?? null,
-          eventStartUtc: eventSummary?.featured?.startUtc ?? null,
-          eventEndUtc: eventSummary?.featured?.endUtc ?? null,
-          status: (eventSummary?.featured?.status ?? "none") as EventsPageCardProps["status"],
-          counts: eventSummary?.counts ?? { upcoming: 0, current: 0, past: 0 },
-          updatedLabel: eventsUpdatedLabel
-        }
-      : null;
 
   return (
     <div className="space-y-12">

@@ -15,9 +15,6 @@ import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
 import { logger } from "@/lib/logger";
 import { ActiveCodes } from "@/components/ActiveCodes";
 import { ExpiredCodes } from "@/components/ExpiredCodes";
-import { GameCard } from "@/components/GameCard";
-import { ToolCard } from "@/components/ToolCard";
-import { EventsPageCard, type EventsPageCardProps } from "@/components/EventsPageCard";
 import { SocialShare } from "@/components/SocialShare";
 import { ContentSlot } from "@/components/ContentSlot";
 import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
@@ -27,17 +24,11 @@ import { monthYear } from "@/lib/date";
 import { sortCodesByFirstSeenDesc } from "@/lib/code-utils";
 import {
   getCodePageBySlug,
-  getEventsPageByUniverseId,
   listCodePagesWithActiveCounts,
-  listPublishedArticlesByUniverseId,
-  listPublishedChecklistsByUniverseId
 } from "@/lib/db";
 import type { Code, CodePageWithCounts } from "@/lib/db";
-import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
 import {
-  CHECKLISTS_DESCRIPTION,
   CODES_DESCRIPTION,
-  EVENTS_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
   breadcrumbJsonLd,
@@ -46,11 +37,7 @@ import {
 } from "@/lib/seo";
 import { replaceLinkPlaceholders } from "@/lib/link-placeholders";
 import { extractHowToSteps } from "@/lib/how-to";
-import { ChecklistCard } from "@/components/ChecklistCard";
-import { ArticleCard } from "@/components/ArticleCard";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import { formatUpdatedLabel } from "@/lib/updated-label";
-import { getUniverseEventSummary } from "@/lib/events-summary";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 
 export const revalidate = 3600;
@@ -674,56 +661,6 @@ export default async function GamePage({ params }: Params) {
 
   const universeLabel = game.name;
   const universeId = game.universe_id ?? null;
-  const relatedChecklists = universeId ? await listPublishedChecklistsByUniverseId(universeId, 1) : [];
-  const relatedArticles = universeId ? await listPublishedArticlesByUniverseId(universeId, 3) : [];
-  const relatedTools: ToolListEntry[] = universeId ? await listPublishedToolsByUniverseId(universeId, 3) : [];
-  const relatedEventsPage = universeId ? await getEventsPageByUniverseId(universeId) : null;
-  const eventSummary = universeId ? await getUniverseEventSummary(universeId) : null;
-  const relatedChecklistCards = relatedChecklists.map((row) => {
-    const summary = summarize(row.seo_description ?? row.description_md ?? null, CHECKLISTS_DESCRIPTION);
-    const itemsCount =
-      typeof row.leaf_item_count === "number"
-        ? row.leaf_item_count
-        : typeof row.item_count === "number"
-          ? row.item_count
-          : null;
-    return {
-      id: row.id,
-      slug: row.slug,
-      title: row.title,
-      summary,
-      universeName: game.name,
-      coverImage: row.universe?.icon_url ?? `${SITE_URL}/og-image.png`,
-      updatedAt: row.updated_at || row.published_at || row.created_at || null,
-      itemsCount
-    };
-  });
-  const eventsSummary = relatedEventsPage?.meta_description?.trim() || EVENTS_DESCRIPTION;
-  const eventsUpdatedLabel = relatedEventsPage
-    ? formatUpdatedLabel(relatedEventsPage.updated_at || relatedEventsPage.published_at || relatedEventsPage.created_at)
-    : null;
-  const eventsCard: EventsPageCardProps | null =
-    relatedEventsPage && relatedEventsPage.slug
-      ? {
-          slug: relatedEventsPage.slug,
-          title: relatedEventsPage.title,
-          summary: eventsSummary,
-          universeName:
-            relatedEventsPage.universe?.display_name ??
-            relatedEventsPage.universe?.name ??
-            universeLabel,
-          coverImage: null,
-          fallbackIcon: relatedEventsPage.universe?.icon_url ?? null,
-          eventName: eventSummary?.featured?.name ?? null,
-          eventTimeLabel: eventSummary?.featured?.timeLabel ?? null,
-          eventStartUtc: eventSummary?.featured?.startUtc ?? null,
-          eventEndUtc: eventSummary?.featured?.endUtc ?? null,
-          status: (eventSummary?.featured?.status ?? "none") as EventsPageCardProps["status"],
-          counts: eventSummary?.counts ?? { upcoming: 0, current: 0, past: 0 },
-          updatedLabel: eventsUpdatedLabel
-        }
-      : null;
-
   return (
     <div className="space-y-12">
       <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">

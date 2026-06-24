@@ -7,13 +7,7 @@ import "@/styles/article-content.css";
 import { QuizRunner } from "@/components/QuizRunner";
 import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
 import { MoreQuizzes } from "@/components/more-content";
-import { GameCard } from "@/components/GameCard";
-import { ArticleCard } from "@/components/ArticleCard";
-import { ToolCard } from "@/components/ToolCard";
 import { getQuizPageByCode, listPublishedQuizCodes, loadQuizData } from "@/lib/quizzes";
-import { listCodePagesWithActiveCountsByUniverseId, listPublishedArticlesByUniverseId } from "@/lib/db";
-import { listPublishedToolsByUniverseId } from "@/lib/tools";
-import { buildWikiCatalogPath, listPublishedWikiCatalogPagesByUniverseId } from "@/lib/wiki-catalog";
 import { markdownToPlainText, renderMarkdown } from "@/lib/markdown";
 import { buildServerQuizAttempt } from "@/lib/quiz-attempts";
 import type { QuizData } from "@/lib/quiz-types";
@@ -43,16 +37,6 @@ function pickThumbnail(value: unknown): string | null {
     }
   }
   return null;
-}
-
-function summarize(value: string | null | undefined, fallback: string): string {
-  if (!value) return fallback;
-  const normalized = markdownToPlainText(value).replace(/\s+/g, " ").trim();
-  if (!normalized) return fallback;
-  if (normalized.length <= 140) return normalized;
-  const slice = normalized.slice(0, 137);
-  const lastSpace = slice.lastIndexOf(" ");
-  return `${lastSpace > 80 ? slice.slice(0, lastSpace) : slice}…`;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -124,22 +108,6 @@ export default async function QuizPage({ params, searchParams }: PageProps) {
   const updatedRelativeLabel = updatedDate ? formatDistanceToNow(updatedDate, { addSuffix: true }) : null;
   const universeId = page.universe_id ?? null;
   const universeLabel = page.universe?.display_name ?? page.universe?.name ?? page.title;
-
-  const [relatedCodes, relatedArticles, relatedTools, relatedCatalogPagesRaw] = universeId
-    ? await Promise.all([
-        listCodePagesWithActiveCountsByUniverseId(universeId, 2),
-        listPublishedArticlesByUniverseId(universeId, 3, 0),
-        listPublishedToolsByUniverseId(universeId, 2),
-        listPublishedWikiCatalogPagesByUniverseId(universeId, 2)
-      ])
-    : [[], [], [], []];
-
-  const relatedCatalogPages = relatedCatalogPagesRaw.slice(0, 2);
-  const showRecommendations =
-    relatedCodes.length > 0 ||
-    relatedArticles.length > 0 ||
-    relatedTools.length > 0 ||
-    relatedCatalogPages.length > 0;
 
   const structuredData = {
     "@context": "https://schema.org",

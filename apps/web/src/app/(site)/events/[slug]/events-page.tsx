@@ -6,26 +6,16 @@ import type { ReactNode } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { FiClock } from "react-icons/fi";
 import "@/styles/article-content.css";
-import { ArticleCard } from "@/components/ArticleCard";
-import { ChecklistCard } from "@/components/ChecklistCard";
 import { ContentSlot } from "@/components/ContentSlot";
-import { GameCard } from "@/components/GameCard";
 import { SocialShare } from "@/components/SocialShare";
 import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
 import { MoreEvents } from "@/components/more-content";
-import { ToolCard } from "@/components/ToolCard";
 import { CommentsSection } from "@/components/comments/CommentsSection";
-import {
-  listPublishedArticlesByUniverseId,
-  listPublishedChecklistsByUniverseId,
-  listCodePagesWithActiveCountsByUniverseId
-} from "@/lib/db";
 import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
 import { processHtmlLinks } from "@/lib/link-utils";
 import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
 import { supabaseAdmin } from "@/lib/supabase";
-import { CHECKLISTS_DESCRIPTION, SITE_NAME, SITE_URL, breadcrumbJsonLd, resolveSeoTitle, buildAlternates } from "@/lib/seo";
-import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
+import { SITE_NAME, SITE_URL, breadcrumbJsonLd, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { EventTimePanel } from "./EventTimePanel";
 import { EventEndCountdown } from "./EventEndCountdown";
 import { buildEndCountdown, formatDateTimeLabel, formatDuration } from "./eventTimeFormat";
@@ -835,32 +825,6 @@ export async function renderEventsPage({ slug }: { slug: string }) {
   const heroImageCandidate =
     upcomingEvents.find((event) => event.primary_thumbnail_url)?.primary_thumbnail_url ?? page.universe?.icon_url ?? null;
   const coverImage = resolveImageUrl(heroImageCandidate) ?? `${SITE_URL}/og-image.png`;
-
-  const relatedChecklists = universeId ? await listPublishedChecklistsByUniverseId(universeId, 1) : [];
-  const relatedCodes = universeId ? await listCodePagesWithActiveCountsByUniverseId(universeId, 1) : [];
-  const relatedArticles = universeId ? await listPublishedArticlesByUniverseId(universeId, 5, 0) : [];
-  const relatedTools: ToolListEntry[] = universeId ? await listPublishedToolsByUniverseId(universeId, 3) : [];
-  const relatedHeading = relatedArticles.length ? `${universeLabel} articles` : null;
-  const relatedChecklistCards = relatedChecklists.map((row) => {
-    const summaryPlain =
-      markdownToPlainText(row.seo_description ?? row.description_md ?? "") || CHECKLISTS_DESCRIPTION;
-    const itemsCount =
-      typeof row.leaf_item_count === "number"
-        ? row.leaf_item_count
-        : typeof row.item_count === "number"
-          ? row.item_count
-          : null;
-    return {
-      id: row.id,
-      slug: row.slug,
-      title: row.title,
-      summary: summaryPlain,
-      universeName: row.universe?.display_name ?? row.universe?.name ?? null,
-      coverImage: row.universe?.icon_url ?? `${SITE_URL}/og-image.png`,
-      updatedAt: row.updated_at || row.published_at || row.created_at || null,
-      itemsCount
-    };
-  });
 
   const schemaEvents = [...upcomingEvents, ...currentEvents, ...pastEvents]
     .map((event) => {

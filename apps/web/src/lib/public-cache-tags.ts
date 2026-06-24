@@ -251,11 +251,12 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
 
   switch (type) {
     case "code":
-      return unique([...base, slugTag("code", normalized), "codes-index", "home", "feed", "sitemap", "sitemap:codes"]);
+      return unique([...base, slugTag("code", normalized), "codes", "codes-index", "home", "feed", "sitemap", "sitemap:codes"]);
     case "article":
       return unique([
         ...base,
         slugTag("article", normalized),
+        "articles",
         "articles-index",
         "articles-games",
         "home",
@@ -266,11 +267,12 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
     case "author":
       return unique([...base, slugTag("author", normalized), "authors-index", "sitemap", "sitemap:authors"]);
     case "event":
-      return unique([...base, slugTag("event", normalized), "events-index", "home", "feed", "sitemap", "sitemap:events"]);
+      return unique([...base, slugTag("event", normalized), "events", "events-index", "home", "feed", "sitemap", "sitemap:events"]);
     case "checklist":
       return unique([
         ...base,
         slugTag("checklist", normalized),
+        "checklists",
         "checklists-index",
         "home",
         "feed",
@@ -278,14 +280,15 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         "sitemap:checklists"
       ]);
     case "tool":
-      return unique([...base, slugTag("tool", normalized), "tools-index", "home", "sitemap", "sitemap:tools"]);
+      return unique([...base, slugTag("tool", normalized), "tools", "tools-index", "home", "sitemap", "sitemap:tools"]);
     case "quiz":
-      return unique([...base, slugTag("quiz", normalized), "quizzes-index", "home", "sitemap", "sitemap:quizzes"]);
+      return unique([...base, slugTag("quiz", normalized), "quizzes", "quizzes-index", "home", "sitemap", "sitemap:quizzes"]);
     case "puzzle": {
       const [puzzleSlug] = normalized.split("/");
       return unique([
         ...base,
         puzzleSlug ? slugTag("puzzle", puzzleSlug) : "",
+        "puzzles",
         "puzzles-index",
         "home",
         "feed",

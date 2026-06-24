@@ -115,12 +115,18 @@ function getOrderedCatalogCards(cards: CatalogIndexCard[], order: readonly strin
 
 async function buildCatalogCards() {
   const pages = await listPublishedTopLevelCatalogPages();
+  const pagesWithMeta = await Promise.all(
+    pages.map(async (entry, index) => ({
+      entry,
+      index,
+      normalizedCode: normalizeCatalogIndexCode(entry.code),
+      meta: await resolveCatalogCardMeta(normalizeCatalogIndexCode(entry.code))
+    }))
+  );
   const resultsById = new Map<string, CatalogIndexCard>();
-  for (const [index, entry] of pages.entries()) {
+  for (const { entry, index, normalizedCode, meta } of pagesWithMeta) {
     const updatedAt = entry.content_updated_at ?? entry.updated_at ?? entry.published_at ?? entry.created_at ?? null;
-    const normalizedCode = normalizeCatalogIndexCode(entry.code);
     const existing = resultsById.get(normalizedCode);
-    const meta = await resolveCatalogCardMeta(normalizedCode);
     const next: CatalogIndexCard = {
       id: normalizedCode,
       href: `/catalog/${normalizedCode}`,
