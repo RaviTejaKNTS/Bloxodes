@@ -1,6 +1,55 @@
 import * as cheerio from "cheerio";
 import type { ScrapedCode, ScrapeResult } from "./scraper-types";
 
+const USER_AGENT = "Mozilla/5.0 (compatible; RobloxCodesBot/1.0)";
+const FETCH_ATTEMPTS = 3;
+const BASE_RETRY_DELAY_MS = 1_500;
+const RETRYABLE_STATUS_CODES = new Set([408, 429, 500, 502, 503, 504]);
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function parseRetryAfterMs(value: string | null): number | null {
+  if (!value) return null;
+
+  const seconds = Number(value);
+  if (Number.isFinite(seconds) && seconds >= 0) {
+    return seconds * 1_000;
+  }
+
+  const dateMs = Date.parse(value);
+  if (!Number.isNaN(dateMs)) {
+    return Math.max(0, dateMs - Date.now());
+  }
+
+  return null;
+}
+
+async function fetchRobloxdenHtml(url: string): Promise<string> {
+  let lastStatus: number | null = null;
+
+  for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt += 1) {
+    const res = await fetch(url, {
+      headers: { "user-agent": USER_AGENT },
+    });
+
+    if (res.ok) return res.text();
+
+    lastStatus = res.status;
+    const shouldRetry = RETRYABLE_STATUS_CODES.has(res.status) && attempt < FETCH_ATTEMPTS;
+    if (!shouldRetry) {
+      throw new Error(`Failed to fetch ${url}: ${res.status}`);
+    }
+
+    const retryAfterMs = parseRetryAfterMs(res.headers.get("retry-after"));
+    const fallbackDelayMs = BASE_RETRY_DELAY_MS * attempt;
+    await sleep(Math.max(retryAfterMs ?? 0, fallbackDelayMs));
+  }
+
+  throw new Error(`Failed to fetch ${url}: ${lastStatus ?? "unknown status"}`);
+}
+
 function isAdRow($item: cheerio.Cheerio<cheerio.Element>, $: cheerio.CheerioAPI): boolean {
   const adClassSelectors = [".table__ad-placement-row", ".codes-list__ad", ".codes-list__promo"];
   for (const sel of adClassSelectors) {
@@ -169,11 +218,7 @@ function extractIsNew($item: cheerio.Cheerio<cheerio.Element>, $: cheerio.Cheeri
 }
 
 export async function scrapeRobloxdenPage(url: string): Promise<ScrapeResult> {
-  const res = await fetch(url, {
-    headers: { "user-agent": "Mozilla/5.0 (compatible; RobloxCodesBot/1.0)" },
-  });
-  if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);
-  const html = await res.text();
+  const html = await fetchRobloxdenHtml(url);
   const $ = cheerio.load(html);
 
   // Typical item selector

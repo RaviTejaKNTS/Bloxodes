@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "game": "Clean The Library",
+    "collection": "keys",
+    "universeId": 10226701629,
+    "updatedAt": "2026-06-24",
+    "groupBy": "catalogSection",
+    "columns": [
+      "name",
+      "color",
+      "effect",
+      "catalogSection",
+      "cardSummary",
+      "image"
+    ],
+    "sources": [
+      {
+        "label": "Clean The Library Wiki - Keys",
+        "url": "https://cleanthelibrary.wiki/keys/",
+        "accessed": "2026-06-24"
+      }
+    ],
+    "notes": "Four collectible keys, each a one-time pickup that grants a permanent buff. Cards show the key name, its color, and the buff it grants. The two carry-capacity keys stack with each other. Per-key in-game icons are not reliably available without in-game capture, so the catalog launches image-light."
+  },
+  "items": [
+    {
+      "name": "Crimson Octagon",
+      "slug": "crimson-octagon",
+      "color": "Red",
+      "effect": "Permanently increases your jump height, helping you reach raised platforms and shortcuts.",
+      "catalogSection": "Keys",
+      "cardSummary": "The Crimson Octagon is a red key that permanently raises your jump height, making elevated areas easier to reach.",
+      "image": "",
+      "sourcePage": "https://cleanthelibrary.wiki/keys/"
+    },
+    {
+      "name": "Golden Diamond",
+      "slug": "golden-diamond",
+      "color": "Gold",
+      "effect": "Permanently increases your carry capacity by 3, the largest single carry boost.",
+      "catalogSection": "Keys",
+      "cardSummary": "The Golden Diamond is a gold key that adds +3 carry capacity, letting you hold more books per trip.",
+      "image": "",
+      "sourcePage": "https://cleanthelibrary.wiki/keys/"
+    },
+    {
+      "name": "Azure Star",
+      "slug": "azure-star",
+      "color": "Blue",
+      "effect": "Permanently increases your carry capacity by 2, and stacks with the Golden Diamond.",
+      "catalogSection": "Keys",
+      "cardSummary": "The Azure Star is a blue key that adds +2 carry capacity. It stacks with the Golden Diamond for more carrying room.",
+      "image": "",
+      "sourcePage": "https://cleanthelibrary.wiki/keys/"
+    },
+    {
+      "name": "Emerald Club",
+      "slug": "emerald-club",
+      "color": "Green",
+      "effect": "Permanently grants sprint, letting you move faster across the library.",
+      "catalogSection": "Keys",
+      "cardSummary": "The Emerald Club is a green key that unlocks faster movement, speeding up long trips across the library.",
+      "image": "",
+      "sourcePage": "https://cleanthelibrary.wiki/keys/"
+    }
+  ]
+}

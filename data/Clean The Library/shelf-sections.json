@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "game": "Clean The Library",
+    "collection": "shelf-sections",
+    "universeId": 10226701629,
+    "updatedAt": "2026-06-24",
+    "groupBy": "catalogSection",
+    "columns": [
+      "name",
+      "code",
+      "theme",
+      "exampleBooks",
+      "catalogSection",
+      "cardSummary",
+      "image"
+    ],
+    "sources": [
+      {
+        "label": "AllThings.How - Clean The Library Shelf Sections and Book Sorting Guide",
+        "url": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/",
+        "accessed": "2026-06-24"
+      }
+    ],
+    "notes": "Sixteen themed shelf sections across two floors. Each section has a floor + letter code (1A, 2B, etc.) and a book theme; books matching that theme are shelved there. Section codes group by floor. Example book titles are drawn from the source to show the kind of book that belongs on each shelf. Per-section in-game screenshots are not reliably available without in-game capture, so the catalog launches image-light."
+  },
+  "items": [
+    {
+      "name": "Studio",
+      "slug": "studio",
+      "code": "1A",
+      "theme": "Studio",
+      "exampleBooks": "Why Some Parts Float When Nobody is Watching, Anchored Vs Unanchored",
+      "catalogSection": "First Floor",
+      "cardSummary": "Section 1A on the first floor holds Studio books about building experiences in Roblox Studio.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Simulators",
+      "slug": "simulators",
+      "code": "1B",
+      "theme": "Simulators",
+      "exampleBooks": "Pet Simulator Economics for Beginners, The Psychology of Clicking Faster",
+      "catalogSection": "First Floor",
+      "cardSummary": "Section 1B on the first floor holds Simulator books, the genre of grind-and-upgrade Roblox experiences.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Avatar & Catalog",
+      "slug": "avatar-catalog",
+      "code": "1C",
+      "theme": "Avatar & Catalog",
+      "exampleBooks": "How to Make UGC, The RTHRO Experiment",
+      "catalogSection": "First Floor",
+      "cardSummary": "Section 1C on the first floor holds Avatar and Catalog books about avatar items and the Roblox catalog.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Myths",
+      "slug": "myths",
+      "code": "1D",
+      "theme": "Myths",
+      "exampleBooks": "Myth Sightings 1x1x1x1, The Hidden Sword",
+      "catalogSection": "First Floor",
+      "cardSummary": "Section 1D on the first floor holds Myth books about Roblox legends and creepy in-game stories.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "DevEx",
+      "slug": "devex",
+      "code": "1E",
+      "theme": "DevEx",
+      "exampleBooks": "What To Buy After DevEx, Wonderful World of Group Payouts",
+      "catalogSection": "First Floor",
+      "cardSummary": "Section 1E on the first floor holds DevEx books about earning and exchanging Robux as a developer.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Rules & Moderation",
+      "slug": "rules-moderation",
+      "code": "1F",
+      "theme": "Rules & Moderation",
+      "exampleBooks": "The Appeal Process, Chat Filter",
+      "catalogSection": "First Floor",
+      "cardSummary": "Section 1F on the first floor holds Rules and Moderation books about Roblox policies and enforcement.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Obby/Parkour",
+      "slug": "obby-parkour",
+      "code": "1G",
+      "theme": "Obby/Parkour",
+      "exampleBooks": "The Lava Floors Always Rising, Kill Bricks",
+      "catalogSection": "First Floor",
+      "cardSummary": "Section 1G on the first floor holds Obby and Parkour books, the genre of jumping and obstacle courses.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Horror",
+      "slug": "horror",
+      "code": "1H",
+      "theme": "Horror",
+      "exampleBooks": "The Lobby Where Your Name Is Taken, Server 0",
+      "catalogSection": "First Floor",
+      "cardSummary": "Section 1H on the first floor holds Horror books about scary and survival Roblox experiences.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Economy/Trading",
+      "slug": "economy-trading",
+      "code": "1I",
+      "theme": "Economy/Trading",
+      "exampleBooks": "Limited Items: Pump and Dump Tactics, How to Spot a Scammer in 3 Seconds",
+      "catalogSection": "First Floor",
+      "cardSummary": "Section 1I on the first floor holds Economy and Trading books about Robux, limiteds, and in-game markets.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "History",
+      "slug": "history",
+      "code": "1J",
+      "theme": "History",
+      "exampleBooks": "Catalog Wars, Egg Hunt, Default Noob",
+      "catalogSection": "First Floor",
+      "cardSummary": "Section 1J on the first floor holds History books about the past of Roblox and its community.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Magic",
+      "slug": "magic",
+      "code": "2A",
+      "theme": "Magic",
+      "exampleBooks": "Illusion Magic, Necromancy Studies, Summoning Rituals",
+      "catalogSection": "Second Floor",
+      "cardSummary": "Section 2A on the second floor holds Magic books about spell-casting and wizard Roblox experiences.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Anime",
+      "slug": "anime",
+      "code": "2B",
+      "theme": "Anime",
+      "exampleBooks": "Tournament Arcs, Demon Hunters, Ninja Chronicles",
+      "catalogSection": "Second Floor",
+      "cardSummary": "Section 2B on the second floor holds Anime books, the genre of anime-themed Roblox games.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Meditation",
+      "slug": "meditation",
+      "code": "2C",
+      "theme": "Meditation",
+      "exampleBooks": "Stress Management, Sleep Improvement, Zen Philosophy",
+      "catalogSection": "Second Floor",
+      "cardSummary": "Section 2C on the second floor holds Meditation books about calm and relaxing Roblox experiences.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Military",
+      "slug": "military",
+      "code": "2D",
+      "theme": "Military",
+      "exampleBooks": "Air Combat, Tank Operations, Naval Fleets",
+      "catalogSection": "Second Floor",
+      "cardSummary": "Section 2D on the second floor holds Military books about war, shooter, and combat Roblox games.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Brainrot",
+      "slug": "brainrot",
+      "code": "2E",
+      "theme": "Brainrot",
+      "exampleBooks": "Sigma Studies, Skibidi Research, Meme Evolution",
+      "catalogSection": "Second Floor",
+      "cardSummary": "Section 2E on the second floor holds Brainrot books about the meme-driven brainrot genre.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    },
+    {
+      "name": "Theme Parks",
+      "slug": "theme-parks",
+      "code": "2F",
+      "theme": "Theme Parks",
+      "exampleBooks": "Ride Safety Standards, Haunted Attractions, Roller Coaster Engineering",
+      "catalogSection": "Second Floor",
+      "cardSummary": "Section 2F on the second floor holds Theme Park books about ride-building and amusement park Roblox games.",
+      "image": "",
+      "sourcePage": "https://allthings.how/clean-the-library-shelf-sections-and-book-sorting-guide-roblox/"
+    }
+  ]
+}

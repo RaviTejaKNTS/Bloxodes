@@ -7,7 +7,9 @@ const HEADING_SELECTOR = "h1, h2, h3, h4, h5, h6";
 const CODES_CONTAINER_SELECTOR = "ul, ol, table";
 const ACTIVE_CODES_HEADING_REGEX =
   /(?:\b(?:active|working)\b.*\bcodes?\b|\bcodes?\b.*\b(?:active|working)\b)/i;
-const NON_ACTIVE_SECTION_REGEX = /\b(?:expired|inactive|redeem|how to)\b/i;
+const TROUBLESHOOTING_HEADING_REGEX =
+  /\b(?:not\s+working|not\s+work|why\s+(?:are|is)\s+my|how\s+to\s+fix|troubleshoot)\b/i;
+const NON_ACTIVE_SECTION_REGEX = /\b(?:expired|inactive|redeem|how to|get more|where to find)\b/i;
 const REDEMPTION_INSTRUCTION_REGEXES = [
   /^go(?:to)?(?:the)?shop$/i,
   /^select(?:the)?redeem(?:option|button)?$/i,
@@ -97,7 +99,11 @@ function findCodesContainer($: cheerio.CheerioAPI): cheerio.Cheerio<cheerio.Elem
 
   const activeHeadings = content.find(HEADING_SELECTOR).filter((_, el) => {
     const text = $(el).text().replace(/\s+/g, " ").trim();
-    return ACTIVE_CODES_HEADING_REGEX.test(text) && !text.toLowerCase().includes("expired");
+    return (
+      ACTIVE_CODES_HEADING_REGEX.test(text) &&
+      !NON_ACTIVE_SECTION_REGEX.test(text) &&
+      !TROUBLESHOOTING_HEADING_REGEX.test(text)
+    );
   });
 
   for (const headingEl of activeHeadings.toArray()) {
@@ -105,18 +111,21 @@ function findCodesContainer($: cheerio.CheerioAPI): cheerio.Cheerio<cheerio.Elem
     if (container?.length) return container;
   }
 
-  // Some older Beebom pages use a plain "Codes" heading. Keep this fallback
-  // heading-bound so navigation and redemption lists cannot become code data.
-  if (!activeHeadings.length) {
-    const genericHeadings = content.find(HEADING_SELECTOR).filter((_, el) => {
-      const text = $(el).text().replace(/\s+/g, " ").trim();
-      return /\bcodes?\b/i.test(text) && !NON_ACTIVE_SECTION_REGEX.test(text);
-    });
+  // Some Beebom pages use plain "All New ... Codes" headings. Keep this
+  // fallback heading-bound so redemption and troubleshooting lists cannot
+  // become code data.
+  const genericHeadings = content.find(HEADING_SELECTOR).filter((_, el) => {
+    const text = $(el).text().replace(/\s+/g, " ").trim();
+    return (
+      /\bcodes?\b/i.test(text) &&
+      !NON_ACTIVE_SECTION_REGEX.test(text) &&
+      !TROUBLESHOOTING_HEADING_REGEX.test(text)
+    );
+  });
 
-    for (const headingEl of genericHeadings.toArray()) {
-      const container = findContainerBeforeNextHeading($, $(headingEl));
-      if (container?.length) return container;
-    }
+  for (const headingEl of genericHeadings.toArray()) {
+    const container = findContainerBeforeNextHeading($, $(headingEl));
+    if (container?.length) return container;
   }
 
   return null;
@@ -186,6 +195,7 @@ export function parseBeebomHtml(html: string): ScrapeResult {
         const rewardText = rewardCell ? rewardCell.text().trim() : "";
 
         const { cleaned: codeClean, isNew: codeNew } = stripNewFlag(codeText);
+        const { cleaned: rewardClean, isNew: rewardNew } = stripNewFlag(rewardText);
         const normalized = normalizeCode(codeClean);
         if (!normalized || isLikelyNonCodeText(codeClean)) return;
 
@@ -195,8 +205,8 @@ export function parseBeebomHtml(html: string): ScrapeResult {
           provider: "beebom",
         };
 
-        if (rewardText) entry.rewardsText = rewardText;
-        if (codeNew) entry.isNew = true;
+        if (rewardClean) entry.rewardsText = rewardClean;
+        if (codeNew || rewardNew) entry.isNew = true;
 
         codes.push(entry);
       });
@@ -209,6 +219,7 @@ export function parseBeebomHtml(html: string): ScrapeResult {
         const rewardRaw = rewardPart.trim();
 
         const { cleaned: codeClean, isNew: codeNew } = stripNewFlag(beforeSeparator);
+        const { cleaned: rewardClean, isNew: rewardNew } = stripNewFlag(rewardRaw);
         const normalized = normalizeCode(codeClean);
         if (!normalized || isLikelyNonCodeText(codeClean)) return;
         const entry: ScrapedCode = {
@@ -217,8 +228,8 @@ export function parseBeebomHtml(html: string): ScrapeResult {
           provider: "beebom",
         };
 
-        if (rewardRaw) entry.rewardsText = rewardRaw;
-        if (codeNew) entry.isNew = true;
+        if (rewardClean) entry.rewardsText = rewardClean;
+        if (codeNew || rewardNew) entry.isNew = true;
 
         codes.push(entry);
       });

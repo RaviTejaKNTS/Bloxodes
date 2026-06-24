@@ -423,6 +423,14 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
       "jobs",
       "locations"
     ]
+  },
+  {
+    gameSlug: "clean-the-library",
+    gameName: "Clean The Library",
+    universeId: 10226701629,
+    dataDir: "Clean The Library",
+    universeNames: ["Clean The Library", "Clean The Library 📖"],
+    collections: ["shelf-sections", "magic-abilities", "keys", "upgrades"]
   }
 ];
 
@@ -474,6 +482,9 @@ const COLLECTION_LABEL_OVERRIDES: Record<string, string> = {
 
 const COLLECTION_FOCUS: Record<string, string> = {
   abilities: "what each ability does, where it comes from, and what it changes in play",
+  "magic-abilities": "what each magic ability does, how it is unlocked, and how it speeds up sorting and shelving",
+  "shelf-sections": "section codes, floor, book themes, and example titles for sorting books to the right shelf",
+  keys: "key names, colors, and the permanent buffs each key grants",
   anomalies: "warning signs, encounter type, location, best action, and consequence",
   accessories: "rarity, type, stats, obtainment, and build value",
   "accessory-shop": "chests, accessory shop items, prices, rarity chances, and obtainment notes",
