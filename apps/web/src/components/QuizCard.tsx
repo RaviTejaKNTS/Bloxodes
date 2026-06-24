@@ -97,8 +97,7 @@ export function QuizCard({ code, title, universeName, coverImage, updatedAt }: Q
     <ContentCard
       type="quiz"
       href={`/quizzes/${code}`}
-      eyebrow={universeName ?? "Roblox"}
-      title={title}
+      title={`${universeName ?? "Roblox"} Quiz`}
       image={{ src: coverImage, alt: universeName || title, ratio: "1:1" }}
       meta={
         <>
