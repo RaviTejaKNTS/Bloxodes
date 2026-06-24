@@ -179,6 +179,11 @@ Scope: a single uniform, server-rendered "discover more of this game" sidebar on
 - **Stats card**: minimal outline (no fill) — "<Game> Stats", "Current players" + big number, "Global rank #N" below. Now a **client island** that fetches `/api/stats/games/[universeId]` on mount + every 60s, so the CCU/rank stay live instead of going stale with the page cache.
 - **Wiki card**: shows the game's square thumbnail (universe icon) instead of a generic book glyph.
 
+### 2026-06-24 — Quiz layout + stats card tweaks
+- **Quiz page** (`QuizRunner`): the on-page quiz was getting squished by the new 2-col page layout. Rebuilt it — question text with the image to its **right**, the 4 options **below** full-width, and removed the card border/background so it sits directly on the page.
+- **Sidebar quiz card**: reverted to single-column options (one answer per row); dropped the image (that was meant for the quiz page, not the sidebar).
+- **Sidebar stats card**: centered, no outline/background; label combined to **"Current Players on <Game>"** (wraps to a 2nd line for long names), a bigger number using compact notation (e.g. **64.9K**, 224.3K, 5.3M), and "Global rank #N" below.
+
 #### Sidebar follow-ups (not blocking)
 - The old per-universe related fetches still run on codes/articles/events (now unused) — can be deleted for a small perf win.
 - Catalog list can get long for content-rich games (e.g. 16 entries) — consider a cap + "view all".

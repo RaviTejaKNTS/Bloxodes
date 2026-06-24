@@ -3,6 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+function abbreviateCount(value: number): string {
+  const strip = (n: number) => n.toFixed(1).replace(/\.0$/, "");
+  if (value < 1000) return String(value);
+  if (value < 1_000_000) return `${strip(value / 1000)}K`;
+  if (value < 1_000_000_000) return `${strip(value / 1_000_000)}M`;
+  return `${strip(value / 1_000_000_000)}B`;
+}
+
 type StatsSidebarCardProps = {
   universeId: number;
   gameName: string;
@@ -41,19 +49,18 @@ export function StatsSidebarCard({ universeId, gameName, slug, initialRank, init
 
   const body = (
     <>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/55">{gameName} Stats</p>
-      <p className="mt-2 text-xs text-muted">Current players</p>
-      <p className="inline-flex items-center gap-2 text-2xl font-semibold leading-tight text-foreground">
-        <span className="h-2 w-2 rounded-full bg-green-400" aria-hidden />
-        {typeof playing === "number" ? playing.toLocaleString("en-US") : "—"}
+      <p className="text-xs text-muted">Current Players on {gameName}</p>
+      <p className="mt-1 inline-flex items-center justify-center gap-2 text-4xl font-bold leading-none text-foreground">
+        <span className="h-2.5 w-2.5 rounded-full bg-green-400" aria-hidden />
+        {typeof playing === "number" ? abbreviateCount(playing) : "—"}
       </p>
       {typeof rank === "number" ? (
-        <p className="mt-1 text-xs text-muted">Global rank #{rank.toLocaleString("en-US")}</p>
+        <p className="mt-2 text-xs text-muted">Global rank #{rank.toLocaleString("en-US")}</p>
       ) : null}
     </>
   );
 
-  const className = "block rounded-lg border border-border/60 px-4 py-3.5 transition-colors hover:border-border";
+  const className = "block px-2 py-2 text-center transition-opacity hover:opacity-80";
   return slug ? (
     <Link href={`/stats/games/${slug}`} className={className}>
       {body}

@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CardImage } from "@/components/CardImage";
 import { cn } from "@/lib/utils";
 
 type Option = { id: string; text: string };
@@ -27,16 +26,9 @@ export function QuizSidebarCard({ code, gameName, question }: QuizSidebarCardPro
     <section className="rounded-lg border border-border/70 bg-card p-4">
       <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/55">{gameName} Quiz</p>
 
-      <div className="mb-3 flex items-start gap-3">
-        <p className="min-w-0 flex-1 text-sm font-semibold leading-snug text-foreground">{question.question}</p>
-        {question.image ? (
-          <span className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md bg-surface-muted">
-            <CardImage src={question.image} alt="" />
-          </span>
-        ) : null}
-      </div>
+      <p className="mb-3 text-sm font-semibold leading-snug text-foreground">{question.question}</p>
 
-      <ul className="grid grid-cols-2 gap-2">
+      <ul className="space-y-2">
         {question.options.map((option) => {
           const isSelected = selected === option.id;
           const isCorrect = option.id === question.correctOptionId;

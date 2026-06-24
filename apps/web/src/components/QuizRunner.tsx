@@ -468,116 +468,103 @@ export function QuizRunner(props: QuizRunnerProps) {
   return (
     <div className="space-y-6">
       {!showSummary ? (
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
-          {heroImage ? (
-            <div className="rounded-lg border border-border/70 bg-card p-3">
-              <div className="aspect-video overflow-hidden rounded-md bg-surface-muted">
+        <div className="space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+            <span className="rounded-md border border-border/70 bg-surface-muted px-2.5 py-1 text-accent">
+              {formatDifficulty(currentQuestion?.difficulty ?? "easy")}
+            </span>
+            <span>
+              Question {currentIndex + 1} of {totalQuestions}
+            </span>
+          </div>
+
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-muted">
+            <div className="h-full rounded-full bg-accent transition-all" style={{ width: `${progressPercent}%` }} />
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] md:items-start">
+            <h2 className="text-2xl font-semibold leading-snug text-foreground md:text-3xl">{currentQuestion?.question}</h2>
+            {currentQuestion?.image || heroImage ? (
+              <div className="aspect-video overflow-hidden rounded-lg bg-surface-muted">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={heroImage}
-                  alt={heroAlt || "Quiz hero image"}
-                  className="h-full w-full object-contain"
+                  src={currentQuestion?.image || heroImage || ""}
+                  alt={heroAlt || "Quiz image"}
+                  className="h-full w-full object-cover"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
+            ) : null}
+          </div>
+
+          <div className="grid gap-3">
+            {(currentQuestion?.options ?? []).map((option, index) => {
+              const label = String.fromCharCode(65 + index);
+              const selected = currentAnswer === option.id;
+              const isCorrect = currentQuestion?.correctOptionId === option.id;
+              const showResult = Boolean(currentAnswer);
+              const baseClass =
+                "flex w-full items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm font-medium transition-colors";
+              const stateClass = showResult
+                ? selected
+                  ? isCorrect
+                    ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
+                    : "border-rose-500/70 bg-rose-500/10 text-rose-600 dark:text-rose-300"
+                  : isCorrect
+                    ? "border-emerald-500/40 bg-emerald-500/5 text-emerald-600 dark:text-emerald-300"
+                    : "border-border/70 bg-background text-foreground"
+                : "border-border/70 bg-background text-foreground hover:border-border hover:bg-surface-muted";
+
+              return (
+                <button
+                  key={option.id}
+                  type="button"
+                  className={`${baseClass} ${stateClass}`}
+                  onClick={() => handleSelectOption(option.id)}
+                  disabled={!canInteract || Boolean(currentAnswer)}
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border/70 bg-surface-muted text-xs font-semibold uppercase">
+                    {label}
+                  </span>
+                  <span className="flex-1">{option.text}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {currentAnswer ? (
+            <div
+              className={`rounded-lg border px-4 py-3 text-sm font-semibold ${
+                currentAnswer === currentQuestion?.correctOptionId
+                  ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
+                  : "border-rose-500/40 bg-rose-500/10 text-rose-600 dark:text-rose-300"
+              }`}
+            >
+              {currentAnswer === currentQuestion?.correctOptionId
+                ? "Correct!"
+                : `Wrong. The correct answer is ${
+                    currentQuestion?.options.find((option) => option.id === currentQuestion.correctOptionId)?.text ?? ""
+                  }.`}
             </div>
           ) : null}
 
-          <div className="rounded-lg border border-border/70 bg-card p-5">
-            <div className="flex flex-wrap items-center justify-between gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-              <span className="rounded-md border border-border/70 bg-surface-muted px-2.5 py-1 text-accent">
-                {formatDifficulty(currentQuestion?.difficulty ?? "easy")}
-              </span>
-              <span>
-                Question {currentIndex + 1} of {totalQuestions}
-              </span>
-            </div>
-
-            <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-surface-muted">
-              <div
-                className="h-full rounded-full bg-accent transition-all"
-                style={{ width: `${progressPercent}%` }}
-              />
-            </div>
-
-            {currentQuestion?.image ? (
-              <div className="mt-6 overflow-hidden rounded-lg border border-border/70 bg-background">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={currentQuestion.image} alt="Quiz prompt" className="h-auto w-full object-cover" />
-              </div>
-            ) : null}
-
-            <h2 className="mt-6 text-xl font-semibold leading-snug text-foreground md:text-2xl">{currentQuestion?.question}</h2>
-
-            <div className="mt-4 grid gap-3">
-              {(currentQuestion?.options ?? []).map((option, index) => {
-                const label = String.fromCharCode(65 + index);
-                const selected = currentAnswer === option.id;
-                const isCorrect = currentQuestion?.correctOptionId === option.id;
-                const showResult = Boolean(currentAnswer);
-                const baseClass =
-                  "flex w-full items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm font-medium transition-colors";
-                const stateClass = showResult
-                  ? selected
-                    ? isCorrect
-                      ? "border-emerald-500/70 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
-                      : "border-rose-500/70 bg-rose-500/10 text-rose-600 dark:text-rose-300"
-                    : isCorrect
-                      ? "border-emerald-500/40 bg-emerald-500/5 text-emerald-600 dark:text-emerald-300"
-                      : "border-border/70 bg-background text-foreground"
-                  : "border-border/70 bg-background text-foreground hover:border-border hover:bg-surface-muted";
-
-                return (
-                  <button
-                    key={option.id}
-                    type="button"
-                    className={`${baseClass} ${stateClass}`}
-                    onClick={() => handleSelectOption(option.id)}
-                    disabled={!canInteract || Boolean(currentAnswer)}
-                  >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-border/70 bg-surface-muted text-xs font-semibold uppercase">
-                      {label}
-                    </span>
-                    <span className="flex-1">{option.text}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {currentAnswer ? (
-              <div
-                className={`mt-4 rounded-lg border px-4 py-3 text-sm font-semibold ${
-                  currentAnswer === currentQuestion?.correctOptionId
-                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
-                    : "border-rose-500/40 bg-rose-500/10 text-rose-600 dark:text-rose-300"
-                }`}
-              >
-                {currentAnswer === currentQuestion?.correctOptionId
-                  ? "Correct!"
-                  : `Wrong. The correct answer is ${
-                      currentQuestion?.options.find((option) => option.id === currentQuestion.correctOptionId)?.text ?? ""
-                    }.`}
-              </div>
-            ) : null}
-
-            <div className="mt-6 flex flex-wrap items-center justify-end gap-3">
-              <button
-                type="button"
-                className="rounded-md border border-border/70 bg-background px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-foreground transition-colors hover:bg-surface-muted"
-                onClick={handleReloadQuiz}
-              >
-                Reload Quiz
-              </button>
-              <button
-                type="button"
-                className="rounded-md bg-accent px-5 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:bg-accent/40"
-                onClick={handleNext}
-                disabled={!canInteract || !currentAnswer}
-              >
-                {currentIndex >= attempt.length - 1 ? "Finish" : "Next"}
-              </button>
-            </div>
+          <div className="flex flex-wrap items-center justify-end gap-3">
+            <button
+              type="button"
+              className="rounded-md border border-border/70 bg-background px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-foreground transition-colors hover:bg-surface-muted"
+              onClick={handleReloadQuiz}
+            >
+              Reload Quiz
+            </button>
+            <button
+              type="button"
+              className="rounded-md bg-accent px-5 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:bg-accent/40"
+              onClick={handleNext}
+              disabled={!canInteract || !currentAnswer}
+            >
+              {currentIndex >= attempt.length - 1 ? "Finish" : "Next"}
+            </button>
           </div>
         </div>
       ) : (
