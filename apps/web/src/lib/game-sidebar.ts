@@ -32,9 +32,10 @@ export type SidebarGlobalCatalog = {
 };
 
 export type GameSidebarData = {
-  wiki: { slug: string; title: string } | null;
+  universeIcon: string | null;
+  wiki: { slug: string; title: string; iconUrl: string | null } | null;
   catalogs: SidebarCatalogLink[];
-  stats: { rank: number | null; playing: number | null; slug: string | null } | null;
+  stats: { rank: number | null; playing: number | null; slug: string | null; iconUrl: string | null } | null;
   event: {
     slug: string;
     eventName: string;
@@ -47,7 +48,13 @@ export type GameSidebarData = {
   checklist: { slug: string; title: string; itemsCount: number; coverImage: string | null } | null;
   quiz: {
     code: string;
-    firstQuestion: { id: string; question: string; options: { id: string; text: string }[]; correctOptionId: string };
+    firstQuestion: {
+      id: string;
+      question: string;
+      image: string | null;
+      options: { id: string; text: string }[];
+      correctOptionId: string;
+    };
   } | null;
   tools: ToolListEntry[];
   articles: SidebarArticle[];
@@ -132,6 +139,7 @@ export async function getGameSidebarData(universeId: number): Promise<GameSideba
           firstQuestion: {
             id: first.id,
             question: first.question,
+            image: first.image ?? null,
             options: (first.options ?? []).map((option) => ({ id: option.id, text: option.text })),
             correctOptionId: first.correctOptionId
           }
@@ -183,5 +191,7 @@ export async function getGameSidebarData(universeId: number): Promise<GameSideba
     fallback = { articles: generalArticles, catalogs: globalCatalogs };
   }
 
-  return { wiki, catalogs, stats, event, codes, checklist, quiz, tools, articles, fallback };
+  const universeIcon = stats?.iconUrl ?? wiki?.iconUrl ?? checklist?.coverImage ?? codes?.coverImage ?? null;
+
+  return { universeIcon, wiki, catalogs, stats, event, codes, checklist, quiz, tools, articles, fallback };
 }

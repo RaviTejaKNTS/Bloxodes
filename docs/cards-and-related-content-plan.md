@@ -173,6 +173,12 @@ Scope: a single uniform, server-rendered "discover more of this game" sidebar on
 - Pages: codes/articles already had a right aside → swapped hand-rolled related sections for `<GameDiscoverySidebar>`. events already had a 2-col aside → same swap. quizzes converted to 2-col and its in-body recommendations removed.
 - Verified on `localhost:5050` (prod DB): typecheck clean, no server errors; sidebar renders SSR on all four page types; quiz card excluded on quiz page; catalog list shows "All N <items>"; stats shows rank + live CCU; quiz answer → `?qa=` → quiz opens at Question 2.
 
+### 2026-06-24 — Sidebar component polish
+- **Quiz card**: question image (when present) sits to the right of the question; options in a 2-column grid.
+- **Catalog list**: now a card with a game-thumbnail cover, max 5 "All N <items>" links, and a "+N catalogs" button that expands to show all (client island). Moved to just above Articles (was right under Wiki).
+- **Stats card**: minimal outline (no fill) — "<Game> Stats", "Current players" + big number, "Global rank #N" below. Now a **client island** that fetches `/api/stats/games/[universeId]` on mount + every 60s, so the CCU/rank stay live instead of going stale with the page cache.
+- **Wiki card**: shows the game's square thumbnail (universe icon) instead of a generic book glyph.
+
 #### Sidebar follow-ups (not blocking)
 - The old per-universe related fetches still run on codes/articles/events (now unused) — can be deleted for a small perf win.
 - Catalog list can get long for content-rich games (e.g. 16 entries) — consider a cap + "view all".

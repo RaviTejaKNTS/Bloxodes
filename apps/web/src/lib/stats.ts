@@ -1470,19 +1470,24 @@ async function listCurrentRisers(limit: number): Promise<StatsGame[]> {
 
 export async function getUniverseStatsSummary(
   universeId: number
-): Promise<{ rank: number | null; playing: number | null; slug: string | null } | null> {
+): Promise<{ rank: number | null; playing: number | null; slug: string | null; iconUrl: string | null } | null> {
   try {
     const { data, error } = await supabaseAdmin()
       .from("stats_game_current_index")
-      .select("playing, global_playing_rank, slug")
+      .select("playing, global_playing_rank, slug, icon_url")
       .eq("universe_id", universeId)
       .limit(1);
     if (error) throw error;
     const row = (data ?? [])[0] as
-      | { playing?: number | null; global_playing_rank?: number | null; slug?: string | null }
+      | { playing?: number | null; global_playing_rank?: number | null; slug?: string | null; icon_url?: string | null }
       | undefined;
     if (!row) return null;
-    return { rank: row.global_playing_rank ?? null, playing: row.playing ?? null, slug: row.slug ?? null };
+    return {
+      rank: row.global_playing_rank ?? null,
+      playing: row.playing ?? null,
+      slug: row.slug ?? null,
+      iconUrl: row.icon_url ?? null
+    };
   } catch (error) {
     console.error("Error fetching universe stats summary", error);
     return null;
