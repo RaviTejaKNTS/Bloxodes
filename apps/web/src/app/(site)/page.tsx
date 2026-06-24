@@ -213,7 +213,7 @@ export default async function HomePage() {
   return (
     <div className="space-y-12">
       <header className="space-y-3">
-        <h1 className="max-w-4xl text-3xl font-bold leading-tight text-foreground md:text-4xl">
+        <h1 className="max-w-4xl text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-4xl">
           Roblox hub for live stats, wikis, active codes, events, quizzes and gameplay checklists
         </h1>
         <p className="max-w-2xl text-sm text-muted md:text-base">
@@ -223,15 +223,15 @@ export default async function HomePage() {
       </header>
 
       {/* TOP ROW — trending leaderboard · music catalog · spotlight */}
-      <section className="grid gap-4 lg:grid-cols-3 lg:items-stretch">
-        <div className={`${cardClass} flex flex-col`}>
+      <section className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:items-stretch">
+        <div className={`${cardClass} flex min-w-0 flex-col sm:col-span-2 lg:col-span-1`}>
           <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
             <TrendingUp className="h-4 w-4 text-accent" aria-hidden /> Trending now
           </div>
           <ul className="flex-1 space-y-1">
             {topGames.map((game, index) => (
               <li key={game.universeId}>
-                <Link href={`/stats/games/${game.slug}`} className="flex items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-surface-muted/60">
+                <Link href={`/stats/games/${game.slug}`} className="flex min-w-0 items-center gap-3 rounded-lg px-2 py-1.5 transition-colors hover:bg-surface-muted/60">
                   <span className="w-4 text-center text-xs font-semibold text-muted">{index + 1}</span>
                   <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-lg bg-surface-muted">
                     <CardImage src={game.iconUrl} alt={game.displayName} />
@@ -251,22 +251,22 @@ export default async function HomePage() {
 
         <Link
           href="/catalog/roblox-music-ids"
-          className="group relative flex flex-col items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-700 p-6 text-center text-white"
+          className="group relative flex min-h-[9rem] min-w-0 flex-col items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-700 p-5 text-center text-white sm:min-h-full sm:p-6"
         >
-          <Music className="absolute -bottom-5 -right-4 h-32 w-32 text-white/15 transition duration-500 group-hover:scale-105" aria-hidden />
+          <Music className="absolute -bottom-5 -right-4 h-24 w-24 text-white/15 transition duration-500 group-hover:scale-105 sm:h-32 sm:w-32" aria-hidden />
           <span className="relative">
-            {musicCount ? <span className="block text-4xl font-bold tracking-tight">{musicCount}</span> : null}
+            {musicCount ? <span className="block text-3xl font-bold tracking-tight sm:text-4xl">{musicCount}</span> : null}
             <span className="mt-1 block text-sm font-medium text-white/85">Roblox Music IDs</span>
             <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white/90">Browse all music codes →</span>
           </span>
         </Link>
 
-        <div className="grid grid-rows-2 gap-4">
+        <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2 lg:gap-4">
           {spotlightGames.map(({ game, wiki }) => (
             <Link
               key={game.universeId}
               href={`/wiki/${wiki.slug}`}
-              className="group relative flex min-h-[8rem] flex-col justify-end overflow-hidden rounded-xl border border-border/60 bg-surface-muted p-4"
+              className="group relative flex min-h-[7rem] min-w-0 flex-col justify-end overflow-hidden rounded-xl border border-border/60 bg-surface-muted p-3.5 sm:min-h-[8rem] sm:p-4"
             >
               <span className="absolute inset-0">
                 <CardImage src={wikiImage(wiki)} alt={game.displayName} className="opacity-45 transition duration-700 group-hover:scale-[1.04] group-hover:opacity-55" />
