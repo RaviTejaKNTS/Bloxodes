@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "game": "Clean The Library",
+    "collection": "magic-abilities",
+    "universeId": 10226701629,
+    "updatedAt": "2026-06-24",
+    "groupBy": "catalogSection",
+    "columns": [
+      "name",
+      "effect",
+      "howUnlocked",
+      "catalogSection",
+      "cardSummary",
+      "image"
+    ],
+    "sources": [
+      {
+        "label": "Clean The Library Wiki - Abilities",
+        "url": "https://cleanthelibrary.wiki/abilities/",
+        "accessed": "2026-06-24"
+      }
+    ],
+    "notes": "Magic abilities are unlocked through shelving progress rather than Robux purchases. Each ability speeds up part of the find-carry-shelve loop. Cards show the ability name, what it does, and how it is unlocked. Per-ability menu icons are not reliably available without in-game capture, so the catalog launches image-light."
+  },
+  "items": [
+    {
+      "name": "Assemble",
+      "slug": "assemble",
+      "effect": "Gathers loose books together so you can pick up a batch at once instead of one book at a time.",
+      "howUnlocked": "Unlocked through shelving progress milestones.",
+      "catalogSection": "Abilities",
+      "cardSummary": "Assemble pulls scattered books into a group, letting you collect a stack in one go rather than chasing each book.",
+      "image": "",
+      "sourcePage": "https://cleanthelibrary.wiki/abilities/"
+    },
+    {
+      "name": "Sort",
+      "slug": "sort",
+      "effect": "Arranges the books you are holding into order so they are quicker to shelve.",
+      "howUnlocked": "Unlocked through shelving progress milestones.",
+      "catalogSection": "Abilities",
+      "cardSummary": "Sort organizes your held books for you, cutting the manual sorting you would otherwise do before each shelf run.",
+      "image": "",
+      "sourcePage": "https://cleanthelibrary.wiki/abilities/"
+    },
+    {
+      "name": "Insight",
+      "slug": "insight",
+      "effect": "Reveals where books belong so you spend less time figuring out the right shelf.",
+      "howUnlocked": "Unlocked through shelving progress milestones.",
+      "catalogSection": "Abilities",
+      "cardSummary": "Insight points you toward the correct shelf for your books, taking the guesswork out of sorting.",
+      "image": "",
+      "sourcePage": "https://cleanthelibrary.wiki/abilities/"
+    },
+    {
+      "name": "Shelf Guide",
+      "slug": "shelf-guide",
+      "effect": "Highlights the shelf a book belongs on so you can drop it off directly.",
+      "howUnlocked": "Unlocked through shelving progress milestones.",
+      "catalogSection": "Abilities",
+      "cardSummary": "Shelf Guide marks the destination shelf for a book, so you can head straight to it instead of searching.",
+      "image": "",
+      "sourcePage": "https://cleanthelibrary.wiki/abilities/"
+    },
+    {
+      "name": "Auto-Shelving",
+      "slug": "auto-shelving",
+      "effect": "Shelves books automatically, handling part of the sorting work for you.",
+      "howUnlocked": "Unlocked through shelving progress milestones.",
+      "catalogSection": "Abilities",
+      "cardSummary": "Auto-Shelving places books on their shelves on its own, freeing you to keep collecting while sorting happens for you.",
+      "image": "",
+      "sourcePage": "https://cleanthelibrary.wiki/abilities/"
+    }
+  ]
+}
