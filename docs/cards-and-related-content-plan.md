@@ -136,6 +136,16 @@ Every detail page ends in a consistent, reason-labeled "everything for this game
   - row: CatalogCard, EventsPageCard
 - Verified on `localhost:5050` (prod DB): typecheck clean, no server errors, all 8 types SSR with correct counts, unified `rounded-lg` (events was `rounded-md` before), tool/wiki/catalog cards visually confirmed.
 
+### 2026-06-24 — Catalog / tool / event card improvements
+- **Catalogs** — count-forward redesign. New `apps/web/src/lib/catalog-card-meta.ts` resolves a clean short label, a category icon, and a **live item count** per catalog code (avatar/items via `getAvatarCatalogCount`, music via a `roblox_music_ids_ranked_view` head count; content-only catalogs get name+icon, no count). `CatalogCard` now shows icon · short name · big count + unit · muted updated, replacing the truncated "ROBLOX MUS" initials tile and the heavy metric box. Wired into the homepage and `/catalog` index loaders.
+- **Tools** — `ToolCard` now shows the `meta_description` (2-line), a derived **type chip** (Calculator/Converter/Planner/Optimizer/Extractor/Tracker/Generator), and a **game chip** when `universe_id` is set. De-generics the card.
+- **Events** — `EventsPageCard` stripped to thumb · game · event · one **status/countdown pill** (green=live, accent=upcoming, muted=past/ended). Removed the status eyebrow, the separate countdown box, and the footer (counts + "updated").
+- Verified on `localhost:5050` (prod DB): typecheck clean, no server errors, homepage + `/catalog` both 200; counts render live (e.g. 58,668 song IDs, 55,866 marketplace items).
+
+#### Catalog follow-ups
+- Counts are wired only for catalogs in `CATALOG_CONFIG` (the avatar/items family + music). Color codes, decal IDs, admin commands show name+icon but no count — add their sources later if wanted.
+- Short labels live in `CATALOG_CONFIG` — easy to tweak wording.
+
 ### Deferred to refinement (intentional parity choices, revisit in step 4)
 - **Date format still mixed** — kept the existing `formatUpdatedLabel` behavior (relative for recent, absolute for older; ArticleCard absolute). Plan calls for unifying to relative everywhere.
 - **No type icons/accents yet** — only the `data-card-type` hook is in place.

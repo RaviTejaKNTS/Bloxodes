@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { CatalogCard } from "@/components/CatalogCard";
+import { resolveCatalogCardMeta, type CatalogIconKey } from "@/lib/catalog-card-meta";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
@@ -55,10 +56,9 @@ type CatalogIndexCard = {
   href: string;
   title: string;
   description: string;
-  category: string;
-  metricLabel: null;
-  metricValue: null;
-  tileLabel: string;
+  count: number | null;
+  unit: string | null;
+  iconKey: CatalogIconKey | null;
   coverImage: string | null;
   tone: (typeof CATALOG_CARD_TONES)[number];
   updatedLabel: string | null;
@@ -120,18 +120,20 @@ async function buildCatalogCards() {
     const updatedAt = entry.content_updated_at ?? entry.updated_at ?? entry.published_at ?? entry.created_at ?? null;
     const normalizedCode = normalizeCatalogIndexCode(entry.code);
     const existing = resultsById.get(normalizedCode);
+    const meta = await resolveCatalogCardMeta(normalizedCode);
     const next: CatalogIndexCard = {
       id: normalizedCode,
       href: `/catalog/${normalizedCode}`,
-      title: normalizedCode === AVATAR_CATALOG_MASTER_CODE ? AVATAR_CATALOG_MASTER_TITLE : entry.title,
+      title:
+        meta.shortLabel ??
+        (normalizedCode === AVATAR_CATALOG_MASTER_CODE ? AVATAR_CATALOG_MASTER_TITLE : entry.title),
       description:
         normalizedCode === AVATAR_CATALOG_MASTER_CODE
           ? "Browse Roblox Marketplace items and bundles by type, price, creator, sale status, favorites, and limited state."
           : summarizeCatalogDescription(entry.meta_description),
-      category: "Catalog",
-      metricLabel: null,
-      metricValue: null,
-      tileLabel: normalizedCode === AVATAR_CATALOG_MASTER_CODE ? AVATAR_CATALOG_MASTER_TITLE : entry.title,
+      count: meta.count,
+      unit: meta.unit,
+      iconKey: meta.icon,
       coverImage: entry.thumb_url ?? null,
       tone: CATALOG_CARD_TONES[index % CATALOG_CARD_TONES.length],
       updatedLabel: formatUpdatedLabel(updatedAt),

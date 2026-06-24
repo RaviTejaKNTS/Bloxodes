@@ -10,6 +10,7 @@ import { listPublishedQuizzes } from "@/lib/quizzes";
 import { listPublishedTools } from "@/lib/tools";
 import { CHECKLISTS_DESCRIPTION, QUIZZES_DESCRIPTION, SITE_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
+import { resolveCatalogCardMeta } from "@/lib/catalog-card-meta";
 import { listPublishedWikiPages } from "@/lib/wiki";
 import { GameCard } from "@/components/GameCard";
 import { ArticleCard } from "@/components/ArticleCard";
@@ -194,22 +195,24 @@ export default async function HomePage() {
   });
   const articleCards = articles.slice(0, INITIAL_ARTICLES);
   const eventsCards = eventsPayload.cards.slice(0, INITIAL_EVENTS);
-  const catalogCards = catalogPages.slice(0, INITIAL_CATALOGS).map((page, index) => {
-    const updatedAt = page.content_updated_at ?? page.updated_at ?? page.published_at ?? page.created_at ?? null;
-    return {
-      id: page.code,
-      href: `/catalog/${page.code}`,
-      title: page.title,
-      description: summarize(page.meta_description, "Open this Roblox catalog hub for the latest published content."),
-      category: "Catalog",
-      metricLabel: null,
-      metricValue: null,
-      updatedLabel: updatedAt ? formatDistanceToNow(new Date(updatedAt), { addSuffix: true }) : null,
-      coverImage: page.thumb_url ?? null,
-      tileLabel: page.title,
-      tone: CATALOG_CARD_TONES[index % CATALOG_CARD_TONES.length]
-    };
-  });
+  const catalogCards = await Promise.all(
+    catalogPages.slice(0, INITIAL_CATALOGS).map(async (page, index) => {
+      const updatedAt = page.content_updated_at ?? page.updated_at ?? page.published_at ?? page.created_at ?? null;
+      const meta = await resolveCatalogCardMeta(page.code);
+      return {
+        id: page.code,
+        href: `/catalog/${page.code}`,
+        title: meta.shortLabel ?? page.title,
+        description: summarize(page.meta_description, "Open this Roblox catalog hub for the latest published content."),
+        count: meta.count,
+        unit: meta.unit,
+        iconKey: meta.icon,
+        updatedLabel: updatedAt ? formatDistanceToNow(new Date(updatedAt), { addSuffix: true }) : null,
+        coverImage: page.thumb_url ?? null,
+        tone: CATALOG_CARD_TONES[index % CATALOG_CARD_TONES.length]
+      };
+    })
+  );
 
   const structuredData = JSON.stringify({
     "@context": "https://schema.org",

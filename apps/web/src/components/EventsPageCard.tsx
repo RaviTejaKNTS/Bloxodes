@@ -28,32 +28,32 @@ export type EventsPageCardProps = {
 
 const STATUS_COPY = {
   upcoming: {
-    label: "Next event",
-    timerLabel: "Starts in",
+    label: "Starts in",
+    standalone: "Upcoming",
     icon: CalendarClock,
-    dot: "bg-accent",
-    iconClass: "text-accent"
+    pill: "border-accent/30 bg-accent/10 text-accent",
+    dot: "bg-accent"
   },
   current: {
     label: "Live now",
-    timerLabel: "Ends in",
+    standalone: "Live now",
     icon: Radio,
-    dot: "bg-emerald-400",
-    iconClass: "text-emerald-400"
+    pill: "border-emerald-400/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+    dot: "bg-emerald-400"
   },
   past: {
-    label: "Last event",
-    timerLabel: "Ended",
+    label: "Ended",
+    standalone: "Last event",
     icon: Clock3,
-    dot: "bg-amber-400",
-    iconClass: "text-amber-400"
+    pill: "border-border/60 bg-surface-muted text-muted",
+    dot: "bg-muted"
   },
   none: {
     label: "Events hub",
-    timerLabel: "Status",
+    standalone: "Events hub",
     icon: CalendarClock,
-    dot: "bg-muted",
-    iconClass: "text-muted"
+    pill: "border-border/60 bg-surface-muted text-muted",
+    dot: "bg-muted"
   }
 } as const;
 
@@ -74,20 +74,6 @@ function buildCountdown(target: number, now: number): string {
   const seconds = totalSeconds % 60;
 
   return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-}
-
-function buildCountsLabel(counts: EventCounts) {
-  const upcoming = counts.upcoming ?? 0;
-  const current = counts.current ?? 0;
-  const past = counts.past ?? 0;
-  if (upcoming || current) {
-    const parts: string[] = [];
-    if (upcoming) parts.push(`${upcoming} upcoming`);
-    if (current) parts.push(`${current} live`);
-    return parts.join(" · ");
-  }
-  if (past) return `${past} past ${past === 1 ? "event" : "events"}`;
-  return "No events tracked";
 }
 
 function normalizeTimerFallback(status: EventsPageCardProps["status"], fallback: string | null) {
@@ -149,9 +135,7 @@ export function EventsPageCard({
   eventTimeLabel,
   eventStartUtc,
   eventEndUtc,
-  status,
-  counts,
-  updatedLabel
+  status
 }: EventsPageCardProps) {
   const displayUniverse = universeName ?? "Roblox";
   const statusCopy = STATUS_COPY[status] ?? STATUS_COPY.none;
@@ -166,6 +150,18 @@ export function EventsPageCard({
   const gameTitle = displayUniverse || title || "Roblox events";
   const eventTitle = eventName || title || "Events overview";
 
+  const hasTimer = Boolean(timerLabel) && timerLabel !== "No event time";
+  let pillText: string;
+  if (status === "current") {
+    pillText = hasTimer ? `Live now · ${timerLabel}` : "Live now";
+  } else if (status === "upcoming") {
+    pillText = hasTimer ? `Starts in ${timerLabel}` : "Upcoming";
+  } else if (status === "past") {
+    pillText = hasTimer ? `Ended ${timerLabel}` : "Last event";
+  } else {
+    pillText = "Events hub";
+  }
+
   return (
     <ContentCard
       type="events"
@@ -174,30 +170,19 @@ export function EventsPageCard({
       prefetch={false}
       thumbClassName="border border-border/60"
       title={gameTitle}
-      titleClassName="text-xl transition-colors group-hover:text-accent"
-      eyebrow={
-        <span className="inline-flex items-center gap-2">
-          <span className={`h-2 w-2 rounded-full ${statusCopy.dot}`} aria-hidden />
-          {statusCopy.label}
-        </span>
-      }
+      titleClassName="transition-colors group-hover:text-accent"
       subtitle={<p className="line-clamp-1 text-sm text-muted">{eventTitle}</p>}
       image={{ src: imageUrl, alt: gameTitle, ratio: "1:1" }}
       imageFallback={
         <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-muted">EV</div>
       }
       liveSlot={
-        <div className="inline-flex max-w-full items-center gap-2 rounded-md border border-border/60 bg-surface px-3 py-2 text-sm font-semibold text-foreground">
-          <StatusIcon className={`h-4 w-4 shrink-0 ${statusCopy.iconClass}`} aria-hidden />
-          <span className="shrink-0 text-muted">{statusCopy.timerLabel}</span>
-          <span className="truncate">{timerLabel}</span>
-        </div>
-      }
-      footer={
-        <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-border/60 px-4 py-3 text-xs text-muted">
-          <span>{buildCountsLabel(counts)}</span>
-          {updatedLabel ? <span>Updated {updatedLabel}</span> : null}
-        </div>
+        <span
+          className={`inline-flex max-w-full items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold ${statusCopy.pill}`}
+        >
+          <StatusIcon className="h-3.5 w-3.5 shrink-0" aria-hidden />
+          <span className="truncate">{pillText}</span>
+        </span>
       }
     />
   );
