@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Grow a Garden 2 crops data",
-    "updatedAt": "2026-06-13",
+    "updatedAt": "2026-06-23",
     "sources": [
       {
         "label": "Beebom - All Grow a Garden 2 Plants and Seeds Guide",
         "url": "https://beebom.com/grow-a-garden-2-plants-and-seeds/",
-        "accessed": "2026-06-13"
+        "accessed": "2026-06-23"
       },
       {
         "label": "Grow a Garden 2 Wiki - Fandom",
@@ -217,8 +217,8 @@
       "id": "dragons-breath",
       "name": "Dragon's Breath",
       "rarity": "Super",
-      "harvestType": "Unknown",
-      "cropRole": "High-rarity crop listed as strong for defense and selling",
+      "harvestType": "Multi",
+      "cropRole": "Super repeat-harvest crop",
       "image": "/Grow%20a%20Garden%202/Crops/dragons-breath.webp",
       "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_521444.png?w=150&quality=75",
       "whereToGet": "Seed Shop"
@@ -227,8 +227,8 @@
       "id": "moon-bloom",
       "name": "Moon Bloom",
       "rarity": "Super",
-      "harvestType": "Unknown",
-      "cropRole": "High-rarity crop listed as strong for defense and selling",
+      "harvestType": "Multi",
+      "cropRole": "Super repeat-harvest crop",
       "image": "/Grow%20a%20Garden%202/Crops/moon-bloom.webp",
       "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_54_150.webp?w=200",
       "whereToGet": "Seed Shop"
@@ -237,8 +237,8 @@
       "id": "poison-apple",
       "name": "Poison Apple",
       "rarity": "Mythic",
-      "harvestType": "Unknown",
-      "cropRole": "Mythic crop",
+      "harvestType": "Multi",
+      "cropRole": "Mythic repeat-harvest crop",
       "image": "/Grow%20a%20Garden%202/Crops/poison-apple.webp",
       "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_49_150.webp?w=200",
       "whereToGet": "Seed Shop"
@@ -267,10 +267,18 @@
       "id": "venus-fly-trap",
       "name": "Venus Fly Trap",
       "rarity": "Mythic",
-      "harvestType": "Unknown",
+      "harvestType": "Multi",
       "cropRole": "Mythic crop",
       "image": "/Grow%20a%20Garden%202/Crops/venus-fly-trap.webp",
       "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_47_150.webp?w=200",
+      "whereToGet": "Seed Shop"
+    },
+    {
+      "id": "venom-spitter",
+      "name": "Venom Spitter",
+      "rarity": "Mythic",
+      "harvestType": "Multi",
+      "cropRole": "Mythic repeat-harvest crop",
       "whereToGet": "Seed Shop"
     },
     {

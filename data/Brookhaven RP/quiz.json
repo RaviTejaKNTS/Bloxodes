@@ -1,0 +1,920 @@
+{
+  "easy": [
+    {
+      "id": "BHR-E01",
+      "question": "What type of Roblox experience is Brookhaven RP?",
+      "options": [
+        {
+          "id": "A",
+          "text": "An open-world roleplay town game"
+        },
+        {
+          "id": "B",
+          "text": "A wave-based zombie survival shooter"
+        },
+        {
+          "id": "C",
+          "text": "A competitive tower defense game"
+        },
+        {
+          "id": "D",
+          "text": "A pet-hatching and trading simulator"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "BHR-E02",
+      "question": "Which of these is NOT something Brookhaven RP focuses on?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Free roleplay and player creativity"
+        },
+        {
+          "id": "B",
+          "text": "A forced main objective you must complete"
+        },
+        {
+          "id": "C",
+          "text": "Choosing roles and spawning houses"
+        },
+        {
+          "id": "D",
+          "text": "Customizing your avatar"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "BHR-E03",
+      "question": "How much does it cost to pick a job or role in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "You must earn coins to unlock each job"
+        },
+        {
+          "id": "B",
+          "text": "Every job needs a separate gamepass"
+        },
+        {
+          "id": "C",
+          "text": "It is free to choose any listed job"
+        },
+        {
+          "id": "D",
+          "text": "You can only unlock jobs by leveling up"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "BHR-E04",
+      "question": "What is the name of the hospital in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Brookhaven General"
+        },
+        {
+          "id": "B",
+          "text": "Haven Medical Center"
+        },
+        {
+          "id": "C",
+          "text": "Madison Memorial"
+        },
+        {
+          "id": "D",
+          "text": "St. Lukes Hospital"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "BHR-E05",
+      "question": "Where would you go to roleplay as a firefighter?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The Power Plant"
+        },
+        {
+          "id": "B",
+          "text": "The Fire Station"
+        },
+        {
+          "id": "C",
+          "text": "The Bank"
+        },
+        {
+          "id": "D",
+          "text": "The Museum"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "BHR-E06",
+      "question": "What is the coffee shop in Brookhaven called?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Starbrooks Coffee"
+        },
+        {
+          "id": "B",
+          "text": "Brew Haven"
+        },
+        {
+          "id": "C",
+          "text": "Coffee Corner"
+        },
+        {
+          "id": "D",
+          "text": "Bean Brook"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "BHR-E07",
+      "question": "Can players spawn houses and vehicles in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "No, houses and vehicles are owned only by NPCs"
+        },
+        {
+          "id": "B",
+          "text": "Only after completing the tutorial quest"
+        },
+        {
+          "id": "C",
+          "text": "Only during special weekend events"
+        },
+        {
+          "id": "D",
+          "text": "Yes, players can freely spawn houses and vehicles"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "BHR-E08",
+      "question": "Which kind of weather can appear in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Acid storms that damage avatars"
+        },
+        {
+          "id": "B",
+          "text": "Meteor showers that destroy houses"
+        },
+        {
+          "id": "C",
+          "text": "Rain"
+        },
+        {
+          "id": "D",
+          "text": "Sandstorms that block all movement"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "BHR-E09",
+      "question": "Which of these is a real job you can take in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Police"
+        },
+        {
+          "id": "B",
+          "text": "Dragon Tamer"
+        },
+        {
+          "id": "C",
+          "text": "Wizard"
+        },
+        {
+          "id": "D",
+          "text": "Bounty Hunter"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "BHR-E10",
+      "question": "What is the main thing players do in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Grind levels to beat a final boss"
+        },
+        {
+          "id": "B",
+          "text": "Roleplay everyday life in a town with friends"
+        },
+        {
+          "id": "C",
+          "text": "Farm crops to sell for profit"
+        },
+        {
+          "id": "D",
+          "text": "Race to the end of an obstacle course"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "BHR-E11",
+      "question": "Where in Brookhaven would you go to roleplay as a student or teacher?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The Airport"
+        },
+        {
+          "id": "B",
+          "text": "The Cemetery"
+        },
+        {
+          "id": "C",
+          "text": "The School"
+        },
+        {
+          "id": "D",
+          "text": "The Fire Station"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "BHR-E12",
+      "question": "Which type of building lets players catch a flight in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The Bank"
+        },
+        {
+          "id": "B",
+          "text": "The Grocery Store"
+        },
+        {
+          "id": "C",
+          "text": "The Library"
+        },
+        {
+          "id": "D",
+          "text": "The Airport"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    }
+  ],
+  "medium": [
+    {
+      "id": "BHR-M01",
+      "question": "What kind of store is Zerizon in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A trendy clothing and fashion boutique"
+        },
+        {
+          "id": "B",
+          "text": "A phone repair and sales shop"
+        },
+        {
+          "id": "C",
+          "text": "A neighborhood grocery store"
+        },
+        {
+          "id": "D",
+          "text": "A luxury car dealership"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "BHR-M02",
+      "question": "What is Club Brooks in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The town's nightclub"
+        },
+        {
+          "id": "B",
+          "text": "A members-only gym"
+        },
+        {
+          "id": "C",
+          "text": "A golf clubhouse"
+        },
+        {
+          "id": "D",
+          "text": "A book club library"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "BHR-M03",
+      "question": "What does the Theme Pack gamepass mainly unlock?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Extra houses on new plots of land"
+        },
+        {
+          "id": "B",
+          "text": "A library of songs for the boombox"
+        },
+        {
+          "id": "C",
+          "text": "New custom faces for the Avatar Editor"
+        },
+        {
+          "id": "D",
+          "text": "Map themes that change how the whole town looks"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "BHR-M04",
+      "question": "What does the Disaster Pack gamepass let a player do?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Instantly heal other players at the hospital"
+        },
+        {
+          "id": "B",
+          "text": "Ban other players from their own house"
+        },
+        {
+          "id": "C",
+          "text": "Trigger fires, floods, and gas leaks nearby"
+        },
+        {
+          "id": "D",
+          "text": "Spawn an unlimited number of free vehicles"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "BHR-M05",
+      "question": "Which of these is a real map theme in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Apocalypse"
+        },
+        {
+          "id": "B",
+          "text": "Underwater City"
+        },
+        {
+          "id": "C",
+          "text": "Medieval Castle"
+        },
+        {
+          "id": "D",
+          "text": "Wild West"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "BHR-M06",
+      "question": "Which of these vehicle types can you find in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Submarines you can dive in"
+        },
+        {
+          "id": "B",
+          "text": "Boats"
+        },
+        {
+          "id": "C",
+          "text": "Hot-air war zeppelins"
+        },
+        {
+          "id": "D",
+          "text": "Spaceships you can pilot to orbit"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "BHR-M07",
+      "question": "Which three tiers do Brookhaven houses fall into?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Common, Rare, and Legendary"
+        },
+        {
+          "id": "B",
+          "text": "Bronze, Silver, and Gold"
+        },
+        {
+          "id": "C",
+          "text": "Free, Premium, and Special"
+        },
+        {
+          "id": "D",
+          "text": "Starter, Standard, and Deluxe"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "BHR-M08",
+      "question": "Which of these disasters can actually occur in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Volcanic eruptions"
+        },
+        {
+          "id": "B",
+          "text": "Tornado outbreaks"
+        },
+        {
+          "id": "C",
+          "text": "Tsunamis that flood the whole map"
+        },
+        {
+          "id": "D",
+          "text": "Earthquakes"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "BHR-M09",
+      "question": "What can happen to small buildings during a shop fire event?",
+      "options": [
+        {
+          "id": "A",
+          "text": "They are permanently destroyed and removed from the map"
+        },
+        {
+          "id": "B",
+          "text": "They catch fire and can be put out again"
+        },
+        {
+          "id": "C",
+          "text": "They float into the sky until the round ends"
+        },
+        {
+          "id": "D",
+          "text": "They turn invisible to all of the other players"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "BHR-M10",
+      "question": "What is the name of the lake in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lake Madison"
+        },
+        {
+          "id": "B",
+          "text": "Lake Brook"
+        },
+        {
+          "id": "C",
+          "text": "Haven Lake"
+        },
+        {
+          "id": "D",
+          "text": "Lake Crown"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "BHR-M11",
+      "question": "Which gamepass mainly adds extra boats to your vehicle options?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Music Unlocked"
+        },
+        {
+          "id": "B",
+          "text": "Penthouse"
+        },
+        {
+          "id": "C",
+          "text": "Boat Pack"
+        },
+        {
+          "id": "D",
+          "text": "Horse Upgrade"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "BHR-M12",
+      "question": "What happens to the map when you apply a different map theme?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Only your own house changes its appearance"
+        },
+        {
+          "id": "B",
+          "text": "Your avatar is given a matching costume"
+        },
+        {
+          "id": "C",
+          "text": "All other players are teleported to spawn"
+        },
+        {
+          "id": "D",
+          "text": "The entire map's appearance changes to match"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "BHR-M13",
+      "question": "Where can players adopt pets in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The Animal Rescue"
+        },
+        {
+          "id": "B",
+          "text": "The Bank"
+        },
+        {
+          "id": "C",
+          "text": "The Post Office"
+        },
+        {
+          "id": "D",
+          "text": "The Movie theater"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    }
+  ],
+  "hard": [
+    {
+      "id": "BHR-H01",
+      "question": "Which gamepass is the most expensive in Brookhaven, at 999 Robux?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Estate Unlocked"
+        },
+        {
+          "id": "B",
+          "text": "Vehicle Pack"
+        },
+        {
+          "id": "C",
+          "text": "VIP Pack"
+        },
+        {
+          "id": "D",
+          "text": "Disaster Pack"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "BHR-H02",
+      "question": "Where is the hidden entrance to the Agency Bunker located?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Behind the Museum's main desk"
+        },
+        {
+          "id": "B",
+          "text": "Under the third grave at the Cemetery"
+        },
+        {
+          "id": "C",
+          "text": "Inside the School library"
+        },
+        {
+          "id": "D",
+          "text": "On the right side of the Gas Station"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "BHR-H03",
+      "question": "Which house must you select to access the Secret Vault?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The Underground House"
+        },
+        {
+          "id": "B",
+          "text": "The Penthouse"
+        },
+        {
+          "id": "C",
+          "text": "The Island Estate"
+        },
+        {
+          "id": "D",
+          "text": "The Lake House"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "BHR-H04",
+      "question": "What hidden feature is found aboard the Yacht at Lake Madison?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A free VIP gamepass voucher code"
+        },
+        {
+          "id": "B",
+          "text": "A hidden weapons room behind the shower"
+        },
+        {
+          "id": "C",
+          "text": "A teleporter that leads to the Airport"
+        },
+        {
+          "id": "D",
+          "text": "A secret underground racing track"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "BHR-H05",
+      "question": "What is special about owning the Power Plant landmark?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Only you can enter it once you own it"
+        },
+        {
+          "id": "B",
+          "text": "It gives you free Robux every hour"
+        },
+        {
+          "id": "C",
+          "text": "It lets you reset the entire server"
+        },
+        {
+          "id": "D",
+          "text": "You own it but cannot ban other players from entering"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "BHR-H06",
+      "question": "In Brookhaven, which of these is a lighting or sky effect rather than a weather event?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Flood"
+        },
+        {
+          "id": "B",
+          "text": "Shop fires"
+        },
+        {
+          "id": "C",
+          "text": "Foggy lighting"
+        },
+        {
+          "id": "D",
+          "text": "Rain"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "BHR-H07",
+      "question": "Which of these is one of the less common roleplay jobs available in Brookhaven?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Blacksmith"
+        },
+        {
+          "id": "B",
+          "text": "Spy"
+        },
+        {
+          "id": "C",
+          "text": "Treasure Hunter"
+        },
+        {
+          "id": "D",
+          "text": "Knight"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "BHR-H08",
+      "question": "What does the Music Unlocked gamepass let players do?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Play songs in houses, vehicles, and outdoors"
+        },
+        {
+          "id": "B",
+          "text": "Add custom voice lines to their avatar"
+        },
+        {
+          "id": "C",
+          "text": "Mute the music of all other players"
+        },
+        {
+          "id": "D",
+          "text": "Trigger map-wide live concert events for everyone"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "BHR-H09",
+      "question": "Which lighting effect turns the surroundings dark for everyone, making it ideal for horror roleplay?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cloudy"
+        },
+        {
+          "id": "B",
+          "text": "Orange Skybox"
+        },
+        {
+          "id": "C",
+          "text": "Normal"
+        },
+        {
+          "id": "D",
+          "text": "Darkness"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    },
+    {
+      "id": "BHR-H10",
+      "question": "Which gamepass focuses on unlocking large estates and extra estate plots?",
+      "options": [
+        {
+          "id": "A",
+          "text": "On Demand Fire"
+        },
+        {
+          "id": "B",
+          "text": "Vehicle Customization"
+        },
+        {
+          "id": "C",
+          "text": "Estate Unlocked"
+        },
+        {
+          "id": "D",
+          "text": "Theme Pack"
+        }
+      ],
+      "correctOptionId": "C",
+      "image": null
+    },
+    {
+      "id": "BHR-H11",
+      "question": "Where can players find a secret hidden room connected to the X-ray room?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Inside St. Lukes Hospital"
+        },
+        {
+          "id": "B",
+          "text": "Inside the Police Station"
+        },
+        {
+          "id": "C",
+          "text": "Inside the Town Hall"
+        },
+        {
+          "id": "D",
+          "text": "Inside the Museum"
+        }
+      ],
+      "correctOptionId": "A",
+      "image": null
+    },
+    {
+      "id": "BHR-H12",
+      "question": "Which gamepass unlocks new horse breeds and lets you customize a horse's colors?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Premium"
+        },
+        {
+          "id": "B",
+          "text": "Horse Upgrade"
+        },
+        {
+          "id": "C",
+          "text": "Land Unlocked"
+        },
+        {
+          "id": "D",
+          "text": "Boat Pack"
+        }
+      ],
+      "correctOptionId": "B",
+      "image": null
+    },
+    {
+      "id": "BHR-H13",
+      "question": "Where can you find the hidden 'Wolfpaq was here!' sign?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Behind the Bank vault"
+        },
+        {
+          "id": "B",
+          "text": "On the School rooftop"
+        },
+        {
+          "id": "C",
+          "text": "Inside the subway tunnel"
+        },
+        {
+          "id": "D",
+          "text": "Underneath the Yacht"
+        }
+      ],
+      "correctOptionId": "D",
+      "image": null
+    }
+  ]
+}

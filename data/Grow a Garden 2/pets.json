@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Grow a Garden 2 pets data",
-    "updatedAt": "2026-06-13",
+    "updatedAt": "2026-06-23",
     "sources": [
       {
         "label": "Beebom - All Grow a Garden 2 Pets Guide",
         "url": "https://beebom.com/grow-a-garden-2-pets/",
-        "accessed": "2026-06-13"
+        "accessed": "2026-06-23"
       },
       {
         "label": "BloxInformer - Grow a Garden 2 Wiki",
@@ -93,7 +93,7 @@
     {
       "id": "monkey",
       "name": "Monkey",
-      "price": "1M Sheckles",
+      "price": "3M Sheckles",
       "rarity": "Mythic",
       "ability": "Brings ripe fruits straight to you",
       "role": "Harvest convenience",
@@ -104,7 +104,7 @@
     {
       "id": "golden-dragonfly",
       "name": "Golden Dragonfly",
-      "price": "3M Sheckles",
+      "price": "9M Sheckles",
       "rarity": "Mythic",
       "ability": "Increases gold chance by 2x",
       "role": "Mutation/value support",
@@ -115,7 +115,7 @@
     {
       "id": "unicorn",
       "name": "Unicorn",
-      "price": "4M Sheckles",
+      "price": "12M Sheckles",
       "rarity": "Mythic",
       "ability": "Doubles the chance of fruits turning rainbow",
       "role": "Mutation/value support",
@@ -126,12 +126,21 @@
     {
       "id": "raccoon",
       "name": "Raccoon",
-      "price": "5M Sheckles",
+      "price": "15M Sheckles",
       "rarity": "Super",
       "ability": "Steals fruit from empty gardens at night and increases steal limit by +25",
       "role": "Night stealing",
       "image": "/Grow%20a%20Garden%202/Pets/raccoon.webp",
       "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Raccoon.jpg",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "bear",
+      "name": "Bear",
+      "price": "5M Sheckles",
+      "rarity": "Mythic",
+      "ability": "Tackles intruders, pins them down, then throws them away to defend your garden",
+      "role": "Defense",
       "whereToGet": "Lobby pet spawn"
     },
     {

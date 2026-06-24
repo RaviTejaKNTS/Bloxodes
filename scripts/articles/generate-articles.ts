@@ -9,10 +9,10 @@ import { z } from "zod";
 
 import { slugify } from "@/lib/slug";
 import { toMediaPublicUrl } from "../shared/storage-public-url";
-import { tavilySearch } from "../shared/tavily";
+import { firecrawlSearch } from "../shared/firecrawl";
 
 const GENERATOR_PROMPT_VERSION = "article-generator-v2-2026-09-03";
-const MODEL = process.env.ARTICLE_GENERATION_MODEL ?? "gpt-4.1-mini";
+const MODEL = process.env.ARTICLE_GENERATION_MODEL ?? "gpt-5-mini";
 
 type QueueRow = {
   id: string;
@@ -118,7 +118,7 @@ type RelatedUniversePage = {
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE;
-const TAVILY_API_KEY = process.env.TAVILY_API_KEY;
+const FIRECRAWL_API_KEY = process.env.FIRECRAWL_API_KEY;
 const OPENAI_KEY = process.env.OPENAI_API_KEY;
 const AUTHOR_ID = process.env.ARTICLE_AUTHOR_ID ?? "4fc99a58-83da-46f6-9621-7816e36b4088";
 const SUPABASE_MEDIA_BUCKET = process.env.SUPABASE_MEDIA_BUCKET;
@@ -138,8 +138,8 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE) {
   throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE.");
 }
 
-if (!TAVILY_API_KEY) {
-  throw new Error("Missing TAVILY_API_KEY.");
+if (!FIRECRAWL_API_KEY) {
+  throw new Error("Missing FIRECRAWL_API_KEY.");
 }
 
 if (!OPENAI_KEY) {
@@ -173,6 +173,21 @@ function recordValidation(result: ValidationResult) {
   artifactState.validationResults.push(result);
 }
 
+function isGpt5Model(model: string): boolean {
+  return model.toLowerCase().startsWith("gpt-5");
+}
+
+function chatCompletionTokenParams(maxTokens: number) {
+  return isGpt5Model(MODEL)
+    ? { max_completion_tokens: maxTokens }
+    : { max_tokens: maxTokens };
+}
+
+function chatCompletionTemperatureParams(temperature: number | undefined) {
+  if (isGpt5Model(MODEL)) return {};
+  return { temperature: temperature ?? 0.2 };
+}
+
 async function requestModelText(params: {
   step: string;
   system: string;
@@ -187,8 +202,8 @@ async function requestModelText(params: {
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     const completion = await openai.chat.completions.create({
       model: MODEL,
-      temperature: params.temperature ?? 0.2,
-      max_tokens: params.maxTokens,
+      ...chatCompletionTemperatureParams(params.temperature),
+      ...chatCompletionTokenParams(params.maxTokens),
       messages: [
         { role: "system", content: params.system },
         { role: "user", content: attempt === 1 ? params.prompt : `${params.prompt}\n\nPrevious response failed validation: ${lastError}. Return a non-empty response only.` }
@@ -224,8 +239,8 @@ async function requestJsonWithSchema<T>(params: {
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     const completion = await openai.chat.completions.create({
       model: MODEL,
-      temperature: params.temperature ?? 0.2,
-      max_tokens: params.maxTokens,
+      ...chatCompletionTemperatureParams(params.temperature),
+      ...chatCompletionTokenParams(params.maxTokens),
       response_format: { type: "json_object" },
       messages: [
         { role: "system", content: params.system },
@@ -887,22 +902,23 @@ async function updateQueueFailure(queue: QueueRow, lastError: string): Promise<v
 }
 
 async function searchWeb(query: string, limit: number, options: { includeDomains?: string[]; exactMatch?: boolean } = {}): Promise<SearchResult[]> {
-  const payload = await tavilySearch(query, {
-    exactMatch: options.exactMatch ?? false,
+  const searchQuery = options.exactMatch ? `"${query.replace(/"/g, "")}"` : query;
+  const payload = await firecrawlSearch(searchQuery, {
     includeDomains: options.includeDomains,
-    maxResults: limit,
-    searchDepth: "advanced",
-    topic: "general",
-    includeRawContent: "markdown"
+    limit,
+    scrapeMarkdown: true
   });
+  if (typeof payload.creditsUsed === "number") {
+    console.log(`   • firecrawl_credits_used=${payload.creditsUsed}`);
+  }
 
   return (
-    payload.results
+    payload.data?.web
       ?.map((item) => ({
-        title: item.title ?? "",
-        url: item.url ?? "",
-        snippet: item.content,
-        rawContent: item.raw_content ?? undefined
+        title: item.title ?? item.metadata?.title ?? "",
+        url: item.url ?? item.metadata?.sourceURL ?? item.metadata?.url ?? "",
+        snippet: item.description ?? item.metadata?.description,
+        rawContent: item.markdown ?? undefined
       }))
       .filter((entry) => entry.title && entry.url) ?? []
   );
@@ -1050,7 +1066,7 @@ async function gatherSources(topic: string, queueSources?: string | null): Promi
   }
 
   try {
-    console.log(`🔎 tavily_search → ${searchQuery}`);
+    console.log(`🔎 firecrawl_search → ${searchQuery}`);
     const results = await searchWeb(searchQuery, MAX_RESULTS_PER_QUERY);
     for (const result of results) {
       if (candidates.length >= MAX_SOURCES) break;

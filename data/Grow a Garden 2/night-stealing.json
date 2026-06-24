@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Grow a Garden 2 night stealing data",
-    "updatedAt": "2026-06-13",
+    "updatedAt": "2026-06-23",
     "sources": [
       {
         "label": "Beebom - Grow a Garden 2 Wiki",
         "url": "https://beebom.com/grow-a-garden-2-wiki/",
-        "accessed": "2026-06-13"
+        "accessed": "2026-06-23"
       },
       {
         "label": "Beebom - All Grow a Garden 2 Pets Guide",
@@ -63,6 +63,14 @@
       "effect": "Patrols the garden and swarms intruders",
       "role": "Defense",
       "image": "/Grow%20a%20Garden%202/Pets/bee.webp",
+      "whereToGet": "Lobby pet spawn"
+    },
+    {
+      "id": "bear",
+      "name": "Bear",
+      "type": "Pet",
+      "effect": "Tackles intruders, pins them down, then throws them away",
+      "role": "Defense",
       "whereToGet": "Lobby pet spawn"
     },
     {
