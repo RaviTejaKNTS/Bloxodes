@@ -1,54 +1,41 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
 import {
-  listCodePagesWithActiveCounts,
-  listPublishedArticles,
-  listPublishedChecklists
-} from "@/lib/db";
-import { listPublishedQuizzes } from "@/lib/quizzes";
+  BarChart3,
+  BookOpen,
+  CalendarClock,
+  Flame,
+  Key,
+  LayoutGrid,
+  ListChecks,
+  Newspaper,
+  Puzzle,
+  Wrench
+} from "lucide-react";
+import { listCodePagesWithActiveCounts, listPublishedArticles, listPublishedChecklists } from "@/lib/db";
+import { listPublishedQuizzes, loadQuizData } from "@/lib/quizzes";
+import { buildServerQuizAttempt } from "@/lib/quiz-attempts";
 import { listPublishedTools } from "@/lib/tools";
-import { CHECKLISTS_DESCRIPTION, QUIZZES_DESCRIPTION, SITE_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
+import { getStatsHome } from "@/lib/stats";
+import { getGameSidebarData } from "@/lib/game-sidebar";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
-import { resolveCatalogCardMeta } from "@/lib/catalog-card-meta";
 import { listPublishedWikiPages } from "@/lib/wiki";
-import { GameCard } from "@/components/GameCard";
-import { ArticleCard } from "@/components/ArticleCard";
-import { ChecklistCard } from "@/components/ChecklistCard";
-import { ToolCard } from "@/components/ToolCard";
 import { EventsPageCard } from "@/components/EventsPageCard";
-import { CatalogCard } from "@/components/CatalogCard";
-import { QuizCard } from "@/components/QuizCard";
-import { WikiCard } from "@/components/WikiCard";
+import { CardImage } from "@/components/CardImage";
+import { PlatformCcuChart } from "@/components/home/PlatformCcuChart";
+import { FeaturedQuizCard } from "@/components/home/FeaturedQuizCard";
 import { buildEventsCards } from "./events/page-data";
-
-const INITIAL_FEATURED_GAMES = 8;
-const INITIAL_ARTICLES = 8;
-const INITIAL_CHECKLISTS = 6;
-const INITIAL_TOOLS = 6;
-const INITIAL_WIKI = 8;
-const INITIAL_EVENTS = 3;
-const INITIAL_CATALOGS = 3;
-const INITIAL_QUIZZES = 8;
-const CATALOG_CARD_TONES = ["indigo", "amber", "emerald"] as const;
 
 export const revalidate = 3600;
 
-const PAGE_TITLE = `${SITE_NAME} | Roblox codes, guides, checklists, and tools`;
+const PAGE_TITLE = `${SITE_NAME} | Roblox codes, guides, tools, and live game stats`;
 const PAGE_DESCRIPTION = SITE_DESCRIPTION;
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  keywords: [
-    "Roblox codes",
-    "Roblox promo codes",
-    "free Roblox rewards",
-    "Bloxodes",
-    "updated Roblox codes",
-    "Roblox checklists",
-    "Roblox tools"
-  ],
+  keywords: ["Roblox codes", "Roblox guides", "Roblox stats", "Bloxodes", "Roblox tools", "Roblox wiki"],
   alternates: buildAlternates(SITE_URL),
   openGraph: {
     title: PAGE_TITLE,
@@ -56,163 +43,118 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: SITE_NAME,
     type: "website",
-    images: [
-      {
-        url: `${SITE_URL}/Bloxodes.png`,
-        width: 1200,
-        height: 675,
-        alt: PAGE_TITLE
-      }
-    ]
+    images: [{ url: `${SITE_URL}/Bloxodes.png`, width: 1200, height: 675, alt: PAGE_TITLE }]
   },
-  twitter: {
-    card: "summary_large_image",
-    title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
-    images: [`${SITE_URL}/Bloxodes.png`]
-  }
+  twitter: { card: "summary_large_image", title: PAGE_TITLE, description: PAGE_DESCRIPTION, images: [`${SITE_URL}/Bloxodes.png`] }
 };
 
-type ChecklistCardData = {
-  id: string;
-  slug: string;
-  title: string;
-  summary: string;
-  universeName: string | null;
-  coverImage: string | null;
-  updatedAt: string | null;
-  itemsCount: number | null;
-};
-
-type ListEntryPreview = {
-  game?: { cover_image?: string | null } | null;
-  universe?: { icon_url?: string | null } | null;
-};
+function abbreviateCount(value: number | null | undefined): string {
+  if (typeof value !== "number" || !Number.isFinite(value)) return "—";
+  const strip = (n: number) => n.toFixed(1).replace(/\.0$/, "");
+  if (value < 1000) return String(value);
+  if (value < 1_000_000) return `${strip(value / 1000)}K`;
+  if (value < 1_000_000_000) return `${strip(value / 1_000_000)}M`;
+  return `${strip(value / 1_000_000_000)}B`;
+}
 
 function pickThumbnail(value: unknown): string | null {
   if (!value) return null;
-  if (typeof value === "string") return value;
+  if (typeof value === "string") return value.trim() || null;
   if (Array.isArray(value)) {
     for (const entry of value) {
-      if (typeof entry === "string" && entry.trim()) return entry;
-      if (entry && typeof entry === "object" && "url" in entry) {
-        const url = (entry as { url?: unknown }).url;
-        if (typeof url === "string" && url.trim()) return url;
-      }
+      const picked = pickThumbnail(entry);
+      if (picked) return picked;
     }
+  }
+  if (value && typeof value === "object" && "url" in value) {
+    const url = (value as { url?: unknown }).url;
+    if (typeof url === "string" && url.trim()) return url;
   }
   return null;
 }
 
-function summarize(descriptionMd: string | null | undefined, fallback: string): string {
-  if (!descriptionMd) return fallback;
-  const plain = descriptionMd.replace(/[#>*_`~[\]]/g, " ").replace(/\s+/g, " ").trim();
-  if (!plain) return fallback;
-  if (plain.length <= 160) return plain;
-  const slice = plain.slice(0, 157);
-  const lastSpace = slice.lastIndexOf(" ");
-  return `${lastSpace > 120 ? slice.slice(0, lastSpace) : slice}…`;
-}
-
 export default async function HomePage() {
-  const [games, articles, checklistRows, tools, wikiPages, quizzes, eventsPayload, catalogPages] = await Promise.all([
-    listCodePagesWithActiveCounts(),
-    listPublishedArticles(12),
-    listPublishedChecklists(INITIAL_CHECKLISTS * 2),
-    listPublishedTools(),
-    listPublishedWikiPages(),
-    listPublishedQuizzes(),
-    buildEventsCards(INITIAL_EVENTS),
-    listPublishedTopLevelCatalogPages()
-  ]);
+  const [statsHome, codeGames, wikiPages, eventsPayload, quizzes, tools, catalogPages, articles, checklistRows] =
+    await Promise.all([
+      getStatsHome(),
+      listCodePagesWithActiveCounts(),
+      listPublishedWikiPages(),
+      buildEventsCards(6),
+      listPublishedQuizzes(),
+      listPublishedTools(),
+      listPublishedTopLevelCatalogPages(),
+      listPublishedArticles(8),
+      listPublishedChecklists(40)
+    ]);
 
-  const sortedGames = [...games].sort((a, b) => {
-    const aTime = new Date(a.content_updated_at ?? a.updated_at).getTime();
-    const bTime = new Date(b.content_updated_at ?? b.updated_at).getTime();
-    if (Number.isNaN(aTime) && Number.isNaN(bTime)) return 0;
-    if (Number.isNaN(aTime)) return 1;
-    if (Number.isNaN(bTime)) return -1;
-    return bTime - aTime;
-  });
+  const totalActiveCodes = codeGames.reduce((sum, game) => sum + (game.active_count ?? 0), 0);
 
-  const totalActiveCodes = games.reduce((sum, game) => sum + (game.active_count ?? 0), 0);
-  const mostRecentGame = sortedGames[0];
-  const mostRecentUpdate = mostRecentGame
-    ? new Date(mostRecentGame.content_updated_at ?? mostRecentGame.updated_at)
-    : null;
-  const refreshedLabel = mostRecentUpdate ? formatDistanceToNow(mostRecentUpdate, { addSuffix: true }) : null;
+  // Wiki coverage map → only surface trending games we actually cover.
+  const wikiByUniverse = new Map<number, { slug: string; title: string; image: string | null }>();
+  for (const page of wikiPages) {
+    if (typeof page.universe_id === "number" && page.slug) {
+      wikiByUniverse.set(page.universe_id, {
+        slug: page.slug,
+        title: page.title,
+        image: pickThumbnail(page.thumbnail_urls) ?? page.cover_image ?? page.icon_url ?? null
+      });
+    }
+  }
 
-  const featuredGames = sortedGames.slice(0, INITIAL_FEATURED_GAMES).map((game) => ({
-    data: game,
-    articleUpdatedAt: game.content_updated_at ?? game.updated_at ?? null
-  }));
-
-  const checklistCards: ChecklistCardData[] = await Promise.all(
-    checklistRows.slice(0, INITIAL_CHECKLISTS).map(async (row) => {
-      const universeName = row.universe?.display_name ?? row.universe?.name ?? null;
-      const thumb = pickThumbnail(row.universe?.thumbnail_urls);
-      const coverImage = row.universe?.icon_url || thumb || `${SITE_URL}/og-image.png`;
-      const updatedAt = row.updated_at || row.published_at || row.created_at || null;
-
-      const itemsCount =
-        typeof row.leaf_item_count === "number"
-          ? row.leaf_item_count
-          : typeof row.item_count === "number"
-            ? row.item_count
-            : null;
-      const summary = summarize(row.seo_description ?? row.description_md ?? null, CHECKLISTS_DESCRIPTION);
-
+  const risingGames = statsHome.risers
+    .filter((game) => typeof game.universeId === "number" && wikiByUniverse.has(game.universeId))
+    .map((game) => {
+      const wiki = wikiByUniverse.get(game.universeId)!;
       return {
-        id: row.id,
-        slug: row.slug,
-        title: row.title,
-        summary,
-        universeName,
-        coverImage,
-        updatedAt,
-        itemsCount
+        universeId: game.universeId,
+        name: game.displayName || game.name,
+        wikiSlug: wiki.slug,
+        image: wiki.image ?? game.iconUrl ?? null,
+        playing: game.playing,
+        growth: typeof game.growth24hPercent === "number" ? Math.round(game.growth24hPercent) : null
       };
-    })
-  );
+    });
 
-  const toolCards = tools.slice(0, INITIAL_TOOLS);
-  const wikiCards = wikiPages.slice(0, INITIAL_WIKI);
-  const quizCards = quizzes.slice(0, INITIAL_QUIZZES).map((quiz) => {
-    const universeName = quiz.universe?.display_name ?? quiz.universe?.name ?? null;
-    const thumb = pickThumbnail(quiz.universe?.thumbnail_urls);
-    const coverImage = quiz.universe?.icon_url || thumb || `${SITE_URL}/og-image.png`;
-    const updatedAt = quiz.content_updated_at || quiz.updated_at || quiz.published_at || quiz.created_at || null;
-    const summary = summarize(quiz.seo_description ?? quiz.description_md ?? null, QUIZZES_DESCRIPTION);
+  const risingTop = risingGames.slice(0, 3);
+  const topGames = statsHome.topGames.slice(0, 5);
 
-    return {
-      code: quiz.code,
-      title: quiz.title,
-      summary,
-      universeName,
-      coverImage,
-      updatedAt
-    };
-  });
-  const articleCards = articles.slice(0, INITIAL_ARTICLES);
-  const eventsCards = eventsPayload.cards.slice(0, INITIAL_EVENTS);
-  const catalogCards = await Promise.all(
-    catalogPages.slice(0, INITIAL_CATALOGS).map(async (page, index) => {
-      const updatedAt = page.content_updated_at ?? page.updated_at ?? page.published_at ?? page.created_at ?? null;
-      const meta = await resolveCatalogCardMeta(page.code);
-      return {
-        id: page.code,
-        href: `/catalog/${page.code}`,
-        title: meta.shortLabel ?? page.title,
-        description: summarize(page.meta_description, "Open this Roblox catalog hub for the latest published content."),
-        count: meta.count,
-        unit: meta.unit,
-        iconKey: meta.icon,
-        updatedLabel: updatedAt ? formatDistanceToNow(new Date(updatedAt), { addSuffix: true }) : null,
-        coverImage: page.thumb_url ?? null,
-        tone: CATALOG_CARD_TONES[index % CATALOG_CARD_TONES.length]
-      };
-    })
-  );
+  // Events: prefer live/upcoming.
+  const liveEvents = eventsPayload.cards.filter((c) => c.status === "current" || c.status === "upcoming");
+  const events = (liveEvents.length ? liveEvents : eventsPayload.cards).slice(0, 2);
+
+  // Quiz of the day = newest published quiz with a playable question.
+  const quizPick = quizzes[0] ?? null;
+  const quizData = quizPick ? await loadQuizData(quizPick.code) : null;
+  const firstQuestion = quizData ? buildServerQuizAttempt(quizData, quizPick!.code)[0] : null;
+  const quizOfDay =
+    quizPick && firstQuestion
+      ? {
+          code: quizPick.code,
+          gameName: quizPick.universe?.display_name ?? quizPick.universe?.name ?? "Roblox",
+          question: {
+            id: firstQuestion.id,
+            question: firstQuestion.question,
+            options: firstQuestion.options.map((o) => ({ id: o.id, text: o.text })),
+            correctOptionId: firstQuestion.correctOptionId
+          }
+        }
+      : null;
+
+  // Spotlight: top covered rising game (full hub) + a different one (compact).
+  const spotlightA = risingGames[0] ?? null;
+  const spotlightB = risingGames[1] ?? null;
+  const spotlightData = spotlightA ? await getGameSidebarData(spotlightA.universeId) : null;
+
+  const browse = [
+    { href: "/codes", label: "Codes", icon: Key, count: codeGames.length },
+    { href: "/wiki", label: "Wiki", icon: BookOpen, count: wikiPages.length },
+    { href: "/stats", label: "Stats", icon: BarChart3, count: statsHome.totals.trackedGames },
+    { href: "/tools", label: "Tools", icon: Wrench, count: tools.length },
+    { href: "/catalog", label: "Catalog", icon: LayoutGrid, count: catalogPages.length },
+    { href: "/checklists", label: "Checklists", icon: ListChecks, count: checklistRows.length },
+    { href: "/quizzes", label: "Quizzes", icon: Puzzle, count: quizzes.length },
+    { href: "/articles", label: "Articles", icon: Newspaper, count: articles.length }
+  ];
 
   const structuredData = JSON.stringify({
     "@context": "https://schema.org",
@@ -224,395 +166,250 @@ export default async function HomePage() {
     hasPart: [
       {
         "@type": "ItemList",
-        name: "Catalogs",
-        numberOfItems: catalogCards.length,
-        itemListElement: catalogCards.map((card, index) => ({
+        name: "Trending Roblox games",
+        itemListElement: risingTop.map((game, index) => ({
           "@type": "ListItem",
           position: index + 1,
-          name: card.title,
-          url: `${SITE_URL}${card.href}`,
-          description: card.description
-        }))
-      },
-      {
-        "@type": "ItemList",
-        name: "Tools",
-        numberOfItems: toolCards.length,
-        itemListElement: toolCards.map((tool, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: tool.title,
-          url: `${SITE_URL}/tools/${tool.code}`,
-          description: tool.meta_description,
-          dateModified: tool.content_updated_at ?? tool.updated_at ?? tool.published_at ?? undefined
-        }))
-      },
-      {
-        "@type": "ItemList",
-        name: "Wiki",
-        numberOfItems: wikiCards.length,
-        itemListElement: wikiCards.map((page, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: page.title,
-          url: `${SITE_URL}/wiki/${page.slug}`,
-          description: page.meta_description ?? undefined,
-          dateModified: page.content_updated_at ?? page.updated_at ?? page.published_at ?? undefined
-        }))
-      },
-      {
-        "@type": "ItemList",
-        name: "Latest codes",
-        numberOfItems: featuredGames.length,
-        itemListElement: featuredGames.map(({ data: game }, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: `${game.name} codes`,
-          url: `${SITE_URL}/codes/${game.slug}`,
-          dateModified: game.content_updated_at ?? game.updated_at
-        }))
-      },
-      {
-        "@type": "ItemList",
-        name: "Quizzes",
-        numberOfItems: quizCards.length,
-        itemListElement: quizCards.map((quiz, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: quiz.title,
-          url: `${SITE_URL}/quizzes/${quiz.code}`,
-          description: quiz.summary,
-          dateModified: quiz.updatedAt ?? undefined
-        }))
-      },
-      {
-        "@type": "ItemList",
-        name: "Checklists",
-        numberOfItems: checklistCards.length,
-        itemListElement: checklistCards.map((card, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: card.title,
-          url: `${SITE_URL}/checklists/${card.slug}`,
-          description: card.summary,
-          dateModified: card.updatedAt ?? undefined
-        }))
-      },
-      {
-        "@type": "ItemList",
-        name: "Events",
-        numberOfItems: eventsCards.length,
-        itemListElement: eventsCards.map((card, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: card.title,
-          url: `${SITE_URL}/events/${card.slug}`,
-          description: card.summary
-        }))
-      },
-      {
-        "@type": "ItemList",
-        name: "Articles",
-        numberOfItems: articleCards.length,
-        itemListElement: articleCards.map((article, index) => ({
-          "@type": "ListItem",
-          position: index + 1,
-          name: article.title,
-          url: `${SITE_URL}/articles/${article.slug}`,
-          image: article.cover_image ?? undefined,
-          datePublished: article.published_at,
-          dateModified: article.updated_at
+          name: game.name,
+          url: `${SITE_URL}/wiki/${game.wikiSlug}`
         }))
       }
     ]
   });
 
+  const spotlightLinks = spotlightData
+    ? [
+        spotlightData.codes
+          ? { href: `/codes/${spotlightData.codes.slug}`, icon: Key, label: `Codes · ${spotlightData.codes.activeCount}`, tone: "codes" }
+          : null,
+        spotlightData.wiki ? { href: `/wiki/${spotlightData.wiki.slug}`, icon: BookOpen, label: "Wiki", tone: "wiki" } : null,
+        spotlightData.checklist
+          ? { href: `/checklists/${spotlightData.checklist.slug}`, icon: ListChecks, label: `Checklist · ${spotlightData.checklist.itemsCount}`, tone: "checklist" }
+          : null,
+        spotlightData.quiz ? { href: `/quizzes/${spotlightData.quiz.code}`, icon: Puzzle, label: "Quiz", tone: "quiz" } : null,
+        spotlightData.tools.length
+          ? { href: `/tools/${spotlightData.tools[0].code}`, icon: Wrench, label: `Tools · ${spotlightData.tools.length}`, tone: "tool" }
+          : null,
+        spotlightData.event ? { href: `/events/${spotlightData.event.slug}`, icon: CalendarClock, label: "Events", tone: "events" } : null,
+        spotlightData.catalogs.length
+          ? { href: spotlightData.catalogs[0].href, icon: LayoutGrid, label: spotlightData.catalogs[0].title, tone: "catalog" }
+          : null,
+        spotlightData.articles.length
+          ? { href: `/articles/${spotlightData.articles[0].slug}`, icon: Newspaper, label: `Articles · ${spotlightData.articles.length}`, tone: "article" }
+          : null
+      ].filter(Boolean as unknown as <T>(v: T | null) => v is T)
+    : [];
+
+  const toneClass: Record<string, string> = {
+    codes: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-300",
+    wiki: "bg-blue-500/10 text-blue-600 dark:text-blue-300",
+    checklist: "bg-teal-500/10 text-teal-600 dark:text-teal-300",
+    quiz: "bg-violet-500/10 text-violet-600 dark:text-violet-300",
+    tool: "bg-sky-500/10 text-sky-600 dark:text-sky-300",
+    events: "bg-amber-500/10 text-amber-600 dark:text-amber-300",
+    catalog: "bg-orange-500/10 text-orange-600 dark:text-orange-300",
+    article: "bg-pink-500/10 text-pink-600 dark:text-pink-300"
+  };
+
   return (
-    <section className="space-y-12 -mt-10 md:-mt-12">
+    <div className="space-y-12 -mt-6 md:-mt-8">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: structuredData }} />
 
-      <header className="space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Roblox Hub</p>
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
-          Roblox hub for guides, checklists, tools, active codes, and live game stats
-        </h1>
-        <p className="max-w-3xl text-base text-muted md:text-lg">
-          Guides, checklists, tools, active codes, and live stats in one place. Updated throughout the day with fresh rewards,
-          tips, and insights.
-        </p>
-      </header>
+      {/* HERO — platform pulse + top games leaderboard */}
+      <section className="grid gap-4 lg:grid-cols-[1.55fr_1fr] lg:items-stretch">
+        <div className="flex flex-col gap-4">
+          <header className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent/80">Roblox · live</p>
+            <h1 className="text-3xl font-bold leading-tight text-foreground md:text-4xl">The live Roblox database</h1>
+            <p className="max-w-xl text-sm text-muted md:text-base">
+              Codes, guides, tools, and real-time player stats for every Roblox game worth playing.
+            </p>
+          </header>
 
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Catalogs</h2>
-          <Link
-            href="/catalog"
-            data-analytics-event="view_all_click"
-            data-analytics-section="catalogs"
-            className="text-sm font-semibold text-accent underline-offset-2 hover:underline"
-          >
-            View all catalogs
+          <div className="flex flex-1 flex-col justify-between gap-3 rounded-xl border border-border/60 bg-accent/5 p-4">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold text-foreground/80">Players across tracked games · last 24h</span>
+              <Link href="/stats" className="text-xs font-semibold text-accent hover:underline">
+                Full stats →
+              </Link>
+            </div>
+            <PlatformCcuChart points={statsHome.platformTrend} className="h-20 w-full" />
+          </div>
+
+          <div className="grid grid-cols-3 gap-3">
+            <div className="rounded-lg bg-surface-muted/60 px-3 py-2.5">
+              <p className="text-[11px] uppercase tracking-wide text-muted">Players now</p>
+              <p className="text-xl font-semibold text-foreground">{abbreviateCount(statsHome.totals.livePlayers)}</p>
+            </div>
+            <div className="rounded-lg bg-surface-muted/60 px-3 py-2.5">
+              <p className="text-[11px] uppercase tracking-wide text-muted">Active codes</p>
+              <p className="text-xl font-semibold text-foreground">{totalActiveCodes.toLocaleString("en-US")}</p>
+            </div>
+            <div className="rounded-lg bg-surface-muted/60 px-3 py-2.5">
+              <p className="text-[11px] uppercase tracking-wide text-muted">Games tracked</p>
+              <p className="text-xl font-semibold text-foreground">{statsHome.totals.trackedGames.toLocaleString("en-US")}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-border/60 bg-card p-4">
+          <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
+            <Flame className="h-4 w-4 text-amber-500" aria-hidden />
+            Top games right now
+          </div>
+          <ul className="space-y-2">
+            {topGames.map((game, index) => (
+              <li key={game.universeId}>
+                <Link
+                  href={`/stats/games/${game.slug}`}
+                  className="flex items-center gap-2.5 rounded-md px-1 py-1 transition-colors hover:bg-surface-muted/50"
+                >
+                  <span className="w-4 text-center text-xs font-semibold text-muted">{index + 1}</span>
+                  <span className="relative h-7 w-7 shrink-0 overflow-hidden rounded-md bg-surface-muted">
+                    <CardImage src={game.iconUrl} alt={game.displayName} />
+                  </span>
+                  <span className="flex-1 truncate text-sm text-foreground">{game.displayName}</span>
+                  <span className="text-xs font-medium text-muted">{abbreviateCount(game.playing)}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link href="/stats/games" className="mt-3 inline-block text-xs font-semibold text-muted hover:text-accent">
+            Full leaderboard →
           </Link>
         </div>
-        {catalogCards.length ? (
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {catalogCards.map(({ id, ...card }, index) => (
-              <div
-                key={id}
-                className="contents"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="home_catalogs"
-                data-analytics-item-id={id}
-                data-analytics-item-name={card.title}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="catalog"
-              >
-                <CatalogCard {...card} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-muted">No catalog pages are live yet. Check back soon.</p>
-        )}
       </section>
 
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Tools</h2>
-          <Link
-            href="/tools"
-            data-analytics-event="view_all_click"
-            data-analytics-section="tools"
-            className="text-sm font-semibold text-accent underline-offset-2 hover:underline"
-          >
-            View all tools
-          </Link>
-        </div>
-        {toolCards.length ? (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {toolCards.map((tool, index) => (
-              <div
-                key={tool.id ?? tool.code}
-                className="contents"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="home_tools"
-                data-analytics-item-id={tool.code}
-                data-analytics-item-name={tool.title}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="tool"
+      {/* RISING / WIKI — above events + quiz */}
+      {risingTop.length ? (
+        <section className="space-y-4">
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-xl font-semibold text-foreground">Rising fast</h2>
+            <Link href="/wiki" className="text-sm font-semibold text-accent hover:underline">
+              All game wikis
+            </Link>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {risingTop.map((game) => (
+              <Link
+                key={game.universeId}
+                href={`/wiki/${game.wikiSlug}`}
+                className="group overflow-hidden rounded-lg border border-border/70 bg-card transition-colors hover:border-border"
               >
-                <ToolCard tool={tool} />
-              </div>
+                <div className="relative aspect-[16/9] overflow-hidden bg-surface-muted">
+                  <CardImage src={game.image} alt={game.name} className="transition duration-500 group-hover:scale-[1.03]" />
+                </div>
+                <div className="space-y-1 p-3">
+                  <p className="line-clamp-1 text-sm font-semibold text-foreground">{game.name}</p>
+                  <p className="flex items-center gap-2 text-xs text-muted">
+                    <span className="inline-flex items-center gap-1">
+                      <Flame className="h-3 w-3 text-amber-500" aria-hidden /> {abbreviateCount(game.playing)}
+                    </span>
+                    {game.growth != null ? <span className="text-emerald-500">+{game.growth}%</span> : null}
+                    <span className="ml-auto text-accent">Wiki →</span>
+                  </p>
+                </div>
+              </Link>
             ))}
           </div>
-        ) : (
-          <p className="text-sm text-muted">No tools have been published yet. Check back soon.</p>
-        )}
+        </section>
+      ) : null}
+
+      {/* EVENTS (left) + QUIZ (right) */}
+      <section className="grid gap-5 lg:grid-cols-[1fr_1.5fr] lg:items-start">
+        {events.length ? (
+          <div className="space-y-3">
+            <h2 className="text-xl font-semibold text-foreground">Happening now</h2>
+            <div className="space-y-3">
+              {events.map(({ id, ...card }) => (
+                <EventsPageCard key={id} {...card} />
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {quizOfDay ? (
+          <div className="space-y-3">
+            <div className="flex items-baseline justify-between">
+              <h2 className="text-xl font-semibold text-foreground">Quiz of the day</h2>
+              <span className="text-xs text-muted">{quizOfDay.gameName}</span>
+            </div>
+            <FeaturedQuizCard code={quizOfDay.code} gameName={quizOfDay.gameName} question={quizOfDay.question} />
+          </div>
+        ) : null}
       </section>
 
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Wiki</h2>
-          <Link
-            href="/wiki"
-            data-analytics-event="view_all_click"
-            data-analytics-section="wiki"
-            className="text-sm font-semibold text-accent underline-offset-2 hover:underline"
-          >
-            View all wiki
-          </Link>
-        </div>
-        {wikiCards.length ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {wikiCards.map((page, index) => (
-              <div
-                key={page.id}
-                className="contents"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="home_wiki"
-                data-analytics-item-id={page.slug}
-                data-analytics-item-name={page.title}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="wiki"
-              >
-                <WikiCard page={page} />
+      {/* SPOTLIGHT bento — a covered trending game's full hub + a second game */}
+      {spotlightA && spotlightLinks.length ? (
+        <section className="grid gap-4 lg:grid-cols-[1.6fr_1fr] lg:items-stretch">
+          <div className="rounded-xl border border-border/60 bg-card p-4">
+            <div className="mb-3 flex items-center gap-3">
+              <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-md bg-surface-muted">
+                <CardImage src={spotlightA.image} alt={spotlightA.name} />
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Everything for {spotlightA.name}</p>
+                <p className="text-xs text-muted">
+                  {abbreviateCount(spotlightA.playing)} playing{spotlightA.growth != null ? ` · +${spotlightA.growth}%` : ""}
+                </p>
               </div>
-            ))}
+            </div>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {spotlightLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <Link
+                    key={link.href + link.label}
+                    href={link.href}
+                    className={`flex items-center gap-1.5 rounded-md px-2.5 py-2 text-xs font-medium ${toneClass[link.tone] ?? "bg-surface-muted text-foreground"}`}
+                  >
+                    <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                    <span className="truncate">{link.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-        ) : (
-          <p className="text-sm text-muted">No wiki pages have been published yet. Check back soon.</p>
-        )}
-      </section>
 
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Codes</h2>
-          <Link
-            href="/codes"
-            data-analytics-event="view_all_click"
-            data-analytics-section="codes"
-            className="text-sm font-semibold text-accent underline-offset-2 hover:underline"
-          >
-            View all codes
-          </Link>
-        </div>
-        {featuredGames.length ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {featuredGames.map(({ data: game, articleUpdatedAt }, index) => (
-              <div
-                key={game.id}
-                className="contents"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="home_latest_codes"
-                data-analytics-item-id={game.slug}
-                data-analytics-item-name={game.name}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="codes"
-              >
-                <GameCard game={game} priority={index === 0} articleUpdatedAt={articleUpdatedAt} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-muted">No code pages have been published yet. Check back soon.</p>
-        )}
-      </section>
+          {spotlightB ? (
+            <Link
+              href={`/wiki/${spotlightB.wikiSlug}`}
+              className="group relative flex flex-col justify-end overflow-hidden rounded-xl border border-border/60 bg-surface-muted p-4 min-h-[10rem]"
+            >
+              <span className="absolute inset-0">
+                <CardImage src={spotlightB.image} alt={spotlightB.name} className="opacity-40 transition duration-700 group-hover:scale-[1.04] group-hover:opacity-50" />
+              </span>
+              <span className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent" aria-hidden />
+              <span className="relative">
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-white/70">Spotlight</span>
+                <span className="block text-lg font-semibold text-white">{spotlightB.name}</span>
+                <span className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-white/90">Open the wiki →</span>
+              </span>
+            </Link>
+          ) : null}
+        </section>
+      ) : null}
 
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Quizzes</h2>
-          <Link
-            href="/quizzes"
-            data-analytics-event="view_all_click"
-            data-analytics-section="quizzes"
-            className="text-sm font-semibold text-accent underline-offset-2 hover:underline"
-          >
-            View all quizzes
-          </Link>
-        </div>
-        {quizCards.length ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {quizCards.map((card, index) => (
-              <div
-                key={card.code}
-                className="contents"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="home_quizzes"
-                data-analytics-item-id={card.code}
-                data-analytics-item-name={card.title}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="quiz"
+      {/* BROWSE everything */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-semibold text-foreground">Browse everything</h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {browse.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="flex items-center gap-2.5 rounded-lg border border-border/70 bg-card px-3 py-3 transition-colors hover:border-border"
               >
-                <QuizCard {...card} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-muted">No quizzes have been published yet. Check back soon.</p>
-        )}
-      </section>
-
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Checklists</h2>
-          <Link
-            href="/checklists"
-            data-analytics-event="view_all_click"
-            data-analytics-section="checklists"
-            className="text-sm font-semibold text-accent underline-offset-2 hover:underline"
-          >
-            View all checklists
-          </Link>
+                <Icon className="h-5 w-5 text-accent" aria-hidden />
+                <span className="text-sm font-semibold text-foreground">{item.label}</span>
+                <span className="ml-auto text-xs text-muted">{item.count.toLocaleString("en-US")}</span>
+              </Link>
+            );
+          })}
         </div>
-        {checklistCards.length ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {checklistCards.map((card, index) => (
-              <div
-                key={card.id}
-                className="contents"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="home_checklists"
-                data-analytics-item-id={card.slug}
-                data-analytics-item-name={card.title}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="checklist"
-              >
-                <ChecklistCard {...card} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-muted">No public checklists yet. Check back soon.</p>
-        )}
       </section>
-
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Events</h2>
-          <Link
-            href="/events"
-            data-analytics-event="view_all_click"
-            data-analytics-section="events"
-            className="text-sm font-semibold text-accent underline-offset-2 hover:underline"
-          >
-            View all events
-          </Link>
-        </div>
-        {eventsCards.length ? (
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {eventsCards.map(({ id, ...card }, index) => (
-              <div
-                key={id}
-                className="contents"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="home_events"
-                data-analytics-item-id={card.slug}
-                data-analytics-item-name={card.title}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="event"
-              >
-                <EventsPageCard {...card} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-muted">No event hubs have been published yet. Check back soon.</p>
-        )}
-      </section>
-
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Articles</h2>
-          <Link
-            href="/articles"
-            data-analytics-event="view_all_click"
-            data-analytics-section="articles"
-            className="text-sm font-semibold text-accent underline-offset-2 hover:underline"
-          >
-            View all articles
-          </Link>
-        </div>
-        {articleCards.length ? (
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {articleCards.map((article, index) => (
-              <div
-                key={article.id}
-                className="contents"
-                data-analytics-event="select_item"
-                data-analytics-item-list-name="home_articles"
-                data-analytics-item-id={article.slug}
-                data-analytics-item-name={article.title}
-                data-analytics-position={index + 1}
-                data-analytics-content-type="article"
-              >
-                <ArticleCard article={article} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-muted">Articles will appear here after publication.</p>
-        )}
-      </section>
-    </section>
+    </div>
   );
 }
