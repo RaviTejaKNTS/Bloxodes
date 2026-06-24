@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev:local"],
       "port": 3000
+    },
+    {
+      "name": "web-design",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev:design", "-w", "@bloxodes/web"],
+      "port": 5050
     }
   ]
 }

@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { CalendarClock, Clock3, Radio } from "lucide-react";
+import { ContentCard } from "@/components/ContentCard";
 
 type EventCounts = {
   upcoming: number;
@@ -57,12 +56,6 @@ const STATUS_COPY = {
     iconClass: "text-muted"
   }
 } as const;
-
-function normalizeImageUrl(value: string | null): string | null {
-  if (!value) return null;
-  if (value.startsWith("http")) return value;
-  return value.startsWith("/") ? value : `/${value}`;
-}
 
 function parseTarget(value: string | null): number | null {
   if (!value) return null;
@@ -161,8 +154,6 @@ export function EventsPageCard({
   updatedLabel
 }: EventsPageCardProps) {
   const displayUniverse = universeName ?? "Roblox";
-  const normalizedCover = normalizeImageUrl(coverImage);
-  const normalizedIcon = normalizeImageUrl(fallbackIcon);
   const statusCopy = STATUS_COPY[status] ?? STATUS_COPY.none;
   const StatusIcon = statusCopy.icon;
   const timerLabel = useEventTimer({
@@ -171,55 +162,43 @@ export function EventsPageCard({
     endUtc: eventEndUtc,
     fallback: eventTimeLabel
   });
-  const imageUrl = normalizedCover ?? normalizedIcon;
+  const imageUrl = coverImage ?? fallbackIcon;
   const gameTitle = displayUniverse || title || "Roblox events";
   const eventTitle = eventName || title || "Events overview";
 
   return (
-    <Link href={`/events/${slug}`} prefetch={false} className="group block h-full">
-      <article className="flex h-full flex-col rounded-md border border-border/70 bg-card transition-colors hover:border-border">
-        <div className="flex items-start gap-4 p-4">
-          <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md border border-border/60 bg-surface-muted">
-            {imageUrl ? (
-              <Image
-                src={imageUrl}
-                alt={gameTitle}
-                fill
-                sizes="64px"
-                className="object-cover"
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-muted">
-                EV
-              </div>
-            )}
-          </div>
-
-          <div className="min-w-0 flex-1 space-y-3">
-            <div className="space-y-1">
-              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                <span className={`h-2 w-2 rounded-full ${statusCopy.dot}`} aria-hidden />
-                {statusCopy.label}
-              </div>
-              <h3 className="line-clamp-2 text-xl font-semibold leading-tight text-foreground transition-colors group-hover:text-accent">
-                {gameTitle}
-              </h3>
-              <p className="line-clamp-1 text-sm text-muted">{eventTitle}</p>
-            </div>
-
-            <div className="inline-flex max-w-full items-center gap-2 rounded-md border border-border/60 bg-surface px-3 py-2 text-sm font-semibold text-foreground">
-              <StatusIcon className={`h-4 w-4 shrink-0 ${statusCopy.iconClass}`} aria-hidden />
-              <span className="shrink-0 text-muted">{statusCopy.timerLabel}</span>
-              <span className="truncate">{timerLabel}</span>
-            </div>
-          </div>
+    <ContentCard
+      type="events"
+      variant="row"
+      href={`/events/${slug}`}
+      prefetch={false}
+      thumbClassName="border border-border/60"
+      title={gameTitle}
+      titleClassName="text-xl transition-colors group-hover:text-accent"
+      eyebrow={
+        <span className="inline-flex items-center gap-2">
+          <span className={`h-2 w-2 rounded-full ${statusCopy.dot}`} aria-hidden />
+          {statusCopy.label}
+        </span>
+      }
+      subtitle={<p className="line-clamp-1 text-sm text-muted">{eventTitle}</p>}
+      image={{ src: imageUrl, alt: gameTitle, ratio: "1:1" }}
+      imageFallback={
+        <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-muted">EV</div>
+      }
+      liveSlot={
+        <div className="inline-flex max-w-full items-center gap-2 rounded-md border border-border/60 bg-surface px-3 py-2 text-sm font-semibold text-foreground">
+          <StatusIcon className={`h-4 w-4 shrink-0 ${statusCopy.iconClass}`} aria-hidden />
+          <span className="shrink-0 text-muted">{statusCopy.timerLabel}</span>
+          <span className="truncate">{timerLabel}</span>
         </div>
-
+      }
+      footer={
         <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-border/60 px-4 py-3 text-xs text-muted">
           <span>{buildCountsLabel(counts)}</span>
           {updatedLabel ? <span>Updated {updatedLabel}</span> : null}
         </div>
-      </article>
-    </Link>
+      }
+    />
   );
 }

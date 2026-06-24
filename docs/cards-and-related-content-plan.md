@@ -120,10 +120,27 @@ Every detail page ends in a consistent, reason-labeled "everything for this game
 
 ## Build sequence
 
-1. [ ] `ContentCard` primitive + type config + `media`/`row` variants → migrate the 8 cards (visual parity first, then enhancements).
+1. [x] `ContentCard` primitive + `media`/`row`/`overlay` variants → migrate the 8 cards (visual parity). **Done — see Progress below.**
 2. [ ] `<RelatedContent>` module + resolver → swap into all detail pages, add the 3 missing ones.
 3. [ ] Live slots (quiz preview, checklist ring, countdown) as opt-in overlays.
-4. [ ] `overlay` variant + homepage composition (handoff to homepage plan).
+4. [ ] Per-type signatures (icons/accents), card content enhancements, and homepage composition (handoff to homepage plan).
+
+## Progress log
+
+### 2026-06-24 — Card system foundation (step 1) done, at parity
+- New `apps/web/src/components/CardImage.tsx` — single image pipeline (plain `<img>` since `next.config` runs `images.unoptimized`), with onError → `/og-image.png` fallback. Replaces the 3 prior image techniques (next/image, plain img, bg-image).
+- New `apps/web/src/components/ContentCard.tsx` — one shell, three variants (`media` / `row` / `overlay`) + slots (`eyebrow`, `subtitle`, `meta`, `liveSlot`, `footer`, `imageFallback`). Adds `data-card-type` on every card for future styling/analytics.
+- All 8 cards rewritten as thin wrappers over `ContentCard`, prop signatures unchanged so every call site still works:
+  - media: GameCard (codes), ArticleCard, ToolCard, QuizCard, ChecklistCard
+  - overlay: WikiCard
+  - row: CatalogCard, EventsPageCard
+- Verified on `localhost:5050` (prod DB): typecheck clean, no server errors, all 8 types SSR with correct counts, unified `rounded-lg` (events was `rounded-md` before), tool/wiki/catalog cards visually confirmed.
+
+### Deferred to refinement (intentional parity choices, revisit in step 4)
+- **Date format still mixed** — kept the existing `formatUpdatedLabel` behavior (relative for recent, absolute for older; ArticleCard absolute). Plan calls for unifying to relative everywhere.
+- **No type icons/accents yet** — only the `data-card-type` hook is in place.
+- **Catalog metric box** now sits in the row's right-hand column (via `liveSlot`) instead of full-width under the thumbnail — minor layout shift to accept or refine.
+- **Blur-up placeholders dropped** — `bg-surface-muted` placeholder color stands in (next/image blur was cosmetic only under `unoptimized`).
 
 ---
 

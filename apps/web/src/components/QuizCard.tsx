@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { FiCheck, FiClock } from "react-icons/fi";
+import { ContentCard } from "@/components/ContentCard";
 
 type QuizCardProps = {
   code: string;
@@ -65,7 +65,6 @@ async function loadQuizProgressIndex(): Promise<QuizProgressState> {
 
 export function QuizCard({ code, title, universeName, coverImage, updatedAt }: QuizCardProps) {
   const updatedLabel = formatUpdatedLabel(updatedAt);
-  const fallbackImage = "/og-image.png";
   const [progressState, setProgressState] = useState<QuizProgressState>({ status: "loading" });
   const normalizedCode = code.trim().toLowerCase();
 
@@ -81,7 +80,9 @@ export function QuizCard({ code, title, universeName, coverImage, updatedAt }: Q
   }, []);
 
   const progress = progressState.status === "ready" ? progressState.progress.get(normalizedCode) ?? null : null;
-  const hasCompleted = Boolean(progress && typeof progress.lastScore === "number" && typeof progress.lastTotal === "number" && progress.lastTotal > 0);
+  const hasCompleted = Boolean(
+    progress && typeof progress.lastScore === "number" && typeof progress.lastTotal === "number" && progress.lastTotal > 0
+  );
   const statusLabel =
     progressState.status === "ready"
       ? hasCompleted
@@ -93,38 +94,14 @@ export function QuizCard({ code, title, universeName, coverImage, updatedAt }: Q
   const scoreLabel = hasCompleted ? `${progress!.lastScore}/${progress!.lastTotal}` : null;
 
   return (
-    <Link
+    <ContentCard
+      type="quiz"
       href={`/quizzes/${code}`}
-      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-card shadow-none transition-colors hover:border-border"
-    >
-      <div className="relative aspect-square shrink-0 overflow-hidden bg-surface-muted">
-        {coverImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={coverImage}
-            alt={universeName || title}
-            className="h-full w-full object-cover"
-            loading="lazy"
-            decoding="async"
-            onError={(event) => {
-              if (event.currentTarget.src.endsWith(fallbackImage)) return;
-              event.currentTarget.src = fallbackImage;
-            }}
-          />
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={fallbackImage} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
-        )}
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-card via-card/70 to-transparent" aria-hidden />
-      </div>
-
-      <div className="relative -mt-1 flex flex-1 flex-col gap-3 bg-card px-4 pb-4 pt-3">
-        <div className="space-y-2">
-          <p className="mb-0 text-xs font-semibold uppercase tracking-[0.18em] text-foreground/55">{universeName ?? "Roblox"}</p>
-          <h3 className="mb-0 line-clamp-2 text-lg font-semibold leading-snug text-foreground">{title}</h3>
-        </div>
-
-        <div className="mt-auto space-y-2">
+      eyebrow={universeName ?? "Roblox"}
+      title={title}
+      image={{ src: coverImage, alt: universeName || title, ratio: "1:1" }}
+      meta={
+        <>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-foreground/70">
             <span className="inline-flex items-center gap-1.5">
               {hasCompleted ? <FiCheck aria-hidden className="h-3.5 w-3.5 text-green-400" /> : null}
@@ -138,8 +115,8 @@ export function QuizCard({ code, title, universeName, coverImage, updatedAt }: Q
               <span>{updatedLabel}</span>
             </p>
           ) : null}
-        </div>
-      </div>
-    </Link>
+        </>
+      }
+    />
   );
 }

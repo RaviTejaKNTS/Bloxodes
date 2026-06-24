@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { FiClock } from "react-icons/fi";
@@ -9,6 +8,7 @@ import {
   useChecklistProgressIndex,
   useChecklistSession
 } from "@/lib/checklist-progress-client";
+import { ContentCard } from "@/components/ContentCard";
 
 type ChecklistCardProps = {
   id: string;
@@ -32,14 +32,7 @@ function formatUpdatedLabel(updatedAt: string | null): string | null {
   }
 }
 
-export function ChecklistCard({
-  slug,
-  title,
-  universeName,
-  coverImage,
-  updatedAt,
-  itemsCount
-}: ChecklistCardProps) {
+export function ChecklistCard({ slug, title, coverImage, universeName, updatedAt, itemsCount }: ChecklistCardProps) {
   const session = useChecklistSession();
   const progressIndex = useChecklistProgressIndex(session.status === "ready" ? session.userId : null);
   const accountDone =
@@ -47,15 +40,10 @@ export function ChecklistCard({
   const updatedLabel = formatUpdatedLabel(updatedAt);
   const totalItems = typeof itemsCount === "number" ? itemsCount : 0;
   const [localVersion, setLocalVersion] = useState(0);
-  const fallbackImage = "/og-image.png";
-  const handleImgError = (event: React.SyntheticEvent<HTMLImageElement>) => {
-    if (event.currentTarget.src.endsWith(fallbackImage)) return;
-    event.currentTarget.src = fallbackImage;
-  };
 
   const progress = useMemo<Progress>(() => {
     if (session.status !== "ready") {
-      return { done: 0, total: totalItems, percent: totalItems ? 0 : 0 };
+      return { done: 0, total: totalItems, percent: 0 };
     }
     if (session.userId) {
       const clampedDone = Math.min(accountDone, totalItems);
@@ -92,49 +80,24 @@ export function ChecklistCard({
   }, [session.userId, slug]);
 
   const progressLabel =
-    progress.total > 0
-      ? `${progress.done}/${progress.total} tasks completed`
-      : "No tasks tracked yet";
+    progress.total > 0 ? `${progress.done}/${progress.total} tasks completed` : "No tasks tracked yet";
 
   return (
-    <Link
+    <ContentCard
+      type="checklist"
       href={`/checklists/${slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-card shadow-none transition-colors hover:border-border"
-    >
-      <div className="relative aspect-square shrink-0 overflow-hidden bg-surface-muted">
-        {coverImage ? (
-          <img
-            src={coverImage}
-            alt={universeName || title}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-            loading="lazy"
-            decoding="async"
-            onError={handleImgError}
-          />
-        ) : (
-          <img
-            src={fallbackImage}
-            alt=""
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-            loading="lazy"
-            decoding="async"
-          />
-        )}
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-card via-card/70 to-transparent" aria-hidden />
-      </div>
-
-      <div className="relative -mt-1 flex flex-1 flex-col gap-3 bg-card px-4 pb-4 pt-3">
-        <div className="space-y-2">
-          <h3 className="mb-0 line-clamp-2 text-lg font-semibold leading-snug text-foreground">{title}</h3>
-          {updatedLabel ? (
-            <p className="inline-flex items-center gap-1.5 text-xs text-foreground/70">
-              <FiClock aria-hidden className="h-3 w-3" />
-              <span>{updatedLabel}</span>
-            </p>
-          ) : null}
-        </div>
-
-        <div className="mt-auto space-y-2">
+      title={title}
+      image={{ src: coverImage, alt: universeName || title, ratio: "1:1" }}
+      subtitle={
+        updatedLabel ? (
+          <span className="inline-flex items-center gap-1.5">
+            <FiClock aria-hidden className="h-3 w-3" />
+            <span>{updatedLabel}</span>
+          </span>
+        ) : null
+      }
+      liveSlot={
+        <>
           <div className="flex items-center justify-between gap-3 text-xs text-foreground/70">
             <span>{progressLabel}</span>
             <span className="font-medium">{progress.percent}%</span>
@@ -146,8 +109,8 @@ export function ChecklistCard({
               aria-hidden
             />
           </div>
-        </div>
-      </div>
-    </Link>
+        </>
+      }
+    />
   );
 }
