@@ -194,6 +194,20 @@ Problem: progress bars used a `bg-surface-muted` track (`rgb(20,23,29)`) sitting
 - Migrated all 7 usages onto it: ChecklistCard, ChecklistSidebarCard, ChecklistProgressHeader, ChecklistBoard (×2), QuizRunner, Forge crafting calculator. (Some already used `bg-border/70`; now all consistent.)
 - Verified dark mode: track renders `rgba(238,241,247,0.1)` and is clearly visible at 0%.
 
+### 2026-06-24 — Stats consistency (sidebar vs stats page)
+Bug: sidebar rank ≠ stats page rank. Root cause = two rank sources. The stats page (`buildStatsGameDetail`) overrides rank with `loadLatestRank()` (latest `roblox_universe_rank_snapshots_hourly`), while the sidebar used the denormalized `global_playing_rank` column on `stats_game_current_index` (both its SSR seed and the `/api/stats/games/[id]` endpoint via `mapIndexedGame`). CCU was always the same `playing` column.
+- Fix: exported `loadLatestRank`; `getUniverseStatsSummary` (SSR seed) now returns `loadLatestRank` for rank; `/api/stats/games/[universeId]` overrides `game.rank` with `loadLatestRank` (that endpoint is sidebar-only — charts use `/chart` + `/rank-chart`). Did **not** touch `getStatsGameSummaryByUniverseId` itself (reused by list builders in `Promise.all`, would add N queries).
+- Verified: sidebar API rank 16 == stats page #16 for grow-a-garden.
+
+#### Stats freshness / revalidation (findings — NOT changed; needs a decision)
+Same source now, but cache TTLs differ:
+- `/stats/games` index → `revalidate = 0` (always live).
+- `/stats` home → `revalidate = 600`.
+- `/stats/games/[slug]` detail → `revalidate = 3600`; headline numbers are server-rendered (only charts poll), so up to 1h stale.
+- Sidebar → client polls `/api/stats/games/[id]` (force-dynamic, 60s) → fresh ≤60s.
+- `/api/revalidate` *can* revalidate stats paths/tags (`stats`, `stats-games`, `stats-game:<slug>`), but the hourly worker `scripts/universes/update-universe-hourly-stats.ts` never calls it — so nothing pushes stats pages fresh on update.
+Options to make detail pages update on stats refresh (stats page redesign is deferred): (a) lower detail `revalidate`; (b) have the hourly worker hit `/api/revalidate` for refreshed games (precise, uses existing infra, revalidation cost); (c) live-poll the detail headline like the sidebar (touches stats page — defer). **Awaiting decision.**
+
 ### Deferred to refinement (intentional parity choices, revisit in step 4)
 - **Date format still mixed** — kept the existing `formatUpdatedLabel` behavior (relative for recent, absolute for older; ArticleCard absolute). Plan calls for unifying to relative everywhere.
 - **No type icons/accents yet** — only the `data-card-type` hook is in place.

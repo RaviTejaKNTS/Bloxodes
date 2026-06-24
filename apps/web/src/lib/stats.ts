@@ -1472,18 +1472,23 @@ export async function getUniverseStatsSummary(
   universeId: number
 ): Promise<{ rank: number | null; playing: number | null; slug: string | null; iconUrl: string | null } | null> {
   try {
-    const { data, error } = await supabaseAdmin()
-      .from("stats_game_current_index")
-      .select("playing, global_playing_rank, slug, icon_url")
-      .eq("universe_id", universeId)
-      .limit(1);
+    // Rank comes from the same source the stats page uses (latest hourly snapshot)
+    // so the sidebar and the stats page never disagree.
+    const [{ data, error }, latestRank] = await Promise.all([
+      supabaseAdmin()
+        .from("stats_game_current_index")
+        .select("playing, slug, icon_url")
+        .eq("universe_id", universeId)
+        .limit(1),
+      loadLatestRank(universeId)
+    ]);
     if (error) throw error;
     const row = (data ?? [])[0] as
-      | { playing?: number | null; global_playing_rank?: number | null; slug?: string | null; icon_url?: string | null }
+      | { playing?: number | null; slug?: string | null; icon_url?: string | null }
       | undefined;
     if (!row) return null;
     return {
-      rank: row.global_playing_rank ?? null,
+      rank: latestRank ?? null,
       playing: row.playing ?? null,
       slug: row.slug ?? null,
       iconUrl: row.icon_url ?? null
@@ -3044,7 +3049,7 @@ async function loadSimilarGames(game: StatsGame): Promise<StatsGame[]> {
   return attachGrowth(rows.filter((row) => row.universeId !== game.universeId).slice(0, 6));
 }
 
-async function loadLatestRank(universeId: number): Promise<number | null> {
+export async function loadLatestRank(universeId: number): Promise<number | null> {
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from("roblox_universe_rank_snapshots_hourly")

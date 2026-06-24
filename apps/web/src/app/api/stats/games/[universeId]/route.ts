@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getStatsGameSummaryByUniverseId } from "@/lib/stats";
+import { getStatsGameSummaryByUniverseId, loadLatestRank } from "@/lib/stats";
 
 export const dynamic = "force-dynamic";
 
@@ -14,7 +14,9 @@ export async function GET(_request: Request, context: RouteContext) {
     if (!Number.isFinite(id)) {
       return NextResponse.json({ error: "Invalid universe ID" }, { status: 400 });
     }
-    const game = await getStatsGameSummaryByUniverseId(id);
+    const [base, latestRank] = await Promise.all([getStatsGameSummaryByUniverseId(id), loadLatestRank(id)]);
+    // Match the stats page, which displays the latest hourly-snapshot rank.
+    const game = base ? { ...base, rank: latestRank ?? null } : null;
     return NextResponse.json({ game }, {
       headers: {
         "cache-control": "public, max-age=60, stale-while-revalidate=300"
