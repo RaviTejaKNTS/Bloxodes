@@ -65,7 +65,6 @@ function QuizzesPageView({ cards, total }: { cards: ReturnType<typeof mapRowToCa
   return (
     <div className="space-y-8">
       <header className="space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Roblox Quizzes</p>
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
           Roblox quizzes to test in-game knowledge
         </h1>

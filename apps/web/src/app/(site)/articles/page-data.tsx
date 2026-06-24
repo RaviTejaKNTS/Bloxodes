@@ -46,7 +46,6 @@ function ArticlesPageView({
     <div className="space-y-10">
       {showHero ? (
         <header className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Bloxodes Articles</p>
           <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
             Fresh Roblox guides, tips, and updates from Bloxodes
           </h1>

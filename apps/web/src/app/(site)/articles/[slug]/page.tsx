@@ -7,6 +7,7 @@ import "@/styles/article-content.css";
 import { AuthorCard } from "@/components/AuthorCard";
 import { SocialShare } from "@/components/SocialShare";
 import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
+import { MoreArticles } from "@/components/more-content";
 import { CodeBlockEnhancer } from "@/components/CodeBlockEnhancer";
 import { ContentFaq } from "@/components/ContentFaq";
 import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
@@ -324,7 +325,8 @@ async function renderArticlePage(article: ArticleWithRelations) {
       : null;
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
+    <div className="space-y-12">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
       <article className="min-w-0">
         <header className="mb-6 space-y-3">
           <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.25em] text-muted">
@@ -443,6 +445,8 @@ async function renderArticlePage(article: ArticleWithRelations) {
 
         <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="articles" />
       </aside>
+      </div>
+      <MoreArticles excludeSlug={article.slug} />
     </div>
   );
 }

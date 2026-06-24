@@ -12,6 +12,7 @@ import { ContentSlot } from "@/components/ContentSlot";
 import { GameCard } from "@/components/GameCard";
 import { SocialShare } from "@/components/SocialShare";
 import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
+import { MoreEvents } from "@/components/more-content";
 import { ToolCard } from "@/components/ToolCard";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import {
@@ -952,7 +953,8 @@ export async function renderEventsPage({ slug }: { slug: string }) {
   );
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
+    <div className="space-y-12">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
       <article className="min-w-0">
         <header className="mb-6 space-y-3">
           <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.25em] text-muted">
@@ -1122,6 +1124,8 @@ export async function renderEventsPage({ slug }: { slug: string }) {
 
         <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="events" />
       </aside>
+      </div>
+      <MoreEvents excludeSlug={canonicalSlug} />
     </div>
   );
 }

@@ -21,6 +21,7 @@ import { EventsPageCard, type EventsPageCardProps } from "@/components/EventsPag
 import { SocialShare } from "@/components/SocialShare";
 import { ContentSlot } from "@/components/ContentSlot";
 import { GameDiscoverySidebar } from "@/components/game-sidebar/GameDiscoverySidebar";
+import { MoreCodes } from "@/components/more-content";
 import { CodeBlockEnhancer } from "@/components/CodeBlockEnhancer";
 import { monthYear } from "@/lib/date";
 import { sortCodesByFirstSeenDesc } from "@/lib/code-utils";
@@ -724,7 +725,8 @@ export default async function GamePage({ params }: Params) {
       : null;
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
+    <div className="space-y-12">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
       <article className="min-w-0">
         <nav aria-label="Breadcrumb" className="mb-4 text-xs uppercase tracking-[0.25em] text-muted">
           <ol className="flex flex-wrap items-center gap-2">
@@ -970,6 +972,8 @@ export default async function GamePage({ params }: Params) {
 
           <GameDiscoverySidebar universeId={universeId} universeName={universeLabel} currentType="codes" />
         </aside>
+      </div>
+      <MoreCodes excludeSlug={game.slug} />
     </div>
   );
 }

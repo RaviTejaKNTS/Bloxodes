@@ -34,7 +34,6 @@ export default async function EventsIndexPage() {
   return (
     <div className="space-y-10">
       <header className="space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Roblox Events</p>
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
           Event schedules and countdowns for Roblox experiences
         </h1>

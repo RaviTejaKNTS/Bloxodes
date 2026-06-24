@@ -44,7 +44,6 @@ function CodesPageView({
     <div className="space-y-10">
       {showHero ? (
         <header className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Roblox Codes Hub</p>
           <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
             Fresh Roblox game codes, updated as soon as they drop
           </h1>

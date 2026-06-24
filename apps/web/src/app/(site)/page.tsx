@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 };
 
 function abbreviateCount(value: number | null | undefined): string {
-  if (typeof value !== "number" || !Number.isFinite(value)) return "—";
+  if (typeof value !== "number" || !Number.isFinite(value)) return "-";
   const strip = (n: number) => n.toFixed(1).replace(/\.0$/, "");
   if (value < 1000) return String(value);
   if (value < 1_000_000) return `${strip(value / 1000)}K`;
@@ -213,12 +213,11 @@ export default async function HomePage() {
   return (
     <div className="space-y-12">
       <header className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-accent/80">Roblox · live</p>
         <h1 className="max-w-4xl text-3xl font-bold leading-tight text-foreground md:text-4xl">
           Roblox hub for live stats, wikis, active codes, events, quizzes and gameplay checklists
         </h1>
         <p className="max-w-2xl text-sm text-muted md:text-base">
-          Real-time player counts, game wikis, working codes, event countdowns, quizzes and progress checklists — all in one
+          Real-time player counts, game wikis, working codes, event countdowns, quizzes and progress checklists, all in one
           place.
         </p>
       </header>

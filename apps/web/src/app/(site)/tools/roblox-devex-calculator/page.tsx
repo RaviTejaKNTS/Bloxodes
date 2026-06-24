@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MoreTools } from "@/components/more-content";
 import "@/styles/article-content.css";
 import { SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { getToolContentWithDevFallback } from "@/lib/tools";
@@ -211,6 +212,7 @@ export default async function RobloxDevexPage() {
       <div className="sr-only" aria-hidden>
         <p>DevEx minimum: {DEVEX_MIN}</p>
       </div>
+      <MoreTools excludeCode="roblox-devex-calculator" />
     </>
   );
 }

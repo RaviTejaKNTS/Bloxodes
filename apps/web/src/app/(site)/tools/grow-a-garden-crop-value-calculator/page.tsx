@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MoreTools } from "@/components/more-content";
 import "@/styles/article-content.css";
 import { SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { getToolContentWithDevFallback } from "@/lib/tools";
@@ -190,6 +191,7 @@ export default async function GrowGardenCropValueCalculatorPage() {
           fullWidthResponsive
         />
       </div>
+      <MoreTools excludeCode="grow-a-garden-crop-value-calculator" />
     </>
   );
 }

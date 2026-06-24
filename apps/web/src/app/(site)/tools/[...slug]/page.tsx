@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MoreTools } from "@/components/more-content";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
 import { markdownToPlainText } from "@/lib/markdown";
@@ -320,11 +321,17 @@ export default async function ToolFallbackPage({ params }: PageProps) {
   );
 
   if (!hasSidebar) {
-    return mainContent;
+    return (
+      <div className="space-y-12">
+        {mainContent}
+        <MoreTools excludeCode={code} />
+      </div>
+    );
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
+    <div className="space-y-12">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
       {mainContent}
       <aside className="space-y-4">
         <SocialShare
@@ -431,6 +438,8 @@ export default async function ToolFallbackPage({ params }: PageProps) {
           </section>
         ) : null}
       </aside>
+      </div>
+      <MoreTools excludeCode={code} />
     </div>
   );
 }

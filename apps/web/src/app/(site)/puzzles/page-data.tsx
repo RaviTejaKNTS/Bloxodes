@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { FiClock } from "react-icons/fi";
+import { MorePuzzles } from "@/components/more-content";
 import type { ContentFaqItem } from "@/components/ContentFaq";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
@@ -188,7 +189,6 @@ export async function renderPuzzlesIndex({ pages }: Awaited<ReturnType<typeof lo
   return (
     <div className="space-y-8">
       <header className="space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Puzzle Answers</p>
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">Daily puzzle answers in one clean place</h1>
         <p className="max-w-2xl text-base text-muted md:text-lg">{PUZZLES_DESCRIPTION}</p>
       </header>
@@ -325,6 +325,7 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPage) }} />
+      <MorePuzzles excludeSlug={page.slug} />
     </article>
   );
 }
@@ -350,7 +351,6 @@ export async function renderPuzzleArchive(data: NonNullable<Awaited<ReturnType<t
         ]}
       />
       <header className="space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Puzzle archive</p>
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
           {page.title} for {formatDate(answer.answer_date)}
         </h1>

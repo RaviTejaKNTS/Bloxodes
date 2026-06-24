@@ -214,7 +214,6 @@ export default async function CatalogIndexPage() {
   return (
     <div className="catalog-surface space-y-10">
       <header className="space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Catalog</p>
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
           Roblox catalogs organized by item type
         </h1>

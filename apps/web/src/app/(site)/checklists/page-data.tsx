@@ -105,7 +105,6 @@ function ChecklistsPageView({
     <div className="space-y-8">
       {showHero ? (
         <header className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Roblox Checklists</p>
           <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">
             Guided Roblox checklists to track your progress
           </h1>

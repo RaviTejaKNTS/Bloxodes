@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MoreTools } from "@/components/more-content";
 
 import "@/styles/article-content.css";
 
@@ -185,6 +186,7 @@ export default async function GrowGarden2CropMutationCalculatorPage() {
           fullWidthResponsive
         />
       </div>
+      <MoreTools excludeCode="grow-a-garden-2-crop-mutation-calculator" />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MoreTools } from "@/components/more-content";
 import "@/styles/article-content.css";
 import { ContentFaq } from "@/components/ContentFaq";
 import { ContentSlot } from "@/components/ContentSlot";
@@ -208,6 +209,7 @@ export default async function WizardAlchemyPotionPlannerPage() {
         adFormat="auto"
         fullWidthResponsive
       />
+      <MoreTools excludeCode="wizard-alchemy-potion-planner" />
     </>
   );
 }
