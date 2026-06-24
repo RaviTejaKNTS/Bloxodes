@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { CalendarClock, Clock3, Radio } from "lucide-react";
 import { ContentCard } from "@/components/ContentCard";
 
 type EventCounts = {
@@ -25,37 +24,6 @@ export type EventsPageCardProps = {
   counts: EventCounts;
   updatedLabel: string | null;
 };
-
-const STATUS_COPY = {
-  upcoming: {
-    label: "Starts in",
-    standalone: "Upcoming",
-    icon: CalendarClock,
-    pill: "border-accent/30 bg-accent/10 text-accent",
-    dot: "bg-accent"
-  },
-  current: {
-    label: "Live now",
-    standalone: "Live now",
-    icon: Radio,
-    pill: "border-emerald-400/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-    dot: "bg-emerald-400"
-  },
-  past: {
-    label: "Ended",
-    standalone: "Last event",
-    icon: Clock3,
-    pill: "border-border/60 bg-surface-muted text-muted",
-    dot: "bg-muted"
-  },
-  none: {
-    label: "Events hub",
-    standalone: "Events hub",
-    icon: CalendarClock,
-    pill: "border-border/60 bg-surface-muted text-muted",
-    dot: "bg-muted"
-  }
-} as const;
 
 function parseTarget(value: string | null): number | null {
   if (!value) return null;
@@ -138,8 +106,6 @@ export function EventsPageCard({
   status
 }: EventsPageCardProps) {
   const displayUniverse = universeName ?? "Roblox";
-  const statusCopy = STATUS_COPY[status] ?? STATUS_COPY.none;
-  const StatusIcon = statusCopy.icon;
   const timerLabel = useEventTimer({
     status,
     startUtc: eventStartUtc,
@@ -151,39 +117,32 @@ export function EventsPageCard({
   const eventTitle = eventName || title || "Events overview";
 
   const hasTimer = Boolean(timerLabel) && timerLabel !== "No event time";
-  let pillText: string;
-  if (status === "current") {
-    pillText = hasTimer ? `Live now · ${timerLabel}` : "Live now";
-  } else if (status === "upcoming") {
-    pillText = hasTimer ? `Starts in ${timerLabel}` : "Upcoming";
-  } else if (status === "past") {
-    pillText = hasTimer ? `Ended ${timerLabel}` : "Last event";
-  } else {
-    pillText = "Events hub";
-  }
+  const useTimerHero = (status === "current" || status === "upcoming") && hasTimer;
+
+  const eyebrowText =
+    status === "current" ? "Live now" : status === "upcoming" ? "Starts in" : status === "past" ? "Last event" : "Events";
+  const heroText = useTimerHero ? timerLabel : gameTitle;
+  const subtitleText = useTimerHero ? gameTitle : eventTitle;
+  const heroColor = !useTimerHero
+    ? ""
+    : status === "current"
+      ? "text-emerald-500 dark:text-emerald-400"
+      : "text-accent";
+  const heroSize = useTimerHero ? "text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl" : "text-xl font-bold";
 
   return (
     <ContentCard
       type="events"
-      variant="row"
+      variant="overlay"
+      overlayAlign="center"
+      overlayScrim
       href={`/events/${slug}`}
       prefetch={false}
-      thumbClassName="border border-border/60"
-      title={gameTitle}
-      titleClassName="transition-colors group-hover:text-accent"
-      subtitle={<p className="line-clamp-1 text-sm text-muted">{eventTitle}</p>}
-      image={{ src: imageUrl, alt: gameTitle, ratio: "1:1" }}
-      imageFallback={
-        <div className="flex h-full w-full items-center justify-center text-xs font-semibold text-muted">EV</div>
-      }
-      liveSlot={
-        <span
-          className={`inline-flex max-w-full items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold ${statusCopy.pill}`}
-        >
-          <StatusIcon className="h-3.5 w-3.5 shrink-0" aria-hidden />
-          <span className="truncate">{pillText}</span>
-        </span>
-      }
+      image={{ src: imageUrl, alt: gameTitle, ratio: "16:9" }}
+      eyebrow={eyebrowText}
+      title={heroText}
+      titleClassName={`${heroSize} ${heroColor}`}
+      subtitle={subtitleText}
     />
   );
 }

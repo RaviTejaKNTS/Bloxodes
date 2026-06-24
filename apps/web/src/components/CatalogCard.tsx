@@ -2,13 +2,13 @@ import { Gift, Image as ImageIcon, Music, Package, Palette, Shirt, Smile, Sparkl
 import { ContentCard } from "@/components/ContentCard";
 import type { CatalogIconKey } from "@/lib/catalog-card-meta";
 
-const TONE_STYLES = {
-  indigo: { ring: "border-accent/20", text: "text-accent" },
-  emerald: { ring: "border-emerald-400/30", text: "text-emerald-600 dark:text-emerald-400" },
-  amber: { ring: "border-amber-400/30", text: "text-amber-600 dark:text-amber-400" }
+const TONE_BG = {
+  indigo: "bg-gradient-to-br from-indigo-500 to-indigo-700",
+  emerald: "bg-gradient-to-br from-emerald-500 to-emerald-700",
+  amber: "bg-gradient-to-br from-amber-500 to-amber-600"
 } as const;
 
-type Tone = keyof typeof TONE_STYLES;
+type Tone = keyof typeof TONE_BG;
 
 const ICONS: Record<CatalogIconKey, typeof Music> = {
   music: Music,
@@ -25,60 +25,32 @@ const ICONS: Record<CatalogIconKey, typeof Music> = {
 type CatalogCardProps = {
   href: string;
   title: string;
-  description: string;
   count?: number | null;
-  unit?: string | null;
   iconKey?: CatalogIconKey | null;
-  updatedLabel?: string | null;
-  coverImage?: string | null;
   tone?: Tone;
 };
 
-export function CatalogCard({
-  href,
-  title,
-  description,
-  count,
-  unit,
-  iconKey,
-  updatedLabel,
-  coverImage,
-  tone = "indigo"
-}: CatalogCardProps) {
-  const toneStyles = TONE_STYLES[tone] ?? TONE_STYLES.indigo;
-  const Icon = iconKey ? ICONS[iconKey] : null;
+export function CatalogCard({ href, title, count, iconKey, tone = "indigo" }: CatalogCardProps) {
+  const Icon = iconKey ? ICONS[iconKey] : Sparkles;
+  const toneBg = TONE_BG[tone] ?? TONE_BG.indigo;
   const hasCount = typeof count === "number" && Number.isFinite(count);
 
   return (
     <ContentCard
       type="catalog"
-      variant="row"
+      variant="overlay"
+      overlayAlign="center"
+      overlayTextClassName="text-white"
       href={href}
-      className="bg-surface hover:border-accent/55"
-      thumbClassName={`border ${toneStyles.ring} bg-background/70`}
-      title={title}
-      titleClassName="transition group-hover:text-accent"
-      image={{ src: coverImage, alt: title, ratio: "1:1" }}
+      image={{ src: null, alt: title, ratio: "16:9" }}
       imageFallback={
-        Icon ? (
-          <div className="flex h-full w-full items-center justify-center">
-            <Icon className={`h-7 w-7 ${toneStyles.text}`} aria-hidden />
-          </div>
-        ) : undefined
+        <div className={`absolute inset-0 ${toneBg}`}>
+          <Icon className="absolute -bottom-4 -right-3 h-28 w-28 text-white/15" aria-hidden />
+        </div>
       }
-      subtitle={
-        hasCount ? (
-          <p className="mb-0">
-            <span className="text-xl font-semibold text-foreground">{count!.toLocaleString("en-US")}</span>{" "}
-            {unit ? <span className="text-sm text-muted">{unit}</span> : null}
-          </p>
-        ) : (
-          <p className="line-clamp-2 text-sm text-muted">{description}</p>
-        )
-      }
-      meta={
-        updatedLabel ? <p className="mb-0 text-xs text-muted">Updated {updatedLabel}</p> : null
-      }
+      title={hasCount ? count!.toLocaleString("en-US") : title}
+      titleClassName={hasCount ? "text-3xl font-bold tracking-tight sm:text-4xl" : "text-xl font-bold"}
+      subtitle={hasCount ? title : null}
     />
   );
 }

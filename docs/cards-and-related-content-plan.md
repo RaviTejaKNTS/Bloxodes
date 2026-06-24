@@ -146,6 +146,14 @@ Every detail page ends in a consistent, reason-labeled "everything for this game
 - Counts are wired only for catalogs in `CATALOG_CONFIG` (the avatar/items family + music). Color codes, decal IDs, admin commands show name+icon but no count — add their sources later if wanted.
 - Short labels live in `CATALOG_CONFIG` — easy to tweak wording.
 
+### 2026-06-24 — Visual redesign of catalog / tool / event cards (round 2)
+Feedback: round 1 added info but kept the same shapes → read as "more text, more clumsy". Round 2 makes them visual, lower-text.
+- `ContentCard` extended: new **`bar`** variant (edge-to-edge image left + compact body) and **centered overlay** mode (`overlayAlign="center"`, optional `overlayScrim`, `overlayTextClassName`) for big hero text over imagery.
+- **Events** → centered-overlay tile (16:9) modeled on the `EventCountdown` hero: dimmed game art + scrim, small uppercase status eyebrow, **big countdown as hero** (accent=upcoming, emerald=live), game name below. Past/art-less events show game name as hero on a clean dark card. Dropped the row layout, pill, footer.
+- **Catalogs** → vibrant tone-gradient tile (indigo/emerald/amber) with a large faded category icon, **big count as hero** + clean name below (e.g. "58,668" / "Roblox Music IDs"). Removed the repeated unit, description, and updated line.
+- **Tools** → compact horizontal `bar` card: small edge-to-edge image left, tool name + updated right. Dropped the description and type/game chips (wrong direction — tools want scannable, not dense).
+- Verified on `localhost:5050` (prod DB): typecheck clean, no server errors; catalog counts render live; events countdowns tick; tools compact.
+
 ### Deferred to refinement (intentional parity choices, revisit in step 4)
 - **Date format still mixed** — kept the existing `formatUpdatedLabel` behavior (relative for recent, absolute for older; ArticleCard absolute). Plan calls for unifying to relative everywhere.
 - **No type icons/accents yet** — only the `data-card-type` hook is in place.

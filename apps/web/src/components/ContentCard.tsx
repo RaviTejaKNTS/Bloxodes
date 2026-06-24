@@ -6,19 +6,20 @@ import { cn } from "@/lib/utils";
 /**
  * ContentCard — the single card shell for every content type.
  *
- * It unifies the *foundation* (border, radius, background, image pipeline,
- * body layout, hover) across all cards, while each content type keeps its
- * *personality* by passing distinct content through slots:
- *   - eyebrow   small uppercase label above the title (universe, category, status)
- *   - subtitle  line under the title (description, "updated" line)
- *   - meta      stat row pinned to the bottom of the body (active codes, score)
- *   - liveSlot  dynamic widget pinned to the bottom (progress bar, countdown)
- *   - footer    supplementary strip rendered OUTSIDE the link (author, counts)
+ * Unifies the *foundation* (border, radius, background, image pipeline, body
+ * layout, hover) while each type keeps its *personality* through slots:
+ *   - eyebrow   small label above the title
+ *   - subtitle  line under the title
+ *   - meta      stat row pinned to the bottom of the body
+ *   - liveSlot  dynamic widget pinned to the bottom (progress bar)
+ *   - footer    supplementary strip rendered OUTSIDE the link
  *
- * Three layout variants:
+ * Layout variants:
  *   - media    image-on-top vertical card (grids / index pages)
- *   - row      small thumbnail + horizontal body (sidebars / related rails)
- *   - overlay  title rendered over a full-bleed image (spotlights / wiki)
+ *   - row      small thumbnail + horizontal body (sidebars)
+ *   - bar      edge-to-edge image on the left + compact body (tools)
+ *   - overlay  title over a full-bleed image; `overlayAlign` picks bottom
+ *              (wiki) or center (events / catalogs — big hero text)
  */
 
 export type ContentCardType =
@@ -31,7 +32,7 @@ export type ContentCardType =
   | "events"
   | "article";
 
-export type ContentCardVariant = "media" | "row" | "overlay";
+export type ContentCardVariant = "media" | "row" | "bar" | "overlay";
 
 type ImageRatio = "16:9" | "1:1" | "1200/675";
 
@@ -65,12 +66,19 @@ type ContentCardProps = {
     ratio?: ImageRatio;
     priority?: boolean;
   };
-  /** Rendered in the image area when `image.src` is absent (e.g. gradient tile). */
+  /** Rendered in the image area when `image.src` is absent. */
   imageFallback?: ReactNode;
 
-  /** Outer container override (background/hover tweaks per type). */
+  /** overlay only: where the hero text sits. */
+  overlayAlign?: "bottom" | "center";
+  /** overlay center only: translucent scrim over photo backgrounds for legibility. */
+  overlayScrim?: boolean;
+  /** overlay center only: base text color for the centered block. */
+  overlayTextClassName?: string;
+
+  /** Outer container override. */
   className?: string;
-  /** Row variant thumbnail wrapper override (e.g. tone ring). */
+  /** row variant thumbnail wrapper override. */
   thumbClassName?: string;
 };
 
@@ -105,6 +113,9 @@ export function ContentCard({
   footer,
   image,
   imageFallback,
+  overlayAlign = "bottom",
+  overlayScrim = false,
+  overlayTextClassName,
   className,
   thumbClassName
 }: ContentCardProps) {
@@ -113,34 +124,95 @@ export function ContentCard({
   // ---------- OVERLAY ----------
   if (variant === "overlay") {
     const ratio = RATIO_CLASS[image?.ratio ?? "1200/675"];
+    const background = image?.src ? (
+      <CardImage
+        src={image.src}
+        alt={image.alt}
+        priority={image.priority}
+        className="transition duration-700 group-hover:scale-[1.02]"
+      />
+    ) : (
+      imageFallback ?? (
+        <div className="absolute inset-0 bg-gradient-to-br from-[rgba(var(--color-accent),0.85)] via-[rgba(var(--color-accent-dark),0.7)] to-[rgba(var(--color-foreground),0.55)]" />
+      )
+    );
+
     return (
       <div
         {...dataType}
         className={cn(OUTER_BASE, "border-border/50 bg-surface-muted/40 hover:border-accent/60", className)}
       >
-        <Link href={href} prefetch={prefetch} className="group/link block h-full">
+        <Link href={href} prefetch={prefetch} className="block h-full">
           <div className={cn("relative w-full overflow-hidden bg-surface-muted", ratio)}>
+            {background}
+
+            {overlayAlign === "center" ? (
+              <>
+                {overlayScrim ? <div className="absolute inset-0 bg-white/80 dark:bg-black/75" aria-hidden /> : null}
+                <div
+                  className={cn(
+                    "absolute inset-0 z-10 flex items-center justify-center p-5 text-center",
+                    overlayTextClassName ?? "text-foreground dark:text-white"
+                  )}
+                >
+                  <div className="w-full space-y-1.5">
+                    {eyebrow ? (
+                      <p className="line-clamp-1 text-[11px] font-semibold uppercase tracking-[0.28em] opacity-80">
+                        {eyebrow}
+                      </p>
+                    ) : null}
+                    <Title as={titleAs} className={cn("text-3xl font-bold tracking-tight sm:text-4xl", titleClassName)}>
+                      {title}
+                    </Title>
+                    {subtitle ? <div className="line-clamp-1 text-sm opacity-80">{subtitle}</div> : null}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 via-black/35 to-transparent" aria-hidden />
+                <div className="absolute inset-x-0 bottom-0 p-3">
+                  {eyebrow ? (
+                    <p className="mb-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/70">{eyebrow}</p>
+                  ) : null}
+                  <Title as={titleAs} className={cn("text-base text-white drop-shadow-md", titleClassName)}>
+                    {title}
+                  </Title>
+                </div>
+              </>
+            )}
+          </div>
+        </Link>
+        {footer}
+      </div>
+    );
+  }
+
+  // ---------- BAR (edge-to-edge image left, compact body) ----------
+  if (variant === "bar") {
+    return (
+      <div {...dataType} className={cn(OUTER_BASE, "border-border/70 hover:border-border", className)}>
+        <Link href={href} prefetch={prefetch} className="flex flex-1 items-stretch">
+          <div className="relative w-20 shrink-0 overflow-hidden bg-surface-muted">
             {image?.src ? (
               <CardImage
                 src={image.src}
                 alt={image.alt}
-                priority={image.priority}
-                className="transition duration-700 group-hover:scale-[1.01]"
+                priority={image?.priority}
+                className="transition duration-500 group-hover:scale-[1.04]"
               />
             ) : (
-              imageFallback ?? (
-                <div className="absolute inset-0 bg-gradient-to-br from-[rgba(var(--color-accent),0.85)] via-[rgba(var(--color-accent-dark),0.7)] to-[rgba(var(--color-foreground),0.55)]" />
-              )
+              imageFallback ?? <CardImage src={null} alt={image?.alt ?? ""} />
             )}
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 via-black/35 to-transparent" aria-hidden />
-            <div className="absolute inset-x-0 bottom-0 p-3">
-              {eyebrow ? (
-                <p className="mb-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/70">{eyebrow}</p>
-              ) : null}
-              <Title as={titleAs} className={cn("text-base text-white drop-shadow-md", titleClassName)}>
-                {title}
-              </Title>
-            </div>
+          </div>
+          <div className="flex min-w-0 flex-1 flex-col justify-center gap-1 px-4 py-3">
+            {eyebrow ? (
+              <p className="mb-0 text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/55">{eyebrow}</p>
+            ) : null}
+            <Title as={titleAs} className={cn("line-clamp-1 text-base", titleClassName)}>
+              {title}
+            </Title>
+            {subtitle ? <div className="text-xs text-foreground/70">{subtitle}</div> : null}
           </div>
         </Link>
         {footer}
