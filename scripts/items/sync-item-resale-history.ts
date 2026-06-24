@@ -6,6 +6,7 @@ import { addHours, chunkArray, fetchResaleData, normalizeNumber, readNumber, toB
 
 type ResaleCandidate = {
   asset_id: number;
+  item_type: string | null;
   last_resale_data_fetched_at: string | null;
 };
 
@@ -54,9 +55,11 @@ async function loadCandidates(options: Options): Promise<ResaleCandidate[]> {
   const cutoff = new Date(Date.now() - options.maxAgeHours * 60 * 60 * 1000).toISOString();
   const { data, error } = await supabaseAdmin()
     .from("roblox_catalog_items")
-    .select("asset_id,last_resale_data_fetched_at")
+    .select("asset_id,item_type,last_resale_data_fetched_at")
     .eq("is_deleted", false)
-    .or("has_resellers.eq.true,lowest_resale_price_robux.gt.0,collectible_item_id.not.is.null")
+    .eq("item_type", "Asset")
+    .gt("asset_id", 0)
+    .or("has_resellers.eq.true,lowest_resale_price_robux.gt.0")
     .or(`last_resale_data_fetched_at.is.null,last_resale_data_fetched_at.lt.${cutoff}`)
     .order("last_resale_data_fetched_at", { ascending: true, nullsFirst: true })
     .order("lowest_resale_price_robux", { ascending: false, nullsFirst: false })

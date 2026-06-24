@@ -42,6 +42,7 @@ const DETAILS_BATCH = readNumber(process.env.ROBLOX_ITEM_STATS_DETAILS_BATCH, 10
 const DEFAULT_LIMIT = readNumber(process.env.ROBLOX_ITEM_STATS_LIMIT, 200);
 const THUMBNAIL_SIZE = process.env.ROBLOX_ITEM_STATS_THUMBNAIL_SIZE ?? "420x420";
 const THUMBNAIL_FORMAT = process.env.ROBLOX_ITEM_STATS_THUMBNAIL_FORMAT ?? "Png";
+const LEASE_MINUTES = readNumber(process.env.ROBLOX_ITEM_STATS_REFRESH_LEASE_MINUTES, 45);
 
 function parseTier(value: string | undefined): Options["tier"] {
   const normalized = (value ?? "HOT").toUpperCase();
@@ -138,24 +139,30 @@ async function loadItems(options: Options): Promise<ItemStatsSourceRow[]> {
     favorite_count,has_resellers,total_quantity,units_available_for_consumption,
     quantity_limit_per_user,sale_location_type,off_sale_deadline,item_status,
     item_restrictions,bundled_items,raw_catalog_json,raw_economy_json,
-    item_stats_tier,next_item_stats_refresh_at,item_stats_refresh_attempt_count,
+    item_stats_tier,next_item_stats_refresh_at,item_stats_refresh_locked_at,item_stats_refresh_locked_by,item_stats_refresh_attempt_count,
     last_item_stats_refreshed_at,last_resale_data_fetched_at,
     last_thumbnail_health_checked_at,thumbnail_http_status,thumbnail_last_error
   `;
+  const nowIso = new Date().toISOString();
+  const leaseCutoff = new Date(Date.now() - LEASE_MINUTES * 60 * 1000).toISOString();
 
   let query = supabaseAdmin()
     .from("roblox_catalog_items")
     .select(select)
     .eq("is_deleted", false)
+    .or(`item_stats_refresh_locked_at.is.null,item_stats_refresh_locked_at.lt.${leaseCutoff}`)
     .order("next_item_stats_refresh_at", { ascending: true, nullsFirst: true })
     .order("last_item_stats_refreshed_at", { ascending: true, nullsFirst: true })
+    .order("favorite_count", { ascending: false, nullsFirst: false })
+    .order("lowest_resale_price_robux", { ascending: false, nullsFirst: false })
+    .order("asset_id", { ascending: true })
     .limit(options.limit);
 
   if (options.assetIds.length) {
     query = query.in("asset_id", Array.from(new Set(options.assetIds)));
   } else {
     if (options.tier !== "ALL") query = query.eq("item_stats_tier", options.tier);
-    query = query.or(`next_item_stats_refresh_at.is.null,next_item_stats_refresh_at.lte.${new Date().toISOString()}`);
+    query = query.or(`next_item_stats_refresh_at.is.null,next_item_stats_refresh_at.lte.${nowIso}`);
   }
 
   const { data, error } = await query;
@@ -166,6 +173,7 @@ async function loadItems(options: Options): Promise<ItemStatsSourceRow[]> {
 async function claimRows(rows: ItemStatsSourceRow[], workerId: string, dryRun: boolean) {
   if (!rows.length || dryRun) return;
   const nowIso = new Date().toISOString();
+  const leaseCutoff = new Date(Date.now() - LEASE_MINUTES * 60 * 1000).toISOString();
   const { error } = await supabaseAdmin()
     .from("roblox_catalog_items")
     .update({
@@ -173,7 +181,8 @@ async function claimRows(rows: ItemStatsSourceRow[], workerId: string, dryRun: b
       item_stats_refresh_locked_by: workerId,
       last_item_stats_refresh_error: null
     })
-    .in("asset_id", rows.map((row) => row.asset_id));
+    .in("asset_id", rows.map((row) => row.asset_id))
+    .or(`item_stats_refresh_locked_at.is.null,item_stats_refresh_locked_at.lt.${leaseCutoff}`);
   if (error) throw new Error(`Failed to claim item stats rows: ${error.message}`);
 }
 

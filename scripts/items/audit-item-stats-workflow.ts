@@ -67,13 +67,15 @@ async function main() {
       },
       resale: {
         candidates: await countRows("roblox_catalog_items", "resale candidates", (query) =>
-          query.eq("is_deleted", false).or("has_resellers.eq.true,lowest_resale_price_robux.gt.0,collectible_item_id.not.is.null")
+          query.eq("is_deleted", false).eq("item_type", "Asset").gt("asset_id", 0).or("has_resellers.eq.true,lowest_resale_price_robux.gt.0")
         ),
         points: await countRows("roblox_catalog_item_resale_points", "resale points"),
         staleOver30d: await countRows("roblox_catalog_items", "resale stale", (query) =>
           query
             .eq("is_deleted", false)
-            .or("has_resellers.eq.true,lowest_resale_price_robux.gt.0,collectible_item_id.not.is.null")
+            .eq("item_type", "Asset")
+            .gt("asset_id", 0)
+            .or("has_resellers.eq.true,lowest_resale_price_robux.gt.0")
             .or(`last_resale_data_fetched_at.is.null,last_resale_data_fetched_at.lt.${stale30d}`)
         )
       }

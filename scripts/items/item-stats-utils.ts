@@ -38,6 +38,8 @@ export type ItemStatsSourceRow = {
   raw_economy_json: Record<string, unknown> | null;
   item_stats_tier: ItemStatsTier | string | null;
   next_item_stats_refresh_at: string | null;
+  item_stats_refresh_locked_at: string | null;
+  item_stats_refresh_locked_by: string | null;
   item_stats_refresh_attempt_count: number | null;
   last_item_stats_refreshed_at: string | null;
   last_resale_data_fetched_at: string | null;
@@ -347,9 +349,6 @@ export function assignItemStatsTier(row: {
   last_item_stats_refreshed_at?: string | null;
   thumbnail_http_status?: number | null;
 }): { tier: ItemStatsTier; reason: string; refreshHours: number } {
-  if (!row.name || !row.category || !row.subcategory || row.favorite_count == null || !row.last_item_stats_refreshed_at) {
-    return { tier: "NEW", reason: "missing_or_never_refreshed", refreshHours: 1 };
-  }
   if ((row.thumbnail_http_status ?? 0) >= 400) {
     return { tier: "BROKEN_MEDIA", reason: "thumbnail_http_error", refreshHours: 1 };
   }
@@ -361,6 +360,9 @@ export function assignItemStatsTier(row: {
   }
   if ((row.favorite_count ?? 0) >= 10_000) {
     return { tier: "WARM", reason: "moderate_favorites", refreshHours: 12 };
+  }
+  if (!row.name || !row.category || !row.subcategory || row.favorite_count == null || !row.last_item_stats_refreshed_at) {
+    return { tier: "NEW", reason: "missing_or_never_refreshed", refreshHours: 1 };
   }
   return { tier: "COLD", reason: "long_tail", refreshHours: 72 };
 }

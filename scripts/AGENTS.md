@@ -66,11 +66,12 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - `music/`: music ID collection, import, enrichment, verification, thumbnails.
 - `items/`: public `/stats/items` automation and read-model maintenance.
   - `assign-item-stats-tier.ts` classifies Roblox marketplace rows into `NEW`, `HOT`, `WARM`, `COLD`, `TRADE`, or `BROKEN_MEDIA`; it is dry-run by default and writes only with `--apply`.
-  - `update-item-hourly-stats.ts` refreshes public Roblox catalog detail data, thumbnails, optional economy detail data, and hourly item snapshots. Use tiered runs such as `npm run stats:items:refresh -- --tier TRADE --limit 180`; use `--asset-id <id>` for targeted repairs.
-  - `sync-item-resale-history.ts` fetches Roblox public resale price/volume points for resale-capable items and updates resale freshness markers.
+  - `update-item-hourly-stats.ts` refreshes public Roblox catalog detail data, thumbnails, optional economy detail data, and hourly item snapshots. It is lease-aware and prioritizes high-favorite/high-resale due rows within each tier. Use tiered runs such as `npm run stats:items:refresh -- --tier TRADE --limit 180`; use `--asset-id <id>` for targeted repairs.
+  - `sync-item-resale-history.ts` fetches Roblox public resale price/volume points for resale-capable asset rows and updates resale freshness markers.
   - `rollup-item-daily-stats.ts` rolls hourly snapshots into daily open/close/min/max rows; use `--date yesterday --finalize` after the UTC day ends.
   - `rebuild-stats-item-indexes.ts` calls `refresh_stats_item_current_indexes()` and queues `/stats/items` revalidation; run it after bulk item refreshes.
   - `audit-item-stats-workflow.ts` reports item stats freshness, index coverage, hourly/daily rows, resale coverage, and broken media counts.
+  - Recurring item stats refresh should run on the VPS stats worker beside games stats. GitHub Actions are a manual fallback only because Roblox item endpoints rate-limit shared GitHub runner IPs aggressively.
 - `posts/`: outbound posting jobs.
 - `puzzles/`: daily puzzle answer collectors for `/puzzles`, writing durable answer rows into `puzzle_answers`.
   - `sync-puzzles.ts` syncs Wordle, Connections, Strands, Spelling Bee, Letter Boxed, NYT Sudoku, NYT Pips, Contexto, Letroso, and LinkedIn puzzle answers. Use `npm run sync:puzzles -- --dry-run` before writing. Pass `-- --skip-linkedin` when `LINKEDIN_LI_AT` is unavailable or stale.

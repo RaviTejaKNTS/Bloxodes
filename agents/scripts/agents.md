@@ -115,8 +115,8 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Collect all catalog item families | multiple catalog collectors | `npm run collect:catalog-items` |
 | Enrich catalog items | `scripts/catalog/enrich-roblox-catalog-items.ts` | `npm run enrich:catalog-items` |
 | Assign public item stats tiers | `scripts/items/assign-item-stats-tier.ts` | `npm run stats:items:tier -- --apply`; dry-run by default without `--apply` |
-| Refresh hourly public item stats | `scripts/items/update-item-hourly-stats.ts` | `npm run stats:items:refresh -- --tier TRADE --limit 180`; refreshes Roblox catalog details, thumbnails, hourly snapshots, and optionally item indexes |
-| Sync item resale history | `scripts/items/sync-item-resale-history.ts` | `npm run stats:items:resale -- --limit 60 --max-age-hours 24`; fetches public Roblox resale price and volume points for resale-capable items |
+| Refresh hourly public item stats | `scripts/items/update-item-hourly-stats.ts` | `npm run stats:items:refresh -- --tier TRADE --limit 180`; refreshes Roblox catalog details, thumbnails, hourly snapshots, and optionally item indexes. Recurring runs belong on the VPS stats worker; GitHub is manual fallback only. |
+| Sync item resale history | `scripts/items/sync-item-resale-history.ts` | `npm run stats:items:resale -- --limit 60 --max-age-hours 24`; fetches public Roblox resale price and volume points for resale-capable asset rows |
 | Roll up item daily stats | `scripts/items/rollup-item-daily-stats.ts` | `npm run stats:items:rollup-daily -- --date yesterday --finalize` |
 | Rebuild item stats indexes | `scripts/items/rebuild-stats-item-indexes.ts` | `npm run stats:items:index:refresh`; rebuilds `/stats/items` read indexes and queues stats revalidation |
 | Audit item stats workflow | `scripts/items/audit-item-stats-workflow.ts` | `npm run stats:items:audit`; reports current index, hourly, daily, resale, stale, due, and broken-media counts |

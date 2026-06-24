@@ -2,9 +2,8 @@ name: Roblox Item Stats Refresh
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "10 * * * *"
-    - cron: "40 * * * *"
+  # Scheduled item stats refresh runs on the VPS stats worker. Keep this workflow
+  # manual-only so GitHub runner IP limits do not throttle Roblox item endpoints.
 
 concurrency:
   group: roblox-item-stats-refresh
@@ -65,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     needs: refresh-items
-    if: always() && (github.event.schedule == '10 * * * *' || github.event_name == 'workflow_dispatch')
+    if: always()
     env:
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
