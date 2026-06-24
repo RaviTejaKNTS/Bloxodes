@@ -52,6 +52,40 @@ describe("Beebom code parsing", () => {
     ]);
   });
 
+  it("does not treat troubleshooting headings as working code sections", () => {
+    const result = parseBeebomHtml(
+      page(`
+        <h2>All New Anime Card Farm Codes</h2>
+        <ul>
+          <li><strong>POTIONS</strong>: 1x Cash Potion, 1x Luck Potion, 1x Mutation Potion (<strong>NEW</strong>)</li>
+          <li><strong>TRAIT!</strong>: 1x Time II Potion, 100x Trait Gems (<strong>NEW</strong>)</li>
+        </ul>
+        <h3>Expired Anime Card Farm Codes</h3>
+        <p>As of now, there are no expired codes in the game.</p>
+        <h2>Why Are My Anime Card Farm Codes Not Working?</h2>
+        <p>If the code is not working, check for typos.</p>
+      `)
+    );
+
+    expect(result.codes).toEqual([
+      {
+        code: "POTIONS",
+        status: "active",
+        provider: "beebom",
+        rewardsText: "1x Cash Potion, 1x Luck Potion, 1x Mutation Potion",
+        isNew: true,
+      },
+      {
+        code: "TRAIT!",
+        status: "active",
+        provider: "beebom",
+        rewardsText: "1x Time II Potion, 100x Trait Gems",
+        isNew: true,
+      },
+    ]);
+    expect(result.expiredCodes).toEqual([]);
+  });
+
   it("rejects instruction-like entries inside an otherwise valid code list", () => {
     const result = parseBeebomHtml(
       page(`
