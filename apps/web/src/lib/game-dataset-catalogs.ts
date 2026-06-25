@@ -388,7 +388,8 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
     collections: [
       "anomalies",
       "rooms",
-      "emergencies"
+      "emergencies",
+      "locations"
     ]
   },
   {
@@ -985,6 +986,11 @@ const FIELD_LABELS: Record<string, string> = {
   power: "Power",
   powerNote: "power note",
   purpose: "purpose",
+  wing: "wing / zone",
+  whatYouDo: "what you do",
+  hasMinigame: "has minigame",
+  minigameType: "minigame type",
+  accessNotes: "access notes",
   goldCost: "Gold cost",
   price: "price",
   priceCoins: "coin price",

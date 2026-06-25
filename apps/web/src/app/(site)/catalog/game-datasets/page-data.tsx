@@ -1531,6 +1531,11 @@ const ANIMAL_HOSPITAL_EMERGENCY_SECTION_ORDER = [
   "Patient Crises",
   "Supernatural Threats"
 ];
+const ANIMAL_HOSPITAL_LOCATION_SECTION_ORDER = [
+  "Support Areas",
+  "Medical Wing (Standard Care)",
+  "Emergency Wing (Minigame Rooms)"
+];
 const ANIMAL_HOSPITAL_SOURCE_KEYS = [
   "aliases",
   "catalogSection",
@@ -3980,6 +3985,16 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     additionalColumns: ["catalogSection", "cardSummary"],
     maxStats: 5,
     subtitleKeys: ["timeLimit"]
+  },
+  "animal-hospital-locations": {
+    groupKey: "catalogSection",
+    groupLabel: "Wing / zone",
+    sectionOrder: ANIMAL_HOSPITAL_LOCATION_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ANIMAL_HOSPITAL_SOURCE_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["wing"]
   },
   "violence-district-killers": {
     groupKey: "catalogSection",
