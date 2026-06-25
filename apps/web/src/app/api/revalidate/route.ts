@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { purgeCloudflarePublicCache, warmCloudflarePaths } from "@/lib/cloudflare-cache";
-import { cacheTagsForEvent, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
+import { cacheTagsForEvent, cacheTagsForPath, type PublicCacheEvent, type PublicCacheEventType } from "@/lib/public-cache-tags";
 import { AVATAR_CATALOG_MASTER_CODE, buildAvatarCatalogPath } from "@/lib/roblox-avatar-catalog";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase";
@@ -232,6 +232,22 @@ function revalidateForStats(slug: string) {
 
 function warmableRevalidationPaths(paths: string[]) {
   return paths.filter((path) => !STATS_DETAIL_PATH_PATTERN.test(path));
+}
+
+function topNavApiPathForPage(path: string) {
+  const trimmed = path.trim();
+  if (!trimmed.startsWith("/") || trimmed.startsWith("/api/")) return null;
+  if (trimmed.includes("?") || trimmed.includes("#")) return null;
+  if (/\[[^/\]]+\]/.test(trimmed)) return null;
+  return `/api/game-top-nav?path=${encodeURIComponent(trimmed === "/" ? "/" : trimmed.replace(/\/+$/, ""))}`;
+}
+
+function topNavApiPathsForPages(paths: string[]) {
+  return Array.from(new Set(paths.map(topNavApiPathForPage).filter((path): path is string => Boolean(path))));
+}
+
+function cacheTagsForPaths(paths: string[]) {
+  return Array.from(new Set(paths.flatMap((path) => cacheTagsForPath(path)).filter((tag) => tag !== "site")));
 }
 
 function readPositiveInt(name: string, fallback: number, max: number) {
@@ -768,7 +784,10 @@ async function collectRevalidationTargets(payload: SinglePayload) {
   const sidebarHostPaths = await lookupSidebarHostPaths(payload.type, slug);
   if (sidebarHostPaths.length) {
     purgePaths = [...purgePaths, ...sidebarHostPaths];
+    purgeTags = [...purgeTags, ...cacheTagsForPaths(sidebarHostPaths)];
   }
+
+  purgePaths = [...purgePaths, ...topNavApiPathsForPages(purgePaths)];
 
   return {
     paths: purgePaths,

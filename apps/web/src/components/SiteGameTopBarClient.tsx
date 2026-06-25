@@ -8,16 +8,20 @@ import type { CatalogTopNavContext, GameTopNavContext } from "@/lib/game-top-nav
 import { cn } from "@/lib/utils";
 
 type SiteGameTopBarClientProps = {
-  initialGameNav: GameTopNavContext | null;
-  initialCatalogNav: CatalogTopNavContext | null;
-  initialPathname: string;
+  initialGameNav?: GameTopNavContext | null;
+  initialCatalogNav?: CatalogTopNavContext | null;
+  initialPathname?: string;
 };
 
 function normalizePathname(value: string | null | undefined): string {
   return value?.trim() || "/";
 }
 
-export function SiteGameTopBarClient({ initialGameNav, initialCatalogNav, initialPathname }: SiteGameTopBarClientProps) {
+export function SiteGameTopBarClient({
+  initialGameNav = null,
+  initialCatalogNav = null,
+  initialPathname = ""
+}: SiteGameTopBarClientProps = {}) {
   const pathname = normalizePathname(usePathname());
   const [gameNav, setGameNav] = useState<GameTopNavContext | null>(() =>
     pathname === normalizePathname(initialPathname) ? initialGameNav : null
@@ -40,9 +44,7 @@ export function SiteGameTopBarClient({ initialGameNav, initialCatalogNav, initia
 
     async function loadGameNav() {
       try {
-        const response = await fetch(`/api/game-top-nav?path=${encodeURIComponent(pathname)}`, {
-          cache: "no-store"
-        });
+        const response = await fetch(`/api/game-top-nav?path=${encodeURIComponent(pathname)}`);
         if (cancelled) return;
         if (!response.ok) return;
         const payload = (await response.json()) as {
