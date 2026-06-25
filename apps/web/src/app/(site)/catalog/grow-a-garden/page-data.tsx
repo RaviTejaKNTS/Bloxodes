@@ -3,6 +3,7 @@ import { repoPath } from "@/lib/paths";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
+import { MoreWikiCatalogs } from "@/components/more-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { ForgeCatalogView } from "../the-forge/ForgeCatalogView";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -950,10 +951,15 @@ export function renderGrowGardenCatalogPage({
         ) : null}
       </section>
 
-      {pagination.info.currentPage === 1 && contentHtml?.id ? (
-        <div className="mt-10">
-          <CommentsSection entityType="wiki_catalog" entityId={contentHtml.id} />
-        </div>
+      {pagination.info.currentPage === 1 ? (
+        <>
+          {contentHtml?.id ? (
+            <div className="mt-10">
+              <CommentsSection entityType="wiki_catalog" entityId={contentHtml.id} />
+            </div>
+          ) : null}
+          <MoreWikiCatalogs wikiSlug="grow-a-garden" excludeCollectionSlug={config.slug} gameName="Grow a Garden" />
+        </>
       ) : null}
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />

@@ -3,6 +3,7 @@ import { repoPath } from "@/lib/paths";
 import Link from "next/link";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { MoreCatalogs } from "@/components/more-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { ColorCodesGrid, type ColorCodeItem } from "./ColorCodesGrid";
 import { HexColorPicker } from "./HexColorPicker";
@@ -301,6 +302,7 @@ export function renderRobloxColorCodesPage({
       </section>
 
       <CommentsSection entityType="catalog" entityId={commentsEntityId} />
+      <MoreCatalogs excludeCode="roblox-color-codes" />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />

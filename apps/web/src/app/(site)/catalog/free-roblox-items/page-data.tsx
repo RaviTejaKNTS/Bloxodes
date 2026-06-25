@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { MoreCatalogs } from "@/components/more-content";
 import { PagePagination } from "@/components/PagePagination";
 import { RobloxCatalogItemCard } from "@/components/RobloxCatalogItemCard";
 import type { CatalogPageContent } from "@/lib/catalog";
@@ -668,6 +669,7 @@ export async function renderRobloxFreeItemsPage({
           <CommentsSection entityType="catalog" entityId={contentHtml.id} />
         </div>
       ) : null}
+      <MoreCatalogs excludeCode={FREE_ITEMS_CATALOG_CODE} />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />

@@ -1,5 +1,5 @@
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
-import { listStatsSitemapGames, listStatsSitemapItems } from "@/lib/stats";
+import { getStatsGenreOptions, listStatsGamesIndexPaths, listStatsSitemapGames, listStatsSitemapItems } from "@/lib/stats";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -15,6 +15,15 @@ export async function GET() {
   ];
 
   try {
+    const genres = await getStatsGenreOptions();
+    pages.push(...listStatsGamesIndexPaths(genres)
+      .filter((path) => path !== "/stats/games")
+      .map((path) => ({
+        loc: withSiteUrl(path),
+        changefreq: "hourly" as const,
+        priority: "0.7"
+      })));
+
     const games = await listStatsSitemapGames(1000);
     pages.push(...games.map((game) => ({
       loc: withSiteUrl(`/stats/games/${game.slug}`),

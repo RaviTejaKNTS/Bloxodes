@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { MoreCatalogs } from "@/components/more-content";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { ADMIN_COMMANDS_DESCRIPTION, resolveSeoTitle, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { getAdminCommandSystems, loadAdminCommandDataset, loadAdminCommandDatasets } from "@/lib/admin-commands";
@@ -574,6 +575,7 @@ export default async function AdminCommandSystemPage({ params }: { params: Promi
           <CommentsSection entityType="catalog" entityId={contentHtml.id} />
         </div>
       ) : null}
+      <MoreCatalogs excludeCode="admin-commands" />
 
       <script
         type="application/ld+json"

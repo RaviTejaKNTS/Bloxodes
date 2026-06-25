@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { StatsGamesView, StatsPageShell } from "../components/StatsViews";
-import { listStatsGames, parseStatsSearchParams } from "@/lib/stats";
+import { getStatsGamesSeoState, listStatsGames, parseStatsSearchParams } from "@/lib/stats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -12,15 +12,24 @@ type PageProps = {
 
 export async function generateMetadata({ searchParams }: PageProps): Promise<Metadata> {
   const parsed = parseStatsSearchParams(await searchParams);
-  const genre = parsed.genres.length === 1 ? parsed.genres[0] : null;
+  const seo = getStatsGamesSeoState(parsed);
+  const canonical = `${SITE_URL}${seo.canonicalPath}`;
   return {
-    title: genre ? `${genre} Roblox Game Stats | ${SITE_NAME}` : `Roblox Game Stats | ${SITE_NAME}`,
-    description: genre
-      ? `Search and sort ${genre} Roblox games by live current players, visits, favorites, rating, and public Bloxodes trend data.`
-      : "Search and sort Roblox games by live current players, visits, favorites, rating, and public Bloxodes trend data.",
-    alternates: buildAlternates(
-      genre ? `${SITE_URL}/stats/games?genre=${encodeURIComponent(genre)}` : `${SITE_URL}/stats/games`
-    )
+    title: `${seo.title} | ${SITE_NAME}`,
+    description: seo.description,
+    alternates: buildAlternates(canonical),
+    robots: seo.indexable ? undefined : { index: false, follow: true },
+    openGraph: {
+      title: `${seo.title} | ${SITE_NAME}`,
+      description: seo.description,
+      url: canonical,
+      siteName: SITE_NAME
+    },
+    twitter: {
+      card: "summary",
+      title: `${seo.title} | ${SITE_NAME}`,
+      description: seo.description
+    }
   };
 }
 

@@ -5,6 +5,7 @@ import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { ADMIN_COMMANDS_DESCRIPTION, resolveSeoTitle, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { loadAdminCommandDatasets } from "@/lib/admin-commands";
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { MoreCatalogs } from "@/components/more-content";
 import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
@@ -135,6 +136,7 @@ export default async function AdminCommandsHubPage() {
           <CommentsSection entityType="catalog" entityId={contentHtml.id} />
         </div>
       ) : null}
+      <MoreCatalogs excludeCode="admin-commands" />
     </div>
   );
 }

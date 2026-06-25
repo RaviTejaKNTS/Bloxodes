@@ -4,6 +4,7 @@ import "@/styles/article-content.css";
 import { getCatalogPageContentByCodes, listPublishedCatalogCodes, type CatalogFaqEntry } from "@/lib/catalog";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { MoreCatalogs } from "@/components/more-content";
 import { splitPathToSlug } from "@/lib/static-params";
 import { buildPageContentHtml, renderPageContentNodes } from "@/lib/page-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -166,6 +167,7 @@ export default async function CatalogFallbackPage({ params }: PageProps) {
           <CommentsSection entityType="catalog" entityId={contentHtml.id} />
         </div>
       ) : null}
+      <MoreCatalogs excludeCode={code} />
     </div>
   );
 }

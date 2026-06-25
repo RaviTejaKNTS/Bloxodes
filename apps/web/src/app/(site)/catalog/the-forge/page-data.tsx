@@ -3,6 +3,7 @@ import { repoPath } from "@/lib/paths";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { CatalogSelectNav } from "@/components/CatalogSelectNav";
+import { MoreWikiCatalogs } from "@/components/more-content";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { ForgeCatalogView } from "./ForgeCatalogView";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
@@ -733,10 +734,15 @@ export function renderForgeCatalogPage({
         ) : null}
       </section>
 
-      {pagination.info.currentPage === 1 && contentHtml?.id ? (
-        <div className="mt-10">
-          <CommentsSection entityType="wiki_catalog" entityId={contentHtml.id} />
-        </div>
+      {pagination.info.currentPage === 1 ? (
+        <>
+          {contentHtml?.id ? (
+            <div className="mt-10">
+              <CommentsSection entityType="wiki_catalog" entityId={contentHtml.id} />
+            </div>
+          ) : null}
+          <MoreWikiCatalogs wikiSlug="the-forge" excludeCollectionSlug={config.slug} gameName="The Forge" />
+        </>
       ) : null}
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />

@@ -11,6 +11,7 @@ import {
   CalendarDays,
   ChevronDown,
   Clock3,
+  Eye,
   ExternalLink,
   Gamepad2,
   Heart,
@@ -203,6 +204,44 @@ function HeaderStat({
         <span className="truncate">{value}</span>
       </div>
     </div>
+  );
+}
+
+function GameDetailStatCard({
+  label,
+  value,
+  icon: Icon
+}: {
+  label: string;
+  value: ReactNode;
+  icon: typeof Users;
+}) {
+  return (
+    <div className="flex min-w-0 items-center gap-3 rounded-lg border border-border/70 bg-surface/80 px-3 py-3 shadow-none">
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-background/70 text-muted">
+        <Icon className="h-5 w-5" aria-hidden />
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="mb-0 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted">{label}</p>
+        <p className="mt-1 truncate text-lg font-semibold leading-none text-foreground">{value}</p>
+      </div>
+    </div>
+  );
+}
+
+function GameDetailStatsRow({ game }: { game: StatsGame }) {
+  const stats = [
+    { icon: Users, label: "Playing now", value: formatCompactNumber(game.playing) },
+    { icon: Eye, label: "Total visits", value: formatCompactNumber(game.visits) },
+    { icon: Star, label: "Favorites", value: formatCompactNumber(game.favorites) }
+  ];
+
+  return (
+    <section aria-label={`${game.name} headline stats`} className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      {stats.map((stat) => (
+        <GameDetailStatCard key={stat.label} {...stat} />
+      ))}
+    </section>
   );
 }
 
@@ -437,6 +476,10 @@ function sortForStatsColumn(column: StatsGameColumnKey): StatsSortKey | null {
       return "favorites";
     case "rating":
       return "rating";
+    case "likes":
+      return "likes";
+    case "dislikes":
+      return "dislikes";
     case "peak24h":
     case "peak7d":
       return "peak";
@@ -1539,8 +1582,6 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
             <div className="flex min-w-max items-center justify-center xl:min-w-0">
               <HeaderStat label="Global rank" value={globalRank ? `#${formatFullNumber(globalRank)}` : "Not tracked"} icon={Trophy} />
               <HeaderStat label="24h peak" value={formatCompactNumber(game.peak24h)} icon={ArrowUpRight} />
-              <HeaderStat label="Visits" value={formatCompactNumber(game.visits)} icon={Play} />
-              <HeaderStat label="Favorites" value={formatCompactNumber(game.favorites)} icon={Heart} />
               <HeaderStat label="Rating" value={formatPercent(game.ratingPercent)} icon={Star} />
               <HeaderStat label="Updated" value={formatRelativeStatsDate(game.updatedAtApi)} icon={Clock3} />
               <HeaderStat label="Created" value={formatStatsDate(game.createdAtApi)} icon={CalendarDays} />
@@ -1551,6 +1592,8 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
           </div>
         </div>
       </header>
+
+      <GameDetailStatsRow game={game} />
 
       <StatsChartPanel
         title={`${game.name} chart`}

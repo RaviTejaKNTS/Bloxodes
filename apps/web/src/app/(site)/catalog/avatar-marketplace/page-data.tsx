@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { MoreCatalogs } from "@/components/more-content";
 import { ContentFaq } from "@/components/ContentFaq";
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { PagePagination } from "@/components/PagePagination";
@@ -706,6 +707,7 @@ export async function renderAvatarCatalogPage({
           <CommentsSection entityType="catalog" entityId={contentHtml.id} />
         </div>
       ) : null}
+      {showHero ? <MoreCatalogs excludeCode={resolveAvatarCatalogPrimaryActiveCode(route)} /> : null}
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />

@@ -1,9 +1,11 @@
 import "server-only";
 import Link from "next/link";
 import { listCodePagesWithActiveCounts, listPublishedArticles } from "@/lib/db";
+import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
 import { listPublishedTools } from "@/lib/tools";
 import { listPublishedQuizzes } from "@/lib/quizzes";
 import { listPublishedPuzzlePages } from "@/lib/puzzles";
+import { buildWikiCatalogPath, listPublishedWikiCatalogPagesByWikiSlug } from "@/lib/wiki-catalog";
 import { resolveModifiedAt } from "@/lib/content-dates";
 import { GameCard } from "@/components/GameCard";
 import { ArticleCard } from "@/components/ArticleCard";
@@ -142,6 +144,35 @@ export async function MoreEvents({ excludeSlug }: { excludeSlug: string }) {
   );
 }
 
+export async function MoreCatalogs({ excludeCode }: { excludeCode: string }) {
+  const catalogs = await listPublishedTopLevelCatalogPages();
+  const normalizedCurrent = excludeCode.trim().toLowerCase();
+  const items = catalogs.filter((catalog) => catalog.code !== normalizedCurrent).slice(0, 8);
+  if (!items.length) return null;
+
+  return (
+    <MoreSection title="Check out other catalog pages" viewAllHref="/catalog">
+      {items.map((catalog) => (
+        <Link
+          key={catalog.id ?? catalog.code}
+          href={`/catalog/${catalog.code}`}
+          className="group flex items-center gap-3 rounded-lg border border-border/70 bg-card p-3 transition-colors hover:border-border"
+        >
+          <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md bg-surface-muted">
+            <CardImage src={catalog.thumb_url ?? null} alt={catalog.title} />
+          </span>
+          <span className="min-w-0">
+            <span className="block line-clamp-2 text-sm font-semibold text-foreground">{catalog.title}</span>
+            <span className="block line-clamp-1 text-xs text-muted">
+              {catalog.universe_name ?? catalog.meta_description ?? "Roblox catalog"}
+            </span>
+          </span>
+        </Link>
+      ))}
+    </MoreSection>
+  );
+}
+
 export async function MorePuzzles({ excludeSlug }: { excludeSlug: string }) {
   const pages = await listPublishedPuzzlePages();
   const items = pages
@@ -163,6 +194,45 @@ export async function MorePuzzles({ excludeSlug }: { excludeSlug: string }) {
           <span className="min-w-0">
             <span className="block line-clamp-2 text-sm font-semibold text-foreground">{puzzle.title}</span>
             <span className="block text-xs text-muted">Answers &amp; help</span>
+          </span>
+        </Link>
+      ))}
+    </MoreSection>
+  );
+}
+
+export async function MoreWikiCatalogs({
+  wikiSlug,
+  excludeCollectionSlug,
+  gameName
+}: {
+  wikiSlug: string;
+  excludeCollectionSlug: string;
+  gameName: string;
+}) {
+  const catalogs = await listPublishedWikiCatalogPagesByWikiSlug(wikiSlug);
+  const normalizedCurrent = excludeCollectionSlug.trim().toLowerCase();
+  const items = catalogs.filter((catalog) => catalog.collection_slug !== normalizedCurrent).slice(0, 8);
+  if (!items.length) return null;
+
+  return (
+    <MoreSection title={`Check out other catalogs from ${gameName}`} viewAllHref={`/wiki/${wikiSlug}`}>
+      {items.map((catalog) => (
+        <Link
+          key={catalog.id ?? catalog.code}
+          href={buildWikiCatalogPath(catalog.wiki_slug, catalog.collection_slug)}
+          className="group flex items-center gap-3 rounded-lg border border-border/70 bg-card p-3 transition-colors hover:border-border"
+        >
+          <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md bg-surface-muted">
+            <CardImage src={catalog.thumb_url ?? null} alt={catalog.display_name ?? catalog.title} />
+          </span>
+          <span className="min-w-0">
+            <span className="block line-clamp-2 text-sm font-semibold text-foreground">
+              {catalog.display_name ?? catalog.title}
+            </span>
+            <span className="block text-xs text-muted">
+              {typeof catalog.item_count === "number" ? `${catalog.item_count.toLocaleString("en-US")} entries` : "Game catalog"}
+            </span>
           </span>
         </Link>
       ))}

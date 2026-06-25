@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { StatsGameDetailView, StatsPageShell } from "../../components/StatsViews";
-import { getStatsGameBySlug, robloxGameUrl } from "@/lib/stats";
+import { getStatsGameBySlug, isStatsGameDetailIndexable, robloxGameUrl } from "@/lib/stats";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const revalidate = 3600;
@@ -14,14 +14,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const data = await getStatsGameBySlug(slug);
   const canonical = `${SITE_URL}/stats/games/${data?.game.slug ?? slug}`;
-  if (!data) return { alternates: buildAlternates(canonical) };
+  if (!data) return { alternates: buildAlternates(canonical), robots: { index: false, follow: false } };
 
   const title = `${data.game.displayName} Stats | ${SITE_NAME}`;
   const description = `Track ${data.game.displayName} Roblox stats, current players, visits, favorites, rating, and public Bloxodes charts.`;
+  const indexable = await isStatsGameDetailIndexable(data.game);
   return {
     title,
     description,
     alternates: buildAlternates(canonical),
+    robots: indexable ? undefined : { index: false, follow: true },
     openGraph: {
       title,
       description,

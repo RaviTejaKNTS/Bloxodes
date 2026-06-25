@@ -5,6 +5,7 @@ import Image from "next/image";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { MoreCatalogs } from "@/components/more-content";
 import { breadcrumbJsonLd, CATALOG_DESCRIPTION, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { PageBreadcrumb, type PageBreadcrumbItem } from "@/components/PageBreadcrumb";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
@@ -399,6 +400,7 @@ export function renderRobloxDecalIdsPage({
                     <CommentsSection entityType="catalog" entityId={contentHtml.id} />
                 </div>
             ) : null}
+            <MoreCatalogs excludeCode="roblox-decal-ids" />
 
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />

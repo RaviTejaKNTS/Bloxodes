@@ -4,6 +4,7 @@ import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { MusicCoverImage } from "@/components/MusicCoverImage";
 import { PagePagination } from "@/components/PagePagination";
 import { CommentsSection } from "@/components/comments/CommentsSection";
+import { MoreCatalogs } from "@/components/more-content";
 import type { CatalogPageContent } from "@/lib/catalog";
 import { supabaseAdmin } from "@/lib/supabase";
 import { breadcrumbJsonLd, CATALOG_DESCRIPTION, SITE_URL, webPageJsonLd } from "@/lib/seo";
@@ -1066,6 +1067,7 @@ export function renderRobloxMusicIdsPage({
           <CommentsSection entityType="catalog" entityId={contentHtml.id} />
         </div>
       ) : null}
+      <MoreCatalogs excludeCode="roblox-music-ids" />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />

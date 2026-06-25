@@ -27,6 +27,8 @@ export type StatsSortKey =
   | "favorites"
   | "rating"
   | "peak"
+  | "likes"
+  | "dislikes"
   | "updated"
   | "created";
 
@@ -593,6 +595,8 @@ const SORT_COLUMNS: Partial<Record<StatsSortKey, keyof UniverseRow>> = {
   playing: "playing",
   visits: "visits",
   favorites: "favorites",
+  likes: "likes",
+  dislikes: "dislikes",
   updated: "updated_at_api",
   created: "created_at_api"
 };
@@ -605,6 +609,8 @@ const INDEX_SORT_COLUMNS: Record<StatsSortKey, keyof StatsGameIndexRow> = {
   favorites: "favorites",
   rating: "rating_percent",
   peak: "peak_24h",
+  likes: "likes",
+  dislikes: "dislikes",
   updated: "updated_at_api",
   created: "created_at_api"
 };
@@ -625,9 +631,185 @@ export const STATS_SORT_OPTIONS: Array<{ value: StatsSortKey; label: string }> =
   { value: "favorites", label: "Favorites" },
   { value: "rating", label: "Rating" },
   { value: "peak", label: "Peak CCU" },
+  { value: "likes", label: "Upvotes" },
+  { value: "dislikes", label: "Downvotes" },
   { value: "updated", label: "Roblox updated" },
   { value: "created", label: "Created date" }
 ];
+
+export const STATS_GAMES_INDEXABLE_SORTS: StatsSortKey[] = [
+  "playing",
+  "growth_24h",
+  "growth_7d",
+  "visits",
+  "favorites",
+  "rating",
+  "peak",
+  "likes",
+  "dislikes"
+];
+
+export const STATS_GAME_DETAIL_INDEX_LIMIT = 1000;
+
+const STATS_GAMES_INDEXABLE_SORT_SET = new Set<StatsSortKey>(STATS_GAMES_INDEXABLE_SORTS);
+
+function statsGamesSeoSubject(genre?: string | null) {
+  const cleanedGenre = cleanStatsTaxonomyLabel(genre);
+  return cleanedGenre ? `${cleanedGenre} Roblox Games` : "Roblox Games";
+}
+
+export function buildStatsGamesIndexPath({
+  genre,
+  sort = "playing"
+}: {
+  genre?: string | null;
+  sort?: StatsSortKey;
+}) {
+  const params = new URLSearchParams();
+  const cleanedGenre = cleanStatsTaxonomyLabel(genre);
+  if (cleanedGenre) params.set("genre", cleanedGenre);
+  if (sort !== "playing") params.set("sort", sort);
+  const query = params.toString();
+  return query ? `/stats/games?${query}` : "/stats/games";
+}
+
+export function statsGamesSeoTitle(sort: StatsSortKey, genre?: string | null) {
+  const cleanedGenre = cleanStatsTaxonomyLabel(genre);
+  const subject = statsGamesSeoSubject(cleanedGenre);
+  switch (sort) {
+    case "growth_24h":
+      return `Trending ${subject} in the Last 24 Hours`;
+    case "growth_7d":
+      return `Trending ${subject} This Week`;
+    case "visits":
+      return `Most Visited ${subject}`;
+    case "favorites":
+      return `Most Favorited ${subject}`;
+    case "rating":
+      return `Highest Rated ${subject}`;
+    case "peak":
+      return `${subject} With the Highest Peak Players`;
+    case "likes":
+      return `${subject} With the Most Upvotes`;
+    case "dislikes":
+      return `${subject} With the Most Downvotes`;
+    default:
+      return cleanedGenre ? `Top Trending ${subject} Right Now` : "Top Trending Roblox Games Right Now";
+  }
+}
+
+export function statsGamesSeoDescription(sort: StatsSortKey, genre?: string | null) {
+  const title = statsGamesSeoTitle(sort, genre);
+  const genrePhrase = cleanStatsTaxonomyLabel(genre) ? `${cleanStatsTaxonomyLabel(genre)} Roblox games` : "Roblox games";
+  switch (sort) {
+    case "growth_24h":
+      return `${title}. Track which ${genrePhrase} are gaining players fastest over the last 24 hours with live Bloxodes stats.`;
+    case "growth_7d":
+      return `${title}. Compare the ${genrePhrase} gaining the most players over the past week.`;
+    case "visits":
+      return `${title}. Browse ${genrePhrase} ranked by total Roblox visits, with players, favorites, ratings, and trend data.`;
+    case "favorites":
+      return `${title}. Browse ${genrePhrase} ranked by total favorites, with live players, visits, ratings, and trend data.`;
+    case "rating":
+      return `${title}. Compare ${genrePhrase} by rating, current players, visits, favorites, and public Bloxodes trend data.`;
+    case "peak":
+      return `${title}. Find ${genrePhrase} with the strongest recent peak player counts and live stats history.`;
+    case "likes":
+      return `${title}. Browse ${genrePhrase} ranked by Roblox upvotes, with player counts, visits, favorites, and ratings.`;
+    case "dislikes":
+      return `${title}. Browse ${genrePhrase} ranked by Roblox downvotes, with player counts, visits, favorites, and ratings.`;
+    default:
+      return `${title}. Browse live current players, visits, favorites, ratings, and trend data for ${genrePhrase} on Bloxodes.`;
+  }
+}
+
+function statsColumnsMatchDefault(columns: StatsGameColumnKey[]) {
+  return (
+    columns.length === DEFAULT_STATS_GAME_COLUMNS.length &&
+    columns.every((column, index) => column === DEFAULT_STATS_GAME_COLUMNS[index])
+  );
+}
+
+export function getStatsGamesSeoState(parsed: ReturnType<typeof parseStatsSearchParams>) {
+  const singleGenre = parsed.genres.length === 1 ? cleanStatsTaxonomyLabel(parsed.genres[0]) : null;
+  const hasExplicitDefaultSort = parsed.rawSort === "playing";
+  const hasUnknownSort = Boolean(parsed.rawSort) && parsed.rawSort !== parsed.sort;
+  const approvedSort = STATS_GAMES_INDEXABLE_SORT_SET.has(parsed.sort) && !hasUnknownSort;
+  const indexable =
+    parsed.page === 1 &&
+    !parsed.q &&
+    parsed.genres.length <= 1 &&
+    parsed.subgenres.length === 0 &&
+    !parsed.minPlaying &&
+    statsColumnsMatchDefault(parsed.columns) &&
+    !hasExplicitDefaultSort &&
+    approvedSort;
+  const canonicalSort = approvedSort ? parsed.sort : "playing";
+  const canonicalPath = buildStatsGamesIndexPath({ genre: singleGenre, sort: canonicalSort });
+  return {
+    indexable,
+    genre: singleGenre,
+    sort: canonicalSort,
+    title: statsGamesSeoTitle(canonicalSort, singleGenre),
+    description: statsGamesSeoDescription(canonicalSort, singleGenre),
+    canonicalPath
+  };
+}
+
+export function listStatsGamesIndexPaths(genres: string[]) {
+  const scopes = [null, ...genres.map((genre) => cleanStatsTaxonomyLabel(genre)).filter((genre): genre is string => Boolean(genre))];
+  const paths = new Set<string>();
+  for (const genre of scopes) {
+    for (const sort of STATS_GAMES_INDEXABLE_SORTS) {
+      paths.add(buildStatsGamesIndexPath({ genre, sort }));
+    }
+  }
+  return Array.from(paths);
+}
+
+type StatsGameDetailIndexBoundary = {
+  universe_id: number;
+  playing: number | null;
+};
+
+function isStatsGameSitemapEligible(game: Pick<StatsGame, "playing" | "visits" | "statsTier">) {
+  return (
+    game.statsTier === "HOT" ||
+    game.statsTier === "WARM" ||
+    (game.playing ?? 0) >= 100 ||
+    (game.visits ?? 0) >= 10_000_000
+  );
+}
+
+async function loadStatsGameDetailIndexBoundary(): Promise<StatsGameDetailIndexBoundary | null> {
+  const { data, error } = await supabaseAdmin()
+    .from("stats_game_current_index")
+    .select("universe_id, playing")
+    .not("slug", "is", null)
+    .or("stats_tier.in.(HOT,WARM),playing.gte.100,visits.gte.10000000")
+    .order("playing", { ascending: false, nullsFirst: false })
+    .order("universe_id", { ascending: true })
+    .range(STATS_GAME_DETAIL_INDEX_LIMIT - 1, STATS_GAME_DETAIL_INDEX_LIMIT - 1)
+    .maybeSingle();
+  if (error) {
+    console.warn("Failed to load stats game detail index boundary", error.message);
+    return null;
+  }
+  return data as StatsGameDetailIndexBoundary | null;
+}
+
+export async function isStatsGameDetailIndexable(game: Pick<StatsGame, "universeId" | "playing" | "visits" | "statsTier">) {
+  if (!isStatsGameSitemapEligible(game)) return false;
+
+  const boundary = await loadStatsGameDetailIndexBoundary();
+  if (!boundary) return false;
+
+  const playing = game.playing ?? 0;
+  const boundaryPlaying = toNumber(boundary.playing) ?? 0;
+  if (playing > boundaryPlaying) return true;
+  if (playing < boundaryPlaying) return false;
+  return game.universeId <= boundary.universe_id;
+}
 
 export const STATS_CREATOR_SORT_OPTIONS: Array<{ value: StatsCreatorSortKey; label: string }> = [
   { value: "playing", label: "Current players" },
@@ -1754,12 +1936,14 @@ export function parseStatsSearchParams(searchParams?: Record<string, string | st
   const first = (value: string | string[] | undefined) => (Array.isArray(value) ? value[0] : value);
   const pageValue = Number(first(searchParams?.page) ?? "1");
   const minValue = Number(first(searchParams?.minPlaying) ?? first(searchParams?.minPlayers) ?? "");
+  const rawSort = first(searchParams?.sort)?.trim() ?? "";
   return {
     page: Number.isFinite(pageValue) && pageValue > 0 ? Math.floor(pageValue) : 1,
     q: first(searchParams?.q)?.trim() ?? "",
     genres: normalizeFilterValues(searchParams?.genre),
     subgenres: normalizeFilterValues(searchParams?.subgenre),
-    sort: normalizeStatsSort(first(searchParams?.sort)),
+    sort: normalizeStatsSort(rawSort),
+    rawSort,
     minPlaying: Number.isFinite(minValue) && minValue > 0 ? Math.floor(minValue) : 0,
     columns: normalizeStatsColumns(searchParams?.column)
   };
@@ -2966,7 +3150,7 @@ async function buildStatsGameDetail(row: UniverseRow | StatsGameIndexRow): Promi
   ]);
 
   return {
-    game: { ...baseGame, rank: globalRank, links: relatedLinks },
+    game: { ...baseGame, rank: globalRank ?? baseGame.rank, links: relatedLinks },
     initialChart,
     initialRankChart,
     relatedLinks,
