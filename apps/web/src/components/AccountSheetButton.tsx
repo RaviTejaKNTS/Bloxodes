@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -47,13 +47,52 @@ export function AccountSheetButton({ account, className }: AccountSheetButtonPro
   const pathname = usePathname() ?? "/";
   const [returnPath, setReturnPath] = useState(pathname);
   const [open, setOpen] = useState(false);
+  const [displayAccount, setDisplayAccount] = useState(account);
+
+  const refreshAccount = useCallback(async () => {
+    try {
+      const response = await fetch("/api/account/avatar", {
+        cache: "no-store",
+        credentials: "same-origin"
+      });
+      if (!response.ok) return;
+
+      const payload = (await response.json()) as {
+        avatarUrl?: string | null;
+        displayName?: string | null;
+        signedIn?: boolean;
+      };
+
+      if (!payload.signedIn) {
+        setDisplayAccount(account);
+        return;
+      }
+
+      setDisplayAccount({
+        avatarUrl: payload.avatarUrl ?? null,
+        href: "/account",
+        label: payload.displayName?.trim() || "Account",
+        signedIn: true
+      });
+    } catch {
+      setDisplayAccount(account);
+    }
+  }, [account]);
 
   useEffect(() => {
     setReturnPath(`${window.location.pathname}${window.location.search}`);
   }, [pathname]);
 
+  useEffect(() => {
+    void refreshAccount();
+  }, [refreshAccount]);
+
+  useEffect(() => {
+    if (open) void refreshAccount();
+  }, [open, refreshAccount]);
+
   const loginHref = `/auth/roblox/login?next=${encodeURIComponent(returnPath)}&source=${encodeURIComponent(returnPath)}`;
-  const accountName = getAccountName(account);
+  const accountName = getAccountName(displayAccount);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -64,31 +103,31 @@ export function AccountSheetButton({ account, className }: AccountSheetButtonPro
           size="icon"
           className={cn(
             "h-9 w-9 rounded-md text-muted-foreground hover:bg-muted/60 hover:text-foreground",
-            account.avatarUrl ? "p-0" : "",
+            displayAccount.avatarUrl ? "p-0" : "",
             className
           )}
-          aria-label={account.signedIn ? `Open account for ${accountName}` : "Open account sign in"}
-          title={account.signedIn ? `Account: ${accountName}` : "Sign in"}
+          aria-label={displayAccount.signedIn ? `Open account for ${accountName}` : "Open account sign in"}
+          title={displayAccount.signedIn ? `Account: ${accountName}` : "Sign in"}
         >
-          <AccountIcon account={account} />
+          <AccountIcon account={displayAccount} />
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-[min(24rem,_92vw)] overflow-y-auto">
         <SheetHeader>
-          <SheetTitle>{account.signedIn ? "Account" : "Sign in"}</SheetTitle>
+          <SheetTitle>{displayAccount.signedIn ? "Account" : "Sign in"}</SheetTitle>
           <SheetDescription>
-            {account.signedIn
+            {displayAccount.signedIn
               ? "Your Bloxodes account is connected through Roblox."
               : "Use Roblox sign-in to save progress and keep account actions in one place."}
           </SheetDescription>
         </SheetHeader>
 
-        {account.signedIn ? (
+        {displayAccount.signedIn ? (
           <div className="mt-6 space-y-5">
             <div className="flex items-center gap-3 border-b border-border/60 pb-5">
-              {account.avatarUrl ? (
+              {displayAccount.avatarUrl ? (
                 <Image
-                  src={account.avatarUrl}
+                  src={displayAccount.avatarUrl}
                   alt={accountName}
                   width={48}
                   height={48}

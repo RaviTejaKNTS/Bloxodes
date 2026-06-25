@@ -1,7 +1,6 @@
 import { SiteGameTopBarClient } from "@/components/SiteGameTopBarClient";
-import { getSidebarAccount } from "@/lib/site-sidebar-account";
+import { signedOutSidebarAccount } from "@/lib/site-navigation";
 
-export async function SiteGameTopBar() {
-  const account = await getSidebarAccount();
-  return <SiteGameTopBarClient account={account} />;
+export function SiteGameTopBar() {
+  return <SiteGameTopBarClient account={signedOutSidebarAccount} />;
 }
