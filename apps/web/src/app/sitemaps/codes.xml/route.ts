@@ -12,19 +12,35 @@ type GameSitemapRow = {
   content_updated_at?: string | null;
 };
 
-export async function GET() {
-  try {
-    const sb = supabaseAdmin();
+const CODES_SITEMAP_BATCH_SIZE = 1000;
+const CODES_SITEMAP_MAX_URLS = 50_000;
+
+async function listCodeSitemapRows(): Promise<GameSitemapRow[]> {
+  const sb = supabaseAdmin();
+  const rows: GameSitemapRow[] = [];
+
+  for (let offset = 0; offset < CODES_SITEMAP_MAX_URLS; offset += CODES_SITEMAP_BATCH_SIZE) {
     const { data, error } = await sb
       .from("code_pages_index_view")
       .select("slug, updated_at, content_updated_at")
       .eq("is_published", true)
       .not("slug", "is", null)
-      .order("updated_at", { ascending: false });
+      .order("updated_at", { ascending: false })
+      .range(offset, offset + CODES_SITEMAP_BATCH_SIZE - 1);
 
     if (error) throw error;
 
-    const rows = (data ?? []) as GameSitemapRow[];
+    const batch = (data ?? []) as GameSitemapRow[];
+    rows.push(...batch);
+    if (batch.length < CODES_SITEMAP_BATCH_SIZE) break;
+  }
+
+  return rows.slice(0, CODES_SITEMAP_MAX_URLS);
+}
+
+export async function GET() {
+  try {
+    const rows = await listCodeSitemapRows();
     const pages: SitemapUrlSetEntry[] = [];
     for (const row of rows) {
       if (!row.slug) continue;

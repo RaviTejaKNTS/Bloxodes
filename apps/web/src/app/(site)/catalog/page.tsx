@@ -236,11 +236,6 @@ export default async function CatalogIndexPage() {
 
       {genericCards.length ? (
         <section className="space-y-6">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-semibold text-foreground">Catalogs</h2>
-            <p className="text-sm text-muted">General catalog hubs that are not tied to a specific game.</p>
-          </div>
-
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {genericCards.map(({ id, updatedAt: _updatedAt, universeId: _universeId, universeName: _universeName, ...card }, index) => (
               <div
