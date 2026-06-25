@@ -36,7 +36,9 @@ function withNoIndexHeaders(response: NextResponse) {
 export async function GET(request: NextRequest) {
   const origin = resolvePublicOrigin(request.headers, request.nextUrl.origin);
   const requestedNext = request.nextUrl.searchParams.get("next");
+  const requestedSource = request.nextUrl.searchParams.get("source");
   const nextPath = sanitizeNextPath(requestedNext);
+  const sourcePath = sanitizeNextPath(requestedSource ?? requestedNext, nextPath);
   const clientId = process.env.ROBLOX_OAUTH_CLIENT_ID?.trim();
   const ip = getRequestIp(request);
   const rateLimit = checkRateLimit({
@@ -80,6 +82,6 @@ export async function GET(request: NextRequest) {
   });
 
   const response = NextResponse.redirect(authUrl);
-  setRobloxLoginOauthCookies(response, { state, verifier, nextPath });
+  setRobloxLoginOauthCookies(response, { state, verifier, nextPath, sourcePath });
   return withNoIndexHeaders(response);
 }

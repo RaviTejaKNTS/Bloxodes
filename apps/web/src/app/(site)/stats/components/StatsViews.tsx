@@ -250,7 +250,7 @@ function CompactGameRow({ game, rank, metric }: { game: StatsGame; rank?: number
   return (
     <Link
       href={`/stats/games/${game.slug}`}
-      className="group flex items-center gap-3 rounded-lg border border-border/60 bg-background/35 px-3 py-3 transition hover:border-accent/70 hover:bg-background/65"
+      className="group grid grid-cols-[auto_auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2 rounded-lg border border-border/60 bg-background/35 px-3 py-3 transition hover:border-accent/70 hover:bg-background/65 sm:grid-cols-[auto_auto_minmax(0,1fr)_auto]"
     >
       <span className="w-7 shrink-0 text-center text-xs font-bold text-muted">#{rank ?? game.rank ?? "-"}</span>
       {gameImage(game, 40)}
@@ -261,9 +261,9 @@ function CompactGameRow({ game, rank, metric }: { game: StatsGame; rank?: number
           {game.ratingPercent != null ? <span>{formatPercent(game.ratingPercent)} rating</span> : null}
         </span>
       </span>
-      <span className="text-right">
+      <span className="col-span-3 flex min-w-0 items-center justify-between gap-3 rounded-md bg-surface/60 px-2 py-1.5 text-left sm:col-span-1 sm:block sm:bg-transparent sm:p-0 sm:text-right">
         <span className="block text-sm font-semibold text-foreground">{metric === "trend" ? game.trendScore : primary}</span>
-        <span className="mt-1 block"><DeltaPill value={game.growth24h} percent={game.growth24hPercent} /></span>
+        <span className="block sm:mt-1"><DeltaPill value={game.growth24h} percent={game.growth24hPercent} /></span>
       </span>
     </Link>
   );
@@ -543,7 +543,7 @@ function renderStatsColumnValue(game: StatsGame, column: StatsGameColumnKey) {
     case "favorites":
       return formatCompactNumber(game.favorites);
     case "rating":
-      return formatPercent(game.ratingPercent);
+      return game.ratingPercent != null ? formatPercent(game.ratingPercent) : "Unrated";
     case "likes":
       return formatCompactNumber(game.likes);
     case "dislikes":
@@ -1582,7 +1582,7 @@ export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
             <div className="flex min-w-max items-center justify-center xl:min-w-0">
               <HeaderStat label="Global rank" value={globalRank ? `#${formatFullNumber(globalRank)}` : "Not tracked"} icon={Trophy} />
               <HeaderStat label="24h peak" value={formatCompactNumber(game.peak24h)} icon={ArrowUpRight} />
-              <HeaderStat label="Rating" value={formatPercent(game.ratingPercent)} icon={Star} />
+              <HeaderStat label="Rating" value={game.ratingPercent != null ? formatPercent(game.ratingPercent) : "Unrated"} icon={Star} />
               <HeaderStat label="Updated" value={formatRelativeStatsDate(game.updatedAtApi)} icon={Clock3} />
               <HeaderStat label="Created" value={formatStatsDate(game.createdAtApi)} icon={CalendarDays} />
               <HeaderStat label="Genre" value={game.genre ?? "Not tracked"} icon={Layers} />

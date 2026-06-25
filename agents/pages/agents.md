@@ -23,8 +23,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 | Area | Routes | Files / Notes |
 | --- | --- | --- |
-| Login | `/login` | `src/app/(secure)/login/page.tsx`, server actions in `src/app/(secure)/login/actions.ts` |
-| Account | `/account` | `src/app/(secure)/account/page.tsx` |
+| Login | `/login` | `src/app/(secure)/login/page.tsx`, server actions in `src/app/(secure)/login/actions.ts`; fallback/deep-link surface because the primary shell entry is the account sheet. |
+| Account | `/account` | `src/app/(secure)/account/page.tsx`; compact account details and sign-out surface, with the main shell account summary shown in the right sheet. |
 
 ## Core Content Families
 

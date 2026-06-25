@@ -1,40 +1,19 @@
 import Link from "next/link";
-import { User } from "lucide-react";
 import { SidebarActiveState } from "@/components/SidebarActiveState";
 import { SidebarSearch } from "@/components/SidebarSearch";
+import { SiteFeedbackButton } from "@/components/SiteFeedbackButton";
 import { SiteLogo } from "@/components/SiteLogo";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { isNavLinkActive, siteNavLinks, type SidebarAccount } from "@/lib/site-navigation";
+import { isNavLinkActive, siteNavLinks } from "@/lib/site-navigation";
 import { cn } from "@/lib/utils";
 
 type SiteSidebarProps = {
-  account: SidebarAccount;
   pathname: string;
 };
 
 const DESKTOP_NAV_ID = "site-sidebar-primary-nav";
 
-function AccountIcon({ account }: { account: SidebarAccount }) {
-  if (account.avatarUrl) {
-    return (
-      <img
-        src={account.avatarUrl}
-        alt=""
-        aria-hidden="true"
-        className="h-[26px] w-[26px] rounded-full border border-sidebar-border object-cover"
-        loading="lazy"
-      />
-    );
-  }
-
-  return (
-    <span className="inline-flex h-[26px] w-[26px] items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-foreground/70">
-      <User aria-hidden className="h-4 w-4" />
-    </span>
-  );
-}
-
-export function SiteSidebar({ account, pathname }: SiteSidebarProps) {
+export function SiteSidebar({ pathname }: SiteSidebarProps) {
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-[15.5rem] flex-col border-r border-sidebar-border/80 bg-sidebar text-sidebar-foreground shadow-none xl:flex">
       <div className="px-3 pb-2 pt-5">
@@ -77,16 +56,11 @@ export function SiteSidebar({ account, pathname }: SiteSidebarProps) {
 
         <div className="mx-3 my-2 h-px bg-sidebar-border" />
 
-        <div className="px-1">
-          <Link
-            href={account.href}
-            aria-label={account.label}
-            title={account.label}
-            className="flex h-9 w-full items-center justify-start gap-2.5 rounded-lg px-2.5 text-[13px] font-semibold text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
-          >
-            <AccountIcon account={account} />
-            <span className="min-w-0 truncate">{account.signedIn ? account.label : "Sign in"}</span>
-          </Link>
+        <div className="space-y-1 px-1">
+          <SiteFeedbackButton
+            className="flex h-9 w-full justify-start rounded-lg px-2.5 text-[13px] font-semibold text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+            labelClassName="inline"
+          />
           <div className="flex h-9 items-center justify-between gap-2 rounded-lg px-2.5 hover:bg-sidebar-accent">
             <span className="text-[13px] font-semibold text-sidebar-foreground/70">Theme</span>
             <ThemeToggle className="h-[26px] w-[26px] border-sidebar-border bg-transparent shadow-none hover:translate-y-0 hover:bg-sidebar-accent [&_svg]:h-3.5 [&_svg]:w-3.5" />

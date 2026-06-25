@@ -11,6 +11,7 @@ const OAUTH_COOKIE_MAX_AGE_SECONDS = 60 * 10; // 10 minutes
 export const ROBLOX_LOGIN_STATE_COOKIE = "roblox_login_oauth_state";
 export const ROBLOX_LOGIN_VERIFIER_COOKIE = "roblox_login_oauth_verifier";
 export const ROBLOX_LOGIN_NEXT_COOKIE = "roblox_login_oauth_next";
+export const ROBLOX_LOGIN_SOURCE_COOKIE = "roblox_login_oauth_source";
 const ROBLOX_LOGIN_CALLBACK_PATH = "/auth/roblox/callback/login";
 const ROBLOX_LOGIN_LEGACY_CALLBACK_PATH = "/auth/roblox/callback";
 
@@ -125,12 +126,13 @@ export function createRobloxCodeChallenge(verifier: string): string {
 
 export function setRobloxLoginOauthCookies(
   response: NextResponse,
-  params: { state: string; verifier: string; nextPath: string }
+  params: { state: string; verifier: string; nextPath: string; sourcePath?: string | null }
 ) {
   const options = cookieOptions();
   response.cookies.set(ROBLOX_LOGIN_STATE_COOKIE, params.state, options);
   response.cookies.set(ROBLOX_LOGIN_VERIFIER_COOKIE, params.verifier, options);
   response.cookies.set(ROBLOX_LOGIN_NEXT_COOKIE, sanitizeNextPath(params.nextPath), options);
+  response.cookies.set(ROBLOX_LOGIN_SOURCE_COOKIE, sanitizeNextPath(params.sourcePath ?? params.nextPath), options);
 }
 
 export function clearRobloxLoginOauthCookies(response: NextResponse) {
@@ -144,20 +146,24 @@ export function clearRobloxLoginOauthCookies(response: NextResponse) {
   response.cookies.set(ROBLOX_LOGIN_STATE_COOKIE, "", clearOptions);
   response.cookies.set(ROBLOX_LOGIN_VERIFIER_COOKIE, "", clearOptions);
   response.cookies.set(ROBLOX_LOGIN_NEXT_COOKIE, "", clearOptions);
+  response.cookies.set(ROBLOX_LOGIN_SOURCE_COOKIE, "", clearOptions);
 }
 
 export function readRobloxLoginOauthCookies(request: NextRequest): {
   state: string | null;
   verifier: string | null;
   nextPath: string;
+  sourcePath: string;
 } {
   const state = request.cookies.get(ROBLOX_LOGIN_STATE_COOKIE)?.value ?? null;
   const verifier = request.cookies.get(ROBLOX_LOGIN_VERIFIER_COOKIE)?.value ?? null;
   const nextRaw = request.cookies.get(ROBLOX_LOGIN_NEXT_COOKIE)?.value ?? null;
+  const sourceRaw = request.cookies.get(ROBLOX_LOGIN_SOURCE_COOKIE)?.value ?? null;
   return {
     state,
     verifier,
-    nextPath: sanitizeNextPath(nextRaw)
+    nextPath: sanitizeNextPath(nextRaw),
+    sourcePath: sanitizeNextPath(sourceRaw ?? nextRaw)
   };
 }
 

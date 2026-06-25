@@ -72,6 +72,7 @@ export async function GET(request: NextRequest) {
   });
   const oauthCookies = readRobloxLoginOauthCookies(request);
   const nextPath = sanitizeNextPath(oauthCookies.nextPath);
+  const sourcePath = sanitizeNextPath(oauthCookies.sourcePath, nextPath);
   const redirectUri = resolveRobloxLoginRedirectUri(origin);
 
   const redirectWithError = (message: string) =>
@@ -200,7 +201,10 @@ export async function GET(request: NextRequest) {
   let sessionToken: string;
   let sessionMaxAge: number;
   try {
-    const session = await createAppSession(userId, request.headers.get("user-agent"));
+    const session = await createAppSession(userId, request.headers.get("user-agent"), {
+      loginSourcePath: sourcePath,
+      loginReturnPath: nextPath
+    });
     sessionToken = session.token;
     sessionMaxAge = session.maxAge;
   } catch {

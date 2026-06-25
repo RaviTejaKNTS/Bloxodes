@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { KeyRound, MessageCircle, SquareCheckBig, Trophy, UserCircle } from "lucide-react";
+import { KeyRound, LogIn, MessageCircle, SquareCheckBig, Trophy, UserCircle } from "lucide-react";
 import { getCurrentAppUser } from "@/lib/auth/app-session";
 import { sanitizeNextPath } from "@/lib/auth/navigation";
 import { signOut } from "./actions";
@@ -61,11 +61,11 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
     (appUser ? `Roblox User ${appUser.roblox_user_id ?? ""}`.trim() : null);
 
   return (
-    <div className="max-w-4xl space-y-10">
-      <section className="space-y-7">
+    <div className="max-w-4xl space-y-9">
+      <section className="space-y-6">
         <header className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent/80">Roblox Login</p>
-          <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">Sign in with Roblox</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted">Roblox Login</p>
+          <h1 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">Sign in with Roblox</h1>
           <p className="max-w-2xl text-base text-muted md:text-lg">
             Use Roblox sign-in to connect your Bloxodes profile, save progress, and keep your account details in one place.
           </p>
@@ -74,8 +74,9 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
         <div className="space-y-3">
           <Link
             href={robloxLoginHref}
-            className="inline-flex min-h-11 items-center justify-center rounded-md bg-accent px-5 py-2 text-sm font-semibold text-background transition hover:opacity-90"
+            className="inline-flex min-h-11 items-center justify-center gap-2 bg-accent px-5 py-2 text-sm font-semibold text-background transition hover:opacity-90"
           >
+            <LogIn className="h-4 w-4" aria-hidden />
             Continue with Roblox
           </Link>
           <p className="max-w-xl text-xs leading-5 text-muted">
@@ -103,7 +104,7 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
         ) : null}
       </section>
 
-      <section className="space-y-5 border-t border-border/60 pt-8">
+      <section className="space-y-5 border-t border-border/60 pt-7">
         <div className="max-w-2xl space-y-2">
           <h2 className="text-2xl font-semibold text-foreground">What you get when you sign in</h2>
           <p className="text-base leading-7 text-muted">
@@ -136,14 +137,14 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
           <div className="flex items-center gap-3">
             <Link
               href="/account"
-              className="inline-flex min-h-10 items-center justify-center rounded-md border border-border/70 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+              className="inline-flex min-h-10 items-center justify-center border border-border/70 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
             >
               Account
             </Link>
             <form action={signOut}>
               <button
                 type="submit"
-                className="inline-flex min-h-10 items-center justify-center rounded-md border border-border/70 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
+                className="inline-flex min-h-10 items-center justify-center border border-border/70 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
               >
                 Sign out
               </button>

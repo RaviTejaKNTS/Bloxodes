@@ -644,10 +644,6 @@ function renderFieldValue(field: CatalogPresentationField, size: "card" | "table
   );
 }
 
-function shouldStackCardField(field: CatalogPresentationField): boolean {
-  return field.kind === "detail" || Boolean(field.parts?.length);
-}
-
 function CatalogImagePlaceholder({ title, compact = false }: { title: string; compact?: boolean }) {
   const initials = title
     .split(/\s+/)
@@ -755,22 +751,14 @@ function ForgeItemCard({
         </div>
 
         <dl className="mt-4 space-y-3 border-t border-border/60 pt-4">
-          {presentation.fields.map((field) => {
-            const stackField = shouldStackCardField(field);
-            return (
-              <div
-                key={field.key}
-                className={
-                  stackField
-                    ? "space-y-1.5"
-                    : "grid grid-cols-[minmax(6.5rem,0.4fr)_minmax(0,1fr)] gap-3"
-                }
-              >
-                <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{field.label}</dt>
-                <dd className="min-w-0 text-sm">{renderFieldValue(field)}</dd>
-              </div>
-            );
-          })}
+          {presentation.fields.map((field) => (
+            <div key={field.key} className="grid grid-cols-[minmax(7.75rem,0.42fr)_minmax(0,1fr)] items-start gap-4">
+              <dt className="min-w-0 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted [overflow-wrap:break-word]">
+                {field.label}
+              </dt>
+              <dd className="min-w-0 text-sm">{renderFieldValue(field)}</dd>
+            </div>
+          ))}
         </dl>
       </div>
     </article>

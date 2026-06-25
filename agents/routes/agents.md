@@ -44,9 +44,9 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 
 | Route | Methods | File | Purpose |
 | --- | --- | --- | --- |
-| `/auth/roblox/login` | `GET` | `src/app/auth/roblox/login/route.ts` | Start Roblox OAuth login flow. |
+| `/auth/roblox/login` | `GET` | `src/app/auth/roblox/login/route.ts` | Start Roblox OAuth login flow; accepts sanitized `next` and `source` paths for return/login-source tracking. |
 | `/auth/roblox/callback` | `GET` re-export | `src/app/auth/roblox/callback/route.ts` | Stable callback entrypoint that re-exports the login callback handler. |
-| `/auth/roblox/callback/login` | `GET` | `src/app/auth/roblox/callback/login/route.ts` | OAuth callback, user upsert, and app-session creation. |
+| `/auth/roblox/callback/login` | `GET` | `src/app/auth/roblox/callback/login/route.ts` | OAuth callback, user upsert, app-session creation, and login-source path storage. |
 
 ## Feed And Sitemap Routes
 

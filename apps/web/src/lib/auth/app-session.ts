@@ -34,6 +34,11 @@ export type AppSession = {
   expiresAt: string;
 };
 
+type CreateAppSessionOptions = {
+  loginSourcePath?: string | null;
+  loginReturnPath?: string | null;
+};
+
 export type CurrentAppUser = {
   user_id: string;
   role: "admin" | "user";
@@ -190,7 +195,7 @@ async function loadValidSession(token: string | null | undefined): Promise<AppSe
   };
 }
 
-export async function createAppSession(userId: string, userAgent?: string | null) {
+export async function createAppSession(userId: string, userAgent?: string | null, options: CreateAppSessionOptions = {}) {
   const sessionLifetime = getSessionLifetime();
   const supabase = supabaseAdmin();
 
@@ -199,6 +204,8 @@ export async function createAppSession(userId: string, userAgent?: string | null
     .insert({
       user_id: userId,
       user_agent: userAgent?.slice(0, 512) ?? null,
+      login_source_path: options.loginSourcePath ?? null,
+      login_return_path: options.loginReturnPath ?? null,
       expires_at: sessionLifetime.expiresAt
     })
     .select("id, user_id, expires_at")

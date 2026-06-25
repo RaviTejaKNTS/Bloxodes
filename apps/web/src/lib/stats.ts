@@ -10,6 +10,7 @@ const STATS_HOME_RISERS_LIMIT = 10;
 const STATS_HOME_GENRES_LIMIT = 10;
 const STATS_HOME_RISERS_MIN_PLAYERS = 5000;
 const STATS_HOME_RISERS_MIN_GAIN = 1000;
+export const STATS_GAME_MIN_RATING_VOTES = 25;
 const SUPABASE_READ_PAGE_SIZE = 1000;
 const SUPABASE_IN_CHUNK_SIZE = 500;
 const STATS_GROWTH_BASELINE_TOLERANCE_MS = 90 * 60 * 1000;
@@ -999,8 +1000,14 @@ export function getRatingPercent(likes?: number | null, dislikes?: number | null
   const up = typeof likes === "number" ? likes : 0;
   const down = typeof dislikes === "number" ? dislikes : 0;
   const total = up + down;
-  if (total <= 0) return null;
+  if (total < STATS_GAME_MIN_RATING_VOTES) return null;
   return Math.round((up / total) * 1000) / 10;
+}
+
+function hasEnoughRatingVotes(likes?: number | null, dislikes?: number | null) {
+  const up = typeof likes === "number" ? likes : 0;
+  const down = typeof dislikes === "number" ? dislikes : 0;
+  return up + down >= STATS_GAME_MIN_RATING_VOTES;
 }
 
 function percentChange(current: number | null, previous: number | null): number | null {
@@ -1079,7 +1086,7 @@ function mapIndexedGame(row: StatsGameIndexRow): StatsGame {
   const base = mapUniverse(row);
   const hydrated = {
     ...base,
-    ratingPercent: toNumber(row.rating_percent) ?? base.ratingPercent,
+    ratingPercent: hasEnoughRatingVotes(row.likes, row.dislikes) ? (toNumber(row.rating_percent) ?? base.ratingPercent) : null,
     rank: toNumber(row.global_playing_rank),
     growth24h: toNumber(row.growth_24h),
     growth24hPercent: toNumber(row.growth_24h_percent),
@@ -1518,6 +1525,9 @@ async function listBaseGames(options: {
   }
 
   const indexSort = options.sort ?? "playing";
+  if (indexSort === "rating") {
+    indexQuery = indexQuery.gte("likes", STATS_GAME_MIN_RATING_VOTES);
+  }
   const indexSortColumn = INDEX_SORT_COLUMNS[indexSort];
   indexQuery = indexQuery
     .order(indexSortColumn, { ascending: indexSort === "created", nullsFirst: false })
@@ -1577,6 +1587,9 @@ async function listBaseGames(options: {
   }
 
   const fallbackSort = options.sort ?? "playing";
+  if (fallbackSort === "rating") {
+    query = query.gte("likes", STATS_GAME_MIN_RATING_VOTES);
+  }
   const sortColumn = SORT_COLUMNS[fallbackSort];
   if (sortColumn) {
     query = query.order(sortColumn, { ascending: fallbackSort === "created", nullsFirst: false });
@@ -1819,7 +1832,9 @@ async function getPlatformTrendFallback(games: StatsGame[]): Promise<StatsChartP
     existing.visits = (existing.visits ?? 0) + (row.visits_end ?? 0);
     existing.favorites = (existing.favorites ?? 0) + (row.favorites_end ?? 0);
     existing.samples = (existing.samples ?? 0) + (row.sample_count ?? 0);
-    const rating = getRatingPercent(row.likes_end, row.dislikes_end) ?? row.rating_percent;
+    const rating = hasEnoughRatingVotes(row.likes_end, row.dislikes_end)
+      ? (getRatingPercent(row.likes_end, row.dislikes_end) ?? row.rating_percent)
+      : null;
     if (typeof rating === "number") {
       const sampleCount = Math.max(row.sample_count ?? 1, 1);
       const current = ratingByHour.get(row.hour_start) ?? { total: 0, weight: 0 };
@@ -2651,7 +2666,9 @@ function bucketRows(
 
       const likesEnd = latestNumber(bucket, "likes_end");
       const dislikesEnd = latestNumber(bucket, "dislikes_end");
-      const rating = getRatingPercent(likesEnd, dislikesEnd) ?? latestNumber(bucket, "rating_percent");
+      const rating = hasEnoughRatingVotes(likesEnd, dislikesEnd)
+        ? (getRatingPercent(likesEnd, dislikesEnd) ?? latestNumber(bucket, "rating_percent"))
+        : null;
       const players = playingWeight > 0 ? playingTotal / playingWeight : null;
 
       return {

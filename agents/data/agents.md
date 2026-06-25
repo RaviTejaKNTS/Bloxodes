@@ -77,6 +77,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `app_users`
   - Account identity and Roblox-linked profile data.
 - `app_sessions`
+  - Stores server-managed session rows plus sanitized `login_source_path` and `login_return_path` from the Roblox OAuth flow.
   - Session storage for signed-in flows.
 - `comments`
   - Comment threads for supported content types, including codes, articles, catalogs, events, tools, wiki pages, and wiki catalog pages. Stores server-resolved `page_type` and `page_url` for operator review.

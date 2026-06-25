@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, User, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { AccountSheetButton } from "@/components/AccountSheetButton";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -23,26 +24,6 @@ type MobileSiteHeaderProps = {
   account: SidebarAccount;
   initialPathname: string;
 };
-
-function AccountIcon({ account }: { account: SidebarAccount }) {
-  if (account.avatarUrl) {
-    return (
-      <img
-        src={account.avatarUrl}
-        alt=""
-        aria-hidden="true"
-        className="h-[26px] w-[26px] rounded-full border border-sidebar-border object-cover"
-        loading="lazy"
-      />
-    );
-  }
-
-  return (
-    <span className="inline-flex h-[26px] w-[26px] items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-foreground/70">
-      <User aria-hidden className="h-4 w-4" />
-    </span>
-  );
-}
 
 export function MobileSiteHeader({ account, initialPathname }: MobileSiteHeaderProps) {
   const [open, setOpen] = useState(false);
@@ -68,7 +49,7 @@ export function MobileSiteHeader({ account, initialPathname }: MobileSiteHeaderP
             <Menu aria-hidden className="h-5 w-5" />
           </Button>
           <SiteLogo className="h-8" />
-          <SiteFeedbackButton className="ml-auto px-3" labelClassName="hidden sm:inline" />
+          <AccountSheetButton account={account} className="ml-auto h-10 w-10" />
         </div>
       </header>
 
@@ -132,17 +113,11 @@ export function MobileSiteHeader({ account, initialPathname }: MobileSiteHeaderP
 
               <div className="mx-3 my-2 h-px bg-sidebar-border" />
 
-              <div className="px-1">
-                <Link
-                  href={account.href}
-                  aria-label={account.label}
-                  title={account.label}
-                  onClick={closeMenu}
-                  className="flex h-9 w-full items-center justify-start gap-2.5 rounded-lg px-2.5 text-[13px] font-semibold text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
-                >
-                  <AccountIcon account={account} />
-                  <span className="min-w-0 truncate">{account.signedIn ? account.label : "Sign in"}</span>
-                </Link>
+              <div className="space-y-1 px-1">
+                <SiteFeedbackButton
+                  className="flex h-9 w-full justify-start rounded-lg px-2.5 text-[13px] font-semibold text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                  labelClassName="inline"
+                />
                 <div className="flex h-9 items-center justify-between gap-2 rounded-lg px-2.5 hover:bg-sidebar-accent">
                   <span className="text-[13px] font-semibold text-sidebar-foreground/70">Theme</span>
                   <ThemeToggle className="h-[26px] w-[26px] border-sidebar-border bg-transparent shadow-none hover:translate-y-0 hover:bg-sidebar-accent [&_svg]:h-3.5 [&_svg]:w-3.5" />
