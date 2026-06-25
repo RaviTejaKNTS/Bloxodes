@@ -704,12 +704,17 @@ export function renderForgeCatalogPage({
 
         <CatalogAdSlot />
 
-        <div className="grid gap-4 md:grid-cols-2 md:items-end">
-          <ForgeCatalogNav activeSlug={config.slug} className="max-w-none" />
-          {sectionNav.length > 1 ? <ForgeSectionNav sections={sectionNav} className="max-w-none" /> : null}
-        </div>
-
-        <ForgeCatalogView sections={pageSections} config={config} pagination={pagination.info} />
+        <ForgeCatalogView
+          sections={pageSections}
+          config={config}
+          pagination={pagination.info}
+          toolbar={
+            <>
+              <ForgeCatalogNav activeSlug={config.slug} className="max-w-none" />
+              {sectionNav.length > 1 ? <ForgeSectionNav sections={sectionNav} className="max-w-none" /> : null}
+            </>
+          }
+        />
 
         <CatalogAdSlot />
 

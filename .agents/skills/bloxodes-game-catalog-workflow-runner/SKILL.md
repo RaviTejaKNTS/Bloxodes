@@ -92,6 +92,11 @@ Once the data subagent completes the process and updates the `brief.md`, check t
 - Every item lands in the right section.
 - Card fields help players compare items.
 - Card summaries are present when the collection needs plain-English item context.
+- The dataset has a natural source-backed highlight-style field when the catalog supports one, such as availability, status, strength, best use, or recommendation.
+- Chip-style fields are used for prices, rarity, tier, duration, cooldown, chance, costs, levels, or important short numbers.
+- Detail fields are complete prose when the value is a sentence; semicolon prose is not being turned into fake lists.
+- Public fields are consistent across rows, with missing source-backed values left empty/null instead of dropping the field.
+- Values do not repeat their labels, such as `Type: Standard boost` inside the `type` value.
 - Hidden/source fields are not exposed as public card fields.
 - Image need and image field are recorded for the next step.
 - The route renderer/config can show the sections, fields, planned image field, and item count.
@@ -113,6 +118,7 @@ Before approving any final.json, make sure all the following are met:
 - Check if item count and title count agree.
 - All the writing is simple and easy for everyone to read.
 - Check if card fields help players compare items.
+- Check if card/list details follow the new presentation contract: description, highlight where natural, chip values for compact numbers, detail values for prose, and no label-stuffed values.
 - Check if image readiness is approved or missing images were clearly accepted.
 - Check if sections are useful and labels are easy to understand.
 - Check if `description_json` keys match actual rendered section labels.

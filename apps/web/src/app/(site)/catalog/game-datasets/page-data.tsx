@@ -6667,9 +6667,7 @@ function buildViewConfig(
       key !== descriptionKey &&
       !subtitleKeys.includes(key)
   );
-  const maxStats = sectionOverride?.maxStats ?? Math.min(6, statKeys.length);
   const stats = Array.from(new Set(statKeys))
-    .slice(0, maxStats)
     .map((key) => ({ key, label: getFieldLabel(key) }));
   const hasImages = dataset.items.some((item) => Boolean(normalizeText(item.image)));
 
@@ -6689,7 +6687,7 @@ function buildViewConfig(
     descriptionKey: descriptionKey ?? undefined,
     cardDescriptionKey: descriptionKey ?? undefined,
     stats,
-    maxStats,
+    maxStats: stats.length,
     hideImages: sectionOverride?.hideImages ?? !hasImages
   };
 }
@@ -7089,12 +7087,17 @@ export function renderGameDatasetCatalogPage({
 
         <CatalogAdSlot />
 
-        <div className="grid gap-4 md:grid-cols-2 md:items-end">
-          <DatasetCatalogNav config={config} className="max-w-none" />
-          {sectionNav.length > 1 ? <SectionNav sections={sectionNav} className="max-w-none" /> : null}
-        </div>
-
-        <ForgeCatalogView sections={groupedSectionsWithNotes} config={preparedCatalog.viewConfig} pagination={pagination.info} />
+        <ForgeCatalogView
+          sections={groupedSectionsWithNotes}
+          config={preparedCatalog.viewConfig}
+          pagination={pagination.info}
+          toolbar={
+            <>
+              <DatasetCatalogNav config={config} className="max-w-none" />
+              {sectionNav.length > 1 ? <SectionNav sections={sectionNav} className="max-w-none" /> : null}
+            </>
+          }
+        />
 
         <CatalogAdSlot />
 

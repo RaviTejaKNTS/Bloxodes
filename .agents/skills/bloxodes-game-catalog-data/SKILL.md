@@ -38,6 +38,19 @@ Use `--file <dataset.json>` if the catalog is not registered yet. Do not use `--
 
 14. Update `brief.md` with data status and gaps from the checker.
 
+## Catalog Presentation Contract
+
+The shared game catalog renderer now treats cards as the primary view and list/table as the complete scanning view. Prepare dataset rows so both views can show the same useful information cleanly.
+
+- Every item should have a clear name, one useful description field such as `cardSummary`, `description`, or `summary`, and the same public comparison fields across rows. If a value is not source-backed for one item, leave it empty/null so the renderer can show `-`; do not remove the field from that row.
+- Include all important player-facing details in dataset fields. Do not hide useful details only because cards are compact; the renderer decides how to present long values.
+- Keep labels out of values. Use `"type": "Standard boost"`, not `"type": "Type: Standard boost"`.
+- Plan at least one source-backed highlight-style field when the catalog has a natural one, such as `availability`, `status`, `bestUse`, `mainStrength`, `recommendedFor`, or `strength`. Highlights should call out useful positive/status information; do not invent a highlight just to satisfy layout.
+- Use chip-friendly fields for prices, rarity, tier, levels, duration, cooldown, chance, cost, BPS, damage, or other important short numbers.
+- Use detail fields for complete sentence values such as obtainment notes, behavior, weakness, effect notes, route notes, or strategy notes. Keep these concise enough to scan.
+- Avoid semicolon pseudo-lists in prose. If the value is one sentence, write it as one sentence. Use arrays only when the source really provides separate list items.
+- If the catalog has some item images but not all, still wire the available images. The renderer will keep card shape consistent with placeholders for missing images.
+
 ## Data Approval Notes
 
 Add this section to `brief.md`:
@@ -52,6 +65,9 @@ Data readiness:
 - Section order:
 - Card fields:
 - Card summary coverage:
+- Highlight-style field:
+- Chip/detail fields:
+- Field consistency:
 - Image needed: yes/no
 - Image field:
 - Hidden/source fields:

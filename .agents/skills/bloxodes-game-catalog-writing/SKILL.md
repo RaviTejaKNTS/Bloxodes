@@ -10,7 +10,7 @@ Use this after `brief.md`, data readiness, and image readiness are approved. Use
 ## Workflow
 
 1. Read the approved `brief.md`.
-2. Confirm `Data readiness` says the dataset, section field, card fields, and renderer/config support are ready.
+2. Confirm `Data readiness` says the dataset, section field, card fields, highlight-style field, chip/detail fields, field consistency, and renderer/config support are ready.
 3. Confirm `Image readiness` is approved, or missing images were clearly accepted.
 4. Create or update:
 
@@ -44,13 +44,20 @@ tmp/content-workspace/<game-slug>/catalogs/<collection-slug>/
 
 **Card copy**
 
-The card should have only this and nothing more:
+Cards are the default catalog view. They should feel complete, aligned, and easy to scan:
 
 - Name of the item
-- Short description of the item
+- One useful description line or short paragraph.
 - Useful key-value facts that are easy to scan.
-- There is no limit on how many key value pairs you can have, but only include the ones that are useful for players to compare items.
+- At least one source-backed highlight-style field when the catalog has a natural status, strength, availability, best-use, or recommendation value.
+- Chip-style values for prices, time, rarity, tier, chance, levels, costs, damage, BPS, or other important short numbers.
+- Detail values for longer sentence facts such as obtainment, behavior, weaknesses, route notes, or strategy notes.
+- There is no hard limit on key-value pairs, but only include fields that help players compare items or understand important differences.
 - Card details come from the dataset. Do not invent fields in `final.json`; make sure the dataset already has the fields the page needs.
+- Both cards and list view show the same public details. Do not plan details for one view only.
+- Keep field names consistent across rows. Missing source-backed values should stay empty/null in the dataset so the renderer can show `-`.
+- Do not merge labels into values. The dataset should provide a value like `Available`, not `Availability: Available`.
+- Do not turn normal sentence values into random bullet-like fragments. Use complete prose for detail fields and arrays only for real lists.
 
 **description_json**
 

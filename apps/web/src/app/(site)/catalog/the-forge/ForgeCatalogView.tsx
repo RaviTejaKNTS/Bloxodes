@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { PagePagination } from "@/components/PagePagination";
 import type { CatalogPaginationInfo } from "./catalog-pagination";
+import { CatalogImageLightbox } from "./CatalogImageLightbox";
 import { ForgeCatalogViewShell } from "./ForgeCatalogViewShell";
 
 type ForgeCatalogStat = { key: string; label: string };
@@ -42,6 +43,7 @@ type ForgeCatalogViewProps = {
   sections: ForgeCatalogSection[];
   config: ForgeCatalogConfig;
   pagination?: CatalogPaginationInfo | null;
+  toolbar?: ReactNode;
 };
 
 type ForgeCatalogDisplayStat = {
@@ -49,6 +51,31 @@ type ForgeCatalogDisplayStat = {
   value: string;
   parts?: string[];
   tone?: "positive" | "negative" | "warning" | "neutral";
+};
+
+type CatalogFieldKind = "normal" | "highlight" | "chip" | "detail";
+
+type CatalogPresentationFieldDefinition = {
+  key: string;
+  label: string;
+  source: "badge" | "subtitle" | "stat" | "description";
+};
+
+type CatalogPresentationField = {
+  key: string;
+  label: string;
+  value: string | null;
+  kind: CatalogFieldKind;
+  tone?: ForgeCatalogDisplayStat["tone"];
+  parts?: string[];
+};
+
+type CatalogItemPresentation = {
+  id: string;
+  title: string;
+  image: string | null;
+  description: string | null;
+  fields: CatalogPresentationField[];
 };
 
 type BooleanishValue = {
@@ -363,55 +390,6 @@ function getStatusLabel(label: string): string {
   return ["availability", "available", "status"].includes(loweredLabel) ? "Status" : label;
 }
 
-function formatBadgeValue(key: string, value: unknown): string | null {
-  const normalized = normalizeValue(value);
-  if (!normalized) return null;
-
-  const displayStat = buildDisplayStat(formatKeyLabel(key), value);
-  if (displayStat?.label === "Status") return displayStat.value;
-
-  return normalized;
-}
-
-function formatSubtitleValue(key: string, value: unknown): string | null {
-  const normalized = normalizeValue(value);
-  if (!normalized) return null;
-
-  const booleanValue = parseBooleanishValue(normalized);
-  const loweredKey = key.toLowerCase();
-  if (["available", "availability"].includes(loweredKey) && booleanValue) {
-    return withBooleanDetail(booleanValue.value ? "Available" : "Not available", booleanValue.detail);
-  }
-
-  if (loweredKey === "obtainable" && booleanValue) {
-    return withBooleanDetail(booleanValue.value ? "Obtainable" : "Not obtainable", booleanValue.detail);
-  }
-
-  if (loweredKey === "sea" && /^\d/.test(normalized)) {
-    return `Sea ${normalized}`;
-  }
-
-  if (loweredKey === "level" && !/^level\b/i.test(normalized)) {
-    return `Level ${normalized}`;
-  }
-
-  if (["sourceType", "source_type"].includes(key) || ["category", "type", "status", "source", "location", "building"].includes(loweredKey)) {
-    return normalized;
-  }
-
-  return `${formatKeyLabel(key)} ${normalized}`;
-}
-
-function buildSubtitle(item: ForgeCatalogItem, config: ForgeCatalogConfig): string | null {
-  if (!config.subtitleKeys?.length) return null;
-  const parts = config.subtitleKeys
-    .map((key) => formatSubtitleValue(key, item[key]))
-    .filter(Boolean)
-    .slice(0, 2) as string[];
-  if (!parts.length) return null;
-  return parts.join(" • ");
-}
-
 function splitStatParts(label: string, value: string): string[] | null {
   const cleanedValue = normalizeDisplayText(value);
   const loweredLabel = label.toLowerCase();
@@ -420,7 +398,13 @@ function splitStatParts(label: string, value: string): string[] | null {
     .map((part) => normalizeDisplayText(part))
     .filter(Boolean);
 
-  if (semicolonParts.length > 1) {
+  const shouldSplitSemicolonParts =
+    semicolonParts.length > 1 &&
+    (loweredLabel.includes("bonus") ||
+      loweredLabel.includes("stat") ||
+      semicolonParts.every((part) => /^[+-]?\d|\b(level|lv\.|rank|tier)\b|:/.test(part.toLowerCase())));
+
+  if (shouldSplitSemicolonParts) {
     return semicolonParts;
   }
 
@@ -459,276 +443,415 @@ function buildDisplayStat(label: string, value: unknown): ForgeCatalogDisplaySta
   };
 }
 
-function buildStatEntries(item: ForgeCatalogItem, config: ForgeCatalogConfig) {
-  const statMap = new Map(
-    (config.stats ?? []).map((stat) => [
-      stat.key,
-      {
-        label: stat.label,
-        value: item[stat.key]
-      }
-    ])
-  );
-
-  const preferredKeys = CARD_STAT_OVERRIDES[config.slug] ?? (config.stats ?? []).map((stat) => stat.key);
-
-  const stats = preferredKeys
-    .map((key) => {
-      const stat = statMap.get(key);
-      return buildDisplayStat(stat?.label ?? formatKeyLabel(key), stat?.value ?? item[key]);
-    })
-    .filter(Boolean) as ForgeCatalogDisplayStat[];
-
-  if (!stats.length) return [];
-  const maxStats = config.maxStats ?? stats.length;
-  return stats.slice(0, maxStats);
-}
-
-function getStatToneClass(stat: ForgeCatalogDisplayStat): string {
-  if (stat.tone === "positive") return "text-emerald-300";
-  if (stat.tone === "negative") return "text-rose-300";
-  if (stat.tone === "warning") return "text-amber-300";
+function getFieldToneClass(field: CatalogPresentationField): string {
+  if (field.kind === "highlight") return "text-emerald-300";
+  if (field.tone === "negative") return "text-rose-300";
+  if (field.tone === "warning") return "text-amber-300";
   return "text-foreground";
 }
 
-function renderValue(value: string | null) {
-  if (!value) {
-    return <span className="text-xs text-muted">—</span>;
+function addUniqueField(
+  fields: CatalogPresentationFieldDefinition[],
+  seen: Set<string>,
+  definition: CatalogPresentationFieldDefinition | null
+) {
+  if (!definition || seen.has(definition.key)) return;
+  seen.add(definition.key);
+  fields.push(definition);
+}
+
+function getPrimaryDescriptionKey(config: ForgeCatalogConfig): string | null {
+  return config.cardDescriptionKey ?? config.descriptionKey ?? null;
+}
+
+function buildFieldDefinitions(config: ForgeCatalogConfig): CatalogPresentationFieldDefinition[] {
+  const fields: CatalogPresentationFieldDefinition[] = [];
+  const seen = new Set<string>();
+  const descriptionKey = getPrimaryDescriptionKey(config);
+  const statMap = new Map((config.stats ?? []).map((stat) => [stat.key, stat.label]));
+  const preferredKeys = CARD_STAT_OVERRIDES[config.slug] ?? (config.stats ?? []).map((stat) => stat.key);
+
+  addUniqueField(
+    fields,
+    seen,
+    config.badgeKey && config.badgeKey !== descriptionKey
+      ? { key: config.badgeKey, label: formatKeyLabel(config.badgeKey), source: "badge" }
+      : null
+  );
+
+  for (const key of config.subtitleKeys ?? []) {
+    addUniqueField(
+      fields,
+      seen,
+      key !== descriptionKey ? { key, label: formatKeyLabel(key), source: "subtitle" } : null
+    );
   }
-  return <span className="text-sm text-foreground">{value}</span>;
-}
 
-function formatCompactNumber(value: number): string {
-  return value.toLocaleString("en-US");
-}
-
-function parseRobuxValue(value: unknown): number | null {
-  if (typeof value === "number" && Number.isFinite(value)) return value;
-  const normalized = normalizeValue(value);
-  if (!normalized) return null;
-  const parsed = Number.parseInt(normalized.replace(/[^\d]/g, ""), 10);
-  return Number.isFinite(parsed) ? parsed : null;
-}
-
-function formatRobuxPrice(item: ForgeCatalogItem): string | null {
-  const priceRobux = parseRobuxValue(item.priceRobux);
-  if (priceRobux !== null) {
-    return priceRobux === 0 ? "Free" : `${formatCompactNumber(priceRobux)} Robux`;
+  for (const key of preferredKeys) {
+    addUniqueField(
+      fields,
+      seen,
+      key !== descriptionKey
+        ? { key, label: statMap.get(key) ?? formatKeyLabel(key), source: "stat" }
+        : null
+    );
   }
 
-  return normalizeValue(item.price);
+  for (const stat of config.stats ?? []) {
+    addUniqueField(
+      fields,
+      seen,
+      stat.key !== descriptionKey ? { key: stat.key, label: stat.label, source: "stat" } : null
+    );
+  }
+
+  if (config.descriptionKey && config.descriptionKey !== descriptionKey) {
+    addUniqueField(fields, seen, {
+      key: config.descriptionKey,
+      label: getDescriptionLabel(config.descriptionKey),
+      source: "description"
+    });
+  }
+
+  if (config.cardDescriptionKey && config.cardDescriptionKey !== descriptionKey) {
+    addUniqueField(fields, seen, {
+      key: config.cardDescriptionKey,
+      label: getDescriptionLabel(config.cardDescriptionKey),
+      source: "description"
+    });
+  }
+
+  return fields;
 }
 
-function buildRobloxCatalogUrl(item: ForgeCatalogItem): string | null {
-  const directUrl = normalizeValue(item.robloxUrl);
-  if (directUrl?.startsWith("https://www.roblox.com/")) return directUrl;
-
-  const robloxId = normalizeValue(item.robloxId);
-  if (robloxId) return `https://www.roblox.com/catalog/${robloxId}`;
-
-  return null;
+function getDescriptionLabel(key: string | null | undefined): string {
+  if (!key) return "Description";
+  const loweredKey = key.toLowerCase();
+  if (["cardsummary", "card_summary", "summary", "description", "overview"].includes(loweredKey)) {
+    return "Description";
+  }
+  return formatKeyLabel(key);
 }
 
-function RivalsUgcItemCard({ item }: { item: ForgeCatalogItem }) {
-  const image = resolveImageSrc(item.image ?? null);
-  const price = formatRobuxPrice(item);
-  const creator = normalizeValue(item.creatorName);
-  const itemType = normalizeValue(item.itemType);
-  const availability = normalizeValue(item.availability);
-  const rewardSummary = normalizeValue(item.rewardSummary);
-  const robloxId = normalizeValue(item.robloxId);
-  const robloxUrl = buildRobloxCatalogUrl(item);
+function getFieldDisplayStat(definition: CatalogPresentationFieldDefinition, item: ForgeCatalogItem) {
+  return buildDisplayStat(definition.label, item[definition.key]);
+}
+
+function isChipField(key: string, label: string, value: string): boolean {
+  const marker = `${key} ${label}`.toLowerCase();
+  if (/\b(price|cost|robux|money|cash|duration|time|cooldown|level|chance|odds|rarity|tier|rank|stage|sea|speed|health|damage|xp|exp|seats|luck)\b/.test(marker)) {
+    return true;
+  }
+  return /^[+-]?\d[\d,.\s%kxKMB]*$/.test(value) || /\b(robux|bucks|coins|cash|xp|sec|seconds|min|minutes|hours|%)\b/i.test(value);
+}
+
+function isLongSentenceValue(value: string): boolean {
+  const words = value.split(/\s+/).filter(Boolean);
+  return value.length > 92 || words.length > 14 || /[.!?]\s/.test(value);
+}
+
+function classifyFieldKind(
+  definition: CatalogPresentationFieldDefinition,
+  displayStat: ForgeCatalogDisplayStat | null
+): CatalogFieldKind {
+  if (!displayStat?.value) return "normal";
+  if (isLongSentenceValue(displayStat.value)) return "detail";
+  if (displayStat.parts?.length) return "detail";
+  if (displayStat.tone === "positive") return "highlight";
+  if (isChipField(definition.key, displayStat.label, displayStat.value)) return "chip";
+  return "normal";
+}
+
+function buildPresentationField(
+  definition: CatalogPresentationFieldDefinition,
+  item: ForgeCatalogItem
+): CatalogPresentationField {
+  const displayStat = getFieldDisplayStat(definition, item);
+  return {
+    key: definition.key,
+    label: displayStat?.label ?? definition.label,
+    value: displayStat?.value ?? null,
+    parts: displayStat?.parts,
+    tone: displayStat?.tone,
+    kind: classifyFieldKind(definition, displayStat)
+  };
+}
+
+function buildItemPresentation(
+  item: ForgeCatalogItem,
+  config: ForgeCatalogConfig,
+  fieldDefinitions: CatalogPresentationFieldDefinition[]
+): CatalogItemPresentation {
+  const descriptionKey = getPrimaryDescriptionKey(config);
+  return {
+    id: item.id,
+    title: item.name,
+    image: resolveImageSrc(item.image ?? null),
+    description: descriptionKey ? normalizeValue(item[descriptionKey]) : null,
+    fields: fieldDefinitions.map((definition) => buildPresentationField(definition, item))
+  };
+}
+
+function presentationHasWideContent(presentation: CatalogItemPresentation): boolean {
+  return (
+    presentation.title.length > 34 ||
+    Boolean(presentation.description && isLongSentenceValue(presentation.description)) ||
+    presentation.fields.some((field) => field.kind === "detail" || Boolean(field.value && isLongSentenceValue(field.value)))
+  );
+}
+
+function renderMissingValue() {
+  return <span className="text-xs text-muted">-</span>;
+}
+
+function renderFieldValue(field: CatalogPresentationField, size: "card" | "table" = "card") {
+  if (!field.value) return renderMissingValue();
+  const textWrapClass =
+    size === "table"
+      ? "[word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:pretty]"
+      : "[overflow-wrap:anywhere]";
+
+  if (field.kind === "chip") {
+    return (
+      <span
+        className={`inline-flex max-w-full items-center rounded-md border border-border/70 bg-background px-2 py-1 text-xs font-semibold leading-snug text-foreground ${textWrapClass}`}
+      >
+        <span className="min-w-0 whitespace-normal">{field.value}</span>
+      </span>
+    );
+  }
+
+  if (field.parts?.length) {
+    return (
+      <ul className={size === "table" ? "space-y-1" : "space-y-1.5"}>
+        {field.parts.map((part, index) => (
+          <li key={`${field.key}-${part}-${index}`} className={`leading-snug ${textWrapClass} ${getFieldToneClass(field)}`}>
+            {part}
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   return (
-    <article
-      id={`item-${item.id}`}
-      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
+    <span
+      className={`block leading-snug ${textWrapClass} ${
+        field.kind === "detail" ? "text-sm font-medium" : "text-sm font-semibold"
+      } ${getFieldToneClass(field)}`}
     >
-      <div className="relative aspect-square w-full overflow-hidden border-b border-border/60 bg-background/70">
-        {image ? (
+      {field.value}
+    </span>
+  );
+}
+
+function CatalogImagePlaceholder({ title, compact = false }: { title: string; compact?: boolean }) {
+  const initials = title
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => (word.match(/[A-Za-z0-9]/)?.[0] ?? "").toUpperCase())
+    .filter(Boolean)
+    .join("");
+
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-surface-muted/70 px-4 text-center">
+      <span
+        aria-hidden="true"
+        className={`inline-flex items-center justify-center rounded-md border border-border/70 bg-background/80 font-semibold text-muted ${
+          compact ? "h-14 w-14 text-base" : "h-20 w-20 text-2xl"
+        }`}
+      >
+        {initials || "?"}
+      </span>
+      <span className={`${compact ? "sr-only" : "line-clamp-2 text-xs font-semibold leading-snug text-muted"}`}>
+        {title}
+      </span>
+    </div>
+  );
+}
+
+function CatalogImageFrame({
+  presentation,
+  showImage,
+  compact = false
+}: {
+  presentation: CatalogItemPresentation;
+  showImage: boolean;
+  compact?: boolean;
+}) {
+  if (!showImage) return null;
+
+  const frameClass = compact
+    ? "flex h-40 w-40 items-center justify-center overflow-hidden rounded-xl bg-surface-muted/70 p-3"
+    : "relative aspect-[4/3] w-full overflow-hidden border-b border-border/60 bg-background/50";
+
+  if (!presentation.image) {
+    return (
+      <div className={frameClass}>
+        <CatalogImagePlaceholder title={presentation.title} compact={compact} />
+      </div>
+    );
+  }
+
+  return (
+    <div className={frameClass}>
+      <button
+        type="button"
+        data-catalog-image-preview
+        data-catalog-image-src={presentation.image}
+        data-catalog-image-alt={presentation.title}
+        className="group/image relative flex h-full w-full items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+        aria-label={`Open larger image for ${presentation.title}`}
+      >
+        {compact ? (
           <Image
-            src={image}
-            alt={item.name}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-contain p-3"
+            src={presentation.image}
+            alt={presentation.title}
+            width={160}
+            height={160}
+            className="h-36 w-36 object-contain transition duration-300 group-hover/image:scale-[1.04]"
             unoptimized
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-surface-muted/60">
-            <span className="sr-only">Image unavailable for {item.name}</span>
-          </div>
+          <Image
+            src={presentation.image}
+            alt={presentation.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1440px) 33vw, 25vw"
+            className="object-contain p-5 transition duration-300 group-hover/image:scale-[1.03]"
+            unoptimized
+          />
         )}
-        {price ? (
-          <div className="absolute left-2 top-2 inline-flex rounded-md bg-black/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm">
-            {price}
-          </div>
-        ) : null}
-      </div>
-
-      <div className="flex flex-1 flex-col gap-4 p-3">
-        <div>
-          <h3 className="text-sm font-semibold leading-4 text-foreground line-clamp-2">{item.name}</h3>
-          {creator ? (
-            <p className="-mt-0.5 block truncate text-xs leading-none text-muted">
-              by <span className="font-semibold text-foreground">{creator}</span>
-            </p>
-          ) : null}
-        </div>
-
-        <div className="flex flex-wrap gap-1.5">
-          {itemType ? (
-            <span className="inline-flex items-center rounded-md border border-border/60 bg-background/50 px-2.5 py-1 text-[10px] font-medium text-foreground/85">
-              {itemType}
-            </span>
-          ) : null}
-          {availability ? (
-            <span className="inline-flex items-center rounded-md border border-border/60 bg-background/50 px-2.5 py-1 text-[10px] font-medium text-foreground/85">
-              {availability}
-            </span>
-          ) : null}
-        </div>
-
-        <dl className="space-y-2 rounded-md border border-border/60 bg-background/40 px-3 py-2.5">
-          {rewardSummary ? (
-            <div>
-              <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Reward progress</dt>
-              <dd className="mt-1 text-sm font-semibold leading-snug text-foreground">{rewardSummary}</dd>
-            </div>
-          ) : null}
-          {robloxId ? (
-            <div>
-              <dt className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Roblox ID</dt>
-              <dd className="mt-1 text-sm font-semibold leading-snug text-foreground [overflow-wrap:anywhere]">
-                {robloxId}
-              </dd>
-            </div>
-          ) : null}
-        </dl>
-
-        {robloxUrl ? (
-          <a
-            href={robloxUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-auto inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-xs font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
-          >
-            Open on Roblox
-          </a>
-        ) : null}
-      </div>
-    </article>
+      </button>
+    </div>
   );
 }
 
-function ForgeItemCard({ item, config }: { item: ForgeCatalogItem; config: ForgeCatalogConfig }) {
-  if (config.slug === "rivals-ugc") {
-    return <RivalsUgcItemCard item={item} />;
-  }
-
-  const badge = config.badgeKey ? formatBadgeValue(config.badgeKey, item[config.badgeKey]) : null;
-  const subtitle = buildSubtitle(item, config);
-  const description = config.cardDescriptionKey ? normalizeValue(item[config.cardDescriptionKey]) : null;
-  const stats = buildStatEntries(item, config);
-  const image = resolveImageSrc(item.image ?? null);
-  const showImage = !config.hideImages;
-  const primaryStatIndex = stats.findIndex((stat) => !stat.tone);
-
+function ForgeItemCard({
+  presentation,
+  showImage
+}: {
+  presentation: CatalogItemPresentation;
+  showImage: boolean;
+}) {
   return (
     <article
-      id={`item-${item.id}`}
+      id={`item-${presentation.id}`}
       className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
     >
-      {showImage ? (
-        <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-border/60 bg-background/50">
-          {image ? (
-            <Image
-              src={image}
-              alt={item.name}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1440px) 25vw, 20vw"
-              className="object-contain p-5"
-              unoptimized
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center bg-surface-muted/60">
-              <span className="sr-only">Image unavailable for {item.name}</span>
-            </div>
-          )}
-        </div>
-      ) : null}
-      <div className="flex flex-1 flex-col gap-4 p-4">
-        <div className="space-y-2">
-          {badge ? (
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
-              {badge}
-            </p>
-          ) : null}
-          <h3 className="text-lg font-semibold leading-snug text-foreground">{item.name}</h3>
-          {subtitle ? (
-            <p className="text-sm leading-relaxed text-muted">{subtitle}</p>
-          ) : null}
-          {description ? (
-            <p className="text-sm leading-relaxed text-muted line-clamp-3">{description}</p>
-          ) : null}
+      <CatalogImageFrame presentation={presentation} showImage={showImage} />
+      <div className="flex flex-1 flex-col p-4">
+        <div className="min-h-[5.75rem] space-y-2">
+          <h3 className="line-clamp-2 text-lg font-semibold leading-snug text-foreground [word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:balance]">
+            {presentation.title}
+          </h3>
+          <p className="line-clamp-2 text-sm leading-relaxed text-muted [overflow-wrap:anywhere]">
+            {presentation.description || "-"}
+          </p>
         </div>
 
-        {stats.length ? (
-          <dl className="mt-auto space-y-3 border-t border-border/60 pt-4">
-            {stats.map((stat, index) =>
-              stat.parts?.length ? (
-                <div key={`${stat.label}-${index}`} className="grid grid-cols-[minmax(5rem,0.42fr)_minmax(0,1fr)] gap-3">
-                  <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{stat.label}</dt>
-                  <dd className="min-w-0">
-                    <ul className="space-y-1">
-                      {stat.parts.slice(0, 6).map((part, partIndex) => (
-                        <li
-                          key={`${part}-${partIndex}`}
-                          className={`leading-snug [overflow-wrap:anywhere] ${
-                            index === primaryStatIndex ? "text-[0.94rem] font-bold" : "text-sm font-semibold"
-                          } ${getStatToneClass(stat)}`}
-                        >
-                          {part}
-                        </li>
-                      ))}
-                      {stat.parts.length > 6 ? (
-                        <li className="text-xs font-medium leading-snug text-muted">
-                          +{stat.parts.length - 6} more
-                        </li>
-                      ) : null}
-                    </ul>
-                  </dd>
-                </div>
-              ) : (
-                <div key={`${stat.label}-${index}`} className="grid grid-cols-[minmax(5rem,0.42fr)_minmax(0,1fr)] gap-3">
-                  <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{stat.label}</dt>
-                  <dd
-                    className={`min-w-0 leading-snug [overflow-wrap:anywhere] ${
-                      index === primaryStatIndex ? "text-[0.94rem] font-bold" : "text-sm font-semibold"
-                    } ${getStatToneClass(stat)}`}
-                  >
-                    {stat.value}
-                  </dd>
-                </div>
-              )
-            )}
-          </dl>
-        ) : null}
+        <dl className="mt-4 space-y-3 border-t border-border/60 pt-4">
+          {presentation.fields.map((field) => (
+            <div key={field.key} className="grid grid-cols-[minmax(6.5rem,0.4fr)_minmax(0,1fr)] gap-3">
+              <dt className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">{field.label}</dt>
+              <dd className="min-w-0 text-sm">{renderFieldValue(field)}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </article>
   );
 }
 
-function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; config: ForgeCatalogConfig }) {
-  const stats = (config.stats ?? []).slice(0, config.maxStats ?? (config.stats?.length ?? 0));
-  const badgeLabel = config.badgeKey ? formatKeyLabel(config.badgeKey) : null;
-  const showImages = !config.hideImages;
-  const subtitleLabel = config.subtitleKeys?.length
-    ? config.subtitleKeys.length === 1
-      ? formatKeyLabel(config.subtitleKeys[0])
-      : "Details"
-    : null;
-  const descriptionLabel = config.descriptionKey ? formatKeyLabel(config.descriptionKey) : null;
+const TINY_TABLE_FIELD_KEYS = new Set([
+  "tier",
+  "rank",
+  "level",
+  "stage",
+  "sea",
+  "status",
+  "displayStage",
+  "displayLevel",
+  "visualStage"
+]);
+
+const COMPACT_TABLE_FIELD_KEYS = new Set([
+  "rarity",
+  "displayRarity",
+  "type",
+  "itemType",
+  "family",
+  "category",
+  "sourceType",
+  "availability",
+  "available",
+  "obtainable",
+  "metaTier"
+]);
+
+const WIDE_TABLE_FIELD_KEYS = new Set([
+  "obtainment",
+  "obtainmentMethod",
+  "unlock",
+  "unlockRoute",
+  "source",
+  "sourceRoute",
+  "requirements",
+  "requirement",
+  "bestUse",
+  "bestFor",
+  "huntBehavior",
+  "weaknessTip",
+  "idTip",
+  "tips",
+  "notes"
+]);
+
+function getTableFieldColumnClass(
+  definition: CatalogPresentationFieldDefinition,
+  presentations: CatalogItemPresentation[]
+): string {
+  const key = definition.key;
+  const sampleFields = presentations
+    .map((presentation) => presentation.fields.find((field) => field.key === key))
+    .filter(Boolean) as CatalogPresentationField[];
+  const hasDetail = definition.source === "description" || sampleFields.some((field) => field.kind === "detail");
+  const hasLongValue = sampleFields.some((field) => Boolean(field.value && field.value.length > 54));
+  const hasChip = sampleFields.some((field) => field.kind === "chip");
+
+  if (TINY_TABLE_FIELD_KEYS.has(key)) {
+    return "w-[5.75rem] min-w-[5.75rem] max-w-[5.75rem]";
+  }
+
+  if (COMPACT_TABLE_FIELD_KEYS.has(key)) {
+    return "w-[8rem] min-w-[8rem] max-w-[8rem]";
+  }
+
+  if (WIDE_TABLE_FIELD_KEYS.has(key) || hasDetail || hasLongValue) {
+    return "w-[13rem] min-w-[13rem] max-w-[17rem]";
+  }
+
+  if (hasChip) {
+    return "w-[10rem] min-w-[10rem] max-w-[12rem]";
+  }
+
+  return "w-[10rem] min-w-[10rem] max-w-[14rem]";
+}
+
+function ForgeItemTable({
+  presentations,
+  fieldDefinitions,
+  showImages,
+  descriptionLabel
+}: {
+  presentations: CatalogItemPresentation[];
+  fieldDefinitions: CatalogPresentationFieldDefinition[];
+  showImages: boolean;
+  descriptionLabel: string | null;
+}) {
+  const fieldColumnClasses = new Map(
+    fieldDefinitions.map((definition) => [definition.key, getTableFieldColumnClass(definition, presentations)])
+  );
 
   return (
     <div className="table-scroll-wrapper">
@@ -737,65 +860,52 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
           <thead>
             <tr>
               {showImages ? <th className="table-col-compact">Image</th> : null}
-              <th>Name</th>
-              {badgeLabel ? <th className="table-col-compact">{badgeLabel}</th> : null}
-              {subtitleLabel ? <th>{subtitleLabel}</th> : null}
-              {stats.map((stat) => (
-                <th key={stat.key} className="table-col-compact">
-                  {stat.label}
+              <th className="w-[8.5rem] min-w-[8.5rem] max-w-[8.5rem]">Name</th>
+              {descriptionLabel ? <th className="w-[13rem] min-w-[13rem] max-w-[18rem]">{descriptionLabel}</th> : null}
+              {fieldDefinitions.map((field) => (
+                <th key={field.key} className={fieldColumnClasses.get(field.key)}>
+                  {field.label}
                 </th>
               ))}
-              {descriptionLabel ? <th className="table-col-flex">{descriptionLabel}</th> : null}
             </tr>
           </thead>
           <tbody>
-            {section.items.map((item) => {
-              const subtitle = buildSubtitle(item, config);
-              const description = config.descriptionKey ? normalizeValue(item[config.descriptionKey]) : null;
-              const badgeValue = config.badgeKey ? formatBadgeValue(config.badgeKey, item[config.badgeKey]) : null;
-              const image = resolveImageSrc(item.image ?? null);
+            {presentations.map((presentation) => {
+              const fieldsByKey = new Map(presentation.fields.map((field) => [field.key, field]));
 
               return (
-                <tr key={item.id} id={`item-${item.id}-row`}>
+                <tr key={presentation.id} id={`item-${presentation.id}-row`}>
                   {showImages ? (
                     <td className="table-col-compact">
                       <div className="flex items-center justify-center">
-                        <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-surface-muted/70 p-1.5">
-                          {image ? (
-                            <Image
-                              src={image}
-                              alt={item.name}
-                              width={80}
-                              height={80}
-                              className="h-18 w-18 object-contain"
-                              unoptimized
-                            />
-                          ) : (
-                            <span className="sr-only">Image unavailable for {item.name}</span>
-                          )}
-                        </div>
+                        <CatalogImageFrame presentation={presentation} showImage={showImages} compact />
                       </div>
                     </td>
                   ) : null}
-                  <td>
-                    <span className="font-semibold text-foreground">{item.name}</span>
+                  <td className="w-[8.5rem] min-w-[8.5rem] max-w-[8.5rem]">
+                    <span className="block font-semibold text-foreground [word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:balance]">
+                      {presentation.title}
+                    </span>
                   </td>
-                  {badgeLabel ? <td className="table-col-compact">{renderValue(badgeValue)}</td> : null}
-                  {subtitleLabel ? <td>{renderValue(subtitle)}</td> : null}
-                  {stats.map((stat) => (
-                    <td key={stat.key} className="table-col-compact">
-                      {renderValue(buildDisplayStat(stat.label, item[stat.key])?.value ?? null)}
-                    </td>
-                  ))}
                   {descriptionLabel ? (
-                    <td className="table-col-flex">
-                      {description ? (
-                        <span className="text-sm text-muted line-clamp-2">{description}</span>
+                    <td className="w-[13rem] min-w-[13rem] max-w-[18rem]">
+                      {presentation.description ? (
+                        <span className="block text-sm text-muted [word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:pretty]">
+                          {presentation.description}
+                        </span>
                       ) : (
-                        renderValue(null)
+                        renderMissingValue()
                       )}
                     </td>
                   ) : null}
+                  {fieldDefinitions.map((definition) => {
+                    const field = fieldsByKey.get(definition.key);
+                    return (
+                      <td key={definition.key} className={fieldColumnClasses.get(definition.key)}>
+                        {field ? renderFieldValue(field, "table") : renderMissingValue()}
+                      </td>
+                    );
+                  })}
                 </tr>
               );
             })}
@@ -806,11 +916,24 @@ function ForgeItemTable({ section, config }: { section: ForgeCatalogSection; con
   );
 }
 
-export function ForgeCatalogView({ sections, config, pagination }: ForgeCatalogViewProps) {
+export function ForgeCatalogView({ sections, config, pagination, toolbar }: ForgeCatalogViewProps) {
   const hasItems = sections.some((section) => section.items.length > 0);
   const totalItemCount = sections.reduce((sum, section) => sum + section.items.length, 0);
+  const fieldDefinitions = buildFieldDefinitions(config);
+  const descriptionKey = getPrimaryDescriptionKey(config);
+  const descriptionLabel = descriptionKey ? getDescriptionLabel(descriptionKey) : null;
+  const showImages = !config.hideImages;
+  const sectionPresentations = sections.map((section) => ({
+    section,
+    items: section.items.map((item) => buildItemPresentation(item, config, fieldDefinitions))
+  }));
+  const hasWideCardContent = sectionPresentations.some(({ items }) => items.some(presentationHasWideContent));
   const renderCards = totalItemCount <= 600;
   const renderList = true;
+  const defaultView = renderCards ? "cards" : "list";
+  const cardGridClass = hasWideCardContent
+    ? "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+    : "grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4";
 
   if (!hasItems) {
     return (
@@ -821,7 +944,8 @@ export function ForgeCatalogView({ sections, config, pagination }: ForgeCatalogV
   }
 
   return (
-    <ForgeCatalogViewShell availableViews={renderCards ? ["cards", "list"] : ["list"]}>
+    <ForgeCatalogViewShell availableViews={renderCards ? ["cards", "list"] : ["list"]} defaultView={defaultView} toolbar={toolbar}>
+      <CatalogImageLightbox containerId="game-catalog-items" />
       {pagination && pagination.totalPages > 1 ? (
         <div className="space-y-3 border-b border-border/60 pb-6">
           <p className="text-sm text-muted">
@@ -835,8 +959,8 @@ export function ForgeCatalogView({ sections, config, pagination }: ForgeCatalogV
           />
         </div>
       ) : null}
-      <div className="space-y-12">
-        {sections.map((section) => (
+      <div id="game-catalog-items" className="space-y-12">
+        {sectionPresentations.map(({ section, items }) => (
           <section key={section.id} id={section.id} className="space-y-5 scroll-mt-28">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="space-y-1">
@@ -865,16 +989,21 @@ export function ForgeCatalogView({ sections, config, pagination }: ForgeCatalogV
 
             {renderCards ? (
               <div className="forge-catalog-cards-view">
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                  {section.items.map((item) => (
-                    <ForgeItemCard key={item.id} item={item} config={config} />
+                <div className={cardGridClass}>
+                  {items.map((presentation) => (
+                    <ForgeItemCard key={presentation.id} presentation={presentation} showImage={showImages} />
                   ))}
                 </div>
               </div>
             ) : null}
             {renderList ? (
               <div className="forge-catalog-list-view">
-                <ForgeItemTable section={section} config={config} />
+                <ForgeItemTable
+                  presentations={items}
+                  fieldDefinitions={fieldDefinitions}
+                  showImages={showImages}
+                  descriptionLabel={descriptionLabel}
+                />
               </div>
             ) : null}
           </section>
