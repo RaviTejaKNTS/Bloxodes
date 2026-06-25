@@ -443,6 +443,21 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
     dataDir: "Paint And SEEK",
     universeNames: ["Paint And SEEK!", "[🎨] Paint And SEEK!", "Paint And SEEK"],
     collections: ["maps"]
+  },
+  {
+    gameSlug: "demonology",
+    gameName: "Demonology",
+    universeId: 6170143659,
+    dataDir: "Demonology",
+    universeNames: ["Demonology", "[UPD] Demonology🕯️", "Demonology🕯️"],
+    collections: [
+      "ghosts",
+      "perks",
+      "equipment",
+      "evidence",
+      "cursed-objects",
+      "maps"
+    ]
   }
 ];
 
@@ -494,6 +509,8 @@ const COLLECTION_LABEL_OVERRIDES: Record<string, string> = {
 
 const COLLECTION_FOCUS: Record<string, string> = {
   abilities: "what each ability does, where it comes from, and what it changes in play",
+  ghosts: "the three evidence types each ghost leaves, its hunt behavior and special traits, weaknesses, and the giveaway that confirms the identification",
+  evidence: "each evidence type, the tool or method that detects it, and the in-game tell that confirms it",
   "magic-abilities": "what each magic ability does, how it is unlocked, and how it speeds up sorting and shelving",
   "shelf-sections": "section codes, floor, book themes, and example titles for sorting books to the right shelf",
   keys: "key names, colors, and the permanent buffs each key grants",
@@ -734,6 +751,8 @@ const FIELD_LABELS: Record<string, string> = {
   craftingRequirement: "crafting requirement",
   cookMethod: "cook method",
   cooldownOrLimit: "cooldown / limit",
+  confirmTell: "confirmation tell",
+  detectionTool: "detection tool",
   currency: "currency",
   damage: "damage",
   dateAdded: "date added",
@@ -781,6 +800,12 @@ const FIELD_LABELS: Record<string, string> = {
   duration: "duration",
   effect: "effect",
   effectType: "effect type",
+  energyCost: "energy cost",
+  cursedHuntTrigger: "Cursed Hunt trigger",
+  evidence: "evidence",
+  huntBehavior: "hunt behavior",
+  idTip: "how to confirm it",
+  weaknessTip: "weakness",
   elementBuffs: "element buffs",
   enemyHealth: "enemy health",
   encounter: "encounter",
@@ -827,6 +852,7 @@ const FIELD_LABELS: Record<string, string> = {
   harvestType: "harvest type",
   killInteractiveBehavior: "kill / interactive behavior",
   holdStyle: "hold style",
+  howToConfirm: "how to confirm",
   howToReach: "how to reach",
   howToUse: "how to use",
   hugeNote: "Huge / Titanic note",

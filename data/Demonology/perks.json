@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "Demonology perks (Tarot Cards) data",
+    "game": "Demonology",
+    "gameSlug": "demonology",
+    "collection": "perks",
+    "route": "/wiki/demonology/perks",
+    "catalogCode": "demonology-perks",
+    "universeId": 6170143659,
+    "updatedAt": "2026-06-25",
+    "publishStatus": "phase-2-dataset-ready-wiki-hub-needed",
+    "itemCount": 7,
+    "groupBy": "catalogSection",
+    "counts": {
+      "bySection": {
+        "Mobility Perks": 3,
+        "Utility Perks": 2,
+        "Defensive Perks": 2
+      },
+      "images": 7,
+      "missingImages": 0
+    },
+    "sectionOrder": [
+      "Mobility Perks",
+      "Utility Perks",
+      "Defensive Perks"
+    ],
+    "imageCoverage": {
+      "present": 7,
+      "missing": 0,
+      "status": "complete",
+      "note": "All 7 perks have clean per-card Demonology tarot-card art saved locally as WebP (1092x1920 portrait) from the canonical Demonology Fandom. Source URLs in each item's sourceImageUrl; saved under apps/web/public/Demonology/Perks. The Hanged Man source URL hash was corrected (c/ca/) from a wrong value recorded in the data pass (7/7e/).",
+      "localDirectory": "apps/web/public/Demonology/Perks"
+    },
+    "defaultCardFields": [
+      "effect",
+      "price",
+      "unlockLevel"
+    ],
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "category",
+      "effect",
+      "price",
+      "unlockLevel",
+      "cardSummary",
+      "sourceImageUrl",
+      "sourcePage",
+      "sortOrder"
+    ],
+    "sources": [
+      {
+        "label": "Demonology Wiki - Perks page (canonical Fandom)",
+        "url": "https://demonology.fandom.com/wiki/Perks",
+        "accessed": "2026-06-25",
+        "usage": "Primary confirmation of all 7 perks, per-card prices, unlock levels, and effects. Re-confirmed via Firecrawl scrape (WebFetch 403s). Matches the two guide sources exactly."
+      },
+      {
+        "label": "allthings.how - Demonology perks explained",
+        "url": "https://allthings.how/demonology-perks-explained-costs-unlock-levels-and-effects/",
+        "accessed": "2026-06-25",
+        "usage": "Per-card prices, unlock levels, effects, and the Mobility / Utility / Defensive grouping framing."
+      },
+      {
+        "label": "techwiser - All perks in Demonology",
+        "url": "https://techwiser.com/roblox-demonology-all-perks/",
+        "accessed": "2026-06-25",
+        "usage": "Independent confirmation of the same 7 names, prices, unlock levels, and effects."
+      },
+      {
+        "label": "roonby - All perks in Demonology guide",
+        "url": "https://roonby.com/2026/04/30/all-perks-in-demonology-guide-and-what-they-do/",
+        "accessed": "2026-06-25",
+        "usage": "Name/effect cross-check only. Prices on this page are stale (higher) and were NOT used."
+      }
+    ],
+    "unresolvedFacts": [
+      "The Fandom and both guide sources state an all-perks total of $340, but the per-card prices sum to $265. The total figure is internally inconsistent across every source, so no all-perks total is stored or rendered. Per-card prices ($35/$35/$25/$35/$50/$50/$35) are triple-confirmed and used as comparison fields.",
+      "Per-card tarot/shop icons exist on Fandom but are deferred to the image pass; catalog renders text-first.",
+      "Prices and unlock levels are balance-patchable; stored as evergreen comparison fields with no date or freshness framing."
+    ]
+  },
+  "items": [
+    {
+      "name": "The Empress",
+      "slug": "the-empress",
+      "image": "/Demonology/Perks/the-empress.webp",
+      "catalogSection": "Mobility Perks",
+      "category": "Mobility",
+      "effect": "All hunters get faster stamina regeneration while it is active.",
+      "price": "$50",
+      "unlockLevel": "Level 15",
+      "cardSummary": "The Empress refills your team's stamina faster, so hunters can sprint and reposition more often during a job. It pairs well with Strength for sprint-heavy runs and applies to every hunter, not just the buyer.",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/demonology/images/1/12/Empress.png/revision/latest",
+      "sourcePage": "https://demonology.fandom.com/wiki/Perks",
+      "sortOrder": 1
+    },
+    {
+      "name": "The Chariot",
+      "slug": "the-chariot",
+      "image": "/Demonology/Perks/the-chariot.webp",
+      "catalogSection": "Mobility Perks",
+      "category": "Mobility",
+      "effect": "All hunters get a faster walk speed while it is active.",
+      "price": "$35",
+      "unlockLevel": "Level 18",
+      "cardSummary": "The Chariot raises walk speed for the whole team, helping hunters cover the map and escape ghosts faster. It is a cheap mobility option that benefits everyone on the job.",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/demonology/images/b/be/Chariot.png/revision/latest",
+      "sourcePage": "https://demonology.fandom.com/wiki/Perks",
+      "sortOrder": 2
+    },
+    {
+      "name": "Strength",
+      "slug": "strength",
+      "image": "/Demonology/Perks/strength.webp",
+      "catalogSection": "Mobility Perks",
+      "category": "Mobility",
+      "effect": "All hunters get double stamina while it is active.",
+      "price": "$35",
+      "unlockLevel": "Level 22",
+      "cardSummary": "Strength doubles each hunter's stamina pool, letting the team sprint for far longer before slowing down. It is strong for evading ghosts and works best alongside The Empress for sustained mobility.",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/demonology/images/8/8b/Strength.png/revision/latest",
+      "sourcePage": "https://demonology.fandom.com/wiki/Perks",
+      "sortOrder": 3
+    },
+    {
+      "name": "Temperance",
+      "slug": "temperance",
+      "image": "/Demonology/Perks/temperance.webp",
+      "catalogSection": "Utility Perks",
+      "category": "Utility",
+      "effect": "Grants +2 photo discards.",
+      "price": "$25",
+      "unlockLevel": "Level 14",
+      "cardSummary": "Temperance adds two extra photo discards, giving the team more room to retake evidence photos without wasting attempts. It is the cheapest perk and unlocks early, making it an easy pick for photo-objective runs.",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/demonology/images/6/61/Temperance.png/revision/latest",
+      "sourcePage": "https://demonology.fandom.com/wiki/Perks",
+      "sortOrder": 4
+    },
+    {
+      "name": "The Emperor",
+      "slug": "the-emperor",
+      "image": "/Demonology/Perks/the-emperor.webp",
+      "catalogSection": "Utility Perks",
+      "category": "Utility",
+      "effect": "All hunters get an extra inventory slot while it is active.",
+      "price": "$50",
+      "unlockLevel": "Level 35",
+      "cardSummary": "The Emperor gives every hunter an extra inventory slot, so the team can carry more gear into a job. It is a high-level unlock and is often recommended for loadout-heavy runs.",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/demonology/images/c/c5/Emperor.png/revision/latest",
+      "sourcePage": "https://demonology.fandom.com/wiki/Perks",
+      "sortOrder": 5
+    },
+    {
+      "name": "The Hanged Man",
+      "slug": "the-hanged-man",
+      "image": "/Demonology/Perks/the-hanged-man.webp",
+      "catalogSection": "Defensive Perks",
+      "category": "Defensive",
+      "effect": "Makes crosses burn twice while it is active.",
+      "price": "$35",
+      "unlockLevel": "Level 12",
+      "cardSummary": "The Hanged Man lets crosses burn twice instead of once, doubling that protection against hostile ghosts. It unlocks the earliest of any perk, making it an accessible defensive option for newer hunters.",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/demonology/images/c/ca/HangedMan.png/revision/latest",
+      "sourcePage": "https://demonology.fandom.com/wiki/Perks",
+      "sortOrder": 6
+    },
+    {
+      "name": "Sun",
+      "slug": "sun",
+      "image": "/Demonology/Perks/sun.webp",
+      "catalogSection": "Defensive Perks",
+      "category": "Defensive",
+      "effect": "Makes Holy Oil burn twice while it is active.",
+      "price": "$35",
+      "unlockLevel": "Level 24",
+      "cardSummary": "Sun makes Holy Oil burn twice, extending the team's protection from that item during a hunt. It is a defensive choice for jobs where you rely on Holy Oil to hold off the ghost.",
+      "sourceImageUrl": "https://static.wikia.nocookie.net/demonology/images/6/61/Sun.png/revision/latest",
+      "sourcePage": "https://demonology.fandom.com/wiki/Perks",
+      "sortOrder": 7
+    }
+  ]
+}

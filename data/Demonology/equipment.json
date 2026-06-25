@@ -1,0 +1,276 @@
+{
+  "meta": {
+    "title": "Demonology equipment data",
+    "groupBy": "catalogSection",
+    "sources": [
+      {
+        "label": "Demonology Fandom Wiki - Equipment (canonical, authoritative for prices, unlock levels, carry quantities)",
+        "url": "https://demonology.fandom.com/wiki/Equipment",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "AllThings.How - All Demonology Equipment Explained (cross-check for carry quantities and functions)",
+        "url": "https://allthings.how/all-demonology-equipment-explained-every-starter-and-purchasable-tool/",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "Sportskeeda - All Equipment in Demonology",
+        "url": "https://www.sportskeeda.com/roblox-news/all-equipment-demonology-function-price",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "Techwiser - Demonology Equipment",
+        "url": "https://techwiser.com/demonology-equipment/",
+        "accessed": "2026-06-25"
+      }
+    ],
+    "columns": [
+      "name",
+      "image",
+      "catalogSection",
+      "price",
+      "unlockLevel",
+      "carryQuantity",
+      "function"
+    ],
+    "defaultCardFields": [
+      "price",
+      "unlockLevel",
+      "carryQuantity",
+      "function"
+    ],
+    "notes": "Disputed unlock levels resolved against the canonical Demonology Fandom wiki: Defibrillator = Level 35, Rock Salt Shotgun = Level 40 (Fandom overrides AllThings.How's L40/L45). Photo Camera = Level 3 confirmed. Carry quantities filled from AllThings.How where the Fandom table cells collapsed; both sources agree where both list a value. Limited-Time confirmed complete: Fandom states only one limited-time item has ever released (the legacy Plushie). Prices and quantities are in-game comparison values, presented evergreen with no dates or freshness claims. Locked items can be skipped with the in-game 'Unlock Instantly' option for R$160 Robux each; loadout is capped at 3 carried items per job."
+  },
+  "items": [
+    {
+      "name": "Blacklight",
+      "slug": "blacklight",
+      "catalogSection": "Starter Equipment",
+      "price": "$30",
+      "unlockLevel": "Level 0",
+      "carryQuantity": "2",
+      "function": "Shine it on surfaces to reveal fingerprints, handprints, and footprints left by the ghost.",
+      "image": "/Demonology/equipment/blacklight.png"
+    },
+    {
+      "name": "EMF Reader",
+      "slug": "emf-reader",
+      "catalogSection": "Starter Equipment",
+      "price": "$35",
+      "unlockLevel": "Level 0",
+      "carryQuantity": "2",
+      "function": "Tracks ghost activity from level 2 to 5. An EMF Level 5 reading counts as evidence.",
+      "image": "/Demonology/equipment/emf-reader.png"
+    },
+    {
+      "name": "Flashlight",
+      "slug": "flashlight",
+      "catalogSection": "Starter Equipment",
+      "price": "$25",
+      "unlockLevel": "Level 0",
+      "carryQuantity": "4",
+      "function": "A basic light source for navigating dark rooms. Gathers no evidence on its own.",
+      "image": "/Demonology/equipment/flashlight.png"
+    },
+    {
+      "name": "Flower Pot",
+      "slug": "flower-pot",
+      "catalogSection": "Starter Equipment",
+      "price": "$40",
+      "unlockLevel": "Level 0",
+      "carryQuantity": "2",
+      "function": "Its flowers wither near ghosts that leave Wither evidence, making it the main tool for confirming Wither.",
+      "image": "/Demonology/equipment/flower-pot.png"
+    },
+    {
+      "name": "Laser Projector",
+      "slug": "laser-projector",
+      "catalogSection": "Starter Equipment",
+      "price": "$50",
+      "unlockLevel": "Level 0",
+      "carryQuantity": "2",
+      "function": "Placed in the ghost's favorite room, it can reveal the ghost's translucent silhouette.",
+      "image": "/Demonology/equipment/laser-projector.png"
+    },
+    {
+      "name": "Spirit Book",
+      "slug": "spirit-book",
+      "catalogSection": "Starter Equipment",
+      "price": "$40",
+      "unlockLevel": "Level 0",
+      "carryQuantity": "2",
+      "function": "Left in the favorite room, the ghost may write in it to confirm Ghost Writing evidence.",
+      "image": "/Demonology/equipment/spirit-book.png"
+    },
+    {
+      "name": "Spirit Box",
+      "slug": "spirit-box",
+      "catalogSection": "Starter Equipment",
+      "price": "$40",
+      "unlockLevel": "Level 0",
+      "carryQuantity": "2",
+      "function": "Used in the favorite room with the lights off, it lets the ghost respond to confirm Spirit Box evidence.",
+      "image": "/Demonology/equipment/spirit-box.png"
+    },
+    {
+      "name": "Thermometer",
+      "slug": "thermometer",
+      "catalogSection": "Starter Equipment",
+      "price": "$30",
+      "unlockLevel": "Level 0",
+      "carryQuantity": "2",
+      "function": "Shows room temperature so you can find the favorite room. A reading of 0C/32F or lower confirms Freezing Temperatures.",
+      "image": "/Demonology/equipment/thermometer.png"
+    },
+    {
+      "name": "Video Camera",
+      "slug": "video-camera",
+      "catalogSection": "Starter Equipment",
+      "price": "$40",
+      "unlockLevel": "Level 0",
+      "carryQuantity": "3",
+      "function": "Detects Ghost Orbs when held or viewed through the base camp computer. Can be placed or carried.",
+      "image": "/Demonology/equipment/video-camera.png"
+    },
+    {
+      "name": "Photo Camera",
+      "slug": "photo-camera",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$45",
+      "unlockLevel": "Level 3",
+      "carryQuantity": "3",
+      "function": "Takes up to six photos per job. You earn money based on the subjects you capture, such as ghosts or handprints.",
+      "image": "/Demonology/equipment/photo-camera.png"
+    },
+    {
+      "name": "Cross",
+      "slug": "cross",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$40",
+      "unlockLevel": "Level 5",
+      "carryQuantity": "2",
+      "function": "Stops a hunt from starting within a 3-meter radius. Must sit in the favorite room and burns out after a successful use.",
+      "image": "/Demonology/equipment/cross.png"
+    },
+    {
+      "name": "Lighter",
+      "slug": "lighter",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$10",
+      "unlockLevel": "Level 5",
+      "carryQuantity": "3",
+      "function": "Lights lanterns, candles, and a summoning circle, and gives off a small amount of light itself.",
+      "image": "/Demonology/equipment/lighter.png"
+    },
+    {
+      "name": "Lantern",
+      "slug": "lantern",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$15",
+      "unlockLevel": "Level 7",
+      "carryQuantity": "3",
+      "function": "A brighter light than the flashlight. When lit, it slows passive energy drain for you and nearby hunters. Needs a lighter to ignite.",
+      "image": "/Demonology/equipment/lantern.png"
+    },
+    {
+      "name": "Salt Canister",
+      "slug": "salt-canister",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$35",
+      "unlockLevel": "Level 10",
+      "carryQuantity": "3",
+      "function": "Lays salt lines on the floor to capture Handprint evidence as footprints when disturbed. Holds three lines per canister.",
+      "image": "/Demonology/equipment/salt-canister.png"
+    },
+    {
+      "name": "Energy Drink",
+      "slug": "energy-drink",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$35",
+      "unlockLevel": "Level 12",
+      "carryQuantity": "4",
+      "function": "Restores 50% of your energy when consumed.",
+      "image": "/Demonology/equipment/energy-drink.png"
+    },
+    {
+      "name": "Head-Mounted Camera",
+      "slug": "head-mounted-camera",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$25",
+      "unlockLevel": "Level 15",
+      "carryQuantity": "4",
+      "function": "A hands-free camera teammates can watch from base camp, without taking up an inventory slot.",
+      "image": "/Demonology/equipment/head-mounted-camera.png"
+    },
+    {
+      "name": "Holy Oil",
+      "slug": "holy-oil",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$60",
+      "unlockLevel": "Level 19",
+      "carryQuantity": "1",
+      "function": "Laid in a line on the ground, it ignites when a hunt begins and forms a barrier the ghost cannot cross.",
+      "image": "/Demonology/equipment/holy-oil.png"
+    },
+    {
+      "name": "Energy Watch",
+      "slug": "energy-watch",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$30",
+      "unlockLevel": "Level 20",
+      "carryQuantity": "4",
+      "function": "Lets you check your energy level without returning to base camp.",
+      "image": "/Demonology/equipment/energy-watch.png"
+    },
+    {
+      "name": "LIDAR Scanner",
+      "slug": "lidar-scanner",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$45",
+      "unlockLevel": "Level 25",
+      "carryQuantity": "2",
+      "function": "A mapping device that reveals the ghost's outline when scanned. Used to locate the ghost, not to gather evidence.",
+      "image": "/Demonology/equipment/lidar-scanner.png"
+    },
+    {
+      "name": "Plushie",
+      "slug": "plushie",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$35",
+      "unlockLevel": "Level 30",
+      "carryQuantity": "1",
+      "function": "Floats when a ghost interacts with it and responds to the Spirit Box for 15 seconds, helping gather or rule out Spirit Box evidence.",
+      "image": "/Demonology/equipment/plushie.png"
+    },
+    {
+      "name": "Defibrillator",
+      "slug": "defibrillator",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$100",
+      "unlockLevel": "Level 35",
+      "carryQuantity": "1",
+      "function": "Revives a dead hunter once.",
+      "image": "/Demonology/equipment/defibrillator.png"
+    },
+    {
+      "name": "Rock Salt Shotgun",
+      "slug": "rock-salt-shotgun",
+      "catalogSection": "Purchasable Equipment",
+      "price": "$100",
+      "unlockLevel": "Level 40",
+      "carryQuantity": "1",
+      "function": "Holds two shots. Fire at the ghost to end a hunt instantly, or at a teammate to ragdoll them.",
+      "image": "/Demonology/equipment/rock-salt-shotgun.png"
+    },
+    {
+      "name": "Plushie (Legacy)",
+      "slug": "plushie-legacy",
+      "catalogSection": "Limited-Time Equipment",
+      "price": "$65",
+      "unlockLevel": "Level 0",
+      "carryQuantity": "1",
+      "function": "An earlier limited-time version of the Plushie. When a ghost interacts with it, it guarantees the Spirit Box evidence for 15 seconds.",
+      "image": "/Demonology/equipment/plushie-legacy.png"
+    }
+  ]
+}

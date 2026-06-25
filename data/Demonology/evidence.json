@@ -1,0 +1,217 @@
+{
+  "meta": {
+    "title": "Demonology evidence types data",
+    "updatedAt": "2026-06-25",
+    "groupBy": "catalogSection",
+    "sectionOrder": [
+      "Device readings",
+      "Camera and light reveals",
+      "Placed and passive"
+    ],
+    "defaultCardFields": [
+      "detectionTool",
+      "howToConfirm",
+      "confirmTell"
+    ],
+    "sources": [
+      {
+        "label": "Demonology Fandom - Evidence (canonical, V1.10.0)",
+        "url": "https://demonology.fandom.com/wiki/Evidence",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "Techwiser - Roblox Demonology All Evidence Guide",
+        "url": "https://techwiser.com/roblox-demonology-all-evidence-guide/",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "allthings.how - Demonology Evidence Types And How To Confirm",
+        "url": "https://allthings.how/demonology-evidence-types-and-how-to-confirm-each-one/",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "demonology.wiki - Demonology Wiki",
+        "url": "https://demonology.wiki/",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "Roblox - Demonology",
+        "url": "https://www.roblox.com/games/18199615050/Demonology",
+        "accessed": "2026-06-25"
+      }
+    ],
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "catalogSection",
+      "order",
+      "detectionTool",
+      "howToConfirm",
+      "confirmTell",
+      "cardSummary",
+      "formerName",
+      "toolAliases",
+      "gotcha",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus",
+      "sourcePage"
+    ],
+    "sourceCountSummary": {
+      "acceptedEvidenceRows": 8,
+      "fandomEvidenceRows": 8,
+      "localImageCount": 8
+    },
+    "uncertainFacts": [
+      "Per-difficulty Prints fade timing is described qualitatively on Fandom (varies by difficulty) but exact durations are not given; card states the behavior, not a number.",
+      "Wither wilt timing is explicitly random per Fandom; no threshold is claimed."
+    ]
+  },
+  "items": [
+    {
+      "name": "EMF Level 5",
+      "slug": "emf-level-5",
+      "image": "/Demonology/evidence/emf-level-5.webp",
+      "catalogSection": "Device readings",
+      "order": 1,
+      "detectionTool": "EMF Reader",
+      "howToConfirm": "Hold the EMF Reader near the ghost while it interacts with objects, manifests, or starts a hunt, and watch the meter climb through its lights.",
+      "confirmTell": "The final red light (Level 5) lights up and a high-pitched beep plays. Lower readings on their own do not count.",
+      "cardSummary": "EMF Level 5 is only confirmed when the EMF Reader hits its top red light during ghost activity. Anything below Level 5 is not this evidence.",
+      "formerName": "",
+      "toolAliases": "EMF 5",
+      "gotcha": "",
+      "sourceConfidence": "high",
+      "verificationNote": "Fandom V1.10.0 Evidence page: EMF Reader must reach Level 5 (final red light) plus beep.",
+      "imageStatus": "local image present",
+      "sourcePage": "https://demonology.fandom.com/wiki/Evidence#EMF_Level_5"
+    },
+    {
+      "name": "Spirit Box",
+      "slug": "spirit-box",
+      "image": "/Demonology/evidence/spirit-box.webp",
+      "catalogSection": "Device readings",
+      "order": 2,
+      "detectionTool": "Spirit Box",
+      "howToConfirm": "Stand in the room with the ghost present and the lights off, then use the Spirit Box and ask it questions.",
+      "confirmTell": "The ghost replies audibly and/or shows a red caption at the bottom of the screen. A Plushie can force a response when it starts levitating.",
+      "cardSummary": "Spirit Box needs the ghost in the room with lights off. A spoken answer or red on-screen caption confirms it; the Plushie can guarantee a reply.",
+      "formerName": "",
+      "toolAliases": "",
+      "gotcha": "",
+      "sourceConfidence": "high",
+      "verificationNote": "Fandom V1.10.0: lights off, ghost present, response audible or red caption; Plushie guarantees a reply when levitating.",
+      "imageStatus": "local image present",
+      "sourcePage": "https://demonology.fandom.com/wiki/Evidence#Spirit_Box"
+    },
+    {
+      "name": "Freezing Temperatures",
+      "slug": "freezing-temperatures",
+      "image": "/Demonology/evidence/freezing-temperatures.webp",
+      "catalogSection": "Device readings",
+      "order": 3,
+      "detectionTool": "Thermometer",
+      "howToConfirm": "Carry a Thermometer into the ghost's room and let the reading settle, or watch the room for cold visual cues.",
+      "confirmTell": "The Thermometer reads below 0 degrees C / 32 degrees F. Visible breath, floor fog, and frosted windows also count.",
+      "cardSummary": "Freezing Temperatures is confirmed when the Thermometer drops below freezing, or by cold cues like breath, floor fog, and frosted windows.",
+      "formerName": "",
+      "toolAliases": "Freezing Temps",
+      "gotcha": "A brief dip that rises again quickly is usually not this evidence; do not confuse breath cues with a ghost mist event.",
+      "sourceConfidence": "high",
+      "verificationNote": "Fandom V1.10.0: below 0C/32F confirms; rapid dip-and-rise is unlikely to be the evidence; breath/fog/frosted windows also count.",
+      "imageStatus": "local image present",
+      "sourcePage": "https://demonology.fandom.com/wiki/Evidence#Freezing_Temperatures"
+    },
+    {
+      "name": "Ghost Orb",
+      "slug": "ghost-orb",
+      "image": "/Demonology/evidence/ghost-orb.webp",
+      "catalogSection": "Camera and light reveals",
+      "order": 4,
+      "detectionTool": "Video Camera",
+      "howToConfirm": "Point a Video Camera at the ghost room, or view the room through the Video Monitor or a teammate's Head-Mounted Camera.",
+      "confirmTell": "A floating orb appears on camera in the ghost room. In Nightmare it drifts to the new room when the ghost room changes.",
+      "cardSummary": "Ghost Orb only shows up on camera. Watch the ghost room through a Video Camera, the Video Monitor, or a Head-Mounted Camera.",
+      "formerName": "",
+      "toolAliases": "Video Monitor, Head-Mounted Camera",
+      "gotcha": "Skinwalkers can fake Ghost Orb, so confirm the other two evidences before locking it in.",
+      "sourceConfidence": "high",
+      "verificationNote": "Fandom V1.10.0: viewable via Video Camera / Video Monitor / Head-Mounted Camera; Skinwalker can mimic; orb travels on Nightmare room change.",
+      "imageStatus": "local image present",
+      "sourcePage": "https://demonology.fandom.com/wiki/Evidence#Ghost_Orb"
+    },
+    {
+      "name": "Prints",
+      "slug": "prints",
+      "image": "/Demonology/evidence/prints.webp",
+      "catalogSection": "Camera and light reveals",
+      "order": 5,
+      "detectionTool": "Blacklight",
+      "howToConfirm": "Shine a Blacklight over doors, windows, walls, and players after the ghost has interacted with objects.",
+      "confirmTell": "Glowing fingerprints or footprints appear under the light. Disturbed salt lines are a reliable place to find them.",
+      "cardSummary": "Prints are revealed with a Blacklight on surfaces the ghost touched. A disturbed salt line is a guaranteed place to check.",
+      "formerName": "Handprints",
+      "toolAliases": "UV Light",
+      "gotcha": "Prints fade after a while, and they fade faster on higher difficulty, so check soon after activity.",
+      "sourceConfidence": "high",
+      "verificationNote": "Fandom V1.10.0: journal label is 'Prints' (former icon name 'Handprints'); revealed with Blacklight; salt-disturbance guarantees prints; fade time scales with difficulty.",
+      "imageStatus": "local image present",
+      "sourcePage": "https://demonology.fandom.com/wiki/Evidence#Prints"
+    },
+    {
+      "name": "Laser Projector",
+      "slug": "laser-projector",
+      "image": "/Demonology/evidence/laser-projector.webp",
+      "catalogSection": "Camera and light reveals",
+      "order": 6,
+      "detectionTool": "Laser Projector",
+      "howToConfirm": "Place a Laser Projector in the ghost room and watch the laser field, ideally through a Video Camera for clearer detection.",
+      "confirmTell": "The ghost becomes faintly visible as it walks through the laser grid. Lowering Roblox graphics to 1 bar can improve visibility.",
+      "cardSummary": "Laser Projector confirms when the ghost shows up faintly walking through the lasers. A Video Camera and low graphics make it easier to spot.",
+      "formerName": "",
+      "toolAliases": "",
+      "gotcha": "",
+      "sourceConfidence": "high",
+      "verificationNote": "Fandom V1.10.0: ghost slightly visible near laser projector; Video Camera recommended; setting graphics to 1 bar aids visibility.",
+      "imageStatus": "local image present",
+      "sourcePage": "https://demonology.fandom.com/wiki/Evidence#Laser_Projector"
+    },
+    {
+      "name": "Inscription",
+      "slug": "inscription",
+      "image": "/Demonology/evidence/inscription.webp",
+      "catalogSection": "Placed and passive",
+      "order": 7,
+      "detectionTool": "Spirit Book",
+      "howToConfirm": "Place the Spirit Book in the ghost's favorite room and wait, and also watch the walls for markings.",
+      "confirmTell": "Writing appears in the Spirit Book or on walls. If the ghost throws the book outside a hunt, this evidence is disproven.",
+      "cardSummary": "Inscription confirms when the ghost writes in the placed Spirit Book or marks a wall. A book thrown outside a hunt rules it out.",
+      "formerName": "Ghost Writing",
+      "toolAliases": "",
+      "gotcha": "",
+      "sourceConfidence": "high",
+      "verificationNote": "Fandom V1.10.0: journal label is 'Inscription' (formerly 'Ghost writing'); found in Spirit Book and on walls; disproven if book is thrown outside a hunt.",
+      "imageStatus": "local image present",
+      "sourcePage": "https://demonology.fandom.com/wiki/Evidence#Inscription"
+    },
+    {
+      "name": "Wither",
+      "slug": "wither",
+      "image": "/Demonology/evidence/wither.webp",
+      "catalogSection": "Placed and passive",
+      "order": 8,
+      "detectionTool": "Observation (Flower Pot)",
+      "howToConfirm": "Watch the map over time for passive decay, and place a Flower Pot in the ghost's room as a clear indicator.",
+      "confirmTell": "Flowers wilt, metal rusts, and paintings distort. The time before decay starts is random.",
+      "cardSummary": "Wither has no detector. Watch for decay over time, and use a placed Flower Pot whose flowers wilt as a clear sign.",
+      "formerName": "",
+      "toolAliases": "Flower Pot",
+      "gotcha": "On the prison map, prisoner NPCs can act as a form of Wither evidence.",
+      "sourceConfidence": "high",
+      "verificationNote": "Fandom V1.10.0: passive map decay (wilting flowers, rusting metal, distorted paintings); Flower Pot is the clearest indicator; onset timing is random; prison NPCs act as Wither.",
+      "imageStatus": "local image present",
+      "sourcePage": "https://demonology.fandom.com/wiki/Evidence#Wither"
+    }
+  ]
+}

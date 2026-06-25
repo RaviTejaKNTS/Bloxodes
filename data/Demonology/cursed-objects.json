@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "title": "Demonology cursed objects data",
+    "game": "Demonology",
+    "universeId": 6170143659,
+    "collection": "cursed-objects",
+    "updatedAt": "2026-06-25",
+    "groupBy": "catalogSection",
+    "defaultCardFields": [
+      "purpose",
+      "howToUse",
+      "energyCost",
+      "cursedHuntTrigger",
+      "requirement"
+    ],
+    "sources": [
+      {
+        "label": "Demonology Wiki (Fandom) - Cursed Objects",
+        "url": "https://demonology.fandom.com/wiki/Cursed_Objects",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "Demonology Wiki (Fandom) - Guide (cursed object energy summary)",
+        "url": "https://demonology.fandom.com/wiki/Guide",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "Demonology Roblox Wiki (legacy Fandom) - Umbra Board",
+        "url": "https://demonologyroblox.fandom.com/wiki/Umbra_Board",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "Sportskeeda - What are cursed objects in Demonology",
+        "url": "https://www.sportskeeda.com/roblox-news/what-cursed-objects-demonology",
+        "accessed": "2026-06-25"
+      }
+    ],
+    "notes": "Single ungrouped section (catalogSection = 'Cursed Objects'), six items matching the canonical Demonology Fandom Cursed Objects page (Fortune Teller, Haunted Mirror, Magnifying Glass, Music Box, Summoning Circle, Umbra Board). Shared rules: only one cursed object spawns per job site/difficulty (randomized among available objects) except on Nightmare; Cursed Hunts cannot be blocked by Crosses. Energy figures are 'as reported' by the canonical Demonology Fandom wiki; Umbra Board cost varies per question (not a single fixed value). Magnifying Glass is tagged 'Recently Added' on the wiki."
+  },
+  "items": [
+    {
+      "name": "Haunted Mirror",
+      "slug": "haunted-mirror",
+      "image": "/Demonology/cursed-objects/haunted-mirror.png",
+      "catalogSection": "Cursed Objects",
+      "purpose": "Reveals the ghost room by showing a static vision of it in the mirror.",
+      "howToUse": "Equip and use the mirror to see a frozen image of the ghost room. Stop holding it once you have the room so you do not drain out.",
+      "energyCost": "30% on first use, then about 20% per second while you keep holding it (as reported).",
+      "cursedHuntTrigger": "If you keep using it while too low on energy, the mirror breaks and starts a Cursed Hunt. It cannot be used again once broken.",
+      "requirement": "",
+      "cardSummary": "A fast ghost-room finder that hits your energy hard. It costs 30% up front and keeps draining about 20% per second, so glance once and put it down before it breaks.",
+      "sourceConfidence": "high",
+      "verificationNote": "30% on use and ~20%/sec hold rate confirmed on demonology.fandom.com Cursed Objects page.",
+      "sourcePage": "https://demonology.fandom.com/wiki/Cursed_Objects#Haunted_Mirror"
+    },
+    {
+      "name": "Magnifying Glass",
+      "slug": "magnifying-glass",
+      "image": "/Demonology/cursed-objects/magnifying-glass.png",
+      "catalogSection": "Cursed Objects",
+      "purpose": "Pinpoints the ghost's live position by hovering it over the ghost.",
+      "howToUse": "Equip the magnifying glass and sweep it around the site, hovering it over the ghost to reveal where it currently is. Stop using it once you have the position so you do not drain out.",
+      "energyCost": "About 3% per second while you keep using it, draining steadily until it reaches zero (as reported).",
+      "cursedHuntTrigger": "Like the Haunted Mirror, the glass breaks when your energy reaches zero, starting a Cursed Hunt. Once broken it cannot be used again.",
+      "requirement": "",
+      "cardSummary": "A live ghost tracker that shows the ghost's current spot while you hover the glass over it. It drains about 3% per second and breaks at zero energy into a Cursed Hunt, so sweep quickly and put it away.",
+      "sourceConfidence": "high",
+      "verificationNote": "3%/sec drain, hover-to-locate use, and zero-energy break/Cursed Hunt confirmed on demonology.fandom.com Cursed Objects page (tagged Recently Added on the wiki).",
+      "sourcePage": "https://demonology.fandom.com/wiki/Cursed_Objects#Magnifying_Glass"
+    },
+    {
+      "name": "Music Box",
+      "slug": "music-box",
+      "image": "/Demonology/cursed-objects/music-box.png",
+      "catalogSection": "Cursed Objects",
+      "purpose": "Helps locate the ghost room; the ghost sings along when you are close to it.",
+      "howToUse": "Use the box to start its melody and walk around the site. When you are near the ghost room, the ghost begins to sing along.",
+      "energyCost": "About 2.5% per second while in use, draining steadily until it reaches zero (as reported).",
+      "cursedHuntTrigger": "When its energy hits zero, a Cursed Hunt starts and the melody plays in reverse. After that it no longer responds to the ghost or drains energy.",
+      "requirement": "",
+      "cardSummary": "A slower, gentler ghost-room finder. It drains about 2.5% per second, and a Dybbuk gets stunned while it plays, so it doubles as a soft ghost-type tell.",
+      "sourceConfidence": "high",
+      "verificationNote": "2.5%/sec drain and reverse-melody hunt trigger confirmed on demonology.fandom.com Cursed Objects page.",
+      "sourcePage": "https://demonology.fandom.com/wiki/Cursed_Objects#Music_Box"
+    },
+    {
+      "name": "Umbra Board",
+      "slug": "umbra-board",
+      "image": "/Demonology/cursed-objects/umbra-board.png",
+      "catalogSection": "Cursed Objects",
+      "purpose": "Lets you ask the ghost direct questions to find the ghost room and learn other details.",
+      "howToUse": "Stand near the board (or hold it) and type a question in Roblox chat. The default prompts find the ghost room, check the ghost's location, or check your energy. The ghost answers through the planchette.",
+      "energyCost": "Charged per question and the amount depends on the question (as reported): room/location questions about 40%, presence questions about 20%, and age or energy checks about 5%.",
+      "cursedHuntTrigger": "Asking a question without enough energy makes the board levitate and permanently break, starting a hunt. The ghost can also be angered into starting one, and a 'hide and seek' prompt deliberately triggers a hunt.",
+      "requirement": "",
+      "cardSummary": "The most informative cursed object: it answers chat questions about the ghost. Cost is paid per question and varies, with room questions being the most expensive, so ask only what you need.",
+      "sourceConfidence": "high",
+      "verificationNote": "Per-question energy values (40% room/location, 20% presence, 5% age/energy) from the demonology.fandom.com Umbra Board questions table; legacy wiki lists 50%/5% and the Guide page summarizes '>=40% per question' - cost varies by question, not a single fixed number.",
+      "sourcePage": "https://demonology.fandom.com/wiki/Cursed_Objects#Umbra_Board"
+    },
+    {
+      "name": "Summoning Circle",
+      "slug": "summoning-circle",
+      "image": "/Demonology/cursed-objects/summoning-circle.png",
+      "catalogSection": "Cursed Objects",
+      "purpose": "Summons the ghost into the open so you can get a guaranteed, safe ghost photo.",
+      "howToUse": "Use a Lighter to light all 5 candles around the circle. Once every candle is lit the ghost appears, nearby doors swing open and shut, then a hunt begins.",
+      "energyCost": "10% energy per candle, for 50% total once all 5 candles are lit (as reported).",
+      "cursedHuntTrigger": "Always starts a Cursed Hunt right after the summon animation finishes; the circle can only be used once and turns black afterward.",
+      "requirement": "A Lighter, plus the circle's 5 candles to light.",
+      "cardSummary": "The 'summon on purpose' object. Light all five candles for a guaranteed ghost photo, but it costs 50% energy and always ends in a Cursed Hunt, so plan your escape first.",
+      "sourceConfidence": "high",
+      "verificationNote": "10%/candle (50% total), Lighter + 5 candles, and guaranteed post-summon hunt confirmed on demonology.fandom.com Cursed Objects page.",
+      "sourcePage": "https://demonology.fandom.com/wiki/Cursed_Objects#Summoning_Circle"
+    },
+    {
+      "name": "Fortune Teller",
+      "slug": "fortune-teller",
+      "image": "/Demonology/cursed-objects/fortune-teller.png",
+      "catalogSection": "Cursed Objects",
+      "purpose": "A gamble that draws a random Fortune Ticket, which can either help or hurt you.",
+      "howToUse": "Insert a Fortune Coin to get a reading; music and animations play, then a Fortune Ticket drops that anyone can pick up. Equip the ticket to reveal its random effect, which triggers as it burns away. No one can insert another coin until the ticket is picked up.",
+      "energyCost": "No direct usage energy cost; it runs on Fortune Coins instead. Some ticket outcomes still affect energy (for example one drains energy, while others restore it).",
+      "cursedHuntTrigger": "Outcomes are random. One ticket reading starts a Cursed Hunt, and another can instantly kill the user, so the risk depends on the draw rather than the object breaking.",
+      "requirement": "Fortune Coins, which spawn around the site (more on larger sites).",
+      "cardSummary": "The wildcard. Spend a Fortune Coin for a random ticket whose effect ranges from restoring energy to starting a hunt or even instant death, so it is high-risk and luck-based rather than a steady tool.",
+      "sourceConfidence": "high",
+      "verificationNote": "Coin-based use (no fixed energy drain), random ticket outcomes including a hunt and an instant-death reading confirmed on demonology.fandom.com Cursed Objects page.",
+      "sourcePage": "https://demonology.fandom.com/wiki/Cursed_Objects#Fortune_Teller"
+    }
+  ]
+}

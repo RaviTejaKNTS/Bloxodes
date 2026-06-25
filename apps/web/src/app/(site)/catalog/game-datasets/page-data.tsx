@@ -1874,6 +1874,91 @@ const ANIME_VANGUARDS_ENEMY_SOURCE_KEYS = [
 ];
 
 const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
+  "demonology-ghosts": {
+    groupKey: "catalogSection",
+    groupLabel: "Ghost type",
+    sectionOrder: ["Core Ghosts", "Wither Ghosts"],
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "slug",
+      "catalogSection",
+      "evidenceAltNames",
+      "sourcePage",
+      "sourceConfidence",
+      "sourceCheckedAt",
+      "verificationNote",
+      "imageStatus"
+    ],
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 6
+  },
+  "demonology-equipment": {
+    groupKey: "catalogSection",
+    groupLabel: "Equipment type",
+    sectionOrder: ["Starter Equipment", "Purchasable Equipment", "Limited-Time Equipment"],
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["slug", "catalogSection"],
+    additionalColumns: ["catalogSection"],
+    maxStats: 5
+  },
+  "demonology-maps": {
+    groupKey: "catalogSection",
+    groupLabel: "Map size",
+    sectionOrder: ["Small Job Sites", "Medium Job Sites", "Large Job Sites"],
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "slug",
+      "catalogSection",
+      "unlockLevelDisplay",
+      "released",
+      "sourcePage",
+      "sourceUrls",
+      "sourceConfidence",
+      "sourceCheckedAt",
+      "verificationNote",
+      "imageStatus"
+    ],
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5
+  },
+  "demonology-evidence": {
+    groupKey: "catalogSection",
+    groupLabel: "Detection method",
+    sectionOrder: ["Device readings", "Camera and light reveals", "Placed and passive"],
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: [
+      "slug",
+      "catalogSection",
+      "order",
+      "formerName",
+      "toolAliases",
+      "gotcha",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus",
+      "sourcePage"
+    ],
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 4
+  },
+  "demonology-cursed-objects": {
+    groupKey: "catalogSection",
+    groupLabel: "Cursed object",
+    sectionOrder: ["Cursed Objects"],
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["slug", "catalogSection", "sourceConfidence", "verificationNote", "sourcePage"],
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 6
+  },
+  "demonology-perks": {
+    groupKey: "catalogSection",
+    groupLabel: "Perk type",
+    sectionOrder: ["Mobility Perks", "Utility Perks", "Defensive Perks"],
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ["slug", "catalogSection", "category", "sourceImageUrl", "sourcePage", "sortOrder"],
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 4
+  },
   "anime-squadron-equipment": {
     groupKey: "catalogSection",
     groupLabel: "Equipment group",
