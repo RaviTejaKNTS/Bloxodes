@@ -90,7 +90,7 @@ Write one short useful blurb for the game wiki hub.
 - `description_md`: Answer the main question raised by the title in more depth.
 - `how_it_works_md`: Explain page fields only when the fields need context. Keep it short.
 - `description_json`: Explain section groups only when it adds context beyond the cards. Keys must match rendered section labels.
-- `faq_json`: Answer useful follow-up questions not already covered.
+- `faq_json`: Answer useful follow-up questions not already covered. Each entry MUST use the keys `q` (question) and `a` (answer): `{ "q": "...", "a": "..." }`. Do NOT use `question`/`answer` — the renderer reads `q`/`a` and wrong keys make the FAQ render blank.
 - `wiki_md`: Give the wiki hub one short blurb about why this collection matters.
 
 ## Output Shape
@@ -108,7 +108,7 @@ Write one short useful blurb for the game wiki hub.
   "description_md": "",
   "how_it_works_md": "",
   "description_json": {},
-  "faq_json": [],
+  "faq_json": [{ "q": "", "a": "" }],
   "wiki_md": "",
   "is_published": true
 }
