@@ -1525,6 +1525,12 @@ const ANIMAL_HOSPITAL_ANOMALY_SECTION_ORDER = [
   "Chase and hostile encounters"
 ];
 const ANIMAL_HOSPITAL_ROOM_SECTION_ORDER = ["Treatment rooms", "Camera zones"];
+const ANIMAL_HOSPITAL_EMERGENCY_SECTION_ORDER = [
+  "Multi-Patient Event",
+  "Fire Hazards",
+  "Patient Crises",
+  "Supernatural Threats"
+];
 const ANIMAL_HOSPITAL_SOURCE_KEYS = [
   "aliases",
   "catalogSection",
@@ -3879,6 +3885,16 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CatalogSectionOverride> = {
     maxStats: 5,
     subtitleKeys: ["shift", "roomRole"],
     hideImages: true
+  },
+  "animal-hospital-emergencies": {
+    groupKey: "catalogSection",
+    groupLabel: "Threat type",
+    sectionOrder: ANIMAL_HOSPITAL_EMERGENCY_SECTION_ORDER,
+    getSectionLabel: getCatalogSection,
+    hiddenKeys: ANIMAL_HOSPITAL_SOURCE_KEYS,
+    additionalColumns: ["catalogSection", "cardSummary"],
+    maxStats: 5,
+    subtitleKeys: ["timeLimit"]
   },
   "violence-district-killers": {
     groupKey: "catalogSection",

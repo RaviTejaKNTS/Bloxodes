@@ -385,7 +385,11 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
     universeId: 10148749921,
     dataDir: "Animal Hospital",
     universeNames: ["Animal Hospital", "Animal Hospital (Anomaly)", "Animal Hospital (Anomaly) 🧪"],
-    collections: ["anomalies", "rooms"]
+    collections: [
+      "anomalies",
+      "rooms",
+      "emergencies"
+    ]
   },
   {
     gameSlug: "anime-squadron",
@@ -486,6 +490,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   "shelf-sections": "section codes, floor, book themes, and example titles for sorting books to the right shelf",
   keys: "key names, colors, and the permanent buffs each key grants",
   anomalies: "warning signs, encounter type, location, best action, and consequence",
+  emergencies: "time limit, what triggers it, how to resolve it, tools needed, and the failure consequence",
   accessories: "rarity, type, stats, obtainment, and build value",
   "accessory-shop": "chests, accessory shop items, prices, rarity chances, and obtainment notes",
   "aura-stages": "aura progression, stage requirements, visuals, and buffs",
@@ -1126,6 +1131,10 @@ const FIELD_LABELS: Record<string, string> = {
   trend: "trend",
   trigger: "trigger",
   triggerBehavior: "trigger behavior",
+  timeLimit: "time limit",
+  toolsNeeded: "tools needed",
+  resolution: "resolution",
+  consequence: "consequence",
   type: "type",
   unlock: "unlock",
   unlockArea: "unlock area",

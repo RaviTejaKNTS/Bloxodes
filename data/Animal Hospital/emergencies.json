@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "title": "Animal Hospital emergencies data",
+    "game": "Animal Hospital",
+    "gameSlug": "animal-hospital",
+    "universeId": "10148749921",
+    "collection": "Emergencies",
+    "collectionSlug": "emergencies",
+    "code": "animal-hospital-emergencies",
+    "route": "/wiki/animal-hospital/emergencies",
+    "updatedAt": "2026-06-25",
+    "sourceCheckedAt": "2026-06-25",
+    "itemCount": 8,
+    "groupBy": "catalogSection",
+    "sectionOrder": [
+      "Multi-Patient Event",
+      "Fire Hazards",
+      "Patient Crises",
+      "Supernatural Threats"
+    ],
+    "sectionCounts": {
+      "Multi-Patient Event": 1,
+      "Fire Hazards": 2,
+      "Patient Crises": 2,
+      "Supernatural Threats": 3
+    },
+    "defaultCardFields": [
+      "timeLimit",
+      "trigger",
+      "toolsNeeded"
+    ],
+    "imageCoverage": {
+      "totalItems": 8,
+      "withLocalImage": 8,
+      "withoutLocalImage": 0,
+      "present": 8,
+      "missing": 0
+    },
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "imageStatus",
+      "catalogSection",
+      "timeLimit",
+      "trigger",
+      "resolution",
+      "toolsNeeded",
+      "consequence",
+      "notes",
+      "cardSummary"
+    ],
+    "sources": [
+      {
+        "label": "Techwiser - Animal Hospital emergency events",
+        "url": "https://techwiser.com/animal-hospital-emergency-events/",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "Pro Game Guides - How to solve all Animal Hospital emergencies",
+        "url": "https://progameguides.com/roblox/how-to-solve-all-animal-hospital-emergencies/",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "Sportskeeda - Animal Hospital Death Ritual guide",
+        "url": "https://www.sportskeeda.com/roblox-news/animal-hospital-death-ritual-guide",
+        "accessed": "2026-06-25"
+      },
+      {
+        "label": "Roblox official game metadata",
+        "url": "https://www.roblox.com/games/78515283254292/Animal-Hospital",
+        "accessed": "2026-06-25"
+      }
+    ],
+    "notes": [
+      "Emergencies are timed in-room crisis events that occur during a night shift after a legitimate patient is admitted. They are a separate in-game system from the 14 anomalies catalog (which covers disguised patients you must identify and reject at the door).",
+      "Both primary sources agree on the same eight-item emergency set and on the timers and resolutions used here.",
+      "Some source labels differ slightly (Room on Fire vs Fire Breakout, Monster in Room 8 vs Purple Monster); names here are normalized to clear player-facing labels.",
+      "The Ambulance Event has no single timer; it is a wave of six patients with mixed conditions, so its timeLimit is 'No timer'.",
+      "Timers can shift with game updates; resolutions are written to stay accurate across versions.",
+      "Images are intentionally blank in this data pass and will be filled at the image gate."
+    ]
+  },
+  "items": [
+    {
+      "name": "Ambulance Event",
+      "slug": "ambulance-event",
+      "image": "/Animal%20Hospital/emergencies/ambulance-event.webp",
+      "imageStatus": "present",
+      "catalogSection": "Multi-Patient Event",
+      "timeLimit": "No timer",
+      "trigger": "Dr. Harlow announces an anomaly attack on the town, usually around shift 4 or 5, and six patients rush in at once.",
+      "resolution": "Treat all six incoming patients and grab whatever rooms are open; some arrive on fire or critically injured, so prioritize the most urgent cases.",
+      "toolsNeeded": "Fire extinguisher plus standard treatment supplies",
+      "consequence": "Any patient left untreated dies.",
+      "notes": "After you clear the first ambulance, the event returns roughly every five shifts.",
+      "cardSummary": "A surge event where six patients flood the hospital together, some on fire or critical. It is the only emergency that stacks several crises at once, so it tests how fast you can triage."
+    },
+    {
+      "name": "Room Fire",
+      "slug": "room-fire",
+      "image": "/Animal%20Hospital/emergencies/room-fire.webp",
+      "imageStatus": "present",
+      "catalogSection": "Fire Hazards",
+      "timeLimit": "No timer",
+      "trigger": "A room randomly catches fire during a shift, before or after a patient checks in.",
+      "resolution": "Put out the flames with the fire extinguisher, or smother them with your hands if you have no extinguisher yet.",
+      "toolsNeeded": "Fire extinguisher (kept in the glass case near the check-in booth; usable after completing 2 shifts)",
+      "consequence": "Standing in the fire drains 1 sanity per second, and patients faint if they walk into a burning room.",
+      "notes": "There is no countdown, but clear it fast because it blocks you from treating the patient in that room.",
+      "cardSummary": "A room bursts into flames and stays dangerous until you extinguish it. It has no death timer, but the sanity drain and fainting risk make it an urgent fix."
+    },
+    {
+      "name": "Patient on Fire",
+      "slug": "patient-on-fire",
+      "image": "/Animal%20Hospital/emergencies/patient-on-fire.webp",
+      "imageStatus": "present",
+      "catalogSection": "Fire Hazards",
+      "timeLimit": "60 seconds",
+      "trigger": "A patient runs into the hospital fully on fire, panicking and screaming.",
+      "resolution": "Spray them with the fire extinguisher for an instant heal, or put the fire out by hand and then treat the burns with ointment, all within the timer.",
+      "toolsNeeded": "Fire extinguisher (preferred) or hands plus burn ointment",
+      "consequence": "The patient dies if the 60-second timer runs out.",
+      "notes": "The extinguisher is the fastest fix; the hands-and-ointment route takes longer and risks missing the timer.",
+      "cardSummary": "A patient arrives engulfed in flames and you have one minute to save them. The extinguisher clears it instantly, making it the go-to tool for this emergency."
+    },
+    {
+      "name": "Patient Fainted",
+      "slug": "patient-fainted",
+      "image": "/Animal%20Hospital/emergencies/patient-fainted.webp",
+      "imageStatus": "present",
+      "catalogSection": "Patient Crises",
+      "timeLimit": "60 seconds",
+      "trigger": "A patient faints at check-in, after walking into a burning room, or after being shot.",
+      "resolution": "Pick the fainted patient up and carry them to their designated bed before the timer ends.",
+      "toolsNeeded": "None (carry by hand)",
+      "consequence": "The patient dies if not bedded in time.",
+      "notes": "Throwing a fainted patient in the trash removes them without counting as a death, but it also forfeits their reward.",
+      "cardSummary": "A patient collapses and must be carried to their bed within a minute. No tools are needed, just quick lifting and good room awareness."
+    },
+    {
+      "name": "Critical Patient",
+      "slug": "critical-patient",
+      "image": "/Animal%20Hospital/emergencies/critical-patient.webp",
+      "imageStatus": "present",
+      "catalogSection": "Patient Crises",
+      "timeLimit": "100-120 seconds",
+      "trigger": "A patient arrives in critical condition, often as part of the ambulance wave.",
+      "resolution": "Run the full treatment process for them, from check-in through every required care step, before the timer expires.",
+      "toolsNeeded": "Varies with the treatment the patient needs",
+      "consequence": "The patient dies if the full treatment is not finished in time.",
+      "notes": "Because the timer covers the whole treatment chain, start critical patients first when several arrive together.",
+      "cardSummary": "A patient shows up needing complete care against the clock. The challenge is finishing every treatment step, not a single quick fix."
+    },
+    {
+      "name": "Death Ritual",
+      "slug": "death-ritual",
+      "image": "/Animal%20Hospital/emergencies/death-ritual.webp",
+      "imageStatus": "present",
+      "catalogSection": "Supernatural Threats",
+      "timeLimit": "40 seconds",
+      "trigger": "In an occupied room the door creaks open, the lights dim, the patient floats, and seven ritual candles appear.",
+      "resolution": "Snuff out all seven candles one by one, tase the patient to break the ritual, or douse the candles with eyedrops, IV drops, or coffee.",
+      "toolsNeeded": "Taser (free at the start of shift 3, recharges in its box) or eyedrops / IV drops / coffee",
+      "consequence": "The patient dies if the ritual completes before you stop it.",
+      "notes": "Tasing is the fastest option but the candle route works if your taser is recharging.",
+      "cardSummary": "A floating patient is surrounded by seven lit candles and you have 40 seconds to break the ritual. The taser ends it quickly, but clearing the candles also works."
+    },
+    {
+      "name": "Bed Monster",
+      "slug": "bed-monster",
+      "image": "/Animal%20Hospital/emergencies/bed-monster.webp",
+      "imageStatus": "present",
+      "catalogSection": "Supernatural Threats",
+      "timeLimit": "30 seconds",
+      "trigger": "A monster grabs a patient and slowly drags them underneath the bed.",
+      "resolution": "Equip the maple syrup, step into the red zone next to the monster, and feed it the syrup so it releases the patient.",
+      "toolsNeeded": "Maple syrup",
+      "consequence": "The monster eats the patient if you do not feed it within 30 seconds.",
+      "notes": "The monster can grab players too, so approach the red zone with the syrup ready.",
+      "cardSummary": "A monster pulls a patient under the bed and you have only 30 seconds to react. Feeding it maple syrup is the way to make it let go."
+    },
+    {
+      "name": "Monster in Room 8",
+      "slug": "monster-in-room-8",
+      "image": "/Animal%20Hospital/emergencies/monster-in-room-8.webp",
+      "imageStatus": "present",
+      "catalogSection": "Supernatural Threats",
+      "timeLimit": "45 seconds",
+      "trigger": "A purple monster emerges from a recovering patient inside Room 8, the surgery room.",
+      "resolution": "Complete the surgery mini-game by following the steps written on the blackboard.",
+      "toolsNeeded": "None (interaction-based mini-game)",
+      "consequence": "The patient dies if the mini-game is not finished in time.",
+      "notes": "Do not tase or shoot the purple monster; attacking it kills the patient instantly.",
+      "cardSummary": "A purple monster appears during surgery in Room 8 and must be handled with the mini-game, not a weapon. Attacking it is an instant loss, which makes it the trickiest threat to learn."
+    }
+  ]
+}
