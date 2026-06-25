@@ -6,6 +6,14 @@ import { listPublishedTools } from "@/lib/tools";
 import { listPublishedQuizzes } from "@/lib/quizzes";
 import { listPublishedPuzzlePages } from "@/lib/puzzles";
 import { buildWikiCatalogPath, listPublishedWikiCatalogPagesByWikiSlug } from "@/lib/wiki-catalog";
+import { resolveCatalogCardMeta } from "@/lib/catalog-card-meta";
+import {
+  AVATAR_CATALOG_FAMILY_CODES,
+  AVATAR_CATALOG_LEGACY_FAMILY_CODES,
+  AVATAR_CATALOG_LEGACY_MASTER_CODE,
+  AVATAR_CATALOG_MASTER_CODE,
+  AVATAR_CATALOG_MASTER_TITLE
+} from "@/lib/roblox-avatar-catalog";
 import { resolveModifiedAt } from "@/lib/content-dates";
 import { GameCard } from "@/components/GameCard";
 import { ArticleCard } from "@/components/ArticleCard";
@@ -13,6 +21,7 @@ import { ToolCard } from "@/components/ToolCard";
 import { QuizCard } from "@/components/QuizCard";
 import { EventsPageCard } from "@/components/EventsPageCard";
 import { CardImage } from "@/components/CardImage";
+import { CatalogCard } from "@/components/CatalogCard";
 import { buildEventsCards } from "@/app/(site)/events/page-data";
 
 function time(value: string | null | undefined): number {
@@ -57,6 +66,26 @@ function MoreSection({
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">{children}</div>
     </section>
   );
+}
+
+const CATALOG_CARD_TONES = ["indigo", "amber", "emerald"] as const;
+const GENERAL_CATALOG_ORDER = [
+  AVATAR_CATALOG_MASTER_CODE,
+  "roblox-music-ids",
+  "free-roblox-items",
+  "roblox-decal-ids",
+  "roblox-color-codes",
+  "admin-commands"
+] as const;
+const AVATAR_CATALOG_CHILD_CODES = new Set<string>(
+  [
+    ...AVATAR_CATALOG_FAMILY_CODES.filter((code) => code !== AVATAR_CATALOG_MASTER_CODE),
+    ...AVATAR_CATALOG_LEGACY_FAMILY_CODES
+  ]
+);
+
+function normalizeCatalogCode(code: string): string {
+  return code === AVATAR_CATALOG_LEGACY_MASTER_CODE ? AVATAR_CATALOG_MASTER_CODE : code;
 }
 
 export async function MoreCodes({ excludeSlug }: { excludeSlug: string }) {
@@ -146,28 +175,54 @@ export async function MoreEvents({ excludeSlug }: { excludeSlug: string }) {
 
 export async function MoreCatalogs({ excludeCode }: { excludeCode: string }) {
   const catalogs = await listPublishedTopLevelCatalogPages();
-  const normalizedCurrent = excludeCode.trim().toLowerCase();
-  const items = catalogs.filter((catalog) => catalog.code !== normalizedCurrent).slice(0, 8);
+  const normalizedCurrent = normalizeCatalogCode(excludeCode.trim().toLowerCase());
+  const orderMap: Map<string, number> = new Map(GENERAL_CATALOG_ORDER.map((code, index) => [code, index]));
+  const cardsById = new Map<
+    string,
+    {
+      id: string;
+      href: string;
+      title: string;
+      count: number | null;
+      iconKey: Awaited<ReturnType<typeof resolveCatalogCardMeta>>["icon"];
+      tone: (typeof CATALOG_CARD_TONES)[number];
+    }
+  >();
+
+  for (const [index, catalog] of catalogs.entries()) {
+    const normalizedCode = normalizeCatalogCode(catalog.code);
+    if (normalizedCode === normalizedCurrent) continue;
+    if (catalog.universe_id || AVATAR_CATALOG_CHILD_CODES.has(normalizedCode)) continue;
+    if (cardsById.has(normalizedCode)) continue;
+
+    const meta = await resolveCatalogCardMeta(normalizedCode);
+    cardsById.set(normalizedCode, {
+      id: normalizedCode,
+      href: `/catalog/${normalizedCode}`,
+      title:
+        meta.shortLabel ??
+        (normalizedCode === AVATAR_CATALOG_MASTER_CODE ? AVATAR_CATALOG_MASTER_TITLE : catalog.title),
+      count: meta.count,
+      iconKey: meta.icon,
+      tone: CATALOG_CARD_TONES[index % CATALOG_CARD_TONES.length]
+    });
+  }
+
+  const items = Array.from(cardsById.values())
+    .sort((a, b) => {
+      const left = orderMap.get(a.id) ?? Number.MAX_SAFE_INTEGER;
+      const right = orderMap.get(b.id) ?? Number.MAX_SAFE_INTEGER;
+      if (left !== right) return left - right;
+      return a.title.localeCompare(b.title);
+    })
+    .slice(0, 8);
+
   if (!items.length) return null;
 
   return (
     <MoreSection title="Check out other catalog pages" viewAllHref="/catalog">
-      {items.map((catalog) => (
-        <Link
-          key={catalog.id ?? catalog.code}
-          href={`/catalog/${catalog.code}`}
-          className="group flex items-center gap-3 rounded-lg border border-border/70 bg-card p-3 transition-colors hover:border-border"
-        >
-          <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md bg-surface-muted">
-            <CardImage src={catalog.thumb_url ?? null} alt={catalog.title} />
-          </span>
-          <span className="min-w-0">
-            <span className="block line-clamp-2 text-sm font-semibold text-foreground">{catalog.title}</span>
-            <span className="block line-clamp-1 text-xs text-muted">
-              {catalog.universe_name ?? catalog.meta_description ?? "Roblox catalog"}
-            </span>
-          </span>
-        </Link>
+      {items.map(({ id, ...card }) => (
+        <CatalogCard key={id} {...card} />
       ))}
     </MoreSection>
   );

@@ -22,9 +22,9 @@ function itemRouteId(item: { assetId: number; itemType: string }) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const assetId = parseAssetId((await params).assetId);
-  if (!assetId) return { title: `Roblox Item Stats | ${SITE_NAME}` };
+  if (!assetId) return { title: `Roblox Item Stats | ${SITE_NAME}`, robots: { index: false, follow: false } };
   const data = await getStatsItemDetail(assetId);
-  if (!data) return { title: `Roblox Item Stats | ${SITE_NAME}` };
+  if (!data) return { title: `Roblox Item Stats | ${SITE_NAME}`, robots: { index: false, follow: false } };
   const routeId = itemRouteId(data.item);
   const title = `${data.item.name} Roblox Item Stats | ${SITE_NAME}`;
   const description = `${data.item.name} price, favorites, resale, creator, and Roblox marketplace history tracked by Bloxodes.`;
@@ -32,6 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: buildAlternates(`${SITE_URL}/stats/items/${routeId}`),
+    robots: { index: false, follow: true },
     openGraph: {
       title,
       description,

@@ -3258,53 +3258,6 @@ export async function listStatsSitemapGames(limit = 200): Promise<Array<{ slug: 
   }));
 }
 
-export async function listStatsSitemapItems(limit = 1000): Promise<Array<{ assetId: number; updatedAt: string | null }>> {
-  const cappedLimit = Math.min(Math.max(Math.trunc(limit), 1), 5000);
-  const hasItemIndex = await isStatsItemIndexAvailable();
-  const tableName = hasItemIndex ? "stats_item_current_index" : "roblox_catalog_items";
-  const selectColumns = hasItemIndex
-    ? "asset_id,item_type,last_item_stats_refreshed_at,last_seen_at,created_at,favorite_count,lowest_resale_price_robux"
-    : "asset_id,item_type,last_seen_at,created_at,favorite_count,lowest_resale_price_robux,is_deleted,name,category,subcategory";
-
-  let query = supabaseAdmin()
-    .from(tableName)
-    .select(selectColumns)
-    .not("name", "is", null)
-    .not("category", "is", null)
-    .not("subcategory", "is", null)
-    .order("favorite_count", { ascending: false, nullsFirst: false })
-    .order("lowest_resale_price_robux", { ascending: false, nullsFirst: false })
-    .limit(cappedLimit * 2);
-
-  if (!hasItemIndex) query = query.eq("is_deleted", false);
-
-  const { data, error } = await query;
-  if (error) {
-    console.warn(`Failed to load ${tableName} for stats item sitemap`, error.message);
-    return [];
-  }
-
-  const seen = new Set<number>();
-  const items: Array<{ assetId: number; updatedAt: string | null }> = [];
-  for (const row of (data ?? []) as unknown as Array<Record<string, unknown>>) {
-    const rawAssetId = toNumber(row.asset_id);
-    if (!rawAssetId) continue;
-    const itemType = typeof row.item_type === "string" ? row.item_type : "Asset";
-    const routeAssetId = itemType === "Bundle" ? Math.abs(Math.trunc(rawAssetId)) : Math.trunc(rawAssetId);
-    if (!routeAssetId || seen.has(routeAssetId)) continue;
-    seen.add(routeAssetId);
-    items.push({
-      assetId: routeAssetId,
-      updatedAt:
-        (typeof row.last_item_stats_refreshed_at === "string" ? row.last_item_stats_refreshed_at : null) ??
-        (typeof row.last_seen_at === "string" ? row.last_seen_at : null) ??
-        (typeof row.created_at === "string" ? row.created_at : null)
-    });
-    if (items.length >= cappedLimit) break;
-  }
-  return items;
-}
-
 export function robloxGameUrl(game: Pick<StatsGame, "rootPlaceId" | "universeId">) {
   return `https://www.roblox.com/games/${game.rootPlaceId ?? game.universeId}`;
 }
