@@ -8,10 +8,10 @@
       "port": 3000
     },
     {
-      "name": "web-design",
+      "name": "web-prod",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev:design", "-w", "@bloxodes/web"],
-      "port": 5050
+      "runtimeArgs": ["run", "dev:prod"],
+      "port": 5000
     }
   ]
 }

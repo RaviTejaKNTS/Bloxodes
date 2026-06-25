@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "npm run dev:web",
     "dev:local": "tsx scripts/dev/start-local-dev.ts",
+    "dev:prod": "tsx scripts/dev/start-prod-dev.ts",
     "dev:web": "npm run dev -w @bloxodes/web",
     "dev:mobile": "npm run dev -w @bloxodes/mobile",
     "android": "npm run android -w @bloxodes/mobile",

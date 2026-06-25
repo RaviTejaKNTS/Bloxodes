@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:design": "next dev -p 5050",
+    "dev:prod": "next dev -p 5000",
     "build": "next build --webpack",
     "start": "next start",
     "typecheck": "tsc --noEmit",
