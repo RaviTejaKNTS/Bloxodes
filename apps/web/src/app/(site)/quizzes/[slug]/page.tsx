@@ -17,7 +17,6 @@ export const revalidate = 21600;
 
 type PageProps = {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateStaticParams() {
@@ -73,10 +72,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function QuizPage({ params, searchParams }: PageProps) {
+export default async function QuizPage({ params }: PageProps) {
   const { slug } = await params;
-  const resolvedSearch = (await searchParams) ?? {};
-  const startAnswerOptionId = typeof resolvedSearch.qa === "string" ? resolvedSearch.qa : undefined;
   const page = await getQuizPageByCode(slug);
   if (!page) {
     notFound();
@@ -195,7 +192,6 @@ export default async function QuizPage({ params, searchParams }: PageProps) {
         initialAttempt={initialAttempt}
         heroImage={heroImage}
         heroAlt={heroAlt}
-        startAnswerOptionId={startAnswerOptionId}
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </div>

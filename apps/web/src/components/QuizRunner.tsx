@@ -254,11 +254,15 @@ export function QuizRunner(props: QuizRunnerProps) {
     if (initializedStorageKey.current === storageKey) return;
     initializedStorageKey.current = storageKey;
 
-    if (props.startAnswerOptionId && initialAttempt.length) {
+    const queryStartAnswerOptionId =
+      props.startAnswerOptionId ??
+      (typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("qa") || undefined : undefined);
+
+    if (queryStartAnswerOptionId && initialAttempt.length) {
       const first = initialAttempt[0];
-      if (first && (first.options ?? []).some((option) => option.id === props.startAnswerOptionId)) {
+      if (first && (first.options ?? []).some((option) => option.id === queryStartAnswerOptionId)) {
         setAttempt(initialAttempt);
-        setAnswers({ [first.id]: props.startAnswerOptionId });
+        setAnswers({ [first.id]: queryStartAnswerOptionId });
         setCurrentIndex(1);
         setShowSummary(false);
         setSavedAttemptKey(null);
