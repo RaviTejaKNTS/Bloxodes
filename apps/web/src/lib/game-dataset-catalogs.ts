@@ -435,6 +435,14 @@ export const GAME_DATASET_CATALOG_GROUPS: GameDatasetCatalogGroup[] = [
     dataDir: "Clean The Library",
     universeNames: ["Clean The Library", "Clean The Library 📖"],
     collections: ["shelf-sections", "magic-abilities", "keys", "upgrades"]
+  },
+  {
+    gameSlug: "paint-and-seek",
+    gameName: "Paint And SEEK!",
+    universeId: 9977954973,
+    dataDir: "Paint And SEEK",
+    universeNames: ["Paint And SEEK!", "[🎨] Paint And SEEK!", "Paint And SEEK"],
+    collections: ["maps"]
   }
 ];
 
@@ -664,6 +672,11 @@ const FIELD_LABELS: Record<string, string> = {
   benefit: "benefit",
   bestAction: "best action",
   bestFor: "best for",
+  setting: "setting",
+  lighting: "lighting",
+  bestHidingStrategy: "best hiding strategy",
+  seekerNote: "seeker note",
+  surfaceTexture: "surface texture",
   biome: "biome",
   biomeGroup: "biome group",
   bodyBase: "body / base",
