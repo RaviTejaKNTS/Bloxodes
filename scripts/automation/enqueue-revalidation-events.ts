@@ -15,7 +15,7 @@ const VALID_TYPES = new Set([
   "quiz",
   "puzzle",
   "wiki",
-  "wiki_catalog",
+  "wiki_collection",
   "stats"
 ]);
 

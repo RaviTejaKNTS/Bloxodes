@@ -9,7 +9,7 @@
     "updatedAt": "2026-06-15",
     "columns": [
       "name",
-      "catalogSection",
+      "collectionSection",
       "rarity",
       "crate",
       "crateChance",
@@ -39,7 +39,7 @@
     {
       "id": "purple-stitch",
       "name": "Purple Stitch",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Pain",
       "crateChance": "16.38%",
@@ -54,7 +54,7 @@
     {
       "id": "camo",
       "name": "Camo",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Pain",
       "crateChance": "16.38%",
@@ -69,7 +69,7 @@
     {
       "id": "classic",
       "name": "Classic",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Pain",
       "crateChance": "16.38%",
@@ -84,7 +84,7 @@
     {
       "id": "sleek",
       "name": "Sleek",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Pain",
       "crateChance": "16.38%",
@@ -99,7 +99,7 @@
     {
       "id": "convict",
       "name": "Convict",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Pain",
       "crateChance": "9%",
@@ -114,7 +114,7 @@
     {
       "id": "turbulence",
       "name": "Turbulence",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Pain",
       "crateChance": "9%",
@@ -129,7 +129,7 @@
     {
       "id": "blotches",
       "name": "Blotches",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Pain",
       "crateChance": "9%",
@@ -144,7 +144,7 @@
     {
       "id": "skull",
       "name": "Skull",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Mythic",
       "crate": "Pain",
       "crateChance": "3%",
@@ -159,7 +159,7 @@
     {
       "id": "spikes",
       "name": "Spikes",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Mythic",
       "crate": "Pain",
       "crateChance": "3%",
@@ -174,7 +174,7 @@
     {
       "id": "bandages",
       "name": "Bandages",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Legendary",
       "crate": "Pain",
       "crateChance": "1.50%",
@@ -189,7 +189,7 @@
     {
       "id": "checkered",
       "name": "Checkered",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Gems",
       "crateChance": "16.38%",
@@ -204,7 +204,7 @@
     {
       "id": "waves",
       "name": "Waves",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Gems",
       "crateChance": "16.38%",
@@ -219,7 +219,7 @@
     {
       "id": "jungle",
       "name": "Jungle",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Gems",
       "crateChance": "16.38%",
@@ -234,7 +234,7 @@
     {
       "id": "opal",
       "name": "Opal",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Gems",
       "crateChance": "16.38%",
@@ -249,7 +249,7 @@
     {
       "id": "crystal",
       "name": "Crystal",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Gems",
       "crateChance": "9%",
@@ -264,7 +264,7 @@
     {
       "id": "quartz",
       "name": "Quartz",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Gems",
       "crateChance": "9%",
@@ -279,7 +279,7 @@
     {
       "id": "emerald",
       "name": "Emerald",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Gems",
       "crateChance": "9%",
@@ -294,7 +294,7 @@
     {
       "id": "obsidian",
       "name": "Obsidian",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Mythic",
       "crate": "Gems",
       "crateChance": "3%",
@@ -309,7 +309,7 @@
     {
       "id": "bismuth",
       "name": "Bismuth",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Mythic",
       "crate": "Gems",
       "crateChance": "3%",
@@ -324,7 +324,7 @@
     {
       "id": "diamond",
       "name": "Diamond",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Legendary",
       "crate": "Gems",
       "crateChance": "1.50%",
@@ -339,7 +339,7 @@
     {
       "id": "desert",
       "name": "Desert",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Dragon",
       "crateChance": "16.38%",
@@ -354,7 +354,7 @@
     {
       "id": "cloth",
       "name": "Cloth",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Dragon",
       "crateChance": "16.38%",
@@ -369,7 +369,7 @@
     {
       "id": "flame",
       "name": "Flame",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Dragon",
       "crateChance": "16.38%",
@@ -384,7 +384,7 @@
     {
       "id": "goo",
       "name": "Goo",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Dragon",
       "crateChance": "16.38%",
@@ -399,7 +399,7 @@
     {
       "id": "fade",
       "name": "Fade",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Dragon",
       "crateChance": "9%",
@@ -414,7 +414,7 @@
     {
       "id": "splash",
       "name": "Splash",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Dragon",
       "crateChance": "9%",
@@ -429,7 +429,7 @@
     {
       "id": "tiger",
       "name": "Tiger",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Dragon",
       "crateChance": "9%",
@@ -444,7 +444,7 @@
     {
       "id": "neon-oni",
       "name": "Neon Oni",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Mythic",
       "crate": "Dragon",
       "crateChance": "3%",
@@ -459,7 +459,7 @@
     {
       "id": "flowers",
       "name": "Flowers",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Mythic",
       "crate": "Dragon",
       "crateChance": "3%",
@@ -474,7 +474,7 @@
     {
       "id": "dragon-scales",
       "name": "Dragon Scales",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Legendary",
       "crate": "Dragon",
       "crateChance": "1.50%",
@@ -489,7 +489,7 @@
     {
       "id": "astral",
       "name": "Astral",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Sci-Fi",
       "crateChance": "16.38%",
@@ -504,7 +504,7 @@
     {
       "id": "swirls",
       "name": "Swirls",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Sci-Fi",
       "crateChance": "16.38%",
@@ -519,7 +519,7 @@
     {
       "id": "cracks",
       "name": "Cracks",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Sci-Fi",
       "crateChance": "16.38%",
@@ -534,7 +534,7 @@
     {
       "id": "alien",
       "name": "Alien",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Sci-Fi",
       "crateChance": "16.38%",
@@ -549,7 +549,7 @@
     {
       "id": "gauntlets",
       "name": "Gauntlets",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Sci-Fi",
       "crateChance": "9%",
@@ -564,7 +564,7 @@
     {
       "id": "adamantite",
       "name": "Adamantite",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Sci-Fi",
       "crateChance": "9%",
@@ -579,7 +579,7 @@
     {
       "id": "rockets",
       "name": "Rockets",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Sci-Fi",
       "crateChance": "9%",
@@ -594,7 +594,7 @@
     {
       "id": "meteorite",
       "name": "Meteorite",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Mythic",
       "crate": "Sci-Fi",
       "crateChance": "3%",
@@ -609,7 +609,7 @@
     {
       "id": "saturn",
       "name": "Saturn",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Mythic",
       "crate": "Sci-Fi",
       "crateChance": "3%",
@@ -624,7 +624,7 @@
     {
       "id": "ancient",
       "name": "Ancient",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Legendary",
       "crate": "Sci-Fi",
       "crateChance": "1.50%",
@@ -639,7 +639,7 @@
     {
       "id": "slayer",
       "name": "Slayer",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Anime",
       "crateChance": "16.38%",
@@ -654,7 +654,7 @@
     {
       "id": "ninja",
       "name": "Ninja",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Anime",
       "crateChance": "16.38%",
@@ -669,7 +669,7 @@
     {
       "id": "alchemist",
       "name": "Alchemist",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Anime",
       "crateChance": "16.38%",
@@ -684,7 +684,7 @@
     {
       "id": "sukuna",
       "name": "Sukuna",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Uncommon",
       "crate": "Anime",
       "crateChance": "16.38%",
@@ -699,7 +699,7 @@
     {
       "id": "kurta",
       "name": "Kurta",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Anime",
       "crateChance": "9%",
@@ -714,7 +714,7 @@
     {
       "id": "pantera",
       "name": "Pantera",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Anime",
       "crateChance": "9%",
@@ -729,7 +729,7 @@
     {
       "id": "ghoul",
       "name": "Ghoul",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Rare",
       "crate": "Anime",
       "crateChance": "9%",
@@ -744,7 +744,7 @@
     {
       "id": "super",
       "name": "Super",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Mythic",
       "crate": "Anime",
       "crateChance": "3%",
@@ -759,7 +759,7 @@
     {
       "id": "chainsaw",
       "name": "Chainsaw",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Mythic",
       "crate": "Anime",
       "crateChance": "3%",
@@ -774,7 +774,7 @@
     {
       "id": "berserk",
       "name": "Berserk",
-      "catalogSection": "Standard crate",
+      "collectionSection": "Standard crate",
       "rarity": "Legendary",
       "crate": "Anime",
       "crateChance": "1.50%",
@@ -789,7 +789,7 @@
     {
       "id": "splatter",
       "name": "Splatter",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Halloween 2023",
       "crateChance": "16.38%",
@@ -804,7 +804,7 @@
     {
       "id": "caution",
       "name": "Caution",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Halloween 2023",
       "crateChance": "16.38%",
@@ -819,7 +819,7 @@
     {
       "id": "poison",
       "name": "Poison",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Halloween 2023",
       "crateChance": "16.38%",
@@ -834,7 +834,7 @@
     {
       "id": "october",
       "name": "October",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Halloween 2023",
       "crateChance": "16.38%",
@@ -849,7 +849,7 @@
     {
       "id": "moth",
       "name": "Moth",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Halloween 2023",
       "crateChance": "9%",
@@ -864,7 +864,7 @@
     {
       "id": "haunted",
       "name": "Haunted",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Halloween 2023",
       "crateChance": "9%",
@@ -879,7 +879,7 @@
     {
       "id": "spider",
       "name": "Spider",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Halloween 2023",
       "crateChance": "9%",
@@ -894,7 +894,7 @@
     {
       "id": "joker",
       "name": "Joker",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Mythic",
       "crate": "Halloween 2023",
       "crateChance": "3%",
@@ -909,7 +909,7 @@
     {
       "id": "bats",
       "name": "Bats",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Mythic",
       "crate": "Halloween 2023",
       "crateChance": "3%",
@@ -924,7 +924,7 @@
     {
       "id": "corruption",
       "name": "Corruption",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Legendary",
       "crate": "Halloween 2023",
       "crateChance": "1.50%",
@@ -939,7 +939,7 @@
     {
       "id": "socks",
       "name": "Socks",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Christmas 2023",
       "crateChance": "16.38%",
@@ -954,7 +954,7 @@
     {
       "id": "holly",
       "name": "Holly",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Christmas 2023",
       "crateChance": "16.38%",
@@ -969,7 +969,7 @@
     {
       "id": "snowflake",
       "name": "Snowflake",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Christmas 2023",
       "crateChance": "16.38%",
@@ -984,7 +984,7 @@
     {
       "id": "knitting",
       "name": "Knitting",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Christmas 2023",
       "crateChance": "16.38%",
@@ -999,7 +999,7 @@
     {
       "id": "firecracker",
       "name": "Firecracker",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Christmas 2023",
       "crateChance": "9%",
@@ -1014,7 +1014,7 @@
     {
       "id": "cake",
       "name": "Cake",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Christmas 2023",
       "crateChance": "9%",
@@ -1029,7 +1029,7 @@
     {
       "id": "candycane",
       "name": "Candycane",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Christmas 2023",
       "crateChance": "9%",
@@ -1044,7 +1044,7 @@
     {
       "id": "warped",
       "name": "Warped",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Mythic",
       "crate": "Christmas 2023",
       "crateChance": "3%",
@@ -1059,7 +1059,7 @@
     {
       "id": "gift",
       "name": "Gift",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Mythic",
       "crate": "Christmas 2023",
       "crateChance": "3%",
@@ -1074,7 +1074,7 @@
     {
       "id": "krampus",
       "name": "Krampus",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Legendary",
       "crate": "Christmas 2023",
       "crateChance": "1.50%",
@@ -1089,7 +1089,7 @@
     {
       "id": "infected",
       "name": "Infected",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Halloween 2024",
       "crateChance": "16.38%",
@@ -1104,7 +1104,7 @@
     {
       "id": "dread",
       "name": "Dread",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Halloween 2024",
       "crateChance": "16.38%",
@@ -1119,7 +1119,7 @@
     {
       "id": "good-and-evil",
       "name": "Good and Evil",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Halloween 2024",
       "crateChance": "16.38%",
@@ -1134,7 +1134,7 @@
     {
       "id": "molten",
       "name": "Molten",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Halloween 2024",
       "crateChance": "16.38%",
@@ -1149,7 +1149,7 @@
     {
       "id": "rat-king",
       "name": "Rat King",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Halloween 2024",
       "crateChance": "9%",
@@ -1164,7 +1164,7 @@
     {
       "id": "arachnophobia",
       "name": "Arachnophobia",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Halloween 2024",
       "crateChance": "9%",
@@ -1179,7 +1179,7 @@
     {
       "id": "brains",
       "name": "Brains",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Halloween 2024",
       "crateChance": "9%",
@@ -1194,7 +1194,7 @@
     {
       "id": "purge",
       "name": "Purge",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Mythic",
       "crate": "Halloween 2024",
       "crateChance": "3%",
@@ -1209,7 +1209,7 @@
     {
       "id": "pirate-hooks",
       "name": "Pirate Hooks",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Mythic",
       "crate": "Halloween 2024",
       "crateChance": "3%",
@@ -1224,7 +1224,7 @@
     {
       "id": "mercenary",
       "name": "Mercenary",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Legendary",
       "crate": "Halloween 2024",
       "crateChance": "1.50%",
@@ -1239,7 +1239,7 @@
     {
       "id": "snowman",
       "name": "Snowman",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Christmas 2024",
       "crateChance": "16.38%",
@@ -1254,7 +1254,7 @@
     {
       "id": "new-year-2025",
       "name": "New Year (2025)",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Christmas 2024",
       "crateChance": "16.38%",
@@ -1269,7 +1269,7 @@
     {
       "id": "guard-up",
       "name": "Guard Up",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Christmas 2024",
       "crateChance": "16.38%",
@@ -1284,7 +1284,7 @@
     {
       "id": "screws",
       "name": "Screws",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Christmas 2024",
       "crateChance": "16.38%",
@@ -1299,7 +1299,7 @@
     {
       "id": "christmas-tree",
       "name": "Christmas Tree",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Christmas 2024",
       "crateChance": "9%",
@@ -1314,7 +1314,7 @@
     {
       "id": "rudolph",
       "name": "Rudolph",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Christmas 2024",
       "crateChance": "9%",
@@ -1329,7 +1329,7 @@
     {
       "id": "wrapped",
       "name": "Wrapped",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Christmas 2024",
       "crateChance": "9%",
@@ -1344,7 +1344,7 @@
     {
       "id": "pack-a-punch",
       "name": "Pack-a-Punch",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Mythic",
       "crate": "Christmas 2024",
       "crateChance": "3%",
@@ -1359,7 +1359,7 @@
     {
       "id": "frozen",
       "name": "Frozen",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Mythic",
       "crate": "Christmas 2024",
       "crateChance": "3%",
@@ -1374,7 +1374,7 @@
     {
       "id": "snowplower",
       "name": "Snowplower",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Legendary",
       "crate": "Christmas 2024",
       "crateChance": "1.50%",
@@ -1389,7 +1389,7 @@
     {
       "id": "heartbeat",
       "name": "Heartbeat",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Valentine's 2026",
       "crateChance": "16.38%",
@@ -1404,7 +1404,7 @@
     {
       "id": "super-love",
       "name": "Super Love",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Valentine's 2026",
       "crateChance": "16.38%",
@@ -1419,7 +1419,7 @@
     {
       "id": "valentine-s-2026",
       "name": "Valentine's 2026",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Valentine's 2026",
       "crateChance": "16.38%",
@@ -1434,7 +1434,7 @@
     {
       "id": "denim",
       "name": "Denim",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Uncommon",
       "crate": "Valentine's 2026",
       "crateChance": "16.38%",
@@ -1449,7 +1449,7 @@
     {
       "id": "cold-hearted",
       "name": "Cold Hearted",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Valentine's 2026",
       "crateChance": "9%",
@@ -1464,7 +1464,7 @@
     {
       "id": "rejected",
       "name": "Rejected",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Valentine's 2026",
       "crateChance": "9%",
@@ -1479,7 +1479,7 @@
     {
       "id": "confessions",
       "name": "Confessions",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Rare",
       "crate": "Valentine's 2026",
       "crateChance": "9%",
@@ -1494,7 +1494,7 @@
     {
       "id": "chocolate",
       "name": "Chocolate",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Mythic",
       "crate": "Valentine's 2026",
       "crateChance": "3%",
@@ -1509,7 +1509,7 @@
     {
       "id": "roses",
       "name": "Roses",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Mythic",
       "crate": "Valentine's 2026",
       "crateChance": "3%",
@@ -1524,7 +1524,7 @@
     {
       "id": "cupid",
       "name": "Cupid",
-      "catalogSection": "Holiday crate",
+      "collectionSection": "Holiday crate",
       "rarity": "Legendary",
       "crate": "Valentine's 2026",
       "crateChance": "1.50%",
@@ -1539,7 +1539,7 @@
     {
       "id": "torn-bronze",
       "name": "Torn Bronze",
-      "catalogSection": "Ranked gloves",
+      "collectionSection": "Ranked gloves",
       "rarity": "Ranked",
       "source": "Ranked",
       "route": "Ranked milestone",
@@ -1553,7 +1553,7 @@
     {
       "id": "patched-silver",
       "name": "Patched Silver",
-      "catalogSection": "Ranked gloves",
+      "collectionSection": "Ranked gloves",
       "rarity": "Ranked",
       "source": "Ranked",
       "route": "Ranked milestone",
@@ -1567,7 +1567,7 @@
     {
       "id": "fused-gold",
       "name": "Fused Gold",
-      "catalogSection": "Ranked gloves",
+      "collectionSection": "Ranked gloves",
       "rarity": "Ranked",
       "source": "Ranked",
       "route": "Ranked milestone",
@@ -1581,7 +1581,7 @@
     {
       "id": "ultra-diamond",
       "name": "Ultra Diamond",
-      "catalogSection": "Ranked gloves",
+      "collectionSection": "Ranked gloves",
       "rarity": "Ranked",
       "source": "Ranked",
       "route": "Ranked milestone",
@@ -1595,7 +1595,7 @@
     {
       "id": "champion",
       "name": "Champion",
-      "catalogSection": "Ranked gloves",
+      "collectionSection": "Ranked gloves",
       "rarity": "Ranked",
       "source": "Ranked",
       "route": "Ranked milestone",
@@ -1609,7 +1609,7 @@
     {
       "id": "beowulf",
       "name": "Beowulf",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "Valentine's Day 2024 event",
       "route": "Limited-time event",
@@ -1623,7 +1623,7 @@
     {
       "id": "bluowulf",
       "name": "Bluowulf",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "June 2025 2-year anniversary event",
       "route": "Limited-time event",
@@ -1637,7 +1637,7 @@
     {
       "id": "balrog",
       "name": "Balrog",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "June 2024 1-year anniversary event",
       "route": "Limited-time event",
@@ -1651,7 +1651,7 @@
     {
       "id": "balrog-breaker",
       "name": "Balrog Breaker",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "Balrog evolution quest",
       "route": "Limited-time event",
@@ -1665,7 +1665,7 @@
     {
       "id": "balrog-greed",
       "name": "Balrog Greed",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "Balrog evolution quest",
       "route": "Limited-time event",
@@ -1679,7 +1679,7 @@
     {
       "id": "balrog-perfect",
       "name": "Balrog Perfect",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "Balrog evolution quest",
       "route": "Limited-time event",
@@ -1693,7 +1693,7 @@
     {
       "id": "balrog-triumph",
       "name": "Balrog Triumph",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "Balrog evolution quest",
       "route": "Limited-time event",
@@ -1707,7 +1707,7 @@
     {
       "id": "balrog-ultimate",
       "name": "Balrog Ultimate",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "Balrog evolution quest",
       "route": "Limited-time event",
@@ -1721,7 +1721,7 @@
     {
       "id": "gilgamesh",
       "name": "Gilgamesh",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "Christmas 2024 event",
       "route": "Limited-time event",
@@ -1735,7 +1735,7 @@
     {
       "id": "bringus-beater",
       "name": "Bringus Beater",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "Roblox The Games 2024 event",
       "route": "Limited-time event",
@@ -1749,7 +1749,7 @@
     {
       "id": "bringus-destroyer",
       "name": "Bringus Destroyer",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "Roblox The Games 2024 event",
       "route": "Limited-time event",
@@ -1763,7 +1763,7 @@
     {
       "id": "troll",
       "name": "Troll",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "April Fools 2024 event",
       "route": "Limited-time event",
@@ -1777,7 +1777,7 @@
     {
       "id": "troll-troll",
       "name": "Troll Troll",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "April Fools 2024 event",
       "route": "Limited-time event",
@@ -1791,7 +1791,7 @@
     {
       "id": "whoopee-concussion",
       "name": "Whoopee Concussion",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "April Fools 2026 event",
       "route": "Limited-time event",
@@ -1805,7 +1805,7 @@
     {
       "id": "whoopee-concussion-prankster",
       "name": "Whoopee Concussion Prankster",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "April Fools 2026 event",
       "route": "Limited-time event",
@@ -1819,7 +1819,7 @@
     {
       "id": "discovered",
       "name": "Discovered",
-      "catalogSection": "Event gloves",
+      "collectionSection": "Event gloves",
       "rarity": "Event",
       "source": "Walmart Discovered Perks promotional event",
       "route": "Limited-time event",
@@ -1833,7 +1833,7 @@
     {
       "id": "default",
       "name": "Default",
-      "catalogSection": "Original line and beta gloves",
+      "collectionSection": "Original line and beta gloves",
       "rarity": "Original",
       "source": "Early glove shop",
       "route": "Old shop or trading",
@@ -1846,7 +1846,7 @@
     {
       "id": "yellow",
       "name": "Yellow",
-      "catalogSection": "Original line and beta gloves",
+      "collectionSection": "Original line and beta gloves",
       "rarity": "Original",
       "source": "Early glove shop",
       "route": "Old shop or trading",
@@ -1859,7 +1859,7 @@
     {
       "id": "green",
       "name": "Green",
-      "catalogSection": "Original line and beta gloves",
+      "collectionSection": "Original line and beta gloves",
       "rarity": "Original",
       "source": "Early glove shop",
       "route": "Old shop or trading",
@@ -1872,7 +1872,7 @@
     {
       "id": "blue",
       "name": "Blue",
-      "catalogSection": "Original line and beta gloves",
+      "collectionSection": "Original line and beta gloves",
       "rarity": "Original",
       "source": "Early glove shop",
       "route": "Old shop or trading",
@@ -1885,7 +1885,7 @@
     {
       "id": "magenta",
       "name": "Magenta",
-      "catalogSection": "Original line and beta gloves",
+      "collectionSection": "Original line and beta gloves",
       "rarity": "Original",
       "source": "Early glove shop",
       "route": "Old shop or trading",
@@ -1898,7 +1898,7 @@
     {
       "id": "white",
       "name": "White",
-      "catalogSection": "Original line and beta gloves",
+      "collectionSection": "Original line and beta gloves",
       "rarity": "Original",
       "source": "Early glove shop",
       "route": "Old shop or trading",
@@ -1911,7 +1911,7 @@
     {
       "id": "black",
       "name": "Black",
-      "catalogSection": "Original line and beta gloves",
+      "collectionSection": "Original line and beta gloves",
       "rarity": "Original",
       "source": "Early glove shop",
       "route": "Old shop or trading",
@@ -1924,7 +1924,7 @@
     {
       "id": "beta-sleek",
       "name": "Beta Sleek",
-      "catalogSection": "Original line and beta gloves",
+      "collectionSection": "Original line and beta gloves",
       "rarity": "Beta",
       "source": "Pre-rework beta glove",
       "route": "Old shop or trading",
@@ -1937,7 +1937,7 @@
     {
       "id": "beta-new-default",
       "name": "Beta New Default",
-      "catalogSection": "Original line and beta gloves",
+      "collectionSection": "Original line and beta gloves",
       "rarity": "Beta",
       "source": "Pre-rework beta glove",
       "route": "Old shop or trading",
@@ -1950,7 +1950,7 @@
     {
       "id": "beta-carbon",
       "name": "Beta Carbon",
-      "catalogSection": "Original line and beta gloves",
+      "collectionSection": "Original line and beta gloves",
       "rarity": "Beta",
       "source": "Pre-rework beta glove",
       "route": "Old shop or trading",

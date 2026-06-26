@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Game Collection Runner"
+  short_description: "Run collection research, data, images, and writing"
+  default_prompt: "Use /bloxodes-game-collection-workflow-runner for approved Bloxodes game collections. Give one collection to each subagent, queue extras, and tell subagents not to run the workflow runner or create more subagents. Use /bloxodes-game-collection-research, /bloxodes-game-collection-data, /bloxodes-game-collection-images, and /bloxodes-game-collection-writing as separate gates. Parent-review the new collection shape, including description, natural highlight, chip/detail values, consistent fields, images/placeholders, and no label-stuffed item values. Run verify:game-collection-finals, open passed localhost links in the Codex Browser, and return links."

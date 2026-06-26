@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Game Collection Suggestions"
+  short_description: "Suggest game collection pages"
+  default_prompt: "Use $bloxodes-game-collection-suggestions to research one Roblox game and return only game collection page recommendations. Check existing collection coverage first, complete the source check, then label each idea create, already covered, skip, or source discovery incomplete."

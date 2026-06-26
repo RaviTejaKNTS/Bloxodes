@@ -1,0 +1,17 @@
+import type { GameCollectionGroup } from "../types";
+
+export const demonologyCollectionGroup = {
+    gameSlug: "demonology",
+    gameName: "Demonology",
+    universeId: 6170143659,
+    dataDir: "Demonology",
+    universeNames: ["Demonology", "[UPD] Demonology🕯️", "Demonology🕯️"],
+    collections: [
+      "ghosts",
+      "perks",
+      "equipment",
+      "evidence",
+      "cursed-objects",
+      "maps"
+    ]
+  } satisfies GameCollectionGroup;

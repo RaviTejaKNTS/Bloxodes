@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Game Collection Data"
+  short_description: "Prepare game collection data"
+  default_prompt: "Use $bloxodes-game-collection-data after collection brief approval. Prepare or verify dataset rows, section field/order, card fields, card summaries, at least one natural highlight-style field when source-backed, chip/detail field intent, image field planning, and renderer support, update brief.md with data readiness, then stop unless data is blocked."

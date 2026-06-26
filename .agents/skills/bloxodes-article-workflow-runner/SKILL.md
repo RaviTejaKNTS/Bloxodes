@@ -86,6 +86,9 @@ Check:
 - the opening starts with the topic, action, or problem
 - every section adds value
 - language is simple enough for Roblox players
+- paragraphs are short (1-3 sentences, one idea each) with no wall-of-text blocks
+- sentences are short and plain; long run-on sentences are split
+- list and step items are short (one action/fact each), not paragraphs crammed into a bullet
 - no public copy mentions research workflow, source gathering, database checks, or internal notes
 - no unsupported claims, vague wording, or page-type overlap
 - links are useful, not decorative

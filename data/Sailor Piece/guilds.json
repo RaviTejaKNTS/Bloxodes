@@ -11,7 +11,7 @@
     ],
     "columns": [
       "name",
-      "catalogSection",
+      "collectionSection",
       "location",
       "encounter",
       "dropChance",
@@ -39,7 +39,7 @@
       "tags": [
         "0.00019342%"
       ],
-      "catalogSection": "Guild Key Sources",
+      "collectionSection": "Guild Key Sources",
       "location": "Starter Island",
       "encounter": "NPC enemy route",
       "dropChance": "0.00019342%",
@@ -65,7 +65,7 @@
       "tags": [
         "0.01%"
       ],
-      "catalogSection": "Guild Key Sources",
+      "collectionSection": "Guild Key Sources",
       "location": "Punch Island world boss route",
       "encounter": "World Boss",
       "dropChance": "0.01%",
@@ -91,7 +91,7 @@
       "tags": [
         "0.011%"
       ],
-      "catalogSection": "Guild Key Sources",
+      "collectionSection": "Guild Key Sources",
       "location": "Open sea route",
       "encounter": "Kraken or Sea Serpent",
       "dropChance": "0.011%",
@@ -117,7 +117,7 @@
       "tags": [
         "+150 max members"
       ],
-      "catalogSection": "Guild Upgrades",
+      "collectionSection": "Guild Upgrades",
       "maxBonus": "+150 max members",
       "appliesTo": "Guild roster",
       "upgradeRole": "Capacity upgrade"
@@ -139,7 +139,7 @@
       "tags": [
         "+15% Damage"
       ],
-      "catalogSection": "Guild Upgrades",
+      "collectionSection": "Guild Upgrades",
       "maxBonus": "+15% Damage",
       "appliesTo": "All guild members",
       "upgradeRole": "Damage upgrade"
@@ -161,7 +161,7 @@
       "tags": [
         "+5% Crit Damage"
       ],
-      "catalogSection": "Guild Upgrades",
+      "collectionSection": "Guild Upgrades",
       "maxBonus": "+5% Crit Damage",
       "appliesTo": "All guild members",
       "upgradeRole": "Critical damage upgrade"
@@ -183,7 +183,7 @@
       "tags": [
         "+2% Crit Chance"
       ],
-      "catalogSection": "Guild Upgrades",
+      "collectionSection": "Guild Upgrades",
       "maxBonus": "+2% Crit Chance",
       "appliesTo": "All guild members",
       "upgradeRole": "Critical chance upgrade"
@@ -205,7 +205,7 @@
       "tags": [
         "+15% HP"
       ],
-      "catalogSection": "Guild Upgrades",
+      "collectionSection": "Guild Upgrades",
       "maxBonus": "+15% HP",
       "appliesTo": "All guild members",
       "upgradeRole": "Survivability upgrade"
@@ -227,7 +227,7 @@
       "tags": [
         "+10% Luck"
       ],
-      "catalogSection": "Guild Upgrades",
+      "collectionSection": "Guild Upgrades",
       "maxBonus": "+10% Luck",
       "appliesTo": "All guild members",
       "upgradeRole": "Drop-farming upgrade"

@@ -2,11 +2,11 @@
   "meta": {
     "title": "Paint And SEEK! Maps",
     "updatedAt": "2026-06-25",
-    "groupBy": "catalogSection",
+    "groupBy": "collectionSection",
     "columns": [
       "name",
       "slug",
-      "catalogSection",
+      "collectionSection",
       "image",
       "cardSummary",
       "setting",
@@ -72,7 +72,7 @@
     {
       "name": "House",
       "slug": "house",
-      "catalogSection": "Maps",
+      "collectionSection": "Maps",
       "image": null,
       "cardSummary": "A suburban home interior with tight rooms and patterned surfaces, the most forgiving starter map for learning how camouflage reads.",
       "setting": "Suburban home interior with furnished rooms, library props, and patterned walls",
@@ -97,7 +97,7 @@
     {
       "name": "Grocery Store",
       "slug": "grocery-store",
-      "catalogSection": "Maps",
+      "collectionSection": "Maps",
       "image": null,
       "cardSummary": "A retail supermarket of bright aisles and colorful shelf products, where the best hides borrow nearby product colors.",
       "setting": "Retail supermarket with stocked shelves, endcaps, and open aisles",
@@ -122,7 +122,7 @@
     {
       "name": "Bank",
       "slug": "bank",
-      "catalogSection": "Maps",
+      "collectionSection": "Maps",
       "image": null,
       "cardSummary": "A financial-institution interior of clean marble surfaces and long sightlines, the most punishing map for hiders.",
       "setting": "Financial institution interior with marble floors, clean walls, and open halls",
@@ -147,7 +147,7 @@
     {
       "name": "Arcade",
       "slug": "arcade",
-      "catalogSection": "Maps",
+      "collectionSection": "Maps",
       "image": null,
       "cardSummary": "A neon gaming hall of saturated colors and noisy visuals, the map with the highest skill ceiling for both sides.",
       "setting": "Neon gaming hall with arcade cabinets and saturated, busy decor",

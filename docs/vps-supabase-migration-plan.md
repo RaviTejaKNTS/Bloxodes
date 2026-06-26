@@ -196,7 +196,7 @@ Run these checks before any app uses the VPS database.
   - `roblox_universe_stats_current`
   - `roblox_universe_stats_hourly`
   - `wiki_pages`
-  - `wiki_catalog_pages`
+  - `wiki_collection_pages`
   - `catalog_pages`
   - `articles`
   - `events_pages`

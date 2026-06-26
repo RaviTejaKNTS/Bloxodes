@@ -1,4 +1,0 @@
-interface:
-  display_name: "Bloxodes Game Catalog Images"
-  short_description: "Prepare game catalog images"
-  default_prompt: "Use $bloxodes-game-catalog-images after game catalog data approval. Find clean item images, save and wire public image paths, update dataset image fields, run the image readiness check, update brief.md, then stop unless images are blocked."

@@ -16,7 +16,7 @@ type EventRow = {
     | "quiz"
     | "puzzle"
     | "wiki"
-    | "wiki_catalog"
+    | "wiki_collection"
     | "stats";
   slug: string;
 };

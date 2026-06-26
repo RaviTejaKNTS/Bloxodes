@@ -4,11 +4,11 @@
     "collection": "upgrades",
     "universeId": 10226701629,
     "updatedAt": "2026-06-24",
-    "groupBy": "catalogSection",
+    "groupBy": "collectionSection",
     "columns": [
       "name",
       "effect",
-      "catalogSection",
+      "collectionSection",
       "cardSummary",
       "image"
     ],
@@ -31,7 +31,7 @@
       "name": "Magnet",
       "slug": "magnet",
       "effect": "Pulls nearby books from the collection you are working on toward you, so you gather them without chasing each one down.",
-      "catalogSection": "Star Points Upgrades",
+      "collectionSection": "Star Points Upgrades",
       "cardSummary": "Magnet speeds up collecting. When you are clearing a book set, nearby matching books drift toward you instead of needing you to walk to each one.",
       "image": "",
       "sourcePage": "https://www.treyexgaming.com/clean-the-library-guide/"
@@ -40,7 +40,7 @@
       "name": "Galore",
       "slug": "galore",
       "effect": "Makes books from the collection you are working on easier to spot and find around the library.",
-      "catalogSection": "Star Points Upgrades",
+      "collectionSection": "Star Points Upgrades",
       "cardSummary": "Galore is a finding upgrade. It helps you locate the books you still need for the current collection instead of searching the whole library by eye.",
       "image": "",
       "sourcePage": "https://www.treyexgaming.com/clean-the-library-guide/"
@@ -49,7 +49,7 @@
       "name": "Scan",
       "slug": "scan",
       "effect": "Highlights the correct bookshelf for the book you are currently holding, so you know exactly where it belongs.",
-      "catalogSection": "Star Points Upgrades",
+      "collectionSection": "Star Points Upgrades",
       "cardSummary": "Scan removes the guesswork from shelving. While carrying a book, it marks the shelf that book goes on so you can drop it off without hunting.",
       "image": "",
       "sourcePage": "https://www.treyexgaming.com/clean-the-library-guide/"
@@ -58,7 +58,7 @@
       "name": "Auto-Organize",
       "slug": "auto-organize",
       "effect": "Automatically sorts the books in your inventory for you.",
-      "catalogSection": "Star Points Upgrades",
+      "collectionSection": "Star Points Upgrades",
       "cardSummary": "Auto-Organize is a convenience upgrade. It keeps your held books in order on its own, cutting down the manual sorting you do between shelf runs.",
       "image": "",
       "sourcePage": "https://www.treyexgaming.com/clean-the-library-guide/"
@@ -67,7 +67,7 @@
       "name": "Speed",
       "slug": "speed",
       "effect": "Increases how fast your character moves around the library.",
-      "catalogSection": "Star Points Upgrades",
+      "collectionSection": "Star Points Upgrades",
       "cardSummary": "Speed is a movement upgrade. Faster walking means quicker trips between book piles and shelves, which adds up over a full cleanup.",
       "image": "",
       "sourcePage": "https://www.treyexgaming.com/clean-the-library-guide/"
@@ -76,7 +76,7 @@
       "name": "Jump",
       "slug": "jump",
       "effect": "Increases how high your character can jump.",
-      "catalogSection": "Star Points Upgrades",
+      "collectionSection": "Star Points Upgrades",
       "cardSummary": "Jump is a movement upgrade. A higher jump helps you reach raised areas and move over obstacles while you work through the library.",
       "image": "",
       "sourcePage": "https://www.treyexgaming.com/clean-the-library-guide/"

@@ -29,7 +29,7 @@
       "name",
       "slug",
       "image",
-      "catalogSection",
+      "collectionSection",
       "nodeType",
       "purpose",
       "valueType",
@@ -52,7 +52,7 @@
       "Timing references"
     ],
     "routeOverrideProposal": {
-      "groupKey": "catalogSection",
+      "groupKey": "collectionSection",
       "groupLabel": "Builder section",
       "sectionOrder": [
         "Timeline nodes",
@@ -62,7 +62,7 @@
         "Timing references"
       ],
       "hiddenKeys": [
-        "catalogSection",
+        "collectionSection",
         "sourcePage",
         "sourceRevision",
         "imageStatus",
@@ -135,7 +135,7 @@
     {
       "name": "Wait",
       "slug": "wait",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Adds a pause before the next node runs.",
@@ -160,7 +160,7 @@
     {
       "name": "Skill",
       "slug": "skill",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Runs one of the game's existing skills inside the custom move.",
@@ -184,7 +184,7 @@
     {
       "name": "Special",
       "slug": "special",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Runs one of the game's existing special moves.",
@@ -207,7 +207,7 @@
     {
       "name": "Animation",
       "slug": "animation",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Plays a selected skill, special, melee, awakening, or emote animation.",
@@ -231,7 +231,7 @@
     {
       "name": "Sound",
       "slug": "sound",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Plays a custom audio ID when the timeline reaches the node.",
@@ -254,7 +254,7 @@
     {
       "name": "Velocity",
       "slug": "velocity",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Controls user or target movement during the custom move.",
@@ -277,7 +277,7 @@
     {
       "name": "Connect",
       "slug": "connect",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Sends an activation signal to matching Connect Blocks.",
@@ -300,7 +300,7 @@
     {
       "name": "Hitbox",
       "slug": "hitbox",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Creates an area that affects targets when the keyframe is reached.",
@@ -325,7 +325,7 @@
     {
       "name": "Branch",
       "slug": "branch",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Triggers a named branch or random branch path.",
@@ -349,7 +349,7 @@
     {
       "name": "Visual",
       "slug": "visual",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Creates a custom visual effect for a chosen amount of time.",
@@ -373,7 +373,7 @@
     {
       "name": "Grab",
       "slug": "grab",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Sticks one of a target's body parts to the user's body after damage is dealt.",
@@ -396,7 +396,7 @@
     {
       "name": "Projectile",
       "slug": "projectile",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Creates a moving hitbox that travels from one place to another.",
@@ -419,7 +419,7 @@
     {
       "name": "Counter",
       "slug": "counter",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Creates a counter check without normal animations or damage.",
@@ -442,7 +442,7 @@
     {
       "name": "Tag",
       "slug": "tag",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Adds or checks a temporary tag on the user.",
@@ -465,7 +465,7 @@
     {
       "name": "State",
       "slug": "state",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Applies a state to the user.",
@@ -488,7 +488,7 @@
     {
       "name": "Add Awakening",
       "slug": "add-awakening",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Adds awakening resource to the user.",
@@ -511,7 +511,7 @@
     {
       "name": "Add Health",
       "slug": "add-health",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Adds or removes health when the timeline reaches the node.",
@@ -534,7 +534,7 @@
     {
       "name": "Add Evasive",
       "slug": "add-evasive",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Adds evasive resource or behavior to the custom move flow.",
@@ -557,7 +557,7 @@
     {
       "name": "Hit Cancel",
       "slug": "hit-cancel",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Cancels the remaining custom move when prior stun or damage has happened in its checked window.",
@@ -580,7 +580,7 @@
     {
       "name": "Loop",
       "slug": "loop",
-      "catalogSection": "Timeline nodes",
+      "collectionSection": "Timeline nodes",
       "image": null,
       "nodeType": "Timeline node",
       "purpose": "Loops a section of timeline behavior.",
@@ -603,7 +603,7 @@
     {
       "name": "In Air",
       "slug": "in-air",
-      "catalogSection": "Conditions",
+      "collectionSection": "Conditions",
       "image": null,
       "nodeType": "Condition",
       "purpose": "Gates a custom ability or branch by grounded versus airborne state.",
@@ -626,7 +626,7 @@
     {
       "name": "Is Jumping",
       "slug": "is-jumping",
-      "catalogSection": "Conditions",
+      "collectionSection": "Conditions",
       "image": null,
       "nodeType": "Condition",
       "purpose": "Gates use by whether the jump input is being held.",
@@ -648,7 +648,7 @@
     {
       "name": "Has Target",
       "slug": "has-target",
-      "catalogSection": "Conditions",
+      "collectionSection": "Conditions",
       "image": null,
       "nodeType": "Condition",
       "purpose": "Gates use by whether a valid target is in sight through the cursor.",
@@ -670,7 +670,7 @@
     {
       "name": "Is Awakened",
       "slug": "is-awakened",
-      "catalogSection": "Conditions",
+      "collectionSection": "Conditions",
       "image": null,
       "nodeType": "Condition",
       "purpose": "Gates use by base state versus awakening state.",
@@ -692,7 +692,7 @@
     {
       "name": "Has Awk Bar",
       "slug": "has-awk-bar",
-      "catalogSection": "Conditions",
+      "collectionSection": "Conditions",
       "image": null,
       "nodeType": "Condition",
       "purpose": "Checks the user's awakening percentage against a chosen amount.",
@@ -714,7 +714,7 @@
     {
       "name": "Durability",
       "slug": "durability",
-      "catalogSection": "Conditions",
+      "collectionSection": "Conditions",
       "image": null,
       "nodeType": "Condition",
       "purpose": "Gives the custom ability or branch a use limit.",
@@ -736,7 +736,7 @@
     {
       "name": "Is In Domain",
       "slug": "is-in-domain",
-      "catalogSection": "Conditions",
+      "collectionSection": "Conditions",
       "image": null,
       "nodeType": "Condition",
       "purpose": "Gates use by whether the user is inside a domain.",
@@ -758,7 +758,7 @@
     {
       "name": "Has Health",
       "slug": "has-health",
-      "catalogSection": "Conditions",
+      "collectionSection": "Conditions",
       "image": null,
       "nodeType": "Condition",
       "purpose": "Checks the user's health against a chosen amount.",
@@ -780,7 +780,7 @@
     {
       "name": "Is Holding",
       "slug": "is-holding",
-      "catalogSection": "Conditions",
+      "collectionSection": "Conditions",
       "image": null,
       "nodeType": "Condition",
       "purpose": "Gates use by whether the player is holding the keybind.",
@@ -802,7 +802,7 @@
     {
       "name": "Damage Multiplier",
       "slug": "damage-multiplier",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Multiplies the custom ability's overall damage.",
@@ -823,7 +823,7 @@
     {
       "name": "Knockback Multiplier",
       "slug": "knockback-multiplier",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Multiplies the custom ability's overall knockback.",
@@ -845,7 +845,7 @@
     {
       "name": "Invincible",
       "slug": "invincible",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Grants total i-frames while the ability runs.",
@@ -867,7 +867,7 @@
     {
       "name": "Replace Skill if Occupied",
       "slug": "replace-skill-if-occupied",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Lets the custom move replace an already occupied move slot.",
@@ -888,7 +888,7 @@
     {
       "name": "Prevent Override",
       "slug": "prevent-override",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Prevents another ability from replacing this custom ability through replacement behavior.",
@@ -909,7 +909,7 @@
     {
       "name": "Hide in Awakening",
       "slug": "hide-in-awakening",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Hides the custom ability while the user is in awakening.",
@@ -931,7 +931,7 @@
     {
       "name": "Keep When Moveset Switches",
       "slug": "keep-when-moveset-switches",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Keeps the custom ability when the user's moveset switches between base and awakening.",
@@ -954,7 +954,7 @@
     {
       "name": "Hide in Base",
       "slug": "hide-in-base",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Hides the custom ability while the user is in base state.",
@@ -976,7 +976,7 @@
     {
       "name": "Use When Obtained",
       "slug": "use-when-obtained",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Immediately activates the custom ability when the user obtains it.",
@@ -998,7 +998,7 @@
     {
       "name": "Use On Death",
       "slug": "use-on-death",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Immediately activates the custom ability when the user dies.",
@@ -1020,7 +1020,7 @@
     {
       "name": "No Stun",
       "slug": "no-stun",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Disables skill checks on the custom ability.",
@@ -1042,7 +1042,7 @@
     {
       "name": "No Cancel",
       "slug": "no-cancel",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Makes the ability uninterruptible.",
@@ -1064,7 +1064,7 @@
     {
       "name": "Variant Tag",
       "slug": "variant-tag",
-      "catalogSection": "Properties",
+      "collectionSection": "Properties",
       "image": null,
       "nodeType": "Property",
       "purpose": "Allows the ability to ignore cooldown or skill checks while an inputted tag is active on the user.",
@@ -1086,7 +1086,7 @@
     {
       "name": "Focus Strike Black Flash",
       "slug": "focus-strike-black-flash",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Focus Strike can trigger a Black Flash style variant.",
@@ -1108,7 +1108,7 @@
     {
       "name": "Divergent Fist Black Flash",
       "slug": "divergent-fist-black-flash",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Divergent Fist can trigger a Black Flash window.",
@@ -1130,7 +1130,7 @@
     {
       "name": "Cleave Rush Black Flash",
       "slug": "cleave-rush-black-flash",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Cleave Rush can trigger a Black Flash style variant.",
@@ -1152,7 +1152,7 @@
     {
       "name": "Idle Transfiguration via Focus Strike",
       "slug": "idle-transfiguration-via-focus-strike",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Idle Transfiguration can be triggered with Focus Strike timing.",
@@ -1175,7 +1175,7 @@
     {
       "name": "Brute Force via Earthquake",
       "slug": "brute-force-via-earthquake",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Brute Force can be triggered through Earthquake timing.",
@@ -1197,7 +1197,7 @@
     {
       "name": "Reserve Balls into Shutter Doors",
       "slug": "reserve-balls-into-shutter-doors",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Reserve Balls can use Shutter Doors as the follow-up trigger.",
@@ -1219,7 +1219,7 @@
     {
       "name": "Toad into Nue",
       "slug": "toad-into-nue",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Toad can use Nue timing for Well's Unknown Abyss-style behavior.",
@@ -1242,7 +1242,7 @@
     {
       "name": "Body Repel via Focus Strike",
       "slug": "body-repel-via-focus-strike",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Body Repel has a listed Focus Strike trigger but the exact value is not final.",
@@ -1264,7 +1264,7 @@
     {
       "name": "Revolve use-again trigger",
       "slug": "revolve-use-again-trigger",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Revolve can trigger again within a short wait.",
@@ -1286,7 +1286,7 @@
     {
       "name": "Veilstep use-again trigger",
       "slug": "veilstep-use-again-trigger",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Veilstep does not need a wait time for its listed variant behavior.",
@@ -1308,7 +1308,7 @@
     {
       "name": "Garuda Rebound use-again trigger",
       "slug": "garuda-rebound-use-again-trigger",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Garuda Rebound has separate normal and held wait windows.",
@@ -1331,7 +1331,7 @@
     {
       "name": "Rika moves via True Love Beam",
       "slug": "rika-moves-via-true-love-beam",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Use Twice/Again trigger",
       "purpose": "Rika Downslam, Rika Slam, and Rika Haymaker can use True Love Beam timing.",
@@ -1353,7 +1353,7 @@
     {
       "name": "Max Elephant hold",
       "slug": "max-elephant-hold",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Hold trigger",
       "purpose": "Max Elephant uses Hold For timing for its variant behavior.",
@@ -1375,7 +1375,7 @@
     {
       "name": "Earthquake hold",
       "slug": "earthquake-hold",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Hold trigger",
       "purpose": "Earthquake has an ideal hold range listed by the source.",
@@ -1397,7 +1397,7 @@
     {
       "name": "Piercing Blood hold",
       "slug": "piercing-blood-hold",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Hold trigger",
       "purpose": "Piercing Blood requires Convergence Orb for the listed hold variant.",
@@ -1420,7 +1420,7 @@
     {
       "name": "Garuda Rebound hold",
       "slug": "garuda-rebound-hold",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Hold trigger",
       "purpose": "Garuda Rebound has a hold-triggered variant window.",
@@ -1442,7 +1442,7 @@
     {
       "name": "Ultra Cannon hold",
       "slug": "ultra-cannon-hold",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Hold trigger",
       "purpose": "Ultra Cannon has a listed hold threshold.",
@@ -1464,7 +1464,7 @@
     {
       "name": "World Cutting Slash special chain",
       "slug": "world-cutting-slash-special-chain",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Special trigger",
       "purpose": "World Cutting Slash can be built from Dismantle, Rush, Open, and Cleave timing.",
@@ -1487,7 +1487,7 @@
     {
       "name": "Incantation x3 into Strong Dismantle",
       "slug": "incantation-x3-into-strong-dismantle",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Special trigger",
       "purpose": "Incantation x3 can stack into Strong Dismantle timing.",
@@ -1510,7 +1510,7 @@
     {
       "name": "Reversal Red into Limitless",
       "slug": "reversal-red-into-limitless",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Special trigger",
       "purpose": "Reversal Red can trigger Limitless within the listed range.",
@@ -1533,7 +1533,7 @@
     {
       "name": "Reversal Red MAX into Limitless",
       "slug": "reversal-red-max-into-limitless",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Special trigger",
       "purpose": "Reversal Red MAX has a shorter Limitless trigger window.",
@@ -1556,7 +1556,7 @@
     {
       "name": "Nue into Lurking Shadow",
       "slug": "nue-into-lurking-shadow",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Special trigger",
       "purpose": "Nue can trigger Lurking Shadow without a wait requirement.",
@@ -1578,7 +1578,7 @@
     {
       "name": "Slicing Exorcism into Convergence",
       "slug": "slicing-exorcism-into-convergence",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Special trigger",
       "purpose": "Slicing Exorcism can trigger Convergence without a wait requirement.",
@@ -1600,7 +1600,7 @@
     {
       "name": "Mass Buildup charge triggers",
       "slug": "mass-buildup-charge-triggers",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Special trigger",
       "purpose": "Rising Rage, Mass Breaker, and Garuda Stab can use Mass Buildup behavior.",
@@ -1622,7 +1622,7 @@
     {
       "name": "Garuda Rebound special timing",
       "slug": "garuda-rebound-special-timing",
-      "catalogSection": "Variant triggers",
+      "collectionSection": "Variant triggers",
       "image": null,
       "nodeType": "Special trigger",
       "purpose": "Garuda Rebound has a special timing row with Garuda Rebound listed as its trigger.",
@@ -1645,7 +1645,7 @@
     {
       "name": "Lapse Blue timing",
       "slug": "lapse-blue-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Lapse Blue.",
@@ -1669,7 +1669,7 @@
     {
       "name": "Reversal Red timing",
       "slug": "reversal-red-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Reversal Red.",
@@ -1693,7 +1693,7 @@
     {
       "name": "Rapid Punches timing",
       "slug": "rapid-punches-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Rapid Punches.",
@@ -1717,7 +1717,7 @@
     {
       "name": "Twofold Kick timing",
       "slug": "twofold-kick-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Twofold Kick.",
@@ -1741,7 +1741,7 @@
     {
       "name": "Lapse Blue MAX timing",
       "slug": "lapse-blue-max-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Lapse Blue MAX.",
@@ -1765,7 +1765,7 @@
     {
       "name": "Reversal Red MAX timing",
       "slug": "reversal-red-max-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Reversal Red MAX.",
@@ -1789,7 +1789,7 @@
     {
       "name": "Hollow Purple timing",
       "slug": "hollow-purple-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Hollow Purple.",
@@ -1813,7 +1813,7 @@
     {
       "name": "Infinite Void timing",
       "slug": "infinite-void-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Infinite Void.",
@@ -1837,7 +1837,7 @@
     {
       "name": "Cursed Strikes timing",
       "slug": "cursed-strikes-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Cursed Strikes.",
@@ -1861,7 +1861,7 @@
     {
       "name": "Aerial Cursed Strikes timing",
       "slug": "aerial-cursed-strikes-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Aerial Cursed Strikes.",
@@ -1885,7 +1885,7 @@
     {
       "name": "Crushing Blow timing",
       "slug": "crushing-blow-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Crushing Blow.",
@@ -1909,7 +1909,7 @@
     {
       "name": "Divergent Fist timing",
       "slug": "divergent-fist-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Divergent Fist.",
@@ -1933,7 +1933,7 @@
     {
       "name": "Manji Kick timing",
       "slug": "manji-kick-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Manji Kick.",
@@ -1957,7 +1957,7 @@
     {
       "name": "Dismantle timing",
       "slug": "dismantle-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Dismantle.",
@@ -1981,7 +1981,7 @@
     {
       "name": "Aerial Dismantle timing",
       "slug": "aerial-dismantle-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Aerial Dismantle.",
@@ -2005,7 +2005,7 @@
     {
       "name": "Rush timing",
       "slug": "rush-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Rush.",
@@ -2029,7 +2029,7 @@
     {
       "name": "Open timing",
       "slug": "open-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Open.",
@@ -2053,7 +2053,7 @@
     {
       "name": "Malevolent Shrine timing",
       "slug": "malevolent-shrine-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Malevolent Shrine.",
@@ -2077,7 +2077,7 @@
     {
       "name": "Reserve Balls timing",
       "slug": "reserve-balls-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Reserve Balls.",
@@ -2101,7 +2101,7 @@
     {
       "name": "Shutter Doors timing",
       "slug": "shutter-doors-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Shutter Doors.",
@@ -2125,7 +2125,7 @@
     {
       "name": "Rough Energy timing",
       "slug": "rough-energy-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Rough Energy.",
@@ -2149,7 +2149,7 @@
     {
       "name": "Fever Breaker timing",
       "slug": "fever-breaker-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Fever Breaker.",
@@ -2173,7 +2173,7 @@
     {
       "name": "Lucky Volley timing",
       "slug": "lucky-volley-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Lucky Volley.",
@@ -2197,7 +2197,7 @@
     {
       "name": "Lucky Rushdown timing",
       "slug": "lucky-rushdown-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Lucky Rushdown.",
@@ -2221,7 +2221,7 @@
     {
       "name": "Overwhelming Luck timing",
       "slug": "overwhelming-luck-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Overwhelming Luck.",
@@ -2245,7 +2245,7 @@
     {
       "name": "Energy Surge timing",
       "slug": "energy-surge-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Energy Surge.",
@@ -2269,7 +2269,7 @@
     {
       "name": "Rabbit Escape timing",
       "slug": "rabbit-escape-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Rabbit Escape.",
@@ -2293,7 +2293,7 @@
     {
       "name": "Nue timing",
       "slug": "nue-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Nue.",
@@ -2317,7 +2317,7 @@
     {
       "name": "Nue Variant timing",
       "slug": "nue-variant-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Nue Variant.",
@@ -2341,7 +2341,7 @@
     {
       "name": "Toad timing",
       "slug": "toad-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Toad.",
@@ -2365,7 +2365,7 @@
     {
       "name": "Well's Unknown Abyss timing",
       "slug": "well-s-unknown-abyss-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Well's Unknown Abyss.",
@@ -2389,7 +2389,7 @@
     {
       "name": "Divine Dog: Totality (First Use) timing",
       "slug": "divine-dog-totality-first-use-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Divine Dog: Totality (First Use).",
@@ -2413,7 +2413,7 @@
     {
       "name": "Divine Dog: Totality (Second Use) timing",
       "slug": "divine-dog-totality-second-use-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Divine Dog: Totality (Second Use).",
@@ -2437,7 +2437,7 @@
     {
       "name": "Great Serpent timing",
       "slug": "great-serpent-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Great Serpent.",
@@ -2461,7 +2461,7 @@
     {
       "name": "Shadow Swarm timing",
       "slug": "shadow-swarm-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Shadow Swarm.",
@@ -2485,7 +2485,7 @@
     {
       "name": "Divine Pummel timing",
       "slug": "divine-pummel-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Divine Pummel.",
@@ -2509,7 +2509,7 @@
     {
       "name": "Ground Pitch timing",
       "slug": "ground-pitch-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Ground Pitch.",
@@ -2533,7 +2533,7 @@
     {
       "name": "Earthquake timing",
       "slug": "earthquake-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Earthquake.",
@@ -2557,7 +2557,7 @@
     {
       "name": "Takedown timing",
       "slug": "takedown-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Takedown.",
@@ -2581,7 +2581,7 @@
     {
       "name": "World Slash timing",
       "slug": "world-slash-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for World Slash.",
@@ -2605,7 +2605,7 @@
     {
       "name": "Stockpile timing",
       "slug": "stockpile-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Stockpile.",
@@ -2629,7 +2629,7 @@
     {
       "name": "Aerial Stockpile timing",
       "slug": "aerial-stockpile-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Aerial Stockpile.",
@@ -2653,7 +2653,7 @@
     {
       "name": "Soul Fire timing",
       "slug": "soul-fire-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Soul Fire.",
@@ -2677,7 +2677,7 @@
     {
       "name": "Focus Strike timing",
       "slug": "focus-strike-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Focus Strike.",
@@ -2701,7 +2701,7 @@
     {
       "name": "Chainwhip timing",
       "slug": "chainwhip-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Chainwhip.",
@@ -2725,7 +2725,7 @@
     {
       "name": "Homerun timing",
       "slug": "homerun-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Homerun.",
@@ -2749,7 +2749,7 @@
     {
       "name": "Body Repel timing",
       "slug": "body-repel-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Body Repel.",
@@ -2773,7 +2773,7 @@
     {
       "name": "Idle Transfiguration timing",
       "slug": "idle-transfiguration-timing",
-      "catalogSection": "Timing references",
+      "collectionSection": "Timing references",
       "image": null,
       "nodeType": "Timing reference",
       "purpose": "Lists source timing windows for Idle Transfiguration.",

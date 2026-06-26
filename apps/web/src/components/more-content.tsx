@@ -5,7 +5,7 @@ import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
 import { listPublishedTools } from "@/lib/tools";
 import { listPublishedQuizzes } from "@/lib/quizzes";
 import { listPublishedPuzzlePages } from "@/lib/puzzles";
-import { buildWikiCatalogPath, listPublishedWikiCatalogPagesByWikiSlug } from "@/lib/wiki-catalog";
+import { buildWikiCollectionPath, listPublishedWikiCollectionPagesByWikiSlug } from "@/lib/wiki-collections";
 import { resolveCatalogCardMeta } from "@/lib/catalog-card-meta";
 import {
   AVATAR_CATALOG_FAMILY_CODES,
@@ -256,7 +256,7 @@ export async function MorePuzzles({ excludeSlug }: { excludeSlug: string }) {
   );
 }
 
-export async function MoreWikiCatalogs({
+export async function MoreWikiCollections({
   wikiSlug,
   excludeCollectionSlug,
   gameName
@@ -265,7 +265,7 @@ export async function MoreWikiCatalogs({
   excludeCollectionSlug: string;
   gameName: string;
 }) {
-  const catalogs = await listPublishedWikiCatalogPagesByWikiSlug(wikiSlug);
+  const catalogs = await listPublishedWikiCollectionPagesByWikiSlug(wikiSlug);
   const normalizedCurrent = excludeCollectionSlug.trim().toLowerCase();
   const items = catalogs.filter((catalog) => catalog.collection_slug !== normalizedCurrent).slice(0, 8);
   if (!items.length) return null;
@@ -275,7 +275,7 @@ export async function MoreWikiCatalogs({
       {items.map((catalog) => (
         <Link
           key={catalog.id ?? catalog.code}
-          href={buildWikiCatalogPath(catalog.wiki_slug, catalog.collection_slug)}
+          href={buildWikiCollectionPath(catalog.wiki_slug, catalog.collection_slug)}
           className="group flex items-center gap-3 rounded-lg border border-border/70 bg-card p-3 transition-colors hover:border-border"
         >
           <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md bg-surface-muted">
@@ -286,7 +286,7 @@ export async function MoreWikiCatalogs({
               {catalog.display_name ?? catalog.title}
             </span>
             <span className="block text-xs text-muted">
-              {typeof catalog.item_count === "number" ? `${catalog.item_count.toLocaleString("en-US")} entries` : "Game catalog"}
+              {typeof catalog.item_count === "number" ? `${catalog.item_count.toLocaleString("en-US")} entries` : "Game collection"}
             </span>
           </span>
         </Link>

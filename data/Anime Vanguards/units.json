@@ -56,7 +56,7 @@
       "name",
       "image",
       "rarity",
-      "catalogSection",
+      "collectionSection",
       "element",
       "battlefieldType",
       "formStatus",
@@ -92,7 +92,7 @@
       "placeLimit": "3",
       "maxUpgrades": "8",
       "notableMoves": "Jackal & Casull Barrage, Mist Form",
-      "catalogSection": "Vanguard",
+      "collectionSection": "Vanguard",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Alocard",
       "sourceUrls": [
@@ -120,7 +120,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Jackal & Casull Barrage, Mist Form, Hell Hounds",
-      "catalogSection": "Vanguard",
+      "collectionSection": "Vanguard",
       "sourceStatus": "Unit List + customData override",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Alocard_(Vampire_King)",
       "sourceUrls": [
@@ -148,7 +148,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Wrathful Roar, Breaking Point, Wrathful Combo",
-      "catalogSection": "Vanguard",
+      "collectionSection": "Vanguard",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Brolzi_Super_(Wrathful)",
       "sourceUrls": [
@@ -178,7 +178,7 @@
       "placeLimit": "2",
       "maxUpgrades": "7",
       "notableMoves": "Time Slash, Complete Erasure, Slashing Existence",
-      "catalogSection": "Vanguard",
+      "collectionSection": "Vanguard",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Divalo_(Requiem)",
       "sourceUrls": [
@@ -208,7 +208,7 @@
       "placeLimit": "3",
       "maxUpgrades": "16",
       "notableMoves": "Ice Fall, Frozen Stride, Ice Queen's Swing",
-      "catalogSection": "Vanguard",
+      "collectionSection": "Vanguard",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ice_Queen_(Release)",
       "sourceUrls": [
@@ -238,7 +238,7 @@
       "placeLimit": "1",
       "maxUpgrades": "16",
       "notableMoves": "Heavenly Sword, Cruel Rain, Cruel Prominence",
-      "catalogSection": "Vanguard",
+      "collectionSection": "Vanguard",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Iscanur_(Pride)",
       "sourceUrls": [
@@ -269,7 +269,7 @@
       "placeLimit": "1",
       "maxUpgrades": "13",
       "notableMoves": "Spike Hail, Beast Explosion, Elemental Bomb",
-      "catalogSection": "Vanguard",
+      "collectionSection": "Vanguard",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Koguro_(Unsealed)",
       "sourceUrls": [
@@ -300,7 +300,7 @@
       "placeLimit": "1",
       "maxUpgrades": "14",
       "notableMoves": "Source gap",
-      "catalogSection": "Vanguard",
+      "collectionSection": "Vanguard",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lich_King_(Ruler)",
       "sourceUrls": [
@@ -331,7 +331,7 @@
       "placeLimit": "1",
       "maxUpgrades": "15",
       "notableMoves": "Instant Teleportation, Peak Impact, Fusion Barrage",
-      "catalogSection": "Vanguard",
+      "collectionSection": "Vanguard",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rogita_(Super_4)",
       "sourceUrls": [
@@ -364,7 +364,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Sword Slam + Steel, Beatdown + Healer, Shadow's Embrace + Belu",
-      "catalogSection": "Vanguard",
+      "collectionSection": "Vanguard",
       "sourceStatus": "Unit List + customData override",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Song_Jinwu_and_Igros",
       "sourceUrls": [
@@ -394,7 +394,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Giant Stamp",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Arin",
       "sourceUrls": [
@@ -424,7 +424,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Giant Stamp, Giant Martial Arts, Hammer Drop",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Arin_(Rumbling)",
       "sourceUrls": [
@@ -454,7 +454,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Armored_Mage",
       "sourceUrls": [
@@ -484,7 +484,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Armored_Mage_(Requip)",
       "sourceUrls": [
@@ -514,7 +514,7 @@
       "placeLimit": "1",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Astolfo",
       "sourceUrls": [
@@ -544,7 +544,7 @@
       "placeLimit": "1",
       "maxUpgrades": "9",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + customData override",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Astolfo_(Rider_of_Black)",
       "sourceUrls": [
@@ -574,7 +574,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Boo",
       "sourceUrls": [
@@ -604,7 +604,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Evil Beam, Guilty Blast",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Boo_(Evil)",
       "sourceUrls": [
@@ -634,7 +634,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Boockleo_(Evil)",
       "sourceUrls": [
@@ -664,7 +664,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Boohon_(Evil)",
       "sourceUrls": [
@@ -694,7 +694,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Bootonks_(Evil)",
       "sourceUrls": [
@@ -724,7 +724,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Cannon Shot",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Byeken",
       "sourceUrls": [
@@ -754,7 +754,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Cannon Shot, Blade Rush, Fatal Strike",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Byeken_(Ronin)",
       "sourceUrls": [
@@ -784,7 +784,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Fire Rain",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Choy_Jong_En",
       "sourceUrls": [
@@ -814,7 +814,7 @@
       "placeLimit": "4",
       "maxUpgrades": "11",
       "notableMoves": "Fire Rain, Fire Spear, Fire Dragon",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Choy_Jong_En_(Guild_Leader)",
       "sourceUrls": [
@@ -844,7 +844,7 @@
       "placeLimit": "3",
       "maxUpgrades": "7",
       "notableMoves": "Dough Wheel, Dough Barrage",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Clatakiri",
       "sourceUrls": [
@@ -874,7 +874,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Dough Wheel, Dough Barrage, Mega Dough Barrage",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Clatakiri_(Mochi)",
       "sourceUrls": [
@@ -904,7 +904,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Flaming Rush Down, Flaming Broom Barrage, Reciprocal Strike",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Company_Captain_(Hybrid)",
       "sourceUrls": [
@@ -934,7 +934,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Life or Death, So Lonely",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Conqueror_vs_Invulnerable",
       "sourceUrls": [
@@ -962,7 +962,7 @@
       "placeLimit": "3",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Delusional_Boy",
       "sourceUrls": [
@@ -992,7 +992,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Chainsaw Blitz, Chain Blades, Non Stop Revving",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Demon_Hybrid_(Chainsaw)",
       "sourceUrls": [
@@ -1022,7 +1022,7 @@
       "placeLimit": "1",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Demon_Leader",
       "sourceUrls": [
@@ -1052,7 +1052,7 @@
       "placeLimit": "1",
       "maxUpgrades": "9",
       "notableMoves": "Bang, Orbital Attack, Control",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Demon_Leader_(Control)",
       "sourceUrls": [
@@ -1082,7 +1082,7 @@
       "placeLimit": "3",
       "maxUpgrades": "15",
       "notableMoves": "Dabo 90, Reishi Assault, Dabo 99",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Eizan_(Aura)",
       "sourceUrls": [
@@ -1110,7 +1110,7 @@
       "placeLimit": "3",
       "maxUpgrades": "15",
       "notableMoves": "Wind Up Punch, Wind Up Barrage, Giant Wind Up Bazooka",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Elastic_Captain_(Pirate)",
       "sourceUrls": [
@@ -1140,7 +1140,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Lightning",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Friran",
       "sourceUrls": [
@@ -1168,7 +1168,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Lightning, Death Barrage, Black Hole",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Friran_(Teacher)",
       "sourceUrls": [
@@ -1196,7 +1196,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/GG",
       "sourceUrls": [
@@ -1226,7 +1226,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Curse Ball Barrage, Curse Ball Spike, Curse Ball Dominion",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/GG_(Possessed)",
       "sourceUrls": [
@@ -1256,7 +1256,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Giant_Queen",
       "sourceUrls": [
@@ -1286,7 +1286,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Reinforced Giant, Ape Giant, Nuclear Giant",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Giant_Queen_(Founder)",
       "sourceUrls": [
@@ -1316,7 +1316,7 @@
       "placeLimit": "1",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/God",
       "sourceUrls": [
@@ -1347,7 +1347,7 @@
       "placeLimit": "1",
       "maxUpgrades": "10",
       "notableMoves": "Time Shot, Out of Time",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/God_(Above_Heaven)",
       "sourceUrls": [
@@ -1378,7 +1378,7 @@
       "placeLimit": "1",
       "maxUpgrades": "10",
       "notableMoves": "It Was Me!, Time Begins Again!",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/God_(Standless)",
       "sourceUrls": [
@@ -1409,7 +1409,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Red, Purple, Max-Purple",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Gujo_(Infinity)",
       "sourceUrls": [
@@ -1437,7 +1437,7 @@
       "placeLimit": "1",
       "maxUpgrades": "11",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Horsegirls_(Racers)",
       "sourceUrls": [
@@ -1467,7 +1467,7 @@
       "placeLimit": "3",
       "maxUpgrades": "8",
       "notableMoves": "Commander's Slash",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Igros",
       "sourceUrls": [
@@ -1497,7 +1497,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Commander's Slash, Shadowfall Slam, Shadow's Embrace",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Igros_(Elite_Knight)",
       "sourceUrls": [
@@ -1527,7 +1527,7 @@
       "placeLimit": "3",
       "maxUpgrades": "7",
       "notableMoves": "Ice Spike",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Isdead",
       "sourceUrls": [
@@ -1555,7 +1555,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Ice Spike, Ice Slash, Ice Meteor",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Isdead_(Romantic)",
       "sourceUrls": [
@@ -1583,7 +1583,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Mystic Combination Ball, Planet Buster",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Kid_Boo_(Evil)",
       "sourceUrls": [
@@ -1613,7 +1613,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Lion's Barrage",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Leo",
       "sourceUrls": [
@@ -1644,7 +1644,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Lion's Barrage, Lion's Barrage Purgatory, Lion's Barrage Abyss",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Leo_(Fangs)",
       "sourceUrls": [
@@ -1675,7 +1675,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Shotgun Shot",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lfelt",
       "sourceUrls": [
@@ -1705,7 +1705,7 @@
       "placeLimit": "Source gap",
       "maxUpgrades": "13",
       "notableMoves": "Shotgun Shot, Sniper Shot, Bullet Rain",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lfelt_(Love)",
       "sourceUrls": [
@@ -1735,7 +1735,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Atomic Shot, I Am Atomic",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lord_of_Shadows",
       "sourceUrls": [
@@ -1765,7 +1765,7 @@
       "placeLimit": "1",
       "maxUpgrades": "11",
       "notableMoves": "Dragon Kick, Dragon Tornado, Staff Slam",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Monkey_King_(Awakened)",
       "sourceUrls": [
@@ -1795,7 +1795,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Pink_Villain",
       "sourceUrls": [
@@ -1825,7 +1825,7 @@
       "placeLimit": "3",
       "maxUpgrades": "15",
       "notableMoves": "Fire Whip, Birb Cage, God String",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Pink_Villain_(Celestial)",
       "sourceUrls": [
@@ -1855,7 +1855,7 @@
       "placeLimit": "4",
       "maxUpgrades": "5",
       "notableMoves": "Silverite Slam",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Regnaw",
       "sourceUrls": [
@@ -1886,7 +1886,7 @@
       "placeLimit": "4",
       "maxUpgrades": "11",
       "notableMoves": "Silverite Slam, Rage Flurry",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Regnaw_(Rage)",
       "sourceUrls": [
@@ -1917,7 +1917,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Falling Stars",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rogita",
       "sourceUrls": [
@@ -1948,7 +1948,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Falling Stars, Comet Burst, Cosmic Dust Punisher",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rogita_(Super)",
       "sourceUrls": [
@@ -1979,7 +1979,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Twin Lizard Punch, Martial Rush, Lizard Fist",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Roku_(Super_3)",
       "sourceUrls": [
@@ -2010,7 +2010,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Desolation",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + customData override",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Saber_(Alternate)",
       "sourceUrls": [
@@ -2040,7 +2040,7 @@
       "placeLimit": "3",
       "maxUpgrades": "15",
       "notableMoves": "Desolation, Vortigern, Starfall",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + customData override",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Saber_(Black_Tyrant)",
       "sourceUrls": [
@@ -2070,7 +2070,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Slime",
       "sourceUrls": [
@@ -2101,7 +2101,7 @@
       "placeLimit": "4",
       "maxUpgrades": "13",
       "notableMoves": "Dark Whirl, Slime Explosion, Apocalypse",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Slime_(King)",
       "sourceUrls": [
@@ -2132,7 +2132,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "String Blitz, Hidden Punch",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Smith_John",
       "sourceUrls": [
@@ -2162,7 +2162,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Soburo",
       "sourceUrls": [
@@ -2190,7 +2190,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Spirit Rain, Shumac",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Soburo_(Contract)",
       "sourceUrls": [
@@ -2218,7 +2218,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sokora",
       "sourceUrls": [
@@ -2248,7 +2248,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sokora_(Angra_Mainyu)",
       "sourceUrls": [
@@ -2278,7 +2278,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Dismantle Slam, Cleaving Dash, Flame Release",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sukono",
       "sourceUrls": [
@@ -2306,7 +2306,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Super_Boo_(Evil)",
       "sourceUrls": [
@@ -2336,7 +2336,7 @@
       "placeLimit": "3",
       "maxUpgrades": "8",
       "notableMoves": "Chi Blade Barrage, Chi Blade Assault, Chi Blade Rush",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Super_Vogito",
       "sourceUrls": [
@@ -2367,7 +2367,7 @@
       "placeLimit": "1",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_Falcon",
       "sourceUrls": [
@@ -2397,7 +2397,7 @@
       "placeLimit": "1",
       "maxUpgrades": "11",
       "notableMoves": "Penance of God, Dark Banishment",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_Falcon_(of_Darkness)",
       "sourceUrls": [
@@ -2427,7 +2427,7 @@
       "placeLimit": "1",
       "maxUpgrades": "11",
       "notableMoves": "Beastly Swipe, Dark Impalement",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_Falcon_(of_Light)",
       "sourceUrls": [
@@ -2457,7 +2457,7 @@
       "placeLimit": "1",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_Falcon_(Sacrifice)",
       "sourceUrls": [
@@ -2487,7 +2487,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Cannon Shot, Slab Slam, Rage Filled Onslaught",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_Struggler_(Rampage)",
       "sourceUrls": [
@@ -2517,7 +2517,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Unstable",
       "sourceUrls": [
@@ -2548,7 +2548,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Kneel, Aura Farming, Uncontrolled Power",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Unstable_(Psychosis)",
       "sourceUrls": [
@@ -2579,7 +2579,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Cross Dimension Slam, Dual Heart Attack",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Valentine_(Love_Train)",
       "sourceUrls": [
@@ -2609,7 +2609,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Last Impact, Hellzone Explosion, Final Blast",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Vogita_(Angel)",
       "sourceUrls": [
@@ -2640,7 +2640,7 @@
       "placeLimit": "1",
       "maxUpgrades": "12",
       "notableMoves": "Right Barrage, Heavenly Exit, Final Strike",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Warlord_(Of_the_Sea)",
       "sourceUrls": [
@@ -2670,7 +2670,7 @@
       "placeLimit": "4",
       "maxUpgrades": "9",
       "notableMoves": "Metralleta, Area Removal",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Wolf_(Resurrection)",
       "sourceUrls": [
@@ -2698,7 +2698,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/World_Destroyer",
       "sourceUrls": [
@@ -2728,7 +2728,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Break Punch, Ground Destruction, Break Slam",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/World_Destroyer_(Old)",
       "sourceUrls": [
@@ -2758,7 +2758,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Almighty Star",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Yehowach",
       "sourceUrls": [
@@ -2786,7 +2786,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Almighty Star, Almighty Cage, Almighty Blast",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Yehowach_(Almighty)",
       "sourceUrls": [
@@ -2814,7 +2814,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Fire Tornado",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Yomomata",
       "sourceUrls": [
@@ -2842,7 +2842,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Fire Tornado, Fire Strike, West",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Yomomata_(Captain)",
       "sourceUrls": [
@@ -2870,7 +2870,7 @@
       "placeLimit": "2",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Al",
       "sourceUrls": [
@@ -2898,7 +2898,7 @@
       "placeLimit": "2",
       "maxUpgrades": "9",
       "notableMoves": "Thunder Bolt, Fireball, Summoned Statue Blast",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Al_(Good)",
       "sourceUrls": [
@@ -2926,7 +2926,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ali",
       "sourceUrls": [
@@ -2957,7 +2957,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Flame Slash, Flame Cyclone, Fused Flame Slash",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ali_(Djinn)",
       "sourceUrls": [
@@ -2988,7 +2988,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Arbiter",
       "sourceUrls": [
@@ -3018,7 +3018,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Nihilistic Flurry, Void Strike",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Arbiter_(Of_the_Void)",
       "sourceUrls": [
@@ -3048,7 +3048,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Aerial Combo",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Arc",
       "sourceUrls": [
@@ -3079,7 +3079,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Ground Slam, Aerial Combo, Melty Blood",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Arc_(True_Ancestor)",
       "sourceUrls": [
@@ -3110,7 +3110,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Black_Hole",
       "sourceUrls": [
@@ -3141,7 +3141,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Black_Hole_(Ninjutsu)",
       "sourceUrls": [
@@ -3172,7 +3172,7 @@
       "placeLimit": "3",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Callasuba",
       "sourceUrls": [
@@ -3202,7 +3202,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Useless Goddess, Strange Tank",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Callasuba_(Squad)",
       "sourceUrls": [
@@ -3232,7 +3232,7 @@
       "placeLimit": "2",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Cat",
       "sourceUrls": [
@@ -3262,7 +3262,7 @@
       "placeLimit": "2",
       "maxUpgrades": "9",
       "notableMoves": "Exnyalibur, Nye Lasers",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Cat_(Stupid)",
       "sourceUrls": [
@@ -3292,7 +3292,7 @@
       "placeLimit": "4",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Club",
       "sourceUrls": [
@@ -3322,7 +3322,7 @@
       "placeLimit": "4",
       "maxUpgrades": "9",
       "notableMoves": "Fire Pillar, El Fuego, Fire Cyclone",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Club_(Pyro)",
       "sourceUrls": [
@@ -3352,7 +3352,7 @@
       "placeLimit": "2",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Dark_Mage",
       "sourceUrls": [
@@ -3380,7 +3380,7 @@
       "placeLimit": "2",
       "maxUpgrades": "9",
       "notableMoves": "Ice Rain, Arcane Barrage",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Dark_Mage_(Evil)",
       "sourceUrls": [
@@ -3408,7 +3408,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Area Cleared",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Dave",
       "sourceUrls": [
@@ -3436,7 +3436,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Area Cleared, Cyber Bombardment",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Dave_(Cyber_Psycho)",
       "sourceUrls": [
@@ -3464,7 +3464,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Million Pokes",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Dawntay",
       "sourceUrls": [
@@ -3494,7 +3494,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Million Pokes, Combination Attack, Devil Armaments",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Dawntay_(Jackpot)",
       "sourceUrls": [
@@ -3524,7 +3524,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Are You Ready?",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Diogo",
       "sourceUrls": [
@@ -3554,7 +3554,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Are You Ready?, Trial to Conquer, Me Time",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Diogo_(Alternate)",
       "sourceUrls": [
@@ -3584,7 +3584,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Clay Birds",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Dodara",
       "sourceUrls": [
@@ -3612,7 +3612,7 @@
       "placeLimit": "3",
       "maxUpgrades": "8",
       "notableMoves": "Clay Birds",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Dodara_(Explosive)",
       "sourceUrls": [
@@ -3640,7 +3640,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Dot Domain",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Dot",
       "sourceUrls": [
@@ -3670,7 +3670,7 @@
       "placeLimit": "4",
       "maxUpgrades": "10",
       "notableMoves": "Dot Domain, Dark Matter Destruction",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Dot_(Nemesis)",
       "sourceUrls": [
@@ -3700,7 +3700,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Spirit Dash",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Emmie",
       "sourceUrls": [
@@ -3731,7 +3731,7 @@
       "placeLimit": "4",
       "maxUpgrades": "11",
       "notableMoves": "Spirit Dash, Spirit Spike",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Emmie_(Ice_Witch)",
       "sourceUrls": [
@@ -3762,7 +3762,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Rock Slam",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Foboko",
       "sourceUrls": [
@@ -3793,7 +3793,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Rock Slam, Hellish Devil, Hellish Tornado",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Foboko_(Hellish)",
       "sourceUrls": [
@@ -3824,7 +3824,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Ghost Bomb",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ghost_Girl",
       "sourceUrls": [
@@ -3856,7 +3856,7 @@
       "placeLimit": "3",
       "maxUpgrades": "7",
       "notableMoves": "Ghost Bomb, Giant Ghost Bomb",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ghost_Girl_(Umbrella)",
       "sourceUrls": [
@@ -3888,7 +3888,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "One Wing Rush",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ghoul",
       "sourceUrls": [
@@ -3919,7 +3919,7 @@
       "placeLimit": "4",
       "maxUpgrades": "9",
       "notableMoves": "One Wing Rush, Shard Storm",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ghoul_(Winged)",
       "sourceUrls": [
@@ -3950,7 +3950,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Gyral Shredder",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Gilgamesh",
       "sourceUrls": [
@@ -3980,7 +3980,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Gyral Shredder, Gates of Babylon, Vortex Rupture",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Gilgamesh_(King_of_Heroes)",
       "sourceUrls": [
@@ -4010,7 +4010,7 @@
       "placeLimit": "3",
       "maxUpgrades": "8",
       "notableMoves": "Milky Blast, Milky Meteor",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Giyu",
       "sourceUrls": [
@@ -4040,7 +4040,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Goblin_Killer",
       "sourceUrls": [
@@ -4068,7 +4068,7 @@
       "placeLimit": "4",
       "maxUpgrades": "9",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Goblin_Killer_(Trapper)",
       "sourceUrls": [
@@ -4096,7 +4096,7 @@
       "placeLimit": "2",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Haruka_Rin",
       "sourceUrls": [
@@ -4124,7 +4124,7 @@
       "placeLimit": "2",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Haruka_Rin_(Dancer)",
       "sourceUrls": [
@@ -4152,7 +4152,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Hebano",
       "sourceUrls": [
@@ -4183,7 +4183,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Flower Blizzard, Fire Flower Illusion",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Hebano_(Clematis)",
       "sourceUrls": [
@@ -4214,7 +4214,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Hei",
       "sourceUrls": [
@@ -4245,7 +4245,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Black Dragon Flames, Black Dragon Lightning",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Hei_(Black_Dragon)",
       "sourceUrls": [
@@ -4276,7 +4276,7 @@
       "placeLimit": "1",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Hellkiller",
       "sourceUrls": [
@@ -4307,7 +4307,7 @@
       "placeLimit": "1",
       "maxUpgrades": "11",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Hellkiller_(Slayer)",
       "sourceUrls": [
@@ -4338,7 +4338,7 @@
       "placeLimit": "1",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Hollowseph",
       "sourceUrls": [
@@ -4369,7 +4369,7 @@
       "placeLimit": "1",
       "maxUpgrades": "11",
       "notableMoves": "Great Slash, Dash Slash, Cyclone Slash",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Hollowseph_(Pure)",
       "sourceUrls": [
@@ -4400,7 +4400,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Jailer",
       "sourceUrls": [
@@ -4431,7 +4431,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Discarded Experiment, Hollow Beam",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Jailer_(Underworld)",
       "sourceUrls": [
@@ -4462,7 +4462,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Eisplosion",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Julias",
       "sourceUrls": [
@@ -4490,7 +4490,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Eisplosion, Lunia Caulis",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Julias_(Eisplosion)",
       "sourceUrls": [
@@ -4518,7 +4518,7 @@
       "placeLimit": "3",
       "maxUpgrades": "7",
       "notableMoves": "Flame Absorption",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Karem",
       "sourceUrls": [
@@ -4549,7 +4549,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Flame Absorption, Passive: Refrigeration (Full AoE)",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Karem_(Chilled)",
       "sourceUrls": [
@@ -4580,7 +4580,7 @@
       "placeLimit": "1",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/LagShooter",
       "sourceUrls": [
@@ -4610,7 +4610,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Blaster Meteor, Gigantic Meteor",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Legendary_Super_Brolzi",
       "sourceUrls": [
@@ -4640,7 +4640,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Cloud Strike, Beast Ball",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lethal_Bee",
       "sourceUrls": [
@@ -4668,7 +4668,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Tail Swipe",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lizard",
       "sourceUrls": [
@@ -4698,7 +4698,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Tail Swipe, Fission Breath",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lizard_(Fission)",
       "sourceUrls": [
@@ -4728,7 +4728,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Luce",
       "sourceUrls": [
@@ -4756,7 +4756,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "I'm In, Boom",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Luce_(Hacker)",
       "sourceUrls": [
@@ -4784,7 +4784,7 @@
       "placeLimit": "1",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Manipulator",
       "sourceUrls": [
@@ -4814,7 +4814,7 @@
       "placeLimit": "1",
       "maxUpgrades": "9",
       "notableMoves": "Spider's Venom, Boom!",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Manipulator_(Spider)",
       "sourceUrls": [
@@ -4844,7 +4844,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Frozen Tundra",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Marlin",
       "sourceUrls": [
@@ -4875,7 +4875,7 @@
       "placeLimit": "4",
       "maxUpgrades": "7",
       "notableMoves": "Frozen Tundra, Limitless Gust",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Marlin_(Gluttony)",
       "sourceUrls": [
@@ -4906,7 +4906,7 @@
       "placeLimit": "4",
       "maxUpgrades": "10",
       "notableMoves": "Albatross Canon, Pigeon Viola",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Mechamar",
       "sourceUrls": [
@@ -4934,7 +4934,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Boulder Toss",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Mimi",
       "sourceUrls": [
@@ -4964,7 +4964,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Boulder Toss, Psychic Throw, Psychic Explosion",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Mimi_(Psychic)",
       "sourceUrls": [
@@ -4994,7 +4994,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Black Flash, Body Repel",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Mohato",
       "sourceUrls": [
@@ -5022,7 +5022,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Newsman",
       "sourceUrls": [
@@ -5053,7 +5053,7 @@
       "placeLimit": "4",
       "maxUpgrades": "9",
       "notableMoves": "Tornado Toss, Atomspheric Blitz",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Newsman_(Forecast)",
       "sourceUrls": [
@@ -5084,7 +5084,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Octo Shot, Fleamaker",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Octopus",
       "sourceUrls": [
@@ -5112,7 +5112,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Okorun",
       "sourceUrls": [
@@ -5142,7 +5142,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "AO Headbutt, AO Missile",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Okorun_(Turbo)",
       "sourceUrls": [
@@ -5172,7 +5172,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Sleeping Mist",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Priestess",
       "sourceUrls": [
@@ -5200,7 +5200,7 @@
       "placeLimit": "4",
       "maxUpgrades": "7",
       "notableMoves": "Sleeping Mist, Invisible Barrier",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Priestess_(Holy)",
       "sourceUrls": [
@@ -5228,7 +5228,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Mantis Barrage",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Pweeny",
       "sourceUrls": [
@@ -5258,7 +5258,7 @@
       "placeLimit": "3",
       "maxUpgrades": "10",
       "notableMoves": "Mantis Barrage, Air ShockWave",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Pweeny_(Boxer)",
       "sourceUrls": [
@@ -5288,7 +5288,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Quetzalcoatl",
       "sourceUrls": [
@@ -5320,7 +5320,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Piedra Del Sol, Ultima Topa Patada, Xiuhcoatl",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Quetzalcoatl_(Sun_God)",
       "sourceUrls": [
@@ -5352,7 +5352,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Reimu",
       "sourceUrls": [
@@ -5382,7 +5382,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Reimu_(Shrine_Maid)",
       "sourceUrls": [
@@ -5412,7 +5412,7 @@
       "placeLimit": "3",
       "maxUpgrades": "8",
       "notableMoves": "Rising Scorching Sun, Blazing Universe",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Renguko",
       "sourceUrls": [
@@ -5442,7 +5442,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Rising Scorching Sun, Blazing Universe, Scorching Spirals",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Renguko_(Purgatory)",
       "sourceUrls": [
@@ -5472,7 +5472,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rideon_vs_Samuel",
       "sourceUrls": [
@@ -5503,7 +5503,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Parry, Final Duel",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rideon_vs_Samuel_(Duel)",
       "sourceUrls": [
@@ -5534,7 +5534,7 @@
       "placeLimit": "3",
       "maxUpgrades": "7",
       "notableMoves": "Rebellion Hammer, Tyrant Spear",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rodock",
       "sourceUrls": [
@@ -5564,7 +5564,7 @@
       "placeLimit": "4",
       "maxUpgrades": "7",
       "notableMoves": "Oni Assault, Oni Whirl",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rom_and_Ran",
       "sourceUrls": [
@@ -5595,7 +5595,7 @@
       "placeLimit": "4",
       "maxUpgrades": "10",
       "notableMoves": "Oni Assault, Oni Whirl, Fanatical Rush",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rom_and_Ran_(Fanatic)",
       "sourceUrls": [
@@ -5626,7 +5626,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rudie",
       "sourceUrls": [
@@ -5657,7 +5657,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Earth Javelin, Fireball, Torrential Downpour",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rudie_(Prodigy)",
       "sourceUrls": [
@@ -5688,7 +5688,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rule",
       "sourceUrls": [
@@ -5718,7 +5718,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rule_(Surgeon)",
       "sourceUrls": [
@@ -5748,7 +5748,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rummie",
       "sourceUrls": [
@@ -5778,7 +5778,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rummie_(Scythe)",
       "sourceUrls": [
@@ -5808,7 +5808,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Burning Swing",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Saiko",
       "sourceUrls": [
@@ -5838,7 +5838,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Burning Swing, Talisman Barrier, Enhanced Barrier",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Saiko_(Spirit_Medium)",
       "sourceUrls": [
@@ -5868,7 +5868,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sakuya",
       "sourceUrls": [
@@ -5898,7 +5898,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sakuya_(Time_Maid)",
       "sourceUrls": [
@@ -5928,7 +5928,7 @@
       "placeLimit": "3",
       "maxUpgrades": "7",
       "notableMoves": "Chi Strike, Assassination",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Seban",
       "sourceUrls": [
@@ -5956,7 +5956,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Senator",
       "sourceUrls": [
@@ -5987,7 +5987,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Fire Wall, Nanoblast, Nanomachine Eruption",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Senator_(Nanomachines)",
       "sourceUrls": [
@@ -6018,7 +6018,7 @@
       "placeLimit": "3",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Shero",
       "sourceUrls": [
@@ -6049,7 +6049,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Caliburn, Nine Lives Forgery, Kaleidoscope Dagger",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Shero_(Hero_of_Justice)",
       "sourceUrls": [
@@ -6080,7 +6080,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Iron Spikes",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sosora",
       "sourceUrls": [
@@ -6108,7 +6108,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Iron Spikes, Sea of Flames",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sosora_(Puppeteer)",
       "sourceUrls": [
@@ -6136,7 +6136,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Flower Slam, Flower Punch",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Stone_Lee",
       "sourceUrls": [
@@ -6164,7 +6164,7 @@
       "placeLimit": "1",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Thunder",
       "sourceUrls": [
@@ -6194,7 +6194,7 @@
       "placeLimit": "1",
       "maxUpgrades": "9",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Thunder_(You)",
       "sourceUrls": [
@@ -6224,7 +6224,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Lash Strike",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Traitless",
       "sourceUrls": [
@@ -6254,7 +6254,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Lash Strike, All in One",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Traitless_(Vigilante)",
       "sourceUrls": [
@@ -6284,7 +6284,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Spinning Staff, Rock Expulsion",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Tuji",
       "sourceUrls": [
@@ -6312,7 +6312,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Spinning Staff, Rock Expulsion, Domain Breaker",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Tuji_(Sorcerer_Killer)",
       "sourceUrls": [
@@ -6340,7 +6340,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Vigil",
       "sourceUrls": [
@@ -6370,7 +6370,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Multi-Slash, Judgement Slice End",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Vigil_(Power)",
       "sourceUrls": [
@@ -6400,7 +6400,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Flame Burdelyon",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Zion",
       "sourceUrls": [
@@ -6428,7 +6428,7 @@
       "placeLimit": "4",
       "maxUpgrades": "11",
       "notableMoves": "Flame Burdelyon, Dragons Nowl",
-      "catalogSection": "Exclusive",
+      "collectionSection": "Exclusive",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Zion_(Burdelyon)",
       "sourceUrls": [
@@ -6456,7 +6456,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ackers",
       "sourceUrls": [
@@ -6486,7 +6486,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Trick Shot, Explosive Shot",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ackers_(Ken)",
       "sourceUrls": [
@@ -6516,7 +6516,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Giant Slayer, Flurry Drop",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ackers_(Levy)",
       "sourceUrls": [
@@ -6546,7 +6546,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Flurry Strike, Javelin Barrage",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ackers_(Makoso)",
       "sourceUrls": [
@@ -6576,7 +6576,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Collapse, Disorder",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Akazo",
       "sourceUrls": [
@@ -6606,7 +6606,7 @@
       "placeLimit": "4",
       "maxUpgrades": "11",
       "notableMoves": "Collapse, Disorder, Annihilation",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Akazo_(Destructive)",
       "sourceUrls": [
@@ -6636,7 +6636,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "TwinBlades",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Archer",
       "sourceUrls": [
@@ -6666,7 +6666,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "TwinBlades, Hrunting, False Caladbolg",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Archer_(Counter_Spirit)",
       "sourceUrls": [
@@ -6696,7 +6696,7 @@
       "placeLimit": "1",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Aurin",
       "sourceUrls": [
@@ -6726,7 +6726,7 @@
       "placeLimit": "1",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Aurin_(Nuclear_Giant)",
       "sourceUrls": [
@@ -6756,7 +6756,7 @@
       "placeLimit": "4",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Bounty_Hunter",
       "sourceUrls": [
@@ -6786,7 +6786,7 @@
       "placeLimit": "4",
       "maxUpgrades": "9",
       "notableMoves": "3 Sword Dash, Cyclonic Slash, Rip Spin",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Bounty_Hunter_(3_Sword)",
       "sourceUrls": [
@@ -6816,7 +6816,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Yo-Yo Combo!",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Brisket",
       "sourceUrls": [
@@ -6846,7 +6846,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Yo-Yo Combo!, Ro Jer the Bear!",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Brisket_(Yo-Yo)",
       "sourceUrls": [
@@ -6876,7 +6876,7 @@
       "placeLimit": "5",
       "maxUpgrades": "8",
       "notableMoves": "Phantom Dance, Sword of Light",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Cha-In",
       "sourceUrls": [
@@ -6906,7 +6906,7 @@
       "placeLimit": "5",
       "maxUpgrades": "11",
       "notableMoves": "Phantom Dance, Sword of Light, Light of the End",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Cha-In_(Blade_Dancer)",
       "sourceUrls": [
@@ -6936,7 +6936,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Blood Convergence, Whip & Plume",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Chaso",
       "sourceUrls": [
@@ -6964,7 +6964,7 @@
       "placeLimit": "4",
       "maxUpgrades": "11",
       "notableMoves": "Blood Convergence, Whip & Plume, Coagulated Spikes",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Chaso_(Blood_Curse)",
       "sourceUrls": [
@@ -6992,7 +6992,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Earthshatter, Crimson Javelin",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Cu_Chulainn",
       "sourceUrls": [
@@ -7022,7 +7022,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Earthshatter, Crimson Javelin, Blood God Frenzy",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Cu_Chulainn_(Child_of_Light)",
       "sourceUrls": [
@@ -7052,7 +7052,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Delusional_Demon",
       "sourceUrls": [
@@ -7082,7 +7082,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Blood Spear, Bloody Slam",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Delusional_Demon_(Blood)",
       "sourceUrls": [
@@ -7112,7 +7112,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Demon_Hunter",
       "sourceUrls": [
@@ -7142,7 +7142,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Fox Demon, Cursed Nail",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Demon_Hunter_(Contract)",
       "sourceUrls": [
@@ -7172,7 +7172,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Demon_Hybrid",
       "sourceUrls": [
@@ -7202,7 +7202,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Beastial Roar",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Deruta",
       "sourceUrls": [
@@ -7232,7 +7232,7 @@
       "placeLimit": "3",
       "maxUpgrades": "10",
       "notableMoves": "Beastial Roar, Beastial Beatdown",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Deruta_(Hunt)",
       "sourceUrls": [
@@ -7262,7 +7262,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Eizan",
       "sourceUrls": [
@@ -7290,7 +7290,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Elastic_Captain",
       "sourceUrls": [
@@ -7320,7 +7320,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Explosive_Demon",
       "sourceUrls": [
@@ -7350,7 +7350,7 @@
       "placeLimit": "3",
       "maxUpgrades": "10",
       "notableMoves": "Explosive Drop, Explosive Rush, High Range Explosion",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Explosive_Demon_(Bomb)",
       "sourceUrls": [
@@ -7380,7 +7380,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Fire_Foot",
       "sourceUrls": [
@@ -7410,7 +7410,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Spinning Kicks, Flying Flame Kick",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Fire_Foot_(Chef)",
       "sourceUrls": [
@@ -7440,7 +7440,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Gazelle",
       "sourceUrls": [
@@ -7468,7 +7468,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Totsero (Zombie), Bomberetta (Zombie)",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Gazelle_(Zombie)",
       "sourceUrls": [
@@ -7496,7 +7496,7 @@
       "placeLimit": "4",
       "maxUpgrades": "5",
       "notableMoves": "Flagpole Barrage",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Gear_Boy",
       "sourceUrls": [
@@ -7526,7 +7526,7 @@
       "placeLimit": "4",
       "maxUpgrades": "9",
       "notableMoves": "Flagpole Barrage, Lightning Ride, Lightning Rush",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Gear_Boy_(Hungry)",
       "sourceUrls": [
@@ -7556,7 +7556,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Giro",
       "sourceUrls": [
@@ -7586,7 +7586,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "One More Shot, Steel Ball Breaker",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Giro_(Ball_Breaker)",
       "sourceUrls": [
@@ -7616,7 +7616,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Red",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Gujo",
       "sourceUrls": [
@@ -7644,7 +7644,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Hercool",
       "sourceUrls": [
@@ -7674,7 +7674,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Present Surprise, Mr Boo Arrives!",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Hercool_and_Mr_Boo",
       "sourceUrls": [
@@ -7704,7 +7704,7 @@
       "placeLimit": "4",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ice_Manipulator",
       "sourceUrls": [
@@ -7735,7 +7735,7 @@
       "placeLimit": "4",
       "maxUpgrades": "9",
       "notableMoves": "Ice Tridents, Ice Spread, Birb Shot",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ice_Manipulator_(Admiral)",
       "sourceUrls": [
@@ -7766,7 +7766,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Gogojogo, Tengo Zengogo, Gogo Explosion",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ichiga_(Savior)",
       "sourceUrls": [
@@ -7796,7 +7796,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Gogojogo",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ichiga_(True_Release)",
       "sourceUrls": [
@@ -7824,7 +7824,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Destiny Wheel, Heavenly Cascade",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ishtar",
       "sourceUrls": [
@@ -7854,7 +7854,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Destiny Wheel, Heavenly Cascade, Celestial Flare",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ishtar_(Divinity)",
       "sourceUrls": [
@@ -7884,7 +7884,7 @@
       "placeLimit": "5",
       "maxUpgrades": "8",
       "notableMoves": "Black Flash, Divergent Pummel",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Itaduri",
       "sourceUrls": [
@@ -7914,7 +7914,7 @@
       "placeLimit": "4",
       "maxUpgrades": "5",
       "notableMoves": "Flame Rain",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Jag-o",
       "sourceUrls": [
@@ -7942,7 +7942,7 @@
       "placeLimit": "4",
       "maxUpgrades": "11",
       "notableMoves": "Flame Rain, Volcanic Stomp, Meteor Maximum",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Jag-o_(Volcanic)",
       "sourceUrls": [
@@ -7970,7 +7970,7 @@
       "placeLimit": "4",
       "maxUpgrades": "5",
       "notableMoves": "Golden Nails",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Johnni",
       "sourceUrls": [
@@ -8000,7 +8000,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Golden Nails, Now I Know Where To Shoot, Roundabout Path",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Johnni_(Infinite_Spin)",
       "sourceUrls": [
@@ -8030,7 +8030,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Under Spike + Grim Beam",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + customData override",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Kazzy",
       "sourceUrls": [
@@ -8060,7 +8060,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Under Spike + Grim Beam, Gear Beam, Close Call",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + customData override",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Kazzy_(Queen)",
       "sourceUrls": [
@@ -8090,7 +8090,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Feral Strike",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Kempache",
       "sourceUrls": [
@@ -8118,7 +8118,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Feral Strike, Feral Slam",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + customData override",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Kempache_(Feral)",
       "sourceUrls": [
@@ -8146,7 +8146,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Banohamo",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Kiskae",
       "sourceUrls": [
@@ -8174,7 +8174,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Banohamo, Stitches Slash, Dabo 91",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Kiskae_(Scientist)",
       "sourceUrls": [
@@ -8202,7 +8202,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lilia",
       "sourceUrls": [
@@ -8232,7 +8232,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Berserker!, Rampage, Nine Lives",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lilia_and_Berserker",
       "sourceUrls": [
@@ -8262,7 +8262,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lord_Friezo",
       "sourceUrls": [
@@ -8292,7 +8292,7 @@
       "placeLimit": "3",
       "maxUpgrades": "11",
       "notableMoves": "Murder Rain, Murder Barrage, Murder Ball",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Lord_Friezo_(Emperor)",
       "sourceUrls": [
@@ -8322,7 +8322,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Melfic Sphere, Pure Volley",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Medea",
       "sourceUrls": [
@@ -8352,7 +8352,7 @@
       "placeLimit": "4",
       "maxUpgrades": "12",
       "notableMoves": "Melfic Sphere, Pure Volley, Rain of Light",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Medea_(Witch_of_Betrayal)",
       "sourceUrls": [
@@ -8382,7 +8382,7 @@
       "placeLimit": "4",
       "maxUpgrades": "5",
       "notableMoves": "Blossom Flail",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Medusa",
       "sourceUrls": [
@@ -8412,7 +8412,7 @@
       "placeLimit": "4",
       "maxUpgrades": "11",
       "notableMoves": "Blossom Flail, Blooming Chains, Bellerophon",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + customData override",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Medusa_(Gorgon)",
       "sourceUrls": [
@@ -8442,7 +8442,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Rasenshuriken",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Noruto_(Sage)",
       "sourceUrls": [
@@ -8470,7 +8470,7 @@
       "placeLimit": "4",
       "maxUpgrades": "12",
       "notableMoves": "Tailed Beast Blast, Tailed Beast Bomb",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Noruto_(Six_Tails)",
       "sourceUrls": [
@@ -8498,7 +8498,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Earth Python",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/NotGoodGuy",
       "sourceUrls": [
@@ -8528,7 +8528,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Earth Python, Ruler Rage",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + customData override",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/NotGoodGuy_(Free)",
       "sourceUrls": [
@@ -8558,7 +8558,7 @@
       "placeLimit": "3",
       "maxUpgrades": "8",
       "notableMoves": "Lightning Receiver, Earth Slam",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Obita",
       "sourceUrls": [
@@ -8586,7 +8586,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Lightning Receiver, Earth Slam, Flame Twisters",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Obita_(Awakened)",
       "sourceUrls": [
@@ -8614,7 +8614,7 @@
       "placeLimit": "1",
       "maxUpgrades": "2",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Orehimi",
       "sourceUrls": [
@@ -8642,7 +8642,7 @@
       "placeLimit": "2",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Orehimi_(Faith)",
       "sourceUrls": [
@@ -8670,7 +8670,7 @@
       "placeLimit": "4",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Oryo",
       "sourceUrls": [
@@ -8698,7 +8698,7 @@
       "placeLimit": "4",
       "maxUpgrades": "11",
       "notableMoves": "Kuinshi Rain, Kuinshi Flurry, Antithesis Shot",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Oryo_(Antithesis)",
       "sourceUrls": [
@@ -8726,7 +8726,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rabbit_Hero",
       "sourceUrls": [
@@ -8756,7 +8756,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Crescent Slam, Moonsault Assault",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rabbit_Hero_(Guts)",
       "sourceUrls": [
@@ -8786,7 +8786,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Riner",
       "sourceUrls": [
@@ -8816,7 +8816,7 @@
       "placeLimit": "4",
       "maxUpgrades": "9",
       "notableMoves": "Armored Strike, Armored Barrage",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Riner_(Reinforced_Giant)",
       "sourceUrls": [
@@ -8846,7 +8846,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Justice Rush",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rohan_(Adult)",
       "sourceUrls": [
@@ -8876,7 +8876,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Twin Lizard Punch",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Roku_(Angel)",
       "sourceUrls": [
@@ -8906,7 +8906,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Cyclone Blade",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Saber",
       "sourceUrls": [
@@ -8936,7 +8936,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Cyclone Blade, Heroic Lunge, Divine Onslaught",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Saber_(King_of_Knights)",
       "sourceUrls": [
@@ -8966,7 +8966,7 @@
       "placeLimit": "1",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Skele_King",
       "sourceUrls": [
@@ -8996,7 +8996,7 @@
       "placeLimit": "1",
       "maxUpgrades": "2",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Skele_King_(Rock)",
       "sourceUrls": [
@@ -9026,7 +9026,7 @@
       "placeLimit": "3",
       "maxUpgrades": "8",
       "notableMoves": "Fatal Strike, Dragon Fear",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Song_Jinwu",
       "sourceUrls": [
@@ -9056,7 +9056,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Fatal Strike, Dragon Fear",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Song_Jinwu_(Monarch)",
       "sourceUrls": [
@@ -9086,7 +9086,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Chidori Lament, Onyx Chidori",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sosuke_(Hebi)",
       "sourceUrls": [
@@ -9114,7 +9114,7 @@
       "placeLimit": "4",
       "maxUpgrades": "12",
       "notableMoves": "Chidori Lament, Onyx Chidori, Chidori Strike",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sosuke_(Storm)",
       "sourceUrls": [
@@ -9142,7 +9142,7 @@
       "placeLimit": "1",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Tempest_Pirate",
       "sourceUrls": [
@@ -9172,7 +9172,7 @@
       "placeLimit": "1",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Tempest_Pirate_(Navigator)",
       "sourceUrls": [
@@ -9202,7 +9202,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Returning Slash",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Tengon",
       "sourceUrls": [
@@ -9232,7 +9232,7 @@
       "placeLimit": "3",
       "maxUpgrades": "12",
       "notableMoves": "Returning Slash, String Performance, Constant Resounding Slashes",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Tengon_(Flashiness)",
       "sourceUrls": [
@@ -9262,7 +9262,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Causality Scythe",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_King",
       "sourceUrls": [
@@ -9292,7 +9292,7 @@
       "placeLimit": "3",
       "maxUpgrades": "9",
       "notableMoves": "Causality Scythe, Otherworldly Strike, Dimension Shatter",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_King_(Apostle)",
       "sourceUrls": [
@@ -9322,7 +9322,7 @@
       "placeLimit": "1",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_Smith",
       "sourceUrls": [
@@ -9352,7 +9352,7 @@
       "placeLimit": "1",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_Smith_(Forged)",
       "sourceUrls": [
@@ -9382,7 +9382,7 @@
       "placeLimit": "3",
       "maxUpgrades": "1",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_Struggler",
       "sourceUrls": [
@@ -9412,7 +9412,7 @@
       "placeLimit": "4",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_Witch",
       "sourceUrls": [
@@ -9442,7 +9442,7 @@
       "placeLimit": "4",
       "maxUpgrades": "11",
       "notableMoves": "Cyclonic Burst, Water Spout, Holy Rain",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/The_Witch_(Disciple)",
       "sourceUrls": [
@@ -9472,7 +9472,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Boogie Barrage, Cursed Lariat",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Todu",
       "sourceUrls": [
@@ -9500,7 +9500,7 @@
       "placeLimit": "4",
       "maxUpgrades": "12",
       "notableMoves": "Boogie Barrage, Cursed Lariat, DropKick",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Todu_(Unleashed)",
       "sourceUrls": [
@@ -9528,7 +9528,7 @@
       "placeLimit": "3",
       "maxUpgrades": "3",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Trash_Gamer",
       "sourceUrls": [
@@ -9558,7 +9558,7 @@
       "placeLimit": "3",
       "maxUpgrades": "10",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Trash_Gamer_(Twin_Blades)",
       "sourceUrls": [
@@ -9588,7 +9588,7 @@
       "placeLimit": "4",
       "maxUpgrades": "9",
       "notableMoves": "Justice Rush, Ultimate Rush",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ultimate_Rohan",
       "sourceUrls": [
@@ -9618,7 +9618,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Cross Dimension Slam",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Valentine",
       "sourceUrls": [
@@ -9648,7 +9648,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Galick Gun, Big Bang",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Vogita_Super",
       "sourceUrls": [
@@ -9678,7 +9678,7 @@
       "placeLimit": "4",
       "maxUpgrades": "12",
       "notableMoves": "Galick Gun, Big Bang, Final Flash",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Vogita_Super_(Awakened)",
       "sourceUrls": [
@@ -9708,7 +9708,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Raijin Strike",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Yuruicha",
       "sourceUrls": [
@@ -9736,7 +9736,7 @@
       "placeLimit": "3",
       "maxUpgrades": "10",
       "notableMoves": "Raijin Strike, Raijin's Rage, Raijin Flurry",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Yuruicha_(Raijin)",
       "sourceUrls": [
@@ -9764,7 +9764,7 @@
       "placeLimit": "3",
       "maxUpgrades": "4",
       "notableMoves": "Source gap",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Zak",
       "sourceUrls": [
@@ -9794,7 +9794,7 @@
       "placeLimit": "3",
       "maxUpgrades": "13",
       "notableMoves": "Rock Toss, Rock Spray",
-      "catalogSection": "Mythic",
+      "collectionSection": "Mythic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Zak_(Ape_Giant)",
       "sourceUrls": [
@@ -9824,7 +9824,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Rock Explosion",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Agony",
       "sourceUrls": [
@@ -9852,7 +9852,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Shark Crash",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Bean",
       "sourceUrls": [
@@ -9882,7 +9882,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Paper",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Goi",
       "sourceUrls": [
@@ -9910,7 +9910,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Cero Explosion",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Grim_Wow",
       "sourceUrls": [
@@ -9938,7 +9938,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Blast Away!",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Inamuki",
       "sourceUrls": [
@@ -9966,7 +9966,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Fireball",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Itochi",
       "sourceUrls": [
@@ -9994,7 +9994,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Light Barrage",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Kinaru",
       "sourceUrls": [
@@ -10022,7 +10022,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Nail Explosion",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Nobaba",
       "sourceUrls": [
@@ -10050,7 +10050,7 @@
       "placeLimit": "4",
       "maxUpgrades": "8",
       "notableMoves": "Dark Nova",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Roku_(Dark)",
       "sourceUrls": [
@@ -10080,7 +10080,7 @@
       "placeLimit": "1",
       "maxUpgrades": "7",
       "notableMoves": "Source gap",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Takaroda",
       "sourceUrls": [
@@ -10108,7 +10108,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Alligator",
       "sourceUrls": [
@@ -10138,7 +10138,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Medical Chakra",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Blossom",
       "sourceUrls": [
@@ -10166,7 +10166,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Gaari",
       "sourceUrls": [
@@ -10194,7 +10194,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Genas",
       "sourceUrls": [
@@ -10222,7 +10222,7 @@
       "placeLimit": "5",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Genitsu",
       "sourceUrls": [
@@ -10252,7 +10252,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Inosake",
       "sourceUrls": [
@@ -10282,7 +10282,7 @@
       "placeLimit": "5",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Kinnua",
       "sourceUrls": [
@@ -10310,7 +10310,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Kokashi",
       "sourceUrls": [
@@ -10338,7 +10338,7 @@
       "placeLimit": "3",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Nazuka",
       "sourceUrls": [
@@ -10368,7 +10368,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Pickleo",
       "sourceUrls": [
@@ -10399,7 +10399,7 @@
       "placeLimit": "4",
       "maxUpgrades": "6",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Shinzi",
       "sourceUrls": [
@@ -10427,7 +10427,7 @@
       "placeLimit": "3",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Epic",
+      "collectionSection": "Epic",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sprintwagon",
       "sourceUrls": [
@@ -10455,7 +10455,7 @@
       "placeLimit": "6",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Elastic_Pirate",
       "sourceUrls": [
@@ -10485,7 +10485,7 @@
       "placeLimit": "6",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Ichiga",
       "sourceUrls": [
@@ -10513,7 +10513,7 @@
       "placeLimit": "6",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Joe",
       "sourceUrls": [
@@ -10541,7 +10541,7 @@
       "placeLimit": "6",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Jon",
       "sourceUrls": [
@@ -10569,7 +10569,7 @@
       "placeLimit": "5",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Noruto",
       "sourceUrls": [
@@ -10597,7 +10597,7 @@
       "placeLimit": "5",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Roku",
       "sourceUrls": [
@@ -10627,7 +10627,7 @@
       "placeLimit": "5",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Rukio",
       "sourceUrls": [
@@ -10655,7 +10655,7 @@
       "placeLimit": "5",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Sosuke",
       "sourceUrls": [
@@ -10683,7 +10683,7 @@
       "placeLimit": "5",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Top_Chef",
       "sourceUrls": [
@@ -10713,7 +10713,7 @@
       "placeLimit": "5",
       "maxUpgrades": "5",
       "notableMoves": "Source gap",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "sourceStatus": "Unit List + UnitData/data",
       "wikiUrl": "https://animevanguards.fandom.com/wiki/Units/Vogita",
       "sourceUrls": [

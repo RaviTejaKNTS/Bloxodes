@@ -1,4 +1,0 @@
-interface:
-  display_name: "Bloxodes Game Catalog Runner"
-  short_description: "Run catalog research, data, images, and writing"
-  default_prompt: "Use /bloxodes-game-catalog-workflow-runner for approved Bloxodes game catalogs. Give one collection to each subagent, queue extras, and tell subagents not to run the workflow runner or create more subagents. Use /bloxodes-game-catalog-research, /bloxodes-game-catalog-data, /bloxodes-game-catalog-images, and /bloxodes-game-catalog-writing as separate gates. Parent-review the new catalog shape, including description, natural highlight, chip/detail values, consistent fields, images/placeholders, and no label-stuffed item values. Run verify:game-catalog-finals, open passed localhost links in the Codex Browser, and return links."

@@ -53,7 +53,7 @@
       "name",
       "slug",
       "image",
-      "catalogSection",
+      "collectionSection",
       "area",
       "nodeType",
       "materials",
@@ -74,7 +74,7 @@
       "name": "Blueberry Bush",
       "slug": "blueberry-bush",
       "image": null,
-      "catalogSection": "Departure Isle gathering nodes",
+      "collectionSection": "Departure Isle gathering nodes",
       "area": "Departure Isle",
       "nodeType": "Safe gathering node",
       "materials": [
@@ -89,7 +89,7 @@
       "name": "Mushroom Cluster",
       "slug": "mushroom-cluster",
       "image": null,
-      "catalogSection": "Departure Isle gathering nodes",
+      "collectionSection": "Departure Isle gathering nodes",
       "area": "Departure Isle",
       "nodeType": "Safe gathering node",
       "materials": [
@@ -104,7 +104,7 @@
       "name": "Bird Nest",
       "slug": "bird-nest",
       "image": null,
-      "catalogSection": "Departure Isle gathering nodes",
+      "collectionSection": "Departure Isle gathering nodes",
       "area": "Departure Isle",
       "nodeType": "Safe gathering node",
       "materials": [
@@ -119,7 +119,7 @@
       "name": "Fern Bush",
       "slug": "fern-bush",
       "image": null,
-      "catalogSection": "Sea of Oblivion gathering nodes",
+      "collectionSection": "Sea of Oblivion gathering nodes",
       "area": "Sea of Oblivion",
       "nodeType": "Safe gathering node",
       "materials": [
@@ -134,7 +134,7 @@
       "name": "Sulphur Lumps",
       "slug": "sulphur-lumps-node",
       "image": null,
-      "catalogSection": "Sea of Oblivion gathering nodes",
+      "collectionSection": "Sea of Oblivion gathering nodes",
       "area": "Sea of Oblivion",
       "nodeType": "Safe gathering node",
       "materials": [
@@ -149,7 +149,7 @@
       "name": "Volcanic Rock",
       "slug": "volcanic-rock-node",
       "image": null,
-      "catalogSection": "Sea of Oblivion gathering nodes",
+      "collectionSection": "Sea of Oblivion gathering nodes",
       "area": "Sea of Oblivion",
       "nodeType": "Safe gathering node",
       "materials": [
@@ -164,7 +164,7 @@
       "name": "Chests",
       "slug": "chests",
       "image": "/Wizard%20Alchemy/Chests/spawn-river-rocks.jpg",
-      "catalogSection": "Shared pickup sources",
+      "collectionSection": "Shared pickup sources",
       "area": "Departure Isle and material routes",
       "nodeType": "Fixed pickup source",
       "materials": [
@@ -182,7 +182,7 @@
       "name": "Enchanted Sword Ferns",
       "slug": "enchanted-sword-ferns",
       "image": "/Wizard%20Alchemy/Resource%20Nodes/enchanted-sword-ferns.jpg",
-      "catalogSection": "Enchanted Stone sources",
+      "collectionSection": "Enchanted Stone sources",
       "area": "Sea of Oblivion lava island",
       "nodeType": "Enemy-like destructible source",
       "materials": [

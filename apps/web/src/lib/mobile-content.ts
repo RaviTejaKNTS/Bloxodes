@@ -23,15 +23,15 @@ import { getToolContentWithDevFallback, listPublishedToolsPage, type ToolListEnt
 import { resolveModifiedAt } from "@/lib/content-dates";
 import { getWikiPageBySlug, listPublishedWikiPages, loadWikiRelatedData, type WikiListEntry } from "@/lib/wiki";
 import { repoPath } from "@/lib/paths";
-import { getFieldLabel, getGameDatasetCatalogConfigByCode } from "@/lib/game-dataset-catalogs";
-import { listGameDatasetCatalogImageUrls } from "@/lib/game-dataset-catalog-images";
+import { getFieldLabel, getGameCollectionConfigByCode } from "@/lib/game-collections";
+import { listGameCollectionImageUrls } from "@/lib/game-collection-images";
 import { supabaseAdmin } from "@/lib/supabase";
 import { ROBUX_BUNDLES, type RobuxBundle } from "@/app/(site)/tools/robux-to-usd-calculator/robux-bundles";
 import { robuxForBundle } from "@/app/(site)/tools/robux-to-usd-calculator/robux-plans";
 import { calculateDevexPayout, calculateDevexRequirement } from "@/lib/devex/calculator";
 import { DEVEX_MIN, DEVEX_NEW_RATE, DEVEX_OLD_RATE, DEVEX_RATE_EFFECTIVE_DATE } from "@/lib/devex/constants";
-import { getGrowGardenCatalogConfig, loadGrowGardenCatalogDataset } from "@/app/(site)/catalog/grow-a-garden/page-data";
-import { getForgeCatalogConfig, loadForgeCatalogDataset } from "@/app/(site)/catalog/the-forge/page-data";
+import { getGrowGardenCollectionConfig, loadGrowGardenCollectionDataset } from "@/app/(site)/wiki/collections/games/grow-a-garden";
+import { getTheForgeCollectionConfig, loadTheForgeCollectionDataset } from "@/app/(site)/wiki/collections/games/the-forge";
 
 const PAGE_SIZE = 20;
 const DETAIL_ITEM_LIMIT = 36;
@@ -521,8 +521,8 @@ function mapWiki(row: WikiListEntry): MobileContentItem {
   };
 }
 
-async function loadGameDatasetCatalogSections(code: string, searchParams?: URLSearchParams): Promise<MobileContentDetailSection[]> {
-  const config = getGameDatasetCatalogConfigByCode(code);
+async function loadGameCollectionSections(code: string, searchParams?: URLSearchParams): Promise<MobileContentDetailSection[]> {
+  const config = getGameCollectionConfigByCode(code);
   if (!config) return [];
 
   const payload = await readJsonFile(repoPath("data", config.dataDir, config.file));
@@ -588,9 +588,9 @@ async function loadGameDatasetCatalogSections(code: string, searchParams?: URLSe
 
 async function loadGrowGardenCatalogSections(code: string, searchParams?: URLSearchParams): Promise<MobileContentDetailSection[]> {
   const slug = code.replace(/^grow-a-garden-/, "");
-  const config = getGrowGardenCatalogConfig(slug);
+  const config = getGrowGardenCollectionConfig(slug);
   if (!config) return [];
-  const dataset = await loadGrowGardenCatalogDataset(config);
+  const dataset = await loadGrowGardenCollectionDataset(config);
   if (!dataset.items.length) return [];
   const rows = dataset.items as Array<Record<string, unknown>>;
   const query = detailQuery(searchParams);
@@ -621,9 +621,9 @@ async function loadGrowGardenCatalogSections(code: string, searchParams?: URLSea
 
 async function loadForgeCatalogSections(code: string, searchParams?: URLSearchParams): Promise<MobileContentDetailSection[]> {
   const slug = code.replace(/^the-forge-/, "");
-  const config = getForgeCatalogConfig(slug);
+  const config = getTheForgeCollectionConfig(slug);
   if (!config) return [];
-  const dataset = await loadForgeCatalogDataset(config);
+  const dataset = await loadTheForgeCollectionDataset(config);
   if (!dataset.items.length) return [];
   const rows = dataset.items as Array<Record<string, unknown>>;
   const query = detailQuery(searchParams);
@@ -821,8 +821,8 @@ async function loadCatalogNativeSections(code: string, searchParams?: URLSearchP
     loaders.push(() => loadForgeCatalogSections(normalized, searchParams));
   }
 
-  if (getGameDatasetCatalogConfigByCode(normalized)) {
-    loaders.push(() => loadGameDatasetCatalogSections(normalized, searchParams));
+  if (getGameCollectionConfigByCode(normalized)) {
+    loaders.push(() => loadGameCollectionSections(normalized, searchParams));
   }
 
   if (normalized === "free-roblox-items" || normalized === "roblox-free-items") {
@@ -1150,7 +1150,7 @@ export async function getMobileContentDetail(
     const childCatalogItems = childPages.length
       ? await Promise.all(
           childPages.map(async (entry) => {
-            const [previewImage] = await listGameDatasetCatalogImageUrls(entry.code, 1);
+            const [previewImage] = await listGameCollectionImageUrls(entry.code, 1);
             const wikiItemCount = (entry as unknown as { wiki_item_count?: unknown }).wiki_item_count;
 
             return detailItem(entry.code, entry.title, {
@@ -1345,7 +1345,7 @@ export async function getMobileContentDetail(
   const relatedCatalogItems = related.catalogPages.length
     ? await Promise.all(
         related.catalogPages.slice(0, DETAIL_ITEM_LIMIT).map(async (entry) => {
-          const [previewImage] = await listGameDatasetCatalogImageUrls(entry.code, 1);
+          const [previewImage] = await listGameCollectionImageUrls(entry.code, 1);
 
           return detailItem(entry.code, entry.title, {
             badge: "Catalog",

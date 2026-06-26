@@ -21,7 +21,7 @@
     "columns": [
       "name",
       "slug",
-      "catalogSection",
+      "collectionSection",
       "starRange",
       "starsRequired",
       "nextThresholdStars",
@@ -111,14 +111,14 @@
       "Fandom rank ranges use overlapping endpoints such as 0-50 and 50-200. Dataset starRange values are normalized to non-overlapping display ranges while preserving numeric starsRequired and nextThresholdStars.",
       "Fashion Maven Nails is included because the current Ranks page lists it as a rank item and the item page says it is obtained by reaching Fashion Maven. Older guide pages that say five rewards are treated as stale.",
       "Pro server access is recorded on Runway Queen from Destructoid and Droid Gamers guide-source support; Fandom does not list it in the rank table.",
-      "The generic dataset route does not currently prioritize catalogSection. Parent should add a route override for dress-to-impress-ranks before public copy/import so sections render as Star ranks and Unlock items and audit fields stay hidden."
+      "The generic dataset route does not currently prioritize collectionSection. Parent should add a route override for dress-to-impress-ranks before public copy/import so sections render as Star ranks and Unlock items and audit fields stay hidden."
     ]
   },
   "items": [
     {
       "name": "New Model",
       "slug": "new-model",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "0-49",
       "starsRequired": 0,
       "nextThresholdStars": 50,
@@ -148,7 +148,7 @@
     {
       "name": "Rising Star",
       "slug": "rising-star",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "50-199",
       "starsRequired": 50,
       "nextThresholdStars": 200,
@@ -178,7 +178,7 @@
     {
       "name": "Aspiring Model",
       "slug": "aspiring-model",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "200-499",
       "starsRequired": 200,
       "nextThresholdStars": 500,
@@ -208,7 +208,7 @@
     {
       "name": "Fashionista",
       "slug": "fashionista",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "500-999",
       "starsRequired": 500,
       "nextThresholdStars": 1000,
@@ -238,7 +238,7 @@
     {
       "name": "Glamourista",
       "slug": "glamourista",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "1,000-1,499",
       "starsRequired": 1000,
       "nextThresholdStars": 1500,
@@ -268,7 +268,7 @@
     {
       "name": "Fashion Maven",
       "slug": "fashion-maven",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "1,500-2,999",
       "starsRequired": 1500,
       "nextThresholdStars": 3000,
@@ -298,7 +298,7 @@
     {
       "name": "Runway Queen",
       "slug": "runway-queen",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "3,000-5,999",
       "starsRequired": 3000,
       "nextThresholdStars": 6000,
@@ -328,7 +328,7 @@
     {
       "name": "Trend Setter",
       "slug": "trend-setter",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "6,000-14,999",
       "starsRequired": 6000,
       "nextThresholdStars": 15000,
@@ -358,7 +358,7 @@
     {
       "name": "Runway Diva",
       "slug": "runway-diva",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "15,000-24,999",
       "starsRequired": 15000,
       "nextThresholdStars": 25000,
@@ -388,7 +388,7 @@
     {
       "name": "Top Model",
       "slug": "top-model",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "25,000-49,999",
       "starsRequired": 25000,
       "nextThresholdStars": 50000,
@@ -418,7 +418,7 @@
     {
       "name": "Glamour Elite",
       "slug": "glamour-elite",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "50,000-74,999",
       "starsRequired": 50000,
       "nextThresholdStars": 75000,
@@ -448,7 +448,7 @@
     {
       "name": "Fashion Mogul",
       "slug": "fashion-mogul",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "75,000-99,999",
       "starsRequired": 75000,
       "nextThresholdStars": 100000,
@@ -478,7 +478,7 @@
     {
       "name": "Supernova",
       "slug": "supernova",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "100,000-149,999",
       "starsRequired": 100000,
       "nextThresholdStars": 150000,
@@ -508,7 +508,7 @@
     {
       "name": "Fashion Goddess",
       "slug": "fashion-goddess",
-      "catalogSection": "Star ranks",
+      "collectionSection": "Star ranks",
       "starRange": "150,000+",
       "starsRequired": 150000,
       "nextThresholdStars": null,
@@ -538,7 +538,7 @@
     {
       "name": "Fashion Maven Nails",
       "slug": "fashion-maven-nails",
-      "catalogSection": "Unlock items",
+      "collectionSection": "Unlock items",
       "starRange": null,
       "starsRequired": 1500,
       "nextThresholdStars": null,
@@ -568,7 +568,7 @@
     {
       "name": "Runway Queen Bag",
       "slug": "runway-queen-bag",
-      "catalogSection": "Unlock items",
+      "collectionSection": "Unlock items",
       "starRange": null,
       "starsRequired": 3000,
       "nextThresholdStars": null,
@@ -598,7 +598,7 @@
     {
       "name": "Trend-Setter Skirt",
       "slug": "trend-setter-skirt",
-      "catalogSection": "Unlock items",
+      "collectionSection": "Unlock items",
       "starRange": null,
       "starsRequired": 6000,
       "nextThresholdStars": null,
@@ -628,7 +628,7 @@
     {
       "name": "Runway Diva Crown",
       "slug": "runway-diva-crown",
-      "catalogSection": "Unlock items",
+      "collectionSection": "Unlock items",
       "starRange": null,
       "starsRequired": 15000,
       "nextThresholdStars": null,
@@ -658,7 +658,7 @@
     {
       "name": "Top Model Silk Robe",
       "slug": "top-model-silk-robe",
-      "catalogSection": "Unlock items",
+      "collectionSection": "Unlock items",
       "starRange": null,
       "starsRequired": 25000,
       "nextThresholdStars": null,
@@ -688,7 +688,7 @@
     {
       "name": "Supernova Crown",
       "slug": "supernova-crown",
-      "catalogSection": "Unlock items",
+      "collectionSection": "Unlock items",
       "starRange": null,
       "starsRequired": 100000,
       "nextThresholdStars": null,

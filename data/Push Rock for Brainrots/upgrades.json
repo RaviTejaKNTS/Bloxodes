@@ -10,7 +10,7 @@
       "cost",
       "currency",
       "priority",
-      "catalogSection",
+      "collectionSection",
       "cardSummary",
       "image"
     ],
@@ -31,7 +31,7 @@
       "cost": "Cash prices scale by level; Robux shortcut available.",
       "currency": "Cash or Robux",
       "priority": "Upgrade first when a rock gate is slowing your route.",
-      "catalogSection": "Core upgrades",
+      "collectionSection": "Core upgrades",
       "cardSummary": "Strength is the main progress upgrade. If a rock barely moves or a rarity lane is out of reach, Strength is the upgrade that fixes it.",
       "image": "/Push%20Rock%20for%20Brainrots/Upgrades/strength-and-carry-panel.jpg",
       "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
@@ -44,7 +44,7 @@
       "cost": "Cash price by level; optional Robux shortcut.",
       "currency": "Cash or Robux",
       "priority": "Upgrade after Strength when return trips start wasting time.",
-      "catalogSection": "Core upgrades",
+      "collectionSection": "Core upgrades",
       "cardSummary": "Carry is a routing upgrade. It matters once you can reach better Brainrots and want fewer trips back to base.",
       "image": "/Push%20Rock%20for%20Brainrots/Upgrades/strength-and-carry-panel.jpg",
       "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
@@ -57,7 +57,7 @@
       "cost": "Cash requirement by rebirth tier.",
       "currency": "Cash requirement",
       "priority": "Use when the next multiplier is worth rebuilding your route.",
-      "catalogSection": "Reset upgrades",
+      "collectionSection": "Reset upgrades",
       "cardSummary": "Rebirth is the long-term reset system. It boosts the account after you can afford the listed cash requirement.",
       "image": "/Push%20Rock%20for%20Brainrots/Upgrades/rebirth-panel.jpg",
       "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"

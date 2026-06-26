@@ -17,7 +17,7 @@ const ALLOWED_ENTITY_TYPES = new Set([
   "event",
   "tool",
   "wiki",
-  "wiki_catalog"
+  "wiki_collection"
 ]);
 const MAX_BODY_LENGTH = 1000;
 const MAX_GUEST_NAME_LENGTH = 60;
@@ -28,7 +28,7 @@ const COMMENT_WRITE_RATE_LIMIT = {
   windowMs: 10 * 60 * 1000
 };
 
-type CommentEntityType = "code" | "article" | "catalog" | "event" | "tool" | "wiki" | "wiki_catalog";
+type CommentEntityType = "code" | "article" | "catalog" | "event" | "tool" | "wiki" | "wiki_collection";
 
 type CommentPageTarget = {
   pageType: string;
@@ -66,7 +66,7 @@ function hasCode(row: unknown): row is { code: string } {
   return typeof row === "object" && row !== null && typeof (row as { code?: unknown }).code === "string";
 }
 
-function hasWikiCatalogPath(row: unknown): row is { wiki_slug: string; collection_slug: string } {
+function hasWikiCollectionPath(row: unknown): row is { wiki_slug: string; collection_slug: string } {
   return (
     typeof row === "object" &&
     row !== null &&
@@ -145,14 +145,14 @@ async function resolveCommentPageTarget(entityType: CommentEntityType, entityId:
   }
 
   const { data, error } = await admin
-    .from("wiki_catalog_pages")
+    .from("wiki_collection_pages")
     .select("wiki_slug, collection_slug")
     .eq("id", entityId)
     .eq("is_published", true)
     .maybeSingle();
-  if (error || !hasWikiCatalogPath(data) || !data.wiki_slug.trim() || !data.collection_slug.trim()) return null;
+  if (error || !hasWikiCollectionPath(data) || !data.wiki_slug.trim() || !data.collection_slug.trim()) return null;
   return {
-    pageType: "Wiki Catalog",
+    pageType: "Wiki Collection",
     pageUrl: buildPageUrl(`/wiki/${data.wiki_slug}/${data.collection_slug}`)
   };
 }

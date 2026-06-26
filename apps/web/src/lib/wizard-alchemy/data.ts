@@ -19,7 +19,7 @@ export type WizardAlchemyMaterial = {
   name: string;
   slug?: string;
   image?: string;
-  catalogSection: string;
+  collectionSection: string;
   magicPower: number | null;
   elementEffect: string | null;
   source: string;
@@ -29,7 +29,7 @@ export type WizardAlchemyRace = {
   name: string;
   slug?: string;
   image?: string;
-  catalogSection: string;
+  collectionSection: string;
   rarity: string;
   rollChance: string;
   bestFor: string;

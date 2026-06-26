@@ -9,10 +9,10 @@
     "gameSlug": "murderers-vs-sheriffs",
     "catalogCode": "murderers-vs-sheriffs-bundles",
     "route": "/wiki/murderers-vs-sheriffs/bundles",
-    "groupBy": "catalogSection",
+    "groupBy": "collectionSection",
     "columns": [
       "name",
-      "catalogSection",
+      "collectionSection",
       "sourceConfidence",
       "sourceStatus",
       "price",
@@ -20,7 +20,7 @@
       "itemTypes",
       "availability",
       "source",
-      "relatedCatalogs",
+      "relatedCollections",
       "image"
     ],
     "sources": [
@@ -174,7 +174,7 @@
     {
       "name": "Dragon Pack",
       "slug": "dragon-pack",
-      "catalogSection": "Verified packs",
+      "collectionSection": "Verified packs",
       "sourceConfidence": "high",
       "sourceStatus": "Explicit contents from official game-pass description",
       "price": "299 Robux",
@@ -188,7 +188,7 @@
       ],
       "availability": "For sale through Roblox game-pass purchase.",
       "source": "Roblox gamepass",
-      "relatedCatalogs": [
+      "relatedCollections": [
         "Weapons"
       ],
       "image": "/Murderers%20VS%20Sheriffs/bundles/dragon-pack.png",
@@ -207,7 +207,7 @@
     {
       "name": "Batwing Pack",
       "slug": "batwing-pack",
-      "catalogSection": "Verified packs",
+      "collectionSection": "Verified packs",
       "sourceConfidence": "high",
       "sourceStatus": "Explicit contents from official game-pass description",
       "price": "299 Robux",
@@ -221,7 +221,7 @@
       ],
       "availability": "For sale through Roblox game-pass purchase.",
       "source": "Roblox gamepass",
-      "relatedCatalogs": [
+      "relatedCollections": [
         "Weapons"
       ],
       "image": "/Murderers%20VS%20Sheriffs/bundles/batwing-pack.png",

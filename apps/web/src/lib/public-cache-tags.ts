@@ -12,7 +12,7 @@ export type PublicCacheEventType =
   | "quiz"
   | "puzzle"
   | "wiki"
-  | "wiki_catalog"
+  | "wiki_collection"
   | "stats";
 
 export type PublicCacheEvent = {
@@ -206,9 +206,9 @@ export function cacheTagsForPath(pathname: string) {
     if (third && third !== "page") {
       return unique([
         ...tags,
-        "wiki-catalog-index",
+        "wiki-collection-index",
         slugTag("wiki", second),
-        slugTag("wiki-catalog", `${second}/${third}`)
+        slugTag("wiki-collection", `${second}/${third}`)
       ]);
     }
     return unique([...tags, "wiki", slugTag("wiki", second)]);
@@ -312,16 +312,16 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
         "sitemap",
         "sitemap:stats"
       ]);
-    case "wiki_catalog": {
+    case "wiki_collection": {
       const [wikiSlug, collectionSlug] = normalized.split("/");
       const flatCatalogSlug = wikiSlug && collectionSlug ? `${wikiSlug}-${collectionSlug}` : "";
       return unique([
         ...base,
         wikiSlug ? slugTag("wiki", wikiSlug) : "",
-        wikiSlug && collectionSlug ? slugTag("wiki-catalog", `${wikiSlug}/${collectionSlug}`) : "",
+        wikiSlug && collectionSlug ? slugTag("wiki-collection", `${wikiSlug}/${collectionSlug}`) : "",
         flatCatalogSlug ? slugTag("catalog", flatCatalogSlug) : "",
         "wiki-index",
-        "wiki-catalog-index",
+        "wiki-collection-index",
         "home",
         "sitemap",
         "sitemap:wiki",

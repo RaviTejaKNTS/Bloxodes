@@ -8,7 +8,7 @@
     "route": "/wiki/fisch/baits",
     "catalogCode": "fisch-baits",
     "updatedAt": "2026-06-19",
-    "groupBy": "catalogSection",
+    "groupBy": "collectionSection",
     "defaultCardFields": [
       "rarity",
       "preferredLuck",
@@ -25,7 +25,7 @@
     ],
     "columns": [
       "name",
-      "catalogSection",
+      "collectionSection",
       "rarity",
       "preferredLuck",
       "universalLuck",
@@ -80,7 +80,7 @@
     {
       "id": "ant",
       "name": "Ant",
-      "catalogSection": "Trash",
+      "collectionSection": "Trash",
       "rarity": "Trash",
       "sortOrder": 1,
       "wikiPage": "Ant",
@@ -99,7 +99,7 @@
     {
       "id": "bagel",
       "name": "Bagel",
-      "catalogSection": "Common",
+      "collectionSection": "Common",
       "rarity": "Common",
       "sortOrder": 2,
       "wikiPage": "Bagel",
@@ -115,7 +115,7 @@
     {
       "id": "worm",
       "name": "Worm",
-      "catalogSection": "Common",
+      "collectionSection": "Common",
       "rarity": "Common",
       "sortOrder": 3,
       "wikiPage": "Worm",
@@ -131,7 +131,7 @@
     {
       "id": "insect",
       "name": "Insect",
-      "catalogSection": "Common",
+      "collectionSection": "Common",
       "rarity": "Common",
       "sortOrder": 4,
       "wikiPage": "Insect",
@@ -147,7 +147,7 @@
     {
       "id": "flakes",
       "name": "Flakes",
-      "catalogSection": "Common",
+      "collectionSection": "Common",
       "rarity": "Common",
       "sortOrder": 5,
       "wikiPage": "Flakes",
@@ -164,7 +164,7 @@
     {
       "id": "garbage",
       "name": "Garbage",
-      "catalogSection": "Common",
+      "collectionSection": "Common",
       "rarity": "Common",
       "sortOrder": 6,
       "wikiPage": "Garbage",
@@ -181,7 +181,7 @@
     {
       "id": "lushrooms",
       "name": "Lushrooms",
-      "catalogSection": "Common",
+      "collectionSection": "Common",
       "rarity": "Common",
       "sortOrder": 7,
       "wikiPage": "Lushrooms",
@@ -199,7 +199,7 @@
     {
       "id": "maggot",
       "name": "Maggot",
-      "catalogSection": "Uncommon",
+      "collectionSection": "Uncommon",
       "rarity": "Uncommon",
       "sortOrder": 8,
       "wikiPage": "Maggot",
@@ -215,7 +215,7 @@
     {
       "id": "shrimp",
       "name": "Shrimp",
-      "catalogSection": "Uncommon",
+      "collectionSection": "Uncommon",
       "rarity": "Uncommon",
       "sortOrder": 9,
       "wikiPage": "Shrimp_(Bait)",
@@ -232,7 +232,7 @@
     {
       "id": "beetle-grub",
       "name": "Beetle Grub",
-      "catalogSection": "Uncommon",
+      "collectionSection": "Uncommon",
       "rarity": "Uncommon",
       "sortOrder": 10,
       "wikiPage": "Beetle_Grub",
@@ -252,7 +252,7 @@
     {
       "id": "snail",
       "name": "Snail",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "rarity": "Rare",
       "sortOrder": 11,
       "wikiPage": "Snail",
@@ -271,7 +271,7 @@
     {
       "id": "coal",
       "name": "Coal",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "rarity": "Rare",
       "sortOrder": 12,
       "wikiPage": "Coal",
@@ -287,7 +287,7 @@
     {
       "id": "rapid-catcher",
       "name": "Rapid Catcher",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "rarity": "Rare",
       "sortOrder": 13,
       "wikiPage": "Rapid_catchers",
@@ -303,7 +303,7 @@
     {
       "id": "glass-beetle",
       "name": "Glass Beetle",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "rarity": "Rare",
       "sortOrder": 14,
       "wikiPage": "Glass_Beetle",
@@ -321,7 +321,7 @@
     {
       "id": "phantom-leech",
       "name": "Phantom Leech",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "rarity": "Rare",
       "sortOrder": 15,
       "wikiPage": "Phantom_Leech",
@@ -339,7 +339,7 @@
     {
       "id": "crystal-bananas",
       "name": "Crystal Bananas",
-      "catalogSection": "Rare",
+      "collectionSection": "Rare",
       "rarity": "Rare",
       "sortOrder": 16,
       "wikiPage": "Crystal_Bananas",
@@ -357,7 +357,7 @@
     {
       "id": "cricket",
       "name": "Cricket",
-      "catalogSection": "Unusual",
+      "collectionSection": "Unusual",
       "rarity": "Unusual",
       "sortOrder": 17,
       "wikiPage": "Cricket",
@@ -374,7 +374,7 @@
     {
       "id": "squid",
       "name": "Squid",
-      "catalogSection": "Unusual",
+      "collectionSection": "Unusual",
       "rarity": "Unusual",
       "sortOrder": 18,
       "wikiPage": "Squid_bait",
@@ -391,7 +391,7 @@
     {
       "id": "seaweed",
       "name": "Seaweed",
-      "catalogSection": "Unusual",
+      "collectionSection": "Unusual",
       "rarity": "Unusual",
       "sortOrder": 19,
       "wikiPage": "Seaweed_bait",
@@ -408,7 +408,7 @@
     {
       "id": "minnow",
       "name": "Minnow",
-      "catalogSection": "Unusual",
+      "collectionSection": "Unusual",
       "rarity": "Unusual",
       "sortOrder": 20,
       "wikiPage": "Minnow_(Bait)",
@@ -424,7 +424,7 @@
     {
       "id": "coral",
       "name": "Coral",
-      "catalogSection": "Unusual",
+      "collectionSection": "Unusual",
       "rarity": "Unusual",
       "sortOrder": 21,
       "wikiPage": "Coral",
@@ -440,7 +440,7 @@
     {
       "id": "ember-berries",
       "name": "Ember Berries",
-      "catalogSection": "Unusual",
+      "collectionSection": "Unusual",
       "rarity": "Unusual",
       "sortOrder": 22,
       "wikiPage": "Ember_Berries",
@@ -458,7 +458,7 @@
     {
       "id": "peppermint-worm",
       "name": "Peppermint Worm",
-      "catalogSection": "Unusual",
+      "collectionSection": "Unusual",
       "rarity": "Unusual",
       "sortOrder": 23,
       "wikiPage": "Peppermint_Worm",
@@ -476,7 +476,7 @@
     {
       "id": "truffle-worm",
       "name": "Truffle Worm",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "rarity": "Legendary",
       "sortOrder": 24,
       "wikiPage": "Truffle_Worm",
@@ -492,7 +492,7 @@
     {
       "id": "weird-algae",
       "name": "Weird Algae",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "rarity": "Legendary",
       "sortOrder": 25,
       "wikiPage": "Weird_algae",
@@ -508,7 +508,7 @@
     {
       "id": "fish-head",
       "name": "Fish Head",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "rarity": "Legendary",
       "sortOrder": 26,
       "wikiPage": "Fish_Head",
@@ -525,7 +525,7 @@
     {
       "id": "night-shrimp",
       "name": "Night Shrimp",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "rarity": "Legendary",
       "sortOrder": 27,
       "wikiPage": "Night_Shrimp_Bait",
@@ -541,7 +541,7 @@
     {
       "id": "instant-catcher",
       "name": "Instant Catcher",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "rarity": "Legendary",
       "sortOrder": 28,
       "wikiPage": "Instant_Catcher",
@@ -558,7 +558,7 @@
     {
       "id": "deep-coral",
       "name": "Deep Coral",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "rarity": "Legendary",
       "sortOrder": 29,
       "wikiPage": "Deep_Coral",
@@ -574,7 +574,7 @@
     {
       "id": "holly-berry",
       "name": "Holly Berry",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "rarity": "Legendary",
       "sortOrder": 30,
       "wikiPage": "Holly_Berry",
@@ -592,7 +592,7 @@
     {
       "id": "kraken-tentacle",
       "name": "Kraken Tentacle",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "rarity": "Legendary",
       "sortOrder": 31,
       "wikiPage": "Kraken_Tentacle",
@@ -610,7 +610,7 @@
     {
       "id": "neuro-slug",
       "name": "Neuro Slug",
-      "catalogSection": "Legendary",
+      "collectionSection": "Legendary",
       "rarity": "Legendary",
       "sortOrder": 32,
       "wikiPage": "Neuro_Slug",
@@ -628,7 +628,7 @@
     {
       "id": "stag-beetle",
       "name": "Stag Beetle",
-      "catalogSection": "Mythical",
+      "collectionSection": "Mythical",
       "rarity": "Mythical",
       "sortOrder": 33,
       "wikiPage": "Stag_Beetle",
@@ -648,7 +648,7 @@
     {
       "id": "nightmare-larva",
       "name": "Nightmare Larva",
-      "catalogSection": "Mythical",
+      "collectionSection": "Mythical",
       "rarity": "Mythical",
       "sortOrder": 34,
       "wikiPage": "Nightmare_Larva",
@@ -666,7 +666,7 @@
     {
       "id": "chocolate-fish",
       "name": "Chocolate Fish",
-      "catalogSection": "Mythical",
+      "collectionSection": "Mythical",
       "rarity": "Mythical",
       "sortOrder": 35,
       "wikiPage": "Chocolate_Fish_(Bait)",
@@ -684,7 +684,7 @@
     {
       "id": "lucky",
       "name": "Lucky",
-      "catalogSection": "Mythical",
+      "collectionSection": "Mythical",
       "rarity": "Mythical",
       "sortOrder": 36,
       "wikiPage": "Lucky_(Bait)",
@@ -702,7 +702,7 @@
     {
       "id": "moonhaze",
       "name": "Moonhaze",
-      "catalogSection": "Mythical",
+      "collectionSection": "Mythical",
       "rarity": "Mythical",
       "sortOrder": 37,
       "wikiPage": "Moonhaze",
@@ -720,7 +720,7 @@
     {
       "id": "umbrella",
       "name": "Umbrella",
-      "catalogSection": "Mythical",
+      "collectionSection": "Mythical",
       "rarity": "Mythical",
       "sortOrder": 38,
       "wikiPage": "Umbrella",
@@ -739,7 +739,7 @@
     {
       "id": "dragonfly",
       "name": "Dragonfly",
-      "catalogSection": "Exotic",
+      "collectionSection": "Exotic",
       "rarity": "Exotic",
       "sortOrder": 39,
       "wikiPage": "Dragonfly",
@@ -758,7 +758,7 @@
     {
       "id": "golden-worm",
       "name": "Golden Worm",
-      "catalogSection": "Exotic",
+      "collectionSection": "Exotic",
       "rarity": "Exotic",
       "sortOrder": 40,
       "wikiPage": "Golden_Worm",
@@ -776,7 +776,7 @@
     {
       "id": "luminous-larva",
       "name": "Luminous Larva",
-      "catalogSection": "Exotic",
+      "collectionSection": "Exotic",
       "rarity": "Exotic",
       "sortOrder": 41,
       "wikiPage": "Luminous_Larva",
@@ -794,7 +794,7 @@
     {
       "id": "glowworm",
       "name": "Glowworm",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "rarity": "Secret",
       "sortOrder": 42,
       "wikiPage": "Glowworm",
@@ -814,7 +814,7 @@
     {
       "id": "crawlurion",
       "name": "Crawlurion",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "rarity": "Secret",
       "sortOrder": 43,
       "wikiPage": "Crawlurion",
@@ -832,7 +832,7 @@
     {
       "id": "astrolure",
       "name": "Astrolure",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "rarity": "Secret",
       "sortOrder": 44,
       "wikiPage": "Astrolure",
@@ -852,7 +852,7 @@
     {
       "id": "nullbit",
       "name": "Nullbit",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "rarity": "Secret",
       "sortOrder": 45,
       "wikiPage": "Nullbit",
@@ -872,7 +872,7 @@
     {
       "id": "snare",
       "name": "Snare",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "rarity": "Secret",
       "sortOrder": 46,
       "wikiPage": "Snare",
@@ -891,7 +891,7 @@
     {
       "id": "starlight-worm",
       "name": "Starlight Worm",
-      "catalogSection": "Secret",
+      "collectionSection": "Secret",
       "rarity": "Secret",
       "sortOrder": 47,
       "wikiPage": "Starlight_Worm",
@@ -910,7 +910,7 @@
     {
       "id": "gourd-bites",
       "name": "Gourd Bites",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 48,
       "wikiPage": "Gourd_Bites",
@@ -927,7 +927,7 @@
     {
       "id": "pumpkin-pieces",
       "name": "Pumpkin Pieces",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 49,
       "wikiPage": "Pumpkin_Pieces",
@@ -944,7 +944,7 @@
     {
       "id": "cranberry-cluster",
       "name": "Cranberry Cluster",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 50,
       "wikiPage": "Cranberry_Cluster",
@@ -961,7 +961,7 @@
     {
       "id": "tryhard-worm",
       "name": "Tryhard Worm",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 51,
       "wikiPage": "Tryhard_Worm",
@@ -978,7 +978,7 @@
     {
       "id": "meteor",
       "name": "Meteor",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 52,
       "wikiPage": "Meteor",
@@ -996,7 +996,7 @@
     {
       "id": "beach-ball",
       "name": "Beach Ball",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 53,
       "wikiPage": "Beach_Ball",
@@ -1014,7 +1014,7 @@
     {
       "id": "beached-pearl",
       "name": "Beached Pearl",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 54,
       "wikiPage": "Beached_Pearl",
@@ -1032,7 +1032,7 @@
     {
       "id": "stud-bait",
       "name": "Stud Bait",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 55,
       "wikiPage": "Stud_Bait",
@@ -1050,7 +1050,7 @@
     {
       "id": "colossal-ink-bait",
       "name": "Colossal Ink Bait",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 56,
       "wikiPage": "Colossal_Ink_Bait",
@@ -1069,7 +1069,7 @@
     {
       "id": "hourglass-bait",
       "name": "Hourglass Bait",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 57,
       "wikiPage": "Hourglass_Bait",
@@ -1089,7 +1089,7 @@
     {
       "id": "golden-shrimp-bait",
       "name": "Golden Shrimp Bait",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 58,
       "wikiPage": "Golden_Shrimp_Bait",
@@ -1107,7 +1107,7 @@
     {
       "id": "whale-bait",
       "name": "Whale Bait",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 59,
       "wikiPage": "Whale_Bait",
@@ -1125,7 +1125,7 @@
     {
       "id": "gobstopper",
       "name": "Gobstopper",
-      "catalogSection": "Limited",
+      "collectionSection": "Limited",
       "rarity": "Limited",
       "sortOrder": 60,
       "wikiPage": "Gobstopper",
@@ -1143,7 +1143,7 @@
     {
       "id": "star",
       "name": "Star",
-      "catalogSection": "Special",
+      "collectionSection": "Special",
       "rarity": "Special",
       "sortOrder": 61,
       "wikiPage": "Star",
@@ -1163,7 +1163,7 @@
     {
       "id": "golden-coin",
       "name": "Golden Coin",
-      "catalogSection": "Special",
+      "collectionSection": "Special",
       "rarity": "Special",
       "sortOrder": 62,
       "wikiPage": "Golden_Coin",
@@ -1183,7 +1183,7 @@
     {
       "id": "singularity",
       "name": "Singularity",
-      "catalogSection": "Special",
+      "collectionSection": "Special",
       "rarity": "Special",
       "sortOrder": 63,
       "wikiPage": "Singularity",
@@ -1203,7 +1203,7 @@
     {
       "id": "ufo",
       "name": "UFO",
-      "catalogSection": "Special",
+      "collectionSection": "Special",
       "rarity": "Special",
       "sortOrder": 64,
       "wikiPage": "UFO",
@@ -1223,7 +1223,7 @@
     {
       "id": "taco",
       "name": "Taco",
-      "catalogSection": "Special",
+      "collectionSection": "Special",
       "rarity": "Special",
       "sortOrder": 65,
       "wikiPage": "Taco",

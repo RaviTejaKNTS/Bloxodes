@@ -5,7 +5,7 @@ description: Write one global Bloxodes catalog final.json after brief approval. 
 
 # Bloxodes Catalog Writing
 
-Use this after `bloxodes-catalog-research` and parent approval. For one Roblox game's item collection, use `bloxodes-game-catalog-writing`.
+Use this after `bloxodes-catalog-research` and parent approval. For one Roblox game's item collection, use `bloxodes-game-collection-writing`.
 
 ## Workflow
 

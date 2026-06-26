@@ -10,8 +10,6 @@ It is based on:
 - `apps/web/src/data/slug_oldslugs.json`
 - `apps/web/src/app/(site)/[slug]/page.tsx`
 - `apps/web/src/app/(site)/catalog/[...slug]/page.tsx`
-- `apps/web/src/app/(site)/catalog/the-forge/[collection]/page.tsx`
-- `apps/web/src/app/(site)/catalog/grow-a-garden/[collection]/page.tsx`
 - `agents/google-analytics-search-console-report-2026-05-23.md`
 - `/private/tmp/bloxodes-seo-audit-2026-05-23.json`
 - `/private/tmp/bloxodes-seo-analysis-2026-05-23.json`
@@ -243,48 +241,41 @@ Action:
 - Link only to `/articles/<slug>`.
 - If any article is deleted later, remove the old root redirect only when the target also has no useful replacement.
 
-## Catalog and Wiki Catalog Migration
+## Catalog and Wiki Collection Migration
 
 The catalog/wiki migration is separate from code pages.
 
 Current direction:
 
 ```text
-/catalog/<game-collection-code> -> /wiki/<game-slug>/<collection-slug>
+/wiki/<game-slug>/<collection-slug>
 ```
 
-Handled by:
-
-- `apps/web/src/app/(site)/catalog/[...slug]/page.tsx`
-- `apps/web/src/lib/game-dataset-catalogs.ts`
-- `apps/web/src/app/(site)/catalog/the-forge/[collection]/page.tsx`
-- `apps/web/src/app/(site)/catalog/grow-a-garden/[collection]/page.tsx`
-
-For game dataset catalog codes, `getGameDatasetCatalogConfigByCode(code)` resolves the old catalog code and the page calls `permanentRedirect()` to the wiki catalog path.
+The old game collection catalog wrappers were removed after search engines caught up. Game collections now live directly under the wiki URL family.
 
 Examples:
 
-| Old URL pattern | Current target pattern |
+| Current URL pattern | Status |
 | --- | --- |
-| `/catalog/wizard-alchemy-materials` | `/wiki/wizard-alchemy/materials` |
-| `/catalog/blox-fruits-fruits` | `/wiki/blox-fruits/fruits` |
-| `/catalog/adopt-me-pets` | `/wiki/adopt-me/pets` |
-| `/catalog/the-forge/ores` | `/wiki/the-forge/ores` |
-| `/catalog/grow-a-garden/crops` | `/wiki/grow-a-garden/crops` |
+| `/wiki/wizard-alchemy/materials` | Canonical game collection page |
+| `/wiki/blox-fruits/fruits` | Canonical game collection page |
+| `/wiki/adopt-me/pets` | Canonical game collection page |
+| `/wiki/the-forge/ores` | Canonical game collection page |
+| `/wiki/grow-a-garden/crops` | Canonical game collection page |
 
 Important detail:
 
-- The old flat catalog code is still a stable identifier in `wiki_catalog_pages.code`.
+- The old flat catalog code is still a stable identifier in `wiki_collection_pages.code`.
 - The public route should be the wiki route.
 - Scripts can keep using the stable code, but public links should use `/wiki/<game>/<collection>`.
 
 Action:
 
-- Keep old catalog redirects while Google/Bing still have old catalog URLs.
+- Old game collection catalog redirects have been removed after search engines caught up.
 - Audit old catalog impressions separately from old code impressions.
-- Make sure catalog cards, wiki hubs, tools, checklists, and articles link to the current wiki catalog route, not `/catalog/<game-collection-code>`.
-- Keep current wiki catalog URLs in `/sitemaps/wiki.xml`.
-- Do not put moved game catalog pages back into `/sitemaps/catalog.xml`.
+- Make sure catalog cards, wiki hubs, tools, checklists, and articles link to the current wiki collection route, not `/catalog/<game-collection-code>`.
+- Keep current wiki collection URLs in `/sitemaps/wiki.xml`.
+- Do not put moved game collection pages back into `/sitemaps/catalog.xml`.
 
 ## Fully Deleted or Unmapped URLs
 
@@ -443,7 +434,7 @@ Use this decision tree for every old URL:
 | Old URL was a category/archive and categories are no longer public | Keep 404 unless category pages return |
 | Old URL has external links or search demand but no replacement | Consider restoring a useful page |
 | Old URL is junk, spam, random, or no-demand | Keep 404 or use 410 if intentionally gone |
-| Old URL was moved to wiki/catalog structure | Permanent redirect to `/wiki/<game>/<collection>` |
+| Old URL was moved to wiki collection structure | Permanent redirect to `/wiki/<game>/<collection>` |
 | Old URL was moved from root article to article route | 301 to `/articles/<slug>` |
 
 ## Do Not Do

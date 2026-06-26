@@ -9,7 +9,7 @@
     "updatedAt": "2026-06-15",
     "columns": [
       "name",
-      "catalogSection",
+      "collectionSection",
       "rarity",
       "source",
       "availability",
@@ -35,7 +35,7 @@
     {
       "id": "standing-bow",
       "name": "Standing Bow",
-      "catalogSection": "Uncommon emotes",
+      "collectionSection": "Uncommon emotes",
       "rarity": "Uncommon",
       "source": "Default unlock",
       "availability": "Obtainable through emote routes unless noted",
@@ -48,7 +48,7 @@
     {
       "id": "touch-gloves",
       "name": "Touch Gloves",
-      "catalogSection": "Uncommon emotes",
+      "collectionSection": "Uncommon emotes",
       "rarity": "Uncommon",
       "source": "Default unlock",
       "availability": "Obtainable through emote routes unless noted",
@@ -61,7 +61,7 @@
     {
       "id": "61",
       "name": "61",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -74,7 +74,7 @@
     {
       "id": "67",
       "name": "67",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -87,7 +87,7 @@
     {
       "id": "caged",
       "name": "Caged",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -100,7 +100,7 @@
     {
       "id": "come-on",
       "name": "Come On",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -113,7 +113,7 @@
     {
       "id": "concentration",
       "name": "Concentration",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -126,7 +126,7 @@
     {
       "id": "cookout",
       "name": "Cookout",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -139,7 +139,7 @@
     {
       "id": "demonic",
       "name": "Demonic",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -152,7 +152,7 @@
     {
       "id": "facepalm",
       "name": "Facepalm",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -165,7 +165,7 @@
     {
       "id": "flute",
       "name": "Flute",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -178,7 +178,7 @@
     {
       "id": "franky",
       "name": "Franky",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -191,7 +191,7 @@
     {
       "id": "friday-night",
       "name": "Friday Night",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -204,7 +204,7 @@
     {
       "id": "gangnam",
       "name": "Gangnam",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -217,7 +217,7 @@
     {
       "id": "heart",
       "name": "Heart",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -230,7 +230,7 @@
     {
       "id": "hit-me",
       "name": "Hit Me",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -243,7 +243,7 @@
     {
       "id": "inspect",
       "name": "Inspect",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -256,7 +256,7 @@
     {
       "id": "kabuki",
       "name": "Kabuki",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -269,7 +269,7 @@
     {
       "id": "karaoke",
       "name": "Karaoke",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -282,7 +282,7 @@
     {
       "id": "kickback",
       "name": "Kickback",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -295,7 +295,7 @@
     {
       "id": "laugh",
       "name": "Laugh",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -308,7 +308,7 @@
     {
       "id": "lesalsa",
       "name": "LeSalsa",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -321,7 +321,7 @@
     {
       "id": "liar",
       "name": "Liar",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -334,7 +334,7 @@
     {
       "id": "lookaway",
       "name": "Lookaway",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -347,7 +347,7 @@
     {
       "id": "muscle",
       "name": "Muscle",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -360,7 +360,7 @@
     {
       "id": "one-arm-pushup",
       "name": "One-Arm Pushup",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -373,7 +373,7 @@
     {
       "id": "overdrive",
       "name": "Overdrive",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -386,7 +386,7 @@
     {
       "id": "pbjt",
       "name": "PBJT",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -399,7 +399,7 @@
     {
       "id": "penguin",
       "name": "Penguin",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -412,7 +412,7 @@
     {
       "id": "poke",
       "name": "Poke",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -425,7 +425,7 @@
     {
       "id": "raise-hand",
       "name": "Raise Hand",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -438,7 +438,7 @@
     {
       "id": "salsa",
       "name": "Salsa",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -451,7 +451,7 @@
     {
       "id": "shadowboxing",
       "name": "Shadowboxing",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -464,7 +464,7 @@
     {
       "id": "shakedown",
       "name": "Shakedown",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -477,7 +477,7 @@
     {
       "id": "sinister",
       "name": "Sinister",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -490,7 +490,7 @@
     {
       "id": "slickback",
       "name": "Slickback",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -503,7 +503,7 @@
     {
       "id": "slide",
       "name": "Slide",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -516,7 +516,7 @@
     {
       "id": "soldier-of-dance",
       "name": "Soldier of Dance",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -529,7 +529,7 @@
     {
       "id": "sturdy",
       "name": "Sturdy",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -542,7 +542,7 @@
     {
       "id": "sumo",
       "name": "Sumo",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -555,7 +555,7 @@
     {
       "id": "t-pose",
       "name": "T-Pose",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -568,7 +568,7 @@
     {
       "id": "take-your-time",
       "name": "Take Your Time",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -581,7 +581,7 @@
     {
       "id": "tetoris",
       "name": "Tetoris",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -594,7 +594,7 @@
     {
       "id": "threat",
       "name": "Threat",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -607,7 +607,7 @@
     {
       "id": "trigger",
       "name": "Trigger",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -620,7 +620,7 @@
     {
       "id": "warmup",
       "name": "Warmup",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -633,7 +633,7 @@
     {
       "id": "wind-up",
       "name": "Wind Up",
-      "catalogSection": "Rare emotes",
+      "collectionSection": "Rare emotes",
       "rarity": "Rare",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -646,7 +646,7 @@
     {
       "id": "24-hour-cinderella",
       "name": "24-Hour Cinderella",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -659,7 +659,7 @@
     {
       "id": "better-call",
       "name": "Better Call",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -672,7 +672,7 @@
     {
       "id": "birthday-cake",
       "name": "Birthday Cake",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -685,7 +685,7 @@
     {
       "id": "clash",
       "name": "Clash",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -698,7 +698,7 @@
     {
       "id": "deadlift",
       "name": "Deadlift",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -711,7 +711,7 @@
     {
       "id": "death-note",
       "name": "Death Note",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -724,7 +724,7 @@
     {
       "id": "gear-second",
       "name": "Gear Second",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -737,7 +737,7 @@
     {
       "id": "geddan",
       "name": "Geddan",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -750,7 +750,7 @@
     {
       "id": "gun-trick-sword",
       "name": "Gun-Trick-Sword",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -763,7 +763,7 @@
     {
       "id": "hakari",
       "name": "Hakari",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -776,7 +776,7 @@
     {
       "id": "lagtrain",
       "name": "Lagtrain",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -789,7 +789,7 @@
     {
       "id": "metsu",
       "name": "Metsu",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -802,7 +802,7 @@
     {
       "id": "motivation-chair",
       "name": "Motivation Chair",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -815,7 +815,7 @@
     {
       "id": "necro",
       "name": "Necro",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -828,7 +828,7 @@
     {
       "id": "pearwell",
       "name": "Pearwell",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -841,7 +841,7 @@
     {
       "id": "power-up",
       "name": "Power Up",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -854,7 +854,7 @@
     {
       "id": "rock-paper-scissors",
       "name": "Rock, Paper, Scissors",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -867,7 +867,7 @@
     {
       "id": "seahorse",
       "name": "Seahorse",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -880,7 +880,7 @@
     {
       "id": "sign",
       "name": "Sign",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -893,7 +893,7 @@
     {
       "id": "take-the-l",
       "name": "Take the L",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -906,7 +906,7 @@
     {
       "id": "torture",
       "name": "Torture",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -919,7 +919,7 @@
     {
       "id": "trollolol",
       "name": "Trollolol",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Limited or currently unobtainable outside trading",
@@ -932,7 +932,7 @@
     {
       "id": "vegetable",
       "name": "Vegetable",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -945,7 +945,7 @@
     {
       "id": "virtual-insanity",
       "name": "Virtual Insanity",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -958,7 +958,7 @@
     {
       "id": "ultimate-apology",
       "name": "Ultimate Apology",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -971,7 +971,7 @@
     {
       "id": "whistle",
       "name": "Whistle",
-      "catalogSection": "Mythic emotes",
+      "collectionSection": "Mythic emotes",
       "rarity": "Mythic",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -984,7 +984,7 @@
     {
       "id": "calculation",
       "name": "Calculation",
-      "catalogSection": "Legendary emotes",
+      "collectionSection": "Legendary emotes",
       "rarity": "Legendary",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -997,7 +997,7 @@
     {
       "id": "dragon",
       "name": "Dragon",
-      "catalogSection": "Legendary emotes",
+      "collectionSection": "Legendary emotes",
       "rarity": "Legendary",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -1010,7 +1010,7 @@
     {
       "id": "guitar",
       "name": "Guitar",
-      "catalogSection": "Legendary emotes",
+      "collectionSection": "Legendary emotes",
       "rarity": "Legendary",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -1023,7 +1023,7 @@
     {
       "id": "phone-summon",
       "name": "Phone Summon",
-      "catalogSection": "Legendary emotes",
+      "collectionSection": "Legendary emotes",
       "rarity": "Legendary",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Obtainable through emote routes unless noted",
@@ -1036,7 +1036,7 @@
     {
       "id": "medal-selfie",
       "name": "Medal Selfie",
-      "catalogSection": "Legendary emotes",
+      "collectionSection": "Legendary emotes",
       "rarity": "Legendary",
       "source": "Emote spins, daily rewards, or trading",
       "availability": "Limited or currently unobtainable outside trading",

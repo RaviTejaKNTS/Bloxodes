@@ -2,7 +2,7 @@ import { getApprovedComments } from "@/lib/comments";
 import { CommentsClient } from "./CommentsClient";
 
 type CommentsSectionProps = {
-  entityType: "code" | "article" | "catalog" | "event" | "tool" | "wiki" | "wiki_catalog";
+  entityType: "code" | "article" | "catalog" | "event" | "tool" | "wiki" | "wiki_collection";
   entityId: string;
 };
 

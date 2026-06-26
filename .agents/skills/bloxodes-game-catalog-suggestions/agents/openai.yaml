@@ -1,4 +1,0 @@
-interface:
-  display_name: "Bloxodes Game Catalog Suggestions"
-  short_description: "Suggest game catalog pages"
-  default_prompt: "Use $bloxodes-game-catalog-suggestions to research one Roblox game and return only game catalog page recommendations. Check existing catalog coverage first, complete the source check, then label each idea create, already covered, skip, or source discovery incomplete."

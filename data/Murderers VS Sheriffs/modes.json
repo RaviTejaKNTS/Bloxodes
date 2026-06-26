@@ -4,7 +4,7 @@
     "updatedAt": "2026-05-31",
     "columns": [
       "name",
-      "catalogSection",
+      "collectionSection",
       "teamSize",
       "queuePlace",
       "placeId",
@@ -49,7 +49,7 @@
     {
       "name": "1v1",
       "slug": "1v1",
-      "catalogSection": "Solo practice",
+      "collectionSection": "Solo practice",
       "teamSize": "1 per side",
       "queuePlace": "[DUELS] 1v1",
       "placeId": 124848751642883,
@@ -70,7 +70,7 @@
     {
       "name": "2v2",
       "slug": "2v2",
-      "catalogSection": "Team queues",
+      "collectionSection": "Team queues",
       "teamSize": "2 per side",
       "queuePlace": "[DUELS] 2v2",
       "placeId": 92876937625630,
@@ -91,7 +91,7 @@
     {
       "name": "3v3",
       "slug": "3v3",
-      "catalogSection": "Team queues",
+      "collectionSection": "Team queues",
       "teamSize": "3 per side",
       "queuePlace": "[DUELS] 3v3",
       "placeId": 101617670515690,
@@ -112,7 +112,7 @@
     {
       "name": "Pro Servers",
       "slug": "pro-servers",
-      "catalogSection": "Pro access",
+      "collectionSection": "Pro access",
       "teamSize": "Not listed",
       "queuePlace": "[DUELS] Pro Servers",
       "placeId": 74084441161738,

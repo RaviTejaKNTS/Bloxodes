@@ -9,7 +9,7 @@
       "unlocks",
       "route",
       "availability",
-      "catalogSection",
+      "collectionSection",
       "cardSummary",
       "image"
     ],
@@ -34,7 +34,7 @@
       "unlocks": "Open path movement",
       "route": "Outdoor lane",
       "availability": "Route obstacle",
-      "catalogSection": "Push obstacles",
+      "collectionSection": "Push obstacles",
       "cardSummary": "Outdoor boulders are the main push obstacle on open routes. They block forward movement until your Strength can move them.",
       "image": "/Push%20Rock%20for%20Brainrots/Rocks/outdoor-boulder.jpg",
       "sourcePage": "https://www.roblox.com/games/75888315541325/Push-Rock-for-Brainrots"
@@ -46,7 +46,7 @@
       "unlocks": "Brainrot cell lane",
       "route": "Indoor rescue corridor",
       "availability": "Route obstacle",
-      "catalogSection": "Push obstacles",
+      "collectionSection": "Push obstacles",
       "cardSummary": "Dungeon boulders appear inside narrow rescue corridors. They matter because the Brainrot is visible behind the gate.",
       "image": "/Push%20Rock%20for%20Brainrots/Rocks/dungeon-boulder.jpg",
       "sourcePage": "https://www.roblox.com/games/75888315541325/Push-Rock-for-Brainrots"
@@ -58,7 +58,7 @@
       "unlocks": "Common Brainrot area",
       "route": "Common wall",
       "availability": "Rarity gate",
-      "catalogSection": "Rarity gates",
+      "collectionSection": "Rarity gates",
       "cardSummary": "The Common gate is the first visible rarity wall in the Basic Overview route and points players toward early Brainrot rescues.",
       "image": "/Push%20Rock%20for%20Brainrots/Rocks/common-gate.jpg",
       "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
@@ -70,7 +70,7 @@
       "unlocks": "Rare Brainrot area",
       "route": "Rare wall",
       "availability": "Rarity gate",
-      "catalogSection": "Rarity gates",
+      "collectionSection": "Rarity gates",
       "cardSummary": "The Rare gate marks the next rarity area after the early route, so it is a progress checkpoint rather than a normal loose boulder.",
       "image": "/Push%20Rock%20for%20Brainrots/Rocks/rare-gate.jpg",
       "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
@@ -82,7 +82,7 @@
       "unlocks": "Epic Brainrot area",
       "route": "Epic wall",
       "availability": "Rarity gate",
-      "catalogSection": "Rarity gates",
+      "collectionSection": "Rarity gates",
       "cardSummary": "The Epic gate is a mid-route rarity gate. It is useful to track because the route changes from normal rescues into stronger rarity targets.",
       "image": "/Push%20Rock%20for%20Brainrots/Rocks/epic-gate.jpg",
       "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
@@ -94,7 +94,7 @@
       "unlocks": "Legendary Brainrot area",
       "route": "Legendary wall",
       "availability": "Rarity gate",
-      "catalogSection": "Rarity gates",
+      "collectionSection": "Rarity gates",
       "cardSummary": "The Legendary gate appears before the highest visible rarity lanes, making it a checkpoint for players pushing past early cash gains.",
       "image": "/Push%20Rock%20for%20Brainrots/Rocks/legendary-gate.jpg",
       "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
@@ -106,7 +106,7 @@
       "unlocks": "Secret Brainrot area",
       "route": "Secret wall",
       "availability": "Rarity gate",
-      "catalogSection": "High-rarity gates",
+      "collectionSection": "High-rarity gates",
       "cardSummary": "The Secret gate points toward rare Brainrot rescues such as Esok Sekolah and Elephant.",
       "image": "/Push%20Rock%20for%20Brainrots/Rocks/secret-gate.jpg",
       "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
@@ -118,7 +118,7 @@
       "unlocks": "God Brainrot area",
       "route": "God wall",
       "availability": "Rarity gate",
-      "catalogSection": "High-rarity gates",
+      "collectionSection": "High-rarity gates",
       "cardSummary": "The God gate is a late-route rarity wall. Treat it as a Strength checkpoint before spending time on a long push.",
       "image": "/Push%20Rock%20for%20Brainrots/Rocks/god-gate.jpg",
       "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
@@ -130,7 +130,7 @@
       "unlocks": "Celestial Brainrot area",
       "route": "Celestial wall",
       "availability": "Rarity gate",
-      "catalogSection": "High-rarity gates",
+      "collectionSection": "High-rarity gates",
       "cardSummary": "The Celestial gate is one of the highest route gates, so it belongs near the end of the rock path.",
       "image": "/Push%20Rock%20for%20Brainrots/Rocks/celestial-gate.jpg",
       "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"

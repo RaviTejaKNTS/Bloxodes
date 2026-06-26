@@ -1,0 +1,23 @@
+import type { GameCollectionGroup } from "../types";
+
+export const petSimulator99CollectionGroup = {
+    gameSlug: "pet-simulator-99",
+    gameName: "Pet Simulator 99",
+    universeId: 3317771874,
+    dataDir: "Pet Simulator 99",
+    universeNames: ["Pet Simulator 99"],
+    collections: [
+      "pets",
+      "eggs",
+      "enchants",
+      "potions",
+      "areas",
+      "machines",
+      "charms",
+      "hoverboards",
+      "booths",
+      "mastery",
+      "minigames",
+      "shiny-relics"
+    ]
+  } satisfies GameCollectionGroup;

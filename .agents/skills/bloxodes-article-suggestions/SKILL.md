@@ -27,7 +27,7 @@ Do a proper deep dive search, do not settle for what was indexed in initial sear
 
 1. Suggest articles that answer one clear reader question.
 2. Suggest evergreen articles rather than event specific or timely or outdated article topics.
-3. Articles ideas should not merge with our page types like codes, events, wiki, wiki catalogs.
+3. Articles ideas should not merge with our page types like codes, events, wiki, or game collections.
 4. Does not have to stick with topics covered by other websites, you can go out your way and suggest topics that can helpful for people even if no one has already covered. Make sure these are accurate to the game or topic.
 
 Most importantly, along with good guides or listicles, you can go creative and suggest various topics like

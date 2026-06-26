@@ -37,9 +37,9 @@ describe("public cache tags", () => {
     expect(cacheTagsForEvent("puzzle", "connections/2026-06-24")).toEqual(expect.arrayContaining(["puzzles", "puzzles-index"]));
   });
 
-  it("tags wiki catalog pages with both wiki and collection tags", () => {
+  it("tags wiki collection pages with both wiki and collection tags", () => {
     expect(cacheTagsForPath("/wiki/slime-rng/slimes")).toEqual(
-      expect.arrayContaining(["wiki:slime-rng", "wiki-catalog:slime-rng/slimes", "wiki-catalog-index"])
+      expect.arrayContaining(["wiki:slime-rng", "wiki-collection:slime-rng/slimes", "wiki-collection-index"])
     );
   });
 

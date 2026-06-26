@@ -162,7 +162,7 @@ Feedback: round 1 added info but kept the same shapes → read as "more text, mo
 ### 2026-06-24 — Game discovery sidebar (step 2) done
 Scope: a single uniform, server-rendered "discover more of this game" sidebar on **codes, articles, events, quizzes** detail pages (not wiki/stats/catalog/tools/checklists). Driven only by `(universeId, universeName, currentType)`; the page's own type is excluded. No per-page special-casing.
 
-- New `lib/game-sidebar.ts` — `getGameSidebarData(universeId)` fetches everything in one parallel pass: wiki, game catalogs (+ item counts), stats (rank/CCU/slug), next event (only upcoming/live), single codes page, checklist, quiz (+ deterministic first question), tools, articles. Falls back to general articles + global catalogs when the game has < 3 of its own cards.
+- New `lib/game-sidebar.ts` — `getGameSidebarData(universeId)` fetches everything in one parallel pass: wiki, game collections (+ item counts), stats (rank/CCU/slug), next event (only upcoming/live), single codes page, checklist, quiz (+ deterministic first question), tools, articles. Falls back to general articles + global catalogs when the game has < 3 of its own cards.
 - New helpers: `getWikiByUniverseId` (wiki.ts), `getQuizByUniverseId` (quizzes.ts), `getUniverseStatsSummary` (stats.ts).
 - New components under `components/game-sidebar/`:
   - `GameDiscoverySidebar.tsx` (server container; ordered stack: wiki → catalog list → stats → event → codes → checklist → quiz → tools → articles → fallback). Server sub-cards (wiki, catalog list, stats, codes, articles) inline.

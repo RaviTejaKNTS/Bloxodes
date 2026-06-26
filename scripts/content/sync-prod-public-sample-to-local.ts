@@ -215,22 +215,22 @@ async function main() {
 
   const universeIds = new Set<number>();
 
-  const [tools, catalogPages, wikiCatalogPages, quizPages, checklistPages, eventsPages] = await Promise.all([
+  const [tools, catalogPages, wikiCollectionPages, quizPages, checklistPages, eventsPages] = await Promise.all([
     fetchAll(source, "tools", (query) => query.order("updated_at", { ascending: false })),
     fetchAll(source, "catalog_pages", (query) => query.order("updated_at", { ascending: false })),
-    fetchAll(source, "wiki_catalog_pages", (query) => query.order("updated_at", { ascending: false })),
+    fetchAll(source, "wiki_collection_pages", (query) => query.order("updated_at", { ascending: false })),
     fetchAll(source, "quiz_pages", (query) => query.eq("is_published", true).order("updated_at", { ascending: false }).limit(50)),
     fetchAll(source, "checklist_pages", (query) => query.eq("is_public", true).order("updated_at", { ascending: false }).limit(50)),
     fetchAll(source, "events_pages", (query) => query.eq("is_published", true).order("updated_at", { ascending: false }).limit(50))
   ]);
 
-  [tools, catalogPages, wikiCatalogPages, quizPages, checklistPages, eventsPages].forEach((rows) => addUniverseIds(universeIds, rows));
+  [tools, catalogPages, wikiCollectionPages, quizPages, checklistPages, eventsPages].forEach((rows) => addUniverseIds(universeIds, rows));
 
   const codePages = await fetchPreferredCodePages();
   addUniverseIds(universeIds, codePages);
 
-  const wikiPageIds = uniq(wikiCatalogPages.map((row) => getString(row, "wiki_page_id")));
-  const wikiSlugs = uniq(wikiCatalogPages.map((row) => getString(row, "wiki_slug")));
+  const wikiPageIds = uniq(wikiCollectionPages.map((row) => getString(row, "wiki_page_id")));
+  const wikiSlugs = uniq(wikiCollectionPages.map((row) => getString(row, "wiki_slug")));
   const wikiPagesById = await fetchByValues("wiki_pages", "id", wikiPageIds);
   const wikiPagesBySlug = await fetchByValues("wiki_pages", "slug", wikiSlugs);
   const wikiPagesByUniverse = await fetchByValues("wiki_pages", "universe_id", [...universeIds]);
@@ -275,7 +275,7 @@ async function main() {
   await upsertRows("code_pages", codePages, "id");
   await upsertRows("wiki_pages", wikiPages, "id");
   await upsertRows("catalog_pages", catalogPages, "code");
-  await upsertRows("wiki_catalog_pages", wikiCatalogPages, "code");
+  await upsertRows("wiki_collection_pages", wikiCollectionPages, "code");
   await upsertRows("tools", tools, "code");
   await upsertRows("quiz_pages", quizPages, "code");
   await upsertRows("checklist_pages", checklistPages, "id");

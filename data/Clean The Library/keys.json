@@ -4,12 +4,12 @@
     "collection": "keys",
     "universeId": 10226701629,
     "updatedAt": "2026-06-24",
-    "groupBy": "catalogSection",
+    "groupBy": "collectionSection",
     "columns": [
       "name",
       "color",
       "effect",
-      "catalogSection",
+      "collectionSection",
       "cardSummary",
       "image"
     ],
@@ -28,7 +28,7 @@
       "slug": "crimson-octagon",
       "color": "Red",
       "effect": "Permanently increases your jump height, helping you reach raised platforms and shortcuts.",
-      "catalogSection": "Keys",
+      "collectionSection": "Keys",
       "cardSummary": "The Crimson Octagon is a red key that permanently raises your jump height, making elevated areas easier to reach.",
       "image": "",
       "sourcePage": "https://cleanthelibrary.wiki/keys/"
@@ -38,7 +38,7 @@
       "slug": "golden-diamond",
       "color": "Gold",
       "effect": "Permanently increases your carry capacity by 3, the largest single carry boost.",
-      "catalogSection": "Keys",
+      "collectionSection": "Keys",
       "cardSummary": "The Golden Diamond is a gold key that adds +3 carry capacity, letting you hold more books per trip.",
       "image": "",
       "sourcePage": "https://cleanthelibrary.wiki/keys/"
@@ -48,7 +48,7 @@
       "slug": "azure-star",
       "color": "Blue",
       "effect": "Permanently increases your carry capacity by 2, and stacks with the Golden Diamond.",
-      "catalogSection": "Keys",
+      "collectionSection": "Keys",
       "cardSummary": "The Azure Star is a blue key that adds +2 carry capacity. It stacks with the Golden Diamond for more carrying room.",
       "image": "",
       "sourcePage": "https://cleanthelibrary.wiki/keys/"
@@ -58,7 +58,7 @@
       "slug": "emerald-club",
       "color": "Green",
       "effect": "Permanently grants sprint, letting you move faster across the library.",
-      "catalogSection": "Keys",
+      "collectionSection": "Keys",
       "cardSummary": "The Emerald Club is a green key that unlocks faster movement, speeding up long trips across the library.",
       "image": "",
       "sourcePage": "https://cleanthelibrary.wiki/keys/"

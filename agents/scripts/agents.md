@@ -104,11 +104,11 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Collect avatar animation items | `scripts/catalog/collect-roblox-avatar-animation-items.ts` | `npm run collect:avatar-animation-items` |
 | Collect Roblox makeup avatar items | `scripts/catalog/collect-roblox-makeup-items.ts` | `npm run collect:makeup-items` |
 | Collect Grow a Garden local catalog images | `scripts/catalog/collect-grow-a-garden-images.ts` | `npm run collect:grow-a-garden-images` |
-| Collect Slime RNG local catalog data and images | `scripts/catalog/collect-slime-rng-data.ts` | `npm run collect:slime-rng-data` |
-| Seed gathered game catalog pages into Supabase | `scripts/catalog/seed-game-catalog-pages.ts` | `npm run seed:game-catalog-pages`, add `-- --dry-run` to preview; add `-- --final-json-root tmp/content-workspace/<game-slug>/catalogs` when approved page `final.json` files should override generated copy; supports new `<collection-slug>/final.json` and older `<catalog-code>/final.json` folders |
-| Register game catalog collection | `scripts/catalog/register-game-catalog.ts` | `npm run register:game-catalog -- --game <game-slug> --collection <collection-slug> --dry-run` first; edits existing game groups only and prints a manual block when the game group is missing |
-| Check game catalog dataset readiness | `scripts/catalog/check-game-catalog-data.ts` | `npm run check:game-catalog-data -- --game <game-slug> --collection <collection-slug> --final-json <final.json>`; validates sections, card fields, card summaries, images, config, and `description_json` section keys |
-| Collect game catalog images from manifest | `scripts/catalog/collect-catalog-images.ts` | `npm run collect:catalog-images -- --manifest <images.json> --dataset data/<Game>/<collection>.json --game-name "<Game>" --collection-name "<Collection>" --dry-run` first |
+| Collect Slime RNG local collection data and images | `scripts/collections/collect-slime-rng-data.ts` | `npm run collect:slime-rng-data` |
+| Seed gathered game collection pages into Supabase | `scripts/collections/seed-game-collection-pages.ts` | `npm run seed:game-collection-pages`, add `-- --dry-run` to preview; add `-- --final-json-root tmp/content-workspace/<game-slug>/collections` when approved page `final.json` files should override generated copy; supports new `<collection-slug>/final.json` and older `<catalog-code>/final.json` folders |
+| Register game collection | `scripts/collections/register-game-collection.ts` | `npm run register:game-collection -- --game <game-slug> --collection <collection-slug> --dry-run` first; edits existing game groups only and prints a manual block when the game group is missing |
+| Check game collection dataset readiness | `scripts/collections/check-game-collection-data.ts` | `npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug> --final-json <final.json>`; validates sections, card fields, card summaries, images, config, and `description_json` section keys |
+| Collect game collection images from manifest | `scripts/collections/collect-collection-images.ts` | `npm run collect:collection-images -- --manifest <images.json> --dataset data/<Game>/<collection>.json --game-name "<Game>" --collection-name "<Collection>" --dry-run` first |
 | Seed broad catalog pages into Supabase | `scripts/catalog/seed-catalog-pages.ts` | `npm run seed:catalog-pages -- --file tmp/content-workspace/<topic>/catalogs/<batch>/final.json --dry-run`; writes to local Supabase by default and refuses production unless `--allow-prod` is supplied |
 | Seed gathered game wiki pages into Supabase | `scripts/catalog/seed-game-wiki-pages.ts` | `npm run seed:game-wiki-pages`, add `-- --dry-run` to preview |
 | Import reviewed content final JSON into Supabase | `scripts/content/import-content-final.ts` | `npm run import:content-final -- --file tmp/content-workspace/<game-or-topic-slug>/<page-folder>/final.json --dry-run`; article imports write only to `articles`, fill missing authors randomly, create edited game-thumbnail covers when needed, inject the feature image before the first H2, and require `/articles` plus `/articles/<slug>` verification against the same saved row |
@@ -140,7 +140,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Report redeem markdown image gaps | `scripts/backfill/report-redeem-md-missing-images.ts` | direct `tsx scripts/backfill/report-redeem-md-missing-images.ts` |
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |
 
-### Wiki And Game Catalog Production Publish
+### Wiki And Game Collection Production Publish
 
 Use this only after local content, data, images, DB readback, and rendered routes are clean.
 
@@ -150,23 +150,23 @@ Use this only after local content, data, images, DB readback, and rendered route
 2. Confirm or create the production `roblox_universes` row first. Prefer universe ID, root place ID, display name, creator, and Roblox URL. Treat `roblox_universes.slug` as a stats-only URL slug, not as the source for page slugs.
 3. Check existing production rows before writing:
    - `wiki_pages.slug = <editorial-game-slug>`
-   - `wiki_catalog_pages.code in (<game-slug>-<collection-slug>...)`
-   - `wiki_catalog_pages.wiki_slug = <editorial-game-slug>` and `collection_slug`
+   - `wiki_collection_pages.code in (<game-slug>-<collection-slug>...)`
+   - `wiki_collection_pages.wiki_slug = <editorial-game-slug>` and `collection_slug`
 4. Run production dry-runs:
 
 ```bash
 NODE_ENV=production npm run seed:game-wiki-pages -- --dry-run --game <game-slug>
-NODE_ENV=production npm run seed:game-catalog-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/catalogs
+NODE_ENV=production npm run seed:game-collection-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections
 ```
 
 5. Push in order:
 
 ```bash
 NODE_ENV=production npm run seed:game-wiki-pages -- --game <game-slug> --allow-prod
-NODE_ENV=production npm run seed:game-catalog-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/catalogs --allow-prod
+NODE_ENV=production npm run seed:game-collection-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections --allow-prod
 ```
 
-Read back the production wiki row after the wiki push, before catalog seeding, so catalog rows can link to the production `wiki_page_id`.
+Read back the production wiki row after the wiki push, before collection seeding, so collection rows can link to the production `wiki_page_id`.
 
 After DB publish, push and deploy only the current game's repo artifacts required by those pages: `data/<Game>/`, `apps/web/public/<Game>/`, game dataset config/rendering code, and approved seed-script changes for that game. Do not include unrelated docs, other game data, temporary workspace files, or unrelated code in the game release commit.
 
@@ -175,7 +175,7 @@ Do not manually queue revalidation by default. Wait and poll live pages for up t
 The publish is done only when live production pages return 200 and render the expected content:
 
 - `/wiki/<game-slug>`
-- `/wiki/<game-slug>/<collection-slug>` for every pushed catalog
+- `/wiki/<game-slug>/<collection-slug>` for every pushed collection
 - item names, counts, sections, fields, descriptions, FAQs, and wired images
 - sitemap entries when applicable
 

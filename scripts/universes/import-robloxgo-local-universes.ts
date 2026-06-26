@@ -139,7 +139,7 @@ const NULLABLE_UNIVERSE_REFERENCES = [
   "games",
   "quiz_pages",
   "tools",
-  "wiki_catalog_pages",
+  "wiki_collection_pages",
   "wiki_pages"
 ];
 

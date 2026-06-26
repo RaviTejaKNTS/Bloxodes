@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Demonology equipment data",
-    "groupBy": "catalogSection",
+    "groupBy": "collectionSection",
     "sources": [
       {
         "label": "Demonology Fandom Wiki - Equipment (canonical, authoritative for prices, unlock levels, carry quantities)",
@@ -27,7 +27,7 @@
     "columns": [
       "name",
       "image",
-      "catalogSection",
+      "collectionSection",
       "price",
       "unlockLevel",
       "carryQuantity",
@@ -45,7 +45,7 @@
     {
       "name": "Blacklight",
       "slug": "blacklight",
-      "catalogSection": "Starter Equipment",
+      "collectionSection": "Starter Equipment",
       "price": "$30",
       "unlockLevel": "Level 0",
       "carryQuantity": "2",
@@ -55,7 +55,7 @@
     {
       "name": "EMF Reader",
       "slug": "emf-reader",
-      "catalogSection": "Starter Equipment",
+      "collectionSection": "Starter Equipment",
       "price": "$35",
       "unlockLevel": "Level 0",
       "carryQuantity": "2",
@@ -65,7 +65,7 @@
     {
       "name": "Flashlight",
       "slug": "flashlight",
-      "catalogSection": "Starter Equipment",
+      "collectionSection": "Starter Equipment",
       "price": "$25",
       "unlockLevel": "Level 0",
       "carryQuantity": "4",
@@ -75,7 +75,7 @@
     {
       "name": "Flower Pot",
       "slug": "flower-pot",
-      "catalogSection": "Starter Equipment",
+      "collectionSection": "Starter Equipment",
       "price": "$40",
       "unlockLevel": "Level 0",
       "carryQuantity": "2",
@@ -85,7 +85,7 @@
     {
       "name": "Laser Projector",
       "slug": "laser-projector",
-      "catalogSection": "Starter Equipment",
+      "collectionSection": "Starter Equipment",
       "price": "$50",
       "unlockLevel": "Level 0",
       "carryQuantity": "2",
@@ -95,7 +95,7 @@
     {
       "name": "Spirit Book",
       "slug": "spirit-book",
-      "catalogSection": "Starter Equipment",
+      "collectionSection": "Starter Equipment",
       "price": "$40",
       "unlockLevel": "Level 0",
       "carryQuantity": "2",
@@ -105,7 +105,7 @@
     {
       "name": "Spirit Box",
       "slug": "spirit-box",
-      "catalogSection": "Starter Equipment",
+      "collectionSection": "Starter Equipment",
       "price": "$40",
       "unlockLevel": "Level 0",
       "carryQuantity": "2",
@@ -115,7 +115,7 @@
     {
       "name": "Thermometer",
       "slug": "thermometer",
-      "catalogSection": "Starter Equipment",
+      "collectionSection": "Starter Equipment",
       "price": "$30",
       "unlockLevel": "Level 0",
       "carryQuantity": "2",
@@ -125,7 +125,7 @@
     {
       "name": "Video Camera",
       "slug": "video-camera",
-      "catalogSection": "Starter Equipment",
+      "collectionSection": "Starter Equipment",
       "price": "$40",
       "unlockLevel": "Level 0",
       "carryQuantity": "3",
@@ -135,7 +135,7 @@
     {
       "name": "Photo Camera",
       "slug": "photo-camera",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$45",
       "unlockLevel": "Level 3",
       "carryQuantity": "3",
@@ -145,7 +145,7 @@
     {
       "name": "Cross",
       "slug": "cross",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$40",
       "unlockLevel": "Level 5",
       "carryQuantity": "2",
@@ -155,7 +155,7 @@
     {
       "name": "Lighter",
       "slug": "lighter",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$10",
       "unlockLevel": "Level 5",
       "carryQuantity": "3",
@@ -165,7 +165,7 @@
     {
       "name": "Lantern",
       "slug": "lantern",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$15",
       "unlockLevel": "Level 7",
       "carryQuantity": "3",
@@ -175,7 +175,7 @@
     {
       "name": "Salt Canister",
       "slug": "salt-canister",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$35",
       "unlockLevel": "Level 10",
       "carryQuantity": "3",
@@ -185,7 +185,7 @@
     {
       "name": "Energy Drink",
       "slug": "energy-drink",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$35",
       "unlockLevel": "Level 12",
       "carryQuantity": "4",
@@ -195,7 +195,7 @@
     {
       "name": "Head-Mounted Camera",
       "slug": "head-mounted-camera",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$25",
       "unlockLevel": "Level 15",
       "carryQuantity": "4",
@@ -205,7 +205,7 @@
     {
       "name": "Holy Oil",
       "slug": "holy-oil",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$60",
       "unlockLevel": "Level 19",
       "carryQuantity": "1",
@@ -215,7 +215,7 @@
     {
       "name": "Energy Watch",
       "slug": "energy-watch",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$30",
       "unlockLevel": "Level 20",
       "carryQuantity": "4",
@@ -225,7 +225,7 @@
     {
       "name": "LIDAR Scanner",
       "slug": "lidar-scanner",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$45",
       "unlockLevel": "Level 25",
       "carryQuantity": "2",
@@ -235,7 +235,7 @@
     {
       "name": "Plushie",
       "slug": "plushie",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$35",
       "unlockLevel": "Level 30",
       "carryQuantity": "1",
@@ -245,7 +245,7 @@
     {
       "name": "Defibrillator",
       "slug": "defibrillator",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$100",
       "unlockLevel": "Level 35",
       "carryQuantity": "1",
@@ -255,7 +255,7 @@
     {
       "name": "Rock Salt Shotgun",
       "slug": "rock-salt-shotgun",
-      "catalogSection": "Purchasable Equipment",
+      "collectionSection": "Purchasable Equipment",
       "price": "$100",
       "unlockLevel": "Level 40",
       "carryQuantity": "1",
@@ -265,7 +265,7 @@
     {
       "name": "Plushie (Legacy)",
       "slug": "plushie-legacy",
-      "catalogSection": "Limited-Time Equipment",
+      "collectionSection": "Limited-Time Equipment",
       "price": "$65",
       "unlockLevel": "Level 0",
       "carryQuantity": "1",

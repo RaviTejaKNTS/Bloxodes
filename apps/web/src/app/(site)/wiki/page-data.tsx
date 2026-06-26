@@ -53,8 +53,8 @@ import { IndexPageStats } from "@/components/IndexPageStats";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { cleanRewardsText, isCodeNew } from "@/lib/code-utils";
-import { listGameDatasetCatalogImageUrls } from "@/lib/game-dataset-catalog-images";
-import { buildWikiCatalogPath } from "@/lib/wiki-catalog";
+import { listGameCollectionImageUrls } from "@/lib/game-collection-images";
+import { buildWikiCollectionPath } from "@/lib/wiki-collections";
 
 const ROBLOX_BASE_URL = "https://www.roblox.com";
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
@@ -1007,7 +1007,7 @@ function buildQuizCards(page: WikiPageContent, related: WikiRelatedData): QuizCa
   }));
 }
 
-async function buildWikiCatalogBlocks(related: WikiRelatedData) {
+async function buildWikiCollectionBlocks(related: WikiRelatedData) {
   const pagesWithCopy = related.catalogPages
     .map((page) => ({ page, copy: normalizeText(page.wiki_md) }))
     .filter((entry) => Boolean(entry.copy)) as Array<{
@@ -1019,9 +1019,9 @@ async function buildWikiCatalogBlocks(related: WikiRelatedData) {
     pagesWithCopy.map(async ({ page, copy }) => {
       const [html, imageUrls] = await Promise.all([
         renderMarkdown(copy, { paragraphizeLineBreaks: true }),
-        listGameDatasetCatalogImageUrls(page.code, 6)
+        listGameCollectionImageUrls(page.code, 6)
       ]);
-      const nodes = renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix: `wiki-catalog-${page.code}` });
+      const nodes = renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix: `wiki-collection-${page.code}` });
 
       return {
         page,
@@ -1040,7 +1040,7 @@ function normalizeWikiImageUrls(value?: string[] | null): string[] {
     .slice(0, 6);
 }
 
-function WikiCatalogCta({
+function WikiCollectionCta({
   href,
   title,
   imageUrls
@@ -1281,7 +1281,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const socialSectionClassName = hasControlsSection && !tipsNodes?.length
     ? "min-w-0 space-y-4"
     : "min-w-0 space-y-4 border-t border-border/60 pt-8";
-  const catalogBlocks = await buildWikiCatalogBlocks(related);
+  const catalogBlocks = await buildWikiCollectionBlocks(related);
   const developerLinks = developerGameLinks(related);
   const creatorUrl = buildCreatorUrl(page);
   const creatorLabel = normalizeText(page.universe_creator_name) ?? "Developer";
@@ -1467,7 +1467,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                     key={catalogPage.code}
                     className="space-y-4"
                     data-analytics-event="select_item"
-                    data-analytics-item-list-name="wiki_catalog"
+                    data-analytics-item-list-name="wiki_collection"
                     data-analytics-item-id={catalogPage.code}
                     data-analytics-item-name={catalogPage.title}
                     data-analytics-content-type="catalog"
@@ -1477,8 +1477,8 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                         {nodes}
                       </div>
                     ) : null}
-                    <WikiCatalogCta
-                      href={buildWikiCatalogPath(catalogPage.wiki_slug, catalogPage.collection_slug)}
+                    <WikiCollectionCta
+                      href={buildWikiCollectionPath(catalogPage.wiki_slug, catalogPage.collection_slug)}
                       title={catalogPage.title}
                       imageUrls={imageUrls}
                     />

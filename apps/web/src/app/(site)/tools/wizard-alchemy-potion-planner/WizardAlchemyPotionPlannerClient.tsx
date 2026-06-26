@@ -59,7 +59,7 @@ export function WizardAlchemyPotionPlannerClient({ potions, materials }: Props) 
     [materials]
   );
   const shards = useMemo(
-    () => materials.filter((item) => item.catalogSection === "Elemental shards"),
+    () => materials.filter((item) => item.collectionSection === "Elemental shards"),
     [materials]
   );
   const [selectedPotionName, setSelectedPotionName] = useState(sortedPotions[0]?.name ?? "");

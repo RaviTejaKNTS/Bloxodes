@@ -12,7 +12,7 @@ import { getQuizByUniverseId, loadQuizData } from "@/lib/quizzes";
 import { buildServerQuizAttempt } from "@/lib/quiz-attempts";
 import { getUniverseStatsSummary } from "@/lib/stats";
 import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
-import { buildWikiCatalogPath, listPublishedWikiCatalogPagesByUniverseId } from "@/lib/wiki-catalog";
+import { buildWikiCollectionPath, listPublishedWikiCollectionPagesByUniverseId } from "@/lib/wiki-collections";
 import { listPublishedTopLevelCatalogPages } from "@/lib/catalog";
 import { resolveCatalogCardMeta, type CatalogIconKey } from "@/lib/catalog-card-meta";
 
@@ -73,7 +73,7 @@ export async function getGameSidebarData(universeId: number): Promise<GameSideba
   const [wiki, catalogRows, stats, eventSummary, eventsPage, codesRows, checklistRows, quizEntry, tools, articleRows] =
     await Promise.all([
       getWikiByUniverseId(universeId).catch(() => null),
-      listPublishedWikiCatalogPagesByUniverseId(universeId).catch(() => []),
+      listPublishedWikiCollectionPagesByUniverseId(universeId).catch(() => []),
       getUniverseStatsSummary(universeId).catch(() => null),
       getUniverseEventSummary(universeId).catch(() => null),
       getEventsPageByUniverseId(universeId).catch(() => null),
@@ -88,7 +88,7 @@ export async function getGameSidebarData(universeId: number): Promise<GameSideba
   const catalogs: SidebarCatalogLink[] = (catalogRows ?? [])
     .filter((row) => row.wiki_slug && row.collection_slug)
     .map((row) => ({
-      href: buildWikiCatalogPath(row.wiki_slug as string, row.collection_slug as string),
+      href: buildWikiCollectionPath(row.wiki_slug as string, row.collection_slug as string),
       title: row.display_name?.trim() || row.title,
       count: typeof row.item_count === "number" ? row.item_count : null
     }));

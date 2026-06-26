@@ -116,7 +116,7 @@ Useful filters:
 - creator or group
 - has Bloxodes codes page
 - has Bloxodes wiki page
-- has game catalog pages
+- has game collection pages
 
 Useful sort options:
 

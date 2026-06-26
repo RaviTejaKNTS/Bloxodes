@@ -12,7 +12,7 @@
     "columns": [
       "name",
       "tier",
-      "catalogSection",
+      "collectionSection",
       "effect",
       "recipe",
       "partRoute",
@@ -39,7 +39,7 @@
       "tags": [
         "sea-2"
       ],
-      "catalogSection": "Raw damage",
+      "collectionSection": "Raw damage",
       "partRoute": "Starter Island + Punch Island parts",
       "bestFor": "Boss damage and general DPS"
     },
@@ -62,7 +62,7 @@
       "tags": [
         "sea-2"
       ],
-      "catalogSection": "Critical stats",
+      "collectionSection": "Critical stats",
       "partRoute": "Starter Island part pair",
       "bestFor": "Crit damage builds"
     },
@@ -85,7 +85,7 @@
       "tags": [
         "sea-2"
       ],
-      "catalogSection": "Drop farming",
+      "collectionSection": "Drop farming",
       "partRoute": "Bizarre Island parts",
       "bestFor": "Rare drop farming"
     },
@@ -108,7 +108,7 @@
       "tags": [
         "sea-2"
       ],
-      "catalogSection": "Critical stats",
+      "collectionSection": "Critical stats",
       "partRoute": "Starter Island part pair",
       "bestFor": "Crit chance builds"
     }

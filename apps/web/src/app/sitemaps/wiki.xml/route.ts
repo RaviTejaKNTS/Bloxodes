@@ -1,6 +1,6 @@
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
 import { listPublishedWikiPages } from "@/lib/wiki";
-import { buildWikiCatalogPath, listPublishedWikiCatalogPagesByWikiSlug } from "@/lib/wiki-catalog";
+import { buildWikiCollectionPath, listPublishedWikiCollectionPagesByWikiSlug } from "@/lib/wiki-collections";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -18,18 +18,18 @@ export async function GET() {
         priority: "0.9",
         lastmod: toIsoDate(row.content_updated_at ?? row.updated_at ?? row.published_at ?? row.created_at)
       }));
-    const catalogGroups = await Promise.all(
+    const collectionGroups = await Promise.all(
       rows
         .filter((row) => row.slug)
-        .map((row) => listPublishedWikiCatalogPagesByWikiSlug(row.slug))
+        .map((row) => listPublishedWikiCollectionPagesByWikiSlug(row.slug))
     );
-    const wikiCatalogPages = catalogGroups.flat().map((row) => ({
-      loc: withSiteUrl(buildWikiCatalogPath(row.wiki_slug, row.collection_slug)),
+    const wikiCollectionPages = collectionGroups.flat().map((row) => ({
+      loc: withSiteUrl(buildWikiCollectionPath(row.wiki_slug, row.collection_slug)),
       changefreq: "weekly",
       priority: "0.9",
       lastmod: toIsoDate(row.content_updated_at ?? row.updated_at ?? row.published_at ?? row.created_at)
     }));
-    const pages = [...wikiPages, ...wikiCatalogPages].sort((a, b) => a.loc.localeCompare(b.loc));
+    const pages = [...wikiPages, ...wikiCollectionPages].sort((a, b) => a.loc.localeCompare(b.loc));
 
     return new NextResponse(buildSitemapUrlSetXml(pages), {
       headers: { "content-type": "application/xml" }

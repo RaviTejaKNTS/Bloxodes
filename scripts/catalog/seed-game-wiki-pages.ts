@@ -2,10 +2,10 @@ import "../shared/load-env";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { GAME_DATASET_CATALOG_GROUPS } from "@/lib/game-dataset-catalogs";
+import { GAME_COLLECTION_GROUPS } from "@/lib/game-collections";
 import { repoPath } from "@/lib/paths";
 
-type GameDatasetCatalogGroup = (typeof GAME_DATASET_CATALOG_GROUPS)[number];
+type GameCollectionGroup = (typeof GAME_COLLECTION_GROUPS)[number];
 
 type WikiPageUpsert = {
   slug: string;
@@ -105,7 +105,7 @@ function collectSingleArgValue(argv: string[], names: string[]): string | null {
 }
 
 function getTargetGroups() {
-  return GAME_DATASET_CATALOG_GROUPS.filter(
+  return GAME_COLLECTION_GROUPS.filter(
     (group) => !targetGameSlugs.length || targetGameSlugs.includes(group.gameSlug)
   );
 }
@@ -122,7 +122,7 @@ async function findExistingFile(candidates: string[]) {
   return null;
 }
 
-async function readFinalJsonOverride(group: GameDatasetCatalogGroup): Promise<WikiFinalJson | null> {
+async function readFinalJsonOverride(group: GameCollectionGroup): Promise<WikiFinalJson | null> {
   if (!finalJsonRoot) return null;
 
   const root = path.isAbsolute(finalJsonRoot) ? finalJsonRoot : repoPath(finalJsonRoot);
@@ -144,7 +144,7 @@ async function readFinalJsonOverride(group: GameDatasetCatalogGroup): Promise<Wi
   return parsed;
 }
 
-async function resolveWikiCopy(group: GameDatasetCatalogGroup): Promise<ResolvedWikiCopy | null> {
+async function resolveWikiCopy(group: GameCollectionGroup): Promise<ResolvedWikiCopy | null> {
   const finalJson = await readFinalJsonOverride(group);
   const legacyCopy = WIKI_COPY[group.gameSlug];
 

@@ -9,7 +9,7 @@
     "updatedAt": "2026-06-15",
     "columns": [
       "name",
-      "catalogSection",
+      "collectionSection",
       "rarity",
       "spinChance",
       "source",
@@ -35,7 +35,7 @@
     {
       "id": "basic",
       "name": "Basic",
-      "catalogSection": "Uncommon styles",
+      "collectionSection": "Uncommon styles",
       "rarity": "Uncommon",
       "spinChance": "63%",
       "source": "Style spins",
@@ -47,7 +47,7 @@
     {
       "id": "smash",
       "name": "Smash",
-      "catalogSection": "Uncommon styles",
+      "collectionSection": "Uncommon styles",
       "rarity": "Uncommon",
       "spinChance": "63%",
       "source": "Style spins",
@@ -59,7 +59,7 @@
     {
       "id": "long-guard",
       "name": "Long Guard",
-      "catalogSection": "Uncommon styles",
+      "collectionSection": "Uncommon styles",
       "rarity": "Uncommon",
       "spinChance": "63%",
       "source": "Style spins",
@@ -71,7 +71,7 @@
     {
       "id": "counter",
       "name": "Counter",
-      "catalogSection": "Uncommon styles",
+      "collectionSection": "Uncommon styles",
       "rarity": "Uncommon",
       "spinChance": "63%",
       "source": "Style spins",
@@ -83,7 +83,7 @@
     {
       "id": "turtle",
       "name": "Turtle",
-      "catalogSection": "Uncommon styles",
+      "collectionSection": "Uncommon styles",
       "rarity": "Uncommon",
       "spinChance": "63%",
       "source": "Style spins",
@@ -95,7 +95,7 @@
     {
       "id": "corkscrew",
       "name": "Corkscrew",
-      "catalogSection": "Rare styles",
+      "collectionSection": "Rare styles",
       "rarity": "Rare",
       "spinChance": "27%",
       "source": "Style spins",
@@ -107,7 +107,7 @@
     {
       "id": "charge",
       "name": "Charge",
-      "catalogSection": "Rare styles",
+      "collectionSection": "Rare styles",
       "rarity": "Rare",
       "spinChance": "27%",
       "source": "Style spins",
@@ -119,7 +119,7 @@
     {
       "id": "hammer",
       "name": "Hammer",
-      "catalogSection": "Rare styles",
+      "collectionSection": "Rare styles",
       "rarity": "Rare",
       "spinChance": "27%",
       "source": "Style spins",
@@ -131,7 +131,7 @@
     {
       "id": "trickster",
       "name": "Trickster",
-      "catalogSection": "Rare styles",
+      "collectionSection": "Rare styles",
       "rarity": "Rare",
       "spinChance": "27%",
       "source": "Style spins",
@@ -143,7 +143,7 @@
     {
       "id": "dragonfish",
       "name": "Dragonfish",
-      "catalogSection": "Rare styles",
+      "collectionSection": "Rare styles",
       "rarity": "Rare",
       "spinChance": "27%",
       "source": "Style spins",
@@ -155,7 +155,7 @@
     {
       "id": "ippo",
       "name": "Ippo",
-      "catalogSection": "Mythic styles",
+      "collectionSection": "Mythic styles",
       "rarity": "Mythic",
       "spinChance": "9% from style spins; 75% from lucky spins",
       "source": "Style spins or lucky spins",
@@ -168,7 +168,7 @@
     {
       "id": "hitman",
       "name": "Hitman",
-      "catalogSection": "Mythic styles",
+      "collectionSection": "Mythic styles",
       "rarity": "Mythic",
       "spinChance": "9% from style spins; 75% from lucky spins",
       "source": "Style spins or lucky spins",
@@ -181,7 +181,7 @@
     {
       "id": "hands-low",
       "name": "Hands Low",
-      "catalogSection": "Mythic styles",
+      "collectionSection": "Mythic styles",
       "rarity": "Mythic",
       "spinChance": "9% from style spins; 75% from lucky spins",
       "source": "Style spins or lucky spins",
@@ -194,7 +194,7 @@
     {
       "id": "wolf",
       "name": "Wolf",
-      "catalogSection": "Mythic styles",
+      "collectionSection": "Mythic styles",
       "rarity": "Mythic",
       "spinChance": "9% from style spins; 75% from lucky spins",
       "source": "Style spins or lucky spins",
@@ -207,7 +207,7 @@
     {
       "id": "bullet",
       "name": "Bullet",
-      "catalogSection": "Mythic styles",
+      "collectionSection": "Mythic styles",
       "rarity": "Mythic",
       "spinChance": "9% from style spins; 75% from lucky spins",
       "source": "Style spins or lucky spins",
@@ -220,7 +220,7 @@
     {
       "id": "switch-hit",
       "name": "Switch Hit",
-      "catalogSection": "Mythic styles",
+      "collectionSection": "Mythic styles",
       "rarity": "Mythic",
       "spinChance": "9% from style spins; 75% from lucky spins",
       "source": "Style spins or lucky spins",
@@ -233,7 +233,7 @@
     {
       "id": "surgeon",
       "name": "Surgeon",
-      "catalogSection": "Mythic styles",
+      "collectionSection": "Mythic styles",
       "rarity": "Mythic",
       "spinChance": "9% from style spins; 75% from lucky spins",
       "source": "Style spins or lucky spins",
@@ -246,7 +246,7 @@
     {
       "id": "slugger",
       "name": "Slugger",
-      "catalogSection": "Legendary styles",
+      "collectionSection": "Legendary styles",
       "rarity": "Legendary",
       "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
       "source": "Style spins, lucky spins, or pity",
@@ -258,7 +258,7 @@
     {
       "id": "hawk",
       "name": "Hawk",
-      "catalogSection": "Legendary styles",
+      "collectionSection": "Legendary styles",
       "rarity": "Legendary",
       "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
       "source": "Style spins, lucky spins, or pity",
@@ -270,7 +270,7 @@
     {
       "id": "ghost",
       "name": "Ghost",
-      "catalogSection": "Legendary styles",
+      "collectionSection": "Legendary styles",
       "rarity": "Legendary",
       "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
       "source": "Style spins, lucky spins, or pity",
@@ -282,7 +282,7 @@
     {
       "id": "iron-fist",
       "name": "Iron Fist",
-      "catalogSection": "Legendary styles",
+      "collectionSection": "Legendary styles",
       "rarity": "Legendary",
       "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
       "source": "Style spins, lucky spins, or pity",
@@ -294,7 +294,7 @@
     {
       "id": "shotgun",
       "name": "Shotgun",
-      "catalogSection": "Legendary styles",
+      "collectionSection": "Legendary styles",
       "rarity": "Legendary",
       "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
       "source": "Style spins, lucky spins, or pity",
@@ -306,7 +306,7 @@
     {
       "id": "freedom",
       "name": "Freedom",
-      "catalogSection": "Legendary styles",
+      "collectionSection": "Legendary styles",
       "rarity": "Legendary",
       "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
       "source": "Style spins, lucky spins, or pity",
@@ -318,7 +318,7 @@
     {
       "id": "chronos",
       "name": "Chronos",
-      "catalogSection": "Legendary styles",
+      "collectionSection": "Legendary styles",
       "rarity": "Legendary",
       "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
       "source": "Style spins, lucky spins, or pity",
@@ -330,7 +330,7 @@
     {
       "id": "white-ash",
       "name": "White Ash",
-      "catalogSection": "Legendary styles",
+      "collectionSection": "Legendary styles",
       "rarity": "Legendary",
       "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
       "source": "Style spins, lucky spins, or pity",
@@ -342,7 +342,7 @@
     {
       "id": "supernova",
       "name": "Supernova",
-      "catalogSection": "Legendary styles",
+      "collectionSection": "Legendary styles",
       "rarity": "Legendary",
       "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
       "source": "Style spins, lucky spins, or pity",
@@ -354,7 +354,7 @@
     {
       "id": "godspeed",
       "name": "Godspeed",
-      "catalogSection": "Shiny styles",
+      "collectionSection": "Shiny styles",
       "rarity": "Shiny",
       "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
       "source": "Style spins, lucky spins, or shiny shards",
@@ -366,7 +366,7 @@
     {
       "id": "bald",
       "name": "Bald",
-      "catalogSection": "Shiny styles",
+      "collectionSection": "Shiny styles",
       "rarity": "Shiny",
       "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
       "source": "Style spins, lucky spins, or shiny shards",
@@ -378,7 +378,7 @@
     {
       "id": "coyote",
       "name": "Coyote",
-      "catalogSection": "Shiny styles",
+      "collectionSection": "Shiny styles",
       "rarity": "Shiny",
       "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
       "source": "Style spins, lucky spins, or shiny shards",
@@ -390,7 +390,7 @@
     {
       "id": "drill",
       "name": "Drill",
-      "catalogSection": "Shiny styles",
+      "collectionSection": "Shiny styles",
       "rarity": "Shiny",
       "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
       "source": "Style spins, lucky spins, or shiny shards",
@@ -402,7 +402,7 @@
     {
       "id": "nanomachines",
       "name": "Nanomachines",
-      "catalogSection": "Shiny styles",
+      "collectionSection": "Shiny styles",
       "rarity": "Shiny",
       "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
       "source": "Style spins, lucky spins, or shiny shards",
@@ -414,7 +414,7 @@
     {
       "id": "conman",
       "name": "Conman",
-      "catalogSection": "Shiny styles",
+      "collectionSection": "Shiny styles",
       "rarity": "Shiny",
       "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
       "source": "Style spins, lucky spins, or shiny shards",
@@ -426,7 +426,7 @@
     {
       "id": "void-samurai",
       "name": "Void Samurai",
-      "catalogSection": "Unobtainable styles",
+      "collectionSection": "Unobtainable styles",
       "rarity": "Special",
       "spinChance": "Not in normal spins",
       "source": "Developer-granted",
@@ -439,7 +439,7 @@
     {
       "id": "ghost-ancient",
       "name": "Ghost (Ancient)",
-      "catalogSection": "Unobtainable styles",
+      "collectionSection": "Unobtainable styles",
       "rarity": "Special",
       "spinChance": "Not in normal spins",
       "source": "Developer-granted",
@@ -452,7 +452,7 @@
     {
       "id": "very-long-guard",
       "name": "Very Long Guard",
-      "catalogSection": "Unobtainable styles",
+      "collectionSection": "Unobtainable styles",
       "rarity": "Special",
       "spinChance": "Not in normal spins",
       "source": "Developer-granted",
@@ -465,7 +465,7 @@
     {
       "id": "testing-style",
       "name": "Testing (Style)",
-      "catalogSection": "Unobtainable styles",
+      "collectionSection": "Unobtainable styles",
       "rarity": "Special",
       "spinChance": "Not in normal spins",
       "source": "Developer-granted",
@@ -478,7 +478,7 @@
     {
       "id": "legacy-kimura",
       "name": "LEGACY:Kimura",
-      "catalogSection": "Removed styles",
+      "collectionSection": "Removed styles",
       "rarity": "Legacy",
       "spinChance": "Not in current spins",
       "source": "Removed style",

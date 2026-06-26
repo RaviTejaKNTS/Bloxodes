@@ -9,7 +9,7 @@
     "updatedAt": "2026-06-15",
     "columns": [
       "name",
-      "catalogSection",
+      "collectionSection",
       "source",
       "availability",
       "price",
@@ -37,7 +37,7 @@
     {
       "id": "default",
       "name": "Default",
-      "catalogSection": "Default",
+      "collectionSection": "Default",
       "source": "Default",
       "availability": "Default",
       "price": "Equipped by default",
@@ -52,7 +52,7 @@
     {
       "id": "liberation",
       "name": "Liberation",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "$89,999",
@@ -67,7 +67,7 @@
     {
       "id": "ritual",
       "name": "Ritual",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "$99,999",
@@ -82,7 +82,7 @@
     {
       "id": "shatter",
       "name": "Shatter",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "Unknown",
@@ -97,7 +97,7 @@
     {
       "id": "knee-pain",
       "name": "Knee Pain",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "$22,222",
@@ -112,7 +112,7 @@
     {
       "id": "fling",
       "name": "Fling",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "Unknown",
@@ -127,7 +127,7 @@
     {
       "id": "8-bit",
       "name": "8-Bit",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "$32,100",
@@ -142,7 +142,7 @@
     {
       "id": "cartoony",
       "name": "Cartoony",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "Unknown",
@@ -157,7 +157,7 @@
     {
       "id": "crafted",
       "name": "Crafted",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "Unknown",
@@ -172,7 +172,7 @@
     {
       "id": "cyborg",
       "name": "Cyborg",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "Unknown",
@@ -187,7 +187,7 @@
     {
       "id": "pure-white-ash",
       "name": "Pure White Ash",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "Unknown",
@@ -202,7 +202,7 @@
     {
       "id": "yamcha",
       "name": "Yamcha",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "$69,999",
@@ -217,7 +217,7 @@
     {
       "id": "yakuza",
       "name": "Yakuza",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "$49,999",
@@ -232,7 +232,7 @@
     {
       "id": "barbarian",
       "name": "Barbarian",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "$89,999",
@@ -247,7 +247,7 @@
     {
       "id": "undertale",
       "name": "Undertale",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "Unknown",
@@ -262,7 +262,7 @@
     {
       "id": "super",
       "name": "Super",
-      "catalogSection": "Daily shop rotation",
+      "collectionSection": "Daily shop rotation",
       "source": "Daily shop rotation",
       "availability": "Can appear in the daily shop rotation",
       "price": "$94,999",
@@ -277,7 +277,7 @@
     {
       "id": "champion",
       "name": "Champion",
-      "catalogSection": "Event reward",
+      "collectionSection": "Event reward",
       "source": "The Games event reward",
       "availability": "Limited event reward",
       "price": "Event reward",

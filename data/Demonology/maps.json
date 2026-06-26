@@ -2,11 +2,11 @@
   "meta": {
     "title": "Demonology Job Sites (Maps)",
     "updatedAt": "2026-06-25",
-    "groupBy": "catalogSection",
+    "groupBy": "collectionSection",
     "columns": [
       "name",
       "slug",
-      "catalogSection",
+      "collectionSection",
       "image",
       "cardSummary",
       "size",
@@ -66,7 +66,7 @@
     {
       "name": "Fenway Drive",
       "slug": "fenway-drive",
-      "catalogSection": "Small Job Sites",
+      "collectionSection": "Small Job Sites",
       "image": "/Demonology/maps/fenway-drive.png",
       "cardSummary": "A small suburban listing flagged by a worried real estate agent, and one of the three starter homes available from the very beginning.",
       "size": "Small",
@@ -88,7 +88,7 @@
     {
       "name": "Juniper Road",
       "slug": "juniper-road",
-      "catalogSection": "Small Job Sites",
+      "collectionSection": "Small Job Sites",
       "image": "/Demonology/maps/juniper-road.png",
       "cardSummary": "A small reported-haunting house and one of the tightest maps in the game, making it a popular pick for fast, efficient runs.",
       "size": "Small",
@@ -110,7 +110,7 @@
     {
       "name": "Lincoln Street",
       "slug": "lincoln-street",
-      "catalogSection": "Small Job Sites",
+      "collectionSection": "Small Job Sites",
       "image": "/Demonology/maps/lincoln-street.png",
       "cardSummary": "A small family home with a basement, called in by residents reporting paranormal activity, available from the start of the game.",
       "size": "Small",
@@ -132,7 +132,7 @@
     {
       "name": "Bodega",
       "slug": "bodega",
-      "catalogSection": "Small Job Sites",
+      "collectionSection": "Small Job Sites",
       "image": "/Demonology/maps/bodega.png",
       "cardSummary": "An NYC corner-store bodega reported for ghostly activity, the only small job site themed as a shop rather than a home.",
       "size": "Small",
@@ -154,7 +154,7 @@
     {
       "name": "Lilim Lane",
       "slug": "lilim-lane",
-      "catalogSection": "Medium Job Sites",
+      "collectionSection": "Medium Job Sites",
       "image": "/Demonology/maps/lilim-lane.png",
       "cardSummary": "A traditional two-story Filipino home reported as haunted by its architect, the first medium-sized job site to unlock.",
       "size": "Medium",
@@ -176,7 +176,7 @@
     {
       "name": "Cafe",
       "slug": "cafe",
-      "catalogSection": "Medium Job Sites",
+      "collectionSection": "Medium Job Sites",
       "image": "/Demonology/maps/cafe.png",
       "cardSummary": "HVNLY Coffee, a medium two-floor cafe where customers were harmed by flying furniture, mixing public dining areas with back-of-house rooms.",
       "size": "Medium",
@@ -198,7 +198,7 @@
     {
       "name": "Bridgewood Drive",
       "slug": "bridgewood-drive",
-      "catalogSection": "Medium Job Sites",
+      "collectionSection": "Medium Job Sites",
       "image": "/Demonology/maps/bridgewood-drive.png",
       "cardSummary": "A high-end forest mansion reported by a wealthy client, a multi-story medium job site that is one of the larger homes in the medium tier.",
       "size": "Medium",
@@ -220,7 +220,7 @@
     {
       "name": "Oakbridge Estates",
       "slug": "oakbridge-estates",
-      "catalogSection": "Medium Job Sites",
+      "collectionSection": "Medium Job Sites",
       "image": "/Demonology/maps/oakbridge-estates.png",
       "cardSummary": "A multi-unit estate where a haunting was reported with an unknown origin, the newest and highest-unlock medium job site.",
       "size": "Medium",
@@ -242,7 +242,7 @@
     {
       "name": "Prison",
       "slug": "prison",
-      "catalogSection": "Large Job Sites",
+      "collectionSection": "Large Job Sites",
       "image": "/Demonology/maps/prison.png",
       "cardSummary": "A shut-down state prison where a ghost caused several injuries, the first large job site players unlock.",
       "size": "Large",
@@ -264,7 +264,7 @@
     {
       "name": "School",
       "slug": "school",
-      "catalogSection": "Large Job Sites",
+      "collectionSection": "Large Job Sites",
       "image": "/Demonology/maps/school.png",
       "cardSummary": "A school where students were hurt by objects thrown by nothing, a large multi-floor job site full of classrooms and offices.",
       "size": "Large",
@@ -286,7 +286,7 @@
     {
       "name": "Asylum",
       "slug": "asylum",
-      "catalogSection": "Large Job Sites",
+      "collectionSection": "Large Job Sites",
       "image": "/Demonology/maps/asylum.png",
       "cardSummary": "A 20th-century lunatic asylum long rumored to be haunted, the largest job site in the game with the highest unlock level.",
       "size": "Large",

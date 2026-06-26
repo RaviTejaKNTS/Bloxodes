@@ -37,6 +37,17 @@ If the brief is missing, weak, unapproved, or has unresolved source gaps, stop a
 - However, do not skip on any info. Do not asssume people already know something, make it clear for everyone to understand.
 - We may not need an what it is headings, but definitely need to cover all such info in the article. We need to make a detailed article that can rank better than all competitors. If the article is missing any info, run a fan-out research query and fill it — never leave a gap.
 
+**Readability and formatting**
+- This sits on top of the value rule: every sentence must add value, and every sentence must also be easy to read.
+- One idea per paragraph. Each paragraph covers a single point clearly, then stops. Never write a wall of text.
+- Keep paragraphs short: aim for 1-3 short sentences. If a paragraph is growing past that, split it into two.
+- Write short, plain sentences. Prefer one simple sentence over one long sentence with commas and "and"s. If a sentence runs long, break it in two.
+- Use everyday words a younger Roblox player understands. Explain any necessary technical term in plain language right where it appears.
+- Keep list and step items short — one action or fact per item, ideally one line. Never cram a paragraph into a single bullet or numbered step.
+- If a step needs a little detail, use a short bolded lead (the action) followed by one short sentence of explanation, not a dense block.
+- Put each distinct action on its own step. Do not chain several actions into one point.
+- Leave white space between ideas so the page is easy to scan, not a dense block of text.
+
 **Structure**
 - Follow the provided outline, but adjust it if a different flow serves the reader better.
 - Use fewer headings so the article stays scannable. If 2 headings can help the user, we can just use 2.

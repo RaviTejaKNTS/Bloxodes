@@ -40,7 +40,7 @@
       }
     ],
     "columns": [
-      "catalogSection",
+      "collectionSection",
       "spawnChance",
       "power",
       "abilityOne",
@@ -54,7 +54,7 @@
     {
       "name": "Lightning Fruit",
       "slug": "lightning-fruit",
-      "catalogSection": "Power Fruits",
+      "collectionSection": "Power Fruits",
       "spawnChance": "1 / 1800 per second",
       "spawnChanceDenominator": 1800,
       "power": "Lightning",
@@ -70,7 +70,7 @@
     {
       "name": "Fire Fruit",
       "slug": "fire-fruit",
-      "catalogSection": "Power Fruits",
+      "collectionSection": "Power Fruits",
       "spawnChance": "1 / 2700 per second",
       "spawnChanceDenominator": 2700,
       "power": "Fire",
@@ -86,7 +86,7 @@
     {
       "name": "Ice Fruit",
       "slug": "ice-fruit",
-      "catalogSection": "Power Fruits",
+      "collectionSection": "Power Fruits",
       "spawnChance": "1 / 4800 per second",
       "spawnChanceDenominator": 4800,
       "power": "Ice",
@@ -102,7 +102,7 @@
     {
       "name": "Sword Fruit",
       "slug": "sword-fruit",
-      "catalogSection": "Power Fruits",
+      "collectionSection": "Power Fruits",
       "spawnChance": "1 / 9000 per second",
       "spawnChanceDenominator": 9000,
       "power": "Sword",
@@ -118,7 +118,7 @@
     {
       "name": "Magician Fruit",
       "slug": "magician-fruit",
-      "catalogSection": "Power Fruits",
+      "collectionSection": "Power Fruits",
       "spawnChance": "1 / 14400 per second",
       "spawnChanceDenominator": 14400,
       "power": "Magician",
@@ -134,7 +134,7 @@
     {
       "name": "Universe Fruit",
       "slug": "universe-fruit",
-      "catalogSection": "Power Fruits",
+      "collectionSection": "Power Fruits",
       "spawnChance": "1 / 36000 per second",
       "spawnChanceDenominator": 36000,
       "power": "Universe",

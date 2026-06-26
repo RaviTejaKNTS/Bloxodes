@@ -2,11 +2,11 @@
   "meta": {
     "title": "Demonology Ghosts",
     "updatedAt": "2026-06-25",
-    "groupBy": "catalogSection",
+    "groupBy": "collectionSection",
     "columns": [
       "name",
       "slug",
-      "catalogSection",
+      "collectionSection",
       "image",
       "cardSummary",
       "evidence",
@@ -64,7 +64,7 @@
     {
       "name": "Spirit",
       "slug": "spirit",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/spirit.webp",
       "cardSummary": "A baseline ghost with no special speed or hunting quirks, identified by its Inscription, Prints, and Spirit Box evidence.",
       "evidence": "Inscription, Prints, Spirit Box",
@@ -84,7 +84,7 @@
     {
       "name": "Demon",
       "slug": "demon",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/demon.webp",
       "cardSummary": "An aggressive ghost that hunts far more often than others, leaving EMF Level 5, Freezing Temperatures, and Prints.",
       "evidence": "EMF Level 5, Freezing Temperatures, Prints",
@@ -103,7 +103,7 @@
     {
       "name": "Banshee",
       "slug": "banshee",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/banshee.webp",
       "cardSummary": "A glass-breaking ghost identified by Freezing Temperatures, Ghost Orb, and Prints, sometimes announced by a unique wail.",
       "evidence": "Freezing Temperatures, Ghost Orb, Prints",
@@ -122,7 +122,7 @@
     {
       "name": "Entity",
       "slug": "entity",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/entity.webp",
       "cardSummary": "A teleporting ghost identified by Prints, Laser Projector, and Spirit Box, marked by smoke when it moves objects.",
       "evidence": "Prints, Laser Projector, Spirit Box",
@@ -141,7 +141,7 @@
     {
       "name": "Ghoul",
       "slug": "ghoul",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/ghoul.webp",
       "cardSummary": "A chat-triggered ghost identified by Freezing Temperatures, Ghost Orb, and Spirit Box that cannot disable electronics.",
       "evidence": "Freezing Temperatures, Ghost Orb, Spirit Box",
@@ -158,7 +158,7 @@
     {
       "name": "Leviathan",
       "slug": "leviathan",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/leviathan.webp",
       "cardSummary": "A power-meddling ghost identified by Inscription, Prints, and Ghost Orb that flickers gear and kills lights.",
       "evidence": "Inscription, Prints, Ghost Orb",
@@ -178,7 +178,7 @@
     {
       "name": "Nightmare",
       "slug": "nightmare",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/nightmare.webp",
       "cardSummary": "A light-fearing ghost identified by EMF Level 5, Ghost Orb, and Spirit Box that can fake sounds.",
       "evidence": "EMF Level 5, Ghost Orb, Spirit Box",
@@ -195,7 +195,7 @@
     {
       "name": "Oni",
       "slug": "oni",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/oni.webp",
       "cardSummary": "A fast hunter identified by Freezing Temperatures, Laser Projector, and Spirit Box that shows itself often.",
       "evidence": "Freezing Temperatures, Laser Projector, Spirit Box",
@@ -212,7 +212,7 @@
     {
       "name": "Phantom",
       "slug": "phantom",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/phantom.webp",
       "cardSummary": "A slow-blinking ghost identified by EMF Level 5, Prints, and Ghost Orb that speeds up while invisible.",
       "evidence": "EMF Level 5, Prints, Ghost Orb",
@@ -231,7 +231,7 @@
     {
       "name": "Ravager",
       "slug": "ravager",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/ravager.webp",
       "cardSummary": "An object-hurling ghost identified by EMF Level 5, Inscription, and Spirit Box whose abilities all leave EMF Level 5.",
       "evidence": "EMF Level 5, Inscription, Spirit Box",
@@ -250,7 +250,7 @@
     {
       "name": "Revenant",
       "slug": "revenant",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/revenant.webp",
       "cardSummary": "A relentless hunter identified by EMF Level 5, Freezing Temperatures, and Inscription that stops hunting after a kill.",
       "evidence": "EMF Level 5, Freezing Temperatures, Inscription",
@@ -269,7 +269,7 @@
     {
       "name": "Shadow",
       "slug": "shadow",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/shadow.webp",
       "cardSummary": "A light-shy ghost identified by EMF Level 5, Inscription, and Laser Projector with smaller temperature swings.",
       "evidence": "EMF Level 5, Inscription, Laser Projector",
@@ -288,7 +288,7 @@
     {
       "name": "Skinwalker",
       "slug": "skinwalker",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/skinwalker.webp",
       "cardSummary": "A deceptive mimic identified by Freezing Temperatures, Inscription, and Spirit Box that fakes a Ghost Orb.",
       "evidence": "Freezing Temperatures, Inscription, Spirit Box",
@@ -307,7 +307,7 @@
     {
       "name": "Specter",
       "slug": "specter",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/specter.webp",
       "cardSummary": "A room-bound ghost identified by EMF Level 5, Freezing Temperatures, and Laser Projector that throws items often.",
       "evidence": "EMF Level 5, Freezing Temperatures, Laser Projector",
@@ -324,7 +324,7 @@
     {
       "name": "Umbra",
       "slug": "umbra",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/umbra.webp",
       "cardSummary": "A silent stalker identified by Prints, Ghost Orb, and Laser Projector that slows down in lit rooms.",
       "evidence": "Prints, Ghost Orb, Laser Projector",
@@ -343,7 +343,7 @@
     {
       "name": "Wendigo",
       "slug": "wendigo",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/wendigo.webp",
       "cardSummary": "A flame-shy ghost identified by Inscription, Ghost Orb, and Laser Projector that speeds up as energy drops.",
       "evidence": "Inscription, Ghost Orb, Laser Projector",
@@ -362,7 +362,7 @@
     {
       "name": "Wraith",
       "slug": "wraith",
-      "catalogSection": "Core Ghosts",
+      "collectionSection": "Core Ghosts",
       "image": "/Demonology/ghosts/wraith.webp",
       "cardSummary": "An energy-draining ghost identified by EMF Level 5, Laser Projector, and Spirit Box that ignores salt.",
       "evidence": "EMF Level 5, Laser Projector, Spirit Box",
@@ -379,7 +379,7 @@
     {
       "name": "Aswang",
       "slug": "aswang",
-      "catalogSection": "Wither Ghosts",
+      "collectionSection": "Wither Ghosts",
       "image": "/Demonology/ghosts/aswang.webp",
       "cardSummary": "A snowballing killer identified by EMF Level 5, Inscription, and Wither that gets faster with every kill.",
       "evidence": "EMF Level 5, Inscription, Wither",
@@ -398,7 +398,7 @@
     {
       "name": "Dullahan",
       "slug": "dullahan",
-      "catalogSection": "Wither Ghosts",
+      "collectionSection": "Wither Ghosts",
       "image": "/Demonology/ghosts/dullahan.webp",
       "cardSummary": "A headless hunter identified by Freezing Temperatures, Laser Projector, and Wither that appears headless in photos.",
       "evidence": "Freezing Temperatures, Laser Projector, Wither",
@@ -415,7 +415,7 @@
     {
       "name": "Dybbuk",
       "slug": "dybbuk",
-      "catalogSection": "Wither Ghosts",
+      "collectionSection": "Wither Ghosts",
       "image": "/Demonology/ghosts/dybbuk.webp",
       "cardSummary": "A corpse-throwing ghost identified by Freezing Temperatures, Prints, and Wither that the music box stuns.",
       "evidence": "Freezing Temperatures, Prints, Wither",
@@ -434,7 +434,7 @@
     {
       "name": "Keres",
       "slug": "keres",
-      "catalogSection": "Wither Ghosts",
+      "collectionSection": "Wither Ghosts",
       "image": "/Demonology/ghosts/keres.webp",
       "cardSummary": "A low-energy hunter identified by Prints, Spirit Box, and Wither that slows down with each kill.",
       "evidence": "Prints, Spirit Box, Wither",
@@ -453,7 +453,7 @@
     {
       "name": "Siren",
       "slug": "siren",
-      "catalogSection": "Wither Ghosts",
+      "collectionSection": "Wither Ghosts",
       "image": "/Demonology/ghosts/siren.webp",
       "cardSummary": "A singing ghost identified by EMF Level 5, Spirit Box, and Wither that slows anyone in its line of sight.",
       "evidence": "EMF Level 5, Spirit Box, Wither",
@@ -470,7 +470,7 @@
     {
       "name": "The Wisp",
       "slug": "the-wisp",
-      "catalogSection": "Wither Ghosts",
+      "collectionSection": "Wither Ghosts",
       "image": "/Demonology/ghosts/the-wisp.webp",
       "cardSummary": "A fire-walking ghost identified by Laser Projector, Ghost Orb, and Wither that only hunts from its favorite room.",
       "evidence": "Laser Projector, Ghost Orb, Wither",
@@ -487,7 +487,7 @@
     {
       "name": "Vesper",
       "slug": "vesper",
-      "catalogSection": "Wither Ghosts",
+      "collectionSection": "Wither Ghosts",
       "image": "/Demonology/ghosts/vesper.webp",
       "cardSummary": "A sound-driven ghost identified by Inscription, Prints, and Wither that hears through walls.",
       "evidence": "Inscription, Prints, Wither",
@@ -507,7 +507,7 @@
     {
       "name": "Vex",
       "slug": "vex",
-      "catalogSection": "Wither Ghosts",
+      "collectionSection": "Wither Ghosts",
       "image": "/Demonology/ghosts/vex.webp",
       "cardSummary": "A wall-phasing ghost identified by Freezing Temperatures, Ghost Orb, and Wither that hides from the LIDAR Scanner.",
       "evidence": "Freezing Temperatures, Ghost Orb, Wither",

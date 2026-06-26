@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { generateWikiCatalogMetadata, renderWikiCatalogPage } from "../../page";
+import { generateWikiCollectionMetadata, renderWikiCollectionPage } from "../../page";
 
 type PageProps = {
   params: Promise<{ slug: string; collection: string; page: string }>;
@@ -16,14 +16,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug, collection, page } = await params;
   const currentPage = parsePage(page);
   if (!currentPage) {
-    return generateWikiCatalogMetadata({ slug, collection, currentPage: 1 });
+    return generateWikiCollectionMetadata({ slug, collection, currentPage: 1 });
   }
-  return generateWikiCatalogMetadata({ slug, collection, currentPage });
+  return generateWikiCollectionMetadata({ slug, collection, currentPage });
 }
 
-export default async function WikiCatalogPaginatedPage({ params }: PageProps) {
+export default async function WikiCollectionPaginatedPage({ params }: PageProps) {
   const { slug, collection, page } = await params;
   const currentPage = parsePage(page);
   if (!currentPage) notFound();
-  return renderWikiCatalogPage({ slug, collection, currentPage });
+  return renderWikiCollectionPage({ slug, collection, currentPage });
 }

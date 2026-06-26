@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Game Collection Images"
+  short_description: "Prepare game collection images"
+  default_prompt: "Use $bloxodes-game-collection-images after game collection data approval. Find clean item images, save and wire public image paths, update dataset image fields, run the image readiness check, update brief.md, then stop unless images are blocked."

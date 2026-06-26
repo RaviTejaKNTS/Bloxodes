@@ -7,7 +7,7 @@
     "route": "/wiki/fisch/rods",
     "catalogCode": "fisch-rods",
     "updatedAt": "2026-06-19",
-    "groupBy": "catalogSection",
+    "groupBy": "collectionSection",
     "defaultCardFields": [
       "price",
       "obtainment",
@@ -20,7 +20,7 @@
     ],
     "columns": [
       "name",
-      "catalogSection",
+      "collectionSection",
       "price",
       "obtainment",
       "lureSpeed",
@@ -58,7 +58,7 @@
     {
       "id": "abyssal-specter-rod",
       "name": "Abyssal Specter Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "850,000C$; Level 170",
       "obtainment": "Atlantis",
       "lureSpeed": "60%",
@@ -77,7 +77,7 @@
     {
       "id": "antler-rod",
       "name": "Antler Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "Obtainable by Advent Calendar after 5 days",
       "obtainment": "Moosewood",
       "lureSpeed": "25%",
@@ -96,7 +96,7 @@
     {
       "id": "arctic-rod",
       "name": "Arctic Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "25,000C$",
       "obtainment": "Northern Expedition",
       "lureSpeed": "25%",
@@ -115,7 +115,7 @@
     {
       "id": "astraeus-serenade",
       "name": "Astraeus Serenade",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "50,000,000C$",
       "obtainment": "Astraeus' Void",
       "lureSpeed": "100%",
@@ -134,7 +134,7 @@
     {
       "id": "auric-rod",
       "name": "Auric Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "No Price",
       "obtainment": "Sunken Chests",
       "lureSpeed": "45%",
@@ -153,7 +153,7 @@
     {
       "id": "aurora-rod",
       "name": "Aurora Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "70,000C$ (570,000C$ including totem cost)",
       "obtainment": "Vertigo",
       "lureSpeed": "10%",
@@ -172,7 +172,7 @@
     {
       "id": "avalanche-rod",
       "name": "Avalanche Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "35,000C$",
       "obtainment": "Nortehrn Expedition (Northern Summit)",
       "lureSpeed": "40%",
@@ -191,7 +191,7 @@
     {
       "id": "axe-of-rhoads",
       "name": "Axe of Rhoads",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Reward for completing Fayelie's quest.",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "70%",
@@ -210,7 +210,7 @@
     {
       "id": "azure-of-lagoon",
       "name": "Azure Of Lagoon",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "100,000C$",
       "obtainment": "Lost Jungle",
       "lureSpeed": "75%",
@@ -229,7 +229,7 @@
     {
       "id": "bat-whisperer-rod",
       "name": "Bat Whisperer Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "Purchasable from the Flying Dutchman for 10,000 Candy.",
       "obtainment": "FischFright 2025",
       "lureSpeed": "86%",
@@ -248,7 +248,7 @@
     {
       "id": "blade-of-glorp",
       "name": "Blade Of Glorp",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "Not listed",
       "obtainment": "Roslit Bay Glorp NPC",
       "lureSpeed": "100%",
@@ -267,7 +267,7 @@
     {
       "id": "blazebringer-rod",
       "name": "Blazebringer Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "70,000E$",
       "obtainment": "Roslit Bay",
       "lureSpeed": "80%",
@@ -286,7 +286,7 @@
     {
       "id": "bone-blade",
       "name": "Bone Blade",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "C$2,500,000|",
       "obtainment": "Black Market",
       "lureSpeed": "100%",
@@ -305,7 +305,7 @@
     {
       "id": "boreal-rod",
       "name": "Boreal Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "C$42,000",
       "obtainment": "Boreal Pines",
       "lureSpeed": "60%",
@@ -324,7 +324,7 @@
     {
       "id": "brick-built-rod",
       "name": "Brick Built Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Event Rods",
       "lureSpeed": "15%",
@@ -343,7 +343,7 @@
     {
       "id": "brick-rod",
       "name": "Brick Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "13,337C$",
       "obtainment": "Brick Rod Secret Location",
       "lureSpeed": "0%",
@@ -362,7 +362,7 @@
     {
       "id": "brine-infused-rod",
       "name": "Brine-infused Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "75,000$",
       "obtainment": "Brine Pool",
       "lureSpeed": "40%",
@@ -381,7 +381,7 @@
     {
       "id": "brothers-rod",
       "name": "Brothers Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Not listed",
       "obtainment": "Storyline \"Castaway\"",
       "lureSpeed": "50%",
@@ -400,7 +400,7 @@
     {
       "id": "buddy-bond-rod",
       "name": "Buddy Bond Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "Obtained after successfully inviting a friend via Bob",
       "obtainment": "Moosewood",
       "lureSpeed": "0% (30%)",
@@ -419,7 +419,7 @@
     {
       "id": "candy-cane-rod",
       "name": "Candy Cane Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "1,500C$",
       "obtainment": "Winter Village",
       "lureSpeed": "10%",
@@ -438,7 +438,7 @@
     {
       "id": "carbon-rod",
       "name": "Carbon Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "2,000C$",
       "obtainment": "Moosewood",
       "lureSpeed": "-10%",
@@ -457,7 +457,7 @@
     {
       "id": "carrot-rod",
       "name": "Carrot Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "75,000C$",
       "obtainment": "Carrot Garden (Mushgrove Swamp)",
       "lureSpeed": "85%",
@@ -476,7 +476,7 @@
     {
       "id": "castbound",
       "name": "Castbound",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "Not listed",
       "obtainment": "",
       "lureSpeed": "Infinite",
@@ -495,7 +495,7 @@
     {
       "id": "celestial-rod",
       "name": "Celestial Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "50%",
@@ -514,7 +514,7 @@
     {
       "id": "cerebra",
       "name": "Cerebra",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "Not listed",
       "obtainment": "Sweetheart Shores",
       "lureSpeed": "200%",
@@ -533,7 +533,7 @@
     {
       "id": "cerulean-fang-rod",
       "name": "Cerulean Fang Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "800,000C$; Level 400",
       "obtainment": "Luminescent Cavern|hunt_focus=|progress_speed=+15%|disturbance=+2",
       "lureSpeed": "75%",
@@ -552,7 +552,7 @@
     {
       "id": "challenger-s-rod",
       "name": "Challenger's Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "750,000",
       "obtainment": "Challenger's Deep",
       "lureSpeed": "95%",
@@ -571,7 +571,7 @@
     {
       "id": "champions-rod",
       "name": "Champions Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "90,000C$",
       "obtainment": "Atlantis",
       "lureSpeed": "45%",
@@ -590,7 +590,7 @@
     {
       "id": "chrysalis",
       "name": "Chrysalis",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "None",
       "obtainment": "Underground Music Venue (Hex)",
       "lureSpeed": "100%",
@@ -609,7 +609,7 @@
     {
       "id": "cinder-block-rod",
       "name": "Cinder Block Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "C$50,000",
       "obtainment": "The Laboratory",
       "lureSpeed": "-50%",
@@ -628,7 +628,7 @@
     {
       "id": "cinderstring",
       "name": "Cinderstring",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Requires",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "95%",
@@ -647,7 +647,7 @@
     {
       "id": "clickbait-caster",
       "name": "Clickbait Caster",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "No Price",
       "obtainment": "Exclusive Rods",
       "lureSpeed": "50%",
@@ -666,7 +666,7 @@
     {
       "id": "coral-rod",
       "name": "Coral Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "C$30,000",
       "obtainment": "Coral Bastion",
       "lureSpeed": "72%",
@@ -685,7 +685,7 @@
     {
       "id": "cornucopia-rod",
       "name": "Cornucopia Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Not listed",
       "obtainment": "Fischgiving 2025",
       "lureSpeed": "90%",
@@ -704,7 +704,7 @@
     {
       "id": "cryolash",
       "name": "Cryolash",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "C$3,500,000",
       "obtainment": "Boreal Pines",
       "lureSpeed": "87%",
@@ -723,7 +723,7 @@
     {
       "id": "crystalized-rod",
       "name": "Crystalized Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "35,000C$",
       "obtainment": "Northern Expedition",
       "lureSpeed": "35%",
@@ -742,7 +742,7 @@
     {
       "id": "cupid-s-bow",
       "name": "Cupid's Bow",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "The Cupid's Bow could be purchased with 25,000 Chocolates.",
       "obtainment": "Valentides Event",
       "lureSpeed": "120%",
@@ -761,7 +761,7 @@
     {
       "id": "daybreaker-rod",
       "name": "Daybreaker Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "750,000C$",
       "obtainment": "Scoria Reach",
       "lureSpeed": "70%",
@@ -780,7 +780,7 @@
     {
       "id": "dead-man-s-rod",
       "name": "Dead Man's Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "5,000,000C$",
       "obtainment": "Ancient Archives",
       "lureSpeed": "95%",
@@ -799,7 +799,7 @@
     {
       "id": "depthseeker-rod",
       "name": "Depthseeker Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "40,000C$ (43,000C$ (including Basic Diving Gear)",
       "obtainment": "Atlantis",
       "lureSpeed": "55%",
@@ -818,7 +818,7 @@
     {
       "id": "destiny-rod",
       "name": "Destiny Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "190,000C$",
       "obtainment": "The Arch (Caleia)",
       "lureSpeed": "45%",
@@ -837,7 +837,7 @@
     {
       "id": "dreambreaker",
       "name": "Dreambreaker",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "C$5,000,000",
       "obtainment": "Cultist Lair",
       "lureSpeed": "120%",
@@ -856,7 +856,7 @@
     {
       "id": "dusekkar-rod",
       "name": "Dusekkar Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "25,000 candy",
       "obtainment": "FischFright 2025",
       "lureSpeed": "80%",
@@ -875,7 +875,7 @@
     {
       "id": "duskwire",
       "name": "Duskwire",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "1,750,001C$",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "100%",
@@ -894,7 +894,7 @@
     {
       "id": "eardrum-rod",
       "name": "Eardrum Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "TBA",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "90%",
@@ -913,7 +913,7 @@
     {
       "id": "egg-rod",
       "name": "Egg Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Egg Hunt 2025",
       "lureSpeed": "75%",
@@ -932,7 +932,7 @@
     {
       "id": "eidolon-rod",
       "name": "Eidolon Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "2,000,000C$ and Level 350",
       "obtainment": "Stage 4 of Cultist Lair",
       "lureSpeed": "100%",
@@ -951,7 +951,7 @@
     {
       "id": "elder-mossripper",
       "name": "Elder Mossripper",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "C$350,000 and Crafting Ingredients",
       "obtainment": "Ancient Archives|title1=Elder Mossripper|disturbance=3|hunt_focus=Mossjaw +8|progress_speed=+30%",
       "lureSpeed": "90%",
@@ -970,7 +970,7 @@
     {
       "id": "electric-guitar",
       "name": "Electric Guitar",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "14,444,44C$",
       "obtainment": "Black Market",
       "lureSpeed": "444%",
@@ -989,7 +989,7 @@
     {
       "id": "ethereal-prism-rod",
       "name": "Ethereal Prism Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "3,500,000C$ and Level 250",
       "obtainment": "Mariana's Veil (Calm Zone)",
       "lureSpeed": "95%",
@@ -1008,7 +1008,7 @@
     {
       "id": "event-horizon-rod",
       "name": "Event Horizon Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Redeem the code ThankYouFollowers3",
       "obtainment": "",
       "lureSpeed": "10%",
@@ -1027,7 +1027,7 @@
     {
       "id": "evil-pitchfork",
       "name": "Evil Pitchfork",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "2,500,00C$ and crafting ingredients",
       "obtainment": "Crimson Cavern",
       "lureSpeed": "150%",
@@ -1046,7 +1046,7 @@
     {
       "id": "fabulous-rod",
       "name": "Fabulous Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "No Price",
       "obtainment": "Calm Zone Fabulous Deity NPC",
       "lureSpeed": "100%",
@@ -1065,7 +1065,7 @@
     {
       "id": "fallen-rod",
       "name": "Fallen Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "170,000$",
       "obtainment": "Tidefall",
       "lureSpeed": "70%",
@@ -1084,7 +1084,7 @@
     {
       "id": "fallen-snowblade",
       "name": "Fallen Snowblade",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "The Fallen Snowblade could be obtained through completing the third and final quest from Sno, at Snowcap Island.",
       "obtainment": "Snowcap Island",
       "lureSpeed": "75%",
@@ -1103,7 +1103,7 @@
     {
       "id": "fast-rod",
       "name": "Fast Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "4,000C$",
       "obtainment": "Moosewood",
       "lureSpeed": "70%",
@@ -1122,7 +1122,7 @@
     {
       "id": "firework-rod",
       "name": "Firework Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "Free",
       "obtainment": "Moosewood (Dr.Glimmerfin)",
       "lureSpeed": "35%",
@@ -1141,7 +1141,7 @@
     {
       "id": "fischer-s-rod",
       "name": "Fischer's Rod",
-      "catalogSection": "Premium and pack rods",
+      "collectionSection": "Premium and pack rods",
       "price": "99",
       "obtainment": "Starter Pack",
       "lureSpeed": "10%",
@@ -1160,7 +1160,7 @@
     {
       "id": "fischmas-rod",
       "name": "Fischmas Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Event Rods",
       "lureSpeed": "10%",
@@ -1179,7 +1179,7 @@
     {
       "id": "fish-photographer",
       "name": "Fish photographer",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "No Price",
       "obtainment": "Exclusive Rods",
       "lureSpeed": "70%",
@@ -1198,7 +1198,7 @@
     {
       "id": "fixer-s-rod",
       "name": "Fixer's Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Event Rods",
       "lureSpeed": "60%",
@@ -1217,7 +1217,7 @@
     {
       "id": "flimsy-rod",
       "name": "Flimsy Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "0C$",
       "obtainment": "Moosewood",
       "lureSpeed": "0%",
@@ -1236,7 +1236,7 @@
     {
       "id": "fortune-rod",
       "name": "Fortune Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "11,000C$",
       "obtainment": "Roslit Bay",
       "lureSpeed": "30%",
@@ -1255,7 +1255,7 @@
     {
       "id": "free-spirit-rod",
       "name": "Free Spirit Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "200,000C$",
       "obtainment": "Mineshaft",
       "lureSpeed": "55%",
@@ -1274,7 +1274,7 @@
     {
       "id": "friendly-rod",
       "name": "Friendly Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "0C$",
       "obtainment": "Friend Quests",
       "lureSpeed": "85%",
@@ -1293,7 +1293,7 @@
     {
       "id": "frog-rod",
       "name": "Frog Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "12,000E$",
       "obtainment": "Waveborne",
       "lureSpeed": "20%",
@@ -1312,7 +1312,7 @@
     {
       "id": "frost-warden-rod",
       "name": "Frost Warden Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Event Rods",
       "lureSpeed": "10%",
@@ -1331,7 +1331,7 @@
     {
       "id": "frostbane-rod",
       "name": "Frostbane Rod",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "1,500,000C$ during a Snowstorm Event.",
       "obtainment": "Northern Expedition (Frigid Cavern)",
       "lureSpeed": "80%",
@@ -1350,7 +1350,7 @@
     {
       "id": "frostfire-rod",
       "name": "Frostfire Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Event Rods",
       "lureSpeed": "20%",
@@ -1369,7 +1369,7 @@
     {
       "id": "fungal-rod",
       "name": "Fungal Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "Reward for completing Agaric's quest",
       "obtainment": "Mushgrove Swamp",
       "lureSpeed": "40%",
@@ -1388,7 +1388,7 @@
     {
       "id": "gingerbread-rod",
       "name": "Gingerbread Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "5,000C$",
       "obtainment": "Fischmas 2025 (Northstar Village)",
       "lureSpeed": "50%",
@@ -1407,7 +1407,7 @@
     {
       "id": "great-dreamer-rod",
       "name": "Great Dreamer Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "700,000C$|location=Cursed Isle",
       "obtainment": "Cursed Isle",
       "lureSpeed": "75%",
@@ -1426,7 +1426,7 @@
     {
       "id": "great-rod-of-oscar",
       "name": "Great Rod Of Oscar",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "2,500,000$; Level 250",
       "obtainment": "Forsaken Shores",
       "lureSpeed": "95%",
@@ -1445,7 +1445,7 @@
     {
       "id": "haunted-rod",
       "name": "Haunted Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "0C$, was obtainable after completing the Witch's quest during the FischFright 2024",
       "obtainment": "Moosewood",
       "lureSpeed": "50%",
@@ -1464,7 +1464,7 @@
     {
       "id": "heaven-s-rod",
       "name": "Heaven's Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "1,750,000C$; Level 220",
       "obtainment": "Northern Expedition (Glacial Grotto)",
       "lureSpeed": "40%",
@@ -1483,7 +1483,7 @@
     {
       "id": "ice-warpers-rod",
       "name": "Ice Warpers Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "65,000C$",
       "obtainment": "Northern Expedition (Overgrowth Caves)",
       "lureSpeed": "50%",
@@ -1502,7 +1502,7 @@
     {
       "id": "igneous-rupturer",
       "name": "Igneous Rupturer",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Not listed",
       "obtainment": "Scoria Reach",
       "lureSpeed": "60%",
@@ -1521,7 +1521,7 @@
     {
       "id": "jack-o-blazer",
       "name": "Jack-o-Blazer",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "From Headless Horseman's fifth quest",
       "obtainment": "FischFright 2025",
       "lureSpeed": "96%",
@@ -1540,7 +1540,7 @@
     {
       "id": "katana-rod",
       "name": "Katana Rod",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "C$1,000,000",
       "obtainment": "Moosewood (Black Market)",
       "lureSpeed": "95%",
@@ -1559,7 +1559,7 @@
     {
       "id": "kings-rod",
       "name": "Kings Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "100,000C$ (100,400C$ including the cost to go to Keepers Altar)",
       "obtainment": "Keeper's Altar",
       "lureSpeed": "30%",
@@ -1578,7 +1578,7 @@
     {
       "id": "kraken-rod",
       "name": "Kraken Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "950,000C$; Level 180",
       "obtainment": "Atlantis (Kraken Pool)",
       "lureSpeed": "60%",
@@ -1597,7 +1597,7 @@
     {
       "id": "krampus-s-rod",
       "name": "Krampus's Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "30,000C$ Obtainable only from Crafting",
       "obtainment": "Ancient Isle",
       "lureSpeed": "30%",
@@ -1616,7 +1616,7 @@
     {
       "id": "leviathan-s-fang-rod",
       "name": "Leviathan's Fang Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "350,000 C$",
       "obtainment": "Veil of the Forsaken",
       "lureSpeed": "85%",
@@ -1635,7 +1635,7 @@
     {
       "id": "lobster-rod",
       "name": "Lobster Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Not listed",
       "obtainment": "Questline",
       "lureSpeed": "60%",
@@ -1654,7 +1654,7 @@
     {
       "id": "long-rod",
       "name": "Long Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "3,000C$",
       "obtainment": "Moosewood",
       "lureSpeed": "20%",
@@ -1673,7 +1673,7 @@
     {
       "id": "lucid-rod",
       "name": "Lucid Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "80,000C$",
       "obtainment": "Ancient Archives",
       "lureSpeed": "80%",
@@ -1692,7 +1692,7 @@
     {
       "id": "lucky-rod",
       "name": "Lucky Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "4,500C$",
       "obtainment": "Moosewood",
       "lureSpeed": "20%",
@@ -1711,7 +1711,7 @@
     {
       "id": "lullaby",
       "name": "Lullaby",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "50,121,212C$",
       "obtainment": "🌘Hawaii🎼",
       "lureSpeed": "90%",
@@ -1730,7 +1730,7 @@
     {
       "id": "luminescent-oath",
       "name": "Luminescent Oath",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "1,000,000C$; Level 500",
       "obtainment": "Luminescent Cavern",
       "lureSpeed": "85%",
@@ -1749,7 +1749,7 @@
     {
       "id": "magma-rod",
       "name": "Magma Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "Reward from completing the Orc's quest.",
       "obtainment": "Roslit Bay",
       "lureSpeed": "45%",
@@ -1768,7 +1768,7 @@
     {
       "id": "magnet-rod",
       "name": "Magnet Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "15,000C$",
       "obtainment": "Terrapin Island",
       "lureSpeed": "-10%",
@@ -1787,7 +1787,7 @@
     {
       "id": "masterline-rod",
       "name": "Masterline Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "Not listed",
       "obtainment": "",
       "lureSpeed": "1000%",
@@ -1806,7 +1806,7 @@
     {
       "id": "merchant-rod",
       "name": "Merchant Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "E$20,000",
       "obtainment": "Whale Interior",
       "lureSpeed": "25%",
@@ -1825,7 +1825,7 @@
     {
       "id": "merlin-s-staff",
       "name": "Merlin's Staff",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "Not listed",
       "obtainment": "Sunstone Island Merlin",
       "lureSpeed": "80%",
@@ -1844,7 +1844,7 @@
     {
       "id": "midas-rod",
       "name": "Midas Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "55,000C$",
       "obtainment": "Travelling Merchant",
       "lureSpeed": "70%",
@@ -1863,7 +1863,7 @@
     {
       "id": "migurod",
       "name": "MiguRod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "4,014,014C$ (5,014,014C$/1,004,014,014C$ if parts included)",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "427%",
@@ -1882,7 +1882,7 @@
     {
       "id": "mission-specialist-s-rod",
       "name": "Mission Specialist's Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "0C$",
       "obtainment": "Jurassic Island",
       "lureSpeed": "60%",
@@ -1901,7 +1901,7 @@
     {
       "id": "mythical-rod",
       "name": "Mythical Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "90,000C$",
       "obtainment": "Travelling Merchant",
       "lureSpeed": "40%",
@@ -1920,7 +1920,7 @@
     {
       "id": "nates-blade",
       "name": "Nates Blade",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "200,000,000C$",
       "obtainment": "Black Market",
       "lureSpeed": "119%",
@@ -1939,7 +1939,7 @@
     {
       "id": "necrotic-rod",
       "name": "Necrotic Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "660,000 C$ and crafting ingredients",
       "obtainment": "FischFright 2025/Ancient Archives",
       "lureSpeed": "82%",
@@ -1958,7 +1958,7 @@
     {
       "id": "nico-s-yarncaster",
       "name": "Nico's Yarncaster",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "No Price",
       "obtainment": "Crazy Cat Lady NPC",
       "lureSpeed": "65%",
@@ -1977,7 +1977,7 @@
     {
       "id": "nilcaster",
       "name": "nilCaster",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "No Price",
       "obtainment": "Exclusive Rods",
       "lureSpeed": "101%",
@@ -1996,7 +1996,7 @@
     {
       "id": "no-life-rod",
       "name": "No-Life Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "No Price",
       "obtainment": "Level 500",
       "lureSpeed": "90%",
@@ -2015,7 +2015,7 @@
     {
       "id": "noctone",
       "name": "Noctone",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "N/A",
       "obtainment": "N/A",
       "lureSpeed": "85%",
@@ -2034,7 +2034,7 @@
     {
       "id": "noctone-previously-axe-of-rhoads",
       "name": "Noctone Previously Axe of Rhoads",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "No Price",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "85%",
@@ -2053,7 +2053,7 @@
     {
       "id": "nocturnal-rod",
       "name": "Nocturnal Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "11,000C$",
       "obtainment": "Vertigo",
       "lureSpeed": "50%",
@@ -2072,7 +2072,7 @@
     {
       "id": "north-pole",
       "name": "North Pole",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Crafting Ingredients; 15,000 Bells",
       "obtainment": "Ancient Archives",
       "lureSpeed": "90%",
@@ -2091,7 +2091,7 @@
     {
       "id": "north-star-rod",
       "name": "North-Star Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "Obtainable by Advent Calendar after 9 days",
       "obtainment": "Moosewood",
       "lureSpeed": "5%",
@@ -2110,7 +2110,7 @@
     {
       "id": "onirifalx",
       "name": "Onirifalx",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Completing Nick's quest line.; (Level 1000 is needed to do the third quest.)",
       "obtainment": "The Depths",
       "lureSpeed": "777%",
@@ -2129,7 +2129,7 @@
     {
       "id": "original-no-life-rod",
       "name": "Original No-Life Rod",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "1C$",
       "obtainment": "Moosewood beside Pierre",
       "lureSpeed": "99%",
@@ -2148,7 +2148,7 @@
     {
       "id": "paintbrush",
       "name": "Paintbrush",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "No Price",
       "obtainment": "Exclusive Rods",
       "lureSpeed": "1618%",
@@ -2167,7 +2167,7 @@
     {
       "id": "paleontologist-s-rod",
       "name": "Paleontologist's Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Event Rods",
       "lureSpeed": "60%",
@@ -2186,7 +2186,7 @@
     {
       "id": "paper-fan-rod",
       "name": "Paper Fan Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "70,000C$",
       "obtainment": "FischFest",
       "lureSpeed": "70%",
@@ -2205,7 +2205,7 @@
     {
       "id": "pen-rod",
       "name": "Pen Rod",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "0C$",
       "obtainment": "Fischipedia Editor Reward",
       "lureSpeed": "65%",
@@ -2224,7 +2224,7 @@
     {
       "id": "peppermint-rod",
       "name": "Peppermint Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Not listed",
       "obtainment": "Fischmas 2025; Northstar Village",
       "lureSpeed": "-250%",
@@ -2243,7 +2243,7 @@
     {
       "id": "phoenix-rod",
       "name": "Phoenix Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "50,000C$",
       "obtainment": "Ancient Isle",
       "lureSpeed": "55%",
@@ -2262,7 +2262,7 @@
     {
       "id": "pinion-s-aria",
       "name": "Pinion's Aria",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "Completing Mysterious Songstress' quest",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "142%",
@@ -2281,7 +2281,7 @@
     {
       "id": "plaguereaver",
       "name": "Plaguereaver",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "13,750,000C$|quote=...",
       "obtainment": "Toxic Grove",
       "lureSpeed": "15%",
@@ -2300,7 +2300,7 @@
     {
       "id": "plastic-rod",
       "name": "Plastic Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "750C$",
       "obtainment": "Moosewood",
       "lureSpeed": "10%",
@@ -2319,7 +2319,7 @@
     {
       "id": "polaris-serenade",
       "name": "Polaris Serenade",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "50,000,000",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "100%",
@@ -2338,7 +2338,7 @@
     {
       "id": "popsicle-rod",
       "name": "Popsicle Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "3000 Shells",
       "obtainment": "Fischfest",
       "lureSpeed": "100%",
@@ -2357,7 +2357,7 @@
     {
       "id": "poseidon-rod",
       "name": "Poseidon Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "700,000C$; Level 100",
       "obtainment": "Atlantis (Poseidon Trial Pool)",
       "lureSpeed": "50%",
@@ -2376,7 +2376,7 @@
     {
       "id": "precision-rod",
       "name": "Precision Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "0C$ and Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "20%",
@@ -2395,7 +2395,7 @@
     {
       "id": "rainbow-cluster-rod",
       "name": "Rainbow Cluster Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "250,000C$",
       "obtainment": "Castaway Cliffs",
       "lureSpeed": "60%",
@@ -2414,7 +2414,7 @@
     {
       "id": "random-rod",
       "name": "Random Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "1-10,000,000 C$",
       "obtainment": "Daily Shop",
       "lureSpeed": "80%",
@@ -2433,7 +2433,7 @@
     {
       "id": "rapid-rod",
       "name": "Rapid Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "12,000C$",
       "obtainment": "Roslit Bay",
       "lureSpeed": "89%",
@@ -2452,7 +2452,7 @@
     {
       "id": "reinforced-rod",
       "name": "Reinforced Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "20,000C$",
       "obtainment": "Desolate Deep",
       "lureSpeed": "40%",
@@ -2471,7 +2471,7 @@
     {
       "id": "relic-rod",
       "name": "Relic Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "8,000C$",
       "obtainment": "Archeological Site",
       "lureSpeed": "80%",
@@ -2490,7 +2490,7 @@
     {
       "id": "remembrance",
       "name": "Remembrance",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "None",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "100%",
@@ -2509,7 +2509,7 @@
     {
       "id": "resourceful-rod",
       "name": "Resourceful Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "30%",
@@ -2528,7 +2528,7 @@
     {
       "id": "riptide-rod",
       "name": "Riptide Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "60%",
@@ -2547,7 +2547,7 @@
     {
       "id": "rod-of-the-cosmos",
       "name": "Rod Of The Cosmos",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Event Rods",
       "lureSpeed": "50%",
@@ -2566,7 +2566,7 @@
     {
       "id": "rod-of-the-depths",
       "name": "Rod Of The Depths",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "C$750,000 (C$772,000+ assuming you've bought the Enchant Relic from Merlin and appraised them)",
       "obtainment": "The Depths",
       "lureSpeed": "65%",
@@ -2585,7 +2585,7 @@
     {
       "id": "rod-of-the-eternal-king",
       "name": "Rod Of The Eternal King",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "0",
       "obtainment": "Ancient Archives",
       "lureSpeed": "50%",
@@ -2604,7 +2604,7 @@
     {
       "id": "rod-of-the-exalted-one",
       "name": "Rod Of The Exalted One",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "0 (Base), >185,000 (Rods needed) and up to 240,000 (Rods needed & 11,000 per relic up to 55,000)",
       "obtainment": "The Keeper's Secret",
       "lureSpeed": "55%",
@@ -2623,7 +2623,7 @@
     {
       "id": "rod-of-the-forgotten-fang",
       "name": "Rod Of The Forgotten Fang",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "0C$; Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "80%",
@@ -2642,7 +2642,7 @@
     {
       "id": "rod-of-the-zenith",
       "name": "Rod Of The Zenith",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "C$1,500,000 and Level 150",
       "obtainment": "Mariana's Veil (Abyssal Zenith)",
       "lureSpeed": "80%",
@@ -2661,7 +2661,7 @@
     {
       "id": "rod-of-time",
       "name": "Rod Of Time",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "Not listed",
       "obtainment": "AFK Mines",
       "lureSpeed": "20%",
@@ -2680,7 +2680,7 @@
     {
       "id": "rose-rend",
       "name": "Rose Rend",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "DLC Codes",
       "lureSpeed": "85%",
@@ -2699,7 +2699,7 @@
     {
       "id": "ruinous-oath",
       "name": "Ruinous Oath",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "5,000,000C$",
       "obtainment": "Crimson Cavern",
       "lureSpeed": "95%",
@@ -2718,7 +2718,7 @@
     {
       "id": "sanguine-spire",
       "name": "Sanguine Spire",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "10,000,000",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "100%",
@@ -2737,7 +2737,7 @@
     {
       "id": "santa-s-miracle-rod",
       "name": "Santa's Miracle Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Not listed",
       "obtainment": "Fischmas 2025; Santa",
       "lureSpeed": "125%",
@@ -2756,7 +2756,7 @@
     {
       "id": "scarlet-ravager",
       "name": "Scarlet Ravager",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "DLC Codes",
       "lureSpeed": "90%",
@@ -2775,7 +2775,7 @@
     {
       "id": "scarlet-spincaster-rod",
       "name": "Scarlet Spincaster Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "180,000C$",
       "obtainment": "Crimson Cavern",
       "lureSpeed": "50%",
@@ -2794,7 +2794,7 @@
     {
       "id": "scurvy-rod",
       "name": "Scurvy Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "40,000",
       "obtainment": "Forsaken Shores",
       "lureSpeed": "25%",
@@ -2813,7 +2813,7 @@
     {
       "id": "seasons-rod",
       "name": "Seasons Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "25%",
@@ -2832,7 +2832,7 @@
     {
       "id": "seraphic-rod",
       "name": "Seraphic Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "No Price",
       "obtainment": "Level 1000",
       "lureSpeed": "95%",
@@ -2851,7 +2851,7 @@
     {
       "id": "shamrock-rod",
       "name": "Shamrock Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "Quest",
       "obtainment": "Moosewood",
       "lureSpeed": "25%",
@@ -2870,7 +2870,7 @@
     {
       "id": "silly-fun-happy-rod",
       "name": "Silly Fun Happy Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "None",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "inf%",
@@ -2889,7 +2889,7 @@
     {
       "id": "smurf-rod",
       "name": "Smurf Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Event Rods",
       "lureSpeed": "15%",
@@ -2908,7 +2908,7 @@
     {
       "id": "soulreaper",
       "name": "SOULREAPER",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "No Price",
       "obtainment": "After completing all quests from the Reaper",
       "lureSpeed": "999.999%",
@@ -2927,7 +2927,7 @@
     {
       "id": "sovereign-doombringer",
       "name": "Sovereign Doombringer",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "No Price",
       "obtainment": "Exclusive Rods",
       "lureSpeed": "65%",
@@ -2946,7 +2946,7 @@
     {
       "id": "spiritbinder",
       "name": "Spiritbinder",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "C$500,000 and Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "90%",
@@ -2965,7 +2965,7 @@
     {
       "id": "spooky-rod",
       "name": "Spooky Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "From the Witch rewards",
       "obtainment": "Fischfright 2025",
       "lureSpeed": "75%",
@@ -2984,7 +2984,7 @@
     {
       "id": "steady-rod",
       "name": "Steady Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "7,000C$",
       "obtainment": "Roslit Bay",
       "lureSpeed": "-60%",
@@ -3003,7 +3003,7 @@
     {
       "id": "stone-rod",
       "name": "Stone Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "2,000C$",
       "obtainment": "Ancient Isle",
       "lureSpeed": "-5%",
@@ -3022,7 +3022,7 @@
     {
       "id": "summit-rod",
       "name": "Summit Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "500,000C$",
       "obtainment": "Northern Expedition (Cryogenic Canal)",
       "lureSpeed": "45%",
@@ -3041,7 +3041,7 @@
     {
       "id": "sunken-rod",
       "name": "Sunken Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Obtainable only from Treasure Chests",
       "obtainment": "Every 50 different spot of First Sea where Treasure Chest spawn.",
       "lureSpeed": "50%",
@@ -3060,7 +3060,7 @@
     {
       "id": "superstar-rod",
       "name": "Superstar Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "199 Robux",
       "obtainment": "Walmart Discovered",
       "lureSpeed": "50%",
@@ -3079,7 +3079,7 @@
     {
       "id": "sweet-stinger",
       "name": "Sweet-Stinger",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "150,000C$",
       "obtainment": "Nectar Den",
       "lureSpeed": "180%",
@@ -3098,7 +3098,7 @@
     {
       "id": "sword-of-darkness",
       "name": "Sword of Darkness",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "C$50,000,000",
       "obtainment": "Black Market",
       "lureSpeed": "250%",
@@ -3117,7 +3117,7 @@
     {
       "id": "tempest-rod",
       "name": "Tempest Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "*500,000 C$",
       "obtainment": "Atlantis",
       "lureSpeed": "90%",
@@ -3136,7 +3136,7 @@
     {
       "id": "test-rod",
       "name": "Test Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "0C$",
       "obtainment": "Underground Music Venue",
       "lureSpeed": "150%",
@@ -3155,7 +3155,7 @@
     {
       "id": "thalassar-s-ruin",
       "name": "Thalassar's ruin",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "14,500,000",
       "obtainment": "Tidefall",
       "lureSpeed": "200%",
@@ -3174,7 +3174,7 @@
     {
       "id": "the-boom-ball",
       "name": "The Boom Ball",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "50,000C$",
       "obtainment": "Detonator's Rest",
       "lureSpeed": "0%",
@@ -3193,7 +3193,7 @@
     {
       "id": "the-lost-rod",
       "name": "The Lost Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "45%",
@@ -3212,7 +3212,7 @@
     {
       "id": "tidal-wave-rod",
       "name": "Tidal Wave Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Fischfest 2025",
       "lureSpeed": "50%",
@@ -3231,7 +3231,7 @@
     {
       "id": "toxic-spire-rod",
       "name": "Toxic Spire Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "87%",
@@ -3250,7 +3250,7 @@
     {
       "id": "toxinburst-rod",
       "name": "Toxinburst Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "Crafting Ingredients + 185,000C$",
       "obtainment": "Ancient Archives",
       "lureSpeed": "83%",
@@ -3269,7 +3269,7 @@
     {
       "id": "training-rod",
       "name": "Training Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "300C$",
       "obtainment": "Moosewood",
       "lureSpeed": "10%",
@@ -3288,7 +3288,7 @@
     {
       "id": "tranquility-rod",
       "name": "Tranquility Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "Not listed",
       "obtainment": "Lost Jungle",
       "lureSpeed": "65%",
@@ -3307,7 +3307,7 @@
     {
       "id": "treasure-rod",
       "name": "Treasure Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "50,000C$",
       "obtainment": "Treasure Island",
       "lureSpeed": "30%",
@@ -3326,7 +3326,7 @@
     {
       "id": "trident-rod",
       "name": "Trident Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "150,000C$ (up to 205,000C$ for 11,000C$ per relic if bought)",
       "obtainment": "Desolate Deep",
       "lureSpeed": "35%",
@@ -3345,7 +3345,7 @@
     {
       "id": "tryhard-rod",
       "name": "Tryhard Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "100,000,000",
       "obtainment": "Roslit Volcano",
       "lureSpeed": "80%",
@@ -3364,7 +3364,7 @@
     {
       "id": "upside-down-rod",
       "name": "Upside-Down Rod",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "15,000 C$",
       "obtainment": "Black Market",
       "lureSpeed": "0%",
@@ -3383,7 +3383,7 @@
     {
       "id": "verdant-oath",
       "name": "Verdant Oath",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "12,500,000C$",
       "obtainment": "",
       "lureSpeed": "95%",
@@ -3402,7 +3402,7 @@
     {
       "id": "verdant-shear-rod",
       "name": "Verdant Shear Rod",
-      "catalogSection": "Starter and shop rods",
+      "collectionSection": "Starter and shop rods",
       "price": "75,000C$",
       "obtainment": "Lost Jungle (originally at Lushgrove)",
       "lureSpeed": "70%",
@@ -3421,7 +3421,7 @@
     {
       "id": "view-smasher",
       "name": "View Smasher",
-      "catalogSection": "Exclusive and creator rods",
+      "collectionSection": "Exclusive and creator rods",
       "price": "No Price",
       "obtainment": "Exclusive Rods",
       "lureSpeed": "60%",
@@ -3440,7 +3440,7 @@
     {
       "id": "vinefang-rod",
       "name": "Vinefang Rod",
-      "catalogSection": "Event and reward rods",
+      "collectionSection": "Event and reward rods",
       "price": "No Price",
       "obtainment": "Event Rods",
       "lureSpeed": "80%",
@@ -3459,7 +3459,7 @@
     {
       "id": "vineweaver-rod",
       "name": "Vineweaver Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "80%",
@@ -3478,7 +3478,7 @@
     {
       "id": "volcanic-rod",
       "name": "Volcanic Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "250,000",
       "obtainment": "Volcanic Vents",
       "lureSpeed": "40%",
@@ -3497,7 +3497,7 @@
     {
       "id": "voyager-rod",
       "name": "Voyager Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "45%",
@@ -3516,7 +3516,7 @@
     {
       "id": "wicked-fang-rod",
       "name": "Wicked Fang Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "400,000C$ and Level 300",
       "obtainment": "Crimson Cavern",
       "lureSpeed": "95%",
@@ -3535,7 +3535,7 @@
     {
       "id": "wildflower-rod",
       "name": "Wildflower Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "7,000",
       "obtainment": "Terrapin Island",
       "lureSpeed": "70%",
@@ -3554,7 +3554,7 @@
     {
       "id": "wind-elemental",
       "name": "Wind Elemental",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "No Price",
       "obtainment": "From the Wind Master at Northern Expedition (Glacial Grotto)",
       "lureSpeed": "555%",
@@ -3573,7 +3573,7 @@
     {
       "id": "wingripper",
       "name": "Wingripper",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "None",
       "obtainment": "Underground Music Venue (Goth)",
       "lureSpeed": "222%",
@@ -3592,7 +3592,7 @@
     {
       "id": "wisdom-rod",
       "name": "Wisdom Rod",
-      "catalogSection": "Advanced progression rods",
+      "collectionSection": "Advanced progression rods",
       "price": "Crafting Ingredients",
       "obtainment": "Ancient Archives",
       "lureSpeed": "55%",
@@ -3611,7 +3611,7 @@
     {
       "id": "zeus-rod",
       "name": "Zeus Rod",
-      "catalogSection": "Passive and utility rods",
+      "collectionSection": "Passive and utility rods",
       "price": "850,000C$; Level 150",
       "obtainment": "Zeus's Rod Room",
       "lureSpeed": "70%",

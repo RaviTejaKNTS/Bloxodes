@@ -14,10 +14,10 @@ import {
 } from "@/lib/db";
 import { getUniverseEventSummary, listUniverseEventTimeline, type UniverseEventSummary, type UniverseTimelineEvent } from "@/lib/events-summary";
 import {
-  listPublishedWikiCatalogPagesByUniverseId,
-  listPublishedWikiCatalogPagesByWikiSlug,
-  type WikiCatalogListEntry
-} from "@/lib/wiki-catalog";
+  listPublishedWikiCollectionPagesByUniverseId,
+  listPublishedWikiCollectionPagesByWikiSlug,
+  type WikiCollectionListEntry
+} from "@/lib/wiki-collections";
 import { supabaseAdmin } from "@/lib/supabase";
 import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
 import type { QuizListEntry } from "@/lib/quizzes";
@@ -163,7 +163,7 @@ export type WikiRelatedData = {
   tools: ToolListEntry[];
   articles: ArticleWithRelations[];
   checklists: ChecklistSummaryRow[];
-  catalogPages: WikiCatalogListEntry[];
+  catalogPages: WikiCollectionListEntry[];
   quizzes: QuizListEntry[];
   eventsPage: EventsPageSummary | null;
   eventSummary: UniverseEventSummary | null;
@@ -530,7 +530,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
   const universeId = page.universe_id ?? null;
   const slug = page.slug?.trim().toLowerCase() ?? "";
   const catalogPagesBySlugPromise = slug
-    ? safeList("wiki catalog pages by slug", () => listPublishedWikiCatalogPagesByWikiSlug(slug))
+    ? safeList("wiki collection pages by slug", () => listPublishedWikiCollectionPagesByWikiSlug(slug))
     : Promise.resolve([]);
 
   if (!universeId) {
@@ -561,7 +561,7 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
     safeList("tools", () => listPublishedToolsByUniverseId(universeId, 6)),
     safeList("articles", () => listPublishedArticlesByUniverseId(universeId, 8, 0)),
     safeList("checklists", () => listPublishedChecklistsByUniverseId(universeId, 4)),
-    safeList("wiki catalog pages", () => listPublishedWikiCatalogPagesByUniverseId(universeId)),
+    safeList("wiki collection pages", () => listPublishedWikiCollectionPagesByUniverseId(universeId)),
     catalogPagesBySlugPromise,
     safeList("quizzes", () => listWikiQuizzesByUniverseId(universeId, 4)),
     safeValue("events page", () => getEventsPageByUniverseId(universeId)),
@@ -600,9 +600,9 @@ export async function loadWikiRelatedData(page: WikiPageContent): Promise<WikiRe
   };
 }
 
-function mergeCatalogPages(left: WikiCatalogListEntry[], right: WikiCatalogListEntry[]): WikiCatalogListEntry[] {
+function mergeCatalogPages(left: WikiCollectionListEntry[], right: WikiCollectionListEntry[]): WikiCollectionListEntry[] {
   const seen = new Set<string>();
-  const merged: WikiCatalogListEntry[] = [];
+  const merged: WikiCollectionListEntry[] = [];
   for (const entry of [...left, ...right]) {
     if (seen.has(entry.code)) continue;
     seen.add(entry.code);

@@ -53,8 +53,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Roblox color codes | `/catalog/roblox-color-codes` | `src/app/(site)/catalog/roblox-color-codes/*`, data helper in `page-data.tsx` |
 | Roblox decal IDs | `/catalog/roblox-decal-ids`, `/catalog/roblox-decal-ids/page/[page]` | `src/app/(site)/catalog/roblox-decal-ids/*`, helpers in `page-data.tsx` |
 | Admin commands | `/catalog/admin-commands`, `/catalog/admin-commands/[system]` | `src/app/(site)/catalog/admin-commands/*`, backed by `data/Admin commands/*.md` |
-| The Forge catalog | `/catalog/the-forge`, `/catalog/the-forge/[collection]`, `/catalog/the-forge-*` flat collection routes | `src/app/(site)/catalog/the-forge/*` plus flat wrappers, view helper in `ForgeCatalogView.tsx`, data helper in `page-data.tsx` |
-| Grow a Garden catalog | `/catalog/grow-a-garden/[collection]`, `/catalog/grow-a-garden-*` flat collection routes | `src/app/(site)/catalog/grow-a-garden/*` plus flat wrappers, shared view helper reused from `the-forge/ForgeCatalogView.tsx`, data helper in `page-data.tsx` |
+| The Forge collections | `/wiki/the-forge/[collection]` | `src/app/(site)/wiki/collections/games/the-forge.tsx` |
+| Grow a Garden collections | `/wiki/grow-a-garden/[collection]` | `src/app/(site)/wiki/collections/games/grow-a-garden.tsx` |
 | Generic catalog fallback | `/catalog/[...slug]` | `src/app/(site)/catalog/[...slug]/page.tsx`, backed by Supabase catalog copy |
 
 ## Tool Families
@@ -94,8 +94,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `src/app/(site)/catalog/roblox-color-codes/page-data.tsx`
 - `src/app/(site)/catalog/roblox-decal-ids/page-data.tsx`
 - `src/app/(site)/catalog/roblox-music-ids/page-data.tsx`
-- `src/app/(site)/catalog/grow-a-garden/page-data.tsx`
-- `src/app/(site)/catalog/the-forge/page-data.tsx`
+- `src/app/(site)/wiki/collections/games/grow-a-garden.tsx`
+- `src/app/(site)/wiki/collections/games/the-forge.tsx`
 - `src/app/(site)/checklists/page-data.tsx`
 - `src/app/(site)/codes/page-data.tsx`
 - `src/app/(site)/events/page-data.tsx`

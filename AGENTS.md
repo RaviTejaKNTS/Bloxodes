@@ -16,8 +16,8 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
 - `.agents/skills/bloxodes-*-research/SKILL.md`: focused content research and source proof before writing.
-- `.agents/skills/bloxodes-game-catalog-data/SKILL.md`: game catalog dataset, fields, sections, and renderer readiness.
-- `.agents/skills/bloxodes-game-catalog-images/SKILL.md`: game catalog image collection, local image paths, and image readiness.
+- `.agents/skills/bloxodes-game-collection-data/SKILL.md`: game collection dataset, fields, sections, and renderer readiness.
+- `.agents/skills/bloxodes-game-collection-images/SKILL.md`: game collection image collection, local image paths, and image readiness.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
@@ -42,7 +42,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - For public content changes, check all of: metadata, JSON-LD, pagination, sitemap coverage, feed coverage, and `/api/revalidate`.
 - For mutations, keep origin validation, rate limiting, and tag revalidation explicit.
 - Prefer `npm run ...` aliases over direct `tsx path/to/script.ts` when an alias already exists.
-- Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_catalog_pages.wiki_slug`.
+- Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_collection_pages.wiki_slug`.
 
 ## Design Direction
 
@@ -62,13 +62,13 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 4. Update `apps/web/src/app/sitemap.xml/route.ts`, `apps/web/src/app/sitemaps/*`, `apps/web/src/app/feed.xml/route.ts`, or `apps/web/src/app/api/revalidate/route.ts` if the content is publishable.
 5. Refresh the relevant inventory doc in `agents/`.
 
-### Game wiki and catalog pages
+### Game wiki and collection pages
 
-1. Use the matching `.agents/skills/bloxodes-*` skill directly. For full jobs, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-catalog-workflow-runner`.
-2. Gather game catalog item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a catalog because an API does not expose item rows.
+1. Use the matching `.agents/skills/bloxodes-*` skill directly. For full jobs, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-collection-workflow-runner`.
+2. Gather game collection item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a collection because an API does not expose item rows.
 3. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
-4. Seed and preview `wiki_pages` and `catalog_pages` locally before production.
-5. Keep catalog codes in `<game-slug>-<collection-slug>` format.
+4. Seed and preview `wiki_pages` and `wiki_collection_pages` locally before production.
+5. Keep collection codes in `<game-slug>-<collection-slug>` format.
 6. Verify local dataset images, item counts, useful card fields, metadata, sitemaps, search, and revalidation before publishing.
 7. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
 

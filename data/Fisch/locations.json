@@ -9,7 +9,7 @@
     "catalogCode": "fisch-locations",
     "updatedAt": "2026-06-21",
     "itemCount": 52,
-    "groupBy": "catalogSection",
+    "groupBy": "collectionSection",
     "defaultCardFields": [
       "sea",
       "type",
@@ -22,7 +22,7 @@
     "columns": [
       "name",
       "slug",
-      "catalogSection",
+      "collectionSection",
       "sea",
       "type",
       "access",
@@ -69,7 +69,7 @@
     {
       "name": "Moosewood",
       "slug": "moosewood",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Starter island",
       "access": "New-player spawn in the middle of the map.",
@@ -88,7 +88,7 @@
     {
       "name": "The Ocean",
       "slug": "the-ocean",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Open-water region",
       "access": "Open water around the main islands.",
@@ -107,7 +107,7 @@
     {
       "name": "Roslit Bay",
       "slug": "roslit-bay",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Boat route from the main sea.",
@@ -126,7 +126,7 @@
     {
       "name": "Sunstone Island",
       "slug": "sunstone-island",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Boat route from the main sea.",
@@ -145,7 +145,7 @@
     {
       "name": "Snowcap Island",
       "slug": "snowcap-island",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Boat route from the main sea.",
@@ -164,7 +164,7 @@
     {
       "name": "Terrapin Island",
       "slug": "terrapin-island",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Boat route from the main sea.",
@@ -183,7 +183,7 @@
     {
       "name": "Mushgrove Swamp",
       "slug": "mushgrove-swamp",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Boat route from the main sea.",
@@ -202,7 +202,7 @@
     {
       "name": "Forsaken Shores",
       "slug": "forsaken-shores",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Boat route from the main sea.",
@@ -221,7 +221,7 @@
     {
       "name": "Ancient Isle",
       "slug": "ancient-isle",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Boat route from the main sea.",
@@ -240,7 +240,7 @@
     {
       "name": "Grand Reef",
       "slug": "grand-reef",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major reef",
       "access": "Boat route from the main sea.",
@@ -259,7 +259,7 @@
     {
       "name": "Castaway Cliffs",
       "slug": "castaway-cliffs",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Boat route from the main sea.",
@@ -278,7 +278,7 @@
     {
       "name": "Lost Jungle",
       "slug": "lost-jungle",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Located northeast of Sunstone Island according to the source page.",
@@ -297,7 +297,7 @@
     {
       "name": "Cursed Isle",
       "slug": "cursed-isle",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Boat route from the main sea.",
@@ -316,7 +316,7 @@
     {
       "name": "Treasure Island",
       "slug": "treasure-island",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major island",
       "access": "Boat route from the main sea.",
@@ -335,7 +335,7 @@
     {
       "name": "Statue of Sovereignty",
       "slug": "statue-of-sovereignty",
-      "catalogSection": "Starter islands and services",
+      "collectionSection": "Starter islands and services",
       "sea": "First Sea",
       "type": "Major structure",
       "access": "Boat route plus internal paid/gated altar access for Keeper's Altar.",
@@ -354,7 +354,7 @@
     {
       "name": "The Arch",
       "slug": "the-arch",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Landmark",
       "access": "Boat route in the main sea.",
@@ -373,7 +373,7 @@
     {
       "name": "Vertigo",
       "slug": "vertigo",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Special area",
       "access": "Reached through Strange Whirlpool routing.",
@@ -392,7 +392,7 @@
     {
       "name": "The Depths",
       "slug": "the-depths",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Deep-zone area",
       "access": "Special progression route from Vertigo and related depth systems.",
@@ -411,7 +411,7 @@
     {
       "name": "Desolate Deep",
       "slug": "desolate-deep",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Underwater area",
       "access": "Requires diving gear route according to related Brine Pool source notes.",
@@ -430,7 +430,7 @@
     {
       "name": "Desolate Pocket",
       "slug": "desolate-pocket",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Underwater sub-location",
       "access": "Inside the Desolate Deep route.",
@@ -449,7 +449,7 @@
     {
       "name": "Brine Pool",
       "slug": "brine-pool",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Hazard fishing pool",
       "access": "Entered from Desolate Deep; fishing needs Reinforced Rod or Invincible enchantment.",
@@ -468,7 +468,7 @@
     {
       "name": "Keeper's Altar",
       "slug": "keepers-altar",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Altar",
       "access": "Reached through Statue of Sovereignty route.",
@@ -487,7 +487,7 @@
     {
       "name": "Roslit Volcano",
       "slug": "roslit-volcano",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Volcano sub-location",
       "access": "Sub-location of Roslit Bay.",
@@ -506,7 +506,7 @@
     {
       "name": "Ancient Archives",
       "slug": "ancient-archives",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Puzzle/progression area",
       "access": "Ancient Isle route.",
@@ -525,7 +525,7 @@
     {
       "name": "Atlantean Storm",
       "slug": "atlantean-storm",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Storm/event area",
       "access": "Appears as a named location route in location navigation.",
@@ -544,7 +544,7 @@
     {
       "name": "Cultist Lair",
       "slug": "cultist-lair",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Hidden lair",
       "access": "Lever route from Terrapin Hideaway on foggy nights according to the source page.",
@@ -563,7 +563,7 @@
     {
       "name": "Underground Music Venue",
       "slug": "underground-music-venue",
-      "catalogSection": "Deep, hidden, and quest areas",
+      "collectionSection": "Deep, hidden, and quest areas",
       "sea": "First Sea",
       "type": "Hidden venue",
       "access": "Hidden route tied to music-themed progression.",
@@ -582,7 +582,7 @@
     {
       "name": "Northern Expedition",
       "slug": "northern-expedition",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Mountain expedition region",
       "access": "Expedition route with multiple mountain sub-locations.",
@@ -601,7 +601,7 @@
     {
       "name": "Northern Summit",
       "slug": "northern-summit",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Expedition sub-location",
       "access": "Northern Expedition route.",
@@ -620,7 +620,7 @@
     {
       "name": "Overgrowth Caves",
       "slug": "overgrowth-caves",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Expedition cave",
       "access": "Northern Expedition route.",
@@ -639,7 +639,7 @@
     {
       "name": "Frigid Cavern",
       "slug": "frigid-cavern",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Expedition cave",
       "access": "Northern Expedition route.",
@@ -658,7 +658,7 @@
     {
       "name": "Cryogenic Canal",
       "slug": "cryogenic-canal",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Expedition water route",
       "access": "Northern Expedition route.",
@@ -677,7 +677,7 @@
     {
       "name": "Glacial Grotto",
       "slug": "glacial-grotto",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Expedition grotto",
       "access": "Northern Expedition route.",
@@ -696,7 +696,7 @@
     {
       "name": "Atlantis",
       "slug": "atlantis",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Underwater city",
       "access": "Grand Reef route according to the source page.",
@@ -715,7 +715,7 @@
     {
       "name": "Poseidon Trial Pool",
       "slug": "poseidon-trial-pool",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Atlantis trial pool",
       "access": "Atlantis route.",
@@ -734,7 +734,7 @@
     {
       "name": "Kraken Pool",
       "slug": "kraken-pool",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Atlantis pool",
       "access": "Atlantis route.",
@@ -753,7 +753,7 @@
     {
       "name": "Ethereal Abyss Pool",
       "slug": "ethereal-abyss-pool",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Atlantis pool",
       "access": "Atlantis route.",
@@ -772,7 +772,7 @@
     {
       "name": "Mariana's Veil",
       "slug": "marianas-veil",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Deep-sea region",
       "access": "Submarine route with Submarine Shipwright and Inn Keeper listed on source page.",
@@ -791,7 +791,7 @@
     {
       "name": "Volcanic Vents",
       "slug": "volcanic-vents",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Mariana sub-location",
       "access": "Mariana's Veil route.",
@@ -810,7 +810,7 @@
     {
       "name": "Challenger's Deep",
       "slug": "challengers-deep",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Mariana sub-location",
       "access": "Mariana's Veil route.",
@@ -829,7 +829,7 @@
     {
       "name": "Abyssal Zenith",
       "slug": "abyssal-zenith",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Mariana sub-location",
       "access": "Mariana's Veil route.",
@@ -848,7 +848,7 @@
     {
       "name": "Calm Zone",
       "slug": "calm-zone",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Mariana sub-location",
       "access": "Mariana's Veil route.",
@@ -867,7 +867,7 @@
     {
       "name": "Veil of the Forsaken",
       "slug": "veil-of-the-forsaken",
-      "catalogSection": "Northern, Atlantis, and Mariana routes",
+      "collectionSection": "Northern, Atlantis, and Mariana routes",
       "sea": "First Sea",
       "type": "Mariana sub-location",
       "access": "Mariana's Veil route.",
@@ -886,7 +886,7 @@
     {
       "name": "Tidefall",
       "slug": "tidefall",
-      "catalogSection": "Tidefall and newer islands",
+      "collectionSection": "Tidefall and newer islands",
       "sea": "First Sea",
       "type": "Cave system",
       "access": "Underwater Opening under The Ocean according to the source page.",
@@ -905,7 +905,7 @@
     {
       "name": "Coral Bastion",
       "slug": "coral-bastion",
-      "catalogSection": "Tidefall and newer islands",
+      "collectionSection": "Tidefall and newer islands",
       "sea": "First Sea",
       "type": "Tidefall branch",
       "access": "Tidefall cave-system route.",
@@ -924,7 +924,7 @@
     {
       "name": "Collapsed Ruins",
       "slug": "collapsed-ruins",
-      "catalogSection": "Tidefall and newer islands",
+      "collectionSection": "Tidefall and newer islands",
       "sea": "First Sea",
       "type": "Tidefall branch",
       "access": "Tidefall cave-system route.",
@@ -943,7 +943,7 @@
     {
       "name": "Crowned Ruins",
       "slug": "crowned-ruins",
-      "catalogSection": "Tidefall and newer islands",
+      "collectionSection": "Tidefall and newer islands",
       "sea": "First Sea",
       "type": "Tidefall branch",
       "access": "Tidefall cave-system route.",
@@ -962,7 +962,7 @@
     {
       "name": "Sunken Reliquary",
       "slug": "sunken-reliquary",
-      "catalogSection": "Tidefall and newer islands",
+      "collectionSection": "Tidefall and newer islands",
       "sea": "First Sea",
       "type": "Tidefall branch",
       "access": "Tidefall cave-system route.",
@@ -981,7 +981,7 @@
     {
       "name": "Tidefall Castle",
       "slug": "tidefall-castle",
-      "catalogSection": "Tidefall and newer islands",
+      "collectionSection": "Tidefall and newer islands",
       "sea": "First Sea",
       "type": "Tidefall branch",
       "access": "Tidefall cave-system route.",
@@ -1000,7 +1000,7 @@
     {
       "name": "Scoria Reach",
       "slug": "scoria-reach",
-      "catalogSection": "Tidefall and newer islands",
+      "collectionSection": "Tidefall and newer islands",
       "sea": "Second Sea",
       "type": "Major island",
       "access": "Located east of Lost Jungle according to the source page.",
@@ -1019,7 +1019,7 @@
     {
       "name": "Everturn Forest",
       "slug": "everturn-forest",
-      "catalogSection": "Tidefall and newer islands",
+      "collectionSection": "Tidefall and newer islands",
       "sea": "Second Sea",
       "type": "Major island",
       "access": "Second-sea route listed as a major location.",
@@ -1038,7 +1038,7 @@
     {
       "name": "Above The Clouds",
       "slug": "above-the-clouds",
-      "catalogSection": "Tidefall and newer islands",
+      "collectionSection": "Tidefall and newer islands",
       "sea": "Second Sea",
       "type": "Sky location",
       "access": "Listed as a major location in Fisch navigation.",

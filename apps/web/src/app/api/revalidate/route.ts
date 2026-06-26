@@ -21,7 +21,7 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
   "quiz",
   "puzzle",
   "wiki",
-  "wiki_catalog",
+  "wiki_collection",
   "stats"
 ]);
 
@@ -452,7 +452,7 @@ function revalidateForCatalog(slug: string) {
   );
 }
 
-function revalidateForWikiCatalog(slug: string) {
+function revalidateForWikiCollection(slug: string) {
   const [wikiSlug, collectionSlug] = slug.split("/");
   const oldFlatCatalogSlug = wikiSlug && collectionSlug ? `${wikiSlug}-${collectionSlug}` : "";
   const wikiCatalogBasePath = wikiSlug && collectionSlug ? `/wiki/${wikiSlug}/${collectionSlug}` : "";
@@ -472,11 +472,11 @@ function revalidateForWikiCatalog(slug: string) {
     ].filter(Boolean) as string[],
     [
       "wiki-index",
-      "wiki-catalog-index",
+      "wiki-collection-index",
       "home",
       wikiSlug ? `wiki:${wikiSlug}` : "",
-      wikiSlug && collectionSlug ? `wiki-catalog:${wikiSlug}/${collectionSlug}` : "",
-      oldFlatCatalogSlug ? `wiki-catalog-code:${oldFlatCatalogSlug}` : ""
+      wikiSlug && collectionSlug ? `wiki-collection:${wikiSlug}/${collectionSlug}` : "",
+      oldFlatCatalogSlug ? `wiki-collection-code:${oldFlatCatalogSlug}` : ""
     ]
   );
 }
@@ -564,7 +564,7 @@ async function lookupRelatedWikiSlugs(type: SinglePayload["type"], slug: string)
     universeIds = await lookupUniverseIdsBySlug("quiz_pages", "code", [slug]);
   } else if (type === "catalog") {
     universeIds = await lookupUniverseIdsBySlug("catalog_pages", "code", [slug, slug.replace(/\//g, "-")]);
-  } else if (type === "wiki_catalog") {
+  } else if (type === "wiki_collection") {
     const [wikiSlug] = slug.split("/");
     return wikiSlug ? [wikiSlug] : [];
   }
@@ -590,7 +590,7 @@ async function resolveUniverseIdsForEvent(type: SinglePayload["type"], slug: str
       return lookupUniverseIdsBySlug("catalog_pages", "code", [slug, slug.replace(/\//g, "-")]);
     case "wiki":
       return lookupUniverseIdsBySlug("wiki_pages", "slug", [slug]);
-    case "wiki_catalog": {
+    case "wiki_collection": {
       const [wikiSlug] = slug.split("/");
       return wikiSlug ? lookupUniverseIdsBySlug("wiki_pages", "slug", [wikiSlug]) : [];
     }
@@ -750,8 +750,8 @@ async function collectRevalidationTargets(payload: SinglePayload) {
     case "stats":
       purgePaths = revalidateForStats(slug);
       break;
-    case "wiki_catalog":
-      purgePaths = revalidateForWikiCatalog(slug);
+    case "wiki_collection":
+      purgePaths = revalidateForWikiCollection(slug);
       break;
     case "tool":
       purgePaths = revalidateForTools(slug);
