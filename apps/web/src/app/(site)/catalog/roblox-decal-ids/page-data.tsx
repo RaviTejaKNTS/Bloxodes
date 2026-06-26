@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ContentFaq } from "@/components/ContentFaq";
@@ -27,15 +28,13 @@ import { DecalIdsBrowser } from "./DecalIdsBrowser";
 const PAGE_SIZE = 24;
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
 const DECAL_SOURCE_TABLE = "roblox_decal_ids";
-const DECAL_SOURCE_VIEW = "roblox_decal_ids_ranked_view";
 const BASE_SELECT_FIELDS =
   "asset_id, texture_id, name, description, creator_id, creator_type, creator_name, creator_verified, roblox_created_at, roblox_updated_at, is_public_domain, is_for_sale, price_in_robux, sales, purchasable, vote_count, upvote_percent, thumbnail_url, thumbnail_state, thumbnail_checked_at, source, first_seen_at, last_seen_at, verified_at, popularity_score, categories, primary_category, curated_score, curated_rank, curated_tier, curated_reason";
-const VIEW_SELECT_FIELDS =
-  "asset_id, texture_id, name, description, creator_id, creator_type, creator_name, creator_verified, roblox_created_at, roblox_updated_at, is_public_domain, is_for_sale, price_in_robux, sales, purchasable, vote_count, upvote_percent, thumbnail_url, thumbnail_state, thumbnail_checked_at, source, first_seen_at, last_seen_at, verified_at, popularity_score, categories, primary_category, curated_score, curated_rank, curated_tier, curated_reason, thumbnail_ready, age_bucket, source_count";
 
 export const BASE_PATH = "/catalog/roblox-decal-ids";
 export const CANONICAL = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
 export const DECAL_SEO_TITLE = "Roblox Decal IDs [24K+ Image Codes]";
+export const DECAL_PAGE_HEADING = "Roblox Decal IDs / Image IDs";
 
 export function buildDecalCuratedPath(): string {
   return `${BASE_PATH}/curated`;
@@ -113,6 +112,15 @@ export type DecalResolvedSearch = {
   sort: DecalSortKey;
 };
 
+type DecalNavKey = "all" | "curated" | "categories";
+
+type DecalNavItem = {
+  id: DecalNavKey;
+  title: string;
+  description: string;
+  href: string;
+};
+
 export type BreadcrumbItem = PageBreadcrumbItem;
 
 type OrderableQuery<T> = {
@@ -123,6 +131,27 @@ type DecalListOptions = {
   category?: string | null;
   curated?: boolean;
 };
+
+const DECAL_NAV_ITEMS: DecalNavItem[] = [
+  {
+    id: "all",
+    title: "All Decal IDs",
+    description: "Broad verified decal ID discovery with copy-ready image codes.",
+    href: BASE_PATH
+  },
+  {
+    id: "curated",
+    title: "Curated",
+    description: "Higher-signal decal IDs from curated sources and ranking checks.",
+    href: buildDecalCuratedPath()
+  },
+  {
+    id: "categories",
+    title: "Categories",
+    description: "Browse decal IDs by image style, theme, and common use.",
+    href: buildDecalCategoriesPath()
+  }
+];
 
 export async function buildRobloxDecalCatalogContentHtml(
   catalog: CatalogPageContent | null
@@ -172,6 +201,7 @@ function applySort<T extends OrderableQuery<T>>(query: T, sort: DecalSortKey): T
   switch (sort) {
     case "popular":
       return query
+        .order("vote_count", { ascending: false, nullsFirst: false })
         .order("popularity_score", { ascending: false, nullsFirst: false })
         .order("last_seen_at", { ascending: false, nullsFirst: false });
     case "newest":
@@ -182,17 +212,13 @@ function applySort<T extends OrderableQuery<T>>(query: T, sort: DecalSortKey): T
       return query.order("name", { ascending: true, nullsFirst: false });
     case "creator_asc":
       return query.order("creator_name", { ascending: true, nullsFirst: false });
-    case "sources_desc":
-      return query
-        .order("source_count", { ascending: false, nullsFirst: false })
-        .order("popularity_score", { ascending: false, nullsFirst: false });
     case "recommended":
     default:
       return query
+        .order("curated_rank", { ascending: true, nullsFirst: false })
         .order("curated_score", { ascending: false, nullsFirst: false })
         .order("popularity_score", { ascending: false, nullsFirst: false })
-        .order("last_seen_at", { ascending: false, nullsFirst: false })
-        .order("verified_at", { ascending: false, nullsFirst: false });
+        .order("last_seen_at", { ascending: false, nullsFirst: false });
   }
 }
 
@@ -213,19 +239,12 @@ export async function loadRobloxDecalIdsPageData(
   const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
   const offset = (safePage - 1) * PAGE_SIZE;
   const supabase = supabaseAdmin();
-  const usesRankedView = search.sort === "sources_desc";
-  let query = usesRankedView
-    ? supabase.from(DECAL_SOURCE_VIEW).select(VIEW_SELECT_FIELDS, { count: "exact" })
-    : supabase.from(DECAL_SOURCE_TABLE).select(BASE_SELECT_FIELDS, { count: "exact" });
+  let query = supabase.from(DECAL_SOURCE_TABLE).select(BASE_SELECT_FIELDS, { count: "exact" });
 
-  if (usesRankedView) {
-    query = query.eq("thumbnail_ready", true);
-  } else {
-    query = query
-      .eq("status", "active")
-      .eq("thumbnail_state", "Completed")
-      .not("thumbnail_url", "is", null);
-  }
+  query = query
+    .eq("status", "active")
+    .eq("thumbnail_state", "Completed")
+    .not("thumbnail_url", "is", null);
 
   if (options.curated) {
     query = query.not("curated_rank", "is", null);
@@ -267,7 +286,7 @@ export async function loadRobloxDecalIdsPageData(
   const total = count ?? data?.length ?? 0;
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
-  return { decals: usesRankedView ? ((data ?? []) as DecalRow[]) : normalizeBaseDecalRows(data), total, totalPages };
+  return { decals: normalizeBaseDecalRows(data), total, totalPages };
 }
 
 export async function loadDecalCategories(): Promise<DecalCategoryRow[]> {
@@ -332,32 +351,51 @@ function formatCount(value: number): string {
   return value.toLocaleString("en-US");
 }
 
-function DecalSectionNav({ active }: { active: "all" | "curated" | "categories" }) {
-  const items = [
-    { id: "all", label: "All", href: BASE_PATH },
-    { id: "curated", label: "Curated", href: buildDecalCuratedPath() },
-    { id: "categories", label: "Categories", href: buildDecalCategoriesPath() }
-  ] as const;
-
+function DecalCatalogNav({ active }: { active: DecalNavKey }) {
   return (
-    <nav className="flex flex-wrap items-center gap-2" aria-label="Roblox decal ID sections">
-      {items.map((item) => {
+    <section className="catalog-surface grid gap-4 md:grid-cols-3" aria-label="Roblox decal ID sections">
+      {DECAL_NAV_ITEMS.map((item) => {
         const isActive = item.id === active;
+        const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${isActive
+            ? "border-accent/60 bg-accent/10"
+            : "border-border/70 bg-surface/80 hover:border-accent/55"
+          }`;
+        const card = (
+          <article className={cardClasses} aria-current={isActive ? "page" : undefined}>
+            <span
+              aria-hidden
+              className={`absolute inset-x-0 top-0 h-1 ${isActive ? "bg-accent" : "bg-accent/30 group-hover:bg-accent/60"
+                }`}
+            />
+            <div className="flex h-full flex-col gap-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-lg font-semibold text-foreground">{item.title}</p>
+                {isActive ? (
+                  <span className="rounded-md bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
+                    Active
+                  </span>
+                ) : null}
+              </div>
+              <p className="text-sm text-muted">{item.description}</p>
+            </div>
+          </article>
+        );
+
+        if (isActive) {
+          return (
+            <div key={item.id} className="h-full" aria-current="page">
+              {card}
+            </div>
+          );
+        }
+
         return (
-          <a
-            key={item.id}
-            href={item.href}
-            className={`inline-flex items-center rounded-md border px-3 py-1.5 text-sm font-semibold transition ${
-              isActive
-                ? "border-accent bg-accent text-white"
-                : "border-border/70 bg-surface text-muted hover:border-accent/60 hover:text-foreground"
-            }`}
-          >
-            {item.label}
-          </a>
+          <Link key={item.id} href={item.href} className="block h-full">
+            {card}
+          </Link>
         );
       })}
-    </nav>
+    </section>
   );
 }
 
@@ -404,8 +442,9 @@ export function renderRobloxDecalCategoriesPage({
         <DecalBreadcrumb items={breadcrumbNavItems} />
         <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{baseTitle}</h1>
         <p className="max-w-3xl text-base leading-7 text-muted">{description}</p>
-        <DecalSectionNav active="categories" />
       </header>
+
+      <DecalCatalogNav active="categories" />
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {categories.map((category) => (
@@ -543,6 +582,7 @@ export function renderRobloxDecalIdsPage({
   const updatedIso = updatedDate && !Number.isNaN(updatedDate.getTime()) ? updatedDate.toISOString() : undefined;
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const searchQueryString = buildSearchQueryString({ query: search, sort });
+  const activeNav: DecalNavKey = section === "curated" ? "curated" : section === "category" ? "categories" : "all";
 
   const breadcrumbNavItems: BreadcrumbItem[] = [
     { label: "Home", href: "/" },
@@ -616,7 +656,6 @@ export function renderRobloxDecalIdsPage({
           <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{baseTitle}</h1>
           {pageDescription ? <p className="max-w-3xl text-base leading-7 text-muted">{pageDescription}</p> : null}
           <UpdatedTimestamp value={updatedDate} />
-          <DecalSectionNav active={section === "curated" ? "curated" : section === "category" ? "categories" : "all"} />
         </header>
       ) : (
         <header className="space-y-2">
@@ -626,7 +665,6 @@ export function renderRobloxDecalIdsPage({
           <p className="text-sm text-muted">
             {refreshedLabel ? `Fresh data ${refreshedLabel} · ` : ""}Page {currentPage} of {totalPages}
           </p>
-          <DecalSectionNav active={section === "curated" ? "curated" : section === "category" ? "categories" : "all"} />
         </header>
       )}
 
@@ -634,6 +672,8 @@ export function renderRobloxDecalIdsPage({
         {introNodes ? introNodes : null}
 
         <CatalogAdSlot />
+
+        <DecalCatalogNav active={activeNav} />
 
         <DecalIdsBrowser
           initialDecals={decals}

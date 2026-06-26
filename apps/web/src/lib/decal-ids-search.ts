@@ -4,8 +4,7 @@ export type DecalSortKey =
   | "newest"
   | "oldest"
   | "name_asc"
-  | "creator_asc"
-  | "sources_desc";
+  | "creator_asc";
 
 export type DecalSortOption = {
   value: DecalSortKey;
@@ -25,8 +24,7 @@ export const SORT_OPTIONS: DecalSortOption[] = [
   { value: "newest", label: "Newest" },
   { value: "oldest", label: "Oldest" },
   { value: "name_asc", label: "Name A-Z" },
-  { value: "creator_asc", label: "Creator A-Z" },
-  { value: "sources_desc", label: "Most sourced" }
+  { value: "creator_asc", label: "Creator A-Z" }
 ];
 
 export function normalizeSearchQuery(value?: string | null): string {

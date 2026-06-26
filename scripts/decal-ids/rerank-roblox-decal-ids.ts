@@ -2,14 +2,14 @@ import "../shared/load-env";
 
 import {
   inferDecalCategorySlugs,
-  normalizeDecalCategorySlugs,
-  getDecalCategoryLabel
+  normalizeDecalCategorySlugs
 } from "@/lib/decal-id-categories";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { chunkArray, normalizeNumber, normalizeText, toBoolean } from "./decal-id-utils";
 
 const DRY_RUN = toBoolean(process.env.ROBLOX_DECAL_RERANK_DRY_RUN, false);
 const PAGE_SIZE = 250;
+const UPDATE_CHUNK_SIZE = 200;
 
 type DecalRow = {
   asset_id: number;
@@ -59,13 +59,13 @@ function ageInDays(value: string | null): number | null {
 function sourceBaseWeight(kind: string | null): number {
   switch (kind) {
     case "progameguides_decal_list":
-      return 520;
+      return 760;
     case "beebom_decal_list":
-      return 500;
+      return 720;
     case "robloxden_decal_database":
-      return 420;
+      return 300;
     case "robloxden_decal_category":
-      return 360;
+      return 240;
     case "legacy_decal_json":
       return 120;
     case "roblox_toolbox_decal_search":
@@ -155,16 +155,47 @@ function strongestSource(sourceRows: SourceRow[], fallback: string | null): stri
   ].find((kind) => kinds.has(kind)) ?? fallback;
 }
 
-function bestExternalRank(sourceRows: SourceRow[]): number | null {
-  const ranks = sourceRows
-    .filter((source) =>
-      ["progameguides_decal_list", "beebom_decal_list", "robloxden_decal_database", "robloxden_decal_category"].includes(
-        source.source_kind
-      )
-    )
-    .map((source) => source.source_rank)
-    .filter((rank): rank is number => typeof rank === "number" && Number.isFinite(rank) && rank > 0);
-  return ranks.length ? Math.min(...ranks) : null;
+function externalRankBoost(sourceRows: SourceRow[]): number {
+  return Math.max(
+    0,
+    ...sourceRows
+      .filter((source) => source.source_rank && source.source_rank > 0)
+      .map((source) => {
+        switch (source.source_kind) {
+          case "progameguides_decal_list":
+          case "beebom_decal_list":
+            return safeRankScore(source.source_rank, 950) * 0.95;
+          case "robloxden_decal_database":
+            return safeRankScore(source.source_rank, 700) * 0.35;
+          case "robloxden_decal_category":
+            return safeRankScore(source.source_rank, 500) * 0.22;
+          default:
+            return 0;
+        }
+      })
+  );
+}
+
+function editorialSourceBoost(sourceRows: SourceRow[]): number {
+  return Math.max(
+    0,
+    ...sourceRows.map((source) => {
+      switch (source.source_kind) {
+        case "progameguides_decal_list":
+          return 3200 + safeRankScore(source.source_rank, 950) * 0.65;
+        case "beebom_decal_list":
+          return 3000 + safeRankScore(source.source_rank, 950) * 0.65;
+        case "robloxden_decal_database":
+          return 900 + safeRankScore(source.source_rank, 700) * 0.18;
+        case "robloxden_decal_category":
+          return 500 + safeRankScore(source.source_rank, 500) * 0.12;
+        case "legacy_decal_json":
+          return 450;
+        default:
+          return 0;
+      }
+    })
+  );
 }
 
 function bestRobloxDenFavoriteCount(sourceRows: SourceRow[]): number {
@@ -186,6 +217,50 @@ function textQualityScore(row: DecalRow): number {
   return 70 + descriptionBoost + shortPenalty + genericPenalty + numericPenalty;
 }
 
+function hasEditorialSource(sourceRows: SourceRow[]): boolean {
+  return sourceRows.some((source) => ["progameguides_decal_list", "beebom_decal_list"].includes(source.source_kind));
+}
+
+function frontPageNamePenalty(row: DecalRow, sourceRows: SourceRow[]): number {
+  if (hasEditorialSource(sourceRows)) return 0;
+
+  const name = row.name.trim().toLowerCase();
+  const genericColor = [
+    "black",
+    "white",
+    "red",
+    "blue",
+    "green",
+    "pink",
+    "purple",
+    "yellow",
+    "brown",
+    "gray",
+    "grey"
+  ].includes(name);
+
+  if (genericColor) return 2200;
+  if (name.length < 7) return 1200;
+  if (/^(image|decal|texture|test|untitled)(\\s*\\d+)?$/.test(name)) return 1800;
+
+  return 0;
+}
+
+function frontPageTonePenalty(row: DecalRow, voteCount: number): number {
+  if (voteCount > 0) return 0;
+
+  const text = [row.name, row.description].filter(Boolean).join(" ").toLowerCase();
+  if (!text) return 0;
+
+  const strongTerms = ["cursed", "horror", "haunted", "satanic", "pentagram", "gore"];
+  const mildTerms = ["scary", "creepy", "uncanny", "demon", "skeleton", "blood"];
+
+  if (strongTerms.some((term) => text.includes(term))) return 900;
+  if (mildTerms.some((term) => text.includes(term))) return 450;
+
+  return 0;
+}
+
 function computeScores(row: DecalRow, sourceRows: SourceRow[]): Omit<ScorePayload, "asset_id" | "curated_rank"> {
   const sourceCount = sourceRows.length;
   const sourceKind = strongestSource(sourceRows, row.source);
@@ -195,7 +270,6 @@ function computeScores(row: DecalRow, sourceRows: SourceRow[]): Omit<ScorePayloa
   const upvotePercent = normalizeNumber(row.upvote_percent) ?? 0;
   const sales = normalizeNumber(row.sales) ?? 0;
   const favoriteCount = bestRobloxDenFavoriteCount(sourceRows);
-  const externalRank = bestExternalRank(sourceRows);
   const lastSeenDays = ageInDays(row.last_seen_at);
   const firstSeenDays = ageInDays(row.first_seen_at);
   const verifiedDays = ageInDays(row.verified_at);
@@ -207,8 +281,11 @@ function computeScores(row: DecalRow, sourceRows: SourceRow[]): Omit<ScorePayloa
   const upvoteBoost = Math.max(0, Math.min(100, upvotePercent)) * 3.2;
   const salesBoost = Math.log10(sales + 1) * 45;
   const favoriteBoost = Math.log10(favoriteCount + 1) * 115;
+  const curatedVoteBoost = Math.log10(voteCount + 1) * 1800 + Math.min(voteCount, 100) * 80;
+  const curatedFavoriteBoost = Math.log10(favoriteCount + 1) * 420;
   const creatorBoost = row.creator_verified ? 85 : 0;
-  const rankBoost = safeRankScore(externalRank, 850) * 0.75;
+  const rankBoost = externalRankBoost(sourceRows);
+  const editorialBoost = editorialSourceBoost(sourceRows);
   const sourceFreshness = sourceRecencyWeight(sourceKind);
   const recentSeenBoost = lastSeenDays === null ? 0 : Math.max(0, 180 - lastSeenDays) * 1.8 * sourceFreshness;
   const newDiscoveryBoost = firstSeenDays === null ? 0 : Math.max(0, 35 - firstSeenDays) * 1.1;
@@ -218,6 +295,9 @@ function computeScores(row: DecalRow, sourceRows: SourceRow[]): Omit<ScorePayloa
   const metadataBoost = textQualityScore(row);
   const toolboxOnlyPenalty =
     sourceRows.length <= 1 && (sourceKind === "roblox_toolbox_decal_search" || !sourceKind) ? 260 : 0;
+  const curatedToolboxOnlyPenalty = toolboxOnlyPenalty ? 900 : 0;
+  const curatedNamePenalty = frontPageNamePenalty(row, sourceRows);
+  const curatedTonePenalty = frontPageTonePenalty(row, voteCount);
   const lowSignalPenalty =
     voteCount === 0 && upvotePercent === 0 && favoriteCount === 0 && sourceCount <= 1 ? 220 : 0;
 
@@ -247,35 +327,32 @@ function computeScores(row: DecalRow, sourceRows: SourceRow[]): Omit<ScorePayloa
       source.source_kind
     )
   );
-  const highRobloxSignal = voteCount >= 100 || upvotePercent >= 85 || favoriteCount >= 150 || sales >= 100;
   const curatedScore = Math.max(
     0,
-    (isCuratedSource ? 700 : 0) +
-      (highRobloxSignal ? 240 : 0) +
-      sourceBoost * 0.22 +
-      rankBoost +
-      favoriteBoost +
-      voteBoost * 0.7 +
-      upvoteBoost +
+    curatedVoteBoost +
+      editorialBoost +
+      curatedFavoriteBoost +
+      sourceDiversityBoost +
+      sourceBoost * 0.08 +
       creatorBoost +
-      metadataBoost +
-      categoryBoost -
+      Math.max(0, metadataBoost) -
       toolboxOnlyPenalty -
+      curatedToolboxOnlyPenalty -
+      curatedNamePenalty -
+      curatedTonePenalty -
       lowSignalPenalty
   );
 
   const curatedTier =
-    curatedScore >= 1200 ? "best" :
-      curatedScore >= 850 ? "strong" :
-        curatedScore >= 620 ? "notable" :
+    curatedScore >= 5500 ? "best" :
+      curatedScore >= 3200 ? "strong" :
+        curatedScore >= 1800 ? "notable" :
           null;
   const curatedReason = curatedTier
     ? [
       isCuratedSource ? "curated source" : null,
       favoriteCount ? `${favoriteCount.toLocaleString("en-US")} RobloxDen favorites` : null,
-      voteCount ? `${voteCount.toLocaleString("en-US")} votes` : null,
-      upvotePercent ? `${upvotePercent}% rating` : null,
-      primaryCategory ? getDecalCategoryLabel(primaryCategory) : null
+      voteCount ? `${voteCount.toLocaleString("en-US")} votes` : null
     ].filter(Boolean).slice(0, 3).join(" · ")
     : null;
 
@@ -293,6 +370,7 @@ async function loadRows(): Promise<DecalRow[]> {
   const sb = supabaseAdmin();
   const rows: DecalRow[] = [];
   let lastAssetId = 0;
+  let pageCount = 0;
 
   while (true) {
     const query = sb
@@ -308,17 +386,24 @@ async function loadRows(): Promise<DecalRow[]> {
     if (error) throw new Error(`Failed to load decal rows: ${error.message}`);
     const page = (data ?? []) as DecalRow[];
     rows.push(...page);
+    pageCount += 1;
+    if (pageCount % 20 === 0) {
+      console.log(`Loaded ${rows.length} active decal rows...`);
+    }
     if (page.length < PAGE_SIZE) break;
     lastAssetId = page[page.length - 1]?.asset_id ?? lastAssetId;
   }
 
+  console.log(`Loaded ${rows.length} active decal rows.`);
   return rows;
 }
 
 async function loadSourceRows(assetIds: number[]): Promise<Map<number, SourceRow[]>> {
   const sb = supabaseAdmin();
   const rowsByAssetId = new Map<number, SourceRow[]>();
-  for (const chunk of chunkArray(assetIds, 500)) {
+  const chunks = chunkArray(assetIds, 500);
+  for (let index = 0; index < chunks.length; index += 1) {
+    const chunk = chunks[index];
     const { data, error } = await sb
       .from("roblox_decal_id_sources")
       .select("asset_id, source_kind, source_url, source_query, source_page, source_rank, raw_payload")
@@ -331,7 +416,11 @@ async function loadSourceRows(assetIds: number[]): Promise<Map<number, SourceRow
       rows.push(source);
       rowsByAssetId.set(assetId, rows);
     }
+    if ((index + 1) % 10 === 0 || index === chunks.length - 1) {
+      console.log(`Loaded source rows for ${index + 1}/${chunks.length} decal chunks...`);
+    }
   }
+  console.log(`Loaded source rows for ${rowsByAssetId.size} decal IDs.`);
   return rowsByAssetId;
 }
 
@@ -345,6 +434,102 @@ function assignCuratedRanks(payload: Array<Omit<ScorePayload, "curated_rank"> & 
     ...row,
     curated_rank: rankByAssetId.get(row.asset_id) ?? null
   }));
+}
+
+function shouldUsePgQueryBulkUpdate(): boolean {
+  const url = process.env.SUPABASE_URL ?? "";
+  return Boolean(url) && !/localhost|127\.0\.0\.1/.test(url);
+}
+
+function dollarQuote(value: string, tag: string): string {
+  if (value.includes(`$${tag}$`)) {
+    return dollarQuote(value, `${tag}_x`);
+  }
+  return `$${tag}$${value}$${tag}$`;
+}
+
+async function updateRankingChunkWithPgQuery(chunk: ScorePayload[], chunkNumber: number) {
+  const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/$/, "");
+  const serviceRole = process.env.SUPABASE_SERVICE_ROLE;
+  if (!supabaseUrl || !serviceRole) {
+    throw new Error("SUPABASE_URL and SUPABASE_SERVICE_ROLE are required for production ranking updates.");
+  }
+
+  const payload = dollarQuote(JSON.stringify(chunk), `decal_rank_${chunkNumber}`);
+  const query = `
+with payload as (
+  select *
+  from jsonb_to_recordset(${payload}::jsonb) as row(
+    asset_id bigint,
+    popularity_score double precision,
+    categories jsonb,
+    primary_category text,
+    curated_score double precision,
+    curated_rank integer,
+    curated_tier text,
+    curated_reason text
+  )
+)
+update public.roblox_decal_ids as target
+set
+  popularity_score = payload.popularity_score,
+  categories = coalesce(
+    array(select jsonb_array_elements_text(payload.categories)),
+    array[]::text[]
+  ),
+  primary_category = payload.primary_category,
+  curated_score = payload.curated_score,
+  curated_rank = payload.curated_rank,
+  curated_tier = payload.curated_tier,
+  curated_reason = payload.curated_reason
+from payload
+where target.asset_id = payload.asset_id;
+`;
+
+  const response = await fetch(`${supabaseUrl}/pg/query`, {
+    method: "POST",
+    headers: {
+      apikey: serviceRole,
+      authorization: `Bearer ${serviceRole}`,
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({ query })
+  });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`pg/query failed for ranking chunk ${chunkNumber}: ${text.slice(0, 500)}`);
+  }
+}
+
+async function updateRankingChunk(sb: ReturnType<typeof supabaseAdmin>, chunk: ScorePayload[], chunkNumber: number) {
+  const maxAttempts = 3;
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    let errorMessage: string | null = null;
+    try {
+      if (shouldUsePgQueryBulkUpdate()) {
+        await updateRankingChunkWithPgQuery(chunk, chunkNumber);
+      } else {
+        await Promise.all(
+          chunk.map(async (row) => {
+            const { error } = await sb
+              .from("roblox_decal_ids")
+              .update(row)
+              .eq("asset_id", row.asset_id);
+            if (error) throw new Error(error.message);
+          })
+        );
+      }
+      return;
+    } catch (error) {
+      errorMessage = error instanceof Error ? error.message : String(error);
+    }
+    if (attempt === maxAttempts) {
+      throw new Error(`Failed to update ranking chunk ${chunkNumber}: ${errorMessage}`);
+    }
+    const waitMs = 750 * attempt;
+    console.warn(`Retrying ranking chunk ${chunkNumber} after error: ${errorMessage}`);
+    await new Promise((resolve) => setTimeout(resolve, waitMs));
+  }
 }
 
 async function main() {
@@ -368,16 +553,13 @@ async function main() {
   }
 
   const sb = supabaseAdmin();
-  for (const chunk of chunkArray(payload, 50)) {
-    await Promise.all(
-      chunk.map(async (row) => {
-        const { error } = await sb
-          .from("roblox_decal_ids")
-          .update(row)
-          .eq("asset_id", row.asset_id);
-        if (error) throw new Error(`Failed to update decal ranking ${row.asset_id}: ${error.message}`);
-      })
-    );
+  const chunks = chunkArray(payload, UPDATE_CHUNK_SIZE);
+  for (let index = 0; index < chunks.length; index += 1) {
+    const chunk = chunks[index];
+    await updateRankingChunk(sb, chunk, index + 1);
+    if ((index + 1) % 10 === 0 || index === chunks.length - 1) {
+      console.log(`Updated ranking chunks ${index + 1}/${chunks.length}...`);
+    }
   }
 
   const curated = payload.filter((row) => row.curated_rank).length;

@@ -8,11 +8,8 @@ export const dynamic = "force-dynamic";
 
 const PAGE_SIZE = 24;
 const DECAL_SOURCE_TABLE = "roblox_decal_ids";
-const DECAL_SOURCE_VIEW = "roblox_decal_ids_ranked_view";
 const BASE_SELECT_FIELDS =
   "asset_id, texture_id, name, description, creator_id, creator_type, creator_name, creator_verified, roblox_created_at, roblox_updated_at, is_public_domain, is_for_sale, price_in_robux, sales, purchasable, vote_count, upvote_percent, thumbnail_url, thumbnail_state, thumbnail_checked_at, source, first_seen_at, last_seen_at, verified_at, popularity_score, categories, primary_category, curated_score, curated_rank, curated_tier, curated_reason";
-const VIEW_SELECT_FIELDS =
-  "asset_id, texture_id, name, description, creator_id, creator_type, creator_name, creator_verified, roblox_created_at, roblox_updated_at, is_public_domain, is_for_sale, price_in_robux, sales, purchasable, vote_count, upvote_percent, thumbnail_url, thumbnail_state, thumbnail_checked_at, source, first_seen_at, last_seen_at, verified_at, popularity_score, categories, primary_category, curated_score, curated_rank, curated_tier, curated_reason, thumbnail_ready, age_bucket, source_count";
 
 type OrderableQuery<T> = {
   order: (...args: any[]) => T;
@@ -34,6 +31,7 @@ function applySort<T extends OrderableQuery<T>>(query: T, sort: DecalSortKey): T
   switch (sort) {
     case "popular":
       return query
+        .order("vote_count", { ascending: false, nullsFirst: false })
         .order("popularity_score", { ascending: false, nullsFirst: false })
         .order("last_seen_at", { ascending: false, nullsFirst: false });
     case "newest":
@@ -44,17 +42,13 @@ function applySort<T extends OrderableQuery<T>>(query: T, sort: DecalSortKey): T
       return query.order("name", { ascending: true, nullsFirst: false });
     case "creator_asc":
       return query.order("creator_name", { ascending: true, nullsFirst: false });
-    case "sources_desc":
-      return query
-        .order("source_count", { ascending: false, nullsFirst: false })
-        .order("popularity_score", { ascending: false, nullsFirst: false });
     case "recommended":
     default:
       return query
+        .order("curated_rank", { ascending: true, nullsFirst: false })
         .order("curated_score", { ascending: false, nullsFirst: false })
         .order("popularity_score", { ascending: false, nullsFirst: false })
-        .order("last_seen_at", { ascending: false, nullsFirst: false })
-        .order("verified_at", { ascending: false, nullsFirst: false });
+        .order("last_seen_at", { ascending: false, nullsFirst: false });
   }
 }
 
@@ -80,19 +74,12 @@ export async function GET(request: Request) {
   const offset = (page - 1) * PAGE_SIZE;
 
   const supabase = supabaseAdmin();
-  const usesRankedView = sort === "sources_desc";
-  let query = usesRankedView
-    ? supabase.from(DECAL_SOURCE_VIEW).select(VIEW_SELECT_FIELDS, { count: "exact" })
-    : supabase.from(DECAL_SOURCE_TABLE).select(BASE_SELECT_FIELDS, { count: "exact" });
+  let query = supabase.from(DECAL_SOURCE_TABLE).select(BASE_SELECT_FIELDS, { count: "exact" });
 
-  if (usesRankedView) {
-    query = query.eq("thumbnail_ready", true);
-  } else {
-    query = query
-      .eq("status", "active")
-      .eq("thumbnail_state", "Completed")
-      .not("thumbnail_url", "is", null);
-  }
+  query = query
+    .eq("status", "active")
+    .eq("thumbnail_state", "Completed")
+    .not("thumbnail_url", "is", null);
 
   if (section === "curated") {
     query = query.not("curated_rank", "is", null);
@@ -134,7 +121,7 @@ export async function GET(request: Request) {
 
   return NextResponse.json({
     ok: true,
-    decals: usesRankedView ? (data ?? []) : normalizeBaseRows(data),
+    decals: normalizeBaseRows(data),
     total,
     totalPages
   });

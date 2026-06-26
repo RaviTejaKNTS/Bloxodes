@@ -5,6 +5,7 @@ import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import {
     buildRobloxDecalCatalogContentHtml,
     CANONICAL,
+    DECAL_PAGE_HEADING,
     DECAL_SEO_TITLE,
     loadRobloxDecalIdsPageData,
     resolveDecalSearch,
@@ -71,6 +72,7 @@ export default async function RobloxDecalIdsPage({ searchParams }: PageProps) {
         showHero: true,
         contentHtml,
         search: search.search,
-        sort: search.sort
+        sort: search.sort,
+        pageTitleOverride: DECAL_PAGE_HEADING
     });
 }
