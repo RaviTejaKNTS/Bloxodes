@@ -26,10 +26,12 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/mobile/codes` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/codes/route.ts` | Public mobile app payload for the paginated codes index. |
 | `/api/mobile/codes/[slug]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/codes/[slug]/route.ts` | Public mobile app payload for a code detail page with active and expired codes. |
 | `/api/mobile/content/[kind]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/content/[kind]/route.ts` | Public mobile app payload for paginated tools, quizzes, checklists, and events index cards. |
+| `/api/mobile/content/[kind]/[slug]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/content/[kind]/[slug]/route.ts` | Public mobile app payload for a content detail page, including queryable native catalog sections. |
 | `/api/quizzes/progress` | `GET`, `PUT` | `src/app/api/quizzes/progress/route.ts` | Per-user quiz progress and last score state. |
 | `/api/quizzes/session` | `GET` | `src/app/api/quizzes/session/route.ts` | Session snapshot for quiz UI. |
 | `/api/revalidate` | `POST` | `src/app/api/revalidate/route.ts` | Publish-triggered ISR and Cloudflare purge entrypoint. |
 | `/api/roblox-free-items` | `GET` | `src/app/api/roblox-free-items/route.ts` | Paginated free-item browser data. |
+| `/api/roblox-decal-ids` | `GET` | `src/app/api/roblox-decal-ids/route.ts` | Paginated/searchable Roblox decal ID catalog data. |
 | `/api/roblox-id-extractor` | `GET` | `src/app/api/roblox-id-extractor/route.ts` | Resolve Roblox URLs and IDs with Roblox API plus Supabase fallbacks. |
 | `/api/roblox-music-ids` | `GET` | `src/app/api/roblox-music-ids/route.ts` | Paginated/searchable music ID catalog data. |
 | `/api/search/all` | `GET` | `src/app/api/search/all/route.ts` | Site-wide aggregated search. |

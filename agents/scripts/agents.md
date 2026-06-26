@@ -122,8 +122,14 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Audit item stats workflow | `scripts/items/audit-item-stats-workflow.ts` | `npm run stats:items:audit`; reports current index, hourly, daily, resale, stale, due, and broken-media counts |
 | Import RobloxDen free items | `scripts/catalog/import-robloxden-free-items.py` | direct `python scripts/catalog/import-robloxden-free-items.py` |
 | Trading limiteds collection | `scripts/trading/collect-all-limiteds.ts` | `npm run trading:collect` |
-| Scrape decal IDs | `scripts/decal-ids/scrape-decal-ids.ts` | `npm run scrape:decal-ids` |
-| Enrich decal IDs | `scripts/decal-ids/enrich-decal-ids.ts` | `npm run enrich:decal-ids` |
+| Collect Roblox decal IDs | `scripts/decal-ids/collect-roblox-decal-ids.ts` | `npm run collect:decal-ids`; primary Roblox Toolbox/Creator Store discovery into `roblox_decal_ids` |
+| Import decal ID candidates | `scripts/decal-ids/import-decal-id-candidates.ts` | `npm run import:decal-id-candidates`; imports legacy JSON/files/external-page candidates before Roblox verification |
+| Verify decal IDs | `scripts/decal-ids/verify-roblox-decal-ids.ts` | `npm run verify:decal-ids`; validates asset type `13`, thumbnails, metadata, status, and rank fields |
+| Rerank decal IDs | `scripts/decal-ids/rerank-roblox-decal-ids.ts` | `npm run rerank:decal-ids`; recomputes active-row popularity, curation, category, and curated-rank fields |
+| Seed decal catalog page | `scripts/decal-ids/seed-decal-catalog-page.ts` | `npm run seed:decal-ids-page`; upserts local `catalog_pages` copy/FAQ for `/catalog/roblox-decal-ids` |
+| Refresh decal IDs | `scripts/decal-ids/run-decal-id-refresh.ts` | `npm run refresh:decal-ids`; guarded collect → import → verify → rerank runner for scheduled refreshes |
+| Legacy scrape decal IDs | `scripts/decal-ids/scrape-decal-ids.ts` | `npm run scrape:decal-ids` |
+| Legacy enrich decal IDs | `scripts/decal-ids/enrich-decal-ids.ts` | `npm run enrich:decal-ids` |
 
 ## Ads, Reporting, And Automation Utilities
 

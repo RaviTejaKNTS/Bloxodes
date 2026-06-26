@@ -62,7 +62,13 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - For a code page, insert or update the `code_pages` row first: `slug` is the editorial game slug only, not `roblox_universes.slug`; `roblox_link` is the Roblox experience URL, `source_url` is the RobloxDen codes page, `source_url_2` is the Beebom codes page, and `seo_title` stays empty or null unless the user explicitly asks otherwise.
   - After source URLs are set, run `npm run refresh:codes -- --slug <game-slug>` so the scraper reads RobloxDen and Beebom, upserts active codes, and expires missing codes.
   - Code-page article fields and metadata must be evergreen. Do not write active code names, current-code reward mappings, active counts, exact dates, month/year labels, or freshness claims such as `latest`, `current`, `fresh`, or `updated daily` into prose or metadata.
-- `decal-ids/`: decal scraping and enrichment.
+- `decal-ids/`: Roblox decal ID discovery, candidate imports, verification, ranking, and legacy JSON scraping/enrichment.
+  - `collect-roblox-decal-ids.ts` is the primary Roblox-first collector. It calls the Roblox Toolbox/Creator Store decal search endpoint, writes pending candidates to `roblox_decal_ids`, and records provenance in `roblox_decal_id_sources`.
+  - `import-decal-id-candidates.ts` imports pending candidates from legacy JSON, local files, or external pages. These are discovery hints only; they must pass `verify-roblox-decal-ids.ts` before the public page shows them.
+  - `verify-roblox-decal-ids.ts` is the reliability gate. It checks Roblox asset details, filters to asset type `13`, refreshes thumbnails, marks inactive/deleted/private/non-decal rows, and computes popularity scores.
+  - `rerank-roblox-decal-ids.ts` recomputes active-row popularity, category, curation, and curated-rank fields without refetching Roblox.
+  - `seed-decal-catalog-page.ts` upserts the local `catalog_pages` copy/FAQ row for `/catalog/roblox-decal-ids`.
+  - `run-decal-id-refresh.ts` is the guarded refresh runner behind `npm run refresh:decal-ids`; it chains collect, import, verify, and rerank with a single-host lockfile.
 - `events/`: event ingestion, page seeding, event detail hydration, event guide generation.
 - `music/`: music ID collection, import, enrichment, verification, thumbnails.
 - `items/`: public `/stats/items` automation and read-model maintenance.

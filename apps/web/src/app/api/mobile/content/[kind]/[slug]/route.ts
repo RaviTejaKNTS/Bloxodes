@@ -18,7 +18,7 @@ export async function OPTIONS() {
   });
 }
 
-export async function GET(_request: Request, { params }: { params: Promise<{ kind: string; slug: string }> }) {
+export async function GET(request: Request, { params }: { params: Promise<{ kind: string; slug: string }> }) {
   const { kind, slug } = await params;
 
   if (!isMobileContentKind(kind)) {
@@ -35,7 +35,8 @@ export async function GET(_request: Request, { params }: { params: Promise<{ kin
   }
 
   try {
-    const payload = await getMobileContentDetail(kind, decodeURIComponent(slug));
+    const { searchParams } = new URL(request.url);
+    const payload = await getMobileContentDetail(kind, decodeURIComponent(slug), searchParams);
 
     if (!payload) {
       return NextResponse.json(

@@ -32,6 +32,7 @@ export type CatalogCardMeta = {
 type CountSource =
   | { kind: "avatar"; code: string; sale?: AvatarCatalogSaleFilter }
   | { kind: "music" }
+  | { kind: "decal" }
   | null;
 
 type CatalogConfig = {
@@ -104,7 +105,7 @@ const CATALOG_CONFIG: Record<string, CatalogConfig> = {
     source: { kind: "avatar", code: "roblox-makeup" }
   },
   "roblox-color-codes": { shortLabel: "Color Codes", unit: "color codes", icon: "palette", source: null },
-  "roblox-decal-ids": { shortLabel: "Decal IDs", unit: "decal IDs", icon: "image", source: null },
+  "roblox-decal-ids": { shortLabel: "Decal IDs", unit: "decal IDs", icon: "image", source: { kind: "decal" } },
   "admin-commands": { shortLabel: "Admin Commands", unit: "commands", icon: "terminal", source: null }
 };
 
@@ -113,7 +114,7 @@ const countMusicIds = publicContentCache(
     const sb = supabaseAdmin();
     const { count, error } = await sb
       .from("roblox_music_ids_ranked_view")
-      .select("*", { count: "exact", head: true });
+      .select("asset_id", { count: "exact", head: true });
     if (error) throw error;
     return count ?? null;
   },
@@ -121,11 +122,30 @@ const countMusicIds = publicContentCache(
   { revalidate: 3600, tags: ["catalog-index", "music-ids"] }
 );
 
+const countDecalIds = publicContentCache(
+  async (): Promise<number | null> => {
+    const sb = supabaseAdmin();
+    const { count, error } = await sb
+      .from("roblox_decal_ids")
+      .select("asset_id", { count: "exact", head: true })
+      .eq("status", "active")
+      .eq("thumbnail_state", "Completed")
+      .not("thumbnail_url", "is", null);
+    if (error) throw error;
+    return count ?? null;
+  },
+  ["catalogCardMeta:decalIdsCount"],
+  { revalidate: 3600, tags: ["catalog-index", "decal-ids"] }
+);
+
 async function resolveCount(source: CountSource): Promise<number | null> {
   if (!source) return null;
   try {
     if (source.kind === "music") {
       return await countMusicIds();
+    }
+    if (source.kind === "decal") {
+      return await countDecalIds();
     }
     const config = resolveAvatarCatalogTopLevelConfig(source.code);
     if (!config) return null;

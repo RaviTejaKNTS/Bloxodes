@@ -26,6 +26,8 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
 ]);
 
 const MUSIC_CATALOG_CODES = new Set(["roblox-music-ids"]);
+const DECAL_CATALOG_CODE = "roblox-decal-ids";
+const DECAL_BASE_PATH = `/catalog/${DECAL_CATALOG_CODE}`;
 const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
 const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
 const FREE_ITEMS_CATALOG_PREFIXES = [FREE_ITEMS_CATALOG_CODE, LEGACY_FREE_ITEMS_CATALOG_CODE];
@@ -373,6 +375,27 @@ function revalidateForMusic(slug = "roblox-music-ids") {
     ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/artists`),
     `${MUSIC_BASE_PATH}/artists/[artist]`,
     `${MUSIC_BASE_PATH}/artists/[artist]/page/[page]`,
+    ...scopedPaths,
+    "/",
+    SITEMAP_INDEX_PATH,
+    CATALOG_SITEMAP_PATH
+  ]);
+}
+
+function revalidateForDecalIds(slug = DECAL_CATALOG_CODE) {
+  const [section, valueSlug] = slugSegmentsAfterPrefix(slug, [DECAL_CATALOG_CODE]);
+  const scopedPaths =
+    section === "categories" && valueSlug
+      ? paginatedIndexPaths(`${DECAL_BASE_PATH}/categories/${valueSlug}`)
+      : [];
+
+  return applyRevalidation([
+    "/catalog",
+    ...paginatedIndexPaths(DECAL_BASE_PATH),
+    ...paginatedIndexPaths(`${DECAL_BASE_PATH}/curated`),
+    `${DECAL_BASE_PATH}/categories`,
+    `${DECAL_BASE_PATH}/categories/[category]`,
+    `${DECAL_BASE_PATH}/categories/[category]/page/[page]`,
     ...scopedPaths,
     "/",
     SITEMAP_INDEX_PATH,
@@ -759,6 +782,9 @@ async function collectRevalidationTargets(payload: SinglePayload) {
     case "catalog":
       if (MUSIC_CATALOG_CODES.has(slug)) {
         purgePaths = [...purgePaths, ...revalidateForMusic(slug)];
+      }
+      if (slug === DECAL_CATALOG_CODE || slug.startsWith(`${DECAL_CATALOG_CODE}/`)) {
+        purgePaths = [...purgePaths, ...revalidateForDecalIds(slug)];
       }
       if (isFreeItemsCatalogSlug(slug)) {
         purgePaths = [...purgePaths, ...revalidateForFreeItems(slug)];

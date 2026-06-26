@@ -773,38 +773,58 @@ async function loadColorCodeCatalogSections(searchParams?: URLSearchParams): Pro
 }
 
 async function loadDecalCatalogSections(searchParams?: URLSearchParams): Promise<MobileContentDetailSection[]> {
-  const payload = await readJsonFile(repoPath("data", "decal-ids", "enriched-decal-ids.json"));
   const query = detailQuery(searchParams);
-  const rows = filterRowsByQuery(readRecordArrayPayload(payload).filter((row) => !row.error && normalizeText(row.name)), query);
-  if (!rows.length) return [];
   const page = sectionPage(searchParams, "decal-ids");
   const pageSize = sectionPageSize(searchParams);
-  const pagedRows = paginateRows(rows, page, pageSize);
+  const offset = (page - 1) * pageSize;
+  const sb = supabaseAdmin();
+  let request = sb
+    .from("roblox_decal_ids_ranked_view")
+    .select(
+      "asset_id, texture_id, name, description, creator_name, roblox_created_at, is_for_sale, price_in_robux, sales, thumbnail_url, vote_count, upvote_percent, source_count",
+      { count: "exact" }
+    )
+    .eq("thumbnail_ready", true);
 
-  const normalizedRows = pagedRows.map((row) => ({
-    ...row,
-    creator_name: isRecord(row.creator) ? row.creator.name : null,
-    thumbnail_url:
-      normalizeText(row.thumbnail) ??
-      (formatUnknownValue(row.id) ? `https://www.roblox.com/asset-thumbnail/image?assetId=${formatUnknownValue(row.id)}&width=420&height=420&format=png` : null)
-  }));
+  if (query) {
+    const pattern = `%${query.replace(/[%_]/g, " ").replace(/[^a-z0-9]+/gi, "%").replace(/%{2,}/g, "%")}%`;
+    const orParts = [`name.ilike.${pattern}`, `description.ilike.${pattern}`, `creator_name.ilike.${pattern}`];
+    if (/^\d+$/.test(query)) {
+      orParts.unshift(`asset_id.eq.${query}`, `texture_id.eq.${query}`);
+    }
+    request = request.or(orParts.join(","));
+  }
+
+  const { data, error, count } = await request
+    .order("popularity_score", { ascending: false, nullsFirst: false })
+    .order("source_count", { ascending: false, nullsFirst: false })
+    .range(offset, offset + pageSize - 1);
+
+  if (error) {
+    console.error("Failed to load mobile decal catalog", error);
+    return [];
+  }
+
+  const rows = data ?? [];
+  const total = count ?? rows.length;
+  if (!rows.length) return [];
 
   return [
     section("decal-ids", "Decal IDs", {
-      subtitle: `${rows.length.toLocaleString("en-US")} decals`,
-      body: `Verified Roblox decal IDs with visual previews, creators, sales, and asset identifiers. Page ${page} of ${Math.max(1, Math.ceil(rows.length / pageSize))}.`,
-      items: detailItemsFromRows(normalizedRows, {
-        titleKeys: ["name", "id"],
+      subtitle: `${total.toLocaleString("en-US")} decals`,
+      body: `Verified Roblox decal IDs with visual previews, creators, ratings, and asset identifiers. Page ${page} of ${Math.max(1, Math.ceil(total / pageSize))}.`,
+      items: detailItemsFromRows(rows, {
+        titleKeys: ["name", "asset_id"],
         subtitleKeys: ["creator_name"],
-        badgeKeys: ["id", "priceInRobux"],
+        badgeKeys: ["asset_id", "price_in_robux"],
         imageKeys: ["thumbnail_url"],
-        bodyKeys: ["description", "creator_name", "created", "sales", "isForSale"],
+        bodyKeys: ["description", "creator_name", "roblox_created_at", "sales", "upvote_percent", "source_count"],
         limit: pageSize
       }),
       page,
       pageSize,
       query,
-      total: rows.length
+      total
     })
   ].filter(Boolean) as MobileContentDetailSection[];
 }

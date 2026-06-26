@@ -1220,10 +1220,17 @@ export async function getAvatarCatalogCount(
   const cached = publicContentCache(
     async () => {
       const sb = supabaseAdmin();
-      let query = createAvatarCatalogBaseQuery(sb, true);
+      let query = sb
+        .from("roblox_catalog_items")
+        .select("asset_id", { count: "exact", head: true })
+        .eq("is_deleted", false)
+        .not("name", "is", null)
+        .not("category", "is", null)
+        .not("subcategory", "is", null)
+        .not("favorite_count", "is", null);
       query = applyScope(query, config.scope);
       query = applyAvatarCatalogFilters(query, filters);
-      const { count, error } = await query.range(0, 0);
+      const { count, error } = await query;
       if (error) throw error;
       return count ?? 0;
     },

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
-import { renderMarkdown } from "@/lib/markdown";
 import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import {
+    buildRobloxDecalCatalogContentHtml,
     CANONICAL,
+    DECAL_SEO_TITLE,
     loadRobloxDecalIdsPageData,
+    resolveDecalSearch,
     renderRobloxDecalIdsPage,
-    type CatalogContentHtml
 } from "./page-data";
 
 export const revalidate = 21600;
@@ -15,66 +16,21 @@ export const revalidate = 21600;
 const CATALOG_CODE_CANDIDATES = ["roblox-decal-ids"];
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
 
-function sortDescriptionEntries(description: Record<string, string> | null | undefined) {
-    return Object.entries(description ?? {}).sort((a, b) => {
-        const left = Number.parseInt(a[0], 10);
-        const right = Number.parseInt(b[0], 10);
-        if (Number.isNaN(left) && Number.isNaN(right)) return a[0].localeCompare(b[0]);
-        if (Number.isNaN(left)) return 1;
-        if (Number.isNaN(right)) return -1;
-        return left - right;
-    });
-}
-
-async function buildCatalogContent(): Promise<{ contentHtml: CatalogContentHtml | null }> {
-    const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
-    if (!catalog) {
-        return { contentHtml: null };
-    }
-
-    const introHtml = catalog.intro_md ? await renderMarkdown(catalog.intro_md, { paragraphizeLineBreaks: true }) : "";
-    const howHtml = catalog.how_it_works_md ? await renderMarkdown(catalog.how_it_works_md, { paragraphizeLineBreaks: true }) : "";
-
-    const descriptionEntries = sortDescriptionEntries(catalog.description_json ?? {});
-    const descriptionHtml = await Promise.all(
-        descriptionEntries.map(async ([key, value]) => ({
-            key,
-            html: await renderMarkdown(value ?? "", { paragraphizeLineBreaks: true })
-        }))
-    );
-
-    const faqEntries = Array.isArray(catalog.faq_json) ? catalog.faq_json : [];
-    const faqHtml = await Promise.all(
-        faqEntries.map(async (entry) => ({
-            q: entry.q,
-            a: await renderMarkdown(entry.a ?? "", { paragraphizeLineBreaks: true })
-        }))
-    );
-
-    return {
-        contentHtml: {
-            id: catalog.id ?? null,
-            title: catalog.title ?? null,
-            introHtml,
-            howHtml,
-            descriptionHtml,
-            faqHtml,
-            updatedAt: catalog.content_updated_at ?? catalog.updated_at ?? catalog.published_at ?? catalog.created_at ?? null
-        }
-    };
-}
+type PageProps = {
+    searchParams?: Promise<Record<string, string | string[] | undefined>>;
+};
 
 export async function generateMetadata(): Promise<Metadata> {
     const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
     if (!catalog) {
         return {
-            title: `Roblox Decal IDs | ${SITE_NAME}`,
+            title: `${DECAL_SEO_TITLE} | ${SITE_NAME}`,
             description: CATALOG_DESCRIPTION,
             alternates: buildAlternates(CANONICAL)
         };
     }
 
-    const title = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? `Roblox Decal IDs | ${SITE_NAME}`;
+    const title = resolveSeoTitle(catalog.seo_title) ?? DECAL_SEO_TITLE;
     const description = catalog.meta_description ?? CATALOG_DESCRIPTION;
     const image = catalog.thumb_url || FALLBACK_IMAGE;
 
@@ -99,11 +55,13 @@ export async function generateMetadata(): Promise<Metadata> {
     };
 }
 
-export default async function RobloxDecalIdsPage() {
-    const [{ decals, total, totalPages }, { contentHtml }] = await Promise.all([
-        loadRobloxDecalIdsPageData(1),
-        buildCatalogContent()
+export default async function RobloxDecalIdsPage({ searchParams }: PageProps) {
+    const search = await resolveDecalSearch(searchParams);
+    const [{ decals, total, totalPages }, catalog] = await Promise.all([
+        loadRobloxDecalIdsPageData(1, search),
+        getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
     ]);
+    const contentHtml = await buildRobloxDecalCatalogContentHtml(catalog);
 
     return renderRobloxDecalIdsPage({
         decals,
@@ -111,6 +69,8 @@ export default async function RobloxDecalIdsPage() {
         totalPages,
         currentPage: 1,
         showHero: true,
-        contentHtml
+        contentHtml,
+        search: search.search,
+        sort: search.sort
     });
 }

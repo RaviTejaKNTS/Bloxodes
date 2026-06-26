@@ -10,6 +10,7 @@ These routes back interactive site features, search, tool data, session/progress
   - `search/all`
   - `search/games`
   - `roblox-music-ids`
+  - `roblox-decal-ids`
   - `roblox-free-items`
   - `roblox-id-extractor`
 - Platform clients:
@@ -17,6 +18,7 @@ These routes back interactive site features, search, tool data, session/progress
   - `mobile/codes`
   - `mobile/codes/[slug]`
   - `mobile/content/[kind]`
+  - `mobile/content/[kind]/[slug]`
 - User/session state:
   - `codes/session`, `codes/progress`
   - `checklists/session`, `checklists/progress`
@@ -63,6 +65,7 @@ These routes back interactive site features, search, tool data, session/progress
 - `/api/mobile/codes` returns the paginated mobile codes index.
 - `/api/mobile/codes/[slug]` returns active and expired codes for a mobile detail screen.
 - `/api/mobile/content/[kind]` returns paginated mobile index cards for `tools`, `quizzes`, `checklists`, and `events`.
+- `/api/mobile/content/[kind]/[slug]` returns mobile detail sections and passes query/page controls through to native catalog sections.
 - Shared payload logic lives in `apps/web/src/lib/extension-codes.ts`, `apps/web/src/lib/mobile-codes.ts`, and `apps/web/src/lib/mobile-content.ts`.
 - Keep freshness badges aligned with the website by using `apps/web/src/lib/code-utils.ts` helpers instead of adding client-specific `is_new` rules.
 
