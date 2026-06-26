@@ -89,6 +89,9 @@ Check:
 - paragraphs are short (1-3 sentences, one idea each) with no wall-of-text blocks
 - sentences are short and plain; long run-on sentences are split
 - list and step items are short (one action/fact each), not paragraphs crammed into a bullet
+- for fix/troubleshooting articles, each fix has its own H3 heading (not one long nested-bullet list); no deep bullet-in-bullet hierarchies
+- no repeated fixes, causes, or explanations across sections
+- facts are verified and accurate: no invented menu paths, no impossible actions, and never tells readers to play Roblox in a web browser (the in-browser player is discontinued)
 - no public copy mentions research workflow, source gathering, database checks, or internal notes
 - no unsupported claims, vague wording, or page-type overlap
 - links are useful, not decorative

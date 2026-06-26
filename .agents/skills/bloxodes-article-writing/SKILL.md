@@ -58,6 +58,20 @@ If the brief is missing, weak, unapproved, or has unresolved source gaps, stop a
 - Use tables and lists only for core, structured info (stats, steps, comparisons). Otherwise default to plain prose.
 - Use numbered lists for step-by-step instructions.
 
+**How-to-fix and troubleshooting articles**
+- Give each fix its own `###` (H3) heading, grouped under one `##` (H2) like "How to fix it". This beats a long numbered list with nested sub-bullets, which gets hard to scan.
+- The H3 is a short action ("Restart your device", "Update your graphics drivers"). Under it, write 1-3 short sentences, or a short numbered list only if the fix has ordered steps.
+- Do not stack deep bullet hierarchies (bullets inside bullets inside steps). Keep each fix flat and simple.
+- Order fixes easiest-first.
+- Never repeat the same fix, cause, or explanation across sections. Each H3 covers one distinct thing. If two fixes overlap, merge them.
+- Keep one short intro before the fixes, and an optional short closing section (e.g. when the problem is on Roblox's side and waiting is the answer). Do not pad with a separate "what is this error" section unless it adds real value.
+
+**Accuracy (never ship wrong info)**
+- Verify every platform claim before writing. Do real research; do not guess menu paths, toggles, limits, or behavior. If a label or path is uncertain, keep the wording generic instead of inventing specifics.
+- Roblox experiences cannot be played in a web browser. The in-browser player was discontinued; roblox.com only launches the installed app. Never tell readers to "play in the browser" or "try the browser instead of the app" as a fix.
+- Do not suggest actions that are not actually possible (e.g. disabling a system that cannot be disabled). Do not claim a fix works for a platform you have not verified it on.
+- When unsure whether something is true, leave it out rather than risk misinformation.
+
 **Game-specific pages**
 - Include the game name in the title and slug. Use "Roblox" when it aids search or clarity.
 
