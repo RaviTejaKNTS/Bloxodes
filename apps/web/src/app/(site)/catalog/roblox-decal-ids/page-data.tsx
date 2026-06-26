@@ -244,7 +244,8 @@ export async function loadRobloxDecalIdsPageData(
   query = query
     .eq("status", "active")
     .eq("thumbnail_state", "Completed")
-    .not("thumbnail_url", "is", null);
+    .not("thumbnail_url", "is", null)
+    .not("thumbnail_url", "ilike", "%/UnknownImage/%");
 
   if (options.curated) {
     query = query.not("curated_rank", "is", null);
@@ -300,6 +301,7 @@ export async function loadDecalCategories(): Promise<DecalCategoryRow[]> {
           .eq("status", "active")
           .eq("thumbnail_state", "Completed")
           .not("thumbnail_url", "is", null)
+          .not("thumbnail_url", "ilike", "%/UnknownImage/%")
           .contains("categories", [category.slug]);
         if (error) {
           reportLoadError(`Failed to load Roblox decal category ${category.slug}`, error);

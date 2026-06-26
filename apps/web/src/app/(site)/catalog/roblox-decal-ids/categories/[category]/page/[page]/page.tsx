@@ -13,6 +13,7 @@ import {
 } from "../../../../page-data";
 
 export const revalidate = 21600;
+export const dynamic = "force-dynamic";
 
 const CATALOG_CODE_CANDIDATES = ["roblox-decal-ids"];
 
@@ -20,10 +21,6 @@ type PageProps = {
   params: Promise<{ category: string; page: string }>;
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
-
-export async function generateStaticParams() {
-  return [];
-}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { category: categorySlug, page } = await params;

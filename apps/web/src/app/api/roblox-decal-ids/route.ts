@@ -79,7 +79,8 @@ export async function GET(request: Request) {
   query = query
     .eq("status", "active")
     .eq("thumbnail_state", "Completed")
-    .not("thumbnail_url", "is", null);
+    .not("thumbnail_url", "is", null)
+    .not("thumbnail_url", "ilike", "%/UnknownImage/%");
 
   if (section === "curated") {
     query = query.not("curated_rank", "is", null);
