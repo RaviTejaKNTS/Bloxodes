@@ -1376,7 +1376,9 @@ export async function getMobileContentDetail(
       )
     : [];
   const sections = [
-    section("overview", "Overview", { body: page.meta_description ?? page.universe_description ?? page.universe_game_description_md }),
+    section("overview", "Overview", {
+      body: toPlainText(page.description_md) ?? page.meta_description ?? page.universe_description ?? page.universe_game_description_md
+    }),
     section("stats", "Game stats", {
       items: [
         detailItem("playing", "Playing", { body: compactNumber(page.playing) }),

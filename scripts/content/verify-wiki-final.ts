@@ -16,6 +16,8 @@ type WikiFinal = {
   slug?: string;
   title?: string;
   universe_id?: number | null;
+  description_md?: string | null;
+  game_description_md?: string | null;
 };
 
 function printUsage() {
@@ -104,19 +106,30 @@ async function verifyReadback(game: string, finalJson: WikiFinal) {
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from("wiki_pages")
-    .select("slug,title,universe_id,is_published,tips_md,meta_description")
+    .select("slug,title,universe_id,is_published,tips_md,meta_description,description_md")
     .eq("slug", game)
     .maybeSingle();
 
   if (error) throw new Error(`Failed to read wiki ${game}: ${error.message}`);
   if (!data) throw new Error(`No wiki_pages row found for ${game}`);
-  const row = data as { title?: string | null; universe_id?: number | null; is_published?: boolean; tips_md?: string | null };
+  const row = data as {
+    title?: string | null;
+    universe_id?: number | null;
+    is_published?: boolean;
+    tips_md?: string | null;
+    description_md?: string | null;
+  };
   if (!row.is_published) throw new Error(`Wiki ${game} is not published`);
   if (finalJson.title && row.title !== finalJson.title) throw new Error(`Wiki title mismatch for ${game}`);
   if (typeof finalJson.universe_id === "number" && row.universe_id !== finalJson.universe_id) {
     throw new Error(`Wiki universe_id mismatch for ${game}`);
   }
   if (!row.tips_md?.trim()) throw new Error(`Wiki ${game} has no tips_md`);
+  const expectedDescription = finalJson.description_md ?? finalJson.game_description_md ?? null;
+  if (expectedDescription && row.description_md !== expectedDescription) {
+    throw new Error(`Wiki description_md mismatch for ${game}`);
+  }
+  if (!row.description_md?.trim()) throw new Error(`Wiki ${game} has no description_md`);
 }
 
 async function verifyRoute(url: string, title?: string) {

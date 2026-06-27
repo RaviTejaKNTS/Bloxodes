@@ -12,6 +12,7 @@ type WikiPageUpsert = {
   title: string;
   seo_title: string;
   meta_description: string;
+  description_md: string | null;
   universe_id: number | null;
   controls_json: Array<Record<string, string>>;
   tips_md: string;
@@ -24,6 +25,7 @@ type WikiCopy = {
   title?: string;
   seoTitle?: string;
   metaDescription: string;
+  descriptionMd?: string;
   tipsMd: string;
   controlsJson?: Array<Record<string, string>>;
   gameDescriptionMd?: string;
@@ -38,6 +40,7 @@ type WikiFinalJson = Partial<{
   universe_id: number | null;
   controls_json: Array<Record<string, string>>;
   tips_md: string;
+  description_md: string;
   cover_image: string | null;
   game_description_md: string;
 }>;
@@ -46,9 +49,9 @@ type ResolvedWikiCopy = {
   title: string;
   seoTitle: string;
   metaDescription: string;
+  descriptionMd?: string;
   tipsMd: string;
   controlsJson: Array<Record<string, string>>;
-  gameDescriptionMd?: string;
   coverImage?: string | null;
 };
 
@@ -159,9 +162,9 @@ async function resolveWikiCopy(group: GameCollectionGroup): Promise<ResolvedWiki
     title: finalJson?.title ?? legacyCopy?.title ?? `${group.gameName} Wiki`,
     seoTitle: finalJson?.seo_title ?? legacyCopy?.seoTitle ?? `${group.gameName} Wiki`,
     metaDescription,
+    descriptionMd: finalJson?.description_md ?? finalJson?.game_description_md ?? legacyCopy?.descriptionMd ?? legacyCopy?.gameDescriptionMd,
     tipsMd,
     controlsJson: finalJson?.controls_json ?? legacyCopy?.controlsJson ?? [],
-    gameDescriptionMd: finalJson?.game_description_md ?? legacyCopy?.gameDescriptionMd,
     coverImage:
       finalJson && "cover_image" in finalJson
         ? finalJson.cover_image ?? null
@@ -877,6 +880,7 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
       title: copy.title,
       seo_title: copy.seoTitle,
       meta_description: copy.metaDescription,
+      description_md: copy.descriptionMd ?? null,
       universe_id: universeIdsByGameSlug.get(group.gameSlug) ?? null,
       controls_json: copy.controlsJson,
       tips_md: copy.tipsMd,
@@ -962,18 +966,6 @@ async function main() {
     }
 
     const { error } = await sb.from("wiki_pages").insert(row);
-    if (error) throw error;
-  }
-
-  for (const group of getTargetGroups()) {
-    const copy = await resolveWikiCopy(group);
-    const universeId = universeIdsByGameSlug.get(group.gameSlug);
-    if (!copy?.gameDescriptionMd || !universeId) continue;
-
-    const { error } = await sb
-      .from("roblox_universes")
-      .update({ game_description_md: copy.gameDescriptionMd })
-      .eq("universe_id", universeId);
     if (error) throw error;
   }
 

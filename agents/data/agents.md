@@ -24,7 +24,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `puzzle_pages`, `puzzle_pages_view`, `puzzle_answers`, `puzzle_sync_runs`
   - Daily puzzle answer pages under `/puzzles`. `puzzle_pages` stores durable page copy and SEO; `puzzle_answers` stores one row per puzzle/date with `answer_summary` and raw `payload`; dated archive pages are noindex and excluded from the puzzles sitemap.
 - `wiki_pages`, `wiki_pages_view`
-  - Game wiki hubs that link editorial controls/tips to `roblox_universes` automation.
+  - Game wiki hubs that store editorial overview copy in `description_md` and link controls/tips to `roblox_universes` automation.
 - `wiki_collection_pages`, `wiki_collection_pages_view`
   - Game-specific collection pages rendered under `/wiki/<game-slug>/<collection-slug>`, with stable `code` values kept for scripts, search, and old catalog URL redirects.
   - Use `display_name` for clean navigation labels such as `Domains` or `Characters`; keep `title`/`seo_title` as full page/SEO titles. Use `item_count` for collection navigation counts instead of parsing titles.
