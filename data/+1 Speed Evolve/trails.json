@@ -55,7 +55,7 @@
       "gamePassId": 1822727684,
       "productId": 3586509094,
       "iconAssetId": 138843243767473,
-      "image": "/+1%20Speed%20Evolve/Trails/orange-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/orange-trail.png",
       "sortOrder": 1
     },
     {
@@ -70,7 +70,7 @@
       "gamePassId": 1823072927,
       "productId": 3586509194,
       "iconAssetId": 77080715021767,
-      "image": "/+1%20Speed%20Evolve/Trails/green-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/green-trail.png",
       "sortOrder": 2
     },
     {
@@ -85,7 +85,7 @@
       "gamePassId": 1822665773,
       "productId": 3586509268,
       "iconAssetId": 112867169988232,
-      "image": "/+1%20Speed%20Evolve/Trails/blue-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/blue-trail.png",
       "sortOrder": 3
     },
     {
@@ -100,7 +100,7 @@
       "gamePassId": 1822749541,
       "productId": 3586509330,
       "iconAssetId": 81414994602080,
-      "image": "/+1%20Speed%20Evolve/Trails/purple-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/purple-trail.png",
       "sortOrder": 4
     },
     {
@@ -115,7 +115,7 @@
       "gamePassId": 1822901135,
       "productId": 3586509410,
       "iconAssetId": 72830341189512,
-      "image": "/+1%20Speed%20Evolve/Trails/rainbow-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/rainbow-trail.png",
       "sortOrder": 5
     },
     {
@@ -130,7 +130,7 @@
       "gamePassId": 1822613776,
       "productId": 3586509476,
       "iconAssetId": 132709043187740,
-      "image": "/+1%20Speed%20Evolve/Trails/galaxy-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/galaxy-trail.png",
       "sortOrder": 6
     },
     {
@@ -145,7 +145,7 @@
       "gamePassId": 1840481220,
       "productId": 3592645556,
       "iconAssetId": 88353786102192,
-      "image": "/+1%20Speed%20Evolve/Trails/snow-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/snow-trail.png",
       "sortOrder": 7
     },
     {
@@ -160,7 +160,7 @@
       "gamePassId": 1840253203,
       "productId": 3592645624,
       "iconAssetId": 90648534337420,
-      "image": "/+1%20Speed%20Evolve/Trails/fire-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/fire-trail.png",
       "sortOrder": 8
     },
     {
@@ -175,7 +175,7 @@
       "gamePassId": 1839629237,
       "productId": 3592645683,
       "iconAssetId": 128498369303034,
-      "image": "/+1%20Speed%20Evolve/Trails/star-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/star-trail.png",
       "sortOrder": 9
     },
     {
@@ -190,7 +190,7 @@
       "gamePassId": 1880830324,
       "productId": 3605048024,
       "iconAssetId": 93567422911108,
-      "image": "/+1%20Speed%20Evolve/Trails/jupiter-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/jupiter-trail.png",
       "sortOrder": 10
     },
     {
@@ -205,7 +205,7 @@
       "gamePassId": 1878964655,
       "productId": 3605048044,
       "iconAssetId": 94718954085231,
-      "image": "/+1%20Speed%20Evolve/Trails/saturn-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/saturn-trail.png",
       "sortOrder": 11
     },
     {
@@ -220,7 +220,7 @@
       "gamePassId": 1875622815,
       "productId": 3605048063,
       "iconAssetId": 132828230861286,
-      "image": "/+1%20Speed%20Evolve/Trails/sun-trail.png",
+      "image": "/%2B1%20Speed%20Evolve/Trails/sun-trail.png",
       "sortOrder": 12
     }
   ]
