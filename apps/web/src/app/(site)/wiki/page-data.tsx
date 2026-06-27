@@ -41,7 +41,7 @@ import {
   type WikiServerItem
 } from "@/lib/wiki";
 import { CHECKLISTS_DESCRIPTION, QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, WIKI_DESCRIPTION, breadcrumbJsonLd } from "@/lib/seo";
-import { WikiLinkList, WikiSection, WikiTable, type WikiLinkItem } from "@/components/wiki/WikiPrimitives";
+import { WikiLinkList, WikiSection, type WikiLinkItem } from "@/components/wiki/WikiPrimitives";
 import { ArticleCard } from "@/components/ArticleCard";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -277,16 +277,6 @@ function formatKeyLabel(value: string): string {
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
-function firstMarkdownParagraph(value?: string | null): string | null {
-  const normalized = normalizeMarkdownText(value);
-  if (!normalized) return null;
-  const firstParagraph = normalized
-    .split(/\n\s*\n/)
-    .map((paragraph) => normalizeText(markdownToPlainText(paragraph)))
-    .find((paragraph): paragraph is string => Boolean(paragraph));
-  return firstParagraph ?? null;
-}
-
 function summarizeCardText(value: string | null | undefined, fallback: string): string {
   const plain = value ? markdownToPlainText(value) : "";
   const normalized = normalizeText(plain) ?? fallback;
@@ -300,8 +290,8 @@ function getUniverseLabel(page: WikiPageContent): string {
   return normalizeText(page.universe_display_name) ?? normalizeText(page.universe_name) ?? page.title;
 }
 
-function getSummary(page: WikiPageContent): string | null {
-  return firstMarkdownParagraph(page.universe_game_description_md);
+function getDescriptionMarkdown(page: WikiPageContent): string | null {
+  return normalizeMarkdownText(page.description_md) ?? normalizeMarkdownText(page.universe_game_description_md);
 }
 
 function getHeroImage(page: WikiPageContent, related: WikiRelatedData): string | null {
@@ -1141,64 +1131,16 @@ function renderMediaGrid(page: WikiPageContent, related: WikiRelatedData) {
   );
 }
 
-function renderImageName({ image, name, description }: { image?: string | null; name: string; description?: string | null }) {
+function WikiSidebarImage({ image, fallback }: { image?: string | null; fallback: ReactNode }) {
+  const imageSrc = normalizeImageSrc(image);
   return (
-    <span className="flex min-w-[12rem] items-center gap-3">
-      {normalizeImageSrc(image) ? (
-        <span className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-lg border border-border/60 bg-surface-muted">
-          <Image src={normalizeImageSrc(image)!} alt="" fill sizes="40px" className="object-cover" />
-        </span>
-      ) : null}
-      <span>
-        <span className="block font-semibold text-foreground">{name}</span>
-        {description ? <span className="line-clamp-1 text-xs text-muted">{description}</span> : null}
-      </span>
+    <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-border/60 bg-surface-muted text-muted">
+      {imageSrc ? (
+        <Image src={imageSrc} alt="" fill sizes="40px" className="object-cover" />
+      ) : (
+        fallback
+      )}
     </span>
-  );
-}
-
-function badgeRows(badges: WikiBadgeItem[]): ReactNode[][] {
-  return badges.map((badge) => [
-    renderImageName({ image: badge.icon_image_url, name: badge.name, description: badge.enabled === false ? "Disabled" : badge.description }),
-    formatNumber(badge.awarded_count) ?? "No public count",
-    formatPercent(badge.rarity_percent) ?? "Roblox does not show this"
-  ]);
-}
-
-function gamePassRows(gamePasses: WikiGamePassItem[]): ReactNode[][] {
-  return gamePasses.map((pass) => [
-    renderImageName({ image: pass.icon_image_url, name: pass.name, description: pass.description }),
-    pass.price === 0 ? "Free" : formatRobux(pass.price) ?? "Price hidden",
-    yesNo(pass.is_for_sale) ?? "Check Roblox",
-    formatNumber(pass.sales) ?? "No public sales count"
-  ]);
-}
-
-function WikiRobloxDataSections({ related, universeLabel }: { related: WikiRelatedData; universeLabel: string }) {
-  const hasBadges = related.badges.length > 0;
-  const hasGamePasses = related.gamePasses.length > 0;
-  if (!hasBadges && !hasGamePasses) return null;
-
-  return (
-    <div className="space-y-8">
-      {hasBadges ? (
-        <WikiSection
-          title={`${universeLabel} Badges`}
-          description={`See which ${universeLabel} badges players earn most often, along with award totals and rarity when Roblox reports it.`}
-        >
-          <WikiTable columns={["Badge", "Awards", "Rarity"]} rows={badgeRows(related.badges)} />
-        </WikiSection>
-      ) : null}
-
-      {hasGamePasses ? (
-        <WikiSection
-          title={`${universeLabel} Game Passes`}
-          description={`Compare ${universeLabel} game passes by price, sale status, and listed benefits before you spend Robux.`}
-        >
-          <WikiTable columns={["Game Pass", "Price", "For Sale", "Sales"]} rows={gamePassRows(related.gamePasses)} />
-        </WikiSection>
-      ) : null}
-    </div>
   );
 }
 
@@ -1227,13 +1169,7 @@ function WikiServerCards({
           return (
             <article key={server.id} className="rounded-lg border border-border/60 bg-surface/40 px-3 py-3">
               <div className="flex min-w-0 items-center gap-3">
-                <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-border/60 bg-surface-muted text-muted">
-                  {imageSrc ? (
-                    <Image src={imageSrc} alt="" fill sizes="40px" className="object-cover" />
-                  ) : (
-                    <SiRoblox className="h-5 w-5" aria-hidden />
-                  )}
-                </span>
+                <WikiSidebarImage image={imageSrc} fallback={<SiRoblox className="h-5 w-5" aria-hidden />} />
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold leading-5 text-foreground">Public server {index + 1}</p>
                   <dl className="mt-1 grid grid-cols-3 gap-2 text-xs">
@@ -1260,6 +1196,88 @@ function WikiServerCards({
   );
 }
 
+function WikiGamePassCards({ gamePasses, universeLabel }: { gamePasses: WikiGamePassItem[]; universeLabel: string }) {
+  if (!gamePasses.length) return null;
+
+  return (
+    <section className="space-y-3">
+      <h3 className="text-lg font-semibold text-foreground">{universeLabel} Game Passes</h3>
+      <div className="space-y-2">
+        {gamePasses.slice(0, 6).map((pass) => {
+          const price = pass.price === 0 ? "Free" : formatRobux(pass.price) ?? "Price hidden";
+          const saleStatus = yesNo(pass.is_for_sale) ?? "Check Roblox";
+          const sales = formatCompactNumber(pass.sales) ?? "No public sales";
+
+          return (
+            <article key={pass.pass_id} className="rounded-lg border border-border/60 bg-surface/40 px-3 py-3">
+              <div className="flex min-w-0 items-center gap-3">
+                <WikiSidebarImage image={pass.icon_image_url} fallback={<SiRoblox className="h-5 w-5" aria-hidden />} />
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold leading-5 text-foreground">{pass.name}</p>
+                  {pass.description ? <p className="line-clamp-1 text-xs leading-5 text-muted">{pass.description}</p> : null}
+                  <dl className="mt-1 grid grid-cols-3 gap-2 text-xs">
+                    <div className="min-w-0">
+                      <dt className="text-muted">Price</dt>
+                      <dd className="truncate font-semibold text-foreground">{price}</dd>
+                    </div>
+                    <div className="min-w-0">
+                      <dt className="text-muted">Sale</dt>
+                      <dd className="truncate font-semibold text-foreground">{saleStatus}</dd>
+                    </div>
+                    <div className="min-w-0">
+                      <dt className="text-muted">Sales</dt>
+                      <dd className="truncate font-semibold text-foreground">{sales}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function WikiBadgeCards({ badges, universeLabel }: { badges: WikiBadgeItem[]; universeLabel: string }) {
+  if (!badges.length) return null;
+
+  return (
+    <section className="space-y-3">
+      <h3 className="text-lg font-semibold text-foreground">{universeLabel} Badges</h3>
+      <div className="space-y-2">
+        {badges.slice(0, 6).map((badge) => {
+          const awards = formatCompactNumber(badge.awarded_count) ?? "No public count";
+          const rarity = formatPercent(badge.rarity_percent) ?? "Roblox hides rarity";
+          const description = badge.enabled === false ? "Disabled" : badge.description;
+
+          return (
+            <article key={badge.badge_id} className="rounded-lg border border-border/60 bg-surface/40 px-3 py-3">
+              <div className="flex min-w-0 items-center gap-3">
+                <WikiSidebarImage image={badge.icon_image_url} fallback={<FiShield className="h-5 w-5" aria-hidden />} />
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold leading-5 text-foreground">{badge.name}</p>
+                  {description ? <p className="line-clamp-1 text-xs leading-5 text-muted">{description}</p> : null}
+                  <dl className="mt-1 grid grid-cols-2 gap-2 text-xs">
+                    <div className="min-w-0">
+                      <dt className="text-muted">Awards</dt>
+                      <dd className="truncate font-semibold text-foreground">{awards}</dd>
+                    </div>
+                    <div className="min-w-0">
+                      <dt className="text-muted">Rarity</dt>
+                      <dd className="truncate font-semibold text-foreground">{rarity}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function developerGameLinks(related: WikiRelatedData): WikiLinkItem[] {
   return related.developerGames.map((game) => ({
     href: game.root_place_id ? `${ROBLOX_BASE_URL}/games/${game.root_place_id}` : `${ROBLOX_BASE_URL}/games`,
@@ -1274,6 +1292,13 @@ async function renderTipsNodes(tipsMd?: string | null): Promise<ReactNode[] | nu
   if (!tips) return null;
   const html = await renderMarkdown(tips, { paragraphizeLineBreaks: true });
   return renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix: "wiki-tips" });
+}
+
+async function renderWikiDescriptionNodes(page: WikiPageContent): Promise<ReactNode[] | null> {
+  const description = getDescriptionMarkdown(page);
+  if (!description) return null;
+  const html = await renderMarkdown(description, { paragraphizeLineBreaks: true });
+  return renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix: `wiki-description-${page.slug}` });
 }
 
 export async function loadWikiIndexPageData(): Promise<WikiIndexPageData> {
@@ -1342,7 +1367,9 @@ export function renderWikiIndexPage({ pages, total }: WikiIndexPageData) {
 
 export async function renderWikiDetailPage({ page, related }: WikiDetailPageData) {
   const universeLabel = getUniverseLabel(page);
-  const summary = getSummary(page);
+  const descriptionMarkdown = getDescriptionMarkdown(page);
+  const summary = descriptionMarkdown ? summarizeCardText(descriptionMarkdown, WIKI_DESCRIPTION) : null;
+  const descriptionNodes = await renderWikiDescriptionNodes(page);
   const heroImage = getHeroImage(page, related);
   const controlColumns = getControlDeviceColumns(page, page.controls_json);
   const controlRows = parseControls(page.controls_json, controlColumns);
@@ -1493,12 +1520,12 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
 
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(20rem,1fr)]">
         <article className="min-w-0 space-y-9">
-          {summary || gameDetailItems.length || heroStats.length ? (
+          {descriptionNodes?.length || gameDetailItems.length || heroStats.length ? (
             <section className="space-y-4">
-              {summary ? (
-                <p className="max-w-3xl text-[1.08rem] leading-[1.85] tracking-[0.012em] text-foreground/90 md:text-[1.14rem] md:leading-[1.95] md:tracking-[0.014em]">
-                  {summary}
-                </p>
+              {descriptionNodes?.length ? (
+                <div className="article-content md-copy-scope game-copy max-w-3xl min-w-0 text-foreground">
+                  {descriptionNodes}
+                </div>
               ) : null}
 
               {gameDetailItems.length ? (
@@ -1608,8 +1635,6 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             eventsPageSlug={related.eventsPage?.slug ?? null}
             universeLabel={universeLabel}
           />
-
-          <WikiRobloxDataSections related={related} universeLabel={universeLabel} />
         </article>
 
         <aside className="space-y-4">
@@ -1624,6 +1649,10 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             universeLabel={universeLabel}
             imageSrc={normalizeImageSrc(page.icon_url) ?? heroImage}
           />
+
+          <WikiGamePassCards gamePasses={related.gamePasses} universeLabel={universeLabel} />
+
+          <WikiBadgeCards badges={related.badges} universeLabel={universeLabel} />
 
           {related.tools.length ? (
             <section className="space-y-3">

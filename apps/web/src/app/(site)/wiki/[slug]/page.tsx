@@ -49,6 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = resolveSeoTitle(page.seo_title) ?? page.title ?? `Roblox Wiki | ${SITE_NAME}`;
   const description =
     normalizeDescription(page.meta_description) ??
+    normalizeDescription(page.description_md) ??
     normalizeDescription(page.universe_game_description_md) ??
     normalizeDescription(page.universe_description) ??
     WIKI_DESCRIPTION;
