@@ -41,6 +41,7 @@ As of this setup pass:
 - The VPS worker image `bloxodes-stats-worker:production` has been built from the `production` branch.
 - The VPS user crontab has the marked `BLOXODES_STATS_WORKER` block for NEW, WARM, COLD, discovery, deep enrichment, audit, and daily worker image refresh.
 - A manual VPS `stats:audit` run succeeded against production.
+- Recovery note from `2026-06-27`: the database-local daily rollup, prune, and health-check cron path stopped leaving fresh `stats_job_runs` rows around `2026-06-12`, while hourly stats continued. The database-only maintenance fallback is now `.github/workflows/roblox-universe-stats-maintenance.yml`, which runs daily rollup, hourly prune, and audit with script-level `stats_job_runs` logging.
 
 The Northflank `_1` secret upload was explicitly approved in-thread before activation.
 
@@ -93,8 +94,8 @@ Use Supabase for jobs that finish quickly or run entirely in the database.
 | --- | --- | --- | --- | --- |
 | `revalidate-drain` | every 2-5 min | Edge Function | `supabase/functions/revalidate` | Drains `revalidation_events` and calls `https://bloxodes.com/api/revalidate`. |
 | `stats-health-check` | every 15 min | Edge Function or SQL | query tier stale counts and recent job runs | Detects stale HOT/WARM/COLD queues early. |
-| `daily-rollup-finalize` | `20 0 * * *` | SQL/RPC | `select public.rollup_roblox_universe_stats_daily(current_date - 1, true);` | Finalizes yesterday's daily stats from hourly rows. |
-| `hourly-history-prune` | `25 1 * * *` | SQL/RPC | call `public.prune_roblox_universe_hourly_history` in bounded batches | Deletes hourly stats/ranks older than 90 days. |
+| `daily-rollup-finalize` | `20 0 * * *` | SQL/RPC or GitHub fallback | `npm run stats:rollup-daily -- --date yesterday --finalize` | Finalizes yesterday's daily stats from hourly rows and records `stats_universe_daily_rollup`. |
+| `hourly-history-prune` | `25 1 * * *` | SQL/RPC or GitHub fallback | `npm run stats:prune-hourly -- --days 90 --apply` | Deletes hourly stats/ranks older than 90 days and records `stats_universe_hourly_prune`. |
 | `stats-revalidation-nudge` | after heavy jobs | SQL insert or script | insert coalesced `stats:stats` and `stats:games` events | Keeps public pages fresh without every worker calling the app directly. |
 
 Supabase jobs should not call Roblox APIs in large loops. If a job needs network calls to Roblox for thousands of universes, it belongs on Northflank or the VPS worker.

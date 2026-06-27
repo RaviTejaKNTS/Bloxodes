@@ -1,9 +1,11 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 
 const DEFAULT_LIMIT = readPositiveNumber("UNIVERSE_DAILY_ROLLUP_LIMIT", 0);
-const BATCH_SIZE = readPositiveNumber("UNIVERSE_DAILY_ROLLUP_BATCH_SIZE", 500);
+const BATCH_SIZE = Math.min(readPositiveNumber("UNIVERSE_DAILY_ROLLUP_BATCH_SIZE", 500), 1000);
+const RPC_CHUNK_SIZE = readPositiveNumber("UNIVERSE_DAILY_ROLLUP_RPC_CHUNK_SIZE", 5000);
 
 type Options = {
   date: string;
@@ -180,6 +182,74 @@ async function fetchHourlyRows(options: Options, offset: number): Promise<Hourly
   return (data ?? []) as unknown as HourlyRow[];
 }
 
+async function countHourlyRows(options: Options): Promise<number> {
+  const sb = supabaseAdmin();
+  const start = `${options.date}T00:00:00.000Z`;
+  const end = `${nextDate(options.date)}T00:00:00.000Z`;
+  const { count, error } = await sb
+    .from("roblox_universe_stats_hourly")
+    .select("*", { count: "exact", head: true })
+    .gte("hour_start", start)
+    .lt("hour_start", end);
+  if (error) throw error;
+  return count ?? 0;
+}
+
+async function runDatabaseRollup(options: Options): Promise<{ hourlyRows: number; dailyRows: number; mode: string }> {
+  const hourlyRows = await countHourlyRows(options);
+  try {
+    const { data, error } = await supabaseAdmin().rpc("rollup_roblox_universe_stats_daily", {
+      p_stat_date: options.date,
+      p_finalize: options.finalize,
+      p_universe_ids: null
+    });
+    if (error) throw error;
+    return { hourlyRows, dailyRows: Number(data ?? 0), mode: "database_rpc" };
+  } catch (error) {
+    console.warn(`Full database rollup failed for ${options.date}; retrying in universe chunks.`);
+    console.warn(error);
+    return {
+      hourlyRows,
+      dailyRows: await runChunkedDatabaseRollup(options, RPC_CHUNK_SIZE),
+      mode: "database_rpc_chunked"
+    };
+  }
+}
+
+async function fetchUniverseIdPage(offset: number, pageSize: number): Promise<number[]> {
+  const { data, error } = await supabaseAdmin()
+    .from("roblox_universes")
+    .select("universe_id")
+    .order("universe_id", { ascending: true })
+    .range(offset, offset + pageSize - 1);
+  if (error) throw error;
+  return (data ?? [])
+    .map((row) => Number((row as { universe_id: unknown }).universe_id))
+    .filter((value) => Number.isFinite(value));
+}
+
+async function runChunkedDatabaseRollup(options: Options, requestedChunkSize: number): Promise<number> {
+  const chunkSize = Math.min(Math.max(requestedChunkSize, 1), 1000);
+  let offset = 0;
+  let dailyRows = 0;
+
+  while (true) {
+    const universeIds = await fetchUniverseIdPage(offset, chunkSize);
+    if (!universeIds.length) break;
+    const { data, error } = await supabaseAdmin().rpc("rollup_roblox_universe_stats_daily", {
+      p_stat_date: options.date,
+      p_finalize: options.finalize,
+      p_universe_ids: universeIds
+    });
+    if (error) throw error;
+    dailyRows += Number(data ?? 0);
+    if (universeIds.length < chunkSize) break;
+    offset += chunkSize;
+  }
+
+  return dailyRows;
+}
+
 function rollupRows(universeId: number, rows: HourlyRow[], options: Options): DailyRollup {
   const visitsStart = first(rows.map((row) => row.visits_start).filter((value): value is number => value != null)) ?? null;
   const visitsEnd = last(rows.map((row) => row.visits_end).filter((value): value is number => value != null)) ?? null;
@@ -298,49 +368,112 @@ function groupByUniverse(rows: HourlyRow[]): Map<number, HourlyRow[]> {
 
 async function writeRollups(rollups: DailyRollup[]) {
   if (!rollups.length) return;
-  const { error } = await supabaseAdmin()
-    .from("roblox_universe_stats_daily")
-    .upsert(rollups, { onConflict: "universe_id,stat_date" });
-  if (error) throw error;
+  const chunkSize = 500;
+  for (let index = 0; index < rollups.length; index += chunkSize) {
+    const chunk = rollups.slice(index, index + chunkSize);
+    const { error } = await supabaseAdmin()
+      .from("roblox_universe_stats_daily")
+      .upsert(chunk, { onConflict: "universe_id,stat_date" });
+    if (error) throw error;
+  }
 }
 
 export async function main(overrides?: Partial<Options>) {
   const parsed = parseArgs();
   const options: Options = { ...parsed, ...overrides };
+  const run = await startStatsJobRun({
+    jobName: "stats_universe_daily_rollup",
+    metadata: {
+      date: options.date,
+      finalize: options.finalize,
+      limit: options.limit,
+      batch_size: BATCH_SIZE
+    }
+  });
   const allRollups: DailyRollup[] = [];
   let offset = 0;
   let carry: HourlyRow[] = [];
-  while (true) {
-    if (options.limit > 0 && allRollups.length >= options.limit) break;
-    const pageRows = await fetchHourlyRows(options, offset);
-    if (!pageRows.length) {
-      if (carry.length && (options.limit <= 0 || allRollups.length < options.limit)) {
-        allRollups.push(rollupRows(carry[0].universe_id, carry, options));
-      }
-      break;
+  let hourlyRowsRead = 0;
+  let pagesRead = 0;
+
+  try {
+    if (options.limit <= 0) {
+      const result = await runDatabaseRollup(options);
+      await finishStatsJobRun(run, {
+        status: "success",
+        rowsClaimed: result.hourlyRows,
+        rowsSucceeded: result.dailyRows,
+        metadata: {
+          date: options.date,
+          finalized: options.finalize,
+          mode: result.mode
+        }
+      });
+      console.log(
+        `Rolled up ${result.dailyRows} daily rows from ${result.hourlyRows} hourly rows for ${options.date} via database RPC (finalize=${options.finalize}).`
+      );
+      return;
     }
 
-    const rows = [...carry, ...pageRows];
-    const lastUniverseId = rows[rows.length - 1]?.universe_id;
-    const couldContinue = pageRows.length === BATCH_SIZE;
-    carry = [];
-    const grouped = groupByUniverse(rows);
-    for (const [universeId, group] of grouped) {
+    while (true) {
       if (options.limit > 0 && allRollups.length >= options.limit) break;
-      if (couldContinue && universeId === lastUniverseId) {
-        carry = group;
-        continue;
+      const pageRows = await fetchHourlyRows(options, offset);
+      hourlyRowsRead += pageRows.length;
+      pagesRead += 1;
+      if (!pageRows.length) {
+        if (carry.length && (options.limit <= 0 || allRollups.length < options.limit)) {
+          allRollups.push(rollupRows(carry[0].universe_id, carry, options));
+        }
+        break;
       }
-      allRollups.push(rollupRows(universeId, group, options));
-    }
-    if (pageRows.length < BATCH_SIZE) break;
-    offset += BATCH_SIZE;
-  }
 
-  await writeRollups(allRollups);
-  console.log(
-    `Rolled up ${allRollups.length} daily rows for ${options.date} (finalize=${options.finalize}).`
-  );
+      const rows = [...carry, ...pageRows];
+      const lastUniverseId = rows[rows.length - 1]?.universe_id;
+      const couldContinue = pageRows.length === BATCH_SIZE;
+      carry = [];
+      const grouped = groupByUniverse(rows);
+      for (const [universeId, group] of grouped) {
+        if (options.limit > 0 && allRollups.length >= options.limit) break;
+        if (couldContinue && universeId === lastUniverseId) {
+          carry = group;
+          continue;
+        }
+        allRollups.push(rollupRows(universeId, group, options));
+      }
+      if (pageRows.length < BATCH_SIZE) {
+        if (carry.length && (options.limit <= 0 || allRollups.length < options.limit)) {
+          allRollups.push(rollupRows(carry[0].universe_id, carry, options));
+          carry = [];
+        }
+        break;
+      }
+      offset += BATCH_SIZE;
+    }
+
+    await writeRollups(allRollups);
+    await finishStatsJobRun(run, {
+      status: "success",
+      rowsClaimed: hourlyRowsRead,
+      rowsSucceeded: allRollups.length,
+      metadata: {
+        date: options.date,
+        finalized: options.finalize,
+        pages_read: pagesRead
+      }
+    });
+    console.log(
+      `Rolled up ${allRollups.length} daily rows from ${hourlyRowsRead} hourly rows for ${options.date} (finalize=${options.finalize}).`
+    );
+  } catch (error) {
+    await finishStatsJobRun(run, {
+      status: "failed",
+      rowsClaimed: hourlyRowsRead,
+      rowsSucceeded: allRollups.length,
+      error,
+      metadata: { date: options.date, finalized: options.finalize, pages_read: pagesRead }
+    });
+    throw error;
+  }
 }
 
 function parseArgs(): Options {

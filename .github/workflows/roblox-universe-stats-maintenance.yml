@@ -1,0 +1,68 @@
+name: Roblox Universe Stats Maintenance
+
+on:
+  schedule:
+    - cron: "35 0 * * *"
+  workflow_dispatch:
+    inputs:
+      rollup_date:
+        description: "Date to roll up: yesterday, today, or YYYY-MM-DD"
+        required: false
+        default: "yesterday"
+      run_prune:
+        description: "Run hourly history prune"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+      run_audit:
+        description: "Run universe stats audit after maintenance"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+concurrency:
+  group: roblox-universe-stats-maintenance
+  cancel-in-progress: false
+
+jobs:
+  universe-stats-maintenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      NODE_ENV: production
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      UNIVERSE_DAILY_ROLLUP_BATCH_SIZE: "1000"
+      ROLLUP_DATE: ${{ github.event_name == 'workflow_dispatch' && inputs.rollup_date || 'yesterday' }}
+      RUN_PRUNE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_prune || 'true' }}
+      RUN_AUDIT: ${{ github.event_name == 'workflow_dispatch' && inputs.run_audit || 'true' }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Roll up daily universe stats
+        run: npm run stats:rollup-daily -- --date "$ROLLUP_DATE" --finalize
+
+      - name: Prune hourly universe history
+        if: env.RUN_PRUNE == 'true'
+        run: npm run stats:prune-hourly -- --days 90 --apply
+
+      - name: Audit universe stats pipeline
+        if: env.RUN_AUDIT == 'true'
+        run: npm run stats:audit

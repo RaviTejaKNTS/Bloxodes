@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 
 const DEFAULT_DAYS = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_RETENTION_DAYS", 90);
 const DEFAULT_BATCH_SIZE = readPositiveInteger("UNIVERSE_HOURLY_HISTORY_PRUNE_BATCH_SIZE", 5000);
@@ -100,31 +101,65 @@ async function pruneBatch(cutoff: string, batchSize: number): Promise<PruneResul
 async function main() {
   const options = parseArgs();
   const cutoff = cutoffIso(options.days);
+  const run = await startStatsJobRun({
+    jobName: "stats_universe_hourly_prune",
+    metadata: {
+      days: options.days,
+      batch_size: options.batchSize,
+      max_batches: options.maxBatches,
+      apply: options.apply,
+      cutoff
+    }
+  });
 
-  if (!options.apply) {
-    const [statsCount, rankCount] = await Promise.all([
-      countOldRows("roblox_universe_stats_hourly", "hour_start", cutoff),
-      countOldRows("roblox_universe_rank_snapshots_hourly", "hour_start", cutoff)
-    ]);
-    console.log(`Dry run. Cutoff=${cutoff}`);
-    console.log(`Hourly stats rows older than cutoff: ${statsCount}`);
-    console.log(`Hourly rank rows older than cutoff: ${rankCount}`);
-    return;
+  try {
+    if (!options.apply) {
+      const [statsCount, rankCount] = await Promise.all([
+        countOldRows("roblox_universe_stats_hourly", "hour_start", cutoff),
+        countOldRows("roblox_universe_rank_snapshots_hourly", "hour_start", cutoff)
+      ]);
+      await finishStatsJobRun(run, {
+        status: "skipped",
+        rowsClaimed: statsCount + rankCount,
+        rowsSucceeded: 0,
+        metadata: { cutoff, stats_count: statsCount, rank_count: rankCount, dry_run: true }
+      });
+      console.log(`Dry run. Cutoff=${cutoff}`);
+      console.log(`Hourly stats rows older than cutoff: ${statsCount}`);
+      console.log(`Hourly rank rows older than cutoff: ${rankCount}`);
+      return;
+    }
+
+    let totalStatsDeleted = 0;
+    let totalRankDeleted = 0;
+    let batchesRun = 0;
+    for (let batch = 1; batch <= options.maxBatches; batch += 1) {
+      const result = await pruneBatch(cutoff, options.batchSize);
+      const statsDeleted = result.stats_deleted ?? 0;
+      const rankDeleted = result.rank_deleted ?? 0;
+      totalStatsDeleted += statsDeleted;
+      totalRankDeleted += rankDeleted;
+      batchesRun = batch;
+      console.log(`Batch ${batch}: deleted stats=${statsDeleted}, ranks=${rankDeleted}`);
+      if (statsDeleted < options.batchSize && rankDeleted < options.batchSize) break;
+    }
+
+    await finishStatsJobRun(run, {
+      status: "success",
+      rowsClaimed: totalStatsDeleted + totalRankDeleted,
+      rowsSucceeded: totalStatsDeleted + totalRankDeleted,
+      metadata: {
+        cutoff,
+        stats_deleted: totalStatsDeleted,
+        rank_deleted: totalRankDeleted,
+        batches_run: batchesRun
+      }
+    });
+    console.log(`Done. Cutoff=${cutoff}, deleted stats=${totalStatsDeleted}, ranks=${totalRankDeleted}`);
+  } catch (error) {
+    await finishStatsJobRun(run, { status: "failed", error, metadata: { cutoff } });
+    throw error;
   }
-
-  let totalStatsDeleted = 0;
-  let totalRankDeleted = 0;
-  for (let batch = 1; batch <= options.maxBatches; batch += 1) {
-    const result = await pruneBatch(cutoff, options.batchSize);
-    const statsDeleted = result.stats_deleted ?? 0;
-    const rankDeleted = result.rank_deleted ?? 0;
-    totalStatsDeleted += statsDeleted;
-    totalRankDeleted += rankDeleted;
-    console.log(`Batch ${batch}: deleted stats=${statsDeleted}, ranks=${rankDeleted}`);
-    if (statsDeleted < options.batchSize && rankDeleted < options.batchSize) break;
-  }
-
-  console.log(`Done. Cutoff=${cutoff}, deleted stats=${totalStatsDeleted}, ranks=${totalRankDeleted}`);
 }
 
 main().catch((error) => {
