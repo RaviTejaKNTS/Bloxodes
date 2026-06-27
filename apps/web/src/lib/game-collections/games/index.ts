@@ -30,6 +30,7 @@ import { berryAvenueRpCollectionGroup } from "./berry-avenue-rp";
 import { cleanTheLibraryCollectionGroup } from "./clean-the-library";
 import { paintAndSeekCollectionGroup } from "./paint-and-seek";
 import { demonologyCollectionGroup } from "./demonology";
+import { speedEvolveCollectionGroup } from "./1-speed-evolve";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -64,5 +65,6 @@ export const GAME_COLLECTION_GROUPS = [
   berryAvenueRpCollectionGroup,
   cleanTheLibraryCollectionGroup,
   paintAndSeekCollectionGroup,
-  demonologyCollectionGroup
+  demonologyCollectionGroup,
+  speedEvolveCollectionGroup
 ] satisfies GameCollectionGroup[];

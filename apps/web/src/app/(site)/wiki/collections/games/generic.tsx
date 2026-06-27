@@ -1179,6 +1179,7 @@ const SAILOR_PIECE_RAW_CARD_KEYS = [
 
 const SPEED_KEYBOARD_TRAIL_SECTION_ORDER = ["Current Robux trails", "Retired or event trails"];
 const SPEED_KEYBOARD_AURA_SECTION_ORDER = ["Starter cost tier", "Mid cost tier", "High cost tier"];
+const SPEED_EVOLVE_AURA_SECTION_ORDER = ["Budget Auras", "Mid-Tier Auras", "High-Tier Auras", "Endgame Auras"];
 const SPEED_KEYBOARD_STAGE_SECTION_ORDER = ["World 1 stages", "World 2 stages"];
 const SPEED_KEYBOARD_TREADMILL_SECTION_ORDER = ["Free trainer", "Premium treadmill upgrades"];
 const UNTITLED_BOXING_GAME_STYLE_SECTION_ORDER = [
@@ -1883,6 +1884,44 @@ const ANIME_VANGUARDS_ENEMY_SOURCE_KEYS = [
 ];
 
 const CATALOG_SECTION_OVERRIDES: Record<string, CollectionSectionOverride> = {
+  "1-speed-evolve-trails": {
+    groupKey: "collectionSection",
+    groupLabel: "Trail tier",
+    sectionOrder: ["Budget Trails", "Mid-Tier Trails", "Premium & Endgame Trails"],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "robuxPriceValue",
+      "gamePassId",
+      "productId",
+      "iconAssetId",
+      "sortOrder"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 4
+  },
+  "1-speed-evolve-animals": {
+    groupKey: "collectionSection",
+    groupLabel: "Form type",
+    sectionOrder: ["Evolution Chain (Wins)", "Gamepass Forms"],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "winCost",
+      "multiplier",
+      "robloxGamePassId",
+      "robloxIconAssetId",
+      "sourceStatus",
+      "sourcePage",
+      "secondarySourcePage",
+      "imageStatus",
+      "sortOrder"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 4
+  },
   "demonology-ghosts": {
     groupKey: "collectionSection",
     groupLabel: "Ghost type",
@@ -2467,6 +2506,27 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CollectionSectionOverride> = {
       "officialName",
       "officialCreated",
       "officialUpdated",
+      "sourceStatus",
+      "sourcePage",
+      "secondarySourcePage",
+      "imageStatus",
+      "sortOrder"
+    ],
+    maxStats: 5
+  },
+  "1-speed-evolve-auras": {
+    groupKey: "collectionSection",
+    groupLabel: "Aura cost tier",
+    sectionOrder: SPEED_EVOLVE_AURA_SECTION_ORDER,
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "collectionSection",
+      "effect",
+      "verificationNote",
+      "robloxGamePassId",
+      "robloxProductId",
+      "robloxIconAssetId",
+      "officialName",
       "sourceStatus",
       "sourcePage",
       "secondarySourcePage",
