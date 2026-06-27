@@ -10,14 +10,17 @@ type CliOptions = {
   dryRun: boolean;
 };
 
-const CONFIG_PATH = repoPath("apps", "web", "src", "lib", "game-collections.ts");
+const GAMES_DIR = repoPath("apps", "web", "src", "lib", "game-collections", "games");
+const GAMES_INDEX_PATH = path.join(GAMES_DIR, "index.ts");
 
 function printUsage() {
   console.log(`Usage:
   npm run register:game-collection -- --game <game-slug> --collection <collection-slug> [--dry-run]
 
-Adds a collection slug to an existing GAME_COLLECTION_GROUPS game entry.
-If the game group does not exist, the script prints the manual block needed and exits without editing.
+Registers a collection slug for a game group under apps/web/src/lib/game-collections/games.
+If games/<game-slug>.ts exists, the collection slug is added to its collections array.
+If it does not exist, a new games/<game-slug>.ts is created (with TODO fields to fill in)
+and its export is wired into games/index.ts.
 `);
 }
 
@@ -54,6 +57,34 @@ function requireValue(argv: string[], index: number, option: string): string {
   const value = argv[index];
   if (!value) throw new Error(`Missing value for ${option}`);
   return value;
+}
+
+function gameFilePath(gameSlug: string): string {
+  return path.join(GAMES_DIR, `${gameSlug}.ts`);
+}
+
+// Derives the exported group identifier from a game slug, matching the existing
+// convention: camelCase + "CollectionGroup". Leading purely-numeric segments are
+// dropped because JS identifiers cannot start with a digit
+// (e.g. "99-nights-in-the-forest" -> "nightsInTheForestCollectionGroup").
+function groupExportName(gameSlug: string): string {
+  const segments = gameSlug.split("-").filter(Boolean);
+  while (segments.length > 1 && /^\d+$/.test(segments[0])) segments.shift();
+  const camel = segments
+    .map((segment, index) =>
+      index === 0 ? segment : segment.charAt(0).toUpperCase() + segment.slice(1)
+    )
+    .join("");
+  return `${camel}CollectionGroup`;
+}
+
+async function pathExists(target: string): Promise<boolean> {
+  try {
+    await fs.access(target);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function findObjectBounds(source: string, gameSlug: string): { start: number; end: number } | null {
@@ -139,31 +170,47 @@ function formatCollections(values: string[], baseIndent: string): string {
   return `collections: [\n${values.map((value) => `${itemIndent}"${value}"`).join(",\n")}\n${baseIndent}]`;
 }
 
-function manualGroupSnippet(gameSlug: string, collection: string): string {
-  return `{
+function gameFileTemplate(gameSlug: string, exportName: string, collection: string): string {
+  return `import type { GameCollectionGroup } from "../types";
+
+export const ${exportName} = {
     gameSlug: "${gameSlug}",
     gameName: "TODO Game Name",
     universeId: 0,
     dataDir: "TODO Game Name",
     universeNames: ["TODO Game Name"],
     collections: ["${collection}"]
-  }`;
+  } satisfies GameCollectionGroup;
+`;
 }
 
-async function main() {
-  const options = parseArgs(process.argv.slice(2));
-  if (getGameCollectionConfigByWikiPath(options.game!, options.collection!)) {
-    console.log(`${options.game}/${options.collection} is already registered.`);
-    return;
-  }
+// Wires a newly created group file into games/index.ts: adds the import (just
+// before the shared type import) and appends the group to GAME_COLLECTION_GROUPS.
+function addGroupToIndex(source: string, gameSlug: string, exportName: string): string {
+  const importLine = `import { ${exportName} } from "./${gameSlug}";`;
+  if (source.includes(importLine)) return source;
 
-  const source = await fs.readFile(CONFIG_PATH, "utf8");
+  const typesImport = 'import type { GameCollectionGroup } from "../types";';
+  if (!source.includes(typesImport)) {
+    throw new Error("Could not find the GameCollectionGroup type import in games/index.ts.");
+  }
+  let next = source.replace(typesImport, `${importLine}\n${typesImport}`);
+
+  const arrayCloseRe = /\n\] satisfies GameCollectionGroup\[\];/;
+  const closeMatch = arrayCloseRe.exec(next);
+  if (!closeMatch) {
+    throw new Error("Could not find the GAME_COLLECTION_GROUPS array in games/index.ts.");
+  }
+  const before = next.slice(0, closeMatch.index).replace(/,?\s*$/, "");
+  next = `${before},\n  ${exportName}${next.slice(closeMatch.index)}`;
+  return next;
+}
+
+async function registerExistingGame(filePath: string, options: CliOptions): Promise<void> {
+  const source = await fs.readFile(filePath, "utf8");
   const bounds = findObjectBounds(source, options.game!);
   if (!bounds) {
-    console.log(`No GAME_COLLECTION_GROUPS entry found for ${options.game}. Add a group like:\n`);
-    console.log(manualGroupSnippet(options.game!, options.collection!));
-    process.exitCode = 1;
-    return;
+    throw new Error(`Could not find a group object for ${options.game} in ${path.relative(process.cwd(), filePath)}.`);
   }
 
   const block = source.slice(bounds.start, bounds.end);
@@ -187,12 +234,46 @@ async function main() {
   const nextSource = source.slice(0, bounds.start) + nextBlock + source.slice(bounds.end);
 
   if (options.dryRun) {
-    console.log(`Would add ${options.collection} to ${options.game} collections in ${path.relative(process.cwd(), CONFIG_PATH)}.`);
+    console.log(`Would add ${options.collection} to ${options.game} collections in ${path.relative(process.cwd(), filePath)}.`);
     return;
   }
 
-  await fs.writeFile(CONFIG_PATH, nextSource);
+  await fs.writeFile(filePath, nextSource);
   console.log(`Registered ${options.game}/${options.collection}.`);
+}
+
+async function registerNewGame(filePath: string, options: CliOptions): Promise<void> {
+  const exportName = groupExportName(options.game!);
+  const relFile = path.relative(process.cwd(), filePath);
+  const relIndex = path.relative(process.cwd(), GAMES_INDEX_PATH);
+
+  if (options.dryRun) {
+    console.log(`Would create ${relFile} (export ${exportName}) and wire it into ${relIndex}.`);
+    return;
+  }
+
+  await fs.writeFile(filePath, gameFileTemplate(options.game!, exportName, options.collection!));
+
+  const indexSource = await fs.readFile(GAMES_INDEX_PATH, "utf8");
+  await fs.writeFile(GAMES_INDEX_PATH, addGroupToIndex(indexSource, options.game!, exportName));
+
+  console.log(`Created ${relFile} and registered ${exportName} in ${relIndex}.`);
+  console.log(`Fill in the TODO fields in ${relFile}: gameName, universeId, dataDir, universeNames.`);
+}
+
+async function main() {
+  const options = parseArgs(process.argv.slice(2));
+  if (getGameCollectionConfigByWikiPath(options.game!, options.collection!)) {
+    console.log(`${options.game}/${options.collection} is already registered.`);
+    return;
+  }
+
+  const filePath = gameFilePath(options.game!);
+  if (await pathExists(filePath)) {
+    await registerExistingGame(filePath, options);
+    return;
+  }
+  await registerNewGame(filePath, options);
 }
 
 main().catch((error) => {
