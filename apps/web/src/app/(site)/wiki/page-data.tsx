@@ -41,7 +41,7 @@ import {
   type WikiServerItem
 } from "@/lib/wiki";
 import { CHECKLISTS_DESCRIPTION, QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, WIKI_DESCRIPTION, breadcrumbJsonLd } from "@/lib/seo";
-import { WikiLinkList, WikiSection, type WikiLinkItem } from "@/components/wiki/WikiPrimitives";
+import { WikiLinkList, WikiSection, WikiTable, type WikiLinkItem } from "@/components/wiki/WikiPrimitives";
 import { ArticleCard } from "@/components/ArticleCard";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -832,7 +832,7 @@ function WikiControlsTable({
                   const value = row.values[column.key];
                   return (
                     <td key={column.key} className="px-4 py-3 leading-6 text-muted">
-                      {value ? value : <span className="text-muted/60">Not listed</span>}
+                      {value ? value : <span className="text-muted/60">No control shown</span>}
                     </td>
                   );
                 })}
@@ -1160,31 +1160,104 @@ function renderImageName({ image, name, description }: { image?: string | null; 
 function badgeRows(badges: WikiBadgeItem[]): ReactNode[][] {
   return badges.map((badge) => [
     renderImageName({ image: badge.icon_image_url, name: badge.name, description: badge.enabled === false ? "Disabled" : badge.description }),
-    formatNumber(badge.awarded_count) ?? "Not tracked",
-    formatPercent(badge.rarity_percent) ?? "Not tracked"
+    formatNumber(badge.awarded_count) ?? "No public count",
+    formatPercent(badge.rarity_percent) ?? "Roblox does not show this"
   ]);
 }
 
 function gamePassRows(gamePasses: WikiGamePassItem[]): ReactNode[][] {
   return gamePasses.map((pass) => [
     renderImageName({ image: pass.icon_image_url, name: pass.name, description: pass.description }),
-    pass.price === 0 ? "Free" : formatRobux(pass.price) ?? "Not listed",
-    yesNo(pass.is_for_sale) ?? "Unknown",
-    formatNumber(pass.sales) ?? "Not tracked"
+    pass.price === 0 ? "Free" : formatRobux(pass.price) ?? "Price hidden",
+    yesNo(pass.is_for_sale) ?? "Check Roblox",
+    formatNumber(pass.sales) ?? "No public sales count"
   ]);
 }
 
-function serverRows(servers: WikiServerItem[]): ReactNode[][] {
-  return servers.map((server) => [
-    <span key="server" className="font-mono text-xs">{server.server_id.slice(0, 12)}{server.server_id.length > 12 ? "..." : ""}</span>,
-    server.region ?? "Unknown",
-    compactMeta([formatNumber(server.player_count), formatNumber(server.max_players)])
-      ? `${formatNumber(server.player_count) ?? "0"} / ${formatNumber(server.max_players) ?? "?"}`
-      : "Not tracked",
-    server.ping_ms != null ? `${server.ping_ms} ms` : "Not tracked",
-    server.fps != null ? `${server.fps.toFixed(1)} FPS` : "Not tracked",
-    formatUpdated(server.fetched_at) ?? "Recently"
-  ]);
+function WikiRobloxDataSections({ related, universeLabel }: { related: WikiRelatedData; universeLabel: string }) {
+  const hasBadges = related.badges.length > 0;
+  const hasGamePasses = related.gamePasses.length > 0;
+  if (!hasBadges && !hasGamePasses) return null;
+
+  return (
+    <div className="space-y-8">
+      {hasBadges ? (
+        <WikiSection
+          title={`${universeLabel} Badges`}
+          description={`See which ${universeLabel} badges players earn most often, along with award totals and rarity when Roblox reports it.`}
+        >
+          <WikiTable columns={["Badge", "Awards", "Rarity"]} rows={badgeRows(related.badges)} />
+        </WikiSection>
+      ) : null}
+
+      {hasGamePasses ? (
+        <WikiSection
+          title={`${universeLabel} Game Passes`}
+          description={`Compare ${universeLabel} game passes by price, sale status, and listed benefits before you spend Robux.`}
+        >
+          <WikiTable columns={["Game Pass", "Price", "For Sale", "Sales"]} rows={gamePassRows(related.gamePasses)} />
+        </WikiSection>
+      ) : null}
+    </div>
+  );
+}
+
+function WikiServerCards({
+  servers,
+  universeLabel,
+  imageSrc
+}: {
+  servers: WikiServerItem[];
+  universeLabel: string;
+  imageSrc: string | null;
+}) {
+  if (!servers.length) return null;
+
+  return (
+    <section className="space-y-3">
+      <h3 className="text-lg font-semibold text-foreground">{universeLabel} Servers</h3>
+      <div className="space-y-2">
+        {servers.slice(0, 6).map((server, index) => {
+          const players = compactMeta([formatNumber(server.player_count), formatNumber(server.max_players)])
+            ? `${formatNumber(server.player_count) ?? "0"} / ${formatNumber(server.max_players) ?? "?"}`
+            : "Players hidden";
+          const ping = server.ping_ms != null ? `${server.ping_ms} ms` : "Ping hidden";
+          const fps = server.fps != null ? `${server.fps.toFixed(1)} FPS` : "FPS hidden";
+
+          return (
+            <article key={server.id} className="rounded-lg border border-border/60 bg-surface/40 px-3 py-3">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-border/60 bg-surface-muted text-muted">
+                  {imageSrc ? (
+                    <Image src={imageSrc} alt="" fill sizes="40px" className="object-cover" />
+                  ) : (
+                    <SiRoblox className="h-5 w-5" aria-hidden />
+                  )}
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold leading-5 text-foreground">Public server {index + 1}</p>
+                  <dl className="mt-1 grid grid-cols-3 gap-2 text-xs">
+                    <div className="min-w-0">
+                      <dt className="text-muted">Players</dt>
+                      <dd className="truncate font-semibold text-foreground">{players}</dd>
+                    </div>
+                    <div className="min-w-0">
+                      <dt className="text-muted">Ping</dt>
+                      <dd className="truncate font-semibold text-foreground">{ping}</dd>
+                    </div>
+                    <div className="min-w-0">
+                      <dt className="text-muted">FPS</dt>
+                      <dd className="truncate font-semibold text-foreground">{fps}</dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
 }
 
 function developerGameLinks(related: WikiRelatedData): WikiLinkItem[] {
@@ -1525,7 +1598,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
           ) : null}
 
           {developerLinks.length ? (
-            <WikiSection title="More From This Developer" description="Other Roblox experiences found under the same creator.">
+            <WikiSection title="More From This Developer" description={`Other Roblox experiences from ${creatorLabel} that players may want to check next.`}>
               <WikiLinkList items={developerLinks} />
             </WikiSection>
           ) : null}
@@ -1536,7 +1609,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             universeLabel={universeLabel}
           />
 
-          <CommentsSection entityType="wiki" entityId={page.id} />
+          <WikiRobloxDataSections related={related} universeLabel={universeLabel} />
         </article>
 
         <aside className="space-y-4">
@@ -1545,6 +1618,12 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
               <WikiGameDetailsBlock details={gameDetailItems} />
             </section>
           ) : null}
+
+          <WikiServerCards
+            servers={related.servers}
+            universeLabel={universeLabel}
+            imageSrc={normalizeImageSrc(page.icon_url) ?? heroImage}
+          />
 
           {related.tools.length ? (
             <section className="space-y-3">
@@ -1626,6 +1705,10 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             </section>
           ) : null}
         </aside>
+
+        <div className="min-w-0 lg:col-start-1">
+          <CommentsSection entityType="wiki" entityId={page.id} />
+        </div>
       </div>
 
       <script

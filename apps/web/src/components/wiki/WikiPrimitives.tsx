@@ -27,12 +27,12 @@ export function WikiSection({
 }) {
   return (
     <section className={cn("min-w-0 border-t border-border/60 pt-8", className)}>
-      <div className="grid min-w-0 gap-5 lg:grid-cols-[13rem_minmax(0,1fr)]">
-        <div className="min-w-0 space-y-2">
-          <h2 className="mb-0 text-xl font-semibold leading-tight text-foreground md:text-2xl">{title}</h2>
-          {description ? <p className="text-sm leading-6 text-muted">{description}</p> : null}
-        </div>
-        <div className="min-w-0">{children}</div>
+      <div className="min-w-0 space-y-4">
+        <header className="max-w-3xl space-y-2">
+          <h2 className="mb-0 text-3xl font-semibold leading-tight text-foreground md:text-4xl">{title}</h2>
+          {description ? <p className="text-base leading-7 text-muted">{description}</p> : null}
+        </header>
+        <div className="min-w-0 w-full">{children}</div>
       </div>
     </section>
   );
