@@ -59,14 +59,15 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Discover Roblox universes from known creators/groups | `scripts/universes/expand-roblox-creators.ts` | `npm run discover:universes:creators` |
 | Run local-safe universe pipeline | `scripts/universes/run-universe-pipeline.ts` | `npm run pipeline:universes` |
 | Backfill missing universe IDs | `scripts/backfill/backfill-game-universes.ts` | `npm run backfill:universes` |
-| Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes`, `npm run enrich:universes:light`, `npm run enrich:universes:deep` |
+| Enrich universes | `scripts/universes/enrich-roblox-universes.ts` | `npm run enrich:universes`, `npm run enrich:universes:light`, `npm run enrich:universes:deep`; deep mode refreshes media, Open Cloud metadata, social links, groups, game passes, badges, and recent public server snapshots |
 | Backfill clean universe display names | `scripts/universes/backfill-clean-display-names.ts` | `npm run backfill:universe-display-names`; write locally with `-- --apply`, write production only with `NODE_ENV=production npm run backfill:universe-display-names -- --apply --allow-prod` after a clean production dry-run |
 | Refresh tiered public stats | `scripts/universes/update-universe-hourly-stats.ts` | `npm run stats:refresh:hot`, `npm run stats:refresh:warm`, `npm run stats:refresh:cold`; use `npm run stats:refresh -- --tier NEW` for NEW rows, or `npm run stats:refresh -- --universe-id <id>` for one-game repairs. Also records Roblox update markers in `roblox_universe_update_events`. |
 | Assign stats tiers | `scripts/universes/assign-universe-stats-tier.ts` | `npm run stats:tier` |
-| Audit stats workflow | `scripts/universes/audit-universe-stats-workflow.ts` | `npm run stats:audit` |
-| Roll hourly stats into daily rows | `scripts/universes/rollup-universe-daily-stats.ts` | `npm run stats:rollup-daily -- --date today`; use `-- --date yesterday --finalize` after the UTC day ends |
+| Audit stats workflow | `scripts/universes/audit-universe-stats-workflow.ts` | `npm run stats:audit`; records `stats_universe_audit` in `stats_job_runs` |
+| Roll hourly stats into daily rows | `scripts/universes/rollup-universe-daily-stats.ts` | `npm run stats:rollup-daily -- --date today`; use `-- --date yesterday --finalize` after the UTC day ends; records `stats_universe_daily_rollup` in `stats_job_runs` |
 | Snapshot public stats rankings | `scripts/universes/rank-universe-stats.ts` | Hourly: `npm run stats:rank -- --all --granularity hourly --rank-set playing --snapshot-scope relevant`; daily full: `npm run stats:rank -- --all --granularity daily --rank-set all --snapshot-scope all` |
-| Prune short-range hourly history | `scripts/universes/prune-universe-hourly-history.ts` | `npm run stats:prune-hourly -- --days 90 --apply`; deletes old hourly stats and hourly rank snapshots only |
+| Refresh platform stats aggregates | `scripts/universes/refresh-platform-stats.ts` | `npm run stats:platform:refresh`; refreshes `roblox_platform_stats_hourly` and `roblox_platform_stats_daily`, and records `stats_platform_refresh` in `stats_job_runs` |
+| Prune short-range hourly history | `scripts/universes/prune-universe-hourly-history.ts` | `npm run stats:prune-hourly -- --days 90 --apply`; deletes old hourly stats and hourly rank snapshots only; records `stats_universe_hourly_prune` in `stats_job_runs` |
 
 `enrich-roblox-universes.ts` should not be the normal source for `roblox_universe_stats_daily` now that public stats use hourly rollups. It writes same-day daily stat rows only when `ROBLOX_ENRICH_WRITE_DAILY_STATS=true` is set for a legacy one-off.
 

@@ -39,6 +39,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/stats/games` | `GET` | `src/app/api/stats/games/route.ts` | Public stats game table payload with search, sort, genre, and minimum-player filters. |
 | `/api/stats/creators` | `GET` | `src/app/api/stats/creators/route.ts` | Public stats creator leaderboard payload with search, sort, and creator-type filters. |
 | `/api/stats/items` | `GET` | `src/app/api/stats/items/route.ts` | Public stats item table payload with search, sort, category, sale-state, creator, and resale filters. |
+| `/api/stats/platform/chart` | `GET` | `src/app/api/stats/platform/chart/route.ts` | Public platform stats chart payload for lazy-loaded range and resolution changes. |
 | `/api/stats/games/[universeId]` | `GET` | `src/app/api/stats/games/[universeId]/route.ts` | Public stats summary for one Roblox universe. |
 | `/api/stats/games/[universeId]/chart` | `GET` | `src/app/api/stats/games/[universeId]/chart/route.ts` | Public chart payload for lazy-loaded hourly, daily, and monthly stats views. |
 

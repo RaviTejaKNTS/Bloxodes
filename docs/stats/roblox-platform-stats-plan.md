@@ -57,9 +57,9 @@ The first small fix is to make the platform CCU chart on `/stats` accept the sam
 
 ## Build Phases
 
-1. Add range controls to the current platform CCU chart.
-2. Create platform aggregate tables or materialized views for hourly and daily totals.
-3. Add `/stats/roblox-platform` with playing and visits first.
+1. Add range controls to the current platform CCU chart. Done in the platform stats implementation pass.
+2. Create platform aggregate tables or materialized views for hourly and daily totals. Done with `roblox_platform_stats_hourly` and `roblox_platform_stats_daily`.
+3. Add `/stats/roblox-platform` with playing and visits first. Done without status/social modules.
 4. Add stored Roblox status snapshots.
 5. Add official Roblox social account snapshots.
 6. Add game social account snapshots after link verification and rate-limit rules are clear.

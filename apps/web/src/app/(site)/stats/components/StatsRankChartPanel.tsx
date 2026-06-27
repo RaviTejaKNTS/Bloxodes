@@ -38,6 +38,7 @@ type RankPoint = {
 };
 
 type RankPointForRender = RankPoint & {
+  tooltipLabel: string;
   previousValue?: number | null;
   comparison0Value?: number | null;
   comparison1Value?: number | null;
@@ -166,7 +167,7 @@ function formatDate(value?: string | null) {
   if (!value) return "Not tracked";
   const date = new Date(value);
   if (!Number.isFinite(date.getTime())) return "Not tracked";
-  return date.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", hour12: true, timeZone: "UTC" });
+  return date.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", hour12: true });
 }
 
 function formatAxisTick(sampledAt: string, range: RangeKey) {
@@ -176,6 +177,21 @@ function formatAxisTick(sampledAt: string, range: RangeKey) {
     return date.toLocaleTimeString("en-US", { hour: "numeric", hour12: true });
   }
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
+function formatTooltipTimestamp(sampledAt: string, resolution: ResolutionKey) {
+  const date = new Date(sampledAt);
+  if (!Number.isFinite(date.getTime())) return sampledAt;
+  if (resolution === "hourly") {
+    return date.toLocaleString(undefined, {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      timeZoneName: "short"
+    });
+  }
+  return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 }
 
 function usablePointCount(points: RankPoint[], scope: RankScopeKey) {
@@ -337,11 +353,12 @@ export function StatsRankChartPanel({
     () =>
       points.map((point, index) => ({
         ...point,
+        tooltipLabel: formatTooltipTimestamp(point.sampledAt, displayChart.resolution),
         previousValue: numberValue(previousPoints[index]?.[dataKey]),
         comparison0Value: numberValue(comparisons[0]?.points[index]?.[dataKey]),
         comparison1Value: numberValue(comparisons[1]?.points[index]?.[dataKey])
       })),
-    [comparisons, dataKey, points, previousPoints]
+    [comparisons, dataKey, displayChart.resolution, points, previousPoints]
   );
   const yDomain = useMemo(() => rankDomain(chartPoints, scope, startsAtOne), [chartPoints, scope, startsAtOne]);
   const scopeSummary = summaries.find((summary) => summary.key === scope);

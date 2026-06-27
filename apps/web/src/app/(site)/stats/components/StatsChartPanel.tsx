@@ -149,9 +149,9 @@ function formatTooltipTimestamp(sampledAt: string, resolution: ResolutionKey) {
     });
   }
   if (resolution === "monthly") {
-    return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+    return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
   }
-  return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+  return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 }
 
 function StatsTooltip({
@@ -238,6 +238,7 @@ export function StatsChartPanel({
   chart,
   initialChart,
   universeId,
+  chartEndpoint,
   defaultMetric = "players",
   defaultRange,
   compact = false,
@@ -248,6 +249,7 @@ export function StatsChartPanel({
   chart?: ChartPoint[];
   initialChart?: ChartData;
   universeId?: number;
+  chartEndpoint?: string;
   defaultMetric?: MetricKey;
   defaultRange?: RangeKey;
   compact?: boolean;
@@ -273,6 +275,7 @@ export function StatsChartPanel({
   const [loadError, setLoadError] = useState<string | null>(null);
   const [startsAtZero, setStartsAtZero] = useState(false);
   const compareIds = useMemo(() => selectedComparisons.map((item) => item.universeId).sort((a, b) => a - b), [selectedComparisons]);
+  const resolvedChartEndpoint = chartEndpoint ?? (universeId ? `/api/stats/games/${universeId}/chart` : null);
   const initialChartKey = initialChart ? chartCacheKey(initialChart.range, initialChart.requestedResolution, false, []) : null;
   const activeKey = chartCacheKey(range, resolution, showPrevious, compareIds);
   const loadedChart = chartCache[activeKey] ?? (initialChartKey === activeKey ? initialChart : undefined);
@@ -296,7 +299,7 @@ export function StatsChartPanel({
       points.map((point, index) => ({
         ...point,
         chartResolution: resolvedResolution,
-        tooltipLabel: point.tooltipLabel ?? formatTooltipTimestamp(point.sampledAt, resolvedResolution),
+        tooltipLabel: formatTooltipTimestamp(point.sampledAt, resolvedResolution),
         previousValue: previousPoints[index]?.[metric] ?? null,
         comparison0Value: comparisons[0]?.points[index]?.[metric] ?? null,
         comparison1Value: comparisons[1]?.points[index]?.[metric] ?? null
@@ -322,7 +325,7 @@ export function StatsChartPanel({
   }, [metric, usableMetrics]);
 
   useEffect(() => {
-    if (!initialChart || !universeId || chartCache[activeKey]) return;
+    if (!initialChart || !resolvedChartEndpoint || chartCache[activeKey]) return;
     let cancelled = false;
     setLoadingKey(activeKey);
     setLoadError(null);
@@ -333,7 +336,7 @@ export function StatsChartPanel({
     });
     if (showPrevious) params.set("previous", "1");
     if (compareIds.length) params.set("compare", compareIds.join(","));
-    fetch(`/api/stats/games/${universeId}/chart?${params.toString()}`)
+    fetch(`${resolvedChartEndpoint}?${params.toString()}`)
       .then(async (response) => {
         if (!response.ok) throw new Error(`Chart request failed (${response.status})`);
         return (await response.json()) as ChartData;
@@ -351,7 +354,7 @@ export function StatsChartPanel({
     return () => {
       cancelled = true;
     };
-  }, [activeKey, chartCache, compareIds, initialChart, range, resolution, showPrevious, universeId]);
+  }, [activeKey, chartCache, compareIds, initialChart, range, resolution, resolvedChartEndpoint, showPrevious]);
 
   useEffect(() => {
     if (!compareOpen || !universeId || compareQuery.trim().length < 2) {

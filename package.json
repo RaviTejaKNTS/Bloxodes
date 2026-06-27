@@ -124,6 +124,7 @@
     "stats:rank:hourly": "tsx scripts/universes/rank-universe-stats.ts --granularity hourly --rank-set playing --snapshot-scope relevant",
     "stats:rank:daily": "tsx scripts/universes/rank-universe-stats.ts --granularity daily --rank-set all --snapshot-scope all --upsert-chunk-size 1000",
     "stats:index:refresh": "tsx scripts/universes/rebuild-stats-current-indexes.ts",
+    "stats:platform:refresh": "tsx scripts/universes/refresh-platform-stats.ts",
     "stats:prune-hourly": "tsx scripts/universes/prune-universe-hourly-history.ts",
     "stats:items:tier": "tsx scripts/items/assign-item-stats-tier.ts",
     "stats:items:refresh": "tsx scripts/items/update-item-hourly-stats.ts",

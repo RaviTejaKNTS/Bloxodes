@@ -9,6 +9,7 @@ export const fetchCache = "force-no-store";
 export async function GET() {
   const pages: SitemapUrlSetEntry[] = [
     { loc: withSiteUrl("/stats"), changefreq: "hourly", priority: "0.8" },
+    { loc: withSiteUrl("/stats/roblox-platform"), changefreq: "hourly", priority: "0.8" },
     { loc: withSiteUrl("/stats/games"), changefreq: "hourly", priority: "0.8" },
     { loc: withSiteUrl("/stats/creators"), changefreq: "hourly", priority: "0.8" },
     { loc: withSiteUrl("/stats/items"), changefreq: "hourly", priority: "0.8" }

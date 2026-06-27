@@ -215,7 +215,9 @@ function revalidateForStats(slug: string) {
   const normalized = normalizeSlug(slug);
   const scopedPaths =
     normalized === "home" || normalized === "stats"
-      ? ["/stats"]
+      ? ["/stats", "/stats/roblox-platform"]
+      : normalized === "roblox-platform" || normalized === "platform"
+        ? ["/stats", "/stats/roblox-platform"]
       : normalized === "games"
         ? ["/stats", "/stats/games"]
         : normalized === "creators"
@@ -224,11 +226,11 @@ function revalidateForStats(slug: string) {
             ? ["/stats", "/stats/items"]
           : normalized.startsWith("games/")
             ? ["/stats", "/stats/games", `/stats/games/${normalized.replace(/^games\//, "")}`]
-            : ["/stats", "/stats/games", "/stats/creators", "/stats/items"];
+            : ["/stats", "/stats/roblox-platform", "/stats/games", "/stats/creators", "/stats/items"];
   const detailSlug = normalized.startsWith("games/") ? normalized.replace(/^games\//, "") : null;
   return applyRevalidation(
-    [...scopedPaths, "/api/stats/games", "/api/stats/creators", "/api/stats/items", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
-    ["stats", "stats-home", "stats-games", "stats-creators", "stats-items", detailSlug ? `stats-game:${detailSlug}` : "", "home"]
+    [...scopedPaths, "/api/stats/platform/chart", "/api/stats/games", "/api/stats/creators", "/api/stats/items", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
+    ["stats", "stats-home", "stats-platform", "stats-games", "stats-creators", "stats-items", detailSlug ? `stats-game:${detailSlug}` : "", "home"]
   );
 }
 
@@ -282,6 +284,7 @@ function warmPathPriority(path: string) {
   if (
     path === "/codes" ||
     path === "/stats" ||
+    path === "/stats/roblox-platform" ||
     path === "/stats/games" ||
     path === "/stats/creators" ||
     path === "/stats/items" ||

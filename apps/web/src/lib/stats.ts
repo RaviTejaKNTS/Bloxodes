@@ -303,6 +303,27 @@ export type StatsHomeData = {
   genres: StatsGenreSummary[];
   recentGames: StatsGame[];
   platformTrend: StatsChartPoint[];
+  platformChart: StatsGameChartData;
+};
+
+export type StatsPlatformTotals = {
+  trackedGames: number;
+  livePlayers: number;
+  totalVisits: number;
+  totalFavorites: number;
+  totalLikes: number;
+  totalDislikes: number;
+  ratingPercent: number | null;
+  lastUpdatedAt: string | null;
+};
+
+export type StatsPlatformPageData = {
+  totals: StatsPlatformTotals;
+  chart: StatsGameChartData;
+  topGames: StatsGame[];
+  risers: StatsGame[];
+  mostVisited: StatsGame[];
+  genres: StatsGenreSummary[];
 };
 
 export type StatsGamesPageData = {
@@ -555,6 +576,20 @@ type PlatformTrendRow = {
   favorites: number | string | null;
   rating: number | string | null;
   samples: number | string | null;
+};
+
+type PlatformAggregateRow = {
+  hour_start?: string | null;
+  stat_date?: string | null;
+  playing: number | string | null;
+  peak_players: number | string | null;
+  avg_players: number | string | null;
+  visits: number | string | null;
+  favorites: number | string | null;
+  rating_percent: number | string | null;
+  tracked_games: number | string | null;
+  samples: number | string | null;
+  recorded_at: string | null;
 };
 
 type RankSnapshotRow = {
@@ -1770,7 +1805,7 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
     .slice(0, limit);
 }
 
-async function getStatsPlatformTotals(): Promise<{ livePlayers: number; totalVisits: number; lastUpdatedAt: string | null } | null> {
+async function getStatsPlatformTotals(): Promise<Omit<StatsPlatformTotals, "trackedGames"> | null> {
   const { data, error } = await supabaseAdmin()
     .from("stats_genre_current_index")
     .select("playing, visits, indexed_at")
@@ -1793,7 +1828,15 @@ async function getStatsPlatformTotals(): Promise<{ livePlayers: number; totalVis
     .filter((value): value is string => Boolean(value))
     .sort();
 
-  return { livePlayers, totalVisits, lastUpdatedAt: lastUpdatedAt[lastUpdatedAt.length - 1] ?? null };
+  return {
+    livePlayers,
+    totalVisits,
+    totalFavorites: 0,
+    totalLikes: 0,
+    totalDislikes: 0,
+    ratingPercent: null,
+    lastUpdatedAt: lastUpdatedAt[lastUpdatedAt.length - 1] ?? null
+  };
 }
 
 async function getPlatformTrendFallback(games: StatsGame[]): Promise<StatsChartPoint[]> {
@@ -1856,31 +1899,40 @@ async function getPlatformTrendFallback(games: StatsGame[]): Promise<StatsChartP
 }
 
 async function getPlatformTrend(games: StatsGame[]): Promise<StatsChartPoint[]> {
+  const chart = await getStatsPlatformChart("1d", "hourly");
+  if (chart.points.length) return chart.points;
+
+  return getPlatformTrendFallback(games);
+}
+
+async function getPlatformTrendFromRpc(sinceIso: string): Promise<StatsChartPoint[] | null> {
   const { data, error } = await supabaseAdmin().rpc("get_stats_platform_ccu_trend", {
-    p_since: hoursAgo(24)
+    p_since: sinceIso
   });
 
-  if (!error) {
-    return ((data ?? []) as PlatformTrendRow[]).map((row) => {
-      const sampledAt = row.hour_start;
-      return {
-        label: new Date(sampledAt).toLocaleTimeString("en-US", { hour: "numeric", hour12: true, timeZone: "UTC" }),
-        sampledAt,
-        players: toFiniteNumber(row.players),
-        peakPlayers: toFiniteNumber(row.peak_players),
-        avgPlayers: toFiniteNumber(row.avg_players),
-        visits: toFiniteNumber(row.visits),
-        favorites: toFiniteNumber(row.favorites),
-        rating: toFiniteNumber(row.rating),
-        samples: toFiniteNumber(row.samples)
-      };
-    });
+  if (error) {
+    if (error.code !== "42883") {
+      console.warn("Failed to load platform CCU trend", error.message);
+    }
+    return null;
   }
 
-  if (error.code !== "42883") {
-    console.warn("Failed to load platform CCU trend", error.message);
-  }
-  return getPlatformTrendFallback(games);
+  return ((data ?? []) as PlatformTrendRow[]).map((row) => mapPlatformTrendRow(row));
+}
+
+function mapPlatformTrendRow(row: PlatformTrendRow): StatsChartPoint {
+  const sampledAt = row.hour_start;
+  return {
+    label: new Date(sampledAt).toLocaleTimeString("en-US", { hour: "numeric", hour12: true, timeZone: "UTC" }),
+    sampledAt,
+    players: toFiniteNumber(row.players),
+    peakPlayers: toFiniteNumber(row.peak_players),
+    avgPlayers: toFiniteNumber(row.avg_players),
+    visits: toFiniteNumber(row.visits),
+    favorites: toFiniteNumber(row.favorites),
+    rating: toFiniteNumber(row.rating),
+    samples: toFiniteNumber(row.samples)
+  };
 }
 
 export async function getStatsHome(): Promise<StatsHomeData> {
@@ -1911,7 +1963,8 @@ export async function getStatsHome(): Promise<StatsHomeData> {
     .sort((a, b) => (a.growth24h ?? 0) - (b.growth24h ?? 0))
     .slice(0, 6);
   const { rows: recentGames } = await listBaseGames({ limit: 8, sort: "updated" });
-  const platformTrend = await getPlatformTrend(topGames);
+  const platformChart = await getStatsPlatformChart("1d", "hourly");
+  const platformTrend = platformChart.points.length ? platformChart.points : await getPlatformTrend(topGames);
   const livePlayers = platformTotals?.livePlayers ?? topGames.reduce((sum, game) => sum + (game.playing ?? 0), 0);
   const totalVisits = platformTotals?.totalVisits ?? mostVisited.reduce((sum, game) => sum + (game.visits ?? 0), 0);
   const sortedRefreshTimes = topGames
@@ -1934,7 +1987,15 @@ export async function getStatsHome(): Promise<StatsHomeData> {
     mostVisited,
     genres,
     recentGames,
-    platformTrend
+    platformTrend,
+    platformChart: platformChart.points.length
+      ? platformChart
+      : {
+          range: "1d",
+          requestedResolution: "hourly",
+          resolution: "hourly",
+          points: platformTrend
+        }
   };
 }
 
@@ -2721,6 +2782,202 @@ async function getBucketedChart(
 
 export function normalizeStatsResolution(value?: string | null): StatsChartResolution {
   return STATS_CHART_RESOLUTIONS.some((option) => option.value === value) ? (value as StatsChartResolution) : DEFAULT_STATS_CHART_RESOLUTION;
+}
+
+function mapPlatformAggregatePoint(row: PlatformAggregateRow, resolution: StatsChartResolution): StatsChartPoint | null {
+  const sampledAt = row.hour_start ?? (row.stat_date ? `${row.stat_date}T00:00:00.000Z` : null);
+  if (!sampledAt) return null;
+  const date = new Date(sampledAt);
+  if (!Number.isFinite(date.getTime())) return null;
+  return {
+    label: resolution === "hourly"
+      ? date.toLocaleTimeString("en-US", { hour: "numeric", hour12: true, timeZone: "UTC" })
+      : formatChartDate(date),
+    tooltipLabel: resolution === "hourly"
+      ? formatBucketTooltip(date, date, "hourly")
+      : formatChartDate(date, true),
+    sampledAt,
+    players: toFiniteNumber(row.playing),
+    peakPlayers: toFiniteNumber(row.peak_players),
+    avgPlayers: toFiniteNumber(row.avg_players),
+    visits: toFiniteNumber(row.visits),
+    favorites: toFiniteNumber(row.favorites),
+    rating: toFiniteNumber(row.rating_percent),
+    samples: toFiniteNumber(row.samples)
+  };
+}
+
+function latestPointNumber(points: StatsChartPoint[], key: keyof Pick<StatsChartPoint, "visits" | "favorites">): number | null {
+  for (let index = points.length - 1; index >= 0; index -= 1) {
+    const value = points[index]?.[key];
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+  }
+  return null;
+}
+
+function bucketPlatformPoints(
+  points: StatsChartPoint[],
+  range: StatsTimeRange,
+  resolution: StatsChartResolution,
+  window = chartWindow(range)
+): StatsChartPoint[] {
+  if (!points.length) return [];
+  const rangeStart = window.start;
+  const rangeEnd = window.end;
+  const bucketMs = RESOLUTION_HOURS[resolution] * 60 * 60 * 1000;
+  const buckets = new Map<number, StatsChartPoint[]>();
+
+  for (const point of points) {
+    const sampledMs = Date.parse(point.sampledAt);
+    if (!Number.isFinite(sampledMs)) continue;
+    if (sampledMs < rangeStart.getTime() || sampledMs > rangeEnd.getTime()) continue;
+    const bucketIndex = Math.max(0, Math.floor((sampledMs - rangeStart.getTime()) / bucketMs));
+    const bucket = buckets.get(bucketIndex) ?? [];
+    bucket.push(point);
+    buckets.set(bucketIndex, bucket);
+  }
+
+  return Array.from(buckets.entries())
+    .sort(([a], [b]) => a - b)
+    .map(([bucketIndex, bucket]) => {
+      bucket.sort((a, b) => Date.parse(a.sampledAt) - Date.parse(b.sampledAt));
+      const bucketStart = new Date(rangeStart.getTime() + bucketIndex * bucketMs);
+      const bucketEnd = new Date(Math.min(rangeStart.getTime() + (bucketIndex + 1) * bucketMs, rangeEnd.getTime()));
+      let playerTotal = 0;
+      let playerWeight = 0;
+      let ratingTotal = 0;
+      let ratingWeight = 0;
+      let peakPlayers: number | null = null;
+      let samples = 0;
+
+      for (const point of bucket) {
+        const sampleCount = Math.max(point.samples ?? 1, 1);
+        if (typeof point.players === "number") {
+          playerTotal += point.players * sampleCount;
+          playerWeight += sampleCount;
+        }
+        if (typeof point.peakPlayers === "number") {
+          peakPlayers = peakPlayers == null ? point.peakPlayers : Math.max(peakPlayers, point.peakPlayers);
+        }
+        if (typeof point.rating === "number") {
+          ratingTotal += point.rating * sampleCount;
+          ratingWeight += sampleCount;
+        }
+        samples += point.samples ?? 0;
+      }
+
+      const sampledAt = bucket[bucket.length - 1]?.sampledAt ?? bucketEnd.toISOString();
+      return {
+        label: formatBucketLabel(bucketStart, bucketEnd, resolution),
+        tooltipLabel: formatBucketTooltip(bucketStart, bucketEnd, resolution),
+        sampledAt,
+        players: playerWeight > 0 ? playerTotal / playerWeight : null,
+        peakPlayers,
+        avgPlayers: playerWeight > 0 ? playerTotal / playerWeight : null,
+        visits: latestPointNumber(bucket, "visits"),
+        favorites: latestPointNumber(bucket, "favorites"),
+        rating: ratingWeight > 0 ? Math.round((ratingTotal / ratingWeight) * 10) / 10 : null,
+        samples
+      };
+    });
+}
+
+async function getStoredPlatformChart(
+  range: StatsTimeRange,
+  resolution: StatsChartResolution,
+  window = chartWindow(range)
+): Promise<StatsChartPoint[] | null> {
+  const useHourly = resolution === "hourly";
+  const table = useHourly ? "roblox_platform_stats_hourly" : "roblox_platform_stats_daily";
+  const timeColumn = useHourly ? "hour_start" : "stat_date";
+  const startValue = useHourly ? window.start.toISOString() : window.start.toISOString().slice(0, 10);
+  const endValue = useHourly ? window.end.toISOString() : window.end.toISOString().slice(0, 10);
+  const { data, error } = await supabaseAdmin()
+    .from(table)
+    .select(`${timeColumn}, playing, peak_players, avg_players, visits, favorites, rating_percent, tracked_games, samples, recorded_at`)
+    .gte(timeColumn, startValue)
+    .lte(timeColumn, endValue)
+    .order(timeColumn, { ascending: true });
+
+  if (error) {
+    if (error.code !== "42P01") {
+      console.warn("Failed to load stored platform stats", error.message);
+    }
+    return null;
+  }
+
+  const points = ((data ?? []) as PlatformAggregateRow[])
+    .map((row) => mapPlatformAggregatePoint(row, useHourly ? "hourly" : "daily"))
+    .filter((point): point is StatsChartPoint => Boolean(point));
+  if (!points.length) return null;
+  return resolution === "hourly" || resolution === "daily" ? points : bucketPlatformPoints(points, range, resolution, window);
+}
+
+export async function getStatsPlatformChart(
+  range: StatsTimeRange = "7d",
+  resolution: StatsChartResolution = DEFAULT_STATS_CHART_RESOLUTION,
+  options: { includePrevious?: boolean } = {}
+): Promise<StatsGameChartData> {
+  const window = chartWindow(range);
+  const previousWindow = chartWindow(range, 1);
+  const [storedPoints, storedPreviousPoints] = await Promise.all([
+    getStoredPlatformChart(range, resolution, window),
+    options.includePrevious ? getStoredPlatformChart(range, resolution, previousWindow) : Promise.resolve(undefined)
+  ]);
+  const fallbackPoints =
+    storedPoints ??
+    (resolution === "hourly" && range === "1d" ? await getPlatformTrendFromRpc(window.start.toISOString()) : null) ??
+    [];
+  const fallbackPreviousPoints =
+    options.includePrevious && !storedPreviousPoints && resolution === "hourly"
+      ? undefined
+      : storedPreviousPoints ?? undefined;
+
+  return {
+    range,
+    requestedResolution: resolution,
+    resolution,
+    points: fallbackPoints,
+    previousPoints: fallbackPreviousPoints
+  };
+}
+
+export async function getStatsPlatformPage(): Promise<StatsPlatformPageData> {
+  const [{ rows: topGames }, { rows: mostVisited }, { total: trackedGames }, genres, riserBase, platformTotals, chart] = await Promise.all([
+    listBaseGames({ limit: 12, sort: "playing" }),
+    listBaseGames({ limit: 10, sort: "visits" }),
+    listBaseGames({ limit: 1, sort: "playing", count: "exact" }),
+    listStatsGenres(12),
+    listCurrentRisers(12),
+    getStatsPlatformTotals(),
+    getStatsPlatformChart("1d", "hourly")
+  ]);
+  const risers = riserBase
+    .filter(isEligibleHomeRiser)
+    .sort((a, b) => {
+      const scoreDelta = momentumRiserScore(b) - momentumRiserScore(a);
+      if (scoreDelta !== 0) return scoreDelta;
+      return (b.growth24h ?? -Infinity) - (a.growth24h ?? -Infinity);
+    })
+    .slice(0, 10);
+
+  return {
+    totals: {
+      trackedGames,
+      livePlayers: platformTotals?.livePlayers ?? topGames.reduce((sum, game) => sum + (game.playing ?? 0), 0),
+      totalVisits: platformTotals?.totalVisits ?? mostVisited.reduce((sum, game) => sum + (game.visits ?? 0), 0),
+      totalFavorites: platformTotals?.totalFavorites ?? 0,
+      totalLikes: platformTotals?.totalLikes ?? 0,
+      totalDislikes: platformTotals?.totalDislikes ?? 0,
+      ratingPercent: platformTotals?.ratingPercent ?? null,
+      lastUpdatedAt: platformTotals?.lastUpdatedAt ?? topGames.map((game) => game.lastStatsRefreshedAt).filter(Boolean).sort().pop() ?? null
+    },
+    chart,
+    topGames,
+    risers,
+    mostVisited,
+    genres
+  };
 }
 
 function parsePositiveUniverseIds(value: string | null, limit = 2): number[] {

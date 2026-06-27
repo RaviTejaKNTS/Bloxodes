@@ -51,6 +51,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Historical Roblox game update markers detected during hourly stats refreshes. Use this for stats chart update overlays; `roblox_universes.updated_at_api` is latest-state only.
 - `stats_game_current_index`, `stats_genre_current_index`, `stats_risers_current_index`, `stats_creator_current_index`
   - Public `/stats` read models for game listings, genre summaries, risers, and creator leaderboards. Rebuild through the stats current-index refresh workflow.
+- `roblox_platform_stats_hourly`, `roblox_platform_stats_daily`
+  - Public `/stats/roblox-platform` aggregates for platform-level playing, visits, favorites, rating, tracked-game count, and chart ranges. Refresh through `npm run stats:platform:refresh`.
 - `roblox_catalog_items`
   - Public `/stats/items` source table for Roblox marketplace item stats, including favorites, price, resale, category, creator, and last-seen fields.
 - `roblox_catalog_item_stats_hourly`, `roblox_catalog_item_stats_daily`, `roblox_catalog_item_resale_points`

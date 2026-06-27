@@ -59,6 +59,7 @@ import {
   type StatsItemDetailData,
   type StatsItemSortKey,
   type StatsItemsPageData,
+  type StatsPlatformPageData,
   type StatsRelatedLink,
   type StatsSortKey,
   type StatsSubgenreOption,
@@ -636,7 +637,7 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           value={formatCompactNumber(data.totals.livePlayers)}
           detail={`Across ${formatFullNumber(data.totals.trackedGames)} tracked games`}
           icon={Users}
-          href="#platform-ccu-trend"
+          href="/stats/roblox-platform"
         />
         <MetricCard label="Tracked games" value={formatFullNumber(data.totals.trackedGames)} detail="Public stats index" icon={Gamepad2} href="/stats/games" />
         <MetricCard
@@ -654,7 +655,16 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
       </div>
 
       <div id="platform-ccu-trend" className="scroll-mt-24">
-        <StatsChartPanel title="Platform CCU trend" subtitle="Tracked Roblox games, last 24 hours" chart={data.platformTrend} defaultMetric="players" compact={false} area />
+        <StatsChartPanel
+          title="Platform CCU trend"
+          subtitle="Tracked Roblox games"
+          initialChart={data.platformChart}
+          chartEndpoint="/api/stats/platform/chart"
+          defaultMetric="players"
+          defaultRange="1d"
+          compact={false}
+          area
+        />
       </div>
 
       <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
@@ -681,6 +691,103 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           </CardContent>
         </Card>
         <GameListPanel title="Most visited games" games={data.mostVisited.slice(0, 8)} metric="visits" href="/stats/games?sort=visits" />
+      </div>
+    </div>
+  );
+}
+
+export function StatsPlatformView({ data }: { data: StatsPlatformPageData }) {
+  const breadcrumbItems = [
+    { label: "Stats", href: "/stats" },
+    { label: "Roblox Platform" }
+  ];
+  return (
+    <div className="stats-surface space-y-6">
+      <header className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        <div className="max-w-3xl">
+          <PageBreadcrumb items={breadcrumbItems} className="mb-3 text-[11px] uppercase tracking-[0.16em] text-muted" />
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">Platform Stats</p>
+          <h1 className="mb-0 mt-2 text-3xl font-semibold leading-tight text-foreground md:text-4xl">Roblox platform stats</h1>
+          <p className="mt-3 text-sm font-medium leading-6 text-muted">
+            Aggregate Roblox activity across games tracked by Bloxodes, with current players, visits, genre mix, and mover lists.
+          </p>
+        </div>
+        <Button asChild variant="outline" className="h-10 rounded-md border-border/70 bg-surface shadow-none">
+          <Link href="/stats/games">
+            Browse games
+            <ExternalLink className="ml-1.5 h-3.5 w-3.5" aria-hidden />
+          </Link>
+        </Button>
+      </header>
+
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <MetricCard
+          label="Platform CCU"
+          value={formatCompactNumber(data.totals.livePlayers)}
+          detail="Latest tracked-game total"
+          icon={Users}
+        />
+        <MetricCard
+          label="Tracked games"
+          value={formatFullNumber(data.totals.trackedGames)}
+          detail="Public stats index"
+          icon={Gamepad2}
+          href="/stats/games"
+        />
+        <MetricCard
+          label="Platform visits"
+          value={formatCompactNumber(data.totals.totalVisits)}
+          detail="Tracked-game total visits"
+          icon={Eye}
+          href="/stats/games?sort=visits"
+        />
+        <MetricCard
+          label="Freshness"
+          value={formatRelativeStatsDate(data.totals.lastUpdatedAt)}
+          detail="Latest stats index refresh"
+          icon={Clock3}
+        />
+      </div>
+
+      <StatsChartPanel
+        title="Roblox platform trend"
+        subtitle="Aggregate tracked-game players, visits, favorites, and rating"
+        initialChart={data.chart}
+        chartEndpoint="/api/stats/platform/chart"
+        defaultMetric="players"
+        defaultRange="1d"
+        area
+      />
+
+      <div className="grid gap-4 xl:grid-cols-2">
+        <GameListPanel title="Top games right now" subtitle="Largest contributors to platform CCU." games={data.topGames} metric="playing" href="/stats/games" />
+        <GameListPanel title="Fastest risers" subtitle="Games adding the most players over the last 24 hours." games={data.risers} metric="playing" href="/stats/games?sort=growth_24h" />
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+        <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">
+          <CardHeader className="border-b border-border/60 p-4">
+            <CardTitle className="m-0 text-base font-semibold text-foreground">Platform genre mix</CardTitle>
+            <p className="mt-1 text-xs font-medium text-muted">Current players grouped by tracked Roblox genre.</p>
+          </CardHeader>
+          <CardContent className="space-y-3 p-4">
+            {data.genres.map((genre) => (
+              <Link key={genre.slug} href={`/stats/games?genre=${encodeURIComponent(genre.genre)}`} className="block rounded-lg border border-border/60 bg-background/35 p-3 transition hover:border-accent/70">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{genre.genre}</p>
+                    <p className="text-xs text-muted">{genre.games} tracked games</p>
+                  </div>
+                  <p className="text-sm font-semibold text-foreground">{formatCompactNumber(genre.playing)}</p>
+                </div>
+                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-border/50">
+                  <div className="h-full rounded-full bg-accent" style={{ width: `${Math.min(100, Math.max(5, genre.playing / Math.max(1, data.genres[0]?.playing ?? 1) * 100))}%` }} />
+                </div>
+              </Link>
+            ))}
+          </CardContent>
+        </Card>
+        <GameListPanel title="Most visited games" subtitle="Long-running traffic leaders in the tracked game index." games={data.mostVisited} metric="visits" href="/stats/games?sort=visits" />
       </div>
     </div>
   );
