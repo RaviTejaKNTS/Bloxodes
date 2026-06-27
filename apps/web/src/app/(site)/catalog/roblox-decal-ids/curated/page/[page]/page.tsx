@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import {
   buildDecalCuratedPath,
-  buildRobloxDecalCatalogContentHtml,
   loadRobloxDecalIdsPageData,
   resolveDecalSearch,
   renderRobloxDecalIdsPage
@@ -13,7 +11,6 @@ import {
 export const revalidate = 21600;
 export const dynamic = "force-dynamic";
 
-const CATALOG_CODE_CANDIDATES = ["roblox-decal-ids"];
 const TITLE = "Curated Roblox Decal IDs";
 const DESCRIPTION = "Browse the best Roblox decal IDs from curated lists, strong Roblox ratings, useful categories, and verified image previews.";
 
@@ -41,11 +38,7 @@ export default async function CuratedRobloxDecalIdsPaginatedPage({ params, searc
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
   const search = await resolveDecalSearch(searchParams);
 
-  const [{ decals, total, totalPages }, catalog] = await Promise.all([
-    loadRobloxDecalIdsPageData(safePageNumber, search, { curated: true }),
-    getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
-  ]);
-  const contentHtml = await buildRobloxDecalCatalogContentHtml(catalog);
+  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, search, { curated: true });
 
   return renderRobloxDecalIdsPage({
     decals,
@@ -53,7 +46,6 @@ export default async function CuratedRobloxDecalIdsPaginatedPage({ params, searc
     totalPages,
     currentPage: safePageNumber,
     showHero: false,
-    contentHtml,
     search: search.search,
     sort: search.sort,
     section: "curated",

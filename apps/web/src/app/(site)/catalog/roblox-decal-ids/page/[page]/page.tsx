@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
-import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
-import { getCatalogPageContentByCodes } from "@/lib/catalog";
+import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import {
     BASE_PATH,
-    buildRobloxDecalCatalogContentHtml,
     DECAL_PAGE_HEADING,
     DECAL_SEO_TITLE,
     loadRobloxDecalIdsPageData,
@@ -15,7 +13,6 @@ import {
 export const revalidate = 21600;
 export const dynamic = "force-dynamic";
 
-const CATALOG_CODE_CANDIDATES = ["roblox-decal-ids"];
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
 
 type PageProps = {
@@ -28,10 +25,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const pageNumber = Number.parseInt(page, 10);
     const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
 
-    const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
-    const title = `${resolveSeoTitle(catalog?.seo_title) ?? DECAL_SEO_TITLE} - Page ${safePageNumber}`;
-    const description = catalog?.meta_description ?? CATALOG_DESCRIPTION;
-    const image = catalog?.thumb_url || FALLBACK_IMAGE;
+    const title = `${DECAL_SEO_TITLE} - Page ${safePageNumber}`;
+    const description = CATALOG_DESCRIPTION;
+    const image = FALLBACK_IMAGE;
     const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}/page/${safePageNumber}`;
 
     return {
@@ -71,11 +67,7 @@ export default async function RobloxDecalIdsPaginatedPage({ params, searchParams
     const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
     const search = await resolveDecalSearch(searchParams);
 
-    const [{ decals, total, totalPages }, catalog] = await Promise.all([
-        loadRobloxDecalIdsPageData(safePageNumber, search),
-        getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
-    ]);
-    const contentHtml = await buildRobloxDecalCatalogContentHtml(catalog);
+    const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, search);
 
     return renderRobloxDecalIdsPage({
         decals,
@@ -83,7 +75,6 @@ export default async function RobloxDecalIdsPaginatedPage({ params, searchParams
         totalPages,
         currentPage: safePageNumber,
         showHero: false,
-        contentHtml,
         search: search.search,
         sort: search.sort,
         pageTitleOverride: DECAL_PAGE_HEADING

@@ -402,11 +402,9 @@ function DecalCatalogNav({ active }: { active: DecalNavKey }) {
 }
 
 export function renderRobloxDecalCategoriesPage({
-  categories,
-  contentHtml
+  categories
 }: {
   categories: DecalCategoryRow[];
-  contentHtml?: CatalogContentHtml | null;
 }) {
   const baseTitle = "Roblox Decal ID Categories";
   const description = "Browse Roblox decal IDs by image style, theme, and common decal search intent.";
@@ -466,11 +464,6 @@ export function renderRobloxDecalCategoriesPage({
         ))}
       </section>
 
-      {contentHtml?.id ? (
-        <div className="mt-10">
-          <CommentsSection entityType="catalog" entityId={contentHtml.id} />
-        </div>
-      ) : null}
       <MoreCatalogs excludeCode="roblox-decal-ids" />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />

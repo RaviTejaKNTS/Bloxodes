@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/article-content.css";
 import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import {
   buildDecalCategoryPath,
-  buildRobloxDecalCatalogContentHtml,
   loadDecalCategoryBySlug,
   loadRobloxDecalIdsPageData,
   resolveDecalSearch,
@@ -14,8 +12,6 @@ import {
 
 export const revalidate = 21600;
 export const dynamic = "force-dynamic";
-
-const CATALOG_CODE_CANDIDATES = ["roblox-decal-ids"];
 
 type PageProps = {
   params: Promise<{ category: string; page: string }>;
@@ -48,11 +44,7 @@ export default async function RobloxDecalCategoryPaginatedPage({ params, searchP
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
   const search = await resolveDecalSearch(searchParams);
 
-  const [{ decals, total, totalPages }, catalog] = await Promise.all([
-    loadRobloxDecalIdsPageData(safePageNumber, search, { category: category.slug }),
-    getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
-  ]);
-  const contentHtml = await buildRobloxDecalCatalogContentHtml(catalog);
+  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, search, { category: category.slug });
 
   return renderRobloxDecalIdsPage({
     decals,
@@ -60,7 +52,6 @@ export default async function RobloxDecalCategoryPaginatedPage({ params, searchP
     totalPages,
     currentPage: safePageNumber,
     showHero: false,
-    contentHtml,
     search: search.search,
     sort: search.sort,
     section: "category",

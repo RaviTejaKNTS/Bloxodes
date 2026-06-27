@@ -1,5 +1,4 @@
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
-import { DECAL_CATEGORY_DEFINITIONS } from "@/lib/decal-id-categories";
 import { buildAvatarCatalogPath, isAvatarCatalogCode } from "@/lib/roblox-avatar-catalog";
 import { supabaseAdmin } from "@/lib/supabase";
 import { NextResponse } from "next/server";
@@ -42,30 +41,6 @@ export async function GET() {
         priority: "0.9",
         lastmod: toIsoDate(updated)
       });
-
-      if (code === "roblox-decal-ids") {
-        pageMap.set("/catalog/roblox-decal-ids/curated", {
-          loc: withSiteUrl("/catalog/roblox-decal-ids/curated"),
-          changefreq: "weekly",
-          priority: "0.85",
-          lastmod: toIsoDate(updated)
-        });
-        pageMap.set("/catalog/roblox-decal-ids/categories", {
-          loc: withSiteUrl("/catalog/roblox-decal-ids/categories"),
-          changefreq: "weekly",
-          priority: "0.85",
-          lastmod: toIsoDate(updated)
-        });
-        for (const category of DECAL_CATEGORY_DEFINITIONS) {
-          const categoryPath = `/catalog/roblox-decal-ids/categories/${category.slug}`;
-          pageMap.set(categoryPath, {
-            loc: withSiteUrl(categoryPath),
-            changefreq: "weekly",
-            priority: "0.8",
-            lastmod: toIsoDate(updated)
-          });
-        }
-      }
     }
 
     const pages = Array.from(pageMap.values()).sort((a, b) => a.loc.localeCompare(b.loc));
