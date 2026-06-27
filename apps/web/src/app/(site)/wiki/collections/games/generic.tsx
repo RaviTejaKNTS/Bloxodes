@@ -1884,6 +1884,89 @@ const ANIME_VANGUARDS_ENEMY_SOURCE_KEYS = [
 ];
 
 const CATALOG_SECTION_OVERRIDES: Record<string, CollectionSectionOverride> = {
+  "build-a-ring-farm-mutations": {
+    groupKey: "collectionSection",
+    groupLabel: "How to get",
+    sectionOrder: ["Spray Mutations", "Event & Pet Mutations"],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: ["slug", "collectionSection"],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 5
+  },
+  "build-a-ring-farm-eggs": {
+    groupKey: "collectionSection",
+    groupLabel: "How to get",
+    sectionOrder: ["Cash Eggs (Egg Merchant)", "Robux & Limited Eggs (Premium Shop)"],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "order",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus",
+      "sourcePage"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 4
+  },
+  "build-a-ring-farm-pets": {
+    groupKey: "collectionSection",
+    groupLabel: "Rarity",
+    sectionOrder: [
+      "Common",
+      "Uncommon",
+      "Rare",
+      "Epic",
+      "Legendary",
+      "Secret",
+      "Prismatic",
+      "Divine",
+      "Exotic"
+    ],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "rarity",
+      "sourceStatus",
+      "sourcePage",
+      "secondarySourcePage",
+      "imageStatus",
+      "sortOrder"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 4
+  },
+  "build-a-ring-farm-seeds": {
+    groupKey: "collectionSection",
+    groupLabel: "Rarity",
+    sectionOrder: [
+      "Common",
+      "Uncommon",
+      "Rare",
+      "Epic",
+      "Legendary",
+      "Secret",
+      "Prismatic",
+      "Divine",
+      "Exotic",
+      "Transcended",
+      "Celestial"
+    ],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "rarity",
+      "sourcePage",
+      "secondarySourcePage",
+      "imageStatus",
+      "sortOrder"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 5
+  },
   "1-speed-evolve-trails": {
     groupKey: "collectionSection",
     groupLabel: "Trail tier",
