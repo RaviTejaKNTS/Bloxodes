@@ -686,24 +686,8 @@ function hasDeviceControlValue(raw: unknown, key: ControlDeviceKey): boolean {
   return Object.values(record).some((value) => value && typeof value === "object" && hasDeviceControlValue(value, key));
 }
 
-function getControlDeviceColumns(page: WikiPageContent, rawControls: unknown): ControlDeviceColumn[] {
-  const enabledByDevice: Record<ControlDeviceKey, boolean | null | undefined> = {
-    desktop: page.desktop_enabled,
-    mobile: page.mobile_enabled,
-    tablet: page.tablet_enabled,
-    console: page.console_enabled,
-    vr: page.vr_enabled
-  };
-  const columns = CONTROL_DEVICE_COLUMNS.map((column) => ({
-    ...column,
-    enabled: enabledByDevice[column.key]
-  }));
-  const enabledColumns = columns.filter((column) => column.enabled === true);
-  const columnsWithValues = columns.filter((column) => hasDeviceControlValue(rawControls, column.key));
-  const mergedColumns = columns.filter((column) =>
-    [...enabledColumns, ...columnsWithValues].some((candidate) => candidate.key === column.key)
-  );
-  return mergedColumns.length ? mergedColumns : columns.slice(0, 1);
+function getControlDeviceColumns(rawControls: unknown): ControlDeviceColumn[] {
+  return CONTROL_DEVICE_COLUMNS.filter((column) => hasDeviceControlValue(rawControls, column.key));
 }
 
 function getControlActionLabel(record: Record<string, unknown>, fallback: string): string {
@@ -725,15 +709,6 @@ function getDeviceControlValue(record: Record<string, unknown>, key: ControlDevi
   return null;
 }
 
-function getGenericControlValue(record: Record<string, unknown>): string | null {
-  return (
-    stringifyControlValue(record.value) ??
-    stringifyControlValue(record.controls) ??
-    stringifyControlValue(record.keys) ??
-    stringifyControlValue(record.description)
-  );
-}
-
 function parseControlEntry(
   entry: unknown,
   index: number,
@@ -741,13 +716,8 @@ function parseControlEntry(
   labelOverride?: string
 ): ControlTableRow | null {
   const fallbackLabel = labelOverride ?? `Controls ${index + 1}`;
-  const fallbackColumn = columns.find((column) => column.key === "desktop") ?? columns[0];
-  if (!fallbackColumn) return null;
 
-  if (typeof entry === "string") {
-    const value = stringifyControlValue(entry);
-    return value ? { action: fallbackLabel, values: { [fallbackColumn.key]: value } } : null;
-  }
+  if (typeof entry === "string") return null;
 
   if (!entry || typeof entry !== "object") return null;
   const record = entry as Record<string, unknown>;
@@ -757,11 +727,6 @@ function parseControlEntry(
   for (const column of columns) {
     const value = getDeviceControlValue(record, column.key);
     if (value) values[column.key] = value;
-  }
-
-  if (!Object.keys(values).length) {
-    const generic = getGenericControlValue(record);
-    if (generic) values[fallbackColumn.key] = generic;
   }
 
   return Object.keys(values).length ? { action, values } : null;
@@ -779,9 +744,7 @@ function parseControls(raw: unknown, columns: ControlDeviceColumn[]): ControlTab
       .map(([key, value], index) => parseControlEntry(value, index, columns, formatKeyLabel(key)))
       .filter((entry): entry is ControlTableRow => Boolean(entry));
   }
-  const value = stringifyControlValue(raw);
-  const fallbackColumn = columns.find((column) => column.key === "desktop") ?? columns[0];
-  return value && fallbackColumn ? [{ action: "Controls", values: { [fallbackColumn.key]: value } }] : [];
+  return [];
 }
 
 function WikiControlsTable({
@@ -1371,7 +1334,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const summary = descriptionMarkdown ? summarizeCardText(descriptionMarkdown, WIKI_DESCRIPTION) : null;
   const descriptionNodes = await renderWikiDescriptionNodes(page);
   const heroImage = getHeroImage(page, related);
-  const controlColumns = getControlDeviceColumns(page, page.controls_json);
+  const controlColumns = getControlDeviceColumns(page.controls_json);
   const controlRows = parseControls(page.controls_json, controlColumns);
   const hasControlsSection = controlColumns.length > 0 && controlRows.length > 0;
   const tipsNodes = await renderTipsNodes(page.tips_md);

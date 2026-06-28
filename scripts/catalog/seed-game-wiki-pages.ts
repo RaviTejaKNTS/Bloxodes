@@ -4,6 +4,7 @@ import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { GAME_COLLECTION_GROUPS } from "@/lib/game-collections";
 import { repoPath } from "@/lib/paths";
+import { validateWikiControlsJson } from "../shared/wiki-controls";
 
 type GameCollectionGroup = (typeof GAME_COLLECTION_GROUPS)[number];
 
@@ -153,10 +154,12 @@ async function resolveWikiCopy(group: GameCollectionGroup): Promise<ResolvedWiki
 
   const metaDescription = finalJson?.meta_description ?? legacyCopy?.metaDescription;
   const descriptionMd = finalJson ? finalJson.description_md : legacyCopy?.descriptionMd;
+  const controlsJson = finalJson ? finalJson.controls_json : legacyCopy?.controlsJson ?? [];
   const tipsMd = finalJson?.tips_md ?? legacyCopy?.tipsMd;
   if (!metaDescription) throw new Error(`Missing meta_description for ${group.gameSlug}`);
   if (!descriptionMd) throw new Error(`Missing description_md for ${group.gameSlug}`);
   if (!tipsMd) throw new Error(`Missing tips_md for ${group.gameSlug}`);
+  validateWikiControlsJson(controlsJson, `${group.gameSlug} controls_json`);
 
   return {
     title: finalJson?.title ?? legacyCopy?.title ?? `${group.gameName} Wiki`,
@@ -164,7 +167,7 @@ async function resolveWikiCopy(group: GameCollectionGroup): Promise<ResolvedWiki
     metaDescription,
     descriptionMd,
     tipsMd,
-    controlsJson: finalJson?.controls_json ?? legacyCopy?.controlsJson ?? [],
+    controlsJson,
     coverImage:
       finalJson && "cover_image" in finalJson
         ? finalJson.cover_image ?? null

@@ -30,7 +30,8 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
 
 - Start with what the player does in the game.
 - Keep `tips_md` to 3-4 useful gameplay tips.
-- Fill `controls_json` only with verified controls. If controls cannot be verified, leave it empty and make sure the gap is listed in `brief.md`.
+- Fill `controls_json` only with verified controls. If controls cannot be verified, use `[]` and make sure the gap is listed in `brief.md`.
+- Do not infer controls from Roblox supported-device flags. A device belongs in `controls_json` only when you have that device's actual control.
 - Do not rewrite catalog blurbs inside a wiki task. Use catalog skills for catalog copy.
 - Do not pad with generic Roblox controls or generic beginner advice.
 
@@ -43,7 +44,7 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
 - `meta_description`: Say what the hub helps players check or understand.
 - `description_md`: Write 1-2 short, link-free paragraphs focused only on what the player does in the game and how the core loop works. Do not promise what the wiki covers, do not add links, and do not turn this into a long guide.
 - `tips_md`: Write 3-4 concrete gameplay tips that help a new or returning player.
-- `controls_json`: Write only verified game controls. Keep unverified controls out of public copy.
+- `controls_json`: Use `[]` when no controls are verified. Otherwise write an array of rows shaped like `{ "action": "Jump", "desktop": "Space" }`, using only verified device keys: `desktop`, `mobile`, `tablet`, `console`, and `vr`. Do not use generic `controls`, `keys`, `value`, or `description` fields.
 - `cover_image`: Use a suitable game image when available.
 
 ## Output Shape

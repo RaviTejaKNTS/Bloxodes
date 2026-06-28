@@ -5,6 +5,7 @@ import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { validateWikiControlsJson } from "../shared/wiki-controls";
 
 type CliOptions = {
   baseUrl: string;
@@ -17,6 +18,7 @@ type WikiFinal = {
   title?: string;
   universe_id?: number | null;
   description_md?: string | null;
+  controls_json?: unknown;
 };
 
 function printUsage() {
@@ -79,6 +81,7 @@ async function findFile(candidates: string[]) {
 
 async function readWikiFinal(file: string): Promise<WikiFinal> {
   const parsed = JSON.parse(await readFile(file, "utf8")) as WikiFinal;
+  validateWikiControlsJson(parsed.controls_json, "final.json controls_json");
   if (parsed.slug && parsed.slug.trim().toLowerCase() !== path.basename(path.dirname(path.dirname(file)))) {
     // The seed script also checks this; this warning keeps verifier output direct when the path shape is different.
     console.warn(`Warning: final.json slug is ${parsed.slug}`);
