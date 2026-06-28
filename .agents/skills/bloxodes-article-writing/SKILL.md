@@ -25,10 +25,16 @@ If the brief is missing, weak, unapproved, or has unresolved source gaps, stop a
 
 ## Writing Rules
 
-**Voice and opening**
-- Write in simple, clean language for Roblox players who want help or info fast.
-- Open with the actual change, action, or problem. No mood-setting, no suspense, no warm-up lines.
-- Ban vague filler like "this is a big change," "this matters," or "the shift is bigger than it looks."
+**Voice & tone (Bloxodes house voice)**
+- Write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful — never formal, corporate, or hyped.
+- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
+- Playful, not loud. Drop in a light, dry touch of wit — roughly one per short paragraph — and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
+- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays — not a manual.
+- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length — not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
+- Open on the real thing — the change, action, problem, or answer. No mood-setting, no suspense, no warm-up lines, no "Welcome to" or "In this game".
+- Read the room. Keep the wit lighter, or drop it, when the reader is stressed — error fixes, "won't open", crashes, anything troubleshooting. Help first.
+- Keep functional slots clean. Steps, table cells, and labels stay plain and direct. Let the playful voice live in intros, explanations, and blurbs.
+- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place. Also ban vague filler like "this is a big change" or "this matters".
 
 **Length and density**
 - Every sentence must add value. No padding, no repetition, ever.
@@ -77,7 +83,9 @@ If the brief is missing, weak, unapproved, or has unresolved source gaps, stop a
 
 **Gaps and links**
 - If info is missing, run a fan-out research query and fill it — never leave a gap.
-- Weave in internal links naturally, mid-sentence, as part of the flow. No "read this" or similar call-outs.
+- Add at least 2 relevant internal links to existing Bloxodes pages. Use the same-game articles and related pages the brief listed; if the brief has none, query the production DB for other published articles on the same `universe_id` before writing.
+- Link only to pages that actually exist. Use real, current slugs (article links are `/articles/<slug>`). Never invent a slug or link to a page you have not confirmed exists.
+- Weave each internal link naturally, mid-sentence, as part of the flow. No "read this" or similar call-outs. Pick anchor text that matches what the reader gets, and place links where they genuinely help (related mechanic, income, next goal), not as filler.
 
 **What never appears in copy**
 - No mentions of research, sources, competitors, databases, or internal notes.
@@ -97,7 +105,7 @@ Write `final.json` only.
 - `faq_json`: Add 2-4 useful questions only when they cover follow-up points not already answered in the article. Keep answers short, clear, and source-backed. Use `[]` if FAQs would repeat the body.
 - `cover_image`: final image URL or path.
 - `author_id`: Set when known, or let the import path assign it if that is the project flow.
-- `universe_id`: Set only when the article belongs to one Roblox game.
+- `universe_id`: Set whenever the article belongs to one Roblox game and that game has a `roblox_universes` row. Look it up (by name/slug, or reuse the id other same-game articles use) instead of leaving it null. Only leave it null if no universe row exists for the game.
 - `tags`: Use specific reusable labels, not loose keyword stuffing.
 - `sources`: Keep the URLs that support important facts. Do not pad with weak repeats.
 

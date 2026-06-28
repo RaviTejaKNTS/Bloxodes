@@ -124,6 +124,8 @@ Before approving any final.json, make sure all the following are met:
 - Check if sections are useful and labels are easy to understand.
 - Check if `description_json` keys match actual rendered section labels.
 - No public copy mentions research, datasets, workflow, or page usage.
+- No prose copy states an item or collection count (no "all X items", "over X", section counts, totals). The only count allowed is the automated `{count}` token in `title`/`seo_title`.
+- `wiki_md` is specific and useful: it explains the in-game system in plain words (what it is, how a player gets/uses it, why it matters), not a generic "this collection lists the items" blurb, and carries no item count.
 - Check if the title follows the pattern `All N <Collection> in <Game>`.
 - Check if the paragraphs add context beyond the cards.
 - Check if `final.json` parses.
@@ -139,6 +141,8 @@ Before approving any final.json, make sure all the following are met:
 - card fields help players compare items
 - title follows `All N <Collection> in <Game>`
 - paragraphs add context beyond the cards
+- no prose copy states an item or collection count (only the `{count}` token is allowed)
+- `wiki_md` clearly explains the in-game system and is useful, not generic, with no item count
 - no public copy mentions research, datasets, workflow, or page usage
 - `final.json` parses
 - verifier, HTML size gate, pagination checks, and Browser preview pass before calling it done

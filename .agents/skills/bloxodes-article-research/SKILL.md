@@ -16,7 +16,14 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
 
 ## Start
 
-Start by checking if we have already covered in this article on the production db. If the article belongs to a game, you can check the db with the universe id to find the articles of that specific game easily. This is to make sure we are not writing an existing article.
+Start by checking if we have already covered this article on the production db. This is to make sure we are not writing an existing article.
+
+If the article belongs to a game:
+
+1. Find the game's `roblox_universes` row first (match on `name`/`slug`; the visible game name may differ from the prompt's wording, so try variations). Record its `universe_id` — the writing step needs it.
+2. List the game's existing published articles by querying `articles` on that `universe_id` (do not rely only on a loose `ilike '%keyword%'` on title — that misses articles whose slug or title spells the game differently).
+3. Treat those same-game articles as internal-link candidates and list them in the brief, with slugs, so the writing step can link to at least 2 real pages.
+4. Confirm none of them already cover this exact topic before continuing.
 
 ## Research
 
@@ -57,6 +64,8 @@ For `brief.md` Use this shape:
 ```text
 Evidence checked:
 - Existing Bloxodes coverage:
+- Game universe_id (if game-specific):
+- Internal link candidates (existing same-game/related pages with slugs, 2+):
 - Source/competitor coverage:
 - Related page-type overlap:
 - Useful uncovered angle:
@@ -83,6 +92,7 @@ If research is weak, say what is missing. Do not pretend the article is ready.
 - show what was checked
 - include useful links
 - name existing Bloxodes overlap clearly
+- list the game's `universe_id` and 2+ existing same-game/related pages (with slugs) as internal-link candidates
 - explain why this should be an article, not another page type
 - give an outline that answers the title promise
 - separate facts to use from facts to avoid

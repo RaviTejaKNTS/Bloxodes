@@ -28,6 +28,18 @@ tmp/content-workspace/<game-slug>/events/<game-slug>/
 3. Write evergreen page fields only.
 4. Parse JSON before returning.
 
+## Voice & Tone
+
+Bloxodes house voice: write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful — never formal, corporate, or hyped.
+
+- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
+- Playful, not loud. Drop in a light, dry touch of wit — roughly one per short paragraph — and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
+- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays — not a manual.
+- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length — not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
+- Open on the real thing — the event or what players want to track. No "In this game…", "Welcome to…", or mood-setting warm-ups.
+- Keep it evergreen. The playful voice never reaches for a live event, date, or "happening now" hook that will expire.
+- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
+
 ## Field Jobs
 
 - `universe_id`: Link the events page to the exact game universe.

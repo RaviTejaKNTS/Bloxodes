@@ -13,8 +13,8 @@ A clean content map for Roblox error / "how to fix" articles. We are starting fr
 ## Tier 1 — Named errors & generic fixes (biggest traffic)
 Not numbered codes — these are what people actually type, and the volume dwarfs most individual codes.
 
-- [ ] **Unexpected error / quit** — PC launch crash popup — *How to Fix "An Unexpected Error Occurred and Roblox Needs to Quit"*
-- [ ] **Roblox cannot continue** — launch/runtime crash — *How to Fix "An Error Occurred and Roblox Cannot Continue"*
+- [x] **Unexpected error / quit** — PC launch crash popup — *How to Fix "An Unexpected Error Occurred and Roblox Needs to Quit"* — published `how-to-fix-an-unexpected-error-occurred-and-roblox-needs-to-quit`
+- [x] **Roblox cannot continue** — launch/runtime crash — *How to Fix "An Error Occurred and Roblox Cannot Continue"* — published `how-to-fix-an-error-occurred-and-roblox-cannot-continue`
 - [ ] **Keeps crashing (PC)** — random crashes mid-game — *Roblox Keeps Crashing on PC: Why It Happens and How to Fix It*
 - [ ] **Won't open / launch** — app won't start — *Roblox Won't Open or Launch on PC: 10 Ways to Fix It*
 - [ ] **Not loading / stuck** — stuck on configuring/loading — *Roblox Stuck on Loading or "Configuring": How to Fix It*

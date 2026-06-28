@@ -62,4 +62,5 @@ npm run verify:wiki-final -- --base-url http://localhost:<port> --game <game-slu
 - controls use `[]` when unknown, and non-empty rows include `action` plus only device keys with verified values
 - tips are concrete and useful
 - public copy does not mention workflow, sources, databases, or page usage
+- public copy reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words or AI filler
 - verifier and Browser preview pass

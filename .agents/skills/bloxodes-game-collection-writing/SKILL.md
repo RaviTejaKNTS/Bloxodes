@@ -23,11 +23,22 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/
 5. Write `final.json`.
 6. Parse JSON before returning.
 
+## Voice & Tone
+
+Bloxodes house voice: write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful — never formal, corporate, or hyped.
+
+- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
+- Playful, not loud. Drop in a light, dry touch of wit — roughly one per short paragraph — and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
+- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays — not a manual.
+- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length — not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
+- Open on the real thing — the item or mechanic. No "In this game…", "This collection…", "Welcome to…", or mood-setting warm-ups.
+- Keep functional slots clean. Card fields, table cells, and short facts stay plain and direct. Let the playful voice live in intros, descriptions, and the wiki blurb.
+- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
+
 ## Writing Rules
 
 **Key rules**
 
-- Always write in simple English that is easy for anyone to understand.
 - Write for Roblox players like a Roblox player who gathered the collection for everyone to check.
 
 **Do Not**
@@ -35,6 +46,7 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/
 - Do not write about sources, dataset, or what this page is about.
 - Do not write about your actions. Always focus on the game, items, and players.
 - Do not write copy that explains how to use the page. Write copy that explains the game system.
+- Do not write the collection number anywhere in prose. Never state how many items the collection has, how many are in a section, or phrases like "all X items", "over X", "the full list of X". The count changes every time more data is gathered, which makes the copy stale. This applies to `intro_md`, `description_md`, `description_json`, `faq_json`, and `wiki_md`. The only count allowed is the automated `{count}` token in `title` and `seo_title`, which the seed/verify workflow resolves from the live dataset so it never goes stale.
 
 
 **intro_md**
@@ -70,32 +82,48 @@ This goes above each cards section and should not repeat the card copy. It shoul
 Do not create a section note for every section unless it helps. Empty `description_json` is fine when the section labels already explain enough.
 
 
-**Description_md**
+**description_md**
 
-Write 2-3 small sections giving more context, strategy, warnings, or decisions. Do not repeat the card copy. The sections should be small and easy to read.
+This is the main body of the page. Its job is to cover everything a reader actually needs to use or finish this collection: strategy, how to progress, the key decisions and trade-offs between items, common mistakes, and any rules the cards alone do not make obvious. Cover what is genuinely useful for this specific collection, then stop. The goal is a page that feels complete, not a page that hits a fixed template.
 
-You can use headings that are almost like sentences. Do not use more than 2 headings. The sections should be small and easy to read.
+Let the content decide the structure. Do not force a set number of sections or headings, and do not default to the same two-heading shape on every page. Match the shape to how much there is to say:
 
-Do not fluff up, repeat info. Give the available info that is needed and helpful for people
+- Short paragraphs, around 2-3 sentences each, so they are easy to read. Break a long paragraph into smaller ones instead of writing a wall of text.
+- Bullet points for steps, tips, quick comparisons, or short lists.
+- A markdown table when you are comparing a few things across the same dimensions (for example, which option to pick for which situation). Use tables when they read more cleanly than prose, not for decoration.
+- Headings only when they genuinely help the reader scan. A short body needs none; a deeper one might use a few. Heading text can read almost like a sentence.
 
-Write in simple English that is easy for anyone to understand.
+Rules:
+
+- Do not repeat the card copy, the intro, the how-it-works note, or the section notes. Only add information the rest of the page does not already give.
+- No fluff, no filler, no restating the obvious. Every line should earn its place. If a section would just pad the page, cut it.
+- Keep it concrete and specific to this game system, in plain, simple English that anyone can follow.
+- Follow the global no-count rule: never state how many items the collection or a section has.
 
 **wiki_md**
 
-Write one short useful blurb for the game wiki hub.
+This is the blurb that shows on the game wiki hub next to the link to this collection. Most wiki blurbs are too generic ("this collection lists all the items") and tell the reader nothing. Write a blurb that is actually useful on the wiki page.
+
+- Explain in plain words what this thing is inside the game and how it works for a player. Treat it like you are explaining the system to a new player who just started the game.
+- Be specific to this collection. Say what the items do, how you get them, where they fit in the game, or what choice the player makes between them. Use concrete in-game terms, not vague words.
+- Be simple and clear. Short sentences. No jargon, no hype words like "ultimate" or "complete".
+- 2 to 4 sentences. Enough to genuinely help someone decide if they want to open the page, but not a full guide.
+- Do not say how many items there are, do not mention the page, the list, sources, or "this collection". Talk about the game system itself.
+
+Good shape: "what it is in the game" → "how it works / how you get it" → "why it matters to the player".
 
 ## Field Jobs
 
 - `display_name`: Write the short reusable collection name exactly as it should appear in UI labels and wiki hub headings, for example `Units`, `Food Items`, `NPCs`, or `UGC Items`. Do not include counts, game names, colons, or SEO phrasing. This is the canonical collection label; do not make scripts infer it from `collection_slug` or `title`.
-- `title`: Use the Bloxodes collection title pattern: `All N <Collection> in <Game>`. Add one short reader-focused angle only when it makes the title clearer.
-- `seo_title`: Keep it close to the title, but make it natural for search.
+- `title`: Use the Bloxodes collection title pattern with an automated count token: `All {count} <Collection> in <Game>`. Add one short reader-focused angle only when it makes the title clearer. Do not manually replace `{count}` with a number; the seed/verify workflow resolves it from the verified dataset row count so refreshed data does not leave a stale title.
+- `seo_title`: Keep it close to the title, make it natural for search, and use the same `{count}` token when the title count appears.
 - `meta_description`: Say what the reader can compare or learn from the page.
 - `intro_md`: Explain what this collection is in the game and why players compare it.
-- `description_md`: Answer the main question raised by the title in more depth.
+- `description_md`: The main body. Cover everything a reader needs to use or finish this collection (strategy, progression, trade-offs, mistakes) using whatever structure fits — short paragraphs, bullets, tables, and headings only where they help. Fluid, not a fixed two-section template; no fluff and no repeating the other fields.
 - `how_it_works_md`: Explain page fields only when the fields need context. Keep it short.
 - `description_json`: Explain section groups only when it adds context beyond the cards. Keys must match rendered section labels.
 - `faq_json`: Answer useful follow-up questions not already covered. Each entry MUST use the keys `q` (question) and `a` (answer): `{ "q": "...", "a": "..." }`. Do NOT use `question`/`answer` — the renderer reads `q`/`a` and wrong keys make the FAQ render blank.
-- `wiki_md`: Give the wiki hub one short blurb about why this collection matters.
+- `wiki_md`: Explain the in-game system this collection covers in plain, simple words so the blurb is genuinely useful on the wiki hub: what it is, how a player gets or uses it, and why it matters. Be specific, 2-4 sentences, no item count.
 
 ## Output Shape
 

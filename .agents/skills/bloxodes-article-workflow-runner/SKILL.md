@@ -28,6 +28,7 @@ After the parent approves the brief, send the same subagent:
 
 - Continue with `/bloxodes-article-writing`.
 - Skill file: `.agents/skills/bloxodes-article-writing/SKILL.md`.
+- Exception — for Roblox tech / platform / troubleshooting articles (error-code fixes, "how to fix", won't open, crash, lag, install, settings how-tos; not single-game gameplay), continue with `/bloxodes-tech-article-writing` instead. Skill file: `.agents/skills/bloxodes-tech-article-writing/SKILL.md`. It adds scan-table, numbered-step, heading, depth, and internal/external link rules on top of the base article rules.
 - Create `final.json` for the approved brief only.
 
 ## Workspace
@@ -86,6 +87,7 @@ Check:
 - the opening starts with the topic, action, or problem
 - every section adds value
 - language is simple enough for Roblox players
+- copy reads in the Bloxodes house voice: calm, playful gamer-buddy, with a light dry touch of wit wrapped around real facts (wit dialed down on error/troubleshooting pieces), and no hype words like ultimate, insane, amazing, epic, must-have, or game-changer
 - paragraphs are short (1-3 sentences, one idea each) with no wall-of-text blocks
 - sentences are short and plain; long run-on sentences are split
 - list and step items are short (one action/fact each), not paragraphs crammed into a bullet

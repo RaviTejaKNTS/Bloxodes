@@ -208,9 +208,7 @@ function normalizeImage(value: unknown): string | null {
 
 function resolveDisplayName(config: GameCollectionConfig, finalJson: Awaited<ReturnType<typeof readFinalJsonOverride>>): string {
   if (!finalJson) return config.label;
-  const displayName = finalJson.display_name?.trim();
-  if (!displayName) throw new Error(`Missing display_name for ${config.code}.`);
-  return displayName;
+  return finalJson.display_name.trim();
 }
 
 async function buildRows(
@@ -236,7 +234,7 @@ async function buildRows(
         `Refusing to generate public copy for ${config.code}. Pass --final-json-root with an approved final.json, or use --allow-generated-copy only for an intentional one-off.`
       );
     }
-    const pageCopy = finalJson ? { ...copy, ...finalJson } : copy;
+    const pageCopy = resolveItemCountTokens(finalJson ? { ...copy, ...finalJson } : copy, dataset.rows.length);
     const displayName = resolveDisplayName(config, finalJson);
 
     rows.push({
@@ -264,6 +262,19 @@ async function buildRows(
   }
 
   return rows;
+}
+
+function resolveItemCountTokens<T extends { title: string; seo_title: string }>(pageCopy: T, itemCount: number): T {
+  return {
+    ...pageCopy,
+    title: resolveItemCountToken(pageCopy.title, itemCount),
+    seo_title: resolveItemCountToken(pageCopy.seo_title, itemCount)
+  };
+}
+
+function resolveItemCountToken(value: string, itemCount: number): string {
+  const countLabel = itemCount.toLocaleString("en-US");
+  return value.replace(/\{\{\s*(?:count|item_count)\s*\}\}|\{\s*(?:count|item_count)\s*\}/gi, countLabel);
 }
 
 async function loadExistingPublishedAt() {

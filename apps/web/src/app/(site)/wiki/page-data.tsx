@@ -103,6 +103,7 @@ type HeroStat = {
   icon: IconType;
   label: string;
   value: string;
+  href: string | null;
 };
 
 type DeviceBadgeItem = {
@@ -1474,10 +1475,13 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const subgenre = rawSubgenre ?? splitGenre[1] ?? null;
   const createdLabel = formatDate(page.created_at_api);
   const updatedLabel = formatDate(page.updated_at_api);
+  const statsDetailHref = page.universe_id != null
+    ? `/stats/games/${statsUniverseSlug(page.universe_slug ?? page.universe_display_name ?? page.universe_name ?? page.title, page.universe_id)}`
+    : null;
   const heroStats = [
-    { icon: FiUsers, label: "Playing Now", value: formatCompactNumber(page.playing) },
-    { icon: FiEye, label: "Total Visits", value: formatCompactNumber(page.visits) },
-    { icon: FiStar, label: "Favorites", value: formatCompactNumber(page.favorites) }
+    { icon: FiUsers, label: "Playing Now", value: formatCompactNumber(page.playing), href: statsDetailHref },
+    { icon: FiEye, label: "Total Visits", value: formatCompactNumber(page.visits), href: statsDetailHref },
+    { icon: FiStar, label: "Favorites", value: formatCompactNumber(page.favorites), href: statsDetailHref }
   ].filter((stat): stat is HeroStat => Boolean(stat.value));
   const checklistCards = buildChecklistCards(page, related);
   const quizCards = buildQuizCards(page, related);
@@ -1598,17 +1602,34 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
 
               {heroStats.length ? (
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                  {heroStats.map((stat) => (
-                    <div key={stat.label} className="flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-border/40 text-muted">
-                        <stat.icon className="h-5 w-5" aria-hidden />
+                  {heroStats.map((stat) => {
+                    const content = (
+                      <>
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-border/40 text-muted transition group-hover:bg-accent/10 group-hover:text-accent">
+                          <stat.icon className="h-5 w-5" aria-hidden />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted">{stat.label}</p>
+                          <p className="truncate text-lg font-semibold text-foreground">{stat.value}</p>
+                        </div>
+                      </>
+                    );
+
+                    return stat.href ? (
+                      <Link
+                        key={stat.label}
+                        href={stat.href}
+                        className="group flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3 transition hover:border-accent/60 hover:bg-surface"
+                        aria-label={`Open ${universeLabel} stats page`}
+                      >
+                        {content}
+                      </Link>
+                    ) : (
+                      <div key={stat.label} className="flex items-center gap-3 rounded-[16px] border border-border/60 bg-background/40 px-3 py-3">
+                        {content}
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-muted">{stat.label}</p>
-                        <p className="truncate text-lg font-semibold text-foreground">{stat.value}</p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : null}
             </section>

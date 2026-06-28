@@ -148,13 +148,20 @@ async function verifyReadback(game: string, collection: string, finalJson: Colle
   };
   if (!row.is_published) throw new Error(`Collection ${game}/${collection} is not published`);
   if (!row.item_count || row.item_count < 1) throw new Error(`Collection ${game}/${collection} has no item_count`);
+  const expectedTitle = finalJson.title ? resolveItemCountToken(finalJson.title, row.item_count) : null;
   const expectedDisplayName = finalJson.display_name?.trim();
-  if (finalJson.title && row.title !== finalJson.title) throw new Error(`Collection title mismatch for ${game}/${collection}`);
+  if (expectedTitle && row.title !== expectedTitle) throw new Error(`Collection title mismatch for ${game}/${collection}`);
   if (!expectedDisplayName || row.display_name !== expectedDisplayName) throw new Error(`Collection display_name mismatch for ${game}/${collection}`);
   if (finalJson.code && row.code !== finalJson.code) throw new Error(`Collection code mismatch for ${game}/${collection}`);
   if (typeof finalJson.universe_id === "number" && row.universe_id !== finalJson.universe_id) {
     throw new Error(`Collection universe_id mismatch for ${game}/${collection}`);
   }
+  return { title: expectedTitle ?? row.title ?? undefined };
+}
+
+function resolveItemCountToken(value: string, itemCount: number): string {
+  const countLabel = itemCount.toLocaleString("en-US");
+  return value.replace(/\{\{\s*(?:count|item_count)\s*\}\}|\{\s*(?:count|item_count)\s*\}/gi, countLabel);
 }
 
 async function verifyRoute(url: string, title?: string) {
@@ -206,9 +213,9 @@ async function main() {
   for (let index = 0; index < collections.length; index += 1) {
     const collection = collections[index];
     const finalJson = finals[index];
-    await verifyReadback(options.game, collection, finalJson);
+    const readback = await verifyReadback(options.game, collection, finalJson);
     const url = `${options.baseUrl}/wiki/${options.game}/${collection}`;
-    await verifyRoute(url, finalJson.title);
+    await verifyRoute(url, readback.title);
     console.log(`Route passed: ${url}`);
     urls.push(url);
   }

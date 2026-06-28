@@ -31,6 +31,18 @@ Skip events, temporary reward tracks, gamepasses, badges, developer products, se
 
 Only mark `[create]` when there is at least one decent public source and enough detail to make a useful page.
 
+### Item count is not a blocker
+
+Do not skip a collection just because it has only a few items. A small collection is still worth `[create]` when all of these hold:
+
+- it is a core, player-facing part of the game (something players actively look up, plan around, or compare), and
+- the data is good quality: source-backed, with useful per-item fields (rarity, cost, income, ability, source, stats, etc.), and
+- there is real search demand for it (multiple guide/wiki sites cover it, or it shows up in searches as a thing players ask about).
+
+A focused 4–8 item collection that is core to the game and has quality data is a better page than a padded list of trivia. Judge by importance, data quality, and search demand — not by raw count.
+
+Still skip when the small count means it is genuinely thin: not a core system, no useful per-item fields, weak or single-source data, or already covered by a broader collection.
+
 ## Output
 
 Start with `Evidence checked`,

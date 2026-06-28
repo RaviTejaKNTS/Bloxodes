@@ -46,4 +46,5 @@ npm run verify:engagement-finals -- --base-url http://localhost:<port> --file <f
 - wrong answers are plausible and similar in specificity
 - no answer is given away by option length
 - explanations teach the fact briefly
+- page copy (intro/description) reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words; questions and options stay plain and exact
 - verifier and browser preview pass

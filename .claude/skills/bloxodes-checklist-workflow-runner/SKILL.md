@@ -46,4 +46,5 @@ npm run verify:engagement-finals -- --base-url http://localhost:<port> --file <f
 - parent rows and leaf tasks have consistent section codes
 - task titles are concrete actions
 - descriptions add useful context only when needed
+- public copy reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words or AI filler
 - verifier and browser preview pass

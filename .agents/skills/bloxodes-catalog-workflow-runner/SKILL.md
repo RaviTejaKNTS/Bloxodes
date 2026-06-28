@@ -47,4 +47,5 @@ npm run verify:catalog-finals -- --base-url http://localhost:<port> --file <fina
 - item/data source is strong enough
 - copy explains the collection, not how to use the page
 - no raw dataset or website-first wording appears in public copy
+- public copy reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words or AI filler
 - verifier and Browser preview pass
