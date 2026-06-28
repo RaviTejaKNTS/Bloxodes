@@ -291,7 +291,7 @@ function getUniverseLabel(page: WikiPageContent): string {
 }
 
 function getDescriptionMarkdown(page: WikiPageContent): string | null {
-  return normalizeMarkdownText(page.description_md) ?? normalizeMarkdownText(page.universe_game_description_md);
+  return normalizeMarkdownText(page.description_md);
 }
 
 function getHeroImage(page: WikiPageContent, related: WikiRelatedData): string | null {

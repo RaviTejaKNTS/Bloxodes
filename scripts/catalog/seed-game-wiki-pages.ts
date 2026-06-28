@@ -12,7 +12,7 @@ type WikiPageUpsert = {
   title: string;
   seo_title: string;
   meta_description: string;
-  description_md: string | null;
+  description_md: string;
   universe_id: number | null;
   controls_json: Array<Record<string, string>>;
   tips_md: string;
@@ -25,10 +25,9 @@ type WikiCopy = {
   title?: string;
   seoTitle?: string;
   metaDescription: string;
-  descriptionMd?: string;
+  descriptionMd: string;
   tipsMd: string;
   controlsJson?: Array<Record<string, string>>;
-  gameDescriptionMd?: string;
   coverImage?: string | null;
 };
 
@@ -42,14 +41,13 @@ type WikiFinalJson = Partial<{
   tips_md: string;
   description_md: string;
   cover_image: string | null;
-  game_description_md: string;
 }>;
 
 type ResolvedWikiCopy = {
   title: string;
   seoTitle: string;
   metaDescription: string;
-  descriptionMd?: string;
+  descriptionMd: string;
   tipsMd: string;
   controlsJson: Array<Record<string, string>>;
   coverImage?: string | null;
@@ -154,15 +152,17 @@ async function resolveWikiCopy(group: GameCollectionGroup): Promise<ResolvedWiki
   if (!finalJson && !legacyCopy) return null;
 
   const metaDescription = finalJson?.meta_description ?? legacyCopy?.metaDescription;
+  const descriptionMd = finalJson ? finalJson.description_md : legacyCopy?.descriptionMd;
   const tipsMd = finalJson?.tips_md ?? legacyCopy?.tipsMd;
   if (!metaDescription) throw new Error(`Missing meta_description for ${group.gameSlug}`);
+  if (!descriptionMd) throw new Error(`Missing description_md for ${group.gameSlug}`);
   if (!tipsMd) throw new Error(`Missing tips_md for ${group.gameSlug}`);
 
   return {
     title: finalJson?.title ?? legacyCopy?.title ?? `${group.gameName} Wiki`,
     seoTitle: finalJson?.seo_title ?? legacyCopy?.seoTitle ?? `${group.gameName} Wiki`,
     metaDescription,
-    descriptionMd: finalJson?.description_md ?? finalJson?.game_description_md ?? legacyCopy?.descriptionMd ?? legacyCopy?.gameDescriptionMd,
+    descriptionMd,
     tipsMd,
     controlsJson: finalJson?.controls_json ?? legacyCopy?.controlsJson ?? [],
     coverImage:
@@ -178,7 +178,7 @@ const WIKI_COPY: Record<string, WikiCopy> = {
   "untitled-boxing-game": {
     metaDescription:
       "Untitled Boxing Game wiki hub with styles, gloves, emotes, knockout effects, titles, controls, and Roblox game details.",
-    gameDescriptionMd:
+    descriptionMd:
       "Untitled Boxing Game is a skill-based Roblox boxing battleground where most fights come down to stamina, reads, side dodges, back dashes, blocks, feints, and knowing what your fighting style wants to do. A normal match is not button mashing: every punch, dash, block, and feint can spend stamina, so strong players win by creating openings instead of throwing every heavy attack on cooldown.\n\nProgress sits around that fight loop. Cash, spins, lucky spins, daily quests, title quests, style rolls, ranked rating, and cosmetic shops all give players something to chase between matches. Styles shape combat, while gloves, emotes, maps, knockout effects, and titles let players customize how their fighter looks, celebrates, enters fights, or marks achievements.\n\nThe official Roblox description says every style can work, and the stronger community references make the same point in practice: rarity helps, but timing still matters. Learn the core controls first, then use styles, gloves, emotes, knockout effects, and title requirements to decide what to keep, trade, buy, or chase next.",
     tipsMd: `- Manage stamina before trying flashy pressure. Punches, dashes, blocks, and feints all matter more when you leave enough stamina to defend after your combo.
 - Learn the difference between side dodges and back dashes. Side dodges help you slip left or right around an attack, while a back dash creates space when pressure is too close.
@@ -237,7 +237,7 @@ const WIKI_COPY: Record<string, WikiCopy> = {
   "grow-a-garden-2": {
     metaDescription:
       "Grow a Garden 2 wiki hub with seeds, crops, pets, gears, sprinklers, crates, mutations, shops, night stealing, codes, and Roblox game details.",
-    gameDescriptionMd:
+    descriptionMd:
       "Grow a Garden 2 is a farming and garden-defense Roblox game where every session starts with seeds, crops, and Sheckles. You buy seeds, plant them on your farm, wait for crops to grow, harvest the fruit, and sell it so the next round of seeds, pets, gears, crates, and upgrades is easier to afford.\n\nThe sequel adds more pressure around the garden itself. Daytime is the cleaner farming window, while night turns the map into a stealing and defense problem. If you leave your plot open at night, other players can try to take fruit, so pets, props, crates, mushrooms, lanterns, and defensive setups matter alongside normal crop value.\n\nMost progress comes from choosing what to spend on next. Multi-harvest plants are better for steady farming, sprinklers help crops grow and improve special results, pets can boost farming or protect the plot, and mutations can turn a normal harvest into a much better sale. Guilds and weekly rewards give returning players another reason to keep the garden moving instead of only planting the most expensive seed they can afford.",
     tipsMd: `- Start with seeds and crops before chasing expensive pets or crates. A steady Sheckles route makes every later upgrade easier to afford.
 - Keep multi-harvest plants working in your plot when you can. They keep producing after the first pickup, while single-harvest crops need replanting.
@@ -281,7 +281,7 @@ const WIKI_COPY: Record<string, WikiCopy> = {
   "push-rock-for-brainrots": {
     metaDescription:
       "Push Rock for Brainrots wiki hub with Brainrots, rock gates, upgrades, rebirths, controls, and Roblox game details.",
-    gameDescriptionMd:
+    descriptionMd:
       "Push Rock for Brainrots is a Roblox rescue and tycoon game where rocks are the main gate between you and better Brainrots. A normal run is simple: push a rock, open the lane, rescue the Brainrot behind it, bring that Brainrot home, and use the Cash income to get stronger for the next push.\n\nThe loop gets harder as the route moves into stronger rarity gates. Strength decides whether a rock is worth fighting through, Carry decides how many rescued Brainrots you can move before returning home, and Rebirth turns a strong cash run into longer-term progress. Hunters add pressure while you are moving through the route, so cash upgrades and clean return trips matter more than just chasing the rarest visible Brainrot.\n\nStart by learning which rarity gate you are pushing toward, then use Brainrot income and upgrade panels to decide whether to spend Cash on Strength, Carry, or a Rebirth reset.",
     tipsMd: `- Upgrade Strength first when a rock gate barely moves. Bigger rocks are the main blocker between early rescues and stronger rarity lanes.
 - Upgrade Carry when return trips start wasting time. More Carry means you can bring home more rescued Brainrots before heading back to base.
@@ -346,7 +346,7 @@ const WIKI_COPY: Record<string, WikiCopy> = {
   "pet-simulator-99": {
     metaDescription:
       "Pet Simulator 99 wiki hub with pets, eggs, areas, machines, enchants, potions, mastery, minigames, relics, and trading cosmetics.",
-    gameDescriptionMd: `Pet Simulator 99 is a pet-collecting progression game where your pets break objects for coins and other currencies. Those currencies feed the main route: hatch better pets, unlock more areas, reach new worlds, and open the machines, eggs, minigames, chests, and rebirth gates tied to each part of the map.
+    descriptionMd: `Pet Simulator 99 is a pet-collecting progression game where your pets break objects for coins and other currencies. Those currencies feed the main route: hatch better pets, unlock more areas, reach new worlds, and open the machines, eggs, minigames, chests, and rebirth gates tied to each part of the map.
 
 Progress gets deeper once the early route opens up. Enchant books shape your loadout, potions add timed boosts, charms modify valuable pets, machines convert or upgrade pets and items, and mastery tracks reward repeated activities such as breaking objects, hatching, fishing, digging, keys, gifts, and machines.
 
@@ -532,7 +532,7 @@ The collection side matters just as much as raw progress. Huge, Titanic, and Gar
       }
     ],
     coverImage: null,
-    gameDescriptionMd:
+    descriptionMd:
       "+1 Speed Keyboard Escape | Candy & Chocolate is an incremental obby where every step builds Speed. You run and jump across candy-and-chocolate keyboard routes, then try to clear stage sections without losing control and being sent back to the start.\n\nProgress comes from more than walking. Stage clears feed Wins, Wins connect into upgrade choices, and Rebirths turn a reset into a stronger long-term Speed multiplier. Trails, Auras, and Treadmills all sit around that same loop: they help you rebuild faster, push into harder routes, or train Speed when active stage runs start to stall.\n\nThe smartest path is to understand the loop before spending. Build enough Speed for the route in front of you, use Wins on upgrades that keep helping after the next run, and treat exact item bonuses or treadmill options as details to compare before committing."
   },
   "kick-a-lucky-block": {
@@ -548,7 +548,7 @@ The collection side matters just as much as raw progress. Huge, Titanic, and Gar
   "survive-zombie-arena": {
     metaDescription:
       "Survive Zombie Arena wiki with classes, weapons, gear, maps, upgrades, Roblox stats, and wave-survival planning.",
-    gameDescriptionMd:
+    descriptionMd:
       "Survive Zombie Arena is a wave-survival shooter where each run starts with preparation in the lobby, then turns into a fight against huge zombie waves. You earn Credits by killing zombies and surviving longer, then spend them on class unlocks, Armory weapons, gear, and Mr. Santito upgrades before the next push. The game rewards a clear role more than random spending: pick a class, cover a Rooftop lane, upgrade the weapon you actually use, and build enough damage and delay tools to keep the horde from collapsing your hold.",
     tipsMd: `- Treat each run as a Credits problem. Zombies and waves feed your economy, and the best spend is usually the class, weapon, or upgrade that stops the next wave from breaking your hold.
 - Pick a class for the job you expect to do. Medic and Marksman are cleaner early unlocks, Engineer and Tactician help lane holds, and Necromancer is a long-term Credit sink for late-wave scaling.
@@ -569,7 +569,7 @@ The collection side matters just as much as raw progress. Huge, Titanic, and Gar
   "murderers-vs-sheriffs": {
     metaDescription:
       "Murderers VS Sheriffs wiki with duel modes, weapons, crates, bundles, death effects, events, codes, trading tips, and Roblox details.",
-    gameDescriptionMd:
+    descriptionMd:
       "Murderers VS Sheriffs is a fast duel game where players queue into short sheriff-and-murderer fights and practice aim, dodging, knife timing, and round reads. The verified queue structure for the MVS Duels Community version covers solo `1v1`, team `2v2` and `3v3`, plus pass-gated Pro Servers access.\n\nProgress around the matches is mostly cosmetic and collection-driven. Coins, codes, PRO and GOD boxes, weapon skins, bundles, death effects, emotes, event rewards, and trading all feed into the inventory loop, so source and availability matter before you spend or accept a trade.\n\nThis version is separate from older similarly named Murderers VS Sheriffs games. Treat item lists, values, maps, battle pass notes, and reward claims as useful only when they tie back to this exact MVS Duels Community experience.",
     tipsMd: `- Start with 1v1 when you want clean aim and knife timing practice. Move into 2v2 or 3v3 when you want teammate spacing, trades, and crossfire to matter more.
 - Treat Pro Servers as pass-gated access first. The verified data proves the Pro Servers Pass requirement, but not special rewards, matchmaking rules, or a guaranteed harder queue.
@@ -600,7 +600,7 @@ The collection side matters just as much as raw progress. Huge, Titanic, and Gar
   "dress-to-impress": {
     metaDescription:
       "Dress To Impress wiki hub with codes, events, theme help, item catalogs, gameplay tips, controls, and Roblox game details.",
-    gameDescriptionMd:
+    descriptionMd:
       "Dress To Impress is a timed fashion-round game where each player gets a theme, builds an outfit in the dressing room and salon, then walks the runway for votes. The round is about reading the prompt quickly, choosing clothing, hair, makeup, colors, patterns, and accessories that make the idea obvious, then using poses and presentation to sell the look.\n\nStars come from runway voting and move players through ranks, while Cash and seasonal currencies help unlock more wardrobe and presentation options. Codes, events, reward items, VIP pieces, pose packs, walk packs, runway effects, pattern packs, and theme knowledge all feed into the same goal: having more ways to answer a prompt before the timer ends.\n\nUse the wiki hub as the high-level map. The detailed catalog pages handle row-by-row theme meanings, rank thresholds, item sources, prices, unlock routes, images, and availability notes.",
     tipsMd: `- Read the theme first, then choose one clear silhouette or color direction before adding small accessories.
 - Jump out of stations as soon as a choice is done so the dressing timer does not get eaten by menus.
@@ -658,7 +658,7 @@ The collection side matters just as much as raw progress. Huge, Titanic, and Gar
     metaDescription:
       "99 Nights in the Forest wiki with survival tips, classes, crafting, materials, weapons, tools, food, locations, entities, and animals.",
     coverImage: "/99%20Nights%20in%20the%20Forest/Entities/the-deer.webp",
-    gameDescriptionMd:
+    descriptionMd:
       "99 Nights in the Forest is a co-op survival game about keeping a camp alive while the forest gets more dangerous at night. A normal run moves between fueling the Campfire, gathering food and materials, crafting upgrades, rescuing missing children, and choosing when to push into cultist, cave, snow, or volcano routes. Classes, tools, weapons, food, tameable animals, entities, and locations all change how safely you can leave camp and return before hunger, darkness, raids, or major threats punish an overextended trip.",
     tipsMd: `- Fuel the Campfire and plan a safe return before long routes. A good loot run can fall apart if the team comes back hungry, underarmed, or too late at night.
 - Pick a class around the job you want to handle. Some classes make early gathering easier, while others matter more for combat, support, building, food, or late-run goals.
@@ -704,7 +704,7 @@ The collection side matters just as much as raw progress. Huge, Titanic, and Gar
   "jujutsu-shenanigans": {
     metaDescription:
       "Jujutsu Shenanigans wiki hub with characters, domains, items, maps, modes, emotes, achievements, Build Mode, controls, and Roblox details.",
-    gameDescriptionMd:
+    descriptionMd:
       "Jujutsu Shenanigans is a Roblox battlegrounds fighting game built around public-server brawls, destructible city movement, character kits, domains, items, and mode queues. A normal session starts with choosing a moveset, landing M1 chains and four skills, using dash or block to survive pressure, and building Awakening by dealing damage. Public servers are the sandbox, but Duels, Ranked Duels, Roulette minigames, private servers, Build Mode, Workshop, and Skill Builder give the game more structure than a simple free-for-all.\n\nThe main thing to learn first is how each character turns neutral hits into pressure. Characters such as Honored One, Vessel, Perfection, Restless Gambler, Ten Shadows, and the Early Access roster all change what your base moves, special, Awakening, or domain can do. Items, throwables, vending machines, map hazards, emotes, achievements, titles, and cosmetic rewards sit around that combat loop. Build Mode is its own creative layer, with blocks, tools, Workshop maps, and Skill Builder nodes for private-server movesets.\n\nReturning players should check character status, new domains, map or Roulette changes, item availability, achievement rewards, emote sources, and Build Mode systems before assuming an older video still matches the game. Jujutsu Shenanigans updates often change kits, modes, and side systems, so public fights and private-server building can feel different after a major patch.",
     tipsMd: `- Keep M1, dash, block, and special timing clean before swapping characters often. Most kits still rely on opening hits, avoiding endlag, and using the right move variant.
 - Awakening bar fills through damage and can reset when you switch characters, so do not change kits right before you are ready to use G.
@@ -778,7 +778,7 @@ The collection side matters just as much as raw progress. Huge, Titanic, and Gar
   "sell-lemons": {
     metaDescription:
       "Sell Lemons wiki hub with income sources, powers, secrets, Evolution stages, locations, controls, and Roblox game details.",
-    gameDescriptionMd:
+    descriptionMd:
       "Sell Lemons is a Roblox tycoon and idle game by BloxByte Games where a tiny lemon stand turns into a layered fruit empire. A normal run starts with clicking the stand, collecting dropped cash, buying early upgrades such as the Juicer and Cup Stand, then unlocking larger systems like LemonDash, Lemon Depot, Trading, Labs, Robotics, Republic, and Orange X.\n\nThe game rewards routing, timing, and checking what each purchase opens. Some useful upgrades appear after decoration or building purchases, managers turn active income sources into idle earners, and offline income makes automation worth planning around. As the numbers grow, Investors, Ascend, Evolution, powers, and permanent upgrades decide whether you should keep pushing the current run or reset for a faster rebuild.\n\nReturning players should check the systems that changed their route first: which income source is next, whether a manager is now worth buying, whether hidden Sewer or UFO unlocks are ready, and whether Evolution or First Tier progress is stronger than another normal cash push.",
     tipsMd: `- Rebuild the Lemon Stand cleanly after every reset. Juicer, Cup Stand, and the Cash Register Automator are early priorities because they restore the basic cash loop while you move toward the next source.
 - Walk newly purchased areas before teleporting away. Sell Lemons hides useful buttons behind walls, roofs, floors, and other building pieces, so a new room or hill layer can matter as much as a visible income upgrade.
@@ -880,7 +880,7 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
       title: copy.title,
       seo_title: copy.seoTitle,
       meta_description: copy.metaDescription,
-      description_md: copy.descriptionMd ?? null,
+      description_md: copy.descriptionMd,
       universe_id: universeIdsByGameSlug.get(group.gameSlug) ?? null,
       controls_json: copy.controlsJson,
       tips_md: copy.tipsMd,

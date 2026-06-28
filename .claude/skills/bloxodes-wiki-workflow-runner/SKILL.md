@@ -55,6 +55,7 @@ npm run verify:wiki-final -- --base-url http://localhost:<port> --game <game-slu
 - production coverage was checked for wiki, codes, catalogs, events, tools, articles, checklists, and quizzes
 - game identity is exact
 - core loop is easy to understand
+- `description_md` is short, link-free, game-loop focused, and does not say what the wiki will cover
 - controls are verified or omitted
 - tips are concrete and useful
 - public copy does not mention workflow, sources, databases, or page usage

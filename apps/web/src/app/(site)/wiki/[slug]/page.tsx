@@ -50,8 +50,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description =
     normalizeDescription(page.meta_description) ??
     normalizeDescription(page.description_md) ??
-    normalizeDescription(page.universe_game_description_md) ??
-    normalizeDescription(page.universe_description) ??
     WIKI_DESCRIPTION;
   const image = normalizeMetadataImage(page.cover_image ?? page.icon_url);
   const publishedAt = page.published_at ?? page.created_at ?? null;

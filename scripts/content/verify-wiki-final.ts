@@ -17,7 +17,6 @@ type WikiFinal = {
   title?: string;
   universe_id?: number | null;
   description_md?: string | null;
-  game_description_md?: string | null;
 };
 
 function printUsage() {
@@ -125,7 +124,7 @@ async function verifyReadback(game: string, finalJson: WikiFinal) {
     throw new Error(`Wiki universe_id mismatch for ${game}`);
   }
   if (!row.tips_md?.trim()) throw new Error(`Wiki ${game} has no tips_md`);
-  const expectedDescription = finalJson.description_md ?? finalJson.game_description_md ?? null;
+  const expectedDescription = finalJson.description_md ?? null;
   if (expectedDescription && row.description_md !== expectedDescription) {
     throw new Error(`Wiki description_md mismatch for ${game}`);
   }

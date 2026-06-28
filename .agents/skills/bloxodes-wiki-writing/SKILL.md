@@ -1,6 +1,6 @@
 ---
 name: bloxodes-wiki-writing
-description: Write one Bloxodes Roblox game wiki hub final.json after brief approval. Use for /wiki/<game-slug> page copy, metadata, tips_md, controls_json, cover_image, and wiki_pages final.json output.
+description: Write one Bloxodes Roblox game wiki hub final.json after brief approval. Use for /wiki/<game-slug> page copy, metadata, description_md, tips_md, controls_json, cover_image, and wiki_pages final.json output.
 ---
 
 # Bloxodes Wiki Writing
@@ -41,10 +41,10 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
 - `title`: Use the simple hub pattern `<Game> Wiki`.
 - `seo_title`: Keep it close to the title and readable in search.
 - `meta_description`: Say what the hub helps players check or understand.
+- `description_md`: Write 1-2 short, link-free paragraphs focused only on what the player does in the game and how the core loop works. Do not promise what the wiki covers, do not add links, and do not turn this into a long guide.
 - `tips_md`: Write 3-4 concrete gameplay tips that help a new or returning player.
 - `controls_json`: Write only verified game controls. Keep unverified controls out of public copy.
 - `cover_image`: Use a suitable game image when available.
-- `game_description_md`: When included in the workflow, explain the normal game loop and core systems for the visible wiki summary.
 
 ## Output Shape
 
@@ -55,10 +55,10 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
   "title": "",
   "seo_title": "",
   "meta_description": "",
+  "description_md": "",
   "tips_md": "",
   "controls_json": [],
   "cover_image": null,
-  "game_description_md": "",
   "is_published": true
 }
 ```

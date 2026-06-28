@@ -1377,7 +1377,7 @@ export async function getMobileContentDetail(
     : [];
   const sections = [
     section("overview", "Overview", {
-      body: toPlainText(page.description_md) ?? page.meta_description ?? page.universe_description ?? page.universe_game_description_md
+      body: toPlainText(page.description_md)
     }),
     section("stats", "Game stats", {
       items: [
@@ -1527,7 +1527,7 @@ export async function getMobileContentDetail(
     kind,
     title: page.title,
     subtitle: page.universe_display_name ?? page.universe_name ?? null,
-    summary: page.meta_description ?? page.universe_description ?? null,
+    summary: toPlainText(page.description_md) ?? page.meta_description ?? null,
     coverImage: absoluteAssetUrl(page.cover_image || page.icon_url || pickThumbnail(page.thumbnail_urls) || "/og-image.png"),
     updatedAt,
     url: `${SITE_URL}/wiki/${page.slug}`,
