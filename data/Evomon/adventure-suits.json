@@ -1,0 +1,423 @@
+{
+  "meta": {
+    "title": "Evomon Adventure Suits data",
+    "game": "Evomon",
+    "gameSlug": "evomon",
+    "collection": "adventure-suits",
+    "route": "/wiki/evomon/adventure-suits",
+    "catalogCode": "evomon-adventure-suits",
+    "universeId": 9826885587,
+    "updatedAt": "2026-06-28",
+    "publishStatus": "phase-3-images-accepted-missing-text-first",
+    "itemCount": 22,
+    "groupBy": "collectionSection",
+    "counts": {
+      "bySection": {
+        "Uncommon Suits": 2,
+        "Rare Suits": 4,
+        "Epic Suits": 6,
+        "Legendary Suits": 5,
+        "Mythic Suits": 3,
+        "Eternal Suits": 2
+      },
+      "images": 0,
+      "missingImages": 22
+    },
+    "sectionOrder": [
+      "Uncommon Suits",
+      "Rare Suits",
+      "Epic Suits",
+      "Legendary Suits",
+      "Mythic Suits",
+      "Eternal Suits"
+    ],
+    "dropRates": {
+      "note": "Drop chances per rarity for the Adventure Suit gacha. Use these for per-section notes at the writing stage (keyed by section label). Normal Spin = 2,000 Coins; Lucky Spin = Robux or passes.",
+      "Uncommon Suits": {
+        "normalSpin": "44%",
+        "luckySpin": "not available"
+      },
+      "Rare Suits": {
+        "normalSpin": "40%",
+        "luckySpin": "not available"
+      },
+      "Epic Suits": {
+        "normalSpin": "12%",
+        "luckySpin": "63%"
+      },
+      "Legendary Suits": {
+        "normalSpin": "3%",
+        "luckySpin": "30%"
+      },
+      "Mythic Suits": {
+        "normalSpin": "0.9%",
+        "luckySpin": "6%"
+      },
+      "Eternal Suits": {
+        "normalSpin": "0.1%",
+        "luckySpin": "1%"
+      }
+    },
+    "imageCoverage": {
+      "present": 0,
+      "missing": 22,
+      "status": "accepted-missing",
+      "note": "No genuine per-suit in-game icon renders are available from accessible sources. The only complete per-suit image set found (Pro Game Guides tier list, /wp-content/uploads/2026/06/<Suit>.jpg) is text-label name tiles (the suit name on a flat colored background), not actual in-game suit artwork, so it was rejected per the no-placeholder rule. Sportskeeda lazy-loads only two menu/building screenshots, not per-suit icons; Gamezebo 403s; community Dex wikis (evomon.wiki, evomon.org, evomon.app) are client-rendered with no scrapable suit icons and no dedicated suit pages. All 22 suits are accepted-missing and render text-first; the dataset is otherwise complete and the page works without images.",
+      "localDirectory": "apps/web/public/Evomon/AdventureSuits"
+    },
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "collectionSection",
+      "rarity",
+      "effect",
+      "effectCategory",
+      "cardSummary",
+      "sourcePage",
+      "secondarySourcePage",
+      "sortOrder"
+    ],
+    "defaultCardFields": [
+      "rarity",
+      "effect",
+      "effectCategory"
+    ],
+    "fieldPresentation": {
+      "rarity": {
+        "kind": "highlight",
+        "label": "rarity"
+      },
+      "effectCategory": {
+        "kind": "chip",
+        "label": "buff type"
+      },
+      "effect": {
+        "kind": "detail",
+        "label": "effect"
+      },
+      "cardSummary": "detail"
+    },
+    "sources": [
+      {
+        "label": "Pro Game Guides - Evomon Adventure Suit Tier List",
+        "url": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+        "accessed": "2026-06-28",
+        "usage": "Primary roster: full 22-suit list with canonical suit names, rarities, and exact buff text. Used for canonical naming (e.g. Normal Novice, Capture Experts, Physical Expert, Monster Hunter, Elemental Mage)."
+      },
+      {
+        "label": "Sportskeeda - Evomon Adventure Suit guide",
+        "url": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+        "accessed": "2026-06-28",
+        "usage": "Independent confirmation of all 22 suits, rarities, and effects, plus obtaining mechanics (NPC Debby gacha, Normal Spin 2,000 Coins, Lucky Spin Robux/passes, 6-slot storage) and per-rarity drop rates for normal and lucky spins."
+      },
+      {
+        "label": "Gamezebo - All Evomon Adventure Suits [Buffs, Rarities, How to Get]",
+        "url": "https://www.gamezebo.com/walkthroughs/evomon-adventure-suits/",
+        "accessed": "2026-06-28",
+        "usage": "Cross-check of buffs, rarities, and obtaining notes (direct fetch 403; verified via search summaries)."
+      }
+    ],
+    "sourceCount": 3,
+    "sourceNotes": [
+      "Roster is 22 Adventure Suits across six rarities: Uncommon (2), Rare (4), Epic (6), Legendary (5), Mythic (3), Eternal (2). Confirmed independently by Pro Game Guides and Sportskeeda with matching names, rarities, and buffs.",
+      "Suit name variants were normalized to the most complete source (Pro Game Guides): 'Normal' -> 'Normal Novice', 'Capture' -> 'Capture Experts', 'Physical' -> 'Physical Expert', 'Monster' -> 'Monster Hunter', 'Elemental' -> 'Elemental Mage', 'Treasure' -> 'Treasure Hunter'. Sportskeeda short forms are not rendered.",
+      "Commander 'Lead vs Last' wording: Pro Game Guides says 'Lead Evomon's Elemental Skill Damage +8%'; Sportskeeda says 'Last Evomon'. Sources conflict, so effect text uses neutral wording ('one team slot's elemental skill damage +8%') rather than asserting Lead or Last. Resolve in-game if possible before publish.",
+      "effectCategory is a derived helper field (Movement, Skill Damage, Capture, Economy, Survivability, Healing, Utility) to let players compare what each suit improves. It is not a source label; it summarizes the source-backed effect.",
+      "collectionSection holds the rarity-tier section label ('<Rarity> Suits'). rarity holds the bare rarity word for the highlight chip. The two are intentionally duplicated: collectionSection drives grouping, rarity drives the per-card highlight.",
+      "Drop rates (per rarity, normal and lucky spin) are stored in meta.dropRates for the writing stage to render as per-section notes, not per-card fields. They are stable but balance-patchable; keep as supporting context, not the page's core promise.",
+      "Images are deferred to the image gate (all null now); not a data blocker.",
+      "Evergreen-safe: no dates, no 'current/latest/updated', no active-count-as-freshness wording in any rendered prose field."
+    ],
+    "imageCount": 0,
+    "missingImageCount": 22
+  },
+  "items": [
+    {
+      "name": "Runner",
+      "slug": "runner",
+      "image": null,
+      "collectionSection": "Uncommon Suits",
+      "rarity": "Uncommon",
+      "effect": "Increases player movement speed by 25%.",
+      "effectCategory": "Movement",
+      "cardSummary": "Runner is a pure overworld-mobility suit that makes your character move 25% faster, so traveling between areas and reaching battles is quicker. It does nothing in combat, so most players swap it out once they have a damage or capture suit.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 1
+    },
+    {
+      "name": "Normal Novice",
+      "slug": "normal-novice",
+      "image": null,
+      "collectionSection": "Uncommon Suits",
+      "rarity": "Uncommon",
+      "effect": "Increases Normal-type skill damage by 5%.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Normal Novice adds 5% skill damage for Normal-type Evomon only, so it helps teams built around Normal attackers. Its narrow scope and small bonus make it an early-game filler until a wider damage suit drops.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 2
+    },
+    {
+      "name": "Fire Novice",
+      "slug": "fire-novice",
+      "image": null,
+      "collectionSection": "Rare Suits",
+      "rarity": "Rare",
+      "effect": "Increases Fire-type skill damage by 5%.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Fire Novice gives 5% extra skill damage to Fire-type Evomon, making it a cheap pick for Fire-leaning teams. It only helps that one element, so its value depends entirely on how many Fire attackers you run.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 3
+    },
+    {
+      "name": "Water Novice",
+      "slug": "water-novice",
+      "image": null,
+      "collectionSection": "Rare Suits",
+      "rarity": "Rare",
+      "effect": "Increases Water-type skill damage by 5%.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Water Novice adds 5% skill damage to Water-type Evomon, a budget boost for Water-focused teams. Like the other Novice suits, it scales only with how much of your team shares that element.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 4
+    },
+    {
+      "name": "Grass Novice",
+      "slug": "grass-novice",
+      "image": null,
+      "collectionSection": "Rare Suits",
+      "rarity": "Rare",
+      "effect": "Increases Grass-type skill damage by 5%.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Grass Novice raises Grass-type skill damage by 5%, helping teams that lean on Grass attackers. It is an early-game element suit you typically replace once a broader damage option appears.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 5
+    },
+    {
+      "name": "Capture Experts",
+      "slug": "capture-experts",
+      "image": null,
+      "collectionSection": "Rare Suits",
+      "rarity": "Rare",
+      "effect": "Increases capture success rate by 5%.",
+      "effectCategory": "Capture",
+      "cardSummary": "Capture Experts improves your capture success rate by 5%, so wild Evomon are slightly easier to catch. It is an entry-level catching suit that the Epic Catch Master later outclasses.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 6
+    },
+    {
+      "name": "Treasure Hunter",
+      "slug": "treasure-hunter",
+      "image": null,
+      "collectionSection": "Epic Suits",
+      "rarity": "Epic",
+      "effect": "Increases coins earned from battles by 15%.",
+      "effectCategory": "Economy",
+      "cardSummary": "Treasure Hunter adds 15% to the coins you earn from battles, speeding up everything coins buy, including more gacha spins. It is a strong farming suit when you are grinding currency rather than pushing combat power.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 7
+    },
+    {
+      "name": "Breeder",
+      "slug": "breeder",
+      "image": null,
+      "collectionSection": "Epic Suits",
+      "rarity": "Epic",
+      "effect": "Increases Evomon EXP earned from battles by 10%.",
+      "effectCategory": "Economy",
+      "cardSummary": "Breeder grants 10% more Evomon EXP from battles, so your team levels faster while you grind. It is a leveling suit best worn during EXP farming rather than tough fights.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 8
+    },
+    {
+      "name": "Catch Master",
+      "slug": "catch-master",
+      "image": null,
+      "collectionSection": "Epic Suits",
+      "rarity": "Epic",
+      "effect": "Increases capture success rate by 10% and capture chance by 1.",
+      "effectCategory": "Capture",
+      "cardSummary": "Catch Master is the dedicated capture suit: +10% capture success and one extra capture attempt per encounter. It is the go-to choice when you are hunting and taming new Evomon.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 9
+    },
+    {
+      "name": "Vanguard",
+      "slug": "vanguard",
+      "image": null,
+      "collectionSection": "Epic Suits",
+      "rarity": "Epic",
+      "effect": "Increases first-turn damage by 22%.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Vanguard adds a large 22% bonus to damage on the first turn of a battle, rewarding fast, aggressive openers. It shines in short fights where you can win on the opening burst but does nothing after turn one.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 10
+    },
+    {
+      "name": "Primal Mage",
+      "slug": "primal-mage",
+      "image": null,
+      "collectionSection": "Epic Suits",
+      "rarity": "Epic",
+      "effect": "Increases Fire, Water, and Grass skill damage by 5% each.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Primal Mage rolls the three elemental Novice bonuses into one suit, adding 5% skill damage to Fire, Water, and Grass attackers. It is a flexible damage option for mixed elemental teams that use the core three types.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 11
+    },
+    {
+      "name": "Commander",
+      "slug": "commander",
+      "image": null,
+      "collectionSection": "Epic Suits",
+      "rarity": "Epic",
+      "effect": "Increases one team slot's elemental skill damage by 8%.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Commander gives a focused +8% elemental skill damage to a single team-slot Evomon, so it rewards building around one strong elemental carry. Sources disagree on whether the slot is the lead or last Evomon, so confirm placement in-game before relying on it.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 12
+    },
+    {
+      "name": "Physical Expert",
+      "slug": "physical-expert",
+      "image": null,
+      "collectionSection": "Legendary Suits",
+      "rarity": "Legendary",
+      "effect": "Increases Physical skill damage by 8%.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Physical Expert adds 8% damage to all Physical skills, regardless of element, making it a broad pick for Physical-attack teams. It pairs naturally with Evomon whose strongest moves are physical rather than special.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 13
+    },
+    {
+      "name": "Special Expert",
+      "slug": "special-expert",
+      "image": null,
+      "collectionSection": "Legendary Suits",
+      "rarity": "Legendary",
+      "effect": "Increases Special skill damage by 8%.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Special Expert mirrors Physical Expert for Special moves, granting 8% to all Special skill damage across elements. It is the better damage suit for teams that rely on special attackers.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 14
+    },
+    {
+      "name": "Monster Hunter",
+      "slug": "monster-hunter",
+      "image": null,
+      "collectionSection": "Legendary Suits",
+      "rarity": "Legendary",
+      "effect": "Increases Evomon EXP from battles by 10% and capture success rate by 15%.",
+      "effectCategory": "Utility",
+      "cardSummary": "Monster Hunter doubles as a leveling and catching suit: +10% battle EXP and +15% capture success in one slot. It is efficient for players who are both grinding levels and expanding their collection at the same time.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 15
+    },
+    {
+      "name": "Elite Hunter",
+      "slug": "elite-hunter",
+      "image": null,
+      "collectionSection": "Legendary Suits",
+      "rarity": "Legendary",
+      "effect": "Increases damage dealt to bosses by 11%.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Elite Hunter adds 11% damage specifically against bosses, making it a top pick for boss fights and raids. It does nothing against normal enemies, so it is a situational swap for tough encounters.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 16
+    },
+    {
+      "name": "Guardian",
+      "slug": "guardian",
+      "image": null,
+      "collectionSection": "Legendary Suits",
+      "rarity": "Legendary",
+      "effect": "Reduces damage taken from bosses by 11%.",
+      "effectCategory": "Survivability",
+      "cardSummary": "Guardian is Elite Hunter's defensive counterpart, cutting damage taken from bosses by 11% so your team survives longer in hard fights. It is most valuable on boss encounters where survival, not extra damage, is the bottleneck.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 17
+    },
+    {
+      "name": "Elemental Mage",
+      "slug": "elemental-mage",
+      "image": null,
+      "collectionSection": "Mythic Suits",
+      "rarity": "Mythic",
+      "effect": "Increases skill damage by 2% for each unique element in your party.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Elemental Mage scales with team variety, adding 2% skill damage for every unique element on your party, so a rainbow team gets the most out of it. It rewards diverse rosters and is weak on mono-element teams.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 18
+    },
+    {
+      "name": "Mediator",
+      "slug": "mediator",
+      "image": null,
+      "collectionSection": "Mythic Suits",
+      "rarity": "Mythic",
+      "effect": "Allied Evomon take 8% less damage from the enemy lead Evomon's elemental type.",
+      "effectCategory": "Survivability",
+      "cardSummary": "Mediator is a defensive suit that cuts 8% of the damage your team takes from the enemy lead's element, softening type-disadvantage matchups. Its value depends on the opposing lead's element, so it shines against predictable elemental threats.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 19
+    },
+    {
+      "name": "Pharmacist",
+      "slug": "pharmacist",
+      "image": null,
+      "collectionSection": "Mythic Suits",
+      "rarity": "Mythic",
+      "effect": "Potions restore 20% more HP to allied Evomon.",
+      "effectCategory": "Healing",
+      "cardSummary": "Pharmacist boosts potion healing by 20%, stretching your healing items further in long fights and grinds. It is a sustain-focused suit that pairs well with potion-heavy playstyles rather than burst damage.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 20
+    },
+    {
+      "name": "Energy Scholar",
+      "slug": "energy-scholar",
+      "image": null,
+      "collectionSection": "Eternal Suits",
+      "rarity": "Eternal",
+      "effect": "Increases Ultimate skill damage by 16%, grants +1 initial Ultimate energy, and recovers 1 energy after each Ultimate used.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Energy Scholar is widely rated the best suit: it boosts Ultimate damage by 16%, starts you with extra Ultimate energy, and refunds energy after each Ultimate, so you use powerful Ultimates more often. It is the standout choice for Ultimate-driven teams.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 21
+    },
+    {
+      "name": "Champion",
+      "slug": "champion",
+      "image": null,
+      "collectionSection": "Eternal Suits",
+      "rarity": "Eternal",
+      "effect": "Increases all skill damage by 11%.",
+      "effectCategory": "Skill Damage",
+      "cardSummary": "Champion adds a flat 11% to all skill damage with no conditions, so it helps every Evomon on any team. That universal, build-free bonus makes it one of the most beginner-friendly top-tier suits.",
+      "sourcePage": "https://progameguides.com/roblox/evomon-adventure-suit-tier-list/",
+      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-adventure-suit-guide",
+      "sortOrder": 22
+    }
+  ]
+}

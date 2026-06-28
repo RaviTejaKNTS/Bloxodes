@@ -1,0 +1,363 @@
+{
+  "meta": {
+    "title": "Evomon islands data",
+    "updatedAt": "2026-06-28",
+    "groupBy": "collectionSection",
+    "sectionOrder": [
+      "Progression islands"
+    ],
+    "defaultCardFields": [
+      "unlockLevel",
+      "dominantType",
+      "islandBoss",
+      "bossLevel",
+      "feature"
+    ],
+    "fieldPresentation": {
+      "unlockLevel": {
+        "kind": "chip",
+        "label": "recommended level"
+      },
+      "dominantType": {
+        "kind": "plain",
+        "label": "dominant type"
+      },
+      "islandBoss": {
+        "kind": "plain",
+        "label": "island boss"
+      },
+      "bossLevel": {
+        "kind": "chip",
+        "label": "boss level"
+      },
+      "feature": {
+        "kind": "highlight",
+        "label": "notable feature"
+      },
+      "notableEvomon": {
+        "kind": "detail",
+        "label": "notable Evomon"
+      },
+      "cardSummary": {
+        "kind": "detail",
+        "label": "card summary"
+      }
+    },
+    "columns": [
+      "name",
+      "slug",
+      "image",
+      "collectionSection",
+      "order",
+      "unlockLevel",
+      "dominantType",
+      "islandBoss",
+      "bossLevel",
+      "feature",
+      "notableEvomon",
+      "cardSummary",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus",
+      "sourcePage"
+    ],
+    "sources": [
+      {
+        "label": "Sportskeeda - All island bosses in Roblox Evomon",
+        "url": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon",
+        "accessed": "2026-06-28"
+      },
+      {
+        "label": "Nerdschalk - All Island Bosses in Evomon: Locations, Levels, and Weaknesses",
+        "url": "https://nerdschalk.com/all-island-bosses-evomon-locations-levels-weaknesses/",
+        "accessed": "2026-06-28"
+      },
+      {
+        "label": "Pro Game Guides - Complete Evomon Progression Guide",
+        "url": "https://progameguides.com/roblox/complete-evomon-progression-guide/",
+        "accessed": "2026-06-28"
+      },
+      {
+        "label": "Destructoid - Evomon Tier List (island name cross-check)",
+        "url": "https://www.destructoid.com/evomon-tier-list/",
+        "accessed": "2026-06-28"
+      },
+      {
+        "label": "evomon.site - Evomon Roblox Wiki (per-island blurbs)",
+        "url": "https://evomon.site/",
+        "accessed": "2026-06-28"
+      }
+    ],
+    "sourceCountSummary": {
+      "acceptedIslandRows": 14,
+      "localImageCount": 0
+    },
+    "uncertainFacts": [
+      "Island ROW ORDER is set by boss level, not by any single source's list order. Sportskeeda's numbered list is not strictly level-sorted (e.g. it lists Raven Ridge L90 after a L100 boss), so level is used as the canonical sort key.",
+      "Spelling 'Lava Crag' is used (majority: Sportskeeda, Pro Game Guides, Nerdschalk, Destructoid). evomon.site spells it 'Lava Crack'; treated as a minority typo and not used.",
+      "'Summon Ruins' is excluded by parent decision: sources describe it as a boss-summoning hub, not a numbered progression island.",
+      "'Flying Territory' is a DESCRIPTIVE label, not a confirmed in-game zone name. Sources say its boss 'King of Flying' / Sundercrene is obtained there as a flying mount. In-game zone name must be verified before publish; rename or drop if it is not a real zone.",
+      "Islands and bosses past #5 (Shiver Snows) are flagged by Nerdschalk as not fully community-verified in writing. Boss names for Raven Ridge (Viparch is Murkwood, etc.) are second-source corroborated via search, but exact BOSS LEVELS for islands 6-14 come only from Sportskeeda and are marked sourceConfidence 'low'.",
+      "Dominant-type per island is well-documented only for islands 1-5. Later islands' dominant types are not reliably sourced and are left null rather than guessed.",
+      "Notable Evomon per island is only sparsely sourced; left null where no source names a specific catch.",
+      "No clean per-island image source was found. All image fields are null; images are owned by the image gate (likely in-game screenshots)."
+    ],
+    "imagePolicy": "text-first",
+    "imageAcceptedMissing": true,
+    "imageAcceptedMissingReason": "No clean per-island zone thumbnail or reliably mappable island-boss render exists from a reusable source. Dedicated map pages (evomon.org/map/island-order, bo3.gg) return 403/empty; dex wikis (evomon.app/dex, evomon.net/wiki, evomon.wiki/dex) are JS-driven catalogs of standard creature art and do not expose King/boss-variant renders. Per parent guidance, accepted text-first rather than using bad/unrelated images."
+  },
+  "items": [
+    {
+      "name": "Verdant Valley",
+      "slug": "verdant-valley",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 1,
+      "unlockLevel": "Start",
+      "dominantType": "Rock / Ground",
+      "islandBoss": "Pebgolem",
+      "bossLevel": "Lv 15",
+      "feature": "Starter island",
+      "notableEvomon": "First wild catches; the opening zone right after the tutorial portal.",
+      "cardSummary": "The first open island after the tutorial. Wild Evomon and the boss lean Rock and Ground, so a Grass, Ground or Water starter has the early edge here.",
+      "sourceConfidence": "high",
+      "verificationNote": "Sportskeeda and Nerdschalk list Pebgolem (Lv 15) as the first island boss; Pro Game Guides describes Verdant Valley as the Rock/Ground starter zone.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Petal Pond",
+      "slug": "petal-pond",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 2,
+      "unlockLevel": "Lv 15+",
+      "dominantType": "Normal / Water",
+      "islandBoss": "Clamspire",
+      "bossLevel": "Lv 30",
+      "feature": "EXP challenge area",
+      "notableEvomon": "Mostly Normal-type wild Evomon; hosts the EXP challenge for fast leveling.",
+      "cardSummary": "The second island, full of Normal-type Evomon and home to the EXP challenge area that players use to level quickly. The boss Clamspire is Water-type.",
+      "sourceConfidence": "high",
+      "verificationNote": "Sportskeeda/Nerdschalk: Clamspire boss (Lv 30, Water). Pro Game Guides and evomon.site note Petal Pond is Normal-type and hosts an EXP/challenge area.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Lava Crag",
+      "slug": "lava-crag",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 3,
+      "unlockLevel": "Lv 30+",
+      "dominantType": "Fire",
+      "islandBoss": "Empixy King",
+      "bossLevel": "Lv 45",
+      "feature": "Water team advantage",
+      "notableEvomon": "Fire-themed island where a Water-focused team holds a strong type advantage.",
+      "cardSummary": "The third island and the first big difficulty step. It is Fire-themed, so a Water team dominates both the wild Evomon and the boss Empixy King.",
+      "sourceConfidence": "high",
+      "verificationNote": "Sportskeeda/Nerdschalk: Empixy King (Lv 45, Fire). Destructoid confirms Lava Crag is 'the third island'. Pro Game Guides confirms Fire theme and Water advantage.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Amber Acres",
+      "slug": "amber-acres",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 4,
+      "unlockLevel": "Lv 45+",
+      "dominantType": "Grass",
+      "islandBoss": "Datunymph King",
+      "bossLevel": "Lv 60",
+      "feature": "Water team falls off",
+      "notableEvomon": "Grass-leaning zone where an all-Water team starts to struggle.",
+      "cardSummary": "The fourth island, where the Grass-type wild Evomon and boss Datunymph King punish a pure Water team. Pro Game Guides suggests adding Fire coverage by this point.",
+      "sourceConfidence": "high",
+      "verificationNote": "Sportskeeda/Nerdschalk: Datunymph King (Lv 60, Grass). Pro Game Guides notes Grass theme and recommends Fire-type coverage here.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Shiver Snows",
+      "slug": "shiver-snows",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 5,
+      "unlockLevel": "Lv 60+",
+      "dominantType": "Ice",
+      "islandBoss": "Glacitadel",
+      "bossLevel": "Lv 75",
+      "feature": "Ice zone",
+      "notableEvomon": null,
+      "cardSummary": "The fifth island and the start of the mid-game. It is Ice-themed, so Fire and Rock coverage helps against the boss Glacitadel.",
+      "sourceConfidence": "medium",
+      "verificationNote": "Sportskeeda/Nerdschalk: Glacitadel (Lv 75, Ice). This is the last island Nerdschalk flags as 'consistently confirmed in written guides'.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Raven Ridge",
+      "slug": "raven-ridge",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 6,
+      "unlockLevel": "Lv 75+",
+      "dominantType": null,
+      "islandBoss": "Volcrest King",
+      "bossLevel": "Lv 90",
+      "feature": "Boss stacks attack buffs",
+      "notableEvomon": "Bluebird can spawn at a sky spot reached by climbing the vines around the area.",
+      "cardSummary": "A mid-game island whose boss Volcrest King stacks attack buffs each turn, so the fight gets harder the longer it runs. A confirmed in-game zone name.",
+      "sourceConfidence": "low",
+      "verificationNote": "Boss name/level (Volcrest King, Lv 90) is Sportskeeda single-source. Zone name 'Raven Ridge' independently confirmed by Destructoid (Bluebird sky-spot spawn).",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Flying Territory",
+      "slug": "flying-territory",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 7,
+      "unlockLevel": "Lv 90+",
+      "dominantType": "Flying",
+      "islandBoss": "Sundercrene",
+      "bossLevel": "Lv 100",
+      "feature": "Flying mount unlock",
+      "notableEvomon": "Defeating the boss here ('King of Flying') unlocks Sundercrene as a flying mount for faster travel.",
+      "cardSummary": "An aerial zone where beating the boss grants the Sundercrene flying mount. NOTE: 'Flying Territory' may be a descriptive label rather than the real in-game zone name and must be verified before publish.",
+      "sourceConfidence": "low",
+      "verificationNote": "Sportskeeda lists Sundercrene (Lv 100). Multiple sources call this the 'King of Flying' encounter that grants a flying mount, but the exact in-game ZONE NAME is unconfirmed - flagged for in-game verification per parent.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Silent Sands",
+      "slug": "silent-sands",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 8,
+      "unlockLevel": "Lv 100+",
+      "dominantType": null,
+      "islandBoss": "Gearforged King",
+      "bossLevel": "Lv 105",
+      "feature": "Equipment Dungeon",
+      "notableEvomon": "Home to the Equipment Dungeon, which unlocks around Level 40 for gear farming.",
+      "cardSummary": "A desert island known for its Equipment Dungeon, a gear-farming activity that opens earlier (around Lv 40) than the island's boss Gearforged King.",
+      "sourceConfidence": "low",
+      "verificationNote": "Boss (Gearforged King, Lv 105) is Sportskeeda single-source. Pro Game Guides independently confirms Silent Sands hosts an Equipment Dungeon unlocking ~Lv 40.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Crystal Cascade",
+      "slug": "crystal-cascade",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 9,
+      "unlockLevel": "Lv 105+",
+      "dominantType": null,
+      "islandBoss": "Frostseer King",
+      "bossLevel": "Lv 120",
+      "feature": "Late-game island",
+      "notableEvomon": "Frostlet becomes available once the zone boss is cleared.",
+      "cardSummary": "A late-game island gated behind the boss Frostseer King. Clearing it opens access to catches like Frostlet.",
+      "sourceConfidence": "low",
+      "verificationNote": "Boss (Frostseer King, Lv 120) is Sportskeeda single-source. Frostlet availability after clearing the zone is mentioned in community guides.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Canyon Oasis",
+      "slug": "canyon-oasis",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 10,
+      "unlockLevel": "Lv 120+",
+      "dominantType": null,
+      "islandBoss": "Chitgladi King",
+      "bossLevel": "Lv 135",
+      "feature": "Late-game island",
+      "notableEvomon": null,
+      "cardSummary": "A late-game (Level 90+ recommended by some guides) island gated by the boss Chitgladi King.",
+      "sourceConfidence": "low",
+      "verificationNote": "Boss (Chitgladi King, Lv 135) is Sportskeeda single-source. Pro Game Guides independently lists Canyon Oasis as a late-game (90+) island.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Murkwood",
+      "slug": "murkwood",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 11,
+      "unlockLevel": "Lv 135+",
+      "dominantType": null,
+      "islandBoss": "Viparch King",
+      "bossLevel": "Lv 150",
+      "feature": "Late-game island",
+      "notableEvomon": null,
+      "cardSummary": "A late-game island guarded by the boss Viparch King, recommended for high-level teams.",
+      "sourceConfidence": "low",
+      "verificationNote": "Boss name (Viparch / Viparch King) corroborated via a second source's search snippet; exact level (Lv 150) is Sportskeeda single-source.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Nether Land",
+      "slug": "nether-land",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 12,
+      "unlockLevel": "Lv 150+",
+      "dominantType": null,
+      "islandBoss": "Rosastar King",
+      "bossLevel": "Lv 165",
+      "feature": "Hard boss fight",
+      "notableEvomon": null,
+      "cardSummary": "A late-game island whose boss Rosastar King is called out as especially tough, dealing enhanced damage after the fourth turn.",
+      "sourceConfidence": "low",
+      "verificationNote": "Boss name (Rosastar King) corroborated via a second source's search snippet, which notes its enhanced damage after turn four; exact level (Lv 165) is Sportskeeda single-source.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Rocky Ridge",
+      "slug": "rocky-ridge",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 13,
+      "unlockLevel": "Lv 165+",
+      "dominantType": null,
+      "islandBoss": "Spikumane King",
+      "bossLevel": "Lv 180",
+      "feature": "Late-game island",
+      "notableEvomon": null,
+      "cardSummary": "A high-level island gated behind the boss Spikumane King, near the end of the current progression route.",
+      "sourceConfidence": "low",
+      "verificationNote": "Boss name (Spikumane / Spikumane King) corroborated via a second source's search snippet; exact level (Lv 180) is Sportskeeda single-source.",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    },
+    {
+      "name": "Thunder Cliffs",
+      "slug": "thunder-cliffs",
+      "image": null,
+      "collectionSection": "Progression islands",
+      "order": 14,
+      "unlockLevel": "Lv 180+",
+      "dominantType": "Electric",
+      "islandBoss": "King of Thunder",
+      "bossLevel": "Lv 200",
+      "feature": "Endgame island",
+      "notableEvomon": "Thunder Cliffs boss drops Arcub; the highest-level progression island currently documented.",
+      "cardSummary": "The final documented progression island, capped by the Level 200 King of Thunder. Its boss drops Arcub, making it a key late-game farm.",
+      "sourceConfidence": "low",
+      "verificationNote": "Boss (King of Thunder, Lv 200) is Sportskeeda single-source. Zone name 'Thunder Cliffs' independently confirmed by Destructoid (Arcub drops from the Thunder Cliffs boss).",
+      "imageStatus": "accepted-missing: no clean reusable per-island zone art or mappable boss render found; zone-image sources (evomon.org, bo3.gg) inaccessible (403/empty), dex sources are JS catalogs of standard-creature art only. Text-first collection.",
+      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-island-bosses-in-roblox-evomon"
+    }
+  ]
+}

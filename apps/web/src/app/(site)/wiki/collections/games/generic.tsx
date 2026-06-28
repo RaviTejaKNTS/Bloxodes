@@ -1884,6 +1884,138 @@ const ANIME_VANGUARDS_ENEMY_SOURCE_KEYS = [
 ];
 
 const CATALOG_SECTION_OVERRIDES: Record<string, CollectionSectionOverride> = {
+  "evomon-adventure-suits": {
+    groupKey: "collectionSection",
+    groupLabel: "Rarity",
+    sectionOrder: [
+      "Uncommon Suits",
+      "Rare Suits",
+      "Epic Suits",
+      "Legendary Suits",
+      "Mythic Suits",
+      "Eternal Suits"
+    ],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "sourcePage",
+      "secondarySourcePage",
+      "sortOrder"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 3
+  },
+  "evomon-items": {
+    groupKey: "collectionSection",
+    groupLabel: "Category",
+    sectionOrder: [
+      "Consumables",
+      "Evolution materials",
+      "Food",
+      "Utility tools"
+    ],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "category",
+      "sourcePage",
+      "secondarySourcePage",
+      "sortOrder"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 5
+  },
+  "evomon-monsters": {
+    groupKey: "collectionSection",
+    groupLabel: "Element",
+    sectionOrder: [
+      "Grass",
+      "Water",
+      "Fire",
+      "Bug",
+      "Flying",
+      "Poison",
+      "Rock",
+      "Ice",
+      "Ground",
+      "Electric",
+      "Fighting",
+      "Normal",
+      "Psychic",
+      "Steel"
+    ],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "sortOrder",
+      "sourcePage",
+      "sourceImageUrl",
+      "imageStatus",
+      "dataStatus",
+      "hp",
+      "attack",
+      "defense",
+      "spAtk",
+      "spDef",
+      "speed",
+      "weather"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 4
+  },
+  "evomon-islands": {
+    groupKey: "collectionSection",
+    groupLabel: "Islands",
+    sectionOrder: ["Progression islands"],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "sortOrder",
+      "order",
+      "sourcePage",
+      "sourceConfidence",
+      "verificationNote",
+      "imageStatus"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 5
+  },
+  "evomon-balls": {
+    groupKey: "collectionSection",
+    groupLabel: "Capture Balls",
+    sectionOrder: ["Capture Balls"],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "sortOrder",
+      "sourcePage",
+      "sourceStatus",
+      "imageStatus"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 4
+  },
+  "evomon-mutations": {
+    groupKey: "collectionSection",
+    groupLabel: "Variants",
+    sectionOrder: ["Variants"],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "sourcePage",
+      "secondarySourcePage",
+      "sourceStatus",
+      "imageStatus"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 4
+  },
   "build-a-ring-farm-mutations": {
     groupKey: "collectionSection",
     groupLabel: "How to get",
@@ -6964,6 +7096,18 @@ type GameDatasetPreparedCollection = {
 
 const gameDatasetPreparedCollectionCache = new Map<string, Promise<GameDatasetPreparedCollection>>();
 
+// Per-collection pagination target weight (text-weight model). Lower values force more
+// pages. Use for image-dense collections where many image cards make a single page exceed
+// the HTML size gate even though the text-weight stays under the default target. Only the
+// listed codes are affected; everything else uses the default.
+const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
+  "evomon-monsters": 30_000
+};
+
+function resolvePaginationTargetWeight(code: string): number | undefined {
+  return COLLECTION_PAGINATION_TARGET_WEIGHT[code];
+}
+
 function buildGameDatasetPreparedCollection(
   config: GameCollectionConfig,
   dataset: GameCollectionDataset
@@ -6974,7 +7118,8 @@ function buildGameDatasetPreparedCollection(
   const totalPages = buildCollectionPagination({
     sections: groupedSections,
     currentPage: 1,
-    basePath: buildGameCollectionPath(config.code)
+    basePath: buildGameCollectionPath(config.code),
+    targetWeight: resolvePaginationTargetWeight(config.code)
   }).info.totalPages;
 
   return {
@@ -7161,7 +7306,8 @@ export function renderGameCollectionPage({
   const pagination = buildCollectionPagination({
     sections: preparedCollection.groupedSections,
     currentPage,
-    basePath
+    basePath,
+    targetWeight: resolvePaginationTargetWeight(config.code)
   });
   const pageSections = pagination.sections;
   const pageItems = pageSections.flatMap((section) => section.items);

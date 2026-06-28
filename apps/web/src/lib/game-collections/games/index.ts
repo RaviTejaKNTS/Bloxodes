@@ -32,6 +32,7 @@ import { paintAndSeekCollectionGroup } from "./paint-and-seek";
 import { demonologyCollectionGroup } from "./demonology";
 import { speedEvolveCollectionGroup } from "./1-speed-evolve";
 import { buildARingFarmCollectionGroup } from "./build-a-ring-farm";
+import { evomonCollectionGroup } from "./evomon";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -68,5 +69,6 @@ export const GAME_COLLECTION_GROUPS = [
   paintAndSeekCollectionGroup,
   demonologyCollectionGroup,
   speedEvolveCollectionGroup,
-  buildARingFarmCollectionGroup
+  buildARingFarmCollectionGroup,
+  evomonCollectionGroup
 ] satisfies GameCollectionGroup[];
