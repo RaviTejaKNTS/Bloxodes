@@ -960,6 +960,10 @@ function buildQuizCards(page: WikiPageContent, related: WikiRelatedData): QuizCa
   }));
 }
 
+function getWikiCollectionBlockHeading(page: WikiRelatedData["catalogPages"][number]): string {
+  return `${formatKeyLabel(page.collection_slug)}:`;
+}
+
 async function buildWikiCollectionBlocks(related: WikiRelatedData) {
   const pagesWithCopy = related.catalogPages
     .map((page) => ({ page, copy: normalizeText(page.wiki_md) }))
@@ -978,6 +982,7 @@ async function buildWikiCollectionBlocks(related: WikiRelatedData) {
 
       return {
         page,
+        heading: getWikiCollectionBlockHeading(page),
         nodes,
         imageUrls
       };
@@ -1525,7 +1530,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
           {catalogBlocks.length ? (
             <section className="min-w-0">
               <div className="space-y-10">
-                {catalogBlocks.map(({ page: catalogPage, nodes, imageUrls }) => (
+                {catalogBlocks.map(({ page: catalogPage, heading, nodes, imageUrls }) => (
                   <section
                     key={catalogPage.code}
                     className="space-y-4"
@@ -1535,6 +1540,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
                     data-analytics-item-name={catalogPage.title}
                     data-analytics-content-type="catalog"
                   >
+                    <h3 className="text-xl font-semibold leading-snug text-foreground">{heading}</h3>
                     {nodes ? (
                       <div className="article-content md-copy-scope text-sm leading-7 text-foreground">
                         {nodes}
