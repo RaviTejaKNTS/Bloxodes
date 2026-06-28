@@ -961,7 +961,9 @@ function buildQuizCards(page: WikiPageContent, related: WikiRelatedData): QuizCa
 }
 
 function getWikiCollectionBlockHeading(page: WikiRelatedData["catalogPages"][number]): string {
-  return `${formatKeyLabel(page.collection_slug)}:`;
+  const label = normalizeText(page.display_name);
+  if (!label) throw new Error(`Missing display_name for wiki collection ${page.code}`);
+  return `${label}:`;
 }
 
 async function buildWikiCollectionBlocks(related: WikiRelatedData) {

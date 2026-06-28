@@ -124,6 +124,7 @@ async function readFinalJsonOverride(config: GameCollectionConfig) {
       Pick<
         WikiCollectionPageUpsert,
         | "code"
+        | "display_name"
         | "title"
         | "seo_title"
         | "meta_description"
@@ -138,6 +139,9 @@ async function readFinalJsonOverride(config: GameCollectionConfig) {
     >;
     if (parsed.code !== config.code) {
       throw new Error(`Expected code ${config.code}, found ${parsed.code ?? "(missing)"}`);
+    }
+    if (typeof parsed.display_name !== "string" || !parsed.display_name.trim()) {
+      throw new Error(`Missing display_name for ${config.code}. Use the short reusable collection name, such as "Units".`);
     }
     return parsed;
   } catch (error) {
@@ -202,6 +206,13 @@ function normalizeImage(value: unknown): string | null {
   return trimmed;
 }
 
+function resolveDisplayName(config: GameCollectionConfig, finalJson: Awaited<ReturnType<typeof readFinalJsonOverride>>): string {
+  if (!finalJson) return config.label;
+  const displayName = finalJson.display_name?.trim();
+  if (!displayName) throw new Error(`Missing display_name for ${config.code}.`);
+  return displayName;
+}
+
 async function buildRows(
   existingPublishedAt: Map<string, string | null>,
   universeIdsByGameSlug: Map<string, number | null>,
@@ -226,6 +237,7 @@ async function buildRows(
       );
     }
     const pageCopy = finalJson ? { ...copy, ...finalJson } : copy;
+    const displayName = resolveDisplayName(config, finalJson);
 
     rows.push({
       wiki_page_id: wikiPageIdsBySlug.get(config.gameSlug) ?? null,
@@ -234,7 +246,7 @@ async function buildRows(
       collection_slug: config.slug,
       code: pageCopy.code,
       title: pageCopy.title,
-      display_name: config.label,
+      display_name: displayName,
       item_count: dataset.rows.length,
       seo_title: pageCopy.seo_title,
       meta_description: pageCopy.meta_description,

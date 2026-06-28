@@ -15,6 +15,7 @@ type CliOptions = {
 
 type CollectionFinal = {
   code?: string;
+  display_name?: string;
   title?: string;
   universe_id?: number | null;
   wiki_slug?: string;
@@ -104,7 +105,11 @@ async function findFinalFile(root: string, collection: string, game: string) {
 }
 
 async function readFinal(file: string): Promise<CollectionFinal> {
-  return JSON.parse(await readFile(file, "utf8")) as CollectionFinal;
+  const parsed = JSON.parse(await readFile(file, "utf8")) as CollectionFinal;
+  if (typeof parsed.display_name !== "string" || !parsed.display_name.trim()) {
+    throw new Error(`${file} must include display_name, the short reusable collection name such as "Units".`);
+  }
+  return parsed;
 }
 
 function runCommand(command: string, args: string[]) {
@@ -126,7 +131,7 @@ async function verifyReadback(game: string, collection: string, finalJson: Colle
   const sb = supabaseAdmin();
   const { data, error } = await sb
     .from("wiki_collection_pages")
-    .select("wiki_slug,collection_slug,code,title,universe_id,item_count,is_published,meta_description")
+    .select("wiki_slug,collection_slug,code,title,display_name,universe_id,item_count,is_published,meta_description")
     .eq("wiki_slug", game)
     .eq("collection_slug", collection)
     .maybeSingle();
@@ -136,13 +141,16 @@ async function verifyReadback(game: string, collection: string, finalJson: Colle
   const row = data as {
     code?: string | null;
     title?: string | null;
+    display_name?: string | null;
     universe_id?: number | null;
     item_count?: number | null;
     is_published?: boolean;
   };
   if (!row.is_published) throw new Error(`Collection ${game}/${collection} is not published`);
   if (!row.item_count || row.item_count < 1) throw new Error(`Collection ${game}/${collection} has no item_count`);
+  const expectedDisplayName = finalJson.display_name?.trim();
   if (finalJson.title && row.title !== finalJson.title) throw new Error(`Collection title mismatch for ${game}/${collection}`);
+  if (!expectedDisplayName || row.display_name !== expectedDisplayName) throw new Error(`Collection display_name mismatch for ${game}/${collection}`);
   if (finalJson.code && row.code !== finalJson.code) throw new Error(`Collection code mismatch for ${game}/${collection}`);
   if (typeof finalJson.universe_id === "number" && row.universe_id !== finalJson.universe_id) {
     throw new Error(`Collection universe_id mismatch for ${game}/${collection}`);

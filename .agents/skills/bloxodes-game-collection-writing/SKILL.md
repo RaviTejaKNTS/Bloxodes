@@ -86,6 +86,7 @@ Write one short useful blurb for the game wiki hub.
 
 ## Field Jobs
 
+- `display_name`: Write the short reusable collection name exactly as it should appear in UI labels and wiki hub headings, for example `Units`, `Food Items`, `NPCs`, or `UGC Items`. Do not include counts, game names, colons, or SEO phrasing. This is the canonical collection label; do not make scripts infer it from `collection_slug` or `title`.
 - `title`: Use the Bloxodes collection title pattern: `All N <Collection> in <Game>`. Add one short reader-focused angle only when it makes the title clearer.
 - `seo_title`: Keep it close to the title, but make it natural for search.
 - `meta_description`: Say what the reader can compare or learn from the page.
@@ -104,6 +105,7 @@ Write one short useful blurb for the game wiki hub.
   "wiki_slug": "",
   "collection_slug": "",
   "code": "",
+  "display_name": "",
   "title": "",
   "seo_title": "",
   "meta_description": "",

@@ -116,6 +116,7 @@ Once the image subagent updates `brief.md`, check that:
 
 Before approving any final.json, make sure all the following are met:
 - Check if item count and title count agree.
+- Check if `display_name` is the short reusable collection label, such as `Units`, `Food Items`, `NPCs`, or `UGC Items`; it must not include counts, game names, colons, or title/SEO phrasing.
 - All the writing is simple and easy for everyone to read.
 - Check if card fields help players compare items.
 - Check if card/list details follow the new presentation contract: description, highlight where natural, chip values for compact numbers, detail values for prose, and no label-stuffed values.
@@ -133,6 +134,7 @@ Before approving any final.json, make sure all the following are met:
 - production duplicate check is recorded
 - source proof supports the collection and important fields
 - item count and title count agree
+- `display_name` is present and uses the clean reusable collection label, not a slug/title-derived phrase
 - image gaps are fixed, accepted, or blocked
 - card fields help players compare items
 - title follows `All N <Collection> in <Game>`

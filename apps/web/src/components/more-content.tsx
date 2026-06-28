@@ -267,23 +267,27 @@ export async function MoreWikiCollections({
 }) {
   const catalogs = await listPublishedWikiCollectionPagesByWikiSlug(wikiSlug);
   const normalizedCurrent = excludeCollectionSlug.trim().toLowerCase();
-  const items = catalogs.filter((catalog) => catalog.collection_slug !== normalizedCurrent).slice(0, 8);
+  const items = catalogs
+    .filter((catalog) => catalog.collection_slug !== normalizedCurrent)
+    .map((catalog) => ({ catalog, label: catalog.display_name?.trim() ?? "" }))
+    .filter((entry) => entry.label)
+    .slice(0, 8);
   if (!items.length) return null;
 
   return (
     <MoreSection title={`Check out other catalogs from ${gameName}`} viewAllHref={`/wiki/${wikiSlug}`}>
-      {items.map((catalog) => (
+      {items.map(({ catalog, label }) => (
         <Link
           key={catalog.id ?? catalog.code}
           href={buildWikiCollectionPath(catalog.wiki_slug, catalog.collection_slug)}
           className="group flex items-center gap-3 rounded-lg border border-border/70 bg-card p-3 transition-colors hover:border-border"
         >
           <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md bg-surface-muted">
-            <CardImage src={catalog.thumb_url ?? null} alt={catalog.display_name ?? catalog.title} />
+            <CardImage src={catalog.thumb_url ?? null} alt={label} />
           </span>
           <span className="min-w-0">
             <span className="block line-clamp-2 text-sm font-semibold text-foreground">
-              {catalog.display_name ?? catalog.title}
+              {label}
             </span>
             <span className="block text-xs text-muted">
               {typeof catalog.item_count === "number" ? `${catalog.item_count.toLocaleString("en-US")} entries` : "Game collection"}
