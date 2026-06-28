@@ -41,7 +41,6 @@ import {
   type WikiServerItem
 } from "@/lib/wiki";
 import { CHECKLISTS_DESCRIPTION, QUIZZES_DESCRIPTION, SITE_NAME, SITE_URL, WIKI_DESCRIPTION, breadcrumbJsonLd } from "@/lib/seo";
-import { WikiLinkList, WikiSection, type WikiLinkItem } from "@/components/wiki/WikiPrimitives";
 import { ArticleCard } from "@/components/ArticleCard";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -55,6 +54,7 @@ import { CommentsSection } from "@/components/comments/CommentsSection";
 import { cleanRewardsText, isCodeNew } from "@/lib/code-utils";
 import { listGameCollectionImageUrls } from "@/lib/game-collection-images";
 import { buildWikiCollectionPath } from "@/lib/wiki-collections";
+import { statsUniverseSlug } from "@/lib/slug";
 
 const ROBLOX_BASE_URL = "https://www.roblox.com";
 const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
@@ -1248,15 +1248,6 @@ function WikiBadgeCards({ badges, universeLabel }: { badges: WikiBadgeItem[]; un
   );
 }
 
-function developerGameLinks(related: WikiRelatedData): WikiLinkItem[] {
-  return related.developerGames.map((game) => ({
-    href: game.root_place_id ? `${ROBLOX_BASE_URL}/games/${game.root_place_id}` : `${ROBLOX_BASE_URL}/games`,
-    title: game.display_name ?? game.name ?? `Universe ${game.universe_id}`,
-    description: compactMeta([formatNumber(game.playing) ? `${formatNumber(game.playing)} playing` : null, formatNumber(game.visits) ? `${formatNumber(game.visits)} visits` : null]),
-    meta: "Roblox"
-  }));
-}
-
 async function renderTipsNodes(tipsMd?: string | null): Promise<ReactNode[] | null> {
   const tips = normalizeMarkdownText(tipsMd);
   if (!tips) return null;
@@ -1269,6 +1260,73 @@ async function renderWikiDescriptionNodes(page: WikiPageContent): Promise<ReactN
   if (!description) return null;
   const html = await renderMarkdown(description, { paragraphizeLineBreaks: true });
   return renderHtmlAsReactNodes(processHtmlLinks(html).__html, { keyPrefix: `wiki-description-${page.slug}` });
+}
+
+function DeveloperGameCards({
+  games,
+  creatorLabel
+}: {
+  games: WikiRelatedData["developerGames"];
+  creatorLabel: string;
+}) {
+  if (!games.length) return null;
+
+  return (
+    <section className="min-w-0 space-y-4 border-t border-border/60 pt-8">
+      <div className="space-y-1">
+        <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">More From This Developer</h2>
+        <p className="max-w-2xl text-base leading-7 text-muted md:text-lg">
+          Other Roblox experiences from {creatorLabel} on Bloxodes.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {games.map((game) => {
+          const title = normalizeText(game.display_name) ?? normalizeText(game.name) ?? `Universe ${game.universe_id}`;
+          const statsSlug = statsUniverseSlug(game.slug ?? game.display_name ?? game.name, game.universe_id);
+          const href = `/stats/games/${statsSlug}`;
+          const meta = compactMeta([
+            formatNumber(game.playing) ? `${formatNumber(game.playing)} playing` : null,
+            formatNumber(game.visits) ? `${formatNumber(game.visits)} visits` : null
+          ]);
+          const imageSrc = normalizeImageSrc(game.icon_url);
+
+          return (
+            <Link
+              key={game.universe_id}
+              href={href}
+              className="group flex min-w-0 gap-3 rounded-lg border border-border/70 bg-surface p-3 transition hover:border-accent/60"
+              data-analytics-event="related_content_click"
+              data-analytics-source-type="wiki"
+              data-analytics-target-type="stats_game"
+              data-analytics-target-slug={statsSlug}
+            >
+              <span className="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-md border border-border/60 bg-surface-muted">
+                {imageSrc ? (
+                  <Image
+                    src={imageSrc}
+                    alt={`${title} icon`}
+                    fill
+                    sizes="64px"
+                    className="object-cover transition duration-200 group-hover:scale-[1.03]"
+                    unoptimized
+                  />
+                ) : (
+                  <span className="text-lg font-semibold text-muted">{title.charAt(0).toUpperCase() || "G"}</span>
+                )}
+              </span>
+              <span className="flex min-w-0 flex-1 flex-col justify-center gap-1">
+                <span className="line-clamp-2 text-sm font-semibold leading-snug text-foreground group-hover:text-accent">
+                  {title}
+                </span>
+                {meta ? <span className="line-clamp-1 text-xs leading-5 text-muted">{meta}</span> : null}
+                <span className="text-xs font-semibold text-muted">Stats page</span>
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+    </section>
+  );
 }
 
 export async function loadWikiIndexPageData(): Promise<WikiIndexPageData> {
@@ -1352,7 +1410,6 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
     ? "min-w-0 space-y-4"
     : "min-w-0 space-y-4 border-t border-border/60 pt-8";
   const catalogBlocks = await buildWikiCollectionBlocks(related);
-  const developerLinks = developerGameLinks(related);
   const creatorUrl = buildCreatorUrl(page);
   const creatorLabel = normalizeText(page.universe_creator_name) ?? "Developer";
   const socialLinks = buildSocialLinkButtons(extractSocialLinks(page.social_links), creatorLabel);
@@ -1595,17 +1652,13 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             </section>
           ) : null}
 
-          {developerLinks.length ? (
-            <WikiSection title="More From This Developer" description={`Other Roblox experiences from ${creatorLabel} that players may want to check next.`}>
-              <WikiLinkList items={developerLinks} />
-            </WikiSection>
-          ) : null}
-
           <WikiEventsTimeline
             events={related.eventTimeline}
             eventsPageSlug={related.eventsPage?.slug ?? null}
             universeLabel={universeLabel}
           />
+
+          <DeveloperGameCards games={related.developerGames} creatorLabel={creatorLabel} />
         </article>
 
         <aside className="space-y-4">
