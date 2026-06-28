@@ -420,6 +420,46 @@ function WikiGameDetailsBlock({ details }: { details: WikiGameDetailItem[] }) {
   );
 }
 
+function WikiSocialAccountsBlock({
+  links,
+  creatorLabel,
+  pageSlug
+}: {
+  links: SocialLinkButton[];
+  creatorLabel: string;
+  pageSlug: string;
+}) {
+  if (!links.length) return null;
+
+  return (
+    <section className="space-y-3">
+      <div className="space-y-1">
+        <h3 className="text-lg font-semibold text-foreground">{creatorLabel} Social Accounts</h3>
+        <p className="text-sm leading-6 text-muted">Official places to follow this game.</p>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {links.map(({ key, url, label, Icon, platform }) => (
+          <a
+            key={key}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            title={label}
+            data-analytics-event="social_follow_click"
+            data-analytics-platform={platform}
+            data-analytics-content-type="wiki"
+            data-analytics-item-id={pageSlug}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border/60 bg-surface text-foreground transition hover:border-accent hover:text-accent"
+          >
+            <Icon className="h-4 w-4" aria-hidden />
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function WikiActiveCodesPreview({
   codes,
   game,
@@ -580,7 +620,7 @@ function WikiEventsTimeline({
   if (!events.length) return null;
 
   return (
-    <section className="min-w-0 space-y-5 border-t border-border/60 pt-8" id="events">
+    <section className="min-w-0 space-y-5" id="events">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div className="min-w-0 space-y-1">
           <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">{universeLabel} Events</h2>
@@ -1272,7 +1312,7 @@ function DeveloperGameCards({
   if (!games.length) return null;
 
   return (
-    <section className="min-w-0 space-y-4 border-t border-border/60 pt-8">
+    <section className="min-w-0 space-y-4">
       <div className="space-y-1">
         <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">More From This Developer</h2>
         <p className="max-w-2xl text-base leading-7 text-muted md:text-lg">
@@ -1405,10 +1445,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const tipsNodes = await renderTipsNodes(page.tips_md);
   const tipsSectionClassName = hasControlsSection
     ? "article-content md-copy-scope game-copy min-w-0"
-    : "article-content md-copy-scope game-copy min-w-0 border-t border-border/60 pt-8";
-  const socialSectionClassName = hasControlsSection && !tipsNodes?.length
-    ? "min-w-0 space-y-4"
-    : "min-w-0 space-y-4 border-t border-border/60 pt-8";
+    : "article-content md-copy-scope game-copy min-w-0";
   const catalogBlocks = await buildWikiCollectionBlocks(related);
   const creatorUrl = buildCreatorUrl(page);
   const creatorLabel = normalizeText(page.universe_creator_name) ?? "Developer";
@@ -1543,8 +1580,6 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
         </div>
       </header>
 
-      <div aria-hidden className="border-t border-border/60" />
-
       <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(20rem,1fr)]">
         <article className="min-w-0 space-y-9">
           {descriptionNodes?.length || gameDetailItems.length || heroStats.length ? (
@@ -1625,33 +1660,6 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
             </section>
           ) : null}
 
-          {socialLinks.length ? (
-            <section className={socialSectionClassName}>
-              <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">{creatorLabel} Social Accounts</h2>
-              <p className="text-base leading-7 text-muted md:text-lg">Here are the official social media platforms of {universeLabel} developers.</p>
-              <div className="flex flex-wrap gap-3">
-                {socialLinks.map(({ key, url, label, Icon, platform }) => {
-                  return (
-                    <a
-                      key={key}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-analytics-event="social_follow_click"
-                      data-analytics-platform={platform}
-                      data-analytics-content-type="wiki"
-                      data-analytics-item-id={page.slug}
-                      className="inline-flex items-center gap-2 rounded-full border border-border/60 px-4 py-2 text-sm font-semibold text-foreground transition hover:border-accent hover:text-accent"
-                    >
-                      <Icon className="h-4 w-4" aria-hidden />
-                      <span>{label}</span>
-                    </a>
-                  );
-                })}
-              </div>
-            </section>
-          ) : null}
-
           <WikiEventsTimeline
             events={related.eventTimeline}
             eventsPageSlug={related.eventsPage?.slug ?? null}
@@ -1667,6 +1675,8 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
               <WikiGameDetailsBlock details={gameDetailItems} />
             </section>
           ) : null}
+
+          <WikiSocialAccountsBlock links={socialLinks} creatorLabel={creatorLabel} pageSlug={page.slug} />
 
           <WikiServerCards
             servers={related.servers}
