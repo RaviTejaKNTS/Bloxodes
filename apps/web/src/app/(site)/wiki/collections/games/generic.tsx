@@ -1932,7 +1932,7 @@ const CATALOG_SECTION_OVERRIDES: Record<string, CollectionSectionOverride> = {
     maxStats: 3,
     fieldPresentation: {
       aisle: { kind: "chip", label: "Aisle" },
-      section: { kind: "plain", label: "Section" },
+      section: { kind: "normal", label: "Section" },
       shelfColor: { kind: "highlight", label: "Shelf color" }
     }
   },

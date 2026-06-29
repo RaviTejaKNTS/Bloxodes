@@ -1402,7 +1402,7 @@ export function renderWikiIndexPage({ pages, total }: WikiIndexPageData) {
         <p className="max-w-2xl text-base text-muted md:text-lg">{WIKI_DESCRIPTION}</p>
         <IndexPageStats
           items={[
-            { label: `${total} wiki page${total === 1 ? "" : "s"} tracked`, icon: "wiki", tone: "accent" },
+            { label: `${total.toLocaleString("en-US")} wiki${total === 1 ? "" : "s"}`, icon: "wiki", tone: "accent" },
             ...(refreshedLabel ? [{ label: `Updated ${refreshedLabel}`, icon: "clock" as const }] : [])
           ]}
         />
