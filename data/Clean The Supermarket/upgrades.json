@@ -1,0 +1,125 @@
+{
+  "meta": {
+    "game": "Clean The Supermarket",
+    "collection": "upgrades",
+    "universeId": 10334731049,
+    "updatedAt": "2026-06-29",
+    "groupBy": "collectionSection",
+    "columns": [
+      "name",
+      "effect",
+      "tier",
+      "buyPriority",
+      "collectionSection",
+      "cardSummary",
+      "image"
+    ],
+    "fieldPresentation": {
+      "effect": { "kind": "detail", "label": "Effect" },
+      "tier": { "kind": "chip", "label": "Tier" },
+      "buyPriority": { "kind": "chip", "label": "Buy priority" }
+    },
+    "sources": [
+      {
+        "label": "Clean the Supermarket (fan guide) - Keys / upgrade priority order",
+        "url": "https://cleanthesupermarket.com/keys",
+        "accessed": "2026-06-29"
+      },
+      {
+        "label": "Clean the Supermarket (fan guide) - Abilities",
+        "url": "https://cleanthesupermarket.com/abilities",
+        "accessed": "2026-06-29"
+      },
+      {
+        "label": "Clean the Supermarket (fan guide) - Tier list (S to C)",
+        "url": "https://cleanthesupermarket.com/tier-list",
+        "accessed": "2026-06-29"
+      },
+      {
+        "label": "Clean the Supermarket (fan guide) - Upgrade order (full key + ability sequence)",
+        "url": "https://cleanthesupermarket.com/upgrade-order",
+        "accessed": "2026-06-29"
+      },
+      {
+        "label": "Roblox experience page - confirms sort-to-restore loop, buy upgrades, and D-Pad abilities",
+        "url": "https://www.roblox.com/games/120450743769548/Clean-the-Supermarket",
+        "accessed": "2026-06-29"
+      }
+    ],
+    "notes": "Six upgrades split into two systems: Keys (four permanent upgrades) and Abilities (two active powers). Cash is earned per item sorted onto its correct aisle shelf and spent between runs. Tier (S to C) and buy priority (1 to 6) are community-recommended rankings from the single unofficial fan guide, treated as comparison fields, not official game values. No Robux or cash costs are published, so prices are omitted rather than guessed. Per-upgrade icons are not reliably available without in-game capture, so the collection launches image-light. Values are best-effort from one unofficial source and should be re-verified in-game; the game is new and may change with updates."
+  },
+  "items": [
+    {
+      "name": "Carry Capacity",
+      "slug": "carry-capacity",
+      "type": "Key",
+      "effect": "Lets you hold +3 grocery items before returning to an aisle.",
+      "tier": "S",
+      "buyPriority": "1",
+      "collectionSection": "Keys (Permanent Upgrades)",
+      "cardSummary": "Carry Capacity is the recommended first buy. Holding three more items per trip cuts your total return walks, so every aisle run sorts more at once.",
+      "image": "",
+      "sourcePage": "https://cleanthesupermarket.com/keys"
+    },
+    {
+      "name": "Move Speed",
+      "slug": "move-speed",
+      "type": "Key",
+      "effect": "Increases how fast you move down the supermarket lanes.",
+      "tier": "A",
+      "buyPriority": "2",
+      "collectionSection": "Keys (Permanent Upgrades)",
+      "cardSummary": "Move Speed is the suggested second pick. Faster lane traversal pays off most once you already know which aisle each item belongs to.",
+      "image": "",
+      "sourcePage": "https://cleanthesupermarket.com/keys"
+    },
+    {
+      "name": "Auto-Sort",
+      "slug": "auto-sort",
+      "type": "Key",
+      "effect": "Helps place obvious items onto their matching shelf for you.",
+      "tier": "A",
+      "buyPriority": "3",
+      "collectionSection": "Keys (Permanent Upgrades)",
+      "cardSummary": "Auto-Sort assists shelf placement for clear-cut items. The time it saves grows with how much you carry, so it pairs well with Carry Capacity.",
+      "image": "",
+      "sourcePage": "https://cleanthesupermarket.com/keys"
+    },
+    {
+      "name": "Section Unlocks",
+      "slug": "section-unlocks",
+      "type": "Key",
+      "effect": "Opens bigger supermarket sections so you earn more per shift.",
+      "tier": "B",
+      "buyPriority": "6",
+      "collectionSection": "Keys (Permanent Upgrades)",
+      "cardSummary": "Section Unlocks is usually saved for last. Larger sections raise your earning ceiling, but only after carry, speed, and sorting make your current aisles efficient.",
+      "image": "",
+      "sourcePage": "https://cleanthesupermarket.com/keys"
+    },
+    {
+      "name": "Shelf Sense",
+      "slug": "shelf-sense",
+      "type": "Ability",
+      "effect": "Highlights likely nearby shelf matches for what you are holding.",
+      "tier": "B",
+      "buyPriority": "4",
+      "collectionSection": "Abilities",
+      "cardSummary": "Shelf Sense is a situational ability. It helps most right when a new section unlocks and the item names are still unfamiliar.",
+      "image": "",
+      "sourcePage": "https://cleanthesupermarket.com/abilities"
+    },
+    {
+      "name": "Cleanup Burst",
+      "slug": "cleanup-burst",
+      "type": "Ability",
+      "effect": "Clears small scatter clusters of items around your cart.",
+      "tier": "C",
+      "buyPriority": "5",
+      "collectionSection": "Abilities",
+      "cardSummary": "Cleanup Burst is a late comfort pick. It is handy for messy end-of-round cleanup but is not worth buying ahead of the core upgrades.",
+      "image": "",
+      "sourcePage": "https://cleanthesupermarket.com/abilities"
+    }
+  ]
+}

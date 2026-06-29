@@ -1884,6 +1884,58 @@ const ANIME_VANGUARDS_ENEMY_SOURCE_KEYS = [
 ];
 
 const CATALOG_SECTION_OVERRIDES: Record<string, CollectionSectionOverride> = {
+  "clean-the-supermarket-upgrades": {
+    groupKey: "collectionSection",
+    groupLabel: "Upgrade type",
+    sectionOrder: ["Keys (Permanent Upgrades)", "Abilities"],
+    getSectionLabel: getCollectionSection,
+    hiddenKeys: ["slug", "collectionSection", "type", "sourcePage", "sortOrder", "image"],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 4,
+    hideImages: true,
+    subtitleKeys: ["type"],
+    fieldPresentation: {
+      effect: { kind: "detail", label: "Effect" },
+      tier: { kind: "chip", label: "Tier" },
+      buyPriority: { kind: "chip", label: "Buy priority" }
+    }
+  },
+  "clean-the-supermarket-grocery-items": {
+    groupKey: "collectionSection",
+    groupLabel: "Aisle",
+    sectionOrder: [
+      "A1 — Fresh Produce",
+      "A2 — Bakery",
+      "A3 — Dairy & Chilled",
+      "A4 — Frozen",
+      "A5 — Drinks",
+      "A6 — Snacks",
+      "A7 — Health & Beauty",
+      "A8 — Household",
+      "A9 — Meat & Seafood",
+      "A10 — Pantry / Canned"
+    ],
+    getSectionLabel: getCollectionSection,
+    hideImages: true,
+    hiddenKeys: [
+      "slug",
+      "collectionSection",
+      "image",
+      "sourcePage",
+      "sourceConfidence",
+      "sourceCheckedAt",
+      "verificationNote",
+      "imageStatus",
+      "sortOrder"
+    ],
+    additionalColumns: ["collectionSection", "cardSummary"],
+    maxStats: 3,
+    fieldPresentation: {
+      aisle: { kind: "chip", label: "Aisle" },
+      section: { kind: "plain", label: "Section" },
+      shelfColor: { kind: "highlight", label: "Shelf color" }
+    }
+  },
   "evomon-adventure-suits": {
     groupKey: "collectionSection",
     groupLabel: "Rarity",
