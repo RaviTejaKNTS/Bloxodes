@@ -8,21 +8,16 @@ import {
   renderRobloxMusicIdsPage
 } from "../../page-data";
 import { CATALOG_DESCRIPTION, buildAlternates } from "@/lib/seo";
-import { buildPageParams } from "@/lib/static-params";
 
 export const revalidate = 21600;
+export const dynamic = "force-dynamic";
 
 const CATALOG_CODE_CANDIDATES = ["roblox-music-ids"];
-const MAX_STATIC_PAGES = 20;
 
 type PageProps = {
   params: Promise<{ page: string }>;
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
-
-export async function generateStaticParams() {
-  return [];
-}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { page } = await params;

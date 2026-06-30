@@ -2,15 +2,12 @@ import type { Metadata } from "next";
 import { MusicChartsPage, buildMusicChartsMetadata } from "../../../charts-page";
 
 export const revalidate = 21600;
+export const dynamic = "force-dynamic";
 
 type PageProps = {
   params: Promise<{ page: string }>;
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
-
-export async function generateStaticParams() {
-  return [];
-}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { page } = await params;
