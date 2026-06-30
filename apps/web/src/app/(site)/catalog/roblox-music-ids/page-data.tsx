@@ -933,7 +933,6 @@ export function renderRobloxMusicIdsPage({
     if (!latestDate || candidate > latestDate) return candidate;
     return latestDate;
   }, null);
-  const refreshedLabel = formatRelativeDate(latest);
   const introHtml = contentHtml?.introHtml?.trim() ? contentHtml?.introHtml : "";
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml?.howHtml : "";
@@ -996,15 +995,17 @@ export function renderRobloxMusicIdsPage({
     })
   );
   const breadcrumbSchema = JSON.stringify(breadcrumbJsonLd(breadcrumbSchemaItems));
-  const introNodes = introHtml ? renderPageContentNodes(introHtml, "music-intro") : null;
-  const descriptionNodes = descriptionHtml.flatMap((entry) =>
-    renderPageContentNodes(entry.html, `music-description-${entry.key}`)
-  );
-  const howNodes = howHtml ? renderPageContentNodes(howHtml, "music-how") : null;
-  const faqNodes = faqHtml.map((faq, idx) => ({
-    ...faq,
-    nodes: renderPageContentNodes(faq.a, `music-faq-${idx}`)
-  }));
+  const introNodes = showHero && introHtml ? renderPageContentNodes(introHtml, "music-intro") : null;
+  const descriptionNodes = showHero
+    ? descriptionHtml.flatMap((entry) => renderPageContentNodes(entry.html, `music-description-${entry.key}`))
+    : [];
+  const howNodes = showHero && howHtml ? renderPageContentNodes(howHtml, "music-how") : null;
+  const faqNodes = showHero
+    ? faqHtml.map((faq, idx) => ({
+      ...faq,
+      nodes: renderPageContentNodes(faq.a, `music-faq-${idx}`)
+    }))
+    : [];
 
   return (
     <div className="catalog-surface space-y-10">
@@ -1018,10 +1019,7 @@ export function renderRobloxMusicIdsPage({
         <header className="space-y-2">
           <MusicBreadcrumb items={breadcrumbNavItems} />
           <h1 className="text-3xl font-semibold text-foreground">{baseTitle}</h1>
-          <UpdatedTimestamp value={updatedDate} />
-          <p className="text-sm text-muted">
-            {refreshedLabel ? `Fresh data ${refreshedLabel} · ` : ""}Page {currentPage} of {totalPages}
-          </p>
+          <p className="text-sm text-muted">Page {currentPage} of {totalPages}</p>
         </header>
       )}
 
